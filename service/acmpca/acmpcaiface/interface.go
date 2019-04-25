@@ -69,7 +69,11 @@ type ACMPCAAPI interface {
 
 	CreateCertificateAuthorityAuditReportRequest(*acmpca.CreateCertificateAuthorityAuditReportInput) acmpca.CreateCertificateAuthorityAuditReportRequest
 
+	CreatePermissionRequest(*acmpca.CreatePermissionInput) acmpca.CreatePermissionRequest
+
 	DeleteCertificateAuthorityRequest(*acmpca.DeleteCertificateAuthorityInput) acmpca.DeleteCertificateAuthorityRequest
+
+	DeletePermissionRequest(*acmpca.DeletePermissionInput) acmpca.DeletePermissionRequest
 
 	DescribeCertificateAuthorityRequest(*acmpca.DescribeCertificateAuthorityInput) acmpca.DescribeCertificateAuthorityRequest
 
@@ -86,6 +90,8 @@ type ACMPCAAPI interface {
 	IssueCertificateRequest(*acmpca.IssueCertificateInput) acmpca.IssueCertificateRequest
 
 	ListCertificateAuthoritiesRequest(*acmpca.ListCertificateAuthoritiesInput) acmpca.ListCertificateAuthoritiesRequest
+
+	ListPermissionsRequest(*acmpca.ListPermissionsInput) acmpca.ListPermissionsRequest
 
 	ListTagsRequest(*acmpca.ListTagsInput) acmpca.ListTagsRequest
 

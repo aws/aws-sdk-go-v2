@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
 const opClaimDevicesByClaimCode = "ClaimDevicesByClaimCode"
@@ -431,6 +432,112 @@ func (c *IoT1ClickDevicesService) ListDevicesRequest(input *ListDevicesInput) Li
 	return ListDevicesRequest{Request: req, Input: input, Copy: c.ListDevicesRequest}
 }
 
+const opListTagsForResource = "ListTagsForResource"
+
+// ListTagsForResourceRequest is a API request type for the ListTagsForResource API operation.
+type ListTagsForResourceRequest struct {
+	*aws.Request
+	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
+}
+
+// Send marshals and sends the ListTagsForResource API request.
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForResourceOutput), nil
+}
+
+// ListTagsForResourceRequest returns a request value for making API operation for
+// AWS IoT 1-Click Devices Service.
+//
+// Lists the tags associated with the specified resource ARN.
+//
+//    // Example sending a request using the ListTagsForResourceRequest method.
+//    req := client.ListTagsForResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/ListTagsForResource
+func (c *IoT1ClickDevicesService) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
+	op := &aws.Operation{
+		Name:       opListTagsForResource,
+		HTTPMethod: "GET",
+		HTTPPath:   "/tags/{resource-arn}",
+	}
+
+	if input == nil {
+		input = &ListTagsForResourceInput{}
+	}
+
+	output := &ListTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
+}
+
+const opTagResource = "TagResource"
+
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
+}
+
+// Send marshals and sends the TagResource API request.
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// AWS IoT 1-Click Devices Service.
+//
+// Adds or updates the tags associated with the resource ARN. See AWS IoT 1-Click
+// Service Limits (https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits)
+// for the maximum number of tags allowed per resource.
+//
+//    // Example sending a request using the TagResourceRequest method.
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/TagResource
+func (c *IoT1ClickDevicesService) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
+	op := &aws.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/tags/{resource-arn}",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
+}
+
 const opUnclaimDevice = "UnclaimDevice"
 
 // UnclaimDeviceRequest is a API request type for the UnclaimDevice API operation.
@@ -480,6 +587,60 @@ func (c *IoT1ClickDevicesService) UnclaimDeviceRequest(input *UnclaimDeviceInput
 	output.responseMetadata = aws.Response{Request: req}
 
 	return UnclaimDeviceRequest{Request: req, Input: input, Copy: c.UnclaimDeviceRequest}
+}
+
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// AWS IoT 1-Click Devices Service.
+//
+// Using tag keys, deletes the tags (key/value pairs) associated with the specified
+// resource ARN.
+//
+//    // Example sending a request using the UntagResourceRequest method.
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/UntagResource
+func (c *IoT1ClickDevicesService) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
+	op := &aws.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/tags/{resource-arn}",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 
 const opUpdateDeviceState = "UpdateDeviceState"
@@ -777,6 +938,9 @@ func (s Device) MarshalFields(e protocol.FieldEncoder) error {
 type DeviceDescription struct {
 	_ struct{} `type:"structure"`
 
+	// The ARN of the device.
+	Arn *string `locationName:"arn" type:"string"`
+
 	// An array of zero or more elements of DeviceAttribute objects providing user
 	// specified device attributes.
 	Attributes map[string]string `locationName:"attributes" type:"map"`
@@ -790,6 +954,8 @@ type DeviceDescription struct {
 	// A value between 0 and 1 inclusive, representing the fraction of life remaining
 	// for the device.
 	RemainingLife *float64 `locationName:"remainingLife" type:"double"`
+
+	Tags map[string]string `locationName:"tags" type:"map"`
 
 	// The type of the device, such as "button".
 	Type *string `locationName:"type" type:"string"`
@@ -807,6 +973,12 @@ func (s DeviceDescription) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DeviceDescription) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if len(s.Attributes) > 0 {
 		v := s.Attributes
 
@@ -836,6 +1008,18 @@ func (s DeviceDescription) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "remainingLife", protocol.Float64Value(v), metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	if s.Type != nil {
 		v := *s.Type
@@ -928,6 +1112,8 @@ type FinalizeDeviceClaimInput struct {
 
 	// DeviceId is a required field
 	DeviceId *string `location:"uri" locationName:"deviceId" type:"string" required:"true"`
+
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -958,6 +1144,18 @@ func (s *FinalizeDeviceClaimInput) Validate() error {
 func (s FinalizeDeviceClaimInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	if s.DeviceId != nil {
 		v := *s.DeviceId
 
@@ -1517,6 +1715,183 @@ func (s ListDevicesOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/ListTagsForResourceRequest
+type ListTagsForResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"resource-arn" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTagsForResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "resource-arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/ListTagsForResourceResponse
+type ListTagsForResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	Tags map[string]string `locationName:"tags" type:"map"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTagsForResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/TagResourceRequest
+type TagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"resource-arn" type:"string" required:"true"`
+
+	// Tags is a required field
+	Tags map[string]string `locationName:"tags" type:"map" required:"true"`
+}
+
+// String returns the string representation
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if s.Tags == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "resource-arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/TagResourceOutput
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/UnclaimDeviceRequest
 type UnclaimDeviceInput struct {
 	_ struct{} `type:"structure"`
@@ -1594,6 +1969,97 @@ func (s UnclaimDeviceOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/UntagResourceRequest
+type UntagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"resource-arn" type:"string" required:"true"`
+
+	// TagKeys is a required field
+	TagKeys []string `location:"querystring" locationName:"tagKeys" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if s.TagKeys == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "resource-arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.QueryTarget, "tagKeys", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/UntagResourceOutput
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UntagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 

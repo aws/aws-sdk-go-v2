@@ -126,6 +126,57 @@ func (c *CodeCommit) CreateBranchRequest(input *CreateBranchInput) CreateBranchR
 	return CreateBranchRequest{Request: req, Input: input, Copy: c.CreateBranchRequest}
 }
 
+const opCreateCommit = "CreateCommit"
+
+// CreateCommitRequest is a API request type for the CreateCommit API operation.
+type CreateCommitRequest struct {
+	*aws.Request
+	Input *CreateCommitInput
+	Copy  func(*CreateCommitInput) CreateCommitRequest
+}
+
+// Send marshals and sends the CreateCommit API request.
+func (r CreateCommitRequest) Send(ctx context.Context) (*CreateCommitOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateCommitOutput), nil
+}
+
+// CreateCommitRequest returns a request value for making API operation for
+// AWS CodeCommit.
+//
+// Creates a commit for a repository on the tip of a specified branch.
+//
+//    // Example sending a request using the CreateCommitRequest method.
+//    req := client.CreateCommitRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateCommit
+func (c *CodeCommit) CreateCommitRequest(input *CreateCommitInput) CreateCommitRequest {
+	op := &aws.Operation{
+		Name:       opCreateCommit,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateCommitInput{}
+	}
+
+	output := &CreateCommitOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateCommitRequest{Request: req, Input: input, Copy: c.CreateCommitRequest}
+}
+
 const opCreatePullRequest = "CreatePullRequest"
 
 // CreatePullRequestRequest is a API request type for the CreatePullRequest API operation.
@@ -2811,6 +2862,145 @@ func (s CreateBranchOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateCommitInput
+type CreateCommitInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the author who created the commit. This information will be used
+	// as both the author and committer for the commit.
+	AuthorName *string `locationName:"authorName" type:"string"`
+
+	// The name of the branch where you will create the commit.
+	//
+	// BranchName is a required field
+	BranchName *string `locationName:"branchName" min:"1" type:"string" required:"true"`
+
+	// The commit message you want to include as part of creating the commit. Commit
+	// messages are limited to 256 KB. If no message is specified, a default message
+	// will be used.
+	CommitMessage *string `locationName:"commitMessage" type:"string"`
+
+	// The files to delete in this commit. These files will still exist in prior
+	// commits.
+	DeleteFiles []DeleteFileEntry `locationName:"deleteFiles" type:"list"`
+
+	// The email address of the person who created the commit.
+	Email *string `locationName:"email" type:"string"`
+
+	// If the commit contains deletions, whether to keep a folder or folder structure
+	// if the changes leave the folders empty. If this is specified as true, a .gitkeep
+	// file will be created for empty folders.
+	KeepEmptyFolders *bool `locationName:"keepEmptyFolders" type:"boolean"`
+
+	// The ID of the commit that is the parent of the commit you will create. If
+	// this is an empty repository, this is not required.
+	ParentCommitId *string `locationName:"parentCommitId" type:"string"`
+
+	// The files to add or update in this commit.
+	PutFiles []PutFileEntry `locationName:"putFiles" type:"list"`
+
+	// The name of the repository where you will create the commit.
+	//
+	// RepositoryName is a required field
+	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
+
+	// The file modes to update for files in this commit.
+	SetFileModes []SetFileModeEntry `locationName:"setFileModes" type:"list"`
+}
+
+// String returns the string representation
+func (s CreateCommitInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateCommitInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateCommitInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateCommitInput"}
+
+	if s.BranchName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BranchName"))
+	}
+	if s.BranchName != nil && len(*s.BranchName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BranchName", 1))
+	}
+
+	if s.RepositoryName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
+	}
+	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
+	}
+	if s.DeleteFiles != nil {
+		for i, v := range s.DeleteFiles {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DeleteFiles", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.PutFiles != nil {
+		for i, v := range s.PutFiles {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PutFiles", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SetFileModes != nil {
+		for i, v := range s.SetFileModes {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SetFileModes", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateCommitOutput
+type CreateCommitOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The full commit ID of the commit that contains your committed file changes.
+	CommitId *string `locationName:"commitId" type:"string"`
+
+	// The files added as part of the committed file changes.
+	FilesAdded []FileMetadata `locationName:"filesAdded" type:"list"`
+
+	// The files deleted as part of the committed file changes.
+	FilesDeleted []FileMetadata `locationName:"filesDeleted" type:"list"`
+
+	// The files updated as part of the commited file changes.
+	FilesUpdated []FileMetadata `locationName:"filesUpdated" type:"list"`
+
+	// The full SHA-1 pointer of the tree information for the commit that contains
+	// the commited file changes.
+	TreeId *string `locationName:"treeId" type:"string"`
+}
+
+// String returns the string representation
+func (s CreateCommitOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateCommitOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCommitOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreatePullRequestInput
 type CreatePullRequestInput struct {
 	_ struct{} `type:"structure"`
@@ -3118,6 +3308,42 @@ func (s DeleteCommentContentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteCommentContentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// A file that will be deleted as part of a commit.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteFileEntry
+type DeleteFileEntry struct {
+	_ struct{} `type:"structure"`
+
+	// The full path of the file that will be deleted, including the name of the
+	// file.
+	//
+	// FilePath is a required field
+	FilePath *string `locationName:"filePath" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteFileEntry) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteFileEntry) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteFileEntry) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteFileEntry"}
+
+	if s.FilePath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FilePath"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteFileInput
@@ -3458,6 +3684,33 @@ func (s File) String() string {
 
 // GoString returns the string representation
 func (s File) GoString() string {
+	return s.String()
+}
+
+// A file that will be added, updated, or deleted as part of a commit.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FileMetadata
+type FileMetadata struct {
+	_ struct{} `type:"structure"`
+
+	// The full path to the file that will be added or updated, including the name
+	// of the file.
+	AbsolutePath *string `locationName:"absolutePath" type:"string"`
+
+	// The blob ID that contains the file information.
+	BlobId *string `locationName:"blobId" type:"string"`
+
+	// The extrapolated file mode permissions for the file. Valid values include
+	// EXECUTABLE and NORMAL.
+	FileMode FileModeTypeEnum `locationName:"fileMode" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s FileMetadata) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FileMetadata) GoString() string {
 	return s.String()
 }
 
@@ -5471,6 +5724,59 @@ func (s PullRequestTarget) GoString() string {
 	return s.String()
 }
 
+// Information about a file that will be added or updated as part of a commit.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutFileEntry
+type PutFileEntry struct {
+	_ struct{} `type:"structure"`
+
+	// The content of the file, if a source file is not specified.
+	//
+	// FileContent is automatically base64 encoded/decoded by the SDK.
+	FileContent []byte `locationName:"fileContent" type:"blob"`
+
+	// The extrapolated file mode permissions for the file. Valid values include
+	// EXECUTABLE and NORMAL.
+	FileMode FileModeTypeEnum `locationName:"fileMode" type:"string" enum:"true"`
+
+	// The full path to the file in the repository, including the name of the file.
+	//
+	// FilePath is a required field
+	FilePath *string `locationName:"filePath" type:"string" required:"true"`
+
+	// The name and full path of the file that contains the changes you want to
+	// make as part of the commit, if you are not providing the file content directly.
+	SourceFile *SourceFileSpecifier `locationName:"sourceFile" type:"structure"`
+}
+
+// String returns the string representation
+func (s PutFileEntry) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutFileEntry) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutFileEntry) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutFileEntry"}
+
+	if s.FilePath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FilePath"))
+	}
+	if s.SourceFile != nil {
+		if err := s.SourceFile.Validate(); err != nil {
+			invalidParams.AddNested("SourceFile", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutFileInput
 type PutFileInput struct {
 	_ struct{} `type:"structure"`
@@ -5844,6 +6150,87 @@ func (s RepositoryTriggerExecutionFailure) String() string {
 // GoString returns the string representation
 func (s RepositoryTriggerExecutionFailure) GoString() string {
 	return s.String()
+}
+
+// Information about the file mode changes.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/SetFileModeEntry
+type SetFileModeEntry struct {
+	_ struct{} `type:"structure"`
+
+	// The file mode for the file.
+	//
+	// FileMode is a required field
+	FileMode FileModeTypeEnum `locationName:"fileMode" type:"string" required:"true" enum:"true"`
+
+	// The full path to the file, including the name of the file.
+	//
+	// FilePath is a required field
+	FilePath *string `locationName:"filePath" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s SetFileModeEntry) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SetFileModeEntry) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SetFileModeEntry) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SetFileModeEntry"}
+	if len(s.FileMode) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("FileMode"))
+	}
+
+	if s.FilePath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FilePath"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Information about a source file that is part of changes made in a commit.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/SourceFileSpecifier
+type SourceFileSpecifier struct {
+	_ struct{} `type:"structure"`
+
+	// The full path to the file, including the name of the file.
+	//
+	// FilePath is a required field
+	FilePath *string `locationName:"filePath" type:"string" required:"true"`
+
+	// Whether to remove the source file from the parent commit.
+	IsMove *bool `locationName:"isMove" type:"boolean"`
+}
+
+// String returns the string representation
+func (s SourceFileSpecifier) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SourceFileSpecifier) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SourceFileSpecifier) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SourceFileSpecifier"}
+
+	if s.FilePath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FilePath"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Returns information about a submodule reference in a repository folder.

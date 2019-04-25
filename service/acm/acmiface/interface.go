@@ -83,6 +83,8 @@ type ACMAPI interface {
 
 	RemoveTagsFromCertificateRequest(*acm.RemoveTagsFromCertificateInput) acm.RemoveTagsFromCertificateRequest
 
+	RenewCertificateRequest(*acm.RenewCertificateInput) acm.RenewCertificateRequest
+
 	RequestCertificateRequest(*acm.RequestCertificateInput) acm.RequestCertificateRequest
 
 	ResendValidationEmailRequest(*acm.ResendValidationEmailInput) acm.ResendValidationEmailRequest

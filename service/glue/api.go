@@ -275,6 +275,168 @@ func (c *Glue) BatchDeleteTableVersionRequest(input *BatchDeleteTableVersionInpu
 	return BatchDeleteTableVersionRequest{Request: req, Input: input, Copy: c.BatchDeleteTableVersionRequest}
 }
 
+const opBatchGetCrawlers = "BatchGetCrawlers"
+
+// BatchGetCrawlersRequest is a API request type for the BatchGetCrawlers API operation.
+type BatchGetCrawlersRequest struct {
+	*aws.Request
+	Input *BatchGetCrawlersInput
+	Copy  func(*BatchGetCrawlersInput) BatchGetCrawlersRequest
+}
+
+// Send marshals and sends the BatchGetCrawlers API request.
+func (r BatchGetCrawlersRequest) Send(ctx context.Context) (*BatchGetCrawlersOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetCrawlersOutput), nil
+}
+
+// BatchGetCrawlersRequest returns a request value for making API operation for
+// AWS Glue.
+//
+// Returns a list of resource metadata for a given list of crawler names. After
+// calling the ListCrawlers operation, you can call this operation to access
+// the data to which you have been granted permissions. This operation supports
+// all IAM permissions, including permission conditions that uses tags.
+//
+//    // Example sending a request using the BatchGetCrawlersRequest method.
+//    req := client.BatchGetCrawlersRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetCrawlers
+func (c *Glue) BatchGetCrawlersRequest(input *BatchGetCrawlersInput) BatchGetCrawlersRequest {
+	op := &aws.Operation{
+		Name:       opBatchGetCrawlers,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &BatchGetCrawlersInput{}
+	}
+
+	output := &BatchGetCrawlersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return BatchGetCrawlersRequest{Request: req, Input: input, Copy: c.BatchGetCrawlersRequest}
+}
+
+const opBatchGetDevEndpoints = "BatchGetDevEndpoints"
+
+// BatchGetDevEndpointsRequest is a API request type for the BatchGetDevEndpoints API operation.
+type BatchGetDevEndpointsRequest struct {
+	*aws.Request
+	Input *BatchGetDevEndpointsInput
+	Copy  func(*BatchGetDevEndpointsInput) BatchGetDevEndpointsRequest
+}
+
+// Send marshals and sends the BatchGetDevEndpoints API request.
+func (r BatchGetDevEndpointsRequest) Send(ctx context.Context) (*BatchGetDevEndpointsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetDevEndpointsOutput), nil
+}
+
+// BatchGetDevEndpointsRequest returns a request value for making API operation for
+// AWS Glue.
+//
+// Returns a list of resource metadata for a given list of DevEndpoint names.
+// After calling the ListDevEndpoints operation, you can call this operation
+// to access the data to which you have been granted permissions. This operation
+// supports all IAM permissions, including permission conditions that uses tags.
+//
+//    // Example sending a request using the BatchGetDevEndpointsRequest method.
+//    req := client.BatchGetDevEndpointsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetDevEndpoints
+func (c *Glue) BatchGetDevEndpointsRequest(input *BatchGetDevEndpointsInput) BatchGetDevEndpointsRequest {
+	op := &aws.Operation{
+		Name:       opBatchGetDevEndpoints,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &BatchGetDevEndpointsInput{}
+	}
+
+	output := &BatchGetDevEndpointsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return BatchGetDevEndpointsRequest{Request: req, Input: input, Copy: c.BatchGetDevEndpointsRequest}
+}
+
+const opBatchGetJobs = "BatchGetJobs"
+
+// BatchGetJobsRequest is a API request type for the BatchGetJobs API operation.
+type BatchGetJobsRequest struct {
+	*aws.Request
+	Input *BatchGetJobsInput
+	Copy  func(*BatchGetJobsInput) BatchGetJobsRequest
+}
+
+// Send marshals and sends the BatchGetJobs API request.
+func (r BatchGetJobsRequest) Send(ctx context.Context) (*BatchGetJobsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetJobsOutput), nil
+}
+
+// BatchGetJobsRequest returns a request value for making API operation for
+// AWS Glue.
+//
+// Returns a list of resource metadata for a given list of job names. After
+// calling the ListJobs operation, you can call this operation to access the
+// data to which you have been granted permissions. This operation supports
+// all IAM permissions, including permission conditions that uses tags.
+//
+//    // Example sending a request using the BatchGetJobsRequest method.
+//    req := client.BatchGetJobsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetJobs
+func (c *Glue) BatchGetJobsRequest(input *BatchGetJobsInput) BatchGetJobsRequest {
+	op := &aws.Operation{
+		Name:       opBatchGetJobs,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &BatchGetJobsInput{}
+	}
+
+	output := &BatchGetJobsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return BatchGetJobsRequest{Request: req, Input: input, Copy: c.BatchGetJobsRequest}
+}
+
 const opBatchGetPartition = "BatchGetPartition"
 
 // BatchGetPartitionRequest is a API request type for the BatchGetPartition API operation.
@@ -324,6 +486,60 @@ func (c *Glue) BatchGetPartitionRequest(input *BatchGetPartitionInput) BatchGetP
 	output.responseMetadata = aws.Response{Request: req}
 
 	return BatchGetPartitionRequest{Request: req, Input: input, Copy: c.BatchGetPartitionRequest}
+}
+
+const opBatchGetTriggers = "BatchGetTriggers"
+
+// BatchGetTriggersRequest is a API request type for the BatchGetTriggers API operation.
+type BatchGetTriggersRequest struct {
+	*aws.Request
+	Input *BatchGetTriggersInput
+	Copy  func(*BatchGetTriggersInput) BatchGetTriggersRequest
+}
+
+// Send marshals and sends the BatchGetTriggers API request.
+func (r BatchGetTriggersRequest) Send(ctx context.Context) (*BatchGetTriggersOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetTriggersOutput), nil
+}
+
+// BatchGetTriggersRequest returns a request value for making API operation for
+// AWS Glue.
+//
+// Returns a list of resource metadata for a given list of trigger names. After
+// calling the ListTriggers operation, you can call this operation to access
+// the data to which you have been granted permissions. This operation supports
+// all IAM permissions, including permission conditions that uses tags.
+//
+//    // Example sending a request using the BatchGetTriggersRequest method.
+//    req := client.BatchGetTriggersRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetTriggers
+func (c *Glue) BatchGetTriggersRequest(input *BatchGetTriggersInput) BatchGetTriggersRequest {
+	op := &aws.Operation{
+		Name:       opBatchGetTriggers,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &BatchGetTriggersInput{}
+	}
+
+	output := &BatchGetTriggersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return BatchGetTriggersRequest{Request: req, Input: input, Copy: c.BatchGetTriggersRequest}
 }
 
 const opBatchStopJobRun = "BatchStopJobRun"
@@ -401,8 +617,8 @@ func (r CreateClassifierRequest) Send(ctx context.Context) (*CreateClassifierOut
 // AWS Glue.
 //
 // Creates a classifier in the user's account. This may be a GrokClassifier,
-// an XMLClassifier, or abbrev JsonClassifier, depending on which field of the
-// request is present.
+// an XMLClassifier, a JsonClassifier, or a CsvClassifier, depending on which
+// field of the request is present.
 //
 //    // Example sending a request using the CreateClassifierRequest method.
 //    req := client.CreateClassifierRequest(params)
@@ -3428,6 +3644,12 @@ func (c *Glue) GetSecurityConfigurationsRequest(input *GetSecurityConfigurations
 		Name:       opGetSecurityConfigurations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -3439,6 +3661,53 @@ func (c *Glue) GetSecurityConfigurationsRequest(input *GetSecurityConfigurations
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetSecurityConfigurationsRequest{Request: req, Input: input, Copy: c.GetSecurityConfigurationsRequest}
+}
+
+// Paginate pages iterates over the pages of a GetSecurityConfigurationsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a GetSecurityConfigurations operation.
+//		req := client.GetSecurityConfigurationsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetSecurityConfigurationsRequest) Paginate(opts ...aws.Option) GetSecurityConfigurationsPager {
+	return GetSecurityConfigurationsPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *GetSecurityConfigurationsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// GetSecurityConfigurationsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetSecurityConfigurationsPager struct {
+	aws.Pager
+}
+
+func (p *GetSecurityConfigurationsPager) CurrentPage() *GetSecurityConfigurationsOutput {
+	return p.Pager.CurrentPage().(*GetSecurityConfigurationsOutput)
 }
 
 const opGetTable = "GetTable"
@@ -3750,6 +4019,57 @@ type GetTablesPager struct {
 
 func (p *GetTablesPager) CurrentPage() *GetTablesOutput {
 	return p.Pager.CurrentPage().(*GetTablesOutput)
+}
+
+const opGetTags = "GetTags"
+
+// GetTagsRequest is a API request type for the GetTags API operation.
+type GetTagsRequest struct {
+	*aws.Request
+	Input *GetTagsInput
+	Copy  func(*GetTagsInput) GetTagsRequest
+}
+
+// Send marshals and sends the GetTags API request.
+func (r GetTagsRequest) Send(ctx context.Context) (*GetTagsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTagsOutput), nil
+}
+
+// GetTagsRequest returns a request value for making API operation for
+// AWS Glue.
+//
+// Retrieves a list of tags associated with a resource.
+//
+//    // Example sending a request using the GetTagsRequest method.
+//    req := client.GetTagsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTags
+func (c *Glue) GetTagsRequest(input *GetTagsInput) GetTagsRequest {
+	op := &aws.Operation{
+		Name:       opGetTags,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetTagsInput{}
+	}
+
+	output := &GetTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetTagsRequest{Request: req, Input: input, Copy: c.GetTagsRequest}
 }
 
 const opGetTrigger = "GetTrigger"
@@ -4113,6 +4433,446 @@ func (c *Glue) ImportCatalogToGlueRequest(input *ImportCatalogToGlueInput) Impor
 	return ImportCatalogToGlueRequest{Request: req, Input: input, Copy: c.ImportCatalogToGlueRequest}
 }
 
+const opListCrawlers = "ListCrawlers"
+
+// ListCrawlersRequest is a API request type for the ListCrawlers API operation.
+type ListCrawlersRequest struct {
+	*aws.Request
+	Input *ListCrawlersInput
+	Copy  func(*ListCrawlersInput) ListCrawlersRequest
+}
+
+// Send marshals and sends the ListCrawlers API request.
+func (r ListCrawlersRequest) Send(ctx context.Context) (*ListCrawlersOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListCrawlersOutput), nil
+}
+
+// ListCrawlersRequest returns a request value for making API operation for
+// AWS Glue.
+//
+// Retrieves the names of all crawler resources in this AWS account, or the
+// resources with the specified tag. This operation allows you to see which
+// resources are available in your account, and their names.
+//
+// This operation takes the optional Tags field which you can use as a filter
+// on the response so that tagged resources can be retrieved as a group. If
+// you choose to use tags filtering, only resources with the tag will be retrieved.
+//
+//    // Example sending a request using the ListCrawlersRequest method.
+//    req := client.ListCrawlersRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListCrawlers
+func (c *Glue) ListCrawlersRequest(input *ListCrawlersInput) ListCrawlersRequest {
+	op := &aws.Operation{
+		Name:       opListCrawlers,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListCrawlersInput{}
+	}
+
+	output := &ListCrawlersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListCrawlersRequest{Request: req, Input: input, Copy: c.ListCrawlersRequest}
+}
+
+// Paginate pages iterates over the pages of a ListCrawlersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListCrawlers operation.
+//		req := client.ListCrawlersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListCrawlersRequest) Paginate(opts ...aws.Option) ListCrawlersPager {
+	return ListCrawlersPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListCrawlersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListCrawlersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListCrawlersPager struct {
+	aws.Pager
+}
+
+func (p *ListCrawlersPager) CurrentPage() *ListCrawlersOutput {
+	return p.Pager.CurrentPage().(*ListCrawlersOutput)
+}
+
+const opListDevEndpoints = "ListDevEndpoints"
+
+// ListDevEndpointsRequest is a API request type for the ListDevEndpoints API operation.
+type ListDevEndpointsRequest struct {
+	*aws.Request
+	Input *ListDevEndpointsInput
+	Copy  func(*ListDevEndpointsInput) ListDevEndpointsRequest
+}
+
+// Send marshals and sends the ListDevEndpoints API request.
+func (r ListDevEndpointsRequest) Send(ctx context.Context) (*ListDevEndpointsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDevEndpointsOutput), nil
+}
+
+// ListDevEndpointsRequest returns a request value for making API operation for
+// AWS Glue.
+//
+// Retrieves the names of all DevEndpoint resources in this AWS account, or
+// the resources with the specified tag. This operation allows you to see which
+// resources are available in your account, and their names.
+//
+// This operation takes the optional Tags field which you can use as a filter
+// on the response so that tagged resources can be retrieved as a group. If
+// you choose to use tags filtering, only resources with the tag will be retrieved.
+//
+//    // Example sending a request using the ListDevEndpointsRequest method.
+//    req := client.ListDevEndpointsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDevEndpoints
+func (c *Glue) ListDevEndpointsRequest(input *ListDevEndpointsInput) ListDevEndpointsRequest {
+	op := &aws.Operation{
+		Name:       opListDevEndpoints,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListDevEndpointsInput{}
+	}
+
+	output := &ListDevEndpointsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListDevEndpointsRequest{Request: req, Input: input, Copy: c.ListDevEndpointsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListDevEndpointsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListDevEndpoints operation.
+//		req := client.ListDevEndpointsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListDevEndpointsRequest) Paginate(opts ...aws.Option) ListDevEndpointsPager {
+	return ListDevEndpointsPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListDevEndpointsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListDevEndpointsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListDevEndpointsPager struct {
+	aws.Pager
+}
+
+func (p *ListDevEndpointsPager) CurrentPage() *ListDevEndpointsOutput {
+	return p.Pager.CurrentPage().(*ListDevEndpointsOutput)
+}
+
+const opListJobs = "ListJobs"
+
+// ListJobsRequest is a API request type for the ListJobs API operation.
+type ListJobsRequest struct {
+	*aws.Request
+	Input *ListJobsInput
+	Copy  func(*ListJobsInput) ListJobsRequest
+}
+
+// Send marshals and sends the ListJobs API request.
+func (r ListJobsRequest) Send(ctx context.Context) (*ListJobsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListJobsOutput), nil
+}
+
+// ListJobsRequest returns a request value for making API operation for
+// AWS Glue.
+//
+// Retrieves the names of all job resources in this AWS account, or the resources
+// with the specified tag. This operation allows you to see which resources
+// are available in your account, and their names.
+//
+// This operation takes the optional Tags field which you can use as a filter
+// on the response so that tagged resources can be retrieved as a group. If
+// you choose to use tags filtering, only resources with the tag will be retrieved.
+//
+//    // Example sending a request using the ListJobsRequest method.
+//    req := client.ListJobsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListJobs
+func (c *Glue) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
+	op := &aws.Operation{
+		Name:       opListJobs,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListJobsInput{}
+	}
+
+	output := &ListJobsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListJobsRequest{Request: req, Input: input, Copy: c.ListJobsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListJobsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListJobs operation.
+//		req := client.ListJobsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListJobsRequest) Paginate(opts ...aws.Option) ListJobsPager {
+	return ListJobsPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListJobsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListJobsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListJobsPager struct {
+	aws.Pager
+}
+
+func (p *ListJobsPager) CurrentPage() *ListJobsOutput {
+	return p.Pager.CurrentPage().(*ListJobsOutput)
+}
+
+const opListTriggers = "ListTriggers"
+
+// ListTriggersRequest is a API request type for the ListTriggers API operation.
+type ListTriggersRequest struct {
+	*aws.Request
+	Input *ListTriggersInput
+	Copy  func(*ListTriggersInput) ListTriggersRequest
+}
+
+// Send marshals and sends the ListTriggers API request.
+func (r ListTriggersRequest) Send(ctx context.Context) (*ListTriggersOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTriggersOutput), nil
+}
+
+// ListTriggersRequest returns a request value for making API operation for
+// AWS Glue.
+//
+// Retrieves the names of all trigger resources in this AWS account, or the
+// resources with the specified tag. This operation allows you to see which
+// resources are available in your account, and their names.
+//
+// This operation takes the optional Tags field which you can use as a filter
+// on the response so that tagged resources can be retrieved as a group. If
+// you choose to use tags filtering, only resources with the tag will be retrieved.
+//
+//    // Example sending a request using the ListTriggersRequest method.
+//    req := client.ListTriggersRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListTriggers
+func (c *Glue) ListTriggersRequest(input *ListTriggersInput) ListTriggersRequest {
+	op := &aws.Operation{
+		Name:       opListTriggers,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListTriggersInput{}
+	}
+
+	output := &ListTriggersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListTriggersRequest{Request: req, Input: input, Copy: c.ListTriggersRequest}
+}
+
+// Paginate pages iterates over the pages of a ListTriggersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListTriggers operation.
+//		req := client.ListTriggersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListTriggersRequest) Paginate(opts ...aws.Option) ListTriggersPager {
+	return ListTriggersPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListTriggersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListTriggersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListTriggersPager struct {
+	aws.Pager
+}
+
+func (p *ListTriggersPager) CurrentPage() *ListTriggersOutput {
+	return p.Pager.CurrentPage().(*ListTriggersOutput)
+}
+
 const opPutDataCatalogEncryptionSettings = "PutDataCatalogEncryptionSettings"
 
 // PutDataCatalogEncryptionSettingsRequest is a API request type for the PutDataCatalogEncryptionSettings API operation.
@@ -4136,7 +4896,7 @@ func (r PutDataCatalogEncryptionSettingsRequest) Send(ctx context.Context) (*Put
 // PutDataCatalogEncryptionSettingsRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Sets the security configuration for a specified catalog. Once the configuration
+// Sets the security configuration for a specified catalog. After the configuration
 // has been set, the specified encryption is applied to every catalog write
 // thereafter.
 //
@@ -4629,6 +5389,110 @@ func (c *Glue) StopTriggerRequest(input *StopTriggerInput) StopTriggerRequest {
 	return StopTriggerRequest{Request: req, Input: input, Copy: c.StopTriggerRequest}
 }
 
+const opTagResource = "TagResource"
+
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
+}
+
+// Send marshals and sends the TagResource API request.
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// AWS Glue.
+//
+// Adds tags to a resource. A tag is a label you can assign to an AWS resource.
+// In AWS Glue, you can tag only certain resources. For information about what
+// resources you can tag, see AWS Tags in AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html).
+//
+//    // Example sending a request using the TagResourceRequest method.
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TagResource
+func (c *Glue) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
+	op := &aws.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
+}
+
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// AWS Glue.
+//
+// Removes tags from a resource.
+//
+//    // Example sending a request using the UntagResourceRequest method.
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UntagResource
+func (c *Glue) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
+	op := &aws.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
+}
+
 const opUpdateClassifier = "UpdateClassifier"
 
 // UpdateClassifierRequest is a API request type for the UpdateClassifier API operation.
@@ -4652,8 +5516,8 @@ func (r UpdateClassifierRequest) Send(ctx context.Context) (*UpdateClassifierOut
 // UpdateClassifierRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Modifies an existing classifier (a GrokClassifier, XMLClassifier, or JsonClassifier,
-// depending on which field is present).
+// Modifies an existing classifier (a GrokClassifier, an XMLClassifier, a JsonClassifier,
+// or a CsvClassifier, depending on which field is present).
 //
 //    // Example sending a request using the UpdateClassifierRequest method.
 //    req := client.UpdateClassifierRequest(params)
@@ -5197,7 +6061,8 @@ func (c *Glue) UpdateUserDefinedFunctionRequest(input *UpdateUserDefinedFunction
 type Action struct {
 	_ struct{} `type:"structure"`
 
-	// Arguments to be passed to the job run.
+	// The job arguments used when this trigger fires. For this job run, they replace
+	// the default arguments set in the job definition itself.
 	//
 	// You can specify arguments here that your own job-execution script consumes,
 	// as well as arguments that AWS Glue itself consumes.
@@ -5362,7 +6227,7 @@ func (s BatchCreatePartitionOutput) SDKResponseMetadata() aws.Response {
 type BatchDeleteConnectionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the Data Catalog in which the connections reside. If none is supplied,
+	// The ID of the Data Catalog in which the connections reside. If none is provided,
 	// the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 
@@ -5696,6 +6561,197 @@ func (s BatchDeleteTableVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetCrawlersRequest
+type BatchGetCrawlersInput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of crawler names, which may be the names returned from the ListCrawlers
+	// operation.
+	//
+	// CrawlerNames is a required field
+	CrawlerNames []string `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s BatchGetCrawlersInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchGetCrawlersInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchGetCrawlersInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetCrawlersInput"}
+
+	if s.CrawlerNames == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CrawlerNames"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetCrawlersResponse
+type BatchGetCrawlersOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of crawler definitions.
+	Crawlers []Crawler `type:"list"`
+
+	// A list of names of crawlers not found.
+	CrawlersNotFound []string `type:"list"`
+}
+
+// String returns the string representation
+func (s BatchGetCrawlersOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchGetCrawlersOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetCrawlersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetDevEndpointsRequest
+type BatchGetDevEndpointsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The list of DevEndpoint names, which may be the names returned from the ListDevEndpoint
+	// operation.
+	//
+	// DevEndpointNames is a required field
+	DevEndpointNames []string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s BatchGetDevEndpointsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchGetDevEndpointsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchGetDevEndpointsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetDevEndpointsInput"}
+
+	if s.DevEndpointNames == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DevEndpointNames"))
+	}
+	if s.DevEndpointNames != nil && len(s.DevEndpointNames) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DevEndpointNames", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetDevEndpointsResponse
+type BatchGetDevEndpointsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of DevEndpoint definitions.
+	DevEndpoints []DevEndpoint `type:"list"`
+
+	// A list of DevEndpoints not found.
+	DevEndpointsNotFound []string `min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s BatchGetDevEndpointsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchGetDevEndpointsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetDevEndpointsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetJobsRequest
+type BatchGetJobsInput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of job names, which may be the names returned from the ListJobs operation.
+	//
+	// JobNames is a required field
+	JobNames []string `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s BatchGetJobsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchGetJobsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchGetJobsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetJobsInput"}
+
+	if s.JobNames == nil {
+		invalidParams.Add(aws.NewErrParamRequired("JobNames"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetJobsResponse
+type BatchGetJobsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of job definitions.
+	Jobs []Job `type:"list"`
+
+	// A list of names of jobs not found.
+	JobsNotFound []string `type:"list"`
+}
+
+// String returns the string representation
+func (s BatchGetJobsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchGetJobsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetJobsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetPartitionRequest
 type BatchGetPartitionInput struct {
 	_ struct{} `type:"structure"`
@@ -5794,6 +6850,69 @@ func (s BatchGetPartitionOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchGetPartitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetTriggersRequest
+type BatchGetTriggersInput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of trigger names, which may be the names returned from the ListTriggers
+	// operation.
+	//
+	// TriggerNames is a required field
+	TriggerNames []string `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s BatchGetTriggersInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchGetTriggersInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchGetTriggersInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetTriggersInput"}
+
+	if s.TriggerNames == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TriggerNames"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetTriggersResponse
+type BatchGetTriggersOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of trigger definitions.
+	Triggers []Trigger `type:"list"`
+
+	// A list of names of triggers not found.
+	TriggersNotFound []string `type:"list"`
+}
+
+// String returns the string representation
+func (s BatchGetTriggersOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchGetTriggersOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetTriggersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -6004,11 +7123,14 @@ func (s CatalogImportStatus) GoString() string {
 // You can use the standard classifiers that AWS Glue supplies, or you can write
 // your own classifiers to best categorize your data sources and specify the
 // appropriate schemas to use for them. A classifier can be a grok classifier,
-// an XML classifier, or a JSON classifier, as specified in one of the fields
-// in the Classifier object.
+// an XML classifier, a JSON classifier, or a custom CSV classifier as specified
+// in one of the fields in the Classifier object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Classifier
 type Classifier struct {
 	_ struct{} `type:"structure"`
+
+	// A CSVClassifier object.
+	CsvClassifier *CsvClassifier `type:"structure"`
 
 	// A GrokClassifier object.
 	GrokClassifier *GrokClassifier `type:"structure"`
@@ -6322,10 +7444,10 @@ type Connection struct {
 	//
 	//    * ENCRYPTED_PASSWORD - When you enable connection password protection
 	//    by setting ConnectionPasswordEncryption in the Data Catalog encryption
-	//    settings, this field stores the key you designate to encrypt the password.
+	//    settings, this field stores the encrypted password.
 	//
-	//    * JDBC_DRIVER_JAR_URI - The S3 path of the a jar file that contains the
-	//    JDBC driver to use.
+	//    * JDBC_DRIVER_JAR_URI - The Amazon S3 path of the JAR file that contains
+	//    the JDBC driver to use.
 	//
 	//    * JDBC_DRIVER_CLASS_NAME - The class name of the JDBC driver to use.
 	//
@@ -6340,24 +7462,24 @@ type Connection struct {
 	//    * JDBC_CONNECTION_URL - The URL for the JDBC connection.
 	//
 	//    * JDBC_ENFORCE_SSL - A Boolean string (true, false) specifying whether
-	//    SSL with hostname matching will be enforced for the JDBC connection on
-	//    the client. The default is false.
+	//    Secure Sockets Layer (SSL) with hostname matching will be enforced for
+	//    the JDBC connection on the client. The default is false.
 	ConnectionProperties map[string]string `type:"map"`
 
 	// The type of the connection. Currently, only JDBC is supported; SFTP is not
 	// supported.
 	ConnectionType ConnectionType `type:"string" enum:"true"`
 
-	// The time this connection definition was created.
+	// The time that this connection definition was created.
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// Description of the connection.
+	// The description of the connection.
 	Description *string `type:"string"`
 
-	// The user, group or role that last updated this connection definition.
+	// The user, group, or role that last updated this connection definition.
 	LastUpdatedBy *string `min:"1" type:"string"`
 
-	// The last time this connection definition was updated.
+	// The last time that this connection definition was updated.
 	LastUpdatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// A list of criteria that can be used in selecting this connection.
@@ -6366,8 +7488,8 @@ type Connection struct {
 	// The name of the connection definition.
 	Name *string `min:"1" type:"string"`
 
-	// A map of physical connection requirements, such as VPC and SecurityGroup,
-	// needed for making this connection successfully.
+	// A map of physical connection requirements, such as virtual private cloud
+	// (VPC) and SecurityGroup, that are needed to make this connection successfully.
 	PhysicalConnectionRequirements *PhysicalConnectionRequirements `type:"structure"`
 }
 
@@ -6381,7 +7503,7 @@ func (s Connection) GoString() string {
 	return s.String()
 }
 
-// A structure used to specify a connection to create or update.
+// A structure that is used to specify a connection to create or update.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectionInput
 type ConnectionInput struct {
 	_ struct{} `type:"structure"`
@@ -6397,7 +7519,7 @@ type ConnectionInput struct {
 	// ConnectionType is a required field
 	ConnectionType ConnectionType `type:"string" required:"true" enum:"true"`
 
-	// Description of the connection.
+	// The description of the connection.
 	Description *string `type:"string"`
 
 	// A list of criteria that can be used in selecting this connection.
@@ -6408,8 +7530,8 @@ type ConnectionInput struct {
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// A map of physical connection requirements, such as VPC and SecurityGroup,
-	// needed for making this connection successfully.
+	// A map of physical connection requirements, such as virtual private cloud
+	// (VPC) and SecurityGroup, that are needed to successfully make this connection.
 	PhysicalConnectionRequirements *PhysicalConnectionRequirements `type:"structure"`
 }
 
@@ -6458,25 +7580,25 @@ func (s *ConnectionInput) Validate() error {
 // only password encryption.
 //
 // When a CreationConnection request arrives containing a password, the Data
-// Catalog first encrypts the password using your KMS key, and then encrypts
+// Catalog first encrypts the password using your AWS KMS key. It then encrypts
 // the whole connection object again if catalog encryption is also enabled.
 //
-// This encryption requires that you set KMS key permissions to enable or restrict
-// access on the password key according to your security requirements. For example,
-// you may want only admin users to have decrypt permission on the password
-// key.
+// This encryption requires that you set AWS KMS key permissions to enable or
+// restrict access on the password key according to your security requirements.
+// For example, you might want only admin users to have decrypt permission on
+// the password key.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectionPasswordEncryption
 type ConnectionPasswordEncryption struct {
 	_ struct{} `type:"structure"`
 
-	// A KMS key used to protect access to the JDBC source.
+	// An AWS KMS key that is used to encrypt the connection password.
 	//
-	// All users in your account should be granted the kms:encrypt permission to
-	// encrypt passwords before storing them in the Data Catalog (through the AWS
-	// Glue CreateConnection operation).
+	// If connection password protection is enabled, the caller of CreateConnection
+	// and UpdateConnection needs at least kms:Encrypt permission on the specified
+	// AWS KMS key, to encrypt passwords before storing them in the Data Catalog.
 	//
-	// The decrypt permission should be granted only to KMS key admins and IAM roles
-	// designated for AWS Glue crawlers.
+	// You can set the decrypt permission to enable or restrict access on the password
+	// key according to your security requirements.
 	AwsKmsKeyId *string `min:"1" type:"string"`
 
 	// When the ReturnConnectionPasswordEncrypted flag is set to "true", passwords
@@ -6677,6 +7799,9 @@ func (s CrawlerTargets) GoString() string {
 type CreateClassifierInput struct {
 	_ struct{} `type:"structure"`
 
+	// A CsvClassifier object specifying the classifier to create.
+	CsvClassifier *CreateCsvClassifierRequest `type:"structure"`
+
 	// A GrokClassifier object specifying the classifier to create.
 	GrokClassifier *CreateGrokClassifierRequest `type:"structure"`
 
@@ -6700,6 +7825,11 @@ func (s CreateClassifierInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateClassifierInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateClassifierInput"}
+	if s.CsvClassifier != nil {
+		if err := s.CsvClassifier.Validate(); err != nil {
+			invalidParams.AddNested("CsvClassifier", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.GrokClassifier != nil {
 		if err := s.GrokClassifier.Validate(); err != nil {
 			invalidParams.AddNested("GrokClassifier", err.(aws.ErrInvalidParams))
@@ -6749,7 +7879,7 @@ type CreateConnectionInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the Data Catalog in which to create the connection. If none is
-	// supplied, the AWS account ID is used by default.
+	// provided, the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 
 	// A ConnectionInput object defining the connection to create.
@@ -6860,6 +7990,12 @@ type CreateCrawlerInput struct {
 	// The table prefix used for catalog tables that are created.
 	TablePrefix *string `type:"string"`
 
+	// The tags to use with this crawler request. You may use tags to limit access
+	// to the crawler. For more information about tags in AWS Glue, see AWS Tags
+	// in AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html)
+	// in the developer guide.
+	Tags map[string]string `type:"map"`
+
 	// A list of collection of targets to crawl.
 	//
 	// Targets is a required field
@@ -6925,6 +8061,70 @@ func (s CreateCrawlerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateCrawlerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// Specifies a custom CSV classifier for CreateClassifier to create.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCsvClassifierRequest
+type CreateCsvClassifierRequest struct {
+	_ struct{} `type:"structure"`
+
+	// Enables the processing of files that contain only one column.
+	AllowSingleColumn *bool `type:"boolean"`
+
+	// Indicates whether the CSV file contains a header.
+	ContainsHeader CsvHeaderOption `type:"string" enum:"true"`
+
+	// A custom symbol to denote what separates each column entry in the row.
+	Delimiter *string `min:"1" type:"string"`
+
+	// Specifies not to trim values before identifying the type of column values.
+	// The default value is true.
+	DisableValueTrimming *bool `type:"boolean"`
+
+	// A list of strings representing column names.
+	Header []string `type:"list"`
+
+	// The name of the classifier.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// A custom symbol to denote what combines content into a single column value.
+	// Must be different from the column delimiter.
+	QuoteSymbol *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s CreateCsvClassifierRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateCsvClassifierRequest) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateCsvClassifierRequest) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateCsvClassifierRequest"}
+	if s.Delimiter != nil && len(*s.Delimiter) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Delimiter", 1))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+	if s.QuoteSymbol != nil && len(*s.QuoteSymbol) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("QuoteSymbol", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDatabaseRequest
@@ -6999,6 +8199,9 @@ func (s CreateDatabaseOutput) SDKResponseMetadata() aws.Response {
 type CreateDevEndpointInput struct {
 	_ struct{} `type:"structure"`
 
+	// A map of arguments used to configure the DevEndpoint.
+	Arguments map[string]string `type:"map"`
+
 	// The name to be assigned to the new DevEndpoint.
 	//
 	// EndpointName is a required field
@@ -7048,6 +8251,12 @@ type CreateDevEndpointInput struct {
 
 	// The subnet ID for the new DevEndpoint to use.
 	SubnetId *string `type:"string"`
+
+	// The tags to use with this DevEndpoint. You may use tags to limit access to
+	// the DevEndpoint. For more information about tags in AWS Glue, see AWS Tags
+	// in AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html)
+	// in the developer guide.
+	Tags map[string]string `type:"map"`
 }
 
 // String returns the string representation
@@ -7086,6 +8295,9 @@ type CreateDevEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
+
+	// The map of arguments used to configure this DevEndpoint.
+	Arguments map[string]string `type:"map"`
 
 	// The AWS availability zone where this DevEndpoint is located.
 	AvailabilityZone *string `type:"string"`
@@ -7217,12 +8429,14 @@ func (s *CreateGrokClassifierRequest) Validate() error {
 type CreateJobInput struct {
 	_ struct{} `type:"structure"`
 
+	// This parameter is deprecated. Use MaxCapacity instead.
+	//
 	// The number of AWS Glue data processing units (DPUs) to allocate to this Job.
 	// From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative
 	// measure of processing power that consists of 4 vCPUs of compute capacity
 	// and 16 GB of memory. For more information, see the AWS Glue pricing page
 	// (https://aws.amazon.com/glue/pricing/).
-	AllocatedCapacity *int64 `type:"integer"`
+	AllocatedCapacity *int64 `deprecated:"true" type:"integer"`
 
 	// The JobCommand that executes this job.
 	//
@@ -7256,6 +8470,24 @@ type CreateJobInput struct {
 	// This field is reserved for future use.
 	LogUri *string `type:"string"`
 
+	// The number of AWS Glue data processing units (DPUs) that can be allocated
+	// when this job runs. A DPU is a relative measure of processing power that
+	// consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information,
+	// see the AWS Glue pricing page (https://aws.amazon.com/glue/pricing/).
+	//
+	// Do not set Max Capacity if using WorkerType and NumberOfWorkers.
+	//
+	// The value that can be allocated for MaxCapacity depends on whether you are
+	// running a python shell job, or an Apache Spark ETL job:
+	//
+	//    * When you specify a python shell job (JobCommand.Name="pythonshell"),
+	//    you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.
+	//
+	//    * When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"),
+	//    you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job
+	//    type cannot have a fractional DPU allocation.
+	MaxCapacity *float64 `type:"double"`
+
 	// The maximum number of times to retry this job if it fails.
 	MaxRetries *int64 `type:"integer"`
 
@@ -7267,6 +8499,13 @@ type CreateJobInput struct {
 	// Specifies configuration properties of a job notification.
 	NotificationProperty *NotificationProperty `type:"structure"`
 
+	// The number of workers of a defined workerType that are allocated when a job
+	// runs.
+	//
+	// The maximum number of workers you can define are 299 for G.1X, and 149 for
+	// G.2X.
+	NumberOfWorkers *int64 `type:"integer"`
+
 	// The name or ARN of the IAM role associated with this job.
 	//
 	// Role is a required field
@@ -7275,10 +8514,28 @@ type CreateJobInput struct {
 	// The name of the SecurityConfiguration structure to be used with this job.
 	SecurityConfiguration *string `min:"1" type:"string"`
 
+	// The tags to use with this job. You may use tags to limit access to the job.
+	// For more information about tags in AWS Glue, see AWS Tags in AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html)
+	// in the developer guide.
+	Tags map[string]string `type:"map"`
+
 	// The job timeout in minutes. This is the maximum time that a job run can consume
 	// resources before it is terminated and enters TIMEOUT status. The default
 	// is 2,880 minutes (48 hours).
 	Timeout *int64 `min:"1" type:"integer"`
+
+	// The type of predefined worker that is allocated when a job runs. Accepts
+	// a value of Standard, G.1X, or G.2X.
+	//
+	//    * For the Standard worker type, each worker provides 4 vCPU, 16 GB of
+	//    memory and a 50GB disk, and 2 executors per worker.
+	//
+	//    * For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory
+	//    and a 64GB disk, and 1 executor per worker.
+	//
+	//    * For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory
+	//    and a 128GB disk, and 1 executor per worker.
+	WorkerType WorkerType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7758,6 +9015,12 @@ type CreateTriggerInput struct {
 	// not supported for ON_DEMAND triggers.
 	StartOnCreation *bool `type:"boolean"`
 
+	// The tags to use with this trigger. You may use tags to limit access to the
+	// trigger. For more information about tags in AWS Glue, see AWS Tags in AWS
+	// Glue (http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the
+	// developer guide.
+	Tags map[string]string `type:"map"`
+
 	// The type of the new trigger.
 	//
 	// Type is a required field
@@ -7969,18 +9232,68 @@ func (s *CreateXMLClassifierRequest) Validate() error {
 	return nil
 }
 
+// A classifier for custom CSV content.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CsvClassifier
+type CsvClassifier struct {
+	_ struct{} `type:"structure"`
+
+	// Enables the processing of files that contain only one column.
+	AllowSingleColumn *bool `type:"boolean"`
+
+	// Indicates whether the CSV file contains a header.
+	ContainsHeader CsvHeaderOption `type:"string" enum:"true"`
+
+	// The time this classifier was registered.
+	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A custom symbol to denote what separates each column entry in the row.
+	Delimiter *string `min:"1" type:"string"`
+
+	// Specifies not to trim values before identifying the type of column values.
+	// The default value is true.
+	DisableValueTrimming *bool `type:"boolean"`
+
+	// A list of strings representing column names.
+	Header []string `type:"list"`
+
+	// The time this classifier was last updated.
+	LastUpdated *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The name of the classifier.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// A custom symbol to denote what combines content into a single column value.
+	// Must be different from the column delimiter.
+	QuoteSymbol *string `min:"1" type:"string"`
+
+	// The version of this classifier.
+	Version *int64 `type:"long"`
+}
+
+// String returns the string representation
+func (s CsvClassifier) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CsvClassifier) GoString() string {
+	return s.String()
+}
+
 // Contains configuration information for maintaining Data Catalog security.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataCatalogEncryptionSettings
 type DataCatalogEncryptionSettings struct {
 	_ struct{} `type:"structure"`
 
-	// When password protection is enabled, the Data Catalog uses a customer-provided
+	// When connection password protection is enabled, the Data Catalog uses a customer-provided
 	// key to encrypt the password as part of CreateConnection or UpdateConnection
 	// and store it in the ENCRYPTED_PASSWORD field in the connection properties.
 	// You can enable catalog encryption or only password encryption.
 	ConnectionPasswordEncryption *ConnectionPasswordEncryption `type:"structure"`
 
-	// Specifies encryption-at-rest configuration for the Data Catalog.
+	// Specifies the encryption-at-rest configuration for the Data Catalog.
 	EncryptionAtRest *EncryptionAtRest `type:"structure"`
 }
 
@@ -8163,7 +9476,7 @@ func (s DeleteClassifierOutput) SDKResponseMetadata() aws.Response {
 type DeleteConnectionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the Data Catalog in which the connection resides. If none is supplied,
+	// The ID of the Data Catalog in which the connection resides. If none is provided,
 	// the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 
@@ -8985,6 +10298,12 @@ func (s DeleteUserDefinedFunctionOutput) SDKResponseMetadata() aws.Response {
 type DevEndpoint struct {
 	_ struct{} `type:"structure"`
 
+	// A map of arguments used to configure the DevEndpoint.
+	//
+	// Note that currently, we only support "--enable-glue-datacatalog": "" as a
+	// valid argument.
+	Arguments map[string]string `type:"map"`
+
 	// The AWS availability zone where this DevEndpoint is located.
 	AvailabilityZone *string `type:"string"`
 
@@ -9132,7 +10451,7 @@ func (s DynamoDBTarget) GoString() string {
 	return s.String()
 }
 
-// Specifies encryption-at-rest configuration for the Data Catalog.
+// Specifies the encryption-at-rest configuration for the Data Catalog.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/EncryptionAtRest
 type EncryptionAtRest struct {
 	_ struct{} `type:"structure"`
@@ -9425,16 +10744,15 @@ func (s GetClassifiersOutput) SDKResponseMetadata() aws.Response {
 type GetConnectionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the Data Catalog in which the connection resides. If none is supplied,
+	// The ID of the Data Catalog in which the connection resides. If none is provided,
 	// the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 
-	// Allow you to retrieve the connection metadata without displaying the password.
-	// For instance, the AWS Glue console uses this flag to retrieve connections,
-	// since the console does not display passwords. Set this parameter where the
-	// caller may not have permission to use the KMS key to decrypt the password,
-	// but does have permission to access the rest of the connection metadata (that
-	// is, the other connection properties).
+	// Allows you to retrieve the connection metadata without returning the password.
+	// For instance, the AWS Glue console uses this flag to retrieve the connection,
+	// and does not display the password. Set this parameter when the caller might
+	// not have permission to use the AWS KMS key to decrypt the password, but does
+	// have permission to access the rest of the connection properties.
 	HidePassword *bool `type:"boolean"`
 
 	// The name of the connection definition to retrieve.
@@ -9498,7 +10816,8 @@ func (s GetConnectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Filters the connection definitions returned by the GetConnections API.
+// Filters the connection definitions that are returned by the GetConnections
+// API operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetConnectionsFilter
 type GetConnectionsFilter struct {
 	_ struct{} `type:"structure"`
@@ -9526,19 +10845,18 @@ func (s GetConnectionsFilter) GoString() string {
 type GetConnectionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the Data Catalog in which the connections reside. If none is supplied,
+	// The ID of the Data Catalog in which the connections reside. If none is provided,
 	// the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 
 	// A filter that controls which connections will be returned.
 	Filter *GetConnectionsFilter `type:"structure"`
 
-	// Allow you to retrieve the connection metadata without displaying the password.
-	// For instance, the AWS Glue console uses this flag to retrieve connections,
-	// since the console does not display passwords. Set this parameter where the
-	// caller may not have permission to use the KMS key to decrypt the password,
-	// but does have permission to access the rest of the connection metadata (that
-	// is, the other connection properties).
+	// Allows you to retrieve the connection metadata without returning the password.
+	// For instance, the AWS Glue console uses this flag to retrieve the connection,
+	// and does not display the password. Set this parameter when the caller might
+	// not have permission to use the AWS KMS key to decrypt the password, but does
+	// have permission to access the rest of the connection properties.
 	HidePassword *bool `type:"boolean"`
 
 	// The maximum number of connections to return in one response.
@@ -9799,7 +11117,7 @@ type GetDataCatalogEncryptionSettingsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the Data Catalog for which to retrieve the security configuration.
-	// If none is supplied, the AWS account ID is used by default.
+	// If none is provided, the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 }
 
@@ -11407,6 +12725,68 @@ func (s GetTablesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTagsRequest
+type GetTagsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon ARN of the resource for which to retrieve tags.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetTagsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetTagsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetTagsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetTagsInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTagsResponse
+type GetTagsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The requested tags.
+	Tags map[string]string `type:"map"`
+}
+
+// String returns the string representation
+func (s GetTagsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetTagsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTriggerRequest
 type GetTriggerInput struct {
 	_ struct{} `type:"structure"`
@@ -11846,12 +13226,14 @@ func (s JdbcTarget) GoString() string {
 type Job struct {
 	_ struct{} `type:"structure"`
 
+	// This field is deprecated, use MaxCapacity instead.
+	//
 	// The number of AWS Glue data processing units (DPUs) allocated to runs of
 	// this job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is
 	// a relative measure of processing power that consists of 4 vCPUs of compute
 	// capacity and 16 GB of memory. For more information, see the AWS Glue pricing
 	// page (https://aws.amazon.com/glue/pricing/).
-	AllocatedCapacity *int64 `type:"integer"`
+	AllocatedCapacity *int64 `deprecated:"true" type:"integer"`
 
 	// The JobCommand that executes this job.
 	Command *JobCommand `type:"structure"`
@@ -11889,6 +13271,24 @@ type Job struct {
 	// This field is reserved for future use.
 	LogUri *string `type:"string"`
 
+	// The number of AWS Glue data processing units (DPUs) that can be allocated
+	// when this job runs. A DPU is a relative measure of processing power that
+	// consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information,
+	// see the AWS Glue pricing page (https://aws.amazon.com/glue/pricing/).
+	//
+	// Do not set Max Capacity if using WorkerType and NumberOfWorkers.
+	//
+	// The value that can be allocated for MaxCapacity depends on whether you are
+	// running a python shell job, or an Apache Spark ETL job:
+	//
+	//    * When you specify a python shell job (JobCommand.Name="pythonshell"),
+	//    you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.
+	//
+	//    * When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"),
+	//    you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job
+	//    type cannot have a fractional DPU allocation.
+	MaxCapacity *float64 `type:"double"`
+
 	// The maximum number of times to retry this job after a JobRun fails.
 	MaxRetries *int64 `type:"integer"`
 
@@ -11897,6 +13297,13 @@ type Job struct {
 
 	// Specifies configuration properties of a job notification.
 	NotificationProperty *NotificationProperty `type:"structure"`
+
+	// The number of workers of a defined workerType that are allocated when a job
+	// runs.
+	//
+	// The maximum number of workers you can define are 299 for G.1X, and 149 for
+	// G.2X.
+	NumberOfWorkers *int64 `type:"integer"`
 
 	// The name or ARN of the IAM role associated with this job.
 	Role *string `type:"string"`
@@ -11908,6 +13315,19 @@ type Job struct {
 	// resources before it is terminated and enters TIMEOUT status. The default
 	// is 2,880 minutes (48 hours).
 	Timeout *int64 `min:"1" type:"integer"`
+
+	// The type of predefined worker that is allocated when a job runs. Accepts
+	// a value of Standard, G.1X, or G.2X.
+	//
+	//    * For the Standard worker type, each worker provides 4 vCPU, 16 GB of
+	//    memory and a 50GB disk, and 2 executors per worker.
+	//
+	//    * For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory
+	//    and a 64GB disk, and 1 executor per worker.
+	//
+	//    * For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory
+	//    and a 128GB disk, and 1 executor per worker.
+	WorkerType WorkerType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -11978,7 +13398,8 @@ func (s JobBookmarksEncryption) GoString() string {
 type JobCommand struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the job command: this must be glueetl.
+	// The name of the job command: this must be glueetl, for an Apache Spark ETL
+	// job, or pythonshell, for a Python shell job.
 	Name *string `type:"string"`
 
 	// Specifies the S3 path to a script that executes a job (required).
@@ -12000,15 +13421,17 @@ func (s JobCommand) GoString() string {
 type JobRun struct {
 	_ struct{} `type:"structure"`
 
+	// This field is deprecated, use MaxCapacity instead.
+	//
 	// The number of AWS Glue data processing units (DPUs) allocated to this JobRun.
 	// From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative
 	// measure of processing power that consists of 4 vCPUs of compute capacity
 	// and 16 GB of memory. For more information, see the AWS Glue pricing page
 	// (https://aws.amazon.com/glue/pricing/).
-	AllocatedCapacity *int64 `type:"integer"`
+	AllocatedCapacity *int64 `deprecated:"true" type:"integer"`
 
-	// The job arguments associated with this run. These override equivalent default
-	// arguments set for the job.
+	// The job arguments associated with this run. For this job run, they replace
+	// the default arguments set in the job definition itself.
 	//
 	// You can specify arguments here that your own job-execution script consumes,
 	// as well as arguments that AWS Glue itself consumes.
@@ -12053,8 +13476,33 @@ type JobRun struct {
 	// then that security configuration will be used to encrypt the log group.
 	LogGroupName *string `type:"string"`
 
+	// The number of AWS Glue data processing units (DPUs) that can be allocated
+	// when this job runs. A DPU is a relative measure of processing power that
+	// consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information,
+	// see the AWS Glue pricing page (https://aws.amazon.com/glue/pricing/).
+	//
+	// Do not set Max Capacity if using WorkerType and NumberOfWorkers.
+	//
+	// The value that can be allocated for MaxCapacity depends on whether you are
+	// running a python shell job, or an Apache Spark ETL job:
+	//
+	//    * When you specify a python shell job (JobCommand.Name="pythonshell"),
+	//    you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.
+	//
+	//    * When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"),
+	//    you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job
+	//    type cannot have a fractional DPU allocation.
+	MaxCapacity *float64 `type:"double"`
+
 	// Specifies configuration properties of a job run notification.
 	NotificationProperty *NotificationProperty `type:"structure"`
+
+	// The number of workers of a defined workerType that are allocated when a job
+	// runs.
+	//
+	// The maximum number of workers you can define are 299 for G.1X, and 149 for
+	// G.2X.
+	NumberOfWorkers *int64 `type:"integer"`
 
 	// A list of predecessors to this job run.
 	PredecessorRuns []Predecessor `type:"list"`
@@ -12078,6 +13526,19 @@ type JobRun struct {
 
 	// The name of the trigger that started this job run.
 	TriggerName *string `min:"1" type:"string"`
+
+	// The type of predefined worker that is allocated when a job runs. Accepts
+	// a value of Standard, G.1X, or G.2X.
+	//
+	//    * For the Standard worker type, each worker provides 4 vCPU, 16 GB of
+	//    memory and a 50GB disk, and 2 executors per worker.
+	//
+	//    * For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory
+	//    and a 64GB disk, and 1 executor per worker.
+	//
+	//    * For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory
+	//    and a 128GB disk, and 1 executor per worker.
+	WorkerType WorkerType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -12096,12 +13557,14 @@ func (s JobRun) GoString() string {
 type JobUpdate struct {
 	_ struct{} `type:"structure"`
 
+	// This field is deprecated. Use MaxCapacity instead.
+	//
 	// The number of AWS Glue data processing units (DPUs) to allocate to this Job.
 	// From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative
 	// measure of processing power that consists of 4 vCPUs of compute capacity
 	// and 16 GB of memory. For more information, see the AWS Glue pricing page
 	// (https://aws.amazon.com/glue/pricing/).
-	AllocatedCapacity *int64 `type:"integer"`
+	AllocatedCapacity *int64 `deprecated:"true" type:"integer"`
 
 	// The JobCommand that executes this job (required).
 	Command *JobCommand `type:"structure"`
@@ -12133,11 +13596,36 @@ type JobUpdate struct {
 	// This field is reserved for future use.
 	LogUri *string `type:"string"`
 
+	// The number of AWS Glue data processing units (DPUs) that can be allocated
+	// when this job runs. A DPU is a relative measure of processing power that
+	// consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information,
+	// see the AWS Glue pricing page (https://aws.amazon.com/glue/pricing/).
+	//
+	// Do not set Max Capacity if using WorkerType and NumberOfWorkers.
+	//
+	// The value that can be allocated for MaxCapacity depends on whether you are
+	// running a python shell job, or an Apache Spark ETL job:
+	//
+	//    * When you specify a python shell job (JobCommand.Name="pythonshell"),
+	//    you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.
+	//
+	//    * When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"),
+	//    you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job
+	//    type cannot have a fractional DPU allocation.
+	MaxCapacity *float64 `type:"double"`
+
 	// The maximum number of times to retry this job if it fails.
 	MaxRetries *int64 `type:"integer"`
 
 	// Specifies configuration properties of a job notification.
 	NotificationProperty *NotificationProperty `type:"structure"`
+
+	// The number of workers of a defined workerType that are allocated when a job
+	// runs.
+	//
+	// The maximum number of workers you can define are 299 for G.1X, and 149 for
+	// G.2X.
+	NumberOfWorkers *int64 `type:"integer"`
 
 	// The name or ARN of the IAM role associated with this job (required).
 	Role *string `type:"string"`
@@ -12149,6 +13637,19 @@ type JobUpdate struct {
 	// resources before it is terminated and enters TIMEOUT status. The default
 	// is 2,880 minutes (48 hours).
 	Timeout *int64 `min:"1" type:"integer"`
+
+	// The type of predefined worker that is allocated when a job runs. Accepts
+	// a value of Standard, G.1X, or G.2X.
+	//
+	//    * For the Standard worker type, each worker provides 4 vCPU, 16 GB of
+	//    memory and a 50GB disk, and 2 executors per worker.
+	//
+	//    * For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory
+	//    and a 64GB disk, and 1 executor per worker.
+	//
+	//    * For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory
+	//    and a 128GB disk, and 1 executor per worker.
+	WorkerType WorkerType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -12251,6 +13752,281 @@ func (s LastCrawlInfo) String() string {
 // GoString returns the string representation
 func (s LastCrawlInfo) GoString() string {
 	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListCrawlersRequest
+type ListCrawlersInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum size of a list to return.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// A continuation token, if this is a continuation request.
+	NextToken *string `type:"string"`
+
+	// Specifies to return only these tagged resources.
+	Tags map[string]string `type:"map"`
+}
+
+// String returns the string representation
+func (s ListCrawlersInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListCrawlersInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListCrawlersInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListCrawlersInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListCrawlersResponse
+type ListCrawlersOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The names of all crawlers in the account, or the crawlers with the specified
+	// tags.
+	CrawlerNames []string `type:"list"`
+
+	// A continuation token, if the returned list does not contain the last metric
+	// available.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ListCrawlersOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListCrawlersOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListCrawlersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDevEndpointsRequest
+type ListDevEndpointsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum size of a list to return.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// A continuation token, if this is a continuation request.
+	NextToken *string `type:"string"`
+
+	// Specifies to return only these tagged resources.
+	Tags map[string]string `type:"map"`
+}
+
+// String returns the string representation
+func (s ListDevEndpointsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListDevEndpointsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListDevEndpointsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListDevEndpointsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDevEndpointsResponse
+type ListDevEndpointsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The names of all DevEndpoints in the account, or the DevEndpoints with the
+	// specified tags.
+	DevEndpointNames []string `type:"list"`
+
+	// A continuation token, if the returned list does not contain the last metric
+	// available.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ListDevEndpointsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListDevEndpointsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDevEndpointsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListJobsRequest
+type ListJobsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum size of a list to return.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// A continuation token, if this is a continuation request.
+	NextToken *string `type:"string"`
+
+	// Specifies to return only these tagged resources.
+	Tags map[string]string `type:"map"`
+}
+
+// String returns the string representation
+func (s ListJobsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListJobsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListJobsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListJobsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListJobsResponse
+type ListJobsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The names of all jobs in the account, or the jobs with the specified tags.
+	JobNames []string `type:"list"`
+
+	// A continuation token, if the returned list does not contain the last metric
+	// available.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ListJobsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListJobsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListJobsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListTriggersRequest
+type ListTriggersInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the job for which to retrieve triggers. The trigger that can
+	// start this job will be returned, and if there is no such trigger, all triggers
+	// will be returned.
+	DependentJobName *string `min:"1" type:"string"`
+
+	// The maximum size of a list to return.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// A continuation token, if this is a continuation request.
+	NextToken *string `type:"string"`
+
+	// Specifies to return only these tagged resources.
+	Tags map[string]string `type:"map"`
+}
+
+// String returns the string representation
+func (s ListTriggersInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTriggersInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTriggersInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListTriggersInput"}
+	if s.DependentJobName != nil && len(*s.DependentJobName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DependentJobName", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListTriggersResponse
+type ListTriggersOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A continuation token, if the returned list does not contain the last metric
+	// available.
+	NextToken *string `type:"string"`
+
+	// The names of all triggers in the account, or the triggers with the specified
+	// tags.
+	TriggerNames []string `type:"list"`
+}
+
+// String returns the string representation
+func (s ListTriggersOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTriggersOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTriggersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The location of resources.
@@ -12503,7 +14279,8 @@ type PartitionInput struct {
 	// Provides information about the physical location where the partition is stored.
 	StorageDescriptor *StorageDescriptor `type:"structure"`
 
-	// The values of the partition.
+	// The values of the partition. Although this parameter is not required by the
+	// SDK, you must specify this parameter for a valid input.
 	Values []string `type:"list"`
 }
 
@@ -12572,9 +14349,9 @@ func (s *PartitionValueList) Validate() error {
 type PhysicalConnectionRequirements struct {
 	_ struct{} `type:"structure"`
 
-	// The connection's availability zone. This field is redundant, since the specified
-	// subnet implies the availability zone to be used. The field must be populated
-	// now, but will be deprecated in the future.
+	// The connection's Availability Zone. This field is redundant because the specified
+	// subnet implies the Availability Zone to be used. Currently the field must
+	// be populated, but it will be deprecated in the future.
 	AvailabilityZone *string `min:"1" type:"string"`
 
 	// The security group ID list used by the connection.
@@ -12678,7 +14455,7 @@ type PutDataCatalogEncryptionSettingsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the Data Catalog for which to set the security configuration. If
-	// none is supplied, the AWS account ID is used by default.
+	// none is provided, the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 
 	// The security configuration to set.
@@ -12750,7 +14527,7 @@ type PutResourcePolicyInput struct {
 	// the call will not depend on the existence of a policy.
 	PolicyExistsCondition ExistCondition `type:"string" enum:"true"`
 
-	// This is the hash value returned when the previous policy was set using PutResourcePolicy.
+	// The hash value returned when the previous policy was set using PutResourcePolicy.
 	// Its purpose is to prevent concurrent modifications of a policy. Do not use
 	// this parameter if no previous policy has been set.
 	PolicyHashCondition *string `min:"1" type:"string"`
@@ -13268,15 +15045,17 @@ func (s StartCrawlerScheduleOutput) SDKResponseMetadata() aws.Response {
 type StartJobRunInput struct {
 	_ struct{} `type:"structure"`
 
+	// This field is deprecated, use MaxCapacity instead.
+	//
 	// The number of AWS Glue data processing units (DPUs) to allocate to this JobRun.
 	// From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative
 	// measure of processing power that consists of 4 vCPUs of compute capacity
 	// and 16 GB of memory. For more information, see the AWS Glue pricing page
 	// (https://aws.amazon.com/glue/pricing/).
-	AllocatedCapacity *int64 `type:"integer"`
+	AllocatedCapacity *int64 `deprecated:"true" type:"integer"`
 
-	// The job arguments specifically for this run. They override the equivalent
-	// default arguments set for in the job definition itself.
+	// The job arguments specifically for this run. For this job run, they replace
+	// the default arguments set in the job definition itself.
 	//
 	// You can specify arguments here that your own job-execution script consumes,
 	// as well as arguments that AWS Glue itself consumes.
@@ -13298,8 +15077,33 @@ type StartJobRunInput struct {
 	// The ID of a previous JobRun to retry.
 	JobRunId *string `min:"1" type:"string"`
 
+	// The number of AWS Glue data processing units (DPUs) that can be allocated
+	// when this job runs. A DPU is a relative measure of processing power that
+	// consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information,
+	// see the AWS Glue pricing page (https://aws.amazon.com/glue/pricing/).
+	//
+	// Do not set Max Capacity if using WorkerType and NumberOfWorkers.
+	//
+	// The value that can be allocated for MaxCapacity depends on whether you are
+	// running a python shell job, or an Apache Spark ETL job:
+	//
+	//    * When you specify a python shell job (JobCommand.Name="pythonshell"),
+	//    you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.
+	//
+	//    * When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"),
+	//    you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job
+	//    type cannot have a fractional DPU allocation.
+	MaxCapacity *float64 `type:"double"`
+
 	// Specifies configuration properties of a job run notification.
 	NotificationProperty *NotificationProperty `type:"structure"`
+
+	// The number of workers of a defined workerType that are allocated when a job
+	// runs.
+	//
+	// The maximum number of workers you can define are 299 for G.1X, and 149 for
+	// G.2X.
+	NumberOfWorkers *int64 `type:"integer"`
 
 	// The name of the SecurityConfiguration structure to be used with this job
 	// run.
@@ -13310,6 +15114,19 @@ type StartJobRunInput struct {
 	// default is 2,880 minutes (48 hours). This overrides the timeout value set
 	// in the parent job.
 	Timeout *int64 `min:"1" type:"integer"`
+
+	// The type of predefined worker that is allocated when a job runs. Accepts
+	// a value of Standard, G.1X, or G.2X.
+	//
+	//    * For the Standard worker type, each worker provides 4 vCPU, 16 GB of
+	//    memory and a 50GB disk, and 2 executors per worker.
+	//
+	//    * For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory
+	//    and a 64GB disk, and 1 executor per worker.
+	//
+	//    * For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory
+	//    and a 128GB disk, and 1 executor per worker.
+	WorkerType WorkerType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -13947,6 +15764,75 @@ func (s TableVersionError) GoString() string {
 	return s.String()
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TagResourceRequest
+type TagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the AWS Glue resource to which to add the tags. For more information
+	// about AWS Glue resource ARNs, see the AWS Glue ARN string pattern (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id).
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `min:"1" type:"string" required:"true"`
+
+	// Tags to add to this resource.
+	//
+	// TagsToAdd is a required field
+	TagsToAdd map[string]string `type:"map" required:"true"`
+}
+
+// String returns the string representation
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
+	}
+
+	if s.TagsToAdd == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TagsToAdd"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TagResourceResponse
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Information about a specific trigger.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Trigger
 type Trigger struct {
@@ -14050,9 +15936,80 @@ func (s *TriggerUpdate) Validate() error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UntagResourceRequest
+type UntagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the resource from which to remove the tags.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `min:"1" type:"string" required:"true"`
+
+	// Tags to remove from this resource.
+	//
+	// TagsToRemove is a required field
+	TagsToRemove []string `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
+	}
+
+	if s.TagsToRemove == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TagsToRemove"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UntagResourceResponse
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateClassifierRequest
 type UpdateClassifierInput struct {
 	_ struct{} `type:"structure"`
+
+	// A CsvClassifier object with updated fields.
+	CsvClassifier *UpdateCsvClassifierRequest `type:"structure"`
 
 	// A GrokClassifier object with updated fields.
 	GrokClassifier *UpdateGrokClassifierRequest `type:"structure"`
@@ -14077,6 +16034,11 @@ func (s UpdateClassifierInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateClassifierInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateClassifierInput"}
+	if s.CsvClassifier != nil {
+		if err := s.CsvClassifier.Validate(); err != nil {
+			invalidParams.AddNested("CsvClassifier", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.GrokClassifier != nil {
 		if err := s.GrokClassifier.Validate(); err != nil {
 			invalidParams.AddNested("GrokClassifier", err.(aws.ErrInvalidParams))
@@ -14125,7 +16087,7 @@ func (s UpdateClassifierOutput) SDKResponseMetadata() aws.Response {
 type UpdateConnectionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the Data Catalog in which the connection resides. If none is supplied,
+	// The ID of the Data Catalog in which the connection resides. If none is provided,
 	// the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 
@@ -14363,6 +16325,70 @@ func (s UpdateCrawlerScheduleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Specifies a custom CSV classifier to be updated.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCsvClassifierRequest
+type UpdateCsvClassifierRequest struct {
+	_ struct{} `type:"structure"`
+
+	// Enables the processing of files that contain only one column.
+	AllowSingleColumn *bool `type:"boolean"`
+
+	// Indicates whether the CSV file contains a header.
+	ContainsHeader CsvHeaderOption `type:"string" enum:"true"`
+
+	// A custom symbol to denote what separates each column entry in the row.
+	Delimiter *string `min:"1" type:"string"`
+
+	// Specifies not to trim values before identifying the type of column values.
+	// The default value is true.
+	DisableValueTrimming *bool `type:"boolean"`
+
+	// A list of strings representing column names.
+	Header []string `type:"list"`
+
+	// The name of the classifier.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// A custom symbol to denote what combines content into a single column value.
+	// Must be different from the column delimiter.
+	QuoteSymbol *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateCsvClassifierRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateCsvClassifierRequest) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateCsvClassifierRequest) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateCsvClassifierRequest"}
+	if s.Delimiter != nil && len(*s.Delimiter) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Delimiter", 1))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+	if s.QuoteSymbol != nil && len(*s.QuoteSymbol) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("QuoteSymbol", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDatabaseRequest
 type UpdateDatabaseInput struct {
 	_ struct{} `type:"structure"`
@@ -14449,11 +16475,18 @@ func (s UpdateDatabaseOutput) SDKResponseMetadata() aws.Response {
 type UpdateDevEndpointInput struct {
 	_ struct{} `type:"structure"`
 
+	// The map of arguments to add the map of arguments used to configure the DevEndpoint.
+	AddArguments map[string]string `type:"map"`
+
 	// The list of public keys for the DevEndpoint to use.
 	AddPublicKeys []string `type:"list"`
 
 	// Custom Python or Java libraries to be loaded in the DevEndpoint.
 	CustomLibraries *DevEndpointCustomLibraries `type:"structure"`
+
+	// The list of argument keys to be deleted from the map of arguments used to
+	// configure the DevEndpoint.
+	DeleteArguments []string `type:"list"`
 
 	// The list of public keys to be deleted from the DevEndpoint.
 	DeletePublicKeys []string `type:"list"`
@@ -15320,6 +17353,24 @@ func (enum CrawlerState) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type CsvHeaderOption string
+
+// Enum values for CsvHeaderOption
+const (
+	CsvHeaderOptionUnknown CsvHeaderOption = "UNKNOWN"
+	CsvHeaderOptionPresent CsvHeaderOption = "PRESENT"
+	CsvHeaderOptionAbsent  CsvHeaderOption = "ABSENT"
+)
+
+func (enum CsvHeaderOption) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CsvHeaderOption) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeleteBehavior string
 
 // Enum values for DeleteBehavior
@@ -15589,6 +17640,24 @@ func (enum UpdateBehavior) MarshalValue() (string, error) {
 }
 
 func (enum UpdateBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type WorkerType string
+
+// Enum values for WorkerType
+const (
+	WorkerTypeStandard WorkerType = "Standard"
+	WorkerTypeG1x      WorkerType = "G.1X"
+	WorkerTypeG2x      WorkerType = "G.2X"
+)
+
+func (enum WorkerType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum WorkerType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

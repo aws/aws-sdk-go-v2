@@ -26,7 +26,7 @@ var initRequest func(*ECR, *aws.Request)
 
 // Service information constants
 const (
-	ServiceName = "ecr"       // Service endpoint prefix API calls made to.
+	ServiceName = "api.ecr"   // Service endpoint prefix API calls made to.
 	EndpointsID = ServiceName // Service ID for Regions and Endpoints metadata.
 )
 
@@ -37,6 +37,7 @@ const (
 //     svc := ecr.New(myConfig)
 func New(config aws.Config) *ECR {
 	var signingName string
+	signingName = "ecr"
 	signingRegion := config.Region
 
 	svc := &ECR{

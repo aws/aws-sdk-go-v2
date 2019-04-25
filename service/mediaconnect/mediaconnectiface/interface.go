@@ -76,6 +76,8 @@ type MediaConnectAPI interface {
 
 	ListFlowsRequest(*mediaconnect.ListFlowsInput) mediaconnect.ListFlowsRequest
 
+	ListTagsForResourceRequest(*mediaconnect.ListTagsForResourceInput) mediaconnect.ListTagsForResourceRequest
+
 	RemoveFlowOutputRequest(*mediaconnect.RemoveFlowOutputInput) mediaconnect.RemoveFlowOutputRequest
 
 	RevokeFlowEntitlementRequest(*mediaconnect.RevokeFlowEntitlementInput) mediaconnect.RevokeFlowEntitlementRequest
@@ -83,6 +85,10 @@ type MediaConnectAPI interface {
 	StartFlowRequest(*mediaconnect.StartFlowInput) mediaconnect.StartFlowRequest
 
 	StopFlowRequest(*mediaconnect.StopFlowInput) mediaconnect.StopFlowRequest
+
+	TagResourceRequest(*mediaconnect.TagResourceInput) mediaconnect.TagResourceRequest
+
+	UntagResourceRequest(*mediaconnect.UntagResourceInput) mediaconnect.UntagResourceRequest
 
 	UpdateFlowEntitlementRequest(*mediaconnect.UpdateFlowEntitlementInput) mediaconnect.UpdateFlowEntitlementRequest
 

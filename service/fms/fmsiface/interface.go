@@ -78,6 +78,8 @@ type FMSAPI interface {
 
 	GetPolicyRequest(*fms.GetPolicyInput) fms.GetPolicyRequest
 
+	GetProtectionStatusRequest(*fms.GetProtectionStatusInput) fms.GetProtectionStatusRequest
+
 	ListComplianceStatusRequest(*fms.ListComplianceStatusInput) fms.ListComplianceStatusRequest
 
 	ListMemberAccountsRequest(*fms.ListMemberAccountsInput) fms.ListMemberAccountsRequest

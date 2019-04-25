@@ -47,7 +47,7 @@ func New(config aws.Config) *AppMesh {
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				APIVersion:    "2018-10-01",
+				APIVersion:    "2019-01-25",
 				JSONVersion:   "1.1",
 			},
 		),

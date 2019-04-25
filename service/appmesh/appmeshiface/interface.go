@@ -70,6 +70,8 @@ type AppMeshAPI interface {
 
 	CreateVirtualRouterRequest(*appmesh.CreateVirtualRouterInput) appmesh.CreateVirtualRouterRequest
 
+	CreateVirtualServiceRequest(*appmesh.CreateVirtualServiceInput) appmesh.CreateVirtualServiceRequest
+
 	DeleteMeshRequest(*appmesh.DeleteMeshInput) appmesh.DeleteMeshRequest
 
 	DeleteRouteRequest(*appmesh.DeleteRouteInput) appmesh.DeleteRouteRequest
@@ -77,6 +79,8 @@ type AppMeshAPI interface {
 	DeleteVirtualNodeRequest(*appmesh.DeleteVirtualNodeInput) appmesh.DeleteVirtualNodeRequest
 
 	DeleteVirtualRouterRequest(*appmesh.DeleteVirtualRouterInput) appmesh.DeleteVirtualRouterRequest
+
+	DeleteVirtualServiceRequest(*appmesh.DeleteVirtualServiceInput) appmesh.DeleteVirtualServiceRequest
 
 	DescribeMeshRequest(*appmesh.DescribeMeshInput) appmesh.DescribeMeshRequest
 
@@ -86,19 +90,33 @@ type AppMeshAPI interface {
 
 	DescribeVirtualRouterRequest(*appmesh.DescribeVirtualRouterInput) appmesh.DescribeVirtualRouterRequest
 
+	DescribeVirtualServiceRequest(*appmesh.DescribeVirtualServiceInput) appmesh.DescribeVirtualServiceRequest
+
 	ListMeshesRequest(*appmesh.ListMeshesInput) appmesh.ListMeshesRequest
 
 	ListRoutesRequest(*appmesh.ListRoutesInput) appmesh.ListRoutesRequest
 
+	ListTagsForResourceRequest(*appmesh.ListTagsForResourceInput) appmesh.ListTagsForResourceRequest
+
 	ListVirtualNodesRequest(*appmesh.ListVirtualNodesInput) appmesh.ListVirtualNodesRequest
 
 	ListVirtualRoutersRequest(*appmesh.ListVirtualRoutersInput) appmesh.ListVirtualRoutersRequest
+
+	ListVirtualServicesRequest(*appmesh.ListVirtualServicesInput) appmesh.ListVirtualServicesRequest
+
+	TagResourceRequest(*appmesh.TagResourceInput) appmesh.TagResourceRequest
+
+	UntagResourceRequest(*appmesh.UntagResourceInput) appmesh.UntagResourceRequest
+
+	UpdateMeshRequest(*appmesh.UpdateMeshInput) appmesh.UpdateMeshRequest
 
 	UpdateRouteRequest(*appmesh.UpdateRouteInput) appmesh.UpdateRouteRequest
 
 	UpdateVirtualNodeRequest(*appmesh.UpdateVirtualNodeInput) appmesh.UpdateVirtualNodeRequest
 
 	UpdateVirtualRouterRequest(*appmesh.UpdateVirtualRouterInput) appmesh.UpdateVirtualRouterRequest
+
+	UpdateVirtualServiceRequest(*appmesh.UpdateVirtualServiceInput) appmesh.UpdateVirtualServiceRequest
 }
 
 var _ AppMeshAPI = (*appmesh.AppMesh)(nil)

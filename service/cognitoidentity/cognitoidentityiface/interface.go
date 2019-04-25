@@ -86,15 +86,21 @@ type CognitoIdentityAPI interface {
 
 	ListIdentityPoolsRequest(*cognitoidentity.ListIdentityPoolsInput) cognitoidentity.ListIdentityPoolsRequest
 
+	ListTagsForResourceRequest(*cognitoidentity.ListTagsForResourceInput) cognitoidentity.ListTagsForResourceRequest
+
 	LookupDeveloperIdentityRequest(*cognitoidentity.LookupDeveloperIdentityInput) cognitoidentity.LookupDeveloperIdentityRequest
 
 	MergeDeveloperIdentitiesRequest(*cognitoidentity.MergeDeveloperIdentitiesInput) cognitoidentity.MergeDeveloperIdentitiesRequest
 
 	SetIdentityPoolRolesRequest(*cognitoidentity.SetIdentityPoolRolesInput) cognitoidentity.SetIdentityPoolRolesRequest
 
+	TagResourceRequest(*cognitoidentity.TagResourceInput) cognitoidentity.TagResourceRequest
+
 	UnlinkDeveloperIdentityRequest(*cognitoidentity.UnlinkDeveloperIdentityInput) cognitoidentity.UnlinkDeveloperIdentityRequest
 
 	UnlinkIdentityRequest(*cognitoidentity.UnlinkIdentityInput) cognitoidentity.UnlinkIdentityRequest
+
+	UntagResourceRequest(*cognitoidentity.UntagResourceInput) cognitoidentity.UntagResourceRequest
 
 	UpdateIdentityPoolRequest(*cognitoidentity.UpdateIdentityPoolOutput) cognitoidentity.UpdateIdentityPoolRequest
 }

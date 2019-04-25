@@ -120,6 +120,8 @@ type LightsailAPI interface {
 
 	DeleteKeyPairRequest(*lightsail.DeleteKeyPairInput) lightsail.DeleteKeyPairRequest
 
+	DeleteKnownHostKeysRequest(*lightsail.DeleteKnownHostKeysInput) lightsail.DeleteKnownHostKeysRequest
+
 	DeleteLoadBalancerRequest(*lightsail.DeleteLoadBalancerInput) lightsail.DeleteLoadBalancerRequest
 
 	DeleteLoadBalancerTlsCertificateRequest(*lightsail.DeleteLoadBalancerTlsCertificateInput) lightsail.DeleteLoadBalancerTlsCertificateRequest

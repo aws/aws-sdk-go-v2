@@ -601,6 +601,8 @@ type EC2API interface {
 
 	ModifyInstanceCreditSpecificationRequest(*ec2.ModifyInstanceCreditSpecificationInput) ec2.ModifyInstanceCreditSpecificationRequest
 
+	ModifyInstanceEventStartTimeRequest(*ec2.ModifyInstanceEventStartTimeInput) ec2.ModifyInstanceEventStartTimeRequest
+
 	ModifyInstancePlacementRequest(*ec2.ModifyInstancePlacementInput) ec2.ModifyInstancePlacementRequest
 
 	ModifyLaunchTemplateRequest(*ec2.ModifyLaunchTemplateInput) ec2.ModifyLaunchTemplateRequest

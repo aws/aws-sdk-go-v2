@@ -29,6 +29,11 @@ func (c *ACMPCA) WaitUntilAuditReportCreated(ctx context.Context, input *Describ
 				Matcher: aws.PathWaiterMatch, Argument: "AuditReportStatus",
 				Expected: "SUCCESS",
 			},
+			{
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "AuditReportStatus",
+				Expected: "FAILED",
+			},
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {

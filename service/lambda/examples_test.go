@@ -96,7 +96,7 @@ func ExampleLambda_CreateFunctionRequest_shared00() {
 		MemorySize:   aws.Int64(128),
 		Publish:      aws.Bool(true),
 		Role:         aws.String("arn:aws:iam::123456789012:role/service-role/role-name"),
-		Runtime:      lambda.RuntimeNodejs43,
+		Runtime:      lambda.RuntimeNodejs810,
 		Timeout:      aws.Int64(15),
 		VpcConfig:    &lambda.VpcConfig{},
 	}

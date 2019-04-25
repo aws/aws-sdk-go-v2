@@ -293,7 +293,7 @@ func (r DeleteTagsRequest) Send(ctx context.Context) (*DeleteTagsOutput, error) 
 // DeleteTagsRequest returns a request value for making API operation for
 // AmazonMQ.
 //
-// Remove a tag from a resource.
+// Removes a tag from a resource.
 //
 //    // Example sending a request using the DeleteTagsRequest method.
 //    req := client.DeleteTagsRequest(params)
@@ -423,6 +423,108 @@ func (c *MQ) DescribeBrokerRequest(input *DescribeBrokerInput) DescribeBrokerReq
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DescribeBrokerRequest{Request: req, Input: input, Copy: c.DescribeBrokerRequest}
+}
+
+const opDescribeBrokerEngineTypes = "DescribeBrokerEngineTypes"
+
+// DescribeBrokerEngineTypesRequest is a API request type for the DescribeBrokerEngineTypes API operation.
+type DescribeBrokerEngineTypesRequest struct {
+	*aws.Request
+	Input *DescribeBrokerEngineTypesInput
+	Copy  func(*DescribeBrokerEngineTypesInput) DescribeBrokerEngineTypesRequest
+}
+
+// Send marshals and sends the DescribeBrokerEngineTypes API request.
+func (r DescribeBrokerEngineTypesRequest) Send(ctx context.Context) (*DescribeBrokerEngineTypesOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeBrokerEngineTypesOutput), nil
+}
+
+// DescribeBrokerEngineTypesRequest returns a request value for making API operation for
+// AmazonMQ.
+//
+// Describe available engine types and versions.
+//
+//    // Example sending a request using the DescribeBrokerEngineTypesRequest method.
+//    req := client.DescribeBrokerEngineTypesRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerEngineTypes
+func (c *MQ) DescribeBrokerEngineTypesRequest(input *DescribeBrokerEngineTypesInput) DescribeBrokerEngineTypesRequest {
+	op := &aws.Operation{
+		Name:       opDescribeBrokerEngineTypes,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v1/broker-engine-types",
+	}
+
+	if input == nil {
+		input = &DescribeBrokerEngineTypesInput{}
+	}
+
+	output := &DescribeBrokerEngineTypesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeBrokerEngineTypesRequest{Request: req, Input: input, Copy: c.DescribeBrokerEngineTypesRequest}
+}
+
+const opDescribeBrokerInstanceOptions = "DescribeBrokerInstanceOptions"
+
+// DescribeBrokerInstanceOptionsRequest is a API request type for the DescribeBrokerInstanceOptions API operation.
+type DescribeBrokerInstanceOptionsRequest struct {
+	*aws.Request
+	Input *DescribeBrokerInstanceOptionsInput
+	Copy  func(*DescribeBrokerInstanceOptionsInput) DescribeBrokerInstanceOptionsRequest
+}
+
+// Send marshals and sends the DescribeBrokerInstanceOptions API request.
+func (r DescribeBrokerInstanceOptionsRequest) Send(ctx context.Context) (*DescribeBrokerInstanceOptionsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeBrokerInstanceOptionsOutput), nil
+}
+
+// DescribeBrokerInstanceOptionsRequest returns a request value for making API operation for
+// AmazonMQ.
+//
+// Describe available broker instance options.
+//
+//    // Example sending a request using the DescribeBrokerInstanceOptionsRequest method.
+//    req := client.DescribeBrokerInstanceOptionsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerInstanceOptions
+func (c *MQ) DescribeBrokerInstanceOptionsRequest(input *DescribeBrokerInstanceOptionsInput) DescribeBrokerInstanceOptionsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeBrokerInstanceOptions,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v1/broker-instance-options",
+	}
+
+	if input == nil {
+		input = &DescribeBrokerInstanceOptionsInput{}
+	}
+
+	output := &DescribeBrokerInstanceOptionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeBrokerInstanceOptionsRequest{Request: req, Input: input, Copy: c.DescribeBrokerInstanceOptionsRequest}
 }
 
 const opDescribeConfiguration = "DescribeConfiguration"
@@ -1037,6 +1139,81 @@ func (c *MQ) UpdateUserRequest(input *UpdateUserInput) UpdateUserRequest {
 	return UpdateUserRequest{Request: req, Input: input, Copy: c.UpdateUserRequest}
 }
 
+// Name of the availability zone.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/AvailabilityZone
+type AvailabilityZone struct {
+	_ struct{} `type:"structure"`
+
+	// Id for the availability zone.
+	Name *string `locationName:"name" type:"string"`
+}
+
+// String returns the string representation
+func (s AvailabilityZone) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AvailabilityZone) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AvailabilityZone) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Types of broker engines.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerEngineType
+type BrokerEngineType struct {
+	_ struct{} `type:"structure"`
+
+	// The type of broker engine.
+	EngineType EngineType `locationName:"engineType" type:"string" enum:"true"`
+
+	// The list of engine versions.
+	EngineVersions []EngineVersion `locationName:"engineVersions" type:"list"`
+}
+
+// String returns the string representation
+func (s BrokerEngineType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BrokerEngineType) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BrokerEngineType) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.EngineType) > 0 {
+		v := s.EngineType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "engineType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.EngineVersions) > 0 {
+		v := s.EngineVersions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "engineVersions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Returns information about all brokers.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerInstance
 type BrokerInstance struct {
@@ -1087,6 +1264,75 @@ func (s BrokerInstance) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ipAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Option for host instance type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerInstanceOption
+type BrokerInstanceOption struct {
+	_ struct{} `type:"structure"`
+
+	// The list of available az.
+	AvailabilityZones []AvailabilityZone `locationName:"availabilityZones" type:"list"`
+
+	// The type of broker engine.
+	EngineType EngineType `locationName:"engineType" type:"string" enum:"true"`
+
+	// The type of broker instance.
+	HostInstanceType *string `locationName:"hostInstanceType" type:"string"`
+
+	// The list of supported engine versions.
+	SupportedEngineVersions []string `locationName:"supportedEngineVersions" type:"list"`
+}
+
+// String returns the string representation
+func (s BrokerInstanceOption) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BrokerInstanceOption) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BrokerInstanceOption) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AvailabilityZones) > 0 {
+		v := s.AvailabilityZones
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "availabilityZones", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.EngineType) > 0 {
+		v := s.EngineType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "engineType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.HostInstanceType != nil {
+		v := *s.HostInstanceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "hostInstanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.SupportedEngineVersions) > 0 {
+		v := s.SupportedEngineVersions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "supportedEngineVersions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -2238,6 +2484,122 @@ func (s DeleteUserOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerEngineTypesRequest
+type DescribeBrokerEngineTypesInput struct {
+	_ struct{} `type:"structure"`
+
+	EngineType *string `location:"querystring" locationName:"engineType" type:"string"`
+
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
+
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeBrokerEngineTypesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeBrokerEngineTypesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeBrokerEngineTypesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeBrokerEngineTypesInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeBrokerEngineTypesInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.EngineType != nil {
+		v := *s.EngineType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "engineType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerEngineTypesResponse
+type DescribeBrokerEngineTypesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	BrokerEngineTypes []BrokerEngineType `locationName:"brokerEngineTypes" type:"list"`
+
+	MaxResults *int64 `locationName:"maxResults" min:"5" type:"integer"`
+
+	NextToken *string `locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeBrokerEngineTypesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeBrokerEngineTypesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeBrokerEngineTypesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeBrokerEngineTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.BrokerEngineTypes) > 0 {
+		v := s.BrokerEngineTypes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "brokerEngineTypes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerRequest
 type DescribeBrokerInput struct {
 	_ struct{} `type:"structure"`
@@ -2279,6 +2641,130 @@ func (s DescribeBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "broker-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerInstanceOptionsRequest
+type DescribeBrokerInstanceOptionsInput struct {
+	_ struct{} `type:"structure"`
+
+	EngineType *string `location:"querystring" locationName:"engineType" type:"string"`
+
+	HostInstanceType *string `location:"querystring" locationName:"hostInstanceType" type:"string"`
+
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
+
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeBrokerInstanceOptionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeBrokerInstanceOptionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeBrokerInstanceOptionsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeBrokerInstanceOptionsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeBrokerInstanceOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.EngineType != nil {
+		v := *s.EngineType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "engineType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.HostInstanceType != nil {
+		v := *s.HostInstanceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "hostInstanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerInstanceOptionsResponse
+type DescribeBrokerInstanceOptionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	BrokerInstanceOptions []BrokerInstanceOption `locationName:"brokerInstanceOptions" type:"list"`
+
+	MaxResults *int64 `locationName:"maxResults" min:"5" type:"integer"`
+
+	NextToken *string `locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeBrokerInstanceOptionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeBrokerInstanceOptionsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeBrokerInstanceOptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeBrokerInstanceOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.BrokerInstanceOptions) > 0 {
+		v := s.BrokerInstanceOptions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "brokerInstanceOptions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2906,6 +3392,36 @@ func (s DescribeUserOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "username", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Id of the engine version.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/EngineVersion
+type EngineVersion struct {
+	_ struct{} `type:"structure"`
+
+	// Id for the version.
+	Name *string `locationName:"name" type:"string"`
+}
+
+// String returns the string representation
+func (s EngineVersion) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EngineVersion) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s EngineVersion) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

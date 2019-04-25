@@ -107,7 +107,7 @@ func (r AuthorizeClusterSecurityGroupIngressRequest) Send(ctx context.Context) (
 // You must also associate the security group with a cluster so that clients
 // running on these IP addresses or the EC2 instance are authorized to connect
 // to the cluster. For information about managing security groups, go to Working
-// with Security Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
+// with Security Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the AuthorizeClusterSecurityGroupIngressRequest method.
@@ -162,7 +162,7 @@ func (r AuthorizeSnapshotAccessRequest) Send(ctx context.Context) (*AuthorizeSna
 // Authorizes the specified AWS customer account to restore the specified snapshot.
 //
 // For more information about working with snapshots, go to Amazon Redshift
-// Snapshots (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
+// Snapshots (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the AuthorizeSnapshotAccessRequest method.
@@ -378,7 +378,7 @@ func (r CopyClusterSnapshotRequest) Send(ctx context.Context) (*CopyClusterSnaps
 // Manual snapshots are retained until you delete them.
 //
 // For more information about working with snapshots, go to Amazon Redshift
-// Snapshots (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
+// Snapshots (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the CopyClusterSnapshotRequest method.
@@ -435,7 +435,7 @@ func (r CreateClusterRequest) Send(ctx context.Context) (*CreateClusterOutput, e
 // To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster
 // subnet group name. The cluster subnet group identifies the subnets of your
 // VPC that Amazon Redshift uses when creating the cluster. For more information
-// about managing clusters, go to Amazon Redshift Clusters (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
+// about managing clusters, go to Amazon Redshift Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the CreateClusterRequest method.
@@ -496,7 +496,7 @@ func (r CreateClusterParameterGroupRequest) Send(ctx context.Context) (*CreateCl
 //
 // Parameters in the parameter group define specific behavior that applies to
 // the databases you create on the cluster. For more information about parameters
-// and parameter groups, go to Amazon Redshift Parameter Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
+// and parameter groups, go to Amazon Redshift Parameter Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the CreateClusterParameterGroupRequest method.
@@ -552,7 +552,7 @@ func (r CreateClusterSecurityGroupRequest) Send(ctx context.Context) (*CreateClu
 // control access to non-VPC clusters.
 //
 // For information about managing security groups, go to Amazon Redshift Cluster
-// Security Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
+// Security Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the CreateClusterSecurityGroupRequest method.
@@ -608,7 +608,7 @@ func (r CreateClusterSnapshotRequest) Send(ctx context.Context) (*CreateClusterS
 // the available state.
 //
 // For more information about working with snapshots, go to Amazon Redshift
-// Snapshots (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
+// Snapshots (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the CreateClusterSnapshotRequest method.
@@ -665,7 +665,7 @@ func (r CreateClusterSubnetGroupRequest) Send(ctx context.Context) (*CreateClust
 // when creating Amazon Redshift subnet group.
 //
 // For information about subnet groups, go to Amazon Redshift Cluster Subnet
-// Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-cluster-subnet-groups.html)
+// Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-cluster-subnet-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the CreateClusterSubnetGroupRequest method.
@@ -796,7 +796,7 @@ func (r CreateHsmClientCertificateRequest) Send(ctx context.Context) (*CreateHsm
 // The command returns a public key, which you must store in the HSM. In addition
 // to creating the HSM certificate, you must create an Amazon Redshift HSM configuration
 // that provides a cluster the information needed to store and use encryption
-// keys in the HSM. For more information, go to Hardware Security Modules (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html)
+// keys in the HSM. For more information, go to Hardware Security Modules (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the CreateHsmClientCertificateRequest method.
@@ -856,8 +856,8 @@ func (r CreateHsmConfigurationRequest) Send(ctx context.Context) (*CreateHsmConf
 //
 // In addition to creating an HSM configuration, you must also create an HSM
 // client certificate. For more information, go to Hardware Security Modules
-// (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html) in
-// the Amazon Redshift Cluster Management Guide.
+// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html)
+// in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the CreateHsmConfigurationRequest method.
 //    req := client.CreateHsmConfigurationRequest(params)
@@ -913,7 +913,7 @@ func (r CreateSnapshotCopyGrantRequest) Send(ctx context.Context) (*CreateSnapsh
 // snapshots in a destination region.
 //
 // For more information about managing snapshot copy grants, go to Amazon Redshift
-// Database Encryption (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
+// Database Encryption (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the CreateSnapshotCopyGrantRequest method.
@@ -1079,7 +1079,7 @@ func (r DeleteClusterRequest) Send(ctx context.Context) (*DeleteClusterOutput, e
 // web service indicates that the request was received correctly. Use DescribeClusters
 // to monitor the status of the deletion. The delete operation cannot be canceled
 // or reverted once submitted. For more information about managing clusters,
-// go to Amazon Redshift Clusters (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
+// go to Amazon Redshift Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 // If you want to shut down the cluster and retain it for future use, set SkipFinalClusterSnapshot
@@ -1090,7 +1090,7 @@ func (r DeleteClusterRequest) Send(ctx context.Context) (*DeleteClusterOutput, e
 // deleting the cluster.
 //
 // For more information about managing clusters, go to Amazon Redshift Clusters
-// (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
+// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the DeleteClusterRequest method.
@@ -1203,7 +1203,7 @@ func (r DeleteClusterSecurityGroupRequest) Send(ctx context.Context) (*DeleteClu
 // You cannot delete the default security group.
 //
 // For information about managing security groups, go to Amazon Redshift Cluster
-// Security Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
+// Security Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the DeleteClusterSecurityGroupRequest method.
@@ -1796,7 +1796,7 @@ func (r DescribeClusterParameterGroupsRequest) Send(ctx context.Context) (*Descr
 // of a specific parameter group.
 //
 // For more information about parameters and parameter groups, go to Amazon
-// Redshift Parameter Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
+// Redshift Parameter Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 // If you specify both tag keys and tag values in the same request, Amazon Redshift
@@ -1921,7 +1921,7 @@ func (r DescribeClusterParametersRequest) Send(ctx context.Context) (*DescribeCl
 // as from ModifyClusterParameterGroup, you can specify source equal to user.
 //
 // For more information about parameters and parameter groups, go to Amazon
-// Redshift Parameter Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
+// Redshift Parameter Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the DescribeClusterParametersRequest method.
@@ -2031,7 +2031,7 @@ func (r DescribeClusterSecurityGroupsRequest) Send(ctx context.Context) (*Descri
 // about only that security group.
 //
 // For information about managing security groups, go to Amazon Redshift Cluster
-// Security Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
+// Security Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 // If you specify both tag keys and tag values in the same request, Amazon Redshift
@@ -2434,7 +2434,7 @@ func (r DescribeClusterVersionsRequest) Send(ctx context.Context) (*DescribeClus
 // Returns descriptions of the available Amazon Redshift cluster versions. You
 // can call this operation even before creating any clusters to learn more about
 // the Amazon Redshift versions. For more information about managing clusters,
-// go to Amazon Redshift Clusters (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
+// go to Amazon Redshift Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the DescribeClusterVersionsRequest method.
@@ -2542,7 +2542,7 @@ func (r DescribeClustersRequest) Send(ctx context.Context) (*DescribeClustersOut
 // Returns properties of provisioned clusters including general cluster properties,
 // cluster database properties, maintenance and backup properties, and security
 // and access properties. This operation supports pagination. For more information
-// about managing clusters, go to Amazon Redshift Clusters (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
+// about managing clusters, go to Amazon Redshift Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 // If you specify both tag keys and tag values in the same request, Amazon Redshift
@@ -2659,7 +2659,7 @@ func (r DescribeDefaultClusterParametersRequest) Send(ctx context.Context) (*Des
 // Returns a list of parameter settings for the specified parameter group family.
 //
 // For more information about parameters and parameter groups, go to Amazon
-// Redshift Parameter Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
+// Redshift Parameter Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the DescribeDefaultClusterParametersRequest method.
@@ -2766,7 +2766,7 @@ func (r DescribeEventCategoriesRequest) Send(ctx context.Context) (*DescribeEven
 //
 // Displays a list of event categories for all event source types, or for a
 // specified source type. For a list of the event categories and source types,
-// go to Amazon Redshift Event Notifications (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-event-notifications.html).
+// go to Amazon Redshift Event Notifications (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-event-notifications.html).
 //
 //    // Example sending a request using the DescribeEventCategoriesRequest method.
 //    req := client.DescribeEventCategoriesRequest(params)
@@ -3331,7 +3331,7 @@ func (r DescribeOrderableClusterOptionsRequest) Send(ctx context.Context) (*Desc
 // memory, CPU and price. With the cost involved you might want to obtain a
 // list of cluster options in the specific region and specify values when creating
 // a cluster. For more information about managing clusters, go to Amazon Redshift
-// Clusters (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
+// Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the DescribeOrderableClusterOptionsRequest method.
@@ -3444,7 +3444,7 @@ func (r DescribeReservedNodeOfferingsRequest) Send(ctx context.Context) (*Descri
 // to reserve one or more nodes for your Amazon Redshift cluster.
 //
 // For more information about reserved node offerings, go to Purchasing Reserved
-// Nodes (http://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html)
+// Nodes (https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the DescribeReservedNodeOfferingsRequest method.
@@ -3714,7 +3714,7 @@ func (r DescribeSnapshotCopyGrantsRequest) Send(ctx context.Context) (*DescribeS
 // region.
 //
 // For more information about managing snapshot copy grants, go to Amazon Redshift
-// Database Encryption (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
+// Database Encryption (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the DescribeSnapshotCopyGrantsRequest method.
@@ -4216,13 +4216,13 @@ func (r GetClusterCredentialsRequest) Send(ctx context.Context) (*GetClusterCred
 // the user will join at log on. By default, the temporary credentials expire
 // in 900 seconds. You can optionally specify a duration between 900 seconds
 // (15 minutes) and 3600 seconds (60 minutes). For more information, see Using
-// IAM Authentication to Generate Database User Credentials (http://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html)
+// IAM Authentication to Generate Database User Credentials (https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 // The AWS Identity and Access Management (IAM)user or role that executes GetClusterCredentials
 // must have an IAM policy attached that allows access to all necessary actions
 // and resources. For more information about permissions, see Resource Policies
-// for GetClusterCredentials (http://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources)
+// for GetClusterCredentials (https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources)
 // in the Amazon Redshift Cluster Management Guide.
 //
 // If the DbGroups parameter is specified, the IAM policy must allow the redshift:JoinGroup
@@ -4340,7 +4340,7 @@ func (r ModifyClusterRequest) Send(ctx context.Context) (*ModifyClusterOutput, e
 // master user password. Resetting a cluster password or modifying the security
 // groups associated with a cluster do not need a reboot. However, modifying
 // a parameter group requires a reboot for parameters to take effect. For more
-// information about managing clusters, go to Amazon Redshift Clusters (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
+// information about managing clusters, go to Amazon Redshift Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 // You can also change node type and the number of nodes to scale up or down
@@ -4557,7 +4557,7 @@ func (r ModifyClusterParameterGroupRequest) Send(ctx context.Context) (*ResetClu
 // Modifies the parameters of a parameter group.
 //
 // For more information about parameters and parameter groups, go to Amazon
-// Redshift Parameter Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
+// Redshift Parameter Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the ModifyClusterParameterGroupRequest method.
@@ -4933,7 +4933,7 @@ func (r PurchaseReservedNodeOfferingRequest) Send(ctx context.Context) (*Purchas
 // node offering and the number of nodes you want to reserve.
 //
 // For more information about reserved node offerings, go to Purchasing Reserved
-// Nodes (http://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html)
+// Nodes (https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the PurchaseReservedNodeOfferingRequest method.
@@ -4990,7 +4990,7 @@ func (r RebootClusterRequest) Send(ctx context.Context) (*RebootClusterOutput, e
 // to rebooting. A cluster event is created when the reboot is completed. Any
 // pending cluster modifications (see ModifyCluster) are applied at this reboot.
 // For more information about managing clusters, go to Amazon Redshift Clusters
-// (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
+// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the RebootClusterRequest method.
@@ -5177,7 +5177,7 @@ func (r RestoreFromClusterSnapshotRequest) Send(ctx context.Context) (*RestoreFr
 // where you want the cluster restored.
 //
 // For more information about working with snapshots, go to Amazon Redshift
-// Snapshots (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
+// Snapshots (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the RestoreFromClusterSnapshotRequest method.
@@ -5295,7 +5295,7 @@ func (r RevokeClusterSecurityGroupIngressRequest) Send(ctx context.Context) (*Re
 // Revokes an ingress rule in an Amazon Redshift security group for a previously
 // authorized IP range or Amazon EC2 security group. To add an ingress rule,
 // see AuthorizeClusterSecurityGroupIngress. For information about managing
-// security groups, go to Amazon Redshift Cluster Security Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
+// security groups, go to Amazon Redshift Cluster Security Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the RevokeClusterSecurityGroupIngressRequest method.
@@ -5352,7 +5352,7 @@ func (r RevokeSnapshotAccessRequest) Send(ctx context.Context) (*RevokeSnapshotA
 // restore will run to completion.
 //
 // For more information about working with snapshots, go to Amazon Redshift
-// Snapshots (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
+// Snapshots (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the RevokeSnapshotAccessRequest method.
@@ -6041,7 +6041,7 @@ type Cluster struct {
 	// An option that specifies whether to create the cluster with enhanced VPC
 	// routing enabled. To create a cluster that uses enhanced VPC routing, the
 	// cluster must be in a VPC. For more information, see Enhanced VPC Routing
-	// (http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html)
+	// (https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	//
 	// If this option is true, enhanced VPC routing is enabled.
@@ -6139,6 +6139,25 @@ func (s Cluster) String() string {
 
 // GoString returns the string representation
 func (s Cluster) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterAssociatedToSchedule
+type ClusterAssociatedToSchedule struct {
+	_ struct{} `type:"structure"`
+
+	ClusterIdentifier *string `type:"string"`
+
+	ScheduleAssociationState ScheduleState `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ClusterAssociatedToSchedule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ClusterAssociatedToSchedule) GoString() string {
 	return s.String()
 }
 
@@ -6266,7 +6285,7 @@ type ClusterParameterGroupStatus struct {
 	// The list of parameter statuses.
 	//
 	// For more information about parameters and parameter groups, go to Amazon
-	// Redshift Parameter Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
+	// Redshift Parameter Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	ClusterParameterStatusList []ClusterParameterStatus `type:"list"`
 
@@ -6653,7 +6672,7 @@ type CreateClusterInput struct {
 	//
 	// Default: The default Amazon Redshift cluster parameter group. For information
 	// about the default parameter group, go to Working with Amazon Redshift Parameter
-	// Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
+	// Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 	//
 	// Constraints:
 	//
@@ -6700,7 +6719,7 @@ type CreateClusterInput struct {
 	//
 	// To create additional databases after the cluster is created, connect to the
 	// cluster with a SQL client and use SQL commands to create a database. For
-	// more information, go to Create a Database (http://docs.aws.amazon.com/redshift/latest/dg/t_creating_database.html)
+	// more information, go to Create a Database (https://docs.aws.amazon.com/redshift/latest/dg/t_creating_database.html)
 	// in the Amazon Redshift Database Developer Guide.
 	//
 	// Default: dev
@@ -6712,7 +6731,7 @@ type CreateClusterInput struct {
 	//    * Must contain only lowercase letters.
 	//
 	//    * Cannot be a word that is reserved by the service. A list of reserved
-	//    words can be found in Reserved Words (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
+	//    words can be found in Reserved Words (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
 	//    in the Amazon Redshift Database Developer Guide.
 	DBName *string `type:"string"`
 
@@ -6720,7 +6739,7 @@ type CreateClusterInput struct {
 	//
 	// Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible
 	// through an Internet gateway. For more information about provisioning clusters
-	// in EC2-VPC, go to Supported Platforms to Launch Your Cluster (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms)
+	// in EC2-VPC, go to Supported Platforms to Launch Your Cluster (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms)
 	// in the Amazon Redshift Cluster Management Guide.
 	ElasticIp *string `type:"string"`
 
@@ -6732,7 +6751,7 @@ type CreateClusterInput struct {
 	// An option that specifies whether to create the cluster with enhanced VPC
 	// routing enabled. To create a cluster that uses enhanced VPC routing, the
 	// cluster must be in a VPC. For more information, see Enhanced VPC Routing
-	// (http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html)
+	// (https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	//
 	// If this option is true, enhanced VPC routing is enabled.
@@ -6801,14 +6820,14 @@ type CreateClusterInput struct {
 	//    * First character must be a letter.
 	//
 	//    * Cannot be a reserved word. A list of reserved words can be found in
-	//    Reserved Words (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
+	//    Reserved Words (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
 	//    in the Amazon Redshift Database Developer Guide.
 	//
 	// MasterUsername is a required field
 	MasterUsername *string `type:"string" required:"true"`
 
 	// The node type to be provisioned for the cluster. For information about node
-	// types, go to  Working with Clusters (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes)
+	// types, go to  Working with Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes)
 	// in the Amazon Redshift Cluster Management Guide.
 	//
 	// Valid Values: ds2.xlarge | ds2.8xlarge | ds2.xlarge | ds2.8xlarge | dc1.large
@@ -6821,7 +6840,7 @@ type CreateClusterInput struct {
 	// the ClusterType parameter is specified as multi-node.
 	//
 	// For information about determining how many nodes you need, go to  Working
-	// with Clusters (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes)
+	// with Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes)
 	// in the Amazon Redshift Cluster Management Guide.
 	//
 	// If you don't specify this parameter, you get a single-node cluster. When
@@ -6851,7 +6870,7 @@ type CreateClusterInput struct {
 	//
 	// Default: A 30-minute window selected at random from an 8-hour block of time
 	// per region, occurring on a random day of the week. For more information about
-	// the time blocks for each region, see Maintenance Windows (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows)
+	// the time blocks for each region, see Maintenance Windows (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows)
 	// in Amazon Redshift Cluster Management Guide.
 	//
 	// Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun
@@ -7665,7 +7684,7 @@ type CreateSnapshotCopyGrantOutput struct {
 	// in the destination region.
 	//
 	// For more information about managing snapshot copy grants, go to Amazon Redshift
-	// Database Encryption (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
+	// Database Encryption (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	SnapshotCopyGrant *SnapshotCopyGrant `type:"structure"`
 }
@@ -7704,6 +7723,7 @@ type CreateSnapshotScheduleInput struct {
 	// are allowed for the identifier.
 	ScheduleIdentifier *string `type:"string"`
 
+	// An optional set of tags you can use to search for the schedule.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
@@ -8964,12 +8984,13 @@ type DescribeClusterSnapshotsInput struct {
 	_ struct{} `type:"structure"`
 
 	// A value that indicates whether to return snapshots only for an existing cluster.
-	// Table-level restore can be performed only using a snapshot of an existing
-	// cluster, that is, a cluster that has not been deleted.
+	// You can perform table-level restore only by using a snapshot of an existing
+	// cluster, that is, a cluster that has not been deleted. Values for this parameter
+	// work as follows:
 	//
 	//    * If ClusterExists is set to true, ClusterIdentifier is required.
 	//
-	//    * If ClusterExists is set to false and ClusterIdentifier is not specified,
+	//    * If ClusterExists is set to false and ClusterIdentifier isn't specified,
 	//    all snapshots associated with deleted clusters (orphaned snapshots) are
 	//    returned.
 	//
@@ -8980,7 +9001,7 @@ type DescribeClusterSnapshotsInput struct {
 	//    for an existing cluster, no snapshots are returned.
 	ClusterExists *bool `type:"boolean"`
 
-	// The identifier of the cluster for which information about snapshots is requested.
+	// The identifier of the cluster which generated the requested snapshots.
 	ClusterIdentifier *string `type:"string"`
 
 	// A time value that requests only snapshots created at or before the specified
@@ -10225,6 +10246,9 @@ type DescribeResizeOutput struct {
 	// shows the average rate of the entire resize operation.
 	AvgResizeRateInMegaBytesPerSecond *float64 `type:"double"`
 
+	// The percent of data transferred from source cluster to target cluster.
+	DataTransferProgressPercent *float64 `type:"double"`
+
 	// The amount of seconds that have elapsed since the resize operation began.
 	// After the resize operation completes, this value shows the total actual time,
 	// in seconds, for the resize operation.
@@ -10624,7 +10648,7 @@ type DescribeTagsInput struct {
 	//
 	// For more information about Amazon Redshift resource types and constructing
 	// ARNs, go to Specifying Policy Elements: Actions, Effects, Resources, and
-	// Principals (http://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions)
+	// Principals (https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions)
 	// in the Amazon Redshift Cluster Management Guide.
 	ResourceType *string `type:"string"`
 
@@ -10965,7 +10989,7 @@ type EnableSnapshotCopyInput struct {
 	// The destination AWS Region that you want to copy snapshots to.
 	//
 	// Constraints: Must be the name of a valid AWS Region. For more information,
-	// see Regions and Endpoints (http://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region)
+	// see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region)
 	// in the Amazon Web Services General Reference.
 	//
 	// DestinationRegion is a required field
@@ -11290,7 +11314,7 @@ type GetClusterCredentialsInput struct {
 	// is False, then the command succeeds but the connection attempt will fail
 	// because the user doesn't exist in the database.
 	//
-	// For more information, see CREATE USER (http://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html)
+	// For more information, see CREATE USER (https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html)
 	// in the Amazon Redshift Database Developer Guide.
 	//
 	// Constraints:
@@ -11819,7 +11843,7 @@ type ModifyClusterInput struct {
 	// for the new version must be specified. The new cluster parameter group can
 	// be the default for that cluster parameter group family. For more information
 	// about parameters and parameter groups, go to Amazon Redshift Parameter Groups
-	// (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
+	// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	//
 	// Example: 1.0
@@ -11829,7 +11853,7 @@ type ModifyClusterInput struct {
 	//
 	// Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible
 	// through an Internet gateway. For more information about provisioning clusters
-	// in EC2-VPC, go to Supported Platforms to Launch Your Cluster (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms)
+	// in EC2-VPC, go to Supported Platforms to Launch Your Cluster (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms)
 	// in the Amazon Redshift Cluster Management Guide.
 	ElasticIp *string `type:"string"`
 
@@ -11843,7 +11867,7 @@ type ModifyClusterInput struct {
 	// An option that specifies whether to create the cluster with enhanced VPC
 	// routing enabled. To create a cluster that uses enhanced VPC routing, the
 	// cluster must be in a VPC. For more information, see Enhanced VPC Routing
-	// (http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html)
+	// (https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	//
 	// If this option is true, enhanced VPC routing is enabled.
@@ -12015,7 +12039,7 @@ type ModifyClusterMaintenanceInput struct {
 
 	// An integer indicating the duration of the maintenance window in days. If
 	// you specify a duration, you can't specify an end time. The duration must
-	// be 14 days or less.
+	// be 45 days or less.
 	DeferMaintenanceDuration *int64 `type:"integer"`
 
 	// A timestamp indicating end time for the deferred maintenance window. If you
@@ -12609,9 +12633,16 @@ type ModifySnapshotScheduleOutput struct {
 
 	responseMetadata aws.Response
 
+	// The number of clusters associated with the schedule.
+	AssociatedClusterCount *int64 `type:"integer"`
+
+	// A list of clusters associated with the schedule. A maximum of 100 clusters
+	// is returned.
+	AssociatedClusters []ClusterAssociatedToSchedule `locationNameList:"ClusterAssociatedToSchedule" type:"list"`
+
 	NextInvocations []time.Time `locationNameList:"SnapshotTime" type:"list"`
 
-	// A list of ScheduleDefinitions
+	// A list of ScheduleDefinitions.
 	ScheduleDefinitions []string `locationNameList:"ScheduleDefinition" type:"list"`
 
 	// The description of the schedule.
@@ -12679,7 +12710,7 @@ type Parameter struct {
 	// be applied dynamically, while other properties require that any associated
 	// clusters be rebooted for the configuration changes to be applied. For more
 	// information about parameters and parameter groups, go to Amazon Redshift
-	// Parameter Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
+	// Parameter Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	ApplyType ParameterApplyType `type:"string" enum:"true"`
 
@@ -12741,7 +12772,7 @@ type PendingModifiedValues struct {
 	// An option that specifies whether to create the cluster with enhanced VPC
 	// routing enabled. To create a cluster that uses enhanced VPC routing, the
 	// cluster must be in a VPC. For more information, see Enhanced VPC Routing
-	// (http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html)
+	// (https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	//
 	// If this option is true, enhanced VPC routing is enabled.
@@ -13270,7 +13301,7 @@ type RestoreFromClusterSnapshotInput struct {
 	//
 	// Default: The default Amazon Redshift cluster parameter group. For information
 	// about the default parameter group, go to Working with Amazon Redshift Parameter
-	// Groups (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html).
+	// Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html).
 	//
 	// Constraints:
 	//
@@ -13300,7 +13331,7 @@ type RestoreFromClusterSnapshotInput struct {
 	// An option that specifies whether to create the cluster with enhanced VPC
 	// routing enabled. To create a cluster that uses enhanced VPC routing, the
 	// cluster must be in a VPC. For more information, see Enhanced VPC Routing
-	// (http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html)
+	// (https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	//
 	// If this option is true, enhanced VPC routing is enabled.
@@ -13338,6 +13369,11 @@ type RestoreFromClusterSnapshotInput struct {
 	// are on different tracks.
 	MaintenanceTrackName *string `type:"string"`
 
+	// The default number of days to retain a manual snapshot. If the value is -1,
+	// the snapshot is retained indefinitely. This setting doesn't change the retention
+	// period of existing snapshots.
+	//
+	// The value must be either -1 or an integer between 1 and 3,653.
 	ManualSnapshotRetentionPeriod *int64 `type:"integer"`
 
 	// The node type that the restored cluster will be provisioned with.
@@ -13351,7 +13387,7 @@ type RestoreFromClusterSnapshotInput struct {
 	// type into another dc1.large instance type or dc2.large instance type. You
 	// can't restore dc1.8xlarge to dc2.8xlarge. First restore to a dc1.8xlareg
 	// cluster, then resize to a dc2.8large cluster. For more information about
-	// node types, see  About Clusters and Nodes (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes)
+	// node types, see  About Clusters and Nodes (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes)
 	// in the Amazon Redshift Cluster Management Guide.
 	NodeType *string `type:"string"`
 
@@ -13373,7 +13409,7 @@ type RestoreFromClusterSnapshotInput struct {
 	//
 	// Default: The value selected for the cluster from which the snapshot was taken.
 	// For more information about the time blocks for each region, see Maintenance
-	// Windows (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows)
+	// Windows (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows)
 	// in Amazon Redshift Cluster Management Guide.
 	//
 	// Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun
@@ -13897,7 +13933,7 @@ type Snapshot struct {
 	// An option that specifies whether to create the cluster with enhanced VPC
 	// routing enabled. To create a cluster that uses enhanced VPC routing, the
 	// cluster must be in a VPC. For more information, see Enhanced VPC Routing
-	// (http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html)
+	// (https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html)
 	// in the Amazon Redshift Cluster Management Guide.
 	//
 	// If this option is true, enhanced VPC routing is enabled.
@@ -14001,7 +14037,7 @@ func (s Snapshot) GoString() string {
 // in the destination region.
 //
 // For more information about managing snapshot copy grants, go to Amazon Redshift
-// Database Encryption (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
+// Database Encryption (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
 // in the Amazon Redshift Cluster Management Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotCopyGrant
 type SnapshotCopyGrant struct {
@@ -14271,7 +14307,7 @@ type TaggedResource struct {
 	//    * Parameter group
 	//
 	// For more information about Amazon Redshift resource types and constructing
-	// ARNs, go to Constructing an Amazon Redshift Amazon Resource Name (ARN) (http://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions)
+	// ARNs, go to Constructing an Amazon Redshift Amazon Resource Name (ARN) (https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions)
 	// in the Amazon Redshift Cluster Management Guide.
 	ResourceType *string `type:"string"`
 

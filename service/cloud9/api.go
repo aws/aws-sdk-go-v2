@@ -1166,6 +1166,9 @@ type Environment struct {
 	// The ID of the environment.
 	Id *string `locationName:"id" type:"string"`
 
+	// The state of the environment in its creation or deletion lifecycle.
+	Lifecycle *EnvironmentLifecycle `locationName:"lifecycle" type:"structure"`
+
 	// The name of the environment.
 	Name *string `locationName:"name" min:"1" type:"string"`
 
@@ -1188,6 +1191,39 @@ func (s Environment) String() string {
 
 // GoString returns the string representation
 func (s Environment) GoString() string {
+	return s.String()
+}
+
+// Information about the current creation or deletion lifecycle state of an
+// AWS Cloud9 development environment.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/EnvironmentLifecycle
+type EnvironmentLifecycle struct {
+	_ struct{} `type:"structure"`
+
+	// If the environment failed to delete, the Amazon Resource Name (ARN) of the
+	// related AWS resource.
+	FailureResource *string `locationName:"failureResource" type:"string"`
+
+	// Any informational message about the lifecycle state of the environment.
+	Reason *string `locationName:"reason" type:"string"`
+
+	// The current creation or deletion lifecycle state of the environment.
+	//
+	//    * CREATED: The environment was successfully created.
+	//
+	//    * DELETE_FAILED: The environment failed to delete.
+	//
+	//    * DELETING: The environment is in the process of being deleted.
+	Status EnvironmentLifecycleStatus `locationName:"status" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s EnvironmentLifecycle) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EnvironmentLifecycle) GoString() string {
 	return s.String()
 }
 
@@ -1434,6 +1470,24 @@ func (s UpdateEnvironmentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateEnvironmentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+type EnvironmentLifecycleStatus string
+
+// Enum values for EnvironmentLifecycleStatus
+const (
+	EnvironmentLifecycleStatusCreated      EnvironmentLifecycleStatus = "CREATED"
+	EnvironmentLifecycleStatusDeleting     EnvironmentLifecycleStatus = "DELETING"
+	EnvironmentLifecycleStatusDeleteFailed EnvironmentLifecycleStatus = "DELETE_FAILED"
+)
+
+func (enum EnvironmentLifecycleStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EnvironmentLifecycleStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
 }
 
 type EnvironmentStatus string

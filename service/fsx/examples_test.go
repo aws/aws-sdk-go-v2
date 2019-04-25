@@ -126,6 +126,8 @@ func ExampleFSx_CreateFileSystemRequest_shared00() {
 				fmt.Println(fsx.ErrCodeIncompatibleParameterError, aerr.Error())
 			case fsx.ErrCodeInvalidImportPath:
 				fmt.Println(fsx.ErrCodeInvalidImportPath, aerr.Error())
+			case fsx.ErrCodeInvalidExportPath:
+				fmt.Println(fsx.ErrCodeInvalidExportPath, aerr.Error())
 			case fsx.ErrCodeInvalidNetworkSettings:
 				fmt.Println(fsx.ErrCodeInvalidNetworkSettings, aerr.Error())
 			case fsx.ErrCodeServiceLimitExceeded:
@@ -234,6 +236,8 @@ func ExampleFSx_DeleteBackupRequest_shared00() {
 			switch aerr.Code() {
 			case fsx.ErrCodeBadRequest:
 				fmt.Println(fsx.ErrCodeBadRequest, aerr.Error())
+			case fsx.ErrCodeBackupInProgress:
+				fmt.Println(fsx.ErrCodeBackupInProgress, aerr.Error())
 			case fsx.ErrCodeBackupNotFound:
 				fmt.Println(fsx.ErrCodeBackupNotFound, aerr.Error())
 			case fsx.ErrCodeBackupRestoring:

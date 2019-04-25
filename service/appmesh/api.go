@@ -35,12 +35,12 @@ func (r CreateMeshRequest) Send(ctx context.Context) (*CreateMeshOutput, error) 
 // CreateMeshRequest returns a request value for making API operation for
 // AWS App Mesh.
 //
-// Creates a new service mesh. A service mesh is a logical boundary for network
+// Creates a service mesh. A service mesh is a logical boundary for network
 // traffic between the services that reside within it.
 //
-// After you create your service mesh, you can create virtual nodes, virtual
-// routers, and routes to distribute traffic between the applications in your
-// mesh.
+// After you create your service mesh, you can create virtual services, virtual
+// nodes, virtual routers, and routes to distribute traffic between the applications
+// in your mesh.
 //
 //    // Example sending a request using the CreateMeshRequest method.
 //    req := client.CreateMeshRequest(params)
@@ -49,12 +49,12 @@ func (r CreateMeshRequest) Send(ctx context.Context) (*CreateMeshOutput, error) 
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateMesh
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateMesh
 func (c *AppMesh) CreateMeshRequest(input *CreateMeshInput) CreateMeshRequest {
 	op := &aws.Operation{
 		Name:       opCreateMesh,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/meshes",
+		HTTPPath:   "/v20190125/meshes",
 	}
 
 	if input == nil {
@@ -91,12 +91,12 @@ func (r CreateRouteRequest) Send(ctx context.Context) (*CreateRouteOutput, error
 // CreateRouteRequest returns a request value for making API operation for
 // AWS App Mesh.
 //
-// Creates a new route that is associated with a virtual router.
+// Creates a route that is associated with a virtual router.
 //
 // You can use the prefix parameter in your route specification for path-based
-// routing of requests. For example, if your virtual router service name is
-// my-service.local, and you want the route to match requests to my-service.local/metrics,
-// then your prefix should be /metrics.
+// routing of requests. For example, if your virtual service name is my-service.local
+// and you want the route to match requests to my-service.local/metrics, your
+// prefix should be /metrics.
 //
 // If your route matches a request, you can distribute traffic to one or more
 // target virtual nodes with relative weighting.
@@ -108,12 +108,12 @@ func (r CreateRouteRequest) Send(ctx context.Context) (*CreateRouteOutput, error
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateRoute
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateRoute
 func (c *AppMesh) CreateRouteRequest(input *CreateRouteInput) CreateRouteRequest {
 	op := &aws.Operation{
 		Name:       opCreateRoute,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes",
+		HTTPPath:   "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes",
 	}
 
 	if input == nil {
@@ -150,11 +150,11 @@ func (r CreateVirtualNodeRequest) Send(ctx context.Context) (*CreateVirtualNodeO
 // CreateVirtualNodeRequest returns a request value for making API operation for
 // AWS App Mesh.
 //
-// Creates a new virtual node within a service mesh.
+// Creates a virtual node within a service mesh.
 //
-// A virtual node acts as logical pointer to a particular task group, such as
-// an Amazon ECS service or a Kubernetes deployment. When you create a virtual
-// node, you must specify the DNS service discovery name for your task group.
+// A virtual node acts as a logical pointer to a particular task group, such
+// as an Amazon ECS service or a Kubernetes deployment. When you create a virtual
+// node, you must specify the DNS service discovery hostname for your task group.
 //
 // Any inbound traffic that your virtual node expects should be specified as
 // a listener. Any outbound traffic that your virtual node expects to reach
@@ -162,7 +162,7 @@ func (r CreateVirtualNodeRequest) Send(ctx context.Context) (*CreateVirtualNodeO
 //
 // The response metadata for your new virtual node contains the arn that is
 // associated with the virtual node. Set this value (either the full ARN or
-// the truncated resource name, for example, mesh/default/virtualNode/simpleapp,
+// the truncated resource name: for example, mesh/default/virtualNode/simpleapp)
 // as the APPMESH_VIRTUAL_NODE_NAME environment variable for your task group's
 // Envoy proxy container in your task definition or pod spec. This is then mapped
 // to the node.id and node.cluster Envoy parameters.
@@ -178,12 +178,12 @@ func (r CreateVirtualNodeRequest) Send(ctx context.Context) (*CreateVirtualNodeO
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateVirtualNode
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualNode
 func (c *AppMesh) CreateVirtualNodeRequest(input *CreateVirtualNodeInput) CreateVirtualNodeRequest {
 	op := &aws.Operation{
 		Name:       opCreateVirtualNode,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/meshes/{meshName}/virtualNodes",
+		HTTPPath:   "/v20190125/meshes/{meshName}/virtualNodes",
 	}
 
 	if input == nil {
@@ -220,9 +220,12 @@ func (r CreateVirtualRouterRequest) Send(ctx context.Context) (*CreateVirtualRou
 // CreateVirtualRouterRequest returns a request value for making API operation for
 // AWS App Mesh.
 //
-// Creates a new virtual router within a service mesh.
+// Creates a virtual router within a service mesh.
 //
-// Virtual routers handle traffic for one or more service names within your
+// Any inbound traffic that your virtual router expects should be specified
+// as a listener.
+//
+// Virtual routers handle traffic for one or more virtual services within your
 // mesh. After you create your virtual router, create and associate routes for
 // your virtual router that direct incoming requests to different virtual nodes.
 //
@@ -233,12 +236,12 @@ func (r CreateVirtualRouterRequest) Send(ctx context.Context) (*CreateVirtualRou
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateVirtualRouter
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualRouter
 func (c *AppMesh) CreateVirtualRouterRequest(input *CreateVirtualRouterInput) CreateVirtualRouterRequest {
 	op := &aws.Operation{
 		Name:       opCreateVirtualRouter,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/meshes/{meshName}/virtualRouters",
+		HTTPPath:   "/v20190125/meshes/{meshName}/virtualRouters",
 	}
 
 	if input == nil {
@@ -250,6 +253,63 @@ func (c *AppMesh) CreateVirtualRouterRequest(input *CreateVirtualRouterInput) Cr
 	output.responseMetadata = aws.Response{Request: req}
 
 	return CreateVirtualRouterRequest{Request: req, Input: input, Copy: c.CreateVirtualRouterRequest}
+}
+
+const opCreateVirtualService = "CreateVirtualService"
+
+// CreateVirtualServiceRequest is a API request type for the CreateVirtualService API operation.
+type CreateVirtualServiceRequest struct {
+	*aws.Request
+	Input *CreateVirtualServiceInput
+	Copy  func(*CreateVirtualServiceInput) CreateVirtualServiceRequest
+}
+
+// Send marshals and sends the CreateVirtualService API request.
+func (r CreateVirtualServiceRequest) Send(ctx context.Context) (*CreateVirtualServiceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateVirtualServiceOutput), nil
+}
+
+// CreateVirtualServiceRequest returns a request value for making API operation for
+// AWS App Mesh.
+//
+// Creates a virtual service within a service mesh.
+//
+// A virtual service is an abstraction of a real service that is provided by
+// a virtual node directly or indirectly by means of a virtual router. Dependent
+// services call your virtual service by its virtualServiceName, and those requests
+// are routed to the virtual node or virtual router that is specified as the
+// provider for the virtual service.
+//
+//    // Example sending a request using the CreateVirtualServiceRequest method.
+//    req := client.CreateVirtualServiceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualService
+func (c *AppMesh) CreateVirtualServiceRequest(input *CreateVirtualServiceInput) CreateVirtualServiceRequest {
+	op := &aws.Operation{
+		Name:       opCreateVirtualService,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/v20190125/meshes/{meshName}/virtualServices",
+	}
+
+	if input == nil {
+		input = &CreateVirtualServiceInput{}
+	}
+
+	output := &CreateVirtualServiceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateVirtualServiceRequest{Request: req, Input: input, Copy: c.CreateVirtualServiceRequest}
 }
 
 const opDeleteMesh = "DeleteMesh"
@@ -277,8 +337,8 @@ func (r DeleteMeshRequest) Send(ctx context.Context) (*DeleteMeshOutput, error) 
 //
 // Deletes an existing service mesh.
 //
-// You must delete all resources (routes, virtual routers, virtual nodes) in
-// the service mesh before you can delete the mesh itself.
+// You must delete all resources (virtual services, routes, virtual routers,
+// and virtual nodes) in the service mesh before you can delete the mesh itself.
 //
 //    // Example sending a request using the DeleteMeshRequest method.
 //    req := client.DeleteMeshRequest(params)
@@ -287,12 +347,12 @@ func (r DeleteMeshRequest) Send(ctx context.Context) (*DeleteMeshOutput, error) 
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteMesh
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteMesh
 func (c *AppMesh) DeleteMeshRequest(input *DeleteMeshInput) DeleteMeshRequest {
 	op := &aws.Operation{
 		Name:       opDeleteMesh,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/meshes/{meshName}",
+		HTTPPath:   "/v20190125/meshes/{meshName}",
 	}
 
 	if input == nil {
@@ -338,12 +398,12 @@ func (r DeleteRouteRequest) Send(ctx context.Context) (*DeleteRouteOutput, error
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteRoute
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteRoute
 func (c *AppMesh) DeleteRouteRequest(input *DeleteRouteInput) DeleteRouteRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRoute,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}",
+		HTTPPath:   "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}",
 	}
 
 	if input == nil {
@@ -382,6 +442,9 @@ func (r DeleteVirtualNodeRequest) Send(ctx context.Context) (*DeleteVirtualNodeO
 //
 // Deletes an existing virtual node.
 //
+// You must delete any virtual services that list a virtual node as a service
+// provider before you can delete the virtual node itself.
+//
 //    // Example sending a request using the DeleteVirtualNodeRequest method.
 //    req := client.DeleteVirtualNodeRequest(params)
 //    resp, err := req.Send(context.TODO())
@@ -389,12 +452,12 @@ func (r DeleteVirtualNodeRequest) Send(ctx context.Context) (*DeleteVirtualNodeO
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteVirtualNode
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualNode
 func (c *AppMesh) DeleteVirtualNodeRequest(input *DeleteVirtualNodeInput) DeleteVirtualNodeRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVirtualNode,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/meshes/{meshName}/virtualNodes/{virtualNodeName}",
+		HTTPPath:   "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}",
 	}
 
 	if input == nil {
@@ -443,12 +506,12 @@ func (r DeleteVirtualRouterRequest) Send(ctx context.Context) (*DeleteVirtualRou
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteVirtualRouter
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualRouter
 func (c *AppMesh) DeleteVirtualRouterRequest(input *DeleteVirtualRouterInput) DeleteVirtualRouterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVirtualRouter,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/meshes/{meshName}/virtualRouters/{virtualRouterName}",
+		HTTPPath:   "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}",
 	}
 
 	if input == nil {
@@ -460,6 +523,57 @@ func (c *AppMesh) DeleteVirtualRouterRequest(input *DeleteVirtualRouterInput) De
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteVirtualRouterRequest{Request: req, Input: input, Copy: c.DeleteVirtualRouterRequest}
+}
+
+const opDeleteVirtualService = "DeleteVirtualService"
+
+// DeleteVirtualServiceRequest is a API request type for the DeleteVirtualService API operation.
+type DeleteVirtualServiceRequest struct {
+	*aws.Request
+	Input *DeleteVirtualServiceInput
+	Copy  func(*DeleteVirtualServiceInput) DeleteVirtualServiceRequest
+}
+
+// Send marshals and sends the DeleteVirtualService API request.
+func (r DeleteVirtualServiceRequest) Send(ctx context.Context) (*DeleteVirtualServiceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteVirtualServiceOutput), nil
+}
+
+// DeleteVirtualServiceRequest returns a request value for making API operation for
+// AWS App Mesh.
+//
+// Deletes an existing virtual service.
+//
+//    // Example sending a request using the DeleteVirtualServiceRequest method.
+//    req := client.DeleteVirtualServiceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualService
+func (c *AppMesh) DeleteVirtualServiceRequest(input *DeleteVirtualServiceInput) DeleteVirtualServiceRequest {
+	op := &aws.Operation{
+		Name:       opDeleteVirtualService,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}",
+	}
+
+	if input == nil {
+		input = &DeleteVirtualServiceInput{}
+	}
+
+	output := &DeleteVirtualServiceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteVirtualServiceRequest{Request: req, Input: input, Copy: c.DeleteVirtualServiceRequest}
 }
 
 const opDescribeMesh = "DescribeMesh"
@@ -485,7 +599,7 @@ func (r DescribeMeshRequest) Send(ctx context.Context) (*DescribeMeshOutput, err
 // DescribeMeshRequest returns a request value for making API operation for
 // AWS App Mesh.
 //
-// Describes an existing cluster.
+// Describes an existing service mesh.
 //
 //    // Example sending a request using the DescribeMeshRequest method.
 //    req := client.DescribeMeshRequest(params)
@@ -494,12 +608,12 @@ func (r DescribeMeshRequest) Send(ctx context.Context) (*DescribeMeshOutput, err
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeMesh
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeMesh
 func (c *AppMesh) DescribeMeshRequest(input *DescribeMeshInput) DescribeMeshRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMesh,
 		HTTPMethod: "GET",
-		HTTPPath:   "/meshes/{meshName}",
+		HTTPPath:   "/v20190125/meshes/{meshName}",
 	}
 
 	if input == nil {
@@ -545,12 +659,12 @@ func (r DescribeRouteRequest) Send(ctx context.Context) (*DescribeRouteOutput, e
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeRoute
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeRoute
 func (c *AppMesh) DescribeRouteRequest(input *DescribeRouteInput) DescribeRouteRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRoute,
 		HTTPMethod: "GET",
-		HTTPPath:   "/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}",
+		HTTPPath:   "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}",
 	}
 
 	if input == nil {
@@ -596,12 +710,12 @@ func (r DescribeVirtualNodeRequest) Send(ctx context.Context) (*DescribeVirtualN
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeVirtualNode
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualNode
 func (c *AppMesh) DescribeVirtualNodeRequest(input *DescribeVirtualNodeInput) DescribeVirtualNodeRequest {
 	op := &aws.Operation{
 		Name:       opDescribeVirtualNode,
 		HTTPMethod: "GET",
-		HTTPPath:   "/meshes/{meshName}/virtualNodes/{virtualNodeName}",
+		HTTPPath:   "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}",
 	}
 
 	if input == nil {
@@ -647,12 +761,12 @@ func (r DescribeVirtualRouterRequest) Send(ctx context.Context) (*DescribeVirtua
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeVirtualRouter
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualRouter
 func (c *AppMesh) DescribeVirtualRouterRequest(input *DescribeVirtualRouterInput) DescribeVirtualRouterRequest {
 	op := &aws.Operation{
 		Name:       opDescribeVirtualRouter,
 		HTTPMethod: "GET",
-		HTTPPath:   "/meshes/{meshName}/virtualRouters/{virtualRouterName}",
+		HTTPPath:   "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}",
 	}
 
 	if input == nil {
@@ -664,6 +778,57 @@ func (c *AppMesh) DescribeVirtualRouterRequest(input *DescribeVirtualRouterInput
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DescribeVirtualRouterRequest{Request: req, Input: input, Copy: c.DescribeVirtualRouterRequest}
+}
+
+const opDescribeVirtualService = "DescribeVirtualService"
+
+// DescribeVirtualServiceRequest is a API request type for the DescribeVirtualService API operation.
+type DescribeVirtualServiceRequest struct {
+	*aws.Request
+	Input *DescribeVirtualServiceInput
+	Copy  func(*DescribeVirtualServiceInput) DescribeVirtualServiceRequest
+}
+
+// Send marshals and sends the DescribeVirtualService API request.
+func (r DescribeVirtualServiceRequest) Send(ctx context.Context) (*DescribeVirtualServiceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeVirtualServiceOutput), nil
+}
+
+// DescribeVirtualServiceRequest returns a request value for making API operation for
+// AWS App Mesh.
+//
+// Describes an existing virtual service.
+//
+//    // Example sending a request using the DescribeVirtualServiceRequest method.
+//    req := client.DescribeVirtualServiceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualService
+func (c *AppMesh) DescribeVirtualServiceRequest(input *DescribeVirtualServiceInput) DescribeVirtualServiceRequest {
+	op := &aws.Operation{
+		Name:       opDescribeVirtualService,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}",
+	}
+
+	if input == nil {
+		input = &DescribeVirtualServiceInput{}
+	}
+
+	output := &DescribeVirtualServiceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeVirtualServiceRequest{Request: req, Input: input, Copy: c.DescribeVirtualServiceRequest}
 }
 
 const opListMeshes = "ListMeshes"
@@ -698,12 +863,12 @@ func (r ListMeshesRequest) Send(ctx context.Context) (*ListMeshesOutput, error) 
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListMeshes
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListMeshes
 func (c *AppMesh) ListMeshesRequest(input *ListMeshesInput) ListMeshesRequest {
 	op := &aws.Operation{
 		Name:       opListMeshes,
 		HTTPMethod: "GET",
-		HTTPPath:   "/meshes",
+		HTTPPath:   "/v20190125/meshes",
 		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
@@ -802,12 +967,12 @@ func (r ListRoutesRequest) Send(ctx context.Context) (*ListRoutesOutput, error) 
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListRoutes
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListRoutes
 func (c *AppMesh) ListRoutesRequest(input *ListRoutesInput) ListRoutesRequest {
 	op := &aws.Operation{
 		Name:       opListRoutes,
 		HTTPMethod: "GET",
-		HTTPPath:   "/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes",
+		HTTPPath:   "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes",
 		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
@@ -874,6 +1039,110 @@ func (p *ListRoutesPager) CurrentPage() *ListRoutesOutput {
 	return p.Pager.CurrentPage().(*ListRoutesOutput)
 }
 
+const opListTagsForResource = "ListTagsForResource"
+
+// ListTagsForResourceRequest is a API request type for the ListTagsForResource API operation.
+type ListTagsForResourceRequest struct {
+	*aws.Request
+	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
+}
+
+// Send marshals and sends the ListTagsForResource API request.
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForResourceOutput), nil
+}
+
+// ListTagsForResourceRequest returns a request value for making API operation for
+// AWS App Mesh.
+//
+// List the tags for an App Mesh resource.
+//
+//    // Example sending a request using the ListTagsForResourceRequest method.
+//    req := client.ListTagsForResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListTagsForResource
+func (c *AppMesh) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
+	op := &aws.Operation{
+		Name:       opListTagsForResource,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v20190125/tags",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "limit",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListTagsForResourceInput{}
+	}
+
+	output := &ListTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
+}
+
+// Paginate pages iterates over the pages of a ListTagsForResourceRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListTagsForResource operation.
+//		req := client.ListTagsForResourceRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListTagsForResourceRequest) Paginate(opts ...aws.Option) ListTagsForResourcePager {
+	return ListTagsForResourcePager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListTagsForResourceInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListTagsForResourcePager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListTagsForResourcePager struct {
+	aws.Pager
+}
+
+func (p *ListTagsForResourcePager) CurrentPage() *ListTagsForResourceOutput {
+	return p.Pager.CurrentPage().(*ListTagsForResourceOutput)
+}
+
 const opListVirtualNodes = "ListVirtualNodes"
 
 // ListVirtualNodesRequest is a API request type for the ListVirtualNodes API operation.
@@ -906,12 +1175,12 @@ func (r ListVirtualNodesRequest) Send(ctx context.Context) (*ListVirtualNodesOut
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListVirtualNodes
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualNodes
 func (c *AppMesh) ListVirtualNodesRequest(input *ListVirtualNodesInput) ListVirtualNodesRequest {
 	op := &aws.Operation{
 		Name:       opListVirtualNodes,
 		HTTPMethod: "GET",
-		HTTPPath:   "/meshes/{meshName}/virtualNodes",
+		HTTPPath:   "/v20190125/meshes/{meshName}/virtualNodes",
 		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
@@ -1010,12 +1279,12 @@ func (r ListVirtualRoutersRequest) Send(ctx context.Context) (*ListVirtualRouter
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListVirtualRouters
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualRouters
 func (c *AppMesh) ListVirtualRoutersRequest(input *ListVirtualRoutersInput) ListVirtualRoutersRequest {
 	op := &aws.Operation{
 		Name:       opListVirtualRouters,
 		HTTPMethod: "GET",
-		HTTPPath:   "/meshes/{meshName}/virtualRouters",
+		HTTPPath:   "/v20190125/meshes/{meshName}/virtualRouters",
 		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
@@ -1082,6 +1351,266 @@ func (p *ListVirtualRoutersPager) CurrentPage() *ListVirtualRoutersOutput {
 	return p.Pager.CurrentPage().(*ListVirtualRoutersOutput)
 }
 
+const opListVirtualServices = "ListVirtualServices"
+
+// ListVirtualServicesRequest is a API request type for the ListVirtualServices API operation.
+type ListVirtualServicesRequest struct {
+	*aws.Request
+	Input *ListVirtualServicesInput
+	Copy  func(*ListVirtualServicesInput) ListVirtualServicesRequest
+}
+
+// Send marshals and sends the ListVirtualServices API request.
+func (r ListVirtualServicesRequest) Send(ctx context.Context) (*ListVirtualServicesOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListVirtualServicesOutput), nil
+}
+
+// ListVirtualServicesRequest returns a request value for making API operation for
+// AWS App Mesh.
+//
+// Returns a list of existing virtual services in a service mesh.
+//
+//    // Example sending a request using the ListVirtualServicesRequest method.
+//    req := client.ListVirtualServicesRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualServices
+func (c *AppMesh) ListVirtualServicesRequest(input *ListVirtualServicesInput) ListVirtualServicesRequest {
+	op := &aws.Operation{
+		Name:       opListVirtualServices,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v20190125/meshes/{meshName}/virtualServices",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "limit",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListVirtualServicesInput{}
+	}
+
+	output := &ListVirtualServicesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListVirtualServicesRequest{Request: req, Input: input, Copy: c.ListVirtualServicesRequest}
+}
+
+// Paginate pages iterates over the pages of a ListVirtualServicesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListVirtualServices operation.
+//		req := client.ListVirtualServicesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListVirtualServicesRequest) Paginate(opts ...aws.Option) ListVirtualServicesPager {
+	return ListVirtualServicesPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListVirtualServicesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListVirtualServicesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListVirtualServicesPager struct {
+	aws.Pager
+}
+
+func (p *ListVirtualServicesPager) CurrentPage() *ListVirtualServicesOutput {
+	return p.Pager.CurrentPage().(*ListVirtualServicesOutput)
+}
+
+const opTagResource = "TagResource"
+
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
+}
+
+// Send marshals and sends the TagResource API request.
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// AWS App Mesh.
+//
+// Associates the specified tags to a resource with the specified resourceArn.
+// If existing tags on a resource aren't specified in the request parameters,
+// they aren't changed. When a resource is deleted, the tags associated with
+// that resource are also deleted.
+//
+//    // Example sending a request using the TagResourceRequest method.
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TagResource
+func (c *AppMesh) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
+	op := &aws.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/v20190125/tag",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
+}
+
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// AWS App Mesh.
+//
+// Deletes specified tags from a resource.
+//
+//    // Example sending a request using the UntagResourceRequest method.
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UntagResource
+func (c *AppMesh) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
+	op := &aws.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/v20190125/untag",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
+}
+
+const opUpdateMesh = "UpdateMesh"
+
+// UpdateMeshRequest is a API request type for the UpdateMesh API operation.
+type UpdateMeshRequest struct {
+	*aws.Request
+	Input *UpdateMeshInput
+	Copy  func(*UpdateMeshInput) UpdateMeshRequest
+}
+
+// Send marshals and sends the UpdateMesh API request.
+func (r UpdateMeshRequest) Send(ctx context.Context) (*UpdateMeshOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateMeshOutput), nil
+}
+
+// UpdateMeshRequest returns a request value for making API operation for
+// AWS App Mesh.
+//
+// Updates an existing service mesh.
+//
+//    // Example sending a request using the UpdateMeshRequest method.
+//    req := client.UpdateMeshRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateMesh
+func (c *AppMesh) UpdateMeshRequest(input *UpdateMeshInput) UpdateMeshRequest {
+	op := &aws.Operation{
+		Name:       opUpdateMesh,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/v20190125/meshes/{meshName}",
+	}
+
+	if input == nil {
+		input = &UpdateMeshInput{}
+	}
+
+	output := &UpdateMeshOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateMeshRequest{Request: req, Input: input, Copy: c.UpdateMeshRequest}
+}
+
 const opUpdateRoute = "UpdateRoute"
 
 // UpdateRouteRequest is a API request type for the UpdateRoute API operation.
@@ -1114,12 +1643,12 @@ func (r UpdateRouteRequest) Send(ctx context.Context) (*UpdateRouteOutput, error
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/UpdateRoute
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateRoute
 func (c *AppMesh) UpdateRouteRequest(input *UpdateRouteInput) UpdateRouteRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRoute,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}",
+		HTTPPath:   "/v20190125/meshes/{meshName}/virtualRouter/{virtualRouterName}/routes/{routeName}",
 	}
 
 	if input == nil {
@@ -1165,12 +1694,12 @@ func (r UpdateVirtualNodeRequest) Send(ctx context.Context) (*UpdateVirtualNodeO
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/UpdateVirtualNode
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualNode
 func (c *AppMesh) UpdateVirtualNodeRequest(input *UpdateVirtualNodeInput) UpdateVirtualNodeRequest {
 	op := &aws.Operation{
 		Name:       opUpdateVirtualNode,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/meshes/{meshName}/virtualNodes/{virtualNodeName}",
+		HTTPPath:   "/v20190125/meshes/{meshName}/virtualNodes/{virtualNodeName}",
 	}
 
 	if input == nil {
@@ -1216,12 +1745,12 @@ func (r UpdateVirtualRouterRequest) Send(ctx context.Context) (*UpdateVirtualRou
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/UpdateVirtualRouter
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualRouter
 func (c *AppMesh) UpdateVirtualRouterRequest(input *UpdateVirtualRouterInput) UpdateVirtualRouterRequest {
 	op := &aws.Operation{
 		Name:       opUpdateVirtualRouter,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/meshes/{meshName}/virtualRouters/{virtualRouterName}",
+		HTTPPath:   "/v20190125/meshes/{meshName}/virtualRouters/{virtualRouterName}",
 	}
 
 	if input == nil {
@@ -1235,7 +1764,149 @@ func (c *AppMesh) UpdateVirtualRouterRequest(input *UpdateVirtualRouterInput) Up
 	return UpdateVirtualRouterRequest{Request: req, Input: input, Copy: c.UpdateVirtualRouterRequest}
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateMeshInput
+const opUpdateVirtualService = "UpdateVirtualService"
+
+// UpdateVirtualServiceRequest is a API request type for the UpdateVirtualService API operation.
+type UpdateVirtualServiceRequest struct {
+	*aws.Request
+	Input *UpdateVirtualServiceInput
+	Copy  func(*UpdateVirtualServiceInput) UpdateVirtualServiceRequest
+}
+
+// Send marshals and sends the UpdateVirtualService API request.
+func (r UpdateVirtualServiceRequest) Send(ctx context.Context) (*UpdateVirtualServiceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateVirtualServiceOutput), nil
+}
+
+// UpdateVirtualServiceRequest returns a request value for making API operation for
+// AWS App Mesh.
+//
+// Updates an existing virtual service in a specified service mesh.
+//
+//    // Example sending a request using the UpdateVirtualServiceRequest method.
+//    req := client.UpdateVirtualServiceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualService
+func (c *AppMesh) UpdateVirtualServiceRequest(input *UpdateVirtualServiceInput) UpdateVirtualServiceRequest {
+	op := &aws.Operation{
+		Name:       opUpdateVirtualService,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/v20190125/meshes/{meshName}/virtualServices/{virtualServiceName}",
+	}
+
+	if input == nil {
+		input = &UpdateVirtualServiceInput{}
+	}
+
+	output := &UpdateVirtualServiceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateVirtualServiceRequest{Request: req, Input: input, Copy: c.UpdateVirtualServiceRequest}
+}
+
+// An object representing the access logging information for a virtual node.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/AccessLog
+type AccessLog struct {
+	_ struct{} `type:"structure"`
+
+	// The file object to send virtual node access logs to.
+	File *FileAccessLog `locationName:"file" type:"structure"`
+}
+
+// String returns the string representation
+func (s AccessLog) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AccessLog) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AccessLog) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AccessLog"}
+	if s.File != nil {
+		if err := s.File.Validate(); err != nil {
+			invalidParams.AddNested("File", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AccessLog) MarshalFields(e protocol.FieldEncoder) error {
+	if s.File != nil {
+		v := s.File
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "file", v, metadata)
+	}
+	return nil
+}
+
+// An object representing the backends that a virtual node is expected to send
+// outbound traffic to.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/Backend
+type Backend struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies a virtual service to use as a backend for a virtual node.
+	VirtualService *VirtualServiceBackend `locationName:"virtualService" type:"structure"`
+}
+
+// String returns the string representation
+func (s Backend) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Backend) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Backend) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Backend"}
+	if s.VirtualService != nil {
+		if err := s.VirtualService.Validate(); err != nil {
+			invalidParams.AddNested("VirtualService", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Backend) MarshalFields(e protocol.FieldEncoder) error {
+	if s.VirtualService != nil {
+		v := s.VirtualService
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "virtualService", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateMeshInput
 type CreateMeshInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1247,6 +1918,15 @@ type CreateMeshInput struct {
 	//
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
+
+	// The service mesh specification to apply.
+	Spec *MeshSpec `locationName:"spec" type:"structure"`
+
+	// Optional metadata that you can apply to the service mesh to assist with categorization
+	// and organization. Each tag consists of a key and an optional value, both
+	// of which you define. Tag keys can have a maximum character length of 128
+	// characters, and tag values can have a maximum length of 256 characters.
+	Tags []TagRef `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -1268,6 +1948,18 @@ func (s *CreateMeshInput) Validate() error {
 	}
 	if s.MeshName != nil && len(*s.MeshName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MeshName", 1))
+	}
+	if s.Spec != nil {
+		if err := s.Spec.Validate(); err != nil {
+			invalidParams.AddNested("Spec", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1298,17 +1990,37 @@ func (s CreateMeshInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.Spec != nil {
+		v := s.Spec
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "spec", v, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateMeshOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateMeshOutput
 type CreateMeshOutput struct {
 	_ struct{} `type:"structure" payload:"Mesh"`
 
 	responseMetadata aws.Response
 
 	// The full description of your service mesh following the create call.
-	Mesh *MeshData `locationName:"mesh" type:"structure"`
+	//
+	// Mesh is a required field
+	Mesh *MeshData `locationName:"mesh" type:"structure" required:"true"`
 }
 
 // String returns the string representation
@@ -1337,7 +2049,7 @@ func (s CreateMeshOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateRouteInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateRouteInput
 type CreateRouteInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1345,7 +2057,7 @@ type CreateRouteInput struct {
 	// of therequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
-	// The name of the service mesh in which to create the route.
+	// The name of the service mesh to create the route in.
 	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
@@ -1359,6 +2071,12 @@ type CreateRouteInput struct {
 	//
 	// Spec is a required field
 	Spec *RouteSpec `locationName:"spec" type:"structure" required:"true"`
+
+	// Optional metadata that you can apply to the route to assist with categorization
+	// and organization. Each tag consists of a key and an optional value, both
+	// of which you define. Tag keys can have a maximum character length of 128
+	// characters, and tag values can have a maximum length of 256 characters.
+	Tags []TagRef `locationName:"tags" type:"list"`
 
 	// The name of the virtual router in which to create the route.
 	//
@@ -1409,6 +2127,13 @@ func (s *CreateRouteInput) Validate() error {
 			invalidParams.AddNested("Spec", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1444,6 +2169,18 @@ func (s CreateRouteInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "spec", v, metadata)
 	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.MeshName != nil {
 		v := *s.MeshName
 
@@ -1459,14 +2196,16 @@ func (s CreateRouteInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateRouteOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateRouteOutput
 type CreateRouteOutput struct {
 	_ struct{} `type:"structure" payload:"Route"`
 
 	responseMetadata aws.Response
 
 	// The full description of your mesh following the create call.
-	Route *RouteData `locationName:"route" type:"structure"`
+	//
+	// Route is a required field
+	Route *RouteData `locationName:"route" type:"structure" required:"true"`
 }
 
 // String returns the string representation
@@ -1495,7 +2234,7 @@ func (s CreateRouteOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateVirtualNodeInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualNodeInput
 type CreateVirtualNodeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1503,7 +2242,7 @@ type CreateVirtualNodeInput struct {
 	// of therequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
-	// The name of the service mesh in which to create the virtual node.
+	// The name of the service mesh to create the virtual node in.
 	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
@@ -1512,6 +2251,12 @@ type CreateVirtualNodeInput struct {
 	//
 	// Spec is a required field
 	Spec *VirtualNodeSpec `locationName:"spec" type:"structure" required:"true"`
+
+	// Optional metadata that you can apply to the virtual node to assist with categorization
+	// and organization. Each tag consists of a key and an optional value, both
+	// of which you define. Tag keys can have a maximum character length of 128
+	// characters, and tag values can have a maximum length of 256 characters.
+	Tags []TagRef `locationName:"tags" type:"list"`
 
 	// The name to use for the virtual node.
 	//
@@ -1555,6 +2300,13 @@ func (s *CreateVirtualNodeInput) Validate() error {
 			invalidParams.AddNested("Spec", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1584,6 +2336,18 @@ func (s CreateVirtualNodeInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "spec", v, metadata)
 	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.VirtualNodeName != nil {
 		v := *s.VirtualNodeName
 
@@ -1599,14 +2363,16 @@ func (s CreateVirtualNodeInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateVirtualNodeOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualNodeOutput
 type CreateVirtualNodeOutput struct {
 	_ struct{} `type:"structure" payload:"VirtualNode"`
 
 	responseMetadata aws.Response
 
 	// The full description of your virtual node following the create call.
-	VirtualNode *VirtualNodeData `locationName:"virtualNode" type:"structure"`
+	//
+	// VirtualNode is a required field
+	VirtualNode *VirtualNodeData `locationName:"virtualNode" type:"structure" required:"true"`
 }
 
 // String returns the string representation
@@ -1635,7 +2401,7 @@ func (s CreateVirtualNodeOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateVirtualRouterInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualRouterInput
 type CreateVirtualRouterInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1643,7 +2409,7 @@ type CreateVirtualRouterInput struct {
 	// of therequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
-	// The name of the service mesh in which to create the virtual router.
+	// The name of the service mesh to create the virtual router in.
 	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
@@ -1652,6 +2418,12 @@ type CreateVirtualRouterInput struct {
 	//
 	// Spec is a required field
 	Spec *VirtualRouterSpec `locationName:"spec" type:"structure" required:"true"`
+
+	// Optional metadata that you can apply to the virtual router to assist with
+	// categorization and organization. Each tag consists of a key and an optional
+	// value, both of which you define. Tag keys can have a maximum character length
+	// of 128 characters, and tag values can have a maximum length of 256 characters.
+	Tags []TagRef `locationName:"tags" type:"list"`
 
 	// The name to use for the virtual router.
 	//
@@ -1690,6 +2462,18 @@ func (s *CreateVirtualRouterInput) Validate() error {
 	if s.VirtualRouterName != nil && len(*s.VirtualRouterName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("VirtualRouterName", 1))
 	}
+	if s.Spec != nil {
+		if err := s.Spec.Validate(); err != nil {
+			invalidParams.AddNested("Spec", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1719,6 +2503,18 @@ func (s CreateVirtualRouterInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "spec", v, metadata)
 	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.VirtualRouterName != nil {
 		v := *s.VirtualRouterName
 
@@ -1734,14 +2530,16 @@ func (s CreateVirtualRouterInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/CreateVirtualRouterOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualRouterOutput
 type CreateVirtualRouterOutput struct {
 	_ struct{} `type:"structure" payload:"VirtualRouter"`
 
 	responseMetadata aws.Response
 
 	// The full description of your virtual router following the create call.
-	VirtualRouter *VirtualRouterData `locationName:"virtualRouter" type:"structure"`
+	//
+	// VirtualRouter is a required field
+	VirtualRouter *VirtualRouterData `locationName:"virtualRouter" type:"structure" required:"true"`
 }
 
 // String returns the string representation
@@ -1770,7 +2568,171 @@ func (s CreateVirtualRouterOutput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteMeshInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualServiceInput
+type CreateVirtualServiceInput struct {
+	_ struct{} `type:"structure"`
+
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of therequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
+
+	// The name of the service mesh to create the virtual service in.
+	//
+	// MeshName is a required field
+	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
+
+	// The virtual service specification to apply.
+	//
+	// Spec is a required field
+	Spec *VirtualServiceSpec `locationName:"spec" type:"structure" required:"true"`
+
+	// Optional metadata that you can apply to the virtual service to assist with
+	// categorization and organization. Each tag consists of a key and an optional
+	// value, both of which you define. Tag keys can have a maximum character length
+	// of 128 characters, and tag values can have a maximum length of 256 characters.
+	Tags []TagRef `locationName:"tags" type:"list"`
+
+	// The name to use for the virtual service.
+	//
+	// VirtualServiceName is a required field
+	VirtualServiceName *string `locationName:"virtualServiceName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateVirtualServiceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateVirtualServiceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateVirtualServiceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateVirtualServiceInput"}
+
+	if s.MeshName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MeshName"))
+	}
+	if s.MeshName != nil && len(*s.MeshName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MeshName", 1))
+	}
+
+	if s.Spec == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Spec"))
+	}
+
+	if s.VirtualServiceName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VirtualServiceName"))
+	}
+	if s.Spec != nil {
+		if err := s.Spec.Validate(); err != nil {
+			invalidParams.AddNested("Spec", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateVirtualServiceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	var ClientToken string
+	if s.ClientToken != nil {
+		ClientToken = *s.ClientToken
+	} else {
+		ClientToken = protocol.GetIdempotencyToken()
+	}
+	{
+		v := ClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Spec != nil {
+		v := s.Spec
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "spec", v, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.VirtualServiceName != nil {
+		v := *s.VirtualServiceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "virtualServiceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MeshName != nil {
+		v := *s.MeshName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateVirtualServiceOutput
+type CreateVirtualServiceOutput struct {
+	_ struct{} `type:"structure" payload:"VirtualService"`
+
+	responseMetadata aws.Response
+
+	// The full description of your virtual service following the create call.
+	//
+	// VirtualService is a required field
+	VirtualService *VirtualServiceData `locationName:"virtualService" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateVirtualServiceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateVirtualServiceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateVirtualServiceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateVirtualServiceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.VirtualService != nil {
+		v := s.VirtualService
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "virtualService", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteMeshInput
 type DeleteMeshInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1820,14 +2782,16 @@ func (s DeleteMeshInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteMeshOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteMeshOutput
 type DeleteMeshOutput struct {
 	_ struct{} `type:"structure" payload:"Mesh"`
 
 	responseMetadata aws.Response
 
 	// The service mesh that was deleted.
-	Mesh *MeshData `locationName:"mesh" type:"structure"`
+	//
+	// Mesh is a required field
+	Mesh *MeshData `locationName:"mesh" type:"structure" required:"true"`
 }
 
 // String returns the string representation
@@ -1856,11 +2820,11 @@ func (s DeleteMeshOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteRouteInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteRouteInput
 type DeleteRouteInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh in which to delete the route.
+	// The name of the service mesh to delete the route in.
 	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
@@ -1870,7 +2834,7 @@ type DeleteRouteInput struct {
 	// RouteName is a required field
 	RouteName *string `location:"uri" locationName:"routeName" min:"1" type:"string" required:"true"`
 
-	// The name of the virtual router in which to delete the route.
+	// The name of the virtual router to delete the route in.
 	//
 	// VirtualRouterName is a required field
 	VirtualRouterName *string `location:"uri" locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
@@ -1942,14 +2906,16 @@ func (s DeleteRouteInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteRouteOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteRouteOutput
 type DeleteRouteOutput struct {
 	_ struct{} `type:"structure" payload:"Route"`
 
 	responseMetadata aws.Response
 
 	// The route that was deleted.
-	Route *RouteData `locationName:"route" type:"structure"`
+	//
+	// Route is a required field
+	Route *RouteData `locationName:"route" type:"structure" required:"true"`
 }
 
 // String returns the string representation
@@ -1978,11 +2944,11 @@ func (s DeleteRouteOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteVirtualNodeInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualNodeInput
 type DeleteVirtualNodeInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh in which to delete the virtual node.
+	// The name of the service mesh to delete the virtual node in.
 	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
@@ -2046,14 +3012,16 @@ func (s DeleteVirtualNodeInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteVirtualNodeOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualNodeOutput
 type DeleteVirtualNodeOutput struct {
 	_ struct{} `type:"structure" payload:"VirtualNode"`
 
 	responseMetadata aws.Response
 
 	// The virtual node that was deleted.
-	VirtualNode *VirtualNodeData `locationName:"virtualNode" type:"structure"`
+	//
+	// VirtualNode is a required field
+	VirtualNode *VirtualNodeData `locationName:"virtualNode" type:"structure" required:"true"`
 }
 
 // String returns the string representation
@@ -2082,11 +3050,11 @@ func (s DeleteVirtualNodeOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteVirtualRouterInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualRouterInput
 type DeleteVirtualRouterInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh in which to delete the virtual router.
+	// The name of the service mesh to delete the virtual router in.
 	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
@@ -2150,14 +3118,16 @@ func (s DeleteVirtualRouterInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DeleteVirtualRouterOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualRouterOutput
 type DeleteVirtualRouterOutput struct {
 	_ struct{} `type:"structure" payload:"VirtualRouter"`
 
 	responseMetadata aws.Response
 
 	// The virtual router that was deleted.
-	VirtualRouter *VirtualRouterData `locationName:"virtualRouter" type:"structure"`
+	//
+	// VirtualRouter is a required field
+	VirtualRouter *VirtualRouterData `locationName:"virtualRouter" type:"structure" required:"true"`
 }
 
 // String returns the string representation
@@ -2186,7 +3156,110 @@ func (s DeleteVirtualRouterOutput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeMeshInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualServiceInput
+type DeleteVirtualServiceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the service mesh to delete the virtual service in.
+	//
+	// MeshName is a required field
+	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
+
+	// The name of the virtual service to delete.
+	//
+	// VirtualServiceName is a required field
+	VirtualServiceName *string `location:"uri" locationName:"virtualServiceName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteVirtualServiceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVirtualServiceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteVirtualServiceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteVirtualServiceInput"}
+
+	if s.MeshName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MeshName"))
+	}
+	if s.MeshName != nil && len(*s.MeshName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MeshName", 1))
+	}
+
+	if s.VirtualServiceName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VirtualServiceName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteVirtualServiceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.MeshName != nil {
+		v := *s.MeshName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VirtualServiceName != nil {
+		v := *s.VirtualServiceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "virtualServiceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DeleteVirtualServiceOutput
+type DeleteVirtualServiceOutput struct {
+	_ struct{} `type:"structure" payload:"VirtualService"`
+
+	responseMetadata aws.Response
+
+	// The virtual service that was deleted.
+	//
+	// VirtualService is a required field
+	VirtualService *VirtualServiceData `locationName:"virtualService" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteVirtualServiceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVirtualServiceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVirtualServiceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteVirtualServiceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.VirtualService != nil {
+		v := s.VirtualService
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "virtualService", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeMeshInput
 type DescribeMeshInput struct {
 	_ struct{} `type:"structure"`
 
@@ -2236,14 +3309,16 @@ func (s DescribeMeshInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeMeshOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeMeshOutput
 type DescribeMeshOutput struct {
 	_ struct{} `type:"structure" payload:"Mesh"`
 
 	responseMetadata aws.Response
 
 	// The full description of your service mesh.
-	Mesh *MeshData `locationName:"mesh" type:"structure"`
+	//
+	// Mesh is a required field
+	Mesh *MeshData `locationName:"mesh" type:"structure" required:"true"`
 }
 
 // String returns the string representation
@@ -2272,11 +3347,11 @@ func (s DescribeMeshOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeRouteInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeRouteInput
 type DescribeRouteInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh in which the route resides.
+	// The name of the service mesh that the route resides in.
 	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
@@ -2286,7 +3361,7 @@ type DescribeRouteInput struct {
 	// RouteName is a required field
 	RouteName *string `location:"uri" locationName:"routeName" min:"1" type:"string" required:"true"`
 
-	// The name of the virtual router with which the route is associated.
+	// The name of the virtual router that the route is associated with.
 	//
 	// VirtualRouterName is a required field
 	VirtualRouterName *string `location:"uri" locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
@@ -2358,14 +3433,16 @@ func (s DescribeRouteInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeRouteOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeRouteOutput
 type DescribeRouteOutput struct {
 	_ struct{} `type:"structure" payload:"Route"`
 
 	responseMetadata aws.Response
 
 	// The full description of your route.
-	Route *RouteData `locationName:"route" type:"structure"`
+	//
+	// Route is a required field
+	Route *RouteData `locationName:"route" type:"structure" required:"true"`
 }
 
 // String returns the string representation
@@ -2394,11 +3471,11 @@ func (s DescribeRouteOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeVirtualNodeInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualNodeInput
 type DescribeVirtualNodeInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh in which the virtual node resides.
+	// The name of the service mesh that the virtual node resides in.
 	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
@@ -2462,14 +3539,16 @@ func (s DescribeVirtualNodeInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeVirtualNodeOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualNodeOutput
 type DescribeVirtualNodeOutput struct {
 	_ struct{} `type:"structure" payload:"VirtualNode"`
 
 	responseMetadata aws.Response
 
 	// The full description of your virtual node.
-	VirtualNode *VirtualNodeData `locationName:"virtualNode" type:"structure"`
+	//
+	// VirtualNode is a required field
+	VirtualNode *VirtualNodeData `locationName:"virtualNode" type:"structure" required:"true"`
 }
 
 // String returns the string representation
@@ -2498,11 +3577,11 @@ func (s DescribeVirtualNodeOutput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeVirtualRouterInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualRouterInput
 type DescribeVirtualRouterInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh in which the virtual router resides.
+	// The name of the service mesh that the virtual router resides in.
 	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
@@ -2566,14 +3645,16 @@ func (s DescribeVirtualRouterInput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DescribeVirtualRouterOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualRouterOutput
 type DescribeVirtualRouterOutput struct {
 	_ struct{} `type:"structure" payload:"VirtualRouter"`
 
 	responseMetadata aws.Response
 
 	// The full description of your virtual router.
-	VirtualRouter *VirtualRouterData `locationName:"virtualRouter" type:"structure"`
+	//
+	// VirtualRouter is a required field
+	VirtualRouter *VirtualRouterData `locationName:"virtualRouter" type:"structure" required:"true"`
 }
 
 // String returns the string representation
@@ -2602,13 +3683,119 @@ func (s DescribeVirtualRouterOutput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// The DNS service discovery information for your virtual node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/DnsServiceDiscovery
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualServiceInput
+type DescribeVirtualServiceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the service mesh that the virtual service resides in.
+	//
+	// MeshName is a required field
+	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
+
+	// The name of the virtual service to describe.
+	//
+	// VirtualServiceName is a required field
+	VirtualServiceName *string `location:"uri" locationName:"virtualServiceName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeVirtualServiceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeVirtualServiceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeVirtualServiceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeVirtualServiceInput"}
+
+	if s.MeshName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MeshName"))
+	}
+	if s.MeshName != nil && len(*s.MeshName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MeshName", 1))
+	}
+
+	if s.VirtualServiceName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VirtualServiceName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeVirtualServiceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.MeshName != nil {
+		v := *s.MeshName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VirtualServiceName != nil {
+		v := *s.VirtualServiceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "virtualServiceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeVirtualServiceOutput
+type DescribeVirtualServiceOutput struct {
+	_ struct{} `type:"structure" payload:"VirtualService"`
+
+	responseMetadata aws.Response
+
+	// The full description of your virtual service.
+	//
+	// VirtualService is a required field
+	VirtualService *VirtualServiceData `locationName:"virtualService" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeVirtualServiceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeVirtualServiceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeVirtualServiceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeVirtualServiceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.VirtualService != nil {
+		v := s.VirtualService
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "virtualService", v, metadata)
+	}
+	return nil
+}
+
+// An object representing the DNS service discovery information for your virtual
+// node.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DnsServiceDiscovery
 type DnsServiceDiscovery struct {
 	_ struct{} `type:"structure"`
 
-	// The DNS service name for your virtual node.
-	ServiceName *string `locationName:"serviceName" type:"string"`
+	// Specifies the DNS service discovery hostname for the virtual node.
+	//
+	// Hostname is a required field
+	Hostname *string `locationName:"hostname" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -2621,47 +3808,177 @@ func (s DnsServiceDiscovery) GoString() string {
 	return s.String()
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DnsServiceDiscovery) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DnsServiceDiscovery"}
+
+	if s.Hostname == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Hostname"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DnsServiceDiscovery) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ServiceName != nil {
-		v := *s.ServiceName
+	if s.Hostname != nil {
+		v := *s.Hostname
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "serviceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "hostname", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object representing the egress filter rules for a service mesh.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/EgressFilter
+type EgressFilter struct {
+	_ struct{} `type:"structure"`
+
+	// The egress filter type. By default, the type is DROP_ALL, which allows egress
+	// only from virtual nodes to other defined resources in the service mesh (and
+	// any traffic to *.amazonaws.com for AWS API calls). You can set the egress
+	// filter type to ALLOW_ALL to allow egress to any endpoint inside or outside
+	// of the service mesh.
+	//
+	// Type is a required field
+	Type EgressFilterType `locationName:"type" type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s EgressFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EgressFilter) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *EgressFilter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "EgressFilter"}
+	if len(s.Type) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s EgressFilter) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// An object representing an access log file.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/FileAccessLog
+type FileAccessLog struct {
+	_ struct{} `type:"structure"`
+
+	// The file path to write access logs to. You can use /dev/stdout to send access
+	// logs to standard out and configure your Envoy container to use a log driver,
+	// such as awslogs, to export the access logs to a log storage service such
+	// as Amazon CloudWatch Logs. You can also specify a path in the Envoy container's
+	// file system to write the files to disk.
+	//
+	// The Envoy process must have write permissions to the path that you specify
+	// here. Otherwise, Envoy fails to bootstrap properly.
+	//
+	// Path is a required field
+	Path *string `locationName:"path" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s FileAccessLog) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FileAccessLog) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *FileAccessLog) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "FileAccessLog"}
+
+	if s.Path == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Path"))
+	}
+	if s.Path != nil && len(*s.Path) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Path", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FileAccessLog) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Path != nil {
+		v := *s.Path
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "path", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
 
 // An object representing the health check policy for a virtual node's listener.
-//
-// Listener health checks are not available during the App Mesh preview.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/HealthCheckPolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HealthCheckPolicy
 type HealthCheckPolicy struct {
 	_ struct{} `type:"structure"`
 
 	// The number of consecutive successful health checks that must occur before
 	// declaring listener healthy.
-	HealthyThreshold *int64 `locationName:"healthyThreshold" type:"integer"`
+	//
+	// HealthyThreshold is a required field
+	HealthyThreshold *int64 `locationName:"healthyThreshold" min:"2" type:"integer" required:"true"`
 
 	// The time period in milliseconds between each health check execution.
-	IntervalMillis *int64 `locationName:"intervalMillis" type:"long"`
+	//
+	// IntervalMillis is a required field
+	IntervalMillis *int64 `locationName:"intervalMillis" min:"5000" type:"long" required:"true"`
 
-	// The destination path for the health check request.
+	// The destination path for the health check request. This is required only
+	// if the specified protocol is HTTP. If the protocol is TCP, this parameter
+	// is ignored.
 	Path *string `locationName:"path" type:"string"`
 
-	// The destination port for the health check request.
+	// The destination port for the health check request. This port must match the
+	// port defined in the PortMapping for the listener.
 	Port *int64 `locationName:"port" min:"1" type:"integer"`
 
 	// The protocol for the health check request.
-	Protocol PortProtocol `locationName:"protocol" type:"string" enum:"true"`
+	//
+	// Protocol is a required field
+	Protocol PortProtocol `locationName:"protocol" type:"string" required:"true" enum:"true"`
 
 	// The amount of time to wait when receiving a response from the health check,
 	// in milliseconds.
-	TimeoutMillis *int64 `locationName:"timeoutMillis" type:"long"`
+	//
+	// TimeoutMillis is a required field
+	TimeoutMillis *int64 `locationName:"timeoutMillis" min:"2000" type:"long" required:"true"`
 
 	// The number of consecutive failed health checks that must occur before declaring
 	// a virtual node unhealthy.
-	UnhealthyThreshold *int64 `locationName:"unhealthyThreshold" type:"integer"`
+	//
+	// UnhealthyThreshold is a required field
+	UnhealthyThreshold *int64 `locationName:"unhealthyThreshold" min:"2" type:"integer" required:"true"`
 }
 
 // String returns the string representation
@@ -2677,8 +3994,39 @@ func (s HealthCheckPolicy) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HealthCheckPolicy) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "HealthCheckPolicy"}
+
+	if s.HealthyThreshold == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HealthyThreshold"))
+	}
+	if s.HealthyThreshold != nil && *s.HealthyThreshold < 2 {
+		invalidParams.Add(aws.NewErrParamMinValue("HealthyThreshold", 2))
+	}
+
+	if s.IntervalMillis == nil {
+		invalidParams.Add(aws.NewErrParamRequired("IntervalMillis"))
+	}
+	if s.IntervalMillis != nil && *s.IntervalMillis < 5000 {
+		invalidParams.Add(aws.NewErrParamMinValue("IntervalMillis", 5000))
+	}
 	if s.Port != nil && *s.Port < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Port", 1))
+	}
+	if len(s.Protocol) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
+	}
+
+	if s.TimeoutMillis == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TimeoutMillis"))
+	}
+	if s.TimeoutMillis != nil && *s.TimeoutMillis < 2000 {
+		invalidParams.Add(aws.NewErrParamMinValue("TimeoutMillis", 2000))
+	}
+
+	if s.UnhealthyThreshold == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UnhealthyThreshold"))
+	}
+	if s.UnhealthyThreshold != nil && *s.UnhealthyThreshold < 2 {
+		invalidParams.Add(aws.NewErrParamMinValue("UnhealthyThreshold", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2735,15 +4083,19 @@ func (s HealthCheckPolicy) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the HTTP routing specification for a route.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/HttpRoute
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRoute
 type HttpRoute struct {
 	_ struct{} `type:"structure"`
 
 	// The action to take if a match is determined.
-	Action *HttpRouteAction `locationName:"action" type:"structure"`
+	//
+	// Action is a required field
+	Action *HttpRouteAction `locationName:"action" type:"structure" required:"true"`
 
 	// The criteria for determining an HTTP request match.
-	Match *HttpRouteMatch `locationName:"match" type:"structure"`
+	//
+	// Match is a required field
+	Match *HttpRouteMatch `locationName:"match" type:"structure" required:"true"`
 }
 
 // String returns the string representation
@@ -2759,9 +4111,22 @@ func (s HttpRoute) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HttpRoute) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "HttpRoute"}
+
+	if s.Action == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
+	}
+
+	if s.Match == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Match"))
+	}
 	if s.Action != nil {
 		if err := s.Action.Validate(); err != nil {
 			invalidParams.AddNested("Action", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Match != nil {
+		if err := s.Match.Validate(); err != nil {
+			invalidParams.AddNested("Match", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2790,14 +4155,16 @@ func (s HttpRoute) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object representing the traffic distribution requirements for matched
 // HTTP requests.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/HttpRouteAction
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRouteAction
 type HttpRouteAction struct {
 	_ struct{} `type:"structure"`
 
 	// The targets that traffic is routed to when a request matches the route. You
-	// can specify one or more targets and their relative weights with which to
-	// distribute traffic.
-	WeightedTargets []WeightedTarget `locationName:"weightedTargets" type:"list"`
+	// can specify one or more targets and their relative weights to distribute
+	// traffic with.
+	//
+	// WeightedTargets is a required field
+	WeightedTargets []WeightedTarget `locationName:"weightedTargets" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2813,6 +4180,13 @@ func (s HttpRouteAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HttpRouteAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "HttpRouteAction"}
+
+	if s.WeightedTargets == nil {
+		invalidParams.Add(aws.NewErrParamRequired("WeightedTargets"))
+	}
+	if s.WeightedTargets != nil && len(s.WeightedTargets) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("WeightedTargets", 1))
+	}
 	if s.WeightedTargets != nil {
 		for i, v := range s.WeightedTargets {
 			if err := v.Validate(); err != nil {
@@ -2846,17 +4220,18 @@ func (s HttpRouteAction) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object representing the requirements for a route to match HTTP requests
 // for a virtual router.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/HttpRouteMatch
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRouteMatch
 type HttpRouteMatch struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the path with which to match requests. This parameter must always
-	// start with /, which by itself matches all requests to the virtual router
-	// service name. You can also match for path-based routing of requests. For
-	// example, if your virtual router service name is my-service.local, and you
-	// want the route to match requests to my-service.local/metrics, then your prefix
-	// should be /metrics.
-	Prefix *string `locationName:"prefix" type:"string"`
+	// Specifies the path to match requests with. This parameter must always start
+	// with /, which by itself matches all requests to the virtual service name.
+	// You can also match for path-based routing of requests. For example, if your
+	// virtual service name is my-service.local and you want the route to match
+	// requests to my-service.local/metrics, your prefix should be /metrics.
+	//
+	// Prefix is a required field
+	Prefix *string `locationName:"prefix" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -2867,6 +4242,20 @@ func (s HttpRouteMatch) String() string {
 // GoString returns the string representation
 func (s HttpRouteMatch) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HttpRouteMatch) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HttpRouteMatch"}
+
+	if s.Prefix == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Prefix"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -2880,17 +4269,17 @@ func (s HttpRouteMatch) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListMeshesInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListMeshesInput
 type ListMeshesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of mesh results returned by ListMeshes in paginated output.
-	// When this parameter is used, ListMeshes only returns limit results in a single
-	// page along with a nextToken response element. The remaining results of the
-	// initial request can be seen by sending another ListMeshes request with the
-	// returned nextToken value. This value can be between 1 and 100. If this parameter
-	// is not used, then ListMeshes returns up to 100 results and a nextToken value
-	// if applicable.
+	// The maximum number of results returned by ListMeshes in paginated output.
+	// When you use this parameter, ListMeshes returns only limit results in a single
+	// page along with a nextToken response element. You can see the remaining results
+	// of the initial request by sending another ListMeshes request with the returned
+	// nextToken value. This value can be between 1 and 100. If you don't use this
+	// parameter, ListMeshes returns up to 100 results and a nextToken value if
+	// applicable.
 	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
 
 	// The nextToken value returned from a previous paginated ListMeshes request
@@ -2898,7 +4287,7 @@ type ListMeshesInput struct {
 	// Pagination continues from the end of the previous results that returned the
 	// nextToken value.
 	//
-	// This token should be treated as an opaque identifier that is only used to
+	// This token should be treated as an opaque identifier that is used only to
 	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
@@ -2945,7 +4334,7 @@ func (s ListMeshesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListMeshesOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListMeshesOutput
 type ListMeshesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -2957,7 +4346,7 @@ type ListMeshesOutput struct {
 	Meshes []MeshRef `locationName:"meshes" type:"list" required:"true"`
 
 	// The nextToken value to include in a future ListMeshes request. When the results
-	// of a ListMeshes request exceed limit, this value can be used to retrieve
+	// of a ListMeshes request exceed limit, you can use this value to retrieve
 	// the next page of results. This value is null when there are no more results
 	// to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -3001,20 +4390,20 @@ func (s ListMeshesOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListRoutesInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListRoutesInput
 type ListRoutesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of mesh results returned by ListRoutes in paginated output.
-	// When this parameter is used, ListRoutes only returns limit results in a single
-	// page along with a nextToken response element. The remaining results of the
-	// initial request can be seen by sending another ListRoutes request with the
-	// returned nextToken value. This value can be between 1 and 100. If this parameter
-	// is not used, then ListRoutes returns up to 100 results and a nextToken value
-	// if applicable.
+	// The maximum number of results returned by ListRoutes in paginated output.
+	// When you use this parameter, ListRoutes returns only limit results in a single
+	// page along with a nextToken response element. You can see the remaining results
+	// of the initial request by sending another ListRoutes request with the returned
+	// nextToken value. This value can be between 1 and 100. If you don't use this
+	// parameter, ListRoutes returns up to 100 results and a nextToken value if
+	// applicable.
 	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
 
-	// The name of the service mesh in which to list routes.
+	// The name of the service mesh to list routes in.
 	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
@@ -3025,7 +4414,7 @@ type ListRoutesInput struct {
 	// nextToken value.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 
-	// The name of the virtual router in which to list routes.
+	// The name of the virtual router to list routes in.
 	//
 	// VirtualRouterName is a required field
 	VirtualRouterName *string `location:"uri" locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
@@ -3099,14 +4488,14 @@ func (s ListRoutesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListRoutesOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListRoutesOutput
 type ListRoutesOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
 	// The nextToken value to include in a future ListRoutes request. When the results
-	// of a ListRoutes request exceed limit, this value can be used to retrieve
+	// of a ListRoutes request exceed limit, you can use this value to retrieve
 	// the next page of results. This value is null when there are no more results
 	// to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -3155,20 +4544,154 @@ func (s ListRoutesOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListVirtualNodesInput
-type ListVirtualNodesInput struct {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListTagsForResourceInput
+type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of mesh results returned by ListVirtualNodes in paginated
-	// output. When this parameter is used, ListVirtualNodes only returns limit
-	// results in a single page along with a nextToken response element. The remaining
-	// results of the initial request can be seen by sending another ListVirtualNodes
+	// The maximum number of tag results returned by ListTagsForResource in paginated
+	// output. When this parameter is used, ListTagsForResource returns only limit
+	// results in a single page along with a nextToken response element. You can
+	// see the remaining results of the initial request by sending another ListTagsForResource
 	// request with the returned nextToken value. This value can be between 1 and
-	// 100. If this parameter is not used, then ListVirtualNodes returns up to 100
+	// 100. If you don't use this parameter, ListTagsForResource returns up to 100
 	// results and a nextToken value if applicable.
 	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
 
-	// The name of the service mesh in which to list virtual nodes.
+	// The nextToken value returned from a previous paginated ListTagsForResource
+	// request where limit was used and the results exceeded the value of that parameter.
+	// Pagination continues from the end of the previous results that returned the
+	// nextToken value.
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+
+	// The Amazon Resource Name (ARN) that identifies the resource to list the tags
+	// for.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `location:"querystring" locationName:"resourceArn" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTagsForResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+	if s.Limit != nil && *s.Limit < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
+	}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Limit != nil {
+		v := *s.Limit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "resourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListTagsForResourceOutput
+type ListTagsForResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The nextToken value to include in a future ListTagsForResource request. When
+	// the results of a ListTagsForResource request exceed limit, you can use this
+	// value to retrieve the next page of results. This value is null when there
+	// are no more results to return.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The tags for the resource.
+	//
+	// Tags is a required field
+	Tags []TagRef `locationName:"tags" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTagsForResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualNodesInput
+type ListVirtualNodesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of results returned by ListVirtualNodes in paginated output.
+	// When you use this parameter, ListVirtualNodes returns only limit results
+	// in a single page along with a nextToken response element. You can see the
+	// remaining results of the initial request by sending another ListVirtualNodes
+	// request with the returned nextToken value. This value can be between 1 and
+	// 100. If you don't use this parameter, ListVirtualNodes returns up to 100
+	// results and a nextToken value if applicable.
+	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
+
+	// The name of the service mesh to list virtual nodes in.
 	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
@@ -3235,15 +4758,15 @@ func (s ListVirtualNodesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListVirtualNodesOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualNodesOutput
 type ListVirtualNodesOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
 	// The nextToken value to include in a future ListVirtualNodes request. When
-	// the results of a ListVirtualNodes request exceed limit, this value can be
-	// used to retrieve the next page of results. This value is null when there
+	// the results of a ListVirtualNodes request exceed limit, you can use this
+	// value to retrieve the next page of results. This value is null when there
 	// are no more results to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
@@ -3291,20 +4814,20 @@ func (s ListVirtualNodesOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListVirtualRoutersInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualRoutersInput
 type ListVirtualRoutersInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of mesh results returned by ListVirtualRouters in paginated
-	// output. When this parameter is used, ListVirtualRouters only returns limit
-	// results in a single page along with a nextToken response element. The remaining
-	// results of the initial request can be seen by sending another ListVirtualRouters
+	// The maximum number of results returned by ListVirtualRouters in paginated
+	// output. When you use this parameter, ListVirtualRouters returns only limit
+	// results in a single page along with a nextToken response element. You can
+	// see the remaining results of the initial request by sending another ListVirtualRouters
 	// request with the returned nextToken value. This value can be between 1 and
-	// 100. If this parameter is not used, then ListVirtualRouters returns up to
-	// 100 results and a nextToken value if applicable.
+	// 100. If you don't use this parameter, ListVirtualRouters returns up to 100
+	// results and a nextToken value if applicable.
 	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
 
-	// The name of the service mesh in which to list virtual routers.
+	// The name of the service mesh to list virtual routers in.
 	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
@@ -3371,15 +4894,15 @@ func (s ListVirtualRoutersInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ListVirtualRoutersOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualRoutersOutput
 type ListVirtualRoutersOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
 	// The nextToken value to include in a future ListVirtualRouters request. When
-	// the results of a ListVirtualRouters request exceed limit, this value can
-	// be used to retrieve the next page of results. This value is null when there
+	// the results of a ListVirtualRouters request exceed limit, you can use this
+	// value to retrieve the next page of results. This value is null when there
 	// are no more results to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
@@ -3427,18 +4950,154 @@ func (s ListVirtualRoutersOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualServicesInput
+type ListVirtualServicesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of results returned by ListVirtualServices in paginated
+	// output. When you use this parameter, ListVirtualServices returns only limit
+	// results in a single page along with a nextToken response element. You can
+	// see the remaining results of the initial request by sending another ListVirtualServices
+	// request with the returned nextToken value. This value can be between 1 and
+	// 100. If you don't use this parameter, ListVirtualServices returns up to 100
+	// results and a nextToken value if applicable.
+	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
+
+	// The name of the service mesh to list virtual services in.
+	//
+	// MeshName is a required field
+	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
+
+	// The nextToken value returned from a previous paginated ListVirtualServices
+	// request where limit was used and the results exceeded the value of that parameter.
+	// Pagination continues from the end of the previous results that returned the
+	// nextToken value.
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListVirtualServicesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListVirtualServicesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListVirtualServicesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListVirtualServicesInput"}
+	if s.Limit != nil && *s.Limit < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
+	}
+
+	if s.MeshName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MeshName"))
+	}
+	if s.MeshName != nil && len(*s.MeshName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MeshName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListVirtualServicesInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.MeshName != nil {
+		v := *s.MeshName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Limit != nil {
+		v := *s.Limit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualServicesOutput
+type ListVirtualServicesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The nextToken value to include in a future ListVirtualServices request. When
+	// the results of a ListVirtualServices request exceed limit, you can use this
+	// value to retrieve the next page of results. This value is null when there
+	// are no more results to return.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The list of existing virtual services for the specified service mesh.
+	//
+	// VirtualServices is a required field
+	VirtualServices []VirtualServiceRef `locationName:"virtualServices" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s ListVirtualServicesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListVirtualServicesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListVirtualServicesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListVirtualServicesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.VirtualServices) > 0 {
+		v := s.VirtualServices
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "virtualServices", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // An object representing a listener for a virtual node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/Listener
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/Listener
 type Listener struct {
 	_ struct{} `type:"structure"`
 
 	// The health check information for the listener.
-	//
-	// Listener health checks are not available during the App Mesh preview.
 	HealthCheck *HealthCheckPolicy `locationName:"healthCheck" type:"structure"`
 
 	// The port mapping information for the listener.
-	PortMapping *PortMapping `locationName:"portMapping" type:"structure"`
+	//
+	// PortMapping is a required field
+	PortMapping *PortMapping `locationName:"portMapping" type:"structure" required:"true"`
 }
 
 // String returns the string representation
@@ -3454,6 +5113,10 @@ func (s Listener) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Listener) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Listener"}
+
+	if s.PortMapping == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PortMapping"))
+	}
 	if s.HealthCheck != nil {
 		if err := s.HealthCheck.Validate(); err != nil {
 			invalidParams.AddNested("HealthCheck", err.(aws.ErrInvalidParams))
@@ -3488,8 +5151,53 @@ func (s Listener) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object representing the logging information for a virtual node.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/Logging
+type Logging struct {
+	_ struct{} `type:"structure"`
+
+	// The access log configuration for a virtual node.
+	AccessLog *AccessLog `locationName:"accessLog" type:"structure"`
+}
+
+// String returns the string representation
+func (s Logging) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Logging) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Logging) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Logging"}
+	if s.AccessLog != nil {
+		if err := s.AccessLog.Validate(); err != nil {
+			invalidParams.AddNested("AccessLog", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Logging) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccessLog != nil {
+		v := s.AccessLog
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "accessLog", v, metadata)
+	}
+	return nil
+}
+
 // An object representing a service mesh returned by a describe operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/MeshData
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MeshData
 type MeshData struct {
 	_ struct{} `type:"structure"`
 
@@ -3503,8 +5211,15 @@ type MeshData struct {
 	// Metadata is a required field
 	Metadata *ResourceMetadata `locationName:"metadata" type:"structure" required:"true"`
 
+	// The associated specification for the service mesh.
+	//
+	// Spec is a required field
+	Spec *MeshSpec `locationName:"spec" type:"structure" required:"true"`
+
 	// The status of the service mesh.
-	Status *MeshStatus `locationName:"status" type:"structure"`
+	//
+	// Status is a required field
+	Status *MeshStatus `locationName:"status" type:"structure" required:"true"`
 }
 
 // String returns the string representation
@@ -3531,6 +5246,12 @@ func (s MeshData) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "metadata", v, metadata)
 	}
+	if s.Spec != nil {
+		v := s.Spec
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "spec", v, metadata)
+	}
 	if s.Status != nil {
 		v := s.Status
 
@@ -3541,15 +5262,19 @@ func (s MeshData) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a service mesh returned by a list operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/MeshRef
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MeshRef
 type MeshRef struct {
 	_ struct{} `type:"structure"`
 
 	// The full Amazon Resource Name (ARN) of the service mesh.
-	Arn *string `locationName:"arn" type:"string"`
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" type:"string" required:"true"`
 
 	// The name of the service mesh.
-	MeshName *string `locationName:"meshName" min:"1" type:"string"`
+	//
+	// MeshName is a required field
+	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -3579,8 +5304,53 @@ func (s MeshRef) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object representing the specification of a service mesh.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MeshSpec
+type MeshSpec struct {
+	_ struct{} `type:"structure"`
+
+	// The egress filter rules for the service mesh.
+	EgressFilter *EgressFilter `locationName:"egressFilter" type:"structure"`
+}
+
+// String returns the string representation
+func (s MeshSpec) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s MeshSpec) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MeshSpec) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MeshSpec"}
+	if s.EgressFilter != nil {
+		if err := s.EgressFilter.Validate(); err != nil {
+			invalidParams.AddNested("EgressFilter", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MeshSpec) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EgressFilter != nil {
+		v := s.EgressFilter
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "egressFilter", v, metadata)
+	}
+	return nil
+}
+
 // An object representing the status of a service mesh.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/MeshStatus
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MeshStatus
 type MeshStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -3609,16 +5379,20 @@ func (s MeshStatus) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// An object representing a virtual node listener port mapping.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/PortMapping
+// An object representing a virtual node or virtual router listener port mapping.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/PortMapping
 type PortMapping struct {
 	_ struct{} `type:"structure"`
 
 	// The port used for the port mapping.
-	Port *int64 `locationName:"port" min:"1" type:"integer"`
+	//
+	// Port is a required field
+	Port *int64 `locationName:"port" min:"1" type:"integer" required:"true"`
 
 	// The protocol used for the port mapping.
-	Protocol PortProtocol `locationName:"protocol" type:"string" enum:"true"`
+	//
+	// Protocol is a required field
+	Protocol PortProtocol `locationName:"protocol" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -3634,8 +5408,15 @@ func (s PortMapping) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PortMapping) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PortMapping"}
+
+	if s.Port == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Port"))
+	}
 	if s.Port != nil && *s.Port < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Port", 1))
+	}
+	if len(s.Protocol) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3662,35 +5443,35 @@ func (s PortMapping) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing metadata for a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ResourceMetadata
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ResourceMetadata
 type ResourceMetadata struct {
 	_ struct{} `type:"structure"`
 
 	// The full Amazon Resource Name (ARN) for the resource.
 	//
-	// After you create a virtual node, set this value (either the full ARN or the
-	// truncated resource name, for example, mesh/default/virtualNode/simpleapp,
-	// as the APPMESH_VIRTUAL_NODE_NAME environment variable for your task group's
-	// Envoy proxy container in your task definition or pod spec. This is then mapped
-	// to the node.id and node.cluster Envoy parameters.
+	// Arn is a required field
+	Arn *string `locationName:"arn" type:"string" required:"true"`
+
+	// The Unix epoch timestamp in seconds for when the resource was created.
 	//
-	// If you require your Envoy stats or tracing to use a different name, you can
-	// override the node.cluster value that is set by APPMESH_VIRTUAL_NODE_NAME
-	// with the APPMESH_VIRTUAL_NODE_CLUSTER environment variable.
-	Arn *string `locationName:"arn" type:"string"`
+	// CreatedAt is a required field
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix" required:"true"`
 
-	// The Unix epoch timestamp in seconds for when the cluster was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
-
-	// The Unix epoch timestamp in seconds for when the cluster was last updated.
-	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+	// The Unix epoch timestamp in seconds for when the resource was last updated.
+	//
+	// LastUpdatedAt is a required field
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix" required:"true"`
 
 	// The unique identifier for the resource.
-	Uid *string `locationName:"uid" type:"string"`
+	//
+	// Uid is a required field
+	Uid *string `locationName:"uid" type:"string" required:"true"`
 
 	// The version of the resource. Resources are created at version 1, and this
-	// version is incremented each time they are updated.
-	Version *int64 `locationName:"version" type:"long"`
+	// version is incremented each time that they're updated.
+	//
+	// Version is a required field
+	Version *int64 `locationName:"version" type:"long" required:"true"`
 }
 
 // String returns the string representation
@@ -3739,17 +5520,19 @@ func (s ResourceMetadata) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a route returned by a describe operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/RouteData
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/RouteData
 type RouteData struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh in which the route resides.
+	// The name of the service mesh that the route resides in.
 	//
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
 	// The associated metadata for the route.
-	Metadata *ResourceMetadata `locationName:"metadata" type:"structure"`
+	//
+	// Metadata is a required field
+	Metadata *ResourceMetadata `locationName:"metadata" type:"structure" required:"true"`
 
 	// The name of the route.
 	//
@@ -3757,12 +5540,16 @@ type RouteData struct {
 	RouteName *string `locationName:"routeName" min:"1" type:"string" required:"true"`
 
 	// The specifications of the route.
-	Spec *RouteSpec `locationName:"spec" type:"structure"`
+	//
+	// Spec is a required field
+	Spec *RouteSpec `locationName:"spec" type:"structure" required:"true"`
 
 	// The status of the route.
-	Status *RouteStatus `locationName:"status" type:"structure"`
+	//
+	// Status is a required field
+	Status *RouteStatus `locationName:"status" type:"structure" required:"true"`
 
-	// The virtual router with which the route is associated.
+	// The virtual router that the route is associated with.
 	//
 	// VirtualRouterName is a required field
 	VirtualRouterName *string `locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
@@ -3820,21 +5607,29 @@ func (s RouteData) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a route returned by a list operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/RouteRef
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/RouteRef
 type RouteRef struct {
 	_ struct{} `type:"structure"`
 
 	// The full Amazon Resource Name (ARN) for the route.
-	Arn *string `locationName:"arn" type:"string"`
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" type:"string" required:"true"`
 
-	// The name of the service mesh in which the route resides.
-	MeshName *string `locationName:"meshName" min:"1" type:"string"`
+	// The name of the service mesh that the route resides in.
+	//
+	// MeshName is a required field
+	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
 	// The name of the route.
-	RouteName *string `locationName:"routeName" min:"1" type:"string"`
+	//
+	// RouteName is a required field
+	RouteName *string `locationName:"routeName" min:"1" type:"string" required:"true"`
 
-	// The virtual router with which the route is associated.
-	VirtualRouterName *string `locationName:"virtualRouterName" min:"1" type:"string"`
+	// The virtual router that the route is associated with.
+	//
+	// VirtualRouterName is a required field
+	VirtualRouterName *string `locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -3877,12 +5672,15 @@ func (s RouteRef) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the specification of a route.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/RouteSpec
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/RouteSpec
 type RouteSpec struct {
 	_ struct{} `type:"structure"`
 
 	// The HTTP routing information for the route.
 	HttpRoute *HttpRoute `locationName:"httpRoute" type:"structure"`
+
+	// The TCP routing information for the route.
+	TcpRoute *TcpRoute `locationName:"tcpRoute" type:"structure"`
 }
 
 // String returns the string representation
@@ -3903,6 +5701,11 @@ func (s *RouteSpec) Validate() error {
 			invalidParams.AddNested("HttpRoute", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.TcpRoute != nil {
+		if err := s.TcpRoute.Validate(); err != nil {
+			invalidParams.AddNested("TcpRoute", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3918,16 +5721,24 @@ func (s RouteSpec) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "httpRoute", v, metadata)
 	}
+	if s.TcpRoute != nil {
+		v := s.TcpRoute
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "tcpRoute", v, metadata)
+	}
 	return nil
 }
 
 // An object representing the current status of a route.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/RouteStatus
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/RouteStatus
 type RouteStatus struct {
 	_ struct{} `type:"structure"`
 
 	// The current status for the route.
-	Status RouteStatusCode `locationName:"status" type:"string" enum:"true"`
+	//
+	// Status is a required field
+	Status RouteStatusCode `locationName:"status" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -3952,11 +5763,11 @@ func (s RouteStatus) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the service discovery information for a virtual node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/ServiceDiscovery
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ServiceDiscovery
 type ServiceDiscovery struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the DNS service name for the virtual node.
+	// Specifies the DNS information for the virtual node.
 	Dns *DnsServiceDiscovery `locationName:"dns" type:"structure"`
 }
 
@@ -3970,6 +5781,21 @@ func (s ServiceDiscovery) GoString() string {
 	return s.String()
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ServiceDiscovery) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ServiceDiscovery"}
+	if s.Dns != nil {
+		if err := s.Dns.Validate(); err != nil {
+			invalidParams.AddNested("Dns", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ServiceDiscovery) MarshalFields(e protocol.FieldEncoder) error {
 	if s.Dns != nil {
@@ -3981,7 +5807,503 @@ func (s ServiceDiscovery) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/UpdateRouteInput
+// Optional metadata that you apply to a resource to assist with categorization
+// and organization. Each tag consists of a key and an optional value, both
+// of which you define. Tag keys can have a maximum character length of 128
+// characters, and tag values can have a maximum length of 256 characters.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TagRef
+type TagRef struct {
+	_ struct{} `type:"structure"`
+
+	// One part of a key-value pair that make up a tag. A key is a general label
+	// that acts like a category for more specific tag values.
+	//
+	// Key is a required field
+	Key *string `locationName:"key" min:"1" type:"string" required:"true"`
+
+	// The optional part of a key-value pair that make up a tag. A value acts as
+	// a descriptor within a tag category (key).
+	Value *string `locationName:"value" type:"string"`
+}
+
+// String returns the string representation
+func (s TagRef) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagRef) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagRef) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TagRef"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagRef) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Key != nil {
+		v := *s.Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "key", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TagResourceInput
+type TagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource to add tags to.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `location:"querystring" locationName:"resourceArn" type:"string" required:"true"`
+
+	// The tags to add to the resource. A tag is an array of key-value pairs. Tag
+	// keys can have a maximum character length of 128 characters, and tag values
+	// can have a maximum length of 256 characters.
+	//
+	// Tags is a required field
+	Tags []TagRef `locationName:"tags" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if s.Tags == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "resourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TagResourceOutput
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// An object representing the TCP routing specification for a route.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TcpRoute
+type TcpRoute struct {
+	_ struct{} `type:"structure"`
+
+	// The action to take if a match is determined.
+	//
+	// Action is a required field
+	Action *TcpRouteAction `locationName:"action" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s TcpRoute) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TcpRoute) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TcpRoute) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TcpRoute"}
+
+	if s.Action == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
+	}
+	if s.Action != nil {
+		if err := s.Action.Validate(); err != nil {
+			invalidParams.AddNested("Action", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TcpRoute) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Action != nil {
+		v := s.Action
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "action", v, metadata)
+	}
+	return nil
+}
+
+// An object representing the traffic distribution requirements for matched
+// TCP requests.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/TcpRouteAction
+type TcpRouteAction struct {
+	_ struct{} `type:"structure"`
+
+	// The targets that traffic is routed to when a request matches the route. You
+	// can specify one or more targets and their relative weights to distribute
+	// traffic with.
+	//
+	// WeightedTargets is a required field
+	WeightedTargets []WeightedTarget `locationName:"weightedTargets" min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s TcpRouteAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TcpRouteAction) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TcpRouteAction) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TcpRouteAction"}
+
+	if s.WeightedTargets == nil {
+		invalidParams.Add(aws.NewErrParamRequired("WeightedTargets"))
+	}
+	if s.WeightedTargets != nil && len(s.WeightedTargets) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("WeightedTargets", 1))
+	}
+	if s.WeightedTargets != nil {
+		for i, v := range s.WeightedTargets {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "WeightedTargets", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TcpRouteAction) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.WeightedTargets) > 0 {
+		v := s.WeightedTargets
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "weightedTargets", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UntagResourceInput
+type UntagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource to delete tags from.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `location:"querystring" locationName:"resourceArn" type:"string" required:"true"`
+
+	// The keys of the tags to be removed.
+	//
+	// TagKeys is a required field
+	TagKeys []string `locationName:"tagKeys" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if s.TagKeys == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tagKeys", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "resourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UntagResourceOutput
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UntagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateMeshInput
+type UpdateMeshInput struct {
+	_ struct{} `type:"structure"`
+
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of therequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
+
+	// The name of the service mesh to update.
+	//
+	// MeshName is a required field
+	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
+
+	// The service mesh specification to apply.
+	Spec *MeshSpec `locationName:"spec" type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateMeshInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateMeshInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateMeshInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateMeshInput"}
+
+	if s.MeshName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MeshName"))
+	}
+	if s.MeshName != nil && len(*s.MeshName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MeshName", 1))
+	}
+	if s.Spec != nil {
+		if err := s.Spec.Validate(); err != nil {
+			invalidParams.AddNested("Spec", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateMeshInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	var ClientToken string
+	if s.ClientToken != nil {
+		ClientToken = *s.ClientToken
+	} else {
+		ClientToken = protocol.GetIdempotencyToken()
+	}
+	{
+		v := ClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Spec != nil {
+		v := s.Spec
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "spec", v, metadata)
+	}
+	if s.MeshName != nil {
+		v := *s.MeshName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateMeshOutput
+type UpdateMeshOutput struct {
+	_ struct{} `type:"structure" payload:"Mesh"`
+
+	responseMetadata aws.Response
+
+	// An object representing a service mesh returned by a describe operation.
+	//
+	// Mesh is a required field
+	Mesh *MeshData `locationName:"mesh" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateMeshOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateMeshOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateMeshOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateMeshOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Mesh != nil {
+		v := s.Mesh
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "mesh", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateRouteInput
 type UpdateRouteInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3989,7 +6311,7 @@ type UpdateRouteInput struct {
 	// of therequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
-	// The name of the service mesh in which the route resides.
+	// The name of the service mesh that the route resides in.
 	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
@@ -4004,7 +6326,7 @@ type UpdateRouteInput struct {
 	// Spec is a required field
 	Spec *RouteSpec `locationName:"spec" type:"structure" required:"true"`
 
-	// The name of the virtual router with which the route is associated.
+	// The name of the virtual router that the route is associated with.
 	//
 	// VirtualRouterName is a required field
 	VirtualRouterName *string `location:"uri" locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
@@ -4103,14 +6425,16 @@ func (s UpdateRouteInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/UpdateRouteOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateRouteOutput
 type UpdateRouteOutput struct {
 	_ struct{} `type:"structure" payload:"Route"`
 
 	responseMetadata aws.Response
 
 	// A full description of the route that was updated.
-	Route *RouteData `locationName:"route" type:"structure"`
+	//
+	// Route is a required field
+	Route *RouteData `locationName:"route" type:"structure" required:"true"`
 }
 
 // String returns the string representation
@@ -4139,7 +6463,7 @@ func (s UpdateRouteOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/UpdateVirtualNodeInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualNodeInput
 type UpdateVirtualNodeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4147,7 +6471,7 @@ type UpdateVirtualNodeInput struct {
 	// of therequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
-	// The name of the service mesh in which the virtual node resides.
+	// The name of the service mesh that the virtual node resides in.
 	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
@@ -4244,14 +6568,16 @@ func (s UpdateVirtualNodeInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/UpdateVirtualNodeOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualNodeOutput
 type UpdateVirtualNodeOutput struct {
 	_ struct{} `type:"structure" payload:"VirtualNode"`
 
 	responseMetadata aws.Response
 
 	// A full description of the virtual node that was updated.
-	VirtualNode *VirtualNodeData `locationName:"virtualNode" type:"structure"`
+	//
+	// VirtualNode is a required field
+	VirtualNode *VirtualNodeData `locationName:"virtualNode" type:"structure" required:"true"`
 }
 
 // String returns the string representation
@@ -4280,7 +6606,7 @@ func (s UpdateVirtualNodeOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/UpdateVirtualRouterInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualRouterInput
 type UpdateVirtualRouterInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4288,7 +6614,7 @@ type UpdateVirtualRouterInput struct {
 	// of therequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
-	// The name of the service mesh in which the virtual router resides.
+	// The name of the service mesh that the virtual router resides in.
 	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
@@ -4336,6 +6662,11 @@ func (s *UpdateVirtualRouterInput) Validate() error {
 	if s.VirtualRouterName != nil && len(*s.VirtualRouterName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("VirtualRouterName", 1))
 	}
+	if s.Spec != nil {
+		if err := s.Spec.Validate(); err != nil {
+			invalidParams.AddNested("Spec", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4380,14 +6711,16 @@ func (s UpdateVirtualRouterInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/UpdateVirtualRouterOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualRouterOutput
 type UpdateVirtualRouterOutput struct {
 	_ struct{} `type:"structure" payload:"VirtualRouter"`
 
 	responseMetadata aws.Response
 
 	// A full description of the virtual router that was updated.
-	VirtualRouter *VirtualRouterData `locationName:"virtualRouter" type:"structure"`
+	//
+	// VirtualRouter is a required field
+	VirtualRouter *VirtualRouterData `locationName:"virtualRouter" type:"structure" required:"true"`
 }
 
 // String returns the string representation
@@ -4416,24 +6749,170 @@ func (s UpdateVirtualRouterOutput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualServiceInput
+type UpdateVirtualServiceInput struct {
+	_ struct{} `type:"structure"`
+
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of therequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
+
+	// The name of the service mesh that the virtual service resides in.
+	//
+	// MeshName is a required field
+	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
+
+	// The new virtual service specification to apply. This overwrites the existing
+	// data.
+	//
+	// Spec is a required field
+	Spec *VirtualServiceSpec `locationName:"spec" type:"structure" required:"true"`
+
+	// The name of the virtual service to update.
+	//
+	// VirtualServiceName is a required field
+	VirtualServiceName *string `location:"uri" locationName:"virtualServiceName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateVirtualServiceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateVirtualServiceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateVirtualServiceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateVirtualServiceInput"}
+
+	if s.MeshName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MeshName"))
+	}
+	if s.MeshName != nil && len(*s.MeshName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MeshName", 1))
+	}
+
+	if s.Spec == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Spec"))
+	}
+
+	if s.VirtualServiceName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VirtualServiceName"))
+	}
+	if s.Spec != nil {
+		if err := s.Spec.Validate(); err != nil {
+			invalidParams.AddNested("Spec", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateVirtualServiceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	var ClientToken string
+	if s.ClientToken != nil {
+		ClientToken = *s.ClientToken
+	} else {
+		ClientToken = protocol.GetIdempotencyToken()
+	}
+	{
+		v := ClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Spec != nil {
+		v := s.Spec
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "spec", v, metadata)
+	}
+	if s.MeshName != nil {
+		v := *s.MeshName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VirtualServiceName != nil {
+		v := *s.VirtualServiceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "virtualServiceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/UpdateVirtualServiceOutput
+type UpdateVirtualServiceOutput struct {
+	_ struct{} `type:"structure" payload:"VirtualService"`
+
+	responseMetadata aws.Response
+
+	// A full description of the virtual service that was updated.
+	//
+	// VirtualService is a required field
+	VirtualService *VirtualServiceData `locationName:"virtualService" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateVirtualServiceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateVirtualServiceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateVirtualServiceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateVirtualServiceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.VirtualService != nil {
+		v := s.VirtualService
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "virtualService", v, metadata)
+	}
+	return nil
+}
+
 // An object representing a virtual node returned by a describe operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/VirtualNodeData
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualNodeData
 type VirtualNodeData struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh in which the virtual node resides.
+	// The name of the service mesh that the virtual node resides in.
 	//
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
 	// The associated metadata for the virtual node.
-	Metadata *ResourceMetadata `locationName:"metadata" type:"structure"`
+	//
+	// Metadata is a required field
+	Metadata *ResourceMetadata `locationName:"metadata" type:"structure" required:"true"`
 
 	// The specifications of the virtual node.
-	Spec *VirtualNodeSpec `locationName:"spec" type:"structure"`
+	//
+	// Spec is a required field
+	Spec *VirtualNodeSpec `locationName:"spec" type:"structure" required:"true"`
 
 	// The current status for the virtual node.
-	Status *VirtualNodeStatus `locationName:"status" type:"structure"`
+	//
+	// Status is a required field
+	Status *VirtualNodeStatus `locationName:"status" type:"structure" required:"true"`
 
 	// The name of the virtual node.
 	//
@@ -4487,18 +6966,24 @@ func (s VirtualNodeData) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a virtual node returned by a list operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/VirtualNodeRef
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualNodeRef
 type VirtualNodeRef struct {
 	_ struct{} `type:"structure"`
 
 	// The full Amazon Resource Name (ARN) for the virtual node.
-	Arn *string `locationName:"arn" type:"string"`
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" type:"string" required:"true"`
 
-	// The name of the service mesh in which the virtual node resides.
-	MeshName *string `locationName:"meshName" min:"1" type:"string"`
+	// The name of the service mesh that the virtual node resides in.
+	//
+	// MeshName is a required field
+	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
 	// The name of the virtual node.
-	VirtualNodeName *string `locationName:"virtualNodeName" min:"1" type:"string"`
+	//
+	// VirtualNodeName is a required field
+	VirtualNodeName *string `locationName:"virtualNodeName" min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -4534,19 +7019,72 @@ func (s VirtualNodeRef) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object representing a virtual node service provider.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualNodeServiceProvider
+type VirtualNodeServiceProvider struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the virtual node that is acting as a service provider.
+	//
+	// VirtualNodeName is a required field
+	VirtualNodeName *string `locationName:"virtualNodeName" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s VirtualNodeServiceProvider) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VirtualNodeServiceProvider) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualNodeServiceProvider) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualNodeServiceProvider"}
+
+	if s.VirtualNodeName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VirtualNodeName"))
+	}
+	if s.VirtualNodeName != nil && len(*s.VirtualNodeName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("VirtualNodeName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualNodeServiceProvider) MarshalFields(e protocol.FieldEncoder) error {
+	if s.VirtualNodeName != nil {
+		v := *s.VirtualNodeName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "virtualNodeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // An object representing the specification of a virtual node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/VirtualNodeSpec
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualNodeSpec
 type VirtualNodeSpec struct {
 	_ struct{} `type:"structure"`
 
-	// The backends to which the virtual node is expected to send outbound traffic.
-	Backends []string `locationName:"backends" type:"list"`
+	// The backends that the virtual node is expected to send outbound traffic to.
+	Backends []Backend `locationName:"backends" type:"list"`
 
-	// The listeners from which the virtual node is expected to receive inbound
-	// traffic.
+	// The listeners that the virtual node is expected to receive inbound traffic
+	// from. Currently only one listener is supported per virtual node.
 	Listeners []Listener `locationName:"listeners" type:"list"`
 
-	// The service discovery information for the virtual node.
+	// The inbound and outbound access logging information for the virtual node.
+	Logging *Logging `locationName:"logging" type:"structure"`
+
+	// The service discovery information for the virtual node. If your virtual node
+	// does not expect ingress traffic, you can omit this parameter.
 	ServiceDiscovery *ServiceDiscovery `locationName:"serviceDiscovery" type:"structure"`
 }
 
@@ -4563,11 +7101,28 @@ func (s VirtualNodeSpec) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VirtualNodeSpec) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "VirtualNodeSpec"}
+	if s.Backends != nil {
+		for i, v := range s.Backends {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Backends", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 	if s.Listeners != nil {
 		for i, v := range s.Listeners {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Listeners", i), err.(aws.ErrInvalidParams))
 			}
+		}
+	}
+	if s.Logging != nil {
+		if err := s.Logging.Validate(); err != nil {
+			invalidParams.AddNested("Logging", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.ServiceDiscovery != nil {
+		if err := s.ServiceDiscovery.Validate(); err != nil {
+			invalidParams.AddNested("ServiceDiscovery", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4586,7 +7141,7 @@ func (s VirtualNodeSpec) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "backends", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+			ls0.ListAddFields(v1)
 		}
 		ls0.End()
 
@@ -4603,6 +7158,12 @@ func (s VirtualNodeSpec) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
+	if s.Logging != nil {
+		v := s.Logging
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "logging", v, metadata)
+	}
 	if s.ServiceDiscovery != nil {
 		v := s.ServiceDiscovery
 
@@ -4613,12 +7174,14 @@ func (s VirtualNodeSpec) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the current status of the virtual node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/VirtualNodeStatus
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualNodeStatus
 type VirtualNodeStatus struct {
 	_ struct{} `type:"structure"`
 
 	// The current status of the virtual node.
-	Status VirtualNodeStatusCode `locationName:"status" type:"string" enum:"true"`
+	//
+	// Status is a required field
+	Status VirtualNodeStatusCode `locationName:"status" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4643,23 +7206,29 @@ func (s VirtualNodeStatus) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a virtual router returned by a describe operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/VirtualRouterData
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualRouterData
 type VirtualRouterData struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh in which the virtual router resides.
+	// The name of the service mesh that the virtual router resides in.
 	//
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
 	// The associated metadata for the virtual router.
-	Metadata *ResourceMetadata `locationName:"metadata" type:"structure"`
+	//
+	// Metadata is a required field
+	Metadata *ResourceMetadata `locationName:"metadata" type:"structure" required:"true"`
 
 	// The specifications of the virtual router.
-	Spec *VirtualRouterSpec `locationName:"spec" type:"structure"`
+	//
+	// Spec is a required field
+	Spec *VirtualRouterSpec `locationName:"spec" type:"structure" required:"true"`
 
 	// The current status of the virtual router.
-	Status *VirtualRouterStatus `locationName:"status" type:"structure"`
+	//
+	// Status is a required field
+	Status *VirtualRouterStatus `locationName:"status" type:"structure" required:"true"`
 
 	// The name of the virtual router.
 	//
@@ -4712,19 +7281,76 @@ func (s VirtualRouterData) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object representing a virtual router listener.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualRouterListener
+type VirtualRouterListener struct {
+	_ struct{} `type:"structure"`
+
+	// An object representing a virtual node or virtual router listener port mapping.
+	//
+	// PortMapping is a required field
+	PortMapping *PortMapping `locationName:"portMapping" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s VirtualRouterListener) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VirtualRouterListener) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualRouterListener) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualRouterListener"}
+
+	if s.PortMapping == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PortMapping"))
+	}
+	if s.PortMapping != nil {
+		if err := s.PortMapping.Validate(); err != nil {
+			invalidParams.AddNested("PortMapping", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualRouterListener) MarshalFields(e protocol.FieldEncoder) error {
+	if s.PortMapping != nil {
+		v := s.PortMapping
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "portMapping", v, metadata)
+	}
+	return nil
+}
+
 // An object representing a virtual router returned by a list operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/VirtualRouterRef
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualRouterRef
 type VirtualRouterRef struct {
 	_ struct{} `type:"structure"`
 
 	// The full Amazon Resource Name (ARN) for the virtual router.
-	Arn *string `locationName:"arn" type:"string"`
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" type:"string" required:"true"`
 
-	// The name of the service mesh in which the virtual router resides.
-	MeshName *string `locationName:"meshName" min:"1" type:"string"`
+	// The name of the service mesh that the virtual router resides in.
+	//
+	// MeshName is a required field
+	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
 	// The name of the virtual router.
-	VirtualRouterName *string `locationName:"virtualRouterName" min:"1" type:"string"`
+	//
+	// VirtualRouterName is a required field
+	VirtualRouterName *string `locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -4760,13 +7386,65 @@ func (s VirtualRouterRef) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object representing a virtual node service provider.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualRouterServiceProvider
+type VirtualRouterServiceProvider struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the virtual router that is acting as a service provider.
+	//
+	// VirtualRouterName is a required field
+	VirtualRouterName *string `locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s VirtualRouterServiceProvider) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VirtualRouterServiceProvider) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualRouterServiceProvider) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualRouterServiceProvider"}
+
+	if s.VirtualRouterName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VirtualRouterName"))
+	}
+	if s.VirtualRouterName != nil && len(*s.VirtualRouterName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("VirtualRouterName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualRouterServiceProvider) MarshalFields(e protocol.FieldEncoder) error {
+	if s.VirtualRouterName != nil {
+		v := *s.VirtualRouterName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "virtualRouterName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // An object representing the specification of a virtual router.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/VirtualRouterSpec
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualRouterSpec
 type VirtualRouterSpec struct {
 	_ struct{} `type:"structure"`
 
-	// The service mesh service names to associate with the virtual router.
-	ServiceNames []string `locationName:"serviceNames" type:"list"`
+	// The listeners that the virtual router is expected to receive inbound traffic
+	// from. Currently only one listener is supported per virtual router.
+	//
+	// Listeners is a required field
+	Listeners []VirtualRouterListener `locationName:"listeners" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -4779,16 +7457,40 @@ func (s VirtualRouterSpec) GoString() string {
 	return s.String()
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualRouterSpec) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualRouterSpec"}
+
+	if s.Listeners == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Listeners"))
+	}
+	if s.Listeners != nil && len(s.Listeners) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Listeners", 1))
+	}
+	if s.Listeners != nil {
+		for i, v := range s.Listeners {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Listeners", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s VirtualRouterSpec) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ServiceNames) > 0 {
-		v := s.ServiceNames
+	if len(s.Listeners) > 0 {
+		v := s.Listeners
 
 		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "serviceNames", metadata)
+		ls0 := e.List(protocol.BodyTarget, "listeners", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+			ls0.ListAddFields(v1)
 		}
 		ls0.End()
 
@@ -4797,12 +7499,14 @@ func (s VirtualRouterSpec) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the status of a virtual router.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/VirtualRouterStatus
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualRouterStatus
 type VirtualRouterStatus struct {
 	_ struct{} `type:"structure"`
 
 	// The current status of the virtual router.
-	Status VirtualRouterStatusCode `locationName:"status" type:"string" enum:"true"`
+	//
+	// Status is a required field
+	Status VirtualRouterStatusCode `locationName:"status" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -4826,19 +7530,336 @@ func (s VirtualRouterStatus) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object representing a virtual service backend for a virtual node.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualServiceBackend
+type VirtualServiceBackend struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the virtual service that is acting as a virtual node backend.
+	//
+	// VirtualServiceName is a required field
+	VirtualServiceName *string `locationName:"virtualServiceName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s VirtualServiceBackend) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VirtualServiceBackend) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualServiceBackend) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualServiceBackend"}
+
+	if s.VirtualServiceName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VirtualServiceName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualServiceBackend) MarshalFields(e protocol.FieldEncoder) error {
+	if s.VirtualServiceName != nil {
+		v := *s.VirtualServiceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "virtualServiceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object representing a virtual service returned by a describe operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualServiceData
+type VirtualServiceData struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the service mesh that the virtual service resides in.
+	//
+	// MeshName is a required field
+	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
+
+	// An object representing metadata for a resource.
+	//
+	// Metadata is a required field
+	Metadata *ResourceMetadata `locationName:"metadata" type:"structure" required:"true"`
+
+	// The specifications of the virtual service.
+	//
+	// Spec is a required field
+	Spec *VirtualServiceSpec `locationName:"spec" type:"structure" required:"true"`
+
+	// The current status of the virtual service.
+	//
+	// Status is a required field
+	Status *VirtualServiceStatus `locationName:"status" type:"structure" required:"true"`
+
+	// The name of the virtual service.
+	//
+	// VirtualServiceName is a required field
+	VirtualServiceName *string `locationName:"virtualServiceName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s VirtualServiceData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VirtualServiceData) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualServiceData) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MeshName != nil {
+		v := *s.MeshName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Metadata != nil {
+		v := s.Metadata
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "metadata", v, metadata)
+	}
+	if s.Spec != nil {
+		v := s.Spec
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "spec", v, metadata)
+	}
+	if s.Status != nil {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "status", v, metadata)
+	}
+	if s.VirtualServiceName != nil {
+		v := *s.VirtualServiceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "virtualServiceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object representing the provider for a virtual service.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualServiceProvider
+type VirtualServiceProvider struct {
+	_ struct{} `type:"structure"`
+
+	// The virtual node associated with a virtual service.
+	VirtualNode *VirtualNodeServiceProvider `locationName:"virtualNode" type:"structure"`
+
+	// The virtual router associated with a virtual service.
+	VirtualRouter *VirtualRouterServiceProvider `locationName:"virtualRouter" type:"structure"`
+}
+
+// String returns the string representation
+func (s VirtualServiceProvider) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VirtualServiceProvider) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualServiceProvider) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualServiceProvider"}
+	if s.VirtualNode != nil {
+		if err := s.VirtualNode.Validate(); err != nil {
+			invalidParams.AddNested("VirtualNode", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.VirtualRouter != nil {
+		if err := s.VirtualRouter.Validate(); err != nil {
+			invalidParams.AddNested("VirtualRouter", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualServiceProvider) MarshalFields(e protocol.FieldEncoder) error {
+	if s.VirtualNode != nil {
+		v := s.VirtualNode
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "virtualNode", v, metadata)
+	}
+	if s.VirtualRouter != nil {
+		v := s.VirtualRouter
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "virtualRouter", v, metadata)
+	}
+	return nil
+}
+
+// An object representing a virtual service returned by a list operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualServiceRef
+type VirtualServiceRef struct {
+	_ struct{} `type:"structure"`
+
+	// The full Amazon Resource Name (ARN) for the virtual service.
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" type:"string" required:"true"`
+
+	// The name of the service mesh that the virtual service resides in.
+	//
+	// MeshName is a required field
+	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
+
+	// The name of the virtual service.
+	//
+	// VirtualServiceName is a required field
+	VirtualServiceName *string `locationName:"virtualServiceName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s VirtualServiceRef) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VirtualServiceRef) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualServiceRef) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MeshName != nil {
+		v := *s.MeshName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VirtualServiceName != nil {
+		v := *s.VirtualServiceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "virtualServiceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object representing the specification of a virtual service.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualServiceSpec
+type VirtualServiceSpec struct {
+	_ struct{} `type:"structure"`
+
+	// The App Mesh object that is acting as the provider for a virtual service.
+	// You can specify a single virtual node or virtual router.
+	Provider *VirtualServiceProvider `locationName:"provider" type:"structure"`
+}
+
+// String returns the string representation
+func (s VirtualServiceSpec) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VirtualServiceSpec) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualServiceSpec) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualServiceSpec"}
+	if s.Provider != nil {
+		if err := s.Provider.Validate(); err != nil {
+			invalidParams.AddNested("Provider", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualServiceSpec) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Provider != nil {
+		v := s.Provider
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "provider", v, metadata)
+	}
+	return nil
+}
+
+// An object representing the status of a virtual service.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/VirtualServiceStatus
+type VirtualServiceStatus struct {
+	_ struct{} `type:"structure"`
+
+	// The current status of the virtual service.
+	//
+	// Status is a required field
+	Status VirtualServiceStatusCode `locationName:"status" type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s VirtualServiceStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VirtualServiceStatus) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualServiceStatus) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // An object representing a target and its relative weight. Traffic is distributed
 // across targets according to their relative weight. For example, a weighted
 // target with a relative weight of 50 receives five times as much traffic as
 // one with a relative weight of 10.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2018-10-01/WeightedTarget
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/WeightedTarget
 type WeightedTarget struct {
 	_ struct{} `type:"structure"`
 
 	// The virtual node to associate with the weighted target.
-	VirtualNode *string `locationName:"virtualNode" min:"1" type:"string"`
+	//
+	// VirtualNode is a required field
+	VirtualNode *string `locationName:"virtualNode" min:"1" type:"string" required:"true"`
 
 	// The relative weight of the weighted target.
-	Weight *int64 `locationName:"weight" type:"integer"`
+	//
+	// Weight is a required field
+	Weight *int64 `locationName:"weight" type:"integer" required:"true"`
 }
 
 // String returns the string representation
@@ -4854,8 +7875,16 @@ func (s WeightedTarget) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *WeightedTarget) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "WeightedTarget"}
+
+	if s.VirtualNode == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VirtualNode"))
+	}
 	if s.VirtualNode != nil && len(*s.VirtualNode) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("VirtualNode", 1))
+	}
+
+	if s.Weight == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Weight"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4879,6 +7908,23 @@ func (s WeightedTarget) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "weight", protocol.Int64Value(v), metadata)
 	}
 	return nil
+}
+
+type EgressFilterType string
+
+// Enum values for EgressFilterType
+const (
+	EgressFilterTypeAllowAll EgressFilterType = "ALLOW_ALL"
+	EgressFilterTypeDropAll  EgressFilterType = "DROP_ALL"
+)
+
+func (enum EgressFilterType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EgressFilterType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
 }
 
 type MeshStatusCode string
@@ -4966,6 +8012,24 @@ func (enum VirtualRouterStatusCode) MarshalValue() (string, error) {
 }
 
 func (enum VirtualRouterStatusCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type VirtualServiceStatusCode string
+
+// Enum values for VirtualServiceStatusCode
+const (
+	VirtualServiceStatusCodeActive   VirtualServiceStatusCode = "ACTIVE"
+	VirtualServiceStatusCodeDeleted  VirtualServiceStatusCode = "DELETED"
+	VirtualServiceStatusCodeInactive VirtualServiceStatusCode = "INACTIVE"
+)
+
+func (enum VirtualServiceStatusCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VirtualServiceStatusCode) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

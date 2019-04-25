@@ -48,7 +48,7 @@ func (r AddTagsToCertificateRequest) Send(ctx context.Context) (*AddTagsToCertif
 // if you want to specify a relationship among those resources. For example,
 // you can add the same tag to an ACM certificate and an Elastic Load Balancing
 // load balancer to indicate that they are both used by the same website. For
-// more information, see Tagging ACM certificates (http://docs.aws.amazon.com/acm/latest/userguide/tags.html).
+// more information, see Tagging ACM certificates (https://docs.aws.amazon.com/acm/latest/userguide/tags.html).
 //
 // To remove one or more tags, use the RemoveTagsFromCertificate action. To
 // view all of the tags that have been applied to the certificate, use the ListTagsForCertificate
@@ -333,15 +333,15 @@ func (r ImportCertificateRequest) Send(ctx context.Context) (*ImportCertificateO
 // AWS Certificate Manager.
 //
 // Imports a certificate into AWS Certificate Manager (ACM) to use with services
-// that are integrated with ACM. Note that integrated services (http://docs.aws.amazon.com/acm/latest/userguide/acm-services.html)
+// that are integrated with ACM. Note that integrated services (https://docs.aws.amazon.com/acm/latest/userguide/acm-services.html)
 // allow only certificate types and keys they support to be associated with
 // their resources. Further, their support differs depending on whether the
 // certificate is imported into IAM or into ACM. For more information, see the
 // documentation for each service. For more information about importing certificates
-// into ACM, see Importing Certificates (http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html)
+// into ACM, see Importing Certificates (https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html)
 // in the AWS Certificate Manager User Guide.
 //
-// ACM does not provide managed renewal (http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
+// ACM does not provide managed renewal (https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
 // for certificates that you import.
 //
 // Note the following guidelines when importing third party certificates:
@@ -381,7 +381,7 @@ func (r ImportCertificateRequest) Send(ctx context.Context) (*ImportCertificateO
 //    certificate, the certificate chain, and the private key files in the manner
 //    required by the programming language you're using.
 //
-// This operation returns the Amazon Resource Name (ARN) (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+// This operation returns the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 // of the imported certificate.
 //
 //    // Example sending a request using the ImportCertificateRequest method.
@@ -630,6 +630,64 @@ func (c *ACM) RemoveTagsFromCertificateRequest(input *RemoveTagsFromCertificateI
 	return RemoveTagsFromCertificateRequest{Request: req, Input: input, Copy: c.RemoveTagsFromCertificateRequest}
 }
 
+const opRenewCertificate = "RenewCertificate"
+
+// RenewCertificateRequest is a API request type for the RenewCertificate API operation.
+type RenewCertificateRequest struct {
+	*aws.Request
+	Input *RenewCertificateInput
+	Copy  func(*RenewCertificateInput) RenewCertificateRequest
+}
+
+// Send marshals and sends the RenewCertificate API request.
+func (r RenewCertificateRequest) Send(ctx context.Context) (*RenewCertificateOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RenewCertificateOutput), nil
+}
+
+// RenewCertificateRequest returns a request value for making API operation for
+// AWS Certificate Manager.
+//
+// Renews an eligable ACM certificate. At this time, only exported private certificates
+// can be renewed with this operation. In order to renew your ACM PCA certificates
+// with ACM, you must first grant the ACM service principal permission to do
+// so (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaPermissions.html).
+// For more information, see Testing Managed Renewal (https://docs.aws.amazon.com/acm/latest/userguide/manual-renewal.html)
+// in the ACM User Guide.
+//
+//    // Example sending a request using the RenewCertificateRequest method.
+//    req := client.RenewCertificateRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RenewCertificate
+func (c *ACM) RenewCertificateRequest(input *RenewCertificateInput) RenewCertificateRequest {
+	op := &aws.Operation{
+		Name:       opRenewCertificate,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RenewCertificateInput{}
+	}
+
+	output := &RenewCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return RenewCertificateRequest{Request: req, Input: input, Copy: c.RenewCertificateRequest}
+}
+
 const opRequestCertificate = "RequestCertificate"
 
 // RequestCertificateRequest is a API request type for the RequestCertificate API operation.
@@ -661,8 +719,8 @@ func (r RequestCertificateRequest) Send(ctx context.Context) (*RequestCertificat
 // If you are requesting a private certificate, domain validation is not required.
 // If you are requesting a public certificate, each domain name that you specify
 // must be validated to verify that you own or control the domain. You can use
-// DNS validation (http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html)
-// or email validation (http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html).
+// DNS validation (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html)
+// or email validation (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html).
 // We recommend that you use DNS validation. ACM issues public certificates
 // after receiving approval from the domain owner.
 //
@@ -725,7 +783,7 @@ func (r ResendValidationEmailRequest) Send(ctx context.Context) (*ResendValidati
 // more than 72 hours have elapsed since your original request or since your
 // last attempt to resend validation mail, you must request a new certificate.
 // For more information about setting up your contact email addresses, see Configure
-// Email for your Domain (http://docs.aws.amazon.com/acm/latest/userguide/setup-email.html).
+// Email for your Domain (https://docs.aws.amazon.com/acm/latest/userguide/setup-email.html).
 //
 //    // Example sending a request using the ResendValidationEmailRequest method.
 //    req := client.ResendValidationEmailRequest(params)
@@ -781,7 +839,7 @@ func (r UpdateCertificateOptionsRequest) Send(ctx context.Context) (*UpdateCerti
 // Updates a certificate. Currently, you can use this function to specify whether
 // to opt in to or out of recording your certificate in a certificate transparency
 // log. For more information, see  Opting Out of Certificate Transparency Logging
-// (http://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency).
+// (https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency).
 //
 //    // Example sending a request using the UpdateCertificateOptionsRequest method.
 //    req := client.UpdateCertificateOptionsRequest(params)
@@ -821,7 +879,7 @@ type AddTagsToCertificateInput struct {
 	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
 	//
 	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// CertificateArn is a required field
 	CertificateArn *string `min:"20" type:"string" required:"true"`
@@ -902,7 +960,7 @@ type CertificateDetail struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the certificate. For more information about
-	// ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the AWS General Reference.
 	CertificateArn *string `min:"20" type:"string"`
 
@@ -932,7 +990,7 @@ type CertificateDetail struct {
 
 	// The reason the certificate request failed. This value exists only when the
 	// certificate status is FAILED. For more information, see Certificate Request
-	// Failed (http://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed)
+	// Failed (https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed)
 	// in the AWS Certificate Manager User Guide.
 	FailureReason FailureReason `type:"string" enum:"true"`
 
@@ -973,10 +1031,12 @@ type CertificateDetail struct {
 	// secure.
 	Options *CertificateOptions `type:"structure"`
 
-	// Specifies whether the certificate is eligible for renewal.
+	// Specifies whether the certificate is eligible for renewal. At this time,
+	// only exported private certificates can be renewed with the RenewCertificate
+	// command.
 	RenewalEligibility RenewalEligibility `type:"string" enum:"true"`
 
-	// Contains information about the status of ACM's managed renewal (http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
+	// Contains information about the status of ACM's managed renewal (https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
 	// for the certificate. This field exists only when the certificate type is
 	// AMAZON_ISSUED.
 	RenewalSummary *RenewalSummary `type:"structure"`
@@ -1011,10 +1071,10 @@ type CertificateDetail struct {
 
 	// The source of the certificate. For certificates provided by ACM, this value
 	// is AMAZON_ISSUED. For certificates that you imported with ImportCertificate,
-	// this value is IMPORTED. ACM does not provide managed renewal (http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
+	// this value is IMPORTED. ACM does not provide managed renewal (https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
 	// for imported certificates. For more information about the differences between
 	// certificates that you import and those that ACM provides, see Importing Certificates
-	// (http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html)
+	// (https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html)
 	// in the AWS Certificate Manager User Guide.
 	Type CertificateType `type:"string" enum:"true"`
 }
@@ -1035,7 +1095,7 @@ func (s CertificateDetail) GoString() string {
 // be recorded in a log. Certificates that are not logged typically generate
 // a browser error. Transparency makes it possible for you to detect SSL/TLS
 // certificates that have been mistakenly or maliciously issued for your domain.
-// For general information, see Certificate Transparency Logging (http://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency).
+// For general information, see Certificate Transparency Logging (https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateOptions
 type CertificateOptions struct {
 	_ struct{} `type:"structure"`
@@ -1065,7 +1125,7 @@ type CertificateSummary struct {
 	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
 	//
 	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	CertificateArn *string `min:"20" type:"string"`
 
 	// Fully qualified domain name (FQDN), such as www.example.com or example.com,
@@ -1093,7 +1153,7 @@ type DeleteCertificateInput struct {
 	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
 	//
 	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// CertificateArn is a required field
 	CertificateArn *string `min:"20" type:"string" required:"true"`
@@ -1158,7 +1218,7 @@ type DescribeCertificateInput struct {
 	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
 	//
 	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// CertificateArn is a required field
 	CertificateArn *string `min:"20" type:"string" required:"true"`
@@ -1228,7 +1288,7 @@ type DomainValidation struct {
 	DomainName *string `min:"1" type:"string" required:"true"`
 
 	// Contains the CNAME record that you add to your DNS database for domain validation.
-	// For more information, see Use DNS to Validate Domain Ownership (http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html).
+	// For more information, see Use DNS to Validate Domain Ownership (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html).
 	ResourceRecord *ResourceRecord `type:"structure"`
 
 	// The domain name that ACM used to send domain validation emails.
@@ -1398,7 +1458,8 @@ type ExportCertificateOutput struct {
 	// that you are exporting.
 	CertificateChain *string `min:"1" type:"string"`
 
-	// The PEM-encoded private key associated with the public key in the certificate.
+	// The encrypted private key associated with the public key in the certificate.
+	// The key is output in PKCS #8 format and is base64 PEM-encoded.
 	PrivateKey *string `min:"1" type:"string"`
 }
 
@@ -1496,7 +1557,7 @@ type GetCertificateInput struct {
 	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
 	//
 	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// CertificateArn is a required field
 	CertificateArn *string `min:"20" type:"string" required:"true"`
@@ -1570,7 +1631,7 @@ type ImportCertificateInput struct {
 	// Certificate is a required field
 	Certificate []byte `min:"1" type:"blob" required:"true"`
 
-	// The Amazon Resource Name (ARN) (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of an imported certificate to replace. To import a new certificate, omit
 	// this field.
 	CertificateArn *string `min:"20" type:"string"`
@@ -1634,7 +1695,7 @@ type ImportCertificateOutput struct {
 
 	responseMetadata aws.Response
 
-	// The Amazon Resource Name (ARN) (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of the imported certificate.
 	CertificateArn *string `min:"20" type:"string"`
 }
@@ -1761,7 +1822,7 @@ type ListTagsForCertificateInput struct {
 	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
 	//
 	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// CertificateArn is a required field
 	CertificateArn *string `min:"20" type:"string" required:"true"`
@@ -1829,7 +1890,7 @@ type RemoveTagsFromCertificateInput struct {
 	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
 	//
 	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// CertificateArn is a required field
 	CertificateArn *string `min:"20" type:"string" required:"true"`
@@ -1903,7 +1964,72 @@ func (s RemoveTagsFromCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Contains information about the status of ACM's managed renewal (http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RenewCertificateRequest
+type RenewCertificateInput struct {
+	_ struct{} `type:"structure"`
+
+	// String that contains the ARN of the ACM certificate to be renewed. This must
+	// be of the form:
+	//
+	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
+	//
+	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	//
+	// CertificateArn is a required field
+	CertificateArn *string `min:"20" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RenewCertificateInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RenewCertificateInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RenewCertificateInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RenewCertificateInput"}
+
+	if s.CertificateArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
+	}
+	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RenewCertificateOutput
+type RenewCertificateOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s RenewCertificateOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RenewCertificateOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RenewCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Contains information about the status of ACM's managed renewal (https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
 // for the certificate. This structure exists only when the certificate type
 // is AMAZON_ISSUED.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RenewalSummary
@@ -1911,7 +2037,7 @@ type RenewalSummary struct {
 	_ struct{} `type:"structure"`
 
 	// Contains information about the validation of each domain name in the certificate,
-	// as it pertains to ACM's managed renewal (http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html).
+	// as it pertains to ACM's managed renewal (https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html).
 	// This is different from the initial validation that occurs as a result of
 	// the RequestCertificate request. This field exists only when the certificate
 	// type is AMAZON_ISSUED.
@@ -1919,11 +2045,19 @@ type RenewalSummary struct {
 	// DomainValidationOptions is a required field
 	DomainValidationOptions []DomainValidation `min:"1" type:"list" required:"true"`
 
-	// The status of ACM's managed renewal (http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
+	// The status of ACM's managed renewal (https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
 	// of the certificate.
 	//
 	// RenewalStatus is a required field
 	RenewalStatus RenewalStatus `type:"string" required:"true" enum:"true"`
+
+	// The reason that a renewal request was unsuccessful.
+	RenewalStatusReason FailureReason `type:"string" enum:"true"`
+
+	// The time at which the renewal summary was last updated.
+	//
+	// UpdatedAt is a required field
+	UpdatedAt *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
 }
 
 // String returns the string representation
@@ -1944,7 +2078,7 @@ type RequestCertificateInput struct {
 	// that will be used to issue the certificate. If you do not provide an ARN
 	// and you are trying to request a private certificate, ACM will attempt to
 	// issue a public certificate. For more information about private CAs, see the
-	// AWS Certificate Manager Private Certificate Authority (PCA) (http://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html)
+	// AWS Certificate Manager Private Certificate Authority (PCA) (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html)
 	// user guide. The ARN must have the following form:
 	//
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
@@ -1979,7 +2113,7 @@ type RequestCertificateInput struct {
 	// to detect SSL/TLS certificates that have been mistakenly or maliciously issued.
 	// Certificates that have not been logged typically produce an error message
 	// in a browser. For more information, see Opting Out of Certificate Transparency
-	// Logging (http://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency).
+	// Logging (https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency).
 	Options *CertificateOptions `type:"structure"`
 
 	// Additional FQDNs to be included in the Subject Alternative Name extension
@@ -1988,7 +2122,7 @@ type RequestCertificateInput struct {
 	// site by using either name. The maximum number of domain names that you can
 	// add to an ACM certificate is 100. However, the initial limit is 10 domain
 	// names. If you need more than 10 names, you must request a limit increase.
-	// For more information, see Limits (http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html).
+	// For more information, see Limits (https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html).
 	//
 	// The maximum length of a SAN DNS name is 253 octets. The name is made up of
 	// multiple labels separated by periods. No label can be longer than 63 octets.
@@ -2007,8 +2141,8 @@ type RequestCertificateInput struct {
 	SubjectAlternativeNames []string `min:"1" type:"list"`
 
 	// The method you want to use if you are requesting a public certificate to
-	// validate that you own or control domain. You can validate with DNS (http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html)
-	// or validate with email (http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html).
+	// validate that you own or control domain. You can validate with DNS (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html)
+	// or validate with email (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html).
 	// We recommend that you use DNS validation.
 	ValidationMethod ValidationMethod `type:"string" enum:"true"`
 }
@@ -2451,6 +2585,7 @@ const (
 	FailureReasonAdditionalVerificationRequired FailureReason = "ADDITIONAL_VERIFICATION_REQUIRED"
 	FailureReasonDomainNotAllowed               FailureReason = "DOMAIN_NOT_ALLOWED"
 	FailureReasonInvalidPublicDomain            FailureReason = "INVALID_PUBLIC_DOMAIN"
+	FailureReasonDomainValidationDenied         FailureReason = "DOMAIN_VALIDATION_DENIED"
 	FailureReasonCaaError                       FailureReason = "CAA_ERROR"
 	FailureReasonPcaLimitExceeded               FailureReason = "PCA_LIMIT_EXCEEDED"
 	FailureReasonPcaInvalidArn                  FailureReason = "PCA_INVALID_ARN"
@@ -2458,6 +2593,8 @@ const (
 	FailureReasonPcaRequestFailed               FailureReason = "PCA_REQUEST_FAILED"
 	FailureReasonPcaResourceNotFound            FailureReason = "PCA_RESOURCE_NOT_FOUND"
 	FailureReasonPcaInvalidArgs                 FailureReason = "PCA_INVALID_ARGS"
+	FailureReasonPcaInvalidDuration             FailureReason = "PCA_INVALID_DURATION"
+	FailureReasonPcaAccessDenied                FailureReason = "PCA_ACCESS_DENIED"
 	FailureReasonOther                          FailureReason = "OTHER"
 )
 

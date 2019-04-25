@@ -202,6 +202,8 @@ type CognitoIdentityProviderAPI interface {
 
 	ListResourceServersRequest(*cognitoidentityprovider.ListResourceServersInput) cognitoidentityprovider.ListResourceServersRequest
 
+	ListTagsForResourceRequest(*cognitoidentityprovider.ListTagsForResourceInput) cognitoidentityprovider.ListTagsForResourceRequest
+
 	ListUserImportJobsRequest(*cognitoidentityprovider.ListUserImportJobsInput) cognitoidentityprovider.ListUserImportJobsRequest
 
 	ListUserPoolClientsRequest(*cognitoidentityprovider.ListUserPoolClientsInput) cognitoidentityprovider.ListUserPoolClientsRequest
@@ -231,6 +233,10 @@ type CognitoIdentityProviderAPI interface {
 	StartUserImportJobRequest(*cognitoidentityprovider.StartUserImportJobInput) cognitoidentityprovider.StartUserImportJobRequest
 
 	StopUserImportJobRequest(*cognitoidentityprovider.StopUserImportJobInput) cognitoidentityprovider.StopUserImportJobRequest
+
+	TagResourceRequest(*cognitoidentityprovider.TagResourceInput) cognitoidentityprovider.TagResourceRequest
+
+	UntagResourceRequest(*cognitoidentityprovider.UntagResourceInput) cognitoidentityprovider.UntagResourceRequest
 
 	UpdateAuthEventFeedbackRequest(*cognitoidentityprovider.UpdateAuthEventFeedbackInput) cognitoidentityprovider.UpdateAuthEventFeedbackRequest
 

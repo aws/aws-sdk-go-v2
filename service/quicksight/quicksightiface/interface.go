@@ -72,6 +72,8 @@ type QuickSightAPI interface {
 
 	DeleteUserRequest(*quicksight.DeleteUserInput) quicksight.DeleteUserRequest
 
+	DeleteUserByPrincipalIdRequest(*quicksight.DeleteUserByPrincipalIdInput) quicksight.DeleteUserByPrincipalIdRequest
+
 	DescribeGroupRequest(*quicksight.DescribeGroupInput) quicksight.DescribeGroupRequest
 
 	DescribeUserRequest(*quicksight.DescribeUserInput) quicksight.DescribeUserRequest

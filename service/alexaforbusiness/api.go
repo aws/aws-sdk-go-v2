@@ -528,6 +528,57 @@ func (c *AlexaForBusiness) CreateContactRequest(input *CreateContactInput) Creat
 	return CreateContactRequest{Request: req, Input: input, Copy: c.CreateContactRequest}
 }
 
+const opCreateGatewayGroup = "CreateGatewayGroup"
+
+// CreateGatewayGroupRequest is a API request type for the CreateGatewayGroup API operation.
+type CreateGatewayGroupRequest struct {
+	*aws.Request
+	Input *CreateGatewayGroupInput
+	Copy  func(*CreateGatewayGroupInput) CreateGatewayGroupRequest
+}
+
+// Send marshals and sends the CreateGatewayGroup API request.
+func (r CreateGatewayGroupRequest) Send(ctx context.Context) (*CreateGatewayGroupOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateGatewayGroupOutput), nil
+}
+
+// CreateGatewayGroupRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Creates a gateway group with the specified details.
+//
+//    // Example sending a request using the CreateGatewayGroupRequest method.
+//    req := client.CreateGatewayGroupRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateGatewayGroup
+func (c *AlexaForBusiness) CreateGatewayGroupRequest(input *CreateGatewayGroupInput) CreateGatewayGroupRequest {
+	op := &aws.Operation{
+		Name:       opCreateGatewayGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateGatewayGroupInput{}
+	}
+
+	output := &CreateGatewayGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateGatewayGroupRequest{Request: req, Input: input, Copy: c.CreateGatewayGroupRequest}
+}
+
 const opCreateProfile = "CreateProfile"
 
 // CreateProfileRequest is a API request type for the CreateProfile API operation.
@@ -986,6 +1037,57 @@ func (c *AlexaForBusiness) DeleteDeviceRequest(input *DeleteDeviceInput) DeleteD
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteDeviceRequest{Request: req, Input: input, Copy: c.DeleteDeviceRequest}
+}
+
+const opDeleteGatewayGroup = "DeleteGatewayGroup"
+
+// DeleteGatewayGroupRequest is a API request type for the DeleteGatewayGroup API operation.
+type DeleteGatewayGroupRequest struct {
+	*aws.Request
+	Input *DeleteGatewayGroupInput
+	Copy  func(*DeleteGatewayGroupInput) DeleteGatewayGroupRequest
+}
+
+// Send marshals and sends the DeleteGatewayGroup API request.
+func (r DeleteGatewayGroupRequest) Send(ctx context.Context) (*DeleteGatewayGroupOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteGatewayGroupOutput), nil
+}
+
+// DeleteGatewayGroupRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Deletes a gateway group.
+//
+//    // Example sending a request using the DeleteGatewayGroupRequest method.
+//    req := client.DeleteGatewayGroupRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteGatewayGroup
+func (c *AlexaForBusiness) DeleteGatewayGroupRequest(input *DeleteGatewayGroupInput) DeleteGatewayGroupRequest {
+	op := &aws.Operation{
+		Name:       opDeleteGatewayGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteGatewayGroupInput{}
+	}
+
+	output := &DeleteGatewayGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteGatewayGroupRequest{Request: req, Input: input, Copy: c.DeleteGatewayGroupRequest}
 }
 
 const opDeleteProfile = "DeleteProfile"
@@ -1859,6 +1961,160 @@ func (c *AlexaForBusiness) GetDeviceRequest(input *GetDeviceInput) GetDeviceRequ
 	return GetDeviceRequest{Request: req, Input: input, Copy: c.GetDeviceRequest}
 }
 
+const opGetGateway = "GetGateway"
+
+// GetGatewayRequest is a API request type for the GetGateway API operation.
+type GetGatewayRequest struct {
+	*aws.Request
+	Input *GetGatewayInput
+	Copy  func(*GetGatewayInput) GetGatewayRequest
+}
+
+// Send marshals and sends the GetGateway API request.
+func (r GetGatewayRequest) Send(ctx context.Context) (*GetGatewayOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetGatewayOutput), nil
+}
+
+// GetGatewayRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Retrieves the details of a gateway.
+//
+//    // Example sending a request using the GetGatewayRequest method.
+//    req := client.GetGatewayRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetGateway
+func (c *AlexaForBusiness) GetGatewayRequest(input *GetGatewayInput) GetGatewayRequest {
+	op := &aws.Operation{
+		Name:       opGetGateway,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetGatewayInput{}
+	}
+
+	output := &GetGatewayOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetGatewayRequest{Request: req, Input: input, Copy: c.GetGatewayRequest}
+}
+
+const opGetGatewayGroup = "GetGatewayGroup"
+
+// GetGatewayGroupRequest is a API request type for the GetGatewayGroup API operation.
+type GetGatewayGroupRequest struct {
+	*aws.Request
+	Input *GetGatewayGroupInput
+	Copy  func(*GetGatewayGroupInput) GetGatewayGroupRequest
+}
+
+// Send marshals and sends the GetGatewayGroup API request.
+func (r GetGatewayGroupRequest) Send(ctx context.Context) (*GetGatewayGroupOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetGatewayGroupOutput), nil
+}
+
+// GetGatewayGroupRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Retrieves the details of a gateway group.
+//
+//    // Example sending a request using the GetGatewayGroupRequest method.
+//    req := client.GetGatewayGroupRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetGatewayGroup
+func (c *AlexaForBusiness) GetGatewayGroupRequest(input *GetGatewayGroupInput) GetGatewayGroupRequest {
+	op := &aws.Operation{
+		Name:       opGetGatewayGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetGatewayGroupInput{}
+	}
+
+	output := &GetGatewayGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetGatewayGroupRequest{Request: req, Input: input, Copy: c.GetGatewayGroupRequest}
+}
+
+const opGetInvitationConfiguration = "GetInvitationConfiguration"
+
+// GetInvitationConfigurationRequest is a API request type for the GetInvitationConfiguration API operation.
+type GetInvitationConfigurationRequest struct {
+	*aws.Request
+	Input *GetInvitationConfigurationInput
+	Copy  func(*GetInvitationConfigurationInput) GetInvitationConfigurationRequest
+}
+
+// Send marshals and sends the GetInvitationConfiguration API request.
+func (r GetInvitationConfigurationRequest) Send(ctx context.Context) (*GetInvitationConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetInvitationConfigurationOutput), nil
+}
+
+// GetInvitationConfigurationRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Retrieves the configured values for the user enrollment invitation email
+// template.
+//
+//    // Example sending a request using the GetInvitationConfigurationRequest method.
+//    req := client.GetInvitationConfigurationRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetInvitationConfiguration
+func (c *AlexaForBusiness) GetInvitationConfigurationRequest(input *GetInvitationConfigurationInput) GetInvitationConfigurationRequest {
+	op := &aws.Operation{
+		Name:       opGetInvitationConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetInvitationConfigurationInput{}
+	}
+
+	output := &GetInvitationConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetInvitationConfigurationRequest{Request: req, Input: input, Copy: c.GetInvitationConfigurationRequest}
+}
+
 const opGetProfile = "GetProfile"
 
 // GetProfileRequest is a API request type for the GetProfile API operation.
@@ -2374,6 +2630,218 @@ type ListDeviceEventsPager struct {
 
 func (p *ListDeviceEventsPager) CurrentPage() *ListDeviceEventsOutput {
 	return p.Pager.CurrentPage().(*ListDeviceEventsOutput)
+}
+
+const opListGatewayGroups = "ListGatewayGroups"
+
+// ListGatewayGroupsRequest is a API request type for the ListGatewayGroups API operation.
+type ListGatewayGroupsRequest struct {
+	*aws.Request
+	Input *ListGatewayGroupsInput
+	Copy  func(*ListGatewayGroupsInput) ListGatewayGroupsRequest
+}
+
+// Send marshals and sends the ListGatewayGroups API request.
+func (r ListGatewayGroupsRequest) Send(ctx context.Context) (*ListGatewayGroupsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListGatewayGroupsOutput), nil
+}
+
+// ListGatewayGroupsRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Retrieves a list of gateway group summaries. Use GetGatewayGroup to retrieve
+// details of a specific gateway group.
+//
+//    // Example sending a request using the ListGatewayGroupsRequest method.
+//    req := client.ListGatewayGroupsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListGatewayGroups
+func (c *AlexaForBusiness) ListGatewayGroupsRequest(input *ListGatewayGroupsInput) ListGatewayGroupsRequest {
+	op := &aws.Operation{
+		Name:       opListGatewayGroups,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListGatewayGroupsInput{}
+	}
+
+	output := &ListGatewayGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListGatewayGroupsRequest{Request: req, Input: input, Copy: c.ListGatewayGroupsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListGatewayGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListGatewayGroups operation.
+//		req := client.ListGatewayGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListGatewayGroupsRequest) Paginate(opts ...aws.Option) ListGatewayGroupsPager {
+	return ListGatewayGroupsPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListGatewayGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListGatewayGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListGatewayGroupsPager struct {
+	aws.Pager
+}
+
+func (p *ListGatewayGroupsPager) CurrentPage() *ListGatewayGroupsOutput {
+	return p.Pager.CurrentPage().(*ListGatewayGroupsOutput)
+}
+
+const opListGateways = "ListGateways"
+
+// ListGatewaysRequest is a API request type for the ListGateways API operation.
+type ListGatewaysRequest struct {
+	*aws.Request
+	Input *ListGatewaysInput
+	Copy  func(*ListGatewaysInput) ListGatewaysRequest
+}
+
+// Send marshals and sends the ListGateways API request.
+func (r ListGatewaysRequest) Send(ctx context.Context) (*ListGatewaysOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListGatewaysOutput), nil
+}
+
+// ListGatewaysRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Retrieves a list of gateway summaries. Use GetGateway to retrieve details
+// of a specific gateway. An optional gateway group ARN can be provided to only
+// retrieve gateway summaries of gateways that are associated with that gateway
+// group ARN.
+//
+//    // Example sending a request using the ListGatewaysRequest method.
+//    req := client.ListGatewaysRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListGateways
+func (c *AlexaForBusiness) ListGatewaysRequest(input *ListGatewaysInput) ListGatewaysRequest {
+	op := &aws.Operation{
+		Name:       opListGateways,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListGatewaysInput{}
+	}
+
+	output := &ListGatewaysOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListGatewaysRequest{Request: req, Input: input, Copy: c.ListGatewaysRequest}
+}
+
+// Paginate pages iterates over the pages of a ListGatewaysRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListGateways operation.
+//		req := client.ListGatewaysRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListGatewaysRequest) Paginate(opts ...aws.Option) ListGatewaysPager {
+	return ListGatewaysPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListGatewaysInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListGatewaysPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListGatewaysPager struct {
+	aws.Pager
+}
+
+func (p *ListGatewaysPager) CurrentPage() *ListGatewaysOutput {
+	return p.Pager.CurrentPage().(*ListGatewaysOutput)
 }
 
 const opListSkills = "ListSkills"
@@ -2946,6 +3414,58 @@ func (c *AlexaForBusiness) PutConferencePreferenceRequest(input *PutConferencePr
 	output.responseMetadata = aws.Response{Request: req}
 
 	return PutConferencePreferenceRequest{Request: req, Input: input, Copy: c.PutConferencePreferenceRequest}
+}
+
+const opPutInvitationConfiguration = "PutInvitationConfiguration"
+
+// PutInvitationConfigurationRequest is a API request type for the PutInvitationConfiguration API operation.
+type PutInvitationConfigurationRequest struct {
+	*aws.Request
+	Input *PutInvitationConfigurationInput
+	Copy  func(*PutInvitationConfigurationInput) PutInvitationConfigurationRequest
+}
+
+// Send marshals and sends the PutInvitationConfiguration API request.
+func (r PutInvitationConfigurationRequest) Send(ctx context.Context) (*PutInvitationConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutInvitationConfigurationOutput), nil
+}
+
+// PutInvitationConfigurationRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Configures the email template for the user enrollment invitation with the
+// specified attributes.
+//
+//    // Example sending a request using the PutInvitationConfigurationRequest method.
+//    req := client.PutInvitationConfigurationRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutInvitationConfiguration
+func (c *AlexaForBusiness) PutInvitationConfigurationRequest(input *PutInvitationConfigurationInput) PutInvitationConfigurationRequest {
+	op := &aws.Operation{
+		Name:       opPutInvitationConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &PutInvitationConfigurationInput{}
+	}
+
+	output := &PutInvitationConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutInvitationConfigurationRequest{Request: req, Input: input, Copy: c.PutInvitationConfigurationRequest}
 }
 
 const opPutRoomSkillParameter = "PutRoomSkillParameter"
@@ -4507,6 +5027,110 @@ func (c *AlexaForBusiness) UpdateDeviceRequest(input *UpdateDeviceInput) UpdateD
 	return UpdateDeviceRequest{Request: req, Input: input, Copy: c.UpdateDeviceRequest}
 }
 
+const opUpdateGateway = "UpdateGateway"
+
+// UpdateGatewayRequest is a API request type for the UpdateGateway API operation.
+type UpdateGatewayRequest struct {
+	*aws.Request
+	Input *UpdateGatewayInput
+	Copy  func(*UpdateGatewayInput) UpdateGatewayRequest
+}
+
+// Send marshals and sends the UpdateGateway API request.
+func (r UpdateGatewayRequest) Send(ctx context.Context) (*UpdateGatewayOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateGatewayOutput), nil
+}
+
+// UpdateGatewayRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Updates the details of a gateway. If any optional field is not provided,
+// the existing corresponding value is left unmodified.
+//
+//    // Example sending a request using the UpdateGatewayRequest method.
+//    req := client.UpdateGatewayRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGateway
+func (c *AlexaForBusiness) UpdateGatewayRequest(input *UpdateGatewayInput) UpdateGatewayRequest {
+	op := &aws.Operation{
+		Name:       opUpdateGateway,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateGatewayInput{}
+	}
+
+	output := &UpdateGatewayOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateGatewayRequest{Request: req, Input: input, Copy: c.UpdateGatewayRequest}
+}
+
+const opUpdateGatewayGroup = "UpdateGatewayGroup"
+
+// UpdateGatewayGroupRequest is a API request type for the UpdateGatewayGroup API operation.
+type UpdateGatewayGroupRequest struct {
+	*aws.Request
+	Input *UpdateGatewayGroupInput
+	Copy  func(*UpdateGatewayGroupInput) UpdateGatewayGroupRequest
+}
+
+// Send marshals and sends the UpdateGatewayGroup API request.
+func (r UpdateGatewayGroupRequest) Send(ctx context.Context) (*UpdateGatewayGroupOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateGatewayGroupOutput), nil
+}
+
+// UpdateGatewayGroupRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Updates the details of a gateway group. If any optional field is not provided,
+// the existing corresponding value is left unmodified.
+//
+//    // Example sending a request using the UpdateGatewayGroupRequest method.
+//    req := client.UpdateGatewayGroupRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGatewayGroup
+func (c *AlexaForBusiness) UpdateGatewayGroupRequest(input *UpdateGatewayGroupInput) UpdateGatewayGroupRequest {
+	op := &aws.Operation{
+		Name:       opUpdateGatewayGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateGatewayGroupInput{}
+	}
+
+	output := &UpdateGatewayGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateGatewayGroupRequest{Request: req, Input: input, Copy: c.UpdateGatewayGroupRequest}
+}
+
 const opUpdateProfile = "UpdateProfile"
 
 // UpdateProfileRequest is a API request type for the UpdateProfile API operation.
@@ -4980,10 +5604,7 @@ func (s AssociateSkillWithSkillGroupOutput) SDKResponseMetadata() aws.Response {
 type AssociateSkillWithUsersInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the organization.
-	OrganizationArn *string `type:"string"`
-
-	// The private skill ID you want to make available to enrolled users.>
+	// The private skill ID you want to make available to enrolled users.
 	//
 	// SkillId is a required field
 	SkillId *string `type:"string" required:"true"`
@@ -5401,10 +6022,12 @@ type CreateBusinessReportScheduleInput struct {
 	// Format is a required field
 	Format BusinessReportFormat `type:"string" required:"true" enum:"true"`
 
-	// The recurrence of the reports.
+	// The recurrence of the reports. If this isn't specified, the report will only
+	// be delivered one time when the API is called.
 	Recurrence *BusinessReportRecurrence `type:"structure"`
 
-	// The S3 bucket name of the output reports.
+	// The S3 bucket name of the output reports. If this isn't specified, the report
+	// can be retrieved from a download link by calling ListBusinessReportSchedule.
 	S3BucketName *string `type:"string"`
 
 	// The S3 key where the report is delivered.
@@ -5655,6 +6278,83 @@ func (s CreateContactOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateContactOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateGatewayGroupRequest
+type CreateGatewayGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// A unique, user-specified identifier for the request that ensures idempotency.
+	//
+	// ClientRequestToken is a required field
+	ClientRequestToken *string `min:"10" type:"string" required:"true" idempotencyToken:"true"`
+
+	// The description of the gateway group.
+	Description *string `type:"string"`
+
+	// The name of the gateway group.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateGatewayGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateGatewayGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateGatewayGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateGatewayGroupInput"}
+
+	if s.ClientRequestToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ClientRequestToken"))
+	}
+	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 10 {
+		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 10))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateGatewayGroupResponse
+type CreateGatewayGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ARN of the created gateway group.
+	GatewayGroupArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CreateGatewayGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateGatewayGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateGatewayGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -6314,6 +7014,62 @@ func (s DeleteDeviceOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteDeviceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteGatewayGroupRequest
+type DeleteGatewayGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the gateway group to delete.
+	//
+	// GatewayGroupArn is a required field
+	GatewayGroupArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteGatewayGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteGatewayGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteGatewayGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteGatewayGroupInput"}
+
+	if s.GatewayGroupArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GatewayGroupArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteGatewayGroupResponse
+type DeleteGatewayGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteGatewayGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteGatewayGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteGatewayGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -6978,9 +7734,6 @@ func (s DisassociateSkillFromSkillGroupOutput) SDKResponseMetadata() aws.Respons
 type DisassociateSkillFromUsersInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the organization.
-	OrganizationArn *string `type:"string"`
-
 	// The private skill ID you want to make unavailable for enrolled users.
 	//
 	// SkillId is a required field
@@ -7178,6 +7931,120 @@ func (s ForgetSmartHomeAppliancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ForgetSmartHomeAppliancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// The details of the gateway.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Gateway
+type Gateway struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the gateway.
+	Arn *string `type:"string"`
+
+	// The description of the gateway.
+	Description *string `type:"string"`
+
+	// The ARN of the gateway group that the gateway is associated to.
+	GatewayGroupArn *string `type:"string"`
+
+	// The name of the gateway.
+	Name *string `min:"1" type:"string"`
+
+	// The software version of the gateway. The gateway automatically updates its
+	// software version during normal operation.
+	SoftwareVersion *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s Gateway) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Gateway) GoString() string {
+	return s.String()
+}
+
+// The details of the gateway group.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GatewayGroup
+type GatewayGroup struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the gateway group.
+	Arn *string `type:"string"`
+
+	// The description of the gateway group.
+	Description *string `type:"string"`
+
+	// The name of the gateway group.
+	Name *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s GatewayGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GatewayGroup) GoString() string {
+	return s.String()
+}
+
+// The summary of a gateway group.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GatewayGroupSummary
+type GatewayGroupSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the gateway group.
+	Arn *string `type:"string"`
+
+	// The description of the gateway group.
+	Description *string `type:"string"`
+
+	// The name of the gateway group.
+	Name *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s GatewayGroupSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GatewayGroupSummary) GoString() string {
+	return s.String()
+}
+
+// The summary of a gateway.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GatewaySummary
+type GatewaySummary struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the gateway.
+	Arn *string `type:"string"`
+
+	// The description of the gateway.
+	Description *string `type:"string"`
+
+	// The ARN of the gateway group that the gateway is associated to.
+	GatewayGroupArn *string `type:"string"`
+
+	// The name of the gateway.
+	Name *string `min:"1" type:"string"`
+
+	// The software version of the gateway. The gateway automatically updates its
+	// software version during normal operation.
+	SoftwareVersion *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s GatewaySummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GatewaySummary) GoString() string {
+	return s.String()
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetAddressBookRequest
@@ -7437,6 +8304,172 @@ func (s GetDeviceOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDeviceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetGatewayGroupRequest
+type GetGatewayGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the gateway group to get.
+	//
+	// GatewayGroupArn is a required field
+	GatewayGroupArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetGatewayGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetGatewayGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetGatewayGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetGatewayGroupInput"}
+
+	if s.GatewayGroupArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GatewayGroupArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetGatewayGroupResponse
+type GetGatewayGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The details of the gateway group.
+	GatewayGroup *GatewayGroup `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetGatewayGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetGatewayGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetGatewayGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetGatewayRequest
+type GetGatewayInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the gateway to get.
+	//
+	// GatewayArn is a required field
+	GatewayArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetGatewayInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetGatewayInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetGatewayInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetGatewayInput"}
+
+	if s.GatewayArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GatewayArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetGatewayResponse
+type GetGatewayOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The details of the gateway.
+	Gateway *Gateway `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetGatewayOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetGatewayOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetInvitationConfigurationRequest
+type GetInvitationConfigurationInput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetInvitationConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetInvitationConfigurationInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetInvitationConfigurationResponse
+type GetInvitationConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The email ID of the organization or individual contact that the enrolled
+	// user can use.
+	ContactEmail *string `min:"1" type:"string"`
+
+	// The name of the organization sending the enrollment invite to a user.
+	OrganizationName *string `min:"1" type:"string"`
+
+	// The list of private skill IDs that you want to recommend to the user to enable
+	// in the invitation.
+	PrivateSkillIds []string `type:"list"`
+}
+
+// String returns the string representation
+func (s GetInvitationConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetInvitationConfigurationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetInvitationConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -7906,6 +8939,139 @@ func (s ListDeviceEventsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListGatewayGroupsRequest
+type ListGatewayGroupsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of gateway group summaries to return. The default is 50.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// The token used to paginate though multiple pages of gateway group summaries.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListGatewayGroupsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListGatewayGroupsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListGatewayGroupsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListGatewayGroupsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListGatewayGroupsResponse
+type ListGatewayGroupsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The gateway groups in the list.
+	GatewayGroups []GatewayGroupSummary `type:"list"`
+
+	// The token used to paginate though multiple pages of gateway group summaries.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListGatewayGroupsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListGatewayGroupsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListGatewayGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListGatewaysRequest
+type ListGatewaysInput struct {
+	_ struct{} `type:"structure"`
+
+	// The gateway group ARN for which to list gateways.
+	GatewayGroupArn *string `type:"string"`
+
+	// The maximum number of gateway summaries to return. The default is 50.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// The token used to paginate though multiple pages of gateway summaries.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListGatewaysInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListGatewaysInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListGatewaysInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListGatewaysInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListGatewaysResponse
+type ListGatewaysOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The gateways in the list.
+	Gateways []GatewaySummary `type:"list"`
+
+	// The token used to paginate though multiple pages of gateway summaries.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListGatewaysOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListGatewaysOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListGatewaysOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsRequest
 type ListSkillsInput struct {
 	_ struct{} `type:"structure"`
@@ -7916,15 +9082,16 @@ type ListSkillsInput struct {
 
 	// The maximum number of results to include in the response. If more results
 	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved.
+	// so that the remaining results can be retrieved. Required.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token, up to the value specified by MaxResults.
+	// Required.
 	NextToken *string `min:"1" type:"string"`
 
-	// The ARN of the skill group for which to list enabled skills.
+	// The ARN of the skill group for which to list enabled skills. Required.
 	SkillGroupArn *string `type:"string"`
 
 	// Whether the skill is publicly available or is a private skill.
@@ -8538,6 +9705,76 @@ func (s PutConferencePreferenceOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutConferencePreferenceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutInvitationConfigurationRequest
+type PutInvitationConfigurationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The email ID of the organization or individual contact that the enrolled
+	// user can use.
+	ContactEmail *string `min:"1" type:"string"`
+
+	// The name of the organization sending the enrollment invite to a user.
+	//
+	// OrganizationName is a required field
+	OrganizationName *string `min:"1" type:"string" required:"true"`
+
+	// The list of private skill IDs that you want to recommend to the user to enable
+	// in the invitation.
+	PrivateSkillIds []string `type:"list"`
+}
+
+// String returns the string representation
+func (s PutInvitationConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutInvitationConfigurationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutInvitationConfigurationInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutInvitationConfigurationInput"}
+	if s.ContactEmail != nil && len(*s.ContactEmail) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ContactEmail", 1))
+	}
+
+	if s.OrganizationName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("OrganizationName"))
+	}
+	if s.OrganizationName != nil && len(*s.OrganizationName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("OrganizationName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutInvitationConfigurationResponse
+type PutInvitationConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s PutInvitationConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutInvitationConfigurationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutInvitationConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -10684,6 +11921,143 @@ func (s UpdateDeviceOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateDeviceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGatewayGroupRequest
+type UpdateGatewayGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The updated description of the gateway group.
+	Description *string `type:"string"`
+
+	// The ARN of the gateway group to update.
+	//
+	// GatewayGroupArn is a required field
+	GatewayGroupArn *string `type:"string" required:"true"`
+
+	// The updated name of the gateway group.
+	Name *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateGatewayGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateGatewayGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateGatewayGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateGatewayGroupInput"}
+
+	if s.GatewayGroupArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GatewayGroupArn"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGatewayGroupResponse
+type UpdateGatewayGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateGatewayGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateGatewayGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateGatewayGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGatewayRequest
+type UpdateGatewayInput struct {
+	_ struct{} `type:"structure"`
+
+	// The updated description of the gateway.
+	Description *string `type:"string"`
+
+	// The ARN of the gateway to update.
+	//
+	// GatewayArn is a required field
+	GatewayArn *string `type:"string" required:"true"`
+
+	// The updated name of the gateway.
+	Name *string `min:"1" type:"string"`
+
+	// The updated software version of the gateway. The gateway automatically updates
+	// its software version during normal operation.
+	SoftwareVersion *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateGatewayInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateGatewayInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateGatewayInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateGatewayInput"}
+
+	if s.GatewayArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GatewayArn"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+	if s.SoftwareVersion != nil && len(*s.SoftwareVersion) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SoftwareVersion", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGatewayResponse
+type UpdateGatewayOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateGatewayOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateGatewayOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateGatewayOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 

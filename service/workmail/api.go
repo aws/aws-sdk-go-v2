@@ -33,7 +33,7 @@ func (r AssociateDelegateToResourceRequest) Send(ctx context.Context) (*Associat
 // AssociateDelegateToResourceRequest returns a request value for making API operation for
 // Amazon WorkMail.
 //
-// Adds a member to the resource's set of delegates.
+// Adds a member (user or group) to the resource's set of delegates.
 //
 //    // Example sending a request using the AssociateDelegateToResourceRequest method.
 //    req := client.AssociateDelegateToResourceRequest(params)
@@ -84,7 +84,7 @@ func (r AssociateMemberToGroupRequest) Send(ctx context.Context) (*AssociateMemb
 // AssociateMemberToGroupRequest returns a request value for making API operation for
 // Amazon WorkMail.
 //
-// Adds a member to the group's set.
+// Adds a member (user or group) to the group's set.
 //
 //    // Example sending a request using the AssociateMemberToGroupRequest method.
 //    req := client.AssociateMemberToGroupRequest(params)
@@ -135,7 +135,7 @@ func (r CreateAliasRequest) Send(ctx context.Context) (*CreateAliasOutput, error
 // CreateAliasRequest returns a request value for making API operation for
 // Amazon WorkMail.
 //
-// Adds an alias to the set of a given member of Amazon WorkMail.
+// Adds an alias to the set of a given member (user or group) of Amazon WorkMail.
 //
 //    // Example sending a request using the CreateAliasRequest method.
 //    req := client.CreateAliasRequest(params)
@@ -238,8 +238,7 @@ func (r CreateResourceRequest) Send(ctx context.Context) (*CreateResourceOutput,
 // CreateResourceRequest returns a request value for making API operation for
 // Amazon WorkMail.
 //
-// Creates a new Amazon WorkMail resource. The available types are equipment
-// and room.
+// Creates a new Amazon WorkMail resource.
 //
 //    // Example sending a request using the CreateResourceRequest method.
 //    req := client.CreateResourceRequest(params)
@@ -342,7 +341,7 @@ func (r DeleteAliasRequest) Send(ctx context.Context) (*DeleteAliasOutput, error
 // DeleteAliasRequest returns a request value for making API operation for
 // Amazon WorkMail.
 //
-// Remove the alias from a set of aliases for a given user.
+// Remove one or more specified aliases from a set of aliases for a given user.
 //
 //    // Example sending a request using the DeleteAliasRequest method.
 //    req := client.DeleteAliasRequest(params)
@@ -444,7 +443,7 @@ func (r DeleteMailboxPermissionsRequest) Send(ctx context.Context) (*DeleteMailb
 // DeleteMailboxPermissionsRequest returns a request value for making API operation for
 // Amazon WorkMail.
 //
-// Deletes permissions granted to a user or group.
+// Deletes permissions granted to a member (user or group).
 //
 //    // Example sending a request using the DeleteMailboxPermissionsRequest method.
 //    req := client.DeleteMailboxPermissionsRequest(params)
@@ -546,9 +545,12 @@ func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserOutput, error) 
 // DeleteUserRequest returns a request value for making API operation for
 // Amazon WorkMail.
 //
-// Deletes a user from Amazon WorkMail and all subsequent systems. The action
-// can't be undone. The mailbox is kept as-is for a minimum of 30 days, without
-// any means to restore it.
+// Deletes a user from Amazon WorkMail and all subsequent systems. Before you
+// can delete a user, the user state must be DISABLED. Use the DescribeUser
+// action to confirm the user state.
+//
+// Deleting a user is permanent and cannot be undone. WorkMail archives user
+// mailboxes for 30 days before they are permanently removed.
 //
 //    // Example sending a request using the DeleteUserRequest method.
 //    req := client.DeleteUserRequest(params)
@@ -600,7 +602,7 @@ func (r DeregisterFromWorkMailRequest) Send(ctx context.Context) (*DeregisterFro
 // Amazon WorkMail.
 //
 // Mark a user, group, or resource as no longer used in Amazon WorkMail. This
-// action disassociates the mailbox and schedules it for clean-up. Amazon WorkMail
+// action disassociates the mailbox and schedules it for clean-up. WorkMail
 // keeps mailboxes for 30 days before they are permanently removed. The functionality
 // in the console is Disable.
 //
@@ -1063,7 +1065,8 @@ func (r ListGroupMembersRequest) Send(ctx context.Context) (*ListGroupMembersOut
 // ListGroupMembersRequest returns a request value for making API operation for
 // Amazon WorkMail.
 //
-// Returns an overview of the members of a group.
+// Returns an overview of the members of a group. Users and groups can be members
+// of a group.
 //
 //    // Example sending a request using the ListGroupMembersRequest method.
 //    req := client.ListGroupMembersRequest(params)
@@ -1271,7 +1274,8 @@ func (r ListMailboxPermissionsRequest) Send(ctx context.Context) (*ListMailboxPe
 // ListMailboxPermissionsRequest returns a request value for making API operation for
 // Amazon WorkMail.
 //
-// Lists the mailbox permissions associated with a mailbox.
+// Lists the mailbox permissions associated with a user, group, or resource
+// mailbox.
 //
 //    // Example sending a request using the ListMailboxPermissionsRequest method.
 //    req := client.ListMailboxPermissionsRequest(params)
@@ -1739,8 +1743,8 @@ func (r PutMailboxPermissionsRequest) Send(ctx context.Context) (*PutMailboxPerm
 // PutMailboxPermissionsRequest returns a request value for making API operation for
 // Amazon WorkMail.
 //
-// Sets permissions for a user or group. This replaces any pre-existing permissions
-// set for the entity.
+// Sets permissions for a user, group, or resource. This replaces any pre-existing
+// permissions.
 //
 //    // Example sending a request using the PutMailboxPermissionsRequest method.
 //    req := client.PutMailboxPermissionsRequest(params)
@@ -1791,14 +1795,15 @@ func (r RegisterToWorkMailRequest) Send(ctx context.Context) (*RegisterToWorkMai
 // RegisterToWorkMailRequest returns a request value for making API operation for
 // Amazon WorkMail.
 //
-// Registers an existing and disabled user, group, or resource/entity for Amazon
-// WorkMail use by associating a mailbox and calendaring capabilities. It performs
-// no change if the entity is enabled and fails if the entity is deleted. This
-// operation results in the accumulation of costs. For more information, see
-// Pricing (http://aws.amazon.com/workmail/pricing). The equivalent console
-// functionality for this operation is Enable. Users can either be created by
-// calling the CreateUser API or they can be synchronized from your directory.
-// For more information, see DeregisterFromWorkMail.
+// Registers an existing and disabled user, group, or resource for Amazon WorkMail
+// use by associating a mailbox and calendaring capabilities. It performs no
+// change if the user, group, or resource is enabled and fails if the user,
+// group, or resource is deleted. This operation results in the accumulation
+// of costs. For more information, see Pricing (https://aws.amazon.com//workmail/pricing).
+// The equivalent console functionality for this operation is Enable.
+//
+// Users can either be created by calling the CreateUser API operation or they
+// can be synchronized from your directory. For more information, see DeregisterFromWorkMail.
 //
 //    // Example sending a request using the RegisterToWorkMailRequest method.
 //    req := client.RegisterToWorkMailRequest(params)
@@ -1900,9 +1905,10 @@ func (r UpdatePrimaryEmailAddressRequest) Send(ctx context.Context) (*UpdatePrim
 // UpdatePrimaryEmailAddressRequest returns a request value for making API operation for
 // Amazon WorkMail.
 //
-// Updates the primary email for an entity. The current email is moved into
-// the list of aliases (or swapped between an existing alias and the current
-// primary email) and the email provided in the input is promoted as the primary.
+// Updates the primary email for a user, group, or resource. The current email
+// is moved into the list of aliases (or swapped between an existing alias and
+// the current primary email), and the email provided in the input is promoted
+// as the primary.
 //
 //    // Example sending a request using the UpdatePrimaryEmailAddressRequest method.
 //    req := client.UpdatePrimaryEmailAddressRequest(params)
@@ -1953,9 +1959,9 @@ func (r UpdateResourceRequest) Send(ctx context.Context) (*UpdateResourceOutput,
 // UpdateResourceRequest returns a request value for making API operation for
 // Amazon WorkMail.
 //
-// Updates data for the resource. It must be preceded by a describe call in
-// order to have the latest information. The dataset in the request should be
-// the one expected when performing another describe call.
+// Updates data for the resource. To have the latest information, it must be
+// preceded by a DescribeResource call. The dataset in the request should be
+// the one expected when performing another DescribeResource call.
 //
 //    // Example sending a request using the UpdateResourceRequest method.
 //    req := client.UpdateResourceRequest(params)
@@ -1997,7 +2003,7 @@ type AssociateDelegateToResourceInput struct {
 	// OrganizationId is a required field
 	OrganizationId *string `type:"string" required:"true"`
 
-	// The resource for which members are associated.
+	// The resource for which members (users or groups) are associated.
 	//
 	// ResourceId is a required field
 	ResourceId *string `type:"string" required:"true"`
@@ -2064,12 +2070,12 @@ func (s AssociateDelegateToResourceOutput) SDKResponseMetadata() aws.Response {
 type AssociateMemberToGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The group for which the member is associated.
+	// The group to which the member (user or group) is associated.
 	//
 	// GroupId is a required field
 	GroupId *string `min:"12" type:"string" required:"true"`
 
-	// The member to associate to the group.
+	// The member (user or group) to associate to the group.
 	//
 	// MemberId is a required field
 	MemberId *string `min:"12" type:"string" required:"true"`
@@ -2171,17 +2177,17 @@ func (s BookingOptions) GoString() string {
 type CreateAliasInput struct {
 	_ struct{} `type:"structure"`
 
-	// The alias to add to the user.
+	// The alias to add to the member set.
 	//
 	// Alias is a required field
 	Alias *string `min:"1" type:"string" required:"true"`
 
-	// The alias is added to this Amazon WorkMail entity.
+	// The member (user or group) to which this alias is added.
 	//
 	// EntityId is a required field
 	EntityId *string `min:"12" type:"string" required:"true"`
 
-	// The organization under which the member exists.
+	// The organization under which the member (user or group) exists.
 	//
 	// OrganizationId is a required field
 	OrganizationId *string `type:"string" required:"true"`
@@ -2299,7 +2305,7 @@ type CreateGroupOutput struct {
 
 	responseMetadata aws.Response
 
-	// The ID of the group.
+	// The identifier of the group.
 	GroupId *string `min:"12" type:"string"`
 }
 
@@ -2322,7 +2328,7 @@ func (s CreateGroupOutput) SDKResponseMetadata() aws.Response {
 type CreateResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the created resource.
+	// The name of the new resource.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
@@ -2333,7 +2339,7 @@ type CreateResourceInput struct {
 	// OrganizationId is a required field
 	OrganizationId *string `type:"string" required:"true"`
 
-	// The type of the created resource.
+	// The type of the new resource. The available types are equipment and room.
 	//
 	// Type is a required field
 	Type ResourceType `type:"string" required:"true" enum:"true"`
@@ -2379,7 +2385,7 @@ type CreateResourceOutput struct {
 
 	responseMetadata aws.Response
 
-	// The identifier of the created resource.
+	// The identifier of the new resource.
 	ResourceId *string `type:"string"`
 }
 
@@ -2402,12 +2408,13 @@ func (s CreateResourceOutput) SDKResponseMetadata() aws.Response {
 type CreateUserInput struct {
 	_ struct{} `type:"structure"`
 
-	// The display name for the user to be created.
+	// The display name for the new user.
 	//
 	// DisplayName is a required field
 	DisplayName *string `type:"string" required:"true"`
 
-	// The name for the user to be created.
+	// The name for the new user. Simple AD or AD Connector user names have a maximum
+	// length of 20. All others have a maximum length of 64.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
@@ -2417,7 +2424,7 @@ type CreateUserInput struct {
 	// OrganizationId is a required field
 	OrganizationId *string `type:"string" required:"true"`
 
-	// The password for the user to be created.
+	// The password for the new user.
 	//
 	// Password is a required field
 	Password *string `type:"string" required:"true"`
@@ -2468,7 +2475,7 @@ type CreateUserOutput struct {
 
 	responseMetadata aws.Response
 
-	// The information regarding the newly created user.
+	// The identifier for the new user.
 	UserId *string `min:"12" type:"string"`
 }
 
@@ -2493,7 +2500,7 @@ func (s CreateUserOutput) SDKResponseMetadata() aws.Response {
 type Delegate struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier for the user or group is associated as the resource's delegate.
+	// The identifier for the user or group associated as the resource's delegate.
 	//
 	// Id is a required field
 	Id *string `type:"string" required:"true"`
@@ -2525,7 +2532,8 @@ type DeleteAliasInput struct {
 	// Alias is a required field
 	Alias *string `min:"1" type:"string" required:"true"`
 
-	// The identifier for the Amazon WorkMail entity to have the aliases removed.
+	// The identifier for the member (user or group) from which to have the aliases
+	// removed.
 	//
 	// EntityId is a required field
 	EntityId *string `min:"12" type:"string" required:"true"`
@@ -2668,19 +2676,18 @@ func (s DeleteGroupOutput) SDKResponseMetadata() aws.Response {
 type DeleteMailboxPermissionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the entity (user or group) for which to delete mailbox
-	// permissions.
+	// The identifier of the member (user or group)that owns the mailbox.
 	//
 	// EntityId is a required field
 	EntityId *string `min:"12" type:"string" required:"true"`
 
-	// The identifier of the entity (user or group) for which to delete granted
+	// The identifier of the member (user or group) for which to delete granted
 	// permissions.
 	//
 	// GranteeId is a required field
 	GranteeId *string `min:"12" type:"string" required:"true"`
 
-	// The identifier of the organization under which the entity (user or group)
+	// The identifier of the organization under which the member (user or group)
 	// exists.
 	//
 	// OrganizationId is a required field
@@ -2751,7 +2758,7 @@ func (s DeleteMailboxPermissionsOutput) SDKResponseMetadata() aws.Response {
 type DeleteResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier associated with the organization for which the resource is
+	// The identifier associated with the organization from which the resource is
 	// deleted.
 	//
 	// OrganizationId is a required field
@@ -2817,7 +2824,7 @@ func (s DeleteResourceOutput) SDKResponseMetadata() aws.Response {
 type DeleteUserInput struct {
 	_ struct{} `type:"structure"`
 
-	// The organization that contains the user.
+	// The organization that contains the user to be deleted.
 	//
 	// OrganizationId is a required field
 	OrganizationId *string `type:"string" required:"true"`
@@ -2885,7 +2892,7 @@ func (s DeleteUserOutput) SDKResponseMetadata() aws.Response {
 type DeregisterFromWorkMailInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier for the entity to be updated.
+	// The identifier for the member (user or group) to be updated.
 	//
 	// EntityId is a required field
 	EntityId *string `min:"12" type:"string" required:"true"`
@@ -3002,15 +3009,15 @@ type DescribeGroupOutput struct {
 
 	responseMetadata aws.Response
 
-	// The date and time when a user was deregistered from Amazon WorkMail, in UNIX
-	// epoch time format.
+	// The date and time when a user was deregistered from WorkMail, in UNIX epoch
+	// time format.
 	DisabledDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The email of the described group.
 	Email *string `min:"1" type:"string"`
 
-	// The date and time when a user was registered to Amazon WorkMail, in UNIX
-	// epoch time format.
+	// The date and time when a user was registered to WorkMail, in UNIX epoch time
+	// format.
 	EnabledDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The identifier of the described group.
@@ -3020,7 +3027,7 @@ type DescribeGroupOutput struct {
 	Name *string `min:"1" type:"string"`
 
 	// The state of the user: enabled (registered to Amazon WorkMail) or disabled
-	// (deregistered or never registered to Amazon WorkMail).
+	// (deregistered or never registered to WorkMail).
 	State EntityState `type:"string" enum:"true"`
 }
 
@@ -3082,7 +3089,7 @@ type DescribeOrganizationOutput struct {
 	// The alias for an organization.
 	Alias *string `min:"1" type:"string"`
 
-	// The date at which the organization became usable in the Amazon WorkMail context,
+	// The date at which the organization became usable in the WorkMail context,
 	// in UNIX epoch time format.
 	CompletedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
@@ -3092,10 +3099,10 @@ type DescribeOrganizationOutput struct {
 	// The identifier for the directory associated with an Amazon WorkMail organization.
 	DirectoryId *string `type:"string"`
 
-	// The type of directory associated with the Amazon WorkMail organization.
+	// The type of directory associated with the WorkMail organization.
 	DirectoryType *string `type:"string"`
 
-	// The (optional) error message indicating if unexpected behavior was encountered
+	// (Optional) The error message indicating if unexpected behavior was encountered
 	// with regards to the organization.
 	ErrorMessage *string `type:"string"`
 
@@ -3174,15 +3181,15 @@ type DescribeResourceOutput struct {
 	// The booking options for the described resource.
 	BookingOptions *BookingOptions `type:"structure"`
 
-	// The date and time when a resource was registered from Amazon WorkMail, in
-	// UNIX epoch time format.
+	// The date and time when a resource was disabled from WorkMail, in UNIX epoch
+	// time format.
 	DisabledDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The email of the described resource.
 	Email *string `min:"1" type:"string"`
 
-	// The date and time when a resource was registered to Amazon WorkMail, in UNIX
-	// epoch time format.
+	// The date and time when a resource was enabled for WorkMail, in UNIX epoch
+	// time format.
 	EnabledDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The name of the described resource.
@@ -3192,7 +3199,7 @@ type DescribeResourceOutput struct {
 	ResourceId *string `type:"string"`
 
 	// The state of the resource: enabled (registered to Amazon WorkMail) or disabled
-	// (deregistered or never registered to Amazon WorkMail).
+	// (deregistered or never registered to WorkMail).
 	State EntityState `type:"string" enum:"true"`
 
 	// The type of the described resource.
@@ -3284,18 +3291,18 @@ type DescribeUserOutput struct {
 	Name *string `min:"1" type:"string"`
 
 	// The state of a user: enabled (registered to Amazon WorkMail) or disabled
-	// (deregistered or never registered to Amazon WorkMail).
+	// (deregistered or never registered to WorkMail).
 	State EntityState `type:"string" enum:"true"`
 
 	// The identifier for the described user.
 	UserId *string `min:"12" type:"string"`
 
-	// In certain cases other entities are modeled as users. If interoperability
+	// In certain cases, other entities are modeled as users. If interoperability
 	// is enabled, resources are imported into Amazon WorkMail as users. Because
-	// different Amazon WorkMail organizations rely on different directory types,
-	// administrators can distinguish between a user that is not registered to Amazon
-	// WorkMail (is disabled and has a user role) and the administrative users of
-	// the directory. The values are USER, RESOURCE, and SYSTEM_USER.
+	// different WorkMail organizations rely on different directory types, administrators
+	// can distinguish between an unregistered user (account is disabled and has
+	// a user role) and the directory administrators. The values are USER, RESOURCE,
+	// and SYSTEM_USER.
 	UserRole UserRole `type:"string" enum:"true"`
 }
 
@@ -3598,7 +3605,7 @@ func (s ListAliasesOutput) SDKResponseMetadata() aws.Response {
 type ListGroupMembersInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier for the group to which the members are associated.
+	// The identifier for the group to which the members (users or groups) are associated.
 	//
 	// GroupId is a required field
 	GroupId *string `min:"12" type:"string" required:"true"`
@@ -3762,7 +3769,8 @@ func (s ListGroupsOutput) SDKResponseMetadata() aws.Response {
 type ListMailboxPermissionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the entity (user or group) for which to list mailbox permissions.
+	// The identifier of the user, group, or resource for which to list mailbox
+	// permissions.
 	//
 	// EntityId is a required field
 	EntityId *string `min:"12" type:"string" required:"true"`
@@ -3774,7 +3782,7 @@ type ListMailboxPermissionsInput struct {
 	// not contain any tokens.
 	NextToken *string `min:"1" type:"string"`
 
-	// The identifier of the organization under which the entity (user or group)
+	// The identifier of the organization under which the user, group, or resource
 	// exists.
 	//
 	// OrganizationId is a required field
@@ -3828,7 +3836,7 @@ type ListMailboxPermissionsOutput struct {
 	// when there are no more results to return.
 	NextToken *string `min:"1" type:"string"`
 
-	// One page of the entity's mailbox permissions.
+	// One page of the user, group, or resource mailbox permissions.
 	Permissions []Permission `type:"list"`
 }
 
@@ -4087,7 +4095,8 @@ type ListUsersInput struct {
 	// The maximum number of results to return in a single call.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// TBD
+	// The token to use to retrieve the next page of results. The first call does
+	// not contain any tokens.
 	NextToken *string `min:"1" type:"string"`
 
 	// The identifier for the organization under which the users exist.
@@ -4155,7 +4164,7 @@ func (s ListUsersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// The representation of a group member (user or group).
+// The representation of a user or group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/Member
 type Member struct {
 	_ struct{} `type:"structure"`
@@ -4189,7 +4198,7 @@ func (s Member) GoString() string {
 	return s.String()
 }
 
-// The brief overview associated with an organization.
+// The representation of an organization.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/OrganizationSummary
 type OrganizationSummary struct {
 	_ struct{} `type:"structure"`
@@ -4219,19 +4228,19 @@ func (s OrganizationSummary) GoString() string {
 	return s.String()
 }
 
-// Permission granted to an entity (user, group) to access a certain aspect
-// of another entity's mailbox.
+// Permission granted to a user, group, or resource to access a certain aspect
+// of another user, group, or resource mailbox.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/Permission
 type Permission struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the entity (user or group) to which the permissions are
+	// The identifier of the user, group, or resource to which the permissions are
 	// granted.
 	//
 	// GranteeId is a required field
 	GranteeId *string `min:"12" type:"string" required:"true"`
 
-	// The type of entity (user, group) of the entity referred to in GranteeId.
+	// The type of user, group, or resource referred to in GranteeId.
 	//
 	// GranteeType is a required field
 	GranteeType MemberType `type:"string" required:"true" enum:"true"`
@@ -4261,18 +4270,18 @@ func (s Permission) GoString() string {
 type PutMailboxPermissionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the entity (user or group) for which to update mailbox
+	// The identifier of the user, group, or resource for which to update mailbox
 	// permissions.
 	//
 	// EntityId is a required field
 	EntityId *string `min:"12" type:"string" required:"true"`
 
-	// The identifier of the entity (user or group) to which to grant the permissions.
+	// The identifier of the user, group, or resource to which to grant the permissions.
 	//
 	// GranteeId is a required field
 	GranteeId *string `min:"12" type:"string" required:"true"`
 
-	// The identifier of the organization under which the entity (user or group)
+	// The identifier of the organization under which the user, group, or resource
 	// exists.
 	//
 	// OrganizationId is a required field
@@ -4357,17 +4366,17 @@ func (s PutMailboxPermissionsOutput) SDKResponseMetadata() aws.Response {
 type RegisterToWorkMailInput struct {
 	_ struct{} `type:"structure"`
 
-	// The email for the entity to be updated.
+	// The email for the user, group, or resource to be updated.
 	//
 	// Email is a required field
 	Email *string `min:"1" type:"string" required:"true"`
 
-	// The identifier for the entity to be updated.
+	// The identifier for the user, group, or resource to be updated.
 	//
 	// EntityId is a required field
 	EntityId *string `min:"12" type:"string" required:"true"`
 
-	// The identifier for the organization under which the Amazon WorkMail entity
+	// The identifier for the organization under which the user, group, or resource
 	// exists.
 	//
 	// OrganizationId is a required field
@@ -4512,7 +4521,7 @@ func (s ResetPasswordOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// The overview for a resource containing relevant data regarding it.
+// The representation of a resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/Resource
 type Resource struct {
 	_ struct{} `type:"structure"`
@@ -4558,12 +4567,12 @@ type UpdatePrimaryEmailAddressInput struct {
 	// Email is a required field
 	Email *string `min:"1" type:"string" required:"true"`
 
-	// The entity to update (user, group, or resource).
+	// The user, group, or resource to update.
 	//
 	// EntityId is a required field
 	EntityId *string `min:"12" type:"string" required:"true"`
 
-	// The organization that contains the entity to update.
+	// The organization that contains the user, group, or resource to update.
 	//
 	// OrganizationId is a required field
 	OrganizationId *string `type:"string" required:"true"`

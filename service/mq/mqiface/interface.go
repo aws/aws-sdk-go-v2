@@ -78,6 +78,10 @@ type MQAPI interface {
 
 	DescribeBrokerRequest(*mq.DescribeBrokerInput) mq.DescribeBrokerRequest
 
+	DescribeBrokerEngineTypesRequest(*mq.DescribeBrokerEngineTypesInput) mq.DescribeBrokerEngineTypesRequest
+
+	DescribeBrokerInstanceOptionsRequest(*mq.DescribeBrokerInstanceOptionsInput) mq.DescribeBrokerInstanceOptionsRequest
+
 	DescribeConfigurationRequest(*mq.DescribeConfigurationInput) mq.DescribeConfigurationRequest
 
 	DescribeConfigurationRevisionRequest(*mq.DescribeConfigurationRevisionInput) mq.DescribeConfigurationRevisionRequest

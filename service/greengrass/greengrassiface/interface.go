@@ -210,11 +210,17 @@ type GreengrassAPI interface {
 
 	ListSubscriptionDefinitionsRequest(*greengrass.ListSubscriptionDefinitionsInput) greengrass.ListSubscriptionDefinitionsRequest
 
+	ListTagsForResourceRequest(*greengrass.ListTagsForResourceInput) greengrass.ListTagsForResourceRequest
+
 	ResetDeploymentsRequest(*greengrass.ResetDeploymentsInput) greengrass.ResetDeploymentsRequest
 
 	StartBulkDeploymentRequest(*greengrass.StartBulkDeploymentInput) greengrass.StartBulkDeploymentRequest
 
 	StopBulkDeploymentRequest(*greengrass.StopBulkDeploymentInput) greengrass.StopBulkDeploymentRequest
+
+	TagResourceRequest(*greengrass.TagResourceInput) greengrass.TagResourceRequest
+
+	UntagResourceRequest(*greengrass.UntagResourceInput) greengrass.UntagResourceRequest
 
 	UpdateConnectivityInfoRequest(*greengrass.UpdateConnectivityInfoInput) greengrass.UpdateConnectivityInfoRequest
 

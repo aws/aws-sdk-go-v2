@@ -77,6 +77,8 @@ type EKSAPI interface {
 
 	ListUpdatesRequest(*eks.ListUpdatesInput) eks.ListUpdatesRequest
 
+	UpdateClusterConfigRequest(*eks.UpdateClusterConfigInput) eks.UpdateClusterConfigRequest
+
 	UpdateClusterVersionRequest(*eks.UpdateClusterVersionInput) eks.UpdateClusterVersionRequest
 
 	WaitUntilClusterActive(context.Context, *eks.DescribeClusterInput, ...aws.WaiterOption) error

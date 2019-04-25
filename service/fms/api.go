@@ -205,8 +205,8 @@ func (r DisassociateAdminAccountRequest) Send(ctx context.Context) (*Disassociat
 // Firewall Management Service.
 //
 // Disassociates the account that has been set as the AWS Firewall Manager administrator
-// account. You will need to submit an AssociateAdminAccount request to set
-// a new account as the AWS Firewall administrator.
+// account. To set a different account as the administrator account, you must
+// submit an AssociateAdminAccount request .
 //
 //    // Example sending a request using the DisassociateAdminAccountRequest method.
 //    req := client.DisassociateAdminAccountRequest(params)
@@ -445,6 +445,58 @@ func (c *FMS) GetPolicyRequest(input *GetPolicyInput) GetPolicyRequest {
 	return GetPolicyRequest{Request: req, Input: input, Copy: c.GetPolicyRequest}
 }
 
+const opGetProtectionStatus = "GetProtectionStatus"
+
+// GetProtectionStatusRequest is a API request type for the GetProtectionStatus API operation.
+type GetProtectionStatusRequest struct {
+	*aws.Request
+	Input *GetProtectionStatusInput
+	Copy  func(*GetProtectionStatusInput) GetProtectionStatusRequest
+}
+
+// Send marshals and sends the GetProtectionStatus API request.
+func (r GetProtectionStatusRequest) Send(ctx context.Context) (*GetProtectionStatusOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetProtectionStatusOutput), nil
+}
+
+// GetProtectionStatusRequest returns a request value for making API operation for
+// Firewall Management Service.
+//
+// If you created a Shield Advanced policy, returns policy-level attack summary
+// information in the event of a potential DDoS attack.
+//
+//    // Example sending a request using the GetProtectionStatusRequest method.
+//    req := client.GetProtectionStatusRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetProtectionStatus
+func (c *FMS) GetProtectionStatusRequest(input *GetProtectionStatusInput) GetProtectionStatusRequest {
+	op := &aws.Operation{
+		Name:       opGetProtectionStatus,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetProtectionStatusInput{}
+	}
+
+	output := &GetProtectionStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetProtectionStatusRequest{Request: req, Input: input, Copy: c.GetProtectionStatusRequest}
+}
+
 const opListComplianceStatus = "ListComplianceStatus"
 
 // ListComplianceStatusRequest is a API request type for the ListComplianceStatus API operation.
@@ -485,6 +537,12 @@ func (c *FMS) ListComplianceStatusRequest(input *ListComplianceStatusInput) List
 		Name:       opListComplianceStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -496,6 +554,53 @@ func (c *FMS) ListComplianceStatusRequest(input *ListComplianceStatusInput) List
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListComplianceStatusRequest{Request: req, Input: input, Copy: c.ListComplianceStatusRequest}
+}
+
+// Paginate pages iterates over the pages of a ListComplianceStatusRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListComplianceStatus operation.
+//		req := client.ListComplianceStatusRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListComplianceStatusRequest) Paginate(opts ...aws.Option) ListComplianceStatusPager {
+	return ListComplianceStatusPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListComplianceStatusInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListComplianceStatusPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListComplianceStatusPager struct {
+	aws.Pager
+}
+
+func (p *ListComplianceStatusPager) CurrentPage() *ListComplianceStatusOutput {
+	return p.Pager.CurrentPage().(*ListComplianceStatusOutput)
 }
 
 const opListMemberAccounts = "ListMemberAccounts"
@@ -540,6 +645,12 @@ func (c *FMS) ListMemberAccountsRequest(input *ListMemberAccountsInput) ListMemb
 		Name:       opListMemberAccounts,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -551,6 +662,53 @@ func (c *FMS) ListMemberAccountsRequest(input *ListMemberAccountsInput) ListMemb
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListMemberAccountsRequest{Request: req, Input: input, Copy: c.ListMemberAccountsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListMemberAccountsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListMemberAccounts operation.
+//		req := client.ListMemberAccountsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListMemberAccountsRequest) Paginate(opts ...aws.Option) ListMemberAccountsPager {
+	return ListMemberAccountsPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListMemberAccountsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListMemberAccountsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListMemberAccountsPager struct {
+	aws.Pager
+}
+
+func (p *ListMemberAccountsPager) CurrentPage() *ListMemberAccountsOutput {
+	return p.Pager.CurrentPage().(*ListMemberAccountsOutput)
 }
 
 const opListPolicies = "ListPolicies"
@@ -591,6 +749,12 @@ func (c *FMS) ListPoliciesRequest(input *ListPoliciesInput) ListPoliciesRequest 
 		Name:       opListPolicies,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -602,6 +766,53 @@ func (c *FMS) ListPoliciesRequest(input *ListPoliciesInput) ListPoliciesRequest 
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListPoliciesRequest{Request: req, Input: input, Copy: c.ListPoliciesRequest}
+}
+
+// Paginate pages iterates over the pages of a ListPoliciesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListPolicies operation.
+//		req := client.ListPoliciesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListPoliciesRequest) Paginate(opts ...aws.Option) ListPoliciesPager {
+	return ListPoliciesPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListPoliciesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListPoliciesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListPoliciesPager struct {
+	aws.Pager
+}
+
+func (p *ListPoliciesPager) CurrentPage() *ListPoliciesOutput {
+	return p.Pager.CurrentPage().(*ListPoliciesOutput)
 }
 
 const opPutNotificationChannel = "PutNotificationChannel"
@@ -682,6 +893,18 @@ func (r PutPolicyRequest) Send(ctx context.Context) (*PutPolicyOutput, error) {
 // Firewall Management Service.
 //
 // Creates an AWS Firewall Manager policy.
+//
+// Firewall Manager provides two types of policies: A Shield Advanced policy,
+// which applies Shield Advanced protection to specified accounts and resources,
+// or a WAF policy, which contains a rule group and defines which resources
+// are to be protected by that rule group. A policy is specific to either WAF
+// or Shield Advanced. If you want to enforce both WAF rules and Shield Advanced
+// protection across accounts, you can create multiple policies. You can create
+// one or more policies for WAF rules, and one or more policies for Shield Advanced.
+//
+// You must be subscribed to Shield Advanced to create a Shield Advanced policy.
+// For more information on subscribing to Shield Advanced, see CreateSubscription
+// (https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_CreateSubscription.html).
 //
 //    // Example sending a request using the PutPolicyRequest method.
 //    req := client.PutPolicyRequest(params)
@@ -781,7 +1004,7 @@ type ComplianceViolator struct {
 
 	// The resource type. This is in the format shown in AWS Resource Types Reference
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
-	// Valid values are AWS::ElasticLoadBalancingV2::LoadBalancer or AWS::CloudFront::Distribution.
+	// For example: AWS::ElasticLoadBalancingV2::LoadBalancer or AWS::CloudFront::Distribution.
 	ResourceType *string `min:"1" type:"string"`
 
 	// The reason that the resource is not protected by the policy.
@@ -838,6 +1061,23 @@ func (s DeleteNotificationChannelOutput) SDKResponseMetadata() aws.Response {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/DeletePolicyRequest
 type DeletePolicyInput struct {
 	_ struct{} `type:"structure"`
+
+	// If True, the request will also perform a clean-up process that will:
+	//
+	//    * Delete rule groups created by AWS Firewall Manager
+	//
+	//    * Remove web ACLs from in-scope resources
+	//
+	//    * Delete web ACLs that contain no rules or rule groups
+	//
+	// After the cleanup, in-scope resources will no longer be protected by web
+	// ACLs in this policy. Protection of out-of-scope resources will remain unchanged.
+	// Scope is determined by tags and accounts associated with the policy. When
+	// creating the policy, if you specified that only resources in specific accounts
+	// or with specific tags be protected by the policy, those resources are in-scope.
+	// All others are out of scope. If you did not specify tags or accounts, all
+	// resources are in-scope.
+	DeleteAllPolicyResources *bool `type:"boolean"`
 
 	// The ID of the policy that you want to delete. PolicyId is returned by PutPolicy
 	// and by ListPolicies.
@@ -1189,6 +1429,138 @@ func (s GetPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetProtectionStatusRequest
+type GetProtectionStatusInput struct {
+	_ struct{} `type:"structure"`
+
+	// The end of the time period to query for the attacks. This is a timestamp
+	// type. The sample request above indicates a number type because the default
+	// used by AWS Firewall Manager is Unix time in seconds. However, any valid
+	// timestamp format is allowed.
+	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// Specifies the number of objects that you want AWS Firewall Manager to return
+	// for this request. If you have more objects than the number that you specify
+	// for MaxResults, the response includes a NextToken value that you can use
+	// to get another batch of objects.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// The AWS account that is in scope of the policy that you want to get the details
+	// for.
+	MemberAccountId *string `min:"1" type:"string"`
+
+	// If you specify a value for MaxResults and you have more objects than the
+	// number that you specify for MaxResults, AWS Firewall Manager returns a NextToken
+	// value in the response that allows you to list another group of objects. For
+	// the second and subsequent GetProtectionStatus requests, specify the value
+	// of NextToken from the previous response to get information about another
+	// batch of objects.
+	NextToken *string `min:"1" type:"string"`
+
+	// The ID of the policy for which you want to get the attack information.
+	//
+	// PolicyId is a required field
+	PolicyId *string `min:"36" type:"string" required:"true"`
+
+	// The start of the time period to query for the attacks. This is a timestamp
+	// type. The sample request above indicates a number type because the default
+	// used by AWS Firewall Manager is Unix time in seconds. However, any valid
+	// timestamp format is allowed.
+	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+}
+
+// String returns the string representation
+func (s GetProtectionStatusInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetProtectionStatusInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetProtectionStatusInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetProtectionStatusInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.MemberAccountId != nil && len(*s.MemberAccountId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MemberAccountId", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if s.PolicyId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
+	}
+	if s.PolicyId != nil && len(*s.PolicyId) < 36 {
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyId", 36))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/GetProtectionStatusResponse
+type GetProtectionStatusOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ID of the AWS Firewall administrator account for this policy.
+	AdminAccountId *string `min:"1" type:"string"`
+
+	// Details about the attack, including the following:
+	//
+	//    * Attack type
+	//
+	//    * Account ID
+	//
+	//    * ARN of the resource attacked
+	//
+	//    * Start time of the attack
+	//
+	//    * End time of the attack (ongoing attacks will not have an end time)
+	//
+	// The details are in JSON format. An example is shown in the Examples section
+	// below.
+	Data *string `type:"string"`
+
+	// If you have more objects than the number that you specified for MaxResults
+	// in the request, the response includes a NextToken value. To list more objects,
+	// submit another GetProtectionStatus request, and specify the NextToken value
+	// from the response in the NextToken value in the next request.
+	//
+	// AWS SDKs provide auto-pagination that identify NextToken in a response and
+	// make subsequent request calls automatically on your behalf. However, this
+	// feature is not supported by GetProtectionStatus. You must submit subsequent
+	// requests with NextToken using your own processes.
+	NextToken *string `min:"1" type:"string"`
+
+	// The service type that is protected by the policy. Currently, this is always
+	// SHIELD_ADVANCED.
+	ServiceType SecurityServiceType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s GetProtectionStatusOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetProtectionStatusOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetProtectionStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListComplianceStatusRequest
 type ListComplianceStatusInput struct {
 	_ struct{} `type:"structure"`
@@ -1286,8 +1658,7 @@ type ListMemberAccountsInput struct {
 	// Specifies the number of member account IDs that you want AWS Firewall Manager
 	// to return for this request. If you have more IDs than the number that you
 	// specify for MaxResults, the response includes a NextToken value that you
-	// can use to get another batch of member account IDs. The maximum value for
-	// MaxResults is 100.
+	// can use to get another batch of member account IDs.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// If you specify a value for MaxResults and you have more account IDs than
@@ -1439,8 +1810,8 @@ type Policy struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the AWS account IDs to exclude from the policy. The IncludeMap
-	// values are evaluated first, with all of the appropriate account IDs added
-	// to the policy. Then the accounts listed in ExcludeMap are removed, resulting
+	// values are evaluated first, with all the appropriate account IDs added to
+	// the policy. Then the accounts listed in ExcludeMap are removed, resulting
 	// in the final list of accounts to add to the policy.
 	//
 	// The key to the map is ACCOUNT. For example, a valid ExcludeMap would be {“ACCOUNT”
@@ -1456,9 +1827,9 @@ type Policy struct {
 	ExcludeResourceTags *bool `type:"boolean" required:"true"`
 
 	// Specifies the AWS account IDs to include in the policy. If IncludeMap is
-	// null, all accounts in the AWS Organization are included in the policy. If
-	// IncludeMap is not null, only values listed in IncludeMap will be included
-	// in the policy.
+	// null, all accounts in the organization in AWS Organizations are included
+	// in the policy. If IncludeMap is not null, only values listed in IncludeMap
+	// are included in the policy.
 	//
 	// The key to the map is ACCOUNT. For example, a valid IncludeMap would be {“ACCOUNT”
 	// : [“accountID1”, “accountID2”]}.
@@ -1486,13 +1857,15 @@ type Policy struct {
 	// An array of ResourceTag objects.
 	ResourceTags []ResourceTag `type:"list"`
 
-	// The type of resource to protect with the policy, either an Application Load
-	// Balancer or a CloudFront distribution. This is in the format shown in AWS
-	// Resource Types Reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
-	// Valid values are AWS::ElasticLoadBalancingV2::LoadBalancer or AWS::CloudFront::Distribution.
+	// The type of resource to protect with the policy. This is in the format shown
+	// in AWS Resource Types Reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
+	// For example: AWS::ElasticLoadBalancingV2::LoadBalancer or AWS::CloudFront::Distribution.
 	//
 	// ResourceType is a required field
 	ResourceType *string `min:"1" type:"string" required:"true"`
+
+	// An array of ResourceType.
+	ResourceTypeList []string `type:"list"`
 
 	// Details about the security service that is being used to protect the resources.
 	//
@@ -1581,8 +1954,8 @@ type PolicyComplianceDetail struct {
 
 	// Details about problems with dependent services, such as AWS WAF or AWS Config,
 	// that are causing a resource to be non-compliant. The details include the
-	// name of the dependent service and the error message recieved indicating the
-	// problem with the service.
+	// name of the dependent service and the error message received that indicates
+	// the problem with the service.
 	IssueInfoMap map[string]string `type:"map"`
 
 	// The AWS account ID.
@@ -1620,8 +1993,8 @@ type PolicyComplianceStatus struct {
 
 	// Details about problems with dependent services, such as AWS WAF or AWS Config,
 	// that are causing a resource to be non-compliant. The details include the
-	// name of the dependent service and the error message recieved indicating the
-	// problem with the service.
+	// name of the dependent service and the error message received that indicates
+	// the problem with the service.
 	IssueInfoMap map[string]string `type:"map"`
 
 	// Time stamp of the last update to the EvaluationResult objects.
@@ -1667,14 +2040,14 @@ type PolicySummary struct {
 	// Indicates if the policy should be automatically applied to new resources.
 	RemediationEnabled *bool `type:"boolean"`
 
-	// The type of resource to protect with the policy, either an Application Load
-	// Balancer or a CloudFront distribution. This is in the format shown in AWS
-	// Resource Types Reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
-	// Valid values are AWS::ElasticLoadBalancingV2::LoadBalancer or AWS::CloudFront::Distribution.
+	// The type of resource to protect with the policy. This is in the format shown
+	// in AWS Resource Types Reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html).
+	// For example: AWS::ElasticLoadBalancingV2::LoadBalancer or AWS::CloudFront::Distribution.
 	ResourceType *string `min:"1" type:"string"`
 
-	// The service that the policy is using to protect the resources. This value
-	// is WAF.
+	// The service that the policy is using to protect the resources. This specifies
+	// the type of policy that is created, either a WAF policy or Shield Advanced
+	// policy.
 	SecurityServiceType SecurityServiceType `type:"string" enum:"true"`
 }
 
@@ -1887,10 +2260,13 @@ type SecurityServicePolicyData struct {
 	// ManagedServiceData": "{\"type\": \"WAF\", \"ruleGroups\": [{\"id\": \"12345678-1bcd-9012-efga-0987654321ab\",
 	// \"overrideAction\" : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\":
 	// \"BLOCK\"}}
+	//
+	// If this is a Shield Advanced policy, this string will be empty.
 	ManagedServiceData *string `min:"1" type:"string"`
 
-	// The service that the policy is using to protect the resources. This value
-	// is WAF.
+	// The service that the policy is using to protect the resources. This specifies
+	// the type of policy that is created, either a WAF policy or Shield Advanced
+	// policy.
 	//
 	// Type is a required field
 	Type SecurityServiceType `type:"string" required:"true" enum:"true"`
@@ -1962,8 +2338,9 @@ type DependentServiceName string
 
 // Enum values for DependentServiceName
 const (
-	DependentServiceNameAwsconfig DependentServiceName = "AWSCONFIG"
-	DependentServiceNameAwswaf    DependentServiceName = "AWSWAF"
+	DependentServiceNameAwsconfig         DependentServiceName = "AWSCONFIG"
+	DependentServiceNameAwswaf            DependentServiceName = "AWSWAF"
+	DependentServiceNameAwsshieldAdvanced DependentServiceName = "AWSSHIELD_ADVANCED"
 )
 
 func (enum DependentServiceName) MarshalValue() (string, error) {
@@ -1996,7 +2373,8 @@ type SecurityServiceType string
 
 // Enum values for SecurityServiceType
 const (
-	SecurityServiceTypeWaf SecurityServiceType = "WAF"
+	SecurityServiceTypeWaf            SecurityServiceType = "WAF"
+	SecurityServiceTypeShieldAdvanced SecurityServiceType = "SHIELD_ADVANCED"
 )
 
 func (enum SecurityServiceType) MarshalValue() (string, error) {
@@ -2012,9 +2390,10 @@ type ViolationReason string
 
 // Enum values for ViolationReason
 const (
-	ViolationReasonWebAclMissingRuleGroup  ViolationReason = "WEB_ACL_MISSING_RULE_GROUP"
-	ViolationReasonResourceMissingWebAcl   ViolationReason = "RESOURCE_MISSING_WEB_ACL"
-	ViolationReasonResourceIncorrectWebAcl ViolationReason = "RESOURCE_INCORRECT_WEB_ACL"
+	ViolationReasonWebAclMissingRuleGroup          ViolationReason = "WEB_ACL_MISSING_RULE_GROUP"
+	ViolationReasonResourceMissingWebAcl           ViolationReason = "RESOURCE_MISSING_WEB_ACL"
+	ViolationReasonResourceIncorrectWebAcl         ViolationReason = "RESOURCE_INCORRECT_WEB_ACL"
+	ViolationReasonResourceMissingShieldProtection ViolationReason = "RESOURCE_MISSING_SHIELD_PROTECTION"
 )
 
 func (enum ViolationReason) MarshalValue() (string, error) {

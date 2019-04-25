@@ -116,11 +116,17 @@ type RoboMakerAPI interface {
 
 	ListSimulationJobsRequest(*robomaker.ListSimulationJobsInput) robomaker.ListSimulationJobsRequest
 
+	ListTagsForResourceRequest(*robomaker.ListTagsForResourceInput) robomaker.ListTagsForResourceRequest
+
 	RegisterRobotRequest(*robomaker.RegisterRobotInput) robomaker.RegisterRobotRequest
 
 	RestartSimulationJobRequest(*robomaker.RestartSimulationJobInput) robomaker.RestartSimulationJobRequest
 
 	SyncDeploymentJobRequest(*robomaker.SyncDeploymentJobInput) robomaker.SyncDeploymentJobRequest
+
+	TagResourceRequest(*robomaker.TagResourceInput) robomaker.TagResourceRequest
+
+	UntagResourceRequest(*robomaker.UntagResourceInput) robomaker.UntagResourceRequest
 
 	UpdateRobotApplicationRequest(*robomaker.UpdateRobotApplicationInput) robomaker.UpdateRobotApplicationRequest
 

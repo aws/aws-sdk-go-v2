@@ -82,6 +82,8 @@ type GameLiftAPI interface {
 
 	CreatePlayerSessionsRequest(*gamelift.CreatePlayerSessionsInput) gamelift.CreatePlayerSessionsRequest
 
+	CreateScriptRequest(*gamelift.CreateScriptInput) gamelift.CreateScriptRequest
+
 	CreateVpcPeeringAuthorizationRequest(*gamelift.CreateVpcPeeringAuthorizationInput) gamelift.CreateVpcPeeringAuthorizationRequest
 
 	CreateVpcPeeringConnectionRequest(*gamelift.CreateVpcPeeringConnectionInput) gamelift.CreateVpcPeeringConnectionRequest
@@ -96,7 +98,11 @@ type GameLiftAPI interface {
 
 	DeleteMatchmakingConfigurationRequest(*gamelift.DeleteMatchmakingConfigurationInput) gamelift.DeleteMatchmakingConfigurationRequest
 
+	DeleteMatchmakingRuleSetRequest(*gamelift.DeleteMatchmakingRuleSetInput) gamelift.DeleteMatchmakingRuleSetRequest
+
 	DeleteScalingPolicyRequest(*gamelift.DeleteScalingPolicyInput) gamelift.DeleteScalingPolicyRequest
+
+	DeleteScriptRequest(*gamelift.DeleteScriptInput) gamelift.DeleteScriptRequest
 
 	DeleteVpcPeeringAuthorizationRequest(*gamelift.DeleteVpcPeeringAuthorizationInput) gamelift.DeleteVpcPeeringAuthorizationRequest
 
@@ -140,6 +146,8 @@ type GameLiftAPI interface {
 
 	DescribeScalingPoliciesRequest(*gamelift.DescribeScalingPoliciesInput) gamelift.DescribeScalingPoliciesRequest
 
+	DescribeScriptRequest(*gamelift.DescribeScriptInput) gamelift.DescribeScriptRequest
+
 	DescribeVpcPeeringAuthorizationsRequest(*gamelift.DescribeVpcPeeringAuthorizationsInput) gamelift.DescribeVpcPeeringAuthorizationsRequest
 
 	DescribeVpcPeeringConnectionsRequest(*gamelift.DescribeVpcPeeringConnectionsInput) gamelift.DescribeVpcPeeringConnectionsRequest
@@ -153,6 +161,8 @@ type GameLiftAPI interface {
 	ListBuildsRequest(*gamelift.ListBuildsInput) gamelift.ListBuildsRequest
 
 	ListFleetsRequest(*gamelift.ListFleetsInput) gamelift.ListFleetsRequest
+
+	ListScriptsRequest(*gamelift.ListScriptsInput) gamelift.ListScriptsRequest
 
 	PutScalingPolicyRequest(*gamelift.PutScalingPolicyInput) gamelift.PutScalingPolicyRequest
 
@@ -193,6 +203,8 @@ type GameLiftAPI interface {
 	UpdateMatchmakingConfigurationRequest(*gamelift.UpdateMatchmakingConfigurationInput) gamelift.UpdateMatchmakingConfigurationRequest
 
 	UpdateRuntimeConfigurationRequest(*gamelift.UpdateRuntimeConfigurationInput) gamelift.UpdateRuntimeConfigurationRequest
+
+	UpdateScriptRequest(*gamelift.UpdateScriptInput) gamelift.UpdateScriptRequest
 
 	ValidateMatchmakingRuleSetRequest(*gamelift.ValidateMatchmakingRuleSetInput) gamelift.ValidateMatchmakingRuleSetRequest
 }

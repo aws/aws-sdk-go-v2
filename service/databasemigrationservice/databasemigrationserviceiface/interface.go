@@ -67,6 +67,8 @@ import (
 type DatabaseMigrationServiceAPI interface {
 	AddTagsToResourceRequest(*databasemigrationservice.AddTagsToResourceInput) databasemigrationservice.AddTagsToResourceRequest
 
+	ApplyPendingMaintenanceActionRequest(*databasemigrationservice.ApplyPendingMaintenanceActionInput) databasemigrationservice.ApplyPendingMaintenanceActionRequest
+
 	CreateEndpointRequest(*databasemigrationservice.CreateEndpointInput) databasemigrationservice.CreateEndpointRequest
 
 	CreateEventSubscriptionRequest(*databasemigrationservice.CreateEventSubscriptionInput) databasemigrationservice.CreateEventSubscriptionRequest
@@ -106,6 +108,8 @@ type DatabaseMigrationServiceAPI interface {
 	DescribeEventsRequest(*databasemigrationservice.DescribeEventsInput) databasemigrationservice.DescribeEventsRequest
 
 	DescribeOrderableReplicationInstancesRequest(*databasemigrationservice.DescribeOrderableReplicationInstancesInput) databasemigrationservice.DescribeOrderableReplicationInstancesRequest
+
+	DescribePendingMaintenanceActionsRequest(*databasemigrationservice.DescribePendingMaintenanceActionsInput) databasemigrationservice.DescribePendingMaintenanceActionsRequest
 
 	DescribeRefreshSchemasStatusRequest(*databasemigrationservice.DescribeRefreshSchemasStatusInput) databasemigrationservice.DescribeRefreshSchemasStatusRequest
 
@@ -167,7 +171,7 @@ type DatabaseMigrationServiceAPI interface {
 
 	WaitUntilReplicationTaskStopped(context.Context, *databasemigrationservice.DescribeReplicationTasksInput, ...aws.WaiterOption) error
 
-	WaitUntilTestConnectionSucceeds(context.Context, *databasemigrationservice.TestConnectionInput, ...aws.WaiterOption) error
+	WaitUntilTestConnectionSucceeds(context.Context, *databasemigrationservice.DescribeConnectionsInput, ...aws.WaiterOption) error
 }
 
 var _ DatabaseMigrationServiceAPI = (*databasemigrationservice.DatabaseMigrationService)(nil)

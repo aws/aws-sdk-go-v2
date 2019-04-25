@@ -80,6 +80,8 @@ type ConfigServiceAPI interface {
 
 	DeletePendingAggregationRequestRequest(*configservice.DeletePendingAggregationRequestInput) configservice.DeletePendingAggregationRequestRequest
 
+	DeleteRemediationConfigurationRequest(*configservice.DeleteRemediationConfigurationInput) configservice.DeleteRemediationConfigurationRequest
+
 	DeleteRetentionConfigurationRequest(*configservice.DeleteRetentionConfigurationInput) configservice.DeleteRetentionConfigurationRequest
 
 	DeliverConfigSnapshotRequest(*configservice.DeliverConfigSnapshotInput) configservice.DeliverConfigSnapshotRequest
@@ -110,6 +112,10 @@ type ConfigServiceAPI interface {
 
 	DescribePendingAggregationRequestsRequest(*configservice.DescribePendingAggregationRequestsInput) configservice.DescribePendingAggregationRequestsRequest
 
+	DescribeRemediationConfigurationsRequest(*configservice.DescribeRemediationConfigurationsInput) configservice.DescribeRemediationConfigurationsRequest
+
+	DescribeRemediationExecutionStatusRequest(*configservice.DescribeRemediationExecutionStatusInput) configservice.DescribeRemediationExecutionStatusRequest
+
 	DescribeRetentionConfigurationsRequest(*configservice.DescribeRetentionConfigurationsInput) configservice.DescribeRetentionConfigurationsRequest
 
 	GetAggregateComplianceDetailsByConfigRuleRequest(*configservice.GetAggregateComplianceDetailsByConfigRuleInput) configservice.GetAggregateComplianceDetailsByConfigRuleRequest
@@ -136,6 +142,8 @@ type ConfigServiceAPI interface {
 
 	ListDiscoveredResourcesRequest(*configservice.ListDiscoveredResourcesInput) configservice.ListDiscoveredResourcesRequest
 
+	ListTagsForResourceRequest(*configservice.ListTagsForResourceInput) configservice.ListTagsForResourceRequest
+
 	PutAggregationAuthorizationRequest(*configservice.PutAggregationAuthorizationInput) configservice.PutAggregationAuthorizationRequest
 
 	PutConfigRuleRequest(*configservice.PutConfigRuleInput) configservice.PutConfigRuleRequest
@@ -148,13 +156,23 @@ type ConfigServiceAPI interface {
 
 	PutEvaluationsRequest(*configservice.PutEvaluationsInput) configservice.PutEvaluationsRequest
 
+	PutRemediationConfigurationsRequest(*configservice.PutRemediationConfigurationsInput) configservice.PutRemediationConfigurationsRequest
+
 	PutRetentionConfigurationRequest(*configservice.PutRetentionConfigurationInput) configservice.PutRetentionConfigurationRequest
+
+	SelectResourceConfigRequest(*configservice.SelectResourceConfigInput) configservice.SelectResourceConfigRequest
 
 	StartConfigRulesEvaluationRequest(*configservice.StartConfigRulesEvaluationInput) configservice.StartConfigRulesEvaluationRequest
 
 	StartConfigurationRecorderRequest(*configservice.StartConfigurationRecorderInput) configservice.StartConfigurationRecorderRequest
 
+	StartRemediationExecutionRequest(*configservice.StartRemediationExecutionInput) configservice.StartRemediationExecutionRequest
+
 	StopConfigurationRecorderRequest(*configservice.StopConfigurationRecorderInput) configservice.StopConfigurationRecorderRequest
+
+	TagResourceRequest(*configservice.TagResourceInput) configservice.TagResourceRequest
+
+	UntagResourceRequest(*configservice.UntagResourceInput) configservice.UntagResourceRequest
 }
 
 var _ ConfigServiceAPI = (*configservice.ConfigService)(nil)

@@ -736,6 +736,9 @@ func (r GetPipelineStateRequest) Send(ctx context.Context) (*GetPipelineStateOut
 // Returns information about the state of a pipeline, including the stages and
 // actions.
 //
+// Values returned in the revisionId and revisionUrl fields indicate the source
+// revision information, such as the commit ID, for the current state.
+//
 //    // Example sending a request using the GetPipelineStateRequest method.
 //    req := client.GetPipelineStateRequest(params)
 //    resp, err := req.Send(context.TODO())
@@ -817,6 +820,57 @@ func (c *CodePipeline) GetThirdPartyJobDetailsRequest(input *GetThirdPartyJobDet
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetThirdPartyJobDetailsRequest{Request: req, Input: input, Copy: c.GetThirdPartyJobDetailsRequest}
+}
+
+const opListActionExecutions = "ListActionExecutions"
+
+// ListActionExecutionsRequest is a API request type for the ListActionExecutions API operation.
+type ListActionExecutionsRequest struct {
+	*aws.Request
+	Input *ListActionExecutionsInput
+	Copy  func(*ListActionExecutionsInput) ListActionExecutionsRequest
+}
+
+// Send marshals and sends the ListActionExecutions API request.
+func (r ListActionExecutionsRequest) Send(ctx context.Context) (*ListActionExecutionsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListActionExecutionsOutput), nil
+}
+
+// ListActionExecutionsRequest returns a request value for making API operation for
+// AWS CodePipeline.
+//
+// Lists the action executions that have occurred in a pipeline.
+//
+//    // Example sending a request using the ListActionExecutionsRequest method.
+//    req := client.ListActionExecutionsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionExecutions
+func (c *CodePipeline) ListActionExecutionsRequest(input *ListActionExecutionsInput) ListActionExecutionsRequest {
+	op := &aws.Operation{
+		Name:       opListActionExecutions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListActionExecutionsInput{}
+	}
+
+	output := &ListActionExecutionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListActionExecutionsRequest{Request: req, Input: input, Copy: c.ListActionExecutionsRequest}
 }
 
 const opListActionTypes = "ListActionTypes"
@@ -2198,6 +2252,155 @@ func (s ActionExecution) GoString() string {
 	return s.String()
 }
 
+// Returns information about an execution of an action, including the action
+// execution ID, and the name, version, and timing of the action.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionDetail
+type ActionExecutionDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The action execution ID.
+	ActionExecutionId *string `locationName:"actionExecutionId" type:"string"`
+
+	// The name of the action.
+	ActionName *string `locationName:"actionName" min:"1" type:"string"`
+
+	// Input details for the action execution, such as role ARN, Region, and input
+	// artifacts.
+	Input *ActionExecutionInput `locationName:"input" type:"structure"`
+
+	// The last update time of the action execution.
+	LastUpdateTime *time.Time `locationName:"lastUpdateTime" type:"timestamp" timestampFormat:"unix"`
+
+	// Output details for the action execution, such as the action execution result.
+	Output *ActionExecutionOutput `locationName:"output" type:"structure"`
+
+	// The pipeline execution ID for the action execution.
+	PipelineExecutionId *string `locationName:"pipelineExecutionId" type:"string"`
+
+	// The version of the pipeline where the action was run.
+	PipelineVersion *int64 `locationName:"pipelineVersion" min:"1" type:"integer"`
+
+	// The name of the stage that contains the action.
+	StageName *string `locationName:"stageName" min:"1" type:"string"`
+
+	// The start time of the action execution.
+	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix"`
+
+	// The status of the action execution. Status categories are InProgress, Succeeded,
+	// and Failed.
+	Status ActionExecutionStatus `locationName:"status" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ActionExecutionDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ActionExecutionDetail) GoString() string {
+	return s.String()
+}
+
+// Filter values for the action execution.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionFilter
+type ActionExecutionFilter struct {
+	_ struct{} `type:"structure"`
+
+	// The pipeline execution ID used to filter action execution history.
+	PipelineExecutionId *string `locationName:"pipelineExecutionId" type:"string"`
+}
+
+// String returns the string representation
+func (s ActionExecutionFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ActionExecutionFilter) GoString() string {
+	return s.String()
+}
+
+// Input information used for an action execution.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionInput
+type ActionExecutionInput struct {
+	_ struct{} `type:"structure"`
+
+	// Represents information about an action type.
+	ActionTypeId *ActionTypeId `locationName:"actionTypeId" type:"structure"`
+
+	// Configuration data for an action execution.
+	Configuration map[string]string `locationName:"configuration" type:"map"`
+
+	// Details of input artifacts of the action that correspond to the action execution.
+	InputArtifacts []ArtifactDetail `locationName:"inputArtifacts" type:"list"`
+
+	// The AWS Region for the action, such as us-east-1.
+	Region *string `locationName:"region" min:"4" type:"string"`
+
+	// The ARN of the IAM service role that performs the declared action. This is
+	// assumed through the roleArn for the pipeline.
+	RoleArn *string `locationName:"roleArn" type:"string"`
+}
+
+// String returns the string representation
+func (s ActionExecutionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ActionExecutionInput) GoString() string {
+	return s.String()
+}
+
+// Output details listed for an action execution, such as the action execution
+// result.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionOutput
+type ActionExecutionOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Execution result information listed in the output details for an action execution.
+	ExecutionResult *ActionExecutionResult `locationName:"executionResult" type:"structure"`
+
+	// Details of output artifacts of the action that correspond to the action execution.
+	OutputArtifacts []ArtifactDetail `locationName:"outputArtifacts" type:"list"`
+}
+
+// String returns the string representation
+func (s ActionExecutionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ActionExecutionOutput) GoString() string {
+	return s.String()
+}
+
+// Execution result information, such as the external execution ID.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionResult
+type ActionExecutionResult struct {
+	_ struct{} `type:"structure"`
+
+	// The action provider's external ID for the action execution.
+	ExternalExecutionId *string `locationName:"externalExecutionId" type:"string"`
+
+	// The action provider's summary for the action execution.
+	ExternalExecutionSummary *string `locationName:"externalExecutionSummary" type:"string"`
+
+	// The deepest external link to the external resource (for example, a repository
+	// URL or deployment endpoint) that is used when running the action.
+	ExternalExecutionUrl *string `locationName:"externalExecutionUrl" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ActionExecutionResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ActionExecutionResult) GoString() string {
+	return s.String()
+}
+
 // Represents information about the version (or revision) of an action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionRevision
 type ActionRevision struct {
@@ -2350,7 +2553,8 @@ type ActionTypeId struct {
 	// The provider of the service being called by the action. Valid providers are
 	// determined by the action category. For example, an action in the Deploy category
 	// type might have a provider of AWS CodeDeploy, which would be specified as
-	// CodeDeploy.
+	// CodeDeploy. To reference a list of action providers by action type, see Valid
+	// Action Types and Providers in CodePipeline (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers).
 	//
 	// Provider is a required field
 	Provider *string `locationName:"provider" min:"1" type:"string" required:"true"`
@@ -2528,6 +2732,28 @@ func (s Artifact) String() string {
 
 // GoString returns the string representation
 func (s Artifact) GoString() string {
+	return s.String()
+}
+
+// Artifact details for the action execution, such as the artifact location.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ArtifactDetail
+type ArtifactDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The artifact object name for the action execution.
+	Name *string `locationName:"name" min:"1" type:"string"`
+
+	// The Amazon S3 artifact location for the action execution.
+	S3location *S3Location `locationName:"s3location" type:"structure"`
+}
+
+// String returns the string representation
+func (s ArtifactDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ArtifactDetail) GoString() string {
 	return s.String()
 }
 
@@ -2763,7 +2989,7 @@ type CreateCustomActionTypeInput struct {
 	// You can refer to a name in the configuration properties of the custom action
 	// within the URL templates by following the format of {Config:name}, as long
 	// as the configuration property is both required and not secret. For more information,
-	// see Create a Custom Action for a Pipeline (http://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html).
+	// see Create a Custom Action for a Pipeline (https://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html).
 	ConfigurationProperties []ActionConfigurationProperty `locationName:"configurationProperties" type:"list"`
 
 	// The details of the input artifact for the action, such as its commit ID.
@@ -4129,6 +4355,92 @@ func (s JobDetails) String() string {
 // GoString returns the string representation
 func (s JobDetails) GoString() string {
 	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionExecutionsInput
+type ListActionExecutionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Input information used to filter action execution history.
+	Filter *ActionExecutionFilter `locationName:"filter" type:"structure"`
+
+	// The maximum number of results to return in a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value. The
+	// action execution history is limited to the most recent 12 months, based on
+	// action execution start times. Default value is 100.
+	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
+
+	// The token that was returned from the previous ListActionExecutions call,
+	// which can be used to return the next set of action executions in the list.
+	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
+
+	// The name of the pipeline for which you want to list action execution history.
+	//
+	// PipelineName is a required field
+	PipelineName *string `locationName:"pipelineName" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ListActionExecutionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListActionExecutionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListActionExecutionsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListActionExecutionsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if s.PipelineName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PipelineName"))
+	}
+	if s.PipelineName != nil && len(*s.PipelineName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("PipelineName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionExecutionsOutput
+type ListActionExecutionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The details for a list of recent executions, such as action execution ID.
+	ActionExecutionDetails []ActionExecutionDetail `locationName:"actionExecutionDetails" type:"list"`
+
+	// If the amount of returned information is significantly large, an identifier
+	// is also returned and can be used in a subsequent ListActionExecutions call
+	// to return the next set of action executions in the list.
+	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListActionExecutionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListActionExecutionsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListActionExecutionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of a ListActionTypes action.
@@ -5730,6 +6042,28 @@ func (s S3ArtifactLocation) GoString() string {
 	return s.String()
 }
 
+// The Amazon S3 artifact location for an action's artifacts.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/S3Location
+type S3Location struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon S3 artifact bucket for an action's artifacts.
+	Bucket *string `locationName:"bucket" min:"3" type:"string"`
+
+	// The artifact name.
+	Key *string `locationName:"key" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s S3Location) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s S3Location) GoString() string {
+	return s.String()
+}
+
 // Information about the version (or revision) of a source artifact that initiated
 // a pipeline execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/SourceRevision
@@ -6353,7 +6687,7 @@ type WebhookFilterRule struct {
 	// action has an action configuration property called "Branch" with a value
 	// of "master", the MatchEquals value will be evaluated as "refs/heads/master".
 	// A list of action configuration properties for built-in action types can be
-	// found here: Pipeline Structure Reference Action Requirements (http://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements).
+	// found here: Pipeline Structure Reference Action Requirements (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements).
 	MatchEquals *string `locationName:"matchEquals" min:"1" type:"string"`
 }
 

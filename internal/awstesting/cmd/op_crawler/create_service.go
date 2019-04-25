@@ -19,6 +19,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/athena"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling"
 	"github.com/aws/aws-sdk-go-v2/service/autoscalingplans"
+	"github.com/aws/aws-sdk-go-v2/service/backup"
 	"github.com/aws/aws-sdk-go-v2/service/batch"
 	"github.com/aws/aws-sdk-go-v2/service/budgets"
 	"github.com/aws/aws-sdk-go-v2/service/chime"
@@ -56,6 +57,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/directconnect"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice"
 	"github.com/aws/aws-sdk-go-v2/service/dlm"
+	"github.com/aws/aws-sdk-go-v2/service/docdb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
@@ -163,12 +165,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	"github.com/aws/aws-sdk-go-v2/service/support"
 	"github.com/aws/aws-sdk-go-v2/service/swf"
+	"github.com/aws/aws-sdk-go-v2/service/textract"
 	"github.com/aws/aws-sdk-go-v2/service/transcribeservice"
 	"github.com/aws/aws-sdk-go-v2/service/transfer"
 	"github.com/aws/aws-sdk-go-v2/service/translate"
 	"github.com/aws/aws-sdk-go-v2/service/waf"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs"
+	"github.com/aws/aws-sdk-go-v2/service/worklink"
 	"github.com/aws/aws-sdk-go-v2/service/workmail"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces"
 	"github.com/aws/aws-sdk-go-v2/service/xray"
@@ -201,6 +205,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "athena", value: reflect.ValueOf(athena.New(cfg))},
 		{name: "autoscaling", value: reflect.ValueOf(autoscaling.New(cfg))},
 		{name: "autoscalingplans", value: reflect.ValueOf(autoscalingplans.New(cfg))},
+		{name: "backup", value: reflect.ValueOf(backup.New(cfg))},
 		{name: "batch", value: reflect.ValueOf(batch.New(cfg))},
 		{name: "budgets", value: reflect.ValueOf(budgets.New(cfg))},
 		{name: "chime", value: reflect.ValueOf(chime.New(cfg))},
@@ -238,6 +243,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "directconnect", value: reflect.ValueOf(directconnect.New(cfg))},
 		{name: "directoryservice", value: reflect.ValueOf(directoryservice.New(cfg))},
 		{name: "dlm", value: reflect.ValueOf(dlm.New(cfg))},
+		{name: "docdb", value: reflect.ValueOf(docdb.New(cfg))},
 		{name: "dynamodb", value: reflect.ValueOf(dynamodb.New(cfg))},
 		{name: "dynamodbstreams", value: reflect.ValueOf(dynamodbstreams.New(cfg))},
 		{name: "ec2", value: reflect.ValueOf(ec2.New(cfg))},
@@ -345,12 +351,14 @@ func createServices(cfg aws.Config) []service {
 		{name: "sts", value: reflect.ValueOf(sts.New(cfg))},
 		{name: "support", value: reflect.ValueOf(support.New(cfg))},
 		{name: "swf", value: reflect.ValueOf(swf.New(cfg))},
+		{name: "textract", value: reflect.ValueOf(textract.New(cfg))},
 		{name: "transcribeservice", value: reflect.ValueOf(transcribeservice.New(cfg))},
 		{name: "transfer", value: reflect.ValueOf(transfer.New(cfg))},
 		{name: "translate", value: reflect.ValueOf(translate.New(cfg))},
 		{name: "waf", value: reflect.ValueOf(waf.New(cfg))},
 		{name: "wafregional", value: reflect.ValueOf(wafregional.New(cfg))},
 		{name: "workdocs", value: reflect.ValueOf(workdocs.New(cfg))},
+		{name: "worklink", value: reflect.ValueOf(worklink.New(cfg))},
 		{name: "workmail", value: reflect.ValueOf(workmail.New(cfg))},
 		{name: "workspaces", value: reflect.ValueOf(workspaces.New(cfg))},
 		{name: "xray", value: reflect.ValueOf(xray.New(cfg))},

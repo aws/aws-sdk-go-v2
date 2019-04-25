@@ -3176,6 +3176,9 @@ type ConnectDirectoryInput struct {
 	//
 	// Size is a required field
 	Size DirectorySize `type:"string" required:"true" enum:"true"`
+
+	// The tags to be assigned to AD Connector.
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -3212,6 +3215,13 @@ func (s *ConnectDirectoryInput) Validate() error {
 	if s.ConnectSettings != nil {
 		if err := s.ConnectSettings.Validate(); err != nil {
 			invalidParams.AddNested("ConnectSettings", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 
@@ -3538,6 +3548,9 @@ type CreateDirectoryInput struct {
 	// Size is a required field
 	Size DirectorySize `type:"string" required:"true" enum:"true"`
 
+	// The tags to be assigned to the Simple AD directory.
+	Tags []Tag `type:"list"`
+
 	// A DirectoryVpcSettings object that contains additional information for the
 	// operation.
 	VpcSettings *DirectoryVpcSettings `type:"structure"`
@@ -3566,6 +3579,13 @@ func (s *CreateDirectoryInput) Validate() error {
 	}
 	if len(s.Size) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Size"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 	if s.VpcSettings != nil {
 		if err := s.VpcSettings.Validate(); err != nil {
@@ -3705,6 +3725,9 @@ type CreateMicrosoftADInput struct {
 	// part of your directory DNS. For example, CORP for the directory DNS corp.example.com.
 	ShortName *string `type:"string"`
 
+	// The tags to be assigned to the AWS Managed Microsoft AD directory.
+	Tags []Tag `type:"list"`
+
 	// Contains VPC information for the CreateDirectory or CreateMicrosoftAD operation.
 	//
 	// VpcSettings is a required field
@@ -3735,6 +3758,13 @@ func (s *CreateMicrosoftADInput) Validate() error {
 
 	if s.VpcSettings == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcSettings"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 	if s.VpcSettings != nil {
 		if err := s.VpcSettings.Validate(); err != nil {

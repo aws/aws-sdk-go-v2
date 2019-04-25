@@ -291,6 +291,8 @@ func ExampleOrganizations_CreateAccountRequest_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -756,6 +758,8 @@ func ExampleOrganizations_DescribeCreateAccountStatusRequest_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1435,6 +1439,8 @@ func ExampleOrganizations_ListCreateAccountStatusRequest_shared00() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1481,6 +1487,8 @@ func ExampleOrganizations_ListCreateAccountStatusRequest_shared01() {
 				fmt.Println(organizations.ErrCodeServiceException, aerr.Error())
 			case organizations.ErrCodeTooManyRequestsException:
 				fmt.Println(organizations.ErrCodeTooManyRequestsException, aerr.Error())
+			case organizations.ErrCodeUnsupportedAPIEndpointException:
+				fmt.Println(organizations.ErrCodeUnsupportedAPIEndpointException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

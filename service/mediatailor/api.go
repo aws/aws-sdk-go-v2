@@ -34,7 +34,7 @@ func (r DeletePlaybackConfigurationRequest) Send(ctx context.Context) (*DeletePl
 // DeletePlaybackConfigurationRequest returns a request value for making API operation for
 // AWS MediaTailor.
 //
-// Deletes the configuration for the specified name.
+// Deletes the playback configuration for the specified name.
 //
 //    // Example sending a request using the DeletePlaybackConfigurationRequest method.
 //    req := client.DeletePlaybackConfigurationRequest(params)
@@ -57,8 +57,6 @@ func (c *MediaTailor) DeletePlaybackConfigurationRequest(input *DeletePlaybackCo
 
 	output := &DeletePlaybackConfigurationOutput{}
 	req := c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeletePlaybackConfigurationRequest{Request: req, Input: input, Copy: c.DeletePlaybackConfigurationRequest}
@@ -87,7 +85,7 @@ func (r GetPlaybackConfigurationRequest) Send(ctx context.Context) (*GetPlayback
 // GetPlaybackConfigurationRequest returns a request value for making API operation for
 // AWS MediaTailor.
 //
-// Returns the configuration for the specified name.
+// Returns the playback configuration for the specified name.
 //
 //    // Example sending a request using the GetPlaybackConfigurationRequest method.
 //    req := client.GetPlaybackConfigurationRequest(params)
@@ -138,10 +136,10 @@ func (r ListPlaybackConfigurationsRequest) Send(ctx context.Context) (*ListPlayb
 // ListPlaybackConfigurationsRequest returns a request value for making API operation for
 // AWS MediaTailor.
 //
-// Returns a list of the configurations defined in AWS Elemental MediaTailor.
-// You can specify a max number of configurations to return at a time. The default
-// max is 50. Results are returned in pagefuls. If AWS Elemental MediaTailor
-// has more configurations than the specified max, it provides parameters in
+// Returns a list of the playback configurations defined in AWS Elemental MediaTailor.
+// You can specify a maximum number of configurations to return at a time. The
+// default maximum is 50. Results are returned in pagefuls. If MediaTailor has
+// more configurations than the specified maximum, it provides parameters in
 // the response that you can use to retrieve the next pageful.
 //
 //    // Example sending a request using the ListPlaybackConfigurationsRequest method.
@@ -170,6 +168,58 @@ func (c *MediaTailor) ListPlaybackConfigurationsRequest(input *ListPlaybackConfi
 	return ListPlaybackConfigurationsRequest{Request: req, Input: input, Copy: c.ListPlaybackConfigurationsRequest}
 }
 
+const opListTagsForResource = "ListTagsForResource"
+
+// ListTagsForResourceRequest is a API request type for the ListTagsForResource API operation.
+type ListTagsForResourceRequest struct {
+	*aws.Request
+	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
+}
+
+// Send marshals and sends the ListTagsForResource API request.
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForResourceOutput), nil
+}
+
+// ListTagsForResourceRequest returns a request value for making API operation for
+// AWS MediaTailor.
+//
+// Returns a list of the tags assigned to the specified playback configuration
+// resource.
+//
+//    // Example sending a request using the ListTagsForResourceRequest method.
+//    req := client.ListTagsForResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListTagsForResource
+func (c *MediaTailor) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
+	op := &aws.Operation{
+		Name:       opListTagsForResource,
+		HTTPMethod: "GET",
+		HTTPPath:   "/tags/{ResourceArn}",
+	}
+
+	if input == nil {
+		input = &ListTagsForResourceInput{}
+	}
+
+	output := &ListTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
+}
+
 const opPutPlaybackConfiguration = "PutPlaybackConfiguration"
 
 // PutPlaybackConfigurationRequest is a API request type for the PutPlaybackConfiguration API operation.
@@ -193,7 +243,7 @@ func (r PutPlaybackConfigurationRequest) Send(ctx context.Context) (*PutPlayback
 // PutPlaybackConfigurationRequest returns a request value for making API operation for
 // AWS MediaTailor.
 //
-// Adds a new configuration to AWS Elemental MediaTailor.
+// Adds a new playback configuration to AWS Elemental MediaTailor.
 //
 //    // Example sending a request using the PutPlaybackConfigurationRequest method.
 //    req := client.PutPlaybackConfigurationRequest(params)
@@ -219,6 +269,114 @@ func (c *MediaTailor) PutPlaybackConfigurationRequest(input *PutPlaybackConfigur
 	output.responseMetadata = aws.Response{Request: req}
 
 	return PutPlaybackConfigurationRequest{Request: req, Input: input, Copy: c.PutPlaybackConfigurationRequest}
+}
+
+const opTagResource = "TagResource"
+
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
+}
+
+// Send marshals and sends the TagResource API request.
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// AWS MediaTailor.
+//
+// Adds tags to the specified playback configuration resource. You can specify
+// one or more tags to add.
+//
+//    // Example sending a request using the TagResourceRequest method.
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/TagResource
+func (c *MediaTailor) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
+	op := &aws.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/tags/{ResourceArn}",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
+}
+
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// AWS MediaTailor.
+//
+// Removes tags from the specified playback configuration resource. You can
+// specify one or more tags to remove.
+//
+//    // Example sending a request using the UntagResourceRequest method.
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UntagResource
+func (c *MediaTailor) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
+	op := &aws.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/tags/{ResourceArn}",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 
 // The configuration for using a content delivery network (CDN), like Amazon
@@ -270,24 +428,31 @@ func (s CdnConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The configuration object for dash content.
+// The configuration for DASH content.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DashConfiguration
 type DashConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// The URL that is used to initiate a playback session for devices that support
-	// DASH.
+	// The URL generated by MediaTailor to initiate a playback session. The session
+	// uses server-side reporting. This setting is ignored in PUT operations.
 	ManifestEndpointPrefix *string `type:"string"`
 
 	// The setting that controls whether MediaTailor includes the Location tag in
-	// DASH Manifests. MediaTailor populates the Location tag with the URL for manifest
+	// DASH manifests. MediaTailor populates the Location tag with the URL for manifest
 	// update requests, to be used by players that don't support sticky redirects.
 	// Disable this if you have CDN routing rules set up for accessing MediaTailor
-	// manifests and you are either using client-side reporting or your players
+	// manifests, and you are either using client-side reporting or your players
 	// support sticky HTTP redirects. Valid values are DISABLED and EMT_DEFAULT.
 	// The EMT_DEFAULT setting enables the inclusion of the tag and is the default
 	// value.
 	MpdLocation *string `type:"string"`
+
+	// The setting that controls whether MediaTailor handles manifests from the
+	// origin server as multi-period manifests or single-period manifests. If your
+	// origin server produces single-period manifests, set this to SINGLE_PERIOD.
+	// The default setting is MULTI_PERIOD. For multi-period manifests, omit this
+	// setting or set it to MULTI_PERIOD.
+	OriginManifestType OriginManifestType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -314,14 +479,36 @@ func (s DashConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "MpdLocation", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if len(s.OriginManifestType) > 0 {
+		v := s.OriginManifestType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OriginManifestType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	return nil
 }
 
+// The configuration for DASH PUT operations.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DashConfigurationForPut
 type DashConfigurationForPut struct {
 	_ struct{} `type:"structure"`
 
+	// The setting that controls whether MediaTailor includes the Location tag in
+	// DASH manifests. MediaTailor populates the Location tag with the URL for manifest
+	// update requests, to be used by players that don't support sticky redirects.
+	// Disable this if you have CDN routing rules set up for accessing MediaTailor
+	// manifests, and you are either using client-side reporting or your players
+	// support sticky HTTP redirects. Valid values are DISABLED and EMT_DEFAULT.
+	// The EMT_DEFAULT setting enables the inclusion of the tag and is the default
+	// value.
 	MpdLocation *string `type:"string"`
+
+	// The setting that controls whether MediaTailor handles manifests from the
+	// origin server as multi-period manifests or single-period manifests. If your
+	// origin server produces single-period manifests, set this to SINGLE_PERIOD.
+	// The default setting is MULTI_PERIOD. For multi-period manifests, omit this
+	// setting or set it to MULTI_PERIOD.
+	OriginManifestType OriginManifestType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -341,6 +528,12 @@ func (s DashConfigurationForPut) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "MpdLocation", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.OriginManifestType) > 0 {
+		v := s.OriginManifestType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OriginManifestType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -390,7 +583,7 @@ func (s DeletePlaybackConfigurationInput) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeletePlaybackConfigurationOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeletePlaybackConfigurationResponse
 type DeletePlaybackConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -472,21 +665,24 @@ type GetPlaybackConfigurationOutput struct {
 	// of static parameters and placeholders for dynamic parameters. AWS Elemental
 	// MediaTailor substitutes player-specific and session-specific parameters as
 	// needed when calling the ADS. Alternately, for testing, you can provide a
-	// static VAST URL. The maximum length is 25000 characters.
+	// static VAST URL. The maximum length is 25,000 characters.
 	AdDecisionServerUrl *string `type:"string"`
 
 	// The configuration for using a content delivery network (CDN), like Amazon
 	// CloudFront, for content and ad segment management.
 	CdnConfiguration *CdnConfiguration `type:"structure"`
 
-	// The configuration object for dash content.
+	// The configuration for DASH content.
 	DashConfiguration *DashConfiguration `type:"structure"`
 
 	// The configuration for HLS content.
 	HlsConfiguration *HlsConfiguration `type:"structure"`
 
-	// The identifier for the configuration.
+	// The identifier for the playback configuration.
 	Name *string `type:"string"`
+
+	// The Amazon Resource Name (ARN) for the playback configuration.
+	PlaybackConfigurationArn *string `type:"string"`
 
 	// The URL that the player accesses to get a manifest from AWS Elemental MediaTailor.
 	// This session will use server-side reporting.
@@ -496,17 +692,21 @@ type GetPlaybackConfigurationOutput struct {
 	// reporting.
 	SessionInitializationEndpointPrefix *string `type:"string"`
 
-	// URL for a high-quality video asset to transcode and use to fill in time that's
-	// not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps
-	// in media content. Configuring the slate is optional for non-VPAID configurations.
-	// For VPAID, the slate is required because AWS Elemental MediaTailor provides
-	// it in the slots designated for dynamic ad content. The slate must be a high-quality
-	// asset that contains both audio and video.
+	// The URL for a high-quality video asset to transcode and use to fill in time
+	// that's not used by ads. AWS Elemental MediaTailor shows the slate to fill
+	// in gaps in media content. Configuring the slate is optional for non-VPAID
+	// playback configurations. For VPAID, the slate is required because MediaTailor
+	// provides it in the slots designated for dynamic ad content. The slate must
+	// be a high-quality asset that contains both audio and video.
 	SlateAdUrl *string `type:"string"`
 
-	// Associate this playbackConfiguration with a custom transcode profile, overriding
-	// MediaTailor's dynamic transcoding defaults. Do not include this field if
-	// you have not setup custom profiles with the MediaTailor service team.
+	// The tags assigned to the playback configuration.
+	Tags map[string]string `locationName:"tags" type:"map"`
+
+	// The name that is used to associate this playback configuration with a custom
+	// transcode profile. This overrides the dynamic transcoding defaults of MediaTailor.
+	// Use this only if you have already set up custom profiles with the help of
+	// AWS Support.
 	TranscodeProfileName *string `type:"string"`
 
 	// The URL prefix for the master playlist for the stream, minus the asset ID.
@@ -561,6 +761,12 @@ func (s GetPlaybackConfigurationOutput) MarshalFields(e protocol.FieldEncoder) e
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.PlaybackConfigurationArn != nil {
+		v := *s.PlaybackConfigurationArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PlaybackConfigurationArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.PlaybackEndpointPrefix != nil {
 		v := *s.PlaybackEndpointPrefix
 
@@ -578,6 +784,18 @@ func (s GetPlaybackConfigurationOutput) MarshalFields(e protocol.FieldEncoder) e
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SlateAdUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	if s.TranscodeProfileName != nil {
 		v := *s.TranscodeProfileName
@@ -682,13 +900,13 @@ type ListPlaybackConfigurationsOutput struct {
 
 	responseMetadata aws.Response
 
-	// Array of playback configurations. This may be all of the available configurations
-	// or a subset, depending on the settings you provide and on the total number
+	// Array of playback configurations. This might be all the available configurations
+	// or a subset, depending on the settings that you provide and the total number
 	// of configurations stored.
 	Items []PlaybackConfiguration `type:"list"`
 
-	// Pagination token returned by the GET list request when results overrun the
-	// meximum allowed. Use the token to fetch the next page of results.
+	// Pagination token returned by the GET list request when results exceed the
+	// maximum allowed. Use the token to fetch the next page of results.
 	NextToken *string `type:"string"`
 }
 
@@ -730,6 +948,92 @@ func (s ListPlaybackConfigurationsOutput) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListTagsForResourceRequest
+type ListTagsForResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"ResourceArn" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTagsForResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "ResourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListTagsForResourceResponse
+type ListTagsForResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	Tags map[string]string `locationName:"tags" type:"map"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTagsForResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PlaybackConfiguration
 type PlaybackConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -740,9 +1044,25 @@ type PlaybackConfiguration struct {
 	// CloudFront, for content and ad segment management.
 	CdnConfiguration *CdnConfiguration `type:"structure"`
 
+	// The configuration for DASH content.
+	DashConfiguration *DashConfiguration `type:"structure"`
+
+	// The configuration for HLS content.
+	HlsConfiguration *HlsConfiguration `type:"structure"`
+
 	Name *string `type:"string"`
 
+	PlaybackConfigurationArn *string `type:"string"`
+
+	PlaybackEndpointPrefix *string `type:"string"`
+
+	SessionInitializationEndpointPrefix *string `type:"string"`
+
 	SlateAdUrl *string `type:"string"`
+
+	Tags map[string]string `locationName:"tags" type:"map"`
+
+	TranscodeProfileName *string `type:"string"`
 
 	VideoContentSourceUrl *string `type:"string"`
 }
@@ -771,17 +1091,65 @@ func (s PlaybackConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "CdnConfiguration", v, metadata)
 	}
+	if s.DashConfiguration != nil {
+		v := s.DashConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DashConfiguration", v, metadata)
+	}
+	if s.HlsConfiguration != nil {
+		v := s.HlsConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "HlsConfiguration", v, metadata)
+	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.PlaybackConfigurationArn != nil {
+		v := *s.PlaybackConfigurationArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PlaybackConfigurationArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PlaybackEndpointPrefix != nil {
+		v := *s.PlaybackEndpointPrefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PlaybackEndpointPrefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SessionInitializationEndpointPrefix != nil {
+		v := *s.SessionInitializationEndpointPrefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SessionInitializationEndpointPrefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.SlateAdUrl != nil {
 		v := *s.SlateAdUrl
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SlateAdUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.TranscodeProfileName != nil {
+		v := *s.TranscodeProfileName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TranscodeProfileName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.VideoContentSourceUrl != nil {
 		v := *s.VideoContentSourceUrl
@@ -800,29 +1168,34 @@ type PutPlaybackConfigurationInput struct {
 	// of static parameters and placeholders for dynamic parameters. AWS Elemental
 	// MediaTailor substitutes player-specific and session-specific parameters as
 	// needed when calling the ADS. Alternately, for testing you can provide a static
-	// VAST URL. The maximum length is 25000 characters.
+	// VAST URL. The maximum length is 25,000 characters.
 	AdDecisionServerUrl *string `type:"string"`
 
 	// The configuration for using a content delivery network (CDN), like Amazon
 	// CloudFront, for content and ad segment management.
 	CdnConfiguration *CdnConfiguration `type:"structure"`
 
+	// The configuration for DASH content.
 	DashConfiguration *DashConfigurationForPut `type:"structure"`
 
-	// The identifier for the configuration.
+	// The identifier for the playback configuration.
 	Name *string `type:"string"`
 
 	// The URL for a high-quality video asset to transcode and use to fill in time
 	// that's not used by ads. AWS Elemental MediaTailor shows the slate to fill
 	// in gaps in media content. Configuring the slate is optional for non-VPAID
-	// configurations. For VPAID, the slate is required because AWS Elemental MediaTailor
-	// provides it in the slots that are designated for dynamic ad content. The
-	// slate must be a high-quality asset that contains both audio and video.
+	// configurations. For VPAID, the slate is required because MediaTailor provides
+	// it in the slots that are designated for dynamic ad content. The slate must
+	// be a high-quality asset that contains both audio and video.
 	SlateAdUrl *string `type:"string"`
 
-	// Associate this playbackConfiguration with a custom transcode profile, overriding
-	// MediaTailor's dynamic transcoding defaults. Do not include this field if
-	// you have not setup custom profiles with the MediaTailor service team.
+	// The tags to assign to the playback configuration.
+	Tags map[string]string `locationName:"tags" type:"map"`
+
+	// The name that is used to associate this playback configuration with a custom
+	// transcode profile. This overrides the dynamic transcoding defaults of MediaTailor.
+	// Use this only if you have already set up custom profiles with the help of
+	// AWS Support.
 	TranscodeProfileName *string `type:"string"`
 
 	// The URL prefix for the master playlist for the stream, minus the asset ID.
@@ -874,6 +1247,18 @@ func (s PutPlaybackConfigurationInput) MarshalFields(e protocol.FieldEncoder) er
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SlateAdUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	if s.TranscodeProfileName != nil {
 		v := *s.TranscodeProfileName
 
@@ -901,7 +1286,7 @@ type PutPlaybackConfigurationOutput struct {
 	// CloudFront, for content and ad segment management.
 	CdnConfiguration *CdnConfiguration `type:"structure"`
 
-	// The configuration object for dash content.
+	// The configuration for DASH content.
 	DashConfiguration *DashConfiguration `type:"structure"`
 
 	// The configuration for HLS content.
@@ -909,11 +1294,15 @@ type PutPlaybackConfigurationOutput struct {
 
 	Name *string `type:"string"`
 
+	PlaybackConfigurationArn *string `type:"string"`
+
 	PlaybackEndpointPrefix *string `type:"string"`
 
 	SessionInitializationEndpointPrefix *string `type:"string"`
 
 	SlateAdUrl *string `type:"string"`
+
+	Tags map[string]string `locationName:"tags" type:"map"`
 
 	TranscodeProfileName *string `type:"string"`
 
@@ -967,6 +1356,12 @@ func (s PutPlaybackConfigurationOutput) MarshalFields(e protocol.FieldEncoder) e
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.PlaybackConfigurationArn != nil {
+		v := *s.PlaybackConfigurationArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PlaybackConfigurationArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.PlaybackEndpointPrefix != nil {
 		v := *s.PlaybackEndpointPrefix
 
@@ -985,6 +1380,18 @@ func (s PutPlaybackConfigurationOutput) MarshalFields(e protocol.FieldEncoder) e
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SlateAdUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	if s.TranscodeProfileName != nil {
 		v := *s.TranscodeProfileName
 
@@ -998,4 +1405,203 @@ func (s PutPlaybackConfigurationOutput) MarshalFields(e protocol.FieldEncoder) e
 		e.SetValue(protocol.BodyTarget, "VideoContentSourceUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/TagResourceRequest
+type TagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"ResourceArn" type:"string" required:"true"`
+
+	// Tags is a required field
+	Tags map[string]string `locationName:"tags" type:"map" required:"true"`
+}
+
+// String returns the string representation
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if s.Tags == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "ResourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/TagResourceOutput
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UntagResourceRequest
+type UntagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"ResourceArn" type:"string" required:"true"`
+
+	// TagKeys is a required field
+	TagKeys []string `location:"querystring" locationName:"tagKeys" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if s.TagKeys == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "ResourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.QueryTarget, "tagKeys", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UntagResourceOutput
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UntagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+type OriginManifestType string
+
+// Enum values for OriginManifestType
+const (
+	OriginManifestTypeSinglePeriod OriginManifestType = "SINGLE_PERIOD"
+	OriginManifestTypeMultiPeriod  OriginManifestType = "MULTI_PERIOD"
+)
+
+func (enum OriginManifestType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OriginManifestType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
 }

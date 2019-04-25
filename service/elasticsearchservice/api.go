@@ -3052,6 +3052,10 @@ type ElasticsearchClusterConfig struct {
 	// The instance type for an Elasticsearch cluster.
 	InstanceType ESPartitionInstanceType `type:"string" enum:"true"`
 
+	// Specifies the zone awareness configuration for a domain when zone awareness
+	// is enabled.
+	ZoneAwarenessConfig *ZoneAwarenessConfig `type:"structure"`
+
 	// A boolean value to indicate whether zone awareness is enabled. See About
 	// Zone Awareness (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness)
 	// for more information.
@@ -3099,6 +3103,12 @@ func (s ElasticsearchClusterConfig) MarshalFields(e protocol.FieldEncoder) error
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "InstanceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ZoneAwarenessConfig != nil {
+		v := s.ZoneAwarenessConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ZoneAwarenessConfig", v, metadata)
 	}
 	if s.ZoneAwarenessEnabled != nil {
 		v := *s.ZoneAwarenessEnabled
@@ -6311,6 +6321,38 @@ func (s VPCOptions) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	return nil
+}
+
+// Specifies the zone awareness configuration for the domain cluster, such as
+// the number of availability zones.
+type ZoneAwarenessConfig struct {
+	_ struct{} `type:"structure"`
+
+	// An integer value to indicate the number of availability zones for a domain
+	// when zone awareness is enabled. This should be equal to number of subnets
+	// if VPC endpoints is enabled
+	AvailabilityZoneCount *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s ZoneAwarenessConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ZoneAwarenessConfig) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ZoneAwarenessConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AvailabilityZoneCount != nil {
+		v := *s.AvailabilityZoneCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AvailabilityZoneCount", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }

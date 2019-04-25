@@ -10,7 +10,165 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
+
+const opAssociatePhoneNumberWithUser = "AssociatePhoneNumberWithUser"
+
+// AssociatePhoneNumberWithUserRequest is a API request type for the AssociatePhoneNumberWithUser API operation.
+type AssociatePhoneNumberWithUserRequest struct {
+	*aws.Request
+	Input *AssociatePhoneNumberWithUserInput
+	Copy  func(*AssociatePhoneNumberWithUserInput) AssociatePhoneNumberWithUserRequest
+}
+
+// Send marshals and sends the AssociatePhoneNumberWithUser API request.
+func (r AssociatePhoneNumberWithUserRequest) Send(ctx context.Context) (*AssociatePhoneNumberWithUserOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociatePhoneNumberWithUserOutput), nil
+}
+
+// AssociatePhoneNumberWithUserRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Associates a phone number with the specified Amazon Chime user.
+//
+//    // Example sending a request using the AssociatePhoneNumberWithUserRequest method.
+//    req := client.AssociatePhoneNumberWithUserRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AssociatePhoneNumberWithUser
+func (c *Chime) AssociatePhoneNumberWithUserRequest(input *AssociatePhoneNumberWithUserInput) AssociatePhoneNumberWithUserRequest {
+	op := &aws.Operation{
+		Name:       opAssociatePhoneNumberWithUser,
+		HTTPMethod: "POST",
+		HTTPPath:   "/accounts/{accountId}/users/{userId}?operation=associate-phone-number",
+	}
+
+	if input == nil {
+		input = &AssociatePhoneNumberWithUserInput{}
+	}
+
+	output := &AssociatePhoneNumberWithUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return AssociatePhoneNumberWithUserRequest{Request: req, Input: input, Copy: c.AssociatePhoneNumberWithUserRequest}
+}
+
+const opAssociatePhoneNumbersWithVoiceConnector = "AssociatePhoneNumbersWithVoiceConnector"
+
+// AssociatePhoneNumbersWithVoiceConnectorRequest is a API request type for the AssociatePhoneNumbersWithVoiceConnector API operation.
+type AssociatePhoneNumbersWithVoiceConnectorRequest struct {
+	*aws.Request
+	Input *AssociatePhoneNumbersWithVoiceConnectorInput
+	Copy  func(*AssociatePhoneNumbersWithVoiceConnectorInput) AssociatePhoneNumbersWithVoiceConnectorRequest
+}
+
+// Send marshals and sends the AssociatePhoneNumbersWithVoiceConnector API request.
+func (r AssociatePhoneNumbersWithVoiceConnectorRequest) Send(ctx context.Context) (*AssociatePhoneNumbersWithVoiceConnectorOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociatePhoneNumbersWithVoiceConnectorOutput), nil
+}
+
+// AssociatePhoneNumbersWithVoiceConnectorRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Associates a phone number with the specified Amazon Chime Voice Connector.
+//
+//    // Example sending a request using the AssociatePhoneNumbersWithVoiceConnectorRequest method.
+//    req := client.AssociatePhoneNumbersWithVoiceConnectorRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AssociatePhoneNumbersWithVoiceConnector
+func (c *Chime) AssociatePhoneNumbersWithVoiceConnectorRequest(input *AssociatePhoneNumbersWithVoiceConnectorInput) AssociatePhoneNumbersWithVoiceConnectorRequest {
+	op := &aws.Operation{
+		Name:       opAssociatePhoneNumbersWithVoiceConnector,
+		HTTPMethod: "POST",
+		HTTPPath:   "/voice-connectors/{voiceConnectorId}?operation=associate-phone-numbers",
+	}
+
+	if input == nil {
+		input = &AssociatePhoneNumbersWithVoiceConnectorInput{}
+	}
+
+	output := &AssociatePhoneNumbersWithVoiceConnectorOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return AssociatePhoneNumbersWithVoiceConnectorRequest{Request: req, Input: input, Copy: c.AssociatePhoneNumbersWithVoiceConnectorRequest}
+}
+
+const opBatchDeletePhoneNumber = "BatchDeletePhoneNumber"
+
+// BatchDeletePhoneNumberRequest is a API request type for the BatchDeletePhoneNumber API operation.
+type BatchDeletePhoneNumberRequest struct {
+	*aws.Request
+	Input *BatchDeletePhoneNumberInput
+	Copy  func(*BatchDeletePhoneNumberInput) BatchDeletePhoneNumberRequest
+}
+
+// Send marshals and sends the BatchDeletePhoneNumber API request.
+func (r BatchDeletePhoneNumberRequest) Send(ctx context.Context) (*BatchDeletePhoneNumberOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchDeletePhoneNumberOutput), nil
+}
+
+// BatchDeletePhoneNumberRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Moves phone numbers into the Deletion queue. Phone numbers must be disassociated
+// from any users or Amazon Chime Voice Connectors before they can be deleted.
+//
+// Phone numbers remain in the Deletion queue for 7 days before they are deleted
+// permanently.
+//
+//    // Example sending a request using the BatchDeletePhoneNumberRequest method.
+//    req := client.BatchDeletePhoneNumberRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchDeletePhoneNumber
+func (c *Chime) BatchDeletePhoneNumberRequest(input *BatchDeletePhoneNumberInput) BatchDeletePhoneNumberRequest {
+	op := &aws.Operation{
+		Name:       opBatchDeletePhoneNumber,
+		HTTPMethod: "POST",
+		HTTPPath:   "/phone-numbers?operation=batch-delete",
+	}
+
+	if input == nil {
+		input = &BatchDeletePhoneNumberInput{}
+	}
+
+	output := &BatchDeletePhoneNumberOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return BatchDeletePhoneNumberRequest{Request: req, Input: input, Copy: c.BatchDeletePhoneNumberRequest}
+}
 
 const opBatchSuspendUser = "BatchSuspendUser"
 
@@ -37,7 +195,7 @@ func (r BatchSuspendUserRequest) Send(ctx context.Context) (*BatchSuspendUserOut
 //
 // Suspends up to 50 users from a Team or EnterpriseLWA Amazon Chime account.
 // For more information about different account types, see Managing Your Amazon
-// Chime Accounts (http://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html)
+// Chime Accounts (https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html)
 // in the Amazon Chime Administration Guide.
 //
 // Users suspended from a Team account are dissociated from the account, but
@@ -46,8 +204,8 @@ func (r BatchSuspendUserRequest) Send(ctx context.Context) (*BatchSuspendUserOut
 // You can use the InviteUsers action to do so.
 //
 // Users suspended from an EnterpriseLWA account are immediately signed out
-// of Amazon Chime and are no longer able to sign in. To remove the suspension
-// from suspended EnterpriseLWA account users, use the BatchUnsuspendUser action.
+// of Amazon Chime and can no longer sign in. To remove the suspension from
+// suspended EnterpriseLWA account users, use the BatchUnsuspendUser action.
 //
 // To sign out users without suspending them, use the LogoutUser action.
 //
@@ -63,7 +221,7 @@ func (c *Chime) BatchSuspendUserRequest(input *BatchSuspendUserInput) BatchSuspe
 	op := &aws.Operation{
 		Name:       opBatchSuspendUser,
 		HTTPMethod: "POST",
-		HTTPPath:   "/console/accounts/{accountId}/users?operation=suspend",
+		HTTPPath:   "/accounts/{accountId}/users?operation=suspend",
 	}
 
 	if input == nil {
@@ -103,7 +261,7 @@ func (r BatchUnsuspendUserRequest) Send(ctx context.Context) (*BatchUnsuspendUse
 // Removes the suspension from up to 50 previously suspended users for the specified
 // Amazon Chime EnterpriseLWA account. Only users on EnterpriseLWA accounts
 // can be unsuspended using this action. For more information about different
-// account types, see Managing Your Amazon Chime Accounts (http://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html)
+// account types, see Managing Your Amazon Chime Accounts (https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html)
 // in the Amazon Chime Administration Guide.
 //
 // Previously suspended users who are unsuspended using this action are returned
@@ -121,7 +279,7 @@ func (c *Chime) BatchUnsuspendUserRequest(input *BatchUnsuspendUserInput) BatchU
 	op := &aws.Operation{
 		Name:       opBatchUnsuspendUser,
 		HTTPMethod: "POST",
-		HTTPPath:   "/console/accounts/{accountId}/users?operation=unsuspend",
+		HTTPPath:   "/accounts/{accountId}/users?operation=unsuspend",
 	}
 
 	if input == nil {
@@ -133,6 +291,58 @@ func (c *Chime) BatchUnsuspendUserRequest(input *BatchUnsuspendUserInput) BatchU
 	output.responseMetadata = aws.Response{Request: req}
 
 	return BatchUnsuspendUserRequest{Request: req, Input: input, Copy: c.BatchUnsuspendUserRequest}
+}
+
+const opBatchUpdatePhoneNumber = "BatchUpdatePhoneNumber"
+
+// BatchUpdatePhoneNumberRequest is a API request type for the BatchUpdatePhoneNumber API operation.
+type BatchUpdatePhoneNumberRequest struct {
+	*aws.Request
+	Input *BatchUpdatePhoneNumberInput
+	Copy  func(*BatchUpdatePhoneNumberInput) BatchUpdatePhoneNumberRequest
+}
+
+// Send marshals and sends the BatchUpdatePhoneNumber API request.
+func (r BatchUpdatePhoneNumberRequest) Send(ctx context.Context) (*BatchUpdatePhoneNumberOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchUpdatePhoneNumberOutput), nil
+}
+
+// BatchUpdatePhoneNumberRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Updates phone number product types. Choose from Amazon Chime Business Calling
+// and Amazon Chime Voice Connector product types.
+//
+//    // Example sending a request using the BatchUpdatePhoneNumberRequest method.
+//    req := client.BatchUpdatePhoneNumberRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchUpdatePhoneNumber
+func (c *Chime) BatchUpdatePhoneNumberRequest(input *BatchUpdatePhoneNumberInput) BatchUpdatePhoneNumberRequest {
+	op := &aws.Operation{
+		Name:       opBatchUpdatePhoneNumber,
+		HTTPMethod: "POST",
+		HTTPPath:   "/phone-numbers?operation=batch-update",
+	}
+
+	if input == nil {
+		input = &BatchUpdatePhoneNumberInput{}
+	}
+
+	output := &BatchUpdatePhoneNumberOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return BatchUpdatePhoneNumberRequest{Request: req, Input: input, Copy: c.BatchUpdatePhoneNumberRequest}
 }
 
 const opBatchUpdateUser = "BatchUpdateUser"
@@ -174,7 +384,7 @@ func (c *Chime) BatchUpdateUserRequest(input *BatchUpdateUserInput) BatchUpdateU
 	op := &aws.Operation{
 		Name:       opBatchUpdateUser,
 		HTTPMethod: "POST",
-		HTTPPath:   "/console/accounts/{accountId}/users",
+		HTTPPath:   "/accounts/{accountId}/users",
 	}
 
 	if input == nil {
@@ -213,7 +423,7 @@ func (r CreateAccountRequest) Send(ctx context.Context) (*CreateAccountOutput, e
 //
 // Creates an Amazon Chime account under the administrator's AWS account. Only
 // Team account types are currently supported for this action. For more information
-// about different account types, see Managing Your Amazon Chime Accounts (http://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html)
+// about different account types, see Managing Your Amazon Chime Accounts (https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html)
 // in the Amazon Chime Administration Guide.
 //
 //    // Example sending a request using the CreateAccountRequest method.
@@ -228,7 +438,7 @@ func (c *Chime) CreateAccountRequest(input *CreateAccountInput) CreateAccountReq
 	op := &aws.Operation{
 		Name:       opCreateAccount,
 		HTTPMethod: "POST",
-		HTTPPath:   "/console/accounts",
+		HTTPPath:   "/accounts",
 	}
 
 	if input == nil {
@@ -240,6 +450,113 @@ func (c *Chime) CreateAccountRequest(input *CreateAccountInput) CreateAccountReq
 	output.responseMetadata = aws.Response{Request: req}
 
 	return CreateAccountRequest{Request: req, Input: input, Copy: c.CreateAccountRequest}
+}
+
+const opCreatePhoneNumberOrder = "CreatePhoneNumberOrder"
+
+// CreatePhoneNumberOrderRequest is a API request type for the CreatePhoneNumberOrder API operation.
+type CreatePhoneNumberOrderRequest struct {
+	*aws.Request
+	Input *CreatePhoneNumberOrderInput
+	Copy  func(*CreatePhoneNumberOrderInput) CreatePhoneNumberOrderRequest
+}
+
+// Send marshals and sends the CreatePhoneNumberOrder API request.
+func (r CreatePhoneNumberOrderRequest) Send(ctx context.Context) (*CreatePhoneNumberOrderOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePhoneNumberOrderOutput), nil
+}
+
+// CreatePhoneNumberOrderRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Creates an order for phone numbers to be provisioned. Choose from Amazon
+// Chime Business Calling and Amazon Chime Voice Connector product types.
+//
+//    // Example sending a request using the CreatePhoneNumberOrderRequest method.
+//    req := client.CreatePhoneNumberOrderRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreatePhoneNumberOrder
+func (c *Chime) CreatePhoneNumberOrderRequest(input *CreatePhoneNumberOrderInput) CreatePhoneNumberOrderRequest {
+	op := &aws.Operation{
+		Name:       opCreatePhoneNumberOrder,
+		HTTPMethod: "POST",
+		HTTPPath:   "/phone-number-orders",
+	}
+
+	if input == nil {
+		input = &CreatePhoneNumberOrderInput{}
+	}
+
+	output := &CreatePhoneNumberOrderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreatePhoneNumberOrderRequest{Request: req, Input: input, Copy: c.CreatePhoneNumberOrderRequest}
+}
+
+const opCreateVoiceConnector = "CreateVoiceConnector"
+
+// CreateVoiceConnectorRequest is a API request type for the CreateVoiceConnector API operation.
+type CreateVoiceConnectorRequest struct {
+	*aws.Request
+	Input *CreateVoiceConnectorInput
+	Copy  func(*CreateVoiceConnectorInput) CreateVoiceConnectorRequest
+}
+
+// Send marshals and sends the CreateVoiceConnector API request.
+func (r CreateVoiceConnectorRequest) Send(ctx context.Context) (*CreateVoiceConnectorOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateVoiceConnectorOutput), nil
+}
+
+// CreateVoiceConnectorRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Creates an Amazon Chime Voice Connector under the administrator's AWS account.
+// Enabling CreateVoiceConnectorRequest$RequireEncryption configures your Amazon
+// Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP
+// (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound
+// calls are blocked.
+//
+//    // Example sending a request using the CreateVoiceConnectorRequest method.
+//    req := client.CreateVoiceConnectorRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateVoiceConnector
+func (c *Chime) CreateVoiceConnectorRequest(input *CreateVoiceConnectorInput) CreateVoiceConnectorRequest {
+	op := &aws.Operation{
+		Name:       opCreateVoiceConnector,
+		HTTPMethod: "POST",
+		HTTPPath:   "/voice-connectors",
+	}
+
+	if input == nil {
+		input = &CreateVoiceConnectorInput{}
+	}
+
+	output := &CreateVoiceConnectorOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateVoiceConnectorRequest{Request: req, Input: input, Copy: c.CreateVoiceConnectorRequest}
 }
 
 const opDeleteAccount = "DeleteAccount"
@@ -291,7 +608,7 @@ func (c *Chime) DeleteAccountRequest(input *DeleteAccountInput) DeleteAccountReq
 	op := &aws.Operation{
 		Name:       opDeleteAccount,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/console/accounts/{accountId}",
+		HTTPPath:   "/accounts/{accountId}",
 	}
 
 	if input == nil {
@@ -303,6 +620,383 @@ func (c *Chime) DeleteAccountRequest(input *DeleteAccountInput) DeleteAccountReq
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteAccountRequest{Request: req, Input: input, Copy: c.DeleteAccountRequest}
+}
+
+const opDeletePhoneNumber = "DeletePhoneNumber"
+
+// DeletePhoneNumberRequest is a API request type for the DeletePhoneNumber API operation.
+type DeletePhoneNumberRequest struct {
+	*aws.Request
+	Input *DeletePhoneNumberInput
+	Copy  func(*DeletePhoneNumberInput) DeletePhoneNumberRequest
+}
+
+// Send marshals and sends the DeletePhoneNumber API request.
+func (r DeletePhoneNumberRequest) Send(ctx context.Context) (*DeletePhoneNumberOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeletePhoneNumberOutput), nil
+}
+
+// DeletePhoneNumberRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Moves the specified phone number into the Deletion queue. A phone number
+// must be disassociated from any users or Amazon Chime Voice Connectors before
+// it can be deleted.
+//
+// Deleted phone numbers remain in the Deletion queue for 7 days before they
+// are deleted permanently.
+//
+//    // Example sending a request using the DeletePhoneNumberRequest method.
+//    req := client.DeletePhoneNumberRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeletePhoneNumber
+func (c *Chime) DeletePhoneNumberRequest(input *DeletePhoneNumberInput) DeletePhoneNumberRequest {
+	op := &aws.Operation{
+		Name:       opDeletePhoneNumber,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/phone-numbers/{phoneNumberId}",
+	}
+
+	if input == nil {
+		input = &DeletePhoneNumberInput{}
+	}
+
+	output := &DeletePhoneNumberOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeletePhoneNumberRequest{Request: req, Input: input, Copy: c.DeletePhoneNumberRequest}
+}
+
+const opDeleteVoiceConnector = "DeleteVoiceConnector"
+
+// DeleteVoiceConnectorRequest is a API request type for the DeleteVoiceConnector API operation.
+type DeleteVoiceConnectorRequest struct {
+	*aws.Request
+	Input *DeleteVoiceConnectorInput
+	Copy  func(*DeleteVoiceConnectorInput) DeleteVoiceConnectorRequest
+}
+
+// Send marshals and sends the DeleteVoiceConnector API request.
+func (r DeleteVoiceConnectorRequest) Send(ctx context.Context) (*DeleteVoiceConnectorOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteVoiceConnectorOutput), nil
+}
+
+// DeleteVoiceConnectorRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Deletes the specified Amazon Chime Voice Connector. Any phone numbers assigned
+// to the Amazon Chime Voice Connector must be unassigned from it before it
+// can be deleted.
+//
+//    // Example sending a request using the DeleteVoiceConnectorRequest method.
+//    req := client.DeleteVoiceConnectorRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnector
+func (c *Chime) DeleteVoiceConnectorRequest(input *DeleteVoiceConnectorInput) DeleteVoiceConnectorRequest {
+	op := &aws.Operation{
+		Name:       opDeleteVoiceConnector,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/voice-connectors/{voiceConnectorId}",
+	}
+
+	if input == nil {
+		input = &DeleteVoiceConnectorInput{}
+	}
+
+	output := &DeleteVoiceConnectorOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteVoiceConnectorRequest{Request: req, Input: input, Copy: c.DeleteVoiceConnectorRequest}
+}
+
+const opDeleteVoiceConnectorOrigination = "DeleteVoiceConnectorOrigination"
+
+// DeleteVoiceConnectorOriginationRequest is a API request type for the DeleteVoiceConnectorOrigination API operation.
+type DeleteVoiceConnectorOriginationRequest struct {
+	*aws.Request
+	Input *DeleteVoiceConnectorOriginationInput
+	Copy  func(*DeleteVoiceConnectorOriginationInput) DeleteVoiceConnectorOriginationRequest
+}
+
+// Send marshals and sends the DeleteVoiceConnectorOrigination API request.
+func (r DeleteVoiceConnectorOriginationRequest) Send(ctx context.Context) (*DeleteVoiceConnectorOriginationOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteVoiceConnectorOriginationOutput), nil
+}
+
+// DeleteVoiceConnectorOriginationRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Deletes the origination settings for the specified Amazon Chime Voice Connector.
+//
+//    // Example sending a request using the DeleteVoiceConnectorOriginationRequest method.
+//    req := client.DeleteVoiceConnectorOriginationRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorOrigination
+func (c *Chime) DeleteVoiceConnectorOriginationRequest(input *DeleteVoiceConnectorOriginationInput) DeleteVoiceConnectorOriginationRequest {
+	op := &aws.Operation{
+		Name:       opDeleteVoiceConnectorOrigination,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/voice-connectors/{voiceConnectorId}/origination",
+	}
+
+	if input == nil {
+		input = &DeleteVoiceConnectorOriginationInput{}
+	}
+
+	output := &DeleteVoiceConnectorOriginationOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteVoiceConnectorOriginationRequest{Request: req, Input: input, Copy: c.DeleteVoiceConnectorOriginationRequest}
+}
+
+const opDeleteVoiceConnectorTermination = "DeleteVoiceConnectorTermination"
+
+// DeleteVoiceConnectorTerminationRequest is a API request type for the DeleteVoiceConnectorTermination API operation.
+type DeleteVoiceConnectorTerminationRequest struct {
+	*aws.Request
+	Input *DeleteVoiceConnectorTerminationInput
+	Copy  func(*DeleteVoiceConnectorTerminationInput) DeleteVoiceConnectorTerminationRequest
+}
+
+// Send marshals and sends the DeleteVoiceConnectorTermination API request.
+func (r DeleteVoiceConnectorTerminationRequest) Send(ctx context.Context) (*DeleteVoiceConnectorTerminationOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteVoiceConnectorTerminationOutput), nil
+}
+
+// DeleteVoiceConnectorTerminationRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Deletes the termination settings for the specified Amazon Chime Voice Connector.
+//
+//    // Example sending a request using the DeleteVoiceConnectorTerminationRequest method.
+//    req := client.DeleteVoiceConnectorTerminationRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorTermination
+func (c *Chime) DeleteVoiceConnectorTerminationRequest(input *DeleteVoiceConnectorTerminationInput) DeleteVoiceConnectorTerminationRequest {
+	op := &aws.Operation{
+		Name:       opDeleteVoiceConnectorTermination,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/voice-connectors/{voiceConnectorId}/termination",
+	}
+
+	if input == nil {
+		input = &DeleteVoiceConnectorTerminationInput{}
+	}
+
+	output := &DeleteVoiceConnectorTerminationOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteVoiceConnectorTerminationRequest{Request: req, Input: input, Copy: c.DeleteVoiceConnectorTerminationRequest}
+}
+
+const opDeleteVoiceConnectorTerminationCredentials = "DeleteVoiceConnectorTerminationCredentials"
+
+// DeleteVoiceConnectorTerminationCredentialsRequest is a API request type for the DeleteVoiceConnectorTerminationCredentials API operation.
+type DeleteVoiceConnectorTerminationCredentialsRequest struct {
+	*aws.Request
+	Input *DeleteVoiceConnectorTerminationCredentialsInput
+	Copy  func(*DeleteVoiceConnectorTerminationCredentialsInput) DeleteVoiceConnectorTerminationCredentialsRequest
+}
+
+// Send marshals and sends the DeleteVoiceConnectorTerminationCredentials API request.
+func (r DeleteVoiceConnectorTerminationCredentialsRequest) Send(ctx context.Context) (*DeleteVoiceConnectorTerminationCredentialsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteVoiceConnectorTerminationCredentialsOutput), nil
+}
+
+// DeleteVoiceConnectorTerminationCredentialsRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Deletes the specified SIP credentials used by your equipment to authenticate
+// during call termination.
+//
+//    // Example sending a request using the DeleteVoiceConnectorTerminationCredentialsRequest method.
+//    req := client.DeleteVoiceConnectorTerminationCredentialsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorTerminationCredentials
+func (c *Chime) DeleteVoiceConnectorTerminationCredentialsRequest(input *DeleteVoiceConnectorTerminationCredentialsInput) DeleteVoiceConnectorTerminationCredentialsRequest {
+	op := &aws.Operation{
+		Name:       opDeleteVoiceConnectorTerminationCredentials,
+		HTTPMethod: "POST",
+		HTTPPath:   "/voice-connectors/{voiceConnectorId}/termination/credentials?operation=delete",
+	}
+
+	if input == nil {
+		input = &DeleteVoiceConnectorTerminationCredentialsInput{}
+	}
+
+	output := &DeleteVoiceConnectorTerminationCredentialsOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteVoiceConnectorTerminationCredentialsRequest{Request: req, Input: input, Copy: c.DeleteVoiceConnectorTerminationCredentialsRequest}
+}
+
+const opDisassociatePhoneNumberFromUser = "DisassociatePhoneNumberFromUser"
+
+// DisassociatePhoneNumberFromUserRequest is a API request type for the DisassociatePhoneNumberFromUser API operation.
+type DisassociatePhoneNumberFromUserRequest struct {
+	*aws.Request
+	Input *DisassociatePhoneNumberFromUserInput
+	Copy  func(*DisassociatePhoneNumberFromUserInput) DisassociatePhoneNumberFromUserRequest
+}
+
+// Send marshals and sends the DisassociatePhoneNumberFromUser API request.
+func (r DisassociatePhoneNumberFromUserRequest) Send(ctx context.Context) (*DisassociatePhoneNumberFromUserOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociatePhoneNumberFromUserOutput), nil
+}
+
+// DisassociatePhoneNumberFromUserRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Disassociates the primary provisioned phone number from the specified Amazon
+// Chime user.
+//
+//    // Example sending a request using the DisassociatePhoneNumberFromUserRequest method.
+//    req := client.DisassociatePhoneNumberFromUserRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DisassociatePhoneNumberFromUser
+func (c *Chime) DisassociatePhoneNumberFromUserRequest(input *DisassociatePhoneNumberFromUserInput) DisassociatePhoneNumberFromUserRequest {
+	op := &aws.Operation{
+		Name:       opDisassociatePhoneNumberFromUser,
+		HTTPMethod: "POST",
+		HTTPPath:   "/accounts/{accountId}/users/{userId}?operation=disassociate-phone-number",
+	}
+
+	if input == nil {
+		input = &DisassociatePhoneNumberFromUserInput{}
+	}
+
+	output := &DisassociatePhoneNumberFromUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DisassociatePhoneNumberFromUserRequest{Request: req, Input: input, Copy: c.DisassociatePhoneNumberFromUserRequest}
+}
+
+const opDisassociatePhoneNumbersFromVoiceConnector = "DisassociatePhoneNumbersFromVoiceConnector"
+
+// DisassociatePhoneNumbersFromVoiceConnectorRequest is a API request type for the DisassociatePhoneNumbersFromVoiceConnector API operation.
+type DisassociatePhoneNumbersFromVoiceConnectorRequest struct {
+	*aws.Request
+	Input *DisassociatePhoneNumbersFromVoiceConnectorInput
+	Copy  func(*DisassociatePhoneNumbersFromVoiceConnectorInput) DisassociatePhoneNumbersFromVoiceConnectorRequest
+}
+
+// Send marshals and sends the DisassociatePhoneNumbersFromVoiceConnector API request.
+func (r DisassociatePhoneNumbersFromVoiceConnectorRequest) Send(ctx context.Context) (*DisassociatePhoneNumbersFromVoiceConnectorOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociatePhoneNumbersFromVoiceConnectorOutput), nil
+}
+
+// DisassociatePhoneNumbersFromVoiceConnectorRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Disassociates the specified phone number from the specified Amazon Chime
+// Voice Connector.
+//
+//    // Example sending a request using the DisassociatePhoneNumbersFromVoiceConnectorRequest method.
+//    req := client.DisassociatePhoneNumbersFromVoiceConnectorRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DisassociatePhoneNumbersFromVoiceConnector
+func (c *Chime) DisassociatePhoneNumbersFromVoiceConnectorRequest(input *DisassociatePhoneNumbersFromVoiceConnectorInput) DisassociatePhoneNumbersFromVoiceConnectorRequest {
+	op := &aws.Operation{
+		Name:       opDisassociatePhoneNumbersFromVoiceConnector,
+		HTTPMethod: "POST",
+		HTTPPath:   "/voice-connectors/{voiceConnectorId}?operation=disassociate-phone-numbers",
+	}
+
+	if input == nil {
+		input = &DisassociatePhoneNumbersFromVoiceConnectorInput{}
+	}
+
+	output := &DisassociatePhoneNumbersFromVoiceConnectorOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DisassociatePhoneNumbersFromVoiceConnectorRequest{Request: req, Input: input, Copy: c.DisassociatePhoneNumbersFromVoiceConnectorRequest}
 }
 
 const opGetAccount = "GetAccount"
@@ -343,7 +1037,7 @@ func (c *Chime) GetAccountRequest(input *GetAccountInput) GetAccountRequest {
 	op := &aws.Operation{
 		Name:       opGetAccount,
 		HTTPMethod: "GET",
-		HTTPPath:   "/console/accounts/{accountId}",
+		HTTPPath:   "/accounts/{accountId}",
 	}
 
 	if input == nil {
@@ -382,7 +1076,7 @@ func (r GetAccountSettingsRequest) Send(ctx context.Context) (*GetAccountSetting
 //
 // Retrieves account settings for the specified Amazon Chime account ID, such
 // as remote control and dial out settings. For more information about these
-// settings, see Use the Policies Page (http://docs.aws.amazon.com/chime/latest/ag/policies.html)
+// settings, see Use the Policies Page (https://docs.aws.amazon.com/chime/latest/ag/policies.html)
 // in the Amazon Chime Administration Guide.
 //
 //    // Example sending a request using the GetAccountSettingsRequest method.
@@ -397,7 +1091,7 @@ func (c *Chime) GetAccountSettingsRequest(input *GetAccountSettingsInput) GetAcc
 	op := &aws.Operation{
 		Name:       opGetAccountSettings,
 		HTTPMethod: "GET",
-		HTTPPath:   "/console/accounts/{accountId}/settings",
+		HTTPPath:   "/accounts/{accountId}/settings",
 	}
 
 	if input == nil {
@@ -409,6 +1103,162 @@ func (c *Chime) GetAccountSettingsRequest(input *GetAccountSettingsInput) GetAcc
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetAccountSettingsRequest{Request: req, Input: input, Copy: c.GetAccountSettingsRequest}
+}
+
+const opGetGlobalSettings = "GetGlobalSettings"
+
+// GetGlobalSettingsRequest is a API request type for the GetGlobalSettings API operation.
+type GetGlobalSettingsRequest struct {
+	*aws.Request
+	Input *GetGlobalSettingsInput
+	Copy  func(*GetGlobalSettingsInput) GetGlobalSettingsRequest
+}
+
+// Send marshals and sends the GetGlobalSettings API request.
+func (r GetGlobalSettingsRequest) Send(ctx context.Context) (*GetGlobalSettingsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetGlobalSettingsOutput), nil
+}
+
+// GetGlobalSettingsRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Retrieves global settings for the administrator's AWS account, such as Amazon
+// Chime Business Calling and Amazon Chime Voice Connector settings.
+//
+//    // Example sending a request using the GetGlobalSettingsRequest method.
+//    req := client.GetGlobalSettingsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetGlobalSettings
+func (c *Chime) GetGlobalSettingsRequest(input *GetGlobalSettingsInput) GetGlobalSettingsRequest {
+	op := &aws.Operation{
+		Name:       opGetGlobalSettings,
+		HTTPMethod: "GET",
+		HTTPPath:   "/settings",
+	}
+
+	if input == nil {
+		input = &GetGlobalSettingsInput{}
+	}
+
+	output := &GetGlobalSettingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetGlobalSettingsRequest{Request: req, Input: input, Copy: c.GetGlobalSettingsRequest}
+}
+
+const opGetPhoneNumber = "GetPhoneNumber"
+
+// GetPhoneNumberRequest is a API request type for the GetPhoneNumber API operation.
+type GetPhoneNumberRequest struct {
+	*aws.Request
+	Input *GetPhoneNumberInput
+	Copy  func(*GetPhoneNumberInput) GetPhoneNumberRequest
+}
+
+// Send marshals and sends the GetPhoneNumber API request.
+func (r GetPhoneNumberRequest) Send(ctx context.Context) (*GetPhoneNumberOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetPhoneNumberOutput), nil
+}
+
+// GetPhoneNumberRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Retrieves details for the specified phone number ID, such as associations,
+// capabilities, and product type.
+//
+//    // Example sending a request using the GetPhoneNumberRequest method.
+//    req := client.GetPhoneNumberRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetPhoneNumber
+func (c *Chime) GetPhoneNumberRequest(input *GetPhoneNumberInput) GetPhoneNumberRequest {
+	op := &aws.Operation{
+		Name:       opGetPhoneNumber,
+		HTTPMethod: "GET",
+		HTTPPath:   "/phone-numbers/{phoneNumberId}",
+	}
+
+	if input == nil {
+		input = &GetPhoneNumberInput{}
+	}
+
+	output := &GetPhoneNumberOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetPhoneNumberRequest{Request: req, Input: input, Copy: c.GetPhoneNumberRequest}
+}
+
+const opGetPhoneNumberOrder = "GetPhoneNumberOrder"
+
+// GetPhoneNumberOrderRequest is a API request type for the GetPhoneNumberOrder API operation.
+type GetPhoneNumberOrderRequest struct {
+	*aws.Request
+	Input *GetPhoneNumberOrderInput
+	Copy  func(*GetPhoneNumberOrderInput) GetPhoneNumberOrderRequest
+}
+
+// Send marshals and sends the GetPhoneNumberOrder API request.
+func (r GetPhoneNumberOrderRequest) Send(ctx context.Context) (*GetPhoneNumberOrderOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetPhoneNumberOrderOutput), nil
+}
+
+// GetPhoneNumberOrderRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Retrieves details for the specified phone number order, such as order creation
+// timestamp, phone numbers in E.164 format, product type, and order status.
+//
+//    // Example sending a request using the GetPhoneNumberOrderRequest method.
+//    req := client.GetPhoneNumberOrderRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetPhoneNumberOrder
+func (c *Chime) GetPhoneNumberOrderRequest(input *GetPhoneNumberOrderInput) GetPhoneNumberOrderRequest {
+	op := &aws.Operation{
+		Name:       opGetPhoneNumberOrder,
+		HTTPMethod: "GET",
+		HTTPPath:   "/phone-number-orders/{phoneNumberOrderId}",
+	}
+
+	if input == nil {
+		input = &GetPhoneNumberOrderInput{}
+	}
+
+	output := &GetPhoneNumberOrderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetPhoneNumberOrderRequest{Request: req, Input: input, Copy: c.GetPhoneNumberOrderRequest}
 }
 
 const opGetUser = "GetUser"
@@ -452,7 +1302,7 @@ func (c *Chime) GetUserRequest(input *GetUserInput) GetUserRequest {
 	op := &aws.Operation{
 		Name:       opGetUser,
 		HTTPMethod: "GET",
-		HTTPPath:   "/console/accounts/{accountId}/users/{userId}",
+		HTTPPath:   "/accounts/{accountId}/users/{userId}",
 	}
 
 	if input == nil {
@@ -464,6 +1314,266 @@ func (c *Chime) GetUserRequest(input *GetUserInput) GetUserRequest {
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetUserRequest{Request: req, Input: input, Copy: c.GetUserRequest}
+}
+
+const opGetUserSettings = "GetUserSettings"
+
+// GetUserSettingsRequest is a API request type for the GetUserSettings API operation.
+type GetUserSettingsRequest struct {
+	*aws.Request
+	Input *GetUserSettingsInput
+	Copy  func(*GetUserSettingsInput) GetUserSettingsRequest
+}
+
+// Send marshals and sends the GetUserSettings API request.
+func (r GetUserSettingsRequest) Send(ctx context.Context) (*GetUserSettingsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetUserSettingsOutput), nil
+}
+
+// GetUserSettingsRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Retrieves settings for the specified user ID, such as any associated phone
+// number settings.
+//
+//    // Example sending a request using the GetUserSettingsRequest method.
+//    req := client.GetUserSettingsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetUserSettings
+func (c *Chime) GetUserSettingsRequest(input *GetUserSettingsInput) GetUserSettingsRequest {
+	op := &aws.Operation{
+		Name:       opGetUserSettings,
+		HTTPMethod: "GET",
+		HTTPPath:   "/accounts/{accountId}/users/{userId}/settings",
+	}
+
+	if input == nil {
+		input = &GetUserSettingsInput{}
+	}
+
+	output := &GetUserSettingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetUserSettingsRequest{Request: req, Input: input, Copy: c.GetUserSettingsRequest}
+}
+
+const opGetVoiceConnector = "GetVoiceConnector"
+
+// GetVoiceConnectorRequest is a API request type for the GetVoiceConnector API operation.
+type GetVoiceConnectorRequest struct {
+	*aws.Request
+	Input *GetVoiceConnectorInput
+	Copy  func(*GetVoiceConnectorInput) GetVoiceConnectorRequest
+}
+
+// Send marshals and sends the GetVoiceConnector API request.
+func (r GetVoiceConnectorRequest) Send(ctx context.Context) (*GetVoiceConnectorOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetVoiceConnectorOutput), nil
+}
+
+// GetVoiceConnectorRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Retrieves details for the specified Amazon Chime Voice Connector, such as
+// timestamps, name, outbound host, and encryption requirements.
+//
+//    // Example sending a request using the GetVoiceConnectorRequest method.
+//    req := client.GetVoiceConnectorRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnector
+func (c *Chime) GetVoiceConnectorRequest(input *GetVoiceConnectorInput) GetVoiceConnectorRequest {
+	op := &aws.Operation{
+		Name:       opGetVoiceConnector,
+		HTTPMethod: "GET",
+		HTTPPath:   "/voice-connectors/{voiceConnectorId}",
+	}
+
+	if input == nil {
+		input = &GetVoiceConnectorInput{}
+	}
+
+	output := &GetVoiceConnectorOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetVoiceConnectorRequest{Request: req, Input: input, Copy: c.GetVoiceConnectorRequest}
+}
+
+const opGetVoiceConnectorOrigination = "GetVoiceConnectorOrigination"
+
+// GetVoiceConnectorOriginationRequest is a API request type for the GetVoiceConnectorOrigination API operation.
+type GetVoiceConnectorOriginationRequest struct {
+	*aws.Request
+	Input *GetVoiceConnectorOriginationInput
+	Copy  func(*GetVoiceConnectorOriginationInput) GetVoiceConnectorOriginationRequest
+}
+
+// Send marshals and sends the GetVoiceConnectorOrigination API request.
+func (r GetVoiceConnectorOriginationRequest) Send(ctx context.Context) (*GetVoiceConnectorOriginationOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetVoiceConnectorOriginationOutput), nil
+}
+
+// GetVoiceConnectorOriginationRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Retrieves origination setting details for the specified Amazon Chime Voice
+// Connector.
+//
+//    // Example sending a request using the GetVoiceConnectorOriginationRequest method.
+//    req := client.GetVoiceConnectorOriginationRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorOrigination
+func (c *Chime) GetVoiceConnectorOriginationRequest(input *GetVoiceConnectorOriginationInput) GetVoiceConnectorOriginationRequest {
+	op := &aws.Operation{
+		Name:       opGetVoiceConnectorOrigination,
+		HTTPMethod: "GET",
+		HTTPPath:   "/voice-connectors/{voiceConnectorId}/origination",
+	}
+
+	if input == nil {
+		input = &GetVoiceConnectorOriginationInput{}
+	}
+
+	output := &GetVoiceConnectorOriginationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetVoiceConnectorOriginationRequest{Request: req, Input: input, Copy: c.GetVoiceConnectorOriginationRequest}
+}
+
+const opGetVoiceConnectorTermination = "GetVoiceConnectorTermination"
+
+// GetVoiceConnectorTerminationRequest is a API request type for the GetVoiceConnectorTermination API operation.
+type GetVoiceConnectorTerminationRequest struct {
+	*aws.Request
+	Input *GetVoiceConnectorTerminationInput
+	Copy  func(*GetVoiceConnectorTerminationInput) GetVoiceConnectorTerminationRequest
+}
+
+// Send marshals and sends the GetVoiceConnectorTermination API request.
+func (r GetVoiceConnectorTerminationRequest) Send(ctx context.Context) (*GetVoiceConnectorTerminationOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetVoiceConnectorTerminationOutput), nil
+}
+
+// GetVoiceConnectorTerminationRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Retrieves termination setting details for the specified Amazon Chime Voice
+// Connector.
+//
+//    // Example sending a request using the GetVoiceConnectorTerminationRequest method.
+//    req := client.GetVoiceConnectorTerminationRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorTermination
+func (c *Chime) GetVoiceConnectorTerminationRequest(input *GetVoiceConnectorTerminationInput) GetVoiceConnectorTerminationRequest {
+	op := &aws.Operation{
+		Name:       opGetVoiceConnectorTermination,
+		HTTPMethod: "GET",
+		HTTPPath:   "/voice-connectors/{voiceConnectorId}/termination",
+	}
+
+	if input == nil {
+		input = &GetVoiceConnectorTerminationInput{}
+	}
+
+	output := &GetVoiceConnectorTerminationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetVoiceConnectorTerminationRequest{Request: req, Input: input, Copy: c.GetVoiceConnectorTerminationRequest}
+}
+
+const opGetVoiceConnectorTerminationHealth = "GetVoiceConnectorTerminationHealth"
+
+// GetVoiceConnectorTerminationHealthRequest is a API request type for the GetVoiceConnectorTerminationHealth API operation.
+type GetVoiceConnectorTerminationHealthRequest struct {
+	*aws.Request
+	Input *GetVoiceConnectorTerminationHealthInput
+	Copy  func(*GetVoiceConnectorTerminationHealthInput) GetVoiceConnectorTerminationHealthRequest
+}
+
+// Send marshals and sends the GetVoiceConnectorTerminationHealth API request.
+func (r GetVoiceConnectorTerminationHealthRequest) Send(ctx context.Context) (*GetVoiceConnectorTerminationHealthOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetVoiceConnectorTerminationHealthOutput), nil
+}
+
+// GetVoiceConnectorTerminationHealthRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Retrieves information about the last time a SIP OPTIONS ping was received
+// from your SIP infrastructure for the specified Amazon Chime Voice Connector.
+//
+//    // Example sending a request using the GetVoiceConnectorTerminationHealthRequest method.
+//    req := client.GetVoiceConnectorTerminationHealthRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorTerminationHealth
+func (c *Chime) GetVoiceConnectorTerminationHealthRequest(input *GetVoiceConnectorTerminationHealthInput) GetVoiceConnectorTerminationHealthRequest {
+	op := &aws.Operation{
+		Name:       opGetVoiceConnectorTerminationHealth,
+		HTTPMethod: "GET",
+		HTTPPath:   "/voice-connectors/{voiceConnectorId}/termination/health",
+	}
+
+	if input == nil {
+		input = &GetVoiceConnectorTerminationHealthInput{}
+	}
+
+	output := &GetVoiceConnectorTerminationHealthOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetVoiceConnectorTerminationHealthRequest{Request: req, Input: input, Copy: c.GetVoiceConnectorTerminationHealthRequest}
 }
 
 const opInviteUsers = "InviteUsers"
@@ -505,7 +1615,7 @@ func (c *Chime) InviteUsersRequest(input *InviteUsersInput) InviteUsersRequest {
 	op := &aws.Operation{
 		Name:       opInviteUsers,
 		HTTPMethod: "POST",
-		HTTPPath:   "/console/accounts/{accountId}/users?operation=add",
+		HTTPPath:   "/accounts/{accountId}/users?operation=add",
 	}
 
 	if input == nil {
@@ -559,7 +1669,7 @@ func (c *Chime) ListAccountsRequest(input *ListAccountsInput) ListAccountsReques
 	op := &aws.Operation{
 		Name:       opListAccounts,
 		HTTPMethod: "GET",
-		HTTPPath:   "/console/accounts",
+		HTTPPath:   "/accounts",
 		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
@@ -626,6 +1736,215 @@ func (p *ListAccountsPager) CurrentPage() *ListAccountsOutput {
 	return p.Pager.CurrentPage().(*ListAccountsOutput)
 }
 
+const opListPhoneNumberOrders = "ListPhoneNumberOrders"
+
+// ListPhoneNumberOrdersRequest is a API request type for the ListPhoneNumberOrders API operation.
+type ListPhoneNumberOrdersRequest struct {
+	*aws.Request
+	Input *ListPhoneNumberOrdersInput
+	Copy  func(*ListPhoneNumberOrdersInput) ListPhoneNumberOrdersRequest
+}
+
+// Send marshals and sends the ListPhoneNumberOrders API request.
+func (r ListPhoneNumberOrdersRequest) Send(ctx context.Context) (*ListPhoneNumberOrdersOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPhoneNumberOrdersOutput), nil
+}
+
+// ListPhoneNumberOrdersRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Lists the phone number orders for the administrator's Amazon Chime account.
+//
+//    // Example sending a request using the ListPhoneNumberOrdersRequest method.
+//    req := client.ListPhoneNumberOrdersRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListPhoneNumberOrders
+func (c *Chime) ListPhoneNumberOrdersRequest(input *ListPhoneNumberOrdersInput) ListPhoneNumberOrdersRequest {
+	op := &aws.Operation{
+		Name:       opListPhoneNumberOrders,
+		HTTPMethod: "GET",
+		HTTPPath:   "/phone-number-orders",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListPhoneNumberOrdersInput{}
+	}
+
+	output := &ListPhoneNumberOrdersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListPhoneNumberOrdersRequest{Request: req, Input: input, Copy: c.ListPhoneNumberOrdersRequest}
+}
+
+// Paginate pages iterates over the pages of a ListPhoneNumberOrdersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListPhoneNumberOrders operation.
+//		req := client.ListPhoneNumberOrdersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListPhoneNumberOrdersRequest) Paginate(opts ...aws.Option) ListPhoneNumberOrdersPager {
+	return ListPhoneNumberOrdersPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListPhoneNumberOrdersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListPhoneNumberOrdersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListPhoneNumberOrdersPager struct {
+	aws.Pager
+}
+
+func (p *ListPhoneNumberOrdersPager) CurrentPage() *ListPhoneNumberOrdersOutput {
+	return p.Pager.CurrentPage().(*ListPhoneNumberOrdersOutput)
+}
+
+const opListPhoneNumbers = "ListPhoneNumbers"
+
+// ListPhoneNumbersRequest is a API request type for the ListPhoneNumbers API operation.
+type ListPhoneNumbersRequest struct {
+	*aws.Request
+	Input *ListPhoneNumbersInput
+	Copy  func(*ListPhoneNumbersInput) ListPhoneNumbersRequest
+}
+
+// Send marshals and sends the ListPhoneNumbers API request.
+func (r ListPhoneNumbersRequest) Send(ctx context.Context) (*ListPhoneNumbersOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPhoneNumbersOutput), nil
+}
+
+// ListPhoneNumbersRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Lists the phone numbers for the specified Amazon Chime account, Amazon Chime
+// user, or Amazon Chime Voice Connector.
+//
+//    // Example sending a request using the ListPhoneNumbersRequest method.
+//    req := client.ListPhoneNumbersRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListPhoneNumbers
+func (c *Chime) ListPhoneNumbersRequest(input *ListPhoneNumbersInput) ListPhoneNumbersRequest {
+	op := &aws.Operation{
+		Name:       opListPhoneNumbers,
+		HTTPMethod: "GET",
+		HTTPPath:   "/phone-numbers",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListPhoneNumbersInput{}
+	}
+
+	output := &ListPhoneNumbersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListPhoneNumbersRequest{Request: req, Input: input, Copy: c.ListPhoneNumbersRequest}
+}
+
+// Paginate pages iterates over the pages of a ListPhoneNumbersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListPhoneNumbers operation.
+//		req := client.ListPhoneNumbersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListPhoneNumbersRequest) Paginate(opts ...aws.Option) ListPhoneNumbersPager {
+	return ListPhoneNumbersPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListPhoneNumbersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListPhoneNumbersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListPhoneNumbersPager struct {
+	aws.Pager
+}
+
+func (p *ListPhoneNumbersPager) CurrentPage() *ListPhoneNumbersOutput {
+	return p.Pager.CurrentPage().(*ListPhoneNumbersOutput)
+}
+
 const opListUsers = "ListUsers"
 
 // ListUsersRequest is a API request type for the ListUsers API operation.
@@ -665,7 +1984,7 @@ func (c *Chime) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 	op := &aws.Operation{
 		Name:       opListUsers,
 		HTTPMethod: "GET",
-		HTTPPath:   "/console/accounts/{accountId}/users",
+		HTTPPath:   "/accounts/{accountId}/users",
 		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
@@ -732,6 +2051,161 @@ func (p *ListUsersPager) CurrentPage() *ListUsersOutput {
 	return p.Pager.CurrentPage().(*ListUsersOutput)
 }
 
+const opListVoiceConnectorTerminationCredentials = "ListVoiceConnectorTerminationCredentials"
+
+// ListVoiceConnectorTerminationCredentialsRequest is a API request type for the ListVoiceConnectorTerminationCredentials API operation.
+type ListVoiceConnectorTerminationCredentialsRequest struct {
+	*aws.Request
+	Input *ListVoiceConnectorTerminationCredentialsInput
+	Copy  func(*ListVoiceConnectorTerminationCredentialsInput) ListVoiceConnectorTerminationCredentialsRequest
+}
+
+// Send marshals and sends the ListVoiceConnectorTerminationCredentials API request.
+func (r ListVoiceConnectorTerminationCredentialsRequest) Send(ctx context.Context) (*ListVoiceConnectorTerminationCredentialsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListVoiceConnectorTerminationCredentialsOutput), nil
+}
+
+// ListVoiceConnectorTerminationCredentialsRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Lists the SIP credentials for the specified Amazon Chime Voice Connector.
+//
+//    // Example sending a request using the ListVoiceConnectorTerminationCredentialsRequest method.
+//    req := client.ListVoiceConnectorTerminationCredentialsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListVoiceConnectorTerminationCredentials
+func (c *Chime) ListVoiceConnectorTerminationCredentialsRequest(input *ListVoiceConnectorTerminationCredentialsInput) ListVoiceConnectorTerminationCredentialsRequest {
+	op := &aws.Operation{
+		Name:       opListVoiceConnectorTerminationCredentials,
+		HTTPMethod: "GET",
+		HTTPPath:   "/voice-connectors/{voiceConnectorId}/termination/credentials",
+	}
+
+	if input == nil {
+		input = &ListVoiceConnectorTerminationCredentialsInput{}
+	}
+
+	output := &ListVoiceConnectorTerminationCredentialsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListVoiceConnectorTerminationCredentialsRequest{Request: req, Input: input, Copy: c.ListVoiceConnectorTerminationCredentialsRequest}
+}
+
+const opListVoiceConnectors = "ListVoiceConnectors"
+
+// ListVoiceConnectorsRequest is a API request type for the ListVoiceConnectors API operation.
+type ListVoiceConnectorsRequest struct {
+	*aws.Request
+	Input *ListVoiceConnectorsInput
+	Copy  func(*ListVoiceConnectorsInput) ListVoiceConnectorsRequest
+}
+
+// Send marshals and sends the ListVoiceConnectors API request.
+func (r ListVoiceConnectorsRequest) Send(ctx context.Context) (*ListVoiceConnectorsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListVoiceConnectorsOutput), nil
+}
+
+// ListVoiceConnectorsRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Lists the Amazon Chime Voice Connectors for the administrator's AWS account.
+//
+//    // Example sending a request using the ListVoiceConnectorsRequest method.
+//    req := client.ListVoiceConnectorsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListVoiceConnectors
+func (c *Chime) ListVoiceConnectorsRequest(input *ListVoiceConnectorsInput) ListVoiceConnectorsRequest {
+	op := &aws.Operation{
+		Name:       opListVoiceConnectors,
+		HTTPMethod: "GET",
+		HTTPPath:   "/voice-connectors",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListVoiceConnectorsInput{}
+	}
+
+	output := &ListVoiceConnectorsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListVoiceConnectorsRequest{Request: req, Input: input, Copy: c.ListVoiceConnectorsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListVoiceConnectorsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListVoiceConnectors operation.
+//		req := client.ListVoiceConnectorsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListVoiceConnectorsRequest) Paginate(opts ...aws.Option) ListVoiceConnectorsPager {
+	return ListVoiceConnectorsPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListVoiceConnectorsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListVoiceConnectorsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListVoiceConnectorsPager struct {
+	aws.Pager
+}
+
+func (p *ListVoiceConnectorsPager) CurrentPage() *ListVoiceConnectorsOutput {
+	return p.Pager.CurrentPage().(*ListVoiceConnectorsOutput)
+}
+
 const opLogoutUser = "LogoutUser"
 
 // LogoutUserRequest is a API request type for the LogoutUser API operation.
@@ -770,7 +2244,7 @@ func (c *Chime) LogoutUserRequest(input *LogoutUserInput) LogoutUserRequest {
 	op := &aws.Operation{
 		Name:       opLogoutUser,
 		HTTPMethod: "POST",
-		HTTPPath:   "/console/accounts/{accountId}/users/{userId}?operation=logout",
+		HTTPPath:   "/accounts/{accountId}/users/{userId}?operation=logout",
 	}
 
 	if input == nil {
@@ -782,6 +2256,161 @@ func (c *Chime) LogoutUserRequest(input *LogoutUserInput) LogoutUserRequest {
 	output.responseMetadata = aws.Response{Request: req}
 
 	return LogoutUserRequest{Request: req, Input: input, Copy: c.LogoutUserRequest}
+}
+
+const opPutVoiceConnectorOrigination = "PutVoiceConnectorOrigination"
+
+// PutVoiceConnectorOriginationRequest is a API request type for the PutVoiceConnectorOrigination API operation.
+type PutVoiceConnectorOriginationRequest struct {
+	*aws.Request
+	Input *PutVoiceConnectorOriginationInput
+	Copy  func(*PutVoiceConnectorOriginationInput) PutVoiceConnectorOriginationRequest
+}
+
+// Send marshals and sends the PutVoiceConnectorOrigination API request.
+func (r PutVoiceConnectorOriginationRequest) Send(ctx context.Context) (*PutVoiceConnectorOriginationOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutVoiceConnectorOriginationOutput), nil
+}
+
+// PutVoiceConnectorOriginationRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Adds origination settings for the specified Amazon Chime Voice Connector.
+//
+//    // Example sending a request using the PutVoiceConnectorOriginationRequest method.
+//    req := client.PutVoiceConnectorOriginationRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorOrigination
+func (c *Chime) PutVoiceConnectorOriginationRequest(input *PutVoiceConnectorOriginationInput) PutVoiceConnectorOriginationRequest {
+	op := &aws.Operation{
+		Name:       opPutVoiceConnectorOrigination,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/voice-connectors/{voiceConnectorId}/origination",
+	}
+
+	if input == nil {
+		input = &PutVoiceConnectorOriginationInput{}
+	}
+
+	output := &PutVoiceConnectorOriginationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutVoiceConnectorOriginationRequest{Request: req, Input: input, Copy: c.PutVoiceConnectorOriginationRequest}
+}
+
+const opPutVoiceConnectorTermination = "PutVoiceConnectorTermination"
+
+// PutVoiceConnectorTerminationRequest is a API request type for the PutVoiceConnectorTermination API operation.
+type PutVoiceConnectorTerminationRequest struct {
+	*aws.Request
+	Input *PutVoiceConnectorTerminationInput
+	Copy  func(*PutVoiceConnectorTerminationInput) PutVoiceConnectorTerminationRequest
+}
+
+// Send marshals and sends the PutVoiceConnectorTermination API request.
+func (r PutVoiceConnectorTerminationRequest) Send(ctx context.Context) (*PutVoiceConnectorTerminationOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutVoiceConnectorTerminationOutput), nil
+}
+
+// PutVoiceConnectorTerminationRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Adds termination settings for the specified Amazon Chime Voice Connector.
+//
+//    // Example sending a request using the PutVoiceConnectorTerminationRequest method.
+//    req := client.PutVoiceConnectorTerminationRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorTermination
+func (c *Chime) PutVoiceConnectorTerminationRequest(input *PutVoiceConnectorTerminationInput) PutVoiceConnectorTerminationRequest {
+	op := &aws.Operation{
+		Name:       opPutVoiceConnectorTermination,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/voice-connectors/{voiceConnectorId}/termination",
+	}
+
+	if input == nil {
+		input = &PutVoiceConnectorTerminationInput{}
+	}
+
+	output := &PutVoiceConnectorTerminationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutVoiceConnectorTerminationRequest{Request: req, Input: input, Copy: c.PutVoiceConnectorTerminationRequest}
+}
+
+const opPutVoiceConnectorTerminationCredentials = "PutVoiceConnectorTerminationCredentials"
+
+// PutVoiceConnectorTerminationCredentialsRequest is a API request type for the PutVoiceConnectorTerminationCredentials API operation.
+type PutVoiceConnectorTerminationCredentialsRequest struct {
+	*aws.Request
+	Input *PutVoiceConnectorTerminationCredentialsInput
+	Copy  func(*PutVoiceConnectorTerminationCredentialsInput) PutVoiceConnectorTerminationCredentialsRequest
+}
+
+// Send marshals and sends the PutVoiceConnectorTerminationCredentials API request.
+func (r PutVoiceConnectorTerminationCredentialsRequest) Send(ctx context.Context) (*PutVoiceConnectorTerminationCredentialsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutVoiceConnectorTerminationCredentialsOutput), nil
+}
+
+// PutVoiceConnectorTerminationCredentialsRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Adds termination SIP credentials for the specified Amazon Chime Voice Connector.
+//
+//    // Example sending a request using the PutVoiceConnectorTerminationCredentialsRequest method.
+//    req := client.PutVoiceConnectorTerminationCredentialsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorTerminationCredentials
+func (c *Chime) PutVoiceConnectorTerminationCredentialsRequest(input *PutVoiceConnectorTerminationCredentialsInput) PutVoiceConnectorTerminationCredentialsRequest {
+	op := &aws.Operation{
+		Name:       opPutVoiceConnectorTerminationCredentials,
+		HTTPMethod: "POST",
+		HTTPPath:   "/voice-connectors/{voiceConnectorId}/termination/credentials?operation=put",
+	}
+
+	if input == nil {
+		input = &PutVoiceConnectorTerminationCredentialsInput{}
+	}
+
+	output := &PutVoiceConnectorTerminationCredentialsOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutVoiceConnectorTerminationCredentialsRequest{Request: req, Input: input, Copy: c.PutVoiceConnectorTerminationCredentialsRequest}
 }
 
 const opResetPersonalPIN = "ResetPersonalPIN"
@@ -822,7 +2451,7 @@ func (c *Chime) ResetPersonalPINRequest(input *ResetPersonalPINInput) ResetPerso
 	op := &aws.Operation{
 		Name:       opResetPersonalPIN,
 		HTTPMethod: "POST",
-		HTTPPath:   "/console/accounts/{accountId}/users/{userId}?operation=reset-personal-pin",
+		HTTPPath:   "/accounts/{accountId}/users/{userId}?operation=reset-personal-pin",
 	}
 
 	if input == nil {
@@ -834,6 +2463,108 @@ func (c *Chime) ResetPersonalPINRequest(input *ResetPersonalPINInput) ResetPerso
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ResetPersonalPINRequest{Request: req, Input: input, Copy: c.ResetPersonalPINRequest}
+}
+
+const opRestorePhoneNumber = "RestorePhoneNumber"
+
+// RestorePhoneNumberRequest is a API request type for the RestorePhoneNumber API operation.
+type RestorePhoneNumberRequest struct {
+	*aws.Request
+	Input *RestorePhoneNumberInput
+	Copy  func(*RestorePhoneNumberInput) RestorePhoneNumberRequest
+}
+
+// Send marshals and sends the RestorePhoneNumber API request.
+func (r RestorePhoneNumberRequest) Send(ctx context.Context) (*RestorePhoneNumberOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RestorePhoneNumberOutput), nil
+}
+
+// RestorePhoneNumberRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Moves a phone number from the Deletion queue back into the phone number Inventory.
+//
+//    // Example sending a request using the RestorePhoneNumberRequest method.
+//    req := client.RestorePhoneNumberRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RestorePhoneNumber
+func (c *Chime) RestorePhoneNumberRequest(input *RestorePhoneNumberInput) RestorePhoneNumberRequest {
+	op := &aws.Operation{
+		Name:       opRestorePhoneNumber,
+		HTTPMethod: "POST",
+		HTTPPath:   "/phone-numbers/{phoneNumberId}?operation=restore",
+	}
+
+	if input == nil {
+		input = &RestorePhoneNumberInput{}
+	}
+
+	output := &RestorePhoneNumberOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return RestorePhoneNumberRequest{Request: req, Input: input, Copy: c.RestorePhoneNumberRequest}
+}
+
+const opSearchAvailablePhoneNumbers = "SearchAvailablePhoneNumbers"
+
+// SearchAvailablePhoneNumbersRequest is a API request type for the SearchAvailablePhoneNumbers API operation.
+type SearchAvailablePhoneNumbersRequest struct {
+	*aws.Request
+	Input *SearchAvailablePhoneNumbersInput
+	Copy  func(*SearchAvailablePhoneNumbersInput) SearchAvailablePhoneNumbersRequest
+}
+
+// Send marshals and sends the SearchAvailablePhoneNumbers API request.
+func (r SearchAvailablePhoneNumbersRequest) Send(ctx context.Context) (*SearchAvailablePhoneNumbersOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SearchAvailablePhoneNumbersOutput), nil
+}
+
+// SearchAvailablePhoneNumbersRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Searches phone numbers that can be ordered.
+//
+//    // Example sending a request using the SearchAvailablePhoneNumbersRequest method.
+//    req := client.SearchAvailablePhoneNumbersRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/SearchAvailablePhoneNumbers
+func (c *Chime) SearchAvailablePhoneNumbersRequest(input *SearchAvailablePhoneNumbersInput) SearchAvailablePhoneNumbersRequest {
+	op := &aws.Operation{
+		Name:       opSearchAvailablePhoneNumbers,
+		HTTPMethod: "GET",
+		HTTPPath:   "/search?type=phone-numbers",
+	}
+
+	if input == nil {
+		input = &SearchAvailablePhoneNumbersInput{}
+	}
+
+	output := &SearchAvailablePhoneNumbersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return SearchAvailablePhoneNumbersRequest{Request: req, Input: input, Copy: c.SearchAvailablePhoneNumbersRequest}
 }
 
 const opUpdateAccount = "UpdateAccount"
@@ -874,7 +2605,7 @@ func (c *Chime) UpdateAccountRequest(input *UpdateAccountInput) UpdateAccountReq
 	op := &aws.Operation{
 		Name:       opUpdateAccount,
 		HTTPMethod: "POST",
-		HTTPPath:   "/console/accounts/{accountId}",
+		HTTPPath:   "/accounts/{accountId}",
 	}
 
 	if input == nil {
@@ -913,7 +2644,7 @@ func (r UpdateAccountSettingsRequest) Send(ctx context.Context) (*UpdateAccountS
 //
 // Updates the settings for the specified Amazon Chime account. You can update
 // settings for remote control of shared screens, or for the dial-out option.
-// For more information about these settings, see Use the Policies Page (http://docs.aws.amazon.com/chime/latest/ag/policies.html)
+// For more information about these settings, see Use the Policies Page (https://docs.aws.amazon.com/chime/latest/ag/policies.html)
 // in the Amazon Chime Administration Guide.
 //
 //    // Example sending a request using the UpdateAccountSettingsRequest method.
@@ -928,7 +2659,7 @@ func (c *Chime) UpdateAccountSettingsRequest(input *UpdateAccountSettingsInput) 
 	op := &aws.Operation{
 		Name:       opUpdateAccountSettings,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/console/accounts/{accountId}/settings",
+		HTTPPath:   "/accounts/{accountId}/settings",
 	}
 
 	if input == nil {
@@ -940,6 +2671,112 @@ func (c *Chime) UpdateAccountSettingsRequest(input *UpdateAccountSettingsInput) 
 	output.responseMetadata = aws.Response{Request: req}
 
 	return UpdateAccountSettingsRequest{Request: req, Input: input, Copy: c.UpdateAccountSettingsRequest}
+}
+
+const opUpdateGlobalSettings = "UpdateGlobalSettings"
+
+// UpdateGlobalSettingsRequest is a API request type for the UpdateGlobalSettings API operation.
+type UpdateGlobalSettingsRequest struct {
+	*aws.Request
+	Input *UpdateGlobalSettingsInput
+	Copy  func(*UpdateGlobalSettingsInput) UpdateGlobalSettingsRequest
+}
+
+// Send marshals and sends the UpdateGlobalSettings API request.
+func (r UpdateGlobalSettingsRequest) Send(ctx context.Context) (*UpdateGlobalSettingsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateGlobalSettingsOutput), nil
+}
+
+// UpdateGlobalSettingsRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Updates global settings for the administrator's AWS account, such as Amazon
+// Chime Business Calling and Amazon Chime Voice Connector settings.
+//
+//    // Example sending a request using the UpdateGlobalSettingsRequest method.
+//    req := client.UpdateGlobalSettingsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateGlobalSettings
+func (c *Chime) UpdateGlobalSettingsRequest(input *UpdateGlobalSettingsInput) UpdateGlobalSettingsRequest {
+	op := &aws.Operation{
+		Name:       opUpdateGlobalSettings,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/settings",
+	}
+
+	if input == nil {
+		input = &UpdateGlobalSettingsInput{}
+	}
+
+	output := &UpdateGlobalSettingsOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateGlobalSettingsRequest{Request: req, Input: input, Copy: c.UpdateGlobalSettingsRequest}
+}
+
+const opUpdatePhoneNumber = "UpdatePhoneNumber"
+
+// UpdatePhoneNumberRequest is a API request type for the UpdatePhoneNumber API operation.
+type UpdatePhoneNumberRequest struct {
+	*aws.Request
+	Input *UpdatePhoneNumberInput
+	Copy  func(*UpdatePhoneNumberInput) UpdatePhoneNumberRequest
+}
+
+// Send marshals and sends the UpdatePhoneNumber API request.
+func (r UpdatePhoneNumberRequest) Send(ctx context.Context) (*UpdatePhoneNumberOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdatePhoneNumberOutput), nil
+}
+
+// UpdatePhoneNumberRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Updates phone number details, such as product type, for the specified phone
+// number ID.
+//
+//    // Example sending a request using the UpdatePhoneNumberRequest method.
+//    req := client.UpdatePhoneNumberRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdatePhoneNumber
+func (c *Chime) UpdatePhoneNumberRequest(input *UpdatePhoneNumberInput) UpdatePhoneNumberRequest {
+	op := &aws.Operation{
+		Name:       opUpdatePhoneNumber,
+		HTTPMethod: "POST",
+		HTTPPath:   "/phone-numbers/{phoneNumberId}",
+	}
+
+	if input == nil {
+		input = &UpdatePhoneNumberInput{}
+	}
+
+	output := &UpdatePhoneNumberOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdatePhoneNumberRequest{Request: req, Input: input, Copy: c.UpdatePhoneNumberRequest}
 }
 
 const opUpdateUser = "UpdateUser"
@@ -980,7 +2817,7 @@ func (c *Chime) UpdateUserRequest(input *UpdateUserInput) UpdateUserRequest {
 	op := &aws.Operation{
 		Name:       opUpdateUser,
 		HTTPMethod: "POST",
-		HTTPPath:   "/console/accounts/{accountId}/users/{userId}",
+		HTTPPath:   "/accounts/{accountId}/users/{userId}",
 	}
 
 	if input == nil {
@@ -992,6 +2829,110 @@ func (c *Chime) UpdateUserRequest(input *UpdateUserInput) UpdateUserRequest {
 	output.responseMetadata = aws.Response{Request: req}
 
 	return UpdateUserRequest{Request: req, Input: input, Copy: c.UpdateUserRequest}
+}
+
+const opUpdateUserSettings = "UpdateUserSettings"
+
+// UpdateUserSettingsRequest is a API request type for the UpdateUserSettings API operation.
+type UpdateUserSettingsRequest struct {
+	*aws.Request
+	Input *UpdateUserSettingsInput
+	Copy  func(*UpdateUserSettingsInput) UpdateUserSettingsRequest
+}
+
+// Send marshals and sends the UpdateUserSettings API request.
+func (r UpdateUserSettingsRequest) Send(ctx context.Context) (*UpdateUserSettingsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateUserSettingsOutput), nil
+}
+
+// UpdateUserSettingsRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Updates the settings for the specified user, such as phone number settings.
+//
+//    // Example sending a request using the UpdateUserSettingsRequest method.
+//    req := client.UpdateUserSettingsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateUserSettings
+func (c *Chime) UpdateUserSettingsRequest(input *UpdateUserSettingsInput) UpdateUserSettingsRequest {
+	op := &aws.Operation{
+		Name:       opUpdateUserSettings,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/accounts/{accountId}/users/{userId}/settings",
+	}
+
+	if input == nil {
+		input = &UpdateUserSettingsInput{}
+	}
+
+	output := &UpdateUserSettingsOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateUserSettingsRequest{Request: req, Input: input, Copy: c.UpdateUserSettingsRequest}
+}
+
+const opUpdateVoiceConnector = "UpdateVoiceConnector"
+
+// UpdateVoiceConnectorRequest is a API request type for the UpdateVoiceConnector API operation.
+type UpdateVoiceConnectorRequest struct {
+	*aws.Request
+	Input *UpdateVoiceConnectorInput
+	Copy  func(*UpdateVoiceConnectorInput) UpdateVoiceConnectorRequest
+}
+
+// Send marshals and sends the UpdateVoiceConnector API request.
+func (r UpdateVoiceConnectorRequest) Send(ctx context.Context) (*UpdateVoiceConnectorOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateVoiceConnectorOutput), nil
+}
+
+// UpdateVoiceConnectorRequest returns a request value for making API operation for
+// Amazon Chime.
+//
+// Updates details for the specified Amazon Chime Voice Connector.
+//
+//    // Example sending a request using the UpdateVoiceConnectorRequest method.
+//    req := client.UpdateVoiceConnectorRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateVoiceConnector
+func (c *Chime) UpdateVoiceConnectorRequest(input *UpdateVoiceConnectorInput) UpdateVoiceConnectorRequest {
+	op := &aws.Operation{
+		Name:       opUpdateVoiceConnector,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/voice-connectors/{voiceConnectorId}",
+	}
+
+	if input == nil {
+		input = &UpdateVoiceConnectorInput{}
+	}
+
+	output := &UpdateVoiceConnectorOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateVoiceConnectorRequest{Request: req, Input: input, Copy: c.UpdateVoiceConnectorRequest}
 }
 
 // The Amazon Chime account details. An AWS account can have multiple Amazon
@@ -1006,7 +2947,7 @@ type Account struct {
 	AccountId *string `type:"string" required:"true"`
 
 	// The Amazon Chime account type. For more information about different account
-	// types, see Managing Your Amazon Chime Accounts (http://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html)
+	// types, see Managing Your Amazon Chime Accounts (https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html)
 	// in the Amazon Chime Administration Guide.
 	AccountType AccountType `type:"string" enum:"true"`
 
@@ -1096,7 +3037,7 @@ func (s Account) MarshalFields(e protocol.FieldEncoder) error {
 // Settings related to the Amazon Chime account. This includes settings that
 // start or stop remote control of shared screens, or start or stop the dial-out
 // option in the Amazon Chime web application. For more information about these
-// settings, see Use the Policies Page (http://docs.aws.amazon.com/chime/latest/ag/policies.html)
+// settings, see Use the Policies Page (https://docs.aws.amazon.com/chime/latest/ag/policies.html)
 // in the Amazon Chime Administration Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AccountSettings
 type AccountSettings struct {
@@ -1107,7 +3048,7 @@ type AccountSettings struct {
 
 	// Setting that allows meeting participants to choose the Call me at a phone
 	// number option. For more information, see Join a Meeting without the Amazon
-	// Chime App (http://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html).
+	// Chime App (https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html).
 	EnableDialOut *bool `type:"boolean"`
 }
 
@@ -1134,6 +3075,313 @@ func (s AccountSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "EnableDialOut", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AssociatePhoneNumberWithUserRequest
+type AssociatePhoneNumberWithUserInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Chime account ID.
+	//
+	// AccountId is a required field
+	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
+
+	// The phone number, in E.164 format.
+	//
+	// E164PhoneNumber is a required field
+	E164PhoneNumber *string `type:"string" required:"true"`
+
+	// The user ID.
+	//
+	// UserId is a required field
+	UserId *string `location:"uri" locationName:"userId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AssociatePhoneNumberWithUserInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AssociatePhoneNumberWithUserInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AssociatePhoneNumberWithUserInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AssociatePhoneNumberWithUserInput"}
+
+	if s.AccountId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
+	}
+
+	if s.E164PhoneNumber == nil {
+		invalidParams.Add(aws.NewErrParamRequired("E164PhoneNumber"))
+	}
+
+	if s.UserId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AssociatePhoneNumberWithUserInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.E164PhoneNumber != nil {
+		v := *s.E164PhoneNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "E164PhoneNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AssociatePhoneNumberWithUserResponse
+type AssociatePhoneNumberWithUserOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s AssociatePhoneNumberWithUserOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AssociatePhoneNumberWithUserOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociatePhoneNumberWithUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AssociatePhoneNumberWithUserOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AssociatePhoneNumbersWithVoiceConnectorRequest
+type AssociatePhoneNumbersWithVoiceConnectorInput struct {
+	_ struct{} `type:"structure"`
+
+	// List of phone numbers, in E.164 format.
+	E164PhoneNumbers []string `type:"list"`
+
+	// The Amazon Chime Voice Connector ID.
+	//
+	// VoiceConnectorId is a required field
+	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AssociatePhoneNumbersWithVoiceConnectorInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AssociatePhoneNumbersWithVoiceConnectorInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AssociatePhoneNumbersWithVoiceConnectorInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AssociatePhoneNumbersWithVoiceConnectorInput"}
+
+	if s.VoiceConnectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AssociatePhoneNumbersWithVoiceConnectorInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.E164PhoneNumbers) > 0 {
+		v := s.E164PhoneNumbers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "E164PhoneNumbers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.VoiceConnectorId != nil {
+		v := *s.VoiceConnectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AssociatePhoneNumbersWithVoiceConnectorResponse
+type AssociatePhoneNumbersWithVoiceConnectorOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If the action fails for one or more of the phone numbers in the request,
+	// a list of the phone numbers is returned, along with error codes and error
+	// messages.
+	PhoneNumberErrors []PhoneNumberError `type:"list"`
+}
+
+// String returns the string representation
+func (s AssociatePhoneNumbersWithVoiceConnectorOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AssociatePhoneNumbersWithVoiceConnectorOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociatePhoneNumbersWithVoiceConnectorOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AssociatePhoneNumbersWithVoiceConnectorOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.PhoneNumberErrors) > 0 {
+		v := s.PhoneNumberErrors
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "PhoneNumberErrors", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchDeletePhoneNumberRequest
+type BatchDeletePhoneNumberInput struct {
+	_ struct{} `type:"structure"`
+
+	// List of phone number IDs.
+	//
+	// PhoneNumberIds is a required field
+	PhoneNumberIds []string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s BatchDeletePhoneNumberInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchDeletePhoneNumberInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchDeletePhoneNumberInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BatchDeletePhoneNumberInput"}
+
+	if s.PhoneNumberIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PhoneNumberIds"))
+	}
+	if s.PhoneNumberIds != nil && len(s.PhoneNumberIds) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("PhoneNumberIds", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BatchDeletePhoneNumberInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.PhoneNumberIds) > 0 {
+		v := s.PhoneNumberIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "PhoneNumberIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchDeletePhoneNumberResponse
+type BatchDeletePhoneNumberOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If the action fails for one or more of the phone numbers in the request,
+	// a list of the phone numbers is returned, along with error codes and error
+	// messages.
+	PhoneNumberErrors []PhoneNumberError `type:"list"`
+}
+
+// String returns the string representation
+func (s BatchDeletePhoneNumberOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchDeletePhoneNumberOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchDeletePhoneNumberOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BatchDeletePhoneNumberOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.PhoneNumberErrors) > 0 {
+		v := s.PhoneNumberErrors
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "PhoneNumberErrors", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -1360,6 +3608,109 @@ func (s BatchUnsuspendUserOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchUpdatePhoneNumberRequest
+type BatchUpdatePhoneNumberInput struct {
+	_ struct{} `type:"structure"`
+
+	// The request containing the phone number IDs and product types to update.
+	//
+	// UpdatePhoneNumberRequestItems is a required field
+	UpdatePhoneNumberRequestItems []UpdatePhoneNumberRequestItem `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s BatchUpdatePhoneNumberInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchUpdatePhoneNumberInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchUpdatePhoneNumberInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BatchUpdatePhoneNumberInput"}
+
+	if s.UpdatePhoneNumberRequestItems == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UpdatePhoneNumberRequestItems"))
+	}
+	if s.UpdatePhoneNumberRequestItems != nil {
+		for i, v := range s.UpdatePhoneNumberRequestItems {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UpdatePhoneNumberRequestItems", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BatchUpdatePhoneNumberInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.UpdatePhoneNumberRequestItems) > 0 {
+		v := s.UpdatePhoneNumberRequestItems
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "UpdatePhoneNumberRequestItems", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchUpdatePhoneNumberResponse
+type BatchUpdatePhoneNumberOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If the action fails for one or more of the phone numbers in the request,
+	// a list of the phone numbers is returned, along with error codes and error
+	// messages.
+	PhoneNumberErrors []PhoneNumberError `type:"list"`
+}
+
+// String returns the string representation
+func (s BatchUpdatePhoneNumberOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchUpdatePhoneNumberOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchUpdatePhoneNumberOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BatchUpdatePhoneNumberOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.PhoneNumberErrors) > 0 {
+		v := s.PhoneNumberErrors
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "PhoneNumberErrors", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BatchUpdateUserRequest
 type BatchUpdateUserInput struct {
 	_ struct{} `type:"structure"`
@@ -1478,6 +3829,37 @@ func (s BatchUpdateUserOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The Amazon Chime Business Calling settings for the administrator's AWS account.
+// Includes any Amazon S3 buckets designated for storing call detail records.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BusinessCallingSettings
+type BusinessCallingSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon S3 bucket designated for call detail record storage.
+	CdrBucket *string `type:"string"`
+}
+
+// String returns the string representation
+func (s BusinessCallingSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BusinessCallingSettings) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BusinessCallingSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CdrBucket != nil {
+		v := *s.CdrBucket
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CdrBucket", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAccountRequest
 type CreateAccountInput struct {
 	_ struct{} `type:"structure"`
@@ -1563,6 +3945,250 @@ func (s CreateAccountOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreatePhoneNumberOrderRequest
+type CreatePhoneNumberOrderInput struct {
+	_ struct{} `type:"structure"`
+
+	// List of phone numbers, in E.164 format.
+	//
+	// E164PhoneNumbers is a required field
+	E164PhoneNumbers []string `type:"list" required:"true"`
+
+	// The phone number product type.
+	//
+	// ProductType is a required field
+	ProductType PhoneNumberProductType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s CreatePhoneNumberOrderInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreatePhoneNumberOrderInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreatePhoneNumberOrderInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreatePhoneNumberOrderInput"}
+
+	if s.E164PhoneNumbers == nil {
+		invalidParams.Add(aws.NewErrParamRequired("E164PhoneNumbers"))
+	}
+	if len(s.ProductType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("ProductType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreatePhoneNumberOrderInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.E164PhoneNumbers) > 0 {
+		v := s.E164PhoneNumbers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "E164PhoneNumbers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.ProductType) > 0 {
+		v := s.ProductType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProductType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreatePhoneNumberOrderResponse
+type CreatePhoneNumberOrderOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The phone number order details.
+	PhoneNumberOrder *PhoneNumberOrder `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreatePhoneNumberOrderOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreatePhoneNumberOrderOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePhoneNumberOrderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreatePhoneNumberOrderOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.PhoneNumberOrder != nil {
+		v := s.PhoneNumberOrder
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "PhoneNumberOrder", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateVoiceConnectorRequest
+type CreateVoiceConnectorInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the Amazon Chime Voice Connector.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// When enabled, requires encryption for the Amazon Chime Voice Connector.
+	//
+	// RequireEncryption is a required field
+	RequireEncryption *bool `type:"boolean" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateVoiceConnectorInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateVoiceConnectorInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateVoiceConnectorInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateVoiceConnectorInput"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if s.RequireEncryption == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RequireEncryption"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateVoiceConnectorInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RequireEncryption != nil {
+		v := *s.RequireEncryption
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RequireEncryption", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateVoiceConnectorResponse
+type CreateVoiceConnectorOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Amazon Chime Voice Connector details.
+	VoiceConnector *VoiceConnector `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateVoiceConnectorOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateVoiceConnectorOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateVoiceConnectorOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateVoiceConnectorOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.VoiceConnector != nil {
+		v := s.VoiceConnector
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "VoiceConnector", v, metadata)
+	}
+	return nil
+}
+
+// The SIP credentials used to authenticate requests to your Amazon Chime Voice
+// Connector.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Credential
+type Credential struct {
+	_ struct{} `type:"structure"`
+
+	// The RFC2617 compliant password associated with the SIP credentials, in US-ASCII
+	// format.
+	Password *string `type:"string"`
+
+	// The RFC2617 compliant user name associated with the SIP credentials, in US-ASCII
+	// format.
+	Username *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Credential) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Credential) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Credential) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Password != nil {
+		v := *s.Password
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Password", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Username != nil {
+		v := *s.Username
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Username", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteAccountRequest
 type DeleteAccountInput struct {
 	_ struct{} `type:"structure"`
@@ -1633,6 +4259,580 @@ func (s DeleteAccountOutput) SDKResponseMetadata() aws.Response {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DeleteAccountOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeletePhoneNumberRequest
+type DeletePhoneNumberInput struct {
+	_ struct{} `type:"structure"`
+
+	// The phone number ID.
+	//
+	// PhoneNumberId is a required field
+	PhoneNumberId *string `location:"uri" locationName:"phoneNumberId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeletePhoneNumberInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeletePhoneNumberInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeletePhoneNumberInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeletePhoneNumberInput"}
+
+	if s.PhoneNumberId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PhoneNumberId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeletePhoneNumberInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PhoneNumberId != nil {
+		v := *s.PhoneNumberId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "phoneNumberId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeletePhoneNumberOutput
+type DeletePhoneNumberOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeletePhoneNumberOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeletePhoneNumberOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeletePhoneNumberOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeletePhoneNumberOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorRequest
+type DeleteVoiceConnectorInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Chime Voice Connector ID.
+	//
+	// VoiceConnectorId is a required field
+	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteVoiceConnectorInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVoiceConnectorInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteVoiceConnectorInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteVoiceConnectorInput"}
+
+	if s.VoiceConnectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteVoiceConnectorInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.VoiceConnectorId != nil {
+		v := *s.VoiceConnectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorOriginationRequest
+type DeleteVoiceConnectorOriginationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Chime Voice Connector ID.
+	//
+	// VoiceConnectorId is a required field
+	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteVoiceConnectorOriginationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVoiceConnectorOriginationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteVoiceConnectorOriginationInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteVoiceConnectorOriginationInput"}
+
+	if s.VoiceConnectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteVoiceConnectorOriginationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.VoiceConnectorId != nil {
+		v := *s.VoiceConnectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorOriginationOutput
+type DeleteVoiceConnectorOriginationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteVoiceConnectorOriginationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVoiceConnectorOriginationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVoiceConnectorOriginationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteVoiceConnectorOriginationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorOutput
+type DeleteVoiceConnectorOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteVoiceConnectorOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVoiceConnectorOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVoiceConnectorOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteVoiceConnectorOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorTerminationCredentialsRequest
+type DeleteVoiceConnectorTerminationCredentialsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The RFC2617 compliant username associated with the SIP credentials, in US-ASCII
+	// format.
+	Usernames []string `type:"list"`
+
+	// The Amazon Chime Voice Connector ID.
+	//
+	// VoiceConnectorId is a required field
+	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteVoiceConnectorTerminationCredentialsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVoiceConnectorTerminationCredentialsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteVoiceConnectorTerminationCredentialsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteVoiceConnectorTerminationCredentialsInput"}
+
+	if s.VoiceConnectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteVoiceConnectorTerminationCredentialsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Usernames) > 0 {
+		v := s.Usernames
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Usernames", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.VoiceConnectorId != nil {
+		v := *s.VoiceConnectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorTerminationCredentialsOutput
+type DeleteVoiceConnectorTerminationCredentialsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteVoiceConnectorTerminationCredentialsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVoiceConnectorTerminationCredentialsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVoiceConnectorTerminationCredentialsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteVoiceConnectorTerminationCredentialsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorTerminationRequest
+type DeleteVoiceConnectorTerminationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Chime Voice Connector ID.
+	//
+	// VoiceConnectorId is a required field
+	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteVoiceConnectorTerminationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVoiceConnectorTerminationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteVoiceConnectorTerminationInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteVoiceConnectorTerminationInput"}
+
+	if s.VoiceConnectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteVoiceConnectorTerminationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.VoiceConnectorId != nil {
+		v := *s.VoiceConnectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorTerminationOutput
+type DeleteVoiceConnectorTerminationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteVoiceConnectorTerminationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVoiceConnectorTerminationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVoiceConnectorTerminationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteVoiceConnectorTerminationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DisassociatePhoneNumberFromUserRequest
+type DisassociatePhoneNumberFromUserInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Chime account ID.
+	//
+	// AccountId is a required field
+	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
+
+	// The user ID.
+	//
+	// UserId is a required field
+	UserId *string `location:"uri" locationName:"userId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DisassociatePhoneNumberFromUserInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisassociatePhoneNumberFromUserInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DisassociatePhoneNumberFromUserInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociatePhoneNumberFromUserInput"}
+
+	if s.AccountId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
+	}
+
+	if s.UserId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DisassociatePhoneNumberFromUserInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DisassociatePhoneNumberFromUserResponse
+type DisassociatePhoneNumberFromUserOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DisassociatePhoneNumberFromUserOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisassociatePhoneNumberFromUserOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociatePhoneNumberFromUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DisassociatePhoneNumberFromUserOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DisassociatePhoneNumbersFromVoiceConnectorRequest
+type DisassociatePhoneNumbersFromVoiceConnectorInput struct {
+	_ struct{} `type:"structure"`
+
+	// List of phone numbers, in E.164 format.
+	E164PhoneNumbers []string `type:"list"`
+
+	// The Amazon Chime Voice Connector ID.
+	//
+	// VoiceConnectorId is a required field
+	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DisassociatePhoneNumbersFromVoiceConnectorInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisassociatePhoneNumbersFromVoiceConnectorInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DisassociatePhoneNumbersFromVoiceConnectorInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociatePhoneNumbersFromVoiceConnectorInput"}
+
+	if s.VoiceConnectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DisassociatePhoneNumbersFromVoiceConnectorInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.E164PhoneNumbers) > 0 {
+		v := s.E164PhoneNumbers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "E164PhoneNumbers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.VoiceConnectorId != nil {
+		v := *s.VoiceConnectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DisassociatePhoneNumbersFromVoiceConnectorResponse
+type DisassociatePhoneNumbersFromVoiceConnectorOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If the action fails for one or more of the phone numbers in the request,
+	// a list of the phone numbers is returned, along with error codes and error
+	// messages.
+	PhoneNumberErrors []PhoneNumberError `type:"list"`
+}
+
+// String returns the string representation
+func (s DisassociatePhoneNumbersFromVoiceConnectorOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisassociatePhoneNumbersFromVoiceConnectorOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociatePhoneNumbersFromVoiceConnectorOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DisassociatePhoneNumbersFromVoiceConnectorOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.PhoneNumberErrors) > 0 {
+		v := s.PhoneNumberErrors
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "PhoneNumberErrors", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	return nil
 }
 
@@ -1800,6 +5000,236 @@ func (s GetAccountSettingsOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetGlobalSettingsInput
+type GetGlobalSettingsInput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetGlobalSettingsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetGlobalSettingsInput) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetGlobalSettingsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetGlobalSettingsResponse
+type GetGlobalSettingsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Amazon Chime Business Calling settings.
+	BusinessCalling *BusinessCallingSettings `type:"structure"`
+
+	// The Amazon Chime Voice Connector settings.
+	VoiceConnector *VoiceConnectorSettings `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetGlobalSettingsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetGlobalSettingsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetGlobalSettingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetGlobalSettingsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BusinessCalling != nil {
+		v := s.BusinessCalling
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "BusinessCalling", v, metadata)
+	}
+	if s.VoiceConnector != nil {
+		v := s.VoiceConnector
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "VoiceConnector", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetPhoneNumberRequest
+type GetPhoneNumberInput struct {
+	_ struct{} `type:"structure"`
+
+	// The phone number ID.
+	//
+	// PhoneNumberId is a required field
+	PhoneNumberId *string `location:"uri" locationName:"phoneNumberId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetPhoneNumberInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetPhoneNumberInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetPhoneNumberInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetPhoneNumberInput"}
+
+	if s.PhoneNumberId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PhoneNumberId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetPhoneNumberInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PhoneNumberId != nil {
+		v := *s.PhoneNumberId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "phoneNumberId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetPhoneNumberOrderRequest
+type GetPhoneNumberOrderInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID for the phone number order.
+	//
+	// PhoneNumberOrderId is a required field
+	PhoneNumberOrderId *string `location:"uri" locationName:"phoneNumberOrderId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetPhoneNumberOrderInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetPhoneNumberOrderInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetPhoneNumberOrderInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetPhoneNumberOrderInput"}
+
+	if s.PhoneNumberOrderId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PhoneNumberOrderId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetPhoneNumberOrderInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PhoneNumberOrderId != nil {
+		v := *s.PhoneNumberOrderId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "phoneNumberOrderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetPhoneNumberOrderResponse
+type GetPhoneNumberOrderOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The phone number order details.
+	PhoneNumberOrder *PhoneNumberOrder `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetPhoneNumberOrderOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetPhoneNumberOrderOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetPhoneNumberOrderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetPhoneNumberOrderOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.PhoneNumberOrder != nil {
+		v := s.PhoneNumberOrder
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "PhoneNumberOrder", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetPhoneNumberResponse
+type GetPhoneNumberOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The phone number details.
+	PhoneNumber *PhoneNumber `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetPhoneNumberOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetPhoneNumberOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetPhoneNumberOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetPhoneNumberOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.PhoneNumber != nil {
+		v := s.PhoneNumber
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "PhoneNumber", v, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetUserRequest
 type GetUserInput struct {
 	_ struct{} `type:"structure"`
@@ -1893,6 +5323,431 @@ func (s GetUserOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "User", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetUserSettingsRequest
+type GetUserSettingsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Chime account ID.
+	//
+	// AccountId is a required field
+	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
+
+	// The user ID.
+	//
+	// UserId is a required field
+	UserId *string `location:"uri" locationName:"userId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetUserSettingsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetUserSettingsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetUserSettingsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetUserSettingsInput"}
+
+	if s.AccountId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
+	}
+
+	if s.UserId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetUserSettingsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetUserSettingsResponse
+type GetUserSettingsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The user settings.
+	UserSettings *UserSettings `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetUserSettingsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetUserSettingsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetUserSettingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetUserSettingsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.UserSettings != nil {
+		v := s.UserSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "UserSettings", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorRequest
+type GetVoiceConnectorInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Chime Voice Connector ID.
+	//
+	// VoiceConnectorId is a required field
+	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetVoiceConnectorInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetVoiceConnectorInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetVoiceConnectorInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetVoiceConnectorInput"}
+
+	if s.VoiceConnectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetVoiceConnectorInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.VoiceConnectorId != nil {
+		v := *s.VoiceConnectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorOriginationRequest
+type GetVoiceConnectorOriginationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Chime Voice Connector ID.
+	//
+	// VoiceConnectorId is a required field
+	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetVoiceConnectorOriginationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetVoiceConnectorOriginationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetVoiceConnectorOriginationInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetVoiceConnectorOriginationInput"}
+
+	if s.VoiceConnectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetVoiceConnectorOriginationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.VoiceConnectorId != nil {
+		v := *s.VoiceConnectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorOriginationResponse
+type GetVoiceConnectorOriginationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The origination setting details.
+	Origination *Origination `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetVoiceConnectorOriginationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetVoiceConnectorOriginationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetVoiceConnectorOriginationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetVoiceConnectorOriginationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Origination != nil {
+		v := s.Origination
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Origination", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorResponse
+type GetVoiceConnectorOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Amazon Chime Voice Connector details.
+	VoiceConnector *VoiceConnector `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetVoiceConnectorOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetVoiceConnectorOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetVoiceConnectorOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetVoiceConnectorOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.VoiceConnector != nil {
+		v := s.VoiceConnector
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "VoiceConnector", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorTerminationHealthRequest
+type GetVoiceConnectorTerminationHealthInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Chime Voice Connector ID.
+	//
+	// VoiceConnectorId is a required field
+	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetVoiceConnectorTerminationHealthInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetVoiceConnectorTerminationHealthInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetVoiceConnectorTerminationHealthInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetVoiceConnectorTerminationHealthInput"}
+
+	if s.VoiceConnectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetVoiceConnectorTerminationHealthInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.VoiceConnectorId != nil {
+		v := *s.VoiceConnectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorTerminationHealthResponse
+type GetVoiceConnectorTerminationHealthOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The termination health details.
+	TerminationHealth *TerminationHealth `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetVoiceConnectorTerminationHealthOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetVoiceConnectorTerminationHealthOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetVoiceConnectorTerminationHealthOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetVoiceConnectorTerminationHealthOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.TerminationHealth != nil {
+		v := s.TerminationHealth
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TerminationHealth", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorTerminationRequest
+type GetVoiceConnectorTerminationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Chime Voice Connector ID.
+	//
+	// VoiceConnectorId is a required field
+	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetVoiceConnectorTerminationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetVoiceConnectorTerminationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetVoiceConnectorTerminationInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetVoiceConnectorTerminationInput"}
+
+	if s.VoiceConnectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetVoiceConnectorTerminationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.VoiceConnectorId != nil {
+		v := *s.VoiceConnectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorTerminationResponse
+type GetVoiceConnectorTerminationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The termination setting details.
+	Termination *Termination `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetVoiceConnectorTerminationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetVoiceConnectorTerminationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetVoiceConnectorTerminationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetVoiceConnectorTerminationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Termination != nil {
+		v := s.Termination
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Termination", v, metadata)
 	}
 	return nil
 }
@@ -2188,6 +6043,248 @@ func (s ListAccountsOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListPhoneNumberOrdersRequest
+type ListPhoneNumberOrdersInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of results to return in a single call.
+	MaxResults *int64 `location:"querystring" locationName:"max-results" min:"1" type:"integer"`
+
+	// The token to use to retrieve the next page of results.
+	NextToken *string `location:"querystring" locationName:"next-token" type:"string"`
+}
+
+// String returns the string representation
+func (s ListPhoneNumberOrdersInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListPhoneNumberOrdersInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListPhoneNumberOrdersInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListPhoneNumberOrdersInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListPhoneNumberOrdersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "max-results", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "next-token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListPhoneNumberOrdersResponse
+type ListPhoneNumberOrdersOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The token to use to retrieve the next page of results.
+	NextToken *string `type:"string"`
+
+	// The phone number order details.
+	PhoneNumberOrders []PhoneNumberOrder `type:"list"`
+}
+
+// String returns the string representation
+func (s ListPhoneNumberOrdersOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListPhoneNumberOrdersOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPhoneNumberOrdersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListPhoneNumberOrdersOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.PhoneNumberOrders) > 0 {
+		v := s.PhoneNumberOrders
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "PhoneNumberOrders", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListPhoneNumbersRequest
+type ListPhoneNumbersInput struct {
+	_ struct{} `type:"structure"`
+
+	// The filter to use to limit the number of results.
+	FilterName PhoneNumberAssociationName `location:"querystring" locationName:"filter-name" type:"string" enum:"true"`
+
+	// The value to use for the filter.
+	FilterValue *string `location:"querystring" locationName:"filter-value" type:"string"`
+
+	// The maximum number of results to return in a single call.
+	MaxResults *int64 `location:"querystring" locationName:"max-results" min:"1" type:"integer"`
+
+	// The token to use to retrieve the next page of results.
+	NextToken *string `location:"querystring" locationName:"next-token" type:"string"`
+
+	// The phone number product type.
+	ProductType PhoneNumberProductType `location:"querystring" locationName:"product-type" type:"string" enum:"true"`
+
+	// The phone number status.
+	Status PhoneNumberStatus `location:"querystring" locationName:"status" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ListPhoneNumbersInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListPhoneNumbersInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListPhoneNumbersInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListPhoneNumbersInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListPhoneNumbersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.FilterName) > 0 {
+		v := s.FilterName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "filter-name", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.FilterValue != nil {
+		v := *s.FilterValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "filter-value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "max-results", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "next-token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ProductType) > 0 {
+		v := s.ProductType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "product-type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListPhoneNumbersResponse
+type ListPhoneNumbersOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The token to use to retrieve the next page of results.
+	NextToken *string `type:"string"`
+
+	// The phone number details.
+	PhoneNumbers []PhoneNumber `type:"list"`
+}
+
+// String returns the string representation
+func (s ListPhoneNumbersOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListPhoneNumbersOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPhoneNumbersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListPhoneNumbersOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.PhoneNumbers) > 0 {
+		v := s.PhoneNumbers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "PhoneNumbers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListUsersRequest
 type ListUsersInput struct {
 	_ struct{} `type:"structure"`
@@ -2315,6 +6412,197 @@ func (s ListUsersOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListVoiceConnectorTerminationCredentialsRequest
+type ListVoiceConnectorTerminationCredentialsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Chime Voice Connector ID.
+	//
+	// VoiceConnectorId is a required field
+	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ListVoiceConnectorTerminationCredentialsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListVoiceConnectorTerminationCredentialsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListVoiceConnectorTerminationCredentialsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListVoiceConnectorTerminationCredentialsInput"}
+
+	if s.VoiceConnectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListVoiceConnectorTerminationCredentialsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.VoiceConnectorId != nil {
+		v := *s.VoiceConnectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListVoiceConnectorTerminationCredentialsResponse
+type ListVoiceConnectorTerminationCredentialsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of user names.
+	Usernames []string `type:"list"`
+}
+
+// String returns the string representation
+func (s ListVoiceConnectorTerminationCredentialsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListVoiceConnectorTerminationCredentialsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListVoiceConnectorTerminationCredentialsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListVoiceConnectorTerminationCredentialsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Usernames) > 0 {
+		v := s.Usernames
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Usernames", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListVoiceConnectorsRequest
+type ListVoiceConnectorsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of results to return in a single call.
+	MaxResults *int64 `location:"querystring" locationName:"max-results" min:"1" type:"integer"`
+
+	// The token to use to retrieve the next page of results.
+	NextToken *string `location:"querystring" locationName:"next-token" type:"string"`
+}
+
+// String returns the string representation
+func (s ListVoiceConnectorsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListVoiceConnectorsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListVoiceConnectorsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListVoiceConnectorsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListVoiceConnectorsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "max-results", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "next-token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListVoiceConnectorsResponse
+type ListVoiceConnectorsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The token to use to retrieve the next page of results.
+	NextToken *string `type:"string"`
+
+	// The details of the Amazon Chime Voice Connectors.
+	VoiceConnectors []VoiceConnector `type:"list"`
+}
+
+// String returns the string representation
+func (s ListVoiceConnectorsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListVoiceConnectorsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListVoiceConnectorsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListVoiceConnectorsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.VoiceConnectors) > 0 {
+		v := s.VoiceConnectors
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "VoiceConnectors", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/LogoutUserRequest
 type LogoutUserInput struct {
 	_ struct{} `type:"structure"`
@@ -2400,6 +6688,856 @@ func (s LogoutUserOutput) SDKResponseMetadata() aws.Response {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s LogoutUserOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// A phone number for which an order has been placed.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/OrderedPhoneNumber
+type OrderedPhoneNumber struct {
+	_ struct{} `type:"structure"`
+
+	// The phone number, in E.164 format.
+	E164PhoneNumber *string `type:"string"`
+
+	// The phone number status.
+	Status OrderedPhoneNumberStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s OrderedPhoneNumber) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s OrderedPhoneNumber) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OrderedPhoneNumber) MarshalFields(e protocol.FieldEncoder) error {
+	if s.E164PhoneNumber != nil {
+		v := *s.E164PhoneNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "E164PhoneNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Origination settings enable your SIP hosts to receive inbound calls using
+// your Amazon Chime Voice Connector.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Origination
+type Origination struct {
+	_ struct{} `type:"structure"`
+
+	// When origination settings are disabled, inbound calls are not enabled for
+	// your Amazon Chime Voice Connector.
+	Disabled *bool `type:"boolean"`
+
+	// The call distribution properties defined for your SIP hosts. Valid range:
+	// Minimum value of 1. Maximum value of 20.
+	Routes []OriginationRoute `type:"list"`
+}
+
+// String returns the string representation
+func (s Origination) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Origination) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Origination) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Origination"}
+	if s.Routes != nil {
+		for i, v := range s.Routes {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Routes", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Origination) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Disabled != nil {
+		v := *s.Disabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Disabled", protocol.BoolValue(v), metadata)
+	}
+	if len(s.Routes) > 0 {
+		v := s.Routes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Routes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Origination routes define call distribution properties for your SIP hosts
+// to receive inbound calls using your Amazon Chime Voice Connector. Limit:
+// 10 origination routes per Amazon Chime Voice Connector.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/OriginationRoute
+type OriginationRoute struct {
+	_ struct{} `type:"structure"`
+
+	// The FODN or IP address to contact for origination traffic.
+	Host *string `type:"string"`
+
+	// The designated origination route port. Defaults to 5060.
+	Port *int64 `type:"integer"`
+
+	// The priority associated with the host, with 1 being the highest priority.
+	// Higher priority hosts are attempted first.
+	Priority *int64 `min:"1" type:"integer"`
+
+	// The protocol to use for the origination route. Encryption-enabled Amazon
+	// Chime Voice Connectors use TCP protocol by default.
+	Protocol OriginationRouteProtocol `type:"string" enum:"true"`
+
+	// The weight associated with the host. If hosts are equal in priority, calls
+	// are distributed among them based on their relative weight.
+	Weight *int64 `min:"1" type:"integer"`
+}
+
+// String returns the string representation
+func (s OriginationRoute) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s OriginationRoute) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OriginationRoute) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "OriginationRoute"}
+	if s.Priority != nil && *s.Priority < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Priority", 1))
+	}
+	if s.Weight != nil && *s.Weight < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Weight", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OriginationRoute) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Host != nil {
+		v := *s.Host
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Host", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), metadata)
+	}
+	if s.Priority != nil {
+		v := *s.Priority
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Priority", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Protocol) > 0 {
+		v := s.Protocol
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Protocol", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Weight != nil {
+		v := *s.Weight
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Weight", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// A phone number used for Amazon Chime Business Calling or an Amazon Chime
+// Voice Connector.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PhoneNumber
+type PhoneNumber struct {
+	_ struct{} `type:"structure"`
+
+	// The phone number associations.
+	Associations []PhoneNumberAssociation `type:"list"`
+
+	// The phone number capabilities.
+	Capabilities *PhoneNumberCapabilities `type:"structure"`
+
+	// The phone number creation timestamp, in ISO 8601 format.
+	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The deleted phone number timestamp, in ISO 8601 format.
+	DeletionTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The phone number, in E.164 format.
+	E164PhoneNumber *string `type:"string"`
+
+	// The phone number ID.
+	PhoneNumberId *string `type:"string"`
+
+	// The phone number product type.
+	ProductType PhoneNumberProductType `type:"string" enum:"true"`
+
+	// The phone number status.
+	Status PhoneNumberStatus `type:"string" enum:"true"`
+
+	// The updated phone number timestamp, in ISO 8601 format.
+	UpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+}
+
+// String returns the string representation
+func (s PhoneNumber) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PhoneNumber) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PhoneNumber) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Associations) > 0 {
+		v := s.Associations
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Associations", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Capabilities != nil {
+		v := s.Capabilities
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Capabilities", v, metadata)
+	}
+	if s.CreatedTimestamp != nil {
+		v := *s.CreatedTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.DeletionTimestamp != nil {
+		v := *s.DeletionTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeletionTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.E164PhoneNumber != nil {
+		v := *s.E164PhoneNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "E164PhoneNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PhoneNumberId != nil {
+		v := *s.PhoneNumberId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PhoneNumberId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ProductType) > 0 {
+		v := s.ProductType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProductType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.UpdatedTimestamp != nil {
+		v := *s.UpdatedTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpdatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	return nil
+}
+
+// The phone number associations, such as Amazon Chime account ID, Amazon Chime
+// user ID, or Amazon Chime Voice Connector ID.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PhoneNumberAssociation
+type PhoneNumberAssociation struct {
+	_ struct{} `type:"structure"`
+
+	// The timestamp of the phone number association, in ISO 8601 format.
+	AssociatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// Defines the association with an Amazon Chime account ID, user ID, or Amazon
+	// Chime Voice Connector ID.
+	Name PhoneNumberAssociationName `type:"string" enum:"true"`
+
+	// Contains the ID for the entity specified in Name.
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s PhoneNumberAssociation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PhoneNumberAssociation) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PhoneNumberAssociation) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AssociatedTimestamp != nil {
+		v := *s.AssociatedTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AssociatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if len(s.Name) > 0 {
+		v := s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The phone number capabilities, such as enabled inbound and outbound calling
+// and text messaging.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PhoneNumberCapabilities
+type PhoneNumberCapabilities struct {
+	_ struct{} `type:"structure"`
+
+	// Allows or denies inbound calling for the specified phone number.
+	InboundCall *bool `type:"boolean"`
+
+	// Allows or denies inbound MMS messaging for the specified phone number.
+	InboundMMS *bool `type:"boolean"`
+
+	// Allows or denies inbound SMS messaging for the specified phone number.
+	InboundSMS *bool `type:"boolean"`
+
+	// Allows or denies outbound calling for the specified phone number.
+	OutboundCall *bool `type:"boolean"`
+
+	// Allows or denies outbound MMS messaging for the specified phone number.
+	OutboundMMS *bool `type:"boolean"`
+
+	// Allows or denies outbound SMS messaging for the specified phone number.
+	OutboundSMS *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s PhoneNumberCapabilities) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PhoneNumberCapabilities) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PhoneNumberCapabilities) MarshalFields(e protocol.FieldEncoder) error {
+	if s.InboundCall != nil {
+		v := *s.InboundCall
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InboundCall", protocol.BoolValue(v), metadata)
+	}
+	if s.InboundMMS != nil {
+		v := *s.InboundMMS
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InboundMMS", protocol.BoolValue(v), metadata)
+	}
+	if s.InboundSMS != nil {
+		v := *s.InboundSMS
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InboundSMS", protocol.BoolValue(v), metadata)
+	}
+	if s.OutboundCall != nil {
+		v := *s.OutboundCall
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutboundCall", protocol.BoolValue(v), metadata)
+	}
+	if s.OutboundMMS != nil {
+		v := *s.OutboundMMS
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutboundMMS", protocol.BoolValue(v), metadata)
+	}
+	if s.OutboundSMS != nil {
+		v := *s.OutboundSMS
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutboundSMS", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// If the phone number action fails for one or more of the phone numbers in
+// the request, a list of the phone numbers is returned, along with error codes
+// and error messages.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PhoneNumberError
+type PhoneNumberError struct {
+	_ struct{} `type:"structure"`
+
+	// The error code.
+	ErrorCode ErrorCode `type:"string" enum:"true"`
+
+	// The error message.
+	ErrorMessage *string `type:"string"`
+
+	// The phone number ID for which the action failed.
+	PhoneNumberId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s PhoneNumberError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PhoneNumberError) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PhoneNumberError) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ErrorCode) > 0 {
+		v := s.ErrorCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ErrorCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ErrorMessage != nil {
+		v := *s.ErrorMessage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ErrorMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PhoneNumberId != nil {
+		v := *s.PhoneNumberId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PhoneNumberId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The details of a phone number order created for Amazon Chime.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PhoneNumberOrder
+type PhoneNumberOrder struct {
+	_ struct{} `type:"structure"`
+
+	// The phone number order creation timestamp, in ISO 8601 format.
+	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The ordered phone number details, such as the phone number in E.164 format
+	// and the phone number status.
+	OrderedPhoneNumbers []OrderedPhoneNumber `type:"list"`
+
+	// The phone number order ID.
+	PhoneNumberOrderId *string `type:"string"`
+
+	// The phone number order product type.
+	ProductType PhoneNumberProductType `type:"string" enum:"true"`
+
+	// The status of the phone number order.
+	Status PhoneNumberOrderStatus `type:"string" enum:"true"`
+
+	// The updated phone number order timestamp, in ISO 8601 format.
+	UpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+}
+
+// String returns the string representation
+func (s PhoneNumberOrder) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PhoneNumberOrder) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PhoneNumberOrder) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreatedTimestamp != nil {
+		v := *s.CreatedTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if len(s.OrderedPhoneNumbers) > 0 {
+		v := s.OrderedPhoneNumbers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "OrderedPhoneNumbers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.PhoneNumberOrderId != nil {
+		v := *s.PhoneNumberOrderId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PhoneNumberOrderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ProductType) > 0 {
+		v := s.ProductType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProductType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.UpdatedTimestamp != nil {
+		v := *s.UpdatedTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpdatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorOriginationRequest
+type PutVoiceConnectorOriginationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The origination setting details to add.
+	//
+	// Origination is a required field
+	Origination *Origination `type:"structure" required:"true"`
+
+	// The Amazon Chime Voice Connector ID.
+	//
+	// VoiceConnectorId is a required field
+	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s PutVoiceConnectorOriginationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutVoiceConnectorOriginationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutVoiceConnectorOriginationInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutVoiceConnectorOriginationInput"}
+
+	if s.Origination == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Origination"))
+	}
+
+	if s.VoiceConnectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
+	}
+	if s.Origination != nil {
+		if err := s.Origination.Validate(); err != nil {
+			invalidParams.AddNested("Origination", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PutVoiceConnectorOriginationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Origination != nil {
+		v := s.Origination
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Origination", v, metadata)
+	}
+	if s.VoiceConnectorId != nil {
+		v := *s.VoiceConnectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorOriginationResponse
+type PutVoiceConnectorOriginationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The updated origination setting details.
+	Origination *Origination `type:"structure"`
+}
+
+// String returns the string representation
+func (s PutVoiceConnectorOriginationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutVoiceConnectorOriginationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutVoiceConnectorOriginationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PutVoiceConnectorOriginationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Origination != nil {
+		v := s.Origination
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Origination", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorTerminationCredentialsRequest
+type PutVoiceConnectorTerminationCredentialsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The termination SIP credentials.
+	Credentials []Credential `type:"list"`
+
+	// The Amazon Chime Voice Connector ID.
+	//
+	// VoiceConnectorId is a required field
+	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s PutVoiceConnectorTerminationCredentialsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutVoiceConnectorTerminationCredentialsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutVoiceConnectorTerminationCredentialsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutVoiceConnectorTerminationCredentialsInput"}
+
+	if s.VoiceConnectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PutVoiceConnectorTerminationCredentialsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Credentials) > 0 {
+		v := s.Credentials
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Credentials", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.VoiceConnectorId != nil {
+		v := *s.VoiceConnectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorTerminationCredentialsOutput
+type PutVoiceConnectorTerminationCredentialsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s PutVoiceConnectorTerminationCredentialsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutVoiceConnectorTerminationCredentialsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutVoiceConnectorTerminationCredentialsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PutVoiceConnectorTerminationCredentialsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorTerminationRequest
+type PutVoiceConnectorTerminationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The termination setting details to add.
+	//
+	// Termination is a required field
+	Termination *Termination `type:"structure" required:"true"`
+
+	// The Amazon Chime Voice Connector ID.
+	//
+	// VoiceConnectorId is a required field
+	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s PutVoiceConnectorTerminationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutVoiceConnectorTerminationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutVoiceConnectorTerminationInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutVoiceConnectorTerminationInput"}
+
+	if s.Termination == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Termination"))
+	}
+
+	if s.VoiceConnectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
+	}
+	if s.Termination != nil {
+		if err := s.Termination.Validate(); err != nil {
+			invalidParams.AddNested("Termination", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PutVoiceConnectorTerminationInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Termination != nil {
+		v := s.Termination
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Termination", v, metadata)
+	}
+	if s.VoiceConnectorId != nil {
+		v := *s.VoiceConnectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorTerminationResponse
+type PutVoiceConnectorTerminationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The updated termination setting details.
+	Termination *Termination `type:"structure"`
+}
+
+// String returns the string representation
+func (s PutVoiceConnectorTerminationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutVoiceConnectorTerminationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutVoiceConnectorTerminationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PutVoiceConnectorTerminationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Termination != nil {
+		v := s.Termination
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Termination", v, metadata)
+	}
 	return nil
 }
 
@@ -2496,6 +7634,428 @@ func (s ResetPersonalPINOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "User", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RestorePhoneNumberRequest
+type RestorePhoneNumberInput struct {
+	_ struct{} `type:"structure"`
+
+	// The phone number.
+	//
+	// PhoneNumberId is a required field
+	PhoneNumberId *string `location:"uri" locationName:"phoneNumberId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RestorePhoneNumberInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RestorePhoneNumberInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RestorePhoneNumberInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RestorePhoneNumberInput"}
+
+	if s.PhoneNumberId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PhoneNumberId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RestorePhoneNumberInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PhoneNumberId != nil {
+		v := *s.PhoneNumberId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "phoneNumberId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RestorePhoneNumberResponse
+type RestorePhoneNumberOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The phone number details.
+	PhoneNumber *PhoneNumber `type:"structure"`
+}
+
+// String returns the string representation
+func (s RestorePhoneNumberOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RestorePhoneNumberOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RestorePhoneNumberOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RestorePhoneNumberOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.PhoneNumber != nil {
+		v := s.PhoneNumber
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "PhoneNumber", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/SearchAvailablePhoneNumbersRequest
+type SearchAvailablePhoneNumbersInput struct {
+	_ struct{} `type:"structure"`
+
+	// The area code used to filter results.
+	AreaCode *string `location:"querystring" locationName:"area-code" type:"string"`
+
+	// The city used to filter results.
+	City *string `location:"querystring" locationName:"city" type:"string"`
+
+	// The country used to filter results.
+	Country *string `location:"querystring" locationName:"country" type:"string"`
+
+	// The maximum number of results to return in a single call.
+	MaxResults *int64 `location:"querystring" locationName:"max-results" min:"1" type:"integer"`
+
+	// The token to use to retrieve the next page of results.
+	NextToken *string `location:"querystring" locationName:"next-token" type:"string"`
+
+	// The state used to filter results.
+	State *string `location:"querystring" locationName:"state" type:"string"`
+}
+
+// String returns the string representation
+func (s SearchAvailablePhoneNumbersInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SearchAvailablePhoneNumbersInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SearchAvailablePhoneNumbersInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SearchAvailablePhoneNumbersInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SearchAvailablePhoneNumbersInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AreaCode != nil {
+		v := *s.AreaCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "area-code", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.City != nil {
+		v := *s.City
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "city", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Country != nil {
+		v := *s.Country
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "country", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "max-results", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "next-token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.State != nil {
+		v := *s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "state", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/SearchAvailablePhoneNumbersResponse
+type SearchAvailablePhoneNumbersOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// List of phone numbers, in E.164 format.
+	E164PhoneNumbers []string `type:"list"`
+}
+
+// String returns the string representation
+func (s SearchAvailablePhoneNumbersOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SearchAvailablePhoneNumbersOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SearchAvailablePhoneNumbersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SearchAvailablePhoneNumbersOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.E164PhoneNumbers) > 0 {
+		v := s.E164PhoneNumbers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "E164PhoneNumbers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Settings that allow management of telephony permissions for an Amazon Chime
+// user, such as inbound and outbound calling and text messaging.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/TelephonySettings
+type TelephonySettings struct {
+	_ struct{} `type:"structure"`
+
+	// Allows or denies inbound calling.
+	//
+	// InboundCalling is a required field
+	InboundCalling *bool `type:"boolean" required:"true"`
+
+	// Allows or denies outbound calling.
+	//
+	// OutboundCalling is a required field
+	OutboundCalling *bool `type:"boolean" required:"true"`
+
+	// Allows or denies SMS messaging.
+	//
+	// SMS is a required field
+	SMS *bool `type:"boolean" required:"true"`
+}
+
+// String returns the string representation
+func (s TelephonySettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TelephonySettings) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TelephonySettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TelephonySettings"}
+
+	if s.InboundCalling == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InboundCalling"))
+	}
+
+	if s.OutboundCalling == nil {
+		invalidParams.Add(aws.NewErrParamRequired("OutboundCalling"))
+	}
+
+	if s.SMS == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SMS"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TelephonySettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.InboundCalling != nil {
+		v := *s.InboundCalling
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InboundCalling", protocol.BoolValue(v), metadata)
+	}
+	if s.OutboundCalling != nil {
+		v := *s.OutboundCalling
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutboundCalling", protocol.BoolValue(v), metadata)
+	}
+	if s.SMS != nil {
+		v := *s.SMS
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SMS", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// Termination settings enable your SIP hosts to make outbound calls using your
+// Amazon Chime Voice Connector.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Termination
+type Termination struct {
+	_ struct{} `type:"structure"`
+
+	// The countries to which calls are allowed.
+	CallingRegions []string `type:"list"`
+
+	// The IP addresses allowed to make calls, in CIDR format.
+	CidrAllowedList []string `type:"list"`
+
+	// The limit on calls per second. Max value based on account service limit.
+	// Default value of 1.
+	CpsLimit *int64 `min:"1" type:"integer"`
+
+	// The default caller ID phone number.
+	DefaultPhoneNumber *string `type:"string"`
+
+	// When termination settings are disabled, outbound calls can not be made.
+	Disabled *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s Termination) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Termination) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Termination) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Termination"}
+	if s.CpsLimit != nil && *s.CpsLimit < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("CpsLimit", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Termination) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.CallingRegions) > 0 {
+		v := s.CallingRegions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "CallingRegions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.CidrAllowedList) > 0 {
+		v := s.CidrAllowedList
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "CidrAllowedList", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.CpsLimit != nil {
+		v := *s.CpsLimit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CpsLimit", protocol.Int64Value(v), metadata)
+	}
+	if s.DefaultPhoneNumber != nil {
+		v := *s.DefaultPhoneNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DefaultPhoneNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Disabled != nil {
+		v := *s.Disabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Disabled", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// The termination health details, including the source IP address and timestamp
+// of the last successful SIP OPTIONS message from your SIP infrastructure.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/TerminationHealth
+type TerminationHealth struct {
+	_ struct{} `type:"structure"`
+
+	// The source IP address.
+	Source *string `type:"string"`
+
+	// The timestamp, in ISO 8601 format.
+	Timestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+}
+
+// String returns the string representation
+func (s TerminationHealth) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TerminationHealth) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TerminationHealth) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Source != nil {
+		v := *s.Source
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Source", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Timestamp != nil {
+		v := *s.Timestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
 	return nil
 }
@@ -2682,6 +8242,241 @@ func (s UpdateAccountSettingsOutput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateGlobalSettingsRequest
+type UpdateGlobalSettingsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Chime Business Calling settings.
+	//
+	// BusinessCalling is a required field
+	BusinessCalling *BusinessCallingSettings `type:"structure" required:"true"`
+
+	// The Amazon Chime Voice Connector settings.
+	//
+	// VoiceConnector is a required field
+	VoiceConnector *VoiceConnectorSettings `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateGlobalSettingsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateGlobalSettingsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateGlobalSettingsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateGlobalSettingsInput"}
+
+	if s.BusinessCalling == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BusinessCalling"))
+	}
+
+	if s.VoiceConnector == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VoiceConnector"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateGlobalSettingsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.BusinessCalling != nil {
+		v := s.BusinessCalling
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "BusinessCalling", v, metadata)
+	}
+	if s.VoiceConnector != nil {
+		v := s.VoiceConnector
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "VoiceConnector", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateGlobalSettingsOutput
+type UpdateGlobalSettingsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateGlobalSettingsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateGlobalSettingsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateGlobalSettingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateGlobalSettingsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdatePhoneNumberRequest
+type UpdatePhoneNumberInput struct {
+	_ struct{} `type:"structure"`
+
+	// The phone number ID.
+	//
+	// PhoneNumberId is a required field
+	PhoneNumberId *string `location:"uri" locationName:"phoneNumberId" type:"string" required:"true"`
+
+	// The product type.
+	ProductType PhoneNumberProductType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s UpdatePhoneNumberInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdatePhoneNumberInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdatePhoneNumberInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdatePhoneNumberInput"}
+
+	if s.PhoneNumberId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PhoneNumberId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdatePhoneNumberInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ProductType) > 0 {
+		v := s.ProductType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProductType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.PhoneNumberId != nil {
+		v := *s.PhoneNumberId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "phoneNumberId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdatePhoneNumberResponse
+type UpdatePhoneNumberOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The updated phone number details.
+	PhoneNumber *PhoneNumber `type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdatePhoneNumberOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdatePhoneNumberOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdatePhoneNumberOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdatePhoneNumberOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.PhoneNumber != nil {
+		v := s.PhoneNumber
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "PhoneNumber", v, metadata)
+	}
+	return nil
+}
+
+// The phone number ID and product type fields to update, used with the BatchUpdatePhoneNumber
+// and UpdatePhoneNumber actions.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdatePhoneNumberRequestItem
+type UpdatePhoneNumberRequestItem struct {
+	_ struct{} `type:"structure"`
+
+	// The phone number ID to update.
+	//
+	// PhoneNumberId is a required field
+	PhoneNumberId *string `type:"string" required:"true"`
+
+	// The product type to update.
+	ProductType PhoneNumberProductType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s UpdatePhoneNumberRequestItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdatePhoneNumberRequestItem) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdatePhoneNumberRequestItem) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdatePhoneNumberRequestItem"}
+
+	if s.PhoneNumberId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PhoneNumberId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdatePhoneNumberRequestItem) MarshalFields(e protocol.FieldEncoder) error {
+	if s.PhoneNumberId != nil {
+		v := *s.PhoneNumberId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PhoneNumberId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ProductType) > 0 {
+		v := s.ProductType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProductType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateUserRequest
 type UpdateUserInput struct {
 	_ struct{} `type:"structure"`
@@ -2844,6 +8639,229 @@ func (s UpdateUserRequestItem) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateUserSettingsRequest
+type UpdateUserSettingsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Chime account ID.
+	//
+	// AccountId is a required field
+	AccountId *string `location:"uri" locationName:"accountId" type:"string" required:"true"`
+
+	// The user ID.
+	//
+	// UserId is a required field
+	UserId *string `location:"uri" locationName:"userId" type:"string" required:"true"`
+
+	// The user settings to update.
+	//
+	// UserSettings is a required field
+	UserSettings *UserSettings `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateUserSettingsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateUserSettingsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateUserSettingsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserSettingsInput"}
+
+	if s.AccountId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
+	}
+
+	if s.UserId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserId"))
+	}
+
+	if s.UserSettings == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserSettings"))
+	}
+	if s.UserSettings != nil {
+		if err := s.UserSettings.Validate(); err != nil {
+			invalidParams.AddNested("UserSettings", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateUserSettingsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.UserSettings != nil {
+		v := s.UserSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "UserSettings", v, metadata)
+	}
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateUserSettingsOutput
+type UpdateUserSettingsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateUserSettingsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateUserSettingsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateUserSettingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateUserSettingsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateVoiceConnectorRequest
+type UpdateVoiceConnectorInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the Amazon Chime Voice Connector.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// When enabled, requires encryption for the Amazon Chime Voice Connector.
+	//
+	// RequireEncryption is a required field
+	RequireEncryption *bool `type:"boolean" required:"true"`
+
+	// The Amazon Chime Voice Connector ID.
+	//
+	// VoiceConnectorId is a required field
+	VoiceConnectorId *string `location:"uri" locationName:"voiceConnectorId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateVoiceConnectorInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateVoiceConnectorInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateVoiceConnectorInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateVoiceConnectorInput"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if s.RequireEncryption == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RequireEncryption"))
+	}
+
+	if s.VoiceConnectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateVoiceConnectorInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RequireEncryption != nil {
+		v := *s.RequireEncryption
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RequireEncryption", protocol.BoolValue(v), metadata)
+	}
+	if s.VoiceConnectorId != nil {
+		v := *s.VoiceConnectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "voiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateVoiceConnectorResponse
+type UpdateVoiceConnectorOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Amazon Chime Voice Connector details.
+	VoiceConnector *VoiceConnector `type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateVoiceConnectorOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateVoiceConnectorOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateVoiceConnectorOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateVoiceConnectorOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.VoiceConnector != nil {
+		v := s.VoiceConnector
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "VoiceConnector", v, metadata)
+	}
+	return nil
+}
+
 // The user on the Amazon Chime account.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/User
 type User struct {
@@ -2867,6 +8885,9 @@ type User struct {
 
 	// The primary email address of the user.
 	PrimaryEmail *string `type:"string"`
+
+	// The primary phone number associated with the user.
+	PrimaryProvisionedNumber *string `type:"string"`
 
 	// Date and time when the user is registered, in ISO 8601 format.
 	RegisteredOn *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -2930,6 +8951,12 @@ func (s User) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "PrimaryEmail", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PrimaryProvisionedNumber != nil {
+		v := *s.PrimaryProvisionedNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PrimaryProvisionedNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.RegisteredOn != nil {
 		v := *s.RegisteredOn
@@ -3004,6 +9031,165 @@ func (s UserError) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "UserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Settings associated with an Amazon Chime user, including inbound and outbound
+// calling and text messaging.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UserSettings
+type UserSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The telephony settings associated with the user.
+	//
+	// Telephony is a required field
+	Telephony *TelephonySettings `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s UserSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UserSettings) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UserSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UserSettings"}
+
+	if s.Telephony == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Telephony"))
+	}
+	if s.Telephony != nil {
+		if err := s.Telephony.Validate(); err != nil {
+			invalidParams.AddNested("Telephony", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UserSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Telephony != nil {
+		v := s.Telephony
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Telephony", v, metadata)
+	}
+	return nil
+}
+
+// The Amazon Chime Voice Connector configuration, including outbound host name
+// and encryption settings.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/VoiceConnector
+type VoiceConnector struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Chime Voice Connector creation timestamp, in ISO 8601 format.
+	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The name of the Amazon Chime Voice Connector.
+	Name *string `min:"1" type:"string"`
+
+	// The outbound host name for the Amazon Chime Voice Connector.
+	OutboundHostName *string `type:"string"`
+
+	// Designates whether encryption is required for the Amazon Chime Voice Connector.
+	RequireEncryption *bool `type:"boolean"`
+
+	// The updated Amazon Chime Voice Connector timestamp, in ISO 8601 format.
+	UpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The Amazon Chime Voice Connector ID.
+	VoiceConnectorId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s VoiceConnector) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VoiceConnector) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VoiceConnector) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreatedTimestamp != nil {
+		v := *s.CreatedTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.OutboundHostName != nil {
+		v := *s.OutboundHostName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutboundHostName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RequireEncryption != nil {
+		v := *s.RequireEncryption
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RequireEncryption", protocol.BoolValue(v), metadata)
+	}
+	if s.UpdatedTimestamp != nil {
+		v := *s.UpdatedTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpdatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.VoiceConnectorId != nil {
+		v := *s.VoiceConnectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VoiceConnectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The Amazon Chime Voice Connector settings. Includes any Amazon S3 buckets
+// designated for storing call detail records.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/VoiceConnectorSettings
+type VoiceConnectorSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon S3 bucket designated for call detail record storage.
+	CdrBucket *string `type:"string"`
+}
+
+// String returns the string representation
+func (s VoiceConnectorSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VoiceConnectorSettings) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VoiceConnectorSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CdrBucket != nil {
+		v := *s.CdrBucket
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CdrBucket", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3103,6 +9289,118 @@ func (enum License) MarshalValue() (string, error) {
 }
 
 func (enum License) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type OrderedPhoneNumberStatus string
+
+// Enum values for OrderedPhoneNumberStatus
+const (
+	OrderedPhoneNumberStatusProcessing OrderedPhoneNumberStatus = "Processing"
+	OrderedPhoneNumberStatusAcquired   OrderedPhoneNumberStatus = "Acquired"
+	OrderedPhoneNumberStatusFailed     OrderedPhoneNumberStatus = "Failed"
+)
+
+func (enum OrderedPhoneNumberStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OrderedPhoneNumberStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type OriginationRouteProtocol string
+
+// Enum values for OriginationRouteProtocol
+const (
+	OriginationRouteProtocolTcp OriginationRouteProtocol = "TCP"
+	OriginationRouteProtocolUdp OriginationRouteProtocol = "UDP"
+)
+
+func (enum OriginationRouteProtocol) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OriginationRouteProtocol) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type PhoneNumberAssociationName string
+
+// Enum values for PhoneNumberAssociationName
+const (
+	PhoneNumberAssociationNameAccountId        PhoneNumberAssociationName = "AccountId"
+	PhoneNumberAssociationNameUserId           PhoneNumberAssociationName = "UserId"
+	PhoneNumberAssociationNameVoiceConnectorId PhoneNumberAssociationName = "VoiceConnectorId"
+)
+
+func (enum PhoneNumberAssociationName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PhoneNumberAssociationName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type PhoneNumberOrderStatus string
+
+// Enum values for PhoneNumberOrderStatus
+const (
+	PhoneNumberOrderStatusProcessing PhoneNumberOrderStatus = "Processing"
+	PhoneNumberOrderStatusSuccessful PhoneNumberOrderStatus = "Successful"
+	PhoneNumberOrderStatusFailed     PhoneNumberOrderStatus = "Failed"
+	PhoneNumberOrderStatusPartial    PhoneNumberOrderStatus = "Partial"
+)
+
+func (enum PhoneNumberOrderStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PhoneNumberOrderStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type PhoneNumberProductType string
+
+// Enum values for PhoneNumberProductType
+const (
+	PhoneNumberProductTypeBusinessCalling PhoneNumberProductType = "BusinessCalling"
+	PhoneNumberProductTypeVoiceConnector  PhoneNumberProductType = "VoiceConnector"
+)
+
+func (enum PhoneNumberProductType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PhoneNumberProductType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type PhoneNumberStatus string
+
+// Enum values for PhoneNumberStatus
+const (
+	PhoneNumberStatusAcquireInProgress PhoneNumberStatus = "AcquireInProgress"
+	PhoneNumberStatusAcquireFailed     PhoneNumberStatus = "AcquireFailed"
+	PhoneNumberStatusUnassigned        PhoneNumberStatus = "Unassigned"
+	PhoneNumberStatusAssigned          PhoneNumberStatus = "Assigned"
+	PhoneNumberStatusReleaseInProgress PhoneNumberStatus = "ReleaseInProgress"
+	PhoneNumberStatusDeleteInProgress  PhoneNumberStatus = "DeleteInProgress"
+	PhoneNumberStatusReleaseFailed     PhoneNumberStatus = "ReleaseFailed"
+	PhoneNumberStatusDeleteFailed      PhoneNumberStatus = "DeleteFailed"
+)
+
+func (enum PhoneNumberStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PhoneNumberStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

@@ -78,9 +78,15 @@ type MediaPackageAPI interface {
 
 	ListOriginEndpointsRequest(*mediapackage.ListOriginEndpointsInput) mediapackage.ListOriginEndpointsRequest
 
+	ListTagsForResourceRequest(*mediapackage.ListTagsForResourceInput) mediapackage.ListTagsForResourceRequest
+
 	RotateChannelCredentialsRequest(*mediapackage.RotateChannelCredentialsInput) mediapackage.RotateChannelCredentialsRequest
 
 	RotateIngestEndpointCredentialsRequest(*mediapackage.RotateIngestEndpointCredentialsInput) mediapackage.RotateIngestEndpointCredentialsRequest
+
+	TagResourceRequest(*mediapackage.TagResourceInput) mediapackage.TagResourceRequest
+
+	UntagResourceRequest(*mediapackage.UntagResourceInput) mediapackage.UntagResourceRequest
 
 	UpdateChannelRequest(*mediapackage.UpdateChannelInput) mediapackage.UpdateChannelRequest
 

@@ -73,6 +73,12 @@ type KafkaAPI interface {
 	ListClustersRequest(*kafka.ListClustersInput) kafka.ListClustersRequest
 
 	ListNodesRequest(*kafka.ListNodesInput) kafka.ListNodesRequest
+
+	ListTagsForResourceRequest(*kafka.ListTagsForResourceInput) kafka.ListTagsForResourceRequest
+
+	TagResourceRequest(*kafka.TagResourceInput) kafka.TagResourceRequest
+
+	UntagResourceRequest(*kafka.UntagResourceInput) kafka.UntagResourceRequest
 }
 
 var _ KafkaAPI = (*kafka.Kafka)(nil)

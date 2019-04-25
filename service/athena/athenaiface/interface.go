@@ -68,7 +68,11 @@ type AthenaAPI interface {
 
 	CreateNamedQueryRequest(*athena.CreateNamedQueryInput) athena.CreateNamedQueryRequest
 
+	CreateWorkGroupRequest(*athena.CreateWorkGroupInput) athena.CreateWorkGroupRequest
+
 	DeleteNamedQueryRequest(*athena.DeleteNamedQueryInput) athena.DeleteNamedQueryRequest
+
+	DeleteWorkGroupRequest(*athena.DeleteWorkGroupInput) athena.DeleteWorkGroupRequest
 
 	GetNamedQueryRequest(*athena.GetNamedQueryInput) athena.GetNamedQueryRequest
 
@@ -76,13 +80,25 @@ type AthenaAPI interface {
 
 	GetQueryResultsRequest(*athena.GetQueryResultsInput) athena.GetQueryResultsRequest
 
+	GetWorkGroupRequest(*athena.GetWorkGroupInput) athena.GetWorkGroupRequest
+
 	ListNamedQueriesRequest(*athena.ListNamedQueriesInput) athena.ListNamedQueriesRequest
 
 	ListQueryExecutionsRequest(*athena.ListQueryExecutionsInput) athena.ListQueryExecutionsRequest
 
+	ListTagsForResourceRequest(*athena.ListTagsForResourceInput) athena.ListTagsForResourceRequest
+
+	ListWorkGroupsRequest(*athena.ListWorkGroupsInput) athena.ListWorkGroupsRequest
+
 	StartQueryExecutionRequest(*athena.StartQueryExecutionInput) athena.StartQueryExecutionRequest
 
 	StopQueryExecutionRequest(*athena.StopQueryExecutionInput) athena.StopQueryExecutionRequest
+
+	TagResourceRequest(*athena.TagResourceInput) athena.TagResourceRequest
+
+	UntagResourceRequest(*athena.UntagResourceInput) athena.UntagResourceRequest
+
+	UpdateWorkGroupRequest(*athena.UpdateWorkGroupInput) athena.UpdateWorkGroupRequest
 }
 
 var _ AthenaAPI = (*athena.Athena)(nil)

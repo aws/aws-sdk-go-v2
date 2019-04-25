@@ -171,7 +171,8 @@ func (r CreateProtectionRequest) Send(ctx context.Context) (*CreateProtectionOut
 //
 // Enables AWS Shield Advanced for a specific AWS resource. The resource can
 // be an Amazon CloudFront distribution, Elastic Load Balancing load balancer,
-// Elastic IP Address, or an Amazon Route 53 hosted zone.
+// AWS Global Accelerator accelerator, Elastic IP Address, or an Amazon Route
+// 53 hosted zone.
 //
 // You can add protection to only a single resource with each CreateProtection
 // request. If you want to add protection to multiple resources at once, use
@@ -1332,7 +1333,9 @@ type CreateProtectionInput struct {
 	//
 	//    * For an Elastic Load Balancer (Classic Load Balancer): arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name
 	//
-	//    * For AWS CloudFront distribution: arn:aws:cloudfront::account-id:distribution/distribution-id
+	//    * For an AWS CloudFront distribution: arn:aws:cloudfront::account-id:distribution/distribution-id
+	//
+	//    * For an AWS Global Accelerator accelerator: arn:aws:globalaccelerator::account-id:accelerator/accelerator-id
 	//
 	//    * For Amazon Route 53: arn:aws:route53:::hostedzone/hosted-zone-id
 	//
@@ -1685,10 +1688,15 @@ func (s DescribeEmergencyContactSettingsOutput) SDKResponseMetadata() aws.Respon
 type DescribeProtectionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique identifier (ID) for the Protection object that is described.
-	//
-	// ProtectionId is a required field
-	ProtectionId *string `min:"1" type:"string" required:"true"`
+	// The unique identifier (ID) for the Protection object that is described. When
+	// submitting the DescribeProtection request you must provide either the ResourceArn
+	// or the ProtectionID, but not both.
+	ProtectionId *string `min:"1" type:"string"`
+
+	// The ARN (Amazon Resource Name) of the AWS resource for the Protection object
+	// that is described. When submitting the DescribeProtection request you must
+	// provide either the ResourceArn or the ProtectionID, but not both.
+	ResourceArn *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -1704,12 +1712,11 @@ func (s DescribeProtectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProtectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeProtectionInput"}
-
-	if s.ProtectionId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProtectionId"))
-	}
 	if s.ProtectionId != nil && len(*s.ProtectionId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProtectionId", 1))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {

@@ -120,6 +120,8 @@ type ComprehendAPI interface {
 
 	ListSentimentDetectionJobsRequest(*comprehend.ListSentimentDetectionJobsInput) comprehend.ListSentimentDetectionJobsRequest
 
+	ListTagsForResourceRequest(*comprehend.ListTagsForResourceInput) comprehend.ListTagsForResourceRequest
+
 	ListTopicsDetectionJobsRequest(*comprehend.ListTopicsDetectionJobsInput) comprehend.ListTopicsDetectionJobsRequest
 
 	StartDocumentClassificationJobRequest(*comprehend.StartDocumentClassificationJobInput) comprehend.StartDocumentClassificationJobRequest
@@ -145,6 +147,10 @@ type ComprehendAPI interface {
 	StopTrainingDocumentClassifierRequest(*comprehend.StopTrainingDocumentClassifierInput) comprehend.StopTrainingDocumentClassifierRequest
 
 	StopTrainingEntityRecognizerRequest(*comprehend.StopTrainingEntityRecognizerInput) comprehend.StopTrainingEntityRecognizerRequest
+
+	TagResourceRequest(*comprehend.TagResourceInput) comprehend.TagResourceRequest
+
+	UntagResourceRequest(*comprehend.UntagResourceInput) comprehend.UntagResourceRequest
 }
 
 var _ ComprehendAPI = (*comprehend.Comprehend)(nil)

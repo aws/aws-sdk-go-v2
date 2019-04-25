@@ -405,7 +405,9 @@ func (r AttachThingPrincipalRequest) Send(ctx context.Context) (*AttachThingPrin
 // AttachThingPrincipalRequest returns a request value for making API operation for
 // AWS IoT.
 //
-// Attaches the specified principal to the specified thing.
+// Attaches the specified principal to the specified thing. A principal can
+// be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities
+// or federated identities.
 //
 //    // Example sending a request using the AttachThingPrincipalRequest method.
 //    req := client.AttachThingPrincipalRequest(params)
@@ -1413,9 +1415,12 @@ func (r CreateThingRequest) Send(ctx context.Context) (*CreateThingOutput, error
 // CreateThingRequest returns a request value for making API operation for
 // AWS IoT.
 //
-// Creates a thing record in the registry.
+// Creates a thing record in the registry. If this call is made multiple times
+// using the same thing name and configuration, the call will succeed. If this
+// call is made with the same thing name but different configuration a ResourceAlreadyExistsException
+// is thrown.
 //
-// This is a control plane operation. See Authorization (http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html)
+// This is a control plane operation. See Authorization (https://docs.aws.amazon.com/iot/latest/developerguide/authorization.html)
 // for information about authorizing control plane actions.
 //
 //    // Example sending a request using the CreateThingRequest method.
@@ -1467,7 +1472,7 @@ func (r CreateThingGroupRequest) Send(ctx context.Context) (*CreateThingGroupOut
 //
 // Create a thing group.
 //
-// This is a control plane operation. See Authorization (http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html)
+// This is a control plane operation. See Authorization (https://docs.aws.amazon.com/iot/latest/developerguide/authorization.html)
 // for information about authorizing control plane actions.
 //
 //    // Example sending a request using the CreateThingGroupRequest method.
@@ -3885,7 +3890,9 @@ func (r DetachThingPrincipalRequest) Send(ctx context.Context) (*DetachThingPrin
 // DetachThingPrincipalRequest returns a request value for making API operation for
 // AWS IoT.
 //
-// Detaches the specified principal from the specified thing.
+// Detaches the specified principal from the specified thing. A principal can
+// be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities
+// or federated identities.
 //
 // This call is asynchronous. It might take several seconds for the detachment
 // to propagate.
@@ -4410,6 +4417,55 @@ func (c *IoT) GetRegistrationCodeRequest(input *GetRegistrationCodeInput) GetReg
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetRegistrationCodeRequest{Request: req, Input: input, Copy: c.GetRegistrationCodeRequest}
+}
+
+const opGetStatistics = "GetStatistics"
+
+// GetStatisticsRequest is a API request type for the GetStatistics API operation.
+type GetStatisticsRequest struct {
+	*aws.Request
+	Input *GetStatisticsInput
+	Copy  func(*GetStatisticsInput) GetStatisticsRequest
+}
+
+// Send marshals and sends the GetStatistics API request.
+func (r GetStatisticsRequest) Send(ctx context.Context) (*GetStatisticsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetStatisticsOutput), nil
+}
+
+// GetStatisticsRequest returns a request value for making API operation for
+// AWS IoT.
+//
+// Gets statistics about things that match the specified query.
+//
+//    // Example sending a request using the GetStatisticsRequest method.
+//    req := client.GetStatisticsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *IoT) GetStatisticsRequest(input *GetStatisticsInput) GetStatisticsRequest {
+	op := &aws.Operation{
+		Name:       opGetStatistics,
+		HTTPMethod: "POST",
+		HTTPPath:   "/indices/statistics",
+	}
+
+	if input == nil {
+		input = &GetStatisticsInput{}
+	}
+
+	output := &GetStatisticsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetStatisticsRequest{Request: req, Input: input, Copy: c.GetStatisticsRequest}
 }
 
 const opGetTopicRule = "GetTopicRule"
@@ -5430,7 +5486,7 @@ func (r ListPrincipalPoliciesRequest) Send(ctx context.Context) (*ListPrincipalP
 // AWS IoT.
 //
 // Lists the policies attached to the specified principal. If you use an Cognito
-// identity, the ID must be in AmazonCognito Identity format (http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax).
+// identity, the ID must be in AmazonCognito Identity format (https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax).
 //
 // Note: This API is deprecated. Please use ListAttachedPolicies instead.
 //
@@ -5484,7 +5540,9 @@ func (r ListPrincipalThingsRequest) Send(ctx context.Context) (*ListPrincipalThi
 // ListPrincipalThingsRequest returns a request value for making API operation for
 // AWS IoT.
 //
-// Lists the things associated with the specified principal.
+// Lists the things associated with the specified principal. A principal can
+// be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities
+// or federated identities.
 //
 //    // Example sending a request using the ListPrincipalThingsRequest method.
 //    req := client.ListPrincipalThingsRequest(params)
@@ -6026,7 +6084,9 @@ func (r ListThingPrincipalsRequest) Send(ctx context.Context) (*ListThingPrincip
 // ListThingPrincipalsRequest returns a request value for making API operation for
 // AWS IoT.
 //
-// Lists the principals associated with the specified thing.
+// Lists the principals associated with the specified thing. A principal can
+// be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities
+// or federated identities.
 //
 //    // Example sending a request using the ListThingPrincipalsRequest method.
 //    req := client.ListThingPrincipalsRequest(params)
@@ -10512,6 +10572,11 @@ func (s *Behavior) Validate() error {
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+	if s.Criteria != nil {
+		if err := s.Criteria.Validate(); err != nil {
+			invalidParams.AddNested("Criteria", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10546,12 +10611,30 @@ func (s Behavior) MarshalFields(e protocol.FieldEncoder) error {
 type BehaviorCriteria struct {
 	_ struct{} `type:"structure"`
 
-	// The operator that relates the thing measured (metric) to the criteria (value).
+	// The operator that relates the thing measured (metric) to the criteria (containing
+	// a value or statisticalThreshold).
 	ComparisonOperator ComparisonOperator `locationName:"comparisonOperator" type:"string" enum:"true"`
 
-	// Use this to specify the period of time over which the behavior is evaluated,
+	// If a device is in violation of the behavior for the specified number of consecutive
+	// datapoints, an alarm occurs. If not specified, the default is 1.
+	ConsecutiveDatapointsToAlarm *int64 `locationName:"consecutiveDatapointsToAlarm" min:"1" type:"integer"`
+
+	// If an alarm has occurred and the offending device is no longer in violation
+	// of the behavior for the specified number of consecutive datapoints, the alarm
+	// is cleared. If not specified, the default is 1.
+	ConsecutiveDatapointsToClear *int64 `locationName:"consecutiveDatapointsToClear" min:"1" type:"integer"`
+
+	// Use this to specify the time duration over which the behavior is evaluated,
 	// for those criteria which have a time dimension (for example, NUM_MESSAGES_SENT).
+	// For a statisticalThreshhold metric comparison, measurements from all devices
+	// are accumulated over this time duration before being used to calculate percentiles,
+	// and later, measurements from an individual device are also accumulated over
+	// this time duration before being given a percentile rank.
 	DurationSeconds *int64 `locationName:"durationSeconds" type:"integer"`
+
+	// A statistical ranking (percentile) which indicates a threshold value by which
+	// a behavior is determined to be in compliance or in violation of the behavior.
+	StatisticalThreshold *StatisticalThreshold `locationName:"statisticalThreshold" type:"structure"`
 
 	// The value to be compared with the metric.
 	Value *MetricValue `locationName:"value" type:"structure"`
@@ -10567,6 +10650,22 @@ func (s BehaviorCriteria) GoString() string {
 	return s.String()
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BehaviorCriteria) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BehaviorCriteria"}
+	if s.ConsecutiveDatapointsToAlarm != nil && *s.ConsecutiveDatapointsToAlarm < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("ConsecutiveDatapointsToAlarm", 1))
+	}
+	if s.ConsecutiveDatapointsToClear != nil && *s.ConsecutiveDatapointsToClear < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("ConsecutiveDatapointsToClear", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BehaviorCriteria) MarshalFields(e protocol.FieldEncoder) error {
 	if len(s.ComparisonOperator) > 0 {
@@ -10575,11 +10674,29 @@ func (s BehaviorCriteria) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "comparisonOperator", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.ConsecutiveDatapointsToAlarm != nil {
+		v := *s.ConsecutiveDatapointsToAlarm
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "consecutiveDatapointsToAlarm", protocol.Int64Value(v), metadata)
+	}
+	if s.ConsecutiveDatapointsToClear != nil {
+		v := *s.ConsecutiveDatapointsToClear
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "consecutiveDatapointsToClear", protocol.Int64Value(v), metadata)
+	}
 	if s.DurationSeconds != nil {
 		v := *s.DurationSeconds
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "durationSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.StatisticalThreshold != nil {
+		v := s.StatisticalThreshold
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "statisticalThreshold", v, metadata)
 	}
 	if s.Value != nil {
 		v := s.Value
@@ -11637,10 +11754,10 @@ type CloudwatchMetricAction struct {
 	// MetricNamespace is a required field
 	MetricNamespace *string `locationName:"metricNamespace" type:"string" required:"true"`
 
-	// An optional Unix timestamp (http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp).
+	// An optional Unix timestamp (https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp).
 	MetricTimestamp *string `locationName:"metricTimestamp" type:"string"`
 
-	// The metric unit (http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit)
+	// The metric unit (https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit)
 	// supported by CloudWatch.
 	//
 	// MetricUnit is a required field
@@ -12303,7 +12420,7 @@ type CreateDynamicThingGroupInput struct {
 
 	// The dynamic thing group search query string.
 	//
-	// See Query Syntax (http://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html)
+	// See Query Syntax (https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html)
 	// for information about query string syntax.
 	//
 	// QueryString is a required field
@@ -12862,6 +12979,9 @@ type CreateOTAUpdateInput struct {
 	// RoleArn is a required field
 	RoleArn *string `locationName:"roleArn" min:"20" type:"string" required:"true"`
 
+	// Metadata which can be used to manage updates.
+	Tags []Tag `locationName:"tags" type:"list"`
+
 	// Specifies whether the update will continue to run (CONTINUOUS), or will be
 	// complete after all the things specified as targets have completed the update
 	// (SNAPSHOT). If continuous, the update may also be run on a thing when a change
@@ -12980,6 +13100,18 @@ func (s CreateOTAUpdateInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if len(s.TargetSelection) > 0 {
 		v := s.TargetSelection
@@ -13495,6 +13627,9 @@ type CreateScheduledAuditInput struct {
 	// ScheduledAuditName is a required field
 	ScheduledAuditName *string `location:"uri" locationName:"scheduledAuditName" min:"1" type:"string" required:"true"`
 
+	// Metadata which can be used to manage the scheduled audit.
+	Tags []Tag `locationName:"tags" type:"list"`
+
 	// Which checks are performed during the scheduled audit. Checks must be enabled
 	// for your account. (Use DescribeAccountAuditConfiguration to see the list
 	// of all checks including those that are enabled or UpdateAccountAuditConfiguration
@@ -13559,6 +13694,18 @@ func (s CreateScheduledAuditInput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "frequency", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if len(s.TargetCheckNames) > 0 {
 		v := s.TargetCheckNames
 
@@ -13618,15 +13765,18 @@ func (s CreateScheduledAuditOutput) MarshalFields(e protocol.FieldEncoder) error
 type CreateSecurityProfileInput struct {
 	_ struct{} `type:"structure"`
 
+	// A list of metrics whose data is retained (stored). By default, data is retained
+	// for any metric used in the profile's behaviors but it is also retained for
+	// any metric specified here.
+	AdditionalMetricsToRetain []string `locationName:"additionalMetricsToRetain" type:"list"`
+
 	// Specifies the destinations to which alerts are sent. (Alerts are always sent
 	// to the console.) Alerts are generated when a device (thing) violates a behavior.
 	AlertTargets map[string]AlertTarget `locationName:"alertTargets" type:"map"`
 
 	// Specifies the behaviors that, when violated by a device (thing), cause an
 	// alert.
-	//
-	// Behaviors is a required field
-	Behaviors []Behavior `locationName:"behaviors" type:"list" required:"true"`
+	Behaviors []Behavior `locationName:"behaviors" type:"list"`
 
 	// A description of the security profile.
 	SecurityProfileDescription *string `locationName:"securityProfileDescription" type:"string"`
@@ -13653,10 +13803,6 @@ func (s CreateSecurityProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSecurityProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateSecurityProfileInput"}
-
-	if s.Behaviors == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Behaviors"))
-	}
 
 	if s.SecurityProfileName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SecurityProfileName"))
@@ -13688,6 +13834,18 @@ func (s *CreateSecurityProfileInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateSecurityProfileInput) MarshalFields(e protocol.FieldEncoder) error {
 
+	if len(s.AdditionalMetricsToRetain) > 0 {
+		v := s.AdditionalMetricsToRetain
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "additionalMetricsToRetain", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
 	if len(s.AlertTargets) > 0 {
 		v := s.AlertTargets
 
@@ -13804,6 +13962,9 @@ type CreateStreamInput struct {
 	//
 	// StreamId is a required field
 	StreamId *string `location:"uri" locationName:"streamId" min:"1" type:"string" required:"true"`
+
+	// Metadata which can be used to manage streams.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -13880,6 +14041,18 @@ func (s CreateStreamInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.StreamId != nil {
 		v := *s.StreamId
@@ -14366,6 +14539,15 @@ type CreateTopicRuleInput struct {
 	// RuleName is a required field
 	RuleName *string `location:"uri" locationName:"ruleName" min:"1" type:"string" required:"true"`
 
+	// Metadata which can be used to manage the topic rule.
+	//
+	// For URI Request parameters use format: ...key1=value1&key2=value2...
+	//
+	// For the CLI command-line parameter use format: --tags "key1=value1&key2=value2..."
+	//
+	// For the cli-input-json file use format: "tags": "key1=value1&key2=value2..."
+	Tags *string `location:"header" locationName:"x-amz-tagging" type:"string"`
+
 	// The rule payload.
 	//
 	// TopicRulePayload is a required field
@@ -14411,6 +14593,12 @@ func (s *CreateTopicRuleInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateTopicRuleInput) MarshalFields(e protocol.FieldEncoder) error {
 
+	if s.Tags != nil {
+		v := *s.Tags
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-tagging", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.RuleName != nil {
 		v := *s.RuleName
 
@@ -17221,16 +17409,16 @@ type DescribeIndexOutput struct {
 	// Contains a value that specifies the type of indexing performed. Valid values
 	// are:
 	//
-	//    * REGISTRY – Your thing index will contain only registry data.
+	//    * REGISTRY – Your thing index contains only registry data.
 	//
-	//    * REGISTRY_AND_SHADOW - Your thing index will contain registry data and
-	//    shadow data.
+	//    * REGISTRY_AND_SHADOW - Your thing index contains registry data and shadow
+	//    data.
 	//
-	//    * REGISTRY_AND_CONNECTIVITY_STATUS - Your thing index will contain registry
+	//    * REGISTRY_AND_CONNECTIVITY_STATUS - Your thing index contains registry
 	//    data and thing connectivity status data.
 	//
-	//    * REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index will
-	//    contain registry data, shadow data, and thing connectivity status data.
+	//    * REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index contains
+	//    registry data, shadow data, and thing connectivity status data.
 	Schema *string `locationName:"schema" type:"string"`
 }
 
@@ -17752,6 +17940,11 @@ type DescribeSecurityProfileOutput struct {
 
 	responseMetadata aws.Response
 
+	// A list of metrics whose data is retained (stored). By default, data is retained
+	// for any metric used in the profile's behaviors but it is also retained for
+	// any metric specified here.
+	AdditionalMetricsToRetain []string `locationName:"additionalMetricsToRetain" type:"list"`
+
 	// Where the alerts are sent. (Alerts are always sent to the console.)
 	AlertTargets map[string]AlertTarget `locationName:"alertTargets" type:"map"`
 
@@ -17797,6 +17990,18 @@ func (s DescribeSecurityProfileOutput) SDKResponseMetadata() aws.Response {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeSecurityProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AdditionalMetricsToRetain) > 0 {
+		v := s.AdditionalMetricsToRetain
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "additionalMetricsToRetain", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
 	if len(s.AlertTargets) > 0 {
 		v := s.AlertTargets
 
@@ -19228,10 +19433,14 @@ type DynamoDBv2Action struct {
 	//
 	// Each attribute in the message payload will be written to a separate column
 	// in the DynamoDB database.
-	PutItem *PutItemInput `locationName:"putItem" type:"structure"`
+	//
+	// PutItem is a required field
+	PutItem *PutItemInput `locationName:"putItem" type:"structure" required:"true"`
 
 	// The ARN of the IAM role that grants access to the DynamoDB table.
-	RoleArn *string `locationName:"roleArn" type:"string"`
+	//
+	// RoleArn is a required field
+	RoleArn *string `locationName:"roleArn" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -19247,6 +19456,14 @@ func (s DynamoDBv2Action) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DynamoDBv2Action) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DynamoDBv2Action"}
+
+	if s.PutItem == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PutItem"))
+	}
+
+	if s.RoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
+	}
 	if s.PutItem != nil {
 		if err := s.PutItem.Validate(); err != nil {
 			invalidParams.AddNested("PutItem", err.(aws.ErrInvalidParams))
@@ -20552,6 +20769,124 @@ func (s GetRegistrationCodeOutput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
+type GetStatisticsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The aggregation field name. Currently not supported.
+	AggregationField *string `locationName:"aggregationField" min:"1" type:"string"`
+
+	// The name of the index to search. The default value is AWS_Things.
+	IndexName *string `locationName:"indexName" min:"1" type:"string"`
+
+	// The query used to search. You can specify "*" for the query string to get
+	// the count of all indexed things in your AWS account.
+	//
+	// QueryString is a required field
+	QueryString *string `locationName:"queryString" min:"1" type:"string" required:"true"`
+
+	// The version of the query used to search.
+	QueryVersion *string `locationName:"queryVersion" type:"string"`
+}
+
+// String returns the string representation
+func (s GetStatisticsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetStatisticsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetStatisticsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetStatisticsInput"}
+	if s.AggregationField != nil && len(*s.AggregationField) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AggregationField", 1))
+	}
+	if s.IndexName != nil && len(*s.IndexName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("IndexName", 1))
+	}
+
+	if s.QueryString == nil {
+		invalidParams.Add(aws.NewErrParamRequired("QueryString"))
+	}
+	if s.QueryString != nil && len(*s.QueryString) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("QueryString", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetStatisticsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AggregationField != nil {
+		v := *s.AggregationField
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "aggregationField", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.IndexName != nil {
+		v := *s.IndexName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "indexName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.QueryString != nil {
+		v := *s.QueryString
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "queryString", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.QueryVersion != nil {
+		v := *s.QueryVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "queryVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+type GetStatisticsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The statistics returned by the Fleet Indexing service based on the query
+	// and aggregation field.
+	Statistics *Statistics `locationName:"statistics" type:"structure"`
+}
+
+// String returns the string representation
+func (s GetStatisticsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetStatisticsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetStatisticsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetStatisticsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Statistics != nil {
+		v := s.Statistics
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "statistics", v, metadata)
+	}
+	return nil
+}
+
 // The input for the GetTopicRule operation.
 type GetTopicRuleInput struct {
 	_ struct{} `type:"structure"`
@@ -20927,10 +21262,10 @@ type Job struct {
 	// If the job was updated, describes the reason for the update.
 	Comment *string `locationName:"comment" type:"string"`
 
-	// The time, in milliseconds since the epoch, when the job was completed.
+	// The time, in seconds since the epoch, when the job was completed.
 	CompletedAt *time.Time `locationName:"completedAt" type:"timestamp" timestampFormat:"unix"`
 
-	// The time, in milliseconds since the epoch, when the job was created.
+	// The time, in seconds since the epoch, when the job was created.
 	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
 
 	// A short text description of the job.
@@ -20952,7 +21287,7 @@ type Job struct {
 	// Details about the job process.
 	JobProcessDetails *JobProcessDetails `locationName:"jobProcessDetails" type:"structure"`
 
-	// The time, in milliseconds since the epoch, when the job was last updated.
+	// The time, in seconds since the epoch, when the job was last updated.
 	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
 
 	// Configuration for pre-signed S3 URLs.
@@ -21130,14 +21465,13 @@ type JobExecution struct {
 	// The unique identifier you assigned to the job when it was created.
 	JobId *string `locationName:"jobId" min:"1" type:"string"`
 
-	// The time, in milliseconds since the epoch, when the job execution was last
-	// updated.
+	// The time, in seconds since the epoch, when the job execution was last updated.
 	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
 
-	// The time, in milliseconds since the epoch, when the job execution was queued.
+	// The time, in seconds since the epoch, when the job execution was queued.
 	QueuedAt *time.Time `locationName:"queuedAt" type:"timestamp" timestampFormat:"unix"`
 
-	// The time, in milliseconds since the epoch, when the job execution started.
+	// The time, in seconds since the epoch, when the job execution started.
 	StartedAt *time.Time `locationName:"startedAt" type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the job execution (IN_PROGRESS, QUEUED, FAILED, SUCCEEDED,
@@ -21280,14 +21614,13 @@ type JobExecutionSummary struct {
 	// in commands which return or update job execution information.
 	ExecutionNumber *int64 `locationName:"executionNumber" type:"long"`
 
-	// The time, in milliseconds since the epoch, when the job execution was last
-	// updated.
+	// The time, in seconds since the epoch, when the job execution was last updated.
 	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
 
-	// The time, in milliseconds since the epoch, when the job execution was queued.
+	// The time, in seconds since the epoch, when the job execution was queued.
 	QueuedAt *time.Time `locationName:"queuedAt" type:"timestamp" timestampFormat:"unix"`
 
-	// The time, in milliseconds since the epoch, when the job execution started.
+	// The time, in seconds since the epoch, when the job execution started.
 	StartedAt *time.Time `locationName:"startedAt" type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the job execution.
@@ -21588,10 +21921,10 @@ func (s JobProcessDetails) MarshalFields(e protocol.FieldEncoder) error {
 type JobSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The time, in milliseconds since the epoch, when the job completed.
+	// The time, in seconds since the epoch, when the job completed.
 	CompletedAt *time.Time `locationName:"completedAt" type:"timestamp" timestampFormat:"unix"`
 
-	// The time, in milliseconds since the epoch, when the job was created.
+	// The time, in seconds since the epoch, when the job was created.
 	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
 
 	// The job ARN.
@@ -21600,7 +21933,7 @@ type JobSummary struct {
 	// The unique identifier you assigned to this job when it was created.
 	JobId *string `locationName:"jobId" min:"1" type:"string"`
 
-	// The time, in milliseconds since the epoch, when the job was last updated.
+	// The time, in seconds since the epoch, when the job was last updated.
 	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
 
 	// The job summary status.
@@ -27787,7 +28120,7 @@ type RegisterCertificateInput struct {
 	// CertificatePem is a required field
 	CertificatePem *string `locationName:"certificatePem" min:"1" type:"string" required:"true"`
 
-	// A boolean value that specifies if the CA certificate is set to active.
+	// A boolean value that specifies if the certificate is set to active.
 	SetAsActive *bool `location:"querystring" locationName:"setAsActive" deprecated:"true" type:"boolean"`
 
 	// The status of the register certificate request.
@@ -27902,11 +28235,11 @@ func (s RegisterCertificateOutput) MarshalFields(e protocol.FieldEncoder) error 
 type RegisterThingInput struct {
 	_ struct{} `type:"structure"`
 
-	// The parameters for provisioning a thing. See Programmatic Provisioning (http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html)
+	// The parameters for provisioning a thing. See Programmatic Provisioning (https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html)
 	// for more information.
 	Parameters map[string]string `locationName:"parameters" type:"map"`
 
-	// The provisioning template. See Programmatic Provisioning (http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html)
+	// The provisioning template. See Programmatic Provisioning (https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html)
 	// for more information.
 	//
 	// TemplateBody is a required field
@@ -28742,7 +29075,7 @@ type S3Action struct {
 	BucketName *string `locationName:"bucketName" type:"string" required:"true"`
 
 	// The Amazon S3 canned ACL that controls access to the object identified by
-	// the object key. For more information, see S3 canned ACLs (http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl).
+	// the object key. For more information, see S3 canned ACLs (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl).
 	CannedAcl CannedAccessControlList `locationName:"cannedAcl" type:"string" enum:"true"`
 
 	// The object key.
@@ -29810,7 +30143,7 @@ type SnsAction struct {
 	// are "JSON" and "RAW". The default value of the attribute is "RAW". SNS uses
 	// this setting to determine if the payload should be parsed and relevant platform-specific
 	// bits of the payload should be extracted. To read more about SNS message formats,
-	// see http://docs.aws.amazon.com/sns/latest/dg/json-formats.html (http://docs.aws.amazon.com/sns/latest/dg/json-formats.html)
+	// see https://docs.aws.amazon.com/sns/latest/dg/json-formats.html (https://docs.aws.amazon.com/sns/latest/dg/json-formats.html)
 	// refer to their official documentation.
 	MessageFormat MessageFormat `locationName:"messageFormat" type:"string" enum:"true"`
 
@@ -30228,6 +30561,73 @@ func (s StartThingRegistrationTaskOutput) MarshalFields(e protocol.FieldEncoder)
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "taskId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A statistical ranking (percentile) which indicates a threshold value by which
+// a behavior is determined to be in compliance or in violation of the behavior.
+type StatisticalThreshold struct {
+	_ struct{} `type:"structure"`
+
+	// The percentile which resolves to a threshold value by which compliance with
+	// a behavior is determined. Metrics are collected over the specified period
+	// (durationSeconds) from all reporting devices in your account and statistical
+	// ranks are calculated. Then, the measurements from a device are collected
+	// over the same period. If the accumulated measurements from the device fall
+	// above or below (comparisonOperator) the value associated with the percentile
+	// specified, then the device is considered to be in compliance with the behavior,
+	// otherwise a violation occurs.
+	Statistic *string `locationName:"statistic" type:"string"`
+}
+
+// String returns the string representation
+func (s StatisticalThreshold) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StatisticalThreshold) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StatisticalThreshold) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Statistic != nil {
+		v := *s.Statistic
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "statistic", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A map of key-value pairs for all supported statistics. Currently, only count
+// is supported.
+type Statistics struct {
+	_ struct{} `type:"structure"`
+
+	// The count of things that match the query.
+	Count *int64 `locationName:"count" type:"integer"`
+}
+
+// String returns the string representation
+func (s Statistics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Statistics) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Statistics) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Count != nil {
+		v := *s.Count
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "count", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -31239,13 +31639,13 @@ func (s ThingAttribute) MarshalFields(e protocol.FieldEncoder) error {
 type ThingConnectivity struct {
 	_ struct{} `type:"structure"`
 
-	// True if the thing is connected to the AWS IoT service, false if it is not
+	// True if the thing is connected to the AWS IoT service; false if it is not
 	// connected.
 	Connected *bool `locationName:"connected" type:"boolean"`
 
 	// The epoch time (in milliseconds) when the thing last connected or disconnected.
-	// Note that if the thing has been disconnected for more than a few weeks, the
-	// time value can be missing.
+	// If the thing has been disconnected for more than a few weeks, the time value
+	// might be missing.
 	Timestamp *int64 `locationName:"timestamp" type:"long"`
 }
 
@@ -31283,7 +31683,7 @@ type ThingDocument struct {
 	// The attributes.
 	Attributes map[string]string `locationName:"attributes" type:"map"`
 
-	// Indicates whether or not the thing is connected to the AWS IoT service.
+	// Indicates whether the thing is connected to the AWS IoT service.
 	Connectivity *ThingConnectivity `locationName:"connectivity" type:"structure"`
 
 	// The shadow.
@@ -31590,18 +31990,17 @@ type ThingIndexingConfiguration struct {
 
 	// Thing connectivity indexing mode. Valid values are:
 	//
-	//    * STATUS – Your thing index will contain connectivity status. In order
-	//    to enable thing connectivity indexing, thingIndexMode must not be set
-	//    to OFF.
+	//    * STATUS – Your thing index contains connectivity status. To enable thing
+	//    connectivity indexing, thingIndexMode must not be set to OFF.
 	//
 	//    * OFF - Thing connectivity status indexing is disabled.
 	ThingConnectivityIndexingMode ThingConnectivityIndexingMode `locationName:"thingConnectivityIndexingMode" type:"string" enum:"true"`
 
 	// Thing indexing mode. Valid values are:
 	//
-	//    * REGISTRY – Your thing index will contain only registry data.
+	//    * REGISTRY – Your thing index contains registry data only.
 	//
-	//    * REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow
+	//    * REGISTRY_AND_SHADOW - Your thing index contains registry and shadow
 	//    data.
 	//
 	//    * OFF - Thing indexing is disabled.
@@ -32026,7 +32425,7 @@ type TopicRulePayload struct {
 	RuleDisabled *bool `locationName:"ruleDisabled" type:"boolean"`
 
 	// The SQL statement used to query the topic. For more information, see AWS
-	// IoT SQL Reference (http://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference)
+	// IoT SQL Reference (https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference)
 	// in the AWS IoT Developer Guide.
 	//
 	// Sql is a required field
@@ -33654,12 +34053,30 @@ func (s UpdateScheduledAuditOutput) MarshalFields(e protocol.FieldEncoder) error
 type UpdateSecurityProfileInput struct {
 	_ struct{} `type:"structure"`
 
+	// A list of metrics whose data is retained (stored). By default, data is retained
+	// for any metric used in the profile's behaviors but it is also retained for
+	// any metric specified here.
+	AdditionalMetricsToRetain []string `locationName:"additionalMetricsToRetain" type:"list"`
+
 	// Where the alerts are sent. (Alerts are always sent to the console.)
 	AlertTargets map[string]AlertTarget `locationName:"alertTargets" type:"map"`
 
 	// Specifies the behaviors that, when violated by a device (thing), cause an
 	// alert.
 	Behaviors []Behavior `locationName:"behaviors" type:"list"`
+
+	// If true, delete all additionalMetricsToRetain defined for this security profile.
+	// If any additionalMetricsToRetain are defined in the current invocation an
+	// exception occurs.
+	DeleteAdditionalMetricsToRetain *bool `locationName:"deleteAdditionalMetricsToRetain" type:"boolean"`
+
+	// If true, delete all alertTargets defined for this security profile. If any
+	// alertTargets are defined in the current invocation an exception occurs.
+	DeleteAlertTargets *bool `locationName:"deleteAlertTargets" type:"boolean"`
+
+	// If true, delete all behaviors defined for this security profile. If any behaviors
+	// are defined in the current invocation an exception occurs.
+	DeleteBehaviors *bool `locationName:"deleteBehaviors" type:"boolean"`
 
 	// The expected version of the security profile. A new version is generated
 	// whenever the security profile is updated. If you specify a value that is
@@ -33719,6 +34136,18 @@ func (s *UpdateSecurityProfileInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateSecurityProfileInput) MarshalFields(e protocol.FieldEncoder) error {
 
+	if len(s.AdditionalMetricsToRetain) > 0 {
+		v := s.AdditionalMetricsToRetain
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "additionalMetricsToRetain", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
 	if len(s.AlertTargets) > 0 {
 		v := s.AlertTargets
 
@@ -33742,6 +34171,24 @@ func (s UpdateSecurityProfileInput) MarshalFields(e protocol.FieldEncoder) error
 		}
 		ls0.End()
 
+	}
+	if s.DeleteAdditionalMetricsToRetain != nil {
+		v := *s.DeleteAdditionalMetricsToRetain
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "deleteAdditionalMetricsToRetain", protocol.BoolValue(v), metadata)
+	}
+	if s.DeleteAlertTargets != nil {
+		v := *s.DeleteAlertTargets
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "deleteAlertTargets", protocol.BoolValue(v), metadata)
+	}
+	if s.DeleteBehaviors != nil {
+		v := *s.DeleteBehaviors
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "deleteBehaviors", protocol.BoolValue(v), metadata)
 	}
 	if s.SecurityProfileDescription != nil {
 		v := *s.SecurityProfileDescription
@@ -33768,6 +34215,11 @@ type UpdateSecurityProfileOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
+
+	// A list of metrics whose data is retained (stored). By default, data is retained
+	// for any metric used in the security profile's behaviors but it is also retained
+	// for any metric specified here.
+	AdditionalMetricsToRetain []string `locationName:"additionalMetricsToRetain" type:"list"`
 
 	// Where the alerts are sent. (Alerts are always sent to the console.)
 	AlertTargets map[string]AlertTarget `locationName:"alertTargets" type:"map"`
@@ -33812,6 +34264,18 @@ func (s UpdateSecurityProfileOutput) SDKResponseMetadata() aws.Response {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateSecurityProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AdditionalMetricsToRetain) > 0 {
+		v := s.AdditionalMetricsToRetain
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "additionalMetricsToRetain", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
 	if len(s.AlertTargets) > 0 {
 		v := s.AlertTargets
 

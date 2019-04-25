@@ -11,6 +11,13 @@ const (
 	// request again with fewer documents.
 	ErrCodeBatchSizeLimitExceededException = "BatchSizeLimitExceededException"
 
+	// ErrCodeConcurrentModificationException for service response error code
+	// "ConcurrentModificationException".
+	//
+	// Concurrent modification of the tags associated with an Amazon Comprehend
+	// resource is not supported.
+	ErrCodeConcurrentModificationException = "ConcurrentModificationException"
+
 	// ErrCodeInternalServerException for service response error code
 	// "InternalServerException".
 	//
@@ -35,6 +42,13 @@ const (
 	//
 	// The specified job was not found. Check the job ID and try again.
 	ErrCodeJobNotFoundException = "JobNotFoundException"
+
+	// ErrCodeKmsKeyValidationException for service response error code
+	// "KmsKeyValidationException".
+	//
+	// The KMS customer managed key (CMK) entered cannot be validated. Verify the
+	// key and re-enter it.
+	ErrCodeKmsKeyValidationException = "KmsKeyValidationException"
 
 	// ErrCodeResourceInUseException for service response error code
 	// "ResourceInUseException".
@@ -75,6 +89,21 @@ const (
 	//
 	// The number of requests exceeds the limit. Resubmit your request later.
 	ErrCodeTooManyRequestsException = "TooManyRequestsException"
+
+	// ErrCodeTooManyTagKeysException for service response error code
+	// "TooManyTagKeysException".
+	//
+	// The request contains more tag keys than can be associated with a resource
+	// (50 tag keys per resource).
+	ErrCodeTooManyTagKeysException = "TooManyTagKeysException"
+
+	// ErrCodeTooManyTagsException for service response error code
+	// "TooManyTagsException".
+	//
+	// The request contains more tags than can be associated with a resource (50
+	// tags per resource). The maximum number of tags includes both existing tags
+	// and those included in your current request.
+	ErrCodeTooManyTagsException = "TooManyTagsException"
 
 	// ErrCodeUnsupportedLanguageException for service response error code
 	// "UnsupportedLanguageException".

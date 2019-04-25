@@ -893,7 +893,7 @@ type ApplicationPolicyStatement struct {
 	// Actions is a required field
 	Actions []string `locationName:"actions" type:"list" required:"true"`
 
-	// An AWS account ID, or * to make the application public.
+	// An array of AWS account IDs, or * to make the application public.
 	//
 	// Principals is a required field
 	Principals []string `locationName:"principals" type:"list" required:"true"`
@@ -1114,6 +1114,8 @@ type CreateApplicationInput struct {
 
 	SemanticVersion *string `locationName:"semanticVersion" type:"string"`
 
+	SourceCodeArchiveUrl *string `locationName:"sourceCodeArchiveUrl" type:"string"`
+
 	SourceCodeUrl *string `locationName:"sourceCodeUrl" type:"string"`
 
 	SpdxLicenseId *string `locationName:"spdxLicenseId" type:"string"`
@@ -1224,6 +1226,12 @@ func (s CreateApplicationInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "semanticVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SourceCodeArchiveUrl != nil {
+		v := *s.SourceCodeArchiveUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sourceCodeArchiveUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SourceCodeUrl != nil {
 		v := *s.SourceCodeUrl
@@ -1384,6 +1392,8 @@ type CreateApplicationVersionInput struct {
 	// SemanticVersion is a required field
 	SemanticVersion *string `location:"uri" locationName:"semanticVersion" type:"string" required:"true"`
 
+	SourceCodeArchiveUrl *string `locationName:"sourceCodeArchiveUrl" type:"string"`
+
 	SourceCodeUrl *string `locationName:"sourceCodeUrl" type:"string"`
 
 	TemplateBody *string `locationName:"templateBody" type:"string"`
@@ -1423,6 +1433,12 @@ func (s *CreateApplicationVersionInput) Validate() error {
 func (s CreateApplicationVersionInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
+	if s.SourceCodeArchiveUrl != nil {
+		v := *s.SourceCodeArchiveUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sourceCodeArchiveUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.SourceCodeUrl != nil {
 		v := *s.SourceCodeUrl
 
@@ -1473,6 +1489,8 @@ type CreateApplicationVersionOutput struct {
 	ResourcesSupported *bool `locationName:"resourcesSupported" type:"boolean"`
 
 	SemanticVersion *string `locationName:"semanticVersion" type:"string"`
+
+	SourceCodeArchiveUrl *string `locationName:"sourceCodeArchiveUrl" type:"string"`
 
 	SourceCodeUrl *string `locationName:"sourceCodeUrl" type:"string"`
 
@@ -1543,6 +1561,12 @@ func (s CreateApplicationVersionOutput) MarshalFields(e protocol.FieldEncoder) e
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "semanticVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SourceCodeArchiveUrl != nil {
+		v := *s.SourceCodeArchiveUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sourceCodeArchiveUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SourceCodeUrl != nil {
 		v := *s.SourceCodeUrl
@@ -3583,7 +3607,8 @@ type Version struct {
 	// (IAM) users. For those applications, you must explicitly acknowledge their
 	// capabilities by specifying this parameter.
 	//
-	// The only valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM, and CAPABILITY_RESOURCE_POLICY.
+	// The only valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM, CAPABILITY_RESOURCE_POLICY,
+	// and CAPABILITY_AUTO_EXPAND.
 	//
 	// The following resources require you to specify CAPABILITY_IAM or CAPABILITY_NAMED_IAM:
 	// AWS::IAM::Group (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html),
@@ -3602,12 +3627,13 @@ type Version struct {
 	// AWS::SQS::QueuePolicy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html),
 	// and AWS::SNS::TopicPolicy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html).
 	//
+	// Applications that contain one or more nested applications require you to
+	// specify CAPABILITY_AUTO_EXPAND.
+	//
 	// If your application template contains any of the above resources, we recommend
 	// that you review all permissions associated with the application before deploying.
 	// If you don't specify this parameter for an application that requires capabilities,
 	// the call will fail.
-	//
-	// Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY
 	//
 	// RequiredCapabilities is a required field
 	RequiredCapabilities []Capability `locationName:"requiredCapabilities" type:"list" required:"true"`
@@ -3625,7 +3651,14 @@ type Version struct {
 	// SemanticVersion is a required field
 	SemanticVersion *string `locationName:"semanticVersion" type:"string" required:"true"`
 
-	// A link to a public repository for the source code of your application.
+	// A link to the S3 object that contains the ZIP archive of the source code
+	// for this version of your application.
+	//
+	// Maximum size 50 MB
+	SourceCodeArchiveUrl *string `locationName:"sourceCodeArchiveUrl" type:"string"`
+
+	// A link to a public repository for the source code of your application, for
+	// example the URL of a specific GitHub commit.
 	SourceCodeUrl *string `locationName:"sourceCodeUrl" type:"string"`
 
 	// A link to the packaged AWS SAM template of your application.
@@ -3694,6 +3727,12 @@ func (s Version) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "semanticVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.SourceCodeArchiveUrl != nil {
+		v := *s.SourceCodeArchiveUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sourceCodeArchiveUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.SourceCodeUrl != nil {
 		v := *s.SourceCodeUrl
 
@@ -3731,7 +3770,8 @@ type VersionSummary struct {
 	// SemanticVersion is a required field
 	SemanticVersion *string `locationName:"semanticVersion" type:"string" required:"true"`
 
-	// A link to a public repository for the source code of your application.
+	// A link to a public repository for the source code of your application, for
+	// example the URL of a specific GitHub commit.
 	SourceCodeUrl *string `locationName:"sourceCodeUrl" type:"string"`
 }
 

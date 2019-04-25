@@ -39,11 +39,8 @@ func (r CreateClusterRequest) Send(ctx context.Context) (*CreateClusterOutput, e
 // The Amazon EKS control plane consists of control plane instances that run
 // the Kubernetes software, like etcd and the API server. The control plane
 // runs in an account managed by AWS, and the Kubernetes API is exposed via
-// the Amazon EKS API server endpoint.
-//
-// Amazon EKS worker nodes run in your AWS account and connect to your cluster's
-// control plane via the Kubernetes API server endpoint and a certificate file
-// that is created for your cluster.
+// the Amazon EKS API server endpoint. Each Amazon EKS cluster control plane
+// is single-tenant and unique, and runs on its own set of Amazon EC2 instances.
 //
 // The cluster control plane is provisioned across multiple Availability Zones
 // and fronted by an Elastic Load Balancing Network Load Balancer. Amazon EKS
@@ -51,11 +48,33 @@ func (r CreateClusterRequest) Send(ctx context.Context) (*CreateClusterOutput, e
 // connectivity from the control plane instances to the worker nodes (for example,
 // to support kubectl exec, logs, and proxy data flows).
 //
-// After you create an Amazon EKS cluster, you must configure your Kubernetes
-// tooling to communicate with the API server and launch worker nodes into your
-// cluster. For more information, see Managing Cluster Authentication (http://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html)
-// and Launching Amazon EKS Worker Nodes (http://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html)in
-// the Amazon EKS User Guide.
+// Amazon EKS worker nodes run in your AWS account and connect to your cluster's
+// control plane via the Kubernetes API server endpoint and a certificate file
+// that is created for your cluster.
+//
+// You can use the endpointPublicAccess and endpointPrivateAccess parameters
+// to enable or disable public and private access to your cluster's Kubernetes
+// API server endpoint. By default, public access is enabled and private access
+// is disabled. For more information, see Amazon EKS Cluster Endpoint Access
+// Control (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
+// in the Amazon EKS User Guide.
+//
+// You can use the logging parameter to enable or disable exporting the Kubernetes
+// control plane logs for your cluster to CloudWatch Logs. By default, cluster
+// control plane logs are not exported to CloudWatch Logs. For more information,
+// see Amazon EKS Cluster Control Plane Logs (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html)
+// in the Amazon EKS User Guide.
+//
+// CloudWatch Logs ingestion, archive storage, and data scanning rates apply
+// to exported control plane logs. For more information, see Amazon CloudWatch
+// Pricing (http://aws.amazon.com/cloudwatch/pricing/).
+//
+// Cluster creation typically takes between 10 and 15 minutes. After you create
+// an Amazon EKS cluster, you must configure your Kubernetes tooling to communicate
+// with the API server and launch worker nodes into your cluster. For more information,
+// see Managing Cluster Authentication (https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html)
+// and Launching Amazon EKS Worker Nodes (https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html)
+// in the Amazon EKS User Guide.
 //
 //    // Example sending a request using the CreateClusterRequest method.
 //    req := client.CreateClusterRequest(params)
@@ -112,7 +131,7 @@ func (r DeleteClusterRequest) Send(ctx context.Context) (*DeleteClusterOutput, e
 // balancer, you must delete those services before deleting the cluster so that
 // the load balancers are deleted properly. Otherwise, you can have orphaned
 // resources in your VPC that prevent you from being able to delete the VPC.
-// For more information, see Deleting a Cluster (http://docs.aws.amazon.com/eks/latest/userguide/delete-cluster.html)
+// For more information, see Deleting a Cluster (https://docs.aws.amazon.com/eks/latest/userguide/delete-cluster.html)
 // in the Amazon EKS User Guide.
 //
 //    // Example sending a request using the DeleteClusterRequest method.
@@ -169,7 +188,7 @@ func (r DescribeClusterRequest) Send(ctx context.Context) (*DescribeClusterOutpu
 // The API server endpoint and certificate authority data returned by this operation
 // are required for kubelet and kubectl to communicate with your Kubernetes
 // API server. For more information, see Create a kubeconfig for Amazon EKS
-// (http://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html).
+// (https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html).
 //
 // The API server endpoint and certificate authority data are not available
 // until the cluster reaches the ACTIVE state.
@@ -358,6 +377,81 @@ func (c *EKS) ListUpdatesRequest(input *ListUpdatesInput) ListUpdatesRequest {
 	return ListUpdatesRequest{Request: req, Input: input, Copy: c.ListUpdatesRequest}
 }
 
+const opUpdateClusterConfig = "UpdateClusterConfig"
+
+// UpdateClusterConfigRequest is a API request type for the UpdateClusterConfig API operation.
+type UpdateClusterConfigRequest struct {
+	*aws.Request
+	Input *UpdateClusterConfigInput
+	Copy  func(*UpdateClusterConfigInput) UpdateClusterConfigRequest
+}
+
+// Send marshals and sends the UpdateClusterConfig API request.
+func (r UpdateClusterConfigRequest) Send(ctx context.Context) (*UpdateClusterConfigOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateClusterConfigOutput), nil
+}
+
+// UpdateClusterConfigRequest returns a request value for making API operation for
+// Amazon Elastic Container Service for Kubernetes.
+//
+// Updates an Amazon EKS cluster configuration. Your cluster continues to function
+// during the update. The response output includes an update ID that you can
+// use to track the status of your cluster update with the DescribeUpdate API
+// operation.
+//
+// You can use this API operation to enable or disable public and private access
+// to your cluster's Kubernetes API server endpoint. By default, public access
+// is enabled and private access is disabled. For more information, see Amazon
+// EKS Cluster Endpoint Access Control (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
+// in the Amazon EKS User Guide.
+//
+// You can also use this API operation to enable or disable exporting the Kubernetes
+// control plane logs for your cluster to CloudWatch Logs. By default, cluster
+// control plane logs are not exported to CloudWatch Logs. For more information,
+// see Amazon EKS Cluster Control Plane Logs (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html)
+// in the Amazon EKS User Guide.
+//
+// CloudWatch Logs ingestion, archive storage, and data scanning rates apply
+// to exported control plane logs. For more information, see Amazon CloudWatch
+// Pricing (http://aws.amazon.com/cloudwatch/pricing/).
+//
+// Cluster updates are asynchronous, and they should finish within a few minutes.
+// During an update, the cluster status moves to UPDATING (this status transition
+// is eventually consistent). When the update is complete (either Failed or
+// Successful), the cluster status moves to Active.
+//
+//    // Example sending a request using the UpdateClusterConfigRequest method.
+//    req := client.UpdateClusterConfigRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterConfig
+func (c *EKS) UpdateClusterConfigRequest(input *UpdateClusterConfigInput) UpdateClusterConfigRequest {
+	op := &aws.Operation{
+		Name:       opUpdateClusterConfig,
+		HTTPMethod: "POST",
+		HTTPPath:   "/clusters/{name}/update-config",
+	}
+
+	if input == nil {
+		input = &UpdateClusterConfigInput{}
+	}
+
+	output := &UpdateClusterConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateClusterConfigRequest{Request: req, Input: input, Copy: c.UpdateClusterConfigRequest}
+}
+
 const opUpdateClusterVersion = "UpdateClusterVersion"
 
 // UpdateClusterVersionRequest is a API request type for the UpdateClusterVersion API operation.
@@ -470,18 +564,21 @@ type Cluster struct {
 	// The endpoint for your Kubernetes API server.
 	Endpoint *string `locationName:"endpoint" type:"string"`
 
+	// The logging configuration for your cluster.
+	Logging *Logging `locationName:"logging" type:"structure"`
+
 	// The name of the cluster.
 	Name *string `locationName:"name" type:"string"`
 
 	// The platform version of your Amazon EKS cluster. For more information, see
-	// Platform Versions (http://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html)
+	// Platform Versions (https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html)
 	// in the Amazon EKS User Guide.
 	PlatformVersion *string `locationName:"platformVersion" type:"string"`
 
-	// The VPC subnets and security groups used by the cluster control plane. Amazon
-	// EKS VPC resources have specific requirements to work properly with Kubernetes.
-	// For more information, see Cluster VPC Considerations (http://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html)
-	// and Cluster Security Group Considerations (http://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html)
+	// The VPC configuration used by the cluster control plane. Amazon EKS VPC resources
+	// have specific requirements to work properly with Kubernetes. For more information,
+	// see Cluster VPC Considerations (https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html)
+	// and Cluster Security Group Considerations (https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html)
 	// in the Amazon EKS User Guide.
 	ResourcesVpcConfig *VpcConfigResponse `locationName:"resourcesVpcConfig" type:"structure"`
 
@@ -539,6 +636,12 @@ func (s Cluster) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "endpoint", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.Logging != nil {
+		v := s.Logging
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "logging", v, metadata)
+	}
 	if s.Name != nil {
 		v := *s.Name
 
@@ -586,15 +689,26 @@ type CreateClusterInput struct {
 	// of the request.
 	ClientRequestToken *string `locationName:"clientRequestToken" type:"string" idempotencyToken:"true"`
 
+	// Enable or disable exporting the Kubernetes control plane logs for your cluster
+	// to CloudWatch Logs. By default, cluster control plane logs are not exported
+	// to CloudWatch Logs. For more information, see Amazon EKS Cluster Control
+	// Plane Logs (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html)
+	// in the Amazon EKS User Guide.
+	//
+	// CloudWatch Logs ingestion, archive storage, and data scanning rates apply
+	// to exported control plane logs. For more information, see Amazon CloudWatch
+	// Pricing (http://aws.amazon.com/cloudwatch/pricing/).
+	Logging *Logging `locationName:"logging" type:"structure"`
+
 	// The unique name to give to your cluster.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
-	// The VPC subnets and security groups used by the cluster control plane. Amazon
-	// EKS VPC resources have specific requirements to work properly with Kubernetes.
-	// For more information, see Cluster VPC Considerations (http://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html)
-	// and Cluster Security Group Considerations (http://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html)
+	// The VPC configuration used by the cluster control plane. Amazon EKS VPC resources
+	// have specific requirements to work properly with Kubernetes. For more information,
+	// see Cluster VPC Considerations (https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html)
+	// and Cluster Security Group Considerations (https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html)
 	// in the Amazon EKS User Guide. You must specify at least two subnets. You
 	// may specify up to five security groups, but we recommend that you use a dedicated
 	// security group for your cluster control plane.
@@ -604,7 +718,7 @@ type CreateClusterInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role that provides permissions
 	// for Amazon EKS to make calls to other AWS API operations on your behalf.
-	// For more information, see Amazon EKS Service IAM Role (http://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html)
+	// For more information, see Amazon EKS Service IAM Role (https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html)
 	// in the Amazon EKS User Guide.
 	//
 	// RoleArn is a required field
@@ -643,11 +757,6 @@ func (s *CreateClusterInput) Validate() error {
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
-	if s.ResourcesVpcConfig != nil {
-		if err := s.ResourcesVpcConfig.Validate(); err != nil {
-			invalidParams.AddNested("ResourcesVpcConfig", err.(aws.ErrInvalidParams))
-		}
-	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -670,6 +779,12 @@ func (s CreateClusterInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "clientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Logging != nil {
+		v := s.Logging
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "logging", v, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -1321,6 +1436,91 @@ func (s ListUpdatesOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object representing the enabled or disabled Kubernetes control plane logs
+// for your cluster.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/LogSetup
+type LogSetup struct {
+	_ struct{} `type:"structure"`
+
+	// If a log type is enabled, then that log type exports its control plane logs
+	// to CloudWatch Logs. If a log type is not enabled, then that log type does
+	// not export its control plane logs. Each individual log type can be enabled
+	// or disabled independently.
+	Enabled *bool `locationName:"enabled" type:"boolean"`
+
+	// The available cluster control plane log types.
+	Types []LogType `locationName:"types" type:"list"`
+}
+
+// String returns the string representation
+func (s LogSetup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LogSetup) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LogSetup) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enabled", protocol.BoolValue(v), metadata)
+	}
+	if len(s.Types) > 0 {
+		v := s.Types
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "types", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// An object representing the logging configuration for resources in your cluster.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Logging
+type Logging struct {
+	_ struct{} `type:"structure"`
+
+	// The cluster control plane logging configuration for your cluster.
+	ClusterLogging []LogSetup `locationName:"clusterLogging" type:"list"`
+}
+
+// String returns the string representation
+func (s Logging) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Logging) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Logging) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ClusterLogging) > 0 {
+		v := s.ClusterLogging
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "clusterLogging", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // An object representing an asynchronous update.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Update
 type Update struct {
@@ -1404,6 +1604,131 @@ func (s Update) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterConfigRequest
+type UpdateClusterConfigInput struct {
+	_ struct{} `type:"structure"`
+
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
+	ClientRequestToken *string `locationName:"clientRequestToken" type:"string" idempotencyToken:"true"`
+
+	// Enable or disable exporting the Kubernetes control plane logs for your cluster
+	// to CloudWatch Logs. By default, cluster control plane logs are not exported
+	// to CloudWatch Logs. For more information, see Amazon EKS Cluster Control
+	// Plane Logs (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html)
+	// in the Amazon EKS User Guide.
+	//
+	// CloudWatch Logs ingestion, archive storage, and data scanning rates apply
+	// to exported control plane logs. For more information, see Amazon CloudWatch
+	// Pricing (http://aws.amazon.com/cloudwatch/pricing/).
+	Logging *Logging `locationName:"logging" type:"structure"`
+
+	// The name of the Amazon EKS cluster to update.
+	//
+	// Name is a required field
+	Name *string `location:"uri" locationName:"name" type:"string" required:"true"`
+
+	// An object representing the VPC configuration to use for an Amazon EKS cluster.
+	ResourcesVpcConfig *VpcConfigRequest `locationName:"resourcesVpcConfig" type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateClusterConfigInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateClusterConfigInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateClusterConfigInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateClusterConfigInput"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateClusterConfigInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	var ClientRequestToken string
+	if s.ClientRequestToken != nil {
+		ClientRequestToken = *s.ClientRequestToken
+	} else {
+		ClientRequestToken = protocol.GetIdempotencyToken()
+	}
+	{
+		v := ClientRequestToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "clientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Logging != nil {
+		v := s.Logging
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "logging", v, metadata)
+	}
+	if s.ResourcesVpcConfig != nil {
+		v := s.ResourcesVpcConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "resourcesVpcConfig", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterConfigResponse
+type UpdateClusterConfigOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object representing an asynchronous update.
+	Update *Update `locationName:"update" type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateClusterConfigOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateClusterConfigOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateClusterConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateClusterConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Update != nil {
+		v := s.Update
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "update", v, metadata)
 	}
 	return nil
 }
@@ -1561,10 +1886,28 @@ func (s UpdateParam) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// An object representing an Amazon EKS cluster VPC configuration request.
+// An object representing the VPC configuration to use for an Amazon EKS cluster.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/VpcConfigRequest
 type VpcConfigRequest struct {
 	_ struct{} `type:"structure"`
+
+	// Set this value to true to enable private access for your cluster's Kubernetes
+	// API server endpoint. If you enable private access, Kubernetes API requests
+	// from within your cluster's VPC will use the private VPC endpoint. The default
+	// value for this parameter is false, which disables private access for your
+	// Kubernetes API server. For more information, see Amazon EKS Cluster Endpoint
+	// Access Control (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
+	// in the Amazon EKS User Guide.
+	EndpointPrivateAccess *bool `locationName:"endpointPrivateAccess" type:"boolean"`
+
+	// Set this value to false to disable public access for your cluster's Kubernetes
+	// API server endpoint. If you disable public access, your cluster's Kubernetes
+	// API server can only receive requests from within the cluster VPC. The default
+	// value for this parameter is true, which enables public access for your Kubernetes
+	// API server. For more information, see Amazon EKS Cluster Endpoint Access
+	// Control (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
+	// in the Amazon EKS User Guide.
+	EndpointPublicAccess *bool `locationName:"endpointPublicAccess" type:"boolean"`
 
 	// Specify one or more security groups for the cross-account elastic network
 	// interfaces that Amazon EKS creates to use to allow communication between
@@ -1575,9 +1918,7 @@ type VpcConfigRequest struct {
 	// Specify subnets for your Amazon EKS worker nodes. Amazon EKS creates cross-account
 	// elastic network interfaces in these subnets to allow communication between
 	// your worker nodes and the Kubernetes control plane.
-	//
-	// SubnetIds is a required field
-	SubnetIds []string `locationName:"subnetIds" type:"list" required:"true"`
+	SubnetIds []string `locationName:"subnetIds" type:"list"`
 }
 
 // String returns the string representation
@@ -1590,22 +1931,20 @@ func (s VpcConfigRequest) GoString() string {
 	return s.String()
 }
 
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *VpcConfigRequest) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "VpcConfigRequest"}
-
-	if s.SubnetIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s VpcConfigRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EndpointPrivateAccess != nil {
+		v := *s.EndpointPrivateAccess
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "endpointPrivateAccess", protocol.BoolValue(v), metadata)
+	}
+	if s.EndpointPublicAccess != nil {
+		v := *s.EndpointPublicAccess
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "endpointPublicAccess", protocol.BoolValue(v), metadata)
+	}
 	if len(s.SecurityGroupIds) > 0 {
 		v := s.SecurityGroupIds
 
@@ -1638,6 +1977,18 @@ func (s VpcConfigRequest) MarshalFields(e protocol.FieldEncoder) error {
 type VpcConfigResponse struct {
 	_ struct{} `type:"structure"`
 
+	// This parameter indicates whether the Amazon EKS private API server endpoint
+	// is enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes
+	// API requests that originate from within your cluster's VPC will use the private
+	// VPC endpoint instead of traversing the internet.
+	EndpointPrivateAccess *bool `locationName:"endpointPrivateAccess" type:"boolean"`
+
+	// This parameter indicates whether the Amazon EKS public API server endpoint
+	// is enabled. If the Amazon EKS public API server endpoint is disabled, your
+	// cluster's Kubernetes API server can only receive requests that originate
+	// from within the cluster VPC.
+	EndpointPublicAccess *bool `locationName:"endpointPublicAccess" type:"boolean"`
+
 	// The security groups associated with the cross-account elastic network interfaces
 	// that are used to allow communication between your worker nodes and the Kubernetes
 	// control plane.
@@ -1662,6 +2013,18 @@ func (s VpcConfigResponse) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s VpcConfigResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EndpointPrivateAccess != nil {
+		v := *s.EndpointPrivateAccess
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "endpointPrivateAccess", protocol.BoolValue(v), metadata)
+	}
+	if s.EndpointPublicAccess != nil {
+		v := *s.EndpointPublicAccess
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "endpointPublicAccess", protocol.BoolValue(v), metadata)
+	}
 	if len(s.SecurityGroupIds) > 0 {
 		v := s.SecurityGroupIds
 
@@ -1737,12 +2100,35 @@ func (enum ErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type LogType string
+
+// Enum values for LogType
+const (
+	LogTypeApi               LogType = "api"
+	LogTypeAudit             LogType = "audit"
+	LogTypeAuthenticator     LogType = "authenticator"
+	LogTypeControllerManager LogType = "controllerManager"
+	LogTypeScheduler         LogType = "scheduler"
+)
+
+func (enum LogType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LogType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type UpdateParamType string
 
 // Enum values for UpdateParamType
 const (
-	UpdateParamTypeVersion         UpdateParamType = "Version"
-	UpdateParamTypePlatformVersion UpdateParamType = "PlatformVersion"
+	UpdateParamTypeVersion               UpdateParamType = "Version"
+	UpdateParamTypePlatformVersion       UpdateParamType = "PlatformVersion"
+	UpdateParamTypeEndpointPrivateAccess UpdateParamType = "EndpointPrivateAccess"
+	UpdateParamTypeEndpointPublicAccess  UpdateParamType = "EndpointPublicAccess"
+	UpdateParamTypeClusterLogging        UpdateParamType = "ClusterLogging"
 )
 
 func (enum UpdateParamType) MarshalValue() (string, error) {
@@ -1777,7 +2163,9 @@ type UpdateType string
 
 // Enum values for UpdateType
 const (
-	UpdateTypeVersionUpdate UpdateType = "VersionUpdate"
+	UpdateTypeVersionUpdate        UpdateType = "VersionUpdate"
+	UpdateTypeEndpointAccessUpdate UpdateType = "EndpointAccessUpdate"
+	UpdateTypeLoggingUpdate        UpdateType = "LoggingUpdate"
 )
 
 func (enum UpdateType) MarshalValue() (string, error) {

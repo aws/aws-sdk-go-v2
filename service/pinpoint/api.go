@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
 const opCreateApp = "CreateApp"
@@ -2713,6 +2714,57 @@ func (c *Pinpoint) GetVoiceChannelRequest(input *GetVoiceChannelInput) GetVoiceC
 	return GetVoiceChannelRequest{Request: req, Input: input, Copy: c.GetVoiceChannelRequest}
 }
 
+const opListTagsForResource = "ListTagsForResource"
+
+// ListTagsForResourceRequest is a API request type for the ListTagsForResource API operation.
+type ListTagsForResourceRequest struct {
+	*aws.Request
+	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
+}
+
+// Send marshals and sends the ListTagsForResource API request.
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForResourceOutput), nil
+}
+
+// ListTagsForResourceRequest returns a request value for making API operation for
+// Amazon Pinpoint.
+//
+// Get list of all tags for a given resource arn
+//
+//    // Example sending a request using the ListTagsForResourceRequest method.
+//    req := client.ListTagsForResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTagsForResource
+func (c *Pinpoint) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
+	op := &aws.Operation{
+		Name:       opListTagsForResource,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v1/tags/{resource-arn}",
+	}
+
+	if input == nil {
+		input = &ListTagsForResourceInput{}
+	}
+
+	output := &ListTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
+}
+
 const opPhoneNumberValidate = "PhoneNumberValidate"
 
 // PhoneNumberValidateRequest is a API request type for the PhoneNumberValidate API operation.
@@ -3018,6 +3070,112 @@ func (c *Pinpoint) SendUsersMessagesRequest(input *SendUsersMessagesInput) SendU
 	output.responseMetadata = aws.Response{Request: req}
 
 	return SendUsersMessagesRequest{Request: req, Input: input, Copy: c.SendUsersMessagesRequest}
+}
+
+const opTagResource = "TagResource"
+
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
+}
+
+// Send marshals and sends the TagResource API request.
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// Amazon Pinpoint.
+//
+// Adds tags to a resource.
+//
+//    // Example sending a request using the TagResourceRequest method.
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TagResource
+func (c *Pinpoint) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
+	op := &aws.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/v1/tags/{resource-arn}",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
+}
+
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// Amazon Pinpoint.
+//
+// Remove tags from a resource.
+//
+//    // Example sending a request using the UntagResourceRequest method.
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UntagResource
+func (c *Pinpoint) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
+	op := &aws.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/v1/tags/{resource-arn}",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 
 const opUpdateAdmChannel = "UpdateAdmChannel"
@@ -5551,11 +5709,17 @@ func (s AddressConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 type ApplicationResponse struct {
 	_ struct{} `type:"structure"`
 
+	// The arn for the application.
+	Arn *string `type:"string"`
+
 	// The unique application ID.
 	Id *string `type:"string"`
 
 	// The display name of the application.
 	Name *string `type:"string"`
+
+	// The Tags for the application.
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -5570,6 +5734,12 @@ func (s ApplicationResponse) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ApplicationResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.Id != nil {
 		v := *s.Id
 
@@ -5581,6 +5751,18 @@ func (s ApplicationResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }
@@ -6387,6 +6569,9 @@ type CampaignResponse struct {
 	// The ID of the application to which the campaign applies.
 	ApplicationId *string `type:"string"`
 
+	// The arn for the campaign.
+	Arn *string `type:"string"`
+
 	// The date the campaign was created in ISO 8601 format.
 	CreationDate *string `type:"string"`
 
@@ -6436,6 +6621,9 @@ type CampaignResponse struct {
 	// only when all treatments have a status of COMPLETED.
 	State *CampaignState `type:"structure"`
 
+	// The Tags for the campaign.
+	Tags map[string]string `locationName:"tags" type:"map"`
+
 	// A custom description for the treatment.
 	TreatmentDescription *string `type:"string"`
 
@@ -6475,6 +6663,12 @@ func (s CampaignResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ApplicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.CreationDate != nil {
 		v := *s.CreationDate
@@ -6565,6 +6759,18 @@ func (s CampaignResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "State", v, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	if s.TreatmentDescription != nil {
 		v := *s.TreatmentDescription
@@ -6944,6 +7150,9 @@ type CreateApplicationRequest struct {
 
 	// The display name of the application. Used in the Amazon Pinpoint console.
 	Name *string `type:"string"`
+
+	// The Tags for the app.
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -6963,6 +7172,18 @@ func (s CreateApplicationRequest) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }
@@ -10357,6 +10578,15 @@ func (s EndpointsResponse) MarshalFields(e protocol.FieldEncoder) error {
 type Event struct {
 	_ struct{} `type:"structure"`
 
+	// The package name associated with the app that's recording the event.
+	AppPackageName *string `type:"string"`
+
+	// The title of the app that's recording the event.
+	AppTitle *string `type:"string"`
+
+	// The version number of the app that's recording the event.
+	AppVersionCode *string `type:"string"`
+
 	// Custom attributes that are associated with the event you're adding or updating.
 	Attributes map[string]string `type:"map"`
 
@@ -10368,6 +10598,9 @@ type Event struct {
 
 	// Custom metrics related to the event.
 	Metrics map[string]float64 `type:"map"`
+
+	// The name of the SDK that's being used to record the event.
+	SdkName *string `type:"string"`
 
 	// Information about the session in which the event occurred.
 	Session *Session `type:"structure"`
@@ -10388,6 +10621,24 @@ func (s Event) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Event) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AppPackageName != nil {
+		v := *s.AppPackageName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AppPackageName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.AppTitle != nil {
+		v := *s.AppTitle
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AppTitle", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.AppVersionCode != nil {
+		v := *s.AppVersionCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AppVersionCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if len(s.Attributes) > 0 {
 		v := s.Attributes
 
@@ -10423,6 +10674,12 @@ func (s Event) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ms0.End()
 
+	}
+	if s.SdkName != nil {
+		v := *s.SdkName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SdkName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Session != nil {
 		v := s.Session
@@ -14961,6 +15218,87 @@ func (s ItemResponse) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTagsForResourceRequest
+type ListTagsForResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"resource-arn" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTagsForResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "resource-arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTagsForResourceResponse
+type ListTagsForResourceOutput struct {
+	_ struct{} `type:"structure" payload:"TagsModel"`
+
+	responseMetadata aws.Response
+
+	// TagsModel is a required field
+	TagsModel *TagsModel `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTagsForResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.TagsModel != nil {
+		v := s.TagsModel
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "TagsModel", v, metadata)
+	}
+	return nil
+}
+
 // Message to send
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/Message
 type Message struct {
@@ -17245,6 +17583,9 @@ type SegmentResponse struct {
 	// The ID of the application that the segment applies to.
 	ApplicationId *string `type:"string"`
 
+	// The arn for the segment.
+	Arn *string `type:"string"`
+
 	// The date and time when the segment was created.
 	CreationDate *string `type:"string"`
 
@@ -17276,6 +17617,9 @@ type SegmentResponse struct {
 	// request to the jobs/import resource.
 	SegmentType SegmentType `type:"string" enum:"true"`
 
+	// The Tags for the segment.
+	Tags map[string]string `locationName:"tags" type:"map"`
+
 	// The segment version number.
 	Version *int64 `type:"integer"`
 }
@@ -17297,6 +17641,12 @@ func (s SegmentResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ApplicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.CreationDate != nil {
 		v := *s.CreationDate
@@ -17345,6 +17695,18 @@ func (s SegmentResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SegmentType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	if s.Version != nil {
 		v := *s.Version
@@ -17931,6 +18293,145 @@ func (s SimpleEmailPart) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TagResourceRequest
+type TagResourceInput struct {
+	_ struct{} `type:"structure" payload:"TagsModel"`
+
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"resource-arn" type:"string" required:"true"`
+
+	// TagsModel is a required field
+	TagsModel *TagsModel `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if s.TagsModel == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TagsModel"))
+	}
+	if s.TagsModel != nil {
+		if err := s.TagsModel.Validate(); err != nil {
+			invalidParams.AddNested("TagsModel", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "resource-arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TagsModel != nil {
+		v := s.TagsModel
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "TagsModel", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TagResourceOutput
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TagsModel
+type TagsModel struct {
+	_ struct{} `type:"structure"`
+
+	// Tags is a required field
+	Tags map[string]string `locationName:"tags" type:"map" required:"true"`
+}
+
+// String returns the string representation
+func (s TagsModel) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagsModel) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagsModel) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TagsModel"}
+
+	if s.Tags == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagsModel) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
 // Treatment resource
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TreatmentResource
 type TreatmentResource struct {
@@ -18012,6 +18513,97 @@ func (s TreatmentResource) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "TreatmentName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UntagResourceRequest
+type UntagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"resource-arn" type:"string" required:"true"`
+
+	// TagKeys is a required field
+	TagKeys []string `location:"querystring" locationName:"tagKeys" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if s.TagKeys == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "resource-arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.QueryTarget, "tagKeys", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UntagResourceOutput
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UntagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
@@ -19889,6 +20481,9 @@ type WriteCampaignRequest struct {
 	// The version of the segment to which the campaign sends messages.
 	SegmentVersion *int64 `type:"integer"`
 
+	// The Tags for the campaign.
+	Tags map[string]string `locationName:"tags" type:"map"`
+
 	// A custom description for the treatment.
 	TreatmentDescription *string `type:"string"`
 
@@ -19980,6 +20575,18 @@ func (s WriteCampaignRequest) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SegmentVersion", protocol.Int64Value(v), metadata)
 	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	if s.TreatmentDescription != nil {
 		v := *s.TreatmentDescription
 
@@ -20053,6 +20660,9 @@ type WriteSegmentRequest struct {
 	// one segment group. Your request can include either a SegmentGroups object
 	// or a Dimensions object, but not both.
 	SegmentGroups *SegmentGroupList `type:"structure"`
+
+	// The Tags for the segments.
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -20084,6 +20694,18 @@ func (s WriteSegmentRequest) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "SegmentGroups", v, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }

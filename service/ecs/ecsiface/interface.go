@@ -69,6 +69,8 @@ type ECSAPI interface {
 
 	CreateServiceRequest(*ecs.CreateServiceInput) ecs.CreateServiceRequest
 
+	CreateTaskSetRequest(*ecs.CreateTaskSetInput) ecs.CreateTaskSetRequest
+
 	DeleteAccountSettingRequest(*ecs.DeleteAccountSettingInput) ecs.DeleteAccountSettingRequest
 
 	DeleteAttributesRequest(*ecs.DeleteAttributesInput) ecs.DeleteAttributesRequest
@@ -76,6 +78,8 @@ type ECSAPI interface {
 	DeleteClusterRequest(*ecs.DeleteClusterInput) ecs.DeleteClusterRequest
 
 	DeleteServiceRequest(*ecs.DeleteServiceInput) ecs.DeleteServiceRequest
+
+	DeleteTaskSetRequest(*ecs.DeleteTaskSetInput) ecs.DeleteTaskSetRequest
 
 	DeregisterContainerInstanceRequest(*ecs.DeregisterContainerInstanceInput) ecs.DeregisterContainerInstanceRequest
 
@@ -88,6 +92,8 @@ type ECSAPI interface {
 	DescribeServicesRequest(*ecs.DescribeServicesInput) ecs.DescribeServicesRequest
 
 	DescribeTaskDefinitionRequest(*ecs.DescribeTaskDefinitionInput) ecs.DescribeTaskDefinitionRequest
+
+	DescribeTaskSetsRequest(*ecs.DescribeTaskSetsInput) ecs.DescribeTaskSetsRequest
 
 	DescribeTasksRequest(*ecs.DescribeTasksInput) ecs.DescribeTasksRequest
 
@@ -112,6 +118,8 @@ type ECSAPI interface {
 	ListTasksRequest(*ecs.ListTasksInput) ecs.ListTasksRequest
 
 	PutAccountSettingRequest(*ecs.PutAccountSettingInput) ecs.PutAccountSettingRequest
+
+	PutAccountSettingDefaultRequest(*ecs.PutAccountSettingDefaultInput) ecs.PutAccountSettingDefaultRequest
 
 	PutAttributesRequest(*ecs.PutAttributesInput) ecs.PutAttributesRequest
 
@@ -138,6 +146,10 @@ type ECSAPI interface {
 	UpdateContainerInstancesStateRequest(*ecs.UpdateContainerInstancesStateInput) ecs.UpdateContainerInstancesStateRequest
 
 	UpdateServiceRequest(*ecs.UpdateServiceInput) ecs.UpdateServiceRequest
+
+	UpdateServicePrimaryTaskSetRequest(*ecs.UpdateServicePrimaryTaskSetInput) ecs.UpdateServicePrimaryTaskSetRequest
+
+	UpdateTaskSetRequest(*ecs.UpdateTaskSetInput) ecs.UpdateTaskSetRequest
 
 	WaitUntilServicesInactive(context.Context, *ecs.DescribeServicesInput, ...aws.WaiterOption) error
 

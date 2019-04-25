@@ -32,7 +32,7 @@ func (r DeleteReportDefinitionRequest) Send(ctx context.Context) (*DeleteReportD
 // DeleteReportDefinitionRequest returns a request value for making API operation for
 // AWS Cost and Usage Report Service.
 //
-// Delete a specified report definition
+// Deletes the specified report.
 //
 //    // Example sending a request using the DeleteReportDefinitionRequest method.
 //    req := client.DeleteReportDefinitionRequest(params)
@@ -83,7 +83,7 @@ func (r DescribeReportDefinitionsRequest) Send(ctx context.Context) (*DescribeRe
 // DescribeReportDefinitionsRequest returns a request value for making API operation for
 // AWS Cost and Usage Report Service.
 //
-// Describe a list of report definitions owned by the account
+// Lists the AWS Cost and Usage reports available to this account.
 //
 //    // Example sending a request using the DescribeReportDefinitionsRequest method.
 //    req := client.DescribeReportDefinitionsRequest(params)
@@ -187,7 +187,7 @@ func (r PutReportDefinitionRequest) Send(ctx context.Context) (*PutReportDefinit
 // PutReportDefinitionRequest returns a request value for making API operation for
 // AWS Cost and Usage Report Service.
 //
-// Create a new report definition
+// Creates a new report using the description that you provide.
 //
 //    // Example sending a request using the PutReportDefinitionRequest method.
 //    req := client.PutReportDefinitionRequest(params)
@@ -215,13 +215,13 @@ func (c *CostAndUsageReportService) PutReportDefinitionRequest(input *PutReportD
 	return PutReportDefinitionRequest{Request: req, Input: input, Copy: c.PutReportDefinitionRequest}
 }
 
-// Request of DeleteReportDefinition
+// Deletes the specified report.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DeleteReportDefinitionRequest
 type DeleteReportDefinitionInput struct {
 	_ struct{} `type:"structure"`
 
-	// Preferred name for a report, it has to be unique. Must starts with a number/letter,
-	// case sensitive. Limited to 256 characters.
+	// The name of the report that you want to create. The name must be unique,
+	// is case sensitive, and can't include spaces.
 	ReportName *string `type:"string"`
 }
 
@@ -235,14 +235,14 @@ func (s DeleteReportDefinitionInput) GoString() string {
 	return s.String()
 }
 
-// Response of DeleteReportDefinition
+// If the action is successful, the service sends back an HTTP 200 response.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DeleteReportDefinitionResponse
 type DeleteReportDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// A message indicates if the deletion is successful.
+	// Whether the deletion was successful or not.
 	ResponseMessage *string `type:"string"`
 }
 
@@ -261,12 +261,12 @@ func (s DeleteReportDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Request of DescribeReportDefinitions
+// Requests a list of AWS Cost and Usage reports owned by the account.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DescribeReportDefinitionsRequest
 type DescribeReportDefinitionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The max number of results returned by the operation.
+	// The maximum number of results that AWS returns for the operation.
 	MaxResults *int64 `min:"5" type:"integer"`
 
 	// A generic string.
@@ -296,7 +296,7 @@ func (s *DescribeReportDefinitionsInput) Validate() error {
 	return nil
 }
 
-// Response of DescribeReportDefinitions
+// If the action is successful, the service sends back an HTTP 200 response.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DescribeReportDefinitionsResponse
 type DescribeReportDefinitionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -306,7 +306,7 @@ type DescribeReportDefinitionsOutput struct {
 	// A generic string.
 	NextToken *string `type:"string"`
 
-	// A list of report definitions.
+	// A list of AWS Cost and Usage reports owned by the account.
 	ReportDefinitions []ReportDefinition `type:"list"`
 }
 
@@ -325,14 +325,13 @@ func (s DescribeReportDefinitionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Request of PutReportDefinition
+// Creates a Cost and Usage Report.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/PutReportDefinitionRequest
 type PutReportDefinitionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The definition of AWS Cost and Usage Report. Customer can specify the report
-	// name, time unit, report format, compression format, S3 bucket and additional
-	// artifacts and schema elements in the definition.
+	// Represents the output of the PutReportDefinition operation. The content consists
+	// of the detailed metadata and data file information.
 	//
 	// ReportDefinition is a required field
 	ReportDefinition *ReportDefinition `type:"structure" required:"true"`
@@ -367,7 +366,8 @@ func (s *PutReportDefinitionInput) Validate() error {
 	return nil
 }
 
-// Response of PutReportDefinition
+// If the action is successful, the service sends back an HTTP 200 response
+// with an empty HTTP body.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/PutReportDefinitionResponse
 type PutReportDefinitionOutput struct {
 	_ struct{} `type:"structure"`
@@ -390,53 +390,65 @@ func (s PutReportDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// The definition of AWS Cost and Usage Report. Customer can specify the report
-// name, time unit, report format, compression format, S3 bucket and additional
-// artifacts and schema elements in the definition.
+// The definition of AWS Cost and Usage Report. You can specify the report name,
+// time unit, report format, compression format, S3 bucket, additional artifacts,
+// and schema elements in the definition.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ReportDefinition
 type ReportDefinition struct {
 	_ struct{} `type:"structure"`
 
-	// A list of additional artifacts.
+	// A list of manifests that you want Amazon Web Services to create for this
+	// report.
 	AdditionalArtifacts []AdditionalArtifact `type:"list"`
 
-	// A list of schema elements.
+	// A list of strings that indicate additional content that Amazon Web Services
+	// includes in the report, such as individual resource IDs.
 	//
 	// AdditionalSchemaElements is a required field
 	AdditionalSchemaElements []SchemaElement `type:"list" required:"true"`
 
-	// Preferred compression format for report.
+	// The compression format that AWS uses for the report.
 	//
 	// Compression is a required field
 	Compression CompressionFormat `type:"string" required:"true" enum:"true"`
 
-	// Preferred format for report.
+	// The format that AWS saves the report in.
 	//
 	// Format is a required field
 	Format ReportFormat `type:"string" required:"true" enum:"true"`
 
-	// Preferred name for a report, it has to be unique. Must starts with a number/letter,
-	// case sensitive. Limited to 256 characters.
+	// Whether you want Amazon Web Services to update your reports after they have
+	// been finalized if Amazon Web Services detects charges related to previous
+	// months. These charges can include refunds, credits, or support fees.
+	RefreshClosedReports *bool `type:"boolean"`
+
+	// The name of the report that you want to create. The name must be unique,
+	// is case sensitive, and can't include spaces.
 	//
 	// ReportName is a required field
 	ReportName *string `type:"string" required:"true"`
 
-	// Name of customer S3 bucket.
+	// Whether you want Amazon Web Services to overwrite the previous version of
+	// each report or to deliver the report in addition to the previous versions.
+	ReportVersioning ReportVersioning `type:"string" enum:"true"`
+
+	// The S3 bucket where AWS delivers the report.
 	//
 	// S3Bucket is a required field
 	S3Bucket *string `type:"string" required:"true"`
 
-	// Preferred report path prefix. Limited to 256 characters.
+	// The prefix that AWS adds to the report name when AWS delivers the report.
+	// Your prefix can't include spaces.
 	//
 	// S3Prefix is a required field
 	S3Prefix *string `type:"string" required:"true"`
 
-	// Region of customer S3 bucket.
+	// The region of the S3 bucket that AWS delivers the report into.
 	//
 	// S3Region is a required field
 	S3Region AWSRegion `type:"string" required:"true" enum:"true"`
 
-	// The frequency on which report data are measured and displayed.
+	// The length of time covered by the report.
 	//
 	// TimeUnit is a required field
 	TimeUnit TimeUnit `type:"string" required:"true" enum:"true"`
@@ -490,7 +502,7 @@ func (s *ReportDefinition) Validate() error {
 	return nil
 }
 
-// Region of customer S3 bucket.
+// The region of the S3 bucket that AWS delivers the report into.
 type AWSRegion string
 
 // Enum values for AWSRegion
@@ -503,6 +515,8 @@ const (
 	AWSRegionApSoutheast1 AWSRegion = "ap-southeast-1"
 	AWSRegionApSoutheast2 AWSRegion = "ap-southeast-2"
 	AWSRegionApNortheast1 AWSRegion = "ap-northeast-1"
+	AWSRegionEuNorth1     AWSRegion = "eu-north-1"
+	AWSRegionApNortheast3 AWSRegion = "ap-northeast-3"
 )
 
 func (enum AWSRegion) MarshalValue() (string, error) {
@@ -514,13 +528,14 @@ func (enum AWSRegion) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Enable support for Redshift and/or QuickSight.
+// The types of manifest that you want AWS to create for this report.
 type AdditionalArtifact string
 
 // Enum values for AdditionalArtifact
 const (
 	AdditionalArtifactRedshift   AdditionalArtifact = "REDSHIFT"
 	AdditionalArtifactQuicksight AdditionalArtifact = "QUICKSIGHT"
+	AdditionalArtifactAthena     AdditionalArtifact = "ATHENA"
 )
 
 func (enum AdditionalArtifact) MarshalValue() (string, error) {
@@ -532,13 +547,14 @@ func (enum AdditionalArtifact) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Preferred compression format for report.
+// The compression format that AWS uses for the report.
 type CompressionFormat string
 
 // Enum values for CompressionFormat
 const (
-	CompressionFormatZip  CompressionFormat = "ZIP"
-	CompressionFormatGzip CompressionFormat = "GZIP"
+	CompressionFormatZip     CompressionFormat = "ZIP"
+	CompressionFormatGzip    CompressionFormat = "GZIP"
+	CompressionFormatParquet CompressionFormat = "Parquet"
 )
 
 func (enum CompressionFormat) MarshalValue() (string, error) {
@@ -550,12 +566,13 @@ func (enum CompressionFormat) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Preferred format for report.
+// The format that AWS saves the report in.
 type ReportFormat string
 
 // Enum values for ReportFormat
 const (
 	ReportFormatTextOrcsv ReportFormat = "textORcsv"
+	ReportFormatParquet   ReportFormat = "Parquet"
 )
 
 func (enum ReportFormat) MarshalValue() (string, error) {
@@ -567,8 +584,24 @@ func (enum ReportFormat) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Preference of including Resource IDs. You can include additional details
-// about individual resource IDs in your report.
+type ReportVersioning string
+
+// Enum values for ReportVersioning
+const (
+	ReportVersioningCreateNewReport ReportVersioning = "CREATE_NEW_REPORT"
+	ReportVersioningOverwriteReport ReportVersioning = "OVERWRITE_REPORT"
+)
+
+func (enum ReportVersioning) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReportVersioning) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Whether or not AWS includes resource IDs in the report.
 type SchemaElement string
 
 // Enum values for SchemaElement
@@ -585,7 +618,7 @@ func (enum SchemaElement) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The frequency on which report data are measured and displayed.
+// The length of time covered by the report.
 type TimeUnit string
 
 // Enum values for TimeUnit
