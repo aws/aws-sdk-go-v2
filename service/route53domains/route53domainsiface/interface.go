@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/route53domains"
 )
 
-// Route53DomainsAPI provides an interface to enable mocking the
-// route53domains.Route53Domains service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// route53domains.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Route 53 Domains.
-//    func myFunc(svc route53domainsiface.Route53DomainsAPI) bool {
+//    func myFunc(svc route53domainsiface.ClientAPI) bool {
 //        // Make svc.CheckDomainAvailability request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockRoute53DomainsClient struct {
-//        route53domainsiface.Route53DomainsAPI
+//    type mockClientClient struct {
+//        route53domainsiface.ClientPI
 //    }
-//    func (m *mockRoute53DomainsClient) CheckDomainAvailability(input *route53domains.CheckDomainAvailabilityInput) (*route53domains.CheckDomainAvailabilityOutput, error) {
+//    func (m *mockClientClient) CheckDomainAvailability(input *route53domains.CheckDomainAvailabilityInput) (*route53domains.CheckDomainAvailabilityOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockRoute53DomainsClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type Route53DomainsAPI interface {
+type ClientAPI interface {
 	CheckDomainAvailabilityRequest(*route53domains.CheckDomainAvailabilityInput) route53domains.CheckDomainAvailabilityRequest
 
 	CheckDomainTransferabilityRequest(*route53domains.CheckDomainTransferabilityInput) route53domains.CheckDomainTransferabilityRequest
@@ -111,4 +110,4 @@ type Route53DomainsAPI interface {
 	ViewBillingRequest(*route53domains.ViewBillingInput) route53domains.ViewBillingRequest
 }
 
-var _ Route53DomainsAPI = (*route53domains.Route53Domains)(nil)
+var _ ClientAPI = (*route53domains.Client)(nil)

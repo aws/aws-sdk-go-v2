@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs"
 )
 
-// CloudWatchLogsAPI provides an interface to enable mocking the
-// cloudwatchlogs.CloudWatchLogs service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// cloudwatchlogs.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon CloudWatch Logs.
-//    func myFunc(svc cloudwatchlogsiface.CloudWatchLogsAPI) bool {
+//    func myFunc(svc cloudwatchlogsiface.ClientAPI) bool {
 //        // Make svc.AssociateKmsKey request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCloudWatchLogsClient struct {
-//        cloudwatchlogsiface.CloudWatchLogsAPI
+//    type mockClientClient struct {
+//        cloudwatchlogsiface.ClientPI
 //    }
-//    func (m *mockCloudWatchLogsClient) AssociateKmsKey(input *cloudwatchlogs.AssociateKmsKeyInput) (*cloudwatchlogs.AssociateKmsKeyOutput, error) {
+//    func (m *mockClientClient) AssociateKmsKey(input *cloudwatchlogs.AssociateKmsKeyInput) (*cloudwatchlogs.AssociateKmsKeyOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockCloudWatchLogsClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type CloudWatchLogsAPI interface {
+type ClientAPI interface {
 	AssociateKmsKeyRequest(*cloudwatchlogs.AssociateKmsKeyInput) cloudwatchlogs.AssociateKmsKeyRequest
 
 	CancelExportTaskRequest(*cloudwatchlogs.CancelExportTaskInput) cloudwatchlogs.CancelExportTaskRequest
@@ -141,4 +140,4 @@ type CloudWatchLogsAPI interface {
 	UntagLogGroupRequest(*cloudwatchlogs.UntagLogGroupInput) cloudwatchlogs.UntagLogGroupRequest
 }
 
-var _ CloudWatchLogsAPI = (*cloudwatchlogs.CloudWatchLogs)(nil)
+var _ ClientAPI = (*cloudwatchlogs.Client)(nil)

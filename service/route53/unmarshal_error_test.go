@@ -14,7 +14,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/route53"
 )
 
-func makeClientWithResponse(response string) *route53.Route53 {
+func makeClientWithResponse(response string) *route53.Client {
 	r := route53.New(unit.Config())
 	r.Handlers.Send.Clear()
 	r.Handlers.Send.PushBack(func(r *request.Request) {

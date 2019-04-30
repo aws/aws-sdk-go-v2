@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sms"
 )
 
-// SMSAPI provides an interface to enable mocking the
-// sms.SMS service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// sms.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // AWS Server Migration Service.
-//    func myFunc(svc smsiface.SMSAPI) bool {
+//    // SMS.
+//    func myFunc(svc smsiface.ClientAPI) bool {
 //        // Make svc.CreateApp request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockSMSClient struct {
-//        smsiface.SMSAPI
+//    type mockClientClient struct {
+//        smsiface.ClientPI
 //    }
-//    func (m *mockSMSClient) CreateApp(input *sms.CreateAppInput) (*sms.CreateAppOutput, error) {
+//    func (m *mockClientClient) CreateApp(input *sms.CreateAppInput) (*sms.CreateAppOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockSMSClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type SMSAPI interface {
+type ClientAPI interface {
 	CreateAppRequest(*sms.CreateAppInput) sms.CreateAppRequest
 
 	CreateReplicationJobRequest(*sms.CreateReplicationJobInput) sms.CreateReplicationJobRequest
@@ -119,4 +118,4 @@ type SMSAPI interface {
 	UpdateReplicationJobRequest(*sms.UpdateReplicationJobInput) sms.UpdateReplicationJobRequest
 }
 
-var _ SMSAPI = (*sms.SMS)(nil)
+var _ ClientAPI = (*sms.Client)(nil)

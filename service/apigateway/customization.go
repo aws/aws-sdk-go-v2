@@ -5,7 +5,7 @@ import (
 )
 
 func init() {
-	initClient = func(c *APIGateway) {
+	initClient = func(c *Client) {
 		c.Handlers.Build.PushBack(func(r *aws.Request) {
 			r.HTTPRequest.Header.Add("Accept", "application/json")
 		})

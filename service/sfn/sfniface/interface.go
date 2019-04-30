@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sfn"
 )
 
-// SFNAPI provides an interface to enable mocking the
-// sfn.SFN service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// sfn.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // AWS Step Functions.
-//    func myFunc(svc sfniface.SFNAPI) bool {
+//    // AWS SFN.
+//    func myFunc(svc sfniface.ClientAPI) bool {
 //        // Make svc.CreateActivity request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockSFNClient struct {
-//        sfniface.SFNAPI
+//    type mockClientClient struct {
+//        sfniface.ClientPI
 //    }
-//    func (m *mockSFNClient) CreateActivity(input *sfn.CreateActivityInput) (*sfn.CreateActivityOutput, error) {
+//    func (m *mockClientClient) CreateActivity(input *sfn.CreateActivityInput) (*sfn.CreateActivityOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockSFNClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type SFNAPI interface {
+type ClientAPI interface {
 	CreateActivityRequest(*sfn.CreateActivityInput) sfn.CreateActivityRequest
 
 	CreateStateMachineRequest(*sfn.CreateStateMachineInput) sfn.CreateStateMachineRequest
@@ -107,4 +106,4 @@ type SFNAPI interface {
 	UpdateStateMachineRequest(*sfn.UpdateStateMachineInput) sfn.UpdateStateMachineRequest
 }
 
-var _ SFNAPI = (*sfn.SFN)(nil)
+var _ ClientAPI = (*sfn.Client)(nil)

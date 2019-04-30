@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub"
 )
 
-// MigrationHubAPI provides an interface to enable mocking the
-// migrationhub.MigrationHub service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// migrationhub.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Migration Hub.
-//    func myFunc(svc migrationhubiface.MigrationHubAPI) bool {
+//    func myFunc(svc migrationhubiface.ClientAPI) bool {
 //        // Make svc.AssociateCreatedArtifact request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockMigrationHubClient struct {
-//        migrationhubiface.MigrationHubAPI
+//    type mockClientClient struct {
+//        migrationhubiface.ClientPI
 //    }
-//    func (m *mockMigrationHubClient) AssociateCreatedArtifact(input *migrationhub.AssociateCreatedArtifactInput) (*migrationhub.AssociateCreatedArtifactOutput, error) {
+//    func (m *mockClientClient) AssociateCreatedArtifact(input *migrationhub.AssociateCreatedArtifactInput) (*migrationhub.AssociateCreatedArtifactOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockMigrationHubClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type MigrationHubAPI interface {
+type ClientAPI interface {
 	AssociateCreatedArtifactRequest(*migrationhub.AssociateCreatedArtifactInput) migrationhub.AssociateCreatedArtifactRequest
 
 	AssociateDiscoveredResourceRequest(*migrationhub.AssociateDiscoveredResourceInput) migrationhub.AssociateDiscoveredResourceRequest
@@ -95,4 +94,4 @@ type MigrationHubAPI interface {
 	PutResourceAttributesRequest(*migrationhub.PutResourceAttributesInput) migrationhub.PutResourceAttributesRequest
 }
 
-var _ MigrationHubAPI = (*migrationhub.MigrationHub)(nil)
+var _ ClientAPI = (*migrationhub.Client)(nil)

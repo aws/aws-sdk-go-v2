@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/rekognition"
 )
 
-// RekognitionAPI provides an interface to enable mocking the
-// rekognition.Rekognition service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// rekognition.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Rekognition.
-//    func myFunc(svc rekognitioniface.RekognitionAPI) bool {
+//    func myFunc(svc rekognitioniface.ClientAPI) bool {
 //        // Make svc.CompareFaces request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockRekognitionClient struct {
-//        rekognitioniface.RekognitionAPI
+//    type mockClientClient struct {
+//        rekognitioniface.ClientPI
 //    }
-//    func (m *mockRekognitionClient) CompareFaces(input *rekognition.CompareFacesInput) (*rekognition.CompareFacesOutput, error) {
+//    func (m *mockClientClient) CompareFaces(input *rekognition.CompareFacesInput) (*rekognition.CompareFacesOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockRekognitionClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type RekognitionAPI interface {
+type ClientAPI interface {
 	CompareFacesRequest(*rekognition.CompareFacesInput) rekognition.CompareFacesRequest
 
 	CreateCollectionRequest(*rekognition.CreateCollectionInput) rekognition.CreateCollectionRequest
@@ -131,4 +130,4 @@ type RekognitionAPI interface {
 	StopStreamProcessorRequest(*rekognition.StopStreamProcessorInput) rekognition.StopStreamProcessorRequest
 }
 
-var _ RekognitionAPI = (*rekognition.Rekognition)(nil)
+var _ ClientAPI = (*rekognition.Client)(nil)

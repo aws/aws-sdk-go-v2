@@ -15,18 +15,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy"
 )
 
-// CodeDeployAPI provides an interface to enable mocking the
-// codedeploy.CodeDeploy service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// codedeploy.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // AWS CodeDeploy.
-//    func myFunc(svc codedeployiface.CodeDeployAPI) bool {
+//    // CodeDeploy.
+//    func myFunc(svc codedeployiface.ClientAPI) bool {
 //        // Make svc.AddTagsToOnPremisesInstances request
 //    }
 //
@@ -44,16 +43,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCodeDeployClient struct {
-//        codedeployiface.CodeDeployAPI
+//    type mockClientClient struct {
+//        codedeployiface.ClientPI
 //    }
-//    func (m *mockCodeDeployClient) AddTagsToOnPremisesInstances(input *codedeploy.AddTagsToOnPremisesInstancesInput) (*codedeploy.AddTagsToOnPremisesInstancesOutput, error) {
+//    func (m *mockClientClient) AddTagsToOnPremisesInstances(input *codedeploy.AddTagsToOnPremisesInstancesInput) (*codedeploy.AddTagsToOnPremisesInstancesOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockCodeDeployClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -64,7 +63,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type CodeDeployAPI interface {
+type ClientAPI interface {
 	AddTagsToOnPremisesInstancesRequest(*codedeploy.AddTagsToOnPremisesInstancesInput) codedeploy.AddTagsToOnPremisesInstancesRequest
 
 	BatchGetApplicationRevisionsRequest(*codedeploy.BatchGetApplicationRevisionsInput) codedeploy.BatchGetApplicationRevisionsRequest
@@ -154,4 +153,4 @@ type CodeDeployAPI interface {
 	WaitUntilDeploymentSuccessful(context.Context, *codedeploy.GetDeploymentInput, ...aws.WaiterOption) error
 }
 
-var _ CodeDeployAPI = (*codedeploy.CodeDeploy)(nil)
+var _ ClientAPI = (*codedeploy.Client)(nil)

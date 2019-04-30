@@ -15,18 +15,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/kinesis"
 )
 
-// KinesisAPI provides an interface to enable mocking the
-// kinesis.Kinesis service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// kinesis.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // Amazon Kinesis.
-//    func myFunc(svc kinesisiface.KinesisAPI) bool {
+//    // Kinesis.
+//    func myFunc(svc kinesisiface.ClientAPI) bool {
 //        // Make svc.AddTagsToStream request
 //    }
 //
@@ -44,16 +43,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockKinesisClient struct {
-//        kinesisiface.KinesisAPI
+//    type mockClientClient struct {
+//        kinesisiface.ClientPI
 //    }
-//    func (m *mockKinesisClient) AddTagsToStream(input *kinesis.AddTagsToStreamInput) (*kinesis.AddTagsToStreamOutput, error) {
+//    func (m *mockClientClient) AddTagsToStream(input *kinesis.AddTagsToStreamInput) (*kinesis.AddTagsToStreamOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockKinesisClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -64,7 +63,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type KinesisAPI interface {
+type ClientAPI interface {
 	AddTagsToStreamRequest(*kinesis.AddTagsToStreamInput) kinesis.AddTagsToStreamRequest
 
 	CreateStreamRequest(*kinesis.CreateStreamInput) kinesis.CreateStreamRequest
@@ -124,4 +123,4 @@ type KinesisAPI interface {
 	WaitUntilStreamNotExists(context.Context, *kinesis.DescribeStreamInput, ...aws.WaiterOption) error
 }
 
-var _ KinesisAPI = (*kinesis.Kinesis)(nil)
+var _ ClientAPI = (*kinesis.Client)(nil)

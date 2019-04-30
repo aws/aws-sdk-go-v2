@@ -25,7 +25,7 @@ func (d retryer) RetryRules(r *request.Request) time.Duration {
 }
 
 func init() {
-	initClient = func(c *DynamoDB) {
+	initClient = func(c *Client) {
 		if c.Config.Retryer == nil {
 			// Only override the retryer with a custom one if the config
 			// does not already contain a retryer
@@ -36,7 +36,7 @@ func init() {
 		c.Handlers.Unmarshal.PushFrontNamed(validateCRC32Handler)
 	}
 
-	initRequest = func(c *DynamoDB, req *aws.Request) {
+	initRequest = func(c *Client, req *aws.Request) {
 		if c.DisableComputeChecksums {
 			// Checksum validation is off, remove the validator.
 			req.Handlers.Unmarshal.Remove(validateCRC32Handler)
@@ -44,7 +44,7 @@ func init() {
 	}
 }
 
-func setCustomRetryer(c *DynamoDB) {
+func setCustomRetryer(c *Client) {
 	c.Retryer = retryer{
 		DefaultRetryer: client.DefaultRetryer{
 			NumMaxRetries: 10,

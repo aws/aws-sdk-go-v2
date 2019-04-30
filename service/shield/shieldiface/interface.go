@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/shield"
 )
 
-// ShieldAPI provides an interface to enable mocking the
-// shield.Shield service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// shield.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Shield.
-//    func myFunc(svc shieldiface.ShieldAPI) bool {
+//    func myFunc(svc shieldiface.ClientAPI) bool {
 //        // Make svc.AssociateDRTLogBucket request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockShieldClient struct {
-//        shieldiface.ShieldAPI
+//    type mockClientClient struct {
+//        shieldiface.ClientPI
 //    }
-//    func (m *mockShieldClient) AssociateDRTLogBucket(input *shield.AssociateDRTLogBucketInput) (*shield.AssociateDRTLogBucketOutput, error) {
+//    func (m *mockClientClient) AssociateDRTLogBucket(input *shield.AssociateDRTLogBucketInput) (*shield.AssociateDRTLogBucketOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockShieldClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type ShieldAPI interface {
+type ClientAPI interface {
 	AssociateDRTLogBucketRequest(*shield.AssociateDRTLogBucketInput) shield.AssociateDRTLogBucketRequest
 
 	AssociateDRTRoleRequest(*shield.AssociateDRTRoleInput) shield.AssociateDRTRoleRequest
@@ -99,4 +98,4 @@ type ShieldAPI interface {
 	UpdateSubscriptionRequest(*shield.UpdateSubscriptionInput) shield.UpdateSubscriptionRequest
 }
 
-var _ ShieldAPI = (*shield.Shield)(nil)
+var _ ClientAPI = (*shield.Client)(nil)

@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideomedia"
 )
 
-// KinesisVideoMediaAPI provides an interface to enable mocking the
-// kinesisvideomedia.KinesisVideoMedia service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// kinesisvideomedia.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // Amazon Kinesis Video Streams Media.
-//    func myFunc(svc kinesisvideomediaiface.KinesisVideoMediaAPI) bool {
+//    // Kinesis Video Media.
+//    func myFunc(svc kinesisvideomediaiface.ClientAPI) bool {
 //        // Make svc.GetMedia request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockKinesisVideoMediaClient struct {
-//        kinesisvideomediaiface.KinesisVideoMediaAPI
+//    type mockClientClient struct {
+//        kinesisvideomediaiface.ClientPI
 //    }
-//    func (m *mockKinesisVideoMediaClient) GetMedia(input *kinesisvideomedia.GetMediaInput) (*kinesisvideomedia.GetMediaOutput, error) {
+//    func (m *mockClientClient) GetMedia(input *kinesisvideomedia.GetMediaInput) (*kinesisvideomedia.GetMediaOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockKinesisVideoMediaClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,8 +60,8 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type KinesisVideoMediaAPI interface {
+type ClientAPI interface {
 	GetMediaRequest(*kinesisvideomedia.GetMediaInput) kinesisvideomedia.GetMediaRequest
 }
 
-var _ KinesisVideoMediaAPI = (*kinesisvideomedia.KinesisVideoMedia)(nil)
+var _ ClientAPI = (*kinesisvideomedia.Client)(nil)

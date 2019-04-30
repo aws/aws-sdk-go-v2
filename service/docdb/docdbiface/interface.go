@@ -15,18 +15,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/docdb"
 )
 
-// DocDBAPI provides an interface to enable mocking the
-// docdb.DocDB service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// docdb.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // Amazon DocumentDB with MongoDB compatibility.
-//    func myFunc(svc docdbiface.DocDBAPI) bool {
+//    // Amazon DocDB.
+//    func myFunc(svc docdbiface.ClientAPI) bool {
 //        // Make svc.AddTagsToResource request
 //    }
 //
@@ -44,16 +43,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockDocDBClient struct {
-//        docdbiface.DocDBAPI
+//    type mockClientClient struct {
+//        docdbiface.ClientPI
 //    }
-//    func (m *mockDocDBClient) AddTagsToResource(input *docdb.AddTagsToResourceInput) (*docdb.AddTagsToResourceOutput, error) {
+//    func (m *mockClientClient) AddTagsToResource(input *docdb.AddTagsToResourceInput) (*docdb.AddTagsToResourceOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockDocDBClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -64,7 +63,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type DocDBAPI interface {
+type ClientAPI interface {
 	AddTagsToResourceRequest(*docdb.AddTagsToResourceInput) docdb.AddTagsToResourceRequest
 
 	ApplyPendingMaintenanceActionRequest(*docdb.ApplyPendingMaintenanceActionInput) docdb.ApplyPendingMaintenanceActionRequest
@@ -148,4 +147,4 @@ type DocDBAPI interface {
 	WaitUntilDBInstanceDeleted(context.Context, *docdb.DescribeDBInstancesInput, ...aws.WaiterOption) error
 }
 
-var _ DocDBAPI = (*docdb.DocDB)(nil)
+var _ ClientAPI = (*docdb.Client)(nil)

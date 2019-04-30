@@ -19,7 +19,7 @@ import (
 )
 
 var (
-	svc                            *s3control.S3Control
+	svc                            *s3control.Client
 	s3ControlEndpoint, stsEndpoint string
 	accountID                      string
 	insecureTLS, useDualstack      bool

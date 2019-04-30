@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/mediastore"
 )
 
-// MediaStoreAPI provides an interface to enable mocking the
-// mediastore.MediaStore service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// mediastore.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // AWS Elemental MediaStore.
-//    func myFunc(svc mediastoreiface.MediaStoreAPI) bool {
+//    // MediaStore.
+//    func myFunc(svc mediastoreiface.ClientAPI) bool {
 //        // Make svc.CreateContainer request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockMediaStoreClient struct {
-//        mediastoreiface.MediaStoreAPI
+//    type mockClientClient struct {
+//        mediastoreiface.ClientPI
 //    }
-//    func (m *mockMediaStoreClient) CreateContainer(input *mediastore.CreateContainerInput) (*mediastore.CreateContainerOutput, error) {
+//    func (m *mockClientClient) CreateContainer(input *mediastore.CreateContainerInput) (*mediastore.CreateContainerOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockMediaStoreClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type MediaStoreAPI interface {
+type ClientAPI interface {
 	CreateContainerRequest(*mediastore.CreateContainerInput) mediastore.CreateContainerRequest
 
 	DeleteContainerRequest(*mediastore.DeleteContainerInput) mediastore.DeleteContainerRequest
@@ -93,4 +92,4 @@ type MediaStoreAPI interface {
 	StopAccessLoggingRequest(*mediastore.StopAccessLoggingInput) mediastore.StopAccessLoggingRequest
 }
 
-var _ MediaStoreAPI = (*mediastore.MediaStore)(nil)
+var _ ClientAPI = (*mediastore.Client)(nil)

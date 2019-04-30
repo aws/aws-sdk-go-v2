@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice"
 )
 
-// LexModelBuildingServiceAPI provides an interface to enable mocking the
-// lexmodelbuildingservice.LexModelBuildingService service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// lexmodelbuildingservice.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Lex Model Building Service.
-//    func myFunc(svc lexmodelbuildingserviceiface.LexModelBuildingServiceAPI) bool {
+//    func myFunc(svc lexmodelbuildingserviceiface.ClientAPI) bool {
 //        // Make svc.CreateBotVersion request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockLexModelBuildingServiceClient struct {
-//        lexmodelbuildingserviceiface.LexModelBuildingServiceAPI
+//    type mockClientClient struct {
+//        lexmodelbuildingserviceiface.ClientPI
 //    }
-//    func (m *mockLexModelBuildingServiceClient) CreateBotVersion(input *lexmodelbuildingservice.CreateBotVersionInput) (*lexmodelbuildingservice.CreateBotVersionOutput, error) {
+//    func (m *mockClientClient) CreateBotVersion(input *lexmodelbuildingservice.CreateBotVersionInput) (*lexmodelbuildingservice.CreateBotVersionOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockLexModelBuildingServiceClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type LexModelBuildingServiceAPI interface {
+type ClientAPI interface {
 	CreateBotVersionRequest(*lexmodelbuildingservice.CreateBotVersionInput) lexmodelbuildingservice.CreateBotVersionRequest
 
 	CreateIntentVersionRequest(*lexmodelbuildingservice.CreateIntentVersionInput) lexmodelbuildingservice.CreateIntentVersionRequest
@@ -135,4 +134,4 @@ type LexModelBuildingServiceAPI interface {
 	StartImportRequest(*lexmodelbuildingservice.StartImportInput) lexmodelbuildingservice.StartImportRequest
 }
 
-var _ LexModelBuildingServiceAPI = (*lexmodelbuildingservice.LexModelBuildingService)(nil)
+var _ ClientAPI = (*lexmodelbuildingservice.Client)(nil)

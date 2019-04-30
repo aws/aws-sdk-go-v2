@@ -15,10 +15,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling"
 )
 
-// AutoScalingAPI provides an interface to enable mocking the
-// autoscaling.AutoScaling service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// autoscaling.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -26,7 +25,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Auto Scaling.
-//    func myFunc(svc autoscalingiface.AutoScalingAPI) bool {
+//    func myFunc(svc autoscalingiface.ClientAPI) bool {
 //        // Make svc.AttachInstances request
 //    }
 //
@@ -44,16 +43,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockAutoScalingClient struct {
-//        autoscalingiface.AutoScalingAPI
+//    type mockClientClient struct {
+//        autoscalingiface.ClientPI
 //    }
-//    func (m *mockAutoScalingClient) AttachInstances(input *autoscaling.AttachInstancesInput) (*autoscaling.AttachInstancesOutput, error) {
+//    func (m *mockClientClient) AttachInstances(input *autoscaling.AttachInstancesInput) (*autoscaling.AttachInstancesOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockAutoScalingClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -64,7 +63,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type AutoScalingAPI interface {
+type ClientAPI interface {
 	AttachInstancesRequest(*autoscaling.AttachInstancesInput) autoscaling.AttachInstancesRequest
 
 	AttachLoadBalancerTargetGroupsRequest(*autoscaling.AttachLoadBalancerTargetGroupsInput) autoscaling.AttachLoadBalancerTargetGroupsRequest
@@ -159,7 +158,7 @@ type AutoScalingAPI interface {
 
 	RecordLifecycleActionHeartbeatRequest(*autoscaling.RecordLifecycleActionHeartbeatInput) autoscaling.RecordLifecycleActionHeartbeatRequest
 
-	ResumeProcessesRequest(*autoscaling.SuspendProcessesInput) autoscaling.ResumeProcessesRequest
+	ResumeProcessesRequest(*autoscaling.ResumeProcessesInput) autoscaling.ResumeProcessesRequest
 
 	SetDesiredCapacityRequest(*autoscaling.SetDesiredCapacityInput) autoscaling.SetDesiredCapacityRequest
 
@@ -180,4 +179,4 @@ type AutoScalingAPI interface {
 	WaitUntilGroupNotExists(context.Context, *autoscaling.DescribeAutoScalingGroupsInput, ...aws.WaiterOption) error
 }
 
-var _ AutoScalingAPI = (*autoscaling.AutoScaling)(nil)
+var _ ClientAPI = (*autoscaling.Client)(nil)

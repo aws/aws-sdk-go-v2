@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/workmail"
 )
 
-// WorkMailAPI provides an interface to enable mocking the
-// workmail.WorkMail service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// workmail.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon WorkMail.
-//    func myFunc(svc workmailiface.WorkMailAPI) bool {
+//    func myFunc(svc workmailiface.ClientAPI) bool {
 //        // Make svc.AssociateDelegateToResource request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockWorkMailClient struct {
-//        workmailiface.WorkMailAPI
+//    type mockClientClient struct {
+//        workmailiface.ClientPI
 //    }
-//    func (m *mockWorkMailClient) AssociateDelegateToResource(input *workmail.AssociateDelegateToResourceInput) (*workmail.AssociateDelegateToResourceOutput, error) {
+//    func (m *mockClientClient) AssociateDelegateToResource(input *workmail.AssociateDelegateToResourceInput) (*workmail.AssociateDelegateToResourceOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockWorkMailClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type WorkMailAPI interface {
+type ClientAPI interface {
 	AssociateDelegateToResourceRequest(*workmail.AssociateDelegateToResourceInput) workmail.AssociateDelegateToResourceRequest
 
 	AssociateMemberToGroupRequest(*workmail.AssociateMemberToGroupInput) workmail.AssociateMemberToGroupRequest
@@ -125,4 +124,4 @@ type WorkMailAPI interface {
 	UpdateResourceRequest(*workmail.UpdateResourceInput) workmail.UpdateResourceRequest
 }
 
-var _ WorkMailAPI = (*workmail.WorkMail)(nil)
+var _ ClientAPI = (*workmail.Client)(nil)

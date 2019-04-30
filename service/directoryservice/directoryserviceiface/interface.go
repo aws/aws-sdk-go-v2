@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice"
 )
 
-// DirectoryServiceAPI provides an interface to enable mocking the
-// directoryservice.DirectoryService service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// directoryservice.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // AWS Directory Service.
-//    func myFunc(svc directoryserviceiface.DirectoryServiceAPI) bool {
+//    // Directory Service.
+//    func myFunc(svc directoryserviceiface.ClientAPI) bool {
 //        // Make svc.AcceptSharedDirectory request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockDirectoryServiceClient struct {
-//        directoryserviceiface.DirectoryServiceAPI
+//    type mockClientClient struct {
+//        directoryserviceiface.ClientPI
 //    }
-//    func (m *mockDirectoryServiceClient) AcceptSharedDirectory(input *directoryservice.AcceptSharedDirectoryInput) (*directoryservice.AcceptSharedDirectoryOutput, error) {
+//    func (m *mockClientClient) AcceptSharedDirectory(input *directoryservice.AcceptSharedDirectoryInput) (*directoryservice.AcceptSharedDirectoryOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockDirectoryServiceClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type DirectoryServiceAPI interface {
+type ClientAPI interface {
 	AcceptSharedDirectoryRequest(*directoryservice.AcceptSharedDirectoryInput) directoryservice.AcceptSharedDirectoryRequest
 
 	AddIpRoutesRequest(*directoryservice.AddIpRoutesInput) directoryservice.AddIpRoutesRequest
@@ -163,4 +162,4 @@ type DirectoryServiceAPI interface {
 	VerifyTrustRequest(*directoryservice.VerifyTrustInput) directoryservice.VerifyTrustRequest
 }
 
-var _ DirectoryServiceAPI = (*directoryservice.DirectoryService)(nil)
+var _ ClientAPI = (*directoryservice.Client)(nil)

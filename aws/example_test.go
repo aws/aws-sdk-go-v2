@@ -14,7 +14,7 @@ import (
 func ExampleEndpointResolverFunc() {
 	defaultResolver := endpoints.NewDefaultResolver()
 	myCustomResolver := func(service, region string) (aws.Endpoint, error) {
-		if service == endpoints.S3ServiceID {
+		if service == s3.EndpointsID {
 			return aws.Endpoint{
 				URL:           "s3.custom.endpoint.com",
 				SigningRegion: "custom-signing-region",

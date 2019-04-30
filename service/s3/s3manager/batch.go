@@ -136,16 +136,16 @@ type BatchDeleteIterator interface {
 //	}
 type DeleteListIterator struct {
 	Bucket    *string
-	Paginator s3.ListObjectsPager
+	Paginator s3.ListObjectsPaginator
 	objects   []s3.Object
 }
 
 // NewDeleteListIterator will return a new DeleteListIterator.
-func NewDeleteListIterator(svc s3iface.S3API, input *s3.ListObjectsInput, opts ...func(*DeleteListIterator)) BatchDeleteIterator {
+func NewDeleteListIterator(svc s3iface.ClientAPI, input *s3.ListObjectsInput, opts ...func(*DeleteListIterator)) BatchDeleteIterator {
 	req := svc.ListObjectsRequest(input)
 	iter := &DeleteListIterator{
 		Bucket:    input.Bucket,
-		Paginator: req.Paginate(),
+		Paginator: s3.NewListObjectsPaginator(req),
 	}
 
 	for _, opt := range opts {
@@ -185,7 +185,7 @@ func (iter *DeleteListIterator) DeleteObject() BatchDeleteObject {
 // BatchDelete will use the s3 package's service client to perform a batch
 // delete.
 type BatchDelete struct {
-	Client    s3iface.S3API
+	Client    s3iface.ClientAPI
 	BatchSize int
 }
 
@@ -209,7 +209,7 @@ type BatchDelete struct {
 //	}); err != nil {
 //		return err
 //	}
-func NewBatchDeleteWithClient(client s3iface.S3API, options ...func(*BatchDelete)) *BatchDelete {
+func NewBatchDeleteWithClient(client s3iface.ClientAPI, options ...func(*BatchDelete)) *BatchDelete {
 	svc := &BatchDelete{
 		Client:    client,
 		BatchSize: DefaultBatchSize,

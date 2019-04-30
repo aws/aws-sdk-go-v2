@@ -161,7 +161,7 @@ func TestCompleteMultipartUploadError(t *testing.T) {
 	}
 }
 
-func newCopyTestSvc(errMsg string) *s3.S3 {
+func newCopyTestSvc(errMsg string) *s3.Client {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, errMsg, http.StatusOK)
 	}))

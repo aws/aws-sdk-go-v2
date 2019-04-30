@@ -47,7 +47,7 @@ func CleanupTest(ctx context.Context, svc *s3.Client, bucketName string) error {
 		&s3.ListObjectsInput{Bucket: &bucketName},
 	)
 
-	listObjPager := listReq.Paginate()
+	listObjPager := s3.NewListObjectsPaginator(listReq)
 	for listObjPager.Next(ctx) {
 		for _, o := range listObjPager.CurrentPage().Contents {
 			_, err := svc.DeleteObjectRequest(&s3.DeleteObjectInput{
@@ -69,7 +69,7 @@ func CleanupTest(ctx context.Context, svc *s3.Client, bucketName string) error {
 		&s3.ListMultipartUploadsInput{Bucket: &bucketName},
 	)
 
-	listMPPager := listMPReq.Paginate()
+	listMPPager := s3.NewListMultipartUploadsPaginator(listMPReq)
 	for listMPPager.Next(ctx) {
 		for _, u := range listMPPager.CurrentPage().Uploads {
 			svc.AbortMultipartUploadRequest(&s3.AbortMultipartUploadInput{

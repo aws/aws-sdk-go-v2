@@ -48,7 +48,7 @@ const bucketRegionHeader = "X-Amz-Bucket-Region"
 // derived from the region the S3 service client was created in.
 //
 // See GetBucketRegion for more information.
-func GetBucketRegionWithClient(ctx context.Context, svc s3iface.S3API, bucket string, opts ...aws.Option) (string, error) {
+func GetBucketRegionWithClient(ctx context.Context, svc s3iface.ClientAPI, bucket string, opts ...aws.Option) (string, error) {
 	req := svc.HeadBucketRequest(&s3.HeadBucketInput{
 		Bucket: aws.String(bucket),
 	})
