@@ -186,7 +186,7 @@ func (r {{ $reqType }}) Send(ctx context.Context) (*{{ $respType }}, error) {
 	//   req := client.{{ $reqType }}(input)
 	//   p := New{{ $reqType}}Paginator(req)
 	//
-	//   for p.Next() {
+	//   for p.Next(context.TODO()) {
 	//       page := p.CurrentPage()
 	//   }
 	//
