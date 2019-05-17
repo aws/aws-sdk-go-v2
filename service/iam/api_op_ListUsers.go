@@ -170,7 +170,7 @@ func (r ListUsersRequest) Send(ctx context.Context) (*ListUsersResponse, error) 
 //   req := client.ListUsersRequest(input)
 //   p := NewListUsersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

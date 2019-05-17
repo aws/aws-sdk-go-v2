@@ -186,7 +186,7 @@ func (r ListThreatIntelSetsRequest) Send(ctx context.Context) (*ListThreatIntelS
 //   req := client.ListThreatIntelSetsRequest(input)
 //   p := NewListThreatIntelSetsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

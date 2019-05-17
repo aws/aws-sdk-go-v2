@@ -145,7 +145,7 @@ func (r DescribeEndpointsRequest) Send(ctx context.Context) (*DescribeEndpointsR
 //   req := client.DescribeEndpointsRequest(input)
 //   p := NewDescribeEndpointsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

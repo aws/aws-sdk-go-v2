@@ -146,7 +146,7 @@ func (r DescribeConnectionsRequest) Send(ctx context.Context) (*DescribeConnecti
 //   req := client.DescribeConnectionsRequest(input)
 //   p := NewDescribeConnectionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

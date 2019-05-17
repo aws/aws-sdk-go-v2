@@ -208,7 +208,7 @@ func (r ListSecretVersionIdsRequest) Send(ctx context.Context) (*ListSecretVersi
 //   req := client.ListSecretVersionIdsRequest(input)
 //   p := NewListSecretVersionIdsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

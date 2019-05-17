@@ -138,7 +138,7 @@ func (r ListStepsRequest) Send(ctx context.Context) (*ListStepsResponse, error) 
 //   req := client.ListStepsRequest(input)
 //   p := NewListStepsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

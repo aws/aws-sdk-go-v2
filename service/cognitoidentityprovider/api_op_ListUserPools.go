@@ -139,7 +139,7 @@ func (r ListUserPoolsRequest) Send(ctx context.Context) (*ListUserPoolsResponse,
 //   req := client.ListUserPoolsRequest(input)
 //   p := NewListUserPoolsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

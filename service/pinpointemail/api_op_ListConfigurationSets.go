@@ -173,7 +173,7 @@ func (r ListConfigurationSetsRequest) Send(ctx context.Context) (*ListConfigurat
 //   req := client.ListConfigurationSetsRequest(input)
 //   p := NewListConfigurationSetsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

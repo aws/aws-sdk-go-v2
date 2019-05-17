@@ -185,7 +185,7 @@ func (r ListJobsByStatusRequest) Send(ctx context.Context) (*ListJobsByStatusRes
 //   req := client.ListJobsByStatusRequest(input)
 //   p := NewListJobsByStatusRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

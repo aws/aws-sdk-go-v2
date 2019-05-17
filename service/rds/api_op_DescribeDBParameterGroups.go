@@ -154,7 +154,7 @@ func (r DescribeDBParameterGroupsRequest) Send(ctx context.Context) (*DescribeDB
 //   req := client.DescribeDBParameterGroupsRequest(input)
 //   p := NewDescribeDBParameterGroupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

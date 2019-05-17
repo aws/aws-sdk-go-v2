@@ -134,7 +134,7 @@ func (r DescribeReplicationGroupsRequest) Send(ctx context.Context) (*DescribeRe
 //   req := client.DescribeReplicationGroupsRequest(input)
 //   p := NewDescribeReplicationGroupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

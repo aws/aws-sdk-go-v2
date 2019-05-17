@@ -152,7 +152,7 @@ func (r GetTransitGatewayRouteTableAssociationsRequest) Send(ctx context.Context
 //   req := client.GetTransitGatewayRouteTableAssociationsRequest(input)
 //   p := NewGetTransitGatewayRouteTableAssociationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

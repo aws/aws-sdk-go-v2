@@ -150,7 +150,7 @@ func (r ListTaskDefinitionsRequest) Send(ctx context.Context) (*ListTaskDefiniti
 //   req := client.ListTaskDefinitionsRequest(input)
 //   p := NewListTaskDefinitionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

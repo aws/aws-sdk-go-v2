@@ -168,7 +168,7 @@ func (r ListGrantsRequest) Send(ctx context.Context) (*ListGrantsResponse, error
 //   req := client.ListGrantsRequest(input)
 //   p := NewListGrantsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

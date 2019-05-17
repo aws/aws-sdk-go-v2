@@ -138,7 +138,7 @@ func (r DescribeLogGroupsRequest) Send(ctx context.Context) (*DescribeLogGroupsR
 //   req := client.DescribeLogGroupsRequest(input)
 //   p := NewDescribeLogGroupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

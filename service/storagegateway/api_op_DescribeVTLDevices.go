@@ -164,7 +164,7 @@ func (r DescribeVTLDevicesRequest) Send(ctx context.Context) (*DescribeVTLDevice
 //   req := client.DescribeVTLDevicesRequest(input)
 //   p := NewDescribeVTLDevicesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

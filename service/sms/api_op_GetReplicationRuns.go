@@ -137,7 +137,7 @@ func (r GetReplicationRunsRequest) Send(ctx context.Context) (*GetReplicationRun
 //   req := client.GetReplicationRunsRequest(input)
 //   p := NewGetReplicationRunsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

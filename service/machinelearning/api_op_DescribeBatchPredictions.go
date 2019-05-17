@@ -191,7 +191,7 @@ func (r DescribeBatchPredictionsRequest) Send(ctx context.Context) (*DescribeBat
 //   req := client.DescribeBatchPredictionsRequest(input)
 //   p := NewDescribeBatchPredictionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -159,7 +159,7 @@ func (r DescribeObjectsRequest) Send(ctx context.Context) (*DescribeObjectsRespo
 //   req := client.DescribeObjectsRequest(input)
 //   p := NewDescribeObjectsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

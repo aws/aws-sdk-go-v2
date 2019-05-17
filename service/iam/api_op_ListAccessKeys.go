@@ -174,7 +174,7 @@ func (r ListAccessKeysRequest) Send(ctx context.Context) (*ListAccessKeysRespons
 //   req := client.ListAccessKeysRequest(input)
 //   p := NewListAccessKeysRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

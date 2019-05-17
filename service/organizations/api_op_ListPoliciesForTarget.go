@@ -180,7 +180,7 @@ func (r ListPoliciesForTargetRequest) Send(ctx context.Context) (*ListPoliciesFo
 //   req := client.ListPoliciesForTargetRequest(input)
 //   p := NewListPoliciesForTargetRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

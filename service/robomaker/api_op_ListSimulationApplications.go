@@ -224,7 +224,7 @@ func (r ListSimulationApplicationsRequest) Send(ctx context.Context) (*ListSimul
 //   req := client.ListSimulationApplicationsRequest(input)
 //   p := NewListSimulationApplicationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

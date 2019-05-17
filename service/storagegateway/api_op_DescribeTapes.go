@@ -162,7 +162,7 @@ func (r DescribeTapesRequest) Send(ctx context.Context) (*DescribeTapesResponse,
 //   req := client.DescribeTapesRequest(input)
 //   p := NewDescribeTapesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

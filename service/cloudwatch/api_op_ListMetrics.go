@@ -151,7 +151,7 @@ func (r ListMetricsRequest) Send(ctx context.Context) (*ListMetricsResponse, err
 //   req := client.ListMetricsRequest(input)
 //   p := NewListMetricsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

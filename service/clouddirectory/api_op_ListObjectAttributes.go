@@ -225,7 +225,7 @@ func (r ListObjectAttributesRequest) Send(ctx context.Context) (*ListObjectAttri
 //   req := client.ListObjectAttributesRequest(input)
 //   p := NewListObjectAttributesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

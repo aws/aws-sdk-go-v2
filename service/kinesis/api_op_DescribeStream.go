@@ -162,7 +162,7 @@ func (r DescribeStreamRequest) Send(ctx context.Context) (*DescribeStreamRespons
 //   req := client.DescribeStreamRequest(input)
 //   p := NewDescribeStreamRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -206,7 +206,7 @@ func (r LookupPolicyRequest) Send(ctx context.Context) (*LookupPolicyResponse, e
 //   req := client.LookupPolicyRequest(input)
 //   p := NewLookupPolicyRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

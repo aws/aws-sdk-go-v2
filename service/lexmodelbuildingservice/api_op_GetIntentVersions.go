@@ -204,7 +204,7 @@ func (r GetIntentVersionsRequest) Send(ctx context.Context) (*GetIntentVersionsR
 //   req := client.GetIntentVersionsRequest(input)
 //   p := NewGetIntentVersionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

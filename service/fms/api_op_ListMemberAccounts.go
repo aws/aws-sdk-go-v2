@@ -143,7 +143,7 @@ func (r ListMemberAccountsRequest) Send(ctx context.Context) (*ListMemberAccount
 //   req := client.ListMemberAccountsRequest(input)
 //   p := NewListMemberAccountsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

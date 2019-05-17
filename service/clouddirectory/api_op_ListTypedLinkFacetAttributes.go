@@ -199,7 +199,7 @@ func (r ListTypedLinkFacetAttributesRequest) Send(ctx context.Context) (*ListTyp
 //   req := client.ListTypedLinkFacetAttributesRequest(input)
 //   p := NewListTypedLinkFacetAttributesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

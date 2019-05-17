@@ -168,7 +168,7 @@ func (r ListAssignmentsForHITRequest) Send(ctx context.Context) (*ListAssignment
 //   req := client.ListAssignmentsForHITRequest(input)
 //   p := NewListAssignmentsForHITRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -140,7 +140,7 @@ func (r ListRunsRequest) Send(ctx context.Context) (*ListRunsResponse, error) {
 //   req := client.ListRunsRequest(input)
 //   p := NewListRunsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

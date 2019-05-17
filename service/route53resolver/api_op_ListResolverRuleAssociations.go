@@ -155,7 +155,7 @@ func (r ListResolverRuleAssociationsRequest) Send(ctx context.Context) (*ListRes
 //   req := client.ListResolverRuleAssociationsRequest(input)
 //   p := NewListResolverRuleAssociationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

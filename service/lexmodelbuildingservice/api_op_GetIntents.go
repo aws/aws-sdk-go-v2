@@ -194,7 +194,7 @@ func (r GetIntentsRequest) Send(ctx context.Context) (*GetIntentsResponse, error
 //   req := client.GetIntentsRequest(input)
 //   p := NewGetIntentsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

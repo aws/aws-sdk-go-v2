@@ -150,7 +150,7 @@ func (r DescribeOrderableClusterOptionsRequest) Send(ctx context.Context) (*Desc
 //   req := client.DescribeOrderableClusterOptionsRequest(input)
 //   p := NewDescribeOrderableClusterOptionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

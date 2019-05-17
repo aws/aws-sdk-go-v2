@@ -131,7 +131,7 @@ func (r DescribeReplicationTaskAssessmentResultsRequest) Send(ctx context.Contex
 //   req := client.DescribeReplicationTaskAssessmentResultsRequest(input)
 //   p := NewDescribeReplicationTaskAssessmentResultsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

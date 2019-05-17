@@ -124,7 +124,7 @@ func (r ListServiceActionsRequest) Send(ctx context.Context) (*ListServiceAction
 //   req := client.ListServiceActionsRequest(input)
 //   p := NewListServiceActionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

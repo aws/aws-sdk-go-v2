@@ -148,7 +148,7 @@ func (r DescribeClustersRequest) Send(ctx context.Context) (*DescribeClustersRes
 //   req := client.DescribeClustersRequest(input)
 //   p := NewDescribeClustersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

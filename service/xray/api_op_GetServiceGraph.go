@@ -244,7 +244,7 @@ func (r GetServiceGraphRequest) Send(ctx context.Context) (*GetServiceGraphRespo
 //   req := client.GetServiceGraphRequest(input)
 //   p := NewGetServiceGraphRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

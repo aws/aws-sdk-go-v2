@@ -179,7 +179,7 @@ func (r GetAccountAuthorizationDetailsRequest) Send(ctx context.Context) (*GetAc
 //   req := client.GetAccountAuthorizationDetailsRequest(input)
 //   p := NewGetAccountAuthorizationDetailsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

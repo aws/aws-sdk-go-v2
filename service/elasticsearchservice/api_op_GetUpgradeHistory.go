@@ -189,7 +189,7 @@ func (r GetUpgradeHistoryRequest) Send(ctx context.Context) (*GetUpgradeHistoryR
 //   req := client.GetUpgradeHistoryRequest(input)
 //   p := NewGetUpgradeHistoryRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

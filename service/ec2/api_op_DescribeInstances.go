@@ -384,7 +384,7 @@ func (r DescribeInstancesRequest) Send(ctx context.Context) (*DescribeInstancesR
 //   req := client.DescribeInstancesRequest(input)
 //   p := NewDescribeInstancesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -141,7 +141,7 @@ func (r DescribeWorkspaceBundlesRequest) Send(ctx context.Context) (*DescribeWor
 //   req := client.DescribeWorkspaceBundlesRequest(input)
 //   p := NewDescribeWorkspaceBundlesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

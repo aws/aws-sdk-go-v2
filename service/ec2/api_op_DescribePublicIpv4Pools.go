@@ -133,7 +133,7 @@ func (r DescribePublicIpv4PoolsRequest) Send(ctx context.Context) (*DescribePubl
 //   req := client.DescribePublicIpv4PoolsRequest(input)
 //   p := NewDescribePublicIpv4PoolsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

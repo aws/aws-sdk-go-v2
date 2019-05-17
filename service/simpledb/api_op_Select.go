@@ -138,7 +138,7 @@ func (r SelectRequest) Send(ctx context.Context) (*SelectResponse, error) {
 //   req := client.SelectRequest(input)
 //   p := NewSelectRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -206,7 +206,7 @@ func (r ListAttachedIndicesRequest) Send(ctx context.Context) (*ListAttachedIndi
 //   req := client.ListAttachedIndicesRequest(input)
 //   p := NewListAttachedIndicesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

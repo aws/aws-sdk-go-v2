@@ -349,7 +349,7 @@ func (r ListResourceRecordSetsRequest) Send(ctx context.Context) (*ListResourceR
 //   req := client.ListResourceRecordSetsRequest(input)
 //   p := NewListResourceRecordSetsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

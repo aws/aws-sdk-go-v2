@@ -190,7 +190,7 @@ func (r GetPersonTrackingRequest) Send(ctx context.Context) (*GetPersonTrackingR
 //   req := client.GetPersonTrackingRequest(input)
 //   p := NewGetPersonTrackingRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

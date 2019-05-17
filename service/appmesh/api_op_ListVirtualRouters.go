@@ -200,7 +200,7 @@ func (r ListVirtualRoutersRequest) Send(ctx context.Context) (*ListVirtualRouter
 //   req := client.ListVirtualRoutersRequest(input)
 //   p := NewListVirtualRoutersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

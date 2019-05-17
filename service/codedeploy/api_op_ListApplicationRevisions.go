@@ -180,7 +180,7 @@ func (r ListApplicationRevisionsRequest) Send(ctx context.Context) (*ListApplica
 //   req := client.ListApplicationRevisionsRequest(input)
 //   p := NewListApplicationRevisionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

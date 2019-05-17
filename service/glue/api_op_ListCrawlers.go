@@ -136,7 +136,7 @@ func (r ListCrawlersRequest) Send(ctx context.Context) (*ListCrawlersResponse, e
 //   req := client.ListCrawlersRequest(input)
 //   p := NewListCrawlersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

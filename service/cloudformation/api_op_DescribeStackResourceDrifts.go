@@ -185,7 +185,7 @@ func (r DescribeStackResourceDriftsRequest) Send(ctx context.Context) (*Describe
 //   req := client.DescribeStackResourceDriftsRequest(input)
 //   p := NewDescribeStackResourceDriftsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -149,7 +149,7 @@ func (r DescribeEngineDefaultParametersRequest) Send(ctx context.Context) (*Desc
 //   req := client.DescribeEngineDefaultParametersRequest(input)
 //   p := NewDescribeEngineDefaultParametersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

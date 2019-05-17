@@ -160,7 +160,7 @@ func (r ListNamespacesRequest) Send(ctx context.Context) (*ListNamespacesRespons
 //   req := client.ListNamespacesRequest(input)
 //   p := NewListNamespacesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

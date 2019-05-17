@@ -128,7 +128,7 @@ func (r ListBusinessReportSchedulesRequest) Send(ctx context.Context) (*ListBusi
 //   req := client.ListBusinessReportSchedulesRequest(input)
 //   p := NewListBusinessReportSchedulesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

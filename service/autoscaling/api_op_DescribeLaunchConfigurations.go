@@ -123,7 +123,7 @@ func (r DescribeLaunchConfigurationsRequest) Send(ctx context.Context) (*Describ
 //   req := client.DescribeLaunchConfigurationsRequest(input)
 //   p := NewDescribeLaunchConfigurationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

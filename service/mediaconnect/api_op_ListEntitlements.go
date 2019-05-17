@@ -174,7 +174,7 @@ func (r ListEntitlementsRequest) Send(ctx context.Context) (*ListEntitlementsRes
 //   req := client.ListEntitlementsRequest(input)
 //   p := NewListEntitlementsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

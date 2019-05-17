@@ -202,7 +202,7 @@ func (r DescribeRouteTablesRequest) Send(ctx context.Context) (*DescribeRouteTab
 //   req := client.DescribeRouteTablesRequest(input)
 //   p := NewDescribeRouteTablesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

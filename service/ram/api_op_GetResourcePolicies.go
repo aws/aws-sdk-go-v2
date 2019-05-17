@@ -200,7 +200,7 @@ func (r GetResourcePoliciesRequest) Send(ctx context.Context) (*GetResourcePolic
 //   req := client.GetResourcePoliciesRequest(input)
 //   p := NewGetResourcePoliciesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

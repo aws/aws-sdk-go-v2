@@ -209,7 +209,7 @@ func (r ListEventSourceMappingsRequest) Send(ctx context.Context) (*ListEventSou
 //   req := client.ListEventSourceMappingsRequest(input)
 //   p := NewListEventSourceMappingsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

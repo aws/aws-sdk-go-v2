@@ -164,7 +164,7 @@ func (r DescribeGlobalClustersRequest) Send(ctx context.Context) (*DescribeGloba
 //   req := client.DescribeGlobalClustersRequest(input)
 //   p := NewDescribeGlobalClustersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

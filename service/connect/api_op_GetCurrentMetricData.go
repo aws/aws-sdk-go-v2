@@ -322,7 +322,7 @@ func (r GetCurrentMetricDataRequest) Send(ctx context.Context) (*GetCurrentMetri
 //   req := client.GetCurrentMetricDataRequest(input)
 //   p := NewGetCurrentMetricDataRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

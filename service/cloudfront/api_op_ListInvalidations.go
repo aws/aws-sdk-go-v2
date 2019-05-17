@@ -173,7 +173,7 @@ func (r ListInvalidationsRequest) Send(ctx context.Context) (*ListInvalidationsR
 //   req := client.ListInvalidationsRequest(input)
 //   p := NewListInvalidationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

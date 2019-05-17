@@ -144,7 +144,7 @@ func (r DescribeTagsRequest) Send(ctx context.Context) (*DescribeTagsResponse, e
 //   req := client.DescribeTagsRequest(input)
 //   p := NewDescribeTagsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

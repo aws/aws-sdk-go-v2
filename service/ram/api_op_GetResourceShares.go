@@ -232,7 +232,7 @@ func (r GetResourceSharesRequest) Send(ctx context.Context) (*GetResourceSharesR
 //   req := client.GetResourceSharesRequest(input)
 //   p := NewGetResourceSharesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

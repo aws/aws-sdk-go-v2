@@ -177,7 +177,7 @@ func (r DescribeReservedDBInstancesOfferingsRequest) Send(ctx context.Context) (
 //   req := client.DescribeReservedDBInstancesOfferingsRequest(input)
 //   p := NewDescribeReservedDBInstancesOfferingsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

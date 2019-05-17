@@ -117,7 +117,7 @@ func (r ListSubscriptionsRequest) Send(ctx context.Context) (*ListSubscriptionsR
 //   req := client.ListSubscriptionsRequest(input)
 //   p := NewListSubscriptionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

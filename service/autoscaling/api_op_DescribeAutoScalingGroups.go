@@ -126,7 +126,7 @@ func (r DescribeAutoScalingGroupsRequest) Send(ctx context.Context) (*DescribeAu
 //   req := client.DescribeAutoScalingGroupsRequest(input)
 //   p := NewDescribeAutoScalingGroupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

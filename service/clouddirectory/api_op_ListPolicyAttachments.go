@@ -209,7 +209,7 @@ func (r ListPolicyAttachmentsRequest) Send(ctx context.Context) (*ListPolicyAtta
 //   req := client.ListPolicyAttachmentsRequest(input)
 //   p := NewListPolicyAttachmentsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

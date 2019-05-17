@@ -190,7 +190,7 @@ func (r GetLabelDetectionRequest) Send(ctx context.Context) (*GetLabelDetectionR
 //   req := client.GetLabelDetectionRequest(input)
 //   p := NewGetLabelDetectionRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

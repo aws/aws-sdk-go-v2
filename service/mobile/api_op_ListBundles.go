@@ -160,7 +160,7 @@ func (r ListBundlesRequest) Send(ctx context.Context) (*ListBundlesResponse, err
 //   req := client.ListBundlesRequest(input)
 //   p := NewListBundlesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

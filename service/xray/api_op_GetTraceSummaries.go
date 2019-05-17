@@ -246,7 +246,7 @@ func (r GetTraceSummariesRequest) Send(ctx context.Context) (*GetTraceSummariesR
 //   req := client.GetTraceSummariesRequest(input)
 //   p := NewGetTraceSummariesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

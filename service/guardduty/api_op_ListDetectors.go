@@ -172,7 +172,7 @@ func (r ListDetectorsRequest) Send(ctx context.Context) (*ListDetectorsResponse,
 //   req := client.ListDetectorsRequest(input)
 //   p := NewListDetectorsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

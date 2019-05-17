@@ -207,7 +207,7 @@ func (r ListVaultsRequest) Send(ctx context.Context) (*ListVaultsResponse, error
 //   req := client.ListVaultsRequest(input)
 //   p := NewListVaultsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

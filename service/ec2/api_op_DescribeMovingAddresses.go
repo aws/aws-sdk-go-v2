@@ -135,7 +135,7 @@ func (r DescribeMovingAddressesRequest) Send(ctx context.Context) (*DescribeMovi
 //   req := client.DescribeMovingAddressesRequest(input)
 //   p := NewDescribeMovingAddressesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

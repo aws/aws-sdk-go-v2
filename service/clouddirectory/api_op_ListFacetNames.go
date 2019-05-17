@@ -182,7 +182,7 @@ func (r ListFacetNamesRequest) Send(ctx context.Context) (*ListFacetNamesRespons
 //   req := client.ListFacetNamesRequest(input)
 //   p := NewListFacetNamesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

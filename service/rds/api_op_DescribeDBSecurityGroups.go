@@ -150,7 +150,7 @@ func (r DescribeDBSecurityGroupsRequest) Send(ctx context.Context) (*DescribeDBS
 //   req := client.DescribeDBSecurityGroupsRequest(input)
 //   p := NewDescribeDBSecurityGroupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -208,7 +208,7 @@ func (r ListPresetsRequest) Send(ctx context.Context) (*ListPresetsResponse, err
 //   req := client.ListPresetsRequest(input)
 //   p := NewListPresetsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

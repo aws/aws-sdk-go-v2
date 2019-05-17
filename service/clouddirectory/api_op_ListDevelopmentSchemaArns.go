@@ -167,7 +167,7 @@ func (r ListDevelopmentSchemaArnsRequest) Send(ctx context.Context) (*ListDevelo
 //   req := client.ListDevelopmentSchemaArnsRequest(input)
 //   p := NewListDevelopmentSchemaArnsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

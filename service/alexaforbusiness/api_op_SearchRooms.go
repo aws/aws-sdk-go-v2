@@ -158,7 +158,7 @@ func (r SearchRoomsRequest) Send(ctx context.Context) (*SearchRoomsResponse, err
 //   req := client.SearchRoomsRequest(input)
 //   p := NewSearchRoomsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

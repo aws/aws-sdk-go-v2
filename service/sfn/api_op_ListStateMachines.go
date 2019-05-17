@@ -147,7 +147,7 @@ func (r ListStateMachinesRequest) Send(ctx context.Context) (*ListStateMachinesR
 //   req := client.ListStateMachinesRequest(input)
 //   p := NewListStateMachinesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

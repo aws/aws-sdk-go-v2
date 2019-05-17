@@ -170,7 +170,7 @@ func (r ListDatasetsRequest) Send(ctx context.Context) (*ListDatasetsResponse, e
 //   req := client.ListDatasetsRequest(input)
 //   p := NewListDatasetsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

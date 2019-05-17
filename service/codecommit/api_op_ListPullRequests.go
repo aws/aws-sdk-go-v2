@@ -148,7 +148,7 @@ func (r ListPullRequestsRequest) Send(ctx context.Context) (*ListPullRequestsRes
 //   req := client.ListPullRequestsRequest(input)
 //   p := NewListPullRequestsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -119,7 +119,7 @@ func (r ListTaskExecutionsRequest) Send(ctx context.Context) (*ListTaskExecution
 //   req := client.ListTaskExecutionsRequest(input)
 //   p := NewListTaskExecutionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

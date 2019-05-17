@@ -146,7 +146,7 @@ func (r ListReviewableHITsRequest) Send(ctx context.Context) (*ListReviewableHIT
 //   req := client.ListReviewableHITsRequest(input)
 //   p := NewListReviewableHITsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -149,7 +149,7 @@ func (r ListInstancesRequest) Send(ctx context.Context) (*ListInstancesResponse,
 //   req := client.ListInstancesRequest(input)
 //   p := NewListInstancesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

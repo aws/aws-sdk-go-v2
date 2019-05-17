@@ -235,7 +235,7 @@ func (r DescribeNetworkInterfacesRequest) Send(ctx context.Context) (*DescribeNe
 //   req := client.DescribeNetworkInterfacesRequest(input)
 //   p := NewDescribeNetworkInterfacesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

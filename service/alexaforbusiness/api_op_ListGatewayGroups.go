@@ -129,7 +129,7 @@ func (r ListGatewayGroupsRequest) Send(ctx context.Context) (*ListGatewayGroupsR
 //   req := client.ListGatewayGroupsRequest(input)
 //   p := NewListGatewayGroupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

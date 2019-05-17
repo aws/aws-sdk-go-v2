@@ -194,7 +194,7 @@ func (r ListFunctionsRequest) Send(ctx context.Context) (*ListFunctionsResponse,
 //   req := client.ListFunctionsRequest(input)
 //   p := NewListFunctionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

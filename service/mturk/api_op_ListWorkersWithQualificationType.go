@@ -150,7 +150,7 @@ func (r ListWorkersWithQualificationTypeRequest) Send(ctx context.Context) (*Lis
 //   req := client.ListWorkersWithQualificationTypeRequest(input)
 //   p := NewListWorkersWithQualificationTypeRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

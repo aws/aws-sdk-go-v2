@@ -135,7 +135,7 @@ func (r ListStacksRequest) Send(ctx context.Context) (*ListStacksResponse, error
 //   req := client.ListStacksRequest(input)
 //   p := NewListStacksRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

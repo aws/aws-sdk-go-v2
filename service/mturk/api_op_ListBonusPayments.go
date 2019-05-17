@@ -151,7 +151,7 @@ func (r ListBonusPaymentsRequest) Send(ctx context.Context) (*ListBonusPaymentsR
 //   req := client.ListBonusPaymentsRequest(input)
 //   p := NewListBonusPaymentsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

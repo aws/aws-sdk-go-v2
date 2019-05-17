@@ -160,7 +160,7 @@ func (r DescribeTapeRecoveryPointsRequest) Send(ctx context.Context) (*DescribeT
 //   req := client.DescribeTapeRecoveryPointsRequest(input)
 //   p := NewDescribeTapeRecoveryPointsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

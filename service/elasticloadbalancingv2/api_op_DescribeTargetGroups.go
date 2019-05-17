@@ -142,7 +142,7 @@ func (r DescribeTargetGroupsRequest) Send(ctx context.Context) (*DescribeTargetG
 //   req := client.DescribeTargetGroupsRequest(input)
 //   p := NewDescribeTargetGroupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

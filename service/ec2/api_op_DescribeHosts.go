@@ -147,7 +147,7 @@ func (r DescribeHostsRequest) Send(ctx context.Context) (*DescribeHostsResponse,
 //   req := client.DescribeHostsRequest(input)
 //   p := NewDescribeHostsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

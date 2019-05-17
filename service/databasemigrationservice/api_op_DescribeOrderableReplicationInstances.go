@@ -123,7 +123,7 @@ func (r DescribeOrderableReplicationInstancesRequest) Send(ctx context.Context) 
 //   req := client.DescribeOrderableReplicationInstancesRequest(input)
 //   p := NewDescribeOrderableReplicationInstancesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

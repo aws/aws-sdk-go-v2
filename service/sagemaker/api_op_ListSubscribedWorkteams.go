@@ -139,7 +139,7 @@ func (r ListSubscribedWorkteamsRequest) Send(ctx context.Context) (*ListSubscrib
 //   req := client.ListSubscribedWorkteamsRequest(input)
 //   p := NewListSubscribedWorkteamsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

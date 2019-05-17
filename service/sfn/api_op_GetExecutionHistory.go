@@ -163,7 +163,7 @@ func (r GetExecutionHistoryRequest) Send(ctx context.Context) (*GetExecutionHist
 //   req := client.GetExecutionHistoryRequest(input)
 //   p := NewGetExecutionHistoryRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

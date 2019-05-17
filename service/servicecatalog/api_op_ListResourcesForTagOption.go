@@ -143,7 +143,7 @@ func (r ListResourcesForTagOptionRequest) Send(ctx context.Context) (*ListResour
 //   req := client.ListResourcesForTagOptionRequest(input)
 //   p := NewListResourcesForTagOptionRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

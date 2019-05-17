@@ -153,7 +153,7 @@ func (r ListResolverRulesRequest) Send(ctx context.Context) (*ListResolverRulesR
 //   req := client.ListResolverRulesRequest(input)
 //   p := NewListResolverRulesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

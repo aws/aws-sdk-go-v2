@@ -148,7 +148,7 @@ func (r ListFileSharesRequest) Send(ctx context.Context) (*ListFileSharesRespons
 //   req := client.ListFileSharesRequest(input)
 //   p := NewListFileSharesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

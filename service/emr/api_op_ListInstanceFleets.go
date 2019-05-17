@@ -131,7 +131,7 @@ func (r ListInstanceFleetsRequest) Send(ctx context.Context) (*ListInstanceFleet
 //   req := client.ListInstanceFleetsRequest(input)
 //   p := NewListInstanceFleetsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

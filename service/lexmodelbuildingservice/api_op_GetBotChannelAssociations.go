@@ -231,7 +231,7 @@ func (r GetBotChannelAssociationsRequest) Send(ctx context.Context) (*GetBotChan
 //   req := client.GetBotChannelAssociationsRequest(input)
 //   p := NewGetBotChannelAssociationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -166,7 +166,7 @@ func (r ListCompilationJobsRequest) Send(ctx context.Context) (*ListCompilationJ
 //   req := client.ListCompilationJobsRequest(input)
 //   p := NewListCompilationJobsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

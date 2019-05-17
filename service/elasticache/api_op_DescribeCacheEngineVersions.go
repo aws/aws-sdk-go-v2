@@ -148,7 +148,7 @@ func (r DescribeCacheEngineVersionsRequest) Send(ctx context.Context) (*Describe
 //   req := client.DescribeCacheEngineVersionsRequest(input)
 //   p := NewDescribeCacheEngineVersionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

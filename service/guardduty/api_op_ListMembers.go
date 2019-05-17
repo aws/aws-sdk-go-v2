@@ -194,7 +194,7 @@ func (r ListMembersRequest) Send(ctx context.Context) (*ListMembersResponse, err
 //   req := client.ListMembersRequest(input)
 //   p := NewListMembersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

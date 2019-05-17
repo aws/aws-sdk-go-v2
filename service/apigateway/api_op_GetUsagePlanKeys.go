@@ -192,7 +192,7 @@ func (r GetUsagePlanKeysRequest) Send(ctx context.Context) (*GetUsagePlanKeysRes
 //   req := client.GetUsagePlanKeysRequest(input)
 //   p := NewGetUsagePlanKeysRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -137,7 +137,7 @@ func (r ListSmartHomeAppliancesRequest) Send(ctx context.Context) (*ListSmartHom
 //   req := client.ListSmartHomeAppliancesRequest(input)
 //   p := NewListSmartHomeAppliancesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

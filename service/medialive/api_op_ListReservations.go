@@ -228,7 +228,7 @@ func (r ListReservationsRequest) Send(ctx context.Context) (*ListReservationsRes
 //   req := client.ListReservationsRequest(input)
 //   p := NewListReservationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

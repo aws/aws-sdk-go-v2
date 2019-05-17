@@ -138,7 +138,7 @@ func (r ListKeyPhrasesDetectionJobsRequest) Send(ctx context.Context) (*ListKeyP
 //   req := client.ListKeyPhrasesDetectionJobsRequest(input)
 //   p := NewListKeyPhrasesDetectionJobsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

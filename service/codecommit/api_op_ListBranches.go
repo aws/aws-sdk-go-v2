@@ -133,7 +133,7 @@ func (r ListBranchesRequest) Send(ctx context.Context) (*ListBranchesResponse, e
 //   req := client.ListBranchesRequest(input)
 //   p := NewListBranchesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -276,7 +276,7 @@ func (r DescribeUsersRequest) Send(ctx context.Context) (*DescribeUsersResponse,
 //   req := client.DescribeUsersRequest(input)
 //   p := NewDescribeUsersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

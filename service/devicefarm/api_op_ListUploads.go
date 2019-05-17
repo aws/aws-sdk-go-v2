@@ -220,7 +220,7 @@ func (r ListUploadsRequest) Send(ctx context.Context) (*ListUploadsResponse, err
 //   req := client.ListUploadsRequest(input)
 //   p := NewListUploadsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

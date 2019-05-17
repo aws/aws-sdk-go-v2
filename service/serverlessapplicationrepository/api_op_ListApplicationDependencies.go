@@ -185,7 +185,7 @@ func (r ListApplicationDependenciesRequest) Send(ctx context.Context) (*ListAppl
 //   req := client.ListApplicationDependenciesRequest(input)
 //   p := NewListApplicationDependenciesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -129,7 +129,7 @@ func (r ListConferenceProvidersRequest) Send(ctx context.Context) (*ListConferen
 //   req := client.ListConferenceProvidersRequest(input)
 //   p := NewListConferenceProvidersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

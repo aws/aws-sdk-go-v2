@@ -158,7 +158,7 @@ func (r ListQualificationTypesRequest) Send(ctx context.Context) (*ListQualifica
 //   req := client.ListQualificationTypesRequest(input)
 //   p := NewListQualificationTypesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

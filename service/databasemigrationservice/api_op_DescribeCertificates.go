@@ -140,7 +140,7 @@ func (r DescribeCertificatesRequest) Send(ctx context.Context) (*DescribeCertifi
 //   req := client.DescribeCertificatesRequest(input)
 //   p := NewDescribeCertificatesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -157,7 +157,7 @@ func (r DescribeReservedInstancesModificationsRequest) Send(ctx context.Context)
 //   req := client.DescribeReservedInstancesModificationsRequest(input)
 //   p := NewDescribeReservedInstancesModificationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

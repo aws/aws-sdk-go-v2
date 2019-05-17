@@ -121,7 +121,7 @@ func (r ListDashboardsRequest) Send(ctx context.Context) (*ListDashboardsRespons
 //   req := client.ListDashboardsRequest(input)
 //   p := NewListDashboardsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

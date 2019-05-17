@@ -223,7 +223,7 @@ func (r ListRobotApplicationsRequest) Send(ctx context.Context) (*ListRobotAppli
 //   req := client.ListRobotApplicationsRequest(input)
 //   p := NewListRobotApplicationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -190,7 +190,7 @@ func (r ListActivityTypesRequest) Send(ctx context.Context) (*ListActivityTypesR
 //   req := client.ListActivityTypesRequest(input)
 //   p := NewListActivityTypesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

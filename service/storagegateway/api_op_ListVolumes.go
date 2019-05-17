@@ -167,7 +167,7 @@ func (r ListVolumesRequest) Send(ctx context.Context) (*ListVolumesResponse, err
 //   req := client.ListVolumesRequest(input)
 //   p := NewListVolumesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

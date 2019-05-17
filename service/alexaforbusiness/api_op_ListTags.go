@@ -141,7 +141,7 @@ func (r ListTagsRequest) Send(ctx context.Context) (*ListTagsResponse, error) {
 //   req := client.ListTagsRequest(input)
 //   p := NewListTagsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

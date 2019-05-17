@@ -135,7 +135,7 @@ func (r GetDatabasesRequest) Send(ctx context.Context) (*GetDatabasesResponse, e
 //   req := client.GetDatabasesRequest(input)
 //   p := NewGetDatabasesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

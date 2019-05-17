@@ -151,7 +151,7 @@ func (r AdminListUserAuthEventsRequest) Send(ctx context.Context) (*AdminListUse
 //   req := client.AdminListUserAuthEventsRequest(input)
 //   p := NewAdminListUserAuthEventsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

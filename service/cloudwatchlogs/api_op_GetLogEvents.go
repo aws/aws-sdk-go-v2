@@ -183,7 +183,7 @@ func (r GetLogEventsRequest) Send(ctx context.Context) (*GetLogEventsResponse, e
 //   req := client.GetLogEventsRequest(input)
 //   p := NewGetLogEventsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

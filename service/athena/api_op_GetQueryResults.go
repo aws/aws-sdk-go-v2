@@ -141,7 +141,7 @@ func (r GetQueryResultsRequest) Send(ctx context.Context) (*GetQueryResultsRespo
 //   req := client.GetQueryResultsRequest(input)
 //   p := NewGetQueryResultsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

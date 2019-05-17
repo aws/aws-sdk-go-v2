@@ -145,7 +145,7 @@ func (r ListPortfoliosForProductRequest) Send(ctx context.Context) (*ListPortfol
 //   req := client.ListPortfoliosForProductRequest(input)
 //   p := NewListPortfoliosForProductRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

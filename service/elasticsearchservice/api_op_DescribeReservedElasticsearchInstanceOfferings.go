@@ -164,7 +164,7 @@ func (r DescribeReservedElasticsearchInstanceOfferingsRequest) Send(ctx context.
 //   req := client.DescribeReservedElasticsearchInstanceOfferingsRequest(input)
 //   p := NewDescribeReservedElasticsearchInstanceOfferingsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

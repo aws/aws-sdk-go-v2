@@ -147,7 +147,7 @@ func (r DescribeReplicationInstancesRequest) Send(ctx context.Context) (*Describ
 //   req := client.DescribeReplicationInstancesRequest(input)
 //   p := NewDescribeReplicationInstancesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

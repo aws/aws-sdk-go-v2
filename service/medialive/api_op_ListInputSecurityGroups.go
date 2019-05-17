@@ -164,7 +164,7 @@ func (r ListInputSecurityGroupsRequest) Send(ctx context.Context) (*ListInputSec
 //   req := client.ListInputSecurityGroupsRequest(input)
 //   p := NewListInputSecurityGroupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

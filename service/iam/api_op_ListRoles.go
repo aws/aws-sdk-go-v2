@@ -170,7 +170,7 @@ func (r ListRolesRequest) Send(ctx context.Context) (*ListRolesResponse, error) 
 //   req := client.ListRolesRequest(input)
 //   p := NewListRolesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

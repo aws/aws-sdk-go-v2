@@ -155,7 +155,7 @@ func (r ListComplianceStatusRequest) Send(ctx context.Context) (*ListComplianceS
 //   req := client.ListComplianceStatusRequest(input)
 //   p := NewListComplianceStatusRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

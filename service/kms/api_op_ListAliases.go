@@ -163,7 +163,7 @@ func (r ListAliasesRequest) Send(ctx context.Context) (*ListAliasesResponse, err
 //   req := client.ListAliasesRequest(input)
 //   p := NewListAliasesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

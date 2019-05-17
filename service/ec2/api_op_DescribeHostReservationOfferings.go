@@ -162,7 +162,7 @@ func (r DescribeHostReservationOfferingsRequest) Send(ctx context.Context) (*Des
 //   req := client.DescribeHostReservationOfferingsRequest(input)
 //   p := NewDescribeHostReservationOfferingsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

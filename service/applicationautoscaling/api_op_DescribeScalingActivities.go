@@ -223,7 +223,7 @@ func (r DescribeScalingActivitiesRequest) Send(ctx context.Context) (*DescribeSc
 //   req := client.DescribeScalingActivitiesRequest(input)
 //   p := NewDescribeScalingActivitiesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

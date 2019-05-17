@@ -212,7 +212,7 @@ func (r ListObjectChildrenRequest) Send(ctx context.Context) (*ListObjectChildre
 //   req := client.ListObjectChildrenRequest(input)
 //   p := NewListObjectChildrenRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

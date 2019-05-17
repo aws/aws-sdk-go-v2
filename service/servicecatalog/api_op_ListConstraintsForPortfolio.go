@@ -151,7 +151,7 @@ func (r ListConstraintsForPortfolioRequest) Send(ctx context.Context) (*ListCons
 //   req := client.ListConstraintsForPortfolioRequest(input)
 //   p := NewListConstraintsForPortfolioRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

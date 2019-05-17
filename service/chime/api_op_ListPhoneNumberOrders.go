@@ -167,7 +167,7 @@ func (r ListPhoneNumberOrdersRequest) Send(ctx context.Context) (*ListPhoneNumbe
 //   req := client.ListPhoneNumberOrdersRequest(input)
 //   p := NewListPhoneNumberOrdersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

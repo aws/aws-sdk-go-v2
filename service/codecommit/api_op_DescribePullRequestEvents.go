@@ -145,7 +145,7 @@ func (r DescribePullRequestEventsRequest) Send(ctx context.Context) (*DescribePu
 //   req := client.DescribePullRequestEventsRequest(input)
 //   p := NewDescribePullRequestEventsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

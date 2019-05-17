@@ -132,7 +132,7 @@ func (r ListOfferingTransactionsRequest) Send(ctx context.Context) (*ListOfferin
 //   req := client.ListOfferingTransactionsRequest(input)
 //   p := NewListOfferingTransactionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

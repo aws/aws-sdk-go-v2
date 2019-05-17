@@ -126,7 +126,7 @@ func (r ListAgentsRequest) Send(ctx context.Context) (*ListAgentsResponse, error
 //   req := client.ListAgentsRequest(input)
 //   p := NewListAgentsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -523,7 +523,7 @@ func (r QueryRequest) Send(ctx context.Context) (*QueryResponse, error) {
 //   req := client.QueryRequest(input)
 //   p := NewQueryRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

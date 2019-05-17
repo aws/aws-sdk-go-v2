@@ -161,7 +161,7 @@ func (r ListTapesRequest) Send(ctx context.Context) (*ListTapesResponse, error) 
 //   req := client.ListTapesRequest(input)
 //   p := NewListTapesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

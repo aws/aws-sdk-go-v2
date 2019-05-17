@@ -163,7 +163,7 @@ func (r GetUsagePlansRequest) Send(ctx context.Context) (*GetUsagePlansResponse,
 //   req := client.GetUsagePlansRequest(input)
 //   p := NewGetUsagePlansRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -179,7 +179,7 @@ func (r GetModelsRequest) Send(ctx context.Context) (*GetModelsResponse, error) 
 //   req := client.GetModelsRequest(input)
 //   p := NewGetModelsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

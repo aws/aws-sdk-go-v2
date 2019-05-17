@@ -353,7 +353,7 @@ func (r SimulatePrincipalPolicyRequest) Send(ctx context.Context) (*SimulatePrin
 //   req := client.SimulatePrincipalPolicyRequest(input)
 //   p := NewSimulatePrincipalPolicyRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

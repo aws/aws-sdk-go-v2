@@ -133,7 +133,7 @@ func (r ListTagOptionsRequest) Send(ctx context.Context) (*ListTagOptionsRespons
 //   req := client.ListTagOptionsRequest(input)
 //   p := NewListTagOptionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

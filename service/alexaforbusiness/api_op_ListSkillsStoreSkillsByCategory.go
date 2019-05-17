@@ -140,7 +140,7 @@ func (r ListSkillsStoreSkillsByCategoryRequest) Send(ctx context.Context) (*List
 //   req := client.ListSkillsStoreSkillsByCategoryRequest(input)
 //   p := NewListSkillsStoreSkillsByCategoryRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

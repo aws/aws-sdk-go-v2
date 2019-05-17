@@ -175,7 +175,7 @@ func (r GetResourceConfigHistoryRequest) Send(ctx context.Context) (*GetResource
 //   req := client.GetResourceConfigHistoryRequest(input)
 //   p := NewGetResourceConfigHistoryRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

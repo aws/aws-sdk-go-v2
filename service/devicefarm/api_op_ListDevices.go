@@ -190,7 +190,7 @@ func (r ListDevicesRequest) Send(ctx context.Context) (*ListDevicesResponse, err
 //   req := client.ListDevicesRequest(input)
 //   p := NewListDevicesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

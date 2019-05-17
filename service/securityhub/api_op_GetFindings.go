@@ -198,7 +198,7 @@ func (r GetFindingsRequest) Send(ctx context.Context) (*GetFindingsResponse, err
 //   req := client.GetFindingsRequest(input)
 //   p := NewGetFindingsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

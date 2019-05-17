@@ -196,7 +196,7 @@ func (r GetSlotTypesRequest) Send(ctx context.Context) (*GetSlotTypesResponse, e
 //   req := client.GetSlotTypesRequest(input)
 //   p := NewGetSlotTypesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

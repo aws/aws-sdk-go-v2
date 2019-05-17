@@ -150,7 +150,7 @@ func (r DescribeClassicLinkInstancesRequest) Send(ctx context.Context) (*Describ
 //   req := client.DescribeClassicLinkInstancesRequest(input)
 //   p := NewDescribeClassicLinkInstancesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

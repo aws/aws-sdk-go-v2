@@ -215,7 +215,7 @@ func (r ListDeploymentJobsRequest) Send(ctx context.Context) (*ListDeploymentJob
 //   req := client.ListDeploymentJobsRequest(input)
 //   p := NewListDeploymentJobsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

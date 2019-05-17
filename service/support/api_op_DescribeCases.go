@@ -169,7 +169,7 @@ func (r DescribeCasesRequest) Send(ctx context.Context) (*DescribeCasesResponse,
 //   req := client.DescribeCasesRequest(input)
 //   p := NewDescribeCasesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

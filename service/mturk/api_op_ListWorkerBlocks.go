@@ -135,7 +135,7 @@ func (r ListWorkerBlocksRequest) Send(ctx context.Context) (*ListWorkerBlocksRes
 //   req := client.ListWorkerBlocksRequest(input)
 //   p := NewListWorkerBlocksRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

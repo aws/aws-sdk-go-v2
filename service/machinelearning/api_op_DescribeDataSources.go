@@ -181,7 +181,7 @@ func (r DescribeDataSourcesRequest) Send(ctx context.Context) (*DescribeDataSour
 //   req := client.DescribeDataSourcesRequest(input)
 //   p := NewDescribeDataSourcesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

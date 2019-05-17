@@ -170,7 +170,7 @@ func (r ListKeyPoliciesRequest) Send(ctx context.Context) (*ListKeyPoliciesRespo
 //   req := client.ListKeyPoliciesRequest(input)
 //   p := NewListKeyPoliciesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

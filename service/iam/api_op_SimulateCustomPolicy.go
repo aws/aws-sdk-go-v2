@@ -331,7 +331,7 @@ func (r SimulateCustomPolicyRequest) Send(ctx context.Context) (*SimulateCustomP
 //   req := client.SimulateCustomPolicyRequest(input)
 //   p := NewSimulateCustomPolicyRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

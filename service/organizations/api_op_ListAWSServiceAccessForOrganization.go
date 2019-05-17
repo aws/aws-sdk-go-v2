@@ -152,7 +152,7 @@ func (r ListAWSServiceAccessForOrganizationRequest) Send(ctx context.Context) (*
 //   req := client.ListAWSServiceAccessForOrganizationRequest(input)
 //   p := NewListAWSServiceAccessForOrganizationRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

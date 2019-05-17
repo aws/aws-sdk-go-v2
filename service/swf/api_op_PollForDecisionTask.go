@@ -252,7 +252,7 @@ func (r PollForDecisionTaskRequest) Send(ctx context.Context) (*PollForDecisionT
 //   req := client.PollForDecisionTaskRequest(input)
 //   p := NewPollForDecisionTaskRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

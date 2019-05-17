@@ -203,7 +203,7 @@ func (r ListSigningPlatformsRequest) Send(ctx context.Context) (*ListSigningPlat
 //   req := client.ListSigningPlatformsRequest(input)
 //   p := NewListSigningPlatformsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

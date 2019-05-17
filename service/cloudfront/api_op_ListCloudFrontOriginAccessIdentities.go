@@ -145,7 +145,7 @@ func (r ListCloudFrontOriginAccessIdentitiesRequest) Send(ctx context.Context) (
 //   req := client.ListCloudFrontOriginAccessIdentitiesRequest(input)
 //   p := NewListCloudFrontOriginAccessIdentitiesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

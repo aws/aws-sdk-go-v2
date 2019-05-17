@@ -189,7 +189,7 @@ func (r LookupEventsRequest) Send(ctx context.Context) (*LookupEventsResponse, e
 //   req := client.LookupEventsRequest(input)
 //   p := NewLookupEventsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

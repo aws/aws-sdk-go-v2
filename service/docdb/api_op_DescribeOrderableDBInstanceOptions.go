@@ -170,7 +170,7 @@ func (r DescribeOrderableDBInstanceOptionsRequest) Send(ctx context.Context) (*D
 //   req := client.DescribeOrderableDBInstanceOptionsRequest(input)
 //   p := NewDescribeOrderableDBInstanceOptionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

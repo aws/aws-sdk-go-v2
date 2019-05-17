@@ -159,7 +159,7 @@ func (r ListServiceActionsForProvisioningArtifactRequest) Send(ctx context.Conte
 //   req := client.ListServiceActionsForProvisioningArtifactRequest(input)
 //   p := NewListServiceActionsForProvisioningArtifactRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

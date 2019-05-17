@@ -169,7 +169,7 @@ func (r ListTasksRequest) Send(ctx context.Context) (*ListTasksResponse, error) 
 //   req := client.ListTasksRequest(input)
 //   p := NewListTasksRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

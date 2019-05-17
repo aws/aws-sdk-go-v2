@@ -150,7 +150,7 @@ func (r GetAttributeValuesRequest) Send(ctx context.Context) (*GetAttributeValue
 //   req := client.GetAttributeValuesRequest(input)
 //   p := NewGetAttributeValuesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

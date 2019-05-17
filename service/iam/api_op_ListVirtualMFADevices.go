@@ -162,7 +162,7 @@ func (r ListVirtualMFADevicesRequest) Send(ctx context.Context) (*ListVirtualMFA
 //   req := client.ListVirtualMFADevicesRequest(input)
 //   p := NewListVirtualMFADevicesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

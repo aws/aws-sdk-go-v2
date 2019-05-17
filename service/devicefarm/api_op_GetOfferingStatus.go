@@ -135,7 +135,7 @@ func (r GetOfferingStatusRequest) Send(ctx context.Context) (*GetOfferingStatusR
 //   req := client.GetOfferingStatusRequest(input)
 //   p := NewGetOfferingStatusRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

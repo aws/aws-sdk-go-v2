@@ -185,7 +185,7 @@ func (r DescribeScheduledInstanceAvailabilityRequest) Send(ctx context.Context) 
 //   req := client.DescribeScheduledInstanceAvailabilityRequest(input)
 //   p := NewDescribeScheduledInstanceAvailabilityRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

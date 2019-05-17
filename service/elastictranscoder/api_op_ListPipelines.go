@@ -158,7 +158,7 @@ func (r ListPipelinesRequest) Send(ctx context.Context) (*ListPipelinesResponse,
 //   req := client.ListPipelinesRequest(input)
 //   p := NewListPipelinesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

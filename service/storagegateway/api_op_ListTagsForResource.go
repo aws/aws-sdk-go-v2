@@ -151,7 +151,7 @@ func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResou
 //   req := client.ListTagsForResourceRequest(input)
 //   p := NewListTagsForResourceRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

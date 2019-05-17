@@ -135,7 +135,7 @@ func (r DescribePrefixListsRequest) Send(ctx context.Context) (*DescribePrefixLi
 //   req := client.DescribePrefixListsRequest(input)
 //   p := NewDescribePrefixListsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

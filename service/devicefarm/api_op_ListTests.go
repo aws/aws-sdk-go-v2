@@ -139,7 +139,7 @@ func (r ListTestsRequest) Send(ctx context.Context) (*ListTestsResponse, error) 
 //   req := client.ListTestsRequest(input)
 //   p := NewListTestsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

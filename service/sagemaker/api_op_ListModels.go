@@ -148,7 +148,7 @@ func (r ListModelsRequest) Send(ctx context.Context) (*ListModelsResponse, error
 //   req := client.ListModelsRequest(input)
 //   p := NewListModelsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -155,7 +155,7 @@ func (r ListArtifactsRequest) Send(ctx context.Context) (*ListArtifactsResponse,
 //   req := client.ListArtifactsRequest(input)
 //   p := NewListArtifactsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

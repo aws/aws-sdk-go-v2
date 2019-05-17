@@ -173,7 +173,7 @@ func (r ListFlowsRequest) Send(ctx context.Context) (*ListFlowsResponse, error) 
 //   req := client.ListFlowsRequest(input)
 //   p := NewListFlowsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

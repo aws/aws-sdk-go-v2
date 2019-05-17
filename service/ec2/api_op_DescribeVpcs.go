@@ -184,7 +184,7 @@ func (r DescribeVpcsRequest) Send(ctx context.Context) (*DescribeVpcsResponse, e
 //   req := client.DescribeVpcsRequest(input)
 //   p := NewDescribeVpcsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

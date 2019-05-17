@@ -135,7 +135,7 @@ func (r ListCertificateAuthoritiesRequest) Send(ctx context.Context) (*ListCerti
 //   req := client.ListCertificateAuthoritiesRequest(input)
 //   p := NewListCertificateAuthoritiesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

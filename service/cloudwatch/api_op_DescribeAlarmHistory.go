@@ -146,7 +146,7 @@ func (r DescribeAlarmHistoryRequest) Send(ctx context.Context) (*DescribeAlarmHi
 //   req := client.DescribeAlarmHistoryRequest(input)
 //   p := NewDescribeAlarmHistoryRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

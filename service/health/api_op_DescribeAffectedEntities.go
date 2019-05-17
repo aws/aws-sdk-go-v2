@@ -162,7 +162,7 @@ func (r DescribeAffectedEntitiesRequest) Send(ctx context.Context) (*DescribeAff
 //   req := client.DescribeAffectedEntitiesRequest(input)
 //   p := NewDescribeAffectedEntitiesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

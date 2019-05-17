@@ -188,7 +188,7 @@ func (r GetInsightsRequest) Send(ctx context.Context) (*GetInsightsResponse, err
 //   req := client.GetInsightsRequest(input)
 //   p := NewGetInsightsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

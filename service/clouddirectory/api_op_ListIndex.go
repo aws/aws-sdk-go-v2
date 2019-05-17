@@ -231,7 +231,7 @@ func (r ListIndexRequest) Send(ctx context.Context) (*ListIndexResponse, error) 
 //   req := client.ListIndexRequest(input)
 //   p := NewListIndexRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

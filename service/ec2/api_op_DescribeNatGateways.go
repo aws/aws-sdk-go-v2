@@ -139,7 +139,7 @@ func (r DescribeNatGatewaysRequest) Send(ctx context.Context) (*DescribeNatGatew
 //   req := client.DescribeNatGatewaysRequest(input)
 //   p := NewDescribeNatGatewaysRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

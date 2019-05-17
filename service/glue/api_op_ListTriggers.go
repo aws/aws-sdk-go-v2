@@ -144,7 +144,7 @@ func (r ListTriggersRequest) Send(ctx context.Context) (*ListTriggersResponse, e
 //   req := client.ListTriggersRequest(input)
 //   p := NewListTriggersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

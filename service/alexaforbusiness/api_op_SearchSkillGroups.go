@@ -160,7 +160,7 @@ func (r SearchSkillGroupsRequest) Send(ctx context.Context) (*SearchSkillGroupsR
 //   req := client.SearchSkillGroupsRequest(input)
 //   p := NewSearchSkillGroupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

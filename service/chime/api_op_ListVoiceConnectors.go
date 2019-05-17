@@ -167,7 +167,7 @@ func (r ListVoiceConnectorsRequest) Send(ctx context.Context) (*ListVoiceConnect
 //   req := client.ListVoiceConnectorsRequest(input)
 //   p := NewListVoiceConnectorsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

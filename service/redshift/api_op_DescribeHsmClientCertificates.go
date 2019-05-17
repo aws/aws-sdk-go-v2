@@ -163,7 +163,7 @@ func (r DescribeHsmClientCertificatesRequest) Send(ctx context.Context) (*Descri
 //   req := client.DescribeHsmClientCertificatesRequest(input)
 //   p := NewDescribeHsmClientCertificatesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -208,7 +208,7 @@ func (r ListFindingsRequest) Send(ctx context.Context) (*ListFindingsResponse, e
 //   req := client.ListFindingsRequest(input)
 //   p := NewListFindingsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

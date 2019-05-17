@@ -213,7 +213,7 @@ func (r ListFleetsRequest) Send(ctx context.Context) (*ListFleetsResponse, error
 //   req := client.ListFleetsRequest(input)
 //   p := NewListFleetsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

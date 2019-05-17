@@ -118,7 +118,7 @@ func (r GetReplicationJobsRequest) Send(ctx context.Context) (*GetReplicationJob
 //   req := client.GetReplicationJobsRequest(input)
 //   p := NewGetReplicationJobsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

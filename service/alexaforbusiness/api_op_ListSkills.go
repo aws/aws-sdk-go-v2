@@ -143,7 +143,7 @@ func (r ListSkillsRequest) Send(ctx context.Context) (*ListSkillsResponse, error
 //   req := client.ListSkillsRequest(input)
 //   p := NewListSkillsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

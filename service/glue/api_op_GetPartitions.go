@@ -238,7 +238,7 @@ func (r GetPartitionsRequest) Send(ctx context.Context) (*GetPartitionsResponse,
 //   req := client.GetPartitionsRequest(input)
 //   p := NewGetPartitionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

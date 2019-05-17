@@ -113,7 +113,7 @@ func (r GetTagKeysRequest) Send(ctx context.Context) (*GetTagKeysResponse, error
 //   req := client.GetTagKeysRequest(input)
 //   p := NewGetTagKeysRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

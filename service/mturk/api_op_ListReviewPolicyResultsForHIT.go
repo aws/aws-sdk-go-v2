@@ -173,7 +173,7 @@ func (r ListReviewPolicyResultsForHITRequest) Send(ctx context.Context) (*ListRe
 //   req := client.ListReviewPolicyResultsForHITRequest(input)
 //   p := NewListReviewPolicyResultsForHITRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

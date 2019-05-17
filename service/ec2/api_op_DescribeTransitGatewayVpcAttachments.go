@@ -150,7 +150,7 @@ func (r DescribeTransitGatewayVpcAttachmentsRequest) Send(ctx context.Context) (
 //   req := client.DescribeTransitGatewayVpcAttachmentsRequest(input)
 //   p := NewDescribeTransitGatewayVpcAttachmentsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

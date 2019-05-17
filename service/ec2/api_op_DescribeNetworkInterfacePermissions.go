@@ -135,7 +135,7 @@ func (r DescribeNetworkInterfacePermissionsRequest) Send(ctx context.Context) (*
 //   req := client.DescribeNetworkInterfacePermissionsRequest(input)
 //   p := NewDescribeNetworkInterfacePermissionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

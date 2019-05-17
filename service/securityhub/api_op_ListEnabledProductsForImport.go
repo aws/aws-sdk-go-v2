@@ -172,7 +172,7 @@ func (r ListEnabledProductsForImportRequest) Send(ctx context.Context) (*ListEna
 //   req := client.ListEnabledProductsForImportRequest(input)
 //   p := NewListEnabledProductsForImportRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

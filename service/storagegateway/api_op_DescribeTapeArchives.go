@@ -147,7 +147,7 @@ func (r DescribeTapeArchivesRequest) Send(ctx context.Context) (*DescribeTapeArc
 //   req := client.DescribeTapeArchivesRequest(input)
 //   p := NewDescribeTapeArchivesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

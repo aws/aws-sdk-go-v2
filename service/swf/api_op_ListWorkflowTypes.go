@@ -189,7 +189,7 @@ func (r ListWorkflowTypesRequest) Send(ctx context.Context) (*ListWorkflowTypesR
 //   req := client.ListWorkflowTypesRequest(input)
 //   p := NewListWorkflowTypesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -150,7 +150,7 @@ func (r GetProductsRequest) Send(ctx context.Context) (*GetProductsResponse, err
 //   req := client.GetProductsRequest(input)
 //   p := NewGetProductsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

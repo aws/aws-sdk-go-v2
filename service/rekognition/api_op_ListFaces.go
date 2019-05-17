@@ -143,7 +143,7 @@ func (r ListFacesRequest) Send(ctx context.Context) (*ListFacesResponse, error) 
 //   req := client.ListFacesRequest(input)
 //   p := NewListFacesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

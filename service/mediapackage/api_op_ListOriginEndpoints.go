@@ -172,7 +172,7 @@ func (r ListOriginEndpointsRequest) Send(ctx context.Context) (*ListOriginEndpoi
 //   req := client.ListOriginEndpointsRequest(input)
 //   p := NewListOriginEndpointsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

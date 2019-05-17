@@ -143,7 +143,7 @@ func (r ListAssociationsRequest) Send(ctx context.Context) (*ListAssociationsRes
 //   req := client.ListAssociationsRequest(input)
 //   p := NewListAssociationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

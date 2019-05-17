@@ -449,7 +449,7 @@ func (r ScanRequest) Send(ctx context.Context) (*ScanResponse, error) {
 //   req := client.ScanRequest(input)
 //   p := NewScanRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -185,7 +185,7 @@ func (r ListMeshesRequest) Send(ctx context.Context) (*ListMeshesResponse, error
 //   req := client.ListMeshesRequest(input)
 //   p := NewListMeshesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

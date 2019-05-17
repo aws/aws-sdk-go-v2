@@ -123,7 +123,7 @@ func (r DescribeNotificationConfigurationsRequest) Send(ctx context.Context) (*D
 //   req := client.DescribeNotificationConfigurationsRequest(input)
 //   p := NewDescribeNotificationConfigurationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

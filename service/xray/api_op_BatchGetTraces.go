@@ -193,7 +193,7 @@ func (r BatchGetTracesRequest) Send(ctx context.Context) (*BatchGetTracesRespons
 //   req := client.BatchGetTracesRequest(input)
 //   p := NewBatchGetTracesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

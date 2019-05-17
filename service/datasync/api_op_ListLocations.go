@@ -121,7 +121,7 @@ func (r ListLocationsRequest) Send(ctx context.Context) (*ListLocationsResponse,
 //   req := client.ListLocationsRequest(input)
 //   p := NewListLocationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

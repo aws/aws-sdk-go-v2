@@ -143,7 +143,7 @@ func (r DescribeReplicationSubnetGroupsRequest) Send(ctx context.Context) (*Desc
 //   req := client.DescribeReplicationSubnetGroupsRequest(input)
 //   p := NewDescribeReplicationSubnetGroupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

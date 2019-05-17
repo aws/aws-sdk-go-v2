@@ -150,7 +150,7 @@ func (r DescribeStaleSecurityGroupsRequest) Send(ctx context.Context) (*Describe
 //   req := client.DescribeStaleSecurityGroupsRequest(input)
 //   p := NewDescribeStaleSecurityGroupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

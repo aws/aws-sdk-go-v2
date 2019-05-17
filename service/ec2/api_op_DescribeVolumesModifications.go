@@ -140,7 +140,7 @@ func (r DescribeVolumesModificationsRequest) Send(ctx context.Context) (*Describ
 //   req := client.DescribeVolumesModificationsRequest(input)
 //   p := NewDescribeVolumesModificationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

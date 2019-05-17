@@ -176,7 +176,7 @@ func (r ListRestoreJobsRequest) Send(ctx context.Context) (*ListRestoreJobsRespo
 //   req := client.ListRestoreJobsRequest(input)
 //   p := NewListRestoreJobsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

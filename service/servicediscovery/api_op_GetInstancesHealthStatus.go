@@ -160,7 +160,7 @@ func (r GetInstancesHealthStatusRequest) Send(ctx context.Context) (*GetInstance
 //   req := client.GetInstancesHealthStatusRequest(input)
 //   p := NewGetInstancesHealthStatusRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -149,7 +149,7 @@ func (r GetTablesRequest) Send(ctx context.Context) (*GetTablesResponse, error) 
 //   req := client.GetTablesRequest(input)
 //   p := NewGetTablesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

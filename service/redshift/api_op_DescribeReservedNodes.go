@@ -130,7 +130,7 @@ func (r DescribeReservedNodesRequest) Send(ctx context.Context) (*DescribeReserv
 //   req := client.DescribeReservedNodesRequest(input)
 //   p := NewDescribeReservedNodesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

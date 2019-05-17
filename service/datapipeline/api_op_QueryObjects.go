@@ -163,7 +163,7 @@ func (r QueryObjectsRequest) Send(ctx context.Context) (*QueryObjectsResponse, e
 //   req := client.QueryObjectsRequest(input)
 //   p := NewQueryObjectsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

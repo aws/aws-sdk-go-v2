@@ -139,7 +139,7 @@ func (r ListJobsRequest) Send(ctx context.Context) (*ListJobsResponse, error) {
 //   req := client.ListJobsRequest(input)
 //   p := NewListJobsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

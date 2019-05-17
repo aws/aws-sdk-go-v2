@@ -139,7 +139,7 @@ func (r ListIdentityProvidersRequest) Send(ctx context.Context) (*ListIdentityPr
 //   req := client.ListIdentityProvidersRequest(input)
 //   p := NewListIdentityProvidersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -167,7 +167,7 @@ func (r DescribeSpotPriceHistoryRequest) Send(ctx context.Context) (*DescribeSpo
 //   req := client.DescribeSpotPriceHistoryRequest(input)
 //   p := NewDescribeSpotPriceHistoryRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

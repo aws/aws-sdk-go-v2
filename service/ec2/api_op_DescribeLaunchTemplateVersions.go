@@ -173,7 +173,7 @@ func (r DescribeLaunchTemplateVersionsRequest) Send(ctx context.Context) (*Descr
 //   req := client.DescribeLaunchTemplateVersionsRequest(input)
 //   p := NewDescribeLaunchTemplateVersionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

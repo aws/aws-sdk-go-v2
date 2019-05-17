@@ -196,7 +196,7 @@ func (r GetBotsRequest) Send(ctx context.Context) (*GetBotsResponse, error) {
 //   req := client.GetBotsRequest(input)
 //   p := NewGetBotsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

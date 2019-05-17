@@ -157,7 +157,7 @@ func (r ListTrainingJobsForHyperParameterTuningJobRequest) Send(ctx context.Cont
 //   req := client.ListTrainingJobsForHyperParameterTuningJobRequest(input)
 //   p := NewListTrainingJobsForHyperParameterTuningJobRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

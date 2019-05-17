@@ -200,7 +200,7 @@ func (r ListVirtualServicesRequest) Send(ctx context.Context) (*ListVirtualServi
 //   req := client.ListVirtualServicesRequest(input)
 //   p := NewListVirtualServicesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

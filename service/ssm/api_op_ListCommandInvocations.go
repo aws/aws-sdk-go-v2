@@ -161,7 +161,7 @@ func (r ListCommandInvocationsRequest) Send(ctx context.Context) (*ListCommandIn
 //   req := client.ListCommandInvocationsRequest(input)
 //   p := NewListCommandInvocationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

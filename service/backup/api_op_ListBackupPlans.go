@@ -187,7 +187,7 @@ func (r ListBackupPlansRequest) Send(ctx context.Context) (*ListBackupPlansRespo
 //   req := client.ListBackupPlansRequest(input)
 //   p := NewListBackupPlansRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

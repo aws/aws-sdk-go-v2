@@ -139,7 +139,7 @@ func (r DescribeStacksRequest) Send(ctx context.Context) (*DescribeStacksRespons
 //   req := client.DescribeStacksRequest(input)
 //   p := NewDescribeStacksRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

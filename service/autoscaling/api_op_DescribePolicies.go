@@ -143,7 +143,7 @@ func (r DescribePoliciesRequest) Send(ctx context.Context) (*DescribePoliciesRes
 //   req := client.DescribePoliciesRequest(input)
 //   p := NewDescribePoliciesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

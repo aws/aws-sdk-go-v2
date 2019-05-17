@@ -125,7 +125,7 @@ func (r GetSecurityConfigurationsRequest) Send(ctx context.Context) (*GetSecurit
 //   req := client.GetSecurityConfigurationsRequest(input)
 //   p := NewGetSecurityConfigurationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

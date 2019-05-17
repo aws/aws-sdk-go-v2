@@ -234,7 +234,7 @@ func (r ListOpenWorkflowExecutionsRequest) Send(ctx context.Context) (*ListOpenW
 //   req := client.ListOpenWorkflowExecutionsRequest(input)
 //   p := NewListOpenWorkflowExecutionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

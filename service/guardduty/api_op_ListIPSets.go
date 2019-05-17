@@ -185,7 +185,7 @@ func (r ListIPSetsRequest) Send(ctx context.Context) (*ListIPSetsResponse, error
 //   req := client.ListIPSetsRequest(input)
 //   p := NewListIPSetsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

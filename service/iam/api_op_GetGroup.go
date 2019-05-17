@@ -173,7 +173,7 @@ func (r GetGroupRequest) Send(ctx context.Context) (*GetGroupResponse, error) {
 //   req := client.GetGroupRequest(input)
 //   p := NewGetGroupRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -149,7 +149,7 @@ func (r ListVocabulariesRequest) Send(ctx context.Context) (*ListVocabulariesRes
 //   req := client.ListVocabulariesRequest(input)
 //   p := NewListVocabulariesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -141,7 +141,7 @@ func (r DescribeFleetsRequest) Send(ctx context.Context) (*DescribeFleetsRespons
 //   req := client.DescribeFleetsRequest(input)
 //   p := NewDescribeFleetsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -149,7 +149,7 @@ func (r GetTransitGatewayAttachmentPropagationsRequest) Send(ctx context.Context
 //   req := client.GetTransitGatewayAttachmentPropagationsRequest(input)
 //   p := NewGetTransitGatewayAttachmentPropagationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

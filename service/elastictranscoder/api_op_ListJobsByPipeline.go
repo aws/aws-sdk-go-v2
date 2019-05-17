@@ -185,7 +185,7 @@ func (r ListJobsByPipelineRequest) Send(ctx context.Context) (*ListJobsByPipelin
 //   req := client.ListJobsByPipelineRequest(input)
 //   p := NewListJobsByPipelineRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

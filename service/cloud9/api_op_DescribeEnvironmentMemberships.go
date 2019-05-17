@@ -141,7 +141,7 @@ func (r DescribeEnvironmentMembershipsRequest) Send(ctx context.Context) (*Descr
 //   req := client.DescribeEnvironmentMembershipsRequest(input)
 //   p := NewDescribeEnvironmentMembershipsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

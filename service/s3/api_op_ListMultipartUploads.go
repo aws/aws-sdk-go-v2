@@ -338,7 +338,7 @@ func (r ListMultipartUploadsRequest) Send(ctx context.Context) (*ListMultipartUp
 //   req := client.ListMultipartUploadsRequest(input)
 //   p := NewListMultipartUploadsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

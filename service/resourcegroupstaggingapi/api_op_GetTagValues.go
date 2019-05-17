@@ -137,7 +137,7 @@ func (r GetTagValuesRequest) Send(ctx context.Context) (*GetTagValuesResponse, e
 //   req := client.GetTagValuesRequest(input)
 //   p := NewGetTagValuesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

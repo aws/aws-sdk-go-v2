@@ -236,7 +236,7 @@ func (r ListGroupResourcesRequest) Send(ctx context.Context) (*ListGroupResource
 //   req := client.ListGroupResourcesRequest(input)
 //   p := NewListGroupResourcesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

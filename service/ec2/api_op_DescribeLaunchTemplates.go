@@ -144,7 +144,7 @@ func (r DescribeLaunchTemplatesRequest) Send(ctx context.Context) (*DescribeLaun
 //   req := client.DescribeLaunchTemplatesRequest(input)
 //   p := NewDescribeLaunchTemplatesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -161,7 +161,7 @@ func (r DescribeHsmConfigurationsRequest) Send(ctx context.Context) (*DescribeHs
 //   req := client.DescribeHsmConfigurationsRequest(input)
 //   p := NewDescribeHsmConfigurationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -215,7 +215,7 @@ func (r DescribeDBSnapshotsRequest) Send(ctx context.Context) (*DescribeDBSnapsh
 //   req := client.DescribeDBSnapshotsRequest(input)
 //   p := NewDescribeDBSnapshotsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

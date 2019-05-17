@@ -122,7 +122,7 @@ func (r ListPlatformApplicationsRequest) Send(ctx context.Context) (*ListPlatfor
 //   req := client.ListPlatformApplicationsRequest(input)
 //   p := NewListPlatformApplicationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -139,7 +139,7 @@ func (r DescribeVpcClassicLinkDnsSupportRequest) Send(ctx context.Context) (*Des
 //   req := client.DescribeVpcClassicLinkDnsSupportRequest(input)
 //   p := NewDescribeVpcClassicLinkDnsSupportRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

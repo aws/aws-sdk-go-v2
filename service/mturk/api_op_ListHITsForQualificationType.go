@@ -149,7 +149,7 @@ func (r ListHITsForQualificationTypeRequest) Send(ctx context.Context) (*ListHIT
 //   req := client.ListHITsForQualificationTypeRequest(input)
 //   p := NewListHITsForQualificationTypeRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

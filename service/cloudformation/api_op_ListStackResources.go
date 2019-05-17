@@ -146,7 +146,7 @@ func (r ListStackResourcesRequest) Send(ctx context.Context) (*ListStackResource
 //   req := client.ListStackResourcesRequest(input)
 //   p := NewListStackResourcesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

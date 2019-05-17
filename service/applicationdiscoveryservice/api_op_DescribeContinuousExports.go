@@ -131,7 +131,7 @@ func (r DescribeContinuousExportsRequest) Send(ctx context.Context) (*DescribeCo
 //   req := client.DescribeContinuousExportsRequest(input)
 //   p := NewDescribeContinuousExportsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

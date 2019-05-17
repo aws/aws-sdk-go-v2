@@ -197,7 +197,7 @@ func (r GetBuiltinIntentsRequest) Send(ctx context.Context) (*GetBuiltinIntentsR
 //   req := client.GetBuiltinIntentsRequest(input)
 //   p := NewGetBuiltinIntentsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

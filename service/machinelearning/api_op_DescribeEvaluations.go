@@ -187,7 +187,7 @@ func (r DescribeEvaluationsRequest) Send(ctx context.Context) (*DescribeEvaluati
 //   req := client.DescribeEvaluationsRequest(input)
 //   p := NewDescribeEvaluationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

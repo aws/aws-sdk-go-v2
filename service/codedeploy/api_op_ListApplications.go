@@ -114,7 +114,7 @@ func (r ListApplicationsRequest) Send(ctx context.Context) (*ListApplicationsRes
 //   req := client.ListApplicationsRequest(input)
 //   p := NewListApplicationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

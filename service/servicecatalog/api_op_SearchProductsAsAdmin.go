@@ -152,7 +152,7 @@ func (r SearchProductsAsAdminRequest) Send(ctx context.Context) (*SearchProducts
 //   req := client.SearchProductsAsAdminRequest(input)
 //   p := NewSearchProductsAsAdminRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

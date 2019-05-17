@@ -129,7 +129,7 @@ func (r DescribeImportSnapshotTasksRequest) Send(ctx context.Context) (*Describe
 //   req := client.DescribeImportSnapshotTasksRequest(input)
 //   p := NewDescribeImportSnapshotTasksRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -153,7 +153,7 @@ func (r ListPermissionsRequest) Send(ctx context.Context) (*ListPermissionsRespo
 //   req := client.ListPermissionsRequest(input)
 //   p := NewListPermissionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

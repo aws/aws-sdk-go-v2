@@ -260,7 +260,7 @@ func (r GetUsageRequest) Send(ctx context.Context) (*GetUsageResponse, error) {
 //   req := client.GetUsageRequest(input)
 //   p := NewGetUsageRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

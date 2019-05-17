@@ -190,7 +190,7 @@ func (r DescribeMLModelsRequest) Send(ctx context.Context) (*DescribeMLModelsRes
 //   req := client.DescribeMLModelsRequest(input)
 //   p := NewDescribeMLModelsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

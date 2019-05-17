@@ -191,7 +191,7 @@ func (r ListDomainsRequest) Send(ctx context.Context) (*ListDomainsResponse, err
 //   req := client.ListDomainsRequest(input)
 //   p := NewListDomainsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

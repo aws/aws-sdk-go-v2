@@ -188,7 +188,7 @@ func (r ListStreamConsumersRequest) Send(ctx context.Context) (*ListStreamConsum
 //   req := client.ListStreamConsumersRequest(input)
 //   p := NewListStreamConsumersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

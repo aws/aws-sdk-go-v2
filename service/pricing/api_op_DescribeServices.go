@@ -144,7 +144,7 @@ func (r DescribeServicesRequest) Send(ctx context.Context) (*DescribeServicesRes
 //   req := client.DescribeServicesRequest(input)
 //   p := NewDescribeServicesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

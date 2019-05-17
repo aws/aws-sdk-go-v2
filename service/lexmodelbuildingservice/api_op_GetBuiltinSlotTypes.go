@@ -199,7 +199,7 @@ func (r GetBuiltinSlotTypesRequest) Send(ctx context.Context) (*GetBuiltinSlotTy
 //   req := client.GetBuiltinSlotTypesRequest(input)
 //   p := NewGetBuiltinSlotTypesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -145,7 +145,7 @@ func (r DescribeReplicationInstanceTaskLogsRequest) Send(ctx context.Context) (*
 //   req := client.DescribeReplicationInstanceTaskLogsRequest(input)
 //   p := NewDescribeReplicationInstanceTaskLogsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

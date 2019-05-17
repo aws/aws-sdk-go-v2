@@ -159,7 +159,7 @@ func (r SearchUsersRequest) Send(ctx context.Context) (*SearchUsersResponse, err
 //   req := client.SearchUsersRequest(input)
 //   p := NewSearchUsersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

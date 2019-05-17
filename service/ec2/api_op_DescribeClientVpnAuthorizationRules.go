@@ -149,7 +149,7 @@ func (r DescribeClientVpnAuthorizationRulesRequest) Send(ctx context.Context) (*
 //   req := client.DescribeClientVpnAuthorizationRulesRequest(input)
 //   p := NewDescribeClientVpnAuthorizationRulesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

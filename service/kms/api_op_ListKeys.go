@@ -143,7 +143,7 @@ func (r ListKeysRequest) Send(ctx context.Context) (*ListKeysResponse, error) {
 //   req := client.ListKeysRequest(input)
 //   p := NewListKeysRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

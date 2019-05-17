@@ -138,7 +138,7 @@ func (r DescribeDestinationsRequest) Send(ctx context.Context) (*DescribeDestina
 //   req := client.DescribeDestinationsRequest(input)
 //   p := NewDescribeDestinationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

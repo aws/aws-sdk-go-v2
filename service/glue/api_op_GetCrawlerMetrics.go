@@ -129,7 +129,7 @@ func (r GetCrawlerMetricsRequest) Send(ctx context.Context) (*GetCrawlerMetricsR
 //   req := client.GetCrawlerMetricsRequest(input)
 //   p := NewGetCrawlerMetricsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

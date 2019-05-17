@@ -158,7 +158,7 @@ func (r DescribeParametersRequest) Send(ctx context.Context) (*DescribeParameter
 //   req := client.DescribeParametersRequest(input)
 //   p := NewDescribeParametersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

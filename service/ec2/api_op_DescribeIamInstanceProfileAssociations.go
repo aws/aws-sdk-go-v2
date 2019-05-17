@@ -141,7 +141,7 @@ func (r DescribeIamInstanceProfileAssociationsRequest) Send(ctx context.Context)
 //   req := client.DescribeIamInstanceProfileAssociationsRequest(input)
 //   p := NewDescribeIamInstanceProfileAssociationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

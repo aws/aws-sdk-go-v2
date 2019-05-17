@@ -232,7 +232,7 @@ func (r DescribeDocumentVersionsRequest) Send(ctx context.Context) (*DescribeDoc
 //   req := client.DescribeDocumentVersionsRequest(input)
 //   p := NewDescribeDocumentVersionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

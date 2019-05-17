@@ -170,7 +170,7 @@ func (r ListInstanceProfilesRequest) Send(ctx context.Context) (*ListInstancePro
 //   req := client.ListInstanceProfilesRequest(input)
 //   p := NewListInstanceProfilesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

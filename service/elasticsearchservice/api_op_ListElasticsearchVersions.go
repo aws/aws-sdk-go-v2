@@ -163,7 +163,7 @@ func (r ListElasticsearchVersionsRequest) Send(ctx context.Context) (*ListElasti
 //   req := client.ListElasticsearchVersionsRequest(input)
 //   p := NewListElasticsearchVersionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

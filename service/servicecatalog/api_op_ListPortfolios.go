@@ -123,7 +123,7 @@ func (r ListPortfoliosRequest) Send(ctx context.Context) (*ListPortfoliosRespons
 //   req := client.ListPortfoliosRequest(input)
 //   p := NewListPortfoliosRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

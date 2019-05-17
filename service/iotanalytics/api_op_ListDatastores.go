@@ -170,7 +170,7 @@ func (r ListDatastoresRequest) Send(ctx context.Context) (*ListDatastoresRespons
 //   req := client.ListDatastoresRequest(input)
 //   p := NewListDatastoresRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

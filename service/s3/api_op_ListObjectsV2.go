@@ -358,7 +358,7 @@ func (r ListObjectsV2Request) Send(ctx context.Context) (*ListObjectsV2Response,
 //   req := client.ListObjectsV2Request(input)
 //   p := NewListObjectsV2RequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

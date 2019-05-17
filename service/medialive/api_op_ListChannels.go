@@ -164,7 +164,7 @@ func (r ListChannelsRequest) Send(ctx context.Context) (*ListChannelsResponse, e
 //   req := client.ListChannelsRequest(input)
 //   p := NewListChannelsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -164,7 +164,7 @@ func (r DescribeDBInstancesRequest) Send(ctx context.Context) (*DescribeDBInstan
 //   req := client.DescribeDBInstancesRequest(input)
 //   p := NewDescribeDBInstancesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

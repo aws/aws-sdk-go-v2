@@ -176,7 +176,7 @@ func (r DescribeVpcPeeringConnectionsRequest) Send(ctx context.Context) (*Descri
 //   req := client.DescribeVpcPeeringConnectionsRequest(input)
 //   p := NewDescribeVpcPeeringConnectionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

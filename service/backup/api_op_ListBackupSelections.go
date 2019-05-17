@@ -191,7 +191,7 @@ func (r ListBackupSelectionsRequest) Send(ctx context.Context) (*ListBackupSelec
 //   req := client.ListBackupSelectionsRequest(input)
 //   p := NewListBackupSelectionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

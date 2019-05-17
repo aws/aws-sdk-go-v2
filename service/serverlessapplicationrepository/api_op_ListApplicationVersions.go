@@ -177,7 +177,7 @@ func (r ListApplicationVersionsRequest) Send(ctx context.Context) (*ListApplicat
 //   req := client.ListApplicationVersionsRequest(input)
 //   p := NewListApplicationVersionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

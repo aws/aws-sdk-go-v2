@@ -167,7 +167,7 @@ func (r DescribeInstanceInformationRequest) Send(ctx context.Context) (*Describe
 //   req := client.DescribeInstanceInformationRequest(input)
 //   p := NewDescribeInstanceInformationRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

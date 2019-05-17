@@ -133,7 +133,7 @@ func (r DescribeActivationsRequest) Send(ctx context.Context) (*DescribeActivati
 //   req := client.DescribeActivationsRequest(input)
 //   p := NewDescribeActivationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -153,7 +153,7 @@ func (r DescribeCommunicationsRequest) Send(ctx context.Context) (*DescribeCommu
 //   req := client.DescribeCommunicationsRequest(input)
 //   p := NewDescribeCommunicationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

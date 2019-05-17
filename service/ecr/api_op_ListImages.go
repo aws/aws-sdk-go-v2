@@ -166,7 +166,7 @@ func (r ListImagesRequest) Send(ctx context.Context) (*ListImagesResponse, error
 //   req := client.ListImagesRequest(input)
 //   p := NewListImagesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -141,7 +141,7 @@ func (r DescribeSchemasRequest) Send(ctx context.Context) (*DescribeSchemasRespo
 //   req := client.DescribeSchemasRequest(input)
 //   p := NewDescribeSchemasRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

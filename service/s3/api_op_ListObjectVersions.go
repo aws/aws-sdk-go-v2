@@ -333,7 +333,7 @@ func (r ListObjectVersionsRequest) Send(ctx context.Context) (*ListObjectVersion
 //   req := client.ListObjectVersionsRequest(input)
 //   p := NewListObjectVersionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

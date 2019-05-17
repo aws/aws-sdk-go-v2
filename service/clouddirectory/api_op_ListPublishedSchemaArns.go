@@ -179,7 +179,7 @@ func (r ListPublishedSchemaArnsRequest) Send(ctx context.Context) (*ListPublishe
 //   req := client.ListPublishedSchemaArnsRequest(input)
 //   p := NewListPublishedSchemaArnsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

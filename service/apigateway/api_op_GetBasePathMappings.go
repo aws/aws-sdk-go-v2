@@ -179,7 +179,7 @@ func (r GetBasePathMappingsRequest) Send(ctx context.Context) (*GetBasePathMappi
 //   req := client.GetBasePathMappingsRequest(input)
 //   p := NewGetBasePathMappingsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

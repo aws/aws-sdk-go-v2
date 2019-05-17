@@ -158,7 +158,7 @@ func (r GetUserDefinedFunctionsRequest) Send(ctx context.Context) (*GetUserDefin
 //   req := client.GetUserDefinedFunctionsRequest(input)
 //   p := NewGetUserDefinedFunctionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

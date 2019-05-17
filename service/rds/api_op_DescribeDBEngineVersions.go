@@ -174,7 +174,7 @@ func (r DescribeDBEngineVersionsRequest) Send(ctx context.Context) (*DescribeDBE
 //   req := client.DescribeDBEngineVersionsRequest(input)
 //   p := NewDescribeDBEngineVersionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

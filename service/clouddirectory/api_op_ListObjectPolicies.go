@@ -209,7 +209,7 @@ func (r ListObjectPoliciesRequest) Send(ctx context.Context) (*ListObjectPolicie
 //   req := client.ListObjectPoliciesRequest(input)
 //   p := NewListObjectPoliciesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

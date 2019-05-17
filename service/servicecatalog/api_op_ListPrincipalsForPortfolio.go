@@ -145,7 +145,7 @@ func (r ListPrincipalsForPortfolioRequest) Send(ctx context.Context) (*ListPrinc
 //   req := client.ListPrincipalsForPortfolioRequest(input)
 //   p := NewListPrincipalsForPortfolioRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

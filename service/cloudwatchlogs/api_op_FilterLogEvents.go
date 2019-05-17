@@ -197,7 +197,7 @@ func (r FilterLogEventsRequest) Send(ctx context.Context) (*FilterLogEventsRespo
 //   req := client.FilterLogEventsRequest(input)
 //   p := NewFilterLogEventsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

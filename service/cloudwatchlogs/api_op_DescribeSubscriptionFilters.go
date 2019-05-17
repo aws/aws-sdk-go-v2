@@ -151,7 +151,7 @@ func (r DescribeSubscriptionFiltersRequest) Send(ctx context.Context) (*Describe
 //   req := client.DescribeSubscriptionFiltersRequest(input)
 //   p := NewDescribeSubscriptionFiltersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

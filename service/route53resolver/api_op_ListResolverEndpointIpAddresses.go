@@ -151,7 +151,7 @@ func (r ListResolverEndpointIpAddressesRequest) Send(ctx context.Context) (*List
 //   req := client.ListResolverEndpointIpAddressesRequest(input)
 //   p := NewListResolverEndpointIpAddressesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

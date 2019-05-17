@@ -171,7 +171,7 @@ func (r ListInstanceProfilesForRoleRequest) Send(ctx context.Context) (*ListInst
 //   req := client.ListInstanceProfilesForRoleRequest(input)
 //   p := NewListInstanceProfilesForRoleRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

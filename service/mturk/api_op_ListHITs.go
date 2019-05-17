@@ -135,7 +135,7 @@ func (r ListHITsRequest) Send(ctx context.Context) (*ListHITsResponse, error) {
 //   req := client.ListHITsRequest(input)
 //   p := NewListHITsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

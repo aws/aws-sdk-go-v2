@@ -165,7 +165,7 @@ func (r GetExclusionsPreviewRequest) Send(ctx context.Context) (*GetExclusionsPr
 //   req := client.GetExclusionsPreviewRequest(input)
 //   p := NewGetExclusionsPreviewRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

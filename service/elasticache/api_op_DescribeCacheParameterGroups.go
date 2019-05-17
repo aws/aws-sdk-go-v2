@@ -128,7 +128,7 @@ func (r DescribeCacheParameterGroupsRequest) Send(ctx context.Context) (*Describ
 //   req := client.DescribeCacheParameterGroupsRequest(input)
 //   p := NewDescribeCacheParameterGroupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

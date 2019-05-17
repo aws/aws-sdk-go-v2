@@ -162,7 +162,7 @@ func (r ListLabelingJobsForWorkteamRequest) Send(ctx context.Context) (*ListLabe
 //   req := client.ListLabelingJobsForWorkteamRequest(input)
 //   p := NewListLabelingJobsForWorkteamRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

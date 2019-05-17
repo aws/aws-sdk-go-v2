@@ -230,7 +230,7 @@ func (r ListHostedZonesRequest) Send(ctx context.Context) (*ListHostedZonesRespo
 //   req := client.ListHostedZonesRequest(input)
 //   p := NewListHostedZonesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

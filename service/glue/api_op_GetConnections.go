@@ -143,7 +143,7 @@ func (r GetConnectionsRequest) Send(ctx context.Context) (*GetConnectionsRespons
 //   req := client.GetConnectionsRequest(input)
 //   p := NewGetConnectionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

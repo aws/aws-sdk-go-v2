@@ -143,7 +143,7 @@ func (r ListEventSubscriptionsRequest) Send(ctx context.Context) (*ListEventSubs
 //   req := client.ListEventSubscriptionsRequest(input)
 //   p := NewListEventSubscriptionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

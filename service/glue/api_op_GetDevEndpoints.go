@@ -130,7 +130,7 @@ func (r GetDevEndpointsRequest) Send(ctx context.Context) (*GetDevEndpointsRespo
 //   req := client.GetDevEndpointsRequest(input)
 //   p := NewGetDevEndpointsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

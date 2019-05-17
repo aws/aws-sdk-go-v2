@@ -218,7 +218,7 @@ func (r ListRoutesRequest) Send(ctx context.Context) (*ListRoutesResponse, error
 //   req := client.ListRoutesRequest(input)
 //   p := NewListRoutesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

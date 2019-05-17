@@ -260,7 +260,7 @@ func (r ListClosedWorkflowExecutionsRequest) Send(ctx context.Context) (*ListClo
 //   req := client.ListClosedWorkflowExecutionsRequest(input)
 //   p := NewListClosedWorkflowExecutionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

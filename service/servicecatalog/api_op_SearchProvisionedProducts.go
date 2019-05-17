@@ -145,7 +145,7 @@ func (r SearchProvisionedProductsRequest) Send(ctx context.Context) (*SearchProv
 //   req := client.SearchProvisionedProductsRequest(input)
 //   p := NewSearchProvisionedProductsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

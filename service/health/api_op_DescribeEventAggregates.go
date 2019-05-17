@@ -151,7 +151,7 @@ func (r DescribeEventAggregatesRequest) Send(ctx context.Context) (*DescribeEven
 //   req := client.DescribeEventAggregatesRequest(input)
 //   p := NewDescribeEventAggregatesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

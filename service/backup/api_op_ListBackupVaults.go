@@ -178,7 +178,7 @@ func (r ListBackupVaultsRequest) Send(ctx context.Context) (*ListBackupVaultsRes
 //   req := client.ListBackupVaultsRequest(input)
 //   p := NewListBackupVaultsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -148,7 +148,7 @@ func (r DescribeClusterVersionsRequest) Send(ctx context.Context) (*DescribeClus
 //   req := client.DescribeClusterVersionsRequest(input)
 //   p := NewDescribeClusterVersionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

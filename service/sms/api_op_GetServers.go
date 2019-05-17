@@ -127,7 +127,7 @@ func (r GetServersRequest) Send(ctx context.Context) (*GetServersResponse, error
 //   req := client.GetServersRequest(input)
 //   p := NewGetServersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

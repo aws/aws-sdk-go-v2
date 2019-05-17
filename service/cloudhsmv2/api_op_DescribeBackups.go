@@ -153,7 +153,7 @@ func (r DescribeBackupsRequest) Send(ctx context.Context) (*DescribeBackupsRespo
 //   req := client.DescribeBackupsRequest(input)
 //   p := NewDescribeBackupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

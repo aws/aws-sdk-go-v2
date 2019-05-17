@@ -129,7 +129,7 @@ func (r DescribeSpotFleetRequestsRequest) Send(ctx context.Context) (*DescribeSp
 //   req := client.DescribeSpotFleetRequestsRequest(input)
 //   p := NewDescribeSpotFleetRequestsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

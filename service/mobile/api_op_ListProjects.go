@@ -161,7 +161,7 @@ func (r ListProjectsRequest) Send(ctx context.Context) (*ListProjectsResponse, e
 //   req := client.ListProjectsRequest(input)
 //   p := NewListProjectsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

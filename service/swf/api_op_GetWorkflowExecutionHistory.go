@@ -193,7 +193,7 @@ func (r GetWorkflowExecutionHistoryRequest) Send(ctx context.Context) (*GetWorkf
 //   req := client.GetWorkflowExecutionHistoryRequest(input)
 //   p := NewGetWorkflowExecutionHistoryRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

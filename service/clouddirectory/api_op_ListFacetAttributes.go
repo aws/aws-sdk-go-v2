@@ -200,7 +200,7 @@ func (r ListFacetAttributesRequest) Send(ctx context.Context) (*ListFacetAttribu
 //   req := client.ListFacetAttributesRequest(input)
 //   p := NewListFacetAttributesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

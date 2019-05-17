@@ -158,7 +158,7 @@ func (r SearchProfilesRequest) Send(ctx context.Context) (*SearchProfilesRespons
 //   req := client.SearchProfilesRequest(input)
 //   p := NewSearchProfilesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

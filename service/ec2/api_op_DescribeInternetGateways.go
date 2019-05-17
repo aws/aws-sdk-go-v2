@@ -160,7 +160,7 @@ func (r DescribeInternetGatewaysRequest) Send(ctx context.Context) (*DescribeInt
 //   req := client.DescribeInternetGatewaysRequest(input)
 //   p := NewDescribeInternetGatewaysRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

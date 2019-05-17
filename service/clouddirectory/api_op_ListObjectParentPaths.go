@@ -208,7 +208,7 @@ func (r ListObjectParentPathsRequest) Send(ctx context.Context) (*ListObjectPare
 //   req := client.ListObjectParentPathsRequest(input)
 //   p := NewListObjectParentPathsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

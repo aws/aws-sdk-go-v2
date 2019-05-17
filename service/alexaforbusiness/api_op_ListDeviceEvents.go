@@ -149,7 +149,7 @@ func (r ListDeviceEventsRequest) Send(ctx context.Context) (*ListDeviceEventsRes
 //   req := client.ListDeviceEventsRequest(input)
 //   p := NewListDeviceEventsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

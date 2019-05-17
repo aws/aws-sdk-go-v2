@@ -175,7 +175,7 @@ func (r DescribeLogStreamsRequest) Send(ctx context.Context) (*DescribeLogStream
 //   req := client.DescribeLogStreamsRequest(input)
 //   p := NewDescribeLogStreamsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

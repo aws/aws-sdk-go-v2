@@ -135,7 +135,7 @@ func (r DescribeListenersRequest) Send(ctx context.Context) (*DescribeListenersR
 //   req := client.DescribeListenersRequest(input)
 //   p := NewDescribeListenersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

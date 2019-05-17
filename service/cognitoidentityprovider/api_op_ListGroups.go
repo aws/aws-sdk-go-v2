@@ -141,7 +141,7 @@ func (r ListGroupsRequest) Send(ctx context.Context) (*ListGroupsResponse, error
 //   req := client.ListGroupsRequest(input)
 //   p := NewListGroupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

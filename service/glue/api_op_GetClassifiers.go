@@ -125,7 +125,7 @@ func (r GetClassifiersRequest) Send(ctx context.Context) (*GetClassifiersRespons
 //   req := client.GetClassifiersRequest(input)
 //   p := NewGetClassifiersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

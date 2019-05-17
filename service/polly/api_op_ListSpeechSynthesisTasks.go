@@ -182,7 +182,7 @@ func (r ListSpeechSynthesisTasksRequest) Send(ctx context.Context) (*ListSpeechS
 //   req := client.ListSpeechSynthesisTasksRequest(input)
 //   p := NewListSpeechSynthesisTasksRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

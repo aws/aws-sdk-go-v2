@@ -154,7 +154,7 @@ func (r ListCreateAccountStatusRequest) Send(ctx context.Context) (*ListCreateAc
 //   req := client.ListCreateAccountStatusRequest(input)
 //   p := NewListCreateAccountStatusRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

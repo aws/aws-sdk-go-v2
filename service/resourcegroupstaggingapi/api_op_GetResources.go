@@ -189,7 +189,7 @@ func (r GetResourcesRequest) Send(ctx context.Context) (*GetResourcesResponse, e
 //   req := client.GetResourcesRequest(input)
 //   p := NewGetResourcesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -164,7 +164,7 @@ func (r ListInputsRequest) Send(ctx context.Context) (*ListInputsResponse, error
 //   req := client.ListInputsRequest(input)
 //   p := NewListInputsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -170,7 +170,7 @@ func (r DescribeInstanceCreditSpecificationsRequest) Send(ctx context.Context) (
 //   req := client.DescribeInstanceCreditSpecificationsRequest(input)
 //   p := NewDescribeInstanceCreditSpecificationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

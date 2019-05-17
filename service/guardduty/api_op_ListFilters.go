@@ -185,7 +185,7 @@ func (r ListFiltersRequest) Send(ctx context.Context) (*ListFiltersResponse, err
 //   req := client.ListFiltersRequest(input)
 //   p := NewListFiltersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

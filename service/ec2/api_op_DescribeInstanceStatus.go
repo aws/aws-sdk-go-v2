@@ -199,7 +199,7 @@ func (r DescribeInstanceStatusRequest) Send(ctx context.Context) (*DescribeInsta
 //   req := client.DescribeInstanceStatusRequest(input)
 //   p := NewDescribeInstanceStatusRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

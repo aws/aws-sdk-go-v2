@@ -188,7 +188,7 @@ func (r GetDeploymentsRequest) Send(ctx context.Context) (*GetDeploymentsRespons
 //   req := client.GetDeploymentsRequest(input)
 //   p := NewGetDeploymentsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

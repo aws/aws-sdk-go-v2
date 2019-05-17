@@ -175,7 +175,7 @@ func (r GetDedicatedIpsRequest) Send(ctx context.Context) (*GetDedicatedIpsRespo
 //   req := client.GetDedicatedIpsRequest(input)
 //   p := NewGetDedicatedIpsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

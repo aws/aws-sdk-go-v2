@@ -218,7 +218,7 @@ func (r DescribeScalableTargetsRequest) Send(ctx context.Context) (*DescribeScal
 //   req := client.DescribeScalableTargetsRequest(input)
 //   p := NewDescribeScalableTargetsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

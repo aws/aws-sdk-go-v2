@@ -145,7 +145,7 @@ func (r ListUserPoolClientsRequest) Send(ctx context.Context) (*ListUserPoolClie
 //   req := client.ListUserPoolClientsRequest(input)
 //   p := NewListUserPoolClientsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

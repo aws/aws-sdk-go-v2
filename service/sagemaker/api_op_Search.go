@@ -168,7 +168,7 @@ func (r SearchRequest) Send(ctx context.Context) (*SearchResponse, error) {
 //   req := client.SearchRequest(input)
 //   p := NewSearchRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

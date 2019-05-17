@@ -173,7 +173,7 @@ func (r ListInvitationsRequest) Send(ctx context.Context) (*ListInvitationsRespo
 //   req := client.ListInvitationsRequest(input)
 //   p := NewListInvitationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

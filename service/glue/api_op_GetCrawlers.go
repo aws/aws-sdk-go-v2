@@ -126,7 +126,7 @@ func (r GetCrawlersRequest) Send(ctx context.Context) (*GetCrawlersResponse, err
 //   req := client.GetCrawlersRequest(input)
 //   p := NewGetCrawlersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

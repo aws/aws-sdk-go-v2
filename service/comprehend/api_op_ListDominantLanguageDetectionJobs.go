@@ -138,7 +138,7 @@ func (r ListDominantLanguageDetectionJobsRequest) Send(ctx context.Context) (*Li
 //   req := client.ListDominantLanguageDetectionJobsRequest(input)
 //   p := NewListDominantLanguageDetectionJobsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

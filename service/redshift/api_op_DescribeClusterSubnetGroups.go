@@ -160,7 +160,7 @@ func (r DescribeClusterSubnetGroupsRequest) Send(ctx context.Context) (*Describe
 //   req := client.DescribeClusterSubnetGroupsRequest(input)
 //   p := NewDescribeClusterSubnetGroupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

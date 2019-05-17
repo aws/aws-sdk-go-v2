@@ -154,7 +154,7 @@ func (r GetClientCertificatesRequest) Send(ctx context.Context) (*GetClientCerti
 //   req := client.GetClientCertificatesRequest(input)
 //   p := NewGetClientCertificatesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

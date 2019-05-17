@@ -176,7 +176,7 @@ func (r GetTraceGraphRequest) Send(ctx context.Context) (*GetTraceGraphResponse,
 //   req := client.GetTraceGraphRequest(input)
 //   p := NewGetTraceGraphRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

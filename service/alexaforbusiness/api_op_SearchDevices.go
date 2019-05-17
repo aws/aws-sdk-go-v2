@@ -160,7 +160,7 @@ func (r SearchDevicesRequest) Send(ctx context.Context) (*SearchDevicesResponse,
 //   req := client.SearchDevicesRequest(input)
 //   p := NewSearchDevicesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

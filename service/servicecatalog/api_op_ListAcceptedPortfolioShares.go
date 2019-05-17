@@ -133,7 +133,7 @@ func (r ListAcceptedPortfolioSharesRequest) Send(ctx context.Context) (*ListAcce
 //   req := client.ListAcceptedPortfolioSharesRequest(input)
 //   p := NewListAcceptedPortfolioSharesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

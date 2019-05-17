@@ -130,7 +130,7 @@ func (r ListExportsRequest) Send(ctx context.Context) (*ListExportsResponse, err
 //   req := client.ListExportsRequest(input)
 //   p := NewListExportsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

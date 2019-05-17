@@ -292,7 +292,7 @@ func (r ListPartsRequest) Send(ctx context.Context) (*ListPartsResponse, error) 
 //   req := client.ListPartsRequest(input)
 //   p := NewListPartsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

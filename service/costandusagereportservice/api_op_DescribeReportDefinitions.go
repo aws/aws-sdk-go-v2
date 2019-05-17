@@ -127,7 +127,7 @@ func (r DescribeReportDefinitionsRequest) Send(ctx context.Context) (*DescribeRe
 //   req := client.DescribeReportDefinitionsRequest(input)
 //   p := NewDescribeReportDefinitionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

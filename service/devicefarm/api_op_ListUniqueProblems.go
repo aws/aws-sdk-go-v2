@@ -155,7 +155,7 @@ func (r ListUniqueProblemsRequest) Send(ctx context.Context) (*ListUniqueProblem
 //   req := client.ListUniqueProblemsRequest(input)
 //   p := NewListUniqueProblemsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -155,7 +155,7 @@ func (r GetRestApisRequest) Send(ctx context.Context) (*GetRestApisResponse, err
 //   req := client.GetRestApisRequest(input)
 //   p := NewGetRestApisRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

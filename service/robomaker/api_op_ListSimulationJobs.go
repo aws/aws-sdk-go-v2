@@ -218,7 +218,7 @@ func (r ListSimulationJobsRequest) Send(ctx context.Context) (*ListSimulationJob
 //   req := client.ListSimulationJobsRequest(input)
 //   p := NewListSimulationJobsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

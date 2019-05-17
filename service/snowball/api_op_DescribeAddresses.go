@@ -131,7 +131,7 @@ func (r DescribeAddressesRequest) Send(ctx context.Context) (*DescribeAddressesR
 //   req := client.DescribeAddressesRequest(input)
 //   p := NewDescribeAddressesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -128,7 +128,7 @@ func (r DescribeCapacityReservationsRequest) Send(ctx context.Context) (*Describ
 //   req := client.DescribeCapacityReservationsRequest(input)
 //   p := NewDescribeCapacityReservationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

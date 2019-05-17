@@ -141,7 +141,7 @@ func (r DescribeStackEventsRequest) Send(ctx context.Context) (*DescribeStackEve
 //   req := client.DescribeStackEventsRequest(input)
 //   p := NewDescribeStackEventsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

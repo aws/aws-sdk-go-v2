@@ -209,7 +209,7 @@ func (r GetBotAliasesRequest) Send(ctx context.Context) (*GetBotAliasesResponse,
 //   req := client.GetBotAliasesRequest(input)
 //   p := NewGetBotAliasesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -149,7 +149,7 @@ func (r DescribeClientVpnRoutesRequest) Send(ctx context.Context) (*DescribeClie
 //   req := client.DescribeClientVpnRoutesRequest(input)
 //   p := NewDescribeClientVpnRoutesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

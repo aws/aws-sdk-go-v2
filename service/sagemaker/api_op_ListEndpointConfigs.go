@@ -149,7 +149,7 @@ func (r ListEndpointConfigsRequest) Send(ctx context.Context) (*ListEndpointConf
 //   req := client.ListEndpointConfigsRequest(input)
 //   p := NewListEndpointConfigsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

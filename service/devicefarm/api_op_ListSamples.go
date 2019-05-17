@@ -139,7 +139,7 @@ func (r ListSamplesRequest) Send(ctx context.Context) (*ListSamplesResponse, err
 //   req := client.ListSamplesRequest(input)
 //   p := NewListSamplesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

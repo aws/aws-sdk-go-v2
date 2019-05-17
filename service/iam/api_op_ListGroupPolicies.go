@@ -182,7 +182,7 @@ func (r ListGroupPoliciesRequest) Send(ctx context.Context) (*ListGroupPoliciesR
 //   req := client.ListGroupPoliciesRequest(input)
 //   p := NewListGroupPoliciesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

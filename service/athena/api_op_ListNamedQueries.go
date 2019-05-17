@@ -134,7 +134,7 @@ func (r ListNamedQueriesRequest) Send(ctx context.Context) (*ListNamedQueriesRes
 //   req := client.ListNamedQueriesRequest(input)
 //   p := NewListNamedQueriesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

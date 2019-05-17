@@ -166,7 +166,7 @@ func (r ListExecutionsRequest) Send(ctx context.Context) (*ListExecutionsRespons
 //   req := client.ListExecutionsRequest(input)
 //   p := NewListExecutionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

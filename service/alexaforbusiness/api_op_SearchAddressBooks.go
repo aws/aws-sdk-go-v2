@@ -160,7 +160,7 @@ func (r SearchAddressBooksRequest) Send(ctx context.Context) (*SearchAddressBook
 //   req := client.SearchAddressBooksRequest(input)
 //   p := NewSearchAddressBooksRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

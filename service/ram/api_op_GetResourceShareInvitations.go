@@ -200,7 +200,7 @@ func (r GetResourceShareInvitationsRequest) Send(ctx context.Context) (*GetResou
 //   req := client.GetResourceShareInvitationsRequest(input)
 //   p := NewGetResourceShareInvitationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

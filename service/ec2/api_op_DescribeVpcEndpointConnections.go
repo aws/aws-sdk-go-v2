@@ -136,7 +136,7 @@ func (r DescribeVpcEndpointConnectionsRequest) Send(ctx context.Context) (*Descr
 //   req := client.DescribeVpcEndpointConnectionsRequest(input)
 //   p := NewDescribeVpcEndpointConnectionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

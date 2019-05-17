@@ -158,7 +158,7 @@ func (r ListLabelingJobsRequest) Send(ctx context.Context) (*ListLabelingJobsRes
 //   req := client.ListLabelingJobsRequest(input)
 //   p := NewListLabelingJobsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

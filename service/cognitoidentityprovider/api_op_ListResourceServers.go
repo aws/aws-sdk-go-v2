@@ -142,7 +142,7 @@ func (r ListResourceServersRequest) Send(ctx context.Context) (*ListResourceServ
 //   req := client.ListResourceServersRequest(input)
 //   p := NewListResourceServersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

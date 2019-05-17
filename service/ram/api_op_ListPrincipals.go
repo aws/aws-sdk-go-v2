@@ -232,7 +232,7 @@ func (r ListPrincipalsRequest) Send(ctx context.Context) (*ListPrincipalsRespons
 //   req := client.ListPrincipalsRequest(input)
 //   p := NewListPrincipalsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

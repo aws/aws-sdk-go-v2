@@ -133,7 +133,7 @@ func (r GetTriggersRequest) Send(ctx context.Context) (*GetTriggersResponse, err
 //   req := client.GetTriggersRequest(input)
 //   p := NewGetTriggersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

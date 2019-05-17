@@ -163,7 +163,7 @@ func (r DescribeDBLogFilesRequest) Send(ctx context.Context) (*DescribeDBLogFile
 //   req := client.DescribeDBLogFilesRequest(input)
 //   p := NewDescribeDBLogFilesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -212,7 +212,7 @@ func (r SearchResourcesRequest) Send(ctx context.Context) (*SearchResourcesRespo
 //   req := client.SearchResourcesRequest(input)
 //   p := NewSearchResourcesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

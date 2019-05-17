@@ -141,7 +141,7 @@ func (r ListStreamingDistributionsRequest) Send(ctx context.Context) (*ListStrea
 //   req := client.ListStreamingDistributionsRequest(input)
 //   p := NewListStreamingDistributionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

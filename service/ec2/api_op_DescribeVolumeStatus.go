@@ -202,7 +202,7 @@ func (r DescribeVolumeStatusRequest) Send(ctx context.Context) (*DescribeVolumeS
 //   req := client.DescribeVolumeStatusRequest(input)
 //   p := NewDescribeVolumeStatusRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -159,7 +159,7 @@ func (r GetTableVersionsRequest) Send(ctx context.Context) (*GetTableVersionsRes
 //   req := client.GetTableVersionsRequest(input)
 //   p := NewGetTableVersionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

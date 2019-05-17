@@ -298,7 +298,7 @@ func (r BatchGetItemRequest) Send(ctx context.Context) (*BatchGetItemResponse, e
 //   req := client.BatchGetItemRequest(input)
 //   p := NewBatchGetItemRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

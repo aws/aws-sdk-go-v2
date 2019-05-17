@@ -153,7 +153,7 @@ func (r ListCommandsRequest) Send(ctx context.Context) (*ListCommandsResponse, e
 //   req := client.ListCommandsRequest(input)
 //   p := NewListCommandsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

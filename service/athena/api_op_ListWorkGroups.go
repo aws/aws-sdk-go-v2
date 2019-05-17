@@ -129,7 +129,7 @@ func (r ListWorkGroupsRequest) Send(ctx context.Context) (*ListWorkGroupsRespons
 //   req := client.ListWorkGroupsRequest(input)
 //   p := NewListWorkGroupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

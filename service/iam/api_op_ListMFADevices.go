@@ -166,7 +166,7 @@ func (r ListMFADevicesRequest) Send(ctx context.Context) (*ListMFADevicesRespons
 //   req := client.ListMFADevicesRequest(input)
 //   p := NewListMFADevicesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

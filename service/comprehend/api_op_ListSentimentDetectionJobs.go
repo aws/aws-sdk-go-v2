@@ -138,7 +138,7 @@ func (r ListSentimentDetectionJobsRequest) Send(ctx context.Context) (*ListSenti
 //   req := client.ListSentimentDetectionJobsRequest(input)
 //   p := NewListSentimentDetectionJobsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

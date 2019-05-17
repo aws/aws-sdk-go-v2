@@ -179,7 +179,7 @@ func (r GetParametersByPathRequest) Send(ctx context.Context) (*GetParametersByP
 //   req := client.GetParametersByPathRequest(input)
 //   p := NewGetParametersByPathRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

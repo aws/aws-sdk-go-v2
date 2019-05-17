@@ -157,7 +157,7 @@ func (r ListTransformJobsRequest) Send(ctx context.Context) (*ListTransformJobsR
 //   req := client.ListTransformJobsRequest(input)
 //   p := NewListTransformJobsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

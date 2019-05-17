@@ -123,7 +123,7 @@ func (r DescribeEgressOnlyInternetGatewaysRequest) Send(ctx context.Context) (*D
 //   req := client.DescribeEgressOnlyInternetGatewaysRequest(input)
 //   p := NewDescribeEgressOnlyInternetGatewaysRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

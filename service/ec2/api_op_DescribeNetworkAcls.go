@@ -192,7 +192,7 @@ func (r DescribeNetworkAclsRequest) Send(ctx context.Context) (*DescribeNetworkA
 //   req := client.DescribeNetworkAclsRequest(input)
 //   p := NewDescribeNetworkAclsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

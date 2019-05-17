@@ -178,7 +178,7 @@ func (r ListProtectedResourcesRequest) Send(ctx context.Context) (*ListProtected
 //   req := client.ListProtectedResourcesRequest(input)
 //   p := NewListProtectedResourcesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

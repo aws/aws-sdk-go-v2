@@ -193,7 +193,7 @@ func (r ListAppliedSchemaArnsRequest) Send(ctx context.Context) (*ListAppliedSch
 //   req := client.ListAppliedSchemaArnsRequest(input)
 //   p := NewListAppliedSchemaArnsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

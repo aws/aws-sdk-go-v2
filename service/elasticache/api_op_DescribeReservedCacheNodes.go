@@ -215,7 +215,7 @@ func (r DescribeReservedCacheNodesRequest) Send(ctx context.Context) (*DescribeR
 //   req := client.DescribeReservedCacheNodesRequest(input)
 //   p := NewDescribeReservedCacheNodesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

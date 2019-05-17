@@ -140,7 +140,7 @@ func (r ListImportsRequest) Send(ctx context.Context) (*ListImportsResponse, err
 //   req := client.ListImportsRequest(input)
 //   p := NewListImportsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

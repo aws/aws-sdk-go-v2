@@ -138,7 +138,7 @@ func (r ListEntitiesDetectionJobsRequest) Send(ctx context.Context) (*ListEntiti
 //   req := client.ListEntitiesDetectionJobsRequest(input)
 //   p := NewListEntitiesDetectionJobsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

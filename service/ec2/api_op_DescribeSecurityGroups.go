@@ -222,7 +222,7 @@ func (r DescribeSecurityGroupsRequest) Send(ctx context.Context) (*DescribeSecur
 //   req := client.DescribeSecurityGroupsRequest(input)
 //   p := NewDescribeSecurityGroupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

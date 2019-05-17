@@ -122,7 +122,7 @@ func (r DescribeAutoScalingInstancesRequest) Send(ctx context.Context) (*Describ
 //   req := client.DescribeAutoScalingInstancesRequest(input)
 //   p := NewDescribeAutoScalingInstancesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

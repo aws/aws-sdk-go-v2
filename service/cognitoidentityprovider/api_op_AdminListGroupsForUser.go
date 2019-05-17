@@ -153,7 +153,7 @@ func (r AdminListGroupsForUserRequest) Send(ctx context.Context) (*AdminListGrou
 //   req := client.AdminListGroupsForUserRequest(input)
 //   p := NewAdminListGroupsForUserRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

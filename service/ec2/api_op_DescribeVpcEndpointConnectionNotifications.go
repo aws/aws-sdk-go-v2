@@ -140,7 +140,7 @@ func (r DescribeVpcEndpointConnectionNotificationsRequest) Send(ctx context.Cont
 //   req := client.DescribeVpcEndpointConnectionNotificationsRequest(input)
 //   p := NewDescribeVpcEndpointConnectionNotificationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

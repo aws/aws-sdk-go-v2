@@ -308,7 +308,7 @@ func (r ListObjectsRequest) Send(ctx context.Context) (*ListObjectsResponse, err
 //   req := client.ListObjectsRequest(input)
 //   p := NewListObjectsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

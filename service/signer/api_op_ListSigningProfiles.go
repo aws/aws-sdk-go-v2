@@ -187,7 +187,7 @@ func (r ListSigningProfilesRequest) Send(ctx context.Context) (*ListSigningProfi
 //   req := client.ListSigningProfilesRequest(input)
 //   p := NewListSigningProfilesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

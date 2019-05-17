@@ -164,7 +164,7 @@ func (r DescribeDBClustersRequest) Send(ctx context.Context) (*DescribeDBCluster
 //   req := client.DescribeDBClustersRequest(input)
 //   p := NewDescribeDBClustersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

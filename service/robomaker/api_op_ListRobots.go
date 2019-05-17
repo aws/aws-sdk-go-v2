@@ -215,7 +215,7 @@ func (r ListRobotsRequest) Send(ctx context.Context) (*ListRobotsResponse, error
 //   req := client.ListRobotsRequest(input)
 //   p := NewListRobotsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

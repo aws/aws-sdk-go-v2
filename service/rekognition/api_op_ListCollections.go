@@ -123,7 +123,7 @@ func (r ListCollectionsRequest) Send(ctx context.Context) (*ListCollectionsRespo
 //   req := client.ListCollectionsRequest(input)
 //   p := NewListCollectionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

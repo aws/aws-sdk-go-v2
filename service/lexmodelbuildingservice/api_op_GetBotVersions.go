@@ -204,7 +204,7 @@ func (r GetBotVersionsRequest) Send(ctx context.Context) (*GetBotVersionsRespons
 //   req := client.GetBotVersionsRequest(input)
 //   p := NewGetBotVersionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

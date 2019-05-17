@@ -168,7 +168,7 @@ func (r ListOrganizationalUnitsForParentRequest) Send(ctx context.Context) (*Lis
 //   req := client.ListOrganizationalUnitsForParentRequest(input)
 //   p := NewListOrganizationalUnitsForParentRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

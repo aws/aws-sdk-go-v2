@@ -136,7 +136,7 @@ func (r ListDevEndpointsRequest) Send(ctx context.Context) (*ListDevEndpointsRes
 //   req := client.ListDevEndpointsRequest(input)
 //   p := NewListDevEndpointsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

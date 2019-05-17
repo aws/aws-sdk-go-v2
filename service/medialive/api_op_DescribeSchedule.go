@@ -177,7 +177,7 @@ func (r DescribeScheduleRequest) Send(ctx context.Context) (*DescribeScheduleRes
 //   req := client.DescribeScheduleRequest(input)
 //   p := NewDescribeScheduleRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

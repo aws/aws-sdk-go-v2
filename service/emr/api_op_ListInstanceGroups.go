@@ -130,7 +130,7 @@ func (r ListInstanceGroupsRequest) Send(ctx context.Context) (*ListInstanceGroup
 //   req := client.ListInstanceGroupsRequest(input)
 //   p := NewListInstanceGroupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

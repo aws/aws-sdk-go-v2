@@ -130,7 +130,7 @@ func (r ListOrganizationsRequest) Send(ctx context.Context) (*ListOrganizationsR
 //   req := client.ListOrganizationsRequest(input)
 //   p := NewListOrganizationsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

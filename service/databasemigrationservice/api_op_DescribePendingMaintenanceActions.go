@@ -145,7 +145,7 @@ func (r DescribePendingMaintenanceActionsRequest) Send(ctx context.Context) (*De
 //   req := client.DescribePendingMaintenanceActionsRequest(input)
 //   p := NewDescribePendingMaintenanceActionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -168,7 +168,7 @@ func (r DescribeClusterParameterGroupsRequest) Send(ctx context.Context) (*Descr
 //   req := client.DescribeClusterParameterGroupsRequest(input)
 //   p := NewDescribeClusterParameterGroupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

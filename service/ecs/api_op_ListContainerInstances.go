@@ -151,7 +151,7 @@ func (r ListContainerInstancesRequest) Send(ctx context.Context) (*ListContainer
 //   req := client.ListContainerInstancesRequest(input)
 //   p := NewListContainerInstancesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

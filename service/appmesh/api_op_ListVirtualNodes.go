@@ -200,7 +200,7 @@ func (r ListVirtualNodesRequest) Send(ctx context.Context) (*ListVirtualNodesRes
 //   req := client.ListVirtualNodesRequest(input)
 //   p := NewListVirtualNodesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

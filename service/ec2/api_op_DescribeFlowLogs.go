@@ -142,7 +142,7 @@ func (r DescribeFlowLogsRequest) Send(ctx context.Context) (*DescribeFlowLogsRes
 //   req := client.DescribeFlowLogsRequest(input)
 //   p := NewDescribeFlowLogsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

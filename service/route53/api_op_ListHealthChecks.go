@@ -212,7 +212,7 @@ func (r ListHealthChecksRequest) Send(ctx context.Context) (*ListHealthChecksRes
 //   req := client.ListHealthChecksRequest(input)
 //   p := NewListHealthChecksRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

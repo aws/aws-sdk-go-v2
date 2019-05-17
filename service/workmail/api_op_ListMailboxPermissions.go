@@ -154,7 +154,7 @@ func (r ListMailboxPermissionsRequest) Send(ctx context.Context) (*ListMailboxPe
 //   req := client.ListMailboxPermissionsRequest(input)
 //   p := NewListMailboxPermissionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

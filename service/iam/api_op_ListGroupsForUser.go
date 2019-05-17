@@ -169,7 +169,7 @@ func (r ListGroupsForUserRequest) Send(ctx context.Context) (*ListGroupsForUserR
 //   req := client.ListGroupsForUserRequest(input)
 //   p := NewListGroupsForUserRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -165,7 +165,7 @@ func (r ListDedicatedIpPoolsRequest) Send(ctx context.Context) (*ListDedicatedIp
 //   req := client.ListDedicatedIpPoolsRequest(input)
 //   p := NewListDedicatedIpPoolsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

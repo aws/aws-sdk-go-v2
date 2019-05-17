@@ -230,7 +230,7 @@ func (r DescribeClusterSnapshotsRequest) Send(ctx context.Context) (*DescribeClu
 //   req := client.DescribeClusterSnapshotsRequest(input)
 //   p := NewDescribeClusterSnapshotsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

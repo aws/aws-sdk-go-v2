@@ -163,7 +163,7 @@ func (r DescribeFileSystemsRequest) Send(ctx context.Context) (*DescribeFileSyst
 //   req := client.DescribeFileSystemsRequest(input)
 //   p := NewDescribeFileSystemsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

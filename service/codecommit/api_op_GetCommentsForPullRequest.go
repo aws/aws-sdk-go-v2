@@ -149,7 +149,7 @@ func (r GetCommentsForPullRequestRequest) Send(ctx context.Context) (*GetComment
 //   req := client.GetCommentsForPullRequestRequest(input)
 //   p := NewGetCommentsForPullRequestRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

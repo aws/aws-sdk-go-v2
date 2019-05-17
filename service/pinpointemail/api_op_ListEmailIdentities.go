@@ -174,7 +174,7 @@ func (r ListEmailIdentitiesRequest) Send(ctx context.Context) (*ListEmailIdentit
 //   req := client.ListEmailIdentitiesRequest(input)
 //   p := NewListEmailIdentitiesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

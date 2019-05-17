@@ -155,7 +155,7 @@ func (r GetVpcLinksRequest) Send(ctx context.Context) (*GetVpcLinksResponse, err
 //   req := client.GetVpcLinksRequest(input)
 //   p := NewGetVpcLinksRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

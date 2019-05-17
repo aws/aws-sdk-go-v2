@@ -179,7 +179,7 @@ func (r ListManagedSchemaArnsRequest) Send(ctx context.Context) (*ListManagedSch
 //   req := client.ListManagedSchemaArnsRequest(input)
 //   p := NewListManagedSchemaArnsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

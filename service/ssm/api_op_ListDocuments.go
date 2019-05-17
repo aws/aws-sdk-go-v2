@@ -153,7 +153,7 @@ func (r ListDocumentsRequest) Send(ctx context.Context) (*ListDocumentsResponse,
 //   req := client.ListDocumentsRequest(input)
 //   p := NewListDocumentsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

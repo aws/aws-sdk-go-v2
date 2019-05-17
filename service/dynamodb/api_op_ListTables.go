@@ -145,7 +145,7 @@ func (r ListTablesRequest) Send(ctx context.Context) (*ListTablesResponse, error
 //   req := client.ListTablesRequest(input)
 //   p := NewListTablesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

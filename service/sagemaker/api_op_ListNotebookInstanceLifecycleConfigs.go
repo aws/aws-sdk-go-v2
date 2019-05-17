@@ -157,7 +157,7 @@ func (r ListNotebookInstanceLifecycleConfigsRequest) Send(ctx context.Context) (
 //   req := client.ListNotebookInstanceLifecycleConfigsRequest(input)
 //   p := NewListNotebookInstanceLifecycleConfigsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

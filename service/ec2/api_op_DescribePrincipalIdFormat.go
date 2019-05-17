@@ -143,7 +143,7 @@ func (r DescribePrincipalIdFormatRequest) Send(ctx context.Context) (*DescribePr
 //   req := client.DescribePrincipalIdFormatRequest(input)
 //   p := NewDescribePrincipalIdFormatRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -174,7 +174,7 @@ func (r ListDeliverabilityTestReportsRequest) Send(ctx context.Context) (*ListDe
 //   req := client.ListDeliverabilityTestReportsRequest(input)
 //   p := NewListDeliverabilityTestReportsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

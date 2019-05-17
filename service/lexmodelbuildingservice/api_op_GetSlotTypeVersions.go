@@ -204,7 +204,7 @@ func (r GetSlotTypeVersionsRequest) Send(ctx context.Context) (*GetSlotTypeVersi
 //   req := client.GetSlotTypeVersionsRequest(input)
 //   p := NewGetSlotTypeVersionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

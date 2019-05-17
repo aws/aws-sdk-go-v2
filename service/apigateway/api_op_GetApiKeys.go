@@ -199,7 +199,7 @@ func (r GetApiKeysRequest) Send(ctx context.Context) (*GetApiKeysResponse, error
 //   req := client.GetApiKeysRequest(input)
 //   p := NewGetApiKeysRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

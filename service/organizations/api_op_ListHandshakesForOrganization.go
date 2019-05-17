@@ -163,7 +163,7 @@ func (r ListHandshakesForOrganizationRequest) Send(ctx context.Context) (*ListHa
 //   req := client.ListHandshakesForOrganizationRequest(input)
 //   p := NewListHandshakesForOrganizationRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

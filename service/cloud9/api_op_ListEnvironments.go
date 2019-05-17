@@ -120,7 +120,7 @@ func (r ListEnvironmentsRequest) Send(ctx context.Context) (*ListEnvironmentsRes
 //   req := client.ListEnvironmentsRequest(input)
 //   p := NewListEnvironmentsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -139,7 +139,7 @@ func (r ListSuitesRequest) Send(ctx context.Context) (*ListSuitesResponse, error
 //   req := client.ListSuitesRequest(input)
 //   p := NewListSuitesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -180,7 +180,7 @@ func (r ListDirectoriesRequest) Send(ctx context.Context) (*ListDirectoriesRespo
 //   req := client.ListDirectoriesRequest(input)
 //   p := NewListDirectoriesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

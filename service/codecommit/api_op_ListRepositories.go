@@ -123,7 +123,7 @@ func (r ListRepositoriesRequest) Send(ctx context.Context) (*ListRepositoriesRes
 //   req := client.ListRepositoriesRequest(input)
 //   p := NewListRepositoriesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

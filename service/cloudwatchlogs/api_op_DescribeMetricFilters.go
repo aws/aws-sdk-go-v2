@@ -155,7 +155,7 @@ func (r DescribeMetricFiltersRequest) Send(ctx context.Context) (*DescribeMetric
 //   req := client.DescribeMetricFiltersRequest(input)
 //   p := NewDescribeMetricFiltersRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

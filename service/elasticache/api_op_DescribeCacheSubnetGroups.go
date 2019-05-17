@@ -127,7 +127,7 @@ func (r DescribeCacheSubnetGroupsRequest) Send(ctx context.Context) (*DescribeCa
 //   req := client.DescribeCacheSubnetGroupsRequest(input)
 //   p := NewDescribeCacheSubnetGroupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

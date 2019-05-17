@@ -208,7 +208,7 @@ func (r ListSigningJobsRequest) Send(ctx context.Context) (*ListSigningJobsRespo
 //   req := client.ListSigningJobsRequest(input)
 //   p := NewListSigningJobsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

@@ -127,7 +127,7 @@ func (r ListS3ResourcesRequest) Send(ctx context.Context) (*ListS3ResourcesRespo
 //   req := client.ListS3ResourcesRequest(input)
 //   p := NewListS3ResourcesRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

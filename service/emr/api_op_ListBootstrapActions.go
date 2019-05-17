@@ -130,7 +130,7 @@ func (r ListBootstrapActionsRequest) Send(ctx context.Context) (*ListBootstrapAc
 //   req := client.ListBootstrapActionsRequest(input)
 //   p := NewListBootstrapActionsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //

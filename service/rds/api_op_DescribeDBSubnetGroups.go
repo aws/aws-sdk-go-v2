@@ -151,7 +151,7 @@ func (r DescribeDBSubnetGroupsRequest) Send(ctx context.Context) (*DescribeDBSub
 //   req := client.DescribeDBSubnetGroupsRequest(input)
 //   p := NewDescribeDBSubnetGroupsRequestPaginator(req)
 //
-//   for p.Next() {
+//   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
 //   }
 //
