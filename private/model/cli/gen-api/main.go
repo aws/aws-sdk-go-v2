@@ -282,7 +282,7 @@ func writeAPIFile(g *generateInfo) error {
 		return err
 	}
 
-	if err := writeGoFile(filepath.Join(g.PackageDir, "api_paramater_types.go"),
+	if err := writeGoFile(filepath.Join(g.PackageDir, "api_types.go"),
 		codeLayout,
 		"",
 		g.API.PackageName(),
