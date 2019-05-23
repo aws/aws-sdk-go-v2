@@ -184,7 +184,7 @@ func (r {{ $reqType }}) Send(ctx context.Context) (*{{ $respType }}, error) {
 	//
 	//   // Example iterating over pages.
 	//   req := client.{{ $reqType }}(input)
-	//   p := {{ .API.PackageName }}New{{ $reqType }}Paginator(req)
+	//   p := {{ .API.PackageName }}.New{{ $reqType }}Paginator(req)
 	//
 	//   for p.Next(context.TODO()) {
 	//       page := p.CurrentPage()
