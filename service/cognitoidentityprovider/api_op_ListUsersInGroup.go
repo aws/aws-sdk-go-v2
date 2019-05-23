@@ -151,7 +151,7 @@ func (r ListUsersInGroupRequest) Send(ctx context.Context) (*ListUsersInGroupRes
 //
 //   // Example iterating over pages.
 //   req := client.ListUsersInGroupRequest(input)
-//   p := NewListUsersInGroupRequestPaginator(req)
+//   p := cognitoidentityprovider.NewListUsersInGroupRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

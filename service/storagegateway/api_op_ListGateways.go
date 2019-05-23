@@ -145,7 +145,7 @@ func (r ListGatewaysRequest) Send(ctx context.Context) (*ListGatewaysResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.ListGatewaysRequest(input)
-//   p := NewListGatewaysRequestPaginator(req)
+//   p := storagegateway.NewListGatewaysRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -132,7 +132,7 @@ func (r ListRulesPackagesRequest) Send(ctx context.Context) (*ListRulesPackagesR
 //
 //   // Example iterating over pages.
 //   req := client.ListRulesPackagesRequest(input)
-//   p := NewListRulesPackagesRequestPaginator(req)
+//   p := inspector.NewListRulesPackagesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

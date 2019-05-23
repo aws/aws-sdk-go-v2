@@ -160,7 +160,7 @@ func (r DescribeTapesRequest) Send(ctx context.Context) (*DescribeTapesResponse,
 //
 //   // Example iterating over pages.
 //   req := client.DescribeTapesRequest(input)
-//   p := NewDescribeTapesRequestPaginator(req)
+//   p := storagegateway.NewDescribeTapesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

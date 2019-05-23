@@ -145,7 +145,7 @@ func (r DescribeHostsRequest) Send(ctx context.Context) (*DescribeHostsResponse,
 //
 //   // Example iterating over pages.
 //   req := client.DescribeHostsRequest(input)
-//   p := NewDescribeHostsRequestPaginator(req)
+//   p := ec2.NewDescribeHostsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

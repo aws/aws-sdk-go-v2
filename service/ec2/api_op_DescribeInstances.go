@@ -382,7 +382,7 @@ func (r DescribeInstancesRequest) Send(ctx context.Context) (*DescribeInstancesR
 //
 //   // Example iterating over pages.
 //   req := client.DescribeInstancesRequest(input)
-//   p := NewDescribeInstancesRequestPaginator(req)
+//   p := ec2.NewDescribeInstancesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -140,7 +140,7 @@ func (r ListEndpointsByPlatformApplicationRequest) Send(ctx context.Context) (*L
 //
 //   // Example iterating over pages.
 //   req := client.ListEndpointsByPlatformApplicationRequest(input)
-//   p := NewListEndpointsByPlatformApplicationRequestPaginator(req)
+//   p := sns.NewListEndpointsByPlatformApplicationRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

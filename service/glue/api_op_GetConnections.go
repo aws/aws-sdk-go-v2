@@ -141,7 +141,7 @@ func (r GetConnectionsRequest) Send(ctx context.Context) (*GetConnectionsRespons
 //
 //   // Example iterating over pages.
 //   req := client.GetConnectionsRequest(input)
-//   p := NewGetConnectionsRequestPaginator(req)
+//   p := glue.NewGetConnectionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

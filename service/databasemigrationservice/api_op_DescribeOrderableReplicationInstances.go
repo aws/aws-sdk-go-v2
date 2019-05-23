@@ -121,7 +121,7 @@ func (r DescribeOrderableReplicationInstancesRequest) Send(ctx context.Context) 
 //
 //   // Example iterating over pages.
 //   req := client.DescribeOrderableReplicationInstancesRequest(input)
-//   p := NewDescribeOrderableReplicationInstancesRequestPaginator(req)
+//   p := databasemigrationservice.NewDescribeOrderableReplicationInstancesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

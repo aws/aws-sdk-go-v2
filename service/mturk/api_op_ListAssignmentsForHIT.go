@@ -166,7 +166,7 @@ func (r ListAssignmentsForHITRequest) Send(ctx context.Context) (*ListAssignment
 //
 //   // Example iterating over pages.
 //   req := client.ListAssignmentsForHITRequest(input)
-//   p := NewListAssignmentsForHITRequestPaginator(req)
+//   p := mturk.NewListAssignmentsForHITRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

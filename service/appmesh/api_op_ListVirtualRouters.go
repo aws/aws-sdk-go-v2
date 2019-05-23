@@ -198,7 +198,7 @@ func (r ListVirtualRoutersRequest) Send(ctx context.Context) (*ListVirtualRouter
 //
 //   // Example iterating over pages.
 //   req := client.ListVirtualRoutersRequest(input)
-//   p := NewListVirtualRoutersRequestPaginator(req)
+//   p := appmesh.NewListVirtualRoutersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

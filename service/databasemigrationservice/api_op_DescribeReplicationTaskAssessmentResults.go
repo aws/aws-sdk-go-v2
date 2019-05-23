@@ -129,7 +129,7 @@ func (r DescribeReplicationTaskAssessmentResultsRequest) Send(ctx context.Contex
 //
 //   // Example iterating over pages.
 //   req := client.DescribeReplicationTaskAssessmentResultsRequest(input)
-//   p := NewDescribeReplicationTaskAssessmentResultsRequestPaginator(req)
+//   p := databasemigrationservice.NewDescribeReplicationTaskAssessmentResultsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

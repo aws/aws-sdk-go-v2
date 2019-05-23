@@ -141,7 +141,7 @@ func (r ListMemberAccountsRequest) Send(ctx context.Context) (*ListMemberAccount
 //
 //   // Example iterating over pages.
 //   req := client.ListMemberAccountsRequest(input)
-//   p := NewListMemberAccountsRequestPaginator(req)
+//   p := fms.NewListMemberAccountsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

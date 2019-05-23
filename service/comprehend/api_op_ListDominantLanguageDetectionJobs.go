@@ -136,7 +136,7 @@ func (r ListDominantLanguageDetectionJobsRequest) Send(ctx context.Context) (*Li
 //
 //   // Example iterating over pages.
 //   req := client.ListDominantLanguageDetectionJobsRequest(input)
-//   p := NewListDominantLanguageDetectionJobsRequestPaginator(req)
+//   p := comprehend.NewListDominantLanguageDetectionJobsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

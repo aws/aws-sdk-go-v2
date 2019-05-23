@@ -191,7 +191,7 @@ func (r BatchGetTracesRequest) Send(ctx context.Context) (*BatchGetTracesRespons
 //
 //   // Example iterating over pages.
 //   req := client.BatchGetTracesRequest(input)
-//   p := NewBatchGetTracesRequestPaginator(req)
+//   p := xray.NewBatchGetTracesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

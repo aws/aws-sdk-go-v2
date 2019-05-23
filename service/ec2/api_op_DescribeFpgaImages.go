@@ -174,7 +174,7 @@ func (r DescribeFpgaImagesRequest) Send(ctx context.Context) (*DescribeFpgaImage
 //
 //   // Example iterating over pages.
 //   req := client.DescribeFpgaImagesRequest(input)
-//   p := NewDescribeFpgaImagesRequestPaginator(req)
+//   p := ec2.NewDescribeFpgaImagesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

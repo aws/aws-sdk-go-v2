@@ -191,7 +191,7 @@ func (r GetWorkflowExecutionHistoryRequest) Send(ctx context.Context) (*GetWorkf
 //
 //   // Example iterating over pages.
 //   req := client.GetWorkflowExecutionHistoryRequest(input)
-//   p := NewGetWorkflowExecutionHistoryRequestPaginator(req)
+//   p := swf.NewGetWorkflowExecutionHistoryRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -163,7 +163,7 @@ func (r ListDedicatedIpPoolsRequest) Send(ctx context.Context) (*ListDedicatedIp
 //
 //   // Example iterating over pages.
 //   req := client.ListDedicatedIpPoolsRequest(input)
-//   p := NewListDedicatedIpPoolsRequestPaginator(req)
+//   p := pinpointemail.NewListDedicatedIpPoolsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

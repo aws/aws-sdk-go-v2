@@ -131,7 +131,7 @@ func (r DescribeActivationsRequest) Send(ctx context.Context) (*DescribeActivati
 //
 //   // Example iterating over pages.
 //   req := client.DescribeActivationsRequest(input)
-//   p := NewDescribeActivationsRequestPaginator(req)
+//   p := ssm.NewDescribeActivationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

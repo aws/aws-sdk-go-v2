@@ -145,7 +145,7 @@ func (r PreviewAgentsRequest) Send(ctx context.Context) (*PreviewAgentsResponse,
 //
 //   // Example iterating over pages.
 //   req := client.PreviewAgentsRequest(input)
-//   p := NewPreviewAgentsRequestPaginator(req)
+//   p := inspector.NewPreviewAgentsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

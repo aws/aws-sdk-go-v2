@@ -127,7 +127,7 @@ func (r ListGatewayGroupsRequest) Send(ctx context.Context) (*ListGatewayGroupsR
 //
 //   // Example iterating over pages.
 //   req := client.ListGatewayGroupsRequest(input)
-//   p := NewListGatewayGroupsRequestPaginator(req)
+//   p := alexaforbusiness.NewListGatewayGroupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

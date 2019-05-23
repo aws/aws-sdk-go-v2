@@ -202,7 +202,7 @@ func (r GetIntentVersionsRequest) Send(ctx context.Context) (*GetIntentVersionsR
 //
 //   // Example iterating over pages.
 //   req := client.GetIntentVersionsRequest(input)
-//   p := NewGetIntentVersionsRequestPaginator(req)
+//   p := lexmodelbuildingservice.NewGetIntentVersionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

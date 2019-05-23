@@ -135,7 +135,7 @@ func (r ListSmartHomeAppliancesRequest) Send(ctx context.Context) (*ListSmartHom
 //
 //   // Example iterating over pages.
 //   req := client.ListSmartHomeAppliancesRequest(input)
-//   p := NewListSmartHomeAppliancesRequestPaginator(req)
+//   p := alexaforbusiness.NewListSmartHomeAppliancesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

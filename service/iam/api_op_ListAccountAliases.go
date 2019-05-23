@@ -153,7 +153,7 @@ func (r ListAccountAliasesRequest) Send(ctx context.Context) (*ListAccountAliase
 //
 //   // Example iterating over pages.
 //   req := client.ListAccountAliasesRequest(input)
-//   p := NewListAccountAliasesRequestPaginator(req)
+//   p := iam.NewListAccountAliasesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

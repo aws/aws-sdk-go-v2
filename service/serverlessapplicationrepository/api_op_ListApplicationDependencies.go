@@ -183,7 +183,7 @@ func (r ListApplicationDependenciesRequest) Send(ctx context.Context) (*ListAppl
 //
 //   // Example iterating over pages.
 //   req := client.ListApplicationDependenciesRequest(input)
-//   p := NewListApplicationDependenciesRequestPaginator(req)
+//   p := serverlessapplicationrepository.NewListApplicationDependenciesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

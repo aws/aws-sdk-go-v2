@@ -206,7 +206,7 @@ func (r ListPresetsRequest) Send(ctx context.Context) (*ListPresetsResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.ListPresetsRequest(input)
-//   p := NewListPresetsRequestPaginator(req)
+//   p := mediaconvert.NewListPresetsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

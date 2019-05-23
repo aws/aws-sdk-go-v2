@@ -133,7 +133,7 @@ func (r ListProjectsRequest) Send(ctx context.Context) (*ListProjectsResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.ListProjectsRequest(input)
-//   p := NewListProjectsRequestPaginator(req)
+//   p := devicefarm.NewListProjectsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

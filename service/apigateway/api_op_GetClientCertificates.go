@@ -152,7 +152,7 @@ func (r GetClientCertificatesRequest) Send(ctx context.Context) (*GetClientCerti
 //
 //   // Example iterating over pages.
 //   req := client.GetClientCertificatesRequest(input)
-//   p := NewGetClientCertificatesRequestPaginator(req)
+//   p := apigateway.NewGetClientCertificatesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

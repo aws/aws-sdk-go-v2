@@ -189,7 +189,7 @@ func (r ListAccountsRequest) Send(ctx context.Context) (*ListAccountsResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.ListAccountsRequest(input)
-//   p := NewListAccountsRequestPaginator(req)
+//   p := chime.NewListAccountsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

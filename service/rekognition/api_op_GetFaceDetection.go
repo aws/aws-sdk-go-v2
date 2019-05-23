@@ -170,7 +170,7 @@ func (r GetFaceDetectionRequest) Send(ctx context.Context) (*GetFaceDetectionRes
 //
 //   // Example iterating over pages.
 //   req := client.GetFaceDetectionRequest(input)
-//   p := NewGetFaceDetectionRequestPaginator(req)
+//   p := rekognition.NewGetFaceDetectionRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

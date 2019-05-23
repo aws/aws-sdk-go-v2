@@ -161,7 +161,7 @@ func (r DescribeDBLogFilesRequest) Send(ctx context.Context) (*DescribeDBLogFile
 //
 //   // Example iterating over pages.
 //   req := client.DescribeDBLogFilesRequest(input)
-//   p := NewDescribeDBLogFilesRequestPaginator(req)
+//   p := rds.NewDescribeDBLogFilesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

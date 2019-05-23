@@ -121,7 +121,7 @@ func (r DescribeEgressOnlyInternetGatewaysRequest) Send(ctx context.Context) (*D
 //
 //   // Example iterating over pages.
 //   req := client.DescribeEgressOnlyInternetGatewaysRequest(input)
-//   p := NewDescribeEgressOnlyInternetGatewaysRequestPaginator(req)
+//   p := ec2.NewDescribeEgressOnlyInternetGatewaysRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

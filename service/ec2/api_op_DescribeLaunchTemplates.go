@@ -142,7 +142,7 @@ func (r DescribeLaunchTemplatesRequest) Send(ctx context.Context) (*DescribeLaun
 //
 //   // Example iterating over pages.
 //   req := client.DescribeLaunchTemplatesRequest(input)
-//   p := NewDescribeLaunchTemplatesRequestPaginator(req)
+//   p := ec2.NewDescribeLaunchTemplatesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

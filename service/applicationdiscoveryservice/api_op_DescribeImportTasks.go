@@ -139,7 +139,7 @@ func (r DescribeImportTasksRequest) Send(ctx context.Context) (*DescribeImportTa
 //
 //   // Example iterating over pages.
 //   req := client.DescribeImportTasksRequest(input)
-//   p := NewDescribeImportTasksRequestPaginator(req)
+//   p := applicationdiscoveryservice.NewDescribeImportTasksRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

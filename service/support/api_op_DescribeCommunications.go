@@ -151,7 +151,7 @@ func (r DescribeCommunicationsRequest) Send(ctx context.Context) (*DescribeCommu
 //
 //   // Example iterating over pages.
 //   req := client.DescribeCommunicationsRequest(input)
-//   p := NewDescribeCommunicationsRequestPaginator(req)
+//   p := support.NewDescribeCommunicationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

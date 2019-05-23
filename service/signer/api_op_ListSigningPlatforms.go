@@ -201,7 +201,7 @@ func (r ListSigningPlatformsRequest) Send(ctx context.Context) (*ListSigningPlat
 //
 //   // Example iterating over pages.
 //   req := client.ListSigningPlatformsRequest(input)
-//   p := NewListSigningPlatformsRequestPaginator(req)
+//   p := signer.NewListSigningPlatformsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

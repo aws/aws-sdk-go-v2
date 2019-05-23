@@ -347,7 +347,7 @@ func (r ListResourceRecordSetsRequest) Send(ctx context.Context) (*ListResourceR
 //
 //   // Example iterating over pages.
 //   req := client.ListResourceRecordSetsRequest(input)
-//   p := NewListResourceRecordSetsRequestPaginator(req)
+//   p := route53.NewListResourceRecordSetsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

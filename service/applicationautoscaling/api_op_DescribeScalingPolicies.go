@@ -222,7 +222,7 @@ func (r DescribeScalingPoliciesRequest) Send(ctx context.Context) (*DescribeScal
 //
 //   // Example iterating over pages.
 //   req := client.DescribeScalingPoliciesRequest(input)
-//   p := NewDescribeScalingPoliciesRequestPaginator(req)
+//   p := applicationautoscaling.NewDescribeScalingPoliciesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

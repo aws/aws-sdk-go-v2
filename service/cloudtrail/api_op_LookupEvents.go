@@ -187,7 +187,7 @@ func (r LookupEventsRequest) Send(ctx context.Context) (*LookupEventsResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.LookupEventsRequest(input)
-//   p := NewLookupEventsRequestPaginator(req)
+//   p := cloudtrail.NewLookupEventsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

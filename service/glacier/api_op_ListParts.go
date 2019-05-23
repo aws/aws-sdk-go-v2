@@ -290,7 +290,7 @@ func (r ListPartsRequest) Send(ctx context.Context) (*ListPartsResponse, error) 
 //
 //   // Example iterating over pages.
 //   req := client.ListPartsRequest(input)
-//   p := NewListPartsRequestPaginator(req)
+//   p := glacier.NewListPartsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

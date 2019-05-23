@@ -118,7 +118,7 @@ func (r ListEnvironmentsRequest) Send(ctx context.Context) (*ListEnvironmentsRes
 //
 //   // Example iterating over pages.
 //   req := client.ListEnvironmentsRequest(input)
-//   p := NewListEnvironmentsRequestPaginator(req)
+//   p := cloud9.NewListEnvironmentsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

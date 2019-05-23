@@ -157,7 +157,7 @@ func (r ListServiceActionsForProvisioningArtifactRequest) Send(ctx context.Conte
 //
 //   // Example iterating over pages.
 //   req := client.ListServiceActionsForProvisioningArtifactRequest(input)
-//   p := NewListServiceActionsForProvisioningArtifactRequestPaginator(req)
+//   p := servicecatalog.NewListServiceActionsForProvisioningArtifactRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

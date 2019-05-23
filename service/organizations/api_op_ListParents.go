@@ -169,7 +169,7 @@ func (r ListParentsRequest) Send(ctx context.Context) (*ListParentsResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.ListParentsRequest(input)
-//   p := NewListParentsRequestPaginator(req)
+//   p := organizations.NewListParentsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

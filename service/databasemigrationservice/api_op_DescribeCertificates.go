@@ -138,7 +138,7 @@ func (r DescribeCertificatesRequest) Send(ctx context.Context) (*DescribeCertifi
 //
 //   // Example iterating over pages.
 //   req := client.DescribeCertificatesRequest(input)
-//   p := NewDescribeCertificatesRequestPaginator(req)
+//   p := databasemigrationservice.NewDescribeCertificatesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

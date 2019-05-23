@@ -234,7 +234,7 @@ func (r ListGroupResourcesRequest) Send(ctx context.Context) (*ListGroupResource
 //
 //   // Example iterating over pages.
 //   req := client.ListGroupResourcesRequest(input)
-//   p := NewListGroupResourcesRequestPaginator(req)
+//   p := resourcegroups.NewListGroupResourcesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

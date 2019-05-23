@@ -137,7 +137,7 @@ func (r DescribeNatGatewaysRequest) Send(ctx context.Context) (*DescribeNatGatew
 //
 //   // Example iterating over pages.
 //   req := client.DescribeNatGatewaysRequest(input)
-//   p := NewDescribeNatGatewaysRequestPaginator(req)
+//   p := ec2.NewDescribeNatGatewaysRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

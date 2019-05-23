@@ -156,7 +156,7 @@ func (r DescribeParametersRequest) Send(ctx context.Context) (*DescribeParameter
 //
 //   // Example iterating over pages.
 //   req := client.DescribeParametersRequest(input)
-//   p := NewDescribeParametersRequestPaginator(req)
+//   p := ssm.NewDescribeParametersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

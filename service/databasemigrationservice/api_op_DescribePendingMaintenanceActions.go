@@ -143,7 +143,7 @@ func (r DescribePendingMaintenanceActionsRequest) Send(ctx context.Context) (*De
 //
 //   // Example iterating over pages.
 //   req := client.DescribePendingMaintenanceActionsRequest(input)
-//   p := NewDescribePendingMaintenanceActionsRequestPaginator(req)
+//   p := databasemigrationservice.NewDescribePendingMaintenanceActionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

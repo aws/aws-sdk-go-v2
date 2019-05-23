@@ -165,7 +165,7 @@ func (r DescribeInstanceInformationRequest) Send(ctx context.Context) (*Describe
 //
 //   // Example iterating over pages.
 //   req := client.DescribeInstanceInformationRequest(input)
-//   p := NewDescribeInstanceInformationRequestPaginator(req)
+//   p := ssm.NewDescribeInstanceInformationRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

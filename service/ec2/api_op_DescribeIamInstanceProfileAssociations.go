@@ -139,7 +139,7 @@ func (r DescribeIamInstanceProfileAssociationsRequest) Send(ctx context.Context)
 //
 //   // Example iterating over pages.
 //   req := client.DescribeIamInstanceProfileAssociationsRequest(input)
-//   p := NewDescribeIamInstanceProfileAssociationsRequestPaginator(req)
+//   p := ec2.NewDescribeIamInstanceProfileAssociationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

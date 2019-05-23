@@ -183,7 +183,7 @@ func (r DescribeStackResourceDriftsRequest) Send(ctx context.Context) (*Describe
 //
 //   // Example iterating over pages.
 //   req := client.DescribeStackResourceDriftsRequest(input)
-//   p := NewDescribeStackResourceDriftsRequestPaginator(req)
+//   p := cloudformation.NewDescribeStackResourceDriftsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

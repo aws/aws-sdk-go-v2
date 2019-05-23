@@ -165,7 +165,7 @@ func (r ListVoiceConnectorsRequest) Send(ctx context.Context) (*ListVoiceConnect
 //
 //   // Example iterating over pages.
 //   req := client.ListVoiceConnectorsRequest(input)
-//   p := NewListVoiceConnectorsRequestPaginator(req)
+//   p := chime.NewListVoiceConnectorsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

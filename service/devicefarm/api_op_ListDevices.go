@@ -188,7 +188,7 @@ func (r ListDevicesRequest) Send(ctx context.Context) (*ListDevicesResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.ListDevicesRequest(input)
-//   p := NewListDevicesRequestPaginator(req)
+//   p := devicefarm.NewListDevicesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

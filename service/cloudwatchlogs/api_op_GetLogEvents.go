@@ -181,7 +181,7 @@ func (r GetLogEventsRequest) Send(ctx context.Context) (*GetLogEventsResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.GetLogEventsRequest(input)
-//   p := NewGetLogEventsRequestPaginator(req)
+//   p := cloudwatchlogs.NewGetLogEventsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

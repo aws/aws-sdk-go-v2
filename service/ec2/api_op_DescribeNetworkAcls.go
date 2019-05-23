@@ -190,7 +190,7 @@ func (r DescribeNetworkAclsRequest) Send(ctx context.Context) (*DescribeNetworkA
 //
 //   // Example iterating over pages.
 //   req := client.DescribeNetworkAclsRequest(input)
-//   p := NewDescribeNetworkAclsRequestPaginator(req)
+//   p := ec2.NewDescribeNetworkAclsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

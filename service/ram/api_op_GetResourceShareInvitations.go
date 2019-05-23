@@ -198,7 +198,7 @@ func (r GetResourceShareInvitationsRequest) Send(ctx context.Context) (*GetResou
 //
 //   // Example iterating over pages.
 //   req := client.GetResourceShareInvitationsRequest(input)
-//   p := NewGetResourceShareInvitationsRequestPaginator(req)
+//   p := ram.NewGetResourceShareInvitationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

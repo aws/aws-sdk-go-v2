@@ -183,7 +183,7 @@ func (r DescribeScheduledInstanceAvailabilityRequest) Send(ctx context.Context) 
 //
 //   // Example iterating over pages.
 //   req := client.DescribeScheduledInstanceAvailabilityRequest(input)
-//   p := NewDescribeScheduledInstanceAvailabilityRequestPaginator(req)
+//   p := ec2.NewDescribeScheduledInstanceAvailabilityRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

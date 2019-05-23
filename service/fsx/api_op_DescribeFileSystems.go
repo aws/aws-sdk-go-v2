@@ -161,7 +161,7 @@ func (r DescribeFileSystemsRequest) Send(ctx context.Context) (*DescribeFileSyst
 //
 //   // Example iterating over pages.
 //   req := client.DescribeFileSystemsRequest(input)
-//   p := NewDescribeFileSystemsRequestPaginator(req)
+//   p := fsx.NewDescribeFileSystemsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

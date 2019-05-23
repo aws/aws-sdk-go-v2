@@ -127,7 +127,7 @@ func (r DescribeSpotFleetRequestsRequest) Send(ctx context.Context) (*DescribeSp
 //
 //   // Example iterating over pages.
 //   req := client.DescribeSpotFleetRequestsRequest(input)
-//   p := NewDescribeSpotFleetRequestsRequestPaginator(req)
+//   p := ec2.NewDescribeSpotFleetRequestsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

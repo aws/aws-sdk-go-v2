@@ -170,7 +170,7 @@ func (r ListDetectorsRequest) Send(ctx context.Context) (*ListDetectorsResponse,
 //
 //   // Example iterating over pages.
 //   req := client.ListDetectorsRequest(input)
-//   p := NewListDetectorsRequestPaginator(req)
+//   p := guardduty.NewListDetectorsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -121,7 +121,7 @@ func (r DescribeLaunchConfigurationsRequest) Send(ctx context.Context) (*Describ
 //
 //   // Example iterating over pages.
 //   req := client.DescribeLaunchConfigurationsRequest(input)
-//   p := NewDescribeLaunchConfigurationsRequestPaginator(req)
+//   p := autoscaling.NewDescribeLaunchConfigurationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

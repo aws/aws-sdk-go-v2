@@ -129,7 +129,7 @@ func (r DescribeAddressesRequest) Send(ctx context.Context) (*DescribeAddressesR
 //
 //   // Example iterating over pages.
 //   req := client.DescribeAddressesRequest(input)
-//   p := NewDescribeAddressesRequestPaginator(req)
+//   p := snowball.NewDescribeAddressesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

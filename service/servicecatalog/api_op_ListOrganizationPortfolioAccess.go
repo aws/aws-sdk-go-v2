@@ -159,7 +159,7 @@ func (r ListOrganizationPortfolioAccessRequest) Send(ctx context.Context) (*List
 //
 //   // Example iterating over pages.
 //   req := client.ListOrganizationPortfolioAccessRequest(input)
-//   p := NewListOrganizationPortfolioAccessRequestPaginator(req)
+//   p := servicecatalog.NewListOrganizationPortfolioAccessRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

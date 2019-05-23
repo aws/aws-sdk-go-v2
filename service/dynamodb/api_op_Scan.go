@@ -447,7 +447,7 @@ func (r ScanRequest) Send(ctx context.Context) (*ScanResponse, error) {
 //
 //   // Example iterating over pages.
 //   req := client.ScanRequest(input)
-//   p := NewScanRequestPaginator(req)
+//   p := dynamodb.NewScanRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

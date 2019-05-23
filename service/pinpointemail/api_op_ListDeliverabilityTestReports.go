@@ -172,7 +172,7 @@ func (r ListDeliverabilityTestReportsRequest) Send(ctx context.Context) (*ListDe
 //
 //   // Example iterating over pages.
 //   req := client.ListDeliverabilityTestReportsRequest(input)
-//   p := NewListDeliverabilityTestReportsRequestPaginator(req)
+//   p := pinpointemail.NewListDeliverabilityTestReportsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

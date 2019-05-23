@@ -127,7 +127,7 @@ func (r ListWorkGroupsRequest) Send(ctx context.Context) (*ListWorkGroupsRespons
 //
 //   // Example iterating over pages.
 //   req := client.ListWorkGroupsRequest(input)
-//   p := NewListWorkGroupsRequestPaginator(req)
+//   p := athena.NewListWorkGroupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

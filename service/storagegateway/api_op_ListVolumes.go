@@ -165,7 +165,7 @@ func (r ListVolumesRequest) Send(ctx context.Context) (*ListVolumesResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.ListVolumesRequest(input)
-//   p := NewListVolumesRequestPaginator(req)
+//   p := storagegateway.NewListVolumesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -158,7 +158,7 @@ func (r ListAssessmentRunAgentsRequest) Send(ctx context.Context) (*ListAssessme
 //
 //   // Example iterating over pages.
 //   req := client.ListAssessmentRunAgentsRequest(input)
-//   p := NewListAssessmentRunAgentsRequestPaginator(req)
+//   p := inspector.NewListAssessmentRunAgentsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

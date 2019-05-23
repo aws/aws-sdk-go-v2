@@ -135,7 +135,7 @@ func (r GetJobRunsRequest) Send(ctx context.Context) (*GetJobRunsResponse, error
 //
 //   // Example iterating over pages.
 //   req := client.GetJobRunsRequest(input)
-//   p := NewGetJobRunsRequestPaginator(req)
+//   p := glue.NewGetJobRunsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

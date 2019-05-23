@@ -142,7 +142,7 @@ func (r DescribeTagsRequest) Send(ctx context.Context) (*DescribeTagsResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.DescribeTagsRequest(input)
-//   p := NewDescribeTagsRequestPaginator(req)
+//   p := ec2.NewDescribeTagsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

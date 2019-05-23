@@ -137,7 +137,7 @@ func (r ListTestsRequest) Send(ctx context.Context) (*ListTestsResponse, error) 
 //
 //   // Example iterating over pages.
 //   req := client.ListTestsRequest(input)
-//   p := NewListTestsRequestPaginator(req)
+//   p := devicefarm.NewListTestsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -175,7 +175,7 @@ func (r ListApplicationVersionsRequest) Send(ctx context.Context) (*ListApplicat
 //
 //   // Example iterating over pages.
 //   req := client.ListApplicationVersionsRequest(input)
-//   p := NewListApplicationVersionsRequestPaginator(req)
+//   p := serverlessapplicationrepository.NewListApplicationVersionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

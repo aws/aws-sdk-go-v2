@@ -164,7 +164,7 @@ func (r ListExecutionsRequest) Send(ctx context.Context) (*ListExecutionsRespons
 //
 //   // Example iterating over pages.
 //   req := client.ListExecutionsRequest(input)
-//   p := NewListExecutionsRequestPaginator(req)
+//   p := sfn.NewListExecutionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

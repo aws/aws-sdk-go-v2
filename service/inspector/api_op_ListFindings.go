@@ -150,7 +150,7 @@ func (r ListFindingsRequest) Send(ctx context.Context) (*ListFindingsResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.ListFindingsRequest(input)
-//   p := NewListFindingsRequestPaginator(req)
+//   p := inspector.NewListFindingsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

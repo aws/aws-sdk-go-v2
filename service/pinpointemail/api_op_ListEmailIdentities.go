@@ -172,7 +172,7 @@ func (r ListEmailIdentitiesRequest) Send(ctx context.Context) (*ListEmailIdentit
 //
 //   // Example iterating over pages.
 //   req := client.ListEmailIdentitiesRequest(input)
-//   p := NewListEmailIdentitiesRequestPaginator(req)
+//   p := pinpointemail.NewListEmailIdentitiesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

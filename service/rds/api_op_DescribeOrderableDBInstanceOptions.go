@@ -169,7 +169,7 @@ func (r DescribeOrderableDBInstanceOptionsRequest) Send(ctx context.Context) (*D
 //
 //   // Example iterating over pages.
 //   req := client.DescribeOrderableDBInstanceOptionsRequest(input)
-//   p := NewDescribeOrderableDBInstanceOptionsRequestPaginator(req)
+//   p := rds.NewDescribeOrderableDBInstanceOptionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

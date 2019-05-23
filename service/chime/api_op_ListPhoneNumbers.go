@@ -202,7 +202,7 @@ func (r ListPhoneNumbersRequest) Send(ctx context.Context) (*ListPhoneNumbersRes
 //
 //   // Example iterating over pages.
 //   req := client.ListPhoneNumbersRequest(input)
-//   p := NewListPhoneNumbersRequestPaginator(req)
+//   p := chime.NewListPhoneNumbersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

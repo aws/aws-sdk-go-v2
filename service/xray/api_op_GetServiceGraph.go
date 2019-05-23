@@ -242,7 +242,7 @@ func (r GetServiceGraphRequest) Send(ctx context.Context) (*GetServiceGraphRespo
 //
 //   // Example iterating over pages.
 //   req := client.GetServiceGraphRequest(input)
-//   p := NewGetServiceGraphRequestPaginator(req)
+//   p := xray.NewGetServiceGraphRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

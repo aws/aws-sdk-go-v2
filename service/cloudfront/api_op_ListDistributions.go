@@ -143,7 +143,7 @@ func (r ListDistributionsRequest) Send(ctx context.Context) (*ListDistributionsR
 //
 //   // Example iterating over pages.
 //   req := client.ListDistributionsRequest(input)
-//   p := NewListDistributionsRequestPaginator(req)
+//   p := cloudfront.NewListDistributionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

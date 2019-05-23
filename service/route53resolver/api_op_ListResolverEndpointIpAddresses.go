@@ -149,7 +149,7 @@ func (r ListResolverEndpointIpAddressesRequest) Send(ctx context.Context) (*List
 //
 //   // Example iterating over pages.
 //   req := client.ListResolverEndpointIpAddressesRequest(input)
-//   p := NewListResolverEndpointIpAddressesRequestPaginator(req)
+//   p := route53resolver.NewListResolverEndpointIpAddressesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

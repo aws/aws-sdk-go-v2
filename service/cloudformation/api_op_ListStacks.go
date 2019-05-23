@@ -133,7 +133,7 @@ func (r ListStacksRequest) Send(ctx context.Context) (*ListStacksResponse, error
 //
 //   // Example iterating over pages.
 //   req := client.ListStacksRequest(input)
-//   p := NewListStacksRequestPaginator(req)
+//   p := cloudformation.NewListStacksRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

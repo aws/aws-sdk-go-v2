@@ -158,7 +158,7 @@ func (r SearchAddressBooksRequest) Send(ctx context.Context) (*SearchAddressBook
 //
 //   // Example iterating over pages.
 //   req := client.SearchAddressBooksRequest(input)
-//   p := NewSearchAddressBooksRequestPaginator(req)
+//   p := alexaforbusiness.NewSearchAddressBooksRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

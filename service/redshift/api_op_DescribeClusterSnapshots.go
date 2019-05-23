@@ -228,7 +228,7 @@ func (r DescribeClusterSnapshotsRequest) Send(ctx context.Context) (*DescribeClu
 //
 //   // Example iterating over pages.
 //   req := client.DescribeClusterSnapshotsRequest(input)
-//   p := NewDescribeClusterSnapshotsRequestPaginator(req)
+//   p := redshift.NewDescribeClusterSnapshotsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

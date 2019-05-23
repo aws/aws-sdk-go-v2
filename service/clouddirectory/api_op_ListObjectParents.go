@@ -235,7 +235,7 @@ func (r ListObjectParentsRequest) Send(ctx context.Context) (*ListObjectParentsR
 //
 //   // Example iterating over pages.
 //   req := client.ListObjectParentsRequest(input)
-//   p := NewListObjectParentsRequestPaginator(req)
+//   p := clouddirectory.NewListObjectParentsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

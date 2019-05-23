@@ -178,7 +178,7 @@ func (r ListPoliciesForTargetRequest) Send(ctx context.Context) (*ListPoliciesFo
 //
 //   // Example iterating over pages.
 //   req := client.ListPoliciesForTargetRequest(input)
-//   p := NewListPoliciesForTargetRequestPaginator(req)
+//   p := organizations.NewListPoliciesForTargetRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

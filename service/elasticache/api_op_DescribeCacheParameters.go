@@ -148,7 +148,7 @@ func (r DescribeCacheParametersRequest) Send(ctx context.Context) (*DescribeCach
 //
 //   // Example iterating over pages.
 //   req := client.DescribeCacheParametersRequest(input)
-//   p := NewDescribeCacheParametersRequestPaginator(req)
+//   p := elasticache.NewDescribeCacheParametersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -163,7 +163,7 @@ func (r DescribeTransitGatewayAttachmentsRequest) Send(ctx context.Context) (*De
 //
 //   // Example iterating over pages.
 //   req := client.DescribeTransitGatewayAttachmentsRequest(input)
-//   p := NewDescribeTransitGatewayAttachmentsRequestPaginator(req)
+//   p := ec2.NewDescribeTransitGatewayAttachmentsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

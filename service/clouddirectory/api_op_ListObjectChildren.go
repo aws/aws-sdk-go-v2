@@ -210,7 +210,7 @@ func (r ListObjectChildrenRequest) Send(ctx context.Context) (*ListObjectChildre
 //
 //   // Example iterating over pages.
 //   req := client.ListObjectChildrenRequest(input)
-//   p := NewListObjectChildrenRequestPaginator(req)
+//   p := clouddirectory.NewListObjectChildrenRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

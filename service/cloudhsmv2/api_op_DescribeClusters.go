@@ -146,7 +146,7 @@ func (r DescribeClustersRequest) Send(ctx context.Context) (*DescribeClustersRes
 //
 //   // Example iterating over pages.
 //   req := client.DescribeClustersRequest(input)
-//   p := NewDescribeClustersRequestPaginator(req)
+//   p := cloudhsmv2.NewDescribeClustersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

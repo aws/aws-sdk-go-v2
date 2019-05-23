@@ -153,7 +153,7 @@ func (r ListUniqueProblemsRequest) Send(ctx context.Context) (*ListUniqueProblem
 //
 //   // Example iterating over pages.
 //   req := client.ListUniqueProblemsRequest(input)
-//   p := NewListUniqueProblemsRequestPaginator(req)
+//   p := devicefarm.NewListUniqueProblemsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

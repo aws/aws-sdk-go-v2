@@ -129,7 +129,7 @@ func (r ListOperationsRequest) Send(ctx context.Context) (*ListOperationsRespons
 //
 //   // Example iterating over pages.
 //   req := client.ListOperationsRequest(input)
-//   p := NewListOperationsRequestPaginator(req)
+//   p := route53domains.NewListOperationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

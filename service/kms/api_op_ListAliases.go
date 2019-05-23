@@ -161,7 +161,7 @@ func (r ListAliasesRequest) Send(ctx context.Context) (*ListAliasesResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.ListAliasesRequest(input)
-//   p := NewListAliasesRequestPaginator(req)
+//   p := kms.NewListAliasesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

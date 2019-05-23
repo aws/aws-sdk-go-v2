@@ -177,7 +177,7 @@ func (r ListPublishedSchemaArnsRequest) Send(ctx context.Context) (*ListPublishe
 //
 //   // Example iterating over pages.
 //   req := client.ListPublishedSchemaArnsRequest(input)
-//   p := NewListPublishedSchemaArnsRequestPaginator(req)
+//   p := clouddirectory.NewListPublishedSchemaArnsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

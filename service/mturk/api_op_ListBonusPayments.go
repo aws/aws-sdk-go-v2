@@ -149,7 +149,7 @@ func (r ListBonusPaymentsRequest) Send(ctx context.Context) (*ListBonusPaymentsR
 //
 //   // Example iterating over pages.
 //   req := client.ListBonusPaymentsRequest(input)
-//   p := NewListBonusPaymentsRequestPaginator(req)
+//   p := mturk.NewListBonusPaymentsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

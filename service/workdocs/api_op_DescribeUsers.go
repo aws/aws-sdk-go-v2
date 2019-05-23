@@ -274,7 +274,7 @@ func (r DescribeUsersRequest) Send(ctx context.Context) (*DescribeUsersResponse,
 //
 //   // Example iterating over pages.
 //   req := client.DescribeUsersRequest(input)
-//   p := NewDescribeUsersRequestPaginator(req)
+//   p := workdocs.NewDescribeUsersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

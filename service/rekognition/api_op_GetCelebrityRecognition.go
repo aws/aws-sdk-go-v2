@@ -194,7 +194,7 @@ func (r GetCelebrityRecognitionRequest) Send(ctx context.Context) (*GetCelebrity
 //
 //   // Example iterating over pages.
 //   req := client.GetCelebrityRecognitionRequest(input)
-//   p := NewGetCelebrityRecognitionRequestPaginator(req)
+//   p := rekognition.NewGetCelebrityRecognitionRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

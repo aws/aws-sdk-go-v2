@@ -148,7 +148,7 @@ func (r ListStreamsRequest) Send(ctx context.Context) (*ListStreamsResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.ListStreamsRequest(input)
-//   p := NewListStreamsRequestPaginator(req)
+//   p := kinesis.NewListStreamsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

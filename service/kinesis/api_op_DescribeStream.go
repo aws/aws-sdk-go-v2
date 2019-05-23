@@ -160,7 +160,7 @@ func (r DescribeStreamRequest) Send(ctx context.Context) (*DescribeStreamRespons
 //
 //   // Example iterating over pages.
 //   req := client.DescribeStreamRequest(input)
-//   p := NewDescribeStreamRequestPaginator(req)
+//   p := kinesis.NewDescribeStreamRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

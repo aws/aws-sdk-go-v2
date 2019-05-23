@@ -136,7 +136,7 @@ func (r ListKeyPhrasesDetectionJobsRequest) Send(ctx context.Context) (*ListKeyP
 //
 //   // Example iterating over pages.
 //   req := client.ListKeyPhrasesDetectionJobsRequest(input)
-//   p := NewListKeyPhrasesDetectionJobsRequestPaginator(req)
+//   p := comprehend.NewListKeyPhrasesDetectionJobsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

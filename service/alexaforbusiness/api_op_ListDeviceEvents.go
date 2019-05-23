@@ -147,7 +147,7 @@ func (r ListDeviceEventsRequest) Send(ctx context.Context) (*ListDeviceEventsRes
 //
 //   // Example iterating over pages.
 //   req := client.ListDeviceEventsRequest(input)
-//   p := NewListDeviceEventsRequestPaginator(req)
+//   p := alexaforbusiness.NewListDeviceEventsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

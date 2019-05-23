@@ -139,7 +139,7 @@ func (r ListStreamingDistributionsRequest) Send(ctx context.Context) (*ListStrea
 //
 //   // Example iterating over pages.
 //   req := client.ListStreamingDistributionsRequest(input)
-//   p := NewListStreamingDistributionsRequestPaginator(req)
+//   p := cloudfront.NewListStreamingDistributionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

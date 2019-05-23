@@ -162,7 +162,7 @@ func (r DescribeVTLDevicesRequest) Send(ctx context.Context) (*DescribeVTLDevice
 //
 //   // Example iterating over pages.
 //   req := client.DescribeVTLDevicesRequest(input)
-//   p := NewDescribeVTLDevicesRequestPaginator(req)
+//   p := storagegateway.NewDescribeVTLDevicesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

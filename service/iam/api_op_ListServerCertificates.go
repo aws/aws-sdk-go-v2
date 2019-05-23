@@ -172,7 +172,7 @@ func (r ListServerCertificatesRequest) Send(ctx context.Context) (*ListServerCer
 //
 //   // Example iterating over pages.
 //   req := client.ListServerCertificatesRequest(input)
-//   p := NewListServerCertificatesRequestPaginator(req)
+//   p := iam.NewListServerCertificatesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

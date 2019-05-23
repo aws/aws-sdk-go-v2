@@ -126,7 +126,7 @@ func (r ListClustersRequest) Send(ctx context.Context) (*ListClustersResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.ListClustersRequest(input)
-//   p := NewListClustersRequestPaginator(req)
+//   p := ecs.NewListClustersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

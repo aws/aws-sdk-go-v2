@@ -220,7 +220,7 @@ func (r DescribeSecurityGroupsRequest) Send(ctx context.Context) (*DescribeSecur
 //
 //   // Example iterating over pages.
 //   req := client.DescribeSecurityGroupsRequest(input)
-//   p := NewDescribeSecurityGroupsRequestPaginator(req)
+//   p := ec2.NewDescribeSecurityGroupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

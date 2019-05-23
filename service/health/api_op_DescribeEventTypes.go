@@ -150,7 +150,7 @@ func (r DescribeEventTypesRequest) Send(ctx context.Context) (*DescribeEventType
 //
 //   // Example iterating over pages.
 //   req := client.DescribeEventTypesRequest(input)
-//   p := NewDescribeEventTypesRequestPaginator(req)
+//   p := health.NewDescribeEventTypesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

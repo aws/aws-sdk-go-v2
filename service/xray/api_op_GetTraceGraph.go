@@ -174,7 +174,7 @@ func (r GetTraceGraphRequest) Send(ctx context.Context) (*GetTraceGraphResponse,
 //
 //   // Example iterating over pages.
 //   req := client.GetTraceGraphRequest(input)
-//   p := NewGetTraceGraphRequestPaginator(req)
+//   p := xray.NewGetTraceGraphRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

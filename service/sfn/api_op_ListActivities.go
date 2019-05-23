@@ -147,7 +147,7 @@ func (r ListActivitiesRequest) Send(ctx context.Context) (*ListActivitiesRespons
 //
 //   // Example iterating over pages.
 //   req := client.ListActivitiesRequest(input)
-//   p := NewListActivitiesRequestPaginator(req)
+//   p := sfn.NewListActivitiesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

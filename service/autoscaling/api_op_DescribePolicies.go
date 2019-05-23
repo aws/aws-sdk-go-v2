@@ -141,7 +141,7 @@ func (r DescribePoliciesRequest) Send(ctx context.Context) (*DescribePoliciesRes
 //
 //   // Example iterating over pages.
 //   req := client.DescribePoliciesRequest(input)
-//   p := NewDescribePoliciesRequestPaginator(req)
+//   p := autoscaling.NewDescribePoliciesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

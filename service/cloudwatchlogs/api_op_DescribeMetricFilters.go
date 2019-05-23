@@ -153,7 +153,7 @@ func (r DescribeMetricFiltersRequest) Send(ctx context.Context) (*DescribeMetric
 //
 //   // Example iterating over pages.
 //   req := client.DescribeMetricFiltersRequest(input)
-//   p := NewDescribeMetricFiltersRequestPaginator(req)
+//   p := cloudwatchlogs.NewDescribeMetricFiltersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

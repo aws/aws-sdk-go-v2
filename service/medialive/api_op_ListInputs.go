@@ -162,7 +162,7 @@ func (r ListInputsRequest) Send(ctx context.Context) (*ListInputsResponse, error
 //
 //   // Example iterating over pages.
 //   req := client.ListInputsRequest(input)
-//   p := NewListInputsRequestPaginator(req)
+//   p := medialive.NewListInputsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

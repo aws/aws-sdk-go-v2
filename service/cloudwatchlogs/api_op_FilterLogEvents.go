@@ -195,7 +195,7 @@ func (r FilterLogEventsRequest) Send(ctx context.Context) (*FilterLogEventsRespo
 //
 //   // Example iterating over pages.
 //   req := client.FilterLogEventsRequest(input)
-//   p := NewFilterLogEventsRequestPaginator(req)
+//   p := cloudwatchlogs.NewFilterLogEventsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -175,7 +175,7 @@ func (r DescribeScheduleRequest) Send(ctx context.Context) (*DescribeScheduleRes
 //
 //   // Example iterating over pages.
 //   req := client.DescribeScheduleRequest(input)
-//   p := NewDescribeScheduleRequestPaginator(req)
+//   p := medialive.NewDescribeScheduleRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -138,7 +138,7 @@ func (r DescribeVolumesModificationsRequest) Send(ctx context.Context) (*Describ
 //
 //   // Example iterating over pages.
 //   req := client.DescribeVolumesModificationsRequest(input)
-//   p := NewDescribeVolumesModificationsRequestPaginator(req)
+//   p := ec2.NewDescribeVolumesModificationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

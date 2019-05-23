@@ -207,7 +207,7 @@ func (r ListObjectPoliciesRequest) Send(ctx context.Context) (*ListObjectPolicie
 //
 //   // Example iterating over pages.
 //   req := client.ListObjectPoliciesRequest(input)
-//   p := NewListObjectPoliciesRequestPaginator(req)
+//   p := clouddirectory.NewListObjectPoliciesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

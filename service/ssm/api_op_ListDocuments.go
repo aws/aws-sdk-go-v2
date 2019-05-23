@@ -151,7 +151,7 @@ func (r ListDocumentsRequest) Send(ctx context.Context) (*ListDocumentsResponse,
 //
 //   // Example iterating over pages.
 //   req := client.ListDocumentsRequest(input)
-//   p := NewListDocumentsRequestPaginator(req)
+//   p := ssm.NewListDocumentsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

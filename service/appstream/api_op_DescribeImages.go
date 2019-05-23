@@ -136,7 +136,7 @@ func (r DescribeImagesRequest) Send(ctx context.Context) (*DescribeImagesRespons
 //
 //   // Example iterating over pages.
 //   req := client.DescribeImagesRequest(input)
-//   p := NewDescribeImagesRequestPaginator(req)
+//   p := appstream.NewDescribeImagesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

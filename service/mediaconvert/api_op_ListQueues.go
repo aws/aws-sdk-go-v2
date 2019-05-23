@@ -194,7 +194,7 @@ func (r ListQueuesRequest) Send(ctx context.Context) (*ListQueuesResponse, error
 //
 //   // Example iterating over pages.
 //   req := client.ListQueuesRequest(input)
-//   p := NewListQueuesRequestPaginator(req)
+//   p := mediaconvert.NewListQueuesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

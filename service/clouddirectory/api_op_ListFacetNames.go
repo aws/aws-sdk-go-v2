@@ -180,7 +180,7 @@ func (r ListFacetNamesRequest) Send(ctx context.Context) (*ListFacetNamesRespons
 //
 //   // Example iterating over pages.
 //   req := client.ListFacetNamesRequest(input)
-//   p := NewListFacetNamesRequestPaginator(req)
+//   p := clouddirectory.NewListFacetNamesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

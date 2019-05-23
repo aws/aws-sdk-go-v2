@@ -239,7 +239,7 @@ func (r ListRecoveryPointsByBackupVaultRequest) Send(ctx context.Context) (*List
 //
 //   // Example iterating over pages.
 //   req := client.ListRecoveryPointsByBackupVaultRequest(input)
-//   p := NewListRecoveryPointsByBackupVaultRequestPaginator(req)
+//   p := backup.NewListRecoveryPointsByBackupVaultRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

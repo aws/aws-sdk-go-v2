@@ -149,7 +149,7 @@ func (r DescribeSubscriptionFiltersRequest) Send(ctx context.Context) (*Describe
 //
 //   // Example iterating over pages.
 //   req := client.DescribeSubscriptionFiltersRequest(input)
-//   p := NewDescribeSubscriptionFiltersRequestPaginator(req)
+//   p := cloudwatchlogs.NewDescribeSubscriptionFiltersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

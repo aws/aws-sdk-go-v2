@@ -124,7 +124,7 @@ func (r ListAgentsRequest) Send(ctx context.Context) (*ListAgentsResponse, error
 //
 //   // Example iterating over pages.
 //   req := client.ListAgentsRequest(input)
-//   p := NewListAgentsRequestPaginator(req)
+//   p := datasync.NewListAgentsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

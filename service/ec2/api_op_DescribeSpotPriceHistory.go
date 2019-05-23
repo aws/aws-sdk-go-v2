@@ -165,7 +165,7 @@ func (r DescribeSpotPriceHistoryRequest) Send(ctx context.Context) (*DescribeSpo
 //
 //   // Example iterating over pages.
 //   req := client.DescribeSpotPriceHistoryRequest(input)
-//   p := NewDescribeSpotPriceHistoryRequestPaginator(req)
+//   p := ec2.NewDescribeSpotPriceHistoryRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

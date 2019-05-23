@@ -183,7 +183,7 @@ func (r ListFiltersRequest) Send(ctx context.Context) (*ListFiltersResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.ListFiltersRequest(input)
-//   p := NewListFiltersRequestPaginator(req)
+//   p := guardduty.NewListFiltersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

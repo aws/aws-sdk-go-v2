@@ -149,7 +149,7 @@ func (r DescribeEventSubscriptionsRequest) Send(ctx context.Context) (*DescribeE
 //
 //   // Example iterating over pages.
 //   req := client.DescribeEventSubscriptionsRequest(input)
-//   p := NewDescribeEventSubscriptionsRequestPaginator(req)
+//   p := rds.NewDescribeEventSubscriptionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

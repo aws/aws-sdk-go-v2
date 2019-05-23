@@ -146,7 +146,7 @@ func (r DescribeImagePermissionsRequest) Send(ctx context.Context) (*DescribeIma
 //
 //   // Example iterating over pages.
 //   req := client.DescribeImagePermissionsRequest(input)
-//   p := NewDescribeImagePermissionsRequestPaginator(req)
+//   p := appstream.NewDescribeImagePermissionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -125,7 +125,7 @@ func (r ListS3ResourcesRequest) Send(ctx context.Context) (*ListS3ResourcesRespo
 //
 //   // Example iterating over pages.
 //   req := client.ListS3ResourcesRequest(input)
-//   p := NewListS3ResourcesRequestPaginator(req)
+//   p := macie.NewListS3ResourcesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

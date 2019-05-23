@@ -131,7 +131,7 @@ func (r ListBranchesRequest) Send(ctx context.Context) (*ListBranchesResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.ListBranchesRequest(input)
-//   p := NewListBranchesRequestPaginator(req)
+//   p := codecommit.NewListBranchesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

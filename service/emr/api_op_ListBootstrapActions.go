@@ -128,7 +128,7 @@ func (r ListBootstrapActionsRequest) Send(ctx context.Context) (*ListBootstrapAc
 //
 //   // Example iterating over pages.
 //   req := client.ListBootstrapActionsRequest(input)
-//   p := NewListBootstrapActionsRequestPaginator(req)
+//   p := emr.NewListBootstrapActionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

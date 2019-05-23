@@ -163,7 +163,7 @@ func (r DescribeDBParametersRequest) Send(ctx context.Context) (*DescribeDBParam
 //
 //   // Example iterating over pages.
 //   req := client.DescribeDBParametersRequest(input)
-//   p := NewDescribeDBParametersRequestPaginator(req)
+//   p := neptune.NewDescribeDBParametersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

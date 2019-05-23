@@ -156,7 +156,7 @@ func (r DescribeCacheClustersRequest) Send(ctx context.Context) (*DescribeCacheC
 //
 //   // Example iterating over pages.
 //   req := client.DescribeCacheClustersRequest(input)
-//   p := NewDescribeCacheClustersRequestPaginator(req)
+//   p := elasticache.NewDescribeCacheClustersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

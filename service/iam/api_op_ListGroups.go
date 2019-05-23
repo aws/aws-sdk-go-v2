@@ -166,7 +166,7 @@ func (r ListGroupsRequest) Send(ctx context.Context) (*ListGroupsResponse, error
 //
 //   // Example iterating over pages.
 //   req := client.ListGroupsRequest(input)
-//   p := NewListGroupsRequestPaginator(req)
+//   p := iam.NewListGroupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

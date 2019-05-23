@@ -160,7 +160,7 @@ func (r DescribeWorkspacesRequest) Send(ctx context.Context) (*DescribeWorkspace
 //
 //   // Example iterating over pages.
 //   req := client.DescribeWorkspacesRequest(input)
-//   p := NewDescribeWorkspacesRequestPaginator(req)
+//   p := workspaces.NewDescribeWorkspacesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

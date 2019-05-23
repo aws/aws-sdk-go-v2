@@ -176,7 +176,7 @@ func (r ListChildrenRequest) Send(ctx context.Context) (*ListChildrenResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.ListChildrenRequest(input)
-//   p := NewListChildrenRequestPaginator(req)
+//   p := organizations.NewListChildrenRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

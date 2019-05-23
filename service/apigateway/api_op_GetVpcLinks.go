@@ -153,7 +153,7 @@ func (r GetVpcLinksRequest) Send(ctx context.Context) (*GetVpcLinksResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.GetVpcLinksRequest(input)
-//   p := NewGetVpcLinksRequestPaginator(req)
+//   p := apigateway.NewGetVpcLinksRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

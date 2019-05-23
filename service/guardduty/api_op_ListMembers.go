@@ -192,7 +192,7 @@ func (r ListMembersRequest) Send(ctx context.Context) (*ListMembersResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.ListMembersRequest(input)
-//   p := NewListMembersRequestPaginator(req)
+//   p := guardduty.NewListMembersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

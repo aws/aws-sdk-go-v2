@@ -145,7 +145,7 @@ func (r DescribeAlarmsRequest) Send(ctx context.Context) (*DescribeAlarmsRespons
 //
 //   // Example iterating over pages.
 //   req := client.DescribeAlarmsRequest(input)
-//   p := NewDescribeAlarmsRequestPaginator(req)
+//   p := cloudwatch.NewDescribeAlarmsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

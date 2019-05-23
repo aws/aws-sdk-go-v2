@@ -134,7 +134,7 @@ func (r ListCrawlersRequest) Send(ctx context.Context) (*ListCrawlersResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.ListCrawlersRequest(input)
-//   p := NewListCrawlersRequestPaginator(req)
+//   p := glue.NewListCrawlersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

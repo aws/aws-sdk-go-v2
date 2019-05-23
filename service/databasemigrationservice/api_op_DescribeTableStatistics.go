@@ -163,7 +163,7 @@ func (r DescribeTableStatisticsRequest) Send(ctx context.Context) (*DescribeTabl
 //
 //   // Example iterating over pages.
 //   req := client.DescribeTableStatisticsRequest(input)
-//   p := NewDescribeTableStatisticsRequestPaginator(req)
+//   p := databasemigrationservice.NewDescribeTableStatisticsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

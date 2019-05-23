@@ -132,7 +132,7 @@ func (r DescribeLoadBalancersRequest) Send(ctx context.Context) (*DescribeLoadBa
 //
 //   // Example iterating over pages.
 //   req := client.DescribeLoadBalancersRequest(input)
-//   p := NewDescribeLoadBalancersRequestPaginator(req)
+//   p := elasticloadbalancing.NewDescribeLoadBalancersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

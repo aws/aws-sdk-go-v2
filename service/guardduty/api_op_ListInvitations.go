@@ -171,7 +171,7 @@ func (r ListInvitationsRequest) Send(ctx context.Context) (*ListInvitationsRespo
 //
 //   // Example iterating over pages.
 //   req := client.ListInvitationsRequest(input)
-//   p := NewListInvitationsRequestPaginator(req)
+//   p := guardduty.NewListInvitationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

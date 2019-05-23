@@ -162,7 +162,7 @@ func (r ListInputSecurityGroupsRequest) Send(ctx context.Context) (*ListInputSec
 //
 //   // Example iterating over pages.
 //   req := client.ListInputSecurityGroupsRequest(input)
-//   p := NewListInputSecurityGroupsRequestPaginator(req)
+//   p := medialive.NewListInputSecurityGroupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

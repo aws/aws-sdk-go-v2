@@ -149,7 +149,7 @@ func (r ListMetricsRequest) Send(ctx context.Context) (*ListMetricsResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.ListMetricsRequest(input)
-//   p := NewListMetricsRequestPaginator(req)
+//   p := cloudwatch.NewListMetricsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

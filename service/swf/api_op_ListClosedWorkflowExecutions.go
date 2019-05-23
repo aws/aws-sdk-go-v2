@@ -258,7 +258,7 @@ func (r ListClosedWorkflowExecutionsRequest) Send(ctx context.Context) (*ListClo
 //
 //   // Example iterating over pages.
 //   req := client.ListClosedWorkflowExecutionsRequest(input)
-//   p := NewListClosedWorkflowExecutionsRequestPaginator(req)
+//   p := swf.NewListClosedWorkflowExecutionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

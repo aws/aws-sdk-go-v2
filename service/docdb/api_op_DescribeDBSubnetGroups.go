@@ -147,7 +147,7 @@ func (r DescribeDBSubnetGroupsRequest) Send(ctx context.Context) (*DescribeDBSub
 //
 //   // Example iterating over pages.
 //   req := client.DescribeDBSubnetGroupsRequest(input)
-//   p := NewDescribeDBSubnetGroupsRequestPaginator(req)
+//   p := docdb.NewDescribeDBSubnetGroupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -161,7 +161,7 @@ func (r DescribeHsmClientCertificatesRequest) Send(ctx context.Context) (*Descri
 //
 //   // Example iterating over pages.
 //   req := client.DescribeHsmClientCertificatesRequest(input)
-//   p := NewDescribeHsmClientCertificatesRequestPaginator(req)
+//   p := redshift.NewDescribeHsmClientCertificatesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

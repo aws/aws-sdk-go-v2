@@ -164,7 +164,7 @@ func (r DescribeBackupsRequest) Send(ctx context.Context) (*DescribeBackupsRespo
 //
 //   // Example iterating over pages.
 //   req := client.DescribeBackupsRequest(input)
-//   p := NewDescribeBackupsRequestPaginator(req)
+//   p := fsx.NewDescribeBackupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

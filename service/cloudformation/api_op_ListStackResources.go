@@ -144,7 +144,7 @@ func (r ListStackResourcesRequest) Send(ctx context.Context) (*ListStackResource
 //
 //   // Example iterating over pages.
 //   req := client.ListStackResourcesRequest(input)
-//   p := NewListStackResourcesRequestPaginator(req)
+//   p := cloudformation.NewListStackResourcesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

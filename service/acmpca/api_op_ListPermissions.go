@@ -151,7 +151,7 @@ func (r ListPermissionsRequest) Send(ctx context.Context) (*ListPermissionsRespo
 //
 //   // Example iterating over pages.
 //   req := client.ListPermissionsRequest(input)
-//   p := NewListPermissionsRequestPaginator(req)
+//   p := acmpca.NewListPermissionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

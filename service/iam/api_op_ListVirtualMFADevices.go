@@ -160,7 +160,7 @@ func (r ListVirtualMFADevicesRequest) Send(ctx context.Context) (*ListVirtualMFA
 //
 //   // Example iterating over pages.
 //   req := client.ListVirtualMFADevicesRequest(input)
-//   p := NewListVirtualMFADevicesRequestPaginator(req)
+//   p := iam.NewListVirtualMFADevicesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

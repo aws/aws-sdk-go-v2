@@ -138,7 +138,7 @@ func (r DescribeScheduledInstancesRequest) Send(ctx context.Context) (*DescribeS
 //
 //   // Example iterating over pages.
 //   req := client.DescribeScheduledInstancesRequest(input)
-//   p := NewDescribeScheduledInstancesRequestPaginator(req)
+//   p := ec2.NewDescribeScheduledInstancesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

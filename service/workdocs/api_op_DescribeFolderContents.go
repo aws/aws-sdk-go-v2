@@ -262,7 +262,7 @@ func (r DescribeFolderContentsRequest) Send(ctx context.Context) (*DescribeFolde
 //
 //   // Example iterating over pages.
 //   req := client.DescribeFolderContentsRequest(input)
-//   p := NewDescribeFolderContentsRequestPaginator(req)
+//   p := workdocs.NewDescribeFolderContentsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

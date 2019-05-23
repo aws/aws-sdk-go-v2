@@ -143,7 +143,7 @@ func (r ListWorkteamsRequest) Send(ctx context.Context) (*ListWorkteamsResponse,
 //
 //   // Example iterating over pages.
 //   req := client.ListWorkteamsRequest(input)
-//   p := NewListWorkteamsRequestPaginator(req)
+//   p := sagemaker.NewListWorkteamsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -112,7 +112,7 @@ func (r ListApplicationsRequest) Send(ctx context.Context) (*ListApplicationsRes
 //
 //   // Example iterating over pages.
 //   req := client.ListApplicationsRequest(input)
-//   p := NewListApplicationsRequestPaginator(req)
+//   p := codedeploy.NewListApplicationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -176,7 +176,7 @@ func (r ListBackupVaultsRequest) Send(ctx context.Context) (*ListBackupVaultsRes
 //
 //   // Example iterating over pages.
 //   req := client.ListBackupVaultsRequest(input)
-//   p := NewListBackupVaultsRequestPaginator(req)
+//   p := backup.NewListBackupVaultsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

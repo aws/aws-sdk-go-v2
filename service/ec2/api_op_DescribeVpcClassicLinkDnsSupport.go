@@ -137,7 +137,7 @@ func (r DescribeVpcClassicLinkDnsSupportRequest) Send(ctx context.Context) (*Des
 //
 //   // Example iterating over pages.
 //   req := client.DescribeVpcClassicLinkDnsSupportRequest(input)
-//   p := NewDescribeVpcClassicLinkDnsSupportRequestPaginator(req)
+//   p := ec2.NewDescribeVpcClassicLinkDnsSupportRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -150,7 +150,7 @@ func (r ListGroupMembersRequest) Send(ctx context.Context) (*ListGroupMembersRes
 //
 //   // Example iterating over pages.
 //   req := client.ListGroupMembersRequest(input)
-//   p := NewListGroupMembersRequestPaginator(req)
+//   p := workmail.NewListGroupMembersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

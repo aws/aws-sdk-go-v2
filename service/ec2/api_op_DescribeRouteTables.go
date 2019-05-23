@@ -200,7 +200,7 @@ func (r DescribeRouteTablesRequest) Send(ctx context.Context) (*DescribeRouteTab
 //
 //   // Example iterating over pages.
 //   req := client.DescribeRouteTablesRequest(input)
-//   p := NewDescribeRouteTablesRequestPaginator(req)
+//   p := ec2.NewDescribeRouteTablesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

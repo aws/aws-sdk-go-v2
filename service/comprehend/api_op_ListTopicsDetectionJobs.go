@@ -136,7 +136,7 @@ func (r ListTopicsDetectionJobsRequest) Send(ctx context.Context) (*ListTopicsDe
 //
 //   // Example iterating over pages.
 //   req := client.ListTopicsDetectionJobsRequest(input)
-//   p := NewListTopicsDetectionJobsRequestPaginator(req)
+//   p := comprehend.NewListTopicsDetectionJobsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

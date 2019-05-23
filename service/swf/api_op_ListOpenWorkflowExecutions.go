@@ -232,7 +232,7 @@ func (r ListOpenWorkflowExecutionsRequest) Send(ctx context.Context) (*ListOpenW
 //
 //   // Example iterating over pages.
 //   req := client.ListOpenWorkflowExecutionsRequest(input)
-//   p := NewListOpenWorkflowExecutionsRequestPaginator(req)
+//   p := swf.NewListOpenWorkflowExecutionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

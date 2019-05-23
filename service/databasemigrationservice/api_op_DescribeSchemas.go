@@ -139,7 +139,7 @@ func (r DescribeSchemasRequest) Send(ctx context.Context) (*DescribeSchemasRespo
 //
 //   // Example iterating over pages.
 //   req := client.DescribeSchemasRequest(input)
-//   p := NewDescribeSchemasRequestPaginator(req)
+//   p := databasemigrationservice.NewDescribeSchemasRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

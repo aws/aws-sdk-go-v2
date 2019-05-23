@@ -179,7 +179,7 @@ func (r DescribeDataSourcesRequest) Send(ctx context.Context) (*DescribeDataSour
 //
 //   // Example iterating over pages.
 //   req := client.DescribeDataSourcesRequest(input)
-//   p := NewDescribeDataSourcesRequestPaginator(req)
+//   p := machinelearning.NewDescribeDataSourcesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

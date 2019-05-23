@@ -130,7 +130,7 @@ func (r ListOfferingTransactionsRequest) Send(ctx context.Context) (*ListOfferin
 //
 //   // Example iterating over pages.
 //   req := client.ListOfferingTransactionsRequest(input)
-//   p := NewListOfferingTransactionsRequestPaginator(req)
+//   p := devicefarm.NewListOfferingTransactionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

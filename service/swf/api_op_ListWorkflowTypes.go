@@ -187,7 +187,7 @@ func (r ListWorkflowTypesRequest) Send(ctx context.Context) (*ListWorkflowTypesR
 //
 //   // Example iterating over pages.
 //   req := client.ListWorkflowTypesRequest(input)
-//   p := NewListWorkflowTypesRequestPaginator(req)
+//   p := swf.NewListWorkflowTypesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

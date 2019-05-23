@@ -157,7 +157,7 @@ func (r DescribeObjectsRequest) Send(ctx context.Context) (*DescribeObjectsRespo
 //
 //   // Example iterating over pages.
 //   req := client.DescribeObjectsRequest(input)
-//   p := NewDescribeObjectsRequestPaginator(req)
+//   p := datapipeline.NewDescribeObjectsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -114,7 +114,7 @@ func (r ListTasksRequest) Send(ctx context.Context) (*ListTasksResponse, error) 
 //
 //   // Example iterating over pages.
 //   req := client.ListTasksRequest(input)
-//   p := NewListTasksRequestPaginator(req)
+//   p := datasync.NewListTasksRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

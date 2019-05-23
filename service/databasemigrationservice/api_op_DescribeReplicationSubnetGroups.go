@@ -141,7 +141,7 @@ func (r DescribeReplicationSubnetGroupsRequest) Send(ctx context.Context) (*Desc
 //
 //   // Example iterating over pages.
 //   req := client.DescribeReplicationSubnetGroupsRequest(input)
-//   p := NewDescribeReplicationSubnetGroupsRequestPaginator(req)
+//   p := databasemigrationservice.NewDescribeReplicationSubnetGroupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

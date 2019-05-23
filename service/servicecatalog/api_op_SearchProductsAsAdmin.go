@@ -150,7 +150,7 @@ func (r SearchProductsAsAdminRequest) Send(ctx context.Context) (*SearchProducts
 //
 //   // Example iterating over pages.
 //   req := client.SearchProductsAsAdminRequest(input)
-//   p := NewSearchProductsAsAdminRequestPaginator(req)
+//   p := servicecatalog.NewSearchProductsAsAdminRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

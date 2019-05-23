@@ -156,7 +156,7 @@ func (r SearchRoomsRequest) Send(ctx context.Context) (*SearchRoomsResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.SearchRoomsRequest(input)
-//   p := NewSearchRoomsRequestPaginator(req)
+//   p := alexaforbusiness.NewSearchRoomsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

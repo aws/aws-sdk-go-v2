@@ -185,7 +185,7 @@ func (r DescribeEvaluationsRequest) Send(ctx context.Context) (*DescribeEvaluati
 //
 //   // Example iterating over pages.
 //   req := client.DescribeEvaluationsRequest(input)
-//   p := NewDescribeEvaluationsRequestPaginator(req)
+//   p := machinelearning.NewDescribeEvaluationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

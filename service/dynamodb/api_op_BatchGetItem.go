@@ -296,7 +296,7 @@ func (r BatchGetItemRequest) Send(ctx context.Context) (*BatchGetItemResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.BatchGetItemRequest(input)
-//   p := NewBatchGetItemRequestPaginator(req)
+//   p := dynamodb.NewBatchGetItemRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

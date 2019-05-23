@@ -229,7 +229,7 @@ func (r GetBotChannelAssociationsRequest) Send(ctx context.Context) (*GetBotChan
 //
 //   // Example iterating over pages.
 //   req := client.GetBotChannelAssociationsRequest(input)
-//   p := NewGetBotChannelAssociationsRequestPaginator(req)
+//   p := lexmodelbuildingservice.NewGetBotChannelAssociationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

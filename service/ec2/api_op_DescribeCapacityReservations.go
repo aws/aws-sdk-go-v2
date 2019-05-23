@@ -126,7 +126,7 @@ func (r DescribeCapacityReservationsRequest) Send(ctx context.Context) (*Describ
 //
 //   // Example iterating over pages.
 //   req := client.DescribeCapacityReservationsRequest(input)
-//   p := NewDescribeCapacityReservationsRequestPaginator(req)
+//   p := ec2.NewDescribeCapacityReservationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

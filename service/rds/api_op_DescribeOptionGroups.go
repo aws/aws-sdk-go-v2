@@ -155,7 +155,7 @@ func (r DescribeOptionGroupsRequest) Send(ctx context.Context) (*DescribeOptionG
 //
 //   // Example iterating over pages.
 //   req := client.DescribeOptionGroupsRequest(input)
-//   p := NewDescribeOptionGroupsRequestPaginator(req)
+//   p := rds.NewDescribeOptionGroupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

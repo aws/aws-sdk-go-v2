@@ -147,7 +147,7 @@ func (r GetTablesRequest) Send(ctx context.Context) (*GetTablesResponse, error) 
 //
 //   // Example iterating over pages.
 //   req := client.GetTablesRequest(input)
-//   p := NewGetTablesRequestPaginator(req)
+//   p := glue.NewGetTablesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

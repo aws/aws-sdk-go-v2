@@ -172,7 +172,7 @@ func (r ListPolicyVersionsRequest) Send(ctx context.Context) (*ListPolicyVersion
 //
 //   // Example iterating over pages.
 //   req := client.ListPolicyVersionsRequest(input)
-//   p := NewListPolicyVersionsRequestPaginator(req)
+//   p := iam.NewListPolicyVersionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

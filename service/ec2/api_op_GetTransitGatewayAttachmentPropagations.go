@@ -147,7 +147,7 @@ func (r GetTransitGatewayAttachmentPropagationsRequest) Send(ctx context.Context
 //
 //   // Example iterating over pages.
 //   req := client.GetTransitGatewayAttachmentPropagationsRequest(input)
-//   p := NewGetTransitGatewayAttachmentPropagationsRequestPaginator(req)
+//   p := ec2.NewGetTransitGatewayAttachmentPropagationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

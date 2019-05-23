@@ -144,7 +144,7 @@ func (r ListReviewableHITsRequest) Send(ctx context.Context) (*ListReviewableHIT
 //
 //   // Example iterating over pages.
 //   req := client.ListReviewableHITsRequest(input)
-//   p := NewListReviewableHITsRequestPaginator(req)
+//   p := mturk.NewListReviewableHITsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

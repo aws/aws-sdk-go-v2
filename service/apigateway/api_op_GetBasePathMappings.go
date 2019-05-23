@@ -177,7 +177,7 @@ func (r GetBasePathMappingsRequest) Send(ctx context.Context) (*GetBasePathMappi
 //
 //   // Example iterating over pages.
 //   req := client.GetBasePathMappingsRequest(input)
-//   p := NewGetBasePathMappingsRequestPaginator(req)
+//   p := apigateway.NewGetBasePathMappingsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

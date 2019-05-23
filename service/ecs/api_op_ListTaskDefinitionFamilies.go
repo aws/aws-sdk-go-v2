@@ -147,7 +147,7 @@ func (r ListTaskDefinitionFamiliesRequest) Send(ctx context.Context) (*ListTaskD
 //
 //   // Example iterating over pages.
 //   req := client.ListTaskDefinitionFamiliesRequest(input)
-//   p := NewListTaskDefinitionFamiliesRequestPaginator(req)
+//   p := ecs.NewListTaskDefinitionFamiliesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

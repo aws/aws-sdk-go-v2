@@ -156,7 +156,7 @@ func (r DescribeRemediationExecutionStatusRequest) Send(ctx context.Context) (*D
 //
 //   // Example iterating over pages.
 //   req := client.DescribeRemediationExecutionStatusRequest(input)
-//   p := NewDescribeRemediationExecutionStatusRequestPaginator(req)
+//   p := configservice.NewDescribeRemediationExecutionStatusRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

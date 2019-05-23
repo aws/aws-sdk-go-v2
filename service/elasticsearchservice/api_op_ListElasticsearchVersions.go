@@ -161,7 +161,7 @@ func (r ListElasticsearchVersionsRequest) Send(ctx context.Context) (*ListElasti
 //
 //   // Example iterating over pages.
 //   req := client.ListElasticsearchVersionsRequest(input)
-//   p := NewListElasticsearchVersionsRequestPaginator(req)
+//   p := elasticsearchservice.NewListElasticsearchVersionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -177,7 +177,7 @@ func (r DescribeDBInstanceAutomatedBackupsRequest) Send(ctx context.Context) (*D
 //
 //   // Example iterating over pages.
 //   req := client.DescribeDBInstanceAutomatedBackupsRequest(input)
-//   p := NewDescribeDBInstanceAutomatedBackupsRequestPaginator(req)
+//   p := rds.NewDescribeDBInstanceAutomatedBackupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

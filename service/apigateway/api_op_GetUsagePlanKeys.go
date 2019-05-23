@@ -190,7 +190,7 @@ func (r GetUsagePlanKeysRequest) Send(ctx context.Context) (*GetUsagePlanKeysRes
 //
 //   // Example iterating over pages.
 //   req := client.GetUsagePlanKeysRequest(input)
-//   p := NewGetUsagePlanKeysRequestPaginator(req)
+//   p := apigateway.NewGetUsagePlanKeysRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

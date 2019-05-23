@@ -147,7 +147,7 @@ func (r DescribeClientVpnRoutesRequest) Send(ctx context.Context) (*DescribeClie
 //
 //   // Example iterating over pages.
 //   req := client.DescribeClientVpnRoutesRequest(input)
-//   p := NewDescribeClientVpnRoutesRequestPaginator(req)
+//   p := ec2.NewDescribeClientVpnRoutesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

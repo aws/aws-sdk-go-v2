@@ -135,7 +135,7 @@ func (r GetTagValuesRequest) Send(ctx context.Context) (*GetTagValuesResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.GetTagValuesRequest(input)
-//   p := NewGetTagValuesRequestPaginator(req)
+//   p := resourcegroupstaggingapi.NewGetTagValuesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

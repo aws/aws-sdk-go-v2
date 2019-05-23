@@ -133,7 +133,7 @@ func (r ListWorkerBlocksRequest) Send(ctx context.Context) (*ListWorkerBlocksRes
 //
 //   // Example iterating over pages.
 //   req := client.ListWorkerBlocksRequest(input)
-//   p := NewListWorkerBlocksRequestPaginator(req)
+//   p := mturk.NewListWorkerBlocksRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

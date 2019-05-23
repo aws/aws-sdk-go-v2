@@ -143,7 +143,7 @@ func (r ListTablesRequest) Send(ctx context.Context) (*ListTablesResponse, error
 //
 //   // Example iterating over pages.
 //   req := client.ListTablesRequest(input)
-//   p := NewListTablesRequestPaginator(req)
+//   p := dynamodb.NewListTablesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -166,7 +166,7 @@ func (r ListGrantsRequest) Send(ctx context.Context) (*ListGrantsResponse, error
 //
 //   // Example iterating over pages.
 //   req := client.ListGrantsRequest(input)
-//   p := NewListGrantsRequestPaginator(req)
+//   p := kms.NewListGrantsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

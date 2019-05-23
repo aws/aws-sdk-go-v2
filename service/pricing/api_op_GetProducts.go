@@ -148,7 +148,7 @@ func (r GetProductsRequest) Send(ctx context.Context) (*GetProductsResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.GetProductsRequest(input)
-//   p := NewGetProductsRequestPaginator(req)
+//   p := pricing.NewGetProductsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

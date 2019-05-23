@@ -222,7 +222,7 @@ func (r ListSimulationApplicationsRequest) Send(ctx context.Context) (*ListSimul
 //
 //   // Example iterating over pages.
 //   req := client.ListSimulationApplicationsRequest(input)
-//   p := NewListSimulationApplicationsRequestPaginator(req)
+//   p := robomaker.NewListSimulationApplicationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

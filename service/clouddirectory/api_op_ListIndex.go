@@ -229,7 +229,7 @@ func (r ListIndexRequest) Send(ctx context.Context) (*ListIndexResponse, error) 
 //
 //   // Example iterating over pages.
 //   req := client.ListIndexRequest(input)
-//   p := NewListIndexRequestPaginator(req)
+//   p := clouddirectory.NewListIndexRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

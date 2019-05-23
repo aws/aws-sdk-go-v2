@@ -162,7 +162,7 @@ func (r DescribeDBInstancesRequest) Send(ctx context.Context) (*DescribeDBInstan
 //
 //   // Example iterating over pages.
 //   req := client.DescribeDBInstancesRequest(input)
-//   p := NewDescribeDBInstancesRequestPaginator(req)
+//   p := rds.NewDescribeDBInstancesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

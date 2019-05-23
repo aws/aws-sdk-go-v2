@@ -134,7 +134,7 @@ func (r ListSubscriptionsByTopicRequest) Send(ctx context.Context) (*ListSubscri
 //
 //   // Example iterating over pages.
 //   req := client.ListSubscriptionsByTopicRequest(input)
-//   p := NewListSubscriptionsByTopicRequestPaginator(req)
+//   p := sns.NewListSubscriptionsByTopicRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

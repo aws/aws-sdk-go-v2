@@ -158,7 +158,7 @@ func (r ListBundlesRequest) Send(ctx context.Context) (*ListBundlesResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.ListBundlesRequest(input)
-//   p := NewListBundlesRequestPaginator(req)
+//   p := mobile.NewListBundlesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

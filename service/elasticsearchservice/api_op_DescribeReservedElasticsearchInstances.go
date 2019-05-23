@@ -163,7 +163,7 @@ func (r DescribeReservedElasticsearchInstancesRequest) Send(ctx context.Context)
 //
 //   // Example iterating over pages.
 //   req := client.DescribeReservedElasticsearchInstancesRequest(input)
-//   p := NewDescribeReservedElasticsearchInstancesRequestPaginator(req)
+//   p := elasticsearchservice.NewDescribeReservedElasticsearchInstancesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

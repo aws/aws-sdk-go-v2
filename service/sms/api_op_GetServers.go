@@ -125,7 +125,7 @@ func (r GetServersRequest) Send(ctx context.Context) (*GetServersResponse, error
 //
 //   // Example iterating over pages.
 //   req := client.GetServersRequest(input)
-//   p := NewGetServersRequestPaginator(req)
+//   p := sms.NewGetServersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

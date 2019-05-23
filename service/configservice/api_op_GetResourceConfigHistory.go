@@ -173,7 +173,7 @@ func (r GetResourceConfigHistoryRequest) Send(ctx context.Context) (*GetResource
 //
 //   // Example iterating over pages.
 //   req := client.GetResourceConfigHistoryRequest(input)
-//   p := NewGetResourceConfigHistoryRequestPaginator(req)
+//   p := configservice.NewGetResourceConfigHistoryRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -139,7 +139,7 @@ func (r DescribeFleetsRequest) Send(ctx context.Context) (*DescribeFleetsRespons
 //
 //   // Example iterating over pages.
 //   req := client.DescribeFleetsRequest(input)
-//   p := NewDescribeFleetsRequestPaginator(req)
+//   p := ec2.NewDescribeFleetsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

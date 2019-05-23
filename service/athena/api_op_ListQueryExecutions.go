@@ -133,7 +133,7 @@ func (r ListQueryExecutionsRequest) Send(ctx context.Context) (*ListQueryExecuti
 //
 //   // Example iterating over pages.
 //   req := client.ListQueryExecutionsRequest(input)
-//   p := NewListQueryExecutionsRequestPaginator(req)
+//   p := athena.NewListQueryExecutionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

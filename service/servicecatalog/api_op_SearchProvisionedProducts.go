@@ -143,7 +143,7 @@ func (r SearchProvisionedProductsRequest) Send(ctx context.Context) (*SearchProv
 //
 //   // Example iterating over pages.
 //   req := client.SearchProvisionedProductsRequest(input)
-//   p := NewSearchProvisionedProductsRequestPaginator(req)
+//   p := servicecatalog.NewSearchProvisionedProductsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

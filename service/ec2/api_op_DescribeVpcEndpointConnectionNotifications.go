@@ -138,7 +138,7 @@ func (r DescribeVpcEndpointConnectionNotificationsRequest) Send(ctx context.Cont
 //
 //   // Example iterating over pages.
 //   req := client.DescribeVpcEndpointConnectionNotificationsRequest(input)
-//   p := NewDescribeVpcEndpointConnectionNotificationsRequestPaginator(req)
+//   p := ec2.NewDescribeVpcEndpointConnectionNotificationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -196,7 +196,7 @@ func (r GetFindingsRequest) Send(ctx context.Context) (*GetFindingsResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.GetFindingsRequest(input)
-//   p := NewGetFindingsRequestPaginator(req)
+//   p := securityhub.NewGetFindingsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

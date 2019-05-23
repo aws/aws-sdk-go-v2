@@ -156,7 +156,7 @@ func (r GetUserDefinedFunctionsRequest) Send(ctx context.Context) (*GetUserDefin
 //
 //   // Example iterating over pages.
 //   req := client.GetUserDefinedFunctionsRequest(input)
-//   p := NewGetUserDefinedFunctionsRequestPaginator(req)
+//   p := glue.NewGetUserDefinedFunctionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

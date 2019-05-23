@@ -180,7 +180,7 @@ func (r ListSpeechSynthesisTasksRequest) Send(ctx context.Context) (*ListSpeechS
 //
 //   // Example iterating over pages.
 //   req := client.ListSpeechSynthesisTasksRequest(input)
-//   p := NewListSpeechSynthesisTasksRequestPaginator(req)
+//   p := polly.NewListSpeechSynthesisTasksRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

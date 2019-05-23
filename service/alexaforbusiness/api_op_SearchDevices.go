@@ -158,7 +158,7 @@ func (r SearchDevicesRequest) Send(ctx context.Context) (*SearchDevicesResponse,
 //
 //   // Example iterating over pages.
 //   req := client.SearchDevicesRequest(input)
-//   p := NewSearchDevicesRequestPaginator(req)
+//   p := alexaforbusiness.NewSearchDevicesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

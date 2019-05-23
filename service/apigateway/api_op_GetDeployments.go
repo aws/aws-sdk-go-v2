@@ -186,7 +186,7 @@ func (r GetDeploymentsRequest) Send(ctx context.Context) (*GetDeploymentsRespons
 //
 //   // Example iterating over pages.
 //   req := client.GetDeploymentsRequest(input)
-//   p := NewGetDeploymentsRequestPaginator(req)
+//   p := apigateway.NewGetDeploymentsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

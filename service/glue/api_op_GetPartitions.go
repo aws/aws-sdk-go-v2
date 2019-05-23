@@ -236,7 +236,7 @@ func (r GetPartitionsRequest) Send(ctx context.Context) (*GetPartitionsResponse,
 //
 //   // Example iterating over pages.
 //   req := client.GetPartitionsRequest(input)
-//   p := NewGetPartitionsRequestPaginator(req)
+//   p := glue.NewGetPartitionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

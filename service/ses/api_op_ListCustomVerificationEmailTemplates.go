@@ -143,7 +143,7 @@ func (r ListCustomVerificationEmailTemplatesRequest) Send(ctx context.Context) (
 //
 //   // Example iterating over pages.
 //   req := client.ListCustomVerificationEmailTemplatesRequest(input)
-//   p := NewListCustomVerificationEmailTemplatesRequestPaginator(req)
+//   p := ses.NewListCustomVerificationEmailTemplatesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

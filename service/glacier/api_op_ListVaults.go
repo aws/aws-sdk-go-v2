@@ -205,7 +205,7 @@ func (r ListVaultsRequest) Send(ctx context.Context) (*ListVaultsResponse, error
 //
 //   // Example iterating over pages.
 //   req := client.ListVaultsRequest(input)
-//   p := NewListVaultsRequestPaginator(req)
+//   p := glacier.NewListVaultsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

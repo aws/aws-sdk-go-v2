@@ -223,7 +223,7 @@ func (r ListObjectAttributesRequest) Send(ctx context.Context) (*ListObjectAttri
 //
 //   // Example iterating over pages.
 //   req := client.ListObjectAttributesRequest(input)
-//   p := NewListObjectAttributesRequestPaginator(req)
+//   p := clouddirectory.NewListObjectAttributesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

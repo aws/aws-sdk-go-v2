@@ -141,7 +141,7 @@ func (r DescribePrincipalIdFormatRequest) Send(ctx context.Context) (*DescribePr
 //
 //   // Example iterating over pages.
 //   req := client.DescribePrincipalIdFormatRequest(input)
-//   p := NewDescribePrincipalIdFormatRequestPaginator(req)
+//   p := ec2.NewDescribePrincipalIdFormatRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

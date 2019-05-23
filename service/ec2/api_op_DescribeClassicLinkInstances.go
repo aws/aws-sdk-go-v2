@@ -148,7 +148,7 @@ func (r DescribeClassicLinkInstancesRequest) Send(ctx context.Context) (*Describ
 //
 //   // Example iterating over pages.
 //   req := client.DescribeClassicLinkInstancesRequest(input)
-//   p := NewDescribeClassicLinkInstancesRequestPaginator(req)
+//   p := ec2.NewDescribeClassicLinkInstancesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

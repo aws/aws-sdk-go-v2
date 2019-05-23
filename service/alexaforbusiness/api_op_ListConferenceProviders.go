@@ -127,7 +127,7 @@ func (r ListConferenceProvidersRequest) Send(ctx context.Context) (*ListConferen
 //
 //   // Example iterating over pages.
 //   req := client.ListConferenceProvidersRequest(input)
-//   p := NewListConferenceProvidersRequestPaginator(req)
+//   p := alexaforbusiness.NewListConferenceProvidersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

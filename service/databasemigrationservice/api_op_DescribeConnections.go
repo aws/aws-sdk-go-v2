@@ -144,7 +144,7 @@ func (r DescribeConnectionsRequest) Send(ctx context.Context) (*DescribeConnecti
 //
 //   // Example iterating over pages.
 //   req := client.DescribeConnectionsRequest(input)
-//   p := NewDescribeConnectionsRequestPaginator(req)
+//   p := databasemigrationservice.NewDescribeConnectionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

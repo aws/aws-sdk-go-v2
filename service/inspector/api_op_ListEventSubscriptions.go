@@ -141,7 +141,7 @@ func (r ListEventSubscriptionsRequest) Send(ctx context.Context) (*ListEventSubs
 //
 //   // Example iterating over pages.
 //   req := client.ListEventSubscriptionsRequest(input)
-//   p := NewListEventSubscriptionsRequestPaginator(req)
+//   p := inspector.NewListEventSubscriptionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

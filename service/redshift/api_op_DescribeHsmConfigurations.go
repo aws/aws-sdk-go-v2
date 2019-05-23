@@ -159,7 +159,7 @@ func (r DescribeHsmConfigurationsRequest) Send(ctx context.Context) (*DescribeHs
 //
 //   // Example iterating over pages.
 //   req := client.DescribeHsmConfigurationsRequest(input)
-//   p := NewDescribeHsmConfigurationsRequestPaginator(req)
+//   p := redshift.NewDescribeHsmConfigurationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

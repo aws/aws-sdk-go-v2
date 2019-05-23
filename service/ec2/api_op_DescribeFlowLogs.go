@@ -140,7 +140,7 @@ func (r DescribeFlowLogsRequest) Send(ctx context.Context) (*DescribeFlowLogsRes
 //
 //   // Example iterating over pages.
 //   req := client.DescribeFlowLogsRequest(input)
-//   p := NewDescribeFlowLogsRequestPaginator(req)
+//   p := ec2.NewDescribeFlowLogsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

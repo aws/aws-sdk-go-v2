@@ -204,7 +204,7 @@ func (r ListAttachedIndicesRequest) Send(ctx context.Context) (*ListAttachedIndi
 //
 //   // Example iterating over pages.
 //   req := client.ListAttachedIndicesRequest(input)
-//   p := NewListAttachedIndicesRequestPaginator(req)
+//   p := clouddirectory.NewListAttachedIndicesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

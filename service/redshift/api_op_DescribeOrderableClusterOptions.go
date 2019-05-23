@@ -148,7 +148,7 @@ func (r DescribeOrderableClusterOptionsRequest) Send(ctx context.Context) (*Desc
 //
 //   // Example iterating over pages.
 //   req := client.DescribeOrderableClusterOptionsRequest(input)
-//   p := NewDescribeOrderableClusterOptionsRequestPaginator(req)
+//   p := redshift.NewDescribeOrderableClusterOptionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

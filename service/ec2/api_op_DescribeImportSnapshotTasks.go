@@ -127,7 +127,7 @@ func (r DescribeImportSnapshotTasksRequest) Send(ctx context.Context) (*Describe
 //
 //   // Example iterating over pages.
 //   req := client.DescribeImportSnapshotTasksRequest(input)
-//   p := NewDescribeImportSnapshotTasksRequestPaginator(req)
+//   p := ec2.NewDescribeImportSnapshotTasksRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

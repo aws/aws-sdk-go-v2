@@ -158,7 +158,7 @@ func (r GetInstancesHealthStatusRequest) Send(ctx context.Context) (*GetInstance
 //
 //   // Example iterating over pages.
 //   req := client.GetInstancesHealthStatusRequest(input)
-//   p := NewGetInstancesHealthStatusRequestPaginator(req)
+//   p := servicediscovery.NewGetInstancesHealthStatusRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

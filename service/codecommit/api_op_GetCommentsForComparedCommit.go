@@ -149,7 +149,7 @@ func (r GetCommentsForComparedCommitRequest) Send(ctx context.Context) (*GetComm
 //
 //   // Example iterating over pages.
 //   req := client.GetCommentsForComparedCommitRequest(input)
-//   p := NewGetCommentsForComparedCommitRequestPaginator(req)
+//   p := codecommit.NewGetCommentsForComparedCommitRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

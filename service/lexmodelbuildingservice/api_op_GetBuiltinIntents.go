@@ -195,7 +195,7 @@ func (r GetBuiltinIntentsRequest) Send(ctx context.Context) (*GetBuiltinIntentsR
 //
 //   // Example iterating over pages.
 //   req := client.GetBuiltinIntentsRequest(input)
-//   p := NewGetBuiltinIntentsRequestPaginator(req)
+//   p := lexmodelbuildingservice.NewGetBuiltinIntentsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

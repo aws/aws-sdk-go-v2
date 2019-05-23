@@ -139,7 +139,7 @@ func (r ListDeploymentGroupsRequest) Send(ctx context.Context) (*ListDeploymentG
 //
 //   // Example iterating over pages.
 //   req := client.ListDeploymentGroupsRequest(input)
-//   p := NewListDeploymentGroupsRequestPaginator(req)
+//   p := codedeploy.NewListDeploymentGroupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

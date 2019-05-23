@@ -143,7 +143,7 @@ func (r ListCloudFrontOriginAccessIdentitiesRequest) Send(ctx context.Context) (
 //
 //   // Example iterating over pages.
 //   req := client.ListCloudFrontOriginAccessIdentitiesRequest(input)
-//   p := NewListCloudFrontOriginAccessIdentitiesRequestPaginator(req)
+//   p := cloudfront.NewListCloudFrontOriginAccessIdentitiesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -139,7 +139,7 @@ func (r DescribeEnvironmentMembershipsRequest) Send(ctx context.Context) (*Descr
 //
 //   // Example iterating over pages.
 //   req := client.DescribeEnvironmentMembershipsRequest(input)
-//   p := NewDescribeEnvironmentMembershipsRequestPaginator(req)
+//   p := cloud9.NewDescribeEnvironmentMembershipsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

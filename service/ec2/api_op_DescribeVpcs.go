@@ -182,7 +182,7 @@ func (r DescribeVpcsRequest) Send(ctx context.Context) (*DescribeVpcsResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.DescribeVpcsRequest(input)
-//   p := NewDescribeVpcsRequestPaginator(req)
+//   p := ec2.NewDescribeVpcsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -155,7 +155,7 @@ func (r ListTransformJobsRequest) Send(ctx context.Context) (*ListTransformJobsR
 //
 //   // Example iterating over pages.
 //   req := client.ListTransformJobsRequest(input)
-//   p := NewListTransformJobsRequestPaginator(req)
+//   p := sagemaker.NewListTransformJobsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

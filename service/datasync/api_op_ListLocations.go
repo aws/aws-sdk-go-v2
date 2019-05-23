@@ -119,7 +119,7 @@ func (r ListLocationsRequest) Send(ctx context.Context) (*ListLocationsResponse,
 //
 //   // Example iterating over pages.
 //   req := client.ListLocationsRequest(input)
-//   p := NewListLocationsRequestPaginator(req)
+//   p := datasync.NewListLocationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

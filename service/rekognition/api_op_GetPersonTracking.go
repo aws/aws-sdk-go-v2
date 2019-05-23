@@ -188,7 +188,7 @@ func (r GetPersonTrackingRequest) Send(ctx context.Context) (*GetPersonTrackingR
 //
 //   // Example iterating over pages.
 //   req := client.GetPersonTrackingRequest(input)
-//   p := NewGetPersonTrackingRequestPaginator(req)
+//   p := rekognition.NewGetPersonTrackingRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

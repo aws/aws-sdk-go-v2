@@ -167,7 +167,7 @@ func (r DescribeCasesRequest) Send(ctx context.Context) (*DescribeCasesResponse,
 //
 //   // Example iterating over pages.
 //   req := client.DescribeCasesRequest(input)
-//   p := NewDescribeCasesRequestPaginator(req)
+//   p := support.NewDescribeCasesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

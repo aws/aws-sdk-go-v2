@@ -169,7 +169,7 @@ func (r ListSSHPublicKeysRequest) Send(ctx context.Context) (*ListSSHPublicKeysR
 //
 //   // Example iterating over pages.
 //   req := client.ListSSHPublicKeysRequest(input)
-//   p := NewListSSHPublicKeysRequestPaginator(req)
+//   p := iam.NewListSSHPublicKeysRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

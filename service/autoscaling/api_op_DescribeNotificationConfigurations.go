@@ -121,7 +121,7 @@ func (r DescribeNotificationConfigurationsRequest) Send(ctx context.Context) (*D
 //
 //   // Example iterating over pages.
 //   req := client.DescribeNotificationConfigurationsRequest(input)
-//   p := NewDescribeNotificationConfigurationsRequestPaginator(req)
+//   p := autoscaling.NewDescribeNotificationConfigurationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -148,7 +148,7 @@ func (r GetAttributeValuesRequest) Send(ctx context.Context) (*GetAttributeValue
 //
 //   // Example iterating over pages.
 //   req := client.GetAttributeValuesRequest(input)
-//   p := NewGetAttributeValuesRequestPaginator(req)
+//   p := pricing.NewGetAttributeValuesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

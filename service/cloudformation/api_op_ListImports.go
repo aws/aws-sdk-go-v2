@@ -138,7 +138,7 @@ func (r ListImportsRequest) Send(ctx context.Context) (*ListImportsResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.ListImportsRequest(input)
-//   p := NewListImportsRequestPaginator(req)
+//   p := cloudformation.NewListImportsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

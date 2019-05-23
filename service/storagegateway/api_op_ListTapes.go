@@ -159,7 +159,7 @@ func (r ListTapesRequest) Send(ctx context.Context) (*ListTapesResponse, error) 
 //
 //   // Example iterating over pages.
 //   req := client.ListTapesRequest(input)
-//   p := NewListTapesRequestPaginator(req)
+//   p := storagegateway.NewListTapesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

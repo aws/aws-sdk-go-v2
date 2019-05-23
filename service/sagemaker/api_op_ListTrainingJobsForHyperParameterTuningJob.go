@@ -155,7 +155,7 @@ func (r ListTrainingJobsForHyperParameterTuningJobRequest) Send(ctx context.Cont
 //
 //   // Example iterating over pages.
 //   req := client.ListTrainingJobsForHyperParameterTuningJobRequest(input)
-//   p := NewListTrainingJobsForHyperParameterTuningJobRequestPaginator(req)
+//   p := sagemaker.NewListTrainingJobsForHyperParameterTuningJobRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

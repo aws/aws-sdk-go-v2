@@ -139,7 +139,7 @@ func (r GetQueryResultsRequest) Send(ctx context.Context) (*GetQueryResultsRespo
 //
 //   // Example iterating over pages.
 //   req := client.GetQueryResultsRequest(input)
-//   p := NewGetQueryResultsRequestPaginator(req)
+//   p := athena.NewGetQueryResultsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

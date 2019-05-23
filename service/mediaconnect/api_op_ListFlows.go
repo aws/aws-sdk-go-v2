@@ -171,7 +171,7 @@ func (r ListFlowsRequest) Send(ctx context.Context) (*ListFlowsResponse, error) 
 //
 //   // Example iterating over pages.
 //   req := client.ListFlowsRequest(input)
-//   p := NewListFlowsRequestPaginator(req)
+//   p := mediaconnect.NewListFlowsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

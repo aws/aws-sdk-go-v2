@@ -150,7 +150,7 @@ func (r DescribeReplicationTasksRequest) Send(ctx context.Context) (*DescribeRep
 //
 //   // Example iterating over pages.
 //   req := client.DescribeReplicationTasksRequest(input)
-//   p := NewDescribeReplicationTasksRequestPaginator(req)
+//   p := databasemigrationservice.NewDescribeReplicationTasksRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

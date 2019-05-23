@@ -143,7 +143,7 @@ func (r GetParameterHistoryRequest) Send(ctx context.Context) (*GetParameterHist
 //
 //   // Example iterating over pages.
 //   req := client.GetParameterHistoryRequest(input)
-//   p := NewGetParameterHistoryRequestPaginator(req)
+//   p := ssm.NewGetParameterHistoryRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

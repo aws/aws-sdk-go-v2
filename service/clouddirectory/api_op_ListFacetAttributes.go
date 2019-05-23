@@ -198,7 +198,7 @@ func (r ListFacetAttributesRequest) Send(ctx context.Context) (*ListFacetAttribu
 //
 //   // Example iterating over pages.
 //   req := client.ListFacetAttributesRequest(input)
-//   p := NewListFacetAttributesRequestPaginator(req)
+//   p := clouddirectory.NewListFacetAttributesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

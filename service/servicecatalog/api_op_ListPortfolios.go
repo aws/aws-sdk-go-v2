@@ -121,7 +121,7 @@ func (r ListPortfoliosRequest) Send(ctx context.Context) (*ListPortfoliosRespons
 //
 //   // Example iterating over pages.
 //   req := client.ListPortfoliosRequest(input)
-//   p := NewListPortfoliosRequestPaginator(req)
+//   p := servicecatalog.NewListPortfoliosRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -136,7 +136,7 @@ func (r DescribeDomainControllersRequest) Send(ctx context.Context) (*DescribeDo
 //
 //   // Example iterating over pages.
 //   req := client.DescribeDomainControllersRequest(input)
-//   p := NewDescribeDomainControllersRequestPaginator(req)
+//   p := directoryservice.NewDescribeDomainControllersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -173,7 +173,7 @@ func (r GetDedicatedIpsRequest) Send(ctx context.Context) (*GetDedicatedIpsRespo
 //
 //   // Example iterating over pages.
 //   req := client.GetDedicatedIpsRequest(input)
-//   p := NewGetDedicatedIpsRequestPaginator(req)
+//   p := pinpointemail.NewGetDedicatedIpsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

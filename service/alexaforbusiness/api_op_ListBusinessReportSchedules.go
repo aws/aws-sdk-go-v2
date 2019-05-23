@@ -126,7 +126,7 @@ func (r ListBusinessReportSchedulesRequest) Send(ctx context.Context) (*ListBusi
 //
 //   // Example iterating over pages.
 //   req := client.ListBusinessReportSchedulesRequest(input)
-//   p := NewListBusinessReportSchedulesRequestPaginator(req)
+//   p := alexaforbusiness.NewListBusinessReportSchedulesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

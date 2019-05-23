@@ -170,7 +170,7 @@ func (r ListOriginEndpointsRequest) Send(ctx context.Context) (*ListOriginEndpoi
 //
 //   // Example iterating over pages.
 //   req := client.ListOriginEndpointsRequest(input)
-//   p := NewListOriginEndpointsRequestPaginator(req)
+//   p := mediapackage.NewListOriginEndpointsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

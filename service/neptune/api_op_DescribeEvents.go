@@ -195,7 +195,7 @@ func (r DescribeEventsRequest) Send(ctx context.Context) (*DescribeEventsRespons
 //
 //   // Example iterating over pages.
 //   req := client.DescribeEventsRequest(input)
-//   p := NewDescribeEventsRequestPaginator(req)
+//   p := neptune.NewDescribeEventsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

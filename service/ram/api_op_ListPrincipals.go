@@ -230,7 +230,7 @@ func (r ListPrincipalsRequest) Send(ctx context.Context) (*ListPrincipalsRespons
 //
 //   // Example iterating over pages.
 //   req := client.ListPrincipalsRequest(input)
-//   p := NewListPrincipalsRequestPaginator(req)
+//   p := ram.NewListPrincipalsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

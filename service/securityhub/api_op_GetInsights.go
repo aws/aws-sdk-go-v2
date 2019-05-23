@@ -186,7 +186,7 @@ func (r GetInsightsRequest) Send(ctx context.Context) (*GetInsightsResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.GetInsightsRequest(input)
-//   p := NewGetInsightsRequestPaginator(req)
+//   p := securityhub.NewGetInsightsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

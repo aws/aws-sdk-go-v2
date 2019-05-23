@@ -202,7 +202,7 @@ func (r GetBotVersionsRequest) Send(ctx context.Context) (*GetBotVersionsRespons
 //
 //   // Example iterating over pages.
 //   req := client.GetBotVersionsRequest(input)
-//   p := NewGetBotVersionsRequestPaginator(req)
+//   p := lexmodelbuildingservice.NewGetBotVersionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

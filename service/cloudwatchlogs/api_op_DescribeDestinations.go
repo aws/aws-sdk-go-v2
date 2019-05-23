@@ -136,7 +136,7 @@ func (r DescribeDestinationsRequest) Send(ctx context.Context) (*DescribeDestina
 //
 //   // Example iterating over pages.
 //   req := client.DescribeDestinationsRequest(input)
-//   p := NewDescribeDestinationsRequestPaginator(req)
+//   p := cloudwatchlogs.NewDescribeDestinationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

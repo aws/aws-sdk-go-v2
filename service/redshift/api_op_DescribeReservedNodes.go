@@ -128,7 +128,7 @@ func (r DescribeReservedNodesRequest) Send(ctx context.Context) (*DescribeReserv
 //
 //   // Example iterating over pages.
 //   req := client.DescribeReservedNodesRequest(input)
-//   p := NewDescribeReservedNodesRequestPaginator(req)
+//   p := redshift.NewDescribeReservedNodesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

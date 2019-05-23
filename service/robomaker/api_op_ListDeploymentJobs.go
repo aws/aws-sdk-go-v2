@@ -213,7 +213,7 @@ func (r ListDeploymentJobsRequest) Send(ctx context.Context) (*ListDeploymentJob
 //
 //   // Example iterating over pages.
 //   req := client.ListDeploymentJobsRequest(input)
-//   p := NewListDeploymentJobsRequestPaginator(req)
+//   p := robomaker.NewListDeploymentJobsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

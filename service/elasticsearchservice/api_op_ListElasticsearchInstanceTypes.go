@@ -195,7 +195,7 @@ func (r ListElasticsearchInstanceTypesRequest) Send(ctx context.Context) (*ListE
 //
 //   // Example iterating over pages.
 //   req := client.ListElasticsearchInstanceTypesRequest(input)
-//   p := NewListElasticsearchInstanceTypesRequestPaginator(req)
+//   p := elasticsearchservice.NewListElasticsearchInstanceTypesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

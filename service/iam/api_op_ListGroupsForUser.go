@@ -167,7 +167,7 @@ func (r ListGroupsForUserRequest) Send(ctx context.Context) (*ListGroupsForUserR
 //
 //   // Example iterating over pages.
 //   req := client.ListGroupsForUserRequest(input)
-//   p := NewListGroupsForUserRequestPaginator(req)
+//   p := iam.NewListGroupsForUserRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

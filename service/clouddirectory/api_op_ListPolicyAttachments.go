@@ -207,7 +207,7 @@ func (r ListPolicyAttachmentsRequest) Send(ctx context.Context) (*ListPolicyAtta
 //
 //   // Example iterating over pages.
 //   req := client.ListPolicyAttachmentsRequest(input)
-//   p := NewListPolicyAttachmentsRequestPaginator(req)
+//   p := clouddirectory.NewListPolicyAttachmentsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

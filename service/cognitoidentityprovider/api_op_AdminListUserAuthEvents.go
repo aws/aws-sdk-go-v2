@@ -149,7 +149,7 @@ func (r AdminListUserAuthEventsRequest) Send(ctx context.Context) (*AdminListUse
 //
 //   // Example iterating over pages.
 //   req := client.AdminListUserAuthEventsRequest(input)
-//   p := NewAdminListUserAuthEventsRequestPaginator(req)
+//   p := cognitoidentityprovider.NewAdminListUserAuthEventsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -151,7 +151,7 @@ func (r ListCommandsRequest) Send(ctx context.Context) (*ListCommandsResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.ListCommandsRequest(input)
-//   p := NewListCommandsRequestPaginator(req)
+//   p := ssm.NewListCommandsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

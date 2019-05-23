@@ -137,7 +137,7 @@ func (r DescribeStacksRequest) Send(ctx context.Context) (*DescribeStacksRespons
 //
 //   // Example iterating over pages.
 //   req := client.DescribeStacksRequest(input)
-//   p := NewDescribeStacksRequestPaginator(req)
+//   p := cloudformation.NewDescribeStacksRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

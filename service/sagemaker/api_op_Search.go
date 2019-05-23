@@ -166,7 +166,7 @@ func (r SearchRequest) Send(ctx context.Context) (*SearchResponse, error) {
 //
 //   // Example iterating over pages.
 //   req := client.SearchRequest(input)
-//   p := NewSearchRequestPaginator(req)
+//   p := sagemaker.NewSearchRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -147,7 +147,7 @@ func (r GetCommentsForPullRequestRequest) Send(ctx context.Context) (*GetComment
 //
 //   // Example iterating over pages.
 //   req := client.GetCommentsForPullRequestRequest(input)
-//   p := NewGetCommentsForPullRequestRequestPaginator(req)
+//   p := codecommit.NewGetCommentsForPullRequestRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

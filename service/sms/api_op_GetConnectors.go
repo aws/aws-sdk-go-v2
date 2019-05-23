@@ -113,7 +113,7 @@ func (r GetConnectorsRequest) Send(ctx context.Context) (*GetConnectorsResponse,
 //
 //   // Example iterating over pages.
 //   req := client.GetConnectorsRequest(input)
-//   p := NewGetConnectorsRequestPaginator(req)
+//   p := sms.NewGetConnectorsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

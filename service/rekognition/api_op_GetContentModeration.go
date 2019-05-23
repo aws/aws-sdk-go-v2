@@ -190,7 +190,7 @@ func (r GetContentModerationRequest) Send(ctx context.Context) (*GetContentModer
 //
 //   // Example iterating over pages.
 //   req := client.GetContentModerationRequest(input)
-//   p := NewGetContentModerationRequestPaginator(req)
+//   p := rekognition.NewGetContentModerationRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

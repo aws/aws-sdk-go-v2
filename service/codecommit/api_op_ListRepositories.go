@@ -121,7 +121,7 @@ func (r ListRepositoriesRequest) Send(ctx context.Context) (*ListRepositoriesRes
 //
 //   // Example iterating over pages.
 //   req := client.ListRepositoriesRequest(input)
-//   p := NewListRepositoriesRequestPaginator(req)
+//   p := codecommit.NewListRepositoriesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

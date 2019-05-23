@@ -168,7 +168,7 @@ func (r ListPipelinesRequest) Send(ctx context.Context) (*ListPipelinesResponse,
 //
 //   // Example iterating over pages.
 //   req := client.ListPipelinesRequest(input)
-//   p := NewListPipelinesRequestPaginator(req)
+//   p := iotanalytics.NewListPipelinesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

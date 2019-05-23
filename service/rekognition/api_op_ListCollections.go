@@ -121,7 +121,7 @@ func (r ListCollectionsRequest) Send(ctx context.Context) (*ListCollectionsRespo
 //
 //   // Example iterating over pages.
 //   req := client.ListCollectionsRequest(input)
-//   p := NewListCollectionsRequestPaginator(req)
+//   p := rekognition.NewListCollectionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -197,7 +197,7 @@ func (r GetResourcesRequest) Send(ctx context.Context) (*GetResourcesResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.GetResourcesRequest(input)
-//   p := NewGetResourcesRequestPaginator(req)
+//   p := apigateway.NewGetResourcesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

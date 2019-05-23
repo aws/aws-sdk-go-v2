@@ -177,7 +177,7 @@ func (r GetModelsRequest) Send(ctx context.Context) (*GetModelsResponse, error) 
 //
 //   // Example iterating over pages.
 //   req := client.GetModelsRequest(input)
-//   p := NewGetModelsRequestPaginator(req)
+//   p := apigateway.NewGetModelsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

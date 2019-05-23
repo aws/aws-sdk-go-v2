@@ -198,7 +198,7 @@ func (r ListVirtualNodesRequest) Send(ctx context.Context) (*ListVirtualNodesRes
 //
 //   // Example iterating over pages.
 //   req := client.ListVirtualNodesRequest(input)
-//   p := NewListVirtualNodesRequestPaginator(req)
+//   p := appmesh.NewListVirtualNodesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

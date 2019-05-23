@@ -131,7 +131,7 @@ func (r GetTriggersRequest) Send(ctx context.Context) (*GetTriggersResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.GetTriggersRequest(input)
-//   p := NewGetTriggersRequestPaginator(req)
+//   p := glue.NewGetTriggersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

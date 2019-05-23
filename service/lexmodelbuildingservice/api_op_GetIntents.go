@@ -192,7 +192,7 @@ func (r GetIntentsRequest) Send(ctx context.Context) (*GetIntentsResponse, error
 //
 //   // Example iterating over pages.
 //   req := client.GetIntentsRequest(input)
-//   p := NewGetIntentsRequestPaginator(req)
+//   p := lexmodelbuildingservice.NewGetIntentsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

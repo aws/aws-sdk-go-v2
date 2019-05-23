@@ -136,7 +136,7 @@ func (r ListEntitiesDetectionJobsRequest) Send(ctx context.Context) (*ListEntiti
 //
 //   // Example iterating over pages.
 //   req := client.ListEntitiesDetectionJobsRequest(input)
-//   p := NewListEntitiesDetectionJobsRequestPaginator(req)
+//   p := comprehend.NewListEntitiesDetectionJobsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -141,7 +141,7 @@ func (r ListAssociationsRequest) Send(ctx context.Context) (*ListAssociationsRes
 //
 //   // Example iterating over pages.
 //   req := client.ListAssociationsRequest(input)
-//   p := NewListAssociationsRequestPaginator(req)
+//   p := ssm.NewListAssociationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

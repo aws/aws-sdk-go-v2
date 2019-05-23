@@ -168,7 +168,7 @@ func (r DescribeClusterSecurityGroupsRequest) Send(ctx context.Context) (*Descri
 //
 //   // Example iterating over pages.
 //   req := client.DescribeClusterSecurityGroupsRequest(input)
-//   p := NewDescribeClusterSecurityGroupsRequestPaginator(req)
+//   p := redshift.NewDescribeClusterSecurityGroupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

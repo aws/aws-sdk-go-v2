@@ -128,7 +128,7 @@ func (r ListInstanceGroupsRequest) Send(ctx context.Context) (*ListInstanceGroup
 //
 //   // Example iterating over pages.
 //   req := client.ListInstanceGroupsRequest(input)
-//   p := NewListInstanceGroupsRequestPaginator(req)
+//   p := emr.NewListInstanceGroupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

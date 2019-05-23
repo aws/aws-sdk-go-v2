@@ -166,7 +166,7 @@ func (r DescribeClusterParameterGroupsRequest) Send(ctx context.Context) (*Descr
 //
 //   // Example iterating over pages.
 //   req := client.DescribeClusterParameterGroupsRequest(input)
-//   p := NewDescribeClusterParameterGroupsRequestPaginator(req)
+//   p := redshift.NewDescribeClusterParameterGroupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

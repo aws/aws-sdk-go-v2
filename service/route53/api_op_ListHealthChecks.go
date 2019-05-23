@@ -210,7 +210,7 @@ func (r ListHealthChecksRequest) Send(ctx context.Context) (*ListHealthChecksRes
 //
 //   // Example iterating over pages.
 //   req := client.ListHealthChecksRequest(input)
-//   p := NewListHealthChecksRequestPaginator(req)
+//   p := route53.NewListHealthChecksRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -175,7 +175,7 @@ func (r DescribeReservedDBInstancesOfferingsRequest) Send(ctx context.Context) (
 //
 //   // Example iterating over pages.
 //   req := client.DescribeReservedDBInstancesOfferingsRequest(input)
-//   p := NewDescribeReservedDBInstancesOfferingsRequestPaginator(req)
+//   p := rds.NewDescribeReservedDBInstancesOfferingsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

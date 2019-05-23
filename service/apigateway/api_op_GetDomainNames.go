@@ -152,7 +152,7 @@ func (r GetDomainNamesRequest) Send(ctx context.Context) (*GetDomainNamesRespons
 //
 //   // Example iterating over pages.
 //   req := client.GetDomainNamesRequest(input)
-//   p := NewGetDomainNamesRequestPaginator(req)
+//   p := apigateway.NewGetDomainNamesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

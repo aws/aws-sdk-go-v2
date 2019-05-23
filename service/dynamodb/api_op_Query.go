@@ -521,7 +521,7 @@ func (r QueryRequest) Send(ctx context.Context) (*QueryResponse, error) {
 //
 //   // Example iterating over pages.
 //   req := client.QueryRequest(input)
-//   p := NewQueryRequestPaginator(req)
+//   p := dynamodb.NewQueryRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

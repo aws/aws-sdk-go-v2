@@ -171,7 +171,7 @@ func (r ListReviewPolicyResultsForHITRequest) Send(ctx context.Context) (*ListRe
 //
 //   // Example iterating over pages.
 //   req := client.ListReviewPolicyResultsForHITRequest(input)
-//   p := NewListReviewPolicyResultsForHITRequestPaginator(req)
+//   p := mturk.NewListReviewPolicyResultsForHITRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

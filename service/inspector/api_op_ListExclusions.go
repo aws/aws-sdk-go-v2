@@ -145,7 +145,7 @@ func (r ListExclusionsRequest) Send(ctx context.Context) (*ListExclusionsRespons
 //
 //   // Example iterating over pages.
 //   req := client.ListExclusionsRequest(input)
-//   p := NewListExclusionsRequestPaginator(req)
+//   p := inspector.NewListExclusionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

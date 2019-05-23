@@ -228,7 +228,7 @@ func (r ListHostedZonesRequest) Send(ctx context.Context) (*ListHostedZonesRespo
 //
 //   // Example iterating over pages.
 //   req := client.ListHostedZonesRequest(input)
-//   p := NewListHostedZonesRequestPaginator(req)
+//   p := route53.NewListHostedZonesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -143,7 +143,7 @@ func (r DescribeEndpointTypesRequest) Send(ctx context.Context) (*DescribeEndpoi
 //
 //   // Example iterating over pages.
 //   req := client.DescribeEndpointTypesRequest(input)
-//   p := NewDescribeEndpointTypesRequestPaginator(req)
+//   p := databasemigrationservice.NewDescribeEndpointTypesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

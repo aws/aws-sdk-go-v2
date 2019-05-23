@@ -230,7 +230,7 @@ func (r DescribeDocumentVersionsRequest) Send(ctx context.Context) (*DescribeDoc
 //
 //   // Example iterating over pages.
 //   req := client.DescribeDocumentVersionsRequest(input)
-//   p := NewDescribeDocumentVersionsRequestPaginator(req)
+//   p := workdocs.NewDescribeDocumentVersionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

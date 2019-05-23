@@ -123,7 +123,7 @@ func (r GetClassifiersRequest) Send(ctx context.Context) (*GetClassifiersRespons
 //
 //   // Example iterating over pages.
 //   req := client.GetClassifiersRequest(input)
-//   p := NewGetClassifiersRequestPaginator(req)
+//   p := glue.NewGetClassifiersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

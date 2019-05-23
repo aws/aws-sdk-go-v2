@@ -178,7 +178,7 @@ func (r ListDirectoriesRequest) Send(ctx context.Context) (*ListDirectoriesRespo
 //
 //   // Example iterating over pages.
 //   req := client.ListDirectoriesRequest(input)
-//   p := NewListDirectoriesRequestPaginator(req)
+//   p := clouddirectory.NewListDirectoriesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

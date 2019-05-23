@@ -210,7 +210,7 @@ func (r SearchResourcesRequest) Send(ctx context.Context) (*SearchResourcesRespo
 //
 //   // Example iterating over pages.
 //   req := client.SearchResourcesRequest(input)
-//   p := NewSearchResourcesRequestPaginator(req)
+//   p := resourcegroups.NewSearchResourcesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

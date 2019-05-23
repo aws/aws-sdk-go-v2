@@ -127,7 +127,7 @@ func (r GetCrawlerMetricsRequest) Send(ctx context.Context) (*GetCrawlerMetricsR
 //
 //   // Example iterating over pages.
 //   req := client.GetCrawlerMetricsRequest(input)
-//   p := NewGetCrawlerMetricsRequestPaginator(req)
+//   p := glue.NewGetCrawlerMetricsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

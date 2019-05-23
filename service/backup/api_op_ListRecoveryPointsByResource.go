@@ -190,7 +190,7 @@ func (r ListRecoveryPointsByResourceRequest) Send(ctx context.Context) (*ListRec
 //
 //   // Example iterating over pages.
 //   req := client.ListRecoveryPointsByResourceRequest(input)
-//   p := NewListRecoveryPointsByResourceRequestPaginator(req)
+//   p := backup.NewListRecoveryPointsByResourceRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

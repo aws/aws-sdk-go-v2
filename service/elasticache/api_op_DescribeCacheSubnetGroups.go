@@ -125,7 +125,7 @@ func (r DescribeCacheSubnetGroupsRequest) Send(ctx context.Context) (*DescribeCa
 //
 //   // Example iterating over pages.
 //   req := client.DescribeCacheSubnetGroupsRequest(input)
-//   p := NewDescribeCacheSubnetGroupsRequestPaginator(req)
+//   p := elasticache.NewDescribeCacheSubnetGroupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

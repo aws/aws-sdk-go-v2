@@ -158,7 +158,7 @@ func (r ListNamespacesRequest) Send(ctx context.Context) (*ListNamespacesRespons
 //
 //   // Example iterating over pages.
 //   req := client.ListNamespacesRequest(input)
-//   p := NewListNamespacesRequestPaginator(req)
+//   p := servicediscovery.NewListNamespacesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

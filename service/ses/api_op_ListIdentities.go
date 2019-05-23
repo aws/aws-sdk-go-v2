@@ -125,7 +125,7 @@ func (r ListIdentitiesRequest) Send(ctx context.Context) (*ListIdentitiesRespons
 //
 //   // Example iterating over pages.
 //   req := client.ListIdentitiesRequest(input)
-//   p := NewListIdentitiesRequestPaginator(req)
+//   p := ses.NewListIdentitiesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -158,7 +158,7 @@ func (r DescribeInternetGatewaysRequest) Send(ctx context.Context) (*DescribeInt
 //
 //   // Example iterating over pages.
 //   req := client.DescribeInternetGatewaysRequest(input)
-//   p := NewDescribeInternetGatewaysRequestPaginator(req)
+//   p := ec2.NewDescribeInternetGatewaysRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

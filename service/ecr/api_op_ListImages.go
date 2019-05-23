@@ -164,7 +164,7 @@ func (r ListImagesRequest) Send(ctx context.Context) (*ListImagesResponse, error
 //
 //   // Example iterating over pages.
 //   req := client.ListImagesRequest(input)
-//   p := NewListImagesRequestPaginator(req)
+//   p := ecr.NewListImagesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

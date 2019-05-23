@@ -137,7 +137,7 @@ func (r ListSuitesRequest) Send(ctx context.Context) (*ListSuitesResponse, error
 //
 //   // Example iterating over pages.
 //   req := client.ListSuitesRequest(input)
-//   p := NewListSuitesRequestPaginator(req)
+//   p := devicefarm.NewListSuitesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -113,7 +113,7 @@ func (r ListDeploymentConfigsRequest) Send(ctx context.Context) (*ListDeployment
 //
 //   // Example iterating over pages.
 //   req := client.ListDeploymentConfigsRequest(input)
-//   p := NewListDeploymentConfigsRequestPaginator(req)
+//   p := codedeploy.NewListDeploymentConfigsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

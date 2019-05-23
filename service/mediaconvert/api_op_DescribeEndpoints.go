@@ -171,7 +171,7 @@ func (r DescribeEndpointsRequest) Send(ctx context.Context) (*DescribeEndpointsR
 //
 //   // Example iterating over pages.
 //   req := client.DescribeEndpointsRequest(input)
-//   p := NewDescribeEndpointsRequestPaginator(req)
+//   p := mediaconvert.NewDescribeEndpointsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -160,7 +160,7 @@ func (r ListLabelingJobsForWorkteamRequest) Send(ctx context.Context) (*ListLabe
 //
 //   // Example iterating over pages.
 //   req := client.ListLabelingJobsForWorkteamRequest(input)
-//   p := NewListLabelingJobsForWorkteamRequestPaginator(req)
+//   p := sagemaker.NewListLabelingJobsForWorkteamRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

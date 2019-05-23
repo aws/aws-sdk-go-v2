@@ -180,7 +180,7 @@ func (r ListNotebookInstancesRequest) Send(ctx context.Context) (*ListNotebookIn
 //
 //   // Example iterating over pages.
 //   req := client.ListNotebookInstancesRequest(input)
-//   p := NewListNotebookInstancesRequestPaginator(req)
+//   p := sagemaker.NewListNotebookInstancesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

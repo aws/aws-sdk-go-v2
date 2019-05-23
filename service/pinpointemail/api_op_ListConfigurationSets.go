@@ -171,7 +171,7 @@ func (r ListConfigurationSetsRequest) Send(ctx context.Context) (*ListConfigurat
 //
 //   // Example iterating over pages.
 //   req := client.ListConfigurationSetsRequest(input)
-//   p := NewListConfigurationSetsRequestPaginator(req)
+//   p := pinpointemail.NewListConfigurationSetsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

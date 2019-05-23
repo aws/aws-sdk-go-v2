@@ -164,7 +164,7 @@ func (r ListCompilationJobsRequest) Send(ctx context.Context) (*ListCompilationJ
 //
 //   // Example iterating over pages.
 //   req := client.ListCompilationJobsRequest(input)
-//   p := NewListCompilationJobsRequestPaginator(req)
+//   p := sagemaker.NewListCompilationJobsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

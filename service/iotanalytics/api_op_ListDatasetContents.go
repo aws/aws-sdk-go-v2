@@ -207,7 +207,7 @@ func (r ListDatasetContentsRequest) Send(ctx context.Context) (*ListDatasetConte
 //
 //   // Example iterating over pages.
 //   req := client.ListDatasetContentsRequest(input)
-//   p := NewListDatasetContentsRequestPaginator(req)
+//   p := iotanalytics.NewListDatasetContentsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

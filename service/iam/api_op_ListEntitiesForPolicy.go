@@ -208,7 +208,7 @@ func (r ListEntitiesForPolicyRequest) Send(ctx context.Context) (*ListEntitiesFo
 //
 //   // Example iterating over pages.
 //   req := client.ListEntitiesForPolicyRequest(input)
-//   p := NewListEntitiesForPolicyRequestPaginator(req)
+//   p := iam.NewListEntitiesForPolicyRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

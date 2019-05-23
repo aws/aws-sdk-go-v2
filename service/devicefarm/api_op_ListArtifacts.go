@@ -153,7 +153,7 @@ func (r ListArtifactsRequest) Send(ctx context.Context) (*ListArtifactsResponse,
 //
 //   // Example iterating over pages.
 //   req := client.ListArtifactsRequest(input)
-//   p := NewListArtifactsRequestPaginator(req)
+//   p := devicefarm.NewListArtifactsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

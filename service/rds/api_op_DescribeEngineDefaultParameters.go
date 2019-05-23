@@ -147,7 +147,7 @@ func (r DescribeEngineDefaultParametersRequest) Send(ctx context.Context) (*Desc
 //
 //   // Example iterating over pages.
 //   req := client.DescribeEngineDefaultParametersRequest(input)
-//   p := NewDescribeEngineDefaultParametersRequestPaginator(req)
+//   p := rds.NewDescribeEngineDefaultParametersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

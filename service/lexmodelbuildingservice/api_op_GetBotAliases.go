@@ -207,7 +207,7 @@ func (r GetBotAliasesRequest) Send(ctx context.Context) (*GetBotAliasesResponse,
 //
 //   // Example iterating over pages.
 //   req := client.GetBotAliasesRequest(input)
-//   p := NewGetBotAliasesRequestPaginator(req)
+//   p := lexmodelbuildingservice.NewGetBotAliasesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

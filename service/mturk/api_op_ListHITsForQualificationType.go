@@ -147,7 +147,7 @@ func (r ListHITsForQualificationTypeRequest) Send(ctx context.Context) (*ListHIT
 //
 //   // Example iterating over pages.
 //   req := client.ListHITsForQualificationTypeRequest(input)
-//   p := NewListHITsForQualificationTypeRequestPaginator(req)
+//   p := mturk.NewListHITsForQualificationTypeRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -197,7 +197,7 @@ func (r GetBuiltinSlotTypesRequest) Send(ctx context.Context) (*GetBuiltinSlotTy
 //
 //   // Example iterating over pages.
 //   req := client.GetBuiltinSlotTypesRequest(input)
-//   p := NewGetBuiltinSlotTypesRequestPaginator(req)
+//   p := lexmodelbuildingservice.NewGetBuiltinSlotTypesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

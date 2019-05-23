@@ -177,7 +177,7 @@ func (r ListManagedSchemaArnsRequest) Send(ctx context.Context) (*ListManagedSch
 //
 //   // Example iterating over pages.
 //   req := client.ListManagedSchemaArnsRequest(input)
-//   p := NewListManagedSchemaArnsRequestPaginator(req)
+//   p := clouddirectory.NewListManagedSchemaArnsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -224,7 +224,7 @@ func (r DescribeSnapshotsRequest) Send(ctx context.Context) (*DescribeSnapshotsR
 //
 //   // Example iterating over pages.
 //   req := client.DescribeSnapshotsRequest(input)
-//   p := NewDescribeSnapshotsRequestPaginator(req)
+//   p := ec2.NewDescribeSnapshotsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

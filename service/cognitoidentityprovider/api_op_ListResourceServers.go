@@ -140,7 +140,7 @@ func (r ListResourceServersRequest) Send(ctx context.Context) (*ListResourceServ
 //
 //   // Example iterating over pages.
 //   req := client.ListResourceServersRequest(input)
-//   p := NewListResourceServersRequestPaginator(req)
+//   p := cognitoidentityprovider.NewListResourceServersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

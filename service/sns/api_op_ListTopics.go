@@ -113,7 +113,7 @@ func (r ListTopicsRequest) Send(ctx context.Context) (*ListTopicsResponse, error
 //
 //   // Example iterating over pages.
 //   req := client.ListTopicsRequest(input)
-//   p := NewListTopicsRequestPaginator(req)
+//   p := sns.NewListTopicsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

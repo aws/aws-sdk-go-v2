@@ -210,7 +210,7 @@ func (r DescribeReservedCacheNodesOfferingsRequest) Send(ctx context.Context) (*
 //
 //   // Example iterating over pages.
 //   req := client.DescribeReservedCacheNodesOfferingsRequest(input)
-//   p := NewDescribeReservedCacheNodesOfferingsRequestPaginator(req)
+//   p := elasticache.NewDescribeReservedCacheNodesOfferingsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

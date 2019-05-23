@@ -155,7 +155,7 @@ func (r ListNotebookInstanceLifecycleConfigsRequest) Send(ctx context.Context) (
 //
 //   // Example iterating over pages.
 //   req := client.ListNotebookInstanceLifecycleConfigsRequest(input)
-//   p := NewListNotebookInstanceLifecycleConfigsRequestPaginator(req)
+//   p := sagemaker.NewListNotebookInstanceLifecycleConfigsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

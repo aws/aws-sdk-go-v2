@@ -143,7 +143,7 @@ func (r ListUserPoolClientsRequest) Send(ctx context.Context) (*ListUserPoolClie
 //
 //   // Example iterating over pages.
 //   req := client.ListUserPoolClientsRequest(input)
-//   p := NewListUserPoolClientsRequestPaginator(req)
+//   p := cognitoidentityprovider.NewListUserPoolClientsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

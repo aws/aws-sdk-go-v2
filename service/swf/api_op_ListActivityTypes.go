@@ -188,7 +188,7 @@ func (r ListActivityTypesRequest) Send(ctx context.Context) (*ListActivityTypesR
 //
 //   // Example iterating over pages.
 //   req := client.ListActivityTypesRequest(input)
-//   p := NewListActivityTypesRequestPaginator(req)
+//   p := swf.NewListActivityTypesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

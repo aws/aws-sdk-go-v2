@@ -161,7 +161,7 @@ func (r GetExecutionHistoryRequest) Send(ctx context.Context) (*GetExecutionHist
 //
 //   // Example iterating over pages.
 //   req := client.GetExecutionHistoryRequest(input)
-//   p := NewGetExecutionHistoryRequestPaginator(req)
+//   p := sfn.NewGetExecutionHistoryRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

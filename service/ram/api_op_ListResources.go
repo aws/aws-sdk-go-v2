@@ -230,7 +230,7 @@ func (r ListResourcesRequest) Send(ctx context.Context) (*ListResourcesResponse,
 //
 //   // Example iterating over pages.
 //   req := client.ListResourcesRequest(input)
-//   p := NewListResourcesRequestPaginator(req)
+//   p := ram.NewListResourcesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -320,7 +320,7 @@ func (r GetCurrentMetricDataRequest) Send(ctx context.Context) (*GetCurrentMetri
 //
 //   // Example iterating over pages.
 //   req := client.GetCurrentMetricDataRequest(input)
-//   p := NewGetCurrentMetricDataRequestPaginator(req)
+//   p := connect.NewGetCurrentMetricDataRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

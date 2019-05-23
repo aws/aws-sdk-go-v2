@@ -129,7 +129,7 @@ func (r DescribeImportImageTasksRequest) Send(ctx context.Context) (*DescribeImp
 //
 //   // Example iterating over pages.
 //   req := client.DescribeImportImageTasksRequest(input)
-//   p := NewDescribeImportImageTasksRequestPaginator(req)
+//   p := ec2.NewDescribeImportImageTasksRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

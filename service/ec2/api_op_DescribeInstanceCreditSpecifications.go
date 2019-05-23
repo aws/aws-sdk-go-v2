@@ -168,7 +168,7 @@ func (r DescribeInstanceCreditSpecificationsRequest) Send(ctx context.Context) (
 //
 //   // Example iterating over pages.
 //   req := client.DescribeInstanceCreditSpecificationsRequest(input)
-//   p := NewDescribeInstanceCreditSpecificationsRequestPaginator(req)
+//   p := ec2.NewDescribeInstanceCreditSpecificationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

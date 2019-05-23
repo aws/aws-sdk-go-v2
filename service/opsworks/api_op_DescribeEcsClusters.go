@@ -139,7 +139,7 @@ func (r DescribeEcsClustersRequest) Send(ctx context.Context) (*DescribeEcsClust
 //
 //   // Example iterating over pages.
 //   req := client.DescribeEcsClustersRequest(input)
-//   p := NewDescribeEcsClustersRequestPaginator(req)
+//   p := opsworks.NewDescribeEcsClustersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

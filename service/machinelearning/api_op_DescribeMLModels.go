@@ -188,7 +188,7 @@ func (r DescribeMLModelsRequest) Send(ctx context.Context) (*DescribeMLModelsRes
 //
 //   // Example iterating over pages.
 //   req := client.DescribeMLModelsRequest(input)
-//   p := NewDescribeMLModelsRequestPaginator(req)
+//   p := machinelearning.NewDescribeMLModelsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

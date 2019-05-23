@@ -166,7 +166,7 @@ func (r ListOrganizationalUnitsForParentRequest) Send(ctx context.Context) (*Lis
 //
 //   // Example iterating over pages.
 //   req := client.ListOrganizationalUnitsForParentRequest(input)
-//   p := NewListOrganizationalUnitsForParentRequestPaginator(req)
+//   p := organizations.NewListOrganizationalUnitsForParentRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -135,7 +135,7 @@ func (r GetReplicationRunsRequest) Send(ctx context.Context) (*GetReplicationRun
 //
 //   // Example iterating over pages.
 //   req := client.GetReplicationRunsRequest(input)
-//   p := NewGetReplicationRunsRequestPaginator(req)
+//   p := sms.NewGetReplicationRunsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

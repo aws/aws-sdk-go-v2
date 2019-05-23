@@ -150,7 +150,7 @@ func (r ListAWSServiceAccessForOrganizationRequest) Send(ctx context.Context) (*
 //
 //   // Example iterating over pages.
 //   req := client.ListAWSServiceAccessForOrganizationRequest(input)
-//   p := NewListAWSServiceAccessForOrganizationRequestPaginator(req)
+//   p := organizations.NewListAWSServiceAccessForOrganizationRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

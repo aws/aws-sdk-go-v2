@@ -208,7 +208,7 @@ func (r ListJobTemplatesRequest) Send(ctx context.Context) (*ListJobTemplatesRes
 //
 //   // Example iterating over pages.
 //   req := client.ListJobTemplatesRequest(input)
-//   p := NewListJobTemplatesRequestPaginator(req)
+//   p := mediaconvert.NewListJobTemplatesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

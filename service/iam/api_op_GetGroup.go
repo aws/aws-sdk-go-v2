@@ -171,7 +171,7 @@ func (r GetGroupRequest) Send(ctx context.Context) (*GetGroupResponse, error) {
 //
 //   // Example iterating over pages.
 //   req := client.GetGroupRequest(input)
-//   p := NewGetGroupRequestPaginator(req)
+//   p := iam.NewGetGroupRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

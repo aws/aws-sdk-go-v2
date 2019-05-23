@@ -190,7 +190,7 @@ func (r ListWebsiteCertificateAuthoritiesRequest) Send(ctx context.Context) (*Li
 //
 //   // Example iterating over pages.
 //   req := client.ListWebsiteCertificateAuthoritiesRequest(input)
-//   p := NewListWebsiteCertificateAuthoritiesRequestPaginator(req)
+//   p := worklink.NewListWebsiteCertificateAuthoritiesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

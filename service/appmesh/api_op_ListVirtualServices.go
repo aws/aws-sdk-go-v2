@@ -198,7 +198,7 @@ func (r ListVirtualServicesRequest) Send(ctx context.Context) (*ListVirtualServi
 //
 //   // Example iterating over pages.
 //   req := client.ListVirtualServicesRequest(input)
-//   p := NewListVirtualServicesRequestPaginator(req)
+//   p := appmesh.NewListVirtualServicesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

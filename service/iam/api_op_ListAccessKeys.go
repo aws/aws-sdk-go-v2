@@ -172,7 +172,7 @@ func (r ListAccessKeysRequest) Send(ctx context.Context) (*ListAccessKeysRespons
 //
 //   // Example iterating over pages.
 //   req := client.ListAccessKeysRequest(input)
-//   p := NewListAccessKeysRequestPaginator(req)
+//   p := iam.NewListAccessKeysRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

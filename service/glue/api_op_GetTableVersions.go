@@ -157,7 +157,7 @@ func (r GetTableVersionsRequest) Send(ctx context.Context) (*GetTableVersionsRes
 //
 //   // Example iterating over pages.
 //   req := client.GetTableVersionsRequest(input)
-//   p := NewGetTableVersionsRequestPaginator(req)
+//   p := glue.NewGetTableVersionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

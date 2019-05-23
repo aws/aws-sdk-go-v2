@@ -168,7 +168,7 @@ func (r ListInstanceProfilesRequest) Send(ctx context.Context) (*ListInstancePro
 //
 //   // Example iterating over pages.
 //   req := client.ListInstanceProfilesRequest(input)
-//   p := NewListInstanceProfilesRequestPaginator(req)
+//   p := iam.NewListInstanceProfilesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

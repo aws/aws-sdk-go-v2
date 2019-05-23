@@ -174,7 +174,7 @@ func (r DescribeVpcPeeringConnectionsRequest) Send(ctx context.Context) (*Descri
 //
 //   // Example iterating over pages.
 //   req := client.DescribeVpcPeeringConnectionsRequest(input)
-//   p := NewDescribeVpcPeeringConnectionsRequestPaginator(req)
+//   p := ec2.NewDescribeVpcPeeringConnectionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

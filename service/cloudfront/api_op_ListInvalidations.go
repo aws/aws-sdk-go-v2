@@ -171,7 +171,7 @@ func (r ListInvalidationsRequest) Send(ctx context.Context) (*ListInvalidationsR
 //
 //   // Example iterating over pages.
 //   req := client.ListInvalidationsRequest(input)
-//   p := NewListInvalidationsRequestPaginator(req)
+//   p := cloudfront.NewListInvalidationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

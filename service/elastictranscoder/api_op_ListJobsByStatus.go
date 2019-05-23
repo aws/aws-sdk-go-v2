@@ -183,7 +183,7 @@ func (r ListJobsByStatusRequest) Send(ctx context.Context) (*ListJobsByStatusRes
 //
 //   // Example iterating over pages.
 //   req := client.ListJobsByStatusRequest(input)
-//   p := NewListJobsByStatusRequestPaginator(req)
+//   p := elastictranscoder.NewListJobsByStatusRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

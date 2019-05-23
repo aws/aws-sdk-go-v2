@@ -152,7 +152,7 @@ func (r ListCreateAccountStatusRequest) Send(ctx context.Context) (*ListCreateAc
 //
 //   // Example iterating over pages.
 //   req := client.ListCreateAccountStatusRequest(input)
-//   p := NewListCreateAccountStatusRequestPaginator(req)
+//   p := organizations.NewListCreateAccountStatusRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -140,7 +140,7 @@ func (r DescribeTargetGroupsRequest) Send(ctx context.Context) (*DescribeTargetG
 //
 //   // Example iterating over pages.
 //   req := client.DescribeTargetGroupsRequest(input)
-//   p := NewDescribeTargetGroupsRequestPaginator(req)
+//   p := elasticloadbalancingv2.NewDescribeTargetGroupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

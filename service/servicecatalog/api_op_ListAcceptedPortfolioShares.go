@@ -131,7 +131,7 @@ func (r ListAcceptedPortfolioSharesRequest) Send(ctx context.Context) (*ListAcce
 //
 //   // Example iterating over pages.
 //   req := client.ListAcceptedPortfolioSharesRequest(input)
-//   p := NewListAcceptedPortfolioSharesRequestPaginator(req)
+//   p := servicecatalog.NewListAcceptedPortfolioSharesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -158,7 +158,7 @@ func (r SearchSkillGroupsRequest) Send(ctx context.Context) (*SearchSkillGroupsR
 //
 //   // Example iterating over pages.
 //   req := client.SearchSkillGroupsRequest(input)
-//   p := NewSearchSkillGroupsRequestPaginator(req)
+//   p := alexaforbusiness.NewSearchSkillGroupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

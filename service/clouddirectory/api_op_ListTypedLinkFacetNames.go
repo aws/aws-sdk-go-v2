@@ -182,7 +182,7 @@ func (r ListTypedLinkFacetNamesRequest) Send(ctx context.Context) (*ListTypedLin
 //
 //   // Example iterating over pages.
 //   req := client.ListTypedLinkFacetNamesRequest(input)
-//   p := NewListTypedLinkFacetNamesRequestPaginator(req)
+//   p := clouddirectory.NewListTypedLinkFacetNamesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

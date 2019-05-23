@@ -197,7 +197,7 @@ func (r GetApiKeysRequest) Send(ctx context.Context) (*GetApiKeysResponse, error
 //
 //   // Example iterating over pages.
 //   req := client.GetApiKeysRequest(input)
-//   p := NewGetApiKeysRequestPaginator(req)
+//   p := apigateway.NewGetApiKeysRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

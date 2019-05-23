@@ -153,7 +153,7 @@ func (r ListResolverRuleAssociationsRequest) Send(ctx context.Context) (*ListRes
 //
 //   // Example iterating over pages.
 //   req := client.ListResolverRuleAssociationsRequest(input)
-//   p := NewListResolverRuleAssociationsRequestPaginator(req)
+//   p := route53resolver.NewListResolverRuleAssociationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

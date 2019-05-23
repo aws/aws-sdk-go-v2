@@ -177,7 +177,7 @@ func (r GetParametersByPathRequest) Send(ctx context.Context) (*GetParametersByP
 //
 //   // Example iterating over pages.
 //   req := client.GetParametersByPathRequest(input)
-//   p := NewGetParametersByPathRequestPaginator(req)
+//   p := ssm.NewGetParametersByPathRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

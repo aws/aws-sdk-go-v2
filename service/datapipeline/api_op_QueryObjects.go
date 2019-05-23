@@ -161,7 +161,7 @@ func (r QueryObjectsRequest) Send(ctx context.Context) (*QueryObjectsResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.QueryObjectsRequest(input)
-//   p := NewQueryObjectsRequestPaginator(req)
+//   p := datapipeline.NewQueryObjectsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

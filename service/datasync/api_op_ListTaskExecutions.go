@@ -117,7 +117,7 @@ func (r ListTaskExecutionsRequest) Send(ctx context.Context) (*ListTaskExecution
 //
 //   // Example iterating over pages.
 //   req := client.ListTaskExecutionsRequest(input)
-//   p := NewListTaskExecutionsRequestPaginator(req)
+//   p := datasync.NewListTaskExecutionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -133,7 +133,7 @@ func (r DescribeMovingAddressesRequest) Send(ctx context.Context) (*DescribeMovi
 //
 //   // Example iterating over pages.
 //   req := client.DescribeMovingAddressesRequest(input)
-//   p := NewDescribeMovingAddressesRequestPaginator(req)
+//   p := ec2.NewDescribeMovingAddressesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

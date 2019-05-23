@@ -207,7 +207,7 @@ func (r ListEventSourceMappingsRequest) Send(ctx context.Context) (*ListEventSou
 //
 //   // Example iterating over pages.
 //   req := client.ListEventSourceMappingsRequest(input)
-//   p := NewListEventSourceMappingsRequestPaginator(req)
+//   p := lambda.NewListEventSourceMappingsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

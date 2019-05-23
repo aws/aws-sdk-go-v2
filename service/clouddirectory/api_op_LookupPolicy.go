@@ -204,7 +204,7 @@ func (r LookupPolicyRequest) Send(ctx context.Context) (*LookupPolicyResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.LookupPolicyRequest(input)
-//   p := NewLookupPolicyRequestPaginator(req)
+//   p := clouddirectory.NewLookupPolicyRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

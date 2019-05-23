@@ -131,7 +131,7 @@ func (r DescribePublicIpv4PoolsRequest) Send(ctx context.Context) (*DescribePubl
 //
 //   // Example iterating over pages.
 //   req := client.DescribePublicIpv4PoolsRequest(input)
-//   p := NewDescribePublicIpv4PoolsRequestPaginator(req)
+//   p := ec2.NewDescribePublicIpv4PoolsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

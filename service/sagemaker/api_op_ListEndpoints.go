@@ -158,7 +158,7 @@ func (r ListEndpointsRequest) Send(ctx context.Context) (*ListEndpointsResponse,
 //
 //   // Example iterating over pages.
 //   req := client.ListEndpointsRequest(input)
-//   p := NewListEndpointsRequestPaginator(req)
+//   p := sagemaker.NewListEndpointsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

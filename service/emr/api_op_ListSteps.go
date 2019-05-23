@@ -136,7 +136,7 @@ func (r ListStepsRequest) Send(ctx context.Context) (*ListStepsResponse, error) 
 //
 //   // Example iterating over pages.
 //   req := client.ListStepsRequest(input)
-//   p := NewListStepsRequestPaginator(req)
+//   p := emr.NewListStepsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

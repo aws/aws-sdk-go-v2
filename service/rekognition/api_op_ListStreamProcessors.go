@@ -125,7 +125,7 @@ func (r ListStreamProcessorsRequest) Send(ctx context.Context) (*ListStreamProce
 //
 //   // Example iterating over pages.
 //   req := client.ListStreamProcessorsRequest(input)
-//   p := NewListStreamProcessorsRequestPaginator(req)
+//   p := rekognition.NewListStreamProcessorsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

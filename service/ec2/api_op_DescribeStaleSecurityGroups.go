@@ -148,7 +148,7 @@ func (r DescribeStaleSecurityGroupsRequest) Send(ctx context.Context) (*Describe
 //
 //   // Example iterating over pages.
 //   req := client.DescribeStaleSecurityGroupsRequest(input)
-//   p := NewDescribeStaleSecurityGroupsRequestPaginator(req)
+//   p := ec2.NewDescribeStaleSecurityGroupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

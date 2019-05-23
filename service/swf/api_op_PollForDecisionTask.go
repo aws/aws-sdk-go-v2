@@ -250,7 +250,7 @@ func (r PollForDecisionTaskRequest) Send(ctx context.Context) (*PollForDecisionT
 //
 //   // Example iterating over pages.
 //   req := client.PollForDecisionTaskRequest(input)
-//   p := NewPollForDecisionTaskRequestPaginator(req)
+//   p := swf.NewPollForDecisionTaskRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

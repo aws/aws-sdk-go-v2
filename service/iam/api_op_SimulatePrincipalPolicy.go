@@ -351,7 +351,7 @@ func (r SimulatePrincipalPolicyRequest) Send(ctx context.Context) (*SimulatePrin
 //
 //   // Example iterating over pages.
 //   req := client.SimulatePrincipalPolicyRequest(input)
-//   p := NewSimulatePrincipalPolicyRequestPaginator(req)
+//   p := iam.NewSimulatePrincipalPolicyRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

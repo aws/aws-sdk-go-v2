@@ -168,7 +168,7 @@ func (r ListChannelsRequest) Send(ctx context.Context) (*ListChannelsResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.ListChannelsRequest(input)
-//   p := NewListChannelsRequestPaginator(req)
+//   p := iotanalytics.NewListChannelsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

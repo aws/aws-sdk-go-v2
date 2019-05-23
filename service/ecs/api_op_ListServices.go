@@ -137,7 +137,7 @@ func (r ListServicesRequest) Send(ctx context.Context) (*ListServicesResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.ListServicesRequest(input)
-//   p := NewListServicesRequestPaginator(req)
+//   p := ecs.NewListServicesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

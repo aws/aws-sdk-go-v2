@@ -171,7 +171,7 @@ func (r DownloadDBLogFilePortionRequest) Send(ctx context.Context) (*DownloadDBL
 //
 //   // Example iterating over pages.
 //   req := client.DownloadDBLogFilePortionRequest(input)
-//   p := NewDownloadDBLogFilePortionRequestPaginator(req)
+//   p := rds.NewDownloadDBLogFilePortionRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

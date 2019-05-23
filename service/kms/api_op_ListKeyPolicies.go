@@ -168,7 +168,7 @@ func (r ListKeyPoliciesRequest) Send(ctx context.Context) (*ListKeyPoliciesRespo
 //
 //   // Example iterating over pages.
 //   req := client.ListKeyPoliciesRequest(input)
-//   p := NewListKeyPoliciesRequestPaginator(req)
+//   p := kms.NewListKeyPoliciesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

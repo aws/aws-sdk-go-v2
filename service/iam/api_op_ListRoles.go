@@ -168,7 +168,7 @@ func (r ListRolesRequest) Send(ctx context.Context) (*ListRolesResponse, error) 
 //
 //   // Example iterating over pages.
 //   req := client.ListRolesRequest(input)
-//   p := NewListRolesRequestPaginator(req)
+//   p := iam.NewListRolesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -119,7 +119,7 @@ func (r ListDashboardsRequest) Send(ctx context.Context) (*ListDashboardsRespons
 //
 //   // Example iterating over pages.
 //   req := client.ListDashboardsRequest(input)
-//   p := NewListDashboardsRequestPaginator(req)
+//   p := cloudwatch.NewListDashboardsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

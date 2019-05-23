@@ -165,7 +165,7 @@ func (r ListDevelopmentSchemaArnsRequest) Send(ctx context.Context) (*ListDevelo
 //
 //   // Example iterating over pages.
 //   req := client.ListDevelopmentSchemaArnsRequest(input)
-//   p := NewListDevelopmentSchemaArnsRequestPaginator(req)
+//   p := clouddirectory.NewListDevelopmentSchemaArnsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

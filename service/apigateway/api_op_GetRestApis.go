@@ -153,7 +153,7 @@ func (r GetRestApisRequest) Send(ctx context.Context) (*GetRestApisResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.GetRestApisRequest(input)
-//   p := NewGetRestApisRequestPaginator(req)
+//   p := apigateway.NewGetRestApisRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

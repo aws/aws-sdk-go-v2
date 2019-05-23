@@ -165,7 +165,7 @@ func (r GetDifferencesRequest) Send(ctx context.Context) (*GetDifferencesRespons
 //
 //   // Example iterating over pages.
 //   req := client.GetDifferencesRequest(input)
-//   p := NewGetDifferencesRequestPaginator(req)
+//   p := codecommit.NewGetDifferencesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

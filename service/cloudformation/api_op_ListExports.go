@@ -128,7 +128,7 @@ func (r ListExportsRequest) Send(ctx context.Context) (*ListExportsResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.ListExportsRequest(input)
-//   p := NewListExportsRequestPaginator(req)
+//   p := cloudformation.NewListExportsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

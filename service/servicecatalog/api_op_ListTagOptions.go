@@ -131,7 +131,7 @@ func (r ListTagOptionsRequest) Send(ctx context.Context) (*ListTagOptionsRespons
 //
 //   // Example iterating over pages.
 //   req := client.ListTagOptionsRequest(input)
-//   p := NewListTagOptionsRequestPaginator(req)
+//   p := servicecatalog.NewListTagOptionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

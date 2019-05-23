@@ -159,7 +159,7 @@ func (r DescribeDBClustersRequest) Send(ctx context.Context) (*DescribeDBCluster
 //
 //   // Example iterating over pages.
 //   req := client.DescribeDBClustersRequest(input)
-//   p := NewDescribeDBClustersRequestPaginator(req)
+//   p := docdb.NewDescribeDBClustersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

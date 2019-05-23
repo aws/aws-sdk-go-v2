@@ -149,7 +149,7 @@ func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResou
 //
 //   // Example iterating over pages.
 //   req := client.ListTagsForResourceRequest(input)
-//   p := NewListTagsForResourceRequestPaginator(req)
+//   p := storagegateway.NewListTagsForResourceRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -123,7 +123,7 @@ func (r GetSecurityConfigurationsRequest) Send(ctx context.Context) (*GetSecurit
 //
 //   // Example iterating over pages.
 //   req := client.GetSecurityConfigurationsRequest(input)
-//   p := NewGetSecurityConfigurationsRequestPaginator(req)
+//   p := glue.NewGetSecurityConfigurationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

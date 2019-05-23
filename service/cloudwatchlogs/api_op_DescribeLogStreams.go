@@ -173,7 +173,7 @@ func (r DescribeLogStreamsRequest) Send(ctx context.Context) (*DescribeLogStream
 //
 //   // Example iterating over pages.
 //   req := client.DescribeLogStreamsRequest(input)
-//   p := NewDescribeLogStreamsRequestPaginator(req)
+//   p := cloudwatchlogs.NewDescribeLogStreamsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

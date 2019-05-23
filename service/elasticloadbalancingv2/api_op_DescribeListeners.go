@@ -133,7 +133,7 @@ func (r DescribeListenersRequest) Send(ctx context.Context) (*DescribeListenersR
 //
 //   // Example iterating over pages.
 //   req := client.DescribeListenersRequest(input)
-//   p := NewDescribeListenersRequestPaginator(req)
+//   p := elasticloadbalancingv2.NewDescribeListenersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

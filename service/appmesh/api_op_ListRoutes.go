@@ -216,7 +216,7 @@ func (r ListRoutesRequest) Send(ctx context.Context) (*ListRoutesResponse, error
 //
 //   // Example iterating over pages.
 //   req := client.ListRoutesRequest(input)
-//   p := NewListRoutesRequestPaginator(req)
+//   p := appmesh.NewListRoutesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

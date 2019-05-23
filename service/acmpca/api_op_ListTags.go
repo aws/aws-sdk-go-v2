@@ -151,7 +151,7 @@ func (r ListTagsRequest) Send(ctx context.Context) (*ListTagsResponse, error) {
 //
 //   // Example iterating over pages.
 //   req := client.ListTagsRequest(input)
-//   p := NewListTagsRequestPaginator(req)
+//   p := acmpca.NewListTagsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -145,7 +145,7 @@ func (r ListQualificationRequestsRequest) Send(ctx context.Context) (*ListQualif
 //
 //   // Example iterating over pages.
 //   req := client.ListQualificationRequestsRequest(input)
-//   p := NewListQualificationRequestsRequestPaginator(req)
+//   p := mturk.NewListQualificationRequestsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

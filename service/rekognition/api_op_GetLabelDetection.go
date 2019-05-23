@@ -188,7 +188,7 @@ func (r GetLabelDetectionRequest) Send(ctx context.Context) (*GetLabelDetectionR
 //
 //   // Example iterating over pages.
 //   req := client.GetLabelDetectionRequest(input)
-//   p := NewGetLabelDetectionRequestPaginator(req)
+//   p := rekognition.NewGetLabelDetectionRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

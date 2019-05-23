@@ -159,7 +159,7 @@ func (r ListHandshakesForAccountRequest) Send(ctx context.Context) (*ListHandsha
 //
 //   // Example iterating over pages.
 //   req := client.ListHandshakesForAccountRequest(input)
-//   p := NewListHandshakesForAccountRequestPaginator(req)
+//   p := organizations.NewListHandshakesForAccountRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

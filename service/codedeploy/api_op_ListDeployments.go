@@ -154,7 +154,7 @@ func (r ListDeploymentsRequest) Send(ctx context.Context) (*ListDeploymentsRespo
 //
 //   // Example iterating over pages.
 //   req := client.ListDeploymentsRequest(input)
-//   p := NewListDeploymentsRequestPaginator(req)
+//   p := codedeploy.NewListDeploymentsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

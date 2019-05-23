@@ -222,7 +222,7 @@ func (r DescribeReservedInstancesOfferingsRequest) Send(ctx context.Context) (*D
 //
 //   // Example iterating over pages.
 //   req := client.DescribeReservedInstancesOfferingsRequest(input)
-//   p := NewDescribeReservedInstancesOfferingsRequestPaginator(req)
+//   p := ec2.NewDescribeReservedInstancesOfferingsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

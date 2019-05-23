@@ -356,7 +356,7 @@ func (r ListObjectsV2Request) Send(ctx context.Context) (*ListObjectsV2Response,
 //
 //   // Example iterating over pages.
 //   req := client.ListObjectsV2Request(input)
-//   p := NewListObjectsV2RequestPaginator(req)
+//   p := s3.NewListObjectsV2RequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

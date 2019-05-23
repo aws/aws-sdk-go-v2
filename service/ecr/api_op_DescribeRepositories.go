@@ -153,7 +153,7 @@ func (r DescribeRepositoriesRequest) Send(ctx context.Context) (*DescribeReposit
 //
 //   // Example iterating over pages.
 //   req := client.DescribeRepositoriesRequest(input)
-//   p := NewDescribeRepositoriesRequestPaginator(req)
+//   p := ecr.NewDescribeRepositoriesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

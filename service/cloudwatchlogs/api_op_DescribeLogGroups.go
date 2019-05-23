@@ -136,7 +136,7 @@ func (r DescribeLogGroupsRequest) Send(ctx context.Context) (*DescribeLogGroupsR
 //
 //   // Example iterating over pages.
 //   req := client.DescribeLogGroupsRequest(input)
-//   p := NewDescribeLogGroupsRequestPaginator(req)
+//   p := cloudwatchlogs.NewDescribeLogGroupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

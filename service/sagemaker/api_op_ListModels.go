@@ -146,7 +146,7 @@ func (r ListModelsRequest) Send(ctx context.Context) (*ListModelsResponse, error
 //
 //   // Example iterating over pages.
 //   req := client.ListModelsRequest(input)
-//   p := NewListModelsRequestPaginator(req)
+//   p := sagemaker.NewListModelsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

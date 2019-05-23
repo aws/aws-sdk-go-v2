@@ -242,7 +242,7 @@ func (r ListBackupJobsRequest) Send(ctx context.Context) (*ListBackupJobsRespons
 //
 //   // Example iterating over pages.
 //   req := client.ListBackupJobsRequest(input)
-//   p := NewListBackupJobsRequestPaginator(req)
+//   p := backup.NewListBackupJobsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

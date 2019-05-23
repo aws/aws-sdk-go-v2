@@ -185,7 +185,7 @@ func (r ListAttachedRolePoliciesRequest) Send(ctx context.Context) (*ListAttache
 //
 //   // Example iterating over pages.
 //   req := client.ListAttachedRolePoliciesRequest(input)
-//   p := NewListAttachedRolePoliciesRequestPaginator(req)
+//   p := iam.NewListAttachedRolePoliciesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

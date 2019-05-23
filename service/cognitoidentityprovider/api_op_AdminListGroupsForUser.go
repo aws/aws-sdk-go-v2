@@ -151,7 +151,7 @@ func (r AdminListGroupsForUserRequest) Send(ctx context.Context) (*AdminListGrou
 //
 //   // Example iterating over pages.
 //   req := client.AdminListGroupsForUserRequest(input)
-//   p := NewAdminListGroupsForUserRequestPaginator(req)
+//   p := cognitoidentityprovider.NewAdminListGroupsForUserRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -132,7 +132,7 @@ func (r DescribeReplicationGroupsRequest) Send(ctx context.Context) (*DescribeRe
 //
 //   // Example iterating over pages.
 //   req := client.DescribeReplicationGroupsRequest(input)
-//   p := NewDescribeReplicationGroupsRequestPaginator(req)
+//   p := elasticache.NewDescribeReplicationGroupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

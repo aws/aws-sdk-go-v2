@@ -141,7 +141,7 @@ func (r DescribeScalingActivitiesRequest) Send(ctx context.Context) (*DescribeSc
 //
 //   // Example iterating over pages.
 //   req := client.DescribeScalingActivitiesRequest(input)
-//   p := NewDescribeScalingActivitiesRequestPaginator(req)
+//   p := autoscaling.NewDescribeScalingActivitiesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

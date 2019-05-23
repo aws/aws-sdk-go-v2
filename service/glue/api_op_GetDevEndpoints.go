@@ -128,7 +128,7 @@ func (r GetDevEndpointsRequest) Send(ctx context.Context) (*GetDevEndpointsRespo
 //
 //   // Example iterating over pages.
 //   req := client.GetDevEndpointsRequest(input)
-//   p := NewGetDevEndpointsRequestPaginator(req)
+//   p := glue.NewGetDevEndpointsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

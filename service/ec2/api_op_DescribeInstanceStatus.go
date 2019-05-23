@@ -197,7 +197,7 @@ func (r DescribeInstanceStatusRequest) Send(ctx context.Context) (*DescribeInsta
 //
 //   // Example iterating over pages.
 //   req := client.DescribeInstanceStatusRequest(input)
-//   p := NewDescribeInstanceStatusRequestPaginator(req)
+//   p := ec2.NewDescribeInstanceStatusRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

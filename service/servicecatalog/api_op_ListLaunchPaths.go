@@ -145,7 +145,7 @@ func (r ListLaunchPathsRequest) Send(ctx context.Context) (*ListLaunchPathsRespo
 //
 //   // Example iterating over pages.
 //   req := client.ListLaunchPathsRequest(input)
-//   p := NewListLaunchPathsRequestPaginator(req)
+//   p := servicecatalog.NewListLaunchPathsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

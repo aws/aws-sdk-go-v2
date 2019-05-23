@@ -160,7 +160,7 @@ func (r ListAccountsForParentRequest) Send(ctx context.Context) (*ListAccountsFo
 //
 //   // Example iterating over pages.
 //   req := client.ListAccountsForParentRequest(input)
-//   p := NewListAccountsForParentRequestPaginator(req)
+//   p := organizations.NewListAccountsForParentRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

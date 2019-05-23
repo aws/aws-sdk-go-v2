@@ -224,7 +224,7 @@ func (r GetMetricDataRequest) Send(ctx context.Context) (*GetMetricDataResponse,
 //
 //   // Example iterating over pages.
 //   req := client.GetMetricDataRequest(input)
-//   p := NewGetMetricDataRequestPaginator(req)
+//   p := cloudwatch.NewGetMetricDataRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

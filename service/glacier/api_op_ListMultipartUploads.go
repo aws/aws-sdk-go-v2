@@ -231,7 +231,7 @@ func (r ListMultipartUploadsRequest) Send(ctx context.Context) (*ListMultipartUp
 //
 //   // Example iterating over pages.
 //   req := client.ListMultipartUploadsRequest(input)
-//   p := NewListMultipartUploadsRequestPaginator(req)
+//   p := glacier.NewListMultipartUploadsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

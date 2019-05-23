@@ -133,7 +133,7 @@ func (r GetOfferingStatusRequest) Send(ctx context.Context) (*GetOfferingStatusR
 //
 //   // Example iterating over pages.
 //   req := client.GetOfferingStatusRequest(input)
-//   p := NewGetOfferingStatusRequestPaginator(req)
+//   p := devicefarm.NewGetOfferingStatusRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

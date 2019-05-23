@@ -206,7 +206,7 @@ func (r ListSigningJobsRequest) Send(ctx context.Context) (*ListSigningJobsRespo
 //
 //   // Example iterating over pages.
 //   req := client.ListSigningJobsRequest(input)
-//   p := NewListSigningJobsRequestPaginator(req)
+//   p := signer.NewListSigningJobsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -143,7 +143,7 @@ func (r DescribeByoipCidrsRequest) Send(ctx context.Context) (*DescribeByoipCidr
 //
 //   // Example iterating over pages.
 //   req := client.DescribeByoipCidrsRequest(input)
-//   p := NewDescribeByoipCidrsRequestPaginator(req)
+//   p := ec2.NewDescribeByoipCidrsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

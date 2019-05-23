@@ -137,7 +137,7 @@ func (r ListSamplesRequest) Send(ctx context.Context) (*ListSamplesResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.ListSamplesRequest(input)
-//   p := NewListSamplesRequestPaginator(req)
+//   p := devicefarm.NewListSamplesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

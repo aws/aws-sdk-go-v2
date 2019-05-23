@@ -146,7 +146,7 @@ func (r ListFileSharesRequest) Send(ctx context.Context) (*ListFileSharesRespons
 //
 //   // Example iterating over pages.
 //   req := client.ListFileSharesRequest(input)
-//   p := NewListFileSharesRequestPaginator(req)
+//   p := storagegateway.NewListFileSharesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

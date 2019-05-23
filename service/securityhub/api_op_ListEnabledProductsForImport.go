@@ -170,7 +170,7 @@ func (r ListEnabledProductsForImportRequest) Send(ctx context.Context) (*ListEna
 //
 //   // Example iterating over pages.
 //   req := client.ListEnabledProductsForImportRequest(input)
-//   p := NewListEnabledProductsForImportRequestPaginator(req)
+//   p := securityhub.NewListEnabledProductsForImportRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

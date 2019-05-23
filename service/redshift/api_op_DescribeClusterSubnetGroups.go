@@ -158,7 +158,7 @@ func (r DescribeClusterSubnetGroupsRequest) Send(ctx context.Context) (*Describe
 //
 //   // Example iterating over pages.
 //   req := client.DescribeClusterSubnetGroupsRequest(input)
-//   p := NewDescribeClusterSubnetGroupsRequestPaginator(req)
+//   p := redshift.NewDescribeClusterSubnetGroupsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

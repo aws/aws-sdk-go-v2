@@ -159,7 +159,7 @@ func (r ListTargetsForPolicyRequest) Send(ctx context.Context) (*ListTargetsForP
 //
 //   // Example iterating over pages.
 //   req := client.ListTargetsForPolicyRequest(input)
-//   p := NewListTargetsForPolicyRequestPaginator(req)
+//   p := organizations.NewListTargetsForPolicyRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

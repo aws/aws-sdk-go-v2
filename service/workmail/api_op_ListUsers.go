@@ -137,7 +137,7 @@ func (r ListUsersRequest) Send(ctx context.Context) (*ListUsersResponse, error) 
 //
 //   // Example iterating over pages.
 //   req := client.ListUsersRequest(input)
-//   p := NewListUsersRequestPaginator(req)
+//   p := workmail.NewListUsersRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

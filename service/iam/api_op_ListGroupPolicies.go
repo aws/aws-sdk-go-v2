@@ -180,7 +180,7 @@ func (r ListGroupPoliciesRequest) Send(ctx context.Context) (*ListGroupPoliciesR
 //
 //   // Example iterating over pages.
 //   req := client.ListGroupPoliciesRequest(input)
-//   p := NewListGroupPoliciesRequestPaginator(req)
+//   p := iam.NewListGroupPoliciesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

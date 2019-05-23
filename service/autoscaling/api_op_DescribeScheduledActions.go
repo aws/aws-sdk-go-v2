@@ -146,7 +146,7 @@ func (r DescribeScheduledActionsRequest) Send(ctx context.Context) (*DescribeSch
 //
 //   // Example iterating over pages.
 //   req := client.DescribeScheduledActionsRequest(input)
-//   p := NewDescribeScheduledActionsRequestPaginator(req)
+//   p := autoscaling.NewDescribeScheduledActionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

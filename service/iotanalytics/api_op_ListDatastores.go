@@ -168,7 +168,7 @@ func (r ListDatastoresRequest) Send(ctx context.Context) (*ListDatastoresRespons
 //
 //   // Example iterating over pages.
 //   req := client.ListDatastoresRequest(input)
-//   p := NewListDatastoresRequestPaginator(req)
+//   p := iotanalytics.NewListDatastoresRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

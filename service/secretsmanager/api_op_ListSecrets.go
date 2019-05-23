@@ -162,7 +162,7 @@ func (r ListSecretsRequest) Send(ctx context.Context) (*ListSecretsResponse, err
 //
 //   // Example iterating over pages.
 //   req := client.ListSecretsRequest(input)
-//   p := NewListSecretsRequestPaginator(req)
+//   p := secretsmanager.NewListSecretsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -161,7 +161,7 @@ func (r GetUsagePlansRequest) Send(ctx context.Context) (*GetUsagePlansResponse,
 //
 //   // Example iterating over pages.
 //   req := client.GetUsagePlansRequest(input)
-//   p := NewGetUsagePlansRequestPaginator(req)
+//   p := apigateway.NewGetUsagePlansRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

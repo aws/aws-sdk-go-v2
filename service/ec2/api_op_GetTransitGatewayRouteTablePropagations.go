@@ -150,7 +150,7 @@ func (r GetTransitGatewayRouteTablePropagationsRequest) Send(ctx context.Context
 //
 //   // Example iterating over pages.
 //   req := client.GetTransitGatewayRouteTablePropagationsRequest(input)
-//   p := NewGetTransitGatewayRouteTablePropagationsRequestPaginator(req)
+//   p := ec2.NewGetTransitGatewayRouteTablePropagationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

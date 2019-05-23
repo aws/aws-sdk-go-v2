@@ -133,7 +133,7 @@ func (r DescribeNetworkInterfacePermissionsRequest) Send(ctx context.Context) (*
 //
 //   // Example iterating over pages.
 //   req := client.DescribeNetworkInterfacePermissionsRequest(input)
-//   p := NewDescribeNetworkInterfacePermissionsRequestPaginator(req)
+//   p := ec2.NewDescribeNetworkInterfacePermissionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

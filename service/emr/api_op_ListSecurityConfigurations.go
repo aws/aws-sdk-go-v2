@@ -112,7 +112,7 @@ func (r ListSecurityConfigurationsRequest) Send(ctx context.Context) (*ListSecur
 //
 //   // Example iterating over pages.
 //   req := client.ListSecurityConfigurationsRequest(input)
-//   p := NewListSecurityConfigurationsRequestPaginator(req)
+//   p := emr.NewListSecurityConfigurationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

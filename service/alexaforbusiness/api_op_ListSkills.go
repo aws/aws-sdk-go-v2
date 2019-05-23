@@ -141,7 +141,7 @@ func (r ListSkillsRequest) Send(ctx context.Context) (*ListSkillsResponse, error
 //
 //   // Example iterating over pages.
 //   req := client.ListSkillsRequest(input)
-//   p := NewListSkillsRequestPaginator(req)
+//   p := alexaforbusiness.NewListSkillsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

@@ -172,7 +172,7 @@ func (r DescribeDBEngineVersionsRequest) Send(ctx context.Context) (*DescribeDBE
 //
 //   // Example iterating over pages.
 //   req := client.DescribeDBEngineVersionsRequest(input)
-//   p := NewDescribeDBEngineVersionsRequestPaginator(req)
+//   p := neptune.NewDescribeDBEngineVersionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

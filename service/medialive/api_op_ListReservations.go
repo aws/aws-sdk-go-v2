@@ -226,7 +226,7 @@ func (r ListReservationsRequest) Send(ctx context.Context) (*ListReservationsRes
 //
 //   // Example iterating over pages.
 //   req := client.ListReservationsRequest(input)
-//   p := NewListReservationsRequestPaginator(req)
+//   p := medialive.NewListReservationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

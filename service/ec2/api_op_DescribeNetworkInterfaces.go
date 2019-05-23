@@ -233,7 +233,7 @@ func (r DescribeNetworkInterfacesRequest) Send(ctx context.Context) (*DescribeNe
 //
 //   // Example iterating over pages.
 //   req := client.DescribeNetworkInterfacesRequest(input)
-//   p := NewDescribeNetworkInterfacesRequestPaginator(req)
+//   p := ec2.NewDescribeNetworkInterfacesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

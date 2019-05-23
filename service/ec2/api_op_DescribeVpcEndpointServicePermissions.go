@@ -149,7 +149,7 @@ func (r DescribeVpcEndpointServicePermissionsRequest) Send(ctx context.Context) 
 //
 //   // Example iterating over pages.
 //   req := client.DescribeVpcEndpointServicePermissionsRequest(input)
-//   p := NewDescribeVpcEndpointServicePermissionsRequestPaginator(req)
+//   p := ec2.NewDescribeVpcEndpointServicePermissionsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

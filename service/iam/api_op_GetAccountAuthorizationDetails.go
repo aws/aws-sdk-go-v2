@@ -177,7 +177,7 @@ func (r GetAccountAuthorizationDetailsRequest) Send(ctx context.Context) (*GetAc
 //
 //   // Example iterating over pages.
 //   req := client.GetAccountAuthorizationDetailsRequest(input)
-//   p := NewGetAccountAuthorizationDetailsRequestPaginator(req)
+//   p := iam.NewGetAccountAuthorizationDetailsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

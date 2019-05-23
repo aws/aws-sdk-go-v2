@@ -128,7 +128,7 @@ func (r ListOrganizationsRequest) Send(ctx context.Context) (*ListOrganizationsR
 //
 //   // Example iterating over pages.
 //   req := client.ListOrganizationsRequest(input)
-//   p := NewListOrganizationsRequestPaginator(req)
+//   p := workmail.NewListOrganizationsRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

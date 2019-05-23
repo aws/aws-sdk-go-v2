@@ -153,7 +153,7 @@ func (r ListComplianceStatusRequest) Send(ctx context.Context) (*ListComplianceS
 //
 //   // Example iterating over pages.
 //   req := client.ListComplianceStatusRequest(input)
-//   p := NewListComplianceStatusRequestPaginator(req)
+//   p := fms.NewListComplianceStatusRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()

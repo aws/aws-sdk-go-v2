@@ -164,7 +164,7 @@ func (r ListMFADevicesRequest) Send(ctx context.Context) (*ListMFADevicesRespons
 //
 //   // Example iterating over pages.
 //   req := client.ListMFADevicesRequest(input)
-//   p := NewListMFADevicesRequestPaginator(req)
+//   p := iam.NewListMFADevicesRequestPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
