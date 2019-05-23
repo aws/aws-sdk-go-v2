@@ -106,6 +106,7 @@ func ExampleBuilder_WithKeyCondition() {
 	// Use the built expression to populate the DynamoDB Query's API input
 	// parameters.
 	input := &dynamodb.QueryInput{
+		ExpressionAttributeNames:  expr.Names(),
 		ExpressionAttributeValues: expr.Values(),
 		KeyConditionExpression:    expr.KeyCondition(),
 		ProjectionExpression:      expr.Projection(),
