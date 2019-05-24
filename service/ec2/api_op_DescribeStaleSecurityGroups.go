@@ -81,10 +81,10 @@ const opDescribeStaleSecurityGroups = "DescribeStaleSecurityGroups"
 // DescribeStaleSecurityGroupsRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// [EC2-VPC only] Describes the stale security group rules for security groups
-// in a specified VPC. Rules are stale when they reference a deleted security
-// group in a peer VPC, or a security group in a peer VPC for which the VPC
-// peering connection has been deleted.
+// [VPC only] Describes the stale security group rules for security groups in
+// a specified VPC. Rules are stale when they reference a deleted security group
+// in a peer VPC, or a security group in a peer VPC for which the VPC peering
+// connection has been deleted.
 //
 //    // Example sending a request using DescribeStaleSecurityGroupsRequest.
 //    req := client.DescribeStaleSecurityGroupsRequest(params)

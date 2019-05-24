@@ -81,6 +81,9 @@ type GetUsagePlanOutput struct {
 	// The maximum number of permitted requests per a given unit time interval.
 	Quota *QuotaSettings `locationName:"quota" type:"structure"`
 
+	// The collection of tags. Each tag element is associated with a given resource.
+	Tags map[string]string `locationName:"tags" type:"map"`
+
 	// The request throttle limits of a usage plan.
 	Throttle *ThrottleSettings `locationName:"throttle" type:"structure"`
 }
@@ -133,6 +136,18 @@ func (s GetUsagePlanOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "quota", v, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	if s.Throttle != nil {
 		v := s.Throttle

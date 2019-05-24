@@ -24,7 +24,8 @@ type DescribeMountTargetsInput struct {
 	Marker *string `location:"querystring" locationName:"Marker" type:"string"`
 
 	// (Optional) Maximum number of mount targets to return in the response. Currently,
-	// this number is automatically set to 10.
+	// this number is automatically set to 10, and other values are ignored. The
+	// response is paginated at 10 per page if you have more than 10 mount targets.
 	MaxItems *int64 `location:"querystring" locationName:"MaxItems" min:"1" type:"integer"`
 
 	// (Optional) ID of the mount target that you want to have described (String).

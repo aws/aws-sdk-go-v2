@@ -54,7 +54,7 @@ const opListPlatformApplications = "ListPlatformApplications"
 // will be returned. To receive the next page, you call ListPlatformApplications
 // using the NextToken string received from the previous call. When there are
 // no more records to return, NextToken will be null. For more information,
-// see Using Amazon SNS Mobile Push Notifications (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
+// see Using Amazon SNS Mobile Push Notifications (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 //
 // This action is throttled at 15 transactions per second (TPS).
 //

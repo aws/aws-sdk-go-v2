@@ -96,6 +96,9 @@ type GetApiKeyOutput struct {
 	// A list of Stage resources that are associated with the ApiKey resource.
 	StageKeys []string `locationName:"stageKeys" type:"list"`
 
+	// The collection of tags. Each tag element is associated with a given resource.
+	Tags map[string]string `locationName:"tags" type:"map"`
+
 	// The value of the API Key.
 	Value *string `locationName:"value" type:"string"`
 }
@@ -159,6 +162,18 @@ func (s GetApiKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
 			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
+
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
 
 	}
 	if s.Value != nil {

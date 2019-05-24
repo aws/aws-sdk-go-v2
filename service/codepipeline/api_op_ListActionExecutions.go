@@ -17,9 +17,12 @@ type ListActionExecutionsInput struct {
 	Filter *ActionExecutionFilter `locationName:"filter" type:"structure"`
 
 	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value. The
-	// action execution history is limited to the most recent 12 months, based on
-	// action execution start times. Default value is 100.
+	// remaining results, make another call with the returned nextToken value. Action
+	// execution history is retained for up to 12 months, based on action execution
+	// start times. Default value is 100.
+	//
+	// Detailed execution history is available for executions run on or after February
+	// 21, 2019.
 	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
 
 	// The token that was returned from the previous ListActionExecutions call,
@@ -98,6 +101,12 @@ func (c *Client) ListActionExecutionsRequest(input *ListActionExecutionsInput) L
 		Name:       opListActionExecutions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -130,6 +139,53 @@ func (r ListActionExecutionsRequest) Send(ctx context.Context) (*ListActionExecu
 	}
 
 	return resp, nil
+}
+
+// NewListActionExecutionsRequestPaginator returns a paginator for ListActionExecutions.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListActionExecutionsRequest(input)
+//   p := codepipeline.NewListActionExecutionsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListActionExecutionsPaginator(req ListActionExecutionsRequest) ListActionExecutionsPaginator {
+	return ListActionExecutionsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListActionExecutionsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListActionExecutionsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListActionExecutionsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListActionExecutionsPaginator) CurrentPage() *ListActionExecutionsOutput {
+	return p.Pager.CurrentPage().(*ListActionExecutionsOutput)
 }
 
 // ListActionExecutionsResponse is the response type for the

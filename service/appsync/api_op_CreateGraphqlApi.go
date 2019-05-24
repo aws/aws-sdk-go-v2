@@ -4,6 +4,7 @@ package appsync
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -14,7 +15,10 @@ import (
 type CreateGraphqlApiInput struct {
 	_ struct{} `type:"structure"`
 
-	// The authentication type: API key, AWS IAM, or Amazon Cognito user pools.
+	// A list of additional authentication providers for the GraphqlApi API.
+	AdditionalAuthenticationProviders []AdditionalAuthenticationProvider `locationName:"additionalAuthenticationProviders" type:"list"`
+
+	// The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.
 	//
 	// AuthenticationType is a required field
 	AuthenticationType AuthenticationType `locationName:"authenticationType" type:"string" required:"true" enum:"true"`
@@ -29,6 +33,9 @@ type CreateGraphqlApiInput struct {
 
 	// The OpenID Connect configuration.
 	OpenIDConnectConfig *OpenIDConnectConfig `locationName:"openIDConnectConfig" type:"structure"`
+
+	// A TagMap object.
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 
 	// The Amazon Cognito user pool configuration.
 	UserPoolConfig *UserPoolConfig `locationName:"userPoolConfig" type:"structure"`
@@ -48,6 +55,16 @@ func (s *CreateGraphqlApiInput) Validate() error {
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
+	if s.AdditionalAuthenticationProviders != nil {
+		for i, v := range s.AdditionalAuthenticationProviders {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AdditionalAuthenticationProviders", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 	if s.LogConfig != nil {
 		if err := s.LogConfig.Validate(); err != nil {
@@ -75,6 +92,18 @@ func (s *CreateGraphqlApiInput) Validate() error {
 func (s CreateGraphqlApiInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
+	if len(s.AdditionalAuthenticationProviders) > 0 {
+		v := s.AdditionalAuthenticationProviders
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "additionalAuthenticationProviders", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if len(s.AuthenticationType) > 0 {
 		v := s.AuthenticationType
 
@@ -98,6 +127,18 @@ func (s CreateGraphqlApiInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "openIDConnectConfig", v, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	if s.UserPoolConfig != nil {
 		v := s.UserPoolConfig

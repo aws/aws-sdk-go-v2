@@ -12,11 +12,7 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// Contains Availability Zone information.
-//
-// This data type is used as an element in the following data type:
-//
-//    * OrderableDBInstanceOption
+// Specifies an Availability Zone.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/AvailabilityZone
 type AvailabilityZone struct {
 	_ struct{} `type:"structure"`
@@ -30,7 +26,7 @@ func (s AvailabilityZone) String() string {
 	return awsutil.Prettify(s)
 }
 
-// This data type is used as a response element in the action DescribeDBEngineVersions.
+// Specifies a character set.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CharacterSet
 type CharacterSet struct {
 	_ struct{} `type:"structure"`
@@ -195,8 +191,7 @@ type DBCluster struct {
 	// to the reader endpoint.
 	ReaderEndpoint *string `type:"string"`
 
-	// Contains the identifier of the source DB cluster if this DB cluster is a
-	// Read Replica.
+	// Not supported by Neptune.
 	ReplicationSourceIdentifier *string `type:"string"`
 
 	// Specifies the current state of this DB cluster.
@@ -604,8 +599,7 @@ type DBInstance struct {
 	// Specifies the Provisioned IOPS (I/O operations per second) value.
 	Iops *int64 `type:"integer"`
 
-	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted
-	// DB instance.
+	// Not supported: The encryption for DB instances is managed by the DB cluster.
 	KmsKeyId *string `type:"string"`
 
 	// Specifies the latest time to which a database can be restored with point-in-time
@@ -657,7 +651,7 @@ type DBInstance struct {
 	// primary instance after a failure of the existing primary instance.
 	PromotionTier *int64 `type:"integer"`
 
-	// This parameter is not supported.
+	// This flag should no longer be used.
 	PubliclyAccessible *bool `deprecated:"true" type:"boolean"`
 
 	// Contains one or more identifiers of DB clusters that are Read Replicas of
@@ -680,7 +674,7 @@ type DBInstance struct {
 	// is blank.
 	StatusInfos []DBInstanceStatusInfo `locationNameList:"DBInstanceStatusInfo" type:"list"`
 
-	// Specifies whether the DB instance is encrypted.
+	// Not supported: The encryption for DB instances is managed by the DB cluster.
 	StorageEncrypted *bool `type:"boolean"`
 
 	// Specifies the storage type associated with DB instance.
@@ -783,11 +777,7 @@ func (s DBParameterGroupStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
-// This data type is used as a response element in the following actions:
-//
-//    * ModifyDBInstance
-//
-//    * RebootDBInstance
+// Specifies membership in a designated DB security group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBSecurityGroupMembership
 type DBSecurityGroupMembership struct {
 	_ struct{} `type:"structure"`
@@ -836,7 +826,7 @@ func (s DBSubnetGroup) String() string {
 	return awsutil.Prettify(s)
 }
 
-// An Active Directory Domain membership record associated with the DB instance.
+// An Active Directory Domain membership record associated with a DB instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DomainMembership
 type DomainMembership struct {
 	_ struct{} `type:"structure"`
@@ -878,13 +868,7 @@ func (s DoubleRange) String() string {
 	return awsutil.Prettify(s)
 }
 
-// This data type is used as a response element in the following actions:
-//
-//    * CreateDBInstance
-//
-//    * DescribeDBInstances
-//
-//    * DeleteDBInstance
+// Specifies a connection endpoint.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/Endpoint
 type Endpoint struct {
 	_ struct{} `type:"structure"`
@@ -1160,11 +1144,7 @@ func (s OrderableDBInstanceOption) String() string {
 	return awsutil.Prettify(s)
 }
 
-// This data type is used as a request parameter in the ModifyDBParameterGroup
-// and ResetDBParameterGroup actions.
-//
-// This data type is used as a response element in the DescribeEngineDefaultParameters
-// and DescribeDBParameters actions.
+// Specifies a parameter.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/Parameter
 type Parameter struct {
 	_ struct{} `type:"structure"`
@@ -1311,8 +1291,7 @@ type PendingModifiedValues struct {
 	// Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment.
 	MultiAZ *bool `type:"boolean"`
 
-	// A list of the log types whose configuration is still pending. In other words,
-	// these log types are in the process of being activated or deactivated.
+	// Specifies the CloudWatch logs to be exported.
 	PendingCloudwatchLogsExports *PendingCloudwatchLogsExports `type:"structure"`
 
 	// Specifies the pending port for the DB instance.
@@ -1368,17 +1347,15 @@ func (s ResourcePendingMaintenanceActions) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Specifies a subnet.
+//
 // This data type is used as a response element in the DescribeDBSubnetGroups
 // action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/Subnet
 type Subnet struct {
 	_ struct{} `type:"structure"`
 
-	// Contains Availability Zone information.
-	//
-	// This data type is used as an element in the following data type:
-	//
-	//    * OrderableDBInstanceOption
+	// Specifies the EC2 Availability Zone that the subnet is in.
 	SubnetAvailabilityZone *AvailabilityZone `type:"structure"`
 
 	// Specifies the identifier of the subnet.
@@ -1417,9 +1394,7 @@ func (s Tag) String() string {
 	return awsutil.Prettify(s)
 }
 
-// A time zone associated with a DBInstance. This data type is an element in
-// the response to the DescribeDBInstances, and the DescribeDBEngineVersions
-// actions.
+// A time zone associated with a DBInstance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/Timezone
 type Timezone struct {
 	_ struct{} `type:"structure"`
@@ -1477,6 +1452,7 @@ func (s ValidDBInstanceModificationsMessage) String() string {
 }
 
 // Information about valid modifications that you can make to your DB instance.
+//
 // Contains the result of a successful call to the DescribeValidDBInstanceModifications
 // action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ValidStorageOptions

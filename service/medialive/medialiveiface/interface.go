@@ -9,6 +9,9 @@
 package medialiveiface
 
 import (
+	"context"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/medialive"
 )
 
@@ -79,6 +82,8 @@ type ClientAPI interface {
 
 	DeleteReservationRequest(*medialive.DeleteReservationInput) medialive.DeleteReservationRequest
 
+	DeleteScheduleRequest(*medialive.DeleteScheduleInput) medialive.DeleteScheduleRequest
+
 	DeleteTagsRequest(*medialive.DeleteTagsInput) medialive.DeleteTagsRequest
 
 	DescribeChannelRequest(*medialive.DescribeChannelInput) medialive.DescribeChannelRequest
@@ -113,11 +118,21 @@ type ClientAPI interface {
 
 	UpdateChannelRequest(*medialive.UpdateChannelInput) medialive.UpdateChannelRequest
 
+	UpdateChannelClassRequest(*medialive.UpdateChannelClassInput) medialive.UpdateChannelClassRequest
+
 	UpdateInputRequest(*medialive.UpdateInputInput) medialive.UpdateInputRequest
 
 	UpdateInputSecurityGroupRequest(*medialive.UpdateInputSecurityGroupInput) medialive.UpdateInputSecurityGroupRequest
 
 	UpdateReservationRequest(*medialive.UpdateReservationInput) medialive.UpdateReservationRequest
+
+	WaitUntilChannelCreated(context.Context, *medialive.DescribeChannelInput, ...aws.WaiterOption) error
+
+	WaitUntilChannelDeleted(context.Context, *medialive.DescribeChannelInput, ...aws.WaiterOption) error
+
+	WaitUntilChannelRunning(context.Context, *medialive.DescribeChannelInput, ...aws.WaiterOption) error
+
+	WaitUntilChannelStopped(context.Context, *medialive.DescribeChannelInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*medialive.Client)(nil)

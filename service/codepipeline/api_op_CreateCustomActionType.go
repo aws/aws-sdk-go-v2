@@ -46,8 +46,11 @@ type CreateCustomActionTypeInput struct {
 	// Provider is a required field
 	Provider *string `locationName:"provider" min:"1" type:"string" required:"true"`
 
-	// Returns information about the settings for an action type.
+	// URLs that provide users information about this custom action.
 	Settings *ActionTypeSettings `locationName:"settings" type:"structure"`
+
+	// The tags for the custom action.
+	Tags []Tag `locationName:"tags" type:"list"`
 
 	// The version identifier of the custom action.
 	//
@@ -110,6 +113,13 @@ func (s *CreateCustomActionTypeInput) Validate() error {
 			invalidParams.AddNested("Settings", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -126,6 +136,9 @@ type CreateCustomActionTypeOutput struct {
 	//
 	// ActionType is a required field
 	ActionType *ActionType `locationName:"actionType" type:"structure" required:"true"`
+
+	// Specifies the tags applied to the custom action.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation

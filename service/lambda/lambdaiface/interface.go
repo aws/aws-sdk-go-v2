@@ -9,6 +9,9 @@
 package lambdaiface
 
 import (
+	"context"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/lambda"
 )
 
@@ -138,6 +141,8 @@ type ClientAPI interface {
 	UpdateFunctionCodeRequest(*lambda.UpdateFunctionCodeInput) lambda.UpdateFunctionCodeRequest
 
 	UpdateFunctionConfigurationRequest(*lambda.UpdateFunctionConfigurationInput) lambda.UpdateFunctionConfigurationRequest
+
+	WaitUntilFunctionExists(context.Context, *lambda.GetFunctionInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*lambda.Client)(nil)

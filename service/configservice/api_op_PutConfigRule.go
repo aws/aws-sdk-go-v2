@@ -4,6 +4,7 @@ package configservice
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -19,6 +20,8 @@ type PutConfigRuleInput struct {
 	//
 	// ConfigRule is a required field
 	ConfigRule *ConfigRule `type:"structure" required:"true"`
+
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -36,6 +39,13 @@ func (s *PutConfigRuleInput) Validate() error {
 	if s.ConfigRule != nil {
 		if err := s.ConfigRule.Validate(); err != nil {
 			invalidParams.AddNested("ConfigRule", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 

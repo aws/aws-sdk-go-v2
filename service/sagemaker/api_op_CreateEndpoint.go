@@ -89,6 +89,10 @@ const opCreateEndpoint = "CreateEndpoint"
 //
 // Use this API only for hosting models using Amazon SageMaker hosting services.
 //
+// You must not delete an EndpointConfig in use by an endpoint that is live
+// or while the UpdateEndpoint or CreateEndpoint operations are being performed
+// on the endpoint. To update an endpoint, you must create a new EndpointConfig.
+//
 // The endpoint name must be unique within an AWS Region in your AWS account.
 //
 // When it receives the request, Amazon SageMaker creates the endpoint, launches

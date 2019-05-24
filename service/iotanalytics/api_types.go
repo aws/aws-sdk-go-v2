@@ -674,6 +674,7 @@ func (s DatasetAction) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Information about the action which automatically creates the data set's contents.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatasetActionSummary
 type DatasetActionSummary struct {
 	_ struct{} `type:"structure"`
@@ -714,6 +715,9 @@ type DatasetContentDeliveryDestination struct {
 
 	// Configuration information for delivery of data set contents to AWS IoT Events.
 	IotEventsDestinationConfiguration *IotEventsDestinationConfiguration `locationName:"iotEventsDestinationConfiguration" type:"structure"`
+
+	// Configuration information for delivery of data set contents to Amazon S3.
+	S3DestinationConfiguration *S3DestinationConfiguration `locationName:"s3DestinationConfiguration" type:"structure"`
 }
 
 // String returns the string representation
@@ -727,6 +731,11 @@ func (s *DatasetContentDeliveryDestination) Validate() error {
 	if s.IotEventsDestinationConfiguration != nil {
 		if err := s.IotEventsDestinationConfiguration.Validate(); err != nil {
 			invalidParams.AddNested("IotEventsDestinationConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.S3DestinationConfiguration != nil {
+		if err := s.S3DestinationConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("S3DestinationConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -743,6 +752,12 @@ func (s DatasetContentDeliveryDestination) MarshalFields(e protocol.FieldEncoder
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "iotEventsDestinationConfiguration", v, metadata)
+	}
+	if s.S3DestinationConfiguration != nil {
+		v := s.S3DestinationConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "s3DestinationConfiguration", v, metadata)
 	}
 	return nil
 }
@@ -1717,6 +1732,72 @@ func (s FilterActivity) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "next", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Configuration information for coordination with the AWS Glue ETL (extract,
+// transform and load) service.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/GlueConfiguration
+type GlueConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the database in your AWS Glue Data Catalog in which the table
+	// is located. (An AWS Glue Data Catalog database contains Glue Data tables.)
+	//
+	// DatabaseName is a required field
+	DatabaseName *string `locationName:"databaseName" min:"1" type:"string" required:"true"`
+
+	// The name of the table in your AWS Glue Data Catalog which is used to perform
+	// the ETL (extract, transform and load) operations. (An AWS Glue Data Catalog
+	// table contains partitioned data and descriptions of data sources and targets.)
+	//
+	// TableName is a required field
+	TableName *string `locationName:"tableName" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GlueConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GlueConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GlueConfiguration"}
+
+	if s.DatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
+	}
+	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
+	}
+
+	if s.TableName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
+	}
+	if s.TableName != nil && len(*s.TableName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GlueConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DatabaseName != nil {
+		v := *s.DatabaseName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "databaseName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TableName != nil {
+		v := *s.TableName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "tableName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2733,6 +2814,104 @@ func (s RetentionPeriod) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Configuration information for delivery of data set contents to Amazon S3.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/S3DestinationConfiguration
+type S3DestinationConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the Amazon S3 bucket to which data set contents are delivered.
+	//
+	// Bucket is a required field
+	Bucket *string `locationName:"bucket" min:"3" type:"string" required:"true"`
+
+	// Configuration information for coordination with the AWS Glue ETL (extract,
+	// transform and load) service.
+	GlueConfiguration *GlueConfiguration `locationName:"glueConfiguration" type:"structure"`
+
+	// The key of the data set contents object. Each object in an Amazon S3 bucket
+	// has a key that is its unique identifier within the bucket (each object in
+	// a bucket has exactly one key).
+	//
+	// Key is a required field
+	Key *string `locationName:"key" min:"1" type:"string" required:"true"`
+
+	// The ARN of the role which grants AWS IoT Analytics permission to interact
+	// with your Amazon S3 and AWS Glue resources.
+	//
+	// RoleArn is a required field
+	RoleArn *string `locationName:"roleArn" min:"20" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s S3DestinationConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3DestinationConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "S3DestinationConfiguration"}
+
+	if s.Bucket == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
+	}
+	if s.Bucket != nil && len(*s.Bucket) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("Bucket", 3))
+	}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if s.RoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
+	}
+	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
+	}
+	if s.GlueConfiguration != nil {
+		if err := s.GlueConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("GlueConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s S3DestinationConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Bucket != nil {
+		v := *s.Bucket
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "bucket", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.GlueConfiguration != nil {
+		v := s.GlueConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "glueConfiguration", v, metadata)
+	}
+	if s.Key != nil {
+		v := *s.Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "key", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The schedule for when to trigger an update.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/Schedule
 type Schedule struct {
@@ -3105,6 +3284,7 @@ func (s Variable) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Information about the versioning of data set contents.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/VersioningConfiguration
 type VersioningConfiguration struct {
 	_ struct{} `type:"structure"`

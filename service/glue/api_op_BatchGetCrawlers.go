@@ -13,7 +13,7 @@ import (
 type BatchGetCrawlersInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of crawler names, which may be the names returned from the ListCrawlers
+	// A list of crawler names, which might be the names returned from the ListCrawlers
 	// operation.
 	//
 	// CrawlerNames is a required field
@@ -46,7 +46,7 @@ type BatchGetCrawlersOutput struct {
 	// A list of crawler definitions.
 	Crawlers []Crawler `type:"list"`
 
-	// A list of names of crawlers not found.
+	// A list of names of crawlers that were not found.
 	CrawlersNotFound []string `type:"list"`
 }
 

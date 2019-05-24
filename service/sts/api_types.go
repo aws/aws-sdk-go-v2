@@ -20,7 +20,7 @@ type AssumedRoleUser struct {
 
 	// The ARN of the temporary security credentials that are returned from the
 	// AssumeRole action. For more information about ARNs and how to use them in
-	// policies, see IAM Identifiers (http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html)
+	// policies, see IAM Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html)
 	// in Using IAM.
 	//
 	// Arn is a required field
@@ -77,7 +77,7 @@ type FederatedUser struct {
 
 	// The ARN that specifies the federated user that is associated with the credentials.
 	// For more information about ARNs and how to use them in policies, see IAM
-	// Identifiers (http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html)
+	// Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html)
 	// in Using IAM.
 	//
 	// Arn is a required field
@@ -93,4 +93,35 @@ type FederatedUser struct {
 // String returns the string representation
 func (s FederatedUser) String() string {
 	return awsutil.Prettify(s)
+}
+
+// A reference to the IAM managed policy that is passed as a session policy
+// for a role session or a federated user session.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/PolicyDescriptorType
+type PolicyDescriptorType struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the IAM managed policy to use as a session
+	// policy for the role. For more information about ARNs, see Amazon Resource
+	// Names (ARNs) and AWS Service Namespaces (general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference.
+	Arn *string `locationName:"arn" min:"20" type:"string"`
+}
+
+// String returns the string representation
+func (s PolicyDescriptorType) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PolicyDescriptorType) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PolicyDescriptorType"}
+	if s.Arn != nil && len(*s.Arn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 20))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }

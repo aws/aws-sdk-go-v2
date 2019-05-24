@@ -229,6 +229,22 @@ func (enum ProductViewSortBy) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type PropertyKey string
+
+// Enum values for PropertyKey
+const (
+	PropertyKeyOwner PropertyKey = "OWNER"
+)
+
+func (enum PropertyKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PropertyKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ProvisionedProductPlanStatus string
 
 // Enum values for ProvisionedProductPlanStatus

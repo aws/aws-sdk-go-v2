@@ -14,7 +14,7 @@ type GenerateRandomInput struct {
 	_ struct{} `type:"structure"`
 
 	// Generates the random byte string in the AWS CloudHSM cluster that is associated
-	// with the specified custom key store (http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html).
+	// with the specified custom key store (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html).
 	// To find the ID of a custom key store, use the DescribeCustomKeyStores operation.
 	CustomKeyStoreId *string `min:"1" type:"string"`
 
@@ -48,7 +48,7 @@ type GenerateRandomOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The random byte string. When you use the HTTP API or the AWS CLI, the value
-	// is Base64-encdoded. Otherwise, it is not encoded.
+	// is Base64-encoded. Otherwise, it is not encoded.
 	//
 	// Plaintext is automatically base64 encoded/decoded by the SDK.
 	Plaintext []byte `min:"1" type:"blob"`
@@ -68,7 +68,7 @@ const opGenerateRandom = "GenerateRandom"
 //
 // By default, the random byte string is generated in AWS KMS. To generate the
 // byte string in the AWS CloudHSM cluster that is associated with a custom
-// key store (http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html),
+// key store (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html),
 // specify the custom key store ID.
 //
 // For more information about entropy and random number generation, see the

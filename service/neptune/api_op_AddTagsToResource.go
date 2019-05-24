@@ -17,7 +17,7 @@ type AddTagsToResourceInput struct {
 
 	// The Amazon Neptune resource that the tags are added to. This value is an
 	// Amazon Resource Name (ARN). For information about creating an ARN, see Constructing
-	// an Amazon Resource Name (ARN) (http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing).
+	// an Amazon Resource Name (ARN) (https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing).
 	//
 	// ResourceName is a required field
 	ResourceName *string `type:"string" required:"true"`

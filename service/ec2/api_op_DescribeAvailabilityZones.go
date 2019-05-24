@@ -23,7 +23,7 @@ type DescribeAvailabilityZonesInput struct {
 	//
 	//    * message - Information about the Availability Zone.
 	//
-	//    * region-name - The name of the region for the Availability Zone (for
+	//    * region-name - The name of the Region for the Availability Zone (for
 	//    example, us-east-1).
 	//
 	//    * state - The state of the Availability Zone (available | information
@@ -65,7 +65,7 @@ const opDescribeAvailabilityZones = "DescribeAvailabilityZones"
 // Amazon Elastic Compute Cloud.
 //
 // Describes the Availability Zones that are available to you. The results include
-// zones only for the region you're currently using. If there is an event impacting
+// zones only for the Region you're currently using. If there is an event impacting
 // an Availability Zone, you can use this request to view the state and any
 // provided message for that Availability Zone.
 //

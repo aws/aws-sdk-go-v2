@@ -60,9 +60,6 @@ const opDeleteAgent = "DeleteAgent"
 // agent from your AWS account. However, it doesn't delete the agent virtual
 // machine (VM) from your on-premises environment.
 //
-// After you delete an agent, you can't reactivate it and you longer pay software
-// charges for it.
-//
 //    // Example sending a request using DeleteAgentRequest.
 //    req := client.DeleteAgentRequest(params)
 //    resp, err := req.Send(context.TODO())

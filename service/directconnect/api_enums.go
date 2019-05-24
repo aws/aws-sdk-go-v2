@@ -138,6 +138,23 @@ func (enum DirectConnectGatewayAttachmentState) MarshalValueBuf(b []byte) ([]byt
 	return append(b, enum...), nil
 }
 
+type DirectConnectGatewayAttachmentType string
+
+// Enum values for DirectConnectGatewayAttachmentType
+const (
+	DirectConnectGatewayAttachmentTypeTransitVirtualInterface DirectConnectGatewayAttachmentType = "TransitVirtualInterface"
+	DirectConnectGatewayAttachmentTypePrivateVirtualInterface DirectConnectGatewayAttachmentType = "PrivateVirtualInterface"
+)
+
+func (enum DirectConnectGatewayAttachmentType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DirectConnectGatewayAttachmentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DirectConnectGatewayState string
 
 // Enum values for DirectConnectGatewayState
@@ -162,6 +179,7 @@ type GatewayType string
 // Enum values for GatewayType
 const (
 	GatewayTypeVirtualPrivateGateway GatewayType = "virtualPrivateGateway"
+	GatewayTypeTransitGateway        GatewayType = "transitGateway"
 )
 
 func (enum GatewayType) MarshalValue() (string, error) {

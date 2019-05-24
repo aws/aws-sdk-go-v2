@@ -20,7 +20,7 @@ type DescribeScheduledInstancesInput struct {
 	// it is UnauthorizedOperation.
 	DryRun *bool `type:"boolean"`
 
-	// One or more filters.
+	// The filters.
 	//
 	//    * availability-zone - The Availability Zone (for example, us-west-2a).
 	//
@@ -39,7 +39,7 @@ type DescribeScheduledInstancesInput struct {
 	// The token for the next set of results.
 	NextToken *string `type:"string"`
 
-	// One or more Scheduled Instance IDs.
+	// The Scheduled Instance IDs.
 	ScheduledInstanceIds []string `locationName:"ScheduledInstanceId" locationNameList:"ScheduledInstanceId" type:"list"`
 
 	// The time period for the first schedule to start.
@@ -74,7 +74,7 @@ const opDescribeScheduledInstances = "DescribeScheduledInstances"
 // DescribeScheduledInstancesRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Describes one or more of your Scheduled Instances.
+// Describes the specified Scheduled Instances or all your Scheduled Instances.
 //
 //    // Example sending a request using DescribeScheduledInstancesRequest.
 //    req := client.DescribeScheduledInstancesRequest(params)

@@ -19,21 +19,23 @@ type AddApplicationInputProcessingConfigurationInput struct {
 	ApplicationName *string `min:"1" type:"string" required:"true"`
 
 	// Version of the application to which you want to add the input processing
-	// configuration. You can use the DescribeApplication operation to get the current
-	// application version. If the version specified is not the current version,
-	// the ConcurrentModificationException is returned.
+	// configuration. You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+	// operation to get the current application version. If the version specified
+	// is not the current version, the ConcurrentModificationException is returned.
 	//
 	// CurrentApplicationVersionId is a required field
 	CurrentApplicationVersionId *int64 `min:"1" type:"long" required:"true"`
 
 	// The ID of the input configuration to add the input processing configuration
 	// to. You can get a list of the input IDs for an application using the DescribeApplication
+	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation.
 	//
 	// InputId is a required field
 	InputId *string `min:"1" type:"string" required:"true"`
 
-	// The InputProcessingConfiguration to add to the application.
+	// The InputProcessingConfiguration (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html)
+	// to add to the application.
 	//
 	// InputProcessingConfiguration is a required field
 	InputProcessingConfiguration *InputProcessingConfiguration `type:"structure" required:"true"`
@@ -99,9 +101,16 @@ const opAddApplicationInputProcessingConfiguration = "AddApplicationInputProcess
 // AddApplicationInputProcessingConfigurationRequest returns a request value for making API operation for
 // Amazon Kinesis Analytics.
 //
-// Adds an InputProcessingConfiguration to an application. An input processor
-// preprocesses records on the input stream before the application's SQL code
-// executes. Currently, the only input processor available is AWS Lambda (https://aws.amazon.com/documentation/lambda/).
+//
+// This documentation is for version 1 of the Amazon Kinesis Data Analytics
+// API, which only supports SQL applications. Version 2 of the API supports
+// SQL and Java applications. For more information about version 2, see Amazon
+// Kinesis Data Analytics API V2 Documentation (/kinesisanalytics/latest/apiv2/Welcome.html).
+//
+// Adds an InputProcessingConfiguration (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html)
+// to an application. An input processor preprocesses records on the input stream
+// before the application's SQL code executes. Currently, the only input processor
+// available is AWS Lambda (https://docs.aws.amazon.com/lambda/).
 //
 //    // Example sending a request using AddApplicationInputProcessingConfigurationRequest.
 //    req := client.AddApplicationInputProcessingConfigurationRequest(params)

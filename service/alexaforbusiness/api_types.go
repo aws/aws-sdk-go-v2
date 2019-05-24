@@ -3,6 +3,7 @@
 package alexaforbusiness
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -50,6 +51,55 @@ type AddressBookData struct {
 // String returns the string representation
 func (s AddressBookData) String() string {
 	return awsutil.Prettify(s)
+}
+
+// The audio message. There is a 1 MB limit on the audio file input and the
+// only supported format is MP3. To convert your MP3 audio files to an Alexa-friendly,
+//
+// required codec version (MPEG version 2) and bit rate (48 kbps), you might
+// use converter software. One option for this is a command-line tool, FFmpeg.
+// For more information, see FFmpeg (https://www.ffmpeg.org/). The following
+// command converts the provided <input-file> to an MP3 file that is played
+// in the announcement:
+//
+// ffmpeg -i <input-file> -ac 2 -codec:a libmp3lame -b:a 48k -ar 16000 <output-file.mp3>
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Audio
+type Audio struct {
+	_ struct{} `type:"structure"`
+
+	// The locale of the audio message. Currently, en-US is supported.
+	//
+	// Locale is a required field
+	Locale Locale `type:"string" required:"true" enum:"true"`
+
+	// The location of the audio file. Currently, S3 URLs are supported. Only S3
+	// locations comprised of safe characters are valid. For more information, see
+	// Safe Characters (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#Safe%20Characters).
+	//
+	// Location is a required field
+	Location *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Audio) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Audio) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Audio"}
+	if len(s.Locale) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Locale"))
+	}
+
+	if s.Location == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Location"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Usage report with specified parameters.
@@ -276,6 +326,58 @@ func (s ContactData) String() string {
 	return awsutil.Prettify(s)
 }
 
+// The content definition. This can contain only one text, SSML, or audio list
+// object.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Content
+type Content struct {
+	_ struct{} `type:"structure"`
+
+	// The list of audio messages.
+	AudioList []Audio `type:"list"`
+
+	// The list of SSML messages.
+	SsmlList []Ssml `type:"list"`
+
+	// The list of text messages.
+	TextList []Text `type:"list"`
+}
+
+// String returns the string representation
+func (s Content) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Content) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Content"}
+	if s.AudioList != nil {
+		for i, v := range s.AudioList {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AudioList", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SsmlList != nil {
+		for i, v := range s.SsmlList {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SsmlList", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.TextList != nil {
+		for i, v := range s.TextList {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TextList", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // The details about the developer that published the skill.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeveloperInfo
 type DeveloperInfo struct {
@@ -326,6 +428,9 @@ type Device struct {
 	// The MAC address of a device.
 	MacAddress *string `type:"string"`
 
+	// Detailed information about a device's network profile.
+	NetworkProfileInfo *DeviceNetworkProfileInfo `type:"structure"`
+
 	// The room ARN of a device.
 	RoomArn *string `type:"string"`
 
@@ -364,6 +469,12 @@ type DeviceData struct {
 	// The MAC address of a device.
 	MacAddress *string `type:"string"`
 
+	// The ARN of the network profile associated with a device.
+	NetworkProfileArn *string `type:"string"`
+
+	// The name of the network profile associated with a device.
+	NetworkProfileName *string `min:"1" type:"string"`
+
 	// The room ARN associated with a device.
 	RoomArn *string `type:"string"`
 
@@ -399,6 +510,26 @@ func (s DeviceEvent) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Detailed information about a device's network profile.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceNetworkProfileInfo
+type DeviceNetworkProfileInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the certificate associated with a device.
+	CertificateArn *string `type:"string"`
+
+	// The time (in epoch) when the certificate expires.
+	CertificateExpirationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The ARN of the network profile associated with a device.
+	NetworkProfileArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DeviceNetworkProfileInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Details of a device’s status.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceStatusDetail
 type DeviceStatusDetail struct {
@@ -406,6 +537,9 @@ type DeviceStatusDetail struct {
 
 	// The device status detail code.
 	Code DeviceStatusDetailCode `type:"string" enum:"true"`
+
+	// The list of available features on the device.
+	Feature Feature `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -643,6 +777,88 @@ func (s *MeetingSetting) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// The network profile associated with a device.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/NetworkProfile
+type NetworkProfile struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the Private Certificate Authority (PCA) created in AWS Certificate
+	// Manager (ACM). This is used to issue certificates to the devices.
+	CertificateAuthorityArn *string `type:"string"`
+
+	// The current password of the Wi-Fi network.
+	CurrentPassword *string `min:"5" type:"string"`
+
+	// Detailed information about a device's network profile.
+	Description *string `type:"string"`
+
+	// The authentication standard that is used in the EAP framework. Currently,
+	// EAP_TLS is supported.
+	EapMethod NetworkEapMethod `type:"string" enum:"true"`
+
+	// The ARN of the network profile associated with a device.
+	NetworkProfileArn *string `type:"string"`
+
+	// The name of the network profile associated with a device.
+	NetworkProfileName *string `min:"1" type:"string"`
+
+	// The next, or subsequent, password of the Wi-Fi network. This password is
+	// asynchronously transmitted to the device and is used when the password of
+	// the network changes to NextPassword.
+	NextPassword *string `type:"string"`
+
+	// The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK,
+	// WPA_PSK, WEP, or OPEN.
+	SecurityType NetworkSecurityType `type:"string" enum:"true"`
+
+	// The SSID of the Wi-Fi network.
+	Ssid *string `min:"1" type:"string"`
+
+	// The root certificates of your authentication server, which is installed on
+	// your devices and used to trust your authentication server during EAP negotiation.
+	TrustAnchors []string `min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s NetworkProfile) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The data associated with a network profile.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/NetworkProfileData
+type NetworkProfileData struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the Private Certificate Authority (PCA) created in AWS Certificate
+	// Manager (ACM). This is used to issue certificates to the devices.
+	CertificateAuthorityArn *string `type:"string"`
+
+	// Detailed information about a device's network profile.
+	Description *string `type:"string"`
+
+	// The authentication standard that is used in the EAP framework. Currently,
+	// EAP_TLS is supported.
+	EapMethod NetworkEapMethod `type:"string" enum:"true"`
+
+	// The ARN of the network profile associated with a device.
+	NetworkProfileArn *string `type:"string"`
+
+	// The name of the network profile associated with a device.
+	NetworkProfileName *string `min:"1" type:"string"`
+
+	// The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK,
+	// WPA_PSK, WEP, or OPEN.
+	SecurityType NetworkSecurityType `type:"string" enum:"true"`
+
+	// The SSID of the Wi-Fi network.
+	Ssid *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s NetworkProfileData) String() string {
+	return awsutil.Prettify(s)
 }
 
 // The information for public switched telephone network (PSTN) conferencing.
@@ -1098,6 +1314,45 @@ func (s *Sort) Validate() error {
 	return nil
 }
 
+// The SSML message. For more information, see SSML Reference (https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html).
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Ssml
+type Ssml struct {
+	_ struct{} `type:"structure"`
+
+	// The locale of the SSML message. Currently, en-US is supported.
+	//
+	// Locale is a required field
+	Locale Locale `type:"string" required:"true" enum:"true"`
+
+	// The value of the SSML message in the correct SSML format. The audio tag is
+	// not supported.
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Ssml) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Ssml) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Ssml"}
+	if len(s.Locale) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Locale"))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // A key-value pair that can be associated with a resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Tag
 type Tag struct {
@@ -1128,6 +1383,44 @@ func (s *Tag) Validate() error {
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The text message.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Text
+type Text struct {
+	_ struct{} `type:"structure"`
+
+	// The locale of the text message. Currently, en-US is supported.
+	//
+	// Locale is a required field
+	Locale Locale `type:"string" required:"true" enum:"true"`
+
+	// The value of the text message.
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Text) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Text) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Text"}
+	if len(s.Locale) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Locale"))
 	}
 
 	if s.Value == nil {

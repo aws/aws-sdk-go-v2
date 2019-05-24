@@ -33,7 +33,7 @@ type DescribeNetworkInterfacePermissionsInput struct {
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value. If
 	// this parameter is not specified, up to 50 results are returned by default.
-	MaxResults *int64 `type:"integer"`
+	MaxResults *int64 `min:"5" type:"integer"`
 
 	// One or more network interface permission IDs.
 	NetworkInterfacePermissionIds []string `locationName:"NetworkInterfacePermissionId" type:"list"`
@@ -45,6 +45,19 @@ type DescribeNetworkInterfacePermissionsInput struct {
 // String returns the string representation
 func (s DescribeNetworkInterfacePermissionsInput) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeNetworkInterfacePermissionsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeNetworkInterfacePermissionsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 5 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Contains the output for DescribeNetworkInterfacePermissions.

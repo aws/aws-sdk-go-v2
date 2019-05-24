@@ -251,7 +251,8 @@ func (enum Ac3MetadataControl) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Acceleration configuration for the job.
+// Enable Acceleration (AccelerationMode) on any job that you want processed
+// with accelerated transcoding.
 type AccelerationMode string
 
 // Enum values for AccelerationMode
@@ -293,9 +294,9 @@ func (enum AfdSignaling) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The anti-alias filter is automatically applied to all outputs. The service
-// no longer accepts the value DISABLED for AntiAlias. If you specify that in
-// your job, the service will ignore the setting.
+// The service automatically applies the anti-alias filter to all outputs. The
+// service no longer accepts the value DISABLED for AntiAlias. If you specify
+// that in your job, the service will ignore the setting.
 type AntiAlias string
 
 // Enum values for AntiAlias
@@ -1073,6 +1074,29 @@ func (enum DashIsoHbbtvCompliance) MarshalValue() (string, error) {
 }
 
 func (enum DashIsoHbbtvCompliance) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// This setting can improve the compatibility of your output with video players
+// on obsolete devices. It applies only to DASH H.264 outputs with DRM encryption.
+// Choose Unencrypted SEI (UNENCRYPTED_SEI) only to correct problems with playback
+// on older devices. Otherwise, keep the default setting CENC v1 (CENC_V1).
+// If you choose Unencrypted SEI, for that output, the service will exclude
+// the access unit delimiter and will leave the SEI NAL units unencrypted.
+type DashIsoPlaybackDeviceCompatibility string
+
+// Enum values for DashIsoPlaybackDeviceCompatibility
+const (
+	DashIsoPlaybackDeviceCompatibilityCencV1         DashIsoPlaybackDeviceCompatibility = "CENC_V1"
+	DashIsoPlaybackDeviceCompatibilityUnencryptedSei DashIsoPlaybackDeviceCompatibility = "UNENCRYPTED_SEI"
+)
+
+func (enum DashIsoPlaybackDeviceCompatibility) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DashIsoPlaybackDeviceCompatibility) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

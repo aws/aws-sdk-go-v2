@@ -13,7 +13,7 @@ import (
 type CreateTransitGatewayRouteInput struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates whether traffic matching this route is to be dropped.
+	// Indicates whether to drop traffic that matches this route.
 	Blackhole *bool `type:"boolean"`
 
 	// The CIDR range used for destination matches. Routing decisions are based

@@ -19,6 +19,7 @@ type DeleteApplicationOutputInput struct {
 	ApplicationName *string `min:"1" type:"string" required:"true"`
 
 	// Amazon Kinesis Analytics application version. You can use the DescribeApplication
+	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation to get the current application version. If the version specified
 	// is not the current version, the ConcurrentModificationException is returned.
 	//
@@ -27,10 +28,11 @@ type DeleteApplicationOutputInput struct {
 
 	// The ID of the configuration to delete. Each output configuration that is
 	// added to the application, either when the application is created or later
-	// using the AddApplicationOutput operation, has a unique ID. You need to provide
-	// the ID to uniquely identify the output configuration that you want to delete
-	// from the application configuration. You can use the DescribeApplication operation
-	// to get the specific OutputId.
+	// using the AddApplicationOutput (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationOutput.html)
+	// operation, has a unique ID. You need to provide the ID to uniquely identify
+	// the output configuration that you want to delete from the application configuration.
+	// You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+	// operation to get the specific OutputId.
 	//
 	// OutputId is a required field
 	OutputId *string `min:"1" type:"string" required:"true"`
@@ -86,6 +88,12 @@ const opDeleteApplicationOutput = "DeleteApplicationOutput"
 
 // DeleteApplicationOutputRequest returns a request value for making API operation for
 // Amazon Kinesis Analytics.
+//
+//
+// This documentation is for version 1 of the Amazon Kinesis Data Analytics
+// API, which only supports SQL applications. Version 2 of the API supports
+// SQL and Java applications. For more information about version 2, see Amazon
+// Kinesis Data Analytics API V2 Documentation (/kinesisanalytics/latest/apiv2/Welcome.html).
 //
 // Deletes output destination configuration from your application configuration.
 // Amazon Kinesis Analytics will no longer write data from the corresponding

@@ -14,7 +14,7 @@ import (
 type DescribeExportTasksInput struct {
 	_ struct{} `type:"structure"`
 
-	// One or more export task IDs.
+	// The export task IDs.
 	ExportTaskIds []string `locationName:"exportTaskId" locationNameList:"ExportTaskId" type:"list"`
 }
 
@@ -42,7 +42,7 @@ const opDescribeExportTasks = "DescribeExportTasks"
 // DescribeExportTasksRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Describes one or more of your export tasks.
+// Describes the specified export tasks or all your export tasks.
 //
 //    // Example sending a request using DescribeExportTasksRequest.
 //    req := client.DescribeExportTasksRequest(params)

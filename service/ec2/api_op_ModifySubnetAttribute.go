@@ -25,10 +25,8 @@ type ModifySubnetAttributeInput struct {
 	// or later of the Amazon EC2 API.
 	AssignIpv6AddressOnCreation *AttributeBooleanValue `type:"structure"`
 
-	// Specify true to indicate that network interfaces created in the specified
-	// subnet should be assigned a public IPv4 address. This includes a network
-	// interface that's created when launching an instance into the subnet (the
-	// instance therefore receives a public IPv4 address).
+	// Specify true to indicate that ENIs attached to instances created in the specified
+	// subnet should be assigned a public IPv4 address.
 	MapPublicIpOnLaunch *AttributeBooleanValue `type:"structure"`
 
 	// The ID of the subnet.

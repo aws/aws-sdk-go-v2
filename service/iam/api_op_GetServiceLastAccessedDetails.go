@@ -103,7 +103,7 @@ type GetServiceLastAccessedDetailsOutput struct {
 
 	// When IsTruncated is true, this element is present and contains the value
 	// to use for the Marker parameter in a subsequent pagination request.
-	Marker *string `min:"1" type:"string"`
+	Marker *string `type:"string"`
 
 	// A ServiceLastAccessed object that contains details about the most recent
 	// attempt to access the service.
@@ -141,8 +141,8 @@ const opGetServiceLastAccessedDetails = "GetServiceLastAccessedDetails"
 // attempt to access the service. If the operation fails, the GetServiceLastAccessedDetails
 // operation returns the reason that it failed.
 //
-// The GetServiceLastAccessedDetails operation returns a list of services that
-// includes the number of entities that have attempted to access the service
+// The GetServiceLastAccessedDetails operation returns a list of services. This
+// list includes the number of entities that have attempted to access the service
 // and the date and time of the last attempt. It also returns the ARN of the
 // following entity, depending on the resource ARN that you used to generate
 // the report:

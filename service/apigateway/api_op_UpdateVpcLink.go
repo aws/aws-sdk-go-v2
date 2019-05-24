@@ -99,6 +99,9 @@ type UpdateVpcLinkOutput struct {
 	// A description about the VPC link status.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
 
+	// The collection of tags. Each tag element is associated with a given resource.
+	Tags map[string]string `locationName:"tags" type:"map"`
+
 	// The ARNs of network load balancers of the VPC targeted by the VPC link. The
 	// network load balancers must be owned by the same AWS account of the API owner.
 	TargetArns []string `locationName:"targetArns" type:"list"`
@@ -140,6 +143,18 @@ func (s UpdateVpcLinkOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "statusMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	if len(s.TargetArns) > 0 {
 		v := s.TargetArns

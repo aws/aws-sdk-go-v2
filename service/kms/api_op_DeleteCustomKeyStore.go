@@ -57,19 +57,19 @@ const opDeleteCustomKeyStore = "DeleteCustomKeyStore"
 // DeleteCustomKeyStoreRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Deletes a custom key store (http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html).
+// Deletes a custom key store (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html).
 // This operation does not delete the AWS CloudHSM cluster that is associated
 // with the custom key store, or affect any users or keys in the cluster.
 //
 // The custom key store that you delete cannot contain any AWS KMS customer
-// master keys (CMKs) (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys).
+// master keys (CMKs) (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys).
 // Before deleting the key store, verify that you will never need to use any
 // of the CMKs in the key store for any cryptographic operations. Then, use
 // ScheduleKeyDeletion to delete the AWS KMS customer master keys (CMKs) from
 // the key store. When the scheduled waiting period expires, the ScheduleKeyDeletion
 // operation deletes the CMKs. Then it makes a best effort to delete the key
 // material from the associated cluster. However, you might need to manually
-// delete the orphaned key material (http://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-orphaned-key)
+// delete the orphaned key material (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-orphaned-key)
 // from the cluster and its backups.
 //
 // After all CMKs are deleted from AWS KMS, use DisconnectCustomKeyStore to
@@ -83,7 +83,7 @@ const opDeleteCustomKeyStore = "DeleteCustomKeyStore"
 //
 // If the operation succeeds, it returns a JSON object with no properties.
 //
-// This operation is part of the Custom Key Store feature (http://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
+// This operation is part of the Custom Key Store feature (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 // feature in AWS KMS, which combines the convenience and extensive integration
 // of AWS KMS with the isolation and control of a single-tenant key store.
 //

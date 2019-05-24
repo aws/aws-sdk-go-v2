@@ -14,6 +14,14 @@ import (
 type UpdateTaskInput struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Name (ARN) of the resource name of the CloudWatch LogGroup.
+	CloudWatchLogGroupArn *string `type:"string"`
+
+	// A filter that determines which files to exclude from a task based on the
+	// specified pattern in the filter. Transfers all files in the task’s subdirectory,
+	// except files that match the filter that is set.
+	Excludes []FilterRule `type:"list"`
+
 	// The name of the task to update.
 	Name *string `min:"1" type:"string"`
 

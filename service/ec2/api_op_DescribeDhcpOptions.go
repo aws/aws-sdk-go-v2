@@ -44,11 +44,31 @@ type DescribeDhcpOptionsInput struct {
 	//    to find all resources assigned a tag with a specific key, regardless of
 	//    the tag value.
 	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	MaxResults *int64 `min:"5" type:"integer"`
+
+	// The token for the next page of results.
+	NextToken *string `type:"string"`
 }
 
 // String returns the string representation
 func (s DescribeDhcpOptionsInput) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeDhcpOptionsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDhcpOptionsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 5 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeDhcpOptionsResult
@@ -57,6 +77,10 @@ type DescribeDhcpOptionsOutput struct {
 
 	// Information about one or more DHCP options sets.
 	DhcpOptions []DhcpOptions `locationName:"dhcpOptionsSet" locationNameList:"item" type:"list"`
+
+	// The token to use to retrieve the next page of results. This value is null
+	// when there are no more results to return.
+	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
 // String returns the string representation
@@ -87,6 +111,12 @@ func (c *Client) DescribeDhcpOptionsRequest(input *DescribeDhcpOptionsInput) Des
 		Name:       opDescribeDhcpOptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -119,6 +149,53 @@ func (r DescribeDhcpOptionsRequest) Send(ctx context.Context) (*DescribeDhcpOpti
 	}
 
 	return resp, nil
+}
+
+// NewDescribeDhcpOptionsRequestPaginator returns a paginator for DescribeDhcpOptions.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.DescribeDhcpOptionsRequest(input)
+//   p := ec2.NewDescribeDhcpOptionsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewDescribeDhcpOptionsPaginator(req DescribeDhcpOptionsRequest) DescribeDhcpOptionsPaginator {
+	return DescribeDhcpOptionsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *DescribeDhcpOptionsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// DescribeDhcpOptionsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeDhcpOptionsPaginator struct {
+	aws.Pager
+}
+
+func (p *DescribeDhcpOptionsPaginator) CurrentPage() *DescribeDhcpOptionsOutput {
+	return p.Pager.CurrentPage().(*DescribeDhcpOptionsOutput)
 }
 
 // DescribeDhcpOptionsResponse is the response type for the

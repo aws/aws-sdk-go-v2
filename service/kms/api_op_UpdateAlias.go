@@ -15,14 +15,14 @@ import (
 type UpdateAliasInput struct {
 	_ struct{} `type:"structure"`
 
-	// String that contains the name of the alias to be modified. The name must
-	// start with the word "alias" followed by a forward slash (alias/). Aliases
-	// that begin with "alias/aws" are reserved.
+	// Specifies the name of the alias to change. This value must begin with alias/
+	// followed by the alias name, such as alias/ExampleAlias.
 	//
 	// AliasName is a required field
 	AliasName *string `min:"1" type:"string" required:"true"`
 
-	// Unique identifier of the customer master key to be mapped to the alias.
+	// Unique identifier of the customer master key (CMK) to be mapped to the alias.
+	// When the update operation completes, the alias will point to this CMK.
 	//
 	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
 	//
@@ -98,15 +98,13 @@ const opUpdateAlias = "UpdateAlias"
 // appear in the response from the DescribeKey operation. To get the aliases
 // of all CMKs in the account, use the ListAliases operation.
 //
-// An alias name can contain only alphanumeric characters, forward slashes (/),
-// underscores (_), and dashes (-). An alias must start with the word alias
-// followed by a forward slash (alias/). The alias name can contain only alphanumeric
-// characters, forward slashes (/), underscores (_), and dashes (-). Alias names
-// cannot begin with aws; that alias name prefix is reserved by Amazon Web Services
-// (AWS).
+// The alias name must begin with alias/ followed by a name, such as alias/ExampleAlias.
+// It can contain only alphanumeric characters, forward slashes (/), underscores
+// (_), and dashes (-). The alias name cannot begin with alias/aws/. The alias/aws/
+// prefix is reserved for AWS managed CMKs (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk).
 //
 // The result of this operation varies with the key state of the CMK. For details,
-// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// see How Key State Affects Use of a Customer Master Key (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 // in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using UpdateAliasRequest.

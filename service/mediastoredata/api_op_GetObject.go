@@ -44,8 +44,10 @@ type GetObjectInput struct {
 	Path *string `location:"uri" locationName:"Path" min:"1" type:"string" required:"true"`
 
 	// The range bytes of an object to retrieve. For more information about the
-	// Range header, go to http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
-	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35).
+	// Range header, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
+	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35). AWS Elemental
+	// MediaStore ignores this header for partially uploaded objects that have streaming
+	// upload availability.
 	Range *string `location:"header" locationName:"Range" type:"string"`
 }
 
@@ -179,7 +181,9 @@ const opGetObject = "GetObject"
 // GetObjectRequest returns a request value for making API operation for
 // AWS Elemental MediaStore Data Plane.
 //
-// Downloads the object at the specified path.
+// Downloads the object at the specified path. If the object’s upload availability
+// is set to streaming, AWS Elemental MediaStore downloads the object even if
+// it’s still uploading the object.
 //
 //    // Example sending a request using GetObjectRequest.
 //    req := client.GetObjectRequest(params)

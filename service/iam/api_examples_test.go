@@ -2121,6 +2121,42 @@ func ExampleClient_RemoveUserFromGroupRequest_shared00() {
 	fmt.Println(result)
 }
 
+// To delete an access key for an IAM user
+//
+// The following command sets the STS global endpoint token to version 2. Version 2
+// tokens are valid in all Regions.
+func ExampleClient_SetSecurityTokenServicePreferencesRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := iam.New(cfg)
+	input := &iam.SetSecurityTokenServicePreferencesInput{
+		GlobalEndpointTokenVersion: iam.GlobalEndpointTokenVersionV2token,
+	}
+
+	req := svc.SetSecurityTokenServicePreferencesRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case iam.ErrCodeServiceFailureException:
+				fmt.Println(iam.ErrCodeServiceFailureException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // To add a tag key and value to an IAM role
 //
 // The following example shows how to add tags to an existing role.

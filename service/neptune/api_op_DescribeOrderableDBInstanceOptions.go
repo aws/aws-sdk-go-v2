@@ -79,8 +79,6 @@ func (s *DescribeOrderableDBInstanceOptionsInput) Validate() error {
 	return nil
 }
 
-// Contains the result of a successful invocation of the DescribeOrderableDBInstanceOptions
-// action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/OrderableDBInstanceOptionsMessage
 type DescribeOrderableDBInstanceOptionsOutput struct {
 	_ struct{} `type:"structure"`

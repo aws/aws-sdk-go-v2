@@ -73,8 +73,8 @@ func (s StartSchemaCreationInput) MarshalFields(e protocol.FieldEncoder) error {
 type StartSchemaCreationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The current state of the schema (PROCESSING, ACTIVE, or DELETING). When the
-	// schema is in the ACTIVE state, you can add data.
+	// The current state of the schema (PROCESSING, FAILED, SUCCESS, or NOT_APPLICABLE).
+	// When the schema is in the ACTIVE state, you can add data.
 	Status SchemaStatus `locationName:"status" type:"string" enum:"true"`
 }
 

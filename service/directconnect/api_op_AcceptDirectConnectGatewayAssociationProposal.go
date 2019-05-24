@@ -13,7 +13,8 @@ import (
 type AcceptDirectConnectGatewayAssociationProposalInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the AWS account that owns the virtual private gateway.
+	// The ID of the AWS account that owns the virtual private gateway or transit
+	// gateway.
 	//
 	// AssociatedGatewayOwnerAccount is a required field
 	AssociatedGatewayOwnerAccount *string `locationName:"associatedGatewayOwnerAccount" type:"string" required:"true"`
@@ -23,7 +24,8 @@ type AcceptDirectConnectGatewayAssociationProposalInput struct {
 	// DirectConnectGatewayId is a required field
 	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string" required:"true"`
 
-	// Overrides the Amazon VPC prefixes advertised to the Direct Connect gateway.
+	// Overrides the existing Amazon VPC prefixes advertised to the Direct Connect
+	// gateway.
 	OverrideAllowedPrefixesToDirectConnectGateway []RouteFilterPrefix `locationName:"overrideAllowedPrefixesToDirectConnectGateway" type:"list"`
 
 	// The ID of the request proposal.
@@ -64,7 +66,7 @@ type AcceptDirectConnectGatewayAssociationProposalOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about an association between a Direct Connect gateway and a virtual
-	// private gateway.
+	// private gateway or transit gateway.
 	DirectConnectGatewayAssociation *DirectConnectGatewayAssociation `locationName:"directConnectGatewayAssociation" type:"structure"`
 }
 
@@ -78,8 +80,8 @@ const opAcceptDirectConnectGatewayAssociationProposal = "AcceptDirectConnectGate
 // AcceptDirectConnectGatewayAssociationProposalRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Accepts a proposal request to attach a virtual private gateway to a Direct
-// Connect gateway.
+// Accepts a proposal request to attach a virtual private gateway or transit
+// gateway to a Direct Connect gateway.
 //
 //    // Example sending a request using AcceptDirectConnectGatewayAssociationProposalRequest.
 //    req := client.AcceptDirectConnectGatewayAssociationProposalRequest(params)

@@ -24,9 +24,19 @@ type DescribedServer struct {
 	// Arn is a required field
 	Arn *string `min:"20" type:"string" required:"true"`
 
+	// The virtual private cloud (VPC) endpoint settings that you configured for
+	// your SFTP server.
 	EndpointDetails *EndpointDetails `type:"structure"`
 
+	// The type of endpoint that your SFTP server is connected to. If your SFTP
+	// server is connected to a VPC endpoint, your server isn't accessible over
+	// the public internet.
 	EndpointType EndpointType `type:"string" enum:"true"`
+
+	// This value contains the Message-Digest Algorithm (MD5) hash of the server's
+	// host key. This value is equivalent to the output of ssh-keygen -l -E md5
+	// -f my-new-server-key command.
+	HostKeyFingerprint *string `type:"string"`
 
 	// Specifies information to call a customer-supplied authentication API. This
 	// field is not populated when the IdentityProviderType of the server is SERVICE_MANAGED>.
@@ -118,10 +128,13 @@ func (s DescribedUser) String() string {
 	return awsutil.Prettify(s)
 }
 
+// The configuration settings for the virtual private cloud (VPC) endpoint for
+// your SFTP server.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/EndpointDetails
 type EndpointDetails struct {
 	_ struct{} `type:"structure"`
 
+	// The ID of the VPC endpoint.
 	VpcEndpointId *string `type:"string"`
 }
 
@@ -160,6 +173,9 @@ type ListedServer struct {
 	// Arn is a required field
 	Arn *string `min:"20" type:"string" required:"true"`
 
+	// The type of VPC endpoint that your SFTP server is connected to. If your SFTP
+	// server is connected to a VPC endpoint, your server isn't accessible over
+	// the public internet.
 	EndpointType EndpointType `type:"string" enum:"true"`
 
 	// The authentication method used to validate a user for the server that was

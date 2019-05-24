@@ -20,7 +20,7 @@ type ModifyCurrentDBClusterCapacityInput struct {
 	//
 	// Constraints:
 	//
-	//    * Value must be 2, 4, 8, 16, 32, 64, 128, or 256.
+	//    * Value must be 1, 2, 4, 8, 16, 32, 64, 128, or 256.
 	Capacity *int64 `type:"integer"`
 
 	// The DB cluster identifier for the cluster being modified. This parameter

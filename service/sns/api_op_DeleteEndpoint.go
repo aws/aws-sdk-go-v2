@@ -58,7 +58,7 @@ const opDeleteEndpoint = "DeleteEndpoint"
 //
 // Deletes the endpoint for a device and mobile app from Amazon SNS. This action
 // is idempotent. For more information, see Using Amazon SNS Mobile Push Notifications
-// (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
+// (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 //
 // When you delete an endpoint that is also subscribed to a topic, then you
 // must also unsubscribe the endpoint from the topic.

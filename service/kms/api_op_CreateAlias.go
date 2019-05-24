@@ -15,25 +15,17 @@ import (
 type CreateAliasInput struct {
 	_ struct{} `type:"structure"`
 
-	// String that contains the display name. The name must start with the word
-	// "alias" followed by a forward slash (alias/). Aliases that begin with "alias/AWS"
-	// are reserved.
+	// Specifies the alias name. This value must begin with alias/ followed by a
+	// name, such as alias/ExampleAlias. The alias name cannot begin with alias/aws/.
+	// The alias/aws/ prefix is reserved for AWS managed CMKs.
 	//
 	// AliasName is a required field
 	AliasName *string `min:"1" type:"string" required:"true"`
 
-	// Identifies the CMK for which you are creating the alias. This value cannot
-	// be an alias.
-	//
-	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
-	//
-	// For example:
-	//
-	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
+	// Identifies the CMK to which the alias refers. Specify the key ID or the Amazon
+	// Resource Name (ARN) of the CMK. You cannot specify another alias. For help
+	// finding the key ID and ARN, see Finding the Key ID and ARN (https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html#find-cmk-id-arn)
+	// in the AWS Key Management Service Developer Guide.
 	//
 	// TargetKeyId is a required field
 	TargetKeyId *string `min:"1" type:"string" required:"true"`
@@ -83,8 +75,9 @@ const opCreateAlias = "CreateAlias"
 // CreateAliasRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Creates a display name for a customer master key (CMK). You can use an alias
-// to identify a CMK in selected operations, such as Encrypt and GenerateDataKey.
+// Creates a display name for a customer managed customer master key (CMK).
+// You can use an alias to identify a CMK in selected operations, such as Encrypt
+// and GenerateDataKey.
 //
 // Each CMK can have multiple aliases, but each alias points to only one CMK.
 // The alias name must be unique in the AWS account and region. To simplify
@@ -96,10 +89,10 @@ const opCreateAlias = "CreateAlias"
 // the response from the DescribeKey operation. To get the aliases of all CMKs,
 // use the ListAliases operation.
 //
-// An alias must start with the word alias followed by a forward slash (alias/).
-// The alias name can contain only alphanumeric characters, forward slashes
-// (/), underscores (_), and dashes (-). Alias names cannot begin with aws;
-// that alias name prefix is reserved by Amazon Web Services (AWS).
+// The alias name must begin with alias/ followed by a name, such as alias/ExampleAlias.
+// It can contain only alphanumeric characters, forward slashes (/), underscores
+// (_), and dashes (-). The alias name cannot begin with alias/aws/. The alias/aws/
+// prefix is reserved for AWS managed CMKs (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk).
 //
 // The alias and the CMK it is mapped to must be in the same AWS account and
 // the same region. You cannot perform this operation on an alias in a different
@@ -108,7 +101,7 @@ const opCreateAlias = "CreateAlias"
 // To map an existing alias to a different CMK, call UpdateAlias.
 //
 // The result of this operation varies with the key state of the CMK. For details,
-// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// see How Key State Affects Use of a Customer Master Key (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 // in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using CreateAliasRequest.

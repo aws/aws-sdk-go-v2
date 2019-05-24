@@ -14,7 +14,8 @@ import (
 type BatchGetOnPremisesInstancesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The names of the on-premises instances about which to get information.
+	// The names of the on-premises instances about which to get information. The
+	// maximum number of instance names you can specify is 25.
 	//
 	// InstanceNames is a required field
 	InstanceNames []string `locationName:"instanceNames" type:"list" required:"true"`
@@ -58,7 +59,8 @@ const opBatchGetOnPremisesInstances = "BatchGetOnPremisesInstances"
 // BatchGetOnPremisesInstancesRequest returns a request value for making API operation for
 // AWS CodeDeploy.
 //
-// Gets information about one or more on-premises instances.
+// Gets information about one or more on-premises instances. The maximum number
+// of on-premises instances that can be returned is 25.
 //
 //    // Example sending a request using BatchGetOnPremisesInstancesRequest.
 //    req := client.BatchGetOnPremisesInstancesRequest(params)

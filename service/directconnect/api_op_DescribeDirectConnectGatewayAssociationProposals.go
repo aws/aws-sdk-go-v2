@@ -13,7 +13,7 @@ import (
 type DescribeDirectConnectGatewayAssociationProposalsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the associated virtual private gateway.
+	// The ID of the associated gateway.
 	AssociatedGatewayId *string `locationName:"associatedGatewayId" type:"string"`
 
 	// The ID of the Direct Connect gateway.
@@ -60,7 +60,7 @@ const opDescribeDirectConnectGatewayAssociationProposals = "DescribeDirectConnec
 // AWS Direct Connect.
 //
 // Describes one or more association proposals for connection between a virtual
-// private gateway and a Direct Connect gateway.
+// private gateway or transit gateway and a Direct Connect gateway.
 //
 //    // Example sending a request using DescribeDirectConnectGatewayAssociationProposalsRequest.
 //    req := client.DescribeDirectConnectGatewayAssociationProposalsRequest(params)

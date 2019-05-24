@@ -26,13 +26,13 @@ type CreateEndpointConfigInput struct {
 	// instance that hosts the endpoint.
 	KmsKeyId *string `type:"string"`
 
-	// An array of ProductionVariant objects, one for each model that you want to
+	// An list of ProductionVariant objects, one for each model that you want to
 	// host at this endpoint.
 	//
 	// ProductionVariants is a required field
 	ProductionVariants []ProductionVariant `min:"1" type:"list" required:"true"`
 
-	// An array of key-value pairs. For more information, see Using Cost Allocation
+	// A list of key-value pairs. For more information, see Using Cost Allocation
 	// Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 	// in the AWS Billing and Cost Management User Guide.
 	Tags []Tag `type:"list"`

@@ -194,8 +194,7 @@ type DescribeInstancesInput struct {
 	//    * placement-partition-number - The partition in which the instance is
 	//    located.
 	//
-	//    * platform - The platform. Use windows if you have Windows instances;
-	//    otherwise, leave blank.
+	//    * platform - The platform. To list only Windows instances, use windows.
 	//
 	//    * private-dns-name - The private IPv4 DNS name of the instance.
 	//

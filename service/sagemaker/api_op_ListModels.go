@@ -14,7 +14,8 @@ import (
 type ListModelsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A filter that returns only models created after the specified time (timestamp).
+	// A filter that returns only models with a creation time greater than or equal
+	// to the specified time (timestamp).
 	CreationTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// A filter that returns only models created before the specified time (timestamp).

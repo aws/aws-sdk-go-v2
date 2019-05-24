@@ -21,6 +21,22 @@ func (enum AccountType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type BotType string
+
+// Enum values for BotType
+const (
+	BotTypeChatBot BotType = "ChatBot"
+)
+
+func (enum BotType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BotType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EmailStatus string
 
 // Enum values for EmailStatus

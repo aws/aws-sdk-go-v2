@@ -35,3 +35,37 @@ func (enum EncryptionType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
+
+type SamplingStrategyName string
+
+// Enum values for SamplingStrategyName
+const (
+	SamplingStrategyNamePartialScan SamplingStrategyName = "PartialScan"
+	SamplingStrategyNameFixedRate   SamplingStrategyName = "FixedRate"
+)
+
+func (enum SamplingStrategyName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SamplingStrategyName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TimeRangeType string
+
+// Enum values for TimeRangeType
+const (
+	TimeRangeTypeTraceId TimeRangeType = "TraceId"
+	TimeRangeTypeEvent   TimeRangeType = "Event"
+)
+
+func (enum TimeRangeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TimeRangeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

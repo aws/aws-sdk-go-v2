@@ -17,8 +17,10 @@ import (
 type UpdateJobTemplateInput struct {
 	_ struct{} `type:"structure"`
 
-	// This is a beta feature. If you are interested in using this feature, please
-	// contact AWS customer support.
+	// Accelerated transcoding can significantly speed up jobs with long, visually
+	// complex content. Outputs that use this feature incur pro-tier pricing. For
+	// information about feature limitations, see the AWS Elemental MediaConvert
+	// User Guide.
 	AccelerationSettings *AccelerationSettings `locationName:"accelerationSettings" type:"structure"`
 
 	// The new category for the job template, if you are changing it.

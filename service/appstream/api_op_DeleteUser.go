@@ -20,6 +20,8 @@ type DeleteUserInput struct {
 
 	// The email address of the user.
 	//
+	// Users' email addresses are case-sensitive.
+	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
 }

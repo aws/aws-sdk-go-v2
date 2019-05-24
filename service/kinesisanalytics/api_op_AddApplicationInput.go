@@ -20,12 +20,14 @@ type AddApplicationInputInput struct {
 	ApplicationName *string `min:"1" type:"string" required:"true"`
 
 	// Current version of your Amazon Kinesis Analytics application. You can use
-	// the DescribeApplication operation to find the current application version.
+	// the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+	// operation to find the current application version.
 	//
 	// CurrentApplicationVersionId is a required field
 	CurrentApplicationVersionId *int64 `min:"1" type:"long" required:"true"`
 
-	// The Input to add.
+	// The Input (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_Input.html)
+	// to add.
 	//
 	// Input is a required field
 	Input *Input `type:"structure" required:"true"`
@@ -84,15 +86,22 @@ const opAddApplicationInput = "AddApplicationInput"
 // AddApplicationInputRequest returns a request value for making API operation for
 // Amazon Kinesis Analytics.
 //
+//
+// This documentation is for version 1 of the Amazon Kinesis Data Analytics
+// API, which only supports SQL applications. Version 2 of the API supports
+// SQL and Java applications. For more information about version 2, see Amazon
+// Kinesis Data Analytics API V2 Documentation (/kinesisanalytics/latest/apiv2/Welcome.html).
+//
 // Adds a streaming source to your Amazon Kinesis application. For conceptual
-// information, see Configuring Application Input (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
+// information, see Configuring Application Input (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
 //
 // You can add a streaming source either when you create an application or you
 // can use this operation to add a streaming source after you create an application.
-// For more information, see CreateApplication.
+// For more information, see CreateApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_CreateApplication.html).
 //
 // Any configuration update, including adding a streaming source using this
 // operation, results in a new version of the application. You can use the DescribeApplication
+// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 // operation to find the current application version.
 //
 // This operation requires permissions to perform the kinesisanalytics:AddApplicationInput

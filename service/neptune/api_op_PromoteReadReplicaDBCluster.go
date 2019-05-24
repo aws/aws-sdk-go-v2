@@ -13,14 +13,7 @@ import (
 type PromoteReadReplicaDBClusterInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the DB cluster Read Replica to promote. This parameter
-	// is not case-sensitive.
-	//
-	// Constraints:
-	//
-	//    * Must match the identifier of an existing DBCluster Read Replica.
-	//
-	// Example: my-cluster-replica1
+	// Not supported.
 	//
 	// DBClusterIdentifier is a required field
 	DBClusterIdentifier *string `type:"string" required:"true"`
@@ -65,7 +58,7 @@ const opPromoteReadReplicaDBCluster = "PromoteReadReplicaDBCluster"
 // PromoteReadReplicaDBClusterRequest returns a request value for making API operation for
 // Amazon Neptune.
 //
-// Promotes a Read Replica DB cluster to a standalone DB cluster.
+// Not supported.
 //
 //    // Example sending a request using PromoteReadReplicaDBClusterRequest.
 //    req := client.PromoteReadReplicaDBClusterRequest(params)

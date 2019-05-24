@@ -88,6 +88,12 @@ func (c *Client) ListEntityRecognizersRequest(input *ListEntityRecognizersInput)
 		Name:       opListEntityRecognizers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -120,6 +126,53 @@ func (r ListEntityRecognizersRequest) Send(ctx context.Context) (*ListEntityReco
 	}
 
 	return resp, nil
+}
+
+// NewListEntityRecognizersRequestPaginator returns a paginator for ListEntityRecognizers.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListEntityRecognizersRequest(input)
+//   p := comprehend.NewListEntityRecognizersRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListEntityRecognizersPaginator(req ListEntityRecognizersRequest) ListEntityRecognizersPaginator {
+	return ListEntityRecognizersPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListEntityRecognizersInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListEntityRecognizersPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListEntityRecognizersPaginator struct {
+	aws.Pager
+}
+
+func (p *ListEntityRecognizersPaginator) CurrentPage() *ListEntityRecognizersOutput {
+	return p.Pager.CurrentPage().(*ListEntityRecognizersOutput)
 }
 
 // ListEntityRecognizersResponse is the response type for the

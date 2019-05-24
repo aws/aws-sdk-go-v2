@@ -40,8 +40,9 @@ type RunInstancesInput struct {
 	// in the Amazon Elastic Compute Cloud User Guide.
 	CpuOptions *CpuOptionsRequest `type:"structure"`
 
-	// The credit option for CPU usage of the instance. Valid values are standard
-	// and unlimited. To change this attribute after launch, use ModifyInstanceCreditSpecification.
+	// The credit option for CPU usage of the T2 or T3 instance. Valid values are
+	// standard and unlimited. To change this attribute after launch, use ModifyInstanceCreditSpecification
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceCreditSpecification.html).
 	// For more information, see Burstable Performance Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	//
@@ -50,9 +51,9 @@ type RunInstancesInput struct {
 
 	// If you set this parameter to true, you can't terminate the instance using
 	// the Amazon EC2 console, CLI, or API; otherwise, you can. To change this attribute
-	// to false after launch, use ModifyInstanceAttribute. Alternatively, if you
-	// set InstanceInitiatedShutdownBehavior to terminate, you can terminate the
-	// instance by running the shutdown command from the instance.
+	// after launch, use ModifyInstanceAttribute (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html).
+	// Alternatively, if you set InstanceInitiatedShutdownBehavior to terminate,
+	// you can terminate the instance by running the shutdown command from the instance.
 	//
 	// Default: false
 	DisableApiTermination *bool `locationName:"disableApiTermination" type:"boolean"`
@@ -72,10 +73,15 @@ type RunInstancesInput struct {
 	// Default: false
 	EbsOptimized *bool `locationName:"ebsOptimized" type:"boolean"`
 
-	// An elastic GPU to associate with the instance.
+	// An elastic GPU to associate with the instance. An Elastic GPU is a GPU resource
+	// that you can attach to your Windows instance to accelerate the graphics performance
+	// of your applications. For more information, see Amazon EC2 Elastic GPUs (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html)
+	// in the Amazon Elastic Compute Cloud User Guide.
 	ElasticGpuSpecification []ElasticGpuSpecification `locationNameList:"item" type:"list"`
 
-	// An elastic inference accelerator.
+	// An elastic inference accelerator to associate with the instance. Elastic
+	// inference accelerators are a resource you can attach to your Amazon EC2 instances
+	// to accelerate your Deep Learning (DL) inference workloads.
 	ElasticInferenceAccelerators []ElasticInferenceAccelerator `locationName:"ElasticInferenceAccelerator" locationNameList:"item" type:"list"`
 
 	// Indicates whether an instance is enabled for hibernation. For more information,
@@ -86,9 +92,8 @@ type RunInstancesInput struct {
 	// The IAM instance profile.
 	IamInstanceProfile *IamInstanceProfileSpecification `locationName:"iamInstanceProfile" type:"structure"`
 
-	// The ID of the AMI, which you can get by calling DescribeImages. An AMI is
-	// required to launch an instance and must be specified here or in a launch
-	// template.
+	// The ID of the AMI. An AMI ID is required to launch an instance and must be
+	// specified here or in a launch template.
 	ImageId *string `type:"string"`
 
 	// Indicates whether an instance stops or terminates when you initiate shutdown
@@ -109,7 +114,7 @@ type RunInstancesInput struct {
 	// Default: m1.small
 	InstanceType InstanceType `type:"string" enum:"true"`
 
-	// [EC2-VPC] A number of IPv6 addresses to associate with the primary network
+	// [EC2-VPC] The number of IPv6 addresses to associate with the primary network
 	// interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet.
 	// You cannot specify this option and the option to assign specific IPv6 addresses
 	// in the same request. You can specify this option if you've specified a minimum
@@ -135,8 +140,8 @@ type RunInstancesInput struct {
 	// in the Amazon Elastic Compute Cloud User Guide.
 	KernelId *string `type:"string"`
 
-	// The name of the key pair. You can create a key pair using CreateKeyPair or
-	// ImportKeyPair.
+	// The name of the key pair. You can create a key pair using CreateKeyPair (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html)
+	// or ImportKeyPair (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html).
 	//
 	// If you do not specify a key pair, you can't connect to the instance unless
 	// you choose an AMI that is configured to allow users another way to log in.
@@ -174,13 +179,11 @@ type RunInstancesInput struct {
 	// MinCount is a required field
 	MinCount *int64 `type:"integer" required:"true"`
 
-	// The monitoring for the instance.
+	// Specifies whether detailed monitoring is enabled for the instance.
 	Monitoring *RunInstancesMonitoringEnabled `type:"structure"`
 
-	// The network interfaces.
-	//
-	// You cannot specify this option and the network interfaces option in the same
-	// request.
+	// The network interfaces to associate with the instance. If you specify a network
+	// interface, you must specify any security groups as part of the network interface.
 	NetworkInterfaces []InstanceNetworkInterfaceSpecification `locationName:"networkInterface" locationNameList:"item" type:"list"`
 
 	// The placement for the instance.
@@ -198,26 +201,28 @@ type RunInstancesInput struct {
 	// request.
 	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 
-	// The ID of the RAM disk.
+	// The ID of the RAM disk to select. Some kernels require additional drivers
+	// at launch. Check the kernel requirements for information about whether you
+	// need to specify a RAM disk. To find kernel requirements, go to the AWS Resource
+	// Center and search for the kernel ID.
 	//
 	// We recommend that you use PV-GRUB instead of kernels and RAM disks. For more
 	// information, see PV-GRUB (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	RamdiskId *string `type:"string"`
 
-	// The IDs of the security groups. You can create a security group using CreateSecurityGroup.
+	// The IDs of the security groups. You can create a security group using CreateSecurityGroup
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html).
 	//
-	// Default: Amazon EC2 uses the default security group.
-	//
-	// You cannot specify this option and the network interfaces option in the same
-	// request.
+	// If you specify a network interface, you must specify any security groups
+	// as part of the network interface.
 	SecurityGroupIds []string `locationName:"SecurityGroupId" locationNameList:"SecurityGroupId" type:"list"`
 
 	// [EC2-Classic, default VPC] The names of the security groups. For a nondefault
 	// VPC, you must use security group IDs instead.
 	//
-	// You cannot specify this option and the network interfaces option in the same
-	// request.
+	// If you specify a network interface, you must specify any security groups
+	// as part of the network interface.
 	//
 	// Default: Amazon EC2 uses the default security group.
 	SecurityGroups []string `locationName:"SecurityGroup" locationNameList:"SecurityGroup" type:"list"`
@@ -231,7 +236,7 @@ type RunInstancesInput struct {
 	// The tags to apply to the resources during launch. You can only tag instances
 	// and volumes on launch. The specified tags are applied to all instances or
 	// volumes that are created during launch. To tag a resource after it has been
-	// created, see CreateTags.
+	// created, see CreateTags (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
 	TagSpecifications []TagSpecification `locationName:"TagSpecification" locationNameList:"item" type:"list"`
 
 	// The user data to make available to the instance. For more information, see
@@ -239,7 +244,7 @@ type RunInstancesInput struct {
 	// (Linux) and Adding User Data (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data)
 	// (Windows). If you are using a command line tool, base64-encoding is performed
 	// for you, and you can load the text from a file. Otherwise, you must provide
-	// base64-encoded text.
+	// base64-encoded text. User data is limited to 16 KB.
 	UserData *string `type:"string"`
 }
 

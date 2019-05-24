@@ -17,6 +17,11 @@ type CreateRoleInput struct {
 	// The trust relationship policy document that grants an entity permission to
 	// assume the role.
 	//
+	// You must provide policies in JSON format in IAM. However, for AWS CloudFormation
+	// templates formatted in YAML, you can provide the policy in JSON or YAML format.
+	// AWS CloudFormation always converts a YAML policy to JSON format before submitting
+	// it to IAM.
+	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
 	// parameter is a string of characters consisting of the following:
 	//
@@ -72,12 +77,9 @@ type CreateRoleInput struct {
 
 	// The name of the role to create.
 	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// Role names are not distinguished by case. For example, you cannot create
-	// roles named both "PRODROLE" and "prodrole".
+	// IAM user, group, role, and policy names must be unique within the account.
+	// Names are not distinguished by case. For example, you cannot create resources
+	// named both "MyResource" and "myresource".
 	//
 	// RoleName is a required field
 	RoleName *string `min:"1" type:"string" required:"true"`

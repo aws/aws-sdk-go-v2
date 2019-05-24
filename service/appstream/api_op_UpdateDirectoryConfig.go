@@ -21,8 +21,8 @@ type UpdateDirectoryConfigInput struct {
 	// The distinguished names of the organizational units for computer accounts.
 	OrganizationalUnitDistinguishedNames []string `type:"list"`
 
-	// The credentials for the service account used by the streaming instance to
-	// connect to the directory.
+	// The credentials for the service account used by the fleet or image builder
+	// to connect to the directory.
 	ServiceAccountCredentials *ServiceAccountCredentials `type:"structure"`
 }
 
@@ -69,8 +69,8 @@ const opUpdateDirectoryConfig = "UpdateDirectoryConfig"
 // Amazon AppStream.
 //
 // Updates the specified Directory Config object in AppStream 2.0. This object
-// includes the information required to join streaming instances to an Active
-// Directory domain.
+// includes the configuration information required to join fleets and image
+// builders to Microsoft Active Directory domains.
 //
 //    // Example sending a request using UpdateDirectoryConfigRequest.
 //    req := client.UpdateDirectoryConfigRequest(params)

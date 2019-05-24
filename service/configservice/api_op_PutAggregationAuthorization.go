@@ -4,6 +4,7 @@ package configservice
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -22,6 +23,8 @@ type PutAggregationAuthorizationInput struct {
 	//
 	// AuthorizedAwsRegion is a required field
 	AuthorizedAwsRegion *string `min:"1" type:"string" required:"true"`
+
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -42,6 +45,13 @@ func (s *PutAggregationAuthorizationInput) Validate() error {
 	}
 	if s.AuthorizedAwsRegion != nil && len(*s.AuthorizedAwsRegion) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthorizedAwsRegion", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

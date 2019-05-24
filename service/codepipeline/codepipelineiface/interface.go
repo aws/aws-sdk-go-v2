@@ -99,6 +99,8 @@ type ClientAPI interface {
 
 	ListPipelinesRequest(*codepipeline.ListPipelinesInput) codepipeline.ListPipelinesRequest
 
+	ListTagsForResourceRequest(*codepipeline.ListTagsForResourceInput) codepipeline.ListTagsForResourceRequest
+
 	ListWebhooksRequest(*codepipeline.ListWebhooksInput) codepipeline.ListWebhooksRequest
 
 	PollForJobsRequest(*codepipeline.PollForJobsInput) codepipeline.PollForJobsRequest
@@ -124,6 +126,10 @@ type ClientAPI interface {
 	RetryStageExecutionRequest(*codepipeline.RetryStageExecutionInput) codepipeline.RetryStageExecutionRequest
 
 	StartPipelineExecutionRequest(*codepipeline.StartPipelineExecutionInput) codepipeline.StartPipelineExecutionRequest
+
+	TagResourceRequest(*codepipeline.TagResourceInput) codepipeline.TagResourceRequest
+
+	UntagResourceRequest(*codepipeline.UntagResourceInput) codepipeline.UntagResourceRequest
 
 	UpdatePipelineRequest(*codepipeline.UpdatePipelineInput) codepipeline.UpdatePipelineRequest
 }

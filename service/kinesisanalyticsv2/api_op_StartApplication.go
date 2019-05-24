@@ -74,9 +74,6 @@ const opStartApplication = "StartApplication"
 // Starts the specified Amazon Kinesis Data Analytics application. After creating
 // an application, you must exclusively call this operation to start your application.
 //
-// SQL is not enabled for this private beta. Using SQL parameters (such as RunConfiguration$SqlRunConfigurations)
-// will result in an error.
-//
 //    // Example sending a request using StartApplicationRequest.
 //    req := client.StartApplicationRequest(params)
 //    resp, err := req.Send(context.TODO())

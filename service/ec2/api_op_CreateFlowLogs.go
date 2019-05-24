@@ -17,7 +17,11 @@ type CreateFlowLogsInput struct {
 	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html).
 	ClientToken *string `type:"string"`
 
-	// The ARN for the IAM role that's used to post flow logs to a log group.
+	// The ARN for the IAM role that permits Amazon EC2 to publish flow logs to
+	// a CloudWatch Logs log group in your account.
+	//
+	// If you specify LogDestinationType as s3, do not specify DeliverLogsPermissionArn
+	// or LogGroupName.
 	DeliverLogsPermissionArn *string `type:"string"`
 
 	// Checks whether you have the required permissions for the action, without
@@ -27,7 +31,7 @@ type CreateFlowLogsInput struct {
 	DryRun *bool `type:"boolean"`
 
 	// Specifies the destination to which the flow log data is to be published.
-	// Flow log data can be published to an CloudWatch Logs log group or an Amazon
+	// Flow log data can be published to a CloudWatch Logs log group or an Amazon
 	// S3 bucket. The value specified for this parameter depends on the value specified
 	// for LogDestinationType.
 	//
@@ -47,25 +51,35 @@ type CreateFlowLogsInput struct {
 	// flow log data to CloudWatch Logs, specify cloud-watch-logs. To publish flow
 	// log data to Amazon S3, specify s3.
 	//
+	// If you specify LogDestinationType as s3, do not specify DeliverLogsPermissionArn
+	// or LogGroupName.
+	//
 	// Default: cloud-watch-logs
 	LogDestinationType LogDestinationType `type:"string" enum:"true"`
 
-	// The name of the log group.
+	// The name of a new or existing CloudWatch Logs log group where Amazon EC2
+	// publishes your flow logs.
+	//
+	// If you specify LogDestinationType as s3, do not specify DeliverLogsPermissionArn
+	// or LogGroupName.
 	LogGroupName *string `type:"string"`
 
-	// One or more subnet, network interface, or VPC IDs.
+	// The ID of the subnet, network interface, or VPC for which you want to create
+	// a flow log.
 	//
 	// Constraints: Maximum of 1000 resources
 	//
 	// ResourceIds is a required field
 	ResourceIds []string `locationName:"ResourceId" locationNameList:"item" type:"list" required:"true"`
 
-	// The type of resource on which to create the flow log.
+	// The type of resource for which to create the flow log. For example, if you
+	// specified a VPC ID for the ResourceId property, specify VPC for this property.
 	//
 	// ResourceType is a required field
 	ResourceType FlowLogsResourceType `type:"string" required:"true" enum:"true"`
 
-	// The type of traffic to log.
+	// The type of traffic to log. You can log traffic that the resource accepts
+	// or rejects, or all traffic.
 	//
 	// TrafficType is a required field
 	TrafficType TrafficType `type:"string" required:"true" enum:"true"`

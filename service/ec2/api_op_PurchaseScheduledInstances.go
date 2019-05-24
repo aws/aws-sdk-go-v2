@@ -25,7 +25,7 @@ type PurchaseScheduledInstancesInput struct {
 	// it is UnauthorizedOperation.
 	DryRun *bool `type:"boolean"`
 
-	// One or more purchase requests.
+	// The purchase requests.
 	//
 	// PurchaseRequests is a required field
 	PurchaseRequests []PurchaseRequest `locationName:"PurchaseRequest" locationNameList:"PurchaseRequest" min:"1" type:"list" required:"true"`
@@ -79,7 +79,7 @@ const opPurchaseScheduledInstances = "PurchaseScheduledInstances"
 // PurchaseScheduledInstancesRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Purchases one or more Scheduled Instances with the specified schedule.
+// Purchases the Scheduled Instances with the specified schedule.
 //
 // Scheduled Instances enable you to purchase Amazon EC2 compute capacity by
 // the hour for a one-year term. Before you can purchase a Scheduled Instance,

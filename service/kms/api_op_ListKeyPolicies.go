@@ -35,7 +35,7 @@ type ListKeyPoliciesInput struct {
 	// This value is optional. If you include a value, it must be between 1 and
 	// 1000, inclusive. If you do not include a value, it defaults to 100.
 	//
-	// Currently only 1 policy can be attached to a key.
+	// Only one policy can be attached to a key.
 	Limit *int64 `min:"1" type:"integer"`
 
 	// Use this parameter in a subsequent request after you receive a response with
@@ -80,13 +80,12 @@ type ListKeyPoliciesOutput struct {
 	// use for the Marker parameter in a subsequent request.
 	NextMarker *string `min:"1" type:"string"`
 
-	// A list of key policy names. Currently, there is only one key policy per CMK
-	// and it is always named default.
+	// A list of key policy names. The only valid value is default.
 	PolicyNames []string `type:"list"`
 
 	// A flag that indicates whether there are more items in the list. When this
 	// value is true, the list in this response is truncated. To get more items,
-	// pass the value of the NextMarker element in this response to the Marker parameter
+	// pass the value of the NextMarker element in thisresponse to the Marker parameter
 	// in a subsequent request.
 	Truncated *bool `type:"boolean"`
 }

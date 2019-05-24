@@ -292,6 +292,8 @@ type ClientAPI interface {
 
 	SetDefaultPolicyVersionRequest(*iam.SetDefaultPolicyVersionInput) iam.SetDefaultPolicyVersionRequest
 
+	SetSecurityTokenServicePreferencesRequest(*iam.SetSecurityTokenServicePreferencesInput) iam.SetSecurityTokenServicePreferencesRequest
+
 	SimulateCustomPolicyRequest(*iam.SimulateCustomPolicyInput) iam.SimulateCustomPolicyRequest
 
 	SimulatePrincipalPolicyRequest(*iam.SimulatePrincipalPolicyInput) iam.SimulatePrincipalPolicyRequest
@@ -339,6 +341,10 @@ type ClientAPI interface {
 	UploadSigningCertificateRequest(*iam.UploadSigningCertificateInput) iam.UploadSigningCertificateRequest
 
 	WaitUntilInstanceProfileExists(context.Context, *iam.GetInstanceProfileInput, ...aws.WaiterOption) error
+
+	WaitUntilPolicyExists(context.Context, *iam.GetPolicyInput, ...aws.WaiterOption) error
+
+	WaitUntilRoleExists(context.Context, *iam.GetRoleInput, ...aws.WaiterOption) error
 
 	WaitUntilUserExists(context.Context, *iam.GetUserInput, ...aws.WaiterOption) error
 }

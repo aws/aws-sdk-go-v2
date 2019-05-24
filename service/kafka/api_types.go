@@ -194,7 +194,7 @@ type BrokerSoftwareInfo struct {
 	ConfigurationArn *string `locationName:"configurationArn" type:"string"`
 
 	// The revision of the configuration to use.
-	ConfigurationRevision *string `locationName:"configurationRevision" type:"string"`
+	ConfigurationRevision *int64 `locationName:"configurationRevision" type:"long"`
 
 	// The version of Apache Kafka.
 	KafkaVersion *string `locationName:"kafkaVersion" type:"string"`
@@ -217,7 +217,7 @@ func (s BrokerSoftwareInfo) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ConfigurationRevision
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "configurationRevision", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "configurationRevision", protocol.Int64Value(v), metadata)
 	}
 	if s.KafkaVersion != nil {
 		v := *s.KafkaVersion
@@ -341,6 +341,193 @@ func (s ClusterInfo) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "zookeeperConnectString", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Represents an MSK Configuration.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Configuration
+type Configuration struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the configuration.
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" type:"string" required:"true"`
+
+	// CreationTime is a required field
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// The description of the configuration.
+	//
+	// Description is a required field
+	Description *string `locationName:"description" type:"string" required:"true"`
+
+	// KafkaVersions is a required field
+	KafkaVersions []string `locationName:"kafkaVersions" type:"list" required:"true"`
+
+	// Describes a configuration revision.
+	//
+	// LatestRevision is a required field
+	LatestRevision *ConfigurationRevision `locationName:"latestRevision" type:"structure" required:"true"`
+
+	// The name of the configuration.
+	//
+	// Name is a required field
+	Name *string `locationName:"name" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Configuration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Configuration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "creationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.KafkaVersions) > 0 {
+		v := s.KafkaVersions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "kafkaVersions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.LatestRevision != nil {
+		v := s.LatestRevision
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "latestRevision", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Specifies the Kafka configuration to use for the brokers.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ConfigurationInfo
+type ConfigurationInfo struct {
+	_ struct{} `type:"structure"`
+
+	// ARN of the configuration to use.
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" type:"string" required:"true"`
+
+	// The revision of the configuration to use.
+	//
+	// Revision is a required field
+	Revision *int64 `locationName:"revision" type:"long" required:"true"`
+}
+
+// String returns the string representation
+func (s ConfigurationInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ConfigurationInfo) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ConfigurationInfo"}
+
+	if s.Arn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
+	}
+
+	if s.Revision == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Revision"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ConfigurationInfo) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Revision != nil {
+		v := *s.Revision
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "revision", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Describes a configuration revision.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ConfigurationRevision
+type ConfigurationRevision struct {
+	_ struct{} `type:"structure"`
+
+	// The time when the configuration revision was created.
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// The description of the configuration revision.
+	Description *string `locationName:"description" type:"string"`
+
+	// The revision number.
+	//
+	// Revision is a required field
+	Revision *int64 `locationName:"revision" type:"long" required:"true"`
+}
+
+// String returns the string representation
+func (s ConfigurationRevision) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ConfigurationRevision) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "creationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Revision != nil {
+		v := *s.Revision
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "revision", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }

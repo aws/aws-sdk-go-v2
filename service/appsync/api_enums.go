@@ -147,9 +147,12 @@ type SchemaStatus string
 
 // Enum values for SchemaStatus
 const (
-	SchemaStatusProcessing SchemaStatus = "PROCESSING"
-	SchemaStatusActive     SchemaStatus = "ACTIVE"
-	SchemaStatusDeleting   SchemaStatus = "DELETING"
+	SchemaStatusProcessing    SchemaStatus = "PROCESSING"
+	SchemaStatusActive        SchemaStatus = "ACTIVE"
+	SchemaStatusDeleting      SchemaStatus = "DELETING"
+	SchemaStatusFailed        SchemaStatus = "FAILED"
+	SchemaStatusSuccess       SchemaStatus = "SUCCESS"
+	SchemaStatusNotApplicable SchemaStatus = "NOT_APPLICABLE"
 )
 
 func (enum SchemaStatus) MarshalValue() (string, error) {

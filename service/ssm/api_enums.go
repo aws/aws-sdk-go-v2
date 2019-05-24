@@ -937,7 +937,9 @@ type PatchFilterKey string
 
 // Enum values for PatchFilterKey
 const (
+	PatchFilterKeyPatchSet       PatchFilterKey = "PATCH_SET"
 	PatchFilterKeyProduct        PatchFilterKey = "PRODUCT"
+	PatchFilterKeyProductFamily  PatchFilterKey = "PRODUCT_FAMILY"
 	PatchFilterKeyClassification PatchFilterKey = "CLASSIFICATION"
 	PatchFilterKeyMsrcSeverity   PatchFilterKey = "MSRC_SEVERITY"
 	PatchFilterKeyPatchId        PatchFilterKey = "PATCH_ID"
@@ -968,6 +970,44 @@ func (enum PatchOperationType) MarshalValue() (string, error) {
 }
 
 func (enum PatchOperationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type PatchProperty string
+
+// Enum values for PatchProperty
+const (
+	PatchPropertyProduct        PatchProperty = "PRODUCT"
+	PatchPropertyProductFamily  PatchProperty = "PRODUCT_FAMILY"
+	PatchPropertyClassification PatchProperty = "CLASSIFICATION"
+	PatchPropertyMsrcSeverity   PatchProperty = "MSRC_SEVERITY"
+	PatchPropertyPriority       PatchProperty = "PRIORITY"
+	PatchPropertySeverity       PatchProperty = "SEVERITY"
+)
+
+func (enum PatchProperty) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PatchProperty) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type PatchSet string
+
+// Enum values for PatchSet
+const (
+	PatchSetOs          PatchSet = "OS"
+	PatchSetApplication PatchSet = "APPLICATION"
+)
+
+func (enum PatchSet) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PatchSet) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

@@ -15,8 +15,8 @@ type ListUserTagsInput struct {
 
 	// Use this parameter only when paginating results and only after you receive
 	// a response indicating that the results are truncated. Set it to the value
-	// of the Marker element in the response to indicate where the next call should
-	// start.
+	// of the Marker element in the response that you received to indicate where
+	// the next call should start.
 	Marker *string `min:"1" type:"string"`
 
 	// (Optional) Use this only when paginating results to indicate the maximum
@@ -83,7 +83,7 @@ type ListUserTagsOutput struct {
 
 	// When IsTruncated is true, this element is present and contains the value
 	// to use for the Marker parameter in a subsequent pagination request.
-	Marker *string `min:"1" type:"string"`
+	Marker *string `type:"string"`
 
 	// The list of tags that are currently attached to the user. Each tag consists
 	// of a key name and an associated value. If no tags are attached to the specified

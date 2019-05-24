@@ -17,7 +17,7 @@ type GetSMSAttributesInput struct {
 	// A list of the individual attribute names, such as MonthlySpendLimit, for
 	// which you want values.
 	//
-	// For all attribute names, see SetSMSAttributes (http://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html).
+	// For all attribute names, see SetSMSAttributes (https://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html).
 	//
 	// If you don't use this parameter, Amazon SNS returns all SMS attributes.
 	Attributes []string `locationName:"attributes" type:"list"`

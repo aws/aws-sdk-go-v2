@@ -51,11 +51,15 @@ type DescribeAgentOutput struct {
 	// The time that the agent was activated (that is, created in your account).
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The time that the agent was last connected.
+	EndpointOptions *EndpointOptions `type:"structure"`
+
+	// The time that the agent last connected to DataSyc.
 	LastConnectionTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The name of the agent.
 	Name *string `min:"1" type:"string"`
+
+	PrivateLinkConfig *PrivateLinkConfig `type:"structure"`
 
 	// The status of the agent. If the status is ONLINE, then the agent is configured
 	// properly and is available to use. The Running status is the normal running

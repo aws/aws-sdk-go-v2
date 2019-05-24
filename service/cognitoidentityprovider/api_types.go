@@ -1237,6 +1237,8 @@ type PasswordPolicyType struct {
 	// In the password policy that you have set, refers to whether you have required
 	// users to use at least one uppercase letter in their password.
 	RequireUppercase *bool `type:"boolean"`
+
+	TemporaryPasswordValidityDays *int64 `type:"integer"`
 }
 
 // String returns the string representation

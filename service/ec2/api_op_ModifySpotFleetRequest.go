@@ -68,6 +68,8 @@ const opModifySpotFleetRequest = "ModifySpotFleetRequest"
 //
 // Modifies the specified Spot Fleet request.
 //
+// You can only modify a Spot Fleet request of type maintain.
+//
 // While the Spot Fleet request is being modified, it is in the modifying state.
 //
 // To scale up your Spot Fleet, increase its target capacity. The Spot Fleet

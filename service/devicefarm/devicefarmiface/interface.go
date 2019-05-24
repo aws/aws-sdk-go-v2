@@ -155,6 +155,8 @@ type ClientAPI interface {
 
 	ListSuitesRequest(*devicefarm.ListSuitesInput) devicefarm.ListSuitesRequest
 
+	ListTagsForResourceRequest(*devicefarm.ListTagsForResourceInput) devicefarm.ListTagsForResourceRequest
+
 	ListTestsRequest(*devicefarm.ListTestsInput) devicefarm.ListTestsRequest
 
 	ListUniqueProblemsRequest(*devicefarm.ListUniqueProblemsInput) devicefarm.ListUniqueProblemsRequest
@@ -174,6 +176,10 @@ type ClientAPI interface {
 	StopRemoteAccessSessionRequest(*devicefarm.StopRemoteAccessSessionInput) devicefarm.StopRemoteAccessSessionRequest
 
 	StopRunRequest(*devicefarm.StopRunInput) devicefarm.StopRunRequest
+
+	TagResourceRequest(*devicefarm.TagResourceInput) devicefarm.TagResourceRequest
+
+	UntagResourceRequest(*devicefarm.UntagResourceInput) devicefarm.UntagResourceRequest
 
 	UpdateDeviceInstanceRequest(*devicefarm.UpdateDeviceInstanceInput) devicefarm.UpdateDeviceInstanceRequest
 

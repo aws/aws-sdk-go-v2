@@ -54,6 +54,9 @@ func (s *DescribePortfolioInput) Validate() error {
 type DescribePortfolioOutput struct {
 	_ struct{} `type:"structure"`
 
+	// Information about the associated budgets.
+	Budgets []BudgetDetail `type:"list"`
+
 	// Information about the portfolio.
 	PortfolioDetail *PortfolioDetail `type:"structure"`
 

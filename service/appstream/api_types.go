@@ -161,8 +161,8 @@ func (s ComputeCapacityStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes the configuration information for the directory used to join a
-// streaming instance to a Microsoft Active Directory domain.
+// Describes the configuration information required to join fleets and image
+// builders to Microsoft Active Directory domains.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DirectoryConfig
 type DirectoryConfig struct {
 	_ struct{} `type:"structure"`
@@ -178,8 +178,8 @@ type DirectoryConfig struct {
 	// The distinguished names of the organizational units for computer accounts.
 	OrganizationalUnitDistinguishedNames []string `type:"list"`
 
-	// The credentials for the service account used by the streaming instance to
-	// connect to the directory.
+	// The credentials for the service account used by the fleet or image builder
+	// to connect to the directory.
 	ServiceAccountCredentials *ServiceAccountCredentials `type:"structure"`
 }
 
@@ -227,10 +227,13 @@ type Fleet struct {
 	// The description to display.
 	Description *string `min:"1" type:"string"`
 
-	// The time after disconnection when a session is considered to have ended,
-	// in seconds. If a user who was disconnected reconnects within this time interval,
-	// the user is connected to their previous session. Specify a value between
-	// 60 and 360000. By default, this value is 900 seconds (15 minutes).
+	// The amount of time that a streaming session remains active after users disconnect.
+	// If they try to reconnect to the streaming session after a disconnection or
+	// network interruption within this time interval, they are connected to their
+	// previous session. Otherwise, they are connected to a new session with a new
+	// streaming instance.
+	//
+	// Specify a value between 60 and 360000.
 	DisconnectTimeoutInSeconds *int64 `type:"integer"`
 
 	// The fleet name to display.
@@ -260,6 +263,30 @@ type Fleet struct {
 	// connected and a small hourly fee for instances that are not streaming apps.
 	FleetType FleetType `type:"string" enum:"true"`
 
+	// The amount of time that users can be idle (inactive) before they are disconnected
+	// from their streaming session and the DisconnectTimeoutInSeconds time interval
+	// begins. Users are notified before they are disconnected due to inactivity.
+	// If users try to reconnect to the streaming session before the time interval
+	// specified in DisconnectTimeoutInSeconds elapses, they are connected to their
+	// previous session. Users are considered idle when they stop providing keyboard
+	// or mouse input during their streaming session. File uploads and downloads,
+	// audio in, audio out, and pixels changing do not qualify as user activity.
+	// If users continue to be idle after the time interval in IdleDisconnectTimeoutInSeconds
+	// elapses, they are disconnected.
+	//
+	// To prevent users from being disconnected due to inactivity, specify a value
+	// of 0. Otherwise, specify a value between 60 and 3600. The default value is
+	// 900.
+	//
+	// If you enable this feature, we recommend that you specify a value that corresponds
+	// exactly to a whole number of minutes (for example, 60, 120, and 180). If
+	// you don't do this, the value is rounded to the nearest minute. For example,
+	// if you specify a value of 70, users are disconnected after 1 minute of inactivity.
+	// If you specify a value that is at the midpoint between two different minutes,
+	// the value is rounded up. For example, if you specify a value of 90, users
+	// are disconnected after 2 minutes of inactivity.
+	IdleDisconnectTimeoutInSeconds *int64 `type:"integer"`
+
 	// The ARN for the public, private, or shared image.
 	ImageArn *string `type:"string"`
 
@@ -271,8 +298,13 @@ type Fleet struct {
 	// InstanceType is a required field
 	InstanceType *string `min:"1" type:"string" required:"true"`
 
-	// The maximum time that a streaming session can run, in seconds. Specify a
-	// value between 600 and 360000.
+	// The maximum amount of time that a streaming session can remain active, in
+	// seconds. If users are still connected to a streaming instance five minutes
+	// before this limit is reached, they are prompted to save any open documents
+	// before being disconnected. After this time elapses, the instance is terminated
+	// and replaced by a new instance.
+	//
+	// Specify a value between 600 and 360000.
 	MaxUserDurationInSeconds *int64 `type:"integer"`
 
 	// The name of the fleet.
@@ -484,6 +516,25 @@ func (s ImageStateChangeReason) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Describes the error that is returned when a usage report can't be generated.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/LastReportGenerationExecutionError
+type LastReportGenerationExecutionError struct {
+	_ struct{} `type:"structure"`
+
+	// The error code for the error that is returned when a usage report can't be
+	// generated.
+	ErrorCode UsageReportExecutionErrorCode `type:"string" enum:"true"`
+
+	// The error message for the error that is returned when a usage report can't
+	// be generated.
+	ErrorMessage *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s LastReportGenerationExecutionError) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Describes the network details of the fleet instance for the streaming session.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/NetworkAccessConfiguration
 type NetworkAccessConfiguration struct {
@@ -524,8 +575,8 @@ func (s ResourceError) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes the credentials for the service account used by the streaming instance
-// to connect to the directory.
+// Describes the credentials for the service account used by the fleet or image
+// builder to connect to the directory.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ServiceAccountCredentials
 type ServiceAccountCredentials struct {
 	_ struct{} `type:"structure"`
@@ -578,8 +629,7 @@ type Session struct {
 	_ struct{} `type:"structure"`
 
 	// The authentication method. The user is authenticated using a streaming URL
-	// (API), SAML 2.0 federation (SAML), or the AppStream 2.0 user pool (USERPOOL).
-	// The default is to authenticate users using a streaming URL.
+	// (API) or SAML 2.0 federation (SAML).
 	AuthenticationType AuthenticationType `type:"string" enum:"true"`
 
 	// Specifies whether a user is connected to the streaming session.
@@ -718,7 +768,7 @@ func (s StackError) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes a connector to enable persistent storage for users.
+// Describes a connector that enables persistent storage for users.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StorageConnector
 type StorageConnector struct {
 	_ struct{} `type:"structure"`
@@ -754,6 +804,32 @@ func (s *StorageConnector) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Describes information about the usage report subscription.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UsageReportSubscription
+type UsageReportSubscription struct {
+	_ struct{} `type:"structure"`
+
+	// The time when the last usage report was generated.
+	LastGeneratedReportDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The Amazon S3 bucket where generated reports are stored. When a usage report
+	// subscription is enabled for the first time for an account in an AWS Region,
+	// an S3 bucket is created. The bucket is unique to the AWS account and the
+	// Region.
+	S3BucketName *string `min:"1" type:"string"`
+
+	// The schedule for generating usage reports.
+	Schedule UsageReportSchedule `type:"string" enum:"true"`
+
+	// The errors that are returned when usage reports can't be generated.
+	SubscriptionErrors []LastReportGenerationExecutionError `type:"list"`
+}
+
+// String returns the string representation
+func (s UsageReportSubscription) String() string {
+	return awsutil.Prettify(s)
 }
 
 // Describes a user in the user pool.
@@ -796,6 +872,8 @@ type User struct {
 	Status *string `min:"1" type:"string"`
 
 	// The email address of the user.
+	//
+	// Users' email addresses are case-sensitive.
 	UserName *string `min:"1" type:"string"`
 }
 
@@ -862,6 +940,8 @@ type UserStackAssociation struct {
 	StackName *string `min:"1" type:"string" required:"true"`
 
 	// The email address of the user who is associated with the stack.
+	//
+	// Users' email addresses are case-sensitive.
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`

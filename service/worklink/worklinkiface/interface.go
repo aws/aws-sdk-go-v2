@@ -63,6 +63,8 @@ import (
 type ClientAPI interface {
 	AssociateDomainRequest(*worklink.AssociateDomainInput) worklink.AssociateDomainRequest
 
+	AssociateWebsiteAuthorizationProviderRequest(*worklink.AssociateWebsiteAuthorizationProviderInput) worklink.AssociateWebsiteAuthorizationProviderRequest
+
 	AssociateWebsiteCertificateAuthorityRequest(*worklink.AssociateWebsiteCertificateAuthorityInput) worklink.AssociateWebsiteCertificateAuthorityRequest
 
 	CreateFleetRequest(*worklink.CreateFleetInput) worklink.CreateFleetRequest
@@ -87,6 +89,8 @@ type ClientAPI interface {
 
 	DisassociateDomainRequest(*worklink.DisassociateDomainInput) worklink.DisassociateDomainRequest
 
+	DisassociateWebsiteAuthorizationProviderRequest(*worklink.DisassociateWebsiteAuthorizationProviderInput) worklink.DisassociateWebsiteAuthorizationProviderRequest
+
 	DisassociateWebsiteCertificateAuthorityRequest(*worklink.DisassociateWebsiteCertificateAuthorityInput) worklink.DisassociateWebsiteCertificateAuthorityRequest
 
 	ListDevicesRequest(*worklink.ListDevicesInput) worklink.ListDevicesRequest
@@ -94,6 +98,8 @@ type ClientAPI interface {
 	ListDomainsRequest(*worklink.ListDomainsInput) worklink.ListDomainsRequest
 
 	ListFleetsRequest(*worklink.ListFleetsInput) worklink.ListFleetsRequest
+
+	ListWebsiteAuthorizationProvidersRequest(*worklink.ListWebsiteAuthorizationProvidersInput) worklink.ListWebsiteAuthorizationProvidersRequest
 
 	ListWebsiteCertificateAuthoritiesRequest(*worklink.ListWebsiteCertificateAuthoritiesInput) worklink.ListWebsiteCertificateAuthoritiesRequest
 

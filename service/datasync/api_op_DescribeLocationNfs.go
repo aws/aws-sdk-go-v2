@@ -54,6 +54,9 @@ type DescribeLocationNfsOutput struct {
 	// The URL of the source NFS location that was described.
 	LocationUri *string `type:"string"`
 
+	// The NFS mount options that DataSync used to mount your NFS share.
+	MountOptions *NfsMountOptions `type:"structure"`
+
 	// A list of Amazon Resource Names (ARNs) of agents to use for a Network File
 	// System (NFS) location.
 	OnPremConfig *OnPremConfig `type:"structure"`

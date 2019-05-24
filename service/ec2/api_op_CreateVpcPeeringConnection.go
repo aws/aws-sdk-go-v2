@@ -24,10 +24,10 @@ type CreateVpcPeeringConnectionInput struct {
 	// Default: Your AWS account ID
 	PeerOwnerId *string `locationName:"peerOwnerId" type:"string"`
 
-	// The region code for the accepter VPC, if the accepter VPC is located in a
-	// region other than the region in which you make the request.
+	// The Region code for the accepter VPC, if the accepter VPC is located in a
+	// Region other than the Region in which you make the request.
 	//
-	// Default: The region in which you make the request.
+	// Default: The Region in which you make the request.
 	PeerRegion *string `type:"string"`
 
 	// The ID of the VPC with which you are creating the VPC peering connection.

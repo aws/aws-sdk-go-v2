@@ -1652,6 +1652,22 @@ func (enum NetworkInterfaceAttribute) MarshalValueBuf(b []byte) ([]byte, error) 
 	return append(b, enum...), nil
 }
 
+type NetworkInterfaceCreationType string
+
+// Enum values for NetworkInterfaceCreationType
+const (
+	NetworkInterfaceCreationTypeEfa NetworkInterfaceCreationType = "efa"
+)
+
+func (enum NetworkInterfaceCreationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NetworkInterfaceCreationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NetworkInterfacePermissionStateCode string
 
 // Enum values for NetworkInterfacePermissionStateCode
@@ -1697,6 +1713,7 @@ type NetworkInterfaceType string
 const (
 	NetworkInterfaceTypeInterface  NetworkInterfaceType = "interface"
 	NetworkInterfaceTypeNatGateway NetworkInterfaceType = "natGateway"
+	NetworkInterfaceTypeEfa        NetworkInterfaceType = "efa"
 )
 
 func (enum NetworkInterfaceType) MarshalValue() (string, error) {

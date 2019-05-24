@@ -34,7 +34,7 @@ type UpdateProvisionedProductInput struct {
 	// and ProvisionedProductId.
 	ProvisionedProductId *string `min:"1" type:"string"`
 
-	// The updated name of the provisioned product. You cannot specify both ProvisionedProductName
+	// The name of the provisioned product. You cannot specify both ProvisionedProductName
 	// and ProvisionedProductId.
 	ProvisionedProductName *string `min:"1" type:"string"`
 

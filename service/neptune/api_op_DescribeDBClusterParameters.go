@@ -72,8 +72,6 @@ func (s *DescribeDBClusterParametersInput) Validate() error {
 	return nil
 }
 
-// Provides details about a DB cluster parameter group including the parameters
-// in the DB cluster parameter group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterParameterGroupDetails
 type DescribeDBClusterParametersOutput struct {
 	_ struct{} `type:"structure"`

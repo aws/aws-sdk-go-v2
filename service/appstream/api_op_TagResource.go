@@ -23,6 +23,11 @@ type TagResourceInput struct {
 	//
 	// If you do not specify a value, the value is set to an empty string.
 	//
+	// Generally allowed characters are: letters, numbers, and spaces representable
+	// in UTF-8, and the following special characters:
+	//
+	// _ . : / = + \ - @
+	//
 	// Tags is a required field
 	Tags map[string]string `min:"1" type:"map" required:"true"`
 }

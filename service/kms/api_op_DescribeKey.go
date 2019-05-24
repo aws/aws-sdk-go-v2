@@ -15,14 +15,14 @@ type DescribeKeyInput struct {
 
 	// A list of grant tokens.
 	//
-	// For more information, see Grant Tokens (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
+	// For more information, see Grant Tokens (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
 	GrantTokens []string `type:"list"`
 
 	// Describes the specified customer master key (CMK).
 	//
 	// If you specify a predefined AWS alias (an AWS alias with no key ID), KMS
-	// associates the alias with an AWS managed CMK (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys)
+	// associates the alias with an AWS managed CMK (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys)
 	// and returns its KeyId and Arn in the response.
 	//
 	// To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name,
@@ -88,8 +88,9 @@ const opDescribeKey = "DescribeKey"
 //
 // Provides detailed information about the specified customer master key (CMK).
 //
-// If you use DescribeKey on a predefined AWS alias, that is, an AWS alias with
-// no key ID, AWS KMS associates the alias with an AWS managed CMK (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys)
+// You can use DescribeKey on a predefined AWS alias, that is, an AWS alias
+// with no key ID. When you do, AWS KMS associates the alias with an AWS managed
+// CMK (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys)
 // and returns its KeyId and Arn in the response.
 //
 // To perform this operation on a CMK in a different AWS account, specify the

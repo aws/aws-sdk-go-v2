@@ -13,7 +13,7 @@ import (
 type DeleteCrawlerInput struct {
 	_ struct{} `type:"structure"`
 
-	// Name of the crawler to remove.
+	// The name of the crawler to remove.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
@@ -56,8 +56,8 @@ const opDeleteCrawler = "DeleteCrawler"
 // DeleteCrawlerRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Removes a specified crawler from the Data Catalog, unless the crawler state
-// is RUNNING.
+// Removes a specified crawler from the AWS Glue Data Catalog, unless the crawler
+// state is RUNNING.
 //
 //    // Example sending a request using DeleteCrawlerRequest.
 //    req := client.DeleteCrawlerRequest(params)

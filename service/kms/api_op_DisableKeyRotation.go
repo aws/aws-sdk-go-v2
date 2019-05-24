@@ -68,12 +68,12 @@ const opDisableKeyRotation = "DisableKeyRotation"
 // DisableKeyRotationRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Disables automatic rotation of the key material (http://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html)
+// Disables automatic rotation of the key material (https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html)
 // for the specified customer master key (CMK). You cannot perform this operation
 // on a CMK in a different AWS account.
 //
 // The result of this operation varies with the key state of the CMK. For details,
-// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// see How Key State Affects Use of a Customer Master Key (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 // in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using DisableKeyRotationRequest.

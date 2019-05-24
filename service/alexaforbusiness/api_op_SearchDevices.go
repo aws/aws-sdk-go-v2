@@ -16,7 +16,8 @@ type SearchDevicesInput struct {
 
 	// The filters to use to list a specified set of devices. Supported filter keys
 	// are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType,
-	// DeviceSerialNumber, UnassociatedOnly, and ConnectionStatus (ONLINE and OFFLINE).
+	// DeviceSerialNumber, UnassociatedOnly, ConnectionStatus (ONLINE and OFFLINE),
+	// NetworkProfileName, NetworkProfileArn, Feature, and FailureCode.
 	Filters []Filter `type:"list"`
 
 	// The maximum number of results to include in the response. If more results
@@ -31,7 +32,7 @@ type SearchDevicesInput struct {
 
 	// The sort order to use in listing the specified set of devices. Supported
 	// sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber,
-	// and ConnectionStatus.
+	// ConnectionStatus, NetworkProfileName, NetworkProfileArn, Feature, and FailureCode.
 	SortCriteria []Sort `type:"list"`
 }
 

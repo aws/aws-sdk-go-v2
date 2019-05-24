@@ -279,6 +279,11 @@ type DocumentClassificationJobProperties struct {
 	//
 	//    * Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string `type:"string"`
+
+	// Configuration parameters for a private Virtual Private Cloud (VPC) containing
+	// the resources you are using for your document classification job. For more
+	// information, see Amazon VPC (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
+	VpcConfig *VpcConfig `type:"structure"`
 }
 
 // String returns the string representation
@@ -446,6 +451,11 @@ type DocumentClassifierProperties struct {
 	//
 	//    * Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string `type:"string"`
+
+	// Configuration parameters for a private Virtual Private Cloud (VPC) containing
+	// the resources you are using for your custom classifier. For more information,
+	// see Amazon VPC (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
+	VpcConfig *VpcConfig `type:"structure"`
 }
 
 // String returns the string representation
@@ -561,6 +571,11 @@ type DominantLanguageDetectionJobProperties struct {
 	//
 	//    * Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string `type:"string"`
+
+	// Configuration parameters for a private Virtual Private Cloud (VPC) containing
+	// the resources you are using for your dominant language detection job. For
+	// more information, see Amazon VPC (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
+	VpcConfig *VpcConfig `type:"structure"`
 }
 
 // String returns the string representation
@@ -661,6 +676,11 @@ type EntitiesDetectionJobProperties struct {
 	//
 	//    * Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string `type:"string"`
+
+	// Configuration parameters for a private Virtual Private Cloud (VPC) containing
+	// the resources you are using for your entity detection job. For more information,
+	// see Amazon VPC (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
+	VpcConfig *VpcConfig `type:"structure"`
 }
 
 // String returns the string representation
@@ -1006,6 +1026,11 @@ type EntityRecognizerProperties struct {
 	//
 	//    * Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string `type:"string"`
+
+	// Configuration parameters for a private Virtual Private Cloud (VPC) containing
+	// the resources you are using for your custom entity recognizer. For more information,
+	// see Amazon VPC (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
+	VpcConfig *VpcConfig `type:"structure"`
 }
 
 // String returns the string representation
@@ -1211,6 +1236,11 @@ type KeyPhrasesDetectionJobProperties struct {
 	//
 	//    * Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string `type:"string"`
+
+	// Configuration parameters for a private Virtual Private Cloud (VPC) containing
+	// the resources you are using for your key phrases detection job. For more
+	// information, see Amazon VPC (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
+	VpcConfig *VpcConfig `type:"structure"`
 }
 
 // String returns the string representation
@@ -1381,6 +1411,11 @@ type SentimentDetectionJobProperties struct {
 	//
 	//    * Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string `type:"string"`
+
+	// Configuration parameters for a private Virtual Private Cloud (VPC) containing
+	// the resources you are using for your sentiment detection job. For more information,
+	// see Amazon VPC (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
+	VpcConfig *VpcConfig `type:"structure"`
 }
 
 // String returns the string representation
@@ -1581,9 +1616,70 @@ type TopicsDetectionJobProperties struct {
 	//
 	//    * Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string `type:"string"`
+
+	// Configuration parameters for a private Virtual Private Cloud (VPC) containing
+	// the resources you are using for your topic detection job. For more information,
+	// see Amazon VPC (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
+	VpcConfig *VpcConfig `type:"structure"`
 }
 
 // String returns the string representation
 func (s TopicsDetectionJobProperties) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Configuration parameters for an optional private Virtual Private Cloud (VPC)
+// containing the resources you are using for the job. For For more information,
+// see Amazon VPC (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/VpcConfig
+type VpcConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The ID number for a security group on an instance of your private VPC. Security
+	// groups on your VPC function serve as a virtual firewall to control inbound
+	// and outbound traffic and provides security for the resources that you’ll
+	// be accessing on the VPC. This ID number is preceded by "sg-", for instance:
+	// "sg-03b388029b0a285ea". For more information, see Security Groups for your
+	// VPC (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html).
+	//
+	// SecurityGroupIds is a required field
+	SecurityGroupIds []string `min:"1" type:"list" required:"true"`
+
+	// The ID for each subnet being used in your private VPC. This subnet is a subset
+	// of the a range of IPv4 addresses used by the VPC and is specific to a given
+	// availability zone in the VPC’s region. This ID number is preceded by "subnet-",
+	// for instance: "subnet-04ccf456919e69055". For more information, see VPCs
+	// and Subnets (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html).
+	//
+	// Subnets is a required field
+	Subnets []string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s VpcConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VpcConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VpcConfig"}
+
+	if s.SecurityGroupIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if s.SecurityGroupIds != nil && len(s.SecurityGroupIds) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SecurityGroupIds", 1))
+	}
+
+	if s.Subnets == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Subnets"))
+	}
+	if s.Subnets != nil && len(s.Subnets) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Subnets", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }

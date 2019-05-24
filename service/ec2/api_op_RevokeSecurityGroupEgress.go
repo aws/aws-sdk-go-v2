@@ -86,10 +86,10 @@ const opRevokeSecurityGroupEgress = "RevokeSecurityGroupEgress"
 // RevokeSecurityGroupEgressRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// [EC2-VPC only] Removes the specified egress rules from a security group for
-// EC2-VPC. This action doesn't apply to security groups for use in EC2-Classic.
-// To remove a rule, the values that you specify (for example, ports) must match
-// the existing rule's values exactly.
+// [VPC only] Removes the specified egress rules from a security group for EC2-VPC.
+// This action doesn't apply to security groups for use in EC2-Classic. To remove
+// a rule, the values that you specify (for example, ports) must match the existing
+// rule's values exactly.
 //
 // Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or source
 // security group. For the TCP and UDP protocols, you must also specify the

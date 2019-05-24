@@ -116,9 +116,6 @@ const opUpdateApplication = "UpdateApplication"
 // Kinesis Data Analytics updates the ApplicationVersionId each time you update
 // your application.
 //
-// SQL is not enabled for this private beta. Using SQL parameters (such as SqlApplicationConfigurationUpdate)
-// will result in an error.
-//
 //    // Example sending a request using UpdateApplicationRequest.
 //    req := client.UpdateApplicationRequest(params)
 //    resp, err := req.Send(context.TODO())

@@ -14,8 +14,8 @@ type DescribeSessionsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The authentication method. Specify API for a user authenticated using a streaming
-	// URL, SAML for a SAML 2.0-federated user, or USERPOOL for a user in the AppStream
-	// 2.0 user pool. The default is to authenticate users using a streaming URL.
+	// URL or SAML for a SAML federated user. The default is to authenticate users
+	// using a streaming URL.
 	AuthenticationType AuthenticationType `type:"string" enum:"true"`
 
 	// The name of the fleet. This value is case-sensitive.
@@ -97,11 +97,10 @@ const opDescribeSessions = "DescribeSessions"
 // DescribeSessionsRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Retrieves a list that describes the active streaming sessions for a specified
-// stack and fleet. If a value for UserId is provided for the stack and fleet,
-// only streaming sessions for that user are described. If an authentication
-// type is not provided, the default is to authenticate users using a streaming
-// URL.
+// Retrieves a list that describes the streaming sessions for a specified stack
+// and fleet. If a UserId is provided for the stack and fleet, only streaming
+// sessions for that user are described. If an authentication type is not provided,
+// the default is to authenticate users using a streaming URL.
 //
 //    // Example sending a request using DescribeSessionsRequest.
 //    req := client.DescribeSessionsRequest(params)

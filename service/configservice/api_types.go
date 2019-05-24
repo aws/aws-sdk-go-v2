@@ -752,9 +752,6 @@ func (s ConfigRuleEvaluationStatus) String() string {
 // Provides options for how often AWS Config delivers configuration snapshots
 // to the Amazon S3 bucket in your delivery channel.
 //
-// If you want to create a rule that triggers evaluations for your resources
-// when AWS Config delivers the configuration snapshot, see the following:
-//
 // The frequency for a rule that triggers evaluations for your resources when
 // AWS Config delivers the configuration snapshot is set by one of two values,
 // depending on which is less frequent:
@@ -1310,8 +1307,8 @@ func (s GroupedResourceCount) String() string {
 	return awsutil.Prettify(s)
 }
 
-// This object contains regions to setup the aggregator and an IAM role to retrieve
-// organization details.
+// This object contains regions to set up the aggregator and an IAM role to
+// retrieve organization details.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationAggregationSource
 type OrganizationAggregationSource struct {
 	_ struct{} `type:"structure"`
@@ -1322,7 +1319,7 @@ type OrganizationAggregationSource struct {
 	// The source regions being aggregated.
 	AwsRegions []string `min:"1" type:"list"`
 
-	// ARN of the IAM role used to retreive AWS Organization details associated
+	// ARN of the IAM role used to retrieve AWS Organization details associated
 	// with the aggregator account.
 	//
 	// RoleArn is a required field

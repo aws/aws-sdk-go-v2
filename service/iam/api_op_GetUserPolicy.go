@@ -68,6 +68,10 @@ type GetUserPolicyOutput struct {
 
 	// The policy document.
 	//
+	// IAM stores policies in JSON format. However, resources that were created
+	// using AWS CloudFormation templates can be formatted in YAML. AWS CloudFormation
+	// always converts a YAML policy to JSON format before submitting it to IAM.
+	//
 	// PolicyDocument is a required field
 	PolicyDocument *string `min:"1" type:"string" required:"true"`
 
@@ -103,7 +107,7 @@ const opGetUserPolicy = "GetUserPolicy"
 //
 // An IAM user can also have managed policies attached to it. To retrieve a
 // managed policy document that is attached to a user, use GetPolicy to determine
-// the policy's default version, then use GetPolicyVersion to retrieve the policy
+// the policy's default version. Then use GetPolicyVersion to retrieve the policy
 // document.
 //
 // For more information about policies, see Managed Policies and Inline Policies

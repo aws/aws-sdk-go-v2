@@ -79,7 +79,7 @@ type ListSSHPublicKeysOutput struct {
 
 	// When IsTruncated is true, this element is present and contains the value
 	// to use for the Marker parameter in a subsequent pagination request.
-	Marker *string `min:"1" type:"string"`
+	Marker *string `type:"string"`
 
 	// A list of the SSH public keys assigned to IAM user.
 	SSHPublicKeys []SSHPublicKeyMetadata `type:"list"`
@@ -96,7 +96,7 @@ const opListSSHPublicKeys = "ListSSHPublicKeys"
 // AWS Identity and Access Management.
 //
 // Returns information about the SSH public keys associated with the specified
-// IAM user. If there none exists, the operation returns an empty list.
+// IAM user. If none exists, the operation returns an empty list.
 //
 // The SSH public keys returned by this operation are used only for authenticating
 // the IAM user to an AWS CodeCommit repository. For more information about

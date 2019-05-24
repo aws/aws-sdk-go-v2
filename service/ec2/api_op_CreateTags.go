@@ -29,9 +29,9 @@ type CreateTagsInput struct {
 	// Resources is a required field
 	Resources []string `locationName:"ResourceId" type:"list" required:"true"`
 
-	// One or more tags. The value parameter is required, but if you don't want
-	// the tag to have a value, specify the parameter with no value, and we set
-	// the value to an empty string.
+	// The tags. The value parameter is required, but if you don't want the tag
+	// to have a value, specify the parameter with no value, and we set the value
+	// to an empty string.
 	//
 	// Tags is a required field
 	Tags []Tag `locationName:"Tag" locationNameList:"item" type:"list" required:"true"`

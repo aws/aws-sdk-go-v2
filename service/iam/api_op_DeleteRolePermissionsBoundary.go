@@ -61,9 +61,9 @@ const opDeleteRolePermissionsBoundary = "DeleteRolePermissionsBoundary"
 //
 // Deletes the permissions boundary for the specified IAM role.
 //
-// Deleting the permissions boundary for a role might increase its permissions
-// by allowing anyone who assumes the role to perform all the actions granted
-// in its permissions policies.
+// Deleting the permissions boundary for a role might increase its permissions.
+// For example, it might allow anyone who assumes the role to perform all the
+// actions granted in its permissions policies.
 //
 //    // Example sending a request using DeleteRolePermissionsBoundaryRequest.
 //    req := client.DeleteRolePermissionsBoundaryRequest(params)

@@ -85,7 +85,7 @@ type PublishInput struct {
 	//
 	// For information about sending different messages for each protocol using
 	// the AWS Management Console, go to Create Different Messages for Each Protocol
-	// (http://docs.aws.amazon.com/sns/latest/gsg/Publish.html#sns-message-formatting-by-protocol)
+	// (https://docs.aws.amazon.com/sns/latest/gsg/Publish.html#sns-message-formatting-by-protocol)
 	// in the Amazon Simple Notification Service Getting Started Guide.
 	//
 	// Valid value: json
@@ -106,8 +106,6 @@ type PublishInput struct {
 	// and must be less than 100 characters long.
 	Subject *string `type:"string"`
 
-	// Either TopicArn or EndpointArn, but not both.
-	//
 	// If you don't specify a value for the TargetArn parameter, you must specify
 	// a value for the PhoneNumber or TopicArn parameters.
 	TargetArn *string `type:"string"`
@@ -182,7 +180,7 @@ const opPublish = "Publish"
 // with the CreatePlatformEndpoint action.
 //
 // For more information about formatting messages, see Send Custom Platform-Specific
-// Payloads in Messages to Mobile Devices (http://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-custommessage.html).
+// Payloads in Messages to Mobile Devices (https://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-custommessage.html).
 //
 //    // Example sending a request using PublishRequest.
 //    req := client.PublishRequest(params)

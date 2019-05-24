@@ -14,6 +14,11 @@ import (
 type UpdateSMBFileShareInput struct {
 	_ struct{} `type:"structure"`
 
+	// A list of users or groups in the Active Directory that have administrator
+	// rights to the file share. A group must be prefixed with the @ character.
+	// For example @group1. Can only be set if Authentication is set to ActiveDirectory.
+	AdminUserList []string `type:"list"`
+
 	// The default storage class for objects put into an Amazon S3 bucket by the
 	// file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA, or S3_ONEZONE_IA.
 	// If this field is not populated, the default value S3_STANDARD is used. Optional.
@@ -63,6 +68,9 @@ type UpdateSMBFileShareInput struct {
 	// Set this value to "true to enable ACL (access control list) on the SMB file
 	// share. Set it to "false" to map file and directory permissions to the POSIX
 	// permissions.
+	//
+	// For more information, see https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.htmlin
+	// the Storage Gateway User Guide.
 	SMBACLEnabled *bool `type:"boolean"`
 
 	// A list of users or groups in the Active Directory that are allowed to access

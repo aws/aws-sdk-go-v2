@@ -17,7 +17,8 @@ type BatchGetDeploymentTargetsInput struct {
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
 
 	// The unique IDs of the deployment targets. The compute platform of the deployment
-	// determines the type of the targets and their formats.
+	// determines the type of the targets and their formats. The maximum number
+	// of deployment target IDs you can specify is 25.
 	//
 	//    * For deployments that use the EC2/On-premises compute platform, the target
 	//    IDs are EC2 or on-premises instances IDs, and their target type is instanceTarget.
@@ -63,8 +64,10 @@ const opBatchGetDeploymentTargets = "BatchGetDeploymentTargets"
 // BatchGetDeploymentTargetsRequest returns a request value for making API operation for
 // AWS CodeDeploy.
 //
-// Returns an array of targets associated with a deployment. This method works
-// with all compute types and should be used instead of the deprecated BatchGetDeploymentInstances.
+// Returns an array of one or more targets associated with a deployment. This
+// method works with all compute types and should be used instead of the deprecated
+// BatchGetDeploymentInstances. The maximum number of targets that can be returned
+// is 25.
 //
 // The type of targets returned depends on the deployment's compute platform:
 //

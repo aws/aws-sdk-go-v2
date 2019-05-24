@@ -62,6 +62,11 @@ type DescribeTaskExecutionOutput struct {
 	// and finding the delta that needs to be transferred.
 	EstimatedFilesToTransfer *int64 `type:"long"`
 
+	// Specifies that the task execution excludes files from the transfer based
+	// on the specified pattern in the filter. Transfers all files in the task’s
+	// subdirectory, except files that match the filter that is set.
+	Excludes []FilterRule `type:"list"`
+
 	// The actual number of files that was transferred over the network. This value
 	// is calculated and updated on an ongoing basis during the TRANSFERRING phase.
 	// It's updated periodically when each file is read from the source and sent
@@ -73,6 +78,11 @@ type DescribeTaskExecutionOutput struct {
 	// use it as an indicator for a correct file number or to monitor your task
 	// execution.
 	FilesTransferred *int64 `type:"long"`
+
+	// Specifies that the task execution excludes files in the transfer based on
+	// the specified pattern in the filter. When multiple include filters are set,
+	// they are interpreted as an OR.
+	Includes []FilterRule `type:"list"`
 
 	// Represents the options that are available to control the behavior of a StartTaskExecution
 	// operation. Behavior includes preserving metadata such as user ID (UID), group
@@ -91,16 +101,18 @@ type DescribeTaskExecutionOutput struct {
 	// The time that the task execution was started.
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The status of the task. For detailed information about sync statuses, see
-	// Understanding Sync Task Statuses (https://docs.aws.amazon.com/sync-service/latest/userguide/understand-sync-task-statuses.html).
+	// The status of the task execution.
+	//
+	// For detailed information about task execution statuses, see "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-tasks.html#understand-task-creation-statuses"
+	// (Understanding Task Statuses).
 	Status TaskExecutionStatus `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the task execution that was described.
 	// TaskExecutionArn is hierarchical and includes TaskArn for the task that was
 	// executed.
 	//
-	// For example, a TaskExecution value with the ARN arn:aws:sync:us-east-1:209870788375:task/task-0208075f79cedf4a2/execution/exec-08ef1e88ec491019b
-	// executed the task with the ARN arn:aws:sync:us-east-1:209870788375:task/task-0208075f79cedf4a2.
+	// For example, a TaskExecution value with the ARN arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2/execution/exec-08ef1e88ec491019b
+	// executed the task with the ARN arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2.
 	TaskExecutionArn *string `type:"string"`
 }
 

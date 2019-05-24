@@ -23,7 +23,7 @@ type DescribeImagesInput struct {
 	// account ID, self (the sender of the request), or all (public AMIs).
 	ExecutableUsers []string `locationName:"ExecutableBy" locationNameList:"ExecutableBy" type:"list"`
 
-	// One or more filters.
+	// The filters.
 	//
 	//    * architecture - The image architecture (i386 | x86_64).
 	//
@@ -105,7 +105,7 @@ type DescribeImagesInput struct {
 	//    * virtualization-type - The virtualization type (paravirtual | hvm).
 	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
-	// One or more image IDs.
+	// The image IDs.
 	//
 	// Default: Describes all images available to you.
 	ImageIds []string `locationName:"ImageId" locationNameList:"ImageId" type:"list"`
@@ -147,8 +147,10 @@ const opDescribeImages = "DescribeImages"
 // own, and private images owned by other AWS accounts for which you have explicit
 // launch permissions.
 //
-// Deregistered images are included in the returned results for an unspecified
-// interval after deregistration.
+// Recently deregistered images appear in the returned results for a short interval
+// and then return empty results. After all instances that reference a deregistered
+// AMI are terminated, specifying the ID of the image results in an error indicating
+// that the AMI ID cannot be found.
 //
 //    // Example sending a request using DescribeImagesRequest.
 //    req := client.DescribeImagesRequest(params)

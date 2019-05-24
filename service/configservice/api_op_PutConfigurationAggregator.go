@@ -24,6 +24,8 @@ type PutConfigurationAggregatorInput struct {
 
 	// An OrganizationAggregationSource object.
 	OrganizationAggregationSource *OrganizationAggregationSource `type:"structure"`
+
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -51,6 +53,13 @@ func (s *PutConfigurationAggregatorInput) Validate() error {
 	if s.OrganizationAggregationSource != nil {
 		if err := s.OrganizationAggregationSource.Validate(); err != nil {
 			invalidParams.AddNested("OrganizationAggregationSource", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 

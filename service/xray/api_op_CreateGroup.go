@@ -15,7 +15,7 @@ type CreateGroupInput struct {
 	_ struct{} `type:"structure"`
 
 	// The filter expression defining criteria by which to group traces.
-	FilterExpression *string `min:"1" type:"string"`
+	FilterExpression *string `type:"string"`
 
 	// The case-sensitive name of the new group. Default is a reserved name and
 	// names must be unique.
@@ -32,9 +32,6 @@ func (s CreateGroupInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateGroupInput"}
-	if s.FilterExpression != nil && len(*s.FilterExpression) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FilterExpression", 1))
-	}
 
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))

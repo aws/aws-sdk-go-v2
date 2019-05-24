@@ -14,7 +14,7 @@ import (
 type CreateDeploymentConfigInput struct {
 	_ struct{} `type:"structure"`
 
-	// The destination platform type for the deployment (Lambda or Server>).
+	// The destination platform type for the deployment (Lambda, Server, or ECS).
 	ComputePlatform ComputePlatform `locationName:"computePlatform" type:"string" enum:"true"`
 
 	// The name of the deployment configuration to create.

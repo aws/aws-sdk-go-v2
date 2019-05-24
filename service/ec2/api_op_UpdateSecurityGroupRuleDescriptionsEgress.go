@@ -71,7 +71,7 @@ const opUpdateSecurityGroupRuleDescriptionsEgress = "UpdateSecurityGroupRuleDesc
 // UpdateSecurityGroupRuleDescriptionsEgressRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// [EC2-VPC only] Updates the description of an egress (outbound) security group
+// [VPC only] Updates the description of an egress (outbound) security group
 // rule. You can replace an existing description, or add a description to a
 // rule that did not have one previously.
 //

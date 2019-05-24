@@ -59,8 +59,8 @@ type GetSchemaCreationStatusOutput struct {
 	// Detailed information about the status of the schema creation operation.
 	Details *string `locationName:"details" type:"string"`
 
-	// The current state of the schema (PROCESSING, ACTIVE, or DELETING). Once the
-	// schema is in the ACTIVE state, you can add data.
+	// The current state of the schema (PROCESSING, FAILED, SUCCESS, or NOT_APPLICABLE).
+	// When the schema is in the ACTIVE state, you can add data.
 	Status SchemaStatus `locationName:"status" type:"string" enum:"true"`
 }
 

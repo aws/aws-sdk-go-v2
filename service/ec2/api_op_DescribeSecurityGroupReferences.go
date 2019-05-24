@@ -62,7 +62,7 @@ const opDescribeSecurityGroupReferences = "DescribeSecurityGroupReferences"
 // DescribeSecurityGroupReferencesRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// [EC2-VPC only] Describes the VPCs on the other side of a VPC peering connection
+// [VPC only] Describes the VPCs on the other side of a VPC peering connection
 // that are referencing the security groups you've specified in this request.
 //
 //    // Example sending a request using DescribeSecurityGroupReferencesRequest.

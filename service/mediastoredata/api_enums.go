@@ -34,3 +34,20 @@ func (enum StorageClass) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
+
+type UploadAvailability string
+
+// Enum values for UploadAvailability
+const (
+	UploadAvailabilityStandard  UploadAvailability = "STANDARD"
+	UploadAvailabilityStreaming UploadAvailability = "STREAMING"
+)
+
+func (enum UploadAvailability) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UploadAvailability) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

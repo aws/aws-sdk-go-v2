@@ -19,7 +19,7 @@ type UpdateClusterConfigInput struct {
 	ClientRequestToken *string `locationName:"clientRequestToken" type:"string" idempotencyToken:"true"`
 
 	// Enable or disable exporting the Kubernetes control plane logs for your cluster
-	// to CloudWatch Logs. By default, cluster control plane logs are not exported
+	// to CloudWatch Logs. By default, cluster control plane logs aren't exported
 	// to CloudWatch Logs. For more information, see Amazon EKS Cluster Control
 	// Plane Logs (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html)
 	// in the Amazon EKS User Guide .
@@ -128,21 +128,24 @@ const opUpdateClusterConfig = "UpdateClusterConfig"
 // use to track the status of your cluster update with the DescribeUpdate API
 // operation.
 //
-// You can use this API operation to enable or disable public and private access
-// to your cluster's Kubernetes API server endpoint. By default, public access
-// is enabled and private access is disabled. For more information, see Amazon
-// EKS Cluster Endpoint Access Control (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
-// in the Amazon EKS User Guide .
-//
-// You can also use this API operation to enable or disable exporting the Kubernetes
+// You can use this API operation to enable or disable exporting the Kubernetes
 // control plane logs for your cluster to CloudWatch Logs. By default, cluster
-// control plane logs are not exported to CloudWatch Logs. For more information,
+// control plane logs aren't exported to CloudWatch Logs. For more information,
 // see Amazon EKS Cluster Control Plane Logs (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html)
 // in the Amazon EKS User Guide .
 //
 // CloudWatch Logs ingestion, archive storage, and data scanning rates apply
 // to exported control plane logs. For more information, see Amazon CloudWatch
 // Pricing (http://aws.amazon.com/cloudwatch/pricing/).
+//
+// You can also use this API operation to enable or disable public and private
+// access to your cluster's Kubernetes API server endpoint. By default, public
+// access is enabled, and private access is disabled. For more information,
+// see Amazon EKS Cluster Endpoint Access Control (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
+// in the Amazon EKS User Guide .
+//
+// At this time, you can not update the subnets or security group IDs for an
+// existing cluster.
 //
 // Cluster updates are asynchronous, and they should finish within a few minutes.
 // During an update, the cluster status moves to UPDATING (this status transition

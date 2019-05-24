@@ -72,6 +72,10 @@ type DescribePatchGroupStateOutput struct {
 
 	// The number of instances with patches that aren't applicable.
 	InstancesWithNotApplicablePatches *int64 `type:"integer"`
+
+	// The number of instances with NotApplicable patches beyond the supported limit,
+	// which are not reported by name to Systems Manager Inventory.
+	InstancesWithUnreportedNotApplicablePatches *int64 `type:"integer"`
 }
 
 // String returns the string representation

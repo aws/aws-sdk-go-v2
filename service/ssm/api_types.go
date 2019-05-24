@@ -2398,7 +2398,9 @@ type InstancePatchState struct {
 	MissingCount *int64 `type:"integer"`
 
 	// The number of patches from the patch baseline that aren't applicable for
-	// the instance and hence aren't installed on the instance.
+	// the instance and therefore aren't installed on the instance. This number
+	// may be truncated if the list of patch names is very large. The number of
+	// patches beyond this limit are reported in UnreportedNotApplicableCount.
 	NotApplicableCount *int64 `type:"integer"`
 
 	// The type of patching operation that was performed: SCAN (assess patch compliance
@@ -2429,6 +2431,10 @@ type InstancePatchState struct {
 	// The ID of the patch baseline snapshot used during the patching operation
 	// when this compliance data was collected.
 	SnapshotId *string `min:"36" type:"string"`
+
+	// The number of patches beyond the supported limit of NotApplicableCount that
+	// are not reported by name to Systems Manager Inventory.
+	UnreportedNotApplicableCount *int64 `type:"integer"`
 }
 
 // String returns the string representation
@@ -4018,434 +4024,37 @@ func (s PatchComplianceData) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Defines a patch filter.
-//
-// A patch filter consists of key/value pairs, but not all keys are valid for
-// all operating system types. For example, the key PRODUCT is valid for all
-// supported operating system types. The key MSRC_SEVERITY, however, is valid
-// only for Windows operating systems, and the key SECTION is valid only for
-// Ubuntu operating systems.
-//
-// Refer to the following sections for information about which keys may be used
-// with each major operating system, and which values are valid for each key.
-//
-// Windows Operating Systems
-//
-// The supported keys for Windows operating systems are PRODUCT, CLASSIFICATION,
-// and MSRC_SEVERITY. See the following lists for valid values for each of these
-// keys.
-//
-// Supported key: PRODUCT
-//
-// Supported values:
-//
-//    * Windows7
-//
-//    * Windows8
-//
-//    * Windows8.1
-//
-//    * Windows8Embedded
-//
-//    * Windows10
-//
-//    * Windows10LTSB
-//
-//    * WindowsServer2008
-//
-//    * WindowsServer2008R2
-//
-//    * WindowsServer2012
-//
-//    * WindowsServer2012R2
-//
-//    * WindowsServer2016
-//
-//    * WindowsServer2019
-//
-//    * * Use a wildcard character (*) to target all supported operating system
-//    versions.
-//
-// Supported key: CLASSIFICATION
-//
-// Supported values:
-//
-//    * CriticalUpdates
-//
-//    * DefinitionUpdates
-//
-//    * Drivers
-//
-//    * FeaturePacks
-//
-//    * SecurityUpdates
-//
-//    * ServicePacks
-//
-//    * Tools
-//
-//    * UpdateRollups
-//
-//    * Updates
-//
-//    * Upgrades
-//
-// Supported key: MSRC_SEVERITY
-//
-// Supported values:
-//
-//    * Critical
-//
-//    * Important
-//
-//    * Moderate
-//
-//    * Low
-//
-//    * Unspecified
-//
-// Ubuntu Operating Systems
-//
-// The supported keys for Ubuntu operating systems are PRODUCT, PRIORITY, and
-// SECTION. See the following lists for valid values for each of these keys.
-//
-// Supported key: PRODUCT
-//
-// Supported values:
-//
-//    * Ubuntu14.04
-//
-//    * Ubuntu16.04
-//
-//    * * Use a wildcard character (*) to target all supported operating system
-//    versions.
-//
-// Supported key: PRIORITY
-//
-// Supported values:
-//
-//    * Required
-//
-//    * Important
-//
-//    * Standard
-//
-//    * Optional
-//
-//    * Extra
-//
-// Supported key: SECTION
-//
-// Only the length of the key value is validated. Minimum length is 1. Maximum
-// length is 64.
-//
-// Amazon Linux Operating Systems
-//
-// The supported keys for Amazon Linux operating systems are PRODUCT, CLASSIFICATION,
-// and SEVERITY. See the following lists for valid values for each of these
-// keys.
-//
-// Supported key: PRODUCT
-//
-// Supported values:
-//
-//    * AmazonLinux2012.03
-//
-//    * AmazonLinux2012.09
-//
-//    * AmazonLinux2013.03
-//
-//    * AmazonLinux2013.09
-//
-//    * AmazonLinux2014.03
-//
-//    * AmazonLinux2014.09
-//
-//    * AmazonLinux2015.03
-//
-//    * AmazonLinux2015.09
-//
-//    * AmazonLinux2016.03
-//
-//    * AmazonLinux2016.09
-//
-//    * AmazonLinux2017.03
-//
-//    * AmazonLinux2017.09
-//
-//    * * Use a wildcard character (*) to target all supported operating system
-//    versions.
-//
-// Supported key: CLASSIFICATION
-//
-// Supported values:
-//
-//    * Security
-//
-//    * Bugfix
-//
-//    * Enhancement
-//
-//    * Recommended
-//
-//    * Newpackage
-//
-// Supported key: SEVERITY
-//
-// Supported values:
-//
-//    * Critical
-//
-//    * Important
-//
-//    * Medium
-//
-//    * Low
-//
-// Amazon Linux 2 Operating Systems
-//
-// The supported keys for Amazon Linux 2 operating systems are PRODUCT, CLASSIFICATION,
-// and SEVERITY. See the following lists for valid values for each of these
-// keys.
-//
-// Supported key: PRODUCT
-//
-// Supported values:
-//
-//    * AmazonLinux2
-//
-//    * AmazonLinux2.0
-//
-//    * * Use a wildcard character (*) to target all supported operating system
-//    versions.
-//
-// Supported key: CLASSIFICATION
-//
-// Supported values:
-//
-//    * Security
-//
-//    * Bugfix
-//
-//    * Enhancement
-//
-//    * Recommended
-//
-//    * Newpackage
-//
-// Supported key: SEVERITY
-//
-// Supported values:
-//
-//    * Critical
-//
-//    * Important
-//
-//    * Medium
-//
-//    * Low
-//
-// RedHat Enterprise Linux (RHEL) Operating Systems
-//
-// The supported keys for RedHat Enterprise Linux operating systems are PRODUCT,
-// CLASSIFICATION, and SEVERITY. See the following lists for valid values for
-// each of these keys.
-//
-// Supported key: PRODUCT
-//
-// Supported values:
-//
-//    * RedhatEnterpriseLinux6.5
-//
-//    * RedhatEnterpriseLinux6.6
-//
-//    * RedhatEnterpriseLinux6.7
-//
-//    * RedhatEnterpriseLinux6.8
-//
-//    * RedhatEnterpriseLinux6.9
-//
-//    * RedhatEnterpriseLinux7.0
-//
-//    * RedhatEnterpriseLinux7.1
-//
-//    * RedhatEnterpriseLinux7.2
-//
-//    * RedhatEnterpriseLinux7.3
-//
-//    * RedhatEnterpriseLinux7.4
-//
-//    * RedhatEnterpriseLinux7.5
-//
-//    * RedhatEnterpriseLinux7.6
-//
-//    * * Use a wildcard character (*) to target all supported operating system
-//    versions.
-//
-// Supported key: CLASSIFICATION
-//
-// Supported values:
-//
-//    * Security
-//
-//    * Bugfix
-//
-//    * Enhancement
-//
-//    * Recommended
-//
-//    * Newpackage
-//
-// Supported key: SEVERITY
-//
-// Supported values:
-//
-//    * Critical
-//
-//    * Important
-//
-//    * Medium
-//
-//    * Low
-//
-// SUSE Linux Enterprise Server (SLES) Operating Systems
-//
-// The supported keys for SLES operating systems are PRODUCT, CLASSIFICATION,
-// and SEVERITY. See the following lists for valid values for each of these
-// keys.
-//
-// Supported key: PRODUCT
-//
-// Supported values:
-//
-//    * Suse12.0
-//
-//    * Suse12.1
-//
-//    * Suse12.2
-//
-//    * Suse12.3
-//
-//    * Suse12.4
-//
-//    * Suse12.5
-//
-//    * Suse12.6
-//
-//    * Suse12.7
-//
-//    * Suse12.8
-//
-//    * Suse12.9
-//
-//    * * Use a wildcard character (*) to target all supported operating system
-//    versions.
-//
-// Supported key: CLASSIFICATION
-//
-// Supported values:
-//
-//    * Security
-//
-//    * Recommended
-//
-//    * Optional
-//
-//    * Feature
-//
-//    * Document
-//
-//    * Yast
-//
-// Supported key: SEVERITY
-//
-// Supported values:
-//
-//    * Critical
-//
-//    * Important
-//
-//    * Moderate
-//
-//    * Low
-//
-// CentOS Operating Systems
-//
-// The supported keys for CentOS operating systems are PRODUCT, CLASSIFICATION,
-// and SEVERITY. See the following lists for valid values for each of these
-// keys.
-//
-// Supported key: PRODUCT
-//
-// Supported values:
-//
-//    * CentOS6.5
-//
-//    * CentOS6.6
-//
-//    * CentOS6.7
-//
-//    * CentOS6.8
-//
-//    * CentOS6.9
-//
-//    * CentOS7.0
-//
-//    * CentOS7.1
-//
-//    * CentOS7.2
-//
-//    * CentOS7.3
-//
-//    * CentOS7.4
-//
-//    * CentOS7.5
-//
-//    * CentOS7.6
-//
-//    * * Use a wildcard character (*) to target all supported operating system
-//    versions.
-//
-// Supported key: CLASSIFICATION
-//
-// Supported values:
-//
-//    * Security
-//
-//    * Bugfix
-//
-//    * Enhancement
-//
-//    * Recommended
-//
-//    * Newpackage
-//
-// Supported key: SEVERITY
-//
-// Supported values:
-//
-//    * Critical
-//
-//    * Important
-//
-//    * Medium
-//
-//    * Low
+// Defines which patches should be included in a patch baseline.
+//
+// A patch filter consists of a key and a set of values. The filter key is a
+// patch property. For example, the available filter keys for WINDOWS are PATCH_SET,
+// PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, and MSRC_SEVERITY. The filter values
+// define a matching criterion for the patch property indicated by the key.
+// For example, if the filter key is PRODUCT and the filter values are ["Office
+// 2013", "Office 2016"], then the filter accepts all patches where product
+// name is either "Office 2013" or "Office 2016". The filter values can be exact
+// values for the patch property given as a key, or a wildcard (*), which matches
+// all values.
+//
+// You can view lists of valid values for the patch properties by running the
+// DescribePatchProperties command. For information about which patch properties
+// can be used with each major operating system, see DescribePatchProperties.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchFilter
 type PatchFilter struct {
 	_ struct{} `type:"structure"`
 
 	// The key for the filter.
 	//
-	// See PatchFilter for lists of valid keys for each operating system type.
+	// Run the DescribePatchProperties command to view lists of valid keys for each
+	// operating system type.
 	//
 	// Key is a required field
 	Key PatchFilterKey `type:"string" required:"true" enum:"true"`
 
 	// The value for the filter key.
 	//
-	// See PatchFilter for lists of valid values for each key based on operating
-	// system type.
+	// Run the DescribePatchProperties command to view lists of valid values for
+	// each key based on operating system type.
 	//
 	// Values is a required field
 	Values []string `min:"1" type:"list" required:"true"`

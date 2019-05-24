@@ -11,6 +11,69 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// Describes an additional authentication provider.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/AdditionalAuthenticationProvider
+type AdditionalAuthenticationProvider struct {
+	_ struct{} `type:"structure"`
+
+	// The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.
+	AuthenticationType AuthenticationType `locationName:"authenticationType" type:"string" enum:"true"`
+
+	// The OpenID Connect configuration.
+	OpenIDConnectConfig *OpenIDConnectConfig `locationName:"openIDConnectConfig" type:"structure"`
+
+	// The Amazon Cognito user pool configuration.
+	UserPoolConfig *CognitoUserPoolConfig `locationName:"userPoolConfig" type:"structure"`
+}
+
+// String returns the string representation
+func (s AdditionalAuthenticationProvider) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AdditionalAuthenticationProvider) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AdditionalAuthenticationProvider"}
+	if s.OpenIDConnectConfig != nil {
+		if err := s.OpenIDConnectConfig.Validate(); err != nil {
+			invalidParams.AddNested("OpenIDConnectConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.UserPoolConfig != nil {
+		if err := s.UserPoolConfig.Validate(); err != nil {
+			invalidParams.AddNested("UserPoolConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AdditionalAuthenticationProvider) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AuthenticationType) > 0 {
+		v := s.AuthenticationType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "authenticationType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.OpenIDConnectConfig != nil {
+		v := s.OpenIDConnectConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "openIDConnectConfig", v, metadata)
+	}
+	if s.UserPoolConfig != nil {
+		v := s.UserPoolConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "userPoolConfig", v, metadata)
+	}
+	return nil
+}
+
 // Describes an API key.
 //
 // Customers invoke AWS AppSync GraphQL API operations with API keys as an identity
@@ -173,6 +236,72 @@ func (s AwsIamConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "signingServiceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Describes an Amazon Cognito user pool configuration.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CognitoUserPoolConfig
+type CognitoUserPoolConfig struct {
+	_ struct{} `type:"structure"`
+
+	// A regular expression for validating the incoming Amazon Cognito user pool
+	// app client ID.
+	AppIdClientRegex *string `locationName:"appIdClientRegex" type:"string"`
+
+	// The AWS Region in which the user pool was created.
+	//
+	// AwsRegion is a required field
+	AwsRegion *string `locationName:"awsRegion" type:"string" required:"true"`
+
+	// The user pool ID.
+	//
+	// UserPoolId is a required field
+	UserPoolId *string `locationName:"userPoolId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CognitoUserPoolConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CognitoUserPoolConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CognitoUserPoolConfig"}
+
+	if s.AwsRegion == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AwsRegion"))
+	}
+
+	if s.UserPoolId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CognitoUserPoolConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AppIdClientRegex != nil {
+		v := *s.AppIdClientRegex
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "appIdClientRegex", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.AwsRegion != nil {
+		v := *s.AwsRegion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "awsRegion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserPoolId != nil {
+		v := *s.UserPoolId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "userPoolId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -517,6 +646,9 @@ func (s FunctionConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 type GraphqlApi struct {
 	_ struct{} `type:"structure"`
 
+	// A list of additional authentication providers for the GraphqlApi API.
+	AdditionalAuthenticationProviders []AdditionalAuthenticationProvider `locationName:"additionalAuthenticationProviders" type:"list"`
+
 	// The API ID.
 	ApiId *string `locationName:"apiId" type:"string"`
 
@@ -535,6 +667,9 @@ type GraphqlApi struct {
 	// The OpenID Connect configuration.
 	OpenIDConnectConfig *OpenIDConnectConfig `locationName:"openIDConnectConfig" type:"structure"`
 
+	// The tags.
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
+
 	// The URIs.
 	Uris map[string]string `locationName:"uris" type:"map"`
 
@@ -549,6 +684,18 @@ func (s GraphqlApi) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GraphqlApi) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AdditionalAuthenticationProviders) > 0 {
+		v := s.AdditionalAuthenticationProviders
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "additionalAuthenticationProviders", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.ApiId != nil {
 		v := *s.ApiId
 
@@ -584,6 +731,18 @@ func (s GraphqlApi) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "openIDConnectConfig", v, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	if len(s.Uris) > 0 {
 		v := s.Uris

@@ -33,9 +33,12 @@ type CreateTransformJobInput struct {
 	Environment map[string]string `type:"map"`
 
 	// The maximum number of parallel requests that can be sent to each instance
-	// in a transform job. The default value is 1. To allow Amazon SageMaker to
-	// determine the appropriate number for MaxConcurrentTransforms, set the value
-	// to 0.
+	// in a transform job. If MaxConcurrentTransforms is set to 0 or left unset,
+	// Amazon SageMaker checks the optional execution-parameters to determine the
+	// optimal settings for your chosen algorithm. If the execution-parameters endpoint
+	// is not enabled, the default value is 1. For more information on execution-parameters,
+	// see How Containers Serve Requests (http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-batch-code.html#your-algorithms-batch-code-how-containe-serves-requests).
+	// For built-in algorithms, you don't need to set a value for MaxConcurrentTransforms.
 	MaxConcurrentTransforms *int64 `type:"integer"`
 
 	// The maximum allowed size of the payload, in MB. A payload is the data portion

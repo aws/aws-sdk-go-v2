@@ -111,9 +111,15 @@ type ClientAPI interface {
 
 	ListResolversByFunctionRequest(*appsync.ListResolversByFunctionInput) appsync.ListResolversByFunctionRequest
 
+	ListTagsForResourceRequest(*appsync.ListTagsForResourceInput) appsync.ListTagsForResourceRequest
+
 	ListTypesRequest(*appsync.ListTypesInput) appsync.ListTypesRequest
 
 	StartSchemaCreationRequest(*appsync.StartSchemaCreationInput) appsync.StartSchemaCreationRequest
+
+	TagResourceRequest(*appsync.TagResourceInput) appsync.TagResourceRequest
+
+	UntagResourceRequest(*appsync.UntagResourceInput) appsync.UntagResourceRequest
 
 	UpdateApiKeyRequest(*appsync.UpdateApiKeyInput) appsync.UpdateApiKeyRequest
 

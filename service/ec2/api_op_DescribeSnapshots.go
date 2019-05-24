@@ -23,6 +23,8 @@ type DescribeSnapshotsInput struct {
 	//
 	//    * description - A description of the snapshot.
 	//
+	//    * encrypted - Indicates whether the snapshot is encrypted (true | false)
+	//
 	//    * owner-alias - Value from an Amazon-maintained list (amazon | self |
 	//    all | aws-marketplace | microsoft) of snapshot owners. Not to be confused
 	//    with the user-configured AWS account alias, which is set from the IAM

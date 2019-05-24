@@ -71,11 +71,11 @@ const opGetKeyRotationStatus = "GetKeyRotationStatus"
 // AWS Key Management Service.
 //
 // Gets a Boolean value that indicates whether automatic rotation of the key
-// material (http://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html)
+// material (https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html)
 // is enabled for the specified customer master key (CMK).
 //
 // The result of this operation varies with the key state of the CMK. For details,
-// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// see How Key State Affects Use of a Customer Master Key (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 // in the AWS Key Management Service Developer Guide.
 //
 //    * Disabled: The key rotation status does not change when you disable a

@@ -56,8 +56,6 @@ func (s *ResetDBParameterGroupInput) Validate() error {
 	return nil
 }
 
-// Contains the result of a successful invocation of the ModifyDBParameterGroup
-// or ResetDBParameterGroup action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBParameterGroupNameMessage
 type ResetDBParameterGroupOutput struct {
 	_ struct{} `type:"structure"`

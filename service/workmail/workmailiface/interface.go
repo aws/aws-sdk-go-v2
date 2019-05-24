@@ -97,6 +97,8 @@ type ClientAPI interface {
 
 	DisassociateMemberFromGroupRequest(*workmail.DisassociateMemberFromGroupInput) workmail.DisassociateMemberFromGroupRequest
 
+	GetMailboxDetailsRequest(*workmail.GetMailboxDetailsInput) workmail.GetMailboxDetailsRequest
+
 	ListAliasesRequest(*workmail.ListAliasesInput) workmail.ListAliasesRequest
 
 	ListGroupMembersRequest(*workmail.ListGroupMembersInput) workmail.ListGroupMembersRequest
@@ -118,6 +120,8 @@ type ClientAPI interface {
 	RegisterToWorkMailRequest(*workmail.RegisterToWorkMailInput) workmail.RegisterToWorkMailRequest
 
 	ResetPasswordRequest(*workmail.ResetPasswordInput) workmail.ResetPasswordRequest
+
+	UpdateMailboxQuotaRequest(*workmail.UpdateMailboxQuotaInput) workmail.UpdateMailboxQuotaRequest
 
 	UpdatePrimaryEmailAddressRequest(*workmail.UpdatePrimaryEmailAddressInput) workmail.UpdatePrimaryEmailAddressRequest
 

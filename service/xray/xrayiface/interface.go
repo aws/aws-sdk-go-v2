@@ -85,6 +85,8 @@ type ClientAPI interface {
 
 	GetServiceGraphRequest(*xray.GetServiceGraphInput) xray.GetServiceGraphRequest
 
+	GetTimeSeriesServiceStatisticsRequest(*xray.GetTimeSeriesServiceStatisticsInput) xray.GetTimeSeriesServiceStatisticsRequest
+
 	GetTraceGraphRequest(*xray.GetTraceGraphInput) xray.GetTraceGraphRequest
 
 	GetTraceSummariesRequest(*xray.GetTraceSummariesInput) xray.GetTraceSummariesRequest

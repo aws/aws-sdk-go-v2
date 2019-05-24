@@ -51,8 +51,7 @@ type DescribeDBClusterBacktracksInput struct {
 	//
 	//    * db-cluster-backtrack-status - Accepts any of the following backtrack
 	//    status values: applying completed failed pending The results list includes
-	//    information about only the backtracks identified by these values. For
-	//    more information about backtrack status values, see DBClusterBacktrack.
+	//    information about only the backtracks identified by these values.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeDBClusterBacktracks

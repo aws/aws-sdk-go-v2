@@ -13,13 +13,13 @@ import (
 type CreateDBInstanceReadReplicaInput struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates that minor engine upgrades are applied automatically to the Read
-	// Replica during the maintenance window.
+	// A value that indicates whether minor engine upgrades are applied automatically
+	// to the Read Replica during the maintenance window.
 	//
 	// Default: Inherits from the source DB instance
 	AutoMinorVersionUpgrade *bool `type:"boolean"`
 
-	// The Amazon EC2 Availability Zone that the Read Replica is created in.
+	// The Availability Zone (AZ) where the Read Replica will be created.
 	//
 	// Default: A random, system-chosen Availability Zone in the endpoint's AWS
 	// Region.
@@ -27,8 +27,8 @@ type CreateDBInstanceReadReplicaInput struct {
 	// Example: us-east-1d
 	AvailabilityZone *string `type:"string"`
 
-	// True to copy all tags from the Read Replica to snapshots of the Read Replica,
-	// and otherwise false. The default is false.
+	// A value that indicates whether to copy all tags from the Read Replica to
+	// snapshots of the Read Replica. By default, tags are not copied.
 	CopyTagsToSnapshot *bool `type:"boolean"`
 
 	// The compute and memory capacity of the Read Replica, for example, db.m4.large.
@@ -69,9 +69,10 @@ type CreateDBInstanceReadReplicaInput struct {
 	// Example: mySubnetgroup
 	DBSubnetGroupName *string `type:"string"`
 
-	// Indicates if the DB instance should have deletion protection enabled. The
-	// database can't be deleted when this value is set to true. The default is
-	// false. For more information, see Deleting a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
+	// A value that indicates whether the DB instance has deletion protection enabled.
+	// The database can't be deleted when deletion protection is enabled. By default,
+	// deletion protection is disabled. For more information, see Deleting a DB
+	// Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
 	DeletionProtection *bool `type:"boolean"`
 
 	// DestinationRegion is used for presigning the request to a given region.
@@ -83,8 +84,8 @@ type CreateDBInstanceReadReplicaInput struct {
 	// in the Amazon RDS User Guide.
 	EnableCloudwatchLogsExports []string `type:"list"`
 
-	// True to enable mapping of AWS Identity and Access Management (IAM) accounts
-	// to database accounts, and otherwise false.
+	// A value that indicates whether to enable mapping of AWS Identity and Access
+	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
 	//
 	// You can enable IAM database authentication for the following database engines
 	//
@@ -93,11 +94,10 @@ type CreateDBInstanceReadReplicaInput struct {
 	//    * For MySQL 5.7, minor version 5.7.16 or higher
 	//
 	//    * Aurora MySQL 5.6 or higher
-	//
-	// Default: false
 	EnableIAMDatabaseAuthentication *bool `type:"boolean"`
 
-	// True to enable Performance Insights for the Read Replica, and otherwise false.
+	// A value that indicates whether to enable Performance Insights for the Read
+	// Replica.
 	//
 	// For more information, see Using Amazon Performance Insights (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
 	// in the Amazon RDS User Guide.
@@ -143,7 +143,7 @@ type CreateDBInstanceReadReplicaInput struct {
 	// a MonitoringRoleArn value.
 	MonitoringRoleArn *string `type:"string"`
 
-	// Specifies whether the Read Replica is in a Multi-AZ deployment.
+	// A value that indicates whether the Read Replica is in a Multi-AZ deployment.
 	//
 	// You can create a Read Replica as a Multi-AZ DB instance. RDS creates a standby
 	// of your replica in another Availability Zone for failover support for the
@@ -158,6 +158,11 @@ type CreateDBInstanceReadReplicaInput struct {
 	// The AWS KMS key identifier for encryption of Performance Insights data. The
 	// KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the
 	// KMS key alias for the KMS encryption key.
+	//
+	// If you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon
+	// RDS uses your default encryption key. AWS KMS creates the default encryption
+	// key for your AWS account. Your AWS account has a different default encryption
+	// key for each AWS Region.
 	PerformanceInsightsKMSKeyId *string `type:"string"`
 
 	// The amount of time, in days, to retain Performance Insights data. Valid values
@@ -215,11 +220,12 @@ type CreateDBInstanceReadReplicaInput struct {
 	// class of the DB instance.
 	ProcessorFeatures []ProcessorFeature `locationNameList:"ProcessorFeature" type:"list"`
 
-	// Specifies the accessibility options for the DB instance. A value of true
-	// specifies an Internet-facing instance with a publicly resolvable DNS name,
-	// which resolves to a public IP address. A value of false specifies an internal
-	// instance with a DNS name that resolves to a private IP address. For more
-	// information, see CreateDBInstance.
+	// A value that indicates whether the DB instance is publicly accessible. When
+	// the DB instance is publicly accessible, it is an Internet-facing instance
+	// with a publicly resolvable DNS name, which resolves to a public IP address.
+	// When the DB instance is not publicly accessible, it is an internal instance
+	// with a DNS name that resolves to a private IP address. For more information,
+	// see CreateDBInstance.
 	PubliclyAccessible *bool `type:"boolean"`
 
 	// The identifier of the DB instance that will act as the source for the Read
@@ -266,14 +272,14 @@ type CreateDBInstanceReadReplicaInput struct {
 	//
 	// If you specify io1, you must also include a value for the Iops parameter.
 	//
-	// Default: io1 if the Iops parameter is specified, otherwise standard
+	// Default: io1 if the Iops parameter is specified, otherwise gp2
 	StorageType *string `type:"string"`
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
 	// in the Amazon RDS User Guide.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 
-	// A value that specifies that the DB instance class of the DB instance uses
+	// A value that indicates whether the DB instance class of the DB instance uses
 	// its default processor features.
 	UseDefaultProcessorFeatures *bool `type:"boolean"`
 

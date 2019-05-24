@@ -97,21 +97,21 @@ const opScheduleKeyDeletion = "ScheduleKeyDeletion"
 // a CMK is deleted, all data that was encrypted under the CMK is unrecoverable.
 // To prevent the use of a CMK without deleting it, use DisableKey.
 //
-// If you schedule deletion of a CMK from a custom key store (http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html),
+// If you schedule deletion of a CMK from a custom key store (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html),
 // when the waiting period expires, ScheduleKeyDeletion deletes the CMK from
 // AWS KMS. Then AWS KMS makes a best effort to delete the key material from
 // the associated AWS CloudHSM cluster. However, you might need to manually
-// delete the orphaned key material (http://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-orphaned-key)
+// delete the orphaned key material (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-orphaned-key)
 // from the cluster and its backups.
 //
 // You cannot perform this operation on a CMK in a different AWS account.
 //
 // For more information about scheduling a CMK for deletion, see Deleting Customer
-// Master Keys (http://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html)
+// Master Keys (https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html)
 // in the AWS Key Management Service Developer Guide.
 //
 // The result of this operation varies with the key state of the CMK. For details,
-// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// see How Key State Affects Use of a Customer Master Key (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 // in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using ScheduleKeyDeletionRequest.

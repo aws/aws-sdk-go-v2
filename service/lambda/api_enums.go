@@ -79,6 +79,7 @@ const (
 	RuntimeNodejs43     Runtime = "nodejs4.3"
 	RuntimeNodejs610    Runtime = "nodejs6.10"
 	RuntimeNodejs810    Runtime = "nodejs8.10"
+	RuntimeNodejs10X    Runtime = "nodejs10.x"
 	RuntimeJava8        Runtime = "java8"
 	RuntimePython27     Runtime = "python2.7"
 	RuntimePython36     Runtime = "python3.6"

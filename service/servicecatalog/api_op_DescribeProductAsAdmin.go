@@ -54,6 +54,9 @@ func (s *DescribeProductAsAdminInput) Validate() error {
 type DescribeProductAsAdminOutput struct {
 	_ struct{} `type:"structure"`
 
+	// Information about the associated budgets.
+	Budgets []BudgetDetail `type:"list"`
+
 	// Information about the product view.
 	ProductViewDetail *ProductViewDetail `type:"structure"`
 

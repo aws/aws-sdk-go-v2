@@ -96,9 +96,10 @@ const opCreateVirtualMFADevice = "CreateVirtualMFADevice"
 // in the IAM User Guide.
 //
 // The seed information contained in the QR code and the Base32 string should
-// be treated like any other secret access information, such as your AWS access
-// keys or your passwords. After you provision your virtual device, you should
-// ensure that the information is destroyed following secure procedures.
+// be treated like any other secret access information. In other words, protect
+// the seed information as you would your AWS access keys or your passwords.
+// After you provision your virtual device, you should ensure that the information
+// is destroyed following secure procedures.
 //
 //    // Example sending a request using CreateVirtualMFADeviceRequest.
 //    req := client.CreateVirtualMFADeviceRequest(params)

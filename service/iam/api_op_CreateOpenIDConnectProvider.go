@@ -123,13 +123,13 @@ const opCreateOpenIDConnectProvider = "CreateOpenIDConnectProvider"
 //    * A list of client IDs (also known as audiences) that identify the application
 //    or applications that are allowed to authenticate using the OIDC provider
 //
-//    * A list of thumbprints of the server certificate(s) that the IdP uses.
+//    * A list of thumbprints of the server certificate(s) that the IdP uses
 //
 // You get all of this information from the OIDC IdP that you want to use to
 // access AWS.
 //
-// Because trust for the OIDC provider is derived from the IAM provider that
-// this operation creates, it is best to limit access to the CreateOpenIDConnectProvider
+// The trust for the OIDC provider is derived from the IAM provider that this
+// operation creates. Therefore, it is best to limit access to the CreateOpenIDConnectProvider
 // operation to highly privileged users.
 //
 //    // Example sending a request using CreateOpenIDConnectProviderRequest.

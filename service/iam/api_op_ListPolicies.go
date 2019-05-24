@@ -102,7 +102,7 @@ type ListPoliciesOutput struct {
 
 	// When IsTruncated is true, this element is present and contains the value
 	// to use for the Marker parameter in a subsequent pagination request.
-	Marker *string `min:"1" type:"string"`
+	Marker *string `type:"string"`
 
 	// A list of policies.
 	Policies []Policy `type:"list"`

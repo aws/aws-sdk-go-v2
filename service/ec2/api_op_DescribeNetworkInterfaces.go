@@ -102,7 +102,7 @@ type DescribeNetworkInterfacesInput struct {
 	//    managed by an AWS service (for example, AWS Management Console, Auto Scaling,
 	//    and so on).
 	//
-	//    * source-desk-check - Indicates whether the network interface performs
+	//    * source-dest-check - Indicates whether the network interface performs
 	//    source/destination checking. A value of true means checking is enabled,
 	//    and false means checking is disabled. The value must be false for the
 	//    network interface to perform network address translation (NAT) in your
@@ -130,7 +130,7 @@ type DescribeNetworkInterfacesInput struct {
 	// The maximum number of items to return for this request. The request returns
 	// a token that you can specify in a subsequent call to get the next set of
 	// results.
-	MaxResults *int64 `type:"integer"`
+	MaxResults *int64 `min:"5" type:"integer"`
 
 	// One or more network interface IDs.
 	//
@@ -144,6 +144,19 @@ type DescribeNetworkInterfacesInput struct {
 // String returns the string representation
 func (s DescribeNetworkInterfacesInput) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeNetworkInterfacesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeNetworkInterfacesInput"}
+	if s.MaxResults != nil && *s.MaxResults < 5 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Contains the output of DescribeNetworkInterfaces.

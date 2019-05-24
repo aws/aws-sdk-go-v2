@@ -1039,18 +1039,20 @@ type TargetDevice string
 
 // Enum values for TargetDevice
 const (
-	TargetDeviceMlM4      TargetDevice = "ml_m4"
-	TargetDeviceMlM5      TargetDevice = "ml_m5"
-	TargetDeviceMlC4      TargetDevice = "ml_c4"
-	TargetDeviceMlC5      TargetDevice = "ml_c5"
-	TargetDeviceMlP2      TargetDevice = "ml_p2"
-	TargetDeviceMlP3      TargetDevice = "ml_p3"
-	TargetDeviceJetsonTx1 TargetDevice = "jetson_tx1"
-	TargetDeviceJetsonTx2 TargetDevice = "jetson_tx2"
-	TargetDeviceRasp3b    TargetDevice = "rasp3b"
-	TargetDeviceDeeplens  TargetDevice = "deeplens"
-	TargetDeviceRk3399    TargetDevice = "rk3399"
-	TargetDeviceRk3288    TargetDevice = "rk3288"
+	TargetDeviceLambda     TargetDevice = "lambda"
+	TargetDeviceMlM4       TargetDevice = "ml_m4"
+	TargetDeviceMlM5       TargetDevice = "ml_m5"
+	TargetDeviceMlC4       TargetDevice = "ml_c4"
+	TargetDeviceMlC5       TargetDevice = "ml_c5"
+	TargetDeviceMlP2       TargetDevice = "ml_p2"
+	TargetDeviceMlP3       TargetDevice = "ml_p3"
+	TargetDeviceJetsonTx1  TargetDevice = "jetson_tx1"
+	TargetDeviceJetsonTx2  TargetDevice = "jetson_tx2"
+	TargetDeviceJetsonNano TargetDevice = "jetson_nano"
+	TargetDeviceRasp3b     TargetDevice = "rasp3b"
+	TargetDeviceDeeplens   TargetDevice = "deeplens"
+	TargetDeviceRk3399     TargetDevice = "rk3399"
+	TargetDeviceRk3288     TargetDevice = "rk3288"
 )
 
 func (enum TargetDevice) MarshalValue() (string, error) {

@@ -73,6 +73,10 @@ type GetGroupPolicyOutput struct {
 
 	// The policy document.
 	//
+	// IAM stores policies in JSON format. However, resources that were created
+	// using AWS CloudFormation templates can be formatted in YAML. AWS CloudFormation
+	// always converts a YAML policy to JSON format before submitting it to IAM.
+	//
 	// PolicyDocument is a required field
 	PolicyDocument *string `min:"1" type:"string" required:"true"`
 

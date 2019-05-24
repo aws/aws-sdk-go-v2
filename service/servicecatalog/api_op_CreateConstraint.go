@@ -51,7 +51,7 @@ type CreateConstraintInput struct {
 	//
 	// {"NotificationArns" : ["arn:aws:sns:us-east-1:123456789012:Topic"]}
 	//
-	// RESOUCE_UPDATE
+	// RESOURCE_UPDATE
 	//
 	// Specify the TagUpdatesOnProvisionedProduct property as follows:
 	//

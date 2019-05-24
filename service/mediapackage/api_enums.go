@@ -95,6 +95,7 @@ type SegmentTemplateFormat string
 const (
 	SegmentTemplateFormatNumberWithTimeline SegmentTemplateFormat = "NUMBER_WITH_TIMELINE"
 	SegmentTemplateFormatTimeWithTimeline   SegmentTemplateFormat = "TIME_WITH_TIMELINE"
+	SegmentTemplateFormatNumberWithDuration SegmentTemplateFormat = "NUMBER_WITH_DURATION"
 )
 
 func (enum SegmentTemplateFormat) MarshalValue() (string, error) {

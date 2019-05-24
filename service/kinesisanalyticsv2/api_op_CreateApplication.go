@@ -29,7 +29,7 @@ type CreateApplicationInput struct {
 	// application configuration errors.
 	CloudWatchLoggingOptions []CloudWatchLoggingOption `type:"list"`
 
-	// The runtime environment for the application (SQL-1.0 or JAVA-8-FLINK-1.5).
+	// The runtime environment for the application (SQL-1.0 or FLINK-1_6).
 	//
 	// RuntimeEnvironment is a required field
 	RuntimeEnvironment RuntimeEnvironment `type:"string" required:"true" enum:"true"`
@@ -39,6 +39,13 @@ type CreateApplicationInput struct {
 	//
 	// ServiceExecutionRole is a required field
 	ServiceExecutionRole *string `min:"1" type:"string" required:"true"`
+
+	// A list of one or more tags to assign to the application. A tag is a key-value
+	// pair that identifies an application. Note that the maximum number of application
+	// tags includes system tags. The maximum number of user-defined application
+	// tags is 50. For more information, see Using Cost Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+	// in the AWS Billing and Cost Management Guide.
+	Tags []Tag `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -66,6 +73,9 @@ func (s *CreateApplicationInput) Validate() error {
 	if s.ServiceExecutionRole != nil && len(*s.ServiceExecutionRole) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ServiceExecutionRole", 1))
 	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
 	if s.ApplicationConfiguration != nil {
 		if err := s.ApplicationConfiguration.Validate(); err != nil {
 			invalidParams.AddNested("ApplicationConfiguration", err.(aws.ErrInvalidParams))
@@ -75,6 +85,13 @@ func (s *CreateApplicationInput) Validate() error {
 		for i, v := range s.CloudWatchLoggingOptions {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CloudWatchLoggingOptions", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -108,10 +125,7 @@ const opCreateApplication = "CreateApplication"
 //
 // Creates an Amazon Kinesis Data Analytics application. For information about
 // creating a Kinesis Data Analytics application, see Creating an Application
-// (https://docs.aws.amazon.com/kinesisanalytics/latest/Java/creating-app.html).
-//
-// SQL is not enabled for this private beta release. Using SQL parameters (such
-// as SqlApplicationConfiguration) will result in an error.
+// (https://docs.aws.amazon.com/kinesisanalytics/latest/java/getting-started.html).
 //
 //    // Example sending a request using CreateApplicationRequest.
 //    req := client.CreateApplicationRequest(params)

@@ -97,9 +97,15 @@ type ClientAPI interface {
 
 	ListApplicationsRequest(*kinesisanalyticsv2.ListApplicationsInput) kinesisanalyticsv2.ListApplicationsRequest
 
+	ListTagsForResourceRequest(*kinesisanalyticsv2.ListTagsForResourceInput) kinesisanalyticsv2.ListTagsForResourceRequest
+
 	StartApplicationRequest(*kinesisanalyticsv2.StartApplicationInput) kinesisanalyticsv2.StartApplicationRequest
 
 	StopApplicationRequest(*kinesisanalyticsv2.StopApplicationInput) kinesisanalyticsv2.StopApplicationRequest
+
+	TagResourceRequest(*kinesisanalyticsv2.TagResourceInput) kinesisanalyticsv2.TagResourceRequest
+
+	UntagResourceRequest(*kinesisanalyticsv2.UntagResourceInput) kinesisanalyticsv2.UntagResourceRequest
 
 	UpdateApplicationRequest(*kinesisanalyticsv2.UpdateApplicationInput) kinesisanalyticsv2.UpdateApplicationRequest
 }

@@ -33,7 +33,7 @@ type UpdateDirectConnectGatewayAssociationOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about an association between a Direct Connect gateway and a virtual
-	// private gateway.
+	// private gateway or transit gateway.
 	DirectConnectGatewayAssociation *DirectConnectGatewayAssociation `locationName:"directConnectGatewayAssociation" type:"structure"`
 }
 

@@ -67,6 +67,13 @@ type DescribeSubnetsInput struct {
 	//    * vpc-id - The ID of the VPC for the subnet.
 	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	MaxResults *int64 `min:"5" type:"integer"`
+
+	// The token for the next page of results.
+	NextToken *string `type:"string"`
+
 	// One or more subnet IDs.
 	//
 	// Default: Describes all your subnets.
@@ -78,9 +85,26 @@ func (s DescribeSubnetsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeSubnetsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeSubnetsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 5 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSubnetsResult
 type DescribeSubnetsOutput struct {
 	_ struct{} `type:"structure"`
+
+	// The token to use to retrieve the next page of results. This value is null
+	// when there are no more results to return.
+	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// Information about one or more subnets.
 	Subnets []Subnet `locationName:"subnetSet" locationNameList:"item" type:"list"`
@@ -114,6 +138,12 @@ func (c *Client) DescribeSubnetsRequest(input *DescribeSubnetsInput) DescribeSub
 		Name:       opDescribeSubnets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -146,6 +176,53 @@ func (r DescribeSubnetsRequest) Send(ctx context.Context) (*DescribeSubnetsRespo
 	}
 
 	return resp, nil
+}
+
+// NewDescribeSubnetsRequestPaginator returns a paginator for DescribeSubnets.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.DescribeSubnetsRequest(input)
+//   p := ec2.NewDescribeSubnetsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewDescribeSubnetsPaginator(req DescribeSubnetsRequest) DescribeSubnetsPaginator {
+	return DescribeSubnetsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *DescribeSubnetsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// DescribeSubnetsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeSubnetsPaginator struct {
+	aws.Pager
+}
+
+func (p *DescribeSubnetsPaginator) CurrentPage() *DescribeSubnetsOutput {
+	return p.Pager.CurrentPage().(*DescribeSubnetsOutput)
 }
 
 // DescribeSubnetsResponse is the response type for the

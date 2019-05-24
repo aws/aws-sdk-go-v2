@@ -48,27 +48,10 @@ type DescribeLocationEfsOutput struct {
 	// The time that the EFS location was created.
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The subnet and the security group that the target Amazon EFS file system
-	// uses. The subnet must have at least one mount target for that file system.
-	// The security group that you provide needs to be able to communicate with
-	// the security group on the mount target in the subnet specified.
-	//
-	// The exact relationship between security group M (of the mount target) and
-	// security group S (which you provide for DataSync to use at this stage) is
-	// as follows:
-	//
-	//    * Security group M (which you associate with the mount target) must allow
-	//    inbound access for the Transmission Control Protocol (TCP) on the NFS
-	//    port (2049) from security group S. You can enable inbound connections
-	//    either by IP address (CIDR range) or security group.
-	//
-	//    * Security group S (provided to DataSync to access EFS) should have a
-	//    rule that enables outbound connections to the NFS port on one of the file
-	//    system’s mount targets. You can enable outbound connections either by
-	//    IP address (CIDR range) or security group. For information about security
-	//    groups and mount targets, see Security Groups for Amazon EC2 Instances
-	//    and Mount Targets (https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access)
-	//    in the Amazon EFS User Guide.
+	// The subnet and the security group that DataSync uses to access target EFS
+	// file system. The subnet must have at least one mount target for that file
+	// system. The security group that you provide needs to be able to communicate
+	// with the security group on the mount target in the subnet specified.
 	Ec2Config *Ec2Config `type:"structure"`
 
 	// The Amazon resource Name (ARN) of the EFS location that was described.

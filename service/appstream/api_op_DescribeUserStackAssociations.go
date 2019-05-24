@@ -28,6 +28,8 @@ type DescribeUserStackAssociationsInput struct {
 	StackName *string `min:"1" type:"string"`
 
 	// The email address of the user who is associated with the stack.
+	//
+	// Users' email addresses are case-sensitive.
 	UserName *string `min:"1" type:"string"`
 }
 
@@ -64,7 +66,7 @@ type DescribeUserStackAssociationsOutput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// The UserStackAssociation objects.
-	UserStackAssociations []UserStackAssociation `type:"list"`
+	UserStackAssociations []UserStackAssociation `min:"1" type:"list"`
 }
 
 // String returns the string representation

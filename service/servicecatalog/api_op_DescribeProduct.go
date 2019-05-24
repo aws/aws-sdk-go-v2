@@ -54,6 +54,9 @@ func (s *DescribeProductInput) Validate() error {
 type DescribeProductOutput struct {
 	_ struct{} `type:"structure"`
 
+	// Information about the associated budgets.
+	Budgets []BudgetDetail `type:"list"`
+
 	// Summary information about the product view.
 	ProductViewSummary *ProductViewSummary `type:"structure"`
 

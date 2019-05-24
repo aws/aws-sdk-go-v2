@@ -58,7 +58,7 @@ const opDeletePlatformApplication = "DeletePlatformApplication"
 //
 // Deletes a platform application object for one of the supported push notification
 // services, such as APNS and GCM. For more information, see Using Amazon SNS
-// Mobile Push Notifications (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
+// Mobile Push Notifications (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 //
 //    // Example sending a request using DeletePlatformApplicationRequest.
 //    req := client.DeletePlatformApplicationRequest(params)

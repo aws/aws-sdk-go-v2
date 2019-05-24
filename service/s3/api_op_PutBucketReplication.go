@@ -23,6 +23,8 @@ type PutBucketReplicationInput struct {
 	//
 	// ReplicationConfiguration is a required field
 	ReplicationConfiguration *ReplicationConfiguration `locationName:"ReplicationConfiguration" type:"structure" required:"true" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
+
+	Token *string `location:"header" locationName:"x-amz-bucket-object-lock-token" type:"string"`
 }
 
 // String returns the string representation
@@ -63,6 +65,12 @@ func (s *PutBucketReplicationInput) getBucket() (v string) {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PutBucketReplicationInput) MarshalFields(e protocol.FieldEncoder) error {
 
+	if s.Token != nil {
+		v := *s.Token
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-bucket-object-lock-token", protocol.StringValue(v), metadata)
+	}
 	if s.Bucket != nil {
 		v := *s.Bucket
 

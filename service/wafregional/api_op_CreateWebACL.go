@@ -26,9 +26,11 @@ type CreateWebACLInput struct {
 	// DefaultAction is a required field
 	DefaultAction *waf.WafAction `type:"structure" required:"true"`
 
-	// A friendly name or description for the metrics for this WebACL. The name
-	// can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't
-	// contain white space. You can't change MetricName after you create the WebACL.
+	// A friendly name or description for the metrics for this WebACL.The name can
+	// contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length
+	// 128 and minimum length one. It can't contain whitespace or metric names reserved
+	// for AWS WAF, including "All" and "Default_Action." You can't change MetricName
+	// after you create the WebACL.
 	//
 	// MetricName is a required field
 	MetricName *string `type:"string" required:"true"`

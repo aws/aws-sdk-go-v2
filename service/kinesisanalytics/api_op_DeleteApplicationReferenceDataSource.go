@@ -18,17 +18,18 @@ type DeleteApplicationReferenceDataSourceInput struct {
 	// ApplicationName is a required field
 	ApplicationName *string `min:"1" type:"string" required:"true"`
 
-	// Version of the application. You can use the DescribeApplication operation
-	// to get the current application version. If the version specified is not the
-	// current version, the ConcurrentModificationException is returned.
+	// Version of the application. You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+	// operation to get the current application version. If the version specified
+	// is not the current version, the ConcurrentModificationException is returned.
 	//
 	// CurrentApplicationVersionId is a required field
 	CurrentApplicationVersionId *int64 `min:"1" type:"long" required:"true"`
 
 	// ID of the reference data source. When you add a reference data source to
-	// your application using the AddApplicationReferenceDataSource, Amazon Kinesis
-	// Analytics assigns an ID. You can use the DescribeApplication operation to
-	// get the reference ID.
+	// your application using the AddApplicationReferenceDataSource (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html),
+	// Amazon Kinesis Analytics assigns an ID. You can use the DescribeApplication
+	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+	// operation to get the reference ID.
 	//
 	// ReferenceId is a required field
 	ReferenceId *string `min:"1" type:"string" required:"true"`
@@ -85,11 +86,18 @@ const opDeleteApplicationReferenceDataSource = "DeleteApplicationReferenceDataSo
 // DeleteApplicationReferenceDataSourceRequest returns a request value for making API operation for
 // Amazon Kinesis Analytics.
 //
+//
+// This documentation is for version 1 of the Amazon Kinesis Data Analytics
+// API, which only supports SQL applications. Version 2 of the API supports
+// SQL and Java applications. For more information about version 2, see Amazon
+// Kinesis Data Analytics API V2 Documentation (/kinesisanalytics/latest/apiv2/Welcome.html).
+//
 // Deletes a reference data source configuration from the specified application
 // configuration.
 //
 // If the application is running, Amazon Kinesis Analytics immediately removes
 // the in-application table that you created using the AddApplicationReferenceDataSource
+// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html)
 // operation.
 //
 // This operation requires permissions to perform the kinesisanalytics.DeleteApplicationReferenceDataSource

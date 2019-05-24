@@ -14,8 +14,9 @@ import (
 type ModifyOptionGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates whether the changes should be applied immediately, or during the
-	// next maintenance window for each instance associated with the option group.
+	// A value that indicates whether to apply the change immediately or during
+	// the next maintenance window for each instance associated with the option
+	// group.
 	ApplyImmediately *bool `type:"boolean"`
 
 	// The name of the option group to be modified.

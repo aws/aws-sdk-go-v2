@@ -76,11 +76,11 @@ const opCreateKeyPair = "CreateKeyPair"
 // private key is returned as an unencrypted PEM encoded PKCS#1 private key.
 // If a key with the specified name already exists, Amazon EC2 returns an error.
 //
-// You can have up to five thousand key pairs per region.
+// You can have up to five thousand key pairs per Region.
 //
-// The key pair returned to you is available only in the region in which you
+// The key pair returned to you is available only in the Region in which you
 // create it. If you prefer, you can create your own key pair using a third-party
-// tool and upload it to any region using ImportKeyPair.
+// tool and upload it to any Region using ImportKeyPair.
 //
 // For more information, see Key Pairs (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
 // in the Amazon Elastic Compute Cloud User Guide.

@@ -94,7 +94,7 @@ const opModifyDBClusterParameterGroup = "ModifyDBClusterParameterGroup"
 // when creating the default database for a DB cluster, such as the character
 // set for the default database defined by the character_set_database parameter.
 // You can use the Parameter Groups option of the Amazon RDS console (https://console.aws.amazon.com/rds/)
-// or the DescribeDBClusterParameters command to verify that your DB cluster
+// or the DescribeDBClusterParameters action to verify that your DB cluster
 // parameter group has been created or modified.
 //
 // This action only applies to Aurora DB clusters.

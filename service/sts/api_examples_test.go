@@ -39,7 +39,7 @@ func ExampleClient_AssumeRoleRequest_shared00() {
 	input := &sts.AssumeRoleInput{
 		DurationSeconds: aws.Int64(3600),
 		ExternalId:      aws.String("123ABC"),
-		Policy:          aws.String("{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Stmt1\",\"Effect\":\"Allow\",\"Action\":\"s3:*\",\"Resource\":\"*\"}]}"),
+		Policy:          aws.String("{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Stmt1\",\"Effect\":\"Allow\",\"Action\":\"s3:ListAllMyBuckets\",\"Resource\":\"*\"}]}"),
 		RoleArn:         aws.String("arn:aws:iam::123456789012:role/demo"),
 		RoleSessionName: aws.String("Bob"),
 	}
@@ -81,6 +81,7 @@ func ExampleClient_AssumeRoleWithWebIdentityRequest_shared00() {
 	svc := sts.New(cfg)
 	input := &sts.AssumeRoleWithWebIdentityInput{
 		DurationSeconds:  aws.Int64(3600),
+		Policy:           aws.String("{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Stmt1\",\"Effect\":\"Allow\",\"Action\":\"s3:ListAllMyBuckets\",\"Resource\":\"*\"}]}"),
 		ProviderId:       aws.String("www.amazon.com"),
 		RoleArn:          aws.String("arn:aws:iam::123456789012:role/FederatedWebIdentityRole"),
 		RoleSessionName:  aws.String("app1"),
@@ -265,7 +266,7 @@ func ExampleClient_GetFederationTokenRequest_shared00() {
 	input := &sts.GetFederationTokenInput{
 		DurationSeconds: aws.Int64(3600),
 		Name:            aws.String("Bob"),
-		Policy:          aws.String("{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Stmt1\",\"Effect\":\"Allow\",\"Action\":\"s3:*\",\"Resource\":\"*\"}]}"),
+		Policy:          aws.String("{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Stmt1\",\"Effect\":\"Allow\",\"Action\":\"s3:ListAllMyBuckets\",\"Resource\":\"*\"}]}"),
 	}
 
 	req := svc.GetFederationTokenRequest(input)

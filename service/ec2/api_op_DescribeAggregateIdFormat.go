@@ -32,9 +32,9 @@ type DescribeAggregateIdFormatOutput struct {
 	// Information about each resource's ID format.
 	Statuses []IdFormat `locationName:"statusSet" locationNameList:"item" type:"list"`
 
-	// Indicates whether all resource types in the region are configured to use
+	// Indicates whether all resource types in the Region are configured to use
 	// longer IDs. This value is only true if all users are configured to use longer
-	// IDs for all resources types in the region.
+	// IDs for all resources types in the Region.
 	UseLongIdsAggregated *bool `locationName:"useLongIdsAggregated" type:"boolean"`
 }
 
@@ -49,8 +49,8 @@ const opDescribeAggregateIdFormat = "DescribeAggregateIdFormat"
 // Amazon Elastic Compute Cloud.
 //
 // Describes the longer ID format settings for all resource types in a specific
-// region. This request is useful for performing a quick audit to determine
-// whether a specific region is fully opted in for longer IDs (17-character
+// Region. This request is useful for performing a quick audit to determine
+// whether a specific Region is fully opted in for longer IDs (17-character
 // IDs).
 //
 // This request only returns information about resource types that support longer

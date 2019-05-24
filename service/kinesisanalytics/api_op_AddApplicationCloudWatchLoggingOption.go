@@ -84,9 +84,15 @@ const opAddApplicationCloudWatchLoggingOption = "AddApplicationCloudWatchLogging
 // AddApplicationCloudWatchLoggingOptionRequest returns a request value for making API operation for
 // Amazon Kinesis Analytics.
 //
+//
+// This documentation is for version 1 of the Amazon Kinesis Data Analytics
+// API, which only supports SQL applications. Version 2 of the API supports
+// SQL and Java applications. For more information about version 2, see Amazon
+// Kinesis Data Analytics API V2 Documentation (/kinesisanalytics/latest/apiv2/Welcome.html).
+//
 // Adds a CloudWatch log stream to monitor application configuration errors.
 // For more information about using CloudWatch log streams with Amazon Kinesis
-// Analytics applications, see Working with Amazon CloudWatch Logs (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
+// Analytics applications, see Working with Amazon CloudWatch Logs (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
 //
 //    // Example sending a request using AddApplicationCloudWatchLoggingOptionRequest.
 //    req := client.AddApplicationCloudWatchLoggingOptionRequest(params)

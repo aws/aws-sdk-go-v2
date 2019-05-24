@@ -15,7 +15,7 @@ type UpdateGroupInput struct {
 	_ struct{} `type:"structure"`
 
 	// The updated filter expression defining criteria by which to group traces.
-	FilterExpression *string `min:"1" type:"string"`
+	FilterExpression *string `type:"string"`
 
 	// The ARN that was generated upon creation.
 	GroupARN *string `min:"1" type:"string"`
@@ -32,9 +32,6 @@ func (s UpdateGroupInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateGroupInput"}
-	if s.FilterExpression != nil && len(*s.FilterExpression) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FilterExpression", 1))
-	}
 	if s.GroupARN != nil && len(*s.GroupARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GroupARN", 1))
 	}

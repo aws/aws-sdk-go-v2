@@ -44,11 +44,9 @@ type CreateUserInput struct {
 
 	// The name of the user to create.
 	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-.
-	// User names are not distinguished by case. For example, you cannot create
-	// users named both "TESTUSER" and "testuser".
+	// IAM user, group, role, and policy names must be unique within the account.
+	// Names are not distinguished by case. For example, you cannot create resources
+	// named both "MyResource" and "myresource".
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`

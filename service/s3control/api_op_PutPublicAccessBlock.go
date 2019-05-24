@@ -15,15 +15,9 @@ import (
 type PutPublicAccessBlockInput struct {
 	_ struct{} `type:"structure" payload:"PublicAccessBlockConfiguration"`
 
-	// The Account ID for the Amazon Web Services account whose Public Access Block
-	// configuration you want to set.
-	//
 	// AccountId is a required field
 	AccountId *string `location:"header" locationName:"x-amz-account-id" type:"string" required:"true"`
 
-	// The Public Access Block configuration that you want to apply to this Amazon
-	// Web Services account.
-	//
 	// PublicAccessBlockConfiguration is a required field
 	PublicAccessBlockConfiguration *PublicAccessBlockConfiguration `locationName:"PublicAccessBlockConfiguration" type:"structure" required:"true" xmlURI:"http://awss3control.amazonaws.com/doc/2018-08-20/"`
 }
@@ -88,9 +82,6 @@ const opPutPublicAccessBlock = "PutPublicAccessBlock"
 
 // PutPublicAccessBlockRequest returns a request value for making API operation for
 // AWS S3 Control.
-//
-// Creates or modifies the Public Access Block configuration for an Amazon Web
-// Services account.
 //
 //    // Example sending a request using PutPublicAccessBlockRequest.
 //    req := client.PutPublicAccessBlockRequest(params)

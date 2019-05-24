@@ -62,7 +62,7 @@ type DeletePortfolioShareOutput struct {
 
 	// The portfolio share unique identifier. This will only be returned if delete
 	// is made to an organization node.
-	PortfolioShareToken *string `type:"string"`
+	PortfolioShareToken *string `min:"1" type:"string"`
 }
 
 // String returns the string representation

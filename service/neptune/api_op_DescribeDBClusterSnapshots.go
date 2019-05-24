@@ -117,8 +117,6 @@ func (s *DescribeDBClusterSnapshotsInput) Validate() error {
 	return nil
 }
 
-// Provides a list of DB cluster snapshots for the user as the result of a call
-// to the DescribeDBClusterSnapshots action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterSnapshotMessage
 type DescribeDBClusterSnapshotsOutput struct {
 	_ struct{} `type:"structure"`

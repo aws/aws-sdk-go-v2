@@ -71,7 +71,7 @@ const opGetAccessKeyLastUsed = "GetAccessKeyLastUsed"
 //
 // Retrieves information about when the specified access key was last used.
 // The information includes the date and time of last use, along with the AWS
-// service and region that were specified in the last request made with that
+// service and Region that were specified in the last request made with that
 // key.
 //
 //    // Example sending a request using GetAccessKeyLastUsedRequest.

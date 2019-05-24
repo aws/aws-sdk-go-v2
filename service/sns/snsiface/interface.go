@@ -99,6 +99,8 @@ type ClientAPI interface {
 
 	ListSubscriptionsByTopicRequest(*sns.ListSubscriptionsByTopicInput) sns.ListSubscriptionsByTopicRequest
 
+	ListTagsForResourceRequest(*sns.ListTagsForResourceInput) sns.ListTagsForResourceRequest
+
 	ListTopicsRequest(*sns.ListTopicsInput) sns.ListTopicsRequest
 
 	OptInPhoneNumberRequest(*sns.OptInPhoneNumberInput) sns.OptInPhoneNumberRequest
@@ -119,7 +121,11 @@ type ClientAPI interface {
 
 	SubscribeRequest(*sns.SubscribeInput) sns.SubscribeRequest
 
+	TagResourceRequest(*sns.TagResourceInput) sns.TagResourceRequest
+
 	UnsubscribeRequest(*sns.UnsubscribeInput) sns.UnsubscribeRequest
+
+	UntagResourceRequest(*sns.UntagResourceInput) sns.UntagResourceRequest
 }
 
 var _ ClientAPI = (*sns.Client)(nil)

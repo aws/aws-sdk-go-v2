@@ -13,8 +13,8 @@ import (
 type CreateDBClusterInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of EC2 Availability Zones that instances in the DB cluster can be
-	// created in. For information on AWS Regions and Availability Zones, see Choosing
+	// A list of Availability Zones (AZs) where instances in the DB cluster can
+	// be created. For information on AWS Regions and Availability Zones, see Choosing
 	// the Regions and Availability Zones (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html)
 	// in the Amazon Aurora User Guide.
 	AvailabilityZones []string `locationNameList:"AvailabilityZone" type:"list"`
@@ -30,8 +30,7 @@ type CreateDBClusterInput struct {
 	//    hours).
 	BacktrackWindow *int64 `type:"long"`
 
-	// The number of days for which automated backups are retained. You must specify
-	// a minimum value of 1.
+	// The number of days for which automated backups are retained.
 	//
 	// Default: 1
 	//
@@ -44,8 +43,8 @@ type CreateDBClusterInput struct {
 	// specified CharacterSet.
 	CharacterSetName *string `type:"string"`
 
-	// True to copy all tags from the DB cluster to snapshots of the DB cluster,
-	// and otherwise false. The default is false.
+	// A value that indicates whether to copy all tags from the DB cluster to snapshots
+	// of the DB cluster. The default is not to copy them.
 	CopyTagsToSnapshot *bool `type:"boolean"`
 
 	// The DB cluster identifier. This parameter is stored as a lowercase string.
@@ -85,9 +84,9 @@ type CreateDBClusterInput struct {
 	// you are creating.
 	DatabaseName *string `type:"string"`
 
-	// Indicates if the DB cluster should have deletion protection enabled. The
-	// database can't be deleted when this value is set to true. The default is
-	// false.
+	// A value that indicates whether the DB cluster has deletion protection enabled.
+	// The database can't be deleted when deletion protection is enabled. By default,
+	// deletion protection is disabled.
 	DeletionProtection *bool `type:"boolean"`
 
 	// DestinationRegion is used for presigning the request to a given region.
@@ -99,10 +98,8 @@ type CreateDBClusterInput struct {
 	// in the Amazon Aurora User Guide.
 	EnableCloudwatchLogsExports []string `type:"list"`
 
-	// True to enable mapping of AWS Identity and Access Management (IAM) accounts
-	// to database accounts, and otherwise false.
-	//
-	// Default: false
+	// A value that indicates whether to enable mapping of AWS Identity and Access
+	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
 	EnableIAMDatabaseAuthentication *bool `type:"boolean"`
 
 	// The name of the database engine to be used for this DB cluster.
@@ -145,7 +142,7 @@ type CreateDBClusterInput struct {
 	//    Amazon RDS will use the encryption key used to encrypt the source. Otherwise,
 	//    Amazon RDS will use your default encryption key.
 	//
-	//    * If the StorageEncrypted parameter is true and ReplicationSourceIdentifier
+	//    * If the StorageEncrypted parameter is enabled and ReplicationSourceIdentifier
 	//    is not specified, then Amazon RDS will use your default encryption key.
 	//
 	// AWS KMS creates the default encryption key for your AWS account. Your AWS
@@ -264,11 +261,10 @@ type CreateDBClusterInput struct {
 	// have the same region as the source ARN.
 	SourceRegion *string `type:"string" ignore:"true"`
 
-	// Specifies whether the DB cluster is encrypted.
+	// A value that indicates whether the DB cluster is encrypted.
 	StorageEncrypted *bool `type:"boolean"`
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
-	// in the Amazon RDS User Guide.
+	// Tags to assign to the DB cluster.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// A list of EC2 VPC security groups to associate with this DB cluster.

@@ -216,6 +216,23 @@ func (enum EncodingType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type GlobalEndpointTokenVersion string
+
+// Enum values for GlobalEndpointTokenVersion
+const (
+	GlobalEndpointTokenVersionV1token GlobalEndpointTokenVersion = "v1Token"
+	GlobalEndpointTokenVersionV2token GlobalEndpointTokenVersion = "v2Token"
+)
+
+func (enum GlobalEndpointTokenVersion) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GlobalEndpointTokenVersion) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type JobStatusType string
 
 // Enum values for JobStatusType
@@ -333,6 +350,7 @@ const (
 	SummaryKeyTypePolicyVersionsInUse               SummaryKeyType = "PolicyVersionsInUse"
 	SummaryKeyTypePolicyVersionsInUseQuota          SummaryKeyType = "PolicyVersionsInUseQuota"
 	SummaryKeyTypeVersionsPerPolicyQuota            SummaryKeyType = "VersionsPerPolicyQuota"
+	SummaryKeyTypeGlobalEndpointTokenVersion        SummaryKeyType = "GlobalEndpointTokenVersion"
 )
 
 func (enum SummaryKeyType) MarshalValue() (string, error) {

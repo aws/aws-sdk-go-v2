@@ -45,8 +45,7 @@ type CreateDBClusterParameterGroupInput struct {
 	// Description is a required field
 	Description *string `type:"string" required:"true"`
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
-	// in the Amazon RDS User Guide.
+	// Tags to assign to the DB cluster parameter group.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 
@@ -121,7 +120,7 @@ const opCreateDBClusterParameterGroup = "CreateDBClusterParameterGroup"
 // character set for the default database defined by the character_set_database
 // parameter. You can use the Parameter Groups option of the Amazon RDS console
 // (https://console.aws.amazon.com/rds/) or the DescribeDBClusterParameters
-// command to verify that your DB cluster parameter group has been created or
+// action to verify that your DB cluster parameter group has been created or
 // modified.
 //
 // For more information on Amazon Aurora, see What Is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)

@@ -35,6 +35,20 @@ func (s AccessLevelFilter) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Information about a budget.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/BudgetDetail
+type BudgetDetail struct {
+	_ struct{} `type:"structure"`
+
+	// Name of the associated budget.
+	BudgetName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s BudgetDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Information about a CloudWatch dashboard.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CloudWatchDashboard
 type CloudWatchDashboard struct {
@@ -754,6 +768,10 @@ type ProvisioningArtifactProperties struct {
 	// The description of the provisioning artifact, including how it differs from
 	// the previous provisioning artifact.
 	Description *string `type:"string"`
+
+	// If set to true, AWS Service Catalog stops validating the specified provisioning
+	// artifact even if it is invalid.
+	DisableTemplateValidation *bool `type:"boolean"`
 
 	// The URL of the CloudFormation template in Amazon S3. Specify the URL in JSON
 	// format as follows:

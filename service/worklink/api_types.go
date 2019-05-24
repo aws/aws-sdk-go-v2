@@ -184,6 +184,61 @@ func (s FleetSummary) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The summary of the website authorization provider.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/WebsiteAuthorizationProviderSummary
+type WebsiteAuthorizationProviderSummary struct {
+	_ struct{} `type:"structure"`
+
+	// A unique identifier for the authorization provider.
+	AuthorizationProviderId *string `min:"1" type:"string"`
+
+	// The authorization provider type.
+	//
+	// AuthorizationProviderType is a required field
+	AuthorizationProviderType AuthorizationProviderType `type:"string" required:"true" enum:"true"`
+
+	// The time of creation.
+	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The domain name of the authorization provider. This applies only to SAML-based
+	// authorization providers.
+	DomainName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s WebsiteAuthorizationProviderSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s WebsiteAuthorizationProviderSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AuthorizationProviderId != nil {
+		v := *s.AuthorizationProviderId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AuthorizationProviderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.AuthorizationProviderType) > 0 {
+		v := s.AuthorizationProviderType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AuthorizationProviderType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.CreatedTime != nil {
+		v := *s.CreatedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The summary of the certificate authority (CA).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/WebsiteCaSummary
 type WebsiteCaSummary struct {

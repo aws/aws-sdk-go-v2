@@ -139,35 +139,7 @@ type CreateDBClusterInput struct {
 	// Default: 8182
 	Port *int64 `type:"integer"`
 
-	// A URL that contains a Signature Version 4 signed request for the CreateDBCluster
-	// action to be called in the source AWS Region where the DB cluster is replicated
-	// from. You only need to specify PreSignedUrl when you are performing cross-region
-	// replication from an encrypted DB cluster.
-	//
-	// The pre-signed URL must be a valid request for the CreateDBCluster API action
-	// that can be executed in the source AWS Region that contains the encrypted
-	// DB cluster to be copied.
-	//
-	// The pre-signed URL request must contain the following parameter values:
-	//
-	//    * KmsKeyId - The AWS KMS key identifier for the key to use to encrypt
-	//    the copy of the DB cluster in the destination AWS Region. This should
-	//    refer to the same KMS key for both the CreateDBCluster action that is
-	//    called in the destination AWS Region, and the action contained in the
-	//    pre-signed URL.
-	//
-	//    * DestinationRegion - The name of the AWS Region that Read Replica will
-	//    be created in.
-	//
-	//    * ReplicationSourceIdentifier - The DB cluster identifier for the encrypted
-	//    DB cluster to be copied. This identifier must be in the Amazon Resource
-	//    Name (ARN) format for the source AWS Region. For example, if you are copying
-	//    an encrypted DB cluster from the us-west-2 AWS Region, then your ReplicationSourceIdentifier
-	//    would look like Example: arn:aws:rds:us-west-2:123456789012:cluster:neptune-cluster1.
-	//
-	// To learn how to generate a Signature Version 4 signed request, see Authenticating
-	// Requests: Using Query Parameters (AWS Signature Version 4) (http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
-	// and Signature Version 4 Signing Process (http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+	// This parameter is not currently supported.
 	PreSignedUrl *string `type:"string"`
 
 	// The daily time range during which automated backups are created if automated
@@ -175,7 +147,7 @@ type CreateDBClusterInput struct {
 	//
 	// The default is a 30-minute window selected at random from an 8-hour block
 	// of time for each AWS Region. To see the time blocks available, see Adjusting
-	// the Preferred Maintenance Window (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html)
+	// the Preferred Maintenance Window (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html)
 	// in the Amazon Neptune User Guide.
 	//
 	// Constraints:
@@ -197,7 +169,7 @@ type CreateDBClusterInput struct {
 	// The default is a 30-minute window selected at random from an 8-hour block
 	// of time for each AWS Region, occurring on a random day of the week. To see
 	// the time blocks available, see Adjusting the Preferred Maintenance Window
-	// (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html)
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html)
 	// in the Amazon Neptune User Guide.
 	//
 	// Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
@@ -212,8 +184,7 @@ type CreateDBClusterInput struct {
 	// Specifies whether the DB cluster is encrypted.
 	StorageEncrypted *bool `type:"boolean"`
 
-	// A list of tags. For more information, see Tagging Amazon Neptune Resources
-	// (http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html).
+	// The tags to assign to the new DB cluster.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// A list of EC2 VPC security groups to associate with this DB cluster.
@@ -266,9 +237,7 @@ const opCreateDBCluster = "CreateDBCluster"
 // Creates a new Amazon Neptune DB cluster.
 //
 // You can use the ReplicationSourceIdentifier parameter to create the DB cluster
-// as a Read Replica of another DB cluster or Amazon Neptune DB instance. For
-// cross-region replication where the DB cluster identified by ReplicationSourceIdentifier
-// is encrypted, you must also specify the PreSignedUrl parameter.
+// as a Read Replica of another DB cluster or Amazon Neptune DB instance.
 //
 //    // Example sending a request using CreateDBClusterRequest.
 //    req := client.CreateDBClusterRequest(params)

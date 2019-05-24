@@ -13,7 +13,7 @@ import (
 type DescribeBundleTasksInput struct {
 	_ struct{} `type:"structure"`
 
-	// One or more bundle task IDs.
+	// The bundle task IDs.
 	//
 	// Default: Describes all your bundle tasks.
 	BundleIds []string `locationName:"BundleId" locationNameList:"BundleId" type:"list"`
@@ -24,7 +24,7 @@ type DescribeBundleTasksInput struct {
 	// it is UnauthorizedOperation.
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
-	// One or more filters.
+	// The filters.
 	//
 	//    * bundle-id - The ID of the bundle task.
 	//

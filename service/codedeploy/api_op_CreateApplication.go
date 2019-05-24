@@ -20,8 +20,13 @@ type CreateApplicationInput struct {
 	// ApplicationName is a required field
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
 
-	// The destination platform type for the deployment (Lambda or Server).
+	// The destination platform type for the deployment (Lambda, Server, or ECS).
 	ComputePlatform ComputePlatform `locationName:"computePlatform" type:"string" enum:"true"`
+
+	// The metadata that you apply to CodeDeploy applications to help you organize
+	// and categorize them. Each tag consists of a key and an optional value, both
+	// of which you define.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation

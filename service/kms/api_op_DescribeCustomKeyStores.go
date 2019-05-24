@@ -82,7 +82,7 @@ type DescribeCustomKeyStoresOutput struct {
 
 	// A flag that indicates whether there are more items in the list. When this
 	// value is true, the list in this response is truncated. To get more items,
-	// pass the value of the NextMarker element in this response to the Marker parameter
+	// pass the value of the NextMarker element in thisresponse to the Marker parameter
 	// in a subsequent request.
 	Truncated *bool `type:"boolean"`
 }
@@ -97,10 +97,10 @@ const opDescribeCustomKeyStores = "DescribeCustomKeyStores"
 // DescribeCustomKeyStoresRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Gets information about custom key stores (http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html)
+// Gets information about custom key stores (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 // in the account and region.
 //
-// This operation is part of the Custom Key Store feature (http://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
+// This operation is part of the Custom Key Store feature (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 // feature in AWS KMS, which combines the convenience and extensive integration
 // of AWS KMS with the isolation and control of a single-tenant key store.
 //
@@ -122,7 +122,7 @@ const opDescribeCustomKeyStores = "DescribeCustomKeyStores"
 // and contains the minimum number of HSMs required for the operation, if any.
 //
 // For help repairing your custom key store, see the Troubleshooting Custom
-// Key Stores (http://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore-html)
+// Key Stores (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html)
 // topic in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using DescribeCustomKeyStoresRequest.
