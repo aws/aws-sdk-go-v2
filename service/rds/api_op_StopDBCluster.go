@@ -65,7 +65,7 @@ const opStopDBCluster = "StopDBCluster"
 // Aurora also retains the transaction logs so you can do a point-in-time restore
 // if necessary.
 //
-// For more information, see  Stopping and Starting an Aurora Cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html)
+// For more information, see Stopping and Starting an Aurora Cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html)
 // in the Amazon Aurora User Guide.
 //
 // This action only applies to Aurora DB clusters.

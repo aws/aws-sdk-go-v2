@@ -142,7 +142,7 @@ const opListVaults = "ListVaults"
 //
 // For conceptual information and underlying REST API, see Retrieving Vault
 // Metadata in Amazon Glacier (http://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html)
-// and List Vaults  (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vaults-get.html)
+// and List Vaults (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vaults-get.html)
 // in the Amazon Glacier Developer Guide.
 //
 //    // Example sending a request using ListVaultsRequest.

@@ -217,7 +217,7 @@ type ModifyDBInstanceInput struct {
 
 	// Indicates if the DB instance has deletion protection enabled. The database
 	// can't be deleted when this value is set to true. For more information, see
-	//  Deleting a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
+	// Deleting a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
 	DeletionProtection *bool `type:"boolean"`
 
 	// The Active Directory Domain to move the instance to. Specify none to remove
@@ -450,7 +450,7 @@ type ModifyDBInstanceInput struct {
 
 	// A value that specifies the order in which an Aurora Replica is promoted to
 	// the primary instance after a failure of the existing primary instance. For
-	// more information, see  Fault Tolerance for an Aurora DB Cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance)
+	// more information, see Fault Tolerance for an Aurora DB Cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance)
 	// in the Amazon Aurora User Guide.
 	//
 	// Default: 1

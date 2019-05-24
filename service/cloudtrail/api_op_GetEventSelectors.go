@@ -87,8 +87,7 @@ const opGetEventSelectors = "GetEventSelectors"
 //    * If your event selector includes data events, the Amazon S3 objects or
 //    AWS Lambda functions that you are logging for data events.
 //
-// For more information, see Logging Data and Management Events for Trails
-// (http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html)
+// For more information, see Logging Data and Management Events for Trails (http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html)
 // in the AWS CloudTrail User Guide.
 //
 //    // Example sending a request using GetEventSelectorsRequest.

@@ -148,17 +148,9 @@ const opCreateBackupSelection = "CreateBackupSelection"
 //
 //    * Resources: "arn:aws:ec2:region:account-id:volume/volume-id"
 //
-//    * ConditionKey:"department"
+//    * ConditionKey:"department" ConditionValue:"finance" ConditionType:"StringEquals"
 //
-// ConditionValue:"finance"
-//
-// ConditionType:"StringEquals"
-//
-//    * ConditionKey:"importance"
-//
-// ConditionValue:"critical"
-//
-// ConditionType:"StringEquals"
+//    * ConditionKey:"importance" ConditionValue:"critical" ConditionType:"StringEquals"
 //
 // Using these patterns would back up all Amazon Elastic Block Store (Amazon
 // EBS) volumes that are tagged as "department=finance", "importance=critical",

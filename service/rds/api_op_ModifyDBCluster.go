@@ -75,6 +75,7 @@ type ModifyDBClusterInput struct {
 	// can't be deleted when this value is set to true.
 	DeletionProtection *bool `type:"boolean"`
 
+	//
 	// HTTP endpoint functionality is in beta for Aurora Serverless and is subject
 	// to change.
 	//
@@ -146,7 +147,7 @@ type ModifyDBClusterInput struct {
 	// backups are enabled, using the BackupRetentionPeriod parameter.
 	//
 	// The default is a 30-minute window selected at random from an 8-hour block
-	// of time for each AWS Region. To see the time blocks available, see  Adjusting
+	// of time for each AWS Region. To see the time blocks available, see Adjusting
 	// the Preferred DB Cluster Maintenance Window (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora)
 	// in the Amazon Aurora User Guide.
 	//
@@ -168,7 +169,7 @@ type ModifyDBClusterInput struct {
 	//
 	// The default is a 30-minute window selected at random from an 8-hour block
 	// of time for each AWS Region, occurring on a random day of the week. To see
-	// the time blocks available, see  Adjusting the Preferred DB Cluster Maintenance
+	// the time blocks available, see Adjusting the Preferred DB Cluster Maintenance
 	// Window (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora)
 	// in the Amazon Aurora User Guide.
 	//
@@ -227,7 +228,7 @@ const opModifyDBCluster = "ModifyDBCluster"
 //
 // Modify a setting for an Amazon Aurora DB cluster. You can change one or more
 // database configuration parameters by specifying these parameters and the
-// new values in the request. For more information on Amazon Aurora, see  What
+// new values in the request. For more information on Amazon Aurora, see What
 // Is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide.
 //

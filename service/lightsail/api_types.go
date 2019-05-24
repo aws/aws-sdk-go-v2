@@ -580,24 +580,16 @@ type HostKeyAttributes struct {
 
 	// The SHA-1 fingerprint of the returned SSH host key or RDP certificate.
 	//
-	//    * Example of an SHA-1 SSH fingerprint:
+	//    * Example of an SHA-1 SSH fingerprint: SHA1:1CHH6FaAaXjtFOsR/t83vf91SR0
 	//
-	// SHA1:1CHH6FaAaXjtFOsR/t83vf91SR0
-	//
-	//    * Example of an SHA-1 RDP fingerprint:
-	//
-	// af:34:51:fe:09:f0:e0:da:b8:4e:56:ca:60:c2:10:ff:38:06:db:45
+	//    * Example of an SHA-1 RDP fingerprint: af:34:51:fe:09:f0:e0:da:b8:4e:56:ca:60:c2:10:ff:38:06:db:45
 	FingerprintSHA1 *string `locationName:"fingerprintSHA1" type:"string"`
 
 	// The SHA-256 fingerprint of the returned SSH host key or RDP certificate.
 	//
-	//    * Example of an SHA-256 SSH fingerprint:
+	//    * Example of an SHA-256 SSH fingerprint: SHA256:KTsMnRBh1IhD17HpdfsbzeGA4jOijm5tyXsMjKVbB8o
 	//
-	// SHA256:KTsMnRBh1IhD17HpdfsbzeGA4jOijm5tyXsMjKVbB8o
-	//
-	//    * Example of an SHA-256 RDP fingerprint:
-	//
-	// 03:9b:36:9f:4b:de:4e:61:70:fc:7c:c9:78:e7:d2:1a:1c:25:a8:0c:91:f6:7c:e4:d6:a0:85:c8:b4:53:99:68
+	//    * Example of an SHA-256 RDP fingerprint: 03:9b:36:9f:4b:de:4e:61:70:fc:7c:c9:78:e7:d2:1a:1c:25:a8:0c:91:f6:7c:e4:d6:a0:85:c8:b4:53:99:68
 	FingerprintSHA256 *string `locationName:"fingerprintSHA256" type:"string"`
 
 	// The returned RDP certificate is not valid after this point in time.

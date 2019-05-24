@@ -56,9 +56,10 @@ const opDeleteDomain = "DeleteDomain"
 // The DeleteDomain operation deletes a domain. Any items (and their attributes)
 // in the domain are deleted as well. The DeleteDomain operation might take
 // 10 or more seconds to complete.
-//
-// Running DeleteDomain on a domain that does not exist or running the function
-// multiple times using the same domain name will not result in an error response.
+//   Running
+//    DeleteDomain
+//  on a domain that does not exist or running the function multiple times using
+//  the same domain name will not result in an error response.
 //
 //    // Example sending a request using DeleteDomainRequest.
 //    req := client.DeleteDomainRequest(params)

@@ -43,10 +43,12 @@ type AdminLinkProviderForUserInput struct {
 	// respectively. The ProviderAttributeValue for the user must be the same value
 	// as the id, sub, or user_id value found in the social identity provider token.
 	//
-	// For SAML, the ProviderAttributeNamecan be any value that matches a claim in the SAML assertion. If you wish
-	// to link SAML users based on the subject of the SAML assertion, you should
-	// map the subject to a claim through the SAML identity provider and submit
-	// that claim name as the ProviderAttributeName. If you set ProviderAttributeNameto Cognito_Subject
+	// For SAML, the ProviderAttributeName can be any value that matches a claim
+	// in the SAML assertion. If you wish to link SAML users based on the subject
+	// of the SAML assertion, you should map the subject to a claim through the
+	// SAML identity provider and submit that claim name as the ProviderAttributeName.
+	// If you set ProviderAttributeName to Cognito_Subject, Cognito will automatically
+	// parse the default unique identifier found in the subject from the SAML token.
 	//
 	// SourceUser is a required field
 	SourceUser *ProviderUserIdentifierType `type:"structure" required:"true"`

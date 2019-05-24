@@ -70,6 +70,7 @@ const opBatchGetDeploymentInstances = "BatchGetDeploymentInstances"
 // BatchGetDeploymentInstancesRequest returns a request value for making API operation for
 // AWS CodeDeploy.
 //
+//
 // This method works, but is deprecated. Use BatchGetDeploymentTargets instead.
 //
 // Returns an array of instances associated with a deployment. This method works

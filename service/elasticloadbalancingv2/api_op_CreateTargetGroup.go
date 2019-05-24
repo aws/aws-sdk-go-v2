@@ -19,10 +19,10 @@ type CreateTargetGroupInput struct {
 	HealthCheckEnabled *bool `type:"boolean"`
 
 	// The approximate amount of time, in seconds, between health checks of an individual
-	// target. For Application Load Balancers, the range is 5–300 seconds. For Network
-	// Load Balancers, the supported values are 10 or 30 seconds. If the target
-	// type is instance or ip, the default is 30 seconds. If the target type is
-	// lambda, the default is 35 seconds.
+	// target. For Application Load Balancers, the range is 5–300 seconds. For
+	// Network Load Balancers, the supported values are 10 or 30 seconds. If the
+	// target type is instance or ip, the default is 30 seconds. If the target type
+	// is lambda, the default is 35 seconds.
 	HealthCheckIntervalSeconds *int64 `min:"5" type:"integer"`
 
 	// [HTTP/HTTPS health checks] The ping path that is the destination on the targets

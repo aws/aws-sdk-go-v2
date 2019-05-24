@@ -67,23 +67,17 @@ type CreateDBInstanceInput struct {
 	//
 	// Constraints to the amount of storage for each storage type are the following:
 	//
-	//    * General Purpose (SSD) storage (gp2):
+	//    * General Purpose (SSD) storage (gp2): Enterprise and Standard editions:
+	//    Must be an integer from 200 to 16384. Web and Express editions: Must be
+	//    an integer from 20 to 16384.
 	//
-	// Enterprise and Standard editions: Must be an integer from 200 to 16384.
+	//    * Provisioned IOPS storage (io1): Enterprise and Standard editions: Must
+	//    be an integer from 200 to 16384. Web and Express editions: Must be an
+	//    integer from 100 to 16384.
 	//
-	// Web and Express editions: Must be an integer from 20 to 16384.
-	//
-	//    * Provisioned IOPS storage (io1):
-	//
-	// Enterprise and Standard editions: Must be an integer from 200 to 16384.
-	//
-	// Web and Express editions: Must be an integer from 100 to 16384.
-	//
-	//    * Magnetic storage (standard):
-	//
-	// Enterprise and Standard editions: Must be an integer from 200 to 1024.
-	//
-	// Web and Express editions: Must be an integer from 20 to 1024.
+	//    * Magnetic storage (standard): Enterprise and Standard editions: Must
+	//    be an integer from 200 to 1024. Web and Express editions: Must be an integer
+	//    from 20 to 1024.
 	AllocatedStorage *int64 `type:"integer"`
 
 	// Indicates that minor engine upgrades are applied automatically to the DB
@@ -270,7 +264,7 @@ type CreateDBInstanceInput struct {
 
 	// Indicates if the DB instance should have deletion protection enabled. The
 	// database can't be deleted when this value is set to true. The default is
-	// false. For more information, see  Deleting a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
+	// false. For more information, see Deleting a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
 	DeletionProtection *bool `type:"boolean"`
 
 	// Specify the Active Directory Domain to create the instance in.
@@ -282,7 +276,7 @@ type CreateDBInstanceInput struct {
 
 	// The list of log types that need to be enabled for exporting to CloudWatch
 	// Logs. The values in the list depend on the DB engine being used. For more
-	// information, see Publishing Database Logs to Amazon CloudWatch Logs  (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
+	// information, see Publishing Database Logs to Amazon CloudWatch Logs (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon Relational Database Service User Guide.
 	EnableCloudwatchLogsExports []string `type:"list"`
 
@@ -616,7 +610,7 @@ type CreateDBInstanceInput struct {
 	// by the DB cluster. For more information, see CreateDBCluster.
 	//
 	// The default is a 30-minute window selected at random from an 8-hour block
-	// of time for each AWS Region. To see the time blocks available, see  Adjusting
+	// of time for each AWS Region. To see the time blocks available, see Adjusting
 	// the Preferred DB Instance Maintenance Window (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow)
 	// in the Amazon RDS User Guide.
 	//
@@ -651,7 +645,7 @@ type CreateDBInstanceInput struct {
 
 	// A value that specifies the order in which an Aurora Replica is promoted to
 	// the primary instance after a failure of the existing primary instance. For
-	// more information, see  Fault Tolerance for an Aurora DB Cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance)
+	// more information, see Fault Tolerance for an Aurora DB Cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance)
 	// in the Amazon Aurora User Guide.
 	//
 	// Default: 1

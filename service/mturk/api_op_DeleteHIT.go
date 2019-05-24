@@ -66,15 +66,15 @@ const opDeleteHIT = "DeleteHIT"
 // HIT that is Reviewable but without all of its submitted assignments already
 // approved or rejected, the service will return an error.
 //
-// HITs are automatically disposed of after 120 days.
+//    * HITs are automatically disposed of after 120 days.
 //
-//  After you dispose of a HIT, you can no longer approve the HIT's rejected
-// assignments.
+//    * After you dispose of a HIT, you can no longer approve the HIT's rejected
+//    assignments.
 //
-//  Disposed HITs are not returned in results for the ListHITs operation.
+//    * Disposed HITs are not returned in results for the ListHITs operation.
 //
-//  Disposing HITs can improve the performance of operations such as ListReviewableHITs
-// and ListHITs.
+//    * Disposing HITs can improve the performance of operations such as ListReviewableHITs
+//    and ListHITs.
 //
 //    // Example sending a request using DeleteHITRequest.
 //    req := client.DeleteHITRequest(params)

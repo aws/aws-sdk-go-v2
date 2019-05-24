@@ -326,24 +326,17 @@ type SendMessageBatchRequestEntry struct {
 	// The token used for deduplication of messages within a 5-minute minimum deduplication
 	// interval. If a message with a particular MessageDeduplicationId is sent successfully,
 	// subsequent messages with the same MessageDeduplicationId are accepted successfully
-	// but aren't delivered. For more information, see  Exactly-Once Processing
-	// (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing)
+	// but aren't delivered. For more information, see Exactly-Once Processing (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing)
 	// in the Amazon Simple Queue Service Developer Guide.
 	//
-	//    * Every message must have a unique MessageDeduplicationId,
-	//
-	// You may provide a MessageDeduplicationId explicitly.
-	//
-	// If you aren't able to provide a MessageDeduplicationId and you enable ContentBasedDeduplication
-	//    for your queue, Amazon SQS uses a SHA-256 hash to generate the MessageDeduplicationId
-	//    using the body of the message (but not the attributes of the message).
-	//
-	//
-	// If you don't provide a MessageDeduplicationId and the queue doesn't have
-	//    ContentBasedDeduplication set, the action fails with an error.
-	//
-	// If the queue has ContentBasedDeduplication set, your MessageDeduplicationId
-	//    overrides the generated one.
+	//    * Every message must have a unique MessageDeduplicationId, You may provide
+	//    a MessageDeduplicationId explicitly. If you aren't able to provide a MessageDeduplicationId
+	//    and you enable ContentBasedDeduplication for your queue, Amazon SQS uses
+	//    a SHA-256 hash to generate the MessageDeduplicationId using the body of
+	//    the message (but not the attributes of the message). If you don't provide
+	//    a MessageDeduplicationId and the queue doesn't have ContentBasedDeduplication
+	//    set, the action fails with an error. If the queue has ContentBasedDeduplication
+	//    set, your MessageDeduplicationId overrides the generated one.
 	//
 	//    * When ContentBasedDeduplication is in effect, messages with identical
 	//    content sent within the deduplication interval are treated as duplicates

@@ -68,7 +68,7 @@ const opDescribeJobFlows = "DescribeJobFlows"
 //
 //    * Job flows created and completed in the last two weeks
 //
-//    *  Job flows created within the last two months that are in one of the
+//    * Job flows created within the last two months that are in one of the
 //    following states: RUNNING, WAITING, SHUTTING_DOWN, STARTING
 //
 // Amazon EMR can return a maximum of 512 job flow descriptions.

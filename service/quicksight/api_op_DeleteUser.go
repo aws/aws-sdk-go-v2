@@ -126,8 +126,7 @@ const opDeleteUser = "DeleteUser"
 // the AWS Identity and Access Management (IAM) user or role that's making the
 // call. The IAM user isn't deleted as a result of this call.
 //
-// The permission resource is arn:aws:quicksight:us-east-1:<aws-account-id>:user/default/<user-name>
-// .
+// The permission resource is arn:aws:quicksight:us-east-1:<aws-account-id>:user/default/<user-name> .
 //
 // CLI Sample:
 //

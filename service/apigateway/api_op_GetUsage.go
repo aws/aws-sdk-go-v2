@@ -112,7 +112,8 @@ func (s GetUsageInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // Represents the usage data of a usage plan.
 //
-// Create and Use Usage Plans (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html), Manage Usage in a Usage Plan (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-create-usage-plans-with-console.html#api-gateway-usage-plan-manage-usage)
+// Create and Use Usage Plans (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html),
+// Manage Usage in a Usage Plan (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-create-usage-plans-with-console.html#api-gateway-usage-plan-manage-usage)
 type GetUsageOutput struct {
 	_ struct{} `type:"structure"`
 

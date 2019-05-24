@@ -24,13 +24,11 @@ type UpdateItemInput struct {
 	// An expression can contain any of the following:
 	//
 	//    * Functions: attribute_exists | attribute_not_exists | attribute_type
-	//    | contains | begins_with | size
-	//
-	// These function names are case-sensitive.
+	//    | contains | begins_with | size These function names are case-sensitive.
 	//
 	//    * Comparison operators: = | <> | < | > | <= | >= | BETWEEN | IN
 	//
-	//    *  Logical operators: AND | OR | NOT
+	//    * Logical operators: AND | OR | NOT
 	//
 	// For more information on condition expressions, see Specifying Conditions
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
@@ -122,11 +120,9 @@ type UpdateItemInput struct {
 	//
 	//    * INDEXES - The response includes the aggregate ConsumedCapacity for the
 	//    operation, together with ConsumedCapacity for each table and secondary
-	//    index that was accessed.
-	//
-	// Note that some operations, such as GetItem and BatchGetItem, do not access
-	//    any indexes at all. In these cases, specifying INDEXES will only return
-	//    ConsumedCapacity information for table(s).
+	//    index that was accessed. Note that some operations, such as GetItem and
+	//    BatchGetItem, do not access any indexes at all. In these cases, specifying
+	//    INDEXES will only return ConsumedCapacity information for table(s).
 	//
 	//    * TOTAL - The response includes only the aggregate ConsumedCapacity for
 	//    the operation.
@@ -178,64 +174,48 @@ type UpdateItemInput struct {
 	//    * SET - Adds one or more attributes and values to an item. If any of these
 	//    attribute already exist, they are replaced by the new values. You can
 	//    also use SET to add or subtract from an attribute that is of type Number.
-	//    For example: SET myNum = myNum + :val
-	//
-	// SET supports the following functions:
-	//
-	// if_not_exists (path, operand) - if the item does not contain an attribute
+	//    For example: SET myNum = myNum + :val SET supports the following functions:
+	//    if_not_exists (path, operand) - if the item does not contain an attribute
 	//    at the specified path, then if_not_exists evaluates to operand; otherwise,
 	//    it evaluates to path. You can use this function to avoid overwriting an
-	//    attribute that may already be present in the item.
-	//
-	// list_append (operand, operand) - evaluates to a list with a new element added
-	//    to it. You can append the new element to the start or the end of the list
-	//    by reversing the order of the operands.
-	//
-	// These function names are case-sensitive.
+	//    attribute that may already be present in the item. list_append (operand,
+	//    operand) - evaluates to a list with a new element added to it. You can
+	//    append the new element to the start or the end of the list by reversing
+	//    the order of the operands. These function names are case-sensitive.
 	//
 	//    * REMOVE - Removes one or more attributes from an item.
 	//
 	//    * ADD - Adds the specified value to the item, if the attribute does not
 	//    already exist. If the attribute does exist, then the behavior of ADD depends
-	//    on the data type of the attribute:
+	//    on the data type of the attribute: If the existing attribute is a number,
+	//    and if Value is also a number, then Value is mathematically added to the
+	//    existing attribute. If Value is a negative number, then it is subtracted
+	//    from the existing attribute. If you use ADD to increment or decrement
+	//    a number value for an item that doesn't exist before the update, DynamoDB
+	//    uses 0 as the initial value. Similarly, if you use ADD for an existing
+	//    item to increment or decrement an attribute value that doesn't exist before
+	//    the update, DynamoDB uses 0 as the initial value. For example, suppose
+	//    that the item you want to update doesn't have an attribute named itemcount,
+	//    but you decide to ADD the number 3 to this attribute anyway. DynamoDB
+	//    will create the itemcount attribute, set its initial value to 0, and finally
+	//    add 3 to it. The result will be a new itemcount attribute in the item,
+	//    with a value of 3. If the existing data type is a set and if Value is
+	//    also a set, then Value is added to the existing set. For example, if the
+	//    attribute value is the set [1,2], and the ADD action specified [3], then
+	//    the final attribute value is [1,2,3]. An error occurs if an ADD action
+	//    is specified for a set attribute and the attribute type specified does
+	//    not match the existing set type. Both sets must have the same primitive
+	//    data type. For example, if the existing data type is a set of strings,
+	//    the Value must also be a set of strings. The ADD action only supports
+	//    Number and set data types. In addition, ADD can only be used on top-level
+	//    attributes, not nested attributes.
 	//
-	// If the existing attribute is a number, and if Value is also a number, then
-	//    Value is mathematically added to the existing attribute. If Value is a
-	//    negative number, then it is subtracted from the existing attribute.
-	//
-	// If you use ADD to increment or decrement a number value for an item that
-	//    doesn't exist before the update, DynamoDB uses 0 as the initial value.
-	//
-	// Similarly, if you use ADD for an existing item to increment or decrement
-	//    an attribute value that doesn't exist before the update, DynamoDB uses
-	//    0 as the initial value. For example, suppose that the item you want to
-	//    update doesn't have an attribute named itemcount, but you decide to ADD
-	//    the number 3 to this attribute anyway. DynamoDB will create the itemcount
-	//    attribute, set its initial value to 0, and finally add 3 to it. The result
-	//    will be a new itemcount attribute in the item, with a value of 3.
-	//
-	// If the existing data type is a set and if Value is also a set, then Value
-	//    is added to the existing set. For example, if the attribute value is the
-	//    set [1,2], and the ADD action specified [3], then the final attribute
-	//    value is [1,2,3]. An error occurs if an ADD action is specified for a
-	//    set attribute and the attribute type specified does not match the existing
-	//    set type.
-	//
-	// Both sets must have the same primitive data type. For example, if the existing
-	//    data type is a set of strings, the Value must also be a set of strings.
-	//
-	// The ADD action only supports Number and set data types. In addition, ADD
-	//    can only be used on top-level attributes, not nested attributes.
-	//
-	//    * DELETE - Deletes an element from a set.
-	//
-	// If a set of values is specified, then those values are subtracted from the
-	//    old set. For example, if the attribute value was the set [a,b,c] and the
-	//    DELETE action specifies [a,c], then the final attribute value is [b].
-	//    Specifying an empty set is an error.
-	//
-	// The DELETE action only supports set data types. In addition, DELETE can only
-	//    be used on top-level attributes, not nested attributes.
+	//    * DELETE - Deletes an element from a set. If a set of values is specified,
+	//    then those values are subtracted from the old set. For example, if the
+	//    attribute value was the set [a,b,c] and the DELETE action specifies [a,c],
+	//    then the final attribute value is [b]. Specifying an empty set is an error.
+	//    The DELETE action only supports set data types. In addition, DELETE can
+	//    only be used on top-level attributes, not nested attributes.
 	//
 	// You can have many actions in a single expression, such as the following:
 	// SET a=:value1, b=:value2 DELETE :value3, :value4, :value5
@@ -307,10 +287,9 @@ type UpdateItemOutput struct {
 	//    bound for the estimate. The estimate includes the size of all the items
 	//    in the table, plus the size of all attributes projected into all of the
 	//    local secondary indexes on that table. Use this estimate to measure whether
-	//    a local secondary index is approaching its size limit.
-	//
-	// The estimate is subject to change over time; therefore, do not rely on the
-	//    precision or accuracy of the estimate.
+	//    a local secondary index is approaching its size limit. The estimate is
+	//    subject to change over time; therefore, do not rely on the precision or
+	//    accuracy of the estimate.
 	ItemCollectionMetrics *ItemCollectionMetrics `type:"structure"`
 }
 

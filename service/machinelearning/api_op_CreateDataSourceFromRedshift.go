@@ -28,9 +28,10 @@ type CreateDataSourceFromRedshiftInput struct {
 
 	// The data specification of an Amazon Redshift DataSource:
 	//
-	//    * DatabaseInformation - DatabaseName - The name of the Amazon Redshift
-	//    database.
-	//  ClusterIdentifier - The unique ID for the Amazon Redshift cluster.
+	//    * DatabaseInformation -
+	//    * DatabaseName - The name of the Amazon Redshift database.
+	//
+	//    * ClusterIdentifier - The unique ID for the Amazon Redshift cluster.
 	//
 	//    * DatabaseCredentials - The AWS Identity and Access Management (IAM) credentials
 	//    that are used to connect to the Amazon Redshift database.
@@ -48,9 +49,7 @@ type CreateDataSourceFromRedshiftInput struct {
 	//    if DataSchemaUri is specified.
 	//
 	//    * DataRearrangement - A JSON string that represents the splitting and
-	//    rearrangement requirements for the DataSource.
-	//
-	//  Sample -  "{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"
+	//    rearrangement requirements for the DataSource. Sample - "{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"
 	//
 	// DataSpec is a required field
 	DataSpec *RedshiftDataSpec `type:"structure" required:"true"`
@@ -58,11 +57,11 @@ type CreateDataSourceFromRedshiftInput struct {
 	// A fully specified role Amazon Resource Name (ARN). Amazon ML assumes the
 	// role on behalf of the user to create the following:
 	//
-	// A security group to allow Amazon ML to execute the SelectSqlQuery query on
-	// an Amazon Redshift cluster
+	//    * A security group to allow Amazon ML to execute the SelectSqlQuery query
+	//    on an Amazon Redshift cluster
 	//
-	// An Amazon S3 bucket policy to grant Amazon ML read/write permissions on the
-	// S3StagingLocation
+	//    * An Amazon S3 bucket policy to grant Amazon ML read/write permissions
+	//    on the S3StagingLocation
 	//
 	// RoleARN is a required field
 	RoleARN *string `min:"1" type:"string" required:"true"`

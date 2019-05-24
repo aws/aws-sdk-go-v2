@@ -95,7 +95,7 @@ const opDescribeGlobalClusters = "DescribeGlobalClusters"
 // Returns information about Aurora global database clusters. This API supports
 // pagination.
 //
-// For more information on Amazon Aurora, see  What Is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// For more information on Amazon Aurora, see What Is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide.
 //
 // This action only applies to Aurora DB clusters.

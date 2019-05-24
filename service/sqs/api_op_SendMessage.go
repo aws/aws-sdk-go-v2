@@ -46,24 +46,18 @@ type SendMessageInput struct {
 	// The token used for deduplication of sent messages. If a message with a particular
 	// MessageDeduplicationId is sent successfully, any messages sent with the same
 	// MessageDeduplicationId are accepted successfully but aren't delivered during
-	// the 5-minute deduplication interval. For more information, see  Exactly-Once
+	// the 5-minute deduplication interval. For more information, see Exactly-Once
 	// Processing (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing)
 	// in the Amazon Simple Queue Service Developer Guide.
 	//
-	//    * Every message must have a unique MessageDeduplicationId,
-	//
-	// You may provide a MessageDeduplicationId explicitly.
-	//
-	// If you aren't able to provide a MessageDeduplicationId and you enable ContentBasedDeduplication
-	//    for your queue, Amazon SQS uses a SHA-256 hash to generate the MessageDeduplicationId
-	//    using the body of the message (but not the attributes of the message).
-	//
-	//
-	// If you don't provide a MessageDeduplicationId and the queue doesn't have
-	//    ContentBasedDeduplication set, the action fails with an error.
-	//
-	// If the queue has ContentBasedDeduplication set, your MessageDeduplicationId
-	//    overrides the generated one.
+	//    * Every message must have a unique MessageDeduplicationId, You may provide
+	//    a MessageDeduplicationId explicitly. If you aren't able to provide a MessageDeduplicationId
+	//    and you enable ContentBasedDeduplication for your queue, Amazon SQS uses
+	//    a SHA-256 hash to generate the MessageDeduplicationId using the body of
+	//    the message (but not the attributes of the message). If you don't provide
+	//    a MessageDeduplicationId and the queue doesn't have ContentBasedDeduplication
+	//    set, the action fails with an error. If the queue has ContentBasedDeduplication
+	//    set, your MessageDeduplicationId overrides the generated one.
 	//
 	//    * When ContentBasedDeduplication is in effect, messages with identical
 	//    content sent within the deduplication interval are treated as duplicates

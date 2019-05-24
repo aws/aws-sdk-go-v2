@@ -15,15 +15,17 @@ type CreateTransformJobInput struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the number of records to include in a mini-batch for an HTTP inference
-	// request. A recordis a single unit of input data that inference can be made on. For example,
-	// a single line in a CSV file is a record.
+	// request. A record is a single unit of input data that inference can be made
+	// on. For example, a single line in a CSV file is a record.
 	//
-	// To enable the batch strategy, you must set SplitTypeto Line, RecordIO, or TFRecord.
+	// To enable the batch strategy, you must set SplitType to Line, RecordIO, or
+	// TFRecord.
 	//
 	// To use only one record when making an HTTP invocation request to a container,
-	// set BatchStrategyto SingleRecordand SplitTypeto Line.
+	// set BatchStrategy to SingleRecord and SplitType to Line.
 	//
-	// To fit as many records in a mini-batch as can fit within the MaxPayloadInMBlimit, set BatchStrategyto MultiRecordand SplitTypeto Line
+	// To fit as many records in a mini-batch as can fit within the MaxPayloadInMB
+	// limit, set BatchStrategy to MultiRecord and SplitType to Line.
 	BatchStrategy BatchStrategy `type:"string" enum:"true"`
 
 	// The environment variables to set in the Docker container. We support up to

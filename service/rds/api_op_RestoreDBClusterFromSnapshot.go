@@ -81,7 +81,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 
 	// The list of logs that the restored DB cluster is to export to Amazon CloudWatch
 	// Logs. The values in the list depend on the DB engine being used. For more
-	// information, see Publishing Database Logs to Amazon CloudWatch Logs  (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
+	// information, see Publishing Database Logs to Amazon CloudWatch Logs (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon Aurora User Guide.
 	EnableCloudwatchLogsExports []string `type:"list"`
 
@@ -218,7 +218,7 @@ const opRestoreDBClusterFromSnapshot = "RestoreDBClusterFromSnapshot"
 // source DB cluster, except that the new DB cluster is created with the default
 // security group.
 //
-// For more information on Amazon Aurora, see  What Is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// For more information on Amazon Aurora, see What Is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide.
 //
 // This action only applies to Aurora DB clusters.

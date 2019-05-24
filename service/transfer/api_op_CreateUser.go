@@ -15,7 +15,7 @@ type CreateUserInput struct {
 	_ struct{} `type:"structure"`
 
 	// The landing directory (folder) for a user when they log in to the server
-	// using their SFTP client. An example is /home/username.
+	// using their SFTP client. An example is /home/username .
 	HomeDirectory *string `type:"string"`
 
 	// A scope-down policy for your user so you can use the same IAM role across

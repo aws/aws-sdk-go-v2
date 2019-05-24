@@ -44,7 +44,6 @@ type DescribeNetworkAclsInput struct {
 	//
 	//    * entry.port-range.to - The end of the port range specified in the entry.
 	//
-	//
 	//    * entry.protocol - The protocol specified in the entry (tcp | udp | icmp
 	//    or a protocol number).
 	//

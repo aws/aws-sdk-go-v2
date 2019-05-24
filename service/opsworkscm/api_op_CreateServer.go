@@ -105,9 +105,9 @@ type CreateServerInput struct {
 	// The specified time is in coordinated universal time (UTC). The default value
 	// is a random, daily start time.
 	//
-	// Example:08:00, which represents a daily start time of 08:00 UTC.
+	// Example: 08:00, which represents a daily start time of 08:00 UTC.
 	//
-	// Example:Mon:08:00, which represents a start time of every Monday at 08:00
+	// Example: Mon:08:00, which represents a start time of every Monday at 08:00
 	// UTC. (8:00 a.m.)
 	PreferredBackupWindow *string `type:"string"`
 
@@ -117,7 +117,7 @@ type CreateServerInput struct {
 	// time (UTC). The default value is a random one-hour period on Tuesday, Wednesday,
 	// or Friday. See TimeWindowDefinition for more information.
 	//
-	// Example:Mon:08:00, which represents a start time of every Monday at 08:00
+	// Example: Mon:08:00, which represents a start time of every Monday at 08:00
 	// UTC. (8:00 a.m.)
 	PreferredMaintenanceWindow *string `type:"string"`
 

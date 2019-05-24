@@ -88,11 +88,9 @@ const opDeprecateActivityType = "DeprecateActivityType"
 //    * Use an Action element to allow or deny permission to call this action.
 //
 //    * Constrain the following parameters by using a Condition element with
-//    the appropriate keys.
-//
-// activityType.name: String constraint. The key is swf:activityType.name.
-//
-// activityType.version: String constraint. The key is swf:activityType.version.
+//    the appropriate keys. activityType.name: String constraint. The key is
+//    swf:activityType.name. activityType.version: String constraint. The key
+//    is swf:activityType.version.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.

@@ -121,22 +121,21 @@ func (s UpdateMethodResponseInput) MarshalFields(e protocol.FieldEncoder) error 
 // Request
 //
 // The example request retrieves a MethodResponse of the 200 status code.
-//
-//    GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200
-//    HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
-//    X-Amz-Date: 20160603T222952Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160603/us-east-1/apigateway/aws4_request,
-//    SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
+//  GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200
+//  HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
+//  X-Amz-Date: 20160603T222952Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160603/us-east-1/apigateway/aws4_request,
+//  SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
 // Response
 //
 // The successful response returns 200 OK status and a payload as follows:
+//  { "_links": { "curies": { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html",
+//  "name": "methodresponse", "templated": true }, "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200",
+//  "title": "200" }, "methodresponse:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200"
+//  }, "methodresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200"
+//  } }, "responseModels": { "application/json": "Empty" }, "responseParameters":
+//  { "method.response.header.Content-Type": false }, "statusCode": "200" }
 //
-//    { "_links": { "curies": { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html",
-//    "name": "methodresponse", "templated": true }, "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200",
-//    "title": "200" }, "methodresponse:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200"
-//    }, "methodresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200"
-//    } }, "responseModels": { "application/json": "Empty" }, "responseParameters":
-//    { "method.response.header.Content-Type": false }, "statusCode": "200"
-//    }
+// Method, IntegrationResponse, Integration Creating an API (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type UpdateMethodResponseOutput struct {
 	_ struct{} `type:"structure"`
 

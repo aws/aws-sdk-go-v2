@@ -19,11 +19,15 @@ type DescribeDataSourcesInput struct {
 	// Use one of the following variables to filter a list of DataSource:
 	//
 	//    * CreatedAt - Sets the search criteria to DataSource creation dates.
+	//
 	//    * Status - Sets the search criteria to DataSource statuses.
-	//    * Name - Sets the search criteria to the contents of DataSourceName.
+	//
+	//    * Name - Sets the search criteria to the contents of DataSource Name.
+	//
 	//    * DataUri - Sets the search criteria to the URI of data files used to
 	//    create the DataSource. The URI can identify either a file or an Amazon
 	//    Simple Storage Service (Amazon S3) bucket or directory.
+	//
 	//    * IAMUser - Sets the search criteria to the user account that invoked
 	//    the DataSource creation.
 	FilterVariable DataSourceFilterVariable `type:"string" enum:"true"`
@@ -56,7 +60,7 @@ type DescribeDataSourcesInput struct {
 
 	// A string that is found at the beginning of a variable, such as Name or Id.
 	//
-	// For example, a DataSource could have the Name2014-09-09-HolidayGiftMailer.
+	// For example, a DataSource could have the Name 2014-09-09-HolidayGiftMailer.
 	// To search for this DataSource, select Name for the FilterVariable and any
 	// of the following strings for the Prefix:
 	//
@@ -71,7 +75,9 @@ type DescribeDataSourcesInput struct {
 	// of DataSource.
 	//
 	//    * asc - Arranges the list in ascending order (A-Z, 0-9).
+	//
 	//    * dsc - Arranges the list in descending order (Z-A, 9-0).
+	//
 	// Results are sorted by FilterVariable.
 	SortOrder SortOrder `type:"string" enum:"true"`
 }

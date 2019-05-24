@@ -22,7 +22,7 @@ type UpdateClusterConfigInput struct {
 	// to CloudWatch Logs. By default, cluster control plane logs are not exported
 	// to CloudWatch Logs. For more information, see Amazon EKS Cluster Control
 	// Plane Logs (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html)
-	// in the Amazon EKS User Guide.
+	// in the Amazon EKS User Guide .
 	//
 	// CloudWatch Logs ingestion, archive storage, and data scanning rates apply
 	// to exported control plane logs. For more information, see Amazon CloudWatch
@@ -132,13 +132,13 @@ const opUpdateClusterConfig = "UpdateClusterConfig"
 // to your cluster's Kubernetes API server endpoint. By default, public access
 // is enabled and private access is disabled. For more information, see Amazon
 // EKS Cluster Endpoint Access Control (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
-// in the Amazon EKS User Guide.
+// in the Amazon EKS User Guide .
 //
 // You can also use this API operation to enable or disable exporting the Kubernetes
 // control plane logs for your cluster to CloudWatch Logs. By default, cluster
 // control plane logs are not exported to CloudWatch Logs. For more information,
 // see Amazon EKS Cluster Control Plane Logs (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html)
-// in the Amazon EKS User Guide.
+// in the Amazon EKS User Guide .
 //
 // CloudWatch Logs ingestion, archive storage, and data scanning rates apply
 // to exported control plane logs. For more information, see Amazon CloudWatch

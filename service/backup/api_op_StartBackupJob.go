@@ -46,10 +46,10 @@ type StartBackupJobInput struct {
 	// according to the lifecycle that you define.
 	//
 	// Backups transitioned to cold storage must be stored in cold storage for a
-	// minimum of 90 days. Therefore, the “expire after days” setting must be 90
-	// days greater than the “transition to cold after days” setting. The “transition
-	// to cold after days” setting cannot be changed after a backup has been transitioned
-	// to cold.
+	// minimum of 90 days. Therefore, the “expire after days” setting must be
+	// 90 days greater than the “transition to cold after days” setting. The
+	// “transition to cold after days” setting cannot be changed after a backup
+	// has been transitioned to cold.
 	Lifecycle *Lifecycle `type:"structure"`
 
 	// To help organize your resources, you can assign your own metadata to the

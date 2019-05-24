@@ -1332,8 +1332,8 @@ type PredefinedMetricSpecification struct {
 	// and ASGAverageNetworkOut, the parameter must not be specified as the resource
 	// associated with the metric type is the Auto Scaling group. For predefined
 	// metric type ALBRequestCountPerTarget, the parameter must be specified in
-	// the format: app/load-balancer-name/load-balancer-id/targetgroup/target-group-name/target-group-id,
-	// where app/load-balancer-name/load-balancer-id is the final portion of the
+	// the format: app/load-balancer-name/load-balancer-id/targetgroup/target-group-name/target-group-id
+	// , where app/load-balancer-name/load-balancer-id is the final portion of the
 	// load balancer ARN, and targetgroup/target-group-name/target-group-id is the
 	// final portion of the target group ARN. The target group must be attached
 	// to the Auto Scaling group.

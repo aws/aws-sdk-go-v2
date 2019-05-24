@@ -75,7 +75,7 @@ const opUpdateCertificateOptions = "UpdateCertificateOptions"
 //
 // Updates a certificate. Currently, you can use this function to specify whether
 // to opt in to or out of recording your certificate in a certificate transparency
-// log. For more information, see  Opting Out of Certificate Transparency Logging
+// log. For more information, see Opting Out of Certificate Transparency Logging
 // (https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency).
 //
 //    // Example sending a request using UpdateCertificateOptionsRequest.

@@ -100,13 +100,8 @@ const opCreatePlayerSessions = "CreatePlayerSessions"
 //
 //    * DescribePlayerSessions
 //
-//    * Game session placements
-//
-// StartGameSessionPlacement
-//
-// DescribeGameSessionPlacement
-//
-// StopGameSessionPlacement
+//    * Game session placements StartGameSessionPlacement DescribeGameSessionPlacement
+//    StopGameSessionPlacement
 //
 //    // Example sending a request using CreatePlayerSessionsRequest.
 //    req := client.CreatePlayerSessionsRequest(params)

@@ -86,7 +86,6 @@ func ExampleClient_AcceptHandshakeRequest_shared00() {
 // To attach a policy to an OU
 //
 // The following example shows how to attach a service control policy (SCP) to an OU:
-//
 func ExampleClient_AttachPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -143,7 +142,6 @@ func ExampleClient_AttachPolicyRequest_shared00() {
 // To attach a policy to an account
 //
 // The following example shows how to attach a service control policy (SCP) to an account:
-//
 func ExampleClient_AttachPolicyRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -202,7 +200,6 @@ func ExampleClient_AttachPolicyRequest_shared01() {
 // Bill previously sent an invitation to Susan's account to join his organization. He
 // changes his mind and decides to cancel the invitation before Susan accepts it. The
 // following example shows Bill's cancellation:
-//
 func ExampleClient_CancelHandshakeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -254,10 +251,9 @@ func ExampleClient_CancelHandshakeRequest_shared00() {
 // The owner of an organization creates a member account in the organization. The following
 // example shows that when the organization owner creates the member account, the account
 // is preconfigured with the name "Production Account" and an owner email address of
-// susan@example.com.  An IAM role is automatically created using the default name because
+// susan@example.com. An IAM role is automatically created using the default name because
 // the roleName parameter is not used. AWS Organizations sends Susan a "Welcome to AWS"
 // email:
-//
 func ExampleClient_CreateAccountRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -313,7 +309,6 @@ func ExampleClient_CreateAccountRequest_shared00() {
 // The following example shows that the account becomes the master account in the new
 // organization. Because he does not specify a feature set, the new organization defaults
 // to all features enabled and service control policies enabled on the root:
-//
 func ExampleClient_CreateOrganizationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -363,7 +358,6 @@ func ExampleClient_CreateOrganizationRequest_shared00() {
 // In the following example, Bill creates an organization using credentials from account
 // 111111111111, and configures the organization to support only the consolidated billing
 // feature set:
-//
 func ExampleClient_CreateOrganizationRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -414,7 +408,6 @@ func ExampleClient_CreateOrganizationRequest_shared01() {
 //
 // The following example shows how to create an OU that is named AccountingOU. The new
 // OU is directly under the root.:
-//
 func ExampleClient_CreateOrganizationalUnitRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -471,7 +464,6 @@ func ExampleClient_CreateOrganizationalUnitRequest_shared00() {
 // in the policy. The parameter string is escaped with backslashes to ensure that the
 // embedded double quotes in the JSON policy are treated as literals in the parameter,
 // which itself is surrounded by double quotes:
-//
 func ExampleClient_CreatePolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -580,7 +572,6 @@ func ExampleClient_DeclineHandshakeRequest_shared00() {
 //
 // The following example shows how to delete an OU. The example assumes that you previously
 // removed all accounts and other OUs from the OU:
-//
 func ExampleClient_DeleteOrganizationalUnitRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -631,7 +622,6 @@ func ExampleClient_DeleteOrganizationalUnitRequest_shared00() {
 //
 // The following example shows how to delete a policy from an organization. The example
 // assumes that you previously detached the policy from all entities:
-//
 func ExampleClient_DeletePolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {

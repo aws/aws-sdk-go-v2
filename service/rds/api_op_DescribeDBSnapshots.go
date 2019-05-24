@@ -84,10 +84,9 @@ type DescribeDBSnapshotsInput struct {
 	//    * public - Return all DB snapshots that have been marked as public.
 	//
 	//    * awsbackup - Return the DB snapshots managed by the AWS Backup service.
-	//
-	// For information about AWS Backup, see the AWS Backup Developer Guide. (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html)
-	//
-	// The awsbackup type does not apply to Aurora.
+	//    For information about AWS Backup, see the AWS Backup Developer Guide.
+	//    (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html)
+	//    The awsbackup type does not apply to Aurora.
 	//
 	// If you don't specify a SnapshotType value, then both automated and manual
 	// snapshots are returned. Shared and public DB snapshots are not included in

@@ -6598,8 +6598,8 @@ type ThingIndexingConfiguration struct {
 
 	// Thing connectivity indexing mode. Valid values are:
 	//
-	//    * STATUS – Your thing index contains connectivity status. To enable thing
-	//    connectivity indexing, thingIndexMode must not be set to OFF.
+	//    * STATUS – Your thing index contains connectivity status. To enable
+	//    thing connectivity indexing, thingIndexMode must not be set to OFF.
 	//
 	//    * OFF - Thing connectivity status indexing is disabled.
 	ThingConnectivityIndexingMode ThingConnectivityIndexingMode `locationName:"thingConnectivityIndexingMode" type:"string" enum:"true"`

@@ -27,10 +27,10 @@ type UpdateRecoveryPointLifecycleInput struct {
 	// according to the lifecycle that you define.
 	//
 	// Backups transitioned to cold storage must be stored in cold storage for a
-	// minimum of 90 days. Therefore, the “expire after days” setting must be 90
-	// days greater than the “transition to cold after days” setting. The “transition
-	// to cold after days” setting cannot be changed after a backup has been transitioned
-	// to cold.
+	// minimum of 90 days. Therefore, the “expire after days” setting must be
+	// 90 days greater than the “transition to cold after days” setting. The
+	// “transition to cold after days” setting cannot be changed after a backup
+	// has been transitioned to cold.
 	Lifecycle *Lifecycle `type:"structure"`
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a recovery point;
@@ -104,10 +104,10 @@ type UpdateRecoveryPointLifecycleOutput struct {
 	// according to the lifecycle that you define.
 	//
 	// Backups transitioned to cold storage must be stored in cold storage for a
-	// minimum of 90 days. Therefore, the “expire after days” setting must be 90
-	// days greater than the “transition to cold after days” setting. The “transition
-	// to cold after days” setting cannot be changed after a backup has been transitioned
-	// to cold.
+	// minimum of 90 days. Therefore, the “expire after days” setting must be
+	// 90 days greater than the “transition to cold after days” setting. The
+	// “transition to cold after days” setting cannot be changed after a backup
+	// has been transitioned to cold.
 	Lifecycle *Lifecycle `type:"structure"`
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a recovery point;
@@ -161,10 +161,10 @@ const opUpdateRecoveryPointLifecycle = "UpdateRecoveryPointLifecycle"
 // according to the lifecycle that you define.
 //
 // Backups transitioned to cold storage must be stored in cold storage for a
-// minimum of 90 days. Therefore, the “expire after days” setting must be 90
-// days greater than the “transition to cold after days” setting. The “transition
-// to cold after days” setting cannot be changed after a backup has been transitioned
-// to cold.
+// minimum of 90 days. Therefore, the “expire after days” setting must be
+// 90 days greater than the “transition to cold after days” setting. The
+// “transition to cold after days” setting cannot be changed after a backup
+// has been transitioned to cold.
 //
 //    // Example sending a request using UpdateRecoveryPointLifecycleRequest.
 //    req := client.UpdateRecoveryPointLifecycleRequest(params)

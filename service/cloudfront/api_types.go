@@ -361,7 +361,7 @@ type CacheBehavior struct {
 	// behaviors, CloudFront applies the behavior in the default cache behavior.
 	//
 	// For more information, see Path Pattern (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesPathPattern)
-	// in the  Amazon CloudFront Developer Guide.
+	// in the Amazon CloudFront Developer Guide.
 	//
 	// PathPattern is a required field
 	PathPattern *string `type:"string" required:"true"`
@@ -408,7 +408,6 @@ type CacheBehavior struct {
 	//    * redirect-to-https: If a viewer submits an HTTP request, CloudFront returns
 	//    an HTTP status code of 301 (Moved Permanently) to the viewer along with
 	//    the HTTPS URL. The viewer then resubmits the request using the new URL.
-	//
 	//
 	//    * https-only: If a viewer sends an HTTP request, CloudFront returns an
 	//    HTTP status code of 403 (Forbidden).
@@ -1311,7 +1310,6 @@ func (s CookiePreference) MarshalFields(e protocol.FieldEncoder) error {
 //    * Whether CloudFront replaces HTTP status codes in the 4xx and 5xx range
 //    with custom error messages before returning the response to the viewer.
 //
-//
 //    * How long CloudFront caches HTTP status codes in the 4xx and 5xx range.
 //
 // For more information about custom error pages, see Customizing Error Responses
@@ -1372,7 +1370,6 @@ type CustomErrorResponse struct {
 	//    Amazon S3 bucket in a directory named /4xx-errors. Your distribution must
 	//    include a cache behavior for which the path pattern routes requests for
 	//    your custom error pages to that location, for example, /4xx-errors/*.
-	//
 	//
 	//    * The value of TargetOriginId specifies the value of the ID element for
 	//    the origin that contains your custom error pages.
@@ -2275,41 +2272,31 @@ type DistributionConfig struct {
 	//    * If you're using an alternate domain name, such as example.com: Specify
 	//    one of the following values, depending on whether ACM provided your certificate
 	//    or you purchased your certificate from third-party certificate authority:
-	//
-	// <ACMCertificateArn>ARN for ACM SSL/TLS certificate<ACMCertificateArn> where
-	//    ARN for ACM SSL/TLS certificate is the ARN for the ACM SSL/TLS certificate
-	//    that you want to use for this distribution.
-	//
-	// <IAMCertificateId>IAM certificate ID<IAMCertificateId> where IAM certificate
-	//    ID is the ID that IAM returned when you added the certificate to the IAM
-	//    certificate store.
-	//
-	// If you specify ACMCertificateArn or IAMCertificateId, you must also specify
-	//    a value for SSLSupportMethod.
-	//
-	// If you choose to use an ACM certificate or a certificate in the IAM certificate
-	//    store, we recommend that you use only an alternate domain name in your
-	//    object URLs (https://example.com/logo.jpg). If you use the domain name
-	//    that is associated with your CloudFront distribution (such as https://d111111abcdef8.cloudfront.net/logo.jpg)
-	//    and the viewer supports SNI, then CloudFront behaves normally. However,
-	//    if the browser does not support SNI, the user's experience depends on
-	//    the value that you choose for SSLSupportMethod:
-	//
-	// vip: The viewer displays a warning because there is a mismatch between the
-	//    CloudFront domain name and the domain name in your SSL/TLS certificate.
-	//
-	// sni-only: CloudFront drops the connection with the browser without returning
-	//    the object.
+	//    <ACMCertificateArn>ARN for ACM SSL/TLS certificate<ACMCertificateArn>
+	//    where ARN for ACM SSL/TLS certificate is the ARN for the ACM SSL/TLS certificate
+	//    that you want to use for this distribution. <IAMCertificateId>IAM certificate
+	//    ID<IAMCertificateId> where IAM certificate ID is the ID that IAM returned
+	//    when you added the certificate to the IAM certificate store. If you specify
+	//    ACMCertificateArn or IAMCertificateId, you must also specify a value for
+	//    SSLSupportMethod. If you choose to use an ACM certificate or a certificate
+	//    in the IAM certificate store, we recommend that you use only an alternate
+	//    domain name in your object URLs (https://example.com/logo.jpg). If you
+	//    use the domain name that is associated with your CloudFront distribution
+	//    (such as https://d111111abcdef8.cloudfront.net/logo.jpg) and the viewer
+	//    supports SNI, then CloudFront behaves normally. However, if the browser
+	//    does not support SNI, the user's experience depends on the value that
+	//    you choose for SSLSupportMethod: vip: The viewer displays a warning because
+	//    there is a mismatch between the CloudFront domain name and the domain
+	//    name in your SSL/TLS certificate. sni-only: CloudFront drops the connection
+	//    with the browser without returning the object.
 	//
 	//    * If you're using the CloudFront domain name for your distribution, such
-	//    as d111111abcdef8.cloudfront.net: Specify the following value:
-	//
-	// <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
+	//    as d111111abcdef8.cloudfront.net : Specify the following value: <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
 	//
 	// If you want viewers to use HTTPS, you must also specify one of the following
 	// values in your cache behaviors:
 	//
-	//    *  <ViewerProtocolPolicy>https-only<ViewerProtocolPolicy>
+	//    * <ViewerProtocolPolicy>https-only<ViewerProtocolPolicy>
 	//
 	//    * <ViewerProtocolPolicy>redirect-to-https<ViewerProtocolPolicy>
 	//
@@ -2814,41 +2801,31 @@ type DistributionSummary struct {
 	//    * If you're using an alternate domain name, such as example.com: Specify
 	//    one of the following values, depending on whether ACM provided your certificate
 	//    or you purchased your certificate from third-party certificate authority:
-	//
-	// <ACMCertificateArn>ARN for ACM SSL/TLS certificate<ACMCertificateArn> where
-	//    ARN for ACM SSL/TLS certificate is the ARN for the ACM SSL/TLS certificate
-	//    that you want to use for this distribution.
-	//
-	// <IAMCertificateId>IAM certificate ID<IAMCertificateId> where IAM certificate
-	//    ID is the ID that IAM returned when you added the certificate to the IAM
-	//    certificate store.
-	//
-	// If you specify ACMCertificateArn or IAMCertificateId, you must also specify
-	//    a value for SSLSupportMethod.
-	//
-	// If you choose to use an ACM certificate or a certificate in the IAM certificate
-	//    store, we recommend that you use only an alternate domain name in your
-	//    object URLs (https://example.com/logo.jpg). If you use the domain name
-	//    that is associated with your CloudFront distribution (such as https://d111111abcdef8.cloudfront.net/logo.jpg)
-	//    and the viewer supports SNI, then CloudFront behaves normally. However,
-	//    if the browser does not support SNI, the user's experience depends on
-	//    the value that you choose for SSLSupportMethod:
-	//
-	// vip: The viewer displays a warning because there is a mismatch between the
-	//    CloudFront domain name and the domain name in your SSL/TLS certificate.
-	//
-	// sni-only: CloudFront drops the connection with the browser without returning
-	//    the object.
+	//    <ACMCertificateArn>ARN for ACM SSL/TLS certificate<ACMCertificateArn>
+	//    where ARN for ACM SSL/TLS certificate is the ARN for the ACM SSL/TLS certificate
+	//    that you want to use for this distribution. <IAMCertificateId>IAM certificate
+	//    ID<IAMCertificateId> where IAM certificate ID is the ID that IAM returned
+	//    when you added the certificate to the IAM certificate store. If you specify
+	//    ACMCertificateArn or IAMCertificateId, you must also specify a value for
+	//    SSLSupportMethod. If you choose to use an ACM certificate or a certificate
+	//    in the IAM certificate store, we recommend that you use only an alternate
+	//    domain name in your object URLs (https://example.com/logo.jpg). If you
+	//    use the domain name that is associated with your CloudFront distribution
+	//    (such as https://d111111abcdef8.cloudfront.net/logo.jpg) and the viewer
+	//    supports SNI, then CloudFront behaves normally. However, if the browser
+	//    does not support SNI, the user's experience depends on the value that
+	//    you choose for SSLSupportMethod: vip: The viewer displays a warning because
+	//    there is a mismatch between the CloudFront domain name and the domain
+	//    name in your SSL/TLS certificate. sni-only: CloudFront drops the connection
+	//    with the browser without returning the object.
 	//
 	//    * If you're using the CloudFront domain name for your distribution, such
-	//    as d111111abcdef8.cloudfront.net: Specify the following value:
-	//
-	// <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
+	//    as d111111abcdef8.cloudfront.net : Specify the following value: <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
 	//
 	// If you want viewers to use HTTPS, you must also specify one of the following
 	// values in your cache behaviors:
 	//
-	//    *  <ViewerProtocolPolicy>https-only<ViewerProtocolPolicy>
+	//    * <ViewerProtocolPolicy>https-only<ViewerProtocolPolicy>
 	//
 	//    * <ViewerProtocolPolicy>redirect-to-https<ViewerProtocolPolicy>
 	//
@@ -3979,10 +3956,8 @@ type Headers struct {
 	// distribution to do one of the following:
 	//
 	//    * Forward all headers to your origin: Specify 1 for Quantity and * for
-	//    Name.
-	//
-	// CloudFront doesn't cache the objects that are associated with this cache
-	//    behavior. Instead, CloudFront sends every request to the origin.
+	//    Name. CloudFront doesn't cache the objects that are associated with this
+	//    cache behavior. Instead, CloudFront sends every request to the origin.
 	//
 	//    * Forward a whitelist of headers you specify: Specify the number of headers
 	//    that you want CloudFront to base caching on. Then specify the header names
@@ -4401,10 +4376,8 @@ type LambdaFunctionAssociation struct {
 	//
 	//    * viewer-response: The function executes before CloudFront returns the
 	//    requested object to the viewer. The function executes regardless of whether
-	//    the object was already in the edge cache.
-	//
-	// If the origin returns an HTTP status code other than HTTP 200 (OK), the function
-	//    doesn't execute.
+	//    the object was already in the edge cache. If the origin returns an HTTP
+	//    status code other than HTTP 200 (OK), the function doesn't execute.
 	//
 	// EventType is a required field
 	EventType EventType `type:"string" required:"true" enum:"true"`
@@ -6989,8 +6962,7 @@ func (s Tags) MarshalFields(e protocol.FieldEncoder) error {
 // true (if it's currently false), change Quantity as applicable, and specify
 // all of the trusted signers that you want to include in the updated distribution.
 //
-// For more information about updating the distribution configuration, see DistributionConfig
-// .
+// For more information about updating the distribution configuration, see DistributionConfig .
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TrustedSigners
 type TrustedSigners struct {
 	_ struct{} `type:"structure"`
@@ -7101,41 +7073,31 @@ func (s TrustedSigners) MarshalFields(e protocol.FieldEncoder) error {
 //    * If you're using an alternate domain name, such as example.com: Specify
 //    one of the following values, depending on whether ACM provided your certificate
 //    or you purchased your certificate from third-party certificate authority:
-//
-// <ACMCertificateArn>ARN for ACM SSL/TLS certificate<ACMCertificateArn> where
-//    ARN for ACM SSL/TLS certificate is the ARN for the ACM SSL/TLS certificate
-//    that you want to use for this distribution.
-//
-// <IAMCertificateId>IAM certificate ID<IAMCertificateId> where IAM certificate
-//    ID is the ID that IAM returned when you added the certificate to the IAM
-//    certificate store.
-//
-// If you specify ACMCertificateArn or IAMCertificateId, you must also specify
-//    a value for SSLSupportMethod.
-//
-// If you choose to use an ACM certificate or a certificate in the IAM certificate
-//    store, we recommend that you use only an alternate domain name in your
-//    object URLs (https://example.com/logo.jpg). If you use the domain name
-//    that is associated with your CloudFront distribution (such as https://d111111abcdef8.cloudfront.net/logo.jpg)
-//    and the viewer supports SNI, then CloudFront behaves normally. However,
-//    if the browser does not support SNI, the user's experience depends on
-//    the value that you choose for SSLSupportMethod:
-//
-// vip: The viewer displays a warning because there is a mismatch between the
-//    CloudFront domain name and the domain name in your SSL/TLS certificate.
-//
-// sni-only: CloudFront drops the connection with the browser without returning
-//    the object.
+//    <ACMCertificateArn>ARN for ACM SSL/TLS certificate<ACMCertificateArn>
+//    where ARN for ACM SSL/TLS certificate is the ARN for the ACM SSL/TLS certificate
+//    that you want to use for this distribution. <IAMCertificateId>IAM certificate
+//    ID<IAMCertificateId> where IAM certificate ID is the ID that IAM returned
+//    when you added the certificate to the IAM certificate store. If you specify
+//    ACMCertificateArn or IAMCertificateId, you must also specify a value for
+//    SSLSupportMethod. If you choose to use an ACM certificate or a certificate
+//    in the IAM certificate store, we recommend that you use only an alternate
+//    domain name in your object URLs (https://example.com/logo.jpg). If you
+//    use the domain name that is associated with your CloudFront distribution
+//    (such as https://d111111abcdef8.cloudfront.net/logo.jpg) and the viewer
+//    supports SNI, then CloudFront behaves normally. However, if the browser
+//    does not support SNI, the user's experience depends on the value that
+//    you choose for SSLSupportMethod: vip: The viewer displays a warning because
+//    there is a mismatch between the CloudFront domain name and the domain
+//    name in your SSL/TLS certificate. sni-only: CloudFront drops the connection
+//    with the browser without returning the object.
 //
 //    * If you're using the CloudFront domain name for your distribution, such
-//    as d111111abcdef8.cloudfront.net: Specify the following value:
-//
-// <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
+//    as d111111abcdef8.cloudfront.net : Specify the following value: <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
 //
 // If you want viewers to use HTTPS, you must also specify one of the following
 // values in your cache behaviors:
 //
-//    *  <ViewerProtocolPolicy>https-only<ViewerProtocolPolicy>
+//    * <ViewerProtocolPolicy>https-only<ViewerProtocolPolicy>
 //
 //    * <ViewerProtocolPolicy>redirect-to-https<ViewerProtocolPolicy>
 //
@@ -7209,7 +7171,7 @@ type ViewerCertificate struct {
 	//
 	// For information about the relationship between the security policy that you
 	// choose and the protocols and ciphers that CloudFront uses to communicate
-	// with viewers, see  Supported SSL/TLS Protocols and Ciphers for Communication
+	// with viewers, see Supported SSL/TLS Protocols and Ciphers for Communication
 	// Between Viewers and CloudFront (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html#secure-connections-supported-ciphers)
 	// in the Amazon CloudFront Developer Guide.
 	MinimumProtocolVersion MinimumProtocolVersion `type:"string" enum:"true"`
@@ -7226,17 +7188,12 @@ type ViewerCertificate struct {
 	//    support Server Name Indication (SNI). All modern browsers support SNI,
 	//    but some browsers still in use don't support SNI. If some of your users'
 	//    browsers don't support SNI, we recommend that you do one of the following:
-	//
-	// Use the vip option (dedicated IP addresses) instead of sni-only.
-	//
-	// Use the CloudFront SSL/TLS certificate instead of a custom certificate. This
-	//    requires that you use the CloudFront domain name of your distribution
-	//    in the URLs for your objects, for example, https://d111111abcdef8.cloudfront.net/logo.png.
-	//
-	// If you can control which browser your users use, upgrade the browser to one
-	//    that supports SNI.
-	//
-	// Use HTTP instead of HTTPS.
+	//    Use the vip option (dedicated IP addresses) instead of sni-only. Use the
+	//    CloudFront SSL/TLS certificate instead of a custom certificate. This requires
+	//    that you use the CloudFront domain name of your distribution in the URLs
+	//    for your objects, for example, https://d111111abcdef8.cloudfront.net/logo.png.
+	//    If you can control which browser your users use, upgrade the browser to
+	//    one that supports SNI. Use HTTP instead of HTTPS.
 	//
 	// Don't specify a value for SSLSupportMethod if you specified <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>.
 	//

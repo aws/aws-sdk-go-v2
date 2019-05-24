@@ -59,11 +59,9 @@ type CopySnapshotInput struct {
 	//    by the region of the CMK, the AWS account ID of the CMK owner, the key
 	//    namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.
 	//
-	//
 	//    * ARN using key alias. The alias ARN contains the arn:aws:kms namespace,
 	//    followed by the region of the CMK, the AWS account ID of the CMK owner,
 	//    the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
-	//
 	//
 	// AWS parses KmsKeyId asynchronously, meaning that the action you call may
 	// appear to complete even though you provided an invalid identifier. The action

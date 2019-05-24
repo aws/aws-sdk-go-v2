@@ -50,33 +50,34 @@ func (s UpdateAccountInput) MarshalFields(e protocol.FieldEncoder) error {
 //
 // The following exception may be thrown when the request fails.
 //
-// UnauthorizedException
-// NotFoundException
-// TooManyRequestsException
+//    * UnauthorizedException
+//
+//    * NotFoundException
+//
+//    * TooManyRequestsException
+//
 // For detailed error code information, including the corresponding HTTP Status
 // Codes, see API Gateway Error Codes (https://docs.aws.amazon.com/apigateway/api-reference/handling-errors/#api-error-codes)
 //
 // Example: Get the information about an account.
 //
 // Request
-//
-// GET /account HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
-// X-Amz-Date: 20160531T184618Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/us-east-1/apigateway/aws4_request,
-// SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
+//  GET /account HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
+//  X-Amz-Date: 20160531T184618Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/us-east-1/apigateway/aws4_request,
+//  SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
 // Response
 //
 // The successful response returns a 200 OK status code and a payload similar
 // to the following:
-//
-// { "_links": { "curies": { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/account-apigateway-{rel}.html",
-// "name": "account", "templated": true }, "self": { "href": "/account" }, "account:update":
-// { "href": "/account" } }, "cloudwatchRoleArn": "arn:aws:iam::123456789012:role/apigAwsProxyRole",
-// "throttleSettings": { "rateLimit": 500, "burstLimit": 1000 } }
+//  { "_links": { "curies": { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/account-apigateway-{rel}.html",
+//  "name": "account", "templated": true }, "self": { "href": "/account" },
+//  "account:update": { "href": "/account" } }, "cloudwatchRoleArn": "arn:aws:iam::123456789012:role/apigAwsProxyRole",
+//  "throttleSettings": { "rateLimit": 500, "burstLimit": 1000 } }
 // In addition to making the REST API call directly, you can use the AWS CLI
 // and an AWS SDK to access this resource.
 //
-// API Gateway Limits (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-limits.html)Developer
-// Guide (https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html),
+// API Gateway Limits (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-limits.html)
+// Developer Guide (https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html),
 // AWS CLI (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-account.html)
 type UpdateAccountOutput struct {
 	_ struct{} `type:"structure"`

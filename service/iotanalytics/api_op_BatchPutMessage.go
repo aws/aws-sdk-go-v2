@@ -35,7 +35,6 @@ type BatchPutMessageInput struct {
 	//
 	//    * In regular expression terms: "^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$".
 	//
-	//
 	//    * Cannot be greater than 255 characters.
 	//
 	//    * Are case-insensitive. (Fields named "foo" and "FOO" in the same payload

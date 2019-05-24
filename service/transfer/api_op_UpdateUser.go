@@ -15,7 +15,7 @@ type UpdateUserInput struct {
 
 	// The HomeDirectory parameter specifies the landing directory (folder) for
 	// a user when they log in to the server using their client. An example would
-	// be: /home/username.
+	// be: /home/username .
 	HomeDirectory *string `type:"string"`
 
 	// Allows you to supply a scope-down policy for your user so you can use the

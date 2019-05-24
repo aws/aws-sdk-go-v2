@@ -69,7 +69,7 @@ type Cluster struct {
 
 	// The platform version of your Amazon EKS cluster. For more information, see
 	// Platform Versions (https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html)
-	// in the Amazon EKS User Guide.
+	// in the Amazon EKS User Guide .
 	PlatformVersion *string `locationName:"platformVersion" type:"string"`
 
 	// The VPC configuration used by the cluster control plane. Amazon EKS VPC resources
@@ -443,7 +443,7 @@ type VpcConfigRequest struct {
 	// value for this parameter is false, which disables private access for your
 	// Kubernetes API server. For more information, see Amazon EKS Cluster Endpoint
 	// Access Control (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
-	// in the Amazon EKS User Guide.
+	// in the Amazon EKS User Guide .
 	EndpointPrivateAccess *bool `locationName:"endpointPrivateAccess" type:"boolean"`
 
 	// Set this value to false to disable public access for your cluster's Kubernetes
@@ -452,7 +452,7 @@ type VpcConfigRequest struct {
 	// value for this parameter is true, which enables public access for your Kubernetes
 	// API server. For more information, see Amazon EKS Cluster Endpoint Access
 	// Control (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
-	// in the Amazon EKS User Guide.
+	// in the Amazon EKS User Guide .
 	EndpointPublicAccess *bool `locationName:"endpointPublicAccess" type:"boolean"`
 
 	// Specify one or more security groups for the cross-account elastic network

@@ -14,7 +14,7 @@ type CopyDBClusterParameterGroupInput struct {
 	_ struct{} `type:"structure"`
 
 	// The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter
-	// group. For information about creating an ARN, see  Constructing an ARN for
+	// group. For information about creating an ARN, see Constructing an ARN for
 	// Amazon RDS (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
 	// in the Amazon Aurora User Guide.
 	//

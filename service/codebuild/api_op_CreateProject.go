@@ -37,7 +37,7 @@ type CreateProjectInput struct {
 	// if your service role has permission to that key.
 	//
 	// You can specify either the Amazon Resource Name (ARN) of the CMK or, if available,
-	// the CMK's alias (using the format alias/alias-name).
+	// the CMK's alias (using the format alias/alias-name ).
 	EncryptionKey *string `locationName:"encryptionKey" min:"1" type:"string"`
 
 	// Information about the build environment for the build project.

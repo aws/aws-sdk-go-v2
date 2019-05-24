@@ -29,7 +29,7 @@ func parseTime(layout, value string) *time.Time {
 // To retrieve multiple items from a table
 //
 // This example reads multiple items from the Music table using a batch of three GetItem
-// requests.  Only the AlbumTitle attribute is returned.
+// requests. Only the AlbumTitle attribute is returned.
 func ExampleClient_BatchGetItemRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -670,7 +670,7 @@ func ExampleClient_ScanRequest_shared00() {
 // To update an item in a table
 //
 // This example updates an item in the Music table. It adds a new attribute (Year) and
-// modifies the AlbumTitle attribute.  All of the attributes in the item, as they appear
+// modifies the AlbumTitle attribute. All of the attributes in the item, as they appear
 // after the update, are returned in the response.
 func ExampleClient_UpdateItemRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()

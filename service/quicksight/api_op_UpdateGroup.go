@@ -145,7 +145,7 @@ const opUpdateGroup = "UpdateGroup"
 //
 // Changes a group description.
 //
-// The permissions resource is arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/<group-name>.
+// The permissions resource is arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/<group-name> .
 //
 // The response is a group object.
 //

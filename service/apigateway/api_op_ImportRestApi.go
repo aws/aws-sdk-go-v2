@@ -45,6 +45,7 @@ type ImportRestApiInput struct {
 	//
 	//    aws apigateway import-rest-api --parameters ignore=documentation --body
 	//    'file:///path/to/imported-api-body.json'
+	//
 	// The AWS CLI command to set the regional endpoint on the imported API is:
 	//
 	//    aws apigateway import-rest-api --parameters endpointConfigurationTypes=REGIONAL
@@ -108,10 +109,11 @@ type ImportRestApiOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The source of the API key for metering requests according to a usage plan.
-	// Valid values are: HEADER to read the API key from the X-API-Key header of
-	// a request.
-	// AUTHORIZER to read the API key from the UsageIdentifierKey from a custom
-	// authorizer.
+	// Valid values are:
+	//    * HEADER to read the API key from the X-API-Key header of a request.
+	//
+	//    * AUTHORIZER to read the API key from the UsageIdentifierKey from a custom
+	//    authorizer.
 	ApiKeySource ApiKeySourceType `locationName:"apiKeySource" type:"string" enum:"true"`
 
 	// The list of binary media types supported by the RestApi. By default, the
@@ -143,7 +145,7 @@ type ImportRestApiOutput struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// A stringified JSON policy document that applies to this RestApi regardless
-	// of the caller and Method
+	// of the caller and Method configuration.
 	Policy *string `locationName:"policy" type:"string"`
 
 	// A version identifier for the API.

@@ -36,11 +36,11 @@ type CreateDocumentInput struct {
 	// Do not use the following to begin the names of documents you create. They
 	// are reserved by AWS for use as document prefixes:
 	//
-	// aws
+	//    * aws
 	//
-	// amazon
+	//    * amazon
 	//
-	// amzn
+	//    * amzn
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`

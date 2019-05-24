@@ -229,7 +229,7 @@ type CreateClusterInput struct {
 	MasterUsername *string `type:"string" required:"true"`
 
 	// The node type to be provisioned for the cluster. For information about node
-	// types, go to  Working with Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes)
+	// types, go to Working with Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes)
 	// in the Amazon Redshift Cluster Management Guide.
 	//
 	// Valid Values: ds2.xlarge | ds2.8xlarge | ds2.xlarge | ds2.8xlarge | dc1.large
@@ -241,7 +241,7 @@ type CreateClusterInput struct {
 	// The number of compute nodes in the cluster. This parameter is required when
 	// the ClusterType parameter is specified as multi-node.
 	//
-	// For information about determining how many nodes you need, go to  Working
+	// For information about determining how many nodes you need, go to Working
 	// with Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes)
 	// in the Amazon Redshift Cluster Management Guide.
 	//

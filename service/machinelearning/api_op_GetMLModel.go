@@ -92,8 +92,10 @@ type GetMLModelOutput struct {
 	//
 	//    * REGRESSION -- Produces a numeric result. For example, "What price should
 	//    a house be listed at?"
+	//
 	//    * BINARY -- Produces one of two possible results. For example, "Is this
 	//    an e-commerce website?"
+	//
 	//    * MULTICLASS -- Produces one of several possible results. For example,
 	//    "Is this a HIGH, LOW or MEDIUM risk trade?"
 	MLModelType MLModelType `type:"string" enum:"true"`
@@ -107,16 +109,16 @@ type GetMLModelOutput struct {
 	// The recipe to use when training the MLModel. The Recipe provides detailed
 	// information about the observation data to use during training, and manipulations
 	// to perform on the observation data during training.
-	//
-	// NoteThis parameter is provided as part of the verbose format.
+	//  Note
+	// This parameter is provided as part of the verbose format.
 	Recipe *string `type:"string"`
 
 	// The schema used by all of the data files referenced by the DataSource.
-	//
-	// NoteThis parameter is provided as part of the verbose format.
+	//  Note
+	// This parameter is provided as part of the verbose format.
 	Schema *string `type:"string"`
 
-	// The scoring threshold is used in binary classification MLModelmodels. It
+	// The scoring threshold is used in binary classification MLModel models. It
 	// marks the boundary between a positive prediction and a negative prediction.
 	//
 	// Output values greater than or equal to the threshold receive a positive result
@@ -140,10 +142,13 @@ type GetMLModelOutput struct {
 	//
 	//    * PENDING - Amazon Machine Learning (Amazon ML) submitted a request to
 	//    describe a MLModel.
+	//
 	//    * INPROGRESS - The request is processing.
+	//
 	//    * FAILED - The request did not run to completion. The ML model isn't usable.
 	//
 	//    * COMPLETED - The request completed successfully.
+	//
 	//    * DELETED - The MLModel is marked as deleted. It isn't usable.
 	Status EntityStatus `type:"string" enum:"true"`
 
@@ -157,8 +162,7 @@ type GetMLModelOutput struct {
 	//
 	//    * sgd.maxMLModelSizeInBytes - The maximum allowed size of the model. Depending
 	//    on the input data, the size of the model might affect its performance.
-	//
-	//  The value is an integer that ranges from 100000 to 2147483648. The default
+	//    The value is an integer that ranges from 100000 to 2147483648. The default
 	//    value is 33554432.
 	//
 	//    * sgd.maxPasses - The number of times that the training process traverses
@@ -174,20 +178,17 @@ type GetMLModelOutput struct {
 	//    It controls overfitting the data by penalizing large coefficients. This
 	//    tends to drive coefficients to zero, resulting in a sparse feature set.
 	//    If you use this parameter, start by specifying a small value, such as
-	//    1.0E-08.
-	//
-	// The value is a double that ranges from 0 to MAX_DOUBLE. The default is to
-	//    not use L1 normalization. This parameter can't be used when L2 is specified.
-	//    Use this parameter sparingly.
+	//    1.0E-08. The value is a double that ranges from 0 to MAX_DOUBLE. The default
+	//    is to not use L1 normalization. This parameter can't be used when L2 is
+	//    specified. Use this parameter sparingly.
 	//
 	//    * sgd.l2RegularizationAmount - The coefficient regularization L2 norm.
 	//    It controls overfitting the data by penalizing large coefficients. This
 	//    tends to drive coefficients to small, nonzero values. If you use this
-	//    parameter, start by specifying a small value, such as 1.0E-08.
-	//
-	// The value is a double that ranges from 0 to MAX_DOUBLE. The default is to
-	//    not use L2 normalization. This parameter can't be used when L1 is specified.
-	//    Use this parameter sparingly.
+	//    parameter, start by specifying a small value, such as 1.0E-08. The value
+	//    is a double that ranges from 0 to MAX_DOUBLE. The default is to not use
+	//    L2 normalization. This parameter can't be used when L1 is specified. Use
+	//    this parameter sparingly.
 	TrainingParameters map[string]string `type:"map"`
 }
 

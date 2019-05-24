@@ -66,7 +66,10 @@ type AddIpRoutesInput struct {
 	//
 	// Outbound:
 	//
-	// Type: All traffic, Protocol: All, Range: All, Destination: 0.0.0.0/0
+	//    * Type: All traffic, Protocol: All, Range: All, Destination: 0.0.0.0/0
+	//
+	// These security rules impact an internal network interface that is not exposed
+	// publicly.
 	UpdateSecurityGroupForDirectoryControllers *bool `type:"boolean"`
 }
 

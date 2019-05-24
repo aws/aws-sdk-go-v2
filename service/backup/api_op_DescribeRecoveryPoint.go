@@ -132,10 +132,10 @@ type DescribeRecoveryPointOutput struct {
 	// according to the lifecycle that you define.
 	//
 	// Backups that are transitioned to cold storage must be stored in cold storage
-	// for a minimum of 90 days. Therefore, the “expire after days” setting must
-	// be 90 days greater than the “transition to cold after days” setting. The
-	// “transition to cold after days” setting cannot be changed after a backup
-	// has been transitioned to cold.
+	// for a minimum of 90 days. Therefore, the “expire after days” setting
+	// must be 90 days greater than the “transition to cold after days” setting.
+	// The “transition to cold after days” setting cannot be changed after a
+	// backup has been transitioned to cold.
 	Lifecycle *Lifecycle `type:"structure"`
 
 	// An ARN that uniquely identifies a recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.

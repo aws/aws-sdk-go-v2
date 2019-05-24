@@ -456,7 +456,7 @@ type ServerReplicationParameters struct {
 	// KMS key ID for replication jobs that produce encrypted AMIs. Can be any of
 	// the following:
 	//
-	// KMS key ID
+	//    * KMS key ID
 	//
 	//    * KMS key alias
 	//
@@ -464,7 +464,8 @@ type ServerReplicationParameters struct {
 	//
 	//    * ARN referring to KMS key alias
 	//
-	//  If encrypted is true
+	// If encrypted is true but a KMS key id is not specified, the customer's default
+	// KMS key for EBS is used.
 	KmsKeyId *string `locationName:"kmsKeyId" type:"string"`
 
 	// License type for creating a replication job for the server.

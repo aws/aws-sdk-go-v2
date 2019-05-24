@@ -47,12 +47,9 @@ type CreateStackInstancesInput struct {
 	//    and specify its value.
 	//
 	//    * To leave a parameter set to its present value, you can do one of the
-	//    following:
-	//
-	// Do not include the parameter in the list.
-	//
-	// Include the parameter and specify UsePreviousValue as true. (You cannot specify
-	//    both a value and set UsePreviousValue to true.)
+	//    following: Do not include the parameter in the list. Include the parameter
+	//    and specify UsePreviousValue as true. (You cannot specify both a value
+	//    and set UsePreviousValue to true.)
 	//
 	//    * To set all overridden parameter back to the values specified in the
 	//    stack set, specify a parameter list but do not include any parameters.
@@ -136,8 +133,8 @@ const opCreateStackInstances = "CreateStackInstances"
 //
 // Creates stack instances for the specified accounts, within the specified
 // regions. A stack instance refers to a stack in a specific account and region.
-// Accounts and Regions are required parameters—you must specify at least one
-// account and one region.
+// Accounts and Regions are required parameters—you must specify at least
+// one account and one region.
 //
 //    // Example sending a request using CreateStackInstancesRequest.
 //    req := client.CreateStackInstancesRequest(params)

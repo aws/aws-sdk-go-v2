@@ -603,17 +603,29 @@ type ProgressDetail struct {
 
 	// The current progress status.
 	//
-	// ValidatingValidating the deployment.
+	// Validating
 	//
-	// Downloading/ExtractingDownloading and extracting the bundle on the robot.
+	// Validating the deployment.
 	//
-	// Executing pre-launch script(s)Executing pre-launch script(s) if provided.
+	// Downloading/Extracting
 	//
-	// LaunchingLaunching the robot application.
+	// Downloading and extracting the bundle on the robot.
 	//
-	// Executing post-launch script(s)Executing post-launch script(s) if provided.
+	// Executing pre-launch script(s)
 	//
-	// FinishedDeployment is complete.
+	// Executing pre-launch script(s) if provided.
+	//
+	// Launching
+	//
+	// Launching the robot application.
+	//
+	// Executing post-launch script(s)
+	//
+	// Executing post-launch script(s) if provided.
+	//
+	// Finished
+	//
+	// Deployment is complete.
 	CurrentProgress RobotDeploymentStep `locationName:"currentProgress" type:"string" enum:"true"`
 
 	// Estimated amount of time in seconds remaining in the step. This currently
@@ -1178,9 +1190,13 @@ type SimulationJob struct {
 
 	// The failure behavior the simulation job.
 	//
-	// ContinueRestart the simulation job in the same host instance.
+	// Continue
 	//
-	// FailStop the simulation job and terminate the instance.
+	// Restart the simulation job in the same host instance.
+	//
+	// Fail
+	//
+	// Stop the simulation job and terminate the instance.
 	FailureBehavior FailureBehavior `locationName:"failureBehavior" type:"string" enum:"true"`
 
 	// The failure code of the simulation job if it failed.

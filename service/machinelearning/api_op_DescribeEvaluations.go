@@ -21,9 +21,12 @@ type DescribeEvaluationsInput struct {
 	//    * CreatedAt - Sets the search criteria to the Evaluation creation date.
 	//
 	//    * Status - Sets the search criteria to the Evaluation status.
-	//    * Name - Sets the search criteria to the contents of EvaluationName.
+	//
+	//    * Name - Sets the search criteria to the contents of Evaluation Name.
+	//
 	//    * IAMUser - Sets the search criteria to the user account that invoked
 	//    an Evaluation.
+	//
 	//    * MLModelId - Sets the search criteria to the MLModel that was evaluated.
 	//
 	//    * DataSourceId - Sets the search criteria to the DataSource used in Evaluation.
@@ -61,7 +64,7 @@ type DescribeEvaluationsInput struct {
 
 	// A string that is found at the beginning of a variable, such as Name or Id.
 	//
-	// For example, an Evaluation could have the Name2014-09-09-HolidayGiftMailer.
+	// For example, an Evaluation could have the Name 2014-09-09-HolidayGiftMailer.
 	// To search for this Evaluation, select Name for the FilterVariable and any
 	// of the following strings for the Prefix:
 	//
@@ -76,7 +79,9 @@ type DescribeEvaluationsInput struct {
 	// of Evaluation.
 	//
 	//    * asc - Arranges the list in ascending order (A-Z, 0-9).
+	//
 	//    * dsc - Arranges the list in descending order (Z-A, 9-0).
+	//
 	// Results are sorted by FilterVariable.
 	SortOrder SortOrder `type:"string" enum:"true"`
 }

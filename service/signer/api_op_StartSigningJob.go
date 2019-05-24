@@ -141,7 +141,7 @@ const opStartSigningJob = "StartSigningJob"
 // are viewable by the ListSigningJobs operation for two years after they are
 // performed. Note the following requirements:
 //
-//    *  You must create an Amazon S3 source bucket. For more information, see
+//    * You must create an Amazon S3 source bucket. For more information, see
 //    Create a Bucket (http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html)
 //    in the Amazon S3 Getting Started Guide.
 //

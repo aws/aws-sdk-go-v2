@@ -25,7 +25,7 @@ type CreatePermissionInput struct {
 	// can find the ARN by calling the ListCertificateAuthorities operation. This
 	// must have the following form:
 	//
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012.
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 .
 	//
 	// CertificateAuthorityArn is a required field
 	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`

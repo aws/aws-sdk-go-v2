@@ -19,15 +19,13 @@ type BatchGetDeploymentTargetsInput struct {
 	// The unique IDs of the deployment targets. The compute platform of the deployment
 	// determines the type of the targets and their formats.
 	//
-	//    *  For deployments that use the EC2/On-premises compute platform, the
-	//    target IDs are EC2 or on-premises instances IDs, and their target type
-	//    is instanceTarget.
+	//    * For deployments that use the EC2/On-premises compute platform, the target
+	//    IDs are EC2 or on-premises instances IDs, and their target type is instanceTarget.
 	//
-	//    *  For deployments that use the AWS Lambda compute platform, the target
+	//    * For deployments that use the AWS Lambda compute platform, the target
 	//    IDs are the names of Lambda functions, and their target type is instanceTarget.
 	//
-	//
-	//    *  For deployments that use the Amazon ECS compute platform, the target
+	//    * For deployments that use the Amazon ECS compute platform, the target
 	//    IDs are pairs of Amazon ECS clusters and services specified using the
 	//    format <clustername>:<servicename>. Their target type is ecsTarget.
 	TargetIds []string `locationName:"targetIds" type:"list"`
@@ -47,7 +45,6 @@ type BatchGetDeploymentTargetsOutput struct {
 	// target objects depends on the deployment' compute platform.
 	//
 	//    * EC2/On-premises: Each target object is an EC2 or on-premises instance.
-	//
 	//
 	//    * AWS Lambda: The target object is a specific version of an AWS Lambda
 	//    function.

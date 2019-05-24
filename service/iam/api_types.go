@@ -145,7 +145,7 @@ func (s AccessKeyMetadata) String() string {
 // to a user or role to set the permissions boundary.
 //
 // For more information about permissions boundaries, see Permissions Boundaries
-// for IAM Identities  (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+// for IAM Identities (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
 // in the IAM User Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachedPermissionsBoundary
 type AttachedPermissionsBoundary struct {
@@ -202,7 +202,7 @@ func (s AttachedPolicy) String() string {
 // evaluating the Condition elements of the input policies.
 //
 // This data type is used as an input parameter to SimulateCustomPolicy and
-// SimulateCustomPolicy.
+// SimulateCustomPolicy .
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ContextEntry
 type ContextEntry struct {
 	_ struct{} `type:"structure"`
@@ -273,12 +273,12 @@ func (s DeletionTaskFailureReasonType) String() string {
 type EntityDetails struct {
 	_ struct{} `type:"structure"`
 
-	// The EntityInfo object that contains details about the entity (user or role).
+	// The EntityInfo object that contains details about the entity (user or role).
 	//
 	// EntityInfo is a required field
 	EntityInfo *EntityInfo `type:"structure" required:"true"`
 
-	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
+	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
 	// when the authenticated entity last attempted to access AWS. AWS does not
 	// report unauthenticated requests.
 	//
@@ -361,7 +361,7 @@ func (s ErrorDetails) String() string {
 // Contains the results of a simulation.
 //
 // This data type is used by the return parameter of SimulateCustomPolicy and
-// SimulatePrincipalPolicy.
+// SimulatePrincipalPolicy .
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EvaluationResult
 type EvaluationResult struct {
 	_ struct{} `type:"structure"`
@@ -580,7 +580,7 @@ func (s InstanceProfile) String() string {
 type ListPoliciesGrantingServiceAccessEntry struct {
 	_ struct{} `type:"structure"`
 
-	// The PoliciesGrantingServiceAccess object that contains details about the
+	// The PoliciesGrantingServiceAccess object that contains details about the
 	// policy.
 	Policies []PolicyGrantingServiceAccess `type:"list"`
 
@@ -592,7 +592,7 @@ type ListPoliciesGrantingServiceAccessEntry struct {
 	// that service. In the first paragraph, find the service prefix. For example,
 	// (service prefix: a4b). For more information about service namespaces, see
 	// AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the AWS General Reference.
+	// in the AWS General Reference.
 	ServiceNamespace *string `min:"1" type:"string"`
 }
 
@@ -711,7 +711,7 @@ type ManagedPolicyDetail struct {
 	// the permissions boundary.
 	//
 	// For more information about permissions boundaries, see Permissions Boundaries
-	// for IAM Identities  (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+	// for IAM Identities (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
 	// in the IAM User Guide.
 	PermissionsBoundaryUsageCount *int64 `type:"integer"`
 
@@ -872,7 +872,7 @@ type Policy struct {
 	// set the permissions boundary.
 	//
 	// For more information about permissions boundaries, see Permissions Boundaries
-	// for IAM Identities  (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+	// for IAM Identities (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
 	// in the IAM User Guide.
 	PermissionsBoundaryUsageCount *int64 `type:"integer"`
 
@@ -1202,7 +1202,7 @@ type Role struct {
 	// The ARN of the policy used to set the permissions boundary for the role.
 	//
 	// For more information about permissions boundaries, see Permissions Boundaries
-	// for IAM Identities  (IAM/latest/UserGuide/access_policies_boundaries.html)
+	// for IAM Identities (IAM/latest/UserGuide/access_policies_boundaries.html)
 	// in the IAM User Guide.
 	PermissionsBoundary *AttachedPermissionsBoundary `type:"structure"`
 
@@ -1266,7 +1266,7 @@ type RoleDetail struct {
 	// The ARN of the policy used to set the permissions boundary for the role.
 	//
 	// For more information about permissions boundaries, see Permissions Boundaries
-	// for IAM Identities  (IAM/latest/UserGuide/access_policies_boundaries.html)
+	// for IAM Identities (IAM/latest/UserGuide/access_policies_boundaries.html)
 	// in the IAM User Guide.
 	PermissionsBoundary *AttachedPermissionsBoundary `type:"structure"`
 
@@ -1499,7 +1499,7 @@ func (s ServerCertificateMetadata) String() string {
 type ServiceLastAccessed struct {
 	_ struct{} `type:"structure"`
 
-	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
+	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
 	// when an authenticated entity most recently attempted to access the service.
 	// AWS does not report unauthenticated requests.
 	//
@@ -1527,7 +1527,7 @@ type ServiceLastAccessed struct {
 	// that service. In the first paragraph, find the service prefix. For example,
 	// (service prefix: a4b). For more information about service namespaces, see
 	// AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the AWS General Reference.
+	// in the AWS General Reference.
 	//
 	// ServiceNamespace is a required field
 	ServiceNamespace *string `min:"1" type:"string" required:"true"`
@@ -1815,7 +1815,7 @@ type User struct {
 	// The ARN of the policy used to set the permissions boundary for the user.
 	//
 	// For more information about permissions boundaries, see Permissions Boundaries
-	// for IAM Identities  (IAM/latest/UserGuide/access_policies_boundaries.html)
+	// for IAM Identities (IAM/latest/UserGuide/access_policies_boundaries.html)
 	// in the IAM User Guide.
 	PermissionsBoundary *AttachedPermissionsBoundary `type:"structure"`
 
@@ -1876,7 +1876,7 @@ type UserDetail struct {
 	// The ARN of the policy used to set the permissions boundary for the user.
 	//
 	// For more information about permissions boundaries, see Permissions Boundaries
-	// for IAM Identities  (IAM/latest/UserGuide/access_policies_boundaries.html)
+	// for IAM Identities (IAM/latest/UserGuide/access_policies_boundaries.html)
 	// in the IAM User Guide.
 	PermissionsBoundary *AttachedPermissionsBoundary `type:"structure"`
 

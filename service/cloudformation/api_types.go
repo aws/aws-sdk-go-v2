@@ -44,18 +44,14 @@ type AccountGateResult struct {
 	//    and region to FAILED.
 	//
 	//    * SKIPPED: AWS CloudFormation has skipped calling the account gate function
-	//    for this account and region, for one of the following reasons:
-	//
-	// An account gate function has not been specified for the account and region.
-	//    AWS CloudFormation proceeds with the stack set operation in this account
-	//    and region.
-	//
-	// The AWSCloudFormationStackSetExecutionRole of the stack set adminstration
+	//    for this account and region, for one of the following reasons: An account
+	//    gate function has not been specified for the account and region. AWS CloudFormation
+	//    proceeds with the stack set operation in this account and region. The
+	//    AWSCloudFormationStackSetExecutionRole of the stack set adminstration
 	//    account lacks permissions to invoke the function. AWS CloudFormation proceeds
-	//    with the stack set operation in this account and region.
-	//
-	// Either no action is necessary, or no action is possible, on the stack. AWS
-	//    CloudFormation skips the stack set operation in this account and region.
+	//    with the stack set operation in this account and region. Either no action
+	//    is necessary, or no action is possible, on the stack. AWS CloudFormation
+	//    skips the stack set operation in this account and region.
 	Status AccountGateStatus `type:"string" enum:"true"`
 
 	// The reason for the account gate status assigned to this account and region
@@ -126,8 +122,8 @@ type ChangeSetSummary struct {
 	Description *string `min:"1" type:"string"`
 
 	// If the change set execution status is AVAILABLE, you can execute the change
-	// set. If you can’t execute the change set, the status indicates why. For example,
-	// a change set might be in an UNAVAILABLE state because AWS CloudFormation
+	// set. If you can’t execute the change set, the status indicates why. For
+	// example, a change set might be in an UNAVAILABLE state because AWS CloudFormation
 	// is still creating it or in an OBSOLETE state because the stack was already
 	// updated.
 	ExecutionStatus ExecutionStatus `type:"string" enum:"true"`
@@ -212,8 +208,8 @@ type Parameter struct {
 	ParameterValue *string `type:"string"`
 
 	// Read-only. The value that corresponds to a Systems Manager parameter key.
-	// This field is returned only for SSM (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html#aws-ssm-parameter-types)
-	// parameter types in the template.
+	// This field is returned only for SSM parameter types (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html#aws-ssm-parameter-types)
+	// in the template.
 	ResolvedValue *string `type:"string"`
 
 	// During a stack update, use the existing parameter value that the stack is
@@ -830,7 +826,7 @@ type StackEvent struct {
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string `type:"string"`
 
-	// Type of resource. (For more information, go to  AWS Resource Types Reference
+	// Type of resource. (For more information, go to AWS Resource Types Reference
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.)
 	ResourceType *string `min:"1" type:"string"`
@@ -859,10 +855,10 @@ func (s StackEvent) String() string {
 // An AWS CloudFormation stack, in a specific account and region, that's part
 // of a stack set operation. A stack instance is a reference to an attempted
 // or actual stack in a given account within a given region. A stack instance
-// can exist without a stack—for example, if the stack couldn't be created for
-// some reason. A stack instance is associated with only one stack set. Each
-// stack instance contains the ID of its associated stack set, as well as the
-// ID of the actual stack and the stack status.
+// can exist without a stack—for example, if the stack couldn't be created
+// for some reason. A stack instance is associated with only one stack set.
+// Each stack instance contains the ID of its associated stack set, as well
+// as the ID of the actual stack and the stack status.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackInstance
 type StackInstance struct {
 	_ struct{} `type:"structure"`
@@ -894,12 +890,9 @@ type StackInstance struct {
 	//    and then delete the stack manually.
 	//
 	//    * OUTDATED: The stack isn't currently up to date with the stack set because:
-	//
-	// The associated stack failed during a CreateStackSet or UpdateStackSet operation.
-	//
-	//
-	// The stack was part of a CreateStackSet or UpdateStackSet operation that failed
-	//    or was stopped before the stack was created or updated.
+	//    The associated stack failed during a CreateStackSet or UpdateStackSet
+	//    operation. The stack was part of a CreateStackSet or UpdateStackSet operation
+	//    that failed or was stopped before the stack was created or updated.
 	//
 	//    * CURRENT: The stack is currently up to date with the stack set.
 	Status StackInstanceStatus `type:"string" enum:"true"`
@@ -942,12 +935,9 @@ type StackInstanceSummary struct {
 	//    and then delete the stack manually.
 	//
 	//    * OUTDATED: The stack isn't currently up to date with the stack set because:
-	//
-	// The associated stack failed during a CreateStackSet or UpdateStackSet operation.
-	//
-	//
-	// The stack was part of a CreateStackSet or UpdateStackSet operation that failed
-	//    or was stopped before the stack was created or updated.
+	//    The associated stack failed during a CreateStackSet or UpdateStackSet
+	//    operation. The stack was part of a CreateStackSet or UpdateStackSet operation
+	//    that failed or was stopped before the stack was created or updated.
 	//
 	//    * CURRENT: The stack is currently up to date with the stack set.
 	Status StackInstanceStatus `type:"string" enum:"true"`
@@ -992,7 +982,7 @@ type StackResource struct {
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string `type:"string"`
 
-	// Type of resource. (For more information, go to  AWS Resource Types Reference
+	// Type of resource. (For more information, go to AWS Resource Types Reference
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.)
 	//
@@ -1057,7 +1047,7 @@ type StackResourceDetail struct {
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string `type:"string"`
 
-	// Type of resource. ((For more information, go to  AWS Resource Types Reference
+	// Type of resource. ((For more information, go to AWS Resource Types Reference
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.)
 	//
@@ -1183,12 +1173,9 @@ type StackResourceDriftInformation struct {
 	//    * MODIFIED: The resource differs from its expected configuration.
 	//
 	//    * NOT_CHECKED: AWS CloudFormation has not checked if the resource differs
-	//    from its expected configuration.
-	//
-	// Any resources that do not currently support drift detection have a status
-	//    of NOT_CHECKED. For more information, see Resources that Support Drift
-	//    Detection (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
-	//
+	//    from its expected configuration. Any resources that do not currently support
+	//    drift detection have a status of NOT_CHECKED. For more information, see
+	//    Resources that Support Drift Detection (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
 	//
 	//    * IN_SYNC: The resources's actual configuration matches its expected configuration.
 	//
@@ -1219,11 +1206,9 @@ type StackResourceDriftInformationSummary struct {
 	//    * MODIFIED: The resource differs from its expected configuration.
 	//
 	//    * NOT_CHECKED: AWS CloudFormation has not checked if the resource differs
-	//    from its expected configuration.
-	//
-	// Any resources that do not currently support drift detection have a status
-	//    of NOT_CHECKED. For more information, see Resources that Support Drift
-	//    Detection (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
+	//    from its expected configuration. Any resources that do not currently support
+	//    drift detection have a status of NOT_CHECKED. For more information, see
+	//    Resources that Support Drift Detection (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
 	//    If you performed an ContinueUpdateRollback operation on a stack, any resources
 	//    included in ResourcesToSkip will also have a status of NOT_CHECKED. For
 	//    more information on skipping resources during rollback operations, see
@@ -1274,7 +1259,7 @@ type StackResourceSummary struct {
 	// Success/failure message associated with the resource.
 	ResourceStatusReason *string `type:"string"`
 
-	// Type of resource. (For more information, go to  AWS Resource Types Reference
+	// Type of resource. (For more information, go to AWS Resource Types Reference
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.)
 	//
@@ -1419,7 +1404,6 @@ type StackSetOperation struct {
 	//
 	//    * STOPPING: The operation is in the process of stopping, at user request.
 	//
-	//
 	//    * SUCCEEDED: The operation completed creating or updating all the specified
 	//    stacks without exceeding the failure tolerance for the operation.
 	Status StackSetOperationStatus `type:"string" enum:"true"`
@@ -1536,11 +1520,9 @@ type StackSetOperationResultSummary struct {
 	//    cancelled. This is either because a user has stopped the stack set operation,
 	//    or because the failure tolerance of the stack set operation has been exceeded.
 	//
-	//    * FAILED: The operation in the specified account and region failed.
-	//
-	// If the stack set operation fails in enough accounts within a region, the
+	//    * FAILED: The operation in the specified account and region failed. If
+	//    the stack set operation fails in enough accounts within a region, the
 	//    failure tolerance for the stack set operation as a whole might be exceeded.
-	//
 	//
 	//    * RUNNING: The operation in the specified account and region is currently
 	//    in progress.
@@ -1602,7 +1584,6 @@ type StackSetOperationSummary struct {
 	//    * STOPPED: The user has cancelled the operation.
 	//
 	//    * STOPPING: The operation is in the process of stopping, at user request.
-	//
 	//
 	//    * SUCCEEDED: The operation completed creating or updating all the specified
 	//    stacks without exceeding the failure tolerance for the operation.

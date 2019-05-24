@@ -91,26 +91,14 @@ const opTestFailover = "TestFailover"
 //    * To determine whether the node replacement is complete you can check
 //    Events using the Amazon ElastiCache console, the AWS CLI, or the ElastiCache
 //    API. Look for the following automatic failover related events, listed
-//    here in order of occurrance:
-//
-// Replication group message: Test Failover API called for node group <node-group-id>
-//
-// Cache cluster message: Failover from master node <primary-node-id> to replica
-//    node <node-id> completed
-//
-// Replication group message: Failover from master node <primary-node-id> to
-//    replica node <node-id> completed
-//
-// Cache cluster message: Recovering cache nodes <node-id>
-//
-// Cache cluster message: Finished recovery for cache nodes <node-id>
-//
-// For more information see:
-//
-// Viewing ElastiCache Events (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ECEvents.Viewing.html)
-//    in the ElastiCache User Guide
-//
-// DescribeEvents (http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeEvents.html)
+//    here in order of occurrance: Replication group message: Test Failover
+//    API called for node group <node-group-id> Cache cluster message: Failover
+//    from master node <primary-node-id> to replica node <node-id> completed
+//    Replication group message: Failover from master node <primary-node-id>
+//    to replica node <node-id> completed Cache cluster message: Recovering
+//    cache nodes <node-id> Cache cluster message: Finished recovery for cache
+//    nodes <node-id> For more information see: Viewing ElastiCache Events (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ECEvents.Viewing.html)
+//    in the ElastiCache User Guide DescribeEvents (http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeEvents.html)
 //    in the ElastiCache API Reference
 //
 // Also see, Testing Multi-AZ with Automatic Failover (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html#auto-failover-test)

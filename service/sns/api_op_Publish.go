@@ -28,18 +28,16 @@ type PublishInput struct {
 	//
 	// Constraints:
 	//
-	// With the exception of SMS, messages must be UTF-8 encoded strings and at
-	// most 256 KB in size (262,144 bytes, not 262,144 characters).
+	//    * With the exception of SMS, messages must be UTF-8 encoded strings and
+	//    at most 256 KB in size (262,144 bytes, not 262,144 characters).
 	//
 	//    * For SMS, each message can contain up to 140 characters. This character
 	//    limit depends on the encoding schema. For example, an SMS message can
 	//    contain 160 GSM characters, 140 ASCII characters, or 70 UCS-2 characters.
-	//
-	//    * If you publish a message that exceeds this size limit, Amazon SNS sends
+	//    If you publish a message that exceeds this size limit, Amazon SNS sends
 	//    the message as multiple messages, each fitting within the size limit.
 	//    Messages aren't truncated mid-word but are cut off at whole-word boundaries.
-	//
-	//    * The total size limit for a single SMS Publish action is 1,600 characters.
+	//    The total size limit for a single SMS Publish action is 1,600 characters.
 	//
 	// JSON-specific constraints:
 	//

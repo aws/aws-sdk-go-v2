@@ -71,7 +71,7 @@ const opRemoveRoleFromDBCluster = "RemoveRoleFromDBCluster"
 //
 // Disassociates an AWS Identity and Access Management (IAM) role from an Amazon
 // Aurora DB cluster. For more information, see Authorizing Amazon Aurora MySQL
-// to Access Other AWS Services on Your Behalf  (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.Authorizing.html)
+// to Access Other AWS Services on Your Behalf (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.Authorizing.html)
 // in the Amazon Aurora User Guide.
 //
 // This action only applies to Aurora DB clusters.

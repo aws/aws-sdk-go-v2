@@ -83,15 +83,8 @@ const opResizeCluster = "ResizeCluster"
 //
 // Elastic resize operations have the following restrictions:
 //
-//    * You can only resize clusters of the following types:
-//
-// dc2.large
-//
-// dc2.8xlarge
-//
-// ds2.xlarge
-//
-// ds2.8xlarge
+//    * You can only resize clusters of the following types: dc2.large dc2.8xlarge
+//    ds2.xlarge ds2.8xlarge
 //
 //    * The type of nodes that you add must match the node type for the cluster.
 //

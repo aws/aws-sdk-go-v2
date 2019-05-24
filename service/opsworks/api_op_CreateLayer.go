@@ -39,7 +39,7 @@ type CreateLayerInput struct {
 
 	// A JSON-formatted string containing custom stack configuration and deployment
 	// attributes to be installed on the layer's instances. For more information,
-	// see  Using Custom JSON (http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html).
+	// see Using Custom JSON (http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html).
 	// This feature is supported as of version 1.7.42 of the AWS CLI.
 	CustomJson *string `type:"string"`
 

@@ -72,7 +72,7 @@ const opAttachElasticLoadBalancer = "AttachElasticLoadBalancer"
 //
 // You must create the Elastic Load Balancing instance separately, by using
 // the Elastic Load Balancing console, API, or CLI. For more information, see
-//  Elastic Load Balancing Developer Guide (http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/Welcome.html).
+// Elastic Load Balancing Developer Guide (http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/Welcome.html).
 //
 // Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants

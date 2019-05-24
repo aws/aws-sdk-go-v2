@@ -6,6 +6,7 @@ package machinelearning
 // ML include the following:
 //
 //    * SGD - Stochastic Gradient Descent.
+//
 //    * RandomForest - Random forest of decision trees.
 type Algorithm string
 
@@ -28,14 +29,17 @@ func (enum Algorithm) MarshalValueBuf(b []byte) ([]byte, error) {
 //    * CreatedAt - Sets the search criteria to BatchPrediction creation date.
 //
 //    * Status - Sets the search criteria to BatchPrediction status.
-//    * Name - Sets the search criteria to the contents of BatchPredictionName.
+//
+//    * Name - Sets the search criteria to the contents of BatchPrediction Name.
 //
 //    * IAMUser - Sets the search criteria to the user account that invoked
 //    the BatchPrediction creation.
+//
 //    * MLModelId - Sets the search criteria to the MLModel used in the BatchPrediction.
 //
 //    * DataSourceId - Sets the search criteria to the DataSource used in the
 //    BatchPrediction.
+//
 //    * DataURI - Sets the search criteria to the data file(s) used in the BatchPrediction.
 //    The URL can identify either a file or an Amazon Simple Storage Service
 //    (Amazon S3) bucket or directory.
@@ -65,14 +69,19 @@ func (enum BatchPredictionFilterVariable) MarshalValueBuf(b []byte) ([]byte, err
 // A list of the variables to use in searching or filtering DataSource.
 //
 //    * CreatedAt - Sets the search criteria to DataSource creation date.
+//
 //    * Status - Sets the search criteria to DataSource status.
-//    * Name - Sets the search criteria to the contents of DataSourceName.
+//
+//    * Name - Sets the search criteria to the contents of DataSource Name.
+//
 //    * DataUri - Sets the search criteria to the URI of data files used to
 //    create the DataSource. The URI can identify either a file or an Amazon
 //    Simple Storage Service (Amazon S3) bucket or directory.
+//
 //    * IAMUser - Sets the search criteria to the user account that invoked
 //    the DataSource creation.
-// NoteThe variable names should match the variable names in the DataSource.
+//  Note
+// The variable names should match the variable names in the DataSource.
 type DataSourceFilterVariable string
 
 // Enum values for DataSourceFilterVariable
@@ -94,7 +103,17 @@ func (enum DataSourceFilterVariable) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Contains the key values of DetailsMap: PredictiveModelType- Indicates the type of the MLModel. Algorithm- Indicates the algorithm that was used for the MLModel
+// Contains the key values of
+//    DetailsMap
+// :
+//    PredictiveModelType
+//  - Indicates the type of the
+//    MLModel
+// .
+//    Algorithm
+//  - Indicates the algorithm that was used for the
+//    MLModel
+// .
 type DetailsAttributes string
 
 // Enum values for DetailsAttributes
@@ -115,9 +134,13 @@ func (enum DetailsAttributes) MarshalValueBuf(b []byte) ([]byte, error) {
 // Object status with the following possible values:
 //
 //    * PENDING
+//
 //    * INPROGRESS
+//
 //    * FAILED
+//
 //    * COMPLETED
+//
 //    * DELETED
 type EntityStatus string
 
@@ -142,10 +165,14 @@ func (enum EntityStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 // A list of the variables to use in searching or filtering Evaluation.
 //
 //    * CreatedAt - Sets the search criteria to Evaluation creation date.
+//
 //    * Status - Sets the search criteria to Evaluation status.
-//    * Name - Sets the search criteria to the contents of EvaluationName.
+//
+//    * Name - Sets the search criteria to the contents of Evaluation Name.
+//
 //    * IAMUser - Sets the search criteria to the user account that invoked
 //    an evaluation.
+//
 //    * MLModelId - Sets the search criteria to the Predictor that was evaluated.
 //
 //    * DataSourceId - Sets the search criteria to the DataSource used in evaluation.
@@ -242,6 +269,7 @@ func (enum RealtimeEndpointStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 // the following:
 //
 //    * asc - Present the information in ascending order (from A-Z).
+//
 //    * dsc - Present the information in descending order (from Z-A).
 type SortOrder string
 

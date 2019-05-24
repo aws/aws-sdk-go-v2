@@ -118,7 +118,7 @@ const opCreateGovCloudAccount = "CreateGovCloudAccount"
 //
 //    * You are authorized to create accounts in the AWS GovCloud (US) Region.
 //    For more information on the AWS GovCloud (US) Region, see the AWS GovCloud
-//    User Guide (http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/welcome.html).
+//    User Guide. (http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/welcome.html)
 //
 //    * You already have an account in the AWS GovCloud (US) Region that is
 //    associated with your master account in the commercial Region.
@@ -136,9 +136,8 @@ const opCreateGovCloudAccount = "CreateGovCloudAccount"
 //
 //    * Verify that AWS CloudTrail is enabled to store logs.
 //
-//    * Create an S3 bucket for AWS CloudTrail log storage.
-//
-// For more information, see Verifying AWS CloudTrail Is Enabled (http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/verifying-cloudtrail.html)
+//    * Create an S3 bucket for AWS CloudTrail log storage. For more information,
+//    see Verifying AWS CloudTrail Is Enabled (http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/verifying-cloudtrail.html)
 //    in the AWS GovCloud User Guide.
 //
 // You call this action from the master account of your organization in the
@@ -164,11 +163,12 @@ const opCreateGovCloudAccount = "CreateGovCloudAccount"
 //    the Activity in Your Organization (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html)
 //    in the AWS Organizations User Guide.
 //
-// When you call the CreateGovCloudAccountaction, you create two accounts: a standalone account in the AWS GovCloud
-// (US) Region and an associated account in the commercial Region for billing
-// and support purposes. The account in the commercial Region is automatically
-// a member of the organization whose credentials made the request. Both accounts
-// are associated with the same email address.
+// When you call the CreateGovCloudAccount action, you create two accounts:
+// a standalone account in the AWS GovCloud (US) Region and an associated account
+// in the commercial Region for billing and support purposes. The account in
+// the commercial Region is automatically a member of the organization whose
+// credentials made the request. Both accounts are associated with the same
+// email address.
 //
 // A role is created in the new account in the commercial Region that allows
 // the master account in the organization in the commercial Region to assume
@@ -177,32 +177,35 @@ const opCreateGovCloudAccount = "CreateGovCloudAccount"
 // GovCloud (US) account that can be assumed by the AWS GovCloud (US) account
 // that is associated with the master account of the commercial organization.
 // For more information and to view a diagram that explains how account access
-// works, see AWS Organizations (http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html)in the AWS GovCloud User Guide.
+// works, see AWS Organizations (http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html)
+// in the AWS GovCloud User Guide.
 //
 // For more information about creating accounts, see Creating an AWS Account
-// in Your Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html)in the AWS Organizations User Guide.
-//
-// When you create an account in an organization using the AWS Organizations
-// console, API, or CLI commands, the information required for the account to
-// operate as a standalone account, such as a payment method and signing the
-// end user license agreement (EULA) is not automatically collected. If you
-// must remove an account from your organization later, you can do so only after
-// you provide the missing information. Follow the steps at  To leave an organization
-// as a member account (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
+// in Your Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html)
 // in the AWS Organizations User Guide.
 //
-// If you get an exception that indicates that you exceeded your account limits
-// for the organization, contact AWS Support (https://console.aws.amazon.com/support/home#/).
+//    * When you create an account in an organization using the AWS Organizations
+//    console, API, or CLI commands, the information required for the account
+//    to operate as a standalone account, such as a payment method and signing
+//    the end user license agreement (EULA) is not automatically collected.
+//    If you must remove an account from your organization later, you can do
+//    so only after you provide the missing information. Follow the steps at
+//    To leave an organization as a member account (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
+//    in the AWS Organizations User Guide.
 //
-// If you get an exception that indicates that the operation failed because
-// your organization is still initializing, wait one hour and then try again.
-// If the error persists, contact AWS Support (https://console.aws.amazon.com/support/home#/).
+//    * If you get an exception that indicates that you exceeded your account
+//    limits for the organization, contact AWS Support (https://console.aws.amazon.com/support/home#/).
 //
-// Using CreateGovCloudAccount to create multiple temporary accounts isn't recommended.
-// You can only close an account from the AWS Billing and Cost Management console,
-// and you must be signed in as the root user. For information on the requirements
-// and process for closing an account, see Closing an AWS Account (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html)
-// in the AWS Organizations User Guide.
+//    * If you get an exception that indicates that the operation failed because
+//    your organization is still initializing, wait one hour and then try again.
+//    If the error persists, contact AWS Support (https://console.aws.amazon.com/support/home#/).
+//
+//    * Using CreateGovCloudAccount to create multiple temporary accounts isn't
+//    recommended. You can only close an account from the AWS Billing and Cost
+//    Management console, and you must be signed in as the root user. For information
+//    on the requirements and process for closing an account, see Closing an
+//    AWS Account (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html)
+//    in the AWS Organizations User Guide.
 //
 // When you create a member account with this operation, you can choose whether
 // to create the account with the IAM User and Role Access to Billing Information

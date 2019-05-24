@@ -77,23 +77,24 @@ const opBatchDeleteAttributes = "BatchDeleteAttributes"
 // If you specify BatchDeleteAttributes without attributes or values, all the
 // attributes for the item are deleted.
 //
-//  BatchDeleteAttributes is an idempotent operation; running it multiple times
+// BatchDeleteAttributes is an idempotent operation; running it multiple times
 // on the same item or attribute doesn't result in an error.
 //
-//  The BatchDeleteAttributes operation succeeds or fails in its entirety. There
+// The BatchDeleteAttributes operation succeeds or fails in its entirety. There
 // are no partial deletes. You can execute multiple BatchDeleteAttributes operations
 // and other operations in parallel. However, large numbers of concurrent BatchDeleteAttributes
 // calls can result in Service Unavailable (503) responses.
 //
-//  This operation is vulnerable to exceeding the maximum URL size when making
+// This operation is vulnerable to exceeding the maximum URL size when making
 // a REST request using the HTTP GET method.
 //
-//  This operation does not support conditions using Expected.X.Name, Expected.X.Value,
+// This operation does not support conditions using Expected.X.Name, Expected.X.Value,
 // or Expected.X.Exists.
 //
-// The following limitations are enforced for this operation: 1 MB request size
+// The following limitations are enforced for this operation:
+//    * 1 MB request size
 //
-// 25 item limit per BatchDeleteAttributes operation
+//    * 25 item limit per BatchDeleteAttributes operation
 //
 //    // Example sending a request using BatchDeleteAttributesRequest.
 //    req := client.BatchDeleteAttributesRequest(params)

@@ -47,10 +47,11 @@ type DescribeTransformJobOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the number of records to include in a mini-batch for an HTTP inference
-	// request. A recordis a single unit of input data that inference can be made on. For example,
-	// a single line in a CSV file is a record.
+	// request. A record is a single unit of input data that inference can be made
+	// on. For example, a single line in a CSV file is a record.
 	//
-	// To enable the batch strategy, you must set SplitTypeto Line, RecordIO, or TFRecord
+	// To enable the batch strategy, you must set SplitType to Line, RecordIO, or
+	// TFRecord.
 	BatchStrategy BatchStrategy `type:"string" enum:"true"`
 
 	// A timestamp that shows when the transform Job was created.

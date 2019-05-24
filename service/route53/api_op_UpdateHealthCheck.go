@@ -84,7 +84,7 @@ type UpdateHealthCheckInput struct {
 	// However, you can't update an existing health check to add or remove the value
 	// of IPAddress.
 	//
-	// If you specify a value forIPAddress:
+	// If you specify a value for IPAddress:
 	//
 	// Route 53 sends health check requests to the specified IPv4 or IPv6 address
 	// and passes the value of FullyQualifiedDomainName in the Host header for all
@@ -109,7 +109,7 @@ type UpdateHealthCheckInput struct {
 	// If you don't specify a value for FullyQualifiedDomainName, Route 53 substitutes
 	// the value of IPAddress in the Host header in each of the above cases.
 	//
-	// If you don't specify a value forIPAddress:
+	// If you don't specify a value for IPAddress:
 	//
 	// If you don't specify a value for IPAddress, Route 53 sends a DNS request
 	// to the domain that you specify in FullyQualifiedDomainName at the interval

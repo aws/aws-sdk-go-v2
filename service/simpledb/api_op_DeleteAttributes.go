@@ -82,9 +82,11 @@ const opDeleteAttributes = "DeleteAttributes"
 //
 // Deletes one or more attributes associated with an item. If all attributes
 // of the item are deleted, the item is deleted.
-//
-// If DeleteAttributes is called without being passed any attributes or values
-// specified, all the attributes for the item are deleted. DeleteAttributes is an idempotent operation; running it multiple times on
+//   If
+//    DeleteAttributes
+//  is called without being passed any attributes or values specified, all the
+//  attributes for the item are deleted.
+// DeleteAttributes is an idempotent operation; running it multiple times on
 // the same item or attribute does not result in an error response.
 //
 // Because Amazon SimpleDB makes multiple copies of item data and uses an eventual

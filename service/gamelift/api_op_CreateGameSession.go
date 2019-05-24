@@ -170,13 +170,8 @@ const opCreateGameSession = "CreateGameSession"
 //
 //    * GetGameSessionLogUrl
 //
-//    * Game session placements
-//
-// StartGameSessionPlacement
-//
-// DescribeGameSessionPlacement
-//
-// StopGameSessionPlacement
+//    * Game session placements StartGameSessionPlacement DescribeGameSessionPlacement
+//    StopGameSessionPlacement
 //
 //    // Example sending a request using CreateGameSessionRequest.
 //    req := client.CreateGameSessionRequest(params)

@@ -111,7 +111,7 @@ const opUpdateRule = "UpdateRule"
 //
 // You then add the Rule to a WebACL and specify that you want to block requests
 // that satisfy the Rule. For a request to be blocked, the User-Agent header
-// in the request must contain the value BadBotand the request must originate
+// in the request must contain the value BadBot and the request must originate
 // from the IP address 192.0.2.44.
 //
 // To create and configure a Rule, perform the following steps:

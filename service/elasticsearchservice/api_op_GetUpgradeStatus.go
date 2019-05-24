@@ -62,19 +62,26 @@ type GetUpgradeStatusOutput struct {
 	_ struct{} `type:"structure"`
 
 	// One of 4 statuses that a step can go through returned as part of the GetUpgradeStatusResponse
-	// object. The status can take one of the following values: In Progress
-	// Succeeded
-	// Succeeded with Issues
-	// Failed
+	// object. The status can take one of the following values:
+	//    * In Progress
+	//
+	//    * Succeeded
+	//
+	//    * Succeeded with Issues
+	//
+	//    * Failed
 	StepStatus UpgradeStatus `type:"string" enum:"true"`
 
 	// A string that describes the update briefly
 	UpgradeName *string `type:"string"`
 
 	// Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does
-	// through: PreUpgradeCheck
-	// Snapshot
-	// Upgrade
+	// through:
+	//    * PreUpgradeCheck
+	//
+	//    * Snapshot
+	//
+	//    * Upgrade
 	UpgradeStep UpgradeStep `type:"string" enum:"true"`
 }
 

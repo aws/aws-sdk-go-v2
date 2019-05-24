@@ -222,7 +222,7 @@ const opRegisterUser = "RegisterUser"
 // AWS Identity and Access Management (IAM) identity or role specified in the
 // request.
 //
-// The permission resource is arn:aws:quicksight:us-east-1:<aws-account-id>:user/default/<user-name>.
+// The permission resource is arn:aws:quicksight:us-east-1:<aws-account-id>:user/default/<user-name> .
 //
 // The condition resource is the Amazon Resource Name (ARN) for the IAM user
 // or role, and the session name.

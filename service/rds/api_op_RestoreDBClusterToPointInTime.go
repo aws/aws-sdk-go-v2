@@ -233,7 +233,7 @@ const opRestoreDBClusterToPointInTime = "RestoreDBClusterToPointInTime"
 // RestoreDBClusterToPointInTime action has completed and the DB cluster is
 // available.
 //
-// For more information on Amazon Aurora, see  What Is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// For more information on Amazon Aurora, see What Is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide.
 //
 // This action only applies to Aurora DB clusters.

@@ -39,13 +39,16 @@ type CreateFleetInput struct {
 
 	// The fleet type.
 	//
-	// ALWAYS_ONProvides users with instant-on access to their apps. You are charged
-	// for all running instances in your fleet, even if no users are streaming apps.
+	// ALWAYS_ON
 	//
-	// ON_DEMANDProvide users with access to applications after they connect, which
-	// takes one to two minutes. You are charged for instance streaming when users
-	// are connected and a small hourly fee for instances that are not streaming
-	// apps.
+	// Provides users with instant-on access to their apps. You are charged for
+	// all running instances in your fleet, even if no users are streaming apps.
+	//
+	// ON_DEMAND
+	//
+	// Provide users with access to applications after they connect, which takes
+	// one to two minutes. You are charged for instance streaming when users are
+	// connected and a small hourly fee for instances that are not streaming apps.
 	FleetType FleetType `type:"string" enum:"true"`
 
 	// The ARN of the public, private, or shared image to use.

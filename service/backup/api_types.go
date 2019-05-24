@@ -479,10 +479,10 @@ type BackupRule struct {
 	// according to the lifecycle that you define.
 	//
 	// Backups transitioned to cold storage must be stored in cold storage for a
-	// minimum of 90 days. Therefore, the “expire after days” setting must be 90
-	// days greater than the “transition to cold after days” setting. The “transition
-	// to cold after days” setting cannot be changed after a backup has been transitioned
-	// to cold.
+	// minimum of 90 days. Therefore, the “expire after days” setting must be
+	// 90 days greater than the “transition to cold after days” setting. The
+	// “transition to cold after days” setting cannot be changed after a backup
+	// has been transitioned to cold.
 	Lifecycle *Lifecycle `type:"structure"`
 
 	// An array of key-value pair strings that are assigned to resources that are
@@ -592,9 +592,9 @@ type BackupRuleInput struct {
 	// according to the lifecycle that you define.
 	//
 	// Backups transitioned to cold storage must be stored in cold storage for a
-	// minimum of 90 days. Therefore, the “expire after days” setting must be 90
-	// days greater than the “transition to cold after days”. The “transition to
-	// cold after days” setting cannot be changed after a backup has been transitioned
+	// minimum of 90 days. Therefore, the “expire after days” setting must be
+	// 90 days greater than the “transition to cold after days”. The “transition
+	// to cold after days” setting cannot be changed after a backup has been transitioned
 	// to cold.
 	Lifecycle *Lifecycle `type:"structure"`
 
@@ -958,10 +958,10 @@ func (s BackupVaultListMember) MarshalFields(e protocol.FieldEncoder) error {
 // according to the lifecycle that you define.
 //
 // Backups transitioned to cold storage must be stored in cold storage for a
-// minimum of 90 days. Therefore, the “expire after days” setting must be 90
-// days greater than the “transition to cold after days” setting. The “transition
-// to cold after days” setting cannot be changed after a backup has been transitioned
-// to cold.
+// minimum of 90 days. Therefore, the “expire after days” setting must be
+// 90 days greater than the “transition to cold after days” setting. The
+// “transition to cold after days” setting cannot be changed after a backup
+// has been transitioned to cold.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CalculatedLifecycle
 type CalculatedLifecycle struct {
 	_ struct{} `type:"structure"`
@@ -1217,10 +1217,10 @@ type RecoveryPointByBackupVault struct {
 	// according to the lifecycle that you define.
 	//
 	// Backups transitioned to cold storage must be stored in cold storage for a
-	// minimum of 90 days. Therefore, the “expire after days” setting must be 90
-	// days greater than the “transition to cold after days” setting. The “transition
-	// to cold after days” setting cannot be changed after a backup has been transitioned
-	// to cold.
+	// minimum of 90 days. Therefore, the “expire after days” setting must be
+	// 90 days greater than the “transition to cold after days” setting. The
+	// “transition to cold after days” setting cannot be changed after a backup
+	// has been transitioned to cold.
 	Lifecycle *Lifecycle `type:"structure"`
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a recovery point;

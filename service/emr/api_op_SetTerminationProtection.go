@@ -17,8 +17,7 @@ type SetTerminationProtectionInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of strings that uniquely identify the clusters to protect. This identifier
-	// is returned by RunJobFlow and can also be obtained from DescribeJobFlows
-	// .
+	// is returned by RunJobFlow and can also be obtained from DescribeJobFlows .
 	//
 	// JobFlowIds is a required field
 	JobFlowIds []string `type:"list" required:"true"`

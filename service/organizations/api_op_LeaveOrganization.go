@@ -43,28 +43,28 @@ const opLeaveOrganization = "LeaveOrganization"
 //
 // This operation can be called only from a member account in the organization.
 //
-// The master account in an organization with all features enabled can set service
-// control policies (SCPs) that can restrict what administrators of member accounts
-// can do, including preventing them from successfully calling LeaveOrganization
-// and leaving the organization.
+//    * The master account in an organization with all features enabled can
+//    set service control policies (SCPs) that can restrict what administrators
+//    of member accounts can do, including preventing them from successfully
+//    calling LeaveOrganization and leaving the organization.
 //
-// You can leave an organization as a member account only if the account is
-// configured with the information required to operate as a standalone account.
-// When you create an account in an organization using the AWS Organizations
-// console, API, or CLI commands, the information required of standalone accounts
-// is not automatically collected. For each account that you want to make standalone,
-// you must accept the End User License Agreement (EULA), choose a support plan,
-// provide and verify the required contact information, and provide a current
-// payment method. AWS uses the payment method to charge for any billable (not
-// free tier) AWS activity that occurs while the account is not attached to
-// an organization. Follow the steps at  To leave an organization when all required
-// account information has not yet been provided (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
-// in the AWS Organizations User Guide.
+//    * You can leave an organization as a member account only if the account
+//    is configured with the information required to operate as a standalone
+//    account. When you create an account in an organization using the AWS Organizations
+//    console, API, or CLI commands, the information required of standalone
+//    accounts is not automatically collected. For each account that you want
+//    to make standalone, you must accept the End User License Agreement (EULA),
+//    choose a support plan, provide and verify the required contact information,
+//    and provide a current payment method. AWS uses the payment method to charge
+//    for any billable (not free tier) AWS activity that occurs while the account
+//    is not attached to an organization. Follow the steps at To leave an organization
+//    when all required account information has not yet been provided (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
+//    in the AWS Organizations User Guide.
 //
-// You can leave an organization only after you enable IAM user access to billing
-// in your account. For more information, see Activating Access to the Billing
-// and Cost Management Console (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate)
-// in the AWS Billing and Cost Management User Guide.
+//    * You can leave an organization only after you enable IAM user access
+//    to billing in your account. For more information, see Activating Access
+//    to the Billing and Cost Management Console (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate)
+//    in the AWS Billing and Cost Management User Guide.
 //
 //    // Example sending a request using LeaveOrganizationRequest.
 //    req := client.LeaveOrganizationRequest(params)

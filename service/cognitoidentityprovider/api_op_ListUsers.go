@@ -19,7 +19,7 @@ type ListUsersInput struct {
 	// attributes are returned.
 	AttributesToGet []string `type:"list"`
 
-	// A filter string of the form "AttributeNameFilter-Type "AttributeValue"".
+	// A filter string of the form "AttributeName Filter-Type "AttributeValue"".
 	// Quotation marks within the filter string must be escaped using the backslash
 	// (\) character. For example, "family_name = \"Reddy\"".
 	//

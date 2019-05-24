@@ -134,7 +134,7 @@ const opDescribeGroup = "DescribeGroup"
 // Returns an Amazon QuickSight group's description and Amazon Resource Name
 // (ARN).
 //
-// The permissions resource is arn:aws:quicksight:us-east-1:<relevant-aws-account-id>:group/default/<group-name>.
+// The permissions resource is arn:aws:quicksight:us-east-1:<relevant-aws-account-id>:group/default/<group-name> .
 //
 // The response is the group object.
 //

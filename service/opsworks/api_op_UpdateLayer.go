@@ -38,7 +38,7 @@ type UpdateLayerInput struct {
 
 	// A JSON-formatted string containing custom stack configuration and deployment
 	// attributes to be installed on the layer's instances. For more information,
-	// see  Using Custom JSON (http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html).
+	// see Using Custom JSON (http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html).
 	CustomJson *string `type:"string"`
 
 	// A LayerCustomRecipes object that specifies the layer's custom recipes.

@@ -132,34 +132,35 @@ type QueryInput struct {
 	// The partition key equality test is required, and must be specified in the
 	// following format:
 	//
-	// partitionKeyName=:partitionkeyval
+	// partitionKeyName = :partitionkeyval
 	//
 	// If you also want to provide a condition for the sort key, it must be combined
 	// using AND with the condition for the sort key. Following is an example, using
 	// the = comparison operator for the sort key:
 	//
-	// partitionKeyName=:partitionkeyvalANDsortKeyName=:sortkeyval
+	// partitionKeyName = :partitionkeyval AND sortKeyName = :sortkeyval
 	//
 	// Valid comparisons for the sort key condition are as follows:
 	//
-	//    * sortKeyName=:sortkeyval - true if the sort key value is equal to :sortkeyval.
+	//    * sortKeyName = :sortkeyval - true if the sort key value is equal to :sortkeyval.
 	//
-	//    * sortKeyName<:sortkeyval - true if the sort key value is less than :sortkeyval.
-	//
-	//    * sortKeyName<=:sortkeyval - true if the sort key value is less than or
-	//    equal to :sortkeyval.
-	//
-	//    * sortKeyName>:sortkeyval - true if the sort key value is greater than
+	//    * sortKeyName < :sortkeyval - true if the sort key value is less than
 	//    :sortkeyval.
 	//
-	//    * sortKeyName>= :sortkeyval - true if the sort key value is greater than
+	//    * sortKeyName <= :sortkeyval - true if the sort key value is less than
 	//    or equal to :sortkeyval.
 	//
-	//    * sortKeyNameBETWEEN:sortkeyval1AND:sortkeyval2 - true if the sort key
-	//    value is greater than or equal to :sortkeyval1, and less than or equal
+	//    * sortKeyName > :sortkeyval - true if the sort key value is greater than
+	//    :sortkeyval.
+	//
+	//    * sortKeyName >= :sortkeyval - true if the sort key value is greater than
+	//    or equal to :sortkeyval.
+	//
+	//    * sortKeyName BETWEEN :sortkeyval1 AND :sortkeyval2 - true if the sort
+	//    key value is greater than or equal to :sortkeyval1, and less than or equal
 	//    to :sortkeyval2.
 	//
-	//    * begins_with (sortKeyName, :sortkeyval) - true if the sort key value
+	//    * begins_with ( sortKeyName, :sortkeyval ) - true if the sort key value
 	//    begins with a particular operand. (You cannot use this function with a
 	//    sort key that is of type Number.) Note that the function name begins_with
 	//    is case-sensitive.
@@ -227,11 +228,9 @@ type QueryInput struct {
 	//
 	//    * INDEXES - The response includes the aggregate ConsumedCapacity for the
 	//    operation, together with ConsumedCapacity for each table and secondary
-	//    index that was accessed.
-	//
-	// Note that some operations, such as GetItem and BatchGetItem, do not access
-	//    any indexes at all. In these cases, specifying INDEXES will only return
-	//    ConsumedCapacity information for table(s).
+	//    index that was accessed. Note that some operations, such as GetItem and
+	//    BatchGetItem, do not access any indexes at all. In these cases, specifying
+	//    INDEXES will only return ConsumedCapacity information for table(s).
 	//
 	//    * TOTAL - The response includes only the aggregate ConsumedCapacity for
 	//    the operation.
@@ -275,18 +274,15 @@ type QueryInput struct {
 	//
 	//    * SPECIFIC_ATTRIBUTES - Returns only the attributes listed in AttributesToGet.
 	//    This return value is equivalent to specifying AttributesToGet without
-	//    specifying any value for Select.
-	//
-	// If you query or scan a local secondary index and request only attributes
-	//    that are projected into that index, the operation will read only the index
-	//    and not the table. If any of the requested attributes are not projected
-	//    into the local secondary index, DynamoDB will fetch each of these attributes
-	//    from the parent table. This extra fetching incurs additional throughput
-	//    cost and latency.
-	//
-	// If you query or scan a global secondary index, you can only request attributes
-	//    that are projected into the index. Global secondary index queries cannot
-	//    fetch attributes from the parent table.
+	//    specifying any value for Select. If you query or scan a local secondary
+	//    index and request only attributes that are projected into that index,
+	//    the operation will read only the index and not the table. If any of the
+	//    requested attributes are not projected into the local secondary index,
+	//    DynamoDB will fetch each of these attributes from the parent table. This
+	//    extra fetching incurs additional throughput cost and latency. If you query
+	//    or scan a global secondary index, you can only request attributes that
+	//    are projected into the index. Global secondary index queries cannot fetch
+	//    attributes from the parent table.
 	//
 	// If neither Select nor AttributesToGet are specified, DynamoDB defaults to
 	// ALL_ATTRIBUTES when accessing a table, and ALL_PROJECTED_ATTRIBUTES when

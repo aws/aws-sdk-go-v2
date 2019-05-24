@@ -30,8 +30,8 @@ type CreateUserInput struct {
 	// user. If the value is null, the email is sent.
 	//
 	// The temporary password in the welcome email is valid for only 7 days. If
-	// users don’t set their passwords within 7 days, you must send them a new welcome
-	// email.
+	// users don’t set their passwords within 7 days, you must send them a new
+	// welcome email.
 	MessageAction MessageAction `type:"string" enum:"true"`
 
 	// The email address of the user.

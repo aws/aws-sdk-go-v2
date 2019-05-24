@@ -96,7 +96,7 @@ type CreateStackInput struct {
 	//    Windows Server 2012 R2 with SQL Server Web.
 	//
 	//    * A custom AMI: Custom. You specify the custom AMI you want to use when
-	//    you create instances. For more information, see  Using Custom AMIs (http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html).
+	//    you create instances. For more information, see Using Custom AMIs (http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html).
 	//
 	// The default option is the current Amazon Linux version. For more information
 	// about supported operating systems, see AWS OpsWorks Stacks Operating Systems
@@ -112,10 +112,10 @@ type CreateStackInput struct {
 	// A default Amazon EC2 key pair name. The default value is none. If you specify
 	// a key pair name, AWS OpsWorks installs the public key on the instance and
 	// you can use the private key with an SSH client to log in to the instance.
-	// For more information, see  Using SSH to Communicate with an Instance (http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html)
-	// and  Managing SSH Access (http://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html).
+	// For more information, see Using SSH to Communicate with an Instance (http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html)
+	// and Managing SSH Access (http://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html).
 	// You can override this setting by specifying a different key pair, or no key
-	// pair, when you  create an instance (http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html).
+	// pair, when you create an instance (http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html).
 	DefaultSshKeyName *string `type:"string"`
 
 	// The stack's default VPC subnet ID. This parameter is required if you specify

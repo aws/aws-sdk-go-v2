@@ -38,9 +38,7 @@ type StartMatchBackfillInput struct {
 	//    * PlayerID, PlayerAttributes, Team -\\- This information is maintained
 	//    in the GameSession object, MatchmakerData property, for all players who
 	//    are currently assigned to the game session. The matchmaker data is in
-	//    JSON syntax, formatted as a string. For more details, see  Match Data
-	//    (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data).
-	//
+	//    JSON syntax, formatted as a string. For more details, see Match Data (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data).
 	//
 	//    * LatencyInMs -\\- If the matchmaker uses player latency, include a latency
 	//    value, in milliseconds, for the region that the game session is currently
@@ -132,7 +130,7 @@ const opStartMatchBackfill = "StartMatchBackfill"
 // all current players in the game session. If successful, a match backfill
 // ticket is created and returned with status set to QUEUED. The ticket is placed
 // in the matchmaker's ticket pool and processed. Track the status of the ticket
-// to respond as needed. For more detail how to set up backfilling, see  Backfill
+// to respond as needed. For more detail how to set up backfilling, see Backfill
 // Existing Games with FlexMatch (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html).
 //
 // The process of finding backfill matches is essentially identical to the initial
@@ -142,7 +140,7 @@ const opStartMatchBackfill = "StartMatchBackfill"
 // sessions for the new players. All tickets in the match are updated with the
 // game session's connection information, and the GameSession object is updated
 // to include matchmaker data on the new players. For more detail on how match
-// backfill requests are processed, see  How Amazon GameLift FlexMatch Works
+// backfill requests are processed, see How Amazon GameLift FlexMatch Works
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-intro.html).
 //
 //    * StartMatchmaking

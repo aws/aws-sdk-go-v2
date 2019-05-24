@@ -109,7 +109,7 @@ const opSearchFacesByImage = "SearchFacesByImage"
 // operation, and then use the face IDs returned in subsequent calls to the
 // SearchFaces operation.
 //
-//  You can also call the DetectFaces operation and use the bounding boxes in
+// You can also call the DetectFaces operation and use the bounding boxes in
 // the response to make face crops, which then you can pass in to the SearchFacesByImage
 // operation.
 //

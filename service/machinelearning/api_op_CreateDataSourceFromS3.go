@@ -36,9 +36,7 @@ type CreateDataSourceFromS3Input struct {
 	//    if DataSchemaUri is specified.
 	//
 	//    * DataRearrangement - A JSON string that represents the splitting and
-	//    rearrangement requirements for the Datasource.
-	//
-	//  Sample -  "{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"
+	//    rearrangement requirements for the Datasource. Sample - "{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"
 	//
 	// DataSpec is a required field
 	DataSpec *S3DataSpec `type:"structure" required:"true"`

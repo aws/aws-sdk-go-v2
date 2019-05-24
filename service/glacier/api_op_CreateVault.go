@@ -122,7 +122,7 @@ const opCreateVault = "CreateVault"
 //
 // For conceptual information and underlying REST API, see Creating a Vault
 // in Amazon Glacier (http://docs.aws.amazon.com/amazonglacier/latest/dev/creating-vaults.html)
-// and Create Vault  (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-put.html)
+// and Create Vault (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-put.html)
 // in the Amazon Glacier Developer Guide.
 //
 //    // Example sending a request using CreateVaultRequest.

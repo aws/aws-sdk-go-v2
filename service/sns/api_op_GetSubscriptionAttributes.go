@@ -53,9 +53,9 @@ type GetSubscriptionAttributesOutput struct {
 	//    * DeliveryPolicy – The JSON serialization of the subscription's delivery
 	//    policy.
 	//
-	//    * EffectiveDeliveryPolicy – The JSON serialization of the effective delivery
-	//    policy that takes into account the topic delivery policy and account system
-	//    defaults.
+	//    * EffectiveDeliveryPolicy – The JSON serialization of the effective
+	//    delivery policy that takes into account the topic delivery policy and
+	//    account system defaults.
 	//
 	//    * FilterPolicy – The filter policy JSON that is assigned to the subscription.
 	//

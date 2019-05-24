@@ -79,13 +79,13 @@ type ModifyEndpointInput struct {
 
 	// Settings in JSON format for the target Amazon Kinesis Data Streams endpoint.
 	// For more information about the available settings, see Using Object Mapping
-	// to Migrate Data to a Kinesis Data Stream (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping
-	// ) in the AWS Database Migration User Guide.
+	// to Migrate Data to a Kinesis Data Stream (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping)
+	// in the AWS Database Migration User Guide.
 	KinesisSettings *KinesisSettings `type:"structure"`
 
 	// Settings in JSON format for the source MongoDB endpoint. For more information
 	// about the available settings, see the configuration properties section in
-	//  Using MongoDB as a Target for AWS Database Migration Service (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html)
+	// Using MongoDB as a Target for AWS Database Migration Service (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html)
 	// in the AWS Database Migration Service User Guide.
 	MongoDbSettings *MongoDbSettings `type:"structure"`
 

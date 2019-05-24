@@ -18,7 +18,7 @@ type ListTagsForResourceInput struct {
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// The Amazon RDS resource with tags to be listed. This value is an Amazon Resource
-	// Name (ARN). For information about creating an ARN, see  Constructing an ARN
+	// Name (ARN). For information about creating an ARN, see Constructing an ARN
 	// for Amazon RDS (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
 	// in the Amazon RDS User Guide.
 	//

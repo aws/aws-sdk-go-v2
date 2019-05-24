@@ -52,21 +52,22 @@ type GetTopicAttributesOutput struct {
 	//
 	//    * Policy – the JSON serialization of the topic's access control policy
 	//
-	//    * DisplayName – the human-readable name used in the "From" field for notifications
-	//    to email and email-json endpoints
+	//    * DisplayName – the human-readable name used in the "From" field for
+	//    notifications to email and email-json endpoints
 	//
 	//    * SubscriptionsPending – the number of subscriptions pending confirmation
 	//    on this topic
 	//
-	//    * SubscriptionsConfirmed – the number of confirmed subscriptions on this
-	//    topic
+	//    * SubscriptionsConfirmed – the number of confirmed subscriptions on
+	//    this topic
 	//
-	//    * SubscriptionsDeleted – the number of deleted subscriptions on this topic
+	//    * SubscriptionsDeleted – the number of deleted subscriptions on this
+	//    topic
 	//
 	//    * DeliveryPolicy – the JSON serialization of the topic's delivery policy
 	//
-	//    * EffectiveDeliveryPolicy – the JSON serialization of the effective delivery
-	//    policy that takes into account system defaults
+	//    * EffectiveDeliveryPolicy – the JSON serialization of the effective
+	//    delivery policy that takes into account system defaults
 	Attributes map[string]string `type:"map"`
 }
 

@@ -18,7 +18,7 @@ type ListTagsForResourceInput struct {
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// The Amazon Neptune resource with tags to be listed. This value is an Amazon
-	// Resource Name (ARN). For information about creating an ARN, see  Constructing
+	// Resource Name (ARN). For information about creating an ARN, see Constructing
 	// an Amazon Resource Name (ARN) (http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing).
 	//
 	// ResourceName is a required field

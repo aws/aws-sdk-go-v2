@@ -165,8 +165,7 @@ const opUpdateUserPoolClient = "UpdateUserPoolClient"
 //
 // Updates the specified user pool app client with the specified attributes.
 // If you don't provide a value for an attribute, it will be set to the default
-// value. You can get a list of the current user pool app client settings with
-// .
+// value. You can get a list of the current user pool app client settings with .
 //
 //    // Example sending a request using UpdateUserPoolClientRequest.
 //    req := client.UpdateUserPoolClientRequest(params)

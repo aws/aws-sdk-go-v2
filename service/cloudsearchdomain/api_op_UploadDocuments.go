@@ -19,6 +19,7 @@ type UploadDocumentsInput struct {
 	// document batch formats:
 	//
 	//    * application/json
+	//
 	//    * application/xml
 	//
 	// ContentType is a required field

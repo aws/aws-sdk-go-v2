@@ -46,9 +46,7 @@ type UpdateRelationalDatabaseInput struct {
 	//
 	// Constraints:
 	//
-	//    * Must be in the hh24:mi-hh24:mi format.
-	//
-	// Example: 16:00-16:30
+	//    * Must be in the hh24:mi-hh24:mi format. Example: 16:00-16:30
 	//
 	//    * Specified in Universal Coordinated Time (UTC).
 	//

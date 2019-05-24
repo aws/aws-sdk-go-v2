@@ -169,7 +169,7 @@ const opDescribeVault = "DescribeVault"
 //
 // For conceptual information and underlying REST API, see Retrieving Vault
 // Metadata in Amazon Glacier (http://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html)
-// and Describe Vault  (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-get.html)
+// and Describe Vault (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-get.html)
 // in the Amazon Glacier Developer Guide.
 //
 //    // Example sending a request using DescribeVaultRequest.

@@ -300,7 +300,7 @@ type CreateFunctionOutput struct {
 	// (https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
 	LastModified *string `type:"string"`
 
-	// The function's  layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
+	// The function's layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
 	Layers []Layer `type:"list"`
 
 	// For Lambda@Edge functions, the ARN of the master function.

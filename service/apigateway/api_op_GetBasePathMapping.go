@@ -74,6 +74,7 @@ func (s GetBasePathMappingInput) MarshalFields(e protocol.FieldEncoder) error {
 //
 // A custom domain name plus a BasePathMapping specification identifies a deployed
 // RestApi in a given stage of the owner Account.
+//
 // Use Custom Domain Names (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
 type GetBasePathMappingOutput struct {
 	_ struct{} `type:"structure"`

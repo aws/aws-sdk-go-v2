@@ -21,42 +21,21 @@ type DescribeReservedCacheNodesInput struct {
 	// the current generation types provide more memory and computational power
 	// at lower cost when compared to their equivalent previous generation counterparts.
 	//
-	//    * General purpose:
+	//    * General purpose: Current generation: T2 node types: cache.t2.micro,
+	//    cache.t2.small, cache.t2.medium M3 node types: cache.m3.medium, cache.m3.large,
+	//    cache.m3.xlarge, cache.m3.2xlarge M4 node types: cache.m4.large, cache.m4.xlarge,
+	//    cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge Previous generation:
+	//    (not recommended) T1 node types: cache.t1.micro M1 node types: cache.m1.small,
+	//    cache.m1.medium, cache.m1.large, cache.m1.xlarge
 	//
-	// Current generation:
+	//    * Compute optimized: Previous generation: (not recommended) C1 node types:
+	//    cache.c1.xlarge
 	//
-	// T2 node types:cache.t2.micro, cache.t2.small, cache.t2.medium
-	//
-	// M3 node types:cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge
-	//
-	// M4 node types:cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge,
-	//    cache.m4.10xlarge
-	//
-	// Previous generation: (not recommended)
-	//
-	// T1 node types:cache.t1.micro
-	//
-	// M1 node types:cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge
-	//
-	//    * Compute optimized:
-	//
-	// Previous generation: (not recommended)
-	//
-	// C1 node types:cache.c1.xlarge
-	//
-	//    * Memory optimized:
-	//
-	// Current generation:
-	//
-	// R3 node types:cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge, cache.r3.4xlarge,
-	//    cache.r3.8xlarge
-	//
-	// R4 node types;cache.r4.large, cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge,
-	//    cache.r4.8xlarge, cache.r4.16xlarge
-	//
-	// Previous generation: (not recommended)
-	//
-	// M2 node types:cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge
+	//    * Memory optimized: Current generation: R3 node types: cache.r3.large,
+	//    cache.r3.xlarge, cache.r3.2xlarge, cache.r3.4xlarge, cache.r3.8xlarge
+	//    R4 node types; cache.r4.large, cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge,
+	//    cache.r4.8xlarge, cache.r4.16xlarge Previous generation: (not recommended)
+	//    M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge
 	//
 	// Notes:
 	//

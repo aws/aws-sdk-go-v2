@@ -416,8 +416,8 @@ func (s BatchAttachObjectResponse) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Attaches a policy object to a regular object inside a BatchRead operation. For
-// more information, see AttachPolicy and BatchReadRequest$Operations.
+// Attaches a policy object to a regular object inside a BatchRead operation.
+// For more information, see AttachPolicy and BatchReadRequest$Operations.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchAttachPolicy
 type BatchAttachPolicy struct {
 	_ struct{} `type:"structure"`

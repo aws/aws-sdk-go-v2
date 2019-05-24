@@ -85,7 +85,7 @@ type DescribedUser struct {
 
 	// This property specifies the landing directory (or folder) which is the location
 	// that files are written to or read from in an Amazon S3 bucket for the described
-	// user. An example would be: /bucket_name/home/username.
+	// user. An example would be: /bucket_name/home/username .
 	HomeDirectory *string `type:"string"`
 
 	// Specifies the name of the policy in use for the described user.

@@ -62,107 +62,159 @@ type GetMetricDataInput struct {
 	//
 	// The following historical metrics are available:
 	//
-	// CONTACTS_QUEUEDUnit: COUNT
+	// CONTACTS_QUEUED
+	//
+	// Unit: COUNT
 	//
 	// Statistic: SUM
 	//
-	// CONTACTS_HANDLEDUnit: COUNT
+	// CONTACTS_HANDLED
+	//
+	// Unit: COUNT
 	//
 	// Statistics: SUM
 	//
-	// CONTACTS_ABANDONEDUnit: COUNT
+	// CONTACTS_ABANDONED
+	//
+	// Unit: COUNT
 	//
 	// Statistics: SUM
 	//
-	// CONTACTS_CONSULTEDUnit: COUNT
+	// CONTACTS_CONSULTED
+	//
+	// Unit: COUNT
 	//
 	// Statistics: SUM
 	//
-	// CONTACTS_AGENT_HUNG_UP_FIRSTUnit: COUNT
+	// CONTACTS_AGENT_HUNG_UP_FIRST
+	//
+	// Unit: COUNT
 	//
 	// Statistics: SUM
 	//
-	// CONTACTS_HANDLED_INCOMINGUnit: COUNT
+	// CONTACTS_HANDLED_INCOMING
+	//
+	// Unit: COUNT
 	//
 	// Statistics: SUM
 	//
-	// CONTACTS_HANDLED_OUTBOUNDUnit: COUNT
+	// CONTACTS_HANDLED_OUTBOUND
+	//
+	// Unit: COUNT
 	//
 	// Statistics: SUM
 	//
-	// CONTACTS_HOLD_ABANDONSUnit: COUNT
+	// CONTACTS_HOLD_ABANDONS
+	//
+	// Unit: COUNT
 	//
 	// Statistics: SUM
 	//
-	// CONTACTS_TRANSFERRED_INUnit: COUNT
+	// CONTACTS_TRANSFERRED_IN
+	//
+	// Unit: COUNT
 	//
 	// Statistics: SUM
 	//
-	// CONTACTS_TRANSFERRED_OUTUnit: COUNT
+	// CONTACTS_TRANSFERRED_OUT
+	//
+	// Unit: COUNT
 	//
 	// Statistics: SUM
 	//
-	// CONTACTS_TRANSFERRED_IN_FROM_QUEUEUnit: COUNT
+	// CONTACTS_TRANSFERRED_IN_FROM_QUEUE
+	//
+	// Unit: COUNT
 	//
 	// Statistics: SUM
 	//
-	// CONTACTS_TRANSFERRED_OUT_FROM_QUEUEUnit: COUNT
+	// CONTACTS_TRANSFERRED_OUT_FROM_QUEUE
+	//
+	// Unit: COUNT
 	//
 	// Statistics: SUM
 	//
-	// CALLBACK_CONTACTS_HANDLEDUnit: COUNT
+	// CALLBACK_CONTACTS_HANDLED
+	//
+	// Unit: COUNT
 	//
 	// Statistics: SUM
 	//
-	// CALLBACK_CONTACTS_HANDLEDUnit: COUNT
+	// CALLBACK_CONTACTS_HANDLED
+	//
+	// Unit: COUNT
 	//
 	// Statistics: SUM
 	//
-	// API_CONTACTS_HANDLEDUnit: COUNT
+	// API_CONTACTS_HANDLED
+	//
+	// Unit: COUNT
 	//
 	// Statistics: SUM
 	//
-	// CONTACTS_MISSEDUnit: COUNT
+	// CONTACTS_MISSED
+	//
+	// Unit: COUNT
 	//
 	// Statistics: SUM
 	//
-	// OCCUPANCYUnit: PERCENT
+	// OCCUPANCY
+	//
+	// Unit: PERCENT
 	//
 	// Statistics: AVG
 	//
-	// HANDLE_TIMEUnit: SECONDS
+	// HANDLE_TIME
+	//
+	// Unit: SECONDS
 	//
 	// Statistics: AVG
 	//
-	// AFTER_CONTACT_WORK_TIMEUnit: SECONDS
+	// AFTER_CONTACT_WORK_TIME
+	//
+	// Unit: SECONDS
 	//
 	// Statistics: AVG
 	//
-	// QUEUED_TIMEUnit: SECONDS
+	// QUEUED_TIME
+	//
+	// Unit: SECONDS
 	//
 	// Statistics: MAX
 	//
-	// ABANDON_TIMEUnit: COUNT
+	// ABANDON_TIME
+	//
+	// Unit: COUNT
 	//
 	// Statistics: SUM
 	//
-	// QUEUE_ANSWER_TIMEUnit: SECONDS
+	// QUEUE_ANSWER_TIME
+	//
+	// Unit: SECONDS
 	//
 	// Statistics: AVG
 	//
-	// HOLD_TIMEUnit: SECONDS
+	// HOLD_TIME
+	//
+	// Unit: SECONDS
 	//
 	// Statistics: AVG
 	//
-	// INTERACTION_TIMEUnit: SECONDS
+	// INTERACTION_TIME
+	//
+	// Unit: SECONDS
 	//
 	// Statistics: AVG
 	//
-	// INTERACTION_AND_HOLD_TIMEUnit: SECONDS
+	// INTERACTION_AND_HOLD_TIME
+	//
+	// Unit: SECONDS
 	//
 	// Statistics: AVG
 	//
-	// SERVICE_LEVELUnit: PERCENT
+	// SERVICE_LEVEL
+	//
+	// Unit: PERCENT
 	//
 	// Statistics: AVG
 	//

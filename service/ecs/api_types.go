@@ -185,7 +185,7 @@ type Cluster struct {
 	// The Amazon Resource Name (ARN) that identifies the cluster. The ARN contains
 	// the arn:aws:ecs namespace, followed by the Region of the cluster, the AWS
 	// account ID of the cluster owner, the cluster namespace, and then the cluster
-	// name. For example, arn:aws:ecs:region:012345678910:cluster/test..
+	// name. For example, arn:aws:ecs:region:012345678910:cluster/test ..
 	ClusterArn *string `locationName:"clusterArn" type:"string"`
 
 	// A user-generated string that you use to identify your cluster.
@@ -433,6 +433,7 @@ type ContainerDefinition struct {
 	// This parameter is not supported for Windows containers.
 	DockerSecurityOptions []string `locationName:"dockerSecurityOptions" type:"list"`
 
+	//
 	// Early versions of the Amazon ECS container agent do not properly handle entryPoint
 	// parameters. If you have problems using entryPoint, update your container
 	// agent or enter your commands and arguments as command array items instead.
@@ -496,7 +497,7 @@ type ContainerDefinition struct {
 	// The image used to start a container. This string is passed directly to the
 	// Docker daemon. Images in the Docker Hub registry are available by default.
 	// Other repositories are specified with either repository-url/image:tag or
-	// repository-url/image@digest. Up to 255 letters (uppercase and lowercase),
+	// repository-url/image@digest . Up to 255 letters (uppercase and lowercase),
 	// numbers, hyphens, underscores, colons, periods, forward slashes, and number
 	// signs are allowed. This parameter maps to Image in the Create a container
 	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section
@@ -512,7 +513,6 @@ type ContainerDefinition struct {
 	//    full registry/repository:tag or registry/repository@digest. For example,
 	//    012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>:latest
 	//    or 012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>@sha256:94afd1f2e64d908bc90dbca0035a5b567EXAMPLE.
-	//
 	//
 	//    * Images in official repositories on Docker Hub use a single name (for
 	//    example, ubuntu or mongo).
@@ -989,7 +989,7 @@ type ContainerInstance struct {
 	// The Amazon Resource Name (ARN) of the container instance. The ARN contains
 	// the arn:aws:ecs namespace, followed by the Region of the container instance,
 	// the AWS account ID of the container instance owner, the container-instance
-	// namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID.
+	// namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID .
 	ContainerInstanceArn *string `locationName:"containerInstanceArn" type:"string"`
 
 	// The EC2 instance ID of the container instance.
@@ -1185,12 +1185,18 @@ type Deployment struct {
 
 	// The status of the deployment. The following describes each state:
 	//
-	// PRIMARYThe most recent deployment of a service.
+	// PRIMARY
 	//
-	// ACTIVEA service deployment that still has running tasks, but are in the process
+	// The most recent deployment of a service.
+	//
+	// ACTIVE
+	//
+	// A service deployment that still has running tasks, but are in the process
 	// of being replaced with a new PRIMARY deployment.
 	//
-	// INACTIVEA deployment that has been completely replaced.
+	// INACTIVE
+	//
+	// A deployment that has been completely replaced.
 	Status *string `locationName:"status" type:"string"`
 
 	// The most recent task definition that was specified for the tasks in the service
@@ -1274,17 +1280,23 @@ type DeploymentController struct {
 	//
 	// There are three deployment controller types available:
 	//
-	// ECSThe rolling update (ECS) deployment type involves replacing the current
-	// running version of the container with the latest version. The number of containers
+	// ECS
+	//
+	// The rolling update (ECS) deployment type involves replacing the current running
+	// version of the container with the latest version. The number of containers
 	// Amazon ECS adds or removes from the service during a rolling update is controlled
 	// by adjusting the minimum and maximum number of healthy tasks allowed during
 	// a service deployment, as specified in the DeploymentConfiguration.
 	//
-	// CODE_DEPLOYThe blue/green (CODE_DEPLOY) deployment type uses the blue/green
-	// deployment model powered by AWS CodeDeploy, which allows you to verify a
-	// new deployment of a service before sending production traffic to it.
+	// CODE_DEPLOY
 	//
-	// EXTERNALThe external (EXTERNAL) deployment type enables you to use any third-party
+	// The blue/green (CODE_DEPLOY) deployment type uses the blue/green deployment
+	// model powered by AWS CodeDeploy, which allows you to verify a new deployment
+	// of a service before sending production traffic to it.
+	//
+	// EXTERNAL
+	//
+	// The external (EXTERNAL) deployment type enables you to use any third-party
 	// deployment controller for full control over the deployment process for an
 	// Amazon ECS service.
 	//
@@ -2436,13 +2448,12 @@ type Service struct {
 	//    * DAEMON-The daemon scheduling strategy deploys exactly one task on each
 	//    container instance in your cluster. When you are using this strategy,
 	//    do not specify a desired number of tasks or any task placement strategies.
-	//
-	// Fargate tasks do not support the DAEMON scheduling strategy.
+	//    Fargate tasks do not support the DAEMON scheduling strategy.
 	SchedulingStrategy SchedulingStrategy `locationName:"schedulingStrategy" type:"string" enum:"true"`
 
 	// The ARN that identifies the service. The ARN contains the arn:aws:ecs namespace,
 	// followed by the Region of the service, the AWS account ID of the service
-	// owner, the service namespace, and then the service name. For example, arn:aws:ecs:region:012345678910:service/my-service.
+	// owner, the service namespace, and then the service name. For example, arn:aws:ecs:region:012345678910:service/my-service .
 	ServiceArn *string `locationName:"serviceArn" type:"string"`
 
 	// The name of your service. Up to 255 letters (uppercase and lowercase), numbers,
@@ -3195,12 +3206,18 @@ type TaskSet struct {
 
 	// The status of the task set. The following describes each state:
 	//
-	// PRIMARYThe task set is serving production traffic.
+	// PRIMARY
 	//
-	// ACTIVEThe task set is not serving production traffic.
+	// The task set is serving production traffic.
 	//
-	// DRAININGThe tasks in the task set are being stopped and their corresponding
-	// targets are being deregistered from their target group.
+	// ACTIVE
+	//
+	// The task set is not serving production traffic.
+	//
+	// DRAINING
+	//
+	// The tasks in the task set are being stopped and their corresponding targets
+	// are being deregistered from their target group.
 	Status *string `locationName:"status" type:"string"`
 
 	// The task definition the task set is using.
@@ -3321,7 +3338,7 @@ type VersionInfo struct {
 	_ struct{} `type:"structure"`
 
 	// The Git commit hash for the Amazon ECS container agent build on the amazon-ecs-agent
-	//  (https://github.com/aws/amazon-ecs-agent/commits/master) GitHub repository.
+	// (https://github.com/aws/amazon-ecs-agent/commits/master) GitHub repository.
 	AgentHash *string `locationName:"agentHash" type:"string"`
 
 	// The version number of the Amazon ECS container agent.

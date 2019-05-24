@@ -123,7 +123,7 @@ const opGetSessionToken = "GetSessionToken"
 //    * You cannot call any IAM APIs unless MFA authentication information is
 //    included in the request.
 //
-//    * You cannot call any STS API exceptAssumeRole or GetCallerIdentity.
+//    * You cannot call any STS API except AssumeRole or GetCallerIdentity.
 //
 // We recommend that you do not call GetSessionToken with root account credentials.
 // Instead, follow our best practices (http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#create-iam-users)

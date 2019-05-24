@@ -222,12 +222,12 @@ const opPutScalingPolicy = "PutScalingPolicy"
 //
 // A policy's rule statement has the following structure:
 //
-// If [MetricName] is [ComparisonOperator][Threshold] for [EvaluationPeriods]
+// If [MetricName] is [ComparisonOperator] [Threshold] for [EvaluationPeriods]
 // minutes, then [ScalingAdjustmentType] to/by [ScalingAdjustment].
 //
 // To implement the example, the rule statement would look like this:
 //
-// If [PercentIdleInstances] is [GreaterThanThreshold][20] for [15] minutes,
+// If [PercentIdleInstances] is [GreaterThanThreshold] [20] for [15] minutes,
 // then [PercentChangeInCapacity] to/by [10].
 //
 // To create or update a scaling policy, specify a unique combination of name
@@ -243,19 +243,10 @@ const opPutScalingPolicy = "PutScalingPolicy"
 //
 //    * DescribeEC2InstanceLimits
 //
-//    * Manage scaling policies:
+//    * Manage scaling policies: PutScalingPolicy (auto-scaling) DescribeScalingPolicies
+//    (auto-scaling) DeleteScalingPolicy (auto-scaling)
 //
-// PutScalingPolicy (auto-scaling)
-//
-// DescribeScalingPolicies (auto-scaling)
-//
-// DeleteScalingPolicy (auto-scaling)
-//
-//    * Manage fleet actions:
-//
-// StartFleetActions
-//
-// StopFleetActions
+//    * Manage fleet actions: StartFleetActions StopFleetActions
 //
 //    // Example sending a request using PutScalingPolicyRequest.
 //    req := client.PutScalingPolicyRequest(params)

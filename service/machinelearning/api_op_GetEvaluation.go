@@ -118,10 +118,14 @@ type GetEvaluationOutput struct {
 	//
 	//    * PENDING - Amazon Machine Language (Amazon ML) submitted a request to
 	//    evaluate an MLModel.
+	//
 	//    * INPROGRESS - The evaluation is underway.
+	//
 	//    * FAILED - The request to evaluate an MLModel did not run to completion.
 	//    It is not usable.
+	//
 	//    * COMPLETED - The evaluation process completed successfully.
+	//
 	//    * DELETED - The Evaluation is marked as deleted. It is not usable.
 	Status EntityStatus `type:"string" enum:"true"`
 }

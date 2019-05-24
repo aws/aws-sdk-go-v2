@@ -21,8 +21,8 @@ type SetStackPolicyInput struct {
 	// StackName is a required field
 	StackName *string `type:"string" required:"true"`
 
-	// Structure containing the stack policy body. For more information, go to
-	// Prevent Updates to Stack Resources (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html)
+	// Structure containing the stack policy body. For more information, go to Prevent
+	// Updates to Stack Resources (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html)
 	// in the AWS CloudFormation User Guide. You can specify either the StackPolicyBody
 	// or the StackPolicyURL parameter, but not both.
 	StackPolicyBody *string `min:"1" type:"string"`

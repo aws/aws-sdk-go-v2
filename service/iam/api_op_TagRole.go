@@ -104,13 +104,13 @@ const opTagRole = "TagRole"
 //    * Cost allocation - Use tags to help track which individuals and teams
 //    are using which AWS resources.
 //
-// Make sure that you have no invalid tags and that you do not exceed the allowed
-// number of tags per role. In either case, the entire request fails and no
-// tags are added to the role.
+//    * Make sure that you have no invalid tags and that you do not exceed the
+//    allowed number of tags per role. In either case, the entire request fails
+//    and no tags are added to the role.
 //
-// AWS always interprets the tag Value as a single string. If you need to store
-// an array, you can store comma-separated values in the string. However, you
-// must interpret the value in your code.
+//    * AWS always interprets the tag Value as a single string. If you need
+//    to store an array, you can store comma-separated values in the string.
+//    However, you must interpret the value in your code.
 //
 // For more information about tagging, see Tagging IAM Identities (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html)
 // in the IAM User Guide.

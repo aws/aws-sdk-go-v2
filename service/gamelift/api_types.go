@@ -234,37 +234,14 @@ func (s *DesiredPlayerSession) Validate() error {
 //
 //    * DeleteFleet
 //
-//    * Describe fleets:
+//    * Describe fleets: DescribeFleetAttributes DescribeFleetCapacity DescribeFleetPortSettings
+//    DescribeFleetUtilization DescribeRuntimeConfiguration DescribeEC2InstanceLimits
+//    DescribeFleetEvents
 //
-// DescribeFleetAttributes
+//    * Update fleets: UpdateFleetAttributes UpdateFleetCapacity UpdateFleetPortSettings
+//    UpdateRuntimeConfiguration
 //
-// DescribeFleetCapacity
-//
-// DescribeFleetPortSettings
-//
-// DescribeFleetUtilization
-//
-// DescribeRuntimeConfiguration
-//
-// DescribeEC2InstanceLimits
-//
-// DescribeFleetEvents
-//
-//    * Update fleets:
-//
-// UpdateFleetAttributes
-//
-// UpdateFleetCapacity
-//
-// UpdateFleetPortSettings
-//
-// UpdateRuntimeConfiguration
-//
-//    * Manage fleet actions:
-//
-// StartFleetActions
-//
-// StopFleetActions
+//    * Manage fleet actions: StartFleetActions StopFleetActions
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/EC2InstanceCounts
 type EC2InstanceCounts struct {
 	_ struct{} `type:"structure"`
@@ -341,7 +318,7 @@ type Event struct {
 	//    * FLEET_STATE_DOWNLOADING -- Fleet status changed from NEW to DOWNLOADING.
 	//    The compressed build has started downloading to a fleet instance for installation.
 	//
-	//    *  FLEET_BINARY_DOWNLOAD_FAILED -- The build failed to download to the
+	//    * FLEET_BINARY_DOWNLOAD_FAILED -- The build failed to download to the
 	//    fleet instance.
 	//
 	//    * FLEET_CREATION_EXTRACTING_BUILD – The game server build was successfully
@@ -369,7 +346,7 @@ type Event struct {
 	//
 	//    * FLEET_STATE_VALIDATING -- Fleet status changed from DOWNLOADING to VALIDATING.
 	//
-	//    *  FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND -- Validation of the run-time
+	//    * FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND -- Validation of the run-time
 	//    configuration failed because the executable specified in a launch path
 	//    does not exist on the instance.
 	//
@@ -381,8 +358,7 @@ type Event struct {
 	//
 	//    * FLEET_STATE_ACTIVATING -- Fleet status changed from BUILDING to ACTIVATING.
 	//
-	//
-	//    *  FLEET_ACTIVATION_FAILED - The fleet failed to successfully complete
+	//    * FLEET_ACTIVATION_FAILED - The fleet failed to successfully complete
 	//    one of the steps in the fleet activation process. This event code indicates
 	//    that the game build was successfully downloaded to a fleet instance, built,
 	//    and validated, but was not able to start a server process. A possible
@@ -410,7 +386,7 @@ type Event struct {
 	//
 	// Spot instance events:
 	//
-	//    *  INSTANCE_INTERRUPTED -- A spot instance was interrupted by EC2 with
+	//    * INSTANCE_INTERRUPTED -- A spot instance was interrupted by EC2 with
 	//    a two-minute notification.
 	//
 	// Other fleet events:
@@ -425,7 +401,7 @@ type Event struct {
 	//
 	//    * FLEET_DELETED -- A request to delete a fleet was initiated.
 	//
-	//    *  GENERIC_EVENT -- An unspecified event has occurred.
+	//    * GENERIC_EVENT -- An unspecified event has occurred.
 	EventCode EventCode `type:"string" enum:"true"`
 
 	// Unique identifier for a fleet event.
@@ -460,37 +436,14 @@ func (s Event) String() string {
 //
 //    * DeleteFleet
 //
-//    * Describe fleets:
+//    * Describe fleets: DescribeFleetAttributes DescribeFleetCapacity DescribeFleetPortSettings
+//    DescribeFleetUtilization DescribeRuntimeConfiguration DescribeEC2InstanceLimits
+//    DescribeFleetEvents
 //
-// DescribeFleetAttributes
+//    * Update fleets: UpdateFleetAttributes UpdateFleetCapacity UpdateFleetPortSettings
+//    UpdateRuntimeConfiguration
 //
-// DescribeFleetCapacity
-//
-// DescribeFleetPortSettings
-//
-// DescribeFleetUtilization
-//
-// DescribeRuntimeConfiguration
-//
-// DescribeEC2InstanceLimits
-//
-// DescribeFleetEvents
-//
-//    * Update fleets:
-//
-// UpdateFleetAttributes
-//
-// UpdateFleetCapacity
-//
-// UpdateFleetPortSettings
-//
-// UpdateRuntimeConfiguration
-//
-//    * Manage fleet actions:
-//
-// StartFleetActions
-//
-// StopFleetActions
+//    * Manage fleet actions: StartFleetActions StopFleetActions
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetAttributes
 type FleetAttributes struct {
 	_ struct{} `type:"structure"`
@@ -521,7 +474,7 @@ type FleetAttributes struct {
 	// daemons (background processes). Create a role or look up a role's ARN using
 	// the IAM dashboard (https://console.aws.amazon.com/iam/) in the AWS Management
 	// Console. Learn more about using on-box credentials for your game servers
-	// at  Access external resources from a game server (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html).
+	// at Access external resources from a game server (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html).
 	InstanceRoleArn *string `min:"1" type:"string"`
 
 	// EC2 instance type indicating the computing resources of each instance in
@@ -628,37 +581,14 @@ func (s FleetAttributes) String() string {
 //
 //    * DeleteFleet
 //
-//    * Describe fleets:
+//    * Describe fleets: DescribeFleetAttributes DescribeFleetCapacity DescribeFleetPortSettings
+//    DescribeFleetUtilization DescribeRuntimeConfiguration DescribeEC2InstanceLimits
+//    DescribeFleetEvents
 //
-// DescribeFleetAttributes
+//    * Update fleets: UpdateFleetAttributes UpdateFleetCapacity UpdateFleetPortSettings
+//    UpdateRuntimeConfiguration
 //
-// DescribeFleetCapacity
-//
-// DescribeFleetPortSettings
-//
-// DescribeFleetUtilization
-//
-// DescribeRuntimeConfiguration
-//
-// DescribeEC2InstanceLimits
-//
-// DescribeFleetEvents
-//
-//    * Update fleets:
-//
-// UpdateFleetAttributes
-//
-// UpdateFleetCapacity
-//
-// UpdateFleetPortSettings
-//
-// UpdateRuntimeConfiguration
-//
-//    * Manage fleet actions:
-//
-// StartFleetActions
-//
-// StopFleetActions
+//    * Manage fleet actions: StartFleetActions StopFleetActions
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetCapacity
 type FleetCapacity struct {
 	_ struct{} `type:"structure"`
@@ -691,37 +621,14 @@ func (s FleetCapacity) String() string {
 //
 //    * DeleteFleet
 //
-//    * Describe fleets:
+//    * Describe fleets: DescribeFleetAttributes DescribeFleetCapacity DescribeFleetPortSettings
+//    DescribeFleetUtilization DescribeRuntimeConfiguration DescribeEC2InstanceLimits
+//    DescribeFleetEvents
 //
-// DescribeFleetAttributes
+//    * Update fleets: UpdateFleetAttributes UpdateFleetCapacity UpdateFleetPortSettings
+//    UpdateRuntimeConfiguration
 //
-// DescribeFleetCapacity
-//
-// DescribeFleetPortSettings
-//
-// DescribeFleetUtilization
-//
-// DescribeRuntimeConfiguration
-//
-// DescribeEC2InstanceLimits
-//
-// DescribeFleetEvents
-//
-//    * Update fleets:
-//
-// UpdateFleetAttributes
-//
-// UpdateFleetCapacity
-//
-// UpdateFleetPortSettings
-//
-// UpdateRuntimeConfiguration
-//
-//    * Manage fleet actions:
-//
-// StartFleetActions
-//
-// StopFleetActions
+//    * Manage fleet actions: StartFleetActions StopFleetActions
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetUtilization
 type FleetUtilization struct {
 	_ struct{} `type:"structure"`
@@ -756,8 +663,8 @@ func (s FleetUtilization) String() string {
 // to be used when setting up the new game session, such as to specify a game
 // mode, level, or map. Game properties are passed to the game server process
 // when initiating a new game session; the server process uses the properties
-// as appropriate. For more information, see the  Amazon GameLift Developer
-// Guide (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#gamelift-sdk-client-api-create).
+// as appropriate. For more information, see the Amazon GameLift Developer Guide
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#gamelift-sdk-client-api-create).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameProperty
 type GameProperty struct {
 	_ struct{} `type:"structure"`
@@ -817,13 +724,8 @@ func (s *GameProperty) Validate() error {
 //
 //    * GetGameSessionLogUrl
 //
-//    * Game session placements
-//
-// StartGameSessionPlacement
-//
-// DescribeGameSessionPlacement
-//
-// StopGameSessionPlacement
+//    * Game session placements StartGameSessionPlacement DescribeGameSessionPlacement
+//    StopGameSessionPlacement
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSession
 type GameSession struct {
 	_ struct{} `type:"structure"`
@@ -1450,7 +1352,6 @@ func (s MatchmakingConfiguration) String() string {
 //    the match and set minimum and maximum team sizes. For example, a rule
 //    set might describe a 4x4 match that requires all eight slots to be filled.
 //
-//
 //    * Player attributes -- Optional. These attributes specify a set of player
 //    characteristics to evaluate when looking for a match. Matchmaking requests
 //    that use a rule set with player attributes must provide the corresponding
@@ -1464,7 +1365,6 @@ func (s MatchmakingConfiguration) String() string {
 //    have at least one player in a certain role, or the match to have a minimum
 //    average skill level. or may describe an entire group--such as all teams
 //    must be evenly matched or have at least one player in a certain role.
-//
 //
 //    * Expansions -- Optional. Expansions allow you to relax the rules after
 //    a period of time when no acceptable matches are found. This feature lets
@@ -1591,13 +1491,8 @@ func (s MatchmakingTicket) String() string {
 //
 //    * DescribePlayerSessions
 //
-//    * Game session placements
-//
-// StartGameSessionPlacement
-//
-// DescribeGameSessionPlacement
-//
-// StopGameSessionPlacement
+//    * Game session placements StartGameSessionPlacement DescribeGameSessionPlacement
+//    StopGameSessionPlacement
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/PlacedPlayerSession
 type PlacedPlayerSession struct {
 	_ struct{} `type:"structure"`
@@ -1766,13 +1661,8 @@ func (s PlayerLatencyPolicy) String() string {
 //
 //    * DescribePlayerSessions
 //
-//    * Game session placements
-//
-// StartGameSessionPlacement
-//
-// DescribeGameSessionPlacement
-//
-// StopGameSessionPlacement
+//    * Game session placements StartGameSessionPlacement DescribeGameSessionPlacement
+//    StopGameSessionPlacement
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/PlayerSession
 type PlayerSession struct {
 	_ struct{} `type:"structure"`
@@ -1868,37 +1758,14 @@ func (s ResourceCreationLimitPolicy) String() string {
 //
 //    * DeleteFleet
 //
-//    * Describe fleets:
+//    * Describe fleets: DescribeFleetAttributes DescribeFleetCapacity DescribeFleetPortSettings
+//    DescribeFleetUtilization DescribeRuntimeConfiguration DescribeEC2InstanceLimits
+//    DescribeFleetEvents
 //
-// DescribeFleetAttributes
+//    * Update fleets: UpdateFleetAttributes UpdateFleetCapacity UpdateFleetPortSettings
+//    UpdateRuntimeConfiguration
 //
-// DescribeFleetCapacity
-//
-// DescribeFleetPortSettings
-//
-// DescribeFleetUtilization
-//
-// DescribeRuntimeConfiguration
-//
-// DescribeEC2InstanceLimits
-//
-// DescribeFleetEvents
-//
-//    * Update fleets:
-//
-// UpdateFleetAttributes
-//
-// UpdateFleetCapacity
-//
-// UpdateFleetPortSettings
-//
-// UpdateRuntimeConfiguration
-//
-//    * Manage fleet actions:
-//
-// StartFleetActions
-//
-// StopFleetActions
+//    * Manage fleet actions: StartFleetActions StopFleetActions
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RoutingStrategy
 type RoutingStrategy struct {
 	_ struct{} `type:"structure"`
@@ -1935,8 +1802,8 @@ func (s RoutingStrategy) String() string {
 // configuration.
 //
 // The run-time configuration enables the instances in a fleet to run multiple
-// processes simultaneously. Learn more about  Running Multiple Processes on
-// a Fleet  (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-multiprocess.html).
+// processes simultaneously. Learn more about Running Multiple Processes on
+// a Fleet (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-multiprocess.html).
 //
 // A Amazon GameLift instance is limited to 50 processes running simultaneously.
 // To calculate the total number of processes in a run-time configuration, add
@@ -1948,37 +1815,14 @@ func (s RoutingStrategy) String() string {
 //
 //    * DeleteFleet
 //
-//    * Describe fleets:
+//    * Describe fleets: DescribeFleetAttributes DescribeFleetCapacity DescribeFleetPortSettings
+//    DescribeFleetUtilization DescribeRuntimeConfiguration DescribeEC2InstanceLimits
+//    DescribeFleetEvents
 //
-// DescribeFleetAttributes
+//    * Update fleets: UpdateFleetAttributes UpdateFleetCapacity UpdateFleetPortSettings
+//    UpdateRuntimeConfiguration
 //
-// DescribeFleetCapacity
-//
-// DescribeFleetPortSettings
-//
-// DescribeFleetUtilization
-//
-// DescribeRuntimeConfiguration
-//
-// DescribeEC2InstanceLimits
-//
-// DescribeFleetEvents
-//
-//    * Update fleets:
-//
-// UpdateFleetAttributes
-//
-// UpdateFleetCapacity
-//
-// UpdateFleetPortSettings
-//
-// UpdateRuntimeConfiguration
-//
-//    * Manage fleet actions:
-//
-// StartFleetActions
-//
-// StopFleetActions
+//    * Manage fleet actions: StartFleetActions StopFleetActions
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RuntimeConfiguration
 type RuntimeConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -2089,19 +1933,10 @@ func (s *S3Location) Validate() error {
 //
 //    * DescribeEC2InstanceLimits
 //
-//    * Manage scaling policies:
+//    * Manage scaling policies: PutScalingPolicy (auto-scaling) DescribeScalingPolicies
+//    (auto-scaling) DeleteScalingPolicy (auto-scaling)
 //
-// PutScalingPolicy (auto-scaling)
-//
-// DescribeScalingPolicies (auto-scaling)
-//
-// DeleteScalingPolicy (auto-scaling)
-//
-//    * Manage fleet actions:
-//
-// StartFleetActions
-//
-// StopFleetActions
+//    * Manage fleet actions: StartFleetActions StopFleetActions
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ScalingPolicy
 type ScalingPolicy struct {
 	_ struct{} `type:"structure"`
@@ -2269,7 +2104,7 @@ func (s Script) String() string {
 // the custom game build executable or Realtime launch script, optional launch
 // parameters, and the number of server processes with this configuration to
 // maintain concurrently on the instance. Server process configurations make
-// up a fleet's RuntimeConfiguration.
+// up a fleet's RuntimeConfiguration .
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ServerProcess
 type ServerProcess struct {
 	_ struct{} `type:"structure"`
@@ -2285,7 +2120,6 @@ type ServerProcess struct {
 	// scripts are installed on instances at the root:
 	//
 	//    * Windows (for custom game builds only): C:\game. Example: "C:\game\MyGame\server.exe"
-	//
 	//
 	//    * Linux: /local/game. Examples: "/local/game/MyGame/server.exe" or "/local/game/MyRealtimeScript.js"
 	//
@@ -2342,19 +2176,10 @@ func (s *ServerProcess) Validate() error {
 //
 //    * DescribeEC2InstanceLimits
 //
-//    * Manage scaling policies:
+//    * Manage scaling policies: PutScalingPolicy (auto-scaling) DescribeScalingPolicies
+//    (auto-scaling) DeleteScalingPolicy (auto-scaling)
 //
-// PutScalingPolicy (auto-scaling)
-//
-// DescribeScalingPolicies (auto-scaling)
-//
-// DeleteScalingPolicy (auto-scaling)
-//
-//    * Manage fleet actions:
-//
-// StartFleetActions
-//
-// StopFleetActions
+//    * Manage fleet actions: StartFleetActions StopFleetActions
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/TargetConfiguration
 type TargetConfiguration struct {
 	_ struct{} `type:"structure"`

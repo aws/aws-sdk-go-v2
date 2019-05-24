@@ -40,23 +40,25 @@ type CreateAuthorizerInput struct {
 	// is usually of the form /2015-03-31/functions/[FunctionARN]/invocations.
 	AuthorizerUri *string `locationName:"authorizerUri" type:"string"`
 
-	// The identity source for which authorization is requested. For a TOKEN or
-	// COGNITO_USER_POOLS authorizer, this is required and specifies the request
-	// header mapping expression for the custom header holding the authorization
-	// token submitted by the client. For example, if the token header name is Auth,
-	// the header mapping expression is method.request.header.Auth.
-	// For the REQUEST authorizer, this is required when authorization caching is
-	// enabled. The value is a comma-separated string of one or more mapping expressions
-	// of the specified request parameters. For example, if an Auth header, a Name
-	// query string parameter are defined as identity sources, this value is method.request.header.Auth,
-	// method.request.querystring.Name. These parameters will be used to derive
-	// the authorization caching key and to perform runtime validation of the REQUEST
-	// authorizer by verifying all of the identity-related request parameters are
-	// present, not null and non-empty. Only when this is true does the authorizer
-	// invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized
-	// response without calling the Lambda function. The valid value is a string
-	// of comma-separated mapping expressions of the specified request parameters.
-	// When the authorization caching is not enabled, this property is optional.
+	// The identity source for which authorization is requested.
+	//    * For a TOKEN or COGNITO_USER_POOLS authorizer, this is required and specifies
+	//    the request header mapping expression for the custom header holding the
+	//    authorization token submitted by the client. For example, if the token
+	//    header name is Auth, the header mapping expression is method.request.header.Auth.
+	//
+	//    * For the REQUEST authorizer, this is required when authorization caching
+	//    is enabled. The value is a comma-separated string of one or more mapping
+	//    expressions of the specified request parameters. For example, if an Auth
+	//    header, a Name query string parameter are defined as identity sources,
+	//    this value is method.request.header.Auth, method.request.querystring.Name.
+	//    These parameters will be used to derive the authorization caching key
+	//    and to perform runtime validation of the REQUEST authorizer by verifying
+	//    all of the identity-related request parameters are present, not null and
+	//    non-empty. Only when this is true does the authorizer invoke the authorizer
+	//    Lambda function, otherwise, it returns a 401 Unauthorized response without
+	//    calling the Lambda function. The valid value is a string of comma-separated
+	//    mapping expressions of the specified request parameters. When the authorization
+	//    caching is not enabled, this property is optional.
 	IdentitySource *string `locationName:"identitySource" type:"string"`
 
 	// A validation expression for the incoming identity token. For TOKEN authorizers,
@@ -225,23 +227,25 @@ type CreateAuthorizerOutput struct {
 	// The identifier for the authorizer resource.
 	Id *string `locationName:"id" type:"string"`
 
-	// The identity source for which authorization is requested. For a TOKEN or
-	// COGNITO_USER_POOLS authorizer, this is required and specifies the request
-	// header mapping expression for the custom header holding the authorization
-	// token submitted by the client. For example, if the token header name is Auth,
-	// the header mapping expression is method.request.header.Auth.
-	// For the REQUEST authorizer, this is required when authorization caching is
-	// enabled. The value is a comma-separated string of one or more mapping expressions
-	// of the specified request parameters. For example, if an Auth header, a Name
-	// query string parameter are defined as identity sources, this value is method.request.header.Auth,
-	// method.request.querystring.Name. These parameters will be used to derive
-	// the authorization caching key and to perform runtime validation of the REQUEST
-	// authorizer by verifying all of the identity-related request parameters are
-	// present, not null and non-empty. Only when this is true does the authorizer
-	// invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized
-	// response without calling the Lambda function. The valid value is a string
-	// of comma-separated mapping expressions of the specified request parameters.
-	// When the authorization caching is not enabled, this property is optional.
+	// The identity source for which authorization is requested.
+	//    * For a TOKEN or COGNITO_USER_POOLS authorizer, this is required and specifies
+	//    the request header mapping expression for the custom header holding the
+	//    authorization token submitted by the client. For example, if the token
+	//    header name is Auth, the header mapping expression is method.request.header.Auth.
+	//
+	//    * For the REQUEST authorizer, this is required when authorization caching
+	//    is enabled. The value is a comma-separated string of one or more mapping
+	//    expressions of the specified request parameters. For example, if an Auth
+	//    header, a Name query string parameter are defined as identity sources,
+	//    this value is method.request.header.Auth, method.request.querystring.Name.
+	//    These parameters will be used to derive the authorization caching key
+	//    and to perform runtime validation of the REQUEST authorizer by verifying
+	//    all of the identity-related request parameters are present, not null and
+	//    non-empty. Only when this is true does the authorizer invoke the authorizer
+	//    Lambda function, otherwise, it returns a 401 Unauthorized response without
+	//    calling the Lambda function. The valid value is a string of comma-separated
+	//    mapping expressions of the specified request parameters. When the authorization
+	//    caching is not enabled, this property is optional.
 	IdentitySource *string `locationName:"identitySource" type:"string"`
 
 	// A validation expression for the incoming identity token. For TOKEN authorizers,

@@ -18,7 +18,7 @@ type RegisterActivityTypeInput struct {
 	// a task of this type must report progress by calling RecordActivityTaskHeartbeat.
 	// If the timeout is exceeded, the activity task is automatically timed out.
 	// This default can be overridden when scheduling an activity task using the
-	// ScheduleActivityTaskDecision. If the activity worker subsequently attempts
+	// ScheduleActivityTask Decision. If the activity worker subsequently attempts
 	// to record a heartbeat or returns a result, the activity worker receives an
 	// UnknownResource fault. In this case, Amazon SWF no longer considers the activity
 	// task to be valid; the activity worker should clean up the activity task.
@@ -29,7 +29,7 @@ type RegisterActivityTypeInput struct {
 
 	// If set, specifies the default task list to use for scheduling tasks of this
 	// activity type. This default task list is used if a task list isn't provided
-	// when a task is scheduled through the ScheduleActivityTaskDecision.
+	// when a task is scheduled through the ScheduleActivityTask Decision.
 	DefaultTaskList *TaskList `locationName:"defaultTaskList" type:"structure"`
 
 	// The default task priority to assign to the activity type. If not assigned,
@@ -44,7 +44,7 @@ type RegisterActivityTypeInput struct {
 
 	// If set, specifies the default maximum duration for a task of this activity
 	// type. This default can be overridden when scheduling an activity task using
-	// the ScheduleActivityTaskDecision.
+	// the ScheduleActivityTask Decision.
 	//
 	// The duration is specified in seconds, an integer greater than or equal to
 	// 0. You can use NONE to specify unlimited duration.
@@ -52,7 +52,7 @@ type RegisterActivityTypeInput struct {
 
 	// If set, specifies the default maximum duration that a task of this activity
 	// type can wait before being assigned to a worker. This default can be overridden
-	// when scheduling an activity task using the ScheduleActivityTaskDecision.
+	// when scheduling an activity task using the ScheduleActivityTask Decision.
 	//
 	// The duration is specified in seconds, an integer greater than or equal to
 	// 0. You can use NONE to specify unlimited duration.
@@ -60,7 +60,7 @@ type RegisterActivityTypeInput struct {
 
 	// If set, specifies the default maximum duration that a worker can take to
 	// process tasks of this activity type. This default can be overridden when
-	// scheduling an activity task using the ScheduleActivityTaskDecision.
+	// scheduling an activity task using the ScheduleActivityTask Decision.
 	//
 	// The duration is specified in seconds, an integer greater than or equal to
 	// 0. You can use NONE to specify unlimited duration.
@@ -169,13 +169,9 @@ const opRegisterActivityType = "RegisterActivityType"
 //    * Use an Action element to allow or deny permission to call this action.
 //
 //    * Constrain the following parameters by using a Condition element with
-//    the appropriate keys.
-//
-// defaultTaskList.name: String constraint. The key is swf:defaultTaskList.name.
-//
-// name: String constraint. The key is swf:name.
-//
-// version: String constraint. The key is swf:version.
+//    the appropriate keys. defaultTaskList.name: String constraint. The key
+//    is swf:defaultTaskList.name. name: String constraint. The key is swf:name.
+//    version: String constraint. The key is swf:version.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.

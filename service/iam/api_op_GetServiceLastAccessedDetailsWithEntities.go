@@ -46,7 +46,7 @@ type GetServiceLastAccessedDetailsWithEntitiesInput struct {
 	// for that service. In the first paragraph, find the service prefix. For example,
 	// (service prefix: a4b). For more information about service namespaces, see
 	// AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the AWS General Reference.
+	// in the AWS General Reference.
 	//
 	// ServiceNamespace is a required field
 	ServiceNamespace *string `min:"1" type:"string" required:"true"`
@@ -91,7 +91,7 @@ func (s *GetServiceLastAccessedDetailsWithEntitiesInput) Validate() error {
 type GetServiceLastAccessedDetailsWithEntitiesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An EntityDetailsList object that contains details about when an IAM entity
+	// An EntityDetailsList object that contains details about when an IAM entity
 	// (user or role) used group or policy permissions in an attempt to access the
 	// specified AWS service.
 	//
@@ -109,13 +109,13 @@ type GetServiceLastAccessedDetailsWithEntitiesOutput struct {
 	// receive all your results.
 	IsTruncated *bool `type:"boolean"`
 
-	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
+	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
 	// when the generated report job was completed or failed.
 	//
 	// JobCompletionDate is a required field
 	JobCompletionDate *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
 
-	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
+	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
 	// when the report job was created.
 	//
 	// JobCreationDate is a required field
@@ -147,9 +147,9 @@ const opGetServiceLastAccessedDetailsWithEntities = "GetServiceLastAccessedDetai
 // that could have used group or policy permissions to access the specified
 // service.
 //
-//    * Group – For a group report, this operation returns a list of users in
-//    the group that could have used the group’s policies in an attempt to access
-//    the service.
+//    * Group – For a group report, this operation returns a list of users
+//    in the group that could have used the group’s policies in an attempt
+//    to access the service.
 //
 //    * Policy – For a policy report, this operation returns a list of entities
 //    (users or roles) that could have used the policy in an attempt to access

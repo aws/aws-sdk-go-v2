@@ -45,12 +45,9 @@ type UpdateStackInstancesInput struct {
 	//    and specify its value.
 	//
 	//    * To leave a parameter set to its present value, you can do one of the
-	//    following:
-	//
-	// Do not include the parameter in the list.
-	//
-	// Include the parameter and specify UsePreviousValue as true. (You cannot specify
-	//    both a value and set UsePreviousValue to true.)
+	//    following: Do not include the parameter in the list. Include the parameter
+	//    and specify UsePreviousValue as true. (You cannot specify both a value
+	//    and set UsePreviousValue to true.)
 	//
 	//    * To set all overridden parameter back to the values specified in the
 	//    stack set, specify a parameter list but do not include any parameters.

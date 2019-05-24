@@ -89,12 +89,12 @@ const opUpdateGlobalTable = "UpdateGlobalTable"
 // If global secondary indexes are specified, then the following conditions
 // must also be met:
 //
-//    *  The global secondary indexes must have the same name.
+//    * The global secondary indexes must have the same name.
 //
-//    *  The global secondary indexes must have the same hash key and sort key
+//    * The global secondary indexes must have the same hash key and sort key
 //    (if present).
 //
-//    *  The global secondary indexes must have the same provisioned and maximum
+//    * The global secondary indexes must have the same provisioned and maximum
 //    write capacity units.
 //
 //    // Example sending a request using UpdateGlobalTableRequest.

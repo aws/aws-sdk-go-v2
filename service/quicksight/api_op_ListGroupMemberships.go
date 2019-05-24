@@ -169,7 +169,7 @@ const opListGroupMemberships = "ListGroupMemberships"
 //
 // Lists member users in a group.
 //
-// The permissions resource is arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/<group-name>.
+// The permissions resource is arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/<group-name> .
 //
 // The response is a list of group member objects.
 //

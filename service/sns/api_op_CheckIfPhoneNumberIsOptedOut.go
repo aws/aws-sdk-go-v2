@@ -49,8 +49,8 @@ type CheckIfPhoneNumberIsOptedOutOutput struct {
 	//    * true – The phone number is opted out, meaning you cannot publish SMS
 	//    messages to it.
 	//
-	//    * false – The phone number is opted in, meaning you can publish SMS messages
-	//    to it.
+	//    * false – The phone number is opted in, meaning you can publish SMS
+	//    messages to it.
 	IsOptedOut *bool `locationName:"isOptedOut" type:"boolean"`
 }
 

@@ -19,7 +19,7 @@ type CreateFunctionInput struct {
 	// ApiId is a required field
 	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
 
-	// The FunctionDataSource name.
+	// The Function DataSource name.
 	//
 	// DataSourceName is a required field
 	DataSourceName *string `locationName:"dataSourceName" type:"string" required:"true"`

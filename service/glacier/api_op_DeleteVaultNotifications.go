@@ -104,7 +104,7 @@ const opDeleteVaultNotifications = "DeleteVaultNotifications"
 //
 // For conceptual information and underlying REST API, see Configuring Vault
 // Notifications in Amazon Glacier (http://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html)
-// and Delete Vault Notification Configuration  (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-delete.html)
+// and Delete Vault Notification Configuration (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-delete.html)
 // in the Amazon Glacier Developer Guide.
 //
 //    // Example sending a request using DeleteVaultNotificationsRequest.

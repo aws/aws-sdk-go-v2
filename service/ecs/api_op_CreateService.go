@@ -166,10 +166,9 @@ type CreateServiceInput struct {
 	//    active container instance that meets all of the task placement constraints
 	//    that you specify in your cluster. When you're using this strategy, you
 	//    don't need to specify a desired number of tasks, a task placement strategy,
-	//    or use Service Auto Scaling policies.
-	//
-	// Tasks using the Fargate launch type or the CODE_DEPLOY or EXTERNAL deployment
-	//    controller types don't support the DAEMON scheduling strategy.
+	//    or use Service Auto Scaling policies. Tasks using the Fargate launch type
+	//    or the CODE_DEPLOY or EXTERNAL deployment controller types don't support
+	//    the DAEMON scheduling strategy.
 	SchedulingStrategy SchedulingStrategy `locationName:"schedulingStrategy" type:"string" enum:"true"`
 
 	// The name of your service. Up to 255 letters (uppercase and lowercase), numbers,
@@ -356,17 +355,14 @@ const opCreateService = "CreateService"
 //
 //    * By default, the service scheduler attempts to balance tasks across Availability
 //    Zones in this manner (although you can choose a different placement strategy)
-//    with the placementStrategy parameter):
-//
-// Sort the valid container instances, giving priority to instances that have
-//    the fewest number of running tasks for this service in their respective
-//    Availability Zone. For example, if zone A has one running service task
-//    and zones B and C each have zero, valid container instances in either
-//    zone B or C are considered optimal for placement.
-//
-// Place the new service task on a valid container instance in an optimal Availability
-//    Zone (based on the previous steps), favoring container instances with
-//    the fewest number of running tasks for this service.
+//    with the placementStrategy parameter): Sort the valid container instances,
+//    giving priority to instances that have the fewest number of running tasks
+//    for this service in their respective Availability Zone. For example, if
+//    zone A has one running service task and zones B and C each have zero,
+//    valid container instances in either zone B or C are considered optimal
+//    for placement. Place the new service task on a valid container instance
+//    in an optimal Availability Zone (based on the previous steps), favoring
+//    container instances with the fewest number of running tasks for this service.
 //
 //    // Example sending a request using CreateServiceRequest.
 //    req := client.CreateServiceRequest(params)

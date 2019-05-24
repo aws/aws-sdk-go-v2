@@ -99,7 +99,7 @@ type RestoreDBInstanceFromS3Input struct {
 
 	// Indicates if the DB instance should have deletion protection enabled. The
 	// database can't be deleted when this value is set to true. The default is
-	// false. For more information, see  Deleting a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
+	// false. For more information, see Deleting a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
 	DeletionProtection *bool `type:"boolean"`
 
 	// The list of logs that the restored DB instance is to export to CloudWatch

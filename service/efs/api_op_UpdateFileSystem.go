@@ -156,8 +156,8 @@ type UpdateFileSystemOutput struct {
 	// The throughput mode for a file system. There are two throughput modes to
 	// choose from for your file system: bursting and provisioned. You can decrease
 	// your file system's throughput in Provisioned Throughput mode or change between
-	// the throughput modes as long as it’s been more than 24 hours since the last
-	// decrease or throughput mode change.
+	// the throughput modes as long as it’s been more than 24 hours since the
+	// last decrease or throughput mode change.
 	ThroughputMode ThroughputMode `type:"string" enum:"true"`
 }
 

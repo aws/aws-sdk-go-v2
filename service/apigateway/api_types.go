@@ -242,23 +242,25 @@ type Authorizer struct {
 	// The identifier for the authorizer resource.
 	Id *string `locationName:"id" type:"string"`
 
-	// The identity source for which authorization is requested. For a TOKEN or
-	// COGNITO_USER_POOLS authorizer, this is required and specifies the request
-	// header mapping expression for the custom header holding the authorization
-	// token submitted by the client. For example, if the token header name is Auth,
-	// the header mapping expression is method.request.header.Auth.
-	// For the REQUEST authorizer, this is required when authorization caching is
-	// enabled. The value is a comma-separated string of one or more mapping expressions
-	// of the specified request parameters. For example, if an Auth header, a Name
-	// query string parameter are defined as identity sources, this value is method.request.header.Auth,
-	// method.request.querystring.Name. These parameters will be used to derive
-	// the authorization caching key and to perform runtime validation of the REQUEST
-	// authorizer by verifying all of the identity-related request parameters are
-	// present, not null and non-empty. Only when this is true does the authorizer
-	// invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized
-	// response without calling the Lambda function. The valid value is a string
-	// of comma-separated mapping expressions of the specified request parameters.
-	// When the authorization caching is not enabled, this property is optional.
+	// The identity source for which authorization is requested.
+	//    * For a TOKEN or COGNITO_USER_POOLS authorizer, this is required and specifies
+	//    the request header mapping expression for the custom header holding the
+	//    authorization token submitted by the client. For example, if the token
+	//    header name is Auth, the header mapping expression is method.request.header.Auth.
+	//
+	//    * For the REQUEST authorizer, this is required when authorization caching
+	//    is enabled. The value is a comma-separated string of one or more mapping
+	//    expressions of the specified request parameters. For example, if an Auth
+	//    header, a Name query string parameter are defined as identity sources,
+	//    this value is method.request.header.Auth, method.request.querystring.Name.
+	//    These parameters will be used to derive the authorization caching key
+	//    and to perform runtime validation of the REQUEST authorizer by verifying
+	//    all of the identity-related request parameters are present, not null and
+	//    non-empty. Only when this is true does the authorizer invoke the authorizer
+	//    Lambda function, otherwise, it returns a 401 Unauthorized response without
+	//    calling the Lambda function. The valid value is a string of comma-separated
+	//    mapping expressions of the specified request parameters. When the authorization
+	//    caching is not enabled, this property is optional.
 	IdentitySource *string `locationName:"identitySource" type:"string"`
 
 	// A validation expression for the incoming identity token. For TOKEN authorizers,
@@ -365,6 +367,7 @@ func (s Authorizer) MarshalFields(e protocol.FieldEncoder) error {
 //
 // A custom domain name plus a BasePathMapping specification identifies a deployed
 // RestApi in a given stage of the owner Account.
+//
 // Use Custom Domain Names (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
 type BasePathMapping struct {
 	_ struct{} `type:"structure"`
@@ -474,6 +477,7 @@ func (s CanarySettings) MarshalFields(e protocol.FieldEncoder) error {
 // Client certificates are used to authenticate an API by the backend server.
 // To authenticate an API client (or user), use IAM roles and policies, a custom
 // Authorizer or an Amazon Cognito user pool.
+//
 // Use Client-Side Certificate (https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html)
 type Certificate struct {
 	_ struct{} `type:"structure"`
@@ -1056,41 +1060,39 @@ func (s EndpointConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 // response parameters and mapping templates.
 //
 // For more information about valid gateway response types, see Gateway Response
-// Types Supported by API Gateway (https://docs.aws.amazon.com/apigateway/latest/developerguide/supported-gateway-response-types.html)Example:
-// Get a Gateway Response of a given response type
+// Types Supported by API Gateway (https://docs.aws.amazon.com/apigateway/latest/developerguide/supported-gateway-response-types.html)
+//
+// Example: Get a Gateway Response of a given response type
 //
 // Request
 //
 // This example shows how to get a gateway response of the MISSING_AUTHENTICATION_TOKEN
 // type.
-//
-// GET /restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN HTTP/1.1
-// Host: beta-apigateway.us-east-1.amazonaws.com Content-Type: application/json
-// X-Amz-Date: 20170503T202516Z Authorization: AWS4-HMAC-SHA256 Credential={access-key-id}/20170503/us-east-1/apigateway/aws4_request,
-// SignedHeaders=content-type;host;x-amz-date, Signature=1b52460e3159c1a26cff29093855d50ea141c1c5b937528fecaf60f51129697a
-// Cache-Control: no-cache Postman-Token: 3b2a1ce9-c848-2e26-2e2f-9c2caefbed45
-//
+//  GET /restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN HTTP/1.1
+//  Host: beta-apigateway.us-east-1.amazonaws.com Content-Type: application/json
+//  X-Amz-Date: 20170503T202516Z Authorization: AWS4-HMAC-SHA256 Credential={access-key-id}/20170503/us-east-1/apigateway/aws4_request,
+//  SignedHeaders=content-type;host;x-amz-date, Signature=1b52460e3159c1a26cff29093855d50ea141c1c5b937528fecaf60f51129697a
+//  Cache-Control: no-cache Postman-Token: 3b2a1ce9-c848-2e26-2e2f-9c2caefbed45
 // The response type is specified as a URL path.
 //
 // Response
 //
 // The successful operation returns the 200 OK status code and a payload similar
 // to the following:
-//
-// { "_links": { "curies": { "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-gatewayresponse-{rel}.html",
-// "name": "gatewayresponse", "templated": true }, "self": { "href": "/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN"
-// }, "gatewayresponse:delete": { "href": "/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN"
-// }, "gatewayresponse:put": { "href": "/restapis/o81lxisefl/gatewayresponses/{response_type}",
-// "templated": true }, "gatewayresponse:update": { "href": "/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN"
-// } }, "defaultResponse": false, "responseParameters": { "gatewayresponse.header.x-request-path":
-// "method.request.path.petId", "gatewayresponse.header.Access-Control-Allow-Origin":
-// "'a.b.c'", "gatewayresponse.header.x-request-query": "method.request.querystring.q",
-// "gatewayresponse.header.x-request-header": "method.request.header.Accept"
-// }, "responseTemplates": { "application/json": "{\n \"message\": $context.error.messageString,\n
-// \"type\": \"$context.error.responseType\",\n \"stage\": \"$context.stage\",\n
-// \"resourcePath\": \"$context.resourcePath\",\n \"stageVariables.a\": \"$stageVariables.a\",\n
-// \"statusCode\": \"'404'\"\n}" }, "responseType": "MISSING_AUTHENTICATION_TOKEN",
-// "statusCode": "404" }
+//  { "_links": { "curies": { "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-gatewayresponse-{rel}.html",
+//  "name": "gatewayresponse", "templated": true }, "self": { "href": "/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN"
+//  }, "gatewayresponse:delete": { "href": "/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN"
+//  }, "gatewayresponse:put": { "href": "/restapis/o81lxisefl/gatewayresponses/{response_type}",
+//  "templated": true }, "gatewayresponse:update": { "href": "/restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN"
+//  } }, "defaultResponse": false, "responseParameters": { "gatewayresponse.header.x-request-path":
+//  "method.request.path.petId", "gatewayresponse.header.Access-Control-Allow-Origin":
+//  "'a.b.c'", "gatewayresponse.header.x-request-query": "method.request.querystring.q",
+//  "gatewayresponse.header.x-request-header": "method.request.header.Accept"
+//  }, "responseTemplates": { "application/json": "{\n \"message\": $context.error.messageString,\n
+//  \"type\": \"$context.error.responseType\",\n \"stage\": \"$context.stage\",\n
+//  \"resourcePath\": \"$context.resourcePath\",\n \"stageVariables.a\": \"$stageVariables.a\",\n
+//  \"statusCode\": \"'404'\"\n}" }, "responseType": "MISSING_AUTHENTICATION_TOKEN",
+//  "statusCode": "404" }
 //
 // Customize Gateway Responses (https://docs.aws.amazon.com/apigateway/latest/developerguide/customize-gateway-responses.html)
 type GatewayResponse struct {
@@ -1109,27 +1111,46 @@ type GatewayResponse struct {
 	// pairs.
 	ResponseTemplates map[string]string `locationName:"responseTemplates" type:"map"`
 
-	// The response type of the associated GatewayResponse. Valid values are ACCESS_DENIED
+	// The response type of the associated GatewayResponse. Valid values are
+	//    * ACCESS_DENIED
 	//
-	// API_CONFIGURATION_ERROR
-	// AUTHORIZER_FAILURE
-	//  AUTHORIZER_CONFIGURATION_ERROR
-	// BAD_REQUEST_PARAMETERS
-	// BAD_REQUEST_BODY
-	// DEFAULT_4XX
-	// DEFAULT_5XX
-	// EXPIRED_TOKEN
-	// INVALID_SIGNATURE
-	// INTEGRATION_FAILURE
-	// INTEGRATION_TIMEOUT
-	// INVALID_API_KEY
-	// MISSING_AUTHENTICATION_TOKEN
-	//  QUOTA_EXCEEDED
-	// REQUEST_TOO_LARGE
-	// RESOURCE_NOT_FOUND
-	// THROTTLED
-	// UNAUTHORIZED
-	// UNSUPPORTED_MEDIA_TYPE
+	//    * API_CONFIGURATION_ERROR
+	//
+	//    * AUTHORIZER_FAILURE
+	//
+	//    * AUTHORIZER_CONFIGURATION_ERROR
+	//
+	//    * BAD_REQUEST_PARAMETERS
+	//
+	//    * BAD_REQUEST_BODY
+	//
+	//    * DEFAULT_4XX
+	//
+	//    * DEFAULT_5XX
+	//
+	//    * EXPIRED_TOKEN
+	//
+	//    * INVALID_SIGNATURE
+	//
+	//    * INTEGRATION_FAILURE
+	//
+	//    * INTEGRATION_TIMEOUT
+	//
+	//    * INVALID_API_KEY
+	//
+	//    * MISSING_AUTHENTICATION_TOKEN
+	//
+	//    * QUOTA_EXCEEDED
+	//
+	//    * REQUEST_TOO_LARGE
+	//
+	//    * RESOURCE_NOT_FOUND
+	//
+	//    * THROTTLED
+	//
+	//    * UNAUTHORIZED
+	//
+	//    * UNSUPPORTED_MEDIA_TYPE
 	ResponseType GatewayResponseType `locationName:"responseType" type:"string" enum:"true"`
 
 	// The HTTP status code for this GatewayResponse.
@@ -1242,23 +1263,23 @@ type Integration struct {
 	// Example: Get integration responses of a method
 	//
 	// Request
-	//
-	// GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200
-	// HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
-	// X-Amz-Date: 20160607T191449Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160607/us-east-1/apigateway/aws4_request,
-	// SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
+	//   GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200
+	//   HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
+	//   X-Amz-Date: 20160607T191449Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160607/us-east-1/apigateway/aws4_request,
+	//   SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
 	// Response
 	//
-	// The successful response returns 200 OKstatus and a payload as follows:
+	// The successful response returns 200 OK status and a payload as follows:
+	//  { "_links": { "curies": { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html",
+	//  "name": "integrationresponse", "templated": true }, "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200",
+	//  "title": "200" }, "integrationresponse:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
+	//  }, "integrationresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
+	//  } }, "responseParameters": { "method.response.header.Content-Type": "'application/xml'"
+	//  }, "responseTemplates": { "application/json": "$util.urlDecode(\"%3CkinesisStreams%3E#foreach($stream
+	//  in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\")\n"
+	//  }, "statusCode": "200" }
 	//
-	// { "_links": { "curies": { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html",
-	// "name": "integrationresponse", "templated": true }, "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200",
-	// "title": "200" }, "integrationresponse:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
-	// }, "integrationresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
-	// } }, "responseParameters": { "method.response.header.Content-Type": "'application/xml'"
-	// }, "responseTemplates": { "application/json": "$util.urlDecode(\"%3CkinesisStreams%3E#foreach($stream
-	// in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\")\n"
-	// }, "statusCode": "200" }
+	// Creating an API (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 	IntegrationResponses map[string]IntegrationResponse `locationName:"integrationResponses" type:"map"`
 
 	// Specifies how the method request body of an unmapped content type will be
@@ -1267,19 +1288,22 @@ type Integration struct {
 	// or the content type does not match any of the mapped content types, as specified
 	// in requestTemplates. The valid value is one of the following:
 	//
-	// WHEN_NO_MATCH: passes the method request body through the integration request
-	// to the back end without transformation when the method request content type
-	// does not match any content type associated with the mapping templates defined
-	// in the integration request.
-	// WHEN_NO_TEMPLATES: passes the method request body through the integration
-	// request to the back end without transformation when no mapping template is
-	// defined in the integration request. If a template is defined when this option
-	// is selected, the method request of an unmapped content-type will be rejected
-	// with an HTTP 415 Unsupported Media Type response.
-	// NEVER: rejects the method request with an HTTP 415 Unsupported Media Type
-	// response when either the method request content type does not match any content
-	// type associated with the mapping templates defined in the integration request
-	// or no mapping template is defined in the integration request.
+	//    * WHEN_NO_MATCH: passes the method request body through the integration
+	//    request to the back end without transformation when the method request
+	//    content type does not match any content type associated with the mapping
+	//    templates defined in the integration request.
+	//
+	//    * WHEN_NO_TEMPLATES: passes the method request body through the integration
+	//    request to the back end without transformation when no mapping template
+	//    is defined in the integration request. If a template is defined when this
+	//    option is selected, the method request of an unmapped content-type will
+	//    be rejected with an HTTP 415 Unsupported Media Type response.
+	//
+	//    * NEVER: rejects the method request with an HTTP 415 Unsupported Media
+	//    Type response when either the method request content type does not match
+	//    any content type associated with the mapping templates defined in the
+	//    integration request or no mapping template is defined in the integration
+	//    request.
 	PassthroughBehavior *string `locationName:"passthroughBehavior" type:"string"`
 
 	// A key-value map specifying request parameters that are passed from the method
@@ -1307,18 +1331,22 @@ type Integration struct {
 	//    including the Lambda function-invoking action. With the Lambda function-invoking
 	//    action, this is referred to as the Lambda custom integration. With any
 	//    other AWS service action, this is known as AWS integration.
+	//
 	//    * AWS_PROXY: for integrating the API method request with the Lambda function-invoking
 	//    action with the client request passed through as-is. This integration
 	//    is also referred to as the Lambda proxy integration.
+	//
 	//    * HTTP: for integrating the API method request with an HTTP endpoint,
 	//    including a private HTTP endpoint within a VPC. This integration is also
 	//    referred to as the HTTP custom integration.
+	//
 	//    * HTTP_PROXY: for integrating the API method request with an HTTP endpoint,
 	//    including a private HTTP endpoint within a VPC, with the client request
 	//    passed through as-is. This is also referred to as the HTTP proxy integration.
 	//
 	//    * MOCK: for integrating the API method request with API Gateway as a "loop-back"
 	//    endpoint without invoking any backend.
+	//
 	// For the HTTP and HTTP proxy integrations, each integration can specify a
 	// protocol (http/https), port and path. Standard 80 and 443 ports are supported
 	// as well as custom ports above 1024. An HTTP or HTTP proxy integration with
@@ -1328,13 +1356,13 @@ type Integration struct {
 
 	// Specifies Uniform Resource Identifier (URI) of the integration endpoint.
 	//
-	//    *  For HTTP or HTTP_PROXY integrations, the URI must be a fully formed,
-	//    encoded HTTP(S) URL according to the RFC-3986 specification (_blank),
+	//    * For HTTP or HTTP_PROXY integrations, the URI must be a fully formed,
+	//    encoded HTTP(S) URL according to the RFC-3986 specification (https://en.wikipedia.org/wiki/Uniform_Resource_Identifier),
 	//    for either standard integration, where connectionType is not VPC_LINK,
 	//    or private integration, where connectionType is VPC_LINK. For a private
 	//    HTTP integration, the URI is not used for routing.
 	//
-	//    *  For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}.
+	//    * For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}.
 	//    Here, {Region} is the API Gateway region (e.g., us-east-1); {service}
 	//    is the name of the integrated AWS service (e.g., s3); and {subdomain}
 	//    is a designated subdomain supported by certain AWS service for fast host-name
@@ -1590,60 +1618,59 @@ func (s IntegrationResponse) MarshalFields(e protocol.FieldEncoder) error {
 //
 // The following example request retrieves the information about the GET method
 // on an API resource (3kzxbg5sa2) of an API (fugvjdxtri).
-//
-//    GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET HTTP/1.1 Content-Type:
-//    application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date:
-//    20160603T210259Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160603/us-east-1/apigateway/aws4_request,
-//    SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
+//  GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET HTTP/1.1 Content-Type:
+//  application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20160603T210259Z
+//  Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160603/us-east-1/apigateway/aws4_request,
+//  SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
 // Response
 //
 // The successful response returns a 200 OK status code and a payload similar
 // to the following:
-//
-//    { "_links": { "curies": [ { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-{rel}.html",
-//    "name": "integration", "templated": true }, { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html",
-//    "name": "integrationresponse", "templated": true }, { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-{rel}.html",
-//    "name": "method", "templated": true }, { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html",
-//    "name": "methodresponse", "templated": true } ], "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET",
-//    "name": "GET", "title": "GET" }, "integration:put": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration"
-//    }, "method:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET"
-//    }, "method:integration": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration"
-//    }, "method:responses": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200",
-//    "name": "200", "title": "200" }, "method:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET"
-//    }, "methodresponse:put": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/{status_code}",
-//    "templated": true } }, "apiKeyRequired": true, "authorizationType": "NONE",
-//    "httpMethod": "GET", "_embedded": { "method:integration": { "_links":
-//    { "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration"
-//    }, "integration:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration"
-//    }, "integration:responses": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200",
-//    "name": "200", "title": "200" }, "integration:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration"
-//    }, "integrationresponse:put": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/{status_code}",
-//    "templated": true } }, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2",
-//    "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod":
-//    "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": {
-//    "integration.request.header.Content-Type": "'application/x-amz-json-1.1'"
-//    }, "requestTemplates": { "application/json": "{\n}" }, "type": "AWS",
-//    "uri": "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams", "_embedded":
-//    { "integration:responses": { "_links": { "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200",
-//    "name": "200", "title": "200" }, "integrationresponse:delete": { "href":
-//    "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
-//    }, "integrationresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
-//    } }, "responseParameters": { "method.response.header.Content-Type": "'application/xml'"
-//    }, "responseTemplates": { "application/json": "$util.urlDecode(\"%3CkinesisStreams%3E%23foreach(%24stream%20in%20%24input.path(%27%24.StreamNames%27))%3Cstream%3E%3Cname%3E%24stream%3C%2Fname%3E%3C%2Fstream%3E%23end%3C%2FkinesisStreams%3E\")"
-//    }, "statusCode": "200" } } }, "method:responses": { "_links": { "self":
-//    { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200",
-//    "name": "200", "title": "200" }, "methodresponse:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200"
-//    }, "methodresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200"
-//    } }, "responseModels": { "application/json": "Empty" }, "responseParameters":
-//    { "method.response.header.Content-Type": false }, "statusCode": "200"
-//    } } }
+//  { "_links": { "curies": [ { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-{rel}.html",
+//  "name": "integration", "templated": true }, { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html",
+//  "name": "integrationresponse", "templated": true }, { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-{rel}.html",
+//  "name": "method", "templated": true }, { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html",
+//  "name": "methodresponse", "templated": true } ], "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET",
+//  "name": "GET", "title": "GET" }, "integration:put": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration"
+//  }, "method:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET"
+//  }, "method:integration": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration"
+//  }, "method:responses": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200",
+//  "name": "200", "title": "200" }, "method:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET"
+//  }, "methodresponse:put": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/{status_code}",
+//  "templated": true } }, "apiKeyRequired": true, "authorizationType": "NONE",
+//  "httpMethod": "GET", "_embedded": { "method:integration": { "_links": {
+//  "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration"
+//  }, "integration:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration"
+//  }, "integration:responses": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200",
+//  "name": "200", "title": "200" }, "integration:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration"
+//  }, "integrationresponse:put": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/{status_code}",
+//  "templated": true } }, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2",
+//  "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod":
+//  "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": { "integration.request.header.Content-Type":
+//  "'application/x-amz-json-1.1'" }, "requestTemplates": { "application/json":
+//  "{\n}" }, "type": "AWS", "uri": "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams",
+//  "_embedded": { "integration:responses": { "_links": { "self": { "href":
+//  "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200",
+//  "name": "200", "title": "200" }, "integrationresponse:delete": { "href":
+//  "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
+//  }, "integrationresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
+//  } }, "responseParameters": { "method.response.header.Content-Type": "'application/xml'"
+//  }, "responseTemplates": { "application/json": "$util.urlDecode(\"%3CkinesisStreams%3E%23foreach(%24stream%20in%20%24input.path(%27%24.StreamNames%27))%3Cstream%3E%3Cname%3E%24stream%3C%2Fname%3E%3C%2Fstream%3E%23end%3C%2FkinesisStreams%3E\")"
+//  }, "statusCode": "200" } } }, "method:responses": { "_links": { "self":
+//  { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200",
+//  "name": "200", "title": "200" }, "methodresponse:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200"
+//  }, "methodresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200"
+//  } }, "responseModels": { "application/json": "Empty" }, "responseParameters":
+//  { "method.response.header.Content-Type": false }, "statusCode": "200" }
+//  } }
 // In the example above, the response template for the 200 OK response maps
 // the JSON output from the ListStreams action in the back end to an XML output.
 // The mapping template is URL-encoded as %3CkinesisStreams%3E%23foreach(%24stream%20in%20%24input.path(%27%24.StreamNames%27))%3Cstream%3E%3Cname%3E%24stream%3C%2Fname%3E%3C%2Fstream%3E%23end%3C%2FkinesisStreams%3E
 // and the output is decoded using the $util.urlDecode() (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#util-templat-reference)
 // helper function.
 //
-// MethodResponse, Integration, IntegrationResponse, Resource, Set up an API's method (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-method-settings.html)
+// MethodResponse, Integration, IntegrationResponse, Resource, Set up an API's
+// method (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-method-settings.html)
 type Method struct {
 	_ struct{} `type:"structure"`
 
@@ -1680,38 +1707,42 @@ type Method struct {
 	// Example:
 	//
 	// Request
-	//
-	// GET /restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration HTTP/1.1
-	// Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com Content-Length:
-	// 117 X-Amz-Date: 20160613T213210Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160613/us-east-1/apigateway/aws4_request,
-	// SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
+	//   GET /restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration HTTP/1.1
+	//   Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
+	//   Content-Length: 117 X-Amz-Date: 20160613T213210Z Authorization: AWS4-HMAC-SHA256
+	//   Credential={access_key_ID}/20160613/us-east-1/apigateway/aws4_request,
+	//   SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
 	// Response
 	//
-	// The successful response returns a 200 OKstatus code and a payload similar to the following:
+	// The successful response returns a 200 OK status code and a payload similar
+	// to the following:
+	//  { "_links": { "curies": [ { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-{rel}.html",
+	//  "name": "integration", "templated": true }, { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html",
+	//  "name": "integrationresponse", "templated": true } ], "self": { "href":
+	//  "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" }, "integration:delete":
+	//  { "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration"
+	//  }, "integration:responses": { "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200",
+	//  "name": "200", "title": "200" }, "integration:update": { "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration"
+	//  }, "integrationresponse:put": { "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/{status_code}",
+	//  "templated": true } }, "cacheKeyParameters": [], "cacheNamespace": "0cjtch",
+	//  "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod":
+	//  "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestTemplates": { "application/json":
+	//  "{\n \"a\": \"$input.params('operand1')\",\n \"b\": \"$input.params('operand2')\",
+	//  \n \"op\": \"$input.params('operator')\" \n}" }, "type": "AWS", "uri": "arn:aws:apigateway:us-west-2:lambda:path//2015-03-31/functions/arn:aws:lambda:us-west-2:123456789012:function:Calc/invocations",
+	//  "_embedded": { "integration:responses": { "_links": { "self": { "href":
+	//  "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200",
+	//  "name": "200", "title": "200" }, "integrationresponse:delete": { "href":
+	//  "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200"
+	//  }, "integrationresponse:update": { "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200"
+	//  } }, "responseParameters": { "method.response.header.operator": "integration.response.body.op",
+	//  "method.response.header.operand_2": "integration.response.body.b", "method.response.header.operand_1":
+	//  "integration.response.body.a" }, "responseTemplates": { "application/json":
+	//  "#set($res = $input.path('$'))\n{\n \"result\": \"$res.a, $res.b, $res.op
+	//  => $res.c\",\n \"a\" : \"$res.a\",\n \"b\" : \"$res.b\",\n \"op\" : \"$res.op\",\n
+	//  \"c\" : \"$res.c\"\n}" }, "selectionPattern": "", "statusCode": "200" }
+	//  } }
 	//
-	// { "_links": { "curies": [ { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-{rel}.html",
-	// "name": "integration", "templated": true }, { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html",
-	// "name": "integrationresponse", "templated": true } ], "self": { "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration"
-	// }, "integration:delete": { "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration"
-	// }, "integration:responses": { "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200",
-	// "name": "200", "title": "200" }, "integration:update": { "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration"
-	// }, "integrationresponse:put": { "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/{status_code}",
-	// "templated": true } }, "cacheKeyParameters": [], "cacheNamespace": "0cjtch",
-	// "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod":
-	// "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestTemplates": { "application/json":
-	// "{\n \"a\": \"$input.params('operand1')\",\n \"b\": \"$input.params('operand2')\",
-	// \n \"op\": \"$input.params('operator')\" \n}" }, "type": "AWS", "uri": "arn:aws:apigateway:us-west-2:lambda:path//2015-03-31/functions/arn:aws:lambda:us-west-2:123456789012:function:Calc/invocations",
-	// "_embedded": { "integration:responses": { "_links": { "self": { "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200",
-	// "name": "200", "title": "200" }, "integrationresponse:delete": { "href":
-	// "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200"
-	// }, "integrationresponse:update": { "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200"
-	// } }, "responseParameters": { "method.response.header.operator": "integration.response.body.op",
-	// "method.response.header.operand_2": "integration.response.body.b", "method.response.header.operand_1":
-	// "integration.response.body.a" }, "responseTemplates": { "application/json":
-	// "#set($res = $input.path('$'))\n{\n \"result\": \"$res.a, $res.b, $res.op
-	// => $res.c\",\n \"a\" : \"$res.a\",\n \"b\" : \"$res.b\",\n \"op\" : \"$res.op\",\n
-	// \"c\" : \"$res.c\"\n}" }, "selectionPattern": "", "statusCode": "200" } }
-	// }
+	// AWS CLI (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-integration.html)
 	MethodIntegration *Integration `locationName:"methodIntegration" type:"structure"`
 
 	// Gets a method response associated with a given HTTP status code.
@@ -1724,25 +1755,25 @@ type Method struct {
 	// Example: Get a 200 OK response of a GET method
 	//
 	// Request
-	//
-	//    GET /restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200 HTTP/1.1
-	//    Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
-	//    Content-Length: 117 X-Amz-Date: 20160613T215008Z Authorization: AWS4-HMAC-SHA256
-	//    Credential={access_key_ID}/20160613/us-east-1/apigateway/aws4_request,
-	//    SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
+	//   GET /restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200 HTTP/1.1
+	//   Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
+	//   Content-Length: 117 X-Amz-Date: 20160613T215008Z Authorization: AWS4-HMAC-SHA256
+	//   Credential={access_key_ID}/20160613/us-east-1/apigateway/aws4_request,
+	//   SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
 	// Response
 	//
 	// The successful response returns a 200 OK status code and a payload similar
 	// to the following:
+	//  { "_links": { "curies": { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html",
+	//  "name": "methodresponse", "templated": true }, "self": { "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200",
+	//  "title": "200" }, "methodresponse:delete": { "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200"
+	//  }, "methodresponse:update": { "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200"
+	//  } }, "responseModels": { "application/json": "Empty" }, "responseParameters":
+	//  { "method.response.header.operator": false, "method.response.header.operand_2":
+	//  false, "method.response.header.operand_1": false }, "statusCode": "200"
+	//  }
 	//
-	//    { "_links": { "curies": { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html",
-	//    "name": "methodresponse", "templated": true }, "self": { "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200",
-	//    "title": "200" }, "methodresponse:delete": { "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200"
-	//    }, "methodresponse:update": { "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200"
-	//    } }, "responseModels": { "application/json": "Empty" }, "responseParameters":
-	//    { "method.response.header.operator": false, "method.response.header.operand_2":
-	//    false, "method.response.header.operand_1": false }, "statusCode": "200"
-	//    }
+	// AWS CLI (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-method-response.html)
 	MethodResponses map[string]MethodResponse `locationName:"methodResponses" type:"map"`
 
 	// A human-friendly operation identifier for the method. For example, you can
@@ -1878,22 +1909,21 @@ func (s Method) MarshalFields(e protocol.FieldEncoder) error {
 // Request
 //
 // The example request retrieves a MethodResponse of the 200 status code.
-//
-//    GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200
-//    HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
-//    X-Amz-Date: 20160603T222952Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160603/us-east-1/apigateway/aws4_request,
-//    SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
+//  GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200
+//  HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
+//  X-Amz-Date: 20160603T222952Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160603/us-east-1/apigateway/aws4_request,
+//  SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
 // Response
 //
 // The successful response returns 200 OK status and a payload as follows:
+//  { "_links": { "curies": { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html",
+//  "name": "methodresponse", "templated": true }, "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200",
+//  "title": "200" }, "methodresponse:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200"
+//  }, "methodresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200"
+//  } }, "responseModels": { "application/json": "Empty" }, "responseParameters":
+//  { "method.response.header.Content-Type": false }, "statusCode": "200" }
 //
-//    { "_links": { "curies": { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html",
-//    "name": "methodresponse", "templated": true }, "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200",
-//    "title": "200" }, "methodresponse:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200"
-//    }, "methodresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200"
-//    } }, "responseModels": { "application/json": "Empty" }, "responseParameters":
-//    { "method.response.header.Content-Type": false }, "statusCode": "200"
-//    }
+// Method, IntegrationResponse, Integration Creating an API (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type MethodResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -2400,50 +2430,49 @@ type Resource struct {
 	// Example: Get the GET method of an API resource
 	//
 	// Request
-	//
-	// GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET HTTP/1.1 Content-Type:
-	// application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20170223T031827Z
-	// Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20170223/us-east-1/apigateway/aws4_request,
-	// SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
+	//  GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET HTTP/1.1 Content-Type:
+	//  application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20170223T031827Z
+	//  Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20170223/us-east-1/apigateway/aws4_request,
+	//  SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
 	// Response
-	//
-	// { "_links": { "curies": [ { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-{rel}.html",
-	// "name": "integration", "templated": true }, { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html",
-	// "name": "integrationresponse", "templated": true }, { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-{rel}.html",
-	// "name": "method", "templated": true }, { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html",
-	// "name": "methodresponse", "templated": true } ], "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET",
-	// "name": "GET", "title": "GET" }, "integration:put": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration"
-	// }, "method:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET"
-	// }, "method:integration": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration"
-	// }, "method:responses": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200",
-	// "name": "200", "title": "200" }, "method:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET"
-	// }, "methodresponse:put": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/{status_code}",
-	// "templated": true } }, "apiKeyRequired": false, "authorizationType": "NONE",
-	// "httpMethod": "GET", "_embedded": { "method:integration": { "_links": { "self":
-	// { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration"
-	// }, "integration:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration"
-	// }, "integration:responses": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200",
-	// "name": "200", "title": "200" }, "integration:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration"
-	// }, "integrationresponse:put": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/{status_code}",
-	// "templated": true } }, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2",
-	// "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod":
-	// "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": { "integration.request.header.Content-Type":
-	// "'application/x-amz-json-1.1'" }, "requestTemplates": { "application/json":
-	// "{\n}" }, "type": "AWS", "uri": "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams",
-	// "_embedded": { "integration:responses": { "_links": { "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200",
-	// "name": "200", "title": "200" }, "integrationresponse:delete": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
-	// }, "integrationresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
-	// } }, "responseParameters": { "method.response.header.Content-Type": "'application/xml'"
-	// }, "responseTemplates": { "application/json": "$util.urlDecode(\"%3CkinesisStreams%3E#foreach($stream
-	// in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\")\n"
-	// }, "statusCode": "200" } } }, "method:responses": { "_links": { "self": {
-	// "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200",
-	// "name": "200", "title": "200" }, "methodresponse:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200"
-	// }, "methodresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200"
-	// } }, "responseModels": { "application/json": "Empty" }, "responseParameters":
-	// { "method.response.header.Content-Type": false }, "statusCode": "200" } }
-	// }
+	//  { "_links": { "curies": [ { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-{rel}.html",
+	//  "name": "integration", "templated": true }, { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html",
+	//  "name": "integrationresponse", "templated": true }, { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-{rel}.html",
+	//  "name": "method", "templated": true }, { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html",
+	//  "name": "methodresponse", "templated": true } ], "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET",
+	//  "name": "GET", "title": "GET" }, "integration:put": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration"
+	//  }, "method:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET"
+	//  }, "method:integration": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration"
+	//  }, "method:responses": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200",
+	//  "name": "200", "title": "200" }, "method:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET"
+	//  }, "methodresponse:put": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/{status_code}",
+	//  "templated": true } }, "apiKeyRequired": false, "authorizationType": "NONE",
+	//  "httpMethod": "GET", "_embedded": { "method:integration": { "_links": {
+	//  "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration"
+	//  }, "integration:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration"
+	//  }, "integration:responses": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200",
+	//  "name": "200", "title": "200" }, "integration:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration"
+	//  }, "integrationresponse:put": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/{status_code}",
+	//  "templated": true } }, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2",
+	//  "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod":
+	//  "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": { "integration.request.header.Content-Type":
+	//  "'application/x-amz-json-1.1'" }, "requestTemplates": { "application/json":
+	//  "{\n}" }, "type": "AWS", "uri": "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams",
+	//  "_embedded": { "integration:responses": { "_links": { "self": { "href":
+	//  "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200",
+	//  "name": "200", "title": "200" }, "integrationresponse:delete": { "href":
+	//  "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
+	//  }, "integrationresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
+	//  } }, "responseParameters": { "method.response.header.Content-Type": "'application/xml'"
+	//  }, "responseTemplates": { "application/json": "$util.urlDecode(\"%3CkinesisStreams%3E#foreach($stream
+	//  in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\")\n"
+	//  }, "statusCode": "200" } } }, "method:responses": { "_links": { "self":
+	//  { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200",
+	//  "name": "200", "title": "200" }, "methodresponse:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200"
+	//  }, "methodresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200"
+	//  } }, "responseModels": { "application/json": "Empty" }, "responseParameters":
+	//  { "method.response.header.Content-Type": false }, "statusCode": "200" }
+	//  } }
 	// If the OPTIONS is enabled on the resource, you can follow the example here
 	// to get that method. Just replace the GET of the last path segment in the
 	// request URL with OPTIONS.
@@ -2503,10 +2532,11 @@ type RestApi struct {
 	_ struct{} `type:"structure"`
 
 	// The source of the API key for metering requests according to a usage plan.
-	// Valid values are: HEADER to read the API key from the X-API-Key header of
-	// a request.
-	// AUTHORIZER to read the API key from the UsageIdentifierKey from a custom
-	// authorizer.
+	// Valid values are:
+	//    * HEADER to read the API key from the X-API-Key header of a request.
+	//
+	//    * AUTHORIZER to read the API key from the UsageIdentifierKey from a custom
+	//    authorizer.
 	ApiKeySource ApiKeySourceType `locationName:"apiKeySource" type:"string" enum:"true"`
 
 	// The list of binary media types supported by the RestApi. By default, the
@@ -2538,7 +2568,7 @@ type RestApi struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// A stringified JSON policy document that applies to this RestApi regardless
-	// of the caller and Method
+	// of the caller and Method configuration.
 	Policy *string `locationName:"policy" type:"string"`
 
 	// A version identifier for the API.
@@ -3115,7 +3145,8 @@ func (s UsagePlan) MarshalFields(e protocol.FieldEncoder) error {
 // To associate an API stage with a selected API key in a usage plan, you must
 // create a UsagePlanKey resource to represent the selected ApiKey.
 //
-// " Create and Use Usage Plans (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
+// "
+// Create and Use Usage Plans (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
 type UsagePlanKey struct {
 	_ struct{} `type:"structure"`
 

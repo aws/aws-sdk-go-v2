@@ -11,7 +11,7 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // The values of a given attribute, such as Throughput Optimized HDD or Provisioned
-// IOPS for the Amazon EC2volumeType attribute.
+// IOPS for the Amazon EC2 volumeType attribute.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/AttributeValue
 type AttributeValue struct {
 	_ struct{} `type:"structure"`

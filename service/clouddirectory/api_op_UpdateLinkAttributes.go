@@ -122,8 +122,8 @@ const opUpdateLinkAttributes = "UpdateLinkAttributes"
 // UpdateLinkAttributesRequest returns a request value for making API operation for
 // Amazon CloudDirectory.
 //
-// Updates a given typed link’s attributes. Attributes to be updated must not
-// contribute to the typed link’s identity, as defined by its IdentityAttributeOrder.
+// Updates a given typed link’s attributes. Attributes to be updated must
+// not contribute to the typed link’s identity, as defined by its IdentityAttributeOrder.
 //
 //    // Example sending a request using UpdateLinkAttributesRequest.
 //    req := client.UpdateLinkAttributesRequest(params)

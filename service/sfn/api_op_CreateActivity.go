@@ -16,7 +16,7 @@ type CreateActivityInput struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the activity to create. This name must be unique for your AWS
-	// account and region for 90 days. For more information, see  Limits Related
+	// account and region for 90 days. For more information, see Limits Related
 	// to State Machine Executions (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions)
 	// in the AWS Step Functions Developer Guide.
 	//

@@ -24,8 +24,8 @@ func (s GetAccountSummaryInput) String() string {
 type GetAccountSummaryOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A set of key–value pairs containing information about IAM entity usage and
-	// IAM quotas.
+	// A set of key–value pairs containing information about IAM entity usage
+	// and IAM quotas.
 	SummaryMap map[string]int64 `type:"map"`
 }
 

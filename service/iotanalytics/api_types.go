@@ -1125,11 +1125,17 @@ type Datastore struct {
 
 	// The status of a data store:
 	//
-	// CREATINGThe data store is being created.
+	// CREATING
 	//
-	// ACTIVEThe data store has been created and can be used.
+	// The data store is being created.
 	//
-	// DELETINGThe data store is being deleted.
+	// ACTIVE
+	//
+	// The data store has been created and can be used.
+	//
+	// DELETING
+	//
+	// The data store is being deleted.
 	Status DatastoreStatus `locationName:"status" type:"string" enum:"true"`
 }
 
@@ -2733,7 +2739,7 @@ type Schedule struct {
 	_ struct{} `type:"structure"`
 
 	// The expression that defines when to trigger an update. For more information,
-	// see  Schedule Expressions for Rules (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html)
+	// see Schedule Expressions for Rules (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html)
 	// in the Amazon CloudWatch Events User Guide.
 	Expression *string `locationName:"expression" type:"string"`
 }

@@ -20,7 +20,7 @@ type DiscoverPollEndpointInput struct {
 	// The container instance ID or full ARN of the container instance. The ARN
 	// contains the arn:aws:ecs namespace, followed by the Region of the container
 	// instance, the AWS account ID of the container instance owner, the container-instance
-	// namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID.
+	// namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID .
 	ContainerInstance *string `locationName:"containerInstance" type:"string"`
 }
 
@@ -49,6 +49,7 @@ const opDiscoverPollEndpoint = "DiscoverPollEndpoint"
 
 // DiscoverPollEndpointRequest returns a request value for making API operation for
 // Amazon EC2 Container Service.
+//
 //
 // This action is only used by the Amazon ECS agent, and it is not intended
 // for use outside of the agent.

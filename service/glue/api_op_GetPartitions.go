@@ -31,39 +31,53 @@ type GetPartitionsInput struct {
 	// Operators: The following are the operators that you can use in the Expression
 	// API call:
 	//
-	// =Checks if the values of the two operands are equal or not; if yes, then
-	// the condition becomes true.
+	// =
+	//
+	// Checks if the values of the two operands are equal or not; if yes, then the
+	// condition becomes true.
 	//
 	// Example: Assume 'variable a' holds 10 and 'variable b' holds 20.
 	//
 	// (a = b) is not true.
 	//
-	// < >Checks if the values of two operands are equal or not; if the values are
+	// < >
+	//
+	// Checks if the values of two operands are equal or not; if the values are
 	// not equal, then the condition becomes true.
 	//
 	// Example: (a < > b) is true.
 	//
-	// >Checks if the value of the left operand is greater than the value of the
+	// >
+	//
+	// Checks if the value of the left operand is greater than the value of the
 	// right operand; if yes, then the condition becomes true.
 	//
 	// Example: (a > b) is not true.
 	//
-	// <Checks if the value of the left operand is less than the value of the right
+	// <
+	//
+	// Checks if the value of the left operand is less than the value of the right
 	// operand; if yes, then the condition becomes true.
 	//
 	// Example: (a < b) is true.
 	//
-	// >=Checks if the value of the left operand is greater than or equal to the
-	// value of the right operand; if yes, then the condition becomes true.
+	// >=
+	//
+	// Checks if the value of the left operand is greater than or equal to the value
+	// of the right operand; if yes, then the condition becomes true.
 	//
 	// Example: (a >= b) is not true.
 	//
-	// <=Checks if the value of the left operand is less than or equal to the value
+	// <=
+	//
+	// Checks if the value of the left operand is less than or equal to the value
 	// of the right operand; if yes, then the condition becomes true.
 	//
 	// Example: (a <= b) is true.
 	//
-	// AND, OR, IN, BETWEEN, LIKE, NOT, IS NULLLogical operators.
+	// AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL
+	//
+	// Logical operators.
 	//
 	// Supported Partition Key Types: The following are the the supported partition
 	// keys.

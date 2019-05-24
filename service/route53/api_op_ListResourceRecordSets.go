@@ -250,18 +250,25 @@ const opListResourceRecordSets = "ListResourceRecordSets"
 // You can use the name and type elements to specify the resource record set
 // that the list begins with:
 //
-// If you do not specify Name or TypeThe results begin with the first resource
-// record set that the hosted zone contains.
+// If you do not specify Name or Type
 //
-// If you specify Name but not TypeThe results begin with the first resource
-// record set in the list whose name is greater than or equal to Name.
+// The results begin with the first resource record set that the hosted zone
+// contains.
 //
-// If you specify Type but not NameAmazon Route 53 returns the InvalidInput
-// error.
+// If you specify Name but not Type
 //
-// If you specify both Name and TypeThe results begin with the first resource
-// record set in the list whose name is greater than or equal to Name, and whose
-// type is greater than or equal to Type.
+// The results begin with the first resource record set in the list whose name
+// is greater than or equal to Name.
+//
+// If you specify Type but not Name
+//
+// Amazon Route 53 returns the InvalidInput error.
+//
+// If you specify both Name and Type
+//
+// The results begin with the first resource record set in the list whose name
+// is greater than or equal to Name, and whose type is greater than or equal
+// to Type.
 //
 // Resource record sets that are PENDING
 //

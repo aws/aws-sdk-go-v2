@@ -131,7 +131,7 @@ type RunInstancesInput struct {
 	// The ID of the kernel.
 	//
 	// We recommend that you use PV-GRUB instead of kernels and RAM disks. For more
-	// information, see  PV-GRUB (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html)
+	// information, see PV-GRUB (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	KernelId *string `type:"string"`
 
@@ -201,7 +201,7 @@ type RunInstancesInput struct {
 	// The ID of the RAM disk.
 	//
 	// We recommend that you use PV-GRUB instead of kernels and RAM disks. For more
-	// information, see  PV-GRUB (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html)
+	// information, see PV-GRUB (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	RamdiskId *string `type:"string"`
 

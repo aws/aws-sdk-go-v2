@@ -151,7 +151,7 @@ const opCreateGroupMembership = "CreateGroupMembership"
 //
 // Adds an Amazon QuickSight user to an Amazon QuickSight group.
 //
-// The permissions resource is arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/<group-name>.
+// The permissions resource is arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/<group-name> .
 //
 // The condition resource is the user name.
 //

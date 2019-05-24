@@ -61,16 +61,13 @@ type GetQueueAttributesInput struct {
 	//    dead-letter queue functionality of the source queue. For more information
 	//    about the redrive policy and dead-letter queues, see Using Amazon SQS
 	//    Dead-Letter Queues (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)
-	//    in the Amazon Simple Queue Service Developer Guide.
-	//
-	// deadLetterTargetArn - The Amazon Resource Name (ARN) of the dead-letter queue
-	//    to which Amazon SQS moves messages after the value of maxReceiveCount
-	//    is exceeded.
-	//
-	// maxReceiveCount - The number of times a message is delivered to the source
-	//    queue before being moved to the dead-letter queue. When the ReceiveCount
-	//    for a message exceeds the maxReceiveCount for a queue, Amazon SQS moves
-	//    the message to the dead-letter-queue.
+	//    in the Amazon Simple Queue Service Developer Guide. deadLetterTargetArn
+	//    - The Amazon Resource Name (ARN) of the dead-letter queue to which Amazon
+	//    SQS moves messages after the value of maxReceiveCount is exceeded. maxReceiveCount
+	//    - The number of times a message is delivered to the source queue before
+	//    being moved to the dead-letter queue. When the ReceiveCount for a message
+	//    exceeds the maxReceiveCount for a queue, Amazon SQS moves the message
+	//    to the dead-letter-queue.
 	//
 	//    * VisibilityTimeout - Returns the visibility timeout for the queue. For
 	//    more information about the visibility timeout, see Visibility Timeout
@@ -83,20 +80,17 @@ type GetQueueAttributesInput struct {
 	//    (CMK) for Amazon SQS or a custom CMK. For more information, see Key Terms
 	//    (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms).
 	//
-	//
 	//    * KmsDataKeyReusePeriodSeconds - Returns the length of time, in seconds,
 	//    for which Amazon SQS can reuse a data key to encrypt or decrypt messages
 	//    before calling AWS KMS again. For more information, see How Does the Data
 	//    Key Reuse Period Work? (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work).
 	//
-	//
 	// The following attributes apply only to FIFO (first-in-first-out) queues (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html):
 	//
 	//    * FifoQueue - Returns whether the queue is FIFO. For more information,
 	//    see FIFO Queue Logic (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic)
-	//    in the Amazon Simple Queue Service Developer Guide.
-	//
-	// To determine whether a queue is FIFO (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html),
+	//    in the Amazon Simple Queue Service Developer Guide. To determine whether
+	//    a queue is FIFO (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html),
 	//    you can check whether QueueName ends with the .fifo suffix.
 	//
 	//    * ContentBasedDeduplication - Returns whether content-based deduplication

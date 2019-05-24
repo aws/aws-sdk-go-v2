@@ -156,11 +156,9 @@ type ScanInput struct {
 	//
 	//    * INDEXES - The response includes the aggregate ConsumedCapacity for the
 	//    operation, together with ConsumedCapacity for each table and secondary
-	//    index that was accessed.
-	//
-	// Note that some operations, such as GetItem and BatchGetItem, do not access
-	//    any indexes at all. In these cases, specifying INDEXES will only return
-	//    ConsumedCapacity information for table(s).
+	//    index that was accessed. Note that some operations, such as GetItem and
+	//    BatchGetItem, do not access any indexes at all. In these cases, specifying
+	//    INDEXES will only return ConsumedCapacity information for table(s).
 	//
 	//    * TOTAL - The response includes only the aggregate ConsumedCapacity for
 	//    the operation.
@@ -212,18 +210,15 @@ type ScanInput struct {
 	//
 	//    * SPECIFIC_ATTRIBUTES - Returns only the attributes listed in AttributesToGet.
 	//    This return value is equivalent to specifying AttributesToGet without
-	//    specifying any value for Select.
-	//
-	// If you query or scan a local secondary index and request only attributes
-	//    that are projected into that index, the operation will read only the index
-	//    and not the table. If any of the requested attributes are not projected
-	//    into the local secondary index, DynamoDB will fetch each of these attributes
-	//    from the parent table. This extra fetching incurs additional throughput
-	//    cost and latency.
-	//
-	// If you query or scan a global secondary index, you can only request attributes
-	//    that are projected into the index. Global secondary index queries cannot
-	//    fetch attributes from the parent table.
+	//    specifying any value for Select. If you query or scan a local secondary
+	//    index and request only attributes that are projected into that index,
+	//    the operation will read only the index and not the table. If any of the
+	//    requested attributes are not projected into the local secondary index,
+	//    DynamoDB will fetch each of these attributes from the parent table. This
+	//    extra fetching incurs additional throughput cost and latency. If you query
+	//    or scan a global secondary index, you can only request attributes that
+	//    are projected into the index. Global secondary index queries cannot fetch
+	//    attributes from the parent table.
 	//
 	// If neither Select nor AttributesToGet are specified, DynamoDB defaults to
 	// ALL_ATTRIBUTES when accessing a table, and ALL_PROJECTED_ATTRIBUTES when

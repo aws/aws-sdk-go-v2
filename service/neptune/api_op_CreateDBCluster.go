@@ -165,16 +165,16 @@ type CreateDBClusterInput struct {
 	//    an encrypted DB cluster from the us-west-2 AWS Region, then your ReplicationSourceIdentifier
 	//    would look like Example: arn:aws:rds:us-west-2:123456789012:cluster:neptune-cluster1.
 	//
-	// To learn how to generate a Signature Version 4 signed request, see  Authenticating
+	// To learn how to generate a Signature Version 4 signed request, see Authenticating
 	// Requests: Using Query Parameters (AWS Signature Version 4) (http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
-	// and  Signature Version 4 Signing Process (http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+	// and Signature Version 4 Signing Process (http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 	PreSignedUrl *string `type:"string"`
 
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled using the BackupRetentionPeriod parameter.
 	//
 	// The default is a 30-minute window selected at random from an 8-hour block
-	// of time for each AWS Region. To see the time blocks available, see  Adjusting
+	// of time for each AWS Region. To see the time blocks available, see Adjusting
 	// the Preferred Maintenance Window (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html)
 	// in the Amazon Neptune User Guide.
 	//
@@ -196,7 +196,7 @@ type CreateDBClusterInput struct {
 	//
 	// The default is a 30-minute window selected at random from an 8-hour block
 	// of time for each AWS Region, occurring on a random day of the week. To see
-	// the time blocks available, see  Adjusting the Preferred Maintenance Window
+	// the time blocks available, see Adjusting the Preferred Maintenance Window
 	// (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html)
 	// in the Amazon Neptune User Guide.
 	//

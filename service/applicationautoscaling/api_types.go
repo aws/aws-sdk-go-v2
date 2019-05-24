@@ -676,7 +676,7 @@ type ScheduledAction struct {
 	//
 	//    * At expressions - "at(yyyy-mm-ddThh:mm:ss)"
 	//
-	//    * Rate expressions - "rate(valueunit)"
+	//    * Rate expressions - "rate(value unit)"
 	//
 	//    * Cron expressions - "cron(fields)"
 	//

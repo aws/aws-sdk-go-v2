@@ -96,21 +96,35 @@ type Operator struct {
 	// The comparison operators EQ and REF_EQ act on the following fields:
 	//
 	//    * name
+	//
 	//    * @sphere
+	//
 	//    * parent
+	//
 	//    * @componentParent
+	//
 	//    * @instanceParent
+	//
 	//    * @status
+	//
 	//    * @scheduledStartTime
+	//
 	//    * @scheduledEndTime
+	//
 	//    * @actualStartTime
+	//
 	//    * @actualEndTime
+	//
 	// The comparison operators GE, LE, and BETWEEN act on the following fields:
 	//
 	//    * @scheduledStartTime
+	//
 	//    * @scheduledEndTime
+	//
 	//    * @actualStartTime
+	//
 	//    * @actualEndTime
+	//
 	// Note that fields beginning with the at sign (@) are read-only and set by
 	// the web service. When you name fields, you should choose names containing
 	// only alpha-numeric values, as symbols may be reserved by AWS Data Pipeline.

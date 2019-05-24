@@ -143,7 +143,7 @@ const opDeleteGroupMembership = "DeleteGroupMembership"
 // Removes a user from a group so that the user is no longer a member of the
 // group.
 //
-// The permissions resource is arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/<group-name>.
+// The permissions resource is arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/<group-name> .
 //
 // The condition resource is the user name.
 //

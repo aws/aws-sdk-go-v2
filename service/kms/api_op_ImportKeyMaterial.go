@@ -125,10 +125,9 @@ const opImportKeyMaterial = "ImportKeyMaterial"
 // When calling this operation, you must specify the following values:
 //
 //    * The key ID or key ARN of a CMK with no key material. Its Origin must
-//    be EXTERNAL.
-//
-// To create a CMK with no key material, call CreateKey and set the value of
-//    its Origin parameter to EXTERNAL. To get the Origin of a CMK, call DescribeKey.)
+//    be EXTERNAL. To create a CMK with no key material, call CreateKey and
+//    set the value of its Origin parameter to EXTERNAL. To get the Origin of
+//    a CMK, call DescribeKey.)
 //
 //    * The encrypted key material. To get the public key to encrypt the key
 //    material, call GetParametersForImport.

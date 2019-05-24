@@ -35,7 +35,9 @@ type CreateConstraintInput struct {
 	// The constraint parameters, in JSON format. The syntax depends on the constraint
 	// type as follows:
 	//
-	// LAUNCHSpecify the RoleArn property as follows:
+	// LAUNCH
+	//
+	// Specify the RoleArn property as follows:
 	//
 	// {"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"}
 	//
@@ -43,18 +45,24 @@ type CreateConstraintInput struct {
 	//
 	// You also cannot have more than one LAUNCH constraint on a product and portfolio.
 	//
-	// NOTIFICATIONSpecify the NotificationArns property as follows:
+	// NOTIFICATION
+	//
+	// Specify the NotificationArns property as follows:
 	//
 	// {"NotificationArns" : ["arn:aws:sns:us-east-1:123456789012:Topic"]}
 	//
-	// RESOUCE_UPDATESpecify the TagUpdatesOnProvisionedProduct property as follows:
+	// RESOUCE_UPDATE
+	//
+	// Specify the TagUpdatesOnProvisionedProduct property as follows:
 	//
 	// {"Version":"2.0","Properties":{"TagUpdateOnProvisionedProduct":"String"}}
 	//
 	// The TagUpdatesOnProvisionedProduct property accepts a string value of ALLOWED
 	// or NOT_ALLOWED.
 	//
-	// STACKSETSpecify the Parameters property as follows:
+	// STACKSET
+	//
+	// Specify the Parameters property as follows:
 	//
 	// {"Version": "String", "Properties": {"AccountList": [ "String" ], "RegionList":
 	// [ "String" ], "AdminRole": "String", "ExecutionRole": "String"}}
@@ -66,7 +74,9 @@ type CreateConstraintInput struct {
 	// Products with a STACKSET constraint will launch an AWS CloudFormation stack
 	// set.
 	//
-	// TEMPLATESpecify the Rules property. For more information, see Template Constraint
+	// TEMPLATE
+	//
+	// Specify the Rules property. For more information, see Template Constraint
 	// Rules (http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html).
 	//
 	// Parameters is a required field

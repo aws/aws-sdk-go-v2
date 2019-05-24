@@ -45,9 +45,9 @@ type GetAccountOutput struct {
 	//    * HEALTHY – There are no reputation-related issues that currently impact
 	//    your account.
 	//
-	//    * PROBATION – We've identified some issues with your Amazon Pinpoint account.
-	//    We're placing your account under review while you work on correcting these
-	//    issues.
+	//    * PROBATION – We've identified some issues with your Amazon Pinpoint
+	//    account. We're placing your account under review while you work on correcting
+	//    these issues.
 	//
 	//    * SHUTDOWN – Your account's ability to send email is currently paused
 	//    because of an issue with the email sent from your account. When you correct

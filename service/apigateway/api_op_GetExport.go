@@ -26,7 +26,7 @@ type GetExportInput struct {
 	ExportType *string `location:"uri" locationName:"export_type" type:"string" required:"true"`
 
 	// A key-value map of query string parameters that specify properties of the
-	// export, depending on the requested exportType. For exportTypeoas30 and swagger,
+	// export, depending on the requested exportType. For exportType oas30 and swagger,
 	// any combination of the following parameters are supported: extensions='integrations'
 	// or extensions='apigateway' will export the API with x-amazon-apigateway-integration
 	// extensions. extensions='authorizers' will export the API with x-amazon-apigateway-authorizer

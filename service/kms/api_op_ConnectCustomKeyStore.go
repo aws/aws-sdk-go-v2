@@ -81,8 +81,8 @@ const opConnectCustomKeyStore = "ConnectCustomKeyStore"
 // During the connection process, AWS KMS finds the AWS CloudHSM cluster that
 // is associated with the custom key store, creates the connection infrastructure,
 // connects to the cluster, logs into the AWS CloudHSM client as the kmsuser
-// (http://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser)
-// crypto user (CU), and rotates its password.
+// crypto user (http://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser)
+// (CU), and rotates its password.
 //
 // The ConnectCustomKeyStore operation might fail for various reasons. To find
 // the reason, use the DescribeCustomKeyStores operation and see the ConnectionErrorCode

@@ -57,28 +57,46 @@ type CheckDomainAvailabilityOutput struct {
 	//
 	// Valid values:
 	//
-	// AVAILABLEThe domain name is available.
+	// AVAILABLE
 	//
-	// AVAILABLE_RESERVEDThe domain name is reserved under specific conditions.
+	// The domain name is available.
 	//
-	// AVAILABLE_PREORDERThe domain name is available and can be preordered.
+	// AVAILABLE_RESERVED
 	//
-	// DONT_KNOWThe TLD registry didn't reply with a definitive answer about whether
-	// the domain name is available. Amazon Route 53 can return this response for
-	// a variety of reasons, for example, the registry is performing maintenance.
+	// The domain name is reserved under specific conditions.
+	//
+	// AVAILABLE_PREORDER
+	//
+	// The domain name is available and can be preordered.
+	//
+	// DONT_KNOW
+	//
+	// The TLD registry didn't reply with a definitive answer about whether the
+	// domain name is available. Amazon Route 53 can return this response for a
+	// variety of reasons, for example, the registry is performing maintenance.
 	// Try again later.
 	//
-	// PENDINGThe TLD registry didn't return a response in the expected amount of
-	// time. When the response is delayed, it usually takes just a few extra seconds.
+	// PENDING
+	//
+	// The TLD registry didn't return a response in the expected amount of time.
+	// When the response is delayed, it usually takes just a few extra seconds.
 	// You can resubmit the request immediately.
 	//
-	// RESERVEDThe domain name has been reserved for another person or organization.
+	// RESERVED
 	//
-	// UNAVAILABLEThe domain name is not available.
+	// The domain name has been reserved for another person or organization.
 	//
-	// UNAVAILABLE_PREMIUMThe domain name is not available.
+	// UNAVAILABLE
 	//
-	// UNAVAILABLE_RESTRICTEDThe domain name is forbidden.
+	// The domain name is not available.
+	//
+	// UNAVAILABLE_PREMIUM
+	//
+	// The domain name is not available.
+	//
+	// UNAVAILABLE_RESTRICTED
+	//
+	// The domain name is forbidden.
 	//
 	// Availability is a required field
 	Availability DomainAvailability `type:"string" required:"true" enum:"true"`

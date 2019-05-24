@@ -71,7 +71,6 @@ type ImportImageInput struct {
 	//    followed by the region of the CMK, the AWS account ID of the CMK owner,
 	//    the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
 	//
-	//
 	// AWS parses KmsKeyId asynchronously, meaning that the action you call may
 	// appear to complete even though you provided an invalid identifier. This action
 	// will eventually report failure.

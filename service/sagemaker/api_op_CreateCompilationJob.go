@@ -150,7 +150,7 @@ const opCreateCompilationJob = "CreateCompilationJob"
 //
 //    * A name for the compilation job
 //
-//    *  Information about the input model artifacts
+//    * Information about the input model artifacts
 //
 //    * The output location for the compiled model and the device (target) that
 //    the model runs on

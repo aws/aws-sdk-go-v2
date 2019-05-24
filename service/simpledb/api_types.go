@@ -131,7 +131,9 @@ type ReplaceableAttribute struct {
 	Name *string `type:"string" required:"true"`
 
 	// A flag specifying whether or not to replace the attribute/value pair or to
-	// add a new attribute/value pair. The default setting is false
+	// add a new attribute/value pair. The default setting is
+	//    false
+	// .
 	Replace *bool `type:"boolean"`
 
 	// The value of the replaceable attribute.

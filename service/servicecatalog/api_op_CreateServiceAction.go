@@ -24,17 +24,25 @@ type CreateServiceActionInput struct {
 
 	// The self-service action definition. Can be one of the following:
 	//
-	// NameThe name of the AWS Systems Manager Document. For example, AWS-RestartEC2Instance.
+	// Name
 	//
-	// VersionThe AWS Systems Manager automation document version. For example,
-	// "Version": "1"
+	// The name of the AWS Systems Manager Document. For example, AWS-RestartEC2Instance.
 	//
-	// AssumeRoleThe Amazon Resource Name (ARN) of the role that performs the self-service
+	// Version
+	//
+	// The AWS Systems Manager automation document version. For example, "Version":
+	// "1"
+	//
+	// AssumeRole
+	//
+	// The Amazon Resource Name (ARN) of the role that performs the self-service
 	// actions on your behalf. For example, "AssumeRole": "arn:aws:iam::12345678910:role/ActionRole".
 	//
 	// To reuse the provisioned product launch role, set to "AssumeRole": "LAUNCH_ROLE".
 	//
-	// ParametersThe list of parameters in JSON format.
+	// Parameters
+	//
+	// The list of parameters in JSON format.
 	//
 	// For example: [{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}].
 	//

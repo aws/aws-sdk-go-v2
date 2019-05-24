@@ -67,9 +67,9 @@ const opExportSnapshot = "ExportSnapshot"
 // EBS volumes. Snapshots are exported to the same Amazon Web Services Region
 // in Amazon EC2 as the source Lightsail snapshot.
 //
-// The export snapshotoperation supports tag-based access control via resource tags applied to
-// the resource identified by sourceSnapshotName. For more information, see
-// the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+// The export snapshot operation supports tag-based access control via resource
+// tags applied to the resource identified by sourceSnapshotName. For more information,
+// see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 // Use the get instance snapshots or get disk snapshots operations to get a
 // list of snapshots that you can export to Amazon EC2.

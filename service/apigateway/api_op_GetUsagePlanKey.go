@@ -73,7 +73,8 @@ func (s GetUsagePlanKeyInput) MarshalFields(e protocol.FieldEncoder) error {
 // To associate an API stage with a selected API key in a usage plan, you must
 // create a UsagePlanKey resource to represent the selected ApiKey.
 //
-// " Create and Use Usage Plans (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
+// "
+// Create and Use Usage Plans (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
 type GetUsagePlanKeyOutput struct {
 	_ struct{} `type:"structure"`
 

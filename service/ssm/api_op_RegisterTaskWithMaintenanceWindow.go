@@ -58,7 +58,7 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// For more information, see Service-Linked Role Permissions for Systems Manager
 	// (http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions)
 	// and Should I Use a Service-Linked Role or a Custom Service Role to Run Maintenance
-	// Window Tasks?  (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role)
+	// Window Tasks? (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role)
 	// in the AWS Systems Manager User Guide.
 	ServiceRoleArn *string `type:"string"`
 

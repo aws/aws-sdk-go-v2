@@ -19,8 +19,7 @@ type GetBotAliasesInput struct {
 	// BotName is a required field
 	BotName *string `location:"uri" locationName:"botName" min:"2" type:"string" required:"true"`
 
-	// The maximum number of aliases to return in the response. The default is 50.
-	// .
+	// The maximum number of aliases to return in the response. The default is 50. .
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
 	// Substring to match in bot alias names. An alias will be returned if any part

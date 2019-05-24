@@ -115,12 +115,9 @@ const opPutPipelineDefinition = "PutPipelineDefinition"
 // PutPipelineDefinition also validates the configuration as it adds it to the
 // pipeline. Changes to the pipeline are saved unless one of the following three
 // validation errors exists in the pipeline.
-//
-// An object is missing a name or identifier field.
-// A string or reference field is empty.
-// The number of objects in the pipeline exceeds the maximum allowed objects.
-//
-// The pipeline is in a FINISHED state.
+//   An object is missing a name or identifier field. A string or reference
+//   field is empty. The number of objects in the pipeline exceeds the maximum
+//   allowed objects. The pipeline is in a FINISHED state.
 // Pipeline object definitions are passed to the PutPipelineDefinition action
 // and returned by the GetPipelineDefinition action.
 //

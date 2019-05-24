@@ -268,11 +268,9 @@ func (enum ReplicaStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 //
 //    * INDEXES - The response includes the aggregate ConsumedCapacity for the
 //    operation, together with ConsumedCapacity for each table and secondary
-//    index that was accessed.
-//
-// Note that some operations, such as GetItem and BatchGetItem, do not access
-//    any indexes at all. In these cases, specifying INDEXES will only return
-//    ConsumedCapacity information for table(s).
+//    index that was accessed. Note that some operations, such as GetItem and
+//    BatchGetItem, do not access any indexes at all. In these cases, specifying
+//    INDEXES will only return ConsumedCapacity information for table(s).
 //
 //    * TOTAL - The response includes only the aggregate ConsumedCapacity for
 //    the operation.

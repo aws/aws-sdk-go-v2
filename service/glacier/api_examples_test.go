@@ -630,7 +630,7 @@ func ExampleClient_GetJobOutputRequest_shared00() {
 	fmt.Println(result)
 }
 
-// To  get the access-policy set on the vault
+// To get the access-policy set on the vault
 //
 // The example retrieves the access-policy set on the vault named example-vault.
 func ExampleClient_GetVaultAccessPolicyRequest_shared00() {

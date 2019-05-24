@@ -33,7 +33,8 @@ type ListDomainsOutput struct {
 	DomainNames []string `locationNameList:"DomainName" type:"list" flattened:"true"`
 
 	// An opaque token indicating that there are more domains than the specified
-	// MaxNumberOfDomains
+	//    MaxNumberOfDomains
+	//  still available.
 	NextToken *string `type:"string"`
 }
 

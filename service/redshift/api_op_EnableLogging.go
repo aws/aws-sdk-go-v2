@@ -40,17 +40,7 @@ type EnableLoggingInput struct {
 	//
 	//    * Cannot contain spaces( ), double quotes ("), single quotes ('), a backslash
 	//    (\), or control characters. The hexadecimal codes for invalid characters
-	//    are:
-	//
-	// x00 to x20
-	//
-	// x22
-	//
-	// x27
-	//
-	// x5c
-	//
-	// x7f or larger
+	//    are: x00 to x20 x22 x27 x5c x7f or larger
 	S3KeyPrefix *string `type:"string"`
 }
 

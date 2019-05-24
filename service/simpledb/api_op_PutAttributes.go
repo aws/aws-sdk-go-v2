@@ -102,19 +102,23 @@ const opPutAttributes = "PutAttributes"
 // using the attributes { 'b', '4' } with the Replace parameter set to true,
 // the final attributes of the item are changed to { 'a', '1' } and { 'b', '4'
 // }, which replaces the previous values of the 'b' attribute with the new value.
-//
-// Using PutAttributes to replace attribute values that do not exist will not
-// result in an error response. You cannot specify an empty string as an attribute name.
+//   Using
+//    PutAttributes
+//  to replace attribute values that do not exist will not result in an error
+//  response.
+// You cannot specify an empty string as an attribute name.
 //
 // Because Amazon SimpleDB makes multiple copies of client data and uses an
 // eventual consistency update model, an immediate GetAttributes or Select operation
 // (read) immediately after a PutAttributes or DeleteAttributes operation (write)
 // might not return the updated data.
 //
-// The following limitations are enforced for this operation: 256 total attribute
-// name-value pairs per item
-// One billion attributes per domain
-// 10 GB of total user data storage per domain
+// The following limitations are enforced for this operation:
+//    * 256 total attribute name-value pairs per item
+//
+//    * One billion attributes per domain
+//
+//    * 10 GB of total user data storage per domain
 //
 //    // Example sending a request using PutAttributesRequest.
 //    req := client.PutAttributesRequest(params)

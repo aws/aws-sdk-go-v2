@@ -151,32 +151,33 @@ const opUpdateDistribution = "UpdateDistribution2018_11_05"
 //
 // When you edit the XML file, be aware of the following:
 //
-// You must strip out the ETag parameter that is returned.
+//    * You must strip out the ETag parameter that is returned.
 //
-// Additional fields are required when you update a distribution. There may
-// be fields included in the XML file for features that you haven't configured
-// for your distribution. This is expected and required to successfully update
-// the distribution.
+//    * Additional fields are required when you update a distribution. There
+//    may be fields included in the XML file for features that you haven't configured
+//    for your distribution. This is expected and required to successfully update
+//    the distribution.
 //
-// You can't change the value of CallerReference. If you try to change this
-// value, CloudFront returns an IllegalUpdate error.
+//    * You can't change the value of CallerReference. If you try to change
+//    this value, CloudFront returns an IllegalUpdate error.
 //
-// The new configuration replaces the existing configuration; the values that
-// you specify in an UpdateDistribution request are not merged into your existing
-// configuration. When you add, delete, or replace values in an element that
-// allows multiple values (for example, CNAME), you must specify all of the
-// values that you want to appear in the updated distribution. In addition,
-// you must update the corresponding Quantity element.
+//    * The new configuration replaces the existing configuration; the values
+//    that you specify in an UpdateDistribution request are not merged into
+//    your existing configuration. When you add, delete, or replace values in
+//    an element that allows multiple values (for example, CNAME), you must
+//    specify all of the values that you want to appear in the updated distribution.
+//    In addition, you must update the corresponding Quantity element.
 //
 // Submit an UpdateDistribution request to update the configuration for your
 // distribution:
 //
-// In the request body, include the XML document that you updated in Step 2.
-// The request body must include an XML document with a DistributionConfig element.
+//    * In the request body, include the XML document that you updated in Step
+//    2. The request body must include an XML document with a DistributionConfig
+//    element.
 //
-// Set the value of the HTTP If-Match header to the value of the ETag header
-// that CloudFront returned when you submitted the GetDistributionConfig request
-// in Step 1.
+//    * Set the value of the HTTP If-Match header to the value of the ETag header
+//    that CloudFront returned when you submitted the GetDistributionConfig
+//    request in Step 1.
 //
 // Review the response to the UpdateDistribution request to confirm that the
 // configuration was successfully updated.

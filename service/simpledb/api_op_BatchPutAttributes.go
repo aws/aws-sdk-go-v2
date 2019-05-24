@@ -97,22 +97,33 @@ const opBatchPutAttributes = "BatchPutAttributes"
 // a BatchPutAttributes of {'I', 'b', '4' } with the Replace parameter set to
 // true, the final attributes of the item will be { 'a', '1' } and { 'b', '4'
 // }, replacing the previous values of the 'b' attribute with the new value.
-//
-// You cannot specify an empty string as an item or as an attribute name. The
-// BatchPutAttributes operation succeeds or fails in its entirety. There are
-// no partial puts. This operation is vulnerable to exceeding the maximum URL size when making
-// a REST request using the HTTP GET method. This operation does not support
-// conditions using Expected.X.Name, Expected.X.Value, or Expected.X.Exists.
+//   You cannot specify an empty string as an item or as an attribute name.
+//   The
+//    BatchPutAttributes
+//  operation succeeds or fails in its entirety. There are no partial puts.
+//  This operation is vulnerable to exceeding the maximum URL size when making
+//  a REST request using the HTTP GET method. This operation does not support
+//  conditions using
+//    Expected.X.Name
+// ,
+//    Expected.X.Value
+// , or
+//    Expected.X.Exists
+// .
 // You can execute multiple BatchPutAttributes operations and other operations
 // in parallel. However, large numbers of concurrent BatchPutAttributes calls
 // can result in Service Unavailable (503) responses.
 //
-// The following limitations are enforced for this operation: 256 attribute
-// name-value pairs per item
-// 1 MB request size
-// 1 billion attributes per domain
-// 10 GB of total user data storage per domain
-// 25 item limit per BatchPutAttributes operation
+// The following limitations are enforced for this operation:
+//    * 256 attribute name-value pairs per item
+//
+//    * 1 MB request size
+//
+//    * 1 billion attributes per domain
+//
+//    * 10 GB of total user data storage per domain
+//
+//    * 25 item limit per BatchPutAttributes operation
 //
 //    // Example sending a request using BatchPutAttributesRequest.
 //    req := client.BatchPutAttributesRequest(params)

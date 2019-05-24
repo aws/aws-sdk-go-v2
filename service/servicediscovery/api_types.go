@@ -228,23 +228,15 @@ type DnsRecord struct {
 	//
 	//    * The values of priority and weight are both set to 1 and can't be changed.
 	//
-	//
 	//    * The value of port comes from the value that you specify for the AWS_INSTANCE_PORT
 	//    attribute when you submit a RegisterInstance request.
 	//
 	//    * The value of service-hostname is a concatenation of the following values:
-	//
-	// The value that you specify for InstanceId when you register an instance.
-	//
-	// The name of the service.
-	//
-	// The name of the namespace.
-	//
-	// For example, if the value of InstanceId is test, the name of the service
-	//    is backend, and the name of the namespace is example.com, the value of
-	//    service-hostname is:
-	//
-	// test.backend.example.com
+	//    The value that you specify for InstanceId when you register an instance.
+	//    The name of the service. The name of the namespace. For example, if the
+	//    value of InstanceId is test, the name of the service is backend, and the
+	//    name of the namespace is example.com, the value of service-hostname is:
+	//    test.backend.example.com
 	//
 	// If you specify settings for an SRV record and if you specify values for AWS_INSTANCE_IPV4,
 	// AWS_INSTANCE_IPV6, or both in the RegisterInstance request, AWS Cloud Map
@@ -368,14 +360,11 @@ type HealthCheckConfig struct {
 	//
 	//    * HTTPS: Route 53 tries to establish a TCP connection. If successful,
 	//    Route 53 submits an HTTPS request and waits for an HTTP status code of
-	//    200 or greater and less than 400.
+	//    200 or greater and less than 400. If you specify HTTPS for the value of
+	//    Type, the endpoint must support TLS v1.0 or later.
 	//
-	// If you specify HTTPS for the value of Type, the endpoint must support TLS
-	//    v1.0 or later.
-	//
-	//    * TCP: Route 53 tries to establish a TCP connection.
-	//
-	// If you specify TCP for Type, don't specify a value for ResourcePath.
+	//    * TCP: Route 53 tries to establish a TCP connection. If you specify TCP
+	//    for Type, don't specify a value for ResourcePath.
 	//
 	// For more information, see How Route 53 Determines Whether an Endpoint Is
 	// Healthy (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html)
@@ -547,7 +536,6 @@ type Instance struct {
 	//
 	//    * The attributes that apply to the records that are defined in the service.
 	//
-	//
 	//    * For each attribute, the applicable value.
 	//
 	// Supported attribute keys include the following:
@@ -561,8 +549,8 @@ type Instance struct {
 	//
 	// Note the following:
 	//
-	// The configuration for the service that is specified by ServiceId must include
-	// settings for an A record, an AAAA record, or both.
+	//    * The configuration for the service that is specified by ServiceId must
+	//    include settings for an A record, an AAAA record, or both.
 	//
 	//    * In the service that is specified by ServiceId, the value of RoutingPolicy
 	//    must be WEIGHTED.
@@ -582,30 +570,37 @@ type Instance struct {
 	// If the service configuration includes a CNAME record, the domain name that
 	// you want Route 53 to return in response to DNS queries, for example, example.com.
 	//
-	// This value is required if the service specified by ServiceIdincludes settings for an CNAME record.
+	// This value is required if the service specified by ServiceId includes settings
+	// for an CNAME record.
 	//
 	// AWS_INSTANCE_IPV4
 	//
 	// If the service configuration includes an A record, the IPv4 address that
 	// you want Route 53 to return in response to DNS queries, for example, 192.0.2.44.
 	//
-	// This value is required if the service specified by ServiceIdincludes settings for an A record. If the service includes settings for an
-	// SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.
+	// This value is required if the service specified by ServiceId includes settings
+	// for an A record. If the service includes settings for an SRV record, you
+	// must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.
 	//
 	// AWS_INSTANCE_IPV6
 	//
 	// If the service configuration includes an AAAA record, the IPv6 address that
 	// you want Route 53 to return in response to DNS queries, for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345.
 	//
-	// This value is required if the service specified by ServiceIdincludes settings for an AAAA record. If the service includes settings for
-	// an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.
+	// This value is required if the service specified by ServiceId includes settings
+	// for an AAAA record. If the service includes settings for an SRV record, you
+	// must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.
 	//
 	// AWS_INSTANCE_PORT
 	//
 	// If the service includes an SRV record, the value that you want Route 53 to
 	// return for the port.
 	//
-	// If the service includes HealthCheckConfig
+	// If the service includes HealthCheckConfig, the port on the endpoint that
+	// you want Route 53 to send requests to.
+	//
+	// This value is required if you specified settings for an SRV record when you
+	// created the service.
 	Attributes map[string]string `type:"map"`
 
 	// A unique string that identifies the request and that allows failed RegisterInstance
@@ -629,10 +624,9 @@ type Instance struct {
 	//
 	//    * If you specify an existing InstanceId and ServiceId, AWS Cloud Map updates
 	//    the existing DNS records. If there's also an existing health check, AWS
-	//    Cloud Map deletes the old health check and creates a new one.
-	//
-	// The health check isn't deleted immediately, so it will still appear for a
-	//    while if you submit a ListHealthChecks request, for example.
+	//    Cloud Map deletes the old health check and creates a new one. The health
+	//    check isn't deleted immediately, so it will still appear for a while if
+	//    you submit a ListHealthChecks request, for example.
 	//
 	// Id is a required field
 	Id *string `type:"string" required:"true"`

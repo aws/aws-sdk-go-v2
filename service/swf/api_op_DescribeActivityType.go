@@ -72,8 +72,8 @@ type DescribeActivityTypeOutput struct {
 	//    * REGISTERED – The type is registered and available. Workers supporting
 	//    this type should be running.
 	//
-	//    * DEPRECATED – The type was deprecated using DeprecateActivityType, but
-	//    is still in use. You should keep workers supporting this type running.
+	//    * DEPRECATED – The type was deprecated using DeprecateActivityType,
+	//    but is still in use. You should keep workers supporting this type running.
 	//    You cannot create new tasks of this type.
 	//
 	// TypeInfo is a required field
@@ -105,11 +105,9 @@ const opDescribeActivityType = "DescribeActivityType"
 //    * Use an Action element to allow or deny permission to call this action.
 //
 //    * Constrain the following parameters by using a Condition element with
-//    the appropriate keys.
-//
-// activityType.name: String constraint. The key is swf:activityType.name.
-//
-// activityType.version: String constraint. The key is swf:activityType.version.
+//    the appropriate keys. activityType.name: String constraint. The key is
+//    swf:activityType.name. activityType.version: String constraint. The key
+//    is swf:activityType.version.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.

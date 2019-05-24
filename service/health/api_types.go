@@ -20,8 +20,8 @@ type AffectedEntity struct {
 	// The 12-digit AWS account number that contains the affected entity.
 	AwsAccountId *string `locationName:"awsAccountId" type:"string"`
 
-	// The unique identifier for the entity. Format: arn:aws:health:entity-region:aws-account:entity/entity-id.
-	// Example: arn:aws:health:us-east-1:111222333444:entity/AVh5GGT7ul1arKr1sE1K
+	// The unique identifier for the entity. Format: arn:aws:health:entity-region:aws-account:entity/entity-id
+	// . Example: arn:aws:health:us-east-1:111222333444:entity/AVh5GGT7ul1arKr1sE1K
 	EntityArn *string `locationName:"entityArn" type:"string"`
 
 	EntityUrl *string `locationName:"entityUrl" type:"string"`
@@ -29,8 +29,8 @@ type AffectedEntity struct {
 	// The ID of the affected entity.
 	EntityValue *string `locationName:"entityValue" type:"string"`
 
-	// The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID.
-	// Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
+	// The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+	// . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
 	EventArn *string `locationName:"eventArn" type:"string"`
 
 	// The most recent time that the entity was updated.
@@ -80,8 +80,8 @@ type EntityAggregate struct {
 	// The number entities that match the criteria for the specified events.
 	Count *int64 `locationName:"count" type:"integer"`
 
-	// The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID.
-	// Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
+	// The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+	// . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
 	EventArn *string `locationName:"eventArn" type:"string"`
 }
 
@@ -158,8 +158,8 @@ func (s *EntityFilter) Validate() error {
 type Event struct {
 	_ struct{} `type:"structure"`
 
-	// The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID.
-	// Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
+	// The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+	// . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The AWS Availability Zone of the event. For example, us-east-1a.
@@ -172,8 +172,8 @@ type Event struct {
 	// accountNotification.
 	EventTypeCategory EventTypeCategory `locationName:"eventTypeCategory" min:"3" type:"string" enum:"true"`
 
-	// The unique identifier for the event type. The format is AWS_SERVICE_DESCRIPTION;
-	// for example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT.
+	// The unique identifier for the event type. The format is AWS_SERVICE_DESCRIPTION
+	// ; for example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT.
 	EventTypeCode *string `locationName:"eventTypeCode" min:"3" type:"string"`
 
 	// The most recent date and time that the event was updated.
@@ -265,8 +265,8 @@ type EventDetailsErrorItem struct {
 	// The name of the error.
 	ErrorName *string `locationName:"errorName" type:"string"`
 
-	// The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID.
-	// Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
+	// The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+	// . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
 	EventArn *string `locationName:"eventArn" type:"string"`
 }
 
@@ -381,8 +381,8 @@ type EventType struct {
 	// A list of event type category codes (issue, scheduledChange, or accountNotification).
 	Category EventTypeCategory `locationName:"category" min:"3" type:"string" enum:"true"`
 
-	// The unique identifier for the event type. The format is AWS_SERVICE_DESCRIPTION;
-	// for example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT.
+	// The unique identifier for the event type. The format is AWS_SERVICE_DESCRIPTION
+	// ; for example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT.
 	Code *string `locationName:"code" min:"3" type:"string"`
 
 	// The AWS service that is affected by the event. For example, EC2, RDS.
