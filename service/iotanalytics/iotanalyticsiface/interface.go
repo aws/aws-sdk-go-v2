@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/iotanalytics"
 )
 
-// IoTAnalyticsAPI provides an interface to enable mocking the
-// iotanalytics.IoTAnalytics service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// iotanalytics.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS IoT Analytics.
-//    func myFunc(svc iotanalyticsiface.IoTAnalyticsAPI) bool {
+//    func myFunc(svc iotanalyticsiface.ClientAPI) bool {
 //        // Make svc.BatchPutMessage request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockIoTAnalyticsClient struct {
-//        iotanalyticsiface.IoTAnalyticsAPI
+//    type mockClientClient struct {
+//        iotanalyticsiface.ClientPI
 //    }
-//    func (m *mockIoTAnalyticsClient) BatchPutMessage(input *iotanalytics.BatchPutMessageInput) (*iotanalytics.BatchPutMessageOutput, error) {
+//    func (m *mockClientClient) BatchPutMessage(input *iotanalytics.BatchPutMessageInput) (*iotanalytics.BatchPutMessageOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockIoTAnalyticsClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type IoTAnalyticsAPI interface {
+type ClientAPI interface {
 	BatchPutMessageRequest(*iotanalytics.BatchPutMessageInput) iotanalytics.BatchPutMessageRequest
 
 	CancelPipelineReprocessingRequest(*iotanalytics.CancelPipelineReprocessingInput) iotanalytics.CancelPipelineReprocessingRequest
@@ -131,4 +130,4 @@ type IoTAnalyticsAPI interface {
 	UpdatePipelineRequest(*iotanalytics.UpdatePipelineInput) iotanalytics.UpdatePipelineRequest
 }
 
-var _ IoTAnalyticsAPI = (*iotanalytics.IoTAnalytics)(nil)
+var _ ClientAPI = (*iotanalytics.Client)(nil)

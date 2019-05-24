@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2"
 )
 
-// CloudHSMV2API provides an interface to enable mocking the
-// cloudhsmv2.CloudHSMV2 service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// cloudhsmv2.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // AWS CloudHSM V2.
-//    func myFunc(svc cloudhsmv2iface.CloudHSMV2API) bool {
+//    // CloudHSM V2.
+//    func myFunc(svc cloudhsmv2iface.ClientAPI) bool {
 //        // Make svc.CopyBackupToRegion request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCloudHSMV2Client struct {
-//        cloudhsmv2iface.CloudHSMV2API
+//    type mockClientClient struct {
+//        cloudhsmv2iface.ClientPI
 //    }
-//    func (m *mockCloudHSMV2Client) CopyBackupToRegion(input *cloudhsmv2.CopyBackupToRegionInput) (*cloudhsmv2.CopyBackupToRegionOutput, error) {
+//    func (m *mockClientClient) CopyBackupToRegion(input *cloudhsmv2.CopyBackupToRegionInput) (*cloudhsmv2.CopyBackupToRegionOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockCloudHSMV2Client{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type CloudHSMV2API interface {
+type ClientAPI interface {
 	CopyBackupToRegionRequest(*cloudhsmv2.CopyBackupToRegionInput) cloudhsmv2.CopyBackupToRegionRequest
 
 	CreateClusterRequest(*cloudhsmv2.CreateClusterInput) cloudhsmv2.CreateClusterRequest
@@ -89,4 +88,4 @@ type CloudHSMV2API interface {
 	UntagResourceRequest(*cloudhsmv2.UntagResourceInput) cloudhsmv2.UntagResourceRequest
 }
 
-var _ CloudHSMV2API = (*cloudhsmv2.CloudHSMV2)(nil)
+var _ ClientAPI = (*cloudhsmv2.Client)(nil)

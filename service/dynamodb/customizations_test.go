@@ -15,7 +15,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 )
 
-var db *dynamodb.DynamoDB
+var db *dynamodb.Client
 
 func TestMain(m *testing.M) {
 	cfg := unit.Config()
@@ -27,7 +27,7 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 
-func mockCRCResponse(svc *dynamodb.DynamoDB, status int, body, crc string) (req *request.Request) {
+func mockCRCResponse(svc *dynamodb.Client, status int, body, crc string) (req *request.Request) {
 	header := http.Header{}
 	header.Set("x-amz-crc32", crc)
 

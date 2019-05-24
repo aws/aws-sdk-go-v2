@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/kafka"
 )
 
-// KafkaAPI provides an interface to enable mocking the
-// kafka.Kafka service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// kafka.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // Managed Streaming for Kafka.
-//    func myFunc(svc kafkaiface.KafkaAPI) bool {
+//    // Kafka.
+//    func myFunc(svc kafkaiface.ClientAPI) bool {
 //        // Make svc.CreateCluster request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockKafkaClient struct {
-//        kafkaiface.KafkaAPI
+//    type mockClientClient struct {
+//        kafkaiface.ClientPI
 //    }
-//    func (m *mockKafkaClient) CreateCluster(input *kafka.CreateClusterInput) (*kafka.CreateClusterOutput, error) {
+//    func (m *mockClientClient) CreateCluster(input *kafka.CreateClusterInput) (*kafka.CreateClusterOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockKafkaClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type KafkaAPI interface {
+type ClientAPI interface {
 	CreateClusterRequest(*kafka.CreateClusterInput) kafka.CreateClusterRequest
 
 	DeleteClusterRequest(*kafka.DeleteClusterInput) kafka.DeleteClusterRequest
@@ -81,4 +80,4 @@ type KafkaAPI interface {
 	UntagResourceRequest(*kafka.UntagResourceInput) kafka.UntagResourceRequest
 }
 
-var _ KafkaAPI = (*kafka.Kafka)(nil)
+var _ ClientAPI = (*kafka.Client)(nil)

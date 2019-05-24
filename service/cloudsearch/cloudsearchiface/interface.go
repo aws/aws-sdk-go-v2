@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch"
 )
 
-// CloudSearchAPI provides an interface to enable mocking the
-// cloudsearch.CloudSearch service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// cloudsearch.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon CloudSearch.
-//    func myFunc(svc cloudsearchiface.CloudSearchAPI) bool {
+//    func myFunc(svc cloudsearchiface.ClientAPI) bool {
 //        // Make svc.BuildSuggesters request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockCloudSearchClient struct {
-//        cloudsearchiface.CloudSearchAPI
+//    type mockClientClient struct {
+//        cloudsearchiface.ClientPI
 //    }
-//    func (m *mockCloudSearchClient) BuildSuggesters(input *cloudsearch.BuildSuggestersInput) (*cloudsearch.BuildSuggestersOutput, error) {
+//    func (m *mockClientClient) BuildSuggesters(input *cloudsearch.BuildSuggestersInput) (*cloudsearch.BuildSuggestersOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockCloudSearchClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type CloudSearchAPI interface {
+type ClientAPI interface {
 	BuildSuggestersRequest(*cloudsearch.BuildSuggestersInput) cloudsearch.BuildSuggestersRequest
 
 	CreateDomainRequest(*cloudsearch.CreateDomainInput) cloudsearch.CreateDomainRequest
@@ -111,4 +110,4 @@ type CloudSearchAPI interface {
 	UpdateServiceAccessPoliciesRequest(*cloudsearch.UpdateServiceAccessPoliciesInput) cloudsearch.UpdateServiceAccessPoliciesRequest
 }
 
-var _ CloudSearchAPI = (*cloudsearch.CloudSearch)(nil)
+var _ ClientAPI = (*cloudsearch.Client)(nil)

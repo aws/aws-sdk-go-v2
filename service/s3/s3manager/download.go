@@ -45,7 +45,7 @@ type Downloader struct {
 	Concurrency int
 
 	// An S3 client to use when performing downloads.
-	S3 s3iface.S3API
+	S3 s3iface.ClientAPI
 
 	// List of request options that will be passed down to individual API
 	// operation requests made by the downloader.
@@ -116,10 +116,10 @@ func NewDownloader(cfg aws.Config, options ...func(*Downloader)) *Downloader {
 //     downloader := s3manager.NewDownloaderWithClient(s3Svc, func(d *s3manager.Downloader) {
 //          d.PartSize = 64 * 1024 * 1024 // 64MB per part
 //     })
-func NewDownloaderWithClient(svc s3iface.S3API, options ...func(*Downloader)) *Downloader {
+func NewDownloaderWithClient(svc s3iface.ClientAPI, options ...func(*Downloader)) *Downloader {
 	var retryer aws.Retryer
 
-	if s3Svc, ok := svc.(*s3.S3); ok {
+	if s3Svc, ok := svc.(*s3.Client); ok {
 		retryer = s3Svc.Retryer
 	} else {
 		retryer = aws.DefaultRetryer{NumMaxRetries: 3}
@@ -417,14 +417,15 @@ func (d *downloader) downloadChunk(chunk dlchunk) error {
 	var n int64
 	var err error
 	for retry := 0; retry <= d.partBodyMaxRetries; retry++ {
-		var resp *s3.GetObjectOutput
 		req := d.cfg.S3.GetObjectRequest(in)
 		req.ApplyOptions(d.cfg.RequestOptions...)
+
+		var resp *s3.GetObjectResponse
 		resp, err = req.Send(d.ctx)
 		if err != nil {
 			return err
 		}
-		d.setTotalBytes(resp) // Set total if not yet set.
+		d.setTotalBytes(resp.GetObjectOutput) // Set total if not yet set.
 
 		n, err = io.Copy(&chunk, resp.Body)
 		resp.Body.Close()
@@ -443,8 +444,8 @@ func (d *downloader) downloadChunk(chunk dlchunk) error {
 	return err
 }
 
-func logMessage(svc s3iface.S3API, level aws.LogLevel, msg string) {
-	s, ok := svc.(*s3.S3)
+func logMessage(svc s3iface.ClientAPI, level aws.LogLevel, msg string) {
+	s, ok := svc.(*s3.Client)
 	if !ok {
 		return
 	}

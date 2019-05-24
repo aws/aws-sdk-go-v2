@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/budgets"
 )
 
-// BudgetsAPI provides an interface to enable mocking the
-// budgets.Budgets service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// budgets.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // AWS Budgets.
-//    func myFunc(svc budgetsiface.BudgetsAPI) bool {
+//    // AWSBudgets.
+//    func myFunc(svc budgetsiface.ClientAPI) bool {
 //        // Make svc.CreateBudget request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockBudgetsClient struct {
-//        budgetsiface.BudgetsAPI
+//    type mockClientClient struct {
+//        budgetsiface.ClientPI
 //    }
-//    func (m *mockBudgetsClient) CreateBudget(input *budgets.CreateBudgetInput) (*budgets.CreateBudgetOutput, error) {
+//    func (m *mockClientClient) CreateBudget(input *budgets.CreateBudgetInput) (*budgets.CreateBudgetOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockBudgetsClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type BudgetsAPI interface {
+type ClientAPI interface {
 	CreateBudgetRequest(*budgets.CreateBudgetInput) budgets.CreateBudgetRequest
 
 	CreateNotificationRequest(*budgets.CreateNotificationInput) budgets.CreateNotificationRequest
@@ -91,4 +90,4 @@ type BudgetsAPI interface {
 	UpdateSubscriberRequest(*budgets.UpdateSubscriberInput) budgets.UpdateSubscriberRequest
 }
 
-var _ BudgetsAPI = (*budgets.Budgets)(nil)
+var _ ClientAPI = (*budgets.Client)(nil)

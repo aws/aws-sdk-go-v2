@@ -16,7 +16,7 @@ func init() {
 	svc = sts.New(cfg)
 }
 
-var svc *sts.STS
+var svc *sts.Client
 
 func TestUnsignedRequest_AssumeRoleWithSAML(t *testing.T) {
 	req := svc.AssumeRoleWithSAMLRequest(&sts.AssumeRoleWithSAMLInput{

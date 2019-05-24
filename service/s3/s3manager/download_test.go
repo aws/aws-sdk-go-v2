@@ -23,7 +23,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
 )
 
-func dlLoggingSvc(data []byte) (*s3.S3, *[]string, *[]string) {
+func dlLoggingSvc(data []byte) (*s3.Client, *[]string, *[]string) {
 	var m sync.Mutex
 	names := []string{}
 	ranges := []string{}
@@ -61,7 +61,7 @@ func dlLoggingSvc(data []byte) (*s3.S3, *[]string, *[]string) {
 	return svc, &names, &ranges
 }
 
-func dlLoggingSvcNoChunk(data []byte) (*s3.S3, *[]string) {
+func dlLoggingSvcNoChunk(data []byte) (*s3.Client, *[]string) {
 	var m sync.Mutex
 	names := []string{}
 
@@ -84,7 +84,7 @@ func dlLoggingSvcNoChunk(data []byte) (*s3.S3, *[]string) {
 	return svc, &names
 }
 
-func dlLoggingSvcNoContentRangeLength(data []byte, states []int) (*s3.S3, *[]string) {
+func dlLoggingSvcNoContentRangeLength(data []byte, states []int) (*s3.Client, *[]string) {
 	var m sync.Mutex
 	names := []string{}
 	var index int
@@ -108,7 +108,7 @@ func dlLoggingSvcNoContentRangeLength(data []byte, states []int) (*s3.S3, *[]str
 	return svc, &names
 }
 
-func dlLoggingSvcContentRangeTotalAny(data []byte, states []int) (*s3.S3, *[]string) {
+func dlLoggingSvcContentRangeTotalAny(data []byte, states []int) (*s3.Client, *[]string) {
 	var m sync.Mutex
 	names := []string{}
 	ranges := []string{}
@@ -155,7 +155,7 @@ func dlLoggingSvcContentRangeTotalAny(data []byte, states []int) (*s3.S3, *[]str
 	return svc, &names
 }
 
-func dlLoggingSvcWithErrReader(cases []testErrReader) (*s3.S3, *[]string) {
+func dlLoggingSvcWithErrReader(cases []testErrReader) (*s3.Client, *[]string) {
 	var m sync.Mutex
 	names := []string{}
 	var index int

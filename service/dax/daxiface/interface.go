@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dax"
 )
 
-// DAXAPI provides an interface to enable mocking the
-// dax.DAX service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// dax.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // Amazon DynamoDB Accelerator (DAX).
-//    func myFunc(svc daxiface.DAXAPI) bool {
+//    // Amazon DAX.
+//    func myFunc(svc daxiface.ClientAPI) bool {
 //        // Make svc.CreateCluster request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockDAXClient struct {
-//        daxiface.DAXAPI
+//    type mockClientClient struct {
+//        daxiface.ClientPI
 //    }
-//    func (m *mockDAXClient) CreateCluster(input *dax.CreateClusterInput) (*dax.CreateClusterOutput, error) {
+//    func (m *mockClientClient) CreateCluster(input *dax.CreateClusterInput) (*dax.CreateClusterOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockDAXClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type DAXAPI interface {
+type ClientAPI interface {
 	CreateClusterRequest(*dax.CreateClusterInput) dax.CreateClusterRequest
 
 	CreateParameterGroupRequest(*dax.CreateParameterGroupInput) dax.CreateParameterGroupRequest
@@ -105,4 +104,4 @@ type DAXAPI interface {
 	UpdateSubnetGroupRequest(*dax.UpdateSubnetGroupInput) dax.UpdateSubnetGroupRequest
 }
 
-var _ DAXAPI = (*dax.DAX)(nil)
+var _ ClientAPI = (*dax.Client)(nil)

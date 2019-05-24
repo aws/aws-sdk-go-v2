@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog"
 )
 
-// ServiceCatalogAPI provides an interface to enable mocking the
-// servicecatalog.ServiceCatalog service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// servicecatalog.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Service Catalog.
-//    func myFunc(svc servicecatalogiface.ServiceCatalogAPI) bool {
+//    func myFunc(svc servicecatalogiface.ClientAPI) bool {
 //        // Make svc.AcceptPortfolioShare request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockServiceCatalogClient struct {
-//        servicecatalogiface.ServiceCatalogAPI
+//    type mockClientClient struct {
+//        servicecatalogiface.ClientPI
 //    }
-//    func (m *mockServiceCatalogClient) AcceptPortfolioShare(input *servicecatalog.AcceptPortfolioShareInput) (*servicecatalog.AcceptPortfolioShareOutput, error) {
+//    func (m *mockClientClient) AcceptPortfolioShare(input *servicecatalog.AcceptPortfolioShareInput) (*servicecatalog.AcceptPortfolioShareOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockServiceCatalogClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type ServiceCatalogAPI interface {
+type ClientAPI interface {
 	AcceptPortfolioShareRequest(*servicecatalog.AcceptPortfolioShareInput) servicecatalog.AcceptPortfolioShareRequest
 
 	AssociatePrincipalWithPortfolioRequest(*servicecatalog.AssociatePrincipalWithPortfolioInput) servicecatalog.AssociatePrincipalWithPortfolioRequest
@@ -217,4 +216,4 @@ type ServiceCatalogAPI interface {
 	UpdateTagOptionRequest(*servicecatalog.UpdateTagOptionInput) servicecatalog.UpdateTagOptionRequest
 }
 
-var _ ServiceCatalogAPI = (*servicecatalog.ServiceCatalog)(nil)
+var _ ClientAPI = (*servicecatalog.Client)(nil)

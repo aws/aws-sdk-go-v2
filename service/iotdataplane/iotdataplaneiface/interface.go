@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/iotdataplane"
 )
 
-// IoTDataPlaneAPI provides an interface to enable mocking the
-// iotdataplane.IoTDataPlane service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// iotdataplane.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS IoT Data Plane.
-//    func myFunc(svc iotdataplaneiface.IoTDataPlaneAPI) bool {
+//    func myFunc(svc iotdataplaneiface.ClientAPI) bool {
 //        // Make svc.DeleteThingShadow request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockIoTDataPlaneClient struct {
-//        iotdataplaneiface.IoTDataPlaneAPI
+//    type mockClientClient struct {
+//        iotdataplaneiface.ClientPI
 //    }
-//    func (m *mockIoTDataPlaneClient) DeleteThingShadow(input *iotdataplane.DeleteThingShadowInput) (*iotdataplane.DeleteThingShadowOutput, error) {
+//    func (m *mockClientClient) DeleteThingShadow(input *iotdataplane.DeleteThingShadowInput) (*iotdataplane.DeleteThingShadowOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockIoTDataPlaneClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type IoTDataPlaneAPI interface {
+type ClientAPI interface {
 	DeleteThingShadowRequest(*iotdataplane.DeleteThingShadowInput) iotdataplane.DeleteThingShadowRequest
 
 	GetThingShadowRequest(*iotdataplane.GetThingShadowInput) iotdataplane.GetThingShadowRequest
@@ -71,4 +70,4 @@ type IoTDataPlaneAPI interface {
 	UpdateThingShadowRequest(*iotdataplane.UpdateThingShadowInput) iotdataplane.UpdateThingShadowRequest
 }
 
-var _ IoTDataPlaneAPI = (*iotdataplane.IoTDataPlane)(nil)
+var _ ClientAPI = (*iotdataplane.Client)(nil)

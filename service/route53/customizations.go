@@ -10,11 +10,11 @@ import (
 )
 
 func init() {
-	initClient = func(c *Route53) {
+	initClient = func(c *Client) {
 		c.Handlers.Build.PushBack(sanitizeURL)
 	}
 
-	initRequest = func(c *Route53, r *aws.Request) {
+	initRequest = func(c *Client, r *aws.Request) {
 		switch r.Operation.Name {
 		case opChangeResourceRecordSets:
 			r.Handlers.UnmarshalError.Remove(restxml.UnmarshalErrorHandler)

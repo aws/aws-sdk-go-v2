@@ -19,10 +19,9 @@ func S3ManagerUploadInputGoCode(a *API) string {
 		panic(fmt.Sprintf("unable to find PutObjectInput shape in S3 model"))
 	}
 	a.resetImports()
-	delete(a.imports, "github.com/aws/aws-sdk-go-v2/aws")
-	a.imports["io"] = true
-	a.imports["time"] = true
-	a.imports["github.com/aws/aws-sdk-go-v2/service/s3"] = true
+	a.AddImport("io")
+	a.AddImport("time")
+	a.AddSDKImport("service/s3")
 	var w bytes.Buffer
 	if err := s3managerUploadInputTmpl.Execute(&w, s); err != nil {
 		panic(fmt.Sprintf("failed to execute %s template, %v",

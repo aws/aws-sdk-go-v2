@@ -149,7 +149,7 @@ type Uploader struct {
 	MaxUploadParts int
 
 	// The client to use when uploading to S3.
-	S3 s3iface.S3API
+	S3 s3iface.ClientAPI
 
 	// List of request options that will be passed down to individual API
 	// operation requests made by the uploader.
@@ -204,7 +204,7 @@ func NewUploader(cfg aws.Config, options ...func(*Uploader)) *Uploader {
 //     uploader := s3manager.NewUploaderWithClient(s3Svc, func(u *s3manager.Uploader) {
 //          u.PartSize = 64 * 1024 * 1024 // 64MB per part
 //     })
-func NewUploaderWithClient(svc s3iface.S3API, options ...func(*Uploader)) *Uploader {
+func NewUploaderWithClient(svc s3iface.ClientAPI, options ...func(*Uploader)) *Uploader {
 	u := &Uploader{
 		S3:                svc,
 		PartSize:          DefaultUploadPartSize,
@@ -694,7 +694,8 @@ func (u *multiuploader) complete() *s3.CompleteMultipartUploadOutput {
 	if err != nil {
 		u.seterr(err)
 		u.fail()
+		return nil
 	}
 
-	return resp
+	return resp.CompleteMultipartUploadOutput
 }

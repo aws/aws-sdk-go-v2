@@ -124,7 +124,7 @@ func getAccountBuckets(cfg aws.Config, bucketCh chan<- Bucket, owner string) err
 	return nil
 }
 
-func bucketDetails(svc *s3.S3, bucket Bucket) {
+func bucketDetails(svc *s3.Client, bucket Bucket) {
 	objs, errObjs, err := listBucketObjects(svc, bucket.Name)
 	if err != nil {
 		bucket.Error = err
@@ -171,7 +171,7 @@ func (b *Bucket) encryptedObjects() []Object {
 	return encObjs
 }
 
-func listBuckets(svc *s3.S3) ([]Bucket, error) {
+func listBuckets(svc *s3.Client) ([]Bucket, error) {
 	listReq := svc.ListBucketsRequest(&s3.ListBucketsInput{})
 	res, err := listReq.Send(context.Background())
 	if err != nil {
@@ -204,7 +204,7 @@ func listBuckets(svc *s3.S3) ([]Bucket, error) {
 	return buckets, nil
 }
 
-func listBucketObjects(svc *s3.S3, bucket string) ([]Object, []ErrObject, error) {
+func listBucketObjects(svc *s3.Client, bucket string) ([]Object, []ErrObject, error) {
 	listReq := svc.ListObjectsRequest(&s3.ListObjectsInput{
 		Bucket: &bucket,
 	})

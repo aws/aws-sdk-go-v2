@@ -15,10 +15,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/neptune"
 )
 
-// NeptuneAPI provides an interface to enable mocking the
-// neptune.Neptune service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// neptune.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -26,7 +25,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Neptune.
-//    func myFunc(svc neptuneiface.NeptuneAPI) bool {
+//    func myFunc(svc neptuneiface.ClientAPI) bool {
 //        // Make svc.AddRoleToDBCluster request
 //    }
 //
@@ -44,16 +43,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockNeptuneClient struct {
-//        neptuneiface.NeptuneAPI
+//    type mockClientClient struct {
+//        neptuneiface.ClientPI
 //    }
-//    func (m *mockNeptuneClient) AddRoleToDBCluster(input *neptune.AddRoleToDBClusterInput) (*neptune.AddRoleToDBClusterOutput, error) {
+//    func (m *mockClientClient) AddRoleToDBCluster(input *neptune.AddRoleToDBClusterInput) (*neptune.AddRoleToDBClusterOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockNeptuneClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -64,7 +63,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type NeptuneAPI interface {
+type ClientAPI interface {
 	AddRoleToDBClusterRequest(*neptune.AddRoleToDBClusterInput) neptune.AddRoleToDBClusterRequest
 
 	AddSourceIdentifierToSubscriptionRequest(*neptune.AddSourceIdentifierToSubscriptionInput) neptune.AddSourceIdentifierToSubscriptionRequest
@@ -184,4 +183,4 @@ type NeptuneAPI interface {
 	WaitUntilDBInstanceDeleted(context.Context, *neptune.DescribeDBInstancesInput, ...aws.WaiterOption) error
 }
 
-var _ NeptuneAPI = (*neptune.Neptune)(nil)
+var _ ClientAPI = (*neptune.Client)(nil)

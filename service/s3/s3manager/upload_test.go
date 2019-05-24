@@ -51,7 +51,7 @@ func contains(src []string, s string) bool {
 	return false
 }
 
-func loggingSvc(ignoreOps []string) (*s3.S3, *[]string, *[]interface{}) {
+func loggingSvc(ignoreOps []string) (*s3.Client, *[]string, *[]interface{}) {
 	var m sync.Mutex
 	partNum := 0
 	names := []string{}

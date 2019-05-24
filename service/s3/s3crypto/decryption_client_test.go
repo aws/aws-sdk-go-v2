@@ -35,7 +35,7 @@ func TestGetObjectGCM(t *testing.T) {
 	cfg.Region = "us-west-2"
 
 	c := s3crypto.NewDecryptionClient(cfg)
-	c.S3Client.(*s3.S3).ForcePathStyle = true
+	c.S3Client.(*s3.Client).ForcePathStyle = true
 
 	if c == nil {
 		t.Error("expected non-nil value")
@@ -106,7 +106,7 @@ func TestGetObjectCBC(t *testing.T) {
 	cfg.Region = "us-west-2"
 
 	c := s3crypto.NewDecryptionClient(cfg)
-	c.S3Client.(*s3.S3).ForcePathStyle = true
+	c.S3Client.(*s3.Client).ForcePathStyle = true
 
 	if c == nil {
 		t.Error("expected non-nil value")
@@ -175,7 +175,7 @@ func TestGetObjectCBC2(t *testing.T) {
 	cfg.Region = "us-west-2"
 
 	c := s3crypto.NewDecryptionClient(cfg)
-	c.S3Client.(*s3.S3).ForcePathStyle = true
+	c.S3Client.(*s3.Client).ForcePathStyle = true
 
 	if c == nil {
 		t.Error("expected non-nil value")

@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling"
 )
 
-// ApplicationAutoScalingAPI provides an interface to enable mocking the
-// applicationautoscaling.ApplicationAutoScaling service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// applicationautoscaling.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Application Auto Scaling.
-//    func myFunc(svc applicationautoscalingiface.ApplicationAutoScalingAPI) bool {
+//    func myFunc(svc applicationautoscalingiface.ClientAPI) bool {
 //        // Make svc.DeleteScalingPolicy request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockApplicationAutoScalingClient struct {
-//        applicationautoscalingiface.ApplicationAutoScalingAPI
+//    type mockClientClient struct {
+//        applicationautoscalingiface.ClientPI
 //    }
-//    func (m *mockApplicationAutoScalingClient) DeleteScalingPolicy(input *applicationautoscaling.DeleteScalingPolicyInput) (*applicationautoscaling.DeleteScalingPolicyOutput, error) {
+//    func (m *mockClientClient) DeleteScalingPolicy(input *applicationautoscaling.DeleteScalingPolicyInput) (*applicationautoscaling.DeleteScalingPolicyOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockApplicationAutoScalingClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type ApplicationAutoScalingAPI interface {
+type ClientAPI interface {
 	DeleteScalingPolicyRequest(*applicationautoscaling.DeleteScalingPolicyInput) applicationautoscaling.DeleteScalingPolicyRequest
 
 	DeleteScheduledActionRequest(*applicationautoscaling.DeleteScheduledActionInput) applicationautoscaling.DeleteScheduledActionRequest
@@ -83,4 +82,4 @@ type ApplicationAutoScalingAPI interface {
 	RegisterScalableTargetRequest(*applicationautoscaling.RegisterScalableTargetInput) applicationautoscaling.RegisterScalableTargetRequest
 }
 
-var _ ApplicationAutoScalingAPI = (*applicationautoscaling.ApplicationAutoScaling)(nil)
+var _ ClientAPI = (*applicationautoscaling.Client)(nil)

@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/fsx"
 )
 
-// FSxAPI provides an interface to enable mocking the
-// fsx.FSx service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// fsx.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon FSx.
-//    func myFunc(svc fsxiface.FSxAPI) bool {
+//    func myFunc(svc fsxiface.ClientAPI) bool {
 //        // Make svc.CreateBackup request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockFSxClient struct {
-//        fsxiface.FSxAPI
+//    type mockClientClient struct {
+//        fsxiface.ClientPI
 //    }
-//    func (m *mockFSxClient) CreateBackup(input *fsx.CreateBackupInput) (*fsx.CreateBackupOutput, error) {
+//    func (m *mockClientClient) CreateBackup(input *fsx.CreateBackupInput) (*fsx.CreateBackupOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockFSxClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type FSxAPI interface {
+type ClientAPI interface {
 	CreateBackupRequest(*fsx.CreateBackupInput) fsx.CreateBackupRequest
 
 	CreateFileSystemRequest(*fsx.CreateFileSystemInput) fsx.CreateFileSystemRequest
@@ -85,4 +84,4 @@ type FSxAPI interface {
 	UpdateFileSystemRequest(*fsx.UpdateFileSystemInput) fsx.UpdateFileSystemRequest
 }
 
-var _ FSxAPI = (*fsx.FSx)(nil)
+var _ ClientAPI = (*fsx.Client)(nil)

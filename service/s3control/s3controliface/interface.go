@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3control"
 )
 
-// S3ControlAPI provides an interface to enable mocking the
-// s3control.S3Control service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// s3control.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS S3 Control.
-//    func myFunc(svc s3controliface.S3ControlAPI) bool {
+//    func myFunc(svc s3controliface.ClientAPI) bool {
 //        // Make svc.DeletePublicAccessBlock request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockS3ControlClient struct {
-//        s3controliface.S3ControlAPI
+//    type mockClientClient struct {
+//        s3controliface.ClientPI
 //    }
-//    func (m *mockS3ControlClient) DeletePublicAccessBlock(input *s3control.DeletePublicAccessBlockInput) (*s3control.DeletePublicAccessBlockOutput, error) {
+//    func (m *mockClientClient) DeletePublicAccessBlock(input *s3control.DeletePublicAccessBlockInput) (*s3control.DeletePublicAccessBlockOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockS3ControlClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type S3ControlAPI interface {
+type ClientAPI interface {
 	DeletePublicAccessBlockRequest(*s3control.DeletePublicAccessBlockInput) s3control.DeletePublicAccessBlockRequest
 
 	GetPublicAccessBlockRequest(*s3control.GetPublicAccessBlockInput) s3control.GetPublicAccessBlockRequest
@@ -69,4 +68,4 @@ type S3ControlAPI interface {
 	PutPublicAccessBlockRequest(*s3control.PutPublicAccessBlockInput) s3control.PutPublicAccessBlockRequest
 }
 
-var _ S3ControlAPI = (*s3control.S3Control)(nil)
+var _ ClientAPI = (*s3control.Client)(nil)

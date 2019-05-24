@@ -100,7 +100,7 @@ func New(cfg Config, metadata Metadata, handlers Handlers,
 	httpReq, _ := http.NewRequest(method, "", nil)
 
 	// TODO need better way of handling this error... NewRequest should return error.
-	endpoint, err := cfg.EndpointResolver.ResolveEndpoint(metadata.ServiceName, cfg.Region)
+	endpoint, err := cfg.EndpointResolver.ResolveEndpoint(metadata.EndpointsID, cfg.Region)
 	if err == nil {
 		// TODO so ugly
 		metadata.Endpoint = endpoint.URL

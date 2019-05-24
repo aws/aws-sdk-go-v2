@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint"
 )
 
-// PinpointAPI provides an interface to enable mocking the
-// pinpoint.Pinpoint service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// pinpoint.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Pinpoint.
-//    func myFunc(svc pinpointiface.PinpointAPI) bool {
+//    func myFunc(svc pinpointiface.ClientAPI) bool {
 //        // Make svc.CreateApp request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockPinpointClient struct {
-//        pinpointiface.PinpointAPI
+//    type mockClientClient struct {
+//        pinpointiface.ClientPI
 //    }
-//    func (m *mockPinpointClient) CreateApp(input *pinpoint.CreateAppInput) (*pinpoint.CreateAppOutput, error) {
+//    func (m *mockClientClient) CreateApp(input *pinpoint.CreateAppInput) (*pinpoint.CreateAppOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockPinpointClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type PinpointAPI interface {
+type ClientAPI interface {
 	CreateAppRequest(*pinpoint.CreateAppInput) pinpoint.CreateAppRequest
 
 	CreateCampaignRequest(*pinpoint.CreateCampaignInput) pinpoint.CreateCampaignRequest
@@ -217,4 +216,4 @@ type PinpointAPI interface {
 	UpdateVoiceChannelRequest(*pinpoint.UpdateVoiceChannelInput) pinpoint.UpdateVoiceChannelRequest
 }
 
-var _ PinpointAPI = (*pinpoint.Pinpoint)(nil)
+var _ ClientAPI = (*pinpoint.Client)(nil)

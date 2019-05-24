@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ssm"
 )
 
-// SSMAPI provides an interface to enable mocking the
-// ssm.SSM service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// ssm.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // Amazon Simple Systems Manager (SSM).
-//    func myFunc(svc ssmiface.SSMAPI) bool {
+//    // Amazon SSM.
+//    func myFunc(svc ssmiface.ClientAPI) bool {
 //        // Make svc.AddTagsToResource request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockSSMClient struct {
-//        ssmiface.SSMAPI
+//    type mockClientClient struct {
+//        ssmiface.ClientPI
 //    }
-//    func (m *mockSSMClient) AddTagsToResource(input *ssm.AddTagsToResourceInput) (*ssm.AddTagsToResourceOutput, error) {
+//    func (m *mockClientClient) AddTagsToResource(input *ssm.AddTagsToResourceInput) (*ssm.AddTagsToResourceOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockSSMClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type SSMAPI interface {
+type ClientAPI interface {
 	AddTagsToResourceRequest(*ssm.AddTagsToResourceInput) ssm.AddTagsToResourceRequest
 
 	CancelCommandRequest(*ssm.CancelCommandInput) ssm.CancelCommandRequest
@@ -291,4 +290,4 @@ type SSMAPI interface {
 	UpdateServiceSettingRequest(*ssm.UpdateServiceSettingInput) ssm.UpdateServiceSettingRequest
 }
 
-var _ SSMAPI = (*ssm.SSM)(nil)
+var _ ClientAPI = (*ssm.Client)(nil)

@@ -23,7 +23,7 @@ func init() {
 
 var integCfg aws.Config
 var bucketName *string
-var svc *s3.S3
+var svc *s3.Client
 
 func TestMain(m *testing.M) {
 	ctx := context.Background()

@@ -15,10 +15,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/redshift"
 )
 
-// RedshiftAPI provides an interface to enable mocking the
-// redshift.Redshift service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// redshift.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -26,7 +25,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Redshift.
-//    func myFunc(svc redshiftiface.RedshiftAPI) bool {
+//    func myFunc(svc redshiftiface.ClientAPI) bool {
 //        // Make svc.AcceptReservedNodeExchange request
 //    }
 //
@@ -44,16 +43,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockRedshiftClient struct {
-//        redshiftiface.RedshiftAPI
+//    type mockClientClient struct {
+//        redshiftiface.ClientPI
 //    }
-//    func (m *mockRedshiftClient) AcceptReservedNodeExchange(input *redshift.AcceptReservedNodeExchangeInput) (*redshift.AcceptReservedNodeExchangeOutput, error) {
+//    func (m *mockClientClient) AcceptReservedNodeExchange(input *redshift.AcceptReservedNodeExchangeInput) (*redshift.AcceptReservedNodeExchangeOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockRedshiftClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -64,7 +63,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type RedshiftAPI interface {
+type ClientAPI interface {
 	AcceptReservedNodeExchangeRequest(*redshift.AcceptReservedNodeExchangeInput) redshift.AcceptReservedNodeExchangeRequest
 
 	AuthorizeClusterSecurityGroupIngressRequest(*redshift.AuthorizeClusterSecurityGroupIngressInput) redshift.AuthorizeClusterSecurityGroupIngressRequest
@@ -236,4 +235,4 @@ type RedshiftAPI interface {
 	WaitUntilSnapshotAvailable(context.Context, *redshift.DescribeClusterSnapshotsInput, ...aws.WaiterOption) error
 }
 
-var _ RedshiftAPI = (*redshift.Redshift)(nil)
+var _ ClientAPI = (*redshift.Client)(nil)

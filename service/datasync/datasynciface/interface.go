@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/datasync"
 )
 
-// DataSyncAPI provides an interface to enable mocking the
-// datasync.DataSync service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// datasync.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // AWS DataSync.
-//    func myFunc(svc datasynciface.DataSyncAPI) bool {
+//    // DataSync.
+//    func myFunc(svc datasynciface.ClientAPI) bool {
 //        // Make svc.CancelTaskExecution request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockDataSyncClient struct {
-//        datasynciface.DataSyncAPI
+//    type mockClientClient struct {
+//        datasynciface.ClientPI
 //    }
-//    func (m *mockDataSyncClient) CancelTaskExecution(input *datasync.CancelTaskExecutionInput) (*datasync.CancelTaskExecutionOutput, error) {
+//    func (m *mockClientClient) CancelTaskExecution(input *datasync.CancelTaskExecutionInput) (*datasync.CancelTaskExecutionOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockDataSyncClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type DataSyncAPI interface {
+type ClientAPI interface {
 	CancelTaskExecutionRequest(*datasync.CancelTaskExecutionInput) datasync.CancelTaskExecutionRequest
 
 	CreateAgentRequest(*datasync.CreateAgentInput) datasync.CreateAgentRequest
@@ -113,4 +112,4 @@ type DataSyncAPI interface {
 	UpdateTaskRequest(*datasync.UpdateTaskInput) datasync.UpdateTaskRequest
 }
 
-var _ DataSyncAPI = (*datasync.DataSync)(nil)
+var _ ClientAPI = (*datasync.Client)(nil)

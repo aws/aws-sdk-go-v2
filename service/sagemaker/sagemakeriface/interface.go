@@ -15,18 +15,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker"
 )
 
-// SageMakerAPI provides an interface to enable mocking the
-// sagemaker.SageMaker service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// sagemaker.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // Amazon SageMaker Service.
-//    func myFunc(svc sagemakeriface.SageMakerAPI) bool {
+//    // SageMaker.
+//    func myFunc(svc sagemakeriface.ClientAPI) bool {
 //        // Make svc.AddTags request
 //    }
 //
@@ -44,16 +43,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockSageMakerClient struct {
-//        sagemakeriface.SageMakerAPI
+//    type mockClientClient struct {
+//        sagemakeriface.ClientPI
 //    }
-//    func (m *mockSageMakerClient) AddTags(input *sagemaker.AddTagsInput) (*sagemaker.AddTagsOutput, error) {
+//    func (m *mockClientClient) AddTags(input *sagemaker.AddTagsInput) (*sagemaker.AddTagsOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockSageMakerClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -64,7 +63,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type SageMakerAPI interface {
+type ClientAPI interface {
 	AddTagsRequest(*sagemaker.AddTagsInput) sagemaker.AddTagsRequest
 
 	CreateAlgorithmRequest(*sagemaker.CreateAlgorithmInput) sagemaker.CreateAlgorithmRequest
@@ -230,4 +229,4 @@ type SageMakerAPI interface {
 	WaitUntilTransformJobCompletedOrStopped(context.Context, *sagemaker.DescribeTransformJobInput, ...aws.WaiterOption) error
 }
 
-var _ SageMakerAPI = (*sagemaker.SageMaker)(nil)
+var _ ClientAPI = (*sagemaker.Client)(nil)

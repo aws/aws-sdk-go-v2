@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical"
 )
 
-// ComprehendMedicalAPI provides an interface to enable mocking the
-// comprehendmedical.ComprehendMedical service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// comprehendmedical.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // AWS Comprehend Medical.
-//    func myFunc(svc comprehendmedicaliface.ComprehendMedicalAPI) bool {
+//    // ComprehendMedical.
+//    func myFunc(svc comprehendmedicaliface.ClientAPI) bool {
 //        // Make svc.DetectEntities request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockComprehendMedicalClient struct {
-//        comprehendmedicaliface.ComprehendMedicalAPI
+//    type mockClientClient struct {
+//        comprehendmedicaliface.ClientPI
 //    }
-//    func (m *mockComprehendMedicalClient) DetectEntities(input *comprehendmedical.DetectEntitiesInput) (*comprehendmedical.DetectEntitiesOutput, error) {
+//    func (m *mockClientClient) DetectEntities(input *comprehendmedical.DetectEntitiesInput) (*comprehendmedical.DetectEntitiesOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockComprehendMedicalClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,10 +60,10 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type ComprehendMedicalAPI interface {
+type ClientAPI interface {
 	DetectEntitiesRequest(*comprehendmedical.DetectEntitiesInput) comprehendmedical.DetectEntitiesRequest
 
 	DetectPHIRequest(*comprehendmedical.DetectPHIInput) comprehendmedical.DetectPHIRequest
 }
 
-var _ ComprehendMedicalAPI = (*comprehendmedical.ComprehendMedical)(nil)
+var _ ClientAPI = (*comprehendmedical.Client)(nil)

@@ -108,6 +108,10 @@ type Shape struct {
 
 	UsedAsInput  bool
 	UsedAsOutput bool
+
+	// Flags that the shape cannot be rename. Prevents the shape from being
+	// renamed further by the Input/Output.
+	AliasedShapeName bool
 }
 
 // ErrorCodeName will return the error shape's name formated for
@@ -139,6 +143,11 @@ func (s *Shape) GoTags(root, required bool) string {
 // Rename changes the name of the Shape to newName. Also updates
 // the associated API's reference to use newName.
 func (s *Shape) Rename(newName string) {
+	if s.AliasedShapeName {
+		panic(fmt.Sprintf("attempted to rename %s, but flagged as aliased",
+			s.ShapeName))
+	}
+
 	for _, r := range s.refs {
 		r.OrigShapeName = r.ShapeName
 		r.ShapeName = newName
@@ -234,7 +243,7 @@ func (s *Shape) GoStructType(name string, ref *ShapeRef) string {
 	}
 
 	if ref.JSONValue {
-		s.API.imports["github.com/aws/aws-sdk-go-v2/aws"] = true
+		s.API.AddSDKImport("aws")
 		return "aws.JSONValue"
 	}
 
@@ -507,10 +516,6 @@ var goCodeStringerTmpl = template.Must(template.New("goCodeStringerTmpl").Parse(
 func (s {{ .ShapeName }}) String() string {
 	return awsutil.Prettify(s)
 }
-// GoString returns the string representation
-func (s {{ .ShapeName }}) GoString() string {
-	return s.String()
-}
 `))
 
 // GoCodeStringers renders the Stringers for API input/output shapes
@@ -520,7 +525,7 @@ func (s *Shape) GoCodeStringers() string {
 		panic(fmt.Sprintln("Unexpected error executing GoCodeStringers template", err))
 	}
 
-	return w.String()
+	return strings.TrimSpace(w.String())
 }
 
 var enumStrip = regexp.MustCompile(`[^a-zA-Z0-9_:\./-]`)
@@ -594,24 +599,19 @@ var structShapeTmpl = func() *template.Template {
 const structShapeTmplDef = `
 {{ .Docstring }}
 {{ if ne $.OrigShapeName "" -}}
-{{ $crosslinkURL := GetCrosslinkURL $.API.BaseCrosslinkURL $.API.Metadata.UID $.OrigShapeName -}}
-{{ if ne $crosslinkURL "" -}} 
-// Please also see {{ $crosslinkURL }}
-{{ end -}}
+	{{ $crosslinkURL := GetCrosslinkURL $.API.BaseCrosslinkURL $.API.Metadata.UID $.OrigShapeName -}}
+	{{ if ne $crosslinkURL "" -}}
+		// Please also see {{ $crosslinkURL }}
+	{{ end -}}
 {{ else -}}
-{{ $crosslinkURL := GetCrosslinkURL $.API.BaseCrosslinkURL $.API.Metadata.UID $.ShapeName -}}
-{{ if ne $crosslinkURL "" -}} 
-// Please also see {{ $crosslinkURL }}
-{{ end -}}
+	{{ $crosslinkURL := GetCrosslinkURL $.API.BaseCrosslinkURL $.API.Metadata.UID $.ShapeName -}}
+	{{ if ne $crosslinkURL "" -}}
+		// Please also see {{ $crosslinkURL }}
+	{{ end -}}
 {{ end -}}
 {{ $context := . -}}
 type {{ .ShapeName }} struct {
-	{{ $isOutputShape := .UsedAsOutput -}}
 	_ struct{} {{ .GoTags true false }}
-
-	{{ if $isOutputShape }}
-	responseMetadata aws.Response
-	{{ end }}
 
 	{{ range $_, $name := $context.MemberNames -}}
 		{{ $elem := index $context.MemberRefs $name -}}
@@ -645,12 +645,6 @@ type {{ .ShapeName }} struct {
 	{{ if .Validations -}}
 		{{ .Validations.GoCode . }}
 	{{ end }}
-{{ end }}
-{{ if $isOutputShape }}
-// SDKResponseMetdata return sthe response metadata for the API.
-func (s {{ .ShapeName }}) SDKResponseMetadata() aws.Response {
-	return s.responseMetadata
-}
 {{ end }}
 
 {{ if not .API.NoGenStructFieldAccessors }}
@@ -723,7 +717,7 @@ func (s *Shape) GoCode() string {
 		panic(fmt.Sprintln("Cannot generate toplevel shape for", s.Type))
 	}
 
-	return b.String()
+	return strings.TrimSpace(b.String())
 }
 
 // IsEnum returns whether this shape is an enum list
@@ -785,4 +779,49 @@ func (s *Shape) WillRefBeBase64Encoded(refName string) bool {
 	}
 
 	return ref.Shape.Type == "blob"
+}
+
+// Clone returns a cloned version of the shape with all references clones.
+//
+// Does not clone EventStream or Validate related values.
+func (s *Shape) Clone(newName string) *Shape {
+	if s.AliasedShapeName {
+		panic(fmt.Sprintf("attempted to clone and rename %s, but flagged as aliased",
+			s.ShapeName))
+	}
+
+	n := new(Shape)
+	*n = *s
+
+	debugLogger.Logln("cloning", s.ShapeName, "to", newName)
+
+	n.MemberRefs = map[string]*ShapeRef{}
+	for k, r := range s.MemberRefs {
+		nr := new(ShapeRef)
+		*nr = *r
+		nr.Shape.refs = append(nr.Shape.refs, nr)
+		n.MemberRefs[k] = nr
+	}
+
+	if n.MemberRef.Shape != nil {
+		n.MemberRef.Shape.refs = append(n.MemberRef.Shape.refs, &n.MemberRef)
+	}
+	if n.KeyRef.Shape != nil {
+		n.KeyRef.Shape.refs = append(n.KeyRef.Shape.refs, &n.KeyRef)
+	}
+	if n.ValueRef.Shape != nil {
+		n.ValueRef.Shape.refs = append(n.ValueRef.Shape.refs, &n.ValueRef)
+	}
+
+	n.refs = []*ShapeRef{}
+
+	n.Required = append([]string{}, n.Required...)
+	n.Enum = append([]string{}, n.Enum...)
+	n.EnumConsts = append([]string{}, n.EnumConsts...)
+
+	n.OrigShapeName = n.ShapeName
+	n.API.Shapes[newName] = n
+	n.ShapeName = newName
+
+	return n
 }

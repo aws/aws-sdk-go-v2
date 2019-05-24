@@ -16,7 +16,7 @@ import (
 // A fakeDynamoDB instance. During testing, instatiate ItemGetter, then simply
 // assign an instance of fakeDynamoDB to it.
 type fakeDynamoDB struct {
-	dynamodbiface.DynamoDBAPI
+	dynamodbiface.ClientAPI
 	payload map[string]string // Store expected return values
 	err     error
 }

@@ -12,10 +12,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/quicksight"
 )
 
-// QuickSightAPI provides an interface to enable mocking the
-// quicksight.QuickSight service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// quicksight.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
@@ -23,7 +22,7 @@ import (
 //
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon QuickSight.
-//    func myFunc(svc quicksightiface.QuickSightAPI) bool {
+//    func myFunc(svc quicksightiface.ClientAPI) bool {
 //        // Make svc.CreateGroup request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockQuickSightClient struct {
-//        quicksightiface.QuickSightAPI
+//    type mockClientClient struct {
+//        quicksightiface.ClientPI
 //    }
-//    func (m *mockQuickSightClient) CreateGroup(input *quicksight.CreateGroupInput) (*quicksight.CreateGroupOutput, error) {
+//    func (m *mockClientClient) CreateGroup(input *quicksight.CreateGroupInput) (*quicksight.CreateGroupOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockQuickSightClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type QuickSightAPI interface {
+type ClientAPI interface {
 	CreateGroupRequest(*quicksight.CreateGroupInput) quicksight.CreateGroupRequest
 
 	CreateGroupMembershipRequest(*quicksight.CreateGroupMembershipInput) quicksight.CreateGroupMembershipRequest
@@ -95,4 +94,4 @@ type QuickSightAPI interface {
 	UpdateUserRequest(*quicksight.UpdateUserInput) quicksight.UpdateUserRequest
 }
 
-var _ QuickSightAPI = (*quicksight.QuickSight)(nil)
+var _ ClientAPI = (*quicksight.Client)(nil)

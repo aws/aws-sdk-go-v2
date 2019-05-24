@@ -12,18 +12,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/configservice"
 )
 
-// ConfigServiceAPI provides an interface to enable mocking the
-// configservice.ConfigService service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// ClientAPI provides an interface to enable mocking the
+// configservice.Client methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // AWS Config.
-//    func myFunc(svc configserviceiface.ConfigServiceAPI) bool {
+//    // Config Service.
+//    func myFunc(svc configserviceiface.ClientAPI) bool {
 //        // Make svc.BatchGetAggregateResourceConfig request
 //    }
 //
@@ -41,16 +40,16 @@ import (
 // In your _test.go file:
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
-//    type mockConfigServiceClient struct {
-//        configserviceiface.ConfigServiceAPI
+//    type mockClientClient struct {
+//        configserviceiface.ClientPI
 //    }
-//    func (m *mockConfigServiceClient) BatchGetAggregateResourceConfig(input *configservice.BatchGetAggregateResourceConfigInput) (*configservice.BatchGetAggregateResourceConfigOutput, error) {
+//    func (m *mockClientClient) BatchGetAggregateResourceConfig(input *configservice.BatchGetAggregateResourceConfigInput) (*configservice.BatchGetAggregateResourceConfigOutput, error) {
 //        // mock response/functionality
 //    }
 //
 //    func TestMyFunc(t *testing.T) {
 //        // Setup Test
-//        mockSvc := &mockConfigServiceClient{}
+//        mockSvc := &mockClientClient{}
 //
 //        myfunc(mockSvc)
 //
@@ -61,7 +60,7 @@ import (
 // when the service model is updated and adds new API operations, paginators,
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
-type ConfigServiceAPI interface {
+type ClientAPI interface {
 	BatchGetAggregateResourceConfigRequest(*configservice.BatchGetAggregateResourceConfigInput) configservice.BatchGetAggregateResourceConfigRequest
 
 	BatchGetResourceConfigRequest(*configservice.BatchGetResourceConfigInput) configservice.BatchGetResourceConfigRequest
@@ -175,4 +174,4 @@ type ConfigServiceAPI interface {
 	UntagResourceRequest(*configservice.UntagResourceInput) configservice.UntagResourceRequest
 }
 
-var _ ConfigServiceAPI = (*configservice.ConfigService)(nil)
+var _ ClientAPI = (*configservice.Client)(nil)
