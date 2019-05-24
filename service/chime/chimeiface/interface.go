@@ -77,11 +77,15 @@ type ClientAPI interface {
 
 	CreateAccountRequest(*chime.CreateAccountInput) chime.CreateAccountRequest
 
+	CreateBotRequest(*chime.CreateBotInput) chime.CreateBotRequest
+
 	CreatePhoneNumberOrderRequest(*chime.CreatePhoneNumberOrderInput) chime.CreatePhoneNumberOrderRequest
 
 	CreateVoiceConnectorRequest(*chime.CreateVoiceConnectorInput) chime.CreateVoiceConnectorRequest
 
 	DeleteAccountRequest(*chime.DeleteAccountInput) chime.DeleteAccountRequest
+
+	DeleteEventsConfigurationRequest(*chime.DeleteEventsConfigurationInput) chime.DeleteEventsConfigurationRequest
 
 	DeletePhoneNumberRequest(*chime.DeletePhoneNumberInput) chime.DeletePhoneNumberRequest
 
@@ -100,6 +104,10 @@ type ClientAPI interface {
 	GetAccountRequest(*chime.GetAccountInput) chime.GetAccountRequest
 
 	GetAccountSettingsRequest(*chime.GetAccountSettingsInput) chime.GetAccountSettingsRequest
+
+	GetBotRequest(*chime.GetBotInput) chime.GetBotRequest
+
+	GetEventsConfigurationRequest(*chime.GetEventsConfigurationInput) chime.GetEventsConfigurationRequest
 
 	GetGlobalSettingsRequest(*chime.GetGlobalSettingsInput) chime.GetGlobalSettingsRequest
 
@@ -123,6 +131,8 @@ type ClientAPI interface {
 
 	ListAccountsRequest(*chime.ListAccountsInput) chime.ListAccountsRequest
 
+	ListBotsRequest(*chime.ListBotsInput) chime.ListBotsRequest
+
 	ListPhoneNumberOrdersRequest(*chime.ListPhoneNumberOrdersInput) chime.ListPhoneNumberOrdersRequest
 
 	ListPhoneNumbersRequest(*chime.ListPhoneNumbersInput) chime.ListPhoneNumbersRequest
@@ -135,11 +145,15 @@ type ClientAPI interface {
 
 	LogoutUserRequest(*chime.LogoutUserInput) chime.LogoutUserRequest
 
+	PutEventsConfigurationRequest(*chime.PutEventsConfigurationInput) chime.PutEventsConfigurationRequest
+
 	PutVoiceConnectorOriginationRequest(*chime.PutVoiceConnectorOriginationInput) chime.PutVoiceConnectorOriginationRequest
 
 	PutVoiceConnectorTerminationRequest(*chime.PutVoiceConnectorTerminationInput) chime.PutVoiceConnectorTerminationRequest
 
 	PutVoiceConnectorTerminationCredentialsRequest(*chime.PutVoiceConnectorTerminationCredentialsInput) chime.PutVoiceConnectorTerminationCredentialsRequest
+
+	RegenerateSecurityTokenRequest(*chime.RegenerateSecurityTokenInput) chime.RegenerateSecurityTokenRequest
 
 	ResetPersonalPINRequest(*chime.ResetPersonalPINInput) chime.ResetPersonalPINRequest
 
@@ -150,6 +164,8 @@ type ClientAPI interface {
 	UpdateAccountRequest(*chime.UpdateAccountInput) chime.UpdateAccountRequest
 
 	UpdateAccountSettingsRequest(*chime.UpdateAccountSettingsInput) chime.UpdateAccountSettingsRequest
+
+	UpdateBotRequest(*chime.UpdateBotInput) chime.UpdateBotRequest
 
 	UpdateGlobalSettingsRequest(*chime.UpdateGlobalSettingsInput) chime.UpdateGlobalSettingsRequest
 

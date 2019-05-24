@@ -63,13 +63,21 @@ import (
 type ClientAPI interface {
 	CreateClusterRequest(*kafka.CreateClusterInput) kafka.CreateClusterRequest
 
+	CreateConfigurationRequest(*kafka.CreateConfigurationInput) kafka.CreateConfigurationRequest
+
 	DeleteClusterRequest(*kafka.DeleteClusterInput) kafka.DeleteClusterRequest
 
 	DescribeClusterRequest(*kafka.DescribeClusterInput) kafka.DescribeClusterRequest
 
+	DescribeConfigurationRequest(*kafka.DescribeConfigurationInput) kafka.DescribeConfigurationRequest
+
+	DescribeConfigurationRevisionRequest(*kafka.DescribeConfigurationRevisionInput) kafka.DescribeConfigurationRevisionRequest
+
 	GetBootstrapBrokersRequest(*kafka.GetBootstrapBrokersInput) kafka.GetBootstrapBrokersRequest
 
 	ListClustersRequest(*kafka.ListClustersInput) kafka.ListClustersRequest
+
+	ListConfigurationsRequest(*kafka.ListConfigurationsInput) kafka.ListConfigurationsRequest
 
 	ListNodesRequest(*kafka.ListNodesInput) kafka.ListNodesRequest
 

@@ -41,7 +41,9 @@ type UpdateUserInput struct {
 
 	// A unique string that identifies a user and is associated with a server as
 	// specified by the ServerId. This is the string that will be used by your user
-	// when they log in to your SFTP server.
+	// when they log in to your SFTP server. This user name is a minimum of 3 and
+	// a maximum of 32 characters long. The following are valid characters: a-z,
+	// A-Z, 0-9, underscore, and hyphen. The user name can't start with a hyphen.
 	//
 	// UserName is a required field
 	UserName *string `type:"string" required:"true"`

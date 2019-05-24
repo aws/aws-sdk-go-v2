@@ -17,7 +17,7 @@ type BatchDisassociateUserStackInput struct {
 	// The list of UserStackAssociation objects.
 	//
 	// UserStackAssociations is a required field
-	UserStackAssociations []UserStackAssociation `type:"list" required:"true"`
+	UserStackAssociations []UserStackAssociation `min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -31,6 +31,9 @@ func (s *BatchDisassociateUserStackInput) Validate() error {
 
 	if s.UserStackAssociations == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserStackAssociations"))
+	}
+	if s.UserStackAssociations != nil && len(s.UserStackAssociations) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserStackAssociations", 1))
 	}
 	if s.UserStackAssociations != nil {
 		for i, v := range s.UserStackAssociations {

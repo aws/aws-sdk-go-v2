@@ -92,6 +92,11 @@ type CreateDeploymentGroupInput struct {
 	// ServiceRoleArn is a required field
 	ServiceRoleArn *string `locationName:"serviceRoleArn" type:"string" required:"true"`
 
+	// The metadata that you apply to CodeDeploy deployment groups to help you organize
+	// and categorize them. Each tag consists of a key and an optional value, both
+	// of which you define.
+	Tags []Tag `locationName:"tags" type:"list"`
+
 	// Information about triggers to create when the deployment group is created.
 	// For examples, see Create a Trigger for an AWS CodeDeploy Event (https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html)
 	// in the AWS CodeDeploy User Guide.

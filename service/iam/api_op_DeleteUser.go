@@ -62,9 +62,29 @@ const opDeleteUser = "DeleteUser"
 // DeleteUserRequest returns a request value for making API operation for
 // AWS Identity and Access Management.
 //
-// Deletes the specified IAM user. The user must not belong to any groups or
-// have any access keys, signing certificates, MFA devices enabled for AWS,
-// or attached policies.
+// Deletes the specified IAM user. Unlike the AWS Management Console, when you
+// delete a user programmatically, you must delete the items attached to the
+// user manually, or the deletion fails. For more information, see Deleting
+// an IAM User (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_manage.html#id_users_deleting_cli).
+// Before attempting to delete a user, remove the following items:
+//
+//    * Password (DeleteLoginProfile)
+//
+//    * Access keys (DeleteAccessKey)
+//
+//    * Signing certificate (DeleteSigningCertificate)
+//
+//    * SSH public key (DeleteSSHPublicKey)
+//
+//    * Git credentials (DeleteServiceSpecificCredential)
+//
+//    * Multi-factor authentication (MFA) device (DeactivateMFADevice, DeleteVirtualMFADevice)
+//
+//    * Inline policies (DeleteUserPolicy)
+//
+//    * Attached managed policies (DetachUserPolicy)
+//
+//    * Group memberships (RemoveUserFromGroup)
 //
 //    // Example sending a request using DeleteUserRequest.
 //    req := client.DeleteUserRequest(params)

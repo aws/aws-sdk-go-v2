@@ -134,6 +134,8 @@ type ClientAPI interface {
 
 	ListOnPremisesInstancesRequest(*codedeploy.ListOnPremisesInstancesInput) codedeploy.ListOnPremisesInstancesRequest
 
+	ListTagsForResourceRequest(*codedeploy.ListTagsForResourceInput) codedeploy.ListTagsForResourceRequest
+
 	PutLifecycleEventHookExecutionStatusRequest(*codedeploy.PutLifecycleEventHookExecutionStatusInput) codedeploy.PutLifecycleEventHookExecutionStatusRequest
 
 	RegisterApplicationRevisionRequest(*codedeploy.RegisterApplicationRevisionInput) codedeploy.RegisterApplicationRevisionRequest
@@ -145,6 +147,10 @@ type ClientAPI interface {
 	SkipWaitTimeForInstanceTerminationRequest(*codedeploy.SkipWaitTimeForInstanceTerminationInput) codedeploy.SkipWaitTimeForInstanceTerminationRequest
 
 	StopDeploymentRequest(*codedeploy.StopDeploymentInput) codedeploy.StopDeploymentRequest
+
+	TagResourceRequest(*codedeploy.TagResourceInput) codedeploy.TagResourceRequest
+
+	UntagResourceRequest(*codedeploy.UntagResourceInput) codedeploy.UntagResourceRequest
 
 	UpdateApplicationRequest(*codedeploy.UpdateApplicationInput) codedeploy.UpdateApplicationRequest
 

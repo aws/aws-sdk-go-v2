@@ -13,7 +13,7 @@ import (
 type ModifyEventSubscriptionInput struct {
 	_ struct{} `type:"structure"`
 
-	// A Boolean value; set to true to activate the subscription.
+	// A value that indicates whether to activate the subscription.
 	Enabled *bool `type:"boolean"`
 
 	// A list of event categories for a SourceType that you want to subscribe to.

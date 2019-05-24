@@ -21,18 +21,17 @@ type CreateLocationS3Input struct {
 	S3BucketArn *string `type:"string" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management
-	// (IAM) role that is used to access an Amazon S3 bucket. For detailed information
-	// about using such a role, see Components and Terminology (https://alpha-aws-docs.aws.amazon.com/sync-service/latest/userguide/create-locations-cli.html#create-location-s3-cli)
-	// in the AWS DataSync User Guide.
+	// (IAM) role that is used to access an Amazon S3 bucket.
+	//
+	// For detailed information about using such a role, see "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location"
+	// (Creating a Location for Amazon S3) in the AWS DataSync User Guide.
 	//
 	// S3Config is a required field
 	S3Config *S3Config `type:"structure" required:"true"`
 
 	// A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is
 	// used to read data from the S3 source location or write data to the S3 destination.
-	//
-	// Subdirectory is a required field
-	Subdirectory *string `type:"string" required:"true"`
+	Subdirectory *string `type:"string"`
 
 	// The key-value pair that represents the tag that you want to add to the location.
 	// The value can be an empty string. We recommend using tags to name your resources.
@@ -54,10 +53,6 @@ func (s *CreateLocationS3Input) Validate() error {
 
 	if s.S3Config == nil {
 		invalidParams.Add(aws.NewErrParamRequired("S3Config"))
-	}
-
-	if s.Subdirectory == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Subdirectory"))
 	}
 	if s.S3Config != nil {
 		if err := s.S3Config.Validate(); err != nil {
@@ -104,9 +99,10 @@ const opCreateLocationS3 = "CreateLocationS3"
 // and Access Management (IAM) role that has the required permissions. You can
 // set up the required permissions by creating an IAM policy that grants the
 // required permissions and attaching the policy to the role. An example of
-// such a policy is shown in the examples section. For more information, see
-// Configuring Amazon S3 Location Settings (https://docs.aws.amazon.com/sync-service/latest/userguide/configuring-s3-locations.html)
-// in the AWS DataSync User Guide.
+// such a policy is shown in the examples section.
+//
+// For more information, see "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location"
+// (Configuring Amazon S3 Location Settings) in the AWS DataSync User Guide.
 //
 //    // Example sending a request using CreateLocationS3Request.
 //    req := client.CreateLocationS3Request(params)

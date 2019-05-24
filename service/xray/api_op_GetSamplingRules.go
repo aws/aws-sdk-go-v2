@@ -94,6 +94,12 @@ func (c *Client) GetSamplingRulesRequest(input *GetSamplingRulesInput) GetSampli
 		Name:       opGetSamplingRules,
 		HTTPMethod: "POST",
 		HTTPPath:   "/GetSamplingRules",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -126,6 +132,53 @@ func (r GetSamplingRulesRequest) Send(ctx context.Context) (*GetSamplingRulesRes
 	}
 
 	return resp, nil
+}
+
+// NewGetSamplingRulesRequestPaginator returns a paginator for GetSamplingRules.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.GetSamplingRulesRequest(input)
+//   p := xray.NewGetSamplingRulesRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewGetSamplingRulesPaginator(req GetSamplingRulesRequest) GetSamplingRulesPaginator {
+	return GetSamplingRulesPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *GetSamplingRulesInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// GetSamplingRulesPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetSamplingRulesPaginator struct {
+	aws.Pager
+}
+
+func (p *GetSamplingRulesPaginator) CurrentPage() *GetSamplingRulesOutput {
+	return p.Pager.CurrentPage().(*GetSamplingRulesOutput)
 }
 
 // GetSamplingRulesResponse is the response type for the

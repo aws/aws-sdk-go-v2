@@ -14,7 +14,7 @@ import (
 type DescribeConversionTasksInput struct {
 	_ struct{} `type:"structure"`
 
-	// One or more conversion task IDs.
+	// The conversion task IDs.
 	ConversionTaskIds []string `locationName:"conversionTaskId" locationNameList:"item" type:"list"`
 
 	// Checks whether you have the required permissions for the action, without
@@ -48,8 +48,8 @@ const opDescribeConversionTasks = "DescribeConversionTasks"
 // DescribeConversionTasksRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Describes one or more of your conversion tasks. For more information, see
-// the VM Import/Export User Guide (https://docs.aws.amazon.com/vm-import/latest/userguide/).
+// Describes the specified conversion tasks or all your conversion tasks. For
+// more information, see the VM Import/Export User Guide (https://docs.aws.amazon.com/vm-import/latest/userguide/).
 //
 // For information about the import manifest referenced by this API action,
 // see VM Import Manifest (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html).

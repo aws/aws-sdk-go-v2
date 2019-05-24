@@ -17,7 +17,7 @@ type GetPlanInput struct {
 	// The programming language of the code to perform the mapping.
 	Language Language `type:"string" enum:"true"`
 
-	// Parameters for the mapping.
+	// The parameters for the mapping.
 	Location *Location `type:"structure"`
 
 	// The list of mappings from a source table to target tables.
@@ -81,7 +81,7 @@ type GetPlanOutput struct {
 	// A Python script to perform the mapping.
 	PythonScript *string `type:"string"`
 
-	// Scala code to perform the mapping.
+	// The Scala code to perform the mapping.
 	ScalaCode *string `type:"string"`
 }
 

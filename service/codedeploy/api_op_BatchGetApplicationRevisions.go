@@ -19,7 +19,9 @@ type BatchGetApplicationRevisionsInput struct {
 	// ApplicationName is a required field
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
 
-	// Information to get about the application revisions, including type and location.
+	// An array of RevisionLocation objects that specify information to get about
+	// the application revisions, including type and location. The maximum number
+	// of RevisionLocation objects you can specify is 25.
 	//
 	// Revisions is a required field
 	Revisions []RevisionLocation `locationName:"revisions" type:"list" required:"true"`
@@ -76,7 +78,8 @@ const opBatchGetApplicationRevisions = "BatchGetApplicationRevisions"
 // BatchGetApplicationRevisionsRequest returns a request value for making API operation for
 // AWS CodeDeploy.
 //
-// Gets information about one or more application revisions.
+// Gets information about one or more application revisions. The maximum number
+// of application revisions that can be returned is 25.
 //
 //    // Example sending a request using BatchGetApplicationRevisionsRequest.
 //    req := client.BatchGetApplicationRevisionsRequest(params)

@@ -19,7 +19,7 @@ type DescribeFleetInstancesInput struct {
 	// it is UnauthorizedOperation.
 	DryRun *bool `type:"boolean"`
 
-	// One or more filters.
+	// The filters.
 	//
 	//    * instance-type - The instance type.
 	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`

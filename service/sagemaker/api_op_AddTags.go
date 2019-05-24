@@ -77,7 +77,8 @@ const opAddTags = "AddTags"
 //
 // Adds or overwrites one or more tags for the specified Amazon SageMaker resource.
 // You can add tags to notebook instances, training jobs, hyperparameter tuning
-// jobs, models, endpoint configurations, and endpoints.
+// jobs, batch transform jobs, models, labeling jobs, work teams, endpoint configurations,
+// and endpoints.
 //
 // Each tag consists of a key and an optional value. Tag keys must be unique
 // per resource. For more information about tags, see For more information,

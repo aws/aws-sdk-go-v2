@@ -37,8 +37,7 @@ const opDescribeAccountAttributes = "DescribeAccountAttributes"
 // DescribeAccountAttributesRequest returns a request value for making API operation for
 // AWS OpsWorks for Chef Automate.
 //
-// Describes your account attributes, and creates requests to increase limits
-// before they are reached or exceeded.
+// Describes your OpsWorks-CM account attributes.
 //
 // This operation is synchronous.
 //

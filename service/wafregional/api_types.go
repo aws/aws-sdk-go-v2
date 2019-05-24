@@ -1130,9 +1130,10 @@ type RateBasedRule struct {
 	MatchPredicates []waf.Predicate `type:"list" required:"true"`
 
 	// A friendly name or description for the metrics for a RateBasedRule. The name
-	// can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't
-	// contain whitespace. You can't change the name of the metric after you create
-	// the RateBasedRule.
+	// can contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length
+	// 128 and minimum length one. It can't contain whitespace or metric names reserved
+	// for AWS WAF, including "All" and "Default_Action." You can't change the name
+	// of the metric after you create the RateBasedRule.
 	MetricName *string `type:"string"`
 
 	// A friendly name or description for a RateBasedRule. You can't change the
@@ -1554,8 +1555,10 @@ type Rule struct {
 	_ struct{} `type:"structure"`
 
 	// A friendly name or description for the metrics for this Rule. The name can
-	// contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't contain
-	// whitespace. You can't change MetricName after you create the Rule.
+	// contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length
+	// 128 and minimum length one. It can't contain whitespace or metric names reserved
+	// for AWS WAF, including "All" and "Default_Action." You can't change MetricName
+	// after you create the Rule.
 	MetricName *string `type:"string"`
 
 	// The friendly name or description for the Rule. You can't change the name
@@ -1599,9 +1602,10 @@ type RuleGroup struct {
 	_ struct{} `type:"structure"`
 
 	// A friendly name or description for the metrics for this RuleGroup. The name
-	// can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't
-	// contain whitespace. You can't change the name of the metric after you create
-	// the RuleGroup.
+	// can contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length
+	// 128 and minimum length one. It can't contain whitespace or metric names reserved
+	// for AWS WAF, including "All" and "Default_Action." You can't change the name
+	// of the metric after you create the RuleGroup.
 	MetricName *string `type:"string"`
 
 	// The friendly name or description for the RuleGroup. You can't change the
@@ -2315,9 +2319,10 @@ type SubscribedRuleGroupSummary struct {
 	_ struct{} `type:"structure"`
 
 	// A friendly name or description for the metrics for this RuleGroup. The name
-	// can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't
-	// contain whitespace. You can't change the name of the metric after you create
-	// the RuleGroup.
+	// can contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length
+	// 128 and minimum length one. It can't contain whitespace or metric names reserved
+	// for AWS WAF, including "All" and "Default_Action." You can't change the name
+	// of the metric after you create the RuleGroup.
 	//
 	// MetricName is a required field
 	MetricName *string `type:"string" required:"true"`
@@ -2485,8 +2490,10 @@ type WebACL struct {
 	DefaultAction *waf.WafAction `type:"structure" required:"true"`
 
 	// A friendly name or description for the metrics for this WebACL. The name
-	// can contain only alphanumeric characters (A-Z, a-z, 0-9); the name can't
-	// contain whitespace. You can't change MetricName after you create the WebACL.
+	// can contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length
+	// 128 and minimum length one. It can't contain whitespace or metric names reserved
+	// for AWS WAF, including "All" and "Default_Action." You can't change MetricName
+	// after you create the WebACL.
 	MetricName *string `type:"string"`
 
 	// A friendly name or description of the WebACL. You can't change the name of

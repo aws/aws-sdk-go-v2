@@ -33,8 +33,8 @@ type GetCallerIdentityOutput struct {
 	Arn *string `min:"20" type:"string"`
 
 	// The unique identifier of the calling entity. The exact value depends on the
-	// type of entity making the call. The values returned are those listed in the
-	// aws:userid column in the Principal table (http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_variables.html#principaltable)
+	// type of entity that is making the call. The values returned are those listed
+	// in the aws:userid column in the Principal table (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_variables.html#principaltable)
 	// found on the Policy Variables reference page in the IAM User Guide.
 	UserId *string `type:"string"`
 }

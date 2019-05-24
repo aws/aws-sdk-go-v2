@@ -14,7 +14,7 @@ import (
 type CreatePlatformEndpointInput struct {
 	_ struct{} `type:"structure"`
 
-	// For a list of attributes, see SetEndpointAttributes (http://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html).
+	// For a list of attributes, see SetEndpointAttributes (https://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html).
 	Attributes map[string]string `type:"map"`
 
 	// Arbitrary user data to associate with the endpoint. Amazon SNS does not use
@@ -88,11 +88,11 @@ const opCreatePlatformEndpoint = "CreatePlatformEndpoint"
 // action is idempotent, so if the requester already owns an endpoint with the
 // same device token and attributes, that endpoint's ARN is returned without
 // creating a new endpoint. For more information, see Using Amazon SNS Mobile
-// Push Notifications (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
+// Push Notifications (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 //
 // When using CreatePlatformEndpoint with Baidu, two attributes must be provided:
 // ChannelId and UserId. The token field must also contain the ChannelId. For
-// more information, see Creating an Amazon SNS Endpoint for Baidu (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePushBaiduEndpoint.html).
+// more information, see Creating an Amazon SNS Endpoint for Baidu (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePushBaiduEndpoint.html).
 //
 //    // Example sending a request using CreatePlatformEndpointRequest.
 //    req := client.CreatePlatformEndpointRequest(params)

@@ -30,25 +30,25 @@ type CreateServerInput struct {
 	// default value is true.
 	DisableAutomatedBackup *bool `type:"boolean"`
 
-	// The configuration management engine to use. Valid values include Chef and
-	// Puppet.
+	// The configuration management engine to use. Valid values include ChefAutomate
+	// and Puppet.
 	Engine *string `type:"string"`
 
 	// Optional engine attributes on a specified server.
 	//
 	// Attributes accepted in a Chef createServer request:
 	//
-	//    * CHEF_PIVOTAL_KEY: A base64-encoded RSA public key. The corresponding
-	//    private key is required to access the Chef API. When no CHEF_PIVOTAL_KEY
+	//    * CHEF_AUTOMATE_PIVOTAL_KEY: A base64-encoded RSA public key. The corresponding
+	//    private key is required to access the Chef API. When no CHEF_AUTOMATE_PIVOTAL_KEY
 	//    is set, a private key is generated and returned in the response.
 	//
-	//    * CHEF_DELIVERY_ADMIN_PASSWORD: The password for the administrative user
-	//    in the Chef Automate GUI. The password length is a minimum of eight characters,
-	//    and a maximum of 32. The password can contain letters, numbers, and special
-	//    characters (!/@#$%^&+=_). The password must contain at least one lower
-	//    case letter, one upper case letter, one number, and one special character.
-	//    When no CHEF_DELIVERY_ADMIN_PASSWORD is set, one is generated and returned
-	//    in the response.
+	//    * CHEF_AUTOMATE_ADMIN_PASSWORD: The password for the administrative user
+	//    in the Chef Automate web-based dashboard. The password length is a minimum
+	//    of eight characters, and a maximum of 32. The password can contain letters,
+	//    numbers, and special characters (!/@#$%^&+=_). The password must contain
+	//    at least one lower case letter, one upper case letter, one number, and
+	//    one special character. When no CHEF_AUTOMATE_ADMIN_PASSWORD is set, one
+	//    is generated and returned in the response.
 	//
 	// Attributes accepted in a Puppet createServer request:
 	//
@@ -60,8 +60,7 @@ type CreateServerInput struct {
 	//    an r10k remote opens TCP port 8170.
 	//
 	//    * PUPPET_R10K_PRIVATE_KEY: If you are using a private Git repository,
-	//    add PUPPET_R10K_PRIVATE_KEY to specify an SSH URL and a PEM-encoded private
-	//    SSH key.
+	//    add PUPPET_R10K_PRIVATE_KEY to specify a PEM-encoded private SSH key.
 	EngineAttributes []EngineAttribute `type:"list"`
 
 	// The engine model of the server. Valid values in this release include Monolithic
@@ -83,8 +82,7 @@ type CreateServerInput struct {
 	// InstanceProfileArn is a required field
 	InstanceProfileArn *string `type:"string" required:"true"`
 
-	// The Amazon EC2 instance type to use. For example, m4.large. Recommended instance
-	// types include t2.medium and greater, m4.*, or c4.xlarge and greater.
+	// The Amazon EC2 instance type to use. For example, m5.large.
 	//
 	// InstanceType is a required field
 	InstanceType *string `type:"string" required:"true"`

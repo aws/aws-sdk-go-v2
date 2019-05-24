@@ -85,8 +85,8 @@ const opCreateFpgaImage = "CreateFpgaImage"
 // use, check the output logs.
 //
 // An AFI contains the FPGA bitstream that is ready to download to an FPGA.
-// You can securely deploy an AFI on one or more FPGA-accelerated instances.
-// For more information, see the AWS FPGA Hardware Development Kit (https://github.com/aws/aws-fpga/).
+// You can securely deploy an AFI on multiple FPGA-accelerated instances. For
+// more information, see the AWS FPGA Hardware Development Kit (https://github.com/aws/aws-fpga/).
 //
 //    // Example sending a request using CreateFpgaImageRequest.
 //    req := client.CreateFpgaImageRequest(params)

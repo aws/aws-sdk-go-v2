@@ -15,8 +15,7 @@ import (
 type CreateVolumeInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Availability Zone in which to create the volume. Use DescribeAvailabilityZones
-	// to list the Availability Zones that are currently available to you.
+	// The Availability Zone in which to create the volume.
 	//
 	// AvailabilityZone is a required field
 	AvailabilityZone *string `type:"string" required:"true"`
@@ -27,13 +26,18 @@ type CreateVolumeInput struct {
 	// it is UnauthorizedOperation.
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
-	// Specifies whether the volume should be encrypted. Encrypted Amazon EBS volumes
-	// may only be attached to instances that support Amazon EBS encryption. Volumes
-	// that are created from encrypted snapshots are automatically encrypted. There
-	// is no way to create an encrypted volume from an unencrypted snapshot or vice
-	// versa. If your AMI uses encrypted volumes, you can only launch it on supported
-	// instance types. For more information, see Amazon EBS Encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// Specifies the encryption state of the volume. The default effect of setting
+	// the Encrypted parameter to true through the console, API, or CLI depends
+	// on the volume's origin (new or from a snapshot), starting encryption state,
+	// ownership, and whether account-level encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/account-level-encryption.html)
+	// is enabled. Each default case can be overridden by specifying a customer
+	// master key (CMK) with the KmsKeyId parameter in addition to setting Encrypted
+	// to true. For a complete list of possible encryption cases, see Amazon EBS
+	// Encryption (AWSEC2/latest/UserGuide/EBSEncryption.htm).
+	//
+	// Encrypted Amazon EBS volumes may only be attached to instances that support
+	// Amazon EBS encryption. For more information, see Supported Instance Types
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances).
 	Encrypted *bool `locationName:"encrypted" type:"boolean"`
 
 	// The number of I/O operations per second (IOPS) to provision for the volume,
@@ -48,25 +52,25 @@ type CreateVolumeInput struct {
 	Iops *int64 `type:"integer"`
 
 	// An identifier for the AWS Key Management Service (AWS KMS) customer master
-	// key (CMK) to use when creating the encrypted volume. This parameter is only
-	// required if you want to use a non-default CMK; if this parameter is not specified,
-	// the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted
-	// flag must also be set.
+	// key (CMK) to use to encrypt the volume. This parameter is only required if
+	// you want to use a non-default CMK; if this parameter is not specified, the
+	// default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag
+	// must also be set.
 	//
 	// The CMK identifier may be provided in any of the following formats:
 	//
 	//    * Key ID
 	//
 	//    * Key alias. The alias ARN contains the arn:aws:kms namespace, followed
-	//    by the region of the CMK, the AWS account ID of the CMK owner, the alias
+	//    by the Region of the CMK, the AWS account ID of the CMK owner, the alias
 	//    namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
 	//
 	//    * ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed
-	//    by the region of the CMK, the AWS account ID of the CMK owner, the key
+	//    by the Region of the CMK, the AWS account ID of the CMK owner, the key
 	//    namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.
 	//
 	//    * ARN using key alias. The alias ARN contains the arn:aws:kms namespace,
-	//    followed by the region of the CMK, the AWS account ID of the CMK owner,
+	//    followed by the Region of the CMK, the AWS account ID of the CMK owner,
 	//    the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
 	//
 	// AWS parses KmsKeyId asynchronously, meaning that the action you call may
@@ -83,7 +87,7 @@ type CreateVolumeInput struct {
 	// Default: If you're creating the volume from a snapshot and don't specify
 	// a volume size, the default is the snapshot size.
 	//
-	// At least one of Size or SnapshotId are required.
+	// At least one of Size or SnapshotId is required.
 	Size *int64 `type:"integer"`
 
 	// The snapshot from which to create the volume.

@@ -4,6 +4,7 @@ package appsync
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -13,6 +14,9 @@ import (
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApiRequest
 type UpdateGraphqlApiInput struct {
 	_ struct{} `type:"structure"`
+
+	// A list of additional authentication providers for the GraphqlApi API.
+	AdditionalAuthenticationProviders []AdditionalAuthenticationProvider `locationName:"additionalAuthenticationProviders" type:"list"`
 
 	// The API ID.
 	//
@@ -53,6 +57,13 @@ func (s *UpdateGraphqlApiInput) Validate() error {
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+	if s.AdditionalAuthenticationProviders != nil {
+		for i, v := range s.AdditionalAuthenticationProviders {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AdditionalAuthenticationProviders", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 	if s.LogConfig != nil {
 		if err := s.LogConfig.Validate(); err != nil {
 			invalidParams.AddNested("LogConfig", err.(aws.ErrInvalidParams))
@@ -79,6 +90,18 @@ func (s *UpdateGraphqlApiInput) Validate() error {
 func (s UpdateGraphqlApiInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
+	if len(s.AdditionalAuthenticationProviders) > 0 {
+		v := s.AdditionalAuthenticationProviders
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "additionalAuthenticationProviders", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if len(s.AuthenticationType) > 0 {
 		v := s.AuthenticationType
 

@@ -19,10 +19,10 @@ type DescribeElasticGpusInput struct {
 	// it is UnauthorizedOperation.
 	DryRun *bool `type:"boolean"`
 
-	// One or more Elastic Graphics accelerator IDs.
+	// The Elastic Graphics accelerator IDs.
 	ElasticGpuIds []string `locationName:"ElasticGpuId" locationNameList:"item" type:"list"`
 
-	// One or more filters.
+	// The filters.
 	//
 	//    * availability-zone - The Availability Zone in which the Elastic Graphics
 	//    accelerator resides.
@@ -42,7 +42,7 @@ type DescribeElasticGpusInput struct {
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value. This
 	// value can be between 5 and 1000.
-	MaxResults *int64 `type:"integer"`
+	MaxResults *int64 `min:"10" type:"integer"`
 
 	// The token to request the next page of results.
 	NextToken *string `type:"string"`
@@ -51,6 +51,19 @@ type DescribeElasticGpusInput struct {
 // String returns the string representation
 func (s DescribeElasticGpusInput) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeElasticGpusInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeElasticGpusInput"}
+	if s.MaxResults != nil && *s.MaxResults < 10 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeElasticGpusResult

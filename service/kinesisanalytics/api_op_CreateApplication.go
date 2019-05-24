@@ -20,7 +20,7 @@ type CreateApplicationInput struct {
 	// in-application stream, generates a running average of the number of advertisement
 	// clicks by vendor, and insert resulting rows in another in-application stream
 	// using pumps. For more information about the typical pattern, see Application
-	// Code (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-app-code.html).
+	// Code (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-app-code.html).
 	//
 	// You can provide such series of SQL statements, where output of one statement
 	// can be used as the input for the next statement. You store intermediate results
@@ -42,7 +42,7 @@ type CreateApplicationInput struct {
 
 	// Use this parameter to configure a CloudWatch log stream to monitor application
 	// configuration errors. For more information, see Working with Amazon CloudWatch
-	// Logs (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
+	// Logs (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
 	CloudWatchLoggingOptions []CloudWatchLoggingOption `type:"list"`
 
 	// Use this parameter to configure the application input.
@@ -81,6 +81,13 @@ type CreateApplicationInput struct {
 	// Amazon Kinesis Analytics can assume to write to the stream or Lambda function
 	// on your behalf.
 	Outputs []Output `type:"list"`
+
+	// A list of one or more tags to assign to the application. A tag is a key-value
+	// pair that identifies an application. Note that the maximum number of application
+	// tags includes system tags. The maximum number of user-defined application
+	// tags is 50. For more information, see Using Cost Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+	// in the AWS Billing and Cost Management Guide.
+	Tags []Tag `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -97,6 +104,9 @@ func (s *CreateApplicationInput) Validate() error {
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 	if s.CloudWatchLoggingOptions != nil {
 		for i, v := range s.CloudWatchLoggingOptions {
@@ -116,6 +126,13 @@ func (s *CreateApplicationInput) Validate() error {
 		for i, v := range s.Outputs {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Outputs", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -149,11 +166,17 @@ const opCreateApplication = "CreateApplication"
 // CreateApplicationRequest returns a request value for making API operation for
 // Amazon Kinesis Analytics.
 //
+//
+// This documentation is for version 1 of the Amazon Kinesis Data Analytics
+// API, which only supports SQL applications. Version 2 of the API supports
+// SQL and Java applications. For more information about version 2, see Amazon
+// Kinesis Data Analytics API V2 Documentation (/kinesisanalytics/latest/apiv2/Welcome.html).
+//
 // Creates an Amazon Kinesis Analytics application. You can configure each application
 // with one streaming source as input, application code to process the input,
 // and up to three destinations where you want Amazon Kinesis Analytics to write
 // the output data from your application. For an overview, see How it Works
-// (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works.html).
+// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works.html).
 //
 // In the input configuration, you map the streaming source to an in-application
 // stream, which you can think of as a constantly updating table. In the mapping,
@@ -173,7 +196,7 @@ const opCreateApplication = "CreateApplication"
 // kinesisanalytics:CreateApplication action.
 //
 // For introductory exercises to create an Amazon Kinesis Analytics application,
-// see Getting Started (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/getting-started.html).
+// see Getting Started (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/getting-started.html).
 //
 //    // Example sending a request using CreateApplicationRequest.
 //    req := client.CreateApplicationRequest(params)

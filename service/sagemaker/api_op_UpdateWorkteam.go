@@ -20,6 +20,9 @@ type UpdateWorkteamInput struct {
 	// A list of MemberDefinition objects that contain the updated work team members.
 	MemberDefinitions []MemberDefinition `min:"1" type:"list"`
 
+	// Configures SNS topic notifications for available or expiring work items
+	NotificationConfiguration *NotificationConfiguration `type:"structure"`
+
 	// The name of the work team to update.
 	//
 	// WorkteamName is a required field

@@ -66,8 +66,7 @@ type CreateServiceSpecificCredentialOutput struct {
 	// credential.
 	//
 	// This is the only time that the password for this credential set is available.
-	// It cannot be recovered later. Instead, you will have to reset the password
-	// with ResetServiceSpecificCredential.
+	// It cannot be recovered later. Instead, you must reset the password with ResetServiceSpecificCredential.
 	ServiceSpecificCredential *ServiceSpecificCredential `type:"structure"`
 }
 

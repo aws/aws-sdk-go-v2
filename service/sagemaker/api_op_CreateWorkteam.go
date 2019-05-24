@@ -29,6 +29,9 @@ type CreateWorkteamInput struct {
 	// MemberDefinitions is a required field
 	MemberDefinitions []MemberDefinition `min:"1" type:"list" required:"true"`
 
+	// Configures notification of workers regarding available or expiring work items.
+	NotificationConfiguration *NotificationConfiguration `type:"structure"`
+
 	Tags []Tag `type:"list"`
 
 	// The name of the work team. Use this name to identify the work team.

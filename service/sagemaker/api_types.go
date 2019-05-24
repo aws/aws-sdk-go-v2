@@ -303,12 +303,14 @@ type AnnotationConsolidationConfig struct {
 	//    on the Jaccard index of the boxes. arn:aws:lambda:us-east-1:432418664414:function:ACS-BoundingBox
 	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-BoundingBox arn:aws:lambda:us-west-2:081040173940:function:ACS-BoundingBox
 	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-BoundingBox arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-BoundingBox
+	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-BoundingBox
 	//
 	//    * Image classification - Uses a variant of the Expectation Maximization
 	//    approach to estimate the true class of an image based on annotations from
 	//    individual workers. arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClass
 	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClass arn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClass
 	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClass arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClass
+	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-ImageMultiClass
 	//
 	//    * Semantic segmentation - Treats each pixel in an image as a multi-class
 	//    classification and treats pixel annotations from workers as "votes" for
@@ -317,12 +319,14 @@ type AnnotationConsolidationConfig struct {
 	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-SemanticSegmentation
 	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-SemanticSegmentation
 	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-SemanticSegmentation
+	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-SemanticSegmentation
 	//
 	//    * Text classification - Uses a variant of the Expectation Maximization
 	//    approach to estimate the true class of text based on annotations from
 	//    individual workers. arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClass
 	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClass arn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClass
 	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClass arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClass
+	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-TextMultiClass
 	//
 	// For more information, see Annotation Consolidation (http://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html).
 	//
@@ -738,7 +742,18 @@ func (s CompilationJobSummary) String() string {
 type ContainerDefinition struct {
 	_ struct{} `type:"structure"`
 
-	// This parameter is ignored.
+	// This parameter is ignored for models that contain only a PrimaryContainer.
+	//
+	// When a ContainerDefinition is part of an inference pipeline, the value of
+	// ths parameter uniquely identifies the container for the purposes of logging
+	// and metrics. For information, see Use Logs and Metrics to Monitor an Inference
+	// Pipeline (http://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html).
+	// If you don't specify a value for this parameter for a ContainerDefinition
+	// that is part of an inference pipeline, a unique name is automatically assigned
+	// based on the position of the ContainerDefinition in the pipeline. If you
+	// specify a value for the ContainerHostName for any ContainerDefinition that
+	// is part of an inference pipeline, you must specify a value for the ContainerHostName
+	// parameter of every ContainerDefinition in that pipeline.
 	ContainerHostname *string `type:"string"`
 
 	// The environment variables to set in the Docker container. Each key and value
@@ -756,7 +771,9 @@ type ContainerDefinition struct {
 
 	// The S3 path where the model artifacts, which result from model training,
 	// are stored. This path must point to a single gzip compressed tar archive
-	// (.tar.gz suffix).
+	// (.tar.gz suffix). The S3 path is required for Amazon SageMaker built-in algorithms,
+	// but not if you use your own algorithms. For more information on built-in
+	// algorithms, see Common Parameters (http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html).
 	//
 	// If you provide a value for this parameter, Amazon SageMaker uses AWS Security
 	// Token Service to download model artifacts from the S3 path you provide. AWS
@@ -765,6 +782,9 @@ type ContainerDefinition struct {
 	// more information, see Activating and Deactivating AWS STS in an AWS Region
 	// (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
 	// in the AWS Identity and Access Management User Guide.
+	//
+	// If you use a built-in algorithm to create a model, Amazon SageMaker requires
+	// that you provide a S3 path to the model artifacts in ModelDataUrl.
 	ModelDataUrl *string `type:"string"`
 
 	// The name of the model package to use to create the model.
@@ -813,7 +833,7 @@ type ContinuousParameterRange struct {
 
 	// The scale that hyperparameter tuning uses to search the hyperparameter range.
 	// For information about choosing a hyperparameter scale, see Hyperparameter
-	// Range Scaling (http://docs.aws.amazon.com//sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
+	// Scaling (http://docs.aws.amazon.com//sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
 	// One of the following values:
 	//
 	// Auto
@@ -915,9 +935,7 @@ type DataSource struct {
 	_ struct{} `type:"structure"`
 
 	// The S3 location of the data source that is associated with a channel.
-	//
-	// S3DataSource is a required field
-	S3DataSource *S3DataSource `type:"structure" required:"true"`
+	S3DataSource *S3DataSource `type:"structure"`
 }
 
 // String returns the string representation
@@ -928,10 +946,6 @@ func (s DataSource) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DataSource) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DataSource"}
-
-	if s.S3DataSource == nil {
-		invalidParams.Add(aws.NewErrParamRequired("S3DataSource"))
-	}
 	if s.S3DataSource != nil {
 		if err := s.S3DataSource.Validate(); err != nil {
 			invalidParams.AddNested("S3DataSource", err.(aws.ErrInvalidParams))
@@ -1418,6 +1432,16 @@ type HumanTaskConfig struct {
 	//
 	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClass
 	//
+	// Asia Pacific (Sydney (ap-southeast-1):
+	//
+	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-BoundingBox
+	//
+	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-ImageMultiClass
+	//
+	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-SemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-TextMultiClass
+	//
 	// PreHumanTaskLambdaArn is a required field
 	PreHumanTaskLambdaArn *string `type:"string" required:"true"`
 
@@ -1897,15 +1921,11 @@ type HyperParameterTuningJobConfig struct {
 
 	// The HyperParameterTuningJobObjective object that specifies the objective
 	// metric for this tuning job.
-	//
-	// HyperParameterTuningJobObjective is a required field
-	HyperParameterTuningJobObjective *HyperParameterTuningJobObjective `type:"structure" required:"true"`
+	HyperParameterTuningJobObjective *HyperParameterTuningJobObjective `type:"structure"`
 
 	// The ParameterRanges object that specifies the ranges of hyperparameters that
 	// this tuning job searches.
-	//
-	// ParameterRanges is a required field
-	ParameterRanges *ParameterRanges `type:"structure" required:"true"`
+	ParameterRanges *ParameterRanges `type:"structure"`
 
 	// The ResourceLimits object that specifies the maximum number of training jobs
 	// and parallel training jobs for this tuning job.
@@ -1947,14 +1967,6 @@ func (s HyperParameterTuningJobConfig) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HyperParameterTuningJobConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "HyperParameterTuningJobConfig"}
-
-	if s.HyperParameterTuningJobObjective == nil {
-		invalidParams.Add(aws.NewErrParamRequired("HyperParameterTuningJobObjective"))
-	}
-
-	if s.ParameterRanges == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParameterRanges"))
-	}
 
 	if s.ResourceLimits == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceLimits"))
@@ -2369,7 +2381,7 @@ type IntegerParameterRange struct {
 
 	// The scale that hyperparameter tuning uses to search the hyperparameter range.
 	// For information about choosing a hyperparameter scale, see Hyperparameter
-	// Range Scaling (http://docs.aws.amazon.com//sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
+	// Scaling (http://docs.aws.amazon.com//sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
 	// One of the following values:
 	//
 	// Auto
@@ -2626,6 +2638,9 @@ type LabelingJobForWorkteamSummary struct {
 
 	// The name of the labeling job that the work team is assigned to.
 	LabelingJobName *string `min:"1" type:"string"`
+
+	// The configured number of workers per data object.
+	NumberOfHumanWorkersPerDataObject *int64 `min:"1" type:"integer"`
 
 	// WorkRequesterAccountId is a required field
 	WorkRequesterAccountId *string `type:"string" required:"true"`
@@ -3453,6 +3468,21 @@ type NotebookInstanceSummary struct {
 
 // String returns the string representation
 func (s NotebookInstanceSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Configures SNS notifications of available or expiring work items for work
+// teams.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NotificationConfiguration
+type NotificationConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN for the SNS topic to which notifications should be published.
+	NotificationTopicArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s NotificationConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -5548,6 +5578,10 @@ type TransformS3DataSource struct {
 	// file containing a list of object keys that you want Amazon SageMaker to use
 	// for batch transform.
 	//
+	// The following values are compatible: ManifestFile, S3Prefix
+	//
+	// The following value is not compatible: AugmentedManifestFile
+	//
 	// S3DataType is a required field
 	S3DataType S3DataType `type:"string" required:"true" enum:"true"`
 
@@ -5695,6 +5729,11 @@ type VpcConfig struct {
 	// The ID of the subnets in the VPC to which you want to connect your training
 	// job or model.
 	//
+	// Amazon EC2 P3 accelerated computing instances are not available in the c/d/e
+	// availability zones of region us-east-1. If you want to create endpoints with
+	// P3 instances in VPC mode in region us-east-1, create subnets in a/b/f availability
+	// zones instead.
+	//
 	// Subnets is a required field
 	Subnets []string `min:"1" type:"list" required:"true"`
 }
@@ -5748,6 +5787,10 @@ type Workteam struct {
 	//
 	// MemberDefinitions is a required field
 	MemberDefinitions []MemberDefinition `min:"1" type:"list" required:"true"`
+
+	// Configures SNS notifications of available or expiring work items for work
+	// teams.
+	NotificationConfiguration *NotificationConfiguration `type:"structure"`
 
 	// The Amazon Marketplace identifier for a vendor's work team.
 	ProductListingIds []string `type:"list"`

@@ -28,11 +28,11 @@ type ListRetirableGrantsInput struct {
 
 	// The retiring principal for which to list grants.
 	//
-	// To specify the retiring principal, use the Amazon Resource Name (ARN) (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// To specify the retiring principal, use the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of an AWS principal. Valid AWS principals include AWS accounts (root), IAM
 	// users, federated users, and assumed role users. For examples of the ARN syntax
 	// for specifying a principal, see AWS Identity and Access Management (IAM)
-	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam)
 	// in the Example ARNs section of the Amazon Web Services General Reference.
 	//
 	// RetiringPrincipal is a required field
@@ -80,7 +80,7 @@ type ListRetirableGrantsOutput struct {
 
 	// A flag that indicates whether there are more items in the list. When this
 	// value is true, the list in this response is truncated. To get more items,
-	// pass the value of the NextMarker element in this response to the Marker parameter
+	// pass the value of the NextMarker element in thisresponse to the Marker parameter
 	// in a subsequent request.
 	Truncated *bool `type:"boolean"`
 }

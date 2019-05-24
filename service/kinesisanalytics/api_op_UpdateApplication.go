@@ -23,8 +23,8 @@ type UpdateApplicationInput struct {
 	// ApplicationUpdate is a required field
 	ApplicationUpdate *ApplicationUpdate `type:"structure" required:"true"`
 
-	// The current application version ID. You can use the DescribeApplication operation
-	// to get this value.
+	// The current application version ID. You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+	// operation to get this value.
 	//
 	// CurrentApplicationVersionId is a required field
 	CurrentApplicationVersionId *int64 `min:"1" type:"long" required:"true"`
@@ -82,6 +82,12 @@ const opUpdateApplication = "UpdateApplication"
 
 // UpdateApplicationRequest returns a request value for making API operation for
 // Amazon Kinesis Analytics.
+//
+//
+// This documentation is for version 1 of the Amazon Kinesis Data Analytics
+// API, which only supports SQL applications. Version 2 of the API supports
+// SQL and Java applications. For more information about version 2, see Amazon
+// Kinesis Data Analytics API V2 Documentation (/kinesisanalytics/latest/apiv2/Welcome.html).
 //
 // Updates an existing Amazon Kinesis Analytics application. Using this API,
 // you can update application code, input configuration, and output configuration.

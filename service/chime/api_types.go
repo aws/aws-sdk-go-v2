@@ -148,6 +148,105 @@ func (s AccountSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A resource that allows Enterprise account administrators to configure an
+// interface to receive events from Amazon Chime.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Bot
+type Bot struct {
+	_ struct{} `type:"structure"`
+
+	// The bot email address.
+	BotEmail *string `type:"string"`
+
+	// The bot ID.
+	BotId *string `type:"string"`
+
+	// The bot type.
+	BotType BotType `type:"string" enum:"true"`
+
+	// The bot creation timestamp, in ISO 8601 format.
+	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// When true, the bot is stopped from running in your account.
+	Disabled *bool `type:"boolean"`
+
+	// The bot display name.
+	DisplayName *string `type:"string"`
+
+	// The security token used to authenticate Amazon Chime with the outgoing event
+	// endpoint.
+	SecurityToken *string `type:"string"`
+
+	// The updated bot timestamp, in ISO 8601 format.
+	UpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The unique ID for the bot user.
+	UserId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Bot) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Bot) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BotEmail != nil {
+		v := *s.BotEmail
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "BotEmail", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.BotId != nil {
+		v := *s.BotId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "BotId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.BotType) > 0 {
+		v := s.BotType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "BotType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.CreatedTimestamp != nil {
+		v := *s.CreatedTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.Disabled != nil {
+		v := *s.Disabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Disabled", protocol.BoolValue(v), metadata)
+	}
+	if s.DisplayName != nil {
+		v := *s.DisplayName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DisplayName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SecurityToken != nil {
+		v := *s.SecurityToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SecurityToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UpdatedTimestamp != nil {
+		v := *s.UpdatedTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpdatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The Amazon Chime Business Calling settings for the administrator's AWS account.
 // Includes any Amazon S3 buckets designated for storing call detail records.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BusinessCallingSettings
@@ -207,6 +306,50 @@ func (s Credential) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Username", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The configuration that allows a bot to receive outgoing events. Can be either
+// an HTTPS endpoint or a Lambda function ARN.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/EventsConfiguration
+type EventsConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The bot ID.
+	BotId *string `type:"string"`
+
+	// Lambda function ARN that allows a bot to receive outgoing events.
+	LambdaFunctionArn *string `type:"string"`
+
+	// HTTPS endpoint that allows a bot to receive outgoing events.
+	OutboundEventsHTTPSEndpoint *string `type:"string"`
+}
+
+// String returns the string representation
+func (s EventsConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s EventsConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BotId != nil {
+		v := *s.BotId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "BotId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LambdaFunctionArn != nil {
+		v := *s.LambdaFunctionArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LambdaFunctionArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.OutboundEventsHTTPSEndpoint != nil {
+		v := *s.OutboundEventsHTTPSEndpoint
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutboundEventsHTTPSEndpoint", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

@@ -88,7 +88,7 @@ const opCreateSAMLProvider = "CreateSAMLProvider"
 //
 // The SAML provider resource that you create with this operation can be used
 // as a principal in an IAM role's trust policy. Such a policy can enable federated
-// users who sign-in using the SAML IdP to assume the role. You can create an
+// users who sign in using the SAML IdP to assume the role. You can create an
 // IAM role that supports Web-based single sign-on (SSO) to the AWS Management
 // Console or one that supports API access to AWS.
 //

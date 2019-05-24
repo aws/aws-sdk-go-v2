@@ -41,6 +41,11 @@ type CreatePolicyInput struct {
 	// The JSON policy document that you want to use as the content for the new
 	// policy.
 	//
+	// You must provide policies in JSON format in IAM. However, for AWS CloudFormation
+	// templates formatted in YAML, you can provide the policy in JSON or YAML format.
+	// AWS CloudFormation always converts a YAML policy to JSON format before submitting
+	// it to IAM.
+	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
 	// parameter is a string of characters consisting of the following:
 	//
@@ -58,9 +63,9 @@ type CreatePolicyInput struct {
 
 	// The friendly name of the policy.
 	//
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
+	// IAM user, group, role, and policy names must be unique within the account.
+	// Names are not distinguished by case. For example, you cannot create resources
+	// named both "MyResource" and "myresource".
 	//
 	// PolicyName is a required field
 	PolicyName *string `min:"1" type:"string" required:"true"`

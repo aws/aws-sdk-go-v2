@@ -21,7 +21,7 @@ type CreateDirectConnectGatewayAssociationInput struct {
 	// DirectConnectGatewayId is a required field
 	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string" required:"true"`
 
-	// The ID of the virtual private gateway.
+	// The ID of the virtual private gateway or transit gateway.
 	GatewayId *string `locationName:"gatewayId" type:"string"`
 
 	// The ID of the virtual private gateway.

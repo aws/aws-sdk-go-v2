@@ -76,7 +76,7 @@ const opCreateDhcpOptions = "CreateDhcpOptions"
 //    domain-name-servers to a custom DNS server.
 //
 //    * domain-name - If you're using AmazonProvidedDNS in us-east-1, specify
-//    ec2.internal. If you're using AmazonProvidedDNS in another region, specify
+//    ec2.internal. If you're using AmazonProvidedDNS in another Region, specify
 //    region.compute.internal (for example, ap-northeast-1.compute.internal).
 //    Otherwise, specify a domain name (for example, MyCompany.com). This value
 //    is used to complete unqualified DNS hostnames. Important: Some Linux operating

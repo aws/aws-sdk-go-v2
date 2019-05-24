@@ -54,10 +54,10 @@ type CreateNotebookInstanceInput struct {
 	// InstanceType is a required field
 	InstanceType InstanceType `type:"string" required:"true" enum:"true"`
 
-	// If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt data
-	// at rest on the ML storage volume that is attached to your notebook instance.
-	// The KMS key you provide must be enabled. For information, see Enabling and
-	// Disabling Keys (http://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html)
+	// The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon
+	// SageMaker uses to encrypt data on the storage volume attached to your notebook
+	// instance. The KMS key you provide must be enabled. For information, see Enabling
+	// and Disabling Keys (http://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html)
 	// in the AWS Key Management Service Developer Guide.
 	KmsKeyId *string `type:"string"`
 

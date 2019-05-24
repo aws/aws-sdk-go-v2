@@ -65,6 +65,8 @@ type ClientAPI interface {
 
 	AssociateContactWithAddressBookRequest(*alexaforbusiness.AssociateContactWithAddressBookInput) alexaforbusiness.AssociateContactWithAddressBookRequest
 
+	AssociateDeviceWithNetworkProfileRequest(*alexaforbusiness.AssociateDeviceWithNetworkProfileInput) alexaforbusiness.AssociateDeviceWithNetworkProfileRequest
+
 	AssociateDeviceWithRoomRequest(*alexaforbusiness.AssociateDeviceWithRoomInput) alexaforbusiness.AssociateDeviceWithRoomRequest
 
 	AssociateSkillGroupWithRoomRequest(*alexaforbusiness.AssociateSkillGroupWithRoomInput) alexaforbusiness.AssociateSkillGroupWithRoomRequest
@@ -82,6 +84,8 @@ type ClientAPI interface {
 	CreateContactRequest(*alexaforbusiness.CreateContactInput) alexaforbusiness.CreateContactRequest
 
 	CreateGatewayGroupRequest(*alexaforbusiness.CreateGatewayGroupInput) alexaforbusiness.CreateGatewayGroupRequest
+
+	CreateNetworkProfileRequest(*alexaforbusiness.CreateNetworkProfileInput) alexaforbusiness.CreateNetworkProfileRequest
 
 	CreateProfileRequest(*alexaforbusiness.CreateProfileInput) alexaforbusiness.CreateProfileRequest
 
@@ -101,7 +105,11 @@ type ClientAPI interface {
 
 	DeleteDeviceRequest(*alexaforbusiness.DeleteDeviceInput) alexaforbusiness.DeleteDeviceRequest
 
+	DeleteDeviceUsageDataRequest(*alexaforbusiness.DeleteDeviceUsageDataInput) alexaforbusiness.DeleteDeviceUsageDataRequest
+
 	DeleteGatewayGroupRequest(*alexaforbusiness.DeleteGatewayGroupInput) alexaforbusiness.DeleteGatewayGroupRequest
+
+	DeleteNetworkProfileRequest(*alexaforbusiness.DeleteNetworkProfileInput) alexaforbusiness.DeleteNetworkProfileRequest
 
 	DeleteProfileRequest(*alexaforbusiness.DeleteProfileInput) alexaforbusiness.DeleteProfileRequest
 
@@ -142,6 +150,8 @@ type ClientAPI interface {
 	GetGatewayGroupRequest(*alexaforbusiness.GetGatewayGroupInput) alexaforbusiness.GetGatewayGroupRequest
 
 	GetInvitationConfigurationRequest(*alexaforbusiness.GetInvitationConfigurationInput) alexaforbusiness.GetInvitationConfigurationRequest
+
+	GetNetworkProfileRequest(*alexaforbusiness.GetNetworkProfileInput) alexaforbusiness.GetNetworkProfileRequest
 
 	GetProfileRequest(*alexaforbusiness.GetProfileInput) alexaforbusiness.GetProfileRequest
 
@@ -193,6 +203,8 @@ type ClientAPI interface {
 
 	SearchDevicesRequest(*alexaforbusiness.SearchDevicesInput) alexaforbusiness.SearchDevicesRequest
 
+	SearchNetworkProfilesRequest(*alexaforbusiness.SearchNetworkProfilesInput) alexaforbusiness.SearchNetworkProfilesRequest
+
 	SearchProfilesRequest(*alexaforbusiness.SearchProfilesInput) alexaforbusiness.SearchProfilesRequest
 
 	SearchRoomsRequest(*alexaforbusiness.SearchRoomsInput) alexaforbusiness.SearchRoomsRequest
@@ -200,6 +212,8 @@ type ClientAPI interface {
 	SearchSkillGroupsRequest(*alexaforbusiness.SearchSkillGroupsInput) alexaforbusiness.SearchSkillGroupsRequest
 
 	SearchUsersRequest(*alexaforbusiness.SearchUsersInput) alexaforbusiness.SearchUsersRequest
+
+	SendAnnouncementRequest(*alexaforbusiness.SendAnnouncementInput) alexaforbusiness.SendAnnouncementRequest
 
 	SendInvitationRequest(*alexaforbusiness.SendInvitationInput) alexaforbusiness.SendInvitationRequest
 
@@ -224,6 +238,8 @@ type ClientAPI interface {
 	UpdateGatewayRequest(*alexaforbusiness.UpdateGatewayInput) alexaforbusiness.UpdateGatewayRequest
 
 	UpdateGatewayGroupRequest(*alexaforbusiness.UpdateGatewayGroupInput) alexaforbusiness.UpdateGatewayGroupRequest
+
+	UpdateNetworkProfileRequest(*alexaforbusiness.UpdateNetworkProfileInput) alexaforbusiness.UpdateNetworkProfileRequest
 
 	UpdateProfileRequest(*alexaforbusiness.UpdateProfileInput) alexaforbusiness.UpdateProfileRequest
 

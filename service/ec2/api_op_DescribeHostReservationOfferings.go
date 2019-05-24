@@ -13,7 +13,7 @@ import (
 type DescribeHostReservationOfferingsInput struct {
 	_ struct{} `type:"structure"`
 
-	// One or more filters.
+	// The filters.
 	//
 	//    * instance-family - The instance family of the offering (for example,
 	//    m4).

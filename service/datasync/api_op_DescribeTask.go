@@ -46,9 +46,10 @@ type DescribeTaskOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was
-	// used to monitor and log events in the task. For more information on these
-	// groups, see Working with Log Groups and Log Streams (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html)
-	// in the Amazon CloudWatch User Guide.
+	// used to monitor and log events in the task.
+	//
+	// For more information on these groups, see "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html"
+	// (Working with Log Groups and Log Streams) in the Amazon CloudWatch UserGuide.
 	CloudWatchLogGroupArn *string `type:"string"`
 
 	// The time that the task was created.
@@ -68,6 +69,11 @@ type DescribeTaskOutput struct {
 	// You can use this information to help troubleshoot issues.
 	ErrorDetail *string `type:"string"`
 
+	// Specifies that the task excludes files in the transfer based on the specified
+	// pattern in the filter. Transfers all files in the task’s subdirectory,
+	// except files that match the filter that is set.
+	Excludes []FilterRule `type:"list"`
+
 	// The name of the task that was described.
 	Name *string `min:"1" type:"string"`
 
@@ -83,8 +89,10 @@ type DescribeTaskOutput struct {
 	// The Amazon Resource Name (ARN) of the source file system's location.
 	SourceLocationArn *string `type:"string"`
 
-	// The status of the task that was described. For detailed information about
-	// sync statuses, see Understanding Sync Task Statuses (https://docs.aws.amazon.com/sync-service/latest/userguide/understand-sync-task-statuses.html).
+	// The status of the task that was described.
+	//
+	// For detailed information about task execution statuses, see "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-tasks.html#understand-task-creation-statuses"
+	// (Understanding Task Statuses).
 	Status TaskStatus `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the task that was described.

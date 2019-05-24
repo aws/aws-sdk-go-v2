@@ -31,7 +31,7 @@ type CreateVpcEndpointInput struct {
 
 	// (Interface endpoint) Indicate whether to associate a private hosted zone
 	// with the specified VPC. The private hosted zone contains a record set for
-	// the default public DNS name for the service for the region (for example,
+	// the default public DNS name for the service for the Region (for example,
 	// kinesis.us-east-1.amazonaws.com) which resolves to the private IP addresses
 	// of the endpoint network interfaces in the VPC. This enables you to make requests
 	// to the default public DNS name for the service instead of the public DNS
@@ -41,7 +41,7 @@ type CreateVpcEndpointInput struct {
 	// true: enableDnsHostnames and enableDnsSupport. Use ModifyVpcAttribute to
 	// set the VPC attributes.
 	//
-	// Default: false
+	// Default: true
 	PrivateDnsEnabled *bool `type:"boolean"`
 
 	// (Gateway endpoint) One or more route table IDs.

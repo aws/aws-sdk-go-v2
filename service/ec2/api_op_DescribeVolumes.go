@@ -38,7 +38,7 @@ type DescribeVolumesInput struct {
 	//
 	//    * create-time - The time stamp when the volume was created.
 	//
-	//    * encrypted - The encryption status of the volume.
+	//    * encrypted - Indicates whether the volume is encrypted (true | false)
 	//
 	//    * size - The size of the volume, in GiB.
 	//

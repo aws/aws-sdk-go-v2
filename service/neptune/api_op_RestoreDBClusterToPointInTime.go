@@ -27,6 +27,13 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// DBClusterIdentifier is a required field
 	DBClusterIdentifier *string `type:"string" required:"true"`
 
+	// The name of the DB cluster parameter group to associate with the new DB cluster.
+	//
+	// Constraints:
+	//
+	//    * If supplied, must match the name of an existing DBClusterParameterGroup.
+	DBClusterParameterGroupName *string `type:"string"`
+
 	// The DB subnet group name to use for the new DB cluster.
 	//
 	// Constraints: If supplied, must match the name of an existing DBSubnetGroup.
@@ -93,20 +100,8 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// Example: 2015-03-07T23:45:00Z
 	RestoreToTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
-	// The type of restore to be performed. You can specify one of the following
-	// values:
-	//
-	//    * full-copy - The new DB cluster is restored as a full copy of the source
-	//    DB cluster.
-	//
-	//    * copy-on-write - The new DB cluster is restored as a clone of the source
-	//    DB cluster.
-	//
-	// Constraints: You can't specify copy-on-write if the engine version of the
-	// source DB cluster is earlier than 1.11.
-	//
-	// If you don't specify a RestoreType value, then the new DB cluster is restored
-	// as a full copy of the source DB cluster.
+	// The type of restore to be performed. The only type of restore currently supported
+	// is full-copy (the default).
 	RestoreType *string `type:"string"`
 
 	// The identifier of the source DB cluster from which to restore.
@@ -118,8 +113,7 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// SourceDBClusterIdentifier is a required field
 	SourceDBClusterIdentifier *string `type:"string" required:"true"`
 
-	// A list of tags. For more information, see Tagging Amazon Neptune Resources
-	// (http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html).
+	// The tags to be applied to the restored DB cluster.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// A value that is set to true to restore the DB cluster to the latest restorable

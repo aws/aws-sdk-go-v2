@@ -16,7 +16,8 @@ type SimulateCustomPolicyInput struct {
 
 	// A list of names of API operations to evaluate in the simulation. Each operation
 	// is evaluated against each resource. Each operation must include the service
-	// identifier, such as iam:CreateUser.
+	// identifier, such as iam:CreateUser. This operation does not support using
+	// wildcards (*) in an action name.
 	//
 	// ActionNames is a required field
 	ActionNames []string `type:"list" required:"true"`
@@ -31,7 +32,7 @@ type SimulateCustomPolicyInput struct {
 	CallerArn *string `min:"1" type:"string"`
 
 	// A list of context keys and corresponding values for the simulation to use.
-	// Whenever a context key is evaluated in one of the simulated IAM permission
+	// Whenever a context key is evaluated in one of the simulated IAM permissions
 	// policies, the corresponding value is supplied.
 	ContextEntries []ContextEntry `type:"list"`
 
@@ -127,14 +128,14 @@ type SimulateCustomPolicyInput struct {
 	ResourceHandlingOption *string `min:"1" type:"string"`
 
 	// An ARN representing the AWS account ID that specifies the owner of any simulated
-	// resource that does not identify its owner in the resource ARN, such as an
-	// S3 bucket or object. If ResourceOwner is specified, it is also used as the
-	// account owner of any ResourcePolicy included in the simulation. If the ResourceOwner
-	// parameter is not specified, then the owner of the resources and the resource
-	// policy defaults to the account of the identity provided in CallerArn. This
-	// parameter is required only if you specify a resource-based policy and account
-	// that owns the resource is different from the account that owns the simulated
-	// calling user CallerArn.
+	// resource that does not identify its owner in the resource ARN. Examples of
+	// resource ARNs include an S3 bucket or object. If ResourceOwner is specified,
+	// it is also used as the account owner of any ResourcePolicy included in the
+	// simulation. If the ResourceOwner parameter is not specified, then the owner
+	// of the resources and the resource policy defaults to the account of the identity
+	// provided in CallerArn. This parameter is required only if you specify a resource-based
+	// policy and account that owns the resource is different from the account that
+	// owns the simulated calling user CallerArn.
 	//
 	// The ARN for an account uses the following syntax: arn:aws:iam::AWS-account-ID:root.
 	// For example, to represent the account with the 112233445566 ID, use the following
@@ -226,7 +227,7 @@ type SimulateCustomPolicyOutput struct {
 
 	// When IsTruncated is true, this element is present and contains the value
 	// to use for the Marker parameter in a subsequent pagination request.
-	Marker *string `min:"1" type:"string"`
+	Marker *string `type:"string"`
 }
 
 // String returns the string representation

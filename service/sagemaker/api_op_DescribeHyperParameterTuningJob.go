@@ -101,9 +101,7 @@ type DescribeHyperParameterTuningJobOutput struct {
 
 	// The HyperParameterTrainingJobDefinition object that specifies the definition
 	// of the training jobs that this tuning job launches.
-	//
-	// TrainingJobDefinition is a required field
-	TrainingJobDefinition *HyperParameterTrainingJobDefinition `type:"structure" required:"true"`
+	TrainingJobDefinition *HyperParameterTrainingJobDefinition `type:"structure"`
 
 	// The TrainingJobStatusCounters object that specifies the number of training
 	// jobs, categorized by status, that this tuning job launched.

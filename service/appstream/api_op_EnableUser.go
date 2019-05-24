@@ -20,6 +20,11 @@ type EnableUserInput struct {
 
 	// The email address of the user.
 	//
+	// Users' email addresses are case-sensitive. During login, if they specify
+	// an email address that doesn't use the same capitalization as the email address
+	// specified when their user pool account was created, a "user does not exist"
+	// error message displays.
+	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
 }

@@ -100,9 +100,9 @@ const opSetPlatformApplicationAttributes = "SetPlatformApplicationAttributes"
 //
 // Sets the attributes of the platform application object for the supported
 // push notification services, such as APNS and GCM. For more information, see
-// Using Amazon SNS Mobile Push Notifications (http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
+// Using Amazon SNS Mobile Push Notifications (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 // For information on configuring attributes for message delivery status, see
-// Using Amazon SNS Application Attributes for Message Delivery Status (http://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html).
+// Using Amazon SNS Application Attributes for Message Delivery Status (https://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html).
 //
 //    // Example sending a request using SetPlatformApplicationAttributesRequest.
 //    req := client.SetPlatformApplicationAttributesRequest(params)

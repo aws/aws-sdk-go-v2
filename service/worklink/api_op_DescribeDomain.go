@@ -78,11 +78,17 @@ func (s DescribeDomainInput) MarshalFields(e protocol.FieldEncoder) error {
 type DescribeDomainOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The ARN of an issued ACM certificate that is valid for the domain being associated.
+	AcmCertificateArn *string `type:"string"`
+
 	// The time that the domain was added.
 	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The name to display.
 	DisplayName *string `type:"string"`
+
+	// The name of the domain.
+	DomainName *string `min:"1" type:"string"`
 
 	// The current state for the domain.
 	DomainStatus DomainStatus `type:"string" enum:"true"`
@@ -95,6 +101,12 @@ func (s DescribeDomainOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeDomainOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AcmCertificateArn != nil {
+		v := *s.AcmCertificateArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AcmCertificateArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.CreatedTime != nil {
 		v := *s.CreatedTime
 
@@ -106,6 +118,12 @@ func (s DescribeDomainOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "DisplayName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.DomainStatus) > 0 {
 		v := s.DomainStatus

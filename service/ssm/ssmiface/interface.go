@@ -165,6 +165,8 @@ type ClientAPI interface {
 
 	DescribePatchGroupsRequest(*ssm.DescribePatchGroupsInput) ssm.DescribePatchGroupsRequest
 
+	DescribePatchPropertiesRequest(*ssm.DescribePatchPropertiesInput) ssm.DescribePatchPropertiesRequest
+
 	DescribeSessionsRequest(*ssm.DescribeSessionsInput) ssm.DescribeSessionsRequest
 
 	GetAutomationExecutionRequest(*ssm.GetAutomationExecutionInput) ssm.GetAutomationExecutionRequest

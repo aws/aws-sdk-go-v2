@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS S3 Control.
 //    func myFunc(svc s3controliface.ClientAPI) bool {
-//        // Make svc.DeletePublicAccessBlock request
+//        // Make svc.CreateJob request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        s3controliface.ClientPI
 //    }
-//    func (m *mockClientClient) DeletePublicAccessBlock(input *s3control.DeletePublicAccessBlockInput) (*s3control.DeletePublicAccessBlockOutput, error) {
+//    func (m *mockClientClient) CreateJob(input *s3control.CreateJobInput) (*s3control.CreateJobOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,11 +61,21 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	CreateJobRequest(*s3control.CreateJobInput) s3control.CreateJobRequest
+
 	DeletePublicAccessBlockRequest(*s3control.DeletePublicAccessBlockInput) s3control.DeletePublicAccessBlockRequest
+
+	DescribeJobRequest(*s3control.DescribeJobInput) s3control.DescribeJobRequest
 
 	GetPublicAccessBlockRequest(*s3control.GetPublicAccessBlockInput) s3control.GetPublicAccessBlockRequest
 
+	ListJobsRequest(*s3control.ListJobsInput) s3control.ListJobsRequest
+
 	PutPublicAccessBlockRequest(*s3control.PutPublicAccessBlockInput) s3control.PutPublicAccessBlockRequest
+
+	UpdateJobPriorityRequest(*s3control.UpdateJobPriorityInput) s3control.UpdateJobPriorityRequest
+
+	UpdateJobStatusRequest(*s3control.UpdateJobStatusInput) s3control.UpdateJobStatusRequest
 }
 
 var _ ClientAPI = (*s3control.Client)(nil)

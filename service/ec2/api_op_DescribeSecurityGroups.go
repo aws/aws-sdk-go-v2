@@ -116,7 +116,7 @@ type DescribeSecurityGroupsInput struct {
 	// remaining results, make another request with the returned NextToken value.
 	// This value can be between 5 and 1000. If this parameter is not specified,
 	// then all results are returned.
-	MaxResults *int64 `type:"integer"`
+	MaxResults *int64 `min:"5" type:"integer"`
 
 	// The token to request the next page of results.
 	NextToken *string `type:"string"`
@@ -125,6 +125,19 @@ type DescribeSecurityGroupsInput struct {
 // String returns the string representation
 func (s DescribeSecurityGroupsInput) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeSecurityGroupsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeSecurityGroupsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 5 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupsResult

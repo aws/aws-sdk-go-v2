@@ -28,7 +28,7 @@ type CreateDBInstanceInput struct {
 	// Default: true
 	AutoMinorVersionUpgrade *bool `type:"boolean"`
 
-	// The EC2 Availability Zone that the DB instance is created in.
+	// The EC2 Availability Zone that the DB instance is created in
 	//
 	// Default: A random, system-chosen Availability Zone in the endpoint's AWS
 	// Region.
@@ -92,9 +92,7 @@ type CreateDBInstanceInput struct {
 	// DBInstanceIdentifier is a required field
 	DBInstanceIdentifier *string `type:"string" required:"true"`
 
-	// The database name.
-	//
-	// Type: String
+	// Not supported.
 	DBName *string `type:"string"`
 
 	// The name of the DB parameter group to associate with this DB instance. If
@@ -255,7 +253,7 @@ type CreateDBInstanceInput struct {
 	// Valid Values: 0 - 15
 	PromotionTier *int64 `type:"integer"`
 
-	// This parameter is not supported.
+	// This flag should no longer be used.
 	PubliclyAccessible *bool `deprecated:"true" type:"boolean"`
 
 	// Specifies whether the DB instance is encrypted.
@@ -271,8 +269,7 @@ type CreateDBInstanceInput struct {
 	// Not applicable. Storage is managed by the DB Cluster.
 	StorageType *string `type:"string"`
 
-	// A list of tags. For more information, see Tagging Amazon Neptune Resources
-	// (http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html).
+	// The tags to assign to the new instance.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// The ARN from the key store with which to associate the instance for TDE encryption.

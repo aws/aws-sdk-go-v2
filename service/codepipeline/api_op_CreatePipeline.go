@@ -4,6 +4,7 @@ package codepipeline
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -18,6 +19,9 @@ type CreatePipelineInput struct {
 	//
 	// Pipeline is a required field
 	Pipeline *PipelineDeclaration `locationName:"pipeline" type:"structure" required:"true"`
+
+	// The tags for the pipeline.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -37,6 +41,13 @@ func (s *CreatePipelineInput) Validate() error {
 			invalidParams.AddNested("Pipeline", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -51,6 +62,9 @@ type CreatePipelineOutput struct {
 
 	// Represents the structure of actions and stages to be performed in the pipeline.
 	Pipeline *PipelineDeclaration `locationName:"pipeline" type:"structure"`
+
+	// Specifies the tags applied to the pipeline.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation

@@ -23,8 +23,8 @@ type CreateDirectoryConfigInput struct {
 	// OrganizationalUnitDistinguishedNames is a required field
 	OrganizationalUnitDistinguishedNames []string `type:"list" required:"true"`
 
-	// The credentials for the service account used by the streaming instance to
-	// connect to the directory.
+	// The credentials for the service account used by the fleet or image builder
+	// to connect to the directory.
 	//
 	// ServiceAccountCredentials is a required field
 	ServiceAccountCredentials *ServiceAccountCredentials `type:"structure" required:"true"`
@@ -81,8 +81,8 @@ const opCreateDirectoryConfig = "CreateDirectoryConfig"
 // Amazon AppStream.
 //
 // Creates a Directory Config object in AppStream 2.0. This object includes
-// the information required to join streaming instances to an Active Directory
-// domain.
+// the configuration information required to join fleets and image builders
+// to Microsoft Active Directory domains.
 //
 //    // Example sending a request using CreateDirectoryConfigRequest.
 //    req := client.CreateDirectoryConfigRequest(params)

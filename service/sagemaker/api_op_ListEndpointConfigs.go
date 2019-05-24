@@ -14,8 +14,8 @@ import (
 type ListEndpointConfigsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A filter that returns only endpoint configurations created after the specified
-	// time (timestamp).
+	// A filter that returns only endpoint configurations with a creation time greater
+	// than or equal to the specified time (timestamp).
 	CreationTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// A filter that returns only endpoint configurations created before the specified

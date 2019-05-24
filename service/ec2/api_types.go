@@ -231,7 +231,7 @@ type AvailabilityZone struct {
 	// Any messages about the Availability Zone.
 	Messages []AvailabilityZoneMessage `locationName:"messageSet" locationNameList:"item" type:"list"`
 
-	// The name of the region.
+	// The name of the Region.
 	RegionName *string `locationName:"regionName" type:"string"`
 
 	// The state of the Availability Zone.
@@ -1629,15 +1629,21 @@ type EbsBlockDevice struct {
 	// Indicates whether the EBS volume is deleted on instance termination.
 	DeleteOnTermination *bool `locationName:"deleteOnTermination" type:"boolean"`
 
-	// Indicates whether the EBS volume is encrypted. Encrypted volumes can only
-	// be attached to instances that support Amazon EBS encryption.
+	// Indicates whether the encryption state of an EBS volume is changed while
+	// being restored from a backing snapshot. The default effect of setting the
+	// Encrypted parameter to true through the console, API, or CLI depends on the
+	// volume's origin (new or from a snapshot), starting encryption state, ownership,
+	// and whether account-level encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/account-level-encryption.html)
+	// is enabled. Each default case can be overridden by specifying a customer
+	// master key (CMK) with the KmsKeyId parameter in addition to setting Encrypted
+	// to true. For a complete list of possible encryption cases, see Amazon EBS
+	// Encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-parameters)
+	// in the Amazon Elastic Compute Cloud User Guide.
 	//
-	// If you are creating a volume from a snapshot, you cannot specify an encryption
-	// value. This is because only blank volumes can be encrypted on creation. If
-	// you are creating a snapshot from an existing EBS volume, you cannot specify
-	// an encryption value that differs from that of the EBS volume. We recommend
-	// that you omit the encryption value from the block device mappings when creating
-	// an image from an instance.
+	// In no case can you remove encryption from an encrypted volume.
+	//
+	// Encrypted volumes can only be attached to instances that support Amazon EBS
+	// encryption. For more information, see Supported Instance Types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances).
 	Encrypted *bool `locationName:"encrypted" type:"boolean"`
 
 	// The number of I/O operations per second (IOPS) that the volume supports.
@@ -1648,9 +1654,11 @@ type EbsBlockDevice struct {
 	// in the Amazon Elastic Compute Cloud User Guide.
 	//
 	// Constraints: Range is 100-16,000 IOPS for gp2 volumes and 100 to 64,000IOPS
-	// for io1 volumes, in most Regions. The maximum IOPS for io1 of 64,000 is guaranteed
+	// for io1 volumes in most Regions. Maximum io1 IOPS of 64,000 is guaranteed
 	// only on Nitro-based instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
-	// Other instance families guarantee performance up to 32,000 IOPS.
+	// Other instance families guarantee performance up to 32,000 IOPS. For more
+	// information, see Amazon EBS Volume Types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)
+	// in the Amazon Elastic Compute Cloud User Guide.
 	//
 	// Condition: This parameter is required for requests to create io1 volumes;
 	// it is not used in requests to create gp2, st1, sc1, or standard volumes.
@@ -1670,17 +1678,17 @@ type EbsBlockDevice struct {
 
 	// The size of the volume, in GiB.
 	//
+	// Default: If you're creating the volume from a snapshot and don't specify
+	// a volume size, the default is the snapshot size.
+	//
 	// Constraints: 1-16384 for General Purpose SSD (gp2), 4-16384 for Provisioned
 	// IOPS SSD (io1), 500-16384 for Throughput Optimized HDD (st1), 500-16384 for
 	// Cold HDD (sc1), and 1-1024 for Magnetic (standard) volumes. If you specify
 	// a snapshot, the volume size must be equal to or larger than the snapshot
 	// size.
-	//
-	// Default: If you're creating the volume from a snapshot and don't specify
-	// a volume size, the default is the snapshot size.
 	VolumeSize *int64 `locationName:"volumeSize" type:"integer"`
 
-	// The volume type: gp2, io1, st1, sc1, or standard.
+	// The volume type. If you set the type to io1, you must also set the Iops property.
 	//
 	// Default: standard
 	VolumeType VolumeType `locationName:"volumeType" type:"string" enum:"true"`
@@ -1915,7 +1923,7 @@ func (s ElasticInferenceAcceleratorAssociation) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes a Spot Fleet event.
+// Describes an EC2 Fleet or Spot Fleet event.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EventInformation
 type EventInformation struct {
 	_ struct{} `type:"structure"`
@@ -1927,8 +1935,8 @@ type EventInformation struct {
 	//
 	// The following are the error events:
 	//
-	//    * iamFleetRoleInvalid - The Spot Fleet did not have the required permissions
-	//    either to launch or terminate an instance.
+	//    * iamFleetRoleInvalid - The EC2 Fleet or Spot Fleet did not have the required
+	//    permissions either to launch or terminate an instance.
 	//
 	//    * spotFleetRequestConfigurationInvalid - The configuration is not valid.
 	//    For more information, see the description of the event.
@@ -1938,33 +1946,35 @@ type EventInformation struct {
 	//
 	// The following are the fleetRequestChange events:
 	//
-	//    * active - The Spot Fleet has been validated and Amazon EC2 is attempting
-	//    to maintain the target number of running Spot Instances.
+	//    * active - The EC2 Fleet or Spot Fleet request has been validated and
+	//    Amazon EC2 is attempting to maintain the target number of running Spot
+	//    Instances.
 	//
-	//    * cancelled - The Spot Fleet is canceled and has no running Spot Instances.
-	//    The Spot Fleet will be deleted two days after its instances were terminated.
+	//    * cancelled - The EC2 Fleet or Spot Fleet request is canceled and has
+	//    no running Spot Instances. The EC2 Fleet or Spot Fleet will be deleted
+	//    two days after its instances were terminated.
 	//
-	//    * cancelled_running - The Spot Fleet is canceled and does not launch additional
-	//    Spot Instances. Existing Spot Instances continue to run until they are
-	//    interrupted or terminated.
+	//    * cancelled_running - The EC2 Fleet or Spot Fleet request is canceled
+	//    and does not launch additional Spot Instances. Existing Spot Instances
+	//    continue to run until they are interrupted or terminated.
 	//
-	//    * cancelled_terminating - The Spot Fleet is canceled and its Spot Instances
-	//    are terminating.
+	//    * cancelled_terminating - The EC2 Fleet or Spot Fleet request is canceled
+	//    and its Spot Instances are terminating.
 	//
-	//    * expired - The Spot Fleet request has expired. A subsequent event indicates
-	//    that the instances were terminated, if the request was created with TerminateInstancesWithExpiration
-	//    set.
+	//    * expired - The EC2 Fleet or Spot Fleet request has expired. A subsequent
+	//    event indicates that the instances were terminated, if the request was
+	//    created with TerminateInstancesWithExpiration set.
 	//
-	//    * modify_in_progress - A request to modify the Spot Fleet request was
-	//    accepted and is in progress.
+	//    * modify_in_progress - A request to modify the EC2 Fleet or Spot Fleet
+	//    request was accepted and is in progress.
 	//
-	//    * modify_successful - The Spot Fleet request was modified.
+	//    * modify_successful - The EC2 Fleet or Spot Fleet request was modified.
 	//
 	//    * price_update - The price for a launch configuration was adjusted because
 	//    it was too high. This change is permanent.
 	//
-	//    * submitted - The Spot Fleet request is being evaluated and Amazon EC2
-	//    is preparing to launch the target number of Spot Instances.
+	//    * submitted - The EC2 Fleet or Spot Fleet request is being evaluated and
+	//    Amazon EC2 is preparing to launch the target number of Spot Instances.
 	//
 	// The following are the instanceChange events:
 	//
@@ -2532,13 +2542,13 @@ type FpgaImageAttribute struct {
 	// The ID of the AFI.
 	FpgaImageId *string `locationName:"fpgaImageId" type:"string"`
 
-	// One or more load permissions.
+	// The load permissions.
 	LoadPermissions []LoadPermission `locationName:"loadPermissions" locationNameList:"item" type:"list"`
 
 	// The name of the AFI.
 	Name *string `locationName:"name" type:"string"`
 
-	// One or more product codes.
+	// The product codes.
 	ProductCodes []ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
 }
 
@@ -3146,10 +3156,10 @@ type ImportInstanceLaunchSpecification struct {
 	// The architecture of the instance.
 	Architecture ArchitectureValues `locationName:"architecture" type:"string" enum:"true"`
 
-	// One or more security group IDs.
+	// The security group IDs.
 	GroupIds []string `locationName:"GroupId" locationNameList:"SecurityGroupId" type:"list"`
 
-	// One or more security group names.
+	// The security group names.
 	GroupNames []string `locationName:"GroupName" locationNameList:"SecurityGroup" type:"list"`
 
 	// Indicates whether an instance stops or terminates when you initiate shutdown
@@ -3196,7 +3206,7 @@ type ImportInstanceTaskDetails struct {
 	// The instance operating system.
 	Platform PlatformValues `locationName:"platform" type:"string" enum:"true"`
 
-	// One or more volumes.
+	// The volumes.
 	Volumes []ImportInstanceVolumeDetailItem `locationName:"volumes" locationNameList:"item" type:"list"`
 }
 
@@ -3663,6 +3673,11 @@ type InstanceNetworkInterface struct {
 	// One or more security groups.
 	Groups []GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
 
+	// Describes the type of network interface.
+	//
+	// Valid values: interface | efa
+	InterfaceType *string `locationName:"interfaceType" type:"string"`
+
 	// One or more IPv6 addresses associated with the network interface.
 	Ipv6Addresses []InstanceIpv6Address `locationName:"ipv6AddressesSet" locationNameList:"item" type:"list"`
 
@@ -3769,14 +3784,25 @@ type InstanceNetworkInterfaceSpecification struct {
 	// interface when launching an instance.
 	Description *string `locationName:"description" type:"string"`
 
-	// The index of the device on the instance for the network interface attachment.
-	// If you are specifying a network interface in a RunInstances request, you
-	// must provide the device index.
+	// The position of the network interface in the attachment order. A primary
+	// network interface has a device index of 0.
+	//
+	// If you specify a network interface when launching an instance, you must specify
+	// the device index.
 	DeviceIndex *int64 `locationName:"deviceIndex" type:"integer"`
 
 	// The IDs of the security groups for the network interface. Applies only if
 	// creating a network interface when launching an instance.
 	Groups []string `locationName:"SecurityGroupId" locationNameList:"SecurityGroupId" type:"list"`
+
+	// The type of network interface. To create an Elastic Fabric Adapter (EFA),
+	// specify efa. For more information, see Elastic Fabric Adapter (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html)
+	// in the Amazon Elastic Compute Cloud User Guide.
+	//
+	// If you are not creating an EFA, specify interface or omit this parameter.
+	//
+	// Valide values: interface | efa
+	InterfaceType *string `type:"string"`
 
 	// A number of IPv6 addresses to assign to the network interface. Amazon EC2
 	// chooses the IPv6 addresses from the range of the subnet. You cannot specify
@@ -3796,19 +3822,22 @@ type InstanceNetworkInterfaceSpecification struct {
 
 	// The private IPv4 address of the network interface. Applies only if creating
 	// a network interface when launching an instance. You cannot specify this option
-	// if you're launching more than one instance in a RunInstances request.
+	// if you're launching more than one instance in a RunInstances (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html)
+	// request.
 	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 
 	// One or more private IPv4 addresses to assign to the network interface. Only
 	// one private IPv4 address can be designated as primary. You cannot specify
 	// this option if you're launching more than one instance in a RunInstances
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html)
 	// request.
 	PrivateIpAddresses []PrivateIpAddressSpecification `locationName:"privateIpAddressesSet" queryName:"PrivateIpAddresses" locationNameList:"item" type:"list"`
 
 	// The number of secondary private IPv4 addresses. You can't specify this option
 	// and specify more than one private IP address using the private IP addresses
 	// option. You cannot specify this option if you're launching more than one
-	// instance in a RunInstances request.
+	// instance in a RunInstances (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html)
+	// request.
 	SecondaryPrivateIpAddressCount *int64 `locationName:"secondaryPrivateIpAddressCount" type:"integer"`
 
 	// The ID of the subnet associated with the network string. Applies only if
@@ -4063,30 +4092,31 @@ type IpPermission struct {
 	// all ICMP/ICMPv6 types, you must specify all codes.
 	FromPort *int64 `locationName:"fromPort" type:"integer"`
 
-	// The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).
+	// The IP protocol name (tcp, udp, icmp, icmpv6) or number (see Protocol Numbers
+	// (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).
 	//
-	// [EC2-VPC only] Use -1 to specify all protocols. When authorizing security
-	// group rules, specifying -1 or a protocol number other than tcp, udp, icmp,
-	// or 58 (ICMPv6) allows traffic on all ports, regardless of any port range
-	// you specify. For tcp, udp, and icmp, you must specify a port range. For 58
-	// (ICMPv6), you can optionally specify a port range; if you don't, traffic
-	// for all types and codes is allowed when authorizing rules.
+	// [VPC only] Use -1 to specify all protocols. When authorizing security group
+	// rules, specifying -1 or a protocol number other than tcp, udp, icmp, or icmpv6
+	// allows traffic on all ports, regardless of any port range you specify. For
+	// tcp, udp, and icmp, you must specify a port range. For icmpv6, the port range
+	// is optional; if you omit the port range, traffic for all types and codes
+	// is allowed.
 	IpProtocol *string `locationName:"ipProtocol" type:"string"`
 
 	// The IPv4 ranges.
 	IpRanges []IpRange `locationName:"ipRanges" locationNameList:"item" type:"list"`
 
-	// [EC2-VPC only] The IPv6 ranges.
+	// [VPC only] The IPv6 ranges.
 	Ipv6Ranges []Ipv6Range `locationName:"ipv6Ranges" locationNameList:"item" type:"list"`
 
-	// [EC2-VPC only] The prefix list IDs for an AWS service. With AuthorizeSecurityGroupEgress,
-	// this is the AWS service that you want to access through a VPC endpoint from
-	// instances associated with the security group.
+	// [VPC only] The prefix list IDs for an AWS service. With outbound rules, this
+	// is the AWS service to access through a VPC endpoint from instances associated
+	// with the security group.
 	PrefixListIds []PrefixListId `locationName:"prefixListIds" locationNameList:"item" type:"list"`
 
 	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.
-	// A value of -1 indicates all ICMP/ICMPv6 codes for the specified ICMP type.
-	// If you specify all ICMP/ICMPv6 types, you must specify all codes.
+	// A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
+	// types, you must specify all codes.
 	ToPort *int64 `locationName:"toPort" type:"integer"`
 
 	// The security group and AWS account ID pairs.
@@ -4552,8 +4582,8 @@ type LaunchTemplateEbsBlockDeviceRequest struct {
 	// volume. For gp2, this represents the baseline performance of the volume and
 	// the rate at which the volume accumulates I/O credits for bursting. For more
 	// information about General Purpose SSD baseline performance, I/O credits,
-	// and bursting, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud
-	// User Guide.
+	// and bursting, see Amazon EBS Volume Types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)
+	// in the Amazon Elastic Compute Cloud User Guide.
 	//
 	// Condition: This parameter is required for requests to create io1 volumes;
 	// it is not used in requests to create gp2, st1, sc1, or standard volumes.
@@ -4748,6 +4778,9 @@ type LaunchTemplateInstanceNetworkInterfaceSpecification struct {
 	// The IDs of one or more security groups.
 	Groups []string `locationName:"groupSet" locationNameList:"groupId" type:"list"`
 
+	// The type of network interface.
+	InterfaceType *string `locationName:"interfaceType" type:"string"`
+
 	// The number of IPv6 addresses for the network interface.
 	Ipv6AddressCount *int64 `locationName:"ipv6AddressCount" type:"integer"`
 
@@ -4794,6 +4827,9 @@ type LaunchTemplateInstanceNetworkInterfaceSpecificationRequest struct {
 
 	// The IDs of one or more security groups.
 	Groups []string `locationName:"SecurityGroupId" locationNameList:"SecurityGroupId" type:"list"`
+
+	// The type of networking interface.
+	InterfaceType *string `type:"string"`
 
 	// The number of IPv6 addresses to assign to a network interface. Amazon EC2
 	// automatically selects the IPv6 addresses from the subnet range. You can't
@@ -5057,7 +5093,7 @@ type LaunchTemplateTagSpecificationRequest struct {
 
 	// The type of resource to tag. Currently, the resource types that support tagging
 	// on creation are instance and volume. To tag a resource after it has been
-	// created, see CreateTags.
+	// created, see CreateTags (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
 	ResourceType ResourceType `type:"string" enum:"true"`
 
 	// The tags to apply to the resource.
@@ -5519,7 +5555,7 @@ type NetworkInterface struct {
 	// Any security groups for the network interface.
 	Groups []GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
 
-	// The type of interface.
+	// The type of network interface.
 	InterfaceType NetworkInterfaceType `locationName:"interfaceType" type:"string" enum:"true"`
 
 	// The IPv6 addresses associated with the network interface.
@@ -5887,6 +5923,9 @@ type Placement struct {
 	Affinity *string `locationName:"affinity" type:"string"`
 
 	// The Availability Zone of the instance.
+	//
+	// If not specified, an Availability Zone will be automatically chosen for you
+	// based on the load balancing criteria for the Region.
 	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
 
 	// The name of the placement group the instance is in.
@@ -6328,15 +6367,15 @@ func (s RecurringCharge) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes a region.
+// Describes a Region.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Region
 type Region struct {
 	_ struct{} `type:"structure"`
 
-	// The region service endpoint.
+	// The Region service endpoint.
 	Endpoint *string `locationName:"regionEndpoint" type:"string"`
 
-	// The name of the region.
+	// The name of the Region.
 	RegionName *string `locationName:"regionName" type:"string"`
 }
 
@@ -6374,8 +6413,11 @@ type RequestLaunchTemplateData struct {
 	// only.
 	CreditSpecification *CreditSpecificationRequest `type:"structure"`
 
-	// If set to true, you can't terminate the instance using the Amazon EC2 console,
-	// CLI, or API. To change this attribute to false after launch, use ModifyInstanceAttribute.
+	// If you set this parameter to true, you can't terminate the instance using
+	// the Amazon EC2 console, CLI, or API; otherwise, you can. To change this attribute
+	// after launch, use ModifyInstanceAttribute (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html).
+	// Alternatively, if you set InstanceInitiatedShutdownBehavior to terminate,
+	// you can terminate the instance by running the shutdown command from the instance.
 	DisableApiTermination *bool `type:"boolean"`
 
 	// Indicates whether the instance is optimized for Amazon EBS I/O. This optimization
@@ -6401,7 +6443,7 @@ type RequestLaunchTemplateData struct {
 	// The IAM instance profile.
 	IamInstanceProfile *LaunchTemplateIamInstanceProfileSpecificationRequest `type:"structure"`
 
-	// The ID of the AMI, which you can get by using DescribeImages.
+	// The ID of the AMI.
 	ImageId *string `type:"string"`
 
 	// Indicates whether an instance stops or terminates when you initiate shutdown
@@ -6424,8 +6466,8 @@ type RequestLaunchTemplateData struct {
 	// in the Amazon Elastic Compute Cloud User Guide.
 	KernelId *string `type:"string"`
 
-	// The name of the key pair. You can create a key pair using CreateKeyPair or
-	// ImportKeyPair.
+	// The name of the key pair. You can create a key pair using CreateKeyPair (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html)
+	// or ImportKeyPair (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html).
 	//
 	// If you do not specify a key pair, you can't connect to the instance unless
 	// you choose an AMI that is configured to allow users another way to log in.
@@ -6437,7 +6479,8 @@ type RequestLaunchTemplateData struct {
 	// The monitoring for the instance.
 	Monitoring *LaunchTemplatesMonitoringRequest `type:"structure"`
 
-	// One or more network interfaces.
+	// One or more network interfaces. If you specify a network interface, you must
+	// specify any security groups as part of the network interface.
 	NetworkInterfaces []LaunchTemplateInstanceNetworkInterfaceSpecificationRequest `locationName:"NetworkInterface" locationNameList:"InstanceNetworkInterfaceSpecification" type:"list"`
 
 	// The placement for the instance.
@@ -6450,7 +6493,8 @@ type RequestLaunchTemplateData struct {
 	// in the Amazon Elastic Compute Cloud User Guide.
 	RamDiskId *string `type:"string"`
 
-	// One or more security group IDs. You can create a security group using CreateSecurityGroup.
+	// One or more security group IDs. You can create a security group using CreateSecurityGroup
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html).
 	// You cannot specify both a security group ID and security name in the same
 	// request.
 	SecurityGroupIds []string `locationName:"SecurityGroupId" locationNameList:"SecurityGroupId" type:"list"`
@@ -6463,7 +6507,7 @@ type RequestLaunchTemplateData struct {
 	// The tags to apply to the resources during launch. You can only tag instances
 	// and volumes on launch. The specified tags are applied to all instances or
 	// volumes that are created during launch. To tag a resource after it has been
-	// created, see CreateTags.
+	// created, see CreateTags (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
 	TagSpecifications []LaunchTemplateTagSpecificationRequest `locationName:"TagSpecification" locationNameList:"LaunchTemplateTagSpecificationRequest" type:"list"`
 
 	// The Base64-encoded user data to make available to the instance. For more
@@ -6571,7 +6615,8 @@ type RequestSpotLaunchSpecification struct {
 	// The ID of the subnet in which to launch the instance.
 	SubnetId *string `locationName:"subnetId" type:"string"`
 
-	// The Base64-encoded user data for the instance.
+	// The Base64-encoded user data for the instance. User data is limited to 16
+	// KB.
 	UserData *string `locationName:"userData" type:"string"`
 }
 
@@ -6765,7 +6810,7 @@ type ReservedInstancesConfiguration struct {
 	// EC2-Classic or EC2-VPC.
 	Platform *string `locationName:"platform" type:"string"`
 
-	// Whether the Reserved Instance is applied to instances in a region or instances
+	// Whether the Reserved Instance is applied to instances in a Region or instances
 	// in a specific Availability Zone.
 	Scope Scope `locationName:"scope" type:"string" enum:"true"`
 }
@@ -6942,7 +6987,7 @@ type ReservedInstancesOffering struct {
 	// GetReservedInstancesExchangeQuote to confirm that an exchange can be made.
 	ReservedInstancesOfferingId *string `locationName:"reservedInstancesOfferingId" type:"string"`
 
-	// Whether the Reserved Instance is applied to instances in a region or an Availability
+	// Whether the Reserved Instance is applied to instances in a Region or an Availability
 	// Zone.
 	Scope Scope `locationName:"scope" type:"string" enum:"true"`
 
@@ -7536,7 +7581,7 @@ func (s ScheduledInstancesIpv6Address) String() string {
 type ScheduledInstancesLaunchSpecification struct {
 	_ struct{} `type:"structure"`
 
-	// One or more block device mapping entries.
+	// The block device mapping entries.
 	BlockDeviceMappings []ScheduledInstancesBlockDeviceMapping `locationName:"BlockDeviceMapping" locationNameList:"BlockDeviceMapping" type:"list"`
 
 	// Indicates whether the instances are optimized for EBS I/O. This optimization
@@ -7568,7 +7613,7 @@ type ScheduledInstancesLaunchSpecification struct {
 	// Enable or disable monitoring for the instances.
 	Monitoring *ScheduledInstancesMonitoring `type:"structure"`
 
-	// One or more network interfaces.
+	// The network interfaces.
 	NetworkInterfaces []ScheduledInstancesNetworkInterface `locationName:"NetworkInterface" locationNameList:"NetworkInterface" type:"list"`
 
 	// The placement information.
@@ -7577,7 +7622,7 @@ type ScheduledInstancesLaunchSpecification struct {
 	// The ID of the RAM disk.
 	RamdiskId *string `type:"string"`
 
-	// The IDs of one or more security groups.
+	// The IDs of the security groups.
 	SecurityGroupIds []string `locationName:"SecurityGroupId" locationNameList:"SecurityGroupId" type:"list"`
 
 	// The ID of the subnet in which to launch the instances.
@@ -7641,14 +7686,14 @@ type ScheduledInstancesNetworkInterface struct {
 	// The index of the device for the network interface attachment.
 	DeviceIndex *int64 `type:"integer"`
 
-	// The IDs of one or more security groups.
+	// The IDs of the security groups.
 	Groups []string `locationName:"Group" locationNameList:"SecurityGroupId" type:"list"`
 
 	// The number of IPv6 addresses to assign to the network interface. The IPv6
 	// addresses are automatically selected from the subnet range.
 	Ipv6AddressCount *int64 `type:"integer"`
 
-	// One or more specific IPv6 addresses from the subnet range.
+	// The specific IPv6 addresses from the subnet range.
 	Ipv6Addresses []ScheduledInstancesIpv6Address `locationName:"Ipv6Address" locationNameList:"Ipv6Address" type:"list"`
 
 	// The ID of the network interface.
@@ -7724,7 +7769,7 @@ type SecurityGroup struct {
 	// The inbound rules associated with the security group.
 	IpPermissions []IpPermission `locationName:"ipPermissions" locationNameList:"item" type:"list"`
 
-	// [EC2-VPC] The outbound rules associated with the security group.
+	// [VPC only] The outbound rules associated with the security group.
 	IpPermissionsEgress []IpPermission `locationName:"ipPermissionsEgress" locationNameList:"item" type:"list"`
 
 	// The AWS account ID of the owner of the security group.
@@ -7733,7 +7778,7 @@ type SecurityGroup struct {
 	// Any tags assigned to the security group.
 	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
-	// [EC2-VPC] The ID of the VPC for the security group.
+	// [VPC only] The ID of the VPC for the security group.
 	VpcId *string `locationName:"vpcId" type:"string"`
 }
 
@@ -7794,8 +7839,8 @@ type ServiceConfiguration struct {
 	// The DNS names for the service.
 	BaseEndpointDnsNames []string `locationName:"baseEndpointDnsNameSet" locationNameList:"item" type:"list"`
 
-	// Indicates whether the service manages it's VPC Endpoints. Management of the
-	// service VPC Endpoints using the VPC Endpoint API is restricted.
+	// Indicates whether the service manages it's VPC endpoints. Management of the
+	// service VPC endpoints using the VPC endpoint API is restricted.
 	ManagesVpcEndpoints *bool `locationName:"managesVpcEndpoints" type:"boolean"`
 
 	// The Amazon Resource Names (ARNs) of the Network Load Balancers for the service.
@@ -7815,6 +7860,9 @@ type ServiceConfiguration struct {
 
 	// The type of service.
 	ServiceType []ServiceTypeDetail `locationName:"serviceType" locationNameList:"item" type:"list"`
+
+	// Any tags assigned to the service.
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -7837,8 +7885,8 @@ type ServiceDetail struct {
 	// The DNS names for the service.
 	BaseEndpointDnsNames []string `locationName:"baseEndpointDnsNameSet" locationNameList:"item" type:"list"`
 
-	// Indicates whether the service manages it's VPC Endpoints. Management of the
-	// service VPC Endpoints using the VPC Endpoint API is restricted.
+	// Indicates whether the service manages it's VPC endpoints. Management of the
+	// service VPC endpoints using the VPC endpoint API is restricted.
 	ManagesVpcEndpoints *bool `locationName:"managesVpcEndpoints" type:"boolean"`
 
 	// The AWS account ID of the service owner.
@@ -7847,11 +7895,17 @@ type ServiceDetail struct {
 	// The private DNS name for the service.
 	PrivateDnsName *string `locationName:"privateDnsName" type:"string"`
 
+	// The ID of the endpoint service.
+	ServiceId *string `locationName:"serviceId" type:"string"`
+
 	// The Amazon Resource Name (ARN) of the service.
 	ServiceName *string `locationName:"serviceName" type:"string"`
 
 	// The type of service.
 	ServiceType []ServiceTypeDetail `locationName:"serviceType" locationNameList:"item" type:"list"`
+
+	// Any tags assigned to the service.
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// Indicates whether the service supports endpoint policies.
 	VpcEndpointPolicySupported *bool `locationName:"vpcEndpointPolicySupported" type:"boolean"`
@@ -8142,7 +8196,9 @@ func (s SpotDatafeedSubscription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes the launch specification for one or more Spot Instances.
+// Describes the launch specification for one or more Spot Instances. If you
+// include On-Demand capacity in your fleet request, you can't use SpotFleetLaunchSpecification;
+// you must use LaunchTemplateConfig (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_LaunchTemplateConfig.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetLaunchSpecification
 type SpotFleetLaunchSpecification struct {
 	_ struct{} `type:"structure"`
@@ -8150,10 +8206,11 @@ type SpotFleetLaunchSpecification struct {
 	// Deprecated.
 	AddressingType *string `locationName:"addressingType" type:"string"`
 
-	// One or more block device mapping entries. You can't specify both a snapshot
-	// ID and an encryption value. This is because only blank volumes can be encrypted
-	// on creation. If a snapshot is the basis for a volume, it is not blank and
-	// its encryption status is used for the volume encryption status.
+	// One or more block devices that are mapped to the Spot instances. You can't
+	// specify both a snapshot ID and an encryption value. This is because only
+	// blank volumes can be encrypted on creation. If a snapshot is the basis for
+	// a volume, it is not blank and its encryption status is used for the volume
+	// encryption status.
 	BlockDeviceMappings []BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
 
 	// Indicates whether the instances are optimized for EBS I/O. This optimization
@@ -8190,7 +8247,10 @@ type SpotFleetLaunchSpecification struct {
 	// The placement information.
 	Placement *SpotPlacement `locationName:"placement" type:"structure"`
 
-	// The ID of the RAM disk.
+	// The ID of the RAM disk. Some kernels require additional drivers at launch.
+	// Check the kernel requirements for information about whether you need to specify
+	// a RAM disk. To find kernel requirements, refer to the AWS Resource Center
+	// and search for the kernel ID.
 	RamdiskId *string `locationName:"ramdiskId" type:"string"`
 
 	// One or more security groups. When requesting instances in a VPC, you must
@@ -8211,16 +8271,16 @@ type SpotFleetLaunchSpecification struct {
 	// The tags to apply during creation.
 	TagSpecifications []SpotFleetTagSpecification `locationName:"tagSpecificationSet" locationNameList:"item" type:"list"`
 
-	// The Base64-encoded user data to make available to the instances.
+	// The Base64-encoded user data that instances use when starting up.
 	UserData *string `locationName:"userData" type:"string"`
 
 	// The number of units provided by the specified instance type. These are the
-	// same units that you chose to set the target capacity in terms (instances
-	// or a performance characteristic such as vCPUs, memory, or I/O).
+	// same units that you chose to set the target capacity in terms of instances,
+	// or a performance characteristic such as vCPUs, memory, or I/O.
 	//
-	// If the target capacity divided by this value is not a whole number, we round
-	// the number of instances to the next whole number. If this value is not specified,
-	// the default is 1.
+	// If the target capacity divided by this value is not a whole number, Amazon
+	// EC2 rounds the number of instances to the next whole number. If this value
+	// is not specified, the default is 1.
 	WeightedCapacity *float64 `locationName:"weightedCapacity" type:"double"`
 }
 
@@ -8289,18 +8349,23 @@ type SpotFleetRequestConfigData struct {
 	// see Ensuring Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string `locationName:"clientToken" type:"string"`
 
-	// Indicates whether running Spot Instances should be terminated if the target
-	// capacity of the Spot Fleet request is decreased below the current size of
-	// the Spot Fleet.
+	// Indicates whether running Spot Instances should be terminated if you decrease
+	// the target capacity of the Spot Fleet request below the current size of the
+	// Spot Fleet.
 	ExcessCapacityTerminationPolicy ExcessCapacityTerminationPolicy `locationName:"excessCapacityTerminationPolicy" type:"string" enum:"true"`
 
 	// The number of units fulfilled by this request compared to the set target
 	// capacity. You cannot set this value.
 	FulfilledCapacity *float64 `locationName:"fulfilledCapacity" type:"double"`
 
-	// Grants the Spot Fleet permission to terminate Spot Instances on your behalf
-	// when you cancel its Spot Fleet request using CancelSpotFleetRequests or when
-	// the Spot Fleet request expires, if you set terminateInstancesWithExpiration.
+	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
+	// role that grants the Spot Fleet the permission to request, launch, terminate,
+	// and tag instances on your behalf. For more information, see Spot Fleet Prerequisites
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-requests.html#spot-fleet-prerequisites)
+	// in the Amazon EC2 User Guide for Linux Instances. Spot Fleet can terminate
+	// Spot Instances on your behalf when you cancel its Spot Fleet request using
+	// CancelSpotFleetRequests or when the Spot Fleet request expires, if you set
+	// TerminateInstancesWithExpiration.
 	//
 	// IamFleetRole is a required field
 	IamFleetRole *string `locationName:"iamFleetRole" type:"string" required:"true"`
@@ -8314,10 +8379,14 @@ type SpotFleetRequestConfigData struct {
 	// across the number of Spot pools that you specify.
 	InstancePoolsToUseCount *int64 `locationName:"instancePoolsToUseCount" type:"integer"`
 
-	// The launch specifications for the Spot Fleet request.
+	// The launch specifications for the Spot Fleet request. If you specify LaunchSpecifications,
+	// you can't specify LaunchTemplateConfigs. If you include On-Demand capacity
+	// in your request, you must use LaunchTemplateConfigs.
 	LaunchSpecifications []SpotFleetLaunchSpecification `locationName:"launchSpecifications" locationNameList:"item" type:"list"`
 
-	// The launch template and overrides.
+	// The launch template and overrides. If you specify LaunchTemplateConfigs,
+	// you can't specify LaunchSpecifications. If you include On-Demand capacity
+	// in your request, you must use LaunchTemplateConfigs.
 	LaunchTemplateConfigs []LaunchTemplateConfig `locationName:"launchTemplateConfigs" locationNameList:"item" type:"list"`
 
 	// One or more Classic Load Balancers and target groups to attach to the Spot
@@ -8355,17 +8424,17 @@ type SpotFleetRequestConfigData struct {
 	// The default is the On-Demand price.
 	SpotPrice *string `locationName:"spotPrice" type:"string"`
 
-	// The number of units to request. You can choose to set the target capacity
-	// in terms of instances or a performance characteristic that is important to
-	// your application workload, such as vCPUs, memory, or I/O. If the request
-	// type is maintain, you can specify a target capacity of 0 and add capacity
-	// later.
+	// The number of units to request for the Spot Fleet. You can choose to set
+	// the target capacity in terms of instances or a performance characteristic
+	// that is important to your application workload, such as vCPUs, memory, or
+	// I/O. If the request type is maintain, you can specify a target capacity of
+	// 0 and add capacity later.
 	//
 	// TargetCapacity is a required field
 	TargetCapacity *int64 `locationName:"targetCapacity" type:"integer" required:"true"`
 
-	// Indicates whether running Spot Instances should be terminated when the Spot
-	// Fleet request expires.
+	// Indicates whether running Spot Instances are terminated when the Spot Fleet
+	// request expires.
 	TerminateInstancesWithExpiration *bool `locationName:"terminateInstancesWithExpiration" type:"boolean"`
 
 	// The type of request. Indicates whether the Spot Fleet only requests the target
@@ -8378,14 +8447,14 @@ type SpotFleetRequestConfigData struct {
 	// Default: maintain. instant is listed but is not used by Spot Fleet.
 	Type FleetType `locationName:"type" type:"string" enum:"true"`
 
-	// The start date and time of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
-	// The default is to start fulfilling the request immediately.
+	// The start date and time of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ).
+	// By default, Amazon EC2 starts fulfilling the request immediately.
 	ValidFrom *time.Time `locationName:"validFrom" type:"timestamp" timestampFormat:"iso8601"`
 
-	// The end date and time of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
-	// At this point, no new Spot Instance requests are placed or able to fulfill
-	// the request. If no value is specified, the Spot Fleet request remains until
-	// you cancel it.
+	// The end date and time of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ).
+	// After the end date and time, no new Spot Instance requests are placed or
+	// able to fulfill the request. If no value is specified, the Spot Fleet request
+	// remains until you cancel it.
 	ValidUntil *time.Time `locationName:"validUntil" type:"timestamp" timestampFormat:"iso8601"`
 }
 
@@ -10310,7 +10379,7 @@ type VpcEndpoint struct {
 	// hosted zone.
 	PrivateDnsEnabled *bool `locationName:"privateDnsEnabled" type:"boolean"`
 
-	// Indicates whether the VPC Endpoint is being managed by its service.
+	// Indicates whether the VPC endpoint is being managed by its service.
 	RequesterManaged *bool `locationName:"requesterManaged" type:"boolean"`
 
 	// (Gateway endpoint) One or more route tables associated with the endpoint.
@@ -10324,6 +10393,9 @@ type VpcEndpoint struct {
 
 	// (Interface endpoint) One or more subnets in which the endpoint is located.
 	SubnetIds []string `locationName:"subnetIdSet" locationNameList:"item" type:"list"`
+
+	// Any tags assigned to the VPC endpoint.
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The ID of the VPC endpoint.
 	VpcEndpointId *string `locationName:"vpcEndpointId" type:"string"`
@@ -10478,7 +10550,7 @@ type VpcPeeringConnectionVpcInfo struct {
 	// requester VPC.
 	PeeringOptions *VpcPeeringConnectionOptionsDescription `locationName:"peeringOptions" type:"structure"`
 
-	// The region in which the VPC is located.
+	// The Region in which the VPC is located.
 	Region *string `locationName:"region" type:"string"`
 
 	// The ID of the VPC.

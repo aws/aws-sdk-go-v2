@@ -15,15 +15,15 @@ type ListUpdatesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The maximum number of update results returned by ListUpdates in paginated
-	// output. When this parameter is used, ListUpdates only returns maxResults
-	// results in a single page along with a nextToken response element. The remaining
-	// results of the initial request can be seen by sending another ListUpdates
+	// output. When you use this parameter, ListUpdates returns only maxResults
+	// results in a single page along with a nextToken response element. You can
+	// see the remaining results of the initial request by sending another ListUpdates
 	// request with the returned nextToken value. This value can be between 1 and
-	// 100. If this parameter is not used, then ListUpdates returns up to 100 results
+	// 100. If you don't use this parameter, ListUpdates returns up to 100 results
 	// and a nextToken value if applicable.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
-	// The name of the Amazon EKS cluster for which to list updates.
+	// The name of the Amazon EKS cluster to list updates for.
 	//
 	// Name is a required field
 	Name *string `location:"uri" locationName:"name" type:"string" required:"true"`
@@ -87,7 +87,7 @@ type ListUpdatesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The nextToken value to include in a future ListUpdates request. When the
-	// results of a ListUpdates request exceed maxResults, this value can be used
+	// results of a ListUpdates request exceed maxResults, you can use this value
 	// to retrieve the next page of results. This value is null when there are no
 	// more results to return.
 	NextToken *string `locationName:"nextToken" type:"string"`

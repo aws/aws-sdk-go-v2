@@ -32,7 +32,7 @@ type GetParametersForImportInput struct {
 
 	// The algorithm you will use to encrypt the key material before importing it
 	// with ImportKeyMaterial. For more information, see Encrypt the Key Material
-	// (http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-encrypt-key-material.html)
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-encrypt-key-material.html)
 	// in the AWS Key Management Service Developer Guide.
 	//
 	// WrappingAlgorithm is a required field
@@ -110,7 +110,7 @@ const opGetParametersForImport = "GetParametersForImport"
 //
 // Returns the items you need in order to import key material into AWS KMS from
 // your existing key management infrastructure. For more information about importing
-// key material into AWS KMS, see Importing Key Material (http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)
+// key material into AWS KMS, see Importing Key Material (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)
 // in the AWS Key Management Service Developer Guide.
 //
 // You must specify the key ID of the customer master key (CMK) into which you
@@ -127,7 +127,7 @@ const opGetParametersForImport = "GetParametersForImport"
 // To get new ones, send another GetParametersForImport request.
 //
 // The result of this operation varies with the key state of the CMK. For details,
-// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// see How Key State Affects Use of a Customer Master Key (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 // in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using GetParametersForImportRequest.

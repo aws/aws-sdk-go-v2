@@ -20,7 +20,8 @@ type AssociatedGateway struct {
 	// The ID of the associated gateway.
 	Id *string `locationName:"id" type:"string"`
 
-	// The ID of the AWS account that owns the associated virtual private gateway.
+	// The ID of the AWS account that owns the associated virtual private gateway
+	// or transit gateway.
 	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
 
 	// The Region where the associated gateway is located.
@@ -175,7 +176,7 @@ func (s Connection) String() string {
 }
 
 // Information about a Direct Connect gateway, which enables you to connect
-// virtual interfaces and virtual private gateways.
+// virtual interfaces and virtual private gateway or transit gateways.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectGateway
 type DirectConnectGateway struct {
 	_ struct{} `type:"structure"`
@@ -213,7 +214,7 @@ func (s DirectConnectGateway) String() string {
 }
 
 // Information about an association between a Direct Connect gateway and a virtual
-// private gateway.
+// private gateway or transit gateway.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectGatewayAssociation
 type DirectConnectGatewayAssociation struct {
 	_ struct{} `type:"structure"`
@@ -221,7 +222,7 @@ type DirectConnectGatewayAssociation struct {
 	// The Amazon VPC prefixes to advertise to the Direct Connect gateway.
 	AllowedPrefixesToDirectConnectGateway []RouteFilterPrefix `locationName:"allowedPrefixesToDirectConnectGateway" type:"list"`
 
-	// Information about the associated virtual private gateway.
+	// Information about the associated gateway.
 	AssociatedGateway *AssociatedGateway `locationName:"associatedGateway" type:"structure"`
 
 	// The ID of the Direct Connect gateway association.
@@ -231,14 +232,14 @@ type DirectConnectGatewayAssociation struct {
 	//
 	//    * associating: The initial state after calling CreateDirectConnectGatewayAssociation.
 	//
-	//    * associated: The Direct Connect gateway and virtual private gateway are
-	//    successfully associated and ready to pass traffic.
+	//    * associated: The Direct Connect gateway and virtual private gateway or
+	//    transit gateway are successfully associated and ready to pass traffic.
 	//
 	//    * disassociating: The initial state after calling DeleteDirectConnectGatewayAssociation.
 	//
-	//    * disassociated: The virtual private gateway is disassociated from the
-	//    Direct Connect gateway. Traffic flow between the Direct Connect gateway
-	//    and virtual private gateway is stopped.
+	//    * disassociated: The virtual private gateway or transit gateway is disassociated
+	//    from the Direct Connect gateway. Traffic flow between the Direct Connect
+	//    gateway and virtual private gateway or transit gateway is stopped.
 	AssociationState DirectConnectGatewayAssociationState `locationName:"associationState" type:"string" enum:"true"`
 
 	// The ID of the Direct Connect gateway.
@@ -266,12 +267,12 @@ func (s DirectConnectGatewayAssociation) String() string {
 }
 
 // Information about the proposal request to attach a virtual private gateway
-// to a DDirect Connect gateway.
+// to a Direct Connect gateway.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectGatewayAssociationProposal
 type DirectConnectGatewayAssociationProposal struct {
 	_ struct{} `type:"structure"`
 
-	// Information about the associated virtual private gateway.
+	// Information about the associated gateway.
 	AssociatedGateway *AssociatedGateway `locationName:"associatedGateway" type:"structure"`
 
 	// The ID of the Direct Connect gateway.
@@ -327,6 +328,9 @@ type DirectConnectGatewayAttachment struct {
 	//    gateway. Traffic flow between the Direct Connect gateway and virtual interface
 	//    is stopped.
 	AttachmentState DirectConnectGatewayAttachmentState `locationName:"attachmentState" type:"string" enum:"true"`
+
+	// The type of attachment.
+	AttachmentType DirectConnectGatewayAttachmentType `locationName:"attachmentType" type:"string" enum:"true"`
 
 	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string"`
@@ -821,6 +825,81 @@ func (s *NewPublicVirtualInterfaceAllocation) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Information about a transit virtual interface.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewTransitVirtualInterface
+type NewTransitVirtualInterface struct {
+	_ struct{} `type:"structure"`
+
+	// The address family for the BGP peer.
+	AddressFamily AddressFamily `locationName:"addressFamily" type:"string" enum:"true"`
+
+	// The IP address assigned to the Amazon interface.
+	AmazonAddress *string `locationName:"amazonAddress" type:"string"`
+
+	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+	Asn *int64 `locationName:"asn" type:"integer"`
+
+	// The authentication key for BGP configuration.
+	AuthKey *string `locationName:"authKey" type:"string"`
+
+	// The IP address assigned to the customer interface.
+	CustomerAddress *string `locationName:"customerAddress" type:"string"`
+
+	// The ID of the Direct Connect gateway.
+	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string"`
+
+	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
+	// and 9001. The default value is 1500.
+	Mtu *int64 `locationName:"mtu" type:"integer"`
+
+	// The name of the virtual interface assigned by the customer network.
+	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string"`
+
+	// The ID of the VLAN.
+	Vlan *int64 `locationName:"vlan" type:"integer"`
+}
+
+// String returns the string representation
+func (s NewTransitVirtualInterface) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about a transit virtual interface to be provisioned on a connection.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewTransitVirtualInterfaceAllocation
+type NewTransitVirtualInterfaceAllocation struct {
+	_ struct{} `type:"structure"`
+
+	// The address family for the BGP peer.
+	AddressFamily AddressFamily `locationName:"addressFamily" type:"string" enum:"true"`
+
+	// The IP address assigned to the Amazon interface.
+	AmazonAddress *string `locationName:"amazonAddress" type:"string"`
+
+	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+	Asn *int64 `locationName:"asn" type:"integer"`
+
+	// The authentication key for BGP configuration.
+	AuthKey *string `locationName:"authKey" type:"string"`
+
+	// The IP address assigned to the customer interface.
+	CustomerAddress *string `locationName:"customerAddress" type:"string"`
+
+	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
+	// and 9001. The default value is 1500.
+	Mtu *int64 `locationName:"mtu" type:"integer"`
+
+	// The name of the virtual interface assigned by the customer network.
+	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string"`
+
+	// The ID of the VLAN.
+	Vlan *int64 `locationName:"vlan" type:"integer"`
+}
+
+// String returns the string representation
+func (s NewTransitVirtualInterfaceAllocation) String() string {
+	return awsutil.Prettify(s)
 }
 
 // Information about a tag associated with an AWS Direct Connect resource.

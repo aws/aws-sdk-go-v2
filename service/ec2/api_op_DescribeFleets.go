@@ -19,7 +19,7 @@ type DescribeFleetsInput struct {
 	// it is UnauthorizedOperation.
 	DryRun *bool `type:"boolean"`
 
-	// One or more filters.
+	// The filters.
 	//
 	//    * activity-status - The progress of the EC2 Fleet ( error | pending-fulfillment
 	//    | pending-termination | fulfilled).
@@ -75,7 +75,7 @@ const opDescribeFleets = "DescribeFleets"
 // DescribeFleetsRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Describes one or more of your EC2 Fleets.
+// Describes the specified EC2 Fleets or all your EC2 Fleets.
 //
 //    // Example sending a request using DescribeFleetsRequest.
 //    req := client.DescribeFleetsRequest(params)

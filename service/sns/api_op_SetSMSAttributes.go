@@ -86,8 +86,8 @@ type SetSMSAttributesInput struct {
 	// actions.
 	//
 	// For an example bucket policy and usage report, see Monitoring SMS Activity
-	// (http://docs.aws.amazon.com/sns/latest/dg/sms_stats.html) in the Amazon SNS
-	// Developer Guide.
+	// (https://docs.aws.amazon.com/sns/latest/dg/sms_stats.html) in the Amazon
+	// SNS Developer Guide.
 	//
 	// Attributes is a required field
 	Attributes map[string]string `locationName:"attributes" type:"map" required:"true"`
@@ -133,7 +133,7 @@ const opSetSMSAttributes = "SetSMSAttributes"
 //
 // You can override some of these settings for a single message when you use
 // the Publish action with the MessageAttributes.entry.N parameter. For more
-// information, see Sending an SMS Message (http://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html)
+// information, see Sending an SMS Message (https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html)
 // in the Amazon SNS Developer Guide.
 //
 //    // Example sending a request using SetSMSAttributesRequest.

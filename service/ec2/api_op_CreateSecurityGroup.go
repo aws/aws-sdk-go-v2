@@ -88,16 +88,12 @@ const opCreateSecurityGroup = "CreateSecurityGroup"
 //
 // Creates a security group.
 //
-// A security group is for use with instances either in the EC2-Classic platform
-// or in a specific VPC. For more information, see Amazon EC2 Security Groups
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html)
+// A security group acts as a virtual firewall for your instance to control
+// inbound and outbound traffic. For more information, see Amazon EC2 Security
+// Groups (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html)
 // in the Amazon Elastic Compute Cloud User Guide and Security Groups for Your
 // VPC (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html)
 // in the Amazon Virtual Private Cloud User Guide.
-//
-// EC2-Classic: You can have up to 500 security groups.
-//
-// EC2-VPC: You can create up to 500 security groups per VPC.
 //
 // When you create a security group, you specify a friendly name of your choice.
 // You can have a security group for use in EC2-Classic with the same name as
@@ -113,6 +109,9 @@ const opCreateSecurityGroup = "CreateSecurityGroup"
 //
 // You can add or remove rules from your security groups using AuthorizeSecurityGroupIngress,
 // AuthorizeSecurityGroupEgress, RevokeSecurityGroupIngress, and RevokeSecurityGroupEgress.
+//
+// For more information about VPC security group limits, see Amazon VPC Limits
+// (https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html).
 //
 //    // Example sending a request using CreateSecurityGroupRequest.
 //    req := client.CreateSecurityGroupRequest(params)

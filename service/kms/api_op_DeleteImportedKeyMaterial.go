@@ -15,8 +15,8 @@ import (
 type DeleteImportedKeyMaterialInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the CMK whose key material to delete. The CMK's Origin
-	// must be EXTERNAL.
+	// Identifies the CMK from which you are deleting imported key material. The
+	// Origin of the CMK must be EXTERNAL.
 	//
 	// Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
 	//
@@ -71,7 +71,7 @@ const opDeleteImportedKeyMaterial = "DeleteImportedKeyMaterial"
 //
 // Deletes key material that you previously imported. This operation makes the
 // specified customer master key (CMK) unusable. For more information about
-// importing key material into AWS KMS, see Importing Key Material (http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)
+// importing key material into AWS KMS, see Importing Key Material (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)
 // in the AWS Key Management Service Developer Guide. You cannot perform this
 // operation on a CMK in a different AWS account.
 //
@@ -82,7 +82,7 @@ const opDeleteImportedKeyMaterial = "DeleteImportedKeyMaterial"
 // the same key material into the CMK.
 //
 // The result of this operation varies with the key state of the CMK. For details,
-// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// see How Key State Affects Use of a Customer Master Key (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 // in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using DeleteImportedKeyMaterialRequest.

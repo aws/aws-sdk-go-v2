@@ -14,6 +14,11 @@ import (
 type StartTaskExecutionInput struct {
 	_ struct{} `type:"structure"`
 
+	// A filter that determines which files to include in the transfer during a
+	// task execution based on the specified pattern in the filter. When multiple
+	// include filters are set, they are interpreted as an OR.
+	Includes []FilterRule `type:"list"`
+
 	// Represents the options that are available to control the behavior of a StartTaskExecution
 	// operation. Behavior includes preserving metadata such as user ID (UID), group
 	// ID (GID), and file permissions, and also overwriting files in the destination,
@@ -81,9 +86,8 @@ const opStartTaskExecution = "StartTaskExecution"
 // TaskExecution has the following transition phases: INITIALIZING | PREPARING
 // | TRANSFERRING | VERIFYING | SUCCESS/FAILURE.
 //
-// For detailed information, see Task Execution in Components and Terminology
-// (https://docs.aws.amazon.com/sync-service/latest/userguide/how-awssync-works.html#terminology)
-// in the AWS DataSync User Guide.
+// For detailed information, see Task Execution in "https://docs.aws.amazon.com/datasync/latest/userguide/how-datasync-works.html#terminology"
+// (Components and Terminology) in the AWS DataSync User Guide.
 //
 //    // Example sending a request using StartTaskExecutionRequest.
 //    req := client.StartTaskExecutionRequest(params)

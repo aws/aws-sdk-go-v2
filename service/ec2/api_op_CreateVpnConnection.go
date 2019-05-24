@@ -32,7 +32,7 @@ type CreateVpnConnectionInput struct {
 	// specify a virtual private gateway.
 	TransitGatewayId *string `type:"string"`
 
-	// The type of VPN connection (ipsec.1).
+	// The type of VPN connection (ipsec.1 | ipsec.2).
 	//
 	// Type is a required field
 	Type *string `type:"string" required:"true"`
@@ -85,7 +85,7 @@ const opCreateVpnConnection = "CreateVpnConnection"
 // Amazon Elastic Compute Cloud.
 //
 // Creates a VPN connection between an existing virtual private gateway and
-// a VPN customer gateway. The only supported connection type is ipsec.1.
+// a VPN customer gateway. The supported connection types are ipsec.1 and ipsec.2.
 //
 // The response includes information that you need to give to your network administrator
 // to configure your customer gateway.

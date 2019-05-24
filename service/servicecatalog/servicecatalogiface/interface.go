@@ -63,6 +63,8 @@ import (
 type ClientAPI interface {
 	AcceptPortfolioShareRequest(*servicecatalog.AcceptPortfolioShareInput) servicecatalog.AcceptPortfolioShareRequest
 
+	AssociateBudgetWithResourceRequest(*servicecatalog.AssociateBudgetWithResourceInput) servicecatalog.AssociateBudgetWithResourceRequest
+
 	AssociatePrincipalWithPortfolioRequest(*servicecatalog.AssociatePrincipalWithPortfolioInput) servicecatalog.AssociatePrincipalWithPortfolioRequest
 
 	AssociateProductWithPortfolioRequest(*servicecatalog.AssociateProductWithPortfolioInput) servicecatalog.AssociateProductWithPortfolioRequest
@@ -139,6 +141,8 @@ type ClientAPI interface {
 
 	DisableAWSOrganizationsAccessRequest(*servicecatalog.DisableAWSOrganizationsAccessInput) servicecatalog.DisableAWSOrganizationsAccessRequest
 
+	DisassociateBudgetFromResourceRequest(*servicecatalog.DisassociateBudgetFromResourceInput) servicecatalog.DisassociateBudgetFromResourceRequest
+
 	DisassociatePrincipalFromPortfolioRequest(*servicecatalog.DisassociatePrincipalFromPortfolioInput) servicecatalog.DisassociatePrincipalFromPortfolioRequest
 
 	DisassociateProductFromPortfolioRequest(*servicecatalog.DisassociateProductFromPortfolioInput) servicecatalog.DisassociateProductFromPortfolioRequest
@@ -156,6 +160,8 @@ type ClientAPI interface {
 	GetAWSOrganizationsAccessStatusRequest(*servicecatalog.GetAWSOrganizationsAccessStatusInput) servicecatalog.GetAWSOrganizationsAccessStatusRequest
 
 	ListAcceptedPortfolioSharesRequest(*servicecatalog.ListAcceptedPortfolioSharesInput) servicecatalog.ListAcceptedPortfolioSharesRequest
+
+	ListBudgetsForResourceRequest(*servicecatalog.ListBudgetsForResourceInput) servicecatalog.ListBudgetsForResourceRequest
 
 	ListConstraintsForPortfolioRequest(*servicecatalog.ListConstraintsForPortfolioInput) servicecatalog.ListConstraintsForPortfolioRequest
 
@@ -208,6 +214,8 @@ type ClientAPI interface {
 	UpdateProductRequest(*servicecatalog.UpdateProductInput) servicecatalog.UpdateProductRequest
 
 	UpdateProvisionedProductRequest(*servicecatalog.UpdateProvisionedProductInput) servicecatalog.UpdateProvisionedProductRequest
+
+	UpdateProvisionedProductPropertiesRequest(*servicecatalog.UpdateProvisionedProductPropertiesInput) servicecatalog.UpdateProvisionedProductPropertiesRequest
 
 	UpdateProvisioningArtifactRequest(*servicecatalog.UpdateProvisioningArtifactInput) servicecatalog.UpdateProvisioningArtifactRequest
 

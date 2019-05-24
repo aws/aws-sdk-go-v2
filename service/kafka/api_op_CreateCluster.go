@@ -25,6 +25,9 @@ type CreateClusterInput struct {
 	// ClusterName is a required field
 	ClusterName *string `locationName:"clusterName" min:"1" type:"string" required:"true"`
 
+	// Comprises of the Configuration to be used on Kafka brokers in a cluster.
+	ConfigurationInfo *ConfigurationInfo `locationName:"configurationInfo" type:"structure"`
+
 	// Includes all encryption-related information.
 	EncryptionInfo *EncryptionInfo `locationName:"encryptionInfo" type:"structure"`
 
@@ -81,6 +84,11 @@ func (s *CreateClusterInput) Validate() error {
 			invalidParams.AddNested("BrokerNodeGroupInfo", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.ConfigurationInfo != nil {
+		if err := s.ConfigurationInfo.Validate(); err != nil {
+			invalidParams.AddNested("ConfigurationInfo", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.EncryptionInfo != nil {
 		if err := s.EncryptionInfo.Validate(); err != nil {
 			invalidParams.AddNested("EncryptionInfo", err.(aws.ErrInvalidParams))
@@ -108,6 +116,12 @@ func (s CreateClusterInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "clusterName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ConfigurationInfo != nil {
+		v := s.ConfigurationInfo
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "configurationInfo", v, metadata)
 	}
 	if s.EncryptionInfo != nil {
 		v := s.EncryptionInfo

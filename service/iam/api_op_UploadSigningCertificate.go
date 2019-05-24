@@ -89,7 +89,7 @@ const opUploadSigningCertificate = "UploadSigningCertificate"
 // that are signed with a corresponding private key. When you upload the certificate,
 // its default status is Active.
 //
-// If the UserName field is not specified, the IAM user name is determined implicitly
+// If the UserName is not specified, the IAM user name is determined implicitly
 // based on the AWS access key ID used to sign the request. This operation works
 // for access keys under the AWS account. Consequently, you can use this operation
 // to manage AWS account root user credentials even if the AWS account has no

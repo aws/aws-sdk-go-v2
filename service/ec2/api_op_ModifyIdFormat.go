@@ -73,7 +73,7 @@ const opModifyIdFormat = "ModifyIdFormat"
 // ModifyIdFormatRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Modifies the ID format for the specified resource on a per-region basis.
+// Modifies the ID format for the specified resource on a per-Region basis.
 // You can specify that resources should receive longer IDs (17-character IDs)
 // when they are created.
 //

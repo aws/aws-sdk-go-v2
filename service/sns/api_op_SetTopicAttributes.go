@@ -29,6 +29,13 @@ type SetTopicAttributesInput struct {
 	//    * Policy – The policy that defines who can access your topic. By default,
 	//    only the topic owner can publish or subscribe to the topic.
 	//
+	// The following attribute applies only to server-side-encryption (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html):
+	//
+	//    * KmsMasterKeyId - The ID of an AWS-managed customer master key (CMK)
+	//    for Amazon SNS or a custom CMK. For more information, see Key Terms (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms).
+	//    For more examples, see KeyId (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters)
+	//    in the AWS Key Management Service API Reference.
+	//
 	// AttributeName is a required field
 	AttributeName *string `type:"string" required:"true"`
 

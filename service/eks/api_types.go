@@ -18,7 +18,7 @@ var _ = awsutil.Prettify
 type Certificate struct {
 	_ struct{} `type:"structure"`
 
-	// The base64 encoded certificate data required to communicate with your cluster.
+	// The Base64-encoded certificate data required to communicate with your cluster.
 	// Add this to the certificate-authority-data section of the kubeconfig file
 	// for your cluster.
 	Data *string `locationName:"data" type:"string"`
@@ -180,24 +180,24 @@ type ErrorDetail struct {
 
 	// A brief description of the error.
 	//
-	//    * SubnetNotFound: One of the subnets associated with the cluster could
-	//    not be found.
+	//    * SubnetNotFound: We couldn't find one of the subnets associated with
+	//    the cluster.
 	//
-	//    * SecurityGroupNotFound: One of the security groups associated with the
-	//    cluster could not be found.
+	//    * SecurityGroupNotFound: We couldn't find one of the security groups associated
+	//    with the cluster.
 	//
 	//    * EniLimitReached: You have reached the elastic network interface limit
 	//    for your account.
 	//
-	//    * IpNotAvailable: A subnet associated with the cluster does not have any
+	//    * IpNotAvailable: A subnet associated with the cluster doesn't have any
 	//    free IP addresses.
 	//
-	//    * AccessDenied: You do not have permissions to perform the specified operation.
+	//    * AccessDenied: You don't have permissions to perform the specified operation.
 	//
 	//    * OperationNotPermitted: The service role associated with the cluster
-	//    does not have the required access permissions for Amazon EKS.
+	//    doesn't have the required access permissions for Amazon EKS.
 	//
-	//    * VpcIdNotFound: The VPC associated with the cluster could not be found.
+	//    * VpcIdNotFound: We couldn't find the VPC associated with the cluster.
 	ErrorCode ErrorCode `locationName:"errorCode" type:"string" enum:"true"`
 
 	// A more complete description of the error.
@@ -247,10 +247,10 @@ func (s ErrorDetail) MarshalFields(e protocol.FieldEncoder) error {
 type LogSetup struct {
 	_ struct{} `type:"structure"`
 
-	// If a log type is enabled, then that log type exports its control plane logs
-	// to CloudWatch Logs. If a log type is not enabled, then that log type does
-	// not export its control plane logs. Each individual log type can be enabled
-	// or disabled independently.
+	// If a log type is enabled, that log type exports its control plane logs to
+	// CloudWatch Logs. If a log type isn't enabled, that log type doesn't export
+	// its control plane logs. Each individual log type can be enabled or disabled
+	// independently.
 	Enabled *bool `locationName:"enabled" type:"boolean"`
 
 	// The available cluster control plane log types.
@@ -439,7 +439,7 @@ type VpcConfigRequest struct {
 
 	// Set this value to true to enable private access for your cluster's Kubernetes
 	// API server endpoint. If you enable private access, Kubernetes API requests
-	// from within your cluster's VPC will use the private VPC endpoint. The default
+	// from within your cluster's VPC use the private VPC endpoint. The default
 	// value for this parameter is false, which disables private access for your
 	// Kubernetes API server. For more information, see Amazon EKS Cluster Endpoint
 	// Access Control (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
@@ -448,7 +448,7 @@ type VpcConfigRequest struct {
 
 	// Set this value to false to disable public access for your cluster's Kubernetes
 	// API server endpoint. If you disable public access, your cluster's Kubernetes
-	// API server can only receive requests from within the cluster VPC. The default
+	// API server can receive only requests from within the cluster VPC. The default
 	// value for this parameter is true, which enables public access for your Kubernetes
 	// API server. For more information, see Amazon EKS Cluster Endpoint Access
 	// Control (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
@@ -457,7 +457,7 @@ type VpcConfigRequest struct {
 
 	// Specify one or more security groups for the cross-account elastic network
 	// interfaces that Amazon EKS creates to use to allow communication between
-	// your worker nodes and the Kubernetes control plane. If you do not specify
+	// your worker nodes and the Kubernetes control plane. If you don't specify
 	// a security group, the default security group for your VPC is used.
 	SecurityGroupIds []string `locationName:"securityGroupIds" type:"list"`
 
@@ -520,13 +520,13 @@ type VpcConfigResponse struct {
 
 	// This parameter indicates whether the Amazon EKS private API server endpoint
 	// is enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes
-	// API requests that originate from within your cluster's VPC will use the private
+	// API requests that originate from within your cluster's VPC use the private
 	// VPC endpoint instead of traversing the internet.
 	EndpointPrivateAccess *bool `locationName:"endpointPrivateAccess" type:"boolean"`
 
 	// This parameter indicates whether the Amazon EKS public API server endpoint
 	// is enabled. If the Amazon EKS public API server endpoint is disabled, your
-	// cluster's Kubernetes API server can only receive requests that originate
+	// cluster's Kubernetes API server can receive only requests that originate
 	// from within the cluster VPC.
 	EndpointPublicAccess *bool `locationName:"endpointPublicAccess" type:"boolean"`
 

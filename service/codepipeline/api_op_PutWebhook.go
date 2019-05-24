@@ -4,6 +4,7 @@ package codepipeline
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -12,6 +13,9 @@ import (
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutWebhookInput
 type PutWebhookInput struct {
 	_ struct{} `type:"structure"`
+
+	// The tags for the webhook.
+	Tags []Tag `locationName:"tags" type:"list"`
 
 	// The detail provided in an input file to create the webhook, such as the webhook
 	// name, the pipeline name, and the action name. Give the webhook a unique name
@@ -34,6 +38,13 @@ func (s *PutWebhookInput) Validate() error {
 
 	if s.Webhook == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Webhook"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 	if s.Webhook != nil {
 		if err := s.Webhook.Validate(); err != nil {

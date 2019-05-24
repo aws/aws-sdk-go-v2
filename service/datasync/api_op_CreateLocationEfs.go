@@ -15,7 +15,26 @@ import (
 type CreateLocationEfsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The subnet and security group that the Amazon EFS file system uses.
+	// The subnet and security group that the Amazon EFS file system uses. The security
+	// group that you provide needs to be able to communicate with the security
+	// group on the mount target in the subnet specified.
+	//
+	// The exact relationship between security group M (of the mount target) and
+	// security group S (which you provide for DataSync to use at this stage) is
+	// as follows:
+	//
+	//    * Security group M (which you associate with the mount target) must allow
+	//    inbound access for the Transmission Control Protocol (TCP) on the NFS
+	//    port (2049) from security group S. You can enable inbound connections
+	//    either by IP address (CIDR range) or security group.
+	//
+	//    * Security group S (provided to DataSync to access EFS) should have a
+	//    rule that enables outbound connections to the NFS port on one of the file
+	//    system’s mount targets. You can enable outbound connections either by
+	//    IP address (CIDR range) or security group. For information about security
+	//    groups and mount targets, see "https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access"
+	//    (Security Groups for Amazon EC2 Instances and Mount Targets) in the Amazon
+	//    EFS User Guide.
 	//
 	// Ec2Config is a required field
 	Ec2Config *Ec2Config `type:"structure" required:"true"`
@@ -28,9 +47,7 @@ type CreateLocationEfsInput struct {
 	// A subdirectory in the location’s path. This subdirectory in the EFS file
 	// system is used to read data from the EFS source location or write data to
 	// the EFS destination. By default, AWS DataSync uses the root directory.
-	//
-	// Subdirectory is a required field
-	Subdirectory *string `type:"string" required:"true"`
+	Subdirectory *string `type:"string"`
 
 	// The key-value pair that represents a tag that you want to add to the resource.
 	// The value can be an empty string. This value helps you manage, filter, and
@@ -54,10 +71,6 @@ func (s *CreateLocationEfsInput) Validate() error {
 
 	if s.EfsFilesystemArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EfsFilesystemArn"))
-	}
-
-	if s.Subdirectory == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Subdirectory"))
 	}
 	if s.Ec2Config != nil {
 		if err := s.Ec2Config.Validate(); err != nil {

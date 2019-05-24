@@ -14,7 +14,8 @@ import (
 type BatchGetDeploymentsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of deployment IDs, separated by spaces.
+	// A list of deployment IDs, separated by spaces. The maximum number of deployment
+	// IDs you can specify is 25.
 	//
 	// DeploymentIds is a required field
 	DeploymentIds []string `locationName:"deploymentIds" type:"list" required:"true"`
@@ -58,7 +59,8 @@ const opBatchGetDeployments = "BatchGetDeployments"
 // BatchGetDeploymentsRequest returns a request value for making API operation for
 // AWS CodeDeploy.
 //
-// Gets information about one or more deployments.
+// Gets information about one or more deployments. The maximum number of deployments
+// that can be returned is 25.
 //
 //    // Example sending a request using BatchGetDeploymentsRequest.
 //    req := client.BatchGetDeploymentsRequest(params)

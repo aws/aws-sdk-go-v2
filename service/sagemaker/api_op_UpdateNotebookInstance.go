@@ -38,19 +38,27 @@ type UpdateNotebookInstanceInput struct {
 	DefaultCodeRepository *string `min:"1" type:"string"`
 
 	// A list of the Elastic Inference (EI) instance types to remove from this notebook
-	// instance.
+	// instance. This operation is idempotent. If you specify an accelerator type
+	// that is not associated with the notebook instance when you call this method,
+	// it does not throw an error.
 	DisassociateAcceleratorTypes *bool `type:"boolean"`
 
 	// A list of names or URLs of the default Git repositories to remove from this
-	// notebook instance.
+	// notebook instance. This operation is idempotent. If you specify a Git repository
+	// that is not associated with the notebook instance when you call this method,
+	// it does not throw an error.
 	DisassociateAdditionalCodeRepositories *bool `type:"boolean"`
 
 	// The name or URL of the default Git repository to remove from this notebook
-	// instance.
+	// instance. This operation is idempotent. If you specify a Git repository that
+	// is not associated with the notebook instance when you call this method, it
+	// does not throw an error.
 	DisassociateDefaultCodeRepository *bool `type:"boolean"`
 
 	// Set to true to remove the notebook instance lifecycle configuration currently
-	// associated with the notebook instance.
+	// associated with the notebook instance. This operation is idempotent. If you
+	// specify a lifecycle configuration that is not associated with the notebook
+	// instance when you call this method, it does not throw an error.
 	DisassociateLifecycleConfig *bool `type:"boolean"`
 
 	// The Amazon ML compute instance type.
@@ -131,8 +139,7 @@ const opUpdateNotebookInstance = "UpdateNotebookInstance"
 //
 // Updates a notebook instance. NotebookInstance updates include upgrading or
 // downgrading the ML compute instance used for your notebook instance to accommodate
-// changes in your workload requirements. You can also update the VPC security
-// groups.
+// changes in your workload requirements.
 //
 //    // Example sending a request using UpdateNotebookInstanceRequest.
 //    req := client.UpdateNotebookInstanceRequest(params)

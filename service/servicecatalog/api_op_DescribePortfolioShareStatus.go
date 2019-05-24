@@ -17,7 +17,7 @@ type DescribePortfolioShareStatusInput struct {
 	// by CreatePortfolioShare or by DeletePortfolioShare.
 	//
 	// PortfolioShareToken is a required field
-	PortfolioShareToken *string `type:"string" required:"true"`
+	PortfolioShareToken *string `min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -31,6 +31,9 @@ func (s *DescribePortfolioShareStatusInput) Validate() error {
 
 	if s.PortfolioShareToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PortfolioShareToken"))
+	}
+	if s.PortfolioShareToken != nil && len(*s.PortfolioShareToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("PortfolioShareToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -51,7 +54,7 @@ type DescribePortfolioShareStatusOutput struct {
 	PortfolioId *string `min:"1" type:"string"`
 
 	// The token for the portfolio share operation. For example, share-6v24abcdefghi.
-	PortfolioShareToken *string `type:"string"`
+	PortfolioShareToken *string `min:"1" type:"string"`
 
 	// Information about the portfolio share operation.
 	ShareDetails *ShareDetails `type:"structure"`

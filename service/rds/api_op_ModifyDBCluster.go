@@ -13,20 +13,20 @@ import (
 type ModifyDBClusterInput struct {
 	_ struct{} `type:"structure"`
 
-	// A value that specifies whether the modifications in this request and any
+	// A value that indicates whether the modifications in this request and any
 	// pending modifications are asynchronously applied as soon as possible, regardless
 	// of the PreferredMaintenanceWindow setting for the DB cluster. If this parameter
-	// is set to false, changes to the DB cluster are applied during the next maintenance
+	// is disabled, changes to the DB cluster are applied during the next maintenance
 	// window.
 	//
 	// The ApplyImmediately parameter only affects the EnableIAMDatabaseAuthentication,
-	// MasterUserPassword, and NewDBClusterIdentifier values. If you set the ApplyImmediately
-	// parameter value to false, then changes to the EnableIAMDatabaseAuthentication,
+	// MasterUserPassword, and NewDBClusterIdentifier values. If the ApplyImmediately
+	// parameter is disabled, then changes to the EnableIAMDatabaseAuthentication,
 	// MasterUserPassword, and NewDBClusterIdentifier values are applied during
 	// the next maintenance window. All other changes are applied immediately, regardless
 	// of the value of the ApplyImmediately parameter.
 	//
-	// Default: false
+	// By default, this parameter is disabled.
 	ApplyImmediately *bool `type:"boolean"`
 
 	// The target backtrack window, in seconds. To disable backtracking, set this
@@ -54,8 +54,8 @@ type ModifyDBClusterInput struct {
 	// Logs for a specific DB cluster.
 	CloudwatchLogsExportConfiguration *CloudwatchLogsExportConfiguration `type:"structure"`
 
-	// True to copy all tags from the DB cluster to snapshots of the DB cluster,
-	// and otherwise false. The default is false.
+	// A value that indicates whether to copy all tags from the DB cluster to snapshots
+	// of the DB cluster. The default is not to copy them.
 	CopyTagsToSnapshot *bool `type:"boolean"`
 
 	// The DB cluster identifier for the cluster being modified. This parameter
@@ -71,8 +71,9 @@ type ModifyDBClusterInput struct {
 	// The name of the DB cluster parameter group to use for the DB cluster.
 	DBClusterParameterGroupName *string `type:"string"`
 
-	// Indicates if the DB cluster has deletion protection enabled. The database
-	// can't be deleted when this value is set to true.
+	// A value that indicates whether the DB cluster has deletion protection enabled.
+	// The database can't be deleted when deletion protection is enabled. By default,
+	// deletion protection is disabled.
 	DeletionProtection *bool `type:"boolean"`
 
 	//
@@ -91,17 +92,15 @@ type ModifyDBClusterInput struct {
 	// in the Amazon Aurora User Guide.
 	EnableHttpEndpoint *bool `type:"boolean"`
 
-	// True to enable mapping of AWS Identity and Access Management (IAM) accounts
-	// to database accounts, and otherwise false.
-	//
-	// Default: false
+	// A value that indicates whether to enable mapping of AWS Identity and Access
+	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
 	EnableIAMDatabaseAuthentication *bool `type:"boolean"`
 
 	// The version number of the database engine to which you want to upgrade. Changing
 	// this parameter results in an outage. The change is applied during the next
-	// maintenance window unless the ApplyImmediately parameter is set to true.
+	// maintenance window unless ApplyImmediately is enabled.
 	//
-	// For a list of valid engine versions, see CreateDBCluster, or call DescribeDBEngineVersions.
+	// For a list of valid engine versions, use DescribeDBEngineVersions.
 	EngineVersion *string `type:"string"`
 
 	// The new password for the master database user. This password can contain
@@ -127,10 +126,10 @@ type ModifyDBClusterInput struct {
 	// A value that indicates that the DB cluster should be associated with the
 	// specified option group. Changing this parameter doesn't result in an outage
 	// except in the following case, and the change is applied during the next maintenance
-	// window unless the ApplyImmediately parameter is set to true for this request.
-	// If the parameter change results in an option group that enables OEM, this
-	// change can cause a brief (sub-second) period during which new connections
-	// are rejected but existing connections are not interrupted.
+	// window unless the ApplyImmediately is enabled for this request. If the parameter
+	// change results in an option group that enables OEM, this change can cause
+	// a brief (sub-second) period during which new connections are rejected but
+	// existing connections are not interrupted.
 	//
 	// Permanent options can't be removed from an option group. The option group
 	// can't be removed from a DB cluster once it is associated with a DB cluster.

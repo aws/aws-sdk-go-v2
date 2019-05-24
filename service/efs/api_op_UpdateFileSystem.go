@@ -21,13 +21,16 @@ type UpdateFileSystemInput struct {
 	FileSystemId *string `location:"uri" locationName:"FileSystemId" type:"string" required:"true"`
 
 	// (Optional) The amount of throughput, in MiB/s, that you want to provision
-	// for your file system. If you're not updating the amount of provisioned throughput
-	// for your file system, you don't need to provide this value in your request.
-	ProvisionedThroughputInMibps *float64 `type:"double"`
+	// for your file system. Valid values are 1-1024. Required if ThroughputMode
+	// is changed to provisioned on update. If you're not updating the amount of
+	// provisioned throughput for your file system, you don't need to provide this
+	// value in your request.
+	ProvisionedThroughputInMibps *float64 `min:"1" type:"double"`
 
 	// (Optional) The throughput mode that you want your file system to use. If
 	// you're not updating your throughput mode, you don't need to provide this
-	// value in your request.
+	// value in your request. If you are changing the ThroughputMode to provisioned,
+	// you must also set a value for ProvisionedThroughputInMibps.
 	ThroughputMode ThroughputMode `type:"string" enum:"true"`
 }
 
@@ -42,6 +45,9 @@ func (s *UpdateFileSystemInput) Validate() error {
 
 	if s.FileSystemId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
+	}
+	if s.ProvisionedThroughputInMibps != nil && *s.ProvisionedThroughputInMibps < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("ProvisionedThroughputInMibps", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -129,11 +135,12 @@ type UpdateFileSystemOutput struct {
 	PerformanceMode PerformanceMode `type:"string" required:"true" enum:"true"`
 
 	// The throughput, measured in MiB/s, that you want to provision for a file
-	// system. The limit on throughput is 1024 MiB/s. You can get these limits increased
+	// system. Valid values are 1-1024. Required if ThroughputMode is set to provisioned.
+	// The limit on throughput is 1024 MiB/s. You can get these limits increased
 	// by contacting AWS Support. For more information, see Amazon EFS Limits That
 	// You Can Increase (https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits)
 	// in the Amazon EFS User Guide.
-	ProvisionedThroughputInMibps *float64 `type:"double"`
+	ProvisionedThroughputInMibps *float64 `min:"1" type:"double"`
 
 	// The latest known metered size (in bytes) of data stored in the file system,
 	// in its Value field, and the time at which that size was determined in its
@@ -154,10 +161,11 @@ type UpdateFileSystemOutput struct {
 	Tags []Tag `type:"list" required:"true"`
 
 	// The throughput mode for a file system. There are two throughput modes to
-	// choose from for your file system: bursting and provisioned. You can decrease
-	// your file system's throughput in Provisioned Throughput mode or change between
-	// the throughput modes as long as it’s been more than 24 hours since the
-	// last decrease or throughput mode change.
+	// choose from for your file system: bursting and provisioned. If you set ThroughputMode
+	// to provisioned, you must also set a value for ProvisionedThroughPutInMibps.
+	// You can decrease your file system's throughput in Provisioned Throughput
+	// mode or change between the throughput modes as long as it’s been more than
+	// 24 hours since the last decrease or throughput mode change.
 	ThroughputMode ThroughputMode `type:"string" enum:"true"`
 }
 

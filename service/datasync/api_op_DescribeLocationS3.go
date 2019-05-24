@@ -55,9 +55,10 @@ type DescribeLocationS3Output struct {
 	LocationUri *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management
-	// (IAM) role that is used to access an Amazon S3 bucket. For detailed information
-	// about using such a role, see Components and Terminology (https://alpha-aws-docs.aws.amazon.com/sync-service/latest/userguide/create-locations-cli.html#create-location-s3-cli)
-	// in the AWS DataSync User Guide.
+	// (IAM) role that is used to access an Amazon S3 bucket.
+	//
+	// For detailed information about using such a role, see "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location"
+	// (Creating a Location for Amazon S3) in the AWS DataSync User Guide.
 	S3Config *S3Config `type:"structure"`
 }
 

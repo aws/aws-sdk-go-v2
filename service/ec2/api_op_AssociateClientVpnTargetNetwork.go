@@ -13,6 +13,10 @@ import (
 type AssociateClientVpnTargetNetworkInput struct {
 	_ struct{} `type:"structure"`
 
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	ClientToken *string `type:"string" idempotencyToken:"true"`
+
 	// The ID of the Client VPN endpoint.
 	//
 	// ClientVpnEndpointId is a required field

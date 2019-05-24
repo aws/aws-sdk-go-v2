@@ -20,7 +20,7 @@ type DescribeScheduledInstanceAvailabilityInput struct {
 	// it is UnauthorizedOperation.
 	DryRun *bool `type:"boolean"`
 
-	// One or more filters.
+	// The filters.
 	//
 	//    * availability-zone - The Availability Zone (for example, us-west-2a).
 	//

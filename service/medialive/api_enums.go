@@ -603,6 +603,8 @@ const (
 	ChannelStateStopping     ChannelState = "STOPPING"
 	ChannelStateDeleting     ChannelState = "DELETING"
 	ChannelStateDeleted      ChannelState = "DELETED"
+	ChannelStateUpdating     ChannelState = "UPDATING"
+	ChannelStateUpdateFailed ChannelState = "UPDATE_FAILED"
 )
 
 func (enum ChannelState) MarshalValue() (string, error) {

@@ -74,6 +74,10 @@ const opDescribeBudget = "DescribeBudget"
 //
 // Describes a budget.
 //
+// The Request Syntax section shows the BudgetLimit syntax. For PlannedBudgetLimits,
+// see the Examples (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudget.html#API_DescribeBudget_Examples)
+// section.
+//
 //    // Example sending a request using DescribeBudgetRequest.
 //    req := client.DescribeBudgetRequest(params)
 //    resp, err := req.Send(context.TODO())

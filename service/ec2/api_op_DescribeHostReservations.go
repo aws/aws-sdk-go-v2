@@ -13,7 +13,7 @@ import (
 type DescribeHostReservationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// One or more filters.
+	// The filters.
 	//
 	//    * instance-family - The instance family (for example, m4).
 	//
@@ -33,7 +33,7 @@ type DescribeHostReservationsInput struct {
 	//    the tag value.
 	Filter []Filter `locationNameList:"Filter" type:"list"`
 
-	// One or more host reservation IDs.
+	// The host reservation IDs.
 	HostReservationIdSet []string `locationNameList:"item" type:"list"`
 
 	// The maximum number of results to return for the request in a single page.

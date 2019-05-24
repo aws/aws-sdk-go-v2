@@ -71,6 +71,8 @@ type ClientAPI interface {
 
 	AllocatePublicVirtualInterfaceRequest(*directconnect.AllocatePublicVirtualInterfaceInput) directconnect.AllocatePublicVirtualInterfaceRequest
 
+	AllocateTransitVirtualInterfaceRequest(*directconnect.AllocateTransitVirtualInterfaceInput) directconnect.AllocateTransitVirtualInterfaceRequest
+
 	AssociateConnectionWithLagRequest(*directconnect.AssociateConnectionWithLagInput) directconnect.AssociateConnectionWithLagRequest
 
 	AssociateHostedConnectionRequest(*directconnect.AssociateHostedConnectionInput) directconnect.AssociateHostedConnectionRequest
@@ -82,6 +84,8 @@ type ClientAPI interface {
 	ConfirmPrivateVirtualInterfaceRequest(*directconnect.ConfirmPrivateVirtualInterfaceInput) directconnect.ConfirmPrivateVirtualInterfaceRequest
 
 	ConfirmPublicVirtualInterfaceRequest(*directconnect.ConfirmPublicVirtualInterfaceInput) directconnect.ConfirmPublicVirtualInterfaceRequest
+
+	ConfirmTransitVirtualInterfaceRequest(*directconnect.ConfirmTransitVirtualInterfaceInput) directconnect.ConfirmTransitVirtualInterfaceRequest
 
 	CreateBGPPeerRequest(*directconnect.CreateBGPPeerInput) directconnect.CreateBGPPeerRequest
 
@@ -100,6 +104,8 @@ type ClientAPI interface {
 	CreatePrivateVirtualInterfaceRequest(*directconnect.CreatePrivateVirtualInterfaceInput) directconnect.CreatePrivateVirtualInterfaceRequest
 
 	CreatePublicVirtualInterfaceRequest(*directconnect.CreatePublicVirtualInterfaceInput) directconnect.CreatePublicVirtualInterfaceRequest
+
+	CreateTransitVirtualInterfaceRequest(*directconnect.CreateTransitVirtualInterfaceInput) directconnect.CreateTransitVirtualInterfaceRequest
 
 	DeleteBGPPeerRequest(*directconnect.DeleteBGPPeerInput) directconnect.DeleteBGPPeerRequest
 

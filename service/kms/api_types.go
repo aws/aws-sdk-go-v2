@@ -20,7 +20,7 @@ type AliasListEntry struct {
 	// String that contains the key ARN.
 	AliasArn *string `min:"20" type:"string"`
 
-	// String that contains the alias.
+	// String that contains the alias. This value begins with alias/.
 	AliasName *string `min:"1" type:"string"`
 
 	// String that contains the key identifier referred to by the alias.
@@ -51,6 +51,10 @@ type CustomKeyStoresListEntry struct {
 	//    not contain any active HSMs. To connect a custom key store to its AWS
 	//    CloudHSM cluster, the cluster must contain at least one active HSM.
 	//
+	//    * INTERNAL_ERROR - AWS KMS could not complete the request due to an internal
+	//    error. Retry the request. For ConnectCustomKeyStore requests, disconnect
+	//    the custom key store before trying to connect again.
+	//
 	//    * INVALID_CREDENTIALS - AWS KMS does not have the correct password for
 	//    the kmsuser crypto user in the AWS CloudHSM cluster.
 	//
@@ -64,7 +68,7 @@ type CustomKeyStoresListEntry struct {
 	//    for the custom key store.
 	//
 	// For help with connection failures, see Troubleshooting Custom Key Stores
-	// (http://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html)
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html)
 	// in the AWS Key Management Service Developer Guide.
 	ConnectionErrorCode ConnectionErrorCodeType `type:"string" enum:"true"`
 
@@ -81,7 +85,7 @@ type CustomKeyStoresListEntry struct {
 	//
 	// A value of FAILED indicates that an attempt to connect was unsuccessful.
 	// For help resolving a connection failure, see Troubleshooting a Custom Key
-	// Store (http://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html)
+	// Store (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html)
 	// in the AWS Key Management Service Developer Guide.
 	ConnectionState ConnectionStateType `type:"string" enum:"true"`
 
@@ -95,7 +99,7 @@ type CustomKeyStoresListEntry struct {
 	CustomKeyStoreName *string `min:"1" type:"string"`
 
 	// The trust anchor certificate of the associated AWS CloudHSM cluster. When
-	// you initialize the cluster (http://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html#sign-csr),
+	// you initialize the cluster (https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html#sign-csr),
 	// you create this certificate and save it in the customerCA.crt file.
 	TrustAnchorCertificate *string `min:"1" type:"string"`
 }
@@ -105,34 +109,52 @@ func (s CustomKeyStoresListEntry) String() string {
 	return awsutil.Prettify(s)
 }
 
-// A structure that you can use to allow certain operations in the grant only
-// when the desired encryption context is present. For more information about
-// encryption context, see Encryption Context (http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html)
-// in the AWS Key Management Service Developer Guide.
+// Use this structure to allow cryptographic operations in the grant only when
+// the operation request includes the specified encryption context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context).
 //
-// Grant constraints apply only to operations that accept encryption context
-// as input. For example, the DescribeKey operation does not accept encryption
-// context as input. A grant that allows the DescribeKey operation does so regardless
-// of the grant constraints. In constrast, the Encrypt operation accepts encryption
-// context as input. A grant that allows the Encrypt operation does so only
-// when the encryption context of the Encrypt operation satisfies the grant
-// constraints.
+// AWS KMS applies the grant constraints only when the grant allows a cryptographic
+// operation that accepts an encryption context as input, such as the following.
+//
+//    * Encrypt
+//
+//    * Decrypt
+//
+//    * GenerateDataKey
+//
+//    * GenerateDataKeyWithoutPlaintext
+//
+//    * ReEncrypt
+//
+// AWS KMS does not apply the grant constraints to other operations, such as
+// DescribeKey or ScheduleKeyDeletion.
+//
+// In a cryptographic operation, the encryption context in the decryption operation
+// must be an exact, case-sensitive match for the keys and values in the encryption
+// context of the encryption operation. Only the order of the pairs can vary.
+//
+// However, in a grant constraint, the key in each key-value pair is not case
+// sensitive, but the value is case sensitive.
+//
+// To avoid confusion, do not use multiple encryption context pairs that differ
+// only by case. To require a fully case-sensitive encryption context, use the
+// kms:EncryptionContext: and kms:EncryptionContextKeys conditions in an IAM
+// or key policy. For details, see kms:EncryptionContext: (https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-context)
+// in the AWS Key Management Service Developer Guide .
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GrantConstraints
 type GrantConstraints struct {
 	_ struct{} `type:"structure"`
 
-	// A list of key-value pairs that must be present in the encryption context
-	// of certain subsequent operations that the grant allows. When certain subsequent
-	// operations allowed by the grant include encryption context that matches this
-	// list, the grant allows the operation. Otherwise, the grant does not allow
-	// the operation.
+	// A list of key-value pairs that must match the encryption context in the cryptographic
+	// operation request. The grant allows the operation only when the encryption
+	// context in the request is the same as the encryption context specified in
+	// this constraint.
 	EncryptionContextEquals map[string]string `type:"map"`
 
-	// A list of key-value pairs, all of which must be present in the encryption
-	// context of certain subsequent operations that the grant allows. When certain
-	// subsequent operations allowed by the grant include encryption context that
-	// matches this list or is a superset of this list, the grant allows the operation.
-	// Otherwise, the grant does not allow the operation.
+	// A list of key-value pairs that must be included in the encryption context
+	// of the cryptographic operation request. The grant allows the cryptographic
+	// operation only when the encryption context in the request includes the key-value
+	// pairs specified in this constraint, although it can include additional key-value
+	// pairs.
 	EncryptionContextSubset map[string]string `type:"map"`
 }
 
@@ -211,12 +233,12 @@ type KeyMetadata struct {
 	AWSAccountId *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the CMK. For examples, see AWS Key Management
-	// Service (AWS KMS) (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms)
+	// Service (AWS KMS) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms)
 	// in the Example ARNs section of the AWS General Reference.
 	Arn *string `min:"20" type:"string"`
 
 	// The cluster ID of the AWS CloudHSM cluster that contains the key material
-	// for the CMK. When you create a CMK in a custom key store (http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html),
+	// for the CMK. When you create a CMK in a custom key store (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html),
 	// AWS KMS creates the key material for the CMK in the associated AWS CloudHSM
 	// cluster. This value is present only when the CMK is created in a custom key
 	// store.
@@ -225,7 +247,7 @@ type KeyMetadata struct {
 	// The date and time when the CMK was created.
 	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// A unique identifier for the custom key store (http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html)
+	// A unique identifier for the custom key store (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 	// that contains the CMK. This value is present only when the CMK is created
 	// in a custom key store.
 	CustomKeyStoreId *string `min:"1" type:"string"`
@@ -250,21 +272,22 @@ type KeyMetadata struct {
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
 
-	// The CMK's manager. CMKs are either customer-managed or AWS-managed. For more
-	// information about the difference, see Customer Master Keys (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys)
+	// The manager of the CMK. CMKs in your AWS account are either customer managed
+	// or AWS managed. For more information about the difference, see Customer Master
+	// Keys (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys)
 	// in the AWS Key Management Service Developer Guide.
 	KeyManager KeyManagerType `type:"string" enum:"true"`
 
 	// The state of the CMK.
 	//
 	// For more information about how key state affects the use of a CMK, see How
-	// Key State Affects the Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+	// Key State Affects the Use of a Customer Master Key (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 	// in the AWS Key Management Service Developer Guide.
 	KeyState KeyState `type:"string" enum:"true"`
 
-	// The cryptographic operations for which you can use the CMK. Currently the
-	// only allowed value is ENCRYPT_DECRYPT, which means you can use the CMK for
-	// the Encrypt and Decrypt operations.
+	// The cryptographic operations for which you can use the CMK. The only valid
+	// value is ENCRYPT_DECRYPT, which means you can use the CMK to encrypt and
+	// decrypt data.
 	KeyUsage KeyUsageType `type:"string" enum:"true"`
 
 	// The source of the CMK's key material. When this value is AWS_KMS, AWS KMS
@@ -290,7 +313,7 @@ func (s KeyMetadata) String() string {
 // tag values are both required, but tag values can be empty (null) strings.
 //
 // For information about the rules that apply to tag keys and tag values, see
-// User-Defined Tag Restrictions (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)
+// User-Defined Tag Restrictions (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)
 // in the AWS Billing and Cost Management User Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Tag
 type Tag struct {

@@ -74,6 +74,11 @@ const opUpdateBudget = "UpdateBudget"
 // and the calculatedSpend. When you modify a budget, the calculatedSpend drops
 // to zero until AWS has new usage data to use for forecasting.
 //
+// Only one of BudgetLimit or PlannedBudgetLimits can be present in the syntax
+// at one time. Use the syntax that matches your case. The Request Syntax section
+// shows the BudgetLimit syntax. For PlannedBudgetLimits, see the Examples (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_UpdateBudget.html#API_UpdateBudget_Examples)
+// section.
+//
 //    // Example sending a request using UpdateBudgetRequest.
 //    req := client.UpdateBudgetRequest(params)
 //    resp, err := req.Send(context.TODO())

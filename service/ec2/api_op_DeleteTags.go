@@ -29,9 +29,9 @@ type DeleteTagsInput struct {
 	// Resources is a required field
 	Resources []string `locationName:"resourceId" type:"list" required:"true"`
 
-	// One or more tags to delete. Specify a tag key and an optional tag value to
-	// delete specific tags. If you specify a tag key without a tag value, we delete
-	// any tag with this key regardless of its value. If you specify a tag key with
+	// The tags to delete. Specify a tag key and an optional tag value to delete
+	// specific tags. If you specify a tag key without a tag value, we delete any
+	// tag with this key regardless of its value. If you specify a tag key with
 	// an empty string as the tag value, we delete the tag only if its value is
 	// an empty string.
 	//

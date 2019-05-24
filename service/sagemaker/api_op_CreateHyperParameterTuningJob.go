@@ -43,9 +43,7 @@ type CreateHyperParameterTuningJobInput struct {
 	// jobs that this tuning job launches, including static hyperparameters, input
 	// data configuration, output data configuration, resource configuration, and
 	// stopping condition.
-	//
-	// TrainingJobDefinition is a required field
-	TrainingJobDefinition *HyperParameterTrainingJobDefinition `type:"structure" required:"true"`
+	TrainingJobDefinition *HyperParameterTrainingJobDefinition `type:"structure"`
 
 	// Specifies the configuration for starting the hyperparameter tuning job using
 	// one or more previous tuning jobs as a starting point. The results of previous
@@ -84,10 +82,6 @@ func (s *CreateHyperParameterTuningJobInput) Validate() error {
 	}
 	if s.HyperParameterTuningJobName != nil && len(*s.HyperParameterTuningJobName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("HyperParameterTuningJobName", 1))
-	}
-
-	if s.TrainingJobDefinition == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TrainingJobDefinition"))
 	}
 	if s.HyperParameterTuningJobConfig != nil {
 		if err := s.HyperParameterTuningJobConfig.Validate(); err != nil {

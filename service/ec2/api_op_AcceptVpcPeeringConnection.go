@@ -52,8 +52,8 @@ const opAcceptVpcPeeringConnection = "AcceptVpcPeeringConnection"
 // of the peer VPC. Use DescribeVpcPeeringConnections to view your outstanding
 // VPC peering connection requests.
 //
-// For an inter-region VPC peering connection request, you must accept the VPC
-// peering connection in the region of the accepter VPC.
+// For an inter-Region VPC peering connection request, you must accept the VPC
+// peering connection in the Region of the accepter VPC.
 //
 //    // Example sending a request using AcceptVpcPeeringConnectionRequest.
 //    req := client.AcceptVpcPeeringConnectionRequest(params)

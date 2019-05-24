@@ -62,7 +62,7 @@ func (s *DescribeImageAttributeInput) Validate() error {
 type DescribeImageAttributeOutput struct {
 	_ struct{} `type:"structure"`
 
-	// One or more block device mapping entries.
+	// The block device mapping entries.
 	BlockDeviceMappings []BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
 
 	// A description for the AMI.
@@ -74,10 +74,10 @@ type DescribeImageAttributeOutput struct {
 	// The kernel ID.
 	KernelId *AttributeValue `locationName:"kernel" type:"structure"`
 
-	// One or more launch permissions.
+	// The launch permissions.
 	LaunchPermissions []LaunchPermission `locationName:"launchPermission" locationNameList:"item" type:"list"`
 
-	// One or more product codes.
+	// The product codes.
 	ProductCodes []ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
 
 	// The RAM disk ID.

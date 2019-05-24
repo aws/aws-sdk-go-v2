@@ -77,13 +77,13 @@ const opUpdateKeyDescription = "UpdateKeyDescription"
 // UpdateKeyDescriptionRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Updates the description of a customer master key (CMK). To see the decription
+// Updates the description of a customer master key (CMK). To see the description
 // of a CMK, use DescribeKey.
 //
 // You cannot perform this operation on a CMK in a different AWS account.
 //
 // The result of this operation varies with the key state of the CMK. For details,
-// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// see How Key State Affects Use of a Customer Master Key (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 // in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using UpdateKeyDescriptionRequest.

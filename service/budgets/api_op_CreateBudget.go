@@ -87,6 +87,11 @@ const opCreateBudget = "CreateBudget"
 //
 // Creates a budget and, if included, notifications and subscribers.
 //
+// Only one of BudgetLimit or PlannedBudgetLimits can be present in the syntax
+// at one time. Use the syntax that matches your case. The Request Syntax section
+// shows the BudgetLimit syntax. For PlannedBudgetLimits, see the Examples (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_CreateBudget.html#API_CreateBudget_Examples)
+// section.
+//
 //    // Example sending a request using CreateBudgetRequest.
 //    req := client.CreateBudgetRequest(params)
 //    resp, err := req.Send(context.TODO())

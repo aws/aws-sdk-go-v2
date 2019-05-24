@@ -69,8 +69,6 @@ func (s *DescribeDBClustersInput) Validate() error {
 	return nil
 }
 
-// Contains the result of a successful invocation of the DescribeDBClusters
-// action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterMessage
 type DescribeDBClustersOutput struct {
 	_ struct{} `type:"structure"`

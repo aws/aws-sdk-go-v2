@@ -31,27 +31,10 @@ func (s AgentListEntry) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The subnet and the security group that the target Amazon EFS file system
-// uses. The subnet must have at least one mount target for that file system.
-// The security group that you provide needs to be able to communicate with
-// the security group on the mount target in the subnet specified.
-//
-// The exact relationship between security group M (of the mount target) and
-// security group S (which you provide for DataSync to use at this stage) is
-// as follows:
-//
-//    * Security group M (which you associate with the mount target) must allow
-//    inbound access for the Transmission Control Protocol (TCP) on the NFS
-//    port (2049) from security group S. You can enable inbound connections
-//    either by IP address (CIDR range) or security group.
-//
-//    * Security group S (provided to DataSync to access EFS) should have a
-//    rule that enables outbound connections to the NFS port on one of the file
-//    system’s mount targets. You can enable outbound connections either by
-//    IP address (CIDR range) or security group. For information about security
-//    groups and mount targets, see Security Groups for Amazon EC2 Instances
-//    and Mount Targets (https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access)
-//    in the Amazon EFS User Guide.
+// The subnet and the security group that DataSync uses to access target EFS
+// file system. The subnet must have at least one mount target for that file
+// system. The security group that you provide needs to be able to communicate
+// with the security group on the mount target in the subnet specified.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Ec2Config
 type Ec2Config struct {
 	_ struct{} `type:"structure"`
@@ -62,7 +45,8 @@ type Ec2Config struct {
 	// SecurityGroupArns is a required field
 	SecurityGroupArns []string `min:"1" type:"list" required:"true"`
 
-	// The ARN of the subnet that the Amazon EC2 resource belongs in.
+	// The ARN of the subnet and the security group that DataSync uses to access
+	// the target EFS file system.
 	//
 	// SubnetArn is a required field
 	SubnetArn *string `type:"string" required:"true"`
@@ -92,6 +76,40 @@ func (s *Ec2Config) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/EndpointOptions
+type EndpointOptions struct {
+	_ struct{} `type:"structure"`
+
+	Fips *bool `type:"boolean"`
+
+	PrivateLink *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s EndpointOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A pattern that determines which files to include in the transfer or which
+// files to exclude.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/FilterRule
+type FilterRule struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the type of filter rule pattern to apply. DataSync only supports
+	// the SIMPLE_PATTERN rule type.
+	FilterType FilterType `type:"string" enum:"true"`
+
+	// A pattern that defines the filter. The filter might include or exclude files
+	// is a transfer.
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s FilterRule) String() string {
+	return awsutil.Prettify(s)
 }
 
 // Represents a single entry in a list of locations. LocationListEntry returns
@@ -127,6 +145,24 @@ type LocationListEntry struct {
 
 // String returns the string representation
 func (s LocationListEntry) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Represents the mount options that are available for DataSync to access an
+// NFS location.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/NfsMountOptions
+type NfsMountOptions struct {
+	_ struct{} `type:"structure"`
+
+	// The specific NFS version that you want DataSync to use to mount your NFS
+	// share. If you don't specify a version, DataSync defaults to AUTOMATIC. That
+	// is, DataSync automatically selects a version based on negotiation with the
+	// NFS server.
+	Version NfsVersion `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s NfsMountOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -297,10 +333,27 @@ func (s *Options) Validate() error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/PrivateLinkConfig
+type PrivateLinkConfig struct {
+	_ struct{} `type:"structure"`
+
+	PrivateLinkEndpoint *string `type:"string"`
+
+	SecurityGroupArns []string `min:"1" type:"list"`
+
+	SubnetArns []string `min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s PrivateLinkConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
 // The Amazon Resource Name (ARN) of the AWS Identity and Access Management
-// (IAM) role that is used to access an Amazon S3 bucket. For detailed information
-// about using such a role, see Components and Terminology (https://alpha-aws-docs.aws.amazon.com/sync-service/latest/userguide/create-locations-cli.html#create-location-s3-cli)
-// in the AWS DataSync User Guide.
+// (IAM) role that is used to access an Amazon S3 bucket.
+//
+// For detailed information about using such a role, see "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location"
+// (Creating a Location for Amazon S3) in the AWS DataSync User Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/S3Config
 type S3Config struct {
 	_ struct{} `type:"structure"`
@@ -339,7 +392,9 @@ type TagListEntry struct {
 	_ struct{} `type:"structure"`
 
 	// The key for an AWS resource tag.
-	Key *string `min:"1" type:"string"`
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
 
 	// The value for an AWS resource tag.
 	Value *string `min:"1" type:"string"`
@@ -353,6 +408,10 @@ func (s TagListEntry) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagListEntry) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TagListEntry"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}

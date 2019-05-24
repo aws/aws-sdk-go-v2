@@ -57,7 +57,7 @@ const opDisconnectCustomKeyStore = "DisconnectCustomKeyStore"
 // DisconnectCustomKeyStoreRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Disconnects the custom key store (http://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html)
+// Disconnects the custom key store (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 // from its associated AWS CloudHSM cluster. While a custom key store is disconnected,
 // you can manage the custom key store and its customer master keys (CMKs),
 // but you cannot create or use CMKs in the custom key store. You can reconnect
@@ -74,7 +74,7 @@ const opDisconnectCustomKeyStore = "DisconnectCustomKeyStore"
 //
 // If the operation succeeds, it returns a JSON object with no properties.
 //
-// This operation is part of the Custom Key Store feature (http://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
+// This operation is part of the Custom Key Store feature (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 // feature in AWS KMS, which combines the convenience and extensive integration
 // of AWS KMS with the isolation and control of a single-tenant key store.
 //

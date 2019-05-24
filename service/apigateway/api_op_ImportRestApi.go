@@ -148,6 +148,9 @@ type ImportRestApiOutput struct {
 	// of the caller and Method configuration.
 	Policy *string `locationName:"policy" type:"string"`
 
+	// The collection of tags. Each tag element is associated with a given resource.
+	Tags map[string]string `locationName:"tags" type:"map"`
+
 	// A version identifier for the API.
 	Version *string `locationName:"version" type:"string"`
 
@@ -222,6 +225,18 @@ func (s ImportRestApiOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "policy", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	if s.Version != nil {
 		v := *s.Version

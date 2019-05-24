@@ -42,8 +42,8 @@ type GetServiceLastAccessedDetailsWithEntitiesInput struct {
 	//
 	// To learn the service namespace for a service, go to Actions, Resources, and
 	// Condition Keys for AWS Services (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html)
-	// in the IAM User Guide and choose the name of the service to view details
-	// for that service. In the first paragraph, find the service prefix. For example,
+	// in the IAM User Guide. Choose the name of the service to view details for
+	// that service. In the first paragraph, find the service prefix. For example,
 	// (service prefix: a4b). For more information about service namespaces, see
 	// AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
 	// in the AWS General Reference.
@@ -128,7 +128,7 @@ type GetServiceLastAccessedDetailsWithEntitiesOutput struct {
 
 	// When IsTruncated is true, this element is present and contains the value
 	// to use for the Marker parameter in a subsequent pagination request.
-	Marker *string `min:"1" type:"string"`
+	Marker *string `type:"string"`
 }
 
 // String returns the string representation

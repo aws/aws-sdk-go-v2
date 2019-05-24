@@ -76,7 +76,7 @@ const opCreateClassifier = "CreateClassifier"
 // CreateClassifierRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Creates a classifier in the user's account. This may be a GrokClassifier,
+// Creates a classifier in the user's account. This can be a GrokClassifier,
 // an XMLClassifier, a JsonClassifier, or a CsvClassifier, depending on which
 // field of the request is present.
 //

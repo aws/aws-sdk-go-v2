@@ -105,6 +105,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/lightsail"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning"
 	"github.com/aws/aws-sdk-go-v2/service/macie"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering"
@@ -112,6 +113,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/mediaconvert"
 	"github.com/aws/aws-sdk-go-v2/service/medialive"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackage"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod"
 	"github.com/aws/aws-sdk-go-v2/service/mediastore"
 	"github.com/aws/aws-sdk-go-v2/service/mediastoredata"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor"
@@ -291,6 +293,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "lightsail", value: reflect.ValueOf(lightsail.New(cfg))},
 		{name: "machinelearning", value: reflect.ValueOf(machinelearning.New(cfg))},
 		{name: "macie", value: reflect.ValueOf(macie.New(cfg))},
+		{name: "managedblockchain", value: reflect.ValueOf(managedblockchain.New(cfg))},
 		{name: "marketplacecommerceanalytics", value: reflect.ValueOf(marketplacecommerceanalytics.New(cfg))},
 		{name: "marketplaceentitlementservice", value: reflect.ValueOf(marketplaceentitlementservice.New(cfg))},
 		{name: "marketplacemetering", value: reflect.ValueOf(marketplacemetering.New(cfg))},
@@ -298,6 +301,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "mediaconvert", value: reflect.ValueOf(mediaconvert.New(cfg))},
 		{name: "medialive", value: reflect.ValueOf(medialive.New(cfg))},
 		{name: "mediapackage", value: reflect.ValueOf(mediapackage.New(cfg))},
+		{name: "mediapackagevod", value: reflect.ValueOf(mediapackagevod.New(cfg))},
 		{name: "mediastore", value: reflect.ValueOf(mediastore.New(cfg))},
 		{name: "mediastoredata", value: reflect.ValueOf(mediastoredata.New(cfg))},
 		{name: "mediatailor", value: reflect.ValueOf(mediatailor.New(cfg))},

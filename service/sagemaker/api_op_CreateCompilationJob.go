@@ -32,7 +32,7 @@ type CreateCompilationJobInput struct {
 	// OutputConfig is a required field
 	OutputConfig *OutputConfig `type:"structure" required:"true"`
 
-	// The Amazon Resource Name (ARN) of an IIAMAM role that enables Amazon SageMaker
+	// The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker
 	// to perform tasks on your behalf.
 	//
 	// During model compilation, Amazon SageMaker needs your permission to:

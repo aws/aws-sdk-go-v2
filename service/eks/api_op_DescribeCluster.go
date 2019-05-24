@@ -88,8 +88,8 @@ const opDescribeCluster = "DescribeCluster"
 // API server. For more information, see Create a kubeconfig for Amazon EKS
 // (https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html).
 //
-// The API server endpoint and certificate authority data are not available
-// until the cluster reaches the ACTIVE state.
+// The API server endpoint and certificate authority data aren't available until
+// the cluster reaches the ACTIVE state.
 //
 //    // Example sending a request using DescribeClusterRequest.
 //    req := client.DescribeClusterRequest(params)

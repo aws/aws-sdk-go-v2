@@ -21,12 +21,12 @@ type DescribeRegionsInput struct {
 
 	// The filters.
 	//
-	//    * endpoint - The endpoint of the region (for example, ec2.us-east-1.amazonaws.com).
+	//    * endpoint - The endpoint of the Region (for example, ec2.us-east-1.amazonaws.com).
 	//
-	//    * region-name - The name of the region (for example, us-east-1).
+	//    * region-name - The name of the Region (for example, us-east-1).
 	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
-	// The names of the regions.
+	// The names of the Regions.
 	RegionNames []string `locationName:"RegionName" locationNameList:"RegionName" type:"list"`
 }
 
@@ -39,7 +39,7 @@ func (s DescribeRegionsInput) String() string {
 type DescribeRegionsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Information about the regions.
+	// Information about the Regions.
 	Regions []Region `locationName:"regionInfo" locationNameList:"item" type:"list"`
 }
 
@@ -53,9 +53,13 @@ const opDescribeRegions = "DescribeRegions"
 // DescribeRegionsRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Describes the regions that are currently available to you.
+// Describes the Regions that are currently available to you. The API returns
+// a list of all the Regions, including Regions that are disabled for your account.
+// For information about enabling Regions for your account, see Enabling and
+// Disabling Regions (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-account-payment.html#manage-account-payment-enable-disable-regions)
+// in the AWS Billing and Cost Management User Guide.
 //
-// For a list of the regions supported by Amazon EC2, see Regions and Endpoints
+// For a list of the Regions supported by Amazon EC2, see Regions and Endpoints
 // (https://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region).
 //
 //    // Example sending a request using DescribeRegionsRequest.

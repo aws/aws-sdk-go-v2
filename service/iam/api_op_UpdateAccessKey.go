@@ -86,7 +86,7 @@ const opUpdateAccessKey = "UpdateAccessKey"
 // vice versa. This operation can be used to disable a user's key as part of
 // a key rotation workflow.
 //
-// If the UserName field is not specified, the user name is determined implicitly
+// If the UserName is not specified, the user name is determined implicitly
 // based on the AWS access key ID used to sign the request. This operation works
 // for access keys under the AWS account. Consequently, you can use this operation
 // to manage AWS account root user credentials even if the AWS account has no

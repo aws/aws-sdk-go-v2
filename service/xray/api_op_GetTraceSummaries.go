@@ -22,7 +22,7 @@ type GetTraceSummariesInput struct {
 
 	// Specify a filter expression to retrieve trace summaries for services or requests
 	// that meet certain requirements.
-	FilterExpression *string `min:"1" type:"string"`
+	FilterExpression *string `type:"string"`
 
 	// Specify the pagination token returned by a previous request to retrieve the
 	// next page of results.
@@ -31,10 +31,18 @@ type GetTraceSummariesInput struct {
 	// Set to true to get summaries for only a subset of available traces.
 	Sampling *bool `type:"boolean"`
 
+	// A paramater to indicate whether to enable sampling on trace summaries. Input
+	// parameters are Name and Value.
+	SamplingStrategy *SamplingStrategy `type:"structure"`
+
 	// The start of the time frame for which to retrieve traces.
 	//
 	// StartTime is a required field
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// A parameter to indicate whether to query trace summaries by TraceId or Event
+	// time.
+	TimeRangeType TimeRangeType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -48,9 +56,6 @@ func (s *GetTraceSummariesInput) Validate() error {
 
 	if s.EndTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndTime"))
-	}
-	if s.FilterExpression != nil && len(*s.FilterExpression) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("FilterExpression", 1))
 	}
 
 	if s.StartTime == nil {
@@ -90,11 +95,23 @@ func (s GetTraceSummariesInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Sampling", protocol.BoolValue(v), metadata)
 	}
+	if s.SamplingStrategy != nil {
+		v := s.SamplingStrategy
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SamplingStrategy", v, metadata)
+	}
 	if s.StartTime != nil {
 		v := *s.StartTime
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if len(s.TimeRangeType) > 0 {
+		v := s.TimeRangeType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TimeRangeType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -179,7 +196,7 @@ const opGetTraceSummaries = "GetTraceSummaries"
 // annotation.account = "12345"
 //
 // For a full list of indexed fields and keywords that you can use in filter
-// expressions, see Using Filter Expressions (http://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html)
+// expressions, see Using Filter Expressions (https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html)
 // in the AWS X-Ray Developer Guide.
 //
 //    // Example sending a request using GetTraceSummariesRequest.

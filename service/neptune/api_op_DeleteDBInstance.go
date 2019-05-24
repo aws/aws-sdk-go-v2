@@ -113,14 +113,7 @@ const opDeleteDBInstance = "DeleteDBInstance"
 // If the specified DB instance is part of a DB cluster, you can't delete the
 // DB instance if both of the following conditions are true:
 //
-//    * The DB cluster is a Read Replica of another DB cluster.
-//
 //    * The DB instance is the only instance in the DB cluster.
-//
-// To delete a DB instance in this case, first call the PromoteReadReplicaDBCluster
-// API action to promote the DB cluster so it's no longer a Read Replica. After
-// the promotion completes, then call the DeleteDBInstance API action to delete
-// the final instance in the DB cluster.
 //
 //    // Example sending a request using DeleteDBInstanceRequest.
 //    req := client.DeleteDBInstanceRequest(params)

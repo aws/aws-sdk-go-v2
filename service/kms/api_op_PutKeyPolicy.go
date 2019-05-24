@@ -20,7 +20,7 @@ type PutKeyPolicyInput struct {
 	// Setting this value to true increases the risk that the CMK becomes unmanageable.
 	// Do not set this value to true indiscriminately.
 	//
-	// For more information, refer to the scenario in the Default Key Policy (http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam)
+	// For more information, refer to the scenario in the Default Key Policy (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam)
 	// section in the AWS Key Management Service Developer Guide.
 	//
 	// Use this parameter only when you intend to prevent the principal that is
@@ -52,7 +52,7 @@ type PutKeyPolicyInput struct {
 	//    must allow the principal that is making the PutKeyPolicy request to make
 	//    a subsequent PutKeyPolicy request on the CMK. This reduces the risk that
 	//    the CMK becomes unmanageable. For more information, refer to the scenario
-	//    in the Default Key Policy (http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam)
+	//    in the Default Key Policy (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam)
 	//    section of the AWS Key Management Service Developer Guide.
 	//
 	//    * Each statement in the key policy must contain one or more principals.
@@ -61,7 +61,7 @@ type PutKeyPolicyInput struct {
 	//    you might need to enforce a delay before including the new principal in
 	//    a key policy because the new principal might not be immediately visible
 	//    to AWS KMS. For more information, see Changes that I make are not always
-	//    immediately visible (http://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency)
+	//    immediately visible (https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency)
 	//    in the AWS Identity and Access Management User Guide.
 	//
 	// The key policy size limit is 32 kilobytes (32768 bytes).
@@ -129,7 +129,7 @@ const opPutKeyPolicy = "PutKeyPolicy"
 // Attaches a key policy to the specified customer master key (CMK). You cannot
 // perform this operation on a CMK in a different AWS account.
 //
-// For more information about key policies, see Key Policies (http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
+// For more information about key policies, see Key Policies (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
 // in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using PutKeyPolicyRequest.

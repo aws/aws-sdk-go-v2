@@ -38,6 +38,9 @@ type AssociateAddressInput struct {
 
 	// [EC2-VPC] The ID of the network interface. If the instance has more than
 	// one network interface, you must specify a network interface ID.
+	//
+	// For EC2-VPC, you can specify either the instance ID or the network interface
+	// ID, but not both.
 	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
 
 	// [EC2-VPC] The primary or secondary private IP address to associate with the
@@ -45,7 +48,8 @@ type AssociateAddressInput struct {
 	// address is associated with the primary private IP address.
 	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 
-	// The Elastic IP address. This is required for EC2-Classic.
+	// The Elastic IP address to associate with the instance. This is required for
+	// EC2-Classic.
 	PublicIp *string `type:"string"`
 }
 

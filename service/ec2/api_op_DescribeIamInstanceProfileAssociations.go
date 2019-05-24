@@ -13,10 +13,10 @@ import (
 type DescribeIamInstanceProfileAssociationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// One or more IAM instance profile associations.
+	// The IAM instance profile associations.
 	AssociationIds []string `locationName:"AssociationId" locationNameList:"AssociationId" type:"list"`
 
-	// One or more filters.
+	// The filters.
 	//
 	//    * instance-id - The ID of the instance.
 	//
@@ -57,7 +57,7 @@ func (s *DescribeIamInstanceProfileAssociationsInput) Validate() error {
 type DescribeIamInstanceProfileAssociationsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Information about one or more IAM instance profile associations.
+	// Information about the IAM instance profile associations.
 	IamInstanceProfileAssociations []IamInstanceProfileAssociation `locationName:"iamInstanceProfileAssociationSet" locationNameList:"item" type:"list"`
 
 	// The token to use to retrieve the next page of results. This value is null

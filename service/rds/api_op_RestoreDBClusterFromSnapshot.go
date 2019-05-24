@@ -13,8 +13,8 @@ import (
 type RestoreDBClusterFromSnapshotInput struct {
 	_ struct{} `type:"structure"`
 
-	// Provides the list of Amazon EC2 Availability Zones that instances in the
-	// restored DB cluster can be created in.
+	// Provides the list of Availability Zones (AZs) where instances in the restored
+	// DB cluster can be created.
 	AvailabilityZones []string `locationNameList:"AvailabilityZone" type:"list"`
 
 	// The target backtrack window, in seconds. To disable backtracking, set this
@@ -28,8 +28,8 @@ type RestoreDBClusterFromSnapshotInput struct {
 	//    hours).
 	BacktrackWindow *int64 `type:"long"`
 
-	// True to copy all tags from the restored DB cluster to snapshots of the restored
-	// DB cluster, and otherwise false. The default is false.
+	// A value that indicates whether to copy all tags from the restored DB cluster
+	// to snapshots of the restored DB cluster. The default is not to copy them.
 	CopyTagsToSnapshot *bool `type:"boolean"`
 
 	// The name of the DB cluster to create from the DB snapshot or DB cluster snapshot.
@@ -74,9 +74,9 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// The database name for the restored DB cluster.
 	DatabaseName *string `type:"string"`
 
-	// Indicates if the DB cluster should have deletion protection enabled. The
-	// database can't be deleted when this value is set to true. The default is
-	// false.
+	// A value that indicates whether the DB cluster has deletion protection enabled.
+	// The database can't be deleted when deletion protection is enabled. By default,
+	// deletion protection is disabled.
 	DeletionProtection *bool `type:"boolean"`
 
 	// The list of logs that the restored DB cluster is to export to Amazon CloudWatch
@@ -85,10 +85,8 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// in the Amazon Aurora User Guide.
 	EnableCloudwatchLogsExports []string `type:"list"`
 
-	// True to enable mapping of AWS Identity and Access Management (IAM) accounts
-	// to database accounts, and otherwise false.
-	//
-	// Default: false
+	// A value that indicates whether to enable mapping of AWS Identity and Access
+	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
 	EnableIAMDatabaseAuthentication *bool `type:"boolean"`
 
 	// The database engine to use for the new DB cluster.

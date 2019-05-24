@@ -157,6 +157,7 @@ const (
 	DeviceStatusPending      DeviceStatus = "PENDING"
 	DeviceStatusWasOffline   DeviceStatus = "WAS_OFFLINE"
 	DeviceStatusDeregistered DeviceStatus = "DEREGISTERED"
+	DeviceStatusFailed       DeviceStatus = "FAILED"
 )
 
 func (enum DeviceStatus) MarshalValue() (string, error) {
@@ -172,8 +173,21 @@ type DeviceStatusDetailCode string
 
 // Enum values for DeviceStatusDetailCode
 const (
-	DeviceStatusDetailCodeDeviceSoftwareUpdateNeeded DeviceStatusDetailCode = "DEVICE_SOFTWARE_UPDATE_NEEDED"
-	DeviceStatusDetailCodeDeviceWasOffline           DeviceStatusDetailCode = "DEVICE_WAS_OFFLINE"
+	DeviceStatusDetailCodeDeviceSoftwareUpdateNeeded      DeviceStatusDetailCode = "DEVICE_SOFTWARE_UPDATE_NEEDED"
+	DeviceStatusDetailCodeDeviceWasOffline                DeviceStatusDetailCode = "DEVICE_WAS_OFFLINE"
+	DeviceStatusDetailCodeCredentialsAccessFailure        DeviceStatusDetailCode = "CREDENTIALS_ACCESS_FAILURE"
+	DeviceStatusDetailCodeTlsVersionMismatch              DeviceStatusDetailCode = "TLS_VERSION_MISMATCH"
+	DeviceStatusDetailCodeAssociationRejection            DeviceStatusDetailCode = "ASSOCIATION_REJECTION"
+	DeviceStatusDetailCodeAuthenticationFailure           DeviceStatusDetailCode = "AUTHENTICATION_FAILURE"
+	DeviceStatusDetailCodeDhcpFailure                     DeviceStatusDetailCode = "DHCP_FAILURE"
+	DeviceStatusDetailCodeInternetUnavailable             DeviceStatusDetailCode = "INTERNET_UNAVAILABLE"
+	DeviceStatusDetailCodeDnsFailure                      DeviceStatusDetailCode = "DNS_FAILURE"
+	DeviceStatusDetailCodeUnknownFailure                  DeviceStatusDetailCode = "UNKNOWN_FAILURE"
+	DeviceStatusDetailCodeCertificateIssuingLimitExceeded DeviceStatusDetailCode = "CERTIFICATE_ISSUING_LIMIT_EXCEEDED"
+	DeviceStatusDetailCodeInvalidCertificateAuthority     DeviceStatusDetailCode = "INVALID_CERTIFICATE_AUTHORITY"
+	DeviceStatusDetailCodeNetworkProfileNotFound          DeviceStatusDetailCode = "NETWORK_PROFILE_NOT_FOUND"
+	DeviceStatusDetailCodeInvalidPasswordState            DeviceStatusDetailCode = "INVALID_PASSWORD_STATE"
+	DeviceStatusDetailCodePasswordNotFound                DeviceStatusDetailCode = "PASSWORD_NOT_FOUND"
 )
 
 func (enum DeviceStatusDetailCode) MarshalValue() (string, error) {
@@ -181,6 +195,22 @@ func (enum DeviceStatusDetailCode) MarshalValue() (string, error) {
 }
 
 func (enum DeviceStatusDetailCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DeviceUsageType string
+
+// Enum values for DeviceUsageType
+const (
+	DeviceUsageTypeVoice DeviceUsageType = "VOICE"
+)
+
+func (enum DeviceUsageType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeviceUsageType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -260,12 +290,14 @@ type Feature string
 
 // Enum values for Feature
 const (
-	FeatureBluetooth     Feature = "BLUETOOTH"
-	FeatureVolume        Feature = "VOLUME"
-	FeatureNotifications Feature = "NOTIFICATIONS"
-	FeatureLists         Feature = "LISTS"
-	FeatureSkills        Feature = "SKILLS"
-	FeatureAll           Feature = "ALL"
+	FeatureBluetooth      Feature = "BLUETOOTH"
+	FeatureVolume         Feature = "VOLUME"
+	FeatureNotifications  Feature = "NOTIFICATIONS"
+	FeatureLists          Feature = "LISTS"
+	FeatureSkills         Feature = "SKILLS"
+	FeatureNetworkProfile Feature = "NETWORK_PROFILE"
+	FeatureSettings       Feature = "SETTINGS"
+	FeatureAll            Feature = "ALL"
 )
 
 func (enum Feature) MarshalValue() (string, error) {
@@ -273,6 +305,58 @@ func (enum Feature) MarshalValue() (string, error) {
 }
 
 func (enum Feature) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type Locale string
+
+// Enum values for Locale
+const (
+	LocaleEnUs Locale = "en-US"
+)
+
+func (enum Locale) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Locale) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type NetworkEapMethod string
+
+// Enum values for NetworkEapMethod
+const (
+	NetworkEapMethodEapTls NetworkEapMethod = "EAP_TLS"
+)
+
+func (enum NetworkEapMethod) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NetworkEapMethod) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type NetworkSecurityType string
+
+// Enum values for NetworkSecurityType
+const (
+	NetworkSecurityTypeOpen           NetworkSecurityType = "OPEN"
+	NetworkSecurityTypeWep            NetworkSecurityType = "WEP"
+	NetworkSecurityTypeWpaPsk         NetworkSecurityType = "WPA_PSK"
+	NetworkSecurityTypeWpa2Psk        NetworkSecurityType = "WPA2_PSK"
+	NetworkSecurityTypeWpa2Enterprise NetworkSecurityType = "WPA2_ENTERPRISE"
+)
+
+func (enum NetworkSecurityType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NetworkSecurityType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

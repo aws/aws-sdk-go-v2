@@ -66,8 +66,7 @@ type CreateEventSubscriptionInput struct {
 	// SubscriptionName is a required field
 	SubscriptionName *string `type:"string" required:"true"`
 
-	// A list of tags. For more information, see Tagging Amazon Neptune Resources
-	// (http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html).
+	// The tags to be applied to the new event subscription.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 }
 

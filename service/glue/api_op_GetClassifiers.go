@@ -13,7 +13,7 @@ import (
 type GetClassifiersInput struct {
 	_ struct{} `type:"structure"`
 
-	// Size of the list to return (optional).
+	// The size of the list to return (optional).
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// An optional continuation token.

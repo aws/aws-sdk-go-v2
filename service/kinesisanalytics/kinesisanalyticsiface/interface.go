@@ -89,9 +89,15 @@ type ClientAPI interface {
 
 	ListApplicationsRequest(*kinesisanalytics.ListApplicationsInput) kinesisanalytics.ListApplicationsRequest
 
+	ListTagsForResourceRequest(*kinesisanalytics.ListTagsForResourceInput) kinesisanalytics.ListTagsForResourceRequest
+
 	StartApplicationRequest(*kinesisanalytics.StartApplicationInput) kinesisanalytics.StartApplicationRequest
 
 	StopApplicationRequest(*kinesisanalytics.StopApplicationInput) kinesisanalytics.StopApplicationRequest
+
+	TagResourceRequest(*kinesisanalytics.TagResourceInput) kinesisanalytics.TagResourceRequest
+
+	UntagResourceRequest(*kinesisanalytics.UntagResourceInput) kinesisanalytics.UntagResourceRequest
 
 	UpdateApplicationRequest(*kinesisanalytics.UpdateApplicationInput) kinesisanalytics.UpdateApplicationRequest
 }

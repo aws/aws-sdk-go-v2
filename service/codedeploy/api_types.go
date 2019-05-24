@@ -208,7 +208,7 @@ func (s BlueInstanceTerminationOption) String() string {
 type DeploymentConfigInfo struct {
 	_ struct{} `type:"structure"`
 
-	// The destination platform type for the deployment (Lambda or Server).
+	// The destination platform type for the deployment (Lambda, Server, or ECS).
 	ComputePlatform ComputePlatform `locationName:"computePlatform" type:"string" enum:"true"`
 
 	// The time at which the deployment configuration was created.
@@ -254,7 +254,7 @@ type DeploymentGroupInfo struct {
 	// Information about blue/green deployment options for a deployment group.
 	BlueGreenDeploymentConfiguration *BlueGreenDeploymentConfiguration `locationName:"blueGreenDeploymentConfiguration" type:"structure"`
 
-	// The destination platform type for the deployment group (Lambda or Server).
+	// The destination platform type for the deployment (Lambda, Server, or ECS).
 	ComputePlatform ComputePlatform `locationName:"computePlatform" type:"string" enum:"true"`
 
 	// The deployment configuration name.
@@ -305,7 +305,10 @@ type DeploymentGroupInfo struct {
 	// tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
 	OnPremisesTagSet *OnPremisesTagSet `locationName:"onPremisesTagSet" type:"structure"`
 
-	// A service role ARN.
+	// A service role Amazon Resource Name (ARN) that grants CodeDeploy permission
+	// to make calls to AWS services on your behalf. For more information, see Create
+	// a Service Role for AWS CodeDeploy (https://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-create-service-role.html)
+	// in the AWS CodeDeploy User Guide.
 	ServiceRoleArn *string `locationName:"serviceRoleArn" type:"string"`
 
 	// Information about the deployment group's target revision, including type
@@ -343,7 +346,7 @@ type DeploymentInfo struct {
 	// A timestamp that indicates when the deployment was complete.
 	CompleteTime *time.Time `locationName:"completeTime" type:"timestamp" timestampFormat:"unix"`
 
-	// The destination platform type for the deployment (Lambda or Server).
+	// The destination platform type for the deployment (Lambda, Server, or ECS).
 	ComputePlatform ComputePlatform `locationName:"computePlatform" type:"string" enum:"true"`
 
 	// A timestamp that indicates when the deployment was created.
@@ -1018,6 +1021,35 @@ func (s InstanceTarget) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Information about a Lambda function specified in a deployment.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LambdaFunctionInfo
+type LambdaFunctionInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The version of a Lambda function that production traffic points to.
+	CurrentVersion *string `locationName:"currentVersion" type:"string"`
+
+	// The alias of a Lambda function. For more information, see Introduction to
+	// AWS Lambda Aliases (https://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html).
+	FunctionAlias *string `locationName:"functionAlias" type:"string"`
+
+	// The name of a Lambda function.
+	FunctionName *string `locationName:"functionName" type:"string"`
+
+	// The version of a Lambda function that production traffic points to after
+	// the Lambda function is deployed.
+	TargetVersion *string `locationName:"targetVersion" type:"string"`
+
+	// The percentage of production traffic that the target version of a Lambda
+	// function receives.
+	TargetVersionWeight *float64 `locationName:"targetVersionWeight" type:"double"`
+}
+
+// String returns the string representation
+func (s LambdaFunctionInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Information about the target AWS Lambda function during an AWS Lambda deployment.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LambdaTarget
 type LambdaTarget struct {
@@ -1025,6 +1057,9 @@ type LambdaTarget struct {
 
 	// The unique ID of a deployment.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
+
+	// A LambdaFunctionInfo object that describes a target Lambda function.
+	LambdaFunctionInfo *LambdaFunctionInfo `locationName:"lambdaFunctionInfo" type:"structure"`
 
 	// The date and time when the target Lambda function was updated by a deployment.
 	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
@@ -1161,15 +1196,15 @@ type MinimumHealthyHosts struct {
 	// time. The deployment is successful if four or more instance are deployed
 	// to successfully. Otherwise, the deployment fails.
 	//
-	// In a call to the get deployment configuration operation, CodeDeployDefault.OneAtATime
-	// returns a minimum healthy instance type of MOST_CONCURRENCY and a value of
-	// 1. This means a deployment to only one instance at a time. (You cannot set
-	// the type to MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.) In addition,
-	// with CodeDeployDefault.OneAtATime, AWS CodeDeploy attempts to ensure that
-	// all instances but one are kept in a healthy state during the deployment.
-	// Although this allows one instance at a time to be taken offline for a new
-	// deployment, it also means that if the deployment to the last instance fails,
-	// the overall deployment is still successful.
+	// In a call to the GetDeploymentConfig, CodeDeployDefault.OneAtATime returns
+	// a minimum healthy instance type of MOST_CONCURRENCY and a value of 1. This
+	// means a deployment to only one instance at a time. (You cannot set the type
+	// to MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.) In addition, with
+	// CodeDeployDefault.OneAtATime, AWS CodeDeploy attempts to ensure that all
+	// instances but one are kept in a healthy state during the deployment. Although
+	// this allows one instance at a time to be taken offline for a new deployment,
+	// it also means that if the deployment to the last instance fails, the overall
+	// deployment is still successful.
 	//
 	// For more information, see AWS CodeDeploy Instance Health (https://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html)
 	// in the AWS CodeDeploy User Guide.

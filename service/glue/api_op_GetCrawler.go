@@ -13,7 +13,7 @@ import (
 type GetCrawlerInput struct {
 	_ struct{} `type:"structure"`
 
-	// Name of the crawler to retrieve metadata for.
+	// The name of the crawler to retrieve metadata for.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`

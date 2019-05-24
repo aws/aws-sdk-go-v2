@@ -34,7 +34,7 @@ type CopyFpgaImageInput struct {
 	// SourceFpgaImageId is a required field
 	SourceFpgaImageId *string `type:"string" required:"true"`
 
-	// The region that contains the source AFI.
+	// The Region that contains the source AFI.
 	//
 	// SourceRegion is a required field
 	SourceRegion *string `type:"string" required:"true"`
@@ -81,7 +81,7 @@ const opCopyFpgaImage = "CopyFpgaImage"
 // CopyFpgaImageRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Copies the specified Amazon FPGA Image (AFI) to the current region.
+// Copies the specified Amazon FPGA Image (AFI) to the current Region.
 //
 //    // Example sending a request using CopyFpgaImageRequest.
 //    req := client.CopyFpgaImageRequest(params)

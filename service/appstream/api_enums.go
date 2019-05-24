@@ -282,6 +282,7 @@ func (enum SessionConnectionState) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Possible values for the state of a streaming session.
 type SessionState string
 
 // Enum values for SessionState
@@ -355,6 +356,40 @@ func (enum StorageConnectorType) MarshalValue() (string, error) {
 }
 
 func (enum StorageConnectorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type UsageReportExecutionErrorCode string
+
+// Enum values for UsageReportExecutionErrorCode
+const (
+	UsageReportExecutionErrorCodeResourceNotFound     UsageReportExecutionErrorCode = "RESOURCE_NOT_FOUND"
+	UsageReportExecutionErrorCodeAccessDenied         UsageReportExecutionErrorCode = "ACCESS_DENIED"
+	UsageReportExecutionErrorCodeInternalServiceError UsageReportExecutionErrorCode = "INTERNAL_SERVICE_ERROR"
+)
+
+func (enum UsageReportExecutionErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UsageReportExecutionErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type UsageReportSchedule string
+
+// Enum values for UsageReportSchedule
+const (
+	UsageReportScheduleDaily UsageReportSchedule = "DAILY"
+)
+
+func (enum UsageReportSchedule) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UsageReportSchedule) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

@@ -16,12 +16,18 @@ type ListDeploymentsInput struct {
 
 	// The name of an AWS CodeDeploy application associated with the IAM user or
 	// AWS account.
+	//
+	// If applicationName is specified, then deploymentGroupName must be specified.
+	// If it is not specified, then deploymentGroupName must not be specified.
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string"`
 
 	// A time range (start and end) for returning a subset of the list of deployments.
 	CreateTimeRange *TimeRange `locationName:"createTimeRange" type:"structure"`
 
 	// The name of a deployment group for the specified application.
+	//
+	// If deploymentGroupName is specified, then applicationName must be specified.
+	// If it is not specified, then applicationName must not be specified.
 	DeploymentGroupName *string `locationName:"deploymentGroupName" min:"1" type:"string"`
 
 	// A subset of deployments to list by status:

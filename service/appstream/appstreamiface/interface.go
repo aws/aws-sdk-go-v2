@@ -84,6 +84,8 @@ type ClientAPI interface {
 
 	CreateStreamingURLRequest(*appstream.CreateStreamingURLInput) appstream.CreateStreamingURLRequest
 
+	CreateUsageReportSubscriptionRequest(*appstream.CreateUsageReportSubscriptionInput) appstream.CreateUsageReportSubscriptionRequest
+
 	CreateUserRequest(*appstream.CreateUserInput) appstream.CreateUserRequest
 
 	DeleteDirectoryConfigRequest(*appstream.DeleteDirectoryConfigInput) appstream.DeleteDirectoryConfigRequest
@@ -97,6 +99,8 @@ type ClientAPI interface {
 	DeleteImagePermissionsRequest(*appstream.DeleteImagePermissionsInput) appstream.DeleteImagePermissionsRequest
 
 	DeleteStackRequest(*appstream.DeleteStackInput) appstream.DeleteStackRequest
+
+	DeleteUsageReportSubscriptionRequest(*appstream.DeleteUsageReportSubscriptionInput) appstream.DeleteUsageReportSubscriptionRequest
 
 	DeleteUserRequest(*appstream.DeleteUserInput) appstream.DeleteUserRequest
 
@@ -113,6 +117,8 @@ type ClientAPI interface {
 	DescribeSessionsRequest(*appstream.DescribeSessionsInput) appstream.DescribeSessionsRequest
 
 	DescribeStacksRequest(*appstream.DescribeStacksInput) appstream.DescribeStacksRequest
+
+	DescribeUsageReportSubscriptionsRequest(*appstream.DescribeUsageReportSubscriptionsInput) appstream.DescribeUsageReportSubscriptionsRequest
 
 	DescribeUserStackAssociationsRequest(*appstream.DescribeUserStackAssociationsInput) appstream.DescribeUserStackAssociationsRequest
 

@@ -33,6 +33,13 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// DBClusterIdentifier is a required field
 	DBClusterIdentifier *string `type:"string" required:"true"`
 
+	// The name of the DB cluster parameter group to associate with the new DB cluster.
+	//
+	// Constraints:
+	//
+	//    * If supplied, must match the name of an existing DBClusterParameterGroup.
+	DBClusterParameterGroupName *string `type:"string"`
+
 	// The name of the DB subnet group to use for the new DB cluster.
 	//
 	// Constraints: If supplied, must match the name of an existing DBSubnetGroup.
@@ -40,7 +47,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// Example: mySubnetgroup
 	DBSubnetGroupName *string `type:"string"`
 
-	// The database name for the restored DB cluster.
+	// Not supported.
 	DatabaseName *string `type:"string"`
 
 	// True to enable mapping of AWS Identity and Access Management (IAM) accounts

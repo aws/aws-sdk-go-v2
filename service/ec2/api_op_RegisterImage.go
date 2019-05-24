@@ -25,7 +25,7 @@ type RegisterImageInput struct {
 	// use of an AMI.
 	BillingProducts []string `locationName:"BillingProduct" locationNameList:"item" type:"list"`
 
-	// One or more block device mapping entries.
+	// The block device mapping entries.
 	BlockDeviceMappings []BlockDeviceMapping `locationName:"BlockDeviceMapping" locationNameList:"BlockDeviceMapping" type:"list"`
 
 	// A description for your AMI.

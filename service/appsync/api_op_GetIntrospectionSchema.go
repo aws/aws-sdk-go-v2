@@ -23,6 +23,9 @@ type GetIntrospectionSchemaInput struct {
 	//
 	// Format is a required field
 	Format OutputType `location:"querystring" locationName:"format" type:"string" required:"true" enum:"true"`
+
+	// A flag that specifies whether the schema introspection should contain directives.
+	IncludeDirectives *bool `location:"querystring" locationName:"includeDirectives" type:"boolean"`
 }
 
 // String returns the string representation
@@ -62,6 +65,12 @@ func (s GetIntrospectionSchemaInput) MarshalFields(e protocol.FieldEncoder) erro
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.QueryTarget, "format", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.IncludeDirectives != nil {
+		v := *s.IncludeDirectives
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "includeDirectives", protocol.BoolValue(v), metadata)
 	}
 	return nil
 }

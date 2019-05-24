@@ -41,16 +41,16 @@ type ModifyImageAttributeInput struct {
 	// is launchPermission.
 	OperationType OperationType `type:"string" enum:"true"`
 
-	// One or more DevPay product codes. After you add a product code to an AMI,
-	// it can't be removed.
+	// The DevPay product codes. After you add a product code to an AMI, it can't
+	// be removed.
 	ProductCodes []string `locationName:"ProductCode" locationNameList:"ProductCode" type:"list"`
 
-	// One or more user groups. This parameter can be used only when the Attribute
-	// parameter is launchPermission.
+	// The user groups. This parameter can be used only when the Attribute parameter
+	// is launchPermission.
 	UserGroups []string `locationName:"UserGroup" locationNameList:"UserGroup" type:"list"`
 
-	// One or more AWS account IDs. This parameter can be used only when the Attribute
-	// parameter is launchPermission.
+	// The AWS account IDs. This parameter can be used only when the Attribute parameter
+	// is launchPermission.
 	UserIds []string `locationName:"UserId" locationNameList:"UserId" type:"list"`
 
 	// The value of the attribute being modified. This parameter can be used only

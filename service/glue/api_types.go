@@ -115,7 +115,7 @@ func (s BatchStopJobRunSuccessfulSubmission) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Specifies a table definition in the Data Catalog.
+// Specifies a table definition in the AWS Glue Data Catalog.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CatalogEntry
 type CatalogEntry struct {
 	_ struct{} `type:"structure"`
@@ -180,29 +180,74 @@ func (s CatalogImportStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Specifies an AWS Glue Data Catalog target.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CatalogTarget
+type CatalogTarget struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the database to be synchronized.
+	//
+	// DatabaseName is a required field
+	DatabaseName *string `min:"1" type:"string" required:"true"`
+
+	// A list of the tables to be synchronized.
+	//
+	// Tables is a required field
+	Tables []string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s CatalogTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CatalogTarget) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CatalogTarget"}
+
+	if s.DatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
+	}
+	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
+	}
+
+	if s.Tables == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Tables"))
+	}
+	if s.Tables != nil && len(s.Tables) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tables", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Classifiers are triggered during a crawl task. A classifier checks whether
-// a given file is in a format it can handle, and if it is, the classifier creates
+// a given file is in a format it can handle. If it is, the classifier creates
 // a schema in the form of a StructType object that matches that data format.
 //
-// You can use the standard classifiers that AWS Glue supplies, or you can write
+// You can use the standard classifiers that AWS Glue provides, or you can write
 // your own classifiers to best categorize your data sources and specify the
 // appropriate schemas to use for them. A classifier can be a grok classifier,
-// an XML classifier, a JSON classifier, or a custom CSV classifier as specified
+// an XML classifier, a JSON classifier, or a custom CSV classifier, as specified
 // in one of the fields in the Classifier object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Classifier
 type Classifier struct {
 	_ struct{} `type:"structure"`
 
-	// A CSVClassifier object.
+	// A classifier for comma-separated values (CSV).
 	CsvClassifier *CsvClassifier `type:"structure"`
 
-	// A GrokClassifier object.
+	// A classifier that uses grok.
 	GrokClassifier *GrokClassifier `type:"structure"`
 
-	// A JsonClassifier object.
+	// A classifier for JSON content.
 	JsonClassifier *JsonClassifier `type:"structure"`
 
-	// An XMLClassifier object.
+	// A classifier for XML content.
 	XMLClassifier *XMLClassifier `type:"structure"`
 }
 
@@ -294,7 +339,7 @@ type CodeGenNode struct {
 	// The line number of the node.
 	LineNumber *int64 `type:"integer"`
 
-	// The type of node this is.
+	// The type of node that this is.
 	//
 	// NodeType is a required field
 	NodeType *string `type:"string" required:"true"`
@@ -671,7 +716,8 @@ func (s ConnectionsList) String() string {
 type Crawler struct {
 	_ struct{} `type:"structure"`
 
-	// A list of custom classifiers associated with the crawler.
+	// A list of UTF-8 strings that specify the custom classifiers that are associated
+	// with the crawler.
 	Classifiers []string `type:"list"`
 
 	// Crawler configuration information. This versioned JSON string allows users
@@ -683,13 +729,13 @@ type Crawler struct {
 	// crawl began.
 	CrawlElapsedTime *int64 `type:"long"`
 
-	// The name of the SecurityConfiguration structure to be used by this Crawler.
+	// The name of the SecurityConfiguration structure to be used by this crawler.
 	CrawlerSecurityConfiguration *string `type:"string"`
 
-	// The time when the crawler was created.
+	// The time that the crawler was created.
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The database where metadata is written by this crawler.
+	// The name of the database in which the crawler's output is stored.
 	DatabaseName *string `type:"string"`
 
 	// A description of the crawler.
@@ -699,20 +745,20 @@ type Crawler struct {
 	// occurred.
 	LastCrawl *LastCrawlInfo `type:"structure"`
 
-	// The time the crawler was last updated.
+	// The time that the crawler was last updated.
 	LastUpdated *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The crawler name.
+	// The name of the crawler.
 	Name *string `min:"1" type:"string"`
 
-	// The IAM role (or ARN of an IAM role) used to access customer resources, such
-	// as data in Amazon S3.
+	// The Amazon Resource Name (ARN) of an IAM role that's used to access customer
+	// resources, such as Amazon Simple Storage Service (Amazon S3) data.
 	Role *string `type:"string"`
 
 	// For scheduled crawlers, the schedule when the crawler runs.
 	Schedule *Schedule `type:"structure"`
 
-	// Sets the behavior when the crawler finds a changed or deleted object.
+	// The policy that specifies update and delete behaviors for the crawler.
 	SchemaChangePolicy *SchemaChangePolicy `type:"structure"`
 
 	// Indicates whether the crawler is running, or whether a run is pending.
@@ -774,19 +820,39 @@ func (s CrawlerMetrics) String() string {
 type CrawlerTargets struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies DynamoDB targets.
+	// Specifies AWS Glue Data Catalog targets.
+	CatalogTargets []CatalogTarget `type:"list"`
+
+	// Specifies Amazon DynamoDB targets.
 	DynamoDBTargets []DynamoDBTarget `type:"list"`
 
 	// Specifies JDBC targets.
 	JdbcTargets []JdbcTarget `type:"list"`
 
-	// Specifies Amazon S3 targets.
+	// Specifies Amazon Simple Storage Service (Amazon S3) targets.
 	S3Targets []S3Target `type:"list"`
 }
 
 // String returns the string representation
 func (s CrawlerTargets) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CrawlerTargets) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CrawlerTargets"}
+	if s.CatalogTargets != nil {
+		for i, v := range s.CatalogTargets {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CatalogTargets", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Specifies a custom CSV classifier for CreateClassifier to create.
@@ -966,9 +1032,9 @@ type CreateXMLClassifierRequest struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// The XML tag designating the element that contains each record in an XML document
-	// being parsed. Note that this cannot identify a self-closing element (closed
-	// by />). An empty row element that contains only attributes can be parsed
-	// as long as it ends with a closing tag (for example, <row item_a="A" item_b="B"></row>
+	// being parsed. This can't identify a self-closing element (closed by />).
+	// An empty row element that contains only attributes can be parsed as long
+	// as it ends with a closing tag (for example, <row item_a="A" item_b="B"></row>
 	// is okay, but <row item_a="A" item_b="B" /> is not).
 	RowTag *string `type:"string"`
 }
@@ -1010,7 +1076,7 @@ type CsvClassifier struct {
 	// Indicates whether the CSV file contains a header.
 	ContainsHeader CsvHeaderOption `type:"string" enum:"true"`
 
-	// The time this classifier was registered.
+	// The time that this classifier was registered.
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// A custom symbol to denote what separates each column entry in the row.
@@ -1023,7 +1089,7 @@ type CsvClassifier struct {
 	// A list of strings representing column names.
 	Header []string `type:"list"`
 
-	// The time this classifier was last updated.
+	// The time that this classifier was last updated.
 	LastUpdated *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The name of the classifier.
@@ -1032,7 +1098,7 @@ type CsvClassifier struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// A custom symbol to denote what combines content into a single column value.
-	// Must be different from the column delimiter.
+	// It must be different from the column delimiter.
 	QuoteSymbol *string `min:"1" type:"string"`
 
 	// The version of this classifier.
@@ -1289,7 +1355,7 @@ func (s DevEndpointCustomLibraries) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Specifies a DynamoDB table to crawl.
+// Specifies an Amazon DynamoDB table to crawl.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DynamoDBTarget
 type DynamoDBTarget struct {
 	_ struct{} `type:"structure"`
@@ -1422,20 +1488,20 @@ type GrokClassifier struct {
 	// Classification is a required field
 	Classification *string `type:"string" required:"true"`
 
-	// The time this classifier was registered.
+	// The time that this classifier was registered.
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// Optional custom grok patterns defined by this classifier. For more information,
-	// see custom patterns in Writing Custom Classifers (http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html).
+	// see custom patterns in Writing Custom Classifiers (http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html).
 	CustomPatterns *string `type:"string"`
 
 	// The grok pattern applied to a data store by this classifier. For more information,
-	// see built-in patterns in Writing Custom Classifers (http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html).
+	// see built-in patterns in Writing Custom Classifiers (http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html).
 	//
 	// GrokPattern is a required field
 	GrokPattern *string `min:"1" type:"string" required:"true"`
 
-	// The time this classifier was last updated.
+	// The time that this classifier was last updated.
 	LastUpdated *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The name of the classifier.
@@ -1910,7 +1976,7 @@ func (s *JobUpdate) Validate() error {
 type JsonClassifier struct {
 	_ struct{} `type:"structure"`
 
-	// The time this classifier was registered.
+	// The time that this classifier was registered.
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// A JsonPath string defining the JSON data for the classifier to classify.
@@ -1920,7 +1986,7 @@ type JsonClassifier struct {
 	// JsonPath is a required field
 	JsonPath *string `type:"string" required:"true"`
 
-	// The time this classifier was last updated.
+	// The time that this classifier was last updated.
 	LastUpdated *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The name of the classifier.
@@ -1971,13 +2037,13 @@ func (s LastCrawlInfo) String() string {
 type Location struct {
 	_ struct{} `type:"structure"`
 
-	// A DynamoDB Table location.
+	// An Amazon DynamoDB table location.
 	DynamoDB []CodeGenNodeArg `type:"list"`
 
 	// A JDBC location.
 	Jdbc []CodeGenNodeArg `type:"list"`
 
-	// An Amazon S3 location.
+	// An Amazon Simple Storage Service (Amazon S3) location.
 	S3 []CodeGenNodeArg `type:"list"`
 }
 
@@ -2379,7 +2445,7 @@ func (s S3Encryption) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Specifies a data store in Amazon S3.
+// Specifies a data store in Amazon Simple Storage Service (Amazon S3).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3Target
 type S3Target struct {
 	_ struct{} `type:"structure"`
@@ -2402,10 +2468,10 @@ func (s S3Target) String() string {
 type Schedule struct {
 	_ struct{} `type:"structure"`
 
-	// A cron expression used to specify the schedule (see Time-Based Schedules
-	// for Jobs and Crawlers (http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
-	// For example, to run something every day at 12:15 UTC, you would specify:
-	// cron(15 12 * * ? *).
+	// A cron expression used to specify the schedule. For more information, see
+	// Time-Based Schedules for Jobs and Crawlers (http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
+	// For example, to run something every day at 12:15 UTC, specify cron(15 12
+	// * * ? *).
 	ScheduleExpression *string `type:"string"`
 
 	// The state of the schedule.
@@ -2417,7 +2483,7 @@ func (s Schedule) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Crawler policy for update and deletion behavior.
+// A policy that specifies update and deletion behaviors for the crawler.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SchemaChangePolicy
 type SchemaChangePolicy struct {
 	_ struct{} `type:"structure"`
@@ -2974,7 +3040,7 @@ type UpdateCsvClassifierRequest struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// A custom symbol to denote what combines content into a single column value.
-	// Must be different from the column delimiter.
+	// It must be different from the column delimiter.
 	QuoteSymbol *string `min:"1" type:"string"`
 }
 
@@ -3104,9 +3170,9 @@ type UpdateXMLClassifierRequest struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// The XML tag designating the element that contains each record in an XML document
-	// being parsed. Note that this cannot identify a self-closing element (closed
-	// by />). An empty row element that contains only attributes can be parsed
-	// as long as it ends with a closing tag (for example, <row item_a="A" item_b="B"></row>
+	// being parsed. This cannot identify a self-closing element (closed by />).
+	// An empty row element that contains only attributes can be parsed as long
+	// as it ends with a closing tag (for example, <row item_a="A" item_b="B"></row>
 	// is okay, but <row item_a="A" item_b="B" /> is not).
 	RowTag *string `type:"string"`
 }
@@ -3224,10 +3290,10 @@ type XMLClassifier struct {
 	// Classification is a required field
 	Classification *string `type:"string" required:"true"`
 
-	// The time this classifier was registered.
+	// The time that this classifier was registered.
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The time this classifier was last updated.
+	// The time that this classifier was last updated.
 	LastUpdated *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The name of the classifier.
@@ -3236,9 +3302,9 @@ type XMLClassifier struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// The XML tag designating the element that contains each record in an XML document
-	// being parsed. Note that this cannot identify a self-closing element (closed
-	// by />). An empty row element that contains only attributes can be parsed
-	// as long as it ends with a closing tag (for example, <row item_a="A" item_b="B"></row>
+	// being parsed. This can't identify a self-closing element (closed by />).
+	// An empty row element that contains only attributes can be parsed as long
+	// as it ends with a closing tag (for example, <row item_a="A" item_b="B"></row>
 	// is okay, but <row item_a="A" item_b="B" /> is not).
 	RowTag *string `type:"string"`
 

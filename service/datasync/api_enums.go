@@ -36,6 +36,22 @@ func (enum Atime) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type FilterType string
+
+// Enum values for FilterType
+const (
+	FilterTypeSimplePattern FilterType = "SIMPLE_PATTERN"
+)
+
+func (enum FilterType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FilterType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Gid string
 
 // Enum values for Gid
@@ -68,6 +84,25 @@ func (enum Mtime) MarshalValue() (string, error) {
 }
 
 func (enum Mtime) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type NfsVersion string
+
+// Enum values for NfsVersion
+const (
+	NfsVersionAutomatic NfsVersion = "AUTOMATIC"
+	NfsVersionNfs3      NfsVersion = "NFS3"
+	NfsVersionNfs40     NfsVersion = "NFS4_0"
+	NfsVersionNfs41     NfsVersion = "NFS4_1"
+)
+
+func (enum NfsVersion) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NfsVersion) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

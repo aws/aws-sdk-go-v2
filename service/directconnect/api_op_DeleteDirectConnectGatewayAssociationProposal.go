@@ -42,7 +42,7 @@ func (s *DeleteDirectConnectGatewayAssociationProposalInput) Validate() error {
 type DeleteDirectConnectGatewayAssociationProposalOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the virtual private gateway.
+	// The ID of the associated gateway.
 	DirectConnectGatewayAssociationProposal *DirectConnectGatewayAssociationProposal `locationName:"directConnectGatewayAssociationProposal" type:"structure"`
 }
 
@@ -57,7 +57,7 @@ const opDeleteDirectConnectGatewayAssociationProposal = "DeleteDirectConnectGate
 // AWS Direct Connect.
 //
 // Deletes the association proposal request between the specified Direct Connect
-// gateway and virtual private gateway.
+// gateway and virtual private gateway or transit gateway.
 //
 //    // Example sending a request using DeleteDirectConnectGatewayAssociationProposalRequest.
 //    req := client.DeleteDirectConnectGatewayAssociationProposalRequest(params)

@@ -19,7 +19,8 @@ type BatchGetDeploymentInstancesInput struct {
 	// DeploymentId is a required field
 	DeploymentId *string `locationName:"deploymentId" type:"string" required:"true"`
 
-	// The unique IDs of instances used in the deployment.
+	// The unique IDs of instances used in the deployment. The maximum number of
+	// instance IDs you can specify is 25.
 	//
 	// InstanceIds is a required field
 	InstanceIds []string `locationName:"instanceIds" type:"list" required:"true"`
@@ -73,9 +74,10 @@ const opBatchGetDeploymentInstances = "BatchGetDeploymentInstances"
 //
 // This method works, but is deprecated. Use BatchGetDeploymentTargets instead.
 //
-// Returns an array of instances associated with a deployment. This method works
-// with EC2/On-premises and AWS Lambda compute platforms. The newer BatchGetDeploymentTargets
-// works with all compute platforms.
+// Returns an array of one or more instances associated with a deployment. This
+// method works with EC2/On-premises and AWS Lambda compute platforms. The newer
+// BatchGetDeploymentTargets works with all compute platforms. The maximum number
+// of instances that can be returned is 25.
 //
 //    // Example sending a request using BatchGetDeploymentInstancesRequest.
 //    req := client.BatchGetDeploymentInstancesRequest(params)

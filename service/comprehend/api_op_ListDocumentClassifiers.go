@@ -82,6 +82,12 @@ func (c *Client) ListDocumentClassifiersRequest(input *ListDocumentClassifiersIn
 		Name:       opListDocumentClassifiers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -114,6 +120,53 @@ func (r ListDocumentClassifiersRequest) Send(ctx context.Context) (*ListDocument
 	}
 
 	return resp, nil
+}
+
+// NewListDocumentClassifiersRequestPaginator returns a paginator for ListDocumentClassifiers.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListDocumentClassifiersRequest(input)
+//   p := comprehend.NewListDocumentClassifiersRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListDocumentClassifiersPaginator(req ListDocumentClassifiersRequest) ListDocumentClassifiersPaginator {
+	return ListDocumentClassifiersPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListDocumentClassifiersInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListDocumentClassifiersPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListDocumentClassifiersPaginator struct {
+	aws.Pager
+}
+
+func (p *ListDocumentClassifiersPaginator) CurrentPage() *ListDocumentClassifiersOutput {
+	return p.Pager.CurrentPage().(*ListDocumentClassifiersOutput)
 }
 
 // ListDocumentClassifiersResponse is the response type for the

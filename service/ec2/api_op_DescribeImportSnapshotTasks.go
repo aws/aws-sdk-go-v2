@@ -20,7 +20,7 @@ type DescribeImportSnapshotTasksInput struct {
 	// it is UnauthorizedOperation.
 	DryRun *bool `type:"boolean"`
 
-	// One or more filters.
+	// The filters.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// A list of import snapshot task IDs.

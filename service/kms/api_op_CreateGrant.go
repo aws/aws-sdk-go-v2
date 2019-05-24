@@ -13,26 +13,26 @@ import (
 type CreateGrantInput struct {
 	_ struct{} `type:"structure"`
 
-	// A structure that you can use to allow certain operations in the grant only
-	// when the desired encryption context is present. For more information about
-	// encryption context, see Encryption Context (http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html)
-	// in the AWS Key Management Service Developer Guide.
+	// Allows a cryptographic operation only when the encryption context matches
+	// or includes the encryption context specified in this structure. For more
+	// information about encryption context, see Encryption Context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
+	// in the AWS Key Management Service Developer Guide .
 	Constraints *GrantConstraints `type:"structure"`
 
 	// A list of grant tokens.
 	//
-	// For more information, see Grant Tokens (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
+	// For more information, see Grant Tokens (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
 	GrantTokens []string `type:"list"`
 
 	// The principal that is given permission to perform the operations that the
 	// grant permits.
 	//
-	// To specify the principal, use the Amazon Resource Name (ARN) (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// To specify the principal, use the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of an AWS principal. Valid AWS principals include AWS accounts (root), IAM
 	// users, IAM roles, federated users, and assumed role users. For examples of
 	// the ARN syntax to use for specifying a principal, see AWS Identity and Access
-	// Management (IAM) (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam)
+	// Management (IAM) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam)
 	// in the Example ARNs section of the AWS General Reference.
 	//
 	// GranteePrincipal is a required field
@@ -55,8 +55,8 @@ type CreateGrantInput struct {
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
 
-	// A friendly name for identifying the grant. Use this value to prevent unintended
-	// creation of duplicate grants when retrying this request.
+	// A friendly name for identifying the grant. Use this value to prevent the
+	// unintended creation of duplicate grants when retrying this request.
 	//
 	// When this value is absent, all CreateGrant requests result in a new grant
 	// with a unique GrantId even if all the supplied parameters are identical.
@@ -77,11 +77,11 @@ type CreateGrantInput struct {
 	// The principal that is given permission to retire the grant by using RetireGrant
 	// operation.
 	//
-	// To specify the principal, use the Amazon Resource Name (ARN) (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// To specify the principal, use the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of an AWS principal. Valid AWS principals include AWS accounts (root), IAM
 	// users, federated users, and assumed role users. For examples of the ARN syntax
 	// to use for specifying a principal, see AWS Identity and Access Management
-	// (IAM) (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam)
+	// (IAM) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam)
 	// in the Example ARNs section of the AWS General Reference.
 	RetiringPrincipal *string `min:"1" type:"string"`
 }
@@ -136,7 +136,7 @@ type CreateGrantOutput struct {
 
 	// The grant token.
 	//
-	// For more information, see Grant Tokens (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
+	// For more information, see Grant Tokens (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
 	GrantToken *string `min:"1" type:"string"`
 }
@@ -151,17 +151,21 @@ const opCreateGrant = "CreateGrant"
 // CreateGrantRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Adds a grant to a customer master key (CMK). The grant specifies who can
-// use the CMK and under what conditions. When setting permissions, grants are
-// an alternative to key policies.
+// Adds a grant to a customer master key (CMK). The grant allows the grantee
+// principal to use the CMK when the conditions specified in the grant are met.
+// When setting permissions, grants are an alternative to key policies.
+//
+// To create a grant that allows a cryptographic operation only when the encryption
+// context in the operation request matches or includes a specified encryption
+// context, use the Constraints parameter. For details, see GrantConstraints.
 //
 // To perform this operation on a CMK in a different AWS account, specify the
 // key ARN in the value of the KeyId parameter. For more information about grants,
-// see Grants (http://docs.aws.amazon.com/kms/latest/developerguide/grants.html)
-// in the AWS Key Management Service Developer Guide.
+// see Grants (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html)
+// in the AWS Key Management Service Developer Guide .
 //
 // The result of this operation varies with the key state of the CMK. For details,
-// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// see How Key State Affects Use of a Customer Master Key (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 // in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using CreateGrantRequest.

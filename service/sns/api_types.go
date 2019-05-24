@@ -29,13 +29,13 @@ func (s Endpoint) String() string {
 
 // The user-specified message attribute value. For string data types, the value
 // attribute has the same restrictions on the content as the message body. For
-// more information, see Publish (http://docs.aws.amazon.com/sns/latest/api/API_Publish.html).
+// more information, see Publish (https://docs.aws.amazon.com/sns/latest/api/API_Publish.html).
 //
 // Name, type, and value must not be empty or null. In addition, the message
 // body should not be empty or null. All parts of the message attribute, including
 // name, type, and value, are included in the message size restriction, which
 // is currently 256 KB (262,144 bytes). For more information, see Using Amazon
-// SNS Message Attributes (http://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html).
+// SNS Message Attributes (https://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/MessageAttributeValue
 type MessageAttributeValue struct {
 	_ struct{} `type:"structure"`
@@ -48,13 +48,13 @@ type MessageAttributeValue struct {
 
 	// Amazon SNS supports the following logical data types: String, String.Array,
 	// Number, and Binary. For more information, see Message Attribute Data Types
-	// (http://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html#SNSMessageAttributes.DataTypes).
+	// (https://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html#SNSMessageAttributes.DataTypes).
 	//
 	// DataType is a required field
 	DataType *string `type:"string" required:"true"`
 
 	// Strings are Unicode with UTF8 binary encoding. For a list of code values,
-	// see http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters (http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters).
+	// see ASCII Printable Characters (https://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters).
 	StringValue *string `type:"string"`
 }
 
@@ -118,6 +118,48 @@ type Subscription struct {
 // String returns the string representation
 func (s Subscription) String() string {
 	return awsutil.Prettify(s)
+}
+
+// The list of tags to be added to the specified topic.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Tag
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// The required key portion of the tag.
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
+
+	// The optional value portion of the tag.
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // A wrapper type for the topic's Amazon Resource Name (ARN). To retrieve a

@@ -13,7 +13,7 @@ import (
 type DescribeHostsInput struct {
 	_ struct{} `type:"structure"`
 
-	// One or more filters.
+	// The filters.
 	//
 	//    * auto-placement - Whether auto-placement is enabled or disabled (on |
 	//    off).
@@ -77,7 +77,7 @@ const opDescribeHosts = "DescribeHosts"
 // DescribeHostsRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Describes one or more of your Dedicated Hosts.
+// Describes the specified Dedicated Hosts or all your Dedicated Hosts.
 //
 // The results describe only the Dedicated Hosts in the Region you're currently
 // using. All listed instances consume capacity on your Dedicated Host. Dedicated

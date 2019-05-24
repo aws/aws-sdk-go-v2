@@ -368,11 +368,11 @@ type ContainerDefinition struct {
 	// can contain multiple dependencies. When a dependency is defined for container
 	// startup, for container shutdown it is reversed.
 	//
-	// Your Amazon ECS container instances require at least version 1.26.0 of the
-	// container agent to enable container dependencies. However, we recommend using
-	// the latest container agent version. For information about checking your agent
-	// version and updating to the latest version, see Updating the Amazon ECS Container
-	// Agent (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
+	// For tasks using the EC2 launch type, the container instances require at least
+	// version 1.26.0 of the container agent to enable container dependencies. However,
+	// we recommend using the latest container agent version. For information about
+	// checking your agent version and updating to the latest version, see Updating
+	// the Amazon ECS Container Agent (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
 	// in the Amazon Elastic Container Service Developer Guide. If you are using
 	// an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1
 	// of the ecs-init package. If your container instances are launched from version
@@ -380,6 +380,10 @@ type ContainerDefinition struct {
 	// agent and ecs-init. For more information, see Amazon ECS-optimized Linux
 	// AMI (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
 	// in the Amazon Elastic Container Service Developer Guide.
+	//
+	// This parameter is available for tasks using the Fargate launch type in the
+	// Ohio (us-east-2) region only and the task or service requires platform version
+	// 1.3.0 or later.
 	DependsOn []ContainerDependency `locationName:"dependsOn" type:"list"`
 
 	// When this parameter is true, networking is disabled within the container.
@@ -558,7 +562,11 @@ type ContainerDefinition struct {
 
 	// The log configuration specification for the container.
 	//
-	// If you are using the Fargate launch type, the only supported value is awslogs.
+	// For tasks using the Fargate launch type, the supported log drivers are awslogs
+	// and splunk.
+	//
+	// For tasks using the EC2 launch type, the supported log drivers are awslogs,
+	// syslog, gelf, fluentd, splunk, journald, and json-file.
 	//
 	// This parameter maps to LogConfig in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
 	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
@@ -726,11 +734,11 @@ type ContainerDefinition struct {
 	// reach the desired status within that time then containerA will give up and
 	// not start. This results in the task transitioning to a STOPPED state.
 	//
-	// Your Amazon ECS container instances require at least version 1.26.0 of the
-	// container agent to enable a container start timeout value. However, we recommend
-	// using the latest container agent version. For information about checking
-	// your agent version and updating to the latest version, see Updating the Amazon
-	// ECS Container Agent (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
+	// For tasks using the EC2 launch type, the container instances require at least
+	// version 1.26.0 of the container agent to enable a container start timeout
+	// value. However, we recommend using the latest container agent version. For
+	// information about checking your agent version and updating to the latest
+	// version, see Updating the Amazon ECS Container Agent (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
 	// in the Amazon Elastic Container Service Developer Guide. If you are using
 	// an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1
 	// of the ecs-init package. If your container instances are launched from version
@@ -738,18 +746,25 @@ type ContainerDefinition struct {
 	// agent and ecs-init. For more information, see Amazon ECS-optimized Linux
 	// AMI (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
 	// in the Amazon Elastic Container Service Developer Guide.
+	//
+	// This parameter is available for tasks using the Fargate launch type in the
+	// Ohio (us-east-2) region only and the task or service requires platform version
+	// 1.3.0 or later.
 	StartTimeout *int64 `locationName:"startTimeout" type:"integer"`
 
 	// Time duration to wait before the container is forcefully killed if it doesn't
-	// exit normally on its own. The stop timeout value for the container takes
-	// precedence over the ECS_CONTAINER_STOP_TIMEOUT container agent configuration
-	// parameter, if used.
+	// exit normally on its own. For tasks using the Fargate launch type, the max
+	// stopTimeout value is 2 minutes. This parameter is available for tasks using
+	// the Fargate launch type in the Ohio (us-east-2) region only and the task
+	// or service requires platform version 1.3.0 or later.
 	//
-	// Your Amazon ECS container instances require at least version 1.26.0 of the
-	// container agent to enable a container stop timeout value. However, we recommend
-	// using the latest container agent version. For information about checking
-	// your agent version and updating to the latest version, see Updating the Amazon
-	// ECS Container Agent (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
+	// For tasks using the EC2 launch type, the stop timeout value for the container
+	// takes precedence over the ECS_CONTAINER_STOP_TIMEOUT container agent configuration
+	// parameter, if used. Container instances require at least version 1.26.0 of
+	// the container agent to enable a container stop timeout value. However, we
+	// recommend using the latest container agent version. For information about
+	// checking your agent version and updating to the latest version, see Updating
+	// the Amazon ECS Container Agent (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
 	// in the Amazon Elastic Container Service Developer Guide. If you are using
 	// an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1
 	// of the ecs-init package. If your container instances are launched from version
@@ -1774,9 +1789,16 @@ type LogConfiguration struct {
 
 	// The log driver to use for the container. The valid values listed for this
 	// parameter are log drivers that the Amazon ECS container agent can communicate
-	// with by default. If you are using the Fargate launch type, the only supported
-	// value is awslogs. For more information about using the awslogs driver, see
-	// Using the awslogs Log Driver (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html)
+	// with by default.
+	//
+	// For tasks using the Fargate launch type, the supported log drivers are awslogs
+	// and splunk.
+	//
+	// For tasks using the EC2 launch type, the supported log drivers are awslogs,
+	// syslog, gelf, fluentd, splunk, journald, and json-file.
+	//
+	// For more information about using the awslogs log driver, see Using the awslogs
+	// Log Driver (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	//
 	// If you have a custom driver that is not listed above that you would like
@@ -1800,6 +1822,9 @@ type LogConfiguration struct {
 	// to your container instance and run the following command: sudo docker version
 	// --format '{{.Server.APIVersion}}'
 	Options map[string]string `locationName:"options" type:"map"`
+
+	// The secrets to pass to the log configuration.
+	SecretOptions []Secret `locationName:"secretOptions" type:"list"`
 }
 
 // String returns the string representation
@@ -1812,6 +1837,13 @@ func (s *LogConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "LogConfiguration"}
 	if len(s.LogDriver) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("LogDriver"))
+	}
+	if s.SecretOptions != nil {
+		for i, v := range s.SecretOptions {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SecretOptions", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2089,13 +2121,17 @@ func (s PortMapping) String() string {
 
 // The configuration details for the App Mesh proxy.
 //
-// Your Amazon ECS container instances require at least version 1.26.0 of the
-// container agent and at least version 1.26.0-1 of the ecs-init package to
-// enable a proxy configuration. If your container instances are launched from
-// the Amazon ECS-optimized AMI version 20190301 or later, then they contain
-// the required versions of the container agent and ecs-init. For more information,
-// see Amazon ECS-optimized Linux AMI (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
+// For tasks using the EC2 launch type, the container instances require at least
+// version 1.26.0 of the container agent and at least version 1.26.0-1 of the
+// ecs-init package to enable a proxy configuration. If your container instances
+// are launched from the Amazon ECS-optimized AMI version 20190301 or later,
+// then they contain the required versions of the container agent and ecs-init.
+// For more information, see Amazon ECS-optimized Linux AMI (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
 // in the Amazon Elastic Container Service Developer Guide.
+//
+// This parameter is available for tasks using the Fargate launch type in the
+// Ohio (us-east-2) region only and the task or service requires platform version
+// 1.3.0 or later.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ProxyConfiguration
 type ProxyConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -2292,24 +2328,29 @@ func (s Scale) String() string {
 	return awsutil.Prettify(s)
 }
 
-// An object representing the secret to expose to your container. For more information,
-// see Specifying Sensitive Data (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
+// An object representing the secret to expose to your container. Secrets can
+// be exposed to a container in the following ways:
+//
+//    * To inject sensitive data into your containers as environment variables,
+//    use the secrets container definition parameter.
+//
+//    * To reference sensitive information in the log configuration of a container,
+//    use the secretOptions container definition parameter.
+//
+// For more information, see Specifying Sensitive Data (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
 // in the Amazon Elastic Container Service Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Secret
 type Secret struct {
 	_ struct{} `type:"structure"`
 
-	// The value to set as the environment variable on the container.
+	// The name of the secret.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
 
-	// The secret to expose to the container. If your task is using the EC2 launch
-	// type, then supported values are either the full ARN of the AWS Secrets Manager
-	// secret or the full ARN of the parameter in the AWS Systems Manager Parameter
-	// Store. If your task is using the Fargate launch type, then the only supported
-	// value is the full ARN of the parameter in the AWS Systems Manager Parameter
-	// Store.
+	// The secret to expose to the container. The supported values are either the
+	// full ARN of the AWS Secrets Manager secret or the full ARN of the parameter
+	// in the AWS Systems Manager Parameter Store.
 	//
 	// If the AWS Systems Manager Parameter Store parameter exists in the same Region
 	// as the task you are launching, then you can use either the full ARN or name

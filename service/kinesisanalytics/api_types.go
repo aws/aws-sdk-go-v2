@@ -13,6 +13,12 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+//
+// This documentation is for version 1 of the Amazon Kinesis Data Analytics
+// API, which only supports SQL applications. Version 2 of the API supports
+// SQL and Java applications. For more information about version 2, see Amazon
+// Kinesis Data Analytics API V2 Documentation (/kinesisanalytics/latest/apiv2/Welcome.html).
+//
 // Provides a description of the application, including the application Amazon
 // Resource Name (ARN), status, latest version, and input and output configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ApplicationDetail
@@ -48,25 +54,25 @@ type ApplicationDetail struct {
 
 	// Describes the CloudWatch log streams that are configured to receive application
 	// messages. For more information about using CloudWatch log streams with Amazon
-	// Kinesis Analytics applications, see Working with Amazon CloudWatch Logs (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
+	// Kinesis Analytics applications, see Working with Amazon CloudWatch Logs (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
 	CloudWatchLoggingOptionDescriptions []CloudWatchLoggingOptionDescription `type:"list"`
 
 	// Time stamp when the application version was created.
 	CreateTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// Describes the application input configuration. For more information, see
-	// Configuring Application Input (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
+	// Configuring Application Input (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
 	InputDescriptions []InputDescription `type:"list"`
 
 	// Time stamp when the application was last updated.
 	LastUpdateTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// Describes the application output configuration. For more information, see
-	// Configuring Application Output (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
+	// Configuring Application Output (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
 	OutputDescriptions []OutputDescription `type:"list"`
 
 	// Describes reference data sources configured for the application. For more
-	// information, see Configuring Application Input (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
+	// information, see Configuring Application Input (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
 	ReferenceDataSourceDescriptions []ReferenceDataSourceDescription `type:"list"`
 }
 
@@ -75,6 +81,12 @@ func (s ApplicationDetail) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
+// This documentation is for version 1 of the Amazon Kinesis Data Analytics
+// API, which only supports SQL applications. Version 2 of the API supports
+// SQL and Java applications. For more information about version 2, see Amazon
+// Kinesis Data Analytics API V2 Documentation (/kinesisanalytics/latest/apiv2/Welcome.html).
+//
 // Provides application summary information, including the application Amazon
 // Resource Name (ARN), name, and status.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ApplicationSummary
@@ -341,7 +353,7 @@ func (s *CloudWatchLoggingOptionUpdate) Validate() error {
 }
 
 // Describes the data format when records are written to the destination. For
-// more information, see Configuring Application Output (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
+// more information, see Configuring Application Output (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DestinationSchema
 type DestinationSchema struct {
 	_ struct{} `type:"structure"`
@@ -372,7 +384,7 @@ func (s *DestinationSchema) Validate() error {
 
 // When you configure the application input, you specify the streaming source,
 // the in-application stream name that is created, and the mapping between the
-// two. For more information, see Configuring Application Input (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
+// two. For more information, see Configuring Application Input (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/Input
 type Input struct {
 	_ struct{} `type:"structure"`
@@ -381,13 +393,13 @@ type Input struct {
 	//
 	// Data from your source is routed to these in-application input streams.
 	//
-	// (see Configuring Application Input (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
+	// (see Configuring Application Input (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
 	InputParallelism *InputParallelism `type:"structure"`
 
-	// The InputProcessingConfiguration for the input. An input processor transforms
-	// records as they are received from the stream, before the application's SQL
-	// code executes. Currently, the only input processing configuration available
-	// is InputLambdaProcessor.
+	// The InputProcessingConfiguration (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html)
+	// for the input. An input processor transforms records as they are received
+	// from the stream, before the application's SQL code executes. Currently, the
+	// only input processing configuration available is InputLambdaProcessor (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html).
 	InputProcessingConfiguration *InputProcessingConfiguration `type:"structure"`
 
 	// Describes the format of the data in the streaming source, and how each data
@@ -481,7 +493,8 @@ func (s *Input) Validate() error {
 type InputConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// Input source ID. You can get this ID by calling the DescribeApplication operation.
+	// Input source ID. You can get this ID by calling the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+	// operation.
 	//
 	// Id is a required field
 	Id *string `min:"1" type:"string" required:"true"`
@@ -520,7 +533,7 @@ func (s *InputConfiguration) Validate() error {
 }
 
 // Describes the application input configuration. For more information, see
-// Configuring Application Input (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
+// Configuring Application Input (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputDescription
 type InputDescription struct {
 	_ struct{} `type:"structure"`
@@ -568,15 +581,19 @@ func (s InputDescription) String() string {
 }
 
 // An object that contains the Amazon Resource Name (ARN) of the AWS Lambda
-// (https://aws.amazon.com/documentation/lambda/) function that is used to preprocess
+// (https://docs.aws.amazon.com/lambda/) function that is used to preprocess
 // records in the stream, and the ARN of the IAM role that is used to access
 // the AWS Lambda function.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputLambdaProcessor
 type InputLambdaProcessor struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the AWS Lambda (https://aws.amazon.com/documentation/lambda/)
-	// function that operates on records in the stream.
+	// The ARN of the AWS Lambda (https://docs.aws.amazon.com/lambda/) function
+	// that operates on records in the stream.
+	//
+	// To specify an earlier version of the Lambda function than the latest, include
+	// the Lambda function version in the Lambda function ARN. For more information
+	// about Lambda ARNs, see Example ARNs: AWS Lambda (/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
 	//
 	// ResourceARN is a required field
 	ResourceARN *string `min:"1" type:"string" required:"true"`
@@ -617,15 +634,15 @@ func (s *InputLambdaProcessor) Validate() error {
 }
 
 // An object that contains the Amazon Resource Name (ARN) of the AWS Lambda
-// (https://aws.amazon.com/documentation/lambda/) function that is used to preprocess
+// (https://docs.aws.amazon.com/lambda/) function that is used to preprocess
 // records in the stream, and the ARN of the IAM role that is used to access
 // the AWS Lambda expression.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputLambdaProcessorDescription
 type InputLambdaProcessorDescription struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the AWS Lambda (https://aws.amazon.com/documentation/lambda/)
-	// function that is used to preprocess the records in the stream.
+	// The ARN of the AWS Lambda (https://docs.aws.amazon.com/lambda/) function
+	// that is used to preprocess the records in the stream.
 	ResourceARN *string `min:"1" type:"string"`
 
 	// The ARN of the IAM role that is used to access the AWS Lambda function.
@@ -637,14 +654,18 @@ func (s InputLambdaProcessorDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Represents an update to the InputLambdaProcessor that is used to preprocess
-// the records in the stream.
+// Represents an update to the InputLambdaProcessor (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html)
+// that is used to preprocess the records in the stream.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputLambdaProcessorUpdate
 type InputLambdaProcessorUpdate struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the new AWS Lambda (https://aws.amazon.com/documentation/lambda/)
+	// The Amazon Resource Name (ARN) of the new AWS Lambda (https://docs.aws.amazon.com/ambda/)
 	// function that is used to preprocess the records in the stream.
+	//
+	// To specify an earlier version of the Lambda function than the latest, include
+	// the Lambda function version in the Lambda function ARN. For more information
+	// about Lambda ARNs, see Example ARNs: AWS Lambda (/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
 	ResourceARNUpdate *string `min:"1" type:"string"`
 
 	// The ARN of the new IAM role that is used to access the AWS Lambda function.
@@ -674,13 +695,13 @@ func (s *InputLambdaProcessorUpdate) Validate() error {
 
 // Describes the number of in-application streams to create for a given streaming
 // source. For information about parallelism, see Configuring Application Input
-// (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
+// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputParallelism
 type InputParallelism struct {
 	_ struct{} `type:"structure"`
 
 	// Number of in-application streams to create. For more information, see Limits
-	// (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html).
+	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html).
 	Count *int64 `min:"1" type:"integer"`
 }
 
@@ -731,13 +752,14 @@ func (s *InputParallelismUpdate) Validate() error {
 
 // Provides a description of a processor that is used to preprocess the records
 // in the stream before being processed by your application code. Currently,
-// the only input processor available is AWS Lambda (https://aws.amazon.com/documentation/lambda/).
+// the only input processor available is AWS Lambda (https://docs.aws.amazon.com/lambda/).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputProcessingConfiguration
 type InputProcessingConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// The InputLambdaProcessor that is used to preprocess the records in the stream
-	// before being processed by your application code.
+	// The InputLambdaProcessor (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html)
+	// that is used to preprocess the records in the stream before being processed
+	// by your application code.
 	//
 	// InputLambdaProcessor is a required field
 	InputLambdaProcessor *InputLambdaProcessor `type:"structure" required:"true"`
@@ -768,12 +790,13 @@ func (s *InputProcessingConfiguration) Validate() error {
 }
 
 // Provides configuration information about an input processor. Currently, the
-// only input processor available is AWS Lambda (https://aws.amazon.com/documentation/lambda/).
+// only input processor available is AWS Lambda (https://docs.aws.amazon.com/lambda/).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputProcessingConfigurationDescription
 type InputProcessingConfigurationDescription struct {
 	_ struct{} `type:"structure"`
 
-	// Provides configuration information about the associated InputLambdaProcessorDescription.
+	// Provides configuration information about the associated InputLambdaProcessorDescription
+	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessorDescription.html).
 	InputLambdaProcessorDescription *InputLambdaProcessorDescription `type:"structure"`
 }
 
@@ -782,12 +805,12 @@ func (s InputProcessingConfigurationDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes updates to an InputProcessingConfiguration.
+// Describes updates to an InputProcessingConfiguration (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputProcessingConfigurationUpdate
 type InputProcessingConfigurationUpdate struct {
 	_ struct{} `type:"structure"`
 
-	// Provides update information for an InputLambdaProcessor.
+	// Provides update information for an InputLambdaProcessor (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html).
 	//
 	// InputLambdaProcessorUpdate is a required field
 	InputLambdaProcessorUpdate *InputLambdaProcessorUpdate `type:"structure" required:"true"`
@@ -1182,9 +1205,9 @@ func (s KinesisFirehoseOutputDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// When updating an output configuration using the UpdateApplication operation,
-// provides information about an Amazon Kinesis Firehose delivery stream configured
-// as the destination.
+// When updating an output configuration using the UpdateApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html)
+// operation, provides information about an Amazon Kinesis Firehose delivery
+// stream configured as the destination.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisFirehoseOutputUpdate
 type KinesisFirehoseOutputUpdate struct {
 	_ struct{} `type:"structure"`
@@ -1393,8 +1416,9 @@ func (s KinesisStreamsOutputDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// When updating an output configuration using the UpdateApplication operation,
-// provides information about an Amazon Kinesis stream configured as the destination.
+// When updating an output configuration using the UpdateApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html)
+// operation, provides information about an Amazon Kinesis stream configured
+// as the destination.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisStreamsOutputUpdate
 type KinesisStreamsOutputUpdate struct {
 	_ struct{} `type:"structure"`
@@ -1439,6 +1463,10 @@ type LambdaOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Amazon Resource Name (ARN) of the destination Lambda function to write to.
+	//
+	// To specify an earlier version of the Lambda function than the latest, include
+	// the Lambda function version in the Lambda function ARN. For more information
+	// about Lambda ARNs, see Example ARNs: AWS Lambda (/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
 	//
 	// ResourceARN is a required field
 	ResourceARN *string `min:"1" type:"string" required:"true"`
@@ -1499,13 +1527,18 @@ func (s LambdaOutputDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// When updating an output configuration using the UpdateApplication operation,
-// provides information about an AWS Lambda function configured as the destination.
+// When updating an output configuration using the UpdateApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html)
+// operation, provides information about an AWS Lambda function configured as
+// the destination.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/LambdaOutputUpdate
 type LambdaOutputUpdate struct {
 	_ struct{} `type:"structure"`
 
 	// Amazon Resource Name (ARN) of the destination Lambda function.
+	//
+	// To specify an earlier version of the Lambda function than the latest, include
+	// the Lambda function version in the Lambda function ARN. For more information
+	// about Lambda ARNs, see Example ARNs: AWS Lambda (/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
 	ResourceARNUpdate *string `min:"1" type:"string"`
 
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to write to
@@ -1583,13 +1616,13 @@ func (s *MappingParameters) Validate() error {
 // Kinesis Firehose delivery stream.
 //
 // For limits on how many destinations an application can write and other limitations,
-// see Limits (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html).
+// see Limits (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/Output
 type Output struct {
 	_ struct{} `type:"structure"`
 
 	// Describes the data format when records are written to the destination. For
-	// more information, see Configuring Application Output (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
+	// more information, see Configuring Application Output (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
 	//
 	// DestinationSchema is a required field
 	DestinationSchema *DestinationSchema `type:"structure" required:"true"`
@@ -1695,7 +1728,7 @@ type OutputUpdate struct {
 	_ struct{} `type:"structure"`
 
 	// Describes the data format when records are written to the destination. For
-	// more information, see Configuring Application Output (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
+	// more information, see Configuring Application Output (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
 	DestinationSchemaUpdate *DestinationSchema `type:"structure"`
 
 	// Describes an Amazon Kinesis Firehose delivery stream as the destination for
@@ -1771,8 +1804,9 @@ func (s *OutputUpdate) Validate() error {
 type RecordColumn struct {
 	_ struct{} `type:"structure"`
 
-	// Reference to the data element in the streaming input of the reference data
-	// source.
+	// Reference to the data element in the streaming input or the reference data
+	// source. This element is required if the RecordFormatType (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_RecordFormat.html#analytics-Type-RecordFormat-RecordFormatTypel)
+	// is JSON.
 	Mapping *string `type:"string"`
 
 	// Name of the column created in the in-application input stream or reference
@@ -1924,7 +1958,8 @@ type ReferenceDataSourceDescription struct {
 
 	// ID of the reference data source. This is the ID that Amazon Kinesis Analytics
 	// assigns when you add the reference data source to your application using
-	// the AddApplicationReferenceDataSource operation.
+	// the AddApplicationReferenceDataSource (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html)
+	// operation.
 	//
 	// ReferenceId is a required field
 	ReferenceId *string `min:"1" type:"string" required:"true"`
@@ -1963,6 +1998,7 @@ type ReferenceDataSourceUpdate struct {
 	_ struct{} `type:"structure"`
 
 	// ID of the reference data source being updated. You can use the DescribeApplication
+	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
 	// operation to get this value.
 	//
 	// ReferenceId is a required field
@@ -2081,8 +2117,8 @@ func (s *S3Configuration) Validate() error {
 // object on your behalf.
 //
 // An Amazon Kinesis Analytics application loads reference data only once. If
-// the data changes, you call the UpdateApplication operation to trigger reloading
-// of data into your application.
+// the data changes, you call the UpdateApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html)
+// operation to trigger reloading of data into your application.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/S3ReferenceDataSource
 type S3ReferenceDataSource struct {
 	_ struct{} `type:"structure"`
@@ -2263,6 +2299,48 @@ func (s *SourceSchema) Validate() error {
 		if err := s.RecordFormat.Validate(); err != nil {
 			invalidParams.AddNested("RecordFormat", err.(aws.ErrInvalidParams))
 		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// A key-value pair (the value is optional) that you can define and assign to
+// AWS resources. If you specify a tag that already exists, the tag value is
+// replaced with the value that you specify in the request. Note that the maximum
+// number of application tags includes system tags. The maximum number of user-defined
+// application tags is 50. For more information, see Using Cost Allocation Tags
+// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+// in the AWS Billing and Cost Management Guide.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/Tag
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// The key of the key-value tag.
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
+
+	// The value of the key-value tag. The value is optional.
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {

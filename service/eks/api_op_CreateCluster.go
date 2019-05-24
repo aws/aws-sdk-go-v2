@@ -19,7 +19,7 @@ type CreateClusterInput struct {
 	ClientRequestToken *string `locationName:"clientRequestToken" type:"string" idempotencyToken:"true"`
 
 	// Enable or disable exporting the Kubernetes control plane logs for your cluster
-	// to CloudWatch Logs. By default, cluster control plane logs are not exported
+	// to CloudWatch Logs. By default, cluster control plane logs aren't exported
 	// to CloudWatch Logs. For more information, see Amazon EKS Cluster Control
 	// Plane Logs (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html)
 	// in the Amazon EKS User Guide .
@@ -39,7 +39,7 @@ type CreateClusterInput struct {
 	// see Cluster VPC Considerations (https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html)
 	// and Cluster Security Group Considerations (https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html)
 	// in the Amazon EKS User Guide. You must specify at least two subnets. You
-	// may specify up to five security groups, but we recommend that you use a dedicated
+	// can specify up to five security groups, but we recommend that you use a dedicated
 	// security group for your cluster control plane.
 	//
 	// ResourcesVpcConfig is a required field
@@ -53,8 +53,8 @@ type CreateClusterInput struct {
 	// RoleArn is a required field
 	RoleArn *string `locationName:"roleArn" type:"string" required:"true"`
 
-	// The desired Kubernetes version for your cluster. If you do not specify a
-	// value here, the latest version available in Amazon EKS is used.
+	// The desired Kubernetes version for your cluster. If you don't specify a value
+	// here, the latest version available in Amazon EKS is used.
 	Version *string `locationName:"version" type:"string"`
 }
 
@@ -169,10 +169,10 @@ const opCreateCluster = "CreateCluster"
 // Creates an Amazon EKS control plane.
 //
 // The Amazon EKS control plane consists of control plane instances that run
-// the Kubernetes software, like etcd and the API server. The control plane
+// the Kubernetes software, such as etcd and the API server. The control plane
 // runs in an account managed by AWS, and the Kubernetes API is exposed via
 // the Amazon EKS API server endpoint. Each Amazon EKS cluster control plane
-// is single-tenant and unique, and runs on its own set of Amazon EC2 instances.
+// is single-tenant and unique and runs on its own set of Amazon EC2 instances.
 //
 // The cluster control plane is provisioned across multiple Availability Zones
 // and fronted by an Elastic Load Balancing Network Load Balancer. Amazon EKS
@@ -186,14 +186,14 @@ const opCreateCluster = "CreateCluster"
 //
 // You can use the endpointPublicAccess and endpointPrivateAccess parameters
 // to enable or disable public and private access to your cluster's Kubernetes
-// API server endpoint. By default, public access is enabled and private access
+// API server endpoint. By default, public access is enabled, and private access
 // is disabled. For more information, see Amazon EKS Cluster Endpoint Access
 // Control (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
 // in the Amazon EKS User Guide .
 //
 // You can use the logging parameter to enable or disable exporting the Kubernetes
 // control plane logs for your cluster to CloudWatch Logs. By default, cluster
-// control plane logs are not exported to CloudWatch Logs. For more information,
+// control plane logs aren't exported to CloudWatch Logs. For more information,
 // see Amazon EKS Cluster Control Plane Logs (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html)
 // in the Amazon EKS User Guide .
 //

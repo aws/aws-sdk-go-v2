@@ -19,7 +19,7 @@ type DescribeFpgaImagesInput struct {
 	// it is UnauthorizedOperation.
 	DryRun *bool `type:"boolean"`
 
-	// One or more filters.
+	// The filters.
 	//
 	//    * create-time - The creation time of the AFI.
 	//
@@ -51,7 +51,7 @@ type DescribeFpgaImagesInput struct {
 	//    * update-time - The time of the most recent update.
 	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
-	// One or more AFI IDs.
+	// The AFI IDs.
 	FpgaImageIds []string `locationName:"FpgaImageId" locationNameList:"item" type:"list"`
 
 	// The maximum number of results to return in a single call.
@@ -90,7 +90,7 @@ func (s *DescribeFpgaImagesInput) Validate() error {
 type DescribeFpgaImagesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Information about one or more FPGA images.
+	// Information about the FPGA images.
 	FpgaImages []FpgaImage `locationName:"fpgaImageSet" locationNameList:"item" type:"list"`
 
 	// The token to use to retrieve the next page of results. This value is null
@@ -108,9 +108,9 @@ const opDescribeFpgaImages = "DescribeFpgaImages"
 // DescribeFpgaImagesRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Describes one or more available Amazon FPGA Images (AFIs). These include
-// public AFIs, private AFIs that you own, and AFIs owned by other AWS accounts
-// for which you have load permissions.
+// Describes the Amazon FPGA Images (AFIs) available to you. These include public
+// AFIs, private AFIs that you own, and AFIs owned by other AWS accounts for
+// which you have load permissions.
 //
 //    // Example sending a request using DescribeFpgaImagesRequest.
 //    req := client.DescribeFpgaImagesRequest(params)

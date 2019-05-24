@@ -94,6 +94,12 @@ func (c *Client) GetSamplingStatisticSummariesRequest(input *GetSamplingStatisti
 		Name:       opGetSamplingStatisticSummaries,
 		HTTPMethod: "POST",
 		HTTPPath:   "/SamplingStatisticSummaries",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -126,6 +132,53 @@ func (r GetSamplingStatisticSummariesRequest) Send(ctx context.Context) (*GetSam
 	}
 
 	return resp, nil
+}
+
+// NewGetSamplingStatisticSummariesRequestPaginator returns a paginator for GetSamplingStatisticSummaries.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.GetSamplingStatisticSummariesRequest(input)
+//   p := xray.NewGetSamplingStatisticSummariesRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewGetSamplingStatisticSummariesPaginator(req GetSamplingStatisticSummariesRequest) GetSamplingStatisticSummariesPaginator {
+	return GetSamplingStatisticSummariesPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *GetSamplingStatisticSummariesInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// GetSamplingStatisticSummariesPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetSamplingStatisticSummariesPaginator struct {
+	aws.Pager
+}
+
+func (p *GetSamplingStatisticSummariesPaginator) CurrentPage() *GetSamplingStatisticSummariesOutput {
+	return p.Pager.CurrentPage().(*GetSamplingStatisticSummariesOutput)
 }
 
 // GetSamplingStatisticSummariesResponse is the response type for the

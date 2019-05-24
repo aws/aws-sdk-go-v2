@@ -15,8 +15,12 @@ import (
 type AuthorizeSecurityGroupIngressInput struct {
 	_ struct{} `type:"structure"`
 
-	// The CIDR IPv4 address range. You can't specify this parameter when specifying
-	// a source security group.
+	// The IPv4 address range, in CIDR format. You can't specify this parameter
+	// when specifying a source security group. To specify an IPv6 address range,
+	// use a set of IP permissions.
+	//
+	// Alternatively, use a set of IP permissions to specify multiple rules and
+	// a description for the rule.
 	CidrIp *string `type:"string"`
 
 	// Checks whether you have the required permissions for the action, without
@@ -25,9 +29,12 @@ type AuthorizeSecurityGroupIngressInput struct {
 	// it is UnauthorizedOperation.
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
-	// The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6
-	// type number. For the ICMP/ICMPv6 type number, use -1 to specify all types.
-	// If you specify all ICMP/ICMPv6 types, you must specify all codes.
+	// The start of port range for the TCP and UDP protocols, or an ICMP type number.
+	// For the ICMP type number, use -1 to specify all types. If you specify all
+	// ICMP types, you must specify all codes.
+	//
+	// Alternatively, use a set of IP permissions to specify multiple rules and
+	// a description for the rule.
 	FromPort *int64 `type:"integer"`
 
 	// The ID of the security group. You must specify either the security group
@@ -39,16 +46,18 @@ type AuthorizeSecurityGroupIngressInput struct {
 	// either the security group ID or the security group name in the request.
 	GroupName *string `type:"string"`
 
-	// The sets of IP permissions. Can be used to specify multiple rules in a single
-	// command.
+	// The sets of IP permissions.
 	IpPermissions []IpPermission `locationNameList:"item" type:"list"`
 
 	// The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).
-	// (VPC only) Use -1 to specify all protocols. If you specify -1, or a protocol
-	// number other than tcp, udp, icmp, or 58 (ICMPv6), traffic on all ports is
-	// allowed, regardless of any ports you specify. For tcp, udp, and icmp, you
-	// must specify a port range. For protocol 58 (ICMPv6), you can optionally specify
-	// a port range; if you don't, traffic for all types and codes is allowed.
+	// To specify icmpv6, use a set of IP permissions.
+	//
+	// [VPC only] Use -1 to specify all protocols. If you specify -1 or a protocol
+	// other than tcp, udp, or icmp, traffic on all ports is allowed, regardless
+	// of any ports you specify.
+	//
+	// Alternatively, use a set of IP permissions to specify multiple rules and
+	// a description for the rule.
 	IpProtocol *string `type:"string"`
 
 	// [EC2-Classic, default VPC] The name of the source security group. You can't
@@ -68,9 +77,12 @@ type AuthorizeSecurityGroupIngressInput struct {
 	// with a specific IP protocol and port range, use a set of IP permissions instead.
 	SourceSecurityGroupOwnerId *string `type:"string"`
 
-	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code
-	// number. For the ICMP/ICMPv6 code number, use -1 to specify all codes. If
-	// you specify all ICMP/ICMPv6 types, you must specify all codes.
+	// The end of port range for the TCP and UDP protocols, or an ICMP code number.
+	// For the ICMP code number, use -1 to specify all codes. If you specify all
+	// ICMP types, you must specify all codes.
+	//
+	// Alternatively, use a set of IP permissions to specify multiple rules and
+	// a description for the rule.
 	ToPort *int64 `type:"integer"`
 }
 
@@ -96,23 +108,20 @@ const opAuthorizeSecurityGroupIngress = "AuthorizeSecurityGroupIngress"
 //
 // Adds the specified ingress rules to a security group.
 //
+// An inbound rule permits instances to receive traffic from the specified destination
+// IPv4 or IPv6 CIDR address ranges, or from the specified destination security
+// groups.
+//
+// You specify a protocol for each rule (for example, TCP). For TCP and UDP,
+// you must also specify the destination port or port range. For ICMP/ICMPv6,
+// you must also specify the ICMP/ICMPv6 type and code. You can use -1 to mean
+// all types or all codes.
+//
 // Rule changes are propagated to instances within the security group as quickly
 // as possible. However, a small delay might occur.
 //
-// [EC2-Classic] This action gives the IPv4 CIDR address ranges permission to
-// access a security group in your account, or gives the security groups (called
-// the source groups) permission to access a security group for your account.
-// A source group can be for your own AWS account, or another. You can have
-// up to 100 rules per group.
-//
-// [EC2-VPC] This action gives the specified IPv4 or IPv6 CIDR address ranges
-// permission to access a security group in your VPC, or gives the specified
-// security groups (called the source groups) permission to access a security
-// group for your VPC. The security groups must all be for the same VPC or a
-// peer VPC in a VPC peering connection. For more information about VPC security
-// group limits, see Amazon VPC Limits (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html).
-//
-// You can optionally specify a description for the security group rule.
+// For more information about VPC security group limits, see Amazon VPC Limits
+// (https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html).
 //
 //    // Example sending a request using AuthorizeSecurityGroupIngressRequest.
 //    req := client.AuthorizeSecurityGroupIngressRequest(params)

@@ -28,16 +28,18 @@ type Budget struct {
 	//
 	// BudgetLimit is required for cost or usage budgets, but optional for RI utilization
 	// or coverage budgets. RI utilization or coverage budgets default to 100, which
-	// is the only valid value for RI utilization or coverage budgets.
+	// is the only valid value for RI utilization or coverage budgets. You can't
+	// use BudgetLimit with PlannedBudgetLimits for CreateBudget and UpdateBudget
+	// actions.
 	BudgetLimit *Spend `type:"structure"`
 
-	// The name of a budget. The name must be unique within accounts. The : and
+	// The name of a budget. The name must be unique within an account. The : and
 	// \ characters aren't allowed in BudgetName.
 	//
 	// BudgetName is a required field
 	BudgetName *string `min:"1" type:"string" required:"true"`
 
-	// Whether this budget tracks monetary costs, usage, RI utilization, or RI coverage.
+	// Whether this budget tracks costs, usage, RI utilization, or RI coverage.
 	//
 	// BudgetType is a required field
 	BudgetType BudgetType `type:"string" required:"true" enum:"true"`
@@ -45,7 +47,7 @@ type Budget struct {
 	// The actual and forecasted cost or usage that the budget tracks.
 	CalculatedSpend *CalculatedSpend `type:"structure"`
 
-	// The cost filters, such as service or region, that are applied to a budget.
+	// The cost filters, such as service or tag, that are applied to a budget.
 	//
 	// AWS Budgets supports the following services as a filter for RI budgets:
 	//
@@ -67,6 +69,38 @@ type Budget struct {
 
 	// The last time that you updated this budget.
 	LastUpdatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A map containing multiple BudgetLimit, including current or future limits.
+	//
+	// PlannedBudgetLimits is available for cost or usage budget and supports monthly
+	// and quarterly TimeUnit.
+	//
+	// For monthly budgets, provide 12 months of PlannedBudgetLimits values. This
+	// must start from the current month and include the next 11 months. The key
+	// is the start of the month, UTC in epoch seconds.
+	//
+	// For quarterly budgets, provide 4 quarters of PlannedBudgetLimits value entries
+	// in standard calendar quarter increments. This must start from the current
+	// quarter and include the next 3 quarters. The key is the start of the quarter,
+	// UTC in epoch seconds.
+	//
+	// If the planned budget expires before 12 months for monthly or 4 quarters
+	// for quarterly, provide the PlannedBudgetLimits values only for the remaining
+	// periods.
+	//
+	// If the budget begins at a date in the future, provide PlannedBudgetLimits
+	// values from the start date of the budget.
+	//
+	// After all of the BudgetLimit values in PlannedBudgetLimits are used, the
+	// budget continues to use the last limit as the BudgetLimit. At that point,
+	// the planned budget provides the same experience as a fixed budget.
+	//
+	// DescribeBudget and DescribeBudgets response along with PlannedBudgetLimits
+	// will also contain BudgetLimit representing the current month or quarter limit
+	// present in PlannedBudgetLimits. This only applies to budgets created with
+	// PlannedBudgetLimits. Budgets created without PlannedBudgetLimits will only
+	// contain BudgetLimit, and no PlannedBudgetLimits.
+	PlannedBudgetLimits map[string]Spend `type:"map"`
 
 	// The period of time that is covered by a budget. The period has a start date
 	// and an end date. The start date must come before the end date. The end date
@@ -123,6 +157,13 @@ func (s *Budget) Validate() error {
 	if s.CalculatedSpend != nil {
 		if err := s.CalculatedSpend.Validate(); err != nil {
 			invalidParams.AddNested("CalculatedSpend", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.PlannedBudgetLimits != nil {
+		for i, v := range s.PlannedBudgetLimits {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PlannedBudgetLimits", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 
@@ -493,6 +534,8 @@ type Subscriber struct {
 
 	// The address that AWS sends budget notifications to, either an SNS topic or
 	// an email.
+	//
+	// AWS validates the address for a CreateSubscriber request with the .* regex.
 	//
 	// Address is a required field
 	Address *string `min:"1" type:"string" required:"true"`

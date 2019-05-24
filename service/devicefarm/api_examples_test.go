@@ -97,6 +97,8 @@ func ExampleClient_CreateProjectRequest_shared00() {
 				fmt.Println(devicefarm.ErrCodeLimitExceededException, aerr.Error())
 			case devicefarm.ErrCodeServiceAccountException:
 				fmt.Println(devicefarm.ErrCodeServiceAccountException, aerr.Error())
+			case devicefarm.ErrCodeTagOperationException:
+				fmt.Println(devicefarm.ErrCodeTagOperationException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

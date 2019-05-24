@@ -15,9 +15,9 @@ type ListPipelineExecutionsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value. The
-	// available pipeline execution history is limited to the most recent 12 months,
-	// based on pipeline execution start times. Default value is 100.
+	// remaining results, make another call with the returned nextToken value. Pipeline
+	// history is limited to the most recent 12 months, based on pipeline execution
+	// start times. Default value is 100.
 	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
 
 	// The token that was returned from the previous ListPipelineExecutions call,
@@ -97,6 +97,12 @@ func (c *Client) ListPipelineExecutionsRequest(input *ListPipelineExecutionsInpu
 		Name:       opListPipelineExecutions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -129,6 +135,53 @@ func (r ListPipelineExecutionsRequest) Send(ctx context.Context) (*ListPipelineE
 	}
 
 	return resp, nil
+}
+
+// NewListPipelineExecutionsRequestPaginator returns a paginator for ListPipelineExecutions.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListPipelineExecutionsRequest(input)
+//   p := codepipeline.NewListPipelineExecutionsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListPipelineExecutionsPaginator(req ListPipelineExecutionsRequest) ListPipelineExecutionsPaginator {
+	return ListPipelineExecutionsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListPipelineExecutionsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListPipelineExecutionsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListPipelineExecutionsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListPipelineExecutionsPaginator) CurrentPage() *ListPipelineExecutionsOutput {
+	return p.Pager.CurrentPage().(*ListPipelineExecutionsOutput)
 }
 
 // ListPipelineExecutionsResponse is the response type for the

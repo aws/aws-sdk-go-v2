@@ -1809,6 +1809,40 @@ func (s SamplingStatisticsDocument) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
+// The name and value of a sampling rule to apply to a trace summary.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingStrategy
+type SamplingStrategy struct {
+	_ struct{} `type:"structure"`
+
+	// The name of a sampling rule.
+	Name SamplingStrategyName `type:"string" enum:"true"`
+
+	// The value of a sampling rule.
+	Value *float64 `type:"double"`
+}
+
+// String returns the string representation
+func (s SamplingStrategy) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SamplingStrategy) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Name) > 0 {
+		v := s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Value", protocol.Float64Value(v), metadata)
+	}
+	return nil
+}
+
 // Temporary changes to a sampling rule configuration. To meet the global sampling
 // target for a rule, X-Ray calculates a new reservoir for each service based
 // on the recent sampling results of all services that called GetSamplingTargets.
@@ -2277,6 +2311,64 @@ func (s TelemetryRecord) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A list of TimeSeriesStatistic structures.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/TimeSeriesServiceStatistics
+type TimeSeriesServiceStatistics struct {
+	_ struct{} `type:"structure"`
+
+	// Response statistics for an edge.
+	EdgeSummaryStatistics *EdgeStatistics `type:"structure"`
+
+	// The response time histogram for the selected entities.
+	ResponseTimeHistogram []HistogramEntry `type:"list"`
+
+	// Response statistics for a service.
+	ServiceSummaryStatistics *ServiceStatistics `type:"structure"`
+
+	// Timestamp of the window for which statistics are aggregated.
+	Timestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+}
+
+// String returns the string representation
+func (s TimeSeriesServiceStatistics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TimeSeriesServiceStatistics) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EdgeSummaryStatistics != nil {
+		v := s.EdgeSummaryStatistics
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "EdgeSummaryStatistics", v, metadata)
+	}
+	if len(s.ResponseTimeHistogram) > 0 {
+		v := s.ResponseTimeHistogram
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ResponseTimeHistogram", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.ServiceSummaryStatistics != nil {
+		v := s.ServiceSummaryStatistics
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ServiceSummaryStatistics", v, metadata)
+	}
+	if s.Timestamp != nil {
+		v := *s.Timestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	return nil
+}
+
 // A collection of segment documents with matching trace IDs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Trace
 type Trace struct {
@@ -2374,6 +2466,9 @@ type TraceSummary struct {
 
 	// One or more of the segment documents is in progress.
 	IsPartial *bool `type:"boolean"`
+
+	// The matched time stamp of a defined event.
+	MatchedEventTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// A list of resource ARNs for any resource corresponding to the trace segments.
 	ResourceARNs []ResourceARNDetail `type:"list"`
@@ -2517,6 +2612,12 @@ func (s TraceSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "IsPartial", protocol.BoolValue(v), metadata)
+	}
+	if s.MatchedEventTime != nil {
+		v := *s.MatchedEventTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MatchedEventTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
 	if len(s.ResourceARNs) > 0 {
 		v := s.ResourceARNs

@@ -267,8 +267,10 @@ func (s Ac3Settings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Accelerated transcoding is currently in private preview. Contact AWS for
-// more information.
+// Accelerated transcoding can significantly speed up jobs with long, visually
+// complex content. Outputs that use this feature incur pro-tier pricing. For
+// information about feature limitations, see the AWS Elemental MediaConvert
+// User Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AccelerationSettings
 type AccelerationSettings struct {
 	_ struct{} `type:"structure"`
@@ -2300,6 +2302,14 @@ func (s ContainerSettings) MarshalFields(e protocol.FieldEncoder) error {
 type DashIsoEncryptionSettings struct {
 	_ struct{} `type:"structure"`
 
+	// This setting can improve the compatibility of your output with video players
+	// on obsolete devices. It applies only to DASH H.264 outputs with DRM encryption.
+	// Choose Unencrypted SEI (UNENCRYPTED_SEI) only to correct problems with playback
+	// on older devices. Otherwise, keep the default setting CENC v1 (CENC_V1).
+	// If you choose Unencrypted SEI, for that output, the service will exclude
+	// the access unit delimiter and will leave the SEI NAL units unencrypted.
+	PlaybackDeviceCompatibility DashIsoPlaybackDeviceCompatibility `locationName:"playbackDeviceCompatibility" type:"string" enum:"true"`
+
 	// Settings for use with a SPEKE key provider
 	SpekeKeyProvider *SpekeKeyProvider `locationName:"spekeKeyProvider" type:"structure"`
 }
@@ -2311,6 +2321,12 @@ func (s DashIsoEncryptionSettings) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DashIsoEncryptionSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.PlaybackDeviceCompatibility) > 0 {
+		v := s.PlaybackDeviceCompatibility
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "playbackDeviceCompatibility", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.SpekeKeyProvider != nil {
 		v := s.SpekeKeyProvider
 
@@ -6406,8 +6422,8 @@ func (s InsertableImage) MarshalFields(e protocol.FieldEncoder) error {
 type Job struct {
 	_ struct{} `type:"structure"`
 
-	// Accelerated transcoding is currently in private preview. Contact AWS for
-	// more information.
+	// Accelerated transcoding can significantly speed up jobs with long, visually
+	// complex content.
 	AccelerationSettings *AccelerationSettings `locationName:"accelerationSettings" type:"structure"`
 
 	// An identifier for this resource that is unique within all of AWS.
@@ -10924,9 +10940,9 @@ type VideoDescription struct {
 	// to calculate output AFD values based on the input AFD scaler data.
 	AfdSignaling AfdSignaling `locationName:"afdSignaling" type:"string" enum:"true"`
 
-	// The anti-alias filter is automatically applied to all outputs. The service
-	// no longer accepts the value DISABLED for AntiAlias. If you specify that in
-	// your job, the service will ignore the setting.
+	// The service automatically applies the anti-alias filter to all outputs. The
+	// service no longer accepts the value DISABLED for AntiAlias. If you specify
+	// that in your job, the service will ignore the setting.
 	AntiAlias AntiAlias `locationName:"antiAlias" type:"string" enum:"true"`
 
 	// Video codec settings, (CodecSettings) under (VideoDescription), contains

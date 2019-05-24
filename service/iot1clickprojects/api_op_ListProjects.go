@@ -125,6 +125,12 @@ func (c *Client) ListProjectsRequest(input *ListProjectsInput) ListProjectsReque
 		Name:       opListProjects,
 		HTTPMethod: "GET",
 		HTTPPath:   "/projects",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -157,6 +163,53 @@ func (r ListProjectsRequest) Send(ctx context.Context) (*ListProjectsResponse, e
 	}
 
 	return resp, nil
+}
+
+// NewListProjectsRequestPaginator returns a paginator for ListProjects.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListProjectsRequest(input)
+//   p := iot1clickprojects.NewListProjectsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListProjectsPaginator(req ListProjectsRequest) ListProjectsPaginator {
+	return ListProjectsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListProjectsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListProjectsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListProjectsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListProjectsPaginator) CurrentPage() *ListProjectsOutput {
+	return p.Pager.CurrentPage().(*ListProjectsOutput)
 }
 
 // ListProjectsResponse is the response type for the

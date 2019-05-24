@@ -13,8 +13,8 @@ import (
 type CopyDBSnapshotInput struct {
 	_ struct{} `type:"structure"`
 
-	// True to copy all tags from the source DB snapshot to the target DB snapshot,
-	// and otherwise false. The default is false.
+	// A value that indicates whether to copy all tags from the source DB snapshot
+	// to the target DB snapshot. By default, tags are not copied.
 	CopyTags *bool `type:"boolean"`
 
 	// DestinationRegion is used for presigning the request to a given region.

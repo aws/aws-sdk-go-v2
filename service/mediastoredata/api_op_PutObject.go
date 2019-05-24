@@ -62,6 +62,16 @@ type PutObjectInput struct {
 	// temporal storage class, and objects are persisted into durable storage shortly
 	// after being received.
 	StorageClass StorageClass `location:"header" locationName:"x-amz-storage-class" min:"1" type:"string" enum:"true"`
+
+	// Indicates the availability of an object while it is still uploading. If the
+	// value is set to streaming, the object is available for downloading after
+	// some initial buffering but before the object is uploaded completely. If the
+	// value is set to standard, the object is available for downloading only when
+	// it is uploaded completely. The default value for this header is standard.
+	//
+	// To use this header, you must also set the HTTP Transfer-Encoding header to
+	// chunked.
+	UploadAvailability UploadAvailability `location:"header" locationName:"x-amz-upload-availability" min:"1" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -110,6 +120,12 @@ func (s PutObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "x-amz-storage-class", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.UploadAvailability) > 0 {
+		v := s.UploadAvailability
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-upload-availability", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Path != nil {
 		v := *s.Path
@@ -173,7 +189,8 @@ const opPutObject = "PutObject"
 // PutObjectRequest returns a request value for making API operation for
 // AWS Elemental MediaStore Data Plane.
 //
-// Uploads an object to the specified path. Object sizes are limited to 25 MB.
+// Uploads an object to the specified path. Object sizes are limited to 25 MB
+// for standard upload availability and 10 MB for streaming upload availability.
 //
 //    // Example sending a request using PutObjectRequest.
 //    req := client.PutObjectRequest(params)

@@ -140,14 +140,14 @@ type SimulatePrincipalPolicyInput struct {
 	ResourceHandlingOption *string `min:"1" type:"string"`
 
 	// An AWS account ID that specifies the owner of any simulated resource that
-	// does not identify its owner in the resource ARN, such as an S3 bucket or
-	// object. If ResourceOwner is specified, it is also used as the account owner
-	// of any ResourcePolicy included in the simulation. If the ResourceOwner parameter
-	// is not specified, then the owner of the resources and the resource policy
-	// defaults to the account of the identity provided in CallerArn. This parameter
-	// is required only if you specify a resource-based policy and account that
-	// owns the resource is different from the account that owns the simulated calling
-	// user CallerArn.
+	// does not identify its owner in the resource ARN. Examples of resource ARNs
+	// include an S3 bucket or object. If ResourceOwner is specified, it is also
+	// used as the account owner of any ResourcePolicy included in the simulation.
+	// If the ResourceOwner parameter is not specified, then the owner of the resources
+	// and the resource policy defaults to the account of the identity provided
+	// in CallerArn. This parameter is required only if you specify a resource-based
+	// policy and account that owns the resource is different from the account that
+	// owns the simulated calling user CallerArn.
 	ResourceOwner *string `min:"1" type:"string"`
 
 	// A resource-based policy to include in the simulation provided as a string.
@@ -238,7 +238,7 @@ type SimulatePrincipalPolicyOutput struct {
 
 	// When IsTruncated is true, this element is present and contains the value
 	// to use for the Marker parameter in a subsequent pagination request.
-	Marker *string `min:"1" type:"string"`
+	Marker *string `type:"string"`
 }
 
 // String returns the string representation
@@ -264,7 +264,7 @@ const opSimulatePrincipalPolicy = "SimulatePrincipalPolicy"
 // You can also optionally include one resource-based policy to be evaluated
 // with each of the resources included in the simulation.
 //
-// The simulation does not perform the API operations, it only checks the authorization
+// The simulation does not perform the API operations; it only checks the authorization
 // to determine if the simulated policies allow or deny the operations.
 //
 // Note: This API discloses information about the permissions granted to other

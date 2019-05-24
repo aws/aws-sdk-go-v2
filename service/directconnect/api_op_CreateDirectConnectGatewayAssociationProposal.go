@@ -26,7 +26,7 @@ type CreateDirectConnectGatewayAssociationProposalInput struct {
 	// DirectConnectGatewayOwnerAccount is a required field
 	DirectConnectGatewayOwnerAccount *string `locationName:"directConnectGatewayOwnerAccount" type:"string" required:"true"`
 
-	// The ID of the virtual private gateway.
+	// The ID of the virtual private gateway or transit gateway.
 	//
 	// GatewayId is a required field
 	GatewayId *string `locationName:"gatewayId" type:"string" required:"true"`
@@ -80,12 +80,13 @@ const opCreateDirectConnectGatewayAssociationProposal = "CreateDirectConnectGate
 // CreateDirectConnectGatewayAssociationProposalRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Creates a proposal to associate the specified virtual private gateway with
-// the specified Direct Connect gateway.
+// Creates a proposal to associate the specified virtual private gateway or
+// transit gateway with the specified Direct Connect gateway.
 //
 // You can only associate a Direct Connect gateway and virtual private gateway
-// when the account that owns the Direct Connect gateway and the account that
-// owns the virtual private gateway have the same payer ID.
+// or transit gateway when the account that owns the Direct Connect gateway
+// and the account that owns the virtual private gateway or transit gateway
+// have the same AWS Payer ID.
 //
 //    // Example sending a request using CreateDirectConnectGatewayAssociationProposalRequest.
 //    req := client.CreateDirectConnectGatewayAssociationProposalRequest(params)

@@ -34,7 +34,7 @@ type SubscribeInput struct {
 
 	// The endpoint that you want to receive notifications. Endpoints vary by protocol:
 	//
-	//    * For the http protocol, the endpoint is an URL beginning with "http://"
+	//    * For the http protocol, the endpoint is an URL beginning with "https://"
 	//
 	//    * For the https protocol, the endpoint is a URL beginning with "https://"
 	//

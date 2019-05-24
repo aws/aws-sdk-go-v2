@@ -311,7 +311,7 @@ type ApplicationDetail struct {
 	// The current timestamp when the application was last updated.
 	LastUpdateTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The runtime environment for the application (SQL-1.0 or JAVA-8-FLINK-1.5).
+	// The runtime environment for the application (SQL-1.0 or FLINK-1_6).
 	//
 	// RuntimeEnvironment is a required field
 	RuntimeEnvironment RuntimeEnvironment `type:"string" required:"true" enum:"true"`
@@ -471,7 +471,7 @@ type ApplicationSummary struct {
 	// ApplicationVersionId is a required field
 	ApplicationVersionId *int64 `min:"1" type:"long" required:"true"`
 
-	// The runtime environment for the application (SQL-1.0 or JAVA-8-FLINK-1.5).
+	// The runtime environment for the application (SQL-1.0 or FLINK-1_6).
 	//
 	// RuntimeEnvironment is a required field
 	RuntimeEnvironment RuntimeEnvironment `type:"string" required:"true" enum:"true"`
@@ -1225,6 +1225,10 @@ type InputLambdaProcessor struct {
 
 	// The ARN of the AWS Lambda function that operates on records in the stream.
 	//
+	// To specify an earlier version of the Lambda function than the latest, include
+	// the Lambda function version in the Lambda function ARN. For more information
+	// about Lambda ARNs, see Example ARNs: AWS Lambda (/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+	//
 	// ResourceARN is a required field
 	ResourceARN *string `min:"1" type:"string" required:"true"`
 }
@@ -1261,6 +1265,10 @@ type InputLambdaProcessorDescription struct {
 	// The ARN of the AWS Lambda function that is used to preprocess the records
 	// in the stream.
 	//
+	// To specify an earlier version of the Lambda function than the latest, include
+	// the Lambda function version in the Lambda function ARN. For more information
+	// about Lambda ARNs, see Example ARNs: AWS Lambda (/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+	//
 	// ResourceARN is a required field
 	ResourceARN *string `min:"1" type:"string" required:"true"`
 
@@ -1286,6 +1294,10 @@ type InputLambdaProcessorUpdate struct {
 
 	// The Amazon Resource Name (ARN) of the new AWS Lambda function that is used
 	// to preprocess the records in the stream.
+	//
+	// To specify an earlier version of the Lambda function than the latest, include
+	// the Lambda function version in the Lambda function ARN. For more information
+	// about Lambda ARNs, see Example ARNs: AWS Lambda (/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
 	//
 	// ResourceARNUpdate is a required field
 	ResourceARNUpdate *string `min:"1" type:"string" required:"true"`
@@ -2052,6 +2064,10 @@ type LambdaOutput struct {
 	// The Amazon Resource Name (ARN) of the destination Lambda function to write
 	// to.
 	//
+	// To specify an earlier version of the Lambda function than the latest, include
+	// the Lambda function version in the Lambda function ARN. For more information
+	// about Lambda ARNs, see Example ARNs: AWS Lambda (/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+	//
 	// ResourceARN is a required field
 	ResourceARN *string `min:"1" type:"string" required:"true"`
 }
@@ -2111,6 +2127,10 @@ type LambdaOutputUpdate struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the destination AWS Lambda function.
+	//
+	// To specify an earlier version of the Lambda function than the latest, include
+	// the Lambda function version in the Lambda function ARN. For more information
+	// about Lambda ARNs, see Example ARNs: AWS Lambda (/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
 	//
 	// ResourceARNUpdate is a required field
 	ResourceARNUpdate *string `min:"1" type:"string" required:"true"`
@@ -2182,7 +2202,7 @@ func (s *MappingParameters) Validate() error {
 
 // Describes configuration parameters for Amazon CloudWatch logging for a Java-based
 // Kinesis Data Analytics application. For more information about CloudWatch
-// logging, see Monitoring (https://docs.aws.amazon.com/kinesisanalytics/latest/Java/monitoring-overview.html).
+// logging, see Monitoring (https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/MonitoringConfiguration
 type MonitoringConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -2631,7 +2651,7 @@ func (s *PropertyGroup) Validate() error {
 type RecordColumn struct {
 	_ struct{} `type:"structure"`
 
-	// A reference to the data element in the streaming input of the reference data
+	// A reference to the data element in the streaming input or the reference data
 	// source.
 	Mapping *string `type:"string"`
 
@@ -3488,6 +3508,48 @@ func (s *SqlRunConfiguration) Validate() error {
 
 	if s.InputStartingPositionConfiguration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InputStartingPositionConfiguration"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// A key-value pair (the value is optional) that you can define and assign to
+// AWS resources. If you specify a tag that already exists, the tag value is
+// replaced with the value that you specify in the request. Note that the maximum
+// number of application tags includes system tags. The maximum number of user-defined
+// application tags is 50. For more information, see Using Cost Allocation Tags
+// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+// in the AWS Billing and Cost Management Guide.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/Tag
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// The key of the key-value tag.
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
+
+	// The value of the key-value tag. The value is optional.
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {

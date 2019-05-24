@@ -4,6 +4,7 @@ package sns
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -26,6 +27,13 @@ type CreateTopicInput struct {
 	//
 	//    * Policy – The policy that defines who can access your topic. By default,
 	//    only the topic owner can publish or subscribe to the topic.
+	//
+	// The following attribute applies only to server-side-encryption (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html):
+	//
+	//    * KmsMasterKeyId - The ID of an AWS-managed customer master key (CMK)
+	//    for Amazon SNS or a custom CMK. For more information, see Key Terms (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms).
+	//    For more examples, see KeyId (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters)
+	//    in the AWS Key Management Service API Reference.
 	Attributes map[string]string `type:"map"`
 
 	// The name of the topic you want to create.
@@ -36,6 +44,9 @@ type CreateTopicInput struct {
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
+
+	// The list of tags to add to a new topic.
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -49,6 +60,13 @@ func (s *CreateTopicInput) Validate() error {
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -77,7 +95,7 @@ const opCreateTopic = "CreateTopic"
 // Amazon Simple Notification Service.
 //
 // Creates a topic to which notifications can be published. Users can create
-// at most 100,000 topics. For more information, see http://aws.amazon.com/sns
+// at most 100,000 topics. For more information, see https://aws.amazon.com/sns
 // (http://aws.amazon.com/sns/). This action is idempotent, so if the requester
 // already owns a topic with the specified name, that topic's ARN is returned
 // without creating a new topic.
