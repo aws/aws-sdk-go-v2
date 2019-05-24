@@ -67,6 +67,7 @@ const opGrantAccess = "GrantAccess"
 // GrantAccessRequest returns a request value for making API operation for
 // AWS OpsWorks.
 //
+//
 // This action can be used only with Windows stacks.
 //
 // Grants RDP access to a Windows instance for a specified time period.

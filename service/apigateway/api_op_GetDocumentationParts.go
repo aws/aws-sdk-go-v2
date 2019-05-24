@@ -111,7 +111,8 @@ func (s GetDocumentationPartsInput) MarshalFields(e protocol.FieldEncoder) error
 
 // The collection of documentation parts of an API.
 //
-// Documenting an API (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html), DocumentationPart
+// Documenting an API (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html),
+// DocumentationPart
 type GetDocumentationPartsOutput struct {
 	_ struct{} `type:"structure"`
 

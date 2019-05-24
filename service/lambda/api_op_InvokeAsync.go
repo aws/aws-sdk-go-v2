@@ -107,6 +107,7 @@ const opInvokeAsync = "InvokeAsync"
 // InvokeAsyncRequest returns a request value for making API operation for
 // AWS Lambda.
 //
+//
 // For asynchronous function invocation, use Invoke.
 //
 // Invokes a function asynchronously.

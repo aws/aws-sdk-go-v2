@@ -36,7 +36,7 @@ type ApplyPendingMaintenanceActionInput struct {
 	OptInType *string `type:"string" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the resource that the pending maintenance
-	// action applies to. For information about creating an ARN, see  Constructing
+	// action applies to. For information about creating an ARN, see Constructing
 	// an Amazon Resource Name (ARN) (http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing).
 	//
 	// ResourceIdentifier is a required field

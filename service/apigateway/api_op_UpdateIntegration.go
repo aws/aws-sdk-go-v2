@@ -151,23 +151,23 @@ type UpdateIntegrationOutput struct {
 	// Example: Get integration responses of a method
 	//
 	// Request
-	//
-	// GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200
-	// HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
-	// X-Amz-Date: 20160607T191449Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160607/us-east-1/apigateway/aws4_request,
-	// SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
+	//   GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200
+	//   HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
+	//   X-Amz-Date: 20160607T191449Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160607/us-east-1/apigateway/aws4_request,
+	//   SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
 	// Response
 	//
-	// The successful response returns 200 OKstatus and a payload as follows:
+	// The successful response returns 200 OK status and a payload as follows:
+	//  { "_links": { "curies": { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html",
+	//  "name": "integrationresponse", "templated": true }, "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200",
+	//  "title": "200" }, "integrationresponse:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
+	//  }, "integrationresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
+	//  } }, "responseParameters": { "method.response.header.Content-Type": "'application/xml'"
+	//  }, "responseTemplates": { "application/json": "$util.urlDecode(\"%3CkinesisStreams%3E#foreach($stream
+	//  in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\")\n"
+	//  }, "statusCode": "200" }
 	//
-	// { "_links": { "curies": { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html",
-	// "name": "integrationresponse", "templated": true }, "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200",
-	// "title": "200" }, "integrationresponse:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
-	// }, "integrationresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
-	// } }, "responseParameters": { "method.response.header.Content-Type": "'application/xml'"
-	// }, "responseTemplates": { "application/json": "$util.urlDecode(\"%3CkinesisStreams%3E#foreach($stream
-	// in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\")\n"
-	// }, "statusCode": "200" }
+	// Creating an API (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 	IntegrationResponses map[string]IntegrationResponse `locationName:"integrationResponses" type:"map"`
 
 	// Specifies how the method request body of an unmapped content type will be
@@ -176,19 +176,22 @@ type UpdateIntegrationOutput struct {
 	// or the content type does not match any of the mapped content types, as specified
 	// in requestTemplates. The valid value is one of the following:
 	//
-	// WHEN_NO_MATCH: passes the method request body through the integration request
-	// to the back end without transformation when the method request content type
-	// does not match any content type associated with the mapping templates defined
-	// in the integration request.
-	// WHEN_NO_TEMPLATES: passes the method request body through the integration
-	// request to the back end without transformation when no mapping template is
-	// defined in the integration request. If a template is defined when this option
-	// is selected, the method request of an unmapped content-type will be rejected
-	// with an HTTP 415 Unsupported Media Type response.
-	// NEVER: rejects the method request with an HTTP 415 Unsupported Media Type
-	// response when either the method request content type does not match any content
-	// type associated with the mapping templates defined in the integration request
-	// or no mapping template is defined in the integration request.
+	//    * WHEN_NO_MATCH: passes the method request body through the integration
+	//    request to the back end without transformation when the method request
+	//    content type does not match any content type associated with the mapping
+	//    templates defined in the integration request.
+	//
+	//    * WHEN_NO_TEMPLATES: passes the method request body through the integration
+	//    request to the back end without transformation when no mapping template
+	//    is defined in the integration request. If a template is defined when this
+	//    option is selected, the method request of an unmapped content-type will
+	//    be rejected with an HTTP 415 Unsupported Media Type response.
+	//
+	//    * NEVER: rejects the method request with an HTTP 415 Unsupported Media
+	//    Type response when either the method request content type does not match
+	//    any content type associated with the mapping templates defined in the
+	//    integration request or no mapping template is defined in the integration
+	//    request.
 	PassthroughBehavior *string `locationName:"passthroughBehavior" type:"string"`
 
 	// A key-value map specifying request parameters that are passed from the method
@@ -216,18 +219,22 @@ type UpdateIntegrationOutput struct {
 	//    including the Lambda function-invoking action. With the Lambda function-invoking
 	//    action, this is referred to as the Lambda custom integration. With any
 	//    other AWS service action, this is known as AWS integration.
+	//
 	//    * AWS_PROXY: for integrating the API method request with the Lambda function-invoking
 	//    action with the client request passed through as-is. This integration
 	//    is also referred to as the Lambda proxy integration.
+	//
 	//    * HTTP: for integrating the API method request with an HTTP endpoint,
 	//    including a private HTTP endpoint within a VPC. This integration is also
 	//    referred to as the HTTP custom integration.
+	//
 	//    * HTTP_PROXY: for integrating the API method request with an HTTP endpoint,
 	//    including a private HTTP endpoint within a VPC, with the client request
 	//    passed through as-is. This is also referred to as the HTTP proxy integration.
 	//
 	//    * MOCK: for integrating the API method request with API Gateway as a "loop-back"
 	//    endpoint without invoking any backend.
+	//
 	// For the HTTP and HTTP proxy integrations, each integration can specify a
 	// protocol (http/https), port and path. Standard 80 and 443 ports are supported
 	// as well as custom ports above 1024. An HTTP or HTTP proxy integration with
@@ -237,13 +244,13 @@ type UpdateIntegrationOutput struct {
 
 	// Specifies Uniform Resource Identifier (URI) of the integration endpoint.
 	//
-	//    *  For HTTP or HTTP_PROXY integrations, the URI must be a fully formed,
-	//    encoded HTTP(S) URL according to the RFC-3986 specification (_blank),
+	//    * For HTTP or HTTP_PROXY integrations, the URI must be a fully formed,
+	//    encoded HTTP(S) URL according to the RFC-3986 specification (https://en.wikipedia.org/wiki/Uniform_Resource_Identifier),
 	//    for either standard integration, where connectionType is not VPC_LINK,
 	//    or private integration, where connectionType is VPC_LINK. For a private
 	//    HTTP integration, the URI is not used for routing.
 	//
-	//    *  For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}.
+	//    * For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}.
 	//    Here, {Region} is the API Gateway region (e.g., us-east-1); {service}
 	//    is the name of the integrated AWS service (e.g., s3); and {subdomain}
 	//    is a designated subdomain supported by certain AWS service for fast host-name

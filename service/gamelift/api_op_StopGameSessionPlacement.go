@@ -78,13 +78,8 @@ const opStopGameSessionPlacement = "StopGameSessionPlacement"
 //
 //    * GetGameSessionLogUrl
 //
-//    * Game session placements
-//
-// StartGameSessionPlacement
-//
-// DescribeGameSessionPlacement
-//
-// StopGameSessionPlacement
+//    * Game session placements StartGameSessionPlacement DescribeGameSessionPlacement
+//    StopGameSessionPlacement
 //
 //    // Example sending a request using StopGameSessionPlacementRequest.
 //    req := client.StopGameSessionPlacementRequest(params)

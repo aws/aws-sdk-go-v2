@@ -111,7 +111,7 @@ const opDeleteVault = "DeleteVault"
 //
 // For conceptual information and underlying REST API, see Deleting a Vault
 // in Amazon Glacier (http://docs.aws.amazon.com/amazonglacier/latest/dev/deleting-vaults.html)
-// and Delete Vault  (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-delete.html)
+// and Delete Vault (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-delete.html)
 // in the Amazon Glacier Developer Guide.
 //
 //    // Example sending a request using DeleteVaultRequest.

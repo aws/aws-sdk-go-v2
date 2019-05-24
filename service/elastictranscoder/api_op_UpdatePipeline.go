@@ -45,23 +45,18 @@ type UpdatePipelineInput struct {
 	//    and/or predefined Amazon S3 groups.
 	//
 	//    * Grantee Type: Specify the type of value that appears in the Grantee
-	//    object:
-	//
-	// Canonical: The value in the Grantee object is either the canonical user ID
-	//    for an AWS account or an origin access identity for an Amazon CloudFront
-	//    distribution. For more information about canonical user IDs, see Access
-	//    Control List (ACL) Overview in the Amazon Simple Storage Service Developer
-	//    Guide. For more information about using CloudFront origin access identities
-	//    to require that users use CloudFront URLs instead of Amazon S3 URLs, see
-	//    Using an Origin Access Identity to Restrict Access to Your Amazon S3 Content.
-	//
-	// A canonical user ID is not the same as an AWS account number.
-	//
-	// Email: The value in the Grantee object is the registered email address of
-	//    an AWS account.
-	//
-	// Group: The value in the Grantee object is one of the following predefined
-	//    Amazon S3 groups: AllUsers, AuthenticatedUsers, or LogDelivery.
+	//    object: Canonical: The value in the Grantee object is either the canonical
+	//    user ID for an AWS account or an origin access identity for an Amazon
+	//    CloudFront distribution. For more information about canonical user IDs,
+	//    see Access Control List (ACL) Overview in the Amazon Simple Storage Service
+	//    Developer Guide. For more information about using CloudFront origin access
+	//    identities to require that users use CloudFront URLs instead of Amazon
+	//    S3 URLs, see Using an Origin Access Identity to Restrict Access to Your
+	//    Amazon S3 Content. A canonical user ID is not the same as an AWS account
+	//    number. Email: The value in the Grantee object is the registered email
+	//    address of an AWS account. Group: The value in the Grantee object is one
+	//    of the following predefined Amazon S3 groups: AllUsers, AuthenticatedUsers,
+	//    or LogDelivery.
 	//
 	//    * Grantee: The AWS user or group that you want to have access to transcoded
 	//    files and playlists. To identify the user or group, you can specify the
@@ -72,19 +67,13 @@ type UpdatePipelineInput struct {
 	//    * Access: The permission that you want to give to the AWS user that you
 	//    specified in Grantee. Permissions are granted on the files that Elastic
 	//    Transcoder adds to the bucket, including playlists and video files. Valid
-	//    values include:
-	//
-	// READ: The grantee can read the objects and metadata for objects that Elastic
-	//    Transcoder adds to the Amazon S3 bucket.
-	//
-	// READ_ACP: The grantee can read the object ACL for objects that Elastic Transcoder
-	//    adds to the Amazon S3 bucket.
-	//
-	// WRITE_ACP: The grantee can write the ACL for the objects that Elastic Transcoder
-	//    adds to the Amazon S3 bucket.
-	//
-	// FULL_CONTROL: The grantee has READ, READ_ACP, and WRITE_ACP permissions for
-	//    the objects that Elastic Transcoder adds to the Amazon S3 bucket.
+	//    values include: READ: The grantee can read the objects and metadata for
+	//    objects that Elastic Transcoder adds to the Amazon S3 bucket. READ_ACP:
+	//    The grantee can read the object ACL for objects that Elastic Transcoder
+	//    adds to the Amazon S3 bucket. WRITE_ACP: The grantee can write the ACL
+	//    for the objects that Elastic Transcoder adds to the Amazon S3 bucket.
+	//    FULL_CONTROL: The grantee has READ, READ_ACP, and WRITE_ACP permissions
+	//    for the objects that Elastic Transcoder adds to the Amazon S3 bucket.
 	//
 	//    * StorageClass: The Amazon S3 storage class, Standard or ReducedRedundancy,
 	//    that you want Elastic Transcoder to assign to the video files and playlists
@@ -154,18 +143,13 @@ type UpdatePipelineInput struct {
 	//    to a maximum of 30 users and/or predefined Amazon S3 groups.
 	//
 	//    * GranteeType: Specify the type of value that appears in the Grantee object:
-	//
-	// Canonical: The value in the Grantee object is either the canonical user ID
-	//    for an AWS account or an origin access identity for an Amazon CloudFront
-	//    distribution.
-	//
-	// A canonical user ID is not the same as an AWS account number.
-	//
-	// Email: The value in the Grantee object is the registered email address of
-	//    an AWS account.
-	//
-	// Group: The value in the Grantee object is one of the following predefined
-	//    Amazon S3 groups: AllUsers, AuthenticatedUsers, or LogDelivery.
+	//    Canonical: The value in the Grantee object is either the canonical user
+	//    ID for an AWS account or an origin access identity for an Amazon CloudFront
+	//    distribution. A canonical user ID is not the same as an AWS account number.
+	//    Email: The value in the Grantee object is the registered email address
+	//    of an AWS account. Group: The value in the Grantee object is one of the
+	//    following predefined Amazon S3 groups: AllUsers, AuthenticatedUsers, or
+	//    LogDelivery.
 	//
 	//    * Grantee: The AWS user or group that you want to have access to thumbnail
 	//    files. To identify the user or group, you can specify the canonical user
@@ -175,19 +159,14 @@ type UpdatePipelineInput struct {
 	//
 	//    * Access: The permission that you want to give to the AWS user that you
 	//    specified in Grantee. Permissions are granted on the thumbnail files that
-	//    Elastic Transcoder adds to the bucket. Valid values include:
-	//
-	// READ: The grantee can read the thumbnails and metadata for objects that Elastic
-	//    Transcoder adds to the Amazon S3 bucket.
-	//
-	// READ_ACP: The grantee can read the object ACL for thumbnails that Elastic
-	//    Transcoder adds to the Amazon S3 bucket.
-	//
-	// WRITE_ACP: The grantee can write the ACL for the thumbnails that Elastic
-	//    Transcoder adds to the Amazon S3 bucket.
-	//
-	// FULL_CONTROL: The grantee has READ, READ_ACP, and WRITE_ACP permissions for
-	//    the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
+	//    Elastic Transcoder adds to the bucket. Valid values include: READ: The
+	//    grantee can read the thumbnails and metadata for objects that Elastic
+	//    Transcoder adds to the Amazon S3 bucket. READ_ACP: The grantee can read
+	//    the object ACL for thumbnails that Elastic Transcoder adds to the Amazon
+	//    S3 bucket. WRITE_ACP: The grantee can write the ACL for the thumbnails
+	//    that Elastic Transcoder adds to the Amazon S3 bucket. FULL_CONTROL: The
+	//    grantee has READ, READ_ACP, and WRITE_ACP permissions for the thumbnails
+	//    that Elastic Transcoder adds to the Amazon S3 bucket.
 	//
 	//    * StorageClass: The Amazon S3 storage class, Standard or ReducedRedundancy,
 	//    that you want Elastic Transcoder to assign to the thumbnails that it stores

@@ -99,7 +99,7 @@ const opPutBucketReplication = "PutBucketReplication"
 // Amazon Simple Storage Service.
 //
 // Creates a replication configuration or replaces an existing one. For more
-// information, see Cross-Region Replication (CRR) ( https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html)
+// information, see Cross-Region Replication (CRR) (https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html)
 // in the Amazon S3 Developer Guide.
 //
 //    // Example sending a request using PutBucketReplicationRequest.

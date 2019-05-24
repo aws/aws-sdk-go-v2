@@ -450,7 +450,7 @@ type StreamDescriptionSummary struct {
 	//
 	//    * Key ARN example: arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
 	//
-	//    * Alias ARN example:  arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+	//    * Alias ARN example: arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
 	//
 	//    * Globally unique key ID example: 12345678-1234-1234-1234-123456789012
 	//

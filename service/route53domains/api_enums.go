@@ -405,11 +405,17 @@ func (enum ReachabilityStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 //
 // Valid values:
 //
-// TRANSFERABLEThe domain name can be transferred to Amazon Route 53.
+// TRANSFERABLE
 //
-// UNTRANSFERRABLEThe domain name can't be transferred to Amazon Route 53.
+// The domain name can be transferred to Amazon Route 53.
 //
-// DONT_KNOWReserved for future use.
+// UNTRANSFERRABLE
+//
+// The domain name can't be transferred to Amazon Route 53.
+//
+// DONT_KNOW
+//
+// Reserved for future use.
 type Transferable string
 
 // Enum values for Transferable

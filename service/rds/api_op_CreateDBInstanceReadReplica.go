@@ -62,20 +62,16 @@ type CreateDBInstanceReadReplicaInput struct {
 	//    the operation is running.
 	//
 	//    * All Read Replicas in one AWS Region that are created from the same source
-	//    DB instance must either:>
-	//
-	// Specify DB subnet groups from the same VPC. All these Read Replicas are created
-	//    in the same VPC.
-	//
-	// Not specify a DB subnet group. All these Read Replicas are created outside
-	//    of any VPC.
+	//    DB instance must either:> Specify DB subnet groups from the same VPC.
+	//    All these Read Replicas are created in the same VPC. Not specify a DB
+	//    subnet group. All these Read Replicas are created outside of any VPC.
 	//
 	// Example: mySubnetgroup
 	DBSubnetGroupName *string `type:"string"`
 
 	// Indicates if the DB instance should have deletion protection enabled. The
 	// database can't be deleted when this value is set to true. The default is
-	// false. For more information, see  Deleting a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
+	// false. For more information, see Deleting a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
 	DeletionProtection *bool `type:"boolean"`
 
 	// DestinationRegion is used for presigning the request to a given region.
@@ -83,7 +79,7 @@ type CreateDBInstanceReadReplicaInput struct {
 
 	// The list of logs that the new DB instance is to export to CloudWatch Logs.
 	// The values in the list depend on the DB engine being used. For more information,
-	// see Publishing Database Logs to Amazon CloudWatch Logs  (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
+	// see Publishing Database Logs to Amazon CloudWatch Logs (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon RDS User Guide.
 	EnableCloudwatchLogsExports []string `type:"list"`
 
@@ -190,20 +186,18 @@ type CreateDBInstanceReadReplicaInput struct {
 	//
 	//    * DestinationRegion - The AWS Region that the encrypted Read Replica is
 	//    created in. This AWS Region is the same one where the CreateDBInstanceReadReplica
-	//    action is called that contains this presigned URL.
-	//
-	// For example, if you create an encrypted DB instance in the us-west-1 AWS
-	//    Region, from a source DB instance in the us-east-2 AWS Region, then you
-	//    call the CreateDBInstanceReadReplica action in the us-east-1 AWS Region
-	//    and provide a presigned URL that contains a call to the CreateDBInstanceReadReplica
-	//    action in the us-west-2 AWS Region. For this example, the DestinationRegion
-	//    in the presigned URL must be set to the us-east-1 AWS Region.
+	//    action is called that contains this presigned URL. For example, if you
+	//    create an encrypted DB instance in the us-west-1 AWS Region, from a source
+	//    DB instance in the us-east-2 AWS Region, then you call the CreateDBInstanceReadReplica
+	//    action in the us-east-1 AWS Region and provide a presigned URL that contains
+	//    a call to the CreateDBInstanceReadReplica action in the us-west-2 AWS
+	//    Region. For this example, the DestinationRegion in the presigned URL must
+	//    be set to the us-east-1 AWS Region.
 	//
 	//    * KmsKeyId - The AWS KMS key identifier for the key to use to encrypt
 	//    the Read Replica in the destination AWS Region. This is the same identifier
 	//    for both the CreateDBInstanceReadReplica action that is called in the
 	//    destination AWS Region, and the action contained in the presigned URL.
-	//
 	//
 	//    * SourceDBInstanceIdentifier - The DB instance identifier for the encrypted
 	//    DB instance to be replicated. This identifier must be in the Amazon Resource
@@ -211,7 +205,6 @@ type CreateDBInstanceReadReplicaInput struct {
 	//    an encrypted Read Replica from a DB instance in the us-west-2 AWS Region,
 	//    then your SourceDBInstanceIdentifier looks like the following example:
 	//    arn:aws:rds:us-west-2:123456789012:instance:mysql-instance1-20161115.
-	//
 	//
 	// To learn how to generate a Signature Version 4 signed request, see Authenticating
 	// Requests: Using Query Parameters (AWS Signature Version 4) (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
@@ -256,7 +249,7 @@ type CreateDBInstanceReadReplicaInput struct {
 	//
 	//    * If the source DB instance is in a different AWS Region than the Read
 	//    Replica, specify a valid DB instance ARN. For more information, go to
-	//     Constructing an ARN for Amazon RDS (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
+	//    Constructing an ARN for Amazon RDS (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
 	//    in the Amazon RDS User Guide.
 	//
 	// SourceDBInstanceIdentifier is a required field

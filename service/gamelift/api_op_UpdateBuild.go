@@ -79,7 +79,7 @@ const opUpdateBuild = "UpdateBuild"
 //
 // Learn more
 //
-// Working with Builds (https://docs.aws.amazon.com/gamelift/latest/developerguide/build-intro.html)
+//  Working with Builds (https://docs.aws.amazon.com/gamelift/latest/developerguide/build-intro.html)
 //
 // Related operations
 //

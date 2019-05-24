@@ -33,7 +33,7 @@ type ListPoliciesGrantingServiceAccessInput struct {
 	// that service. In the first paragraph, find the service prefix. For example,
 	// (service prefix: a4b). For more information about service namespaces, see
 	// AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	// in the AWS General Reference.
+	// in the AWS General Reference.
 	//
 	// ServiceNamespaces is a required field
 	ServiceNamespaces []string `min:"1" type:"list" required:"true"`
@@ -85,7 +85,7 @@ type ListPoliciesGrantingServiceAccessOutput struct {
 	// to use for the Marker parameter in a subsequent pagination request.
 	Marker *string `min:"1" type:"string"`
 
-	// A ListPoliciesGrantingServiceAccess object that contains details about the
+	// A ListPoliciesGrantingServiceAccess object that contains details about the
 	// permissions policies attached to the specified identity (user, group, or
 	// role).
 	//
@@ -122,9 +122,9 @@ const opListPoliciesGrantingServiceAccess = "ListPoliciesGrantingServiceAccess"
 //    managed and inline policies that are attached to the group to which the
 //    user belongs.
 //
-//    * Group – The list of policies includes only the managed and inline policies
-//    that are attached to the group directly. Policies that are attached to
-//    the group’s user are not included.
+//    * Group – The list of policies includes only the managed and inline
+//    policies that are attached to the group directly. Policies that are attached
+//    to the group’s user are not included.
 //
 //    * Role – The list of policies includes only the managed and inline policies
 //    that are attached to the role.

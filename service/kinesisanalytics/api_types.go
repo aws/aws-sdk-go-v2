@@ -1583,7 +1583,7 @@ func (s *MappingParameters) Validate() error {
 // Kinesis Firehose delivery stream.
 //
 // For limits on how many destinations an application can write and other limitations,
-// see Limits (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html)
+// see Limits (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/Output
 type Output struct {
 	_ struct{} `type:"structure"`

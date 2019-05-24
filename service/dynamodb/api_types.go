@@ -162,47 +162,38 @@ type AttributeValueUpdate struct {
 	//
 	//    * DELETE - If no value is specified, the attribute and its value are removed
 	//    from the item. The data type of the specified value must match the existing
-	//    value's data type.
-	//
-	// If a set of values is specified, then those values are subtracted from the
-	//    old set. For example, if the attribute value was the set [a,b,c] and the
-	//    DELETE action specified [a,c], then the final attribute value would be
-	//    [b]. Specifying an empty set is an error.
+	//    value's data type. If a set of values is specified, then those values
+	//    are subtracted from the old set. For example, if the attribute value was
+	//    the set [a,b,c] and the DELETE action specified [a,c], then the final
+	//    attribute value would be [b]. Specifying an empty set is an error.
 	//
 	//    * ADD - If the attribute does not already exist, then the attribute and
 	//    its values are added to the item. If the attribute does exist, then the
-	//    behavior of ADD depends on the data type of the attribute:
-	//
-	// If the existing attribute is a number, and if Value is also a number, then
-	//    the Value is mathematically added to the existing attribute. If Value
-	//    is a negative number, then it is subtracted from the existing attribute.
-	//
-	//  If you use ADD to increment or decrement a number value for an item that
-	//    doesn't exist before the update, DynamoDB uses 0 as the initial value.
-	//
-	// In addition, if you use ADD to update an existing item, and intend to increment
-	//    or decrement an attribute value which does not yet exist, DynamoDB uses
-	//    0 as the initial value. For example, suppose that the item you want to
-	//    update does not yet have an attribute named itemcount, but you decide
-	//    to ADD the number 3 to this attribute anyway, even though it currently
-	//    does not exist. DynamoDB will create the itemcount attribute, set its
-	//    initial value to 0, and finally add 3 to it. The result will be a new
-	//    itemcount attribute in the item, with a value of 3.
-	//
-	// If the existing data type is a set, and if the Value is also a set, then
-	//    the Value is added to the existing set. (This is a set operation, not
-	//    mathematical addition.) For example, if the attribute value was the set
-	//    [1,2], and the ADD action specified [3], then the final attribute value
-	//    would be [1,2,3]. An error occurs if an Add action is specified for a
-	//    set attribute and the attribute type specified does not match the existing
-	//    set type.
-	//
-	// Both sets must have the same primitive data type. For example, if the existing
-	//    data type is a set of strings, the Value must also be a set of strings.
-	//    The same holds true for number sets and binary sets.
-	//
-	// This action is only valid for an existing attribute whose data type is number
-	//    or is a set. Do not use ADD for any other data types.
+	//    behavior of ADD depends on the data type of the attribute: If the existing
+	//    attribute is a number, and if Value is also a number, then the Value is
+	//    mathematically added to the existing attribute. If Value is a negative
+	//    number, then it is subtracted from the existing attribute. If you use
+	//    ADD to increment or decrement a number value for an item that doesn't
+	//    exist before the update, DynamoDB uses 0 as the initial value. In addition,
+	//    if you use ADD to update an existing item, and intend to increment or
+	//    decrement an attribute value which does not yet exist, DynamoDB uses 0
+	//    as the initial value. For example, suppose that the item you want to update
+	//    does not yet have an attribute named itemcount, but you decide to ADD
+	//    the number 3 to this attribute anyway, even though it currently does not
+	//    exist. DynamoDB will create the itemcount attribute, set its initial value
+	//    to 0, and finally add 3 to it. The result will be a new itemcount attribute
+	//    in the item, with a value of 3. If the existing data type is a set, and
+	//    if the Value is also a set, then the Value is added to the existing set.
+	//    (This is a set operation, not mathematical addition.) For example, if
+	//    the attribute value was the set [1,2], and the ADD action specified [3],
+	//    then the final attribute value would be [1,2,3]. An error occurs if an
+	//    Add action is specified for a set attribute and the attribute type specified
+	//    does not match the existing set type. Both sets must have the same primitive
+	//    data type. For example, if the existing data type is a set of strings,
+	//    the Value must also be a set of strings. The same holds true for number
+	//    sets and binary sets. This action is only valid for an existing attribute
+	//    whose data type is number or is a set. Do not use ADD for any other data
+	//    types.
 	//
 	// If no item with the specified Key is found:
 	//
@@ -662,12 +653,9 @@ func (s Capacity) String() string {
 //
 //    * For a Query operation, Condition is used for specifying the KeyConditions
 //    to use when querying a table or an index. For KeyConditions, only the
-//    following comparison operators are supported:
-//
-// EQ | LE | LT | GE | GT | BEGINS_WITH | BETWEEN
-//
-// Condition is also used in a QueryFilter, which evaluates the query results
-//    and returns only the desired values.
+//    following comparison operators are supported: EQ | LE | LT | GE | GT |
+//    BEGINS_WITH | BETWEEN Condition is also used in a QueryFilter, which evaluates
+//    the query results and returns only the desired values.
 //
 //    * For a Scan operation, Condition is used in a ScanFilter, which evaluates
 //    the scan results and returns only the desired values.
@@ -700,36 +688,109 @@ type Condition struct {
 	// The following are descriptions of each comparison operator.
 	//
 	//    * EQ : Equal. EQ is supported for all data types, including lists and
-	//    maps.
+	//    maps. AttributeValueList can contain only one AttributeValue element of
+	//    type String, Number, Binary, String Set, Number Set, or Binary Set. If
+	//    an item contains an AttributeValue element of a different type than the
+	//    one provided in the request, the value does not match. For example, {"S":"6"}
+	//    does not equal {"N":"6"}. Also, {"N":"6"} does not equal {"NS":["6", "2",
+	//    "1"]}.
 	//
-	// AttributeValueList can contain only one AttributeValue element of type String,
-	//    Number, Binary, String Set, Number Set, or Binary Set. If an item contains
-	//    an AttributeValue element of a different type than the one provided in
+	//    * NE : Not equal. NE is supported for all data types, including lists
+	//    and maps. AttributeValueList can contain only one AttributeValue of type
+	//    String, Number, Binary, String Set, Number Set, or Binary Set. If an item
+	//    contains an AttributeValue of a different type than the one provided in
 	//    the request, the value does not match. For example, {"S":"6"} does not
 	//    equal {"N":"6"}. Also, {"N":"6"} does not equal {"NS":["6", "2", "1"]}.
 	//
-	//    * NE : Not equal. NE is supported for all data types, including lists
-	//    and maps.
+	//    * LE : Less than or equal. AttributeValueList can contain only one AttributeValue
+	//    element of type String, Number, or Binary (not a set type). If an item
+	//    contains an AttributeValue element of a different type than the one provided
+	//    in the request, the value does not match. For example, {"S":"6"} does
+	//    not equal {"N":"6"}. Also, {"N":"6"} does not compare to {"NS":["6", "2",
+	//    "1"]}.
 	//
-	//    * AttributeValueList can contain only one AttributeValue of type String,
-	//    Number, Binary, String Set, Number Set, or Binary Set. If an item contains
-	//    an AttributeValue of a different type than the one provided in the request,
-	//    the value does not match. For example, {"S":"6"} does not equal {"N":"6"}.
-	//    Also, {"N":"6"} does not equal {"NS":["6", "2", "1"]}.
+	//    * LT : Less than. AttributeValueList can contain only one AttributeValue
+	//    of type String, Number, or Binary (not a set type). If an item contains
+	//    an AttributeValue element of a different type than the one provided in
+	//    the request, the value does not match. For example, {"S":"6"} does not
+	//    equal {"N":"6"}. Also, {"N":"6"} does not compare to {"NS":["6", "2",
+	//    "1"]}.
 	//
-	//    * LE : Less than or equal.
+	//    * GE : Greater than or equal. AttributeValueList can contain only one
+	//    AttributeValue element of type String, Number, or Binary (not a set type).
+	//    If an item contains an AttributeValue element of a different type than
+	//    the one provided in the request, the value does not match. For example,
+	//    {"S":"6"} does not equal {"N":"6"}. Also, {"N":"6"} does not compare to
+	//    {"NS":["6", "2", "1"]}.
 	//
-	// AttributeValueList can contain only one AttributeValue element of type String,
-	// Number, or Binary (not a set type). If an item contains an AttributeValue
-	// element of a different type than the one provided in the request, the value
-	// does not match. For example, {"S":"6"} does not equal {"N":"6"}. Also, {"N":"6"}
-	// does not compare to {"NS":["6", "2", "1"]}.
+	//    * GT : Greater than. AttributeValueList can contain only one AttributeValue
+	//    element of type String, Number, or Binary (not a set type). If an item
+	//    contains an AttributeValue element of a different type than the one provided
+	//    in the request, the value does not match. For example, {"S":"6"} does
+	//    not equal {"N":"6"}. Also, {"N":"6"} does not compare to {"NS":["6", "2",
+	//    "1"]}.
 	//
-	// LT: Less than.
+	//    * NOT_NULL : The attribute exists. NOT_NULL is supported for all data
+	//    types, including lists and maps. This operator tests for the existence
+	//    of an attribute, not its data type. If the data type of attribute "a"
+	//    is null, and you evaluate it using NOT_NULL, the result is a Boolean true.
+	//    This result is because the attribute "a" exists; its data type is not
+	//    relevant to the NOT_NULL comparison operator.
 	//
-	// AttributeValueListcan contain only one AttributeValueof type String, Number, or Binary (not a set type). If an item contains an
-	// AttributeValueelement of a different type than the one provided in the request, the value
-	// does not match. For example, {"S":"6"}does not equal {"N":"6"}. Also, {"N":"6"}does not compare to {"NS":["6", "2", "1"]}
+	//    * NULL : The attribute does not exist. NULL is supported for all data
+	//    types, including lists and maps. This operator tests for the nonexistence
+	//    of an attribute, not its data type. If the data type of attribute "a"
+	//    is null, and you evaluate it using NULL, the result is a Boolean false.
+	//    This is because the attribute "a" exists; its data type is not relevant
+	//    to the NULL comparison operator.
+	//
+	//    * CONTAINS : Checks for a subsequence, or value in a set. AttributeValueList
+	//    can contain only one AttributeValue element of type String, Number, or
+	//    Binary (not a set type). If the target attribute of the comparison is
+	//    of type String, then the operator checks for a substring match. If the
+	//    target attribute of the comparison is of type Binary, then the operator
+	//    looks for a subsequence of the target that matches the input. If the target
+	//    attribute of the comparison is a set ("SS", "NS", or "BS"), then the operator
+	//    evaluates to true if it finds an exact match with any member of the set.
+	//    CONTAINS is supported for lists: When evaluating "a CONTAINS b", "a" can
+	//    be a list; however, "b" cannot be a set, a map, or a list.
+	//
+	//    * NOT_CONTAINS : Checks for absence of a subsequence, or absence of a
+	//    value in a set. AttributeValueList can contain only one AttributeValue
+	//    element of type String, Number, or Binary (not a set type). If the target
+	//    attribute of the comparison is a String, then the operator checks for
+	//    the absence of a substring match. If the target attribute of the comparison
+	//    is Binary, then the operator checks for the absence of a subsequence of
+	//    the target that matches the input. If the target attribute of the comparison
+	//    is a set ("SS", "NS", or "BS"), then the operator evaluates to true if
+	//    it does not find an exact match with any member of the set. NOT_CONTAINS
+	//    is supported for lists: When evaluating "a NOT CONTAINS b", "a" can be
+	//    a list; however, "b" cannot be a set, a map, or a list.
+	//
+	//    * BEGINS_WITH : Checks for a prefix. AttributeValueList can contain only
+	//    one AttributeValue of type String or Binary (not a Number or a set type).
+	//    The target attribute of the comparison must be of type String or Binary
+	//    (not a Number or a set type).
+	//
+	//    * IN : Checks for matching elements in a list. AttributeValueList can
+	//    contain one or more AttributeValue elements of type String, Number, or
+	//    Binary. These attributes are compared against an existing attribute of
+	//    an item. If any elements of the input are equal to the item attribute,
+	//    the expression evaluates to true.
+	//
+	//    * BETWEEN : Greater than or equal to the first value, and less than or
+	//    equal to the second value. AttributeValueList must contain two AttributeValue
+	//    elements of the same type, either String, Number, or Binary (not a set
+	//    type). A target attribute matches if the target value is greater than,
+	//    or equal to, the first element and less than, or equal to, the second
+	//    element. If an item contains an AttributeValue element of a different
+	//    type than the one provided in the request, the value does not match. For
+	//    example, {"S":"6"} does not compare to {"N":"6"}. Also, {"N":"6"} does
+	//    not compare to {"NS":["6", "2", "1"]}
+	//
+	// For usage examples of AttributeValueList and ComparisonOperator, see Legacy
+	// Conditional Parameters (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html)
+	// in the Amazon DynamoDB Developer Guide.
 	//
 	// ComparisonOperator is a required field
 	ComparisonOperator ComparisonOperator `type:"string" required:"true" enum:"true"`
@@ -1196,36 +1257,105 @@ type ExpectedAttributeValue struct {
 	// The following are descriptions of each comparison operator.
 	//
 	//    * EQ : Equal. EQ is supported for all data types, including lists and
-	//    maps.
+	//    maps. AttributeValueList can contain only one AttributeValue element of
+	//    type String, Number, Binary, String Set, Number Set, or Binary Set. If
+	//    an item contains an AttributeValue element of a different type than the
+	//    one provided in the request, the value does not match. For example, {"S":"6"}
+	//    does not equal {"N":"6"}. Also, {"N":"6"} does not equal {"NS":["6", "2",
+	//    "1"]}.
 	//
-	// AttributeValueList can contain only one AttributeValue element of type String,
-	//    Number, Binary, String Set, Number Set, or Binary Set. If an item contains
-	//    an AttributeValue element of a different type than the one provided in
+	//    * NE : Not equal. NE is supported for all data types, including lists
+	//    and maps. AttributeValueList can contain only one AttributeValue of type
+	//    String, Number, Binary, String Set, Number Set, or Binary Set. If an item
+	//    contains an AttributeValue of a different type than the one provided in
 	//    the request, the value does not match. For example, {"S":"6"} does not
 	//    equal {"N":"6"}. Also, {"N":"6"} does not equal {"NS":["6", "2", "1"]}.
 	//
-	//    * NE : Not equal. NE is supported for all data types, including lists
-	//    and maps.
+	//    * LE : Less than or equal. AttributeValueList can contain only one AttributeValue
+	//    element of type String, Number, or Binary (not a set type). If an item
+	//    contains an AttributeValue element of a different type than the one provided
+	//    in the request, the value does not match. For example, {"S":"6"} does
+	//    not equal {"N":"6"}. Also, {"N":"6"} does not compare to {"NS":["6", "2",
+	//    "1"]}.
 	//
-	//    * AttributeValueList can contain only one AttributeValue of type String,
-	//    Number, Binary, String Set, Number Set, or Binary Set. If an item contains
-	//    an AttributeValue of a different type than the one provided in the request,
-	//    the value does not match. For example, {"S":"6"} does not equal {"N":"6"}.
-	//    Also, {"N":"6"} does not equal {"NS":["6", "2", "1"]}.
+	//    * LT : Less than. AttributeValueList can contain only one AttributeValue
+	//    of type String, Number, or Binary (not a set type). If an item contains
+	//    an AttributeValue element of a different type than the one provided in
+	//    the request, the value does not match. For example, {"S":"6"} does not
+	//    equal {"N":"6"}. Also, {"N":"6"} does not compare to {"NS":["6", "2",
+	//    "1"]}.
 	//
-	//    * LE : Less than or equal.
+	//    * GE : Greater than or equal. AttributeValueList can contain only one
+	//    AttributeValue element of type String, Number, or Binary (not a set type).
+	//    If an item contains an AttributeValue element of a different type than
+	//    the one provided in the request, the value does not match. For example,
+	//    {"S":"6"} does not equal {"N":"6"}. Also, {"N":"6"} does not compare to
+	//    {"NS":["6", "2", "1"]}.
 	//
-	// AttributeValueList can contain only one AttributeValue element of type String,
-	// Number, or Binary (not a set type). If an item contains an AttributeValue
-	// element of a different type than the one provided in the request, the value
-	// does not match. For example, {"S":"6"} does not equal {"N":"6"}. Also, {"N":"6"}
-	// does not compare to {"NS":["6", "2", "1"]}.
+	//    * GT : Greater than. AttributeValueList can contain only one AttributeValue
+	//    element of type String, Number, or Binary (not a set type). If an item
+	//    contains an AttributeValue element of a different type than the one provided
+	//    in the request, the value does not match. For example, {"S":"6"} does
+	//    not equal {"N":"6"}. Also, {"N":"6"} does not compare to {"NS":["6", "2",
+	//    "1"]}.
 	//
-	// LT: Less than.
+	//    * NOT_NULL : The attribute exists. NOT_NULL is supported for all data
+	//    types, including lists and maps. This operator tests for the existence
+	//    of an attribute, not its data type. If the data type of attribute "a"
+	//    is null, and you evaluate it using NOT_NULL, the result is a Boolean true.
+	//    This result is because the attribute "a" exists; its data type is not
+	//    relevant to the NOT_NULL comparison operator.
 	//
-	// AttributeValueListcan contain only one AttributeValueof type String, Number, or Binary (not a set type). If an item contains an
-	// AttributeValueelement of a different type than the one provided in the request, the value
-	// does not match. For example, {"S":"6"}does not equal {"N":"6"}. Also, {"N":"6"}does not compare to {"NS":["6", "2", "1"]}
+	//    * NULL : The attribute does not exist. NULL is supported for all data
+	//    types, including lists and maps. This operator tests for the nonexistence
+	//    of an attribute, not its data type. If the data type of attribute "a"
+	//    is null, and you evaluate it using NULL, the result is a Boolean false.
+	//    This is because the attribute "a" exists; its data type is not relevant
+	//    to the NULL comparison operator.
+	//
+	//    * CONTAINS : Checks for a subsequence, or value in a set. AttributeValueList
+	//    can contain only one AttributeValue element of type String, Number, or
+	//    Binary (not a set type). If the target attribute of the comparison is
+	//    of type String, then the operator checks for a substring match. If the
+	//    target attribute of the comparison is of type Binary, then the operator
+	//    looks for a subsequence of the target that matches the input. If the target
+	//    attribute of the comparison is a set ("SS", "NS", or "BS"), then the operator
+	//    evaluates to true if it finds an exact match with any member of the set.
+	//    CONTAINS is supported for lists: When evaluating "a CONTAINS b", "a" can
+	//    be a list; however, "b" cannot be a set, a map, or a list.
+	//
+	//    * NOT_CONTAINS : Checks for absence of a subsequence, or absence of a
+	//    value in a set. AttributeValueList can contain only one AttributeValue
+	//    element of type String, Number, or Binary (not a set type). If the target
+	//    attribute of the comparison is a String, then the operator checks for
+	//    the absence of a substring match. If the target attribute of the comparison
+	//    is Binary, then the operator checks for the absence of a subsequence of
+	//    the target that matches the input. If the target attribute of the comparison
+	//    is a set ("SS", "NS", or "BS"), then the operator evaluates to true if
+	//    it does not find an exact match with any member of the set. NOT_CONTAINS
+	//    is supported for lists: When evaluating "a NOT CONTAINS b", "a" can be
+	//    a list; however, "b" cannot be a set, a map, or a list.
+	//
+	//    * BEGINS_WITH : Checks for a prefix. AttributeValueList can contain only
+	//    one AttributeValue of type String or Binary (not a Number or a set type).
+	//    The target attribute of the comparison must be of type String or Binary
+	//    (not a Number or a set type).
+	//
+	//    * IN : Checks for matching elements in a list. AttributeValueList can
+	//    contain one or more AttributeValue elements of type String, Number, or
+	//    Binary. These attributes are compared against an existing attribute of
+	//    an item. If any elements of the input are equal to the item attribute,
+	//    the expression evaluates to true.
+	//
+	//    * BETWEEN : Greater than or equal to the first value, and less than or
+	//    equal to the second value. AttributeValueList must contain two AttributeValue
+	//    elements of the same type, either String, Number, or Binary (not a set
+	//    type). A target attribute matches if the target value is greater than,
+	//    or equal to, the first element and less than, or equal to, the second
+	//    element. If an item contains an AttributeValue element of a different
+	//    type than the one provided in the request, the value does not match. For
+	//    example, {"S":"6"} does not compare to {"N":"6"}. Also, {"N":"6"} does
+	//    not compare to {"NS":["6", "2", "1"]}
 	ComparisonOperator ComparisonOperator `type:"string" enum:"true"`
 
 	// Causes DynamoDB to evaluate the value before attempting a conditional operation:
@@ -2885,15 +3015,9 @@ type TableDescription struct {
 	//    DynamoDB updates this value approximately every six hours. Recent changes
 	//    might not be reflected in this value.
 	//
-	//    * IndexStatus - The current status of the global secondary index:
-	//
-	// CREATING - The index is being created.
-	//
-	// UPDATING - The index is being updated.
-	//
-	// DELETING - The index is being deleted.
-	//
-	// ACTIVE - The index is ready for use.
+	//    * IndexStatus - The current status of the global secondary index: CREATING
+	//    - The index is being created. UPDATING - The index is being updated. DELETING
+	//    - The index is being deleted. ACTIVE - The index is ready for use.
 	//
 	//    * ItemCount - The number of items in the global secondary index. DynamoDB
 	//    updates this value approximately every six hours. Recent changes might
@@ -2906,22 +3030,16 @@ type TableDescription struct {
 	//    * Projection - Specifies attributes that are copied (projected) from the
 	//    table into the index. These are in addition to the primary key attributes
 	//    and index key attributes, which are automatically projected. Each attribute
-	//    specification is composed of:
-	//
-	// ProjectionType - One of the following:
-	//
-	// KEYS_ONLY - Only the index and primary keys are projected into the index.
-	//
-	// INCLUDE - Only the specified table attributes are projected into the index.
-	//    The list of projected attributes are in NonKeyAttributes.
-	//
-	// ALL - All of the table attributes are projected into the index.
-	//
-	// NonKeyAttributes - A list of one or more non-key attribute names that are
-	//    projected into the secondary index. The total count of attributes provided
-	//    in NonKeyAttributes, summed across all of the secondary indexes, must
-	//    not exceed 20. If you project the same attribute into two different indexes,
-	//    this counts as two distinct attributes when determining the total.
+	//    specification is composed of: ProjectionType - One of the following: KEYS_ONLY
+	//    - Only the index and primary keys are projected into the index. INCLUDE
+	//    - Only the specified table attributes are projected into the index. The
+	//    list of projected attributes are in NonKeyAttributes. ALL - All of the
+	//    table attributes are projected into the index. NonKeyAttributes - A list
+	//    of one or more non-key attribute names that are projected into the secondary
+	//    index. The total count of attributes provided in NonKeyAttributes, summed
+	//    across all of the secondary indexes, must not exceed 20. If you project
+	//    the same attribute into two different indexes, this counts as two distinct
+	//    attributes when determining the total.
 	//
 	//    * ProvisionedThroughput - The provisioned throughput settings for the
 	//    global secondary index, consisting of read and write capacity units, along
@@ -2939,20 +3057,14 @@ type TableDescription struct {
 	//
 	//    * AttributeName - The name of the attribute.
 	//
-	//    * KeyType - The role of the attribute:
-	//
-	// HASH - partition key
-	//
-	// RANGE - sort key
-	//
-	// The partition key of an item is also known as its hash attribute. The term
-	//    "hash attribute" derives from DynamoDB' usage of an internal hash function
-	//    to evenly distribute data items across partitions, based on their partition
-	//    key values.
-	//
-	// The sort key of an item is also known as its range attribute. The term "range
-	//    attribute" derives from the way DynamoDB stores items with the same partition
-	//    key physically close together, in sorted order by the sort key value.
+	//    * KeyType - The role of the attribute: HASH - partition key RANGE - sort
+	//    key The partition key of an item is also known as its hash attribute.
+	//    The term "hash attribute" derives from DynamoDB' usage of an internal
+	//    hash function to evenly distribute data items across partitions, based
+	//    on their partition key values. The sort key of an item is also known as
+	//    its range attribute. The term "range attribute" derives from the way DynamoDB
+	//    stores items with the same partition key physically close together, in
+	//    sorted order by the sort key value.
 	//
 	// For more information about primary keys, see Primary Key (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey)
 	// in the Amazon DynamoDB Developer Guide.
@@ -2991,22 +3103,16 @@ type TableDescription struct {
 	//    * Projection - Specifies attributes that are copied (projected) from the
 	//    table into the index. These are in addition to the primary key attributes
 	//    and index key attributes, which are automatically projected. Each attribute
-	//    specification is composed of:
-	//
-	// ProjectionType - One of the following:
-	//
-	// KEYS_ONLY - Only the index and primary keys are projected into the index.
-	//
-	// INCLUDE - Only the specified table attributes are projected into the index.
-	//    The list of projected attributes are in NonKeyAttributes.
-	//
-	// ALL - All of the table attributes are projected into the index.
-	//
-	// NonKeyAttributes - A list of one or more non-key attribute names that are
-	//    projected into the secondary index. The total count of attributes provided
-	//    in NonKeyAttributes, summed across all of the secondary indexes, must
-	//    not exceed 20. If you project the same attribute into two different indexes,
-	//    this counts as two distinct attributes when determining the total.
+	//    specification is composed of: ProjectionType - One of the following: KEYS_ONLY
+	//    - Only the index and primary keys are projected into the index. INCLUDE
+	//    - Only the specified table attributes are projected into the index. The
+	//    list of projected attributes are in NonKeyAttributes. ALL - All of the
+	//    table attributes are projected into the index. NonKeyAttributes - A list
+	//    of one or more non-key attribute names that are projected into the secondary
+	//    index. The total count of attributes provided in NonKeyAttributes, summed
+	//    across all of the secondary indexes, must not exceed 20. If you project
+	//    the same attribute into two different indexes, this counts as two distinct
+	//    attributes when determining the total.
 	//
 	//    * IndexSizeBytes - Represents the total size of the index, in bytes. DynamoDB
 	//    updates this value approximately every six hours. Recent changes might

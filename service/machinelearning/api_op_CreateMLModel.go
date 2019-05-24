@@ -26,6 +26,7 @@ type CreateMLModelInput struct {
 	//    * Choose REGRESSION if the MLModel will be used to predict a numeric value.
 	//
 	//    * Choose BINARY if the MLModel result has two possible values.
+	//
 	//    * Choose MULTICLASS if the MLModel result has a limited number of values.
 	//
 	// For more information, see the Amazon Machine Learning Developer Guide (http://docs.aws.amazon.com/machine-learning/latest/dg).
@@ -40,8 +41,7 @@ type CreateMLModelInput struct {
 	//
 	//    * sgd.maxMLModelSizeInBytes - The maximum allowed size of the model. Depending
 	//    on the input data, the size of the model might affect its performance.
-	//
-	//  The value is an integer that ranges from 100000 to 2147483648. The default
+	//    The value is an integer that ranges from 100000 to 2147483648. The default
 	//    value is 33554432.
 	//
 	//    * sgd.maxPasses - The number of times that the training process traverses
@@ -57,20 +57,17 @@ type CreateMLModelInput struct {
 	//    It controls overfitting the data by penalizing large coefficients. This
 	//    tends to drive coefficients to zero, resulting in a sparse feature set.
 	//    If you use this parameter, start by specifying a small value, such as
-	//    1.0E-08.
-	//
-	// The value is a double that ranges from 0 to MAX_DOUBLE. The default is to
-	//    not use L1 normalization. This parameter can't be used when L2 is specified.
-	//    Use this parameter sparingly.
+	//    1.0E-08. The value is a double that ranges from 0 to MAX_DOUBLE. The default
+	//    is to not use L1 normalization. This parameter can't be used when L2 is
+	//    specified. Use this parameter sparingly.
 	//
 	//    * sgd.l2RegularizationAmount - The coefficient regularization L2 norm.
 	//    It controls overfitting the data by penalizing large coefficients. This
 	//    tends to drive coefficients to small, nonzero values. If you use this
-	//    parameter, start by specifying a small value, such as 1.0E-08.
-	//
-	// The value is a double that ranges from 0 to MAX_DOUBLE. The default is to
-	//    not use L2 normalization. This parameter can't be used when L1 is specified.
-	//    Use this parameter sparingly.
+	//    parameter, start by specifying a small value, such as 1.0E-08. The value
+	//    is a double that ranges from 0 to MAX_DOUBLE. The default is to not use
+	//    L2 normalization. This parameter can't be used when L1 is specified. Use
+	//    this parameter sparingly.
 	Parameters map[string]string `type:"map"`
 
 	// The data recipe for creating the MLModel. You must specify either the recipe

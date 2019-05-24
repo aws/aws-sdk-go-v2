@@ -101,8 +101,8 @@ const opCreateBuild = "CreateBuild"
 // GameLift.
 //
 // To create new builds quickly and easily, use the AWS CLI command upload-build
-// (https://docs.aws.amazon.com/cli/latest/reference/gamelift/upload-build.html).
-// This helper command uploads your build and creates a new build record in
+// (https://docs.aws.amazon.com/cli/latest/reference/gamelift/upload-build.html)
+// . This helper command uploads your build and creates a new build record in
 // one step, and automatically handles the necessary permissions.
 //
 // The CreateBuild operation should be used only when you need to manually upload
@@ -131,7 +131,7 @@ const opCreateBuild = "CreateBuild"
 //
 // Uploading Your Game (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
 //
-// Create a Build with Files in Amazon S3 (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build)
+//  Create a Build with Files in Amazon S3 (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build)
 //
 // Related operations
 //

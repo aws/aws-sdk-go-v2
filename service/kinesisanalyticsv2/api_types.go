@@ -538,7 +538,7 @@ func (s *CSVMappingParameters) Validate() error {
 
 // Describes an application's checkpointing configuration. Checkpointing is
 // the process of persisting application state for fault tolerance. For more
-// information, see  Checkpoints for Fault Tolerance (https://ci.apache.org/projects/flink/flink-docs-release-1.6/concepts/programming-model.html#checkpoints-for-fault-tolerance)
+// information, see Checkpoints for Fault Tolerance (https://ci.apache.org/projects/flink/flink-docs-release-1.6/concepts/programming-model.html#checkpoints-for-fault-tolerance)
 // in the Apache Flink Documentation (https://ci.apache.org/projects/flink/flink-docs-release-1.6/).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CheckpointConfiguration
 type CheckpointConfiguration struct {
@@ -560,7 +560,7 @@ type CheckpointConfiguration struct {
 	// Describes the minimum time in milliseconds after a checkpoint operation completes
 	// that a new checkpoint operation can start. If a checkpoint operation takes
 	// longer than the CheckpointInterval, the application otherwise performs continual
-	// checkpoint operations. For more information, see  Tuning Checkpointing (https://ci.apache.org/projects/flink/flink-docs-stable/ops/state/large_state_tuning.html#tuning-checkpointing)
+	// checkpoint operations. For more information, see Tuning Checkpointing (https://ci.apache.org/projects/flink/flink-docs-stable/ops/state/large_state_tuning.html#tuning-checkpointing)
 	// in the Apache Flink Documentation (https://ci.apache.org/projects/flink/flink-docs-release-1.6/).
 	MinPauseBetweenCheckpoints *int64 `type:"long"`
 }
@@ -966,7 +966,7 @@ type FlinkApplicationConfiguration struct {
 
 	// Describes an application's checkpointing configuration. Checkpointing is
 	// the process of persisting application state for fault tolerance. For more
-	// information, see  Checkpoints for Fault Tolerance (https://ci.apache.org/projects/flink/flink-docs-release-1.6/concepts/programming-model.html#checkpoints-for-fault-tolerance)
+	// information, see Checkpoints for Fault Tolerance (https://ci.apache.org/projects/flink/flink-docs-release-1.6/concepts/programming-model.html#checkpoints-for-fault-tolerance)
 	// in the Apache Flink Documentation (https://ci.apache.org/projects/flink/flink-docs-release-1.6/).
 	CheckpointConfiguration *CheckpointConfiguration `type:"structure"`
 

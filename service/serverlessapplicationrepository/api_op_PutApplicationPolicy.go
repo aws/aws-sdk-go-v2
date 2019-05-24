@@ -112,8 +112,7 @@ const opPutApplicationPolicy = "PutApplicationPolicy"
 // AWSServerlessApplicationRepository.
 //
 // Sets the permission policy for an application. For the list of actions supported
-// for this operation, see Application Permissions (https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions)
-// .
+// for this operation, see Application Permissions (https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions) .
 //
 //    // Example sending a request using PutApplicationPolicyRequest.
 //    req := client.PutApplicationPolicyRequest(params)

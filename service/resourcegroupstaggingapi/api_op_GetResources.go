@@ -69,7 +69,8 @@ type GetResourcesInput struct {
 	// 10 tags, and the third page displaying the remaining 2 resources, each with
 	// its 10 tags.
 	//
-	// You can set TagsPerPage
+	// You can set TagsPerPage to a minimum of 100 items and the maximum of 500
+	// items.
 	TagsPerPage *int64 `type:"integer"`
 }
 

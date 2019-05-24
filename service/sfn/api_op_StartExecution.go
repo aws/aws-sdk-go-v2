@@ -23,8 +23,8 @@ type StartExecutionInput struct {
 	Input *string `locationName:"input" type:"string"`
 
 	// The name of the execution. This name must be unique for your AWS account,
-	// region, and state machine for 90 days. For more information, see  Limits
-	// Related to State Machine Executions (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions)
+	// region, and state machine for 90 days. For more information, see Limits Related
+	// to State Machine Executions (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions)
 	// in the AWS Step Functions Developer Guide.
 	//
 	// A name must not contain:

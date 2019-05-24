@@ -13,10 +13,16 @@ type SelectInput struct {
 	_ struct{} `type:"structure"`
 
 	// Determines whether or not strong consistency should be enforced when data
-	// is read from SimpleDB. If true
+	// is read from SimpleDB. If
+	//    true
+	// , any data previously written to SimpleDB will be returned. Otherwise, results
+	// will be consistent eventually, and the client may not see data that was written
+	// immediately before your read.
 	ConsistentRead *bool `type:"boolean"`
 
-	// A string informing Amazon SimpleDB where to start the next list of ItemNames
+	// A string informing Amazon SimpleDB where to start the next list of
+	//    ItemNames
+	// .
 	NextToken *string `type:"string"`
 
 	// The expression used to query the domain.
@@ -50,7 +56,10 @@ type SelectOutput struct {
 	// A list of items that match the select expression.
 	Items []Item `locationNameList:"Item" type:"list" flattened:"true"`
 
-	// An opaque token indicating that more items than MaxNumberOfItems
+	// An opaque token indicating that more items than
+	//    MaxNumberOfItems
+	//  were matched, the response size exceeded 1 megabyte, or the execution time
+	//  exceeded 5 seconds.
 	NextToken *string `type:"string"`
 }
 

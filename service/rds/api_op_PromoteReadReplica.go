@@ -39,7 +39,7 @@ type PromoteReadReplicaInput struct {
 	// backups are enabled, using the BackupRetentionPeriod parameter.
 	//
 	// The default is a 30-minute window selected at random from an 8-hour block
-	// of time for each AWS Region. To see the time blocks available, see  Adjusting
+	// of time for each AWS Region. To see the time blocks available, see Adjusting
 	// the Preferred Maintenance Window (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html)
 	// in the Amazon RDS User Guide.
 	//
@@ -96,15 +96,16 @@ const opPromoteReadReplica = "PromoteReadReplica"
 //
 // Promotes a Read Replica DB instance to a standalone DB instance.
 //
-// Backup duration is a function of the amount of changes to the database since
-// the previous backup. If you plan to promote a Read Replica to a standalone
-// instance, we recommend that you enable backups and complete at least one
-// backup prior to promotion. In addition, a Read Replica cannot be promoted
-// to a standalone instance when it is in the backing-up status. If you have
-// enabled backups on your Read Replica, configure the automated backup window
-// so that daily backups do not interfere with Read Replica promotion.
+//    * Backup duration is a function of the amount of changes to the database
+//    since the previous backup. If you plan to promote a Read Replica to a
+//    standalone instance, we recommend that you enable backups and complete
+//    at least one backup prior to promotion. In addition, a Read Replica cannot
+//    be promoted to a standalone instance when it is in the backing-up status.
+//    If you have enabled backups on your Read Replica, configure the automated
+//    backup window so that daily backups do not interfere with Read Replica
+//    promotion.
 //
-// This command doesn't apply to Aurora MySQL and Aurora PostgreSQL.
+//    * This command doesn't apply to Aurora MySQL and Aurora PostgreSQL.
 //
 //    // Example sending a request using PromoteReadReplicaRequest.
 //    req := client.PromoteReadReplicaRequest(params)

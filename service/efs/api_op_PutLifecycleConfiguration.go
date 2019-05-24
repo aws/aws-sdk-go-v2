@@ -135,7 +135,7 @@ const opPutLifecycleConfiguration = "PutLifecycleConfiguration"
 //
 //    * A LifecyclePolicies array of LifecyclePolicy objects that define when
 //    files are moved to the IA storage class. The array can contain only one
-//    "TransitionToIA": "AFTER_30_DAYS"LifecyclePolicy item.
+//    "TransitionToIA": "AFTER_30_DAYS" LifecyclePolicy item.
 //
 // This operation requires permissions for the elasticfilesystem:PutLifecycleConfiguration
 // operation.

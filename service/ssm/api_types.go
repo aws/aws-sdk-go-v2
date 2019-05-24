@@ -1031,33 +1031,17 @@ type CommandFilter struct {
 	//    before July 7, 2018.
 	//
 	//    * Status: Specify a valid command status to see a list of all command
-	//    executions with that status. Status values you can specify include:
-	//
-	// Pending
-	//
-	// InProgress
-	//
-	// Success
-	//
-	// Cancelled
-	//
-	// Failed
-	//
-	// TimedOut
-	//
-	// Cancelling
+	//    executions with that status. Status values you can specify include: Pending
+	//    InProgress Success Cancelled Failed TimedOut Cancelling
 	//
 	//    * DocumentName: Specify name of the SSM document for which you want to
 	//    see command execution results. For example, specify AWS-RunPatchBaseline
 	//    to see command executions that used this SSM document to perform security
 	//    patching operations on instances.
 	//
-	//    * ExecutionStage: Specify one of the following values:
-	//
-	// Executing: Returns a list of command executions that are currently still
-	//    running.
-	//
-	// Complete: Returns a list of command executions that have already completed.
+	//    * ExecutionStage: Specify one of the following values: Executing: Returns
+	//    a list of command executions that are currently still running. Complete:
+	//    Returns a list of command executions that have already completed.
 	//
 	// Value is a required field
 	Value *string `locationName:"value" min:"1" type:"string" required:"true"`
@@ -4051,7 +4035,7 @@ func (s PatchComplianceData) String() string {
 // and MSRC_SEVERITY. See the following lists for valid values for each of these
 // keys.
 //
-// Supported key:PRODUCT
+// Supported key: PRODUCT
 //
 // Supported values:
 //
@@ -4079,11 +4063,10 @@ func (s PatchComplianceData) String() string {
 //
 //    * WindowsServer2019
 //
-//    * *
+//    * * Use a wildcard character (*) to target all supported operating system
+//    versions.
 //
-// Use a wildcard character (*) to target all supported operating system versions.
-//
-// Supported key:CLASSIFICATION
+// Supported key: CLASSIFICATION
 //
 // Supported values:
 //
@@ -4107,7 +4090,7 @@ func (s PatchComplianceData) String() string {
 //
 //    * Upgrades
 //
-// Supported key:MSRC_SEVERITY
+// Supported key: MSRC_SEVERITY
 //
 // Supported values:
 //
@@ -4126,7 +4109,7 @@ func (s PatchComplianceData) String() string {
 // The supported keys for Ubuntu operating systems are PRODUCT, PRIORITY, and
 // SECTION. See the following lists for valid values for each of these keys.
 //
-// Supported key:PRODUCT
+// Supported key: PRODUCT
 //
 // Supported values:
 //
@@ -4134,11 +4117,10 @@ func (s PatchComplianceData) String() string {
 //
 //    * Ubuntu16.04
 //
-//    * *
+//    * * Use a wildcard character (*) to target all supported operating system
+//    versions.
 //
-// Use a wildcard character (*) to target all supported operating system versions.
-//
-// Supported key:PRIORITY
+// Supported key: PRIORITY
 //
 // Supported values:
 //
@@ -4152,7 +4134,7 @@ func (s PatchComplianceData) String() string {
 //
 //    * Extra
 //
-// Supported key:SECTION
+// Supported key: SECTION
 //
 // Only the length of the key value is validated. Minimum length is 1. Maximum
 // length is 64.
@@ -4163,7 +4145,7 @@ func (s PatchComplianceData) String() string {
 // and SEVERITY. See the following lists for valid values for each of these
 // keys.
 //
-// Supported key:PRODUCT
+// Supported key: PRODUCT
 //
 // Supported values:
 //
@@ -4191,11 +4173,10 @@ func (s PatchComplianceData) String() string {
 //
 //    * AmazonLinux2017.09
 //
-//    * *
+//    * * Use a wildcard character (*) to target all supported operating system
+//    versions.
 //
-// Use a wildcard character (*) to target all supported operating system versions.
-//
-// Supported key:CLASSIFICATION
+// Supported key: CLASSIFICATION
 //
 // Supported values:
 //
@@ -4209,7 +4190,7 @@ func (s PatchComplianceData) String() string {
 //
 //    * Newpackage
 //
-// Supported key:SEVERITY
+// Supported key: SEVERITY
 //
 // Supported values:
 //
@@ -4227,7 +4208,7 @@ func (s PatchComplianceData) String() string {
 // and SEVERITY. See the following lists for valid values for each of these
 // keys.
 //
-// Supported key:PRODUCT
+// Supported key: PRODUCT
 //
 // Supported values:
 //
@@ -4235,11 +4216,10 @@ func (s PatchComplianceData) String() string {
 //
 //    * AmazonLinux2.0
 //
-//    * *
+//    * * Use a wildcard character (*) to target all supported operating system
+//    versions.
 //
-// Use a wildcard character (*) to target all supported operating system versions.
-//
-// Supported key:CLASSIFICATION
+// Supported key: CLASSIFICATION
 //
 // Supported values:
 //
@@ -4253,7 +4233,7 @@ func (s PatchComplianceData) String() string {
 //
 //    * Newpackage
 //
-// Supported key:SEVERITY
+// Supported key: SEVERITY
 //
 // Supported values:
 //
@@ -4271,7 +4251,7 @@ func (s PatchComplianceData) String() string {
 // CLASSIFICATION, and SEVERITY. See the following lists for valid values for
 // each of these keys.
 //
-// Supported key:PRODUCT
+// Supported key: PRODUCT
 //
 // Supported values:
 //
@@ -4299,11 +4279,10 @@ func (s PatchComplianceData) String() string {
 //
 //    * RedhatEnterpriseLinux7.6
 //
-//    * *
+//    * * Use a wildcard character (*) to target all supported operating system
+//    versions.
 //
-// Use a wildcard character (*) to target all supported operating system versions.
-//
-// Supported key:CLASSIFICATION
+// Supported key: CLASSIFICATION
 //
 // Supported values:
 //
@@ -4317,7 +4296,7 @@ func (s PatchComplianceData) String() string {
 //
 //    * Newpackage
 //
-// Supported key:SEVERITY
+// Supported key: SEVERITY
 //
 // Supported values:
 //
@@ -4335,7 +4314,7 @@ func (s PatchComplianceData) String() string {
 // and SEVERITY. See the following lists for valid values for each of these
 // keys.
 //
-// Supported key:PRODUCT
+// Supported key: PRODUCT
 //
 // Supported values:
 //
@@ -4359,11 +4338,10 @@ func (s PatchComplianceData) String() string {
 //
 //    * Suse12.9
 //
-//    * *
+//    * * Use a wildcard character (*) to target all supported operating system
+//    versions.
 //
-// Use a wildcard character (*) to target all supported operating system versions.
-//
-// Supported key:CLASSIFICATION
+// Supported key: CLASSIFICATION
 //
 // Supported values:
 //
@@ -4379,7 +4357,7 @@ func (s PatchComplianceData) String() string {
 //
 //    * Yast
 //
-// Supported key:SEVERITY
+// Supported key: SEVERITY
 //
 // Supported values:
 //
@@ -4397,7 +4375,7 @@ func (s PatchComplianceData) String() string {
 // and SEVERITY. See the following lists for valid values for each of these
 // keys.
 //
-// Supported key:PRODUCT
+// Supported key: PRODUCT
 //
 // Supported values:
 //
@@ -4425,11 +4403,10 @@ func (s PatchComplianceData) String() string {
 //
 //    * CentOS7.6
 //
-//    * *
+//    * * Use a wildcard character (*) to target all supported operating system
+//    versions.
 //
-// Use a wildcard character (*) to target all supported operating system versions.
-//
-// Supported key:CLASSIFICATION
+// Supported key: CLASSIFICATION
 //
 // Supported values:
 //
@@ -4443,7 +4420,7 @@ func (s PatchComplianceData) String() string {
 //
 //    * Newpackage
 //
-// Supported key:SEVERITY
+// Supported key: SEVERITY
 //
 // Supported values:
 //
@@ -5176,19 +5153,8 @@ type SessionFilter struct {
 	//    by that user.
 	//
 	//    * Status: Specify a valid session status to see a list of all sessions
-	//    with that status. Status values you can specify include:
-	//
-	// Connected
-	//
-	// Connecting
-	//
-	// Disconnected
-	//
-	// Terminated
-	//
-	// Terminating
-	//
-	// Failed
+	//    with that status. Status values you can specify include: Connected Connecting
+	//    Disconnected Terminated Terminating Failed
 	//
 	// Value is a required field
 	Value *string `locationName:"value" min:"1" type:"string" required:"true"`

@@ -14,7 +14,7 @@ type CopyDBClusterParameterGroupInput struct {
 	_ struct{} `type:"structure"`
 
 	// The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter
-	// group. For information about creating an ARN, see  Constructing an Amazon
+	// group. For information about creating an ARN, see Constructing an Amazon
 	// Resource Name (ARN) (http://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing).
 	//
 	// Constraints:

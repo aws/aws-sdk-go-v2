@@ -63,11 +63,11 @@ type IndexFacesInput struct {
 
 	// A filter that specifies how much filtering is done to identify faces that
 	// are detected with low quality. Filtered faces aren't indexed. If you specify
-	// AUTO, filtering prioritizes the identification of faces that don’t meet the
-	// required quality bar chosen by Amazon Rekognition. The quality bar is based
-	// on a variety of common use cases. Low-quality detections can occur for a
-	// number of reasons. Some examples are an object that's misidentified as a
-	// face, a face that's too blurry, or a face with a pose that's too extreme
+	// AUTO, filtering prioritizes the identification of faces that don’t meet
+	// the required quality bar chosen by Amazon Rekognition. The quality bar is
+	// based on a variety of common use cases. Low-quality detections can occur
+	// for a number of reasons. Some examples are an object that's misidentified
+	// as a face, a face that's too blurry, or a face with a pose that's too extreme
 	// to use. If you specify NONE, no filtering is performed. The default value
 	// is AUTO.
 	//
@@ -207,8 +207,8 @@ const opIndexFaces = "IndexFaces"
 // standing in the background.
 //
 // The QualityFilter input parameter allows you to filter out detected faces
-// that don’t meet the required quality bar chosen by Amazon Rekognition. The
-// quality bar is based on a variety of common use cases. By default, IndexFaces
+// that don’t meet the required quality bar chosen by Amazon Rekognition.
+// The quality bar is based on a variety of common use cases. By default, IndexFaces
 // filters detected faces. You can also explicitly filter detected faces by
 // specifying AUTO for the value of QualityFilter. If you do not want to filter
 // detected faces, specify NONE.
@@ -258,6 +258,7 @@ const opIndexFaces = "IndexFaces"
 // be formatted as a PNG or JPEG file.
 //
 // This operation requires permissions to perform the rekognition:IndexFaces
+// action.
 //
 //    // Example sending a request using IndexFacesRequest.
 //    req := client.IndexFacesRequest(params)

@@ -161,17 +161,25 @@ func (s ProgressUpdateStreamSummary) String() string {
 //
 // Note the corresponding format required per type listed below:
 //
-// IPV4x.x.x.x
+// IPV4
+//
+// x.x.x.x
 //
 // where x is an integer in the range [0,255]
 //
-// IPV6y : y : y : y : y : y : y : y
+// IPV6
+//
+// y : y : y : y : y : y : y : y
 //
 // where y is a hexadecimal between 0 and FFFF. [0, FFFF]
 //
-// MAC_ADDRESS^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$
+// MAC_ADDRESS
 //
-// FQDN^[^<>{}\\\\/?,=\\p{Cntrl}]{1,256}$
+// ^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$
+//
+// FQDN
+//
+// ^[^<>{}\\\\/?,=\\p{Cntrl}]{1,256}$
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ResourceAttribute
 type ResourceAttribute struct {
 	_ struct{} `type:"structure"`

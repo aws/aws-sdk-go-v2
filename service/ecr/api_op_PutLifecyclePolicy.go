@@ -19,7 +19,7 @@ type PutLifecyclePolicyInput struct {
 	LifecyclePolicyText *string `locationName:"lifecyclePolicyText" min:"100" type:"string" required:"true"`
 
 	// The AWS account ID associated with the registry that contains the repository.
-	// If you do  not specify a registry, the default registry is assumed.
+	// If you do not specify a registry, the default registry is assumed.
 	RegistryId *string `locationName:"registryId" type:"string"`
 
 	// The name of the repository to receive the policy.

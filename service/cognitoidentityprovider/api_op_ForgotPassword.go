@@ -98,8 +98,7 @@ const opForgotPassword = "ForgotPassword"
 // for the user, the confirmation code is sent to the phone number. Otherwise,
 // if a verified email exists, the confirmation code is sent to the email. If
 // neither a verified phone number nor a verified email exists, InvalidParameterException
-// is thrown. To use the confirmation code for resetting the password, call
-// .
+// is thrown. To use the confirmation code for resetting the password, call .
 //
 //    // Example sending a request using ForgotPasswordRequest.
 //    req := client.ForgotPasswordRequest(params)

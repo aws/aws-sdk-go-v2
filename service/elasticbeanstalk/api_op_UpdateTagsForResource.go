@@ -86,11 +86,15 @@ const opUpdateTagsForResource = "UpdateTagsForResource"
 // specify one of the following two virtual actions (or both) instead of the
 // API operation name:
 //
-// elasticbeanstalk:AddTagsControls permission to call UpdateTagsForResource
-// and pass a list of tags to add in the TagsToAdd parameter.
+// elasticbeanstalk:AddTags
 //
-// elasticbeanstalk:RemoveTagsControls permission to call UpdateTagsForResource
-// and pass a list of tag keys to remove in the TagsToRemove parameter.
+// Controls permission to call UpdateTagsForResource and pass a list of tags
+// to add in the TagsToAdd parameter.
+//
+// elasticbeanstalk:RemoveTags
+//
+// Controls permission to call UpdateTagsForResource and pass a list of tag
+// keys to remove in the TagsToRemove parameter.
 //
 // For details about creating a custom user policy, see Creating a Custom User
 // Policy (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#AWSHowTo.iam.policies).

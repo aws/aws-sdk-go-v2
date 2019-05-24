@@ -161,42 +161,62 @@ type CreateDeploymentJobOutput struct {
 
 	// The failure code of the simulation job if it failed:
 	//
-	// BadPermissionErrorAWS Greengrass requires a service-level role permission
-	// to access other services. The role must include the AWSGreengrassResourceAccessRolePolicy
-	// (https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy$jsonEditor)
-	// managed policy.
+	// BadPermissionError
 	//
-	// ExtractingBundleFailureThe robot application could not be extracted from
-	// the bundle.
+	// AWS Greengrass requires a service-level role permission to access other services.
+	// The role must include the AWSGreengrassResourceAccessRolePolicy managed policy
+	// (https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy$jsonEditor).
 	//
-	// FailureThresholdBreachedThe percentage of robots that could not be updated
-	// exceeded the percentage set for the deployment.
+	// ExtractingBundleFailure
 	//
-	// GreengrassDeploymentFailedThe robot application could not be deployed to
-	// the robot.
+	// The robot application could not be extracted from the bundle.
 	//
-	// GreengrassGroupVersionDoesNotExistThe AWS Greengrass group or version associated
-	// with a robot is missing.
+	// FailureThresholdBreached
 	//
-	// InternalServerErrorAn internal error has occurred. Retry your request, but
-	// if the problem persists, contact us with details.
+	// The percentage of robots that could not be updated exceeded the percentage
+	// set for the deployment.
 	//
-	// MissingRobotApplicationArchitectureThe robot application does not have a
-	// source that matches the architecture of the robot.
+	// GreengrassDeploymentFailed
 	//
-	// MissingRobotDeploymentResourceOne or more of the resources specified for
-	// the robot application are missing. For example, does the robot application
-	// have the correct launch package and launch file?
+	// The robot application could not be deployed to the robot.
 	//
-	// PostLaunchFileFailureThe post-launch script failed.
+	// GreengrassGroupVersionDoesNotExist
 	//
-	// PreLaunchFileFailureThe pre-launch script failed.
+	// The AWS Greengrass group or version associated with a robot is missing.
 	//
-	// ResourceNotFoundOne or more deployment resources are missing. For example,
-	// do robot application source bundles still exist?
+	// InternalServerError
 	//
-	// RobotDeploymentNoResponseThere is no response from the robot. It might not
-	// be powered on or connected to the internet.
+	// An internal error has occurred. Retry your request, but if the problem persists,
+	// contact us with details.
+	//
+	// MissingRobotApplicationArchitecture
+	//
+	// The robot application does not have a source that matches the architecture
+	// of the robot.
+	//
+	// MissingRobotDeploymentResource
+	//
+	// One or more of the resources specified for the robot application are missing.
+	// For example, does the robot application have the correct launch package and
+	// launch file?
+	//
+	// PostLaunchFileFailure
+	//
+	// The post-launch script failed.
+	//
+	// PreLaunchFileFailure
+	//
+	// The pre-launch script failed.
+	//
+	// ResourceNotFound
+	//
+	// One or more deployment resources are missing. For example, do robot application
+	// source bundles still exist?
+	//
+	// RobotDeploymentNoResponse
+	//
+	// There is no response from the robot. It might not be powered on or connected
+	// to the internet.
 	FailureCode DeploymentJobErrorCode `locationName:"failureCode" type:"string" enum:"true"`
 
 	// The failure reason of the deployment job if it failed.

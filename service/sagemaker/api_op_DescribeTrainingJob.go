@@ -120,28 +120,38 @@ type DescribeTrainingJobOutput struct {
 	// Amazon SageMaker provides primary statuses and secondary statuses that apply
 	// to each of them:
 	//
-	// InProgressStarting - Starting the training job.
+	// InProgress
 	//
-	// Downloading - An optional stage for algorithms that support File training
-	// input mode. It indicates that data is being downloaded to the ML storage
-	// volumes.
+	//    * Starting - Starting the training job.
 	//
-	// Training - Training is in progress.
+	//    * Downloading - An optional stage for algorithms that support File training
+	//    input mode. It indicates that data is being downloaded to the ML storage
+	//    volumes.
 	//
-	// Uploading - Training is complete and the model artifacts are being uploaded
-	// to the S3 location.
+	//    * Training - Training is in progress.
 	//
-	// CompletedCompleted - The training job has completed.
+	//    * Uploading - Training is complete and the model artifacts are being uploaded
+	//    to the S3 location.
 	//
-	// FailedFailed - The training job has failed. The reason for the failure is
-	// returned in the FailureReason field of DescribeTrainingJobResponse.
+	// Completed
 	//
-	// StoppedMaxRuntimeExceeded - The job stopped because it exceeded the maximum
-	// allowed runtime.
+	//    * Completed - The training job has completed.
 	//
-	// Stopped - The training job has stopped.
+	// Failed
 	//
-	// StoppingStopping - Stopping the training job.
+	//    * Failed - The training job has failed. The reason for the failure is
+	//    returned in the FailureReason field of DescribeTrainingJobResponse.
+	//
+	// Stopped
+	//
+	//    * MaxRuntimeExceeded - The job stopped because it exceeded the maximum
+	//    allowed runtime.
+	//
+	//    * Stopped - The training job has stopped.
+	//
+	// Stopping
+	//
+	//    * Stopping - Stopping the training job.
 	//
 	// Valid values for SecondaryStatus are subject to change.
 	//

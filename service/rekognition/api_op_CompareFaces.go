@@ -93,10 +93,10 @@ type CompareFacesOutput struct {
 	// after the orientation information in the Exif metadata is used to correct
 	// the image orientation. Images in .png format don't contain Exif metadata.
 	//
-	// Amazon Rekognition doesn’t perform image correction for images in .png format
-	// and .jpeg images without orientation information in the image Exif metadata.
-	// The bounding box coordinates aren't translated and represent the object locations
-	// before the image is rotated.
+	// Amazon Rekognition doesn’t perform image correction for images in .png
+	// format and .jpeg images without orientation information in the image Exif
+	// metadata. The bounding box coordinates aren't translated and represent the
+	// object locations before the image is rotated.
 	SourceImageOrientationCorrection OrientationCorrection `type:"string" enum:"true"`
 
 	// The value of TargetImageOrientationCorrection is always null.
@@ -108,10 +108,10 @@ type CompareFacesOutput struct {
 	// after the orientation information in the Exif metadata is used to correct
 	// the image orientation. Images in .png format don't contain Exif metadata.
 	//
-	// Amazon Rekognition doesn’t perform image correction for images in .png format
-	// and .jpeg images without orientation information in the image Exif metadata.
-	// The bounding box coordinates aren't translated and represent the object locations
-	// before the image is rotated.
+	// Amazon Rekognition doesn’t perform image correction for images in .png
+	// format and .jpeg images without orientation information in the image Exif
+	// metadata. The bounding box coordinates aren't translated and represent the
+	// object locations before the image is rotated.
 	TargetImageOrientationCorrection OrientationCorrection `type:"string" enum:"true"`
 
 	// An array of faces in the target image that did not match the source image

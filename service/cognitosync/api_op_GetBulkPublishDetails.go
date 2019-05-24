@@ -70,8 +70,8 @@ type GetBulkPublishDetailsOutput struct {
 	// The date/time at which the last bulk publish was initiated.
 	BulkPublishStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// Status of the last bulk publish operation, valid values are: NOT_STARTED
-	// - No bulk publish has been requested for this identity pool
+	// Status of the last bulk publish operation, valid values are:
+	// NOT_STARTED - No bulk publish has been requested for this identity pool
 	//
 	// IN_PROGRESS - Data is being published to the configured stream
 	//

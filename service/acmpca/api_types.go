@@ -97,7 +97,7 @@ type CertificateAuthority struct {
 	_ struct{} `type:"structure"`
 
 	// Amazon Resource Name (ARN) for your private certificate authority (CA). The
-	// format is 12345678-1234-1234-1234-123456789012.
+	// format is 12345678-1234-1234-1234-123456789012 .
 	Arn *string `min:"5" type:"string"`
 
 	// Your private CA configuration.
@@ -227,22 +227,15 @@ func (s *CertificateAuthorityConfiguration) Validate() error {
 //    * Next Update: The day and time by which the next CRL will be issued.
 //
 //    * Revoked Certificates: List of revoked certificates. Each list item contains
-//    the following information.
+//    the following information. Serial Number: The serial number, in hexadecimal
+//    format, of the revoked certificate. Revocation Date: Date and time the
+//    certificate was revoked. CRL Entry Extensions: Optional extensions for
+//    the CRL entry. X509v3 CRL Reason Code: Reason the certificate was revoked.
 //
-// Serial Number: The serial number, in hexadecimal format, of the revoked certificate.
-//
-// Revocation Date: Date and time the certificate was revoked.
-//
-// CRL Entry Extensions: Optional extensions for the CRL entry.
-//
-// X509v3 CRL Reason Code: Reason the certificate was revoked.
-//
-//    * CRL Extensions: Optional extensions for the CRL.
-//
-// X509v3 Authority Key Identifier: Identifies the public key associated with
-//    the private key used to sign the certificate.
-//
-// X509v3 CRL Number:: Decimal sequence number for the CRL.
+//    * CRL Extensions: Optional extensions for the CRL. X509v3 Authority Key
+//    Identifier: Identifies the public key associated with the private key
+//    used to sign the certificate. X509v3 CRL Number:: Decimal sequence number
+//    for the CRL.
 //
 //    * Signature Algorithm: Algorithm used by your private CA to sign the CRL.
 //

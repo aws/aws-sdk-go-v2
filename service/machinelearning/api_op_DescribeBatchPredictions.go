@@ -20,15 +20,20 @@ type DescribeBatchPredictionsInput struct {
 	//
 	//    * CreatedAt - Sets the search criteria to the BatchPrediction creation
 	//    date.
+	//
 	//    * Status - Sets the search criteria to the BatchPrediction status.
-	//    * Name - Sets the search criteria to the contents of the BatchPredictionName.
+	//
+	//    * Name - Sets the search criteria to the contents of the BatchPrediction
+	//    Name.
 	//
 	//    * IAMUser - Sets the search criteria to the user account that invoked
 	//    the BatchPrediction creation.
+	//
 	//    * MLModelId - Sets the search criteria to the MLModel used in the BatchPrediction.
 	//
 	//    * DataSourceId - Sets the search criteria to the DataSource used in the
 	//    BatchPrediction.
+	//
 	//    * DataURI - Sets the search criteria to the data file(s) used in the BatchPrediction.
 	//    The URL can identify either a file or an Amazon Simple Storage Solution
 	//    (Amazon S3) bucket or directory.
@@ -65,7 +70,7 @@ type DescribeBatchPredictionsInput struct {
 
 	// A string that is found at the beginning of a variable, such as Name or Id.
 	//
-	// For example, a Batch Prediction operation could have the Name2014-09-09-HolidayGiftMailer.
+	// For example, a Batch Prediction operation could have the Name 2014-09-09-HolidayGiftMailer.
 	// To search for this BatchPrediction, select Name for the FilterVariable and
 	// any of the following strings for the Prefix:
 	//
@@ -80,7 +85,9 @@ type DescribeBatchPredictionsInput struct {
 	// of MLModels.
 	//
 	//    * asc - Arranges the list in ascending order (A-Z, 0-9).
+	//
 	//    * dsc - Arranges the list in descending order (Z-A, 9-0).
+	//
 	// Results are sorted by FilterVariable.
 	SortOrder SortOrder `type:"string" enum:"true"`
 }

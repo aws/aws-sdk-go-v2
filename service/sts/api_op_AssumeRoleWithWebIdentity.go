@@ -278,12 +278,10 @@ const opAssumeRoleWithWebIdentity = "AssumeRoleWithWebIdentity"
 //    * Using Web Identity Federation APIs for Mobile Apps (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc_manual.html)
 //    and Federation Through a Web-based Identity Provider (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity).
 //
-//
-//    *  Web Identity Federation Playground (https://web-identity-federation-playground.s3.amazonaws.com/index.html).
+//    * Web Identity Federation Playground (https://web-identity-federation-playground.s3.amazonaws.com/index.html).
 //    This interactive website lets you walk through the process of authenticating
 //    via Login with Amazon, Facebook, or Google, getting temporary security
 //    credentials, and then using those credentials to make a request to AWS.
-//
 //
 //    * AWS SDK for iOS (http://aws.amazon.com/sdkforios/) and AWS SDK for Android
 //    (http://aws.amazon.com/sdkforandroid/). These toolkits contain sample

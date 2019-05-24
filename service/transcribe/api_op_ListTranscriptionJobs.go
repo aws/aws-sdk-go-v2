@@ -27,8 +27,8 @@ type ListTranscriptionJobsInput struct {
 
 	// When specified, returns only transcription jobs with the specified status.
 	// Jobs are ordered by creation date, with the newest jobs returned first. If
-	// you don’t specify a status, Amazon Transcribe returns all transcription jobs
-	// ordered by creation date.
+	// you don’t specify a status, Amazon Transcribe returns all transcription
+	// jobs ordered by creation date.
 	Status TranscriptionJobStatus `type:"string" enum:"true"`
 }
 

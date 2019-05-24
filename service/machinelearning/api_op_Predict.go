@@ -62,15 +62,14 @@ type PredictOutput struct {
 	// The output from a Predict operation:
 	//
 	//    * Details - Contains the following attributes: DetailsAttributes.PREDICTIVE_MODEL_TYPE
-	//    - REGRESSION | BINARY | MULTICLASSDetailsAttributes.ALGORITHM - SGD
+	//    - REGRESSION | BINARY | MULTICLASS DetailsAttributes.ALGORITHM - SGD
 	//
-	//    * PredictedLabel - Present for either a BINARY or MULTICLASSMLModel request.
-	//
+	//    * PredictedLabel - Present for either a BINARY or MULTICLASS MLModel request.
 	//
 	//    * PredictedScores - Contains the raw classification score corresponding
 	//    to each label.
 	//
-	//    * PredictedValue - Present for a REGRESSIONMLModel request.
+	//    * PredictedValue - Present for a REGRESSION MLModel request.
 	Prediction *Prediction `type:"structure"`
 }
 
@@ -85,8 +84,8 @@ const opPredict = "Predict"
 // Amazon Machine Learning.
 //
 // Generates a prediction for the observation using the specified ML Model.
-//
-// NoteNot all response parameters will be populated. Whether a response parameter
+//  Note
+// Not all response parameters will be populated. Whether a response parameter
 // is populated depends on the type of model requested.
 //
 //    // Example sending a request using PredictRequest.

@@ -39,7 +39,6 @@ type AdminRespondToAuthChallengeInput struct {
 	//    * NEW_PASSWORD_REQUIRED: NEW_PASSWORD, any other required attributes,
 	//    USERNAME, SECRET_HASH (if app client is configured with client secret).
 	//
-	//
 	// The value of the USERNAME attribute must be the user's actual username, not
 	// an alias (such as email address or phone number). To make this easier, the
 	// AdminInitiateAuth response includes the actual username value in the USERNAMEUSER_ID_FOR_SRP

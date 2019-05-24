@@ -230,28 +230,22 @@ const opCreateMountTarget = "CreateMountTarget"
 //
 //    * Creates a new mount target in the specified subnet.
 //
-//    * Also creates a new network interface in the subnet as follows:
-//
-// If the request provides an IpAddress, Amazon EFS assigns that IP address
-//    to the network interface. Otherwise, Amazon EFS assigns a free address
-//    in the subnet (in the same way that the Amazon EC2 CreateNetworkInterface
-//    call does when a request does not specify a primary private IP address).
-//
-// If the request provides SecurityGroups, this network interface is associated
+//    * Also creates a new network interface in the subnet as follows: If the
+//    request provides an IpAddress, Amazon EFS assigns that IP address to the
+//    network interface. Otherwise, Amazon EFS assigns a free address in the
+//    subnet (in the same way that the Amazon EC2 CreateNetworkInterface call
+//    does when a request does not specify a primary private IP address). If
+//    the request provides SecurityGroups, this network interface is associated
 //    with those security groups. Otherwise, it belongs to the default security
-//    group for the subnet's VPC.
-//
-// Assigns the description Mount target fsmt-id for file system fs-id where
-//    fsmt-id is the mount target ID, and fs-id is the FileSystemId.
-//
-// Sets the requesterManaged property of the network interface to true, and
-//    the requesterId value to EFS.
-//
-// Each Amazon EFS mount target has one corresponding requester-managed EC2
-//    network interface. After the network interface is created, Amazon EFS
-//    sets the NetworkInterfaceId field in the mount target's description to
-//    the network interface ID, and the IpAddress field to its address. If network
-//    interface creation fails, the entire CreateMountTarget operation fails.
+//    group for the subnet's VPC. Assigns the description Mount target fsmt-id
+//    for file system fs-id where fsmt-id is the mount target ID, and fs-id
+//    is the FileSystemId. Sets the requesterManaged property of the network
+//    interface to true, and the requesterId value to EFS. Each Amazon EFS mount
+//    target has one corresponding requester-managed EC2 network interface.
+//    After the network interface is created, Amazon EFS sets the NetworkInterfaceId
+//    field in the mount target's description to the network interface ID, and
+//    the IpAddress field to its address. If network interface creation fails,
+//    the entire CreateMountTarget operation fails.
 //
 // The CreateMountTarget call returns only after creating the network interface,
 // but while the mount target state is still creating, you can check the mount

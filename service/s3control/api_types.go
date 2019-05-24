@@ -23,21 +23,21 @@ var _ = awsutil.Prettify
 // The policy grants permissions, not including any "bad actions," to one of
 // the following:
 //
-// A fixed AWS principal, user, role, or service principal
+//    * A fixed AWS principal, user, role, or service principal
 //
-// A fixed aws:SourceArn
+//    * A fixed aws:SourceArn
 //
-// A fixed aws:SourceVpc
+//    * A fixed aws:SourceVpc
 //
-// A fixed aws:SourceVpce
+//    * A fixed aws:SourceVpce
 //
-// A fixed aws:SourceOwner
+//    * A fixed aws:SourceOwner
 //
-// A fixed aws:SourceAccount
+//    * A fixed aws:SourceAccount
 //
-// A fixed value of s3:x-amz-server-side-encryption-aws-kms-key-id
+//    * A fixed value of s3:x-amz-server-side-encryption-aws-kms-key-id
 //
-// A fixed value of aws:userid outside the pattern "AROLEID:*"
+//    * A fixed value of aws:userid outside the pattern "AROLEID:*"
 //
 // "Bad actions" are those that could expose the data inside a bucket to reads
 // or writes by the public. These actions are s3:Get*, s3:List*, s3:AbortMultipartUpload,

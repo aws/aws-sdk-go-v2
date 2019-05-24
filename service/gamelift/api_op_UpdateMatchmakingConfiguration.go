@@ -62,7 +62,7 @@ type UpdateMatchmakingConfigurationInput struct {
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// SNS topic ARN that is set up to receive matchmaking notifications. See  Setting
+	// SNS topic ARN that is set up to receive matchmaking notifications. See Setting
 	// up Notifications for Matchmaking (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html)
 	// for more information.
 	NotificationTarget *string `type:"string"`

@@ -80,8 +80,8 @@ const opRemoveAccountFromOrganization = "RemoveAccountFromOrganization"
 // payment method. AWS uses the payment method to charge for any billable (not
 // free tier) AWS activity that occurs while the account is not attached to
 // an organization. To remove an account that does not yet have this information,
-// you must sign in as the member account and follow the steps at  To leave
-// an organization when all required account information has not yet been provided
+// you must sign in as the member account and follow the steps at To leave an
+// organization when all required account information has not yet been provided
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
 // in the AWS Organizations User Guide.
 //

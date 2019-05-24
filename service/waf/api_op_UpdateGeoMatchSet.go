@@ -30,10 +30,9 @@ type UpdateGeoMatchSetInput struct {
 	//
 	//    * GeoMatchSetUpdate: Contains Action and GeoMatchConstraint
 	//
-	//    * GeoMatchConstraint: Contains Type and Value
-	//
-	// You can have only one Type and Value per GeoMatchConstraint. To add multiple
-	//    countries, include multiple GeoMatchSetUpdate objects in your request.
+	//    * GeoMatchConstraint: Contains Type and Value You can have only one Type
+	//    and Value per GeoMatchConstraint. To add multiple countries, include multiple
+	//    GeoMatchSetUpdate objects in your request.
 	//
 	// Updates is a required field
 	Updates []GeoMatchSetUpdate `min:"1" type:"list" required:"true"`

@@ -64,7 +64,7 @@ type GetAttributeValuesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The list of values for an attribute. For example, Throughput Optimized HDD
-	// and Provisioned IOPS are two available values for the AmazonEC2volumeType.
+	// and Provisioned IOPS are two available values for the AmazonEC2 volumeType.
 	AttributeValues []AttributeValue `type:"list"`
 
 	// The pagination token that indicates the next set of results to retrieve.

@@ -2127,7 +2127,6 @@ func ExampleClient_DeleteNetworkInterfaceRequest_shared00() {
 // To delete a placement group
 //
 // This example deletes the specified placement group.
-//
 func ExampleClient_DeletePlacementGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -2850,7 +2849,6 @@ func ExampleClient_DescribeImagesRequest_shared00() {
 // To describe the instance type
 //
 // This example describes the instance type of the specified instance.
-//
 func ExampleClient_DescribeInstanceAttributeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -2885,7 +2883,6 @@ func ExampleClient_DescribeInstanceAttributeRequest_shared00() {
 // To describe the disableApiTermination attribute
 //
 // This example describes the ``disableApiTermination`` attribute of the specified instance.
-//
 func ExampleClient_DescribeInstanceAttributeRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -2920,7 +2917,6 @@ func ExampleClient_DescribeInstanceAttributeRequest_shared01() {
 // To describe the block device mapping for an instance
 //
 // This example describes the ``blockDeviceMapping`` attribute of the specified instance.
-//
 func ExampleClient_DescribeInstanceAttributeRequest_shared02() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {

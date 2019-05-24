@@ -162,12 +162,10 @@ const opUploadMultipartPart = "UploadMultipartPart"
 //    * Part size does not matchThe size of each part except the last must match
 //    the size specified in the corresponding InitiateMultipartUpload request.
 //    The size of the last part must be the same size as, or smaller than, the
-//    specified size.
-//
-// If you upload a part whose size is smaller than the part size you specified
-//    in your initiate multipart upload request and that part is not the last
-//    part, then the upload part request will succeed. However, the subsequent
-//    Complete Multipart Upload request will fail.
+//    specified size. If you upload a part whose size is smaller than the part
+//    size you specified in your initiate multipart upload request and that
+//    part is not the last part, then the upload part request will succeed.
+//    However, the subsequent Complete Multipart Upload request will fail.
 //
 //    * Range does not alignThe byte range value in the request does not align
 //    with the part size specified in the corresponding initiate request. For
@@ -175,7 +173,6 @@ const opUploadMultipartPart = "UploadMultipartPart"
 //    4194303 bytes (4 MB - 1) and 4194304 (4 MB) to 8388607 (8 MB - 1) are
 //    valid part ranges. However, if you set a range value of 2 MB to 6 MB,
 //    the range does not align with the part size and the upload will fail.
-//
 //
 // This operation is idempotent. If you upload the same part multiple times,
 // the data included in the most recent request overwrites the previously uploaded
@@ -189,7 +186,7 @@ const opUploadMultipartPart = "UploadMultipartPart"
 //
 // For conceptual information and underlying REST API, see Uploading Large Archives
 // in Parts (Multipart Upload) (http://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html)
-// and Upload Part  (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-upload-part.html)
+// and Upload Part (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-upload-part.html)
 // in the Amazon Glacier Developer Guide.
 //
 //    // Example sending a request using UploadMultipartPartRequest.

@@ -43,10 +43,10 @@ type CreateUserPoolInput struct {
 	// need permission to invoke a function. So you will need to make an extra call
 	// to add permission for these event sources to invoke your Lambda function.
 	//
-	// For more information on using the Lambda API to add permission, see  AddPermission
-	//  (https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html).
+	// For more information on using the Lambda API to add permission, see AddPermission
+	// (https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html).
 	//
-	// For adding permission using the AWS CLI, see  add-permission  (https://docs.aws.amazon.com/cli/latest/reference/lambda/add-permission.html).
+	// For adding permission using the AWS CLI, see add-permission (https://docs.aws.amazon.com/cli/latest/reference/lambda/add-permission.html).
 	LambdaConfig *LambdaConfigType `type:"structure"`
 
 	// Specifies MFA configuration details.

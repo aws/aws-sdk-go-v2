@@ -66,7 +66,7 @@ const opDescribeEventCategories = "DescribeEventCategories"
 //
 // Displays a list of categories for all event source types, or, if specified,
 // for a specified source type. You can see a list of the event categories and
-// source types in the  Events (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html)
+// source types in the Events (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html)
 // topic in the Amazon RDS User Guide.
 //
 //    // Example sending a request using DescribeEventCategoriesRequest.

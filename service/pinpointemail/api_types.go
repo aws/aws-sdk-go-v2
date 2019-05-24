@@ -627,14 +627,14 @@ type DkimAttributes struct {
 	//    for the domain and determined that they're correct. Amazon Pinpoint can
 	//    now send DKIM-signed email from the identity.
 	//
-	//    * FAILED – Amazon Pinpoint was unable to locate the DKIM records in the
-	//    DNS settings for the domain, and won't continue to search for them.
+	//    * FAILED – Amazon Pinpoint was unable to locate the DKIM records in
+	//    the DNS settings for the domain, and won't continue to search for them.
 	//
 	//    * TEMPORARY_FAILURE – A temporary issue occurred, which prevented Amazon
 	//    Pinpoint from determining the DKIM status for the domain.
 	//
-	//    * NOT_STARTED – Amazon Pinpoint hasn't yet started searching for the DKIM
-	//    records in the DKIM records for the domain.
+	//    * NOT_STARTED – Amazon Pinpoint hasn't yet started searching for the
+	//    DKIM records in the DKIM records for the domain.
 	Status DkimStatus `type:"string" enum:"true"`
 
 	// A set of unique strings that you use to create a set of CNAME records that
@@ -1220,11 +1220,11 @@ type MailFromAttributes struct {
 	//    * PENDING – Amazon Pinpoint hasn't started searching for the MX record
 	//    yet.
 	//
-	//    * SUCCESS – Amazon Pinpoint detected the required MX record for the MAIL
-	//    FROM domain.
+	//    * SUCCESS – Amazon Pinpoint detected the required MX record for the
+	//    MAIL FROM domain.
 	//
-	//    * FAILED – Amazon Pinpoint can't find the required MX record, or the record
-	//    no longer exists.
+	//    * FAILED – Amazon Pinpoint can't find the required MX record, or the
+	//    record no longer exists.
 	//
 	//    * TEMPORARY_FAILURE – A temporary issue occurred, which prevented Amazon
 	//    Pinpoint from determining the status of the MAIL FROM domain.
@@ -1563,7 +1563,6 @@ type RawMessage struct {
 	//
 	//    * Attachments must be in a file format that Amazon Pinpoint supports.
 	//
-	//
 	//    * The entire message must be Base64 encoded.
 	//
 	//    * If any of the MIME parts in your message contain content that is outside
@@ -1767,19 +1766,19 @@ func (s SnsDestination) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// An object that defines the tags that are associated with a resource. A tag is
-// a label that you optionally define and associate with a resource in Amazon
+// An object that defines the tags that are associated with a resource. A tag
+// is a label that you optionally define and associate with a resource in Amazon
 // Pinpoint. Tags can help you categorize and manage resources in different
 // ways, such as by purpose, owner, environment, or other criteria. A resource
 // can have as many as 50 tags.
 //
-// Each tag consists of a required tag key and an associated tag value, both
+// Each tag consists of a required tag key and an associated tag value, both
 // of which you define. A tag key is a general label that acts as a category
 // for a more specific tag value. A tag value acts as a descriptor within a
 // tag key. For example, if you have two versions of an Amazon Pinpoint project,
-// one for internal testing and another for external use, you might assign a Stack tag
-// key to both projects. The value of the Stack tag key might be Test for one
-// project and Production for the other project.
+// one for internal testing and another for external use, you might assign a
+// Stack tag key to both projects. The value of the Stack tag key might be Test
+// for one project and Production for the other project.
 //
 // A tag key can contain as many as 128 characters. A tag value can contain
 // as many as 256 characters. The characters can be Unicode letters, digits,
@@ -1791,7 +1790,7 @@ func (s SnsDestination) MarshalFields(e protocol.FieldEncoder) error {
 //    * For each associated resource, each tag key must be unique and it can
 //    have only one value.
 //
-//    * The aws: prefix is reserved for use by AWS; you can’t use it in any
+//    * The aws: prefix is reserved for use by AWS; you can’t use it in any
 //    tag keys or values that you define. In addition, you can't edit or remove
 //    tag keys or values that use this prefix. Tags that use this prefix don’t
 //    count against the limit of 50 tags per resource.
@@ -1812,8 +1811,9 @@ type Tag struct {
 
 	// The optional part of a key-value pair that defines a tag. The maximum length
 	// of a tag value is 256 characters. The minimum length is 0 characters. If
-	// you don’t want a resource to have a specific tag value, don’t specify a value
-	// for this parameter. Amazon Pinpoint will set the value to an empty string.
+	// you don’t want a resource to have a specific tag value, don’t specify
+	// a value for this parameter. Amazon Pinpoint will set the value to an empty
+	// string.
 	//
 	// Value is a required field
 	Value *string `type:"string" required:"true"`

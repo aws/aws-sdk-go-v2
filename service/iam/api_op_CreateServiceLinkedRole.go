@@ -29,10 +29,13 @@ type CreateServiceLinkedRoleInput struct {
 
 	// A string that you provide, which is combined with the service-provided prefix
 	// to form the complete role name. If you make multiple requests for the same
-	// service, then you must supply a different CustomSuffixfor each request. Otherwise the request fails with a duplicate role name
-	// error. For example, you could add -1or -debugto the suffix.
+	// service, then you must supply a different CustomSuffix for each request.
+	// Otherwise the request fails with a duplicate role name error. For example,
+	// you could add -1 or -debug to the suffix.
 	//
-	// Some services do not support the CustomSuffix
+	// Some services do not support the CustomSuffix parameter. If you provide an
+	// optional suffix and the operation fails, try the operation again without
+	// the suffix.
 	CustomSuffix *string `min:"1" type:"string"`
 
 	// The description of the role.

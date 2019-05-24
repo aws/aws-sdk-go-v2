@@ -89,8 +89,7 @@ const opStartSession = "StartSession"
 //
 // AWS CLI usage: start-session is an interactive command that requires the
 // Session Manager plugin to be installed on the client machine making the call.
-// For information, see  Install the Session Manager Plugin for the AWS CLI
-// (http://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html)
+// For information, see Install the Session Manager Plugin for the AWS CLI (http://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html)
 // in the AWS Systems Manager User Guide.
 //
 //    // Example sending a request using StartSessionRequest.

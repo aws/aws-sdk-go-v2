@@ -164,7 +164,7 @@ const opGetDashboardEmbedUrl = "GetDashboardEmbedUrl"
 //
 // Generates a server-side embeddable URL and authorization code. Before this
 // can work properly, first you need to configure the dashboards and user permissions.
-// For more information, see  Embedding Amazon QuickSight Dashboards (https://docs.aws.amazon.com/en_us/quicksight/latest/user/embedding.html).
+// For more information, see Embedding Amazon QuickSight Dashboards (https://docs.aws.amazon.com/en_us/quicksight/latest/user/embedding.html).
 //
 // Currently, you can use GetDashboardEmbedURL only from the server, not from
 // the user’s browser.

@@ -32,11 +32,17 @@ type GetContactReachabilityStatusOutput struct {
 
 	// Whether the registrant contact has responded. Values include the following:
 	//
-	// PENDINGWe sent the confirmation email and haven't received a response yet.
+	// PENDING
 	//
-	// DONEWe sent the email and got confirmation from the registrant contact.
+	// We sent the confirmation email and haven't received a response yet.
 	//
-	// EXPIREDThe time limit expired before the registrant contact responded.
+	// DONE
+	//
+	// We sent the email and got confirmation from the registrant contact.
+	//
+	// EXPIRED
+	//
+	// The time limit expired before the registrant contact responded.
 	Status ReachabilityStatus `locationName:"status" type:"string" enum:"true"`
 }
 

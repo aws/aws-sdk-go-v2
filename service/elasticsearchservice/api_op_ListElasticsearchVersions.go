@@ -11,10 +11,10 @@ import (
 )
 
 // Container for the parameters to the ListElasticsearchVersions operation.
-//  Use MaxResults to control the maximum number of results to retrieve in a
+// Use MaxResults to control the maximum number of results to retrieve in a
 // single call.
 //
-//  Use NextToken in response to retrieve more results. If the received response
+// Use NextToken in response to retrieve more results. If the received response
 // does not contain a NextToken, then there are no more results to retrieve.
 type ListElasticsearchVersionsInput struct {
 	_ struct{} `type:"structure"`

@@ -36,9 +36,8 @@ type DescribeClassicLinkInstancesInput struct {
 	//    to find all resources assigned a tag with a specific key, regardless of
 	//    the tag value.
 	//
-	//    * vpc-id - The ID of the VPC to which the instance is linked.
-	//
-	// vpc-id - The ID of the VPC that the instance is linked to.
+	//    * vpc-id - The ID of the VPC to which the instance is linked. vpc-id -
+	//    The ID of the VPC that the instance is linked to.
 	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more instance IDs. Must be instances linked to a VPC through ClassicLink.

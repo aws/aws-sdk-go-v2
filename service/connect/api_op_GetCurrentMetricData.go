@@ -21,25 +21,45 @@ type GetCurrentMetricDataInput struct {
 	//
 	// The following metrics are available:
 	//
-	// AGENTS_AVAILABLEUnit: COUNT
+	// AGENTS_AVAILABLE
 	//
-	// AGENTS_ONLINEUnit: COUNT
+	// Unit: COUNT
 	//
-	// AGENTS_ON_CALLUnit: COUNT
+	// AGENTS_ONLINE
 	//
-	// AGENTS_STAFFEDUnit: COUNT
+	// Unit: COUNT
 	//
-	// AGENTS_AFTER_CONTACT_WORKUnit: COUNT
+	// AGENTS_ON_CALL
 	//
-	// AGENTS_NON_PRODUCTIVEUnit: COUNT
+	// Unit: COUNT
 	//
-	// AGENTS_ERRORUnit: COUNT
+	// AGENTS_STAFFED
 	//
-	// CONTACTS_IN_QUEUEUnit: COUNT
+	// Unit: COUNT
 	//
-	// OLDEST_CONTACT_AGEUnit: SECONDS
+	// AGENTS_AFTER_CONTACT_WORK
 	//
-	// CONTACTS_SCHEDULEDUnit: COUNT
+	// Unit: COUNT
+	//
+	// AGENTS_NON_PRODUCTIVE
+	//
+	// Unit: COUNT
+	//
+	// AGENTS_ERROR
+	//
+	// Unit: COUNT
+	//
+	// CONTACTS_IN_QUEUE
+	//
+	// Unit: COUNT
+	//
+	// OLDEST_CONTACT_AGE
+	//
+	// Unit: SECONDS
+	//
+	// CONTACTS_SCHEDULED
+	//
+	// Unit: COUNT
 	//
 	// CurrentMetrics is a required field
 	CurrentMetrics []CurrentMetric `type:"list" required:"true"`

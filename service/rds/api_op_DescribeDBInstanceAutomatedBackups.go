@@ -28,14 +28,9 @@ type DescribeDBInstanceAutomatedBackupsInput struct {
 	//
 	// Supported filters are the following:
 	//
-	//    * status
-	//
-	// active - automated backups for current instances
-	//
-	// retained - automated backups for deleted instances
-	//
-	// creating - automated backups that are waiting for the first automated snapshot
-	//    to be available
+	//    * status active - automated backups for current instances retained - automated
+	//    backups for deleted instances creating - automated backups that are waiting
+	//    for the first automated snapshot to be available
 	//
 	//    * db-instance-id - Accepts DB instance identifiers and Amazon Resource
 	//    Names (ARNs) for DB instances. The results list includes only information

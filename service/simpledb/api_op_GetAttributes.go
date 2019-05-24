@@ -16,7 +16,11 @@ type GetAttributesInput struct {
 	AttributeNames []string `locationNameList:"AttributeName" type:"list" flattened:"true"`
 
 	// Determines whether or not strong consistency should be enforced when data
-	// is read from SimpleDB. If true
+	// is read from SimpleDB. If
+	//    true
+	// , any data previously written to SimpleDB will be returned. Otherwise, results
+	// will be consistent eventually, and the client may not see data that was written
+	// immediately before your read.
 	ConsistentRead *bool `type:"boolean"`
 
 	// The name of the domain in which to perform the operation.
@@ -77,9 +81,8 @@ const opGetAttributes = "GetAttributes"
 // If the item does not exist on the replica that was accessed for this operation,
 // an empty set is returned. The system does not return an error as it cannot
 // guarantee the item does not exist on other replicas.
-//
-// If GetAttributes is called without being passed any attribute names, all
-// the attributes for the item are returned.
+//   If GetAttributes is called without being passed any attribute names, all
+//   the attributes for the item are returned.
 //
 //    // Example sending a request using GetAttributesRequest.
 //    req := client.GetAttributesRequest(params)

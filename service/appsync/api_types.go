@@ -715,19 +715,12 @@ type LogConfig struct {
 	//    * NONE: No field-level logs are captured.
 	//
 	//    * ERROR: Logs the following information only for the fields that are in
-	//    error:
-	//
-	// The error section in the server response.
-	//
-	// Field-level errors.
-	//
-	// The generated request/response functions that got resolved for error fields.
+	//    error: The error section in the server response. Field-level errors. The
+	//    generated request/response functions that got resolved for error fields.
 	//
 	//    * ALL: The following information is logged for all fields in the query:
-	//
-	// Field-level tracing information.
-	//
-	// The generated request/response functions that got resolved for each field.
+	//    Field-level tracing information. The generated request/response functions
+	//    that got resolved for each field.
 	//
 	// FieldLogLevel is a required field
 	FieldLogLevel FieldLogLevel `locationName:"fieldLogLevel" type:"string" required:"true" enum:"true"`

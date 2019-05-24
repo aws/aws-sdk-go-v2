@@ -498,8 +498,8 @@ type MongoDbSettings struct {
 	//
 	// Valid values: DEFAULT, MONGODB_CR, SCRAM_SHA_1
 	//
-	// DEFAULT – For MongoDB version 2.x, use MONGODB_CR. For MongoDB version 3.x,
-	// use SCRAM_SHA_1. This attribute is not used when authType=No.
+	// DEFAULT – For MongoDB version 2.x, use MONGODB_CR. For MongoDB version
+	// 3.x, use SCRAM_SHA_1. This attribute is not used when authType=No.
 	AuthMechanism AuthMechanismValue `type:"string" enum:"true"`
 
 	// The MongoDB database name. This attribute is not used when authType=NO.
@@ -1126,7 +1126,7 @@ type ResourcePendingMaintenanceActions struct {
 	PendingMaintenanceActionDetails []PendingMaintenanceAction `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the DMS resource that the pending maintenance
-	// action applies to. For information about creating an ARN, see  Constructing
+	// action applies to. For information about creating an ARN, see Constructing
 	// an Amazon Resource Name (ARN) (https://docs.aws.amazon.com/dms/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN)
 	// in the DMS documentation.
 	ResourceIdentifier *string `type:"string"`
@@ -1371,16 +1371,16 @@ type TableStatistics struct {
 	//
 	//    * Pending records—Some records in the table are waiting for validation.
 	//
-	//    * Mismatched records—Some records in the table do not match between the
-	//    source and target.
+	//    * Mismatched records—Some records in the table do not match between
+	//    the source and target.
 	//
 	//    * Suspended records—Some records in the table could not be validated.
 	//
-	//    * No primary key—The table could not be validated because it had no primary
-	//    key.
+	//    * No primary key—The table could not be validated because it had no
+	//    primary key.
 	//
-	//    * Table error—The table was not validated because it was in an error state
-	//    and some data was not migrated.
+	//    * Table error—The table was not validated because it was in an error
+	//    state and some data was not migrated.
 	//
 	//    * Validated—All rows in the table were validated. If the table is updated,
 	//    the status can change from Validated.

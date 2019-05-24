@@ -261,7 +261,7 @@ const opGetJobOutput = "GetJobOutput"
 // For conceptual information and the underlying REST API, see Downloading a
 // Vault Inventory (http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-inventory.html),
 // Downloading an Archive (http://docs.aws.amazon.com/amazonglacier/latest/dev/downloading-an-archive.html),
-// and Get Job Output  (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-job-output-get.html)
+// and Get Job Output (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-job-output-get.html)
 //
 //    // Example sending a request using GetJobOutputRequest.
 //    req := client.GetJobOutputRequest(params)

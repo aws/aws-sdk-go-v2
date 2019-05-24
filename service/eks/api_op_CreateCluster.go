@@ -22,7 +22,7 @@ type CreateClusterInput struct {
 	// to CloudWatch Logs. By default, cluster control plane logs are not exported
 	// to CloudWatch Logs. For more information, see Amazon EKS Cluster Control
 	// Plane Logs (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html)
-	// in the Amazon EKS User Guide.
+	// in the Amazon EKS User Guide .
 	//
 	// CloudWatch Logs ingestion, archive storage, and data scanning rates apply
 	// to exported control plane logs. For more information, see Amazon CloudWatch
@@ -48,7 +48,7 @@ type CreateClusterInput struct {
 	// The Amazon Resource Name (ARN) of the IAM role that provides permissions
 	// for Amazon EKS to make calls to other AWS API operations on your behalf.
 	// For more information, see Amazon EKS Service IAM Role (https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html)
-	// in the Amazon EKS User Guide.
+	// in the Amazon EKS User Guide .
 	//
 	// RoleArn is a required field
 	RoleArn *string `locationName:"roleArn" type:"string" required:"true"`
@@ -189,13 +189,13 @@ const opCreateCluster = "CreateCluster"
 // API server endpoint. By default, public access is enabled and private access
 // is disabled. For more information, see Amazon EKS Cluster Endpoint Access
 // Control (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
-// in the Amazon EKS User Guide.
+// in the Amazon EKS User Guide .
 //
 // You can use the logging parameter to enable or disable exporting the Kubernetes
 // control plane logs for your cluster to CloudWatch Logs. By default, cluster
 // control plane logs are not exported to CloudWatch Logs. For more information,
 // see Amazon EKS Cluster Control Plane Logs (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html)
-// in the Amazon EKS User Guide.
+// in the Amazon EKS User Guide .
 //
 // CloudWatch Logs ingestion, archive storage, and data scanning rates apply
 // to exported control plane logs. For more information, see Amazon CloudWatch

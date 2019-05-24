@@ -87,6 +87,7 @@ const opListDeploymentInstances = "ListDeploymentInstances"
 // ListDeploymentInstancesRequest returns a request value for making API operation for
 // AWS CodeDeploy.
 //
+//
 // The newer BatchGetDeploymentTargets should be used instead because it works
 // with all compute types. ListDeploymentInstances throws an exception if it
 // is used with a compute platform other than EC2/On-premises or AWS Lambda.

@@ -1552,15 +1552,21 @@ type UpdateProvisioningPreferences struct {
 	//
 	// Applicable only to a CFN_STACKSET provisioned product type.
 	//
-	// CREATECreates a new stack instance in the stack set represented by the provisioned
+	// CREATE
+	//
+	// Creates a new stack instance in the stack set represented by the provisioned
 	// product. In this case, only new stack instances are created based on accounts
 	// and regions; if new ProductId or ProvisioningArtifactID are passed, they
 	// will be ignored.
 	//
-	// UPDATEUpdates the stack set represented by the provisioned product and also
-	// its stack instances.
+	// UPDATE
 	//
-	// DELETEDeletes a stack instance in the stack set represented by the provisioned
+	// Updates the stack set represented by the provisioned product and also its
+	// stack instances.
+	//
+	// DELETE
+	//
+	// Deletes a stack instance in the stack set represented by the provisioned
 	// product.
 	StackSetOperationType StackSetOperationType `type:"string" enum:"true"`
 

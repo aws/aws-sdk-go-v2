@@ -67,7 +67,7 @@ const opStopDBInstance = "StopDBInstance"
 // group, and option group membership. Amazon RDS also retains the transaction
 // logs so you can do a point-in-time restore if necessary.
 //
-// For more information, see  Stopping an Amazon RDS DB Instance Temporarily
+// For more information, see Stopping an Amazon RDS DB Instance Temporarily
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StopInstance.html)
 // in the Amazon RDS User Guide.
 //

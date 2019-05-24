@@ -308,8 +308,6 @@ func ExampleClient_PutScalingPolicyRequest_shared00() {
 //
 // This example applies a scaling policy to an Amazon EC2 Spot fleet. The policy increases
 // the target capacity of the spot fleet by 200%, with a cool down period of 180 seconds.",
-//
-//
 func ExampleClient_PutScalingPolicyRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {

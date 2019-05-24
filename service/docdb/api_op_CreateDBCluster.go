@@ -82,7 +82,6 @@ type CreateDBClusterInput struct {
 	//    Amazon DocumentDB uses the encryption key that is used to encrypt the
 	//    source. Otherwise, Amazon DocumentDB uses your default encryption key.
 	//
-	//
 	//    * If the StorageEncrypted parameter is true and ReplicationSourceIdentifier
 	//    is not specified, Amazon DocumentDB uses your default encryption key.
 	//

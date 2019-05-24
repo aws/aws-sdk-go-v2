@@ -93,11 +93,11 @@ const opGetDiscoveredResourceCounts = "GetDiscoveredResourceCounts"
 //
 // AWS Config returns the following:
 //
-// The resource types (EC2 instances, IAM users, and S3 buckets).
+//    * The resource types (EC2 instances, IAM users, and S3 buckets).
 //
-// The number of each resource type (25, 20, and 15).
+//    * The number of each resource type (25, 20, and 15).
 //
-// The total number of all resources (60).
+//    * The total number of all resources (60).
 //
 // The response is paginated. By default, AWS Config lists 100 ResourceCount
 // objects on each page. You can customize this number with the limit parameter.
@@ -107,9 +107,9 @@ const opGetDiscoveredResourceCounts = "GetDiscoveredResourceCounts"
 // If you make a call to the GetDiscoveredResourceCounts action, you might not
 // immediately receive resource counts in the following situations:
 //
-// You are a new AWS Config customer.
+//    * You are a new AWS Config customer.
 //
-// You just enabled resource recording.
+//    * You just enabled resource recording.
 //
 // It might take a few minutes for AWS Config to record and count your resources.
 // Wait a few minutes and then retry the GetDiscoveredResourceCounts action.

@@ -19,7 +19,7 @@ type AccessPoliciesStatus struct {
 	_ struct{} `type:"structure"`
 
 	// The access policy configured for the Elasticsearch domain. Access policies
-	// may be resource-based, IP-based, or IAM-based. See  Configuring Access Policies
+	// may be resource-based, IP-based, or IAM-based. See Configuring Access Policies
 	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-access-policies)for
 	// more information.
 	//
@@ -61,11 +61,10 @@ type AdditionalLimit struct {
 	_ struct{} `type:"structure"`
 
 	// Name of Additional Limit is specific to a given InstanceType and for each
-	// of it's InstanceRole etc. Attributes and their details: MaximumNumberOfDataNodesSupported
-	// This attribute will be present in Master node only to specify how much data
-	// nodes upto which given ESPartitionInstanceTypecan support as master node. MaximumNumberOfDataNodesWithoutMasterNode
-	// This attribute will be present in Data node only to specify how much data
-	// nodes of given ESPartitionInstanceType
+	// of it's InstanceRole etc. Attributes and their details:
+	//    * MaximumNumberOfDataNodesSupported
+	//
+	//    * MaximumNumberOfDataNodesWithoutMasterNode
 	LimitName *string `type:"string"`
 
 	// Value for given AdditionalLimit$LimitName .
@@ -105,10 +104,11 @@ func (s AdditionalLimit) MarshalFields(e protocol.FieldEncoder) error {
 //
 //    * Option to allow references to indices in an HTTP request body. Must
 //    be false when configuring access to individual sub-resources. By default,
-//    the value is true. See Configuration Advanced Options (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options)
-//    for more information.
+//    the value is true. See Configuration Advanced Options for more information.
+//
 //    * Option to specify the percentage of heap space that is allocated to
 //    field data. By default, this setting is unbounded.
+//
 // For more information, see Configuring Advanced Options (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options).
 type AdvancedOptionsStatus struct {
 	_ struct{} `type:"structure"`
@@ -328,7 +328,7 @@ func (s DomainInfo) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Options to enable, disable, and specify the properties of EBS storage volumes.
-// For more information, see  Configuring EBS-based Storage (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs).
+// For more information, see Configuring EBS-based Storage (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs).
 type EBSOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -1088,7 +1088,8 @@ func (s InstanceLimits) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Limits for given InstanceType and for each of it's role. Limits contains following StorageTypes,   InstanceLimitsand AdditionalLimits
+// Limits for given InstanceType and for each of it's role. Limits contains
+// following StorageTypes, InstanceLimits and AdditionalLimits
 type Limits struct {
 	_ struct{} `type:"structure"`
 
@@ -1145,9 +1146,13 @@ func (s Limits) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Log Publishing option that is set for given domain. Attributes and their details: CloudWatchLogsLogGroupArn: ARN of the Cloudwatch
-// log group to which log needs to be published.
-// Enabled: Whether the log publishing for given log type is enabled or not
+// Log Publishing option that is set for given domain. Attributes and their
+// details:
+//    * CloudWatchLogsLogGroupArn: ARN of the Cloudwatch log group to which
+//    log needs to be published.
+//
+//    * Enabled: Whether the log publishing for given log type is enabled or
+//    not
 type LogPublishingOption struct {
 	_ struct{} `type:"structure"`
 
@@ -1774,18 +1779,16 @@ type StorageType struct {
 
 	// SubType of the given storage type. List of available sub-storage options:
 	// For "instance" storageType we wont have any storageSubType, in case of "ebs"
-	// storageType we will have following valid storageSubTypes standard
-	// gp2
-	// io1
-	//  Refer VolumeType for more information regarding above EBS storage options.
+	// storageType we will have following valid storageSubTypes standard gp2 io1
+	// Refer VolumeType for more information regarding above EBS storage options.
 	StorageSubTypeName *string `type:"string"`
 
 	// List of limits that are applicable for given storage type.
 	StorageTypeLimits []StorageTypeLimit `type:"list"`
 
-	// Type of the storage. List of available storage options: instance
-	//  Inbuilt storage available for the given Instance ebs
-	//  Elastic block storage that would be attached to the given Instance
+	// Type of the storage. List of available storage options: instance Inbuilt
+	// storage available for the given Instance ebs Elastic block storage that would
+	// be attached to the given Instance
 	StorageTypeName *string `type:"string"`
 }
 
@@ -1828,15 +1831,14 @@ type StorageTypeLimit struct {
 	_ struct{} `type:"structure"`
 
 	// Name of storage limits that are applicable for given storage type. If StorageType
-	// is ebs, following storage options are applicable MinimumVolumeSize
-	//  Minimum amount of volume size that is applicable for given storage type.It
-	// can be empty if it is not applicable. MaximumVolumeSize
-	//  Maximum amount of volume size that is applicable for given storage type.It
-	// can be empty if it is not applicable. MaximumIops
-	//  Maximum amount of Iops that is applicable for given storage type.It can
-	// be empty if it is not applicable. MinimumIops
-	//  Minimum amount of Iops that is applicable for given storage type.It can
-	// be empty if it is not applicable.
+	// is ebs, following storage options are applicable MinimumVolumeSize Minimum
+	// amount of volume size that is applicable for given storage type.It can be
+	// empty if it is not applicable. MaximumVolumeSize Maximum amount of volume
+	// size that is applicable for given storage type.It can be empty if it is not
+	// applicable. MaximumIops Maximum amount of Iops that is applicable for given
+	// storage type.It can be empty if it is not applicable. MinimumIops Minimum
+	// amount of Iops that is applicable for given storage type.It can be empty
+	// if it is not applicable.
 	LimitName *string `type:"string"`
 
 	// Values for the StorageTypeLimit$LimitName .
@@ -1949,10 +1951,14 @@ type UpgradeHistory struct {
 	UpgradeName *string `type:"string"`
 
 	// The overall status of the update. The status can take one of the following
-	// values: In Progress
-	// Succeeded
-	// Succeeded with Issues
-	// Failed
+	// values:
+	//    * In Progress
+	//
+	//    * Succeeded
+	//
+	//    * Succeeded with Issues
+	//
+	//    * Failed
 	UpgradeStatus UpgradeStatus `type:"string" enum:"true"`
 }
 
@@ -2009,16 +2015,23 @@ type UpgradeStepItem struct {
 	ProgressPercent *float64 `type:"double"`
 
 	// Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does
-	// through: PreUpgradeCheck
-	// Snapshot
-	// Upgrade
+	// through:
+	//    * PreUpgradeCheck
+	//
+	//    * Snapshot
+	//
+	//    * Upgrade
 	UpgradeStep UpgradeStep `type:"string" enum:"true"`
 
 	// The status of a particular step during an upgrade. The status can take one
-	// of the following values: In Progress
-	// Succeeded
-	// Succeeded with Issues
-	// Failed
+	// of the following values:
+	//    * In Progress
+	//
+	//    * Succeeded
+	//
+	//    * Succeeded with Issues
+	//
+	//    * Failed
 	UpgradeStepStatus UpgradeStatus `type:"string" enum:"true"`
 }
 
@@ -2063,7 +2076,7 @@ func (s UpgradeStepItem) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Options to specify the subnets and security groups for VPC endpoint. For
-// more information, see  VPC Endpoints for Amazon Elasticsearch Service Domains
+// more information, see VPC Endpoints for Amazon Elasticsearch Service Domains
 // (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html).
 type VPCDerivedInfo struct {
 	_ struct{} `type:"structure"`
@@ -2173,7 +2186,7 @@ func (s VPCDerivedInfoStatus) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Options to specify the subnets and security groups for VPC endpoint. For
-// more information, see  VPC Endpoints for Amazon Elasticsearch Service Domains
+// more information, see VPC Endpoints for Amazon Elasticsearch Service Domains
 // (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html).
 type VPCOptions struct {
 	_ struct{} `type:"structure"`

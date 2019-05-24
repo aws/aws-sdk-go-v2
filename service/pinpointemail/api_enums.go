@@ -76,9 +76,9 @@ func (enum DimensionValueSource) MarshalValueBuf(b []byte) ([]byte, error) {
 // The DKIM authentication status of the identity. The status can be one of
 // the following:
 //
-//    * PENDING – The DKIM verification process was initiated, and Amazon Pinpoint
-//    is still waiting for the required CNAME records to appear in the DNS configuration
-//    for the domain.
+//    * PENDING – The DKIM verification process was initiated, and Amazon
+//    Pinpoint is still waiting for the required CNAME records to appear in
+//    the DNS configuration for the domain.
 //
 //    * SUCCESS – The DKIM authentication process completed successfully.
 //
@@ -89,8 +89,8 @@ func (enum DimensionValueSource) MarshalValueBuf(b []byte) ([]byte, error) {
 //    * TEMPORARY_FAILURE – A temporary issue is preventing Amazon Pinpoint
 //    from determining the DKIM authentication status of the domain.
 //
-//    * NOT_STARTED – The DKIM verification process hasn't been initiated for
-//    the domain.
+//    * NOT_STARTED – The DKIM verification process hasn't been initiated
+//    for the domain.
 type DkimStatus string
 
 // Enum values for DkimStatus
@@ -164,11 +164,11 @@ func (enum IdentityType) MarshalValueBuf(b []byte) ([]byte, error) {
 //    * PENDING – Amazon Pinpoint hasn't started searching for the MX record
 //    yet.
 //
-//    * SUCCESS – Amazon Pinpoint detected the required MX record for the MAIL
-//    FROM domain.
+//    * SUCCESS – Amazon Pinpoint detected the required MX record for the
+//    MAIL FROM domain.
 //
-//    * FAILED – Amazon Pinpoint can't find the required MX record, or the record
-//    no longer exists.
+//    * FAILED – Amazon Pinpoint can't find the required MX record, or the
+//    record no longer exists.
 //
 //    * TEMPORARY_FAILURE – A temporary issue occurred, which prevented Amazon
 //    Pinpoint from determining the status of the MAIL FROM domain.

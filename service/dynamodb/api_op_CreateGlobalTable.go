@@ -87,9 +87,9 @@ const opCreateGlobalTable = "CreateGlobalTable"
 // If global secondary indexes are specified, then the following conditions
 // must also be met:
 //
-//    *  The global secondary indexes must have the same name.
+//    * The global secondary indexes must have the same name.
 //
-//    *  The global secondary indexes must have the same hash key and sort key
+//    * The global secondary indexes must have the same hash key and sort key
 //    (if present).
 //
 // Write capacity settings should be set consistently across your replica tables
@@ -97,7 +97,7 @@ const opCreateGlobalTable = "CreateGlobalTable"
 // to manage the write capacity settings for all of your global tables replicas
 // and indexes.
 //
-//  If you prefer to manage write capacity settings manually, you should provision
+// If you prefer to manage write capacity settings manually, you should provision
 // equal replicated write capacity units to your replica tables. You should
 // also provision equal replicated write capacity units to matching secondary
 // indexes across your global table.

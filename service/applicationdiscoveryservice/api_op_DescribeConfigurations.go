@@ -60,13 +60,13 @@ const opDescribeConfigurations = "DescribeConfigurations"
 //
 // All of the supplied IDs must be for the same asset type from one of the following:
 //
-// server
+//    * server
 //
-// application
+//    * application
 //
-// process
+//    * process
 //
-// connection
+//    * connection
 //
 // Output fields are specific to the asset type specified. For example, the
 // output for a server configuration item includes a list of attributes about

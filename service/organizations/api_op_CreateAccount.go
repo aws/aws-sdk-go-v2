@@ -133,41 +133,46 @@ const opCreateAccount = "CreateAccount"
 //    the Activity in Your Organization (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html)
 //    in the AWS Organizations User Guide.
 //
-// The user who calls the API to create an account must have the organizations:CreateAccountpermission. If you enabled all features in the organization, AWS Organizations
-// will create the required service-linked role named AWSServiceRoleForOrganizations. For more information, see AWS Organizations and Service-Linked Roles (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs)in the AWS Organizations User Guide.
+// The user who calls the API to create an account must have the organizations:CreateAccount
+// permission. If you enabled all features in the organization, AWS Organizations
+// will create the required service-linked role named AWSServiceRoleForOrganizations.
+// For more information, see AWS Organizations and Service-Linked Roles (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs)
+// in the AWS Organizations User Guide.
 //
 // AWS Organizations preconfigures the new member account with a role (named
-// OrganizationAccountAccessRoleby default) that grants users in the master account administrator permissions
-// in the new member account. Principals in the master account can assume the
-// role. AWS Organizations clones the company name and address information for
-// the new account from the organization's master account.
+// OrganizationAccountAccessRole by default) that grants users in the master
+// account administrator permissions in the new member account. Principals in
+// the master account can assume the role. AWS Organizations clones the company
+// name and address information for the new account from the organization's
+// master account.
 //
 // This operation can be called only from the organization's master account.
 //
 // For more information about creating accounts, see Creating an AWS Account
-// in Your Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html)in the AWS Organizations User Guide.
-//
-// When you create an account in an organization using the AWS Organizations
-// console, API, or CLI commands, the information required for the account to
-// operate as a standalone account, such as a payment method and signing the
-// end user license agreement (EULA) is not automatically collected. If you
-// must remove an account from your organization later, you can do so only after
-// you provide the missing information. Follow the steps at  To leave an organization
-// as a member account (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
+// in Your Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html)
 // in the AWS Organizations User Guide.
 //
-// If you get an exception that indicates that you exceeded your account limits
-// for the organization, contact AWS Support (https://console.aws.amazon.com/support/home#/).
+//    * When you create an account in an organization using the AWS Organizations
+//    console, API, or CLI commands, the information required for the account
+//    to operate as a standalone account, such as a payment method and signing
+//    the end user license agreement (EULA) is not automatically collected.
+//    If you must remove an account from your organization later, you can do
+//    so only after you provide the missing information. Follow the steps at
+//    To leave an organization as a member account (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
+//    in the AWS Organizations User Guide.
 //
-// If you get an exception that indicates that the operation failed because
-// your organization is still initializing, wait one hour and then try again.
-// If the error persists, contact AWS Support (https://console.aws.amazon.com/support/home#/).
+//    * If you get an exception that indicates that you exceeded your account
+//    limits for the organization, contact AWS Support (https://console.aws.amazon.com/support/home#/).
 //
-// Using CreateAccount to create multiple temporary accounts isn't recommended.
-// You can only close an account from the Billing and Cost Management Console,
-// and you must be signed in as the root user. For information on the requirements
-// and process for closing an account, see Closing an AWS Account (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html)
-// in the AWS Organizations User Guide.
+//    * If you get an exception that indicates that the operation failed because
+//    your organization is still initializing, wait one hour and then try again.
+//    If the error persists, contact AWS Support (https://console.aws.amazon.com/support/home#/).
+//
+//    * Using CreateAccount to create multiple temporary accounts isn't recommended.
+//    You can only close an account from the Billing and Cost Management Console,
+//    and you must be signed in as the root user. For information on the requirements
+//    and process for closing an account, see Closing an AWS Account (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html)
+//    in the AWS Organizations User Guide.
 //
 // When you create a member account with this operation, you can choose whether
 // to create the account with the IAM User and Role Access to Billing Information

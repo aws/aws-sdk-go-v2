@@ -115,10 +115,11 @@ type PutRestApiOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The source of the API key for metering requests according to a usage plan.
-	// Valid values are: HEADER to read the API key from the X-API-Key header of
-	// a request.
-	// AUTHORIZER to read the API key from the UsageIdentifierKey from a custom
-	// authorizer.
+	// Valid values are:
+	//    * HEADER to read the API key from the X-API-Key header of a request.
+	//
+	//    * AUTHORIZER to read the API key from the UsageIdentifierKey from a custom
+	//    authorizer.
 	ApiKeySource ApiKeySourceType `locationName:"apiKeySource" type:"string" enum:"true"`
 
 	// The list of binary media types supported by the RestApi. By default, the
@@ -150,7 +151,7 @@ type PutRestApiOutput struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// A stringified JSON policy document that applies to this RestApi regardless
-	// of the caller and Method
+	// of the caller and Method configuration.
 	Policy *string `locationName:"policy" type:"string"`
 
 	// A version identifier for the API.

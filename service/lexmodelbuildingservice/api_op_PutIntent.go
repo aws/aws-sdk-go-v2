@@ -23,7 +23,7 @@ type PutIntentInput struct {
 	//
 	// When you want to update a intent, set the checksum field to the checksum
 	// of the most recent revision of the $LATEST version. If you don't specify
-	// the  checksum field, or if the checksum does not match the $LATEST version,
+	// the checksum field, or if the checksum does not match the $LATEST version,
 	// you get a PreconditionFailedException exception.
 	Checksum *string `locationName:"checksum" type:"string"`
 
@@ -496,7 +496,6 @@ const opPutIntent = "PutIntent"
 //    application. If you use a Lambda function, when all of the intent information
 //    is available, Amazon Lex invokes your Lambda function. If you configure
 //    your intent to return the intent information to the client application.
-//
 //
 // You can specify other optional information in the request, such as:
 //

@@ -360,6 +360,7 @@ type Cluster struct {
 	// The unique identifier for the cluster.
 	Id *string `type:"string"`
 
+	//
 	// The instance fleet configuration is available only in Amazon EMR versions
 	// 4.8.0 and later, excluding 5.0.x versions.
 	//
@@ -565,6 +566,7 @@ func (s Command) String() string {
 	return awsutil.Prettify(s)
 }
 
+//
 // Amazon EMR releases 4.x or later.
 //
 // An optional configuration specification to be used when provisioning cluster
@@ -1208,8 +1210,8 @@ type InstanceFleetStatus struct {
 
 	// A code representing the instance fleet status.
 	//
-	//    * PROVISIONING—The instance fleet is provisioning EC2 resources and is
-	//    not yet ready to run jobs.
+	//    * PROVISIONING—The instance fleet is provisioning EC2 resources and
+	//    is not yet ready to run jobs.
 	//
 	//    * BOOTSTRAPPING—EC2 instances and other resources have been provisioned
 	//    and the bootstrap actions specified for the instances are underway.
@@ -1217,8 +1219,8 @@ type InstanceFleetStatus struct {
 	//    * RUNNING—EC2 instances and other resources are running. They are either
 	//    executing jobs or waiting to execute jobs.
 	//
-	//    * RESIZING—A resize operation is underway. EC2 instances are either being
-	//    added or removed.
+	//    * RESIZING—A resize operation is underway. EC2 instances are either
+	//    being added or removed.
 	//
 	//    * SUSPENDED—A resize operation could not complete. Existing EC2 instances
 	//    are running, but instances can't be added or removed.
@@ -1286,6 +1288,7 @@ type InstanceGroup struct {
 	// to the On-Demand price.
 	BidPrice *string `type:"string"`
 
+	//
 	// Amazon EMR releases 4.x or later.
 	//
 	// The list of configurations supplied for an EMR cluster instance group. You
@@ -1366,6 +1369,7 @@ type InstanceGroupConfig struct {
 	// to the On-Demand price.
 	BidPrice *string `type:"string"`
 
+	//
 	// Amazon EMR releases 4.x or later.
 	//
 	// The list of configurations supplied for an EMR cluster instance group. You
@@ -1980,6 +1984,7 @@ type JobFlowInstancesConfig struct {
 	// The number of EC2 instances in the cluster.
 	InstanceCount *int64 `type:"integer"`
 
+	//
 	// The instance fleet configuration is available only in Amazon EMR versions
 	// 4.8.0 and later, excluding 5.0.x versions.
 	//
@@ -2860,7 +2865,7 @@ type Tag struct {
 	_ struct{} `type:"structure"`
 
 	// A user-defined key, which is the minimum required information for a valid
-	// tag. For more information, see Tag  (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html).
+	// tag. For more information, see Tag (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html).
 	Key *string `type:"string"`
 
 	// A user-defined value, which is optional in a tag. For more information, see

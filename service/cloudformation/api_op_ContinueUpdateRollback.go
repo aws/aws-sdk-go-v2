@@ -30,7 +30,7 @@ type ContinueUpdateRollbackInput struct {
 	// reason.
 	//
 	// Specify this property to skip rolling back resources that AWS CloudFormation
-	// can't successfully roll back. We recommend that you  troubleshoot (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed)
+	// can't successfully roll back. We recommend that you troubleshoot (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed)
 	// resources before skipping them. AWS CloudFormation sets the status of the
 	// specified resources to UPDATE_COMPLETE and continues to roll back the stack.
 	// After the rollback is complete, the state of the skipped resources will be
@@ -126,7 +126,7 @@ const opContinueUpdateRollback = "ContinueUpdateRollback"
 //
 // For a specified stack that is in the UPDATE_ROLLBACK_FAILED state, continues
 // rolling it back to the UPDATE_ROLLBACK_COMPLETE state. Depending on the cause
-// of the failure, you can manually  fix the error (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed)
+// of the failure, you can manually fix the error (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed)
 // and continue the rollback. By continuing the rollback, you can return your
 // stack to a working state (the UPDATE_ROLLBACK_COMPLETE state), and then try
 // to update the stack again.

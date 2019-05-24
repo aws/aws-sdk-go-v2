@@ -84,6 +84,7 @@ type RunJobFlowInput struct {
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
 
+	//
 	// For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later,
 	// use Applications.
 	//
@@ -153,6 +154,7 @@ type RunJobFlowInput struct {
 	// A list of steps to run.
 	Steps []StepConfig `type:"list"`
 
+	//
 	// For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later,
 	// use Applications.
 	//
@@ -245,11 +247,11 @@ const opRunJobFlow = "RunJobFlow"
 // RunJobFlow creates and starts running a new cluster (job flow). The cluster
 // runs the steps specified. After the steps complete, the cluster stops and
 // the HDFS partition is lost. To prevent loss of data, configure the last step
-// of the job flow to store results in Amazon S3. If the JobFlowInstancesConfigKeepJobFlowAliveWhenNoSteps
-// parameter is set to TRUE, the cluster transitions to the WAITING state rather
-// than shutting down after the steps have completed.
+// of the job flow to store results in Amazon S3. If the JobFlowInstancesConfig
+// KeepJobFlowAliveWhenNoSteps parameter is set to TRUE, the cluster transitions
+// to the WAITING state rather than shutting down after the steps have completed.
 //
-// For additional protection, you can set the JobFlowInstancesConfigTerminationProtected
+// For additional protection, you can set the JobFlowInstancesConfig TerminationProtected
 // parameter to TRUE to lock the cluster and prevent it from being terminated
 // by API call, user intervention, or in the event of a job flow error.
 //

@@ -57,7 +57,7 @@ type DescribeLocationEfsOutput struct {
 	// security group S (which you provide for DataSync to use at this stage) is
 	// as follows:
 	//
-	//    *  Security group M (which you associate with the mount target) must allow
+	//    * Security group M (which you associate with the mount target) must allow
 	//    inbound access for the Transmission Control Protocol (TCP) on the NFS
 	//    port (2049) from security group S. You can enable inbound connections
 	//    either by IP address (CIDR range) or security group.

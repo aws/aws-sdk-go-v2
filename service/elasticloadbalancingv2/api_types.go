@@ -107,7 +107,8 @@ type AuthenticateCognitoActionConfig struct {
 	//
 	//    * allow - Allow the request to be forwarded to the target.
 	//
-	// authenticate
+	//    * authenticate - Redirect the request to the IdP authorization endpoint.
+	//    This is the default value.
 	OnUnauthenticatedRequest AuthenticateCognitoActionConditionalBehaviorEnum `type:"string" enum:"true"`
 
 	// The set of user claims to be requested from the IdP. The default is openid.
@@ -207,7 +208,8 @@ type AuthenticateOidcActionConfig struct {
 	//
 	//    * allow - Allow the request to be forwarded to the target.
 	//
-	// authenticate
+	//    * authenticate - Redirect the request to the IdP authorization endpoint.
+	//    This is the default value.
 	OnUnauthenticatedRequest AuthenticateOidcActionConditionalBehaviorEnum `type:"string" enum:"true"`
 
 	// The set of user claims to be requested from the IdP. The default is openid.

@@ -1478,7 +1478,6 @@ type Snapshot struct {
 	//
 	//    * CreateClusterSnapshot and CopyClusterSnapshot returns status as "creating".
 	//
-	//
 	//    * DescribeClusterSnapshots returns status as "creating", "available",
 	//    "final snapshot", or "failed".
 	//

@@ -50,19 +50,9 @@ type DescribeDBClusterBacktracksInput struct {
 	//    identifiers.
 	//
 	//    * db-cluster-backtrack-status - Accepts any of the following backtrack
-	//    status values:
-	//
-	// applying
-	//
-	// completed
-	//
-	// failed
-	//
-	// pending
-	//
-	// The results list includes information about only the backtracks identified
-	//    by these values. For more information about backtrack status values, see
-	//    DBClusterBacktrack.
+	//    status values: applying completed failed pending The results list includes
+	//    information about only the backtracks identified by these values. For
+	//    more information about backtrack status values, see DBClusterBacktrack.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeDBClusterBacktracks
@@ -132,7 +122,7 @@ const opDescribeDBClusterBacktracks = "DescribeDBClusterBacktracks"
 //
 // Returns information about backtracks for a DB cluster.
 //
-// For more information on Amazon Aurora, see  What Is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// For more information on Amazon Aurora, see What Is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide.
 //
 // This action only applies to Aurora DB clusters.

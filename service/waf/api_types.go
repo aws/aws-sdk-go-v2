@@ -64,15 +64,15 @@ type ActivatedRule struct {
 	//
 	// Submit an UpdateWebACL request that has two actions:
 	//
-	// The first action deletes the existing rule group from the web ACL. That is,
-	// in the UpdateWebACL request, the first Updates:Action should be DELETE and
-	// Updates:ActivatedRule:RuleId should be the rule group that contains the rules
-	// that you want to exclude.
+	//    * The first action deletes the existing rule group from the web ACL. That
+	//    is, in the UpdateWebACL request, the first Updates:Action should be DELETE
+	//    and Updates:ActivatedRule:RuleId should be the rule group that contains
+	//    the rules that you want to exclude.
 	//
-	// The second action inserts the same rule group back in, but specifying the
-	// rules to exclude. That is, the second Updates:Action should be INSERT, Updates:ActivatedRule:RuleId
-	// should be the rule group that you just removed, and ExcludedRules should
-	// contain the rules that you want to exclude.
+	//    * The second action inserts the same rule group back in, but specifying
+	//    the rules to exclude. That is, the second Updates:Action should be INSERT,
+	//    Updates:ActivatedRule:RuleId should be the rule group that you just removed,
+	//    and ExcludedRules should contain the rules that you want to exclude.
 	ExcludedRules []ExcludedRule `type:"list"`
 
 	// Use the OverrideAction to test your RuleGroup.
@@ -1063,7 +1063,7 @@ type Predicate struct {
 	// on the negation of the settings in the ByteMatchSet, IPSet, SqlInjectionMatchSet,
 	// XssMatchSet, RegexMatchSet, GeoMatchSet, or SizeConstraintSet. For example,
 	// if an IPSet includes the IP address 192.0.2.44, AWS WAF will allow, block,
-	// or count requests based on all IP addresses except192.0.2.44.
+	// or count requests based on all IP addresses except 192.0.2.44.
 	//
 	// Negated is a required field
 	Negated *bool `type:"boolean" required:"true"`
@@ -1811,7 +1811,7 @@ func (s SampledHTTPRequest) String() string {
 
 // Specifies a constraint on the size of a part of the web request. AWS WAF
 // uses the Size, ComparisonOperator, and FieldToMatch to build an expression
-// in the form of "SizeComparisonOperator size in bytes of FieldToMatch". If
+// in the form of "Size ComparisonOperator size in bytes of FieldToMatch". If
 // that expression is true, the SizeConstraint is considered to match.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/SizeConstraint
 type SizeConstraint struct {
@@ -1819,7 +1819,7 @@ type SizeConstraint struct {
 
 	// The type of comparison you want AWS WAF to perform. AWS WAF uses this in
 	// combination with the provided Size and FieldToMatch to build an expression
-	// in the form of "SizeComparisonOperator size in bytes of FieldToMatch". If
+	// in the form of "Size ComparisonOperator size in bytes of FieldToMatch". If
 	// that expression is true, the SizeConstraint is considered to match.
 	//
 	// EQ: Used to test if the Size is equal to the size of the FieldToMatch
@@ -1845,7 +1845,7 @@ type SizeConstraint struct {
 
 	// The size in bytes that you want AWS WAF to compare against the size of the
 	// specified FieldToMatch. AWS WAF uses this in combination with ComparisonOperator
-	// and FieldToMatch to build an expression in the form of "SizeComparisonOperator
+	// and FieldToMatch to build an expression in the form of "Size ComparisonOperator
 	// size in bytes of FieldToMatch". If that expression is true, the SizeConstraint
 	// is considered to match.
 	//
@@ -2047,7 +2047,7 @@ type SizeConstraintSetUpdate struct {
 
 	// Specifies a constraint on the size of a part of the web request. AWS WAF
 	// uses the Size, ComparisonOperator, and FieldToMatch to build an expression
-	// in the form of "SizeComparisonOperator size in bytes of FieldToMatch". If
+	// in the form of "Size ComparisonOperator size in bytes of FieldToMatch". If
 	// that expression is true, the SizeConstraint is considered to match.
 	//
 	// SizeConstraint is a required field

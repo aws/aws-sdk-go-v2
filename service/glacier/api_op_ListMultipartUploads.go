@@ -168,7 +168,7 @@ const opListMultipartUploads = "ListMultipartUploads"
 //
 // For conceptual information and the underlying REST API, see Working with
 // Archives in Amazon Glacier (http://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html)
-// and List Multipart Uploads  (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-list-uploads.html)
+// and List Multipart Uploads (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-list-uploads.html)
 // in the Amazon Glacier Developer Guide.
 //
 //    // Example sending a request using ListMultipartUploadsRequest.

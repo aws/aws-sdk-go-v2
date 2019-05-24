@@ -82,7 +82,7 @@ type ListUploadsInput struct {
 	//
 	//    * APPIUM_NODE_TEST_SPEC: An Appium Node.js test spec upload.
 	//
-	//    *  APPIUM_RUBY_TEST_SPEC: An Appium Ruby test spec upload.
+	//    * APPIUM_RUBY_TEST_SPEC: An Appium Ruby test spec upload.
 	//
 	//    * APPIUM_WEB_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload
 	//    for a web app.

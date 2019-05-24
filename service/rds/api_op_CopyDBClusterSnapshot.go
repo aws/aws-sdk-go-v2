@@ -68,9 +68,9 @@ type CopyDBClusterSnapshotInput struct {
 	//    the us-west-2 AWS Region, then your SourceDBClusterSnapshotIdentifier
 	//    looks like the following example: arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115.
 	//
-	// To learn how to generate a Signature Version 4 signed request, see  Authenticating
+	// To learn how to generate a Signature Version 4 signed request, see Authenticating
 	// Requests: Using Query Parameters (AWS Signature Version 4) (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
-	// and  Signature Version 4 Signing Process (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+	// and Signature Version 4 Signing Process (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 	PreSignedUrl *string `type:"string"`
 
 	// The identifier of the DB cluster snapshot to copy. This parameter is not
@@ -87,8 +87,8 @@ type CopyDBClusterSnapshotInput struct {
 	//    a valid DB snapshot identifier.
 	//
 	//    * If the source snapshot is in a different AWS Region than the copy, specify
-	//    a valid DB cluster snapshot ARN. For more information, go to  Copying
-	//    Snapshots Across AWS Regions (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html#USER_CopySnapshot.AcrossRegions)
+	//    a valid DB cluster snapshot ARN. For more information, go to Copying Snapshots
+	//    Across AWS Regions (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html#USER_CopySnapshot.AcrossRegions)
 	//    in the Amazon Aurora User Guide.
 	//
 	// Example: my-cluster-snapshot1
@@ -186,29 +186,21 @@ const opCopyDBClusterSnapshot = "CopyDBClusterSnapshot"
 //    where the DB cluster snapshot is copied from. The pre-signed URL must
 //    be a valid request for the CopyDBClusterSnapshot API action that can be
 //    executed in the source AWS Region that contains the encrypted DB cluster
-//    snapshot to be copied.
-//
-// The pre-signed URL request must contain the following parameter values:
-//
-// KmsKeyId - The KMS key identifier for the key to use to encrypt the copy
-//    of the DB cluster snapshot in the destination AWS Region. This is the
-//    same identifier for both the CopyDBClusterSnapshot action that is called
-//    in the destination AWS Region, and the action contained in the pre-signed
-//    URL.
-//
-// DestinationRegion - The name of the AWS Region that the DB cluster snapshot
-//    will be created in.
-//
-// SourceDBClusterSnapshotIdentifier - The DB cluster snapshot identifier for
-//    the encrypted DB cluster snapshot to be copied. This identifier must be
-//    in the Amazon Resource Name (ARN) format for the source AWS Region. For
-//    example, if you are copying an encrypted DB cluster snapshot from the
-//    us-west-2 AWS Region, then your SourceDBClusterSnapshotIdentifier looks
-//    like the following example: arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115.
-//
-// To learn how to generate a Signature Version 4 signed request, see  Authenticating
+//    snapshot to be copied. The pre-signed URL request must contain the following
+//    parameter values: KmsKeyId - The KMS key identifier for the key to use
+//    to encrypt the copy of the DB cluster snapshot in the destination AWS
+//    Region. This is the same identifier for both the CopyDBClusterSnapshot
+//    action that is called in the destination AWS Region, and the action contained
+//    in the pre-signed URL. DestinationRegion - The name of the AWS Region
+//    that the DB cluster snapshot will be created in. SourceDBClusterSnapshotIdentifier
+//    - The DB cluster snapshot identifier for the encrypted DB cluster snapshot
+//    to be copied. This identifier must be in the Amazon Resource Name (ARN)
+//    format for the source AWS Region. For example, if you are copying an encrypted
+//    DB cluster snapshot from the us-west-2 AWS Region, then your SourceDBClusterSnapshotIdentifier
+//    looks like the following example: arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115.
+//    To learn how to generate a Signature Version 4 signed request, see Authenticating
 //    Requests: Using Query Parameters (AWS Signature Version 4) (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
-//    and  Signature Version 4 Signing Process (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+//    and Signature Version 4 Signing Process (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 //
 //    * TargetDBClusterSnapshotIdentifier - The identifier for the new copy
 //    of the DB cluster snapshot in the destination AWS Region.
@@ -223,10 +215,10 @@ const opCopyDBClusterSnapshot = "CopyDBClusterSnapshot"
 // DB cluster snapshot is in "copying" status.
 //
 // For more information on copying encrypted DB cluster snapshots from one AWS
-// Region to another, see  Copying a Snapshot (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html)
+// Region to another, see Copying a Snapshot (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html)
 // in the Amazon Aurora User Guide.
 //
-// For more information on Amazon Aurora, see  What Is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// For more information on Amazon Aurora, see What Is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide.
 //
 // This action only applies to Aurora DB clusters.

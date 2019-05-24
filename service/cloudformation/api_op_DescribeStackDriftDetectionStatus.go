@@ -55,9 +55,8 @@ type DescribeStackDriftDetectionStatusOutput struct {
 	//    * DETECTION_COMPLETE: The stack drift detection operation has successfully
 	//    completed for all resources in the stack that support drift detection.
 	//    (Resources that do not currently support stack detection remain unchecked.)
-	//
-	// If you specified logical resource IDs for AWS CloudFormation to use as a
-	//    filter for the stack drift detection operation, only the resources with
+	//    If you specified logical resource IDs for AWS CloudFormation to use as
+	//    a filter for the stack drift detection operation, only the resources with
 	//    those logical IDs are checked for drift.
 	//
 	//    * DETECTION_FAILED: The stack drift detection operation has failed for

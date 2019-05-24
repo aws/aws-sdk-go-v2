@@ -68,11 +68,15 @@ const opDisconnectCustomKeyStore = "DisconnectCustomKeyStore"
 // operations will fail. This action can prevent users from storing and accessing
 // sensitive data.
 //
-// To find the connection state of a custom key store, use the DescribeCustomKeyStoresoperation. To reconnect a custom key store, use the ConnectCustomKeyStoreoperation.
+// To find the connection state of a custom key store, use the DescribeCustomKeyStores
+// operation. To reconnect a custom key store, use the ConnectCustomKeyStore
+// operation.
 //
 // If the operation succeeds, it returns a JSON object with no properties.
 //
 // This operation is part of the Custom Key Store feature (http://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
+// feature in AWS KMS, which combines the convenience and extensive integration
+// of AWS KMS with the isolation and control of a single-tenant key store.
 //
 //    // Example sending a request using DisconnectCustomKeyStoreRequest.
 //    req := client.DisconnectCustomKeyStoreRequest(params)

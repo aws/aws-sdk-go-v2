@@ -178,7 +178,7 @@ const opUpdateSecret = "UpdateSecret"
 // AWS Secrets Manager.
 //
 // Modifies many of the details of the specified secret. If you include a ClientRequestToken
-// and eitherSecretString or SecretBinary then it also creates a new version
+// and either SecretString or SecretBinary then it also creates a new version
 // attached to the secret.
 //
 // To modify the rotation configuration of a secret, use RotateSecret instead.
@@ -196,27 +196,27 @@ const opUpdateSecret = "UpdateSecret"
 //    Secrets Manager automatically attaches the staging label AWSCURRENT to
 //    the new version.
 //
-// If you call an operation that needs to encrypt or decrypt the SecretString
-// or SecretBinary for a secret in the same account as the calling user and
-// that secret doesn't specify a AWS KMS encryption key, Secrets Manager uses
-// the account's default AWS managed customer master key (CMK) with the alias
-// aws/secretsmanager. If this key doesn't already exist in your account then
-// Secrets Manager creates it for you automatically. All users and roles in
-// the same AWS account automatically have access to use the default CMK. Note
-// that if an Secrets Manager API call results in AWS having to create the account's
-// AWS-managed CMK, it can result in a one-time significant delay in returning
-// the result.
+//    * If you call an operation that needs to encrypt or decrypt the SecretString
+//    or SecretBinary for a secret in the same account as the calling user and
+//    that secret doesn't specify a AWS KMS encryption key, Secrets Manager
+//    uses the account's default AWS managed customer master key (CMK) with
+//    the alias aws/secretsmanager. If this key doesn't already exist in your
+//    account then Secrets Manager creates it for you automatically. All users
+//    and roles in the same AWS account automatically have access to use the
+//    default CMK. Note that if an Secrets Manager API call results in AWS having
+//    to create the account's AWS-managed CMK, it can result in a one-time significant
+//    delay in returning the result.
 //
-// If the secret is in a different AWS account from the credentials calling
-// an API that requires encryption or decryption of the secret value then you
-// must create and use a custom AWS KMS CMK because you can't access the default
-// CMK for the account using credentials from a different AWS account. Store
-// the ARN of the CMK in the secret when you create the secret or when you update
-// it by including it in the KMSKeyId. If you call an API that must encrypt
-// or decrypt SecretString or SecretBinary using credentials from a different
-// account then the AWS KMS key policy must grant cross-account access to that
-// other account's user or role for both the kms:GenerateDataKey and kms:Decrypt
-// operations.
+//    * If the secret is in a different AWS account from the credentials calling
+//    an API that requires encryption or decryption of the secret value then
+//    you must create and use a custom AWS KMS CMK because you can't access
+//    the default CMK for the account using credentials from a different AWS
+//    account. Store the ARN of the CMK in the secret when you create the secret
+//    or when you update it by including it in the KMSKeyId. If you call an
+//    API that must encrypt or decrypt SecretString or SecretBinary using credentials
+//    from a different account then the AWS KMS key policy must grant cross-account
+//    access to that other account's user or role for both the kms:GenerateDataKey
+//    and kms:Decrypt operations.
 //
 // Minimum permissions
 //

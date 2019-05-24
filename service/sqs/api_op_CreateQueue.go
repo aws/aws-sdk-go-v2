@@ -42,19 +42,15 @@ type CreateQueueInput struct {
 	//    queue functionality of the source queue. For more information about the
 	//    redrive policy and dead-letter queues, see Using Amazon SQS Dead-Letter
 	//    Queues (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)
-	//    in the Amazon Simple Queue Service Developer Guide.
-	//
-	// deadLetterTargetArn - The Amazon Resource Name (ARN) of the dead-letter queue
-	//    to which Amazon SQS moves messages after the value of maxReceiveCount
-	//    is exceeded.
-	//
-	// maxReceiveCount - The number of times a message is delivered to the source
-	//    queue before being moved to the dead-letter queue. When the ReceiveCount
-	//    for a message exceeds the maxReceiveCount for a queue, Amazon SQS moves
-	//    the message to the dead-letter-queue.
-	//
-	// The dead-letter queue of a FIFO queue must also be a FIFO queue. Similarly,
-	//    the dead-letter queue of a standard queue must also be a standard queue.
+	//    in the Amazon Simple Queue Service Developer Guide. deadLetterTargetArn
+	//    - The Amazon Resource Name (ARN) of the dead-letter queue to which Amazon
+	//    SQS moves messages after the value of maxReceiveCount is exceeded. maxReceiveCount
+	//    - The number of times a message is delivered to the source queue before
+	//    being moved to the dead-letter queue. When the ReceiveCount for a message
+	//    exceeds the maxReceiveCount for a queue, Amazon SQS moves the message
+	//    to the dead-letter-queue. The dead-letter queue of a FIFO queue must also
+	//    be a FIFO queue. Similarly, the dead-letter queue of a standard queue
+	//    must also be a standard queue.
 	//
 	//    * VisibilityTimeout - The visibility timeout for the queue, in seconds.
 	//    Valid values: An integer from 0 to 43,200 (12 hours). Default: 30. For
@@ -67,7 +63,7 @@ type CreateQueueInput struct {
 	//    * KmsMasterKeyId - The ID of an AWS-managed customer master key (CMK)
 	//    for Amazon SQS or a custom CMK. For more information, see Key Terms (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms).
 	//    While the alias of the AWS-managed CMK for Amazon SQS is always alias/aws/sqs,
-	//    the alias of a custom CMK can, for example, be alias/MyAlias. For more
+	//    the alias of a custom CMK can, for example, be alias/MyAlias . For more
 	//    examples, see KeyId (http://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters)
 	//    in the AWS Key Management Service API Reference.
 	//
@@ -80,45 +76,33 @@ type CreateQueueInput struct {
 	//    Free Tier. For more information, see How Does the Data Key Reuse Period
 	//    Work? (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work).
 	//
-	//
 	// The following attributes apply only to FIFO (first-in-first-out) queues (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html):
 	//
 	//    * FifoQueue - Designates a queue as FIFO. Valid values: true, false. You
 	//    can provide this attribute only during queue creation. You can't change
 	//    it for an existing queue. When you set this attribute, you must also provide
-	//    the MessageGroupId for your messages explicitly.
-	//
-	// For more information, see FIFO Queue Logic (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic)
+	//    the MessageGroupId for your messages explicitly. For more information,
+	//    see FIFO Queue Logic (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic)
 	//    in the Amazon Simple Queue Service Developer Guide.
 	//
 	//    * ContentBasedDeduplication - Enables content-based deduplication. Valid
 	//    values: true, false. For more information, see Exactly-Once Processing
 	//    (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing)
-	//    in the Amazon Simple Queue Service Developer Guide.
-	//
-	// Every message must have a unique MessageDeduplicationId,
-	//
-	// You may provide a MessageDeduplicationId explicitly.
-	//
-	// If you aren't able to provide a MessageDeduplicationId and you enable ContentBasedDeduplication
-	//    for your queue, Amazon SQS uses a SHA-256 hash to generate the MessageDeduplicationId
-	//    using the body of the message (but not the attributes of the message).
-	//
-	//
-	// If you don't provide a MessageDeduplicationId and the queue doesn't have
-	//    ContentBasedDeduplication set, the action fails with an error.
-	//
-	// If the queue has ContentBasedDeduplication set, your MessageDeduplicationId
-	//    overrides the generated one.
-	//
-	// When ContentBasedDeduplication is in effect, messages with identical content
-	//    sent within the deduplication interval are treated as duplicates and only
-	//    one copy of the message is delivered.
-	//
-	// If you send one message with ContentBasedDeduplication enabled and then another
-	//    message with a MessageDeduplicationId that is the same as the one generated
-	//    for the first MessageDeduplicationId, the two messages are treated as
-	//    duplicates and only one copy of the message is delivered.
+	//    in the Amazon Simple Queue Service Developer Guide. Every message must
+	//    have a unique MessageDeduplicationId, You may provide a MessageDeduplicationId
+	//    explicitly. If you aren't able to provide a MessageDeduplicationId and
+	//    you enable ContentBasedDeduplication for your queue, Amazon SQS uses a
+	//    SHA-256 hash to generate the MessageDeduplicationId using the body of
+	//    the message (but not the attributes of the message). If you don't provide
+	//    a MessageDeduplicationId and the queue doesn't have ContentBasedDeduplication
+	//    set, the action fails with an error. If the queue has ContentBasedDeduplication
+	//    set, your MessageDeduplicationId overrides the generated one. When ContentBasedDeduplication
+	//    is in effect, messages with identical content sent within the deduplication
+	//    interval are treated as duplicates and only one copy of the message is
+	//    delivered. If you send one message with ContentBasedDeduplication enabled
+	//    and then another message with a MessageDeduplicationId that is the same
+	//    as the one generated for the first MessageDeduplicationId, the two messages
+	//    are treated as duplicates and only one copy of the message is delivered.
 	Attributes map[string]string `locationName:"Attribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
 
 	// The name of the new queue. The following limits apply to this name:
@@ -178,13 +162,11 @@ const opCreateQueue = "CreateQueue"
 // in the request. Keep the following caveats in mind:
 //
 //    * If you don't specify the FifoQueue attribute, Amazon SQS creates a standard
-//    queue.
-//
-//  You can't change the queue type after you create it and you can't convert
-//    an existing standard queue into a FIFO queue. You must either create a
-//    new FIFO queue for your application or delete your existing standard queue
-//    and recreate it as a FIFO queue. For more information, see Moving From
-//    a Standard Queue to a FIFO Queue (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-moving)
+//    queue. You can't change the queue type after you create it and you can't
+//    convert an existing standard queue into a FIFO queue. You must either
+//    create a new FIFO queue for your application or delete your existing standard
+//    queue and recreate it as a FIFO queue. For more information, see Moving
+//    From a Standard Queue to a FIFO Queue (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-moving)
 //    in the Amazon Simple Queue Service Developer Guide.
 //
 //    * If you don't provide a value for an attribute, the queue is created

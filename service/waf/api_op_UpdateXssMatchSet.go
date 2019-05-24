@@ -116,9 +116,7 @@ const opUpdateXssMatchSet = "UpdateXssMatchSet"
 //
 //    * TextTransformation: Which text transformation, if any, to perform on
 //    the web request before inspecting the request for cross-site scripting
-//    attacks.
-//
-// You can only specify a single type of TextTransformation.
+//    attacks. You can only specify a single type of TextTransformation.
 //
 // You use XssMatchSet objects to specify which CloudFront requests that you
 // want to allow, block, or count. For example, if you're receiving requests

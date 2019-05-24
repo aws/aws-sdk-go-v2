@@ -131,7 +131,7 @@ const opBacktrackDBCluster = "BacktrackDBCluster"
 //
 // Backtracks a DB cluster to a specific time, without creating a new DB cluster.
 //
-// For more information on backtracking, see  Backtracking an Aurora DB Cluster
+// For more information on backtracking, see Backtracking an Aurora DB Cluster
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Backtrack.html)
 // in the Amazon Aurora User Guide.
 //

@@ -87,8 +87,8 @@ type GetDataSourceOutput struct {
 	DataSourceId *string `min:"1" type:"string"`
 
 	// The schema used by all of the data files of this DataSource.
-	//
-	// NoteThis parameter is provided as part of the verbose format.
+	//  Note
+	// This parameter is provided as part of the verbose format.
 	DataSourceSchema *string `type:"string"`
 
 	// The epoch time when Amazon Machine Learning marked the DataSource as COMPLETED
@@ -131,10 +131,14 @@ type GetDataSourceOutput struct {
 	// values:
 	//
 	//    * PENDING - Amazon ML submitted a request to create a DataSource.
+	//
 	//    * INPROGRESS - The creation process is underway.
+	//
 	//    * FAILED - The request to create a DataSource did not run to completion.
 	//    It is not usable.
+	//
 	//    * COMPLETED - The creation process completed successfully.
+	//
 	//    * DELETED - The DataSource is marked as deleted. It is not usable.
 	Status EntityStatus `type:"string" enum:"true"`
 }

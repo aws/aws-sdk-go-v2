@@ -678,12 +678,14 @@ type EmailConfigurationType struct {
 	// email functionality or your Amazon SES email configuration. Specify one of
 	// the following values:
 	//
-	// COGNITO_DEFAULTWhen Amazon Cognito emails your users, it uses its built-in
-	// email functionality. When you use the default option, Amazon Cognito allows
-	// only a limited number of emails each day for your user pool. For typical
-	// production environments, the default email limit is below the required delivery
-	// volume. To achieve a higher delivery volume, specify DEVELOPER to use your
-	// Amazon SES email configuration.
+	// COGNITO_DEFAULT
+	//
+	// When Amazon Cognito emails your users, it uses its built-in email functionality.
+	// When you use the default option, Amazon Cognito allows only a limited number
+	// of emails each day for your user pool. For typical production environments,
+	// the default email limit is below the required delivery volume. To achieve
+	// a higher delivery volume, specify DEVELOPER to use your Amazon SES email
+	// configuration.
 	//
 	// To look up the email delivery limit for the default option, see Limits in
 	// Amazon Cognito (https://docs.aws.amazon.com/cognito/latest/developerguide/limits.html)
@@ -693,7 +695,9 @@ type EmailConfigurationType struct {
 	// the FROM address, provide the ARN of an Amazon SES verified email address
 	// for the SourceArn parameter.
 	//
-	// DEVELOPERWhen Amazon Cognito emails your users, it uses your Amazon SES configuration.
+	// DEVELOPER
+	//
+	// When Amazon Cognito emails your users, it uses your Amazon SES configuration.
 	// Amazon Cognito calls Amazon SES on your behalf to send email from your verified
 	// email address. When you use this option, the email delivery limits are the
 	// same limits that apply to your Amazon SES verified email address in your

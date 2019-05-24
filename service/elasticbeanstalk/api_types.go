@@ -1311,7 +1311,7 @@ func (s PlatformDescription) String() string {
 //
 // The filter is evaluated as the expression:
 //
-// TypeOperatorValues[i]
+// Type Operator Values[i]
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/PlatformFilter
 type PlatformFilter struct {
 	_ struct{} `type:"structure"`

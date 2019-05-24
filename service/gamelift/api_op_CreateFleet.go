@@ -44,7 +44,7 @@ type CreateFleetInput struct {
 	// Indicates whether to use on-demand instances or spot instances for this fleet.
 	// If empty, the default is ON_DEMAND. Both categories of instances use identical
 	// hardware and configurations based on the instance type selected for this
-	// fleet. Learn more about  On-Demand versus Spot Instances (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html#gamelift-ec2-instances-spot).
+	// fleet. Learn more about On-Demand versus Spot Instances (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html#gamelift-ec2-instances-spot).
 	FleetType FleetType `type:"string" enum:"true"`
 
 	// Unique identifier for an AWS IAM role that manages access to your AWS services.
@@ -53,7 +53,7 @@ type CreateFleetInput struct {
 	// daemons (background processes). Create a role or look up a role's ARN using
 	// the IAM dashboard (https://console.aws.amazon.com/iam/) in the AWS Management
 	// Console. Learn more about using on-box credentials for your game servers
-	// at  Access external resources from a game server (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html).
+	// at Access external resources from a game server (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html).
 	InstanceRoleArn *string `min:"1" type:"string"`
 
 	// This parameter is no longer used. Instead, to specify where Amazon GameLift
@@ -218,7 +218,7 @@ const opCreateFleet = "CreateFleet"
 // instance in the fleet.
 //
 // When creating a Realtime Servers fleet, we recommend using a minimal version
-// of the Realtime script (see this  working code example  (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-script.html#realtime-script-examples)).
+// of the Realtime script (see this working code example (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-script.html#realtime-script-examples)).
 // This will make it much easier to troubleshoot any fleet creation issues.
 // Once the fleet is active, you can update your Realtime script as needed.
 //
@@ -229,10 +229,9 @@ const opCreateFleet = "CreateFleet"
 //    * Creates a fleet record. Status: NEW.
 //
 //    * Begins writing events to the fleet event log, which can be accessed
-//    in the Amazon GameLift console.
-//
-// Sets the fleet's target capacity to 1 (desired instances), which triggers
-//    Amazon GameLift to start one new EC2 instance.
+//    in the Amazon GameLift console. Sets the fleet's target capacity to 1
+//    (desired instances), which triggers Amazon GameLift to start one new EC2
+//    instance.
 //
 //    * Downloads the game build or Realtime script to the new instance and
 //    installs it. Statuses: DOWNLOADING, VALIDATING, BUILDING.
@@ -246,9 +245,9 @@ const opCreateFleet = "CreateFleet"
 //
 // Learn more
 //
-// Working with Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+//  Working with Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 //
-// Debug Fleet Creation Issues (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html)
+//  Debug Fleet Creation Issues (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html)
 //
 // Related operations
 //
@@ -258,37 +257,14 @@ const opCreateFleet = "CreateFleet"
 //
 //    * DeleteFleet
 //
-//    * Describe fleets:
+//    * Describe fleets: DescribeFleetAttributes DescribeFleetCapacity DescribeFleetPortSettings
+//    DescribeFleetUtilization DescribeRuntimeConfiguration DescribeEC2InstanceLimits
+//    DescribeFleetEvents
 //
-// DescribeFleetAttributes
+//    * Update fleets: UpdateFleetAttributes UpdateFleetCapacity UpdateFleetPortSettings
+//    UpdateRuntimeConfiguration
 //
-// DescribeFleetCapacity
-//
-// DescribeFleetPortSettings
-//
-// DescribeFleetUtilization
-//
-// DescribeRuntimeConfiguration
-//
-// DescribeEC2InstanceLimits
-//
-// DescribeFleetEvents
-//
-//    * Update fleets:
-//
-// UpdateFleetAttributes
-//
-// UpdateFleetCapacity
-//
-// UpdateFleetPortSettings
-//
-// UpdateRuntimeConfiguration
-//
-//    * Manage fleet actions:
-//
-// StartFleetActions
-//
-// StopFleetActions
+//    * Manage fleet actions: StartFleetActions StopFleetActions
 //
 //    // Example sending a request using CreateFleetRequest.
 //    req := client.CreateFleetRequest(params)

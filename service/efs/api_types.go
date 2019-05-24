@@ -95,8 +95,8 @@ type FileSystemDescription struct {
 	// The throughput mode for a file system. There are two throughput modes to
 	// choose from for your file system: bursting and provisioned. You can decrease
 	// your file system's throughput in Provisioned Throughput mode or change between
-	// the throughput modes as long as it’s been more than 24 hours since the last
-	// decrease or throughput mode change.
+	// the throughput modes as long as it’s been more than 24 hours since the
+	// last decrease or throughput mode change.
 	ThroughputMode ThroughputMode `type:"string" enum:"true"`
 }
 
@@ -385,7 +385,7 @@ func (s MountTargetDescription) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A tag is a key-value pair. Allowed characters are letters, white space, and
-// numbers that can be represented in UTF-8, and the following characters: +
+// numbers that can be represented in UTF-8, and the following characters:+
 // - = . _ : /
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/Tag
 type Tag struct {

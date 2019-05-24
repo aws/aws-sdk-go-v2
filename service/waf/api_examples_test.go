@@ -353,7 +353,7 @@ func ExampleClient_DeleteByteMatchSetRequest_shared00() {
 
 // To delete an IP set
 //
-// The following example deletes an IP match set  with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+// The following example deletes an IP match set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
 func ExampleClient_DeleteIPSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -445,7 +445,7 @@ func ExampleClient_DeleteRuleRequest_shared00() {
 
 // To delete a size constraint set
 //
-// The following example deletes a size constraint set  with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+// The following example deletes a size constraint set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
 func ExampleClient_DeleteSizeConstraintSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -491,7 +491,7 @@ func ExampleClient_DeleteSizeConstraintSetRequest_shared00() {
 
 // To delete a SQL injection match set
 //
-// The following example deletes a SQL injection match set  with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
+// The following example deletes a SQL injection match set with the ID example1ds3t-46da-4fdb-b8d5-abc321j569j5.
 func ExampleClient_DeleteSqlInjectionMatchSetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {

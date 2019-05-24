@@ -48,7 +48,7 @@ type DescribeReservedInstancesOfferingsInput struct {
 	//    SUSE Linux (Amazon VPC) | Red Hat Enterprise Linux | Red Hat Enterprise
 	//    Linux (Amazon VPC) | Windows | Windows (Amazon VPC) | Windows with SQL
 	//    Server Standard | Windows with SQL Server Standard (Amazon VPC) | Windows
-	//    with SQL Server Web |  Windows with SQL Server Web (Amazon VPC) | Windows
+	//    with SQL Server Web | Windows with SQL Server Web (Amazon VPC) | Windows
 	//    with SQL Server Enterprise | Windows with SQL Server Enterprise (Amazon
 	//    VPC))
 	//

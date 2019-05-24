@@ -20,8 +20,8 @@ type StartExportTaskInput struct {
 	// the most recent data collected by the agent.
 	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
 
-	// The file format for the returned export data. Default value is CSV. Note:TheGRAPHMLoption
-	// has been deprecated.
+	// The file format for the returned export data. Default value is CSV. Note:
+	// The GRAPHML option has been deprecated.
 	ExportDataFormat []ExportDataFormat `locationName:"exportDataFormat" type:"list"`
 
 	// If a filter is present, it selects the single agentId of the Application

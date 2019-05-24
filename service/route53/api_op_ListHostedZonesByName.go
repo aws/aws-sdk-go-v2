@@ -224,10 +224,9 @@ const opListHostedZonesByName = "ListHostedZonesByName"
 //    the current response.
 //
 //    * If the value of IsTruncated in the response is true, there are more
-//    hosted zones associated with the current AWS account.
-//
-// If IsTruncated is false, this response includes the last hosted zone that
-//    is associated with the current account. The NextDNSName element and NextHostedZoneId
+//    hosted zones associated with the current AWS account. If IsTruncated is
+//    false, this response includes the last hosted zone that is associated
+//    with the current account. The NextDNSName element and NextHostedZoneId
 //    elements are omitted from the response.
 //
 //    * The NextDNSName and NextHostedZoneId elements in the response contain

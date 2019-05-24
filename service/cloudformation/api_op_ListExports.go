@@ -63,8 +63,7 @@ const opListExports = "ListExports"
 // import into other stacks. To import values, use the Fn::ImportValue (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html)
 // function.
 //
-// For more information, see  AWS CloudFormation Export Stack Output Values
-// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-exports.html).
+// For more information, see AWS CloudFormation Export Stack Output Values (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-exports.html).
 //
 //    // Example sending a request using ListExportsRequest.
 //    req := client.ListExportsRequest(params)

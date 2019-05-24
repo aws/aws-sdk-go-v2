@@ -87,7 +87,6 @@ type DescribeInstancesInput struct {
 	//
 	//    * instance.group-name - The name of the security group for the instance.
 	//
-	//
 	//    * ip-address - The public IPv4 address of the instance.
 	//
 	//    * kernel-id - The kernel ID.
@@ -96,7 +95,6 @@ type DescribeInstancesInput struct {
 	//
 	//    * launch-index - When launching multiple instances, this is the index
 	//    for the instance in the launch group (for example, 0, 1, 2, and so on).
-	//
 	//
 	//    * launch-time - The time when the instance was launched.
 	//

@@ -71,7 +71,7 @@ type ModifyClusterInput struct {
 	// cluster is deleted and your connection is switched to the new cluster. You
 	// can use DescribeResize to track the progress of the resize request.
 	//
-	// Valid Values:  multi-node | single-node
+	// Valid Values: multi-node | single-node
 	ClusterType *string `type:"string"`
 
 	// The new version number of the Amazon Redshift engine to upgrade to.

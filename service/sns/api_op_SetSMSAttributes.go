@@ -32,8 +32,8 @@ type SetSMSAttributesInput struct {
 	// Description field, explain that you are requesting an SMS monthly spend limit
 	// increase.
 	//
-	// DeliveryStatusIAMRole – The ARN of the IAM role that allows Amazon SNS to
-	// write logs about SMS deliveries in CloudWatch Logs. For each SMS message
+	// DeliveryStatusIAMRole – The ARN of the IAM role that allows Amazon SNS
+	// to write logs about SMS deliveries in CloudWatch Logs. For each SMS message
 	// that you send, Amazon SNS writes a log that includes the message price, the
 	// success or failure status, the reason for failure (if the message failed),
 	// the message dwell time, and other information.
@@ -49,8 +49,8 @@ type SetSMSAttributesInput struct {
 	// The sender ID can be 1 - 11 alphanumeric characters, and it must contain
 	// at least one letter.
 	//
-	// DefaultSMSType – The type of SMS message that you will send by default. You
-	// can assign the following values:
+	// DefaultSMSType – The type of SMS message that you will send by default.
+	// You can assign the following values:
 	//
 	//    * Promotional – (Default) Noncritical messages, such as marketing messages.
 	//    Amazon SNS optimizes the message delivery to incur the lowest cost.
@@ -59,8 +59,8 @@ type SetSMSAttributesInput struct {
 	//    such as one-time passcodes for multi-factor authentication. Amazon SNS
 	//    optimizes the message delivery to achieve the highest reliability.
 	//
-	// UsageReportS3Bucket – The name of the Amazon S3 bucket to receive daily SMS
-	// usage reports from Amazon SNS. Each day, Amazon SNS will deliver a usage
+	// UsageReportS3Bucket – The name of the Amazon S3 bucket to receive daily
+	// SMS usage reports from Amazon SNS. Each day, Amazon SNS will deliver a usage
 	// report as a CSV file to the bucket. The report includes the following information
 	// for each SMS message that was successfully delivered by your account:
 	//

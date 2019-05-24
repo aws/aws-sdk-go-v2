@@ -193,13 +193,8 @@ const opStartGameSessionPlacement = "StartGameSessionPlacement"
 //
 //    * GetGameSessionLogUrl
 //
-//    * Game session placements
-//
-// StartGameSessionPlacement
-//
-// DescribeGameSessionPlacement
-//
-// StopGameSessionPlacement
+//    * Game session placements StartGameSessionPlacement DescribeGameSessionPlacement
+//    StopGameSessionPlacement
 //
 //    // Example sending a request using StartGameSessionPlacementRequest.
 //    req := client.StartGameSessionPlacementRequest(params)

@@ -100,7 +100,7 @@ const opListOrganizationalUnitsForParent = "ListOrganizationalUnitsForParent"
 // Always check the NextToken response parameter for a null value when calling
 // a List* operation. These operations can occasionally return an empty set
 // of results even when there are more results available. The NextToken response
-// parameter value is nullonly when there are no more results to display.
+// parameter value is null only when there are no more results to display.
 //
 // This operation can be called only from the organization's master account.
 //

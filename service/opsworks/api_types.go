@@ -60,7 +60,7 @@ type App struct {
 	// An array of EnvironmentVariable objects that specify environment variables
 	// to be associated with the app. After you deploy the app, these variables
 	// are defined on the associated app server instances. For more information,
-	// see  Environment Variables (http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment).
+	// see Environment Variables (http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment).
 	//
 	// There is no specific limit on the number of environment variables. However,
 	// the size of the associated data structure - which includes the variable names,
@@ -753,7 +753,7 @@ type Instance struct {
 	// For container instances, the instance's ARN.
 	EcsContainerInstanceArn *string `type:"string"`
 
-	// The instance Elastic IP address  (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html).
+	// The instance Elastic IP address (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html).
 	ElasticIp *string `type:"string"`
 
 	// The instance host name.
@@ -1796,7 +1796,7 @@ type Volume struct {
 	// The volume ID.
 	VolumeId *string `type:"string"`
 
-	// The volume type. For more information, see  Amazon EBS Volume Types (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html).
+	// The volume type. For more information, see Amazon EBS Volume Types (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html).
 	//
 	//    * standard - Magnetic. Magnetic volumes must have a minimum size of 1
 	//    GiB and a maximum size of 1024 GiB.
@@ -1851,7 +1851,7 @@ type VolumeConfiguration struct {
 	// Size is a required field
 	Size *int64 `type:"integer" required:"true"`
 
-	// The volume type. For more information, see  Amazon EBS Volume Types (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html).
+	// The volume type. For more information, see Amazon EBS Volume Types (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html).
 	//
 	//    * standard - Magnetic. Magnetic volumes must have a minimum size of 1
 	//    GiB and a maximum size of 1024 GiB.

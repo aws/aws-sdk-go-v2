@@ -84,8 +84,8 @@ type DescribeChangeSetOutput struct {
 	Description *string `min:"1" type:"string"`
 
 	// If the change set execution status is AVAILABLE, you can execute the change
-	// set. If you can’t execute the change set, the status indicates why. For example,
-	// a change set might be in an UNAVAILABLE state because AWS CloudFormation
+	// set. If you can’t execute the change set, the status indicates why. For
+	// example, a change set might be in an UNAVAILABLE state because AWS CloudFormation
 	// is still creating it or in an OBSOLETE state because the stack was already
 	// updated.
 	ExecutionStatus ExecutionStatus `type:"string" enum:"true"`

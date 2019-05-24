@@ -356,7 +356,6 @@ func ExampleClient_DeleteCertificateRequest_shared00() {
 //
 // Deletes the specified endpoint. All tasks associated with the endpoint must be deleted
 // before you can delete the endpoint.
-//
 func ExampleClient_DeleteEndpointRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -395,7 +394,6 @@ func ExampleClient_DeleteEndpointRequest_shared00() {
 //
 // Deletes the specified replication instance. You must delete any migration tasks that
 // are associated with the replication instance before you can delete it.
-//
 func ExampleClient_DeleteReplicationInstanceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {

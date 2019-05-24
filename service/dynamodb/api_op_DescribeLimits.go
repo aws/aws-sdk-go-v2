@@ -84,13 +84,14 @@ const opDescribeLimits = "DescribeLimits"
 //
 // For each table name listed by ListTables, do the following:
 //
-// Call DescribeTable with the table name.
+//    * Call DescribeTable with the table name.
 //
-// Use the data returned by DescribeTable to add the read capacity units and
-// write capacity units provisioned for the table itself to your variables.
+//    * Use the data returned by DescribeTable to add the read capacity units
+//    and write capacity units provisioned for the table itself to your variables.
 //
-// If the table has one or more global secondary indexes (GSIs), loop over these
-// GSIs and add their provisioned capacity values to your variables as well.
+//    * If the table has one or more global secondary indexes (GSIs), loop over
+//    these GSIs and add their provisioned capacity values to your variables
+//    as well.
 //
 // Report the account limits for that region returned by DescribeLimits, along
 // with the total current provisioned capacity levels you have calculated.

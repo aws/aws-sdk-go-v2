@@ -124,7 +124,7 @@ const opDeleteGroup = "DeleteGroup"
 //
 // Removes a user group from Amazon QuickSight.
 //
-// The permissions resource is arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/<group-name>.
+// The permissions resource is arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/<group-name> .
 //
 // CLI Sample:
 //

@@ -128,41 +128,19 @@ type ModifyCacheClusterInput struct {
 	//
 	// Impact of new add/remove requests upon pending requests
 	//
-	//    * Scenario-1
+	//    * Scenario-1 Pending Action: Delete New Request: Delete Result: The new
+	//    delete, pending or immediate, replaces the pending delete.
 	//
-	// Pending Action: Delete
+	//    * Scenario-2 Pending Action: Delete New Request: Create Result: The new
+	//    create, pending or immediate, replaces the pending delete.
 	//
-	// New Request: Delete
+	//    * Scenario-3 Pending Action: Create New Request: Delete Result: The new
+	//    delete, pending or immediate, replaces the pending create.
 	//
-	// Result: The new delete, pending or immediate, replaces the pending delete.
-	//
-	//    * Scenario-2
-	//
-	// Pending Action: Delete
-	//
-	// New Request: Create
-	//
-	// Result: The new create, pending or immediate, replaces the pending delete.
-	//
-	//    * Scenario-3
-	//
-	// Pending Action: Create
-	//
-	// New Request: Delete
-	//
-	// Result: The new delete, pending or immediate, replaces the pending create.
-	//
-	//    * Scenario-4
-	//
-	// Pending Action: Create
-	//
-	// New Request: Create
-	//
-	// Result: The new create is added to the pending create.
-	//
-	// Important: If the new create request is Apply Immediately - Yes, all creates
-	//    are performed immediately. If the new create request is Apply Immediately
-	//    - No, all creates are pending.
+	//    * Scenario-4 Pending Action: Create New Request: Create Result: The new
+	//    create is added to the pending create. Important: If the new create request
+	//    is Apply Immediately - Yes, all creates are performed immediately. If
+	//    the new create request is Apply Immediately - No, all creates are pending.
 	NewAvailabilityZones []string `locationNameList:"PreferredAvailabilityZone" type:"list"`
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications

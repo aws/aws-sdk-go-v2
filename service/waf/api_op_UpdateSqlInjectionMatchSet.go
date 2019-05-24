@@ -117,9 +117,7 @@ const opUpdateSqlInjectionMatchSet = "UpdateSqlInjectionMatchSet"
 //
 //    * TextTransformation: Which text transformation, if any, to perform on
 //    the web request before inspecting the request for snippets of malicious
-//    SQL code.
-//
-// You can only specify a single type of TextTransformation.
+//    SQL code. You can only specify a single type of TextTransformation.
 //
 // You use SqlInjectionMatchSet objects to specify which CloudFront requests
 // that you want to allow, block, or count. For example, if you're receiving

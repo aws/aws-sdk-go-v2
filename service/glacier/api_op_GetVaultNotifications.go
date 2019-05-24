@@ -117,7 +117,7 @@ const opGetVaultNotifications = "GetVaultNotifications"
 //
 // For conceptual information and underlying REST API, see Configuring Vault
 // Notifications in Amazon Glacier (http://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html)
-// and Get Vault Notification Configuration  (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-get.html)
+// and Get Vault Notification Configuration (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-get.html)
 // in the Amazon Glacier Developer Guide.
 //
 //    // Example sending a request using GetVaultNotificationsRequest.

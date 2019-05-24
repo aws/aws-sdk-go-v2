@@ -108,17 +108,7 @@ const opCreateService = "CreateService"
 // Creates a service, which defines the configuration for the following entities:
 //
 //    * For public and private DNS namespaces, one of the following combinations
-//    of DNS records in Amazon Route 53:
-//
-// A
-//
-// AAAA
-//
-// A and AAAA
-//
-// SRV
-//
-// CNAME
+//    of DNS records in Amazon Route 53: A AAAA A and AAAA SRV CNAME
 //
 //    * Optionally, a health check
 //

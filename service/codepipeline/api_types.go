@@ -1900,12 +1900,12 @@ type WebhookDefinition struct {
 
 	// Supported options are GITHUB_HMAC, IP and UNAUTHENTICATED.
 	//
-	//    *  GITHUB_HMAC implements the authentication scheme described here: https://developer.github.com/webhooks/securing/
+	//    * GITHUB_HMAC implements the authentication scheme described here: https://developer.github.com/webhooks/securing/
 	//
-	//    *  IP will reject webhooks trigger requests unless they originate from
+	//    * IP will reject webhooks trigger requests unless they originate from
 	//    an IP within the IP range whitelisted in the authentication configuration.
 	//
-	//    *  UNAUTHENTICATED will accept all webhook trigger requests regardless
+	//    * UNAUTHENTICATED will accept all webhook trigger requests regardless
 	//    of origin.
 	//
 	// Authentication is a required field

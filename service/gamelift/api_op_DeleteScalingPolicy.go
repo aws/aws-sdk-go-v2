@@ -82,19 +82,10 @@ const opDeleteScalingPolicy = "DeleteScalingPolicy"
 //
 //    * DescribeEC2InstanceLimits
 //
-//    * Manage scaling policies:
+//    * Manage scaling policies: PutScalingPolicy (auto-scaling) DescribeScalingPolicies
+//    (auto-scaling) DeleteScalingPolicy (auto-scaling)
 //
-// PutScalingPolicy (auto-scaling)
-//
-// DescribeScalingPolicies (auto-scaling)
-//
-// DeleteScalingPolicy (auto-scaling)
-//
-//    * Manage fleet actions:
-//
-// StartFleetActions
-//
-// StopFleetActions
+//    * Manage fleet actions: StartFleetActions StopFleetActions
 //
 //    // Example sending a request using DeleteScalingPolicyRequest.
 //    req := client.DeleteScalingPolicyRequest(params)

@@ -96,7 +96,7 @@ const opUpdateRuntimeConfiguration = "UpdateRuntimeConfiguration"
 //
 // Learn more
 //
-// Working with Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html).
+//  Working with Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html).
 //
 // Related operations
 //
@@ -106,37 +106,14 @@ const opUpdateRuntimeConfiguration = "UpdateRuntimeConfiguration"
 //
 //    * DeleteFleet
 //
-//    * Describe fleets:
+//    * Describe fleets: DescribeFleetAttributes DescribeFleetCapacity DescribeFleetPortSettings
+//    DescribeFleetUtilization DescribeRuntimeConfiguration DescribeEC2InstanceLimits
+//    DescribeFleetEvents
 //
-// DescribeFleetAttributes
+//    * Update fleets: UpdateFleetAttributes UpdateFleetCapacity UpdateFleetPortSettings
+//    UpdateRuntimeConfiguration
 //
-// DescribeFleetCapacity
-//
-// DescribeFleetPortSettings
-//
-// DescribeFleetUtilization
-//
-// DescribeRuntimeConfiguration
-//
-// DescribeEC2InstanceLimits
-//
-// DescribeFleetEvents
-//
-//    * Update fleets:
-//
-// UpdateFleetAttributes
-//
-// UpdateFleetCapacity
-//
-// UpdateFleetPortSettings
-//
-// UpdateRuntimeConfiguration
-//
-//    * Manage fleet actions:
-//
-// StartFleetActions
-//
-// StopFleetActions
+//    * Manage fleet actions: StartFleetActions StopFleetActions
 //
 //    // Example sending a request using UpdateRuntimeConfigurationRequest.
 //    req := client.UpdateRuntimeConfigurationRequest(params)

@@ -25,11 +25,8 @@ type ReceiveMessageInput struct {
 	//    * ApproximateReceiveCount - Returns the number of times a message has
 	//    been received from the queue but not deleted.
 	//
-	//    * SenderId
-	//
-	// For an IAM user, returns the IAM user ID, for example ABCDEFGHI1JKLMNOPQ23R.
-	//
-	// For an IAM role, returns the IAM role ID, for example ABCDE1F2GH3I4JK5LMNOP:i-a123b456.
+	//    * SenderId For an IAM user, returns the IAM user ID, for example ABCDEFGHI1JKLMNOPQ23R.
+	//    For an IAM role, returns the IAM role ID, for example ABCDE1F2GH3I4JK5LMNOP:i-a123b456.
 	//
 	//    * SentTimestamp - Returns the time the message was sent to the queue (epoch
 	//    time (http://en.wikipedia.org/wiki/Unix_time) in milliseconds).
@@ -103,18 +100,15 @@ type ReceiveMessageInput struct {
 	//    return the same messages and receipt handles. If a retry occurs within
 	//    the deduplication interval, it resets the visibility timeout. For more
 	//    information, see Visibility Timeout (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)
-	//    in the Amazon Simple Queue Service Developer Guide.
-	//
-	// If a caller of the ReceiveMessage action still processes messages when the
-	//    visibility timeout expires and messages become visible, another worker
-	//    consuming from the same queue can receive the same messages and therefore
-	//    process duplicates. Also, if a consumer whose message processing time
-	//    is longer than the visibility timeout tries to delete the processed messages,
-	//    the action fails with an error.
-	//
-	// To mitigate this effect, ensure that your application observes a safe threshold
-	//    before the visibility timeout expires and extend the visibility timeout
-	//    as necessary.
+	//    in the Amazon Simple Queue Service Developer Guide. If a caller of the
+	//    ReceiveMessage action still processes messages when the visibility timeout
+	//    expires and messages become visible, another worker consuming from the
+	//    same queue can receive the same messages and therefore process duplicates.
+	//    Also, if a consumer whose message processing time is longer than the visibility
+	//    timeout tries to delete the processed messages, the action fails with
+	//    an error. To mitigate this effect, ensure that your application observes
+	//    a safe threshold before the visibility timeout expires and extend the
+	//    visibility timeout as necessary.
 	//
 	//    * While messages with a particular MessageGroupId are invisible, no more
 	//    messages belonging to the same MessageGroupId are returned until the visibility

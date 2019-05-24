@@ -49,9 +49,8 @@ type CreateRelationalDatabaseInput struct {
 	//
 	//    * The first character must be a letter.
 	//
-	//    * Cannot be a reserved word for the database engine you choose.
-	//
-	// For more information about reserved words in MySQL 5.6 or 5.7, see the Keywords
+	//    * Cannot be a reserved word for the database engine you choose. For more
+	//    information about reserved words in MySQL 5.6 or 5.7, see the Keywords
 	//    and Reserved Words articles for MySQL 5.6 (https://dev.mysql.com/doc/refman/5.6/en/keywords.html)
 	//    or MySQL 5.7 (https://dev.mysql.com/doc/refman/5.7/en/keywords.html) respectively.
 	//
@@ -68,9 +67,7 @@ type CreateRelationalDatabaseInput struct {
 	//
 	// Constraints:
 	//
-	//    * Must be in the hh24:mi-hh24:mi format.
-	//
-	// Example: 16:00-16:30
+	//    * Must be in the hh24:mi-hh24:mi format. Example: 16:00-16:30
 	//
 	//    * Specified in Universal Coordinated Time (UTC).
 	//

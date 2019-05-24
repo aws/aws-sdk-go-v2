@@ -18,8 +18,7 @@ type DescribeApplicationSnapshotInput struct {
 	// ApplicationName is a required field
 	ApplicationName *string `min:"1" type:"string" required:"true"`
 
-	// The identifier of an application snapshot. You can retrieve this value using
-	// .
+	// The identifier of an application snapshot. You can retrieve this value using .
 	//
 	// SnapshotName is a required field
 	SnapshotName *string `min:"1" type:"string" required:"true"`

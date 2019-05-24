@@ -97,7 +97,7 @@ const opStartReplicationTask = "StartReplicationTask"
 // Starts the replication task.
 //
 // For more information about AWS DMS tasks, see Working with Migration Tasks
-//  (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html) in the
+// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html) in the
 // AWS Database Migration Service User Guide.
 //
 //    // Example sending a request using StartReplicationTaskRequest.

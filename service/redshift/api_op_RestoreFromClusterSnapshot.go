@@ -145,7 +145,7 @@ type RestoreFromClusterSnapshotInput struct {
 	// type into another dc1.large instance type or dc2.large instance type. You
 	// can't restore dc1.8xlarge to dc2.8xlarge. First restore to a dc1.8xlareg
 	// cluster, then resize to a dc2.8large cluster. For more information about
-	// node types, see  About Clusters and Nodes (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes)
+	// node types, see About Clusters and Nodes (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes)
 	// in the Amazon Redshift Cluster Management Guide.
 	NodeType *string `type:"string"`
 

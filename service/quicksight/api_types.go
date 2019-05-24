@@ -106,9 +106,9 @@ func (s GroupMember) MarshalFields(e protocol.FieldEncoder) error {
 type User struct {
 	_ struct{} `type:"structure"`
 
-	// Active status of user. When you create an Amazon QuickSight user that’s not
-	// an IAM user or an AD user, that user is inactive until they sign in and provide
-	// a password
+	// Active status of user. When you create an Amazon QuickSight user that’s
+	// not an IAM user or an AD user, that user is inactive until they sign in and
+	// provide a password
 	Active *bool `type:"boolean"`
 
 	// The Amazon Resource Name (ARN) for the user.

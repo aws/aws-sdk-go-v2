@@ -89,11 +89,9 @@ const opDeprecateWorkflowType = "DeprecateWorkflowType"
 //    * Use an Action element to allow or deny permission to call this action.
 //
 //    * Constrain the following parameters by using a Condition element with
-//    the appropriate keys.
-//
-// workflowType.name: String constraint. The key is swf:workflowType.name.
-//
-// workflowType.version: String constraint. The key is swf:workflowType.version.
+//    the appropriate keys. workflowType.name: String constraint. The key is
+//    swf:workflowType.name. workflowType.version: String constraint. The key
+//    is swf:workflowType.version.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.

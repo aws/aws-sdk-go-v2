@@ -27,8 +27,8 @@ type CognitoStreams struct {
 	// the developers account and in the same region as the identity pool.
 	StreamName *string `min:"1" type:"string"`
 
-	// Status of the Cognito streams. Valid values are: ENABLED - Streaming of updates
-	// to identity pool is enabled.
+	// Status of the Cognito streams. Valid values are:
+	// ENABLED - Streaming of updates to identity pool is enabled.
 	//
 	// DISABLED - Streaming of updates to identity pool is disabled. Bulk publish
 	// will also fail if StreamingStatus is DISABLED.

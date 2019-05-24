@@ -116,13 +116,8 @@ const opDescribeGameSessionDetails = "DescribeGameSessionDetails"
 //
 //    * GetGameSessionLogUrl
 //
-//    * Game session placements
-//
-// StartGameSessionPlacement
-//
-// DescribeGameSessionPlacement
-//
-// StopGameSessionPlacement
+//    * Game session placements StartGameSessionPlacement DescribeGameSessionPlacement
+//    StopGameSessionPlacement
 //
 //    // Example sending a request using DescribeGameSessionDetailsRequest.
 //    req := client.DescribeGameSessionDetailsRequest(params)

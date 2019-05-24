@@ -66,7 +66,7 @@ type CreateStreamingDistributionWithTagsOutput struct {
 	ETag *string `location:"header" locationName:"ETag" type:"string"`
 
 	// The fully qualified URI of the new streaming distribution resource just created.
-	// For example: https://cloudfront.amazonaws.com/2010-11-01/streaming-distribution/EGTXBD79H29TRA8.
+	// For example:https://cloudfront.amazonaws.com/2010-11-01/streaming-distribution/EGTXBD79H29TRA8.
 	Location *string `location:"header" locationName:"Location" type:"string"`
 
 	// The streaming distribution's information.

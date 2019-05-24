@@ -74,6 +74,7 @@ func (s UpdateClientCertificateInput) MarshalFields(e protocol.FieldEncoder) err
 // Client certificates are used to authenticate an API by the backend server.
 // To authenticate an API client (or user), use IAM roles and policies, a custom
 // Authorizer or an Amazon Cognito user pool.
+//
 // Use Client-Side Certificate (https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html)
 type UpdateClientCertificateOutput struct {
 	_ struct{} `type:"structure"`

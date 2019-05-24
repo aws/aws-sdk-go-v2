@@ -120,7 +120,7 @@ const opModifyCurrentDBClusterCapacity = "ModifyCurrentDBClusterCapacity"
 //
 // If you call ModifyCurrentDBClusterCapacity with the default TimeoutAction,
 // connections that prevent Aurora Serverless from finding a scaling point might
-// be dropped. For more information about scaling points, see  Autoscaling for
+// be dropped. For more information about scaling points, see Autoscaling for
 // Aurora Serverless (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling)
 // in the Amazon Aurora User Guide.
 //

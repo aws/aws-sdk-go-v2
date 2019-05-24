@@ -23,7 +23,7 @@ type PutSlotTypeInput struct {
 	//
 	// When you want to update a slot type, set the checksum field to the checksum
 	// of the most recent revision of the $LATEST version. If you don't specify
-	// the  checksum field, or if the checksum does not match the $LATEST version,
+	// the checksum field, or if the checksum does not match the $LATEST version,
 	// you get a PreconditionFailedException exception.
 	Checksum *string `locationName:"checksum" type:"string"`
 

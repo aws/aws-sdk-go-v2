@@ -93,6 +93,7 @@ func (s ImportDocumentationPartsInput) MarshalFields(e protocol.FieldEncoder) er
 //
 // This is used to return the result when documentation parts in an external
 // (e.g., OpenAPI) file are imported into API Gateway
+//
 // Documenting an API (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html),
 // documentationpart:import (https://docs.aws.amazon.com/apigateway/api-reference/link-relation/documentationpart-import/),
 // DocumentationPart

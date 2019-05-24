@@ -22,7 +22,7 @@ type DeregisterContainerInstanceInput struct {
 	// The ARN contains the arn:aws:ecs namespace, followed by the Region of the
 	// container instance, the AWS account ID of the container instance owner, the
 	// container-instance namespace, and then the container instance ID. For example,
-	// arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID.
+	// arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID .
 	//
 	// ContainerInstance is a required field
 	ContainerInstance *string `locationName:"containerInstance" type:"string" required:"true"`

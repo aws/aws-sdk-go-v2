@@ -170,7 +170,7 @@ const opUpdateUser = "UpdateUser"
 //
 // Updates an Amazon QuickSight user.
 //
-// The permission resource is arn:aws:quicksight:us-east-1:<aws-account-id>:user/default/<user-name>.
+// The permission resource is arn:aws:quicksight:us-east-1:<aws-account-id>:user/default/<user-name> .
 //
 // The response is a user object that contains the user's Amazon QuickSight
 // user name, email address, active or inactive status in Amazon QuickSight,

@@ -108,7 +108,6 @@ const opCreateCase = "CreateCase"
 //    * issueType. The type of issue for the case. You can specify either "customer-service"
 //    or "technical." If you do not indicate a value, the default is "technical."
 //
-//
 //    * serviceCode. The code for an AWS service. You obtain the serviceCode
 //    by calling DescribeServices.
 //
@@ -138,7 +137,6 @@ const opCreateCase = "CreateCase"
 //    The account that opens the case is already identified by passing the AWS
 //    Credentials in the HTTP POST method or in a method or function call from
 //    one of the programming languages supported by an AWS SDK (http://aws.amazon.com/tools/).
-//
 //
 // To add additional communication or attachments to an existing case, use AddCommunicationToCase.
 //

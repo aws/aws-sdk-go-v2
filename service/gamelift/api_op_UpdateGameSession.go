@@ -104,13 +104,8 @@ const opUpdateGameSession = "UpdateGameSession"
 //
 //    * GetGameSessionLogUrl
 //
-//    * Game session placements
-//
-// StartGameSessionPlacement
-//
-// DescribeGameSessionPlacement
-//
-// StopGameSessionPlacement
+//    * Game session placements StartGameSessionPlacement DescribeGameSessionPlacement
+//    StopGameSessionPlacement
 //
 //    // Example sending a request using UpdateGameSessionRequest.
 //    req := client.UpdateGameSessionRequest(params)

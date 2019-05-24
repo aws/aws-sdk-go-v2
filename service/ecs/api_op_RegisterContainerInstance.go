@@ -106,6 +106,7 @@ const opRegisterContainerInstance = "RegisterContainerInstance"
 // RegisterContainerInstanceRequest returns a request value for making API operation for
 // Amazon EC2 Container Service.
 //
+//
 // This action is only used by the Amazon ECS agent, and it is not intended
 // for use outside of the agent.
 //

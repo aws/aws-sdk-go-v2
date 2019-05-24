@@ -254,7 +254,6 @@ const opCreateTrainingJob = "CreateTrainingJob"
 //    the quality of the final model. For a list of hyperparameters for each
 //    training algorithm provided by Amazon SageMaker, see Algorithms (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html).
 //
-//
 //    * InputDataConfig - Describes the training dataset and the Amazon S3 location
 //    where it is stored.
 //
@@ -273,7 +272,7 @@ const opCreateTrainingJob = "CreateTrainingJob"
 //    * StoppingCondition - Sets a duration for training. Use this parameter
 //    to cap model training costs.
 //
-//  For more information about Amazon SageMaker, see How It Works (https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html)
+// For more information about Amazon SageMaker, see How It Works (https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html).
 //
 //    // Example sending a request using CreateTrainingJobRequest.
 //    req := client.CreateTrainingJobRequest(params)

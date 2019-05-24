@@ -157,13 +157,9 @@ const opListOpenWorkflowExecutions = "ListOpenWorkflowExecutions"
 //    * Use an Action element to allow or deny permission to call this action.
 //
 //    * Constrain the following parameters by using a Condition element with
-//    the appropriate keys.
-//
-// tagFilter.tag: String constraint. The key is swf:tagFilter.tag.
-//
-// typeFilter.name: String constraint. The key is swf:typeFilter.name.
-//
-// typeFilter.version: String constraint. The key is swf:typeFilter.version.
+//    the appropriate keys. tagFilter.tag: String constraint. The key is swf:tagFilter.tag.
+//    typeFilter.name: String constraint. The key is swf:typeFilter.name. typeFilter.version:
+//    String constraint. The key is swf:typeFilter.version.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.

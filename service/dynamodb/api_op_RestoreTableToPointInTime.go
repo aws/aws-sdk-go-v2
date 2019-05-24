@@ -97,10 +97,8 @@ const opRestoreTableToPointInTime = "RestoreTableToPointInTime"
 //
 //    * Provisioned read and write capacity
 //
-//    * Encryption settings
-//
-//  All these settings come from the current settings of the source table at
-//    the time of restore.
+//    * Encryption settings All these settings come from the current settings
+//    of the source table at the time of restore.
 //
 // You must manually set up the following on the restored table:
 //

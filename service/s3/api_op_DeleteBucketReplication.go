@@ -83,7 +83,7 @@ const opDeleteBucketReplication = "DeleteBucketReplication"
 // Amazon Simple Storage Service.
 //
 // Deletes the replication configuration from the bucket. For information about
-// replication configuration, see Cross-Region Replication (CRR) ( https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html)
+// replication configuration, see Cross-Region Replication (CRR) (https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html)
 // in the Amazon S3 Developer Guide.
 //
 //    // Example sending a request using DeleteBucketReplicationRequest.

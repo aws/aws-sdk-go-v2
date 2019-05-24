@@ -67,8 +67,8 @@ const opDeleteEvaluation = "DeleteEvaluation"
 //
 // After invoking the DeleteEvaluation operation, you can use the GetEvaluation
 // operation to verify that the status of the Evaluation changed to DELETED.
-//
-// CautionThe results of the DeleteEvaluation operation are irreversible.
+//  Caution
+// The results of the DeleteEvaluation operation are irreversible.
 //
 //    // Example sending a request using DeleteEvaluationRequest.
 //    req := client.DeleteEvaluationRequest(params)

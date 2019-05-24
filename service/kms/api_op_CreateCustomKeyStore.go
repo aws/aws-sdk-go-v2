@@ -27,9 +27,9 @@ type CreateCustomKeyStoreInput struct {
 	// CustomKeyStoreName is a required field
 	CustomKeyStoreName *string `min:"1" type:"string" required:"true"`
 
-	// Enter the password of the kmsuser (http://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser)
-	// crypto user (CU) account in the specified AWS CloudHSM cluster. AWS KMS logs
-	// into the cluster as this user to manage key material on your behalf.
+	// Enter the password of the kmsuser crypto user (CU) account (http://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser)
+	// in the specified AWS CloudHSM cluster. AWS KMS logs into the cluster as this
+	// user to manage key material on your behalf.
 	//
 	// This parameter tells AWS KMS the kmsuser account password; it does not change
 	// the password in the AWS CloudHSM cluster.
@@ -130,11 +130,11 @@ const opCreateCustomKeyStore = "CreateCustomKeyStore"
 //    cluster. You created this certificate, and saved it in the customerCA.crt
 //    file, when you initialized the cluster (http://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html#sign-csr).
 //
-//    * You must provide the password of the dedicated kmsuser (http://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser)
-//    crypto user (CU) account in the cluster.
-//
-// Before you create the custom key store, use the createUser (http://docs.aws.amazon.com/cloudhsm/latest/userguide/cloudhsm_mgmt_util-createUser.html)
-//    command in cloudhsm_mgmt_util to create a crypto user (CU) named  (http://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser)kmsuserin
+//    * You must provide the password of the dedicated kmsuser crypto user (http://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser)
+//    (CU) account in the cluster. Before you create the custom key store, use
+//    the createUser (http://docs.aws.amazon.com/cloudhsm/latest/userguide/cloudhsm_mgmt_util-createUser.html)
+//    command in cloudhsm_mgmt_util to create a crypto user (CU) named kmsuser
+//    (http://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser)in
 //    specified AWS CloudHSM cluster. AWS KMS uses the kmsuser CU account to
 //    create and manage key material on your behalf. For instructions, see Create
 //    the kmsuser Crypto User (http://docs.aws.amazon.com/kms/latest/developerguide/create-keystore.html#before-keystore)

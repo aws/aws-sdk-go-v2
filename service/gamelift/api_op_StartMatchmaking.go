@@ -101,7 +101,7 @@ const opStartMatchmaking = "StartMatchmaking"
 // who want to play together. FlexMatch finds additional players as needed to
 // fill the match. Match type, rules, and the queue used to place a new game
 // session are defined in a MatchmakingConfiguration. For complete information
-// on setting up and using FlexMatch, see the topic  Adding FlexMatch to Your
+// on setting up and using FlexMatch, see the topic Adding FlexMatch to Your
 // Game (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-intro.html).
 //
 // To start matchmaking, provide a unique ticket ID, specify a matchmaking configuration,

@@ -16,7 +16,7 @@ type AddTagsToResourceInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon RDS resource that the tags are added to. This value is an Amazon
-	// Resource Name (ARN). For information about creating an ARN, see  Constructing
+	// Resource Name (ARN). For information about creating an ARN, see Constructing
 	// an RDS Amazon Resource Name (ARN) (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing).
 	//
 	// ResourceName is a required field

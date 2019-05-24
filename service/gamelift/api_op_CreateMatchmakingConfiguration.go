@@ -188,7 +188,7 @@ const opCreateMatchmakingConfiguration = "CreateMatchmakingConfiguration"
 // or (2) receiving notifications with Amazon Simple Notification Service (SNS).
 // To use notifications, you first need to set up an SNS topic to receive the
 // notifications, and provide the topic ARN in the matchmaking configuration
-// (see  Setting up Notifications for Matchmaking (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html)).
+// (see Setting up Notifications for Matchmaking (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html)).
 // Since notifications promise only "best effort" delivery, we recommend calling
 // DescribeMatchmaking if no notifications are received within 30 seconds.
 //

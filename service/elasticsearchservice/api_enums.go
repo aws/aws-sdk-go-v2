@@ -77,14 +77,16 @@ func (enum ESPartitionInstanceType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Type of Log File, it can be one of the following: INDEX_SLOW_LOGS: Index
-// slow logs contain insert requests that took more time than configured index
-// query log threshold to execute.
-// SEARCH_SLOW_LOGS: Search slow logs contain search queries that took more
-// time than configured search query log threshold to execute.
-// ES_APPLICATION_LOGS: Elasticsearch application logs contain information about
-// errors and warnings raised during the operation of the service and can be
-// useful for troubleshooting.
+// Type of Log File, it can be one of the following:
+//    * INDEX_SLOW_LOGS: Index slow logs contain insert requests that took more
+//    time than configured index query log threshold to execute.
+//
+//    * SEARCH_SLOW_LOGS: Search slow logs contain search queries that took
+//    more time than configured search query log threshold to execute.
+//
+//    * ES_APPLICATION_LOGS: Elasticsearch application logs contain information
+//    about errors and warnings raised during the operation of the service and
+//    can be useful for troubleshooting.
 type LogType string
 
 // Enum values for LogType
@@ -106,6 +108,7 @@ func (enum LogType) MarshalValueBuf(b []byte) ([]byte, error) {
 // The state of a requested change. One of the following:
 //
 //    * Processing: The request change is still in-process.
+//
 //    * Active: The request change is processed and deployed to the Elasticsearch
 //    domain.
 type OptionState string

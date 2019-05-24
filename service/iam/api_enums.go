@@ -128,7 +128,7 @@ func (enum PolicySourceType) MarshalValueBuf(b []byte) ([]byte, error) {
 // policy or as the permissions boundary for an entity.
 //
 // For more information about permissions boundaries, see Permissions Boundaries
-// for IAM Identities  (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+// for IAM Identities (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
 // in the IAM User Guide.
 type PolicyUsageType string
 

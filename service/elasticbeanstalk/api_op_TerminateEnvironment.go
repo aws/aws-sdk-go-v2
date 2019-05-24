@@ -42,7 +42,7 @@ type TerminateEnvironmentInput struct {
 	//    * false: AWS Elastic Beanstalk resource management is removed from the
 	//    environment, but the AWS resources continue to operate.
 	//
-	// For more information, see the  AWS Elastic Beanstalk User Guide.  (https://docs.aws.amazon.com/elasticbeanstalk/latest/ug/)
+	// For more information, see the AWS Elastic Beanstalk User Guide. (https://docs.aws.amazon.com/elasticbeanstalk/latest/ug/)
 	//
 	// Default: true
 	//

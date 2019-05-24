@@ -78,7 +78,7 @@ const opCreateAssessmentTarget = "CreateAssessmentTarget"
 // role to grant Amazon Inspector access to AWS Services needed to perform security
 // assessments. You can create up to 50 assessment targets per AWS account.
 // You can run up to 500 concurrent agents per AWS account. For more information,
-// see  Amazon Inspector Assessment Targets (https://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html).
+// see Amazon Inspector Assessment Targets (https://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html).
 //
 //    // Example sending a request using CreateAssessmentTargetRequest.
 //    req := client.CreateAssessmentTargetRequest(params)

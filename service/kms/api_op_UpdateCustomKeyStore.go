@@ -105,11 +105,11 @@ const opUpdateCustomKeyStore = "UpdateCustomKeyStore"
 // custom key store to the value that you specify.
 //
 // Use the KeyStorePassword parameter tell AWS KMS the current password of the
-// kmsuser (http://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser)
-// crypto user (CU) in the associated AWS CloudHSM cluster. You can use this
-// parameter to fix connection failures that occur when AWS KMS cannot log into
-// the associated cluster because the kmsuser password has changed. This value
-// does not change the password in the AWS CloudHSM cluster.
+// kmsuser crypto user (CU) (http://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser)
+// in the associated AWS CloudHSM cluster. You can use this parameter to fix
+// connection failures that occur when AWS KMS cannot log into the associated
+// cluster because the kmsuser password has changed. This value does not change
+// the password in the AWS CloudHSM cluster.
 //
 // Use the CloudHsmClusterId parameter to associate the custom key store with
 // a related AWS CloudHSM cluster, that is, a cluster that shares a backup history

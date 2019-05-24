@@ -22,7 +22,7 @@ type DescribeCertificateAuthorityAuditReportInput struct {
 
 	// The Amazon Resource Name (ARN) of the private CA. This must be of the form:
 	//
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012.
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 .
 	//
 	// CertificateAuthorityArn is a required field
 	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`

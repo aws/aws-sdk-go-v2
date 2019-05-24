@@ -235,23 +235,15 @@ const opSendRawEmail = "SendRawEmail"
 //    the email's Source, From, and Return-Path parameters in one of two ways:
 //    you can pass optional parameters SourceArn, FromArn, and/or ReturnPathArn
 //    to the API, or you can include the following X-headers in the header of
-//    your raw email:
-//
-// X-SES-SOURCE-ARN
-//
-// X-SES-FROM-ARN
-//
-// X-SES-RETURN-PATH-ARN
-//
-// Do not include these X-headers in the DKIM signature; Amazon SES will remove
-//    them before sending the email.
-//
-// For most common sending authorization scenarios, we recommend that you specify
-//    the SourceIdentityArn parameter and not the FromIdentityArn or ReturnPathIdentityArn
-//    parameters. If you only specify the SourceIdentityArn parameter, Amazon
-//    SES will set the From and Return Path addresses to the identity specified
-//    in SourceIdentityArn. For more information about sending authorization,
-//    see the Using Sending Authorization with Amazon SES (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
+//    your raw email: X-SES-SOURCE-ARN X-SES-FROM-ARN X-SES-RETURN-PATH-ARN
+//    Do not include these X-headers in the DKIM signature; Amazon SES will
+//    remove them before sending the email. For most common sending authorization
+//    scenarios, we recommend that you specify the SourceIdentityArn parameter
+//    and not the FromIdentityArn or ReturnPathIdentityArn parameters. If you
+//    only specify the SourceIdentityArn parameter, Amazon SES will set the
+//    From and Return Path addresses to the identity specified in SourceIdentityArn.
+//    For more information about sending authorization, see the Using Sending
+//    Authorization with Amazon SES (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
 //    in the Amazon SES Developer Guide.
 //
 //    * For every message that you send, the total number of recipients (including

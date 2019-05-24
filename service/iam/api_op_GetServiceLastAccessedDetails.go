@@ -74,12 +74,14 @@ type GetServiceLastAccessedDetailsOutput struct {
 	Error *ErrorDetails `type:"structure"`
 
 	// A flag that indicates whether there are more items to return. If your results
-	// were truncated, you can make a subsequent pagination request using the Markerrequest parameter to retrieve more items. Note that IAM might return fewer
-	// than the MaxItemsnumber of results even when there are more results available. We recommend
-	// that you check IsTruncated
+	// were truncated, you can make a subsequent pagination request using the Marker
+	// request parameter to retrieve more items. Note that IAM might return fewer
+	// than the MaxItems number of results even when there are more results available.
+	// We recommend that you check IsTruncated after every call to ensure that you
+	// receive all your results.
 	IsTruncated *bool `type:"boolean"`
 
-	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
+	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
 	// when the generated report job was completed or failed.
 	//
 	// This field is null if the job is still in progress, as indicated by a JobStatus
@@ -88,7 +90,7 @@ type GetServiceLastAccessedDetailsOutput struct {
 	// JobCompletionDate is a required field
 	JobCompletionDate *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
 
-	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
+	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
 	// when the report job was created.
 	//
 	// JobCreationDate is a required field
@@ -103,7 +105,7 @@ type GetServiceLastAccessedDetailsOutput struct {
 	// to use for the Marker parameter in a subsequent pagination request.
 	Marker *string `min:"1" type:"string"`
 
-	// A ServiceLastAccessed object that contains details about the most recent
+	// A ServiceLastAccessed object that contains details about the most recent
 	// attempt to access the service.
 	//
 	// ServicesLastAccessed is a required field

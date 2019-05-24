@@ -18,7 +18,7 @@ type RegisterWorkflowTypeInput struct {
 	// when a workflow execution of this type is terminated, by calling the TerminateWorkflowExecution
 	// action explicitly or due to an expired timeout. This default can be overridden
 	// when starting a workflow execution using the StartWorkflowExecution action
-	// or the StartChildWorkflowExecutionDecision.
+	// or the StartChildWorkflowExecution Decision.
 	//
 	// The supported child policies are:
 	//
@@ -34,7 +34,7 @@ type RegisterWorkflowTypeInput struct {
 
 	// If set, specifies the default maximum duration for executions of this workflow
 	// type. You can override this default when starting an execution through the
-	// StartWorkflowExecution Action or StartChildWorkflowExecutionDecision.
+	// StartWorkflowExecution Action or StartChildWorkflowExecution Decision.
 	//
 	// The duration is specified in seconds; an integer greater than or equal to
 	// 0. Unlike some of the other timeout parameters in Amazon SWF, you cannot
@@ -55,7 +55,7 @@ type RegisterWorkflowTypeInput struct {
 	// If set, specifies the default task list to use for scheduling decision tasks
 	// for executions of this workflow type. This default is used only if a task
 	// list isn't provided when starting the execution through the StartWorkflowExecution
-	// Action or StartChildWorkflowExecutionDecision.
+	// Action or StartChildWorkflowExecution Decision.
 	DefaultTaskList *TaskList `locationName:"defaultTaskList" type:"structure"`
 
 	// The default task priority to assign to the workflow type. If not assigned,
@@ -70,7 +70,8 @@ type RegisterWorkflowTypeInput struct {
 
 	// If set, specifies the default maximum duration of decision tasks for this
 	// workflow type. This default can be overridden when starting a workflow execution
-	// using the StartWorkflowExecution action or the StartChildWorkflowExecutionDecision.
+	// using the StartWorkflowExecution action or the StartChildWorkflowExecution
+	// Decision.
 	//
 	// The duration is specified in seconds, an integer greater than or equal to
 	// 0. You can use NONE to specify unlimited duration.
@@ -186,13 +187,9 @@ const opRegisterWorkflowType = "RegisterWorkflowType"
 //    * Use an Action element to allow or deny permission to call this action.
 //
 //    * Constrain the following parameters by using a Condition element with
-//    the appropriate keys.
-//
-// defaultTaskList.name: String constraint. The key is swf:defaultTaskList.name.
-//
-// name: String constraint. The key is swf:name.
-//
-// version: String constraint. The key is swf:version.
+//    the appropriate keys. defaultTaskList.name: String constraint. The key
+//    is swf:defaultTaskList.name. name: String constraint. The key is swf:name.
+//    version: String constraint. The key is swf:version.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or
 // the parameter values fall outside the specified constraints, the action fails.
