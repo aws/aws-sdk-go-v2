@@ -65,14 +65,16 @@ unit-with-race-cover: verify
 	@echo "go test SDK and vendor packages"
 	@go test -tags ${UNIT_TEST_TAGS} -race -cpu=1,2,4 ${SDK_ALL_PKGS}
 
-#ci-test: generate unit-with-race-cover ci-test-generate-validate
-#
-#ci-test-generate-validate:
-#	@echo "CI test validate no generated code changes"
-#	git add . -A
-#	gitstatus=`git diff --cached --ignore-space-change`; \
-#	echo "$$gitstatus"; \
-#	if [ "$$gitstatus" != "" ] && [ "$$gitstatus" != "skipping validation" ]; then echo "$$gitstatus"; exit 1; fi
+ci-test: generate unit-with-race-cover ci-test-generate-validate
+
+ci-test-generate-validate:
+	@echo "CI test validate no generated code changes"
+	git update-index --assume-unchanged go.mod go.sum
+	git add . -A
+	gitstatus=`git diff --cached --ignore-space-change`; \
+	git update-index --no-assume-unchanged go.mod go.sum
+	echo "$$gitstatus"; \
+	if [ "$$gitstatus" != "" ]; then echo "$$gitstatus"; exit 1; fi
 
 #######################
 # Integration Testing #
