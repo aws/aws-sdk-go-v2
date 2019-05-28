@@ -27,6 +27,27 @@ func (enum BehaviorOnMxFailure) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// The current status of your Deliverability dashboard subscription. If this
+// value is PENDING_EXPIRATION, your subscription is scheduled to expire at
+// the end of the current calendar month.
+type DeliverabilityDashboardAccountStatus string
+
+// Enum values for DeliverabilityDashboardAccountStatus
+const (
+	DeliverabilityDashboardAccountStatusActive            DeliverabilityDashboardAccountStatus = "ACTIVE"
+	DeliverabilityDashboardAccountStatusPendingExpiration DeliverabilityDashboardAccountStatus = "PENDING_EXPIRATION"
+	DeliverabilityDashboardAccountStatusDisabled          DeliverabilityDashboardAccountStatus = "DISABLED"
+)
+
+func (enum DeliverabilityDashboardAccountStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeliverabilityDashboardAccountStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The status of a predictive inbox placement test. If the status is IN_PROGRESS,
 // then the predictive inbox placement test is currently running. Predictive
 // inbox placement tests are usually complete within 24 hours of creating the

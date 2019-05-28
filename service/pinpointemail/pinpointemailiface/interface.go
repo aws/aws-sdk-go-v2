@@ -95,6 +95,8 @@ type ClientAPI interface {
 
 	GetDeliverabilityTestReportRequest(*pinpointemail.GetDeliverabilityTestReportInput) pinpointemail.GetDeliverabilityTestReportRequest
 
+	GetDomainDeliverabilityCampaignRequest(*pinpointemail.GetDomainDeliverabilityCampaignInput) pinpointemail.GetDomainDeliverabilityCampaignRequest
+
 	GetDomainStatisticsReportRequest(*pinpointemail.GetDomainStatisticsReportInput) pinpointemail.GetDomainStatisticsReportRequest
 
 	GetEmailIdentityRequest(*pinpointemail.GetEmailIdentityInput) pinpointemail.GetEmailIdentityRequest
@@ -104,6 +106,8 @@ type ClientAPI interface {
 	ListDedicatedIpPoolsRequest(*pinpointemail.ListDedicatedIpPoolsInput) pinpointemail.ListDedicatedIpPoolsRequest
 
 	ListDeliverabilityTestReportsRequest(*pinpointemail.ListDeliverabilityTestReportsInput) pinpointemail.ListDeliverabilityTestReportsRequest
+
+	ListDomainDeliverabilityCampaignsRequest(*pinpointemail.ListDomainDeliverabilityCampaignsInput) pinpointemail.ListDomainDeliverabilityCampaignsRequest
 
 	ListEmailIdentitiesRequest(*pinpointemail.ListEmailIdentitiesInput) pinpointemail.ListEmailIdentitiesRequest
 

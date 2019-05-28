@@ -323,7 +323,7 @@ func (s Content) MarshalFields(e protocol.FieldEncoder) error {
 type DailyVolume struct {
 	_ struct{} `type:"structure"`
 
-	// An object that contains inbox placement metrics for a specifid day in the
+	// An object that contains inbox placement metrics for a specified day in the
 	// analysis period, broken out by the recipient's email provider.
 	DomainIspPlacements []DomainIspPlacement `type:"list"`
 
@@ -675,6 +675,230 @@ func (s DkimAttributes) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	return nil
+}
+
+// An object that contains the deliverability data for a specific campaign.
+// This data is available for a campaign only if the campaign sent email by
+// using a domain that the Deliverability dashboard is enabled for (PutDeliverabilityDashboardOption
+// operation).
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DomainDeliverabilityCampaign
+type DomainDeliverabilityCampaign struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier for the campaign. Amazon Pinpoint automatically generates
+	// and assigns this identifier to a campaign. This value is not the same as
+	// the campaign identifier that Amazon Pinpoint assigns to campaigns that you
+	// create and manage by using the Amazon Pinpoint API or the Amazon Pinpoint
+	// console.
+	CampaignId *string `type:"string"`
+
+	// The percentage of email messages that were deleted by recipients, without
+	// being opened first. Due to technical limitations, this value only includes
+	// recipients who opened the message by using an email client that supports
+	// images.
+	DeleteRate *float64 `type:"double"`
+
+	// The major email providers who handled the email message.
+	Esps []string `type:"list"`
+
+	// The first time, in Unix time format, when the email message was delivered
+	// to any recipient's inbox. This value can help you determine how long it took
+	// for a campaign to deliver an email message.
+	FirstSeenDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The verified email address that the email message was sent from.
+	FromAddress *string `type:"string"`
+
+	// The URL of an image that contains a snapshot of the email message that was
+	// sent.
+	ImageUrl *string `type:"string"`
+
+	// The number of email messages that were delivered to recipients’ inboxes.
+	InboxCount *int64 `type:"long"`
+
+	// The last time, in Unix time format, when the email message was delivered
+	// to any recipient's inbox. This value can help you determine how long it took
+	// for a campaign to deliver an email message.
+	LastSeenDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The projected number of recipients that the email message was sent to.
+	ProjectedVolume *int64 `type:"long"`
+
+	// The percentage of email messages that were opened and then deleted by recipients.
+	// Due to technical limitations, this value only includes recipients who opened
+	// the message by using an email client that supports images.
+	ReadDeleteRate *float64 `type:"double"`
+
+	// The percentage of email messages that were opened by recipients. Due to technical
+	// limitations, this value only includes recipients who opened the message by
+	// using an email client that supports images.
+	ReadRate *float64 `type:"double"`
+
+	// The IP addresses that were used to send the email message.
+	SendingIps []string `type:"list"`
+
+	// The number of email messages that were delivered to recipients' spam or junk
+	// mail folders.
+	SpamCount *int64 `type:"long"`
+
+	// The subject line, or title, of the email message.
+	Subject *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DomainDeliverabilityCampaign) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DomainDeliverabilityCampaign) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CampaignId != nil {
+		v := *s.CampaignId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CampaignId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DeleteRate != nil {
+		v := *s.DeleteRate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeleteRate", protocol.Float64Value(v), metadata)
+	}
+	if len(s.Esps) > 0 {
+		v := s.Esps
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Esps", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.FirstSeenDateTime != nil {
+		v := *s.FirstSeenDateTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FirstSeenDateTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.FromAddress != nil {
+		v := *s.FromAddress
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FromAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ImageUrl != nil {
+		v := *s.ImageUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ImageUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.InboxCount != nil {
+		v := *s.InboxCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InboxCount", protocol.Int64Value(v), metadata)
+	}
+	if s.LastSeenDateTime != nil {
+		v := *s.LastSeenDateTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastSeenDateTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.ProjectedVolume != nil {
+		v := *s.ProjectedVolume
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProjectedVolume", protocol.Int64Value(v), metadata)
+	}
+	if s.ReadDeleteRate != nil {
+		v := *s.ReadDeleteRate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ReadDeleteRate", protocol.Float64Value(v), metadata)
+	}
+	if s.ReadRate != nil {
+		v := *s.ReadRate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ReadRate", protocol.Float64Value(v), metadata)
+	}
+	if len(s.SendingIps) > 0 {
+		v := s.SendingIps
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SendingIps", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.SpamCount != nil {
+		v := *s.SpamCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SpamCount", protocol.Int64Value(v), metadata)
+	}
+	if s.Subject != nil {
+		v := *s.Subject
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Subject", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object that contains information about the Deliverability dashboard subscription
+// for a verified domain that you use to send email and currently has an active
+// Deliverability dashboard subscription. If a Deliverability dashboard subscription
+// is active for a domain, you gain access to reputation, inbox placement, and
+// other metrics for the domain.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DomainDeliverabilityTrackingOption
+type DomainDeliverabilityTrackingOption struct {
+	_ struct{} `type:"structure"`
+
+	// A verified domain that’s associated with your AWS account and currently
+	// has an active Deliverability dashboard subscription.
+	Domain *string `type:"string"`
+
+	// An object that contains information about the inbox placement data settings
+	// for the domain.
+	InboxPlacementTrackingOption *InboxPlacementTrackingOption `type:"structure"`
+
+	// The date, in Unix time format, when you enabled the Deliverability dashboard
+	// for the domain.
+	SubscriptionStartDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+}
+
+// String returns the string representation
+func (s DomainDeliverabilityTrackingOption) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DomainDeliverabilityTrackingOption) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Domain != nil {
+		v := *s.Domain
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Domain", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.InboxPlacementTrackingOption != nil {
+		v := s.InboxPlacementTrackingOption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "InboxPlacementTrackingOption", v, metadata)
+	}
+	if s.SubscriptionStartDate != nil {
+		v := *s.SubscriptionStartDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SubscriptionStartDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
 	return nil
 }
@@ -1094,6 +1318,50 @@ func (s IdentityInfo) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SendingEnabled", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// An object that contains information about the inbox placement data settings
+// for a verified domain that’s associated with your AWS account. This data
+// is available only if you enabled the Deliverability dashboard for the domain
+// (PutDeliverabilityDashboardOption operation).
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/InboxPlacementTrackingOption
+type InboxPlacementTrackingOption struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies whether inbox placement data is being tracked for the domain.
+	Global *bool `type:"boolean"`
+
+	// An array of strings, one for each major email provider that the inbox placement
+	// data applies to.
+	TrackedIsps []string `type:"list"`
+}
+
+// String returns the string representation
+func (s InboxPlacementTrackingOption) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InboxPlacementTrackingOption) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Global != nil {
+		v := *s.Global
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Global", protocol.BoolValue(v), metadata)
+	}
+	if len(s.TrackedIsps) > 0 {
+		v := s.TrackedIsps
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "TrackedIsps", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -1775,15 +2043,10 @@ func (s SnsDestination) MarshalFields(e protocol.FieldEncoder) error {
 // Each tag consists of a required tag key and an associated tag value, both
 // of which you define. A tag key is a general label that acts as a category
 // for a more specific tag value. A tag value acts as a descriptor within a
-// tag key. For example, if you have two versions of an Amazon Pinpoint project,
-// one for internal testing and another for external use, you might assign a
-// Stack tag key to both projects. The value of the Stack tag key might be Test
-// for one project and Production for the other project.
-//
-// A tag key can contain as many as 128 characters. A tag value can contain
-// as many as 256 characters. The characters can be Unicode letters, digits,
-// white space, or one of the following symbols: _ . : / = + -. The following
-// additional restrictions apply to tags:
+// tag key. A tag key can contain as many as 128 characters. A tag value can
+// contain as many as 256 characters. The characters can be Unicode letters,
+// digits, white space, or one of the following symbols: _ . : / = + -. The
+// following additional restrictions apply to tags:
 //
 //    * Tag keys and values are case sensitive.
 //

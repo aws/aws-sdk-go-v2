@@ -43,7 +43,7 @@ type AssumeRoleWithWebIdentityInput struct {
 	// the role's temporary credentials in subsequent AWS API calls to access resources
 	// in the account that owns the role. You cannot use session policies to grant
 	// more permissions than those allowed by the identity-based policy of the role
-	// that is being assumed. For more information, see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session)
+	// that is being assumed. For more information, see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
 	// in the IAM User Guide.
 	//
 	// The plain text that you use for both inline and managed session policies
@@ -81,7 +81,7 @@ type AssumeRoleWithWebIdentityInput struct {
 	// in subsequent AWS API calls to access resources in the account that owns
 	// the role. You cannot use session policies to grant more permissions than
 	// those allowed by the identity-based policy of the role that is being assumed.
-	// For more information, see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session)
+	// For more information, see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
 	// in the IAM User Guide.
 	PolicyArns []PolicyDescriptorType `type:"list"`
 
@@ -287,7 +287,7 @@ const opAssumeRoleWithWebIdentity = "AssumeRoleWithWebIdentity"
 // AWS API calls to access resources in the account that owns the role. You
 // cannot use session policies to grant more permissions than those allowed
 // by the identity-based policy of the role that is being assumed. For more
-// information, see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session)
+// information, see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
 // in the IAM User Guide.
 //
 // Before your application can call AssumeRoleWithWebIdentity, you must have

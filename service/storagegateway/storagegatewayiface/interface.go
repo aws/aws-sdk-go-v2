@@ -71,6 +71,8 @@ type ClientAPI interface {
 
 	AddWorkingStorageRequest(*storagegateway.AddWorkingStorageInput) storagegateway.AddWorkingStorageRequest
 
+	AssignTapePoolRequest(*storagegateway.AssignTapePoolInput) storagegateway.AssignTapePoolRequest
+
 	AttachVolumeRequest(*storagegateway.AttachVolumeInput) storagegateway.AttachVolumeRequest
 
 	CancelArchivalRequest(*storagegateway.CancelArchivalInput) storagegateway.CancelArchivalRequest

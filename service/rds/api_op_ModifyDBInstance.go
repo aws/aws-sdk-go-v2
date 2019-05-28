@@ -23,34 +23,36 @@ type ModifyDBInstanceInput struct {
 	// For the valid values for allocated storage for each engine, see CreateDBInstance.
 	AllocatedStorage *int64 `type:"integer"`
 
-	// A value that indicates whether major version upgrades are allowed. Changing
-	// this parameter doesn't result in an outage and the change is asynchronously
-	// applied as soon as possible.
+	// Indicates that major version upgrades are allowed. Changing this parameter
+	// doesn't result in an outage and the change is asynchronously applied as soon
+	// as possible.
 	//
-	// Constraints: Major version upgrades must be allowed when specifying a value
-	// for the EngineVersion parameter that is a different major version than the
-	// DB instance's current version.
+	// Constraints: This parameter must be set to true when specifying a value for
+	// the EngineVersion parameter that is a different major version than the DB
+	// instance's current version.
 	AllowMajorVersionUpgrade *bool `type:"boolean"`
 
-	// A value that indicates whether the modifications in this request and any
-	// pending modifications are asynchronously applied as soon as possible, regardless
-	// of the PreferredMaintenanceWindow setting for the DB instance. By default,
-	// this parameter is disabled.
+	// Specifies whether the modifications in this request and any pending modifications
+	// are asynchronously applied as soon as possible, regardless of the PreferredMaintenanceWindow
+	// setting for the DB instance.
 	//
-	// If this parameter is disabled, changes to the DB instance are applied during
-	// the next maintenance window. Some parameter changes can cause an outage and
-	// are applied on the next call to RebootDBInstance, or the next failure reboot.
-	// Review the table of parameters in Modifying a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html)
-	// in the Amazon RDS User Guide. to see the impact of enabling or disabling
-	// ApplyImmediately for each modified parameter and to determine when the changes
-	// are applied.
+	// If this parameter is set to false, changes to the DB instance are applied
+	// during the next maintenance window. Some parameter changes can cause an outage
+	// and are applied on the next call to RebootDBInstance, or the next failure
+	// reboot. Review the table of parameters in Modifying a DB Instance and Using
+	// the Apply Immediately Parameter (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html)
+	// in the Amazon RDS User Guide. to see the impact that setting ApplyImmediately
+	// to true or false has for each modified parameter and to determine when the
+	// changes are applied.
+	//
+	// Default: false
 	ApplyImmediately *bool `type:"boolean"`
 
-	// A value that indicates whether minor version upgrades are applied automatically
-	// to the DB instance during the maintenance window. Changing this parameter
-	// doesn't result in an outage except in the following case and the change is
-	// asynchronously applied as soon as possible. An outage results if this parameter
-	// is enabled during the maintenance window, and a newer minor version is available,
+	// Indicates that minor version upgrades are applied automatically to the DB
+	// instance during the maintenance window. Changing this parameter doesn't result
+	// in an outage except in the following case and the change is asynchronously
+	// applied as soon as possible. An outage will result if this parameter is set
+	// to true during the maintenance window, and a newer minor version is available,
 	// and RDS has enabled auto patching for that engine version.
 	AutoMinorVersionUpgrade *bool `type:"boolean"`
 
@@ -60,9 +62,10 @@ type ModifyDBInstanceInput struct {
 	//
 	// Changing this parameter can result in an outage if you change from 0 to a
 	// non-zero value or from a non-zero value to 0. These changes are applied during
-	// the next maintenance window unless the ApplyImmediately parameter is enabled
-	// for this request. If you change the parameter from one non-zero value to
-	// another non-zero value, the change is asynchronously applied as soon as possible.
+	// the next maintenance window unless the ApplyImmediately parameter is set
+	// to true for this request. If you change the parameter from one non-zero value
+	// to another non-zero value, the change is asynchronously applied as soon as
+	// possible.
 	//
 	// Amazon Aurora
 	//
@@ -95,8 +98,8 @@ type ModifyDBInstanceInput struct {
 	// has no effect.
 	CloudwatchLogsExportConfiguration *CloudwatchLogsExportConfiguration `type:"structure"`
 
-	// A value that indicates whether to copy all tags from the DB instance to snapshots
-	// of the DB instance. By default, tags are not copied.
+	// True to copy all tags from the DB instance to snapshots of the DB instance,
+	// and otherwise false. The default is false.
 	//
 	// Amazon Aurora
 	//
@@ -113,7 +116,7 @@ type ModifyDBInstanceInput struct {
 	//
 	// If you modify the DB instance class, an outage occurs during the change.
 	// The change is applied during the next maintenance window, unless ApplyImmediately
-	// is enabled for this request.
+	// is specified as true for this request.
 	//
 	// Default: Uses existing setting
 	DBInstanceClass *string `type:"string"`
@@ -204,17 +207,17 @@ type ModifyDBInstanceInput struct {
 	// in the Amazon RDS User Guide.
 	//
 	// Changing the subnet group causes an outage during the change. The change
-	// is applied during the next maintenance window, unless you enable ApplyImmediately.
+	// is applied during the next maintenance window, unless you specify true for
+	// the ApplyImmediately parameter.
 	//
 	// Constraints: If supplied, must match the name of an existing DBSubnetGroup.
 	//
 	// Example: mySubnetGroup
 	DBSubnetGroupName *string `type:"string"`
 
-	// A value that indicates whether the DB instance has deletion protection enabled.
-	// The database can't be deleted when deletion protection is enabled. By default,
-	// deletion protection is disabled. For more information, see Deleting a DB
-	// Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
+	// Indicates if the DB instance has deletion protection enabled. The database
+	// can't be deleted when this value is set to true. For more information, see
+	// Deleting a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
 	DeletionProtection *bool `type:"boolean"`
 
 	// The Active Directory Domain to move the instance to. Specify none to remove
@@ -226,8 +229,8 @@ type ModifyDBInstanceInput struct {
 	// The name of the IAM role to use when making API calls to the Directory Service.
 	DomainIAMRoleName *string `type:"string"`
 
-	// A value that indicates whether to enable mapping of AWS Identity and Access
-	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
+	// True to enable mapping of AWS Identity and Access Management (IAM) accounts
+	// to database accounts, and otherwise false.
 	//
 	// You can enable IAM database authentication for the following database engines
 	//
@@ -241,10 +244,11 @@ type ModifyDBInstanceInput struct {
 	//    * For MySQL 5.6, minor version 5.6.34 or higher
 	//
 	//    * For MySQL 5.7, minor version 5.7.16 or higher
+	//
+	// Default: false
 	EnableIAMDatabaseAuthentication *bool `type:"boolean"`
 
-	// A value that indicates whether to enable Performance Insights for the DB
-	// instance.
+	// True to enable Performance Insights for the DB instance, and otherwise false.
 	//
 	// For more information, see Using Amazon Performance Insights (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
 	// in the Amazon Relational Database Service User Guide.
@@ -252,7 +256,7 @@ type ModifyDBInstanceInput struct {
 
 	// The version number of the database engine to upgrade to. Changing this parameter
 	// results in an outage and the change is applied during the next maintenance
-	// window unless the ApplyImmediately parameter is eanbled for this request.
+	// window unless the ApplyImmediately parameter is set to true for this request.
 	//
 	// For major version upgrades, if a nondefault DB parameter group is currently
 	// in use, a new DB parameter group in the DB parameter group family for the
@@ -267,9 +271,9 @@ type ModifyDBInstanceInput struct {
 	//
 	// Changing this setting doesn't result in an outage and the change is applied
 	// during the next maintenance window unless the ApplyImmediately parameter
-	// is enabled for this request. If you are migrating from Provisioned IOPS to
-	// standard storage, set this value to 0. The DB instance will require a reboot
-	// for the change in storage type to take effect.
+	// is set to true for this request. If you are migrating from Provisioned IOPS
+	// to standard storage, set this value to 0. The DB instance will require a
+	// reboot for the change in storage type to take effect.
 	//
 	// If you choose to migrate your DB instance from using standard storage to
 	// using Provisioned IOPS, or from using Provisioned IOPS to using standard
@@ -357,17 +361,16 @@ type ModifyDBInstanceInput struct {
 	// a MonitoringRoleArn value.
 	MonitoringRoleArn *string `type:"string"`
 
-	// A value that indicates whether the DB instance is a Multi-AZ deployment.
-	// Changing this parameter doesn't result in an outage and the change is applied
-	// during the next maintenance window unless the ApplyImmediately parameter
-	// is enabled for this request.
+	// Specifies if the DB instance is a Multi-AZ deployment. Changing this parameter
+	// doesn't result in an outage and the change is applied during the next maintenance
+	// window unless the ApplyImmediately parameter is set to true for this request.
 	MultiAZ *bool `type:"boolean"`
 
 	// The new DB instance identifier for the DB instance when renaming a DB instance.
-	// When you change the DB instance identifier, an instance reboot occurs immediately
-	// if you enable ApplyImmediately, or will occur during the next maintenance
-	// window if you disable Apply Immediately. This value is stored as a lowercase
-	// string.
+	// When you change the DB instance identifier, an instance reboot will occur
+	// immediately if you set Apply Immediately to true, or will occur during the
+	// next maintenance window if Apply Immediately to false. This value is stored
+	// as a lowercase string.
 	//
 	// Constraints:
 	//
@@ -383,8 +386,8 @@ type ModifyDBInstanceInput struct {
 	// Indicates that the DB instance should be associated with the specified option
 	// group. Changing this parameter doesn't result in an outage except in the
 	// following case and the change is applied during the next maintenance window
-	// unless the ApplyImmediately parameter is enabled for this request. If the
-	// parameter change results in an option group that enables OEM, this change
+	// unless the ApplyImmediately parameter is set to true for this request. If
+	// the parameter change results in an option group that enables OEM, this change
 	// can cause a brief (sub-second) period during which new connections are rejected
 	// but existing connections are not interrupted.
 	//
@@ -396,11 +399,6 @@ type ModifyDBInstanceInput struct {
 	// The AWS KMS key identifier for encryption of Performance Insights data. The
 	// KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the
 	// KMS key alias for the KMS encryption key.
-	//
-	// If you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon
-	// RDS uses your default encryption key. AWS KMS creates the default encryption
-	// key for your AWS account. Your AWS account has a different default encryption
-	// key for each AWS Region.
 	PerformanceInsightsKMSKeyId *string `type:"string"`
 
 	// The amount of time, in days, to retain Performance Insights data. Valid values
@@ -460,18 +458,20 @@ type ModifyDBInstanceInput struct {
 	// Valid Values: 0 - 15
 	PromotionTier *int64 `type:"integer"`
 
-	// A value that indicates whether the DB instance is publicly accessible. When
-	// the DB instance is publicly accessible, it is an Internet-facing instance
-	// with a publicly resolvable DNS name, which resolves to a public IP address.
-	// When the DB instance is not publicly accessible, it is an internal instance
-	// with a DNS name that resolves to a private IP address.
+	// Boolean value that indicates if the DB instance has a publicly resolvable
+	// DNS name. Set to True to make the DB instance Internet-facing with a publicly
+	// resolvable DNS name, which resolves to a public IP address. Set to False
+	// to make the DB instance internal with a DNS name that resolves to a private
+	// IP address.
 	//
 	// PubliclyAccessible only applies to DB instances in a VPC. The DB instance
-	// must be part of a public subnet and PubliclyAccessible must be enabled for
-	// it to be publicly accessible.
+	// must be part of a public subnet and PubliclyAccessible must be true in order
+	// for it to be publicly accessible.
 	//
 	// Changes to the PubliclyAccessible parameter are applied immediately regardless
 	// of the value of the ApplyImmediately parameter.
+	//
+	// Default: false
 	PubliclyAccessible *bool `type:"boolean"`
 
 	// Specifies the storage type to be associated with the DB instance.
@@ -494,7 +494,7 @@ type ModifyDBInstanceInput struct {
 	//
 	// Valid values: standard | gp2 | io1
 	//
-	// Default: io1 if the Iops parameter is specified, otherwise gp2
+	// Default: io1 if the Iops parameter is specified, otherwise standard
 	StorageType *string `type:"string"`
 
 	// The ARN from the key store with which to associate the instance for TDE encryption.
@@ -504,7 +504,7 @@ type ModifyDBInstanceInput struct {
 	// device.
 	TdeCredentialPassword *string `type:"string"`
 
-	// A value that indicates whether the DB instance class of the DB instance uses
+	// A value that specifies that the DB instance class of the DB instance uses
 	// its default processor features.
 	UseDefaultProcessorFeatures *bool `type:"boolean"`
 

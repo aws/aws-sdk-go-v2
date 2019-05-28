@@ -103,7 +103,8 @@ const opBatchUpdatePhoneNumber = "BatchUpdatePhoneNumber"
 // Amazon Chime.
 //
 // Updates phone number product types. Choose from Amazon Chime Business Calling
-// and Amazon Chime Voice Connector product types.
+// and Amazon Chime Voice Connector product types. For toll-free numbers, you
+// can use only the Amazon Chime Voice Connector product type.
 //
 //    // Example sending a request using BatchUpdatePhoneNumberRequest.
 //    req := client.BatchUpdatePhoneNumberRequest(params)

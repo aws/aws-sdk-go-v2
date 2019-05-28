@@ -25,8 +25,8 @@ type RestoreDBClusterToPointInTimeInput struct {
 	//    hours).
 	BacktrackWindow *int64 `type:"long"`
 
-	// A value that indicates whether to copy all tags from the restored DB cluster
-	// to snapshots of the restored DB cluster. The default is not to copy them.
+	// True to copy all tags from the restored DB cluster to snapshots of the restored
+	// DB cluster, and otherwise false. The default is false.
 	CopyTagsToSnapshot *bool `type:"boolean"`
 
 	// The name of the new DB cluster to be created.
@@ -65,9 +65,9 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// Example: mySubnetgroup
 	DBSubnetGroupName *string `type:"string"`
 
-	// A value that indicates whether the DB cluster has deletion protection enabled.
-	// The database can't be deleted when deletion protection is enabled. By default,
-	// deletion protection is disabled.
+	// Indicates if the DB cluster should have deletion protection enabled. The
+	// database can't be deleted when this value is set to true. The default is
+	// false.
 	DeletionProtection *bool `type:"boolean"`
 
 	// The list of logs that the restored DB cluster is to export to CloudWatch
@@ -76,8 +76,10 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// in the Amazon Aurora User Guide.
 	EnableCloudwatchLogsExports []string `type:"list"`
 
-	// A value that indicates whether to enable mapping of AWS Identity and Access
-	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
+	// True to enable mapping of AWS Identity and Access Management (IAM) accounts
+	// to database accounts, and otherwise false.
+	//
+	// Default: false
 	EnableIAMDatabaseAuthentication *bool `type:"boolean"`
 
 	// The AWS KMS key identifier to use when restoring an encrypted DB cluster
@@ -126,9 +128,9 @@ type RestoreDBClusterToPointInTimeInput struct {
 	//
 	//    * Must be specified if UseLatestRestorableTime parameter is not provided
 	//
-	//    * Can't be specified if the UseLatestRestorableTime parameter is enabled
+	//    * Can't be specified if UseLatestRestorableTime parameter is true
 	//
-	//    * Can't be specified if the RestoreType parameter is copy-on-write
+	//    * Can't be specified if RestoreType parameter is copy-on-write
 	//
 	// Example: 2015-03-07T23:45:00Z
 	RestoreToTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
@@ -162,9 +164,10 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// in the Amazon RDS User Guide.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 
-	// A value that indicates whether to restore the DB cluster to the latest restorable
-	// backup time. By default, the DB cluster is not restored to the latest restorable
-	// backup time.
+	// A value that is set to true to restore the DB cluster to the latest restorable
+	// backup time, and false otherwise.
+	//
+	// Default: false
 	//
 	// Constraints: Can't be specified if RestoreToTime parameter is provided.
 	UseLatestRestorableTime *bool `type:"boolean"`

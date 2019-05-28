@@ -17,16 +17,16 @@ type GetDedicatedIpsInput struct {
 
 	// A token returned from a previous call to GetDedicatedIps to indicate the
 	// position of the dedicated IP pool in the list of IP pools.
-	NextToken *string `type:"string"`
+	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
 
 	// The number of results to show in a single call to GetDedicatedIpsRequest.
 	// If the number of results is larger than the number you specified in this
 	// parameter, then the response includes a NextToken element, which you can
 	// use to obtain additional results.
-	PageSize *int64 `type:"integer"`
+	PageSize *int64 `location:"querystring" locationName:"PageSize" type:"integer"`
 
 	// The name of the IP pool that the dedicated IP address is associated with.
-	PoolName *string `type:"string"`
+	PoolName *string `location:"querystring" locationName:"PoolName" type:"string"`
 }
 
 // String returns the string representation
@@ -42,19 +42,19 @@ func (s GetDedicatedIpsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.PageSize != nil {
 		v := *s.PageSize
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "PageSize", protocol.Int64Value(v), metadata)
+		e.SetValue(protocol.QueryTarget, "PageSize", protocol.Int64Value(v), metadata)
 	}
 	if s.PoolName != nil {
 		v := *s.PoolName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "PoolName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "PoolName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

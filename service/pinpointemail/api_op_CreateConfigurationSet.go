@@ -17,7 +17,9 @@ type CreateConfigurationSetInput struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the configuration set.
-	ConfigurationSetName *string `type:"string"`
+	//
+	// ConfigurationSetName is a required field
+	ConfigurationSetName *string `type:"string" required:"true"`
 
 	// An object that defines the dedicated IP pool that is used to send emails
 	// that you send using the configuration set.
@@ -31,8 +33,8 @@ type CreateConfigurationSetInput struct {
 	// you send using the configuration set.
 	SendingOptions *SendingOptions `type:"structure"`
 
-	// An object that defines the tags (keys and values) that you want to associate
-	// with the configuration set.
+	// An array of objects that define the tags (keys and values) that you want
+	// to associate with the configuration set.
 	Tags []Tag `type:"list"`
 
 	// An object that defines the open and click tracking options for emails that
@@ -48,6 +50,10 @@ func (s CreateConfigurationSetInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateConfigurationSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateConfigurationSetInput"}
+
+	if s.ConfigurationSetName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
+	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
 			if err := v.Validate(); err != nil {

@@ -13,9 +13,8 @@ import (
 type CreateEventSubscriptionInput struct {
 	_ struct{} `type:"structure"`
 
-	// A value that indicates whether to activate the subscription. If the event
-	// notification subscription is not activated, the subscription is created but
-	// not active.
+	// A Boolean value; set to true to activate the subscription, set to false to
+	// create the subscription but not active it.
 	Enabled *bool `type:"boolean"`
 
 	// A list of event categories for a SourceType that you want to subscribe to.

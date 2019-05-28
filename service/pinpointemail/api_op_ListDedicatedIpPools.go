@@ -17,13 +17,13 @@ type ListDedicatedIpPoolsInput struct {
 
 	// A token returned from a previous call to ListDedicatedIpPools to indicate
 	// the position in the list of dedicated IP pools.
-	NextToken *string `type:"string"`
+	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
 
 	// The number of results to show in a single call to ListDedicatedIpPools. If
 	// the number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results.
-	PageSize *int64 `type:"integer"`
+	PageSize *int64 `location:"querystring" locationName:"PageSize" type:"integer"`
 }
 
 // String returns the string representation
@@ -39,13 +39,13 @@ func (s ListDedicatedIpPoolsInput) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.PageSize != nil {
 		v := *s.PageSize
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "PageSize", protocol.Int64Value(v), metadata)
+		e.SetValue(protocol.QueryTarget, "PageSize", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }

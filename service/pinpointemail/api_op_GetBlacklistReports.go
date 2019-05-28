@@ -21,7 +21,7 @@ type GetBlacklistReportsInput struct {
 	// using Amazon Pinpoint or Amazon SES.
 	//
 	// BlacklistItemNames is a required field
-	BlacklistItemNames []string `type:"list" required:"true"`
+	BlacklistItemNames []string `location:"querystring" locationName:"BlacklistItemNames" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -51,7 +51,7 @@ func (s GetBlacklistReportsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.BlacklistItemNames
 
 		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "BlacklistItemNames", metadata)
+		ls0 := e.List(protocol.QueryTarget, "BlacklistItemNames", metadata)
 		ls0.Start()
 		for _, v1 := range v {
 			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})

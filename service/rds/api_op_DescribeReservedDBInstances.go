@@ -41,8 +41,8 @@ type DescribeReservedDBInstancesInput struct {
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int64 `type:"integer"`
 
-	// A value that indicates whether to show only those reservations that support
-	// Multi-AZ.
+	// The Multi-AZ filter value. Specify this parameter to show only those reservations
+	// matching the specified Multi-AZ parameter.
 	MultiAZ *bool `type:"boolean"`
 
 	// The offering type filter value. Specify this parameter to show only the available

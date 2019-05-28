@@ -79,6 +79,10 @@ type GetDeliverabilityTestReportOutput struct {
 	//
 	// OverallPlacement is a required field
 	OverallPlacement *PlacementStatistics `type:"structure" required:"true"`
+
+	// An array of objects that define the tags (keys and values) that are associated
+	// with the predictive inbox placement test.
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -117,6 +121,18 @@ func (s GetDeliverabilityTestReportOutput) MarshalFields(e protocol.FieldEncoder
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "OverallPlacement", v, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	return nil
 }

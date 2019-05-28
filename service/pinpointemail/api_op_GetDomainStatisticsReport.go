@@ -26,13 +26,13 @@ type GetDomainStatisticsReportInput struct {
 	// 30 days after the StartDate.
 	//
 	// EndDate is a required field
-	EndDate *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	EndDate *time.Time `location:"querystring" locationName:"EndDate" type:"timestamp" timestampFormat:"unix" required:"true"`
 
 	// The first day (in Unix time) that you want to obtain domain deliverability
 	// metrics for.
 	//
 	// StartDate is a required field
-	StartDate *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartDate *time.Time `location:"querystring" locationName:"StartDate" type:"timestamp" timestampFormat:"unix" required:"true"`
 }
 
 // String returns the string representation
@@ -66,23 +66,23 @@ func (s *GetDomainStatisticsReportInput) Validate() error {
 func (s GetDomainStatisticsReportInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if s.EndDate != nil {
-		v := *s.EndDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EndDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
-	}
-	if s.StartDate != nil {
-		v := *s.StartDate
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
-	}
 	if s.Domain != nil {
 		v := *s.Domain
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "Domain", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EndDate != nil {
+		v := *s.EndDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "EndDate", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+	}
+	if s.StartDate != nil {
+		v := *s.StartDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "StartDate", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
 	}
 	return nil
 }

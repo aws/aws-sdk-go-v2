@@ -24,10 +24,10 @@ type DeleteDBClusterInput struct {
 	DBClusterIdentifier *string `type:"string" required:"true"`
 
 	// The DB cluster snapshot identifier of the new DB cluster snapshot created
-	// when SkipFinalSnapshot is disabled.
+	// when SkipFinalSnapshot is set to false.
 	//
-	// Specifying this parameter and also skipping the creation of a final DB cluster
-	// snapshot with the SkipFinalShapshot parameter results in an error.
+	// Specifying this parameter and also setting the SkipFinalShapshot parameter
+	// to true results in an error.
 	//
 	// Constraints:
 	//
@@ -38,14 +38,14 @@ type DeleteDBClusterInput struct {
 	//    * Can't end with a hyphen or contain two consecutive hyphens
 	FinalDBSnapshotIdentifier *string `type:"string"`
 
-	// A value that indicates whether to skip the creation of a final DB cluster
-	// snapshot before the DB cluster is deleted. If skip is specified, no DB cluster
-	// snapshot is created. If skip is not specified, a DB cluster snapshot is created
-	// before the DB cluster is deleted. By default, skip is not specified, and
-	// the DB cluster snapshot is created. By default, this parameter is disabled.
+	// Determines whether a final DB cluster snapshot is created before the DB cluster
+	// is deleted. If true is specified, no DB cluster snapshot is created. If false
+	// is specified, a DB cluster snapshot is created before the DB cluster is deleted.
 	//
 	// You must specify a FinalDBSnapshotIdentifier parameter if SkipFinalSnapshot
-	// is disabled.
+	// is false.
+	//
+	// Default: false
 	SkipFinalSnapshot *bool `type:"boolean"`
 }
 

@@ -31,6 +31,9 @@ type SearchAvailablePhoneNumbersInput struct {
 
 	// The state used to filter results.
 	State *string `location:"querystring" locationName:"state" type:"string"`
+
+	// The toll-free prefix that you use to filter results.
+	TollFreePrefix *string `location:"querystring" locationName:"toll-free-prefix" min:"3" type:"string"`
 }
 
 // String returns the string representation
@@ -43,6 +46,9 @@ func (s *SearchAvailablePhoneNumbersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SearchAvailablePhoneNumbersInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.TollFreePrefix != nil && len(*s.TollFreePrefix) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("TollFreePrefix", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -89,6 +95,12 @@ func (s SearchAvailablePhoneNumbersInput) MarshalFields(e protocol.FieldEncoder)
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.QueryTarget, "state", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TollFreePrefix != nil {
+		v := *s.TollFreePrefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "toll-free-prefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
