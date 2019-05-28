@@ -85,6 +85,10 @@ type GetEmailIdentityOutput struct {
 	// email identity.
 	MailFromAttributes *MailFromAttributes `type:"structure"`
 
+	// An array of objects that define the tags (keys and values) that are associated
+	// with the email identity.
+	Tags []Tag `type:"list"`
+
 	// Specifies whether or not the identity is verified. In Amazon Pinpoint, you
 	// can only send email from verified email addresses or domains. For more information
 	// about verifying identities, see the Amazon Pinpoint User Guide (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html).
@@ -121,6 +125,18 @@ func (s GetEmailIdentityOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "MailFromAttributes", v, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.VerifiedForSendingStatus != nil {
 		v := *s.VerifiedForSendingStatus

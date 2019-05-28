@@ -42,8 +42,8 @@ type RestoreDBClusterFromS3Input struct {
 	// with the specified CharacterSet.
 	CharacterSetName *string `type:"string"`
 
-	// A value that indicates whether to copy all tags from the restored DB cluster
-	// to snapshots of the restored DB cluster. The default is not to copy them.
+	// True to copy all tags from the restored DB cluster to snapshots of the restored
+	// DB cluster, and otherwise false. The default is false.
 	CopyTagsToSnapshot *bool `type:"boolean"`
 
 	// The name of the DB cluster to create from the source data in the Amazon S3
@@ -80,9 +80,9 @@ type RestoreDBClusterFromS3Input struct {
 	// The database name for the restored DB cluster.
 	DatabaseName *string `type:"string"`
 
-	// A value that indicates whether the DB cluster has deletion protection enabled.
-	// The database can't be deleted when deletion protection is enabled. By default,
-	// deletion protection is disabled.
+	// Indicates if the DB cluster should have deletion protection enabled. The
+	// database can't be deleted when this value is set to true. The default is
+	// false.
 	DeletionProtection *bool `type:"boolean"`
 
 	// The list of logs that the restored DB cluster is to export to CloudWatch
@@ -91,8 +91,10 @@ type RestoreDBClusterFromS3Input struct {
 	// in the Amazon Aurora User Guide.
 	EnableCloudwatchLogsExports []string `type:"list"`
 
-	// A value that indicates whether to enable mapping of AWS Identity and Access
-	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
+	// True to enable mapping of AWS Identity and Access Management (IAM) accounts
+	// to database accounts, and otherwise false.
+	//
+	// Default: false
 	EnableIAMDatabaseAuthentication *bool `type:"boolean"`
 
 	// The name of the database engine to be used for the restored DB cluster.
@@ -120,7 +122,7 @@ type RestoreDBClusterFromS3Input struct {
 	// the KMS encryption key used to encrypt the new DB cluster, then you can use
 	// the KMS key alias instead of the ARN for the KM encryption key.
 	//
-	// If the StorageEncrypted parameter is enabled, and you do not specify a value
+	// If the StorageEncrypted parameter is true, and you do not specify a value
 	// for the KmsKeyId parameter, then Amazon RDS will use your default encryption
 	// key. AWS KMS creates the default encryption key for your AWS account. Your
 	// AWS account has a different default encryption key for each AWS Region.
@@ -231,7 +233,7 @@ type RestoreDBClusterFromS3Input struct {
 	// SourceEngineVersion is a required field
 	SourceEngineVersion *string `type:"string" required:"true"`
 
-	// A value that indicates whether the restored DB cluster is encrypted.
+	// Specifies whether the restored DB cluster is encrypted.
 	StorageEncrypted *bool `type:"boolean"`
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)

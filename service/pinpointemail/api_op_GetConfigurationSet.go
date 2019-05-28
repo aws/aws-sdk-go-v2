@@ -74,6 +74,10 @@ type GetConfigurationSetOutput struct {
 	// you send using the configuration set.
 	SendingOptions *SendingOptions `type:"structure"`
 
+	// An array of objects that define the tags (keys and values) that are associated
+	// with the configuration set.
+	Tags []Tag `type:"list"`
+
 	// An object that defines the open and click tracking options for emails that
 	// you send using the configuration set.
 	TrackingOptions *TrackingOptions `type:"structure"`
@@ -109,6 +113,18 @@ func (s GetConfigurationSetOutput) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "SendingOptions", v, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.TrackingOptions != nil {
 		v := s.TrackingOptions

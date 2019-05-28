@@ -60,7 +60,7 @@ type AssumeRoleInput struct {
 	// the role's temporary credentials in subsequent AWS API calls to access resources
 	// in the account that owns the role. You cannot use session policies to grant
 	// more permissions than those allowed by the identity-based policy of the role
-	// that is being assumed. For more information, see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session)
+	// that is being assumed. For more information, see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
 	// in the IAM User Guide.
 	//
 	// The plain text that you use for both inline and managed session policies
@@ -98,7 +98,7 @@ type AssumeRoleInput struct {
 	// in subsequent AWS API calls to access resources in the account that owns
 	// the role. You cannot use session policies to grant more permissions than
 	// those allowed by the identity-based policy of the role that is being assumed.
-	// For more information, see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session)
+	// For more information, see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
 	// in the IAM User Guide.
 	PolicyArns []PolicyDescriptorType `type:"list"`
 
@@ -282,7 +282,7 @@ const opAssumeRole = "AssumeRole"
 // AWS API calls to access resources in the account that owns the role. You
 // cannot use session policies to grant more permissions than those allowed
 // by the identity-based policy of the role that is being assumed. For more
-// information, see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session)
+// information, see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
 // in the IAM User Guide.
 //
 // To assume a role from a different account, your AWS account must be trusted

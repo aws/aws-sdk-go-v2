@@ -39,8 +39,8 @@ type CreateDeliverabilityTestReportInput struct {
 	// when you retrieve the results.
 	ReportName *string `type:"string"`
 
-	// An object that defines the tags (keys and values) that you want to associate
-	// with the predictive inbox placement test.
+	// An array of objects that define the tags (keys and values) that you want
+	// to associate with the predictive inbox placement test.
 	Tags []Tag `type:"list"`
 }
 

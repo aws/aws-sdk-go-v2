@@ -90,7 +90,8 @@ const opUpdatePhoneNumber = "UpdatePhoneNumber"
 // Amazon Chime.
 //
 // Updates phone number details, such as product type, for the specified phone
-// number ID.
+// number ID. For toll-free numbers, you can use only the Amazon Chime Voice
+// Connector product type.
 //
 //    // Example sending a request using UpdatePhoneNumberRequest.
 //    req := client.UpdatePhoneNumberRequest(params)

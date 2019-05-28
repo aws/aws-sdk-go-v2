@@ -1,3 +1,58 @@
+Release v0.9.0 (2019-05-28)
+===
+
+### Services
+* Synced the V2 SDK with latest AWS service API definitions.
+* Fixes [#304](https://github.com/aws/aws-sdk-go-v2/issues/304)
+* Fixes [#295](https://github.com/aws/aws-sdk-go-v2/issues/295)
+
+### SDK Breaking changes
+This update includes multiple breaking changes to the SDK. These updates improve the SDK's usability, consistency.
+
+#### Client type name
+The API client type is renamed to `Client` for consistency, and remove stutter between package and client type name. Using Amazon S3 API client as an example, the `s3.S3` type is renamed to `s3.Client`.
+
+#### New API operation response type
+API operations' `Request.Send` method now returns a Response type for the specific operation. The Response type wraps the operation's Output parameter, and includes a method for the response's metadata such as RequestID. The Output type is an anonymous embedded field within the Output type. If your application was passing the Output value around you'll need to extract it directly, or pass the Response type instead.
+
+#### New API operation paginator utility
+This change removes the `Paginate` method from API operation Request types, (e.g. ListObjectsRequest). A new Paginator constructor is added that can be used to page these operations. To update your application to use the new pattern, where `Paginate` was being called, replace this with the Paginator type's constructor. The usage of the returned Paginator type is unchanged.
+
+```go
+req := svc.ListObjectsRequest(params)
+p := req.Paginate()
+```
+
+Is updated to to use the Paginator constructor instead of Paginate method.
+
+```go
+req := svc.ListObjectsRequest(params)
+p := s3.NewListObjectsPaginator(req)
+```
+
+#### Other changes
+  * Standardizes API client package name to be based on the API model's `ServiceID`.
+  * Standardizes API client operation input and output type names.
+  * Removes `endpoints` package's service identifier constants. These values were unstable. Each API client package contains an `EndpointsID` constant that can be used for service specific endpoint lookup.
+  * Fix API endpoint lookups to use the API's modeled `EndpointsID` (aka `enpdointPrefix`). Searching for API endpoints in the `endpoints` package should use the API client package's, `EndpointsID`.
+
+### SDK Enhancements
+*  Update CI tests to ensure all codegen changes are accounted for in PR ([#183](https://github.com/aws/aws-sdk-go-v2/issues/183))
+  * Updates the CI tests to ensure that any code generation changes are accounted for in the PR, and that there were no mistaken changes made without also running code generation. This change should also help ensure that code generation order is stable, and there are no ordering issues with the SDK's codegen.
+  * Related [aws/aws-sdk-go#1966](https://github.com/aws/aws-sdk-go/issues/1966)
+
+### SDK Bugs
+* `service/dynamodb/expression`: Fix Builder with KeyCondition example ([#306](https://github.com/aws/aws-sdk-go-v2/issues/306))
+  * Fixes the ExampleBuilder_WithKeyCondition example to include the ExpressionAttributeNames member being set.
+  * Fixes [#285](https://github.com/aws/aws-sdk-go-v2/issues/285)
+* `aws/defaults`: Fix UserAgent execution environment key ([#307](https://github.com/aws/aws-sdk-go-v2/issues/307))
+  * Fixes the SDK's UserAgent key for the execution environment.
+  * Fixes [#276](https://github.com/aws/aws-sdk-go-v2/issues/276)
+* `private/model/api`: Improve SDK API reference doc generation ([#309](https://github.com/aws/aws-sdk-go-v2/issues/309))
+  * Improves the SDK's generated documentation for API client, operation, and types. This fixes several bugs in the doc generation causing poor formatting, an difficult to read reference documentation.
+  * Fix [#308](https://github.com/aws/aws-sdk-go-v2/issues/308)
+  * Related [aws/aws-sdk-go#2617](https://github.com/aws/aws-sdk-go/issues/2617)
+
 Release v0.8.0 (2019-04-25)
 ===
 

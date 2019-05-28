@@ -140,6 +140,10 @@ type DescribeSimulationJobOutput struct {
 	IamRole *string `locationName:"iamRole" min:"1" type:"string"`
 
 	// The time, in milliseconds since the epoch, when the simulation job was last
+	// started.
+	LastStartedAt *time.Time `locationName:"lastStartedAt" type:"timestamp" timestampFormat:"unix"`
+
+	// The time, in milliseconds since the epoch, when the simulation job was last
 	// updated.
 	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
 
@@ -214,6 +218,12 @@ func (s DescribeSimulationJobOutput) MarshalFields(e protocol.FieldEncoder) erro
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "iamRole", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastStartedAt != nil {
+		v := *s.LastStartedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastStartedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
 	if s.LastUpdatedAt != nil {
 		v := *s.LastUpdatedAt

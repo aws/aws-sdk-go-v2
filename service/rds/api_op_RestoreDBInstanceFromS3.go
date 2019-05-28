@@ -21,9 +21,10 @@ type RestoreDBInstanceFromS3Input struct {
 	// growth.
 	AllocatedStorage *int64 `type:"integer"`
 
-	// A value that indicates whether minor engine upgrades are applied automatically
-	// to the DB instance during the maintenance window. By default, minor engine
-	// upgrades are not applied automatically.
+	// True to indicate that minor engine upgrades are applied automatically to
+	// the DB instance during the maintenance window, and otherwise false.
+	//
+	// Default: true
 	AutoMinorVersionUpgrade *bool `type:"boolean"`
 
 	// The Availability Zone that the DB instance is created in. For information
@@ -36,8 +37,8 @@ type RestoreDBInstanceFromS3Input struct {
 	//
 	// Example: us-east-1d
 	//
-	// Constraint: The AvailabilityZone parameter can't be specified if the DB instance
-	// is a Multi-AZ deployment. The specified Availability Zone must be in the
+	// Constraint: The AvailabilityZone parameter can't be specified if the MultiAZ
+	// parameter is set to true. The specified Availability Zone must be in the
 	// same AWS Region as the current endpoint.
 	AvailabilityZone *string `type:"string"`
 
@@ -46,8 +47,10 @@ type RestoreDBInstanceFromS3Input struct {
 	// CreateDBInstance.
 	BackupRetentionPeriod *int64 `type:"integer"`
 
-	// A value that indicates whether to copy all tags from the DB instance to snapshots
-	// of the DB instance. By default, tags are not copied.
+	// True to copy all tags from the restored DB instance to snapshots of the restored
+	// DB instance, and otherwise false.
+	//
+	// Default: false.
 	CopyTagsToSnapshot *bool `type:"boolean"`
 
 	// The compute and memory capacity of the DB instance, for example, db.m4.large.
@@ -94,10 +97,9 @@ type RestoreDBInstanceFromS3Input struct {
 	// A DB subnet group to associate with this DB instance.
 	DBSubnetGroupName *string `type:"string"`
 
-	// A value that indicates whether the DB instance has deletion protection enabled.
-	// The database can't be deleted when deletion protection is enabled. By default,
-	// deletion protection is disabled. For more information, see Deleting a DB
-	// Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
+	// Indicates if the DB instance should have deletion protection enabled. The
+	// database can't be deleted when this value is set to true. The default is
+	// false. For more information, see Deleting a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
 	DeletionProtection *bool `type:"boolean"`
 
 	// The list of logs that the restored DB instance is to export to CloudWatch
@@ -106,12 +108,13 @@ type RestoreDBInstanceFromS3Input struct {
 	// in the Amazon RDS User Guide.
 	EnableCloudwatchLogsExports []string `type:"list"`
 
-	// A value that indicates whether to enable mapping of AWS Identity and Access
-	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
+	// True to enable mapping of AWS Identity and Access Management (IAM) accounts
+	// to database accounts, and otherwise false.
+	//
+	// Default: false
 	EnableIAMDatabaseAuthentication *bool `type:"boolean"`
 
-	// A value that indicates whether to enable Performance Insights for the DB
-	// instance.
+	// True to enable Performance Insights for the DB instance, and otherwise false.
 	//
 	// For more information, see Using Amazon Performance Insights (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
 	// in the Amazon Relational Database Service User Guide.
@@ -142,7 +145,7 @@ type RestoreDBInstanceFromS3Input struct {
 	// the KMS encryption key used to encrypt the new DB instance, then you can
 	// use the KMS key alias instead of the ARN for the KM encryption key.
 	//
-	// If the StorageEncrypted parameter is enabled, and you do not specify a value
+	// If the StorageEncrypted parameter is true, and you do not specify a value
 	// for the KmsKeyId parameter, then Amazon RDS will use your default encryption
 	// key. AWS KMS creates the default encryption key for your AWS account. Your
 	// AWS account has a different default encryption key for each AWS Region.
@@ -190,9 +193,8 @@ type RestoreDBInstanceFromS3Input struct {
 	// a MonitoringRoleArn value.
 	MonitoringRoleArn *string `type:"string"`
 
-	// A value that indicates whether the DB instance is a Multi-AZ deployment.
-	// If the DB instance is a Multi-AZ deployment, you can't set the AvailabilityZone
-	// parameter.
+	// Specifies whether the DB instance is a Multi-AZ deployment. If MultiAZ is
+	// set to true, you can't set the AvailabilityZone parameter.
 	MultiAZ *bool `type:"boolean"`
 
 	// The name of the option group to associate with this DB instance. If this
@@ -203,11 +205,6 @@ type RestoreDBInstanceFromS3Input struct {
 	// The AWS KMS key identifier for encryption of Performance Insights data. The
 	// KMS key ID is the Amazon Resource Name (ARN), the KMS key identifier, or
 	// the KMS key alias for the KMS encryption key.
-	//
-	// If you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon
-	// RDS uses your default encryption key. AWS KMS creates the default encryption
-	// key for your AWS account. Your AWS account has a different default encryption
-	// key for each AWS Region.
 	PerformanceInsightsKMSKeyId *string `type:"string"`
 
 	// The amount of time, in days, to retain Performance Insights data. Valid values
@@ -260,12 +257,11 @@ type RestoreDBInstanceFromS3Input struct {
 	// class of the DB instance.
 	ProcessorFeatures []ProcessorFeature `locationNameList:"ProcessorFeature" type:"list"`
 
-	// A value that indicates whether the DB instance is publicly accessible. When
-	// the DB instance is publicly accessible, it is an Internet-facing instance
-	// with a publicly resolvable DNS name, which resolves to a public IP address.
-	// When the DB instance is not publicly accessible, it is an internal instance
-	// with a DNS name that resolves to a private IP address. For more information,
-	// see CreateDBInstance.
+	// Specifies the accessibility options for the DB instance. A value of true
+	// specifies an Internet-facing instance with a publicly resolvable DNS name,
+	// which resolves to a public IP address. A value of false specifies an internal
+	// instance with a DNS name that resolves to a private IP address. For more
+	// information, see CreateDBInstance.
 	PubliclyAccessible *bool `type:"boolean"`
 
 	// The name of your Amazon S3 bucket that contains your database backup file.
@@ -296,7 +292,7 @@ type RestoreDBInstanceFromS3Input struct {
 	// SourceEngineVersion is a required field
 	SourceEngineVersion *string `type:"string" required:"true"`
 
-	// A value that indicates whether the new DB instance is encrypted or not.
+	// Specifies whether the new DB instance is encrypted or not.
 	StorageEncrypted *bool `type:"boolean"`
 
 	// Specifies the storage type to be associated with the DB instance.
@@ -305,7 +301,7 @@ type RestoreDBInstanceFromS3Input struct {
 	//
 	// If you specify io1, you must also include a value for the Iops parameter.
 	//
-	// Default: io1 if the Iops parameter is specified; otherwise gp2
+	// Default: io1 if the Iops parameter is specified; otherwise standard
 	StorageType *string `type:"string"`
 
 	// A list of tags to associate with this DB instance. For more information,
@@ -313,7 +309,7 @@ type RestoreDBInstanceFromS3Input struct {
 	// in the Amazon RDS User Guide.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 
-	// A value that indicates whether the DB instance class of the DB instance uses
+	// A value that specifies that the DB instance class of the DB instance uses
 	// its default processor features.
 	UseDefaultProcessorFeatures *bool `type:"boolean"`
 

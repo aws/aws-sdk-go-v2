@@ -52,7 +52,7 @@ type GetFederationTokenInput struct {
 	// you a way to further restrict the permissions for a federated user. You cannot
 	// use session policies to grant more permissions than those that are defined
 	// in the permissions policy of the IAM user. For more information, see Session
-	// Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session)
+	// Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
 	// in the IAM User Guide.
 	//
 	// The plain text that you use for both inline and managed session policies
@@ -92,7 +92,7 @@ type GetFederationTokenInput struct {
 	// you a way to further restrict the permissions for a federated user. You cannot
 	// use session policies to grant more permissions than those that are defined
 	// in the permissions policy of the IAM user. For more information, see Session
-	// Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session)
+	// Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
 	// in the IAM User Guide.
 	//
 	// The characters in this parameter count towards the 2048 character session
@@ -231,7 +231,7 @@ const opGetFederationToken = "GetFederationToken"
 // you pass. This gives you a way to further restrict the permissions for a
 // federated user. You cannot use session policies to grant more permissions
 // than those that are defined in the permissions policy of the IAM user. For
-// more information, see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM/latest/UserGuide/access_policies.html#policies_session)
+// more information, see Session Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
 // in the IAM User Guide. For information about using GetFederationToken to
 // create temporary security credentials, see GetFederationToken—Federation
 // Through a Custom Identity Broker (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_getfederationtoken).

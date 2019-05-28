@@ -43,8 +43,8 @@ type CreateDBClusterInput struct {
 	// specified CharacterSet.
 	CharacterSetName *string `type:"string"`
 
-	// A value that indicates whether to copy all tags from the DB cluster to snapshots
-	// of the DB cluster. The default is not to copy them.
+	// True to copy all tags from the DB cluster to snapshots of the DB cluster,
+	// and otherwise false. The default is false.
 	CopyTagsToSnapshot *bool `type:"boolean"`
 
 	// The DB cluster identifier. This parameter is stored as a lowercase string.
@@ -84,9 +84,9 @@ type CreateDBClusterInput struct {
 	// you are creating.
 	DatabaseName *string `type:"string"`
 
-	// A value that indicates whether the DB cluster has deletion protection enabled.
-	// The database can't be deleted when deletion protection is enabled. By default,
-	// deletion protection is disabled.
+	// Indicates whether the DB cluster should have deletion protection enabled.
+	// The database can't be deleted when this value is set to true. The default
+	// is false.
 	DeletionProtection *bool `type:"boolean"`
 
 	// DestinationRegion is used for presigning the request to a given region.
@@ -98,8 +98,10 @@ type CreateDBClusterInput struct {
 	// in the Amazon Aurora User Guide.
 	EnableCloudwatchLogsExports []string `type:"list"`
 
-	// A value that indicates whether to enable mapping of AWS Identity and Access
-	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
+	// True to enable mapping of AWS Identity and Access Management (IAM) accounts
+	// to database accounts, and otherwise false.
+	//
+	// Default: false
 	EnableIAMDatabaseAuthentication *bool `type:"boolean"`
 
 	// The name of the database engine to be used for this DB cluster.
@@ -142,7 +144,7 @@ type CreateDBClusterInput struct {
 	//    Amazon RDS will use the encryption key used to encrypt the source. Otherwise,
 	//    Amazon RDS will use your default encryption key.
 	//
-	//    * If the StorageEncrypted parameter is enabled and ReplicationSourceIdentifier
+	//    * If the StorageEncrypted parameter is true and ReplicationSourceIdentifier
 	//    is not specified, then Amazon RDS will use your default encryption key.
 	//
 	// AWS KMS creates the default encryption key for your AWS account. Your AWS
@@ -261,7 +263,7 @@ type CreateDBClusterInput struct {
 	// have the same region as the source ARN.
 	SourceRegion *string `type:"string" ignore:"true"`
 
-	// A value that indicates whether the DB cluster is encrypted.
+	// Specifies whether the DB cluster is encrypted.
 	StorageEncrypted *bool `type:"boolean"`
 
 	// Tags to assign to the DB cluster.

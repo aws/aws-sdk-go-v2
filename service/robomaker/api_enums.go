@@ -60,6 +60,7 @@ const (
 	DeploymentStatusInProgress DeploymentStatus = "InProgress"
 	DeploymentStatusFailed     DeploymentStatus = "Failed"
 	DeploymentStatusSucceeded  DeploymentStatus = "Succeeded"
+	DeploymentStatusCanceled   DeploymentStatus = "Canceled"
 )
 
 func (enum DeploymentStatus) MarshalValue() (string, error) {

@@ -229,6 +229,23 @@ func (enum PhoneNumberStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type PhoneNumberType string
+
+// Enum values for PhoneNumberType
+const (
+	PhoneNumberTypeLocal    PhoneNumberType = "Local"
+	PhoneNumberTypeTollFree PhoneNumberType = "TollFree"
+)
+
+func (enum PhoneNumberType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PhoneNumberType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RegistrationStatus string
 
 // Enum values for RegistrationStatus

@@ -10,25 +10,29 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// A request to enable or disable the Deliverability dashboard. When you enable
-// the Deliverability dashboard, you gain access to reputation metrics for the
-// domains that you use to send email using Amazon Pinpoint. You also gain the
-// ability to perform predictive inbox placement tests.
+// Enable or disable the Deliverability dashboard for your Amazon Pinpoint account.
+// When you enable the Deliverability dashboard, you gain access to reputation,
+// deliverability, and other metrics for the domains that you use to send email
+// using Amazon Pinpoint. You also gain the ability to perform predictive inbox
+// placement tests.
 //
-// When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00,
-// in addition to any other fees that you accrue by using Amazon Pinpoint. If
-// you enable the Deliverability dashboard after the first day of a calendar
-// month, we prorate the monthly charge based on how many days have elapsed
-// in the current calendar month.
+// When you use the Deliverability dashboard, you pay a monthly subscription
+// charge, in addition to any other fees that you accrue by using Amazon Pinpoint.
+// For more information about the features and cost of a Deliverability dashboard
+// subscription, see Amazon Pinpoint Pricing (http://aws.amazon.com/pinpoint/pricing/).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutDeliverabilityDashboardOptionRequest
 type PutDeliverabilityDashboardOptionInput struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates whether the Deliverability dashboard is enabled. If the value is
-	// true, then the dashboard is enabled.
+	// Specifies whether to enable the Deliverability dashboard for your Amazon
+	// Pinpoint account. To enable the dashboard, set this value to true.
 	//
 	// DashboardEnabled is a required field
 	DashboardEnabled *bool `type:"boolean" required:"true"`
+
+	// An array of objects, one for each verified domain that you use to send email
+	// and enabled the Deliverability dashboard for.
+	SubscribedDomains []DomainDeliverabilityTrackingOption `type:"list"`
 }
 
 // String returns the string representation
@@ -60,6 +64,18 @@ func (s PutDeliverabilityDashboardOptionInput) MarshalFields(e protocol.FieldEnc
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "DashboardEnabled", protocol.BoolValue(v), metadata)
 	}
+	if len(s.SubscribedDomains) > 0 {
+		v := s.SubscribedDomains
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SubscribedDomains", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	return nil
 }
 
@@ -85,16 +101,16 @@ const opPutDeliverabilityDashboardOption = "PutDeliverabilityDashboardOption"
 // PutDeliverabilityDashboardOptionRequest returns a request value for making API operation for
 // Amazon Pinpoint Email Service.
 //
-// Enable or disable the Deliverability dashboard. When you enable the Deliverability
-// dashboard, you gain access to reputation metrics for the domains that you
-// use to send email using Amazon Pinpoint. You also gain the ability to perform
-// predictive inbox placement tests.
+// Enable or disable the Deliverability dashboard for your Amazon Pinpoint account.
+// When you enable the Deliverability dashboard, you gain access to reputation,
+// deliverability, and other metrics for the domains that you use to send email
+// using Amazon Pinpoint. You also gain the ability to perform predictive inbox
+// placement tests.
 //
-// When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00,
-// in addition to any other fees that you accrue by using Amazon Pinpoint. If
-// you enable the Deliverability dashboard after the first day of a calendar
-// month, we prorate the monthly charge based on how many days have elapsed
-// in the current calendar month.
+// When you use the Deliverability dashboard, you pay a monthly subscription
+// charge, in addition to any other fees that you accrue by using Amazon Pinpoint.
+// For more information about the features and cost of a Deliverability dashboard
+// subscription, see Amazon Pinpoint Pricing (http://aws.amazon.com/pinpoint/pricing/).
 //
 //    // Example sending a request using PutDeliverabilityDashboardOptionRequest.
 //    req := client.PutDeliverabilityDashboardOptionRequest(params)

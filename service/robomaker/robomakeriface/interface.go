@@ -63,6 +63,8 @@ import (
 type ClientAPI interface {
 	BatchDescribeSimulationJobRequest(*robomaker.BatchDescribeSimulationJobInput) robomaker.BatchDescribeSimulationJobRequest
 
+	CancelDeploymentJobRequest(*robomaker.CancelDeploymentJobInput) robomaker.CancelDeploymentJobRequest
+
 	CancelSimulationJobRequest(*robomaker.CancelSimulationJobInput) robomaker.CancelSimulationJobRequest
 
 	CreateDeploymentJobRequest(*robomaker.CreateDeploymentJobInput) robomaker.CreateDeploymentJobRequest

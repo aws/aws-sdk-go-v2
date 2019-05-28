@@ -613,6 +613,9 @@ type PhoneNumber struct {
 	// The phone number status.
 	Status PhoneNumberStatus `type:"string" enum:"true"`
 
+	// The phone number type.
+	Type PhoneNumberType `type:"string" enum:"true"`
+
 	// The updated phone number timestamp, in ISO 8601 format.
 	UpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
 }
@@ -677,6 +680,12 @@ func (s PhoneNumber) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.UpdatedTimestamp != nil {
 		v := *s.UpdatedTimestamp

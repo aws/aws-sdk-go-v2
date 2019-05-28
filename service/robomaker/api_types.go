@@ -607,11 +607,11 @@ type ProgressDetail struct {
 	//
 	// Validating the deployment.
 	//
-	// Downloading/Extracting
+	// DownloadingExtracting
 	//
 	// Downloading and extracting the bundle on the robot.
 	//
-	// Executing pre-launch script(s)
+	// ExecutingPreLaunch
 	//
 	// Executing pre-launch script(s) if provided.
 	//
@@ -619,7 +619,7 @@ type ProgressDetail struct {
 	//
 	// Launching the robot application.
 	//
-	// Executing post-launch script(s)
+	// ExecutingPostLaunch
 	//
 	// Executing post-launch script(s) if provided.
 	//
@@ -897,6 +897,9 @@ type RobotApplicationSummary struct {
 	// The name of the robot application.
 	Name *string `locationName:"name" min:"1" type:"string"`
 
+	// Information about a robot software suite.
+	RobotSoftwareSuite *RobotSoftwareSuite `locationName:"robotSoftwareSuite" type:"structure"`
+
 	// The version of the robot application.
 	Version *string `locationName:"version" min:"1" type:"string"`
 }
@@ -925,6 +928,12 @@ func (s RobotApplicationSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RobotSoftwareSuite != nil {
+		v := s.RobotSoftwareSuite
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "robotSoftwareSuite", v, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
@@ -1139,6 +1148,12 @@ type SimulationApplicationSummary struct {
 	// The name of the simulation application.
 	Name *string `locationName:"name" min:"1" type:"string"`
 
+	// Information about a robot software suite.
+	RobotSoftwareSuite *RobotSoftwareSuite `locationName:"robotSoftwareSuite" type:"structure"`
+
+	// Information about a simulation software suite.
+	SimulationSoftwareSuite *SimulationSoftwareSuite `locationName:"simulationSoftwareSuite" type:"structure"`
+
 	// The version of the simulation application.
 	Version *string `locationName:"version" min:"1" type:"string"`
 }
@@ -1167,6 +1182,18 @@ func (s SimulationApplicationSummary) MarshalFields(e protocol.FieldEncoder) err
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RobotSoftwareSuite != nil {
+		v := s.RobotSoftwareSuite
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "robotSoftwareSuite", v, metadata)
+	}
+	if s.SimulationSoftwareSuite != nil {
+		v := s.SimulationSoftwareSuite
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "simulationSoftwareSuite", v, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
@@ -1207,9 +1234,12 @@ type SimulationJob struct {
 
 	// The IAM role that allows the simulation instance to call the AWS APIs that
 	// are specified in its associated policies on your behalf. This is how credentials
-	// are passed in to your simulation job. See how to specify AWS security credentials
-	// for your application (https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/deployment-ecs-specify-credentials).
+	// are passed in to your simulation job.
 	IamRole *string `locationName:"iamRole" min:"1" type:"string"`
+
+	// The time, in milliseconds since the epoch, when the simulation job was last
+	// started.
+	LastStartedAt *time.Time `locationName:"lastStartedAt" type:"timestamp" timestampFormat:"unix"`
 
 	// The time, in milliseconds since the epoch, when the simulation job was last
 	// updated.
@@ -1287,6 +1317,12 @@ func (s SimulationJob) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "iamRole", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastStartedAt != nil {
+		v := *s.LastStartedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastStartedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
 	if s.LastUpdatedAt != nil {
 		v := *s.LastUpdatedAt

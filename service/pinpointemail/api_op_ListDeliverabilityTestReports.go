@@ -18,7 +18,7 @@ type ListDeliverabilityTestReportsInput struct {
 
 	// A token returned from a previous call to ListDeliverabilityTestReports to
 	// indicate the position in the list of predictive inbox placement tests.
-	NextToken *string `type:"string"`
+	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
 
 	// The number of results to show in a single call to ListDeliverabilityTestReports.
 	// If the number of results is larger than the number you specified in this
@@ -26,7 +26,7 @@ type ListDeliverabilityTestReportsInput struct {
 	// use to obtain additional results.
 	//
 	// The value you specify has to be at least 0, and can be no more than 1000.
-	PageSize *int64 `type:"integer"`
+	PageSize *int64 `location:"querystring" locationName:"PageSize" type:"integer"`
 }
 
 // String returns the string representation
@@ -42,13 +42,13 @@ func (s ListDeliverabilityTestReportsInput) MarshalFields(e protocol.FieldEncode
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.PageSize != nil {
 		v := *s.PageSize
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "PageSize", protocol.Int64Value(v), metadata)
+		e.SetValue(protocol.QueryTarget, "PageSize", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }

@@ -24,15 +24,15 @@ type DeleteDBInstanceInput struct {
 	DBInstanceIdentifier *string `type:"string" required:"true"`
 
 	// A value that indicates whether to remove automated backups immediately after
-	// the DB instance is deleted. This parameter isn't case-sensitive. The default
-	// is to remove automated backups immediately after the DB instance is deleted.
+	// the DB instance is deleted. This parameter isn't case-sensitive. This parameter
+	// defaults to true.
 	DeleteAutomatedBackups *bool `type:"boolean"`
 
-	// The DBSnapshotIdentifier of the new DBSnapshot created when the SkipFinalSnapshot
-	// parameter is disabled.
+	// The DBSnapshotIdentifier of the new DB snapshot created when SkipFinalSnapshot
+	// is set to false.
 	//
-	// Specifying this parameter and also specifying to skip final DB snapshot creation
-	// in SkipFinalShapshot results in an error.
+	// Specifying this parameter and also setting the SkipFinalShapshot parameter
+	// to true results in an error.
 	//
 	// Constraints:
 	//
@@ -45,20 +45,21 @@ type DeleteDBInstanceInput struct {
 	//    * Can't be specified when deleting a Read Replica.
 	FinalDBSnapshotIdentifier *string `type:"string"`
 
-	// A value that indicates whether to skip the creation of a final DB snapshot
-	// before the DB instance is deleted. If skip is specified, no DB snapshot is
-	// created. If skip is not specified, a DB snapshot is created before the DB
-	// instance is deleted. By default, skip is not specified, and the DB snapshot
-	// is created.
+	// A value that indicates whether a final DB snapshot is created before the
+	// DB instance is deleted. If true is specified, no DB snapshot is created.
+	// If false is specified, a DB snapshot is created before the DB instance is
+	// deleted.
 	//
-	// Note that when a DB instance is in a failure state and has a status of 'failed',
-	// 'incompatible-restore', or 'incompatible-network', it can only be deleted
-	// when skip is specified.
+	// When a DB instance is in a failure state and has a status of failed, incompatible-restore,
+	// or incompatible-network, you can only delete it when the SkipFinalSnapshot
+	// parameter is set to true.
 	//
-	// Specify skip when deleting a Read Replica.
+	// Specify true when deleting a Read Replica.
 	//
-	// The FinalDBSnapshotIdentifier parameter must be specified if skip is not
-	// specified.
+	// The FinalDBSnapshotIdentifier parameter must be specified if SkipFinalSnapshot
+	// is false.
+	//
+	// Default: false
 	SkipFinalSnapshot *bool `type:"boolean"`
 }
 
@@ -113,7 +114,7 @@ const opDeleteDBInstance = "DeleteDBInstance"
 //
 // Note that when a DB instance is in a failure state and has a status of failed,
 // incompatible-restore, or incompatible-network, you can only delete it when
-// you skip creation of the final snapshot with the SkipFinalSnapshot parameter.
+// the SkipFinalSnapshot parameter is set to true.
 //
 // If the specified DB instance is part of an Amazon Aurora DB cluster, you
 // can't delete the DB instance if both of the following conditions are true:

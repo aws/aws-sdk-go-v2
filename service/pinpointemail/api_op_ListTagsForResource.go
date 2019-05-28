@@ -18,7 +18,7 @@ type ListTagsForResourceInput struct {
 	// tag information for.
 	//
 	// ResourceArn is a required field
-	ResourceArn *string `type:"string" required:"true"`
+	ResourceArn *string `location:"querystring" locationName:"ResourceArn" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -48,7 +48,7 @@ func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ResourceArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ResourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "ResourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -92,7 +92,7 @@ const opListTagsForResource = "ListTagsForResource"
 // Amazon Pinpoint Email Service.
 //
 // Retrieve a list of the tags (keys and values) that are associated with a
-// specific resource. A tag is a label that you optionally define and associate
+// specified resource. A tag is a label that you optionally define and associate
 // with a resource in Amazon Pinpoint. Each tag consists of a required tag key
 // and an optional associated tag value. A tag key is a general label that acts
 // as a category for more specific tag values. A tag value acts as a descriptor

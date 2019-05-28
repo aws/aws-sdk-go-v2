@@ -80,6 +80,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator"
 	"github.com/aws/aws-sdk-go-v2/service/glue"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty"
 	"github.com/aws/aws-sdk-go-v2/service/health"
 	"github.com/aws/aws-sdk-go-v2/service/iam"
@@ -268,6 +269,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "globalaccelerator", value: reflect.ValueOf(globalaccelerator.New(cfg))},
 		{name: "glue", value: reflect.ValueOf(glue.New(cfg))},
 		{name: "greengrass", value: reflect.ValueOf(greengrass.New(cfg))},
+		{name: "groundstation", value: reflect.ValueOf(groundstation.New(cfg))},
 		{name: "guardduty", value: reflect.ValueOf(guardduty.New(cfg))},
 		{name: "health", value: reflect.ValueOf(health.New(cfg))},
 		{name: "iam", value: reflect.ValueOf(iam.New(cfg))},
