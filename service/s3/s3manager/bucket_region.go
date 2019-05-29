@@ -53,12 +53,6 @@ func GetBucketRegionWithClient(ctx context.Context, svc s3iface.ClientAPI, bucke
 		Bucket: aws.String(bucket),
 	})
 
-	// Disable HTTP redirects to prevent an invalid 301 from eating the response
-	// because Go's HTTP client will fail, and drop the response if an 301 is
-	// received without a location header. S3 will return a 301 without the
-	// location header for HeadObject API calls.
-	req.DisableFollowRedirects = true
-
 	var bucketRegion string
 	req.Handlers.Send.PushBack(func(r *aws.Request) {
 		bucketRegion = r.HTTPResponse.Header.Get(bucketRegionHeader)

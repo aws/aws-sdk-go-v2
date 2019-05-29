@@ -91,11 +91,9 @@ var ValidateReqSigHandler = aws.NamedHandler{
 var SendHandler = aws.NamedHandler{
 	Name: "core.SendHandler",
 	Fn: func(r *aws.Request) {
-		sender := sendFollowRedirects
-		if r.DisableFollowRedirects {
-			sender = sendWithoutFollowRedirects
-		}
 
+		// TODO remove this complexity the SDK's built http.Request should
+		// set Request.Body to nil, if there is no body to send. #318
 		if aws.NoBody == r.HTTPRequest.Body {
 			// Strip off the request body if the NoBody reader was used as a
 			// place holder for a request body. This prevents the SDK from
@@ -113,24 +111,26 @@ var SendHandler = aws.NamedHandler{
 		}
 
 		var err error
-		r.HTTPResponse, err = sender(r)
+		r.HTTPResponse, err = sendRequest(r.Config.HTTPClient, r.HTTPRequest)
 		if err != nil {
 			handleSendError(r, err)
 		}
 	},
 }
 
-func sendFollowRedirects(r *aws.Request) (*http.Response, error) {
-	return r.Config.HTTPClient.Do(r.HTTPRequest)
-}
-
-func sendWithoutFollowRedirects(r *aws.Request) (*http.Response, error) {
-	transport := r.Config.HTTPClient.Transport
-	if transport == nil {
-		transport = http.DefaultTransport
+func sendRequest(client aws.HTTPClient, r *http.Request) (*http.Response, error) {
+	resp, err := client.Do(r)
+	if err != nil {
+		return resp, err
 	}
 
-	return transport.RoundTrip(r.HTTPRequest)
+	switch resp.StatusCode {
+	case 307, 308:
+		if r.GetBody != nil {
+		}
+	}
+
+	return resp, nil
 }
 
 func handleSendError(r *aws.Request, err error) {

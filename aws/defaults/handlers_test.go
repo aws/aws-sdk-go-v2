@@ -252,7 +252,6 @@ func TestSendWithoutFollowRedirects(t *testing.T) {
 		Name:     "Operation",
 		HTTPPath: "/original",
 	}, nil, nil)
-	r.DisableFollowRedirects = true
 
 	err := r.Send()
 	if err != nil {

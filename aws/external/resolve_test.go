@@ -1,12 +1,14 @@
 package external
 
 import (
+	"io/ioutil"
 	"net/http"
 	"strings"
 	"testing"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/aws/ec2rolecreds"
 	"github.com/aws/aws-sdk-go-v2/aws/endpointcreds"
 	"github.com/aws/aws-sdk-go-v2/aws/stscreds"
@@ -19,17 +21,72 @@ func TestResolveCustomCABundle(t *testing.T) {
 		WithCustomCABundle(awstesting.TLSBundleCA),
 	}
 
-	cfg := aws.Config{
-		HTTPClient: &http.Client{Transport: &http.Transport{}},
-	}
-
+	cfg := defaults.Config()
 	if err := ResolveCustomCABundle(&cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	transport := cfg.HTTPClient.Transport.(*http.Transport)
-	if transport.TLSClientConfig.RootCAs == nil {
+	type transportGetter interface {
+		GetTransport() *http.Transport
+	}
+
+	trGetter := cfg.HTTPClient.(transportGetter)
+	tr := trGetter.GetTransport()
+	if tr.TLSClientConfig.RootCAs == nil {
 		t.Errorf("expect root CAs set")
+	}
+}
+
+func TestResolveCustomCABundle_ValidCA(t *testing.T) {
+	certFile, keyFile, caFile, err := awstesting.CreateTLSBundleFiles()
+	if err != nil {
+		t.Fatalf("failed to create cert temp files, %v", err)
+	}
+	defer func() {
+		awstesting.CleanupTLSBundleFiles(certFile, keyFile, caFile)
+	}()
+
+	serverAddr, err := awstesting.CreateTLSServer(certFile, keyFile, nil)
+	if err != nil {
+		t.Fatalf("failed to start TLS server, %v", err)
+	}
+
+	caPEM, err := ioutil.ReadFile(caFile)
+	if err != nil {
+		t.Fatalf("failed to read CA file, %v", err)
+	}
+
+	configs := Configs{
+		WithCustomCABundle(caPEM),
+	}
+
+	cfg := defaults.Config()
+	if err := ResolveCustomCABundle(&cfg, configs); err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	req, _ := http.NewRequest("GET", serverAddr, nil)
+	resp, err := cfg.HTTPClient.Do(req)
+	if err != nil {
+		t.Fatalf("failed to make request to TLS server, %v", err)
+	}
+	resp.Body.Close()
+
+	if e, a := http.StatusOK, resp.StatusCode; e != a {
+		t.Errorf("expect %v status, got %v", e, a)
+	}
+}
+
+func TestResolveCustomCABundle_ErrorCustomClient(t *testing.T) {
+	configs := Configs{
+		WithCustomCABundle(awstesting.TLSBundleCA),
+	}
+
+	cfg := aws.Config{
+		HTTPClient: &http.Client{},
+	}
+	if err := ResolveCustomCABundle(&cfg, configs); err == nil {
+		t.Fatalf("expect error, got none")
 	}
 }
 

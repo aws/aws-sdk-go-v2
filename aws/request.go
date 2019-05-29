@@ -40,24 +40,23 @@ type Request struct {
 	Handlers Handlers
 
 	Retryer
-	Time                   time.Time
-	ExpireTime             time.Duration
-	Operation              *Operation
-	HTTPRequest            *http.Request
-	HTTPResponse           *http.Response
-	Body                   io.ReadSeeker
-	BodyStart              int64 // offset from beginning of Body that the request body starts
-	Params                 interface{}
-	Error                  error
-	Data                   interface{}
-	RequestID              string
-	RetryCount             int
-	Retryable              *bool
-	RetryDelay             time.Duration
-	NotHoist               bool
-	SignedHeaderVals       http.Header
-	LastSignedAt           time.Time
-	DisableFollowRedirects bool
+	Time             time.Time
+	ExpireTime       time.Duration
+	Operation        *Operation
+	HTTPRequest      *http.Request
+	HTTPResponse     *http.Response
+	Body             io.ReadSeeker
+	BodyStart        int64 // offset from beginning of Body that the request body starts
+	Params           interface{}
+	Error            error
+	Data             interface{}
+	RequestID        string
+	RetryCount       int
+	Retryable        *bool
+	RetryDelay       time.Duration
+	NotHoist         bool
+	SignedHeaderVals http.Header
+	LastSignedAt     time.Time
 
 	context context.Context
 

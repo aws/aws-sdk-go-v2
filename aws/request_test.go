@@ -76,6 +76,9 @@ type jsonErrorResponse struct {
 
 // test that retries occur for 5xx status codes
 func TestRequestRecoverRetry5xx(t *testing.T) {
+	restoreSleep := mockSleep()
+	defer restoreSleep()
+
 	reqNum := 0
 	reqs := []http.Response{
 		{StatusCode: 500, Body: body(`{"__type":"UnknownError","message":"An error occurred."}`)},
@@ -111,6 +114,9 @@ func TestRequestRecoverRetry5xx(t *testing.T) {
 
 // test that retries occur for 4xx status codes with a response type that can be retried - see `shouldRetry`
 func TestRequestRecoverRetry4xxRetryable(t *testing.T) {
+	restoreSleep := mockSleep()
+	defer restoreSleep()
+
 	reqNum := 0
 	reqs := []http.Response{
 		{StatusCode: 400, Body: body(`{"__type":"Throttling","message":"Rate exceeded."}`)},
@@ -181,6 +187,9 @@ func TestRequest4xxUnretryable(t *testing.T) {
 }
 
 func TestRequestExhaustRetries(t *testing.T) {
+	restoreSleep := mockSleep()
+	defer restoreSleep()
+
 	orig := sdk.SleepWithContext
 	defer func() { sdk.SleepWithContext = orig }()
 
@@ -539,56 +548,59 @@ func TestRequest_NoBody(t *testing.T) {
 		"PUT", "POST", "PATCH",
 	}
 
-	for i, c := range cases {
-		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			if v := r.TransferEncoding; len(v) > 0 {
-				t.Errorf("%d, expect no body sent with Transfer-Encoding, %v", i, v)
+	for _, c := range cases {
+		t.Run(c, func(t *testing.T) {
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				if v := r.TransferEncoding; len(v) > 0 {
+					t.Errorf("expect no body sent with Transfer-Encoding, %v", v)
+				}
+
+				outMsg := []byte(`{"Value": "abc"}`)
+
+				if b, err := ioutil.ReadAll(r.Body); err != nil {
+					t.Fatalf("expect no error reading request body, got %v", err)
+				} else if n := len(b); n > 0 {
+					t.Errorf("expect no request body, got %d bytes", n)
+				}
+
+				w.Header().Set("Content-Length", strconv.Itoa(len(outMsg)))
+				if _, err := w.Write(outMsg); err != nil {
+					t.Fatalf("expect no error writing server response, got %v", err)
+				}
+			}))
+			defer server.Close()
+
+			cfg := unit.Config()
+			cfg.Region = "mock-region"
+			cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
+			cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
+
+			s := awstesting.NewClient(cfg)
+
+			s.Handlers.Build.PushBack(rest.Build)
+			s.Handlers.Validate.Clear()
+			s.Handlers.Unmarshal.PushBack(unmarshal)
+			s.Handlers.UnmarshalError.PushBack(unmarshalError)
+
+			in := struct {
+				Bucket *string `location:"uri" locationName:"bucket"`
+				Key    *string `location:"uri" locationName:"key"`
+			}{
+				Bucket: aws.String("mybucket"), Key: aws.String("myKey"),
 			}
 
-			outMsg := []byte(`{"Value": "abc"}`)
+			out := struct {
+				Value *string
+			}{}
 
-			if b, err := ioutil.ReadAll(r.Body); err != nil {
-				t.Fatalf("%d, expect no error reading request body, got %v", i, err)
-			} else if n := len(b); n > 0 {
-				t.Errorf("%d, expect no request body, got %d bytes", i, n)
+			r := s.NewRequest(&aws.Operation{
+				Name: "OpName", HTTPMethod: c, HTTPPath: "/{bucket}/{key+}",
+			}, &in, &out)
+
+			if err := r.Send(); err != nil {
+				t.Fatalf("expect no error sending request, got %v", err)
 			}
-
-			w.Header().Set("Content-Length", strconv.Itoa(len(outMsg)))
-			if _, err := w.Write(outMsg); err != nil {
-				t.Fatalf("%d, expect no error writing server response, got %v", i, err)
-			}
-		}))
-
-		cfg := unit.Config()
-		cfg.Region = "mock-region"
-		cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
-		cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-
-		s := awstesting.NewClient(cfg)
-
-		s.Handlers.Build.PushBack(rest.Build)
-		s.Handlers.Validate.Clear()
-		s.Handlers.Unmarshal.PushBack(unmarshal)
-		s.Handlers.UnmarshalError.PushBack(unmarshalError)
-
-		in := struct {
-			Bucket *string `location:"uri" locationName:"bucket"`
-			Key    *string `location:"uri" locationName:"key"`
-		}{
-			Bucket: aws.String("mybucket"), Key: aws.String("myKey"),
-		}
-
-		out := struct {
-			Value *string
-		}{}
-
-		r := s.NewRequest(&aws.Operation{
-			Name: "OpName", HTTPMethod: c, HTTPPath: "/{bucket}/{key+}",
-		}, &in, &out)
-
-		if err := r.Send(); err != nil {
-			t.Fatalf("%d, expect no error sending request, got %v", i, err)
-		}
+		})
 	}
 }
 
@@ -698,6 +710,9 @@ func (rc *connResetCloser) Close() error {
 }
 
 func TestSerializationErrConnectionReset(t *testing.T) {
+	restoreSleep := mockSleep()
+	defer restoreSleep()
+
 	count := 0
 	handlers := aws.Handlers{}
 	handlers.Send.PushBack(func(r *aws.Request) {
@@ -737,10 +752,8 @@ func TestSerializationErrConnectionReset(t *testing.T) {
 		handlers,
 		aws.DefaultRetryer{NumMaxRetries: 5},
 		op,
-		&struct {
-		}{},
-		&struct {
-		}{},
+		&struct{}{},
+		&struct{}{},
 	)
 
 	osErr := stubConnectionResetError
@@ -788,6 +801,9 @@ func (d *testRetryer) ShouldRetry(r *aws.Request) bool {
 }
 
 func TestEnforceShouldRetryCheck(t *testing.T) {
+	restoreSleep := mockSleep()
+	defer restoreSleep()
+
 	tp := &http.Transport{
 		Proxy:                 http.ProxyFromEnvironment,
 		ResponseHeaderTimeout: 1 * time.Millisecond,
@@ -861,8 +877,10 @@ func TestIsNoBodyReader(t *testing.T) {
 }
 
 func TestRequest_TemporaryRetry(t *testing.T) {
-	done := make(chan struct{})
+	restoreSleep := mockSleep()
+	defer restoreSleep()
 
+	done := make(chan struct{})
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Length", "1024")
 		w.WriteHeader(http.StatusOK)
@@ -874,6 +892,7 @@ func TestRequest_TemporaryRetry(t *testing.T) {
 
 		<-done
 	}))
+	defer server.Close()
 
 	cfg := unit.Config()
 	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 1}
@@ -913,7 +932,10 @@ func TestRequest_TemporaryRetry(t *testing.T) {
 		Temporary() bool
 	}
 
-	terr := aerr.OrigErr().(temporary)
+	terr, ok := aerr.OrigErr().(temporary)
+	if !ok {
+		t.Fatalf("expect error to implement temporary, got %T", aerr.OrigErr())
+	}
 	if !terr.Temporary() {
 		t.Errorf("expect temporary error, was not")
 	}
