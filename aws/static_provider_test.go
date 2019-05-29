@@ -2,8 +2,6 @@ package aws
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
 func TestStaticCredentialsProviderGet(t *testing.T) {
@@ -16,10 +14,18 @@ func TestStaticCredentialsProviderGet(t *testing.T) {
 	}
 
 	creds, err := s.Retrieve()
-	assert.Nil(t, err, "Expect no error")
-	assert.Equal(t, "AKID", creds.AccessKeyID, "Expect access key ID to match")
-	assert.Equal(t, "SECRET", creds.SecretAccessKey, "Expect secret access key to match")
-	assert.Empty(t, creds.SessionToken, "Expect no session token")
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+	if e, a := "AKID", creds.AccessKeyID; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "SECRET", creds.SecretAccessKey; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if l := creds.SessionToken; len(l) != 0 {
+		t.Errorf("expect no token, got %v", l)
+	}
 }
 
 func TestStaticCredentialsProviderIsExpired(t *testing.T) {
@@ -31,5 +37,7 @@ func TestStaticCredentialsProviderIsExpired(t *testing.T) {
 		},
 	}
 
-	assert.False(t, s.IsExpired(), "Expect static credentials to never expire")
+	if s.IsExpired() {
+		t.Errorf("expect static credentials to never expire")
+	}
 }

@@ -6,8 +6,6 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
@@ -29,7 +27,9 @@ func TestRequestInvalidEndpoint(t *testing.T) {
 		nil,
 	)
 
-	assert.Error(t, r.Error)
+	if r.Error == nil {
+		t.Errorf("expect error, got none")
+	}
 }
 
 type timeoutErr struct {

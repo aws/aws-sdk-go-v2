@@ -7,7 +7,6 @@ import (
 
 	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
-	"github.com/stretchr/testify/assert"
 )
 
 type mockCloser struct {
@@ -27,14 +26,22 @@ func TestUnmarshalDrainBody(t *testing.T) {
 	}}
 
 	protocol.UnmarshalDiscardBody(r)
-	assert.NoError(t, r.Error)
-	assert.Equal(t, 0, b.Len())
-	assert.True(t, b.Closed)
+	if r.Error != nil {
+		t.Fatalf("expect no error, got %v", r.Error)
+	}
+	if l := b.Len(); l != 0 {
+		t.Errorf("expect no body, have %v length", l)
+	}
+	if !b.Closed {
+		t.Errorf("expect closed, was not")
+	}
 }
 
 func TestUnmarshalDrainBodyNoBody(t *testing.T) {
 	r := &request.Request{HTTPResponse: &http.Response{}}
 
 	protocol.UnmarshalDiscardBody(r)
-	assert.NoError(t, r.Error)
+	if r.Error != nil {
+		t.Fatalf("expect no error, got %v", r.Error)
+	}
 }

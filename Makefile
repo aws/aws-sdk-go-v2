@@ -168,7 +168,6 @@ get-deps: get-deps-tests get-deps-x-tests get-deps-codegen get-deps-verify
 
 get-deps-tests:
 	@echo "go get SDK testing dependencies"
-	go get github.com/stretchr/testify
 	go get golang.org/x/net/html
 
 get-deps-x-tests:
