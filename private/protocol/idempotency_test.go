@@ -2,10 +2,10 @@ package protocol_test
 
 import (
 	"reflect"
+	"strconv"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestCanSetIdempotencyToken(t *testing.T) {
@@ -52,10 +52,14 @@ func TestCanSetIdempotencyToken(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		v := reflect.Indirect(reflect.ValueOf(c.Case))
-		ty := v.Type()
-		canSet := protocol.CanSetIdempotencyToken(v.Field(0), ty.Field(0))
-		assert.Equal(t, c.CanSet, canSet, "Expect case %d can set to match", i)
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			v := reflect.Indirect(reflect.ValueOf(c.Case))
+			ty := v.Type()
+			canSet := protocol.CanSetIdempotencyToken(v.Field(0), ty.Field(0))
+			if e, a := c.CanSet, canSet; e != a {
+				t.Errorf("expect %v can set, got %v", e, a)
+			}
+		})
 	}
 }
 
@@ -86,21 +90,38 @@ func TestSetIdempotencyToken(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		v := reflect.Indirect(reflect.ValueOf(c.Case))
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			v := reflect.Indirect(reflect.ValueOf(c.Case))
 
-		protocol.SetIdempotencyToken(v.Field(0))
-		assert.NotEmpty(t, v.Field(0).Interface(), "Expect case %d to be set", i)
+			protocol.SetIdempotencyToken(v.Field(0))
+			switch tv := v.Field(0).Interface().(type) {
+			case *string:
+				if tv == nil || len(*tv) == 0 {
+					t.Errorf("expect to be set")
+				}
+			case string:
+				if len(tv) == 0 {
+					t.Errorf("expect to be set")
+				}
+			default:
+				t.Errorf("value is not a string")
+			}
+		})
 	}
 }
 
 func TestUUIDVersion4(t *testing.T) {
 	uuid := protocol.UUIDVersion4(make([]byte, 16))
-	assert.Equal(t, `00000000-0000-4000-8000-000000000000`, uuid)
+	if e, a := `00000000-0000-4000-8000-000000000000`, uuid; e != a {
+		t.Errorf("expect %v uuid, got %v", e, a)
+	}
 
 	b := make([]byte, 16)
 	for i := 0; i < len(b); i++ {
 		b[i] = 1
 	}
 	uuid = protocol.UUIDVersion4(b)
-	assert.Equal(t, `01010101-0101-4101-8101-010101010101`, uuid)
+	if e, a := `01010101-0101-4101-8101-010101010101`, uuid; e != a {
+		t.Errorf("expect %v uuid, got %v", e, a)
+	}
 }

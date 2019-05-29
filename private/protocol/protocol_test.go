@@ -5,8 +5,6 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
-
 	metadata "github.com/aws/aws-sdk-go-v2/aws"
 	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
@@ -117,13 +115,21 @@ func checkForLeak(data interface{}, build, fn func(*request.Request), t *testing
 	fn(req)
 
 	if result.errExists {
-		assert.NotNil(t, req.Error)
+		if req.Error == nil {
+			t.Fatalf("expect error, got none")
+		}
 	} else {
-		assert.Nil(t, req.Error)
+		if req.Error != nil {
+			t.Fatalf("expect no error, got %v", req.Error)
+		}
 	}
 
-	assert.Equal(t, reader.Closed, result.closed)
-	assert.Equal(t, reader.Size, result.size)
+	if e, a := reader.Closed, result.closed; e != a {
+		t.Errorf("expect %v closed, got %v", e, a)
+	}
+	if e, a := reader.Size, result.size; e != a {
+		t.Errorf("expect %v size, got %v", e, a)
+	}
 }
 
 func TestJSONRpc(t *testing.T) {
