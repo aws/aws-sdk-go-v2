@@ -111,26 +111,11 @@ var SendHandler = aws.NamedHandler{
 		}
 
 		var err error
-		r.HTTPResponse, err = sendRequest(r.Config.HTTPClient, r.HTTPRequest)
+		r.HTTPResponse, err = r.Config.HTTPClient.Do(r.HTTPRequest)
 		if err != nil {
 			handleSendError(r, err)
 		}
 	},
-}
-
-func sendRequest(client aws.HTTPClient, r *http.Request) (*http.Response, error) {
-	resp, err := client.Do(r)
-	if err != nil {
-		return resp, err
-	}
-
-	switch resp.StatusCode {
-	case 307, 308:
-		if r.GetBody != nil {
-		}
-	}
-
-	return resp, nil
 }
 
 func handleSendError(r *aws.Request, err error) {

@@ -116,7 +116,7 @@ func limitedRedirect(r *http.Request, via []*http.Request) error {
 
 	switch resp.StatusCode {
 	case 307, 308:
-		// Only allow 307 and 308 redirects as they prefer the method.
+		// Only allow 307 and 308 redirects as they preserve the method.
 		return nil
 	}
 

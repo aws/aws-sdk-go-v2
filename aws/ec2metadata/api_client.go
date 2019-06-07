@@ -37,6 +37,9 @@ type Client struct {
 //     svc := ec2metadata.New(cfg)
 func New(config aws.Config) *Client {
 	if c, ok := config.HTTPClient.(*aws.BuildableHTTPClient); ok {
+		// TODO consider moving this to a client configuration via client builder
+		// instead automatically being set.
+
 		// Use a custom Dial timeout for the EC2 Metadata service to account
 		// for the possibility the application might not be running in an
 		// environment with the service present. The client should fail fast in
