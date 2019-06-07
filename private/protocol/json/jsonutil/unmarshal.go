@@ -232,6 +232,8 @@ func unmarshalScalar(value reflect.Value, data interface{}, tag reflect.StructTa
 		switch value.Interface().(type) {
 		case *bool:
 			value.Set(reflect.ValueOf(&d))
+		case bool:
+			value.Set(reflect.ValueOf(d))
 		default:
 			return errf()
 		}
