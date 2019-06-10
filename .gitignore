@@ -7,4 +7,3 @@ Gemfile.lock
 /internal/awstesting/integration/smoke/_test/
 /vendor
 /private/model/cli/gen-api/gen-api
-.idea/
