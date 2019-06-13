@@ -89,4 +89,4 @@ see LICENSE.txt and NOTICE.txt for more information.
 [Projects]: https://github.com/aws/aws-sdk-go-v2/projects
 [CHANGE_LOG]: https://github.com/aws/aws-sdk-go-v2/blob/master/CHANGELOG.md
 [Amazon DynamoDB]: https://aws.amazon.com/dynamodb/
-[Gitter channel]: https://gitter.im/aws/aws-sdk-go-v2
+[Gitter channel]: https://gitter.im/aws/aws-sdk-go-v2 
