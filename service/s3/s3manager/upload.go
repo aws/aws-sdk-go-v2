@@ -583,8 +583,18 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker) (*UploadOutput, error) {
 			uploadID: u.uploadID,
 		}
 	}
+
+	// Create a presigned URL of the S3 Get Object in order to have parity with
+	// single part upload.
+	getReq := u.cfg.S3.GetObjectRequest(&s3.GetObjectInput{
+		Bucket: u.in.Bucket,
+		Key:    u.in.Key,
+	})
+	getReq.Config.Credentials = aws.AnonymousCredentials
+	uploadLocation, _, _ := getReq.PresignRequest(1)
+
 	return &UploadOutput{
-		Location:  aws.StringValue(complete.Location),
+		Location:  uploadLocation,
 		VersionID: complete.VersionId,
 		UploadID:  u.uploadID,
 	}, nil
