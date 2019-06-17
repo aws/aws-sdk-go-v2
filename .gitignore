@@ -8,3 +8,4 @@ Gemfile.lock
 /vendor
 /private/model/cli/gen-api/gen-api
 .idea/
+*.DS_Store
