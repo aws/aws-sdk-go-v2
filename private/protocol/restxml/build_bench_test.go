@@ -1,5 +1,3 @@
-// +build bench
-
 package restxml_test
 
 import (
@@ -20,8 +18,8 @@ import (
 )
 
 var (
-	cloudfrontSvc *cloudfront.CloudFront
-	s3Svc         *s3.S3
+	cloudfrontSvc *cloudfront.Client
+	s3Svc         *s3.Client
 )
 
 func TestMain(m *testing.M) {
