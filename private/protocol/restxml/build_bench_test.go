@@ -22,6 +22,7 @@ var (
 	s3Svc         *s3.Client
 )
 
+// initialize s3Svc and cloudfrontSvc client
 func TestMain(m *testing.M) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
@@ -42,6 +43,7 @@ func TestMain(m *testing.M) {
 	os.Exit(c)
 }
 
+// get input paramter for cloud front svc/distributeion request
 func BenchmarkRESTXMLBuild_Complex_CFCreateDistro(b *testing.B) {
 	params := cloudfrontCreateDistributionInput()
 
@@ -118,6 +120,8 @@ func BenchmarkEncodingXML_Simple(b *testing.B) {
 	}
 }
 
+// use passed in func to generate aws request based on the input parameters
+// then test build() function
 func benchRESTXMLBuild(b *testing.B, reqFn func() *aws.Request) {
 	b.ResetTimer()
 
