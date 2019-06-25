@@ -57,6 +57,7 @@ func TestRequest_FollowPUTRedirects(t *testing.T) {
 			t.Fatalf("unexpected endpoint used, %q", r.URL.String())
 		}
 	}))
+	defer server.Close()
 
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
