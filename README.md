@@ -30,6 +30,7 @@ This example shows how you can use the v2 SDK to make an API request using the S
 package main
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -59,7 +60,7 @@ func main() {
 	})
 
 	// Send the request, and get the response or error back
-	resp, err := req.Send()
+	resp, err := req.Send(context.Background())
 	if err != nil {
 		panic("failed to describe table, "+err.Error())
 	}
