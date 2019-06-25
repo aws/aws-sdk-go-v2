@@ -1,5 +1,3 @@
-// +build bench
-
 package restjson_test
 
 import (
@@ -15,7 +13,7 @@ import (
 )
 
 var (
-	elastictranscoderSvc *elastictranscoder.ElasticTranscoder
+	elastictranscoderSvc *elastictranscoder.Client
 )
 
 func TestMain(m *testing.M) {
@@ -119,7 +117,7 @@ func elastictranscoderCreateJobInput() *elastictranscoder.CreateJobInput {
 			Resolution: aws.String("Resolution"),
 		},
 		PipelineId: aws.String("Id"), // Required
-		Output: &elastictranscoder.CreateJobOutput{
+		Output: &elastictranscoder.CreateJobOutputResult{
 			AlbumArt: &elastictranscoder.JobAlbumArt{
 				Artwork: []elastictranscoder.Artwork{
 					{ // Required
@@ -212,7 +210,7 @@ func elastictranscoderCreateJobInput() *elastictranscoder.CreateJobInput {
 			},
 		},
 		OutputKeyPrefix: aws.String("Key"),
-		Outputs: []elastictranscoder.CreateJobOutput{
+		Outputs: []elastictranscoder.CreateJobOutputResult{
 			{ // Required
 				AlbumArt: &elastictranscoder.JobAlbumArt{
 					Artwork: []elastictranscoder.Artwork{
