@@ -23,7 +23,7 @@ type DataOutput struct {
 func BenchmarkXMLUnmarshal_Simple(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		req := getXMLResponse_Simple()
+		req := getXMLResponseSimple()
 		xmlutil.UnmarshalXML(req.Data, xml.NewDecoder(req.HTTPResponse.Body), "")
 	}
 }
@@ -31,18 +31,18 @@ func BenchmarkXMLUnmarshal_Simple(b *testing.B) {
 func BenchmarkXMLUnmarshal_Complex(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		req := getXMLResponse_Complex()
+		req := getXMLResponseComplex()
 		xmlutil.UnmarshalXML(req.Data, xml.NewDecoder(req.HTTPResponse.Body), "")
 	}
 }
 
-func getXMLResponse_Simple() *aws.Request {
+func getXMLResponseSimple() *aws.Request {
 	buf := bytes.NewReader([]byte("<OperationNameResponse><FooEnum>foo</FooEnum><ListEnums><member>0</member><member>1</member></ListEnums></OperationNameResponse>"))
 	req := aws.Request{Data: &DataOutput{}, HTTPResponse: &http.Response{Body: ioutil.NopCloser(buf)}}
 	return &req
 }
 
-func getXMLResponse_Complex() *aws.Request {
+func getXMLResponseComplex() *aws.Request {
 	buf := bytes.NewReader([]byte(`2019/07/01 15:01:44 <?xml version="1.0" encoding="UTF-8"?>
 <DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
     <requestId>7e2ca54c-e2af-4567-bb41-21632d2b839e</requestId>
