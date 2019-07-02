@@ -43,7 +43,7 @@ func getXMLResponseSimple() *aws.Request {
 }
 
 func getXMLResponseComplex() *aws.Request {
-	buf := bytes.NewReader([]byte(`2019/07/01 15:01:44 <?xml version="1.0" encoding="UTF-8"?>
+	buf := bytes.NewReader([]byte(`<?xml version="1.0" encoding="UTF-8"?>
 <DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2016-11-15/">
     <requestId>7e2ca54c-e2af-4567-bb41-21632d2b839e</requestId>
     <reservationSet>
