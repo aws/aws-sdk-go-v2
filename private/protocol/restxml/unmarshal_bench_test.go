@@ -8,24 +8,23 @@ import (
 	"testing"
 )
 
-type DataOutput struct {
-	_ struct{} `type:"structure"`
-
-	FooEnum string `type:"string" enum:"true"`
-
-	ListEnums []string `type:"list"`
-}
-
-func BenchmarkRESTXMLUnmarshal_Simple(b *testing.B) {
+func BenchmarkRESTXMLUnmarshalError(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		Unmarshal(getSimpleRESTXMLResponse_Simple())
+		UnmarshalError(getRESTXMLError())
 	}
 }
 
-func getSimpleRESTXMLResponse_Simple() *aws.Request {
-	buf := bytes.NewReader([]byte("<OperationNameResponse><FooEnum>foo</FooEnum><ListEnums><member>0</member><member>1</member></ListEnums></OperationNameResponse>"))
-	output := DataOutput{}
-	req := aws.Request{Data: &output, HTTPResponse: &http.Response{Body: ioutil.NopCloser(buf)}}
+func getRESTXMLError() *aws.Request {
+	buf := bytes.NewReader([]byte(`
+		<ErrorResponse>
+		  <Error>
+			<Code>baz</Code>
+			<Message>test error message</Message>
+		  </Error>
+		  <RequestId>b25f48e8-84fd-11e6-80d9-574e0c4664cb</RequestId>
+		</ErrorResponse>`))
+	req := aws.Request{HTTPResponse: &http.Response{StatusCode: 404, Body: ioutil.NopCloser(buf), Header: http.Header{}}}
+	req.HTTPResponse.Header.Set("X-Amzn-Errortype", "baz")
 	return &req
 }

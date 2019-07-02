@@ -8,24 +8,17 @@ import (
 	"testing"
 )
 
-type DataOutput struct {
-	_ struct{} `type:"structure"`
-
-	FooEnum string `type:"string" enum:"true"`
-
-	ListEnums []string `type:"list"`
-}
-
-func BenchmarkRESTJSONUnmarshal_Simple(b *testing.B) {
+func BenchmarkRESTJSONUnmarshalError(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		Unmarshal(getRESTJSONResponse_Simple())
+		UnmarshalError(getRESTJSONError())
 	}
 }
 
-func getRESTJSONResponse_Simple() *aws.Request {
-	buf := bytes.NewReader([]byte(`{"FooEnum": "foo", "ListEnums": ["0", "1"]}`))
-	output := DataOutput{}
-	req := aws.Request{Data: &output, HTTPResponse: &http.Response{Body: ioutil.NopCloser(buf)}}
+func getRESTJSONError() *aws.Request {
+	buf := bytes.NewReader([]byte(`{"message":"test error message"}`))
+	req := aws.Request{RequestID: "b25f48e8-84fd-11e6-80d9-574e0c4664cb",
+		HTTPResponse: &http.Response{StatusCode: 404, Body: ioutil.NopCloser(buf), Header: http.Header{}}}
+	req.HTTPResponse.Header.Set("X-Amzn-Errortype", "baz")
 	return &req
 }
