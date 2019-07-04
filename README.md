@@ -16,7 +16,7 @@ The best way to get started working with the SDK is to use `go get` to add the S
 go get github.com/aws/aws-sdk-go-v2
 ```
 
-Without Go Modules, or in a GOPATH with Go 1.11 or 1.12 use the `/...` suffix on the `go get` to retrieve all of the SDK's depdnencies.
+Without Go Modules, or in a GOPATH with Go 1.11 or 1.12 use the `/...` suffix on the `go get` to retrieve all of the SDK's dependencies.
 
 ```sh
 go get github.com/aws/aws-sdk-go-v2/...
