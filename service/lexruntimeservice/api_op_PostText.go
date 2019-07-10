@@ -117,7 +117,7 @@ func (s PostTextInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "inputText", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.RequestAttributes) > 0 {
+	if s.RequestAttributes != nil {
 		v := s.RequestAttributes
 
 		metadata := protocol.Metadata{}
@@ -129,7 +129,7 @@ func (s PostTextInput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.SessionAttributes) > 0 {
+	if s.SessionAttributes != nil {
 		v := s.SessionAttributes
 
 		metadata := protocol.Metadata{}
@@ -301,7 +301,7 @@ func (s PostTextOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "responseCard", v, metadata)
 	}
-	if len(s.SessionAttributes) > 0 {
+	if s.SessionAttributes != nil {
 		v := s.SessionAttributes
 
 		metadata := protocol.Metadata{}
@@ -319,7 +319,7 @@ func (s PostTextOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "slotToElicit", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Slots) > 0 {
+	if s.Slots != nil {
 		v := s.Slots
 
 		metadata := protocol.Metadata{}

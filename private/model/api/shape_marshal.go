@@ -292,7 +292,7 @@ var marshalShapeRefTmpl = template.Must(template.New("marshalShapeRefTmpl").Func
 	{{ $isList := $.IsShapeType "list" -}}
 	{{ $isMap := $.IsShapeType "map" -}}
 	{{- if or $isList $isMap -}}
-		len(s.{{ $.Name }}) > 0
+		s.{{ $.Name }} != nil
 	{{- else if $.Ref.Shape.IsEnum -}}
 		len(s.{{ $.Name }}) > 0
 	{{- else -}}

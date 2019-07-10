@@ -514,7 +514,7 @@ type InputService4TestShapeInputService4TestCaseOperation1Input struct {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService4TestShapeInputService4TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{}
@@ -669,7 +669,7 @@ func (s InputService5TestShapeInputService5TestCaseOperation1Input) MarshalField
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "PipelineId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.QueryDoc) > 0 {
+	if s.QueryDoc != nil {
 		v := s.QueryDoc
 
 		metadata := protocol.Metadata{}
@@ -824,7 +824,7 @@ func (s InputService6TestShapeInputService6TestCaseOperation1Input) MarshalField
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "PipelineId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.QueryDoc) > 0 {
+	if s.QueryDoc != nil {
 		v := s.QueryDoc
 
 		metadata := protocol.Metadata{}
@@ -3380,7 +3380,7 @@ func (s InputService16TestShapeRecursiveStructType) MarshalFields(e protocol.Fie
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NoRecurse", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.RecursiveList) > 0 {
+	if s.RecursiveList != nil {
 		v := s.RecursiveList
 
 		metadata := protocol.Metadata{}
@@ -3392,7 +3392,7 @@ func (s InputService16TestShapeRecursiveStructType) MarshalFields(e protocol.Fie
 		ls0.End()
 
 	}
-	if len(s.RecursiveMap) > 0 {
+	if s.RecursiveMap != nil {
 		v := s.RecursiveMap
 
 		metadata := protocol.Metadata{}
@@ -4582,7 +4582,7 @@ func (s InputService21TestShapeBodyStructure) MarshalFields(e protocol.FieldEnco
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "BodyField", protocol.JSONValue{V: v, EscapeMode: protocol.QuotedEscape}, metadata)
 	}
-	if len(s.BodyListField) > 0 {
+	if s.BodyListField != nil {
 		v := s.BodyListField
 
 		metadata := protocol.Metadata{}
@@ -4668,7 +4668,7 @@ func (s InputService22TestShapeInputService22TestCaseOperation1Input) MarshalFie
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "FooEnum", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.ListEnums) > 0 {
+	if s.ListEnums != nil {
 		v := s.ListEnums
 
 		metadata := protocol.Metadata{}
@@ -4692,7 +4692,7 @@ func (s InputService22TestShapeInputService22TestCaseOperation1Input) MarshalFie
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.QueryTarget, "Enum", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.QueryListEnums) > 0 {
+	if s.QueryListEnums != nil {
 		v := s.QueryListEnums
 
 		metadata := protocol.Metadata{}
@@ -4805,7 +4805,7 @@ func (s InputService22TestShapeInputService22TestCaseOperation2Input) MarshalFie
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "FooEnum", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.ListEnums) > 0 {
+	if s.ListEnums != nil {
 		v := s.ListEnums
 
 		metadata := protocol.Metadata{}
@@ -4829,7 +4829,7 @@ func (s InputService22TestShapeInputService22TestCaseOperation2Input) MarshalFie
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.QueryTarget, "Enum", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.QueryListEnums) > 0 {
+	if s.QueryListEnums != nil {
 		v := s.QueryListEnums
 
 		metadata := protocol.Metadata{}
@@ -5265,7 +5265,7 @@ func (s InputService24TestShapeInputService24TestCaseOperation1Input) MarshalFie
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "Header1", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.HeaderMap) > 0 {
+	if s.HeaderMap != nil {
 		v := s.HeaderMap
 
 		metadata := protocol.Metadata{}
@@ -5352,6 +5352,181 @@ type InputService24TestCaseOperation1Response struct {
 // SDKResponseMetdata returns the response metadata for the
 // InputService24TestCaseOperation1 request.
 func (r *InputService24TestCaseOperation1Response) SDKResponseMetdata() *aws.Response {
+	return r.response
+}
+
+// InputService25ProtocolTest provides the API operation methods for making requests to
+// InputService25ProtocolTest. See this package's package overview docs
+// for details on the service.
+//
+// The client's methods are safe to use concurrently. It is not safe to
+// modify mutate any of the struct's properties though.
+type InputService25ProtocolTest struct {
+	*aws.Client
+}
+
+// New creates a new instance of the client from the provided Config.
+//
+// Example:
+//     // Create a client from just a config.
+//     svc := inputservice25protocoltest.New(myConfig)
+func NewInputService25ProtocolTest(config aws.Config) *InputService25ProtocolTest {
+	svc := &InputService25ProtocolTest{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
+				ServiceName:   "InputService25ProtocolTest",
+				ServiceID:     "InputService25ProtocolTest",
+				EndpointsID:   "inputservice25protocoltest",
+				SigningName:   "inputservice25protocoltest",
+				SigningRegion: config.Region,
+				APIVersion:    "2014-01-01",
+			},
+		),
+	}
+
+	// Handlers
+	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
+	svc.Handlers.Build.PushBackNamed(restjson.BuildHandler)
+	svc.Handlers.Unmarshal.PushBackNamed(restjson.UnmarshalHandler)
+	svc.Handlers.UnmarshalMeta.PushBackNamed(restjson.UnmarshalMetaHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(restjson.UnmarshalErrorHandler)
+
+	return svc
+}
+
+// newRequest creates a new request for a client operation and runs any
+// custom request initialization.
+func (c *InputService25ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
+	req := c.NewRequest(op, params, data)
+
+	return req
+}
+
+type InputService25TestShapeInputService25TestCaseOperation1Input struct {
+	_ struct{} `type:"structure"`
+
+	MapDefaults map[string]string `type:"map"`
+
+	MapEmpty map[string]string `type:"map"`
+
+	MapNotSet map[string]string `type:"map"`
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputService25TestShapeInputService25TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MapDefaults != nil {
+		v := s.MapDefaults
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "MapDefaults", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.MapEmpty != nil {
+		v := s.MapEmpty
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "MapEmpty", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.MapNotSet != nil {
+		v := s.MapNotSet
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "MapNotSet", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
+type InputService25TestShapeInputService25TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputService25TestShapeInputService25TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+const opInputService25TestCaseOperation1 = "OperationName"
+
+// InputService25TestCaseOperation1Request returns a request value for making API operation for
+// .
+//
+//    // Example sending a request using InputService25TestCaseOperation1Request.
+//    req := client.InputService25TestCaseOperation1Request(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *InputService25ProtocolTest) InputService25TestCaseOperation1Request(input *InputService25TestShapeInputService25TestCaseOperation1Input) InputService25TestCaseOperation1Request {
+	op := &aws.Operation{
+		Name:       opInputService25TestCaseOperation1,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &InputService25TestShapeInputService25TestCaseOperation1Input{}
+	}
+
+	req := c.newRequest(op, input, &InputService25TestShapeInputService25TestCaseOperation1Output{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return InputService25TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService25TestCaseOperation1Request}
+}
+
+// InputService25TestCaseOperation1Request is the request type for the
+// InputService25TestCaseOperation1 API operation.
+type InputService25TestCaseOperation1Request struct {
+	*aws.Request
+	Input *InputService25TestShapeInputService25TestCaseOperation1Input
+	Copy  func(*InputService25TestShapeInputService25TestCaseOperation1Input) InputService25TestCaseOperation1Request
+}
+
+// Send marshals and sends the InputService25TestCaseOperation1 API request.
+func (r InputService25TestCaseOperation1Request) Send(ctx context.Context) (*InputService25TestCaseOperation1Response, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	resp := &InputService25TestCaseOperation1Response{
+		InputService25TestShapeInputService25TestCaseOperation1Output: r.Request.Data.(*InputService25TestShapeInputService25TestCaseOperation1Output),
+		response: &aws.Response{Request: r.Request},
+	}
+
+	return resp, nil
+}
+
+// InputService25TestCaseOperation1Response is the response type for the
+// InputService25TestCaseOperation1 API operation.
+type InputService25TestCaseOperation1Response struct {
+	*InputService25TestShapeInputService25TestCaseOperation1Output
+
+	response *aws.Response
+}
+
+// SDKResponseMetdata returns the response metadata for the
+// InputService25TestCaseOperation1 request.
+func (r *InputService25TestCaseOperation1Response) SDKResponseMetdata() *aws.Response {
 	return r.response
 }
 
@@ -6628,5 +6803,42 @@ func TestInputService24ProtocolTestHeaderWhitespaceCase1(t *testing.T) {
 	if e, a := "headerValue", r.Header.Get("header1"); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
+
+}
+
+func TestInputService25ProtocolTestEmptyOrUnsetMapsInPayloadCase1(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewInputService25ProtocolTest(cfg)
+	input := &InputService25TestShapeInputService25TestCaseOperation1Input{
+		MapDefaults: map[string]string{
+			"test_key_1": "test_value_1",
+			"test_key_2": "test_value_2",
+			"test_key_3": "test_value_3",
+		},
+		MapEmpty: map[string]string{},
+	}
+
+	req := svc.InputService25TestCaseOperation1Request(input)
+	r := req.HTTPRequest
+
+	// build request
+	req.Build()
+	if req.Error != nil {
+		t.Errorf("expect no error, got %v", req.Error)
+	}
+
+	// assert body
+	if r.Body == nil {
+		t.Errorf("expect body not to be nil")
+	}
+	body, _ := ioutil.ReadAll(r.Body)
+	awstesting.AssertJSON(t, `{"MapDefaults":{"test_key_1":"test_value_1","test_key_2":"test_value_2","test_key_3":"test_value_3"},"MapEmpty":{}}`, util.Trim(string(body)))
+
+	// assert URL
+	awstesting.AssertURL(t, "https://test/", r.URL.String())
+
+	// assert headers
 
 }
