@@ -46,7 +46,7 @@ func (s *UpdateUsagePlanInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateUsagePlanInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.PatchOperations) > 0 {
+	if s.PatchOperations != nil {
 		v := s.PatchOperations
 
 		metadata := protocol.Metadata{}
@@ -111,7 +111,7 @@ func (s UpdateUsagePlanOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateUsagePlanOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ApiStages) > 0 {
+	if s.ApiStages != nil {
 		v := s.ApiStages
 
 		metadata := protocol.Metadata{}
@@ -153,7 +153,7 @@ func (s UpdateUsagePlanOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "quota", v, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

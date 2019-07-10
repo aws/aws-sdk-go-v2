@@ -72,7 +72,7 @@ func (s PutTelemetryRecordsInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ResourceARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.TelemetryRecords) > 0 {
+	if s.TelemetryRecords != nil {
 		v := s.TelemetryRecords
 
 		metadata := protocol.Metadata{}

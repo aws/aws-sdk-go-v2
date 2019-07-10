@@ -76,7 +76,7 @@ func (s *PublishLayerVersionInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PublishLayerVersionInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.CompatibleRuntimes) > 0 {
+	if s.CompatibleRuntimes != nil {
 		v := s.CompatibleRuntimes
 
 		metadata := protocol.Metadata{}
@@ -152,7 +152,7 @@ func (s PublishLayerVersionOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PublishLayerVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.CompatibleRuntimes) > 0 {
+	if s.CompatibleRuntimes != nil {
 		v := s.CompatibleRuntimes
 
 		metadata := protocol.Metadata{}

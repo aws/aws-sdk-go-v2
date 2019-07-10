@@ -137,7 +137,7 @@ func (s CreateApplicationVersionOutput) MarshalFields(e protocol.FieldEncoder) e
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "creationTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ParameterDefinitions) > 0 {
+	if s.ParameterDefinitions != nil {
 		v := s.ParameterDefinitions
 
 		metadata := protocol.Metadata{}
@@ -149,7 +149,7 @@ func (s CreateApplicationVersionOutput) MarshalFields(e protocol.FieldEncoder) e
 		ls0.End()
 
 	}
-	if len(s.RequiredCapabilities) > 0 {
+	if s.RequiredCapabilities != nil {
 		v := s.RequiredCapabilities
 
 		metadata := protocol.Metadata{}

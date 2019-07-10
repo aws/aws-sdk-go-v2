@@ -78,7 +78,7 @@ func (s GetBucketNotificationConfigurationOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetBucketNotificationConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.LambdaFunctionConfigurations) > 0 {
+	if s.LambdaFunctionConfigurations != nil {
 		v := s.LambdaFunctionConfigurations
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -90,7 +90,7 @@ func (s GetBucketNotificationConfigurationOutput) MarshalFields(e protocol.Field
 		ls0.End()
 
 	}
-	if len(s.QueueConfigurations) > 0 {
+	if s.QueueConfigurations != nil {
 		v := s.QueueConfigurations
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -102,7 +102,7 @@ func (s GetBucketNotificationConfigurationOutput) MarshalFields(e protocol.Field
 		ls0.End()
 
 	}
-	if len(s.TopicConfigurations) > 0 {
+	if s.TopicConfigurations != nil {
 		v := s.TopicConfigurations
 
 		metadata := protocol.Metadata{Flatten: true}

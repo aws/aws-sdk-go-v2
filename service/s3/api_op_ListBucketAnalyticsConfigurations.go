@@ -96,7 +96,7 @@ func (s ListBucketAnalyticsConfigurationsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListBucketAnalyticsConfigurationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AnalyticsConfigurationList) > 0 {
+	if s.AnalyticsConfigurationList != nil {
 		v := s.AnalyticsConfigurationList
 
 		metadata := protocol.Metadata{Flatten: true}

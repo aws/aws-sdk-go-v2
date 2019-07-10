@@ -189,7 +189,7 @@ func (s CreateResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "pathPart", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResourceMethods) > 0 {
+	if s.ResourceMethods != nil {
 		v := s.ResourceMethods
 
 		metadata := protocol.Metadata{}

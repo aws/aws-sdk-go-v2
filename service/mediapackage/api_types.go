@@ -65,7 +65,7 @@ func (s Channel) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -172,7 +172,7 @@ func (s CmafPackage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "encryption", v, metadata)
 	}
-	if len(s.HlsManifests) > 0 {
+	if s.HlsManifests != nil {
 		v := s.HlsManifests
 
 		metadata := protocol.Metadata{}
@@ -263,7 +263,7 @@ func (s CmafPackageCreateOrUpdateParameters) MarshalFields(e protocol.FieldEncod
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "encryption", v, metadata)
 	}
-	if len(s.HlsManifests) > 0 {
+	if s.HlsManifests != nil {
 		v := s.HlsManifests
 
 		metadata := protocol.Metadata{}
@@ -459,7 +459,7 @@ func (s DashPackage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "minUpdatePeriodSeconds", protocol.Int64Value(v), metadata)
 	}
-	if len(s.PeriodTriggers) > 0 {
+	if s.PeriodTriggers != nil {
 		v := s.PeriodTriggers
 
 		metadata := protocol.Metadata{}
@@ -604,7 +604,7 @@ func (s HlsIngest) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s HlsIngest) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.IngestEndpoints) > 0 {
+	if s.IngestEndpoints != nil {
 		v := s.IngestEndpoints
 
 		metadata := protocol.Metadata{}
@@ -1243,7 +1243,7 @@ func (s OriginEndpoint) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "startoverWindowSeconds", protocol.Int64Value(v), metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -1267,7 +1267,7 @@ func (s OriginEndpoint) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Whitelist) > 0 {
+	if s.Whitelist != nil {
 		v := s.Whitelist
 
 		metadata := protocol.Metadata{}
@@ -1366,7 +1366,7 @@ func (s SpekeKeyProvider) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SystemIds) > 0 {
+	if s.SystemIds != nil {
 		v := s.SystemIds
 
 		metadata := protocol.Metadata{}

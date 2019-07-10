@@ -149,7 +149,7 @@ func (s UpdateFunctionConfigurationInput) MarshalFields(e protocol.FieldEncoder)
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "KMSKeyArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Layers) > 0 {
+	if s.Layers != nil {
 		v := s.Layers
 
 		metadata := protocol.Metadata{}
@@ -347,7 +347,7 @@ func (s UpdateFunctionConfigurationOutput) MarshalFields(e protocol.FieldEncoder
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LastModified", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Layers) > 0 {
+	if s.Layers != nil {
 		v := s.Layers
 
 		metadata := protocol.Metadata{}

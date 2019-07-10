@@ -153,7 +153,7 @@ func (s DescribeSimulationApplicationOutput) MarshalFields(e protocol.FieldEncod
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "simulationSoftwareSuite", v, metadata)
 	}
-	if len(s.Sources) > 0 {
+	if s.Sources != nil {
 		v := s.Sources
 
 		metadata := protocol.Metadata{}
@@ -165,7 +165,7 @@ func (s DescribeSimulationApplicationOutput) MarshalFields(e protocol.FieldEncod
 		ls0.End()
 
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

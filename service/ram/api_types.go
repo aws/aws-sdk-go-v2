@@ -243,7 +243,7 @@ func (s ResourceShare) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "statusMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -404,7 +404,7 @@ func (s ResourceShareInvitation) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "resourceShareArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResourceShareAssociations) > 0 {
+	if s.ResourceShareAssociations != nil {
 		v := s.ResourceShareAssociations
 
 		metadata := protocol.Metadata{}
@@ -502,7 +502,7 @@ func (s TagFilter) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "tagKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.TagValues) > 0 {
+	if s.TagValues != nil {
 		v := s.TagValues
 
 		metadata := protocol.Metadata{}

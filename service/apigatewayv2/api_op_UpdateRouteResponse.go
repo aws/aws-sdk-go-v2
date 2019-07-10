@@ -79,7 +79,7 @@ func (s UpdateRouteResponseInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "modelSelectionExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResponseModels) > 0 {
+	if s.ResponseModels != nil {
 		v := s.ResponseModels
 
 		metadata := protocol.Metadata{}
@@ -91,7 +91,7 @@ func (s UpdateRouteResponseInput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.ResponseParameters) > 0 {
+	if s.ResponseParameters != nil {
 		v := s.ResponseParameters
 
 		metadata := protocol.Metadata{}
@@ -169,7 +169,7 @@ func (s UpdateRouteResponseOutput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "modelSelectionExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResponseModels) > 0 {
+	if s.ResponseModels != nil {
 		v := s.ResponseModels
 
 		metadata := protocol.Metadata{}
@@ -181,7 +181,7 @@ func (s UpdateRouteResponseOutput) MarshalFields(e protocol.FieldEncoder) error 
 		ms0.End()
 
 	}
-	if len(s.ResponseParameters) > 0 {
+	if s.ResponseParameters != nil {
 		v := s.ResponseParameters
 
 		metadata := protocol.Metadata{}

@@ -108,7 +108,7 @@ func (s CreateMissionProfileInput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "contactPrePassDurationSeconds", protocol.Int64Value(v), metadata)
 	}
-	if len(s.DataflowEdges) > 0 {
+	if s.DataflowEdges != nil {
 		v := s.DataflowEdges
 
 		metadata := protocol.Metadata{}
@@ -137,7 +137,7 @@ func (s CreateMissionProfileInput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

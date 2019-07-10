@@ -88,7 +88,7 @@ func (s CancelJobExecutionInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "expectedVersion", protocol.Int64Value(v), metadata)
 	}
-	if len(s.StatusDetails) > 0 {
+	if s.StatusDetails != nil {
 		v := s.StatusDetails
 
 		metadata := protocol.Metadata{}

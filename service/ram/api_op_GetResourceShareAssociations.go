@@ -100,7 +100,7 @@ func (s GetResourceShareAssociationsInput) MarshalFields(e protocol.FieldEncoder
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "resourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResourceShareArns) > 0 {
+	if s.ResourceShareArns != nil {
 		v := s.ResourceShareArns
 
 		metadata := protocol.Metadata{}
@@ -140,7 +140,7 @@ func (s GetResourceShareAssociationsOutput) MarshalFields(e protocol.FieldEncode
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResourceShareAssociations) > 0 {
+	if s.ResourceShareAssociations != nil {
 		v := s.ResourceShareAssociations
 
 		metadata := protocol.Metadata{}

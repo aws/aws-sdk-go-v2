@@ -76,7 +76,7 @@ func (s *ListSimulationApplicationsInput) Validate() error {
 func (s ListSimulationApplicationsInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.Filters) > 0 {
+	if s.Filters != nil {
 		v := s.Filters
 
 		metadata := protocol.Metadata{}
@@ -137,7 +137,7 @@ func (s ListSimulationApplicationsOutput) MarshalFields(e protocol.FieldEncoder)
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SimulationApplicationSummaries) > 0 {
+	if s.SimulationApplicationSummaries != nil {
 		v := s.SimulationApplicationSummaries
 
 		metadata := protocol.Metadata{}

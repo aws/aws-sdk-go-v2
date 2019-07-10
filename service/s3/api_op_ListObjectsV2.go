@@ -197,7 +197,7 @@ func (s ListObjectsV2Output) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListObjectsV2Output) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.CommonPrefixes) > 0 {
+	if s.CommonPrefixes != nil {
 		v := s.CommonPrefixes
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -209,7 +209,7 @@ func (s ListObjectsV2Output) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Contents) > 0 {
+	if s.Contents != nil {
 		v := s.Contents
 
 		metadata := protocol.Metadata{Flatten: true}

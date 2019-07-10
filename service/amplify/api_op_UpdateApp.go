@@ -106,7 +106,7 @@ func (s UpdateAppInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "buildSpec", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.CustomRules) > 0 {
+	if s.CustomRules != nil {
 		v := s.CustomRules
 
 		metadata := protocol.Metadata{}
@@ -136,7 +136,7 @@ func (s UpdateAppInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "enableBranchAutoBuild", protocol.BoolValue(v), metadata)
 	}
-	if len(s.EnvironmentVariables) > 0 {
+	if s.EnvironmentVariables != nil {
 		v := s.EnvironmentVariables
 
 		metadata := protocol.Metadata{}

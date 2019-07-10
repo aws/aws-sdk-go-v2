@@ -77,7 +77,7 @@ func (s *UpdateChannelInput) Validate() error {
 func (s UpdateChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.Destinations) > 0 {
+	if s.Destinations != nil {
 		v := s.Destinations
 
 		metadata := protocol.Metadata{}
@@ -95,7 +95,7 @@ func (s UpdateChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "encoderSettings", v, metadata)
 	}
-	if len(s.InputAttachments) > 0 {
+	if s.InputAttachments != nil {
 		v := s.InputAttachments
 
 		metadata := protocol.Metadata{}

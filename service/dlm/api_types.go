@@ -74,7 +74,7 @@ func (s CreateRule) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "IntervalUnit", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Times) > 0 {
+	if s.Times != nil {
 		v := s.Times
 
 		metadata := protocol.Metadata{}
@@ -267,7 +267,7 @@ func (s *PolicyDetails) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PolicyDetails) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ResourceTypes) > 0 {
+	if s.ResourceTypes != nil {
 		v := s.ResourceTypes
 
 		metadata := protocol.Metadata{}
@@ -279,7 +279,7 @@ func (s PolicyDetails) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Schedules) > 0 {
+	if s.Schedules != nil {
 		v := s.Schedules
 
 		metadata := protocol.Metadata{}
@@ -291,7 +291,7 @@ func (s PolicyDetails) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.TargetTags) > 0 {
+	if s.TargetTags != nil {
 		v := s.TargetTags
 
 		metadata := protocol.Metadata{}
@@ -429,7 +429,7 @@ func (s Schedule) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "RetainRule", v, metadata)
 	}
-	if len(s.TagsToAdd) > 0 {
+	if s.TagsToAdd != nil {
 		v := s.TagsToAdd
 
 		metadata := protocol.Metadata{}

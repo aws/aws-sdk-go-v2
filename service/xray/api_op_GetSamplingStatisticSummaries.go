@@ -59,7 +59,7 @@ func (s GetSamplingStatisticSummariesOutput) MarshalFields(e protocol.FieldEncod
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SamplingStatisticSummaries) > 0 {
+	if s.SamplingStatisticSummaries != nil {
 		v := s.SamplingStatisticSummaries
 
 		metadata := protocol.Metadata{}

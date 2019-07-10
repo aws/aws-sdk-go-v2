@@ -72,7 +72,7 @@ func (s *UpdateUserSecurityProfilesInput) Validate() error {
 func (s UpdateUserSecurityProfilesInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.SecurityProfileIds) > 0 {
+	if s.SecurityProfileIds != nil {
 		v := s.SecurityProfileIds
 
 		metadata := protocol.Metadata{}

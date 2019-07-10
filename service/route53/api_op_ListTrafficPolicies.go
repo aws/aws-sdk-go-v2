@@ -127,7 +127,7 @@ func (s ListTrafficPoliciesOutput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "TrafficPolicyIdMarker", protocol.StringValue(v), metadata)
 	}
-	if len(s.TrafficPolicySummaries) > 0 {
+	if s.TrafficPolicySummaries != nil {
 		v := s.TrafficPolicySummaries
 
 		metadata := protocol.Metadata{ListLocationName: "TrafficPolicySummary"}

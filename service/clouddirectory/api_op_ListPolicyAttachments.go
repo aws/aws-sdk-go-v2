@@ -123,7 +123,7 @@ func (s ListPolicyAttachmentsOutput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ObjectIdentifiers) > 0 {
+	if s.ObjectIdentifiers != nil {
 		v := s.ObjectIdentifiers
 
 		metadata := protocol.Metadata{}

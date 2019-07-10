@@ -73,7 +73,7 @@ func (s GetDeploymentInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "restapi_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Embed) > 0 {
+	if s.Embed != nil {
 		v := s.Embed
 
 		metadata := protocol.Metadata{}
@@ -122,7 +122,7 @@ func (s GetDeploymentOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetDeploymentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ApiSummary) > 0 {
+	if s.ApiSummary != nil {
 		v := s.ApiSummary
 
 		metadata := protocol.Metadata{}

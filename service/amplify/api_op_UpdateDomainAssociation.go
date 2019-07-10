@@ -82,7 +82,7 @@ func (s UpdateDomainAssociationInput) MarshalFields(e protocol.FieldEncoder) err
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "enableAutoSubDomain", protocol.BoolValue(v), metadata)
 	}
-	if len(s.SubDomainSettings) > 0 {
+	if s.SubDomainSettings != nil {
 		v := s.SubDomainSettings
 
 		metadata := protocol.Metadata{}

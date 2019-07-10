@@ -62,7 +62,7 @@ func (s *GetLifecyclePoliciesInput) Validate() error {
 func (s GetLifecyclePoliciesInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.PolicyIds) > 0 {
+	if s.PolicyIds != nil {
 		v := s.PolicyIds
 
 		metadata := protocol.Metadata{}
@@ -74,7 +74,7 @@ func (s GetLifecyclePoliciesInput) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceTypes) > 0 {
+	if s.ResourceTypes != nil {
 		v := s.ResourceTypes
 
 		metadata := protocol.Metadata{}
@@ -92,7 +92,7 @@ func (s GetLifecyclePoliciesInput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.QueryTarget, "state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.TagsToAdd) > 0 {
+	if s.TagsToAdd != nil {
 		v := s.TagsToAdd
 
 		metadata := protocol.Metadata{}
@@ -104,7 +104,7 @@ func (s GetLifecyclePoliciesInput) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.TargetTags) > 0 {
+	if s.TargetTags != nil {
 		v := s.TargetTags
 
 		metadata := protocol.Metadata{}
@@ -134,7 +134,7 @@ func (s GetLifecyclePoliciesOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetLifecyclePoliciesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Policies) > 0 {
+	if s.Policies != nil {
 		v := s.Policies
 
 		metadata := protocol.Metadata{}

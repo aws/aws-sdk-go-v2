@@ -50,7 +50,7 @@ func (s *BatchUpdatePhoneNumberInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchUpdatePhoneNumberInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.UpdatePhoneNumberRequestItems) > 0 {
+	if s.UpdatePhoneNumberRequestItems != nil {
 		v := s.UpdatePhoneNumberRequestItems
 
 		metadata := protocol.Metadata{}
@@ -82,7 +82,7 @@ func (s BatchUpdatePhoneNumberOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchUpdatePhoneNumberOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.PhoneNumberErrors) > 0 {
+	if s.PhoneNumberErrors != nil {
 		v := s.PhoneNumberErrors
 
 		metadata := protocol.Metadata{}

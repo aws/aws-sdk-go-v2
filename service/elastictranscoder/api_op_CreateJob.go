@@ -122,7 +122,7 @@ func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Input", v, metadata)
 	}
-	if len(s.Inputs) > 0 {
+	if s.Inputs != nil {
 		v := s.Inputs
 
 		metadata := protocol.Metadata{}
@@ -146,7 +146,7 @@ func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "OutputKeyPrefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Outputs) > 0 {
+	if s.Outputs != nil {
 		v := s.Outputs
 
 		metadata := protocol.Metadata{}
@@ -164,7 +164,7 @@ func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "PipelineId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Playlists) > 0 {
+	if s.Playlists != nil {
 		v := s.Playlists
 
 		metadata := protocol.Metadata{}
@@ -176,7 +176,7 @@ func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.UserMetadata) > 0 {
+	if s.UserMetadata != nil {
 		v := s.UserMetadata
 
 		metadata := protocol.Metadata{}

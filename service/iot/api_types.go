@@ -55,7 +55,7 @@ func (s *AbortConfig) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s AbortConfig) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.CriteriaList) > 0 {
+	if s.CriteriaList != nil {
 		v := s.CriteriaList
 
 		metadata := protocol.Metadata{}
@@ -558,7 +558,7 @@ func (s Allowed) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Allowed) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Policies) > 0 {
+	if s.Policies != nil {
 		v := s.Policies
 
 		metadata := protocol.Metadata{}
@@ -599,7 +599,7 @@ func (s AttributePayload) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s AttributePayload) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -785,7 +785,7 @@ func (s AuditFinding) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "reasonForNonComplianceCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.RelatedResources) > 0 {
+	if s.RelatedResources != nil {
 		v := s.RelatedResources
 
 		metadata := protocol.Metadata{}
@@ -941,7 +941,7 @@ func (s AuthInfo) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "actionType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Resources) > 0 {
+	if s.Resources != nil {
 		v := s.Resources
 
 		metadata := protocol.Metadata{}
@@ -1009,7 +1009,7 @@ func (s AuthResult) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "denied", v, metadata)
 	}
-	if len(s.MissingContextValues) > 0 {
+	if s.MissingContextValues != nil {
 		v := s.MissingContextValues
 
 		metadata := protocol.Metadata{}
@@ -1103,7 +1103,7 @@ func (s AuthorizerDescription) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "tokenKeyName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.TokenSigningPublicKeys) > 0 {
+	if s.TokenSigningPublicKeys != nil {
 		v := s.TokenSigningPublicKeys
 
 		metadata := protocol.Metadata{}
@@ -2662,7 +2662,7 @@ func (s ExplicitDeny) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ExplicitDeny) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Policies) > 0 {
+	if s.Policies != nil {
 		v := s.Policies
 
 		metadata := protocol.Metadata{}
@@ -2932,7 +2932,7 @@ func (s ImplicitDeny) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ImplicitDeny) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Policies) > 0 {
+	if s.Policies != nil {
 		v := s.Policies
 
 		metadata := protocol.Metadata{}
@@ -3223,7 +3223,7 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "targetSelection", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Targets) > 0 {
+	if s.Targets != nil {
 		v := s.Targets
 
 		metadata := protocol.Metadata{}
@@ -3383,7 +3383,7 @@ func (s JobExecutionStatusDetails) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s JobExecutionStatusDetails) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.DetailsMap) > 0 {
+	if s.DetailsMap != nil {
 		v := s.DetailsMap
 
 		metadata := protocol.Metadata{}
@@ -3670,7 +3670,7 @@ func (s JobProcessDetails) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "numberOfTimedOutThings", protocol.Int64Value(v), metadata)
 	}
-	if len(s.ProcessingTargets) > 0 {
+	if s.ProcessingTargets != nil {
 		v := s.ProcessingTargets
 
 		metadata := protocol.Metadata{}
@@ -4068,7 +4068,7 @@ func (s MetricValue) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s MetricValue) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Cidrs) > 0 {
+	if s.Cidrs != nil {
 		v := s.Cidrs
 
 		metadata := protocol.Metadata{}
@@ -4086,7 +4086,7 @@ func (s MetricValue) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "count", protocol.Int64Value(v), metadata)
 	}
-	if len(s.Ports) > 0 {
+	if s.Ports != nil {
 		v := s.Ports
 
 		metadata := protocol.Metadata{}
@@ -4122,7 +4122,7 @@ func (s NonCompliantResource) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s NonCompliantResource) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AdditionalInfo) > 0 {
+	if s.AdditionalInfo != nil {
 		v := s.AdditionalInfo
 
 		metadata := protocol.Metadata{}
@@ -4196,7 +4196,7 @@ func (s *OTAUpdateFile) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OTAUpdateFile) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -4294,7 +4294,7 @@ func (s OTAUpdateInfo) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OTAUpdateInfo) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AdditionalParameters) > 0 {
+	if s.AdditionalParameters != nil {
 		v := s.AdditionalParameters
 
 		metadata := protocol.Metadata{}
@@ -4354,7 +4354,7 @@ func (s OTAUpdateInfo) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "otaUpdateArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.OtaUpdateFiles) > 0 {
+	if s.OtaUpdateFiles != nil {
 		v := s.OtaUpdateFiles
 
 		metadata := protocol.Metadata{}
@@ -4384,7 +4384,7 @@ func (s OTAUpdateInfo) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "targetSelection", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Targets) > 0 {
+	if s.Targets != nil {
 		v := s.Targets
 
 		metadata := protocol.Metadata{}
@@ -4844,7 +4844,7 @@ func (s RelatedResource) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s RelatedResource) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AdditionalInfo) > 0 {
+	if s.AdditionalInfo != nil {
 		v := s.AdditionalInfo
 
 		metadata := protocol.Metadata{}
@@ -5999,7 +5999,7 @@ func (s StreamInfo) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Files) > 0 {
+	if s.Files != nil {
 		v := s.Files
 
 		metadata := protocol.Metadata{}
@@ -6234,7 +6234,7 @@ func (s ThingAttribute) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ThingAttribute) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -6342,7 +6342,7 @@ func (s ThingDocument) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ThingDocument) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -6366,7 +6366,7 @@ func (s ThingDocument) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "shadow", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ThingGroupNames) > 0 {
+	if s.ThingGroupNames != nil {
 		v := s.ThingGroupNames
 
 		metadata := protocol.Metadata{}
@@ -6426,7 +6426,7 @@ func (s ThingGroupDocument) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ThingGroupDocument) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -6438,7 +6438,7 @@ func (s ThingGroupDocument) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.ParentGroupNames) > 0 {
+	if s.ParentGroupNames != nil {
 		v := s.ParentGroupNames
 
 		metadata := protocol.Metadata{}
@@ -6543,7 +6543,7 @@ func (s ThingGroupMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "parentGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.RootToParentThingGroups) > 0 {
+	if s.RootToParentThingGroups != nil {
 		v := s.RootToParentThingGroups
 
 		metadata := protocol.Metadata{}
@@ -6769,7 +6769,7 @@ func (s ThingTypeProperties) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ThingTypeProperties) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.SearchableAttributes) > 0 {
+	if s.SearchableAttributes != nil {
 		v := s.SearchableAttributes
 
 		metadata := protocol.Metadata{}
@@ -6859,7 +6859,7 @@ func (s TopicRule) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s TopicRule) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Actions) > 0 {
+	if s.Actions != nil {
 		v := s.Actions
 
 		metadata := protocol.Metadata{}
@@ -7042,7 +7042,7 @@ func (s *TopicRulePayload) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s TopicRulePayload) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Actions) > 0 {
+	if s.Actions != nil {
 		v := s.Actions
 
 		metadata := protocol.Metadata{}

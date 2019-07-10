@@ -96,7 +96,7 @@ func (s *ApplicationPolicyStatement) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ApplicationPolicyStatement) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Actions) > 0 {
+	if s.Actions != nil {
 		v := s.Actions
 
 		metadata := protocol.Metadata{}
@@ -108,7 +108,7 @@ func (s ApplicationPolicyStatement) MarshalFields(e protocol.FieldEncoder) error
 		ls0.End()
 
 	}
-	if len(s.Principals) > 0 {
+	if s.Principals != nil {
 		v := s.Principals
 
 		metadata := protocol.Metadata{}
@@ -219,7 +219,7 @@ func (s ApplicationSummary) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "homePageUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Labels) > 0 {
+	if s.Labels != nil {
 		v := s.Labels
 
 		metadata := protocol.Metadata{}
@@ -355,7 +355,7 @@ func (s ParameterDefinition) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "allowedPattern", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.AllowedValues) > 0 {
+	if s.AllowedValues != nil {
 		v := s.AllowedValues
 
 		metadata := protocol.Metadata{}
@@ -421,7 +421,7 @@ func (s ParameterDefinition) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "noEcho", protocol.BoolValue(v), metadata)
 	}
-	if len(s.ReferencedByResources) > 0 {
+	if s.ReferencedByResources != nil {
 		v := s.ReferencedByResources
 
 		metadata := protocol.Metadata{}
@@ -548,7 +548,7 @@ func (s RollbackConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "monitoringTimeInMinutes", protocol.Int64Value(v), metadata)
 	}
-	if len(s.RollbackTriggers) > 0 {
+	if s.RollbackTriggers != nil {
 		v := s.RollbackTriggers
 
 		metadata := protocol.Metadata{}
@@ -790,7 +790,7 @@ func (s Version) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "creationTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ParameterDefinitions) > 0 {
+	if s.ParameterDefinitions != nil {
 		v := s.ParameterDefinitions
 
 		metadata := protocol.Metadata{}
@@ -802,7 +802,7 @@ func (s Version) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.RequiredCapabilities) > 0 {
+	if s.RequiredCapabilities != nil {
 		v := s.RequiredCapabilities
 
 		metadata := protocol.Metadata{}

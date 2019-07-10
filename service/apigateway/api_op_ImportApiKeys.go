@@ -96,7 +96,7 @@ func (s ImportApiKeysOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ImportApiKeysOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Ids) > 0 {
+	if s.Ids != nil {
 		v := s.Ids
 
 		metadata := protocol.Metadata{}
@@ -108,7 +108,7 @@ func (s ImportApiKeysOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Warnings) > 0 {
+	if s.Warnings != nil {
 		v := s.Warnings
 
 		metadata := protocol.Metadata{}

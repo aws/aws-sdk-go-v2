@@ -97,7 +97,7 @@ func (s PutSigningProfileInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "signingMaterial", v, metadata)
 	}
-	if len(s.SigningParameters) > 0 {
+	if s.SigningParameters != nil {
 		v := s.SigningParameters
 
 		metadata := protocol.Metadata{}

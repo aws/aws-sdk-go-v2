@@ -62,7 +62,7 @@ func (s *TestAuthorizationInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s TestAuthorizationInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.AuthInfos) > 0 {
+	if s.AuthInfos != nil {
 		v := s.AuthInfos
 
 		metadata := protocol.Metadata{}
@@ -80,7 +80,7 @@ func (s TestAuthorizationInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "cognitoIdentityPoolId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.PolicyNamesToAdd) > 0 {
+	if s.PolicyNamesToAdd != nil {
 		v := s.PolicyNamesToAdd
 
 		metadata := protocol.Metadata{}
@@ -92,7 +92,7 @@ func (s TestAuthorizationInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.PolicyNamesToSkip) > 0 {
+	if s.PolicyNamesToSkip != nil {
 		v := s.PolicyNamesToSkip
 
 		metadata := protocol.Metadata{}
@@ -133,7 +133,7 @@ func (s TestAuthorizationOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s TestAuthorizationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AuthResults) > 0 {
+	if s.AuthResults != nil {
 		v := s.AuthResults
 
 		metadata := protocol.Metadata{}

@@ -86,7 +86,7 @@ func (s ListOriginEndpointsOutput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.OriginEndpoints) > 0 {
+	if s.OriginEndpoints != nil {
 		v := s.OriginEndpoints
 
 		metadata := protocol.Metadata{}

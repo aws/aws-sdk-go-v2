@@ -166,7 +166,7 @@ func (s DataRetrievalPolicy) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DataRetrievalPolicy) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Rules) > 0 {
+	if s.Rules != nil {
 		v := s.Rules
 
 		metadata := protocol.Metadata{}
@@ -1123,7 +1123,7 @@ func (s *S3Location) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s S3Location) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AccessControlList) > 0 {
+	if s.AccessControlList != nil {
 		v := s.AccessControlList
 
 		metadata := protocol.Metadata{}
@@ -1165,7 +1165,7 @@ func (s S3Location) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "StorageClass", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Tagging) > 0 {
+	if s.Tagging != nil {
 		v := s.Tagging
 
 		metadata := protocol.Metadata{}
@@ -1177,7 +1177,7 @@ func (s S3Location) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.UserMetadata) > 0 {
+	if s.UserMetadata != nil {
 		v := s.UserMetadata
 
 		metadata := protocol.Metadata{}
@@ -1374,7 +1374,7 @@ func (s VaultNotificationConfig) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s VaultNotificationConfig) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Events) > 0 {
+	if s.Events != nil {
 		v := s.Events
 
 		metadata := protocol.Metadata{}

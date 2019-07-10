@@ -142,7 +142,7 @@ func (s ListHostedZonesByNameOutput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "HostedZoneId", protocol.StringValue(v), metadata)
 	}
-	if len(s.HostedZones) > 0 {
+	if s.HostedZones != nil {
 		v := s.HostedZones
 
 		metadata := protocol.Metadata{ListLocationName: "HostedZone"}

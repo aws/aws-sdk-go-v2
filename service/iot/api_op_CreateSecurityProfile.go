@@ -78,7 +78,7 @@ func (s *CreateSecurityProfileInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateSecurityProfileInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.AdditionalMetricsToRetain) > 0 {
+	if s.AdditionalMetricsToRetain != nil {
 		v := s.AdditionalMetricsToRetain
 
 		metadata := protocol.Metadata{}
@@ -90,7 +90,7 @@ func (s CreateSecurityProfileInput) MarshalFields(e protocol.FieldEncoder) error
 		ls0.End()
 
 	}
-	if len(s.AlertTargets) > 0 {
+	if s.AlertTargets != nil {
 		v := s.AlertTargets
 
 		metadata := protocol.Metadata{}
@@ -102,7 +102,7 @@ func (s CreateSecurityProfileInput) MarshalFields(e protocol.FieldEncoder) error
 		ms0.End()
 
 	}
-	if len(s.Behaviors) > 0 {
+	if s.Behaviors != nil {
 		v := s.Behaviors
 
 		metadata := protocol.Metadata{}
@@ -120,7 +120,7 @@ func (s CreateSecurityProfileInput) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "securityProfileDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

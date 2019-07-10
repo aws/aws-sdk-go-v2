@@ -120,7 +120,7 @@ func (s ListContactsInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "startTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
-	if len(s.StatusList) > 0 {
+	if s.StatusList != nil {
 		v := s.StatusList
 
 		metadata := protocol.Metadata{}
@@ -154,7 +154,7 @@ func (s ListContactsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListContactsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ContactList) > 0 {
+	if s.ContactList != nil {
 		v := s.ContactList
 
 		metadata := protocol.Metadata{}

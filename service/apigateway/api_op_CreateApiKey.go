@@ -82,7 +82,7 @@ func (s CreateApiKeyInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.StageKeys) > 0 {
+	if s.StageKeys != nil {
 		v := s.StageKeys
 
 		metadata := protocol.Metadata{}
@@ -94,7 +94,7 @@ func (s CreateApiKeyInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -205,7 +205,7 @@ func (s CreateApiKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.StageKeys) > 0 {
+	if s.StageKeys != nil {
 		v := s.StageKeys
 
 		metadata := protocol.Metadata{}
@@ -217,7 +217,7 @@ func (s CreateApiKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

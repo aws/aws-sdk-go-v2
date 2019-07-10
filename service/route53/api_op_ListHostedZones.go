@@ -114,7 +114,7 @@ func (s ListHostedZonesOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListHostedZonesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.HostedZones) > 0 {
+	if s.HostedZones != nil {
 		v := s.HostedZones
 
 		metadata := protocol.Metadata{ListLocationName: "HostedZone"}

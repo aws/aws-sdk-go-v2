@@ -102,7 +102,7 @@ func (s CreateStageInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.RouteSettings) > 0 {
+	if s.RouteSettings != nil {
 		v := s.RouteSettings
 
 		metadata := protocol.Metadata{}
@@ -120,7 +120,7 @@ func (s CreateStageInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "stageName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.StageVariables) > 0 {
+	if s.StageVariables != nil {
 		v := s.StageVariables
 
 		metadata := protocol.Metadata{}
@@ -223,7 +223,7 @@ func (s CreateStageOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "lastUpdatedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
-	if len(s.RouteSettings) > 0 {
+	if s.RouteSettings != nil {
 		v := s.RouteSettings
 
 		metadata := protocol.Metadata{}
@@ -241,7 +241,7 @@ func (s CreateStageOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "stageName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.StageVariables) > 0 {
+	if s.StageVariables != nil {
 		v := s.StageVariables
 
 		metadata := protocol.Metadata{}

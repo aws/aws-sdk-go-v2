@@ -66,7 +66,7 @@ func (s ListJobsInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "x-amz-account-id", protocol.StringValue(v), metadata)
 	}
-	if len(s.JobStatuses) > 0 {
+	if s.JobStatuses != nil {
 		v := s.JobStatuses
 
 		metadata := protocol.Metadata{}
@@ -113,7 +113,7 @@ func (s ListJobsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListJobsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Jobs) > 0 {
+	if s.Jobs != nil {
 		v := s.Jobs
 
 		metadata := protocol.Metadata{}

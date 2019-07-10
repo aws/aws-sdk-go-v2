@@ -74,7 +74,7 @@ func (s *ListDeploymentJobsInput) Validate() error {
 func (s ListDeploymentJobsInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.Filters) > 0 {
+	if s.Filters != nil {
 		v := s.Filters
 
 		metadata := protocol.Metadata{}
@@ -122,7 +122,7 @@ func (s ListDeploymentJobsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListDeploymentJobsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.DeploymentJobs) > 0 {
+	if s.DeploymentJobs != nil {
 		v := s.DeploymentJobs
 
 		metadata := protocol.Metadata{}

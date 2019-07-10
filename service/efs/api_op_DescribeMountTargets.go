@@ -112,7 +112,7 @@ func (s DescribeMountTargetsOutput) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.MountTargets) > 0 {
+	if s.MountTargets != nil {
 		v := s.MountTargets
 
 		metadata := protocol.Metadata{}

@@ -93,7 +93,7 @@ func (s ListIncomingTypedLinksInput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ConsistencyLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.FilterAttributeRanges) > 0 {
+	if s.FilterAttributeRanges != nil {
 		v := s.FilterAttributeRanges
 
 		metadata := protocol.Metadata{}
@@ -156,7 +156,7 @@ func (s ListIncomingTypedLinksOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListIncomingTypedLinksOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.LinkSpecifiers) > 0 {
+	if s.LinkSpecifiers != nil {
 		v := s.LinkSpecifiers
 
 		metadata := protocol.Metadata{}

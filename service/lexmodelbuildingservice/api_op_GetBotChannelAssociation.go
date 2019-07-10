@@ -149,7 +149,7 @@ func (s GetBotChannelAssociationOutput) MarshalFields(e protocol.FieldEncoder) e
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "botAlias", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.BotConfiguration) > 0 {
+	if s.BotConfiguration != nil {
 		v := s.BotConfiguration
 
 		metadata := protocol.Metadata{}

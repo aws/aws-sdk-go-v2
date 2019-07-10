@@ -101,7 +101,7 @@ func (s GetObjectInformationOutput) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SchemaFacets) > 0 {
+	if s.SchemaFacets != nil {
 		v := s.SchemaFacets
 
 		metadata := protocol.Metadata{}

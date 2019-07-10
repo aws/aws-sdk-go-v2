@@ -108,7 +108,7 @@ func (s ListRoutingProfilesOutput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.RoutingProfileSummaryList) > 0 {
+	if s.RoutingProfileSummaryList != nil {
 		v := s.RoutingProfileSummaryList
 
 		metadata := protocol.Metadata{}

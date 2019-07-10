@@ -90,7 +90,7 @@ func (s CreateRestApiInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "apiKeySource", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.BinaryMediaTypes) > 0 {
+	if s.BinaryMediaTypes != nil {
 		v := s.BinaryMediaTypes
 
 		metadata := protocol.Metadata{}
@@ -138,7 +138,7 @@ func (s CreateRestApiInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "policy", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -229,7 +229,7 @@ func (s CreateRestApiOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "apiKeySource", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.BinaryMediaTypes) > 0 {
+	if s.BinaryMediaTypes != nil {
 		v := s.BinaryMediaTypes
 
 		metadata := protocol.Metadata{}
@@ -283,7 +283,7 @@ func (s CreateRestApiOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "policy", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -301,7 +301,7 @@ func (s CreateRestApiOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Warnings) > 0 {
+	if s.Warnings != nil {
 		v := s.Warnings
 
 		metadata := protocol.Metadata{}

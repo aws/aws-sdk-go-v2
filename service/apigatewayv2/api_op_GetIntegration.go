@@ -201,7 +201,7 @@ func (s GetIntegrationOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "passthroughBehavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.RequestParameters) > 0 {
+	if s.RequestParameters != nil {
 		v := s.RequestParameters
 
 		metadata := protocol.Metadata{}
@@ -213,7 +213,7 @@ func (s GetIntegrationOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.RequestTemplates) > 0 {
+	if s.RequestTemplates != nil {
 		v := s.RequestTemplates
 
 		metadata := protocol.Metadata{}

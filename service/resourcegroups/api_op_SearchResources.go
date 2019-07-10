@@ -112,7 +112,7 @@ func (s SearchResourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.QueryErrors) > 0 {
+	if s.QueryErrors != nil {
 		v := s.QueryErrors
 
 		metadata := protocol.Metadata{}
@@ -124,7 +124,7 @@ func (s SearchResourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.ResourceIdentifiers) > 0 {
+	if s.ResourceIdentifiers != nil {
 		v := s.ResourceIdentifiers
 
 		metadata := protocol.Metadata{}

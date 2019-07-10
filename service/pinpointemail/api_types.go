@@ -159,7 +159,7 @@ func (s *CloudWatchDestination) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CloudWatchDestination) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.DimensionConfigurations) > 0 {
+	if s.DimensionConfigurations != nil {
 		v := s.DimensionConfigurations
 
 		metadata := protocol.Metadata{}
@@ -342,7 +342,7 @@ func (s DailyVolume) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DailyVolume) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.DomainIspPlacements) > 0 {
+	if s.DomainIspPlacements != nil {
 		v := s.DomainIspPlacements
 
 		metadata := protocol.Metadata{}
@@ -566,7 +566,7 @@ func (s Destination) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Destination) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.BccAddresses) > 0 {
+	if s.BccAddresses != nil {
 		v := s.BccAddresses
 
 		metadata := protocol.Metadata{}
@@ -578,7 +578,7 @@ func (s Destination) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.CcAddresses) > 0 {
+	if s.CcAddresses != nil {
 		v := s.CcAddresses
 
 		metadata := protocol.Metadata{}
@@ -590,7 +590,7 @@ func (s Destination) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.ToAddresses) > 0 {
+	if s.ToAddresses != nil {
 		v := s.ToAddresses
 
 		metadata := protocol.Metadata{}
@@ -664,7 +664,7 @@ func (s DkimAttributes) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Tokens) > 0 {
+	if s.Tokens != nil {
 		v := s.Tokens
 
 		metadata := protocol.Metadata{}
@@ -766,7 +766,7 @@ func (s DomainDeliverabilityCampaign) MarshalFields(e protocol.FieldEncoder) err
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "DeleteRate", protocol.Float64Value(v), metadata)
 	}
-	if len(s.Esps) > 0 {
+	if s.Esps != nil {
 		v := s.Esps
 
 		metadata := protocol.Metadata{}
@@ -826,7 +826,7 @@ func (s DomainDeliverabilityCampaign) MarshalFields(e protocol.FieldEncoder) err
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ReadRate", protocol.Float64Value(v), metadata)
 	}
-	if len(s.SendingIps) > 0 {
+	if s.SendingIps != nil {
 		v := s.SendingIps
 
 		metadata := protocol.Metadata{}
@@ -1119,7 +1119,7 @@ func (s EventDestination) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "KinesisFirehoseDestination", v, metadata)
 	}
-	if len(s.MatchingEventTypes) > 0 {
+	if s.MatchingEventTypes != nil {
 		v := s.MatchingEventTypes
 
 		metadata := protocol.Metadata{}
@@ -1241,7 +1241,7 @@ func (s EventDestinationDefinition) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "KinesisFirehoseDestination", v, metadata)
 	}
-	if len(s.MatchingEventTypes) > 0 {
+	if s.MatchingEventTypes != nil {
 		v := s.MatchingEventTypes
 
 		metadata := protocol.Metadata{}
@@ -1351,7 +1351,7 @@ func (s InboxPlacementTrackingOption) MarshalFields(e protocol.FieldEncoder) err
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Global", protocol.BoolValue(v), metadata)
 	}
-	if len(s.TrackedIsps) > 0 {
+	if s.TrackedIsps != nil {
 		v := s.TrackedIsps
 
 		metadata := protocol.Metadata{}
@@ -1694,7 +1694,7 @@ func (s OverallVolume) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OverallVolume) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.DomainIspPlacements) > 0 {
+	if s.DomainIspPlacements != nil {
 		v := s.DomainIspPlacements
 
 		metadata := protocol.Metadata{}

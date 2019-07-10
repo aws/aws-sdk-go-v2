@@ -38,7 +38,7 @@ func (s GenerateClientCertificateInput) MarshalFields(e protocol.FieldEncoder) e
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -121,7 +121,7 @@ func (s GenerateClientCertificateOutput) MarshalFields(e protocol.FieldEncoder) 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "pemEncodedCertificate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

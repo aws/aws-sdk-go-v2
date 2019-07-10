@@ -94,7 +94,7 @@ func (s ListIndexInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.RangesOnIndexedValues) > 0 {
+	if s.RangesOnIndexedValues != nil {
 		v := s.RangesOnIndexedValues
 
 		metadata := protocol.Metadata{}
@@ -139,7 +139,7 @@ func (s ListIndexOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListIndexOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.IndexAttachments) > 0 {
+	if s.IndexAttachments != nil {
 		v := s.IndexAttachments
 
 		metadata := protocol.Metadata{}

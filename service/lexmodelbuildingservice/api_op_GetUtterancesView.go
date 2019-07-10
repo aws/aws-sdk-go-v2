@@ -74,7 +74,7 @@ func (s GetUtterancesViewInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "botname", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.BotVersions) > 0 {
+	if s.BotVersions != nil {
 		v := s.BotVersions
 
 		metadata := protocol.Metadata{}
@@ -121,7 +121,7 @@ func (s GetUtterancesViewOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Utterances) > 0 {
+	if s.Utterances != nil {
 		v := s.Utterances
 
 		metadata := protocol.Metadata{}

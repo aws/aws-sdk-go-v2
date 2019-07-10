@@ -66,7 +66,7 @@ func (s AssociateTargetsWithJobInput) MarshalFields(e protocol.FieldEncoder) err
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "comment", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Targets) > 0 {
+	if s.Targets != nil {
 		v := s.Targets
 
 		metadata := protocol.Metadata{}

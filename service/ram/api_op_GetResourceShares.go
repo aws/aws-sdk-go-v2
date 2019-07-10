@@ -88,7 +88,7 @@ func (s GetResourceSharesInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "resourceOwner", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.ResourceShareArns) > 0 {
+	if s.ResourceShareArns != nil {
 		v := s.ResourceShareArns
 
 		metadata := protocol.Metadata{}
@@ -106,7 +106,7 @@ func (s GetResourceSharesInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "resourceShareStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.TagFilters) > 0 {
+	if s.TagFilters != nil {
 		v := s.TagFilters
 
 		metadata := protocol.Metadata{}
@@ -146,7 +146,7 @@ func (s GetResourceSharesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResourceShares) > 0 {
+	if s.ResourceShares != nil {
 		v := s.ResourceShares
 
 		metadata := protocol.Metadata{}

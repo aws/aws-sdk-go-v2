@@ -42,7 +42,7 @@ func (s *PutTraceSegmentsInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PutTraceSegmentsInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.TraceSegmentDocuments) > 0 {
+	if s.TraceSegmentDocuments != nil {
 		v := s.TraceSegmentDocuments
 
 		metadata := protocol.Metadata{}
@@ -72,7 +72,7 @@ func (s PutTraceSegmentsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PutTraceSegmentsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.UnprocessedTraceSegments) > 0 {
+	if s.UnprocessedTraceSegments != nil {
 		v := s.UnprocessedTraceSegments
 
 		metadata := protocol.Metadata{}

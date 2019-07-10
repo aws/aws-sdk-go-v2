@@ -50,7 +50,7 @@ func (s *ValidateSecurityProfileBehaviorsInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ValidateSecurityProfileBehaviorsInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.Behaviors) > 0 {
+	if s.Behaviors != nil {
 		v := s.Behaviors
 
 		metadata := protocol.Metadata{}
@@ -88,7 +88,7 @@ func (s ValidateSecurityProfileBehaviorsOutput) MarshalFields(e protocol.FieldEn
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "valid", protocol.BoolValue(v), metadata)
 	}
-	if len(s.ValidationErrors) > 0 {
+	if s.ValidationErrors != nil {
 		v := s.ValidationErrors
 
 		metadata := protocol.Metadata{}

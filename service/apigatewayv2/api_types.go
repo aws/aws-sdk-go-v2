@@ -163,7 +163,7 @@ func (s Api) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Warnings) > 0 {
+	if s.Warnings != nil {
 		v := s.Warnings
 
 		metadata := protocol.Metadata{}
@@ -333,7 +333,7 @@ func (s Authorizer) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "authorizerUri", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.IdentitySource) > 0 {
+	if s.IdentitySource != nil {
 		v := s.IdentitySource
 
 		metadata := protocol.Metadata{}
@@ -357,7 +357,7 @@ func (s Authorizer) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ProviderArns) > 0 {
+	if s.ProviderArns != nil {
 		v := s.ProviderArns
 
 		metadata := protocol.Metadata{}
@@ -470,7 +470,7 @@ func (s DomainName) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "domainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.DomainNameConfigurations) > 0 {
+	if s.DomainNameConfigurations != nil {
 		v := s.DomainNameConfigurations
 
 		metadata := protocol.Metadata{}
@@ -744,7 +744,7 @@ func (s Integration) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "passthroughBehavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.RequestParameters) > 0 {
+	if s.RequestParameters != nil {
 		v := s.RequestParameters
 
 		metadata := protocol.Metadata{}
@@ -756,7 +756,7 @@ func (s Integration) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.RequestTemplates) > 0 {
+	if s.RequestTemplates != nil {
 		v := s.RequestTemplates
 
 		metadata := protocol.Metadata{}
@@ -856,7 +856,7 @@ func (s IntegrationResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "integrationResponseKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResponseParameters) > 0 {
+	if s.ResponseParameters != nil {
 		v := s.ResponseParameters
 
 		metadata := protocol.Metadata{}
@@ -868,7 +868,7 @@ func (s IntegrationResponse) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.ResponseTemplates) > 0 {
+	if s.ResponseTemplates != nil {
 		v := s.ResponseTemplates
 
 		metadata := protocol.Metadata{}
@@ -1047,7 +1047,7 @@ func (s Route) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "apiKeyRequired", protocol.BoolValue(v), metadata)
 	}
-	if len(s.AuthorizationScopes) > 0 {
+	if s.AuthorizationScopes != nil {
 		v := s.AuthorizationScopes
 
 		metadata := protocol.Metadata{}
@@ -1083,7 +1083,7 @@ func (s Route) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "operationName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.RequestModels) > 0 {
+	if s.RequestModels != nil {
 		v := s.RequestModels
 
 		metadata := protocol.Metadata{}
@@ -1095,7 +1095,7 @@ func (s Route) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.RequestParameters) > 0 {
+	if s.RequestParameters != nil {
 		v := s.RequestParameters
 
 		metadata := protocol.Metadata{}
@@ -1170,7 +1170,7 @@ func (s RouteResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "modelSelectionExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResponseModels) > 0 {
+	if s.ResponseModels != nil {
 		v := s.ResponseModels
 
 		metadata := protocol.Metadata{}
@@ -1182,7 +1182,7 @@ func (s RouteResponse) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.ResponseParameters) > 0 {
+	if s.ResponseParameters != nil {
 		v := s.ResponseParameters
 
 		metadata := protocol.Metadata{}
@@ -1362,7 +1362,7 @@ func (s Stage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "lastUpdatedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
-	if len(s.RouteSettings) > 0 {
+	if s.RouteSettings != nil {
 		v := s.RouteSettings
 
 		metadata := protocol.Metadata{}
@@ -1380,7 +1380,7 @@ func (s Stage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "stageName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.StageVariables) > 0 {
+	if s.StageVariables != nil {
 		v := s.StageVariables
 
 		metadata := protocol.Metadata{}

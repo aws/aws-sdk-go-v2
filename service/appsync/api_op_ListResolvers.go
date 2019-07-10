@@ -111,7 +111,7 @@ func (s ListResolversOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Resolvers) > 0 {
+	if s.Resolvers != nil {
 		v := s.Resolvers
 
 		metadata := protocol.Metadata{}

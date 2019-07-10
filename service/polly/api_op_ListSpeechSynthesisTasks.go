@@ -94,7 +94,7 @@ func (s ListSpeechSynthesisTasksOutput) MarshalFields(e protocol.FieldEncoder) e
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SynthesisTasks) > 0 {
+	if s.SynthesisTasks != nil {
 		v := s.SynthesisTasks
 
 		metadata := protocol.Metadata{}

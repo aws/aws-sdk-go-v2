@@ -114,7 +114,7 @@ func (s GetObjectAclOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetObjectAclOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Grants) > 0 {
+	if s.Grants != nil {
 		v := s.Grants
 
 		metadata := protocol.Metadata{ListLocationName: "Grant"}

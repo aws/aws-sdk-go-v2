@@ -46,7 +46,7 @@ func (s *ModifyMountTargetSecurityGroupsInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ModifyMountTargetSecurityGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.SecurityGroups) > 0 {
+	if s.SecurityGroups != nil {
 		v := s.SecurityGroups
 
 		metadata := protocol.Metadata{}

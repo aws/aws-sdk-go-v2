@@ -52,7 +52,7 @@ func (s *BatchImportFindingsInput) Validate() error {
 func (s BatchImportFindingsInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.Findings) > 0 {
+	if s.Findings != nil {
 		v := s.Findings
 
 		metadata := protocol.Metadata{}
@@ -98,7 +98,7 @@ func (s BatchImportFindingsOutput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "FailedCount", protocol.Int64Value(v), metadata)
 	}
-	if len(s.FailedFindings) > 0 {
+	if s.FailedFindings != nil {
 		v := s.FailedFindings
 
 		metadata := protocol.Metadata{}

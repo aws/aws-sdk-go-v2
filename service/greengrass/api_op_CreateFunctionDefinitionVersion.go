@@ -55,7 +55,7 @@ func (s CreateFunctionDefinitionVersionInput) MarshalFields(e protocol.FieldEnco
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "DefaultConfig", v, metadata)
 	}
-	if len(s.Functions) > 0 {
+	if s.Functions != nil {
 		v := s.Functions
 
 		metadata := protocol.Metadata{}

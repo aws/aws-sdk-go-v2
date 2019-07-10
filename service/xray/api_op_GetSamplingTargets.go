@@ -51,7 +51,7 @@ func (s *GetSamplingTargetsInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetSamplingTargetsInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.SamplingStatisticsDocuments) > 0 {
+	if s.SamplingStatisticsDocuments != nil {
 		v := s.SamplingStatisticsDocuments
 
 		metadata := protocol.Metadata{}
@@ -95,7 +95,7 @@ func (s GetSamplingTargetsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LastRuleModification", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
-	if len(s.SamplingTargetDocuments) > 0 {
+	if s.SamplingTargetDocuments != nil {
 		v := s.SamplingTargetDocuments
 
 		metadata := protocol.Metadata{}
@@ -107,7 +107,7 @@ func (s GetSamplingTargetsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.UnprocessedStatistics) > 0 {
+	if s.UnprocessedStatistics != nil {
 		v := s.UnprocessedStatistics
 
 		metadata := protocol.Metadata{}

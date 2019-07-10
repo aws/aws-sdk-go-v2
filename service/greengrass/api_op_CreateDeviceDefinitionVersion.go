@@ -45,7 +45,7 @@ func (s *CreateDeviceDefinitionVersionInput) Validate() error {
 func (s CreateDeviceDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.Devices) > 0 {
+	if s.Devices != nil {
 		v := s.Devices
 
 		metadata := protocol.Metadata{}

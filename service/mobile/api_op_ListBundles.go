@@ -68,7 +68,7 @@ func (s ListBundlesOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListBundlesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.BundleList) > 0 {
+	if s.BundleList != nil {
 		v := s.BundleList
 
 		metadata := protocol.Metadata{}

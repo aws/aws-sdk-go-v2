@@ -135,7 +135,7 @@ func (s DescribeRobotApplicationOutput) MarshalFields(e protocol.FieldEncoder) e
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "robotSoftwareSuite", v, metadata)
 	}
-	if len(s.Sources) > 0 {
+	if s.Sources != nil {
 		v := s.Sources
 
 		metadata := protocol.Metadata{}
@@ -147,7 +147,7 @@ func (s DescribeRobotApplicationOutput) MarshalFields(e protocol.FieldEncoder) e
 		ls0.End()
 
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

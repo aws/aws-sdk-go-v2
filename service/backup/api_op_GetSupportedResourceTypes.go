@@ -52,7 +52,7 @@ func (s GetSupportedResourceTypesOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetSupportedResourceTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ResourceTypes) > 0 {
+	if s.ResourceTypes != nil {
 		v := s.ResourceTypes
 
 		metadata := protocol.Metadata{}

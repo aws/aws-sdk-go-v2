@@ -131,7 +131,7 @@ func (s GetSlotTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.EnumerationValues) > 0 {
+	if s.EnumerationValues != nil {
 		v := s.EnumerationValues
 
 		metadata := protocol.Metadata{}

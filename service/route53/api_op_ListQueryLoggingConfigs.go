@@ -104,7 +104,7 @@ func (s ListQueryLoggingConfigsOutput) MarshalFields(e protocol.FieldEncoder) er
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), metadata)
 	}
-	if len(s.QueryLoggingConfigs) > 0 {
+	if s.QueryLoggingConfigs != nil {
 		v := s.QueryLoggingConfigs
 
 		metadata := protocol.Metadata{ListLocationName: "QueryLoggingConfig"}

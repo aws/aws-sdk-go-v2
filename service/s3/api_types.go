@@ -99,7 +99,7 @@ func (s *AccessControlPolicy) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s AccessControlPolicy) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Grants) > 0 {
+	if s.Grants != nil {
 		v := s.Grants
 
 		metadata := protocol.Metadata{ListLocationName: "Grant"}
@@ -201,7 +201,7 @@ func (s AnalyticsAndOperator) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Prefix", protocol.StringValue(v), metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -551,7 +551,7 @@ func (s *BucketLifecycleConfiguration) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BucketLifecycleConfiguration) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Rules) > 0 {
+	if s.Rules != nil {
 		v := s.Rules
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -643,7 +643,7 @@ func (s *CORSConfiguration) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CORSConfiguration) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.CORSRules) > 0 {
+	if s.CORSRules != nil {
 		v := s.CORSRules
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -711,7 +711,7 @@ func (s *CORSRule) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CORSRule) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AllowedHeaders) > 0 {
+	if s.AllowedHeaders != nil {
 		v := s.AllowedHeaders
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -723,7 +723,7 @@ func (s CORSRule) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.AllowedMethods) > 0 {
+	if s.AllowedMethods != nil {
 		v := s.AllowedMethods
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -735,7 +735,7 @@ func (s CORSRule) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.AllowedOrigins) > 0 {
+	if s.AllowedOrigins != nil {
 		v := s.AllowedOrigins
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -747,7 +747,7 @@ func (s CORSRule) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.ExposeHeaders) > 0 {
+	if s.ExposeHeaders != nil {
 		v := s.ExposeHeaders
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -950,7 +950,7 @@ func (s CloudFunctionConfiguration) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Event", v, metadata)
 	}
-	if len(s.Events) > 0 {
+	if s.Events != nil {
 		v := s.Events
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -1014,7 +1014,7 @@ func (s CompletedMultipartUpload) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CompletedMultipartUpload) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Parts) > 0 {
+	if s.Parts != nil {
 		v := s.Parts
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -1280,7 +1280,7 @@ func (s *Delete) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Delete) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Objects) > 0 {
+	if s.Objects != nil {
 		v := s.Objects
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -2170,7 +2170,7 @@ func (s InventoryConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "IsEnabled", protocol.BoolValue(v), metadata)
 	}
-	if len(s.OptionalFields) > 0 {
+	if s.OptionalFields != nil {
 		v := s.OptionalFields
 
 		metadata := protocol.Metadata{ListLocationName: "Field"}
@@ -2558,7 +2558,7 @@ func (s *LambdaFunctionConfiguration) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s LambdaFunctionConfiguration) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Events) > 0 {
+	if s.Events != nil {
 		v := s.Events
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -2627,7 +2627,7 @@ func (s *LifecycleConfiguration) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s LifecycleConfiguration) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Rules) > 0 {
+	if s.Rules != nil {
 		v := s.Rules
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -2783,7 +2783,7 @@ func (s LifecycleRule) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "NoncurrentVersionExpiration", v, metadata)
 	}
-	if len(s.NoncurrentVersionTransitions) > 0 {
+	if s.NoncurrentVersionTransitions != nil {
 		v := s.NoncurrentVersionTransitions
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -2807,7 +2807,7 @@ func (s LifecycleRule) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Status", v, metadata)
 	}
-	if len(s.Transitions) > 0 {
+	if s.Transitions != nil {
 		v := s.Transitions
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -2866,7 +2866,7 @@ func (s LifecycleRuleAndOperator) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Prefix", protocol.StringValue(v), metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -3011,7 +3011,7 @@ func (s LoggingEnabled) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "TargetBucket", protocol.StringValue(v), metadata)
 	}
-	if len(s.TargetGrants) > 0 {
+	if s.TargetGrants != nil {
 		v := s.TargetGrants
 
 		metadata := protocol.Metadata{ListLocationName: "Grant"}
@@ -3105,7 +3105,7 @@ func (s MetricsAndOperator) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Prefix", protocol.StringValue(v), metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -3436,7 +3436,7 @@ func (s *NotificationConfiguration) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s NotificationConfiguration) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.LambdaFunctionConfigurations) > 0 {
+	if s.LambdaFunctionConfigurations != nil {
 		v := s.LambdaFunctionConfigurations
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -3448,7 +3448,7 @@ func (s NotificationConfiguration) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.QueueConfigurations) > 0 {
+	if s.QueueConfigurations != nil {
 		v := s.QueueConfigurations
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -3460,7 +3460,7 @@ func (s NotificationConfiguration) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.TopicConfigurations) > 0 {
+	if s.TopicConfigurations != nil {
 		v := s.TopicConfigurations
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -4187,7 +4187,7 @@ func (s *QueueConfiguration) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s QueueConfiguration) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Events) > 0 {
+	if s.Events != nil {
 		v := s.Events
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -4249,7 +4249,7 @@ func (s QueueConfigurationDeprecated) MarshalFields(e protocol.FieldEncoder) err
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Event", v, metadata)
 	}
-	if len(s.Events) > 0 {
+	if s.Events != nil {
 		v := s.Events
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -4452,7 +4452,7 @@ func (s ReplicationConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Role", protocol.StringValue(v), metadata)
 	}
-	if len(s.Rules) > 0 {
+	if s.Rules != nil {
 		v := s.Rules
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -4651,7 +4651,7 @@ func (s ReplicationRuleAndOperator) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Prefix", protocol.StringValue(v), metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -5075,7 +5075,7 @@ func (s S3KeyFilter) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s S3KeyFilter) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.FilterRules) > 0 {
+	if s.FilterRules != nil {
 		v := s.FilterRules
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -5167,7 +5167,7 @@ func (s *S3Location) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s S3Location) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AccessControlList) > 0 {
+	if s.AccessControlList != nil {
 		v := s.AccessControlList
 
 		metadata := protocol.Metadata{ListLocationName: "Grant"}
@@ -5215,7 +5215,7 @@ func (s S3Location) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Tagging", v, metadata)
 	}
-	if len(s.UserMetadata) > 0 {
+	if s.UserMetadata != nil {
 		v := s.UserMetadata
 
 		metadata := protocol.Metadata{ListLocationName: "MetadataEntry"}
@@ -5469,7 +5469,7 @@ func (s *ServerSideEncryptionConfiguration) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ServerSideEncryptionConfiguration) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Rules) > 0 {
+	if s.Rules != nil {
 		v := s.Rules
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -5804,7 +5804,7 @@ func (s *Tagging) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Tagging) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.TagSet) > 0 {
+	if s.TagSet != nil {
 		v := s.TagSet
 
 		metadata := protocol.Metadata{ListLocationName: "Tag"}
@@ -5923,7 +5923,7 @@ func (s *TopicConfiguration) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s TopicConfiguration) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Events) > 0 {
+	if s.Events != nil {
 		v := s.Events
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -5987,7 +5987,7 @@ func (s TopicConfigurationDeprecated) MarshalFields(e protocol.FieldEncoder) err
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Event", v, metadata)
 	}
-	if len(s.Events) > 0 {
+	if s.Events != nil {
 		v := s.Events
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -6163,7 +6163,7 @@ func (s WebsiteConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "RedirectAllRequestsTo", v, metadata)
 	}
-	if len(s.RoutingRules) > 0 {
+	if s.RoutingRules != nil {
 		v := s.RoutingRules
 
 		metadata := protocol.Metadata{ListLocationName: "RoutingRule"}

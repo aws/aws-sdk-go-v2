@@ -74,7 +74,7 @@ func (s UpdateFindingsFeedbackInput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "feedback", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.FindingIds) > 0 {
+	if s.FindingIds != nil {
 		v := s.FindingIds
 
 		metadata := protocol.Metadata{}

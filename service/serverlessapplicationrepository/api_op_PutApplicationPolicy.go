@@ -56,7 +56,7 @@ func (s *PutApplicationPolicyInput) Validate() error {
 func (s PutApplicationPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.Statements) > 0 {
+	if s.Statements != nil {
 		v := s.Statements
 
 		metadata := protocol.Metadata{}
@@ -91,7 +91,7 @@ func (s PutApplicationPolicyOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PutApplicationPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Statements) > 0 {
+	if s.Statements != nil {
 		v := s.Statements
 
 		metadata := protocol.Metadata{}

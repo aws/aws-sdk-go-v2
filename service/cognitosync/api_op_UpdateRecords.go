@@ -112,7 +112,7 @@ func (s UpdateRecordsInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "DeviceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.RecordPatches) > 0 {
+	if s.RecordPatches != nil {
 		v := s.RecordPatches
 
 		metadata := protocol.Metadata{}
@@ -173,7 +173,7 @@ func (s UpdateRecordsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateRecordsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Records) > 0 {
+	if s.Records != nil {
 		v := s.Records
 
 		metadata := protocol.Metadata{}

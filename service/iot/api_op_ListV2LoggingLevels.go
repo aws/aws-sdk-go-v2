@@ -84,7 +84,7 @@ func (s ListV2LoggingLevelsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListV2LoggingLevelsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.LogTargetConfigurations) > 0 {
+	if s.LogTargetConfigurations != nil {
 		v := s.LogTargetConfigurations
 
 		metadata := protocol.Metadata{}

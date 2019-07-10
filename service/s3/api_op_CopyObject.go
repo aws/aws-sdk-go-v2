@@ -405,7 +405,7 @@ func (s CopyObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "x-amz-website-redirect-location", protocol.StringValue(v), metadata)
 	}
-	if len(s.Metadata) > 0 {
+	if s.Metadata != nil {
 		v := s.Metadata
 
 		metadata := protocol.Metadata{}

@@ -52,7 +52,7 @@ func (s *DeleteTagsInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DeleteTagsInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.TagKeys) > 0 {
+	if s.TagKeys != nil {
 		v := s.TagKeys
 
 		metadata := protocol.Metadata{}

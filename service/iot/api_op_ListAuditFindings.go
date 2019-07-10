@@ -131,7 +131,7 @@ func (s ListAuditFindingsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListAuditFindingsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Findings) > 0 {
+	if s.Findings != nil {
 		v := s.Findings
 
 		metadata := protocol.Metadata{}

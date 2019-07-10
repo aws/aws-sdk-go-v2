@@ -82,7 +82,7 @@ func (s *Event) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Event) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -100,7 +100,7 @@ func (s Event) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "eventType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Metrics) > 0 {
+	if s.Metrics != nil {
 		v := s.Metrics
 
 		metadata := protocol.Metadata{}

@@ -154,7 +154,7 @@ func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "statusUpdateInterval", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.UserMetadata) > 0 {
+	if s.UserMetadata != nil {
 		v := s.UserMetadata
 
 		metadata := protocol.Metadata{}

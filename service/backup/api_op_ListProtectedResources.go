@@ -90,7 +90,7 @@ func (s ListProtectedResourcesOutput) MarshalFields(e protocol.FieldEncoder) err
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Results) > 0 {
+	if s.Results != nil {
 		v := s.Results
 
 		metadata := protocol.Metadata{}

@@ -135,7 +135,7 @@ func (s App) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "createTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
-	if len(s.CustomRules) > 0 {
+	if s.CustomRules != nil {
 		v := s.CustomRules
 
 		metadata := protocol.Metadata{}
@@ -171,7 +171,7 @@ func (s App) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "enableBranchAutoBuild", protocol.BoolValue(v), metadata)
 	}
-	if len(s.EnvironmentVariables) > 0 {
+	if s.EnvironmentVariables != nil {
 		v := s.EnvironmentVariables
 
 		metadata := protocol.Metadata{}
@@ -213,7 +213,7 @@ func (s App) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "repository", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -373,7 +373,7 @@ func (s Branch) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "createTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
-	if len(s.CustomDomains) > 0 {
+	if s.CustomDomains != nil {
 		v := s.CustomDomains
 
 		metadata := protocol.Metadata{}
@@ -415,7 +415,7 @@ func (s Branch) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "enableNotification", protocol.BoolValue(v), metadata)
 	}
-	if len(s.EnvironmentVariables) > 0 {
+	if s.EnvironmentVariables != nil {
 		v := s.EnvironmentVariables
 
 		metadata := protocol.Metadata{}
@@ -439,7 +439,7 @@ func (s Branch) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "stage", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -649,7 +649,7 @@ func (s DomainAssociation) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "statusReason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SubDomains) > 0 {
+	if s.SubDomains != nil {
 		v := s.SubDomains
 
 		metadata := protocol.Metadata{}
@@ -687,7 +687,7 @@ func (s Job) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Job) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Steps) > 0 {
+	if s.Steps != nil {
 		v := s.Steps
 
 		metadata := protocol.Metadata{}
@@ -933,7 +933,7 @@ func (s Step) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "logUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Screenshots) > 0 {
+	if s.Screenshots != nil {
 		v := s.Screenshots
 
 		metadata := protocol.Metadata{}

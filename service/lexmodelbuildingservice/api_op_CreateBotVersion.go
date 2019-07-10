@@ -205,7 +205,7 @@ func (s CreateBotVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "idleSessionTTLInSeconds", protocol.Int64Value(v), metadata)
 	}
-	if len(s.Intents) > 0 {
+	if s.Intents != nil {
 		v := s.Intents
 
 		metadata := protocol.Metadata{}

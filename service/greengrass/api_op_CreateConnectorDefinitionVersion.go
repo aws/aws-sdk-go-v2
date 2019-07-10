@@ -45,7 +45,7 @@ func (s *CreateConnectorDefinitionVersionInput) Validate() error {
 func (s CreateConnectorDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.Connectors) > 0 {
+	if s.Connectors != nil {
 		v := s.Connectors
 
 		metadata := protocol.Metadata{}

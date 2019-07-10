@@ -45,7 +45,7 @@ func (s *CreateLoggerDefinitionVersionInput) Validate() error {
 func (s CreateLoggerDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.Loggers) > 0 {
+	if s.Loggers != nil {
 		v := s.Loggers
 
 		metadata := protocol.Metadata{}

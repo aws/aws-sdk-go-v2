@@ -133,7 +133,7 @@ func (s ListAuditTasksOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tasks) > 0 {
+	if s.Tasks != nil {
 		v := s.Tasks
 
 		metadata := protocol.Metadata{}

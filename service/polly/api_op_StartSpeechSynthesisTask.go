@@ -113,7 +113,7 @@ func (s StartSpeechSynthesisTaskInput) MarshalFields(e protocol.FieldEncoder) er
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LanguageCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.LexiconNames) > 0 {
+	if s.LexiconNames != nil {
 		v := s.LexiconNames
 
 		metadata := protocol.Metadata{}
@@ -155,7 +155,7 @@ func (s StartSpeechSynthesisTaskInput) MarshalFields(e protocol.FieldEncoder) er
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SnsTopicArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SpeechMarkTypes) > 0 {
+	if s.SpeechMarkTypes != nil {
 		v := s.SpeechMarkTypes
 
 		metadata := protocol.Metadata{}

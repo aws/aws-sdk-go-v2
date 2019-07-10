@@ -133,7 +133,7 @@ func (s CreateRobotApplicationVersionOutput) MarshalFields(e protocol.FieldEncod
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "robotSoftwareSuite", v, metadata)
 	}
-	if len(s.Sources) > 0 {
+	if s.Sources != nil {
 		v := s.Sources
 
 		metadata := protocol.Metadata{}

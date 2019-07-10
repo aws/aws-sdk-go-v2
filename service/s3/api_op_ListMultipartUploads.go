@@ -186,7 +186,7 @@ func (s ListMultipartUploadsOutput) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Bucket", protocol.StringValue(v), metadata)
 	}
-	if len(s.CommonPrefixes) > 0 {
+	if s.CommonPrefixes != nil {
 		v := s.CommonPrefixes
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -252,7 +252,7 @@ func (s ListMultipartUploadsOutput) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "UploadIdMarker", protocol.StringValue(v), metadata)
 	}
-	if len(s.Uploads) > 0 {
+	if s.Uploads != nil {
 		v := s.Uploads
 
 		metadata := protocol.Metadata{Flatten: true}

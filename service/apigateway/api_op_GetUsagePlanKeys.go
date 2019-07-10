@@ -101,7 +101,7 @@ func (s GetUsagePlanKeysOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetUsagePlanKeysOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{}

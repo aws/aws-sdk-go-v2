@@ -117,7 +117,7 @@ func (s ListPhoneNumbersOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.PhoneNumbers) > 0 {
+	if s.PhoneNumbers != nil {
 		v := s.PhoneNumbers
 
 		metadata := protocol.Metadata{}

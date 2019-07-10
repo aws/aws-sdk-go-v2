@@ -315,7 +315,7 @@ func (s GetMetricDataInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Filters", v, metadata)
 	}
-	if len(s.Groupings) > 0 {
+	if s.Groupings != nil {
 		v := s.Groupings
 
 		metadata := protocol.Metadata{}
@@ -327,7 +327,7 @@ func (s GetMetricDataInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.HistoricalMetrics) > 0 {
+	if s.HistoricalMetrics != nil {
 		v := s.HistoricalMetrics
 
 		metadata := protocol.Metadata{}
@@ -396,7 +396,7 @@ func (s GetMetricDataOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetMetricDataOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.MetricResults) > 0 {
+	if s.MetricResults != nil {
 		v := s.MetricResults
 
 		metadata := protocol.Metadata{}

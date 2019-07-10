@@ -108,7 +108,7 @@ func (s JobDescriptor) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Description", protocol.StringValue(v), metadata)
 	}
-	if len(s.FailureReasons) > 0 {
+	if s.FailureReasons != nil {
 		v := s.FailureReasons
 
 		metadata := protocol.Metadata{}
@@ -505,7 +505,7 @@ func (s *JobManifestSpec) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s JobManifestSpec) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Fields) > 0 {
+	if s.Fields != nil {
 		v := s.Fields
 
 		metadata := protocol.Metadata{}
@@ -881,7 +881,7 @@ func (s *S3AccessControlList) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s S3AccessControlList) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Grants) > 0 {
+	if s.Grants != nil {
 		v := s.Grants
 
 		metadata := protocol.Metadata{}
@@ -1037,7 +1037,7 @@ func (s *S3CopyObjectOperation) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s S3CopyObjectOperation) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AccessControlGrants) > 0 {
+	if s.AccessControlGrants != nil {
 		v := s.AccessControlGrants
 
 		metadata := protocol.Metadata{}
@@ -1073,7 +1073,7 @@ func (s S3CopyObjectOperation) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "NewObjectMetadata", v, metadata)
 	}
-	if len(s.NewObjectTagging) > 0 {
+	if s.NewObjectTagging != nil {
 		v := s.NewObjectTagging
 
 		metadata := protocol.Metadata{}
@@ -1406,7 +1406,7 @@ func (s S3ObjectMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SSEAlgorithm", v, metadata)
 	}
-	if len(s.UserMetadata) > 0 {
+	if s.UserMetadata != nil {
 		v := s.UserMetadata
 
 		metadata := protocol.Metadata{}
@@ -1545,7 +1545,7 @@ func (s *S3SetObjectTaggingOperation) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s S3SetObjectTaggingOperation) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.TagSet) > 0 {
+	if s.TagSet != nil {
 		v := s.TagSet
 
 		metadata := protocol.Metadata{}

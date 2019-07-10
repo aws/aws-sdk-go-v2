@@ -50,7 +50,7 @@ func (s DescribeAccountAuditConfigurationOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeAccountAuditConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AuditCheckConfigurations) > 0 {
+	if s.AuditCheckConfigurations != nil {
 		v := s.AuditCheckConfigurations
 
 		metadata := protocol.Metadata{}
@@ -62,7 +62,7 @@ func (s DescribeAccountAuditConfigurationOutput) MarshalFields(e protocol.FieldE
 		ms0.End()
 
 	}
-	if len(s.AuditNotificationTargetConfigurations) > 0 {
+	if s.AuditNotificationTargetConfigurations != nil {
 		v := s.AuditNotificationTargetConfigurations
 
 		metadata := protocol.Metadata{}

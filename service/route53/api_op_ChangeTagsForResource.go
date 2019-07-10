@@ -74,7 +74,7 @@ func (s *ChangeTagsForResourceInput) Validate() error {
 func (s ChangeTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 
 	e.SetFields(protocol.BodyTarget, "ChangeTagsForResourceRequest", protocol.FieldMarshalerFunc(func(e protocol.FieldEncoder) error {
-		if len(s.AddTags) > 0 {
+		if s.AddTags != nil {
 			v := s.AddTags
 
 			metadata := protocol.Metadata{ListLocationName: "Tag"}
@@ -86,7 +86,7 @@ func (s ChangeTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error
 			ls0.End()
 
 		}
-		if len(s.RemoveTagKeys) > 0 {
+		if s.RemoveTagKeys != nil {
 			v := s.RemoveTagKeys
 
 			metadata := protocol.Metadata{ListLocationName: "Key"}

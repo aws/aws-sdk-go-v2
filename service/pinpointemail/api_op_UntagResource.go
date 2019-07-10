@@ -64,7 +64,7 @@ func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.QueryTarget, "ResourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.TagKeys) > 0 {
+	if s.TagKeys != nil {
 		v := s.TagKeys
 
 		metadata := protocol.Metadata{}

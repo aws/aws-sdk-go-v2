@@ -77,7 +77,7 @@ func (s GetHealthCheckStatusOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetHealthCheckStatusOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.HealthCheckObservations) > 0 {
+	if s.HealthCheckObservations != nil {
 		v := s.HealthCheckObservations
 
 		metadata := protocol.Metadata{ListLocationName: "HealthCheckObservation"}

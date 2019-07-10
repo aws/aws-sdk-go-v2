@@ -274,7 +274,7 @@ func (s *BatchAddFacetToObject) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchAddFacetToObject) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ObjectAttributeList) > 0 {
+	if s.ObjectAttributeList != nil {
 		v := s.ObjectAttributeList
 
 		metadata := protocol.Metadata{}
@@ -643,7 +643,7 @@ func (s *BatchAttachTypedLink) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchAttachTypedLink) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -783,7 +783,7 @@ func (s BatchCreateIndex) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.OrderedIndexedAttributeList) > 0 {
+	if s.OrderedIndexedAttributeList != nil {
 		v := s.OrderedIndexedAttributeList
 
 		metadata := protocol.Metadata{}
@@ -911,7 +911,7 @@ func (s BatchCreateObject) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ObjectAttributeList) > 0 {
+	if s.ObjectAttributeList != nil {
 		v := s.ObjectAttributeList
 
 		metadata := protocol.Metadata{}
@@ -929,7 +929,7 @@ func (s BatchCreateObject) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "ParentReference", v, metadata)
 	}
-	if len(s.SchemaFacet) > 0 {
+	if s.SchemaFacet != nil {
 		v := s.SchemaFacet
 
 		metadata := protocol.Metadata{}
@@ -1385,7 +1385,7 @@ func (s *BatchGetLinkAttributes) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchGetLinkAttributes) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AttributeNames) > 0 {
+	if s.AttributeNames != nil {
 		v := s.AttributeNames
 
 		metadata := protocol.Metadata{}
@@ -1422,7 +1422,7 @@ func (s BatchGetLinkAttributesResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchGetLinkAttributesResponse) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -1495,7 +1495,7 @@ func (s *BatchGetObjectAttributes) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchGetObjectAttributes) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AttributeNames) > 0 {
+	if s.AttributeNames != nil {
 		v := s.AttributeNames
 
 		metadata := protocol.Metadata{}
@@ -1538,7 +1538,7 @@ func (s BatchGetObjectAttributesResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchGetObjectAttributesResponse) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -1620,7 +1620,7 @@ func (s BatchGetObjectInformationResponse) MarshalFields(e protocol.FieldEncoder
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SchemaFacets) > 0 {
+	if s.SchemaFacets != nil {
 		v := s.SchemaFacets
 
 		metadata := protocol.Metadata{}
@@ -1717,7 +1717,7 @@ func (s BatchListAttachedIndicesResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchListAttachedIndicesResponse) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.IndexAttachments) > 0 {
+	if s.IndexAttachments != nil {
 		v := s.IndexAttachments
 
 		metadata := protocol.Metadata{}
@@ -1803,7 +1803,7 @@ func (s *BatchListIncomingTypedLinks) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchListIncomingTypedLinks) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.FilterAttributeRanges) > 0 {
+	if s.FilterAttributeRanges != nil {
 		v := s.FilterAttributeRanges
 
 		metadata := protocol.Metadata{}
@@ -1861,7 +1861,7 @@ func (s BatchListIncomingTypedLinksResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchListIncomingTypedLinksResponse) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.LinkSpecifiers) > 0 {
+	if s.LinkSpecifiers != nil {
 		v := s.LinkSpecifiers
 
 		metadata := protocol.Metadata{}
@@ -1952,7 +1952,7 @@ func (s BatchListIndex) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.RangesOnIndexedValues) > 0 {
+	if s.RangesOnIndexedValues != nil {
 		v := s.RangesOnIndexedValues
 
 		metadata := protocol.Metadata{}
@@ -1986,7 +1986,7 @@ func (s BatchListIndexResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchListIndexResponse) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.IndexAttachments) > 0 {
+	if s.IndexAttachments != nil {
 		v := s.IndexAttachments
 
 		metadata := protocol.Metadata{}
@@ -2105,7 +2105,7 @@ func (s BatchListObjectAttributesResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchListObjectAttributesResponse) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -2209,7 +2209,7 @@ func (s BatchListObjectChildrenResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchListObjectChildrenResponse) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Children) > 0 {
+	if s.Children != nil {
 		v := s.Children
 
 		metadata := protocol.Metadata{}
@@ -2319,7 +2319,7 @@ func (s BatchListObjectParentPathsResponse) MarshalFields(e protocol.FieldEncode
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.PathToObjectIdentifiersList) > 0 {
+	if s.PathToObjectIdentifiersList != nil {
 		v := s.PathToObjectIdentifiersList
 
 		metadata := protocol.Metadata{}
@@ -2415,7 +2415,7 @@ func (s BatchListObjectParentsResponse) MarshalFields(e protocol.FieldEncoder) e
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ParentLinks) > 0 {
+	if s.ParentLinks != nil {
 		v := s.ParentLinks
 
 		metadata := protocol.Metadata{}
@@ -2512,7 +2512,7 @@ func (s BatchListObjectPoliciesResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchListObjectPoliciesResponse) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AttachedPolicyIds) > 0 {
+	if s.AttachedPolicyIds != nil {
 		v := s.AttachedPolicyIds
 
 		metadata := protocol.Metadata{}
@@ -2598,7 +2598,7 @@ func (s *BatchListOutgoingTypedLinks) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchListOutgoingTypedLinks) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.FilterAttributeRanges) > 0 {
+	if s.FilterAttributeRanges != nil {
 		v := s.FilterAttributeRanges
 
 		metadata := protocol.Metadata{}
@@ -2662,7 +2662,7 @@ func (s BatchListOutgoingTypedLinksResponse) MarshalFields(e protocol.FieldEncod
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.TypedLinkSpecifiers) > 0 {
+	if s.TypedLinkSpecifiers != nil {
 		v := s.TypedLinkSpecifiers
 
 		metadata := protocol.Metadata{}
@@ -2766,7 +2766,7 @@ func (s BatchListPolicyAttachmentsResponse) MarshalFields(e protocol.FieldEncode
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ObjectIdentifiers) > 0 {
+	if s.ObjectIdentifiers != nil {
 		v := s.ObjectIdentifiers
 
 		metadata := protocol.Metadata{}
@@ -2871,7 +2871,7 @@ func (s BatchLookupPolicyResponse) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.PolicyToPathList) > 0 {
+	if s.PolicyToPathList != nil {
 		v := s.PolicyToPathList
 
 		metadata := protocol.Metadata{}
@@ -3476,7 +3476,7 @@ func (s *BatchUpdateLinkAttributes) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchUpdateLinkAttributes) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AttributeUpdates) > 0 {
+	if s.AttributeUpdates != nil {
 		v := s.AttributeUpdates
 
 		metadata := protocol.Metadata{}
@@ -3561,7 +3561,7 @@ func (s *BatchUpdateObjectAttributes) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchUpdateObjectAttributes) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AttributeUpdates) > 0 {
+	if s.AttributeUpdates != nil {
 		v := s.AttributeUpdates
 
 		metadata := protocol.Metadata{}
@@ -4241,7 +4241,7 @@ func (s FacetAttributeDefinition) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "IsImmutable", protocol.BoolValue(v), metadata)
 	}
-	if len(s.Rules) > 0 {
+	if s.Rules != nil {
 		v := s.Rules
 
 		metadata := protocol.Metadata{}
@@ -4400,7 +4400,7 @@ func (s IndexAttachment) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s IndexAttachment) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.IndexedAttributes) > 0 {
+	if s.IndexedAttributes != nil {
 		v := s.IndexedAttributes
 
 		metadata := protocol.Metadata{}
@@ -4735,7 +4735,7 @@ func (s PathToObjectIdentifiers) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PathToObjectIdentifiers) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ObjectIdentifiers) > 0 {
+	if s.ObjectIdentifiers != nil {
 		v := s.ObjectIdentifiers
 
 		metadata := protocol.Metadata{}
@@ -4827,7 +4827,7 @@ func (s PolicyToPath) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Path", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Policies) > 0 {
+	if s.Policies != nil {
 		v := s.Policies
 
 		metadata := protocol.Metadata{}
@@ -4862,7 +4862,7 @@ func (s Rule) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Rule) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Parameters) > 0 {
+	if s.Parameters != nil {
 		v := s.Parameters
 
 		metadata := protocol.Metadata{}
@@ -5187,7 +5187,7 @@ func (s TypedLinkAttributeDefinition) MarshalFields(e protocol.FieldEncoder) err
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "RequiredBehavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Rules) > 0 {
+	if s.Rules != nil {
 		v := s.Rules
 
 		metadata := protocol.Metadata{}
@@ -5330,7 +5330,7 @@ func (s *TypedLinkFacet) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s TypedLinkFacet) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -5342,7 +5342,7 @@ func (s TypedLinkFacet) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.IdentityAttributeOrder) > 0 {
+	if s.IdentityAttributeOrder != nil {
 		v := s.IdentityAttributeOrder
 
 		metadata := protocol.Metadata{}
@@ -5557,7 +5557,7 @@ func (s *TypedLinkSpecifier) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s TypedLinkSpecifier) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.IdentityAttributeValues) > 0 {
+	if s.IdentityAttributeValues != nil {
 		v := s.IdentityAttributeValues
 
 		metadata := protocol.Metadata{}

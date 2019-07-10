@@ -118,7 +118,7 @@ func (s ListProposalVotesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ProposalVotes) > 0 {
+	if s.ProposalVotes != nil {
 		v := s.ProposalVotes
 
 		metadata := protocol.Metadata{}

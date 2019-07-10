@@ -110,7 +110,7 @@ func (s ListResolversByFunctionOutput) MarshalFields(e protocol.FieldEncoder) er
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Resolvers) > 0 {
+	if s.Resolvers != nil {
 		v := s.Resolvers
 
 		metadata := protocol.Metadata{}

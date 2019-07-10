@@ -128,7 +128,7 @@ func (s UpdateBranchInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "enableNotification", protocol.BoolValue(v), metadata)
 	}
-	if len(s.EnvironmentVariables) > 0 {
+	if s.EnvironmentVariables != nil {
 		v := s.EnvironmentVariables
 
 		metadata := protocol.Metadata{}

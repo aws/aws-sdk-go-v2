@@ -56,7 +56,7 @@ func (s UpdateThingGroupsForThingInput) MarshalFields(e protocol.FieldEncoder) e
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "overrideDynamicGroups", protocol.BoolValue(v), metadata)
 	}
-	if len(s.ThingGroupsToAdd) > 0 {
+	if s.ThingGroupsToAdd != nil {
 		v := s.ThingGroupsToAdd
 
 		metadata := protocol.Metadata{}
@@ -68,7 +68,7 @@ func (s UpdateThingGroupsForThingInput) MarshalFields(e protocol.FieldEncoder) e
 		ls0.End()
 
 	}
-	if len(s.ThingGroupsToRemove) > 0 {
+	if s.ThingGroupsToRemove != nil {
 		v := s.ThingGroupsToRemove
 
 		metadata := protocol.Metadata{}

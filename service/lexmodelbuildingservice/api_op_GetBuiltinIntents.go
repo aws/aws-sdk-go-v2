@@ -103,7 +103,7 @@ func (s GetBuiltinIntentsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetBuiltinIntentsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Intents) > 0 {
+	if s.Intents != nil {
 		v := s.Intents
 
 		metadata := protocol.Metadata{}

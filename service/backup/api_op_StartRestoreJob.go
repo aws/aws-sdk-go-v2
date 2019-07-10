@@ -96,7 +96,7 @@ func (s StartRestoreJobInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "IdempotencyToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Metadata) > 0 {
+	if s.Metadata != nil {
 		v := s.Metadata
 
 		metadata := protocol.Metadata{}

@@ -114,7 +114,7 @@ func (s ListVirtualRoutersOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.VirtualRouters) > 0 {
+	if s.VirtualRouters != nil {
 		v := s.VirtualRouters
 
 		metadata := protocol.Metadata{}

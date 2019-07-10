@@ -67,7 +67,7 @@ func (s GetCompatibleElasticsearchVersionsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetCompatibleElasticsearchVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.CompatibleElasticsearchVersions) > 0 {
+	if s.CompatibleElasticsearchVersions != nil {
 		v := s.CompatibleElasticsearchVersions
 
 		metadata := protocol.Metadata{}

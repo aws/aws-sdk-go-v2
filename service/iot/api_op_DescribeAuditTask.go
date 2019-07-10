@@ -84,7 +84,7 @@ func (s DescribeAuditTaskOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeAuditTaskOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AuditDetails) > 0 {
+	if s.AuditDetails != nil {
 		v := s.AuditDetails
 
 		metadata := protocol.Metadata{}

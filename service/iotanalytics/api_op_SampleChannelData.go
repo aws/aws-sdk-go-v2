@@ -102,7 +102,7 @@ func (s SampleChannelDataOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SampleChannelDataOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Payloads) > 0 {
+	if s.Payloads != nil {
 		v := s.Payloads
 
 		metadata := protocol.Metadata{}

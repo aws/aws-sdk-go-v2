@@ -49,7 +49,7 @@ func (s *GetInsightsInput) Validate() error {
 func (s GetInsightsInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.InsightArns) > 0 {
+	if s.InsightArns != nil {
 		v := s.InsightArns
 
 		metadata := protocol.Metadata{}
@@ -96,7 +96,7 @@ func (s GetInsightsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetInsightsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Insights) > 0 {
+	if s.Insights != nil {
 		v := s.Insights
 
 		metadata := protocol.Metadata{}

@@ -73,7 +73,7 @@ func (s *UpdateIntegrationResponseInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateIntegrationResponseInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.PatchOperations) > 0 {
+	if s.PatchOperations != nil {
 		v := s.PatchOperations
 
 		metadata := protocol.Metadata{}
@@ -178,7 +178,7 @@ func (s UpdateIntegrationResponseOutput) MarshalFields(e protocol.FieldEncoder) 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "contentHandling", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.ResponseParameters) > 0 {
+	if s.ResponseParameters != nil {
 		v := s.ResponseParameters
 
 		metadata := protocol.Metadata{}
@@ -190,7 +190,7 @@ func (s UpdateIntegrationResponseOutput) MarshalFields(e protocol.FieldEncoder) 
 		ms0.End()
 
 	}
-	if len(s.ResponseTemplates) > 0 {
+	if s.ResponseTemplates != nil {
 		v := s.ResponseTemplates
 
 		metadata := protocol.Metadata{}

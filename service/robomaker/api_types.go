@@ -194,7 +194,7 @@ func (s DeploymentJob) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
-	if len(s.DeploymentApplicationConfigs) > 0 {
+	if s.DeploymentApplicationConfigs != nil {
 		v := s.DeploymentApplicationConfigs
 
 		metadata := protocol.Metadata{}
@@ -304,7 +304,7 @@ func (s *DeploymentLaunchConfig) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DeploymentLaunchConfig) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.EnvironmentVariables) > 0 {
+	if s.EnvironmentVariables != nil {
 		v := s.EnvironmentVariables
 
 		metadata := protocol.Metadata{}
@@ -384,7 +384,7 @@ func (s Filter) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Values) > 0 {
+	if s.Values != nil {
 		v := s.Values
 
 		metadata := protocol.Metadata{}
@@ -519,7 +519,7 @@ func (s *LaunchConfig) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s LaunchConfig) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.EnvironmentVariables) > 0 {
+	if s.EnvironmentVariables != nil {
 		v := s.EnvironmentVariables
 
 		metadata := protocol.Metadata{}
@@ -1348,7 +1348,7 @@ func (s SimulationJob) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "outputLocation", v, metadata)
 	}
-	if len(s.RobotApplications) > 0 {
+	if s.RobotApplications != nil {
 		v := s.RobotApplications
 
 		metadata := protocol.Metadata{}
@@ -1360,7 +1360,7 @@ func (s SimulationJob) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.SimulationApplications) > 0 {
+	if s.SimulationApplications != nil {
 		v := s.SimulationApplications
 
 		metadata := protocol.Metadata{}
@@ -1384,7 +1384,7 @@ func (s SimulationJob) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -1455,7 +1455,7 @@ func (s SimulationJobSummary) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.RobotApplicationNames) > 0 {
+	if s.RobotApplicationNames != nil {
 		v := s.RobotApplicationNames
 
 		metadata := protocol.Metadata{}
@@ -1467,7 +1467,7 @@ func (s SimulationJobSummary) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.SimulationApplicationNames) > 0 {
+	if s.SimulationApplicationNames != nil {
 		v := s.SimulationApplicationNames
 
 		metadata := protocol.Metadata{}
@@ -1686,7 +1686,7 @@ func (s VPCConfig) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "assignPublicIp", protocol.BoolValue(v), metadata)
 	}
-	if len(s.SecurityGroups) > 0 {
+	if s.SecurityGroups != nil {
 		v := s.SecurityGroups
 
 		metadata := protocol.Metadata{}
@@ -1698,7 +1698,7 @@ func (s VPCConfig) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Subnets) > 0 {
+	if s.Subnets != nil {
 		v := s.Subnets
 
 		metadata := protocol.Metadata{}
@@ -1744,7 +1744,7 @@ func (s VPCConfigResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "assignPublicIp", protocol.BoolValue(v), metadata)
 	}
-	if len(s.SecurityGroups) > 0 {
+	if s.SecurityGroups != nil {
 		v := s.SecurityGroups
 
 		metadata := protocol.Metadata{}
@@ -1756,7 +1756,7 @@ func (s VPCConfigResponse) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Subnets) > 0 {
+	if s.Subnets != nil {
 		v := s.Subnets
 
 		metadata := protocol.Metadata{}

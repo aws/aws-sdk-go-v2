@@ -107,7 +107,7 @@ func (s PutIntegrationResponseInput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "contentHandling", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.ResponseParameters) > 0 {
+	if s.ResponseParameters != nil {
 		v := s.ResponseParameters
 
 		metadata := protocol.Metadata{}
@@ -119,7 +119,7 @@ func (s PutIntegrationResponseInput) MarshalFields(e protocol.FieldEncoder) erro
 		ms0.End()
 
 	}
-	if len(s.ResponseTemplates) > 0 {
+	if s.ResponseTemplates != nil {
 		v := s.ResponseTemplates
 
 		metadata := protocol.Metadata{}
@@ -230,7 +230,7 @@ func (s PutIntegrationResponseOutput) MarshalFields(e protocol.FieldEncoder) err
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "contentHandling", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.ResponseParameters) > 0 {
+	if s.ResponseParameters != nil {
 		v := s.ResponseParameters
 
 		metadata := protocol.Metadata{}
@@ -242,7 +242,7 @@ func (s PutIntegrationResponseOutput) MarshalFields(e protocol.FieldEncoder) err
 		ms0.End()
 
 	}
-	if len(s.ResponseTemplates) > 0 {
+	if s.ResponseTemplates != nil {
 		v := s.ResponseTemplates
 
 		metadata := protocol.Metadata{}

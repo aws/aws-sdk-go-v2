@@ -233,7 +233,7 @@ func (s PublishVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LastModified", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Layers) > 0 {
+	if s.Layers != nil {
 		v := s.Layers
 
 		metadata := protocol.Metadata{}

@@ -91,7 +91,7 @@ func (s GetDatasetContentOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetDatasetContentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Entries) > 0 {
+	if s.Entries != nil {
 		v := s.Entries
 
 		metadata := protocol.Metadata{}

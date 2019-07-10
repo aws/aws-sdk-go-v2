@@ -76,7 +76,7 @@ func (s DescribeCompanyNetworkConfigurationOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeCompanyNetworkConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.SecurityGroupIds) > 0 {
+	if s.SecurityGroupIds != nil {
 		v := s.SecurityGroupIds
 
 		metadata := protocol.Metadata{}
@@ -88,7 +88,7 @@ func (s DescribeCompanyNetworkConfigurationOutput) MarshalFields(e protocol.Fiel
 		ls0.End()
 
 	}
-	if len(s.SubnetIds) > 0 {
+	if s.SubnetIds != nil {
 		v := s.SubnetIds
 
 		metadata := protocol.Metadata{}

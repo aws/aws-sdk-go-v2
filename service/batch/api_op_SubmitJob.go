@@ -137,7 +137,7 @@ func (s SubmitJobInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "containerOverrides", v, metadata)
 	}
-	if len(s.DependsOn) > 0 {
+	if s.DependsOn != nil {
 		v := s.DependsOn
 
 		metadata := protocol.Metadata{}
@@ -173,7 +173,7 @@ func (s SubmitJobInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "nodeOverrides", v, metadata)
 	}
-	if len(s.Parameters) > 0 {
+	if s.Parameters != nil {
 		v := s.Parameters
 
 		metadata := protocol.Metadata{}

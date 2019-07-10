@@ -149,7 +149,7 @@ func (s GetUsageOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "endDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{}

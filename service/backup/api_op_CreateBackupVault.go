@@ -59,7 +59,7 @@ func (s *CreateBackupVaultInput) Validate() error {
 func (s CreateBackupVaultInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.BackupVaultTags) > 0 {
+	if s.BackupVaultTags != nil {
 		v := s.BackupVaultTags
 
 		metadata := protocol.Metadata{}

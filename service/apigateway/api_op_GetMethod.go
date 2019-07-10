@@ -293,7 +293,7 @@ func (s GetMethodOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "apiKeyRequired", protocol.BoolValue(v), metadata)
 	}
-	if len(s.AuthorizationScopes) > 0 {
+	if s.AuthorizationScopes != nil {
 		v := s.AuthorizationScopes
 
 		metadata := protocol.Metadata{}
@@ -329,7 +329,7 @@ func (s GetMethodOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "methodIntegration", v, metadata)
 	}
-	if len(s.MethodResponses) > 0 {
+	if s.MethodResponses != nil {
 		v := s.MethodResponses
 
 		metadata := protocol.Metadata{}
@@ -347,7 +347,7 @@ func (s GetMethodOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "operationName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.RequestModels) > 0 {
+	if s.RequestModels != nil {
 		v := s.RequestModels
 
 		metadata := protocol.Metadata{}
@@ -359,7 +359,7 @@ func (s GetMethodOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.RequestParameters) > 0 {
+	if s.RequestParameters != nil {
 		v := s.RequestParameters
 
 		metadata := protocol.Metadata{}

@@ -73,7 +73,7 @@ func (s ListPipelinesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextPageToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Pipelines) > 0 {
+	if s.Pipelines != nil {
 		v := s.Pipelines
 
 		metadata := protocol.Metadata{}

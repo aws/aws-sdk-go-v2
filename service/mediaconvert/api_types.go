@@ -922,7 +922,7 @@ func (s AudioSelector) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "offset", protocol.Int64Value(v), metadata)
 	}
-	if len(s.Pids) > 0 {
+	if s.Pids != nil {
 		v := s.Pids
 
 		metadata := protocol.Metadata{}
@@ -952,7 +952,7 @@ func (s AudioSelector) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "selectorType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Tracks) > 0 {
+	if s.Tracks != nil {
 		v := s.Tracks
 
 		metadata := protocol.Metadata{}
@@ -986,7 +986,7 @@ func (s AudioSelectorGroup) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s AudioSelectorGroup) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AudioSelectorNames) > 0 {
+	if s.AudioSelectorNames != nil {
 		v := s.AudioSelectorNames
 
 		metadata := protocol.Metadata{}
@@ -1787,7 +1787,7 @@ func (s ChannelMapping) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ChannelMapping) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.OutputChannels) > 0 {
+	if s.OutputChannels != nil {
 		v := s.OutputChannels
 
 		metadata := protocol.Metadata{}
@@ -5295,7 +5295,7 @@ func (s *HlsGroupSettings) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s HlsGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AdMarkers) > 0 {
+	if s.AdMarkers != nil {
 		v := s.AdMarkers
 
 		metadata := protocol.Metadata{}
@@ -5313,7 +5313,7 @@ func (s HlsGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "baseUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.CaptionLanguageMappings) > 0 {
+	if s.CaptionLanguageMappings != nil {
 		v := s.CaptionLanguageMappings
 
 		metadata := protocol.Metadata{}
@@ -5600,7 +5600,7 @@ func (s *ImageInserter) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ImageInserter) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.InsertableImages) > 0 {
+	if s.InsertableImages != nil {
 		v := s.InsertableImages
 
 		metadata := protocol.Metadata{}
@@ -5770,7 +5770,7 @@ func (s *Input) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Input) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AudioSelectorGroups) > 0 {
+	if s.AudioSelectorGroups != nil {
 		v := s.AudioSelectorGroups
 
 		metadata := protocol.Metadata{}
@@ -5782,7 +5782,7 @@ func (s Input) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.AudioSelectors) > 0 {
+	if s.AudioSelectors != nil {
 		v := s.AudioSelectors
 
 		metadata := protocol.Metadata{}
@@ -5794,7 +5794,7 @@ func (s Input) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.CaptionSelectors) > 0 {
+	if s.CaptionSelectors != nil {
 		v := s.CaptionSelectors
 
 		metadata := protocol.Metadata{}
@@ -5848,7 +5848,7 @@ func (s Input) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "imageInserter", v, metadata)
 	}
-	if len(s.InputClippings) > 0 {
+	if s.InputClippings != nil {
 		v := s.InputClippings
 
 		metadata := protocol.Metadata{}
@@ -5872,7 +5872,7 @@ func (s Input) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "psiControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.SupplementalImps) > 0 {
+	if s.SupplementalImps != nil {
 		v := s.SupplementalImps
 
 		metadata := protocol.Metadata{}
@@ -6161,7 +6161,7 @@ func (s *InputTemplate) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputTemplate) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AudioSelectorGroups) > 0 {
+	if s.AudioSelectorGroups != nil {
 		v := s.AudioSelectorGroups
 
 		metadata := protocol.Metadata{}
@@ -6173,7 +6173,7 @@ func (s InputTemplate) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.AudioSelectors) > 0 {
+	if s.AudioSelectors != nil {
 		v := s.AudioSelectors
 
 		metadata := protocol.Metadata{}
@@ -6185,7 +6185,7 @@ func (s InputTemplate) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.CaptionSelectors) > 0 {
+	if s.CaptionSelectors != nil {
 		v := s.CaptionSelectors
 
 		metadata := protocol.Metadata{}
@@ -6227,7 +6227,7 @@ func (s InputTemplate) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "imageInserter", v, metadata)
 	}
-	if len(s.InputClippings) > 0 {
+	if s.InputClippings != nil {
 		v := s.InputClippings
 
 		metadata := protocol.Metadata{}
@@ -6575,7 +6575,7 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "jobTemplate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.OutputGroupDetails) > 0 {
+	if s.OutputGroupDetails != nil {
 		v := s.OutputGroupDetails
 
 		metadata := protocol.Metadata{}
@@ -6629,7 +6629,7 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "timing", v, metadata)
 	}
-	if len(s.UserMetadata) > 0 {
+	if s.UserMetadata != nil {
 		v := s.UserMetadata
 
 		metadata := protocol.Metadata{}
@@ -6755,7 +6755,7 @@ func (s JobSettings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "esam", v, metadata)
 	}
-	if len(s.Inputs) > 0 {
+	if s.Inputs != nil {
 		v := s.Inputs
 
 		metadata := protocol.Metadata{}
@@ -6779,7 +6779,7 @@ func (s JobSettings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "nielsenConfiguration", v, metadata)
 	}
-	if len(s.OutputGroups) > 0 {
+	if s.OutputGroups != nil {
 		v := s.OutputGroups
 
 		metadata := protocol.Metadata{}
@@ -7046,7 +7046,7 @@ func (s JobTemplateSettings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "esam", v, metadata)
 	}
-	if len(s.Inputs) > 0 {
+	if s.Inputs != nil {
 		v := s.Inputs
 
 		metadata := protocol.Metadata{}
@@ -7070,7 +7070,7 @@ func (s JobTemplateSettings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "nielsenConfiguration", v, metadata)
 	}
-	if len(s.OutputGroups) > 0 {
+	if s.OutputGroups != nil {
 		v := s.OutputGroups
 
 		metadata := protocol.Metadata{}
@@ -7399,7 +7399,7 @@ func (s M2tsSettings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "audioFramesPerPes", protocol.Int64Value(v), metadata)
 	}
-	if len(s.AudioPids) > 0 {
+	if s.AudioPids != nil {
 		v := s.AudioPids
 
 		metadata := protocol.Metadata{}
@@ -7435,7 +7435,7 @@ func (s M2tsSettings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "dvbSdtSettings", v, metadata)
 	}
-	if len(s.DvbSubPids) > 0 {
+	if s.DvbSubPids != nil {
 		v := s.DvbSubPids
 
 		metadata := protocol.Metadata{}
@@ -7725,7 +7725,7 @@ func (s M3u8Settings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "audioFramesPerPes", protocol.Int64Value(v), metadata)
 	}
-	if len(s.AudioPids) > 0 {
+	if s.AudioPids != nil {
 		v := s.AudioPids
 
 		metadata := protocol.Metadata{}
@@ -9003,7 +9003,7 @@ func (s *Output) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Output) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AudioDescriptions) > 0 {
+	if s.AudioDescriptions != nil {
 		v := s.AudioDescriptions
 
 		metadata := protocol.Metadata{}
@@ -9015,7 +9015,7 @@ func (s Output) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.CaptionDescriptions) > 0 {
+	if s.CaptionDescriptions != nil {
 		v := s.CaptionDescriptions
 
 		metadata := protocol.Metadata{}
@@ -9082,7 +9082,7 @@ func (s OutputChannelMapping) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputChannelMapping) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.InputChannels) > 0 {
+	if s.InputChannels != nil {
 		v := s.InputChannels
 
 		metadata := protocol.Metadata{}
@@ -9200,7 +9200,7 @@ func (s OutputGroup) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "outputGroupSettings", v, metadata)
 	}
-	if len(s.Outputs) > 0 {
+	if s.Outputs != nil {
 		v := s.Outputs
 
 		metadata := protocol.Metadata{}
@@ -9231,7 +9231,7 @@ func (s OutputGroupDetail) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputGroupDetail) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.OutputDetails) > 0 {
+	if s.OutputDetails != nil {
 		v := s.OutputDetails
 
 		metadata := protocol.Metadata{}
@@ -9536,7 +9536,7 @@ func (s *PresetSettings) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PresetSettings) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AudioDescriptions) > 0 {
+	if s.AudioDescriptions != nil {
 		v := s.AudioDescriptions
 
 		metadata := protocol.Metadata{}
@@ -9548,7 +9548,7 @@ func (s PresetSettings) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.CaptionDescriptions) > 0 {
+	if s.CaptionDescriptions != nil {
 		v := s.CaptionDescriptions
 
 		metadata := protocol.Metadata{}
@@ -10197,7 +10197,7 @@ func (s ResourceTags) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -10359,7 +10359,7 @@ func (s SpekeKeyProvider) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "resourceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SystemIds) > 0 {
+	if s.SystemIds != nil {
 		v := s.SystemIds
 
 		metadata := protocol.Metadata{}
@@ -10681,7 +10681,7 @@ func (s TimedMetadataInsertion) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s TimedMetadataInsertion) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Id3Insertions) > 0 {
+	if s.Id3Insertions != nil {
 		v := s.Id3Insertions
 
 		metadata := protocol.Metadata{}

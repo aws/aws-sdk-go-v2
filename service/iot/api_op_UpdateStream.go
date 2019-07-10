@@ -74,7 +74,7 @@ func (s UpdateStreamInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Files) > 0 {
+	if s.Files != nil {
 		v := s.Files
 
 		metadata := protocol.Metadata{}

@@ -91,7 +91,7 @@ func (s ListOutgoingCertificatesOutput) MarshalFields(e protocol.FieldEncoder) e
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextMarker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.OutgoingCertificates) > 0 {
+	if s.OutgoingCertificates != nil {
 		v := s.OutgoingCertificates
 
 		metadata := protocol.Metadata{}

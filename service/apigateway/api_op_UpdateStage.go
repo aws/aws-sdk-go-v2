@@ -56,7 +56,7 @@ func (s *UpdateStageInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateStageInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.PatchOperations) > 0 {
+	if s.PatchOperations != nil {
 		v := s.PatchOperations
 
 		metadata := protocol.Metadata{}
@@ -221,7 +221,7 @@ func (s UpdateStageOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "lastUpdatedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
-	if len(s.MethodSettings) > 0 {
+	if s.MethodSettings != nil {
 		v := s.MethodSettings
 
 		metadata := protocol.Metadata{}
@@ -239,7 +239,7 @@ func (s UpdateStageOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "stageName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -257,7 +257,7 @@ func (s UpdateStageOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "tracingEnabled", protocol.BoolValue(v), metadata)
 	}
-	if len(s.Variables) > 0 {
+	if s.Variables != nil {
 		v := s.Variables
 
 		metadata := protocol.Metadata{}

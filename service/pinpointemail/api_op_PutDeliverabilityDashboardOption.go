@@ -64,7 +64,7 @@ func (s PutDeliverabilityDashboardOptionInput) MarshalFields(e protocol.FieldEnc
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "DashboardEnabled", protocol.BoolValue(v), metadata)
 	}
-	if len(s.SubscribedDomains) > 0 {
+	if s.SubscribedDomains != nil {
 		v := s.SubscribedDomains
 
 		metadata := protocol.Metadata{}

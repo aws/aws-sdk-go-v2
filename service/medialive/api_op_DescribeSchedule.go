@@ -91,7 +91,7 @@ func (s DescribeScheduleOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ScheduleActions) > 0 {
+	if s.ScheduleActions != nil {
 		v := s.ScheduleActions
 
 		metadata := protocol.Metadata{}

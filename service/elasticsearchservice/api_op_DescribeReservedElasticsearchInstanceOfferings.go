@@ -80,7 +80,7 @@ func (s DescribeReservedElasticsearchInstanceOfferingsOutput) MarshalFields(e pr
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ReservedElasticsearchInstanceOfferings) > 0 {
+	if s.ReservedElasticsearchInstanceOfferings != nil {
 		v := s.ReservedElasticsearchInstanceOfferings
 
 		metadata := protocol.Metadata{}

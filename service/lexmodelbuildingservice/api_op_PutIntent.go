@@ -257,7 +257,7 @@ func (s PutIntentInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "rejectionStatement", v, metadata)
 	}
-	if len(s.SampleUtterances) > 0 {
+	if s.SampleUtterances != nil {
 		v := s.SampleUtterances
 
 		metadata := protocol.Metadata{}
@@ -269,7 +269,7 @@ func (s PutIntentInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Slots) > 0 {
+	if s.Slots != nil {
 		v := s.Slots
 
 		metadata := protocol.Metadata{}
@@ -435,7 +435,7 @@ func (s PutIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "rejectionStatement", v, metadata)
 	}
-	if len(s.SampleUtterances) > 0 {
+	if s.SampleUtterances != nil {
 		v := s.SampleUtterances
 
 		metadata := protocol.Metadata{}
@@ -447,7 +447,7 @@ func (s PutIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Slots) > 0 {
+	if s.Slots != nil {
 		v := s.Slots
 
 		metadata := protocol.Metadata{}

@@ -80,7 +80,7 @@ func (s CreateResourceShareInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Principals) > 0 {
+	if s.Principals != nil {
 		v := s.Principals
 
 		metadata := protocol.Metadata{}
@@ -92,7 +92,7 @@ func (s CreateResourceShareInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.ResourceArns) > 0 {
+	if s.ResourceArns != nil {
 		v := s.ResourceArns
 
 		metadata := protocol.Metadata{}
@@ -104,7 +104,7 @@ func (s CreateResourceShareInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

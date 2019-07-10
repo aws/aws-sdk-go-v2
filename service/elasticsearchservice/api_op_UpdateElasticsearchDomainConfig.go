@@ -89,7 +89,7 @@ func (s UpdateElasticsearchDomainConfigInput) MarshalFields(e protocol.FieldEnco
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "AccessPolicies", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.AdvancedOptions) > 0 {
+	if s.AdvancedOptions != nil {
 		v := s.AdvancedOptions
 
 		metadata := protocol.Metadata{}
@@ -119,7 +119,7 @@ func (s UpdateElasticsearchDomainConfigInput) MarshalFields(e protocol.FieldEnco
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "ElasticsearchClusterConfig", v, metadata)
 	}
-	if len(s.LogPublishingOptions) > 0 {
+	if s.LogPublishingOptions != nil {
 		v := s.LogPublishingOptions
 
 		metadata := protocol.Metadata{}

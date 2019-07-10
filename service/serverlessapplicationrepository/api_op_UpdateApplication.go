@@ -71,7 +71,7 @@ func (s UpdateApplicationInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "homePageUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Labels) > 0 {
+	if s.Labels != nil {
 		v := s.Labels
 
 		metadata := protocol.Metadata{}
@@ -169,7 +169,7 @@ func (s UpdateApplicationOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "homePageUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Labels) > 0 {
+	if s.Labels != nil {
 		v := s.Labels
 
 		metadata := protocol.Metadata{}

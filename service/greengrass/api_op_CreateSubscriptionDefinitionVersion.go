@@ -45,7 +45,7 @@ func (s *CreateSubscriptionDefinitionVersionInput) Validate() error {
 func (s CreateSubscriptionDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.Subscriptions) > 0 {
+	if s.Subscriptions != nil {
 		v := s.Subscriptions
 
 		metadata := protocol.Metadata{}

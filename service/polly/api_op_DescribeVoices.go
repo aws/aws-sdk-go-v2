@@ -85,7 +85,7 @@ func (s DescribeVoicesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Voices) > 0 {
+	if s.Voices != nil {
 		v := s.Voices
 
 		metadata := protocol.Metadata{}

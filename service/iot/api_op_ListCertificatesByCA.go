@@ -105,7 +105,7 @@ func (s ListCertificatesByCAOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListCertificatesByCAOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Certificates) > 0 {
+	if s.Certificates != nil {
 		v := s.Certificates
 
 		metadata := protocol.Metadata{}

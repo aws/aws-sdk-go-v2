@@ -107,7 +107,7 @@ func (s ListThingsInThingGroupOutput) MarshalFields(e protocol.FieldEncoder) err
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Things) > 0 {
+	if s.Things != nil {
 		v := s.Things
 
 		metadata := protocol.Metadata{}

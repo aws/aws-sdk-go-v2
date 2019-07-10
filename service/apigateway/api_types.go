@@ -139,7 +139,7 @@ func (s ApiKey) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.StageKeys) > 0 {
+	if s.StageKeys != nil {
 		v := s.StageKeys
 
 		metadata := protocol.Metadata{}
@@ -151,7 +151,7 @@ func (s ApiKey) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -206,7 +206,7 @@ func (s ApiStage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "stage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Throttle) > 0 {
+	if s.Throttle != nil {
 		v := s.Throttle
 
 		metadata := protocol.Metadata{}
@@ -356,7 +356,7 @@ func (s Authorizer) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ProviderARNs) > 0 {
+	if s.ProviderARNs != nil {
 		v := s.ProviderARNs
 
 		metadata := protocol.Metadata{}
@@ -465,7 +465,7 @@ func (s CanarySettings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "percentTraffic", protocol.Float64Value(v), metadata)
 	}
-	if len(s.StageVariableOverrides) > 0 {
+	if s.StageVariableOverrides != nil {
 		v := s.StageVariableOverrides
 
 		metadata := protocol.Metadata{}
@@ -554,7 +554,7 @@ func (s Certificate) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "pemEncodedCertificate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -603,7 +603,7 @@ func (s Deployment) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Deployment) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ApiSummary) > 0 {
+	if s.ApiSummary != nil {
 		v := s.ApiSummary
 
 		metadata := protocol.Metadata{}
@@ -672,7 +672,7 @@ func (s DeploymentCanarySettings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "percentTraffic", protocol.Float64Value(v), metadata)
 	}
-	if len(s.StageVariableOverrides) > 0 {
+	if s.StageVariableOverrides != nil {
 		v := s.StageVariableOverrides
 
 		metadata := protocol.Metadata{}
@@ -1052,7 +1052,7 @@ func (s DomainName) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "regionalHostedZoneId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -1086,7 +1086,7 @@ func (s EndpointConfiguration) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s EndpointConfiguration) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Types) > 0 {
+	if s.Types != nil {
 		v := s.Types
 
 		metadata := protocol.Metadata{}
@@ -1215,7 +1215,7 @@ func (s GatewayResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "defaultResponse", protocol.BoolValue(v), metadata)
 	}
-	if len(s.ResponseParameters) > 0 {
+	if s.ResponseParameters != nil {
 		v := s.ResponseParameters
 
 		metadata := protocol.Metadata{}
@@ -1227,7 +1227,7 @@ func (s GatewayResponse) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.ResponseTemplates) > 0 {
+	if s.ResponseTemplates != nil {
 		v := s.ResponseTemplates
 
 		metadata := protocol.Metadata{}
@@ -1430,7 +1430,7 @@ func (s Integration) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Integration) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.CacheKeyParameters) > 0 {
+	if s.CacheKeyParameters != nil {
 		v := s.CacheKeyParameters
 
 		metadata := protocol.Metadata{}
@@ -1478,7 +1478,7 @@ func (s Integration) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "httpMethod", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.IntegrationResponses) > 0 {
+	if s.IntegrationResponses != nil {
 		v := s.IntegrationResponses
 
 		metadata := protocol.Metadata{}
@@ -1496,7 +1496,7 @@ func (s Integration) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "passthroughBehavior", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.RequestParameters) > 0 {
+	if s.RequestParameters != nil {
 		v := s.RequestParameters
 
 		metadata := protocol.Metadata{}
@@ -1508,7 +1508,7 @@ func (s Integration) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.RequestTemplates) > 0 {
+	if s.RequestTemplates != nil {
 		v := s.RequestTemplates
 
 		metadata := protocol.Metadata{}
@@ -1607,7 +1607,7 @@ func (s IntegrationResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "contentHandling", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.ResponseParameters) > 0 {
+	if s.ResponseParameters != nil {
 		v := s.ResponseParameters
 
 		metadata := protocol.Metadata{}
@@ -1619,7 +1619,7 @@ func (s IntegrationResponse) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.ResponseTemplates) > 0 {
+	if s.ResponseTemplates != nil {
 		v := s.ResponseTemplates
 
 		metadata := protocol.Metadata{}
@@ -1858,7 +1858,7 @@ func (s Method) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "apiKeyRequired", protocol.BoolValue(v), metadata)
 	}
-	if len(s.AuthorizationScopes) > 0 {
+	if s.AuthorizationScopes != nil {
 		v := s.AuthorizationScopes
 
 		metadata := protocol.Metadata{}
@@ -1894,7 +1894,7 @@ func (s Method) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "methodIntegration", v, metadata)
 	}
-	if len(s.MethodResponses) > 0 {
+	if s.MethodResponses != nil {
 		v := s.MethodResponses
 
 		metadata := protocol.Metadata{}
@@ -1912,7 +1912,7 @@ func (s Method) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "operationName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.RequestModels) > 0 {
+	if s.RequestModels != nil {
 		v := s.RequestModels
 
 		metadata := protocol.Metadata{}
@@ -1924,7 +1924,7 @@ func (s Method) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.RequestParameters) > 0 {
+	if s.RequestParameters != nil {
 		v := s.RequestParameters
 
 		metadata := protocol.Metadata{}
@@ -2002,7 +2002,7 @@ func (s MethodResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s MethodResponse) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ResponseModels) > 0 {
+	if s.ResponseModels != nil {
 		v := s.ResponseModels
 
 		metadata := protocol.Metadata{}
@@ -2014,7 +2014,7 @@ func (s MethodResponse) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.ResponseParameters) > 0 {
+	if s.ResponseParameters != nil {
 		v := s.ResponseParameters
 
 		metadata := protocol.Metadata{}
@@ -2555,7 +2555,7 @@ func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "pathPart", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResourceMethods) > 0 {
+	if s.ResourceMethods != nil {
 		v := s.ResourceMethods
 
 		metadata := protocol.Metadata{}
@@ -2640,7 +2640,7 @@ func (s RestApi) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "apiKeySource", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.BinaryMediaTypes) > 0 {
+	if s.BinaryMediaTypes != nil {
 		v := s.BinaryMediaTypes
 
 		metadata := protocol.Metadata{}
@@ -2694,7 +2694,7 @@ func (s RestApi) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "policy", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -2712,7 +2712,7 @@ func (s RestApi) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Warnings) > 0 {
+	if s.Warnings != nil {
 		v := s.Warnings
 
 		metadata := protocol.Metadata{}
@@ -2812,7 +2812,7 @@ func (s SdkType) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SdkType) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ConfigurationProperties) > 0 {
+	if s.ConfigurationProperties != nil {
 		v := s.ConfigurationProperties
 
 		metadata := protocol.Metadata{}
@@ -2983,7 +2983,7 @@ func (s Stage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "lastUpdatedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
-	if len(s.MethodSettings) > 0 {
+	if s.MethodSettings != nil {
 		v := s.MethodSettings
 
 		metadata := protocol.Metadata{}
@@ -3001,7 +3001,7 @@ func (s Stage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "stageName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -3019,7 +3019,7 @@ func (s Stage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "tracingEnabled", protocol.BoolValue(v), metadata)
 	}
-	if len(s.Variables) > 0 {
+	if s.Variables != nil {
 		v := s.Variables
 
 		metadata := protocol.Metadata{}
@@ -3152,7 +3152,7 @@ func (s UsagePlan) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UsagePlan) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ApiStages) > 0 {
+	if s.ApiStages != nil {
 		v := s.ApiStages
 
 		metadata := protocol.Metadata{}
@@ -3194,7 +3194,7 @@ func (s UsagePlan) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "quota", v, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -3348,7 +3348,7 @@ func (s VpcLink) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "statusMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -3360,7 +3360,7 @@ func (s VpcLink) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.TargetArns) > 0 {
+	if s.TargetArns != nil {
 		v := s.TargetArns
 
 		metadata := protocol.Metadata{}

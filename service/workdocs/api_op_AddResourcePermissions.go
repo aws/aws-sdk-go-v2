@@ -79,7 +79,7 @@ func (s AddResourcePermissionsInput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "NotificationOptions", v, metadata)
 	}
-	if len(s.Principals) > 0 {
+	if s.Principals != nil {
 		v := s.Principals
 
 		metadata := protocol.Metadata{}
@@ -121,7 +121,7 @@ func (s AddResourcePermissionsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s AddResourcePermissionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ShareResults) > 0 {
+	if s.ShareResults != nil {
 		v := s.ShareResults
 
 		metadata := protocol.Metadata{}

@@ -72,7 +72,7 @@ func (s *AddAttributesActivity) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s AddAttributesActivity) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -459,7 +459,7 @@ func (s ContainerDatasetAction) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "resourceConfiguration", v, metadata)
 	}
-	if len(s.Variables) > 0 {
+	if s.Variables != nil {
 		v := s.Variables
 
 		metadata := protocol.Metadata{}
@@ -522,7 +522,7 @@ func (s Dataset) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Dataset) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Actions) > 0 {
+	if s.Actions != nil {
 		v := s.Actions
 
 		metadata := protocol.Metadata{}
@@ -540,7 +540,7 @@ func (s Dataset) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ContentDeliveryRules) > 0 {
+	if s.ContentDeliveryRules != nil {
 		v := s.ContentDeliveryRules
 
 		metadata := protocol.Metadata{}
@@ -582,7 +582,7 @@ func (s Dataset) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Triggers) > 0 {
+	if s.Triggers != nil {
 		v := s.Triggers
 
 		metadata := protocol.Metadata{}
@@ -1017,7 +1017,7 @@ func (s DatasetSummary) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DatasetSummary) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Actions) > 0 {
+	if s.Actions != nil {
 		v := s.Actions
 
 		metadata := protocol.Metadata{}
@@ -1053,7 +1053,7 @@ func (s DatasetSummary) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Triggers) > 0 {
+	if s.Triggers != nil {
 		v := s.Triggers
 
 		metadata := protocol.Metadata{}
@@ -2264,7 +2264,7 @@ func (s Pipeline) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Pipeline) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Activities) > 0 {
+	if s.Activities != nil {
 		v := s.Activities
 
 		metadata := protocol.Metadata{}
@@ -2300,7 +2300,7 @@ func (s Pipeline) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ReprocessingSummaries) > 0 {
+	if s.ReprocessingSummaries != nil {
 		v := s.ReprocessingSummaries
 
 		metadata := protocol.Metadata{}
@@ -2526,7 +2526,7 @@ func (s PipelineSummary) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "pipelineName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ReprocessingSummaries) > 0 {
+	if s.ReprocessingSummaries != nil {
 		v := s.ReprocessingSummaries
 
 		metadata := protocol.Metadata{}
@@ -2636,7 +2636,7 @@ func (s *RemoveAttributesActivity) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s RemoveAttributesActivity) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -2993,7 +2993,7 @@ func (s *SelectAttributesActivity) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SelectAttributesActivity) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -3062,7 +3062,7 @@ func (s *SqlQueryDatasetAction) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SqlQueryDatasetAction) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Filters) > 0 {
+	if s.Filters != nil {
 		v := s.Filters
 
 		metadata := protocol.Metadata{}

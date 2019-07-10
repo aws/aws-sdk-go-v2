@@ -312,7 +312,7 @@ func (s *PushSync) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PushSync) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ApplicationArns) > 0 {
+	if s.ApplicationArns != nil {
 		v := s.ApplicationArns
 
 		metadata := protocol.Metadata{}

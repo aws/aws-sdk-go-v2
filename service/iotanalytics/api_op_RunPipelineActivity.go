@@ -63,7 +63,7 @@ func (s *RunPipelineActivityInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s RunPipelineActivityInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.Payloads) > 0 {
+	if s.Payloads != nil {
 		v := s.Payloads
 
 		metadata := protocol.Metadata{}
@@ -110,7 +110,7 @@ func (s RunPipelineActivityOutput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "logResult", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Payloads) > 0 {
+	if s.Payloads != nil {
 		v := s.Payloads
 
 		metadata := protocol.Metadata{}

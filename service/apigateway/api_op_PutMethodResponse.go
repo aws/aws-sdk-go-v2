@@ -87,7 +87,7 @@ func (s *PutMethodResponseInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PutMethodResponseInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.ResponseModels) > 0 {
+	if s.ResponseModels != nil {
 		v := s.ResponseModels
 
 		metadata := protocol.Metadata{}
@@ -99,7 +99,7 @@ func (s PutMethodResponseInput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.ResponseParameters) > 0 {
+	if s.ResponseParameters != nil {
 		v := s.ResponseParameters
 
 		metadata := protocol.Metadata{}
@@ -195,7 +195,7 @@ func (s PutMethodResponseOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PutMethodResponseOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ResponseModels) > 0 {
+	if s.ResponseModels != nil {
 		v := s.ResponseModels
 
 		metadata := protocol.Metadata{}
@@ -207,7 +207,7 @@ func (s PutMethodResponseOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.ResponseParameters) > 0 {
+	if s.ResponseParameters != nil {
 		v := s.ResponseParameters
 
 		metadata := protocol.Metadata{}

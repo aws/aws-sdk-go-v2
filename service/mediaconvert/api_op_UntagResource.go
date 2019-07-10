@@ -49,7 +49,7 @@ func (s *UntagResourceInput) Validate() error {
 func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.TagKeys) > 0 {
+	if s.TagKeys != nil {
 		v := s.TagKeys
 
 		metadata := protocol.Metadata{}

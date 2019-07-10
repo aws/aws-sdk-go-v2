@@ -65,7 +65,7 @@ func (s ListGroundStationsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListGroundStationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.GroundStationList) > 0 {
+	if s.GroundStationList != nil {
 		v := s.GroundStationList
 
 		metadata := protocol.Metadata{}

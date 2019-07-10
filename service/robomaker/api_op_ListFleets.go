@@ -72,7 +72,7 @@ func (s *ListFleetsInput) Validate() error {
 func (s ListFleetsInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.Filters) > 0 {
+	if s.Filters != nil {
 		v := s.Filters
 
 		metadata := protocol.Metadata{}
@@ -120,7 +120,7 @@ func (s ListFleetsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListFleetsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.FleetDetails) > 0 {
+	if s.FleetDetails != nil {
 		v := s.FleetDetails
 
 		metadata := protocol.Metadata{}

@@ -62,7 +62,7 @@ func (s *CreateLabelsInput) Validate() error {
 func (s CreateLabelsInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.Labels) > 0 {
+	if s.Labels != nil {
 		v := s.Labels
 
 		metadata := protocol.Metadata{}

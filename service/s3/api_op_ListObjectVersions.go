@@ -163,7 +163,7 @@ func (s ListObjectVersionsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListObjectVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.CommonPrefixes) > 0 {
+	if s.CommonPrefixes != nil {
 		v := s.CommonPrefixes
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -175,7 +175,7 @@ func (s ListObjectVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.DeleteMarkers) > 0 {
+	if s.DeleteMarkers != nil {
 		v := s.DeleteMarkers
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -247,7 +247,7 @@ func (s ListObjectVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "VersionIdMarker", protocol.StringValue(v), metadata)
 	}
-	if len(s.Versions) > 0 {
+	if s.Versions != nil {
 		v := s.Versions
 
 		metadata := protocol.Metadata{Flatten: true}

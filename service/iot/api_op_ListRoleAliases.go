@@ -88,7 +88,7 @@ func (s ListRoleAliasesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextMarker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.RoleAliases) > 0 {
+	if s.RoleAliases != nil {
 		v := s.RoleAliases
 
 		metadata := protocol.Metadata{}

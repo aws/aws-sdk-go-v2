@@ -603,7 +603,7 @@ func (s *ChangeBatch) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ChangeBatch) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Changes) > 0 {
+	if s.Changes != nil {
 		v := s.Changes
 
 		metadata := protocol.Metadata{ListLocationName: "Change"}
@@ -759,7 +759,7 @@ func (s CloudWatchAlarmConfiguration) MarshalFields(e protocol.FieldEncoder) err
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ComparisonOperator", v, metadata)
 	}
-	if len(s.Dimensions) > 0 {
+	if s.Dimensions != nil {
 		v := s.Dimensions
 
 		metadata := protocol.Metadata{ListLocationName: "Dimension"}
@@ -849,7 +849,7 @@ func (s DelegationSet) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), metadata)
 	}
-	if len(s.NameServers) > 0 {
+	if s.NameServers != nil {
 		v := s.NameServers
 
 		metadata := protocol.Metadata{ListLocationName: "NameServer"}
@@ -1468,7 +1468,7 @@ func (s HealthCheckConfig) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "AlarmIdentifier", v, metadata)
 	}
-	if len(s.ChildHealthChecks) > 0 {
+	if s.ChildHealthChecks != nil {
 		v := s.ChildHealthChecks
 
 		metadata := protocol.Metadata{ListLocationName: "ChildHealthCheck"}
@@ -1540,7 +1540,7 @@ func (s HealthCheckConfig) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), metadata)
 	}
-	if len(s.Regions) > 0 {
+	if s.Regions != nil {
 		v := s.Regions
 
 		metadata := protocol.Metadata{ListLocationName: "Region"}
@@ -2464,7 +2464,7 @@ func (s ResourceRecordSet) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Region", v, metadata)
 	}
-	if len(s.ResourceRecords) > 0 {
+	if s.ResourceRecords != nil {
 		v := s.ResourceRecords
 
 		metadata := protocol.Metadata{ListLocationName: "ResourceRecord"}
@@ -2547,7 +2547,7 @@ func (s ResourceTagSet) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ResourceType", v, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{ListLocationName: "Tag"}

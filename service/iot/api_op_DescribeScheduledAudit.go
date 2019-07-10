@@ -119,7 +119,7 @@ func (s DescribeScheduledAuditOutput) MarshalFields(e protocol.FieldEncoder) err
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "scheduledAuditName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.TargetCheckNames) > 0 {
+	if s.TargetCheckNames != nil {
 		v := s.TargetCheckNames
 
 		metadata := protocol.Metadata{}

@@ -101,7 +101,7 @@ func (s CreateDeliverabilityTestReportInput) MarshalFields(e protocol.FieldEncod
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ReportName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

@@ -79,7 +79,7 @@ func (s UpdateCompanyNetworkConfigurationInput) MarshalFields(e protocol.FieldEn
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "FleetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SecurityGroupIds) > 0 {
+	if s.SecurityGroupIds != nil {
 		v := s.SecurityGroupIds
 
 		metadata := protocol.Metadata{}
@@ -91,7 +91,7 @@ func (s UpdateCompanyNetworkConfigurationInput) MarshalFields(e protocol.FieldEn
 		ls0.End()
 
 	}
-	if len(s.SubnetIds) > 0 {
+	if s.SubnetIds != nil {
 		v := s.SubnetIds
 
 		metadata := protocol.Metadata{}

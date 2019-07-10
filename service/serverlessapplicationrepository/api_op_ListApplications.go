@@ -72,7 +72,7 @@ func (s ListApplicationsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListApplicationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Applications) > 0 {
+	if s.Applications != nil {
 		v := s.Applications
 
 		metadata := protocol.Metadata{}

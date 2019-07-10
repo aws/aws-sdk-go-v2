@@ -684,7 +684,7 @@ func (s GraphqlApi) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GraphqlApi) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AdditionalAuthenticationProviders) > 0 {
+	if s.AdditionalAuthenticationProviders != nil {
 		v := s.AdditionalAuthenticationProviders
 
 		metadata := protocol.Metadata{}
@@ -732,7 +732,7 @@ func (s GraphqlApi) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "openIDConnectConfig", v, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -744,7 +744,7 @@ func (s GraphqlApi) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.Uris) > 0 {
+	if s.Uris != nil {
 		v := s.Uris
 
 		metadata := protocol.Metadata{}
@@ -1012,7 +1012,7 @@ func (s PipelineConfig) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PipelineConfig) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Functions) > 0 {
+	if s.Functions != nil {
 		v := s.Functions
 
 		metadata := protocol.Metadata{}

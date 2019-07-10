@@ -82,7 +82,7 @@ func (s GetBuiltinIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "signature", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Slots) > 0 {
+	if s.Slots != nil {
 		v := s.Slots
 
 		metadata := protocol.Metadata{}
@@ -94,7 +94,7 @@ func (s GetBuiltinIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.SupportedLocales) > 0 {
+	if s.SupportedLocales != nil {
 		v := s.SupportedLocales
 
 		metadata := protocol.Metadata{}

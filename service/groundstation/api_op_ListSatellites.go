@@ -71,7 +71,7 @@ func (s ListSatellitesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Satellites) > 0 {
+	if s.Satellites != nil {
 		v := s.Satellites
 
 		metadata := protocol.Metadata{}

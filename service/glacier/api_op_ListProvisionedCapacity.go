@@ -68,7 +68,7 @@ func (s ListProvisionedCapacityOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListProvisionedCapacityOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ProvisionedCapacityList) > 0 {
+	if s.ProvisionedCapacityList != nil {
 		v := s.ProvisionedCapacityList
 
 		metadata := protocol.Metadata{}

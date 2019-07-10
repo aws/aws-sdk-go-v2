@@ -82,7 +82,7 @@ func (s DescribeAssetOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.EgressEndpoints) > 0 {
+	if s.EgressEndpoints != nil {
 		v := s.EgressEndpoints
 
 		metadata := protocol.Metadata{}

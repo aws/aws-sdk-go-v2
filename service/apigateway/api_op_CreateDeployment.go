@@ -113,7 +113,7 @@ func (s CreateDeploymentInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "tracingEnabled", protocol.BoolValue(v), metadata)
 	}
-	if len(s.Variables) > 0 {
+	if s.Variables != nil {
 		v := s.Variables
 
 		metadata := protocol.Metadata{}
@@ -168,7 +168,7 @@ func (s CreateDeploymentOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateDeploymentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ApiSummary) > 0 {
+	if s.ApiSummary != nil {
 		v := s.ApiSummary
 
 		metadata := protocol.Metadata{}

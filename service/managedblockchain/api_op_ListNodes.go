@@ -129,7 +129,7 @@ func (s ListNodesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Nodes) > 0 {
+	if s.Nodes != nil {
 		v := s.Nodes
 
 		metadata := protocol.Metadata{}

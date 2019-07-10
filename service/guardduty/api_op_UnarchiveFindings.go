@@ -51,7 +51,7 @@ func (s *UnarchiveFindingsInput) Validate() error {
 func (s UnarchiveFindingsInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.FindingIds) > 0 {
+	if s.FindingIds != nil {
 		v := s.FindingIds
 
 		metadata := protocol.Metadata{}

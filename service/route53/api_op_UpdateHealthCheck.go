@@ -330,7 +330,7 @@ func (s UpdateHealthCheckInput) MarshalFields(e protocol.FieldEncoder) error {
 			metadata := protocol.Metadata{}
 			e.SetFields(protocol.BodyTarget, "AlarmIdentifier", v, metadata)
 		}
-		if len(s.ChildHealthChecks) > 0 {
+		if s.ChildHealthChecks != nil {
 			v := s.ChildHealthChecks
 
 			metadata := protocol.Metadata{ListLocationName: "ChildHealthCheck"}
@@ -402,7 +402,7 @@ func (s UpdateHealthCheckInput) MarshalFields(e protocol.FieldEncoder) error {
 			metadata := protocol.Metadata{}
 			e.SetValue(protocol.BodyTarget, "Port", protocol.Int64Value(v), metadata)
 		}
-		if len(s.Regions) > 0 {
+		if s.Regions != nil {
 			v := s.Regions
 
 			metadata := protocol.Metadata{ListLocationName: "Region"}
@@ -414,7 +414,7 @@ func (s UpdateHealthCheckInput) MarshalFields(e protocol.FieldEncoder) error {
 			ls0.End()
 
 		}
-		if len(s.ResetElements) > 0 {
+		if s.ResetElements != nil {
 			v := s.ResetElements
 
 			metadata := protocol.Metadata{ListLocationName: "ResettableElementName"}

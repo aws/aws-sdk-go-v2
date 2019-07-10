@@ -64,7 +64,7 @@ func (s GetEnabledStandardsInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.StandardsSubscriptionArns) > 0 {
+	if s.StandardsSubscriptionArns != nil {
 		v := s.StandardsSubscriptionArns
 
 		metadata := protocol.Metadata{}
@@ -103,7 +103,7 @@ func (s GetEnabledStandardsOutput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.StandardsSubscriptions) > 0 {
+	if s.StandardsSubscriptions != nil {
 		v := s.StandardsSubscriptions
 
 		metadata := protocol.Metadata{}

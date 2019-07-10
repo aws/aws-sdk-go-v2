@@ -62,7 +62,7 @@ func (s GetResourceShareInvitationsInput) MarshalFields(e protocol.FieldEncoder)
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResourceShareArns) > 0 {
+	if s.ResourceShareArns != nil {
 		v := s.ResourceShareArns
 
 		metadata := protocol.Metadata{}
@@ -74,7 +74,7 @@ func (s GetResourceShareInvitationsInput) MarshalFields(e protocol.FieldEncoder)
 		ls0.End()
 
 	}
-	if len(s.ResourceShareInvitationArns) > 0 {
+	if s.ResourceShareInvitationArns != nil {
 		v := s.ResourceShareInvitationArns
 
 		metadata := protocol.Metadata{}
@@ -114,7 +114,7 @@ func (s GetResourceShareInvitationsOutput) MarshalFields(e protocol.FieldEncoder
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResourceShareInvitations) > 0 {
+	if s.ResourceShareInvitations != nil {
 		v := s.ResourceShareInvitations
 
 		metadata := protocol.Metadata{}

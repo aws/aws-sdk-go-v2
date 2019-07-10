@@ -482,7 +482,7 @@ func (s *HttpRouteAction) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s HttpRouteAction) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.WeightedTargets) > 0 {
+	if s.WeightedTargets != nil {
 		v := s.WeightedTargets
 
 		metadata := protocol.Metadata{}
@@ -1348,7 +1348,7 @@ func (s *TcpRouteAction) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s TcpRouteAction) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.WeightedTargets) > 0 {
+	if s.WeightedTargets != nil {
 		v := s.WeightedTargets
 
 		metadata := protocol.Metadata{}
@@ -1588,7 +1588,7 @@ func (s *VirtualNodeSpec) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s VirtualNodeSpec) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Backends) > 0 {
+	if s.Backends != nil {
 		v := s.Backends
 
 		metadata := protocol.Metadata{}
@@ -1600,7 +1600,7 @@ func (s VirtualNodeSpec) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Listeners) > 0 {
+	if s.Listeners != nil {
 		v := s.Listeners
 
 		metadata := protocol.Metadata{}
@@ -1907,7 +1907,7 @@ func (s *VirtualRouterSpec) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s VirtualRouterSpec) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Listeners) > 0 {
+	if s.Listeners != nil {
 		v := s.Listeners
 
 		metadata := protocol.Metadata{}

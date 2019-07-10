@@ -103,7 +103,7 @@ func (s ListVaultsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.VaultList) > 0 {
+	if s.VaultList != nil {
 		v := s.VaultList
 
 		metadata := protocol.Metadata{}

@@ -242,7 +242,7 @@ func (s SynthesisTask) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LanguageCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.LexiconNames) > 0 {
+	if s.LexiconNames != nil {
 		v := s.LexiconNames
 
 		metadata := protocol.Metadata{}
@@ -284,7 +284,7 @@ func (s SynthesisTask) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SnsTopicArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SpeechMarkTypes) > 0 {
+	if s.SpeechMarkTypes != nil {
 		v := s.SpeechMarkTypes
 
 		metadata := protocol.Metadata{}
@@ -367,7 +367,7 @@ func (s Voice) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Voice) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AdditionalLanguageCodes) > 0 {
+	if s.AdditionalLanguageCodes != nil {
 		v := s.AdditionalLanguageCodes
 
 		metadata := protocol.Metadata{}

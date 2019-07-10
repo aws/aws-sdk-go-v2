@@ -177,7 +177,7 @@ func (s Record) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Record) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Values) > 0 {
+	if s.Values != nil {
 		v := s.Values
 
 		metadata := protocol.Metadata{}
@@ -211,7 +211,7 @@ func (s ResultFrame) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ResultFrame) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Records) > 0 {
+	if s.Records != nil {
 		v := s.Records
 
 		metadata := protocol.Metadata{}
@@ -257,7 +257,7 @@ func (s ResultSetMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "columnCount", protocol.Int64Value(v), metadata)
 	}
-	if len(s.ColumnMetadata) > 0 {
+	if s.ColumnMetadata != nil {
 		v := s.ColumnMetadata
 
 		metadata := protocol.Metadata{}
@@ -322,7 +322,7 @@ func (s StructValue) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s StructValue) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -382,7 +382,7 @@ func (s Value) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Value) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ArrayValues) > 0 {
+	if s.ArrayValues != nil {
 		v := s.ArrayValues
 
 		metadata := protocol.Metadata{}

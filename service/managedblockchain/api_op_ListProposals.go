@@ -100,7 +100,7 @@ func (s ListProposalsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Proposals) > 0 {
+	if s.Proposals != nil {
 		v := s.Proposals
 
 		metadata := protocol.Metadata{}

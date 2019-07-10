@@ -67,7 +67,7 @@ func (s CreateBackupPlanInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "BackupPlan", v, metadata)
 	}
-	if len(s.BackupPlanTags) > 0 {
+	if s.BackupPlanTags != nil {
 		v := s.BackupPlanTags
 
 		metadata := protocol.Metadata{}

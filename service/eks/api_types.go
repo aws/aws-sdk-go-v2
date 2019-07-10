@@ -226,7 +226,7 @@ func (s ErrorDetail) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "errorMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResourceIds) > 0 {
+	if s.ResourceIds != nil {
 		v := s.ResourceIds
 
 		metadata := protocol.Metadata{}
@@ -270,7 +270,7 @@ func (s LogSetup) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "enabled", protocol.BoolValue(v), metadata)
 	}
-	if len(s.Types) > 0 {
+	if s.Types != nil {
 		v := s.Types
 
 		metadata := protocol.Metadata{}
@@ -301,7 +301,7 @@ func (s Logging) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Logging) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ClusterLogging) > 0 {
+	if s.ClusterLogging != nil {
 		v := s.ClusterLogging
 
 		metadata := protocol.Metadata{}
@@ -353,7 +353,7 @@ func (s Update) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
-	if len(s.Errors) > 0 {
+	if s.Errors != nil {
 		v := s.Errors
 
 		metadata := protocol.Metadata{}
@@ -371,7 +371,7 @@ func (s Update) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Params) > 0 {
+	if s.Params != nil {
 		v := s.Params
 
 		metadata := protocol.Metadata{}
@@ -486,7 +486,7 @@ func (s VpcConfigRequest) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "endpointPublicAccess", protocol.BoolValue(v), metadata)
 	}
-	if len(s.SecurityGroupIds) > 0 {
+	if s.SecurityGroupIds != nil {
 		v := s.SecurityGroupIds
 
 		metadata := protocol.Metadata{}
@@ -498,7 +498,7 @@ func (s VpcConfigRequest) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.SubnetIds) > 0 {
+	if s.SubnetIds != nil {
 		v := s.SubnetIds
 
 		metadata := protocol.Metadata{}
@@ -561,7 +561,7 @@ func (s VpcConfigResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "endpointPublicAccess", protocol.BoolValue(v), metadata)
 	}
-	if len(s.SecurityGroupIds) > 0 {
+	if s.SecurityGroupIds != nil {
 		v := s.SecurityGroupIds
 
 		metadata := protocol.Metadata{}
@@ -573,7 +573,7 @@ func (s VpcConfigResponse) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.SubnetIds) > 0 {
+	if s.SubnetIds != nil {
 		v := s.SubnetIds
 
 		metadata := protocol.Metadata{}

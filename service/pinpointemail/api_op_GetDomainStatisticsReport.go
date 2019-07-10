@@ -115,7 +115,7 @@ func (s GetDomainStatisticsReportOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetDomainStatisticsReportOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.DailyVolumes) > 0 {
+	if s.DailyVolumes != nil {
 		v := s.DailyVolumes
 
 		metadata := protocol.Metadata{}

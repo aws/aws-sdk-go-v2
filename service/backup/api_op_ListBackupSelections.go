@@ -98,7 +98,7 @@ func (s ListBackupSelectionsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListBackupSelectionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.BackupSelectionsList) > 0 {
+	if s.BackupSelectionsList != nil {
 		v := s.BackupSelectionsList
 
 		metadata := protocol.Metadata{}

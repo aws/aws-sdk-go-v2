@@ -460,7 +460,7 @@ func (s SearchOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SearchOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Facets) > 0 {
+	if s.Facets != nil {
 		v := s.Facets
 
 		metadata := protocol.Metadata{}
@@ -478,7 +478,7 @@ func (s SearchOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "hits", v, metadata)
 	}
-	if len(s.Stats) > 0 {
+	if s.Stats != nil {
 		v := s.Stats
 
 		metadata := protocol.Metadata{}

@@ -99,7 +99,7 @@ func (s UpdateIntegrationResponseInput) MarshalFields(e protocol.FieldEncoder) e
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "integrationResponseKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResponseParameters) > 0 {
+	if s.ResponseParameters != nil {
 		v := s.ResponseParameters
 
 		metadata := protocol.Metadata{}
@@ -111,7 +111,7 @@ func (s UpdateIntegrationResponseInput) MarshalFields(e protocol.FieldEncoder) e
 		ms0.End()
 
 	}
-	if len(s.ResponseTemplates) > 0 {
+	if s.ResponseTemplates != nil {
 		v := s.ResponseTemplates
 
 		metadata := protocol.Metadata{}
@@ -215,7 +215,7 @@ func (s UpdateIntegrationResponseOutput) MarshalFields(e protocol.FieldEncoder) 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "integrationResponseKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResponseParameters) > 0 {
+	if s.ResponseParameters != nil {
 		v := s.ResponseParameters
 
 		metadata := protocol.Metadata{}
@@ -227,7 +227,7 @@ func (s UpdateIntegrationResponseOutput) MarshalFields(e protocol.FieldEncoder) 
 		ms0.End()
 
 	}
-	if len(s.ResponseTemplates) > 0 {
+	if s.ResponseTemplates != nil {
 		v := s.ResponseTemplates
 
 		metadata := protocol.Metadata{}

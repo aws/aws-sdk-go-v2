@@ -71,7 +71,7 @@ func (s GetBucketTaggingOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetBucketTaggingOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.TagSet) > 0 {
+	if s.TagSet != nil {
 		v := s.TagSet
 
 		metadata := protocol.Metadata{ListLocationName: "Tag"}

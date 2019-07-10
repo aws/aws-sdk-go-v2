@@ -151,7 +151,7 @@ func (s CreateSimulationApplicationVersionOutput) MarshalFields(e protocol.Field
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "simulationSoftwareSuite", v, metadata)
 	}
-	if len(s.Sources) > 0 {
+	if s.Sources != nil {
 		v := s.Sources
 
 		metadata := protocol.Metadata{}

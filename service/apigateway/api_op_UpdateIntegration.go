@@ -64,7 +64,7 @@ func (s *UpdateIntegrationInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateIntegrationInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.PatchOperations) > 0 {
+	if s.PatchOperations != nil {
 		v := s.PatchOperations
 
 		metadata := protocol.Metadata{}
@@ -273,7 +273,7 @@ func (s UpdateIntegrationOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateIntegrationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.CacheKeyParameters) > 0 {
+	if s.CacheKeyParameters != nil {
 		v := s.CacheKeyParameters
 
 		metadata := protocol.Metadata{}
@@ -321,7 +321,7 @@ func (s UpdateIntegrationOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "httpMethod", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.IntegrationResponses) > 0 {
+	if s.IntegrationResponses != nil {
 		v := s.IntegrationResponses
 
 		metadata := protocol.Metadata{}
@@ -339,7 +339,7 @@ func (s UpdateIntegrationOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "passthroughBehavior", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.RequestParameters) > 0 {
+	if s.RequestParameters != nil {
 		v := s.RequestParameters
 
 		metadata := protocol.Metadata{}
@@ -351,7 +351,7 @@ func (s UpdateIntegrationOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.RequestTemplates) > 0 {
+	if s.RequestTemplates != nil {
 		v := s.RequestTemplates
 
 		metadata := protocol.Metadata{}

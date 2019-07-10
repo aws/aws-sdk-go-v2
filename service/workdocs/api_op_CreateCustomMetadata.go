@@ -72,7 +72,7 @@ func (s *CreateCustomMetadataInput) Validate() error {
 func (s CreateCustomMetadataInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.CustomMetadata) > 0 {
+	if s.CustomMetadata != nil {
 		v := s.CustomMetadata
 
 		metadata := protocol.Metadata{}

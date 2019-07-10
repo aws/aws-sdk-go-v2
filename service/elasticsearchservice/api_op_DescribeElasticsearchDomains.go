@@ -43,7 +43,7 @@ func (s *DescribeElasticsearchDomainsInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeElasticsearchDomainsInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.DomainNames) > 0 {
+	if s.DomainNames != nil {
 		v := s.DomainNames
 
 		metadata := protocol.Metadata{}
@@ -76,7 +76,7 @@ func (s DescribeElasticsearchDomainsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeElasticsearchDomainsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.DomainStatusList) > 0 {
+	if s.DomainStatusList != nil {
 		v := s.DomainStatusList
 
 		metadata := protocol.Metadata{}

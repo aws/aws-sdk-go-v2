@@ -71,7 +71,7 @@ func (s GetResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "restapi_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Embed) > 0 {
+	if s.Embed != nil {
 		v := s.Embed
 
 		metadata := protocol.Metadata{}
@@ -194,7 +194,7 @@ func (s GetResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "pathPart", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResourceMethods) > 0 {
+	if s.ResourceMethods != nil {
 		v := s.ResourceMethods
 
 		metadata := protocol.Metadata{}

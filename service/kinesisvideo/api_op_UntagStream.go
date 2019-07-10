@@ -70,7 +70,7 @@ func (s UntagStreamInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.TagKeyList) > 0 {
+	if s.TagKeyList != nil {
 		v := s.TagKeyList
 
 		metadata := protocol.Metadata{}

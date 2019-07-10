@@ -89,7 +89,7 @@ func (s ListRestoreJobsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.RestoreJobs) > 0 {
+	if s.RestoreJobs != nil {
 		v := s.RestoreJobs
 
 		metadata := protocol.Metadata{}

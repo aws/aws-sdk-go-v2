@@ -114,7 +114,7 @@ func (s ImportDocumentationPartsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ImportDocumentationPartsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Ids) > 0 {
+	if s.Ids != nil {
 		v := s.Ids
 
 		metadata := protocol.Metadata{}
@@ -126,7 +126,7 @@ func (s ImportDocumentationPartsOutput) MarshalFields(e protocol.FieldEncoder) e
 		ls0.End()
 
 	}
-	if len(s.Warnings) > 0 {
+	if s.Warnings != nil {
 		v := s.Warnings
 
 		metadata := protocol.Metadata{}

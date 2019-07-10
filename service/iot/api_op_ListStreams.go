@@ -88,7 +88,7 @@ func (s ListStreamsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Streams) > 0 {
+	if s.Streams != nil {
 		v := s.Streams
 
 		metadata := protocol.Metadata{}

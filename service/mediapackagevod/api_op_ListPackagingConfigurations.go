@@ -86,7 +86,7 @@ func (s ListPackagingConfigurationsOutput) MarshalFields(e protocol.FieldEncoder
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.PackagingConfigurations) > 0 {
+	if s.PackagingConfigurations != nil {
 		v := s.PackagingConfigurations
 
 		metadata := protocol.Metadata{}

@@ -90,7 +90,7 @@ func (s DescribeBrokerInstanceOptionsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeBrokerInstanceOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.BrokerInstanceOptions) > 0 {
+	if s.BrokerInstanceOptions != nil {
 		v := s.BrokerInstanceOptions
 
 		metadata := protocol.Metadata{}

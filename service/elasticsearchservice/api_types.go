@@ -84,7 +84,7 @@ func (s AdditionalLimit) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LimitName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.LimitValues) > 0 {
+	if s.LimitValues != nil {
 		v := s.LimitValues
 
 		metadata := protocol.Metadata{}
@@ -133,7 +133,7 @@ func (s AdvancedOptionsStatus) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s AdvancedOptionsStatus) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Options) > 0 {
+	if s.Options != nil {
 		v := s.Options
 
 		metadata := protocol.Metadata{}
@@ -289,7 +289,7 @@ func (s CompatibleVersionsMap) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SourceVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.TargetVersions) > 0 {
+	if s.TargetVersions != nil {
 		v := s.TargetVersions
 
 		metadata := protocol.Metadata{}
@@ -768,7 +768,7 @@ func (s ElasticsearchDomainStatus) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "AccessPolicies", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.AdvancedOptions) > 0 {
+	if s.AdvancedOptions != nil {
 		v := s.AdvancedOptions
 
 		metadata := protocol.Metadata{}
@@ -840,7 +840,7 @@ func (s ElasticsearchDomainStatus) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Endpoint", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Endpoints) > 0 {
+	if s.Endpoints != nil {
 		v := s.Endpoints
 
 		metadata := protocol.Metadata{}
@@ -852,7 +852,7 @@ func (s ElasticsearchDomainStatus) MarshalFields(e protocol.FieldEncoder) error 
 		ms0.End()
 
 	}
-	if len(s.LogPublishingOptions) > 0 {
+	if s.LogPublishingOptions != nil {
 		v := s.LogPublishingOptions
 
 		metadata := protocol.Metadata{}
@@ -1113,7 +1113,7 @@ func (s Limits) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Limits) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AdditionalLimits) > 0 {
+	if s.AdditionalLimits != nil {
 		v := s.AdditionalLimits
 
 		metadata := protocol.Metadata{}
@@ -1131,7 +1131,7 @@ func (s Limits) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "InstanceLimits", v, metadata)
 	}
-	if len(s.StorageTypes) > 0 {
+	if s.StorageTypes != nil {
 		v := s.StorageTypes
 
 		metadata := protocol.Metadata{}
@@ -1204,7 +1204,7 @@ func (s LogPublishingOptionsStatus) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s LogPublishingOptionsStatus) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Options) > 0 {
+	if s.Options != nil {
 		v := s.Options
 
 		metadata := protocol.Metadata{}
@@ -1479,7 +1479,7 @@ func (s ReservedElasticsearchInstance) MarshalFields(e protocol.FieldEncoder) er
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "PaymentOption", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.RecurringCharges) > 0 {
+	if s.RecurringCharges != nil {
 		v := s.RecurringCharges
 
 		metadata := protocol.Metadata{}
@@ -1600,7 +1600,7 @@ func (s ReservedElasticsearchInstanceOffering) MarshalFields(e protocol.FieldEnc
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "PaymentOption", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.RecurringCharges) > 0 {
+	if s.RecurringCharges != nil {
 		v := s.RecurringCharges
 
 		metadata := protocol.Metadata{}
@@ -1805,7 +1805,7 @@ func (s StorageType) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "StorageSubTypeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.StorageTypeLimits) > 0 {
+	if s.StorageTypeLimits != nil {
 		v := s.StorageTypeLimits
 
 		metadata := protocol.Metadata{}
@@ -1858,7 +1858,7 @@ func (s StorageTypeLimit) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LimitName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.LimitValues) > 0 {
+	if s.LimitValues != nil {
 		v := s.LimitValues
 
 		metadata := protocol.Metadata{}
@@ -1975,7 +1975,7 @@ func (s UpgradeHistory) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "StartTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
-	if len(s.StepsList) > 0 {
+	if s.StepsList != nil {
 		v := s.StepsList
 
 		metadata := protocol.Metadata{}
@@ -2042,7 +2042,7 @@ func (s UpgradeStepItem) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpgradeStepItem) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Issues) > 0 {
+	if s.Issues != nil {
 		v := s.Issues
 
 		metadata := protocol.Metadata{}
@@ -2103,7 +2103,7 @@ func (s VPCDerivedInfo) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s VPCDerivedInfo) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AvailabilityZones) > 0 {
+	if s.AvailabilityZones != nil {
 		v := s.AvailabilityZones
 
 		metadata := protocol.Metadata{}
@@ -2115,7 +2115,7 @@ func (s VPCDerivedInfo) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.SecurityGroupIds) > 0 {
+	if s.SecurityGroupIds != nil {
 		v := s.SecurityGroupIds
 
 		metadata := protocol.Metadata{}
@@ -2127,7 +2127,7 @@ func (s VPCDerivedInfo) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.SubnetIds) > 0 {
+	if s.SubnetIds != nil {
 		v := s.SubnetIds
 
 		metadata := protocol.Metadata{}
@@ -2205,7 +2205,7 @@ func (s VPCOptions) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s VPCOptions) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.SecurityGroupIds) > 0 {
+	if s.SecurityGroupIds != nil {
 		v := s.SecurityGroupIds
 
 		metadata := protocol.Metadata{}
@@ -2217,7 +2217,7 @@ func (s VPCOptions) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.SubnetIds) > 0 {
+	if s.SubnetIds != nil {
 		v := s.SubnetIds
 
 		metadata := protocol.Metadata{}

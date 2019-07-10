@@ -51,7 +51,7 @@ func (s BatchGetTracesInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.TraceIds) > 0 {
+	if s.TraceIds != nil {
 		v := s.TraceIds
 
 		metadata := protocol.Metadata{}
@@ -93,7 +93,7 @@ func (s BatchGetTracesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Traces) > 0 {
+	if s.Traces != nil {
 		v := s.Traces
 
 		metadata := protocol.Metadata{}
@@ -105,7 +105,7 @@ func (s BatchGetTracesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.UnprocessedTraceIds) > 0 {
+	if s.UnprocessedTraceIds != nil {
 		v := s.UnprocessedTraceIds
 
 		metadata := protocol.Metadata{}

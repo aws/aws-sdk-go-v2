@@ -105,7 +105,7 @@ func (s ListWebsiteAuthorizationProvidersOutput) MarshalFields(e protocol.FieldE
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.WebsiteAuthorizationProviders) > 0 {
+	if s.WebsiteAuthorizationProviders != nil {
 		v := s.WebsiteAuthorizationProviders
 
 		metadata := protocol.Metadata{}

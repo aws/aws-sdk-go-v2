@@ -51,7 +51,7 @@ func (s GetTraceGraphInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.TraceIds) > 0 {
+	if s.TraceIds != nil {
 		v := s.TraceIds
 
 		metadata := protocol.Metadata{}
@@ -90,7 +90,7 @@ func (s GetTraceGraphOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Services) > 0 {
+	if s.Services != nil {
 		v := s.Services
 
 		metadata := protocol.Metadata{}

@@ -113,7 +113,7 @@ func (s *CreateOTAUpdateInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateOTAUpdateInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.AdditionalParameters) > 0 {
+	if s.AdditionalParameters != nil {
 		v := s.AdditionalParameters
 
 		metadata := protocol.Metadata{}
@@ -137,7 +137,7 @@ func (s CreateOTAUpdateInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Files) > 0 {
+	if s.Files != nil {
 		v := s.Files
 
 		metadata := protocol.Metadata{}
@@ -155,7 +155,7 @@ func (s CreateOTAUpdateInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -173,7 +173,7 @@ func (s CreateOTAUpdateInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "targetSelection", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Targets) > 0 {
+	if s.Targets != nil {
 		v := s.Targets
 
 		metadata := protocol.Metadata{}

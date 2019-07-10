@@ -51,7 +51,7 @@ func (s *InviteUsersInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InviteUsersInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.UserEmailList) > 0 {
+	if s.UserEmailList != nil {
 		v := s.UserEmailList
 
 		metadata := protocol.Metadata{}
@@ -87,7 +87,7 @@ func (s InviteUsersOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InviteUsersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Invites) > 0 {
+	if s.Invites != nil {
 		v := s.Invites
 
 		metadata := protocol.Metadata{}

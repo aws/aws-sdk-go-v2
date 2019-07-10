@@ -201,7 +201,7 @@ func (s ListRecordsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LastModifiedBy", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.MergedDatasetNames) > 0 {
+	if s.MergedDatasetNames != nil {
 		v := s.MergedDatasetNames
 
 		metadata := protocol.Metadata{}
@@ -219,7 +219,7 @@ func (s ListRecordsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Records) > 0 {
+	if s.Records != nil {
 		v := s.Records
 
 		metadata := protocol.Metadata{}

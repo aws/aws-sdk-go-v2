@@ -33,7 +33,7 @@ func (s DeviceTemplate) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DeviceTemplate) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.CallbackOverrides) > 0 {
+	if s.CallbackOverrides != nil {
 		v := s.CallbackOverrides
 
 		metadata := protocol.Metadata{}
@@ -94,7 +94,7 @@ func (s PlacementDescription) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PlacementDescription) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -216,7 +216,7 @@ func (s PlacementTemplate) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PlacementTemplate) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.DefaultAttributes) > 0 {
+	if s.DefaultAttributes != nil {
 		v := s.DefaultAttributes
 
 		metadata := protocol.Metadata{}
@@ -228,7 +228,7 @@ func (s PlacementTemplate) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.DeviceTemplates) > 0 {
+	if s.DeviceTemplates != nil {
 		v := s.DeviceTemplates
 
 		metadata := protocol.Metadata{}
@@ -315,7 +315,7 @@ func (s ProjectDescription) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "projectName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -390,7 +390,7 @@ func (s ProjectSummary) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "projectName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

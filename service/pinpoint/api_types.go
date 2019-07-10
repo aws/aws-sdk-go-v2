@@ -258,7 +258,7 @@ func (s ADMMessage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ConsolidationKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Data) > 0 {
+	if s.Data != nil {
 		v := s.Data
 
 		metadata := protocol.Metadata{}
@@ -324,7 +324,7 @@ func (s ADMMessage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Sound", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Substitutions) > 0 {
+	if s.Substitutions != nil {
 		v := s.Substitutions
 
 		metadata := protocol.Metadata{}
@@ -698,7 +698,7 @@ func (s APNSMessage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "CollapseId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Data) > 0 {
+	if s.Data != nil {
 		v := s.Data
 
 		metadata := protocol.Metadata{}
@@ -746,7 +746,7 @@ func (s APNSMessage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Sound", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Substitutions) > 0 {
+	if s.Substitutions != nil {
 		v := s.Substitutions
 
 		metadata := protocol.Metadata{}
@@ -1447,7 +1447,7 @@ func (s ActivitiesResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ActivitiesResponse) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Item) > 0 {
+	if s.Item != nil {
 		v := s.Item
 
 		metadata := protocol.Metadata{}
@@ -1653,7 +1653,7 @@ func (s AddressConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ChannelType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Context) > 0 {
+	if s.Context != nil {
 		v := s.Context
 
 		metadata := protocol.Metadata{}
@@ -1671,7 +1671,7 @@ func (s AddressConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "RawContent", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Substitutions) > 0 {
+	if s.Substitutions != nil {
 		v := s.Substitutions
 
 		metadata := protocol.Metadata{}
@@ -1740,7 +1740,7 @@ func (s ApplicationResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -1851,7 +1851,7 @@ func (s ApplicationsResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ApplicationsResponse) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Item) > 0 {
+	if s.Item != nil {
 		v := s.Item
 
 		metadata := protocol.Metadata{}
@@ -1901,7 +1901,7 @@ func (s AttributeDimension) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "AttributeType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Values) > 0 {
+	if s.Values != nil {
 		v := s.Values
 
 		metadata := protocol.Metadata{}
@@ -1950,7 +1950,7 @@ func (s AttributesResource) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "AttributeType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -2207,7 +2207,7 @@ func (s BaiduMessage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Body", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Data) > 0 {
+	if s.Data != nil {
 		v := s.Data
 
 		metadata := protocol.Metadata{}
@@ -2261,7 +2261,7 @@ func (s BaiduMessage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Sound", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Substitutions) > 0 {
+	if s.Substitutions != nil {
 		v := s.Substitutions
 
 		metadata := protocol.Metadata{}
@@ -2574,7 +2574,7 @@ func (s CampaignResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CampaignResponse) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AdditionalTreatments) > 0 {
+	if s.AdditionalTreatments != nil {
 		v := s.AdditionalTreatments
 
 		metadata := protocol.Metadata{}
@@ -2688,7 +2688,7 @@ func (s CampaignResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "State", v, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -2811,7 +2811,7 @@ func (s CampaignsResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CampaignsResponse) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Item) > 0 {
+	if s.Item != nil {
 		v := s.Item
 
 		metadata := protocol.Metadata{}
@@ -2946,7 +2946,7 @@ func (s ChannelsResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ChannelsResponse) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Channels) > 0 {
+	if s.Channels != nil {
 		v := s.Channels
 
 		metadata := protocol.Metadata{}
@@ -2986,7 +2986,7 @@ func (s CreateApplicationRequest) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -3026,7 +3026,7 @@ func (s DefaultMessage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Body", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Substitutions) > 0 {
+	if s.Substitutions != nil {
 		v := s.Substitutions
 
 		metadata := protocol.Metadata{}
@@ -3102,7 +3102,7 @@ func (s DefaultPushNotificationMessage) MarshalFields(e protocol.FieldEncoder) e
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Body", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Data) > 0 {
+	if s.Data != nil {
 		v := s.Data
 
 		metadata := protocol.Metadata{}
@@ -3120,7 +3120,7 @@ func (s DefaultPushNotificationMessage) MarshalFields(e protocol.FieldEncoder) e
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SilentPush", protocol.BoolValue(v), metadata)
 	}
-	if len(s.Substitutions) > 0 {
+	if s.Substitutions != nil {
 		v := s.Substitutions
 
 		metadata := protocol.Metadata{}
@@ -3528,7 +3528,7 @@ func (s EmailMessage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "RawEmail", v, metadata)
 	}
-	if len(s.ReplyToAddresses) > 0 {
+	if s.ReplyToAddresses != nil {
 		v := s.ReplyToAddresses
 
 		metadata := protocol.Metadata{}
@@ -3546,7 +3546,7 @@ func (s EmailMessage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "SimpleEmail", v, metadata)
 	}
-	if len(s.Substitutions) > 0 {
+	if s.Substitutions != nil {
 		v := s.Substitutions
 
 		metadata := protocol.Metadata{}
@@ -3635,7 +3635,7 @@ func (s EndpointBatchItem) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Address", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -3688,7 +3688,7 @@ func (s EndpointBatchItem) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Location", v, metadata)
 	}
-	if len(s.Metrics) > 0 {
+	if s.Metrics != nil {
 		v := s.Metrics
 
 		metadata := protocol.Metadata{}
@@ -3737,7 +3737,7 @@ func (s EndpointBatchRequest) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s EndpointBatchRequest) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Item) > 0 {
+	if s.Item != nil {
 		v := s.Item
 
 		metadata := protocol.Metadata{}
@@ -4099,7 +4099,7 @@ func (s EndpointRequest) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Address", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -4146,7 +4146,7 @@ func (s EndpointRequest) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Location", v, metadata)
 	}
-	if len(s.Metrics) > 0 {
+	if s.Metrics != nil {
 		v := s.Metrics
 
 		metadata := protocol.Metadata{}
@@ -4265,7 +4265,7 @@ func (s EndpointResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ApplicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -4330,7 +4330,7 @@ func (s EndpointResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Location", v, metadata)
 	}
-	if len(s.Metrics) > 0 {
+	if s.Metrics != nil {
 		v := s.Metrics
 
 		metadata := protocol.Metadata{}
@@ -4402,7 +4402,7 @@ func (s EndpointSendConfiguration) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "BodyOverride", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Context) > 0 {
+	if s.Context != nil {
 		v := s.Context
 
 		metadata := protocol.Metadata{}
@@ -4420,7 +4420,7 @@ func (s EndpointSendConfiguration) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "RawContent", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Substitutions) > 0 {
+	if s.Substitutions != nil {
 		v := s.Substitutions
 
 		metadata := protocol.Metadata{}
@@ -4472,7 +4472,7 @@ func (s EndpointUser) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s EndpointUser) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.UserAttributes) > 0 {
+	if s.UserAttributes != nil {
 		v := s.UserAttributes
 
 		metadata := protocol.Metadata{}
@@ -4514,7 +4514,7 @@ func (s EndpointsResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s EndpointsResponse) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Item) > 0 {
+	if s.Item != nil {
 		v := s.Item
 
 		metadata := protocol.Metadata{}
@@ -4590,7 +4590,7 @@ func (s Event) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "AppVersionCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -4614,7 +4614,7 @@ func (s Event) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "EventType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Metrics) > 0 {
+	if s.Metrics != nil {
 		v := s.Metrics
 
 		metadata := protocol.Metadata{}
@@ -4673,7 +4673,7 @@ func (s EventDimensions) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s EventDimensions) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -4691,7 +4691,7 @@ func (s EventDimensions) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "EventType", v, metadata)
 	}
-	if len(s.Metrics) > 0 {
+	if s.Metrics != nil {
 		v := s.Metrics
 
 		metadata := protocol.Metadata{}
@@ -4843,7 +4843,7 @@ func (s EventsBatch) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Endpoint", v, metadata)
 	}
-	if len(s.Events) > 0 {
+	if s.Events != nil {
 		v := s.Events
 
 		metadata := protocol.Metadata{}
@@ -4875,7 +4875,7 @@ func (s EventsRequest) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s EventsRequest) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.BatchItem) > 0 {
+	if s.BatchItem != nil {
 		v := s.BatchItem
 
 		metadata := protocol.Metadata{}
@@ -4910,7 +4910,7 @@ func (s EventsResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s EventsResponse) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Results) > 0 {
+	if s.Results != nil {
 		v := s.Results
 
 		metadata := protocol.Metadata{}
@@ -5132,7 +5132,7 @@ func (s ExportJobResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "FailedPieces", protocol.Int64Value(v), metadata)
 	}
-	if len(s.Failures) > 0 {
+	if s.Failures != nil {
 		v := s.Failures
 
 		metadata := protocol.Metadata{}
@@ -5203,7 +5203,7 @@ func (s ExportJobsResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ExportJobsResponse) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Item) > 0 {
+	if s.Item != nil {
 		v := s.Item
 
 		metadata := protocol.Metadata{}
@@ -5484,7 +5484,7 @@ func (s GCMMessage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "CollapseKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Data) > 0 {
+	if s.Data != nil {
 		v := s.Data
 
 		metadata := protocol.Metadata{}
@@ -5550,7 +5550,7 @@ func (s GCMMessage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Sound", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Substitutions) > 0 {
+	if s.Substitutions != nil {
 		v := s.Substitutions
 
 		metadata := protocol.Metadata{}
@@ -5947,7 +5947,7 @@ func (s ImportJobResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "FailedPieces", protocol.Int64Value(v), metadata)
 	}
-	if len(s.Failures) > 0 {
+	if s.Failures != nil {
 		v := s.Failures
 
 		metadata := protocol.Metadata{}
@@ -6018,7 +6018,7 @@ func (s ImportJobsResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ImportJobsResponse) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Item) > 0 {
+	if s.Item != nil {
 		v := s.Item
 
 		metadata := protocol.Metadata{}
@@ -6066,7 +6066,7 @@ func (s ItemResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "EndpointItemResponse", v, metadata)
 	}
-	if len(s.EventsItemResponse) > 0 {
+	if s.EventsItemResponse != nil {
 		v := s.EventsItemResponse
 
 		metadata := protocol.Metadata{}
@@ -6373,7 +6373,7 @@ func (s MessageRequest) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s MessageRequest) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Addresses) > 0 {
+	if s.Addresses != nil {
 		v := s.Addresses
 
 		metadata := protocol.Metadata{}
@@ -6385,7 +6385,7 @@ func (s MessageRequest) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.Context) > 0 {
+	if s.Context != nil {
 		v := s.Context
 
 		metadata := protocol.Metadata{}
@@ -6397,7 +6397,7 @@ func (s MessageRequest) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.Endpoints) > 0 {
+	if s.Endpoints != nil {
 		v := s.Endpoints
 
 		metadata := protocol.Metadata{}
@@ -6458,7 +6458,7 @@ func (s MessageResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ApplicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.EndpointResult) > 0 {
+	if s.EndpointResult != nil {
 		v := s.EndpointResult
 
 		metadata := protocol.Metadata{}
@@ -6476,7 +6476,7 @@ func (s MessageResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "RequestId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Result) > 0 {
+	if s.Result != nil {
 		v := s.Result
 
 		metadata := protocol.Metadata{}
@@ -6842,7 +6842,7 @@ func (s PublicEndpoint) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Address", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -6889,7 +6889,7 @@ func (s PublicEndpoint) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Location", v, metadata)
 	}
-	if len(s.Metrics) > 0 {
+	if s.Metrics != nil {
 		v := s.Metrics
 
 		metadata := protocol.Metadata{}
@@ -7277,7 +7277,7 @@ func (s SMSMessage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SenderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Substitutions) > 0 {
+	if s.Substitutions != nil {
 		v := s.Substitutions
 
 		metadata := protocol.Metadata{}
@@ -7516,7 +7516,7 @@ func (s SegmentDimensions) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SegmentDimensions) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -7546,7 +7546,7 @@ func (s SegmentDimensions) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Location", v, metadata)
 	}
-	if len(s.Metrics) > 0 {
+	if s.Metrics != nil {
 		v := s.Metrics
 
 		metadata := protocol.Metadata{}
@@ -7558,7 +7558,7 @@ func (s SegmentDimensions) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.UserAttributes) > 0 {
+	if s.UserAttributes != nil {
 		v := s.UserAttributes
 
 		metadata := protocol.Metadata{}
@@ -7609,7 +7609,7 @@ func (s SegmentGroup) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SegmentGroup) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Dimensions) > 0 {
+	if s.Dimensions != nil {
 		v := s.Dimensions
 
 		metadata := protocol.Metadata{}
@@ -7621,7 +7621,7 @@ func (s SegmentGroup) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.SourceSegments) > 0 {
+	if s.SourceSegments != nil {
 		v := s.SourceSegments
 
 		metadata := protocol.Metadata{}
@@ -7670,7 +7670,7 @@ func (s SegmentGroupList) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SegmentGroupList) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Groups) > 0 {
+	if s.Groups != nil {
 		v := s.Groups
 
 		metadata := protocol.Metadata{}
@@ -7727,7 +7727,7 @@ func (s SegmentImportResource) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SegmentImportResource) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ChannelCounts) > 0 {
+	if s.ChannelCounts != nil {
 		v := s.ChannelCounts
 
 		metadata := protocol.Metadata{}
@@ -7956,7 +7956,7 @@ func (s SegmentResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SegmentType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -7997,7 +7997,7 @@ func (s SegmentsResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SegmentsResponse) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Item) > 0 {
+	if s.Item != nil {
 		v := s.Item
 
 		metadata := protocol.Metadata{}
@@ -8049,7 +8049,7 @@ func (s SendUsersMessageRequest) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SendUsersMessageRequest) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Context) > 0 {
+	if s.Context != nil {
 		v := s.Context
 
 		metadata := protocol.Metadata{}
@@ -8073,7 +8073,7 @@ func (s SendUsersMessageRequest) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "TraceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Users) > 0 {
+	if s.Users != nil {
 		v := s.Users
 
 		metadata := protocol.Metadata{}
@@ -8125,7 +8125,7 @@ func (s SendUsersMessageResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "RequestId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Result) > 0 {
+	if s.Result != nil {
 		v := s.Result
 
 		metadata := protocol.Metadata{}
@@ -8226,7 +8226,7 @@ func (s SetDimension) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "DimensionType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Values) > 0 {
+	if s.Values != nil {
 		v := s.Values
 
 		metadata := protocol.Metadata{}
@@ -8351,7 +8351,7 @@ func (s *TagsModel) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s TagsModel) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -8461,7 +8461,7 @@ func (s UpdateAttributesRequest) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateAttributesRequest) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Blacklist) > 0 {
+	if s.Blacklist != nil {
 		v := s.Blacklist
 
 		metadata := protocol.Metadata{}
@@ -8652,7 +8652,7 @@ func (s VoiceMessage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "OriginationNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Substitutions) > 0 {
+	if s.Substitutions != nil {
 		v := s.Substitutions
 
 		metadata := protocol.Metadata{}
@@ -8802,7 +8802,7 @@ func (s WriteCampaignRequest) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s WriteCampaignRequest) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AdditionalTreatments) > 0 {
+	if s.AdditionalTreatments != nil {
 		v := s.AdditionalTreatments
 
 		metadata := protocol.Metadata{}
@@ -8874,7 +8874,7 @@ func (s WriteCampaignRequest) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SegmentVersion", protocol.Int64Value(v), metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -8984,7 +8984,7 @@ func (s WriteSegmentRequest) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "SegmentGroups", v, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

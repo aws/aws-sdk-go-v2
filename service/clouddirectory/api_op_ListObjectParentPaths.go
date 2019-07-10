@@ -112,7 +112,7 @@ func (s ListObjectParentPathsOutput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.PathToObjectIdentifiersList) > 0 {
+	if s.PathToObjectIdentifiersList != nil {
 		v := s.PathToObjectIdentifiersList
 
 		metadata := protocol.Metadata{}

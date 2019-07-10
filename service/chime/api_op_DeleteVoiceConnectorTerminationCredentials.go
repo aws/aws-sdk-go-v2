@@ -47,7 +47,7 @@ func (s *DeleteVoiceConnectorTerminationCredentialsInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DeleteVoiceConnectorTerminationCredentialsInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.Usernames) > 0 {
+	if s.Usernames != nil {
 		v := s.Usernames
 
 		metadata := protocol.Metadata{}

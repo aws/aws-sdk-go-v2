@@ -101,7 +101,7 @@ func (s ListReusableDelegationSetsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListReusableDelegationSetsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.DelegationSets) > 0 {
+	if s.DelegationSets != nil {
 		v := s.DelegationSets
 
 		metadata := protocol.Metadata{ListLocationName: "DelegationSet"}

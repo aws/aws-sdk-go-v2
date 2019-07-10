@@ -69,7 +69,7 @@ func (s GetConnectivityInfoOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetConnectivityInfoOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ConnectivityInfo) > 0 {
+	if s.ConnectivityInfo != nil {
 		v := s.ConnectivityInfo
 
 		metadata := protocol.Metadata{}

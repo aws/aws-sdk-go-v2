@@ -202,7 +202,7 @@ func (s AliasRoutingConfiguration) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s AliasRoutingConfiguration) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AdditionalVersionWeights) > 0 {
+	if s.AdditionalVersionWeights != nil {
 		v := s.AdditionalVersionWeights
 
 		metadata := protocol.Metadata{}
@@ -284,7 +284,7 @@ func (s Environment) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Environment) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Variables) > 0 {
+	if s.Variables != nil {
 		v := s.Variables
 
 		metadata := protocol.Metadata{}
@@ -358,7 +358,7 @@ func (s EnvironmentResponse) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Error", v, metadata)
 	}
-	if len(s.Variables) > 0 {
+	if s.Variables != nil {
 		v := s.Variables
 
 		metadata := protocol.Metadata{}
@@ -708,7 +708,7 @@ func (s FunctionConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LastModified", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Layers) > 0 {
+	if s.Layers != nil {
 		v := s.Layers
 
 		metadata := protocol.Metadata{}
@@ -960,7 +960,7 @@ func (s LayerVersionsListItem) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s LayerVersionsListItem) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.CompatibleRuntimes) > 0 {
+	if s.CompatibleRuntimes != nil {
 		v := s.CompatibleRuntimes
 
 		metadata := protocol.Metadata{}
@@ -1117,7 +1117,7 @@ func (s VpcConfig) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s VpcConfig) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.SecurityGroupIds) > 0 {
+	if s.SecurityGroupIds != nil {
 		v := s.SecurityGroupIds
 
 		metadata := protocol.Metadata{}
@@ -1129,7 +1129,7 @@ func (s VpcConfig) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.SubnetIds) > 0 {
+	if s.SubnetIds != nil {
 		v := s.SubnetIds
 
 		metadata := protocol.Metadata{}
@@ -1166,7 +1166,7 @@ func (s VpcConfigResponse) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s VpcConfigResponse) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.SecurityGroupIds) > 0 {
+	if s.SecurityGroupIds != nil {
 		v := s.SecurityGroupIds
 
 		metadata := protocol.Metadata{}
@@ -1178,7 +1178,7 @@ func (s VpcConfigResponse) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.SubnetIds) > 0 {
+	if s.SubnetIds != nil {
 		v := s.SubnetIds
 
 		metadata := protocol.Metadata{}

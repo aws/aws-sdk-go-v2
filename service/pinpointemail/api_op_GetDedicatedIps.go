@@ -82,7 +82,7 @@ func (s GetDedicatedIpsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetDedicatedIpsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.DedicatedIps) > 0 {
+	if s.DedicatedIps != nil {
 		v := s.DedicatedIps
 
 		metadata := protocol.Metadata{}

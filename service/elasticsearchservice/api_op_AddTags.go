@@ -67,7 +67,7 @@ func (s AddTagsInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.TagList) > 0 {
+	if s.TagList != nil {
 		v := s.TagList
 
 		metadata := protocol.Metadata{}

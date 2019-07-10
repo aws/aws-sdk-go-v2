@@ -98,7 +98,7 @@ func (s GetDeliverabilityTestReportOutput) MarshalFields(e protocol.FieldEncoder
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "DeliverabilityTestReport", v, metadata)
 	}
-	if len(s.IspPlacements) > 0 {
+	if s.IspPlacements != nil {
 		v := s.IspPlacements
 
 		metadata := protocol.Metadata{}
@@ -122,7 +122,7 @@ func (s GetDeliverabilityTestReportOutput) MarshalFields(e protocol.FieldEncoder
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "OverallPlacement", v, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

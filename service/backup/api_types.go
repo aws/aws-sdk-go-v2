@@ -243,7 +243,7 @@ func (s BackupPlan) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "BackupPlanName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Rules) > 0 {
+	if s.Rules != nil {
 		v := s.Rules
 
 		metadata := protocol.Metadata{}
@@ -316,7 +316,7 @@ func (s BackupPlanInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "BackupPlanName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Rules) > 0 {
+	if s.Rules != nil {
 		v := s.Rules
 
 		metadata := protocol.Metadata{}
@@ -533,7 +533,7 @@ func (s BackupRule) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Lifecycle", v, metadata)
 	}
-	if len(s.RecoveryPointTags) > 0 {
+	if s.RecoveryPointTags != nil {
 		v := s.RecoveryPointTags
 
 		metadata := protocol.Metadata{}
@@ -659,7 +659,7 @@ func (s BackupRuleInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Lifecycle", v, metadata)
 	}
-	if len(s.RecoveryPointTags) > 0 {
+	if s.RecoveryPointTags != nil {
 		v := s.RecoveryPointTags
 
 		metadata := protocol.Metadata{}
@@ -763,7 +763,7 @@ func (s BackupSelection) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "IamRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ListOfTags) > 0 {
+	if s.ListOfTags != nil {
 		v := s.ListOfTags
 
 		metadata := protocol.Metadata{}
@@ -775,7 +775,7 @@ func (s BackupSelection) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Resources) > 0 {
+	if s.Resources != nil {
 		v := s.Resources
 
 		metadata := protocol.Metadata{}

@@ -1423,7 +1423,7 @@ func (s *ProposalActions) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ProposalActions) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Invitations) > 0 {
+	if s.Invitations != nil {
 		v := s.Invitations
 
 		metadata := protocol.Metadata{}
@@ -1435,7 +1435,7 @@ func (s ProposalActions) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Removals) > 0 {
+	if s.Removals != nil {
 		v := s.Removals
 
 		metadata := protocol.Metadata{}

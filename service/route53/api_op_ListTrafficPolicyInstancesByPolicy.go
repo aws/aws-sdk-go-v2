@@ -223,7 +223,7 @@ func (s ListTrafficPolicyInstancesByPolicyOutput) MarshalFields(e protocol.Field
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "TrafficPolicyInstanceTypeMarker", v, metadata)
 	}
-	if len(s.TrafficPolicyInstances) > 0 {
+	if s.TrafficPolicyInstances != nil {
 		v := s.TrafficPolicyInstances
 
 		metadata := protocol.Metadata{ListLocationName: "TrafficPolicyInstance"}

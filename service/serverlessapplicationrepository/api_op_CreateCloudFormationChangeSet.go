@@ -93,7 +93,7 @@ func (s *CreateCloudFormationChangeSetInput) Validate() error {
 func (s CreateCloudFormationChangeSetInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.Capabilities) > 0 {
+	if s.Capabilities != nil {
 		v := s.Capabilities
 
 		metadata := protocol.Metadata{}
@@ -123,7 +123,7 @@ func (s CreateCloudFormationChangeSetInput) MarshalFields(e protocol.FieldEncode
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.NotificationArns) > 0 {
+	if s.NotificationArns != nil {
 		v := s.NotificationArns
 
 		metadata := protocol.Metadata{}
@@ -135,7 +135,7 @@ func (s CreateCloudFormationChangeSetInput) MarshalFields(e protocol.FieldEncode
 		ls0.End()
 
 	}
-	if len(s.ParameterOverrides) > 0 {
+	if s.ParameterOverrides != nil {
 		v := s.ParameterOverrides
 
 		metadata := protocol.Metadata{}
@@ -147,7 +147,7 @@ func (s CreateCloudFormationChangeSetInput) MarshalFields(e protocol.FieldEncode
 		ls0.End()
 
 	}
-	if len(s.ResourceTypes) > 0 {
+	if s.ResourceTypes != nil {
 		v := s.ResourceTypes
 
 		metadata := protocol.Metadata{}
@@ -177,7 +177,7 @@ func (s CreateCloudFormationChangeSetInput) MarshalFields(e protocol.FieldEncode
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "stackName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

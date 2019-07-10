@@ -153,7 +153,7 @@ func (s CurrentMetricResult) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CurrentMetricResult) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Collections) > 0 {
+	if s.Collections != nil {
 		v := s.Collections
 
 		metadata := protocol.Metadata{}
@@ -241,7 +241,7 @@ func (s *Filters) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Filters) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Channels) > 0 {
+	if s.Channels != nil {
 		v := s.Channels
 
 		metadata := protocol.Metadata{}
@@ -253,7 +253,7 @@ func (s Filters) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Queues) > 0 {
+	if s.Queues != nil {
 		v := s.Queues
 
 		metadata := protocol.Metadata{}
@@ -659,7 +659,7 @@ func (s HistoricalMetricResult) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s HistoricalMetricResult) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Collections) > 0 {
+	if s.Collections != nil {
 		v := s.Collections
 
 		metadata := protocol.Metadata{}
@@ -924,7 +924,7 @@ func (s User) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "RoutingProfileId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SecurityProfileIds) > 0 {
+	if s.SecurityProfileIds != nil {
 		v := s.SecurityProfileIds
 
 		metadata := protocol.Metadata{}

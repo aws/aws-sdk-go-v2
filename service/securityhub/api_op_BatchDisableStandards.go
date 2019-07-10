@@ -46,7 +46,7 @@ func (s *BatchDisableStandardsInput) Validate() error {
 func (s BatchDisableStandardsInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.StandardsSubscriptionArns) > 0 {
+	if s.StandardsSubscriptionArns != nil {
 		v := s.StandardsSubscriptionArns
 
 		metadata := protocol.Metadata{}
@@ -76,7 +76,7 @@ func (s BatchDisableStandardsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchDisableStandardsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.StandardsSubscriptions) > 0 {
+	if s.StandardsSubscriptions != nil {
 		v := s.StandardsSubscriptions
 
 		metadata := protocol.Metadata{}

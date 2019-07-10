@@ -107,7 +107,7 @@ func (s ListConfigurationRevisionsOutput) MarshalFields(e protocol.FieldEncoder)
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Revisions) > 0 {
+	if s.Revisions != nil {
 		v := s.Revisions
 
 		metadata := protocol.Metadata{}
