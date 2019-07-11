@@ -75,7 +75,7 @@ func (s UpdateFlowEntitlementInput) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "encryption", v, metadata)
 	}
-	if len(s.Subscribers) > 0 {
+	if s.Subscribers != nil {
 		v := s.Subscribers
 
 		metadata := protocol.Metadata{}

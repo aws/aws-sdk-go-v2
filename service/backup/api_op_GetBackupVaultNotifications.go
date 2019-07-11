@@ -91,7 +91,7 @@ func (s GetBackupVaultNotificationsOutput) MarshalFields(e protocol.FieldEncoder
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "BackupVaultArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.BackupVaultEvents) > 0 {
+	if s.BackupVaultEvents != nil {
 		v := s.BackupVaultEvents
 
 		metadata := protocol.Metadata{}

@@ -166,7 +166,7 @@ func (s CreateUserInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "RoutingProfileId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SecurityProfileIds) > 0 {
+	if s.SecurityProfileIds != nil {
 		v := s.SecurityProfileIds
 
 		metadata := protocol.Metadata{}

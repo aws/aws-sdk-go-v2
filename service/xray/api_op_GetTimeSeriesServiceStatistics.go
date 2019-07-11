@@ -158,7 +158,7 @@ func (s GetTimeSeriesServiceStatisticsOutput) MarshalFields(e protocol.FieldEnco
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.TimeSeriesServiceStatistics) > 0 {
+	if s.TimeSeriesServiceStatistics != nil {
 		v := s.TimeSeriesServiceStatistics
 
 		metadata := protocol.Metadata{}

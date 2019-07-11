@@ -120,7 +120,7 @@ func (s SearchAvailablePhoneNumbersOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SearchAvailablePhoneNumbersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.E164PhoneNumbers) > 0 {
+	if s.E164PhoneNumbers != nil {
 		v := s.E164PhoneNumbers
 
 		metadata := protocol.Metadata{}

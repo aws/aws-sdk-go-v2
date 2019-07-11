@@ -84,7 +84,7 @@ func (s BrokerNodeGroupInfo) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "brokerAZDistribution", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.ClientSubnets) > 0 {
+	if s.ClientSubnets != nil {
 		v := s.ClientSubnets
 
 		metadata := protocol.Metadata{}
@@ -102,7 +102,7 @@ func (s BrokerNodeGroupInfo) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "instanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SecurityGroups) > 0 {
+	if s.SecurityGroups != nil {
 		v := s.SecurityGroups
 
 		metadata := protocol.Metadata{}
@@ -402,7 +402,7 @@ func (s Configuration) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.KafkaVersions) > 0 {
+	if s.KafkaVersions != nil {
 		v := s.KafkaVersions
 
 		metadata := protocol.Metadata{}

@@ -79,7 +79,7 @@ func (s ListDeliverabilityTestReportsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListDeliverabilityTestReportsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.DeliverabilityTestReports) > 0 {
+	if s.DeliverabilityTestReports != nil {
 		v := s.DeliverabilityTestReports
 
 		metadata := protocol.Metadata{}

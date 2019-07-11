@@ -43,7 +43,7 @@ func (s *FinalizeDeviceClaimInput) Validate() error {
 func (s FinalizeDeviceClaimInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

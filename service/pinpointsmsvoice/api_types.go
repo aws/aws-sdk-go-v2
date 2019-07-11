@@ -130,7 +130,7 @@ func (s EventDestination) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "KinesisFirehoseDestination", v, metadata)
 	}
-	if len(s.MatchingEventTypes) > 0 {
+	if s.MatchingEventTypes != nil {
 		v := s.MatchingEventTypes
 
 		metadata := protocol.Metadata{}
@@ -209,7 +209,7 @@ func (s EventDestinationDefinition) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "KinesisFirehoseDestination", v, metadata)
 	}
-	if len(s.MatchingEventTypes) > 0 {
+	if s.MatchingEventTypes != nil {
 		v := s.MatchingEventTypes
 
 		metadata := protocol.Metadata{}

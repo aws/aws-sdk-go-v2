@@ -117,7 +117,7 @@ func (s ListAliasesOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListAliasesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Aliases) > 0 {
+	if s.Aliases != nil {
 		v := s.Aliases
 
 		metadata := protocol.Metadata{}

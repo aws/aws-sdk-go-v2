@@ -59,7 +59,7 @@ func (s *GetMediaForFragmentListInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetMediaForFragmentListInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.Fragments) > 0 {
+	if s.Fragments != nil {
 		v := s.Fragments
 
 		metadata := protocol.Metadata{}

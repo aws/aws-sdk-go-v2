@@ -93,7 +93,7 @@ func (s Account) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SupportedLicenses) > 0 {
+	if s.SupportedLicenses != nil {
 		v := s.SupportedLicenses
 
 		metadata := protocol.Metadata{}
@@ -486,7 +486,7 @@ func (s Origination) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Disabled", protocol.BoolValue(v), metadata)
 	}
-	if len(s.Routes) > 0 {
+	if s.Routes != nil {
 		v := s.Routes
 
 		metadata := protocol.Metadata{}
@@ -627,7 +627,7 @@ func (s PhoneNumber) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PhoneNumber) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Associations) > 0 {
+	if s.Associations != nil {
 		v := s.Associations
 
 		metadata := protocol.Metadata{}
@@ -895,7 +895,7 @@ func (s PhoneNumberOrder) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "CreatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
-	if len(s.OrderedPhoneNumbers) > 0 {
+	if s.OrderedPhoneNumbers != nil {
 		v := s.OrderedPhoneNumbers
 
 		metadata := protocol.Metadata{}
@@ -1049,7 +1049,7 @@ func (s *Termination) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Termination) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.CallingRegions) > 0 {
+	if s.CallingRegions != nil {
 		v := s.CallingRegions
 
 		metadata := protocol.Metadata{}
@@ -1061,7 +1061,7 @@ func (s Termination) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.CidrAllowedList) > 0 {
+	if s.CidrAllowedList != nil {
 		v := s.CidrAllowedList
 
 		metadata := protocol.Metadata{}

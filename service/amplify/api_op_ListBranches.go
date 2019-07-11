@@ -101,7 +101,7 @@ func (s ListBranchesOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListBranchesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Branches) > 0 {
+	if s.Branches != nil {
 		v := s.Branches
 
 		metadata := protocol.Metadata{}

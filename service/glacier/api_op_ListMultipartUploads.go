@@ -120,7 +120,7 @@ func (s ListMultipartUploadsOutput) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.UploadsList) > 0 {
+	if s.UploadsList != nil {
 		v := s.UploadsList
 
 		metadata := protocol.Metadata{}

@@ -67,7 +67,7 @@ func (s *PutBackupVaultNotificationsInput) Validate() error {
 func (s PutBackupVaultNotificationsInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.BackupVaultEvents) > 0 {
+	if s.BackupVaultEvents != nil {
 		v := s.BackupVaultEvents
 
 		metadata := protocol.Metadata{}

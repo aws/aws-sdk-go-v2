@@ -80,7 +80,7 @@ func (s ListScheduledAuditsOutput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ScheduledAudits) > 0 {
+	if s.ScheduledAudits != nil {
 		v := s.ScheduledAudits
 
 		metadata := protocol.Metadata{}

@@ -105,7 +105,7 @@ func (s GetDeploymentStatusOutput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "DeploymentType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.ErrorDetails) > 0 {
+	if s.ErrorDetails != nil {
 		v := s.ErrorDetails
 
 		metadata := protocol.Metadata{}

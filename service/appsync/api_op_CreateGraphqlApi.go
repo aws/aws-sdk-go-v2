@@ -92,7 +92,7 @@ func (s *CreateGraphqlApiInput) Validate() error {
 func (s CreateGraphqlApiInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.AdditionalAuthenticationProviders) > 0 {
+	if s.AdditionalAuthenticationProviders != nil {
 		v := s.AdditionalAuthenticationProviders
 
 		metadata := protocol.Metadata{}
@@ -128,7 +128,7 @@ func (s CreateGraphqlApiInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "openIDConnectConfig", v, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

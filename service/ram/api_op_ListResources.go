@@ -82,7 +82,7 @@ func (s ListResourcesInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "principal", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResourceArns) > 0 {
+	if s.ResourceArns != nil {
 		v := s.ResourceArns
 
 		metadata := protocol.Metadata{}
@@ -100,7 +100,7 @@ func (s ListResourcesInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "resourceOwner", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.ResourceShareArns) > 0 {
+	if s.ResourceShareArns != nil {
 		v := s.ResourceShareArns
 
 		metadata := protocol.Metadata{}
@@ -146,7 +146,7 @@ func (s ListResourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Resources) > 0 {
+	if s.Resources != nil {
 		v := s.Resources
 
 		metadata := protocol.Metadata{}

@@ -131,7 +131,7 @@ func (s DescribeConfigurationOutput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

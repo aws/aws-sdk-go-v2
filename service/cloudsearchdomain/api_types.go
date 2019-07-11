@@ -59,7 +59,7 @@ func (s BucketInfo) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BucketInfo) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Buckets) > 0 {
+	if s.Buckets != nil {
 		v := s.Buckets
 
 		metadata := protocol.Metadata{}
@@ -232,7 +232,7 @@ func (s Hit) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Hit) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Exprs) > 0 {
+	if s.Exprs != nil {
 		v := s.Exprs
 
 		metadata := protocol.Metadata{}
@@ -244,7 +244,7 @@ func (s Hit) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.Fields) > 0 {
+	if s.Fields != nil {
 		v := s.Fields
 
 		metadata := protocol.Metadata{}
@@ -261,7 +261,7 @@ func (s Hit) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.Highlights) > 0 {
+	if s.Highlights != nil {
 		v := s.Highlights
 
 		metadata := protocol.Metadata{}
@@ -319,7 +319,7 @@ func (s Hits) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "found", protocol.Int64Value(v), metadata)
 	}
-	if len(s.Hit) > 0 {
+	if s.Hit != nil {
 		v := s.Hit
 
 		metadata := protocol.Metadata{}
@@ -407,7 +407,7 @@ func (s SuggestModel) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "query", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Suggestions) > 0 {
+	if s.Suggestions != nil {
 		v := s.Suggestions
 
 		metadata := protocol.Metadata{}

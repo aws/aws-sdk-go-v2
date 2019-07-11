@@ -59,7 +59,7 @@ func (s DescribeJobDefinitionsInput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "jobDefinitionName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.JobDefinitions) > 0 {
+	if s.JobDefinitions != nil {
 		v := s.JobDefinitions
 
 		metadata := protocol.Metadata{}
@@ -113,7 +113,7 @@ func (s DescribeJobDefinitionsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeJobDefinitionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.JobDefinitions) > 0 {
+	if s.JobDefinitions != nil {
 		v := s.JobDefinitions
 
 		metadata := protocol.Metadata{}

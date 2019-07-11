@@ -88,7 +88,7 @@ func (s GetDataflowEndpointGroupOutput) MarshalFields(e protocol.FieldEncoder) e
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "dataflowEndpointGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.EndpointsDetails) > 0 {
+	if s.EndpointsDetails != nil {
 		v := s.EndpointsDetails
 
 		metadata := protocol.Metadata{}
@@ -100,7 +100,7 @@ func (s GetDataflowEndpointGroupOutput) MarshalFields(e protocol.FieldEncoder) e
 		ls0.End()
 
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

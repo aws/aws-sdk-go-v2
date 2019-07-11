@@ -114,7 +114,7 @@ func (s LookupPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.PolicyToPathList) > 0 {
+	if s.PolicyToPathList != nil {
 		v := s.PolicyToPathList
 
 		metadata := protocol.Metadata{}

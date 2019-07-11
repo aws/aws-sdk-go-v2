@@ -67,7 +67,7 @@ func (s ActiveTrustedSigners) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), metadata)
 	}
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "Signer"}
@@ -126,7 +126,7 @@ func (s *Aliases) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Aliases) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "CNAME"}
@@ -228,7 +228,7 @@ func (s AllowedMethods) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "CachedMethods", v, metadata)
 	}
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "Method"}
@@ -614,7 +614,7 @@ func (s *CacheBehaviors) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CacheBehaviors) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "CacheBehavior"}
@@ -688,7 +688,7 @@ func (s *CachedMethods) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CachedMethods) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "Method"}
@@ -891,7 +891,7 @@ func (s CloudFrontOriginAccessIdentityList) MarshalFields(e protocol.FieldEncode
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), metadata)
 	}
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "CloudFrontOriginAccessIdentitySummary"}
@@ -1147,7 +1147,7 @@ func (s *ContentTypeProfiles) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ContentTypeProfiles) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "ContentTypeProfile"}
@@ -1209,7 +1209,7 @@ func (s *CookieNames) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CookieNames) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "Name"}
@@ -1487,7 +1487,7 @@ func (s *CustomErrorResponses) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CustomErrorResponses) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "CustomErrorResponse"}
@@ -1552,7 +1552,7 @@ func (s *CustomHeaders) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CustomHeaders) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "OriginCustomHeader"}
@@ -2626,7 +2626,7 @@ func (s DistributionList) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), metadata)
 	}
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "DistributionSummary"}
@@ -3018,7 +3018,7 @@ func (s *EncryptionEntities) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s EncryptionEntities) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "EncryptionEntity"}
@@ -3289,7 +3289,7 @@ func (s FieldLevelEncryptionList) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s FieldLevelEncryptionList) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "FieldLevelEncryptionSummary"}
@@ -3493,7 +3493,7 @@ func (s FieldLevelEncryptionProfileList) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s FieldLevelEncryptionProfileList) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "FieldLevelEncryptionProfileSummary"}
@@ -3698,7 +3698,7 @@ func (s *FieldPatterns) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s FieldPatterns) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "FieldPattern"}
@@ -3904,7 +3904,7 @@ func (s *GeoRestriction) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GeoRestriction) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "Location"}
@@ -4002,7 +4002,7 @@ func (s *Headers) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Headers) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "Name"}
@@ -4216,7 +4216,7 @@ func (s InvalidationList) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), metadata)
 	}
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "InvalidationSummary"}
@@ -4333,7 +4333,7 @@ func (s KeyPairIds) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s KeyPairIds) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "KeyPairId"}
@@ -4493,7 +4493,7 @@ func (s *LambdaFunctionAssociations) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s LambdaFunctionAssociations) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "LambdaFunctionAssociation"}
@@ -5074,7 +5074,7 @@ func (s *OriginGroupMembers) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OriginGroupMembers) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "OriginGroupMember"}
@@ -5137,7 +5137,7 @@ func (s *OriginGroups) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OriginGroups) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "OriginGroup"}
@@ -5201,7 +5201,7 @@ func (s *OriginSslProtocols) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OriginSslProtocols) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "SslProtocol"}
@@ -5274,7 +5274,7 @@ func (s *Origins) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Origins) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "Origin"}
@@ -5333,7 +5333,7 @@ func (s *Paths) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Paths) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "Path"}
@@ -5522,7 +5522,7 @@ func (s PublicKeyList) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PublicKeyList) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "PublicKeySummary"}
@@ -5779,7 +5779,7 @@ func (s *QueryArgProfiles) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s QueryArgProfiles) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "QueryArgProfile"}
@@ -5836,7 +5836,7 @@ func (s *QueryStringCacheKeys) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s QueryStringCacheKeys) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "Name"}
@@ -6128,7 +6128,7 @@ func (s *StatusCodes) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s StatusCodes) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "StatusCode"}
@@ -6539,7 +6539,7 @@ func (s StreamingDistributionList) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), metadata)
 	}
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "StreamingDistributionSummary"}
@@ -6883,7 +6883,7 @@ func (s TagKeys) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s TagKeys) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "Key"}
@@ -6931,7 +6931,7 @@ func (s *Tags) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Tags) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "Tag"}
@@ -7014,7 +7014,7 @@ func (s TrustedSigners) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), metadata)
 	}
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{ListLocationName: "AwsAccountNumber"}

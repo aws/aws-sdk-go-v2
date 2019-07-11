@@ -53,7 +53,7 @@ func (s *UpdateInputInput) Validate() error {
 func (s UpdateInputInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.Destinations) > 0 {
+	if s.Destinations != nil {
 		v := s.Destinations
 
 		metadata := protocol.Metadata{}
@@ -65,7 +65,7 @@ func (s UpdateInputInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.InputSecurityGroups) > 0 {
+	if s.InputSecurityGroups != nil {
 		v := s.InputSecurityGroups
 
 		metadata := protocol.Metadata{}
@@ -77,7 +77,7 @@ func (s UpdateInputInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.MediaConnectFlows) > 0 {
+	if s.MediaConnectFlows != nil {
 		v := s.MediaConnectFlows
 
 		metadata := protocol.Metadata{}
@@ -101,7 +101,7 @@ func (s UpdateInputInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Sources) > 0 {
+	if s.Sources != nil {
 		v := s.Sources
 
 		metadata := protocol.Metadata{}

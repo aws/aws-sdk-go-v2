@@ -67,7 +67,7 @@ func (s GetConfigurationSetEventDestinationsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetConfigurationSetEventDestinationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.EventDestinations) > 0 {
+	if s.EventDestinations != nil {
 		v := s.EventDestinations
 
 		metadata := protocol.Metadata{}

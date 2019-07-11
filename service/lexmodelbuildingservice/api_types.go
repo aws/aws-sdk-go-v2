@@ -155,7 +155,7 @@ func (s BotChannelAssociation) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "botAlias", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.BotConfiguration) > 0 {
+	if s.BotConfiguration != nil {
 		v := s.BotConfiguration
 
 		metadata := protocol.Metadata{}
@@ -310,7 +310,7 @@ func (s BuiltinIntentMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "signature", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SupportedLocales) > 0 {
+	if s.SupportedLocales != nil {
 		v := s.SupportedLocales
 
 		metadata := protocol.Metadata{}
@@ -377,7 +377,7 @@ func (s BuiltinSlotTypeMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "signature", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SupportedLocales) > 0 {
+	if s.SupportedLocales != nil {
 		v := s.SupportedLocales
 
 		metadata := protocol.Metadata{}
@@ -505,7 +505,7 @@ func (s *EnumerationValue) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s EnumerationValue) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Synonyms) > 0 {
+	if s.Synonyms != nil {
 		v := s.Synonyms
 
 		metadata := protocol.Metadata{}
@@ -936,7 +936,7 @@ func (s Prompt) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "maxAttempts", protocol.Int64Value(v), metadata)
 	}
-	if len(s.Messages) > 0 {
+	if s.Messages != nil {
 		v := s.Messages
 
 		metadata := protocol.Metadata{}
@@ -1108,7 +1108,7 @@ func (s Slot) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "responseCard", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SampleUtterances) > 0 {
+	if s.SampleUtterances != nil {
 		v := s.SampleUtterances
 
 		metadata := protocol.Metadata{}
@@ -1261,7 +1261,7 @@ func (s *Statement) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Statement) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Messages) > 0 {
+	if s.Messages != nil {
 		v := s.Messages
 
 		metadata := protocol.Metadata{}
@@ -1371,7 +1371,7 @@ func (s UtteranceList) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "botVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Utterances) > 0 {
+	if s.Utterances != nil {
 		v := s.Utterances
 
 		metadata := protocol.Metadata{}

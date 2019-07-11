@@ -121,7 +121,7 @@ func (s ListVPCAssociationAuthorizationsOutput) MarshalFields(e protocol.FieldEn
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.StringValue(v), metadata)
 	}
-	if len(s.VPCs) > 0 {
+	if s.VPCs != nil {
 		v := s.VPCs
 
 		metadata := protocol.Metadata{ListLocationName: "VPC"}

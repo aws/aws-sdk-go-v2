@@ -99,7 +99,7 @@ func (s ListThreatIntelSetsOutput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ThreatIntelSetIds) > 0 {
+	if s.ThreatIntelSetIds != nil {
 		v := s.ThreatIntelSetIds
 
 		metadata := protocol.Metadata{}

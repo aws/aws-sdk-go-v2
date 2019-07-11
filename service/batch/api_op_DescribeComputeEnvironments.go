@@ -48,7 +48,7 @@ func (s DescribeComputeEnvironmentsInput) String() string {
 func (s DescribeComputeEnvironmentsInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.ComputeEnvironments) > 0 {
+	if s.ComputeEnvironments != nil {
 		v := s.ComputeEnvironments
 
 		metadata := protocol.Metadata{}
@@ -96,7 +96,7 @@ func (s DescribeComputeEnvironmentsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeComputeEnvironmentsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ComputeEnvironments) > 0 {
+	if s.ComputeEnvironments != nil {
 		v := s.ComputeEnvironments
 
 		metadata := protocol.Metadata{}

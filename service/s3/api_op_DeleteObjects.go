@@ -127,7 +127,7 @@ func (s DeleteObjectsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DeleteObjectsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Deleted) > 0 {
+	if s.Deleted != nil {
 		v := s.Deleted
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -139,7 +139,7 @@ func (s DeleteObjectsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Errors) > 0 {
+	if s.Errors != nil {
 		v := s.Errors
 
 		metadata := protocol.Metadata{Flatten: true}

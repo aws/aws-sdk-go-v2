@@ -77,7 +77,7 @@ func (s UpdateAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "tokenKeyName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.TokenSigningPublicKeys) > 0 {
+	if s.TokenSigningPublicKeys != nil {
 		v := s.TokenSigningPublicKeys
 
 		metadata := protocol.Metadata{}

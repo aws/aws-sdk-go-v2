@@ -93,7 +93,7 @@ func (s *UpdateSecurityProfileInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateSecurityProfileInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.AdditionalMetricsToRetain) > 0 {
+	if s.AdditionalMetricsToRetain != nil {
 		v := s.AdditionalMetricsToRetain
 
 		metadata := protocol.Metadata{}
@@ -105,7 +105,7 @@ func (s UpdateSecurityProfileInput) MarshalFields(e protocol.FieldEncoder) error
 		ls0.End()
 
 	}
-	if len(s.AlertTargets) > 0 {
+	if s.AlertTargets != nil {
 		v := s.AlertTargets
 
 		metadata := protocol.Metadata{}
@@ -117,7 +117,7 @@ func (s UpdateSecurityProfileInput) MarshalFields(e protocol.FieldEncoder) error
 		ms0.End()
 
 	}
-	if len(s.Behaviors) > 0 {
+	if s.Behaviors != nil {
 		v := s.Behaviors
 
 		metadata := protocol.Metadata{}
@@ -209,7 +209,7 @@ func (s UpdateSecurityProfileOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateSecurityProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AdditionalMetricsToRetain) > 0 {
+	if s.AdditionalMetricsToRetain != nil {
 		v := s.AdditionalMetricsToRetain
 
 		metadata := protocol.Metadata{}
@@ -221,7 +221,7 @@ func (s UpdateSecurityProfileOutput) MarshalFields(e protocol.FieldEncoder) erro
 		ls0.End()
 
 	}
-	if len(s.AlertTargets) > 0 {
+	if s.AlertTargets != nil {
 		v := s.AlertTargets
 
 		metadata := protocol.Metadata{}
@@ -233,7 +233,7 @@ func (s UpdateSecurityProfileOutput) MarshalFields(e protocol.FieldEncoder) erro
 		ms0.End()
 
 	}
-	if len(s.Behaviors) > 0 {
+	if s.Behaviors != nil {
 		v := s.Behaviors
 
 		metadata := protocol.Metadata{}

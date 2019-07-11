@@ -65,7 +65,7 @@ func (s ListGroupCertificateAuthoritiesOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListGroupCertificateAuthoritiesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.GroupCertificateAuthorities) > 0 {
+	if s.GroupCertificateAuthorities != nil {
 		v := s.GroupCertificateAuthorities
 
 		metadata := protocol.Metadata{}

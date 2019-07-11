@@ -95,7 +95,7 @@ func (s DescribeInputOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.AttachedChannels) > 0 {
+	if s.AttachedChannels != nil {
 		v := s.AttachedChannels
 
 		metadata := protocol.Metadata{}
@@ -107,7 +107,7 @@ func (s DescribeInputOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Destinations) > 0 {
+	if s.Destinations != nil {
 		v := s.Destinations
 
 		metadata := protocol.Metadata{}
@@ -131,7 +131,7 @@ func (s DescribeInputOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "inputClass", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.MediaConnectFlows) > 0 {
+	if s.MediaConnectFlows != nil {
 		v := s.MediaConnectFlows
 
 		metadata := protocol.Metadata{}
@@ -155,7 +155,7 @@ func (s DescribeInputOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SecurityGroups) > 0 {
+	if s.SecurityGroups != nil {
 		v := s.SecurityGroups
 
 		metadata := protocol.Metadata{}
@@ -167,7 +167,7 @@ func (s DescribeInputOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Sources) > 0 {
+	if s.Sources != nil {
 		v := s.Sources
 
 		metadata := protocol.Metadata{}
@@ -185,7 +185,7 @@ func (s DescribeInputOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

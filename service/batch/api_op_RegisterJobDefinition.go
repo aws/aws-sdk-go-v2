@@ -112,7 +112,7 @@ func (s RegisterJobDefinitionInput) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "nodeProperties", v, metadata)
 	}
-	if len(s.Parameters) > 0 {
+	if s.Parameters != nil {
 		v := s.Parameters
 
 		metadata := protocol.Metadata{}

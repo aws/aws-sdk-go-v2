@@ -109,7 +109,7 @@ func (s GroupFilter) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Values) > 0 {
+	if s.Values != nil {
 		v := s.Values
 
 		metadata := protocol.Metadata{}
@@ -292,7 +292,7 @@ func (s ResourceFilter) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Values) > 0 {
+	if s.Values != nil {
 		v := s.Values
 
 		metadata := protocol.Metadata{}

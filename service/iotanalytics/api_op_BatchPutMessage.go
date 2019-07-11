@@ -89,7 +89,7 @@ func (s BatchPutMessageInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "channelName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Messages) > 0 {
+	if s.Messages != nil {
 		v := s.Messages
 
 		metadata := protocol.Metadata{}
@@ -119,7 +119,7 @@ func (s BatchPutMessageOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchPutMessageOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.BatchPutMessageErrorEntries) > 0 {
+	if s.BatchPutMessageErrorEntries != nil {
 		v := s.BatchPutMessageErrorEntries
 
 		metadata := protocol.Metadata{}

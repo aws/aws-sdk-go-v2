@@ -94,7 +94,7 @@ func (s GetImportOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "createdDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
-	if len(s.FailureReason) > 0 {
+	if s.FailureReason != nil {
 		v := s.FailureReason
 
 		metadata := protocol.Metadata{}

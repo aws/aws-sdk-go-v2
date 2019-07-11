@@ -100,7 +100,7 @@ func (s AwsEc2InstanceDetails) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ImageId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.IpV4Addresses) > 0 {
+	if s.IpV4Addresses != nil {
 		v := s.IpV4Addresses
 
 		metadata := protocol.Metadata{}
@@ -112,7 +112,7 @@ func (s AwsEc2InstanceDetails) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.IpV6Addresses) > 0 {
+	if s.IpV6Addresses != nil {
 		v := s.IpV6Addresses
 
 		metadata := protocol.Metadata{}
@@ -533,7 +533,7 @@ func (s AwsSecurityFinding) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LastObservedAt", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Malware) > 0 {
+	if s.Malware != nil {
 		v := s.Malware
 
 		metadata := protocol.Metadata{}
@@ -569,7 +569,7 @@ func (s AwsSecurityFinding) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ProductArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ProductFields) > 0 {
+	if s.ProductFields != nil {
 		v := s.ProductFields
 
 		metadata := protocol.Metadata{}
@@ -587,7 +587,7 @@ func (s AwsSecurityFinding) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "RecordState", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.RelatedFindings) > 0 {
+	if s.RelatedFindings != nil {
 		v := s.RelatedFindings
 
 		metadata := protocol.Metadata{}
@@ -605,7 +605,7 @@ func (s AwsSecurityFinding) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Remediation", v, metadata)
 	}
-	if len(s.Resources) > 0 {
+	if s.Resources != nil {
 		v := s.Resources
 
 		metadata := protocol.Metadata{}
@@ -635,7 +635,7 @@ func (s AwsSecurityFinding) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SourceUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ThreatIntelIndicators) > 0 {
+	if s.ThreatIntelIndicators != nil {
 		v := s.ThreatIntelIndicators
 
 		metadata := protocol.Metadata{}
@@ -653,7 +653,7 @@ func (s AwsSecurityFinding) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Title", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Types) > 0 {
+	if s.Types != nil {
 		v := s.Types
 
 		metadata := protocol.Metadata{}
@@ -671,7 +671,7 @@ func (s AwsSecurityFinding) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "UpdatedAt", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.UserDefinedFields) > 0 {
+	if s.UserDefinedFields != nil {
 		v := s.UserDefinedFields
 
 		metadata := protocol.Metadata{}
@@ -988,7 +988,7 @@ func (s AwsSecurityFindingFilters) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AwsAccountId) > 0 {
+	if s.AwsAccountId != nil {
 		v := s.AwsAccountId
 
 		metadata := protocol.Metadata{}
@@ -1000,7 +1000,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.CompanyName) > 0 {
+	if s.CompanyName != nil {
 		v := s.CompanyName
 
 		metadata := protocol.Metadata{}
@@ -1012,7 +1012,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ComplianceStatus) > 0 {
+	if s.ComplianceStatus != nil {
 		v := s.ComplianceStatus
 
 		metadata := protocol.Metadata{}
@@ -1024,7 +1024,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.Confidence) > 0 {
+	if s.Confidence != nil {
 		v := s.Confidence
 
 		metadata := protocol.Metadata{}
@@ -1036,7 +1036,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.CreatedAt) > 0 {
+	if s.CreatedAt != nil {
 		v := s.CreatedAt
 
 		metadata := protocol.Metadata{}
@@ -1048,7 +1048,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.Criticality) > 0 {
+	if s.Criticality != nil {
 		v := s.Criticality
 
 		metadata := protocol.Metadata{}
@@ -1060,7 +1060,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.Description) > 0 {
+	if s.Description != nil {
 		v := s.Description
 
 		metadata := protocol.Metadata{}
@@ -1072,7 +1072,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.FirstObservedAt) > 0 {
+	if s.FirstObservedAt != nil {
 		v := s.FirstObservedAt
 
 		metadata := protocol.Metadata{}
@@ -1084,7 +1084,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.GeneratorId) > 0 {
+	if s.GeneratorId != nil {
 		v := s.GeneratorId
 
 		metadata := protocol.Metadata{}
@@ -1096,7 +1096,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.Id) > 0 {
+	if s.Id != nil {
 		v := s.Id
 
 		metadata := protocol.Metadata{}
@@ -1108,7 +1108,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.Keyword) > 0 {
+	if s.Keyword != nil {
 		v := s.Keyword
 
 		metadata := protocol.Metadata{}
@@ -1120,7 +1120,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.LastObservedAt) > 0 {
+	if s.LastObservedAt != nil {
 		v := s.LastObservedAt
 
 		metadata := protocol.Metadata{}
@@ -1132,7 +1132,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.MalwareName) > 0 {
+	if s.MalwareName != nil {
 		v := s.MalwareName
 
 		metadata := protocol.Metadata{}
@@ -1144,7 +1144,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.MalwarePath) > 0 {
+	if s.MalwarePath != nil {
 		v := s.MalwarePath
 
 		metadata := protocol.Metadata{}
@@ -1156,7 +1156,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.MalwareState) > 0 {
+	if s.MalwareState != nil {
 		v := s.MalwareState
 
 		metadata := protocol.Metadata{}
@@ -1168,7 +1168,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.MalwareType) > 0 {
+	if s.MalwareType != nil {
 		v := s.MalwareType
 
 		metadata := protocol.Metadata{}
@@ -1180,7 +1180,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.NetworkDestinationDomain) > 0 {
+	if s.NetworkDestinationDomain != nil {
 		v := s.NetworkDestinationDomain
 
 		metadata := protocol.Metadata{}
@@ -1192,7 +1192,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.NetworkDestinationIpV4) > 0 {
+	if s.NetworkDestinationIpV4 != nil {
 		v := s.NetworkDestinationIpV4
 
 		metadata := protocol.Metadata{}
@@ -1204,7 +1204,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.NetworkDestinationIpV6) > 0 {
+	if s.NetworkDestinationIpV6 != nil {
 		v := s.NetworkDestinationIpV6
 
 		metadata := protocol.Metadata{}
@@ -1216,7 +1216,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.NetworkDestinationPort) > 0 {
+	if s.NetworkDestinationPort != nil {
 		v := s.NetworkDestinationPort
 
 		metadata := protocol.Metadata{}
@@ -1228,7 +1228,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.NetworkDirection) > 0 {
+	if s.NetworkDirection != nil {
 		v := s.NetworkDirection
 
 		metadata := protocol.Metadata{}
@@ -1240,7 +1240,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.NetworkProtocol) > 0 {
+	if s.NetworkProtocol != nil {
 		v := s.NetworkProtocol
 
 		metadata := protocol.Metadata{}
@@ -1252,7 +1252,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.NetworkSourceDomain) > 0 {
+	if s.NetworkSourceDomain != nil {
 		v := s.NetworkSourceDomain
 
 		metadata := protocol.Metadata{}
@@ -1264,7 +1264,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.NetworkSourceIpV4) > 0 {
+	if s.NetworkSourceIpV4 != nil {
 		v := s.NetworkSourceIpV4
 
 		metadata := protocol.Metadata{}
@@ -1276,7 +1276,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.NetworkSourceIpV6) > 0 {
+	if s.NetworkSourceIpV6 != nil {
 		v := s.NetworkSourceIpV6
 
 		metadata := protocol.Metadata{}
@@ -1288,7 +1288,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.NetworkSourceMac) > 0 {
+	if s.NetworkSourceMac != nil {
 		v := s.NetworkSourceMac
 
 		metadata := protocol.Metadata{}
@@ -1300,7 +1300,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.NetworkSourcePort) > 0 {
+	if s.NetworkSourcePort != nil {
 		v := s.NetworkSourcePort
 
 		metadata := protocol.Metadata{}
@@ -1312,7 +1312,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.NoteText) > 0 {
+	if s.NoteText != nil {
 		v := s.NoteText
 
 		metadata := protocol.Metadata{}
@@ -1324,7 +1324,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.NoteUpdatedAt) > 0 {
+	if s.NoteUpdatedAt != nil {
 		v := s.NoteUpdatedAt
 
 		metadata := protocol.Metadata{}
@@ -1336,7 +1336,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.NoteUpdatedBy) > 0 {
+	if s.NoteUpdatedBy != nil {
 		v := s.NoteUpdatedBy
 
 		metadata := protocol.Metadata{}
@@ -1348,7 +1348,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ProcessLaunchedAt) > 0 {
+	if s.ProcessLaunchedAt != nil {
 		v := s.ProcessLaunchedAt
 
 		metadata := protocol.Metadata{}
@@ -1360,7 +1360,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ProcessName) > 0 {
+	if s.ProcessName != nil {
 		v := s.ProcessName
 
 		metadata := protocol.Metadata{}
@@ -1372,7 +1372,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ProcessParentPid) > 0 {
+	if s.ProcessParentPid != nil {
 		v := s.ProcessParentPid
 
 		metadata := protocol.Metadata{}
@@ -1384,7 +1384,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ProcessPath) > 0 {
+	if s.ProcessPath != nil {
 		v := s.ProcessPath
 
 		metadata := protocol.Metadata{}
@@ -1396,7 +1396,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ProcessPid) > 0 {
+	if s.ProcessPid != nil {
 		v := s.ProcessPid
 
 		metadata := protocol.Metadata{}
@@ -1408,7 +1408,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ProcessTerminatedAt) > 0 {
+	if s.ProcessTerminatedAt != nil {
 		v := s.ProcessTerminatedAt
 
 		metadata := protocol.Metadata{}
@@ -1420,7 +1420,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ProductArn) > 0 {
+	if s.ProductArn != nil {
 		v := s.ProductArn
 
 		metadata := protocol.Metadata{}
@@ -1432,7 +1432,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ProductFields) > 0 {
+	if s.ProductFields != nil {
 		v := s.ProductFields
 
 		metadata := protocol.Metadata{}
@@ -1444,7 +1444,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ProductName) > 0 {
+	if s.ProductName != nil {
 		v := s.ProductName
 
 		metadata := protocol.Metadata{}
@@ -1456,7 +1456,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.RecommendationText) > 0 {
+	if s.RecommendationText != nil {
 		v := s.RecommendationText
 
 		metadata := protocol.Metadata{}
@@ -1468,7 +1468,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.RecordState) > 0 {
+	if s.RecordState != nil {
 		v := s.RecordState
 
 		metadata := protocol.Metadata{}
@@ -1480,7 +1480,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.RelatedFindingsId) > 0 {
+	if s.RelatedFindingsId != nil {
 		v := s.RelatedFindingsId
 
 		metadata := protocol.Metadata{}
@@ -1492,7 +1492,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.RelatedFindingsProductArn) > 0 {
+	if s.RelatedFindingsProductArn != nil {
 		v := s.RelatedFindingsProductArn
 
 		metadata := protocol.Metadata{}
@@ -1504,7 +1504,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceAwsEc2InstanceIamInstanceProfileArn) > 0 {
+	if s.ResourceAwsEc2InstanceIamInstanceProfileArn != nil {
 		v := s.ResourceAwsEc2InstanceIamInstanceProfileArn
 
 		metadata := protocol.Metadata{}
@@ -1516,7 +1516,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceAwsEc2InstanceImageId) > 0 {
+	if s.ResourceAwsEc2InstanceImageId != nil {
 		v := s.ResourceAwsEc2InstanceImageId
 
 		metadata := protocol.Metadata{}
@@ -1528,7 +1528,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceAwsEc2InstanceIpV4Addresses) > 0 {
+	if s.ResourceAwsEc2InstanceIpV4Addresses != nil {
 		v := s.ResourceAwsEc2InstanceIpV4Addresses
 
 		metadata := protocol.Metadata{}
@@ -1540,7 +1540,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceAwsEc2InstanceIpV6Addresses) > 0 {
+	if s.ResourceAwsEc2InstanceIpV6Addresses != nil {
 		v := s.ResourceAwsEc2InstanceIpV6Addresses
 
 		metadata := protocol.Metadata{}
@@ -1552,7 +1552,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceAwsEc2InstanceKeyName) > 0 {
+	if s.ResourceAwsEc2InstanceKeyName != nil {
 		v := s.ResourceAwsEc2InstanceKeyName
 
 		metadata := protocol.Metadata{}
@@ -1564,7 +1564,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceAwsEc2InstanceLaunchedAt) > 0 {
+	if s.ResourceAwsEc2InstanceLaunchedAt != nil {
 		v := s.ResourceAwsEc2InstanceLaunchedAt
 
 		metadata := protocol.Metadata{}
@@ -1576,7 +1576,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceAwsEc2InstanceSubnetId) > 0 {
+	if s.ResourceAwsEc2InstanceSubnetId != nil {
 		v := s.ResourceAwsEc2InstanceSubnetId
 
 		metadata := protocol.Metadata{}
@@ -1588,7 +1588,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceAwsEc2InstanceType) > 0 {
+	if s.ResourceAwsEc2InstanceType != nil {
 		v := s.ResourceAwsEc2InstanceType
 
 		metadata := protocol.Metadata{}
@@ -1600,7 +1600,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceAwsEc2InstanceVpcId) > 0 {
+	if s.ResourceAwsEc2InstanceVpcId != nil {
 		v := s.ResourceAwsEc2InstanceVpcId
 
 		metadata := protocol.Metadata{}
@@ -1612,7 +1612,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceAwsIamAccessKeyCreatedAt) > 0 {
+	if s.ResourceAwsIamAccessKeyCreatedAt != nil {
 		v := s.ResourceAwsIamAccessKeyCreatedAt
 
 		metadata := protocol.Metadata{}
@@ -1624,7 +1624,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceAwsIamAccessKeyStatus) > 0 {
+	if s.ResourceAwsIamAccessKeyStatus != nil {
 		v := s.ResourceAwsIamAccessKeyStatus
 
 		metadata := protocol.Metadata{}
@@ -1636,7 +1636,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceAwsIamAccessKeyUserName) > 0 {
+	if s.ResourceAwsIamAccessKeyUserName != nil {
 		v := s.ResourceAwsIamAccessKeyUserName
 
 		metadata := protocol.Metadata{}
@@ -1648,7 +1648,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceAwsS3BucketOwnerId) > 0 {
+	if s.ResourceAwsS3BucketOwnerId != nil {
 		v := s.ResourceAwsS3BucketOwnerId
 
 		metadata := protocol.Metadata{}
@@ -1660,7 +1660,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceAwsS3BucketOwnerName) > 0 {
+	if s.ResourceAwsS3BucketOwnerName != nil {
 		v := s.ResourceAwsS3BucketOwnerName
 
 		metadata := protocol.Metadata{}
@@ -1672,7 +1672,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceContainerImageId) > 0 {
+	if s.ResourceContainerImageId != nil {
 		v := s.ResourceContainerImageId
 
 		metadata := protocol.Metadata{}
@@ -1684,7 +1684,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceContainerImageName) > 0 {
+	if s.ResourceContainerImageName != nil {
 		v := s.ResourceContainerImageName
 
 		metadata := protocol.Metadata{}
@@ -1696,7 +1696,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceContainerLaunchedAt) > 0 {
+	if s.ResourceContainerLaunchedAt != nil {
 		v := s.ResourceContainerLaunchedAt
 
 		metadata := protocol.Metadata{}
@@ -1708,7 +1708,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceContainerName) > 0 {
+	if s.ResourceContainerName != nil {
 		v := s.ResourceContainerName
 
 		metadata := protocol.Metadata{}
@@ -1720,7 +1720,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceDetailsOther) > 0 {
+	if s.ResourceDetailsOther != nil {
 		v := s.ResourceDetailsOther
 
 		metadata := protocol.Metadata{}
@@ -1732,7 +1732,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceId) > 0 {
+	if s.ResourceId != nil {
 		v := s.ResourceId
 
 		metadata := protocol.Metadata{}
@@ -1744,7 +1744,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourcePartition) > 0 {
+	if s.ResourcePartition != nil {
 		v := s.ResourcePartition
 
 		metadata := protocol.Metadata{}
@@ -1756,7 +1756,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceRegion) > 0 {
+	if s.ResourceRegion != nil {
 		v := s.ResourceRegion
 
 		metadata := protocol.Metadata{}
@@ -1768,7 +1768,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceTags) > 0 {
+	if s.ResourceTags != nil {
 		v := s.ResourceTags
 
 		metadata := protocol.Metadata{}
@@ -1780,7 +1780,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ResourceType) > 0 {
+	if s.ResourceType != nil {
 		v := s.ResourceType
 
 		metadata := protocol.Metadata{}
@@ -1792,7 +1792,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.SeverityLabel) > 0 {
+	if s.SeverityLabel != nil {
 		v := s.SeverityLabel
 
 		metadata := protocol.Metadata{}
@@ -1804,7 +1804,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.SeverityNormalized) > 0 {
+	if s.SeverityNormalized != nil {
 		v := s.SeverityNormalized
 
 		metadata := protocol.Metadata{}
@@ -1816,7 +1816,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.SeverityProduct) > 0 {
+	if s.SeverityProduct != nil {
 		v := s.SeverityProduct
 
 		metadata := protocol.Metadata{}
@@ -1828,7 +1828,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.SourceUrl) > 0 {
+	if s.SourceUrl != nil {
 		v := s.SourceUrl
 
 		metadata := protocol.Metadata{}
@@ -1840,7 +1840,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ThreatIntelIndicatorCategory) > 0 {
+	if s.ThreatIntelIndicatorCategory != nil {
 		v := s.ThreatIntelIndicatorCategory
 
 		metadata := protocol.Metadata{}
@@ -1852,7 +1852,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ThreatIntelIndicatorLastObservedAt) > 0 {
+	if s.ThreatIntelIndicatorLastObservedAt != nil {
 		v := s.ThreatIntelIndicatorLastObservedAt
 
 		metadata := protocol.Metadata{}
@@ -1864,7 +1864,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ThreatIntelIndicatorSource) > 0 {
+	if s.ThreatIntelIndicatorSource != nil {
 		v := s.ThreatIntelIndicatorSource
 
 		metadata := protocol.Metadata{}
@@ -1876,7 +1876,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ThreatIntelIndicatorSourceUrl) > 0 {
+	if s.ThreatIntelIndicatorSourceUrl != nil {
 		v := s.ThreatIntelIndicatorSourceUrl
 
 		metadata := protocol.Metadata{}
@@ -1888,7 +1888,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ThreatIntelIndicatorType) > 0 {
+	if s.ThreatIntelIndicatorType != nil {
 		v := s.ThreatIntelIndicatorType
 
 		metadata := protocol.Metadata{}
@@ -1900,7 +1900,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.ThreatIntelIndicatorValue) > 0 {
+	if s.ThreatIntelIndicatorValue != nil {
 		v := s.ThreatIntelIndicatorValue
 
 		metadata := protocol.Metadata{}
@@ -1912,7 +1912,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.Title) > 0 {
+	if s.Title != nil {
 		v := s.Title
 
 		metadata := protocol.Metadata{}
@@ -1924,7 +1924,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.Type) > 0 {
+	if s.Type != nil {
 		v := s.Type
 
 		metadata := protocol.Metadata{}
@@ -1936,7 +1936,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.UpdatedAt) > 0 {
+	if s.UpdatedAt != nil {
 		v := s.UpdatedAt
 
 		metadata := protocol.Metadata{}
@@ -1948,7 +1948,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.UserDefinedFields) > 0 {
+	if s.UserDefinedFields != nil {
 		v := s.UserDefinedFields
 
 		metadata := protocol.Metadata{}
@@ -1960,7 +1960,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.VerificationState) > 0 {
+	if s.VerificationState != nil {
 		v := s.VerificationState
 
 		metadata := protocol.Metadata{}
@@ -1972,7 +1972,7 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.WorkflowState) > 0 {
+	if s.WorkflowState != nil {
 		v := s.WorkflowState
 
 		metadata := protocol.Metadata{}
@@ -2337,7 +2337,7 @@ func (s InsightResults) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "InsightArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResultValues) > 0 {
+	if s.ResultValues != nil {
 		v := s.ResultValues
 
 		metadata := protocol.Metadata{}
@@ -3193,7 +3193,7 @@ func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Region", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -3267,7 +3267,7 @@ func (s ResourceDetails) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Container", v, metadata)
 	}
-	if len(s.Other) > 0 {
+	if s.Other != nil {
 		v := s.Other
 
 		metadata := protocol.Metadata{}
@@ -3442,7 +3442,7 @@ func (s StandardsSubscription) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "StandardsArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.StandardsInput) > 0 {
+	if s.StandardsInput != nil {
 		v := s.StandardsInput
 
 		metadata := protocol.Metadata{}
@@ -3513,7 +3513,7 @@ func (s StandardsSubscriptionRequest) MarshalFields(e protocol.FieldEncoder) err
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "StandardsArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.StandardsInput) > 0 {
+	if s.StandardsInput != nil {
 		v := s.StandardsInput
 
 		metadata := protocol.Metadata{}

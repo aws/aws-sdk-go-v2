@@ -98,7 +98,7 @@ func (s ListTargetsForSecurityProfileOutput) MarshalFields(e protocol.FieldEncod
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SecurityProfileTargets) > 0 {
+	if s.SecurityProfileTargets != nil {
 		v := s.SecurityProfileTargets
 
 		metadata := protocol.Metadata{}

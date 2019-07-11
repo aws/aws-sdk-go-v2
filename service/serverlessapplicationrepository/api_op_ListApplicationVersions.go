@@ -91,7 +91,7 @@ func (s ListApplicationVersionsOutput) MarshalFields(e protocol.FieldEncoder) er
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Versions) > 0 {
+	if s.Versions != nil {
 		v := s.Versions
 
 		metadata := protocol.Metadata{}

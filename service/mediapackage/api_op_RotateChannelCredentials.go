@@ -98,7 +98,7 @@ func (s RotateChannelCredentialsOutput) MarshalFields(e protocol.FieldEncoder) e
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

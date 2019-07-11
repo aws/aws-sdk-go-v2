@@ -683,7 +683,7 @@ func (s *Captions) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Captions) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.CaptionFormats) > 0 {
+	if s.CaptionFormats != nil {
 		v := s.CaptionFormats
 
 		metadata := protocol.Metadata{}
@@ -695,7 +695,7 @@ func (s Captions) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.CaptionSources) > 0 {
+	if s.CaptionSources != nil {
 		v := s.CaptionSources
 
 		metadata := protocol.Metadata{}
@@ -929,7 +929,7 @@ func (s CreateJobOutputResult) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Captions", v, metadata)
 	}
-	if len(s.Composition) > 0 {
+	if s.Composition != nil {
 		v := s.Composition
 
 		metadata := protocol.Metadata{}
@@ -983,7 +983,7 @@ func (s CreateJobOutputResult) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ThumbnailPattern", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Watermarks) > 0 {
+	if s.Watermarks != nil {
 		v := s.Watermarks
 
 		metadata := protocol.Metadata{}
@@ -1099,7 +1099,7 @@ func (s CreateJobPlaylist) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.OutputKeys) > 0 {
+	if s.OutputKeys != nil {
 		v := s.OutputKeys
 
 		metadata := protocol.Metadata{}
@@ -1435,7 +1435,7 @@ func (s *InputCaptions) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputCaptions) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.CaptionSources) > 0 {
+	if s.CaptionSources != nil {
 		v := s.CaptionSources
 
 		metadata := protocol.Metadata{}
@@ -1567,7 +1567,7 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Input", v, metadata)
 	}
-	if len(s.Inputs) > 0 {
+	if s.Inputs != nil {
 		v := s.Inputs
 
 		metadata := protocol.Metadata{}
@@ -1591,7 +1591,7 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "OutputKeyPrefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Outputs) > 0 {
+	if s.Outputs != nil {
 		v := s.Outputs
 
 		metadata := protocol.Metadata{}
@@ -1609,7 +1609,7 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "PipelineId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Playlists) > 0 {
+	if s.Playlists != nil {
 		v := s.Playlists
 
 		metadata := protocol.Metadata{}
@@ -1633,7 +1633,7 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Timing", v, metadata)
 	}
-	if len(s.UserMetadata) > 0 {
+	if s.UserMetadata != nil {
 		v := s.UserMetadata
 
 		metadata := protocol.Metadata{}
@@ -1696,7 +1696,7 @@ func (s *JobAlbumArt) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s JobAlbumArt) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Artwork) > 0 {
+	if s.Artwork != nil {
 		v := s.Artwork
 
 		metadata := protocol.Metadata{}
@@ -2150,7 +2150,7 @@ func (s JobOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Captions", v, metadata)
 	}
-	if len(s.Composition) > 0 {
+	if s.Composition != nil {
 		v := s.Composition
 
 		metadata := protocol.Metadata{}
@@ -2252,7 +2252,7 @@ func (s JobOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ThumbnailPattern", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Watermarks) > 0 {
+	if s.Watermarks != nil {
 		v := s.Watermarks
 
 		metadata := protocol.Metadata{}
@@ -2462,7 +2462,7 @@ func (s *Permission) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Permission) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Access) > 0 {
+	if s.Access != nil {
 		v := s.Access
 
 		metadata := protocol.Metadata{}
@@ -2771,7 +2771,7 @@ func (s PipelineOutputConfig) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Bucket", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Permissions) > 0 {
+	if s.Permissions != nil {
 		v := s.Permissions
 
 		metadata := protocol.Metadata{}
@@ -2996,7 +2996,7 @@ func (s Playlist) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.OutputKeys) > 0 {
+	if s.OutputKeys != nil {
 		v := s.OutputKeys
 
 		metadata := protocol.Metadata{}
@@ -4049,7 +4049,7 @@ func (s VideoParameters) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Codec", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.CodecOptions) > 0 {
+	if s.CodecOptions != nil {
 		v := s.CodecOptions
 
 		metadata := protocol.Metadata{}
@@ -4121,7 +4121,7 @@ func (s VideoParameters) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SizingPolicy", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Watermarks) > 0 {
+	if s.Watermarks != nil {
 		v := s.Watermarks
 
 		metadata := protocol.Metadata{}

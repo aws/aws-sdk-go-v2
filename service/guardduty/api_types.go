@@ -305,7 +305,7 @@ func (s Condition) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Condition) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Eq) > 0 {
+	if s.Eq != nil {
 		v := s.Eq
 
 		metadata := protocol.Metadata{}
@@ -341,7 +341,7 @@ func (s Condition) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "lte", protocol.Int64Value(v), metadata)
 	}
-	if len(s.Neq) > 0 {
+	if s.Neq != nil {
 		v := s.Neq
 
 		metadata := protocol.Metadata{}
@@ -622,7 +622,7 @@ func (s FindingCriteria) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s FindingCriteria) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Criterion) > 0 {
+	if s.Criterion != nil {
 		v := s.Criterion
 
 		metadata := protocol.Metadata{}
@@ -653,7 +653,7 @@ func (s FindingStatistics) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s FindingStatistics) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.CountBySeverity) > 0 {
+	if s.CountBySeverity != nil {
 		v := s.CountBySeverity
 
 		metadata := protocol.Metadata{}
@@ -834,7 +834,7 @@ func (s InstanceDetails) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "launchTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.NetworkInterfaces) > 0 {
+	if s.NetworkInterfaces != nil {
 		v := s.NetworkInterfaces
 
 		metadata := protocol.Metadata{}
@@ -852,7 +852,7 @@ func (s InstanceDetails) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "platform", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ProductCodes) > 0 {
+	if s.ProductCodes != nil {
 		v := s.ProductCodes
 
 		metadata := protocol.Metadata{}
@@ -864,7 +864,7 @@ func (s InstanceDetails) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -1219,7 +1219,7 @@ func (s NetworkInterface) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s NetworkInterface) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Ipv6Addresses) > 0 {
+	if s.Ipv6Addresses != nil {
 		v := s.Ipv6Addresses
 
 		metadata := protocol.Metadata{}
@@ -1249,7 +1249,7 @@ func (s NetworkInterface) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "privateIpAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.PrivateIpAddresses) > 0 {
+	if s.PrivateIpAddresses != nil {
 		v := s.PrivateIpAddresses
 
 		metadata := protocol.Metadata{}
@@ -1273,7 +1273,7 @@ func (s NetworkInterface) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "publicIp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SecurityGroups) > 0 {
+	if s.SecurityGroups != nil {
 		v := s.SecurityGroups
 
 		metadata := protocol.Metadata{}
@@ -1377,7 +1377,7 @@ func (s PortProbeAction) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "blocked", protocol.BoolValue(v), metadata)
 	}
-	if len(s.PortProbeDetails) > 0 {
+	if s.PortProbeDetails != nil {
 		v := s.PortProbeDetails
 
 		metadata := protocol.Metadata{}

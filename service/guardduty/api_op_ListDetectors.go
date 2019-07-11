@@ -80,7 +80,7 @@ func (s ListDetectorsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListDetectorsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.DetectorIds) > 0 {
+	if s.DetectorIds != nil {
 		v := s.DetectorIds
 
 		metadata := protocol.Metadata{}

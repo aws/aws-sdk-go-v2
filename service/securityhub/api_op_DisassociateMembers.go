@@ -28,7 +28,7 @@ func (s DisassociateMembersInput) String() string {
 func (s DisassociateMembersInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.AccountIds) > 0 {
+	if s.AccountIds != nil {
 		v := s.AccountIds
 
 		metadata := protocol.Metadata{}

@@ -249,7 +249,7 @@ func (s DescribeSimulationJobOutput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "outputLocation", v, metadata)
 	}
-	if len(s.RobotApplications) > 0 {
+	if s.RobotApplications != nil {
 		v := s.RobotApplications
 
 		metadata := protocol.Metadata{}
@@ -261,7 +261,7 @@ func (s DescribeSimulationJobOutput) MarshalFields(e protocol.FieldEncoder) erro
 		ls0.End()
 
 	}
-	if len(s.SimulationApplications) > 0 {
+	if s.SimulationApplications != nil {
 		v := s.SimulationApplications
 
 		metadata := protocol.Metadata{}
@@ -285,7 +285,7 @@ func (s DescribeSimulationJobOutput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

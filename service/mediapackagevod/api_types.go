@@ -178,7 +178,7 @@ func (s CmafPackage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "encryption", v, metadata)
 	}
-	if len(s.HlsManifests) > 0 {
+	if s.HlsManifests != nil {
 		v := s.HlsManifests
 
 		metadata := protocol.Metadata{}
@@ -344,7 +344,7 @@ func (s *DashPackage) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DashPackage) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.DashManifests) > 0 {
+	if s.DashManifests != nil {
 		v := s.DashManifests
 
 		metadata := protocol.Metadata{}
@@ -595,7 +595,7 @@ func (s HlsPackage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "encryption", v, metadata)
 	}
-	if len(s.HlsManifests) > 0 {
+	if s.HlsManifests != nil {
 		v := s.HlsManifests
 
 		metadata := protocol.Metadata{}
@@ -752,7 +752,7 @@ func (s MssPackage) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "encryption", v, metadata)
 	}
-	if len(s.MssManifests) > 0 {
+	if s.MssManifests != nil {
 		v := s.MssManifests
 
 		metadata := protocol.Metadata{}
@@ -944,7 +944,7 @@ func (s SpekeKeyProvider) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SystemIds) > 0 {
+	if s.SystemIds != nil {
 		v := s.SystemIds
 
 		metadata := protocol.Metadata{}

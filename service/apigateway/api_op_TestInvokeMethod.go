@@ -95,7 +95,7 @@ func (s TestInvokeMethodInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "clientCertificateId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Headers) > 0 {
+	if s.Headers != nil {
 		v := s.Headers
 
 		metadata := protocol.Metadata{}
@@ -107,7 +107,7 @@ func (s TestInvokeMethodInput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.MultiValueHeaders) > 0 {
+	if s.MultiValueHeaders != nil {
 		v := s.MultiValueHeaders
 
 		metadata := protocol.Metadata{}
@@ -130,7 +130,7 @@ func (s TestInvokeMethodInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "pathWithQueryString", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.StageVariables) > 0 {
+	if s.StageVariables != nil {
 		v := s.StageVariables
 
 		metadata := protocol.Metadata{}
@@ -201,7 +201,7 @@ func (s TestInvokeMethodOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "body", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Headers) > 0 {
+	if s.Headers != nil {
 		v := s.Headers
 
 		metadata := protocol.Metadata{}
@@ -225,7 +225,7 @@ func (s TestInvokeMethodOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "log", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.MultiValueHeaders) > 0 {
+	if s.MultiValueHeaders != nil {
 		v := s.MultiValueHeaders
 
 		metadata := protocol.Metadata{}

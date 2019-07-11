@@ -46,7 +46,7 @@ func (s GetCheckerIpRangesOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetCheckerIpRangesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.CheckerIpRanges) > 0 {
+	if s.CheckerIpRanges != nil {
 		v := s.CheckerIpRanges
 
 		metadata := protocol.Metadata{}

@@ -60,7 +60,7 @@ func (s GetFindingsStatisticsInput) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "findingCriteria", v, metadata)
 	}
-	if len(s.FindingStatisticTypes) > 0 {
+	if s.FindingStatisticTypes != nil {
 		v := s.FindingStatisticTypes
 
 		metadata := protocol.Metadata{}

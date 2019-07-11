@@ -76,7 +76,7 @@ func (s *ListRobotApplicationsInput) Validate() error {
 func (s ListRobotApplicationsInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.Filters) > 0 {
+	if s.Filters != nil {
 		v := s.Filters
 
 		metadata := protocol.Metadata{}
@@ -136,7 +136,7 @@ func (s ListRobotApplicationsOutput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.RobotApplicationSummaries) > 0 {
+	if s.RobotApplicationSummaries != nil {
 		v := s.RobotApplicationSummaries
 
 		metadata := protocol.Metadata{}

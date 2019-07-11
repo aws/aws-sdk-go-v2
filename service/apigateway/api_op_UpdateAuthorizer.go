@@ -55,7 +55,7 @@ func (s *UpdateAuthorizerInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.PatchOperations) > 0 {
+	if s.PatchOperations != nil {
 		v := s.PatchOperations
 
 		metadata := protocol.Metadata{}
@@ -217,7 +217,7 @@ func (s UpdateAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ProviderARNs) > 0 {
+	if s.ProviderARNs != nil {
 		v := s.ProviderARNs
 
 		metadata := protocol.Metadata{}

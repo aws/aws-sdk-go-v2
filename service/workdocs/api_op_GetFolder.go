@@ -95,7 +95,7 @@ func (s GetFolderOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetFolderOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.CustomMetadata) > 0 {
+	if s.CustomMetadata != nil {
 		v := s.CustomMetadata
 
 		metadata := protocol.Metadata{}

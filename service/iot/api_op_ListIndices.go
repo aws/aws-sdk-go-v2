@@ -75,7 +75,7 @@ func (s ListIndicesOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListIndicesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.IndexNames) > 0 {
+	if s.IndexNames != nil {
 		v := s.IndexNames
 
 		metadata := protocol.Metadata{}

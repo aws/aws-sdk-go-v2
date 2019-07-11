@@ -187,7 +187,7 @@ func (s SyncDeploymentJobOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
-	if len(s.DeploymentApplicationConfigs) > 0 {
+	if s.DeploymentApplicationConfigs != nil {
 		v := s.DeploymentApplicationConfigs
 
 		metadata := protocol.Metadata{}

@@ -107,7 +107,7 @@ func (s DescribeFileSystemsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeFileSystemsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.FileSystems) > 0 {
+	if s.FileSystems != nil {
 		v := s.FileSystems
 
 		metadata := protocol.Metadata{}

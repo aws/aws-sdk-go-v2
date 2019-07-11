@@ -123,7 +123,7 @@ func (s SearchIndexOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ThingGroups) > 0 {
+	if s.ThingGroups != nil {
 		v := s.ThingGroups
 
 		metadata := protocol.Metadata{}
@@ -135,7 +135,7 @@ func (s SearchIndexOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Things) > 0 {
+	if s.Things != nil {
 		v := s.Things
 
 		metadata := protocol.Metadata{}

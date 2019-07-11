@@ -51,7 +51,7 @@ func (s *BatchSuspendUserInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchSuspendUserInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.UserIdList) > 0 {
+	if s.UserIdList != nil {
 		v := s.UserIdList
 
 		metadata := protocol.Metadata{}
@@ -89,7 +89,7 @@ func (s BatchSuspendUserOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchSuspendUserOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.UserErrors) > 0 {
+	if s.UserErrors != nil {
 		v := s.UserErrors
 
 		metadata := protocol.Metadata{}

@@ -59,7 +59,7 @@ func (s AssociateResourceShareInput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Principals) > 0 {
+	if s.Principals != nil {
 		v := s.Principals
 
 		metadata := protocol.Metadata{}
@@ -71,7 +71,7 @@ func (s AssociateResourceShareInput) MarshalFields(e protocol.FieldEncoder) erro
 		ls0.End()
 
 	}
-	if len(s.ResourceArns) > 0 {
+	if s.ResourceArns != nil {
 		v := s.ResourceArns
 
 		metadata := protocol.Metadata{}
@@ -117,7 +117,7 @@ func (s AssociateResourceShareOutput) MarshalFields(e protocol.FieldEncoder) err
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResourceShareAssociations) > 0 {
+	if s.ResourceShareAssociations != nil {
 		v := s.ResourceShareAssociations
 
 		metadata := protocol.Metadata{}

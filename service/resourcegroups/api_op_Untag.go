@@ -54,7 +54,7 @@ func (s *UntagInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UntagInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.Keys) > 0 {
+	if s.Keys != nil {
 		v := s.Keys
 
 		metadata := protocol.Metadata{}
@@ -99,7 +99,7 @@ func (s UntagOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Keys) > 0 {
+	if s.Keys != nil {
 		v := s.Keys
 
 		metadata := protocol.Metadata{}

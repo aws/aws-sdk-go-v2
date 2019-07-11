@@ -112,7 +112,7 @@ func (s ListBucketMetricsConfigurationsOutput) MarshalFields(e protocol.FieldEnc
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), metadata)
 	}
-	if len(s.MetricsConfigurationList) > 0 {
+	if s.MetricsConfigurationList != nil {
 		v := s.MetricsConfigurationList
 
 		metadata := protocol.Metadata{Flatten: true}

@@ -105,7 +105,7 @@ func (s DescribeNotificationSubscriptionsOutput) MarshalFields(e protocol.FieldE
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Subscriptions) > 0 {
+	if s.Subscriptions != nil {
 		v := s.Subscriptions
 
 		metadata := protocol.Metadata{}

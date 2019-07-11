@@ -98,7 +98,7 @@ func (s GetBulkDeploymentStatusOutput) MarshalFields(e protocol.FieldEncoder) er
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "CreatedAt", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ErrorDetails) > 0 {
+	if s.ErrorDetails != nil {
 		v := s.ErrorDetails
 
 		metadata := protocol.Metadata{}
@@ -116,7 +116,7 @@ func (s GetBulkDeploymentStatusOutput) MarshalFields(e protocol.FieldEncoder) er
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ErrorMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

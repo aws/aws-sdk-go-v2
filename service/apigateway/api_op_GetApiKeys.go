@@ -97,7 +97,7 @@ func (s GetApiKeysOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetApiKeysOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{}
@@ -115,7 +115,7 @@ func (s GetApiKeysOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "position", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Warnings) > 0 {
+	if s.Warnings != nil {
 		v := s.Warnings
 
 		metadata := protocol.Metadata{}

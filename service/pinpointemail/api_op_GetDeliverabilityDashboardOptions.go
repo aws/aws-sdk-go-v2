@@ -85,7 +85,7 @@ func (s GetDeliverabilityDashboardOptionsOutput) MarshalFields(e protocol.FieldE
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "AccountStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.ActiveSubscribedDomains) > 0 {
+	if s.ActiveSubscribedDomains != nil {
 		v := s.ActiveSubscribedDomains
 
 		metadata := protocol.Metadata{}
@@ -103,7 +103,7 @@ func (s GetDeliverabilityDashboardOptionsOutput) MarshalFields(e protocol.FieldE
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "DashboardEnabled", protocol.BoolValue(v), metadata)
 	}
-	if len(s.PendingExpirationSubscribedDomains) > 0 {
+	if s.PendingExpirationSubscribedDomains != nil {
 		v := s.PendingExpirationSubscribedDomains
 
 		metadata := protocol.Metadata{}

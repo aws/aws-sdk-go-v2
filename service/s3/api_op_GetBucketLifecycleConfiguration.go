@@ -70,7 +70,7 @@ func (s GetBucketLifecycleConfigurationOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetBucketLifecycleConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Rules) > 0 {
+	if s.Rules != nil {
 		v := s.Rules
 
 		metadata := protocol.Metadata{Flatten: true}

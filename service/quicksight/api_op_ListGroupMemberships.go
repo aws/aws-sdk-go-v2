@@ -134,7 +134,7 @@ func (s ListGroupMembershipsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListGroupMembershipsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.GroupMemberList) > 0 {
+	if s.GroupMemberList != nil {
 		v := s.GroupMemberList
 
 		metadata := protocol.Metadata{}

@@ -101,7 +101,7 @@ func (s CreateConfigurationSetInput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "SendingOptions", v, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

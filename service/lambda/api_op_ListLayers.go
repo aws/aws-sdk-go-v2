@@ -84,7 +84,7 @@ func (s ListLayersOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListLayersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Layers) > 0 {
+	if s.Layers != nil {
 		v := s.Layers
 
 		metadata := protocol.Metadata{}

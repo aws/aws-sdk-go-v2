@@ -134,7 +134,7 @@ type OutputService1TestShapeOutputService1TestCaseOperation1Output struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService1TestShapeOutputService1TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Blobs) > 0 {
+	if s.Blobs != nil {
 		v := s.Blobs
 
 		metadata := protocol.Metadata{}
@@ -170,7 +170,7 @@ func (s OutputService1TestShapeOutputService1TestCaseOperation1Output) MarshalFi
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Float", protocol.Float64Value(v), metadata)
 	}
-	if len(s.Float64s) > 0 {
+	if s.Float64s != nil {
 		v := s.Float64s
 
 		metadata := protocol.Metadata{}
@@ -206,7 +206,7 @@ func (s OutputService1TestShapeOutputService1TestCaseOperation1Output) MarshalFi
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
 	}
-	if len(s.Timestamps) > 0 {
+	if s.Timestamps != nil {
 		v := s.Timestamps
 
 		metadata := protocol.Metadata{}
@@ -347,7 +347,7 @@ type OutputService1TestShapeOutputService1TestCaseOperation2Output struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService1TestShapeOutputService1TestCaseOperation2Output) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Blobs) > 0 {
+	if s.Blobs != nil {
 		v := s.Blobs
 
 		metadata := protocol.Metadata{}
@@ -383,7 +383,7 @@ func (s OutputService1TestShapeOutputService1TestCaseOperation2Output) MarshalFi
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Float", protocol.Float64Value(v), metadata)
 	}
-	if len(s.Float64s) > 0 {
+	if s.Float64s != nil {
 		v := s.Float64s
 
 		metadata := protocol.Metadata{}
@@ -419,7 +419,7 @@ func (s OutputService1TestShapeOutputService1TestCaseOperation2Output) MarshalFi
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
 	}
-	if len(s.Timestamps) > 0 {
+	if s.Timestamps != nil {
 		v := s.Timestamps
 
 		metadata := protocol.Metadata{}
@@ -560,7 +560,7 @@ type OutputService1TestShapeOutputService1TestCaseOperation3Output struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService1TestShapeOutputService1TestCaseOperation3Output) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Blobs) > 0 {
+	if s.Blobs != nil {
 		v := s.Blobs
 
 		metadata := protocol.Metadata{}
@@ -596,7 +596,7 @@ func (s OutputService1TestShapeOutputService1TestCaseOperation3Output) MarshalFi
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Float", protocol.Float64Value(v), metadata)
 	}
-	if len(s.Float64s) > 0 {
+	if s.Float64s != nil {
 		v := s.Float64s
 
 		metadata := protocol.Metadata{}
@@ -632,7 +632,7 @@ func (s OutputService1TestShapeOutputService1TestCaseOperation3Output) MarshalFi
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
 	}
-	if len(s.Timestamps) > 0 {
+	if s.Timestamps != nil {
 		v := s.Timestamps
 
 		metadata := protocol.Metadata{}
@@ -935,7 +935,7 @@ type OutputService3TestShapeOutputService3TestCaseOperation1Output struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService3TestShapeOutputService3TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ListMember) > 0 {
+	if s.ListMember != nil {
 		v := s.ListMember
 
 		metadata := protocol.Metadata{}
@@ -1080,7 +1080,7 @@ type OutputService4TestShapeOutputService4TestCaseOperation1Output struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService4TestShapeOutputService4TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ListMember) > 0 {
+	if s.ListMember != nil {
 		v := s.ListMember
 
 		metadata := protocol.Metadata{ListLocationName: "item"}
@@ -1225,7 +1225,7 @@ type OutputService5TestShapeOutputService5TestCaseOperation1Output struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService5TestShapeOutputService5TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ListMember) > 0 {
+	if s.ListMember != nil {
 		v := s.ListMember
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -1370,7 +1370,7 @@ type OutputService6TestShapeOutputService6TestCaseOperation1Output struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService6TestShapeOutputService6TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Map) > 0 {
+	if s.Map != nil {
 		v := s.Map
 
 		metadata := protocol.Metadata{}
@@ -1532,7 +1532,7 @@ type OutputService7TestShapeOutputService7TestCaseOperation1Output struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService7TestShapeOutputService7TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Map) > 0 {
+	if s.Map != nil {
 		v := s.Map
 
 		metadata := protocol.Metadata{Flatten: true}
@@ -1677,7 +1677,7 @@ type OutputService8TestShapeOutputService8TestCaseOperation1Output struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService8TestShapeOutputService8TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Map) > 0 {
+	if s.Map != nil {
 		v := s.Map
 
 		metadata := protocol.Metadata{MapLocationNameKey: "foo", MapLocationNameValue: "bar"}
@@ -2477,7 +2477,7 @@ func (s OutputService13TestShapeOutputService13TestCaseOperation1Output) Marshal
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "FooEnum", v, metadata)
 	}
-	if len(s.ListEnums) > 0 {
+	if s.ListEnums != nil {
 		v := s.ListEnums
 
 		metadata := protocol.Metadata{}
@@ -2581,7 +2581,7 @@ func (s OutputService13TestShapeOutputService13TestCaseOperation2Input) MarshalF
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "FooEnum", v, metadata)
 	}
-	if len(s.ListEnums) > 0 {
+	if s.ListEnums != nil {
 		v := s.ListEnums
 
 		metadata := protocol.Metadata{}
@@ -2762,7 +2762,7 @@ type OutputService14TestShapeOutputService14TestCaseOperation1Output struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService14TestShapeOutputService14TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ListItems) > 0 {
+	if s.ListItems != nil {
 		v := s.ListItems
 
 		metadata := protocol.Metadata{ListLocationName: "Item"}

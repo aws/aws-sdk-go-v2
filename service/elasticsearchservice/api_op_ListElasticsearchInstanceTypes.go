@@ -107,7 +107,7 @@ func (s ListElasticsearchInstanceTypesOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListElasticsearchInstanceTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ElasticsearchInstanceTypes) > 0 {
+	if s.ElasticsearchInstanceTypes != nil {
 		v := s.ElasticsearchInstanceTypes
 
 		metadata := protocol.Metadata{}

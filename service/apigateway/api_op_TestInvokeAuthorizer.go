@@ -75,7 +75,7 @@ func (s *TestInvokeAuthorizerInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s TestInvokeAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.AdditionalContext) > 0 {
+	if s.AdditionalContext != nil {
 		v := s.AdditionalContext
 
 		metadata := protocol.Metadata{}
@@ -93,7 +93,7 @@ func (s TestInvokeAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "body", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Headers) > 0 {
+	if s.Headers != nil {
 		v := s.Headers
 
 		metadata := protocol.Metadata{}
@@ -105,7 +105,7 @@ func (s TestInvokeAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error 
 		ms0.End()
 
 	}
-	if len(s.MultiValueHeaders) > 0 {
+	if s.MultiValueHeaders != nil {
 		v := s.MultiValueHeaders
 
 		metadata := protocol.Metadata{}
@@ -128,7 +128,7 @@ func (s TestInvokeAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "pathWithQueryString", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.StageVariables) > 0 {
+	if s.StageVariables != nil {
 		v := s.StageVariables
 
 		metadata := protocol.Metadata{}
@@ -190,7 +190,7 @@ func (s TestInvokeAuthorizerOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s TestInvokeAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Authorization) > 0 {
+	if s.Authorization != nil {
 		v := s.Authorization
 
 		metadata := protocol.Metadata{}
@@ -207,7 +207,7 @@ func (s TestInvokeAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error
 		ms0.End()
 
 	}
-	if len(s.Claims) > 0 {
+	if s.Claims != nil {
 		v := s.Claims
 
 		metadata := protocol.Metadata{}

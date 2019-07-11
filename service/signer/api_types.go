@@ -63,7 +63,7 @@ func (s EncryptionAlgorithmOptions) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s EncryptionAlgorithmOptions) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AllowedValues) > 0 {
+	if s.AllowedValues != nil {
 		v := s.AllowedValues
 
 		metadata := protocol.Metadata{}
@@ -107,7 +107,7 @@ func (s HashAlgorithmOptions) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s HashAlgorithmOptions) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AllowedValues) > 0 {
+	if s.AllowedValues != nil {
 		v := s.AllowedValues
 
 		metadata := protocol.Metadata{}
@@ -398,7 +398,7 @@ func (s SigningImageFormat) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "defaultFormat", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.SupportedFormats) > 0 {
+	if s.SupportedFormats != nil {
 		v := s.SupportedFormats
 
 		metadata := protocol.Metadata{}
@@ -691,7 +691,7 @@ func (s SigningProfile) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "signingMaterial", v, metadata)
 	}
-	if len(s.SigningParameters) > 0 {
+	if s.SigningParameters != nil {
 		v := s.SigningParameters
 
 		metadata := protocol.Metadata{}

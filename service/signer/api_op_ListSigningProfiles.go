@@ -95,7 +95,7 @@ func (s ListSigningProfilesOutput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Profiles) > 0 {
+	if s.Profiles != nil {
 		v := s.Profiles
 
 		metadata := protocol.Metadata{}

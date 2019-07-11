@@ -85,7 +85,7 @@ func (s ListEnabledProductsForImportOutput) MarshalFields(e protocol.FieldEncode
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ProductSubscriptions) > 0 {
+	if s.ProductSubscriptions != nil {
 		v := s.ProductSubscriptions
 
 		metadata := protocol.Metadata{}

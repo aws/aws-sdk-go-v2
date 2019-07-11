@@ -72,7 +72,7 @@ func (s ListBrokersOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListBrokersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.BrokerSummaries) > 0 {
+	if s.BrokerSummaries != nil {
 		v := s.BrokerSummaries
 
 		metadata := protocol.Metadata{}

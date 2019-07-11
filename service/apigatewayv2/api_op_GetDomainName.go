@@ -85,7 +85,7 @@ func (s GetDomainNameOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "domainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.DomainNameConfigurations) > 0 {
+	if s.DomainNameConfigurations != nil {
 		v := s.DomainNameConfigurations
 
 		metadata := protocol.Metadata{}

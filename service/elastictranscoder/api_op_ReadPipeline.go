@@ -80,7 +80,7 @@ func (s ReadPipelineOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Pipeline", v, metadata)
 	}
-	if len(s.Warnings) > 0 {
+	if s.Warnings != nil {
 		v := s.Warnings
 
 		metadata := protocol.Metadata{}

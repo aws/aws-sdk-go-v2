@@ -44,7 +44,7 @@ func (s *UpdateDomainNameInput) Validate() error {
 func (s UpdateDomainNameInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.DomainNameConfigurations) > 0 {
+	if s.DomainNameConfigurations != nil {
 		v := s.DomainNameConfigurations
 
 		metadata := protocol.Metadata{}
@@ -100,7 +100,7 @@ func (s UpdateDomainNameOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "domainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.DomainNameConfigurations) > 0 {
+	if s.DomainNameConfigurations != nil {
 		v := s.DomainNameConfigurations
 
 		metadata := protocol.Metadata{}

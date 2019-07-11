@@ -65,7 +65,7 @@ func (s ListDataflowEndpointGroupsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListDataflowEndpointGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.DataflowEndpointGroupList) > 0 {
+	if s.DataflowEndpointGroupList != nil {
 		v := s.DataflowEndpointGroupList
 
 		metadata := protocol.Metadata{}

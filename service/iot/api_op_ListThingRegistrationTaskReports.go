@@ -118,7 +118,7 @@ func (s ListThingRegistrationTaskReportsOutput) MarshalFields(e protocol.FieldEn
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "reportType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.ResourceLinks) > 0 {
+	if s.ResourceLinks != nil {
 		v := s.ResourceLinks
 
 		metadata := protocol.Metadata{}

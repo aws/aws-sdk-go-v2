@@ -91,7 +91,7 @@ func (s TestRoleInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Role", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Topics) > 0 {
+	if s.Topics != nil {
 		v := s.Topics
 
 		metadata := protocol.Metadata{}
@@ -126,7 +126,7 @@ func (s TestRoleOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s TestRoleOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Messages) > 0 {
+	if s.Messages != nil {
 		v := s.Messages
 
 		metadata := protocol.Metadata{}

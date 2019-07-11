@@ -106,7 +106,7 @@ func (s ListAppliedSchemaArnsOutput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SchemaArns) > 0 {
+	if s.SchemaArns != nil {
 		v := s.SchemaArns
 
 		metadata := protocol.Metadata{}

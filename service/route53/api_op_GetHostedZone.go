@@ -91,7 +91,7 @@ func (s GetHostedZoneOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "HostedZone", v, metadata)
 	}
-	if len(s.VPCs) > 0 {
+	if s.VPCs != nil {
 		v := s.VPCs
 
 		metadata := protocol.Metadata{ListLocationName: "VPC"}

@@ -154,7 +154,7 @@ func (s ListRecoveryPointsByBackupVaultOutput) MarshalFields(e protocol.FieldEnc
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.RecoveryPoints) > 0 {
+	if s.RecoveryPoints != nil {
 		v := s.RecoveryPoints
 
 		metadata := protocol.Metadata{}

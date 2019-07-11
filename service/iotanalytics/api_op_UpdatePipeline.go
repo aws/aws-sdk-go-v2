@@ -77,7 +77,7 @@ func (s *UpdatePipelineInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdatePipelineInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.PipelineActivities) > 0 {
+	if s.PipelineActivities != nil {
 		v := s.PipelineActivities
 
 		metadata := protocol.Metadata{}

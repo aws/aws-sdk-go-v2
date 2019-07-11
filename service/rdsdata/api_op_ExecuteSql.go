@@ -119,7 +119,7 @@ func (s ExecuteSqlOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ExecuteSqlOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.SqlStatementResults) > 0 {
+	if s.SqlStatementResults != nil {
 		v := s.SqlStatementResults
 
 		metadata := protocol.Metadata{}

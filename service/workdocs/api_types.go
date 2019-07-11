@@ -335,7 +335,7 @@ func (s DocumentMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Labels) > 0 {
+	if s.Labels != nil {
 		v := s.Labels
 
 		metadata := protocol.Metadata{}
@@ -486,7 +486,7 @@ func (s DocumentVersionMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Size", protocol.Int64Value(v), metadata)
 	}
-	if len(s.Source) > 0 {
+	if s.Source != nil {
 		v := s.Source
 
 		metadata := protocol.Metadata{}
@@ -504,7 +504,7 @@ func (s DocumentVersionMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Thumbnail) > 0 {
+	if s.Thumbnail != nil {
 		v := s.Thumbnail
 
 		metadata := protocol.Metadata{}
@@ -583,7 +583,7 @@ func (s FolderMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Labels) > 0 {
+	if s.Labels != nil {
 		v := s.Labels
 
 		metadata := protocol.Metadata{}
@@ -727,7 +727,7 @@ func (s Participants) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Participants) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Groups) > 0 {
+	if s.Groups != nil {
 		v := s.Groups
 
 		metadata := protocol.Metadata{}
@@ -739,7 +739,7 @@ func (s Participants) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Users) > 0 {
+	if s.Users != nil {
 		v := s.Users
 
 		metadata := protocol.Metadata{}
@@ -816,7 +816,7 @@ func (s Principal) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Roles) > 0 {
+	if s.Roles != nil {
 		v := s.Roles
 
 		metadata := protocol.Metadata{}
@@ -933,7 +933,7 @@ func (s ResourcePath) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ResourcePath) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Components) > 0 {
+	if s.Components != nil {
 		v := s.Components
 
 		metadata := protocol.Metadata{}
@@ -1220,7 +1220,7 @@ func (s UploadMetadata) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UploadMetadata) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.SignedHeaders) > 0 {
+	if s.SignedHeaders != nil {
 		v := s.SignedHeaders
 
 		metadata := protocol.Metadata{}

@@ -201,7 +201,7 @@ func (s GetAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ProviderARNs) > 0 {
+	if s.ProviderARNs != nil {
 		v := s.ProviderARNs
 
 		metadata := protocol.Metadata{}

@@ -66,7 +66,7 @@ func (s CreateSoftwareUpdateJobInput) MarshalFields(e protocol.FieldEncoder) err
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "UpdateAgentLogLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.UpdateTargets) > 0 {
+	if s.UpdateTargets != nil {
 		v := s.UpdateTargets
 
 		metadata := protocol.Metadata{}

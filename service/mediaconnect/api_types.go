@@ -287,7 +287,7 @@ func (s Entitlement) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Subscribers) > 0 {
+	if s.Subscribers != nil {
 		v := s.Subscribers
 
 		metadata := protocol.Metadata{}
@@ -377,7 +377,7 @@ func (s Flow) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "egressIp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Entitlements) > 0 {
+	if s.Entitlements != nil {
 		v := s.Entitlements
 
 		metadata := protocol.Metadata{}
@@ -401,7 +401,7 @@ func (s Flow) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Outputs) > 0 {
+	if s.Outputs != nil {
 		v := s.Outputs
 
 		metadata := protocol.Metadata{}
@@ -498,7 +498,7 @@ func (s GrantEntitlementRequest) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Subscribers) > 0 {
+	if s.Subscribers != nil {
 		v := s.Subscribers
 
 		metadata := protocol.Metadata{}
@@ -655,7 +655,7 @@ func (s Messages) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Messages) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Errors) > 0 {
+	if s.Errors != nil {
 		v := s.Errors
 
 		metadata := protocol.Metadata{}

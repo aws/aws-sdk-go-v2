@@ -87,7 +87,7 @@ func (s CreateObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ObjectAttributeList) > 0 {
+	if s.ObjectAttributeList != nil {
 		v := s.ObjectAttributeList
 
 		metadata := protocol.Metadata{}
@@ -105,7 +105,7 @@ func (s CreateObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "ParentReference", v, metadata)
 	}
-	if len(s.SchemaFacets) > 0 {
+	if s.SchemaFacets != nil {
 		v := s.SchemaFacets
 
 		metadata := protocol.Metadata{}

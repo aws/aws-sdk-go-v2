@@ -70,7 +70,7 @@ func (s GetFindingsInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SortCriteria) > 0 {
+	if s.SortCriteria != nil {
 		v := s.SortCriteria
 
 		metadata := protocol.Metadata{}
@@ -105,7 +105,7 @@ func (s GetFindingsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetFindingsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Findings) > 0 {
+	if s.Findings != nil {
 		v := s.Findings
 
 		metadata := protocol.Metadata{}

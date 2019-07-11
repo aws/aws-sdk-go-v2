@@ -59,7 +59,7 @@ func (s GetSamplingRulesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SamplingRuleRecords) > 0 {
+	if s.SamplingRuleRecords != nil {
 		v := s.SamplingRuleRecords
 
 		metadata := protocol.Metadata{}

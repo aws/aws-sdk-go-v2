@@ -89,7 +89,7 @@ func (s GetTypedLinkFacetInformationOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetTypedLinkFacetInformationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.IdentityAttributeOrder) > 0 {
+	if s.IdentityAttributeOrder != nil {
 		v := s.IdentityAttributeOrder
 
 		metadata := protocol.Metadata{}

@@ -129,7 +129,7 @@ func (s DescribeBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "brokerId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.BrokerInstances) > 0 {
+	if s.BrokerInstances != nil {
 		v := s.BrokerInstances
 
 		metadata := protocol.Metadata{}
@@ -213,7 +213,7 @@ func (s DescribeBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "publiclyAccessible", protocol.BoolValue(v), metadata)
 	}
-	if len(s.SecurityGroups) > 0 {
+	if s.SecurityGroups != nil {
 		v := s.SecurityGroups
 
 		metadata := protocol.Metadata{}
@@ -225,7 +225,7 @@ func (s DescribeBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.SubnetIds) > 0 {
+	if s.SubnetIds != nil {
 		v := s.SubnetIds
 
 		metadata := protocol.Metadata{}
@@ -237,7 +237,7 @@ func (s DescribeBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -249,7 +249,7 @@ func (s DescribeBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.Users) > 0 {
+	if s.Users != nil {
 		v := s.Users
 
 		metadata := protocol.Metadata{}

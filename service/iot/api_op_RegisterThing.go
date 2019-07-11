@@ -46,7 +46,7 @@ func (s *RegisterThingInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s RegisterThingInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.Parameters) > 0 {
+	if s.Parameters != nil {
 		v := s.Parameters
 
 		metadata := protocol.Metadata{}
@@ -90,7 +90,7 @@ func (s RegisterThingOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "certificatePem", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResourceArns) > 0 {
+	if s.ResourceArns != nil {
 		v := s.ResourceArns
 
 		metadata := protocol.Metadata{}

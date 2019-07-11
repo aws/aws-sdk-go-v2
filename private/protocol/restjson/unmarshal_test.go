@@ -652,7 +652,7 @@ type OutputService4TestShapeOutputService4TestCaseOperation1Output struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService4TestShapeOutputService4TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ListMember) > 0 {
+	if s.ListMember != nil {
 		v := s.ListMember
 
 		metadata := protocol.Metadata{}
@@ -797,7 +797,7 @@ type OutputService5TestShapeOutputService5TestCaseOperation1Output struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService5TestShapeOutputService5TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ListMember) > 0 {
+	if s.ListMember != nil {
 		v := s.ListMember
 
 		metadata := protocol.Metadata{}
@@ -959,7 +959,7 @@ type OutputService6TestShapeOutputService6TestCaseOperation1Output struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService6TestShapeOutputService6TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.MapMember) > 0 {
+	if s.MapMember != nil {
 		v := s.MapMember
 
 		metadata := protocol.Metadata{}
@@ -1109,7 +1109,7 @@ type OutputService7TestShapeOutputService7TestCaseOperation1Output struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService7TestShapeOutputService7TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.MapMember) > 0 {
+	if s.MapMember != nil {
 		v := s.MapMember
 
 		metadata := protocol.Metadata{}
@@ -1395,7 +1395,7 @@ type OutputService9TestShapeOutputService9TestCaseOperation1Output struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService9TestShapeOutputService9TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AllHeaders) > 0 {
+	if s.AllHeaders != nil {
 		v := s.AllHeaders
 
 		metadata := protocol.Metadata{}
@@ -1407,7 +1407,7 @@ func (s OutputService9TestShapeOutputService9TestCaseOperation1Output) MarshalFi
 		ms0.End()
 
 	}
-	if len(s.PrefixedHeaders) > 0 {
+	if s.PrefixedHeaders != nil {
 		v := s.PrefixedHeaders
 
 		metadata := protocol.Metadata{}
@@ -1865,7 +1865,7 @@ func (s OutputService12TestShapeOutputService12TestCaseOperation1Output) Marshal
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "BodyField", protocol.JSONValue{V: v, EscapeMode: protocol.QuotedEscape}, metadata)
 	}
-	if len(s.BodyListField) > 0 {
+	if s.BodyListField != nil {
 		v := s.BodyListField
 
 		metadata := protocol.Metadata{}
@@ -1978,7 +1978,7 @@ func (s OutputService12TestShapeOutputService12TestCaseOperation2Output) Marshal
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "BodyField", protocol.JSONValue{V: v, EscapeMode: protocol.QuotedEscape}, metadata)
 	}
-	if len(s.BodyListField) > 0 {
+	if s.BodyListField != nil {
 		v := s.BodyListField
 
 		metadata := protocol.Metadata{}
@@ -2091,7 +2091,7 @@ func (s OutputService12TestShapeOutputService12TestCaseOperation3Output) Marshal
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "BodyField", protocol.JSONValue{V: v, EscapeMode: protocol.QuotedEscape}, metadata)
 	}
-	if len(s.BodyListField) > 0 {
+	if s.BodyListField != nil {
 		v := s.BodyListField
 
 		metadata := protocol.Metadata{}
@@ -2252,7 +2252,7 @@ func (s OutputService13TestShapeOutputService13TestCaseOperation1Output) Marshal
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "FooEnum", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.ListEnums) > 0 {
+	if s.ListEnums != nil {
 		v := s.ListEnums
 
 		metadata := protocol.Metadata{}
@@ -2356,7 +2356,7 @@ func (s OutputService13TestShapeOutputService13TestCaseOperation2Input) MarshalF
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "FooEnum", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.ListEnums) > 0 {
+	if s.ListEnums != nil {
 		v := s.ListEnums
 
 		metadata := protocol.Metadata{}

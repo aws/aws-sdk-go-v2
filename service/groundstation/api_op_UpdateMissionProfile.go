@@ -90,7 +90,7 @@ func (s UpdateMissionProfileInput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "contactPrePassDurationSeconds", protocol.Int64Value(v), metadata)
 	}
-	if len(s.DataflowEdges) > 0 {
+	if s.DataflowEdges != nil {
 		v := s.DataflowEdges
 
 		metadata := protocol.Metadata{}

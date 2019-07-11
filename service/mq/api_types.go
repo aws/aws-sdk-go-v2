@@ -63,7 +63,7 @@ func (s BrokerEngineType) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "engineType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.EngineVersions) > 0 {
+	if s.EngineVersions != nil {
 		v := s.EngineVersions
 
 		metadata := protocol.Metadata{}
@@ -106,7 +106,7 @@ func (s BrokerInstance) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "consoleURL", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Endpoints) > 0 {
+	if s.Endpoints != nil {
 		v := s.Endpoints
 
 		metadata := protocol.Metadata{}
@@ -152,7 +152,7 @@ func (s BrokerInstanceOption) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BrokerInstanceOption) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AvailabilityZones) > 0 {
+	if s.AvailabilityZones != nil {
 		v := s.AvailabilityZones
 
 		metadata := protocol.Metadata{}
@@ -176,7 +176,7 @@ func (s BrokerInstanceOption) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "hostInstanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SupportedEngineVersions) > 0 {
+	if s.SupportedEngineVersions != nil {
 		v := s.SupportedEngineVersions
 
 		metadata := protocol.Metadata{}
@@ -365,7 +365,7 @@ func (s Configuration) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -485,7 +485,7 @@ func (s Configurations) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "current", v, metadata)
 	}
-	if len(s.History) > 0 {
+	if s.History != nil {
 		v := s.History
 
 		metadata := protocol.Metadata{}
@@ -746,7 +746,7 @@ func (s User) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "consoleAccess", protocol.BoolValue(v), metadata)
 	}
-	if len(s.Groups) > 0 {
+	if s.Groups != nil {
 		v := s.Groups
 
 		metadata := protocol.Metadata{}
@@ -804,7 +804,7 @@ func (s UserPendingChanges) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "consoleAccess", protocol.BoolValue(v), metadata)
 	}
-	if len(s.Groups) > 0 {
+	if s.Groups != nil {
 		v := s.Groups
 
 		metadata := protocol.Metadata{}

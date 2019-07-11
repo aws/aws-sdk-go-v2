@@ -47,7 +47,7 @@ func (s *UpdateApiKeyInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateApiKeyInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.PatchOperations) > 0 {
+	if s.PatchOperations != nil {
 		v := s.PatchOperations
 
 		metadata := protocol.Metadata{}
@@ -158,7 +158,7 @@ func (s UpdateApiKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.StageKeys) > 0 {
+	if s.StageKeys != nil {
 		v := s.StageKeys
 
 		metadata := protocol.Metadata{}
@@ -170,7 +170,7 @@ func (s UpdateApiKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

@@ -52,7 +52,7 @@ func (s DescribeEventConfigurationsOutput) MarshalFields(e protocol.FieldEncoder
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
-	if len(s.EventConfigurations) > 0 {
+	if s.EventConfigurations != nil {
 		v := s.EventConfigurations
 
 		metadata := protocol.Metadata{}

@@ -77,7 +77,7 @@ func (s CreateConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.KafkaVersions) > 0 {
+	if s.KafkaVersions != nil {
 		v := s.KafkaVersions
 
 		metadata := protocol.Metadata{}

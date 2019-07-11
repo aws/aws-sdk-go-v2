@@ -128,7 +128,7 @@ func (s DescribeFleetOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Robots) > 0 {
+	if s.Robots != nil {
 		v := s.Robots
 
 		metadata := protocol.Metadata{}
@@ -140,7 +140,7 @@ func (s DescribeFleetOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

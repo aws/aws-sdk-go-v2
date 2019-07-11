@@ -102,7 +102,7 @@ func (s GetIntentVersionsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetIntentVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Intents) > 0 {
+	if s.Intents != nil {
 		v := s.Intents
 
 		metadata := protocol.Metadata{}

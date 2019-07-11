@@ -59,7 +59,7 @@ func (s *AddFlowOutputsInput) Validate() error {
 func (s AddFlowOutputsInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.Outputs) > 0 {
+	if s.Outputs != nil {
 		v := s.Outputs
 
 		metadata := protocol.Metadata{}
@@ -106,7 +106,7 @@ func (s AddFlowOutputsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "flowArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Outputs) > 0 {
+	if s.Outputs != nil {
 		v := s.Outputs
 
 		metadata := protocol.Metadata{}

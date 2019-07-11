@@ -138,7 +138,7 @@ func (s ListObjectParentsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ParentLinks) > 0 {
+	if s.ParentLinks != nil {
 		v := s.ParentLinks
 
 		metadata := protocol.Metadata{}
@@ -150,7 +150,7 @@ func (s ListObjectParentsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Parents) > 0 {
+	if s.Parents != nil {
 		v := s.Parents
 
 		metadata := protocol.Metadata{}

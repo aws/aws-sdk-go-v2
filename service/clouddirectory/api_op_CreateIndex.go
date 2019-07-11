@@ -91,7 +91,7 @@ func (s CreateIndexInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.OrderedIndexedAttributeList) > 0 {
+	if s.OrderedIndexedAttributeList != nil {
 		v := s.OrderedIndexedAttributeList
 
 		metadata := protocol.Metadata{}

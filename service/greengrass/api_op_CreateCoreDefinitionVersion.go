@@ -45,7 +45,7 @@ func (s *CreateCoreDefinitionVersionInput) Validate() error {
 func (s CreateCoreDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.Cores) > 0 {
+	if s.Cores != nil {
 		v := s.Cores
 
 		metadata := protocol.Metadata{}

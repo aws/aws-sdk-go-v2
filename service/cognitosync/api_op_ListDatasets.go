@@ -122,7 +122,7 @@ func (s ListDatasetsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Count", protocol.Int64Value(v), metadata)
 	}
-	if len(s.Datasets) > 0 {
+	if s.Datasets != nil {
 		v := s.Datasets
 
 		metadata := protocol.Metadata{}

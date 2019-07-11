@@ -41,7 +41,7 @@ func (s ListDomainNamesOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListDomainNamesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.DomainNames) > 0 {
+	if s.DomainNames != nil {
 		v := s.DomainNames
 
 		metadata := protocol.Metadata{}

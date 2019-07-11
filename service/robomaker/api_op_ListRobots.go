@@ -74,7 +74,7 @@ func (s *ListRobotsInput) Validate() error {
 func (s ListRobotsInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.Filters) > 0 {
+	if s.Filters != nil {
 		v := s.Filters
 
 		metadata := protocol.Metadata{}
@@ -128,7 +128,7 @@ func (s ListRobotsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Robots) > 0 {
+	if s.Robots != nil {
 		v := s.Robots
 
 		metadata := protocol.Metadata{}

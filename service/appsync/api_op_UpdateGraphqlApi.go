@@ -90,7 +90,7 @@ func (s *UpdateGraphqlApiInput) Validate() error {
 func (s UpdateGraphqlApiInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.AdditionalAuthenticationProviders) > 0 {
+	if s.AdditionalAuthenticationProviders != nil {
 		v := s.AdditionalAuthenticationProviders
 
 		metadata := protocol.Metadata{}

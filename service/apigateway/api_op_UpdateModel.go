@@ -55,7 +55,7 @@ func (s *UpdateModelInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateModelInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.PatchOperations) > 0 {
+	if s.PatchOperations != nil {
 		v := s.PatchOperations
 
 		metadata := protocol.Metadata{}

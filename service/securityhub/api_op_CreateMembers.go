@@ -28,7 +28,7 @@ func (s CreateMembersInput) String() string {
 func (s CreateMembersInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.AccountDetails) > 0 {
+	if s.AccountDetails != nil {
 		v := s.AccountDetails
 
 		metadata := protocol.Metadata{}
@@ -59,7 +59,7 @@ func (s CreateMembersOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateMembersOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.UnprocessedAccounts) > 0 {
+	if s.UnprocessedAccounts != nil {
 		v := s.UnprocessedAccounts
 
 		metadata := protocol.Metadata{}

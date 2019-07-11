@@ -183,7 +183,7 @@ func (s DescribeActivitiesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.UserActivities) > 0 {
+	if s.UserActivities != nil {
 		v := s.UserActivities
 
 		metadata := protocol.Metadata{}

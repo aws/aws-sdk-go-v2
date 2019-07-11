@@ -86,7 +86,7 @@ func (s GetSdkInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "stage_name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Parameters) > 0 {
+	if s.Parameters != nil {
 		v := s.Parameters
 
 		metadata := protocol.Metadata{}

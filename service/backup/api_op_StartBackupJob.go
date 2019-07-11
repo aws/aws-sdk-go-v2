@@ -127,7 +127,7 @@ func (s StartBackupJobInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Lifecycle", v, metadata)
 	}
-	if len(s.RecoveryPointTags) > 0 {
+	if s.RecoveryPointTags != nil {
 		v := s.RecoveryPointTags
 
 		metadata := protocol.Metadata{}

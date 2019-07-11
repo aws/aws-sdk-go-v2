@@ -136,7 +136,7 @@ func (s GetBotChannelAssociationsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetBotChannelAssociationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.BotChannelAssociations) > 0 {
+	if s.BotChannelAssociations != nil {
 		v := s.BotChannelAssociations
 
 		metadata := protocol.Metadata{}

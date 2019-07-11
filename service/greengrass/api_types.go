@@ -173,7 +173,7 @@ func (s BulkDeploymentResult) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "DeploymentType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.ErrorDetails) > 0 {
+	if s.ErrorDetails != nil {
 		v := s.ErrorDetails
 
 		metadata := protocol.Metadata{}
@@ -290,7 +290,7 @@ func (s Connector) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Parameters) > 0 {
+	if s.Parameters != nil {
 		v := s.Parameters
 
 		metadata := protocol.Metadata{}
@@ -323,7 +323,7 @@ func (s ConnectorDefinitionVersion) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ConnectorDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Connectors) > 0 {
+	if s.Connectors != nil {
 		v := s.Connectors
 
 		metadata := protocol.Metadata{}
@@ -407,7 +407,7 @@ func (s CoreDefinitionVersion) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CoreDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Cores) > 0 {
+	if s.Cores != nil {
 		v := s.Cores
 
 		metadata := protocol.Metadata{}
@@ -500,7 +500,7 @@ func (s DefinitionInformation) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -647,7 +647,7 @@ func (s DeviceDefinitionVersion) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DeviceDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Devices) > 0 {
+	if s.Devices != nil {
 		v := s.Devices
 
 		metadata := protocol.Metadata{}
@@ -869,7 +869,7 @@ func (s FunctionConfigurationEnvironment) MarshalFields(e protocol.FieldEncoder)
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Execution", v, metadata)
 	}
-	if len(s.ResourceAccessPolicies) > 0 {
+	if s.ResourceAccessPolicies != nil {
 		v := s.ResourceAccessPolicies
 
 		metadata := protocol.Metadata{}
@@ -881,7 +881,7 @@ func (s FunctionConfigurationEnvironment) MarshalFields(e protocol.FieldEncoder)
 		ls0.End()
 
 	}
-	if len(s.Variables) > 0 {
+	if s.Variables != nil {
 		v := s.Variables
 
 		metadata := protocol.Metadata{}
@@ -991,7 +991,7 @@ func (s FunctionDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "DefaultConfig", v, metadata)
 	}
-	if len(s.Functions) > 0 {
+	if s.Functions != nil {
 		v := s.Functions
 
 		metadata := protocol.Metadata{}
@@ -1477,7 +1477,7 @@ func (s LoggerDefinitionVersion) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s LoggerDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Loggers) > 0 {
+	if s.Loggers != nil {
 		v := s.Loggers
 
 		metadata := protocol.Metadata{}
@@ -1656,7 +1656,7 @@ func (s ResourceDefinitionVersion) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ResourceDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Resources) > 0 {
+	if s.Resources != nil {
 		v := s.Resources
 
 		metadata := protocol.Metadata{}
@@ -1771,7 +1771,7 @@ func (s SecretsManagerSecretResourceData) MarshalFields(e protocol.FieldEncoder)
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.AdditionalStagingLabelsToDownload) > 0 {
+	if s.AdditionalStagingLabelsToDownload != nil {
 		v := s.AdditionalStagingLabelsToDownload
 
 		metadata := protocol.Metadata{}
@@ -1858,7 +1858,7 @@ func (s SubscriptionDefinitionVersion) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SubscriptionDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Subscriptions) > 0 {
+	if s.Subscriptions != nil {
 		v := s.Subscriptions
 
 		metadata := protocol.Metadata{}

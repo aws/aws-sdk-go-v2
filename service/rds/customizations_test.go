@@ -41,7 +41,7 @@ func TestPresignCrossRegionRequest(t *testing.T) {
 	cfg.EndpointResolver = endpoints.NewDefaultResolver()
 
 	svc := New(cfg)
-	const regexPattern= `^https://rds.us-west-1\.amazonaws\.com/\?Action=%s.+?DestinationRegion=%s.+`
+	const regexPattern = `^https://rds.us-west-1\.amazonaws\.com/\?Action=%s.+?DestinationRegion=%s.+`
 
 	cases := map[string]struct {
 		Req    *request.Request

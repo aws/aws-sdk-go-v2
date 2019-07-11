@@ -74,7 +74,7 @@ func (s GetResourcePoliciesInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "principal", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResourceArns) > 0 {
+	if s.ResourceArns != nil {
 		v := s.ResourceArns
 
 		metadata := protocol.Metadata{}
@@ -114,7 +114,7 @@ func (s GetResourcePoliciesOutput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Policies) > 0 {
+	if s.Policies != nil {
 		v := s.Policies
 
 		metadata := protocol.Metadata{}

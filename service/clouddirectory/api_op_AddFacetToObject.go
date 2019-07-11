@@ -78,7 +78,7 @@ func (s *AddFacetToObjectInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s AddFacetToObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.ObjectAttributeList) > 0 {
+	if s.ObjectAttributeList != nil {
 		v := s.ObjectAttributeList
 
 		metadata := protocol.Metadata{}

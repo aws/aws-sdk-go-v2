@@ -141,7 +141,7 @@ func (s ListTrafficPolicyVersionsOutput) MarshalFields(e protocol.FieldEncoder) 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.StringValue(v), metadata)
 	}
-	if len(s.TrafficPolicies) > 0 {
+	if s.TrafficPolicies != nil {
 		v := s.TrafficPolicies
 
 		metadata := protocol.Metadata{ListLocationName: "TrafficPolicy"}

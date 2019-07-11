@@ -61,7 +61,7 @@ func (s *ListTagsForResourcesInput) Validate() error {
 func (s ListTagsForResourcesInput) MarshalFields(e protocol.FieldEncoder) error {
 
 	e.SetFields(protocol.BodyTarget, "ListTagsForResourcesRequest", protocol.FieldMarshalerFunc(func(e protocol.FieldEncoder) error {
-		if len(s.ResourceIds) > 0 {
+		if s.ResourceIds != nil {
 			v := s.ResourceIds
 
 			metadata := protocol.Metadata{ListLocationName: "ResourceId"}
@@ -102,7 +102,7 @@ func (s ListTagsForResourcesOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListTagsForResourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ResourceTagSets) > 0 {
+	if s.ResourceTagSets != nil {
 		v := s.ResourceTagSets
 
 		metadata := protocol.Metadata{ListLocationName: "ResourceTagSet"}

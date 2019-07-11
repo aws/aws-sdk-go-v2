@@ -86,7 +86,7 @@ func (s DescribeInputSecurityGroupOutput) MarshalFields(e protocol.FieldEncoder)
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Inputs) > 0 {
+	if s.Inputs != nil {
 		v := s.Inputs
 
 		metadata := protocol.Metadata{}
@@ -104,7 +104,7 @@ func (s DescribeInputSecurityGroupOutput) MarshalFields(e protocol.FieldEncoder)
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -116,7 +116,7 @@ func (s DescribeInputSecurityGroupOutput) MarshalFields(e protocol.FieldEncoder)
 		ms0.End()
 
 	}
-	if len(s.WhitelistRules) > 0 {
+	if s.WhitelistRules != nil {
 		v := s.WhitelistRules
 
 		metadata := protocol.Metadata{}

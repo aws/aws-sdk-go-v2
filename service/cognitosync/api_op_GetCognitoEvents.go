@@ -72,7 +72,7 @@ func (s GetCognitoEventsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetCognitoEventsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Events) > 0 {
+	if s.Events != nil {
 		v := s.Events
 
 		metadata := protocol.Metadata{}

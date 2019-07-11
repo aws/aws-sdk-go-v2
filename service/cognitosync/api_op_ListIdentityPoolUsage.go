@@ -77,7 +77,7 @@ func (s ListIdentityPoolUsageOutput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Count", protocol.Int64Value(v), metadata)
 	}
-	if len(s.IdentityPoolUsages) > 0 {
+	if s.IdentityPoolUsages != nil {
 		v := s.IdentityPoolUsages
 
 		metadata := protocol.Metadata{}

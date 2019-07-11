@@ -57,7 +57,7 @@ func (s *UpdateDeploymentInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateDeploymentInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.PatchOperations) > 0 {
+	if s.PatchOperations != nil {
 		v := s.PatchOperations
 
 		metadata := protocol.Metadata{}
@@ -118,7 +118,7 @@ func (s UpdateDeploymentOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateDeploymentOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ApiSummary) > 0 {
+	if s.ApiSummary != nil {
 		v := s.ApiSummary
 
 		metadata := protocol.Metadata{}

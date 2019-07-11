@@ -155,7 +155,7 @@ func (s GetTraceSummariesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.TraceSummaries) > 0 {
+	if s.TraceSummaries != nil {
 		v := s.TraceSummaries
 
 		metadata := protocol.Metadata{}

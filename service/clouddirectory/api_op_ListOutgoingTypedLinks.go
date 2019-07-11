@@ -93,7 +93,7 @@ func (s ListOutgoingTypedLinksInput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ConsistencyLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.FilterAttributeRanges) > 0 {
+	if s.FilterAttributeRanges != nil {
 		v := s.FilterAttributeRanges
 
 		metadata := protocol.Metadata{}
@@ -162,7 +162,7 @@ func (s ListOutgoingTypedLinksOutput) MarshalFields(e protocol.FieldEncoder) err
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.TypedLinkSpecifiers) > 0 {
+	if s.TypedLinkSpecifiers != nil {
 		v := s.TypedLinkSpecifiers
 
 		metadata := protocol.Metadata{}

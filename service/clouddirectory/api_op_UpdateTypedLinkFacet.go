@@ -85,7 +85,7 @@ func (s *UpdateTypedLinkFacetInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateTypedLinkFacetInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.AttributeUpdates) > 0 {
+	if s.AttributeUpdates != nil {
 		v := s.AttributeUpdates
 
 		metadata := protocol.Metadata{}
@@ -97,7 +97,7 @@ func (s UpdateTypedLinkFacetInput) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.IdentityAttributeOrder) > 0 {
+	if s.IdentityAttributeOrder != nil {
 		v := s.IdentityAttributeOrder
 
 		metadata := protocol.Metadata{}

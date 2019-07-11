@@ -105,7 +105,7 @@ func (s GetRecoveryPointRestoreMetadataOutput) MarshalFields(e protocol.FieldEnc
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "RecoveryPointArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.RestoreMetadata) > 0 {
+	if s.RestoreMetadata != nil {
 		v := s.RestoreMetadata
 
 		metadata := protocol.Metadata{}

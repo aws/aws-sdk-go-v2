@@ -132,7 +132,7 @@ func (s ListRoutesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Routes) > 0 {
+	if s.Routes != nil {
 		v := s.Routes
 
 		metadata := protocol.Metadata{}

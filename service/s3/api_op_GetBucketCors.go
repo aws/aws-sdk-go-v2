@@ -70,7 +70,7 @@ func (s GetBucketCorsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetBucketCorsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.CORSRules) > 0 {
+	if s.CORSRules != nil {
 		v := s.CORSRules
 
 		metadata := protocol.Metadata{Flatten: true}

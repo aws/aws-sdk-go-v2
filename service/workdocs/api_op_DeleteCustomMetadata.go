@@ -85,7 +85,7 @@ func (s DeleteCustomMetadataInput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.QueryTarget, "deleteAll", protocol.BoolValue(v), metadata)
 	}
-	if len(s.Keys) > 0 {
+	if s.Keys != nil {
 		v := s.Keys
 
 		metadata := protocol.Metadata{}

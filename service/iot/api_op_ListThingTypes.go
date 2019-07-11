@@ -94,7 +94,7 @@ func (s ListThingTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ThingTypes) > 0 {
+	if s.ThingTypes != nil {
 		v := s.ThingTypes
 
 		metadata := protocol.Metadata{}

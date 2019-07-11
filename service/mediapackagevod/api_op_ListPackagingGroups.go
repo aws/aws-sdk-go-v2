@@ -78,7 +78,7 @@ func (s ListPackagingGroupsOutput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.PackagingGroups) > 0 {
+	if s.PackagingGroups != nil {
 		v := s.PackagingGroups
 
 		metadata := protocol.Metadata{}

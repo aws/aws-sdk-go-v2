@@ -1657,5 +1657,65 @@
         }
       }
     ]
+  },
+  {
+    "description": "Empty or unset maps in payload",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "MapEmpty": {
+            "shape": "MapStringStringType"
+          },
+          "MapDefaults": {
+            "shape": "MapStringStringType"
+          },
+          "MapNotSet": {
+            "shape": "MapStringStringType"
+          }
+        }
+      },
+      "MapStringStringType": {
+        "type": "map",
+        "key": {
+          "shape": "StringType"
+        },
+        "value": {
+          "shape": "StringType"
+        }
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "MapEmpty": {},
+          "MapDefaults": {"test_key_1": "test_value_1", "test_key_2": "test_value_2" ,"test_key_3": "test_value_3" }
+        },
+        "serialized": {
+          "body": "{\"MapDefaults\": {\"test_key_1\":\"test_value_1\", \"test_key_2\":\"test_value_2\", \"test_key_3\":\"test_value_3\"}, \"MapEmpty\":{}}",
+          "uri": "/",
+          "headers": {}
+        }
+      }
+    ]
   }
 ]
+
+

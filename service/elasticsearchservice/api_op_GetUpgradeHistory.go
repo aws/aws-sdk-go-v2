@@ -104,7 +104,7 @@ func (s GetUpgradeHistoryOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.UpgradeHistories) > 0 {
+	if s.UpgradeHistories != nil {
 		v := s.UpgradeHistories
 
 		metadata := protocol.Metadata{}

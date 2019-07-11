@@ -179,7 +179,7 @@ func (s ListPartsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "PartSizeInBytes", protocol.Int64Value(v), metadata)
 	}
-	if len(s.Parts) > 0 {
+	if s.Parts != nil {
 		v := s.Parts
 
 		metadata := protocol.Metadata{}

@@ -101,7 +101,7 @@ func (s ListJobExecutionsForJobOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListJobExecutionsForJobOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ExecutionSummaries) > 0 {
+	if s.ExecutionSummaries != nil {
 		v := s.ExecutionSummaries
 
 		metadata := protocol.Metadata{}

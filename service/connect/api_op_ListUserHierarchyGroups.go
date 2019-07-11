@@ -107,7 +107,7 @@ func (s ListUserHierarchyGroupsOutput) MarshalFields(e protocol.FieldEncoder) er
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.UserHierarchyGroupSummaryList) > 0 {
+	if s.UserHierarchyGroupSummaryList != nil {
 		v := s.UserHierarchyGroupSummaryList
 
 		metadata := protocol.Metadata{}

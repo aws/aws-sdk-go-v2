@@ -128,7 +128,7 @@ func (s TestInvokeAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "isAuthenticated", protocol.BoolValue(v), metadata)
 	}
-	if len(s.PolicyDocuments) > 0 {
+	if s.PolicyDocuments != nil {
 		v := s.PolicyDocuments
 
 		metadata := protocol.Metadata{}

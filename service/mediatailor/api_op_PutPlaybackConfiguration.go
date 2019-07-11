@@ -92,7 +92,7 @@ func (s PutPlaybackConfigurationInput) MarshalFields(e protocol.FieldEncoder) er
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SlateAdUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -213,7 +213,7 @@ func (s PutPlaybackConfigurationOutput) MarshalFields(e protocol.FieldEncoder) e
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SlateAdUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

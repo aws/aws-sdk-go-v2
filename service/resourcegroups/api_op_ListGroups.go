@@ -61,7 +61,7 @@ func (s *ListGroupsInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.Filters) > 0 {
+	if s.Filters != nil {
 		v := s.Filters
 
 		metadata := protocol.Metadata{}
@@ -111,7 +111,7 @@ func (s ListGroupsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.GroupIdentifiers) > 0 {
+	if s.GroupIdentifiers != nil {
 		v := s.GroupIdentifiers
 
 		metadata := protocol.Metadata{}
@@ -123,7 +123,7 @@ func (s ListGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Groups) > 0 {
+	if s.Groups != nil {
 		v := s.Groups
 
 		metadata := protocol.Metadata{}

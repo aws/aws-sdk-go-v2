@@ -55,7 +55,7 @@ func (s *PutLifecycleConfigurationInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PutLifecycleConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.LifecyclePolicies) > 0 {
+	if s.LifecyclePolicies != nil {
 		v := s.LifecyclePolicies
 
 		metadata := protocol.Metadata{}
@@ -92,7 +92,7 @@ func (s PutLifecycleConfigurationOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PutLifecycleConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.LifecyclePolicies) > 0 {
+	if s.LifecyclePolicies != nil {
 		v := s.LifecyclePolicies
 
 		metadata := protocol.Metadata{}

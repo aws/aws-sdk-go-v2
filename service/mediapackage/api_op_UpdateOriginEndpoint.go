@@ -131,7 +131,7 @@ func (s UpdateOriginEndpointInput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "timeDelaySeconds", protocol.Int64Value(v), metadata)
 	}
-	if len(s.Whitelist) > 0 {
+	if s.Whitelist != nil {
 		v := s.Whitelist
 
 		metadata := protocol.Metadata{}
@@ -257,7 +257,7 @@ func (s UpdateOriginEndpointOutput) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "startoverWindowSeconds", protocol.Int64Value(v), metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -281,7 +281,7 @@ func (s UpdateOriginEndpointOutput) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Whitelist) > 0 {
+	if s.Whitelist != nil {
 		v := s.Whitelist
 
 		metadata := protocol.Metadata{}

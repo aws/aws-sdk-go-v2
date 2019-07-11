@@ -72,7 +72,7 @@ func (s GetPendingJobExecutionsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetPendingJobExecutionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.InProgressJobs) > 0 {
+	if s.InProgressJobs != nil {
 		v := s.InProgressJobs
 
 		metadata := protocol.Metadata{}
@@ -84,7 +84,7 @@ func (s GetPendingJobExecutionsOutput) MarshalFields(e protocol.FieldEncoder) er
 		ls0.End()
 
 	}
-	if len(s.QueuedJobs) > 0 {
+	if s.QueuedJobs != nil {
 		v := s.QueuedJobs
 
 		metadata := protocol.Metadata{}

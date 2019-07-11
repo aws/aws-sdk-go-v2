@@ -155,7 +155,7 @@ func (s ListGeoLocationsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListGeoLocationsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.GeoLocationDetailsList) > 0 {
+	if s.GeoLocationDetailsList != nil {
 		v := s.GeoLocationDetailsList
 
 		metadata := protocol.Metadata{ListLocationName: "GeoLocationDetails"}

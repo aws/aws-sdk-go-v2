@@ -97,7 +97,7 @@ func (s UpdateRobotApplicationInput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "robotSoftwareSuite", v, metadata)
 	}
-	if len(s.Sources) > 0 {
+	if s.Sources != nil {
 		v := s.Sources
 
 		metadata := protocol.Metadata{}
@@ -176,7 +176,7 @@ func (s UpdateRobotApplicationOutput) MarshalFields(e protocol.FieldEncoder) err
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "robotSoftwareSuite", v, metadata)
 	}
-	if len(s.Sources) > 0 {
+	if s.Sources != nil {
 		v := s.Sources
 
 		metadata := protocol.Metadata{}

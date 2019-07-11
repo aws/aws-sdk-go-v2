@@ -75,7 +75,7 @@ func (s *ListSimulationJobsInput) Validate() error {
 func (s ListSimulationJobsInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.Filters) > 0 {
+	if s.Filters != nil {
 		v := s.Filters
 
 		metadata := protocol.Metadata{}
@@ -131,7 +131,7 @@ func (s ListSimulationJobsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SimulationJobSummaries) > 0 {
+	if s.SimulationJobSummaries != nil {
 		v := s.SimulationJobSummaries
 
 		metadata := protocol.Metadata{}

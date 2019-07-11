@@ -130,7 +130,7 @@ func (s DescribeResourcePermissionsOutput) MarshalFields(e protocol.FieldEncoder
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Principals) > 0 {
+	if s.Principals != nil {
 		v := s.Principals
 
 		metadata := protocol.Metadata{}

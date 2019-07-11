@@ -75,7 +75,7 @@ func (s GetSdkTypeOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetSdkTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ConfigurationProperties) > 0 {
+	if s.ConfigurationProperties != nil {
 		v := s.ConfigurationProperties
 
 		metadata := protocol.Metadata{}

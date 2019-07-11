@@ -27,7 +27,7 @@ func (s UpdateAccountInput) String() string {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateAccountInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.PatchOperations) > 0 {
+	if s.PatchOperations != nil {
 		v := s.PatchOperations
 
 		metadata := protocol.Metadata{}
@@ -115,7 +115,7 @@ func (s UpdateAccountOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "cloudwatchRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Features) > 0 {
+	if s.Features != nil {
 		v := s.Features
 
 		metadata := protocol.Metadata{}

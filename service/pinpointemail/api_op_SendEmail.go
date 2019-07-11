@@ -105,7 +105,7 @@ func (s SendEmailInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Destination", v, metadata)
 	}
-	if len(s.EmailTags) > 0 {
+	if s.EmailTags != nil {
 		v := s.EmailTags
 
 		metadata := protocol.Metadata{}
@@ -129,7 +129,7 @@ func (s SendEmailInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "FromEmailAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ReplyToAddresses) > 0 {
+	if s.ReplyToAddresses != nil {
 		v := s.ReplyToAddresses
 
 		metadata := protocol.Metadata{}

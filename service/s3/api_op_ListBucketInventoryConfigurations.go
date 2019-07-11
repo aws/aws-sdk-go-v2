@@ -104,7 +104,7 @@ func (s ListBucketInventoryConfigurationsOutput) MarshalFields(e protocol.FieldE
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ContinuationToken", protocol.StringValue(v), metadata)
 	}
-	if len(s.InventoryConfigurationList) > 0 {
+	if s.InventoryConfigurationList != nil {
 		v := s.InventoryConfigurationList
 
 		metadata := protocol.Metadata{Flatten: true}

@@ -137,7 +137,7 @@ func (s CreateBranchInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "enableNotification", protocol.BoolValue(v), metadata)
 	}
-	if len(s.EnvironmentVariables) > 0 {
+	if s.EnvironmentVariables != nil {
 		v := s.EnvironmentVariables
 
 		metadata := protocol.Metadata{}
@@ -161,7 +161,7 @@ func (s CreateBranchInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "stage", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

@@ -46,7 +46,7 @@ func (s *PutVoiceConnectorTerminationCredentialsInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PutVoiceConnectorTerminationCredentialsInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.Credentials) > 0 {
+	if s.Credentials != nil {
 		v := s.Credentials
 
 		metadata := protocol.Metadata{}

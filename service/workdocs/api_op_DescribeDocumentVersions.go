@@ -138,7 +138,7 @@ func (s DescribeDocumentVersionsOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeDocumentVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.DocumentVersions) > 0 {
+	if s.DocumentVersions != nil {
 		v := s.DocumentVersions
 
 		metadata := protocol.Metadata{}

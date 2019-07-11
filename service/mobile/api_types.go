@@ -44,7 +44,7 @@ func (s BundleDetails) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BundleDetails) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.AvailablePlatforms) > 0 {
+	if s.AvailablePlatforms != nil {
 		v := s.AvailablePlatforms
 
 		metadata := protocol.Metadata{}
@@ -162,7 +162,7 @@ func (s ProjectDetails) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "region", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Resources) > 0 {
+	if s.Resources != nil {
 		v := s.Resources
 
 		metadata := protocol.Metadata{}
@@ -252,7 +252,7 @@ func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}

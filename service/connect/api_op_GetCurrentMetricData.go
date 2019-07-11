@@ -153,7 +153,7 @@ func (s *GetCurrentMetricDataInput) Validate() error {
 func (s GetCurrentMetricDataInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.CurrentMetrics) > 0 {
+	if s.CurrentMetrics != nil {
 		v := s.CurrentMetrics
 
 		metadata := protocol.Metadata{}
@@ -171,7 +171,7 @@ func (s GetCurrentMetricDataInput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Filters", v, metadata)
 	}
-	if len(s.Groupings) > 0 {
+	if s.Groupings != nil {
 		v := s.Groupings
 
 		metadata := protocol.Metadata{}
@@ -246,7 +246,7 @@ func (s GetCurrentMetricDataOutput) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "DataSnapshotTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
-	if len(s.MetricResults) > 0 {
+	if s.MetricResults != nil {
 		v := s.MetricResults
 
 		metadata := protocol.Metadata{}

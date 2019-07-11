@@ -104,7 +104,7 @@ func (s CreateDeploymentJobInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "clientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.DeploymentApplicationConfigs) > 0 {
+	if s.DeploymentApplicationConfigs != nil {
 		v := s.DeploymentApplicationConfigs
 
 		metadata := protocol.Metadata{}
@@ -128,7 +128,7 @@ func (s CreateDeploymentJobInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "fleet", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -251,7 +251,7 @@ func (s CreateDeploymentJobOutput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
-	if len(s.DeploymentApplicationConfigs) > 0 {
+	if s.DeploymentApplicationConfigs != nil {
 		v := s.DeploymentApplicationConfigs
 
 		metadata := protocol.Metadata{}
@@ -293,7 +293,7 @@ func (s CreateDeploymentJobOutput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

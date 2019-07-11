@@ -60,7 +60,7 @@ func (s CreateUserInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "consoleAccess", protocol.BoolValue(v), metadata)
 	}
-	if len(s.Groups) > 0 {
+	if s.Groups != nil {
 		v := s.Groups
 
 		metadata := protocol.Metadata{}

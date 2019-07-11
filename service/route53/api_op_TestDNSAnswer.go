@@ -190,7 +190,7 @@ func (s TestDNSAnswerOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Protocol", protocol.StringValue(v), metadata)
 	}
-	if len(s.RecordData) > 0 {
+	if s.RecordData != nil {
 		v := s.RecordData
 
 		metadata := protocol.Metadata{ListLocationName: "RecordDataEntry"}

@@ -107,7 +107,7 @@ func (s *UpdateDatasetInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateDatasetInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.Actions) > 0 {
+	if s.Actions != nil {
 		v := s.Actions
 
 		metadata := protocol.Metadata{}
@@ -119,7 +119,7 @@ func (s UpdateDatasetInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.ContentDeliveryRules) > 0 {
+	if s.ContentDeliveryRules != nil {
 		v := s.ContentDeliveryRules
 
 		metadata := protocol.Metadata{}
@@ -137,7 +137,7 @@ func (s UpdateDatasetInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "retentionPeriod", v, metadata)
 	}
-	if len(s.Triggers) > 0 {
+	if s.Triggers != nil {
 		v := s.Triggers
 
 		metadata := protocol.Metadata{}

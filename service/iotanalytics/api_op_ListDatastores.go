@@ -78,7 +78,7 @@ func (s ListDatastoresOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListDatastoresOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.DatastoreSummaries) > 0 {
+	if s.DatastoreSummaries != nil {
 		v := s.DatastoreSummaries
 
 		metadata := protocol.Metadata{}

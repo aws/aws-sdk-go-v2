@@ -74,7 +74,7 @@ func (s ArrayPropertiesDetail) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "size", protocol.Int64Value(v), metadata)
 	}
-	if len(s.StatusSummary) > 0 {
+	if s.StatusSummary != nil {
 		v := s.StatusSummary
 
 		metadata := protocol.Metadata{}
@@ -179,7 +179,7 @@ func (s AttemptContainerDetail) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "logStreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.NetworkInterfaces) > 0 {
+	if s.NetworkInterfaces != nil {
 		v := s.NetworkInterfaces
 
 		metadata := protocol.Metadata{}
@@ -606,7 +606,7 @@ func (s ComputeResource) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "instanceRole", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.InstanceTypes) > 0 {
+	if s.InstanceTypes != nil {
 		v := s.InstanceTypes
 
 		metadata := protocol.Metadata{}
@@ -642,7 +642,7 @@ func (s ComputeResource) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "placementGroup", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SecurityGroupIds) > 0 {
+	if s.SecurityGroupIds != nil {
 		v := s.SecurityGroupIds
 
 		metadata := protocol.Metadata{}
@@ -660,7 +660,7 @@ func (s ComputeResource) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "spotIamFleetRole", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Subnets) > 0 {
+	if s.Subnets != nil {
 		v := s.Subnets
 
 		metadata := protocol.Metadata{}
@@ -672,7 +672,7 @@ func (s ComputeResource) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -823,7 +823,7 @@ func (s ContainerDetail) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ContainerDetail) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Command) > 0 {
+	if s.Command != nil {
 		v := s.Command
 
 		metadata := protocol.Metadata{}
@@ -841,7 +841,7 @@ func (s ContainerDetail) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "containerInstanceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Environment) > 0 {
+	if s.Environment != nil {
 		v := s.Environment
 
 		metadata := protocol.Metadata{}
@@ -889,7 +889,7 @@ func (s ContainerDetail) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "memory", protocol.Int64Value(v), metadata)
 	}
-	if len(s.MountPoints) > 0 {
+	if s.MountPoints != nil {
 		v := s.MountPoints
 
 		metadata := protocol.Metadata{}
@@ -901,7 +901,7 @@ func (s ContainerDetail) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.NetworkInterfaces) > 0 {
+	if s.NetworkInterfaces != nil {
 		v := s.NetworkInterfaces
 
 		metadata := protocol.Metadata{}
@@ -931,7 +931,7 @@ func (s ContainerDetail) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "reason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ResourceRequirements) > 0 {
+	if s.ResourceRequirements != nil {
 		v := s.ResourceRequirements
 
 		metadata := protocol.Metadata{}
@@ -949,7 +949,7 @@ func (s ContainerDetail) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "taskArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Ulimits) > 0 {
+	if s.Ulimits != nil {
 		v := s.Ulimits
 
 		metadata := protocol.Metadata{}
@@ -973,7 +973,7 @@ func (s ContainerDetail) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "vcpus", protocol.Int64Value(v), metadata)
 	}
-	if len(s.Volumes) > 0 {
+	if s.Volumes != nil {
 		v := s.Volumes
 
 		metadata := protocol.Metadata{}
@@ -1047,7 +1047,7 @@ func (s *ContainerOverrides) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ContainerOverrides) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Command) > 0 {
+	if s.Command != nil {
 		v := s.Command
 
 		metadata := protocol.Metadata{}
@@ -1059,7 +1059,7 @@ func (s ContainerOverrides) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Environment) > 0 {
+	if s.Environment != nil {
 		v := s.Environment
 
 		metadata := protocol.Metadata{}
@@ -1083,7 +1083,7 @@ func (s ContainerOverrides) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "memory", protocol.Int64Value(v), metadata)
 	}
-	if len(s.ResourceRequirements) > 0 {
+	if s.ResourceRequirements != nil {
 		v := s.ResourceRequirements
 
 		metadata := protocol.Metadata{}
@@ -1253,7 +1253,7 @@ func (s *ContainerProperties) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ContainerProperties) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Command) > 0 {
+	if s.Command != nil {
 		v := s.Command
 
 		metadata := protocol.Metadata{}
@@ -1265,7 +1265,7 @@ func (s ContainerProperties) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Environment) > 0 {
+	if s.Environment != nil {
 		v := s.Environment
 
 		metadata := protocol.Metadata{}
@@ -1301,7 +1301,7 @@ func (s ContainerProperties) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "memory", protocol.Int64Value(v), metadata)
 	}
-	if len(s.MountPoints) > 0 {
+	if s.MountPoints != nil {
 		v := s.MountPoints
 
 		metadata := protocol.Metadata{}
@@ -1325,7 +1325,7 @@ func (s ContainerProperties) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "readonlyRootFilesystem", protocol.BoolValue(v), metadata)
 	}
-	if len(s.ResourceRequirements) > 0 {
+	if s.ResourceRequirements != nil {
 		v := s.ResourceRequirements
 
 		metadata := protocol.Metadata{}
@@ -1337,7 +1337,7 @@ func (s ContainerProperties) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.Ulimits) > 0 {
+	if s.Ulimits != nil {
 		v := s.Ulimits
 
 		metadata := protocol.Metadata{}
@@ -1361,7 +1361,7 @@ func (s ContainerProperties) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "vcpus", protocol.Int64Value(v), metadata)
 	}
-	if len(s.Volumes) > 0 {
+	if s.Volumes != nil {
 		v := s.Volumes
 
 		metadata := protocol.Metadata{}
@@ -1528,7 +1528,7 @@ func (s JobDefinition) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "nodeProperties", v, metadata)
 	}
-	if len(s.Parameters) > 0 {
+	if s.Parameters != nil {
 		v := s.Parameters
 
 		metadata := protocol.Metadata{}
@@ -1708,7 +1708,7 @@ func (s JobDetail) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "arrayProperties", v, metadata)
 	}
-	if len(s.Attempts) > 0 {
+	if s.Attempts != nil {
 		v := s.Attempts
 
 		metadata := protocol.Metadata{}
@@ -1732,7 +1732,7 @@ func (s JobDetail) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "createdAt", protocol.Int64Value(v), metadata)
 	}
-	if len(s.DependsOn) > 0 {
+	if s.DependsOn != nil {
 		v := s.DependsOn
 
 		metadata := protocol.Metadata{}
@@ -1780,7 +1780,7 @@ func (s JobDetail) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "nodeProperties", v, metadata)
 	}
-	if len(s.Parameters) > 0 {
+	if s.Parameters != nil {
 		v := s.Parameters
 
 		metadata := protocol.Metadata{}
@@ -1878,7 +1878,7 @@ func (s JobQueueDetail) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s JobQueueDetail) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ComputeEnvironmentOrder) > 0 {
+	if s.ComputeEnvironmentOrder != nil {
 		v := s.ComputeEnvironmentOrder
 
 		metadata := protocol.Metadata{}
@@ -2330,7 +2330,7 @@ func (s *NodeOverrides) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s NodeOverrides) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.NodePropertyOverrides) > 0 {
+	if s.NodePropertyOverrides != nil {
 		v := s.NodePropertyOverrides
 
 		metadata := protocol.Metadata{}
@@ -2416,7 +2416,7 @@ func (s NodeProperties) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "mainNode", protocol.Int64Value(v), metadata)
 	}
-	if len(s.NodeRangeProperties) > 0 {
+	if s.NodeRangeProperties != nil {
 		v := s.NodeRangeProperties
 
 		metadata := protocol.Metadata{}

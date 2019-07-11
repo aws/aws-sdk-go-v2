@@ -501,7 +501,7 @@ func (s ContactData) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "startTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -1192,7 +1192,7 @@ func (s SecurityDetails) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SecurityGroupIds) > 0 {
+	if s.SecurityGroupIds != nil {
 		v := s.SecurityGroupIds
 
 		metadata := protocol.Metadata{}
@@ -1204,7 +1204,7 @@ func (s SecurityDetails) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.SubnetIds) > 0 {
+	if s.SubnetIds != nil {
 		v := s.SubnetIds
 
 		metadata := protocol.Metadata{}

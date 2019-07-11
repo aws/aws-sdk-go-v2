@@ -108,7 +108,7 @@ func (s DeviceDescription) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}
@@ -138,7 +138,7 @@ func (s DeviceDescription) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "remainingLife", protocol.Float64Value(v), metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

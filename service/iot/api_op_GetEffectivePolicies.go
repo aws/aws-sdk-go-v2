@@ -79,7 +79,7 @@ func (s GetEffectivePoliciesOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetEffectivePoliciesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.EffectivePolicies) > 0 {
+	if s.EffectivePolicies != nil {
 		v := s.EffectivePolicies
 
 		metadata := protocol.Metadata{}

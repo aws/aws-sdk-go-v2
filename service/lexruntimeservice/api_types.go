@@ -87,7 +87,7 @@ func (s GenericAttachment) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "attachmentLinkUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Buttons) > 0 {
+	if s.Buttons != nil {
 		v := s.Buttons
 
 		metadata := protocol.Metadata{}
@@ -151,7 +151,7 @@ func (s ResponseCard) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "contentType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.GenericAttachments) > 0 {
+	if s.GenericAttachments != nil {
 		v := s.GenericAttachments
 
 		metadata := protocol.Metadata{}

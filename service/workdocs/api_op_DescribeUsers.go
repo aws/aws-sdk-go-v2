@@ -185,7 +185,7 @@ func (s DescribeUsersOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "TotalNumberOfUsers", protocol.Int64Value(v), metadata)
 	}
-	if len(s.Users) > 0 {
+	if s.Users != nil {
 		v := s.Users
 
 		metadata := protocol.Metadata{}

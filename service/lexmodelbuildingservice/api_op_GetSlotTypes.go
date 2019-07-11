@@ -102,7 +102,7 @@ func (s GetSlotTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.SlotTypes) > 0 {
+	if s.SlotTypes != nil {
 		v := s.SlotTypes
 
 		metadata := protocol.Metadata{}

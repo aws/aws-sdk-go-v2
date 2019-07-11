@@ -68,7 +68,7 @@ func (s DescribeLifecycleConfigurationOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeLifecycleConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.LifecyclePolicies) > 0 {
+	if s.LifecyclePolicies != nil {
 		v := s.LifecyclePolicies
 
 		metadata := protocol.Metadata{}

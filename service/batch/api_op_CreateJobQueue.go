@@ -81,7 +81,7 @@ func (s *CreateJobQueueInput) Validate() error {
 func (s CreateJobQueueInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-	if len(s.ComputeEnvironmentOrder) > 0 {
+	if s.ComputeEnvironmentOrder != nil {
 		v := s.ComputeEnvironmentOrder
 
 		metadata := protocol.Metadata{}

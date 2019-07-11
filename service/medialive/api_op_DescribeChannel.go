@@ -106,7 +106,7 @@ func (s DescribeChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "channelClass", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Destinations) > 0 {
+	if s.Destinations != nil {
 		v := s.Destinations
 
 		metadata := protocol.Metadata{}
@@ -118,7 +118,7 @@ func (s DescribeChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
-	if len(s.EgressEndpoints) > 0 {
+	if s.EgressEndpoints != nil {
 		v := s.EgressEndpoints
 
 		metadata := protocol.Metadata{}
@@ -142,7 +142,7 @@ func (s DescribeChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.InputAttachments) > 0 {
+	if s.InputAttachments != nil {
 		v := s.InputAttachments
 
 		metadata := protocol.Metadata{}
@@ -190,7 +190,7 @@ func (s DescribeChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

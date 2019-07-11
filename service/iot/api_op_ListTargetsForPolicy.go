@@ -97,7 +97,7 @@ func (s ListTargetsForPolicyOutput) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextMarker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Targets) > 0 {
+	if s.Targets != nil {
 		v := s.Targets
 
 		metadata := protocol.Metadata{}

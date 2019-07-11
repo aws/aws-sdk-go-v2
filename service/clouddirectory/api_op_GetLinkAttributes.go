@@ -69,7 +69,7 @@ func (s *GetLinkAttributesInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetLinkAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.AttributeNames) > 0 {
+	if s.AttributeNames != nil {
 		v := s.AttributeNames
 
 		metadata := protocol.Metadata{}
@@ -117,7 +117,7 @@ func (s GetLinkAttributesOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetLinkAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}

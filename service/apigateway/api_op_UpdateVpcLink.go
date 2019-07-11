@@ -47,7 +47,7 @@ func (s *UpdateVpcLinkInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateVpcLinkInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.PatchOperations) > 0 {
+	if s.PatchOperations != nil {
 		v := s.PatchOperations
 
 		metadata := protocol.Metadata{}
@@ -144,7 +144,7 @@ func (s UpdateVpcLinkOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "statusMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -156,7 +156,7 @@ func (s UpdateVpcLinkOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
-	if len(s.TargetArns) > 0 {
+	if s.TargetArns != nil {
 		v := s.TargetArns
 
 		metadata := protocol.Metadata{}

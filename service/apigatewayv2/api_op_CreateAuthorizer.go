@@ -125,7 +125,7 @@ func (s CreateAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "authorizerUri", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.IdentitySource) > 0 {
+	if s.IdentitySource != nil {
 		v := s.IdentitySource
 
 		metadata := protocol.Metadata{}
@@ -149,7 +149,7 @@ func (s CreateAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ProviderArns) > 0 {
+	if s.ProviderArns != nil {
 		v := s.ProviderArns
 
 		metadata := protocol.Metadata{}
@@ -252,7 +252,7 @@ func (s CreateAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "authorizerUri", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.IdentitySource) > 0 {
+	if s.IdentitySource != nil {
 		v := s.IdentitySource
 
 		metadata := protocol.Metadata{}
@@ -276,7 +276,7 @@ func (s CreateAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.ProviderArns) > 0 {
+	if s.ProviderArns != nil {
 		v := s.ProviderArns
 
 		metadata := protocol.Metadata{}

@@ -81,7 +81,7 @@ func (s ListVoiceConnectorsOutput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.VoiceConnectors) > 0 {
+	if s.VoiceConnectors != nil {
 		v := s.VoiceConnectors
 
 		metadata := protocol.Metadata{}

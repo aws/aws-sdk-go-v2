@@ -95,7 +95,7 @@ func (s GetUsagePlanOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetUsagePlanOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.ApiStages) > 0 {
+	if s.ApiStages != nil {
 		v := s.ApiStages
 
 		metadata := protocol.Metadata{}
@@ -137,7 +137,7 @@ func (s GetUsagePlanOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "quota", v, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

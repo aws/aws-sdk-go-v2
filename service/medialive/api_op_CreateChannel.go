@@ -86,7 +86,7 @@ func (s CreateChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "channelClass", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Destinations) > 0 {
+	if s.Destinations != nil {
 		v := s.Destinations
 
 		metadata := protocol.Metadata{}
@@ -104,7 +104,7 @@ func (s CreateChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "encoderSettings", v, metadata)
 	}
-	if len(s.InputAttachments) > 0 {
+	if s.InputAttachments != nil {
 		v := s.InputAttachments
 
 		metadata := protocol.Metadata{}
@@ -158,7 +158,7 @@ func (s CreateChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}

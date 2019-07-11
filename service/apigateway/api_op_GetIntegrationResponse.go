@@ -162,7 +162,7 @@ func (s GetIntegrationResponseOutput) MarshalFields(e protocol.FieldEncoder) err
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "contentHandling", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.ResponseParameters) > 0 {
+	if s.ResponseParameters != nil {
 		v := s.ResponseParameters
 
 		metadata := protocol.Metadata{}
@@ -174,7 +174,7 @@ func (s GetIntegrationResponseOutput) MarshalFields(e protocol.FieldEncoder) err
 		ms0.End()
 
 	}
-	if len(s.ResponseTemplates) > 0 {
+	if s.ResponseTemplates != nil {
 		v := s.ResponseTemplates
 
 		metadata := protocol.Metadata{}

@@ -79,7 +79,7 @@ func (s *GetObjectAttributesInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetObjectAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.AttributeNames) > 0 {
+	if s.AttributeNames != nil {
 		v := s.AttributeNames
 
 		metadata := protocol.Metadata{}
@@ -133,7 +133,7 @@ func (s GetObjectAttributesOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetObjectAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Attributes) > 0 {
+	if s.Attributes != nil {
 		v := s.Attributes
 
 		metadata := protocol.Metadata{}

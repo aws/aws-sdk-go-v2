@@ -47,7 +47,7 @@ func (s *UpdateRestApiInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateRestApiInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.PatchOperations) > 0 {
+	if s.PatchOperations != nil {
 		v := s.PatchOperations
 
 		metadata := protocol.Metadata{}
@@ -138,7 +138,7 @@ func (s UpdateRestApiOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "apiKeySource", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.BinaryMediaTypes) > 0 {
+	if s.BinaryMediaTypes != nil {
 		v := s.BinaryMediaTypes
 
 		metadata := protocol.Metadata{}
@@ -192,7 +192,7 @@ func (s UpdateRestApiOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "policy", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -210,7 +210,7 @@ func (s UpdateRestApiOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Warnings) > 0 {
+	if s.Warnings != nil {
 		v := s.Warnings
 
 		metadata := protocol.Metadata{}

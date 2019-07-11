@@ -65,7 +65,7 @@ func (s ListGraphqlApisOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListGraphqlApisOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.GraphqlApis) > 0 {
+	if s.GraphqlApis != nil {
 		v := s.GraphqlApis
 
 		metadata := protocol.Metadata{}

@@ -1067,7 +1067,7 @@ type InputService5TestShapeInputService5TestCaseOperation1Input struct {
 func (s InputService5TestShapeInputService5TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
 
 	e.SetFields(protocol.BodyTarget, "OperationRequest", protocol.FieldMarshalerFunc(func(e protocol.FieldEncoder) error {
-		if len(s.ListParam) > 0 {
+		if s.ListParam != nil {
 			v := s.ListParam
 
 			metadata := protocol.Metadata{}
@@ -1217,7 +1217,7 @@ type InputService6TestShapeInputService6TestCaseOperation1Input struct {
 func (s InputService6TestShapeInputService6TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
 
 	e.SetFields(protocol.BodyTarget, "OperationRequest", protocol.FieldMarshalerFunc(func(e protocol.FieldEncoder) error {
-		if len(s.ListParam) > 0 {
+		if s.ListParam != nil {
 			v := s.ListParam
 
 			metadata := protocol.Metadata{ListLocationName: "NotMember"}
@@ -1367,7 +1367,7 @@ type InputService7TestShapeInputService7TestCaseOperation1Input struct {
 func (s InputService7TestShapeInputService7TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
 
 	e.SetFields(protocol.BodyTarget, "OperationRequest", protocol.FieldMarshalerFunc(func(e protocol.FieldEncoder) error {
-		if len(s.ListParam) > 0 {
+		if s.ListParam != nil {
 			v := s.ListParam
 
 			metadata := protocol.Metadata{Flatten: true}
@@ -1517,7 +1517,7 @@ type InputService8TestShapeInputService8TestCaseOperation1Input struct {
 func (s InputService8TestShapeInputService8TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
 
 	e.SetFields(protocol.BodyTarget, "OperationRequest", protocol.FieldMarshalerFunc(func(e protocol.FieldEncoder) error {
-		if len(s.ListParam) > 0 {
+		if s.ListParam != nil {
 			v := s.ListParam
 
 			metadata := protocol.Metadata{Flatten: true}
@@ -1667,7 +1667,7 @@ type InputService9TestShapeInputService9TestCaseOperation1Input struct {
 func (s InputService9TestShapeInputService9TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
 
 	e.SetFields(protocol.BodyTarget, "OperationRequest", protocol.FieldMarshalerFunc(func(e protocol.FieldEncoder) error {
-		if len(s.ListParam) > 0 {
+		if s.ListParam != nil {
 			v := s.ListParam
 
 			metadata := protocol.Metadata{Flatten: true}
@@ -2003,7 +2003,7 @@ type InputService11TestShapeInputService11TestCaseOperation1Input struct {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService11TestShapeInputService11TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.Foo) > 0 {
+	if s.Foo != nil {
 		v := s.Foo
 
 		metadata := protocol.Metadata{}
@@ -2150,7 +2150,7 @@ type InputService12TestShapeInputService12TestCaseOperation1Input struct {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService12TestShapeInputService12TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.Items) > 0 {
+	if s.Items != nil {
 		v := s.Items
 
 		metadata := protocol.Metadata{}
@@ -2305,7 +2305,7 @@ func (s InputService13TestShapeInputService13TestCaseOperation1Input) MarshalFie
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "PipelineId", protocol.StringValue(v), metadata)
 	}
-	if len(s.QueryDoc) > 0 {
+	if s.QueryDoc != nil {
 		v := s.QueryDoc
 
 		metadata := protocol.Metadata{}
@@ -2460,7 +2460,7 @@ func (s InputService14TestShapeInputService14TestCaseOperation1Input) MarshalFie
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "PipelineId", protocol.StringValue(v), metadata)
 	}
-	if len(s.QueryDoc) > 0 {
+	if s.QueryDoc != nil {
 		v := s.QueryDoc
 
 		metadata := protocol.Metadata{}
@@ -4817,7 +4817,7 @@ func (s InputService22TestShapeRecursiveStructType) MarshalFields(e protocol.Fie
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NoRecurse", protocol.StringValue(v), metadata)
 	}
-	if len(s.RecursiveList) > 0 {
+	if s.RecursiveList != nil {
 		v := s.RecursiveList
 
 		metadata := protocol.Metadata{}
@@ -4829,7 +4829,7 @@ func (s InputService22TestShapeRecursiveStructType) MarshalFields(e protocol.Fie
 		ls0.End()
 
 	}
-	if len(s.RecursiveMap) > 0 {
+	if s.RecursiveMap != nil {
 		v := s.RecursiveMap
 
 		metadata := protocol.Metadata{}
@@ -5308,7 +5308,7 @@ func (s InputService25TestShapeInputService25TestCaseOperation1Input) MarshalFie
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "FooEnum", v, metadata)
 	}
-	if len(s.ListEnums) > 0 {
+	if s.ListEnums != nil {
 		v := s.ListEnums
 
 		metadata := protocol.Metadata{}
@@ -5332,7 +5332,7 @@ func (s InputService25TestShapeInputService25TestCaseOperation1Input) MarshalFie
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "URIEnum", v, metadata)
 	}
-	if len(s.URIListEnums) > 0 {
+	if s.URIListEnums != nil {
 		v := s.URIListEnums
 
 		metadata := protocol.Metadata{}
@@ -5445,7 +5445,7 @@ func (s InputService25TestShapeInputService25TestCaseOperation2Input) MarshalFie
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "FooEnum", v, metadata)
 	}
-	if len(s.ListEnums) > 0 {
+	if s.ListEnums != nil {
 		v := s.ListEnums
 
 		metadata := protocol.Metadata{}
@@ -5469,7 +5469,7 @@ func (s InputService25TestShapeInputService25TestCaseOperation2Input) MarshalFie
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "URIEnum", v, metadata)
 	}
-	if len(s.URIListEnums) > 0 {
+	if s.URIListEnums != nil {
 		v := s.URIListEnums
 
 		metadata := protocol.Metadata{}
@@ -5911,7 +5911,7 @@ func (s InputService27TestShapeInputService27TestCaseOperation1Input) MarshalFie
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "Header1", protocol.StringValue(v), metadata)
 	}
-	if len(s.HeaderMap) > 0 {
+	if s.HeaderMap != nil {
 		v := s.HeaderMap
 
 		metadata := protocol.Metadata{}

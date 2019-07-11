@@ -98,7 +98,7 @@ func (s CreateScheduledAuditInput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "frequency", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	if len(s.Tags) > 0 {
+	if s.Tags != nil {
 		v := s.Tags
 
 		metadata := protocol.Metadata{}
@@ -110,7 +110,7 @@ func (s CreateScheduledAuditInput) MarshalFields(e protocol.FieldEncoder) error 
 		ls0.End()
 
 	}
-	if len(s.TargetCheckNames) > 0 {
+	if s.TargetCheckNames != nil {
 		v := s.TargetCheckNames
 
 		metadata := protocol.Metadata{}

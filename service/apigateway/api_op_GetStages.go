@@ -77,7 +77,7 @@ func (s GetStagesOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetStagesOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.Item) > 0 {
+	if s.Item != nil {
 		v := s.Item
 
 		metadata := protocol.Metadata{}

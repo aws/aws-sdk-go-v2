@@ -223,7 +223,7 @@ func (s CreateApiOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
-	if len(s.Warnings) > 0 {
+	if s.Warnings != nil {
 		v := s.Warnings
 
 		metadata := protocol.Metadata{}

@@ -206,7 +206,7 @@ func (s ListResourceRecordSetsOutput) MarshalFields(e protocol.FieldEncoder) err
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextRecordType", v, metadata)
 	}
-	if len(s.ResourceRecordSets) > 0 {
+	if s.ResourceRecordSets != nil {
 		v := s.ResourceRecordSets
 
 		metadata := protocol.Metadata{ListLocationName: "ResourceRecordSet"}

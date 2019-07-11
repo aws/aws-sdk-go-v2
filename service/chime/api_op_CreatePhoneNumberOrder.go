@@ -50,7 +50,7 @@ func (s *CreatePhoneNumberOrderInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreatePhoneNumberOrderInput) MarshalFields(e protocol.FieldEncoder) error {
 
-	if len(s.E164PhoneNumbers) > 0 {
+	if s.E164PhoneNumbers != nil {
 		v := s.E164PhoneNumbers
 
 		metadata := protocol.Metadata{}
