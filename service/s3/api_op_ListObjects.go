@@ -4,10 +4,14 @@ package s3
 
 import (
 	"context"
-
+	"encoding/xml"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
+
+	"io"
+	"strconv"
+	"time"
 )
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsRequest
@@ -114,6 +118,484 @@ func (s ListObjectsInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.QueryTarget, "prefix", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+func CheckXMLSyntax(d *xml.Decoder) error {
+	for {
+		err := d.Skip()
+		if err != nil {
+			if err == io.EOF {
+				break
+			} else {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+// function will never be called by unmarshal handler
+// may used by developer?
+func (s *ListObjectsResponse) UnmarshalAWSXML(d *xml.Decoder) error {
+	// Send() will build the ListObjectsResponse type, no need to do building here
+	if s.response == nil {
+		resp := aws.Response{}
+		s.response = &resp
+	}
+	if s.ListObjectsOutput == nil {
+		output := ListObjectsOutput{}
+		s.ListObjectsOutput = &output
+	}
+	err := s.ListObjectsOutput.UnmarshalAWSXML(d)
+	return err
+}
+
+func (s *ListObjectsOutput) UnmarshalAWSXML(d *xml.Decoder) error {
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			if err == io.EOF {
+				break
+			} else {
+				return err
+			}
+		}
+
+		if tok == nil {
+			break
+		}
+
+		if end, ok := tok.(xml.EndElement); ok {
+			name := end.Name.Local
+			if name == "ListBucketResult" {
+				break
+			}
+		}
+
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name := start.Name.Local; name {
+			case "Delimiter":
+				tok, err = d.Token();
+				if err != nil {
+					if err == io.EOF {
+						break
+					} else {
+						return err
+					}
+				}
+				if tok == nil {
+					break
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Delimiter = &value
+			case "EncodingType":
+				tok, err = d.Token();
+				if err != nil {
+					if err == io.EOF {
+						break
+					} else {
+						return err
+					}
+				}
+				if tok == nil {
+					break
+				}
+				v, _ := tok.(xml.CharData)
+				value := EncodingType(v)
+				s.EncodingType = value
+			case "IsTruncated":
+				tok, err = d.Token();
+				if err != nil {
+					if err == io.EOF {
+						break
+					} else {
+						return err
+					}
+				}
+				if tok == nil {
+					break
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.IsTruncated = &value
+			case "Marker":
+				tok, err = d.Token();
+				if err != nil {
+					if err == io.EOF {
+						break
+					} else {
+						return err
+					}
+				}
+				if tok == nil {
+					break
+				}
+				v, _ := tok.(xml.CharData);
+				value := string(v)
+				s.Marker = &value
+			case "MaxKeys":
+				tok, err = d.Token();
+				if err != nil {
+					if err == io.EOF {
+						break
+					} else {
+						return err
+					}
+				}
+				if tok == nil {
+					break
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.MaxKeys = &value
+			case "Name":
+				tok, err = d.Token();
+				if err != nil {
+					if err == io.EOF {
+						break
+					} else {
+						return err
+					}
+				}
+				if tok == nil {
+					break
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Name = &value
+			case "NextMarker":
+				tok, err = d.Token();
+				if err != nil {
+					if err == io.EOF {
+						break
+					} else {
+						return err
+					}
+				}
+				if tok == nil {
+					break
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.NextMarker = &value
+			case "Prefix":
+				tok, err = d.Token()
+				if err != nil {
+					if err == io.EOF {
+						break
+					} else {
+						return err
+					}
+				}
+				if tok == nil {
+					break
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Prefix = &value
+			case "Contents":
+				object := Object{}
+				err := object.UnmarshalAWSXML(d)
+				if err != nil {
+					return err
+				}
+				s.Contents = append(s.Contents, object)
+			case "CommonPrefixes":
+				commonPrefix := CommonPrefix{}
+				err := commonPrefix.UnmarshalAWSXML(d)
+				if err != nil {
+					return err
+				}
+				s.CommonPrefixes = append(s.CommonPrefixes, commonPrefix)
+			case "ListBucketResult":
+				continue
+			default:
+				err := d.Skip()
+				if err != nil {
+					if err == io.EOF {
+						break
+					} else {
+						return err
+					}
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func (s *CommonPrefix) UnmarshalAWSXML(d *xml.Decoder) error {
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			if err == io.EOF {
+				break
+			} else {
+				return err
+			}
+		}
+
+		if tok == nil {
+			break
+		}
+
+		if end, ok := tok.(xml.EndElement); ok {
+			name := end.Name.Local
+			if name == "CommonPrefixes" {
+				break
+			}
+		}
+
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name := start.Name.Local; name {
+			case "Prefix":
+				tok, err = d.Token();
+				if err != nil {
+					if err == io.EOF {
+						break
+					} else {
+						return err
+					}
+				}
+				if tok == nil {
+					break
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Prefix = &value
+			case "CommonPrefixes":
+				continue
+			default:
+				err := d.Skip()
+				if err != nil {
+					if err == io.EOF {
+						break
+					} else {
+						return err
+					}
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func (s *Object) UnmarshalAWSXML(d *xml.Decoder) error {
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			if err == io.EOF {
+				break
+			} else {
+				return err
+			}
+		}
+
+		if tok == nil {
+			break
+		}
+
+		if end, ok := tok.(xml.EndElement); ok {
+			name := end.Name.Local
+			if name == "Contents" {
+				break
+			}
+		}
+
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name := start.Name.Local; name {
+			case "ETag":
+				tok, err = d.Token();
+				if err != nil {
+					if err == io.EOF {
+						break
+					} else {
+						return err
+					}
+				}
+				if tok == nil {
+					break
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ETag = &value
+			case "Key":
+				tok, err = d.Token();
+				if err != nil {
+					if err == io.EOF {
+						break
+					} else {
+						return err
+					}
+				}
+				if tok == nil {
+					break
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Key = &value
+			case "LastModified":
+				tok, err = d.Token();
+				if err != nil {
+					if err == io.EOF {
+						break
+					} else {
+						return err
+					}
+				}
+				if tok == nil {
+					break
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse("2006-01-02T15:04:05Z07:00", string(v))
+				s.LastModified = &value
+			case "Size":
+				tok, err = d.Token();
+				if err != nil {
+					if err == io.EOF {
+						break
+					} else {
+						return err
+					}
+				}
+				if tok == nil {
+					break
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Size = &value
+			case "StorageClass":
+				tok, err = d.Token();
+				if err != nil {
+					if err == io.EOF {
+						break
+					} else {
+						return err
+					}
+				}
+				if tok == nil {
+					break
+				}
+				v, _ := tok.(xml.CharData)
+				value := ObjectStorageClass(v)
+				s.StorageClass = value
+			case "Owner":
+				owner := Owner{}
+				err := owner.unmarshalAWSXML(d)
+				if err != nil {
+					return err
+				}
+				s.Owner = &owner
+			case "Contents":
+				continue
+			default:
+				err := d.Skip()
+				if err != nil {
+					if err == io.EOF {
+						break
+					} else {
+						return err
+					}
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func (s *Owner) unmarshalAWSXML(d *xml.Decoder) error {
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			if err == io.EOF {
+				break
+			} else {
+				return err
+			}
+		}
+
+		if tok == nil {
+			break
+		}
+
+		if end, ok := tok.(xml.EndElement); ok {
+			name := end.Name.Local
+			if name == "Owner" {
+				break
+			}
+		}
+
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name := start.Name.Local; name {
+			case "DisplayName":
+				tok, err = d.Token();
+				if err != nil {
+					if err == io.EOF {
+						break
+					} else {
+						return err
+					}
+				}
+				if tok == nil {
+					break
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.DisplayName = &value
+			case "ID":
+				tok, err = d.Token();
+				if err != nil {
+					if err == io.EOF {
+						break
+					} else {
+						return err
+					}
+				}
+				if tok == nil {
+					break
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ID = &value
+			case "Owner":
+				continue
+			default:
+				err := d.Skip()
+				if err != nil {
+					if err == io.EOF {
+						break
+					} else {
+						return err
+					}
+				}
+			}
+		}
+	}
+	return nil
+}
+
+// function will never be called by unmarshal handler
+// may used by developer?
+func (s *ListObjectsResponse) UnmarshalAWSREST(r *aws.Request) error {
+	if s.response == nil {
+		resp := aws.Response{Request: r}
+		s.response = &resp
+	}
+	if s.ListObjectsOutput == nil {
+		output := ListObjectsOutput{}
+		s.ListObjectsOutput = &output
+	}
+	err := s.ListObjectsOutput.UnmarshalAWSREST(r)
+	return err
+}
+
+func (s *ListObjectsOutput) UnmarshalAWSREST(r *aws.Request) error {
+	r.RequestID = r.HTTPResponse.Header.Get("X-Amzn-Requestid")
+	if r.RequestID == "" {
+		r.RequestID = r.HTTPResponse.Header.Get("X-Amz-Request-Id")
 	}
 	return nil
 }

@@ -30,6 +30,20 @@ var UnmarshalMetaHandler = request.NamedHandler{Name: "awssdk.restxml.UnmarshalM
 // UnmarshalErrorHandler is a named request handler for unmarshaling restxml protocol request errors
 var UnmarshalErrorHandler = request.NamedHandler{Name: "awssdk.restxml.UnmarshalError", Fn: UnmarshalError}
 
+type XMLUnmarshaler interface {
+	UnmarshalAWSXML(d *xml.Decoder) error
+}
+
+type RESTUnmarshaler interface {
+	UnmarshalAWSREST(r *request.Request) error
+	//UnmarshalAWSREST(r *http.Response) error
+}
+
+type RESTXMLUnmarshaler interface {
+	XMLUnmarshaler
+	RESTUnmarshaler
+}
+
 // Build builds a request payload for the REST XML protocol.
 func Build(r *request.Request) {
 	if m, ok := r.Params.(protocol.FieldMarshaler); ok {
@@ -66,8 +80,21 @@ func Build(r *request.Request) {
 
 // Unmarshal unmarshals a payload response for the REST XML protocol.
 func Unmarshal(r *request.Request) {
+	//if resp, ok := r.Data.(RESTXMLUnmarshaler); ok {
+	//	defer r.HTTPResponse.Body.Close()
+	//	decoder := xml.NewDecoder(r.HTTPResponse.Body)
+	//	err := resp.UnmarshalAWSXML(decoder)
+	//	if err != nil {
+	//   	r.Data = nil // reset r's Data
+	//		r.Error = awserr.New("SerializationError", "failed to decode REST XML response", err)
+	//		return
+	//	}
+	//	return
+	//}
+
+	// Fall back to old reflection based unmarshaler
 	if t := rest.PayloadType(r.Data); t == "structure" || t == "" {
-		defer r.HTTPResponse.Body.Close()
+		//defer r.HTTPResponse.Body.Close()
 		decoder := xml.NewDecoder(r.HTTPResponse.Body)
 		err := xmlutil.UnmarshalXML(r.Data, decoder, "")
 		if err != nil {
@@ -81,6 +108,16 @@ func Unmarshal(r *request.Request) {
 
 // UnmarshalMeta unmarshals response headers for the REST XML protocol.
 func UnmarshalMeta(r *request.Request) {
+	//if resp, ok := r.Data.(RESTXMLUnmarshaler); ok {
+	//	err := resp.UnmarshalAWSREST(r)
+	//	if err != nil {
+	//		r.Error = awserr.New("SerializationError", "failed to decode REST XML response", err)
+	//		return
+	//	}
+	//	return
+	//}
+
+	// Fall back to old reflection based unmarshaler
 	rest.UnmarshalMeta(r)
 }
 
