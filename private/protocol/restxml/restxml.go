@@ -9,6 +9,7 @@ import (
 	"bytes"
 	"encoding/xml"
 	"io"
+	"net/http"
 
 	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
@@ -30,18 +31,21 @@ var UnmarshalMetaHandler = request.NamedHandler{Name: "awssdk.restxml.UnmarshalM
 // UnmarshalErrorHandler is a named request handler for unmarshaling restxml protocol request errors
 var UnmarshalErrorHandler = request.NamedHandler{Name: "awssdk.restxml.UnmarshalError", Fn: UnmarshalError}
 
-type XMLUnmarshaler interface {
-	UnmarshalAWSXML(d *xml.Decoder) error
+// xmlUnmarshaler is an interface that a shape can implement
+type xmlUnmarshaler interface {
+	UnmarshalAWSXML(*xml.Decoder) error
 }
 
-type RESTUnmarshaler interface {
-	UnmarshalAWSREST(r *request.Request) error
-	//UnmarshalAWSREST(r *http.Response) error
+// restUnmarshaler is an interface that a shape can implement
+type restUnmarshaler interface {
+	//UnmarshalAWSREST(r *request.Request) error
+	UnmarshalAWSREST(*http.Response) error
 }
 
-type RESTXMLUnmarshaler interface {
-	XMLUnmarshaler
-	RESTUnmarshaler
+// restXMLUnmarshaler is the interface combines XMLUnmarshaler and RESTUnmarshaler
+type restXMLUnmarshaler interface {
+	xmlUnmarshaler
+	restUnmarshaler
 }
 
 // Build builds a request payload for the REST XML protocol.
@@ -80,21 +84,33 @@ func Build(r *request.Request) {
 
 // Unmarshal unmarshals a payload response for the REST XML protocol.
 func Unmarshal(r *request.Request) {
-	//if resp, ok := r.Data.(RESTXMLUnmarshaler); ok {
-	//	defer r.HTTPResponse.Body.Close()
-	//	decoder := xml.NewDecoder(r.HTTPResponse.Body)
-	//	err := resp.UnmarshalAWSXML(decoder)
-	//	if err != nil {
-	//   	r.Data = nil // reset r's Data
-	//		r.Error = awserr.New("SerializationError", "failed to decode REST XML response", err)
-	//		return
-	//	}
-	//	return
-	//}
+	//defer r.HTTPResponse.Body.Close()
+	if resp, ok := r.Data.(restUnmarshaler); ok {
+		err := resp.UnmarshalAWSREST(r.HTTPResponse)
+		if err != nil {
+			r.Error = awserr.New("SerializationError", "failed to decode REST XML response", err)
+			return
+		}
+
+	}
+	if resp, ok := r.Data.(xmlUnmarshaler); ok {
+		defer r.HTTPResponse.Body.Close()
+		decoder := xml.NewDecoder(r.HTTPResponse.Body)
+		err := resp.UnmarshalAWSXML(decoder)
+		if err != nil {
+			r.Error = awserr.New("SerializationError", "failed to decode REST XML response", err)
+			return
+		}
+		return
+	}
+
+	if _, ok := r.Data.(restUnmarshaler); ok {
+		return
+	}
 
 	// Fall back to old reflection based unmarshaler
 	if t := rest.PayloadType(r.Data); t == "structure" || t == "" {
-		//defer r.HTTPResponse.Body.Close()
+		defer r.HTTPResponse.Body.Close()
 		decoder := xml.NewDecoder(r.HTTPResponse.Body)
 		err := xmlutil.UnmarshalXML(r.Data, decoder, "")
 		if err != nil {
@@ -108,14 +124,14 @@ func Unmarshal(r *request.Request) {
 
 // UnmarshalMeta unmarshals response headers for the REST XML protocol.
 func UnmarshalMeta(r *request.Request) {
-	//if resp, ok := r.Data.(RESTXMLUnmarshaler); ok {
-	//	err := resp.UnmarshalAWSREST(r)
-	//	if err != nil {
-	//		r.Error = awserr.New("SerializationError", "failed to decode REST XML response", err)
-	//		return
-	//	}
-	//	return
-	//}
+	if _, ok := r.Data.(restUnmarshaler); ok {
+		r.RequestID = r.HTTPResponse.Header.Get("X-Amzn-Requestid")
+		if r.RequestID == "" {
+			// Alternative version of request id in the header
+			r.RequestID = r.HTTPResponse.Header.Get("X-Amz-Request-Id")
+		}
+		return
+	}
 
 	// Fall back to old reflection based unmarshaler
 	rest.UnmarshalMeta(r)

@@ -122,37 +122,13 @@ func (s ListObjectsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-func CheckXMLSyntax(d *xml.Decoder) error {
-	for {
-		err := d.Skip()
+func (s *ListObjectsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
 		if err != nil {
-			if err == io.EOF {
-				break
-			} else {
-				return err
-			}
+			*s = ListObjectsOutput{}
 		}
-	}
-	return nil
-}
+	}()
 
-// function will never be called by unmarshal handler
-// may used by developer?
-func (s *ListObjectsResponse) UnmarshalAWSXML(d *xml.Decoder) error {
-	// Send() will build the ListObjectsResponse type, no need to do building here
-	if s.response == nil {
-		resp := aws.Response{}
-		s.response = &resp
-	}
-	if s.ListObjectsOutput == nil {
-		output := ListObjectsOutput{}
-		s.ListObjectsOutput = &output
-	}
-	err := s.ListObjectsOutput.UnmarshalAWSXML(d)
-	return err
-}
-
-func (s *ListObjectsOutput) UnmarshalAWSXML(d *xml.Decoder) error {
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -327,7 +303,7 @@ func (s *ListObjectsOutput) UnmarshalAWSXML(d *xml.Decoder) error {
 	return nil
 }
 
-func (s *CommonPrefix) UnmarshalAWSXML(d *xml.Decoder) error {
+func (s *CommonPrefix) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -383,7 +359,7 @@ func (s *CommonPrefix) UnmarshalAWSXML(d *xml.Decoder) error {
 	return nil
 }
 
-func (s *Object) UnmarshalAWSXML(d *xml.Decoder) error {
+func (s *Object) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -450,7 +426,7 @@ func (s *Object) UnmarshalAWSXML(d *xml.Decoder) error {
 					break
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse("2006-01-02T15:04:05Z07:00", string(v))
+				value, _ := time.Parse(time.RFC3339, string(v))
 				s.LastModified = &value
 			case "Size":
 				tok, err = d.Token();
@@ -506,7 +482,7 @@ func (s *Object) UnmarshalAWSXML(d *xml.Decoder) error {
 	return nil
 }
 
-func (s *Owner) unmarshalAWSXML(d *xml.Decoder) error {
+func (s *Owner) unmarshalAWSXML(d *xml.Decoder) (err error) {
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -573,29 +549,6 @@ func (s *Owner) unmarshalAWSXML(d *xml.Decoder) error {
 				}
 			}
 		}
-	}
-	return nil
-}
-
-// function will never be called by unmarshal handler
-// may used by developer?
-func (s *ListObjectsResponse) UnmarshalAWSREST(r *aws.Request) error {
-	if s.response == nil {
-		resp := aws.Response{Request: r}
-		s.response = &resp
-	}
-	if s.ListObjectsOutput == nil {
-		output := ListObjectsOutput{}
-		s.ListObjectsOutput = &output
-	}
-	err := s.ListObjectsOutput.UnmarshalAWSREST(r)
-	return err
-}
-
-func (s *ListObjectsOutput) UnmarshalAWSREST(r *aws.Request) error {
-	r.RequestID = r.HTTPResponse.Header.Get("X-Amzn-Requestid")
-	if r.RequestID == "" {
-		r.RequestID = r.HTTPResponse.Header.Get("X-Amz-Request-Id")
 	}
 	return nil
 }
