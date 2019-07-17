@@ -4,12 +4,16 @@ package s3
 
 import (
 	"context"
+	"fmt"
 	"io"
+	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/private/protocol/rest"
 )
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectRequest
@@ -365,6 +369,180 @@ type GetObjectOutput struct {
 	// the value of this header in the object metadata.
 	WebsiteRedirectLocation *string `location:"header" locationName:"x-amz-website-redirect-location" type:"string"`
 }
+
+func (s *GetObjectOutput) UnmarshalAWSPayload(r io.ReadCloser) (err error) {
+	defer func() {
+		if err != nil {
+			*s = GetObjectOutput{}
+		}
+	}()
+	s.Body = r
+	return nil
+}
+
+func (s *GetObjectOutput) UnmarshalAWSREST(r *http.Response) (err error) {
+	defer func() {
+		if err != nil {
+			*s = GetObjectOutput{}
+		}
+	}()
+
+	// First, unmarshal the status code to the status code field in the shape
+
+	// Secondly, unmarshal the http header to the header fields in the shape
+	for k, v := range r.Header {
+		switch k {
+		case http.CanonicalHeaderKey("accept-ranges"):
+			value := v[0]
+			s.AcceptRanges = &value
+		case http.CanonicalHeaderKey("Cache-Control"):
+			value := v[0]
+			s.CacheControl = &value
+		case http.CanonicalHeaderKey("Content-Disposition"):
+			value := v[0]
+			s.ContentDisposition = &value
+		case http.CanonicalHeaderKey("Content-Encoding"):
+			value := v[0]
+			s.ContentEncoding = &value
+		case http.CanonicalHeaderKey("Content-Language"):
+			value := v[0]
+			s.ContentLanguage = &value
+		case http.CanonicalHeaderKey("Content-Length"):
+			value, err := strconv.ParseInt(v[0], 10, 64)
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput, %s", err)
+			}
+			s.ContentLength = &value
+		case http.CanonicalHeaderKey("Content-Range"):
+			value := v[0]
+			s.ContentRange = &value
+		case http.CanonicalHeaderKey("Content-Type"):
+			value := v[0]
+			s.ContentType = &value
+		case http.CanonicalHeaderKey("x-amz-delete-marker"):
+			value, err := strconv.ParseBool(v[0])
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput, %s", err)
+			}
+			s.DeleteMarker = &value
+		case http.CanonicalHeaderKey("ETag"):
+			value := v[0]
+			s.ETag = &value
+		case http.CanonicalHeaderKey("x-amz-expiration"):
+			value := v[0]
+			s.Expiration = &value
+		case http.CanonicalHeaderKey("Expires"):
+			value := v[0]
+			s.Expires = &value
+		case http.CanonicalHeaderKey("Last-Modified"):
+			value, err := time.Parse(rest.RFC822, v[0])
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput, %s", err)
+			}
+			s.LastModified = &value
+		case http.CanonicalHeaderKey("x-amz-missing-meta"):
+			value, err := strconv.ParseInt(v[0], 10, 64)
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput, %s", err)
+			}
+			s.MissingMeta = &value
+		case http.CanonicalHeaderKey("x-amz-object-lock-legal-hold"):
+			value := ObjectLockLegalHoldStatus(v[0])
+			s.ObjectLockLegalHoldStatus = value
+		case http.CanonicalHeaderKey("x-amz-object-lock-mode"):
+			value := ObjectLockMode(v[0])
+			s.ObjectLockMode = value
+		case http.CanonicalHeaderKey("x-amz-object-lock-retain-until-date"):
+			value, err := time.Parse(rest.RFC822, v[0])
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput, %s", err)
+			}
+			s.ObjectLockRetainUntilDate = &value
+		case http.CanonicalHeaderKey("x-amz-mp-parts-count"):
+			value, err := strconv.ParseInt(v[0], 10, 64)
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput, %s", err)
+			}
+			s.PartsCount = &value
+		case http.CanonicalHeaderKey("x-amz-replication-status"):
+			value := ReplicationStatus(v[0])
+			s.ReplicationStatus = value
+		case http.CanonicalHeaderKey("x-amz-request-charged"):
+			value := RequestCharged(v[0])
+			s.RequestCharged = value
+		case http.CanonicalHeaderKey("x-amz-restore"):
+			value := v[0]
+			s.Restore = &value
+		case http.CanonicalHeaderKey("x-amz-server-side-encryption-customer-algorithm"):
+			value := v[0]
+			s.SSECustomerAlgorithm = &value
+		case http.CanonicalHeaderKey("x-amz-server-side-encryption-customer-key-MD5"):
+			value := v[0]
+			s.SSECustomerKeyMD5 = &value
+		case http.CanonicalHeaderKey("x-amz-server-side-encryption-aws-kms-key-id"):
+			value := v[0]
+			s.SSEKMSKeyId = &value
+		case http.CanonicalHeaderKey("x-amz-server-side-encryption"):
+			value := ServerSideEncryption(v[0])
+			s.ServerSideEncryption = value
+		case http.CanonicalHeaderKey("x-amz-storage-class"):
+			value := StorageClass(v[0])
+			s.StorageClass = value
+		case http.CanonicalHeaderKey("x-amz-tagging-count"):
+			value, err := strconv.ParseInt(v[0], 10, 64)
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput, %s", err)
+			}
+			s.TagCount = &value
+		case http.CanonicalHeaderKey("x-amz-version-id"):
+			value := v[0]
+			s.VersionId = &value
+		case http.CanonicalHeaderKey("x-amz-website-redirect-location"):
+			value := v[0]
+			s.WebsiteRedirectLocation = &value
+		default:
+			prefix := "x-amz-meta-"
+			if len(k) >= len(prefix) && k[:len(prefix)] == http.CanonicalHeaderKey(prefix) {
+				if s.Metadata == nil {
+					s.Metadata = map[string]string{}
+				}
+				err := unmarshalAWSRESTMetadata(&s.Metadata, r, k, prefix)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput, %s", err)
+				}
+			}
+			//prefix := "x-amz-meta-"
+			//if len(k) >= len(prefix) && k[:len(prefix)] == http.CanonicalHeaderKey(prefix) {
+			//	if s.Metadata == nil {
+			//		s.Metadata = map[string]string{}
+			//	}
+			//	(*s).Metadata[k[len(prefix):]] = r.Header.Get(k)
+			//}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSRESTMetadata(s *map[string]string, r *http.Response, key string, prefix string) (err error) {
+	defer func() {
+		if err != nil {
+			*s = map[string]string{}
+		}
+	}()
+	(*s)[key[len(prefix):]] = r.Header.Get(key)
+	return nil
+}
+
+//func unmarshalAWSRESTMap(s *map[string]string, r *http.Response) error {
+//	for k, v := range r.Header {
+//		k = http.CanonicalHeaderKey(k)
+//		prefix := "x-amz-meta-"
+//		if strings.HasPrefix(strings.ToLower(k), strings.ToLower(prefix)) {
+//			(*s)[k[len(prefix):]] = v[0]
+//		}
+//	}
+//	return nil
+//}
 
 // String returns the string representation
 func (s GetObjectOutput) String() string {
