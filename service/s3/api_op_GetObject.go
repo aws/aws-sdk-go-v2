@@ -369,18 +369,26 @@ type GetObjectOutput struct {
 	WebsiteRedirectLocation *string `location:"header" locationName:"x-amz-website-redirect-location" type:"string"`
 }
 
+func (s *GetObjectOutput) UnmarshalAWSPayload(r *io.ReadCloser) (err error) {
+	defer func() {
+		if err != nil {
+			*s = GetObjectOutput{}
+		}
+	}()
+	s.Body = *r
+	return nil
+}
+
 func (s *GetObjectOutput) UnmarshalAWSREST(r *http.Response) (err error) {
 	defer func() {
 		if err != nil {
 			*s = GetObjectOutput{}
 		}
 	}()
+
 	// First, unmarshal the status code to the status code field in the shape
 
-	// Secondly, unmarshal the http body to the body field in the shape
-	s.Body = r.Body
-
-	// Thirdly, unmarshal the http header to the header fields in the shape
+	// Secondly, unmarshal the http header to the header fields in the shape
 	for k, v := range r.Header {
 		switch k {
 		case http.CanonicalHeaderKey("accept-ranges"):

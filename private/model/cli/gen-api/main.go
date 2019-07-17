@@ -20,6 +20,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/util"
 )
 
+//
 func usage() {
 	fmt.Fprintln(os.Stderr, `Usage: api-gen <options> [model path | file path]
 Loads API models from file and generates SDK clients from the models.
