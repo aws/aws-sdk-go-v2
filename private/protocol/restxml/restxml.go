@@ -44,7 +44,7 @@ type restUnmarshaler interface {
 
 // payloadUnmarshaler is an interface that a shape can implement
 type payloadUnmarshaler interface {
-	UnmarshalAWSPayload(*io.ReadCloser) error
+	UnmarshalAWSPayload(io.ReadCloser) error
 }
 
 // Build builds a request payload for the REST XML protocol.
@@ -92,12 +92,11 @@ func Unmarshal(r *request.Request) {
 		}
 	}
 	if resp, ok := r.Data.(payloadUnmarshaler); ok {
-		err := resp.UnmarshalAWSPayload(&r.HTTPResponse.Body)
+		err := resp.UnmarshalAWSPayload(r.HTTPResponse.Body)
 		if err != nil {
 			r.Error = awserr.New("SerializationError", "failed to decode REST XML response", err)
 			return
 		}
-
 	}
 	if resp, ok := r.Data.(xmlUnmarshaler); ok {
 		defer r.HTTPResponse.Body.Close()

@@ -5,6 +5,7 @@ package s3
 import (
 	"context"
 	"encoding/xml"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -135,7 +136,7 @@ func (s *ListObjectsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 			if err == io.EOF {
 				break
 			} else {
-				return err
+				return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
 			}
 		}
 
@@ -158,7 +159,7 @@ func (s *ListObjectsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 					if err == io.EOF {
 						break
 					} else {
-						return err
+						return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
 					}
 				}
 				if tok == nil {
@@ -173,7 +174,7 @@ func (s *ListObjectsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 					if err == io.EOF {
 						break
 					} else {
-						return err
+						return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
 					}
 				}
 				if tok == nil {
@@ -188,7 +189,7 @@ func (s *ListObjectsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 					if err == io.EOF {
 						break
 					} else {
-						return err
+						return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
 					}
 				}
 				if tok == nil {
@@ -203,7 +204,7 @@ func (s *ListObjectsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 					if err == io.EOF {
 						break
 					} else {
-						return err
+						return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
 					}
 				}
 				if tok == nil {
@@ -218,7 +219,7 @@ func (s *ListObjectsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 					if err == io.EOF {
 						break
 					} else {
-						return err
+						return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
 					}
 				}
 				if tok == nil {
@@ -233,7 +234,7 @@ func (s *ListObjectsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 					if err == io.EOF {
 						break
 					} else {
-						return err
+						return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
 					}
 				}
 				if tok == nil {
@@ -248,7 +249,7 @@ func (s *ListObjectsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 					if err == io.EOF {
 						break
 					} else {
-						return err
+						return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
 					}
 				}
 				if tok == nil {
@@ -263,7 +264,7 @@ func (s *ListObjectsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 					if err == io.EOF {
 						break
 					} else {
-						return err
+						return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
 					}
 				}
 				if tok == nil {
@@ -276,14 +277,14 @@ func (s *ListObjectsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 				object := Object{}
 				err := object.UnmarshalAWSXML(d)
 				if err != nil {
-					return err
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
 				}
 				s.Contents = append(s.Contents, object)
 			case "CommonPrefixes":
 				commonPrefix := CommonPrefix{}
 				err := commonPrefix.UnmarshalAWSXML(d)
 				if err != nil {
-					return err
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
 				}
 				s.CommonPrefixes = append(s.CommonPrefixes, commonPrefix)
 			case "ListBucketResult":
@@ -294,7 +295,7 @@ func (s *ListObjectsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 					if err == io.EOF {
 						break
 					} else {
-						return err
+						return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
 					}
 				}
 			}
@@ -304,6 +305,12 @@ func (s *ListObjectsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 }
 
 func (s *CommonPrefix) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CommonPrefix{}
+		}
+	}()
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -360,6 +367,12 @@ func (s *CommonPrefix) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 }
 
 func (s *Object) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = Object{}
+		}
+	}()
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -483,6 +496,12 @@ func (s *Object) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 }
 
 func (s *Owner) unmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = Owner{}
+		}
+	}()
+
 	for {
 		tok, err := d.Token()
 		if err != nil {

@@ -7,6 +7,7 @@ import (
 	"encoding/xml"
 	"io"
 	"time"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -51,7 +52,7 @@ func (s *ListBucketsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 			if err == io.EOF {
 				break
 			} else {
-				return err
+				return fmt.Errorf("fail to UnmarshalAWSXML ListBucketsOutput, %s", err)
 			}
 		}
 
@@ -72,14 +73,14 @@ func (s *ListBucketsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 				owner := Owner{}
 				err := owner.unmarshalAWSXML(d)
 				if err != nil {
-					return err
+					return fmt.Errorf("fail to UnmarshalAWSXML ListBucketsOutput, %s", err)
 				}
 				s.Owner = &owner
 			case "Buckets":
 				buckets := make([]Bucket, 0)
 				err := unmarshalAWSXMLListBucket(&buckets, d)
 				if err != nil {
-					return err
+					return fmt.Errorf("fail to UnmarshalAWSXML ListBucketsOutput, %s", err)
 				}
 				s.Buckets = buckets
 			case "ListAllMyBucketsResult":
@@ -90,7 +91,7 @@ func (s *ListBucketsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 					if err == io.EOF {
 						break
 					} else {
-						return err
+						return fmt.Errorf("fail to UnmarshalAWSXML ListBucketsOutput, %s", err)
 					}
 				}
 			}
@@ -101,6 +102,12 @@ func (s *ListBucketsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 
 // For N-Dimension list, add each layer a UnmarshalAWSXML() function
 func unmarshalAWSXMLListBucket(s *[]Bucket, d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]Bucket, 0)
+		}
+	}()
+
 	for {
 		tok, err := d.Token()
 		if err != nil {
@@ -149,6 +156,12 @@ func unmarshalAWSXMLListBucket(s *[]Bucket, d *xml.Decoder) (err error) {
 }
 
 func (s *Bucket) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = Bucket{}
+		}
+	}()
+
 	for {
 		tok, err := d.Token()
 		if err != nil {

@@ -4,6 +4,7 @@ package s3
 
 import (
 	"context"
+	"fmt"
 	"io"
 	"net/http"
 	"strconv"
@@ -369,13 +370,13 @@ type GetObjectOutput struct {
 	WebsiteRedirectLocation *string `location:"header" locationName:"x-amz-website-redirect-location" type:"string"`
 }
 
-func (s *GetObjectOutput) UnmarshalAWSPayload(r *io.ReadCloser) (err error) {
+func (s *GetObjectOutput) UnmarshalAWSPayload(r io.ReadCloser) (err error) {
 	defer func() {
 		if err != nil {
 			*s = GetObjectOutput{}
 		}
 	}()
-	s.Body = *r
+	s.Body = r
 	return nil
 }
 
@@ -409,7 +410,7 @@ func (s *GetObjectOutput) UnmarshalAWSREST(r *http.Response) (err error) {
 		case http.CanonicalHeaderKey("Content-Length"):
 			value, err := strconv.ParseInt(v[0], 10, 64)
 			if err != nil {
-				return err
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput, %s", err)
 			}
 			s.ContentLength = &value
 		case http.CanonicalHeaderKey("Content-Range"):
@@ -421,7 +422,7 @@ func (s *GetObjectOutput) UnmarshalAWSREST(r *http.Response) (err error) {
 		case http.CanonicalHeaderKey("x-amz-delete-marker"):
 			value, err := strconv.ParseBool(v[0])
 			if err != nil {
-				return err
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput, %s", err)
 			}
 			s.DeleteMarker = &value
 		case http.CanonicalHeaderKey("ETag"):
@@ -436,13 +437,13 @@ func (s *GetObjectOutput) UnmarshalAWSREST(r *http.Response) (err error) {
 		case http.CanonicalHeaderKey("Last-Modified"):
 			value, err := time.Parse(rest.RFC822, v[0])
 			if err != nil {
-				return err
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput, %s", err)
 			}
 			s.LastModified = &value
 		case http.CanonicalHeaderKey("x-amz-missing-meta"):
 			value, err := strconv.ParseInt(v[0], 10, 64)
 			if err != nil {
-				return err
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput, %s", err)
 			}
 			s.MissingMeta = &value
 		case http.CanonicalHeaderKey("x-amz-object-lock-legal-hold"):
@@ -454,13 +455,13 @@ func (s *GetObjectOutput) UnmarshalAWSREST(r *http.Response) (err error) {
 		case http.CanonicalHeaderKey("x-amz-object-lock-retain-until-date"):
 			value, err := time.Parse(rest.RFC822, v[0])
 			if err != nil {
-				return err
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput, %s", err)
 			}
 			s.ObjectLockRetainUntilDate = &value
 		case http.CanonicalHeaderKey("x-amz-mp-parts-count"):
 			value, err := strconv.ParseInt(v[0], 10, 64)
 			if err != nil {
-				return err
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput, %s", err)
 			}
 			s.PartsCount = &value
 		case http.CanonicalHeaderKey("x-amz-replication-status"):
@@ -490,7 +491,7 @@ func (s *GetObjectOutput) UnmarshalAWSREST(r *http.Response) (err error) {
 		case http.CanonicalHeaderKey("x-amz-tagging-count"):
 			value, err := strconv.ParseInt(v[0], 10, 64)
 			if err != nil {
-				return err
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput, %s", err)
 			}
 			s.TagCount = &value
 		case http.CanonicalHeaderKey("x-amz-version-id"):
@@ -505,18 +506,29 @@ func (s *GetObjectOutput) UnmarshalAWSREST(r *http.Response) (err error) {
 				if s.Metadata == nil {
 					s.Metadata = map[string]string{}
 				}
-				err := unmarshalAWSRESTMetadataMap(&s.Metadata, r, k)
+				err := unmarshalAWSRESTMetadata(&s.Metadata, r, k, prefix)
 				if err != nil {
-					return err
+					return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput, %s", err)
 				}
 			}
+			//prefix := "x-amz-meta-"
+			//if len(k) >= len(prefix) && k[:len(prefix)] == http.CanonicalHeaderKey(prefix) {
+			//	if s.Metadata == nil {
+			//		s.Metadata = map[string]string{}
+			//	}
+			//	(*s).Metadata[k[len(prefix):]] = r.Header.Get(k)
+			//}
 		}
 	}
 	return nil
 }
 
-func unmarshalAWSRESTMetadataMap(s *map[string]string, r *http.Response, key string) (err error) {
-	prefix := "x-amz-meta-"
+func unmarshalAWSRESTMetadata(s *map[string]string, r *http.Response, key string, prefix string) (err error) {
+	defer func() {
+		if err != nil {
+			*s = map[string]string{}
+		}
+	}()
 	(*s)[key[len(prefix):]] = r.Header.Get(key)
 	return nil
 }
