@@ -130,161 +130,105 @@ func (s *ListObjectsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 		}
 	}()
 
+	cur := ""
 	for {
 		tok, err := d.Token()
-		if err != nil {
+		if tok == nil || err != nil {
 			if err == io.EOF {
 				break
 			} else {
-				return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
-			}
-		}
-
-		if tok == nil {
-			break
-		}
-
-		if end, ok := tok.(xml.EndElement); ok {
-			name := end.Name.Local
-			if name == "ListBucketResult" {
-				break
+				return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput.%s, %s", cur, err)
 			}
 		}
 
 		if start, ok := tok.(xml.StartElement); ok {
 			switch name := start.Name.Local; name {
 			case "Delimiter":
+				cur = name
 				tok, err = d.Token();
-				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
-					}
-				}
-				if tok == nil {
-					break
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput.%s, %s", cur, err)
 				}
 				v, _ := tok.(xml.CharData)
 				value := string(v)
 				s.Delimiter = &value
 			case "EncodingType":
+				cur = name
 				tok, err = d.Token();
-				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
-					}
-				}
-				if tok == nil {
-					break
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput.%s, %s", cur, err)
 				}
 				v, _ := tok.(xml.CharData)
 				value := EncodingType(v)
 				s.EncodingType = value
 			case "IsTruncated":
+				cur = name
 				tok, err = d.Token();
-				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
-					}
-				}
-				if tok == nil {
-					break
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput.%s, %s", cur, err)
 				}
 				v, _ := tok.(xml.CharData)
 				value, _ := strconv.ParseBool(string(v))
 				s.IsTruncated = &value
 			case "Marker":
+				cur = name
 				tok, err = d.Token();
-				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
-					}
-				}
-				if tok == nil {
-					break
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput.%s, %s", cur, err)
 				}
 				v, _ := tok.(xml.CharData);
 				value := string(v)
 				s.Marker = &value
 			case "MaxKeys":
+				cur = name
 				tok, err = d.Token();
-				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
-					}
-				}
-				if tok == nil {
-					break
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput.%s, %s", cur, err)
 				}
 				v, _ := tok.(xml.CharData)
 				value, _ := strconv.ParseInt(string(v), 10, 64)
 				s.MaxKeys = &value
 			case "Name":
+				cur = name
 				tok, err = d.Token();
-				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
-					}
-				}
-				if tok == nil {
-					break
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput.%s, %s", cur, err)
 				}
 				v, _ := tok.(xml.CharData)
 				value := string(v)
 				s.Name = &value
 			case "NextMarker":
+				cur = name
 				tok, err = d.Token();
-				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
-					}
-				}
-				if tok == nil {
-					break
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput.%s, %s", cur, err)
 				}
 				v, _ := tok.(xml.CharData)
 				value := string(v)
 				s.NextMarker = &value
 			case "Prefix":
+				cur = name
 				tok, err = d.Token()
-				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
-					}
-				}
-				if tok == nil {
-					break
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput.%s, %s", cur, err)
 				}
 				v, _ := tok.(xml.CharData)
 				value := string(v)
 				s.Prefix = &value
 			case "Contents":
+				cur = name
 				object := Object{}
 				err := object.UnmarshalAWSXML(d)
 				if err != nil {
-					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput.%s, %s", cur, err)
 				}
 				s.Contents = append(s.Contents, object)
 			case "CommonPrefixes":
+				cur = name
 				commonPrefix := CommonPrefix{}
 				err := commonPrefix.UnmarshalAWSXML(d)
 				if err != nil {
-					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput.%s, %s", cur, err)
 				}
 				s.CommonPrefixes = append(s.CommonPrefixes, commonPrefix)
 			case "ListBucketResult":
@@ -292,11 +236,8 @@ func (s *ListObjectsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 			default:
 				err := d.Skip()
 				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput, %s", err)
-					}
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectsOutput.%s, %s", cur, err)
+
 				}
 			}
 		}
@@ -313,16 +254,8 @@ func (s *CommonPrefix) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 
 	for {
 		tok, err := d.Token()
-		if err != nil {
-			if err == io.EOF {
-				break
-			} else {
-				return err
-			}
-		}
-
-		if tok == nil {
-			break
+		if tok == nil || err != nil {
+			return err
 		}
 
 		if end, ok := tok.(xml.EndElement); ok {
@@ -336,29 +269,16 @@ func (s *CommonPrefix) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 			switch name := start.Name.Local; name {
 			case "Prefix":
 				tok, err = d.Token();
-				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return err
-					}
-				}
-				if tok == nil {
-					break
+				if tok == nil || err != nil {
+					return err
 				}
 				v, _ := tok.(xml.CharData)
 				value := string(v)
 				s.Prefix = &value
-			case "CommonPrefixes":
-				continue
 			default:
 				err := d.Skip()
 				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return err
-					}
+					return err
 				}
 			}
 		}
@@ -375,16 +295,8 @@ func (s *Object) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 
 	for {
 		tok, err := d.Token()
-		if err != nil {
-			if err == io.EOF {
-				break
-			} else {
-				return err
-			}
-		}
-
-		if tok == nil {
-			break
+		if tok == nil || err != nil {
+			return err
 		}
 
 		if end, ok := tok.(xml.EndElement); ok {
@@ -398,75 +310,40 @@ func (s *Object) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 			switch name := start.Name.Local; name {
 			case "ETag":
 				tok, err = d.Token();
-				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return err
-					}
-				}
-				if tok == nil {
-					break
+				if tok == nil || err != nil {
+					return err
 				}
 				v, _ := tok.(xml.CharData)
 				value := string(v)
 				s.ETag = &value
 			case "Key":
 				tok, err = d.Token();
-				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return err
-					}
-				}
-				if tok == nil {
-					break
+				if tok == nil || err != nil {
+					return err
 				}
 				v, _ := tok.(xml.CharData)
 				value := string(v)
 				s.Key = &value
 			case "LastModified":
 				tok, err = d.Token();
-				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return err
-					}
-				}
-				if tok == nil {
-					break
+				if tok == nil || err != nil {
+					return err
 				}
 				v, _ := tok.(xml.CharData)
 				value, _ := time.Parse(time.RFC3339, string(v))
 				s.LastModified = &value
 			case "Size":
 				tok, err = d.Token();
-				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return err
-					}
-				}
-				if tok == nil {
-					break
+				if tok == nil || err != nil {
+					return err
 				}
 				v, _ := tok.(xml.CharData)
 				value, _ := strconv.ParseInt(string(v), 10, 64)
 				s.Size = &value
 			case "StorageClass":
 				tok, err = d.Token();
-				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return err
-					}
-				}
-				if tok == nil {
-					break
+				if tok == nil || err != nil {
+					return err
 				}
 				v, _ := tok.(xml.CharData)
 				value := ObjectStorageClass(v)
@@ -478,16 +355,10 @@ func (s *Object) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 					return err
 				}
 				s.Owner = &owner
-			case "Contents":
-				continue
 			default:
 				err := d.Skip()
 				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return err
-					}
+					return err
 				}
 			}
 		}
@@ -504,16 +375,8 @@ func (s *Owner) unmarshalAWSXML(d *xml.Decoder) (err error) {
 
 	for {
 		tok, err := d.Token()
-		if err != nil {
-			if err == io.EOF {
-				break
-			} else {
-				return err
-			}
-		}
-
-		if tok == nil {
-			break
+		if tok == nil || err != nil {
+			return err
 		}
 
 		if end, ok := tok.(xml.EndElement); ok {
@@ -527,44 +390,24 @@ func (s *Owner) unmarshalAWSXML(d *xml.Decoder) (err error) {
 			switch name := start.Name.Local; name {
 			case "DisplayName":
 				tok, err = d.Token();
-				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return err
-					}
-				}
-				if tok == nil {
-					break
+				if tok == nil || err != nil {
+					return err
 				}
 				v, _ := tok.(xml.CharData)
 				value := string(v)
 				s.DisplayName = &value
 			case "ID":
 				tok, err = d.Token();
-				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return err
-					}
-				}
-				if tok == nil {
-					break
+				if tok == nil || err != nil {
+					return err
 				}
 				v, _ := tok.(xml.CharData)
 				value := string(v)
 				s.ID = &value
-			case "Owner":
-				continue
 			default:
 				err := d.Skip()
 				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return err
-					}
+					return err
 				}
 			}
 		}

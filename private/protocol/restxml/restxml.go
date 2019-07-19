@@ -82,8 +82,9 @@ func Build(r *request.Request) {
 
 // Unmarshal unmarshals a payload response for the REST XML protocol.
 func Unmarshal(r *request.Request) {
-	//defer r.HTTPResponse.Body.Close()
+	hasGeneratedUmarshaler := false
 	if resp, ok := r.Data.(restUnmarshaler); ok {
+		hasGeneratedUmarshaler = true
 		err := resp.UnmarshalAWSREST(r.HTTPResponse)
 		if err != nil {
 			r.Error = awserr.New("SerializationError", "failed to decode REST XML response", err)
@@ -91,6 +92,7 @@ func Unmarshal(r *request.Request) {
 		}
 	}
 	if resp, ok := r.Data.(payloadUnmarshaler); ok {
+		hasGeneratedUmarshaler = true
 		err := resp.UnmarshalAWSPayload(r.HTTPResponse.Body)
 		if err != nil {
 			r.Error = awserr.New("SerializationError", "failed to decode REST XML response", err)
@@ -98,6 +100,7 @@ func Unmarshal(r *request.Request) {
 		}
 	}
 	if resp, ok := r.Data.(xmlUnmarshaler); ok {
+		hasGeneratedUmarshaler = true
 		defer r.HTTPResponse.Body.Close()
 		decoder := xml.NewDecoder(r.HTTPResponse.Body)
 		err := resp.UnmarshalAWSXML(decoder)
@@ -105,14 +108,8 @@ func Unmarshal(r *request.Request) {
 			r.Error = awserr.New("SerializationError", "failed to decode REST XML response", err)
 			return
 		}
-		return
 	}
-
-	if _, ok := r.Data.(payloadUnmarshaler); ok {
-		return
-	}
-
-	if _, ok := r.Data.(restUnmarshaler); ok {
+	if hasGeneratedUmarshaler {
 		return
 	}
 
@@ -132,6 +129,10 @@ func Unmarshal(r *request.Request) {
 
 // UnmarshalMeta unmarshals response headers for the REST XML protocol.
 func UnmarshalMeta(r *request.Request) {
+	/*
+	   If r.Data has implemented the restUmarshaler interface, the header and status code unmarshaling can be handled by the function
+	   shape.UnmarshalAWSREST(*http.Response). Then the UnmarshalMeta(*request.Request) function only needs to handle requestID unmarshaling.
+	*/
 	if _, ok := r.Data.(restUnmarshaler); ok {
 		r.RequestID = r.HTTPResponse.Header.Get("X-Amzn-Requestid")
 		if r.RequestID == "" {

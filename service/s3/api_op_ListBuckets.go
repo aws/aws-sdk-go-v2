@@ -46,41 +46,33 @@ func (s *ListBucketsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 		}
 	}()
 
+	cur := ""
 	for {
 		tok, err := d.Token()
-		if err != nil {
+		if tok == nil || err != nil {
 			if err == io.EOF {
 				break
 			} else {
-				return fmt.Errorf("fail to UnmarshalAWSXML ListBucketsOutput, %s", err)
-			}
-		}
-
-		if tok == nil {
-			break
-		}
-
-		if end, ok := tok.(xml.EndElement); ok {
-			name := end.Name.Local
-			if name == "ListAllMyBucketsResult" {
-				break
+				return fmt.Errorf("fail to UnmarshalAWSXML ListBucketsOutput.%s, %s", cur, err)
 			}
 		}
 
 		if start, ok := tok.(xml.StartElement); ok {
 			switch name := start.Name.Local; name {
 			case "Owner":
+				cur = name
 				owner := Owner{}
 				err := owner.unmarshalAWSXML(d)
 				if err != nil {
-					return fmt.Errorf("fail to UnmarshalAWSXML ListBucketsOutput, %s", err)
+					return fmt.Errorf("fail to UnmarshalAWSXML ListBucketsOutput.%s, %s", cur, err)
 				}
 				s.Owner = &owner
 			case "Buckets":
+				cur = name
 				buckets := make([]Bucket, 0)
 				err := unmarshalAWSXMLListBucket(&buckets, d)
 				if err != nil {
-					return fmt.Errorf("fail to UnmarshalAWSXML ListBucketsOutput, %s", err)
+					return fmt.Errorf("fail to UnmarshalAWSXML ListBucketsOutput.%s, %s", cur, err)
 				}
 				s.Buckets = buckets
 			case "ListAllMyBucketsResult":
@@ -88,11 +80,7 @@ func (s *ListBucketsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 			default:
 				err := d.Skip()
 				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return fmt.Errorf("fail to UnmarshalAWSXML ListBucketsOutput, %s", err)
-					}
+					return fmt.Errorf("fail to UnmarshalAWSXML ListBucketsOutput.%s, %s", cur, err)
 				}
 			}
 		}
@@ -110,16 +98,8 @@ func unmarshalAWSXMLListBucket(s *[]Bucket, d *xml.Decoder) (err error) {
 
 	for {
 		tok, err := d.Token()
-		if err != nil {
-			if err == io.EOF {
-				break
-			} else {
-				return err
-			}
-		}
-
-		if tok == nil {
-			break
+		if tok == nil || err != nil {
+			return err
 		}
 
 		if end, ok := tok.(xml.EndElement); ok {
@@ -138,16 +118,10 @@ func unmarshalAWSXMLListBucket(s *[]Bucket, d *xml.Decoder) (err error) {
 					return err
 				}
 				*s = append(*s, bucket)
-			case "Buckets":
-				continue
 			default:
 				err := d.Skip()
 				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return err
-					}
+					return err
 				}
 			}
 		}
@@ -164,16 +138,8 @@ func (s *Bucket) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 
 	for {
 		tok, err := d.Token()
-		if err != nil {
-			if err == io.EOF {
-				break
-			} else {
-				return err
-			}
-		}
-
-		if tok == nil {
-			break
+		if tok == nil || err != nil {
+			return err
 		}
 
 		if end, ok := tok.(xml.EndElement); ok {
@@ -187,44 +153,24 @@ func (s *Bucket) UnmarshalAWSXML(d *xml.Decoder) (err error) {
 			switch name := start.Name.Local; name {
 			case "Name":
 				tok, err = d.Token();
-				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return err
-					}
-				}
-				if tok == nil {
-					break
+				if tok == nil || err != nil {
+					return err
 				}
 				v, _ := tok.(xml.CharData)
 				value := string(v)
 				s.Name = &value
 			case "CreationDate":
 				tok, err = d.Token();
-				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return err
-					}
-				}
-				if tok == nil {
-					break
+				if tok == nil || err != nil {
+					return err
 				}
 				v, _ := tok.(xml.CharData)
 				value, _ := time.Parse(time.RFC3339, string(v))
 				s.CreationDate = &value
-			case "Bucket":
-				continue
 			default:
 				err := d.Skip()
 				if err != nil {
-					if err == io.EOF {
-						break
-					} else {
-						return err
-					}
+					return err
 				}
 			}
 		}
