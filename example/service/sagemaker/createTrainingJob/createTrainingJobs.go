@@ -16,7 +16,7 @@ func exitErrorf(msg string, args ...interface{}) {
 	os.Exit(1)
 }
 
-//Usage: go run  createTrainingJobs.go
+// Usage: go run -tags example createTrainingJobs.go
 func main() {
 
 	cfg, err := external.LoadDefaultAWSConfig()
@@ -71,16 +71,17 @@ func main() {
 			TrainingInputMode: TrainingInputMode,
 		},
 
-		InputDataConfig: []sagemaker.Channel{0: {
-			ChannelName: &ChannelName,
-			DataSource: &sagemaker.DataSource{
-				S3DataSource: &sagemaker.S3DataSource{
-					S3DataDistributionType: S3DataDistributionType,
-					S3DataType:             S3DataType,
-					S3Uri:                  &S3Uri,
+		InputDataConfig: []sagemaker.Channel{
+			{
+				ChannelName: &ChannelName,
+				DataSource: &sagemaker.DataSource{
+					S3DataSource: &sagemaker.S3DataSource{
+						S3DataDistributionType: S3DataDistributionType,
+						S3DataType:             S3DataType,
+						S3Uri:                  &S3Uri,
+					},
 				},
 			},
-		},
 		},
 		HyperParameters: HyperParameters,
 	}
@@ -88,10 +89,10 @@ func main() {
 	req := sagemakerSvc.CreateTrainingJobRequest(params)
 
 	resp, err := req.Send(context.TODO())
-	if err == nil {
-		fmt.Println(resp)
-	} else {
+	if err != nil {
 		exitErrorf("Error creating TrainingJob, %v", err)
+		return
 	}
 
+	fmt.Println(resp)
 }

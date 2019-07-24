@@ -1,10 +1,21 @@
-## usage
-`go run listTrainingJobs.go <number of jobs to be displayed>`
+Example using [Amazon SageMaker](https://aws.amazon.com/sagemaker/) with the
+AWS SDK for Go to list training jobs that have been created, and their status.
 
-`go run listTrainingJobs.go 1`
+## Usage
+Use the example to list the created training jobs and their status, passing in
+the number of jobs to show.
 
-## output
-`
+```sh
+go run listTrainingJobs.go <number of jobs to be displayed>
+
+# E.g.
+go run listTrainingJobs.go 1
+```
+
+## Output
+Example response of a training job and its status.
+
+```
 {
   NextToken: "xcskfskdfksdffksdhfjhjghjshdfgjhfjgh"
   TrainingJobSummaries: [{
@@ -16,4 +27,4 @@
       TrainingJobStatus: Completed
     }]
 }
-`
+```
