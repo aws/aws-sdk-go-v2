@@ -1,3 +1,34 @@
+Release v0.10.0 (2019-07-24)
+===
+
+### Services
+* Synced the V2 SDK with latest AWS service API definitions.
+* Fixes [#341](https://github.com/aws/aws-sdk-go-v2/issues/341)
+* Fixes [#342](https://github.com/aws/aws-sdk-go-v2/issues/342)
+
+### SDK Breaking Changes
+* `aws`: Add default HTTP client instead of http.DefaultClient/Transport ([#315](https://github.com/aws/aws-sdk-go-v2/pull/315))
+  * Adds a new BuildableHTTPClient type to the SDK's aws package. The type uses the builder pattern with immutable changes. Modifications to the buildable client create copies of the client.  Adds a HTTPClient interface to the aws package that the SDK will use as an abstraction over the specific HTTP client implementation. The SDK will default to the BuildableHTTPClient, but a *http.Client can be also provided for custom configuration.  When the SDK's aws.Config.HTTPClient value is a BuildableHTTPClient the SDK will be able to use API client specific request timeout options.
+  * Fixes [#279](https://github.com/aws/aws-sdk-go-v2/issues/279)
+  * Fixes [#269](https://github.com/aws/aws-sdk-go-v2/issues/269)
+
+### SDK Enhancements
+* `service/s3/s3manager`: Update S3 Upload Multipart location ([#324](https://github.com/aws/aws-sdk-go-v2/pull/324))
+  * Updates the Location returned value of S3 Upload's Multipart UploadOutput type to be consistent with single part upload URL. This update also brings the multipart upload Location inline with the S3 object URLs created by the SDK.
+  * Fixes [#323](https://github.com/aws/aws-sdk-go-v2/issues/323)
+  * V2 Port [aws/aws-sdk-go#2453](https://github.com/aws/aws-sdk-go/issues/2453)
+
+### SDK Bugs
+* `private/model`: Handles empty map vs unset map behavior in send request ([#337](https://github.com/aws/aws-sdk-go-v2/pull/337))
+  * Updated shape marshal model to handle the empty map vs nil map behavior. Adding a test case to assert behavior when a user sends an empty map vs nil map.
+  * Fix [#332](https://github.com/aws/aws-sdk-go-v2/issues/332)
+* `service/rds`: Fix presign URL for same region ([#331](https://github.com/aws/aws-sdk-go-v2/pull/331)) 
+  * Fixes RDS no-autopresign URL for same region issue for aws-sdk-go-v2. Solves the issue by making sure that the presigned URLs are not created, when the source and destination regions are the same. Added and updated the tests accordingly.
+  * Fix [#271](https://github.com/aws/aws-sdk-go-v2/issues/271)
+* `private/protocola/json/jsonutil`: Fix Unmarshal map[string]bool ([#320](https://github.com/aws/aws-sdk-go-v2/pull/320))
+  * Fixes the JSON unmarshaling of maps of bools. The unmarshal case was missing the condition for bool value, in addition the bool pointer.
+  * Fix [#319](https://github.com/aws/aws-sdk-go-v2/issues/319)
+
 Release v0.9.0 (2019-05-28)
 ===
 
