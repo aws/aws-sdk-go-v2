@@ -534,6 +534,21 @@
         {"shape":"ClusterNotFoundException"}
       ]
     },
+    "SubmitAttachmentStateChanges":{
+      "name":"SubmitAttachmentStateChanges",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SubmitAttachmentStateChangesRequest"},
+      "output":{"shape":"SubmitAttachmentStateChangesResponse"},
+      "errors":[
+        {"shape":"ServerException"},
+        {"shape":"ClientException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"InvalidParameterException"}
+      ]
+    },
     "SubmitContainerStateChange":{
       "name":"SubmitContainerStateChange",
       "http":{
@@ -808,7 +823,8 @@
         "pendingTasksCount":{"shape":"Integer"},
         "activeServicesCount":{"shape":"Integer"},
         "statistics":{"shape":"Statistics"},
-        "tags":{"shape":"Tags"}
+        "tags":{"shape":"Tags"},
+        "settings":{"shape":"ClusterSettings"}
       }
     },
     "ClusterContainsContainerInstancesException":{
@@ -845,6 +861,21 @@
       "members":{
       },
       "exception":true
+    },
+    "ClusterSetting":{
+      "type":"structure",
+      "members":{
+        "name":{"shape":"ClusterSettingName"},
+        "value":{"shape":"String"}
+      }
+    },
+    "ClusterSettingName":{
+      "type":"string",
+      "enum":["containerInsights"]
+    },
+    "ClusterSettings":{
+      "type":"list",
+      "member":{"shape":"ClusterSetting"}
     },
     "Clusters":{
       "type":"list",
@@ -966,6 +997,7 @@
         "remainingResources":{"shape":"Resources"},
         "registeredResources":{"shape":"Resources"},
         "status":{"shape":"String"},
+        "statusReason":{"shape":"String"},
         "agentConnected":{"shape":"Boolean"},
         "runningTasksCount":{"shape":"Integer"},
         "pendingTasksCount":{"shape":"Integer"},
@@ -988,7 +1020,10 @@
       "type":"string",
       "enum":[
         "ACTIVE",
-        "DRAINING"
+        "DRAINING",
+        "REGISTERING",
+        "DEREGISTERING",
+        "REGISTRATION_FAILED"
       ]
     },
     "ContainerInstances":{
@@ -1033,7 +1068,8 @@
       "type":"structure",
       "members":{
         "clusterName":{"shape":"String"},
-        "tags":{"shape":"Tags"}
+        "tags":{"shape":"Tags"},
+        "settings":{"shape":"ClusterSettings"}
       }
     },
     "CreateClusterResponse":{
@@ -2198,7 +2234,9 @@
       "enum":[
         "serviceLongArnFormat",
         "taskLongArnFormat",
-        "containerInstanceLongArnFormat"
+        "containerInstanceLongArnFormat",
+        "awsvpcTrunking",
+        "containerInsights"
       ]
     },
     "Settings":{
@@ -2273,6 +2311,20 @@
       "type":"map",
       "key":{"shape":"String"},
       "value":{"shape":"String"}
+    },
+    "SubmitAttachmentStateChangesRequest":{
+      "type":"structure",
+      "required":["attachments"],
+      "members":{
+        "cluster":{"shape":"String"},
+        "attachments":{"shape":"AttachmentStateChanges"}
+      }
+    },
+    "SubmitAttachmentStateChangesResponse":{
+      "type":"structure",
+      "members":{
+        "acknowledgment":{"shape":"String"}
+      }
     },
     "SubmitContainerStateChangeRequest":{
       "type":"structure",
