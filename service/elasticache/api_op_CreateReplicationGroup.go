@@ -23,7 +23,7 @@ type CreateReplicationGroupInput struct {
 	// group.
 	//
 	// Required: Only available when creating a replication group in an Amazon VPC
-	// using redis version 3.2.6 or 4.x.
+	// using redis version 3.2.6, 4.x or later.
 	//
 	// Default: false
 	AtRestEncryptionEnabled *bool `type:"boolean"`
@@ -67,7 +67,7 @@ type CreateReplicationGroupInput struct {
 	//
 	//    * Redis versions earlier than 2.8.6.
 	//
-	//    * Redis (cluster mode disabled): T1 and T2 cache node types.
+	//    * Redis (cluster mode disabled): T1 node types.
 	//
 	//    * Redis (cluster mode enabled): T1 node types.
 	AutomaticFailoverEnabled *bool `type:"boolean"`
@@ -78,48 +78,44 @@ type CreateReplicationGroupInput struct {
 	// the current generation types provide more memory and computational power
 	// at lower cost when compared to their equivalent previous generation counterparts.
 	//
-	//    * General purpose: Current generation: T2 node types: cache.t2.micro,
-	//    cache.t2.small, cache.t2.medium M3 node types: cache.m3.medium, cache.m3.large,
-	//    cache.m3.xlarge, cache.m3.2xlarge M4 node types: cache.m4.large, cache.m4.xlarge,
-	//    cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge Previous generation:
-	//    (not recommended) T1 node types: cache.t1.micro M1 node types: cache.m1.small,
-	//    cache.m1.medium, cache.m1.large, cache.m1.xlarge
+	//    * General purpose: Current generation: M5 node types: cache.m5.large,
+	//    cache.m5.xlarge, cache.m5.2xlarge, cache.m5.4xlarge, cache.m5.12xlarge,
+	//    cache.m5.24xlarge M4 node types: cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge,
+	//    cache.m4.4xlarge, cache.m4.10xlarge T2 node types: cache.t2.micro, cache.t2.small,
+	//    cache.t2.medium Previous generation: (not recommended) T1 node types:
+	//    cache.t1.micro M1 node types: cache.m1.small, cache.m1.medium, cache.m1.large,
+	//    cache.m1.xlarge M3 node types: cache.m3.medium, cache.m3.large, cache.m3.xlarge,
+	//    cache.m3.2xlarge
 	//
 	//    * Compute optimized: Previous generation: (not recommended) C1 node types:
 	//    cache.c1.xlarge
 	//
-	//    * Memory optimized: Current generation: R3 node types: cache.r3.large,
-	//    cache.r3.xlarge, cache.r3.2xlarge, cache.r3.4xlarge, cache.r3.8xlarge
-	//    R4 node types; cache.r4.large, cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge,
-	//    cache.r4.8xlarge, cache.r4.16xlarge Previous generation: (not recommended)
-	//    M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge
+	//    * Memory optimized: Current generation: R5 node types: cache.r5.large,
+	//    cache.r5.xlarge, cache.r5.2xlarge, cache.r5.4xlarge, cache.r5.12xlarge,
+	//    cache.r5.24xlarge R4 node types: cache.r4.large, cache.r4.xlarge, cache.r4.2xlarge,
+	//    cache.r4.4xlarge, cache.r4.8xlarge, cache.r4.16xlarge Previous generation:
+	//    (not recommended) M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge
+	//    R3 node types: cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge, cache.r3.4xlarge,
+	//    cache.r3.8xlarge
 	//
-	// Notes:
+	// Additional node type info
 	//
-	//    * All T2 instances are created in an Amazon Virtual Private Cloud (Amazon
-	//    VPC).
+	//    * All current generation instance types are created in Amazon VPC by default.
 	//
-	//    * Redis (cluster mode disabled): Redis backup/restore is not supported
-	//    on T1 and T2 instances.
+	//    * Redis append-only files (AOF) are not supported for T1 or T2 instances.
 	//
-	//    * Redis (cluster mode enabled): Backup/restore is not supported on T1
-	//    instances.
+	//    * Redis Multi-AZ with automatic failover is not supported on T1 instances.
 	//
-	//    * Redis Append-only files (AOF) functionality is not supported for T1
-	//    or T2 instances.
-	//
-	// For a complete listing of node types and specifications, see:
-	//
-	//    * Amazon ElastiCache Product Features and Details (http://aws.amazon.com/elasticache/details)
-	//
-	//    * Cache Node Type-Specific Parameters for Memcached (http://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/ParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific)
-	//
-	//    * Cache Node Type-Specific Parameters for Redis (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific)
+	//    * Redis configuration variables appendonly and appendfsync are not supported
+	//    on Redis version 2.8.22 and later.
 	CacheNodeType *string `type:"string"`
 
 	// The name of the parameter group to associate with this replication group.
 	// If this argument is omitted, the default cache parameter group for the specified
 	// engine is used.
+	//
+	// If you are restoring to an engine version that is different than the original,
+	// you must specify the default version of that version. For example, CacheParameterGroupName=default.redis4.0.
 	//
 	// If you are running Redis version 3.2.4 or later, only one node group (shard),
 	// and want to use a default parameter group, we recommend that you specify
@@ -137,7 +133,7 @@ type CreateReplicationGroupInput struct {
 	//
 	// If you're going to launch your cluster in an Amazon VPC, you need to create
 	// a subnet group before you start creating a cluster. For more information,
-	// see Subnets and Subnet Groups (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.html).
+	// see Subnets and Subnet Groups (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.html).
 	CacheSubnetGroupName *string `type:"string"`
 
 	// The name of the cache engine to be used for the clusters in this replication
@@ -149,7 +145,7 @@ type CreateReplicationGroupInput struct {
 	// operation.
 	//
 	// Important: You can upgrade to a newer engine version (see Selecting a Cache
-	// Engine and Version (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement))
+	// Engine and Version (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement))
 	// in the ElastiCache User Guide, but you cannot downgrade to an earlier engine
 	// version. If you want to use an earlier engine version, you must delete the
 	// existing cluster or replication group and create it anew with the earlier
@@ -310,8 +306,9 @@ type CreateReplicationGroupInput struct {
 	// appropriate time range.
 	SnapshotWindow *string `type:"string"`
 
-	// A list of cost allocation tags to be added to this resource. A tag is a key-value
-	// pair.
+	// A list of cost allocation tags to be added to this resource. Tags are comma-separated
+	// key,value pairs (e.g. Key=myKey, Value=myKeyValue. You can include multiple
+	// tags as shown following: Key=myKey, Value=myKeyValue Key=mySecondKey, Value=mySecondKeyValue.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
 
 	// A flag that enables in-transit encryption when set to true.
@@ -327,7 +324,7 @@ type CreateReplicationGroupInput struct {
 	// If you enable in-transit encryption, you must also specify a value for CacheSubnetGroup.
 	//
 	// Required: Only available when creating a replication group in an Amazon VPC
-	// using redis version 3.2.6 or 4.x.
+	// using redis version 3.2.6, 4.x or later.
 	//
 	// Default: false
 	//
@@ -392,7 +389,7 @@ const opCreateReplicationGroup = "CreateReplicationGroup"
 // replicas. Writes to the primary are asynchronously propagated to the replicas.
 //
 // A Redis (cluster mode enabled) replication group is a collection of 1 to
-// 15 node groups (shards). Each node group (shard) has one read/write primary
+// 90 node groups (shards). Each node group (shard) has one read/write primary
 // node and up to 5 read-only replica nodes. Writes to the primary are asynchronously
 // propagated to the replicas. Redis (cluster mode enabled) replication groups
 // partition the data across node groups (shards).
@@ -403,7 +400,7 @@ const opCreateReplicationGroup = "CreateReplicationGroup"
 // group after it has been created. However, if you need to increase or decrease
 // the number of node groups (console: shards), you can avail yourself of ElastiCache
 // for Redis' enhanced backup and restore. For more information, see Restoring
-// From a Backup with Cluster Resizing (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-restoring.html)
+// From a Backup with Cluster Resizing (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-restoring.html)
 // in the ElastiCache User Guide.
 //
 // This operation is valid for Redis only.

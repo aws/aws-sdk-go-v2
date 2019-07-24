@@ -79,7 +79,7 @@ func (s DeleteClusterOutput) MarshalFields(e protocol.FieldEncoder) error {
 const opDeleteCluster = "DeleteCluster"
 
 // DeleteClusterRequest returns a request value for making API operation for
-// Amazon Elastic Container Service for Kubernetes.
+// Amazon Elastic Kubernetes Service.
 //
 // Deletes the Amazon EKS cluster control plane.
 //

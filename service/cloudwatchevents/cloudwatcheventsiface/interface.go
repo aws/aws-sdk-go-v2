@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon CloudWatch Events.
 //    func myFunc(svc cloudwatcheventsiface.ClientAPI) bool {
-//        // Make svc.DeleteRule request
+//        // Make svc.ActivateEventSource request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        cloudwatcheventsiface.ClientPI
 //    }
-//    func (m *mockClientClient) DeleteRule(input *cloudwatchevents.DeleteRuleInput) (*cloudwatchevents.DeleteRuleOutput, error) {
+//    func (m *mockClientClient) ActivateEventSource(input *cloudwatchevents.ActivateEventSourceInput) (*cloudwatchevents.ActivateEventSourceOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,15 +61,39 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	ActivateEventSourceRequest(*cloudwatchevents.ActivateEventSourceInput) cloudwatchevents.ActivateEventSourceRequest
+
+	CreateEventBusRequest(*cloudwatchevents.CreateEventBusInput) cloudwatchevents.CreateEventBusRequest
+
+	CreatePartnerEventSourceRequest(*cloudwatchevents.CreatePartnerEventSourceInput) cloudwatchevents.CreatePartnerEventSourceRequest
+
+	DeactivateEventSourceRequest(*cloudwatchevents.DeactivateEventSourceInput) cloudwatchevents.DeactivateEventSourceRequest
+
+	DeleteEventBusRequest(*cloudwatchevents.DeleteEventBusInput) cloudwatchevents.DeleteEventBusRequest
+
+	DeletePartnerEventSourceRequest(*cloudwatchevents.DeletePartnerEventSourceInput) cloudwatchevents.DeletePartnerEventSourceRequest
+
 	DeleteRuleRequest(*cloudwatchevents.DeleteRuleInput) cloudwatchevents.DeleteRuleRequest
 
 	DescribeEventBusRequest(*cloudwatchevents.DescribeEventBusInput) cloudwatchevents.DescribeEventBusRequest
+
+	DescribeEventSourceRequest(*cloudwatchevents.DescribeEventSourceInput) cloudwatchevents.DescribeEventSourceRequest
+
+	DescribePartnerEventSourceRequest(*cloudwatchevents.DescribePartnerEventSourceInput) cloudwatchevents.DescribePartnerEventSourceRequest
 
 	DescribeRuleRequest(*cloudwatchevents.DescribeRuleInput) cloudwatchevents.DescribeRuleRequest
 
 	DisableRuleRequest(*cloudwatchevents.DisableRuleInput) cloudwatchevents.DisableRuleRequest
 
 	EnableRuleRequest(*cloudwatchevents.EnableRuleInput) cloudwatchevents.EnableRuleRequest
+
+	ListEventBusesRequest(*cloudwatchevents.ListEventBusesInput) cloudwatchevents.ListEventBusesRequest
+
+	ListEventSourcesRequest(*cloudwatchevents.ListEventSourcesInput) cloudwatchevents.ListEventSourcesRequest
+
+	ListPartnerEventSourceAccountsRequest(*cloudwatchevents.ListPartnerEventSourceAccountsInput) cloudwatchevents.ListPartnerEventSourceAccountsRequest
+
+	ListPartnerEventSourcesRequest(*cloudwatchevents.ListPartnerEventSourcesInput) cloudwatchevents.ListPartnerEventSourcesRequest
 
 	ListRuleNamesByTargetRequest(*cloudwatchevents.ListRuleNamesByTargetInput) cloudwatchevents.ListRuleNamesByTargetRequest
 
@@ -80,6 +104,8 @@ type ClientAPI interface {
 	ListTargetsByRuleRequest(*cloudwatchevents.ListTargetsByRuleInput) cloudwatchevents.ListTargetsByRuleRequest
 
 	PutEventsRequest(*cloudwatchevents.PutEventsInput) cloudwatchevents.PutEventsRequest
+
+	PutPartnerEventsRequest(*cloudwatchevents.PutPartnerEventsInput) cloudwatchevents.PutPartnerEventsRequest
 
 	PutPermissionRequest(*cloudwatchevents.PutPermissionInput) cloudwatchevents.PutPermissionRequest
 

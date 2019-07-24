@@ -13,7 +13,7 @@ import (
 type RestoreTableFromBackupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN associated with the backup.
+	// The Amazon Resource Name (ARN) associated with the backup.
 	//
 	// BackupArn is a required field
 	BackupArn *string `min:"37" type:"string" required:"true"`
@@ -82,7 +82,7 @@ const opRestoreTableFromBackup = "RestoreTableFromBackup"
 //
 //    * IAM policies
 //
-//    * Cloudwatch metrics and alarms
+//    * Amazon CloudWatch metrics and alarms
 //
 //    * Tags
 //

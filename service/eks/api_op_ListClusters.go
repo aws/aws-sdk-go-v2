@@ -115,7 +115,7 @@ func (s ListClustersOutput) MarshalFields(e protocol.FieldEncoder) error {
 const opListClusters = "ListClusters"
 
 // ListClustersRequest returns a request value for making API operation for
-// Amazon Elastic Container Service for Kubernetes.
+// Amazon Elastic Kubernetes Service.
 //
 // Lists the Amazon EKS clusters in your AWS account in the specified Region.
 //

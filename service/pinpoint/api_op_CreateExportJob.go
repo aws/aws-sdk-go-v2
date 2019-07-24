@@ -17,7 +17,8 @@ type CreateExportJobInput struct {
 	// ApplicationId is a required field
 	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
 
-	// Export job request.
+	// Specifies the settings for a job that exports endpoint definitions to an
+	// Amazon Simple Storage Service (Amazon S3) bucket.
 	//
 	// ExportJobRequest is a required field
 	ExportJobRequest *ExportJobRequest `type:"structure" required:"true"`
@@ -38,6 +39,11 @@ func (s *CreateExportJobInput) Validate() error {
 
 	if s.ExportJobRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ExportJobRequest"))
+	}
+	if s.ExportJobRequest != nil {
+		if err := s.ExportJobRequest.Validate(); err != nil {
+			invalidParams.AddNested("ExportJobRequest", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -69,7 +75,10 @@ func (s CreateExportJobInput) MarshalFields(e protocol.FieldEncoder) error {
 type CreateExportJobOutput struct {
 	_ struct{} `type:"structure" payload:"ExportJobResponse"`
 
-	// Export job response.
+	// Provides information about the status and settings of a job that exports
+	// endpoint definitions to a file. The file can be added directly to an Amazon
+	// Simple Storage Service (Amazon S3) bucket by using the Amazon Pinpoint API
+	// or downloaded directly to a computer by using the Amazon Pinpoint console.
 	//
 	// ExportJobResponse is a required field
 	ExportJobResponse *ExportJobResponse `type:"structure" required:"true"`
@@ -96,7 +105,7 @@ const opCreateExportJob = "CreateExportJob"
 // CreateExportJobRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Creates an export job.
+// Creates a new export job for an application.
 //
 //    // Example sending a request using CreateExportJobRequest.
 //    req := client.CreateExportJobRequest(params)

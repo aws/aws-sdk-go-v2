@@ -102,8 +102,7 @@ const opPutBucketPolicy = "PutBucketPolicy"
 // PutBucketPolicyRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Replaces a policy on a bucket. If the bucket already has a policy, the one
-// in this request completely replaces it.
+// Applies an Amazon S3 bucket policy to an Amazon S3 bucket.
 //
 //    // Example sending a request using PutBucketPolicyRequest.
 //    req := client.PutBucketPolicyRequest(params)

@@ -17,7 +17,8 @@ type UpdateEndpointsBatchInput struct {
 	// ApplicationId is a required field
 	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
 
-	// Endpoint batch update request.
+	// Specifies a batch of endpoints to create or update and the settings and attributes
+	// to set or change for each endpoint.
 	//
 	// EndpointBatchRequest is a required field
 	EndpointBatchRequest *EndpointBatchRequest `type:"structure" required:"true"`
@@ -38,6 +39,11 @@ func (s *UpdateEndpointsBatchInput) Validate() error {
 
 	if s.EndpointBatchRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointBatchRequest"))
+	}
+	if s.EndpointBatchRequest != nil {
+		if err := s.EndpointBatchRequest.Validate(); err != nil {
+			invalidParams.AddNested("EndpointBatchRequest", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -69,7 +75,7 @@ func (s UpdateEndpointsBatchInput) MarshalFields(e protocol.FieldEncoder) error 
 type UpdateEndpointsBatchOutput struct {
 	_ struct{} `type:"structure" payload:"MessageBody"`
 
-	// Simple message object.
+	// Provides information about an API request or response.
 	//
 	// MessageBody is a required field
 	MessageBody *MessageBody `type:"structure" required:"true"`
@@ -96,7 +102,10 @@ const opUpdateEndpointsBatch = "UpdateEndpointsBatch"
 // UpdateEndpointsBatchRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Use to update a batch of endpoints.
+// Creates a new batch of endpoints for an application or updates the settings
+// and attributes of a batch of existing endpoints for an application. You can
+// also use this operation to define custom attributes (Attributes, Metrics,
+// and UserAttributes properties) for a batch of endpoints.
 //
 //    // Example sending a request using UpdateEndpointsBatchRequest.
 //    req := client.UpdateEndpointsBatchRequest(params)

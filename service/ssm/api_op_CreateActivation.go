@@ -121,8 +121,8 @@ const opCreateActivation = "CreateActivation"
 // Registers your on-premises server or virtual machine with Amazon EC2 so that
 // you can manage these resources using Run Command. An on-premises server or
 // virtual machine that has been registered with EC2 is called a managed instance.
-// For more information about activations, see Setting Up Systems Manager in
-// Hybrid Environments (http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html).
+// For more information about activations, see Setting Up AWS Systems Manager
+// for Hybrid Environments (http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html).
 //
 //    // Example sending a request using CreateActivationRequest.
 //    req := client.CreateActivationRequest(params)

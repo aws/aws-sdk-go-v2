@@ -18,10 +18,8 @@ type CreateEventSubscriptionInput struct {
 	Enabled *bool `type:"boolean"`
 
 	// A list of event categories for a source type that you want to subscribe to.
-	// You can see a list of the categories for a given source type by calling the
-	// DescribeEventCategories action or in the topic Working with Events and Notifications
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html) in the
-	// AWS Database Migration Service User Guide.
+	// For more information, see Working with Events and Notifications (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html)
+	// in the AWS Database Migration Service User Guide.
 	EventCategories []string `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic created for event
@@ -31,10 +29,13 @@ type CreateEventSubscriptionInput struct {
 	// SnsTopicArn is a required field
 	SnsTopicArn *string `type:"string" required:"true"`
 
-	// The list of identifiers of the event sources for which events will be returned.
-	// If not specified, then all sources are included in the response. An identifier
-	// must begin with a letter and must contain only ASCII letters, digits, and
-	// hyphens; it cannot end with a hyphen or contain two consecutive hyphens.
+	// A list of identifiers for which AWS DMS provides notification events.
+	//
+	// If you don't specify a value, notifications are provided for all sources.
+	//
+	// If you specify multiple values, they must be of the same type. For example,
+	// if you specify a database instance ID, then all of the other values must
+	// be database instance IDs.
 	SourceIds []string `type:"list"`
 
 	// The type of AWS DMS resource that generates the events. For example, if you
@@ -42,17 +43,16 @@ type CreateEventSubscriptionInput struct {
 	// this parameter to replication-instance. If this value is not specified, all
 	// events are returned.
 	//
-	// Valid values: replication-instance | migration-task
+	// Valid values: replication-instance | replication-task
 	SourceType *string `type:"string"`
 
-	// The name of the AWS DMS event notification subscription.
-	//
-	// Constraints: The name must be less than 255 characters.
+	// The name of the AWS DMS event notification subscription. This name must be
+	// less than 255 characters.
 	//
 	// SubscriptionName is a required field
 	SubscriptionName *string `type:"string" required:"true"`
 
-	// A tag to be attached to the event subscription.
+	// One or more tags to be assigned to the event subscription.
 	Tags []Tag `type:"list"`
 }
 

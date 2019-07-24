@@ -75,7 +75,7 @@ const opUpdateRepositoryName = "UpdateRepositoryName"
 // AWS account. In addition, repository names are limited to 100 alphanumeric,
 // dash, and underscore characters, and cannot include certain characters. The
 // suffix ".git" is prohibited. For a full description of the limits on repository
-// names, see Limits (http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
+// names, see Limits (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
 // in the AWS CodeCommit User Guide.
 //
 //    // Example sending a request using UpdateRepositoryNameRequest.

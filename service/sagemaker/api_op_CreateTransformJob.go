@@ -28,6 +28,10 @@ type CreateTransformJobInput struct {
 	// limit, set BatchStrategy to MultiRecord and SplitType to Line.
 	BatchStrategy BatchStrategy `type:"string" enum:"true"`
 
+	// The data structure used for combining the input data and inference in the
+	// output file. For more information, see Batch Transform I/O Join (http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html).
+	DataProcessing *DataProcessing `type:"structure"`
+
 	// The environment variables to set in the Docker container. We support up to
 	// 16 key and values entries in the map.
 	Environment map[string]string `type:"map"`

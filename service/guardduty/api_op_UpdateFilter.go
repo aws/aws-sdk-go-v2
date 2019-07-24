@@ -10,21 +10,25 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// UpdateFilter request object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFilterRequest
 type UpdateFilterInput struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the action that is to be applied to the findings that match the
 	// filter.
-	Action FilterAction `locationName:"action" type:"string" enum:"true"`
+	Action FilterAction `locationName:"action" min:"1" type:"string" enum:"true"`
 
 	// The description of the filter.
 	Description *string `locationName:"description" type:"string"`
 
+	// The unique ID of the detector that specifies the GuardDuty service where
+	// you want to update a filter.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
+	// The name of the filter.
+	//
 	// FilterName is a required field
 	FilterName *string `location:"uri" locationName:"filterName" type:"string" required:"true"`
 
@@ -33,7 +37,7 @@ type UpdateFilterInput struct {
 
 	// Specifies the position of the filter in the list of current filters. Also
 	// specifies the order in which this filter is applied to the findings.
-	Rank *int64 `locationName:"rank" type:"integer"`
+	Rank *int64 `locationName:"rank" min:"1" type:"integer"`
 }
 
 // String returns the string representation
@@ -48,9 +52,15 @@ func (s *UpdateFilterInput) Validate() error {
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
 	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
+	}
 
 	if s.FilterName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
+	}
+	if s.Rank != nil && *s.Rank < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Rank", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -102,13 +112,14 @@ func (s UpdateFilterInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// UpdateFilter response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFilterResponse
 type UpdateFilterOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the filter.
-	Name *string `locationName:"name" type:"string"`
+	//
+	// Name is a required field
+	Name *string `locationName:"name" min:"3" type:"string" required:"true"`
 }
 
 // String returns the string representation

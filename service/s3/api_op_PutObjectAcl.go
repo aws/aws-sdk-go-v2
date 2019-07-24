@@ -17,6 +17,7 @@ type PutObjectAclInput struct {
 	// The canned ACL to apply to the object.
 	ACL ObjectCannedACL `location:"header" locationName:"x-amz-acl" type:"string" enum:"true"`
 
+	// Contains the elements that set the ACL permissions for an object per grantee.
 	AccessControlPolicy *AccessControlPolicy `locationName:"AccessControlPolicy" type:"structure" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
 
 	// Bucket is a required field

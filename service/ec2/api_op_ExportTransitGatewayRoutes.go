@@ -21,7 +21,7 @@ type ExportTransitGatewayRoutesInput struct {
 
 	// One or more filters. The possible values are:
 	//
-	//    * attachment.transit-gateway-attachment-id- The id of the transit gateway
+	//    * attachment.transit-gateway-attachment-id - The id of the transit gateway
 	//    attachment.
 	//
 	//    * attachment.resource-id - The resource id of the transit gateway attachment.
@@ -45,7 +45,7 @@ type ExportTransitGatewayRoutesInput struct {
 	//
 	//    * transit-gateway-route-destination-cidr-block - The CIDR range.
 	//
-	//    * type - The type of roue (active | blackhole).
+	//    * type - The type of route (active | blackhole).
 	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// The name of the S3 bucket.

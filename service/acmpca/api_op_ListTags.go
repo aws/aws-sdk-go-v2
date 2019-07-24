@@ -14,7 +14,7 @@ type ListTagsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) that was returned when you called the CreateCertificateAuthority
-	// operation. This must be of the form:
+	// action. This must be of the form:
 	//
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	//
@@ -85,8 +85,8 @@ const opListTags = "ListTags"
 //
 // Lists the tags, if any, that are associated with your private CA. Tags are
 // labels that you can use to identify and organize your CAs. Each tag consists
-// of a key and an optional value. Call the TagCertificateAuthority operation
-// to add one or more tags to your CA. Call the UntagCertificateAuthority operation
+// of a key and an optional value. Call the TagCertificateAuthority action to
+// add one or more tags to your CA. Call the UntagCertificateAuthority action
 // to remove tags.
 //
 //    // Example sending a request using ListTagsRequest.

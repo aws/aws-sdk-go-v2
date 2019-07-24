@@ -29,7 +29,7 @@ func (s EnableEbsEncryptionByDefaultInput) String() string {
 type EnableEbsEncryptionByDefaultOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Account-level encryption status after performing the action.
+	// The updated status of encryption by default.
 	EbsEncryptionByDefault *bool `locationName:"ebsEncryptionByDefault" type:"boolean"`
 }
 
@@ -43,32 +43,23 @@ const opEnableEbsEncryptionByDefault = "EnableEbsEncryptionByDefault"
 // EnableEbsEncryptionByDefaultRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Enables default encryption for EBS volumes that are created in your account
-// in the current region.
+// Enables EBS encryption by default for your account in the current Region.
 //
-// Once encryption is enabled with this action, EBS volumes that are created
-// in your account will always be encrypted even if encryption is not specified
-// at launch. This setting overrides the encrypted setting to true in all API
-// calls that create EBS volumes in your account. A volume will be encrypted
-// even if you specify encryption to be false in the API call that creates the
-// volume.
+// After you enable encryption by default, the EBS volumes that you create are
+// are always encrypted, either using the default CMK or the CMK that you specified
+// when you created each volume. For more information, see Amazon EBS Encryption
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)
+// in the Amazon Elastic Compute Cloud User Guide.
 //
-// If you do not specify a customer master key (CMK) in the API call that creates
-// the EBS volume, then the volume is encrypted to your AWS account's default
-// CMK.
+// You can specify the default CMK for encryption by default using ModifyEbsDefaultKmsKeyId
+// or ResetEbsDefaultKmsKeyId.
 //
-// You can specify a default CMK of your choice using ModifyEbsDefaultKmsKeyId.
+// Enabling encryption by default has no effect on the encryption status of
+// your existing volumes.
 //
-// Enabling default encryption for EBS volumes has no effect on existing unencrypted
-// volumes in your account. Encrypting the data in these requires manual action.
-// You can either create an encrypted snapshot of an unencrypted volume, or
-// encrypt a copy of an unencrypted snapshot. Any volume restored from an encrypted
-// snapshot is also encrypted. For more information, see Amazon EBS Snapshots
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html).
-//
-// Once EBS encryption by default is enabled, you can no longer launch older-generation
-// instance types that do not support encryption. For more information, see
-// Supported Instance Types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances).
+// After you enable encryption by default, you can no longer launch instances
+// using instance types that do not support encryption. For more information,
+// see Supported Instance Types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances).
 //
 //    // Example sending a request using EnableEbsEncryptionByDefaultRequest.
 //    req := client.EnableEbsEncryptionByDefaultRequest(params)

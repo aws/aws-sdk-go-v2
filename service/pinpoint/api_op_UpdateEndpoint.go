@@ -20,7 +20,7 @@ type UpdateEndpointInput struct {
 	// EndpointId is a required field
 	EndpointId *string `location:"uri" locationName:"endpoint-id" type:"string" required:"true"`
 
-	// An endpoint update request.
+	// Specifies the channel type and other settings for an endpoint.
 	//
 	// EndpointRequest is a required field
 	EndpointRequest *EndpointRequest `type:"structure" required:"true"`
@@ -82,7 +82,7 @@ func (s UpdateEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateEndpointOutput struct {
 	_ struct{} `type:"structure" payload:"MessageBody"`
 
-	// Simple message object.
+	// Provides information about an API request or response.
 	//
 	// MessageBody is a required field
 	MessageBody *MessageBody `type:"structure" required:"true"`
@@ -109,7 +109,10 @@ const opUpdateEndpoint = "UpdateEndpoint"
 // UpdateEndpointRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Creates or updates an endpoint.
+// Creates a new endpoint for an application or updates the settings and attributes
+// of an existing endpoint for an application. You can also use this operation
+// to define custom attributes (Attributes, Metrics, and UserAttributes properties)
+// for an endpoint.
 //
 //    // Example sending a request using UpdateEndpointRequest.
 //    req := client.UpdateEndpointRequest(params)

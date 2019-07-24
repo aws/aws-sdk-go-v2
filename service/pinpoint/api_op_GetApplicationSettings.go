@@ -54,7 +54,8 @@ func (s GetApplicationSettingsInput) MarshalFields(e protocol.FieldEncoder) erro
 type GetApplicationSettingsOutput struct {
 	_ struct{} `type:"structure" payload:"ApplicationSettingsResource"`
 
-	// Application settings.
+	// Provides information about an application, including the default settings
+	// for an application.
 	//
 	// ApplicationSettingsResource is a required field
 	ApplicationSettingsResource *ApplicationSettingsResource `type:"structure" required:"true"`
@@ -81,7 +82,7 @@ const opGetApplicationSettings = "GetApplicationSettings"
 // GetApplicationSettingsRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Used to request the settings for an app.
+// Retrieves information about the settings for an application.
 //
 //    // Example sending a request using GetApplicationSettingsRequest.
 //    req := client.GetApplicationSettingsRequest(params)

@@ -22,10 +22,11 @@ type RebootDBInstanceInput struct {
 	// DBInstanceIdentifier is a required field
 	DBInstanceIdentifier *string `type:"string" required:"true"`
 
-	// When true, the reboot is conducted through a MultiAZ failover.
+	// A value that indicates whether the reboot is conducted through a Multi-AZ
+	// failover.
 	//
-	// Constraint: You can't specify true if the instance is not configured for
-	// MultiAZ.
+	// Constraint: You can't enable force failover if the instance is not configured
+	// for Multi-AZ.
 	ForceFailover *bool `type:"boolean"`
 }
 

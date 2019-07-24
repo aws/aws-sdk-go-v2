@@ -711,7 +711,8 @@ type MaintenanceWindowResourceType string
 
 // Enum values for MaintenanceWindowResourceType
 const (
-	MaintenanceWindowResourceTypeInstance MaintenanceWindowResourceType = "INSTANCE"
+	MaintenanceWindowResourceTypeInstance      MaintenanceWindowResourceType = "INSTANCE"
+	MaintenanceWindowResourceTypeResourceGroup MaintenanceWindowResourceType = "RESOURCE_GROUP"
 )
 
 func (enum MaintenanceWindowResourceType) MarshalValue() (string, error) {
@@ -798,6 +799,109 @@ func (enum OperatingSystem) MarshalValue() (string, error) {
 }
 
 func (enum OperatingSystem) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type OpsFilterOperatorType string
+
+// Enum values for OpsFilterOperatorType
+const (
+	OpsFilterOperatorTypeEqual       OpsFilterOperatorType = "Equal"
+	OpsFilterOperatorTypeNotEqual    OpsFilterOperatorType = "NotEqual"
+	OpsFilterOperatorTypeBeginWith   OpsFilterOperatorType = "BeginWith"
+	OpsFilterOperatorTypeLessThan    OpsFilterOperatorType = "LessThan"
+	OpsFilterOperatorTypeGreaterThan OpsFilterOperatorType = "GreaterThan"
+	OpsFilterOperatorTypeExists      OpsFilterOperatorType = "Exists"
+)
+
+func (enum OpsFilterOperatorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OpsFilterOperatorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type OpsItemDataType string
+
+// Enum values for OpsItemDataType
+const (
+	OpsItemDataTypeSearchableString OpsItemDataType = "SearchableString"
+	OpsItemDataTypeString           OpsItemDataType = "String"
+)
+
+func (enum OpsItemDataType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OpsItemDataType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type OpsItemFilterKey string
+
+// Enum values for OpsItemFilterKey
+const (
+	OpsItemFilterKeyStatus               OpsItemFilterKey = "Status"
+	OpsItemFilterKeyCreatedBy            OpsItemFilterKey = "CreatedBy"
+	OpsItemFilterKeySource               OpsItemFilterKey = "Source"
+	OpsItemFilterKeyPriority             OpsItemFilterKey = "Priority"
+	OpsItemFilterKeyTitle                OpsItemFilterKey = "Title"
+	OpsItemFilterKeyOpsItemId            OpsItemFilterKey = "OpsItemId"
+	OpsItemFilterKeyCreatedTime          OpsItemFilterKey = "CreatedTime"
+	OpsItemFilterKeyLastModifiedTime     OpsItemFilterKey = "LastModifiedTime"
+	OpsItemFilterKeyOperationalData      OpsItemFilterKey = "OperationalData"
+	OpsItemFilterKeyOperationalDataKey   OpsItemFilterKey = "OperationalDataKey"
+	OpsItemFilterKeyOperationalDataValue OpsItemFilterKey = "OperationalDataValue"
+	OpsItemFilterKeyResourceId           OpsItemFilterKey = "ResourceId"
+	OpsItemFilterKeyAutomationId         OpsItemFilterKey = "AutomationId"
+)
+
+func (enum OpsItemFilterKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OpsItemFilterKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type OpsItemFilterOperator string
+
+// Enum values for OpsItemFilterOperator
+const (
+	OpsItemFilterOperatorEqual       OpsItemFilterOperator = "Equal"
+	OpsItemFilterOperatorContains    OpsItemFilterOperator = "Contains"
+	OpsItemFilterOperatorGreaterThan OpsItemFilterOperator = "GreaterThan"
+	OpsItemFilterOperatorLessThan    OpsItemFilterOperator = "LessThan"
+)
+
+func (enum OpsItemFilterOperator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OpsItemFilterOperator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type OpsItemStatus string
+
+// Enum values for OpsItemStatus
+const (
+	OpsItemStatusOpen       OpsItemStatus = "Open"
+	OpsItemStatusInProgress OpsItemStatus = "InProgress"
+	OpsItemStatusResolved   OpsItemStatus = "Resolved"
+)
+
+func (enum OpsItemStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OpsItemStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -1090,6 +1194,7 @@ const (
 	ResourceTypeForTaggingMaintenanceWindow ResourceTypeForTagging = "MaintenanceWindow"
 	ResourceTypeForTaggingParameter         ResourceTypeForTagging = "Parameter"
 	ResourceTypeForTaggingPatchBaseline     ResourceTypeForTagging = "PatchBaseline"
+	ResourceTypeForTaggingOpsItem           ResourceTypeForTagging = "OpsItem"
 )
 
 func (enum ResourceTypeForTagging) MarshalValue() (string, error) {

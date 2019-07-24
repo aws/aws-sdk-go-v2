@@ -72,7 +72,7 @@ const opDeleteQueue = "DeleteQueue"
 // a queue with the same name.
 //
 // Cross-account permissions don't apply to this action. For more information,
-// see see Grant Cross-Account Permissions to a Role and a User Name (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
+// see Grant Cross-Account Permissions to a Role and a User Name (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
 // in the Amazon Simple Queue Service Developer Guide.
 //
 //    // Example sending a request using DeleteQueueRequest.

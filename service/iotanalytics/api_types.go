@@ -166,6 +166,9 @@ type Channel struct {
 
 	// The status of the channel.
 	Status ChannelStatus `locationName:"status" type:"string" enum:"true"`
+
+	// Where channel data is stored.
+	Storage *ChannelStorage `locationName:"storage" type:"structure"`
 }
 
 // String returns the string representation
@@ -210,6 +213,12 @@ func (s Channel) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Storage != nil {
+		v := s.Storage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "storage", v, metadata)
 	}
 	return nil
 }
@@ -313,6 +322,91 @@ func (s ChannelStatistics) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Where channel data is stored.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ChannelStorage
+type ChannelStorage struct {
+	_ struct{} `type:"structure"`
+
+	// Use this to store channel data in an S3 bucket that you manage.
+	CustomerManagedS3 *CustomerManagedChannelS3Storage `locationName:"customerManagedS3" type:"structure"`
+
+	// Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics
+	// service.
+	ServiceManagedS3 *ServiceManagedChannelS3Storage `locationName:"serviceManagedS3" type:"structure"`
+}
+
+// String returns the string representation
+func (s ChannelStorage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ChannelStorage) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ChannelStorage"}
+	if s.CustomerManagedS3 != nil {
+		if err := s.CustomerManagedS3.Validate(); err != nil {
+			invalidParams.AddNested("CustomerManagedS3", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ChannelStorage) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CustomerManagedS3 != nil {
+		v := s.CustomerManagedS3
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "customerManagedS3", v, metadata)
+	}
+	if s.ServiceManagedS3 != nil {
+		v := s.ServiceManagedS3
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "serviceManagedS3", v, metadata)
+	}
+	return nil
+}
+
+// Where channel data is stored.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ChannelStorageSummary
+type ChannelStorageSummary struct {
+	_ struct{} `type:"structure"`
+
+	// Used to store channel data in an S3 bucket that you manage.
+	CustomerManagedS3 *CustomerManagedChannelS3StorageSummary `locationName:"customerManagedS3" type:"structure"`
+
+	// Used to store channel data in an S3 bucket managed by the AWS IoT Analytics
+	// service.
+	ServiceManagedS3 *ServiceManagedChannelS3StorageSummary `locationName:"serviceManagedS3" type:"structure"`
+}
+
+// String returns the string representation
+func (s ChannelStorageSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ChannelStorageSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CustomerManagedS3 != nil {
+		v := s.CustomerManagedS3
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "customerManagedS3", v, metadata)
+	}
+	if s.ServiceManagedS3 != nil {
+		v := s.ServiceManagedS3
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "serviceManagedS3", v, metadata)
+	}
+	return nil
+}
+
 // A summary of information about a channel.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ChannelSummary
 type ChannelSummary struct {
@@ -320,6 +414,9 @@ type ChannelSummary struct {
 
 	// The name of the channel.
 	ChannelName *string `locationName:"channelName" min:"1" type:"string"`
+
+	// Where channel data is stored.
+	ChannelStorage *ChannelStorageSummary `locationName:"channelStorage" type:"structure"`
 
 	// When the channel was created.
 	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix"`
@@ -343,6 +440,12 @@ func (s ChannelSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "channelName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ChannelStorage != nil {
+		v := s.ChannelStorage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "channelStorage", v, metadata)
 	}
 	if s.CreationTime != nil {
 		v := *s.CreationTime
@@ -470,6 +573,252 @@ func (s ContainerDatasetAction) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	return nil
+}
+
+// Use this to store channel data in an S3 bucket that you manage.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/CustomerManagedChannelS3Storage
+type CustomerManagedChannelS3Storage struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the Amazon S3 bucket in which channel data is stored.
+	//
+	// Bucket is a required field
+	Bucket *string `locationName:"bucket" min:"3" type:"string" required:"true"`
+
+	// The prefix used to create the keys of the channel data objects. Each object
+	// in an Amazon S3 bucket has a key that is its unique identifier within the
+	// bucket (each object in a bucket has exactly one key).
+	KeyPrefix *string `locationName:"keyPrefix" min:"1" type:"string"`
+
+	// The ARN of the role which grants AWS IoT Analytics permission to interact
+	// with your Amazon S3 resources.
+	//
+	// RoleArn is a required field
+	RoleArn *string `locationName:"roleArn" min:"20" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CustomerManagedChannelS3Storage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CustomerManagedChannelS3Storage) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CustomerManagedChannelS3Storage"}
+
+	if s.Bucket == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
+	}
+	if s.Bucket != nil && len(*s.Bucket) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("Bucket", 3))
+	}
+	if s.KeyPrefix != nil && len(*s.KeyPrefix) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("KeyPrefix", 1))
+	}
+
+	if s.RoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
+	}
+	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CustomerManagedChannelS3Storage) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Bucket != nil {
+		v := *s.Bucket
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "bucket", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.KeyPrefix != nil {
+		v := *s.KeyPrefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "keyPrefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Used to store channel data in an S3 bucket that you manage.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/CustomerManagedChannelS3StorageSummary
+type CustomerManagedChannelS3StorageSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the Amazon S3 bucket in which channel data is stored.
+	Bucket *string `locationName:"bucket" min:"3" type:"string"`
+
+	// The prefix used to create the keys of the channel data objects. Each object
+	// in an Amazon S3 bucket has a key that is its unique identifier within the
+	// bucket (each object in a bucket has exactly one key).
+	KeyPrefix *string `locationName:"keyPrefix" min:"1" type:"string"`
+
+	// The ARN of the role which grants AWS IoT Analytics permission to interact
+	// with your Amazon S3 resources.
+	RoleArn *string `locationName:"roleArn" min:"20" type:"string"`
+}
+
+// String returns the string representation
+func (s CustomerManagedChannelS3StorageSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CustomerManagedChannelS3StorageSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Bucket != nil {
+		v := *s.Bucket
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "bucket", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.KeyPrefix != nil {
+		v := *s.KeyPrefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "keyPrefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Use this to store data store data in an S3 bucket that you manage.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/CustomerManagedDatastoreS3Storage
+type CustomerManagedDatastoreS3Storage struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the Amazon S3 bucket in which data store data is stored.
+	//
+	// Bucket is a required field
+	Bucket *string `locationName:"bucket" min:"3" type:"string" required:"true"`
+
+	// The prefix used to create the keys of the data store data objects. Each object
+	// in an Amazon S3 bucket has a key that is its unique identifier within the
+	// bucket (each object in a bucket has exactly one key).
+	KeyPrefix *string `locationName:"keyPrefix" min:"1" type:"string"`
+
+	// The ARN of the role which grants AWS IoT Analytics permission to interact
+	// with your Amazon S3 resources.
+	//
+	// RoleArn is a required field
+	RoleArn *string `locationName:"roleArn" min:"20" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CustomerManagedDatastoreS3Storage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CustomerManagedDatastoreS3Storage) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CustomerManagedDatastoreS3Storage"}
+
+	if s.Bucket == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
+	}
+	if s.Bucket != nil && len(*s.Bucket) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("Bucket", 3))
+	}
+	if s.KeyPrefix != nil && len(*s.KeyPrefix) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("KeyPrefix", 1))
+	}
+
+	if s.RoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
+	}
+	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CustomerManagedDatastoreS3Storage) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Bucket != nil {
+		v := *s.Bucket
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "bucket", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.KeyPrefix != nil {
+		v := *s.KeyPrefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "keyPrefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Used to store data store data in an S3 bucket that you manage.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/CustomerManagedDatastoreS3StorageSummary
+type CustomerManagedDatastoreS3StorageSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the Amazon S3 bucket in which data store data is stored.
+	Bucket *string `locationName:"bucket" min:"3" type:"string"`
+
+	// The prefix used to create the keys of the data store data objects. Each object
+	// in an Amazon S3 bucket has a key that is its unique identifier within the
+	// bucket (each object in a bucket has exactly one key).
+	KeyPrefix *string `locationName:"keyPrefix" min:"1" type:"string"`
+
+	// The ARN of the role which grants AWS IoT Analytics permission to interact
+	// with your Amazon S3 resources.
+	RoleArn *string `locationName:"roleArn" min:"20" type:"string"`
+}
+
+// String returns the string representation
+func (s CustomerManagedDatastoreS3StorageSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CustomerManagedDatastoreS3StorageSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Bucket != nil {
+		v := *s.Bucket
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "bucket", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.KeyPrefix != nil {
+		v := *s.KeyPrefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "keyPrefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1152,6 +1501,9 @@ type Datastore struct {
 	//
 	// The data store is being deleted.
 	Status DatastoreStatus `locationName:"status" type:"string" enum:"true"`
+
+	// Where data store data is stored.
+	Storage *DatastoreStorage `locationName:"storage" type:"structure"`
 }
 
 // String returns the string representation
@@ -1196,6 +1548,12 @@ func (s Datastore) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Storage != nil {
+		v := s.Storage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "storage", v, metadata)
 	}
 	return nil
 }
@@ -1287,6 +1645,91 @@ func (s DatastoreStatistics) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Where data store data is stored.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatastoreStorage
+type DatastoreStorage struct {
+	_ struct{} `type:"structure"`
+
+	// Use this to store data store data in an S3 bucket that you manage.
+	CustomerManagedS3 *CustomerManagedDatastoreS3Storage `locationName:"customerManagedS3" type:"structure"`
+
+	// Use this to store data store data in an S3 bucket managed by the AWS IoT
+	// Analytics service.
+	ServiceManagedS3 *ServiceManagedDatastoreS3Storage `locationName:"serviceManagedS3" type:"structure"`
+}
+
+// String returns the string representation
+func (s DatastoreStorage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DatastoreStorage) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DatastoreStorage"}
+	if s.CustomerManagedS3 != nil {
+		if err := s.CustomerManagedS3.Validate(); err != nil {
+			invalidParams.AddNested("CustomerManagedS3", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DatastoreStorage) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CustomerManagedS3 != nil {
+		v := s.CustomerManagedS3
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "customerManagedS3", v, metadata)
+	}
+	if s.ServiceManagedS3 != nil {
+		v := s.ServiceManagedS3
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "serviceManagedS3", v, metadata)
+	}
+	return nil
+}
+
+// Where data store data is stored.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatastoreStorageSummary
+type DatastoreStorageSummary struct {
+	_ struct{} `type:"structure"`
+
+	// Used to store data store data in an S3 bucket that you manage.
+	CustomerManagedS3 *CustomerManagedDatastoreS3StorageSummary `locationName:"customerManagedS3" type:"structure"`
+
+	// Used to store data store data in an S3 bucket managed by the AWS IoT Analytics
+	// service.
+	ServiceManagedS3 *ServiceManagedDatastoreS3StorageSummary `locationName:"serviceManagedS3" type:"structure"`
+}
+
+// String returns the string representation
+func (s DatastoreStorageSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DatastoreStorageSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CustomerManagedS3 != nil {
+		v := s.CustomerManagedS3
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "customerManagedS3", v, metadata)
+	}
+	if s.ServiceManagedS3 != nil {
+		v := s.ServiceManagedS3
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "serviceManagedS3", v, metadata)
+	}
+	return nil
+}
+
 // A summary of information about a data store.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatastoreSummary
 type DatastoreSummary struct {
@@ -1297,6 +1740,9 @@ type DatastoreSummary struct {
 
 	// The name of the data store.
 	DatastoreName *string `locationName:"datastoreName" min:"1" type:"string"`
+
+	// Where data store data is stored.
+	DatastoreStorage *DatastoreStorageSummary `locationName:"datastoreStorage" type:"structure"`
 
 	// The last time the data store was updated.
 	LastUpdateTime *time.Time `locationName:"lastUpdateTime" type:"timestamp" timestampFormat:"unix"`
@@ -1323,6 +1769,12 @@ func (s DatastoreSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "datastoreName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DatastoreStorage != nil {
+		v := s.DatastoreStorage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "datastoreStorage", v, metadata)
 	}
 	if s.LastUpdateTime != nil {
 		v := *s.LastUpdateTime
@@ -3017,6 +3469,74 @@ func (s SelectAttributesActivity) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "next", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	return nil
+}
+
+// Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics
+// service.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ServiceManagedChannelS3Storage
+type ServiceManagedChannelS3Storage struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s ServiceManagedChannelS3Storage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ServiceManagedChannelS3Storage) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Used to store channel data in an S3 bucket managed by the AWS IoT Analytics
+// service.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ServiceManagedChannelS3StorageSummary
+type ServiceManagedChannelS3StorageSummary struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s ServiceManagedChannelS3StorageSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ServiceManagedChannelS3StorageSummary) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Use this to store data store data in an S3 bucket managed by the AWS IoT
+// Analytics service.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ServiceManagedDatastoreS3Storage
+type ServiceManagedDatastoreS3Storage struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s ServiceManagedDatastoreS3Storage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ServiceManagedDatastoreS3Storage) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Used to store data store data in an S3 bucket managed by the AWS IoT Analytics
+// service.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ServiceManagedDatastoreS3StorageSummary
+type ServiceManagedDatastoreS3StorageSummary struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s ServiceManagedDatastoreS3StorageSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ServiceManagedDatastoreS3StorageSummary) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 

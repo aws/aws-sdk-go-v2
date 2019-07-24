@@ -164,7 +164,7 @@ func (s CreateClusterOutput) MarshalFields(e protocol.FieldEncoder) error {
 const opCreateCluster = "CreateCluster"
 
 // CreateClusterRequest returns a request value for making API operation for
-// Amazon Elastic Container Service for Kubernetes.
+// Amazon Elastic Kubernetes Service.
 //
 // Creates an Amazon EKS control plane.
 //

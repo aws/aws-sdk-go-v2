@@ -45,7 +45,7 @@ func (s *GetSecurityConfigurationInput) Validate() error {
 type GetSecurityConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The requested security configuration
+	// The requested security configuration.
 	SecurityConfiguration *SecurityConfiguration `type:"structure"`
 }
 

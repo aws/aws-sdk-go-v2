@@ -54,7 +54,8 @@ func (s GetEmailChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetEmailChannelOutput struct {
 	_ struct{} `type:"structure" payload:"EmailChannelResponse"`
 
-	// Email Channel Response.
+	// Provides information about the status and settings of the email channel for
+	// an application.
 	//
 	// EmailChannelResponse is a required field
 	EmailChannelResponse *EmailChannelResponse `type:"structure" required:"true"`
@@ -81,7 +82,8 @@ const opGetEmailChannel = "GetEmailChannel"
 // GetEmailChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Get an email channel.
+// Retrieves information about the status and settings of the email channel
+// for an application.
 //
 //    // Example sending a request using GetEmailChannelRequest.
 //    req := client.GetEmailChannelRequest(params)

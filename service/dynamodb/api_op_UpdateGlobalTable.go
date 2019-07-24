@@ -19,7 +19,7 @@ type UpdateGlobalTableInput struct {
 	// GlobalTableName is a required field
 	GlobalTableName *string `min:"3" type:"string" required:"true"`
 
-	// A list of regions that should be added or removed from the global table.
+	// A list of Regions that should be added or removed from the global table.
 	//
 	// ReplicaUpdates is a required field
 	ReplicaUpdates []ReplicaUpdate `type:"list" required:"true"`
@@ -78,9 +78,9 @@ const opUpdateGlobalTable = "UpdateGlobalTable"
 //
 // Adds or removes replicas in the specified global table. The global table
 // must already exist to be able to use this operation. Any replica to be added
-// must be empty, must have the same name as the global table, must have the
-// same key schema, and must have DynamoDB Streams enabled and must have same
-// provisioned and maximum write capacity units.
+// must be empty, have the same name as the global table, have the same key
+// schema, have DynamoDB Streams enabled, and have the same provisioned and
+// maximum write capacity units.
 //
 // Although you can use UpdateGlobalTable to add replicas and remove replicas
 // in a single request, for simplicity we recommend that you issue separate

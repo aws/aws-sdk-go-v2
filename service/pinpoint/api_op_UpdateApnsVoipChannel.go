@@ -14,7 +14,8 @@ import (
 type UpdateApnsVoipChannelInput struct {
 	_ struct{} `type:"structure" payload:"APNSVoipChannelRequest"`
 
-	// Apple VoIP Push Notification Service channel definition.
+	// Specifies the status and settings of the APNs (Apple Push Notification service)
+	// VoIP channel for an application.
 	//
 	// APNSVoipChannelRequest is a required field
 	APNSVoipChannelRequest *APNSVoipChannelRequest `type:"structure" required:"true"`
@@ -69,7 +70,8 @@ func (s UpdateApnsVoipChannelInput) MarshalFields(e protocol.FieldEncoder) error
 type UpdateApnsVoipChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSVoipChannelResponse"`
 
-	// Apple VoIP Push Notification Service channel definition.
+	// Provides information about the status and settings of the APNs (Apple Push
+	// Notification service) VoIP channel for an application.
 	//
 	// APNSVoipChannelResponse is a required field
 	APNSVoipChannelResponse *APNSVoipChannelResponse `type:"structure" required:"true"`
@@ -96,7 +98,7 @@ const opUpdateApnsVoipChannel = "UpdateApnsVoipChannel"
 // UpdateApnsVoipChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Update an APNS VoIP channel
+// Updates the APNs VoIP channel settings for an application.
 //
 //    // Example sending a request using UpdateApnsVoipChannelRequest.
 //    req := client.UpdateApnsVoipChannelRequest(params)

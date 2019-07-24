@@ -14,7 +14,8 @@ import (
 type UpdateApnsSandboxChannelInput struct {
 	_ struct{} `type:"structure" payload:"APNSSandboxChannelRequest"`
 
-	// Apple Development Push Notification Service channel definition.
+	// Specifies the status and settings of the APNs (Apple Push Notification service)
+	// sandbox channel for an application.
 	//
 	// APNSSandboxChannelRequest is a required field
 	APNSSandboxChannelRequest *APNSSandboxChannelRequest `type:"structure" required:"true"`
@@ -69,7 +70,8 @@ func (s UpdateApnsSandboxChannelInput) MarshalFields(e protocol.FieldEncoder) er
 type UpdateApnsSandboxChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSSandboxChannelResponse"`
 
-	// Apple Development Push Notification Service channel definition.
+	// Provides information about the status and settings of the APNs (Apple Push
+	// Notification service) sandbox channel for an application.
 	//
 	// APNSSandboxChannelResponse is a required field
 	APNSSandboxChannelResponse *APNSSandboxChannelResponse `type:"structure" required:"true"`
@@ -96,7 +98,7 @@ const opUpdateApnsSandboxChannel = "UpdateApnsSandboxChannel"
 // UpdateApnsSandboxChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Update an APNS sandbox channel.
+// Updates the APNs sandbox channel settings for an application.
 //
 //    // Example sending a request using UpdateApnsSandboxChannelRequest.
 //    req := client.UpdateApnsSandboxChannelRequest(params)

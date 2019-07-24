@@ -57,6 +57,22 @@ func (enum ClusterField) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ClusterSettingName string
+
+// Enum values for ClusterSettingName
+const (
+	ClusterSettingNameContainerInsights ClusterSettingName = "containerInsights"
+)
+
+func (enum ClusterSettingName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ClusterSettingName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Compatibility string
 
 // Enum values for Compatibility
@@ -130,8 +146,11 @@ type ContainerInstanceStatus string
 
 // Enum values for ContainerInstanceStatus
 const (
-	ContainerInstanceStatusActive   ContainerInstanceStatus = "ACTIVE"
-	ContainerInstanceStatusDraining ContainerInstanceStatus = "DRAINING"
+	ContainerInstanceStatusActive             ContainerInstanceStatus = "ACTIVE"
+	ContainerInstanceStatusDraining           ContainerInstanceStatus = "DRAINING"
+	ContainerInstanceStatusRegistering        ContainerInstanceStatus = "REGISTERING"
+	ContainerInstanceStatusDeregistering      ContainerInstanceStatus = "DEREGISTERING"
+	ContainerInstanceStatusRegistrationFailed ContainerInstanceStatus = "REGISTRATION_FAILED"
 )
 
 func (enum ContainerInstanceStatus) MarshalValue() (string, error) {
@@ -481,6 +500,8 @@ const (
 	SettingNameServiceLongArnFormat           SettingName = "serviceLongArnFormat"
 	SettingNameTaskLongArnFormat              SettingName = "taskLongArnFormat"
 	SettingNameContainerInstanceLongArnFormat SettingName = "containerInstanceLongArnFormat"
+	SettingNameAwsvpcTrunking                 SettingName = "awsvpcTrunking"
+	SettingNameContainerInsights              SettingName = "containerInsights"
 )
 
 func (enum SettingName) MarshalValue() (string, error) {

@@ -95,6 +95,23 @@ func (enum DeploymentStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type DomainNameStatus string
+
+// Enum values for DomainNameStatus
+const (
+	DomainNameStatusAvailable DomainNameStatus = "AVAILABLE"
+	DomainNameStatusUpdating  DomainNameStatus = "UPDATING"
+)
+
+func (enum DomainNameStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DomainNameStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Represents an endpoint type.
 type EndpointType string
 
@@ -184,6 +201,23 @@ func (enum ProtocolType) MarshalValue() (string, error) {
 }
 
 func (enum ProtocolType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SecurityPolicy string
+
+// Enum values for SecurityPolicy
+const (
+	SecurityPolicyTls10 SecurityPolicy = "TLS_1_0"
+	SecurityPolicyTls12 SecurityPolicy = "TLS_1_2"
+)
+
+func (enum SecurityPolicy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SecurityPolicy) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

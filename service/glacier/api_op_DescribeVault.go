@@ -16,7 +16,7 @@ type DescribeVaultInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon Glacier uses the AWS account ID associated with the
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -70,7 +70,7 @@ func (s DescribeVaultInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains the Amazon Glacier response to your request.
+// Contains the Amazon S3 Glacier response to your request.
 type DescribeVaultOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -78,8 +78,8 @@ type DescribeVaultOutput struct {
 	// value should be a string in the ISO 8601 date format, for example 2012-03-20T17:03:43.221Z.
 	CreationDate *string `type:"string"`
 
-	// The Universal Coordinated Time (UTC) date when Amazon Glacier completed the
-	// last vault inventory. This value should be a string in the ISO 8601 date
+	// The Universal Coordinated Time (UTC) date when Amazon S3 Glacier completed
+	// the last vault inventory. This value should be a string in the ISO 8601 date
 	// format, for example 2012-03-20T17:03:43.221Z.
 	LastInventoryDate *string `type:"string"`
 
@@ -158,18 +158,18 @@ const opDescribeVault = "DescribeVault"
 // This means that if you add or remove an archive from a vault, and then immediately
 // use Describe Vault, the change in contents will not be immediately reflected.
 // If you want to retrieve the latest inventory of the vault, use InitiateJob.
-// Amazon Glacier generates vault inventories approximately daily. For more
-// information, see Downloading a Vault Inventory in Amazon Glacier (http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-inventory.html).
+// Amazon S3 Glacier generates vault inventories approximately daily. For more
+// information, see Downloading a Vault Inventory in Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-inventory.html).
 //
 // An AWS account has full permission to perform all operations (actions). However,
 // AWS Identity and Access Management (IAM) users don't have any permissions
 // by default. You must grant them explicit permission to perform specific actions.
 // For more information, see Access Control Using AWS Identity and Access Management
-// (IAM) (http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
+// (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
 //
 // For conceptual information and underlying REST API, see Retrieving Vault
-// Metadata in Amazon Glacier (http://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html)
-// and Describe Vault (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-get.html)
+// Metadata in Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html)
+// and Describe Vault (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-get.html)
 // in the Amazon Glacier Developer Guide.
 //
 //    // Example sending a request using DescribeVaultRequest.

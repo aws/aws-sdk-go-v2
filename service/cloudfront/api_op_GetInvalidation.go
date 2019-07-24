@@ -11,7 +11,7 @@ import (
 )
 
 // The request to get an invalidation's information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetInvalidationRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetInvalidationRequest
 type GetInvalidationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -68,12 +68,12 @@ func (s GetInvalidationInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetInvalidationResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetInvalidationResult
 type GetInvalidationOutput struct {
 	_ struct{} `type:"structure" payload:"Invalidation"`
 
 	// The invalidation's information. For more information, see Invalidation Complex
-	// Type (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/InvalidationDatatype.html).
+	// Type (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/InvalidationDatatype.html).
 	Invalidation *Invalidation `type:"structure"`
 }
 
@@ -93,7 +93,7 @@ func (s GetInvalidationOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opGetInvalidation = "GetInvalidation2018_11_05"
+const opGetInvalidation = "GetInvalidation2019_03_26"
 
 // GetInvalidationRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -107,12 +107,12 @@ const opGetInvalidation = "GetInvalidation2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetInvalidation
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetInvalidation
 func (c *Client) GetInvalidationRequest(input *GetInvalidationInput) GetInvalidationRequest {
 	op := &aws.Operation{
 		Name:       opGetInvalidation,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2018-11-05/distribution/{DistributionId}/invalidation/{Id}",
+		HTTPPath:   "/2019-03-26/distribution/{DistributionId}/invalidation/{Id}",
 	}
 
 	if input == nil {

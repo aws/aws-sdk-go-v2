@@ -10,13 +10,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Provides options for initiating a multipart upload to an Amazon Glacier vault.
+// Provides options for initiating a multipart upload to an Amazon S3 Glacier
+// vault.
 type InitiateMultipartUploadInput struct {
 	_ struct{} `type:"structure"`
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon Glacier uses the AWS account ID associated with the
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -94,11 +95,11 @@ func (s InitiateMultipartUploadInput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// The Amazon Glacier response to your request.
+// The Amazon S3 Glacier response to your request.
 type InitiateMultipartUploadOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The relative URI path of the multipart upload ID Amazon Glacier created.
+	// The relative URI path of the multipart upload ID Amazon S3 Glacier created.
 	Location *string `location:"header" locationName:"Location" type:"string"`
 
 	// The ID of the multipart upload. This value is also included as part of the
@@ -133,9 +134,10 @@ const opInitiateMultipartUpload = "InitiateMultipartUpload"
 // InitiateMultipartUploadRequest returns a request value for making API operation for
 // Amazon Glacier.
 //
-// This operation initiates a multipart upload. Amazon Glacier creates a multipart
-// upload resource and returns its ID in the response. The multipart upload
-// ID is used in subsequent requests to upload parts of an archive (see UploadMultipartPart).
+// This operation initiates a multipart upload. Amazon S3 Glacier creates a
+// multipart upload resource and returns its ID in the response. The multipart
+// upload ID is used in subsequent requests to upload parts of an archive (see
+// UploadMultipartPart).
 //
 // When you initiate a multipart upload, you specify the part size in number
 // of bytes. The part size must be a megabyte (1024 KB) multiplied by a power
@@ -150,23 +152,23 @@ const opInitiateMultipartUpload = "InitiateMultipartUpload"
 // parts of 4 MB each and one part of 0.2 MB.
 //
 // You don't need to know the size of the archive when you start a multipart
-// upload because Amazon Glacier does not require you to specify the overall
+// upload because Amazon S3 Glacier does not require you to specify the overall
 // archive size.
 //
-// After you complete the multipart upload, Amazon Glacier removes the multipart
-// upload resource referenced by the ID. Amazon Glacier also removes the multipart
-// upload resource if you cancel the multipart upload or it may be removed if
-// there is no activity for a period of 24 hours.
+// After you complete the multipart upload, Amazon S3 Glacier (Glacier) removes
+// the multipart upload resource referenced by the ID. Glacier also removes
+// the multipart upload resource if you cancel the multipart upload or it may
+// be removed if there is no activity for a period of 24 hours.
 //
 // An AWS account has full permission to perform all operations (actions). However,
 // AWS Identity and Access Management (IAM) users don't have any permissions
 // by default. You must grant them explicit permission to perform specific actions.
 // For more information, see Access Control Using AWS Identity and Access Management
-// (IAM) (http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
+// (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
 //
 // For conceptual information and underlying REST API, see Uploading Large Archives
-// in Parts (Multipart Upload) (http://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html)
-// and Initiate Multipart Upload (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-initiate-upload.html)
+// in Parts (Multipart Upload) (https://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html)
+// and Initiate Multipart Upload (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-initiate-upload.html)
 // in the Amazon Glacier Developer Guide.
 //
 //    // Example sending a request using InitiateMultipartUploadRequest.

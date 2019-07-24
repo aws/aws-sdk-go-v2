@@ -27,7 +27,7 @@ type StartTaskInput struct {
 	ContainerInstances []string `locationName:"containerInstances" type:"list" required:"true"`
 
 	// Specifies whether to enable Amazon ECS managed tags for the task. For more
-	// information, see Tagging Your Amazon ECS Resources (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
+	// information, see Tagging Your Amazon ECS Resources (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags *bool `locationName:"enableECSManagedTags" type:"boolean"`
 

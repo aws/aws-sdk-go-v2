@@ -26,20 +26,20 @@ type DescribeLimitsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The maximum total read capacity units that your account allows you to provision
-	// across all of your tables in this region.
+	// across all of your tables in this Region.
 	AccountMaxReadCapacityUnits *int64 `min:"1" type:"long"`
 
 	// The maximum total write capacity units that your account allows you to provision
-	// across all of your tables in this region.
+	// across all of your tables in this Region.
 	AccountMaxWriteCapacityUnits *int64 `min:"1" type:"long"`
 
 	// The maximum read capacity units that your account allows you to provision
-	// for a new table that you are creating in this region, including the read
+	// for a new table that you are creating in this Region, including the read
 	// capacity units provisioned for its global secondary indexes (GSIs).
 	TableMaxReadCapacityUnits *int64 `min:"1" type:"long"`
 
 	// The maximum write capacity units that your account allows you to provision
-	// for a new table that you are creating in this region, including the write
+	// for a new table that you are creating in this Region, including the write
 	// capacity units provisioned for its global secondary indexes (GSIs).
 	TableMaxWriteCapacityUnits *int64 `min:"1" type:"long"`
 }
@@ -55,12 +55,12 @@ const opDescribeLimits = "DescribeLimits"
 // Amazon DynamoDB.
 //
 // Returns the current provisioned-capacity limits for your AWS account in a
-// region, both for the region as a whole and for any one DynamoDB table that
+// Region, both for the Region as a whole and for any one DynamoDB table that
 // you create there.
 //
 // When you establish an AWS account, the account has initial limits on the
 // maximum read capacity units and write capacity units that you can provision
-// across all of your DynamoDB tables in a given region. Also, there are per-table
+// across all of your DynamoDB tables in a given Region. Also, there are per-table
 // limits that apply when you create a table there. For more information, see
 // Limits (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
 // page in the Amazon DynamoDB Developer Guide.
@@ -73,11 +73,11 @@ const opDescribeLimits = "DescribeLimits"
 //
 // For example, you could use one of the AWS SDKs to do the following:
 //
-// Call DescribeLimits for a particular region to obtain your current account
+// Call DescribeLimits for a particular Region to obtain your current account
 // limits on provisioned capacity there.
 //
 // Create a variable to hold the aggregate read capacity units provisioned for
-// all your tables in that region, and one to hold the aggregate write capacity
+// all your tables in that Region, and one to hold the aggregate write capacity
 // units. Zero them both.
 //
 // Call ListTables to obtain a list of all your DynamoDB tables.
@@ -93,7 +93,7 @@ const opDescribeLimits = "DescribeLimits"
 //    these GSIs and add their provisioned capacity values to your variables
 //    as well.
 //
-// Report the account limits for that region returned by DescribeLimits, along
+// Report the account limits for that Region returned by DescribeLimits, along
 // with the total current provisioned capacity levels you have calculated.
 //
 // This will let you see whether you are getting close to your account-level
@@ -103,8 +103,8 @@ const opDescribeLimits = "DescribeLimits"
 // the sum of the provisioned capacity of the new table itself and all its global
 // secondary indexes.
 //
-// For existing tables and their GSIs, DynamoDB will not let you increase provisioned
-// capacity extremely rapidly, but the only upper limit that applies is that
+// For existing tables and their GSIs, DynamoDB doesn't let you increase provisioned
+// capacity extremely rapidly. But the only upper limit that applies is that
 // the aggregate provisioned capacity over all your tables and GSIs cannot exceed
 // either of the per-account limits.
 //

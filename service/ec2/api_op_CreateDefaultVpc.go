@@ -45,7 +45,7 @@ const opCreateDefaultVpc = "CreateDefaultVpc"
 //
 // Creates a default VPC with a size /16 IPv4 CIDR block and a default subnet
 // in each Availability Zone. For more information about the components of a
-// default VPC, see Default VPC and Default Subnets (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html)
+// default VPC, see Default VPC and Default Subnets (https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html)
 // in the Amazon Virtual Private Cloud User Guide. You cannot specify the components
 // of the default VPC yourself.
 //

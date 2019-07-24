@@ -3,6 +3,7 @@
 package codecommit
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -11,6 +12,32 @@ import (
 
 var _ aws.Config
 var _ = awsutil.Prettify
+
+// Information about errors in a BatchDescribeMergeConflicts operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchDescribeMergeConflictsError
+type BatchDescribeMergeConflictsError struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the exception.
+	//
+	// ExceptionName is a required field
+	ExceptionName *string `locationName:"exceptionName" type:"string" required:"true"`
+
+	// The path to the file.
+	//
+	// FilePath is a required field
+	FilePath *string `locationName:"filePath" type:"string" required:"true"`
+
+	// The message provided by the exception.
+	//
+	// Message is a required field
+	Message *string `locationName:"message" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s BatchDescribeMergeConflictsError) String() string {
+	return awsutil.Prettify(s)
+}
 
 // Returns information about a specific Git blob object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BlobMetadata
@@ -215,6 +242,122 @@ func (s Commit) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Information about conflicts in a merge operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Conflict
+type Conflict struct {
+	_ struct{} `type:"structure"`
+
+	// Metadata about a conflict in a merge operation.
+	ConflictMetadata *ConflictMetadata `locationName:"conflictMetadata" type:"structure"`
+
+	// A list of hunks that contain the differences between files or lines causing
+	// the conflict.
+	MergeHunks []MergeHunk `locationName:"mergeHunks" type:"list"`
+}
+
+// String returns the string representation
+func (s Conflict) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about the metadata for a conflict in a merge operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ConflictMetadata
+type ConflictMetadata struct {
+	_ struct{} `type:"structure"`
+
+	// A boolean value indicating whether there are conflicts in the content of
+	// a file.
+	ContentConflict *bool `locationName:"contentConflict" type:"boolean"`
+
+	// A boolean value indicating whether there are conflicts in the file mode of
+	// a file.
+	FileModeConflict *bool `locationName:"fileModeConflict" type:"boolean"`
+
+	// The file modes of the file in the source, destination, and base of the merge.
+	FileModes *FileModes `locationName:"fileModes" type:"structure"`
+
+	// The path of the file that contains conflicts.
+	FilePath *string `locationName:"filePath" type:"string"`
+
+	// The file sizes of the file in the source, destination, and base of the merge.
+	FileSizes *FileSizes `locationName:"fileSizes" type:"structure"`
+
+	// A boolean value (true or false) indicating whether the file is binary or
+	// textual in the source, destination, and base of the merge.
+	IsBinaryFile *IsBinaryFile `locationName:"isBinaryFile" type:"structure"`
+
+	// Whether an add, modify, or delete operation caused the conflict between the
+	// source and destination of the merge.
+	MergeOperations *MergeOperations `locationName:"mergeOperations" type:"structure"`
+
+	// The number of conflicts, including both hunk conflicts and metadata conflicts.
+	NumberOfConflicts *int64 `locationName:"numberOfConflicts" type:"integer"`
+
+	// A boolean value (true or false) indicating whether there are conflicts between
+	// the branches in the object type of a file, folder, or submodule.
+	ObjectTypeConflict *bool `locationName:"objectTypeConflict" type:"boolean"`
+
+	// Information about any object type conflicts in a merge operation.
+	ObjectTypes *ObjectTypes `locationName:"objectTypes" type:"structure"`
+}
+
+// String returns the string representation
+func (s ConflictMetadata) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A list of inputs to use when resolving conflicts during a merge if AUTOMERGE
+// is chosen as the conflict resolution strategy.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ConflictResolution
+type ConflictResolution struct {
+	_ struct{} `type:"structure"`
+
+	// Files that will be deleted as part of the merge conflict resolution.
+	DeleteFiles []DeleteFileEntry `locationName:"deleteFiles" type:"list"`
+
+	// Files that will have content replaced as part of the merge conflict resolution.
+	ReplaceContents []ReplaceContentEntry `locationName:"replaceContents" type:"list"`
+
+	// File modes that will be set as part of the merge conflict resolution.
+	SetFileModes []SetFileModeEntry `locationName:"setFileModes" type:"list"`
+}
+
+// String returns the string representation
+func (s ConflictResolution) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ConflictResolution) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ConflictResolution"}
+	if s.DeleteFiles != nil {
+		for i, v := range s.DeleteFiles {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DeleteFiles", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.ReplaceContents != nil {
+		for i, v := range s.ReplaceContents {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ReplaceContents", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SetFileModes != nil {
+		for i, v := range s.SetFileModes {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SetFileModes", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // A file that will be deleted as part of a commit.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteFileEntry
 type DeleteFileEntry struct {
@@ -315,6 +458,46 @@ func (s FileMetadata) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Information about file modes in a merge or pull request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FileModes
+type FileModes struct {
+	_ struct{} `type:"structure"`
+
+	// The file mode of a file in the base of a merge or pull request.
+	Base FileModeTypeEnum `locationName:"base" type:"string" enum:"true"`
+
+	// The file mode of a file in the destination of a merge or pull request.
+	Destination FileModeTypeEnum `locationName:"destination" type:"string" enum:"true"`
+
+	// The file mode of a file in the source of a merge or pull request.
+	Source FileModeTypeEnum `locationName:"source" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s FileModes) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about the size of files in a merge or pull request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FileSizes
+type FileSizes struct {
+	_ struct{} `type:"structure"`
+
+	// The size of a file in the base of a merge or pull request.
+	Base *int64 `locationName:"base" type:"long"`
+
+	// The size of a file in the destination of a merge or pull request.
+	Destination *int64 `locationName:"destination" type:"long"`
+
+	// The size of a file in the source of a merge or pull request.
+	Source *int64 `locationName:"source" type:"long"`
+}
+
+// String returns the string representation
+func (s FileSizes) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Returns information about a folder in a repository.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Folder
 type Folder struct {
@@ -334,6 +517,30 @@ type Folder struct {
 
 // String returns the string representation
 func (s Folder) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about whether a file is binary or textual in a merge or pull
+// request operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/IsBinaryFile
+type IsBinaryFile struct {
+	_ struct{} `type:"structure"`
+
+	// The binary or non-binary status of a file in the base of a merge or pull
+	// request.
+	Base *bool `locationName:"base" type:"boolean"`
+
+	// The binary or non-binary status of a file in the destination of a merge or
+	// pull request.
+	Destination *bool `locationName:"destination" type:"boolean"`
+
+	// The binary or non-binary status of file in the source of a merge or pull
+	// request.
+	Source *bool `locationName:"source" type:"boolean"`
+}
+
+// String returns the string representation
+func (s IsBinaryFile) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -360,6 +567,56 @@ func (s Location) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Information about merge hunks in a merge or pull request operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeHunk
+type MergeHunk struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the merge hunk in the base of a merge or pull request.
+	Base *MergeHunkDetail `locationName:"base" type:"structure"`
+
+	// Information about the merge hunk in the destination of a merge or pull request.
+	Destination *MergeHunkDetail `locationName:"destination" type:"structure"`
+
+	// A Boolean value indicating whether a combination of hunks contains a conflict.
+	// Conflicts occur when the same file or the same lines in a file were modified
+	// in both the source and destination of a merge or pull request. Valid values
+	// include true, false, and null. This will be true when the hunk represents
+	// a conflict and one or more files contains a line conflict. File mode conflicts
+	// in a merge will not set this to be true.
+	IsConflict *bool `locationName:"isConflict" type:"boolean"`
+
+	// Information about the merge hunk in the source of a merge or pull request.
+	Source *MergeHunkDetail `locationName:"source" type:"structure"`
+}
+
+// String returns the string representation
+func (s MergeHunk) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about the details of a merge hunk that contains a conflict in
+// a merge or pull request operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeHunkDetail
+type MergeHunkDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The end position of the hunk in the merge result.
+	EndLine *int64 `locationName:"endLine" type:"integer"`
+
+	// The base-64 encoded content of the hunk merged region that might or might
+	// not contain a conflict.
+	HunkContent *string `locationName:"hunkContent" type:"string"`
+
+	// The start position of the hunk in the merge result.
+	StartLine *int64 `locationName:"startLine" type:"integer"`
+}
+
+// String returns the string representation
+func (s MergeHunkDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Returns information about a merge or potential merge between a source reference
 // and a destination reference in a pull request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeMetadata
@@ -369,12 +626,56 @@ type MergeMetadata struct {
 	// A Boolean value indicating whether the merge has been made.
 	IsMerged *bool `locationName:"isMerged" type:"boolean"`
 
+	// The commit ID for the merge commit, if any.
+	MergeCommitId *string `locationName:"mergeCommitId" type:"string"`
+
+	// The merge strategy used in the merge.
+	MergeOption MergeOptionTypeEnum `locationName:"mergeOption" type:"string" enum:"true"`
+
 	// The Amazon Resource Name (ARN) of the user who merged the branches.
 	MergedBy *string `locationName:"mergedBy" type:"string"`
 }
 
 // String returns the string representation
 func (s MergeMetadata) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about the file operation conflicts in a merge operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeOperations
+type MergeOperations struct {
+	_ struct{} `type:"structure"`
+
+	// The operation on a file in the destination of a merge or pull request.
+	Destination ChangeTypeEnum `locationName:"destination" type:"string" enum:"true"`
+
+	// The operation on a file (add, modify, or delete) of a file in the source
+	// of a merge or pull request.
+	Source ChangeTypeEnum `locationName:"source" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s MergeOperations) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about the type of an object in a merge operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ObjectTypes
+type ObjectTypes struct {
+	_ struct{} `type:"structure"`
+
+	// The type of the object in the base commit of the merge.
+	Base ObjectTypeEnum `locationName:"base" type:"string" enum:"true"`
+
+	// The type of the object in the destination branch.
+	Destination ObjectTypeEnum `locationName:"destination" type:"string" enum:"true"`
+
+	// The type of the object in the source branch.
+	Source ObjectTypeEnum `locationName:"source" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ObjectTypes) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -629,6 +930,53 @@ func (s *PutFileEntry) Validate() error {
 		if err := s.SourceFile.Validate(); err != nil {
 			invalidParams.AddNested("SourceFile", err.(aws.ErrInvalidParams))
 		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Information about a replacement content entry in the conflict of a merge
+// or pull request operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ReplaceContentEntry
+type ReplaceContentEntry struct {
+	_ struct{} `type:"structure"`
+
+	// The base-64 encoded content to use when the replacement type is USE_NEW_CONTENT.
+	//
+	// Content is automatically base64 encoded/decoded by the SDK.
+	Content []byte `locationName:"content" type:"blob"`
+
+	// The file mode to apply during conflict resoltion.
+	FileMode FileModeTypeEnum `locationName:"fileMode" type:"string" enum:"true"`
+
+	// The path of the conflicting file.
+	//
+	// FilePath is a required field
+	FilePath *string `locationName:"filePath" type:"string" required:"true"`
+
+	// The replacement type to use when determining how to resolve the conflict.
+	//
+	// ReplacementType is a required field
+	ReplacementType ReplacementTypeEnum `locationName:"replacementType" type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s ReplaceContentEntry) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ReplaceContentEntry) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ReplaceContentEntry"}
+
+	if s.FilePath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FilePath"))
+	}
+	if len(s.ReplacementType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("ReplacementType"))
 	}
 
 	if invalidParams.Len() > 0 {

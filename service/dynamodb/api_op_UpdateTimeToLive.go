@@ -75,9 +75,9 @@ const opUpdateTimeToLive = "UpdateTimeToLive"
 // UpdateTimeToLiveRequest returns a request value for making API operation for
 // Amazon DynamoDB.
 //
-// The UpdateTimeToLive method will enable or disable TTL for the specified
-// table. A successful UpdateTimeToLive call returns the current TimeToLiveSpecification;
-// it may take up to one hour for the change to fully process. Any additional
+// The UpdateTimeToLive method enables or disables Time to Live (TTL) for the
+// specified table. A successful UpdateTimeToLive call returns the current TimeToLiveSpecification.
+// It can take up to one hour for the change to fully process. Any additional
 // UpdateTimeToLive calls for the same table during this one hour duration result
 // in a ValidationException.
 //
@@ -87,7 +87,7 @@ const opUpdateTimeToLive = "UpdateTimeToLive"
 // deleted.
 //
 // The epoch time format is the number of seconds elapsed since 12:00:00 AM
-// January 1st, 1970 UTC.
+// January 1, 1970 UTC.
 //
 // DynamoDB deletes expired items on a best-effort basis to ensure availability
 // of throughput for other data operations.
@@ -97,8 +97,8 @@ const opUpdateTimeToLive = "UpdateTimeToLive"
 // to the nature of the workload. Items that have expired and not been deleted
 // will still show up in reads, queries, and scans.
 //
-// As items are deleted, they are removed from any Local Secondary Index and
-// Global Secondary Index immediately in the same eventually consistent way
+// As items are deleted, they are removed from any local secondary index and
+// global secondary index immediately in the same eventually consistent way
 // as a standard delete operation.
 //
 // For more information, see Time To Live (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html)

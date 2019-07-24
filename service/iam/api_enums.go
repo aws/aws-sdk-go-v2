@@ -304,6 +304,25 @@ func (enum PolicyType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type SortKeyType string
+
+// Enum values for SortKeyType
+const (
+	SortKeyTypeServiceNamespaceAscending       SortKeyType = "SERVICE_NAMESPACE_ASCENDING"
+	SortKeyTypeServiceNamespaceDescending      SortKeyType = "SERVICE_NAMESPACE_DESCENDING"
+	SortKeyTypeLastAuthenticatedTimeAscending  SortKeyType = "LAST_AUTHENTICATED_TIME_ASCENDING"
+	SortKeyTypeLastAuthenticatedTimeDescending SortKeyType = "LAST_AUTHENTICATED_TIME_DESCENDING"
+)
+
+func (enum SortKeyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SortKeyType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StatusType string
 
 // Enum values for StatusType

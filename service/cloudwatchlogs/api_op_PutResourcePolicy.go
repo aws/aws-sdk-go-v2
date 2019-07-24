@@ -15,6 +15,7 @@ type PutResourcePolicyInput struct {
 
 	// Details of the new policy, including the identity of the principal that is
 	// enabled to put logs to this account. This is formatted as a JSON string.
+	// This parameter is required.
 	//
 	// The following example creates a resource policy enabling the Route 53 service
 	// to put DNS query logs in to the specified log group. Replace "logArn" with

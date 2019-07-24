@@ -29,11 +29,6 @@ type CreateConfigurationInput struct {
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
 
-	// Contents of the server.properties file. When using the API, you must ensure
-	// that the contents of the file are base64 encoded. When using the AWS Management
-	// Console, the SDK, or the AWS CLI, the contents of server.properties can be
-	// in plaintext.
-	//
 	// ServerProperties is automatically base64 encoded/decoded by the SDK.
 	//
 	// ServerProperties is a required field

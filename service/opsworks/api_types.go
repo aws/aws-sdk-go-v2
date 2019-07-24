@@ -60,14 +60,14 @@ type App struct {
 	// An array of EnvironmentVariable objects that specify environment variables
 	// to be associated with the app. After you deploy the app, these variables
 	// are defined on the associated app server instances. For more information,
-	// see Environment Variables (http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment).
+	// see Environment Variables (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment).
 	//
 	// There is no specific limit on the number of environment variables. However,
 	// the size of the associated data structure - which includes the variable names,
-	// values, and protected flag values - cannot exceed 10 KB (10240 Bytes). This
-	// limit should accommodate most if not all use cases, but if you do exceed
-	// it, you will cause an exception (API) with an "Environment: is too large
-	// (maximum is 10KB)" message.
+	// values, and protected flag values - cannot exceed 20 KB. This limit should
+	// accommodate most if not all use cases, but if you do exceed it, you will
+	// cause an exception (API) with an "Environment: is too large (maximum is 20
+	// KB)" message.
 	Environment []EnvironmentVariable `type:"list"`
 
 	// The app name.
@@ -104,7 +104,7 @@ type AutoScalingThresholds struct {
 	// To use custom alarms, you must update your service role to allow cloudwatch:DescribeAlarms.
 	// You can either have AWS OpsWorks Stacks update the role for you when you
 	// first use this feature or you can edit the role manually. For more information,
-	// see Allowing AWS OpsWorks Stacks to Act on Your Behalf (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-servicerole.html).
+	// see Allowing AWS OpsWorks Stacks to Act on Your Behalf (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-servicerole.html).
 	Alarms []string `type:"list"`
 
 	// The CPU utilization threshold, as a percent of the available CPU. A value
@@ -159,7 +159,7 @@ func (s *AutoScalingThresholds) Validate() error {
 }
 
 // Describes a block device mapping. This data type maps directly to the Amazon
-// EC2 BlockDeviceMapping (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html)
+// EC2 BlockDeviceMapping (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html)
 // data type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/BlockDeviceMapping
 type BlockDeviceMapping struct {
@@ -177,7 +177,7 @@ type BlockDeviceMapping struct {
 	// Suppresses the specified device included in the AMI's block device mapping.
 	NoDevice *string `type:"string"`
 
-	// The virtual device name. For more information, see BlockDeviceMapping (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html).
+	// The virtual device name. For more information, see BlockDeviceMapping (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html).
 	VirtualName *string `type:"string"`
 }
 
@@ -222,7 +222,7 @@ func (s CloudWatchLogsConfiguration) String() string {
 
 // Describes the Amazon CloudWatch logs configuration for a layer. For detailed
 // information about members of this data type, see the CloudWatch Logs Agent
-// Reference (http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html).
+// Reference (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CloudWatchLogsLogStream
 type CloudWatchLogsLogStream struct {
 	_ struct{} `type:"structure"`
@@ -241,7 +241,7 @@ type CloudWatchLogsLogStream struct {
 	BufferDuration *int64 `type:"integer"`
 
 	// Specifies how the time stamp is extracted from logs. For more information,
-	// see the CloudWatch Logs Agent Reference (http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html).
+	// see the CloudWatch Logs Agent Reference (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html).
 	DatetimeFormat *string `type:"string"`
 
 	// Specifies the encoding of the log file so that the file can be read correctly.
@@ -415,7 +415,7 @@ type Deployment struct {
 	// "{\"key1\": \"value1\", \"key2\": \"value2\",...}"
 	//
 	// For more information on custom JSON, see Use Custom JSON to Modify the Stack
-	// Configuration Attributes (http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html).
+	// Configuration Attributes (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html).
 	CustomJson *string `type:"string"`
 
 	// The deployment ID.
@@ -535,7 +535,7 @@ func (s *DeploymentCommand) Validate() error {
 }
 
 // Describes an Amazon EBS volume. This data type maps directly to the Amazon
-// EC2 EbsBlockDevice (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html)
+// EC2 EbsBlockDevice (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html)
 // data type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/EbsBlockDevice
 type EbsBlockDevice struct {
@@ -545,13 +545,13 @@ type EbsBlockDevice struct {
 	DeleteOnTermination *bool `type:"boolean"`
 
 	// The number of I/O operations per second (IOPS) that the volume supports.
-	// For more information, see EbsBlockDevice (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html).
+	// For more information, see EbsBlockDevice (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html).
 	Iops *int64 `type:"integer"`
 
 	// The snapshot ID.
 	SnapshotId *string `type:"string"`
 
-	// The volume size, in GiB. For more information, see EbsBlockDevice (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html).
+	// The volume size, in GiB. For more information, see EbsBlockDevice (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html).
 	VolumeSize *int64 `type:"integer"`
 
 	// The volume type. gp2 for General Purpose (SSD) volumes, io1 for Provisioned
@@ -610,7 +610,7 @@ type ElasticIp struct {
 	// The name.
 	Name *string `type:"string"`
 
-	// The AWS region. For more information, see Regions and Endpoints (http://docs.aws.amazon.com/general/latest/gr/rande.html).
+	// The AWS region. For more information, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html).
 	Region *string `type:"string"`
 }
 
@@ -718,7 +718,7 @@ type Instance struct {
 	AgentVersion *string `type:"string"`
 
 	// A custom AMI ID to be used to create the instance. For more information,
-	// see Instances (http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html)
+	// see Instances (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html)
 	AmiId *string `type:"string"`
 
 	// The instance architecture: "i386" or "x86_64".
@@ -731,7 +731,7 @@ type Instance struct {
 	AutoScalingType AutoScalingType `type:"string" enum:"true"`
 
 	// The instance Availability Zone. For more information, see Regions and Endpoints
-	// (http://docs.aws.amazon.com/general/latest/gr/rande.html).
+	// (https://docs.aws.amazon.com/general/latest/gr/rande.html).
 	AvailabilityZone *string `type:"string"`
 
 	// An array of BlockDeviceMapping objects that specify the instance's block
@@ -753,7 +753,7 @@ type Instance struct {
 	// For container instances, the instance's ARN.
 	EcsContainerInstanceArn *string `type:"string"`
 
-	// The instance Elastic IP address (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html).
+	// The instance Elastic IP address (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html).
 	ElasticIp *string `type:"string"`
 
 	// The instance host name.
@@ -776,7 +776,7 @@ type Instance struct {
 	InstanceId *string `type:"string"`
 
 	// The ARN of the instance's IAM profile. For more information about IAM ARNs,
-	// see Using Identifiers (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
+	// see Using Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
 	InstanceProfileArn *string `type:"string"`
 
 	// The instance type, such as t2.micro.
@@ -816,7 +816,7 @@ type Instance struct {
 	ReportedOs *ReportedOs `type:"structure"`
 
 	// The instance's root device type. For more information, see Storage for the
-	// Root Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
+	// Root Device (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
 	RootDeviceType RootDeviceType `type:"string" enum:"true"`
 
 	// The root device volume ID.
@@ -886,7 +886,7 @@ func (s Instance) String() string {
 }
 
 // Contains a description of an Amazon EC2 instance from the Amazon EC2 metadata
-// service. For more information, see Instance Metadata and User Data (http://docs.aws.amazon.com/sdkfornet/latest/apidocs/Index.html).
+// service. For more information, see Instance Metadata and User Data (https://docs.aws.amazon.com/sdkfornet/latest/apidocs/Index.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/InstanceIdentity
 type InstanceIdentity struct {
 	_ struct{} `type:"structure"`
@@ -991,13 +991,13 @@ type Layer struct {
 	// is set to the cluster's ARN.
 	Attributes map[string]string `type:"map"`
 
-	// Whether to automatically assign an Elastic IP address (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
-	// to the layer's instances. For more information, see How to Edit a Layer (http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html).
+	// Whether to automatically assign an Elastic IP address (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
+	// to the layer's instances. For more information, see How to Edit a Layer (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html).
 	AutoAssignElasticIps *bool `type:"boolean"`
 
 	// For stacks that are running in a VPC, whether to automatically assign a public
 	// IP address to the layer's instances. For more information, see How to Edit
-	// a Layer (http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html).
+	// a Layer (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html).
 	AutoAssignPublicIps *bool `type:"boolean"`
 
 	// The Amazon CloudWatch Logs configuration settings for the layer.
@@ -1007,7 +1007,7 @@ type Layer struct {
 	CreatedAt *string `type:"string"`
 
 	// The ARN of the default IAM profile to be used for the layer's EC2 instances.
-	// For more information about IAM ARNs, see Using Identifiers (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
+	// For more information about IAM ARNs, see Using Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
 	CustomInstanceProfileArn *string `type:"string"`
 
 	// A JSON formatted string containing the layer's custom stack configuration
@@ -1022,11 +1022,10 @@ type Layer struct {
 
 	// AWS OpsWorks Stacks supports five lifecycle events: setup, configuration,
 	// deploy, undeploy, and shutdown. For each layer, AWS OpsWorks Stacks runs
-	// a set of standard recipes for each event. In addition, you can provide custom
-	// recipes for any or all layers and events. AWS OpsWorks Stacks runs custom
-	// event recipes after the standard recipes. LayerCustomRecipes specifies the
-	// custom recipes for a particular layer to be run in response to each of the
-	// five events.
+	// a set of standard recipes for each event. You can also provide custom recipes
+	// for any or all layers and events. AWS OpsWorks Stacks runs custom event recipes
+	// after the standard recipes. LayerCustomRecipes specifies the custom recipes
+	// for a particular layer to be run in response to each of the five events.
 	//
 	// To specify a recipe, use the cookbook's directory name in the repository
 	// followed by two colons and the recipe name, which is the recipe's file name
@@ -1131,10 +1130,10 @@ type OperatingSystem struct {
 	// operating system.
 	ConfigurationManagers []OperatingSystemConfigurationManager `type:"list"`
 
-	// The ID of a supported operating system, such as Amazon Linux 2017.09.
+	// The ID of a supported operating system, such as Amazon Linux 2018.03.
 	Id *string `type:"string"`
 
-	// The name of the operating system, such as Amazon Linux 2017.09.
+	// The name of the operating system, such as Amazon Linux 2018.03.
 	Name *string `type:"string"`
 
 	// A short name for the operating system manufacturer.
@@ -1188,7 +1187,7 @@ type Permission struct {
 	AllowSudo *bool `type:"boolean"`
 
 	// The Amazon Resource Name (ARN) for an AWS Identity and Access Management
-	// (IAM) role. For more information about IAM ARNs, see Using Identifiers (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
+	// (IAM) role. For more information about IAM ARNs, see Using Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
 	IamUserArn *string `type:"string"`
 
 	// The user's permission level, which must be the following:
@@ -1204,7 +1203,7 @@ type Permission struct {
 	//    * iam_only
 	//
 	// For more information on the permissions associated with these levels, see
-	// Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
+	// Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
 	Level *string `type:"string"`
 
 	// A stack ID.
@@ -1222,7 +1221,7 @@ type RaidArray struct {
 	_ struct{} `type:"structure"`
 
 	// The array's Availability Zone. For more information, see Regions and Endpoints
-	// (http://docs.aws.amazon.com/general/latest/gr/rande.html).
+	// (https://docs.aws.amazon.com/general/latest/gr/rande.html).
 	AvailabilityZone *string `type:"string"`
 
 	// When the RAID array was created.
@@ -1423,7 +1422,7 @@ type ShutdownEventConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// Whether to enable Elastic Load Balancing connection draining. For more information,
-	// see Connection Draining (http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#conn-drain)
+	// see Connection Draining (https://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#conn-drain)
 	DelayUntilElbConnectionsDrained *bool `type:"boolean"`
 
 	// The time, in seconds, that AWS OpsWorks Stacks will wait after triggering
@@ -1437,8 +1436,8 @@ func (s ShutdownEventConfiguration) String() string {
 }
 
 // Contains the information required to retrieve an app or cookbook from a repository.
-// For more information, see Creating Apps (http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html)
-// or Custom Recipes and Cookbooks (http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html).
+// For more information, see Creating Apps (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html)
+// or Custom Recipes and Cookbooks (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Source
 type Source struct {
 	_ struct{} `type:"structure"`
@@ -1450,8 +1449,8 @@ type Source struct {
 	//
 	//    * For HTTP bundles and Subversion repositories, set Password to the password.
 	//
-	// For more information on how to safely handle IAM credentials, see http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html
-	// (http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html).
+	// For more information on how to safely handle IAM credentials, see https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html).
 	//
 	// In responses, AWS OpsWorks Stacks returns *****FILTERED***** instead of the
 	// actual value.
@@ -1549,7 +1548,7 @@ type Stack struct {
 	Attributes map[string]string `type:"map"`
 
 	// A ChefConfiguration object that specifies whether to enable Berkshelf and
-	// the Berkshelf version. For more information, see Create a New Stack (http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html).
+	// the Berkshelf version. For more information, see Create a New Stack (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html).
 	ChefConfiguration *ChefConfiguration `type:"structure"`
 
 	// The configuration manager.
@@ -1559,8 +1558,8 @@ type Stack struct {
 	CreatedAt *string `type:"string"`
 
 	// Contains the information required to retrieve an app or cookbook from a repository.
-	// For more information, see Creating Apps (http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html)
-	// or Custom Recipes and Cookbooks (http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html).
+	// For more information, see Adding Apps (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html)
+	// or Cookbooks and Recipes (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html).
 	CustomCookbooksSource *Source `type:"structure"`
 
 	// A JSON object that contains user-defined attributes to be added to the stack
@@ -1571,16 +1570,16 @@ type Stack struct {
 	// "{\"key1\": \"value1\", \"key2\": \"value2\",...}"
 	//
 	// For more information on custom JSON, see Use Custom JSON to Modify the Stack
-	// Configuration Attributes (http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html).
+	// Configuration Attributes (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html).
 	CustomJson *string `type:"string"`
 
 	// The stack's default Availability Zone. For more information, see Regions
-	// and Endpoints (http://docs.aws.amazon.com/general/latest/gr/rande.html).
+	// and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html).
 	DefaultAvailabilityZone *string `type:"string"`
 
 	// The ARN of an IAM profile that is the default profile for all of the stack's
 	// EC2 instances. For more information about IAM ARNs, see Using Identifiers
-	// (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
 	DefaultInstanceProfileArn *string `type:"string"`
 
 	// The stack's default operating system.
@@ -1588,7 +1587,7 @@ type Stack struct {
 
 	// The default root device type. This value is used by default for all instances
 	// in the stack, but you can override it when you create an instance. For more
-	// information, see Storage for the Root Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
+	// information, see Storage for the Root Device (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
 	DefaultRootDeviceType RootDeviceType `type:"string" enum:"true"`
 
 	// A default Amazon EC2 key pair for the stack's instances. You can override
@@ -1605,7 +1604,7 @@ type Stack struct {
 	Name *string `type:"string"`
 
 	// The stack AWS region, such as "ap-northeast-2". For more information about
-	// AWS regions, see Regions and Endpoints (http://docs.aws.amazon.com/general/latest/gr/rande.html).
+	// AWS regions, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html).
 	Region *string `type:"string"`
 
 	// The stack AWS Identity and Access Management (IAM) role.
@@ -1728,7 +1727,7 @@ type UserProfile struct {
 	_ struct{} `type:"structure"`
 
 	// Whether users can specify their own SSH public key through the My Settings
-	// page. For more information, see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html).
+	// page. For more information, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html).
 	AllowSelfManagement *bool `type:"boolean"`
 
 	// The user's IAM ARN.
@@ -1755,7 +1754,7 @@ type Volume struct {
 	_ struct{} `type:"structure"`
 
 	// The volume Availability Zone. For more information, see Regions and Endpoints
-	// (http://docs.aws.amazon.com/general/latest/gr/rande.html).
+	// (https://docs.aws.amazon.com/general/latest/gr/rande.html).
 	AvailabilityZone *string `type:"string"`
 
 	// The device name.
@@ -1765,7 +1764,7 @@ type Volume struct {
 	Ec2VolumeId *string `type:"string"`
 
 	// Specifies whether an Amazon EBS volume is encrypted. For more information,
-	// see Amazon EBS Encryption (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html).
+	// see Amazon EBS Encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html).
 	Encrypted *bool `type:"boolean"`
 
 	// The instance ID.
@@ -1784,19 +1783,19 @@ type Volume struct {
 	RaidArrayId *string `type:"string"`
 
 	// The AWS region. For more information about AWS regions, see Regions and Endpoints
-	// (http://docs.aws.amazon.com/general/latest/gr/rande.html).
+	// (https://docs.aws.amazon.com/general/latest/gr/rande.html).
 	Region *string `type:"string"`
 
 	// The volume size.
 	Size *int64 `type:"integer"`
 
-	// The value returned by DescribeVolumes (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeVolumes.html).
+	// The value returned by DescribeVolumes (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeVolumes.html).
 	Status *string `type:"string"`
 
 	// The volume ID.
 	VolumeId *string `type:"string"`
 
-	// The volume type. For more information, see Amazon EBS Volume Types (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html).
+	// The volume type. For more information, see Amazon EBS Volume Types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html).
 	//
 	//    * standard - Magnetic. Magnetic volumes must have a minimum size of 1
 	//    GiB and a maximum size of 1024 GiB.
@@ -1827,7 +1826,7 @@ type VolumeConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies whether an Amazon EBS volume is encrypted. For more information,
-	// see Amazon EBS Encryption (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html).
+	// see Amazon EBS Encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html).
 	Encrypted *bool `type:"boolean"`
 
 	// For PIOPS volumes, the IOPS per disk.
@@ -1851,7 +1850,7 @@ type VolumeConfiguration struct {
 	// Size is a required field
 	Size *int64 `type:"integer" required:"true"`
 
-	// The volume type. For more information, see Amazon EBS Volume Types (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html).
+	// The volume type. For more information, see Amazon EBS Volume Types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html).
 	//
 	//    * standard - Magnetic. Magnetic volumes must have a minimum size of 1
 	//    GiB and a maximum size of 1024 GiB.

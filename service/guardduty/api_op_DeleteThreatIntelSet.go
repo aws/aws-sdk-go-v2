@@ -14,9 +14,13 @@ import (
 type DeleteThreatIntelSetInput struct {
 	_ struct{} `type:"structure"`
 
+	// The unique ID of the detector the threatIntelSet is associated with.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
+	// The unique ID of the threatIntelSet you want to delete.
+	//
 	// ThreatIntelSetId is a required field
 	ThreatIntelSetId *string `location:"uri" locationName:"threatIntelSetId" type:"string" required:"true"`
 }
@@ -32,6 +36,9 @@ func (s *DeleteThreatIntelSetInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
 	}
 
 	if s.ThreatIntelSetId == nil {

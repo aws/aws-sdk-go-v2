@@ -10,14 +10,13 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// CreateFilter request object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateFilterRequest
 type CreateFilterInput struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the action that is to be applied to the findings that match the
 	// filter.
-	Action FilterAction `locationName:"action" type:"string" enum:"true"`
+	Action FilterAction `locationName:"action" min:"1" type:"string" enum:"true"`
 
 	// The idempotency token for the create request.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
@@ -25,8 +24,11 @@ type CreateFilterInput struct {
 	// The description of the filter.
 	Description *string `locationName:"description" type:"string"`
 
+	// The unique ID of the detector of the GuardDuty account for which you want
+	// to create a filter.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
 	// Represents the criteria to be used in the filter for querying findings.
 	//
@@ -36,11 +38,14 @@ type CreateFilterInput struct {
 	// The name of the filter.
 	//
 	// Name is a required field
-	Name *string `locationName:"name" type:"string" required:"true"`
+	Name *string `locationName:"name" min:"3" type:"string" required:"true"`
 
 	// Specifies the position of the filter in the list of current filters. Also
 	// specifies the order in which this filter is applied to the findings.
-	Rank *int64 `locationName:"rank" type:"integer"`
+	Rank *int64 `locationName:"rank" min:"1" type:"integer"`
+
+	// The tags to be added to a new filter resource.
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -55,6 +60,9 @@ func (s *CreateFilterInput) Validate() error {
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
 	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
+	}
 
 	if s.FindingCriteria == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FindingCriteria"))
@@ -62,6 +70,15 @@ func (s *CreateFilterInput) Validate() error {
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 3))
+	}
+	if s.Rank != nil && *s.Rank < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Rank", 1))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -116,6 +133,18 @@ func (s CreateFilterInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "rank", protocol.Int64Value(v), metadata)
 	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	if s.DetectorId != nil {
 		v := *s.DetectorId
 
@@ -125,13 +154,14 @@ func (s CreateFilterInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// CreateFilter response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateFilterResponse
 type CreateFilterOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the successfully created filter.
-	Name *string `locationName:"name" type:"string"`
+	//
+	// Name is a required field
+	Name *string `locationName:"name" min:"3" type:"string" required:"true"`
 }
 
 // String returns the string representation

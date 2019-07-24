@@ -11,7 +11,7 @@ import (
 )
 
 // The request to list invalidations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListInvalidationsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListInvalidationsRequest
 type ListInvalidationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -78,7 +78,7 @@ func (s ListInvalidationsInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListInvalidationsResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListInvalidationsResult
 type ListInvalidationsOutput struct {
 	_ struct{} `type:"structure" payload:"InvalidationList"`
 
@@ -102,7 +102,7 @@ func (s ListInvalidationsOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opListInvalidations = "ListInvalidations2018_11_05"
+const opListInvalidations = "ListInvalidations2019_03_26"
 
 // ListInvalidationsRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -116,12 +116,12 @@ const opListInvalidations = "ListInvalidations2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListInvalidations
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListInvalidations
 func (c *Client) ListInvalidationsRequest(input *ListInvalidationsInput) ListInvalidationsRequest {
 	op := &aws.Operation{
 		Name:       opListInvalidations,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2018-11-05/distribution/{DistributionId}/invalidation",
+		HTTPPath:   "/2019-03-26/distribution/{DistributionId}/invalidation",
 		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"InvalidationList.NextMarker"},

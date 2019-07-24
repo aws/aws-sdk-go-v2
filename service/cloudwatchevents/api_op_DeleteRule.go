@@ -15,6 +15,10 @@ import (
 type DeleteRuleInput struct {
 	_ struct{} `type:"structure"`
 
+	// The event bus associated with the rule. If you omit this, the default event
+	// bus is used.
+	EventBusName *string `min:"1" type:"string"`
+
 	// If this is a managed rule, created by an AWS service on your behalf, you
 	// must specify Force as True to delete the rule. This parameter is ignored
 	// for rules that are not managed rules. You can check whether a rule is a managed
@@ -36,6 +40,9 @@ func (s DeleteRuleInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteRuleInput"}
+	if s.EventBusName != nil && len(*s.EventBusName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EventBusName", 1))
+	}
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
@@ -75,7 +82,7 @@ const opDeleteRule = "DeleteRule"
 // Managed rules are rules created and managed by another AWS service on your
 // behalf. These rules are created by those other AWS services to support functionality
 // in those services. You can delete these rules using the Force option, but
-// you should do so only if you are sure the other service is not still using
+// you should do so only if you're sure that the other service isn't still using
 // that rule.
 //
 //    // Example sending a request using DeleteRuleRequest.

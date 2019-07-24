@@ -45,6 +45,9 @@ func (s CharacterSet) String() string {
 
 // The configuration setting for the log types to be enabled for export to CloudWatch
 // Logs for a specific DB instance or DB cluster.
+//
+// The EnableLogTypes and DisableLogTypes arrays determine which logs will be
+// exported (or not exported) to CloudWatch Logs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CloudwatchLogsExportConfiguration
 type CloudwatchLogsExportConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -129,6 +132,10 @@ type DBCluster struct {
 	// Specifies the earliest time to which a database can be restored with point-in-time
 	// restore.
 	EarliestRestorableTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// A list of log types that this DB cluster is configured to export to CloudWatch
+	// Logs.
+	EnabledCloudwatchLogsExports []string `type:"list"`
 
 	// Specifies the connection endpoint for the primary instance of the DB cluster.
 	Endpoint *string `type:"string"`

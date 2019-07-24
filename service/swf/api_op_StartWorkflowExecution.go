@@ -64,8 +64,8 @@ type StartWorkflowExecutionInput struct {
 	// Executions of this workflow type need IAM roles to invoke Lambda functions.
 	// If you don't attach an IAM role, any attempt to schedule a Lambda task fails.
 	// This results in a ScheduleLambdaFunctionFailed history event. For more information,
-	// see http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
+	// see https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
 	// in the Amazon SWF Developer Guide.
 	LambdaRole *string `locationName:"lambdaRole" min:"1" type:"string"`
 
@@ -86,7 +86,7 @@ type StartWorkflowExecutionInput struct {
 	//
 	// The specified string must not start or end with whitespace. It must not contain
 	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not contain the literal string arn.
+	// | \u007f-\u009f). Also, it must not be the literal string arn.
 	TaskList *TaskList `locationName:"taskList" type:"structure"`
 
 	// The task priority to use for this workflow execution. This overrides any
@@ -96,7 +96,7 @@ type StartWorkflowExecutionInput struct {
 	// to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string `locationName:"taskPriority" type:"string"`
 
@@ -117,11 +117,11 @@ type StartWorkflowExecutionInput struct {
 	// use this to associate a custom identifier with the workflow execution. You
 	// may specify the same identifier if a workflow execution is logically a restart
 	// of a previous execution. You cannot have two open workflow executions with
-	// the same workflowId at the same time.
+	// the same workflowId at the same time within the same domain.
 	//
 	// The specified string must not start or end with whitespace. It must not contain
 	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not contain the literal string arn.
+	// | \u007f-\u009f). Also, it must not be the literal string arn.
 	//
 	// WorkflowId is a required field
 	WorkflowId *string `locationName:"workflowId" min:"1" type:"string" required:"true"`
@@ -225,7 +225,7 @@ const opStartWorkflowExecution = "StartWorkflowExecution"
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 //    // Example sending a request using StartWorkflowExecutionRequest.

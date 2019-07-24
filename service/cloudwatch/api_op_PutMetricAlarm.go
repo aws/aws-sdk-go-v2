@@ -43,6 +43,10 @@ type PutMetricAlarmInput struct {
 	// The arithmetic operation to use when comparing the specified statistic and
 	// threshold. The specified statistic value is used as the first operand.
 	//
+	// The values LessThanLowerOrGreaterThanUpperThreshold, LessThanLowerThreshold,
+	// and GreaterThanUpperThreshold are used only for alarms based on anomaly detection
+	// models.
+	//
 	// ComparisonOperator is a required field
 	ComparisonOperator ComparisonOperator `type:"string" required:"true" enum:"true"`
 
@@ -164,9 +168,16 @@ type PutMetricAlarmInput struct {
 	Tags []Tag `type:"list"`
 
 	// The value against which the specified statistic is compared.
+	Threshold *float64 `type:"double"`
+
+	// If this is an alarm based on an anomaly detection model, make this value
+	// match the ID of the ANOMALY_DETECTION_BAND function.
 	//
-	// Threshold is a required field
-	Threshold *float64 `type:"double" required:"true"`
+	// For an example of how to use this parameter, see the Anomaly Detection Model
+	// Alarm example on this page.
+	//
+	// If your alarm uses this parameter, it cannot have Auto Scaling actions.
+	ThresholdMetricId *string `min:"1" type:"string"`
 
 	// Sets how this alarm is to handle missing data points. If TreatMissingData
 	// is omitted, the default behavior of missing is used. For more information,
@@ -227,9 +238,8 @@ func (s *PutMetricAlarmInput) Validate() error {
 	if s.Period != nil && *s.Period < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Period", 1))
 	}
-
-	if s.Threshold == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Threshold"))
+	if s.ThresholdMetricId != nil && len(*s.ThresholdMetricId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ThresholdMetricId", 1))
 	}
 	if s.TreatMissingData != nil && len(*s.TreatMissingData) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TreatMissingData", 1))
@@ -277,8 +287,10 @@ const opPutMetricAlarm = "PutMetricAlarm"
 // PutMetricAlarmRequest returns a request value for making API operation for
 // Amazon CloudWatch.
 //
-// Creates or updates an alarm and associates it with the specified metric or
-// metric math expression.
+// Creates or updates an alarm and associates it with the specified metric,
+// metric math expression, or anomaly detection model.
+//
+// Alarms based on anomaly detection models cannot have Auto Scaling actions.
 //
 // When this operation creates an alarm, the alarm state is immediately set
 // to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately.

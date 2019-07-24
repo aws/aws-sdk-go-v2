@@ -45,8 +45,8 @@ type PutMethodInput struct {
 	HttpMethod *string `location:"uri" locationName:"http_method" type:"string" required:"true"`
 
 	// A human-friendly operation identifier for the method. For example, you can
-	// assign the operationName of ListPets for the GET /pets method in PetStore
-	// (https://petstore-demo-endpoint.execute-api.com/petstore/pets) example.
+	// assign the operationName of ListPets for the GET /pets method in the PetStore
+	// example.
 	OperationName *string `locationName:"operationName" type:"string"`
 
 	// Specifies the Model resources used for the request's content type. Request
@@ -375,8 +375,8 @@ type PutMethodOutput struct {
 	MethodResponses map[string]MethodResponse `locationName:"methodResponses" type:"map"`
 
 	// A human-friendly operation identifier for the method. For example, you can
-	// assign the operationName of ListPets for the GET /pets method in PetStore
-	// (https://petstore-demo-endpoint.execute-api.com/petstore/pets) example.
+	// assign the operationName of ListPets for the GET /pets method in the PetStore
+	// example.
 	OperationName *string `locationName:"operationName" type:"string"`
 
 	// A key-value map specifying data schemas, represented by Model resources,

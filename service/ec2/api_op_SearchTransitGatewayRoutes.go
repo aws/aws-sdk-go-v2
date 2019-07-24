@@ -41,11 +41,9 @@ type SearchTransitGatewayRoutesInput struct {
 	//    routes in your route table and you specify supernet-of-match as 10.0.1.0/30,
 	//    then the result returns 10.0.1.0/29.
 	//
-	//    * state - The state of the attachment (available | deleted | deleting
-	//    | failed | modifying | pendingAcceptance | pending | rollingBack | rejected
-	//    | rejecting).
+	//    * state - The state of the route (active | blackhole).
 	//
-	//    * type - The type of roue (active | blackhole).
+	//    * type - The type of roue (propagated | static).
 	//
 	// Filters is a required field
 	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list" required:"true"`

@@ -4,6 +4,7 @@ package directconnect
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -37,6 +38,9 @@ type AllocateHostedConnectionInput struct {
 	// OwnerAccount is a required field
 	OwnerAccount *string `locationName:"ownerAccount" type:"string" required:"true"`
 
+	// The tags to assign to the hosted connection.
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
+
 	// The dedicated VLAN provisioned to the hosted connection.
 	//
 	// Vlan is a required field
@@ -67,9 +71,19 @@ func (s *AllocateHostedConnectionInput) Validate() error {
 	if s.OwnerAccount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OwnerAccount"))
 	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
 
 	if s.Vlan == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Vlan"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -148,6 +162,9 @@ type AllocateHostedConnectionOutput struct {
 
 	// The AWS Region where the connection is located.
 	Region *string `locationName:"region" type:"string"`
+
+	// Any tags assigned to the connection.
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
 	// The ID of the VLAN.
 	Vlan *int64 `locationName:"vlan" type:"integer"`

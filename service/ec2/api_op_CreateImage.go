@@ -13,7 +13,7 @@ import (
 type CreateImageInput struct {
 	_ struct{} `type:"structure"`
 
-	// Tthe block device mappings. This parameter cannot be used to modify the encryption
+	// The block device mappings. This parameter cannot be used to modify the encryption
 	// status of existing volumes or snapshots. To create an AMI with encrypted
 	// snapshots, use the CopyImage action.
 	BlockDeviceMappings []BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"BlockDeviceMapping" type:"list"`

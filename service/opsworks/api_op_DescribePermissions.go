@@ -14,7 +14,7 @@ type DescribePermissionsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The user's IAM ARN. This can also be a federated user's ARN. For more information
-	// about IAM ARNs, see Using Identifiers (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
+	// about IAM ARNs, see Using Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
 	IamUserArn *string `type:"string"`
 
 	// The stack ID.
@@ -60,7 +60,7 @@ const opDescribePermissions = "DescribePermissions"
 // Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using DescribePermissionsRequest.
 //    req := client.DescribePermissionsRequest(params)

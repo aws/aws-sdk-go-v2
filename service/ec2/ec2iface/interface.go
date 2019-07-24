@@ -198,11 +198,21 @@ type ClientAPI interface {
 
 	CreateSnapshotRequest(*ec2.CreateSnapshotInput) ec2.CreateSnapshotRequest
 
+	CreateSnapshotsRequest(*ec2.CreateSnapshotsInput) ec2.CreateSnapshotsRequest
+
 	CreateSpotDatafeedSubscriptionRequest(*ec2.CreateSpotDatafeedSubscriptionInput) ec2.CreateSpotDatafeedSubscriptionRequest
 
 	CreateSubnetRequest(*ec2.CreateSubnetInput) ec2.CreateSubnetRequest
 
 	CreateTagsRequest(*ec2.CreateTagsInput) ec2.CreateTagsRequest
+
+	CreateTrafficMirrorFilterRequest(*ec2.CreateTrafficMirrorFilterInput) ec2.CreateTrafficMirrorFilterRequest
+
+	CreateTrafficMirrorFilterRuleRequest(*ec2.CreateTrafficMirrorFilterRuleInput) ec2.CreateTrafficMirrorFilterRuleRequest
+
+	CreateTrafficMirrorSessionRequest(*ec2.CreateTrafficMirrorSessionInput) ec2.CreateTrafficMirrorSessionRequest
+
+	CreateTrafficMirrorTargetRequest(*ec2.CreateTrafficMirrorTargetInput) ec2.CreateTrafficMirrorTargetRequest
 
 	CreateTransitGatewayRequest(*ec2.CreateTransitGatewayInput) ec2.CreateTransitGatewayRequest
 
@@ -279,6 +289,14 @@ type ClientAPI interface {
 	DeleteSubnetRequest(*ec2.DeleteSubnetInput) ec2.DeleteSubnetRequest
 
 	DeleteTagsRequest(*ec2.DeleteTagsInput) ec2.DeleteTagsRequest
+
+	DeleteTrafficMirrorFilterRequest(*ec2.DeleteTrafficMirrorFilterInput) ec2.DeleteTrafficMirrorFilterRequest
+
+	DeleteTrafficMirrorFilterRuleRequest(*ec2.DeleteTrafficMirrorFilterRuleInput) ec2.DeleteTrafficMirrorFilterRuleRequest
+
+	DeleteTrafficMirrorSessionRequest(*ec2.DeleteTrafficMirrorSessionInput) ec2.DeleteTrafficMirrorSessionRequest
+
+	DeleteTrafficMirrorTargetRequest(*ec2.DeleteTrafficMirrorTargetInput) ec2.DeleteTrafficMirrorTargetRequest
 
 	DeleteTransitGatewayRequest(*ec2.DeleteTransitGatewayInput) ec2.DeleteTransitGatewayRequest
 
@@ -458,6 +476,12 @@ type ClientAPI interface {
 
 	DescribeTagsRequest(*ec2.DescribeTagsInput) ec2.DescribeTagsRequest
 
+	DescribeTrafficMirrorFiltersRequest(*ec2.DescribeTrafficMirrorFiltersInput) ec2.DescribeTrafficMirrorFiltersRequest
+
+	DescribeTrafficMirrorSessionsRequest(*ec2.DescribeTrafficMirrorSessionsInput) ec2.DescribeTrafficMirrorSessionsRequest
+
+	DescribeTrafficMirrorTargetsRequest(*ec2.DescribeTrafficMirrorTargetsInput) ec2.DescribeTrafficMirrorTargetsRequest
+
 	DescribeTransitGatewayAttachmentsRequest(*ec2.DescribeTransitGatewayAttachmentsInput) ec2.DescribeTransitGatewayAttachmentsRequest
 
 	DescribeTransitGatewayRouteTablesRequest(*ec2.DescribeTransitGatewayRouteTablesInput) ec2.DescribeTransitGatewayRouteTablesRequest
@@ -625,6 +649,12 @@ type ClientAPI interface {
 	ModifySpotFleetRequestRequest(*ec2.ModifySpotFleetRequestInput) ec2.ModifySpotFleetRequestRequest
 
 	ModifySubnetAttributeRequest(*ec2.ModifySubnetAttributeInput) ec2.ModifySubnetAttributeRequest
+
+	ModifyTrafficMirrorFilterNetworkServicesRequest(*ec2.ModifyTrafficMirrorFilterNetworkServicesInput) ec2.ModifyTrafficMirrorFilterNetworkServicesRequest
+
+	ModifyTrafficMirrorFilterRuleRequest(*ec2.ModifyTrafficMirrorFilterRuleInput) ec2.ModifyTrafficMirrorFilterRuleRequest
+
+	ModifyTrafficMirrorSessionRequest(*ec2.ModifyTrafficMirrorSessionInput) ec2.ModifyTrafficMirrorSessionRequest
 
 	ModifyTransitGatewayVpcAttachmentRequest(*ec2.ModifyTransitGatewayVpcAttachmentInput) ec2.ModifyTransitGatewayVpcAttachmentRequest
 

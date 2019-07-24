@@ -18,7 +18,7 @@ type DescribePublicIpv4PoolsInput struct {
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// The token for the next page of results.
-	NextToken *string `min:"1" type:"string"`
+	NextToken *string `type:"string"`
 
 	// The IDs of the address pools.
 	PoolIds []string `locationName:"PoolId" locationNameList:"item" type:"list"`
@@ -34,9 +34,6 @@ func (s *DescribePublicIpv4PoolsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribePublicIpv4PoolsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {

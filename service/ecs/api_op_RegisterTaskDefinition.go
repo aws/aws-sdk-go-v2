@@ -58,7 +58,7 @@ type RegisterTaskDefinitionInput struct {
 	// You must specify a family for a task definition, which allows you to track
 	// multiple versions of the same task definition. The family is used as a name
 	// for your task definition. Up to 255 letters (uppercase and lowercase), numbers,
-	// hyphens, and underscores are allowed.
+	// and hyphens are allowed.
 	//
 	// Family is a required field
 	Family *string `locationName:"family" type:"string" required:"true"`
@@ -81,7 +81,7 @@ type RegisterTaskDefinitionInput struct {
 	//
 	// If you are setting namespaced kernel parameters using systemControls for
 	// the containers in the task, the following will apply to your IPC resource
-	// namespace. For more information, see System Controls (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html)
+	// namespace. For more information, see System Controls (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	//
 	//    * For tasks that use the host IPC mode, IPC namespace related systemControls
@@ -142,7 +142,7 @@ type RegisterTaskDefinitionInput struct {
 	// If the network mode is awsvpc, the task is allocated an elastic network interface,
 	// and you must specify a NetworkConfiguration value when you create a service
 	// or run a task with the task definition. For more information, see Task Networking
-	// (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	//
 	// Currently, only Amazon ECS-optimized AMIs, other Amazon Linux variants with
@@ -190,12 +190,11 @@ type RegisterTaskDefinitionInput struct {
 	// ecs-init package to enable a proxy configuration. If your container instances
 	// are launched from the Amazon ECS-optimized AMI version 20190301 or later,
 	// then they contain the required versions of the container agent and ecs-init.
-	// For more information, see Amazon ECS-optimized Linux AMI (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
+	// For more information, see Amazon ECS-optimized Linux AMI (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	//
-	// This parameter is available for tasks using the Fargate launch type in the
-	// Ohio (us-east-2) region only and the task or service requires platform version
-	// 1.3.0 or later.
+	// For tasks using the Fargate launch type, the task or service requires platform
+	// version 1.3.0 or later.
 	ProxyConfiguration *ProxyConfiguration `locationName:"proxyConfiguration" type:"structure"`
 
 	// The launch type required by the task. If no value is specified, it defaults
@@ -302,7 +301,7 @@ const opRegisterTaskDefinition = "RegisterTaskDefinition"
 // in the Docker run reference. If you specify the awsvpc network mode, the
 // task is allocated an elastic network interface, and you must specify a NetworkConfiguration
 // when you create a service or run a task with the task definition. For more
-// information, see Task Networking (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
+// information, see Task Networking (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
 // in the Amazon Elastic Container Service Developer Guide.
 //
 //    // Example sending a request using RegisterTaskDefinitionRequest.

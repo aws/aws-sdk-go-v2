@@ -178,7 +178,8 @@ func (s BlueGreenDeploymentConfiguration) String() string {
 }
 
 // Information about whether instances in the original environment are terminated
-// when a blue/green deployment is successful.
+// when a blue/green deployment is successful. BlueInstanceTerminationOption
+// does not apply to Lambda deployments.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BlueInstanceTerminationOption
 type BlueInstanceTerminationOption struct {
 	_ struct{} `type:"structure"`
@@ -192,9 +193,14 @@ type BlueInstanceTerminationOption struct {
 	//    the load balancer and removed from the deployment group.
 	Action InstanceAction `locationName:"action" type:"string" enum:"true"`
 
-	// The number of minutes to wait after a successful blue/green deployment before
-	// terminating instances from the original environment. The maximum setting
-	// is 2880 minutes (2 days).
+	// For an Amazon EC2 deployment, the number of minutes to wait after a successful
+	// blue/green deployment before terminating instances from the original environment.
+	//
+	// For an Amazon ECS deployment, the number of minutes before deleting the original
+	// (blue) task set. During an Amazon ECS deployment, CodeDeploy shifts traffic
+	// from the original (blue) task set to a replacement (green) task set.
+	//
+	// The maximum setting is 2880 minutes (2 days).
 	TerminationWaitTimeInMinutes *int64 `locationName:"terminationWaitTimeInMinutes" type:"integer"`
 }
 

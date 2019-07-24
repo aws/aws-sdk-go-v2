@@ -67,7 +67,10 @@ func (s GetExportJobInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetExportJobOutput struct {
 	_ struct{} `type:"structure" payload:"ExportJobResponse"`
 
-	// Export job response.
+	// Provides information about the status and settings of a job that exports
+	// endpoint definitions to a file. The file can be added directly to an Amazon
+	// Simple Storage Service (Amazon S3) bucket by using the Amazon Pinpoint API
+	// or downloaded directly to a computer by using the Amazon Pinpoint console.
 	//
 	// ExportJobResponse is a required field
 	ExportJobResponse *ExportJobResponse `type:"structure" required:"true"`
@@ -94,7 +97,8 @@ const opGetExportJob = "GetExportJob"
 // GetExportJobRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Returns information about an export job.
+// Retrieves information about the status and settings of a specific export
+// job for an application.
 //
 //    // Example sending a request using GetExportJobRequest.
 //    req := client.GetExportJobRequest(params)

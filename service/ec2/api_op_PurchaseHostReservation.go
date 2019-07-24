@@ -13,9 +13,8 @@ import (
 type PurchaseHostReservationInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string `type:"string"`
 
 	// The currency in which the totalUpfrontPrice, LimitPrice, and totalHourlyPrice
@@ -68,9 +67,8 @@ func (s *PurchaseHostReservationInput) Validate() error {
 type PurchaseHostReservationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string `locationName:"clientToken" type:"string"`
 
 	// The currency in which the totalUpfrontPrice and totalHourlyPrice amounts

@@ -57,12 +57,12 @@ type CreateEndpointInput struct {
 	// EndpointIdentifier is a required field
 	EndpointIdentifier *string `type:"string" required:"true"`
 
-	// The type of endpoint.
+	// The type of endpoint. Valid values are source and target.
 	//
 	// EndpointType is a required field
 	EndpointType ReplicationEndpointTypeValue `type:"string" required:"true" enum:"true"`
 
-	// The type of engine for the endpoint. Valid values, depending on the EndPointType
+	// The type of engine for the endpoint. Valid values, depending on the EndpointType
 	// value, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql,
 	// redshift, s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.
 	//
@@ -72,7 +72,12 @@ type CreateEndpointInput struct {
 	// The external table definition.
 	ExternalTableDefinition *string `type:"string"`
 
-	// Additional attributes associated with the connection.
+	// Additional attributes associated with the connection. Each attribute is specified
+	// as a name-value pair associated by an equal sign (=). Multiple attributes
+	// are separated by a semicolon (;) with no additional white space. For information
+	// on the attributes available for connecting your source or target endpoint,
+	// see Working with AWS DMS Endpoints (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Endpoints.html)
+	// in the AWS Database Migration Service User Guide.
 	ExtraConnectionAttributes *string `type:"string"`
 
 	// Settings in JSON format for the target Amazon Kinesis Data Streams endpoint.
@@ -81,11 +86,14 @@ type CreateEndpointInput struct {
 	// in the AWS Database Migration User Guide.
 	KinesisSettings *KinesisSettings `type:"structure"`
 
-	// The AWS KMS key identifier to use to encrypt the connection parameters. If
-	// you don't specify a value for the KmsKeyId parameter, then AWS DMS uses your
-	// default encryption key. AWS KMS creates the default encryption key for your
-	// AWS account. Your AWS account has a different default encryption key for
-	// each AWS Region.
+	// An AWS KMS key identifier that is used to encrypt the connection parameters
+	// for the endpoint.
+	//
+	// If you don't specify a value for the KmsKeyId parameter, then AWS DMS uses
+	// your default encryption key.
+	//
+	// AWS KMS creates the default encryption key for your AWS account. Your AWS
+	// account has a different default encryption key for each AWS Region.
 	KmsKeyId *string `type:"string"`
 
 	// Settings in JSON format for the source MongoDB endpoint. For more information
@@ -115,12 +123,11 @@ type CreateEndpointInput struct {
 	// to use to create the endpoint.
 	ServiceAccessRoleArn *string `type:"string"`
 
-	// The Secure Sockets Layer (SSL) mode to use for the SSL connection. The SSL
-	// mode can be one of four values: none, require, verify-ca, verify-full. The
-	// default value is none.
+	// The Secure Sockets Layer (SSL) mode to use for the SSL connection. The default
+	// is none
 	SslMode DmsSslModeValue `type:"string" enum:"true"`
 
-	// Tags to be added to the endpoint.
+	// One or more tags to be assigned to the endpoint.
 	Tags []Tag `type:"list"`
 
 	// The user name to be used to log in to the endpoint database.

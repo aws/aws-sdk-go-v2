@@ -17,7 +17,9 @@ type UpdateGcmChannelInput struct {
 	// ApplicationId is a required field
 	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
 
-	// Google Cloud Messaging credentials
+	// Specifies the status and settings of the GCM channel for an application.
+	// This channel enables Amazon Pinpoint to send push notifications through the
+	// Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.
 	//
 	// GCMChannelRequest is a required field
 	GCMChannelRequest *GCMChannelRequest `type:"structure" required:"true"`
@@ -38,6 +40,11 @@ func (s *UpdateGcmChannelInput) Validate() error {
 
 	if s.GCMChannelRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GCMChannelRequest"))
+	}
+	if s.GCMChannelRequest != nil {
+		if err := s.GCMChannelRequest.Validate(); err != nil {
+			invalidParams.AddNested("GCMChannelRequest", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -69,7 +76,10 @@ func (s UpdateGcmChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateGcmChannelOutput struct {
 	_ struct{} `type:"structure" payload:"GCMChannelResponse"`
 
-	// Google Cloud Messaging channel definition
+	// Provides information about the status and settings of the GCM channel for
+	// an application. The GCM channel enables Amazon Pinpoint to send push notifications
+	// through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging
+	// (GCM), service.
 	//
 	// GCMChannelResponse is a required field
 	GCMChannelResponse *GCMChannelResponse `type:"structure" required:"true"`
@@ -96,7 +106,7 @@ const opUpdateGcmChannel = "UpdateGcmChannel"
 // UpdateGcmChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Use to update the GCM channel for an app.
+// Updates the status and settings of the GCM channel for an application.
 //
 //    // Example sending a request using UpdateGcmChannelRequest.
 //    req := client.UpdateGcmChannelRequest(params)

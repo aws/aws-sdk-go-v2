@@ -119,6 +119,9 @@ type AssociateHostedConnectionOutput struct {
 	// The AWS Region where the connection is located.
 	Region *string `locationName:"region" type:"string"`
 
+	// Any tags assigned to the connection.
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
+
 	// The ID of the VLAN.
 	Vlan *int64 `locationName:"vlan" type:"integer"`
 }

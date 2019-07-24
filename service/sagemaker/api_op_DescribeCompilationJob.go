@@ -116,7 +116,9 @@ type DescribeCompilationJobOutput struct {
 	// RoleArn is a required field
 	RoleArn *string `min:"20" type:"string" required:"true"`
 
-	// The duration allowed for model compilation.
+	// Specifies a limit to how long a model compilation job can run. When the job
+	// reaches the time limit, Amazon SageMaker ends the compilation job. Use this
+	// API to cap model training costs.
 	//
 	// StoppingCondition is a required field
 	StoppingCondition *StoppingCondition `type:"structure" required:"true"`

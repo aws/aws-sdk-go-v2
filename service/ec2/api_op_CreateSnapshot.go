@@ -62,7 +62,7 @@ type CreateSnapshotOutput struct {
 	// the original volume or snapshot copy. Because data encryption keys are inherited
 	// by volumes created from snapshots, and vice versa, if snapshots share the
 	// same data encryption key identifier, then they belong to the same volume/snapshot
-	// lineage. This parameter is only returned by the DescribeSnapshots API operation.
+	// lineage. This parameter is only returned by DescribeSnapshots.
 	DataEncryptionKeyId *string `locationName:"dataEncryptionKeyId" type:"string"`
 
 	// The description for the snapshot.
@@ -71,9 +71,9 @@ type CreateSnapshotOutput struct {
 	// Indicates whether the snapshot is encrypted.
 	Encrypted *bool `locationName:"encrypted" type:"boolean"`
 
-	// The full ARN of the AWS Key Management Service (AWS KMS) customer master
-	// key (CMK) that was used to protect the volume encryption key for the parent
-	// volume.
+	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
+	// customer master key (CMK) that was used to protect the volume encryption
+	// key for the parent volume.
 	KmsKeyId *string `locationName:"kmsKeyId" type:"string"`
 
 	// Value from an Amazon-maintained list (amazon | self | all | aws-marketplace
@@ -101,7 +101,7 @@ type CreateSnapshotOutput struct {
 	// operation fails (for example, if the proper AWS Key Management Service (AWS
 	// KMS) permissions are not obtained) this field displays error state details
 	// to help you diagnose why the error occurred. This parameter is only returned
-	// by the DescribeSnapshots API operation.
+	// by DescribeSnapshots.
 	StateMessage *string `locationName:"statusMessage" type:"string"`
 
 	// Any tags assigned to the snapshot.

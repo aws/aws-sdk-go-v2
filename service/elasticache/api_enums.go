@@ -55,6 +55,44 @@ func (enum ChangeType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type NodeUpdateInitiatedBy string
+
+// Enum values for NodeUpdateInitiatedBy
+const (
+	NodeUpdateInitiatedBySystem   NodeUpdateInitiatedBy = "system"
+	NodeUpdateInitiatedByCustomer NodeUpdateInitiatedBy = "customer"
+)
+
+func (enum NodeUpdateInitiatedBy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NodeUpdateInitiatedBy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type NodeUpdateStatus string
+
+// Enum values for NodeUpdateStatus
+const (
+	NodeUpdateStatusNotApplied     NodeUpdateStatus = "not-applied"
+	NodeUpdateStatusWaitingToStart NodeUpdateStatus = "waiting-to-start"
+	NodeUpdateStatusInProgress     NodeUpdateStatus = "in-progress"
+	NodeUpdateStatusStopping       NodeUpdateStatus = "stopping"
+	NodeUpdateStatusStopped        NodeUpdateStatus = "stopped"
+	NodeUpdateStatusComplete       NodeUpdateStatus = "complete"
+)
+
+func (enum NodeUpdateStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NodeUpdateStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PendingAutomaticFailoverStatus string
 
 // Enum values for PendingAutomaticFailoverStatus
@@ -68,6 +106,77 @@ func (enum PendingAutomaticFailoverStatus) MarshalValue() (string, error) {
 }
 
 func (enum PendingAutomaticFailoverStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ServiceUpdateSeverity string
+
+// Enum values for ServiceUpdateSeverity
+const (
+	ServiceUpdateSeverityCritical  ServiceUpdateSeverity = "critical"
+	ServiceUpdateSeverityImportant ServiceUpdateSeverity = "important"
+	ServiceUpdateSeverityMedium    ServiceUpdateSeverity = "medium"
+	ServiceUpdateSeverityLow       ServiceUpdateSeverity = "low"
+)
+
+func (enum ServiceUpdateSeverity) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ServiceUpdateSeverity) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ServiceUpdateStatus string
+
+// Enum values for ServiceUpdateStatus
+const (
+	ServiceUpdateStatusAvailable ServiceUpdateStatus = "available"
+	ServiceUpdateStatusCancelled ServiceUpdateStatus = "cancelled"
+	ServiceUpdateStatusExpired   ServiceUpdateStatus = "expired"
+)
+
+func (enum ServiceUpdateStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ServiceUpdateStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ServiceUpdateType string
+
+// Enum values for ServiceUpdateType
+const (
+	ServiceUpdateTypeSecurityUpdate ServiceUpdateType = "security-update"
+)
+
+func (enum ServiceUpdateType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ServiceUpdateType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SlaMet string
+
+// Enum values for SlaMet
+const (
+	SlaMetYes SlaMet = "yes"
+	SlaMetNo  SlaMet = "no"
+	SlaMetNA  SlaMet = "n/a"
+)
+
+func (enum SlaMet) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SlaMet) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -88,6 +197,27 @@ func (enum SourceType) MarshalValue() (string, error) {
 }
 
 func (enum SourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type UpdateActionStatus string
+
+// Enum values for UpdateActionStatus
+const (
+	UpdateActionStatusNotApplied     UpdateActionStatus = "not-applied"
+	UpdateActionStatusWaitingToStart UpdateActionStatus = "waiting-to-start"
+	UpdateActionStatusInProgress     UpdateActionStatus = "in-progress"
+	UpdateActionStatusStopping       UpdateActionStatus = "stopping"
+	UpdateActionStatusStopped        UpdateActionStatus = "stopped"
+	UpdateActionStatusComplete       UpdateActionStatus = "complete"
+)
+
+func (enum UpdateActionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UpdateActionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

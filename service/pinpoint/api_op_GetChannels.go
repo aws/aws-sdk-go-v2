@@ -54,7 +54,8 @@ func (s GetChannelsInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetChannelsOutput struct {
 	_ struct{} `type:"structure" payload:"ChannelsResponse"`
 
-	// Get channels definition
+	// Provides information about the general settings and status of all channels
+	// for an application, including channels that aren't enabled for the application.
 	//
 	// ChannelsResponse is a required field
 	ChannelsResponse *ChannelsResponse `type:"structure" required:"true"`
@@ -81,7 +82,8 @@ const opGetChannels = "GetChannels"
 // GetChannelsRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Get all channels.
+// Retrieves information about the history and status of each channel for an
+// application.
 //
 //    // Example sending a request using GetChannelsRequest.
 //    req := client.GetChannelsRequest(params)

@@ -83,7 +83,7 @@ const opGetInsightResults = "GetInsightResults"
 // GetInsightResultsRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Lists the results of the Security Hub insight specified by the insight ARN.
+// Lists the results of the Security Hub insight that the insight ARN specifies.
 //
 //    // Example sending a request using GetInsightResultsRequest.
 //    req := client.GetInsightResultsRequest(params)

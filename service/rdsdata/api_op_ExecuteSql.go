@@ -10,28 +10,34 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Execute SQL Request
+// The request parameters represent the input of a request to run one or more
+// SQL statements.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ExecuteSqlRequest
 type ExecuteSqlInput struct {
 	_ struct{} `type:"structure"`
 
-	// ARN of the db credentials in AWS Secret Store or the friendly secret name
+	// The Amazon Resource Name (ARN) of the secret that enables access to the DB
+	// cluster.
 	//
 	// AwsSecretStoreArn is a required field
 	AwsSecretStoreArn *string `locationName:"awsSecretStoreArn" type:"string" required:"true"`
 
-	// Target DB name
+	// The name of the database.
 	Database *string `locationName:"database" type:"string"`
 
-	// ARN of the target db cluster or instance
+	// The ARN of the Aurora Serverless DB cluster.
 	//
 	// DbClusterOrInstanceArn is a required field
 	DbClusterOrInstanceArn *string `locationName:"dbClusterOrInstanceArn" type:"string" required:"true"`
 
-	// Target Schema name
+	// The name of the database schema.
 	Schema *string `locationName:"schema" type:"string"`
 
-	// SQL statement(s) to be executed. Statements can be chained by using semicolons
+	// One or more SQL statements to run on the DB cluster.
+	//
+	// You can separate SQL statements from each other with a semicolon (;). Any
+	// valid SQL statement is permitted, including data definition, data manipulation,
+	// and commit statements.
 	//
 	// SqlStatements is a required field
 	SqlStatements *string `locationName:"sqlStatements" type:"string" required:"true"`
@@ -101,15 +107,14 @@ func (s ExecuteSqlInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Execute SQL response
+// The response elements represent the output of a request to run one or more
+// SQL statements.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ExecuteSqlResponse
 type ExecuteSqlOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Results returned by executing the sql statement(s)
-	//
-	// SqlStatementResults is a required field
-	SqlStatementResults []SqlStatementResult `locationName:"sqlStatementResults" type:"list" required:"true"`
+	// The results of the SQL statement or statements.
+	SqlStatementResults []SqlStatementResult `locationName:"sqlStatementResults" type:"list"`
 }
 
 // String returns the string representation
@@ -139,7 +144,10 @@ const opExecuteSql = "ExecuteSql"
 // ExecuteSqlRequest returns a request value for making API operation for
 // AWS RDS DataService.
 //
-// Executes any SQL statement on the target database synchronously
+// Runs one or more SQL statements.
+//
+// This operation is deprecated. Use the BatchExecuteStatement or ExecuteStatement
+// operation.
 //
 //    // Example sending a request using ExecuteSqlRequest.
 //    req := client.ExecuteSqlRequest(params)
@@ -150,6 +158,9 @@ const opExecuteSql = "ExecuteSql"
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ExecuteSql
 func (c *Client) ExecuteSqlRequest(input *ExecuteSqlInput) ExecuteSqlRequest {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ExecuteSql, has been deprecated")
+	}
 	op := &aws.Operation{
 		Name:       opExecuteSql,
 		HTTPMethod: "POST",

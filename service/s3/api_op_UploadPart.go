@@ -27,7 +27,9 @@ type UploadPartInput struct {
 	// body cannot be determined automatically.
 	ContentLength *int64 `location:"header" locationName:"Content-Length" type:"long"`
 
-	// The base64-encoded 128-bit MD5 digest of the part data.
+	// The base64-encoded 128-bit MD5 digest of the part data. This parameter is
+	// auto-populated when using the command from the CLI. This parameted is required
+	// if object lock parameters are specified.
 	ContentMD5 *string `location:"header" locationName:"Content-MD5" type:"string"`
 
 	// Object key for which the multipart upload was initiated.

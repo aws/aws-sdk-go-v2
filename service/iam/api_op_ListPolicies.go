@@ -45,7 +45,7 @@ type ListPoliciesInput struct {
 	// can contain any ASCII character from the ! (\u0021) through the DEL character
 	// (\u007F), including most punctuation characters, digits, and upper and lowercased
 	// letters.
-	PathPrefix *string `type:"string"`
+	PathPrefix *string `min:"1" type:"string"`
 
 	// The policy usage method to use for filtering the results.
 	//
@@ -79,6 +79,9 @@ func (s *ListPoliciesInput) Validate() error {
 	}
 	if s.MaxItems != nil && *s.MaxItems < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
+	}
+	if s.PathPrefix != nil && len(*s.PathPrefix) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("PathPrefix", 1))
 	}
 
 	if invalidParams.Len() > 0 {

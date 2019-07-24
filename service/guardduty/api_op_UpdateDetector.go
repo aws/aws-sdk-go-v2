@@ -10,13 +10,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Update Detector Request
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetectorRequest
 type UpdateDetectorInput struct {
 	_ struct{} `type:"structure"`
 
+	// The unique ID of the detector that you want to update.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
 	// Updated boolean value for the detector that specifies whether the detector
 	// is enabled.
@@ -37,6 +38,9 @@ func (s *UpdateDetectorInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
 	}
 
 	if invalidParams.Len() > 0 {

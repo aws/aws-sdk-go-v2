@@ -17,7 +17,7 @@ type ListPartsInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon Glacier uses the AWS account ID associated with the
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -110,7 +110,7 @@ func (s ListPartsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains the Amazon Glacier response to your request.
+// Contains the Amazon S3 Glacier response to your request.
 type ListPartsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -223,11 +223,11 @@ const opListParts = "ListParts"
 // AWS Identity and Access Management (IAM) users don't have any permissions
 // by default. You must grant them explicit permission to perform specific actions.
 // For more information, see Access Control Using AWS Identity and Access Management
-// (IAM) (http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
+// (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
 //
 // For conceptual information and the underlying REST API, see Working with
-// Archives in Amazon Glacier (http://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html)
-// and List Parts (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-list-parts.html)
+// Archives in Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html)
+// and List Parts (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-list-parts.html)
 // in the Amazon Glacier Developer Guide.
 //
 //    // Example sending a request using ListPartsRequest.

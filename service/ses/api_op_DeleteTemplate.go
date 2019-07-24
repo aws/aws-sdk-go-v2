@@ -10,7 +10,7 @@ import (
 )
 
 // Represents a request to delete an email template. For more information, see
-// the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
+// the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteTemplateRequest
 type DeleteTemplateInput struct {
 	_ struct{} `type:"structure"`

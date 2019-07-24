@@ -87,11 +87,11 @@ func (s ASN1Subject) String() string {
 // private CA can issue and revoke X.509 digital certificates. Digital certificates
 // verify that the entity named in the certificate Subject field owns or controls
 // the public key contained in the Subject Public Key Info field. Call the CreateCertificateAuthority
-// operation to create your private CA. You must then call the GetCertificateAuthorityCertificate
-// operation to retrieve a private CA certificate signing request (CSR). Take
-// the CSR to your on-premises CA and sign it with the root CA certificate or
-// a subordinate certificate. Call the ImportCertificateAuthorityCertificate
-// operation to import the signed certificate into AWS Certificate Manager (ACM).
+// action to create your private CA. You must then call the GetCertificateAuthorityCertificate
+// action to retrieve a private CA certificate signing request (CSR). Sign the
+// CSR with your ACM Private CA-hosted or on-premises root or subordinate CA
+// certificate. Call the ImportCertificateAuthorityCertificate action to import
+// the signed certificate into AWS Certificate Manager (ACM).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CertificateAuthority
 type CertificateAuthority struct {
 	_ struct{} `type:"structure"`
@@ -120,7 +120,7 @@ type CertificateAuthority struct {
 
 	// The period during which a deleted CA can be restored. For more information,
 	// see the PermanentDeletionTimeInDays parameter of the DeleteCertificateAuthorityRequest
-	// operation.
+	// action.
 	RestorableUntil *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// Information about the certificate revocation list (CRL) created and maintained
@@ -147,13 +147,14 @@ func (s CertificateAuthority) String() string {
 // the key pair that your private CA creates when it issues a certificate. It
 // also includes the signature algorithm that it uses when issuing certificates,
 // and its X.500 distinguished name. You must specify this information when
-// you call the CreateCertificateAuthority operation.
+// you call the CreateCertificateAuthority action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CertificateAuthorityConfiguration
 type CertificateAuthorityConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// Type of the public key algorithm and size, in bits, of the key pair that
-	// your key pair creates when it issues a certificate.
+	// your CA creates when it issues a certificate. When you create a subordinate
+	// CA, you must use a key algorithm supported by the parent CA.
 	//
 	// KeyAlgorithm is a required field
 	KeyAlgorithm KeyAlgorithm `type:"string" required:"true" enum:"true"`
@@ -203,7 +204,7 @@ func (s *CertificateAuthorityConfiguration) Validate() error {
 // the name of your bucket by specifying a value for the CustomCname parameter.
 // Your private CA copies the CNAME or the S3 bucket name to the CRL Distribution
 // Points extension of each certificate it issues. Your S3 bucket policy must
-// give write permission to ACM PCA.
+// give write permission to ACM Private CA.
 //
 // Your private CA uses the value in the ExpirationInDays parameter to calculate
 // the nextUpdate field in the CRL. The CRL is refreshed at 1/2 the age of next
@@ -241,8 +242,8 @@ func (s *CertificateAuthorityConfiguration) Validate() error {
 //
 //    * Signature Value: Signature computed over the CRL.
 //
-// Certificate revocation lists created by ACM PCA are DER-encoded. You can
-// use the following OpenSSL command to list a CRL.
+// Certificate revocation lists created by ACM Private CA are DER-encoded. You
+// can use the following OpenSSL command to list a CRL.
 //
 // openssl crl -inform DER -text -in crl_path -noout
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CrlConfiguration
@@ -256,8 +257,8 @@ type CrlConfiguration struct {
 
 	// Boolean value that specifies whether certificate revocation lists (CRLs)
 	// are enabled. You can use this value to enable certificate revocation for
-	// a new CA when you call the CreateCertificateAuthority operation or for an
-	// existing CA when you call the UpdateCertificateAuthority operation.
+	// a new CA when you call the CreateCertificateAuthority action or for an existing
+	// CA when you call the UpdateCertificateAuthority action.
 	//
 	// Enabled is a required field
 	Enabled *bool `type:"boolean" required:"true"`
@@ -268,9 +269,9 @@ type CrlConfiguration struct {
 	// Name of the S3 bucket that contains the CRL. If you do not provide a value
 	// for the CustomCname argument, the name of your S3 bucket is placed into the
 	// CRL Distribution Points extension of the issued certificate. You can change
-	// the name of your bucket by calling the UpdateCertificateAuthority operation.
-	// You must specify a bucket policy that allows ACM PCA to write the CRL to
-	// your bucket.
+	// the name of your bucket by calling the UpdateCertificateAuthority action.
+	// You must specify a bucket policy that allows ACM Private CA to write the
+	// CRL to your bucket.
 	S3BucketName *string `min:"3" type:"string"`
 }
 
@@ -299,17 +300,17 @@ func (s *CrlConfiguration) Validate() error {
 	return nil
 }
 
-// Permissions designate which private CA operations can be performed by an
-// AWS service or entity. In order for ACM to automatically renew private certificates,
+// Permissions designate which private CA actions can be performed by an AWS
+// service or entity. In order for ACM to automatically renew private certificates,
 // you must give the ACM service principal all available permissions (IssueCertificate,
 // GetCertificate, and ListPermissions). Permissions can be assigned with the
-// CreatePermission operation, removed with the DeletePermission operation,
-// and listed with the ListPermissions operation.
+// CreatePermission action, removed with the DeletePermission action, and listed
+// with the ListPermissions action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/Permission
 type Permission struct {
 	_ struct{} `type:"structure"`
 
-	// The private CA operations that can be performed by the designated AWS service.
+	// The private CA actions that can be performed by the designated AWS service.
 	Actions []ActionType `min:"1" type:"list"`
 
 	// The Amazon Resource Number (ARN) of the private CA from which the permission
@@ -336,7 +337,7 @@ func (s Permission) String() string {
 }
 
 // Certificate revocation information used by the CreateCertificateAuthority
-// and UpdateCertificateAuthority operations. Your private certificate authority
+// and UpdateCertificateAuthority actions. Your private certificate authority
 // (CA) can create and maintain a certificate revocation list (CRL). A CRL contains
 // information about certificates revoked by your CA. For more information,
 // see RevokeCertificate.
@@ -372,8 +373,8 @@ func (s *RevocationConfiguration) Validate() error {
 // Tags are labels that you can use to identify and organize your private CAs.
 // Each tag consists of a key and an optional value. You can associate up to
 // 50 tags with a private CA. To add one or more tags to a private CA, call
-// the TagCertificateAuthority operation. To remove a tag, call the UntagCertificateAuthority
-// operation.
+// the TagCertificateAuthority action. To remove a tag, call the UntagCertificateAuthority
+// action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
@@ -411,7 +412,7 @@ func (s *Tag) Validate() error {
 
 // Length of time for which the certificate issued by your private certificate
 // authority (CA), or by the private CA itself, is valid in days, months, or
-// years. You can issue a certificate by calling the IssueCertificate operation.
+// years. You can issue a certificate by calling the IssueCertificate action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/Validity
 type Validity struct {
 	_ struct{} `type:"structure"`

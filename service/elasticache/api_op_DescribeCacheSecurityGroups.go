@@ -62,6 +62,7 @@ const opDescribeCacheSecurityGroups = "DescribeCacheSecurityGroups"
 //
 // Returns a list of cache security group descriptions. If a cache security
 // group name is specified, the list contains only the description of that group.
+// This applicable only when you have ElastiCache in Classic setup
 //
 //    // Example sending a request using DescribeCacheSecurityGroupsRequest.
 //    req := client.DescribeCacheSecurityGroupsRequest(params)

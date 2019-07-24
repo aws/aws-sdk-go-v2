@@ -121,7 +121,7 @@ const opCreateVpcEndpoint = "CreateVpcEndpoint"
 // Creates a VPC endpoint for a specified service. An endpoint enables you to
 // create a private connection between your VPC and the service. The service
 // may be provided by AWS, an AWS Marketplace partner, or another AWS account.
-// For more information, see VPC Endpoints (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-endpoints.html)
+// For more information, see VPC Endpoints (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html)
 // in the Amazon Virtual Private Cloud User Guide.
 //
 // A gateway endpoint serves as a target for a route in your route table for

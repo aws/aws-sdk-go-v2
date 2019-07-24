@@ -39,6 +39,80 @@ func (s AlarmHistoryItem) String() string {
 	return awsutil.Prettify(s)
 }
 
+// An anomaly detection model associated with a particular CloudWatch metric
+// athresnd statistic. You can use the model to display a band of expected normal
+// values when the metric is graphed.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/AnomalyDetector
+type AnomalyDetector struct {
+	_ struct{} `type:"structure"`
+
+	// The configuration specifies details about how the anomaly detection model
+	// is to be trained, including time ranges to exclude from use for training
+	// the model, and the time zone to use for the metric.
+	Configuration *AnomalyDetectorConfiguration `type:"structure"`
+
+	// The metric dimensions associated with the anomaly detection model.
+	Dimensions []Dimension `type:"list"`
+
+	// The name of the metric associated with the anomaly detection model.
+	MetricName *string `min:"1" type:"string"`
+
+	// The namespace of the metric associated with the anomaly detection model.
+	Namespace *string `min:"1" type:"string"`
+
+	// The statistic associated with the anomaly detection model.
+	Stat *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AnomalyDetector) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The configuration specifies details about how the anomaly detection model
+// is to be trained, including time ranges to exclude from use for training
+// the model and the time zone to use for the metric.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/AnomalyDetectorConfiguration
+type AnomalyDetectorConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// An array of time ranges to exclude from use when the anomaly detection model
+	// is trained. Use this to make sure that events that could cause unusual values
+	// for the metric, such as deployments, aren't used when CloudWatch creates
+	// the model.
+	ExcludedTimeRanges []Range `type:"list"`
+
+	// The time zone to use for the metric. This is useful to enable the model to
+	// automatically account for daylight savings time changes if the metric is
+	// sensitive to such time changes.
+	//
+	// To specify a time zone, use the name of the time zone as specified in the
+	// standard tz database. For more information, see tz database (https://en.wikipedia.org/wiki/Tz_database).
+	MetricTimezone *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AnomalyDetectorConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AnomalyDetectorConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AnomalyDetectorConfiguration"}
+	if s.ExcludedTimeRanges != nil {
+		for i, v := range s.ExcludedTimeRanges {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ExcludedTimeRanges", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Represents a specific dashboard.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DashboardEntry
 type DashboardEntry struct {
@@ -314,9 +388,15 @@ type MetricAlarm struct {
 	// Name (ARN).
 	InsufficientDataActions []string `type:"list"`
 
-	// The name of the metric associated with the alarm.
+	// The name of the metric associated with the alarm, if this is an alarm based
+	// on a single metric.
 	MetricName *string `min:"1" type:"string"`
 
+	// An array of MetricDataQuery structures, used in an alarm based on a metric
+	// math expression. Each structure either retrieves a metric or performs a math
+	// expression. One item in the Metrics array is the math expression that the
+	// alarm watches. This expression by designated by having ReturnValue set to
+	// true.
 	Metrics []MetricDataQuery `type:"list"`
 
 	// The namespace of the metric associated with the alarm.
@@ -347,6 +427,10 @@ type MetricAlarm struct {
 
 	// The value to compare with the specified statistic.
 	Threshold *float64 `type:"double"`
+
+	// In an alarm based on an anomaly detection model, this is the ID of the ANOMALY_DETECTION_BAND
+	// function used as the threshold for the alarm.
+	ThresholdMetricId *string `min:"1" type:"string"`
 
 	// Sets how this alarm is to handle missing data points. If this parameter is
 	// omitted, the default behavior of missing is used.
@@ -547,7 +631,9 @@ type MetricDatum struct {
 	// since Jan 1, 1970 00:00:00 UTC.
 	Timestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
-	// The unit of the metric.
+	// When you are using a Put operation, this defines what unit you want to use
+	// when storing the metric. In a Get operation, this displays the unit that
+	// is used for the metric.
 	Unit StandardUnit `type:"string" enum:"true"`
 
 	// The value for the metric.
@@ -632,7 +718,9 @@ type MetricStat struct {
 	// Stat is a required field
 	Stat *string `type:"string" required:"true"`
 
-	// The unit to use for the returned data points.
+	// When you are using a Put operation, this defines what unit you want to use
+	// when storing the metric. In a Get operation, this displays the unit that
+	// is used for the metric.
 	Unit StandardUnit `type:"string" enum:"true"`
 }
 
@@ -663,6 +751,48 @@ func (s *MetricStat) Validate() error {
 		if err := s.Metric.Validate(); err != nil {
 			invalidParams.AddNested("Metric", err.(aws.ErrInvalidParams))
 		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Specifies one range of days or times to exclude from use for training an
+// anomaly detection model.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/Range
+type Range struct {
+	_ struct{} `type:"structure"`
+
+	// The end time of the range to exclude. The format is yyyy-MM-dd'T'HH:mm:ss.
+	// For example, 2019-07-01T23:59:59.
+	//
+	// EndTime is a required field
+	EndTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+
+	// The start time of the range to exclude. The format is yyyy-MM-dd'T'HH:mm:ss.
+	// For example, 2019-07-01T23:59:59.
+	//
+	// StartTime is a required field
+	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+}
+
+// String returns the string representation
+func (s Range) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Range) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Range"}
+
+	if s.EndTime == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EndTime"))
+	}
+
+	if s.StartTime == nil {
+		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
 	}
 
 	if invalidParams.Len() > 0 {

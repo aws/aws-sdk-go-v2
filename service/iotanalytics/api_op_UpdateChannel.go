@@ -20,6 +20,9 @@ type UpdateChannelInput struct {
 	// ChannelName is a required field
 	ChannelName *string `location:"uri" locationName:"channelName" min:"1" type:"string" required:"true"`
 
+	// Where channel data is stored.
+	ChannelStorage *ChannelStorage `locationName:"channelStorage" type:"structure"`
+
 	// How long, in days, message data is kept for the channel.
 	RetentionPeriod *RetentionPeriod `locationName:"retentionPeriod" type:"structure"`
 }
@@ -39,6 +42,11 @@ func (s *UpdateChannelInput) Validate() error {
 	if s.ChannelName != nil && len(*s.ChannelName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChannelName", 1))
 	}
+	if s.ChannelStorage != nil {
+		if err := s.ChannelStorage.Validate(); err != nil {
+			invalidParams.AddNested("ChannelStorage", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.RetentionPeriod != nil {
 		if err := s.RetentionPeriod.Validate(); err != nil {
 			invalidParams.AddNested("RetentionPeriod", err.(aws.ErrInvalidParams))
@@ -54,6 +62,12 @@ func (s *UpdateChannelInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 
+	if s.ChannelStorage != nil {
+		v := s.ChannelStorage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "channelStorage", v, metadata)
+	}
 	if s.RetentionPeriod != nil {
 		v := s.RetentionPeriod
 

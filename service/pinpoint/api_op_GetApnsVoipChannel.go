@@ -54,7 +54,8 @@ func (s GetApnsVoipChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetApnsVoipChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSVoipChannelResponse"`
 
-	// Apple VoIP Push Notification Service channel definition.
+	// Provides information about the status and settings of the APNs (Apple Push
+	// Notification service) VoIP channel for an application.
 	//
 	// APNSVoipChannelResponse is a required field
 	APNSVoipChannelResponse *APNSVoipChannelResponse `type:"structure" required:"true"`
@@ -81,7 +82,8 @@ const opGetApnsVoipChannel = "GetApnsVoipChannel"
 // GetApnsVoipChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Get an APNS VoIP channel
+// Retrieves information about the status and settings of the APNs VoIP channel
+// for an application.
 //
 //    // Example sending a request using GetApnsVoipChannelRequest.
 //    req := client.GetApnsVoipChannelRequest(params)

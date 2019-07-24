@@ -10,7 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListFieldLevelEncryptionProfilesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListFieldLevelEncryptionProfilesRequest
 type ListFieldLevelEncryptionProfilesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +49,7 @@ func (s ListFieldLevelEncryptionProfilesInput) MarshalFields(e protocol.FieldEnc
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListFieldLevelEncryptionProfilesResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListFieldLevelEncryptionProfilesResult
 type ListFieldLevelEncryptionProfilesOutput struct {
 	_ struct{} `type:"structure" payload:"FieldLevelEncryptionProfileList"`
 
@@ -74,7 +74,7 @@ func (s ListFieldLevelEncryptionProfilesOutput) MarshalFields(e protocol.FieldEn
 	return nil
 }
 
-const opListFieldLevelEncryptionProfiles = "ListFieldLevelEncryptionProfiles2018_11_05"
+const opListFieldLevelEncryptionProfiles = "ListFieldLevelEncryptionProfiles2019_03_26"
 
 // ListFieldLevelEncryptionProfilesRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -89,12 +89,12 @@ const opListFieldLevelEncryptionProfiles = "ListFieldLevelEncryptionProfiles2018
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListFieldLevelEncryptionProfiles
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListFieldLevelEncryptionProfiles
 func (c *Client) ListFieldLevelEncryptionProfilesRequest(input *ListFieldLevelEncryptionProfilesInput) ListFieldLevelEncryptionProfilesRequest {
 	op := &aws.Operation{
 		Name:       opListFieldLevelEncryptionProfiles,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2018-11-05/field-level-encryption-profile",
+		HTTPPath:   "/2019-03-26/field-level-encryption-profile",
 	}
 
 	if input == nil {

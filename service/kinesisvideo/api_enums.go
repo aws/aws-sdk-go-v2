@@ -6,11 +6,12 @@ type APIName string
 
 // Enum values for APIName
 const (
-	APINamePutMedia                  APIName = "PUT_MEDIA"
-	APINameGetMedia                  APIName = "GET_MEDIA"
-	APINameListFragments             APIName = "LIST_FRAGMENTS"
-	APINameGetMediaForFragmentList   APIName = "GET_MEDIA_FOR_FRAGMENT_LIST"
-	APINameGetHlsStreamingSessionUrl APIName = "GET_HLS_STREAMING_SESSION_URL"
+	APINamePutMedia                   APIName = "PUT_MEDIA"
+	APINameGetMedia                   APIName = "GET_MEDIA"
+	APINameListFragments              APIName = "LIST_FRAGMENTS"
+	APINameGetMediaForFragmentList    APIName = "GET_MEDIA_FOR_FRAGMENT_LIST"
+	APINameGetHlsStreamingSessionUrl  APIName = "GET_HLS_STREAMING_SESSION_URL"
+	APINameGetDashStreamingSessionUrl APIName = "GET_DASH_STREAMING_SESSION_URL"
 )
 
 func (enum APIName) MarshalValue() (string, error) {

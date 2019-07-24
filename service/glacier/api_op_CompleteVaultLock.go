@@ -111,7 +111,7 @@ const opCompleteVaultLock = "CompleteVaultLock"
 // lock policy to become unchangeable. A vault lock is put into the InProgress
 // state by calling InitiateVaultLock. You can obtain the state of the vault
 // lock by calling GetVaultLock. For more information about the vault locking
-// process, Amazon Glacier Vault Lock (http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html).
+// process, Amazon Glacier Vault Lock (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html).
 //
 // This operation is idempotent. This request is always successful if the vault
 // lock is in the Locked state and the provided lock ID matches the lock ID

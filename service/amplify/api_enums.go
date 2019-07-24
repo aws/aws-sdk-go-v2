@@ -6,11 +6,14 @@ type DomainStatus string
 
 // Enum values for DomainStatus
 const (
-	DomainStatusPendingVerification DomainStatus = "PENDING_VERIFICATION"
-	DomainStatusInProgress          DomainStatus = "IN_PROGRESS"
-	DomainStatusAvailable           DomainStatus = "AVAILABLE"
-	DomainStatusPendingDeployment   DomainStatus = "PENDING_DEPLOYMENT"
-	DomainStatusFailed              DomainStatus = "FAILED"
+	DomainStatusPendingVerification   DomainStatus = "PENDING_VERIFICATION"
+	DomainStatusInProgress            DomainStatus = "IN_PROGRESS"
+	DomainStatusAvailable             DomainStatus = "AVAILABLE"
+	DomainStatusPendingDeployment     DomainStatus = "PENDING_DEPLOYMENT"
+	DomainStatusFailed                DomainStatus = "FAILED"
+	DomainStatusCreating              DomainStatus = "CREATING"
+	DomainStatusRequestingCertificate DomainStatus = "REQUESTING_CERTIFICATE"
+	DomainStatusUpdating              DomainStatus = "UPDATING"
 )
 
 func (enum DomainStatus) MarshalValue() (string, error) {
@@ -50,6 +53,7 @@ type JobType string
 const (
 	JobTypeRelease JobType = "RELEASE"
 	JobTypeRetry   JobType = "RETRY"
+	JobTypeManual  JobType = "MANUAL"
 	JobTypeWebHook JobType = "WEB_HOOK"
 )
 
@@ -66,10 +70,7 @@ type Platform string
 
 // Enum values for Platform
 const (
-	PlatformIos         Platform = "IOS"
-	PlatformAndroid     Platform = "ANDROID"
-	PlatformWeb         Platform = "WEB"
-	PlatformReactNative Platform = "REACT_NATIVE"
+	PlatformWeb Platform = "WEB"
 )
 
 func (enum Platform) MarshalValue() (string, error) {

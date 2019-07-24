@@ -14,8 +14,8 @@ import (
 type DescribeMaintenanceWindowScheduleInput struct {
 	_ struct{} `type:"structure"`
 
-	// Filters used to limit the range of results. For example, you can limit Maintenance
-	// Window executions to only those scheduled before or after a certain date
+	// Filters used to limit the range of results. For example, you can limit maintenance
+	// window executions to only those scheduled before or after a certain date
 	// and time.
 	Filters []PatchOrchestratorFilter `type:"list"`
 
@@ -35,7 +35,7 @@ type DescribeMaintenanceWindowScheduleInput struct {
 	// The instance ID or key/value pair to retrieve information about.
 	Targets []Target `type:"list"`
 
-	// The ID of the Maintenance Window to retrieve information about.
+	// The ID of the maintenance window to retrieve information about.
 	WindowId *string `min:"20" type:"string"`
 }
 
@@ -82,7 +82,7 @@ type DescribeMaintenanceWindowScheduleOutput struct {
 	// next call.)
 	NextToken *string `type:"string"`
 
-	// Information about Maintenance Window executions scheduled for the specified
+	// Information about maintenance window executions scheduled for the specified
 	// time range.
 	ScheduledWindowExecutions []ScheduledWindowExecution `type:"list"`
 }
@@ -97,7 +97,7 @@ const opDescribeMaintenanceWindowSchedule = "DescribeMaintenanceWindowSchedule"
 // DescribeMaintenanceWindowScheduleRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Retrieves information about upcoming executions of a Maintenance Window.
+// Retrieves information about upcoming executions of a maintenance window.
 //
 //    // Example sending a request using DescribeMaintenanceWindowScheduleRequest.
 //    req := client.DescribeMaintenanceWindowScheduleRequest(params)

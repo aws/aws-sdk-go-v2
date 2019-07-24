@@ -14,9 +14,6 @@ import (
 type RebuildWorkspacesInput struct {
 	_ struct{} `type:"structure"`
 
-	// Reserved.
-	AdditionalInfo *string `type:"string"`
-
 	// The WorkSpace to rebuild. You can specify a single WorkSpace.
 	//
 	// RebuildWorkspaceRequests is a required field

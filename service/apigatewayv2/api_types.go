@@ -88,6 +88,9 @@ type Api struct {
 	// RouteSelectionExpression is a required field
 	RouteSelectionExpression *string `locationName:"routeSelectionExpression" type:"string" required:"true"`
 
+	// Tags for the API.
+	Tags map[string]string `locationName:"tags" type:"map"`
+
 	// A version identifier for the API.
 	Version *string `locationName:"version" type:"string"`
 
@@ -156,6 +159,18 @@ func (s Api) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "routeSelectionExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	if s.Version != nil {
 		v := *s.Version
@@ -449,6 +464,9 @@ type DomainName struct {
 
 	// The domain name configurations.
 	DomainNameConfigurations []DomainNameConfiguration `locationName:"domainNameConfigurations" type:"list"`
+
+	// Tags for the DomainName.
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -482,6 +500,18 @@ func (s DomainName) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	return nil
 }
 
@@ -505,11 +535,25 @@ type DomainNameConfiguration struct {
 	// for this domain name was uploaded.
 	CertificateUploadDate *time.Time `locationName:"certificateUploadDate" type:"timestamp" timestampFormat:"unix"`
 
+	// The status of the domain name migration. The valid values are AVAILABLE and
+	// UPDATING. If the status is UPDATING, the domain cannot be modified further
+	// until the existing operation is complete. If it is AVAILABLE, the domain
+	// can be updated.
+	DomainNameStatus DomainNameStatus `locationName:"domainNameStatus" type:"string" enum:"true"`
+
+	// An optional text message containing detailed information about status of
+	// the domain name migration.
+	DomainNameStatusMessage *string `locationName:"domainNameStatusMessage" type:"string"`
+
 	// The endpoint type.
 	EndpointType EndpointType `locationName:"endpointType" type:"string" enum:"true"`
 
 	// The Amazon Route 53 Hosted Zone ID of the endpoint.
 	HostedZoneId *string `locationName:"hostedZoneId" type:"string"`
+
+	// The Transport Layer Security (TLS) version of the security policy for this
+	// domain name. The valid values are TLS_1_0 and TLS_1_2.
+	SecurityPolicy SecurityPolicy `locationName:"securityPolicy" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -543,6 +587,18 @@ func (s DomainNameConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "certificateUploadDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
+	if len(s.DomainNameStatus) > 0 {
+		v := s.DomainNameStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "domainNameStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.DomainNameStatusMessage != nil {
+		v := *s.DomainNameStatusMessage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "domainNameStatusMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if len(s.EndpointType) > 0 {
 		v := s.EndpointType
 
@@ -554,6 +610,12 @@ func (s DomainNameConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "hostedZoneId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.SecurityPolicy) > 0 {
+		v := s.SecurityPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "securityPolicy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -1311,6 +1373,9 @@ type Stage struct {
 	// can have alphanumeric and underscore characters, and the values must match
 	// [A-Za-z0-9-._~:/?#&=,]+.
 	StageVariables map[string]string `locationName:"stageVariables" type:"map"`
+
+	// Tags for the Stage.
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -1385,6 +1450,18 @@ func (s Stage) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		ms0 := e.Map(protocol.BodyTarget, "stageVariables", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
 			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})

@@ -16,7 +16,7 @@ type CreateBasePathMappingInput struct {
 
 	// The base path name that callers of the API must provide as part of the URL
 	// after the domain name. This value must be unique for all of the mappings
-	// across a single API. Leave this blank if you do not want callers to specify
+	// across a single API. Specify '(none)' if you do not want callers to specify
 	// a base path name after the domain name.
 	BasePath *string `locationName:"basePath" type:"string"`
 
@@ -30,8 +30,8 @@ type CreateBasePathMappingInput struct {
 	// RestApiId is a required field
 	RestApiId *string `locationName:"restApiId" type:"string" required:"true"`
 
-	// The name of the API's stage that you want to use for this mapping. Leave
-	// this blank if you do not want callers to explicitly specify the stage name
+	// The name of the API's stage that you want to use for this mapping. Specify
+	// '(none)' if you do not want callers to explicitly specify the stage name
 	// after any base path name.
 	Stage *string `locationName:"stage" type:"string"`
 }

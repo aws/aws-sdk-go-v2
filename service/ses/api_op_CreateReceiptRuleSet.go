@@ -11,7 +11,7 @@ import (
 
 // Represents a request to create an empty receipt rule set. You use receipt
 // rule sets to receive email with Amazon SES. For more information, see the
-// Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
+// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptRuleSetRequest
 type CreateReceiptRuleSetInput struct {
 	_ struct{} `type:"structure"`
@@ -67,7 +67,7 @@ const opCreateReceiptRuleSet = "CreateReceiptRuleSet"
 // Creates an empty receipt rule set.
 //
 // For information about setting up receipt rule sets, see the Amazon SES Developer
-// Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html).
+// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html).
 //
 // You can execute this operation no more than once per second.
 //

@@ -13,7 +13,7 @@ import (
 // set event destination, which can be either Amazon CloudWatch or Amazon Kinesis
 // Firehose, describes an AWS service in which Amazon SES publishes the email
 // sending events associated with a configuration set. For information about
-// using configuration sets, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
+// using configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSetEventDestinationRequest
 type CreateConfigurationSetEventDestinationInput struct {
 	_ struct{} `type:"structure"`
@@ -83,7 +83,7 @@ const opCreateConfigurationSetEventDestination = "CreateConfigurationSetEventDes
 //
 // An event destination is the AWS service to which Amazon SES publishes the
 // email sending events associated with a configuration set. For information
-// about using configuration sets, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
+// about using configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 //
 // You can execute this operation no more than once per second.
 //

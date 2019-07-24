@@ -16,7 +16,7 @@ type GetVaultLockInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon Glacier uses the AWS account ID associated with the
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -70,7 +70,7 @@ func (s GetVaultLockInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains the Amazon Glacier response to your request.
+// Contains the Amazon S3 Glacier response to your request.
 type GetVaultLockOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -143,11 +143,11 @@ const opGetVaultLock = "GetVaultLock"
 // A vault lock is put into the InProgress state by calling InitiateVaultLock.
 // A vault lock is put into the Locked state by calling CompleteVaultLock. You
 // can abort the vault locking process by calling AbortVaultLock. For more information
-// about the vault locking process, Amazon Glacier Vault Lock (http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html).
+// about the vault locking process, Amazon Glacier Vault Lock (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html).
 //
 // If there is no vault lock policy set on the vault, the operation returns
 // a 404 Not found error. For more information about vault lock policies, Amazon
-// Glacier Access Control with Vault Lock Policies (http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html).
+// Glacier Access Control with Vault Lock Policies (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html).
 //
 //    // Example sending a request using GetVaultLockRequest.
 //    req := client.GetVaultLockRequest(params)

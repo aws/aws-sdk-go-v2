@@ -10,13 +10,15 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Get Findings Statistics Request
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatisticsRequest
 type GetFindingsStatisticsInput struct {
 	_ struct{} `type:"structure"`
 
+	// The ID of the detector that specifies the GuardDuty service whose findings'
+	// statistics you want to retrieve.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
 	// Represents the criteria used for querying findings.
 	FindingCriteria *FindingCriteria `locationName:"findingCriteria" type:"structure"`
@@ -38,6 +40,9 @@ func (s *GetFindingsStatisticsInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
 	}
 
 	if s.FindingStatisticTypes == nil {
@@ -81,13 +86,14 @@ func (s GetFindingsStatisticsInput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// GetFindingsStatistics response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatisticsResponse
 type GetFindingsStatisticsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Finding statistics object.
-	FindingStatistics *FindingStatistics `locationName:"findingStatistics" type:"structure"`
+	//
+	// FindingStatistics is a required field
+	FindingStatistics *FindingStatistics `locationName:"findingStatistics" type:"structure" required:"true"`
 }
 
 // String returns the string representation

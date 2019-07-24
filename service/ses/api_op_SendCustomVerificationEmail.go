@@ -79,7 +79,7 @@ const opSendCustomVerificationEmail = "SendCustomVerificationEmail"
 //
 // To use this operation, you must first create a custom verification email
 // template. For more information about creating and using custom verification
-// email templates, see Using Custom Verification Email Templates (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
+// email templates, see Using Custom Verification Email Templates (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
 // in the Amazon SES Developer Guide.
 //
 // You can execute this operation no more than once per second.

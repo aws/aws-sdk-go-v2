@@ -92,6 +92,12 @@ type DBCluster struct {
 	// cluster is accessed.
 	DbClusterResourceId *string `type:"string"`
 
+	// Specifies whether this cluster can be deleted. If DeletionProtection is enabled,
+	// the cluster cannot be deleted unless it is modified and DeletionProtection
+	// is disabled. DeletionProtection protects clusters from being accidentally
+	// deleted.
+	DeletionProtection *bool `type:"boolean"`
+
 	// The earliest time to which a database can be restored with point-in-time
 	// restore.
 	EarliestRestorableTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`

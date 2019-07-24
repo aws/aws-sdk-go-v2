@@ -28,11 +28,14 @@ type CreateRepositoryInput struct {
 	// The repository name must be unique across the calling AWS account. In addition,
 	// repository names are limited to 100 alphanumeric, dash, and underscore characters,
 	// and cannot include certain characters. For a full description of the limits
-	// on repository names, see Limits (http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
+	// on repository names, see Limits (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
 	// in the AWS CodeCommit User Guide. The suffix ".git" is prohibited.
 	//
 	// RepositoryName is a required field
 	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
+
+	// One or more tag key-value pairs to use when tagging this repository.
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation

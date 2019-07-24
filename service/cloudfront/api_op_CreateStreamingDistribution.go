@@ -11,14 +11,14 @@ import (
 )
 
 // The request to create a new streaming distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CreateStreamingDistributionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateStreamingDistributionRequest
 type CreateStreamingDistributionInput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistributionConfig"`
 
 	// The streaming distribution's configuration information.
 	//
 	// StreamingDistributionConfig is a required field
-	StreamingDistributionConfig *StreamingDistributionConfig `locationName:"StreamingDistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2018-11-05/"`
+	StreamingDistributionConfig *StreamingDistributionConfig `locationName:"StreamingDistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
 }
 
 // String returns the string representation
@@ -51,14 +51,14 @@ func (s CreateStreamingDistributionInput) MarshalFields(e protocol.FieldEncoder)
 	if s.StreamingDistributionConfig != nil {
 		v := s.StreamingDistributionConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2018-11-05/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
 		e.SetFields(protocol.PayloadTarget, "StreamingDistributionConfig", v, metadata)
 	}
 	return nil
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CreateStreamingDistributionResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateStreamingDistributionResult
 type CreateStreamingDistributionOutput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistribution"`
 
@@ -101,18 +101,18 @@ func (s CreateStreamingDistributionOutput) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-const opCreateStreamingDistribution = "CreateStreamingDistribution2018_11_05"
+const opCreateStreamingDistribution = "CreateStreamingDistribution2019_03_26"
 
 // CreateStreamingDistributionRequest returns a request value for making API operation for
 // Amazon CloudFront.
 //
-// Creates a new RMTP distribution. An RTMP distribution is similar to a web
+// Creates a new RTMP distribution. An RTMP distribution is similar to a web
 // distribution, but an RTMP distribution streams media files using the Adobe
 // Real-Time Messaging Protocol (RTMP) instead of serving files using HTTP.
 //
-// To create a new web distribution, submit a POST request to the CloudFront
-// API version/distribution resource. The request body must include a document
-// with a StreamingDistributionConfig element. The response echoes the StreamingDistributionConfig
+// To create a new distribution, submit a POST request to the CloudFront API
+// version/distribution resource. The request body must include a document with
+// a StreamingDistributionConfig element. The response echoes the StreamingDistributionConfig
 // element and returns other information about the RTMP distribution.
 //
 // To get the status of your request, use the GET StreamingDistribution API
@@ -121,7 +121,7 @@ const opCreateStreamingDistribution = "CreateStreamingDistribution2018_11_05"
 // minutes.
 //
 // For more information about web distributions, see Working with RTMP Distributions
-// (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-rtmp.html)
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-rtmp.html)
 // in the Amazon CloudFront Developer Guide.
 //
 // Beginning with the 2012-05-05 version of the CloudFront API, we made substantial
@@ -142,12 +142,12 @@ const opCreateStreamingDistribution = "CreateStreamingDistribution2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CreateStreamingDistribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateStreamingDistribution
 func (c *Client) CreateStreamingDistributionRequest(input *CreateStreamingDistributionInput) CreateStreamingDistributionRequest {
 	op := &aws.Operation{
 		Name:       opCreateStreamingDistribution,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2018-11-05/streaming-distribution",
+		HTTPPath:   "/2019-03-26/streaming-distribution",
 	}
 
 	if input == nil {

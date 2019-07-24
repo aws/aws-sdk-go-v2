@@ -17,7 +17,9 @@ type CreateSegmentInput struct {
 	// ApplicationId is a required field
 	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
 
-	// Segment definition.
+	// Specifies the configuration, dimension, and other settings for a segment.
+	// A WriteSegmentRequest object can include a Dimensions object or a SegmentGroups
+	// object, but not both.
 	//
 	// WriteSegmentRequest is a required field
 	WriteSegmentRequest *WriteSegmentRequest `type:"structure" required:"true"`
@@ -38,6 +40,11 @@ func (s *CreateSegmentInput) Validate() error {
 
 	if s.WriteSegmentRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WriteSegmentRequest"))
+	}
+	if s.WriteSegmentRequest != nil {
+		if err := s.WriteSegmentRequest.Validate(); err != nil {
+			invalidParams.AddNested("WriteSegmentRequest", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -69,7 +76,8 @@ func (s CreateSegmentInput) MarshalFields(e protocol.FieldEncoder) error {
 type CreateSegmentOutput struct {
 	_ struct{} `type:"structure" payload:"SegmentResponse"`
 
-	// Segment definition.
+	// Provides information about the configuration, dimension, and other settings
+	// for a segment.
 	//
 	// SegmentResponse is a required field
 	SegmentResponse *SegmentResponse `type:"structure" required:"true"`
@@ -96,7 +104,8 @@ const opCreateSegment = "CreateSegment"
 // CreateSegmentRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Used to create or update a segment.
+// Creates a new segment for an application or updates the configuration, dimension,
+// and other settings for an existing segment that's associated with an application.
 //
 //    // Example sending a request using CreateSegmentRequest.
 //    req := client.CreateSegmentRequest(params)

@@ -121,7 +121,7 @@ func (s UpdateClusterConfigOutput) MarshalFields(e protocol.FieldEncoder) error 
 const opUpdateClusterConfig = "UpdateClusterConfig"
 
 // UpdateClusterConfigRequest returns a request value for making API operation for
-// Amazon Elastic Container Service for Kubernetes.
+// Amazon Elastic Kubernetes Service.
 //
 // Updates an Amazon EKS cluster configuration. Your cluster continues to function
 // during the update. The response output includes an update ID that you can

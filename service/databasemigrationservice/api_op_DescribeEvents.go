@@ -21,7 +21,7 @@ type DescribeEventsInput struct {
 	// The end time for the events to be listed.
 	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// A list of event categories for a source type that you want to subscribe to.
+	// A list of event categories for the source type that you've chosen.
 	EventCategories []string `type:"list"`
 
 	// Filters applied to the action.
@@ -41,14 +41,12 @@ type DescribeEventsInput struct {
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int64 `type:"integer"`
 
-	// The identifier of the event source. An identifier must begin with a letter
-	// and must contain only ASCII letters, digits, and hyphens. It cannot end with
-	// a hyphen or contain two consecutive hyphens.
+	// The identifier of an event source.
 	SourceIdentifier *string `type:"string"`
 
 	// The type of AWS DMS resource that generates events.
 	//
-	// Valid values: replication-instance | migration-task
+	// Valid values: replication-instance | replication-task
 	SourceType SourceType `type:"string" enum:"true"`
 
 	// The start time for the events to be listed.

@@ -137,11 +137,17 @@ type ClientAPI interface {
 
 	ListRootsRequest(*organizations.ListRootsInput) organizations.ListRootsRequest
 
+	ListTagsForResourceRequest(*organizations.ListTagsForResourceInput) organizations.ListTagsForResourceRequest
+
 	ListTargetsForPolicyRequest(*organizations.ListTargetsForPolicyInput) organizations.ListTargetsForPolicyRequest
 
 	MoveAccountRequest(*organizations.MoveAccountInput) organizations.MoveAccountRequest
 
 	RemoveAccountFromOrganizationRequest(*organizations.RemoveAccountFromOrganizationInput) organizations.RemoveAccountFromOrganizationRequest
+
+	TagResourceRequest(*organizations.TagResourceInput) organizations.TagResourceRequest
+
+	UntagResourceRequest(*organizations.UntagResourceInput) organizations.UntagResourceRequest
 
 	UpdateOrganizationalUnitRequest(*organizations.UpdateOrganizationalUnitInput) organizations.UpdateOrganizationalUnitRequest
 

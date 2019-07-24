@@ -10,13 +10,15 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Archive Findings Request
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ArchiveFindingsRequest
 type ArchiveFindingsInput struct {
 	_ struct{} `type:"structure"`
 
+	// The ID of the detector that specifies the GuardDuty service whose findings
+	// you want to archive.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
 	// IDs of the findings that you want to archive.
 	//
@@ -35,6 +37,9 @@ func (s *ArchiveFindingsInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
 	}
 
 	if s.FindingIds == nil {

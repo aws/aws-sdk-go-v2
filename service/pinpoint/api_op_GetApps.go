@@ -47,7 +47,7 @@ func (s GetAppsInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetAppsOutput struct {
 	_ struct{} `type:"structure" payload:"ApplicationsResponse"`
 
-	// Get Applications Result.
+	// Provides information about all of your applications.
 	//
 	// ApplicationsResponse is a required field
 	ApplicationsResponse *ApplicationsResponse `type:"structure" required:"true"`
@@ -74,7 +74,7 @@ const opGetApps = "GetApps"
 // GetAppsRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Returns information about your apps.
+// Retrieves information about all of your applications.
 //
 //    // Example sending a request using GetAppsRequest.
 //    req := client.GetAppsRequest(params)

@@ -19,6 +19,23 @@ func (enum AcceptanceType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type BackfillMode string
+
+// Enum values for BackfillMode
+const (
+	BackfillModeAutomatic BackfillMode = "AUTOMATIC"
+	BackfillModeManual    BackfillMode = "MANUAL"
+)
+
+func (enum BackfillMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BackfillMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type BuildStatus string
 
 // Enum values for BuildStatus

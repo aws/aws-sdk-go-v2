@@ -54,7 +54,8 @@ func (s GetVoiceChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetVoiceChannelOutput struct {
 	_ struct{} `type:"structure" payload:"VoiceChannelResponse"`
 
-	// Voice Channel Response.
+	// Provides information about the status and settings of the voice channel for
+	// an application.
 	//
 	// VoiceChannelResponse is a required field
 	VoiceChannelResponse *VoiceChannelResponse `type:"structure" required:"true"`
@@ -81,7 +82,8 @@ const opGetVoiceChannel = "GetVoiceChannel"
 // GetVoiceChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Get a Voice Channel
+// Retrieves information about the status and settings of the voice channel
+// for an application.
 //
 //    // Example sending a request using GetVoiceChannelRequest.
 //    req := client.GetVoiceChannelRequest(params)

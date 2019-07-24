@@ -151,6 +151,12 @@ type ClientAPI interface {
 
 	GetStagesRequest(*apigatewayv2.GetStagesInput) apigatewayv2.GetStagesRequest
 
+	GetTagsRequest(*apigatewayv2.GetTagsInput) apigatewayv2.GetTagsRequest
+
+	TagResourceRequest(*apigatewayv2.TagResourceInput) apigatewayv2.TagResourceRequest
+
+	UntagResourceRequest(*apigatewayv2.UntagResourceInput) apigatewayv2.UntagResourceRequest
+
 	UpdateApiRequest(*apigatewayv2.UpdateApiInput) apigatewayv2.UpdateApiRequest
 
 	UpdateApiMappingRequest(*apigatewayv2.UpdateApiMappingInput) apigatewayv2.UpdateApiMappingRequest

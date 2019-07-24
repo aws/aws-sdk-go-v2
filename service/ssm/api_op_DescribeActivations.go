@@ -65,9 +65,9 @@ const opDescribeActivations = "DescribeActivations"
 // DescribeActivationsRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Details about the activation, including: the date and time the activation
-// was created, the expiration date, the IAM role assigned to the instances
-// in the activation, and the number of instances activated by this registration.
+// Describes details about the activation, such as the date and time the activation
+// was created, its expiration date, the IAM role assigned to the instances
+// in the activation, and the number of instances registered by using this activation.
 //
 //    // Example sending a request using DescribeActivationsRequest.
 //    req := client.DescribeActivationsRequest(params)

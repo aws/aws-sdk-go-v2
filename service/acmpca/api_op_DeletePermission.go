@@ -16,7 +16,7 @@ type DeletePermissionInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Number (ARN) of the private CA that issued the permissions.
-	// You can find the CA's ARN by calling the ListCertificateAuthorities operation.
+	// You can find the CA's ARN by calling the ListCertificateAuthorities action.
 	// This must have the following form:
 	//
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 .
@@ -30,7 +30,7 @@ type DeletePermissionInput struct {
 	// Principal is a required field
 	Principal *string `type:"string" required:"true"`
 
-	// The AWS account that calls this operation.
+	// The AWS account that calls this action.
 	SourceAccount *string `min:"12" type:"string"`
 }
 
@@ -79,8 +79,8 @@ const opDeletePermission = "DeletePermission"
 // AWS Certificate Manager Private Certificate Authority.
 //
 // Revokes permissions that a private CA assigned to a designated AWS service.
-// Permissions can be created with the CreatePermission operation and listed
-// with the ListPermissions operation.
+// Permissions can be created with the CreatePermission action and listed with
+// the ListPermissions action.
 //
 //    // Example sending a request using DeletePermissionRequest.
 //    req := client.DeletePermissionRequest(params)

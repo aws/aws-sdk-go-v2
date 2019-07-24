@@ -253,7 +253,9 @@ type PlatformType string
 
 // Enum values for PlatformType
 const (
-	PlatformTypeWindows PlatformType = "WINDOWS"
+	PlatformTypeWindows           PlatformType = "WINDOWS"
+	PlatformTypeWindowsServer2016 PlatformType = "WINDOWS_SERVER_2016"
+	PlatformTypeWindowsServer2019 PlatformType = "WINDOWS_SERVER_2019"
 )
 
 func (enum PlatformType) MarshalValue() (string, error) {

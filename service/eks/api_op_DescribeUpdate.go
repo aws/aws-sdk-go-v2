@@ -94,7 +94,7 @@ func (s DescribeUpdateOutput) MarshalFields(e protocol.FieldEncoder) error {
 const opDescribeUpdate = "DescribeUpdate"
 
 // DescribeUpdateRequest returns a request value for making API operation for
-// Amazon Elastic Container Service for Kubernetes.
+// Amazon Elastic Kubernetes Service.
 //
 // Returns descriptive information about an update against your Amazon EKS cluster.
 //

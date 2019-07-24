@@ -66,7 +66,7 @@ const opListDeadLetterSourceQueues = "ListDeadLetterSourceQueues"
 // configured with a dead-letter queue.
 //
 // For more information about using dead-letter queues, see Using Amazon SQS
-// Dead-Letter Queues (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)
+// Dead-Letter Queues (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)
 // in the Amazon Simple Queue Service Developer Guide.
 //
 //    // Example sending a request using ListDeadLetterSourceQueuesRequest.

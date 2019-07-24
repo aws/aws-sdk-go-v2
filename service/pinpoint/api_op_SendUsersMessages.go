@@ -17,7 +17,8 @@ type SendUsersMessagesInput struct {
 	// ApplicationId is a required field
 	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
 
-	// Send message request.
+	// Specifies the configuration and other settings for a message to send to all
+	// the endpoints that are associated with a list of users.
 	//
 	// SendUsersMessageRequest is a required field
 	SendUsersMessageRequest *SendUsersMessageRequest `type:"structure" required:"true"`
@@ -38,6 +39,11 @@ func (s *SendUsersMessagesInput) Validate() error {
 
 	if s.SendUsersMessageRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SendUsersMessageRequest"))
+	}
+	if s.SendUsersMessageRequest != nil {
+		if err := s.SendUsersMessageRequest.Validate(); err != nil {
+			invalidParams.AddNested("SendUsersMessageRequest", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -69,7 +75,7 @@ func (s SendUsersMessagesInput) MarshalFields(e protocol.FieldEncoder) error {
 type SendUsersMessagesOutput struct {
 	_ struct{} `type:"structure" payload:"SendUsersMessageResponse"`
 
-	// User send message response.
+	// Provides information about which users and endpoints a message was sent to.
 	//
 	// SendUsersMessageResponse is a required field
 	SendUsersMessageResponse *SendUsersMessageResponse `type:"structure" required:"true"`
@@ -96,7 +102,7 @@ const opSendUsersMessages = "SendUsersMessages"
 // SendUsersMessagesRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Used to send a message to a list of users.
+// Creates and sends a message to a list of users.
 //
 //    // Example sending a request using SendUsersMessagesRequest.
 //    req := client.SendUsersMessagesRequest(params)

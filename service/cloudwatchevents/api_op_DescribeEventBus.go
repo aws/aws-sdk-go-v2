@@ -12,11 +12,28 @@ import (
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeEventBusRequest
 type DescribeEventBusInput struct {
 	_ struct{} `type:"structure"`
+
+	// The name of the event bus to show details for. If you omit this, the default
+	// event bus is displayed.
+	Name *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
 func (s DescribeEventBusInput) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeEventBusInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventBusInput"}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeEventBusResponse
@@ -44,9 +61,15 @@ const opDescribeEventBus = "DescribeEventBus"
 // DescribeEventBusRequest returns a request value for making API operation for
 // Amazon CloudWatch Events.
 //
-// Displays the external AWS accounts that are permitted to write events to
-// your account using your account's event bus, and the associated policy. To
-// enable your account to receive events from other accounts, use PutPermission.
+// Displays details about an event bus in your account. This can include the
+// external AWS accounts that are permitted to write events to your default
+// event bus, and the associated policy. For custom event buses and partner
+// event buses, it displays the name, ARN, policy, state, and creation time.
+//
+// To enable your account to receive events from other accounts on its default
+// event bus, use PutPermission.
+//
+// For more information about partner event buses, see CreateEventBus.
 //
 //    // Example sending a request using DescribeEventBusRequest.
 //    req := client.DescribeEventBusRequest(params)

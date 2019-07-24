@@ -48,7 +48,7 @@ type DescribeGlobalTableSettingsOutput struct {
 	// The name of the global table.
 	GlobalTableName *string `min:"3" type:"string"`
 
-	// The region specific settings for the global table.
+	// The Region-specific settings for the global table.
 	ReplicaSettings []ReplicaSettingsDescription `type:"list"`
 }
 
@@ -62,7 +62,7 @@ const opDescribeGlobalTableSettings = "DescribeGlobalTableSettings"
 // DescribeGlobalTableSettingsRequest returns a request value for making API operation for
 // Amazon DynamoDB.
 //
-// Describes region specific settings for a global table.
+// Describes Region-specific settings for a global table.
 //
 //    // Example sending a request using DescribeGlobalTableSettingsRequest.
 //    req := client.DescribeGlobalTableSettingsRequest(params)

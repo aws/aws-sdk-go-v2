@@ -23,7 +23,7 @@ type StartMatchBackfillInput struct {
 	// parameter.
 	//
 	// ConfigurationName is a required field
-	ConfigurationName *string `min:"1" type:"string" required:"true"`
+	ConfigurationName *string `type:"string" required:"true"`
 
 	// Amazon Resource Name (ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
 	// that is assigned to a game session and uniquely identifies it.
@@ -50,7 +50,7 @@ type StartMatchBackfillInput struct {
 	// Unique identifier for a matchmaking ticket. If no ticket ID is specified
 	// here, Amazon GameLift will generate one in the form of a UUID. Use this identifier
 	// to track the match backfill ticket status and retrieve match results.
-	TicketId *string `min:"1" type:"string"`
+	TicketId *string `type:"string"`
 }
 
 // String returns the string representation
@@ -65,9 +65,6 @@ func (s *StartMatchBackfillInput) Validate() error {
 	if s.ConfigurationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationName"))
 	}
-	if s.ConfigurationName != nil && len(*s.ConfigurationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationName", 1))
-	}
 
 	if s.GameSessionArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GameSessionArn"))
@@ -78,9 +75,6 @@ func (s *StartMatchBackfillInput) Validate() error {
 
 	if s.Players == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Players"))
-	}
-	if s.TicketId != nil && len(*s.TicketId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TicketId", 1))
 	}
 	if s.Players != nil {
 		for i, v := range s.Players {
@@ -130,8 +124,7 @@ const opStartMatchBackfill = "StartMatchBackfill"
 // all current players in the game session. If successful, a match backfill
 // ticket is created and returned with status set to QUEUED. The ticket is placed
 // in the matchmaker's ticket pool and processed. Track the status of the ticket
-// to respond as needed. For more detail how to set up backfilling, see Backfill
-// Existing Games with FlexMatch (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html).
+// to respond as needed.
 //
 // The process of finding backfill matches is essentially identical to the initial
 // matchmaking process. The matchmaker searches the pool and groups tickets
@@ -141,7 +134,15 @@ const opStartMatchBackfill = "StartMatchBackfill"
 // game session's connection information, and the GameSession object is updated
 // to include matchmaker data on the new players. For more detail on how match
 // backfill requests are processed, see How Amazon GameLift FlexMatch Works
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-intro.html).
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-match.html).
+//
+// Learn more
+//
+//  Backfill Existing Games with FlexMatch (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html)
+//
+//  How GameLift FlexMatch Works (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-match.html)
+//
+// Related operations
 //
 //    * StartMatchmaking
 //

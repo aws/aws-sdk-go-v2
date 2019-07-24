@@ -91,7 +91,7 @@ const opSetDataRetrievalPolicy = "SetDataRetrievalPolicy"
 //
 // The set policy operation does not affect retrieval jobs that were in progress
 // before the policy was enacted. For more information about data retrieval
-// policies, see Amazon Glacier Data Retrieval Policies (http://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html).
+// policies, see Amazon Glacier Data Retrieval Policies (https://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html).
 //
 //    // Example sending a request using SetDataRetrievalPolicyRequest.
 //    req := client.SetDataRetrievalPolicyRequest(params)

@@ -75,9 +75,8 @@ const opDeleteVpcPeeringAuthorization = "DeleteVpcPeeringAuthorization"
 // DeleteVpcPeeringAuthorizationRequest returns a request value for making API operation for
 // Amazon GameLift.
 //
-// Cancels a pending VPC peering authorization for the specified VPC. If the
-// authorization has already been used to create a peering connection, call
-// DeleteVpcPeeringConnection to remove the connection.
+// Cancels a pending VPC peering authorization for the specified VPC. If you
+// need to delete an existing VPC peering connection, call DeleteVpcPeeringConnection.
 //
 //    * CreateVpcPeeringAuthorization
 //

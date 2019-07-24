@@ -83,7 +83,7 @@ func (s GetCampaignActivitiesInput) MarshalFields(e protocol.FieldEncoder) error
 type GetCampaignActivitiesOutput struct {
 	_ struct{} `type:"structure" payload:"ActivitiesResponse"`
 
-	// Activities for campaign.
+	// Provides information about the activities that were performed by a campaign.
 	//
 	// ActivitiesResponse is a required field
 	ActivitiesResponse *ActivitiesResponse `type:"structure" required:"true"`
@@ -110,7 +110,7 @@ const opGetCampaignActivities = "GetCampaignActivities"
 // GetCampaignActivitiesRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Returns information about the activity performed by a campaign.
+// Retrieves information about the activity performed by a campaign.
 //
 //    // Example sending a request using GetCampaignActivitiesRequest.
 //    req := client.GetCampaignActivitiesRequest(params)

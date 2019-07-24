@@ -11,7 +11,7 @@ import (
 
 // Represents a request to return the notification attributes for a list of
 // identities you verified with Amazon SES. For information about Amazon SES
-// notifications, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html).
+// notifications, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityNotificationAttributesRequest
 type GetIdentityNotificationAttributesInput struct {
 	_ struct{} `type:"structure"`
@@ -71,7 +71,7 @@ const opGetIdentityNotificationAttributes = "GetIdentityNotificationAttributes"
 // attributes for up to 100 identities at a time.
 //
 // For more information about using notifications with Amazon SES, see the Amazon
-// SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html).
+// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html).
 //
 //    // Example sending a request using GetIdentityNotificationAttributesRequest.
 //    req := client.GetIdentityNotificationAttributesRequest(params)

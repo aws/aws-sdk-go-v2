@@ -12,7 +12,7 @@ import (
 )
 
 // Deletes a origin access identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DeleteCloudFrontOriginAccessIdentityRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteCloudFrontOriginAccessIdentityRequest
 type DeleteCloudFrontOriginAccessIdentityInput struct {
 	_ struct{} `type:"structure"`
 
@@ -63,7 +63,7 @@ func (s DeleteCloudFrontOriginAccessIdentityInput) MarshalFields(e protocol.Fiel
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DeleteCloudFrontOriginAccessIdentityOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteCloudFrontOriginAccessIdentityOutput
 type DeleteCloudFrontOriginAccessIdentityOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -78,7 +78,7 @@ func (s DeleteCloudFrontOriginAccessIdentityOutput) MarshalFields(e protocol.Fie
 	return nil
 }
 
-const opDeleteCloudFrontOriginAccessIdentity = "DeleteCloudFrontOriginAccessIdentity2018_11_05"
+const opDeleteCloudFrontOriginAccessIdentity = "DeleteCloudFrontOriginAccessIdentity2019_03_26"
 
 // DeleteCloudFrontOriginAccessIdentityRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -92,12 +92,12 @@ const opDeleteCloudFrontOriginAccessIdentity = "DeleteCloudFrontOriginAccessIden
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DeleteCloudFrontOriginAccessIdentity
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteCloudFrontOriginAccessIdentity
 func (c *Client) DeleteCloudFrontOriginAccessIdentityRequest(input *DeleteCloudFrontOriginAccessIdentityInput) DeleteCloudFrontOriginAccessIdentityRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCloudFrontOriginAccessIdentity,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/2018-11-05/origin-access-identity/cloudfront/{Id}",
+		HTTPPath:   "/2019-03-26/origin-access-identity/cloudfront/{Id}",
 	}
 
 	if input == nil {

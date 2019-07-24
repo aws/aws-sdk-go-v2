@@ -13,7 +13,7 @@ import (
 type DeleteMaintenanceWindowInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the Maintenance Window to delete.
+	// The ID of the maintenance window to delete.
 	//
 	// WindowId is a required field
 	WindowId *string `min:"20" type:"string" required:"true"`
@@ -45,7 +45,7 @@ func (s *DeleteMaintenanceWindowInput) Validate() error {
 type DeleteMaintenanceWindowOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the deleted Maintenance Window.
+	// The ID of the deleted maintenance window.
 	WindowId *string `min:"20" type:"string"`
 }
 
@@ -59,7 +59,7 @@ const opDeleteMaintenanceWindow = "DeleteMaintenanceWindow"
 // DeleteMaintenanceWindowRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Deletes a Maintenance Window.
+// Deletes a maintenance window.
 //
 //    // Example sending a request using DeleteMaintenanceWindowRequest.
 //    req := client.DeleteMaintenanceWindowRequest(params)

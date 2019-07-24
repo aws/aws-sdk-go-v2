@@ -35,13 +35,16 @@ type StartJobInput struct {
 	// Commit date / time for the Job.
 	CommitTime *time.Time `locationName:"commitTime" type:"timestamp" timestampFormat:"unix"`
 
-	// Unique Id for the Job.
+	// Unique Id for an existing job. Required for "RETRY" JobType.
 	JobId *string `locationName:"jobId" type:"string"`
 
-	// Reason for the Job.
+	// Descriptive reason for starting this job.
 	JobReason *string `locationName:"jobReason" type:"string"`
 
-	// Type for the Job.
+	// Type for the Job. Available JobTypes are: \n "RELEASE": Start a new job with
+	// the latest change from the specified branch. Only available for apps that
+	// have connected to a repository. "RETRY": Retry an existing job. JobId is
+	// required for this type of job.
 	//
 	// JobType is a required field
 	JobType JobType `locationName:"jobType" type:"string" required:"true" enum:"true"`

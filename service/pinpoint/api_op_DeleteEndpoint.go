@@ -67,7 +67,7 @@ func (s DeleteEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteEndpointOutput struct {
 	_ struct{} `type:"structure" payload:"EndpointResponse"`
 
-	// Endpoint response
+	// Provides information about the channel type and other settings for an endpoint.
 	//
 	// EndpointResponse is a required field
 	EndpointResponse *EndpointResponse `type:"structure" required:"true"`
@@ -94,7 +94,7 @@ const opDeleteEndpoint = "DeleteEndpoint"
 // DeleteEndpointRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Deletes an endpoint.
+// Deletes an endpoint from an application.
 //
 //    // Example sending a request using DeleteEndpointRequest.
 //    req := client.DeleteEndpointRequest(params)

@@ -37,7 +37,7 @@ type CreateDBInstanceInput struct {
 	// DBClusterIdentifier is a required field
 	DBClusterIdentifier *string `type:"string" required:"true"`
 
-	// The compute and memory capacity of the DB instance; for example, db.m4.large.
+	// The compute and memory capacity of the DB instance; for example, db.r5.large.
 	//
 	// DBInstanceClass is a required field
 	DBInstanceClass *string `type:"string" required:"true"`

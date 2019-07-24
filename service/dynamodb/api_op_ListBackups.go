@@ -25,10 +25,10 @@ type ListBackupsInput struct {
 	//    * ALL - All types of on-demand backups (USER and SYSTEM).
 	BackupType BackupTypeFilter `type:"string" enum:"true"`
 
-	// LastEvaluatedBackupArn is the ARN of the backup last evaluated when the current
-	// page of results was returned, inclusive of the current page of results. This
-	// value may be specified as the ExclusiveStartBackupArn of a new ListBackups
-	// operation in order to fetch the next page of results.
+	// LastEvaluatedBackupArn is the Amazon Resource Name (ARN) of the backup last
+	// evaluated when the current page of results was returned, inclusive of the
+	// current page of results. This value may be specified as the ExclusiveStartBackupArn
+	// of a new ListBackups operation in order to fetch the next page of results.
 	ExclusiveStartBackupArn *string `min:"37" type:"string"`
 
 	// Maximum number of backups to return at once.
@@ -84,9 +84,9 @@ type ListBackupsOutput struct {
 	// If LastEvaluatedBackupArn is empty, then the last page of results has been
 	// processed and there are no more results to be retrieved.
 	//
-	// If LastEvaluatedBackupArn is not empty, this may or may not indicate there
-	// is more data to be returned. All results are guaranteed to have been returned
-	// if and only if no value for LastEvaluatedBackupArn is returned.
+	// If LastEvaluatedBackupArn is not empty, this may or may not indicate that
+	// there is more data to be returned. All results are guaranteed to have been
+	// returned if and only if no value for LastEvaluatedBackupArn is returned.
 	LastEvaluatedBackupArn *string `min:"37" type:"string"`
 }
 
@@ -102,13 +102,13 @@ const opListBackups = "ListBackups"
 //
 // List backups associated with an AWS account. To list backups for a given
 // table, specify TableName. ListBackups returns a paginated list of results
-// with at most 1MB worth of items in a page. You can also specify a limit for
-// the maximum number of entries to be returned in a page.
+// with at most 1 MB worth of items in a page. You can also specify a limit
+// for the maximum number of entries to be returned in a page.
 //
-// In the request, start time is inclusive but end time is exclusive. Note that
-// these limits are for the time at which the original backup was requested.
+// In the request, start time is inclusive, but end time is exclusive. Note
+// that these limits are for the time at which the original backup was requested.
 //
-// You can call ListBackups a maximum of 5 times per second.
+// You can call ListBackups a maximum of five times per second.
 //
 //    // Example sending a request using ListBackupsRequest.
 //    req := client.ListBackupsRequest(params)

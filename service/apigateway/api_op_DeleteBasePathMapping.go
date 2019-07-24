@@ -17,6 +17,8 @@ type DeleteBasePathMappingInput struct {
 
 	// [Required] The base path name of the BasePathMapping resource to delete.
 	//
+	// To specify an empty base path, set this parameter to '(none)'.
+	//
 	// BasePath is a required field
 	BasePath *string `location:"uri" locationName:"base_path" type:"string" required:"true"`
 

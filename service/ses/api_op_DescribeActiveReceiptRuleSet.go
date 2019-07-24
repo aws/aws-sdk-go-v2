@@ -12,7 +12,7 @@ import (
 // Represents a request to return the metadata and receipt rules for the receipt
 // rule set that is currently active. You use receipt rule sets to receive email
 // with Amazon SES. For more information, see the Amazon SES Developer Guide
-// (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
+// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeActiveReceiptRuleSetRequest
 type DescribeActiveReceiptRuleSetInput struct {
 	_ struct{} `type:"structure"`
@@ -51,7 +51,7 @@ const opDescribeActiveReceiptRuleSet = "DescribeActiveReceiptRuleSet"
 // active.
 //
 // For information about setting up receipt rule sets, see the Amazon SES Developer
-// Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html).
+// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html).
 //
 // You can execute this operation no more than once per second.
 //

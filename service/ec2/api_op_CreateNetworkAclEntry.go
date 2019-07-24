@@ -136,7 +136,7 @@ const opCreateNetworkAclEntry = "CreateNetworkAclEntry"
 // After you add an entry, you can't modify it; you must either replace it,
 // or create an entry and delete the old one.
 //
-// For more information about network ACLs, see Network ACLs (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html)
+// For more information about network ACLs, see Network ACLs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html)
 // in the Amazon Virtual Private Cloud User Guide.
 //
 //    // Example sending a request using CreateNetworkAclEntryRequest.

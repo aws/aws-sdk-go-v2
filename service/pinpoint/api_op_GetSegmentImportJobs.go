@@ -83,7 +83,9 @@ func (s GetSegmentImportJobsInput) MarshalFields(e protocol.FieldEncoder) error 
 type GetSegmentImportJobsOutput struct {
 	_ struct{} `type:"structure" payload:"ImportJobsResponse"`
 
-	// Import job list.
+	// Provides information about the status and settings of all the import jobs
+	// that are associated with an application or segment. An import job is a job
+	// that imports endpoint definitions from one or more files.
 	//
 	// ImportJobsResponse is a required field
 	ImportJobsResponse *ImportJobsResponse `type:"structure" required:"true"`
@@ -110,7 +112,8 @@ const opGetSegmentImportJobs = "GetSegmentImportJobs"
 // GetSegmentImportJobsRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Returns a list of import jobs for a specific segment.
+// Retrieves information about the status and settings of the import jobs for
+// a segment.
 //
 //    // Example sending a request using GetSegmentImportJobsRequest.
 //    req := client.GetSegmentImportJobsRequest(params)

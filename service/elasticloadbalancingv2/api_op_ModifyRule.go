@@ -14,11 +14,13 @@ import (
 type ModifyRuleInput struct {
 	_ struct{} `type:"structure"`
 
-	// The actions.
+	// The actions. Each rule must include exactly one of the following types of
+	// actions: forward, fixed-response, or redirect.
 	//
 	// If the action type is forward, you specify a target group. The protocol of
 	// the target group must be HTTP or HTTPS for an Application Load Balancer.
-	// The protocol of the target group must be TCP or TLS for a Network Load Balancer.
+	// The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a
+	// Network Load Balancer.
 	//
 	// [HTTPS listeners] If the action type is authenticate-oidc, you authenticate
 	// users through an identity provider that is OpenID Connect (OIDC) compliant.
@@ -33,35 +35,9 @@ type ModifyRuleInput struct {
 	// specified client requests and return a custom HTTP response.
 	Actions []Action `type:"list"`
 
-	// The conditions. Each condition specifies a field name and a single value.
-	//
-	// If the field name is host-header, you can specify a single host name (for
-	// example, my.example.com). A host name is case insensitive, can be up to 128
-	// characters in length, and can contain any of the following characters. You
-	// can include up to three wildcard characters.
-	//
-	//    * A-Z, a-z, 0-9
-	//
-	//    * - .
-	//
-	//    * * (matches 0 or more characters)
-	//
-	//    * ? (matches exactly 1 character)
-	//
-	// If the field name is path-pattern, you can specify a single path pattern.
-	// A path pattern is case-sensitive, can be up to 128 characters in length,
-	// and can contain any of the following characters. You can include up to three
-	// wildcard characters.
-	//
-	//    * A-Z, a-z, 0-9
-	//
-	//    * _ - . $ / ~ " ' @ : +
-	//
-	//    * & (using &)
-	//
-	//    * * (matches 0 or more characters)
-	//
-	//    * ? (matches exactly 1 character)
+	// The conditions. Each rule can include zero or one of the following conditions:
+	// http-request-method, host-header, path-pattern, and source-ip, and zero or
+	// more of the following conditions: http-header and query-string.
 	Conditions []RuleCondition `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the rule.

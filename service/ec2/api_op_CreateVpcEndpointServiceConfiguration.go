@@ -81,7 +81,7 @@ const opCreateVpcEndpointServiceConfiguration = "CreateVpcEndpointServiceConfigu
 //
 // To create an endpoint service configuration, you must first create a Network
 // Load Balancer for your service. For more information, see VPC Endpoint Services
-// (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/endpoint-service.html)
+// (https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html)
 // in the Amazon Virtual Private Cloud User Guide.
 //
 //    // Example sending a request using CreateVpcEndpointServiceConfigurationRequest.

@@ -11,7 +11,7 @@ import (
 
 // Represents a request to set a receipt rule set as the active receipt rule
 // set. You use receipt rule sets to receive email with Amazon SES. For more
-// information, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
+// information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetActiveReceiptRuleSetRequest
 type SetActiveReceiptRuleSetInput struct {
 	_ struct{} `type:"structure"`
@@ -48,7 +48,7 @@ const opSetActiveReceiptRuleSet = "SetActiveReceiptRuleSet"
 // this API with RuleSetName set to null.
 //
 // For information about managing receipt rule sets, see the Amazon SES Developer
-// Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html).
+// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html).
 //
 // You can execute this operation no more than once per second.
 //

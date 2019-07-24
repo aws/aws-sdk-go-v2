@@ -36,7 +36,7 @@ type CreateServiceInput struct {
 
 	// Specifies whether to enable Amazon ECS managed tags for the tasks within
 	// the service. For more information, see Tagging Your Amazon ECS Resources
-	// (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags *bool `locationName:"enableECSManagedTags" type:"boolean"`
 
@@ -101,7 +101,7 @@ type CreateServiceInput struct {
 	// The network configuration for the service. This parameter is required for
 	// task definitions that use the awsvpc network mode to receive their own elastic
 	// network interface, and it is not supported for other network modes. For more
-	// information, see Task Networking (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
+	// information, see Task Networking (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	NetworkConfiguration *NetworkConfiguration `locationName:"networkConfiguration" type:"structure"`
 
@@ -139,7 +139,7 @@ type CreateServiceInput struct {
 	// role is used by default for your service unless you specify a role here.
 	// The service-linked role is required if your task definition uses the awsvpc
 	// network mode, in which case you should not specify a role here. For more
-	// information, see Using Service-Linked Roles for Amazon ECS (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html)
+	// information, see Using Service-Linked Roles for Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	//
 	// If your specified role has a path other than /, then you must either specify
@@ -151,7 +151,7 @@ type CreateServiceInput struct {
 	Role *string `locationName:"role" type:"string"`
 
 	// The scheduling strategy to use for the service. For more information, see
-	// Services (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).
+	// Services (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).
 	//
 	// There are two service scheduler strategies available:
 	//
@@ -172,19 +172,19 @@ type CreateServiceInput struct {
 	SchedulingStrategy SchedulingStrategy `locationName:"schedulingStrategy" type:"string" enum:"true"`
 
 	// The name of your service. Up to 255 letters (uppercase and lowercase), numbers,
-	// hyphens, and underscores are allowed. Service names must be unique within
-	// a cluster, but you can have similarly named services in multiple clusters
-	// within a Region or across multiple Regions.
+	// and hyphens are allowed. Service names must be unique within a cluster, but
+	// you can have similarly named services in multiple clusters within a Region
+	// or across multiple Regions.
 	//
 	// ServiceName is a required field
 	ServiceName *string `locationName:"serviceName" type:"string" required:"true"`
 
 	// The details of the service discovery registries to assign to this service.
-	// For more information, see Service Discovery (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
+	// For more information, see Service Discovery (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
 	//
 	// Service discovery is supported for Fargate tasks if you are using platform
 	// version v1.1.0 or later. For more information, see AWS Fargate Platform Versions
-	// (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html).
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html).
 	ServiceRegistries []ServiceRegistry `locationName:"serviceRegistries" type:"list"`
 
 	// The metadata that you apply to the service to help you categorize and organize

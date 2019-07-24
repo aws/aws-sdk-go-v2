@@ -4,6 +4,7 @@ package swf
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -22,10 +23,16 @@ type RegisterDomainInput struct {
 	//
 	// The specified string must not start or end with whitespace. It must not contain
 	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not contain the literal string arn.
+	// | \u007f-\u009f). Also, it must not be the literal string arn.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
+
+	// Tags to be added when registering a domain.
+	//
+	// Tags may only contain unicode letters, digits, whitespace, or these symbols:
+	// _ . : / = + - @.
+	Tags []ResourceTag `locationName:"tags" type:"list"`
 
 	// The duration (in days) that records and histories of workflow executions
 	// on the domain should be kept by the service. After the retention period,
@@ -36,7 +43,7 @@ type RegisterDomainInput struct {
 	// record and its history are deleted.
 	//
 	// The maximum workflow execution retention period is 90 days. For more information
-	// about Amazon SWF service limits, see: Amazon SWF Service Limits (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-limits.html)
+	// about Amazon SWF service limits, see: Amazon SWF Service Limits (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-limits.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// WorkflowExecutionRetentionPeriodInDays is a required field
@@ -64,6 +71,13 @@ func (s *RegisterDomainInput) Validate() error {
 	}
 	if s.WorkflowExecutionRetentionPeriodInDays != nil && len(*s.WorkflowExecutionRetentionPeriodInDays) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("WorkflowExecutionRetentionPeriodInDays", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -105,7 +119,7 @@ const opRegisterDomain = "RegisterDomain"
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 //    // Example sending a request using RegisterDomainRequest.

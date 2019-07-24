@@ -7,8 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
-	"github.com/aws/aws-sdk-go-v2/private/protocol"
-	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
 )
 
 // Contains the parameters for AssignPrivateIpAddresses.
@@ -57,9 +55,15 @@ func (s *AssignPrivateIpAddressesInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignPrivateIpAddressesOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignPrivateIpAddressesResult
 type AssignPrivateIpAddressesOutput struct {
 	_ struct{} `type:"structure"`
+
+	// The private IP addresses assigned to the network interface.
+	AssignedPrivateIpAddresses []AssignedPrivateIpAddress `locationName:"assignedPrivateIpAddressesSet" locationNameList:"item" type:"list"`
+
+	// The ID of the network interface.
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
 }
 
 // String returns the string representation
@@ -111,8 +115,6 @@ func (c *Client) AssignPrivateIpAddressesRequest(input *AssignPrivateIpAddresses
 	}
 
 	req := c.newRequest(op, input, &AssignPrivateIpAddressesOutput{})
-	req.Handlers.Unmarshal.Remove(ec2query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	return AssignPrivateIpAddressesRequest{Request: req, Input: input, Copy: c.AssignPrivateIpAddressesRequest}
 }
 

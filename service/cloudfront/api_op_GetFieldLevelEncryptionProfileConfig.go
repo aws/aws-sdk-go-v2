@@ -10,7 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetFieldLevelEncryptionProfileConfigRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionProfileConfigRequest
 type GetFieldLevelEncryptionProfileConfigInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +51,7 @@ func (s GetFieldLevelEncryptionProfileConfigInput) MarshalFields(e protocol.Fiel
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetFieldLevelEncryptionProfileConfigResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionProfileConfigResult
 type GetFieldLevelEncryptionProfileConfigOutput struct {
 	_ struct{} `type:"structure" payload:"FieldLevelEncryptionProfileConfig"`
 
@@ -85,7 +85,7 @@ func (s GetFieldLevelEncryptionProfileConfigOutput) MarshalFields(e protocol.Fie
 	return nil
 }
 
-const opGetFieldLevelEncryptionProfileConfig = "GetFieldLevelEncryptionProfileConfig2018_11_05"
+const opGetFieldLevelEncryptionProfileConfig = "GetFieldLevelEncryptionProfileConfig2019_03_26"
 
 // GetFieldLevelEncryptionProfileConfigRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -99,12 +99,12 @@ const opGetFieldLevelEncryptionProfileConfig = "GetFieldLevelEncryptionProfileCo
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetFieldLevelEncryptionProfileConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionProfileConfig
 func (c *Client) GetFieldLevelEncryptionProfileConfigRequest(input *GetFieldLevelEncryptionProfileConfigInput) GetFieldLevelEncryptionProfileConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetFieldLevelEncryptionProfileConfig,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2018-11-05/field-level-encryption-profile/{Id}/config",
+		HTTPPath:   "/2019-03-26/field-level-encryption-profile/{Id}/config",
 	}
 
 	if input == nil {

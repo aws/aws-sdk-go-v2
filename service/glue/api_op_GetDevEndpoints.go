@@ -59,7 +59,7 @@ const opGetDevEndpoints = "GetDevEndpoints"
 // GetDevEndpointsRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Retrieves all the DevEndpoints in this AWS account.
+// Retrieves all the development endpoints in this AWS account.
 //
 // When you create a development endpoint in a virtual private cloud (VPC),
 // AWS Glue returns only a private IP address and the public IP address field

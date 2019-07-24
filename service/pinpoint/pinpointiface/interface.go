@@ -115,6 +115,8 @@ type ClientAPI interface {
 
 	GetAppRequest(*pinpoint.GetAppInput) pinpoint.GetAppRequest
 
+	GetApplicationDateRangeKpiRequest(*pinpoint.GetApplicationDateRangeKpiInput) pinpoint.GetApplicationDateRangeKpiRequest
+
 	GetApplicationSettingsRequest(*pinpoint.GetApplicationSettingsInput) pinpoint.GetApplicationSettingsRequest
 
 	GetAppsRequest(*pinpoint.GetAppsInput) pinpoint.GetAppsRequest
@@ -124,6 +126,8 @@ type ClientAPI interface {
 	GetCampaignRequest(*pinpoint.GetCampaignInput) pinpoint.GetCampaignRequest
 
 	GetCampaignActivitiesRequest(*pinpoint.GetCampaignActivitiesInput) pinpoint.GetCampaignActivitiesRequest
+
+	GetCampaignDateRangeKpiRequest(*pinpoint.GetCampaignDateRangeKpiInput) pinpoint.GetCampaignDateRangeKpiRequest
 
 	GetCampaignVersionRequest(*pinpoint.GetCampaignVersionInput) pinpoint.GetCampaignVersionRequest
 

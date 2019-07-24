@@ -14,7 +14,8 @@ type ModifyGlobalClusterInput struct {
 	_ struct{} `type:"structure"`
 
 	// Indicates if the global database cluster has deletion protection enabled.
-	// The global database cluster can't be deleted when this value is set to true.
+	// The global database cluster can't be deleted when deletion protection is
+	// enabled.
 	DeletionProtection *bool `type:"boolean"`
 
 	// The DB cluster identifier for the global cluster being modified. This parameter

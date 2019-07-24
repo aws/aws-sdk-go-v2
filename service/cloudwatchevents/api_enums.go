@@ -19,6 +19,24 @@ func (enum AssignPublicIp) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type EventSourceState string
+
+// Enum values for EventSourceState
+const (
+	EventSourceStatePending EventSourceState = "PENDING"
+	EventSourceStateActive  EventSourceState = "ACTIVE"
+	EventSourceStateDeleted EventSourceState = "DELETED"
+)
+
+func (enum EventSourceState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventSourceState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LaunchType string
 
 // Enum values for LaunchType

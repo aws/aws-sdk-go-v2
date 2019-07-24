@@ -67,7 +67,7 @@ func (s GetEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetEndpointOutput struct {
 	_ struct{} `type:"structure" payload:"EndpointResponse"`
 
-	// Endpoint response
+	// Provides information about the channel type and other settings for an endpoint.
 	//
 	// EndpointResponse is a required field
 	EndpointResponse *EndpointResponse `type:"structure" required:"true"`
@@ -94,7 +94,8 @@ const opGetEndpoint = "GetEndpoint"
 // GetEndpointRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Returns information about an endpoint.
+// Retrieves information about the settings and attributes of a specific endpoint
+// for an application.
 //
 //    // Example sending a request using GetEndpointRequest.
 //    req := client.GetEndpointRequest(params)

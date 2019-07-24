@@ -35,7 +35,7 @@ type CreateFleetInput struct {
 	// LaunchTemplateConfigs is a required field
 	LaunchTemplateConfigs []FleetLaunchTemplateConfigRequest `locationNameList:"item" type:"list" required:"true"`
 
-	// The allocation strategy of On-Demand Instances in an EC2 Fleet.
+	// Describes the configuration of On-Demand Instances in an EC2 Fleet.
 	OnDemandOptions *OnDemandOptionsRequest `type:"structure"`
 
 	// Indicates whether EC2 Fleet should replace unhealthy instances.
@@ -50,8 +50,7 @@ type CreateFleetInput struct {
 	// For information about tagging after launch, see Tagging Your Resources (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources).
 	TagSpecifications []TagSpecification `locationName:"TagSpecification" locationNameList:"item" type:"list"`
 
-	// The TotalTargetCapacity, OnDemandTargetCapacity, SpotTargetCapacity, and
-	// DefaultCapacityType structure.
+	// The number of units to request.
 	//
 	// TargetCapacitySpecification is a required field
 	TargetCapacitySpecification *TargetCapacitySpecificationRequest `type:"structure" required:"true"`

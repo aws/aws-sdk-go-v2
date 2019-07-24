@@ -11,7 +11,7 @@ import (
 )
 
 // Represents a request to send a single raw email using Amazon SES. For more
-// information, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html).
+// information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendRawEmailRequest
 type SendRawEmailInput struct {
 	_ struct{} `type:"structure"`
@@ -32,7 +32,7 @@ type SendRawEmailInput struct {
 	// the corresponding X-header, Amazon SES uses the value of the FromArn parameter.
 	//
 	// For information about when to use this parameter, see the description of
-	// SendRawEmail in this guide, or see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html).
+	// SendRawEmail in this guide, or see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html).
 	FromArn *string `type:"string"`
 
 	// The raw email message itself. The message has to meet the following criteria:
@@ -46,14 +46,14 @@ type SendRawEmailInput struct {
 	//
 	//    * Attachments must be of a content type that Amazon SES supports. For
 	//    a list on unsupported content types, see Unsupported Attachment Types
-	//    (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mime-types.html)
+	//    (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mime-types.html)
 	//    in the Amazon SES Developer Guide.
 	//
 	//    * The entire message must be base64-encoded.
 	//
 	//    * If any of the MIME parts in your message contain content that is outside
 	//    of the 7-bit ASCII character range, we highly recommend that you encode
-	//    that content. For more information, see Sending Raw Email (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html)
+	//    that content. For more information, see Sending Raw Email (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html)
 	//    in the Amazon SES Developer Guide.
 	//
 	//    * Per RFC 5321 (https://tools.ietf.org/html/rfc5321#section-4.5.3.1.6),
@@ -78,7 +78,7 @@ type SendRawEmailInput struct {
 	// parameter.
 	//
 	// For information about when to use this parameter, see the description of
-	// SendRawEmail in this guide, or see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html).
+	// SendRawEmail in this guide, or see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html).
 	ReturnPathArn *string `type:"string"`
 
 	// The identity's email address. If you do not provide a value for this parameter,
@@ -117,7 +117,7 @@ type SendRawEmailInput struct {
 	// parameter.
 	//
 	// For information about when to use this parameter, see the description of
-	// SendRawEmail in this guide, or see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html).
+	// SendRawEmail in this guide, or see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html).
 	SourceArn *string `type:"string"`
 
 	// A list of tags, in the form of name/value pairs, to apply to an email that
@@ -189,14 +189,14 @@ const opSendRawEmail = "SendRawEmail"
 //
 // The SendRawEmail operation has the following requirements:
 //
-//    * You can only send email from verified email addresses or domains (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html).
+//    * You can only send email from verified email addresses or domains (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html).
 //    If you try to send email from an address that isn't verified, the operation
 //    results in an "Email address not verified" error.
 //
-//    * If your account is still in the Amazon SES sandbox (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/request-production-access.html),
+//    * If your account is still in the Amazon SES sandbox (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/request-production-access.html),
 //    you can only send email to other verified addresses in your account, or
 //    to addresses that are associated with the Amazon SES mailbox simulator
-//    (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mailbox-simulator.html).
+//    (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mailbox-simulator.html).
 //
 //    * The maximum message size, including attachments, is 10 MB.
 //
@@ -219,7 +219,7 @@ const opSendRawEmail = "SendRawEmail"
 //    of your message (for example, if you use open and click tracking), 8-bit
 //    content isn't preserved. For this reason, we highly recommend that you
 //    encode all content that isn't 7-bit ASCII. For more information, see MIME
-//    Encoding (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html#send-email-mime-encoding)
+//    Encoding (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html#send-email-mime-encoding)
 //    in the Amazon SES Developer Guide.
 //
 // Additionally, keep the following considerations in mind when using the SendRawEmail
@@ -243,14 +243,14 @@ const opSendRawEmail = "SendRawEmail"
 //    only specify the SourceIdentityArn parameter, Amazon SES will set the
 //    From and Return Path addresses to the identity specified in SourceIdentityArn.
 //    For more information about sending authorization, see the Using Sending
-//    Authorization with Amazon SES (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
+//    Authorization with Amazon SES (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
 //    in the Amazon SES Developer Guide.
 //
 //    * For every message that you send, the total number of recipients (including
 //    each recipient in the To:, CC: and BCC: fields) is counted against the
 //    maximum number of emails you can send in a 24-hour period (your sending
 //    quota). For more information about sending quotas in Amazon SES, see Managing
-//    Your Amazon SES Sending Limits (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html)
+//    Your Amazon SES Sending Limits (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html)
 //    in the Amazon SES Developer Guide.
 //
 //    // Example sending a request using SendRawEmailRequest.

@@ -66,8 +66,12 @@ const opDeletePolicy = "DeletePolicy"
 //
 // Deletes the specified scaling policy.
 //
-// Deleting a policy deletes the underlying alarm action, but does not delete
-// the alarm, even if it no longer has an associated action.
+// Deleting either a step scaling policy or a simple scaling policy deletes
+// the underlying alarm action, but does not delete the alarm, even if it no
+// longer has an associated action.
+//
+// For more information, see Deleting a Scaling Policy (https://docs.aws.amazon.com/autoscaling/ec2/userguide/deleting-scaling-policy.html)
+// in the Amazon EC2 Auto Scaling User Guide.
 //
 //    // Example sending a request using DeletePolicyRequest.
 //    req := client.DeletePolicyRequest(params)

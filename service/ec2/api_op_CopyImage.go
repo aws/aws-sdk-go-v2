@@ -43,17 +43,16 @@ type CopyImageInput struct {
 	// the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted
 	// flag must also be set.
 	//
-	// The CMK identifier may be provided in any of the following formats:
+	// To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name,
+	// or alias ARN. When using an alias name, prefix it with "alias/". For example:
 	//
-	//    * Key ID
+	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	//    * ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed
-	//    by the Region of the CMK, the AWS account ID of the CMK owner, the key
-	//    namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.
+	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	//    * ARN using key alias. The alias ARN contains the arn:aws:kms namespace,
-	//    followed by the Region of the CMK, the AWS account ID of the CMK owner,
-	//    the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
+	//    * Alias name: alias/ExampleAlias
+	//
+	//    * Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
 	//
 	// AWS parses KmsKeyId asynchronously, meaning that the action you call may
 	// appear to complete even though you provided an invalid identifier. This action

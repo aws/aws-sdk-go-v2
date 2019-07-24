@@ -129,7 +129,7 @@ const opCreateAccount = "CreateAccount"
 //    as a parameter to the DescribeCreateAccountStatus operation.
 //
 //    * Check the AWS CloudTrail log for the CreateAccountResult event. For
-//    information on using AWS CloudTrail with Organizations, see Monitoring
+//    information on using AWS CloudTrail with AWS Organizations, see Monitoring
 //    the Activity in Your Organization (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html)
 //    in the AWS Organizations User Guide.
 //

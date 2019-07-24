@@ -14,13 +14,13 @@ import (
 type CreateMaintenanceWindowInput struct {
 	_ struct{} `type:"structure"`
 
-	// Enables a Maintenance Window task to run on managed instances, even if you
+	// Enables a maintenance window task to run on managed instances, even if you
 	// have not registered those instances as targets. If enabled, then you must
 	// specify the unregistered instances (by instance ID) when you register a task
-	// with the Maintenance Window
+	// with the maintenance window.
 	//
 	// If you don't enable this option, then you must specify previously-registered
-	// targets when you register a task with the Maintenance Window.
+	// targets when you register a task with the maintenance window.
 	//
 	// AllowUnassociatedTargets is a required field
 	AllowUnassociatedTargets *bool `type:"boolean" required:"true"`
@@ -28,50 +28,50 @@ type CreateMaintenanceWindowInput struct {
 	// User-provided idempotency token.
 	ClientToken *string `min:"1" type:"string" idempotencyToken:"true"`
 
-	// The number of hours before the end of the Maintenance Window that Systems
+	// The number of hours before the end of the maintenance window that Systems
 	// Manager stops scheduling new tasks for execution.
 	//
 	// Cutoff is a required field
 	Cutoff *int64 `type:"integer" required:"true"`
 
-	// An optional description for the Maintenance Window. We recommend specifying
-	// a description to help you organize your Maintenance Windows.
+	// An optional description for the maintenance window. We recommend specifying
+	// a description to help you organize your maintenance windows.
 	Description *string `min:"1" type:"string"`
 
-	// The duration of the Maintenance Window in hours.
+	// The duration of the maintenance window in hours.
 	//
 	// Duration is a required field
 	Duration *int64 `min:"1" type:"integer" required:"true"`
 
-	// The date and time, in ISO-8601 Extended format, for when you want the Maintenance
-	// Window to become inactive. EndDate allows you to set a date and time in the
-	// future when the Maintenance Window will no longer run.
+	// The date and time, in ISO-8601 Extended format, for when you want the maintenance
+	// window to become inactive. EndDate allows you to set a date and time in the
+	// future when the maintenance window will no longer run.
 	EndDate *string `type:"string"`
 
-	// The name of the Maintenance Window.
+	// The name of the maintenance window.
 	//
 	// Name is a required field
 	Name *string `min:"3" type:"string" required:"true"`
 
-	// The schedule of the Maintenance Window in the form of a cron or rate expression.
+	// The schedule of the maintenance window in the form of a cron or rate expression.
 	//
 	// Schedule is a required field
 	Schedule *string `min:"1" type:"string" required:"true"`
 
-	// The time zone that the scheduled Maintenance Window executions are based
+	// The time zone that the scheduled maintenance window executions are based
 	// on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles",
 	// "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database
 	// (https://www.iana.org/time-zones) on the IANA website.
 	ScheduleTimezone *string `type:"string"`
 
-	// The date and time, in ISO-8601 Extended format, for when you want the Maintenance
-	// Window to become active. StartDate allows you to delay activation of the
-	// Maintenance Window until the specified future date.
+	// The date and time, in ISO-8601 Extended format, for when you want the maintenance
+	// window to become active. StartDate allows you to delay activation of the
+	// maintenance window until the specified future date.
 	StartDate *string `type:"string"`
 
 	// Optional metadata that you assign to a resource. Tags enable you to categorize
 	// a resource in different ways, such as by purpose, owner, or environment.
-	// For example, you might want to tag a Maintenance Window to identify the type
+	// For example, you might want to tag a maintenance window to identify the type
 	// of tasks it will run, the types of targets, and the environment it will run
 	// in. In this case, you could specify the following key name/value pairs:
 	//
@@ -81,7 +81,7 @@ type CreateMaintenanceWindowInput struct {
 	//
 	//    * Key=Environment,Value=Production
 	//
-	// To add tags to an existing Maintenance Window, use the AddTagsToResource
+	// To add tags to an existing maintenance window, use the AddTagsToResource
 	// action.
 	Tags []Tag `type:"list"`
 }
@@ -147,7 +147,7 @@ func (s *CreateMaintenanceWindowInput) Validate() error {
 type CreateMaintenanceWindowOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the created Maintenance Window.
+	// The ID of the created maintenance window.
 	WindowId *string `min:"20" type:"string"`
 }
 
@@ -161,7 +161,7 @@ const opCreateMaintenanceWindow = "CreateMaintenanceWindow"
 // CreateMaintenanceWindowRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Creates a new Maintenance Window.
+// Creates a new maintenance window.
 //
 //    // Example sending a request using CreateMaintenanceWindowRequest.
 //    req := client.CreateMaintenanceWindowRequest(params)

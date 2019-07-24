@@ -26,7 +26,7 @@ type PollForActivityTaskInput struct {
 	//
 	// The specified string must not start or end with whitespace. It must not contain
 	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not contain the literal string arn.
+	// | \u007f-\u009f). Also, it must not be the literal string arn.
 	//
 	// TaskList is a required field
 	TaskList *TaskList `locationName:"taskList" type:"structure" required:"true"`
@@ -139,7 +139,7 @@ const opPollForActivityTask = "PollForActivityTask"
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 //    // Example sending a request using PollForActivityTaskRequest.

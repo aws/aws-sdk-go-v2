@@ -11,7 +11,7 @@ import (
 )
 
 // The request to list tags for a CloudFront resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListTagsForResourceRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListTagsForResourceRequest
 type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +53,7 @@ func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListTagsForResourceResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListTagsForResourceResult
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure" payload:"Tags"`
 
@@ -79,7 +79,7 @@ func (s ListTagsForResourceOutput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-const opListTagsForResource = "ListTagsForResource2018_11_05"
+const opListTagsForResource = "ListTagsForResource2019_03_26"
 
 // ListTagsForResourceRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -93,12 +93,12 @@ const opListTagsForResource = "ListTagsForResource2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListTagsForResource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListTagsForResource
 func (c *Client) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2018-11-05/tagging",
+		HTTPPath:   "/2019-03-26/tagging",
 	}
 
 	if input == nil {

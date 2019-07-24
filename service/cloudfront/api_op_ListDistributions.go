@@ -11,7 +11,7 @@ import (
 )
 
 // The request to list your distributions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListDistributionsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListDistributionsRequest
 type ListDistributionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +50,7 @@ func (s ListDistributionsInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListDistributionsResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListDistributionsResult
 type ListDistributionsOutput struct {
 	_ struct{} `type:"structure" payload:"DistributionList"`
 
@@ -74,12 +74,12 @@ func (s ListDistributionsOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opListDistributions = "ListDistributions2018_11_05"
+const opListDistributions = "ListDistributions2019_03_26"
 
 // ListDistributionsRequest returns a request value for making API operation for
 // Amazon CloudFront.
 //
-// List distributions.
+// List CloudFront distributions.
 //
 //    // Example sending a request using ListDistributionsRequest.
 //    req := client.ListDistributionsRequest(params)
@@ -88,12 +88,12 @@ const opListDistributions = "ListDistributions2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListDistributions
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListDistributions
 func (c *Client) ListDistributionsRequest(input *ListDistributionsInput) ListDistributionsRequest {
 	op := &aws.Operation{
 		Name:       opListDistributions,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2018-11-05/distribution",
+		HTTPPath:   "/2019-03-26/distribution",
 		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"DistributionList.NextMarker"},

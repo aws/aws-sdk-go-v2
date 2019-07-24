@@ -627,8 +627,8 @@ func ExampleClient_ScanRequest_shared00() {
 	svc := dynamodb.New(cfg)
 	input := &dynamodb.ScanInput{
 		ExpressionAttributeNames: map[string]string{
-			"AT": "AlbumTitle",
-			"ST": "SongTitle",
+			"#AT": "AlbumTitle",
+			"#ST": "SongTitle",
 		},
 		ExpressionAttributeValues: map[string]dynamodb.AttributeValue{
 			":a": {

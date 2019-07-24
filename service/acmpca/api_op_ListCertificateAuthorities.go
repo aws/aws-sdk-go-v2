@@ -69,7 +69,7 @@ const opListCertificateAuthorities = "ListCertificateAuthorities"
 // AWS Certificate Manager Private Certificate Authority.
 //
 // Lists the private certificate authorities that you created by using the CreateCertificateAuthority
-// operation.
+// action.
 //
 //    // Example sending a request using ListCertificateAuthoritiesRequest.
 //    req := client.ListCertificateAuthoritiesRequest(params)

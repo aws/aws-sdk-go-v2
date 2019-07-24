@@ -13,7 +13,7 @@ import (
 type ModifyReplicationSubnetGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The description of the replication instance subnet group.
+	// A description for the replication instance subnet group.
 	ReplicationSubnetGroupDescription *string `type:"string"`
 
 	// The name of the replication instance subnet group.

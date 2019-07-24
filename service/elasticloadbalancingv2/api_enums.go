@@ -132,10 +132,12 @@ type ProtocolEnum string
 
 // Enum values for ProtocolEnum
 const (
-	ProtocolEnumHttp  ProtocolEnum = "HTTP"
-	ProtocolEnumHttps ProtocolEnum = "HTTPS"
-	ProtocolEnumTcp   ProtocolEnum = "TCP"
-	ProtocolEnumTls   ProtocolEnum = "TLS"
+	ProtocolEnumHttp   ProtocolEnum = "HTTP"
+	ProtocolEnumHttps  ProtocolEnum = "HTTPS"
+	ProtocolEnumTcp    ProtocolEnum = "TCP"
+	ProtocolEnumTls    ProtocolEnum = "TLS"
+	ProtocolEnumUdp    ProtocolEnum = "UDP"
+	ProtocolEnumTcpUdp ProtocolEnum = "TCP_UDP"
 )
 
 func (enum ProtocolEnum) MarshalValue() (string, error) {

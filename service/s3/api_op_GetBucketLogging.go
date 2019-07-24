@@ -60,9 +60,10 @@ func (s GetBucketLoggingInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetBucketLoggingOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Container for logging information. Presence of this element indicates that
-	// logging is enabled. Parameters TargetBucket and TargetPrefix are required
-	// in this case.
+	// Describes where logs are stored and the prefix that Amazon S3 assigns to
+	// all log object keys for a bucket. For more information, see PUT Bucket logging
+	// (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html)
+	// in the Amazon Simple Storage Service API Reference.
 	LoggingEnabled *LoggingEnabled `type:"structure"`
 }
 

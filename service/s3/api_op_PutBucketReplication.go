@@ -24,6 +24,7 @@ type PutBucketReplicationInput struct {
 	// ReplicationConfiguration is a required field
 	ReplicationConfiguration *ReplicationConfiguration `locationName:"ReplicationConfiguration" type:"structure" required:"true" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
 
+	// A token that allows Amazon S3 object lock to be enabled for an existing bucket.
 	Token *string `location:"header" locationName:"x-amz-bucket-object-lock-token" type:"string"`
 }
 

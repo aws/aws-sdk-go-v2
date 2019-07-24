@@ -84,7 +84,7 @@ const opCreateCacheSecurityGroup = "CreateCacheSecurityGroup"
 // Cache security groups are only used when you are creating a cluster outside
 // of an Amazon Virtual Private Cloud (Amazon VPC). If you are creating a cluster
 // inside of a VPC, use a cache subnet group instead. For more information,
-// see CreateCacheSubnetGroup (http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSubnetGroup.html).
+// see CreateCacheSubnetGroup (https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSubnetGroup.html).
 //
 //    // Example sending a request using CreateCacheSecurityGroupRequest.
 //    req := client.CreateCacheSecurityGroupRequest(params)

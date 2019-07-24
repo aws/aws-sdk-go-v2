@@ -54,7 +54,8 @@ func (s DeleteVoiceChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteVoiceChannelOutput struct {
 	_ struct{} `type:"structure" payload:"VoiceChannelResponse"`
 
-	// Voice Channel Response.
+	// Provides information about the status and settings of the voice channel for
+	// an application.
 	//
 	// VoiceChannelResponse is a required field
 	VoiceChannelResponse *VoiceChannelResponse `type:"structure" required:"true"`
@@ -81,7 +82,8 @@ const opDeleteVoiceChannel = "DeleteVoiceChannel"
 // DeleteVoiceChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Delete an Voice channel
+// Disables the voice channel for an application and deletes any existing settings
+// for the channel.
 //
 //    // Example sending a request using DeleteVoiceChannelRequest.
 //    req := client.DeleteVoiceChannelRequest(params)

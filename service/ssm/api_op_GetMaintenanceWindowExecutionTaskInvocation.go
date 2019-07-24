@@ -19,13 +19,13 @@ type GetMaintenanceWindowExecutionTaskInvocationInput struct {
 	// InvocationId is a required field
 	InvocationId *string `min:"36" type:"string" required:"true"`
 
-	// The ID of the specific task in the Maintenance Window task that should be
+	// The ID of the specific task in the maintenance window task that should be
 	// retrieved.
 	//
 	// TaskId is a required field
 	TaskId *string `min:"36" type:"string" required:"true"`
 
-	// The ID of the Maintenance Window execution for which the task is a part.
+	// The ID of the maintenance window execution for which the task is a part.
 	//
 	// WindowExecutionId is a required field
 	WindowExecutionId *string `min:"36" type:"string" required:"true"`
@@ -81,7 +81,7 @@ type GetMaintenanceWindowExecutionTaskInvocationOutput struct {
 	InvocationId *string `min:"36" type:"string"`
 
 	// User-provided value to be included in any CloudWatch events raised while
-	// running tasks for these targets in this Maintenance Window.
+	// running tasks for these targets in this maintenance window.
 	OwnerInformation *string `min:"1" type:"string"`
 
 	// The parameters used at the time that the task ran.
@@ -100,14 +100,14 @@ type GetMaintenanceWindowExecutionTaskInvocationOutput struct {
 	// The task execution ID.
 	TaskExecutionId *string `min:"36" type:"string"`
 
-	// Retrieves the task type for a Maintenance Window. Task types include the
-	// following: LAMBDA, STEP_FUNCTION, AUTOMATION, RUN_COMMAND.
+	// Retrieves the task type for a maintenance window. Task types include the
+	// following: LAMBDA, STEP_FUNCTIONS, AUTOMATION, RUN_COMMAND.
 	TaskType MaintenanceWindowTaskType `type:"string" enum:"true"`
 
-	// The Maintenance Window execution ID.
+	// The maintenance window execution ID.
 	WindowExecutionId *string `min:"36" type:"string"`
 
-	// The Maintenance Window target ID.
+	// The maintenance window target ID.
 	WindowTargetId *string `type:"string"`
 }
 
@@ -121,8 +121,7 @@ const opGetMaintenanceWindowExecutionTaskInvocation = "GetMaintenanceWindowExecu
 // GetMaintenanceWindowExecutionTaskInvocationRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Retrieves a task invocation. A task invocation is a specific task running
-// on a specific target. Maintenance Windows report status for all invocations.
+// Retrieves information about a specific task running on a specific target.
 //
 //    // Example sending a request using GetMaintenanceWindowExecutionTaskInvocationRequest.
 //    req := client.GetMaintenanceWindowExecutionTaskInvocationRequest(params)

@@ -14,13 +14,13 @@ import (
 type GetMaintenanceWindowExecutionTaskInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the specific task execution in the Maintenance Window task that
+	// The ID of the specific task execution in the maintenance window task that
 	// should be retrieved.
 	//
 	// TaskId is a required field
 	TaskId *string `min:"36" type:"string" required:"true"`
 
-	// The ID of the Maintenance Window execution that includes the task.
+	// The ID of the maintenance window execution that includes the task.
 	//
 	// WindowExecutionId is a required field
 	WindowExecutionId *string `min:"36" type:"string" required:"true"`
@@ -87,7 +87,7 @@ type GetMaintenanceWindowExecutionTaskOutput struct {
 	// The ARN of the task that ran.
 	TaskArn *string `min:"1" type:"string"`
 
-	// The ID of the specific task execution in the Maintenance Window task that
+	// The ID of the specific task execution in the maintenance window task that
 	// was retrieved.
 	TaskExecutionId *string `min:"36" type:"string"`
 
@@ -96,7 +96,7 @@ type GetMaintenanceWindowExecutionTaskOutput struct {
 	// TaskParameters has been deprecated. To specify parameters to pass to a task
 	// when it runs, instead use the Parameters option in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options
-	// for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.
+	// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 	//
 	// The map has the following format:
 	//
@@ -108,7 +108,7 @@ type GetMaintenanceWindowExecutionTaskOutput struct {
 	// The type of task that was run.
 	Type MaintenanceWindowTaskType `type:"string" enum:"true"`
 
-	// The ID of the Maintenance Window execution that includes the task.
+	// The ID of the maintenance window execution that includes the task.
 	WindowExecutionId *string `min:"36" type:"string"`
 }
 
@@ -122,8 +122,8 @@ const opGetMaintenanceWindowExecutionTask = "GetMaintenanceWindowExecutionTask"
 // GetMaintenanceWindowExecutionTaskRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Retrieves the details about a specific task run as part of a Maintenance
-// Window execution.
+// Retrieves the details about a specific task run as part of a maintenance
+// window execution.
 //
 //    // Example sending a request using GetMaintenanceWindowExecutionTaskRequest.
 //    req := client.GetMaintenanceWindowExecutionTaskRequest(params)

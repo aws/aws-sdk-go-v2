@@ -10,14 +10,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/UpdateFieldLevelEncryptionConfigRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateFieldLevelEncryptionConfigRequest
 type UpdateFieldLevelEncryptionConfigInput struct {
 	_ struct{} `type:"structure" payload:"FieldLevelEncryptionConfig"`
 
 	// Request to update a field-level encryption configuration.
 	//
 	// FieldLevelEncryptionConfig is a required field
-	FieldLevelEncryptionConfig *FieldLevelEncryptionConfig `locationName:"FieldLevelEncryptionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2018-11-05/"`
+	FieldLevelEncryptionConfig *FieldLevelEncryptionConfig `locationName:"FieldLevelEncryptionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
 
 	// The ID of the configuration you want to update.
 	//
@@ -75,13 +75,13 @@ func (s UpdateFieldLevelEncryptionConfigInput) MarshalFields(e protocol.FieldEnc
 	if s.FieldLevelEncryptionConfig != nil {
 		v := s.FieldLevelEncryptionConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2018-11-05/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
 		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionConfig", v, metadata)
 	}
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/UpdateFieldLevelEncryptionConfigResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateFieldLevelEncryptionConfigResult
 type UpdateFieldLevelEncryptionConfigOutput struct {
 	_ struct{} `type:"structure" payload:"FieldLevelEncryption"`
 
@@ -115,7 +115,7 @@ func (s UpdateFieldLevelEncryptionConfigOutput) MarshalFields(e protocol.FieldEn
 	return nil
 }
 
-const opUpdateFieldLevelEncryptionConfig = "UpdateFieldLevelEncryptionConfig2018_11_05"
+const opUpdateFieldLevelEncryptionConfig = "UpdateFieldLevelEncryptionConfig2019_03_26"
 
 // UpdateFieldLevelEncryptionConfigRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -129,12 +129,12 @@ const opUpdateFieldLevelEncryptionConfig = "UpdateFieldLevelEncryptionConfig2018
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/UpdateFieldLevelEncryptionConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateFieldLevelEncryptionConfig
 func (c *Client) UpdateFieldLevelEncryptionConfigRequest(input *UpdateFieldLevelEncryptionConfigInput) UpdateFieldLevelEncryptionConfigRequest {
 	op := &aws.Operation{
 		Name:       opUpdateFieldLevelEncryptionConfig,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/2018-11-05/field-level-encryption/{Id}/config",
+		HTTPPath:   "/2019-03-26/field-level-encryption/{Id}/config",
 	}
 
 	if input == nil {

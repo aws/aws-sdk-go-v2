@@ -25,7 +25,7 @@ type UpdateConfigurationSetTrackingOptionsInput struct {
 	// emails.
 	//
 	// For more information, see Configuring Custom Domains to Handle Open and Click
-	// Tracking (ses/latest/DeveloperGuide/configure-custom-open-click-domains.html)
+	// Tracking (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html)
 	// in the Amazon SES Developer Guide.
 	//
 	// TrackingOptions is a required field
@@ -77,7 +77,7 @@ const opUpdateConfigurationSetTrackingOptions = "UpdateConfigurationSetTrackingO
 // By default, images and links used for tracking open and click events are
 // hosted on domains operated by Amazon SES. You can configure a subdomain of
 // your own to handle these events. For information about using custom domains,
-// see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html).
+// see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html).
 //
 //    // Example sending a request using UpdateConfigurationSetTrackingOptionsRequest.
 //    req := client.UpdateConfigurationSetTrackingOptionsRequest(params)

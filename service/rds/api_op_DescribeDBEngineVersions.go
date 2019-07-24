@@ -21,8 +21,8 @@ type DescribeDBEngineVersionsInput struct {
 	//    * If supplied, must match an existing DBParameterGroupFamily.
 	DBParameterGroupFamily *string `type:"string"`
 
-	// Indicates that only the default version of the specified engine or engine
-	// and major version combination is returned.
+	// A value that indicates whether only the default version of the specified
+	// engine or engine and major version combination is returned.
 	DefaultOnly *bool `type:"boolean"`
 
 	// The database engine to return.
@@ -36,16 +36,22 @@ type DescribeDBEngineVersionsInput struct {
 	// This parameter is not currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
-	// Whether to include non-available engine versions in the list. The default
-	// is to list only available engine versions.
+	// A value that indicates whether to include engine versions that aren't available
+	// in the list. The default is to list only available engine versions.
 	IncludeAll *bool `type:"boolean"`
 
-	// If this parameter is specified and the requested engine supports the CharacterSetName
+	// A value that indicates whether to list the supported character sets for each
+	// engine version.
+	//
+	// If this parameter is enabled and the requested engine supports the CharacterSetName
 	// parameter for CreateDBInstance, the response includes a list of supported
 	// character sets for each engine version.
 	ListSupportedCharacterSets *bool `type:"boolean"`
 
-	// If this parameter is specified and the requested engine supports the TimeZone
+	// A value that indicates whether to list the supported time zones for each
+	// engine version.
+	//
+	// If this parameter is enabled and the requested engine supports the TimeZone
 	// parameter for CreateDBInstance, the response includes a list of supported
 	// time zones for each engine version.
 	ListSupportedTimezones *bool `type:"boolean"`

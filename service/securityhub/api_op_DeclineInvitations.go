@@ -14,8 +14,8 @@ import (
 type DeclineInvitationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of account IDs specifying accounts whose invitations to Security Hub
-	// you want to decline.
+	// A list of account IDs that specify the accounts that invitations to Security
+	// Hub are declined from.
 	AccountIds []string `type:"list"`
 }
 
@@ -47,8 +47,8 @@ func (s DeclineInvitationsInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeclineInvitationsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of account ID and email address pairs of the AWS accounts that could
-	// not be processed.
+	// A list of account ID and email address pairs of the AWS accounts that weren't
+	// processed.
 	UnprocessedAccounts []Result `type:"list"`
 }
 
@@ -79,8 +79,7 @@ const opDeclineInvitations = "DeclineInvitations"
 // DeclineInvitationsRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Declines invitations that are sent to this AWS account (invitee) by the AWS
-// accounts (inviters) that are specified by the account IDs.
+// Declines invitations to become a member account.
 //
 //    // Example sending a request using DeclineInvitationsRequest.
 //    req := client.DeclineInvitationsRequest(params)

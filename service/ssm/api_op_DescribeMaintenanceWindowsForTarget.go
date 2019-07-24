@@ -75,7 +75,7 @@ type DescribeMaintenanceWindowsForTargetOutput struct {
 	// next call.)
 	NextToken *string `type:"string"`
 
-	// Information about the Maintenance Window targets and tasks an instance is
+	// Information about the maintenance window targets and tasks an instance is
 	// associated with.
 	WindowIdentities []MaintenanceWindowIdentityForTarget `type:"list"`
 }
@@ -90,7 +90,7 @@ const opDescribeMaintenanceWindowsForTarget = "DescribeMaintenanceWindowsForTarg
 // DescribeMaintenanceWindowsForTargetRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Retrieves information about the Maintenance Windows targets or tasks that
+// Retrieves information about the maintenance window targets or tasks that
 // an instance is associated with.
 //
 //    // Example sending a request using DescribeMaintenanceWindowsForTargetRequest.

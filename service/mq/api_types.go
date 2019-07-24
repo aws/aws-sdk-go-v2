@@ -506,6 +506,58 @@ func (s Configurations) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Encryption options for the broker.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/EncryptionOptions
+type EncryptionOptions struct {
+	_ struct{} `type:"structure"`
+
+	// The customer master key (CMK) to use for the AWS Key Management Service (KMS).
+	// This key is used to encrypt your data at rest. If not provided, Amazon MQ
+	// will use a default CMK to encrypt your data.
+	KmsKeyId *string `locationName:"kmsKeyId" type:"string"`
+
+	// Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
+	//
+	// UseAwsOwnedKey is a required field
+	UseAwsOwnedKey *bool `locationName:"useAwsOwnedKey" type:"boolean" required:"true"`
+}
+
+// String returns the string representation
+func (s EncryptionOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *EncryptionOptions) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "EncryptionOptions"}
+
+	if s.UseAwsOwnedKey == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UseAwsOwnedKey"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s EncryptionOptions) MarshalFields(e protocol.FieldEncoder) error {
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "kmsKeyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UseAwsOwnedKey != nil {
+		v := *s.UseAwsOwnedKey
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "useAwsOwnedKey", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
 // Id of the engine version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/EngineVersion
 type EngineVersion struct {

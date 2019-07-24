@@ -68,9 +68,9 @@ const opAcceptHandshake = "AcceptHandshake"
 //    * Invitation to join or Approve all features request handshakes: only
 //    a principal from the member account. The user who calls the API for an
 //    invitation to join must have the organizations:AcceptHandshake permission.
-//    If you enabled all features in the organization, then the user must also
-//    have the iam:CreateServiceLinkedRole permission so that Organizations
-//    can create the required service-linked role named AWSServiceRoleForOrganizations.
+//    If you enabled all features in the organization, the user must also have
+//    the iam:CreateServiceLinkedRole permission so that AWS Organizations can
+//    create the required service-linked role named AWSServiceRoleForOrganizations.
 //    For more information, see AWS Organizations and Service-Linked Roles (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integration_service-linked-roles)
 //    in the AWS Organizations User Guide.
 //
@@ -83,7 +83,7 @@ const opAcceptHandshake = "AcceptHandshake"
 //    in the AWS Organizations User Guide.
 //
 // After you accept a handshake, it continues to appear in the results of relevant
-// APIs for only 30 days. After that it is deleted.
+// APIs for only 30 days. After that, it's deleted.
 //
 //    // Example sending a request using AcceptHandshakeRequest.
 //    req := client.AcceptHandshakeRequest(params)

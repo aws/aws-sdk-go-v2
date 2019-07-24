@@ -11,13 +11,13 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Provides options for downloading output of an Amazon Glacier job.
+// Provides options for downloading output of an Amazon S3 Glacier job.
 type GetJobOutputInput struct {
 	_ struct{} `type:"structure"`
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon Glacier uses the AWS account ID associated with the
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -55,8 +55,8 @@ type GetJobOutputInput struct {
 	// checksum values. Compute the tree hash of these values to find the checksum
 	// of the entire output. Using the DescribeJob API, obtain job information of
 	// the job that provided you the output. The response includes the checksum
-	// of the entire archive stored in Amazon Glacier. You compare this value with
-	// the checksum you computed to ensure you have downloaded the entire archive
+	// of the entire archive stored in Amazon S3 Glacier. You compare this value
+	// with the checksum you computed to ensure you have downloaded the entire archive
 	// content with no errors.
 	Range *string `location:"header" locationName:"Range" type:"string"`
 
@@ -123,7 +123,7 @@ func (s GetJobOutputInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains the Amazon Glacier response to your request.
+// Contains the Amazon S3 Glacier response to your request.
 type GetJobOutputOutput struct {
 	_ struct{} `type:"structure" payload:"Body"`
 
@@ -154,9 +154,10 @@ type GetJobOutputOutput struct {
 	//    as a response header.
 	Checksum *string `location:"header" locationName:"x-amz-sha256-tree-hash" type:"string"`
 
-	// The range of bytes returned by Amazon Glacier. If only partial output is
-	// downloaded, the response provides the range of bytes Amazon Glacier returned.
-	// For example, bytes 0-1048575/8388608 returns the first 1 MB from 8 MB.
+	// The range of bytes returned by Amazon S3 Glacier. If only partial output
+	// is downloaded, the response provides the range of bytes Amazon S3 Glacier
+	// returned. For example, bytes 0-1048575/8388608 returns the first 1 MB from
+	// 8 MB.
 	ContentRange *string `location:"header" locationName:"Content-Range" type:"string"`
 
 	// The Content-Type depends on whether the job output is an archive or a vault
@@ -224,14 +225,14 @@ const opGetJobOutput = "GetJobOutput"
 //
 // You can download all the job output or download a portion of the output by
 // specifying a byte range. In the case of an archive retrieval job, depending
-// on the byte range you specify, Amazon Glacier returns the checksum for the
-// portion of the data. You can compute the checksum on the client and verify
-// that the values match to ensure the portion you downloaded is the correct
-// data.
+// on the byte range you specify, Amazon S3 Glacier (Glacier) returns the checksum
+// for the portion of the data. You can compute the checksum on the client and
+// verify that the values match to ensure the portion you downloaded is the
+// correct data.
 //
-// A job ID will not expire for at least 24 hours after Amazon Glacier completes
-// the job. That a byte range. For both archive and inventory retrieval jobs,
-// you should verify the downloaded size against the size returned in the headers
+// A job ID will not expire for at least 24 hours after Glacier completes the
+// job. That a byte range. For both archive and inventory retrieval jobs, you
+// should verify the downloaded size against the size returned in the headers
 // from the Get Job Output response.
 //
 // For archive retrieval jobs, you should also verify that the size is what
@@ -239,29 +240,29 @@ const opGetJobOutput = "GetJobOutput"
 // is based on the range of bytes you specified. For example, if you specify
 // a range of bytes=0-1048575, you should verify your download size is 1,048,576
 // bytes. If you download an entire archive, the expected size is the size of
-// the archive when you uploaded it to Amazon Glacier The expected size is also
-// returned in the headers from the Get Job Output response.
+// the archive when you uploaded it to Amazon S3 Glacier The expected size is
+// also returned in the headers from the Get Job Output response.
 //
 // In the case of an archive retrieval job, depending on the byte range you
-// specify, Amazon Glacier returns the checksum for the portion of the data.
-// To ensure the portion you downloaded is the correct data, compute the checksum
-// on the client, verify that the values match, and verify that the size is
-// what you expected.
+// specify, Glacier returns the checksum for the portion of the data. To ensure
+// the portion you downloaded is the correct data, compute the checksum on the
+// client, verify that the values match, and verify that the size is what you
+// expected.
 //
-// A job ID does not expire for at least 24 hours after Amazon Glacier completes
-// the job. That is, you can download the job output within the 24 hours period
+// A job ID does not expire for at least 24 hours after Glacier completes the
+// job. That is, you can download the job output within the 24 hours period
 // after Amazon Glacier completes the job.
 //
 // An AWS account has full permission to perform all operations (actions). However,
 // AWS Identity and Access Management (IAM) users don't have any permissions
 // by default. You must grant them explicit permission to perform specific actions.
 // For more information, see Access Control Using AWS Identity and Access Management
-// (IAM) (http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
+// (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
 //
 // For conceptual information and the underlying REST API, see Downloading a
-// Vault Inventory (http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-inventory.html),
-// Downloading an Archive (http://docs.aws.amazon.com/amazonglacier/latest/dev/downloading-an-archive.html),
-// and Get Job Output (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-job-output-get.html)
+// Vault Inventory (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-inventory.html),
+// Downloading an Archive (https://docs.aws.amazon.com/amazonglacier/latest/dev/downloading-an-archive.html),
+// and Get Job Output (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-job-output-get.html)
 //
 //    // Example sending a request using GetJobOutputRequest.
 //    req := client.GetJobOutputRequest(params)

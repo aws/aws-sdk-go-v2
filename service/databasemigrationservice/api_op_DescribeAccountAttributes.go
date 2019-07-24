@@ -25,6 +25,17 @@ type DescribeAccountAttributesOutput struct {
 
 	// Account quota information.
 	AccountQuotas []AccountQuota `type:"list"`
+
+	// A unique AWS DMS identifier for an account in a particular AWS Region. The
+	// value of this identifier has the following format: c99999999999. DMS uses
+	// this identifier to name artifacts. For example, DMS uses this identifier
+	// to name the default Amazon S3 bucket for storing task assessment reports
+	// in a given AWS Region. The format of this S3 bucket name is the following:
+	// dms-AccountNumber-UniqueAccountIdentifier. Here is an example name for this
+	// default S3 bucket: dms-111122223333-c44445555666.
+	//
+	// AWS DMS supports UniqueAccountIdentifier in versions 3.1.4 and later.
+	UniqueAccountIdentifier *string `type:"string"`
 }
 
 // String returns the string representation
@@ -37,10 +48,13 @@ const opDescribeAccountAttributes = "DescribeAccountAttributes"
 // DescribeAccountAttributesRequest returns a request value for making API operation for
 // AWS Database Migration Service.
 //
-// Lists all of the AWS DMS attributes for a customer account. The attributes
-// include AWS DMS quotas for the account, such as the number of replication
-// instances allowed. The description for a quota includes the quota name, current
-// usage toward that quota, and the quota's maximum value.
+// Lists all of the AWS DMS attributes for a customer account. These attributes
+// include AWS DMS quotas for the account and a unique account identifier in
+// a particular DMS region. DMS quotas include a list of resource quotas supported
+// by the account, such as the number of replication instances allowed. The
+// description for each resource quota, includes the quota name, current usage
+// toward that quota, and the quota's maximum value. DMS uses the unique account
+// identifier to name each artifact used by DMS in the given region.
 //
 // This command does not take any parameters.
 //

@@ -68,7 +68,7 @@ const opCreateVpcPeeringConnection = "CreateVpcPeeringConnection"
 // CIDR blocks.
 //
 // Limitations and rules apply to a VPC peering connection. For more information,
-// see the limitations (https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/vpc-peering-basics.html#vpc-peering-limitations)
+// see the limitations (https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-basics.html#vpc-peering-limitations)
 // section in the VPC Peering Guide.
 //
 // The owner of the accepter VPC must accept the peering request to activate

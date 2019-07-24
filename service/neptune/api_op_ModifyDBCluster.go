@@ -39,6 +39,10 @@ type ModifyDBClusterInput struct {
 	//    * Must be a value from 1 to 35
 	BackupRetentionPeriod *int64 `type:"integer"`
 
+	// The configuration setting for the log types to be enabled for export to CloudWatch
+	// Logs for a specific DB cluster.
+	CloudwatchLogsExportConfiguration *CloudwatchLogsExportConfiguration `type:"structure"`
+
 	// The DB cluster identifier for the cluster being modified. This parameter
 	// is not case-sensitive.
 	//

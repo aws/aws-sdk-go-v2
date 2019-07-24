@@ -14,7 +14,7 @@ import (
 type DeleteInsightInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the insight that you want to delete.
+	// The ARN of the insight to delete.
 	//
 	// InsightArn is a required field
 	InsightArn *string `location:"uri" locationName:"InsightArn" type:"string" required:"true"`
@@ -83,7 +83,7 @@ const opDeleteInsight = "DeleteInsight"
 // DeleteInsightRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Deletes an insight that is specified by the insight ARN.
+// Deletes the insight specified by the InsightArn.
 //
 //    // Example sending a request using DeleteInsightRequest.
 //    req := client.DeleteInsightRequest(params)

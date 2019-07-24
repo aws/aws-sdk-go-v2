@@ -62,12 +62,12 @@ type ModifyEndpointInput struct {
 	// hyphen or contain two consecutive hyphens.
 	EndpointIdentifier *string `type:"string"`
 
-	// The type of endpoint.
+	// The type of endpoint. Valid values are source and target.
 	EndpointType ReplicationEndpointTypeValue `type:"string" enum:"true"`
 
-	// The type of engine for the endpoint. Valid values, depending on the EndPointType,
+	// The type of engine for the endpoint. Valid values, depending on the EndpointType,
 	// include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift,
-	// s3, db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.
+	// s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.
 	EngineName *string `type:"string"`
 
 	// The external table definition.
@@ -110,11 +110,7 @@ type ModifyEndpointInput struct {
 	// to modify the endpoint.
 	ServiceAccessRoleArn *string `type:"string"`
 
-	// The SSL mode to be used.
-	//
-	// SSL mode can be one of four values: none, require, verify-ca, verify-full.
-	//
-	// The default value is none.
+	// The SSL mode used to connect to the endpoint. The default value is none.
 	SslMode DmsSslModeValue `type:"string" enum:"true"`
 
 	// The user name to be used to login to the endpoint database.

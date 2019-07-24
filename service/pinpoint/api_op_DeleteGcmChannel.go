@@ -54,7 +54,10 @@ func (s DeleteGcmChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteGcmChannelOutput struct {
 	_ struct{} `type:"structure" payload:"GCMChannelResponse"`
 
-	// Google Cloud Messaging channel definition
+	// Provides information about the status and settings of the GCM channel for
+	// an application. The GCM channel enables Amazon Pinpoint to send push notifications
+	// through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging
+	// (GCM), service.
 	//
 	// GCMChannelResponse is a required field
 	GCMChannelResponse *GCMChannelResponse `type:"structure" required:"true"`
@@ -81,7 +84,8 @@ const opDeleteGcmChannel = "DeleteGcmChannel"
 // DeleteGcmChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Deletes the GCM channel for an app.
+// Disables the GCM channel for an application and deletes any existing settings
+// for the channel.
 //
 //    // Example sending a request using DeleteGcmChannelRequest.
 //    req := client.DeleteGcmChannelRequest(params)

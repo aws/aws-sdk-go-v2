@@ -16,7 +16,7 @@ type GetVaultAccessPolicyInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon Glacier uses the AWS account ID associated with the
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -101,10 +101,10 @@ const opGetVaultAccessPolicy = "GetVaultAccessPolicy"
 //
 // This operation retrieves the access-policy subresource set on the vault;
 // for more information on setting this subresource, see Set Vault Access Policy
-// (PUT access-policy) (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-SetVaultAccessPolicy.html).
+// (PUT access-policy) (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-SetVaultAccessPolicy.html).
 // If there is no access policy set on the vault, the operation returns a 404
 // Not found error. For more information about vault access policies, see Amazon
-// Glacier Access Control with Vault Access Policies (http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html).
+// Glacier Access Control with Vault Access Policies (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html).
 //
 //    // Example sending a request using GetVaultAccessPolicyRequest.
 //    req := client.GetVaultAccessPolicyRequest(params)

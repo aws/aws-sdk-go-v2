@@ -11,16 +11,16 @@ import (
 )
 
 // Provides options to complete a multipart upload operation. This informs Amazon
-// Glacier that all the archive parts have been uploaded and Amazon Glacier
-// can now assemble the archive from the uploaded parts. After assembling and
-// saving the archive to the vault, Amazon Glacier returns the URI path of the
+// Glacier that all the archive parts have been uploaded and Amazon S3 Glacier
+// (Glacier) can now assemble the archive from the uploaded parts. After assembling
+// and saving the archive to the vault, Glacier returns the URI path of the
 // newly created archive resource.
 type CompleteMultipartUploadInput struct {
 	_ struct{} `type:"structure"`
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon Glacier uses the AWS account ID associated with the
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -34,7 +34,8 @@ type CompleteMultipartUploadInput struct {
 	// The SHA256 tree hash of the entire archive. It is the tree hash of SHA256
 	// tree hash of the individual parts. If the value you specify in the request
 	// does not match the SHA256 tree hash of the final assembled archive as computed
-	// by Amazon Glacier, Amazon Glacier returns an error and the request fails.
+	// by Amazon S3 Glacier (Glacier), Glacier returns an error and the request
+	// fails.
 	Checksum *string `location:"header" locationName:"x-amz-sha256-tree-hash" type:"string"`
 
 	// The upload ID of the multipart upload.
@@ -111,17 +112,18 @@ func (s CompleteMultipartUploadInput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Contains the Amazon Glacier response to your request.
+// Contains the Amazon S3 Glacier response to your request.
 //
-// For information about the underlying REST API, see Upload Archive (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html).
-// For conceptual information, see Working with Archives in Amazon Glacier (http://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html).
+// For information about the underlying REST API, see Upload Archive (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html).
+// For conceptual information, see Working with Archives in Amazon S3 Glacier
+// (https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html).
 type CompleteMultipartUploadOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the archive. This value is also included as part of the location.
 	ArchiveId *string `location:"header" locationName:"x-amz-archive-id" type:"string"`
 
-	// The checksum of the archive computed by Amazon Glacier.
+	// The checksum of the archive computed by Amazon S3 Glacier.
 	Checksum *string `location:"header" locationName:"x-amz-sha256-tree-hash" type:"string"`
 
 	// The relative URI path of the newly added archive resource.
@@ -161,28 +163,28 @@ const opCompleteMultipartUpload = "CompleteMultipartUpload"
 // CompleteMultipartUploadRequest returns a request value for making API operation for
 // Amazon Glacier.
 //
-// You call this operation to inform Amazon Glacier that all the archive parts
-// have been uploaded and that Amazon Glacier can now assemble the archive from
-// the uploaded parts. After assembling and saving the archive to the vault,
-// Amazon Glacier returns the URI path of the newly created archive resource.
-// Using the URI path, you can then access the archive. After you upload an
-// archive, you should save the archive ID returned to retrieve the archive
-// at a later point. You can also get the vault inventory to obtain a list of
-// archive IDs in a vault. For more information, see InitiateJob.
+// You call this operation to inform Amazon S3 Glacier (Glacier) that all the
+// archive parts have been uploaded and that Glacier can now assemble the archive
+// from the uploaded parts. After assembling and saving the archive to the vault,
+// Glacier returns the URI path of the newly created archive resource. Using
+// the URI path, you can then access the archive. After you upload an archive,
+// you should save the archive ID returned to retrieve the archive at a later
+// point. You can also get the vault inventory to obtain a list of archive IDs
+// in a vault. For more information, see InitiateJob.
 //
 // In the request, you must include the computed SHA256 tree hash of the entire
 // archive you have uploaded. For information about computing a SHA256 tree
-// hash, see Computing Checksums (http://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html).
-// On the server side, Amazon Glacier also constructs the SHA256 tree hash of
-// the assembled archive. If the values match, Amazon Glacier saves the archive
-// to the vault; otherwise, it returns an error, and the operation fails. The
-// ListParts operation returns a list of parts uploaded for a specific multipart
-// upload. It includes checksum information for each uploaded part that can
-// be used to debug a bad checksum issue.
+// hash, see Computing Checksums (https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html).
+// On the server side, Glacier also constructs the SHA256 tree hash of the assembled
+// archive. If the values match, Glacier saves the archive to the vault; otherwise,
+// it returns an error, and the operation fails. The ListParts operation returns
+// a list of parts uploaded for a specific multipart upload. It includes checksum
+// information for each uploaded part that can be used to debug a bad checksum
+// issue.
 //
-// Additionally, Amazon Glacier also checks for any missing content ranges when
-// assembling the archive, if missing content ranges are found, Amazon Glacier
-// returns an error and the operation fails.
+// Additionally, Glacier also checks for any missing content ranges when assembling
+// the archive, if missing content ranges are found, Glacier returns an error
+// and the operation fails.
 //
 // Complete Multipart Upload is an idempotent operation. After your first successful
 // complete multipart upload, if you call the operation again within a short
@@ -199,11 +201,11 @@ const opCompleteMultipartUpload = "CompleteMultipartUpload"
 // AWS Identity and Access Management (IAM) users don't have any permissions
 // by default. You must grant them explicit permission to perform specific actions.
 // For more information, see Access Control Using AWS Identity and Access Management
-// (IAM) (http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
+// (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
 //
 // For conceptual information and underlying REST API, see Uploading Large Archives
-// in Parts (Multipart Upload) (http://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html)
-// and Complete Multipart Upload (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-complete-upload.html)
+// in Parts (Multipart Upload) (https://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html)
+// and Complete Multipart Upload (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-complete-upload.html)
 // in the Amazon Glacier Developer Guide.
 //
 //    // Example sending a request using CompleteMultipartUploadRequest.

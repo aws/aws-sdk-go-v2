@@ -17,7 +17,7 @@ type StopMatchmakingInput struct {
 	// Unique identifier for a matchmaking ticket.
 	//
 	// TicketId is a required field
-	TicketId *string `min:"1" type:"string" required:"true"`
+	TicketId *string `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -31,9 +31,6 @@ func (s *StopMatchmakingInput) Validate() error {
 
 	if s.TicketId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TicketId"))
-	}
-	if s.TicketId != nil && len(*s.TicketId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TicketId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -57,9 +54,23 @@ const opStopMatchmaking = "StopMatchmaking"
 // StopMatchmakingRequest returns a request value for making API operation for
 // Amazon GameLift.
 //
-// Cancels a matchmaking ticket that is currently being processed. To stop the
-// matchmaking operation, specify the ticket ID. If successful, work on the
-// ticket is stopped, and the ticket status is changed to CANCELLED.
+// Cancels a matchmaking ticket or match backfill ticket that is currently being
+// processed. To stop the matchmaking operation, specify the ticket ID. If successful,
+// work on the ticket is stopped, and the ticket status is changed to CANCELLED.
+//
+// This call is also used to turn off automatic backfill for an individual game
+// session. This is for game sessions that are created with a matchmaking configuration
+// that has automatic backfill enabled. The ticket ID is included in the MatchmakerData
+// of an updated game session object, which is provided to the game server.
+//
+// If the action is successful, the service sends back an empty JSON struct
+// with the HTTP 200 response (not an empty HTTP body).
+//
+// Learn more
+//
+//  Add FlexMatch to a Game Client (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html)
+//
+// Related operations
 //
 //    * StartMatchmaking
 //

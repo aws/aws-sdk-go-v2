@@ -54,7 +54,8 @@ const opDeleteWorkspaceImage = "DeleteWorkspaceImage"
 // Amazon WorkSpaces.
 //
 // Deletes the specified image from your account. To delete an image, you must
-// first delete any bundles that are associated with the image.
+// first delete any bundles that are associated with the image and un-share
+// the image if it is shared with other accounts.
 //
 //    // Example sending a request using DeleteWorkspaceImageRequest.
 //    req := client.DeleteWorkspaceImageRequest(params)

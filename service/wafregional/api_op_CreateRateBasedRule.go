@@ -4,6 +4,7 @@ package wafregional
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -52,6 +53,8 @@ type CreateRateBasedRuleInput struct {
 	//
 	// RateLimit is a required field
 	RateLimit *int64 `min:"2000" type:"long" required:"true"`
+
+	Tags []waf.Tag `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -89,6 +92,16 @@ func (s *CreateRateBasedRuleInput) Validate() error {
 	}
 	if s.RateLimit != nil && *s.RateLimit < 2000 {
 		invalidParams.Add(aws.NewErrParamMinValue("RateLimit", 2000))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

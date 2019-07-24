@@ -26,7 +26,7 @@ type DeleteItemInput struct {
 	//
 	//    * Logical operators: AND | OR | NOT
 	//
-	// For more information on condition expressions, see Specifying Conditions
+	// For more information about condition expressions, see Condition Expressions
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ConditionExpression *string `type:"string"`
@@ -73,7 +73,7 @@ type DeleteItemInput struct {
 	// Tokens that begin with the : character are expression attribute values, which
 	// are placeholders for the actual value at runtime.
 	//
-	// For more information on expression attribute names, see Accessing Item Attributes
+	// For more information on expression attribute names, see Specifying Item Attributes
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeNames map[string]string `type:"map"`
@@ -95,7 +95,7 @@ type DeleteItemInput struct {
 	//
 	// ProductStatus IN (:avail, :back, :disc)
 	//
-	// For more information on expression attribute values, see Specifying Conditions
+	// For more information on expression attribute values, see Condition Expressions
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeValues map[string]AttributeValue `type:"map"`
@@ -190,7 +190,7 @@ type DeleteItemOutput struct {
 	// includes the total provisioned throughput consumed, along with statistics
 	// for the table and any indexes involved in the operation. ConsumedCapacity
 	// is only returned if the ReturnConsumedCapacity parameter was specified. For
-	// more information, see Provisioned Throughput (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
+	// more information, see Provisioned Mode (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ConsumedCapacity *ConsumedCapacity `type:"structure"`
 

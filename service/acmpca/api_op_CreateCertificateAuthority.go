@@ -20,7 +20,7 @@ type CreateCertificateAuthorityInput struct {
 	// CertificateAuthorityConfiguration is a required field
 	CertificateAuthorityConfiguration *CertificateAuthorityConfiguration `type:"structure" required:"true"`
 
-	// The type of the certificate authority. Currently, this must be SUBORDINATE.
+	// The type of the certificate authority.
 	//
 	// CertificateAuthorityType is a required field
 	CertificateAuthorityType CertificateAuthorityType `type:"string" required:"true" enum:"true"`
@@ -28,20 +28,23 @@ type CreateCertificateAuthorityInput struct {
 	// Alphanumeric string that can be used to distinguish between calls to CreateCertificateAuthority.
 	// Idempotency tokens time out after five minutes. Therefore, if you call CreateCertificateAuthority
 	// multiple times with the same idempotency token within a five minute period,
-	// ACM PCA recognizes that you are requesting only one certificate. As a result,
-	// ACM PCA issues only one. If you change the idempotency token for each call,
-	// however, ACM PCA recognizes that you are requesting multiple certificates.
+	// ACM Private CA recognizes that you are requesting only one certificate. As
+	// a result, ACM Private CA issues only one. If you change the idempotency token
+	// for each call, however, ACM Private CA recognizes that you are requesting
+	// multiple certificates.
 	IdempotencyToken *string `min:"1" type:"string"`
 
 	// Contains a Boolean value that you can use to enable a certification revocation
-	// list (CRL) for the CA, the name of the S3 bucket to which ACM PCA will write
-	// the CRL, and an optional CNAME alias that you can use to hide the name of
-	// your bucket in the CRL Distribution Points extension of your CA certificate.
-	// For more information, see the CrlConfiguration structure.
+	// list (CRL) for the CA, the name of the S3 bucket to which ACM Private CA
+	// will write the CRL, and an optional CNAME alias that you can use to hide
+	// the name of your bucket in the CRL Distribution Points extension of your
+	// CA certificate. For more information, see the CrlConfiguration structure.
 	RevocationConfiguration *RevocationConfiguration `type:"structure"`
 
 	// Key-value pairs that will be attached to the new private CA. You can associate
-	// up to 50 tags with a private CA.
+	// up to 50 tags with a private CA. For information using tags with
+	//
+	// IAM to manage permissions, see Controlling Access Using IAM Tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html).
 	Tags []Tag `min:"1" type:"list"`
 }
 
@@ -111,16 +114,16 @@ const opCreateCertificateAuthority = "CreateCertificateAuthority"
 // CreateCertificateAuthorityRequest returns a request value for making API operation for
 // AWS Certificate Manager Private Certificate Authority.
 //
-// Creates a private subordinate certificate authority (CA). You must specify
-// the CA configuration, the revocation configuration, the CA type, and an optional
-// idempotency token. The CA configuration specifies the name of the algorithm
+// Creates a root or subordinate private certificate authority (CA). You must
+// specify the CA configuration, the certificate revocation list (CRL) configuration,
+// the CA type, and an optional idempotency token to avoid accidental creation
+// of multiple CAs. The CA configuration specifies the name of the algorithm
 // and key size to be used to create the CA private key, the type of signing
-// algorithm that the CA uses to sign, and X.500 subject information. The CRL
-// (certificate revocation list) configuration specifies the CRL expiration
-// period in days (the validity period of the CRL), the Amazon S3 bucket that
-// will contain the CRL, and a CNAME alias for the S3 bucket that is included
-// in certificates issued by the CA. If successful, this operation returns the
-// Amazon Resource Name (ARN) of the CA.
+// algorithm that the CA uses, and X.500 subject information. The CRL configuration
+// specifies the CRL expiration period in days (the validity period of the CRL),
+// the Amazon S3 bucket that will contain the CRL, and a CNAME alias for the
+// S3 bucket that is included in certificates issued by the CA. If successful,
+// this action returns the Amazon Resource Name (ARN) of the CA.
 //
 //    // Example sending a request using CreateCertificateAuthorityRequest.
 //    req := client.CreateCertificateAuthorityRequest(params)

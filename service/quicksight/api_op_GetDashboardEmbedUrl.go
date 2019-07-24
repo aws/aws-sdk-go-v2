@@ -40,6 +40,20 @@ type GetDashboardEmbedUrlInput struct {
 	// Remove the undo/redo button on embedded dashboard. The default is FALSE,
 	// which enables the undo/redo button.
 	UndoRedoDisabled *bool `location:"querystring" locationName:"undo-redo-disabled" type:"boolean"`
+
+	// The Amazon QuickSight user's ARN, for use with QUICKSIGHT identity type.
+	// You can use this for any of the following:
+	//
+	//    * Amazon QuickSight users in your account (readers, authors, or admins)
+	//
+	//    * AD users
+	//
+	//    * Invited non-federated users
+	//
+	//    * Federated IAM users
+	//
+	//    * Federated IAM role-based sessions
+	UserArn *string `location:"querystring" locationName:"user-arn" type:"string"`
 }
 
 // String returns the string representation
@@ -113,6 +127,12 @@ func (s GetDashboardEmbedUrlInput) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.QueryTarget, "undo-redo-disabled", protocol.BoolValue(v), metadata)
+	}
+	if s.UserArn != nil {
+		v := *s.UserArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "user-arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

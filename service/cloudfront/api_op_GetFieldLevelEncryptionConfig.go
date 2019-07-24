@@ -10,7 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetFieldLevelEncryptionConfigRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionConfigRequest
 type GetFieldLevelEncryptionConfigInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +51,7 @@ func (s GetFieldLevelEncryptionConfigInput) MarshalFields(e protocol.FieldEncode
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetFieldLevelEncryptionConfigResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionConfigResult
 type GetFieldLevelEncryptionConfigOutput struct {
 	_ struct{} `type:"structure" payload:"FieldLevelEncryptionConfig"`
 
@@ -85,7 +85,7 @@ func (s GetFieldLevelEncryptionConfigOutput) MarshalFields(e protocol.FieldEncod
 	return nil
 }
 
-const opGetFieldLevelEncryptionConfig = "GetFieldLevelEncryptionConfig2018_11_05"
+const opGetFieldLevelEncryptionConfig = "GetFieldLevelEncryptionConfig2019_03_26"
 
 // GetFieldLevelEncryptionConfigRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -99,12 +99,12 @@ const opGetFieldLevelEncryptionConfig = "GetFieldLevelEncryptionConfig2018_11_05
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetFieldLevelEncryptionConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionConfig
 func (c *Client) GetFieldLevelEncryptionConfigRequest(input *GetFieldLevelEncryptionConfigInput) GetFieldLevelEncryptionConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetFieldLevelEncryptionConfig,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2018-11-05/field-level-encryption/{Id}/config",
+		HTTPPath:   "/2019-03-26/field-level-encryption/{Id}/config",
 	}
 
 	if input == nil {

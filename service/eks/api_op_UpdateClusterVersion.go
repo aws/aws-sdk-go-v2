@@ -110,7 +110,7 @@ func (s UpdateClusterVersionOutput) MarshalFields(e protocol.FieldEncoder) error
 const opUpdateClusterVersion = "UpdateClusterVersion"
 
 // UpdateClusterVersionRequest returns a request value for making API operation for
-// Amazon Elastic Container Service for Kubernetes.
+// Amazon Elastic Kubernetes Service.
 //
 // Updates an Amazon EKS cluster to the specified Kubernetes version. Your cluster
 // continues to function during the update. The response output includes an

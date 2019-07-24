@@ -119,3 +119,21 @@ func (enum ObjectACL) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
+
+type SMBSecurityStrategy string
+
+// Enum values for SMBSecurityStrategy
+const (
+	SMBSecurityStrategyClientSpecified     SMBSecurityStrategy = "ClientSpecified"
+	SMBSecurityStrategyMandatorySigning    SMBSecurityStrategy = "MandatorySigning"
+	SMBSecurityStrategyMandatoryEncryption SMBSecurityStrategy = "MandatoryEncryption"
+)
+
+func (enum SMBSecurityStrategy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SMBSecurityStrategy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

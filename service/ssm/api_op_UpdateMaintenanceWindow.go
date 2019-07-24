@@ -13,29 +13,29 @@ import (
 type UpdateMaintenanceWindowInput struct {
 	_ struct{} `type:"structure"`
 
-	// Whether targets must be registered with the Maintenance Window before tasks
+	// Whether targets must be registered with the maintenance window before tasks
 	// can be defined for those targets.
 	AllowUnassociatedTargets *bool `type:"boolean"`
 
-	// The number of hours before the end of the Maintenance Window that Systems
+	// The number of hours before the end of the maintenance window that Systems
 	// Manager stops scheduling new tasks for execution.
 	Cutoff *int64 `type:"integer"`
 
 	// An optional description for the update request.
 	Description *string `min:"1" type:"string"`
 
-	// The duration of the Maintenance Window in hours.
+	// The duration of the maintenance window in hours.
 	Duration *int64 `min:"1" type:"integer"`
 
-	// Whether the Maintenance Window is enabled.
+	// Whether the maintenance window is enabled.
 	Enabled *bool `type:"boolean"`
 
-	// The date and time, in ISO-8601 Extended format, for when you want the Maintenance
-	// Window to become inactive. EndDate allows you to set a date and time in the
-	// future when the Maintenance Window will no longer run.
+	// The date and time, in ISO-8601 Extended format, for when you want the maintenance
+	// window to become inactive. EndDate allows you to set a date and time in the
+	// future when the maintenance window will no longer run.
 	EndDate *string `type:"string"`
 
-	// The name of the Maintenance Window.
+	// The name of the maintenance window.
 	Name *string `min:"3" type:"string"`
 
 	// If True, then all fields that are required by the CreateMaintenanceWindow
@@ -43,22 +43,22 @@ type UpdateMaintenanceWindowInput struct {
 	// specified are set to null.
 	Replace *bool `type:"boolean"`
 
-	// The schedule of the Maintenance Window in the form of a cron or rate expression.
+	// The schedule of the maintenance window in the form of a cron or rate expression.
 	Schedule *string `min:"1" type:"string"`
 
-	// The time zone that the scheduled Maintenance Window executions are based
+	// The time zone that the scheduled maintenance window executions are based
 	// on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles",
 	// "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database
 	// (https://www.iana.org/time-zones) on the IANA website.
 	ScheduleTimezone *string `type:"string"`
 
-	// The time zone that the scheduled Maintenance Window executions are based
+	// The time zone that the scheduled maintenance window executions are based
 	// on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles",
 	// "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database
 	// (https://www.iana.org/time-zones) on the IANA website.
 	StartDate *string `type:"string"`
 
-	// The ID of the Maintenance Window to update.
+	// The ID of the maintenance window to update.
 	//
 	// WindowId is a required field
 	WindowId *string `min:"20" type:"string" required:"true"`
@@ -102,46 +102,46 @@ func (s *UpdateMaintenanceWindowInput) Validate() error {
 type UpdateMaintenanceWindowOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Whether targets must be registered with the Maintenance Window before tasks
+	// Whether targets must be registered with the maintenance window before tasks
 	// can be defined for those targets.
 	AllowUnassociatedTargets *bool `type:"boolean"`
 
-	// The number of hours before the end of the Maintenance Window that Systems
+	// The number of hours before the end of the maintenance window that Systems
 	// Manager stops scheduling new tasks for execution.
 	Cutoff *int64 `type:"integer"`
 
 	// An optional description of the update.
 	Description *string `min:"1" type:"string"`
 
-	// The duration of the Maintenance Window in hours.
+	// The duration of the maintenance window in hours.
 	Duration *int64 `min:"1" type:"integer"`
 
-	// Whether the Maintenance Window is enabled.
+	// Whether the maintenance window is enabled.
 	Enabled *bool `type:"boolean"`
 
-	// The date and time, in ISO-8601 Extended format, for when the Maintenance
-	// Window is scheduled to become inactive. The Maintenance Window will not run
+	// The date and time, in ISO-8601 Extended format, for when the maintenance
+	// window is scheduled to become inactive. The maintenance window will not run
 	// after this specified time.
 	EndDate *string `type:"string"`
 
-	// The name of the Maintenance Window.
+	// The name of the maintenance window.
 	Name *string `min:"3" type:"string"`
 
-	// The schedule of the Maintenance Window in the form of a cron or rate expression.
+	// The schedule of the maintenance window in the form of a cron or rate expression.
 	Schedule *string `min:"1" type:"string"`
 
-	// The time zone that the scheduled Maintenance Window executions are based
+	// The time zone that the scheduled maintenance window executions are based
 	// on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles",
 	// "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database
 	// (https://www.iana.org/time-zones) on the IANA website.
 	ScheduleTimezone *string `type:"string"`
 
-	// The date and time, in ISO-8601 Extended format, for when the Maintenance
-	// Window is scheduled to become active. The Maintenance Window will not run
+	// The date and time, in ISO-8601 Extended format, for when the maintenance
+	// window is scheduled to become active. The maintenance window will not run
 	// before this specified time.
 	StartDate *string `type:"string"`
 
-	// The ID of the created Maintenance Window.
+	// The ID of the created maintenance window.
 	WindowId *string `min:"20" type:"string"`
 }
 
@@ -155,7 +155,7 @@ const opUpdateMaintenanceWindow = "UpdateMaintenanceWindow"
 // UpdateMaintenanceWindowRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Updates an existing Maintenance Window. Only specified parameters are modified.
+// Updates an existing maintenance window. Only specified parameters are modified.
 //
 //    // Example sending a request using UpdateMaintenanceWindowRequest.
 //    req := client.UpdateMaintenanceWindowRequest(params)

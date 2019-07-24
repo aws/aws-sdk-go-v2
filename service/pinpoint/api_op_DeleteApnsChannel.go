@@ -54,7 +54,8 @@ func (s DeleteApnsChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteApnsChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSChannelResponse"`
 
-	// Apple Distribution Push Notification Service channel definition.
+	// Provides information about the status and settings of the APNs (Apple Push
+	// Notification service) channel for an application.
 	//
 	// APNSChannelResponse is a required field
 	APNSChannelResponse *APNSChannelResponse `type:"structure" required:"true"`
@@ -81,7 +82,8 @@ const opDeleteApnsChannel = "DeleteApnsChannel"
 // DeleteApnsChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Deletes the APNs channel for an app.
+// Disables the APNs channel for an application and deletes any existing settings
+// for the channel.
 //
 //    // Example sending a request using DeleteApnsChannelRequest.
 //    req := client.DeleteApnsChannelRequest(params)

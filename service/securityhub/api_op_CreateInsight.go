@@ -14,21 +14,19 @@ import (
 type CreateInsightInput struct {
 	_ struct{} `type:"structure"`
 
-	// A collection of attributes that are applied to all active Security Hub-aggregated
-	// findings and that result in a subset of findings that are included in this
-	// insight.
+	// One or more attributes used to filter the findings included in the insight.
+	// Only findings that match the criteria defined in the filters are included
+	// in the insight.
 	//
 	// Filters is a required field
 	Filters *AwsSecurityFindingFilters `type:"structure" required:"true"`
 
-	// The attribute by which the insight's findings are grouped. This attribute
-	// is used as a findings aggregator for the purposes of viewing and managing
-	// multiple related findings under a single operand.
+	// The attribute used as the aggregator to group related findings for the insight.
 	//
 	// GroupByAttribute is a required field
 	GroupByAttribute *string `type:"string" required:"true"`
 
-	// The user-defined name that identifies the insight that you want to create.
+	// The name of the custom insight to create.
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
@@ -90,7 +88,7 @@ func (s CreateInsightInput) MarshalFields(e protocol.FieldEncoder) error {
 type CreateInsightOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN Of the created insight.
+	// The ARN of the insight created.
 	//
 	// InsightArn is a required field
 	InsightArn *string `type:"string" required:"true"`
@@ -117,8 +115,9 @@ const opCreateInsight = "CreateInsight"
 // CreateInsightRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Creates an insight, which is a consolidation of findings that identifies
-// a security area that requires attention or intervention.
+// Creates a custom insight in Security Hub. An insight is a consolidation of
+// findings that relate to a security issue that requires attention or remediation.
+// Use the GroupByAttribute to group the related findings in the insight.
 //
 //    // Example sending a request using CreateInsightRequest.
 //    req := client.CreateInsightRequest(params)

@@ -11,7 +11,7 @@ import (
 
 // Represents a request to return the Amazon SES custom MAIL FROM attributes
 // for a list of identities. For information about using a custom MAIL FROM
-// domain, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html).
+// domain, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityMailFromDomainAttributesRequest
 type GetIdentityMailFromDomainAttributesInput struct {
 	_ struct{} `type:"structure"`

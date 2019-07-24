@@ -151,6 +151,12 @@ type StartBuildInput struct {
 	//
 	//    * For Amazon Simple Storage Service (Amazon S3): the version ID of the
 	//    object that represents the build input ZIP file to use.
+	//
+	// If sourceVersion is specified at the project level, then this sourceVersion
+	// (at the build level) takes precedence.
+	//
+	// For more information, see Source Version Sample with CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
+	// in the AWS CodeBuild User Guide.
 	SourceVersion *string `locationName:"sourceVersion" type:"string"`
 
 	// The number of build timeout minutes, from 5 to 480 (8 hours), that overrides,

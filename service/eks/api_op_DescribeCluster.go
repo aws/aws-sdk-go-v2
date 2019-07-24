@@ -79,7 +79,7 @@ func (s DescribeClusterOutput) MarshalFields(e protocol.FieldEncoder) error {
 const opDescribeCluster = "DescribeCluster"
 
 // DescribeClusterRequest returns a request value for making API operation for
-// Amazon Elastic Container Service for Kubernetes.
+// Amazon Elastic Kubernetes Service.
 //
 // Returns descriptive information about an Amazon EKS cluster.
 //

@@ -47,7 +47,8 @@ const opDisassociateFromMasterAccount = "DisassociateFromMasterAccount"
 // DisassociateFromMasterAccountRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Disassociates the current Security Hub member account from its master account.
+// Disassociates the current Security Hub member account from the associated
+// master account.
 //
 //    // Example sending a request using DisassociateFromMasterAccountRequest.
 //    req := client.DisassociateFromMasterAccountRequest(params)

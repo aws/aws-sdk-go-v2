@@ -52,8 +52,8 @@ type DescribeListenersOutput struct {
 	// Information about the listeners.
 	Listeners []Listener `type:"list"`
 
-	// The marker to use when requesting the next set of results. If there are no
-	// additional results, the string is empty.
+	// If there are additional results, this is the marker for the next set of results.
+	// Otherwise, this is null.
 	NextMarker *string `type:"string"`
 }
 
@@ -70,6 +70,10 @@ const opDescribeListeners = "DescribeListeners"
 // Describes the specified listeners or the listeners for the specified Application
 // Load Balancer or Network Load Balancer. You must specify either a load balancer
 // or one or more listeners.
+//
+// For an HTTPS or TLS listener, the output includes the default certificate
+// for the listener. To describe the certificate list for the listener, use
+// DescribeListenerCertificates.
 //
 //    // Example sending a request using DescribeListenersRequest.
 //    req := client.DescribeListenersRequest(params)

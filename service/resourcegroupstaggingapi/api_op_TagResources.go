@@ -80,8 +80,8 @@ const opTagResources = "TagResources"
 // Applies one or more tags to the specified resources. Note the following:
 //
 //    * Not all resources can have tags. For a list of resources that support
-//    tagging, see Supported Resources (http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/supported-resources.html)
-//    in the AWS Resource Groups and Tag Editor User Guide.
+//    tagging, see Supported Resources (http://docs.aws.amazon.com/ARG/latest/userguide/supported-resources.html)
+//    in the AWS Resource Groups User Guide.
 //
 //    * Each resource can have up to 50 tags. For other limits, see Tag Restrictions
 //    (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-restrictions)
@@ -92,8 +92,8 @@ const opTagResources = "TagResources"
 //
 //    * To add tags to a resource, you need the necessary permissions for the
 //    service that the resource belongs to as well as permissions for adding
-//    tags. For more information, see Obtaining Permissions for Tagging (http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/obtaining-permissions-for-tagging.html)
-//    in the AWS Resource Groups and Tag Editor User Guide.
+//    tags. For more information, see Obtaining Permissions for Tagging (http://docs.aws.amazon.com/ARG/latest/userguide/obtaining-permissions-for-tagging.html)
+//    in the AWS Resource Groups User Guide.
 //
 //    // Example sending a request using TagResourcesRequest.
 //    req := client.TagResourcesRequest(params)

@@ -24,8 +24,8 @@ type DetachPolicyInput struct {
 	// PolicyId is a required field
 	PolicyId *string `type:"string" required:"true"`
 
-	// The unique identifier (ID) of the root, OU, or account from which you want
-	// to detach the policy. You can get the ID from the ListRoots, ListOrganizationalUnitsForParent,
+	// The unique identifier (ID) of the root, OU, or account that you want to detach
+	// the policy from. You can get the ID from the ListRoots, ListOrganizationalUnitsForParent,
 	// or ListAccounts operations.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) for a target ID string
@@ -89,13 +89,13 @@ const opDetachPolicy = "DetachPolicy"
 //
 // Note: Every root, OU, and account must have at least one SCP attached. If
 // you want to replace the default FullAWSAccess policy with one that limits
-// the permissions that can be delegated, then you must attach the replacement
-// policy before you can remove the default one. This is the authorization strategy
+// the permissions that can be delegated, you must attach the replacement policy
+// before you can remove the default one. This is the authorization strategy
 // of whitelisting (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_about-scps.html#orgs_policies_whitelist).
 // If you instead attach a second SCP and leave the FullAWSAccess SCP still
 // attached, and specify "Effect": "Deny" in the second SCP to override the
 // "Effect": "Allow" in the FullAWSAccess policy (or any other attached SCP),
-// then you are using the authorization strategy of blacklisting (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_about-scps.html#orgs_policies_blacklist).
+// you're using the authorization strategy of blacklisting (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_about-scps.html#orgs_policies_blacklist).
 //
 // This operation can be called only from the organization's master account.
 //

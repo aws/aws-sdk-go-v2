@@ -14,12 +14,10 @@ import (
 type AcceptInvitationInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the invitation that is sent to the AWS account by the Security
-	// Hub master account.
+	// The ID of the invitation sent from the Security Hub master account.
 	InvitationId *string `type:"string"`
 
-	// The account ID of the master Security Hub account whose invitation you're
-	// accepting.
+	// The account ID of the Security Hub master account that sent the invitation.
 	MasterId *string `type:"string"`
 }
 
@@ -67,7 +65,10 @@ const opAcceptInvitation = "AcceptInvitation"
 // AcceptInvitationRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Accepts the invitation to be monitored by a master SecurityHub account.
+// Accepts the invitation to be a member account and be monitored by the Security
+// Hub master account that the invitation was sent from. When the member account
+// accepts the invitation, permission is granted to the master account to view
+// findings generated in the member account.
 //
 //    // Example sending a request using AcceptInvitationRequest.
 //    req := client.AcceptInvitationRequest(params)

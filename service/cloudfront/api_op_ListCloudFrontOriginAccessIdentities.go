@@ -11,7 +11,7 @@ import (
 )
 
 // The request to list origin access identities.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListCloudFrontOriginAccessIdentitiesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListCloudFrontOriginAccessIdentitiesRequest
 type ListCloudFrontOriginAccessIdentitiesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +50,7 @@ func (s ListCloudFrontOriginAccessIdentitiesInput) MarshalFields(e protocol.Fiel
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListCloudFrontOriginAccessIdentitiesResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListCloudFrontOriginAccessIdentitiesResult
 type ListCloudFrontOriginAccessIdentitiesOutput struct {
 	_ struct{} `type:"structure" payload:"CloudFrontOriginAccessIdentityList"`
 
@@ -74,7 +74,7 @@ func (s ListCloudFrontOriginAccessIdentitiesOutput) MarshalFields(e protocol.Fie
 	return nil
 }
 
-const opListCloudFrontOriginAccessIdentities = "ListCloudFrontOriginAccessIdentities2018_11_05"
+const opListCloudFrontOriginAccessIdentities = "ListCloudFrontOriginAccessIdentities2019_03_26"
 
 // ListCloudFrontOriginAccessIdentitiesRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -88,12 +88,12 @@ const opListCloudFrontOriginAccessIdentities = "ListCloudFrontOriginAccessIdenti
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListCloudFrontOriginAccessIdentities
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListCloudFrontOriginAccessIdentities
 func (c *Client) ListCloudFrontOriginAccessIdentitiesRequest(input *ListCloudFrontOriginAccessIdentitiesInput) ListCloudFrontOriginAccessIdentitiesRequest {
 	op := &aws.Operation{
 		Name:       opListCloudFrontOriginAccessIdentities,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2018-11-05/origin-access-identity/cloudfront",
+		HTTPPath:   "/2019-03-26/origin-access-identity/cloudfront",
 		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"CloudFrontOriginAccessIdentityList.NextMarker"},

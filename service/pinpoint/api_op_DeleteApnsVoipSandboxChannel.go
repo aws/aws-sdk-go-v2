@@ -54,7 +54,8 @@ func (s DeleteApnsVoipSandboxChannelInput) MarshalFields(e protocol.FieldEncoder
 type DeleteApnsVoipSandboxChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSVoipSandboxChannelResponse"`
 
-	// Apple VoIP Developer Push Notification Service channel definition.
+	// Provides information about the status and settings of the APNs (Apple Push
+	// Notification service) VoIP sandbox channel for an application.
 	//
 	// APNSVoipSandboxChannelResponse is a required field
 	APNSVoipSandboxChannelResponse *APNSVoipSandboxChannelResponse `type:"structure" required:"true"`
@@ -81,7 +82,8 @@ const opDeleteApnsVoipSandboxChannel = "DeleteApnsVoipSandboxChannel"
 // DeleteApnsVoipSandboxChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Delete an APNS VoIP sandbox channel
+// Disables the APNs VoIP sandbox channel for an application and deletes any
+// existing settings for the channel.
 //
 //    // Example sending a request using DeleteApnsVoipSandboxChannelRequest.
 //    req := client.DeleteApnsVoipSandboxChannelRequest(params)

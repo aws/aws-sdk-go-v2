@@ -27,7 +27,7 @@ type ExecutePolicyInput struct {
 	// Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to
 	// complete before executing the policy.
 	//
-	// This parameter is not supported if the policy type is StepScaling.
+	// This parameter is not supported if the policy type is StepScaling or TargetTrackingScaling.
 	//
 	// For more information, see Scaling Cooldowns (https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html)
 	// in the Amazon EC2 Auto Scaling User Guide.

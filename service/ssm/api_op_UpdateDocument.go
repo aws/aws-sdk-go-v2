@@ -95,7 +95,7 @@ const opUpdateDocument = "UpdateDocument"
 // UpdateDocumentRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// The document you want to update.
+// Updates one or more values for an SSM document.
 //
 //    // Example sending a request using UpdateDocumentRequest.
 //    req := client.UpdateDocumentRequest(params)

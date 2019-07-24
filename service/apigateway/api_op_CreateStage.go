@@ -40,7 +40,9 @@ type CreateStageInput struct {
 	// RestApiId is a required field
 	RestApiId *string `location:"uri" locationName:"restapi_id" type:"string" required:"true"`
 
-	// [Required] The name for the Stage resource.
+	// [Required] The name for the Stage resource. Stage names can only contain
+	// alphanumeric characters, hyphens, and underscores. Maximum length is 128
+	// characters.
 	//
 	// StageName is a required field
 	StageName *string `locationName:"stageName" type:"string" required:"true"`
@@ -217,7 +219,8 @@ type CreateStageOutput struct {
 	MethodSettings map[string]MethodSetting `locationName:"methodSettings" type:"map"`
 
 	// The name of the stage is the first path segment in the Uniform Resource Identifier
-	// (URI) of a call to API Gateway.
+	// (URI) of a call to API Gateway. Stage names can only contain alphanumeric
+	// characters, hyphens, and underscores. Maximum length is 128 characters.
 	StageName *string `locationName:"stageName" type:"string"`
 
 	// The collection of tags. Each tag element is associated with a given resource.

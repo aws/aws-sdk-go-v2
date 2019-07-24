@@ -57,7 +57,7 @@ func (s *BatchStopJobRunInput) Validate() error {
 type BatchStopJobRunOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of the errors that were encountered in tryng to stop JobRuns, including
+	// A list of the errors that were encountered in trying to stop JobRuns, including
 	// the JobRunId for which each error was encountered and details about the error.
 	Errors []BatchStopJobRunError `type:"list"`
 

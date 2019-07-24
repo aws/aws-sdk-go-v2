@@ -84,8 +84,8 @@ type GetServiceLastAccessedDetailsOutput struct {
 	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
 	// when the generated report job was completed or failed.
 	//
-	// This field is null if the job is still in progress, as indicated by a JobStatus
-	// value of IN_PROGRESS.
+	// This field is null if the job is still in progress, as indicated by a job
+	// status value of IN_PROGRESS.
 	//
 	// JobCompletionDate is a required field
 	JobCompletionDate *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
@@ -122,10 +122,11 @@ const opGetServiceLastAccessedDetails = "GetServiceLastAccessedDetails"
 // GetServiceLastAccessedDetailsRequest returns a request value for making API operation for
 // AWS Identity and Access Management.
 //
-// After you generate a user, group, role, or policy report using the GenerateServiceLastAccessedDetails
-// operation, you can use the JobId parameter in GetServiceLastAccessedDetails.
-// This operation retrieves the status of your report job and a list of AWS
-// services that the resource (user, group, role, or managed policy) can access.
+// Retrieves a service last accessed report that was created using the GenerateServiceLastAccessedDetails
+// operation. You can use the JobId parameter in GetServiceLastAccessedDetails
+// to retrieve the status of your report job. When the report is complete, you
+// can retrieve the generated report. The report includes a list of AWS services
+// that the resource (user, group, role, or managed policy) can access.
 //
 // Service last accessed data does not use other policy types when determining
 // whether a resource could access a service. These other policy types include

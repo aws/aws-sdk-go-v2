@@ -64,6 +64,8 @@ type GetBucketWebsiteOutput struct {
 
 	IndexDocument *IndexDocument `type:"structure"`
 
+	// Specifies the redirect behavior of all requests to a website endpoint of
+	// an Amazon S3 bucket.
 	RedirectAllRequestsTo *RedirectAllRequestsTo `type:"structure"`
 
 	RoutingRules []RoutingRule `locationNameList:"RoutingRule" type:"list"`

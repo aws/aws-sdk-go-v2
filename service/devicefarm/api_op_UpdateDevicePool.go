@@ -14,7 +14,7 @@ import (
 type UpdateDevicePoolInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resourc Name (ARN) of the Device Farm device pool you wish to
+	// The Amazon Resource Name (ARN) of the Device Farm device pool you wish to
 	// update.
 	//
 	// Arn is a required field

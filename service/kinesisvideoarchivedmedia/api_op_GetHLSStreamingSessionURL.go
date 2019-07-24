@@ -41,7 +41,7 @@ type GetHLSStreamingSessionURLInput struct {
 	// fragment timestamps are not accurate or if fragments might be missing. You
 	// should not place discontinuity flags between fragments for the player timeline
 	// to accurately map to the producer timestamps.
-	DiscontinuityMode DiscontinuityMode `type:"string" enum:"true"`
+	DiscontinuityMode HLSDiscontinuityMode `type:"string" enum:"true"`
 
 	// Specifies when the fragment start timestamps should be included in the HLS
 	// media playlist. Typically, media players report the playhead position as
@@ -54,23 +54,25 @@ type GetHLSStreamingSessionURLInput struct {
 	// The default is NEVER. When HLSFragmentSelector is SERVER_TIMESTAMP, the timestamps
 	// will be the server start timestamps. Similarly, when HLSFragmentSelector
 	// is PRODUCER_TIMESTAMP, the timestamps will be the producer start timestamps.
-	DisplayFragmentTimestamp DisplayFragmentTimestamp `type:"string" enum:"true"`
+	DisplayFragmentTimestamp HLSDisplayFragmentTimestamp `type:"string" enum:"true"`
 
 	// The time in seconds until the requested session expires. This value can be
 	// between 300 (5 minutes) and 43200 (12 hours).
 	//
 	// When a session expires, no new calls to GetHLSMasterPlaylist, GetHLSMediaPlaylist,
-	// GetMP4InitFragment, or GetMP4MediaFragment can be made for that session.
+	// GetMP4InitFragment, GetMP4MediaFragment, or GetTSFragment can be made for
+	// that session.
 	//
 	// The default is 300 (5 minutes).
 	Expires *int64 `min:"300" type:"integer"`
 
 	// The time range of the requested fragment, and the source of the timestamps.
 	//
-	// This parameter is required if PlaybackMode is ON_DEMAND. This parameter is
-	// optional if PlaybackMode is LIVE. If PlaybackMode is LIVE, the FragmentSelectorType
-	// can be set, but the TimestampRange should not be set. If PlaybackMode is
-	// ON_DEMAND, both FragmentSelectorType and TimestampRange must be set.
+	// This parameter is required if PlaybackMode is ON_DEMAND or LIVE_REPLAY. This
+	// parameter is optional if PlaybackMode is LIVE. If PlaybackMode is LIVE, the
+	// FragmentSelectorType can be set, but the TimestampRange should not be set.
+	// If PlaybackMode is ON_DEMAND or LIVE_REPLAY, both FragmentSelectorType and
+	// TimestampRange must be set.
 	HLSFragmentSelector *HLSFragmentSelector `type:"structure"`
 
 	// The maximum number of fragments that are returned in the HLS media playlists.
@@ -85,17 +87,17 @@ type GetHLSStreamingSessionURLInput struct {
 	// that rebuffering will occur during playback. We recommend that a live HLS
 	// media playlist have a minimum of 3 fragments and a maximum of 10 fragments.
 	//
-	// The default is 5 fragments if PlaybackMode is LIVE, and 1,000 if PlaybackMode
-	// is ON_DEMAND.
+	// The default is 5 fragments if PlaybackMode is LIVE or LIVE_REPLAY, and 1,000
+	// if PlaybackMode is ON_DEMAND.
 	//
 	// The maximum value of 1,000 fragments corresponds to more than 16 minutes
 	// of video on streams with 1-second fragments, and more than 2 1/2 hours of
 	// video on streams with 10-second fragments.
 	MaxMediaPlaylistFragmentResults *int64 `min:"1" type:"long"`
 
-	// Whether to retrieve live or archived, on-demand data.
+	// Whether to retrieve live, live replay, or archived, on-demand data.
 	//
-	// Features of the two types of session include the following:
+	// Features of the three types of sessions include the following:
 	//
 	//    * LIVE : For sessions of this type, the HLS media playlist is continually
 	//    updated with the latest fragments as they become available. We recommend
@@ -111,6 +113,18 @@ type GetHLSStreamingSessionURLInput struct {
 	//    fragment becomes available after a subsequent fragment is added to the
 	//    playlist, the older fragment is not added, and the gap is not filled.
 	//
+	//    * LIVE_REPLAY : For sessions of this type, the HLS media playlist is updated
+	//    similarly to how it is updated for LIVE mode except that it starts by
+	//    including fragments from a given start time. Instead of fragments being
+	//    added as they are ingested, fragments are added as the duration of the
+	//    next fragment elapses. For example, if the fragments in the session are
+	//    two seconds long, then a new fragment is added to the media playlist every
+	//    two seconds. This mode is useful to be able to start playback from when
+	//    an event is detected and continue live streaming media that has not yet
+	//    been ingested as of the time of the session creation. This mode is also
+	//    useful to stream previously archived media without being limited by the
+	//    1,000 fragment limit in the ON_DEMAND mode.
+	//
 	//    * ON_DEMAND : For sessions of this type, the HLS media playlist contains
 	//    all the fragments for the session, up to the number that is specified
 	//    in MaxMediaPlaylistFragmentResults. The playlist must be retrieved only
@@ -118,7 +132,7 @@ type GetHLSStreamingSessionURLInput struct {
 	//    player, the user interface typically displays a scrubber control for choosing
 	//    the position in the playback window to display.
 	//
-	// In both playback modes, if FragmentSelectorType is PRODUCER_TIMESTAMP, and
+	// In all playback modes, if FragmentSelectorType is PRODUCER_TIMESTAMP, and
 	// if there are multiple fragments with the same start timestamp, the fragment
 	// that has the larger fragment number (that is, the newer fragment) is included
 	// in the HLS media playlist. The other fragments are not included. Fragments
@@ -127,7 +141,7 @@ type GetHLSStreamingSessionURLInput struct {
 	// player.
 	//
 	// The default is LIVE.
-	PlaybackMode PlaybackMode `type:"string" enum:"true"`
+	PlaybackMode HLSPlaybackMode `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the stream for which to retrieve the HLS
 	// master playlist URL.
@@ -261,30 +275,32 @@ const opGetHLSStreamingSessionURL = "GetHLSStreamingSessionURL"
 // Retrieves an HTTP Live Streaming (HLS) URL for the stream. You can then open
 // the URL in a browser or media player to view the stream contents.
 //
-// You must specify either the StreamName or the StreamARN.
+// Both the StreamName and the StreamARN parameters are optional, but you must
+// specify either the StreamName or the StreamARN when invoking this API operation.
 //
 // An Amazon Kinesis video stream has the following requirements for providing
 // data through HLS:
 //
-//    * The media must contain h.264 encoded video and, optionally, AAC encoded
-//    audio. Specifically, the codec id of track 1 should be V_MPEG/ISO/AVC.
-//    Optionally, the codec id of track 2 should be A_AAC.
+//    * The media must contain h.264 or h.265 encoded video and, optionally,
+//    AAC encoded audio. Specifically, the codec id of track 1 should be V_MPEG/ISO/AVC
+//    (for h.264) or V_MPEG/ISO/HEVC (for h.265). Optionally, the codec id of
+//    track 2 should be A_AAC.
 //
 //    * Data retention must be greater than 0.
 //
 //    * The video track of each fragment must contain codec private data in
-//    the Advanced Video Coding (AVC) for H.264 format (MPEG-4 specification
-//    ISO/IEC 14496-15 (https://www.iso.org/standard/55980.html)). For information
-//    about adapting stream data to a given format, see NAL Adaptation Flags
-//    (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/producer-reference-nal.html).
+//    the Advanced Video Coding (AVC) for H.264 format or HEVC for H.265 format
+//    (MPEG-4 specification ISO/IEC 14496-15 (https://www.iso.org/standard/55980.html)).
+//    For information about adapting stream data to a given format, see NAL
+//    Adaptation Flags (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/producer-reference-nal.html).
 //
 //    * The audio track (if present) of each fragment must contain codec private
 //    data in the AAC format (AAC specification ISO/IEC 13818-7 (https://www.iso.org/standard/43345.html)).
 //
 // Kinesis Video Streams HLS sessions contain fragments in the fragmented MPEG-4
-// form (also called fMP4 or CMAF), rather than the MPEG-2 form (also called
-// TS chunks, which the HLS specification also supports). For more information
-// about HLS fragment types, see the HLS specification (https://tools.ietf.org/html/draft-pantos-http-live-streaming-23).
+// form (also called fMP4 or CMAF) or the MPEG-2 form (also called TS chunks,
+// which the HLS specification also supports). For more information about HLS
+// fragment types, see the HLS specification (https://tools.ietf.org/html/draft-pantos-http-live-streaming-23).
 //
 // The following procedure shows how to use HLS with Kinesis Video Streams:
 //
@@ -364,12 +380,14 @@ const opGetHLSStreamingSessionURL = "GetHLSStreamingSessionURL"
 //    might throttle a session if multiple media players are sharing it. For
 //    connection limits, see Kinesis Video Streams Limits (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html).
 //
-//    * A Kinesis video stream can have a maximum of five active HLS streaming
+//    * A Kinesis video stream can have a maximum of ten active HLS streaming
 //    sessions. If a new session is created when the maximum number of sessions
 //    is already active, the oldest (earliest created) session is closed. The
 //    number of active GetMedia connections on a Kinesis video stream does not
 //    count against this limit, and the number of active HLS sessions does not
-//    count against the active GetMedia connection limit.
+//    count against the active GetMedia connection limit. The maximum limits
+//    for active HLS and MPEG-DASH streaming sessions are independent of each
+//    other.
 //
 // You can monitor the amount of data that the media player consumes by monitoring
 // the GetMP4MediaFragment.OutgoingBytes Amazon CloudWatch metric. For information
@@ -381,6 +399,25 @@ const opGetHLSStreamingSessionURL = "GetHLSStreamingSessionURL"
 //
 // For more information about HLS, see HTTP Live Streaming (https://developer.apple.com/streaming/)
 // on the Apple Developer site (https://developer.apple.com).
+//
+// If an error is thrown after invoking a Kinesis Video Streams archived media
+// API, in addition to the HTTP status code and the response body, it includes
+// the following pieces of information:
+//
+//    * x-amz-ErrorType HTTP header – contains a more specific error type
+//    in addition to what the HTTP status code provides.
+//
+//    * x-amz-RequestId HTTP header – if you want to report an issue to AWS,
+//    the support team can better diagnose the problem if given the Request
+//    Id.
+//
+// Both the HTTP status code and the ErrorType header can be utilized to make
+// programmatic decisions about whether errors are retry-able and under what
+// conditions, as well as provide information on what actions the client programmer
+// might need to take in order to successfully try again.
+//
+// For more information, see the Errors section at the bottom of this topic,
+// as well as Common Errors (https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html).
 //
 //    // Example sending a request using GetHLSStreamingSessionURLRequest.
 //    req := client.GetHLSStreamingSessionURLRequest(params)

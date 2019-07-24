@@ -17,7 +17,7 @@ type UpdateSmsChannelInput struct {
 	// ApplicationId is a required field
 	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
 
-	// SMS Channel Request
+	// Specifies the status and settings of the SMS channel for an application.
 	//
 	// SMSChannelRequest is a required field
 	SMSChannelRequest *SMSChannelRequest `type:"structure" required:"true"`
@@ -69,7 +69,8 @@ func (s UpdateSmsChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateSmsChannelOutput struct {
 	_ struct{} `type:"structure" payload:"SMSChannelResponse"`
 
-	// SMS Channel Response.
+	// Provides information about the status and settings of the SMS channel for
+	// an application.
 	//
 	// SMSChannelResponse is a required field
 	SMSChannelResponse *SMSChannelResponse `type:"structure" required:"true"`
@@ -96,7 +97,7 @@ const opUpdateSmsChannel = "UpdateSmsChannel"
 // UpdateSmsChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Update an SMS channel.
+// Updates the status and settings of the SMS channel for an application.
 //
 //    // Example sending a request using UpdateSmsChannelRequest.
 //    req := client.UpdateSmsChannelRequest(params)

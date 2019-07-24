@@ -75,7 +75,7 @@ const opAssociateVpcCidrBlock = "AssociateVpcCidrBlock"
 // IPv6 CIDR block size is fixed at /56.
 //
 // For more information about associating CIDR blocks with your VPC and applicable
-// restrictions, see VPC and Subnet Sizing (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html#VPC_Sizing)
+// restrictions, see VPC and Subnet Sizing (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing)
 // in the Amazon Virtual Private Cloud User Guide.
 //
 //    // Example sending a request using AssociateVpcCidrBlockRequest.

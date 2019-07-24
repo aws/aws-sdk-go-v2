@@ -103,6 +103,10 @@ const opStartQuery = "StartQuery"
 //
 // For more information, see CloudWatch Logs Insights Query Syntax (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html).
 //
+// Queries time out after 15 minutes of execution. If your queries are timing
+// out, reduce the time range being searched, or partition your query into a
+// number of queries.
+//
 //    // Example sending a request using StartQueryRequest.
 //    req := client.StartQueryRequest(params)
 //    resp, err := req.Send(context.TODO())

@@ -11,7 +11,7 @@ import (
 )
 
 // The request to update a streaming distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/UpdateStreamingDistributionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateStreamingDistributionRequest
 type UpdateStreamingDistributionInput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistributionConfig"`
 
@@ -27,7 +27,7 @@ type UpdateStreamingDistributionInput struct {
 	// The streaming distribution's configuration information.
 	//
 	// StreamingDistributionConfig is a required field
-	StreamingDistributionConfig *StreamingDistributionConfig `locationName:"StreamingDistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2018-11-05/"`
+	StreamingDistributionConfig *StreamingDistributionConfig `locationName:"StreamingDistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
 }
 
 // String returns the string representation
@@ -76,14 +76,14 @@ func (s UpdateStreamingDistributionInput) MarshalFields(e protocol.FieldEncoder)
 	if s.StreamingDistributionConfig != nil {
 		v := s.StreamingDistributionConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2018-11-05/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
 		e.SetFields(protocol.PayloadTarget, "StreamingDistributionConfig", v, metadata)
 	}
 	return nil
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/UpdateStreamingDistributionResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateStreamingDistributionResult
 type UpdateStreamingDistributionOutput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistribution"`
 
@@ -116,7 +116,7 @@ func (s UpdateStreamingDistributionOutput) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-const opUpdateStreamingDistribution = "UpdateStreamingDistribution2018_11_05"
+const opUpdateStreamingDistribution = "UpdateStreamingDistribution2019_03_26"
 
 // UpdateStreamingDistributionRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -130,12 +130,12 @@ const opUpdateStreamingDistribution = "UpdateStreamingDistribution2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/UpdateStreamingDistribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateStreamingDistribution
 func (c *Client) UpdateStreamingDistributionRequest(input *UpdateStreamingDistributionInput) UpdateStreamingDistributionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateStreamingDistribution,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/2018-11-05/streaming-distribution/{Id}/config",
+		HTTPPath:   "/2019-03-26/streaming-distribution/{Id}/config",
 	}
 
 	if input == nil {

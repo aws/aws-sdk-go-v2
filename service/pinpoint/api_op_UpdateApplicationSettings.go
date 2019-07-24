@@ -17,7 +17,7 @@ type UpdateApplicationSettingsInput struct {
 	// ApplicationId is a required field
 	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
 
-	// Creating application setting request
+	// Specifies the default settings for an application.
 	//
 	// WriteApplicationSettingsRequest is a required field
 	WriteApplicationSettingsRequest *WriteApplicationSettingsRequest `type:"structure" required:"true"`
@@ -69,7 +69,8 @@ func (s UpdateApplicationSettingsInput) MarshalFields(e protocol.FieldEncoder) e
 type UpdateApplicationSettingsOutput struct {
 	_ struct{} `type:"structure" payload:"ApplicationSettingsResource"`
 
-	// Application settings.
+	// Provides information about an application, including the default settings
+	// for an application.
 	//
 	// ApplicationSettingsResource is a required field
 	ApplicationSettingsResource *ApplicationSettingsResource `type:"structure" required:"true"`
@@ -96,7 +97,7 @@ const opUpdateApplicationSettings = "UpdateApplicationSettings"
 // UpdateApplicationSettingsRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Used to update the settings for an app.
+// Updates the settings for an application.
 //
 //    // Example sending a request using UpdateApplicationSettingsRequest.
 //    req := client.UpdateApplicationSettingsRequest(params)

@@ -38,7 +38,8 @@ type CreateBucketInput struct {
 	// Allows grantee to write the ACL for the applicable bucket.
 	GrantWriteACP *string `location:"header" locationName:"x-amz-grant-write-acp" type:"string"`
 
-	// Specifies whether you want S3 Object Lock to be enabled for the new bucket.
+	// Specifies whether you want Amazon S3 object lock to be enabled for the new
+	// bucket.
 	ObjectLockEnabledForBucket *bool `location:"header" locationName:"x-amz-bucket-object-lock-enabled" type:"boolean"`
 }
 

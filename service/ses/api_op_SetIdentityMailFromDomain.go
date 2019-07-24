@@ -11,7 +11,7 @@ import (
 
 // Represents a request to enable or disable the Amazon SES custom MAIL FROM
 // domain setup for a verified identity. For information about using a custom
-// MAIL FROM domain, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html).
+// MAIL FROM domain, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityMailFromDomainRequest
 type SetIdentityMailFromDomainInput struct {
 	_ struct{} `type:"structure"`
@@ -36,7 +36,7 @@ type SetIdentityMailFromDomainInput struct {
 	// MAIL FROM domain must 1) be a subdomain of the verified identity, 2) not
 	// be used in a "From" address if the MAIL FROM domain is the destination of
 	// email feedback forwarding (for more information, see the Amazon SES Developer
-	// Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html)),
+	// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html)),
 	// and 3) not be used to receive emails. A value of null disables the custom
 	// MAIL FROM setting for the identity.
 	MailFromDomain *string `type:"string"`
@@ -83,7 +83,7 @@ const opSetIdentityMailFromDomain = "SetIdentityMailFromDomain"
 // To send emails using the specified MAIL FROM domain, you must add an MX record
 // to your MAIL FROM domain's DNS settings. If you want your emails to pass
 // Sender Policy Framework (SPF) checks, you must also add or update an SPF
-// record. For more information, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from-set.html).
+// record. For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from-set.html).
 //
 // You can execute this operation no more than once per second.
 //

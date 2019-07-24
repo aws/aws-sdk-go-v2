@@ -11,7 +11,7 @@ import (
 )
 
 // Represents a request to send a templated email to multiple destinations using
-// Amazon SES. For more information, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
+// Amazon SES. For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendBulkTemplatedEmailRequest
 type SendBulkTemplatedEmailInput struct {
 	_ struct{} `type:"structure"`
@@ -61,18 +61,18 @@ type SendBulkTemplatedEmailInput struct {
 	// and the ReturnPath to be feedback@example.com.
 	//
 	// For more information about sending authorization, see the Amazon SES Developer
-	// Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+	// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	ReturnPathArn *string `type:"string"`
 
 	// The email address that is sending the email. This email address must be either
 	// individually verified with Amazon SES, or from a domain that has been verified
 	// with Amazon SES. For information about verifying identities, see the Amazon
-	// SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html).
+	// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html).
 	//
 	// If you are sending on behalf of another user and have been permitted to do
 	// so by a sending authorization policy, then you must also specify the SourceArn
 	// parameter. For more information about sending authorization, see the Amazon
-	// SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+	// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	//
 	// Amazon SES does not support the SMTPUTF8 extension, as described in RFC6531
 	// (https://tools.ietf.org/html/rfc6531). For this reason, the local part of
@@ -98,7 +98,7 @@ type SendBulkTemplatedEmailInput struct {
 	// and the Source to be user@example.com.
 	//
 	// For more information about sending authorization, see the Amazon SES Developer
-	// Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+	// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	SourceArn *string `type:"string"`
 
 	// The template to use when sending this email.
@@ -185,7 +185,7 @@ const opSendBulkTemplatedEmail = "SendBulkTemplatedEmail"
 //    * If your account is still in the Amazon SES sandbox, you may only send
 //    to verified addresses or domains, or to email addresses associated with
 //    the Amazon SES Mailbox Simulator. For more information, see Verifying
-//    Email Addresses and Domains (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html)
+//    Email Addresses and Domains (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html)
 //    in the Amazon SES Developer Guide.
 //
 //    * The maximum message size is 10 MB.

@@ -67,7 +67,8 @@ func (s DeleteUserEndpointsInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteUserEndpointsOutput struct {
 	_ struct{} `type:"structure" payload:"EndpointsResponse"`
 
-	// List of endpoints
+	// Provides information about all the endpoints that are associated with a user
+	// ID.
 	//
 	// EndpointsResponse is a required field
 	EndpointsResponse *EndpointsResponse `type:"structure" required:"true"`
@@ -94,7 +95,7 @@ const opDeleteUserEndpoints = "DeleteUserEndpoints"
 // DeleteUserEndpointsRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Deletes endpoints that are associated with a User ID.
+// Deletes all the endpoints that are associated with a specific user ID.
 //
 //    // Example sending a request using DeleteUserEndpointsRequest.
 //    req := client.DeleteUserEndpointsRequest(params)

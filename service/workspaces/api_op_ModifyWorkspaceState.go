@@ -65,8 +65,9 @@ const opModifyWorkspaceState = "ModifyWorkspaceState"
 //
 // To maintain a WorkSpace without being interrupted, set the WorkSpace state
 // to ADMIN_MAINTENANCE. WorkSpaces in this state do not respond to requests
-// to reboot, stop, start, or rebuild. An AutoStop WorkSpace in this state is
-// not stopped. Users can log into a WorkSpace in the ADMIN_MAINTENANCE state.
+// to reboot, stop, start, rebuild, or restore. An AutoStop WorkSpace in this
+// state is not stopped. Users cannot log into a WorkSpace in the ADMIN_MAINTENANCE
+// state.
 //
 //    // Example sending a request using ModifyWorkspaceStateRequest.
 //    req := client.ModifyWorkspaceStateRequest(params)

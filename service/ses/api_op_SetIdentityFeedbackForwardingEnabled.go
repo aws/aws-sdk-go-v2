@@ -11,7 +11,7 @@ import (
 
 // Represents a request to enable or disable whether Amazon SES forwards you
 // bounce and complaint notifications through email. For information about email
-// feedback forwarding, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-email.html).
+// feedback forwarding, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-email.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityFeedbackForwardingEnabledRequest
 type SetIdentityFeedbackForwardingEnabledInput struct {
 	_ struct{} `type:"structure"`
@@ -83,7 +83,7 @@ const opSetIdentityFeedbackForwardingEnabled = "SetIdentityFeedbackForwardingEna
 // You can execute this operation no more than once per second.
 //
 // For more information about using notifications with Amazon SES, see the Amazon
-// SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html).
+// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html).
 //
 //    // Example sending a request using SetIdentityFeedbackForwardingEnabledRequest.
 //    req := client.SetIdentityFeedbackForwardingEnabledRequest(params)

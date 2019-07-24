@@ -63,7 +63,7 @@ const opDeleteConfigurationSetTrackingOptions = "DeleteConfigurationSetTrackingO
 // By default, images and links used for tracking open and click events are
 // hosted on domains operated by Amazon SES. You can configure a subdomain of
 // your own to handle these events. For information about using custom domains,
-// see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html).
+// see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html).
 //
 // Deleting this kind of association will result in emails sent using the specified
 // configuration set to capture open and click events using the standard, Amazon

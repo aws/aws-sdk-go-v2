@@ -41,9 +41,9 @@ type IssueCertificateInput struct {
 	Csr []byte `min:"1" type:"blob" required:"true"`
 
 	// Custom string that can be used to distinguish between calls to the IssueCertificate
-	// operation. Idempotency tokens time out after one hour. Therefore, if you
-	// call IssueCertificate multiple times with the same idempotency token within
-	// 5 minutes, ACM PCA recognizes that you are requesting only one certificate
+	// action. Idempotency tokens time out after one hour. Therefore, if you call
+	// IssueCertificate multiple times with the same idempotency token within 5
+	// minutes, ACM Private CA recognizes that you are requesting only one certificate
 	// and will issue only one. If you change the idempotency token for each call,
 	// PCA recognizes that you are requesting multiple certificates.
 	IdempotencyToken *string `min:"1" type:"string"`
@@ -53,6 +53,28 @@ type IssueCertificateInput struct {
 	//
 	// SigningAlgorithm is a required field
 	SigningAlgorithm SigningAlgorithm `type:"string" required:"true" enum:"true"`
+
+	// Specifies a custom configuration template to use when issuing a certificate.
+	// If this parameter is not provided, ACM Private CA defaults to the EndEntityCertificate/V1
+	// template.
+	//
+	// The following service-owned TemplateArn values are supported by ACM Private
+	// CA:
+	//
+	//    * arn:aws:acm-pca:::template/EndEntityCertificate/V1
+	//
+	//    * arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen0/V1
+	//
+	//    * arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen1/V1
+	//
+	//    * arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen2/V1
+	//
+	//    * arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen3/V1
+	//
+	//    * arn:aws:acm-pca:::template/RootCACertificate/V1
+	//
+	// For more information, see Using Templates (https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html).
+	TemplateArn *string `min:"5" type:"string"`
 
 	// The type of the validity period.
 	//
@@ -87,6 +109,9 @@ func (s *IssueCertificateInput) Validate() error {
 	}
 	if len(s.SigningAlgorithm) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("SigningAlgorithm"))
+	}
+	if s.TemplateArn != nil && len(*s.TemplateArn) < 5 {
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateArn", 5))
 	}
 
 	if s.Validity == nil {
@@ -126,12 +151,12 @@ const opIssueCertificate = "IssueCertificate"
 // AWS Certificate Manager Private Certificate Authority.
 //
 // Uses your private certificate authority (CA) to issue a client certificate.
-// This operation returns the Amazon Resource Name (ARN) of the certificate.
-// You can retrieve the certificate by calling the GetCertificate operation
-// and specifying the ARN.
+// This action returns the Amazon Resource Name (ARN) of the certificate. You
+// can retrieve the certificate by calling the GetCertificate action and specifying
+// the ARN.
 //
-// You cannot use the ACM ListCertificateAuthorities operation to retrieve the
-// ARNs of the certificates that you issue by using ACM PCA.
+// You cannot use the ACM ListCertificateAuthorities action to retrieve the
+// ARNs of the certificates that you issue by using ACM Private CA.
 //
 //    // Example sending a request using IssueCertificateRequest.
 //    req := client.IssueCertificateRequest(params)

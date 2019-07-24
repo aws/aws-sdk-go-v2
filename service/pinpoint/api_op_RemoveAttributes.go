@@ -20,7 +20,8 @@ type RemoveAttributesInput struct {
 	// AttributeType is a required field
 	AttributeType *string `location:"uri" locationName:"attribute-type" type:"string" required:"true"`
 
-	// Update attributes request
+	// Specifies one or more attributes to remove from all the endpoints that are
+	// associated with an application.
 	//
 	// UpdateAttributesRequest is a required field
 	UpdateAttributesRequest *UpdateAttributesRequest `type:"structure" required:"true"`
@@ -82,7 +83,8 @@ func (s RemoveAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
 type RemoveAttributesOutput struct {
 	_ struct{} `type:"structure" payload:"AttributesResource"`
 
-	// Attributes.
+	// Provides information about the type and the names of attributes that were
+	// removed from all the endpoints that are associated with an application.
 	//
 	// AttributesResource is a required field
 	AttributesResource *AttributesResource `type:"structure" required:"true"`
@@ -109,7 +111,8 @@ const opRemoveAttributes = "RemoveAttributes"
 // RemoveAttributesRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Used to remove the attributes for an app
+// Removes one or more attributes, of the same attribute type, from all the
+// endpoints that are associated with an application.
 //
 //    // Example sending a request using RemoveAttributesRequest.
 //    req := client.RemoveAttributesRequest(params)

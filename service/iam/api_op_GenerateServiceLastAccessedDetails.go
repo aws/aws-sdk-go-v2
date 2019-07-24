@@ -62,12 +62,11 @@ const opGenerateServiceLastAccessedDetails = "GenerateServiceLastAccessedDetails
 // GenerateServiceLastAccessedDetailsRequest returns a request value for making API operation for
 // AWS Identity and Access Management.
 //
-// Generates a request for a report that includes details about when an IAM
-// resource (user, group, role, or policy) was last used in an attempt to access
-// AWS services. Recent activity usually appears within four hours. IAM reports
-// activity for the last 365 days, or less if your Region began supporting this
-// feature within the last year. For more information, see Regions Where Data
-// Is Tracked (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period).
+// Generates a report that includes details about when an IAM resource (user,
+// group, role, or policy) was last used in an attempt to access AWS services.
+// Recent activity usually appears within four hours. IAM reports activity for
+// the last 365 days, or less if your Region began supporting this feature within
+// the last year. For more information, see Regions Where Data Is Tracked (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period).
 //
 // The service last accessed data includes all attempts to access an AWS API,
 // not just the successful ones. This includes all attempts that were made using

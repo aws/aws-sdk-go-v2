@@ -139,6 +139,10 @@ type UpdateApiOutput struct {
 	// for more information.
 	RouteSelectionExpression *string `locationName:"routeSelectionExpression" type:"string"`
 
+	// A key value pair of string with key length between[1-128] and value length
+	// between[1-256]
+	Tags map[string]string `locationName:"tags" type:"map"`
+
 	// A string with a length between [1-64].
 	Version *string `locationName:"version" type:"string"`
 
@@ -205,6 +209,18 @@ func (s UpdateApiOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "routeSelectionExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	if s.Version != nil {
 		v := *s.Version

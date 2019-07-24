@@ -38,7 +38,7 @@ type CreateStackInput struct {
 
 	// A ChefConfiguration object that specifies whether to enable Berkshelf and
 	// the Berkshelf version on Chef 11.10 stacks. For more information, see Create
-	// a New Stack (http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html).
+	// a New Stack (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html).
 	ChefConfiguration *ChefConfiguration `type:"structure"`
 
 	// The configuration manager. When you create a stack we recommend that you
@@ -48,8 +48,8 @@ type CreateStackInput struct {
 	ConfigurationManager *StackConfigurationManager `type:"structure"`
 
 	// Contains the information required to retrieve an app or cookbook from a repository.
-	// For more information, see Creating Apps (http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html)
-	// or Custom Recipes and Cookbooks (http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html).
+	// For more information, see Adding Apps (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html)
+	// or Cookbooks and Recipes (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html).
 	CustomCookbooksSource *Source `type:"structure"`
 
 	// A string that contains user-defined, custom JSON. It can be used to override
@@ -59,18 +59,18 @@ type CreateStackInput struct {
 	// "{\"key1\": \"value1\", \"key2\": \"value2\",...}"
 	//
 	// For more information about custom JSON, see Use Custom JSON to Modify the
-	// Stack Configuration Attributes (http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html).
+	// Stack Configuration Attributes (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html).
 	CustomJson *string `type:"string"`
 
 	// The stack's default Availability Zone, which must be in the specified region.
-	// For more information, see Regions and Endpoints (http://docs.aws.amazon.com/general/latest/gr/rande.html).
+	// For more information, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html).
 	// If you also specify a value for DefaultSubnetId, the subnet must be in the
 	// same zone. For more information, see the VpcId parameter description.
 	DefaultAvailabilityZone *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of an IAM profile that is the default profile
 	// for all of the stack's EC2 instances. For more information about IAM ARNs,
-	// see Using Identifiers (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
+	// see Using Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
 	//
 	// DefaultInstanceProfileArn is a required field
 	DefaultInstanceProfileArn *string `type:"string" required:"true"`
@@ -80,8 +80,9 @@ type CreateStackInput struct {
 	// You can specify one of the following.
 	//
 	//    * A supported Linux operating system: An Amazon Linux version, such as
-	//    Amazon Linux 2017.09, Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon
-	//    Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.
+	//    Amazon Linux 2018.03, Amazon Linux 2017.09, Amazon Linux 2017.03, Amazon
+	//    Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux
+	//    2015.03.
 	//
 	//    * A supported Ubuntu operating system, such as Ubuntu 16.04 LTS, Ubuntu
 	//    14.04 LTS, or Ubuntu 12.04 LTS.
@@ -96,26 +97,26 @@ type CreateStackInput struct {
 	//    Windows Server 2012 R2 with SQL Server Web.
 	//
 	//    * A custom AMI: Custom. You specify the custom AMI you want to use when
-	//    you create instances. For more information, see Using Custom AMIs (http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html).
+	//    you create instances. For more information, see Using Custom AMIs (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html).
 	//
 	// The default option is the current Amazon Linux version. For more information
 	// about supported operating systems, see AWS OpsWorks Stacks Operating Systems
-	// (http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html).
+	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html).
 	DefaultOs *string `type:"string"`
 
 	// The default root device type. This value is the default for all instances
 	// in the stack, but you can override it when you create an instance. The default
 	// option is instance-store. For more information, see Storage for the Root
-	// Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
+	// Device (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
 	DefaultRootDeviceType RootDeviceType `type:"string" enum:"true"`
 
 	// A default Amazon EC2 key pair name. The default value is none. If you specify
 	// a key pair name, AWS OpsWorks installs the public key on the instance and
 	// you can use the private key with an SSH client to log in to the instance.
-	// For more information, see Using SSH to Communicate with an Instance (http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html)
-	// and Managing SSH Access (http://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html).
+	// For more information, see Using SSH to Communicate with an Instance (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html)
+	// and Managing SSH Access (https://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html).
 	// You can override this setting by specifying a different key pair, or no key
-	// pair, when you create an instance (http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html).
+	// pair, when you create an instance (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html).
 	DefaultSshKeyName *string `type:"string"`
 
 	// The stack's default VPC subnet ID. This parameter is required if you specify
@@ -139,7 +140,7 @@ type CreateStackInput struct {
 	//
 	//    * Fruits
 	//
-	//    * Greek_Deities
+	//    * Greek_Deities_and_Titans
 	//
 	//    * Legendary_creatures_from_Japan
 	//
@@ -163,7 +164,7 @@ type CreateStackInput struct {
 	Name *string `type:"string" required:"true"`
 
 	// The stack's AWS region, such as ap-south-1. For more information about Amazon
-	// regions, see Regions and Endpoints (http://docs.aws.amazon.com/general/latest/gr/rande.html).
+	// regions, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html).
 	//
 	// In the AWS CLI, this API maps to the --stack-region parameter. If the --stack-region
 	// parameter and the AWS CLI common parameter --region are set to the same value,
@@ -187,7 +188,7 @@ type CreateStackInput struct {
 	// The stack's AWS Identity and Access Management (IAM) role, which allows AWS
 	// OpsWorks Stacks to work with AWS resources on your behalf. You must set this
 	// parameter to the Amazon Resource Name (ARN) for an existing IAM role. For
-	// more information about IAM ARNs, see Using Identifiers (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
+	// more information about IAM ARNs, see Using Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
 	//
 	// ServiceRoleArn is a required field
 	ServiceRoleArn *string `type:"string" required:"true"`
@@ -215,7 +216,7 @@ type CreateStackInput struct {
 	//    custom security groups are required only for those layers that need custom
 	//    settings.
 	//
-	// For more information, see Create a New Stack (http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html).
+	// For more information, see Create a New Stack (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html).
 	UseOpsworksSecurityGroups *bool `type:"boolean"`
 
 	// The ID of the VPC that the stack is to be launched into. The VPC must be
@@ -241,9 +242,9 @@ type CreateStackInput struct {
 	//    * You must specify a value for DefaultSubnetId.
 	//
 	// For more information about how to use AWS OpsWorks Stacks with a VPC, see
-	// Running a Stack in a VPC (http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-vpc.html).
+	// Running a Stack in a VPC (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-vpc.html).
 	// For more information about default VPC and EC2-Classic, see Supported Platforms
-	// (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html).
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html).
 	VpcId *string `type:"string"`
 }
 
@@ -298,11 +299,11 @@ const opCreateStack = "CreateStack"
 // CreateStackRequest returns a request value for making API operation for
 // AWS OpsWorks.
 //
-// Creates a new stack. For more information, see Create a New Stack (http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-edit.html).
+// Creates a new stack. For more information, see Create a New Stack (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-edit.html).
 //
 // Required Permissions: To use this action, an IAM user must have an attached
 // policy that explicitly grants permissions. For more information about user
-// permissions, see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using CreateStackRequest.
 //    req := client.CreateStackRequest(params)

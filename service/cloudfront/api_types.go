@@ -24,31 +24,24 @@ var _ = awsutil.Prettify
 // are associated with the trusted signer's AWS account. If no KeyPairId element
 // appears for a Signer, that signer can't create signed URLs.
 //
-// For more information, see Serving Private Content through CloudFront (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
+// For more information, see Serving Private Content through CloudFront (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ActiveTrustedSigners
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ActiveTrustedSigners
 type ActiveTrustedSigners struct {
 	_ struct{} `type:"structure"`
 
 	// Enabled is true if any of the AWS accounts listed in the TrustedSigners complex
-	// type for this RTMP distribution have active CloudFront key pairs. If not,
-	// Enabled is false.
-	//
-	// For more information, see ActiveTrustedSigners.
+	// type for this distribution have active CloudFront key pairs. If not, Enabled
+	// is false.
 	//
 	// Enabled is a required field
 	Enabled *bool `type:"boolean" required:"true"`
 
 	// A complex type that contains one Signer complex type for each trusted signer
 	// that is specified in the TrustedSigners complex type.
-	//
-	// For more information, see ActiveTrustedSigners.
 	Items []Signer `locationNameList:"Signer" type:"list"`
 
-	// A complex type that contains one Signer complex type for each trusted signer
-	// specified in the TrustedSigners complex type.
-	//
-	// For more information, see ActiveTrustedSigners.
+	// The number of trusted signers specified in the TrustedSigners complex type.
 	//
 	// Quantity is a required field
 	Quantity *int64 `type:"integer" required:"true"`
@@ -88,9 +81,67 @@ func (s ActiveTrustedSigners) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// AWS services in China customers must file for an Internet Content Provider
+// (ICP) recordal if they want to serve content publicly on an alternate domain
+// name, also known as a CNAME, that they've added to CloudFront. AliasICPRecordal
+// provides the ICP recordal status for CNAMEs associated with distributions.
+// The status is returned in the CloudFront response; you can't configure it
+// yourself.
+//
+// For more information about ICP recordals, see Signup, Accounts, and Credentials
+// (https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html)
+// in Getting Started with AWS services in China.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/AliasICPRecordal
+type AliasICPRecordal struct {
+	_ struct{} `type:"structure"`
+
+	// A domain name associated with a distribution.
+	CNAME *string `type:"string"`
+
+	// The Internet Content Provider (ICP) recordal status for a CNAME. The ICPRecordalStatus
+	// is set to APPROVED for all CNAMEs (aliases) in regions outside of China.
+	//
+	// The status values returned are the following:
+	//
+	//    * APPROVED indicates that the associated CNAME has a valid ICP recordal
+	//    number. Multiple CNAMEs can be associated with a distribution, and CNAMEs
+	//    can correspond to different ICP recordals. To be marked as APPROVED, that
+	//    is, valid to use with China region, a CNAME must have one ICP recordal
+	//    number associated with it.
+	//
+	//    * SUSPENDED indicates that the associated CNAME does not have a valid
+	//    ICP recordal number.
+	//
+	//    * PENDING indicates that at least one CNAME associated with the distribution
+	//    does not have a valid ICP recordal number.
+	ICPRecordalStatus ICPRecordalStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s AliasICPRecordal) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AliasICPRecordal) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CNAME != nil {
+		v := *s.CNAME
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CNAME", protocol.StringValue(v), metadata)
+	}
+	if len(s.ICPRecordalStatus) > 0 {
+		v := s.ICPRecordalStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ICPRecordalStatus", v, metadata)
+	}
+	return nil
+}
+
 // A complex type that contains information about CNAMEs (alternate domain names),
 // if any, for this distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/Aliases
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Aliases
 type Aliases struct {
 	_ struct{} `type:"structure"`
 
@@ -162,7 +213,7 @@ func (s Aliases) MarshalFields(e protocol.FieldEncoder) error {
 // S3 bucket or to your custom origin so users can't perform operations that
 // you don't want them to. For example, you might not want users to have permissions
 // to delete objects from your origin.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/AllowedMethods
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/AllowedMethods
 type AllowedMethods struct {
 	_ struct{} `type:"structure"`
 
@@ -259,7 +310,7 @@ func (s AllowedMethods) MarshalFields(e protocol.FieldEncoder) error {
 // to get objects from one of the origins, but the other origin is never used.
 //
 // For the current limit on the number of cache behaviors that you can add to
-// a distribution, see Amazon CloudFront Limits (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront)
+// a distribution, see Amazon CloudFront Limits (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront)
 // in the AWS General Reference.
 //
 // If you don't want to specify any cache behaviors, include only an empty CacheBehaviors
@@ -273,9 +324,9 @@ func (s AllowedMethods) MarshalFields(e protocol.FieldEncoder) error {
 // configuration and specify all of the cache behaviors that you want to include
 // in the updated distribution.
 //
-// For more information about cache behaviors, see Cache Behaviors (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior)
+// For more information about cache behaviors, see Cache Behaviors (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CacheBehavior
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CacheBehavior
 type CacheBehavior struct {
 	_ struct{} `type:"structure"`
 
@@ -298,7 +349,7 @@ type CacheBehavior struct {
 
 	// Whether you want CloudFront to automatically compress certain files for this
 	// cache behavior. If so, specify true; if not, specify false. For more information,
-	// see Serving Compressed Files (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html)
+	// see Serving Compressed Files (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html)
 	// in the Amazon CloudFront Developer Guide.
 	Compress *bool `type:"boolean"`
 
@@ -306,8 +357,8 @@ type CacheBehavior struct {
 	// before CloudFront forwards another request to your origin to determine whether
 	// the object has been updated. The value that you specify applies only when
 	// your origin does not add HTTP headers such as Cache-Control max-age, Cache-Control
-	// s-maxage, and Expires to objects. For more information, see Specifying How
-	// Long Objects and Errors Stay in a CloudFront Edge Cache (Expiration) (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
+	// s-maxage, and Expires to objects. For more information, see Managing How
+	// Long Content Stays in an Edge Cache (Expiration) (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
 	DefaultTTL *int64 `type:"long"`
 
@@ -329,16 +380,16 @@ type CacheBehavior struct {
 	// before CloudFront forwards another request to your origin to determine whether
 	// the object has been updated. The value that you specify applies only when
 	// your origin adds HTTP headers such as Cache-Control max-age, Cache-Control
-	// s-maxage, and Expires to objects. For more information, see Specifying How
-	// Long Objects and Errors Stay in a CloudFront Edge Cache (Expiration) (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
+	// s-maxage, and Expires to objects. For more information, see Managing How
+	// Long Content Stays in an Edge Cache (Expiration) (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
 	MaxTTL *int64 `type:"long"`
 
 	// The minimum amount of time that you want objects to stay in CloudFront caches
 	// before CloudFront forwards another request to your origin to determine whether
-	// the object has been updated. For more information, see Specifying How Long
-	// Objects and Errors Stay in a CloudFront Edge Cache (Expiration) (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
-	// in the Amazon Amazon CloudFront Developer Guide.
+	// the object has been updated. For more information, see Managing How Long
+	// Content Stays in an Edge Cache (Expiration) (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
+	// in the Amazon CloudFront Developer Guide.
 	//
 	// You must specify 0 for MinTTL if you configure CloudFront to forward all
 	// headers to your origin (under Headers, if you specify 1 for Quantity and
@@ -360,7 +411,7 @@ type CacheBehavior struct {
 	// If the request for an object does not match the path pattern for any cache
 	// behaviors, CloudFront applies the behavior in the default cache behavior.
 	//
-	// For more information, see Path Pattern (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesPathPattern)
+	// For more information, see Path Pattern (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesPathPattern)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// PathPattern is a required field
@@ -386,8 +437,8 @@ type CacheBehavior struct {
 	// If you want to require signed URLs in requests for objects in the target
 	// origin that match the PathPattern for this cache behavior, specify true for
 	// Enabled, and specify the applicable values for Quantity and Items. For more
-	// information, see Serving Private Content through CloudFront (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
-	// in the Amazon Amazon CloudFront Developer Guide.
+	// information, see Serving Private Content through CloudFront (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
+	// in the Amazon CloudFront Developer Guide.
 	//
 	// If you don't want to require signed URLs in requests for objects that match
 	// PathPattern, specify false for Enabled and 0 for Quantity. Omit Items.
@@ -413,7 +464,7 @@ type CacheBehavior struct {
 	//    HTTP status code of 403 (Forbidden).
 	//
 	// For more information about requiring the HTTPS protocol, see Using an HTTPS
-	// Connection to Access Your Objects (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html)
+	// Connection to Access Your Objects (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// The only way to guarantee that viewers retrieve an object that was fetched
@@ -422,8 +473,8 @@ type CacheBehavior struct {
 	// you clear your objects' cache because cached objects are protocol agnostic.
 	// That means that an edge location will return an object from the cache regardless
 	// of whether the current request protocol matches the protocol used previously.
-	// For more information, see Specifying How Long Objects and Errors Stay in
-	// a CloudFront Edge Cache (Expiration) (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
+	// For more information, see Managing How Long Content Stays in an Edge Cache
+	// (Expiration) (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// ViewerProtocolPolicy is a required field
@@ -572,7 +623,7 @@ func (s CacheBehavior) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains zero or more CacheBehavior elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CacheBehaviors
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CacheBehaviors
 type CacheBehaviors struct {
 	_ struct{} `type:"structure"`
 
@@ -645,7 +696,7 @@ func (s CacheBehaviors) MarshalFields(e protocol.FieldEncoder) error {
 // If you pick the second choice for your Amazon S3 Origin, you may need to
 // forward Access-Control-Request-Method, Access-Control-Request-Headers, and
 // Origin headers for the responses to be cached correctly.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CachedMethods
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CachedMethods
 type CachedMethods struct {
 	_ struct{} `type:"structure"`
 
@@ -710,7 +761,7 @@ func (s CachedMethods) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // CloudFront origin access identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CloudFrontOriginAccessIdentity
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CloudFrontOriginAccessIdentity
 type CloudFrontOriginAccessIdentity struct {
 	_ struct{} `type:"structure"`
 
@@ -760,7 +811,7 @@ func (s CloudFrontOriginAccessIdentity) MarshalFields(e protocol.FieldEncoder) e
 
 // Origin access identity configuration. Send a GET request to the /CloudFront
 // API version/CloudFront/identity ID/config resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CloudFrontOriginAccessIdentityConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CloudFrontOriginAccessIdentityConfig
 type CloudFrontOriginAccessIdentityConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -836,7 +887,7 @@ func (s CloudFrontOriginAccessIdentityConfig) MarshalFields(e protocol.FieldEnco
 // child elements. By default, your entire list of origin access identities
 // is returned in one single page. If the list is long, you can paginate it
 // using the MaxItems and Marker parameters.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CloudFrontOriginAccessIdentityList
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CloudFrontOriginAccessIdentityList
 type CloudFrontOriginAccessIdentityList struct {
 	_ struct{} `type:"structure"`
 
@@ -931,7 +982,7 @@ func (s CloudFrontOriginAccessIdentityList) MarshalFields(e protocol.FieldEncode
 }
 
 // Summary of the information about a CloudFront origin access identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CloudFrontOriginAccessIdentitySummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CloudFrontOriginAccessIdentitySummary
 type CloudFrontOriginAccessIdentitySummary struct {
 	_ struct{} `type:"structure"`
 
@@ -983,7 +1034,7 @@ func (s CloudFrontOriginAccessIdentitySummary) MarshalFields(e protocol.FieldEnc
 }
 
 // A field-level encryption content type profile.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ContentTypeProfile
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ContentTypeProfile
 type ContentTypeProfile struct {
 	_ struct{} `type:"structure"`
 
@@ -1047,7 +1098,7 @@ func (s ContentTypeProfile) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The configuration for a field-level encryption content type-profile mapping.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ContentTypeProfileConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ContentTypeProfileConfig
 type ContentTypeProfileConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1106,7 +1157,7 @@ func (s ContentTypeProfileConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Field-level encryption content type-profile.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ContentTypeProfiles
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ContentTypeProfiles
 type ContentTypeProfiles struct {
 	_ struct{} `type:"structure"`
 
@@ -1170,10 +1221,9 @@ func (s ContentTypeProfiles) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that specifies whether you want CloudFront to forward cookies
 // to the origin and, if so, which ones. For more information about forwarding
-// cookies to the origin, see How CloudFront Forwards, Caches, and Logs Cookies
-// (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html)
+// cookies to the origin, see Caching Content Based on Request Headers (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CookieNames
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CookieNames
 type CookieNames struct {
 	_ struct{} `type:"structure"`
 
@@ -1232,10 +1282,9 @@ func (s CookieNames) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that specifies whether you want CloudFront to forward cookies
 // to the origin and, if so, which ones. For more information about forwarding
-// cookies to the origin, see How CloudFront Forwards, Caches, and Logs Cookies
-// (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html)
+// cookies to the origin, see Caching Content Based on Cookies (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CookiePreference
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CookiePreference
 type CookiePreference struct {
 	_ struct{} `type:"structure"`
 
@@ -1260,7 +1309,7 @@ type CookiePreference struct {
 	// deletes them automatically.
 	//
 	// For the current limit on the number of cookie names that you can whitelist
-	// for each cache behavior, see Amazon CloudFront Limits (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront)
+	// for each cache behavior, see CloudFront Limits (https://docs.aws.amazon.com/general/latest/gr/xrefaws_service_limits.html#limits_cloudfront)
 	// in the AWS General Reference.
 	WhitelistedNames *CookieNames `type:"structure"`
 }
@@ -1313,9 +1362,9 @@ func (s CookiePreference) MarshalFields(e protocol.FieldEncoder) error {
 //    * How long CloudFront caches HTTP status codes in the 4xx and 5xx range.
 //
 // For more information about custom error pages, see Customizing Error Responses
-// (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html)
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CustomErrorResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CustomErrorResponse
 type CustomErrorResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -1327,7 +1376,7 @@ type CustomErrorResponse struct {
 	// If you don't want to specify a value, include an empty element, <ErrorCachingMinTTL>,
 	// in the XML document.
 	//
-	// For more information, see Customizing Error Responses (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html)
+	// For more information, see Customizing Error Responses (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html)
 	// in the Amazon CloudFront Developer Guide.
 	ErrorCachingMinTTL *int64 `type:"long"`
 
@@ -1441,9 +1490,9 @@ func (s CustomErrorResponse) MarshalFields(e protocol.FieldEncoder) error {
 //    * How long CloudFront caches HTTP status codes in the 4xx and 5xx range.
 //
 // For more information about custom error pages, see Customizing Error Responses
-// (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html)
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CustomErrorResponses
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CustomErrorResponses
 type CustomErrorResponses struct {
 	_ struct{} `type:"structure"`
 
@@ -1509,7 +1558,7 @@ func (s CustomErrorResponses) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains the list of Custom Headers for each origin.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CustomHeaders
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CustomHeaders
 type CustomHeaders struct {
 	_ struct{} `type:"structure"`
 
@@ -1573,8 +1622,8 @@ func (s CustomHeaders) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A customer origin or an Amazon S3 bucket configured as a website endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CustomOriginConfig
+// A custom origin or an Amazon S3 bucket configured as a website endpoint.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CustomOriginConfig
 type CustomOriginConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1691,7 +1740,7 @@ func (s CustomOriginConfig) MarshalFields(e protocol.FieldEncoder) error {
 // A complex type that describes the default cache behavior if you don't specify
 // a CacheBehavior element or if files don't match any of the values of PathPattern
 // in CacheBehavior elements. You must create exactly one default cache behavior.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DefaultCacheBehavior
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DefaultCacheBehavior
 type DefaultCacheBehavior struct {
 	_ struct{} `type:"structure"`
 
@@ -1714,7 +1763,7 @@ type DefaultCacheBehavior struct {
 
 	// Whether you want CloudFront to automatically compress certain files for this
 	// cache behavior. If so, specify true; if not, specify false. For more information,
-	// see Serving Compressed Files (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html)
+	// see Serving Compressed Files (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html)
 	// in the Amazon CloudFront Developer Guide.
 	Compress *bool `type:"boolean"`
 
@@ -1722,8 +1771,8 @@ type DefaultCacheBehavior struct {
 	// before CloudFront forwards another request to your origin to determine whether
 	// the object has been updated. The value that you specify applies only when
 	// your origin does not add HTTP headers such as Cache-Control max-age, Cache-Control
-	// s-maxage, and Expires to objects. For more information, see Specifying How
-	// Long Objects and Errors Stay in a CloudFront Edge Cache (Expiration) (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
+	// s-maxage, and Expires to objects. For more information, see Managing How
+	// Long Content Stays in an Edge Cache (Expiration) (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
 	DefaultTTL *int64 `type:"long"`
 
@@ -1741,13 +1790,20 @@ type DefaultCacheBehavior struct {
 	// a cache behavior.
 	LambdaFunctionAssociations *LambdaFunctionAssociations `type:"structure"`
 
+	// The maximum amount of time that you want objects to stay in CloudFront caches
+	// before CloudFront forwards another request to your origin to determine whether
+	// the object has been updated. The value that you specify applies only when
+	// your origin adds HTTP headers such as Cache-Control max-age, Cache-Control
+	// s-maxage, and Expires to objects. For more information, see Managing How
+	// Long Content Stays in an Edge Cache (Expiration) (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
+	// in the Amazon CloudFront Developer Guide.
 	MaxTTL *int64 `type:"long"`
 
 	// The minimum amount of time that you want objects to stay in CloudFront caches
 	// before CloudFront forwards another request to your origin to determine whether
-	// the object has been updated. For more information, see Specifying How Long
-	// Objects and Errors Stay in a CloudFront Edge Cache (Expiration) (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
-	// in the Amazon Amazon CloudFront Developer Guide.
+	// the object has been updated. For more information, see Managing How Long
+	// Content Stays in an Edge Cache (Expiration) (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
+	// in the Amazon CloudFront Developer Guide.
 	//
 	// You must specify 0 for MinTTL if you configure CloudFront to forward all
 	// headers to your origin (under Headers, if you specify 1 for Quantity and
@@ -1776,8 +1832,8 @@ type DefaultCacheBehavior struct {
 	// If you want to require signed URLs in requests for objects in the target
 	// origin that match the PathPattern for this cache behavior, specify true for
 	// Enabled, and specify the applicable values for Quantity and Items. For more
-	// information, see Serving Private Content through CloudFront (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
-	// in the Amazon Amazon CloudFront Developer Guide.
+	// information, see Serving Private Content through CloudFront (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
+	// in the Amazon CloudFront Developer Guide.
 	//
 	// If you don't want to require signed URLs in requests for objects that match
 	// PathPattern, specify false for Enabled and 0 for Quantity. Omit Items.
@@ -1803,7 +1859,7 @@ type DefaultCacheBehavior struct {
 	//    HTTP status code of 403 (Forbidden).
 	//
 	// For more information about requiring the HTTPS protocol, see Using an HTTPS
-	// Connection to Access Your Objects (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html)
+	// Connection to Access Your Objects (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// The only way to guarantee that viewers retrieve an object that was fetched
@@ -1812,8 +1868,8 @@ type DefaultCacheBehavior struct {
 	// you clear your objects' cache because cached objects are protocol agnostic.
 	// That means that an edge location will return an object from the cache regardless
 	// of whether the current request protocol matches the protocol used previously.
-	// For more information, see Specifying How Long Objects and Errors Stay in
-	// a CloudFront Edge Cache (Expiration) (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
+	// For more information, see Managing How Long Content Stays in an Edge Cache
+	// (Expiration) (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// ViewerProtocolPolicy is a required field
@@ -1951,8 +2007,9 @@ func (s DefaultCacheBehavior) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The distribution's information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/Distribution
+// A distribution tells CloudFront where you want content to be delivered from,
+// and the details about how to track and manage content delivery.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Distribution
 type Distribution struct {
 	_ struct{} `type:"structure"`
 
@@ -1973,6 +2030,16 @@ type Distribution struct {
 	//
 	// ActiveTrustedSigners is a required field
 	ActiveTrustedSigners *ActiveTrustedSigners `type:"structure" required:"true"`
+
+	// AWS services in China customers must file for an Internet Content Provider
+	// (ICP) recordal if they want to serve content publicly on an alternate domain
+	// name, also known as a CNAME, that they've added to CloudFront. AliasICPRecordal
+	// provides the ICP recordal status for CNAMEs associated with distributions.
+	//
+	// For more information about ICP recordals, see Signup, Accounts, and Credentials
+	// (https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html)
+	// in Getting Started with AWS services in China.
+	AliasICPRecordals []AliasICPRecordal `locationNameList:"AliasICPRecordal" type:"list"`
 
 	// The current configuration information for the distribution. Send a GET request
 	// to the /CloudFront API version/distribution ID/config resource.
@@ -2027,6 +2094,18 @@ func (s Distribution) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "ActiveTrustedSigners", v, metadata)
 	}
+	if s.AliasICPRecordals != nil {
+		v := s.AliasICPRecordals
+
+		metadata := protocol.Metadata{ListLocationName: "AliasICPRecordal"}
+		ls0 := e.List(protocol.BodyTarget, "AliasICPRecordals", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.DistributionConfig != nil {
 		v := s.DistributionConfig
 
@@ -2067,7 +2146,7 @@ func (s Distribution) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A distribution configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DistributionConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DistributionConfig
 type DistributionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -2112,7 +2191,7 @@ type DistributionConfig struct {
 	//    * How long CloudFront caches HTTP status codes in the 4xx and 5xx range.
 	//
 	// For more information about custom error pages, see Customizing Error Responses
-	// (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html)
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html)
 	// in the Amazon CloudFront Developer Guide.
 	CustomErrorResponses *CustomErrorResponses `type:"structure"`
 
@@ -2141,7 +2220,7 @@ type DistributionConfig struct {
 	// and specify the new object.
 	//
 	// For more information about the default root object, see Creating a Default
-	// Root Object (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html)
+	// Root Object (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html)
 	// in the Amazon CloudFront Developer Guide.
 	DefaultRootObject *string `type:"string"`
 
@@ -2176,7 +2255,7 @@ type DistributionConfig struct {
 	// that can access your content, don't enable IPv6. If you want to restrict
 	// access to some content by IP address and not restrict access to other content
 	// (or restrict access but not by IP address), you can create two distributions.
-	// For more information, see Creating a Signed URL Using a Custom Policy (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-creating-signed-url-custom-policy.html)
+	// For more information, see Creating a Signed URL Using a Custom Policy (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-creating-signed-url-custom-policy.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// If you're using an Amazon Route 53 alias resource record set to route traffic
@@ -2188,7 +2267,7 @@ type DistributionConfig struct {
 	//    * You're using alternate domain names in the URLs for your objects
 	//
 	// For more information, see Routing Traffic to an Amazon CloudFront Web Distribution
-	// by Using Your Domain Name (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html)
+	// by Using Your Domain Name (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html)
 	// in the Amazon Route 53 Developer Guide.
 	//
 	// If you created a CNAME resource record set, either with Amazon Route 53 or
@@ -2199,7 +2278,7 @@ type DistributionConfig struct {
 
 	// A complex type that controls whether access logs are written for the distribution.
 	//
-	// For more information about logging, see Access Logs (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html)
+	// For more information about logging, see Access Logs (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html)
 	// in the Amazon CloudFront Developer Guide.
 	Logging *LoggingConfig `type:"structure"`
 
@@ -2222,10 +2301,10 @@ type DistributionConfig struct {
 	// performance.
 	//
 	// For more information about price classes, see Choosing the Price Class for
-	// a CloudFront Distribution (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PriceClass.html)
+	// a CloudFront Distribution (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PriceClass.html)
 	// in the Amazon CloudFront Developer Guide. For information about CloudFront
 	// pricing, including how price classes (such as Price Class 100) map to CloudFront
-	// regions, see Amazon CloudFront Pricing (https://aws.amazon.com/cloudfront/pricing/).
+	// regions, see Amazon CloudFront Pricing (http://aws.amazon.com/cloudfront/pricing/).
 	// For price class information, scroll down to see the table at the bottom of
 	// the page.
 	PriceClass PriceClass `type:"string" enum:"true"`
@@ -2234,82 +2313,10 @@ type DistributionConfig struct {
 	// of your content.
 	Restrictions *Restrictions `type:"structure"`
 
-	// A complex type that specifies the following:
-	//
-	//    * Whether you want viewers to use HTTP or HTTPS to request your objects.
-	//
-	//    * If you want viewers to use HTTPS, whether you're using an alternate
-	//    domain name such as example.com or the CloudFront domain name for your
-	//    distribution, such as d111111abcdef8.cloudfront.net.
-	//
-	//    * If you're using an alternate domain name, whether AWS Certificate Manager
-	//    (ACM) provided the certificate, or you purchased a certificate from a
-	//    third-party certificate authority and imported it into ACM or uploaded
-	//    it to the IAM certificate store.
-	//
-	// You must specify only one of the following values:
-	//
-	//    * ViewerCertificate$ACMCertificateArn
-	//
-	//    * ViewerCertificate$IAMCertificateId
-	//
-	//    * ViewerCertificate$CloudFrontDefaultCertificate
-	//
-	// Don't specify false for CloudFrontDefaultCertificate.
-	//
-	// If you want viewers to use HTTP instead of HTTPS to request your objects:
-	// Specify the following value:
-	//
-	// <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
-	//
-	// In addition, specify allow-all for ViewerProtocolPolicy for all of your cache
-	// behaviors.
-	//
-	// If you want viewers to use HTTPS to request your objects: Choose the type
-	// of certificate that you want to use based on whether you're using an alternate
-	// domain name for your objects or the CloudFront domain name:
-	//
-	//    * If you're using an alternate domain name, such as example.com: Specify
-	//    one of the following values, depending on whether ACM provided your certificate
-	//    or you purchased your certificate from third-party certificate authority:
-	//    <ACMCertificateArn>ARN for ACM SSL/TLS certificate<ACMCertificateArn>
-	//    where ARN for ACM SSL/TLS certificate is the ARN for the ACM SSL/TLS certificate
-	//    that you want to use for this distribution. <IAMCertificateId>IAM certificate
-	//    ID<IAMCertificateId> where IAM certificate ID is the ID that IAM returned
-	//    when you added the certificate to the IAM certificate store. If you specify
-	//    ACMCertificateArn or IAMCertificateId, you must also specify a value for
-	//    SSLSupportMethod. If you choose to use an ACM certificate or a certificate
-	//    in the IAM certificate store, we recommend that you use only an alternate
-	//    domain name in your object URLs (https://example.com/logo.jpg). If you
-	//    use the domain name that is associated with your CloudFront distribution
-	//    (such as https://d111111abcdef8.cloudfront.net/logo.jpg) and the viewer
-	//    supports SNI, then CloudFront behaves normally. However, if the browser
-	//    does not support SNI, the user's experience depends on the value that
-	//    you choose for SSLSupportMethod: vip: The viewer displays a warning because
-	//    there is a mismatch between the CloudFront domain name and the domain
-	//    name in your SSL/TLS certificate. sni-only: CloudFront drops the connection
-	//    with the browser without returning the object.
-	//
-	//    * If you're using the CloudFront domain name for your distribution, such
-	//    as d111111abcdef8.cloudfront.net : Specify the following value: <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
-	//
-	// If you want viewers to use HTTPS, you must also specify one of the following
-	// values in your cache behaviors:
-	//
-	//    * <ViewerProtocolPolicy>https-only<ViewerProtocolPolicy>
-	//
-	//    * <ViewerProtocolPolicy>redirect-to-https<ViewerProtocolPolicy>
-	//
-	// You can also optionally require that CloudFront use HTTPS to communicate
-	// with your origin by specifying one of the following values for the applicable
-	// origins:
-	//
-	//    * <OriginProtocolPolicy>https-only<OriginProtocolPolicy>
-	//
-	//    * <OriginProtocolPolicy>match-viewer<OriginProtocolPolicy>
-	//
-	// For more information, see Using Alternate Domain Names and HTTPS (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS)
-	// in the Amazon CloudFront Developer Guide.
+	// A complex type that specifies whether you want viewers to use HTTP or HTTPS
+	// to request your objects, whether you're using an alternate domain name with
+	// HTTPS, and if so, if you're using AWS Certificate Manager (ACM) or a third-party
+	// certificate authority.
 	ViewerCertificate *ViewerCertificate `type:"structure"`
 
 	// A unique identifier that specifies the AWS WAF web ACL, if any, to associate
@@ -2510,7 +2517,7 @@ func (s DistributionConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 // A distribution Configuration and a list of tags to be associated with the
 // distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DistributionConfigWithTags
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DistributionConfigWithTags
 type DistributionConfigWithTags struct {
 	_ struct{} `type:"structure"`
 
@@ -2576,7 +2583,7 @@ func (s DistributionConfigWithTags) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // A distribution list.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DistributionList
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DistributionList
 type DistributionList struct {
 	_ struct{} `type:"structure"`
 
@@ -2666,7 +2673,7 @@ func (s DistributionList) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A summary of the information about a CloudFront distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DistributionSummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DistributionSummary
 type DistributionSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -2675,6 +2682,16 @@ type DistributionSummary struct {
 	//
 	// ARN is a required field
 	ARN *string `type:"string" required:"true"`
+
+	// AWS services in China customers must file for an Internet Content Provider
+	// (ICP) recordal if they want to serve content publicly on an alternate domain
+	// name, also known as a CNAME, that they've added to CloudFront. AliasICPRecordal
+	// provides the ICP recordal status for CNAMEs associated with distributions.
+	//
+	// For more information about ICP recordals, see Signup, Accounts, and Credentials
+	// (https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html)
+	// in Getting Started with AWS services in China.
+	AliasICPRecordals []AliasICPRecordal `locationNameList:"AliasICPRecordal" type:"list"`
 
 	// A complex type that contains information about CNAMEs (alternate domain names),
 	// if any, for this distribution.
@@ -2763,82 +2780,10 @@ type DistributionSummary struct {
 	// Status is a required field
 	Status *string `type:"string" required:"true"`
 
-	// A complex type that specifies the following:
-	//
-	//    * Whether you want viewers to use HTTP or HTTPS to request your objects.
-	//
-	//    * If you want viewers to use HTTPS, whether you're using an alternate
-	//    domain name such as example.com or the CloudFront domain name for your
-	//    distribution, such as d111111abcdef8.cloudfront.net.
-	//
-	//    * If you're using an alternate domain name, whether AWS Certificate Manager
-	//    (ACM) provided the certificate, or you purchased a certificate from a
-	//    third-party certificate authority and imported it into ACM or uploaded
-	//    it to the IAM certificate store.
-	//
-	// You must specify only one of the following values:
-	//
-	//    * ViewerCertificate$ACMCertificateArn
-	//
-	//    * ViewerCertificate$IAMCertificateId
-	//
-	//    * ViewerCertificate$CloudFrontDefaultCertificate
-	//
-	// Don't specify false for CloudFrontDefaultCertificate.
-	//
-	// If you want viewers to use HTTP instead of HTTPS to request your objects:
-	// Specify the following value:
-	//
-	// <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
-	//
-	// In addition, specify allow-all for ViewerProtocolPolicy for all of your cache
-	// behaviors.
-	//
-	// If you want viewers to use HTTPS to request your objects: Choose the type
-	// of certificate that you want to use based on whether you're using an alternate
-	// domain name for your objects or the CloudFront domain name:
-	//
-	//    * If you're using an alternate domain name, such as example.com: Specify
-	//    one of the following values, depending on whether ACM provided your certificate
-	//    or you purchased your certificate from third-party certificate authority:
-	//    <ACMCertificateArn>ARN for ACM SSL/TLS certificate<ACMCertificateArn>
-	//    where ARN for ACM SSL/TLS certificate is the ARN for the ACM SSL/TLS certificate
-	//    that you want to use for this distribution. <IAMCertificateId>IAM certificate
-	//    ID<IAMCertificateId> where IAM certificate ID is the ID that IAM returned
-	//    when you added the certificate to the IAM certificate store. If you specify
-	//    ACMCertificateArn or IAMCertificateId, you must also specify a value for
-	//    SSLSupportMethod. If you choose to use an ACM certificate or a certificate
-	//    in the IAM certificate store, we recommend that you use only an alternate
-	//    domain name in your object URLs (https://example.com/logo.jpg). If you
-	//    use the domain name that is associated with your CloudFront distribution
-	//    (such as https://d111111abcdef8.cloudfront.net/logo.jpg) and the viewer
-	//    supports SNI, then CloudFront behaves normally. However, if the browser
-	//    does not support SNI, the user's experience depends on the value that
-	//    you choose for SSLSupportMethod: vip: The viewer displays a warning because
-	//    there is a mismatch between the CloudFront domain name and the domain
-	//    name in your SSL/TLS certificate. sni-only: CloudFront drops the connection
-	//    with the browser without returning the object.
-	//
-	//    * If you're using the CloudFront domain name for your distribution, such
-	//    as d111111abcdef8.cloudfront.net : Specify the following value: <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
-	//
-	// If you want viewers to use HTTPS, you must also specify one of the following
-	// values in your cache behaviors:
-	//
-	//    * <ViewerProtocolPolicy>https-only<ViewerProtocolPolicy>
-	//
-	//    * <ViewerProtocolPolicy>redirect-to-https<ViewerProtocolPolicy>
-	//
-	// You can also optionally require that CloudFront use HTTPS to communicate
-	// with your origin by specifying one of the following values for the applicable
-	// origins:
-	//
-	//    * <OriginProtocolPolicy>https-only<OriginProtocolPolicy>
-	//
-	//    * <OriginProtocolPolicy>match-viewer<OriginProtocolPolicy>
-	//
-	// For more information, see Using Alternate Domain Names and HTTPS (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS)
-	// in the Amazon CloudFront Developer Guide.
+	// A complex type that specifies whether you want viewers to use HTTP or HTTPS
+	// to request your objects, whether you're using an alternate domain name with
+	// HTTPS, and if so, if you're using AWS Certificate Manager (ACM) or a third-party
+	// certificate authority.
 	//
 	// ViewerCertificate is a required field
 	ViewerCertificate *ViewerCertificate `type:"structure" required:"true"`
@@ -2861,6 +2806,18 @@ func (s DistributionSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ARN", protocol.StringValue(v), metadata)
+	}
+	if s.AliasICPRecordals != nil {
+		v := s.AliasICPRecordals
+
+		metadata := protocol.Metadata{ListLocationName: "AliasICPRecordal"}
+		ls0 := e.List(protocol.BodyTarget, "AliasICPRecordals", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.Aliases != nil {
 		v := s.Aliases
@@ -2975,7 +2932,7 @@ func (s DistributionSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 // Complex data type for field-level encryption profiles that includes all of
 // the encryption entities.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/EncryptionEntities
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/EncryptionEntities
 type EncryptionEntities struct {
 	_ struct{} `type:"structure"`
 
@@ -3041,7 +2998,7 @@ func (s EncryptionEntities) MarshalFields(e protocol.FieldEncoder) error {
 
 // Complex data type for field-level encryption profiles that includes the encryption
 // key and field pattern specifications.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/EncryptionEntity
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/EncryptionEntity
 type EncryptionEntity struct {
 	_ struct{} `type:"structure"`
 
@@ -3125,7 +3082,7 @@ func (s EncryptionEntity) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex data type that includes the profile configurations and other options
 // specified for field-level encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/FieldLevelEncryption
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryption
 type FieldLevelEncryption struct {
 	_ struct{} `type:"structure"`
 
@@ -3178,7 +3135,7 @@ func (s FieldLevelEncryption) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex data type that includes the profile configurations specified for
 // field-level encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/FieldLevelEncryptionConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionConfig
 type FieldLevelEncryptionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -3259,7 +3216,7 @@ func (s FieldLevelEncryptionConfig) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // List of field-level encrpytion configurations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/FieldLevelEncryptionList
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionList
 type FieldLevelEncryptionList struct {
 	_ struct{} `type:"structure"`
 
@@ -3323,7 +3280,7 @@ func (s FieldLevelEncryptionList) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex data type for field-level encryption profiles.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/FieldLevelEncryptionProfile
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionProfile
 type FieldLevelEncryptionProfile struct {
 	_ struct{} `type:"structure"`
 
@@ -3375,7 +3332,7 @@ func (s FieldLevelEncryptionProfile) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // A complex data type of profiles for the field-level encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/FieldLevelEncryptionProfileConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionProfileConfig
 type FieldLevelEncryptionProfileConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -3462,7 +3419,7 @@ func (s FieldLevelEncryptionProfileConfig) MarshalFields(e protocol.FieldEncoder
 }
 
 // List of field-level encryption profiles.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/FieldLevelEncryptionProfileList
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionProfileList
 type FieldLevelEncryptionProfileList struct {
 	_ struct{} `type:"structure"`
 
@@ -3527,7 +3484,7 @@ func (s FieldLevelEncryptionProfileList) MarshalFields(e protocol.FieldEncoder) 
 }
 
 // The field-level encryption profile summary.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/FieldLevelEncryptionProfileSummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionProfileSummary
 type FieldLevelEncryptionProfileSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -3598,7 +3555,7 @@ func (s FieldLevelEncryptionProfileSummary) MarshalFields(e protocol.FieldEncode
 }
 
 // A summary of a field-level encryption item.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/FieldLevelEncryptionSummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionSummary
 type FieldLevelEncryptionSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -3664,7 +3621,7 @@ func (s FieldLevelEncryptionSummary) MarshalFields(e protocol.FieldEncoder) erro
 
 // A complex data type that includes the field patterns to match for field-level
 // encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/FieldPatterns
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldPatterns
 type FieldPatterns struct {
 	_ struct{} `type:"structure"`
 
@@ -3720,21 +3677,26 @@ func (s FieldPatterns) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that specifies how CloudFront handles query strings and cookies.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ForwardedValues
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ForwardedValues
 type ForwardedValues struct {
 	_ struct{} `type:"structure"`
 
 	// A complex type that specifies whether you want CloudFront to forward cookies
 	// to the origin and, if so, which ones. For more information about forwarding
 	// cookies to the origin, see How CloudFront Forwards, Caches, and Logs Cookies
-	// (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html)
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// Cookies is a required field
 	Cookies *CookiePreference `type:"structure" required:"true"`
 
 	// A complex type that specifies the Headers, if any, that you want CloudFront
-	// to base caching on for this cache behavior.
+	// to forward to the origin for this cache behavior (whitelisted headers). For
+	// the headers that you specify, CloudFront also caches separate versions of
+	// a specified object that is based on the header values in viewer requests.
+	//
+	// For more information, see Caching Content Based on Request Headers (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html)
+	// in the Amazon CloudFront Developer Guide.
 	Headers *Headers `type:"structure"`
 
 	// Indicates whether you want CloudFront to forward query strings to the origin
@@ -3758,7 +3720,7 @@ type ForwardedValues struct {
 	// parameters.
 	//
 	// For more information, see Configuring CloudFront to Cache Based on Query
-	// String Parameters (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/QueryStringParameters.html)
+	// String Parameters (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/QueryStringParameters.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// QueryString is a required field
@@ -3838,7 +3800,7 @@ func (s ForwardedValues) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that controls the countries in which your content is distributed.
 // CloudFront determines the location of your users using MaxMind GeoIP databases.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GeoRestriction
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GeoRestriction
 type GeoRestriction struct {
 	_ struct{} `type:"structure"`
 
@@ -3941,9 +3903,9 @@ func (s GeoRestriction) MarshalFields(e protocol.FieldEncoder) error {
 // your content based on values in the product header. CloudFront forwards the
 // product header to the origin and caches the response from the origin once
 // for each header value. For more information about caching based on header
-// values, see How CloudFront Forwards and Caches Headers (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html)
+// values, see How CloudFront Forwards and Caches Headers (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/Headers
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Headers
 type Headers struct {
 	_ struct{} `type:"structure"`
 
@@ -3973,9 +3935,9 @@ type Headers struct {
 	// the following documentation:
 	//
 	//    * S3 bucket: See HTTP Request Headers That CloudFront Removes or Updates
-	//    (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorS3Origin.html#request-s3-removed-headers)
+	//    (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorS3Origin.html#request-s3-removed-headers)
 	//
-	//    * Custom origin: See HTTP Request Headers and CloudFront Behavior (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior)
+	//    * Custom origin: See HTTP Request Headers and CloudFront Behavior (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior)
 	//
 	// Quantity is a required field
 	Quantity *int64 `type:"integer" required:"true"`
@@ -4024,7 +3986,7 @@ func (s Headers) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An invalidation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/Invalidation
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Invalidation
 type Invalidation struct {
 	_ struct{} `type:"structure"`
 
@@ -4085,7 +4047,7 @@ func (s Invalidation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An invalidation batch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidationBatch
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidationBatch
 type InvalidationBatch struct {
 	_ struct{} `type:"structure"`
 
@@ -4110,7 +4072,7 @@ type InvalidationBatch struct {
 
 	// A complex type that contains information about the objects that you want
 	// to invalidate. For more information, see Specifying the Objects to Invalidate
-	// (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#invalidation-specifying-objects)
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#invalidation-specifying-objects)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// Paths is a required field
@@ -4164,9 +4126,9 @@ func (s InvalidationBatch) MarshalFields(e protocol.FieldEncoder) error {
 
 // The InvalidationList complex type describes the list of invalidation objects.
 // For more information about invalidation, see Invalidating Objects (Web Distributions
-// Only) (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html)
+// Only) (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidationList
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidationList
 type InvalidationList struct {
 	_ struct{} `type:"structure"`
 
@@ -4256,7 +4218,7 @@ func (s InvalidationList) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A summary of an invalidation request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/InvalidationSummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidationSummary
 type InvalidationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -4307,20 +4269,20 @@ func (s InvalidationSummary) MarshalFields(e protocol.FieldEncoder) error {
 // A complex type that lists the active CloudFront key pairs, if any, that are
 // associated with AwsAccountNumber.
 //
-// For more information, see ActiveTrustedSigners.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/KeyPairIds
+// For more information, see ActiveTrustedSigners (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html).
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/KeyPairIds
 type KeyPairIds struct {
 	_ struct{} `type:"structure"`
 
 	// A complex type that lists the active CloudFront key pairs, if any, that are
 	// associated with AwsAccountNumber.
 	//
-	// For more information, see ActiveTrustedSigners.
+	// For more information, see ActiveTrustedSigners (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html).
 	Items []string `locationNameList:"KeyPairId" type:"list"`
 
 	// The number of active CloudFront key pairs for AwsAccountNumber.
 	//
-	// For more information, see ActiveTrustedSigners.
+	// For more information, see ActiveTrustedSigners (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html).
 	//
 	// Quantity is a required field
 	Quantity *int64 `type:"integer" required:"true"`
@@ -4355,7 +4317,7 @@ func (s KeyPairIds) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains a Lambda function association.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/LambdaFunctionAssociation
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/LambdaFunctionAssociation
 type LambdaFunctionAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -4384,7 +4346,7 @@ type LambdaFunctionAssociation struct {
 
 	// A flag that allows a Lambda function to have read access to the body content.
 	// For more information, see Accessing the Request Body by Choosing the Include
-	// Body Option (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-include-body-access.html)
+	// Body Option (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-include-body-access.html)
 	// in the Amazon CloudFront Developer Guide.
 	IncludeBody *bool `type:"boolean"`
 
@@ -4451,7 +4413,7 @@ func (s LambdaFunctionAssociation) MarshalFields(e protocol.FieldEncoder) error 
 //
 // If you don't want to invoke any Lambda functions for the requests that match
 // PathPattern, specify 0 for Quantity and omit Items.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/LambdaFunctionAssociations
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/LambdaFunctionAssociations
 type LambdaFunctionAssociations struct {
 	_ struct{} `type:"structure"`
 
@@ -4515,7 +4477,7 @@ func (s LambdaFunctionAssociations) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // A complex type that controls whether access logs are written for the distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/LoggingConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/LoggingConfig
 type LoggingConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -4619,9 +4581,9 @@ func (s LoggingConfig) MarshalFields(e protocol.FieldEncoder) error {
 // group. You must specify at least one origin or origin group.
 //
 // For the current limit on the number of origins or origin groups that you
-// can specify for a distribution, see Amazon CloudFront Limits (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront)
+// can specify for a distribution, see Amazon CloudFront Limits (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront)
 // in the AWS General Reference.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/Origin
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Origin
 type Origin struct {
 	_ struct{} `type:"structure"`
 
@@ -4639,7 +4601,7 @@ type Origin struct {
 	// Amazon S3 static website hosting endpoint for the bucket.
 	//
 	// For more information about specifying this value for different types of origins,
-	// see Origin Domain Name (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesDomainName)
+	// see Origin Domain Name (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesDomainName)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// Constraints for Amazon S3 origins:
@@ -4675,7 +4637,7 @@ type Origin struct {
 	// the cache behavior to route requests by specifying the value of the Id element
 	// for that origin. When a request matches the path pattern for that cache behavior,
 	// CloudFront routes the request to the specified origin. For more information,
-	// see Cache Behavior Settings (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior)
+	// see Cache Behavior Settings (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// Id is a required field
@@ -4788,14 +4750,14 @@ func (s Origin) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains HeaderName and HeaderValue elements, if any,
 // for this distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/OriginCustomHeader
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginCustomHeader
 type OriginCustomHeader struct {
 	_ struct{} `type:"structure"`
 
 	// The name of a header that you want CloudFront to forward to your origin.
 	// For more information, see Forwarding Custom Headers to Your Origin (Web Distributions
-	// Only) (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/forward-custom-headers.html)
-	// in the Amazon Amazon CloudFront Developer Guide.
+	// Only) (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/forward-custom-headers.html)
+	// in the Amazon CloudFront Developer Guide.
 	//
 	// HeaderName is a required field
 	HeaderName *string `type:"string" required:"true"`
@@ -4852,7 +4814,7 @@ func (s OriginCustomHeader) MarshalFields(e protocol.FieldEncoder) error {
 // a distribution, you can specifiy the origin group instead of a single origin,
 // and CloudFront will failover from the primary origin to the second origin
 // under the failover conditions that you've chosen.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/OriginGroup
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginGroup
 type OriginGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -4936,7 +4898,7 @@ func (s OriginGroup) MarshalFields(e protocol.FieldEncoder) error {
 // A complex data type that includes information about the failover criteria
 // for an origin group, including the status codes for which CloudFront will
 // failover from the primary origin to the second origin.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/OriginGroupFailoverCriteria
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginGroupFailoverCriteria
 type OriginGroupFailoverCriteria struct {
 	_ struct{} `type:"structure"`
 
@@ -4983,7 +4945,7 @@ func (s OriginGroupFailoverCriteria) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // An origin in an origin group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/OriginGroupMember
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginGroupMember
 type OriginGroupMember struct {
 	_ struct{} `type:"structure"`
 
@@ -5024,7 +4986,7 @@ func (s OriginGroupMember) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex data type for the origins included in an origin group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/OriginGroupMembers
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginGroupMembers
 type OriginGroupMembers struct {
 	_ struct{} `type:"structure"`
 
@@ -5096,7 +5058,7 @@ func (s OriginGroupMembers) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex data type for the origin groups specified for a distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/OriginGroups
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginGroups
 type OriginGroups struct {
 	_ struct{} `type:"structure"`
 
@@ -5160,7 +5122,7 @@ func (s OriginGroups) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about the SSL/TLS protocols that
 // CloudFront can use when establishing an HTTPS connection with your origin.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/OriginSslProtocols
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginSslProtocols
 type OriginSslProtocols struct {
 	_ struct{} `type:"structure"`
 
@@ -5224,7 +5186,7 @@ func (s OriginSslProtocols) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about origins and origin groups
 // for this distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/Origins
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Origins
 type Origins struct {
 	_ struct{} `type:"structure"`
 
@@ -5297,16 +5259,17 @@ func (s Origins) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about the objects that you want
 // to invalidate. For more information, see Specifying the Objects to Invalidate
-// (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#invalidation-specifying-objects)
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#invalidation-specifying-objects)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/Paths
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Paths
 type Paths struct {
 	_ struct{} `type:"structure"`
 
 	// A complex type that contains a list of the paths that you want to invalidate.
 	Items []string `locationNameList:"Path" type:"list"`
 
-	// The number of objects that you want to invalidate.
+	// The number of invalidation paths specified for the objects that you want
+	// to invalidate.
 	//
 	// Quantity is a required field
 	Quantity *int64 `type:"integer" required:"true"`
@@ -5356,7 +5319,7 @@ func (s Paths) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex data type of public keys you add to CloudFront to use with features
 // like field-level encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/PublicKey
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/PublicKey
 type PublicKey struct {
 	_ struct{} `type:"structure"`
 
@@ -5407,7 +5370,7 @@ func (s PublicKey) MarshalFields(e protocol.FieldEncoder) error {
 
 // Information about a public key you add to CloudFront to use with features
 // like field-level encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/PublicKeyConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/PublicKeyConfig
 type PublicKeyConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -5490,7 +5453,7 @@ func (s PublicKeyConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 // A list of public keys you've added to CloudFront to use with features like
 // field-level encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/PublicKeyList
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/PublicKeyList
 type PublicKeyList struct {
 	_ struct{} `type:"structure"`
 
@@ -5556,7 +5519,7 @@ func (s PublicKeyList) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex data type for public key information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/PublicKeySummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/PublicKeySummary
 type PublicKeySummary struct {
 	_ struct{} `type:"structure"`
 
@@ -5625,7 +5588,7 @@ func (s PublicKeySummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Query argument-profile mapping for field-level encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/QueryArgProfile
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/QueryArgProfile
 type QueryArgProfile struct {
 	_ struct{} `type:"structure"`
 
@@ -5681,7 +5644,7 @@ func (s QueryArgProfile) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Configuration for query argument-profile mapping for field-level encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/QueryArgProfileConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/QueryArgProfileConfig
 type QueryArgProfileConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -5738,7 +5701,7 @@ func (s QueryArgProfileConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Query argument-profile mapping for field-level encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/QueryArgProfiles
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/QueryArgProfiles
 type QueryArgProfiles struct {
 	_ struct{} `type:"structure"`
 
@@ -5800,16 +5763,18 @@ func (s QueryArgProfiles) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/QueryStringCacheKeys
+// A complex type that contains information about the query string parameters
+// that you want CloudFront to use for caching for a cache behavior.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/QueryStringCacheKeys
 type QueryStringCacheKeys struct {
 	_ struct{} `type:"structure"`
 
-	// (Optional) A list that contains the query string parameters that you want
-	// CloudFront to use as a basis for caching for this cache behavior. If Quantity
-	// is 0, you can omit Items.
+	// A list that contains the query string parameters that you want CloudFront
+	// to use as a basis for caching for a cache behavior. If Quantity is 0, you
+	// can omit Items.
 	Items []string `locationNameList:"Name" type:"list"`
 
-	// The number of whitelisted query string parameters for this cache behavior.
+	// The number of whitelisted query string parameters for a cache behavior.
 	//
 	// Quantity is a required field
 	Quantity *int64 `type:"integer" required:"true"`
@@ -5859,7 +5824,7 @@ func (s QueryStringCacheKeys) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that identifies ways in which you want to restrict distribution
 // of your content.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/Restrictions
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Restrictions
 type Restrictions struct {
 	_ struct{} `type:"structure"`
 
@@ -5907,7 +5872,7 @@ func (s Restrictions) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about the Amazon S3 bucket from
 // which you want CloudFront to get your media files for distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/S3Origin
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/S3Origin
 type S3Origin struct {
 	_ struct{} `type:"structure"`
 
@@ -5916,7 +5881,7 @@ type S3Origin struct {
 	// DomainName is a required field
 	DomainName *string `type:"string" required:"true"`
 
-	// The CloudFront origin access identity to associate with the RTMP distribution.
+	// The CloudFront origin access identity to associate with the distribution.
 	// Use an origin access identity to configure the distribution so that end users
 	// can only access objects in an Amazon S3 bucket through CloudFront.
 	//
@@ -5931,8 +5896,8 @@ type S3Origin struct {
 	// and specify the new origin access identity.
 	//
 	// For more information, see Using an Origin Access Identity to Restrict Access
-	// to Your Amazon S3 Content (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html)
-	// in the Amazon Amazon CloudFront Developer Guide.
+	// to Your Amazon S3 Content (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html)
+	// in the Amazon CloudFront Developer Guide.
 	//
 	// OriginAccessIdentity is a required field
 	OriginAccessIdentity *string `type:"string" required:"true"`
@@ -5980,7 +5945,7 @@ func (s S3Origin) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about the Amazon S3 origin. If the
 // origin is a custom origin, use the CustomOriginConfig element instead.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/S3OriginConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/S3OriginConfig
 type S3OriginConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -6005,7 +5970,7 @@ type S3OriginConfig struct {
 	// and specify the new origin access identity.
 	//
 	// For more information about the origin access identity, see Serving Private
-	// Content through CloudFront (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
+	// Content through CloudFront (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// OriginAccessIdentity is a required field
@@ -6044,12 +6009,12 @@ func (s S3OriginConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that lists the AWS accounts that were included in the TrustedSigners
 // complex type, as well as their active CloudFront key pair IDs, if any.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/Signer
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Signer
 type Signer struct {
 	_ struct{} `type:"structure"`
 
 	// An AWS account that is included in the TrustedSigners complex type for this
-	// RTMP distribution. Valid values include:
+	// distribution. Valid values include:
 	//
 	//    * self, which is the AWS account used to create the distribution.
 	//
@@ -6085,7 +6050,7 @@ func (s Signer) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex data type for the status codes that you specify that, when returned
 // by a primary origin, trigger CloudFront to failover to a second origin.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/StatusCodes
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StatusCodes
 type StatusCodes struct {
 	_ struct{} `type:"structure"`
 
@@ -6149,8 +6114,10 @@ func (s StatusCodes) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A streaming distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/StreamingDistribution
+// A streaming distribution tells CloudFront where you want RTMP content to
+// be delivered from, and the details about how to track and manage content
+// delivery.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StreamingDistribution
 type StreamingDistribution struct {
 	_ struct{} `type:"structure"`
 
@@ -6170,7 +6137,7 @@ type StreamingDistribution struct {
 	// are associated with the trusted signer's AWS account. If no KeyPairId element
 	// appears for a Signer, that signer can't create signed URLs.
 	//
-	// For more information, see Serving Private Content through CloudFront (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
+	// For more information, see Serving Private Content through CloudFront (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// ActiveTrustedSigners is a required field
@@ -6255,7 +6222,7 @@ func (s StreamingDistribution) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The RTMP distribution's configuration information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/StreamingDistributionConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StreamingDistributionConfig
 type StreamingDistributionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -6305,7 +6272,7 @@ type StreamingDistributionConfig struct {
 	// create signed URLs for private content. If you want the distribution to use
 	// signed URLs, include this element; if you want the distribution to use public
 	// URLs, remove this element. For more information, see Serving Private Content
-	// through CloudFront (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
+	// through CloudFront (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// TrustedSigners is a required field
@@ -6422,7 +6389,7 @@ func (s StreamingDistributionConfig) MarshalFields(e protocol.FieldEncoder) erro
 
 // A streaming distribution Configuration and a list of tags to be associated
 // with the streaming distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/StreamingDistributionConfigWithTags
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StreamingDistributionConfigWithTags
 type StreamingDistributionConfigWithTags struct {
 	_ struct{} `type:"structure"`
 
@@ -6488,7 +6455,7 @@ func (s StreamingDistributionConfigWithTags) MarshalFields(e protocol.FieldEncod
 }
 
 // A streaming distribution list.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/StreamingDistributionList
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StreamingDistributionList
 type StreamingDistributionList struct {
 	_ struct{} `type:"structure"`
 
@@ -6578,8 +6545,8 @@ func (s StreamingDistributionList) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// A summary of the information for an Amazon CloudFront streaming distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/StreamingDistributionSummary
+// A summary of the information for a CloudFront streaming distribution.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StreamingDistributionSummary
 type StreamingDistributionSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -6621,6 +6588,9 @@ type StreamingDistributionSummary struct {
 	// LastModifiedTime is a required field
 	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
 
+	// A complex type that contains information about price class for this streaming
+	// distribution.
+	//
 	// PriceClass is a required field
 	PriceClass PriceClass `type:"string" required:"true" enum:"true"`
 
@@ -6647,6 +6617,9 @@ type StreamingDistributionSummary struct {
 	// signers, change Enabled to true (if it's currently false), change Quantity
 	// as applicable, and specify all of the trusted signers that you want to include
 	// in the updated distribution.
+	//
+	// For more information, see Serving Private Content through CloudFront (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
+	// in the Amazon CloudFront Developer Guide.
 	//
 	// TrustedSigners is a required field
 	TrustedSigners *TrustedSigners `type:"structure" required:"true"`
@@ -6730,7 +6703,7 @@ func (s StreamingDistributionSummary) MarshalFields(e protocol.FieldEncoder) err
 
 // A complex type that controls whether access logs are written for this streaming
 // distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/StreamingLoggingConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/StreamingLoggingConfig
 type StreamingLoggingConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -6809,7 +6782,7 @@ func (s StreamingLoggingConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains Tag key and Tag value.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/Tag
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -6868,7 +6841,7 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains zero or more Tag elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TagKeys
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TagKeys
 type TagKeys struct {
 	_ struct{} `type:"structure"`
 
@@ -6899,7 +6872,7 @@ func (s TagKeys) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains zero or more Tag elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/Tags
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Tags
 type Tags struct {
 	_ struct{} `type:"structure"`
 
@@ -6952,8 +6925,8 @@ func (s Tags) MarshalFields(e protocol.FieldEncoder) error {
 // If you want to require signed URLs in requests for objects in the target
 // origin that match the PathPattern for this cache behavior, specify true for
 // Enabled, and specify the applicable values for Quantity and Items. For more
-// information, see Serving Private Content through CloudFront (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
-// in the Amazon Amazon CloudFront Developer Guide.
+// information, see Serving Private Content through CloudFront (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
+// in the Amazon CloudFront Developer Guide.
 //
 // If you don't want to require signed URLs in requests for objects that match
 // PathPattern, specify false for Enabled and 0 for Quantity. Omit Items.
@@ -6962,8 +6935,10 @@ func (s Tags) MarshalFields(e protocol.FieldEncoder) error {
 // true (if it's currently false), change Quantity as applicable, and specify
 // all of the trusted signers that you want to include in the updated distribution.
 //
-// For more information about updating the distribution configuration, see DistributionConfig .
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TrustedSigners
+// For more information about updating the distribution configuration, see DistributionConfig
+// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/DistributionConfig.html)
+// in the Amazon CloudFront API Reference.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TrustedSigners
 type TrustedSigners struct {
 	_ struct{} `type:"structure"`
 
@@ -7048,99 +7023,65 @@ func (s TrustedSigners) MarshalFields(e protocol.FieldEncoder) error {
 //    third-party certificate authority and imported it into ACM or uploaded
 //    it to the IAM certificate store.
 //
-// You must specify only one of the following values:
+// Specify only one of the following values:
 //
-//    * ViewerCertificate$ACMCertificateArn
+//    * ACMCertificateArn (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ViewerCertificate.html#cloudfront-Type-ViewerCertificate-ACMCertificateArn)
 //
-//    * ViewerCertificate$IAMCertificateId
+//    * IAMCertificateId (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ViewerCertificate.html#cloudfront-Type-ViewerCertificate-IAMCertificateId)
 //
-//    * ViewerCertificate$CloudFrontDefaultCertificate
+//    * CloudFrontDefaultCertificate (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ViewerCertificate.html#cloudfront-Type-ViewerCertificate-CloudFrontDefaultCertificate)
 //
-// Don't specify false for CloudFrontDefaultCertificate.
-//
-// If you want viewers to use HTTP instead of HTTPS to request your objects:
-// Specify the following value:
-//
-// <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
-//
-// In addition, specify allow-all for ViewerProtocolPolicy for all of your cache
-// behaviors.
-//
-// If you want viewers to use HTTPS to request your objects: Choose the type
-// of certificate that you want to use based on whether you're using an alternate
-// domain name for your objects or the CloudFront domain name:
-//
-//    * If you're using an alternate domain name, such as example.com: Specify
-//    one of the following values, depending on whether ACM provided your certificate
-//    or you purchased your certificate from third-party certificate authority:
-//    <ACMCertificateArn>ARN for ACM SSL/TLS certificate<ACMCertificateArn>
-//    where ARN for ACM SSL/TLS certificate is the ARN for the ACM SSL/TLS certificate
-//    that you want to use for this distribution. <IAMCertificateId>IAM certificate
-//    ID<IAMCertificateId> where IAM certificate ID is the ID that IAM returned
-//    when you added the certificate to the IAM certificate store. If you specify
-//    ACMCertificateArn or IAMCertificateId, you must also specify a value for
-//    SSLSupportMethod. If you choose to use an ACM certificate or a certificate
-//    in the IAM certificate store, we recommend that you use only an alternate
-//    domain name in your object URLs (https://example.com/logo.jpg). If you
-//    use the domain name that is associated with your CloudFront distribution
-//    (such as https://d111111abcdef8.cloudfront.net/logo.jpg) and the viewer
-//    supports SNI, then CloudFront behaves normally. However, if the browser
-//    does not support SNI, the user's experience depends on the value that
-//    you choose for SSLSupportMethod: vip: The viewer displays a warning because
-//    there is a mismatch between the CloudFront domain name and the domain
-//    name in your SSL/TLS certificate. sni-only: CloudFront drops the connection
-//    with the browser without returning the object.
-//
-//    * If you're using the CloudFront domain name for your distribution, such
-//    as d111111abcdef8.cloudfront.net : Specify the following value: <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
-//
-// If you want viewers to use HTTPS, you must also specify one of the following
-// values in your cache behaviors:
-//
-//    * <ViewerProtocolPolicy>https-only<ViewerProtocolPolicy>
-//
-//    * <ViewerProtocolPolicy>redirect-to-https<ViewerProtocolPolicy>
-//
-// You can also optionally require that CloudFront use HTTPS to communicate
-// with your origin by specifying one of the following values for the applicable
-// origins:
-//
-//    * <OriginProtocolPolicy>https-only<OriginProtocolPolicy>
-//
-//    * <OriginProtocolPolicy>match-viewer<OriginProtocolPolicy>
-//
-// For more information, see Using Alternate Domain Names and HTTPS (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS)
+// For more information, see Using Alternate Domain Names and HTTPS (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ViewerCertificate
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ViewerCertificate
 type ViewerCertificate struct {
 	_ struct{} `type:"structure"`
 
-	// For information about how and when to use ACMCertificateArn, see ViewerCertificate.
+	// If you want viewers to use HTTPS to request your objects and you're using
+	// an alternate domain name, you must choose the type of certificate that you
+	// want to use. Specify the following value if ACM provided your certificate:
+	//
+	//    * <ACMCertificateArn>ARN for ACM SSL/TLS certificate<ACMCertificateArn>
+	//    where ARN for ACM SSL/TLS certificate is the ARN for the ACM SSL/TLS certificate
+	//    that you want to use for this distribution.
+	//
+	// If you specify ACMCertificateArn, you must also specify a value for SSLSupportMethod.
 	ACMCertificateArn *string `type:"string"`
 
-	// This field has been deprecated. Use one of the following fields instead:
+	// This field is no longer used. Use one of the following fields instead:
 	//
-	//    * ViewerCertificate$ACMCertificateArn
+	//    * ACMCertificateArn (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ViewerCertificate.html#cloudfront-Type-ViewerCertificate-ACMCertificateArn)
 	//
-	//    * ViewerCertificate$IAMCertificateId
+	//    * IAMCertificateId (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ViewerCertificate.html#cloudfront-Type-ViewerCertificate-IAMCertificateId)
 	//
-	//    * ViewerCertificate$CloudFrontDefaultCertificate
+	//    * CloudFrontDefaultCertificate (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ViewerCertificate.html#cloudfront-Type-ViewerCertificate-CloudFrontDefaultCertificate)
 	Certificate *string `deprecated:"true" type:"string"`
 
-	// This field has been deprecated. Use one of the following fields instead:
+	// This field is no longer used. Use one of the following fields instead:
 	//
-	//    * ViewerCertificate$ACMCertificateArn
+	//    * ACMCertificateArn (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ViewerCertificate.html#cloudfront-Type-ViewerCertificate-ACMCertificateArn)
 	//
-	//    * ViewerCertificate$IAMCertificateId
+	//    * IAMCertificateId (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ViewerCertificate.html#cloudfront-Type-ViewerCertificate-IAMCertificateId)
 	//
-	//    * ViewerCertificate$CloudFrontDefaultCertificate
+	//    * CloudFrontDefaultCertificate (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ViewerCertificate.html#cloudfront-Type-ViewerCertificate-CloudFrontDefaultCertificate)
 	CertificateSource CertificateSource `deprecated:"true" type:"string" enum:"true"`
 
-	// For information about how and when to use CloudFrontDefaultCertificate, see
-	// ViewerCertificate.
+	// If you're using the CloudFront domain name for your distribution, such as
+	// d111111abcdef8.cloudfront.net, specify the following value:
+	//
+	//    * <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
 	CloudFrontDefaultCertificate *bool `type:"boolean"`
 
-	// For information about how and when to use IAMCertificateId, see ViewerCertificate.
+	// If you want viewers to use HTTPS to request your objects and you're using
+	// an alternate domain name, you must choose the type of certificate that you
+	// want to use. Specify the following value if you purchased your certificate
+	// from a third-party certificate authority:
+	//
+	//    * <IAMCertificateId>IAM certificate ID<IAMCertificateId> where IAM certificate
+	//    ID is the ID that IAM returned when you added the certificate to the IAM
+	//    certificate store.
+	//
+	// If you specify IAMCertificateId, you must also specify a value for SSLSupportMethod.
 	IAMCertificateId *string `type:"string"`
 
 	// Specify the security policy that you want CloudFront to use for HTTPS connections.
@@ -7172,32 +7113,34 @@ type ViewerCertificate struct {
 	// For information about the relationship between the security policy that you
 	// choose and the protocols and ciphers that CloudFront uses to communicate
 	// with viewers, see Supported SSL/TLS Protocols and Ciphers for Communication
-	// Between Viewers and CloudFront (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html#secure-connections-supported-ciphers)
+	// Between Viewers and CloudFront (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html#secure-connections-supported-ciphers)
 	// in the Amazon CloudFront Developer Guide.
 	MinimumProtocolVersion MinimumProtocolVersion `type:"string" enum:"true"`
 
-	// If you specify a value for ViewerCertificate$ACMCertificateArn or for ViewerCertificate$IAMCertificateId,
+	// If you specify a value for ACMCertificateArn (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ViewerCertificate.html#cloudfront-Type-ViewerCertificate-ACMCertificateArn)
+	// or for IAMCertificateId (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ViewerCertificate.html#cloudfront-Type-ViewerCertificate-IAMCertificateId),
 	// you must also specify how you want CloudFront to serve HTTPS requests: using
-	// a method that works for all clients or one that works for most clients:
-	//
-	//    * vip: CloudFront uses dedicated IP addresses for your content and can
-	//    respond to HTTPS requests from any viewer. However, you will incur additional
-	//    monthly charges.
+	// a method that works for browsers and clients released after 2010 or one that
+	// works for all clients.
 	//
 	//    * sni-only: CloudFront can respond to HTTPS requests from viewers that
 	//    support Server Name Indication (SNI). All modern browsers support SNI,
-	//    but some browsers still in use don't support SNI. If some of your users'
-	//    browsers don't support SNI, we recommend that you do one of the following:
-	//    Use the vip option (dedicated IP addresses) instead of sni-only. Use the
-	//    CloudFront SSL/TLS certificate instead of a custom certificate. This requires
-	//    that you use the CloudFront domain name of your distribution in the URLs
-	//    for your objects, for example, https://d111111abcdef8.cloudfront.net/logo.png.
-	//    If you can control which browser your users use, upgrade the browser to
-	//    one that supports SNI. Use HTTP instead of HTTPS.
+	//    but there are a few that don't. For a current list of the browsers that
+	//    support SNI, see the Wikipedia entry Server Name Indication (http://en.wikipedia.org/wiki/Server_Name_Indication).
+	//    To learn about options to explore if you have users with browsers that
+	//    don't include SNI support, see Choosing How CloudFront Serves HTTPS Requests
+	//    (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cnames-https-dedicated-ip-or-sni.html)
+	//    in the Amazon CloudFront Developer Guide.
+	//
+	//    * vip: CloudFront uses dedicated IP addresses for your content and can
+	//    respond to HTTPS requests from any viewer. However, there are additional
+	//    monthly charges. For details, including specific pricing information,
+	//    see Custom SSL options for Amazon CloudFront (http://aws.amazon.com/cloudfront/custom-ssl-domains/)
+	//    on the AWS marketing site.
 	//
 	// Don't specify a value for SSLSupportMethod if you specified <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>.
 	//
-	// For more information, see Using Alternate Domain Names and HTTPS (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS.html)
+	// For more information, see Choosing How CloudFront Serves HTTPS Requests (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cnames-https-dedicated-ip-or-sni.html)
 	// in the Amazon CloudFront Developer Guide.
 	SSLSupportMethod SSLSupportMethod `type:"string" enum:"true"`
 }

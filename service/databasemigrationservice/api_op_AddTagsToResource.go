@@ -9,18 +9,21 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
+// Associates a set of tags with an AWS DMS resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/AddTagsToResourceMessage
 type AddTagsToResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the AWS DMS resource the tag is to be added
-	// to. AWS DMS resources include a replication instance, endpoint, and a replication
+	// Identifies the AWS DMS resource to which tags should be added. The value
+	// for this parameter is an Amazon Resource Name (ARN).
+	//
+	// For AWS DMS, you can tag a replication instance, an endpoint, or a replication
 	// task.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `type:"string" required:"true"`
 
-	// The tag to be assigned to the DMS resource.
+	// One or more tags to be assigned to the resource.
 	//
 	// Tags is a required field
 	Tags []Tag `type:"list" required:"true"`

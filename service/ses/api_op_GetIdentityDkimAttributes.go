@@ -13,7 +13,7 @@ import (
 // identity. For domain identities, this request also returns the DKIM tokens
 // that are required for Easy DKIM signing, and whether Amazon SES successfully
 // verified that these tokens were published. For more information about Easy
-// DKIM, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
+// DKIM, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityDkimAttributesRequest
 type GetIdentityDkimAttributesInput struct {
 	_ struct{} `type:"structure"`
@@ -89,7 +89,7 @@ const opGetIdentityDkimAttributes = "GetIdentityDkimAttributes"
 // attributes for up to 100 identities at a time.
 //
 // For more information about creating DNS records using DKIM tokens, go to
-// the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html).
+// the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html).
 //
 //    // Example sending a request using GetIdentityDkimAttributesRequest.
 //    req := client.GetIdentityDkimAttributesRequest(params)

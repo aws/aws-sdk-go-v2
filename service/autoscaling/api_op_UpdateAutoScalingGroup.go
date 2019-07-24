@@ -24,9 +24,12 @@ type UpdateAutoScalingGroupInput struct {
 	AvailabilityZones []string `min:"1" type:"list"`
 
 	// The amount of time, in seconds, after a scaling activity completes before
-	// another scaling activity can start. The default value is 300.
+	// another scaling activity can start. The default value is 300. This cooldown
+	// period is not used when a scaling-specific cooldown is specified.
 	//
-	// For more information, see Scaling Cooldowns (https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html)
+	// Cooldown periods are not supported for target tracking scaling policies,
+	// step scaling policies, or scheduled scaling. For more information, see Scaling
+	// Cooldowns (https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	DefaultCooldown *int64 `type:"integer"`
 
@@ -51,13 +54,18 @@ type UpdateAutoScalingGroupInput struct {
 	// balancer health checks.
 	HealthCheckType *string `min:"1" type:"string"`
 
-	// The name of the launch configuration. If you specify this parameter, you
-	// can't specify a launch template or a mixed instances policy.
+	// The name of the launch configuration. If you specify LaunchConfigurationName
+	// in your update request, you can't specify LaunchTemplate or MixedInstancesPolicy.
+	//
+	// To update an Auto Scaling group with a launch configuration with InstanceMonitoring
+	// set to false, you must first disable the collection of group metrics. Otherwise,
+	// you get an error. If you have previously enabled the collection of group
+	// metrics, you can disable it using DisableMetricsCollection.
 	LaunchConfigurationName *string `min:"1" type:"string"`
 
 	// The launch template and version to use to specify the updates. If you specify
-	// this parameter, you can't specify a launch configuration or a mixed instances
-	// policy.
+	// LaunchTemplate in your update request, you can't specify LaunchConfigurationName
+	// or MixedInstancesPolicy.
 	LaunchTemplate *LaunchTemplateSpecification `type:"structure"`
 
 	// The maximum size of the Auto Scaling group.
@@ -66,8 +74,10 @@ type UpdateAutoScalingGroupInput struct {
 	// The minimum size of the Auto Scaling group.
 	MinSize *int64 `type:"integer"`
 
-	// The mixed instances policy to use to specify the updates. If you specify
-	// this parameter, you can't specify a launch configuration or a launch template.
+	// An embedded object that specifies a mixed instances policy.
+	//
+	// In your call to UpdateAutoScalingGroup, you can make changes to the policy
+	// that is specified. All optional parameters are left unchanged if not specified.
 	//
 	// For more information, see Auto Scaling Groups with Multiple Instance Types
 	// and Purchase Options (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
@@ -104,7 +114,7 @@ type UpdateAutoScalingGroupInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	TerminationPolicies []string `type:"list"`
 
-	// A comma-separated list of subnet IDs, if you are launching into a VPC.
+	// A comma-separated list of subnet IDs for virtual private cloud (VPC).
 	//
 	// If you specify VPCZoneIdentifier with AvailabilityZones, the subnets that
 	// you specify for this parameter must reside in those Availability Zones.
@@ -178,27 +188,43 @@ const opUpdateAutoScalingGroup = "UpdateAutoScalingGroup"
 //
 // Updates the configuration for the specified Auto Scaling group.
 //
-// The new settings take effect on any scaling activities after this call returns.
-// Scaling activities that are currently in progress aren't affected.
+// To update an Auto Scaling group, specify the name of the group and the parameter
+// that you want to change. Any parameters that you don't specify are not changed
+// by this update request. The new settings take effect on any scaling activities
+// after this call returns. Scaling activities that are currently in progress
+// aren't affected.
 //
-// To update an Auto Scaling group with a launch configuration with InstanceMonitoring
-// set to false, you must first disable the collection of group metrics. Otherwise,
-// you get an error. If you have previously enabled the collection of group
-// metrics, you can disable it using DisableMetricsCollection.
+// If you associate a new launch configuration or template with an Auto Scaling
+// group, all new instances will get the updated configuration, but existing
+// instances continue to run with the configuration that they were originally
+// launched with. When you update a group to specify a mixed instances policy
+// instead of a launch configuration or template, existing instances may be
+// replaced to match the new purchasing options that you specified in the policy.
+// For example, if the group currently has 100% On-Demand capacity and the policy
+// specifies 50% Spot capacity, this means that half of your instances will
+// be gradually terminated and relaunched as Spot Instances. When replacing
+// instances, Amazon EC2 Auto Scaling launches new instances before terminating
+// the old ones, so that updating your group does not compromise the performance
+// or availability of your application.
 //
-// Note the following:
+// Note the following about changing DesiredCapacity, MaxSize, or MinSize:
+//
+//    * If a scale-in event occurs as a result of a new DesiredCapacity value
+//    that is lower than the current size of the group, the Auto Scaling group
+//    uses its termination policy to determine which instances to terminate.
 //
 //    * If you specify a new value for MinSize without specifying a value for
 //    DesiredCapacity, and the new MinSize is larger than the current size of
-//    the group, we implicitly call SetDesiredCapacity to set the size of the
-//    group to the new value of MinSize.
+//    the group, this sets the group's DesiredCapacity to the new MinSize value.
 //
 //    * If you specify a new value for MaxSize without specifying a value for
 //    DesiredCapacity, and the new MaxSize is smaller than the current size
-//    of the group, we implicitly call SetDesiredCapacity to set the size of
-//    the group to the new value of MaxSize.
+//    of the group, this sets the group's DesiredCapacity to the new MaxSize
+//    value.
 //
-//    * All other optional parameters are left unchanged if not specified.
+// To see which parameters have been set, use DescribeAutoScalingGroups. You
+// can also view the scaling policies for an Auto Scaling group using DescribePolicies.
+// If the group has scaling policies, you can update them using PutScalingPolicy.
 //
 //    // Example sending a request using UpdateAutoScalingGroupRequest.
 //    req := client.UpdateAutoScalingGroupRequest(params)

@@ -11,14 +11,14 @@ import (
 )
 
 // The request to create a new distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CreateDistributionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateDistributionRequest
 type CreateDistributionInput struct {
 	_ struct{} `type:"structure" payload:"DistributionConfig"`
 
 	// The distribution's configuration information.
 	//
 	// DistributionConfig is a required field
-	DistributionConfig *DistributionConfig `locationName:"DistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2018-11-05/"`
+	DistributionConfig *DistributionConfig `locationName:"DistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
 }
 
 // String returns the string representation
@@ -51,14 +51,14 @@ func (s CreateDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
 	if s.DistributionConfig != nil {
 		v := s.DistributionConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2018-11-05/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
 		e.SetFields(protocol.PayloadTarget, "DistributionConfig", v, metadata)
 	}
 	return nil
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CreateDistributionResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateDistributionResult
 type CreateDistributionOutput struct {
 	_ struct{} `type:"structure" payload:"Distribution"`
 
@@ -101,7 +101,7 @@ func (s CreateDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opCreateDistribution = "CreateDistribution2018_11_05"
+const opCreateDistribution = "CreateDistribution2019_03_26"
 
 // CreateDistributionRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -112,15 +112,13 @@ const opCreateDistribution = "CreateDistribution2018_11_05"
 // API version/distribution/distribution ID resource.
 //
 // When you update a distribution, there are more required fields than when
-// you create a distribution. When you update your distribution by using UpdateDistribution,
+// you create a distribution. When you update your distribution by using UpdateDistribution
+// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html),
 // follow the steps included in the documentation to get the current configuration
 // and then make your updates. This helps to make sure that you include all
 // of the required fields. To view a summary, see Required Fields for Create
-// Distribution and Update Distribution (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-overview-required-fields.html)
+// Distribution and Update Distribution (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-overview-required-fields.html)
 // in the Amazon CloudFront Developer Guide.
-//
-// If you are using Adobe Flash Media Server's RTMP protocol, you set up a different
-// kind of CloudFront distribution. For more information, see CreateStreamingDistribution.
 //
 //    // Example sending a request using CreateDistributionRequest.
 //    req := client.CreateDistributionRequest(params)
@@ -129,12 +127,12 @@ const opCreateDistribution = "CreateDistribution2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CreateDistribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateDistribution
 func (c *Client) CreateDistributionRequest(input *CreateDistributionInput) CreateDistributionRequest {
 	op := &aws.Operation{
 		Name:       opCreateDistribution,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2018-11-05/distribution",
+		HTTPPath:   "/2019-03-26/distribution",
 	}
 
 	if input == nil {

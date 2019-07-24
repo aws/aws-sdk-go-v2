@@ -36,11 +36,28 @@ func (enum IntervalUnitValues) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type PolicyTypeValues string
+
+// Enum values for PolicyTypeValues
+const (
+	PolicyTypeValuesEbsSnapshotManagement PolicyTypeValues = "EBS_SNAPSHOT_MANAGEMENT"
+)
+
+func (enum PolicyTypeValues) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PolicyTypeValues) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ResourceTypeValues string
 
 // Enum values for ResourceTypeValues
 const (
-	ResourceTypeValuesVolume ResourceTypeValues = "VOLUME"
+	ResourceTypeValuesVolume   ResourceTypeValues = "VOLUME"
+	ResourceTypeValuesInstance ResourceTypeValues = "INSTANCE"
 )
 
 func (enum ResourceTypeValues) MarshalValue() (string, error) {

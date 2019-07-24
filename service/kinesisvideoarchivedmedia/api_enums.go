@@ -19,36 +19,71 @@ func (enum ContainerFormat) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-type DiscontinuityMode string
+type DASHDisplayFragmentNumber string
 
-// Enum values for DiscontinuityMode
+// Enum values for DASHDisplayFragmentNumber
 const (
-	DiscontinuityModeAlways DiscontinuityMode = "ALWAYS"
-	DiscontinuityModeNever  DiscontinuityMode = "NEVER"
+	DASHDisplayFragmentNumberAlways DASHDisplayFragmentNumber = "ALWAYS"
+	DASHDisplayFragmentNumberNever  DASHDisplayFragmentNumber = "NEVER"
 )
 
-func (enum DiscontinuityMode) MarshalValue() (string, error) {
+func (enum DASHDisplayFragmentNumber) MarshalValue() (string, error) {
 	return string(enum), nil
 }
 
-func (enum DiscontinuityMode) MarshalValueBuf(b []byte) ([]byte, error) {
+func (enum DASHDisplayFragmentNumber) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
 
-type DisplayFragmentTimestamp string
+type DASHDisplayFragmentTimestamp string
 
-// Enum values for DisplayFragmentTimestamp
+// Enum values for DASHDisplayFragmentTimestamp
 const (
-	DisplayFragmentTimestampAlways DisplayFragmentTimestamp = "ALWAYS"
-	DisplayFragmentTimestampNever  DisplayFragmentTimestamp = "NEVER"
+	DASHDisplayFragmentTimestampAlways DASHDisplayFragmentTimestamp = "ALWAYS"
+	DASHDisplayFragmentTimestampNever  DASHDisplayFragmentTimestamp = "NEVER"
 )
 
-func (enum DisplayFragmentTimestamp) MarshalValue() (string, error) {
+func (enum DASHDisplayFragmentTimestamp) MarshalValue() (string, error) {
 	return string(enum), nil
 }
 
-func (enum DisplayFragmentTimestamp) MarshalValueBuf(b []byte) ([]byte, error) {
+func (enum DASHDisplayFragmentTimestamp) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DASHFragmentSelectorType string
+
+// Enum values for DASHFragmentSelectorType
+const (
+	DASHFragmentSelectorTypeProducerTimestamp DASHFragmentSelectorType = "PRODUCER_TIMESTAMP"
+	DASHFragmentSelectorTypeServerTimestamp   DASHFragmentSelectorType = "SERVER_TIMESTAMP"
+)
+
+func (enum DASHFragmentSelectorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DASHFragmentSelectorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DASHPlaybackMode string
+
+// Enum values for DASHPlaybackMode
+const (
+	DASHPlaybackModeLive       DASHPlaybackMode = "LIVE"
+	DASHPlaybackModeLiveReplay DASHPlaybackMode = "LIVE_REPLAY"
+	DASHPlaybackModeOnDemand   DASHPlaybackMode = "ON_DEMAND"
+)
+
+func (enum DASHPlaybackMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DASHPlaybackMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -70,6 +105,40 @@ func (enum FragmentSelectorType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type HLSDiscontinuityMode string
+
+// Enum values for HLSDiscontinuityMode
+const (
+	HLSDiscontinuityModeAlways HLSDiscontinuityMode = "ALWAYS"
+	HLSDiscontinuityModeNever  HLSDiscontinuityMode = "NEVER"
+)
+
+func (enum HLSDiscontinuityMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HLSDiscontinuityMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type HLSDisplayFragmentTimestamp string
+
+// Enum values for HLSDisplayFragmentTimestamp
+const (
+	HLSDisplayFragmentTimestampAlways HLSDisplayFragmentTimestamp = "ALWAYS"
+	HLSDisplayFragmentTimestampNever  HLSDisplayFragmentTimestamp = "NEVER"
+)
+
+func (enum HLSDisplayFragmentTimestamp) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HLSDisplayFragmentTimestamp) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type HLSFragmentSelectorType string
 
 // Enum values for HLSFragmentSelectorType
@@ -87,19 +156,20 @@ func (enum HLSFragmentSelectorType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-type PlaybackMode string
+type HLSPlaybackMode string
 
-// Enum values for PlaybackMode
+// Enum values for HLSPlaybackMode
 const (
-	PlaybackModeLive     PlaybackMode = "LIVE"
-	PlaybackModeOnDemand PlaybackMode = "ON_DEMAND"
+	HLSPlaybackModeLive       HLSPlaybackMode = "LIVE"
+	HLSPlaybackModeLiveReplay HLSPlaybackMode = "LIVE_REPLAY"
+	HLSPlaybackModeOnDemand   HLSPlaybackMode = "ON_DEMAND"
 )
 
-func (enum PlaybackMode) MarshalValue() (string, error) {
+func (enum HLSPlaybackMode) MarshalValue() (string, error) {
 	return string(enum), nil
 }
 
-func (enum PlaybackMode) MarshalValueBuf(b []byte) ([]byte, error) {
+func (enum HLSPlaybackMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

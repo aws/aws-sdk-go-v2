@@ -14,7 +14,8 @@ import (
 type UpdateApnsChannelInput struct {
 	_ struct{} `type:"structure" payload:"APNSChannelRequest"`
 
-	// Apple Push Notification Service channel definition.
+	// Specifies the status and settings of the APNs (Apple Push Notification service)
+	// channel for an application.
 	//
 	// APNSChannelRequest is a required field
 	APNSChannelRequest *APNSChannelRequest `type:"structure" required:"true"`
@@ -69,7 +70,8 @@ func (s UpdateApnsChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateApnsChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSChannelResponse"`
 
-	// Apple Distribution Push Notification Service channel definition.
+	// Provides information about the status and settings of the APNs (Apple Push
+	// Notification service) channel for an application.
 	//
 	// APNSChannelResponse is a required field
 	APNSChannelResponse *APNSChannelResponse `type:"structure" required:"true"`
@@ -96,7 +98,7 @@ const opUpdateApnsChannel = "UpdateApnsChannel"
 // UpdateApnsChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Use to update the APNs channel for an app.
+// Updates the APNs channel settings for an application.
 //
 //    // Example sending a request using UpdateApnsChannelRequest.
 //    req := client.UpdateApnsChannelRequest(params)

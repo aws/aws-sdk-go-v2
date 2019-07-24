@@ -33,7 +33,7 @@ type CreateTriggerInput struct {
 	Predicate *Predicate `type:"structure"`
 
 	// A cron expression used to specify the schedule (see Time-Based Schedules
-	// for Jobs and Crawlers (http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
+	// for Jobs and Crawlers (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
 	// For example, to run something every day at 12:15 UTC, you would specify:
 	// cron(15 12 * * ? *).
 	//
@@ -41,12 +41,12 @@ type CreateTriggerInput struct {
 	Schedule *string `type:"string"`
 
 	// Set to true to start SCHEDULED and CONDITIONAL triggers when created. True
-	// not supported for ON_DEMAND triggers.
+	// is not supported for ON_DEMAND triggers.
 	StartOnCreation *bool `type:"boolean"`
 
 	// The tags to use with this trigger. You may use tags to limit access to the
 	// trigger. For more information about tags in AWS Glue, see AWS Tags in AWS
-	// Glue (http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the
+	// Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the
 	// developer guide.
 	Tags map[string]string `type:"map"`
 
@@ -54,6 +54,9 @@ type CreateTriggerInput struct {
 	//
 	// Type is a required field
 	Type TriggerType `type:"string" required:"true" enum:"true"`
+
+	// The name of the workflow associated with the trigger.
+	WorkflowName *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -77,6 +80,9 @@ func (s *CreateTriggerInput) Validate() error {
 	}
 	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+	if s.WorkflowName != nil && len(*s.WorkflowName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("WorkflowName", 1))
 	}
 	if s.Actions != nil {
 		for i, v := range s.Actions {

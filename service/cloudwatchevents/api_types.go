@@ -13,7 +13,7 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// This structure specifies the VPC subnets and security groups for the task,
+// This structure specifies the VPC subnets and security groups for the task
 // and whether a public IP address is to be used. This structure is relevant
 // only for ECS tasks that use the awsvpc network mode.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/AwsVpcConfiguration
@@ -27,7 +27,7 @@ type AwsVpcConfiguration struct {
 
 	// Specifies the security groups associated with the task. These security groups
 	// must all be in the same VPC. You can specify as many as five security groups.
-	// If you do not specify a security group, the default security group for the
+	// If you don't specify a security group, the default security group for the
 	// VPC is used.
 	SecurityGroups []string `type:"list"`
 
@@ -98,8 +98,8 @@ type BatchParameters struct {
 	// JobName is a required field
 	JobName *string `type:"string" required:"true"`
 
-	// The retry strategy to use for failed jobs, if the target is an AWS Batch
-	// job. The retry strategy is the number of times to retry the failed job execution.
+	// The retry strategy to use for failed jobs if the target is an AWS Batch job.
+	// The retry strategy is the number of times to retry the failed job execution.
 	// Valid values are 1–10. When you specify a retry strategy here, it overrides
 	// the retry strategy defined in the job definition.
 	RetryStrategy *BatchRetryStrategy `type:"structure"`
@@ -128,9 +128,9 @@ func (s *BatchParameters) Validate() error {
 	return nil
 }
 
-// The retry strategy to use for failed jobs, if the target is an AWS Batch
-// job. If you specify a retry strategy here, it overrides the retry strategy
-// defined in the job definition.
+// The retry strategy to use for failed jobs if the target is an AWS Batch job.
+// If you specify a retry strategy here, it overrides the retry strategy defined
+// in the job definition.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/BatchRetryStrategy
 type BatchRetryStrategy struct {
 	_ struct{} `type:"structure"`
@@ -145,29 +145,28 @@ func (s BatchRetryStrategy) String() string {
 	return awsutil.Prettify(s)
 }
 
-// A JSON string which you can use to limit the event bus permissions you are
+// A JSON string that you can use to limit the event bus permissions that you're
 // granting to only accounts that fulfill the condition. Currently, the only
 // supported condition is membership in a certain AWS organization. The string
 // must contain Type, Key, and Value fields. The Value field specifies the ID
-// of the AWS organization. Following is an example value for Condition:
+// of the AWS organization. The following is an example value for Condition:
 //
 // '{"Type" : "StringEquals", "Key": "aws:PrincipalOrgID", "Value": "o-1234567890"}'
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Condition
 type Condition struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the key for the condition. Currently the only supported key is
-	// aws:PrincipalOrgID.
+	// The key for the condition. Currently, the only supported key is aws:PrincipalOrgID.
 	//
 	// Key is a required field
 	Key *string `type:"string" required:"true"`
 
-	// Specifies the type of condition. Currently the only supported value is StringEquals.
+	// The type of condition. Currently, the only supported value is StringEquals.
 	//
 	// Type is a required field
 	Type *string `type:"string" required:"true"`
 
-	// Specifies the value for the key. Currently, this must be the ID of the organization.
+	// The value for the key. Currently, this must be the ID of the organization.
 	//
 	// Value is a required field
 	Value *string `type:"string" required:"true"`
@@ -217,11 +216,11 @@ type EcsParameters struct {
 	LaunchType LaunchType `type:"string" enum:"true"`
 
 	// Use this structure if the ECS task uses the awsvpc network mode. This structure
-	// specifies the VPC subnets and security groups associated with the task, and
+	// specifies the VPC subnets and security groups associated with the task and
 	// whether a public IP address is to be used. This structure is required if
 	// LaunchType is FARGATE because the awsvpc mode is required for Fargate tasks.
 	//
-	// If you specify NetworkConfiguration when the target ECS task does not use
+	// If you specify NetworkConfiguration when the target ECS task doesn't use
 	// the awsvpc network mode, the task fails.
 	NetworkConfiguration *NetworkConfiguration `type:"structure"`
 
@@ -273,6 +272,68 @@ func (s *EcsParameters) Validate() error {
 	return nil
 }
 
+// An event bus receives events from a source and routes them to rules associated
+// with that event bus. Your account's default event bus receives rules from
+// AWS services. A custom event bus can receive rules from AWS services as well
+// as your custom applications and services. A partner event bus receives events
+// from an event source created by an SaaS partner. These events come from the
+// partners services or applications.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EventBus
+type EventBus struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the event bus.
+	Arn *string `type:"string"`
+
+	// The name of the event bus.
+	Name *string `type:"string"`
+
+	// The permissions policy of the event bus, describing which other AWS accounts
+	// can write events to this event bus.
+	Policy *string `type:"string"`
+}
+
+// String returns the string representation
+func (s EventBus) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A partner event source is created by an SaaS partner. If a customer creates
+// a partner event bus that matches this event source, that AWS account can
+// receive events from the partner's applications or services.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EventSource
+type EventSource struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the event source.
+	Arn *string `type:"string"`
+
+	// The name of the partner that created the event source.
+	CreatedBy *string `type:"string"`
+
+	// The date and time when the event source was created.
+	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The date and time when the event source will expire if the AWS account doesn't
+	// create a matching event bus for it.
+	ExpirationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The name of the event source.
+	Name *string `type:"string"`
+
+	// The state of the event source. If it's ACTIVE, you have already created a
+	// matching event bus for this event source, and that event bus is active. If
+	// it's PENDING, either you haven't yet created a matching event bus, or that
+	// event bus is deactivated. If it's DELETED, you have created a matching event
+	// bus, but the event source has since been deleted.
+	State EventSourceState `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s EventSource) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Contains the parameters needed for you to provide custom input to a target
 // based on one or more pieces of data extracted from the event.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/InputTransformer
@@ -280,27 +341,27 @@ type InputTransformer struct {
 	_ struct{} `type:"structure"`
 
 	// Map of JSON paths to be extracted from the event. You can then insert these
-	// in the template in InputTemplate to produce the output you want to be sent
-	// to the target.
+	// in the template in InputTemplate to produce the output to be sent to the
+	// target.
 	//
 	// InputPathsMap is an array key-value pairs, where each value is a valid JSON
 	// path. You can have as many as 10 key-value pairs. You must use JSON dot notation,
 	// not bracket notation.
 	//
-	// The keys cannot start with "AWS."
+	// The keys can't start with "AWS".
 	InputPathsMap map[string]string `type:"map"`
 
 	// Input template where you specify placeholders that will be filled with the
 	// values of the keys from InputPathsMap to customize the data sent to the target.
-	// Enclose each InputPathsMaps value in brackets: <value> The InputTemplate
+	// Enclose each InputPathsMaps value in brackets: <value>. The InputTemplate
 	// must be valid JSON.
 	//
 	// If InputTemplate is a JSON object (surrounded by curly braces), the following
 	// restrictions apply:
 	//
-	//    * The placeholder cannot be used as an object key.
+	//    * The placeholder can't be used as an object key
 	//
-	//    * Object values cannot include quote marks.
+	//    * Object values can't include quote marks
 	//
 	// The following example shows the syntax for using InputPathsMap and InputTemplate.
 	//
@@ -354,9 +415,9 @@ func (s *InputTransformer) Validate() error {
 }
 
 // This object enables you to specify a JSON path to extract from the event
-// and use as the partition key for the Amazon Kinesis data stream, so that
-// you can control the shard to which the event goes. If you do not include
-// this parameter, the default is to use the eventId as the partition key.
+// and use as the partition key for the Amazon Kinesis data stream so that you
+// can control the shard that the event goes to. If you don't include this parameter,
+// the default is to use the eventId as the partition key.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/KinesisParameters
 type KinesisParameters struct {
 	_ struct{} `type:"structure"`
@@ -394,7 +455,7 @@ type NetworkConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// Use this structure to specify the VPC subnets and security groups for the
-	// task, and whether a public IP address is to be used. This structure is relevant
+	// task and whether a public IP address is to be used. This structure is relevant
 	// only for ECS tasks that use the awsvpc network mode.
 	AwsvpcConfiguration *AwsVpcConfiguration `locationName:"awsvpcConfiguration" type:"structure"`
 }
@@ -419,33 +480,97 @@ func (s *NetworkConfiguration) Validate() error {
 	return nil
 }
 
+// A partner event source is created by an SaaS partner. If a customer creates
+// a partner event bus that matches this event source, that AWS account can
+// receive events from the partner's applications or services.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PartnerEventSource
+type PartnerEventSource struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the partner event source.
+	Arn *string `type:"string"`
+
+	// The name of the partner event source.
+	Name *string `type:"string"`
+}
+
+// String returns the string representation
+func (s PartnerEventSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The AWS account that a partner event source has been offered to.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PartnerEventSourceAccount
+type PartnerEventSourceAccount struct {
+	_ struct{} `type:"structure"`
+
+	// The AWS account ID that the partner event source was offered to.
+	Account *string `min:"12" type:"string"`
+
+	// The date and time when the event source was created.
+	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The date and time when the event source will expire if the AWS account doesn't
+	// create a matching event bus for it.
+	ExpirationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The state of the event source. If it's ACTIVE, you have already created a
+	// matching event bus for this event source, and that event bus is active. If
+	// it's PENDING, either you haven't yet created a matching event bus, or that
+	// event bus is deactivated. If it's DELETED, you have created a matching event
+	// bus, but the event source has since been deleted.
+	State EventSourceState `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s PartnerEventSourceAccount) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Represents an event to be submitted.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEventsRequestEntry
 type PutEventsRequestEntry struct {
 	_ struct{} `type:"structure"`
 
-	// A valid JSON string. There is no other schema imposed. The JSON string may
+	// A valid JSON string. There is no other schema imposed. The JSON string can
 	// contain fields and nested subobjects.
 	Detail *string `type:"string"`
 
-	// Free-form string used to decide what fields to expect in the event detail.
+	// Free-form string used to decide which fields to expect in the event detail.
 	DetailType *string `type:"string"`
 
-	// AWS resources, identified by Amazon Resource Name (ARN), which the event
-	// primarily concerns. Any number, including zero, may be present.
+	// The event bus that will receive the event. Only the rules that are associated
+	// with this event bus can match the event.
+	EventBusName *string `min:"1" type:"string"`
+
+	// AWS resources, identified by Amazon Resource Name (ARN), that the event primarily
+	// concerns. Any number, including zero, can be present.
 	Resources []string `type:"list"`
 
 	// The source of the event. This field is required.
 	Source *string `type:"string"`
 
-	// The time stamp of the event, per RFC3339 (https://www.rfc-editor.org/rfc/rfc3339.txt).
-	// If no time stamp is provided, the time stamp of the PutEvents call is used.
+	// The timestamp of the event, per RFC3339 (https://www.rfc-editor.org/rfc/rfc3339.txt).
+	// If no timestamp is provided, the timestamp of the PutEvents call is used.
 	Time *time.Time `type:"timestamp" timestampFormat:"unix"`
 }
 
 // String returns the string representation
 func (s PutEventsRequestEntry) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutEventsRequestEntry) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutEventsRequestEntry"}
+	if s.EventBusName != nil && len(*s.EventBusName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EventBusName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Represents an event that failed to be submitted.
@@ -465,6 +590,54 @@ type PutEventsResultEntry struct {
 
 // String returns the string representation
 func (s PutEventsResultEntry) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The details about an event generated by an SaaS partner.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPartnerEventsRequestEntry
+type PutPartnerEventsRequestEntry struct {
+	_ struct{} `type:"structure"`
+
+	// A valid JSON string. There is no other schema imposed. The JSON string can
+	// contain fields and nested subobjects.
+	Detail *string `type:"string"`
+
+	// A free-form string used to decide which fields to expect in the event detail.
+	DetailType *string `type:"string"`
+
+	// AWS resources, identified by Amazon Resource Name (ARN), that the event primarily
+	// concerns. Any number, including zero, can be present.
+	Resources []string `type:"list"`
+
+	// The event source that is generating the evntry.
+	Source *string `type:"string"`
+
+	// The date and time of the event.
+	Time *time.Time `type:"timestamp" timestampFormat:"unix"`
+}
+
+// String returns the string representation
+func (s PutPartnerEventsRequestEntry) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Represents an event that a partner tried to generate but failed.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPartnerEventsResultEntry
+type PutPartnerEventsResultEntry struct {
+	_ struct{} `type:"structure"`
+
+	// The error code that indicates why the event submission failed.
+	ErrorCode *string `type:"string"`
+
+	// The error message that explains why the event submission failed.
+	ErrorMessage *string `type:"string"`
+
+	// The ID of the event.
+	EventId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s PutPartnerEventsResultEntry) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -512,7 +685,7 @@ func (s RemoveTargetsResultEntry) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Contains information about a rule in Amazon CloudWatch Events.
+// Contains information about a rule in Amazon EventBridge.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Rule
 type Rule struct {
 	_ struct{} `type:"structure"`
@@ -523,13 +696,15 @@ type Rule struct {
 	// The description of the rule.
 	Description *string `type:"string"`
 
-	// The event pattern of the rule. For more information, see Events and Event
-	// Patterns (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html)
-	// in the Amazon CloudWatch Events User Guide.
+	// The event bus associated with the rule.
+	EventBusName *string `min:"1" type:"string"`
+
+	// The event pattern of the rule. For more information, see Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
+	// in the Amazon EventBridge User Guide.
 	EventPattern *string `type:"string"`
 
-	// If the rule was created on behalf of your account by an AWS service, this
-	// field displays the principal name of the service that created the rule.
+	// If an AWS service created the rule on behalf of your account, this field
+	// displays the principal name of the service that created the rule.
 	ManagedBy *string `min:"1" type:"string"`
 
 	// The name of the rule.
@@ -538,7 +713,7 @@ type Rule struct {
 	// The Amazon Resource Name (ARN) of the role that is used for target invocation.
 	RoleArn *string `min:"1" type:"string"`
 
-	// The scheduling expression. For example, "cron(0 20 * * ? *)", "rate(5 minutes)".
+	// The scheduling expression: for example, "cron(0 20 * * ? *)" or "rate(5 minutes)".
 	ScheduleExpression *string `type:"string"`
 
 	// The state of the rule.
@@ -594,7 +769,7 @@ func (s *RunCommandParameters) Validate() error {
 
 // Information about the EC2 instances that are to be sent the command, specified
 // as key-value pairs. Each RunCommandTarget block can include only one key,
-// but this key may specify multiple values.
+// but this key can specify multiple values.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RunCommandTarget
 type RunCommandTarget struct {
 	_ struct{} `type:"structure"`
@@ -655,14 +830,14 @@ func (s SqsParameters) String() string {
 	return awsutil.Prettify(s)
 }
 
-// A key-value pair associated with an AWS resource. In CloudWatch Events, rules
-// support tagging.
+// A key-value pair associated with an AWS resource. In EventBridge, rules support
+// tagging.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
-	// A string you can use to assign a value. The combination of tag keys and values
-	// can help you organize and categorize your resources.
+	// A string that you can use to assign a value. The combination of tag keys
+	// and values can help you organize and categorize your resources.
 	//
 	// Key is a required field
 	Key *string `min:"1" type:"string" required:"true"`
@@ -702,12 +877,12 @@ func (s *Tag) Validate() error {
 // Targets are the resources to be invoked when a rule is triggered. For a complete
 // list of services and resources that can be set as a target, see PutTargets.
 //
-// If you are setting the event bus of another account as the target, and that
+// If you're setting the event bus of another account as the target and that
 // account granted permission to your account through an organization instead
-// of directly by the account ID, then you must specify a RoleArn with proper
-// permissions in the Target structure. For more information, see Sending and
-// Receiving Events Between AWS Accounts (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEvents-CrossAccountEventDelivery.html)
-// in the Amazon CloudWatch Events User Guide.
+// of directly by the account ID, you must specify a RoleArn with proper permissions
+// in the Target structure. For more information, see Sending and Receiving
+// Events Between AWS Accounts (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html)
+// in the Amazon EventBridge User Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Target
 type Target struct {
 	_ struct{} `type:"structure"`
@@ -722,7 +897,7 @@ type Target struct {
 	// in the AWS Batch User Guide.
 	BatchParameters *BatchParameters `type:"structure"`
 
-	// Contains the Amazon ECS task definition and task count to be used, if the
+	// Contains the Amazon ECS task definition and task count to be used if the
 	// event target is an Amazon ECS task. For more information about Amazon ECS
 	// tasks, see Task Definitions (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html)
 	// in the Amazon EC2 Container Service Developer Guide.
@@ -748,9 +923,9 @@ type Target struct {
 	// then use that data to send customized input to the target.
 	InputTransformer *InputTransformer `type:"structure"`
 
-	// The custom parameter you can use to control the shard assignment, when the
-	// target is a Kinesis data stream. If you do not include this parameter, the
-	// default is to use the eventId as the partition key.
+	// The custom parameter that you can use to control the shard assignment when
+	// the target is a Kinesis data stream. If you don't include this parameter,
+	// the default is to use the eventId as the partition key.
 	KinesisParameters *KinesisParameters `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the IAM role to be used for this target

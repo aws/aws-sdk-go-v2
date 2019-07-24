@@ -15,14 +15,14 @@ import (
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon DyanamoDB resource the tags will be removed from. This value is
-	// an Amazon Resource Name (ARN).
+	// The DynamoDB resource that the tags will be removed from. This value is an
+	// Amazon Resource Name (ARN).
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `min:"1" type:"string" required:"true"`
 
 	// A list of tag keys. Existing tags of the resource whose keys are members
-	// of this list will be removed from the Amazon DynamoDB resource.
+	// of this list will be removed from the DynamoDB resource.
 	//
 	// TagKeys is a required field
 	TagKeys []string `type:"list" required:"true"`
@@ -70,7 +70,7 @@ const opUntagResource = "UntagResource"
 // Amazon DynamoDB.
 //
 // Removes the association of tags from an Amazon DynamoDB resource. You can
-// call UntagResource up to 5 times per second, per account.
+// call UntagResource up to five times per second, per account.
 //
 // For an overview on tagging DynamoDB resources, see Tagging for DynamoDB (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
 // in the Amazon DynamoDB Developer Guide.

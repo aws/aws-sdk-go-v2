@@ -275,6 +275,10 @@ type LogStream struct {
 	LogStreamName *string `locationName:"logStreamName" min:"1" type:"string"`
 
 	// The number of bytes stored.
+	//
+	// IMPORTANT: Starting on June 17, 2019, this parameter will be deprecated for
+	// log streams, and will be reported as zero. This change applies only to log
+	// streams. The storedBytes parameter for log groups is not affected.
 	StoredBytes *int64 `locationName:"storedBytes" type:"long"`
 
 	// The sequence token.
@@ -338,7 +342,7 @@ func (s MetricFilterMatchRecord) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Indicates how to transform ingested log eventsto metric data in a CloudWatch
+// Indicates how to transform ingested log events to metric data in a CloudWatch
 // metric.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/MetricTransformation
 type MetricTransformation struct {

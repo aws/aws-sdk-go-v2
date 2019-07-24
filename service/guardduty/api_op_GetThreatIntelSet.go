@@ -14,9 +14,13 @@ import (
 type GetThreatIntelSetInput struct {
 	_ struct{} `type:"structure"`
 
+	// The unique ID of the detector the threatIntelSet is associated with.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
+	// The unique ID of the threatIntelSet you want to get.
+	//
 	// ThreatIntelSetId is a required field
 	ThreatIntelSetId *string `location:"uri" locationName:"threatIntelSetId" type:"string" required:"true"`
 }
@@ -32,6 +36,9 @@ func (s *GetThreatIntelSetInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
 	}
 
 	if s.ThreatIntelSetId == nil {
@@ -63,23 +70,33 @@ func (s GetThreatIntelSetInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// GetThreatIntelSet response object
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSetResponse
 type GetThreatIntelSetOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The format of the threatIntelSet.
-	Format ThreatIntelSetFormat `locationName:"format" type:"string" enum:"true"`
+	//
+	// Format is a required field
+	Format ThreatIntelSetFormat `locationName:"format" min:"1" type:"string" required:"true" enum:"true"`
 
 	// The URI of the file that contains the ThreatIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
-	Location *string `locationName:"location" type:"string"`
+	//
+	// Location is a required field
+	Location *string `locationName:"location" min:"1" type:"string" required:"true"`
 
 	// A user-friendly ThreatIntelSet name that is displayed in all finding generated
 	// by activity that involves IP addresses included in this ThreatIntelSet.
-	Name *string `locationName:"name" type:"string"`
+	//
+	// Name is a required field
+	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
 	// The status of threatIntelSet file uploaded.
-	Status ThreatIntelSetStatus `locationName:"status" type:"string" enum:"true"`
+	//
+	// Status is a required field
+	Status ThreatIntelSetStatus `locationName:"status" min:"1" type:"string" required:"true" enum:"true"`
+
+	// The tags of the Threat List resource.
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -112,6 +129,18 @@ func (s GetThreatIntelSetOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }

@@ -62,7 +62,7 @@ const opUpdateManagedInstanceRole = "UpdateManagedInstanceRole"
 // UpdateManagedInstanceRoleRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Assigns or changes an Amazon Identity and Access Management (IAM) role to
+// Assigns or changes an Amazon Identity and Access Management (IAM) role for
 // the managed instance.
 //
 //    // Example sending a request using UpdateManagedInstanceRoleRequest.

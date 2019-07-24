@@ -85,7 +85,7 @@ const opDeleteTaskSet = "DeleteTaskSet"
 //
 // Deletes a specified task set within a service. This is used when a service
 // uses the EXTERNAL deployment controller type. For more information, see Amazon
-// ECS Deployment Types (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
+// ECS Deployment Types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
 // in the Amazon Elastic Container Service Developer Guide.
 //
 //    // Example sending a request using DeleteTaskSetRequest.

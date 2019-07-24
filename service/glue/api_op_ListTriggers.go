@@ -14,8 +14,8 @@ type ListTriggersInput struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the job for which to retrieve triggers. The trigger that can
-	// start this job will be returned, and if there is no such trigger, all triggers
-	// will be returned.
+	// start this job is returned. If there is no such trigger, all triggers are
+	// returned.
 	DependentJobName *string `min:"1" type:"string"`
 
 	// The maximum size of a list to return.
@@ -76,9 +76,9 @@ const opListTriggers = "ListTriggers"
 // resources with the specified tag. This operation allows you to see which
 // resources are available in your account, and their names.
 //
-// This operation takes the optional Tags field which you can use as a filter
+// This operation takes the optional Tags field, which you can use as a filter
 // on the response so that tagged resources can be retrieved as a group. If
-// you choose to use tags filtering, only resources with the tag will be retrieved.
+// you choose to use tags filtering, only resources with the tag are retrieved.
 //
 //    // Example sending a request using ListTriggersRequest.
 //    req := client.ListTriggersRequest(params)

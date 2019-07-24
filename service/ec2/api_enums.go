@@ -64,6 +64,7 @@ const (
 	AllocationStatePermanentFailure         AllocationState = "permanent-failure"
 	AllocationStateReleased                 AllocationState = "released"
 	AllocationStateReleasedPermanentFailure AllocationState = "released-permanent-failure"
+	AllocationStatePending                  AllocationState = "pending"
 )
 
 func (enum AllocationState) MarshalValue() (string, error) {
@@ -488,6 +489,22 @@ func (enum ConversionTaskState) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type CopyTagsFromSource string
+
+// Enum values for CopyTagsFromSource
+const (
+	CopyTagsFromSourceVolume CopyTagsFromSource = "volume"
+)
+
+func (enum CopyTagsFromSource) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CopyTagsFromSource) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CurrencyCodeValues string
 
 // Enum values for CurrencyCodeValues
@@ -737,6 +754,7 @@ const (
 	EventTypeInstanceChange     EventType = "instanceChange"
 	EventTypeFleetRequestChange EventType = "fleetRequestChange"
 	EventTypeError              EventType = "error"
+	EventTypeInformation        EventType = "information"
 )
 
 func (enum EventType) MarshalValue() (string, error) {
@@ -981,6 +999,23 @@ func (enum GatewayType) MarshalValue() (string, error) {
 }
 
 func (enum GatewayType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type HostRecovery string
+
+// Enum values for HostRecovery
+const (
+	HostRecoveryOn  HostRecovery = "on"
+	HostRecoveryOff HostRecovery = "off"
+)
+
+func (enum HostRecovery) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HostRecovery) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -1295,20 +1330,26 @@ const (
 	InstanceTypeR5Xlarge     InstanceType = "r5.xlarge"
 	InstanceTypeR52xlarge    InstanceType = "r5.2xlarge"
 	InstanceTypeR54xlarge    InstanceType = "r5.4xlarge"
+	InstanceTypeR58xlarge    InstanceType = "r5.8xlarge"
 	InstanceTypeR512xlarge   InstanceType = "r5.12xlarge"
+	InstanceTypeR516xlarge   InstanceType = "r5.16xlarge"
 	InstanceTypeR524xlarge   InstanceType = "r5.24xlarge"
 	InstanceTypeR5Metal      InstanceType = "r5.metal"
 	InstanceTypeR5aLarge     InstanceType = "r5a.large"
 	InstanceTypeR5aXlarge    InstanceType = "r5a.xlarge"
 	InstanceTypeR5a2xlarge   InstanceType = "r5a.2xlarge"
 	InstanceTypeR5a4xlarge   InstanceType = "r5a.4xlarge"
+	InstanceTypeR5a8xlarge   InstanceType = "r5a.8xlarge"
 	InstanceTypeR5a12xlarge  InstanceType = "r5a.12xlarge"
+	InstanceTypeR5a16xlarge  InstanceType = "r5a.16xlarge"
 	InstanceTypeR5a24xlarge  InstanceType = "r5a.24xlarge"
 	InstanceTypeR5dLarge     InstanceType = "r5d.large"
 	InstanceTypeR5dXlarge    InstanceType = "r5d.xlarge"
 	InstanceTypeR5d2xlarge   InstanceType = "r5d.2xlarge"
 	InstanceTypeR5d4xlarge   InstanceType = "r5d.4xlarge"
+	InstanceTypeR5d8xlarge   InstanceType = "r5d.8xlarge"
 	InstanceTypeR5d12xlarge  InstanceType = "r5d.12xlarge"
+	InstanceTypeR5d16xlarge  InstanceType = "r5d.16xlarge"
 	InstanceTypeR5d24xlarge  InstanceType = "r5d.24xlarge"
 	InstanceTypeR5dMetal     InstanceType = "r5d.metal"
 	InstanceTypeR5adLarge    InstanceType = "r5ad.large"
@@ -1338,6 +1379,13 @@ const (
 	InstanceTypeI38xlarge    InstanceType = "i3.8xlarge"
 	InstanceTypeI316xlarge   InstanceType = "i3.16xlarge"
 	InstanceTypeI3Metal      InstanceType = "i3.metal"
+	InstanceTypeI3enLarge    InstanceType = "i3en.large"
+	InstanceTypeI3enXlarge   InstanceType = "i3en.xlarge"
+	InstanceTypeI3en2xlarge  InstanceType = "i3en.2xlarge"
+	InstanceTypeI3en3xlarge  InstanceType = "i3en.3xlarge"
+	InstanceTypeI3en6xlarge  InstanceType = "i3en.6xlarge"
+	InstanceTypeI3en12xlarge InstanceType = "i3en.12xlarge"
+	InstanceTypeI3en24xlarge InstanceType = "i3en.24xlarge"
 	InstanceTypeHi14xlarge   InstanceType = "hi1.4xlarge"
 	InstanceTypeHs18xlarge   InstanceType = "hs1.8xlarge"
 	InstanceTypeC1Medium     InstanceType = "c1.medium"
@@ -1357,7 +1405,10 @@ const (
 	InstanceTypeC52xlarge    InstanceType = "c5.2xlarge"
 	InstanceTypeC54xlarge    InstanceType = "c5.4xlarge"
 	InstanceTypeC59xlarge    InstanceType = "c5.9xlarge"
+	InstanceTypeC512xlarge   InstanceType = "c5.12xlarge"
 	InstanceTypeC518xlarge   InstanceType = "c5.18xlarge"
+	InstanceTypeC524xlarge   InstanceType = "c5.24xlarge"
+	InstanceTypeC5Metal      InstanceType = "c5.metal"
 	InstanceTypeC5dLarge     InstanceType = "c5d.large"
 	InstanceTypeC5dXlarge    InstanceType = "c5d.xlarge"
 	InstanceTypeC5d2xlarge   InstanceType = "c5d.2xlarge"
@@ -1397,20 +1448,26 @@ const (
 	InstanceTypeM5Xlarge     InstanceType = "m5.xlarge"
 	InstanceTypeM52xlarge    InstanceType = "m5.2xlarge"
 	InstanceTypeM54xlarge    InstanceType = "m5.4xlarge"
+	InstanceTypeM58xlarge    InstanceType = "m5.8xlarge"
 	InstanceTypeM512xlarge   InstanceType = "m5.12xlarge"
+	InstanceTypeM516xlarge   InstanceType = "m5.16xlarge"
 	InstanceTypeM524xlarge   InstanceType = "m5.24xlarge"
 	InstanceTypeM5Metal      InstanceType = "m5.metal"
 	InstanceTypeM5aLarge     InstanceType = "m5a.large"
 	InstanceTypeM5aXlarge    InstanceType = "m5a.xlarge"
 	InstanceTypeM5a2xlarge   InstanceType = "m5a.2xlarge"
 	InstanceTypeM5a4xlarge   InstanceType = "m5a.4xlarge"
+	InstanceTypeM5a8xlarge   InstanceType = "m5a.8xlarge"
 	InstanceTypeM5a12xlarge  InstanceType = "m5a.12xlarge"
+	InstanceTypeM5a16xlarge  InstanceType = "m5a.16xlarge"
 	InstanceTypeM5a24xlarge  InstanceType = "m5a.24xlarge"
 	InstanceTypeM5dLarge     InstanceType = "m5d.large"
 	InstanceTypeM5dXlarge    InstanceType = "m5d.xlarge"
 	InstanceTypeM5d2xlarge   InstanceType = "m5d.2xlarge"
 	InstanceTypeM5d4xlarge   InstanceType = "m5d.4xlarge"
+	InstanceTypeM5d8xlarge   InstanceType = "m5d.8xlarge"
 	InstanceTypeM5d12xlarge  InstanceType = "m5d.12xlarge"
+	InstanceTypeM5d16xlarge  InstanceType = "m5d.16xlarge"
 	InstanceTypeM5d24xlarge  InstanceType = "m5d.24xlarge"
 	InstanceTypeM5dMetal     InstanceType = "m5d.metal"
 	InstanceTypeM5adLarge    InstanceType = "m5ad.large"
@@ -2093,6 +2150,9 @@ const (
 	ResourceTypeSnapshot                 ResourceType = "snapshot"
 	ResourceTypeSpotInstancesRequest     ResourceType = "spot-instances-request"
 	ResourceTypeSubnet                   ResourceType = "subnet"
+	ResourceTypeTrafficMirrorFilter      ResourceType = "traffic-mirror-filter"
+	ResourceTypeTrafficMirrorSession     ResourceType = "traffic-mirror-session"
+	ResourceTypeTrafficMirrorTarget      ResourceType = "traffic-mirror-target"
 	ResourceTypeTransitGateway           ResourceType = "transit-gateway"
 	ResourceTypeTransitGatewayAttachment ResourceType = "transit-gateway-attachment"
 	ResourceTypeTransitGatewayRouteTable ResourceType = "transit-gateway-route-table"
@@ -2494,6 +2554,110 @@ func (enum Tenancy) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type TrafficDirection string
+
+// Enum values for TrafficDirection
+const (
+	TrafficDirectionIngress TrafficDirection = "ingress"
+	TrafficDirectionEgress  TrafficDirection = "egress"
+)
+
+func (enum TrafficDirection) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TrafficDirection) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TrafficMirrorFilterRuleField string
+
+// Enum values for TrafficMirrorFilterRuleField
+const (
+	TrafficMirrorFilterRuleFieldDestinationPortRange TrafficMirrorFilterRuleField = "destination-port-range"
+	TrafficMirrorFilterRuleFieldSourcePortRange      TrafficMirrorFilterRuleField = "source-port-range"
+	TrafficMirrorFilterRuleFieldProtocol             TrafficMirrorFilterRuleField = "protocol"
+	TrafficMirrorFilterRuleFieldDescription          TrafficMirrorFilterRuleField = "description"
+)
+
+func (enum TrafficMirrorFilterRuleField) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TrafficMirrorFilterRuleField) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TrafficMirrorNetworkService string
+
+// Enum values for TrafficMirrorNetworkService
+const (
+	TrafficMirrorNetworkServiceAmazonDns TrafficMirrorNetworkService = "amazon-dns"
+)
+
+func (enum TrafficMirrorNetworkService) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TrafficMirrorNetworkService) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TrafficMirrorRuleAction string
+
+// Enum values for TrafficMirrorRuleAction
+const (
+	TrafficMirrorRuleActionAccept TrafficMirrorRuleAction = "accept"
+	TrafficMirrorRuleActionReject TrafficMirrorRuleAction = "reject"
+)
+
+func (enum TrafficMirrorRuleAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TrafficMirrorRuleAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TrafficMirrorSessionField string
+
+// Enum values for TrafficMirrorSessionField
+const (
+	TrafficMirrorSessionFieldPacketLength     TrafficMirrorSessionField = "packet-length"
+	TrafficMirrorSessionFieldDescription      TrafficMirrorSessionField = "description"
+	TrafficMirrorSessionFieldVirtualNetworkId TrafficMirrorSessionField = "virtual-network-id"
+)
+
+func (enum TrafficMirrorSessionField) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TrafficMirrorSessionField) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TrafficMirrorTargetType string
+
+// Enum values for TrafficMirrorTargetType
+const (
+	TrafficMirrorTargetTypeNetworkInterface    TrafficMirrorTargetType = "network-interface"
+	TrafficMirrorTargetTypeNetworkLoadBalancer TrafficMirrorTargetType = "network-load-balancer"
+)
+
+func (enum TrafficMirrorTargetType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TrafficMirrorTargetType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TrafficType string
 
 // Enum values for TrafficType
@@ -2535,8 +2699,9 @@ type TransitGatewayAttachmentResourceType string
 
 // Enum values for TransitGatewayAttachmentResourceType
 const (
-	TransitGatewayAttachmentResourceTypeVpc TransitGatewayAttachmentResourceType = "vpc"
-	TransitGatewayAttachmentResourceTypeVpn TransitGatewayAttachmentResourceType = "vpn"
+	TransitGatewayAttachmentResourceTypeVpc                  TransitGatewayAttachmentResourceType = "vpc"
+	TransitGatewayAttachmentResourceTypeVpn                  TransitGatewayAttachmentResourceType = "vpn"
+	TransitGatewayAttachmentResourceTypeDirectConnectGateway TransitGatewayAttachmentResourceType = "direct-connect-gateway"
 )
 
 func (enum TransitGatewayAttachmentResourceType) MarshalValue() (string, error) {

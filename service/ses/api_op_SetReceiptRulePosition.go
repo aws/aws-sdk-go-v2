@@ -11,7 +11,7 @@ import (
 
 // Represents a request to set the position of a receipt rule in a receipt rule
 // set. You use receipt rule sets to receive email with Amazon SES. For more
-// information, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
+// information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetReceiptRulePositionRequest
 type SetReceiptRulePositionInput struct {
 	_ struct{} `type:"structure"`
@@ -72,7 +72,7 @@ const opSetReceiptRulePosition = "SetReceiptRulePosition"
 // Sets the position of the specified receipt rule in the receipt rule set.
 //
 // For information about managing receipt rules, see the Amazon SES Developer
-// Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rules.html).
+// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rules.html).
 //
 // You can execute this operation no more than once per second.
 //

@@ -45,7 +45,7 @@ const opDescribeUserProfiles = "DescribeUserProfiles"
 //
 // Required Permissions: To use this action, an IAM user must have an attached
 // policy that explicitly grants permissions. For more information about user
-// permissions, see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using DescribeUserProfilesRequest.
 //    req := client.DescribeUserProfilesRequest(params)

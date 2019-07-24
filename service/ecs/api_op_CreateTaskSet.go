@@ -58,7 +58,7 @@ type CreateTaskSetInput struct {
 	Service *string `locationName:"service" type:"string" required:"true"`
 
 	// The details of the service discovery registries to assign to this task set.
-	// For more information, see Service Discovery (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
+	// For more information, see Service Discovery (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
 	ServiceRegistries []ServiceRegistry `locationName:"serviceRegistries" type:"list"`
 
 	// The task definition for the tasks in the task set to use.
@@ -122,7 +122,7 @@ const opCreateTaskSet = "CreateTaskSet"
 //
 // Create a task set in the specified cluster and service. This is used when
 // a service uses the EXTERNAL deployment controller type. For more information,
-// see Amazon ECS Deployment Types (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
+// see Amazon ECS Deployment Types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
 // in the Amazon Elastic Container Service Developer Guide.
 //
 //    // Example sending a request using CreateTaskSetRequest.

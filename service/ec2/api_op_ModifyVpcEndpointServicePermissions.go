@@ -71,7 +71,7 @@ const opModifyVpcEndpointServicePermissions = "ModifyVpcEndpointServicePermissio
 // ModifyVpcEndpointServicePermissionsRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Modifies the permissions for your VPC endpoint service (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/endpoint-service.html).
+// Modifies the permissions for your VPC endpoint service (https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html).
 // You can add or remove permissions for service consumers (IAM users, IAM roles,
 // and AWS accounts) to connect to your endpoint service.
 //

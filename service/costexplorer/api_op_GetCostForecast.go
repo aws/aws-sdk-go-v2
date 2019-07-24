@@ -31,15 +31,15 @@ type GetCostForecastInput struct {
 	//
 	// Valid values for a GetCostForecast call are the following:
 	//
-	//    * AmortizedCost
+	//    * AMORTIZED_COST
 	//
-	//    * BlendedCost
+	//    * BLENDED_COST
 	//
-	//    * NetAmortizedCost
+	//    * NET_AMORTIZED_COST
 	//
-	//    * NetUnblendedCost
+	//    * NET_UNBLENDED_COST
 	//
-	//    * UnblendedCost
+	//    * UNBLENDED_COST
 	//
 	// Metric is a required field
 	Metric Metric `type:"string" required:"true" enum:"true"`

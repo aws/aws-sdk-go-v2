@@ -24,8 +24,10 @@ type AcceptDirectConnectGatewayAssociationProposalInput struct {
 	// DirectConnectGatewayId is a required field
 	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string" required:"true"`
 
-	// Overrides the existing Amazon VPC prefixes advertised to the Direct Connect
-	// gateway.
+	// Overrides the Amazon VPC prefixes advertised to the Direct Connect gateway.
+	//
+	// For information about how to set the prefixes, see Allowed Prefixes (https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes)
+	// in the AWS Direct Connect User Guide.
 	OverrideAllowedPrefixesToDirectConnectGateway []RouteFilterPrefix `locationName:"overrideAllowedPrefixesToDirectConnectGateway" type:"list"`
 
 	// The ID of the request proposal.

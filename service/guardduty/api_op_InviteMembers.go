@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// InviteMembers request body.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InviteMembersRequest
 type InviteMembersInput struct {
 	_ struct{} `type:"structure"`
@@ -19,10 +18,13 @@ type InviteMembersInput struct {
 	// as members.
 	//
 	// AccountIds is a required field
-	AccountIds []string `locationName:"accountIds" type:"list" required:"true"`
+	AccountIds []string `locationName:"accountIds" min:"1" type:"list" required:"true"`
 
+	// The unique ID of the detector of the GuardDuty account with which you want
+	// to invite members.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
 	// A boolean value that specifies whether you want to disable email notification
 	// to the accounts that you’re inviting to GuardDuty as members.
@@ -45,9 +47,15 @@ func (s *InviteMembersInput) Validate() error {
 	if s.AccountIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountIds"))
 	}
+	if s.AccountIds != nil && len(s.AccountIds) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AccountIds", 1))
+	}
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -93,14 +101,15 @@ func (s InviteMembersInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// InviteMembers response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InviteMembersResponse
 type InviteMembersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of objects containing the unprocessed account and a result string
 	// explaining why it was unprocessed.
-	UnprocessedAccounts []UnprocessedAccount `locationName:"unprocessedAccounts" type:"list"`
+	//
+	// UnprocessedAccounts is a required field
+	UnprocessedAccounts []UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`
 }
 
 // String returns the string representation

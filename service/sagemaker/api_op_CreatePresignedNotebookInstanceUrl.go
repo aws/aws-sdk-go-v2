@@ -68,11 +68,10 @@ const opCreatePresignedNotebookInstanceUrl = "CreatePresignedNotebookInstanceUrl
 // home page from the notebook instance. The console uses this API to get the
 // URL and show the page.
 //
-// You can restrict access to this API and to the URL that it returns to a list
-// of IP addresses that you specify. To restrict access, attach an IAM policy
-// that denies access to this API unless the call comes from an IP address in
-// the specified list to every AWS Identity and Access Management user, group,
-// or role used to access the notebook instance. Use the NotIpAddress condition
+// IAM authorization policies for this API are also enforced for every HTTP
+// request and WebSocket frame that attempts to connect to the notebook instance.For
+// example, you can restrict access to this API and to the URL that it returns
+// to a list of IP addresses that you specify. Use the NotIpAddress condition
 // operator and the aws:SourceIP condition context key to specify the list of
 // IP addresses that you want to have access to the notebook instance. For more
 // information, see Limit Access to a Notebook Instance by IP Address (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-ip-filter.html).

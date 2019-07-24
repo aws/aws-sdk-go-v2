@@ -13,6 +13,10 @@ import (
 type DescribeRegionsInput struct {
 	_ struct{} `type:"structure"`
 
+	// Indicates whether to display all Regions, including Regions that are disabled
+	// for your account.
+	AllRegions *bool `type:"boolean"`
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
 	// the required permissions, the error response is DryRunOperation. Otherwise,
@@ -26,7 +30,8 @@ type DescribeRegionsInput struct {
 	//    * region-name - The name of the Region (for example, us-east-1).
 	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
-	// The names of the Regions.
+	// The names of the Regions. You can specify any Regions, whether they are enabled
+	// and disabled for your account.
 	RegionNames []string `locationName:"RegionName" locationNameList:"RegionName" type:"list"`
 }
 
@@ -53,14 +58,14 @@ const opDescribeRegions = "DescribeRegions"
 // DescribeRegionsRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Describes the Regions that are currently available to you. The API returns
-// a list of all the Regions, including Regions that are disabled for your account.
-// For information about enabling Regions for your account, see Enabling and
-// Disabling Regions (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-account-payment.html#manage-account-payment-enable-disable-regions)
-// in the AWS Billing and Cost Management User Guide.
+// Describes the Regions that are enabled for your account, or all Regions.
 //
 // For a list of the Regions supported by Amazon EC2, see Regions and Endpoints
 // (https://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region).
+//
+// For information about enabling and disabling Regions for your account, see
+// Managing AWS Regions (https://docs.aws.amazon.com/general/latest/gr/rande-manage.html)
+// in the AWS General Reference.
 //
 //    // Example sending a request using DescribeRegionsRequest.
 //    req := client.DescribeRegionsRequest(params)

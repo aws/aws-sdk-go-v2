@@ -9,12 +9,13 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
+// Removes one or more tags from an AWS DMS resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RemoveTagsFromResourceMessage
 type RemoveTagsFromResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// >The Amazon Resource Name (ARN) of the AWS DMS resource the tag is to be
-	// removed from.
+	// An AWS DMS resource from which you want to remove tag(s). The value for this
+	// parameter is an Amazon Resource Name (ARN).
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `type:"string" required:"true"`

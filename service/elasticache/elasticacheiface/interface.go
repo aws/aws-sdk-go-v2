@@ -68,6 +68,10 @@ type ClientAPI interface {
 
 	AuthorizeCacheSecurityGroupIngressRequest(*elasticache.AuthorizeCacheSecurityGroupIngressInput) elasticache.AuthorizeCacheSecurityGroupIngressRequest
 
+	BatchApplyUpdateActionRequest(*elasticache.BatchApplyUpdateActionInput) elasticache.BatchApplyUpdateActionRequest
+
+	BatchStopUpdateActionRequest(*elasticache.BatchStopUpdateActionInput) elasticache.BatchStopUpdateActionRequest
+
 	CopySnapshotRequest(*elasticache.CopySnapshotInput) elasticache.CopySnapshotRequest
 
 	CreateCacheClusterRequest(*elasticache.CreateCacheClusterInput) elasticache.CreateCacheClusterRequest
@@ -118,7 +122,11 @@ type ClientAPI interface {
 
 	DescribeReservedCacheNodesOfferingsRequest(*elasticache.DescribeReservedCacheNodesOfferingsInput) elasticache.DescribeReservedCacheNodesOfferingsRequest
 
+	DescribeServiceUpdatesRequest(*elasticache.DescribeServiceUpdatesInput) elasticache.DescribeServiceUpdatesRequest
+
 	DescribeSnapshotsRequest(*elasticache.DescribeSnapshotsInput) elasticache.DescribeSnapshotsRequest
+
+	DescribeUpdateActionsRequest(*elasticache.DescribeUpdateActionsInput) elasticache.DescribeUpdateActionsRequest
 
 	IncreaseReplicaCountRequest(*elasticache.IncreaseReplicaCountInput) elasticache.IncreaseReplicaCountRequest
 

@@ -29,12 +29,12 @@ type CreateReplicationSubnetGroupInput struct {
 	// ReplicationSubnetGroupIdentifier is a required field
 	ReplicationSubnetGroupIdentifier *string `type:"string" required:"true"`
 
-	// The EC2 subnet IDs for the subnet group.
+	// One or more subnet IDs to be assigned to the subnet group.
 	//
 	// SubnetIds is a required field
 	SubnetIds []string `type:"list" required:"true"`
 
-	// The tag to be assigned to the subnet group.
+	// One or more tags to be assigned to the subnet group.
 	Tags []Tag `type:"list"`
 }
 

@@ -69,13 +69,19 @@ type ClientAPI interface {
 
 	DescribeClusterRequest(*kafka.DescribeClusterInput) kafka.DescribeClusterRequest
 
+	DescribeClusterOperationRequest(*kafka.DescribeClusterOperationInput) kafka.DescribeClusterOperationRequest
+
 	DescribeConfigurationRequest(*kafka.DescribeConfigurationInput) kafka.DescribeConfigurationRequest
 
 	DescribeConfigurationRevisionRequest(*kafka.DescribeConfigurationRevisionInput) kafka.DescribeConfigurationRevisionRequest
 
 	GetBootstrapBrokersRequest(*kafka.GetBootstrapBrokersInput) kafka.GetBootstrapBrokersRequest
 
+	ListClusterOperationsRequest(*kafka.ListClusterOperationsInput) kafka.ListClusterOperationsRequest
+
 	ListClustersRequest(*kafka.ListClustersInput) kafka.ListClustersRequest
+
+	ListConfigurationRevisionsRequest(*kafka.ListConfigurationRevisionsInput) kafka.ListConfigurationRevisionsRequest
 
 	ListConfigurationsRequest(*kafka.ListConfigurationsInput) kafka.ListConfigurationsRequest
 
@@ -86,6 +92,10 @@ type ClientAPI interface {
 	TagResourceRequest(*kafka.TagResourceInput) kafka.TagResourceRequest
 
 	UntagResourceRequest(*kafka.UntagResourceInput) kafka.UntagResourceRequest
+
+	UpdateBrokerStorageRequest(*kafka.UpdateBrokerStorageInput) kafka.UpdateBrokerStorageRequest
+
+	UpdateClusterConfigurationRequest(*kafka.UpdateClusterConfigurationInput) kafka.UpdateClusterConfigurationRequest
 }
 
 var _ ClientAPI = (*kafka.Client)(nil)

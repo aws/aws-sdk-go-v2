@@ -21,7 +21,7 @@ import (
 func (c *Client) WaitUntilDistributionDeployed(ctx context.Context, input *GetDistributionInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDistributionDeployed",
-		MaxAttempts: 25,
+		MaxAttempts: 35,
 		Delay:       aws.ConstantWaiterDelay(60 * time.Second),
 		Acceptors: []aws.WaiterAcceptor{
 			{

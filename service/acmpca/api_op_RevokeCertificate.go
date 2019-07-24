@@ -26,15 +26,15 @@ type RevokeCertificateInput struct {
 	// Serial number of the certificate to be revoked. This must be in hexadecimal
 	// format. You can retrieve the serial number by calling GetCertificate with
 	// the Amazon Resource Name (ARN) of the certificate you want and the ARN of
-	// your private CA. The GetCertificate operation retrieves the certificate in
-	// the PEM format. You can use the following OpenSSL command to list the certificate
+	// your private CA. The GetCertificate action retrieves the certificate in the
+	// PEM format. You can use the following OpenSSL command to list the certificate
 	// in text format and copy the hexadecimal serial number.
 	//
 	// openssl x509 -in file_path -text -noout
 	//
 	// You can also copy the serial number from the console or use the DescribeCertificate
 	// (https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html)
-	// operation in the AWS Certificate Manager API Reference.
+	// action in the AWS Certificate Manager API Reference.
 	//
 	// CertificateSerial is a required field
 	CertificateSerial *string `type:"string" required:"true"`
@@ -89,13 +89,15 @@ const opRevokeCertificate = "RevokeCertificate"
 // RevokeCertificateRequest returns a request value for making API operation for
 // AWS Certificate Manager Private Certificate Authority.
 //
-// Revokes a certificate that you issued by calling the IssueCertificate operation.
-// If you enable a certificate revocation list (CRL) when you create or update
-// your private CA, information about the revoked certificates will be included
-// in the CRL. ACM PCA writes the CRL to an S3 bucket that you specify. For
-// more information about revocation, see the CrlConfiguration structure. ACM
-// PCA also writes revocation information to the audit report. For more information,
+// Revokes a certificate that was issued inside ACM Private CA. If you enable
+// a certificate revocation list (CRL) when you create or update your private
+// CA, information about the revoked certificates will be included in the CRL.
+// ACM Private CA writes the CRL to an S3 bucket that you specify. For more
+// information about revocation, see the CrlConfiguration structure. ACM Private
+// CA also writes revocation information to the audit report. For more information,
 // see CreateCertificateAuthorityAuditReport.
+//
+// You cannot revoke a root CA self-signed certificate.
 //
 //    // Example sending a request using RevokeCertificateRequest.
 //    req := client.RevokeCertificateRequest(params)

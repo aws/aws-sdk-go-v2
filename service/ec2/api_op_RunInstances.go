@@ -17,10 +17,7 @@ type RunInstancesInput struct {
 	// Reserved.
 	AdditionalInfo *string `locationName:"additionalInfo" type:"string"`
 
-	// The block device mapping entries. You can't specify both a snapshot ID and
-	// an encryption value. This is because only blank volumes can be encrypted
-	// on creation. If a snapshot is the basis for a volume, it is not blank and
-	// its encryption status is used for the volume encryption status.
+	// The block device mapping entries.
 	BlockDeviceMappings []BlockDeviceMapping `locationName:"BlockDeviceMapping" locationNameList:"BlockDeviceMapping" type:"list"`
 
 	// Information about the Capacity Reservation targeting option. If you do not
@@ -183,7 +180,8 @@ type RunInstancesInput struct {
 	Monitoring *RunInstancesMonitoringEnabled `type:"structure"`
 
 	// The network interfaces to associate with the instance. If you specify a network
-	// interface, you must specify any security groups as part of the network interface.
+	// interface, you must specify any security groups and subnets as part of the
+	// network interface.
 	NetworkInterfaces []InstanceNetworkInterfaceSpecification `locationName:"networkInterface" locationNameList:"item" type:"list"`
 
 	// The placement for the instance.
@@ -229,8 +227,8 @@ type RunInstancesInput struct {
 
 	// [EC2-VPC] The ID of the subnet to launch the instance into.
 	//
-	// You cannot specify this option and the network interfaces option in the same
-	// request.
+	// If you specify a network interface, you must specify any subnets as part
+	// of the network interface.
 	SubnetId *string `type:"string"`
 
 	// The tags to apply to the resources during launch. You can only tag instances

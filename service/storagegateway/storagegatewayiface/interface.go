@@ -201,6 +201,8 @@ type ClientAPI interface {
 
 	UpdateSMBFileShareRequest(*storagegateway.UpdateSMBFileShareInput) storagegateway.UpdateSMBFileShareRequest
 
+	UpdateSMBSecurityStrategyRequest(*storagegateway.UpdateSMBSecurityStrategyInput) storagegateway.UpdateSMBSecurityStrategyRequest
+
 	UpdateSnapshotScheduleRequest(*storagegateway.UpdateSnapshotScheduleInput) storagegateway.UpdateSnapshotScheduleRequest
 
 	UpdateVTLDeviceTypeRequest(*storagegateway.UpdateVTLDeviceTypeInput) storagegateway.UpdateVTLDeviceTypeRequest

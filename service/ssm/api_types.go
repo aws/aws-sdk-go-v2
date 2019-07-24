@@ -2147,7 +2147,7 @@ type InstanceAssociationStatusInfo struct {
 	// Detailed status information about the instance association.
 	DetailedStatus *string `type:"string"`
 
-	// The association document verions.
+	// The association document versions.
 	DocumentVersion *string `type:"string"`
 
 	// An error code returned by the request to create the association.
@@ -2565,7 +2565,7 @@ type InventoryDeletionStatusItem struct {
 	DeletionStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// Information about the delete operation. For more information about this summary,
-	// see Understanding the Delete Inventory Summary (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-delete.html#sysman-inventory-delete-summary)
+	// see Understanding the Delete Inventory Summary (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete)
 	// in the AWS Systems Manager User Guide.
 	DeletionSummary *InventoryDeletionSummary `type:"structure"`
 
@@ -2919,7 +2919,7 @@ func (s InventoryResultItem) String() string {
 // LoggingInfo has been deprecated. To specify an S3 bucket to contain logs,
 // instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters
 // structure. For information about how Systems Manager handles these options
-// for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.
+// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/LoggingInfo
 type LoggingInfo struct {
 	_ struct{} `type:"structure"`
@@ -2983,12 +2983,12 @@ type MaintenanceWindowAutomationParameters struct {
 	// LoggingInfo has been deprecated. To specify an S3 bucket to contain logs,
 	// instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options
-	// for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.
+	// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 	//
 	// TaskParameters has been deprecated. To specify parameters to pass to a task
 	// when it runs, instead use the Parameters option in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options
-	// for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.
+	// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 	//
 	// For AUTOMATION task types, Systems Manager ignores any values specified for
 	// these parameters.
@@ -3013,7 +3013,7 @@ func (s *MaintenanceWindowAutomationParameters) Validate() error {
 	return nil
 }
 
-// Describes the information about an execution of a Maintenance Window.
+// Describes the information about an execution of a maintenance window.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowExecution
 type MaintenanceWindowExecution struct {
 	_ struct{} `type:"structure"`
@@ -3030,10 +3030,10 @@ type MaintenanceWindowExecution struct {
 	// The details explaining the Status. Only available for certain status values.
 	StatusDetails *string `type:"string"`
 
-	// The ID of the Maintenance Window execution.
+	// The ID of the maintenance window execution.
 	WindowExecutionId *string `min:"36" type:"string"`
 
-	// The ID of the Maintenance Window.
+	// The ID of the maintenance window.
 	WindowId *string `min:"20" type:"string"`
 }
 
@@ -3042,7 +3042,7 @@ func (s MaintenanceWindowExecution) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Information about a task execution performed as part of a Maintenance Window
+// Information about a task execution performed as part of a maintenance window
 // execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowExecutionTaskIdentity
 type MaintenanceWindowExecutionTaskIdentity struct {
@@ -3064,13 +3064,13 @@ type MaintenanceWindowExecutionTaskIdentity struct {
 	// The ARN of the task that ran.
 	TaskArn *string `min:"1" type:"string"`
 
-	// The ID of the specific task execution in the Maintenance Window execution.
+	// The ID of the specific task execution in the maintenance window execution.
 	TaskExecutionId *string `min:"36" type:"string"`
 
 	// The type of task that ran.
 	TaskType MaintenanceWindowTaskType `type:"string" enum:"true"`
 
-	// The ID of the Maintenance Window execution that ran the task.
+	// The ID of the maintenance window execution that ran the task.
 	WindowExecutionId *string `min:"36" type:"string"`
 }
 
@@ -3080,7 +3080,7 @@ func (s MaintenanceWindowExecutionTaskIdentity) String() string {
 }
 
 // Describes the information about a task invocation for a particular target
-// as part of a task execution performed as part of a Maintenance Window execution.
+// as part of a task execution performed as part of a maintenance window execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowExecutionTaskInvocationIdentity
 type MaintenanceWindowExecutionTaskInvocationIdentity struct {
 	_ struct{} `type:"structure"`
@@ -3096,7 +3096,7 @@ type MaintenanceWindowExecutionTaskInvocationIdentity struct {
 	InvocationId *string `min:"36" type:"string"`
 
 	// User-provided value that was specified when the target was registered with
-	// the Maintenance Window. This was also included in any CloudWatch events raised
+	// the maintenance window. This was also included in any CloudWatch events raised
 	// during the task invocation.
 	OwnerInformation *string `min:"1" type:"string"`
 
@@ -3113,16 +3113,16 @@ type MaintenanceWindowExecutionTaskInvocationIdentity struct {
 	// for certain Status values.
 	StatusDetails *string `type:"string"`
 
-	// The ID of the specific task execution in the Maintenance Window execution.
+	// The ID of the specific task execution in the maintenance window execution.
 	TaskExecutionId *string `min:"36" type:"string"`
 
 	// The task type.
 	TaskType MaintenanceWindowTaskType `type:"string" enum:"true"`
 
-	// The ID of the Maintenance Window execution that ran the task.
+	// The ID of the maintenance window execution that ran the task.
 	WindowExecutionId *string `min:"36" type:"string"`
 
-	// The ID of the target definition in this Maintenance Window the invocation
+	// The ID of the target definition in this maintenance window the invocation
 	// was performed for.
 	WindowTargetId *string `type:"string"`
 }
@@ -3162,47 +3162,47 @@ func (s *MaintenanceWindowFilter) Validate() error {
 	return nil
 }
 
-// Information about the Maintenance Window.
+// Information about the maintenance window.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowIdentity
 type MaintenanceWindowIdentity struct {
 	_ struct{} `type:"structure"`
 
-	// The number of hours before the end of the Maintenance Window that Systems
+	// The number of hours before the end of the maintenance window that Systems
 	// Manager stops scheduling new tasks for execution.
 	Cutoff *int64 `type:"integer"`
 
-	// A description of the Maintenance Window.
+	// A description of the maintenance window.
 	Description *string `min:"1" type:"string"`
 
-	// The duration of the Maintenance Window in hours.
+	// The duration of the maintenance window in hours.
 	Duration *int64 `min:"1" type:"integer"`
 
-	// Whether the Maintenance Window is enabled.
+	// Indicates whether the maintenance window is enabled.
 	Enabled *bool `type:"boolean"`
 
-	// The date and time, in ISO-8601 Extended format, for when the Maintenance
-	// Window is scheduled to become inactive.
+	// The date and time, in ISO-8601 Extended format, for when the maintenance
+	// window is scheduled to become inactive.
 	EndDate *string `type:"string"`
 
-	// The name of the Maintenance Window.
+	// The name of the maintenance window.
 	Name *string `min:"3" type:"string"`
 
-	// The next time the Maintenance Window will actually run, taking into account
-	// any specified times for the Maintenance Window to become active or inactive.
+	// The next time the maintenance window will actually run, taking into account
+	// any specified times for the maintenance window to become active or inactive.
 	NextExecutionTime *string `type:"string"`
 
-	// The schedule of the Maintenance Window in the form of a cron or rate expression.
+	// The schedule of the maintenance window in the form of a cron or rate expression.
 	Schedule *string `min:"1" type:"string"`
 
-	// The time zone that the scheduled Maintenance Window executions are based
+	// The time zone that the scheduled maintenance window executions are based
 	// on, in Internet Assigned Numbers Authority (IANA) format.
 	ScheduleTimezone *string `type:"string"`
 
-	// The date and time, in ISO-8601 Extended format, for when the Maintenance
-	// Window is scheduled to become active.
+	// The date and time, in ISO-8601 Extended format, for when the maintenance
+	// window is scheduled to become active.
 	StartDate *string `type:"string"`
 
-	// The ID of the Maintenance Window.
+	// The ID of the maintenance window.
 	WindowId *string `min:"20" type:"string"`
 }
 
@@ -3211,15 +3211,15 @@ func (s MaintenanceWindowIdentity) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The Maintenance Window to which the specified target belongs.
+// The maintenance window to which the specified target belongs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowIdentityForTarget
 type MaintenanceWindowIdentityForTarget struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the Maintenance Window.
+	// The name of the maintenance window.
 	Name *string `min:"3" type:"string"`
 
-	// The ID of the Maintenance Window.
+	// The ID of the maintenance window.
 	WindowId *string `min:"20" type:"string"`
 }
 
@@ -3236,12 +3236,12 @@ func (s MaintenanceWindowIdentityForTarget) String() string {
 // LoggingInfo has been deprecated. To specify an S3 bucket to contain logs,
 // instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters
 // structure. For information about how Systems Manager handles these options
-// for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.
+// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 //
 // TaskParameters has been deprecated. To specify parameters to pass to a task
 // when it runs, instead use the Parameters option in the TaskInvocationParameters
 // structure. For information about how Systems Manager handles these options
-// for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.
+// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 //
 // For Lambda tasks, Systems Manager ignores any values specified for TaskParameters
 // and LoggingInfo.
@@ -3295,12 +3295,12 @@ func (s *MaintenanceWindowLambdaParameters) Validate() error {
 // LoggingInfo has been deprecated. To specify an S3 bucket to contain logs,
 // instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters
 // structure. For information about how Systems Manager handles these options
-// for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.
+// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 //
 // TaskParameters has been deprecated. To specify parameters to pass to a task
 // when it runs, instead use the Parameters option in the TaskInvocationParameters
 // structure. For information about how Systems Manager handles these options
-// for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.
+// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 //
 // For Run Command tasks, Systems Manager uses specified values for TaskParameters
 // and LoggingInfo only if no values are specified for TaskInvocationParameters.
@@ -3308,7 +3308,7 @@ func (s *MaintenanceWindowLambdaParameters) Validate() error {
 type MaintenanceWindowRunCommandParameters struct {
 	_ struct{} `type:"structure"`
 
-	// Information about the command(s) to run.
+	// Information about the commands to run.
 	Comment *string `type:"string"`
 
 	// The SHA-256 or SHA-1 hash created by the system when the document was created.
@@ -3331,7 +3331,8 @@ type MaintenanceWindowRunCommandParameters struct {
 	// The parameters for the RUN_COMMAND task execution.
 	Parameters map[string][]string `type:"map"`
 
-	// The IAM service role to assume during task execution.
+	// The ARN of the IAM service role to use to publish Amazon Simple Notification
+	// Service (Amazon SNS) notifications for maintenance window Run Command tasks.
 	ServiceRoleArn *string `type:"string"`
 
 	// If this time is reached and the command has not already started running,
@@ -3360,7 +3361,7 @@ func (s *MaintenanceWindowRunCommandParameters) Validate() error {
 	return nil
 }
 
-// The parameters for a STEP_FUNCTION task.
+// The parameters for a STEP_FUNCTIONS task.
 //
 // For information about specifying and updating task parameters, see RegisterTaskWithMaintenanceWindow
 // and UpdateMaintenanceWindowTask.
@@ -3368,12 +3369,12 @@ func (s *MaintenanceWindowRunCommandParameters) Validate() error {
 // LoggingInfo has been deprecated. To specify an S3 bucket to contain logs,
 // instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters
 // structure. For information about how Systems Manager handles these options
-// for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.
+// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 //
 // TaskParameters has been deprecated. To specify parameters to pass to a task
 // when it runs, instead use the Parameters option in the TaskInvocationParameters
 // structure. For information about how Systems Manager handles these options
-// for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.
+// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 //
 // For Step Functions tasks, Systems Manager ignores any values specified for
 // TaskParameters and LoggingInfo.
@@ -3381,10 +3382,10 @@ func (s *MaintenanceWindowRunCommandParameters) Validate() error {
 type MaintenanceWindowStepFunctionsParameters struct {
 	_ struct{} `type:"structure"`
 
-	// The inputs for the STEP_FUNCTION task.
+	// The inputs for the STEP_FUNCTIONS task.
 	Input *string `type:"string"`
 
-	// The name of the STEP_FUNCTION task.
+	// The name of the STEP_FUNCTIONS task.
 	Name *string `min:"1" type:"string"`
 }
 
@@ -3406,7 +3407,7 @@ func (s *MaintenanceWindowStepFunctionsParameters) Validate() error {
 	return nil
 }
 
-// The target registered with the Maintenance Window.
+// The target registered with the maintenance window.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowTarget
 type MaintenanceWindowTarget struct {
 	_ struct{} `type:"structure"`
@@ -3414,14 +3415,14 @@ type MaintenanceWindowTarget struct {
 	// A description for the target.
 	Description *string `min:"1" type:"string"`
 
-	// The target name.
+	// The name for the maintenance window target.
 	Name *string `min:"3" type:"string"`
 
 	// A user-provided value that will be included in any CloudWatch events that
-	// are raised while running tasks for these targets in this Maintenance Window.
+	// are raised while running tasks for these targets in this maintenance window.
 	OwnerInformation *string `min:"1" type:"string"`
 
-	// The type of target that is being registered with the Maintenance Window.
+	// The type of target that is being registered with the maintenance window.
 	ResourceType MaintenanceWindowResourceType `type:"string" enum:"true"`
 
 	// The targets, either instances or tags.
@@ -3435,7 +3436,7 @@ type MaintenanceWindowTarget struct {
 	// Key=<tag name>,Values=<tag value>.
 	Targets []Target `type:"list"`
 
-	// The ID of the Maintenance Window to register the target with.
+	// The ID of the maintenance window to register the target with.
 	WindowId *string `min:"20" type:"string"`
 
 	// The ID of the target.
@@ -3447,7 +3448,7 @@ func (s MaintenanceWindowTarget) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Information about a task defined for a Maintenance Window.
+// Information about a task defined for a maintenance window.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowTask
 type MaintenanceWindowTask struct {
 	_ struct{} `type:"structure"`
@@ -3460,7 +3461,7 @@ type MaintenanceWindowTask struct {
 	// LoggingInfo has been deprecated. To specify an S3 bucket to contain logs,
 	// instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options
-	// for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.
+	// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 	LoggingInfo *LoggingInfo `type:"structure"`
 
 	// The maximum number of targets this task can be run for, in parallel.
@@ -3472,12 +3473,13 @@ type MaintenanceWindowTask struct {
 	// The task name.
 	Name *string `min:"3" type:"string"`
 
-	// The priority of the task in the Maintenance Window. The lower the number,
+	// The priority of the task in the maintenance window. The lower the number,
 	// the higher the priority. Tasks that have the same priority are scheduled
 	// in parallel.
 	Priority *int64 `type:"integer"`
 
-	// The role that should be assumed when running the task.
+	// The ARN of the IAM service role to use to publish Amazon Simple Notification
+	// Service (Amazon SNS) notifications for maintenance window Run Command tasks.
 	ServiceRoleArn *string `type:"string"`
 
 	// The targets (either instances or tags). Instances are specified using Key=instanceids,Values=<instanceid1>,<instanceid2>.
@@ -3486,8 +3488,8 @@ type MaintenanceWindowTask struct {
 
 	// The resource that the task uses during execution. For RUN_COMMAND and AUTOMATION
 	// task types, TaskArn is the Systems Manager document name or ARN. For LAMBDA
-	// tasks, it's the function name or ARN. For STEP_FUNCTION tasks, it's the state
-	// machine ARN.
+	// tasks, it's the function name or ARN. For STEP_FUNCTIONS tasks, it's the
+	// state machine ARN.
 	TaskArn *string `min:"1" type:"string"`
 
 	// The parameters that should be passed to the task when it is run.
@@ -3495,14 +3497,14 @@ type MaintenanceWindowTask struct {
 	// TaskParameters has been deprecated. To specify parameters to pass to a task
 	// when it runs, instead use the Parameters option in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options
-	// for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.
+	// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map"`
 
 	// The type of task. The type can be one of the following: RUN_COMMAND, AUTOMATION,
-	// LAMBDA, or STEP_FUNCTION.
+	// LAMBDA, or STEP_FUNCTIONS.
 	Type MaintenanceWindowTaskType `type:"string" enum:"true"`
 
-	// The ID of the Maintenance Window where the task is registered.
+	// The ID of the maintenance window where the task is registered.
 	WindowId *string `min:"20" type:"string"`
 
 	// The task ID.
@@ -3528,7 +3530,7 @@ type MaintenanceWindowTaskInvocationParameters struct {
 	// The parameters for a RUN_COMMAND task type.
 	RunCommand *MaintenanceWindowRunCommandParameters `type:"structure"`
 
-	// The parameters for a STEP_FUNCTION task type.
+	// The parameters for a STEP_FUNCTIONS task type.
 	StepFunctions *MaintenanceWindowStepFunctionsParameters `type:"structure"`
 }
 
@@ -3605,14 +3607,15 @@ func (s NonCompliantSummary) String() string {
 type NotificationConfig struct {
 	_ struct{} `type:"structure"`
 
-	// An Amazon Resource Name (ARN) for a Simple Notification Service (SNS) topic.
-	// Run Command pushes notifications about command status changes to this topic.
+	// An Amazon Resource Name (ARN) for an Amazon Simple Notification Service (Amazon
+	// SNS) topic. Run Command pushes notifications about command status changes
+	// to this topic.
 	NotificationArn *string `type:"string"`
 
 	// The different events for which you can receive notifications. These events
 	// include the following: All (events), InProgress, Success, TimedOut, Cancelled,
 	// Failed. To learn more about these events, see Configuring Amazon SNS Notifications
-	// for Run Command (http://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html)
+	// for AWS Systems Manager (http://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-sns-notifications.html)
 	// in the AWS Systems Manager User Guide.
 	NotificationEvents []NotificationEvent `type:"list"`
 
@@ -3624,6 +3627,358 @@ type NotificationConfig struct {
 
 // String returns the string representation
 func (s NotificationConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// One or more aggregators for viewing counts of OpsItems using different dimensions
+// such as Source, CreatedTime, or Source and CreatedTime, to name a few.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsAggregator
+type OpsAggregator struct {
+	_ struct{} `type:"structure"`
+
+	// Either a Range or Count aggregator for limiting an OpsItem summary.
+	AggregatorType *string `min:"1" type:"string"`
+
+	// A nested aggregator for viewing counts of OpsItems.
+	Aggregators []OpsAggregator `min:"1" type:"list"`
+
+	// The name of an OpsItem attribute on which to limit the count of OpsItems.
+	AttributeName *string `type:"string"`
+
+	// The aggregator filters.
+	Filters []OpsFilter `min:"1" type:"list"`
+
+	// The data type name to use for viewing counts of OpsItems.
+	TypeName *string `min:"1" type:"string"`
+
+	// The aggregator value.
+	Values map[string]string `type:"map"`
+}
+
+// String returns the string representation
+func (s OpsAggregator) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OpsAggregator) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "OpsAggregator"}
+	if s.AggregatorType != nil && len(*s.AggregatorType) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AggregatorType", 1))
+	}
+	if s.Aggregators != nil && len(s.Aggregators) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Aggregators", 1))
+	}
+	if s.Filters != nil && len(s.Filters) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
+	}
+	if s.TypeName != nil && len(*s.TypeName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TypeName", 1))
+	}
+	if s.Aggregators != nil {
+		for i, v := range s.Aggregators {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Aggregators", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Filters != nil {
+		for i, v := range s.Filters {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The result of the query.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsEntity
+type OpsEntity struct {
+	_ struct{} `type:"structure"`
+
+	// The data returned by the query.
+	Data map[string]OpsEntityItem `type:"map"`
+
+	// The query ID.
+	Id *string `type:"string"`
+}
+
+// String returns the string representation
+func (s OpsEntity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The OpsItem summaries result item.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsEntityItem
+type OpsEntityItem struct {
+	_ struct{} `type:"structure"`
+
+	// The detailed data content for an OpsItem summaries result item.
+	Content []map[string]string `type:"list"`
+}
+
+// String returns the string representation
+func (s OpsEntityItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A filter for viewing OpsItem summaries.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsFilter
+type OpsFilter struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the filter.
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
+
+	// The type of filter.
+	Type OpsFilterOperatorType `type:"string" enum:"true"`
+
+	// The filter value.
+	//
+	// Values is a required field
+	Values []string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s OpsFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OpsFilter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "OpsFilter"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if s.Values == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
+	}
+	if s.Values != nil && len(s.Values) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Values", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Operations engineers and IT professionals use OpsCenter to view, investigate,
+// and remediate operational issues impacting the performance and health of
+// their AWS resources. For more information, see AWS Systems Manager OpsCenter
+// (http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html)
+// in the AWS Systems Manager User Guide.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItem
+type OpsItem struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the AWS account that created the OpsItem.
+	CreatedBy *string `type:"string"`
+
+	// The date and time the OpsItem was created.
+	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The OpsItem description.
+	Description *string `min:"1" type:"string"`
+
+	// The ARN of the AWS account that last updated the OpsItem.
+	LastModifiedBy *string `type:"string"`
+
+	// The date and time the OpsItem was last updated.
+	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The Amazon Resource Name (ARN) of an SNS topic where notifications are sent
+	// when this OpsItem is edited or changed.
+	Notifications []OpsItemNotification `type:"list"`
+
+	// Operational data is custom data that provides useful reference details about
+	// the OpsItem. For example, you can specify log files, error strings, license
+	// keys, troubleshooting tips, or other relevant data. You enter operational
+	// data as key-value pairs. The key has a maximum length of 128 characters.
+	// The value has a maximum size of 20 KB.
+	//
+	// Operational data keys can't begin with the following: amazon, aws, amzn,
+	// ssm, /amazon, /aws, /amzn, /ssm.
+	//
+	// You can choose to make the data searchable by other users in the account
+	// or you can restrict search access. Searchable data means that all users with
+	// access to the OpsItem Overview page (as provided by the DescribeOpsItems
+	// API action) can view and search on the specified data. Operational data that
+	// is not searchable is only viewable by users who have access to the OpsItem
+	// (as provided by the GetOpsItem API action).
+	//
+	// Use the /aws/resources key in OperationalData to specify a related resource
+	// in the request. Use the /aws/automations key in OperationalData to associate
+	// an Automation runbook with the OpsItem. To view AWS CLI example commands
+	// that use these keys, see Creating OpsItems Manually (http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems)
+	// in the AWS Systems Manager User Guide.
+	OperationalData map[string]OpsItemDataValue `type:"map"`
+
+	// The ID of the OpsItem.
+	OpsItemId *string `type:"string"`
+
+	// The importance of this OpsItem in relation to other OpsItems in the system.
+	Priority *int64 `min:"1" type:"integer"`
+
+	// One or more OpsItems that share something in common with the current OpsItem.
+	// For example, related OpsItems can include OpsItems with similar error messages,
+	// impacted resources, or statuses for the impacted resource.
+	RelatedOpsItems []RelatedOpsItem `type:"list"`
+
+	// The origin of the OpsItem, such as Amazon EC2 or AWS Systems Manager. The
+	// impacted resource is a subset of source.
+	Source *string `min:"1" type:"string"`
+
+	// The OpsItem status. Status can be Open, In Progress, or Resolved. For more
+	// information, see Editing OpsItem Details (http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html)
+	// in the AWS Systems Manager User Guide.
+	Status OpsItemStatus `type:"string" enum:"true"`
+
+	// A short heading that describes the nature of the OpsItem and the impacted
+	// resource.
+	Title *string `min:"1" type:"string"`
+
+	// The version of this OpsItem. Each time the OpsItem is edited the version
+	// number increments by one.
+	Version *string `type:"string"`
+}
+
+// String returns the string representation
+func (s OpsItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// An object that defines the value of the key and its type in the OperationalData
+// map.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemDataValue
+type OpsItemDataValue struct {
+	_ struct{} `type:"structure"`
+
+	// The type of key-value pair. Valid types include SearchableString and String.
+	Type OpsItemDataType `type:"string" enum:"true"`
+
+	// The value of the OperationalData key.
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s OpsItemDataValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes an OpsItem filter.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemFilter
+type OpsItemFilter struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the filter.
+	//
+	// Key is a required field
+	Key OpsItemFilterKey `type:"string" required:"true" enum:"true"`
+
+	// The operator used by the filter call.
+	//
+	// Operator is a required field
+	Operator OpsItemFilterOperator `type:"string" required:"true" enum:"true"`
+
+	// The filter value.
+	//
+	// Values is a required field
+	Values []string `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s OpsItemFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OpsItemFilter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "OpsItemFilter"}
+	if len(s.Key) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if len(s.Operator) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Operator"))
+	}
+
+	if s.Values == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// A notification about the OpsItem.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemNotification
+type OpsItemNotification struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of an SNS topic where notifications are sent
+	// when this OpsItem is edited or changed.
+	Arn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s OpsItemNotification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A count of OpsItems.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OpsItemSummary
+type OpsItemSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem.
+	CreatedBy *string `type:"string"`
+
+	// The date and time the OpsItem was created.
+	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem.
+	LastModifiedBy *string `type:"string"`
+
+	// The date and time the OpsItem was last updated.
+	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// Operational data is custom data that provides useful reference details about
+	// the OpsItem.
+	OperationalData map[string]OpsItemDataValue `type:"map"`
+
+	// The ID of the OpsItem.
+	OpsItemId *string `type:"string"`
+
+	// The importance of this OpsItem in relation to other OpsItems in the system.
+	Priority *int64 `min:"1" type:"integer"`
+
+	// The impacted AWS resource.
+	Source *string `min:"1" type:"string"`
+
+	// The OpsItem status. Status can be Open, In Progress, or Resolved.
+	Status OpsItemStatus `type:"string" enum:"true"`
+
+	// A short heading that describes the nature of the OpsItem and the impacted
+	// resource.
+	Title *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s OpsItemSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -3718,6 +4073,9 @@ type ParameterHistory struct {
 	Name *string `min:"1" type:"string"`
 
 	// Information about the policies assigned to a parameter.
+	//
+	// Working with Parameter Policies (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html)
+	// in the AWS Systems Manager User Guide.
 	Policies []ParameterInlinePolicy `type:"list"`
 
 	// The parameter tier.
@@ -3762,7 +4120,7 @@ func (s ParameterInlinePolicy) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Metada includes information like the ARN of the last user and the date/time
+// Metadata includes information like the ARN of the last user and the date/time
 // the parameter was last used.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterMetadata
 type ParameterMetadata struct {
@@ -4381,6 +4739,38 @@ func (s ProgressCounters) String() string {
 	return awsutil.Prettify(s)
 }
 
+// An OpsItems that shares something in common with the current OpsItem. For
+// example, related OpsItems can include OpsItems with similar error messages,
+// impacted resources, or statuses for the impacted resource.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RelatedOpsItem
+type RelatedOpsItem struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of an OpsItem related to the current OpsItem.
+	//
+	// OpsItemId is a required field
+	OpsItemId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RelatedOpsItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RelatedOpsItem) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RelatedOpsItem"}
+
+	if s.OpsItemId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("OpsItemId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Information about targets that resolved during the Automation execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResolvedTargets
 type ResolvedTargets struct {
@@ -4474,7 +4864,7 @@ type ResourceDataSyncS3Destination struct {
 	_ struct{} `type:"structure"`
 
 	// The ARN of an encryption key for a destination in Amazon S3. Must belong
-	// to the same region as the destination Amazon S3 bucket.
+	// to the same Region as the destination Amazon S3 bucket.
 	AWSKMSKeyARN *string `min:"1" type:"string"`
 
 	// The name of the Amazon S3 bucket where the aggregated data is stored.
@@ -4622,19 +5012,19 @@ func (s S3OutputUrl) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Information about a scheduled execution for a Maintenance Window.
+// Information about a scheduled execution for a maintenance window.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ScheduledWindowExecution
 type ScheduledWindowExecution struct {
 	_ struct{} `type:"structure"`
 
-	// The time, in ISO-8601 Extended format, that the Maintenance Window is scheduled
+	// The time, in ISO-8601 Extended format, that the maintenance window is scheduled
 	// to be run.
 	ExecutionTime *string `type:"string"`
 
-	// The name of the Maintenance Window to be run.
+	// The name of the maintenance window to be run.
 	Name *string `min:"3" type:"string"`
 
-	// The ID of the Maintenance Window to be run.
+	// The ID of the maintenance window to be run.
 	WindowId *string `min:"20" type:"string"`
 }
 
@@ -4988,8 +5378,8 @@ func (s *StepExecutionFilter) Validate() error {
 
 // Metadata that you assign to your AWS resources. Tags enable you to categorize
 // your resources in different ways, for example, by purpose, owner, or environment.
-// In Systems Manager, you can apply tags to documents, managed instances, Maintenance
-// Windows, Parameter Store parameters, and patch baselines.
+// In Systems Manager, you can apply tags to documents, managed instances, maintenance
+// windows, Parameter Store parameters, and patch baselines.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
@@ -5035,25 +5425,47 @@ func (s *Tag) Validate() error {
 }
 
 // An array of search criteria that targets instances using a Key,Value combination
-// that you specify. Targets is required if you don't provide one or more instance
-// IDs in the call.
+// that you specify.
+//
+// Supported formats include the following.
+//
+//    * Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3
+//
+//    * Key=tag:my-tag-key,Values=my-tag-value-1,my-tag-value-2
+//
+//    * Key=tag-key,Values=my-tag-key-1,my-tag-key-2
+//
+//    * (Maintenance window targets only) Key=resource-groups:Name,Values=resource-group-name
+//
+//    * (Maintenance window targets only) Key=resource-groups:ResourceTypeFilters,Values=resource-type-1,resource-type-2
+//
+// For example:
+//
+//    * Key=InstanceIds,Values=i-02573cafcfEXAMPLE,i-0471e04240EXAMPLE,i-07782c72faEXAMPLE
+//
+//    * Key=tag:CostCenter,Values=CostCenter1,CostCenter2,CostCenter3
+//
+//    * Key=tag-key,Values=Name,Instance-Type,CostCenter
+//
+//    * (Maintenance window targets only) Key=resource-groups:Name,Values=ProductionResourceGroup
+//
+//    * (Maintenance window targets only) Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC
+//
+// For information about how to send commands that target instances using Key,Value
+// parameters, see Using Targets and Rate Controls to Send Commands to a Fleet
+// (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting)
+// in the AWS Systems Manager User Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Target
 type Target struct {
 	_ struct{} `type:"structure"`
 
 	// User-defined criteria for sending commands that target instances that meet
-	// the criteria. Key can be tag:<Amazon EC2 tag> or InstanceIds. For more information
-	// about how to send commands that target instances using Key,Value parameters,
-	// see Using Targets and Rate Controls to Send Commands to a Fleet (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting)
-	// in the AWS Systems Manager User Guide.
+	// the criteria.
 	Key *string `min:"1" type:"string"`
 
 	// User-defined criteria that maps to Key. For example, if you specified tag:ServerRole,
 	// you could specify value:WebServer to run a command on instances that include
-	// Amazon EC2 tags of ServerRole,WebServer. For more information about how to
-	// send commands that target instances using Key,Value parameters, see Using
-	// Targets and Rate Controls to Send Commands to a Fleet (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
-	// in the AWS Systems Manager User Guide.
+	// Amazon EC2 tags of ServerRole,WebServer.
 	Values []string `type:"list"`
 }
 
@@ -5090,11 +5502,11 @@ type TargetLocation struct {
 	// The AWS Regions targeted by the current Automation execution.
 	Regions []string `min:"1" type:"list"`
 
-	// The maxium number of AWS accounts and AWS regions allowed to run the Automation
+	// The maximum number of AWS accounts and AWS regions allowed to run the Automation
 	// concurrently
 	TargetLocationMaxConcurrency *string `min:"1" type:"string"`
 
-	// The maxium number of errors allowed before the system stops queueing additional
+	// The maximum number of errors allowed before the system stops queueing additional
 	// Automation executions for the currently running Automation.
 	TargetLocationMaxErrors *string `min:"1" type:"string"`
 }

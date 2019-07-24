@@ -307,7 +307,9 @@ type Certificate struct {
 	CertificateArn *string `type:"string"`
 
 	// Indicates whether the certificate is the default certificate. Do not set
-	// IsDefault when specifying a certificate as an input parameter.
+	// this value when specifying a certificate as an input. This value is not included
+	// in the output when describing a listener, but is included when describing
+	// listener certificates.
 	IsDefault *bool `type:"boolean"`
 }
 
@@ -372,10 +374,17 @@ func (s *FixedResponseActionConfig) Validate() error {
 	return nil
 }
 
+// Information about a host header condition.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HostHeaderConditionConfig
 type HostHeaderConditionConfig struct {
 	_ struct{} `type:"structure"`
 
+	// One or more host names. The maximum size of each name is 128 characters.
+	// The comparison is case insensitive. The following wildcard characters are
+	// supported: * (matches 0 or more characters) and ? (matches exactly 1 character).
+	//
+	// If you specify multiple strings, the condition is satisfied if one of the
+	// strings matches the host name.
 	Values []string `type:"list"`
 }
 
@@ -384,12 +393,33 @@ func (s HostHeaderConditionConfig) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Information about an HTTP header condition.
+//
+// There is a set of standard HTTP header fields. You can also define custom
+// HTTP header fields.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HttpHeaderConditionConfig
 type HttpHeaderConditionConfig struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the HTTP header field. The maximum size is 40 characters. The
+	// header name is case insensitive. The allowed characters are specified by
+	// RFC 7230. Wildcards are not supported.
+	//
+	// You can't use an HTTP header condition to specify the host header. Use HostHeaderConditionConfig
+	// to specify a host header condition.
 	HttpHeaderName *string `type:"string"`
 
+	// One or more strings to compare against the value of the HTTP header. The
+	// maximum size of each string is 128 characters. The comparison strings are
+	// case insensitive. The following wildcard characters are supported: * (matches
+	// 0 or more characters) and ? (matches exactly 1 character).
+	//
+	// If the same header appears multiple times in the request, we search them
+	// in order until a match is found.
+	//
+	// If you specify multiple strings, the condition is satisfied if one of the
+	// strings matches the value of the HTTP header. To require that all of the
+	// strings are a match, create one condition per string.
 	Values []string `type:"list"`
 }
 
@@ -398,10 +428,24 @@ func (s HttpHeaderConditionConfig) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Information about an HTTP method condition.
+//
+// HTTP defines a set of request methods, also referred to as HTTP verbs. For
+// more information, see the HTTP Method Registry (https://www.iana.org/assignments/http-methods/http-methods.xhtml).
+// You can also define custom HTTP methods.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HttpRequestMethodConditionConfig
 type HttpRequestMethodConditionConfig struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the request method. The maximum size is 40 characters. The allowed
+	// characters are A-Z, hyphen (-), and underscore (_). The comparison is case
+	// sensitive. Wildcards are not supported; therefore, the method name must be
+	// an exact match.
+	//
+	// If you specify multiple strings, the condition is satisfied if one of the
+	// strings matches the HTTP request method. We recommend that you route GET
+	// and HEAD requests in the same way, because the response to a HEAD request
+	// may be cached.
 	Values []string `type:"list"`
 }
 
@@ -450,8 +494,7 @@ func (s Limit) String() string {
 type Listener struct {
 	_ struct{} `type:"structure"`
 
-	// The SSL server certificate. You must provide a certificate if the protocol
-	// is HTTPS or TLS.
+	// [HTTPS or TLS listener] The default certificate for the listener.
 	Certificates []Certificate `type:"list"`
 
 	// The default actions for the listener.
@@ -469,8 +512,8 @@ type Listener struct {
 	// The protocol for connections from clients to the load balancer.
 	Protocol ProtocolEnum `type:"string" enum:"true"`
 
-	// The security policy that defines which ciphers and protocols are supported.
-	// The default is the current predefined security policy.
+	// [HTTPS or TLS listener] The security policy that defines which ciphers and
+	// protocols are supported. The default is the current predefined security policy.
 	SslPolicy *string `type:"string"`
 }
 
@@ -655,10 +698,20 @@ func (s *Matcher) Validate() error {
 	return nil
 }
 
+// Information about a path pattern condition.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/PathPatternConditionConfig
 type PathPatternConditionConfig struct {
 	_ struct{} `type:"structure"`
 
+	// One or more path patterns to compare against the request URL. The maximum
+	// size of each string is 128 characters. The comparison is case sensitive.
+	// The following wildcard characters are supported: * (matches 0 or more characters)
+	// and ? (matches exactly 1 character).
+	//
+	// If you specify multiple strings, the condition is satisfied if one of them
+	// matches the request URL. The path pattern is compared only to the path of
+	// the URL, not to its query string. To compare against the query string, use
+	// QueryStringConditionConfig.
 	Values []string `type:"list"`
 }
 
@@ -667,10 +720,25 @@ func (s PathPatternConditionConfig) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Information about a query string condition.
+//
+// The query string component of a URI starts after the first '?' character
+// and is terminated by either a '#' character or the end of the URI. A typical
+// query string contains key/value pairs separated by '&' characters. The allowed
+// characters are specified by RFC 3986. Any character can be percentage encoded.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/QueryStringConditionConfig
 type QueryStringConditionConfig struct {
 	_ struct{} `type:"structure"`
 
+	// One or more key/value pairs or values to find in the query string. The maximum
+	// size of each string is 128 characters. The comparison is case insensitive.
+	// The following wildcard characters are supported: * (matches 0 or more characters)
+	// and ? (matches exactly 1 character). To search for a literal '*' or '?' character
+	// in a query string, you must escape these characters in Values using a '\'
+	// character.
+	//
+	// If you specify multiple key/value pairs or values, the condition is satisfied
+	// if one of them is found in the query string.
 	Values []QueryStringKeyValuePair `type:"list"`
 }
 
@@ -679,12 +747,15 @@ func (s QueryStringConditionConfig) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Information about a key/value pair.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/QueryStringKeyValuePair
 type QueryStringKeyValuePair struct {
 	_ struct{} `type:"structure"`
 
+	// The key. You can omit the key.
 	Key *string `type:"string"`
 
+	// The value.
 	Value *string `type:"string"`
 }
 
@@ -775,10 +846,14 @@ func (s *RedirectActionConfig) Validate() error {
 type Rule struct {
 	_ struct{} `type:"structure"`
 
-	// The actions.
+	// The actions. Each rule must include exactly one of the following types of
+	// actions: forward, redirect, or fixed-response, and it must be the last action
+	// to be performed.
 	Actions []Action `type:"list"`
 
-	// The conditions.
+	// The conditions. Each rule can include zero or one of the following conditions:
+	// http-request-method, host-header, path-pattern, and source-ip, and zero or
+	// more of the following conditions: http-header and query-string.
 	Conditions []RuleCondition `type:"list"`
 
 	// Indicates whether this is the default rule.
@@ -801,27 +876,46 @@ func (s Rule) String() string {
 type RuleCondition struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the field. The possible values are host-header and path-pattern.
+	// The field in the HTTP request. The following are the possible values:
+	//
+	//    * http-header
+	//
+	//    * http-request-method
+	//
+	//    * host-header
+	//
+	//    * path-pattern
+	//
+	//    * query-string
+	//
+	//    * source-ip
 	Field *string `type:"string"`
 
+	// Information for a host header condition. Specify only when Field is host-header.
 	HostHeaderConfig *HostHeaderConditionConfig `type:"structure"`
 
+	// Information for an HTTP header condition. Specify only when Field is http-header.
 	HttpHeaderConfig *HttpHeaderConditionConfig `type:"structure"`
 
+	// Information for an HTTP method condition. Specify only when Field is http-request-method.
 	HttpRequestMethodConfig *HttpRequestMethodConditionConfig `type:"structure"`
 
+	// Information for a path pattern condition. Specify only when Field is path-pattern.
 	PathPatternConfig *PathPatternConditionConfig `type:"structure"`
 
+	// Information for a query string condition. Specify only when Field is query-string.
 	QueryStringConfig *QueryStringConditionConfig `type:"structure"`
 
+	// Information for a source IP condition. Specify only when Field is source-ip.
 	SourceIpConfig *SourceIpConditionConfig `type:"structure"`
 
-	// The condition value.
+	// The condition value. You can use Values if the rule contains only host-header
+	// and path-pattern conditions. Otherwise, you can use HostHeaderConfig for
+	// host-header conditions and PathPatternConfig for path-pattern conditions.
 	//
-	// If the field name is host-header, you can specify a single host name (for
-	// example, my.example.com). A host name is case insensitive, can be up to 128
-	// characters in length, and can contain any of the following characters. You
-	// can include up to three wildcard characters.
+	// If Field is host-header, you can specify a single host name (for example,
+	// my.example.com). A host name is case insensitive, can be up to 128 characters
+	// in length, and can contain any of the following characters.
 	//
 	//    * A-Z, a-z, 0-9
 	//
@@ -831,10 +925,9 @@ type RuleCondition struct {
 	//
 	//    * ? (matches exactly 1 character)
 	//
-	// If the field name is path-pattern, you can specify a single path pattern
-	// (for example, /img/*). A path pattern is case-sensitive, can be up to 128
-	// characters in length, and can contain any of the following characters. You
-	// can include up to three wildcard characters.
+	// If Field is path-pattern, you can specify a single path pattern (for example,
+	// /img/*). A path pattern is case-sensitive, can be up to 128 characters in
+	// length, and can contain any of the following characters.
 	//
 	//    * A-Z, a-z, 0-9
 	//
@@ -883,10 +976,22 @@ func (s *RulePriorityPair) Validate() error {
 	return nil
 }
 
+// Information about a source IP condition.
+//
+// You can use this condition to route based on the IP address of the source
+// that connects to the load balancer. If a client is behind a proxy, this is
+// the IP address of the proxy not the IP address of the client.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SourceIpConditionConfig
 type SourceIpConditionConfig struct {
 	_ struct{} `type:"structure"`
 
+	// One or more source IP addresses, in CIDR format. You can use both IPv4 and
+	// IPv6 addresses. Wildcards are not supported.
+	//
+	// If you specify multiple addresses, the condition is satisfied if the source
+	// IP address of the request matches one of the CIDR blocks. This condition
+	// is not satisfied by the addresses in the X-Forwarded-For header. To search
+	// for addresses in the X-Forwarded-For header, use HttpHeaderConditionConfig.
 	Values []string `type:"list"`
 }
 

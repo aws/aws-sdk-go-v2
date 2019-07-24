@@ -13,6 +13,10 @@ import (
 type DescribeRuleInput struct {
 	_ struct{} `type:"structure"`
 
+	// The event bus associated with the rule. If you omit this, the default event
+	// bus is used.
+	EventBusName *string `min:"1" type:"string"`
+
 	// The name of the rule.
 	//
 	// Name is a required field
@@ -27,6 +31,9 @@ func (s DescribeRuleInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeRuleInput"}
+	if s.EventBusName != nil && len(*s.EventBusName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EventBusName", 1))
+	}
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
@@ -51,8 +58,11 @@ type DescribeRuleOutput struct {
 	// The description of the rule.
 	Description *string `type:"string"`
 
-	// The event pattern. For more information, see Events and Event Patterns (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html)
-	// in the Amazon CloudWatch Events User Guide.
+	// The event bus associated with the rule.
+	EventBusName *string `min:"1" type:"string"`
+
+	// The event pattern. For more information, see Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
+	// in the Amazon EventBridge User Guide.
 	EventPattern *string `type:"string"`
 
 	// If this is a managed rule, created by an AWS service on your behalf, this
@@ -65,7 +75,7 @@ type DescribeRuleOutput struct {
 	// The Amazon Resource Name (ARN) of the IAM role associated with the rule.
 	RoleArn *string `min:"1" type:"string"`
 
-	// The scheduling expression. For example, "cron(0 20 * * ? *)", "rate(5 minutes)".
+	// The scheduling expression: for example, "cron(0 20 * * ? *)" or "rate(5 minutes)".
 	ScheduleExpression *string `type:"string"`
 
 	// Specifies whether the rule is enabled or disabled.
@@ -84,7 +94,7 @@ const opDescribeRule = "DescribeRule"
 //
 // Describes the specified rule.
 //
-// DescribeRule does not list the targets of a rule. To see the targets associated
+// DescribeRule doesn't list the targets of a rule. To see the targets associated
 // with a rule, use ListTargetsByRule.
 //
 //    // Example sending a request using DescribeRuleRequest.

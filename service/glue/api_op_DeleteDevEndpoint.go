@@ -53,7 +53,7 @@ const opDeleteDevEndpoint = "DeleteDevEndpoint"
 // DeleteDevEndpointRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Deletes a specified DevEndpoint.
+// Deletes a specified development endpoint.
 //
 //    // Example sending a request using DeleteDevEndpointRequest.
 //    req := client.DeleteDevEndpointRequest(params)

@@ -18,8 +18,8 @@ type CreateOrganizationalUnitInput struct {
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// The unique identifier (ID) of the parent root or OU in which you want to
-	// create the new OU.
+	// The unique identifier (ID) of the parent root or OU that you want to create
+	// the new OU in.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) for a parent ID string
 	// requires one of the following:

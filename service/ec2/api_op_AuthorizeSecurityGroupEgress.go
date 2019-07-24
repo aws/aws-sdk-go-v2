@@ -89,9 +89,9 @@ const opAuthorizeSecurityGroupEgress = "AuthorizeSecurityGroupEgress"
 // [VPC only] Adds the specified egress rules to a security group for use with
 // a VPC.
 //
-// An outbound rule permits instances to send traffic to the specified destination
-// IPv4 or IPv6 CIDR address ranges, or to the specified destination security
-// groups for the same VPC.
+// An outbound rule permits instances to send traffic to the specified IPv4
+// or IPv6 CIDR address ranges, or to the instances associated with the specified
+// destination security groups.
 //
 // You specify a protocol for each rule (for example, TCP). For the TCP and
 // UDP protocols, you must also specify the destination port or port range.

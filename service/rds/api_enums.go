@@ -2,6 +2,42 @@
 
 package rds
 
+type ActivityStreamMode string
+
+// Enum values for ActivityStreamMode
+const (
+	ActivityStreamModeSync  ActivityStreamMode = "sync"
+	ActivityStreamModeAsync ActivityStreamMode = "async"
+)
+
+func (enum ActivityStreamMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ActivityStreamMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ActivityStreamStatus string
+
+// Enum values for ActivityStreamStatus
+const (
+	ActivityStreamStatusStopped  ActivityStreamStatus = "stopped"
+	ActivityStreamStatusStarting ActivityStreamStatus = "starting"
+	ActivityStreamStatusStarted  ActivityStreamStatus = "started"
+	ActivityStreamStatusStopping ActivityStreamStatus = "stopping"
+)
+
+func (enum ActivityStreamStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ActivityStreamStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ApplyMethod string
 
 // Enum values for ApplyMethod

@@ -50,6 +50,10 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// Not supported.
 	DatabaseName *string `type:"string"`
 
+	// The list of logs that the restored DB cluster is to export to Amazon CloudWatch
+	// Logs.
+	EnableCloudwatchLogsExports []string `type:"list"`
+
 	// True to enable mapping of AWS Identity and Access Management (IAM) accounts
 	// to database accounts, and otherwise false.
 	//

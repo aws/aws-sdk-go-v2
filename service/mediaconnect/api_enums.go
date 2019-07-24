@@ -24,6 +24,7 @@ type KeyType string
 
 // Enum values for KeyType
 const (
+	KeyTypeSpeke     KeyType = "speke"
 	KeyTypeStaticKey KeyType = "static-key"
 )
 

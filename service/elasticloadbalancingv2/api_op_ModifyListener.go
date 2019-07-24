@@ -14,9 +14,9 @@ import (
 type ModifyListenerInput struct {
 	_ struct{} `type:"structure"`
 
-	// [HTTPS and TLS listeners] The default SSL server certificate. You must provide
-	// exactly one certificate. Set CertificateArn to the certificate ARN but do
-	// not set IsDefault.
+	// [HTTPS and TLS listeners] The default certificate for the listener. You must
+	// provide exactly one certificate. Set CertificateArn to the certificate ARN
+	// but do not set IsDefault.
 	//
 	// To create a certificate list, use AddListenerCertificates.
 	Certificates []Certificate `type:"list"`
@@ -26,7 +26,8 @@ type ModifyListenerInput struct {
 	//
 	// If the action type is forward, you specify a target group. The protocol of
 	// the target group must be HTTP or HTTPS for an Application Load Balancer.
-	// The protocol of the target group must be TCP or TLS for a Network Load Balancer.
+	// The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a
+	// Network Load Balancer.
 	//
 	// [HTTPS listeners] If the action type is authenticate-oidc, you authenticate
 	// users through an identity provider that is OpenID Connect (OIDC) compliant.
@@ -51,7 +52,7 @@ type ModifyListenerInput struct {
 
 	// The protocol for connections from clients to the load balancer. Application
 	// Load Balancers support the HTTP and HTTPS protocols. Network Load Balancers
-	// support the TCP and TLS protocols.
+	// support the TCP, TLS, UDP, and TCP_UDP protocols.
 	Protocol ProtocolEnum `type:"string" enum:"true"`
 
 	// [HTTPS and TLS listeners] The security policy that defines which protocols
@@ -111,9 +112,9 @@ const opModifyListener = "ModifyListener"
 //
 // Any properties that you do not specify retain their current values. However,
 // changing the protocol from HTTPS to HTTP, or from TLS to TCP, removes the
-// security policy and server certificate properties. If you change the protocol
+// security policy and default certificate properties. If you change the protocol
 // from HTTP to HTTPS, or from TCP to TLS, you must add the security policy
-// and server certificate properties.
+// and default certificate properties.
 //
 //    // Example sending a request using ModifyListenerRequest.
 //    req := client.ModifyListenerRequest(params)

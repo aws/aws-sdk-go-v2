@@ -95,7 +95,7 @@ const opReplaceRoute = "ReplaceRoute"
 // instance, NAT gateway, VPC peering connection, network interface, or egress-only
 // internet gateway.
 //
-// For more information, see Route Tables (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html)
+// For more information, see Route Tables (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html)
 // in the Amazon Virtual Private Cloud User Guide.
 //
 //    // Example sending a request using ReplaceRouteRequest.

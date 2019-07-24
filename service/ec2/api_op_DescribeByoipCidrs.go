@@ -23,10 +23,10 @@ type DescribeByoipCidrsInput struct {
 	// remaining results, make another call with the returned nextToken value.
 	//
 	// MaxResults is a required field
-	MaxResults *int64 `min:"5" type:"integer" required:"true"`
+	MaxResults *int64 `min:"1" type:"integer" required:"true"`
 
 	// The token for the next page of results.
-	NextToken *string `min:"1" type:"string"`
+	NextToken *string `type:"string"`
 }
 
 // String returns the string representation
@@ -41,11 +41,8 @@ func (s *DescribeByoipCidrsInput) Validate() error {
 	if s.MaxResults == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MaxResults"))
 	}
-	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
-	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {

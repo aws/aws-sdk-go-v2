@@ -18,6 +18,8 @@ type PutBucketWebsiteInput struct {
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
+	// Specifies website configuration parameters for an Amazon S3 bucket.
+	//
 	// WebsiteConfiguration is a required field
 	WebsiteConfiguration *WebsiteConfiguration `locationName:"WebsiteConfiguration" type:"structure" required:"true" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
 }

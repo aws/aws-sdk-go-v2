@@ -35,6 +35,9 @@ type CreateLaunchTemplateInput struct {
 	// LaunchTemplateName is a required field
 	LaunchTemplateName *string `min:"3" type:"string" required:"true"`
 
+	// The tags to apply to the launch template during creation.
+	TagSpecifications []TagSpecification `locationName:"TagSpecification" locationNameList:"item" type:"list"`
+
 	// A description for the first version of the launch template.
 	VersionDescription *string `type:"string"`
 }

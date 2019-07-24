@@ -224,7 +224,8 @@ func (s ApiStage) MarshalFields(e protocol.FieldEncoder) error {
 // Represents an authorization layer for methods. If enabled on a method, API
 // Gateway will activate the authorizer when a client calls the method.
 //
-// Enable custom authorization (https://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html)
+// Use Lambda Function as Authorizer (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html)
+// Use Cognito User Pool as Authorizer (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html)
 type Authorizer struct {
 	_ struct{} `type:"structure"`
 
@@ -279,11 +280,12 @@ type Authorizer struct {
 	IdentitySource *string `locationName:"identitySource" type:"string"`
 
 	// A validation expression for the incoming identity token. For TOKEN authorizers,
-	// this value is a regular expression. API Gateway will match the aud field
-	// of the incoming token from the client against the specified regular expression.
-	// It will invoke the authorizer's Lambda function when there is a match. Otherwise,
-	// it will return a 401 Unauthorized response without calling the Lambda function.
-	// The validation expression does not apply to the REQUEST authorizer.
+	// this value is a regular expression. For COGNITO_USER_POOLS authorizers, API
+	// Gateway will match the aud field of the incoming token from the client against
+	// the specified regular expression. It will invoke the authorizer's Lambda
+	// function when there is a match. Otherwise, it will return a 401 Unauthorized
+	// response without calling the Lambda function. The validation expression does
+	// not apply to the REQUEST authorizer.
 	IdentityValidationExpression *string `locationName:"identityValidationExpression" type:"string"`
 
 	// [Required] The name of the authorizer.
@@ -952,6 +954,16 @@ type DomainName struct {
 	// The custom domain name as an API host name, for example, my-api.example.com.
 	DomainName *string `locationName:"domainName" type:"string"`
 
+	// The status of the DomainName migration. The valid values are AVAILABLE and
+	// UPDATING. If the status is UPDATING, the domain cannot be modified further
+	// until the existing operation is complete. If it is AVAILABLE, the domain
+	// can be updated.
+	DomainNameStatus DomainNameStatus `locationName:"domainNameStatus" type:"string" enum:"true"`
+
+	// An optional text message containing detailed information about status of
+	// the DomainName migration.
+	DomainNameStatusMessage *string `locationName:"domainNameStatusMessage" type:"string"`
+
 	// The endpoint configuration of this DomainName showing the endpoint types
 	// of the domain name.
 	EndpointConfiguration *EndpointConfiguration `locationName:"endpointConfiguration" type:"structure"`
@@ -974,6 +986,10 @@ type DomainName struct {
 	// For more information, see Set up a Regional Custom Domain Name (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html)
 	// and AWS Regions and Endpoints for API Gateway (https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region).
 	RegionalHostedZoneId *string `locationName:"regionalHostedZoneId" type:"string"`
+
+	// The Transport Layer Security (TLS) version + cipher suite for this DomainName.
+	// The valid values are TLS_1_0 and TLS_1_2.
+	SecurityPolicy SecurityPolicy `locationName:"securityPolicy" type:"string" enum:"true"`
 
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]string `locationName:"tags" type:"map"`
@@ -1022,6 +1038,18 @@ func (s DomainName) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "domainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if len(s.DomainNameStatus) > 0 {
+		v := s.DomainNameStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "domainNameStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.DomainNameStatusMessage != nil {
+		v := *s.DomainNameStatusMessage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "domainNameStatusMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.EndpointConfiguration != nil {
 		v := s.EndpointConfiguration
 
@@ -1051,6 +1079,12 @@ func (s DomainName) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "regionalHostedZoneId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.SecurityPolicy) > 0 {
+		v := s.SecurityPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "securityPolicy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Tags != nil {
 		v := s.Tags
@@ -1262,10 +1296,14 @@ func (s GatewayResponse) MarshalFields(e protocol.FieldEncoder) error {
 type Integration struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the integration's cache key parameters.
+	// A list of request parameters whose values API Gateway caches. To be valid
+	// values for cacheKeyParameters, these parameters must also be specified for
+	// Method requestParameters.
 	CacheKeyParameters []string `locationName:"cacheKeyParameters" type:"list"`
 
-	// Specifies the integration's cache namespace.
+	// An API-specific tag group of related cached parameters. To be valid values
+	// for cacheKeyParameters, these parameters must also be specified for Method
+	// requestParameters.
 	CacheNamespace *string `locationName:"cacheNamespace" type:"string"`
 
 	// The (id (https://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id))
@@ -1290,7 +1328,7 @@ type Integration struct {
 	//
 	// If this property is not defined, the request payload will be passed through
 	// from the method request to integration request without modification, provided
-	// that the passthroughBehaviors is configured to support payload pass-through.
+	// that the passthroughBehavior is configured to support payload pass-through.
 	ContentHandling ContentHandlingStrategy `locationName:"contentHandling" type:"string" enum:"true"`
 
 	// Specifies the credentials required for the integration, if any. For AWS integrations,
@@ -1822,8 +1860,8 @@ type Method struct {
 	MethodResponses map[string]MethodResponse `locationName:"methodResponses" type:"map"`
 
 	// A human-friendly operation identifier for the method. For example, you can
-	// assign the operationName of ListPets for the GET /pets method in PetStore
-	// (https://petstore-demo-endpoint.execute-api.com/petstore/pets) example.
+	// assign the operationName of ListPets for the GET /pets method in the PetStore
+	// example.
 	OperationName *string `locationName:"operationName" type:"string"`
 
 	// A key-value map specifying data schemas, represented by Model resources,
@@ -2892,7 +2930,8 @@ type Stage struct {
 	MethodSettings map[string]MethodSetting `locationName:"methodSettings" type:"map"`
 
 	// The name of the stage is the first path segment in the Uniform Resource Identifier
-	// (URI) of a call to API Gateway.
+	// (URI) of a call to API Gateway. Stage names can only contain alphanumeric
+	// characters, hyphens, and underscores. Maximum length is 128 characters.
 	StageName *string `locationName:"stageName" type:"string"`
 
 	// The collection of tags. Each tag element is associated with a given resource.

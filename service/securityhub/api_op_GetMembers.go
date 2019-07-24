@@ -14,8 +14,8 @@ import (
 type GetMembersInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of account IDs for the Security Hub member accounts on which you want
-	// to return the details.
+	// A list of account IDs for the Security Hub member accounts that you want
+	// to return the details for.
 	//
 	// AccountIds is a required field
 	AccountIds []string `type:"list" required:"true"`
@@ -66,8 +66,8 @@ type GetMembersOutput struct {
 	// A list of details about the Security Hub member accounts.
 	Members []Member `type:"list"`
 
-	// A list of account ID and email address pairs of the AWS accounts that could
-	// not be processed.
+	// A list of account ID and email address pairs of the AWS accounts that couldn't
+	// be processed.
 	UnprocessedAccounts []Result `type:"list"`
 }
 
@@ -110,8 +110,8 @@ const opGetMembers = "GetMembers"
 // GetMembersRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Returns the details on the Security Hub member accounts that are specified
-// by the account IDs.
+// Returns the details on the Security Hub member accounts that the account
+// IDs specify.
 //
 //    // Example sending a request using GetMembersRequest.
 //    req := client.GetMembersRequest(params)

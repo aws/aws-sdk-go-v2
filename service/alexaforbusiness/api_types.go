@@ -291,8 +291,17 @@ type Contact struct {
 	// The last name of the contact, used to call the contact on the device.
 	LastName *string `min:"1" type:"string"`
 
-	// The phone number of the contact.
+	// The phone number of the contact. The phone number type defaults to WORK.
+	// You can either specify PhoneNumber or PhoneNumbers. We recommend that you
+	// use PhoneNumbers, which lets you specify the phone number type and multiple
+	// numbers.
 	PhoneNumber *string `type:"string"`
+
+	// The list of phone numbers for the contact.
+	PhoneNumbers []PhoneNumber `type:"list"`
+
+	// The list of SIP addresses for the contact.
+	SipAddresses []SipAddress `type:"list"`
 }
 
 // String returns the string representation
@@ -317,8 +326,16 @@ type ContactData struct {
 	// The last name of the contact, used to call the contact on the device.
 	LastName *string `min:"1" type:"string"`
 
-	// The phone number of the contact.
+	// The phone number of the contact. The phone number type defaults to WORK.
+	// You can specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers,
+	// which lets you specify the phone number type and multiple numbers.
 	PhoneNumber *string `type:"string"`
+
+	// The list of phone numbers for the contact.
+	PhoneNumbers []PhoneNumber `type:"list"`
+
+	// The list of SIP addresses for the contact.
+	SipAddresses []SipAddress `type:"list"`
 }
 
 // String returns the string representation
@@ -928,6 +945,45 @@ func (s *PSTNDialIn) Validate() error {
 	return nil
 }
 
+// The phone number for the contact containing the raw number and phone number
+// type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PhoneNumber
+type PhoneNumber struct {
+	_ struct{} `type:"structure"`
+
+	// The raw value of the phone number.
+	//
+	// Number is a required field
+	Number *string `type:"string" required:"true"`
+
+	// The type of the phone number.
+	//
+	// Type is a required field
+	Type PhoneNumberType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s PhoneNumber) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PhoneNumber) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PhoneNumber"}
+
+	if s.Number == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Number"))
+	}
+	if len(s.Type) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // A room profile with attributes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Profile
 type Profile struct {
@@ -1103,6 +1159,47 @@ func (s *RoomSkillParameter) Validate() error {
 	}
 	if s.ParameterValue != nil && len(*s.ParameterValue) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ParameterValue", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The SIP address for the contact containing the URI and SIP address type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SipAddress
+type SipAddress struct {
+	_ struct{} `type:"structure"`
+
+	// The type of the SIP address.
+	//
+	// Type is a required field
+	Type SipType `type:"string" required:"true" enum:"true"`
+
+	// The URI for the SIP address.
+	//
+	// Uri is a required field
+	Uri *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s SipAddress) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SipAddress) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SipAddress"}
+	if len(s.Type) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+
+	if s.Uri == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Uri"))
+	}
+	if s.Uri != nil && len(*s.Uri) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Uri", 1))
 	}
 
 	if invalidParams.Len() > 0 {

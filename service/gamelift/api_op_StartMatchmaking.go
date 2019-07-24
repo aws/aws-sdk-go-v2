@@ -19,7 +19,7 @@ type StartMatchmakingInput struct {
 	// configurations must exist in the same region as this request.
 	//
 	// ConfigurationName is a required field
-	ConfigurationName *string `min:"1" type:"string" required:"true"`
+	ConfigurationName *string `type:"string" required:"true"`
 
 	// Information on each player to be matched. This information must include a
 	// player ID, and may contain player attributes and latency data to be used
@@ -32,7 +32,7 @@ type StartMatchmakingInput struct {
 	// Unique identifier for a matchmaking ticket. If no ticket ID is specified
 	// here, Amazon GameLift will generate one in the form of a UUID. Use this identifier
 	// to track the matchmaking ticket status and retrieve match results.
-	TicketId *string `min:"1" type:"string"`
+	TicketId *string `type:"string"`
 }
 
 // String returns the string representation
@@ -47,15 +47,9 @@ func (s *StartMatchmakingInput) Validate() error {
 	if s.ConfigurationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationName"))
 	}
-	if s.ConfigurationName != nil && len(*s.ConfigurationName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationName", 1))
-	}
 
 	if s.Players == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Players"))
-	}
-	if s.TicketId != nil && len(*s.TicketId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TicketId", 1))
 	}
 	if s.Players != nil {
 		for i, v := range s.Players {
@@ -100,9 +94,7 @@ const opStartMatchmaking = "StartMatchmaking"
 // A matchmaking request might start with a single player or a group of players
 // who want to play together. FlexMatch finds additional players as needed to
 // fill the match. Match type, rules, and the queue used to place a new game
-// session are defined in a MatchmakingConfiguration. For complete information
-// on setting up and using FlexMatch, see the topic Adding FlexMatch to Your
-// Game (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-intro.html).
+// session are defined in a MatchmakingConfiguration.
 //
 // To start matchmaking, provide a unique ticket ID, specify a matchmaking configuration,
 // and include the players to be matched. You must also include a set of player
@@ -153,6 +145,18 @@ const opStartMatchmaking = "StartMatchmaking"
 // COMPLETED status. Connection information (including game session endpoint
 // and player session) is added to the matchmaking tickets. Matched players
 // can use the connection information to join the game.
+//
+// Learn more
+//
+//  Add FlexMatch to a Game Client (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html)
+//
+//  Set Up FlexMatch Event Notification (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html)
+//
+//  FlexMatch Integration Roadmap (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-tasks.html)
+//
+//  How GameLift FlexMatch Works (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-match.html)
+//
+// Related operations
 //
 //    * StartMatchmaking
 //

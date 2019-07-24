@@ -29,7 +29,7 @@ type DescribeMatchmakingConfigurationsInput struct {
 
 	// Unique identifier for a matchmaking rule set. Use this parameter to retrieve
 	// all matchmaking configurations that use this rule set.
-	RuleSetName *string `min:"1" type:"string"`
+	RuleSetName *string `type:"string"`
 }
 
 // String returns the string representation
@@ -45,9 +45,6 @@ func (s *DescribeMatchmakingConfigurationsInput) Validate() error {
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
-	if s.RuleSetName != nil && len(*s.RuleSetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RuleSetName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -80,7 +77,7 @@ const opDescribeMatchmakingConfigurations = "DescribeMatchmakingConfigurations"
 // DescribeMatchmakingConfigurationsRequest returns a request value for making API operation for
 // Amazon GameLift.
 //
-// Retrieves the details of FlexMatch matchmaking configurations. with this
+// Retrieves the details of FlexMatch matchmaking configurations. With this
 // operation, you have the following options: (1) retrieve all existing configurations,
 // (2) provide the names of one or more configurations to retrieve, or (3) retrieve
 // all configurations that use a specified rule set name. When requesting multiple
@@ -88,6 +85,12 @@ const opDescribeMatchmakingConfigurations = "DescribeMatchmakingConfigurations"
 // pages. If successful, a configuration is returned for each requested name.
 // When specifying a list of names, only configurations that currently exist
 // are returned.
+//
+// Learn more
+//
+//  Setting Up FlexMatch Matchmakers (https://docs.aws.amazon.com/gamelift/latest/developerguide/matchmaker-build.html)
+//
+// Related operations
 //
 //    * CreateMatchmakingConfiguration
 //

@@ -44,9 +44,9 @@ import (
 // distribution was successfully deleted.
 //
 // For information about deleting a distribution using the CloudFront console,
-// see Deleting a Distribution (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html)
+// see Deleting a Distribution (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DeleteDistributionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteDistributionRequest
 type DeleteDistributionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -97,7 +97,7 @@ func (s DeleteDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DeleteDistributionOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteDistributionOutput
 type DeleteDistributionOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -112,7 +112,7 @@ func (s DeleteDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opDeleteDistribution = "DeleteDistribution2018_11_05"
+const opDeleteDistribution = "DeleteDistribution2019_03_26"
 
 // DeleteDistributionRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -126,12 +126,12 @@ const opDeleteDistribution = "DeleteDistribution2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DeleteDistribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteDistribution
 func (c *Client) DeleteDistributionRequest(input *DeleteDistributionInput) DeleteDistributionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDistribution,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/2018-11-05/distribution/{Id}",
+		HTTPPath:   "/2019-03-26/distribution/{Id}",
 	}
 
 	if input == nil {

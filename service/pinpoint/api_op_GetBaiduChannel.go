@@ -54,7 +54,8 @@ func (s GetBaiduChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetBaiduChannelOutput struct {
 	_ struct{} `type:"structure" payload:"BaiduChannelResponse"`
 
-	// Baidu Cloud Messaging channel definition
+	// Provides information about the status and settings of the Baidu (Baidu Cloud
+	// Push) channel for an application.
 	//
 	// BaiduChannelResponse is a required field
 	BaiduChannelResponse *BaiduChannelResponse `type:"structure" required:"true"`
@@ -81,7 +82,8 @@ const opGetBaiduChannel = "GetBaiduChannel"
 // GetBaiduChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Get a BAIDU GCM channel
+// Retrieves information about the status and settings of the Baidu Cloud Push
+// channel for an application.
 //
 //    // Example sending a request using GetBaiduChannelRequest.
 //    req := client.GetBaiduChannelRequest(params)

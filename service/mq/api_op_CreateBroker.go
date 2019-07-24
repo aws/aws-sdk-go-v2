@@ -26,6 +26,9 @@ type CreateBrokerInput struct {
 	// The deployment mode of the broker.
 	DeploymentMode DeploymentMode `locationName:"deploymentMode" type:"string" enum:"true"`
 
+	// Encryption options for the broker.
+	EncryptionOptions *EncryptionOptions `locationName:"encryptionOptions" type:"structure"`
+
 	// The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.
 	EngineType EngineType `locationName:"engineType" type:"string" enum:"true"`
 
@@ -54,6 +57,21 @@ type CreateBrokerInput struct {
 // String returns the string representation
 func (s CreateBrokerInput) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateBrokerInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateBrokerInput"}
+	if s.EncryptionOptions != nil {
+		if err := s.EncryptionOptions.Validate(); err != nil {
+			invalidParams.AddNested("EncryptionOptions", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -95,6 +113,12 @@ func (s CreateBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "deploymentMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.EncryptionOptions != nil {
+		v := s.EncryptionOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "encryptionOptions", v, metadata)
 	}
 	if len(s.EngineType) > 0 {
 		v := s.EngineType

@@ -14,11 +14,11 @@ import (
 type CreateListenerInput struct {
 	_ struct{} `type:"structure"`
 
-	// [HTTPS and TLS listeners] The default SSL server certificate. You must provide
-	// exactly one certificate. Set CertificateArn to the certificate ARN but do
-	// not set IsDefault.
+	// [HTTPS and TLS listeners] The default certificate for the listener. You must
+	// provide exactly one certificate. Set CertificateArn to the certificate ARN
+	// but do not set IsDefault.
 	//
-	// To create a certificate list, use AddListenerCertificates.
+	// To create a certificate list for the listener, use AddListenerCertificates.
 	Certificates []Certificate `type:"list"`
 
 	// The actions for the default rule. The rule must include one forward action
@@ -26,7 +26,8 @@ type CreateListenerInput struct {
 	//
 	// If the action type is forward, you specify a target group. The protocol of
 	// the target group must be HTTP or HTTPS for an Application Load Balancer.
-	// The protocol of the target group must be TCP or TLS for a Network Load Balancer.
+	// The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a
+	// Network Load Balancer.
 	//
 	// [HTTPS listeners] If the action type is authenticate-oidc, you authenticate
 	// users through an identity provider that is OpenID Connect (OIDC) compliant.
@@ -55,7 +56,7 @@ type CreateListenerInput struct {
 
 	// The protocol for connections from clients to the load balancer. For Application
 	// Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load
-	// Balancers, the supported protocols are TCP and TLS.
+	// Balancers, the supported protocols are TCP, TLS, UDP, and TCP_UDP.
 	//
 	// Protocol is a required field
 	Protocol ProtocolEnum `type:"string" required:"true" enum:"true"`

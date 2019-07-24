@@ -40,7 +40,7 @@ type SetPermissionInput struct {
 	//    * iam_only
 	//
 	// For more information about the permissions associated with these levels,
-	// see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+	// see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 	Level *string `type:"string"`
 
 	// The stack ID.
@@ -88,12 +88,12 @@ const opSetPermission = "SetPermission"
 // AWS OpsWorks.
 //
 // Specifies a user's permissions. For more information, see Security and Permissions
-// (http://docs.aws.amazon.com/opsworks/latest/userguide/workingsecurity.html).
+// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingsecurity.html).
 //
 // Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using SetPermissionRequest.
 //    req := client.SetPermissionRequest(params)

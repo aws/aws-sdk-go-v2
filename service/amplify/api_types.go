@@ -29,6 +29,12 @@ type App struct {
 	// AppId is a required field
 	AppId *string `locationName:"appId" min:"1" type:"string" required:"true"`
 
+	// Automated branch creation config for the Amplify App.
+	AutoBranchCreationConfig *AutoBranchCreationConfig `locationName:"autoBranchCreationConfig" type:"structure"`
+
+	// Automated branch creation glob patterns for the Amplify App.
+	AutoBranchCreationPatterns []string `locationName:"autoBranchCreationPatterns" type:"list"`
+
 	// Basic Authorization credentials for branches for the Amplify App.
 	BasicAuthCredentials *string `locationName:"basicAuthCredentials" type:"string"`
 
@@ -52,6 +58,9 @@ type App struct {
 	//
 	// Description is a required field
 	Description *string `locationName:"description" type:"string" required:"true"`
+
+	// Enables automated branch creation for the Amplify App.
+	EnableAutoBranchCreation *bool `locationName:"enableAutoBranchCreation" type:"boolean"`
 
 	// Enables Basic Authorization for branches for the Amplify App.
 	//
@@ -90,7 +99,7 @@ type App struct {
 	Repository *string `locationName:"repository" type:"string" required:"true"`
 
 	// Tag for Amplify App.
-	Tags map[string]string `locationName:"tags" type:"map"`
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 
 	// Update date / time for the Amplify App.
 	//
@@ -116,6 +125,24 @@ func (s App) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "appId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.AutoBranchCreationConfig != nil {
+		v := s.AutoBranchCreationConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "autoBranchCreationConfig", v, metadata)
+	}
+	if s.AutoBranchCreationPatterns != nil {
+		v := s.AutoBranchCreationPatterns
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "autoBranchCreationPatterns", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	if s.BasicAuthCredentials != nil {
 		v := *s.BasicAuthCredentials
@@ -158,6 +185,12 @@ func (s App) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EnableAutoBranchCreation != nil {
+		v := *s.EnableAutoBranchCreation
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enableAutoBranchCreation", protocol.BoolValue(v), metadata)
 	}
 	if s.EnableBasicAuth != nil {
 		v := *s.EnableBasicAuth
@@ -234,6 +267,104 @@ func (s App) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Structure with auto branch creation config.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/AutoBranchCreationConfig
+type AutoBranchCreationConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Basic Authorization credentials for the auto created branch.
+	BasicAuthCredentials *string `locationName:"basicAuthCredentials" type:"string"`
+
+	// BuildSpec for the auto created branch.
+	BuildSpec *string `locationName:"buildSpec" min:"1" type:"string"`
+
+	// Enables auto building for the auto created branch.
+	EnableAutoBuild *bool `locationName:"enableAutoBuild" type:"boolean"`
+
+	// Enables Basic Auth for the auto created branch.
+	EnableBasicAuth *bool `locationName:"enableBasicAuth" type:"boolean"`
+
+	// Environment Variables for the auto created branch.
+	EnvironmentVariables map[string]string `locationName:"environmentVariables" type:"map"`
+
+	// Framework for the auto created branch.
+	Framework *string `locationName:"framework" type:"string"`
+
+	// Stage for the auto created branch.
+	Stage Stage `locationName:"stage" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s AutoBranchCreationConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AutoBranchCreationConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AutoBranchCreationConfig"}
+	if s.BuildSpec != nil && len(*s.BuildSpec) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BuildSpec", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AutoBranchCreationConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BasicAuthCredentials != nil {
+		v := *s.BasicAuthCredentials
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "basicAuthCredentials", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.BuildSpec != nil {
+		v := *s.BuildSpec
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "buildSpec", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EnableAutoBuild != nil {
+		v := *s.EnableAutoBuild
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enableAutoBuild", protocol.BoolValue(v), metadata)
+	}
+	if s.EnableBasicAuth != nil {
+		v := *s.EnableBasicAuth
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enableBasicAuth", protocol.BoolValue(v), metadata)
+	}
+	if s.EnvironmentVariables != nil {
+		v := s.EnvironmentVariables
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "environmentVariables", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.Framework != nil {
+		v := *s.Framework
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "framework", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Stage) > 0 {
+		v := s.Stage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "stage", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Branch for an Amplify App, which maps to a 3rd party repository branch.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Branch
 type Branch struct {
@@ -243,6 +374,9 @@ type Branch struct {
 	//
 	// ActiveJobId is a required field
 	ActiveJobId *string `locationName:"activeJobId" type:"string" required:"true"`
+
+	// List of custom resources that are linked to this branch.
+	AssociatedResources []string `locationName:"associatedResources" type:"list"`
 
 	// Basic Authorization credentials for a branch, part of an Amplify App.
 	BasicAuthCredentials *string `locationName:"basicAuthCredentials" type:"string"`
@@ -275,8 +409,10 @@ type Branch struct {
 	// Description is a required field
 	Description *string `locationName:"description" type:"string" required:"true"`
 
-	// Display name for a branch, part of an Amplify App.
-	DisplayName *string `locationName:"displayName" type:"string"`
+	// Display name for a branch, will use as the default domain prefix.
+	//
+	// DisplayName is a required field
+	DisplayName *string `locationName:"displayName" type:"string" required:"true"`
 
 	// Enables auto-building on push for a branch, part of an Amplify App.
 	//
@@ -309,9 +445,9 @@ type Branch struct {
 	Stage Stage `locationName:"stage" type:"string" required:"true" enum:"true"`
 
 	// Tag for branch for Amplify App.
-	Tags map[string]string `locationName:"tags" type:"map"`
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 
-	// Thumbnail Url for the branch.
+	// Thumbnail URL for the branch.
 	ThumbnailUrl *string `locationName:"thumbnailUrl" min:"1" type:"string"`
 
 	// Total number of Jobs part of an Amplify App.
@@ -342,6 +478,18 @@ func (s Branch) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "activeJobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.AssociatedResources != nil {
+		v := s.AssociatedResources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "associatedResources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	if s.BasicAuthCredentials != nil {
 		v := *s.BasicAuthCredentials
@@ -571,9 +719,7 @@ type DomainAssociation struct {
 	_ struct{} `type:"structure"`
 
 	// DNS Record for certificate verification.
-	//
-	// CertificateVerificationDNSRecord is a required field
-	CertificateVerificationDNSRecord *string `locationName:"certificateVerificationDNSRecord" type:"string" required:"true"`
+	CertificateVerificationDNSRecord *string `locationName:"certificateVerificationDNSRecord" type:"string"`
 
 	// ARN for the Domain Association.
 	//
@@ -741,7 +887,9 @@ type JobSummary struct {
 	// JobId is a required field
 	JobId *string `locationName:"jobId" type:"string" required:"true"`
 
-	// Type for the Job.
+	// Type for the Job. \n "RELEASE": Manually released from source by using StartJob
+	// API. "RETRY": Manually retried by using StartJob API. "WEB_HOOK": Automatically
+	// triggered by WebHooks.
 	//
 	// JobType is a required field
 	JobType JobType `locationName:"jobType" type:"string" required:"true" enum:"true"`
@@ -835,7 +983,7 @@ type ProductionBranch struct {
 	// Status of Production Branch.
 	Status *string `locationName:"status" min:"3" type:"string"`
 
-	// Thumbnail Url for Production Branch.
+	// Thumbnail URL for Production Branch.
 	ThumbnailUrl *string `locationName:"thumbnailUrl" min:"1" type:"string"`
 }
 
@@ -878,18 +1026,21 @@ func (s ProductionBranch) MarshalFields(e protocol.FieldEncoder) error {
 type Step struct {
 	_ struct{} `type:"structure"`
 
-	// Url to teh artifact for the execution step.
+	// URL to the artifact for the execution step.
 	ArtifactsUrl *string `locationName:"artifactsUrl" type:"string"`
+
+	// The context for current step, will include build image if step is build.
+	Context *string `locationName:"context" type:"string"`
 
 	// End date/ time of the execution step.
 	//
 	// EndTime is a required field
 	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix" required:"true"`
 
-	// Url to the logs for the execution step.
+	// URL to the logs for the execution step.
 	LogUrl *string `locationName:"logUrl" type:"string"`
 
-	// List of screenshot Urls for the execution step, if relevant.
+	// List of screenshot URLs for the execution step, if relevant.
 	Screenshots map[string]string `locationName:"screenshots" type:"map"`
 
 	// Start date/ time of the execution step.
@@ -901,6 +1052,9 @@ type Step struct {
 	//
 	// Status is a required field
 	Status JobStatus `locationName:"status" type:"string" required:"true" enum:"true"`
+
+	// The reason for current step status.
+	StatusReason *string `locationName:"statusReason" type:"string"`
 
 	// Name of the execution step.
 	//
@@ -920,6 +1074,12 @@ func (s Step) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "artifactsUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Context != nil {
+		v := *s.Context
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "context", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.EndTime != nil {
 		v := *s.EndTime
@@ -956,6 +1116,12 @@ func (s Step) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.StatusReason != nil {
+		v := *s.StatusReason
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "statusReason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StepName != nil {
 		v := *s.StepName
@@ -1070,6 +1236,99 @@ func (s SubDomainSetting) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "prefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Structure for webhook, which associates a webhook with an Amplify App.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Webhook
+type Webhook struct {
+	_ struct{} `type:"structure"`
+
+	// Name for a branch, part of an Amplify App.
+	//
+	// BranchName is a required field
+	BranchName *string `locationName:"branchName" min:"1" type:"string" required:"true"`
+
+	// Create date / time for a webhook.
+	//
+	// CreateTime is a required field
+	CreateTime *time.Time `locationName:"createTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// Description for a webhook.
+	//
+	// Description is a required field
+	Description *string `locationName:"description" type:"string" required:"true"`
+
+	// Update date / time for a webhook.
+	//
+	// UpdateTime is a required field
+	UpdateTime *time.Time `locationName:"updateTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// ARN for the webhook.
+	//
+	// WebhookArn is a required field
+	WebhookArn *string `locationName:"webhookArn" type:"string" required:"true"`
+
+	// Id of the webhook.
+	//
+	// WebhookId is a required field
+	WebhookId *string `locationName:"webhookId" type:"string" required:"true"`
+
+	// Url of the webhook.
+	//
+	// WebhookUrl is a required field
+	WebhookUrl *string `locationName:"webhookUrl" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Webhook) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Webhook) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BranchName != nil {
+		v := *s.BranchName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "branchName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreateTime != nil {
+		v := *s.CreateTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UpdateTime != nil {
+		v := *s.UpdateTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "updateTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.WebhookArn != nil {
+		v := *s.WebhookArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "webhookArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.WebhookId != nil {
+		v := *s.WebhookId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "webhookId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.WebhookUrl != nil {
+		v := *s.WebhookUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "webhookUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

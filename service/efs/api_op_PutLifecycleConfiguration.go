@@ -125,17 +125,14 @@ const opPutLifecycleConfiguration = "PutLifecycleConfiguration"
 // LifecyclePolicies array in the request body deletes any existing LifecycleConfiguration
 // and disables lifecycle management.
 //
-// You can enable lifecycle management only for EFS file systems created after
-// the release of EFS infrequent access.
-//
 // In the request, specify the following:
 //
-//    * The ID for the file system for which you are creating a lifecycle management
-//    configuration.
+//    * The ID for the file system for which you are enabling, disabling, or
+//    modifying lifecycle management.
 //
 //    * A LifecyclePolicies array of LifecyclePolicy objects that define when
 //    files are moved to the IA storage class. The array can contain only one
-//    "TransitionToIA": "AFTER_30_DAYS" LifecyclePolicy item.
+//    LifecyclePolicy item.
 //
 // This operation requires permissions for the elasticfilesystem:PutLifecycleConfiguration
 // operation.

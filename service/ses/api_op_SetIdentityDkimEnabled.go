@@ -11,7 +11,7 @@ import (
 
 // Represents a request to enable or disable Amazon SES Easy DKIM signing for
 // an identity. For more information about setting up Easy DKIM, see the Amazon
-// SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
+// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityDkimEnabledRequest
 type SetIdentityDkimEnabledInput struct {
 	_ struct{} `type:"structure"`
@@ -84,7 +84,7 @@ const opSetIdentityDkimEnabled = "SetIdentityDkimEnabled"
 // You can execute this operation no more than once per second.
 //
 // For more information about Easy DKIM signing, go to the Amazon SES Developer
-// Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
+// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
 //
 //    // Example sending a request using SetIdentityDkimEnabledRequest.
 //    req := client.SetIdentityDkimEnabledRequest(params)

@@ -55,9 +55,9 @@ type UpdateTableInput struct {
 
 	// Represents the DynamoDB Streams configuration for the table.
 	//
-	// You will receive a ResourceInUseException if you attempt to enable a stream
-	// on a table that already has a stream, or if you attempt to disable a stream
-	// on a table which does not have a stream.
+	// You receive a ResourceInUseException if you try to enable a stream on a table
+	// that already has a stream, or if you try to disable a stream on a table that
+	// doesn't have a stream.
 	StreamSpecification *StreamSpecification `type:"structure"`
 
 	// The name of the table to be updated.
@@ -133,11 +133,11 @@ const opUpdateTable = "UpdateTable"
 //
 //    * Modify the provisioned throughput settings of the table.
 //
-//    * Enable or disable Streams on the table.
+//    * Enable or disable DynamoDB Streams on the table.
 //
 //    * Remove a global secondary index from the table.
 //
-//    * Create a new global secondary index on the table. Once the index begins
+//    * Create a new global secondary index on the table. After the index begins
 //    backfilling, you can use UpdateTable to perform other operations.
 //
 // UpdateTable is an asynchronous operation; while it is executing, the table

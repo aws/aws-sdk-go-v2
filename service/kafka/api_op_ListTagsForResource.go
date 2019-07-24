@@ -50,12 +50,12 @@ func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// List tags for a resource
+// Response of listing tags for a resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListTagsForResourceResponse
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The Key value pairs indicating resource tags.
+	// The key-value pair for the resource tag.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
@@ -86,7 +86,7 @@ const opListTagsForResource = "ListTagsForResource"
 // ListTagsForResourceRequest returns a request value for making API operation for
 // Managed Streaming for Kafka.
 //
-// List tags for a resource.
+// Returns a list of the tags associated with the specified resource.
 //
 //    // Example sending a request using ListTagsForResourceRequest.
 //    req := client.ListTagsForResourceRequest(params)

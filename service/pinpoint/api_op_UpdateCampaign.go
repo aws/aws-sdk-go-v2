@@ -20,7 +20,7 @@ type UpdateCampaignInput struct {
 	// CampaignId is a required field
 	CampaignId *string `location:"uri" locationName:"campaign-id" type:"string" required:"true"`
 
-	// Used to create a campaign.
+	// Specifies the configuration and other settings for a campaign.
 	//
 	// WriteCampaignRequest is a required field
 	WriteCampaignRequest *WriteCampaignRequest `type:"structure" required:"true"`
@@ -45,6 +45,11 @@ func (s *UpdateCampaignInput) Validate() error {
 
 	if s.WriteCampaignRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WriteCampaignRequest"))
+	}
+	if s.WriteCampaignRequest != nil {
+		if err := s.WriteCampaignRequest.Validate(); err != nil {
+			invalidParams.AddNested("WriteCampaignRequest", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -82,7 +87,8 @@ func (s UpdateCampaignInput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateCampaignOutput struct {
 	_ struct{} `type:"structure" payload:"CampaignResponse"`
 
-	// Campaign definition
+	// Provides information about the status, configuration, and other settings
+	// for a campaign.
 	//
 	// CampaignResponse is a required field
 	CampaignResponse *CampaignResponse `type:"structure" required:"true"`
@@ -109,7 +115,7 @@ const opUpdateCampaign = "UpdateCampaign"
 // UpdateCampaignRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Use to update a campaign.
+// Updates the settings for a campaign.
 //
 //    // Example sending a request using UpdateCampaignRequest.
 //    req := client.UpdateCampaignRequest(params)

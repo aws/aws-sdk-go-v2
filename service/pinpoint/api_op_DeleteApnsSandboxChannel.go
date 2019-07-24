@@ -54,7 +54,8 @@ func (s DeleteApnsSandboxChannelInput) MarshalFields(e protocol.FieldEncoder) er
 type DeleteApnsSandboxChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSSandboxChannelResponse"`
 
-	// Apple Development Push Notification Service channel definition.
+	// Provides information about the status and settings of the APNs (Apple Push
+	// Notification service) sandbox channel for an application.
 	//
 	// APNSSandboxChannelResponse is a required field
 	APNSSandboxChannelResponse *APNSSandboxChannelResponse `type:"structure" required:"true"`
@@ -81,7 +82,8 @@ const opDeleteApnsSandboxChannel = "DeleteApnsSandboxChannel"
 // DeleteApnsSandboxChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Delete an APNS sandbox channel.
+// Disables the APNs sandbox channel for an application and deletes any existing
+// settings for the channel.
 //
 //    // Example sending a request using DeleteApnsSandboxChannelRequest.
 //    req := client.DeleteApnsSandboxChannelRequest(params)

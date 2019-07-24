@@ -112,6 +112,8 @@ const (
 	ConstraintViolationExceptionReasonCreateOrganizationInBillingModeUnsupportedRegion ConstraintViolationExceptionReason = "CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION"
 	ConstraintViolationExceptionReasonEmailVerificationCodeExpired                     ConstraintViolationExceptionReason = "EMAIL_VERIFICATION_CODE_EXPIRED"
 	ConstraintViolationExceptionReasonWaitPeriodActive                                 ConstraintViolationExceptionReason = "WAIT_PERIOD_ACTIVE"
+	ConstraintViolationExceptionReasonMaxTagLimitExceeded                              ConstraintViolationExceptionReason = "MAX_TAG_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonTagPolicyViolation                               ConstraintViolationExceptionReason = "TAG_POLICY_VIOLATION"
 )
 
 func (enum ConstraintViolationExceptionReason) MarshalValue() (string, error) {
@@ -287,6 +289,7 @@ const (
 	InvalidInputExceptionReasonInvalidFullNameTarget              InvalidInputExceptionReason = "INVALID_FULL_NAME_TARGET"
 	InvalidInputExceptionReasonUnrecognizedServicePrincipal       InvalidInputExceptionReason = "UNRECOGNIZED_SERVICE_PRINCIPAL"
 	InvalidInputExceptionReasonInvalidRoleName                    InvalidInputExceptionReason = "INVALID_ROLE_NAME"
+	InvalidInputExceptionReasonInvalidSystemTagsParameter         InvalidInputExceptionReason = "INVALID_SYSTEM_TAGS_PARAMETER"
 )
 
 func (enum InvalidInputExceptionReason) MarshalValue() (string, error) {

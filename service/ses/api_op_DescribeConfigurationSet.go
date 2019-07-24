@@ -11,7 +11,7 @@ import (
 
 // Represents a request to return the details of a configuration set. Configuration
 // sets enable you to publish email sending events. For information about using
-// configuration sets, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
+// configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeConfigurationSetRequest
 type DescribeConfigurationSetInput struct {
 	_ struct{} `type:"structure"`
@@ -46,7 +46,7 @@ func (s *DescribeConfigurationSetInput) Validate() error {
 
 // Represents the details of a configuration set. Configuration sets enable
 // you to publish email sending events. For information about using configuration
-// sets, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
+// sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeConfigurationSetResponse
 type DescribeConfigurationSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -54,6 +54,10 @@ type DescribeConfigurationSetOutput struct {
 	// The configuration set object associated with the specified configuration
 	// set.
 	ConfigurationSet *ConfigurationSet `type:"structure"`
+
+	// Specifies whether messages that use the configuration set are required to
+	// use Transport Layer Security (TLS).
+	DeliveryOptions *DeliveryOptions `type:"structure"`
 
 	// A list of event destinations associated with the configuration set.
 	EventDestinations []EventDestination `type:"list"`
@@ -77,7 +81,7 @@ const opDescribeConfigurationSet = "DescribeConfigurationSet"
 // Amazon Simple Email Service.
 //
 // Returns the details of the specified configuration set. For information about
-// using configuration sets, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
+// using configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 //
 // You can execute this operation no more than once per second.
 //

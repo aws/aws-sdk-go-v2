@@ -11,14 +11,14 @@ import (
 )
 
 // The request to update a distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/UpdateDistributionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateDistributionRequest
 type UpdateDistributionInput struct {
 	_ struct{} `type:"structure" payload:"DistributionConfig"`
 
 	// The distribution's configuration information.
 	//
 	// DistributionConfig is a required field
-	DistributionConfig *DistributionConfig `locationName:"DistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2018-11-05/"`
+	DistributionConfig *DistributionConfig `locationName:"DistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
 
 	// The distribution's id.
 	//
@@ -76,14 +76,14 @@ func (s UpdateDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
 	if s.DistributionConfig != nil {
 		v := s.DistributionConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2018-11-05/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
 		e.SetFields(protocol.PayloadTarget, "DistributionConfig", v, metadata)
 	}
 	return nil
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/UpdateDistributionResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateDistributionResult
 type UpdateDistributionOutput struct {
 	_ struct{} `type:"structure" payload:"Distribution"`
 
@@ -116,7 +116,7 @@ func (s UpdateDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opUpdateDistribution = "UpdateDistribution2018_11_05"
+const opUpdateDistribution = "UpdateDistribution2019_03_26"
 
 // UpdateDistributionRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -128,7 +128,7 @@ const opUpdateDistribution = "UpdateDistribution2018_11_05"
 // API action, follow the steps here to get the current configuration and then
 // make your updates, to make sure that you include all of the required fields.
 // To view a summary, see Required Fields for Create Distribution and Update
-// Distribution (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-overview-required-fields.html)
+// Distribution (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-overview-required-fields.html)
 // in the Amazon CloudFront Developer Guide.
 //
 // The update process includes getting the current distribution configuration,
@@ -136,13 +136,13 @@ const opUpdateDistribution = "UpdateDistribution2018_11_05"
 // submitting an UpdateDistribution request to make the updates.
 //
 // For information about updating a distribution using the CloudFront console
-// instead, see Creating a Distribution (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-creating-console.html)
+// instead, see Creating a Distribution (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-creating-console.html)
 // in the Amazon CloudFront Developer Guide.
 //
 // To update a web distribution using the CloudFront API
 //
-// Submit a GetDistributionConfig request to get the current configuration and
-// an Etag header for the distribution.
+// Submit a GetDistributionConfig (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistributionConfig.html)
+// request to get the current configuration and an Etag header for the distribution.
 //
 // If you update the distribution again, you must get a new Etag header.
 //
@@ -182,8 +182,9 @@ const opUpdateDistribution = "UpdateDistribution2018_11_05"
 // Review the response to the UpdateDistribution request to confirm that the
 // configuration was successfully updated.
 //
-// Optional: Submit a GetDistribution request to confirm that your changes have
-// propagated. When propagation is complete, the value of Status is Deployed.
+// Optional: Submit a GetDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistribution.html)
+// request to confirm that your changes have propagated. When propagation is
+// complete, the value of Status is Deployed.
 //
 //    // Example sending a request using UpdateDistributionRequest.
 //    req := client.UpdateDistributionRequest(params)
@@ -192,12 +193,12 @@ const opUpdateDistribution = "UpdateDistribution2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/UpdateDistribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateDistribution
 func (c *Client) UpdateDistributionRequest(input *UpdateDistributionInput) UpdateDistributionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDistribution,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/2018-11-05/distribution/{Id}/config",
+		HTTPPath:   "/2019-03-26/distribution/{Id}/config",
 	}
 
 	if input == nil {

@@ -21,6 +21,8 @@ type DeleteFlowLogsInput struct {
 
 	// One or more flow log IDs.
 	//
+	// Constraint: Maximum of 1000 flow log IDs.
+	//
 	// FlowLogIds is a required field
 	FlowLogIds []string `locationName:"FlowLogId" locationNameList:"item" type:"list" required:"true"`
 }

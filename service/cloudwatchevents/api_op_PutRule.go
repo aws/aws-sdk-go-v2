@@ -17,11 +17,15 @@ type PutRuleInput struct {
 	// A description of the rule.
 	Description *string `type:"string"`
 
-	// The event pattern. For more information, see Events and Event Patterns (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html)
-	// in the Amazon CloudWatch Events User Guide.
+	// The event bus to associate with this rule. If you omit this, the default
+	// event bus is used.
+	EventBusName *string `min:"1" type:"string"`
+
+	// The event pattern. For more information, see Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
+	// in the Amazon EventBridge User Guide.
 	EventPattern *string `type:"string"`
 
-	// The name of the rule that you are creating or updating.
+	// The name of the rule that you're creating or updating.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
@@ -29,7 +33,7 @@ type PutRuleInput struct {
 	// The Amazon Resource Name (ARN) of the IAM role associated with the rule.
 	RoleArn *string `min:"1" type:"string"`
 
-	// The scheduling expression. For example, "cron(0 20 * * ? *)" or "rate(5 minutes)".
+	// The scheduling expression: for example, "cron(0 20 * * ? *)" or "rate(5 minutes)".
 	ScheduleExpression *string `type:"string"`
 
 	// Indicates whether the rule is enabled or disabled.
@@ -47,6 +51,9 @@ func (s PutRuleInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutRuleInput"}
+	if s.EventBusName != nil && len(*s.EventBusName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EventBusName", 1))
+	}
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
@@ -89,13 +96,19 @@ const opPutRule = "PutRule"
 // PutRuleRequest returns a request value for making API operation for
 // Amazon CloudWatch Events.
 //
-// Creates or updates the specified rule. Rules are enabled by default, or based
+// Creates or updates the specified rule. Rules are enabled by default or based
 // on value of the state. You can disable a rule using DisableRule.
 //
-// If you are updating an existing rule, the rule is replaced with what you
-// specify in this PutRule command. If you omit arguments in PutRule, the old
-// values for those arguments are not kept. Instead, they are replaced with
-// null values.
+// A single rule watches for events from a single event bus. Events generated
+// by AWS services go to your account's default event bus. Events generated
+// by SaaS partner services or applications go to the matching partner event
+// bus. If you have custom applications or services, you can specify whether
+// their events go to your default event bus or a custom event bus that you
+// have created. For more information, see CreateEventBus.
+//
+// If you're updating an existing rule, the rule is replaced with what you specify
+// in this PutRule command. If you omit arguments in PutRule, the old values
+// for those arguments aren't kept. Instead, they're replaced with null values.
 //
 // When you create or update a rule, incoming events might not immediately start
 // matching to new or updated rules. Allow a short period of time for changes
@@ -119,17 +132,18 @@ const opPutRule = "PutRule"
 // and UntagResource.
 //
 // Most services in AWS treat : or / as the same character in Amazon Resource
-// Names (ARNs). However, CloudWatch Events uses an exact match in event patterns
+// Names (ARNs). However, EventBridge uses an exact match in event patterns
 // and rules. Be sure to use the correct ARN characters when creating event
-// patterns so that they match the ARN syntax in the event you want to match.
+// patterns so that they match the ARN syntax in the event that you want to
+// match.
 //
-// In CloudWatch Events, it is possible to create rules that lead to infinite
-// loops, where a rule is fired repeatedly. For example, a rule might detect
-// that ACLs have changed on an S3 bucket, and trigger software to change them
-// to the desired state. If the rule is not written carefully, the subsequent
-// change to the ACLs fires the rule again, creating an infinite loop.
+// In EventBridge, you could create rules that lead to infinite loops, where
+// a rule is fired repeatedly. For example, a rule might detect that ACLs have
+// changed on an S3 bucket, and trigger software to change them to the desired
+// state. If you don't write the rule carefully, the subsequent change to the
+// ACLs fires the rule again, creating an infinite loop.
 //
-// To prevent this, write the rules so that the triggered actions do not re-fire
+// To prevent this, write the rules so that the triggered actions don't refire
 // the same rule. For example, your rule could fire only if ACLs are found to
 // be in a bad state, instead of after any change.
 //

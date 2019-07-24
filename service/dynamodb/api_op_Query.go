@@ -37,7 +37,7 @@ type QueryInput struct {
 	// The primary key of the first item that this operation will evaluate. Use
 	// the value that was returned for LastEvaluatedKey in the previous operation.
 	//
-	// The data type for ExclusiveStartKey must be String, Number or Binary. No
+	// The data type for ExclusiveStartKey must be String, Number, or Binary. No
 	// set data types are allowed.
 	ExclusiveStartKey map[string]AttributeValue `type:"map"`
 
@@ -73,7 +73,7 @@ type QueryInput struct {
 	// Tokens that begin with the : character are expression attribute values, which
 	// are placeholders for the actual value at runtime.
 	//
-	// For more information on expression attribute names, see Accessing Item Attributes
+	// For more information on expression attribute names, see Specifying Item Attributes
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeNames map[string]string `type:"map"`
@@ -119,7 +119,7 @@ type QueryInput struct {
 	// parameter, you must also provide TableName.
 	IndexName *string `min:"3" type:"string"`
 
-	// The condition that specifies the key value(s) for items to be retrieved by
+	// The condition that specifies the key values for items to be retrieved by
 	// the Query action.
 	//
 	// The condition must perform an equality test on a single partition key value.
@@ -198,7 +198,7 @@ type QueryInput struct {
 	// items). If DynamoDB processes the number of items up to the limit while processing
 	// the results, it stops the operation and returns the matching values up to
 	// that point, and a key in LastEvaluatedKey to apply in a subsequent operation,
-	// so that you can pick up where you left off. Also, if the processed data set
+	// so that you can pick up where you left off. Also, if the processed dataset
 	// size exceeds 1 MB before DynamoDB reaches this limit, it stops the operation
 	// and returns the matching values up to the limit, and a key in LastEvaluatedKey
 	// to apply in a subsequent operation to continue the operation. For more information,
@@ -259,10 +259,10 @@ type QueryInput struct {
 	//
 	//    * ALL_ATTRIBUTES - Returns all of the item attributes from the specified
 	//    table or index. If you query a local secondary index, then for each matching
-	//    item in the index DynamoDB will fetch the entire item from the parent
-	//    table. If the index is configured to project all item attributes, then
-	//    all of the data can be obtained from the local secondary index, and no
-	//    fetching is required.
+	//    item in the index, DynamoDB fetches the entire item from the parent table.
+	//    If the index is configured to project all item attributes, then all of
+	//    the data can be obtained from the local secondary index, and no fetching
+	//    is required.
 	//
 	//    * ALL_PROJECTED_ATTRIBUTES - Allowed only when querying an index. Retrieves
 	//    all attributes that have been projected into the index. If the index is
@@ -278,7 +278,7 @@ type QueryInput struct {
 	//    index and request only attributes that are projected into that index,
 	//    the operation will read only the index and not the table. If any of the
 	//    requested attributes are not projected into the local secondary index,
-	//    DynamoDB will fetch each of these attributes from the parent table. This
+	//    DynamoDB fetches each of these attributes from the parent table. This
 	//    extra fetching incurs additional throughput cost and latency. If you query
 	//    or scan a global secondary index, you can only request attributes that
 	//    are projected into the index. Global secondary index queries cannot fetch
@@ -355,8 +355,8 @@ type QueryOutput struct {
 	// The capacity units consumed by the Query operation. The data returned includes
 	// the total provisioned throughput consumed, along with statistics for the
 	// table and any indexes involved in the operation. ConsumedCapacity is only
-	// returned if the ReturnConsumedCapacity parameter was specified For more information,
-	// see Provisioned Throughput (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
+	// returned if the ReturnConsumedCapacity parameter was specified. For more
+	// information, see Provisioned Throughput (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ConsumedCapacity *ConsumedCapacity `type:"structure"`
 

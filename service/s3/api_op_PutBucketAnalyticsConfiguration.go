@@ -25,7 +25,7 @@ type PutBucketAnalyticsConfigurationInput struct {
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
-	// The identifier used to represent an analytics configuration.
+	// The ID that identifies the analytics configuration.
 	//
 	// Id is a required field
 	Id *string `location:"querystring" locationName:"id" type:"string" required:"true"`

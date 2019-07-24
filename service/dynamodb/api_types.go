@@ -2796,27 +2796,19 @@ func (s RestoreSummary) String() string {
 type SSEDescription struct {
 	_ struct{} `type:"structure"`
 
-	// The KMS master key ARN used for the KMS encryption.
+	// The KMS customer master key (CMK) ARN used for the KMS encryption.
 	KMSMasterKeyArn *string `type:"string"`
 
-	// Server-side encryption type:
-	//
-	//    * AES256 - Server-side encryption which uses the AES256 algorithm (not
-	//    applicable).
+	// Server-side encryption type. The only supported value is:
 	//
 	//    * KMS - Server-side encryption which uses AWS Key Management Service.
 	//    Key is stored in your account and is managed by AWS KMS (KMS charges apply).
 	SSEType SSEType `type:"string" enum:"true"`
 
-	// The current state of server-side encryption:
-	//
-	//    * ENABLING - Server-side encryption is being enabled.
+	// Represents the current state of server-side encryption. The only supported
+	// values are:
 	//
 	//    * ENABLED - Server-side encryption is enabled.
-	//
-	//    * DISABLING - Server-side encryption is being disabled.
-	//
-	//    * DISABLED - Server-side encryption is disabled.
 	//
 	//    * UPDATING - Server-side encryption is being updated.
 	Status SSEStatus `type:"string" enum:"true"`
@@ -2832,22 +2824,19 @@ func (s SSEDescription) String() string {
 type SSESpecification struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates whether server-side encryption is enabled (true) or disabled (false)
-	// on the table. If enabled (true), server-side encryption type is set to KMS.
-	// If disabled (false) or not specified, server-side encryption is set to AWS
-	// owned CMK.
+	// Indicates whether server-side encryption is done using an AWS managed CMK
+	// or an AWS owned CMK. If enabled (true), server-side encryption type is set
+	// to KMS and an AWS managed CMK is used (AWS KMS charges apply). If disabled
+	// (false) or not specified, server-side encryption is set to AWS owned CMK.
 	Enabled *bool `type:"boolean"`
 
-	// The KMS Master Key (CMK) which should be used for the KMS encryption. To
-	// specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or
-	// alias ARN. Note that you should only provide this parameter if the key is
-	// different from the default DynamoDB KMS Master Key alias/aws/dynamodb.
+	// The KMS Customer Master Key (CMK) which should be used for the KMS encryption.
+	// To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name,
+	// or alias ARN. Note that you should only provide this parameter if the key
+	// is different from the default DynamoDB Customer Master Key alias/aws/dynamodb.
 	KMSMasterKeyId *string `type:"string"`
 
-	// Server-side encryption type:
-	//
-	//    * AES256 - Server-side encryption which uses the AES256 algorithm (not
-	//    applicable).
+	// Server-side encryption type. The only supported value is:
 	//
 	//    * KMS - Server-side encryption which uses AWS Key Management Service.
 	//    Key is stored in your account and is managed by AWS KMS (KMS charges apply).
@@ -3059,7 +3048,7 @@ type TableDescription struct {
 	//
 	//    * KeyType - The role of the attribute: HASH - partition key RANGE - sort
 	//    key The partition key of an item is also known as its hash attribute.
-	//    The term "hash attribute" derives from DynamoDB' usage of an internal
+	//    The term "hash attribute" derives from DynamoDB's usage of an internal
 	//    hash function to evenly distribute data items across partitions, based
 	//    on their partition key values. The sort key of an item is also known as
 	//    its range attribute. The term "range attribute" derives from the way DynamoDB
@@ -3184,9 +3173,9 @@ func (s TableDescription) String() string {
 type Tag struct {
 	_ struct{} `type:"structure"`
 
-	// The key of the tag.Tag keys are case sensitive. Each DynamoDB table can only
-	// have up to one tag with the same key. If you try to add an existing tag (same
-	// key), the existing tag value will be updated to the new value.
+	// The key of the tag. Tag keys are case sensitive. Each DynamoDB table can
+	// only have up to one tag with the same key. If you try to add an existing
+	// tag (same key), the existing tag value will be updated to the new value.
 	//
 	// Key is a required field
 	Key *string `min:"1" type:"string" required:"true"`
@@ -3228,10 +3217,10 @@ func (s *Tag) Validate() error {
 type TimeToLiveDescription struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the Time to Live attribute for items in the table.
+	// The name of the TTL attribute for items in the table.
 	AttributeName *string `min:"1" type:"string"`
 
-	// The Time to Live status for the table.
+	// The TTL status for the table.
 	TimeToLiveStatus TimeToLiveStatus `type:"string" enum:"true"`
 }
 
@@ -3240,20 +3229,20 @@ func (s TimeToLiveDescription) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Represents the settings used to enable or disable Time to Live for the specified
-// table.
+// Represents the settings used to enable or disable Time to Live (TTL) for
+// the specified table.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TimeToLiveSpecification
 type TimeToLiveSpecification struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the Time to Live attribute used to store the expiration time
-	// for items in the table.
+	// The name of the TTL attribute used to store the expiration time for items
+	// in the table.
 	//
 	// AttributeName is a required field
 	AttributeName *string `min:"1" type:"string" required:"true"`
 
-	// Indicates whether Time To Live is to be enabled (true) or disabled (false)
-	// on the table.
+	// Indicates whether TTL is to be enabled (true) or disabled (false) on the
+	// table.
 	//
 	// Enabled is a required field
 	Enabled *bool `type:"boolean" required:"true"`

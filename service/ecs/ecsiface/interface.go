@@ -132,6 +132,8 @@ type ClientAPI interface {
 
 	StopTaskRequest(*ecs.StopTaskInput) ecs.StopTaskRequest
 
+	SubmitAttachmentStateChangesRequest(*ecs.SubmitAttachmentStateChangesInput) ecs.SubmitAttachmentStateChangesRequest
+
 	SubmitContainerStateChangeRequest(*ecs.SubmitContainerStateChangeInput) ecs.SubmitContainerStateChangeRequest
 
 	SubmitTaskStateChangeRequest(*ecs.SubmitTaskStateChangeInput) ecs.SubmitTaskStateChangeRequest

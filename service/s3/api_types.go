@@ -14,14 +14,17 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// Specifies the days since the initiation of an Incomplete Multipart Upload
-// that Lifecycle will wait before permanently removing all parts of the upload.
+// Specifies the days since the initiation of an incomplete multipart upload
+// that Amazon S3 will wait before permanently removing all parts of the upload.
+// For more information, see Aborting Incomplete Multipart Uploads Using a Bucket
+// Lifecycle Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)
+// in the Amazon Simple Storage Service Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbortIncompleteMultipartUpload
 type AbortIncompleteMultipartUpload struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates the number of days that must pass since initiation for Lifecycle
-	// to abort an Incomplete Multipart Upload.
+	// Specifies the number of days after which Amazon S3 aborts an incomplete multipart
+	// upload.
 	DaysAfterInitiation *int64 `type:"integer"`
 }
 
@@ -41,11 +44,14 @@ func (s AbortIncompleteMultipartUpload) MarshalFields(e protocol.FieldEncoder) e
 	return nil
 }
 
+// Configures the transfer acceleration state for an Amazon S3 bucket. For more
+// information, see Amazon S3 Transfer Acceleration (https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html)
+// in the Amazon Simple Storage Service Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AccelerateConfiguration
 type AccelerateConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// The accelerate configuration of the bucket.
+	// Specifies the transfer acceleration status of the bucket.
 	Status BucketAccelerateStatus `type:"string" enum:"true"`
 }
 
@@ -65,6 +71,7 @@ func (s AccelerateConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains the elements that set the ACL permissions for an object per grantee.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AccessControlPolicy
 type AccessControlPolicy struct {
 	_ struct{} `type:"structure"`
@@ -72,6 +79,7 @@ type AccessControlPolicy struct {
 	// A list of grants.
 	Grants []Grant `locationName:"AccessControlList" locationNameList:"Grant" type:"list"`
 
+	// Container for the bucket owner's display name and ID.
 	Owner *Owner `type:"structure"`
 }
 
@@ -125,7 +133,9 @@ func (s AccessControlPolicy) MarshalFields(e protocol.FieldEncoder) error {
 type AccessControlTranslation struct {
 	_ struct{} `type:"structure"`
 
-	// The override value for the owner of the replica object.
+	// Specifies the replica ownership. For default and valid values, see PUT bucket
+	// replication (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html)
+	// in the Amazon Simple Storage Service API Reference.
 	//
 	// Owner is a required field
 	Owner OwnerOverride `type:"string" required:"true" enum:"true"`
@@ -160,11 +170,15 @@ func (s AccessControlTranslation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A conjunction (logical AND) of predicates, which is used in evaluating a
+// metrics filter. The operator must have at least two predicates in any combination,
+// and an object must match all of the predicates for the filter to apply.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsAndOperator
 type AnalyticsAndOperator struct {
 	_ struct{} `type:"structure"`
 
-	// The prefix to use when evaluating an AND predicate.
+	// The prefix to use when evaluating an AND predicate: The prefix that an object
+	// must have to be included in the metrics results.
 	Prefix *string `type:"string"`
 
 	// The list of tags to use when evaluating an AND predicate.
@@ -216,6 +230,11 @@ func (s AnalyticsAndOperator) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the configuration and any analyses for the analytics filter of
+// an Amazon S3 bucket.
+//
+// For more information, see GET Bucket analytics (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETAnalyticsConfig.html)
+// in the Amazon Simple Storage Service API Reference.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsConfiguration
 type AnalyticsConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -225,13 +244,13 @@ type AnalyticsConfiguration struct {
 	// If no filter is provided, all objects will be considered in any analysis.
 	Filter *AnalyticsFilter `type:"structure"`
 
-	// The identifier used to represent an analytics configuration.
+	// The ID that identifies the analytics configuration.
 	//
 	// Id is a required field
 	Id *string `type:"string" required:"true"`
 
-	// If present, it indicates that data related to access patterns will be collected
-	// and made available to analyze the tradeoffs between different storage classes.
+	// Contains data related to access patterns to be collected and made available
+	// to analyze the tradeoffs between different storage classes.
 	//
 	// StorageClassAnalysis is a required field
 	StorageClassAnalysis *StorageClassAnalysis `type:"structure" required:"true"`
@@ -293,6 +312,7 @@ func (s AnalyticsConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Where to publish the analytics results.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsExportDestination
 type AnalyticsExportDestination struct {
 	_ struct{} `type:"structure"`
@@ -405,7 +425,7 @@ func (s AnalyticsFilter) MarshalFields(e protocol.FieldEncoder) error {
 type AnalyticsS3BucketDestination struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon resource name (ARN) of the bucket to which data is exported.
+	// The Amazon Resource Name (ARN) of the bucket to which data is exported.
 	//
 	// Bucket is a required field
 	Bucket *string `type:"string" required:"true"`
@@ -414,13 +434,12 @@ type AnalyticsS3BucketDestination struct {
 	// the owner will not be validated prior to exporting data.
 	BucketAccountId *string `type:"string"`
 
-	// The file format used when exporting data to Amazon S3.
+	// Specifies the file format used when exporting data to Amazon S3.
 	//
 	// Format is a required field
 	Format AnalyticsS3ExportFileFormat `type:"string" required:"true" enum:"true"`
 
-	// The prefix to use when exporting data. The exported data begins with this
-	// prefix.
+	// The prefix to use when exporting data. The prefix is prepended to all results.
 	Prefix *string `type:"string"`
 }
 
@@ -515,10 +534,15 @@ func (s Bucket) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the lifecycle configuration for objects in an Amazon S3 bucket.
+// For more information, see Object Lifecycle Management (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html)
+// in the Amazon Simple Storage Service Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/BucketLifecycleConfiguration
 type BucketLifecycleConfiguration struct {
 	_ struct{} `type:"structure"`
 
+	// A lifecycle rule for individual objects in an Amazon S3 bucket.
+	//
 	// Rules is a required field
 	Rules []LifecycleRule `locationName:"Rule" type:"list" flattened:"true" required:"true"`
 }
@@ -570,9 +594,10 @@ func (s BucketLifecycleConfiguration) MarshalFields(e protocol.FieldEncoder) err
 type BucketLoggingStatus struct {
 	_ struct{} `type:"structure"`
 
-	// Container for logging information. Presence of this element indicates that
-	// logging is enabled. Parameters TargetBucket and TargetPrefix are required
-	// in this case.
+	// Describes where logs are stored and the prefix that Amazon S3 assigns to
+	// all log object keys for a bucket. For more information, see PUT Bucket logging
+	// (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html)
+	// in the Amazon Simple Storage Service API Reference.
 	LoggingEnabled *LoggingEnabled `type:"structure"`
 }
 
@@ -607,10 +632,16 @@ func (s BucketLoggingStatus) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Describes the cross-origin access configuration for objects in an Amazon
+// S3 bucket. For more information, see Enabling Cross-Origin Resource Sharing
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the Amazon
+// Simple Storage Service Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CORSConfiguration
 type CORSConfiguration struct {
 	_ struct{} `type:"structure"`
 
+	// A set of allowed origins and methods.
+	//
 	// CORSRules is a required field
 	CORSRules []CORSRule `locationName:"CORSRule" type:"list" flattened:"true" required:"true"`
 }
@@ -658,15 +689,19 @@ func (s CORSConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies a cross-origin access rule for an Amazon S3 bucket.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CORSRule
 type CORSRule struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies which headers are allowed in a pre-flight OPTIONS request.
+	// Headers that are specified in the Access-Control-Request-Headers header.
+	// These headers are allowed in a preflight OPTIONS request. In response to
+	// any preflight OPTIONS request, Amazon S3 returns any requested headers that
+	// are allowed.
 	AllowedHeaders []string `locationName:"AllowedHeader" type:"list" flattened:"true"`
 
-	// Identifies HTTP methods that the domain/origin specified in the rule is allowed
-	// to execute.
+	// An HTTP method that you allow the origin to execute. Valid values are GET,
+	// PUT, HEAD, POST, and DELETE.
 	//
 	// AllowedMethods is a required field
 	AllowedMethods []string `locationName:"AllowedMethod" type:"list" flattened:"true" required:"true"`
@@ -1063,6 +1098,7 @@ func (s CompletedPart) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies a condition that must be met for a redirect to apply.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Condition
 type Condition struct {
 	_ struct{} `type:"structure"`
@@ -1195,7 +1231,7 @@ func (s CreateBucketConfiguration) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// The container element for specifying the default Object Lock retention settings
+// The container element for specifying the default object lock retention settings
 // for new objects placed in the specified bucket.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DefaultRetention
 type DefaultRetention struct {
@@ -1204,7 +1240,7 @@ type DefaultRetention struct {
 	// The number of days that you want to specify for the default retention period.
 	Days *int64 `type:"integer"`
 
-	// The default Object Lock retention mode you want to apply to new objects placed
+	// The default object lock retention mode you want to apply to new objects placed
 	// in the specified bucket.
 	Mode ObjectLockRetentionMode `type:"string" enum:"true"`
 
@@ -1436,34 +1472,34 @@ func (s DeletedObject) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A container for information about the replication destination.
+// Specifies information about where to publish analysis or configuration results
+// for an Amazon S3 bucket.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Destination
 type Destination struct {
 	_ struct{} `type:"structure"`
 
-	// A container for information about access control for replicas.
-	//
-	// Use this element only in a cross-account scenario where source and destination
-	// bucket owners are not the same to change replica ownership to the AWS account
-	// that owns the destination bucket. If you don't add this element to the replication
-	// configuration, the replicas are owned by same AWS account that owns the source
-	// object.
+	// Specify this only in a cross-account scenario (where source and destination
+	// bucket owners are not the same), and you want to change replica ownership
+	// to the AWS account that owns the destination bucket. If this is not specified
+	// in the replication configuration, the replicas are owned by same AWS account
+	// that owns the source object.
 	AccessControlTranslation *AccessControlTranslation `type:"structure"`
 
-	// The account ID of the destination bucket. Currently, Amazon S3 verifies this
-	// value only if Access Control Translation is enabled.
-	//
-	// In a cross-account scenario, if you change replica ownership to the AWS account
-	// that owns the destination bucket by adding the AccessControlTranslation element,
-	// this is the account ID of the owner of the destination bucket.
+	// Destination bucket owner account ID. In a cross-account scenario, if you
+	// direct Amazon S3 to change replica ownership to the AWS account that owns
+	// the destination bucket by specifying the AccessControlTranslation property,
+	// this is the account ID of the destination bucket owner. For more information,
+	// see Cross-Region Replication Additional Configuration: Change Replica Owner
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/crr-change-owner.html) in
+	// the Amazon Simple Storage Service Developer Guide.
 	Account *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the bucket where you want Amazon S3 to
 	// store replicas of the object identified by the rule.
 	//
-	// If there are multiple rules in your replication configuration, all rules
-	// must specify the same bucket as the destination. A replication configuration
-	// can replicate objects to only one destination bucket.
+	// A replication configuration can replicate objects to only one destination
+	// bucket. If there are multiple rules in your replication configuration, all
+	// rules must specify the same destination bucket.
 	//
 	// Bucket is a required field
 	Bucket *string `type:"string" required:"true"`
@@ -1472,8 +1508,13 @@ type Destination struct {
 	// is specified, you must specify this element.
 	EncryptionConfiguration *EncryptionConfiguration `type:"structure"`
 
-	// The class of storage used to store the object. By default Amazon S3 uses
-	// storage class of the source object when creating a replica.
+	// The storage class to use when replicating objects, such as standard or reduced
+	// redundancy. By default, Amazon S3 uses the storage class of the source object
+	// to create the object replica.
+	//
+	// For valid values, see the StorageClass element of the PUT Bucket replication
+	// (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html)
+	// action in the Amazon Simple Storage Service API Reference.
 	StorageClass StorageClass `type:"string" enum:"true"`
 }
 
@@ -1605,14 +1646,14 @@ func (s Encryption) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A container for information about the encryption-based configuration for
-// replicas.
+// Specifies encryption-related information for an Amazon S3 bucket that is
+// a destination for replicated objects.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/EncryptionConfiguration
 type EncryptionConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the AWS KMS key for the AWS Region where the destination bucket
-	// resides. Amazon S3 uses this key to encrypt the replica object.
+	// Specifies the AWS KMS Key ID (Key ARN or Alias ARN) for the destination bucket.
+	// Amazon S3 uses this key to encrypt replica objects.
 	ReplicaKmsKeyID *string `type:"string"`
 }
 
@@ -1722,19 +1763,20 @@ func (s ErrorDocument) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A container for a key value pair that defines the criteria for the filter
-// rule.
+// Specifies the Amazon S3 object key name to filter on and whether to filter
+// on the suffix or prefix of the key name.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/FilterRule
 type FilterRule struct {
 	_ struct{} `type:"structure"`
 
 	// The object key name prefix or suffix identifying one or more objects to which
-	// the filtering rule applies. The maximum prefix length is 1,024 characters.
-	// Overlapping prefixes and suffixes are not supported. For more information,
-	// see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+	// the filtering rule applies. The maximum length is 1,024 characters. Overlapping
+	// prefixes and suffixes are not supported. For more information, see Configuring
+	// Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
 	// in the Amazon Simple Storage Service Developer Guide.
 	Name FilterRuleName `type:"string" enum:"true"`
 
+	// The value that the filter searches for in object key names.
 	Value *string `type:"string"`
 }
 
@@ -2052,6 +2094,9 @@ func (s InputSerialization) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the inventory configuration for an Amazon S3 bucket. For more information,
+// see GET Bucket inventory (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html)
+// in the Amazon Simple Storage Service API Reference.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryConfiguration
 type InventoryConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -2070,12 +2115,16 @@ type InventoryConfiguration struct {
 	// Id is a required field
 	Id *string `type:"string" required:"true"`
 
-	// Specifies which object version(s) to included in the inventory results.
+	// Object versions to include in the inventory list. If set to All, the list
+	// includes all the object versions, which adds the version-related fields VersionId,
+	// IsLatest, and DeleteMarker to the list. If set to Current, the list does
+	// not contain these version-related fields.
 	//
 	// IncludedObjectVersions is a required field
 	IncludedObjectVersions InventoryIncludedObjectVersions `type:"string" required:"true" enum:"true"`
 
-	// Specifies whether the inventory is enabled or disabled.
+	// Specifies whether the inventory is enabled or disabled. If set to True, an
+	// inventory list is generated. If set to False, no inventory list is generated.
 	//
 	// IsEnabled is a required field
 	IsEnabled *bool `type:"boolean" required:"true"`
@@ -2514,11 +2563,15 @@ func (s JSONOutput) MarshalFields(e protocol.FieldEncoder) error {
 type LambdaFunctionConfiguration struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon S3 bucket event for which to invoke the AWS Lambda function. For
+	// more information, see Supported Event Types (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+	// in the Amazon Simple Storage Service Developer Guide.
+	//
 	// Events is a required field
 	Events []Event `locationName:"Event" type:"list" flattened:"true" required:"true"`
 
-	// A container for object key name filtering rules. For information about key
-	// name filtering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+	// Specifies object key name filtering rules. For information about key name
+	// filtering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
 	// in the Amazon Simple Storage Service Developer Guide.
 	Filter *NotificationConfigurationFilter `type:"structure"`
 
@@ -2526,8 +2579,8 @@ type LambdaFunctionConfiguration struct {
 	// If you don't provide one, Amazon S3 will assign an ID.
 	Id *string `type:"string"`
 
-	// The Amazon Resource Name (ARN) of the Lambda cloud function that Amazon S3
-	// can invoke when it detects events of the specified type.
+	// The Amazon Resource Name (ARN) of the AWS Lambda function that Amazon S3
+	// invokes when the specified event type occurs.
 	//
 	// LambdaFunctionArn is a required field
 	LambdaFunctionArn *string `locationName:"CloudFunction" type:"string" required:"true"`
@@ -2693,8 +2746,11 @@ func (s LifecycleExpiration) MarshalFields(e protocol.FieldEncoder) error {
 type LifecycleRule struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the days since the initiation of an Incomplete Multipart Upload
-	// that Lifecycle will wait before permanently removing all parts of the upload.
+	// Specifies the days since the initiation of an incomplete multipart upload
+	// that Amazon S3 will wait before permanently removing all parts of the upload.
+	// For more information, see Aborting Incomplete Multipart Uploads Using a Bucket
+	// Lifecycle Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)
+	// in the Amazon Simple Storage Service Developer Guide.
 	AbortIncompleteMultipartUpload *AbortIncompleteMultipartUpload `type:"structure"`
 
 	Expiration *LifecycleExpiration `type:"structure"`
@@ -2947,9 +3003,10 @@ func (s LifecycleRuleFilter) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Container for logging information. Presence of this element indicates that
-// logging is enabled. Parameters TargetBucket and TargetPrefix are required
-// in this case.
+// Describes where logs are stored and the prefix that Amazon S3 assigns to
+// all log object keys for a bucket. For more information, see PUT Bucket logging
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html)
+// in the Amazon Simple Storage Service API Reference.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LoggingEnabled
 type LoggingEnabled struct {
 	_ struct{} `type:"structure"`
@@ -2966,8 +3023,9 @@ type LoggingEnabled struct {
 
 	TargetGrants []TargetGrant `locationNameList:"Grant" type:"list"`
 
-	// This element lets you specify a prefix for the keys that the log files will
-	// be stored under.
+	// A prefix for all log object keys. If you store log files from multiple Amazon
+	// S3 buckets in a single bucket, you can use a prefix to distinguish which
+	// log files came from which bucket.
 	//
 	// TargetPrefix is a required field
 	TargetPrefix *string `type:"string" required:"true"`
@@ -3120,6 +3178,13 @@ func (s MetricsAndOperator) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies a metrics configuration for the CloudWatch request metrics (specified
+// by the metrics configuration ID) from an Amazon S3 bucket. If you're updating
+// an existing metrics configuration, note that this is a full replacement of
+// the existing metrics configuration. If you don't include the elements you
+// want to keep, they are erased. For more information, see PUT Bucket metrics
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTMetricConfiguration.html)
+// in the Amazon Simple Storage Service API Reference.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetricsConfiguration
 type MetricsConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -3342,11 +3407,11 @@ func (s NoncurrentVersionExpiration) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // Container for the transition rule that describes when noncurrent objects
-// transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER or
-// DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning
+// transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER,
+// or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning
 // is suspended), you can set this action to request that Amazon S3 transition
 // noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING,
-// GLACIER or DEEP_ARCHIVE storage class at a specific period in the object's
+// GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's
 // lifetime.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NoncurrentVersionTransition
 type NoncurrentVersionTransition struct {
@@ -3391,10 +3456,16 @@ func (s NoncurrentVersionTransition) MarshalFields(e protocol.FieldEncoder) erro
 type NotificationConfiguration struct {
 	_ struct{} `type:"structure"`
 
+	// Describes the AWS Lambda functions to invoke and the events for which to
+	// invoke them.
 	LambdaFunctionConfigurations []LambdaFunctionConfiguration `locationName:"CloudFunctionConfiguration" type:"list" flattened:"true"`
 
+	// The Amazon Simple Queue Service queues to publish messages to and the events
+	// for which to publish messages.
 	QueueConfigurations []QueueConfiguration `locationName:"QueueConfiguration" type:"list" flattened:"true"`
 
+	// The topic to which notifications are sent and the events for which notifications
+	// are generated.
 	TopicConfigurations []TopicConfiguration `locationName:"TopicConfiguration" type:"list" flattened:"true"`
 }
 
@@ -3514,8 +3585,8 @@ func (s NotificationConfigurationDeprecated) MarshalFields(e protocol.FieldEncod
 	return nil
 }
 
-// A container for object key name filtering rules. For information about key
-// name filtering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+// Specifies object key name filtering rules. For information about key name
+// filtering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
 // in the Amazon Simple Storage Service Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfigurationFilter
 type NotificationConfigurationFilter struct {
@@ -3657,15 +3728,15 @@ func (s ObjectIdentifier) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The container element for Object Lock configuration parameters.
+// The container element for object lock configuration parameters.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectLockConfiguration
 type ObjectLockConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates whether this bucket has an Object Lock configuration enabled.
+	// Indicates whether this bucket has an object lock configuration enabled.
 	ObjectLockEnabled ObjectLockEnabled `type:"string" enum:"true"`
 
-	// The Object Lock rule in place for the specified object.
+	// The object lock rule in place for the specified object.
 	Rule *ObjectLockRule `type:"structure"`
 }
 
@@ -3724,7 +3795,7 @@ type ObjectLockRetention struct {
 	// Indicates the Retention mode for the specified object.
 	Mode ObjectLockRetentionMode `type:"string" enum:"true"`
 
-	// The date on which this Object Lock Retention will expire.
+	// The date on which this object lock retention expires.
 	RetainUntilDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 }
 
@@ -3750,7 +3821,7 @@ func (s ObjectLockRetention) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The container element for an Object Lock rule.
+// The container element for an object lock rule.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectLockRule
 type ObjectLockRule struct {
 	_ struct{} `type:"structure"`
@@ -4060,6 +4131,7 @@ func (s PolicyStatus) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the Block Public Access configuration for an Amazon S3 bucket.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PublicAccessBlockConfiguration
 type PublicAccessBlockConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -4136,9 +4208,8 @@ func (s PublicAccessBlockConfiguration) MarshalFields(e protocol.FieldEncoder) e
 	return nil
 }
 
-// A container for specifying the configuration for publication of messages
-// to an Amazon Simple Queue Service (Amazon SQS) queue.when Amazon S3 detects
-// specified events.
+// Specifies the configuration for publishing messages to an Amazon Simple Queue
+// Service (Amazon SQS) queue when Amazon S3 detects specified events.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/QueueConfiguration
 type QueueConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -4146,8 +4217,8 @@ type QueueConfiguration struct {
 	// Events is a required field
 	Events []Event `locationName:"Event" type:"list" flattened:"true" required:"true"`
 
-	// A container for object key name filtering rules. For information about key
-	// name filtering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+	// Specifies object key name filtering rules. For information about key name
+	// filtering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
 	// in the Amazon Simple Storage Service Developer Guide.
 	Filter *NotificationConfigurationFilter `type:"structure"`
 
@@ -4156,7 +4227,7 @@ type QueueConfiguration struct {
 	Id *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3
-	// will publish a message when it detects events of the specified type.
+	// publishes a message when it detects events of the specified type.
 	//
 	// QueueArn is a required field
 	QueueArn *string `locationName:"Queue" type:"string" required:"true"`
@@ -4276,6 +4347,8 @@ func (s QueueConfigurationDeprecated) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
+// Specifies how requests are redirected. In the event of an error, you can
+// specify a different error code to return.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Redirect
 type Redirect struct {
 	_ struct{} `type:"structure"`
@@ -4287,8 +4360,8 @@ type Redirect struct {
 	// siblings is present.
 	HttpRedirectCode *string `type:"string"`
 
-	// Protocol to use (http, https) when redirecting requests. The default is the
-	// protocol that is used in the original request.
+	// Protocol to use when redirecting requests. The default is the protocol that
+	// is used in the original request.
 	Protocol Protocol `type:"string" enum:"true"`
 
 	// The object key prefix to use in the redirect request. For example, to redirect
@@ -4300,7 +4373,7 @@ type Redirect struct {
 	ReplaceKeyPrefixWith *string `type:"string"`
 
 	// The specific object key to use in the redirect request. For example, redirect
-	// request to error.html. Not required if one of the sibling is present. Can
+	// request to error.html. Not required if one of the siblings is present. Can
 	// be present only if ReplaceKeyPrefixWith is not provided.
 	ReplaceKeyWith *string `type:"string"`
 }
@@ -4345,17 +4418,19 @@ func (s Redirect) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the redirect behavior of all requests to a website endpoint of
+// an Amazon S3 bucket.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RedirectAllRequestsTo
 type RedirectAllRequestsTo struct {
 	_ struct{} `type:"structure"`
 
-	// Name of the host where requests will be redirected.
+	// Name of the host where requests are redirected.
 	//
 	// HostName is a required field
 	HostName *string `type:"string" required:"true"`
 
-	// Protocol to use (http, https) when redirecting requests. The default is the
-	// protocol that is used in the original request.
+	// Protocol to use when redirecting requests. The default is the protocol that
+	// is used in the original request.
 	Protocol Protocol `type:"string" enum:"true"`
 }
 
@@ -4402,7 +4477,9 @@ type ReplicationConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management
-	// (IAM) role that Amazon S3 can assume when replicating the objects.
+	// (IAM) role that Amazon S3 assumes when replicating objects. For more information,
+	// see How to Set Up Cross-Region Replication (https://docs.aws.amazon.com/AmazonS3/latest/dev/crr-how-setup.html)
+	// in the Amazon Simple Storage Service Developer Guide.
 	//
 	// Role is a required field
 	Role *string `type:"string" required:"true"`
@@ -4467,7 +4544,7 @@ func (s ReplicationConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A container for information about a specific replication rule.
+// Specifies which Amazon S3 objects to replicate and where to store the replicas.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRule
 type ReplicationRule struct {
 	_ struct{} `type:"structure"`
@@ -4488,7 +4565,8 @@ type ReplicationRule struct {
 	ID *string `type:"string"`
 
 	// An object keyname prefix that identifies the object or objects to which the
-	// rule applies. The maximum prefix length is 1,024 characters.
+	// rule applies. The maximum prefix length is 1,024 characters. To include all
+	// objects in a bucket, specify an empty string.
 	Prefix *string `deprecated:"true" type:"string"`
 
 	// The priority associated with the rule. If you specify multiple rules in a
@@ -4511,12 +4589,9 @@ type ReplicationRule struct {
 	// replication of these objects. Currently, Amazon S3 supports only the filter
 	// that you can specify for objects created with server-side encryption using
 	// an AWS KMS-Managed Key (SSE-KMS).
-	//
-	// If you want Amazon S3 to replicate objects created with server-side encryption
-	// using AWS KMS-Managed Keys.
 	SourceSelectionCriteria *SourceSelectionCriteria `type:"structure"`
 
-	// If status isn't enabled, the rule is ignored.
+	// Specifies whether the rule is enabled.
 	//
 	// Status is a required field
 	Status ReplicationRuleStatus `type:"string" required:"true" enum:"true"`
@@ -4886,6 +4961,7 @@ func (s RestoreRequest) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the redirect behavior and when a redirect is applied.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RoutingRule
 type RoutingRule struct {
 	_ struct{} `type:"structure"`
@@ -4940,17 +5016,23 @@ func (s RoutingRule) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies lifecycle rules for an Amazon S3 bucket. For more information,
+// see PUT Bucket lifecycle (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html)
+// in the Amazon Simple Storage Service API Reference.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Rule
 type Rule struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the days since the initiation of an Incomplete Multipart Upload
-	// that Lifecycle will wait before permanently removing all parts of the upload.
+	// Specifies the days since the initiation of an incomplete multipart upload
+	// that Amazon S3 will wait before permanently removing all parts of the upload.
+	// For more information, see Aborting Incomplete Multipart Uploads Using a Bucket
+	// Lifecycle Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)
+	// in the Amazon Simple Storage Service Developer Guide.
 	AbortIncompleteMultipartUpload *AbortIncompleteMultipartUpload `type:"structure"`
 
 	Expiration *LifecycleExpiration `type:"structure"`
 
-	// Unique identifier for the rule. The value cannot be longer than 255 characters.
+	// Unique identifier for the rule. The value can't be longer than 255 characters.
 	ID *string `type:"string"`
 
 	// Specifies when noncurrent object versions expire. Upon expiration, Amazon
@@ -4961,25 +5043,27 @@ type Rule struct {
 	NoncurrentVersionExpiration *NoncurrentVersionExpiration `type:"structure"`
 
 	// Container for the transition rule that describes when noncurrent objects
-	// transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER or
-	// DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning
+	// transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER,
+	// or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning
 	// is suspended), you can set this action to request that Amazon S3 transition
 	// noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING,
-	// GLACIER or DEEP_ARCHIVE storage class at a specific period in the object's
+	// GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's
 	// lifetime.
 	NoncurrentVersionTransition *NoncurrentVersionTransition `type:"structure"`
 
-	// Prefix identifying one or more objects to which the rule applies.
+	// Object key prefix that identifies one or more objects to which this rule
+	// applies.
 	//
 	// Prefix is a required field
 	Prefix *string `type:"string" required:"true"`
 
-	// If 'Enabled', the rule is currently being applied. If 'Disabled', the rule
-	// is not currently being applied.
+	// If Enabled, the rule is currently being applied. If Disabled, the rule is
+	// not currently being applied.
 	//
 	// Status is a required field
 	Status ExpirationStatus `type:"string" required:"true" enum:"true"`
 
+	// Specifies when an object transitions to a specified storage class.
 	Transition *Transition `type:"structure"`
 }
 
@@ -5377,14 +5461,16 @@ func (s SelectParameters) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes the default server-side encryption to apply to new objects in the
-// bucket. If Put Object request does not specify any server-side encryption,
-// this default encryption will be applied.
+// bucket. If a PUT Object request doesn't specify any server-side encryption,
+// this default encryption will be applied. For more information, see PUT Bucket
+// encryption (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTencryption.html)
+// in the Amazon Simple Storage Service API Reference.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ServerSideEncryptionByDefault
 type ServerSideEncryptionByDefault struct {
 	_ struct{} `type:"structure"`
 
 	// KMS master key ID to use for the default encryption. This parameter is allowed
-	// if SSEAlgorithm is aws:kms.
+	// if and only if SSEAlgorithm is set to aws:kms.
 	KMSMasterKeyID *string `type:"string"`
 
 	// Server-side encryption algorithm to use for the default encryption.
@@ -5428,8 +5514,7 @@ func (s ServerSideEncryptionByDefault) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
-// Container for server-side encryption configuration rules. Currently S3 supports
-// one rule only.
+// Specifies the default server-side-encryption configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ServerSideEncryptionConfiguration
 type ServerSideEncryptionConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -5484,14 +5569,13 @@ func (s ServerSideEncryptionConfiguration) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-// Container for information about a particular server-side encryption configuration
-// rule.
+// Specifies the default server-side encryption configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ServerSideEncryptionRule
 type ServerSideEncryptionRule struct {
 	_ struct{} `type:"structure"`
 
-	// Describes the default server-side encryption to apply to new objects in the
-	// bucket. If Put Object request does not specify any server-side encryption,
+	// Specifies the default server-side encryption to apply to new objects in the
+	// bucket. If a PUT Object request doesn't specify any server-side encryption,
 	// this default encryption will be applied.
 	ApplyServerSideEncryptionByDefault *ServerSideEncryptionByDefault `type:"structure"`
 }
@@ -5527,14 +5611,18 @@ func (s ServerSideEncryptionRule) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A container for filters that define which source objects should be replicated.
+// A container that describes additional filters for identifying the source
+// objects that you want to replicate. You can choose to enable or disable the
+// replication of these objects. Currently, Amazon S3 supports only the filter
+// that you can specify for objects created with server-side encryption using
+// an AWS KMS-Managed Key (SSE-KMS).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SourceSelectionCriteria
 type SourceSelectionCriteria struct {
 	_ struct{} `type:"structure"`
 
-	// A container for filter information for the selection of S3 objects encrypted
-	// with AWS KMS. If you include SourceSelectionCriteria in the replication configuration,
-	// this element is required.
+	// A container for filter information for the selection of Amazon S3 objects
+	// encrypted with AWS KMS. If you include SourceSelectionCriteria in the replication
+	// configuration, this element is required.
 	SseKmsEncryptedObjects *SseKmsEncryptedObjects `type:"structure"`
 }
 
@@ -5575,8 +5663,8 @@ func (s SourceSelectionCriteria) MarshalFields(e protocol.FieldEncoder) error {
 type SseKmsEncryptedObjects struct {
 	_ struct{} `type:"structure"`
 
-	// If the status is not Enabled, replication for S3 objects encrypted with AWS
-	// KMS is disabled.
+	// Specifies whether Amazon S3 replicates objects created with server-side encryption
+	// using an AWS KMS-managed key.
 	//
 	// Status is a required field
 	Status SseKmsEncryptedObjectsStatus `type:"string" required:"true" enum:"true"`
@@ -5611,12 +5699,15 @@ func (s SseKmsEncryptedObjects) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies data related to access patterns to be collected and made available
+// to analyze the tradeoffs between different storage classes for an Amazon
+// S3 bucket.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/StorageClassAnalysis
 type StorageClassAnalysis struct {
 	_ struct{} `type:"structure"`
 
-	// A container used to describe how data related to the storage class analysis
-	// should be exported.
+	// Specifies how data related to the storage class analysis for an Amazon S3
+	// bucket should be exported.
 	DataExport *StorageClassAnalysisDataExport `type:"structure"`
 }
 
@@ -5873,17 +5964,21 @@ func (s TargetGrant) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A container for specifying the configuration for publication of messages
-// to an Amazon Simple Notification Service (Amazon SNS) topic.when Amazon S3
+// to an Amazon Simple Notification Service (Amazon SNS) topic when Amazon S3
 // detects specified events.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/TopicConfiguration
 type TopicConfiguration struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon S3 bucket event about which to send notifications. For more information,
+	// see Supported Event Types (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+	// in the Amazon Simple Storage Service Developer Guide.
+	//
 	// Events is a required field
 	Events []Event `locationName:"Event" type:"list" flattened:"true" required:"true"`
 
-	// A container for object key name filtering rules. For information about key
-	// name filtering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+	// Specifies object key name filtering rules. For information about key name
+	// filtering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
 	// in the Amazon Simple Storage Service Developer Guide.
 	Filter *NotificationConfigurationFilter `type:"structure"`
 
@@ -5892,7 +5987,7 @@ type TopicConfiguration struct {
 	Id *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3
-	// will publish a message when it detects events of the specified type.
+	// publishes a message when it detects events of the specified type.
 	//
 	// TopicArn is a required field
 	TopicArn *string `locationName:"Topic" type:"string" required:"true"`
@@ -6014,19 +6109,20 @@ func (s TopicConfigurationDeprecated) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
+// Specifies when an object transitions to a specified storage class.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Transition
 type Transition struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates at what date the object is to be moved or deleted. Should be in
-	// GMT ISO 8601 Format.
+	// Indicates when objects are transitioned to the specified storage class. The
+	// date value must be in ISO 8601 format. The time is always midnight UTC.
 	Date *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
-	// Indicates the lifetime, in days, of the objects that are subject to the rule.
-	// The value must be a non-zero positive integer.
+	// Indicates the number of days after creation when objects are transitioned
+	// to the specified storage class. The value must be a positive integer.
 	Days *int64 `type:"integer"`
 
-	// The class of storage used to store the object.
+	// The storage class to which you want the object to transition.
 	StorageClass TransitionStorageClass `type:"string" enum:"true"`
 }
 
@@ -6058,6 +6154,9 @@ func (s Transition) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Describes the versioning state of an Amazon S3 bucket. For more information,
+// see PUT Bucket versioning (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html)
+// in the Amazon Simple Storage Service API Reference.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/VersioningConfiguration
 type VersioningConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -6093,16 +6192,23 @@ func (s VersioningConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies website configuration parameters for an Amazon S3 bucket.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/WebsiteConfiguration
 type WebsiteConfiguration struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the error document for the website.
 	ErrorDocument *ErrorDocument `type:"structure"`
 
+	// The name of the index document for the website.
 	IndexDocument *IndexDocument `type:"structure"`
 
+	// The redirect behavior for every request to this bucket's website endpoint.
+	//
+	// If you specify this property, you can't specify any other property.
 	RedirectAllRequestsTo *RedirectAllRequestsTo `type:"structure"`
 
+	// Rules that define when a redirect is applied and the redirect behavior.
 	RoutingRules []RoutingRule `locationNameList:"RoutingRule" type:"list"`
 }
 

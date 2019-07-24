@@ -63,8 +63,7 @@ const opDeleteParameters = "DeleteParameters"
 // DeleteParametersRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Delete a list of parameters. This API is used to delete parameters by using
-// the Amazon EC2 console.
+// Delete a list of parameters.
 //
 //    // Example sending a request using DeleteParametersRequest.
 //    req := client.DeleteParametersRequest(params)

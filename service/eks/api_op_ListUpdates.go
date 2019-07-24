@@ -127,7 +127,7 @@ func (s ListUpdatesOutput) MarshalFields(e protocol.FieldEncoder) error {
 const opListUpdates = "ListUpdates"
 
 // ListUpdatesRequest returns a request value for making API operation for
-// Amazon Elastic Container Service for Kubernetes.
+// Amazon Elastic Kubernetes Service.
 //
 // Lists the updates associated with an Amazon EKS cluster in your AWS account,
 // in the specified Region.

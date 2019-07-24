@@ -142,6 +142,10 @@ type ClientAPI interface {
 
 	RestoreDBClusterToPointInTimeRequest(*docdb.RestoreDBClusterToPointInTimeInput) docdb.RestoreDBClusterToPointInTimeRequest
 
+	StartDBClusterRequest(*docdb.StartDBClusterInput) docdb.StartDBClusterRequest
+
+	StopDBClusterRequest(*docdb.StopDBClusterInput) docdb.StopDBClusterRequest
+
 	WaitUntilDBInstanceAvailable(context.Context, *docdb.DescribeDBInstancesInput, ...aws.WaiterOption) error
 
 	WaitUntilDBInstanceDeleted(context.Context, *docdb.DescribeDBInstancesInput, ...aws.WaiterOption) error

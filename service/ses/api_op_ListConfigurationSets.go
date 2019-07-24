@@ -12,7 +12,7 @@ import (
 // Represents a request to list the configuration sets associated with your
 // AWS account. Configuration sets enable you to publish email sending events.
 // For information about using configuration sets, see the Amazon SES Developer
-// Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
+// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListConfigurationSetsRequest
 type ListConfigurationSetsInput struct {
 	_ struct{} `type:"structure"`
@@ -32,7 +32,7 @@ func (s ListConfigurationSetsInput) String() string {
 
 // A list of configuration sets associated with your AWS account. Configuration
 // sets enable you to publish email sending events. For information about using
-// configuration sets, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
+// configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListConfigurationSetsResponse
 type ListConfigurationSetsOutput struct {
 	_ struct{} `type:"structure"`
@@ -57,7 +57,7 @@ const opListConfigurationSets = "ListConfigurationSets"
 //
 // Provides a list of the configuration sets associated with your Amazon SES
 // account in the current AWS Region. For information about using configuration
-// sets, see Monitoring Your Amazon SES Sending Activity (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
+// sets, see Monitoring Your Amazon SES Sending Activity (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
 // in the Amazon SES Developer Guide.
 //
 // You can execute this operation no more than once per second. This operation

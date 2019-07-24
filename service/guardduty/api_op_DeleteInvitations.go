@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// DeleteInvitations request body.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteInvitationsRequest
 type DeleteInvitationsInput struct {
 	_ struct{} `type:"structure"`
@@ -19,7 +18,7 @@ type DeleteInvitationsInput struct {
 	// member account that you want to delete invitations from.
 	//
 	// AccountIds is a required field
-	AccountIds []string `locationName:"accountIds" type:"list" required:"true"`
+	AccountIds []string `locationName:"accountIds" min:"1" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -33,6 +32,9 @@ func (s *DeleteInvitationsInput) Validate() error {
 
 	if s.AccountIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountIds"))
+	}
+	if s.AccountIds != nil && len(s.AccountIds) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AccountIds", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -60,14 +62,15 @@ func (s DeleteInvitationsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// DeleteInvitations response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteInvitationsResponse
 type DeleteInvitationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of objects containing the unprocessed account and a result string
 	// explaining why it was unprocessed.
-	UnprocessedAccounts []UnprocessedAccount `locationName:"unprocessedAccounts" type:"list"`
+	//
+	// UnprocessedAccounts is a required field
+	UnprocessedAccounts []UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`
 }
 
 // String returns the string representation

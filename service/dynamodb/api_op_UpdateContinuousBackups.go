@@ -84,7 +84,7 @@ const opUpdateContinuousBackups = "UpdateContinuousBackups"
 // to any point in time within EarliestRestorableDateTime and LatestRestorableDateTime.
 //
 // LatestRestorableDateTime is typically 5 minutes before the current time.
-// You can restore your table to any point in time during the last 35 days..
+// You can restore your table to any point in time during the last 35 days.
 //
 //    // Example sending a request using UpdateContinuousBackupsRequest.
 //    req := client.UpdateContinuousBackupsRequest(params)

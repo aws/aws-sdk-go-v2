@@ -40,7 +40,7 @@ type BatchGetItemInput struct {
 	//    You could then use this substitution in an expression, as in this example:
 	//    #P = :val Tokens that begin with the : character are expression attribute
 	//    values, which are placeholders for the actual value at runtime. For more
-	//    information on expression attribute names, see Accessing Item Attributes
+	//    information about expression attribute names, see Accessing Item Attributes
 	//    (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	//    in the Amazon DynamoDB Developer Guide.
 	//
@@ -54,8 +54,8 @@ type BatchGetItemInput struct {
 	//    to retrieve from the table. These attributes can include scalars, sets,
 	//    or elements of a JSON document. The attributes in the expression must
 	//    be separated by commas. If no attribute names are specified, then all
-	//    attributes will be returned. If any of the requested attributes are not
-	//    found, they will not appear in the result. For more information, see Accessing
+	//    attributes are returned. If any of the requested attributes are not found,
+	//    they do not appear in the result. For more information, see Accessing
 	//    Item Attributes (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	//    in the Amazon DynamoDB Developer Guide.
 	//
@@ -167,23 +167,23 @@ const opBatchGetItem = "BatchGetItem"
 // one or more tables. You identify requested items by primary key.
 //
 // A single operation can retrieve up to 16 MB of data, which can contain as
-// many as 100 items. BatchGetItem will return a partial result if the response
+// many as 100 items. BatchGetItem returns a partial result if the response
 // size limit is exceeded, the table's provisioned throughput is exceeded, or
 // an internal processing failure occurs. If a partial result is returned, the
 // operation returns a value for UnprocessedKeys. You can use this value to
 // retry the operation starting with the next item to get.
 //
-// If you request more than 100 items BatchGetItem will return a ValidationException
-// with the message "Too many items requested for the BatchGetItem call".
+// If you request more than 100 items, BatchGetItem returns a ValidationException
+// with the message "Too many items requested for the BatchGetItem call."
 //
 // For example, if you ask to retrieve 100 items, but each individual item is
 // 300 KB in size, the system returns 52 items (so as not to exceed the 16 MB
 // limit). It also returns an appropriate UnprocessedKeys value so you can get
 // the next page of results. If desired, your application can include its own
-// logic to assemble the pages of results into one data set.
+// logic to assemble the pages of results into one dataset.
 //
 // If none of the items can be processed due to insufficient provisioned throughput
-// on all of the tables in the request, then BatchGetItem will return a ProvisionedThroughputExceededException.
+// on all of the tables in the request, then BatchGetItem returns a ProvisionedThroughputExceededException.
 // If at least one of the items is successfully processed, then BatchGetItem
 // completes successfully, while returning the keys of the unread items in UnprocessedKeys.
 //
@@ -210,7 +210,7 @@ const opBatchGetItem = "BatchGetItem"
 //
 // If a requested item does not exist, it is not returned in the result. Requests
 // for nonexistent items consume the minimum read capacity units according to
-// the type of read. For more information, see Capacity Units Calculations (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#CapacityUnitCalculations)
+// the type of read. For more information, see Working with Tables (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#CapacityUnitCalculations)
 // in the Amazon DynamoDB Developer Guide.
 //
 //    // Example sending a request using BatchGetItemRequest.

@@ -90,6 +90,24 @@ func (enum HttpVersion) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ICPRecordalStatus string
+
+// Enum values for ICPRecordalStatus
+const (
+	ICPRecordalStatusApproved  ICPRecordalStatus = "APPROVED"
+	ICPRecordalStatusSuspended ICPRecordalStatus = "SUSPENDED"
+	ICPRecordalStatusPending   ICPRecordalStatus = "PENDING"
+)
+
+func (enum ICPRecordalStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ICPRecordalStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ItemSelection string
 
 // Enum values for ItemSelection

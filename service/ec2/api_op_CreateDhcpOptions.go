@@ -71,9 +71,9 @@ const opCreateDhcpOptions = "CreateDhcpOptions"
 //    * domain-name-servers - The IP addresses of up to four domain name servers,
 //    or AmazonProvidedDNS. The default DHCP option set specifies AmazonProvidedDNS.
 //    If specifying more than one domain name server, specify the IP addresses
-//    in a single parameter, separated by commas. ITo have your instance to
-//    receive a custom DNS hostname as specified in domain-name, you must set
-//    domain-name-servers to a custom DNS server.
+//    in a single parameter, separated by commas. To have your instance receive
+//    a custom DNS hostname as specified in domain-name, you must set domain-name-servers
+//    to a custom DNS server.
 //
 //    * domain-name - If you're using AmazonProvidedDNS in us-east-1, specify
 //    ec2.internal. If you're using AmazonProvidedDNS in another Region, specify
@@ -99,7 +99,7 @@ const opCreateDhcpOptions = "CreateDhcpOptions"
 // only a DNS server that we provide (AmazonProvidedDNS). If you create a set
 // of options, and if your VPC has an internet gateway, make sure to set the
 // domain-name-servers option either to AmazonProvidedDNS or to a domain name
-// server of your choice. For more information, see DHCP Options Sets (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html)
+// server of your choice. For more information, see DHCP Options Sets (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html)
 // in the Amazon Virtual Private Cloud User Guide.
 //
 //    // Example sending a request using CreateDhcpOptionsRequest.

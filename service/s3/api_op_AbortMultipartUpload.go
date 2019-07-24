@@ -14,9 +14,13 @@ import (
 type AbortMultipartUploadInput struct {
 	_ struct{} `type:"structure"`
 
+	// Name of the bucket to which the multipart upload was initiated.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
+	// Key of the object for which the multipart upload was initiated.
+	//
 	// Key is a required field
 	Key *string `location:"uri" locationName:"Key" min:"1" type:"string" required:"true"`
 
@@ -26,6 +30,8 @@ type AbortMultipartUploadInput struct {
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
 	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"true"`
 
+	// Upload ID that identifies the multipart upload.
+	//
 	// UploadId is a required field
 	UploadId *string `location:"querystring" locationName:"uploadId" type:"string" required:"true"`
 }

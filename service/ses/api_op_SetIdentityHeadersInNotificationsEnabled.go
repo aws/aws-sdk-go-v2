@@ -11,7 +11,7 @@ import (
 
 // Represents a request to set whether Amazon SES includes the original email
 // headers in the Amazon SNS notifications of a specified type. For information
-// about notifications, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html).
+// about notifications, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityHeadersInNotificationsEnabledRequest
 type SetIdentityHeadersInNotificationsEnabledInput struct {
 	_ struct{} `type:"structure"`
@@ -88,7 +88,7 @@ const opSetIdentityHeadersInNotificationsEnabled = "SetIdentityHeadersInNotifica
 // You can execute this operation no more than once per second.
 //
 // For more information about using notifications with Amazon SES, see the Amazon
-// SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html).
+// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html).
 //
 //    // Example sending a request using SetIdentityHeadersInNotificationsEnabledRequest.
 //    req := client.SetIdentityHeadersInNotificationsEnabledRequest(params)

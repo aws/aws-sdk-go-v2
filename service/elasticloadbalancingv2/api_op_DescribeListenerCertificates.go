@@ -55,8 +55,8 @@ type DescribeListenerCertificatesOutput struct {
 	// Information about the certificates.
 	Certificates []Certificate `type:"list"`
 
-	// The marker to use when requesting the next set of results. If there are no
-	// additional results, the string is empty.
+	// If there are additional results, this is the marker for the next set of results.
+	// Otherwise, this is null.
 	NextMarker *string `type:"string"`
 }
 
@@ -70,7 +70,15 @@ const opDescribeListenerCertificates = "DescribeListenerCertificates"
 // DescribeListenerCertificatesRequest returns a request value for making API operation for
 // Elastic Load Balancing.
 //
-// Describes the certificates for the specified HTTPS listener.
+// Describes the default certificate and the certificate list for the specified
+// HTTPS listener.
+//
+// If the default certificate is also in the certificate list, it appears twice
+// in the results (once with IsDefault set to true and once with IsDefault set
+// to false).
+//
+// For more information, see SSL Certificates (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#https-listener-certificates)
+// in the Application Load Balancers Guide.
 //
 //    // Example sending a request using DescribeListenerCertificatesRequest.
 //    req := client.DescribeListenerCertificatesRequest(params)

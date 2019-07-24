@@ -14,9 +14,13 @@ import (
 type DeleteFilterInput struct {
 	_ struct{} `type:"structure"`
 
+	// The unique ID of the detector the filter is associated with.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
+	// The name of the filter you want to delete.
+	//
 	// FilterName is a required field
 	FilterName *string `location:"uri" locationName:"filterName" type:"string" required:"true"`
 }
@@ -32,6 +36,9 @@ func (s *DeleteFilterInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
 	}
 
 	if s.FilterName == nil {

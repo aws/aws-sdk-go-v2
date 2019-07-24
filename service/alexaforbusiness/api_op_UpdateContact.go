@@ -4,6 +4,7 @@ package alexaforbusiness
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -27,8 +28,17 @@ type UpdateContactInput struct {
 	// The updated last name of the contact.
 	LastName *string `min:"1" type:"string"`
 
-	// The updated phone number of the contact.
+	// The updated phone number of the contact. The phone number type defaults to
+	// WORK. You can either specify PhoneNumber or PhoneNumbers. We recommend that
+	// you use PhoneNumbers, which lets you specify the phone number type and multiple
+	// numbers.
 	PhoneNumber *string `type:"string"`
+
+	// The list of phone numbers for the contact.
+	PhoneNumbers []PhoneNumber `type:"list"`
+
+	// The list of SIP addresses for the contact.
+	SipAddresses []SipAddress `type:"list"`
 }
 
 // String returns the string representation
@@ -51,6 +61,20 @@ func (s *UpdateContactInput) Validate() error {
 	}
 	if s.LastName != nil && len(*s.LastName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LastName", 1))
+	}
+	if s.PhoneNumbers != nil {
+		for i, v := range s.PhoneNumbers {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PhoneNumbers", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SipAddresses != nil {
+		for i, v := range s.SipAddresses {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SipAddresses", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

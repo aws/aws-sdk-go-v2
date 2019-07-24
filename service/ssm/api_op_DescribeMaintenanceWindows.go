@@ -14,8 +14,8 @@ import (
 type DescribeMaintenanceWindowsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Optional filters used to narrow down the scope of the returned Maintenance
-	// Windows. Supported filter keys are Name and Enabled.
+	// Optional filters used to narrow down the scope of the returned maintenance
+	// windows. Supported filter keys are Name and Enabled.
 	Filters []MaintenanceWindowFilter `type:"list"`
 
 	// The maximum number of items to return for this call. The call also returns
@@ -61,7 +61,7 @@ type DescribeMaintenanceWindowsOutput struct {
 	// items to return, the string is empty.
 	NextToken *string `type:"string"`
 
-	// Information about the Maintenance Windows.
+	// Information about the maintenance windows.
 	WindowIdentities []MaintenanceWindowIdentity `type:"list"`
 }
 
@@ -75,7 +75,7 @@ const opDescribeMaintenanceWindows = "DescribeMaintenanceWindows"
 // DescribeMaintenanceWindowsRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Retrieves the Maintenance Windows in an AWS account.
+// Retrieves the maintenance windows in an AWS account.
 //
 //    // Example sending a request using DescribeMaintenanceWindowsRequest.
 //    req := client.DescribeMaintenanceWindowsRequest(params)

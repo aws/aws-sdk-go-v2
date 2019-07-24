@@ -23,7 +23,7 @@ type GetTagsInput struct {
 	Position *string `location:"querystring" locationName:"position" type:"string"`
 
 	// [Required] The ARN of a resource that can be tagged. The resource ARN must
-	// be URL-encoded. At present, Stage is the only taggable resource.
+	// be URL-encoded.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resource_arn" type:"string" required:"true"`

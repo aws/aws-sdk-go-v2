@@ -15,6 +15,10 @@ import (
 type EnableRuleInput struct {
 	_ struct{} `type:"structure"`
 
+	// The event bus associated with the rule. If you omit this, the default event
+	// bus is used.
+	EventBusName *string `min:"1" type:"string"`
+
 	// The name of the rule.
 	//
 	// Name is a required field
@@ -29,6 +33,9 @@ func (s EnableRuleInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableRuleInput"}
+	if s.EventBusName != nil && len(*s.EventBusName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EventBusName", 1))
+	}
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
@@ -58,7 +65,7 @@ const opEnableRule = "EnableRule"
 // EnableRuleRequest returns a request value for making API operation for
 // Amazon CloudWatch Events.
 //
-// Enables the specified rule. If the rule does not exist, the operation fails.
+// Enables the specified rule. If the rule doesn't exist, the operation fails.
 //
 // When you enable a rule, incoming events might not immediately start matching
 // to a newly enabled rule. Allow a short period of time for changes to take

@@ -14,14 +14,17 @@ type ModifyHostsInput struct {
 	_ struct{} `type:"structure"`
 
 	// Specify whether to enable or disable auto-placement.
-	//
-	// AutoPlacement is a required field
-	AutoPlacement AutoPlacement `locationName:"autoPlacement" type:"string" required:"true" enum:"true"`
+	AutoPlacement AutoPlacement `locationName:"autoPlacement" type:"string" enum:"true"`
 
 	// The IDs of the Dedicated Hosts to modify.
 	//
 	// HostIds is a required field
 	HostIds []string `locationName:"hostId" locationNameList:"item" type:"list" required:"true"`
+
+	// Indicates whether to enable or disable host recovery for the Dedicated Host.
+	// For more information, see Host Recovery (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-recovery.html)
+	// in the Amazon Elastic Compute Cloud User Guide.
+	HostRecovery HostRecovery `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -32,9 +35,6 @@ func (s ModifyHostsInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyHostsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyHostsInput"}
-	if len(s.AutoPlacement) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("AutoPlacement"))
-	}
 
 	if s.HostIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HostIds"))

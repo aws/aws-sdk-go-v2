@@ -65,7 +65,7 @@ const opCreateNetworkAcl = "CreateNetworkAcl"
 // Creates a network ACL in a VPC. Network ACLs provide an optional layer of
 // security (in addition to security groups) for the instances in your VPC.
 //
-// For more information, see Network ACLs (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html)
+// For more information, see Network ACLs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html)
 // in the Amazon Virtual Private Cloud User Guide.
 //
 //    // Example sending a request using CreateNetworkAclRequest.

@@ -148,6 +148,8 @@ type ClientAPI interface {
 
 	ListVerifiedEmailAddressesRequest(*ses.ListVerifiedEmailAddressesInput) ses.ListVerifiedEmailAddressesRequest
 
+	PutConfigurationSetDeliveryOptionsRequest(*ses.PutConfigurationSetDeliveryOptionsInput) ses.PutConfigurationSetDeliveryOptionsRequest
+
 	PutIdentityPolicyRequest(*ses.PutIdentityPolicyInput) ses.PutIdentityPolicyRequest
 
 	ReorderReceiptRuleSetRequest(*ses.ReorderReceiptRuleSetInput) ses.ReorderReceiptRuleSetRequest

@@ -67,7 +67,8 @@ func (s DeleteCampaignInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteCampaignOutput struct {
 	_ struct{} `type:"structure" payload:"CampaignResponse"`
 
-	// Campaign definition
+	// Provides information about the status, configuration, and other settings
+	// for a campaign.
 	//
 	// CampaignResponse is a required field
 	CampaignResponse *CampaignResponse `type:"structure" required:"true"`
@@ -94,7 +95,7 @@ const opDeleteCampaign = "DeleteCampaign"
 // DeleteCampaignRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Deletes a campaign.
+// Deletes a campaign from an application.
 //
 //    // Example sending a request using DeleteCampaignRequest.
 //    req := client.DeleteCampaignRequest(params)

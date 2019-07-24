@@ -65,7 +65,7 @@ const opDescribeLoadBasedAutoScaling = "DescribeLoadBasedAutoScaling"
 // Required Permissions: To use this action, an IAM user must have a Show, Deploy,
 // or Manage permissions level for the stack, or an attached policy that explicitly
 // grants permissions. For more information about user permissions, see Managing
-// User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using DescribeLoadBasedAutoScalingRequest.
 //    req := client.DescribeLoadBasedAutoScalingRequest(params)

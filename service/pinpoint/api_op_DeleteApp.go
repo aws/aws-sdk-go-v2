@@ -54,7 +54,7 @@ func (s DeleteAppInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteAppOutput struct {
 	_ struct{} `type:"structure" payload:"ApplicationResponse"`
 
-	// Application Response.
+	// Provides information about an application.
 	//
 	// ApplicationResponse is a required field
 	ApplicationResponse *ApplicationResponse `type:"structure" required:"true"`
@@ -81,7 +81,7 @@ const opDeleteApp = "DeleteApp"
 // DeleteAppRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Deletes an app.
+// Deletes an application.
 //
 //    // Example sending a request using DeleteAppRequest.
 //    req := client.DeleteAppRequest(params)

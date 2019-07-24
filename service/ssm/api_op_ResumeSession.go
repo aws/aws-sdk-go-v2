@@ -49,7 +49,7 @@ type ResumeSessionOutput struct {
 	SessionId *string `min:"1" type:"string"`
 
 	// A URL back to SSM Agent on the instance that the Session Manager client uses
-	// to send commands and receive output from the instance. Format: wss://ssm-messages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output).
+	// to send commands and receive output from the instance. Format: wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output).
 	//
 	// region represents the Region identifier for an AWS Region supported by AWS
 	// Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list

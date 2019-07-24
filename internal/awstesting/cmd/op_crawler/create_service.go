@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh"
 	"github.com/aws/aws-sdk-go-v2/service/appstream"
 	"github.com/aws/aws-sdk-go-v2/service/appsync"
@@ -61,6 +62,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
+	"github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect"
 	"github.com/aws/aws-sdk-go-v2/service/ecr"
 	"github.com/aws/aws-sdk-go-v2/service/ecs"
 	"github.com/aws/aws-sdk-go-v2/service/efs"
@@ -72,6 +74,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice"
 	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder"
 	"github.com/aws/aws-sdk-go-v2/service/emr"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge"
 	"github.com/aws/aws-sdk-go-v2/service/firehose"
 	"github.com/aws/aws-sdk-go-v2/service/fms"
 	"github.com/aws/aws-sdk-go-v2/service/fsx"
@@ -90,7 +93,10 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/iot1clickprojects"
 	"github.com/aws/aws-sdk-go-v2/service/iotanalytics"
 	"github.com/aws/aws-sdk-go-v2/service/iotdataplane"
+	"github.com/aws/aws-sdk-go-v2/service/iotevents"
+	"github.com/aws/aws-sdk-go-v2/service/ioteventsdata"
 	"github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph"
 	"github.com/aws/aws-sdk-go-v2/service/kafka"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics"
@@ -127,6 +133,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/opsworks"
 	"github.com/aws/aws-sdk-go-v2/service/opsworkscm"
 	"github.com/aws/aws-sdk-go-v2/service/organizations"
+	"github.com/aws/aws-sdk-go-v2/service/personalize"
+	"github.com/aws/aws-sdk-go-v2/service/personalizeevents"
+	"github.com/aws/aws-sdk-go-v2/service/personalizeruntime"
 	"github.com/aws/aws-sdk-go-v2/service/pi"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail"
@@ -154,6 +163,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas"
 	"github.com/aws/aws-sdk-go-v2/service/ses"
 	"github.com/aws/aws-sdk-go-v2/service/sfn"
 	"github.com/aws/aws-sdk-go-v2/service/shield"
@@ -202,6 +212,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "apigatewayv2", value: reflect.ValueOf(apigatewayv2.New(cfg))},
 		{name: "applicationautoscaling", value: reflect.ValueOf(applicationautoscaling.New(cfg))},
 		{name: "applicationdiscoveryservice", value: reflect.ValueOf(applicationdiscoveryservice.New(cfg))},
+		{name: "applicationinsights", value: reflect.ValueOf(applicationinsights.New(cfg))},
 		{name: "appmesh", value: reflect.ValueOf(appmesh.New(cfg))},
 		{name: "appstream", value: reflect.ValueOf(appstream.New(cfg))},
 		{name: "appsync", value: reflect.ValueOf(appsync.New(cfg))},
@@ -250,6 +261,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "dynamodb", value: reflect.ValueOf(dynamodb.New(cfg))},
 		{name: "dynamodbstreams", value: reflect.ValueOf(dynamodbstreams.New(cfg))},
 		{name: "ec2", value: reflect.ValueOf(ec2.New(cfg))},
+		{name: "ec2instanceconnect", value: reflect.ValueOf(ec2instanceconnect.New(cfg))},
 		{name: "ecr", value: reflect.ValueOf(ecr.New(cfg))},
 		{name: "ecs", value: reflect.ValueOf(ecs.New(cfg))},
 		{name: "efs", value: reflect.ValueOf(efs.New(cfg))},
@@ -261,6 +273,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "elasticsearchservice", value: reflect.ValueOf(elasticsearchservice.New(cfg))},
 		{name: "elastictranscoder", value: reflect.ValueOf(elastictranscoder.New(cfg))},
 		{name: "emr", value: reflect.ValueOf(emr.New(cfg))},
+		{name: "eventbridge", value: reflect.ValueOf(eventbridge.New(cfg))},
 		{name: "firehose", value: reflect.ValueOf(firehose.New(cfg))},
 		{name: "fms", value: reflect.ValueOf(fms.New(cfg))},
 		{name: "fsx", value: reflect.ValueOf(fsx.New(cfg))},
@@ -279,7 +292,10 @@ func createServices(cfg aws.Config) []service {
 		{name: "iot1clickprojects", value: reflect.ValueOf(iot1clickprojects.New(cfg))},
 		{name: "iotanalytics", value: reflect.ValueOf(iotanalytics.New(cfg))},
 		{name: "iotdataplane", value: reflect.ValueOf(iotdataplane.New(cfg))},
+		{name: "iotevents", value: reflect.ValueOf(iotevents.New(cfg))},
+		{name: "ioteventsdata", value: reflect.ValueOf(ioteventsdata.New(cfg))},
 		{name: "iotjobsdataplane", value: reflect.ValueOf(iotjobsdataplane.New(cfg))},
+		{name: "iotthingsgraph", value: reflect.ValueOf(iotthingsgraph.New(cfg))},
 		{name: "kafka", value: reflect.ValueOf(kafka.New(cfg))},
 		{name: "kinesis", value: reflect.ValueOf(kinesis.New(cfg))},
 		{name: "kinesisanalytics", value: reflect.ValueOf(kinesisanalytics.New(cfg))},
@@ -316,6 +332,9 @@ func createServices(cfg aws.Config) []service {
 		{name: "opsworks", value: reflect.ValueOf(opsworks.New(cfg))},
 		{name: "opsworkscm", value: reflect.ValueOf(opsworkscm.New(cfg))},
 		{name: "organizations", value: reflect.ValueOf(organizations.New(cfg))},
+		{name: "personalize", value: reflect.ValueOf(personalize.New(cfg))},
+		{name: "personalizeevents", value: reflect.ValueOf(personalizeevents.New(cfg))},
+		{name: "personalizeruntime", value: reflect.ValueOf(personalizeruntime.New(cfg))},
 		{name: "pi", value: reflect.ValueOf(pi.New(cfg))},
 		{name: "pinpoint", value: reflect.ValueOf(pinpoint.New(cfg))},
 		{name: "pinpointemail", value: reflect.ValueOf(pinpointemail.New(cfg))},
@@ -343,6 +362,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "serverlessapplicationrepository", value: reflect.ValueOf(serverlessapplicationrepository.New(cfg))},
 		{name: "servicecatalog", value: reflect.ValueOf(servicecatalog.New(cfg))},
 		{name: "servicediscovery", value: reflect.ValueOf(servicediscovery.New(cfg))},
+		{name: "servicequotas", value: reflect.ValueOf(servicequotas.New(cfg))},
 		{name: "ses", value: reflect.ValueOf(ses.New(cfg))},
 		{name: "sfn", value: reflect.ValueOf(sfn.New(cfg))},
 		{name: "shield", value: reflect.ValueOf(shield.New(cfg))},

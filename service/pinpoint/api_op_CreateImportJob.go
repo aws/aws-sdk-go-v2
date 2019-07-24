@@ -17,7 +17,8 @@ type CreateImportJobInput struct {
 	// ApplicationId is a required field
 	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
 
-	// Import job request.
+	// Specifies the settings for a job that imports endpoint definitions from an
+	// Amazon Simple Storage Service (Amazon S3) bucket.
 	//
 	// ImportJobRequest is a required field
 	ImportJobRequest *ImportJobRequest `type:"structure" required:"true"`
@@ -38,6 +39,11 @@ func (s *CreateImportJobInput) Validate() error {
 
 	if s.ImportJobRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ImportJobRequest"))
+	}
+	if s.ImportJobRequest != nil {
+		if err := s.ImportJobRequest.Validate(); err != nil {
+			invalidParams.AddNested("ImportJobRequest", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -69,7 +75,10 @@ func (s CreateImportJobInput) MarshalFields(e protocol.FieldEncoder) error {
 type CreateImportJobOutput struct {
 	_ struct{} `type:"structure" payload:"ImportJobResponse"`
 
-	// Import job response.
+	// Provides information about the status and settings of a job that imports
+	// endpoint definitions from one or more files. The files can be stored in an
+	// Amazon Simple Storage Service (Amazon S3) bucket or uploaded directly from
+	// a computer by using the Amazon Pinpoint console.
 	//
 	// ImportJobResponse is a required field
 	ImportJobResponse *ImportJobResponse `type:"structure" required:"true"`
@@ -96,7 +105,7 @@ const opCreateImportJob = "CreateImportJob"
 // CreateImportJobRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Creates or updates an import job.
+// Creates a new import job for an application.
 //
 //    // Example sending a request using CreateImportJobRequest.
 //    req := client.CreateImportJobRequest(params)

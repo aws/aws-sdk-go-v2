@@ -10,13 +10,13 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Provides options for initiating an Amazon Glacier job.
+// Provides options for initiating an Amazon S3 Glacier job.
 type InitiateJobInput struct {
 	_ struct{} `type:"structure" payload:"JobParameters"`
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon Glacier uses the AWS account ID associated with the
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -84,7 +84,7 @@ func (s InitiateJobInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains the Amazon Glacier response to your request.
+// Contains the Amazon S3 Glacier response to your request.
 type InitiateJobOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -134,7 +134,7 @@ const opInitiateJob = "InitiateJob"
 // This operation initiates a job of the specified type, which can be a select,
 // an archival retrieval, or a vault retrieval. For more information about using
 // this operation, see the documentation for the underlying REST API Initiate
-// a Job (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html).
+// a Job (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html).
 //
 //    // Example sending a request using InitiateJobRequest.
 //    req := client.InitiateJobRequest(params)

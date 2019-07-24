@@ -72,7 +72,8 @@ func (s GetAuthorizersInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // Represents a collection of Authorizer resources.
 //
-// Enable custom authorization (https://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html)
+// Use Lambda Function as Authorizer (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html)
+// Use Cognito User Pool as Authorizer (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html)
 type GetAuthorizersOutput struct {
 	_ struct{} `type:"structure"`
 

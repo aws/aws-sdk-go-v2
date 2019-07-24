@@ -13,7 +13,8 @@ import (
 type BatchGetJobsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of job names, which may be the names returned from the ListJobs operation.
+	// A list of job names, which might be the names returned from the ListJobs
+	// operation.
 	//
 	// JobNames is a required field
 	JobNames []string `type:"list" required:"true"`

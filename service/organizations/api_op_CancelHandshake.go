@@ -68,7 +68,7 @@ const opCancelHandshake = "CancelHandshake"
 // to that handshake.
 //
 // After you cancel a handshake, it continues to appear in the results of relevant
-// APIs for only 30 days. After that it is deleted.
+// APIs for only 30 days. After that, it's deleted.
 //
 //    // Example sending a request using CancelHandshakeRequest.
 //    req := client.CancelHandshakeRequest(params)

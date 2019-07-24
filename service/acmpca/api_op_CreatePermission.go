@@ -22,8 +22,8 @@ type CreatePermissionInput struct {
 	Actions []ActionType `min:"1" type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the CA that grants the permissions. You
-	// can find the ARN by calling the ListCertificateAuthorities operation. This
-	// must have the following form:
+	// can find the ARN by calling the ListCertificateAuthorities action. This must
+	// have the following form:
 	//
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 .
 	//
@@ -99,8 +99,8 @@ const opCreatePermission = "CreatePermission"
 // all possible permissions from the CA to the ACM service principal.
 //
 // At this time, you can only assign permissions to ACM (acm.amazonaws.com).
-// Permissions can be revoked with the DeletePermission operation and listed
-// with the ListPermissions operation.
+// Permissions can be revoked with the DeletePermission action and listed with
+// the ListPermissions action.
 //
 //    // Example sending a request using CreatePermissionRequest.
 //    req := client.CreatePermissionRequest(params)

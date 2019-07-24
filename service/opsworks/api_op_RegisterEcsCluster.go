@@ -68,12 +68,12 @@ const opRegisterEcsCluster = "RegisterEcsCluster"
 //
 // Registers a specified Amazon ECS cluster with a stack. You can register only
 // one cluster with a stack. A cluster can be registered with only one stack.
-// For more information, see Resource Management (http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html).
+// For more information, see Resource Management (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html).
 //
 // Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using RegisterEcsClusterRequest.
 //    req := client.RegisterEcsClusterRequest(params)

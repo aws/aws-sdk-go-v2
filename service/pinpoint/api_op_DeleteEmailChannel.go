@@ -54,7 +54,8 @@ func (s DeleteEmailChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteEmailChannelOutput struct {
 	_ struct{} `type:"structure" payload:"EmailChannelResponse"`
 
-	// Email Channel Response.
+	// Provides information about the status and settings of the email channel for
+	// an application.
 	//
 	// EmailChannelResponse is a required field
 	EmailChannelResponse *EmailChannelResponse `type:"structure" required:"true"`
@@ -81,7 +82,8 @@ const opDeleteEmailChannel = "DeleteEmailChannel"
 // DeleteEmailChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Delete an email channel.
+// Disables the email channel for an application and deletes any existing settings
+// for the channel.
 //
 //    // Example sending a request using DeleteEmailChannelRequest.
 //    req := client.DeleteEmailChannelRequest(params)

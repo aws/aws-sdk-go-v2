@@ -67,8 +67,8 @@ type CreateLaunchConfigurationInput struct {
 	// EC2 instances launched with an IAM role automatically have AWS security credentials
 	// available. You can use IAM roles with Amazon EC2 Auto Scaling to automatically
 	// enable applications running on your EC2 instances to securely access other
-	// AWS resources. For more information, see Use an IAM Role for Applications
-	// That Run on Amazon EC2 Instances (https://docs.aws.amazon.com/autoscaling/ec2/userguide/us-iam-role.html)
+	// AWS resources. For more information, see IAM Role for Applications That Run
+	// on Amazon EC2 Instances (https://docs.aws.amazon.com/autoscaling/ec2/userguide/us-iam-role.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	IamInstanceProfile *string `min:"1" type:"string"`
 
@@ -84,14 +84,14 @@ type CreateLaunchConfigurationInput struct {
 	// launch configuration derives attributes from the instance, except for the
 	// block device mapping.
 	//
-	// If you do not specify InstanceId, you must specify both ImageId and InstanceType.
-	//
 	// To create a launch configuration with a block device mapping or override
 	// any other instance attributes, specify them as part of the same request.
 	//
 	// For more information, see Create a Launch Configuration Using an EC2 Instance
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-lc-with-instanceID.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
+	//
+	// If you do not specify InstanceId, you must specify both ImageId and InstanceType.
 	InstanceId *string `min:"1" type:"string"`
 
 	// Enables detailed monitoring (true) or basic monitoring (false) for the Auto
@@ -100,11 +100,11 @@ type CreateLaunchConfigurationInput struct {
 
 	// The instance type of the EC2 instance.
 	//
-	// If you do not specify InstanceId, you must specify InstanceType.
-	//
 	// For information about available instance types, see Available Instance Types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes)
 	// in the Amazon EC2 User Guide for Linux Instances.
+	//
+	// If you do not specify InstanceId, you must specify InstanceType.
 	InstanceType *string `min:"1" type:"string"`
 
 	// The ID of the kernel associated with the AMI.
@@ -115,8 +115,8 @@ type CreateLaunchConfigurationInput struct {
 	// in the Amazon EC2 User Guide for Linux Instances.
 	KeyName *string `min:"1" type:"string"`
 
-	// The name of the launch configuration. This name must be unique within the
-	// scope of your AWS account.
+	// The name of the launch configuration. This name must be unique per Region
+	// per account.
 	//
 	// LaunchConfigurationName is a required field
 	LaunchConfigurationName *string `min:"1" type:"string" required:"true"`
@@ -128,10 +128,10 @@ type CreateLaunchConfigurationInput struct {
 	// placement tenancy attribute set to default), you must set the value of this
 	// parameter to dedicated.
 	//
-	// If you specify this parameter, be sure to specify at least one subnet when
+	// If you specify PlacementTenancy, be sure to specify at least one subnet when
 	// you create your group.
 	//
-	// For more information, see Launching Auto Scaling Instances in a VPC (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html)
+	// For more information, see Instance Placement Tenancy (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-vpc-tenancy)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	//
 	// Valid values: default | dedicated

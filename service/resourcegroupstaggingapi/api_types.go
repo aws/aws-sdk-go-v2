@@ -38,7 +38,7 @@ func (s FailureInfo) String() string {
 type ResourceTagMapping struct {
 	_ struct{} `type:"structure"`
 
-	// An array of resource ARN(s).
+	// The ARN of the resource.
 	ResourceARN *string `min:"1" type:"string"`
 
 	// The tags that have been applied to one or more AWS resources.

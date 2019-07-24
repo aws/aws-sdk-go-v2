@@ -6,10 +6,13 @@ type ComparisonOperator string
 
 // Enum values for ComparisonOperator
 const (
-	ComparisonOperatorGreaterThanOrEqualToThreshold ComparisonOperator = "GreaterThanOrEqualToThreshold"
-	ComparisonOperatorGreaterThanThreshold          ComparisonOperator = "GreaterThanThreshold"
-	ComparisonOperatorLessThanThreshold             ComparisonOperator = "LessThanThreshold"
-	ComparisonOperatorLessThanOrEqualToThreshold    ComparisonOperator = "LessThanOrEqualToThreshold"
+	ComparisonOperatorGreaterThanOrEqualToThreshold            ComparisonOperator = "GreaterThanOrEqualToThreshold"
+	ComparisonOperatorGreaterThanThreshold                     ComparisonOperator = "GreaterThanThreshold"
+	ComparisonOperatorLessThanThreshold                        ComparisonOperator = "LessThanThreshold"
+	ComparisonOperatorLessThanOrEqualToThreshold               ComparisonOperator = "LessThanOrEqualToThreshold"
+	ComparisonOperatorLessThanLowerOrGreaterThanUpperThreshold ComparisonOperator = "LessThanLowerOrGreaterThanUpperThreshold"
+	ComparisonOperatorLessThanLowerThreshold                   ComparisonOperator = "LessThanLowerThreshold"
+	ComparisonOperatorGreaterThanUpperThreshold                ComparisonOperator = "GreaterThanUpperThreshold"
 )
 
 func (enum ComparisonOperator) MarshalValue() (string, error) {

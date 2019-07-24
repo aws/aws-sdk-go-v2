@@ -14,16 +14,16 @@ import (
 type ListMembersInput struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates the maximum number of items that you want in the response.
+	// The maximum number of items that you want in the response.
 	MaxResults *int64 `location:"querystring" locationName:"MaxResults" min:"1" type:"integer"`
 
 	// Paginates results. Set the value of this parameter to NULL on your first
 	// call to the ListMembers operation. For subsequent calls to the operation,
-	// fill nextToken in the request with the value of NextToken from the previous
+	// fill nextToken in the request with the value of nextToken from the previous
 	// response to continue listing data.
 	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
 
-	// Specifies what member accounts the response includes based on their relationship
+	// Specifies which member accounts the response includes based on their relationship
 	// status with the master account. The default value is TRUE. If onlyAssociated
 	// is set to TRUE, the response includes member accounts whose relationship
 	// status with the master is set to ENABLED or DISABLED. If onlyAssociated is

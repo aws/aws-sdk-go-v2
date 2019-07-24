@@ -18,12 +18,12 @@ type ModifyReplicationInstanceInput struct {
 	AllocatedStorage *int64 `type:"integer"`
 
 	// Indicates that major version upgrades are allowed. Changing this parameter
-	// does not result in an outage and the change is asynchronously applied as
+	// does not result in an outage, and the change is asynchronously applied as
 	// soon as possible.
 	//
-	// Constraints: This parameter must be set to true when specifying a value for
-	// the EngineVersion parameter that is a different major version than the replication
-	// instance's current version.
+	// This parameter must be set to true when specifying a value for the EngineVersion
+	// parameter that is a different major version than the replication instance's
+	// current version.
 	AllowMajorVersionUpgrade *bool `type:"boolean"`
 
 	// Indicates whether the changes should be applied immediately or during the
@@ -42,8 +42,9 @@ type ModifyReplicationInstanceInput struct {
 	// The engine version number of the replication instance.
 	EngineVersion *string `type:"string"`
 
-	// Specifies if the replication instance is a Multi-AZ deployment. You cannot
-	// set the AvailabilityZone parameter if the Multi-AZ parameter is set to true.
+	// Specifies whether the replication instance is a Multi-AZ deployment. You
+	// cannot set the AvailabilityZone parameter if the Multi-AZ parameter is set
+	// to true.
 	MultiAZ *bool `type:"boolean"`
 
 	// The weekly time range (in UTC) during which system maintenance can occur,

@@ -112,7 +112,7 @@ const opListClusters = "ListClusters"
 // ListClustersRequest returns a request value for making API operation for
 // Managed Streaming for Kafka.
 //
-// Returns a list of clusters in an account.
+// Returns a list of all the MSK clusters in the current Region.
 //
 //    // Example sending a request using ListClustersRequest.
 //    req := client.ListClustersRequest(params)

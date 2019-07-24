@@ -211,6 +211,22 @@ func (enum RefreshSchemasStatusTypeValue) MarshalValueBuf(b []byte) ([]byte, err
 	return append(b, enum...), nil
 }
 
+type ReleaseStatusValues string
+
+// Enum values for ReleaseStatusValues
+const (
+	ReleaseStatusValuesBeta ReleaseStatusValues = "beta"
+)
+
+func (enum ReleaseStatusValues) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReleaseStatusValues) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ReloadOptionValue string
 
 // Enum values for ReloadOptionValue

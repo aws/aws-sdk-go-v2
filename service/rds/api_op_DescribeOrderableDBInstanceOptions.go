@@ -48,8 +48,7 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int64 `type:"integer"`
 
-	// The VPC filter value. Specify this parameter to show only the available VPC
-	// or non-VPC offerings.
+	// A value that indicates whether to show only VPC or non-VPC offerings.
 	Vpc *bool `type:"boolean"`
 }
 

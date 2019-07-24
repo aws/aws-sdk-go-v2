@@ -69,17 +69,27 @@ type ClientAPI interface {
 
 	BatchImportFindingsRequest(*securityhub.BatchImportFindingsInput) securityhub.BatchImportFindingsRequest
 
+	CreateActionTargetRequest(*securityhub.CreateActionTargetInput) securityhub.CreateActionTargetRequest
+
 	CreateInsightRequest(*securityhub.CreateInsightInput) securityhub.CreateInsightRequest
 
 	CreateMembersRequest(*securityhub.CreateMembersInput) securityhub.CreateMembersRequest
 
 	DeclineInvitationsRequest(*securityhub.DeclineInvitationsInput) securityhub.DeclineInvitationsRequest
 
+	DeleteActionTargetRequest(*securityhub.DeleteActionTargetInput) securityhub.DeleteActionTargetRequest
+
 	DeleteInsightRequest(*securityhub.DeleteInsightInput) securityhub.DeleteInsightRequest
 
 	DeleteInvitationsRequest(*securityhub.DeleteInvitationsInput) securityhub.DeleteInvitationsRequest
 
 	DeleteMembersRequest(*securityhub.DeleteMembersInput) securityhub.DeleteMembersRequest
+
+	DescribeActionTargetsRequest(*securityhub.DescribeActionTargetsInput) securityhub.DescribeActionTargetsRequest
+
+	DescribeHubRequest(*securityhub.DescribeHubInput) securityhub.DescribeHubRequest
+
+	DescribeProductsRequest(*securityhub.DescribeProductsInput) securityhub.DescribeProductsRequest
 
 	DisableImportFindingsForProductRequest(*securityhub.DisableImportFindingsForProductInput) securityhub.DisableImportFindingsForProductRequest
 
@@ -114,6 +124,14 @@ type ClientAPI interface {
 	ListInvitationsRequest(*securityhub.ListInvitationsInput) securityhub.ListInvitationsRequest
 
 	ListMembersRequest(*securityhub.ListMembersInput) securityhub.ListMembersRequest
+
+	ListTagsForResourceRequest(*securityhub.ListTagsForResourceInput) securityhub.ListTagsForResourceRequest
+
+	TagResourceRequest(*securityhub.TagResourceInput) securityhub.TagResourceRequest
+
+	UntagResourceRequest(*securityhub.UntagResourceInput) securityhub.UntagResourceRequest
+
+	UpdateActionTargetRequest(*securityhub.UpdateActionTargetInput) securityhub.UpdateActionTargetRequest
 
 	UpdateFindingsRequest(*securityhub.UpdateFindingsInput) securityhub.UpdateFindingsRequest
 

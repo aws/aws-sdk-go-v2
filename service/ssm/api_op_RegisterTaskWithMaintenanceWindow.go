@@ -26,7 +26,7 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// LoggingInfo has been deprecated. To specify an S3 bucket to contain logs,
 	// instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options
-	// for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.
+	// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 	LoggingInfo *LoggingInfo `type:"structure"`
 
 	// The maximum number of targets this task can be run for in parallel.
@@ -42,35 +42,34 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// An optional name for the task.
 	Name *string `min:"3" type:"string"`
 
-	// The priority of the task in the Maintenance Window, the lower the number
-	// the higher the priority. Tasks in a Maintenance Window are scheduled in priority
+	// The priority of the task in the maintenance window, the lower the number
+	// the higher the priority. Tasks in a maintenance window are scheduled in priority
 	// order with tasks that have the same priority scheduled in parallel.
 	Priority *int64 `type:"integer"`
 
-	// The role to assume when running the Maintenance Window task.
+	// The ARN of the IAM service role for Systems Manager to assume when running
+	// a maintenance window task. If you do not specify a service role ARN, Systems
+	// Manager uses your account's service-linked role. If no service-linked role
+	// for Systems Manager exists in your account, it is created when you run RegisterTaskWithMaintenanceWindow.
 	//
-	// If you do not specify a service role ARN, Systems Manager will use your account's
-	// service-linked role for Systems Manager by default. If no service-linked
-	// role for Systems Manager exists in your account, it will be created when
-	// you run RegisterTaskWithMaintenanceWindow without specifying a service role
-	// ARN.
+	// For more information, see the following topics in the in the AWS Systems
+	// Manager User Guide:
 	//
-	// For more information, see Service-Linked Role Permissions for Systems Manager
-	// (http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions)
-	// and Should I Use a Service-Linked Role or a Custom Service Role to Run Maintenance
-	// Window Tasks? (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role)
-	// in the AWS Systems Manager User Guide.
+	//    * Service-Linked Role Permissions for Systems Manager (http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions)
+	//
+	//    * Should I Use a Service-Linked Role or a Custom Service Role to Run Maintenance
+	//    Window Tasks? (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role)
 	ServiceRoleArn *string `type:"string"`
 
-	// The targets (either instances or Maintenance Window targets).
+	// The targets (either instances or maintenance window targets).
 	//
 	// Specify instances using the following format:
 	//
 	// Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>
 	//
-	// Specify Maintenance Window targets using the following format:
+	// Specify maintenance window targets using the following format:
 	//
-	// Key=<WindowTargetIds>,Values=<window-target-id-1>,<window-target-id-2>
+	// Key=WindowTargetIds;,Values=<window-target-id-1>,<window-target-id-2>
 	//
 	// Targets is a required field
 	Targets []Target `type:"list" required:"true"`
@@ -89,7 +88,7 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// TaskParameters has been deprecated. To specify parameters to pass to a task
 	// when it runs, instead use the Parameters option in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options
-	// for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.
+	// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map"`
 
 	// The type of task being registered.
@@ -97,7 +96,7 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// TaskType is a required field
 	TaskType MaintenanceWindowTaskType `type:"string" required:"true" enum:"true"`
 
-	// The ID of the Maintenance Window the task should be added to.
+	// The ID of the maintenance window the task should be added to.
 	//
 	// WindowId is a required field
 	WindowId *string `min:"20" type:"string" required:"true"`
@@ -183,7 +182,7 @@ func (s *RegisterTaskWithMaintenanceWindowInput) Validate() error {
 type RegisterTaskWithMaintenanceWindowOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the task in the Maintenance Window.
+	// The ID of the task in the maintenance window.
 	WindowTaskId *string `min:"36" type:"string"`
 }
 
@@ -197,7 +196,7 @@ const opRegisterTaskWithMaintenanceWindow = "RegisterTaskWithMaintenanceWindow"
 // RegisterTaskWithMaintenanceWindowRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Adds a new task to a Maintenance Window.
+// Adds a new task to a maintenance window.
 //
 //    // Example sending a request using RegisterTaskWithMaintenanceWindowRequest.
 //    req := client.RegisterTaskWithMaintenanceWindowRequest(params)

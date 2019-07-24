@@ -13,20 +13,24 @@ import (
 type PutAccountSettingInput struct {
 	_ struct{} `type:"structure"`
 
-	// The resource name for which to enable the new format. If serviceLongArnFormat
-	// is specified, the ARN for your Amazon ECS services is affected. If taskLongArnFormat
-	// is specified, the ARN and resource ID for your Amazon ECS tasks is affected.
-	// If containerInstanceLongArnFormat is specified, the ARN and resource ID for
-	// your Amazon ECS container instances is affected.
+	// The Amazon ECS resource name for which to modify the account setting. If
+	// serviceLongArnFormat is specified, the ARN for your Amazon ECS services is
+	// affected. If taskLongArnFormat is specified, the ARN and resource ID for
+	// your Amazon ECS tasks is affected. If containerInstanceLongArnFormat is specified,
+	// the ARN and resource ID for your Amazon ECS container instances is affected.
+	// If awsvpcTrunking is specified, the elastic network interface (ENI) limit
+	// for your Amazon ECS container instances is affected. If containerInsights
+	// is specified, the default setting for CloudWatch Container Insights for your
+	// clusters is affected.
 	//
 	// Name is a required field
 	Name SettingName `locationName:"name" type:"string" required:"true" enum:"true"`
 
 	// The ARN of the principal, which can be an IAM user, IAM role, or the root
-	// user. If you specify the root user, it modifies the ARN and resource ID format
-	// for all IAM users, IAM roles, and the root user of the account unless an
-	// IAM user or role explicitly overrides these settings for themselves. If this
-	// field is omitted, the settings are changed only for the authenticated user.
+	// user. If you specify the root user, it modifies the account setting for all
+	// IAM users, IAM roles, and the root user of the account unless an IAM user
+	// or role explicitly overrides these settings. If this field is omitted, the
+	// setting is changed only for the authenticated user.
 	PrincipalArn *string `locationName:"principalArn" type:"string"`
 
 	// The account setting value for the specified principal ARN. Accepted values
@@ -76,15 +80,33 @@ const opPutAccountSetting = "PutAccountSetting"
 // PutAccountSettingRequest returns a request value for making API operation for
 // Amazon EC2 Container Service.
 //
-// Modifies the ARN and resource ID format of a resource type for a specified
-// IAM user, IAM role, or the root user for an account. If the account setting
-// for the root user is changed, it sets the default setting for all of the
-// IAM users and roles for which no individual account setting has been set.
-// The opt-in and opt-out account setting can be set for each Amazon ECS resource
-// separately. The ARN and resource ID format of a resource will be defined
-// by the opt-in status of the IAM user or role that created the resource. Enabling
-// this setting is required to use new Amazon ECS features such as resource
-// tagging. For more information, see Amazon Resource Names (ARNs) and IDs (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-resource-ids.html)
+// Modifies an account setting. If you change the account setting for the root
+// user, the default settings for all of the IAM users and roles for which no
+// individual account setting has been specified are reset. For more information,
+// see Account Settings (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html)
+// in the Amazon Elastic Container Service Developer Guide.
+//
+// When serviceLongArnFormat, taskLongArnFormat, or containerInstanceLongArnFormat
+// are specified, the Amazon Resource Name (ARN) and resource ID format of the
+// resource type for a specified IAM user, IAM role, or the root user for an
+// account is affected. The opt-in and opt-out account setting must be set for
+// each Amazon ECS resource separately. The ARN and resource ID format of a
+// resource will be defined by the opt-in status of the IAM user or role that
+// created the resource. You must enable this setting to use Amazon ECS features
+// such as resource tagging.
+//
+// When awsvpcTrunking is specified, the elastic network interface (ENI) limit
+// for any new container instances that support the feature is changed. If awsvpcTrunking
+// is enabled, any new container instances that support the feature are launched
+// have the increased ENI limits available to them. For more information, see
+// Elastic Network Interface Trunking (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html)
+// in the Amazon Elastic Container Service Developer Guide.
+//
+// When containerInsights is specified, the default setting indicating whether
+// CloudWatch Container Insights is enabled for your clusters is changed. If
+// containerInsights is enabled, any new clusters that are created will have
+// Container Insights enabled unless you disable it during cluster creation.
+// For more information, see CloudWatch Container Insights (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html)
 // in the Amazon Elastic Container Service Developer Guide.
 //
 //    // Example sending a request using PutAccountSettingRequest.

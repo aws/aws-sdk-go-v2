@@ -17,7 +17,7 @@ type UpdateEmailChannelInput struct {
 	// ApplicationId is a required field
 	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
 
-	// Email Channel Request
+	// Specifies the status and settings of the email channel for an application.
 	//
 	// EmailChannelRequest is a required field
 	EmailChannelRequest *EmailChannelRequest `type:"structure" required:"true"`
@@ -38,6 +38,11 @@ func (s *UpdateEmailChannelInput) Validate() error {
 
 	if s.EmailChannelRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EmailChannelRequest"))
+	}
+	if s.EmailChannelRequest != nil {
+		if err := s.EmailChannelRequest.Validate(); err != nil {
+			invalidParams.AddNested("EmailChannelRequest", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -69,7 +74,8 @@ func (s UpdateEmailChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateEmailChannelOutput struct {
 	_ struct{} `type:"structure" payload:"EmailChannelResponse"`
 
-	// Email Channel Response.
+	// Provides information about the status and settings of the email channel for
+	// an application.
 	//
 	// EmailChannelResponse is a required field
 	EmailChannelResponse *EmailChannelResponse `type:"structure" required:"true"`
@@ -96,7 +102,7 @@ const opUpdateEmailChannel = "UpdateEmailChannel"
 // UpdateEmailChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Update an email channel.
+// Updates the status and settings of the email channel for an application.
 //
 //    // Example sending a request using UpdateEmailChannelRequest.
 //    req := client.UpdateEmailChannelRequest(params)

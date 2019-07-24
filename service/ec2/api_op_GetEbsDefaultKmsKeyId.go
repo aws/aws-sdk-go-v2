@@ -29,8 +29,7 @@ func (s GetEbsDefaultKmsKeyIdInput) String() string {
 type GetEbsDefaultKmsKeyIdOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The full ARN of the default CMK that your account uses to encrypt an EBS
-	// volume when no CMK is specified in the API call that creates the volume.
+	// The Amazon Resource Name (ARN) of the default CMK for encryption by default.
 	KmsKeyId *string `locationName:"kmsKeyId" type:"string"`
 }
 
@@ -44,9 +43,12 @@ const opGetEbsDefaultKmsKeyId = "GetEbsDefaultKmsKeyId"
 // GetEbsDefaultKmsKeyIdRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Describes the default customer master key (CMK) that your account uses to
-// encrypt EBS volumes if you don’t specify a CMK in the API call. You can
-// change this default using ModifyEbsDefaultKmsKeyId.
+// Describes the default customer master key (CMK) for EBS encryption by default
+// for your account in this Region. You can change the default CMK for encryption
+// by default using ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId.
+//
+// For more information, see Amazon EBS Encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)
+// in the Amazon Elastic Compute Cloud User Guide.
 //
 //    // Example sending a request using GetEbsDefaultKmsKeyIdRequest.
 //    req := client.GetEbsDefaultKmsKeyIdRequest(params)

@@ -46,8 +46,8 @@ type StartSelector struct {
 	//
 	//    * EARLIEST - Start with earliest available chunk on the stream.
 	//
-	//    * FRAGMENT_NUMBER - Start with the chunk containing the specific fragment.
-	//    You must also specify the StartFragmentNumber.
+	//    * FRAGMENT_NUMBER - Start with the chunk after a specific fragment. You
+	//    must also specify the AfterFragmentNumber parameter.
 	//
 	//    * PRODUCER_TIMESTAMP or SERVER_TIMESTAMP - Start with the chunk containing
 	//    a fragment with the specified producer or server timestamp. You specify

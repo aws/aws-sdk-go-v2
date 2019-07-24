@@ -12,7 +12,7 @@ import (
 )
 
 // The request to add tags to a CloudFront resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TagResourceRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TagResourceRequest
 type TagResourceInput struct {
 	_ struct{} `type:"structure" payload:"Tags"`
 
@@ -24,7 +24,7 @@ type TagResourceInput struct {
 	// A complex type that contains zero or more Tag elements.
 	//
 	// Tags is a required field
-	Tags *Tags `locationName:"Tags" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2018-11-05/"`
+	Tags *Tags `locationName:"Tags" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
 }
 
 // String returns the string representation
@@ -61,7 +61,7 @@ func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	if s.Tags != nil {
 		v := s.Tags
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2018-11-05/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
 		e.SetFields(protocol.PayloadTarget, "Tags", v, metadata)
 	}
 	if s.Resource != nil {
@@ -73,7 +73,7 @@ func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TagResourceOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TagResourceOutput
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -88,7 +88,7 @@ func (s TagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opTagResource = "TagResource2018_11_05"
+const opTagResource = "TagResource2019_03_26"
 
 // TagResourceRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -102,12 +102,12 @@ const opTagResource = "TagResource2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/TagResource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TagResource
 func (c *Client) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
 	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2018-11-05/tagging?Operation=Tag",
+		HTTPPath:   "/2019-03-26/tagging?Operation=Tag",
 	}
 
 	if input == nil {

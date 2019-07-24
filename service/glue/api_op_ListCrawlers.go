@@ -68,9 +68,9 @@ const opListCrawlers = "ListCrawlers"
 // resources with the specified tag. This operation allows you to see which
 // resources are available in your account, and their names.
 //
-// This operation takes the optional Tags field which you can use as a filter
+// This operation takes the optional Tags field, which you can use as a filter
 // on the response so that tagged resources can be retrieved as a group. If
-// you choose to use tags filtering, only resources with the tag will be retrieved.
+// you choose to use tags filtering, only resources with the tag are retrieved.
 //
 //    // Example sending a request using ListCrawlersRequest.
 //    req := client.ListCrawlersRequest(params)

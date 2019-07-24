@@ -54,7 +54,8 @@ func (s GetApnsSandboxChannelInput) MarshalFields(e protocol.FieldEncoder) error
 type GetApnsSandboxChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSSandboxChannelResponse"`
 
-	// Apple Development Push Notification Service channel definition.
+	// Provides information about the status and settings of the APNs (Apple Push
+	// Notification service) sandbox channel for an application.
 	//
 	// APNSSandboxChannelResponse is a required field
 	APNSSandboxChannelResponse *APNSSandboxChannelResponse `type:"structure" required:"true"`
@@ -81,7 +82,8 @@ const opGetApnsSandboxChannel = "GetApnsSandboxChannel"
 // GetApnsSandboxChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Get an APNS sandbox channel.
+// Retrieves information about the status and settings of the APNs sandbox channel
+// for an application.
 //
 //    // Example sending a request using GetApnsSandboxChannelRequest.
 //    req := client.GetApnsSandboxChannelRequest(params)

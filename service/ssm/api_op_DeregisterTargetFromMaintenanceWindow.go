@@ -15,10 +15,10 @@ type DeregisterTargetFromMaintenanceWindowInput struct {
 
 	// The system checks if the target is being referenced by a task. If the target
 	// is being referenced, the system returns an error and does not deregister
-	// the target from the Maintenance Window.
+	// the target from the maintenance window.
 	Safe *bool `type:"boolean"`
 
-	// The ID of the Maintenance Window the target should be removed from.
+	// The ID of the maintenance window the target should be removed from.
 	//
 	// WindowId is a required field
 	WindowId *string `min:"20" type:"string" required:"true"`
@@ -62,7 +62,7 @@ func (s *DeregisterTargetFromMaintenanceWindowInput) Validate() error {
 type DeregisterTargetFromMaintenanceWindowOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the Maintenance Window the target was removed from.
+	// The ID of the maintenance window the target was removed from.
 	WindowId *string `min:"20" type:"string"`
 
 	// The ID of the removed target definition.
@@ -79,7 +79,7 @@ const opDeregisterTargetFromMaintenanceWindow = "DeregisterTargetFromMaintenance
 // DeregisterTargetFromMaintenanceWindowRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Removes a target from a Maintenance Window.
+// Removes a target from a maintenance window.
 //
 //    // Example sending a request using DeregisterTargetFromMaintenanceWindowRequest.
 //    req := client.DeregisterTargetFromMaintenanceWindowRequest(params)

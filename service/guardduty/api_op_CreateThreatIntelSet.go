@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Create Threat Intel Set Request
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateThreatIntelSetRequest
 type CreateThreatIntelSetInput struct {
 	_ struct{} `type:"structure"`
@@ -24,24 +23,30 @@ type CreateThreatIntelSetInput struct {
 	// The idempotency token for the create request.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
+	// The unique ID of the detector of the GuardDuty account for which you want
+	// to create a threatIntelSet.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
 	// The format of the file that contains the ThreatIntelSet.
 	//
 	// Format is a required field
-	Format ThreatIntelSetFormat `locationName:"format" type:"string" required:"true" enum:"true"`
+	Format ThreatIntelSetFormat `locationName:"format" min:"1" type:"string" required:"true" enum:"true"`
 
 	// The URI of the file that contains the ThreatIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
 	//
 	// Location is a required field
-	Location *string `locationName:"location" type:"string" required:"true"`
+	Location *string `locationName:"location" min:"1" type:"string" required:"true"`
 
 	// A user-friendly ThreatIntelSet name that is displayed in all finding generated
 	// by activity that involves IP addresses included in this ThreatIntelSet.
 	//
 	// Name is a required field
-	Name *string `locationName:"name" type:"string" required:"true"`
+	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
+
+	// The tags to be added to a new Threat List resource.
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -60,6 +65,9 @@ func (s *CreateThreatIntelSetInput) Validate() error {
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
 	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
+	}
 	if len(s.Format) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Format"))
 	}
@@ -67,9 +75,18 @@ func (s *CreateThreatIntelSetInput) Validate() error {
 	if s.Location == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Location"))
 	}
+	if s.Location != nil && len(*s.Location) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Location", 1))
+	}
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -118,6 +135,18 @@ func (s CreateThreatIntelSetInput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	if s.DetectorId != nil {
 		v := *s.DetectorId
 
@@ -127,13 +156,14 @@ func (s CreateThreatIntelSetInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// CreateThreatIntelSet response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateThreatIntelSetResponse
 type CreateThreatIntelSetOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique identifier for an threat intel set
-	ThreatIntelSetId *string `locationName:"threatIntelSetId" type:"string"`
+	// The ID of the ThreatIntelSet resource.
+	//
+	// ThreatIntelSetId is a required field
+	ThreatIntelSetId *string `locationName:"threatIntelSetId" type:"string" required:"true"`
 }
 
 // String returns the string representation

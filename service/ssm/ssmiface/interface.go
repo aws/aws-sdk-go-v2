@@ -77,6 +77,8 @@ type ClientAPI interface {
 
 	CreateMaintenanceWindowRequest(*ssm.CreateMaintenanceWindowInput) ssm.CreateMaintenanceWindowRequest
 
+	CreateOpsItemRequest(*ssm.CreateOpsItemInput) ssm.CreateOpsItemRequest
+
 	CreatePatchBaselineRequest(*ssm.CreatePatchBaselineInput) ssm.CreatePatchBaselineRequest
 
 	CreateResourceDataSyncRequest(*ssm.CreateResourceDataSyncInput) ssm.CreateResourceDataSyncRequest
@@ -157,6 +159,8 @@ type ClientAPI interface {
 
 	DescribeMaintenanceWindowsForTargetRequest(*ssm.DescribeMaintenanceWindowsForTargetInput) ssm.DescribeMaintenanceWindowsForTargetRequest
 
+	DescribeOpsItemsRequest(*ssm.DescribeOpsItemsInput) ssm.DescribeOpsItemsRequest
+
 	DescribeParametersRequest(*ssm.DescribeParametersInput) ssm.DescribeParametersRequest
 
 	DescribePatchBaselinesRequest(*ssm.DescribePatchBaselinesInput) ssm.DescribePatchBaselinesRequest
@@ -194,6 +198,10 @@ type ClientAPI interface {
 	GetMaintenanceWindowExecutionTaskInvocationRequest(*ssm.GetMaintenanceWindowExecutionTaskInvocationInput) ssm.GetMaintenanceWindowExecutionTaskInvocationRequest
 
 	GetMaintenanceWindowTaskRequest(*ssm.GetMaintenanceWindowTaskInput) ssm.GetMaintenanceWindowTaskRequest
+
+	GetOpsItemRequest(*ssm.GetOpsItemInput) ssm.GetOpsItemRequest
+
+	GetOpsSummaryRequest(*ssm.GetOpsSummaryInput) ssm.GetOpsSummaryRequest
 
 	GetParameterRequest(*ssm.GetParameterInput) ssm.GetParameterRequest
 
@@ -286,6 +294,8 @@ type ClientAPI interface {
 	UpdateMaintenanceWindowTaskRequest(*ssm.UpdateMaintenanceWindowTaskInput) ssm.UpdateMaintenanceWindowTaskRequest
 
 	UpdateManagedInstanceRoleRequest(*ssm.UpdateManagedInstanceRoleInput) ssm.UpdateManagedInstanceRoleRequest
+
+	UpdateOpsItemRequest(*ssm.UpdateOpsItemInput) ssm.UpdateOpsItemRequest
 
 	UpdatePatchBaselineRequest(*ssm.UpdatePatchBaselineInput) ssm.UpdatePatchBaselineRequest
 

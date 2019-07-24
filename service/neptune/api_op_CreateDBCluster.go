@@ -67,6 +67,10 @@ type CreateDBClusterInput struct {
 	// you are creating.
 	DatabaseName *string `type:"string"`
 
+	// The list of log types that need to be enabled for exporting to CloudWatch
+	// Logs.
+	EnableCloudwatchLogsExports []string `type:"list"`
+
 	// True to enable mapping of AWS Identity and Access Management (IAM) accounts
 	// to database accounts, and otherwise false.
 	//

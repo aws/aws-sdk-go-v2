@@ -18,7 +18,7 @@ type DeleteObjectsInput struct {
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
 	// Specifies whether you want to delete this object even if it has a Governance-type
-	// Object Lock in place. You must have sufficient permissions to perform this
+	// object lock in place. You must have sufficient permissions to perform this
 	// operation.
 	BypassGovernanceRetention *bool `location:"header" locationName:"x-amz-bypass-governance-retention" type:"boolean"`
 

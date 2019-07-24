@@ -57,12 +57,12 @@ const opDeleteStack = "DeleteStack"
 //
 // Deletes a specified stack. You must first delete all instances, layers, and
 // apps or deregister registered instances. For more information, see Shut Down
-// a Stack (http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-shutting.html).
+// a Stack (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-shutting.html).
 //
 // Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using DeleteStackRequest.
 //    req := client.DeleteStackRequest(params)

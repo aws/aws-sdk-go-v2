@@ -29,8 +29,6 @@ type CreateNetworkInterfaceInput struct {
 	// Indicates the type of network interface. To create an Elastic Fabric Adapter
 	// (EFA), specify efa. For more information, see Elastic Fabric Adapter (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
-	//
-	// If you are not creating an EFA, specify interface or omit this parameter.
 	InterfaceType NetworkInterfaceCreationType `type:"string" enum:"true"`
 
 	// The number of IPv6 addresses to assign to a network interface. Amazon EC2

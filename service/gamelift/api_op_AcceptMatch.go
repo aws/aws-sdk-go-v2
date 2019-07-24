@@ -29,7 +29,7 @@ type AcceptMatchInput struct {
 	// REQUIRES_ACCEPTANCE; otherwise this request will fail.
 	//
 	// TicketId is a required field
-	TicketId *string `min:"1" type:"string" required:"true"`
+	TicketId *string `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -50,9 +50,6 @@ func (s *AcceptMatchInput) Validate() error {
 
 	if s.TicketId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TicketId"))
-	}
-	if s.TicketId != nil && len(*s.TicketId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TicketId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -93,11 +90,19 @@ const opAcceptMatch = "AcceptMatch"
 //
 // If any player rejects the match, or if acceptances are not received before
 // a specified timeout, the proposed match is dropped. The matchmaking tickets
-// are then handled in one of two ways: For tickets where all players accepted
-// the match, the ticket status is returned to SEARCHING to find a new match.
-// For tickets where one or more players failed to accept the match, the ticket
-// status is set to FAILED, and processing is terminated. A new matchmaking
+// are then handled in one of two ways: For tickets where one or more players
+// rejected the match, the ticket status is returned to SEARCHING to find a
+// new match. For tickets where one or more players failed to respond, the ticket
+// status is set to CANCELLED, and processing is terminated. A new matchmaking
 // request for these players can be submitted as needed.
+//
+// Learn more
+//
+//  Add FlexMatch to a Game Client (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html)
+//
+//  FlexMatch Events Reference (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-events.html)
+//
+// Related operations
 //
 //    * StartMatchmaking
 //

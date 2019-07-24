@@ -16,6 +16,16 @@ import (
 type CreateAppInput struct {
 	_ struct{} `type:"structure"`
 
+	// Personal Access token for 3rd party source control system for an Amplify
+	// App, used to create webhook and read-only deploy key. Token is not stored.
+	AccessToken *string `locationName:"accessToken" min:"1" type:"string"`
+
+	// Automated branch creation config for the Amplify App.
+	AutoBranchCreationConfig *AutoBranchCreationConfig `locationName:"autoBranchCreationConfig" type:"structure"`
+
+	// Automated branch creation glob patterns for the Amplify App.
+	AutoBranchCreationPatterns []string `locationName:"autoBranchCreationPatterns" type:"list"`
+
 	// Credentials for Basic Authorization for an Amplify App.
 	BasicAuthCredentials *string `locationName:"basicAuthCredentials" type:"string"`
 
@@ -27,6 +37,9 @@ type CreateAppInput struct {
 
 	// Description for an Amplify App
 	Description *string `locationName:"description" type:"string"`
+
+	// Enables automated branch creation for the Amplify App.
+	EnableAutoBranchCreation *bool `locationName:"enableAutoBranchCreation" type:"boolean"`
 
 	// Enable Basic Authorization for an Amplify App, this will apply to all branches
 	// part of this App.
@@ -48,22 +61,16 @@ type CreateAppInput struct {
 
 	// OAuth token for 3rd party source control system for an Amplify App, used
 	// to create webhook and read-only deploy key. OAuth token is not stored.
-	//
-	// OauthToken is a required field
-	OauthToken *string `locationName:"oauthToken" type:"string" required:"true"`
+	OauthToken *string `locationName:"oauthToken" type:"string"`
 
 	// Platform / framework for an Amplify App
-	//
-	// Platform is a required field
-	Platform Platform `locationName:"platform" type:"string" required:"true" enum:"true"`
+	Platform Platform `locationName:"platform" type:"string" enum:"true"`
 
 	// Repository for an Amplify App
-	//
-	// Repository is a required field
-	Repository *string `locationName:"repository" type:"string" required:"true"`
+	Repository *string `locationName:"repository" type:"string"`
 
 	// Tag for an Amplify App
-	Tags map[string]string `locationName:"tags" type:"map"`
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -74,6 +81,9 @@ func (s CreateAppInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAppInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateAppInput"}
+	if s.AccessToken != nil && len(*s.AccessToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AccessToken", 1))
+	}
 	if s.BuildSpec != nil && len(*s.BuildSpec) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("BuildSpec", 1))
 	}
@@ -87,16 +97,13 @@ func (s *CreateAppInput) Validate() error {
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
-
-	if s.OauthToken == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OauthToken"))
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
-	if len(s.Platform) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Platform"))
-	}
-
-	if s.Repository == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Repository"))
+	if s.AutoBranchCreationConfig != nil {
+		if err := s.AutoBranchCreationConfig.Validate(); err != nil {
+			invalidParams.AddNested("AutoBranchCreationConfig", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.CustomRules != nil {
 		for i, v := range s.CustomRules {
@@ -116,6 +123,30 @@ func (s *CreateAppInput) Validate() error {
 func (s CreateAppInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
+	if s.AccessToken != nil {
+		v := *s.AccessToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "accessToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.AutoBranchCreationConfig != nil {
+		v := s.AutoBranchCreationConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "autoBranchCreationConfig", v, metadata)
+	}
+	if s.AutoBranchCreationPatterns != nil {
+		v := s.AutoBranchCreationPatterns
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "autoBranchCreationPatterns", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
 	if s.BasicAuthCredentials != nil {
 		v := *s.BasicAuthCredentials
 
@@ -145,6 +176,12 @@ func (s CreateAppInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EnableAutoBranchCreation != nil {
+		v := *s.EnableAutoBranchCreation
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enableAutoBranchCreation", protocol.BoolValue(v), metadata)
 	}
 	if s.EnableBasicAuth != nil {
 		v := *s.EnableBasicAuth

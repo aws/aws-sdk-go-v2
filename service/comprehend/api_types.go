@@ -885,7 +885,8 @@ type EntityRecognizerInputDataConfig struct {
 	// S3 location of the entity list for an entity recognizer.
 	EntityList *EntityRecognizerEntityList `type:"structure"`
 
-	// The entity types in the input data for an entity recognizer.
+	// The entity types in the input data for an entity recognizer. A maximum of
+	// 12 entity types can be used at one time to train an entity recognizer.
 	//
 	// EntityTypes is a required field
 	EntityTypes []EntityTypesListItem `type:"list" required:"true"`
@@ -967,6 +968,14 @@ func (s EntityRecognizerMetadata) String() string {
 type EntityRecognizerMetadataEntityTypesListItem struct {
 	_ struct{} `type:"structure"`
 
+	// Detailed information about the accuracy of the entity recognizer for a specific
+	// item on the list of entity types.
+	EvaluationMetrics *EntityTypesEvaluationMetrics `type:"structure"`
+
+	// indicates the number of times the given entity name was seen in the training
+	// data.
+	NumberOfTrainMentions *int64 `type:"integer"`
+
 	// Type of entity from the list of entity types in the metadata of an entity
 	// recognizer.
 	Type *string `type:"string"`
@@ -1035,6 +1044,34 @@ type EntityRecognizerProperties struct {
 
 // String returns the string representation
 func (s EntityRecognizerProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Detailed information about the accuracy of an entity recognizer for a specific
+// entity type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityTypesEvaluationMetrics
+type EntityTypesEvaluationMetrics struct {
+	_ struct{} `type:"structure"`
+
+	// A measure of how accurate the recognizer results are for for a specific entity
+	// type in the test data. It is derived from the Precision and Recall values.
+	// The F1Score is the harmonic average of the two scores. The highest score
+	// is 1, and the worst score is 0.
+	F1Score *float64 `type:"double"`
+
+	// A measure of the usefulness of the recognizer results for a specific entity
+	// type in the test data. High precision means that the recognizer returned
+	// substantially more relevant results than irrelevant ones.
+	Precision *float64 `type:"double"`
+
+	// A measure of how complete the recognizer results are for a specific entity
+	// type in the test data. High recall means that the recognizer returned most
+	// of the relevant results.
+	Recall *float64 `type:"double"`
+}
+
+// String returns the string representation
+func (s EntityTypesEvaluationMetrics) String() string {
 	return awsutil.Prettify(s)
 }
 

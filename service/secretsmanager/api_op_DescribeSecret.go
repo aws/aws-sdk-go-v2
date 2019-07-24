@@ -96,6 +96,8 @@ type DescribeSecretOutput struct {
 	// The user-provided friendly name of the secret.
 	Name *string `min:"1" type:"string"`
 
+	OwningService *string `min:"1" type:"string"`
+
 	// Specifies whether automatic rotation is enabled for this secret.
 	//
 	// To enable rotation, use RotateSecret with AutomaticallyRotateAfterDays set

@@ -14,9 +14,13 @@ import (
 type GetFilterInput struct {
 	_ struct{} `type:"structure"`
 
+	// The unique ID of the detector the filter is associated with.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
+	// The name of the filter you want to get.
+	//
 	// FilterName is a required field
 	FilterName *string `location:"uri" locationName:"filterName" type:"string" required:"true"`
 }
@@ -32,6 +36,9 @@ func (s *GetFilterInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
 	}
 
 	if s.FilterName == nil {
@@ -63,27 +70,35 @@ func (s GetFilterInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// GetFilter response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFilterResponse
 type GetFilterOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the action that is to be applied to the findings that match the
 	// filter.
-	Action FilterAction `locationName:"action" type:"string" enum:"true"`
+	//
+	// Action is a required field
+	Action FilterAction `locationName:"action" min:"1" type:"string" required:"true" enum:"true"`
 
 	// The description of the filter.
 	Description *string `locationName:"description" type:"string"`
 
 	// Represents the criteria to be used in the filter for querying findings.
-	FindingCriteria *FindingCriteria `locationName:"findingCriteria" type:"structure"`
+	//
+	// FindingCriteria is a required field
+	FindingCriteria *FindingCriteria `locationName:"findingCriteria" type:"structure" required:"true"`
 
 	// The name of the filter.
-	Name *string `locationName:"name" type:"string"`
+	//
+	// Name is a required field
+	Name *string `locationName:"name" min:"3" type:"string" required:"true"`
 
 	// Specifies the position of the filter in the list of current filters. Also
 	// specifies the order in which this filter is applied to the findings.
-	Rank *int64 `locationName:"rank" type:"integer"`
+	Rank *int64 `locationName:"rank" min:"1" type:"integer"`
+
+	// The tags of the filter resource.
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -122,6 +137,18 @@ func (s GetFilterOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "rank", protocol.Int64Value(v), metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }

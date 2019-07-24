@@ -66,6 +66,8 @@ import (
 type ClientAPI interface {
 	DeleteAlarmsRequest(*cloudwatch.DeleteAlarmsInput) cloudwatch.DeleteAlarmsRequest
 
+	DeleteAnomalyDetectorRequest(*cloudwatch.DeleteAnomalyDetectorInput) cloudwatch.DeleteAnomalyDetectorRequest
+
 	DeleteDashboardsRequest(*cloudwatch.DeleteDashboardsInput) cloudwatch.DeleteDashboardsRequest
 
 	DescribeAlarmHistoryRequest(*cloudwatch.DescribeAlarmHistoryInput) cloudwatch.DescribeAlarmHistoryRequest
@@ -73,6 +75,8 @@ type ClientAPI interface {
 	DescribeAlarmsRequest(*cloudwatch.DescribeAlarmsInput) cloudwatch.DescribeAlarmsRequest
 
 	DescribeAlarmsForMetricRequest(*cloudwatch.DescribeAlarmsForMetricInput) cloudwatch.DescribeAlarmsForMetricRequest
+
+	DescribeAnomalyDetectorsRequest(*cloudwatch.DescribeAnomalyDetectorsInput) cloudwatch.DescribeAnomalyDetectorsRequest
 
 	DisableAlarmActionsRequest(*cloudwatch.DisableAlarmActionsInput) cloudwatch.DisableAlarmActionsRequest
 
@@ -91,6 +95,8 @@ type ClientAPI interface {
 	ListMetricsRequest(*cloudwatch.ListMetricsInput) cloudwatch.ListMetricsRequest
 
 	ListTagsForResourceRequest(*cloudwatch.ListTagsForResourceInput) cloudwatch.ListTagsForResourceRequest
+
+	PutAnomalyDetectorRequest(*cloudwatch.PutAnomalyDetectorInput) cloudwatch.PutAnomalyDetectorRequest
 
 	PutDashboardRequest(*cloudwatch.PutDashboardInput) cloudwatch.PutDashboardRequest
 

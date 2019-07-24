@@ -13,7 +13,7 @@ import (
 type CancelMaintenanceWindowExecutionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the Maintenance Window execution to stop.
+	// The ID of the maintenance window execution to stop.
 	//
 	// WindowExecutionId is a required field
 	WindowExecutionId *string `min:"36" type:"string" required:"true"`
@@ -45,7 +45,7 @@ func (s *CancelMaintenanceWindowExecutionInput) Validate() error {
 type CancelMaintenanceWindowExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the Maintenance Window execution that has been stopped.
+	// The ID of the maintenance window execution that has been stopped.
 	WindowExecutionId *string `min:"36" type:"string"`
 }
 
@@ -59,7 +59,7 @@ const opCancelMaintenanceWindowExecution = "CancelMaintenanceWindowExecution"
 // CancelMaintenanceWindowExecutionRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Stops a Maintenance Window execution that is already in progress and cancels
+// Stops a maintenance window execution that is already in progress and cancels
 // any tasks in the window that have not already starting running. (Tasks already
 // in progress will continue to completion.)
 //

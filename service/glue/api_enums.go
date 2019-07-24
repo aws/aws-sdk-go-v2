@@ -81,6 +81,25 @@ func (enum ConnectionType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type CrawlState string
+
+// Enum values for CrawlState
+const (
+	CrawlStateRunning   CrawlState = "RUNNING"
+	CrawlStateSucceeded CrawlState = "SUCCEEDED"
+	CrawlStateCancelled CrawlState = "CANCELLED"
+	CrawlStateFailed    CrawlState = "FAILED"
+)
+
+func (enum CrawlState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CrawlState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CrawlerState string
 
 // Enum values for CrawlerState
@@ -260,6 +279,24 @@ func (enum LogicalOperator) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type NodeType string
+
+// Enum values for NodeType
+const (
+	NodeTypeCrawler NodeType = "CRAWLER"
+	NodeTypeJob     NodeType = "JOB"
+	NodeTypeTrigger NodeType = "TRIGGER"
+)
+
+func (enum NodeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NodeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PrincipalType string
 
 // Enum values for PrincipalType
@@ -404,6 +441,23 @@ func (enum WorkerType) MarshalValue() (string, error) {
 }
 
 func (enum WorkerType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type WorkflowRunStatus string
+
+// Enum values for WorkflowRunStatus
+const (
+	WorkflowRunStatusRunning   WorkflowRunStatus = "RUNNING"
+	WorkflowRunStatusCompleted WorkflowRunStatus = "COMPLETED"
+)
+
+func (enum WorkflowRunStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum WorkflowRunStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

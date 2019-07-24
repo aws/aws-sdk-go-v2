@@ -30,16 +30,16 @@ type ModifyReplicationGroupShardConfigurationInput struct {
 	NodeGroupCount *int64 `type:"integer" required:"true"`
 
 	// If the value of NodeGroupCount is less than the current number of node groups
-	// (shards), the NodeGroupsToRemove or NodeGroupsToRetain is a required list
-	// of node group ids to remove from or retain in the cluster.
+	// (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required.
+	// NodeGroupsToRemove is a list of NodeGroupIds to remove from the cluster.
 	//
 	// ElastiCache for Redis will attempt to remove all node groups listed by NodeGroupsToRemove
 	// from the cluster.
 	NodeGroupsToRemove []string `locationNameList:"NodeGroupToRemove" type:"list"`
 
 	// If the value of NodeGroupCount is less than the current number of node groups
-	// (shards), the NodeGroupsToRemove or NodeGroupsToRetain is a required list
-	// of node group ids to remove from or retain in the cluster.
+	// (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required.
+	// NodeGroupsToRetain is a list of NodeGroupIds to retain in the cluster.
 	//
 	// ElastiCache for Redis will attempt to remove all node groups except those
 	// listed by NodeGroupsToRetain from the cluster.

@@ -17,7 +17,7 @@ type UploadMultipartPartInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon Glacier uses the AWS account ID associated with the
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -31,7 +31,7 @@ type UploadMultipartPartInput struct {
 	Checksum *string `location:"header" locationName:"x-amz-sha256-tree-hash" type:"string"`
 
 	// Identifies the range of bytes in the assembled archive that will be uploaded
-	// in this part. Amazon Glacier uses this information to assemble the archive
+	// in this part. Amazon S3 Glacier uses this information to assemble the archive
 	// in the proper sequence. The format of this header follows RFC 2616. An example
 	// header is Content-Range:bytes 0-4194303/*.
 	Range *string `location:"header" locationName:"Content-Range" type:"string"`
@@ -116,11 +116,11 @@ func (s UploadMultipartPartInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains the Amazon Glacier response to your request.
+// Contains the Amazon S3 Glacier response to your request.
 type UploadMultipartPartOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The SHA256 tree hash that Amazon Glacier computed for the uploaded part.
+	// The SHA256 tree hash that Amazon S3 Glacier computed for the uploaded part.
 	Checksum *string `location:"header" locationName:"x-amz-sha256-tree-hash" type:"string"`
 }
 
@@ -154,10 +154,10 @@ const opUploadMultipartPart = "UploadMultipartPart"
 //
 //    * SHA256 tree hash does not matchTo ensure that part data is not corrupted
 //    in transmission, you compute a SHA256 tree hash of the part and include
-//    it in your request. Upon receiving the part data, Amazon Glacier also
+//    it in your request. Upon receiving the part data, Amazon S3 Glacier also
 //    computes a SHA256 tree hash. If these hash values don't match, the operation
 //    fails. For information about computing a SHA256 tree hash, see Computing
-//    Checksums (http://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html).
+//    Checksums (https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html).
 //
 //    * Part size does not matchThe size of each part except the last must match
 //    the size specified in the corresponding InitiateMultipartUpload request.
@@ -182,11 +182,11 @@ const opUploadMultipartPart = "UploadMultipartPart"
 // AWS Identity and Access Management (IAM) users don't have any permissions
 // by default. You must grant them explicit permission to perform specific actions.
 // For more information, see Access Control Using AWS Identity and Access Management
-// (IAM) (http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
+// (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
 //
 // For conceptual information and underlying REST API, see Uploading Large Archives
-// in Parts (Multipart Upload) (http://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html)
-// and Upload Part (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-upload-part.html)
+// in Parts (Multipart Upload) (https://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html)
+// and Upload Part (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-upload-part.html)
 // in the Amazon Glacier Developer Guide.
 //
 //    // Example sending a request using UploadMultipartPartRequest.

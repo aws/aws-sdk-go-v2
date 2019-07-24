@@ -14,7 +14,7 @@ import (
 type DeleteRemoteAccessSessionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the sesssion for which you want to delete
+	// The Amazon Resource Name (ARN) of the session for which you want to delete
 	// remote access.
 	//
 	// Arn is a required field

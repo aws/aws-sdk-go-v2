@@ -30,7 +30,7 @@ type UpdateItemInput struct {
 	//
 	//    * Logical operators: AND | OR | NOT
 	//
-	// For more information on condition expressions, see Specifying Conditions
+	// For more information about condition expressions, see Specifying Conditions
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ConditionExpression *string `type:"string"`
@@ -65,7 +65,7 @@ type UpdateItemInput struct {
 	// The name of this attribute conflicts with a reserved word, so it cannot be
 	// used directly in an expression. (For the complete list of reserved words,
 	// see Reserved Words (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
-	// in the Amazon DynamoDB Developer Guide). To work around this, you could specify
+	// in the Amazon DynamoDB Developer Guide.) To work around this, you could specify
 	// the following for ExpressionAttributeNames:
 	//
 	//    * {"#P":"Percentile"}
@@ -77,8 +77,8 @@ type UpdateItemInput struct {
 	// Tokens that begin with the : character are expression attribute values, which
 	// are placeholders for the actual value at runtime.
 	//
-	// For more information on expression attribute names, see Accessing Item Attributes
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
+	// For more information about expression attribute names, see Specifying Item
+	// Attributes (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeNames map[string]string `type:"map"`
 
@@ -99,7 +99,7 @@ type UpdateItemInput struct {
 	//
 	// ProductStatus IN (:avail, :back, :disc)
 	//
-	// For more information on expression attribute values, see Specifying Conditions
+	// For more information on expression attribute values, see Condition Expressions
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeValues map[string]AttributeValue `type:"map"`
@@ -167,12 +167,12 @@ type UpdateItemInput struct {
 	TableName *string `min:"3" type:"string" required:"true"`
 
 	// An expression that defines one or more attributes to be updated, the action
-	// to be performed on them, and new value(s) for them.
+	// to be performed on them, and new values for them.
 	//
 	// The following action values are available for UpdateExpression.
 	//
 	//    * SET - Adds one or more attributes and values to an item. If any of these
-	//    attribute already exist, they are replaced by the new values. You can
+	//    attributes already exist, they are replaced by the new values. You can
 	//    also use SET to add or subtract from an attribute that is of type Number.
 	//    For example: SET myNum = myNum + :val SET supports the following functions:
 	//    if_not_exists (path, operand) - if the item does not contain an attribute

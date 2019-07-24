@@ -102,15 +102,12 @@ const opAttachVolume = "AttachVolume"
 // Attaches an EBS volume to a running or stopped instance and exposes it to
 // the instance with the specified device name.
 //
-// Encrypted EBS volumes may only be attached to instances that support Amazon
-// EBS encryption. For more information, see Amazon EBS Encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)
+// Encrypted EBS volumes must be attached to instances that support Amazon EBS
+// encryption. For more information, see Amazon EBS Encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)
 // in the Amazon Elastic Compute Cloud User Guide.
 //
-// For a list of supported device names, see Attaching an EBS Volume to an Instance
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html).
-// Any device names that aren't reserved for instance store volumes can be used
-// for EBS volumes. For more information, see Amazon EC2 Instance Store (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// After you attach an EBS volume, you must make it available. For more information,
+// see Making an EBS Volume Available For Use (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html).
 //
 // If a volume has an AWS Marketplace product code:
 //
@@ -124,8 +121,7 @@ const opAttachVolume = "AttachVolume"
 //    the product. For example, you can't detach a volume from a Windows instance
 //    and attach it to a Linux instance.
 //
-// For more information about EBS volumes, see Attaching Amazon EBS Volumes
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html)
+// For more information, see Attaching Amazon EBS Volumes (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html)
 // in the Amazon Elastic Compute Cloud User Guide.
 //
 //    // Example sending a request using AttachVolumeRequest.

@@ -69,7 +69,8 @@ type CreatePrivateVirtualInterfaceOutput struct {
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
 	Asn *int64 `locationName:"asn" type:"integer"`
 
-	// The authentication key for BGP configuration.
+	// The authentication key for BGP configuration. This string has a minimum length
+	// of 6 characters and and a maximun lenth of 80 characters.
 	AuthKey *string `locationName:"authKey" type:"string"`
 
 	// The Direct Connect endpoint on which the virtual interface terminates.
@@ -109,6 +110,9 @@ type CreatePrivateVirtualInterfaceOutput struct {
 	// The routes to be advertised to the AWS network in this Region. Applies to
 	// public virtual interfaces.
 	RouteFilterPrefixes []RouteFilterPrefix `locationName:"routeFilterPrefixes" type:"list"`
+
+	// Any tags assigned to the virtual interface.
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
 	// The ID of the virtual private gateway. Applies only to private virtual interfaces.
 	VirtualGatewayId *string `locationName:"virtualGatewayId" deprecated:"true" type:"string"`

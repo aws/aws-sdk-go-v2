@@ -138,7 +138,12 @@ type Build struct {
 	// Information about the source code to be built.
 	Source *ProjectSource `locationName:"source" type:"structure"`
 
-	// Any version identifier for the version of the source code to be built.
+	// Any version identifier for the version of the source code to be built. If
+	// sourceVersion is specified at the project level, then this sourceVersion
+	// (at the build level) takes precedence.
+	//
+	// For more information, see Source Version Sample with CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
+	// in the AWS CodeBuild User Guide.
 	SourceVersion *string `locationName:"sourceVersion" min:"1" type:"string"`
 
 	// When the build process started, expressed in Unix time format.
@@ -633,6 +638,11 @@ type Project struct {
 	// An array of ProjectArtifacts objects.
 	SecondaryArtifacts []ProjectArtifacts `locationName:"secondaryArtifacts" type:"list"`
 
+	// An array of ProjectSourceVersion objects. If secondarySourceVersions is specified
+	// at the build level, then they take over these secondarySourceVersions (at
+	// the project level).
+	SecondarySourceVersions []ProjectSourceVersion `locationName:"secondarySourceVersions" type:"list"`
+
 	// An array of ProjectSource objects.
 	SecondarySources []ProjectSource `locationName:"secondarySources" type:"list"`
 
@@ -643,6 +653,33 @@ type Project struct {
 
 	// Information about the build input source code for this build project.
 	Source *ProjectSource `locationName:"source" type:"structure"`
+
+	// A version of the build input to be built for this project. If not specified,
+	// the latest version is used. If specified, it must be one of:
+	//
+	//    * For AWS CodeCommit: the commit ID to use.
+	//
+	//    * For GitHub: the commit ID, pull request ID, branch name, or tag name
+	//    that corresponds to the version of the source code you want to build.
+	//    If a pull request ID is specified, it must use the format pr/pull-request-ID
+	//    (for example pr/25). If a branch name is specified, the branch's HEAD
+	//    commit ID is used. If not specified, the default branch's HEAD commit
+	//    ID is used.
+	//
+	//    * For Bitbucket: the commit ID, branch name, or tag name that corresponds
+	//    to the version of the source code you want to build. If a branch name
+	//    is specified, the branch's HEAD commit ID is used. If not specified, the
+	//    default branch's HEAD commit ID is used.
+	//
+	//    * For Amazon Simple Storage Service (Amazon S3): the version ID of the
+	//    object that represents the build input ZIP file to use.
+	//
+	// If sourceVersion is specified at the build level, then that version takes
+	// precedence over this sourceVersion (at the project level).
+	//
+	// For more information, see Source Version Sample with CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
+	// in the AWS CodeBuild User Guide.
+	SourceVersion *string `locationName:"sourceVersion" type:"string"`
 
 	// The tags for this build project.
 	//
@@ -856,7 +893,7 @@ type ProjectCache struct {
 	//    * LOCAL_DOCKER_LAYER_CACHE mode caches existing Docker layers. This mode
 	//    is a good choice for projects that build or pull large Docker images.
 	//    It can prevent the performance issues caused by pulling large Docker images
-	//    down from the network. You can use a Docker layer cache in the Linux enviornment
+	//    down from the network. You can use a Docker layer cache in the Linux environment
 	//    only. The privileged flag must be set so that your project has the required
 	//    Docker permissions. You should consider the security implications before
 	//    you use a Docker layer cache.
@@ -967,15 +1004,17 @@ type ProjectEnvironment struct {
 	// If the operating system's base image is Ubuntu Linux:
 	//
 	// - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375
-	// --storage-driver=overlay& - timeout 15 sh -c "until docker info; do echo
-	// .; sleep 1; done"
+	// --storage-driver=overlay&
 	//
-	// If the operating system's base image is Alpine Linux, add the -t argument
-	// to timeout:
+	// - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
+	//
+	// If the operating system's base image is Alpine Linux and the previous command
+	// does not work, add the -t argument to timeout:
 	//
 	// - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375
-	// --storage-driver=overlay& - timeout 15 -t sh -c "until docker info; do echo
-	// .; sleep 1; done"
+	// --storage-driver=overlay&
+	//
+	// - timeout -t 15 sh -c "until docker info; do echo .; sleep 1; done"
 	PrivilegedMode *bool `locationName:"privilegedMode" type:"boolean"`
 
 	// The credentials for access to a private registry.
@@ -1184,6 +1223,9 @@ type ProjectSourceVersion struct {
 	//
 	//    * For Amazon Simple Storage Service (Amazon S3): the version ID of the
 	//    object that represents the build input ZIP file to use.
+	//
+	// For more information, see Source Version Sample with CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
+	// in the AWS CodeBuild User Guide.
 	//
 	// SourceVersion is a required field
 	SourceVersion *string `locationName:"sourceVersion" type:"string" required:"true"`

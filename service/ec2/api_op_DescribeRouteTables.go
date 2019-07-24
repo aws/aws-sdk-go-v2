@@ -148,7 +148,7 @@ const opDescribeRouteTables = "DescribeRouteTables"
 // with the main route table. This command does not return the subnet ID for
 // implicit associations.
 //
-// For more information, see Route Tables (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html)
+// For more information, see Route Tables (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html)
 // in the Amazon Virtual Private Cloud User Guide.
 //
 //    // Example sending a request using DescribeRouteTablesRequest.

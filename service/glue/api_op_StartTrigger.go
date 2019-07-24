@@ -59,7 +59,7 @@ const opStartTrigger = "StartTrigger"
 // StartTriggerRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Starts an existing trigger. See Triggering Jobs (http://docs.aws.amazon.com/glue/latest/dg/trigger-job.html)
+// Starts an existing trigger. See Triggering Jobs (https://docs.aws.amazon.com/glue/latest/dg/trigger-job.html)
 // for information about how different types of trigger are started.
 //
 //    // Example sending a request using StartTriggerRequest.

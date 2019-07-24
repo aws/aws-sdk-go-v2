@@ -78,7 +78,7 @@ const opAssociateRouteTable = "AssociateRouteTable"
 // an association ID, which you need in order to disassociate the route table
 // from the subnet later. A route table can be associated with multiple subnets.
 //
-// For more information, see Route Tables (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html)
+// For more information, see Route Tables (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html)
 // in the Amazon Virtual Private Cloud User Guide.
 //
 //    // Example sending a request using AssociateRouteTableRequest.

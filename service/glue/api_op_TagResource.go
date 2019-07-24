@@ -14,7 +14,7 @@ type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ARN of the AWS Glue resource to which to add the tags. For more information
-	// about AWS Glue resource ARNs, see the AWS Glue ARN string pattern (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id).
+	// about AWS Glue resource ARNs, see the AWS Glue ARN string pattern (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id).
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `min:"1" type:"string" required:"true"`
@@ -68,7 +68,7 @@ const opTagResource = "TagResource"
 //
 // Adds tags to a resource. A tag is a label you can assign to an AWS resource.
 // In AWS Glue, you can tag only certain resources. For information about what
-// resources you can tag, see AWS Tags in AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html).
+// resources you can tag, see AWS Tags in AWS Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html).
 //
 //    // Example sending a request using TagResourceRequest.
 //    req := client.TagResourceRequest(params)

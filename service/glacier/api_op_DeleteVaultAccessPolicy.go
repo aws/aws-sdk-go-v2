@@ -17,7 +17,7 @@ type DeleteVaultAccessPolicyInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon Glacier uses the AWS account ID associated with the
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -92,14 +92,14 @@ const opDeleteVaultAccessPolicy = "DeleteVaultAccessPolicy"
 //
 // This operation deletes the access policy associated with the specified vault.
 // The operation is eventually consistent; that is, it might take some time
-// for Amazon Glacier to completely remove the access policy, and you might
+// for Amazon S3 Glacier to completely remove the access policy, and you might
 // still see the effect of the policy for a short time after you send the delete
 // request.
 //
 // This operation is idempotent. You can invoke delete multiple times, even
 // if there is no policy associated with the vault. For more information about
 // vault access policies, see Amazon Glacier Access Control with Vault Access
-// Policies (http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html).
+// Policies (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html).
 //
 //    // Example sending a request using DeleteVaultAccessPolicyRequest.
 //    req := client.DeleteVaultAccessPolicyRequest(params)

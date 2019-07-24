@@ -14,12 +14,12 @@ import (
 type PutObjectLockConfigurationInput struct {
 	_ struct{} `type:"structure" payload:"ObjectLockConfiguration"`
 
-	// The bucket whose Object Lock configuration you want to create or replace.
+	// The bucket whose object lock configuration you want to create or replace.
 	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
-	// The Object Lock configuration that you want to apply to the specified bucket.
+	// The object lock configuration that you want to apply to the specified bucket.
 	ObjectLockConfiguration *ObjectLockConfiguration `locationName:"ObjectLockConfiguration" type:"structure" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
 
 	// Confirms that the requester knows that she or he will be charged for the
@@ -28,7 +28,7 @@ type PutObjectLockConfigurationInput struct {
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
 	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"true"`
 
-	// A token to allow Object Lock to be enabled for an existing bucket.
+	// A token to allow Amazon S3 object lock to be enabled for an existing bucket.
 	Token *string `location:"header" locationName:"x-amz-bucket-object-lock-token" type:"string"`
 }
 
@@ -118,8 +118,8 @@ const opPutObjectLockConfiguration = "PutObjectLockConfiguration"
 // PutObjectLockConfigurationRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Places an Object Lock configuration on the specified bucket. The rule specified
-// in the Object Lock configuration will be applied by default to every new
+// Places an object lock configuration on the specified bucket. The rule specified
+// in the object lock configuration will be applied by default to every new
 // object placed in the specified bucket.
 //
 //    // Example sending a request using PutObjectLockConfigurationRequest.
