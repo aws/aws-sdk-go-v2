@@ -17,7 +17,6 @@ func exitErrorf(msg string, args ...interface{}) {
 	os.Exit(1)
 }
 
-
 // Usage:  listTrainingJobs <int_value>
 // This code serves an example on how to use it for sagemaker
 func main() {
@@ -26,17 +25,16 @@ func main() {
 		exitErrorf("you must specify a MaxItems")
 	}
 
-    x, err := strconv.ParseInt(os.Args[1], 10, 64); 
+	x, err := strconv.ParseInt(os.Args[1], 10, 64)
 
-    if err != nil {
-    	exitErrorf("failed to parse argument %v", err)
-    }
+	if err != nil {
+		exitErrorf("failed to parse argument %v", err)
+	}
 
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		exitErrorf("failed to load config, %v", err)
 	}
-
 
 	cfg.Region = "us-west-2"
 
@@ -44,11 +42,8 @@ func main() {
 
 	req := sagemakerSvc.ListTrainingJobsRequest(&sagemaker.ListTrainingJobsInput{MaxResults: &x})
 
-    resp, err := req.Send(context.TODO())
-    if(err == nil) {
-    	fmt.Println(resp)
-    }
+	resp, err := req.Send(context.TODO())
+	if err == nil {
+		fmt.Println(resp)
+	}
 }
-
-
-
