@@ -3,6 +3,7 @@ package restxml_test
 import (
 	"bytes"
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
@@ -11,6 +12,8 @@ import (
 	"net/http"
 	"net/url"
 	"reflect"
+	"strconv"
+	"strings"
 	"testing"
 	"time"
 
@@ -37,6 +40,9 @@ var _ = io.EOF
 var _ = aws.String
 var _ = fmt.Println
 var _ = reflect.Value{}
+var _ = strings.Reader{}
+var _ = strconv.Atoi
+var _ = base64.Encoding{}
 
 func init() {
 	protocol.RandReader = &awstesting.ZeroReader{}
@@ -208,6 +214,206 @@ func (s OutputService1TestShapeOutputService1TestCaseOperation1Output) MarshalFi
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "X-Foo", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *OutputService1TestShapeOutputService1TestCaseOperation1Output) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService1TestShapeOutputService1TestCaseOperation1Output{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation1Output, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation1Output, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *OutputService1TestShapeOutputService1TestCaseOperation1Output) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService1TestShapeOutputService1TestCaseOperation1Output{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Char":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Char = &value
+			case "Double":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseFloat(string(v), 64)
+				s.Double = &value
+			case "FalseBool":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.FalseBool = &value
+			case "Float":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseFloat(string(v), 64)
+				s.Float = &value
+			case "Float64s":
+				if s.Float64s == nil {
+					s.Float64s = make([]float64, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation1Output.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "Float64s" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "member":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation1Output.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value, _ := strconv.ParseFloat(string(v), 64)
+							s.Float64s = append(s.Float64s, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			case "ImaHeader":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ImaHeader = &value
+			case "X-Foo":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ImaHeaderLocation = &value
+			case "Long":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Long = &value
+			case "FooNum":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Num = &value
+			case "Str":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Str = &value
+			case "Timestamp":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				s.Timestamp = &value
+			case "TrueBool":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.TrueBool = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation1Output.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+// UnmarshalAWSREST decodes the AWS API shape using the passed in *http.Response.
+func (s *OutputService1TestShapeOutputService1TestCaseOperation1Output) UnmarshalAWSREST(r *http.Response) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService1TestShapeOutputService1TestCaseOperation1Output{}
+		}
+	}()
+	for k, v := range r.Header {
+		switch {
+		case strings.EqualFold(k, "ImaHeader"):
+			value := v[0]
+			s.ImaHeader = &value
+		case strings.EqualFold(k, "X-Foo"):
+			value := v[0]
+			s.ImaHeaderLocation = &value
+		}
 	}
 	return nil
 }
@@ -398,6 +604,206 @@ func (s OutputService1TestShapeOutputService1TestCaseOperation2Output) MarshalFi
 	return nil
 }
 
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *OutputService1TestShapeOutputService1TestCaseOperation2Output) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService1TestShapeOutputService1TestCaseOperation2Output{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation2Output, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation2Output, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *OutputService1TestShapeOutputService1TestCaseOperation2Output) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService1TestShapeOutputService1TestCaseOperation2Output{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Char":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation2Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Char = &value
+			case "Double":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation2Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseFloat(string(v), 64)
+				s.Double = &value
+			case "FalseBool":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation2Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.FalseBool = &value
+			case "Float":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation2Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseFloat(string(v), 64)
+				s.Float = &value
+			case "Float64s":
+				if s.Float64s == nil {
+					s.Float64s = make([]float64, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation2Output.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "Float64s" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "member":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation2Output.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value, _ := strconv.ParseFloat(string(v), 64)
+							s.Float64s = append(s.Float64s, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			case "ImaHeader":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation2Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ImaHeader = &value
+			case "X-Foo":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation2Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ImaHeaderLocation = &value
+			case "Long":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation2Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Long = &value
+			case "FooNum":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation2Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Num = &value
+			case "Str":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation2Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Str = &value
+			case "Timestamp":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation2Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				s.Timestamp = &value
+			case "TrueBool":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation2Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.TrueBool = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation2Output.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+// UnmarshalAWSREST decodes the AWS API shape using the passed in *http.Response.
+func (s *OutputService1TestShapeOutputService1TestCaseOperation2Output) UnmarshalAWSREST(r *http.Response) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService1TestShapeOutputService1TestCaseOperation2Output{}
+		}
+	}()
+	for k, v := range r.Header {
+		switch {
+		case strings.EqualFold(k, "ImaHeader"):
+			value := v[0]
+			s.ImaHeader = &value
+		case strings.EqualFold(k, "X-Foo"):
+			value := v[0]
+			s.ImaHeaderLocation = &value
+		}
+	}
+	return nil
+}
+
 const opOutputService1TestCaseOperation2 = "OperationName"
 
 // OutputService1TestCaseOperation2Request returns a request value for making API operation for
@@ -460,6 +866,54 @@ type OutputService1TestCaseOperation2Response struct {
 // OutputService1TestCaseOperation2 request.
 func (r *OutputService1TestCaseOperation2Response) SDKResponseMetdata() *aws.Response {
 	return r.response
+}
+
+func unmarshalAWSXMLListOutputService1TestShapeFloat64s(s *[]float64, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]float64, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "member":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []float64.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseFloat(string(v), 64)
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []float64.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListOutputService1TestShapeFloat64s(s *[]float64, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]float64, 0)
+		}
+	}()
+	return nil
 }
 
 // OutputService2ProtocolTest provides the API operation methods for making requests to
@@ -536,6 +990,73 @@ func (s OutputService2TestShapeOutputService2TestCaseOperation1Output) MarshalFi
 		e.SetValue(protocol.BodyTarget, "Blob", protocol.BytesValue(v), metadata)
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *OutputService2TestShapeOutputService2TestCaseOperation1Output) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService2TestShapeOutputService2TestCaseOperation1Output{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService2TestShapeOutputService2TestCaseOperation1Output, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService2TestShapeOutputService2TestCaseOperation1Output, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *OutputService2TestShapeOutputService2TestCaseOperation1Output) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService2TestShapeOutputService2TestCaseOperation1Output{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Blob":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService2TestShapeOutputService2TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := base64.StdEncoding.DecodeString(string(v))
+				s.Blob = value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService2TestShapeOutputService2TestCaseOperation1Output.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 const opOutputService2TestCaseOperation1 = "OperationName"
@@ -683,6 +1204,98 @@ func (s OutputService3TestShapeOutputService3TestCaseOperation1Output) MarshalFi
 	return nil
 }
 
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *OutputService3TestShapeOutputService3TestCaseOperation1Output) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService3TestShapeOutputService3TestCaseOperation1Output{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService3TestShapeOutputService3TestCaseOperation1Output, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService3TestShapeOutputService3TestCaseOperation1Output, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *OutputService3TestShapeOutputService3TestCaseOperation1Output) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService3TestShapeOutputService3TestCaseOperation1Output{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "ListMember":
+				if s.ListMember == nil {
+					s.ListMember = make([]string, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML OutputService3TestShapeOutputService3TestCaseOperation1Output.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "ListMember" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "member":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML OutputService3TestShapeOutputService3TestCaseOperation1Output.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value := string(v)
+							s.ListMember = append(s.ListMember, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService3TestShapeOutputService3TestCaseOperation1Output.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
 const opOutputService3TestCaseOperation1 = "OperationName"
 
 // OutputService3TestCaseOperation1Request returns a request value for making API operation for
@@ -745,6 +1358,54 @@ type OutputService3TestCaseOperation1Response struct {
 // OutputService3TestCaseOperation1 request.
 func (r *OutputService3TestCaseOperation1Response) SDKResponseMetdata() *aws.Response {
 	return r.response
+}
+
+func unmarshalAWSXMLListOutputService3TestShapeListShape(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "member":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListOutputService3TestShapeListShape(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	return nil
 }
 
 // OutputService4ProtocolTest provides the API operation methods for making requests to
@@ -828,6 +1489,98 @@ func (s OutputService4TestShapeOutputService4TestCaseOperation1Output) MarshalFi
 	return nil
 }
 
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *OutputService4TestShapeOutputService4TestCaseOperation1Output) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService4TestShapeOutputService4TestCaseOperation1Output{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService4TestShapeOutputService4TestCaseOperation1Output, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService4TestShapeOutputService4TestCaseOperation1Output, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *OutputService4TestShapeOutputService4TestCaseOperation1Output) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService4TestShapeOutputService4TestCaseOperation1Output{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "ListMember":
+				if s.ListMember == nil {
+					s.ListMember = make([]string, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML OutputService4TestShapeOutputService4TestCaseOperation1Output.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "ListMember" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "item":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML OutputService4TestShapeOutputService4TestCaseOperation1Output.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value := string(v)
+							s.ListMember = append(s.ListMember, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService4TestShapeOutputService4TestCaseOperation1Output.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
 const opOutputService4TestCaseOperation1 = "OperationName"
 
 // OutputService4TestCaseOperation1Request returns a request value for making API operation for
@@ -890,6 +1643,54 @@ type OutputService4TestCaseOperation1Response struct {
 // OutputService4TestCaseOperation1 request.
 func (r *OutputService4TestCaseOperation1Response) SDKResponseMetdata() *aws.Response {
 	return r.response
+}
+
+func unmarshalAWSXMLListOutputService4TestShapeListShape(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "item":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListOutputService4TestShapeListShape(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	return nil
 }
 
 // OutputService5ProtocolTest provides the API operation methods for making requests to
@@ -973,6 +1774,76 @@ func (s OutputService5TestShapeOutputService5TestCaseOperation1Output) MarshalFi
 	return nil
 }
 
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *OutputService5TestShapeOutputService5TestCaseOperation1Output) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService5TestShapeOutputService5TestCaseOperation1Output{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService5TestShapeOutputService5TestCaseOperation1Output, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService5TestShapeOutputService5TestCaseOperation1Output, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *OutputService5TestShapeOutputService5TestCaseOperation1Output) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService5TestShapeOutputService5TestCaseOperation1Output{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "ListMember":
+				if s.ListMember == nil {
+					s.ListMember = make([]string, 0)
+				}
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService5TestShapeOutputService5TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ListMember = append(s.ListMember, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService5TestShapeOutputService5TestCaseOperation1Output.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
 const opOutputService5TestCaseOperation1 = "OperationName"
 
 // OutputService5TestCaseOperation1Request returns a request value for making API operation for
@@ -1035,6 +1906,54 @@ type OutputService5TestCaseOperation1Response struct {
 // OutputService5TestCaseOperation1 request.
 func (r *OutputService5TestCaseOperation1Response) SDKResponseMetdata() *aws.Response {
 	return r.response
+}
+
+func unmarshalAWSXMLListOutputService5TestShapeStringList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "member":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListOutputService5TestShapeStringList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	return nil
 }
 
 // OutputService6ProtocolTest provides the API operation methods for making requests to
@@ -1118,6 +2037,77 @@ func (s OutputService6TestShapeOutputService6TestCaseOperation1Output) MarshalFi
 	return nil
 }
 
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *OutputService6TestShapeOutputService6TestCaseOperation1Output) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService6TestShapeOutputService6TestCaseOperation1Output{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService6TestShapeOutputService6TestCaseOperation1Output, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService6TestShapeOutputService6TestCaseOperation1Output, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *OutputService6TestShapeOutputService6TestCaseOperation1Output) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService6TestShapeOutputService6TestCaseOperation1Output{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Map":
+				if s.Map == nil {
+					s.Map = make(map[string]OutputService6TestShapeSingleStructure)
+				}
+				if s.Map == nil {
+					s.Map = make(map[string]OutputService6TestShapeSingleStructure)
+				}
+				err := unmarshalAWSXMLMapOutputService6TestShapeStringMap(&s.Map, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService6TestShapeOutputService6TestCaseOperation1Output.%s, %s", name, err)
+
+				}
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService6TestShapeOutputService6TestCaseOperation1Output.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
 const opOutputService6TestCaseOperation1 = "OperationName"
 
 // OutputService6TestCaseOperation1Request returns a request value for making API operation for
@@ -1195,6 +2185,137 @@ func (s OutputService6TestShapeSingleStructure) MarshalFields(e protocol.FieldEn
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "foo", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+func (s *OutputService6TestShapeSingleStructure) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService6TestShapeSingleStructure{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService6TestShapeSingleStructure.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "foo":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService6TestShapeSingleStructure.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Foo = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService6TestShapeSingleStructure.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLMapOutputService6TestShapeStringMap(s *map[string]OutputService6TestShapeSingleStructure, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make(map[string]OutputService6TestShapeSingleStructure)
+		}
+	}()
+	name := ""
+	curKey := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML map[string]OutputService6TestShapeSingleStructure.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "key":
+				tok, err := d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]OutputService6TestShapeSingleStructure.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				curKey = string(v)
+			case "value":
+				value := OutputService6TestShapeSingleStructure{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]OutputService6TestShapeSingleStructure.%s, %s", name, err)
+				}
+				(*s)[curKey] = value
+			case "entry":
+				continue
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]OutputService6TestShapeSingleStructure.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedMapOutputService6TestShapeStringMap(s *map[string]OutputService6TestShapeSingleStructure, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make(map[string]OutputService6TestShapeSingleStructure)
+		}
+	}()
+	name := ""
+	curKey := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML map[string]OutputService6TestShapeSingleStructure.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "key":
+				tok, err := d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]OutputService6TestShapeSingleStructure.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				curKey = string(v)
+			case "value":
+				value := OutputService6TestShapeSingleStructure{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]OutputService6TestShapeSingleStructure.%s, %s", name, err)
+				}
+				(*s)[curKey] = value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]OutputService6TestShapeSingleStructure.%s, %s", name, err)
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -1280,6 +2401,106 @@ func (s OutputService7TestShapeOutputService7TestCaseOperation1Output) MarshalFi
 	return nil
 }
 
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *OutputService7TestShapeOutputService7TestCaseOperation1Output) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService7TestShapeOutputService7TestCaseOperation1Output{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService7TestShapeOutputService7TestCaseOperation1Output, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService7TestShapeOutputService7TestCaseOperation1Output, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *OutputService7TestShapeOutputService7TestCaseOperation1Output) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService7TestShapeOutputService7TestCaseOperation1Output{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Map":
+				if s.Map == nil {
+					s.Map = make(map[string]string)
+				}
+				curKey := ""
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML OutputService7TestShapeOutputService7TestCaseOperation1Output.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "Map" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "key":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML OutputService7TestShapeOutputService7TestCaseOperation1Output.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							curKey = string(v)
+						case "value":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML OutputService7TestShapeOutputService7TestCaseOperation1Output.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value := string(v)
+							s.Map[curKey] = value
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService7TestShapeOutputService7TestCaseOperation1Output.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
 const opOutputService7TestCaseOperation1 = "OperationName"
 
 // OutputService7TestCaseOperation1Request returns a request value for making API operation for
@@ -1342,6 +2563,102 @@ type OutputService7TestCaseOperation1Response struct {
 // OutputService7TestCaseOperation1 request.
 func (r *OutputService7TestCaseOperation1Response) SDKResponseMetdata() *aws.Response {
 	return r.response
+}
+
+func unmarshalAWSXMLMapOutputService7TestShapeStringMap(s *map[string]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make(map[string]string)
+		}
+	}()
+	name := ""
+	curKey := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "key":
+				tok, err := d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				curKey = string(v)
+			case "value":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				(*s)[curKey] = value
+			case "entry":
+				continue
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedMapOutputService7TestShapeStringMap(s *map[string]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make(map[string]string)
+		}
+	}()
+	name := ""
+	curKey := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "key":
+				tok, err := d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				curKey = string(v)
+			case "value":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				(*s)[curKey] = value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
 }
 
 // OutputService8ProtocolTest provides the API operation methods for making requests to
@@ -1425,6 +2742,108 @@ func (s OutputService8TestShapeOutputService8TestCaseOperation1Output) MarshalFi
 	return nil
 }
 
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *OutputService8TestShapeOutputService8TestCaseOperation1Output) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService8TestShapeOutputService8TestCaseOperation1Output{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService8TestShapeOutputService8TestCaseOperation1Output, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService8TestShapeOutputService8TestCaseOperation1Output, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *OutputService8TestShapeOutputService8TestCaseOperation1Output) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService8TestShapeOutputService8TestCaseOperation1Output{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Map":
+				if s.Map == nil {
+					s.Map = make(map[string]string)
+				}
+				curKey := ""
+				for {
+					tok, err := d.Token()
+					if tok == nil || err != nil {
+						return err
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "Map" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "foo":
+							tok, err := d.Token()
+							if tok == nil || err != nil {
+								return err
+							}
+							v, _ := tok.(xml.CharData)
+							curKey = string(v)
+						case "bar":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return err
+							}
+							v, _ := tok.(xml.CharData)
+							value := string(v)
+							s.Map[curKey] = value
+						case "entry":
+							continue
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService8TestShapeOutputService8TestCaseOperation1Output.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
 const opOutputService8TestCaseOperation1 = "OperationName"
 
 // OutputService8TestCaseOperation1Request returns a request value for making API operation for
@@ -1487,6 +2906,102 @@ type OutputService8TestCaseOperation1Response struct {
 // OutputService8TestCaseOperation1 request.
 func (r *OutputService8TestCaseOperation1Response) SDKResponseMetdata() *aws.Response {
 	return r.response
+}
+
+func unmarshalAWSXMLMapOutputService8TestShapeStringMap(s *map[string]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make(map[string]string)
+		}
+	}()
+	name := ""
+	curKey := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "foo":
+				tok, err := d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				curKey = string(v)
+			case "bar":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				(*s)[curKey] = value
+			case "entry":
+				continue
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedMapOutputService8TestShapeStringMap(s *map[string]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make(map[string]string)
+		}
+	}()
+	name := ""
+	curKey := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "foo":
+				tok, err := d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				curKey = string(v)
+			case "bar":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				(*s)[curKey] = value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
 }
 
 // OutputService9ProtocolTest provides the API operation methods for making requests to
@@ -1572,6 +3087,53 @@ func (s OutputService9TestShapeOutputService9TestCaseOperation1Output) MarshalFi
 	return nil
 }
 
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *OutputService9TestShapeOutputService9TestCaseOperation1Output) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService9TestShapeOutputService9TestCaseOperation1Output{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService9TestShapeOutputService9TestCaseOperation1Output, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		if s.Data == nil {
+			s.Data = &OutputService9TestShapeSingleStructure{}
+		}
+		err = s.Data.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService9TestShapeOutputService9TestCaseOperation1Output, %s", err)
+		}
+		return nil
+	}
+}
+
+// UnmarshalAWSREST decodes the AWS API shape using the passed in *http.Response.
+func (s *OutputService9TestShapeOutputService9TestCaseOperation1Output) UnmarshalAWSREST(r *http.Response) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService9TestShapeOutputService9TestCaseOperation1Output{}
+		}
+	}()
+	for k, v := range r.Header {
+		switch {
+		case strings.EqualFold(k, "X-Foo"):
+			value := v[0]
+			s.Header = &value
+		}
+	}
+	return nil
+}
+
 const opOutputService9TestCaseOperation1 = "OperationName"
 
 // OutputService9TestCaseOperation1Request returns a request value for making API operation for
@@ -1652,6 +3214,43 @@ func (s OutputService9TestShapeSingleStructure) MarshalFields(e protocol.FieldEn
 	}
 	return nil
 }
+func (s *OutputService9TestShapeSingleStructure) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService9TestShapeSingleStructure{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService9TestShapeSingleStructure.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Foo":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService9TestShapeSingleStructure.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Foo = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService9TestShapeSingleStructure.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // OutputService10ProtocolTest provides the API operation methods for making requests to
 // OutputService10ProtocolTest. See this package's package overview docs
@@ -1725,6 +3324,19 @@ func (s OutputService10TestShapeOutputService10TestCaseOperation1Output) Marshal
 		metadata := protocol.Metadata{}
 		e.SetStream(protocol.PayloadTarget, "Stream", protocol.BytesStream(v), metadata)
 	}
+	return nil
+}
+
+// UnmarshalAWSPayload decodes the AWS API shape using the passed in io.ReadCloser.
+func (s *OutputService10TestShapeOutputService10TestCaseOperation1Output) UnmarshalAWSPayload(r io.ReadCloser) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService10TestShapeOutputService10TestCaseOperation1Output{}
+		}
+	}()
+	buf := new(bytes.Buffer)
+	buf.ReadFrom(r)
+	s.Stream = []byte(buf.String())
 	return nil
 }
 
@@ -1931,6 +3543,171 @@ func (s OutputService11TestShapeOutputService11TestCaseOperation1Output) Marshal
 	}
 	return nil
 }
+func (s *OutputService11TestShapeOutputService11TestCaseOperation1Output) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService11TestShapeOutputService11TestCaseOperation1Output{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "x-char":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService11TestShapeOutputService11TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Char = &value
+			case "x-double":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService11TestShapeOutputService11TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseFloat(string(v), 64)
+				s.Double = &value
+			case "x-false-bool":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService11TestShapeOutputService11TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.FalseBool = &value
+			case "x-float":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService11TestShapeOutputService11TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseFloat(string(v), 64)
+				s.Float = &value
+			case "x-int":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService11TestShapeOutputService11TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Integer = &value
+			case "x-long":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService11TestShapeOutputService11TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Long = &value
+			case "x-str":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService11TestShapeOutputService11TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Str = &value
+			case "x-timestamp":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService11TestShapeOutputService11TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(protocol.RFC822TimeFromat, string(v))
+				s.Timestamp = &value
+			case "x-true-bool":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService11TestShapeOutputService11TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.TrueBool = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService11TestShapeOutputService11TestCaseOperation1Output.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+// UnmarshalAWSREST decodes the AWS API shape using the passed in *http.Response.
+func (s *OutputService11TestShapeOutputService11TestCaseOperation1Output) UnmarshalAWSREST(r *http.Response) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService11TestShapeOutputService11TestCaseOperation1Output{}
+		}
+	}()
+	for k, v := range r.Header {
+		switch {
+		case strings.EqualFold(k, "x-char"):
+			value := v[0]
+			s.Char = &value
+		case strings.EqualFold(k, "x-double"):
+			value, err := strconv.ParseFloat(v[0], 64)
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST OutputService11TestShapeOutputService11TestCaseOperation1Output.Double, %s", err)
+			}
+			s.Double = &value
+		case strings.EqualFold(k, "x-false-bool"):
+			value, err := strconv.ParseBool(v[0])
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST OutputService11TestShapeOutputService11TestCaseOperation1Output.FalseBool, %s", err)
+			}
+			s.FalseBool = &value
+		case strings.EqualFold(k, "x-float"):
+			value, err := strconv.ParseFloat(v[0], 64)
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST OutputService11TestShapeOutputService11TestCaseOperation1Output.Float, %s", err)
+			}
+			s.Float = &value
+		case strings.EqualFold(k, "x-int"):
+			value, err := strconv.ParseInt(v[0], 10, 64)
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST OutputService11TestShapeOutputService11TestCaseOperation1Output.Integer, %s", err)
+			}
+			s.Integer = &value
+		case strings.EqualFold(k, "x-long"):
+			value, err := strconv.ParseInt(v[0], 10, 64)
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST OutputService11TestShapeOutputService11TestCaseOperation1Output.Long, %s", err)
+			}
+			s.Long = &value
+		case strings.EqualFold(k, "x-str"):
+			value := v[0]
+			s.Str = &value
+		case strings.EqualFold(k, "x-timestamp"):
+			value, err := time.Parse(protocol.RFC822TimeFromat, v[0])
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST OutputService11TestShapeOutputService11TestCaseOperation1Output.Timestamp, %s", err)
+			}
+			s.Timestamp = &value
+		case strings.EqualFold(k, "x-true-bool"):
+			value, err := strconv.ParseBool(v[0])
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST OutputService11TestShapeOutputService11TestCaseOperation1Output.TrueBool, %s", err)
+			}
+			s.TrueBool = &value
+		}
+	}
+	return nil
+}
 
 const opOutputService11TestCaseOperation1 = "OperationName"
 
@@ -2069,6 +3846,73 @@ func (s OutputService12TestShapeOutputService12TestCaseOperation1Output) Marshal
 		e.SetValue(protocol.BodyTarget, "Foo", protocol.StringValue(v), metadata)
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *OutputService12TestShapeOutputService12TestCaseOperation1Output) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService12TestShapeOutputService12TestCaseOperation1Output{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService12TestShapeOutputService12TestCaseOperation1Output, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService12TestShapeOutputService12TestCaseOperation1Output, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *OutputService12TestShapeOutputService12TestCaseOperation1Output) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService12TestShapeOutputService12TestCaseOperation1Output{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Foo":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService12TestShapeOutputService12TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Foo = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService12TestShapeOutputService12TestCaseOperation1Output.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 const opOutputService12TestCaseOperation1 = "OperationName"
@@ -2264,6 +4108,152 @@ func (s OutputService13TestShapeOutputService13TestCaseOperation1Output) Marshal
 	return nil
 }
 
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *OutputService13TestShapeOutputService13TestCaseOperation1Output) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService13TestShapeOutputService13TestCaseOperation1Output{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeOutputService13TestCaseOperation1Output, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeOutputService13TestCaseOperation1Output, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *OutputService13TestShapeOutputService13TestCaseOperation1Output) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService13TestShapeOutputService13TestCaseOperation1Output{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "StructMember":
+				value := OutputService13TestShapeTimeContainer{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeOutputService13TestCaseOperation1Output.%s, %s", name, err)
+				}
+				s.StructMember = &value
+			case "TimeArg":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeOutputService13TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				s.TimeArg = &value
+			case "x-amz-timearg":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeOutputService13TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(protocol.RFC822TimeFromat, string(v))
+				s.TimeArgInHeader = &value
+			case "TimeCustom":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeOutputService13TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				s.TimeCustom = &value
+			case "x-amz-timecustom":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeOutputService13TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(protocol.RFC822TimeFromat, string(v))
+				s.TimeCustomInHeader = &value
+			case "TimeFormat":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeOutputService13TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				s.TimeFormat = &value
+			case "x-amz-timeformat":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeOutputService13TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(protocol.RFC822TimeFromat, string(v))
+				s.TimeFormatInHeader = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeOutputService13TestCaseOperation1Output.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+// UnmarshalAWSREST decodes the AWS API shape using the passed in *http.Response.
+func (s *OutputService13TestShapeOutputService13TestCaseOperation1Output) UnmarshalAWSREST(r *http.Response) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService13TestShapeOutputService13TestCaseOperation1Output{}
+		}
+	}()
+	for k, v := range r.Header {
+		switch {
+		case strings.EqualFold(k, "x-amz-timearg"):
+			value, err := time.Parse(protocol.RFC822TimeFromat, v[0])
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST OutputService13TestShapeOutputService13TestCaseOperation1Output.TimeArgInHeader, %s", err)
+			}
+			s.TimeArgInHeader = &value
+		case strings.EqualFold(k, "x-amz-timecustom"):
+			value, err := time.Parse(protocol.RFC822TimeFromat, v[0])
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST OutputService13TestShapeOutputService13TestCaseOperation1Output.TimeCustomInHeader, %s", err)
+			}
+			s.TimeCustomInHeader = &value
+		case strings.EqualFold(k, "x-amz-timeformat"):
+			value, err := time.Parse(protocol.RFC822TimeFromat, v[0])
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST OutputService13TestShapeOutputService13TestCaseOperation1Output.TimeFormatInHeader, %s", err)
+			}
+			s.TimeFormatInHeader = &value
+		}
+	}
+	return nil
+}
+
 const opOutputService13TestCaseOperation1 = "OperationName"
 
 // OutputService13TestCaseOperation1Request returns a request value for making API operation for
@@ -2353,6 +4343,51 @@ func (s OutputService13TestShapeTimeContainer) MarshalFields(e protocol.FieldEnc
 			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	return nil
+}
+func (s *OutputService13TestShapeTimeContainer) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService13TestShapeTimeContainer{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeTimeContainer.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "bar":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeTimeContainer.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				s.Bar = &value
+			case "foo":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeTimeContainer.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				s.Foo = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeTimeContainer.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // OutputService14ProtocolTest provides the API operation methods for making requests to
@@ -2448,6 +4483,131 @@ func (s OutputService14TestShapeOutputService14TestCaseOperation1Output) Marshal
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "x-amz-enum", v, metadata)
+	}
+	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *OutputService14TestShapeOutputService14TestCaseOperation1Output) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService14TestShapeOutputService14TestCaseOperation1Output{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService14TestShapeOutputService14TestCaseOperation1Output, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService14TestShapeOutputService14TestCaseOperation1Output, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *OutputService14TestShapeOutputService14TestCaseOperation1Output) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService14TestShapeOutputService14TestCaseOperation1Output{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "FooEnum":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService14TestShapeOutputService14TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := OutputService14TestShapeRESTJSONEnumType(v)
+				s.FooEnum = value
+			case "x-amz-enum":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService14TestShapeOutputService14TestCaseOperation1Output.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := OutputService14TestShapeRESTJSONEnumType(v)
+				s.HeaderEnum = value
+			case "ListEnums":
+				if s.ListEnums == nil {
+					s.ListEnums = make([]OutputService14TestShapeRESTJSONEnumType, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML OutputService14TestShapeOutputService14TestCaseOperation1Output.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "ListEnums" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "member":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML OutputService14TestShapeOutputService14TestCaseOperation1Output.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value := OutputService14TestShapeRESTJSONEnumType(v)
+							s.ListEnums = append(s.ListEnums, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService14TestShapeOutputService14TestCaseOperation1Output.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+// UnmarshalAWSREST decodes the AWS API shape using the passed in *http.Response.
+func (s *OutputService14TestShapeOutputService14TestCaseOperation1Output) UnmarshalAWSREST(r *http.Response) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService14TestShapeOutputService14TestCaseOperation1Output{}
+		}
+	}()
+	for k, v := range r.Header {
+		switch {
+		case strings.EqualFold(k, "x-amz-enum"):
+			value := OutputService14TestShapeRESTJSONEnumType(v[0])
+			s.HeaderEnum = value
+		}
 	}
 	return nil
 }
@@ -2564,6 +4724,37 @@ type OutputService14TestShapeOutputService14TestCaseOperation2Output struct {
 func (s OutputService14TestShapeOutputService14TestCaseOperation2Output) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
+func (s *OutputService14TestShapeOutputService14TestCaseOperation2Output) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService14TestShapeOutputService14TestCaseOperation2Output{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService14TestShapeOutputService14TestCaseOperation2Output.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 const opOutputService14TestCaseOperation2 = "OperationName"
 
@@ -2629,6 +4820,54 @@ type OutputService14TestCaseOperation2Response struct {
 // OutputService14TestCaseOperation2 request.
 func (r *OutputService14TestCaseOperation2Response) SDKResponseMetdata() *aws.Response {
 	return r.response
+}
+
+func unmarshalAWSXMLListOutputService14TestShapeEnumList(s *[]OutputService14TestShapeRESTJSONEnumType, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]OutputService14TestShapeRESTJSONEnumType, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "member":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []OutputService14TestShapeRESTJSONEnumType.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := OutputService14TestShapeRESTJSONEnumType(v)
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []OutputService14TestShapeRESTJSONEnumType.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListOutputService14TestShapeEnumList(s *[]OutputService14TestShapeRESTJSONEnumType, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]OutputService14TestShapeRESTJSONEnumType, 0)
+		}
+	}()
+	return nil
 }
 
 type OutputService14TestShapeRESTJSONEnumType string
@@ -2731,6 +4970,73 @@ func (s OutputService15TestShapeOutputService15TestCaseOperation1Output) Marshal
 	return nil
 }
 
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *OutputService15TestShapeOutputService15TestCaseOperation1Output) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService15TestShapeOutputService15TestCaseOperation1Output{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService15TestShapeOutputService15TestCaseOperation1Output, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService15TestShapeOutputService15TestCaseOperation1Output, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *OutputService15TestShapeOutputService15TestCaseOperation1Output) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService15TestShapeOutputService15TestCaseOperation1Output{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "ItemsList":
+				if s.ListItems == nil {
+					s.ListItems = make([]OutputService15TestShapeItemShape, 0)
+				}
+				err := unmarshalAWSXMLListOutputService15TestShapeListItemsShape(&s.ListItems, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService15TestShapeOutputService15TestCaseOperation1Output.%s, %s", name, err)
+				}
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService15TestShapeOutputService15TestCaseOperation1Output.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
 const opOutputService15TestCaseOperation1 = "OperationName"
 
 // OutputService15TestCaseOperation1Request returns a request value for making API operation for
@@ -2815,6 +5121,50 @@ func (s OutputService15TestShapeItemDetailShape) MarshalFields(e protocol.FieldE
 	// Skipping Type XML Attribute.
 	return nil
 }
+func (s *OutputService15TestShapeItemDetailShape) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService15TestShapeItemDetailShape{}
+		}
+	}()
+	for index, attr := range head.Attr {
+		if attr.Name.Local == "type" {
+			v := head.Attr[index].Value
+			value := OutputService15TestShapeItemType(v)
+			s.Type = value
+		}
+	}
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService15TestShapeItemDetailShape.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "ID":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService15TestShapeItemDetailShape.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ID = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService15TestShapeItemDetailShape.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 type OutputService15TestShapeItemShape struct {
 	_ struct{} `type:"structure"`
@@ -2836,6 +5186,95 @@ func (s OutputService15TestShapeItemShape) MarshalFields(e protocol.FieldEncoder
 		metadata := protocol.Metadata{Attributes: attrs, XMLNamespacePrefix: "xsi", XMLNamespaceURI: "http://www.w3.org/2001/XMLSchema-instance"}
 		e.SetFields(protocol.BodyTarget, "ItemDetail", v, metadata)
 	}
+	return nil
+}
+func (s *OutputService15TestShapeItemShape) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OutputService15TestShapeItemShape{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OutputService15TestShapeItemShape.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "ItemDetail":
+				value := OutputService15TestShapeItemDetailShape{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService15TestShapeItemShape.%s, %s", name, err)
+				}
+				s.ItemDetail = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OutputService15TestShapeItemShape.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListOutputService15TestShapeListItemsShape(s *[]OutputService15TestShapeItemShape, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]OutputService15TestShapeItemShape, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Item":
+				value := OutputService15TestShapeItemShape{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []OutputService15TestShapeItemShape.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []OutputService15TestShapeItemShape.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListOutputService15TestShapeListItemsShape(s *[]OutputService15TestShapeItemShape, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]OutputService15TestShapeItemShape, 0)
+		}
+	}()
+	value := OutputService15TestShapeItemShape{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
 	return nil
 }
 

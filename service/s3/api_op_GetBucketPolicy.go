@@ -3,7 +3,9 @@
 package s3
 
 import (
+	"bytes"
 	"context"
+	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -77,6 +79,20 @@ func (s GetBucketPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetStream(protocol.PayloadTarget, "Policy", protocol.StringStream(v), metadata)
 	}
+	return nil
+}
+
+// UnmarshalAWSPayload decodes the AWS API shape using the passed in io.ReadCloser.
+func (s *GetBucketPolicyOutput) UnmarshalAWSPayload(r io.ReadCloser) (err error) {
+	defer func() {
+		if err != nil {
+			*s = GetBucketPolicyOutput{}
+		}
+	}()
+	buf := new(bytes.Buffer)
+	buf.ReadFrom(r)
+	str := buf.String()
+	s.Policy = &str
 	return nil
 }
 

@@ -4,6 +4,11 @@ package cloudfront
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
+	"net/http"
+	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -96,6 +101,56 @@ func (s CreateFieldLevelEncryptionConfigOutput) MarshalFields(e protocol.FieldEn
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryption", v, metadata)
+	}
+	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *CreateFieldLevelEncryptionConfigOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CreateFieldLevelEncryptionConfigOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML CreateFieldLevelEncryptionConfigOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		if s.FieldLevelEncryption == nil {
+			s.FieldLevelEncryption = &FieldLevelEncryption{}
+		}
+		err = s.FieldLevelEncryption.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML CreateFieldLevelEncryptionConfigOutput, %s", err)
+		}
+		return nil
+	}
+}
+
+// UnmarshalAWSREST decodes the AWS API shape using the passed in *http.Response.
+func (s *CreateFieldLevelEncryptionConfigOutput) UnmarshalAWSREST(r *http.Response) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CreateFieldLevelEncryptionConfigOutput{}
+		}
+	}()
+	for k, v := range r.Header {
+		switch {
+		case strings.EqualFold(k, "ETag"):
+			value := v[0]
+			s.ETag = &value
+		case strings.EqualFold(k, "Location"):
+			value := v[0]
+			s.Location = &value
+		}
 	}
 	return nil
 }

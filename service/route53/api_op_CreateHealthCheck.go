@@ -4,6 +4,11 @@ package route53
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
+	"net/http"
+	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -131,6 +136,97 @@ func (s CreateHealthCheckOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *CreateHealthCheckOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CreateHealthCheckOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML CreateHealthCheckOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML CreateHealthCheckOutput, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *CreateHealthCheckOutput) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CreateHealthCheckOutput{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "HealthCheck":
+				value := HealthCheck{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CreateHealthCheckOutput.%s, %s", name, err)
+				}
+				s.HealthCheck = &value
+			case "Location":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CreateHealthCheckOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Location = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CreateHealthCheckOutput.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+// UnmarshalAWSREST decodes the AWS API shape using the passed in *http.Response.
+func (s *CreateHealthCheckOutput) UnmarshalAWSREST(r *http.Response) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CreateHealthCheckOutput{}
+		}
+	}()
+	for k, v := range r.Header {
+		switch {
+		case strings.EqualFold(k, "Location"):
+			value := v[0]
+			s.Location = &value
+		}
 	}
 	return nil
 }

@@ -4,6 +4,10 @@ package route53
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
+	"strconv"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -198,6 +202,113 @@ func (s ListGeoLocationsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "NextSubdivisionCode", protocol.StringValue(v), metadata)
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *ListGeoLocationsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = ListGeoLocationsOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML ListGeoLocationsOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML ListGeoLocationsOutput, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *ListGeoLocationsOutput) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = ListGeoLocationsOutput{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "GeoLocationDetailsList":
+				if s.GeoLocationDetailsList == nil {
+					s.GeoLocationDetailsList = make([]GeoLocationDetails, 0)
+				}
+				err := unmarshalAWSXMLListGeoLocationDetailsList(&s.GeoLocationDetailsList, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListGeoLocationsOutput.%s, %s", name, err)
+				}
+			case "IsTruncated":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListGeoLocationsOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.IsTruncated = &value
+			case "MaxItems":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListGeoLocationsOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.MaxItems = &value
+			case "NextContinentCode":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListGeoLocationsOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.NextContinentCode = &value
+			case "NextCountryCode":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListGeoLocationsOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.NextCountryCode = &value
+			case "NextSubdivisionCode":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListGeoLocationsOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.NextSubdivisionCode = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListGeoLocationsOutput.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 const opListGeoLocations = "ListGeoLocations"

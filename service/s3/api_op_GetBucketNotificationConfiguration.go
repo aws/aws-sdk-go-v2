@@ -4,6 +4,9 @@ package s3
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -121,6 +124,89 @@ func (s GetBucketNotificationConfigurationOutput) MarshalFields(e protocol.Field
 
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *GetBucketNotificationConfigurationOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = GetBucketNotificationConfigurationOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML GetBucketNotificationConfigurationOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML GetBucketNotificationConfigurationOutput, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *GetBucketNotificationConfigurationOutput) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = GetBucketNotificationConfigurationOutput{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "CloudFunctionConfiguration":
+				if s.LambdaFunctionConfigurations == nil {
+					s.LambdaFunctionConfigurations = make([]LambdaFunctionConfiguration, 0)
+				}
+				err := unmarshalAWSXMLFlattenedListLambdaFunctionConfigurationList(&s.LambdaFunctionConfigurations, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML GetBucketNotificationConfigurationOutput.%s, %s", name, err)
+				}
+			case "QueueConfiguration":
+				if s.QueueConfigurations == nil {
+					s.QueueConfigurations = make([]QueueConfiguration, 0)
+				}
+				err := unmarshalAWSXMLFlattenedListQueueConfigurationList(&s.QueueConfigurations, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML GetBucketNotificationConfigurationOutput.%s, %s", name, err)
+				}
+			case "TopicConfiguration":
+				if s.TopicConfigurations == nil {
+					s.TopicConfigurations = make([]TopicConfiguration, 0)
+				}
+				err := unmarshalAWSXMLFlattenedListTopicConfigurationList(&s.TopicConfigurations, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML GetBucketNotificationConfigurationOutput.%s, %s", name, err)
+				}
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML GetBucketNotificationConfigurationOutput.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 const opGetBucketNotificationConfiguration = "GetBucketNotificationConfiguration"

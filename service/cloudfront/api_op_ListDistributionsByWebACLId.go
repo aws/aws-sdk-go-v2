@@ -4,6 +4,9 @@ package cloudfront
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -102,6 +105,36 @@ func (s ListDistributionsByWebACLIdOutput) MarshalFields(e protocol.FieldEncoder
 		e.SetFields(protocol.PayloadTarget, "DistributionList", v, metadata)
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *ListDistributionsByWebACLIdOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = ListDistributionsByWebACLIdOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML ListDistributionsByWebACLIdOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		if s.DistributionList == nil {
+			s.DistributionList = &DistributionList{}
+		}
+		err = s.DistributionList.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML ListDistributionsByWebACLIdOutput, %s", err)
+		}
+		return nil
+	}
 }
 
 const opListDistributionsByWebACLId = "ListDistributionsByWebACLId2019_03_26"

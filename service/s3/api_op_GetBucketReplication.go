@@ -4,6 +4,9 @@ package s3
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -79,6 +82,36 @@ func (s GetBucketReplicationOutput) MarshalFields(e protocol.FieldEncoder) error
 		e.SetFields(protocol.PayloadTarget, "ReplicationConfiguration", v, metadata)
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *GetBucketReplicationOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = GetBucketReplicationOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML GetBucketReplicationOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		if s.ReplicationConfiguration == nil {
+			s.ReplicationConfiguration = &ReplicationConfiguration{}
+		}
+		err = s.ReplicationConfiguration.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML GetBucketReplicationOutput, %s", err)
+		}
+		return nil
+	}
 }
 
 const opGetBucketReplication = "GetBucketReplication"

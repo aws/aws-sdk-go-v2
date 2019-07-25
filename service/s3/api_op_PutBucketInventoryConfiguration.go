@@ -4,6 +4,9 @@ package s3
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -107,6 +110,37 @@ func (s PutBucketInventoryConfigurationOutput) String() string {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PutBucketInventoryConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
+}
+func (s *PutBucketInventoryConfigurationOutput) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = PutBucketInventoryConfigurationOutput{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PutBucketInventoryConfigurationOutput.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 const opPutBucketInventoryConfiguration = "PutBucketInventoryConfiguration"

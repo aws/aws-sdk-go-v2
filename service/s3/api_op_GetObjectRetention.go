@@ -4,6 +4,9 @@ package s3
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -119,6 +122,36 @@ func (s GetObjectRetentionOutput) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetFields(protocol.PayloadTarget, "Retention", v, metadata)
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *GetObjectRetentionOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = GetObjectRetentionOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML GetObjectRetentionOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		if s.Retention == nil {
+			s.Retention = &ObjectLockRetention{}
+		}
+		err = s.Retention.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML GetObjectRetentionOutput, %s", err)
+		}
+		return nil
+	}
 }
 
 const opGetObjectRetention = "GetObjectRetention"

@@ -3,6 +3,7 @@ package ec2query_test
 import (
 	"bytes"
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
@@ -11,6 +12,8 @@ import (
 	"net/http"
 	"net/url"
 	"reflect"
+	"strconv"
+	"strings"
 	"testing"
 	"time"
 
@@ -37,6 +40,9 @@ var _ = io.EOF
 var _ = aws.String
 var _ = fmt.Println
 var _ = reflect.Value{}
+var _ = strings.Reader{}
+var _ = strconv.Atoi
+var _ = base64.Encoding{}
 
 func init() {
 	protocol.RandReader = &awstesting.ZeroReader{}

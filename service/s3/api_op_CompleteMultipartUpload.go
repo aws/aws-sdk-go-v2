@@ -4,6 +4,11 @@ package s3
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
+	"net/http"
+	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -205,6 +210,166 @@ func (s CompleteMultipartUploadOutput) MarshalFields(e protocol.FieldEncoder) er
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "x-amz-version-id", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *CompleteMultipartUploadOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CompleteMultipartUploadOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML CompleteMultipartUploadOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML CompleteMultipartUploadOutput, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *CompleteMultipartUploadOutput) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CompleteMultipartUploadOutput{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Bucket":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CompleteMultipartUploadOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Bucket = &value
+			case "ETag":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CompleteMultipartUploadOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ETag = &value
+			case "x-amz-expiration":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CompleteMultipartUploadOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Expiration = &value
+			case "Key":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CompleteMultipartUploadOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Key = &value
+			case "Location":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CompleteMultipartUploadOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Location = &value
+			case "x-amz-request-charged":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CompleteMultipartUploadOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := RequestCharged(v)
+				s.RequestCharged = value
+			case "x-amz-server-side-encryption-aws-kms-key-id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CompleteMultipartUploadOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.SSEKMSKeyId = &value
+			case "x-amz-server-side-encryption":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CompleteMultipartUploadOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := ServerSideEncryption(v)
+				s.ServerSideEncryption = value
+			case "x-amz-version-id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CompleteMultipartUploadOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.VersionId = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CompleteMultipartUploadOutput.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+// UnmarshalAWSREST decodes the AWS API shape using the passed in *http.Response.
+func (s *CompleteMultipartUploadOutput) UnmarshalAWSREST(r *http.Response) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CompleteMultipartUploadOutput{}
+		}
+	}()
+	for k, v := range r.Header {
+		switch {
+		case strings.EqualFold(k, "x-amz-expiration"):
+			value := v[0]
+			s.Expiration = &value
+		case strings.EqualFold(k, "x-amz-request-charged"):
+			value := RequestCharged(v[0])
+			s.RequestCharged = value
+		case strings.EqualFold(k, "x-amz-server-side-encryption-aws-kms-key-id"):
+			value := v[0]
+			s.SSEKMSKeyId = &value
+		case strings.EqualFold(k, "x-amz-server-side-encryption"):
+			value := ServerSideEncryption(v[0])
+			s.ServerSideEncryption = value
+		case strings.EqualFold(k, "x-amz-version-id"):
+			value := v[0]
+			s.VersionId = &value
+		}
 	}
 	return nil
 }

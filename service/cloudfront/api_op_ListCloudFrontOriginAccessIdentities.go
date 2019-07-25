@@ -4,6 +4,9 @@ package cloudfront
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -72,6 +75,36 @@ func (s ListCloudFrontOriginAccessIdentitiesOutput) MarshalFields(e protocol.Fie
 		e.SetFields(protocol.PayloadTarget, "CloudFrontOriginAccessIdentityList", v, metadata)
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *ListCloudFrontOriginAccessIdentitiesOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = ListCloudFrontOriginAccessIdentitiesOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML ListCloudFrontOriginAccessIdentitiesOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		if s.CloudFrontOriginAccessIdentityList == nil {
+			s.CloudFrontOriginAccessIdentityList = &CloudFrontOriginAccessIdentityList{}
+		}
+		err = s.CloudFrontOriginAccessIdentityList.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML ListCloudFrontOriginAccessIdentitiesOutput, %s", err)
+		}
+		return nil
+	}
 }
 
 const opListCloudFrontOriginAccessIdentities = "ListCloudFrontOriginAccessIdentities2019_03_26"

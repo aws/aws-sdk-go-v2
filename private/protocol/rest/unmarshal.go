@@ -42,6 +42,9 @@ func UnmarshalMeta(r *request.Request) {
 }
 
 func unmarshalBody(r *request.Request, v reflect.Value) {
+	if r.HTTPResponse.Body == nil {
+		return
+	}
 	if field, ok := v.Type().FieldByName("_"); ok {
 		if payloadName := field.Tag.Get("payload"); payloadName != "" {
 			pfield, _ := v.Type().FieldByName(payloadName)

@@ -255,24 +255,46 @@ func (a *API) importsGoCode() string {
 	return code
 }
 
-// A tplAPI is the top level template for the API
-var tplAPI = template.Must(template.New("api").Parse(`
-{{ range $_, $o := .OperationList }}
-{{ $o.GoCode }}
-
-{{ end }}
-
+const tplAPIShapesDef = `
 {{ range $_, $s := .ShapeList }}
-	{{- if and (and (not $s.UsedAsOutput) (not $s.UsedAsInput)) (eq $s.Type "structure") }}
+	{{ if and (and (not $s.UsedAsInput) (not $s.UsedAsOutput)) (eq $s.Type "structure") -}}
 		{{ $s.GoCode }}
-	{{- end }}
+	{{ else if or (eq $s.Type "list") (eq $s.Type "map") -}}
+		{{ if not $s.API.NoGenUnmarshalers -}}
+			{{ UnmarshalShapeGoCode $s }}
+		{{ end -}}
+	{{ end -}}
 {{ end }}
+`
+
+const tplAPIDef = `
+{{ range $_, $o := .OperationList }}
+	{{ $o.GoCode }}
+{{ end }}
+
+{{ template "tplAPIShapes" $ -}}
 
 {{ range $_, $s := .ShapeList }}
-{{ if $s.IsEnum }}{{ $s.GoCode }}{{ end }}
-
+	{{ if $s.IsEnum }}{{ $s.GoCode }}{{ end }}
 {{ end }}
-`))
+`
+
+var tplAPI = func() *template.Template {
+	apiTmpl := template.Must(
+		template.New("api").
+			Funcs(template.FuncMap{
+				"UnmarshalShapeGoCode": UnmarshalShapeGoCode,
+			}).Parse(tplAPIDef),
+	)
+
+	template.Must(
+		apiTmpl.AddParseTree(
+			"tplAPIShapes",
+			tplAPIShapes.Tree),
+	)
+
+	return apiTmpl
+}()
 
 // AddImport adds the import path to the generated file's import.
 func (a *API) AddImport(v string) error {
@@ -353,13 +375,11 @@ func (a *API) APIEnumsGoCode() string {
 }
 
 // A tplAPIShapes is the top level template for the API Shapes.
-var tplAPIShapes = template.Must(template.New("api").Parse(`
-{{ range $_, $s := .ShapeList }}
-	{{ if and (and (not $s.UsedAsInput) (not $s.UsedAsOutput)) (eq $s.Type "structure") -}}
-		{{ $s.GoCode }}
-	{{- end }}
-{{ end }}
-`))
+var tplAPIShapes = template.Must(template.New("api").Funcs(
+	template.FuncMap{
+		"UnmarshalShapeGoCode": UnmarshalShapeGoCode,
+	},
+).Parse(tplAPIShapesDef))
 
 // APIParamShapesGoCode renders the API's shape types in Go code. Returning
 // them as a string.

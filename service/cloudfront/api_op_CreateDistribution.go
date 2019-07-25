@@ -4,6 +4,11 @@ package cloudfront
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
+	"net/http"
+	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -97,6 +102,56 @@ func (s CreateDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.PayloadTarget, "Distribution", v, metadata)
+	}
+	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *CreateDistributionOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CreateDistributionOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML CreateDistributionOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		if s.Distribution == nil {
+			s.Distribution = &Distribution{}
+		}
+		err = s.Distribution.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML CreateDistributionOutput, %s", err)
+		}
+		return nil
+	}
+}
+
+// UnmarshalAWSREST decodes the AWS API shape using the passed in *http.Response.
+func (s *CreateDistributionOutput) UnmarshalAWSREST(r *http.Response) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CreateDistributionOutput{}
+		}
+	}()
+	for k, v := range r.Header {
+		switch {
+		case strings.EqualFold(k, "ETag"):
+			value := v[0]
+			s.ETag = &value
+		case strings.EqualFold(k, "Location"):
+			value := v[0]
+			s.Location = &value
+		}
 	}
 	return nil
 }

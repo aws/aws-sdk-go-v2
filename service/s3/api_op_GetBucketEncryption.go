@@ -4,6 +4,9 @@ package s3
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -81,6 +84,36 @@ func (s GetBucketEncryptionOutput) MarshalFields(e protocol.FieldEncoder) error 
 		e.SetFields(protocol.PayloadTarget, "ServerSideEncryptionConfiguration", v, metadata)
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *GetBucketEncryptionOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = GetBucketEncryptionOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML GetBucketEncryptionOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		if s.ServerSideEncryptionConfiguration == nil {
+			s.ServerSideEncryptionConfiguration = &ServerSideEncryptionConfiguration{}
+		}
+		err = s.ServerSideEncryptionConfiguration.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML GetBucketEncryptionOutput, %s", err)
+		}
+		return nil
+	}
 }
 
 const opGetBucketEncryption = "GetBucketEncryption"

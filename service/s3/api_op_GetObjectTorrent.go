@@ -5,6 +5,8 @@ package s3
 import (
 	"context"
 	"io"
+	"net/http"
+	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -110,6 +112,34 @@ func (s GetObjectTorrentOutput) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.HeaderTarget, "x-amz-request-charged", v, metadata)
 	}
 	// Skipping Body Output type's body not valid.
+	return nil
+}
+
+// UnmarshalAWSREST decodes the AWS API shape using the passed in *http.Response.
+func (s *GetObjectTorrentOutput) UnmarshalAWSREST(r *http.Response) (err error) {
+	defer func() {
+		if err != nil {
+			*s = GetObjectTorrentOutput{}
+		}
+	}()
+	for k, v := range r.Header {
+		switch {
+		case strings.EqualFold(k, "x-amz-request-charged"):
+			value := RequestCharged(v[0])
+			s.RequestCharged = value
+		}
+	}
+	return nil
+}
+
+// UnmarshalAWSPayload decodes the AWS API shape using the passed in io.ReadCloser.
+func (s *GetObjectTorrentOutput) UnmarshalAWSPayload(r io.ReadCloser) (err error) {
+	defer func() {
+		if err != nil {
+			*s = GetObjectTorrentOutput{}
+		}
+	}()
+	s.Body = r
 	return nil
 }
 

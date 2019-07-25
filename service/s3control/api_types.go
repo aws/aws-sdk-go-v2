@@ -3,7 +3,9 @@
 package s3control
 
 import (
+	"encoding/xml"
 	"fmt"
+	"strconv"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -203,6 +205,167 @@ func (s JobDescriptor) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *JobDescriptor) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = JobDescriptor{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "ConfirmationRequired":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.ConfirmationRequired = &value
+			case "CreationTime":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				s.CreationTime = &value
+			case "Description":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Description = &value
+			case "FailureReasons":
+				if s.FailureReasons == nil {
+					s.FailureReasons = make([]JobFailure, 0)
+				}
+				err := unmarshalAWSXMLListJobFailureList(&s.FailureReasons, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
+				}
+			case "JobArn":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.JobArn = &value
+			case "JobId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.JobId = &value
+			case "Manifest":
+				value := JobManifest{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
+				}
+				s.Manifest = &value
+			case "Operation":
+				value := JobOperation{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
+				}
+				s.Operation = &value
+			case "Priority":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Priority = &value
+			case "ProgressSummary":
+				value := JobProgressSummary{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
+				}
+				s.ProgressSummary = &value
+			case "Report":
+				value := JobReport{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
+				}
+				s.Report = &value
+			case "RoleArn":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.RoleArn = &value
+			case "Status":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := JobStatus(v)
+				s.Status = value
+			case "StatusUpdateReason":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.StatusUpdateReason = &value
+			case "SuspendedCause":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.SuspendedCause = &value
+			case "SuspendedDate":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				s.SuspendedDate = &value
+			case "TerminationDate":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				s.TerminationDate = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // If this job failed, this element indicates why the job failed.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobFailure
@@ -235,6 +398,104 @@ func (s JobFailure) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "FailureReason", protocol.StringValue(v), metadata)
 	}
+	return nil
+}
+func (s *JobFailure) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = JobFailure{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML JobFailure.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "FailureCode":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobFailure.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.FailureCode = &value
+			case "FailureReason":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobFailure.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.FailureReason = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobFailure.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListJobFailureList(s *[]JobFailure, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]JobFailure, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "member":
+				value := JobFailure{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []JobFailure.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []JobFailure.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListJobFailureList(s *[]JobFailure, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]JobFailure, 0)
+		}
+	}()
+	value := JobFailure{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
 	return nil
 }
 
@@ -332,6 +593,151 @@ func (s JobListDescriptor) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *JobListDescriptor) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = JobListDescriptor{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML JobListDescriptor.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "CreationTime":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobListDescriptor.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				s.CreationTime = &value
+			case "Description":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobListDescriptor.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Description = &value
+			case "JobId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobListDescriptor.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.JobId = &value
+			case "Operation":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobListDescriptor.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := OperationName(v)
+				s.Operation = value
+			case "Priority":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobListDescriptor.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Priority = &value
+			case "ProgressSummary":
+				value := JobProgressSummary{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobListDescriptor.%s, %s", name, err)
+				}
+				s.ProgressSummary = &value
+			case "Status":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobListDescriptor.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := JobStatus(v)
+				s.Status = value
+			case "TerminationDate":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobListDescriptor.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				s.TerminationDate = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobListDescriptor.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListJobListDescriptorList(s *[]JobListDescriptor, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]JobListDescriptor, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "member":
+				value := JobListDescriptor{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []JobListDescriptor.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []JobListDescriptor.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListJobListDescriptorList(s *[]JobListDescriptor, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]JobListDescriptor, 0)
+		}
+	}()
+	value := JobListDescriptor{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
+	return nil
+}
 
 // Contains the configuration information for a job's manifest.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobManifest
@@ -397,6 +803,97 @@ func (s JobManifest) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Spec", v, metadata)
 	}
+	return nil
+}
+func (s *JobManifest) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = JobManifest{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML JobManifest.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Location":
+				value := JobManifestLocation{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobManifest.%s, %s", name, err)
+				}
+				s.Location = &value
+			case "Spec":
+				value := JobManifestSpec{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobManifest.%s, %s", name, err)
+				}
+				s.Spec = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobManifest.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListJobManifestFieldList(s *[]JobManifestFieldName, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]JobManifestFieldName, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "member":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []JobManifestFieldName.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := JobManifestFieldName(v)
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []JobManifestFieldName.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListJobManifestFieldList(s *[]JobManifestFieldName, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]JobManifestFieldName, 0)
+		}
+	}()
 	return nil
 }
 
@@ -473,6 +970,59 @@ func (s JobManifestLocation) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *JobManifestLocation) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = JobManifestLocation{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML JobManifestLocation.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "ETag":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobManifestLocation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ETag = &value
+			case "ObjectArn":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobManifestLocation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ObjectArn = &value
+			case "ObjectVersionId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobManifestLocation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ObjectVersionId = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobManifestLocation.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // Describes the format of a manifest. If the manifest is in CSV format, also
 // describes the columns contained within the manifest.
@@ -529,6 +1079,76 @@ func (s JobManifestSpec) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "Format", v, metadata)
 	}
 	return nil
+}
+func (s *JobManifestSpec) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = JobManifestSpec{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML JobManifestSpec.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Fields":
+				if s.Fields == nil {
+					s.Fields = make([]JobManifestFieldName, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML JobManifestSpec.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "Fields" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "member":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML JobManifestSpec.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value := JobManifestFieldName(v)
+							s.Fields = append(s.Fields, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			case "Format":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobManifestSpec.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := JobManifestFormat(v)
+				s.Format = value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobManifestSpec.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // The operation that you want this job to perform on each object listed in
@@ -629,6 +1249,70 @@ func (s JobOperation) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *JobOperation) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = JobOperation{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML JobOperation.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "LambdaInvoke":
+				value := LambdaInvokeOperation{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobOperation.%s, %s", name, err)
+				}
+				s.LambdaInvoke = &value
+			case "S3InitiateRestoreObject":
+				value := S3InitiateRestoreObjectOperation{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobOperation.%s, %s", name, err)
+				}
+				s.S3InitiateRestoreObject = &value
+			case "S3PutObjectAcl":
+				value := S3SetObjectAclOperation{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobOperation.%s, %s", name, err)
+				}
+				s.S3PutObjectAcl = &value
+			case "S3PutObjectCopy":
+				value := S3CopyObjectOperation{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobOperation.%s, %s", name, err)
+				}
+				s.S3PutObjectCopy = &value
+			case "S3PutObjectTagging":
+				value := S3SetObjectTaggingOperation{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobOperation.%s, %s", name, err)
+				}
+				s.S3PutObjectTagging = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobOperation.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // Describes the total number of tasks that the specified job has executed,
 // the number of tasks that succeeded, and the number of tasks that failed.
@@ -669,6 +1353,59 @@ func (s JobProgressSummary) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "TotalNumberOfTasks", protocol.Int64Value(v), metadata)
 	}
 	return nil
+}
+func (s *JobProgressSummary) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = JobProgressSummary{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML JobProgressSummary.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "NumberOfTasksFailed":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobProgressSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.NumberOfTasksFailed = &value
+			case "NumberOfTasksSucceeded":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobProgressSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.NumberOfTasksSucceeded = &value
+			case "TotalNumberOfTasks":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobProgressSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.TotalNumberOfTasks = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobProgressSummary.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // Contains the configuration parameters for a job-completion report.
@@ -756,6 +1493,123 @@ func (s JobReport) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *JobReport) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = JobReport{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML JobReport.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Bucket":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobReport.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Bucket = &value
+			case "Enabled":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobReport.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.Enabled = &value
+			case "Format":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobReport.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := JobReportFormat(v)
+				s.Format = value
+			case "Prefix":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobReport.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Prefix = &value
+			case "ReportScope":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobReport.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := JobReportScope(v)
+				s.ReportScope = value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML JobReport.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListJobStatusList(s *[]JobStatus, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]JobStatus, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "member":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []JobStatus.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := JobStatus(v)
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []JobStatus.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListJobStatusList(s *[]JobStatus, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]JobStatus, 0)
+		}
+	}()
+	return nil
+}
 
 // Contains the configuration parameters for a Lambda Invoke operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/LambdaInvokeOperation
@@ -794,6 +1648,43 @@ func (s LambdaInvokeOperation) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "FunctionArn", protocol.StringValue(v), metadata)
 	}
 	return nil
+}
+func (s *LambdaInvokeOperation) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = LambdaInvokeOperation{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML LambdaInvokeOperation.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "FunctionArn":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML LambdaInvokeOperation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.FunctionArn = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML LambdaInvokeOperation.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PublicAccessBlockConfiguration
@@ -841,6 +1732,67 @@ func (s PublicAccessBlockConfiguration) MarshalFields(e protocol.FieldEncoder) e
 		e.SetValue(protocol.BodyTarget, "RestrictPublicBuckets", protocol.BoolValue(v), metadata)
 	}
 	return nil
+}
+func (s *PublicAccessBlockConfiguration) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = PublicAccessBlockConfiguration{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML PublicAccessBlockConfiguration.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "BlockPublicAcls":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicAccessBlockConfiguration.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.BlockPublicAcls = &value
+			case "BlockPublicPolicy":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicAccessBlockConfiguration.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.BlockPublicPolicy = &value
+			case "IgnorePublicAcls":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicAccessBlockConfiguration.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.IgnorePublicAcls = &value
+			case "RestrictPublicBuckets":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicAccessBlockConfiguration.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.RestrictPublicBuckets = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicAccessBlockConfiguration.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3AccessControlList
@@ -906,6 +1858,50 @@ func (s S3AccessControlList) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *S3AccessControlList) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = S3AccessControlList{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML S3AccessControlList.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Grants":
+				if s.Grants == nil {
+					s.Grants = make([]S3Grant, 0)
+				}
+				err := unmarshalAWSXMLListS3GrantList(&s.Grants, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3AccessControlList.%s, %s", name, err)
+				}
+			case "Owner":
+				value := S3ObjectOwner{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3AccessControlList.%s, %s", name, err)
+				}
+				s.Owner = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3AccessControlList.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3AccessControlPolicy
 type S3AccessControlPolicy struct {
@@ -951,6 +1947,50 @@ func (s S3AccessControlPolicy) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "CannedAccessControlList", v, metadata)
 	}
 	return nil
+}
+func (s *S3AccessControlPolicy) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = S3AccessControlPolicy{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML S3AccessControlPolicy.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "AccessControlList":
+				value := S3AccessControlList{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3AccessControlPolicy.%s, %s", name, err)
+				}
+				s.AccessControlList = &value
+			case "CannedAccessControlList":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3AccessControlPolicy.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := S3CannedAccessControlList(v)
+				s.CannedAccessControlList = value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3AccessControlPolicy.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // Contains the configuration parameters for a PUT Copy object operation. Amazon
@@ -1155,6 +2195,162 @@ func (s S3CopyObjectOperation) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *S3CopyObjectOperation) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = S3CopyObjectOperation{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "AccessControlGrants":
+				if s.AccessControlGrants == nil {
+					s.AccessControlGrants = make([]S3Grant, 0)
+				}
+				err := unmarshalAWSXMLListS3GrantList(&s.AccessControlGrants, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
+				}
+			case "CannedAccessControlList":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := S3CannedAccessControlList(v)
+				s.CannedAccessControlList = value
+			case "MetadataDirective":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := S3MetadataDirective(v)
+				s.MetadataDirective = value
+			case "ModifiedSinceConstraint":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				s.ModifiedSinceConstraint = &value
+			case "NewObjectMetadata":
+				value := S3ObjectMetadata{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
+				}
+				s.NewObjectMetadata = &value
+			case "NewObjectTagging":
+				if s.NewObjectTagging == nil {
+					s.NewObjectTagging = make([]S3Tag, 0)
+				}
+				err := unmarshalAWSXMLListS3TagSet(&s.NewObjectTagging, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
+				}
+			case "ObjectLockLegalHoldStatus":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := S3ObjectLockLegalHoldStatus(v)
+				s.ObjectLockLegalHoldStatus = value
+			case "ObjectLockMode":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := S3ObjectLockMode(v)
+				s.ObjectLockMode = value
+			case "ObjectLockRetainUntilDate":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				s.ObjectLockRetainUntilDate = &value
+			case "RedirectLocation":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.RedirectLocation = &value
+			case "RequesterPays":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.RequesterPays = &value
+			case "SSEAwsKmsKeyId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.SSEAwsKmsKeyId = &value
+			case "StorageClass":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := S3StorageClass(v)
+				s.StorageClass = value
+			case "TargetKeyPrefix":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.TargetKeyPrefix = &value
+			case "TargetResource":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.TargetResource = &value
+			case "UnModifiedSinceConstraint":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				s.UnModifiedSinceConstraint = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3Grant
 type S3Grant struct {
@@ -1199,6 +2395,103 @@ func (s S3Grant) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Permission", v, metadata)
 	}
+	return nil
+}
+func (s *S3Grant) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = S3Grant{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML S3Grant.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Grantee":
+				value := S3Grantee{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3Grant.%s, %s", name, err)
+				}
+				s.Grantee = &value
+			case "Permission":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3Grant.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := S3Permission(v)
+				s.Permission = value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3Grant.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListS3GrantList(s *[]S3Grant, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]S3Grant, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "member":
+				value := S3Grant{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []S3Grant.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []S3Grant.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListS3GrantList(s *[]S3Grant, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]S3Grant, 0)
+		}
+	}()
+	value := S3Grant{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
 	return nil
 }
 
@@ -1256,6 +2549,59 @@ func (s S3Grantee) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *S3Grantee) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = S3Grantee{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML S3Grantee.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "DisplayName":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3Grantee.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.DisplayName = &value
+			case "Identifier":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3Grantee.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Identifier = &value
+			case "TypeIdentifier":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3Grantee.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := S3GranteeTypeIdentifier(v)
+				s.TypeIdentifier = value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3Grantee.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // Contains the configuration parameters for an Initiate Glacier Restore job.
 // Amazon S3 batch operations passes each value through to the underlying POST
@@ -1290,6 +2636,51 @@ func (s S3InitiateRestoreObjectOperation) MarshalFields(e protocol.FieldEncoder)
 		e.SetValue(protocol.BodyTarget, "GlacierJobTier", v, metadata)
 	}
 	return nil
+}
+func (s *S3InitiateRestoreObjectOperation) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = S3InitiateRestoreObjectOperation{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML S3InitiateRestoreObjectOperation.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "ExpirationInDays":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3InitiateRestoreObjectOperation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.ExpirationInDays = &value
+			case "GlacierJobTier":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3InitiateRestoreObjectOperation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := S3GlacierJobTier(v)
+				s.GlacierJobTier = value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3InitiateRestoreObjectOperation.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3ObjectMetadata
@@ -1429,6 +2820,158 @@ func (s S3ObjectMetadata) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *S3ObjectMetadata) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = S3ObjectMetadata{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML S3ObjectMetadata.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "CacheControl":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3ObjectMetadata.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.CacheControl = &value
+			case "ContentDisposition":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3ObjectMetadata.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ContentDisposition = &value
+			case "ContentEncoding":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3ObjectMetadata.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ContentEncoding = &value
+			case "ContentLanguage":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3ObjectMetadata.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ContentLanguage = &value
+			case "ContentLength":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3ObjectMetadata.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.ContentLength = &value
+			case "ContentMD5":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3ObjectMetadata.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ContentMD5 = &value
+			case "ContentType":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3ObjectMetadata.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ContentType = &value
+			case "HttpExpiresDate":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3ObjectMetadata.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				s.HttpExpiresDate = &value
+			case "RequesterCharged":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3ObjectMetadata.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.RequesterCharged = &value
+			case "SSEAlgorithm":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3ObjectMetadata.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := S3SSEAlgorithm(v)
+				s.SSEAlgorithm = value
+			case "UserMetadata":
+				if s.UserMetadata == nil {
+					s.UserMetadata = make(map[string]string)
+				}
+				curKey := ""
+				for {
+					tok, err := d.Token()
+					if tok == nil || err != nil {
+						return err
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "UserMetadata" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "key":
+							tok, err := d.Token()
+							if tok == nil || err != nil {
+								return err
+							}
+							v, _ := tok.(xml.CharData)
+							curKey = string(v)
+						case "value":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return err
+							}
+							v, _ := tok.(xml.CharData)
+							value := string(v)
+							s.UserMetadata[curKey] = value
+						case "entry":
+							continue
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3ObjectMetadata.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3ObjectOwner
 type S3ObjectOwner struct {
@@ -1476,6 +3019,51 @@ func (s S3ObjectOwner) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *S3ObjectOwner) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = S3ObjectOwner{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML S3ObjectOwner.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "DisplayName":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3ObjectOwner.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.DisplayName = &value
+			case "ID":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3ObjectOwner.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ID = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3ObjectOwner.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // Contains the configuration parameters for a Set Object ACL operation. Amazon
 // S3 batch operations passes each value through to the underlying PUT Object
@@ -1517,6 +3105,42 @@ func (s S3SetObjectAclOperation) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetFields(protocol.BodyTarget, "AccessControlPolicy", v, metadata)
 	}
 	return nil
+}
+func (s *S3SetObjectAclOperation) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = S3SetObjectAclOperation{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML S3SetObjectAclOperation.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "AccessControlPolicy":
+				value := S3AccessControlPolicy{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3SetObjectAclOperation.%s, %s", name, err)
+				}
+				s.AccessControlPolicy = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3SetObjectAclOperation.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // Contains the configuration parameters for a Set Object Tagging operation.
@@ -1567,6 +3191,43 @@ func (s S3SetObjectTaggingOperation) MarshalFields(e protocol.FieldEncoder) erro
 
 	}
 	return nil
+}
+func (s *S3SetObjectTaggingOperation) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = S3SetObjectTaggingOperation{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML S3SetObjectTaggingOperation.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "TagSet":
+				if s.TagSet == nil {
+					s.TagSet = make([]S3Tag, 0)
+				}
+				err := unmarshalAWSXMLListS3TagSet(&s.TagSet, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3SetObjectTaggingOperation.%s, %s", name, err)
+				}
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3SetObjectTaggingOperation.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3Tag
@@ -1619,6 +3280,200 @@ func (s S3Tag) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+func (s *S3Tag) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = S3Tag{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML S3Tag.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Key":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3Tag.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Key = &value
+			case "Value":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3Tag.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Value = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3Tag.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListS3TagSet(s *[]S3Tag, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]S3Tag, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "member":
+				value := S3Tag{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []S3Tag.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []S3Tag.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListS3TagSet(s *[]S3Tag, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]S3Tag, 0)
+		}
+	}()
+	value := S3Tag{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
+	return nil
+}
+
+func unmarshalAWSXMLMapS3UserMetadata(s *map[string]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make(map[string]string)
+		}
+	}()
+	name := ""
+	curKey := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "key":
+				tok, err := d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				curKey = string(v)
+			case "value":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				(*s)[curKey] = value
+			case "entry":
+				continue
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedMapS3UserMetadata(s *map[string]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make(map[string]string)
+		}
+	}()
+	name := ""
+	curKey := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "key":
+				tok, err := d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				curKey = string(v)
+			case "value":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				(*s)[curKey] = value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML map[string]string.%s, %s", name, err)
+				}
+			}
+		}
 	}
 	return nil
 }

@@ -751,60 +751,6 @@ func (r marshalShapeRef) TimeFormat() string {
 	}
 }
 
-// UnmarshalShapeGoCode renders the shape's UnmarshalAWS method with unmarshalers
-// for each field within the shape. A string is returned of the rendered Go code.
-//
-// Will panic if error.
-func UnmarshalShapeGoCode(s *Shape) string {
-	w := &bytes.Buffer{}
-	if err := unmarshalShapeTmpl.Execute(w, s); err != nil {
-		panic(fmt.Sprintf("failed to render shape's fields unmarshaler, %v", err))
-	}
-
-	return w.String()
-}
-
-var unmarshalShapeTmpl = template.Must(template.New("unmarshalShapeTmpl").Funcs(
-	template.FuncMap{
-		"UnmarshalShapeRefGoCode": UnmarshalShapeRefGoCode,
-	},
-).Parse(`
-{{ $shapeName := $.ShapeName -}}
-
-// UnmarshalAWS decodes the AWS API shape using the passed in protocol decoder.
-func (s *{{ $shapeName }}) UnmarshalAWS(d protocol.FieldDecoder) {
-	{{ range $name, $ref := $.MemberRefs -}}
-		{{ UnmarshalShapeRefGoCode $name $ref $ }}
-	{{ end }}
-}
-
-{{ if $.UsedInList -}}
-func decode{{ $shapeName }}List(vsp *[]*{{ $shapeName }}) func(int, protocol.ListDecoder) {
-	return func(n int, ld protocol.ListDecoder) {
-		vs := make([]{{ $shapeName }}, n)
-		*vsp = make([]*{{ $shapeName }}, n)
-		for i := 0; i < n; i++ {
-			ld.ListGetUnmarshaler(&vs[i])
-			(*vsp)[i] = &vs[i]
-		}
-	}
-}
-{{- end }}
-
-{{ if $.UsedInMap -}}
-func decode{{ $shapeName }}Map(vsp *map[string]*{{ $shapeName }}) func([]string, protocol.MapDecoder) {
-	return func(ks []string, md protocol.MapDecoder) {
-		vs := make(map[string]*{{ $shapeName }}, n)
-		for _, k range ks {
-			v := &{{ $shapeName }}{}
-			md.MapGetUnmarshaler(k, v)
-			vs[k] = v
-		}
-	}
-}
-{{- end }}
-`))
-
 // UnmarshalShapeRefGoCode generates the Go code to unmarshal an API shape.
 func UnmarshalShapeRefGoCode(refName string, ref *ShapeRef, context *Shape) string {
 	if ref.XMLAttribute {

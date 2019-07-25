@@ -4,6 +4,11 @@ package s3
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
+	"net/http"
+	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -344,6 +349,68 @@ func (s UploadPartCopyOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.PayloadTarget, "CopyPartResult", v, metadata)
+	}
+	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *UploadPartCopyOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = UploadPartCopyOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML UploadPartCopyOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		if s.CopyPartResult == nil {
+			s.CopyPartResult = &CopyPartResult{}
+		}
+		err = s.CopyPartResult.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML UploadPartCopyOutput, %s", err)
+		}
+		return nil
+	}
+}
+
+// UnmarshalAWSREST decodes the AWS API shape using the passed in *http.Response.
+func (s *UploadPartCopyOutput) UnmarshalAWSREST(r *http.Response) (err error) {
+	defer func() {
+		if err != nil {
+			*s = UploadPartCopyOutput{}
+		}
+	}()
+	for k, v := range r.Header {
+		switch {
+		case strings.EqualFold(k, "x-amz-copy-source-version-id"):
+			value := v[0]
+			s.CopySourceVersionId = &value
+		case strings.EqualFold(k, "x-amz-request-charged"):
+			value := RequestCharged(v[0])
+			s.RequestCharged = value
+		case strings.EqualFold(k, "x-amz-server-side-encryption-customer-algorithm"):
+			value := v[0]
+			s.SSECustomerAlgorithm = &value
+		case strings.EqualFold(k, "x-amz-server-side-encryption-customer-key-MD5"):
+			value := v[0]
+			s.SSECustomerKeyMD5 = &value
+		case strings.EqualFold(k, "x-amz-server-side-encryption-aws-kms-key-id"):
+			value := v[0]
+			s.SSEKMSKeyId = &value
+		case strings.EqualFold(k, "x-amz-server-side-encryption"):
+			value := ServerSideEncryption(v[0])
+			s.ServerSideEncryption = value
+		}
 	}
 	return nil
 }

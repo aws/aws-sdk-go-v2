@@ -4,6 +4,9 @@ package route53
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -221,6 +224,138 @@ func (s TestDNSAnswerOutput) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "ResponseCode", protocol.StringValue(v), metadata)
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *TestDNSAnswerOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = TestDNSAnswerOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML TestDNSAnswerOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML TestDNSAnswerOutput, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *TestDNSAnswerOutput) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = TestDNSAnswerOutput{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Nameserver":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML TestDNSAnswerOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Nameserver = &value
+			case "Protocol":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML TestDNSAnswerOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Protocol = &value
+			case "RecordData":
+				if s.RecordData == nil {
+					s.RecordData = make([]string, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML TestDNSAnswerOutput.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "RecordData" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "RecordDataEntry":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML TestDNSAnswerOutput.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value := string(v)
+							s.RecordData = append(s.RecordData, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			case "RecordName":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML TestDNSAnswerOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.RecordName = &value
+			case "RecordType":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML TestDNSAnswerOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := RRType(v)
+				s.RecordType = value
+			case "ResponseCode":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML TestDNSAnswerOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ResponseCode = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML TestDNSAnswerOutput.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 const opTestDNSAnswer = "TestDNSAnswer"
