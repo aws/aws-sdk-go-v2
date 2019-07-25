@@ -4,12 +4,17 @@ package s3
 
 import (
 	"context"
+	"fmt"
 	"io"
+	"net/http"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/private/protocol/rest"
 )
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectRequest
@@ -367,6 +372,143 @@ type GetObjectOutput struct {
 	// to another object in the same bucket or to an external URL. Amazon S3 stores
 	// the value of this header in the object metadata.
 	WebsiteRedirectLocation *string `location:"header" locationName:"x-amz-website-redirect-location" type:"string"`
+}
+
+func (s *GetObjectOutput) UnmarshalAWSPayload(r io.ReadCloser) (err error) {
+	defer func() {
+		if err != nil {
+			*s = GetObjectOutput{}
+		}
+	}()
+	s.Body = r
+	return nil
+}
+
+func (s *GetObjectOutput) UnmarshalAWSREST(r *http.Response) (err error) {
+	defer func() {
+		if err != nil {
+			*s = GetObjectOutput{}
+		}
+	}()
+
+	for k, v := range r.Header {
+		switch {
+		case strings.EqualFold(k, "accept-ranges"):
+			value := v[0]
+			s.AcceptRanges = &value
+		case strings.EqualFold(k, "Cache-Control"):
+			value := v[0]
+			s.CacheControl = &value
+		case strings.EqualFold(k, "Content-Disposition"):
+			value := v[0]
+			s.ContentDisposition = &value
+		case strings.EqualFold(k, "Content-Encoding"):
+			value := v[0]
+			s.ContentEncoding = &value
+		case strings.EqualFold(k, "Content-Language"):
+			value := v[0]
+			s.ContentLanguage = &value
+		case strings.EqualFold(k, "Content-Length"):
+			value, err := strconv.ParseInt(v[0], 10, 64)
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput.ContentLength, %s", err)
+			}
+			s.ContentLength = &value
+		case strings.EqualFold(k, "Content-Range"):
+			value := v[0]
+			s.ContentRange = &value
+		case strings.EqualFold(k, "Content-Type"):
+			value := v[0]
+			s.ContentType = &value
+		case strings.EqualFold(k, "x-amz-delete-marker"):
+			value, err := strconv.ParseBool(v[0])
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput.DeleteMarker, %s", err)
+			}
+			s.DeleteMarker = &value
+		case strings.EqualFold(k, "ETag"):
+			value := v[0]
+			s.ETag = &value
+		case strings.EqualFold(k, "x-amz-expiration"):
+			value := v[0]
+			s.Expiration = &value
+		case strings.EqualFold(k, "Expires"):
+			value := v[0]
+			s.Expires = &value
+		case strings.EqualFold(k, "Last-Modified"):
+			value, err := time.Parse(rest.RFC822, v[0])
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput.LastModified, %s", err)
+			}
+			s.LastModified = &value
+		case strings.EqualFold(k, "x-amz-missing-meta"):
+			value, err := strconv.ParseInt(v[0], 10, 64)
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput.MissingMeta, %s", err)
+			}
+			s.MissingMeta = &value
+		case strings.EqualFold(k, "x-amz-object-lock-legal-hold"):
+			value := ObjectLockLegalHoldStatus(v[0])
+			s.ObjectLockLegalHoldStatus = value
+		case strings.EqualFold(k, "x-amz-object-lock-mode"):
+			value := ObjectLockMode(v[0])
+			s.ObjectLockMode = value
+		case strings.EqualFold(k, "x-amz-object-lock-retain-until-date"):
+			value, err := time.Parse(rest.RFC822, v[0])
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput.ObjectLockRetainUntilDate, %s", err)
+			}
+			s.ObjectLockRetainUntilDate = &value
+		case strings.EqualFold(k, "x-amz-mp-parts-count"):
+			value, err := strconv.ParseInt(v[0], 10, 64)
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput.PartsCount, %s", err)
+			}
+			s.PartsCount = &value
+		case strings.EqualFold(k, "x-amz-replication-status"):
+			value := ReplicationStatus(v[0])
+			s.ReplicationStatus = value
+		case strings.EqualFold(k, "x-amz-request-charged"):
+			value := RequestCharged(v[0])
+			s.RequestCharged = value
+		case strings.EqualFold(k, "x-amz-restore"):
+			value := v[0]
+			s.Restore = &value
+		case strings.EqualFold(k, "x-amz-server-side-encryption-customer-algorithm"):
+			value := v[0]
+			s.SSECustomerAlgorithm = &value
+		case strings.EqualFold(k, "x-amz-server-side-encryption-customer-key-MD5"):
+			value := v[0]
+			s.SSECustomerKeyMD5 = &value
+		case strings.EqualFold(k, "x-amz-server-side-encryption-aws-kms-key-id"):
+			value := v[0]
+			s.SSEKMSKeyId = &value
+		case strings.EqualFold(k, "x-amz-server-side-encryption"):
+			value := ServerSideEncryption(v[0])
+			s.ServerSideEncryption = value
+		case strings.EqualFold(k, "x-amz-storage-class"):
+			value := StorageClass(v[0])
+			s.StorageClass = value
+		case strings.EqualFold(k, "x-amz-tagging-count"):
+			value, err := strconv.ParseInt(v[0], 10, 64)
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput.TagCount, %s", err)
+			}
+			s.TagCount = &value
+		case strings.EqualFold(k, "x-amz-version-id"):
+			value := v[0]
+			s.VersionId = &value
+		case strings.EqualFold(k, "x-amz-website-redirect-location"):
+			value := v[0]
+			s.WebsiteRedirectLocation = &value
+		case strings.HasPrefix(strings.ToLower(k), "x-amz-meta-"):
+			if s.Metadata == nil {
+				s.Metadata = map[string]string{}
+			}
+			s.Metadata[k[len("x-amz-meta-"):]] = v[0]
+		}
+	}
+	return nil
 }
 
 // String returns the string representation

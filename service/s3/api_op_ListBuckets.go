@@ -4,6 +4,10 @@ package s3
 
 import (
 	"context"
+	"encoding/xml"
+	"io"
+	"time"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -33,6 +37,145 @@ type ListBucketsOutput struct {
 	Buckets []Bucket `locationNameList:"Bucket" type:"list"`
 
 	Owner *Owner `type:"structure"`
+}
+
+func (s *ListBucketsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = ListBucketsOutput{}
+		}
+	}()
+
+	cur := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				break
+			} else {
+				return fmt.Errorf("fail to UnmarshalAWSXML ListBucketsOutput.%s, %s", cur, err)
+			}
+		}
+
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name := start.Name.Local; name {
+			case "Owner":
+				cur = name
+				owner := Owner{}
+				err := owner.unmarshalAWSXML(d)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListBucketsOutput.%s, %s", cur, err)
+				}
+				s.Owner = &owner
+			case "Buckets":
+				cur = name
+				buckets := make([]Bucket, 0)
+				err := unmarshalAWSXMLListBucket(&buckets, d)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListBucketsOutput.%s, %s", cur, err)
+				}
+				s.Buckets = buckets
+			case "ListAllMyBucketsResult":
+				continue
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListBucketsOutput.%s, %s", cur, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+// For N-Dimension list, add each layer a UnmarshalAWSXML() function
+func unmarshalAWSXMLListBucket(s *[]Bucket, d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]Bucket, 0)
+		}
+	}()
+
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+
+		if end, ok := tok.(xml.EndElement); ok {
+			name := end.Name.Local
+			if name == "Buckets" {
+				break
+			}
+		}
+
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name := start.Name.Local; name {
+			case "Bucket":
+				bucket := Bucket{}
+				err := bucket.UnmarshalAWSXML(d)
+				if err != nil {
+					return err
+				}
+				*s = append(*s, bucket)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func (s *Bucket) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = Bucket{}
+		}
+	}()
+
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+
+		if end, ok := tok.(xml.EndElement); ok {
+			name := end.Name.Local
+			if name == "Bucket" {
+				break
+			}
+		}
+
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name := start.Name.Local; name {
+			case "Name":
+				tok, err = d.Token();
+				if tok == nil || err != nil {
+					return err
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Name = &value
+			case "CreationDate":
+				tok, err = d.Token();
+				if tok == nil || err != nil {
+					return err
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := time.Parse(time.RFC3339, string(v))
+				s.CreationDate = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
 }
 
 // String returns the string representation
