@@ -83,7 +83,9 @@ func (s GetSegmentExportJobsInput) MarshalFields(e protocol.FieldEncoder) error 
 type GetSegmentExportJobsOutput struct {
 	_ struct{} `type:"structure" payload:"ExportJobsResponse"`
 
-	// Export job list.
+	// Provides information about all the export jobs that are associated with an
+	// application or segment. An export job is a job that exports endpoint definitions
+	// to a file.
 	//
 	// ExportJobsResponse is a required field
 	ExportJobsResponse *ExportJobsResponse `type:"structure" required:"true"`
@@ -110,7 +112,8 @@ const opGetSegmentExportJobs = "GetSegmentExportJobs"
 // GetSegmentExportJobsRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Returns a list of export jobs for a specific segment.
+// Retrieves information about the status and settings of the export jobs for
+// a segment.
 //
 //    // Example sending a request using GetSegmentExportJobsRequest.
 //    req := client.GetSegmentExportJobsRequest(params)

@@ -54,7 +54,8 @@ func (s DeleteApnsVoipChannelInput) MarshalFields(e protocol.FieldEncoder) error
 type DeleteApnsVoipChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSVoipChannelResponse"`
 
-	// Apple VoIP Push Notification Service channel definition.
+	// Provides information about the status and settings of the APNs (Apple Push
+	// Notification service) VoIP channel for an application.
 	//
 	// APNSVoipChannelResponse is a required field
 	APNSVoipChannelResponse *APNSVoipChannelResponse `type:"structure" required:"true"`
@@ -81,7 +82,8 @@ const opDeleteApnsVoipChannel = "DeleteApnsVoipChannel"
 // DeleteApnsVoipChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Delete an APNS VoIP channel
+// Disables the APNs VoIP channel for an application and deletes any existing
+// settings for the channel.
 //
 //    // Example sending a request using DeleteApnsVoipChannelRequest.
 //    req := client.DeleteApnsVoipChannelRequest(params)

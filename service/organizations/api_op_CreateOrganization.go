@@ -65,8 +65,8 @@ const opCreateOrganization = "CreateOrganization"
 // is created with all features enabled and service control policies automatically
 // enabled in the root. If you instead choose to create the organization supporting
 // only the consolidated billing features by setting the FeatureSet parameter
-// to CONSOLIDATED_BILLING", then no policy types are enabled by default and
-// you cannot use organization policies.
+// to CONSOLIDATED_BILLING", no policy types are enabled by default, and you
+// can't use organization policies.
 //
 //    // Example sending a request using CreateOrganizationRequest.
 //    req := client.CreateOrganizationRequest(params)

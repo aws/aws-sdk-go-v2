@@ -16,8 +16,8 @@ import (
 type CreateAutoScalingGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the Auto Scaling group. This name must be unique within the scope
-	// of your AWS account.
+	// The name of the Auto Scaling group. This name must be unique per Region per
+	// account.
 	//
 	// AutoScalingGroupName is a required field
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
@@ -36,10 +36,11 @@ type CreateAutoScalingGroupInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	DefaultCooldown *int64 `type:"integer"`
 
-	// The number of EC2 instances that should be running in the group. This number
-	// must be greater than or equal to the minimum size of the group and less than
-	// or equal to the maximum size of the group. If you do not specify a desired
-	// capacity, the default is the minimum size of the group.
+	// The number of Amazon EC2 instances that the Auto Scaling group attempts to
+	// maintain. This number must be greater than or equal to the minimum size of
+	// the group and less than or equal to the maximum size of the group. If you
+	// do not specify a desired capacity, the default is the minimum size of the
+	// group.
 	DesiredCapacity *int64 `type:"integer"`
 
 	// The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before
@@ -63,8 +64,6 @@ type CreateAutoScalingGroupInput struct {
 	HealthCheckType *string `min:"1" type:"string"`
 
 	// The ID of the instance used to create a launch configuration for the group.
-	// This parameter, a launch configuration, a launch template, or a mixed instances
-	// policy must be specified.
 	//
 	// When you specify an ID of an instance, Amazon EC2 Auto Scaling creates a
 	// new launch configuration and associates it with the group. This launch configuration
@@ -74,31 +73,39 @@ type CreateAutoScalingGroupInput struct {
 	// For more information, see Create an Auto Scaling Group Using an EC2 Instance
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-from-instance.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
+	//
+	// You must specify one of the following parameters in your request: LaunchConfigurationName,
+	// LaunchTemplate, InstanceId, or MixedInstancesPolicy.
 	InstanceId *string `min:"1" type:"string"`
 
-	// The name of the launch configuration. This parameter, a launch template,
-	// a mixed instances policy, or an EC2 instance must be specified.
+	// The name of the launch configuration.
 	//
 	// For more information, see Creating an Auto Scaling Group Using a Launch Configuration
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg.html) in
 	// the Amazon EC2 Auto Scaling User Guide.
+	//
+	// If you do not specify LaunchConfigurationName, you must specify one of the
+	// following parameters: InstanceId, LaunchTemplate, or MixedInstancesPolicy.
 	LaunchConfigurationName *string `min:"1" type:"string"`
 
-	// The launch template to use to launch instances. This parameter, a launch
-	// configuration, a mixed instances policy, or an EC2 instance must be specified.
+	// The launch template to use to launch instances.
 	//
 	// For more information, see Creating an Auto Scaling Group Using a Launch Template
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-launch-template.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
+	//
+	// If you do not specify LaunchTemplate, you must specify one of the following
+	// parameters: InstanceId, LaunchConfigurationName, or MixedInstancesPolicy.
 	LaunchTemplate *LaunchTemplateSpecification `type:"structure"`
 
 	// One or more lifecycle hooks.
 	LifecycleHookSpecificationList []LifecycleHookSpecification `type:"list"`
 
-	// One or more Classic Load Balancers. To specify an Application Load Balancer
-	// or a Network Load Balancer, use TargetGroupARNs instead.
+	// A list of Classic Load Balancers associated with this Auto Scaling group.
+	// For Application Load Balancers and Network Load Balancers, specify a list
+	// of target groups using the TargetGroupARNs property instead.
 	//
-	// For more information, see Using a Load Balancer With an Auto Scaling Group
+	// For more information, see Using a Load Balancer with an Auto Scaling Group
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	LoadBalancerNames []string `type:"list"`
@@ -113,12 +120,22 @@ type CreateAutoScalingGroupInput struct {
 	// MinSize is a required field
 	MinSize *int64 `type:"integer" required:"true"`
 
-	// The mixed instances policy to use to launch instances. This parameter, a
-	// launch template, a launch configuration, or an EC2 instance must be specified.
+	// An embedded object that specifies a mixed instances policy. The required
+	// parameters must be specified. If optional parameters are unspecified, their
+	// default values are used.
+	//
+	// The policy includes parameters that not only define the distribution of On-Demand
+	// Instances and Spot Instances, the maximum price to pay for Spot instances,
+	// and how the Auto Scaling group allocates instance types to fulfill On-Demand
+	// and Spot capacity, but also the parameters that specify the instance configuration
+	// information—the launch template and instance types.
 	//
 	// For more information, see Auto Scaling Groups with Multiple Instance Types
 	// and Purchase Options (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
+	//
+	// You must specify one of the following parameters in your request: LaunchConfigurationName,
+	// LaunchTemplate, InstanceId, or MixedInstancesPolicy.
 	MixedInstancesPolicy *MixedInstancesPolicy `type:"structure"`
 
 	// Indicates whether newly launched instances are protected from termination
@@ -150,7 +167,13 @@ type CreateAutoScalingGroupInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	Tags []Tag `type:"list"`
 
-	// The Amazon Resource Names (ARN) of the target groups.
+	// The Amazon Resource Names (ARN) of the target groups to associate with the
+	// Auto Scaling group. Instances are registered as targets in a target group,
+	// and traffic is routed to the target group.
+	//
+	// For more information, see Using a Load Balancer with an Auto Scaling Group
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	TargetGroupARNs []string `type:"list"`
 
 	// One or more termination policies used to select the instance to terminate.

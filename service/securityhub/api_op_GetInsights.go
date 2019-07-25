@@ -14,16 +14,16 @@ import (
 type GetInsightsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARNS of the insights that you want to describe.
+	// The ARNs of the insights that you want to describe.
 	InsightArns []string `type:"list"`
 
-	// Indicates the maximum number of items that you want in the response.
+	// The maximum number of items that you want in the response.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// Paginates results. Set the value of this parameter to NULL on your first
-	// call to the GetInsights operation. For subsequent calls to the operation,
-	// fill nextToken in the request with the value of nextToken from the previous
-	// response to continue listing data.
+	// Paginates results. On your first call to the GetInsights operation, set the
+	// value of this parameter to NULL. For subsequent calls to the operation, fill
+	// nextToken in the request with the value of nextToken from the previous response
+	// to continue listing data.
 	NextToken *string `type:"string"`
 }
 
@@ -122,7 +122,7 @@ const opGetInsights = "GetInsights"
 // GetInsightsRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Lists and describes insights that are specified by insight ARNs.
+// Lists and describes insights that insight ARNs specify.
 //
 //    // Example sending a request using GetInsightsRequest.
 //    req := client.GetInsightsRequest(params)

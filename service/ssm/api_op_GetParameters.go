@@ -50,8 +50,8 @@ func (s *GetParametersInput) Validate() error {
 type GetParametersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of parameters that are not formatted correctly or do not run when
-	// executed.
+	// A list of parameters that are not formatted correctly or do not run during
+	// an execution.
 	InvalidParameters []string `min:"1" type:"list"`
 
 	// A list of details for a parameter.

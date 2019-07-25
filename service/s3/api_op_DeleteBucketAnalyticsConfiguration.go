@@ -20,7 +20,7 @@ type DeleteBucketAnalyticsConfigurationInput struct {
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
-	// The identifier used to represent an analytics configuration.
+	// The ID that identifies the analytics configuration.
 	//
 	// Id is a required field
 	Id *string `location:"querystring" locationName:"id" type:"string" required:"true"`
@@ -96,6 +96,10 @@ const opDeleteBucketAnalyticsConfiguration = "DeleteBucketAnalyticsConfiguration
 //
 // Deletes an analytics configuration for the bucket (specified by the analytics
 // configuration ID).
+//
+// To use this operation, you must have permissions to perform the s3:PutAnalyticsConfiguration
+// action. The bucket owner has this permission by default. The bucket owner
+// can grant this permission to others.
 //
 //    // Example sending a request using DeleteBucketAnalyticsConfigurationRequest.
 //    req := client.DeleteBucketAnalyticsConfigurationRequest(params)

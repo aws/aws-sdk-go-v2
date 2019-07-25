@@ -56,7 +56,7 @@ func (s GetDataRetrievalPolicyInput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Contains the Amazon Glacier response to the GetDataRetrievalPolicy request.
+// Contains the Amazon S3 Glacier response to the GetDataRetrievalPolicy request.
 type GetDataRetrievalPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -87,7 +87,7 @@ const opGetDataRetrievalPolicy = "GetDataRetrievalPolicy"
 //
 // This operation returns the current data retrieval policy for the account
 // and region specified in the GET request. For more information about data
-// retrieval policies, see Amazon Glacier Data Retrieval Policies (http://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html).
+// retrieval policies, see Amazon Glacier Data Retrieval Policies (https://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html).
 //
 //    // Example sending a request using GetDataRetrievalPolicyRequest.
 //    req := client.GetDataRetrievalPolicyRequest(params)

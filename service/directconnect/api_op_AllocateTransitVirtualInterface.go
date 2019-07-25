@@ -49,6 +49,11 @@ func (s *AllocateTransitVirtualInterfaceInput) Validate() error {
 	if s.OwnerAccount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OwnerAccount"))
 	}
+	if s.NewTransitVirtualInterfaceAllocation != nil {
+		if err := s.NewTransitVirtualInterfaceAllocation.Validate(); err != nil {
+			invalidParams.AddNested("NewTransitVirtualInterfaceAllocation", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -51,14 +51,14 @@ const opDescribeElasticIps = "DescribeElasticIps"
 // DescribeElasticIpsRequest returns a request value for making API operation for
 // AWS OpsWorks.
 //
-// Describes Elastic IP addresses (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html).
+// Describes Elastic IP addresses (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html).
 //
 // This call accepts only one resource-identifying parameter.
 //
 // Required Permissions: To use this action, an IAM user must have a Show, Deploy,
 // or Manage permissions level for the stack, or an attached policy that explicitly
 // grants permissions. For more information about user permissions, see Managing
-// User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using DescribeElasticIpsRequest.
 //    req := client.DescribeElasticIpsRequest(params)

@@ -14,9 +14,9 @@ type ListAccountSettingsInput struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies whether to return the effective settings. If true, the account
-	// settings for the root user or the default setting for the principalArn. If
-	// false, the account settings for the principalArn are returned if they are
-	// set. Otherwise, no account settings are returned.
+	// settings for the root user or the default setting for the principalArn are
+	// returned. If false, the account settings for the principalArn are returned
+	// if they are set. Otherwise, no account settings are returned.
 	EffectiveSettings *bool `locationName:"effectiveSettings" type:"boolean"`
 
 	// The maximum number of account setting results returned by ListAccountSettings
@@ -79,7 +79,7 @@ const opListAccountSettings = "ListAccountSettings"
 // ListAccountSettingsRequest returns a request value for making API operation for
 // Amazon EC2 Container Service.
 //
-// Lists the account settings for an Amazon ECS resource for a specified principal.
+// Lists the account settings for a specified principal.
 //
 //    // Example sending a request using ListAccountSettingsRequest.
 //    req := client.ListAccountSettingsRequest(params)

@@ -22,33 +22,40 @@ type CreateDevEndpointInput struct {
 	// EndpointName is a required field
 	EndpointName *string `type:"string" required:"true"`
 
-	// Path to one or more Java Jars in an S3 bucket that should be loaded in your
-	// DevEndpoint.
+	// The path to one or more Java .jar files in an S3 bucket that should be loaded
+	// in your DevEndpoint.
 	ExtraJarsS3Path *string `type:"string"`
 
-	// Path(s) to one or more Python libraries in an S3 bucket that should be loaded
-	// in your DevEndpoint. Multiple values must be complete paths separated by
-	// a comma.
+	// The paths to one or more Python libraries in an Amazon S3 bucket that should
+	// be loaded in your DevEndpoint. Multiple values must be complete paths separated
+	// by a comma.
 	//
-	// Please note that only pure Python libraries can currently be used on a DevEndpoint.
-	// Libraries that rely on C extensions, such as the pandas (http://pandas.pydata.org/)
-	// Python data analysis library, are not yet supported.
+	// You can only use pure Python libraries with a DevEndpoint. Libraries that
+	// rely on C extensions, such as the pandas (http://pandas.pydata.org/) Python
+	// data analysis library, are not yet supported.
 	ExtraPythonLibsS3Path *string `type:"string"`
 
 	// The number of AWS Glue Data Processing Units (DPUs) to allocate to this DevEndpoint.
 	NumberOfNodes *int64 `type:"integer"`
 
+	// The number of workers of a defined workerType that are allocated to the development
+	// endpoint.
+	//
+	// The maximum number of workers you can define are 299 for G.1X, and 149 for
+	// G.2X.
+	NumberOfWorkers *int64 `type:"integer"`
+
 	// The public key to be used by this DevEndpoint for authentication. This attribute
-	// is provided for backward compatibility, as the recommended attribute to use
-	// is public keys.
+	// is provided for backward compatibility because the recommended attribute
+	// to use is public keys.
 	PublicKey *string `type:"string"`
 
-	// A list of public keys to be used by the DevEndpoints for authentication.
+	// A list of public keys to be used by the development endpoints for authentication.
 	// The use of this attribute is preferred over a single public key because the
 	// public keys allow you to have a different private key per client.
 	//
 	// If you previously created an endpoint with a public key, you must remove
-	// that key to be able to set a list of public keys: call the UpdateDevEndpoint
+	// that key to be able to set a list of public keys. Call the UpdateDevEndpoint
 	// API with the public key content in the deletePublicKeys attribute, and the
 	// list of new keys in the addPublicKeys attribute.
 	PublicKeys []string `type:"list"`
@@ -69,9 +76,24 @@ type CreateDevEndpointInput struct {
 
 	// The tags to use with this DevEndpoint. You may use tags to limit access to
 	// the DevEndpoint. For more information about tags in AWS Glue, see AWS Tags
-	// in AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html)
+	// in AWS Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html)
 	// in the developer guide.
 	Tags map[string]string `type:"map"`
+
+	// The type of predefined worker that is allocated to the development endpoint.
+	// Accepts a value of Standard, G.1X, or G.2X.
+	//
+	//    * For the Standard worker type, each worker provides 4 vCPU, 16 GB of
+	//    memory and a 50GB disk, and 2 executors per worker.
+	//
+	//    * For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of
+	//    memory, 64 GB disk), and provides 1 executor per worker. We recommend
+	//    this worker type for memory-intensive jobs.
+	//
+	//    * For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of
+	//    memory, 128 GB disk), and provides 1 executor per worker. We recommend
+	//    this worker type for memory-intensive jobs.
+	WorkerType WorkerType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -107,7 +129,7 @@ type CreateDevEndpointOutput struct {
 	// The map of arguments used to configure this DevEndpoint.
 	Arguments map[string]string `type:"map"`
 
-	// The AWS availability zone where this DevEndpoint is located.
+	// The AWS Availability Zone where this DevEndpoint is located.
 	AvailabilityZone *string `type:"string"`
 
 	// The point in time at which this DevEndpoint was created.
@@ -116,11 +138,11 @@ type CreateDevEndpointOutput struct {
 	// The name assigned to the new DevEndpoint.
 	EndpointName *string `type:"string"`
 
-	// Path to one or more Java Jars in an S3 bucket that will be loaded in your
-	// DevEndpoint.
+	// Path to one or more Java .jar files in an S3 bucket that will be loaded in
+	// your DevEndpoint.
 	ExtraJarsS3Path *string `type:"string"`
 
-	// Path(s) to one or more Python libraries in an S3 bucket that will be loaded
+	// The paths to one or more Python libraries in an S3 bucket that will be loaded
 	// in your DevEndpoint.
 	ExtraPythonLibsS3Path *string `type:"string"`
 
@@ -130,7 +152,11 @@ type CreateDevEndpointOutput struct {
 	// The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
 	NumberOfNodes *int64 `type:"integer"`
 
-	// The AWS ARN of the role assigned to the new DevEndpoint.
+	// The number of workers of a defined workerType that are allocated to the development
+	// endpoint.
+	NumberOfWorkers *int64 `type:"integer"`
+
+	// The Amazon Resource Name (ARN) of the role assigned to the new DevEndpoint.
 	RoleArn *string `type:"string"`
 
 	// The name of the SecurityConfiguration structure being used with this DevEndpoint.
@@ -145,8 +171,12 @@ type CreateDevEndpointOutput struct {
 	// The subnet ID assigned to the new DevEndpoint.
 	SubnetId *string `type:"string"`
 
-	// The ID of the VPC used by this DevEndpoint.
+	// The ID of the virtual private cloud (VPC) used by this DevEndpoint.
 	VpcId *string `type:"string"`
+
+	// The type of predefined worker that is allocated to the development endpoint.
+	// May be a value of Standard, G.1X, or G.2X.
+	WorkerType WorkerType `type:"string" enum:"true"`
 
 	// The address of the YARN endpoint used by this DevEndpoint.
 	YarnEndpointAddress *string `type:"string"`
@@ -165,7 +195,7 @@ const opCreateDevEndpoint = "CreateDevEndpoint"
 // CreateDevEndpointRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Creates a new DevEndpoint.
+// Creates a new development endpoint.
 //
 //    // Example sending a request using CreateDevEndpointRequest.
 //    req := client.CreateDevEndpointRequest(params)

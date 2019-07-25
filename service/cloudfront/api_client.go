@@ -45,7 +45,7 @@ func New(config aws.Config) *Client {
 				EndpointsID:   EndpointsID,
 				SigningName:   "cloudfront",
 				SigningRegion: config.Region,
-				APIVersion:    "2018-11-05",
+				APIVersion:    "2019-03-26",
 			},
 		),
 	}

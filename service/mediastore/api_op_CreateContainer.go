@@ -4,6 +4,7 @@ package mediastore
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -20,6 +21,14 @@ type CreateContainerInput struct {
 	//
 	// ContainerName is a required field
 	ContainerName *string `min:"1" type:"string" required:"true"`
+
+	// An array of key:value pairs that you define. These values can be anything
+	// that you want. Typically, the tag key represents a category (such as "environment")
+	// and the tag value represents a specific value within that category (such
+	// as "test," "development," or "production"). You can add up to 50 tags to
+	// each container. For more information about tagging, including naming and
+	// usage conventions, see Tagging Resources in MediaStore (https://aws.amazon.com/documentation/mediastore/tagging).
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -36,6 +45,13 @@ func (s *CreateContainerInput) Validate() error {
 	}
 	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

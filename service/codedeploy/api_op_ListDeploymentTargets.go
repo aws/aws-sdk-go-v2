@@ -20,7 +20,13 @@ type ListDeploymentTargetsInput struct {
 	// It can be used to return the next set of deployment targets in the list.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
-	// A key used to filter the returned targets.
+	// A key used to filter the returned targets. The two valid values are:
+	//
+	//    * TargetStatus - A TargetStatus filter string can be Failed, InProgress,
+	//    Pending, Ready, Skipped, Succeeded, or Unknown.
+	//
+	//    * ServerInstanceLabel - A ServerInstanceLabel filter string can be Blue
+	//    or Green.
 	TargetFilters map[string][]string `locationName:"targetFilters" type:"map"`
 }
 

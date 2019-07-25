@@ -164,6 +164,8 @@ type ClientAPI interface {
 
 	GenerateCredentialReportRequest(*iam.GenerateCredentialReportInput) iam.GenerateCredentialReportRequest
 
+	GenerateOrganizationsAccessReportRequest(*iam.GenerateOrganizationsAccessReportInput) iam.GenerateOrganizationsAccessReportRequest
+
 	GenerateServiceLastAccessedDetailsRequest(*iam.GenerateServiceLastAccessedDetailsInput) iam.GenerateServiceLastAccessedDetailsRequest
 
 	GetAccessKeyLastUsedRequest(*iam.GetAccessKeyLastUsedInput) iam.GetAccessKeyLastUsedRequest
@@ -189,6 +191,8 @@ type ClientAPI interface {
 	GetLoginProfileRequest(*iam.GetLoginProfileInput) iam.GetLoginProfileRequest
 
 	GetOpenIDConnectProviderRequest(*iam.GetOpenIDConnectProviderInput) iam.GetOpenIDConnectProviderRequest
+
+	GetOrganizationsAccessReportRequest(*iam.GetOrganizationsAccessReportInput) iam.GetOrganizationsAccessReportRequest
 
 	GetPolicyRequest(*iam.GetPolicyInput) iam.GetPolicyRequest
 

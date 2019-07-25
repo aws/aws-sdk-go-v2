@@ -10,13 +10,13 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Provides options for retrieving a job list for an Amazon Glacier vault.
+// Provides options for retrieving a job list for an Amazon S3 Glacier vault.
 type ListJobsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon Glacier uses the AWS account ID associated with the
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -112,7 +112,7 @@ func (s ListJobsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains the Amazon Glacier response to your request.
+// Contains the Amazon S3 Glacier response to your request.
 type ListJobsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -194,7 +194,7 @@ const opListJobs = "ListJobs"
 // (false).
 //
 // For more information about using this operation, see the documentation for
-// the underlying REST API List Jobs (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-jobs-get.html).
+// the underlying REST API List Jobs (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-jobs-get.html).
 //
 //    // Example sending a request using ListJobsRequest.
 //    req := client.ListJobsRequest(params)

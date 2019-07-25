@@ -119,7 +119,14 @@ const opDeleteUserByPrincipalId = "DeleteUserByPrincipalId"
 // DeleteUserByPrincipalIdRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Deletes a user after locating the user by its principal ID.
+// Deletes a user identified by its principal ID.
+//
+// The permission resource is arn:aws:quicksight:us-east-1:<aws-account-id>:user/default/<user-name> .
+//
+// CLI Sample:
+//
+// aws quicksight delete-user-by-principal-id --aws-account-id=111122223333
+// --namespace=default --principal-id=ABCDEFJA26JLI7EUUOEHS
 //
 //    // Example sending a request using DeleteUserByPrincipalIdRequest.
 //    req := client.DeleteUserByPrincipalIdRequest(params)

@@ -67,11 +67,11 @@ const opDescribeCertificateAuthority = "DescribeCertificateAuthority"
 // the private CA on input by its ARN (Amazon Resource Name). The output contains
 // the status of your CA. This can be any of the following:
 //
-//    * CREATING - ACM PCA is creating your private certificate authority.
+//    * CREATING - ACM Private CA is creating your private certificate authority.
 //
 //    * PENDING_CERTIFICATE - The certificate is pending. You must use your
-//    on-premises root or subordinate CA to sign your private CA CSR and then
-//    import it into PCA.
+//    ACM Private CA-hosted or on-premises root or subordinate CA to sign your
+//    private CA CSR and then import it into PCA.
 //
 //    * ACTIVE - Your private CA is active.
 //
@@ -85,7 +85,7 @@ const opDescribeCertificateAuthority = "DescribeCertificateAuthority"
 //
 //    * DELETED - Your private CA is within the restoration period, after which
 //    it is permanently deleted. The length of time remaining in the CA's restoration
-//    period is also included in this operation's output.
+//    period is also included in this action's output.
 //
 //    // Example sending a request using DescribeCertificateAuthorityRequest.
 //    req := client.DescribeCertificateAuthorityRequest(params)

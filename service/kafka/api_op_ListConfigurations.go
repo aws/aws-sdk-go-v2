@@ -14,7 +14,7 @@ import (
 type ListConfigurationsInput struct {
 	_ struct{} `type:"structure"`
 
-	MaxResults *string `location:"querystring" locationName:"maxResults" type:"string"`
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
@@ -22,6 +22,19 @@ type ListConfigurationsInput struct {
 // String returns the string representation
 func (s ListConfigurationsInput) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListConfigurationsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListConfigurationsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -32,7 +45,7 @@ func (s ListConfigurationsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.MaxResults
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "maxResults", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
 	}
 	if s.NextToken != nil {
 		v := *s.NextToken
@@ -49,6 +62,7 @@ func (s ListConfigurationsInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
+	// An array of MSK configurations.
 	Configurations []Configuration `locationName:"configurations" type:"list"`
 
 	// The paginated results marker. When the result of a ListConfigurations operation
@@ -90,7 +104,7 @@ const opListConfigurations = "ListConfigurations"
 // ListConfigurationsRequest returns a request value for making API operation for
 // Managed Streaming for Kafka.
 //
-// Returns a list of all the MSK configurations in this Region for this account.
+// Returns a list of all the MSK configurations in this Region.
 //
 //    // Example sending a request using ListConfigurationsRequest.
 //    req := client.ListConfigurationsRequest(params)

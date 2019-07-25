@@ -14,8 +14,7 @@ import (
 type DeleteMembersInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of account IDs of the Security Hub member accounts that you want to
-	// delete.
+	// A list of account IDs of the member accounts to delete.
 	AccountIds []string `type:"list"`
 }
 
@@ -47,8 +46,8 @@ func (s DeleteMembersInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteMembersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of account ID and email address pairs of the AWS accounts that could
-	// not be processed.
+	// A list of account ID and email address pairs of the AWS accounts that weren't
+	// deleted.
 	UnprocessedAccounts []Result `type:"list"`
 }
 
@@ -79,8 +78,7 @@ const opDeleteMembers = "DeleteMembers"
 // DeleteMembersRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Deletes the Security Hub member accounts that are specified by the account
-// IDs.
+// Deletes the specified member accounts from Security Hub.
 //
 //    // Example sending a request using DeleteMembersRequest.
 //    req := client.DeleteMembersRequest(params)

@@ -74,9 +74,10 @@ const opMergePullRequestByFastForward = "MergePullRequestByFastForward"
 // MergePullRequestByFastForwardRequest returns a request value for making API operation for
 // AWS CodeCommit.
 //
-// Closes a pull request and attempts to merge the source commit of a pull request
-// into the specified destination branch for that pull request at the specified
-// commit using the fast-forward merge option.
+// Attempts to merge the source commit of a pull request into the specified
+// destination branch for that pull request at the specified commit using the
+// fast-forward merge strategy. If the merge is successful, it closes the pull
+// request.
 //
 //    // Example sending a request using MergePullRequestByFastForwardRequest.
 //    req := client.MergePullRequestByFastForwardRequest(params)

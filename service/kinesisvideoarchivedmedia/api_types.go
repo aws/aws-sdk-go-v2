@@ -13,6 +13,128 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// Contains the range of timestamps for the requested media, and the source
+// of the timestamps.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/DASHFragmentSelector
+type DASHFragmentSelector struct {
+	_ struct{} `type:"structure"`
+
+	// The source of the timestamps for the requested media.
+	//
+	// When FragmentSelectorType is set to PRODUCER_TIMESTAMP and GetDASHStreamingSessionURLInput$PlaybackMode
+	// is ON_DEMAND or LIVE_REPLAY, the first fragment ingested with a producer
+	// timestamp within the specified FragmentSelector$TimestampRange is included
+	// in the media playlist. In addition, the fragments with producer timestamps
+	// within the TimestampRange ingested immediately following the first fragment
+	// (up to the GetDASHStreamingSessionURLInput$MaxManifestFragmentResults value)
+	// are included.
+	//
+	// Fragments that have duplicate producer timestamps are deduplicated. This
+	// means that if producers are producing a stream of fragments with producer
+	// timestamps that are approximately equal to the true clock time, the MPEG-DASH
+	// manifest will contain all of the fragments within the requested timestamp
+	// range. If some fragments are ingested within the same time range and very
+	// different points in time, only the oldest ingested collection of fragments
+	// are returned.
+	//
+	// When FragmentSelectorType is set to PRODUCER_TIMESTAMP and GetDASHStreamingSessionURLInput$PlaybackMode
+	// is LIVE, the producer timestamps are used in the MP4 fragments and for deduplication.
+	// But the most recently ingested fragments based on server timestamps are included
+	// in the MPEG-DASH manifest. This means that even if fragments ingested in
+	// the past have producer timestamps with values now, they are not included
+	// in the HLS media playlist.
+	//
+	// The default is SERVER_TIMESTAMP.
+	FragmentSelectorType DASHFragmentSelectorType `type:"string" enum:"true"`
+
+	// The start and end of the timestamp range for the requested media.
+	//
+	// This value should not be present if PlaybackType is LIVE.
+	TimestampRange *DASHTimestampRange `type:"structure"`
+}
+
+// String returns the string representation
+func (s DASHFragmentSelector) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DASHFragmentSelector) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.FragmentSelectorType) > 0 {
+		v := s.FragmentSelectorType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FragmentSelectorType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.TimestampRange != nil {
+		v := s.TimestampRange
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TimestampRange", v, metadata)
+	}
+	return nil
+}
+
+// The start and end of the timestamp range for the requested media.
+//
+// This value should not be present if PlaybackType is LIVE.
+//
+// The values in the DASHimestampRange are inclusive. Fragments that begin before
+// the start time but continue past it, or fragments that begin before the end
+// time but continue past it, are included in the session.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/DASHTimestampRange
+type DASHTimestampRange struct {
+	_ struct{} `type:"structure"`
+
+	// The end of the timestamp range for the requested media. This value must be
+	// within 3 hours of the specified StartTimestamp, and it must be later than
+	// the StartTimestamp value.
+	//
+	// If FragmentSelectorType for the request is SERVER_TIMESTAMP, this value must
+	// be in the past.
+	//
+	// The EndTimestamp value is required for ON_DEMAND mode, but optional for LIVE_REPLAY
+	// mode. If the EndTimestamp is not set for LIVE_REPLAY mode then the session
+	// will continue to include newly ingested fragments until the session expires.
+	//
+	// This value is inclusive. The EndTimestamp is compared to the (starting) timestamp
+	// of the fragment. Fragments that start before the EndTimestamp value and continue
+	// past it are included in the session.
+	EndTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The start of the timestamp range for the requested media.
+	//
+	// If the DASHTimestampRange value is specified, the StartTimestamp value is
+	// required.
+	//
+	// This value is inclusive. Fragments that start before the StartTimestamp and
+	// continue past it are included in the session. If FragmentSelectorType is
+	// SERVER_TIMESTAMP, the StartTimestamp must be later than the stream head.
+	StartTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+}
+
+// String returns the string representation
+func (s DASHTimestampRange) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DASHTimestampRange) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EndTimestamp != nil {
+		v := *s.EndTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EndTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.StartTimestamp != nil {
+		v := *s.StartTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StartTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	return nil
+}
+
 // Represents a segment of video or other time-delimited data.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/Fragment
 type Fragment struct {
@@ -21,7 +143,8 @@ type Fragment struct {
 	// The playback duration or other time value associated with the fragment.
 	FragmentLengthInMilliseconds *int64 `type:"long"`
 
-	// The index value of the fragment.
+	// The unique identifier of the fragment. This value monotonically increases
+	// based on the ingestion order.
 	FragmentNumber *string `min:"1" type:"string"`
 
 	// The total fragment size, including information about the fragment and contained
@@ -159,10 +282,11 @@ type HLSFragmentSelector struct {
 	// The source of the timestamps for the requested media.
 	//
 	// When FragmentSelectorType is set to PRODUCER_TIMESTAMP and GetHLSStreamingSessionURLInput$PlaybackMode
-	// is ON_DEMAND, the first fragment ingested with a producer timestamp within
-	// the specified FragmentSelector$TimestampRange is included in the media playlist.
-	// In addition, the fragments with producer timestamps within the TimestampRange
-	// ingested immediately following the first fragment (up to the GetHLSStreamingSessionURLInput$MaxMediaPlaylistFragmentResults
+	// is ON_DEMAND or LIVE_REPLAY, the first fragment ingested with a producer
+	// timestamp within the specified FragmentSelector$TimestampRange is included
+	// in the media playlist. In addition, the fragments with producer timestamps
+	// within the TimestampRange ingested immediately following the first fragment
+	// (up to the GetHLSStreamingSessionURLInput$MaxMediaPlaylistFragmentResults
 	// value) are included.
 	//
 	// Fragments that have duplicate producer timestamps are deduplicated. This
@@ -229,7 +353,9 @@ type HLSTimestampRange struct {
 	// If FragmentSelectorType for the request is SERVER_TIMESTAMP, this value must
 	// be in the past.
 	//
-	// If the HLSTimestampRange value is specified, the EndTimestamp value is required.
+	// The EndTimestamp value is required for ON_DEMAND mode, but optional for LIVE_REPLAY
+	// mode. If the EndTimestamp is not set for LIVE_REPLAY mode then the session
+	// will continue to include newly ingested fragments until the session expires.
 	//
 	// This value is inclusive. The EndTimestamp is compared to the (starting) timestamp
 	// of the fragment. Fragments that start before the EndTimestamp value and continue

@@ -14,7 +14,7 @@ type CreateUserProfileInput struct {
 	_ struct{} `type:"structure"`
 
 	// Whether users can specify their own SSH public key through the My Settings
-	// page. For more information, see Setting an IAM User's Public SSH Key (http://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html).
+	// page. For more information, see Setting an IAM User's Public SSH Key (https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html).
 	AllowSelfManagement *bool `type:"boolean"`
 
 	// The user's IAM ARN; this can also be a federated user's ARN.
@@ -75,7 +75,7 @@ const opCreateUserProfile = "CreateUserProfile"
 //
 // Required Permissions: To use this action, an IAM user must have an attached
 // policy that explicitly grants permissions. For more information about user
-// permissions, see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using CreateUserProfileRequest.
 //    req := client.CreateUserProfileRequest(params)

@@ -90,7 +90,7 @@ const opUntagResource = "UntagResource"
 // UntagResourceRequest returns a request value for making API operation for
 // Managed Streaming for Kafka.
 //
-// Remove tags from a resource.
+// Removes the tags associated with the keys that are provided in the query.
 //
 //    // Example sending a request using UntagResourceRequest.
 //    req := client.UntagResourceRequest(params)

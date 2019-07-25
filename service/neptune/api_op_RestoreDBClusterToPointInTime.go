@@ -41,6 +41,10 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// Example: mySubnetgroup
 	DBSubnetGroupName *string `type:"string"`
 
+	// The list of logs that the restored DB cluster is to export to CloudWatch
+	// Logs.
+	EnableCloudwatchLogsExports []string `type:"list"`
+
 	// True to enable mapping of AWS Identity and Access Management (IAM) accounts
 	// to database accounts, and otherwise false.
 	//
@@ -100,8 +104,17 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// Example: 2015-03-07T23:45:00Z
 	RestoreToTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
-	// The type of restore to be performed. The only type of restore currently supported
-	// is full-copy (the default).
+	// The type of restore to be performed. You can specify one of the following
+	// values:
+	//
+	//    * full-copy - The new DB cluster is restored as a full copy of the source
+	//    DB cluster.
+	//
+	//    * copy-on-write - The new DB cluster is restored as a clone of the source
+	//    DB cluster.
+	//
+	// If you don't specify a RestoreType value, then the new DB cluster is restored
+	// as a full copy of the source DB cluster.
 	RestoreType *string `type:"string"`
 
 	// The identifier of the source DB cluster from which to restore.

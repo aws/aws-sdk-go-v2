@@ -37,6 +37,8 @@ type DescribeFlowLogsInput struct {
 	Filter []Filter `locationNameList:"Filter" type:"list"`
 
 	// One or more flow log IDs.
+	//
+	// Constraint: Maximum of 1000 flow log IDs.
 	FlowLogIds []string `locationName:"FlowLogId" locationNameList:"item" type:"list"`
 
 	// The maximum number of results to return with a single call. To retrieve the

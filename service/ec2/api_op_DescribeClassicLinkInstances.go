@@ -47,7 +47,7 @@ type DescribeClassicLinkInstancesInput struct {
 	// remaining results, make another call with the returned nextToken value.
 	//
 	// Constraint: If the value is greater than 1000, we return only 1000 items.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
+	MaxResults *int64 `locationName:"maxResults" min:"5" type:"integer"`
 
 	// The token for the next page of results.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -56,6 +56,19 @@ type DescribeClassicLinkInstancesInput struct {
 // String returns the string representation
 func (s DescribeClassicLinkInstancesInput) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeClassicLinkInstancesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeClassicLinkInstancesInput"}
+	if s.MaxResults != nil && *s.MaxResults < 5 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClassicLinkInstancesResult

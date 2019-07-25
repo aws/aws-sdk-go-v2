@@ -106,7 +106,7 @@ const opRestoreTableToPointInTime = "RestoreTableToPointInTime"
 //
 //    * IAM policies
 //
-//    * Cloudwatch metrics and alarms
+//    * Amazon CloudWatch metrics and alarms
 //
 //    * Tags
 //

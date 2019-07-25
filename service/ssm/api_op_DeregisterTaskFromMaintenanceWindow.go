@@ -13,12 +13,12 @@ import (
 type DeregisterTaskFromMaintenanceWindowInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the Maintenance Window the task should be removed from.
+	// The ID of the maintenance window the task should be removed from.
 	//
 	// WindowId is a required field
 	WindowId *string `min:"20" type:"string" required:"true"`
 
-	// The ID of the task to remove from the Maintenance Window.
+	// The ID of the task to remove from the maintenance window.
 	//
 	// WindowTaskId is a required field
 	WindowTaskId *string `min:"36" type:"string" required:"true"`
@@ -57,10 +57,10 @@ func (s *DeregisterTaskFromMaintenanceWindowInput) Validate() error {
 type DeregisterTaskFromMaintenanceWindowOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the Maintenance Window the task was removed from.
+	// The ID of the maintenance window the task was removed from.
 	WindowId *string `min:"20" type:"string"`
 
-	// The ID of the task removed from the Maintenance Window.
+	// The ID of the task removed from the maintenance window.
 	WindowTaskId *string `min:"36" type:"string"`
 }
 
@@ -74,7 +74,7 @@ const opDeregisterTaskFromMaintenanceWindow = "DeregisterTaskFromMaintenanceWind
 // DeregisterTaskFromMaintenanceWindowRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Removes a task from a Maintenance Window.
+// Removes a task from a maintenance window.
 //
 //    // Example sending a request using DeregisterTaskFromMaintenanceWindowRequest.
 //    req := client.DeregisterTaskFromMaintenanceWindowRequest(params)

@@ -56,7 +56,11 @@ type GetQueryResultsOutput struct {
 	Statistics *QueryStatistics `locationName:"statistics" type:"structure"`
 
 	// The status of the most recent running of the query. Possible values are Cancelled,
-	// Complete, Failed, Running, Scheduled, and Unknown.
+	// Complete, Failed, Running, Scheduled, Timeout, and Unknown.
+	//
+	// Queries time out after 15 minutes of execution. To avoid having your queries
+	// time out, reduce the time range being searched, or partition your query into
+	// a number of queries.
 	Status QueryStatus `locationName:"status" type:"string" enum:"true"`
 }
 
@@ -71,8 +75,11 @@ const opGetQueryResults = "GetQueryResults"
 // Amazon CloudWatch Logs.
 //
 // Returns the results from the specified query. If the query is in progress,
-// partial results of that current execution are returned. Only the fields requested
-// in the query are returned.
+// partial results of that current execution are returned.
+//
+// Only the fields requested in the query are returned, along with a @ptr field
+// which is the identifier for the log record. You can use the value of @ptr
+// in a operation to get the full log record.
 //
 // GetQueryResults does not start a query execution. To run a query, use .
 //

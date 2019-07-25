@@ -29,7 +29,7 @@ func (s DisableEbsEncryptionByDefaultInput) String() string {
 type DisableEbsEncryptionByDefaultOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Account-level encryption status after performing the action.
+	// The updated status of encryption by default.
 	EbsEncryptionByDefault *bool `locationName:"ebsEncryptionByDefault" type:"boolean"`
 }
 
@@ -43,16 +43,16 @@ const opDisableEbsEncryptionByDefault = "DisableEbsEncryptionByDefault"
 // DisableEbsEncryptionByDefaultRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Disables default encryption for EBS volumes that are created in your account
-// in the current region.
+// Disables EBS encryption by default for your account in the current Region.
 //
-// Call this API if you have enabled default encryption using EnableEbsEncryptionByDefault
-// and want to disable default EBS encryption. Once default EBS encryption is
-// disabled, you can still create an encrypted volume by setting encrypted to
-// true in the API call that creates the volume.
+// After you disable encryption by default, you can still create encrypted volumes
+// by enabling encryption when you create each volume.
 //
-// Disabling default EBS encryption will not change the encryption status of
-// any of your existing volumes.
+// Disabling encryption by default does not change the encryption status of
+// your existing volumes.
+//
+// For more information, see Amazon EBS Encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)
+// in the Amazon Elastic Compute Cloud User Guide.
 //
 //    // Example sending a request using DisableEbsEncryptionByDefaultRequest.
 //    req := client.DisableEbsEncryptionByDefaultRequest(params)

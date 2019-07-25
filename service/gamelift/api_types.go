@@ -62,7 +62,7 @@ func (s Alias) String() string {
 
 // Values for use in Player attribute key:value pairs. This object lets you
 // specify an attribute value using any of the valid data types: string, number,
-// string array or data map. Each AttributeValue object can use only one of
+// string array, or data map. Each AttributeValue object can use only one of
 // the available properties.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/AttributeValue
 type AttributeValue struct {
@@ -1011,7 +1011,7 @@ type GameSessionQueue struct {
 
 	// Amazon Resource Name (ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
 	// that is assigned to a game session queue and uniquely identifies it. Format
-	// is arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912.
+	// is arn:aws:gamelift:<region>:<aws account>:gamesessionqueue/<queue name>.
 	GameSessionQueueArn *string `min:"1" type:"string"`
 
 	// Descriptive label that is associated with game session queue. Queue names
@@ -1271,7 +1271,7 @@ func (s MatchedPlayerSession) String() string {
 type MatchmakingConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// Flag that determines whether or not a match that was created with this configuration
+	// Flag that determines whether a match that was created with this configuration
 	// must be accepted by the matched players. To require acceptance, set to TRUE.
 	AcceptanceRequired *bool `type:"boolean"`
 
@@ -1286,11 +1286,18 @@ type MatchmakingConfiguration struct {
 	// for the match.
 	AdditionalPlayerCount *int64 `type:"integer"`
 
+	// Method used to backfill game sessions created with this matchmaking configuration.
+	// MANUAL indicates that the game makes backfill requests or does not use the
+	// match backfill feature. AUTOMATIC indicates that GameLift creates StartMatchBackfill
+	// requests whenever a game session has one or more open slots. Learn more about
+	// manual and automatic backfill in Backfill Existing Games with FlexMatch (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html).
+	BackfillMode BackfillMode `type:"string" enum:"true"`
+
 	// Time stamp indicating when this data object was created. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// Information to attached to all events related to the matchmaking configuration.
+	// Information to attach to all events related to the matchmaking configuration.
 	CustomEventData *string `type:"string"`
 
 	// Descriptive label that is associated with matchmaking configuration.
@@ -1312,26 +1319,27 @@ type MatchmakingConfiguration struct {
 
 	// Amazon Resource Name (ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
 	// that is assigned to a game session queue and uniquely identifies it. Format
-	// is arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912.
+	// is arn:aws:gamelift:<region>:<aws account>:gamesessionqueue/<queue name>.
 	// These queues are used when placing game sessions for matches that are created
 	// with this matchmaking configuration. Queues can be located in any region.
 	GameSessionQueueArns []string `type:"list"`
 
 	// Unique identifier for a matchmaking configuration. This name is used to identify
 	// the configuration associated with a matchmaking request or ticket.
-	Name *string `min:"1" type:"string"`
+	Name *string `type:"string"`
 
 	// SNS topic ARN that is set up to receive matchmaking notifications.
 	NotificationTarget *string `type:"string"`
 
 	// Maximum duration, in seconds, that a matchmaking ticket can remain in process
-	// before timing out. Requests that time out can be resubmitted as needed.
+	// before timing out. Requests that fail due to timing out can be resubmitted
+	// as needed.
 	RequestTimeoutSeconds *int64 `min:"1" type:"integer"`
 
 	// Unique identifier for a matchmaking rule set to use with this configuration.
 	// A matchmaking configuration can only use rule sets that are defined in the
 	// same region.
-	RuleSetName *string `min:"1" type:"string"`
+	RuleSetName *string `type:"string"`
 }
 
 // String returns the string representation
@@ -1340,9 +1348,9 @@ func (s MatchmakingConfiguration) String() string {
 }
 
 // Set of rule statements, used with FlexMatch, that determine how to build
-// a certain kind of player match. Each rule set describes a type of group to
-// be created and defines the parameters for acceptable player matches. Rule
-// sets are used in MatchmakingConfiguration objects.
+// your player matches. Each rule set describes a type of group to be created
+// and defines the parameters for acceptable player matches. Rule sets are used
+// in MatchmakingConfiguration objects.
 //
 // A rule set may define the following elements for a match. For detailed information
 // and examples showing how to construct a rule set, see Build a FlexMatch Rule
@@ -1380,14 +1388,14 @@ type MatchmakingRuleSet struct {
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// Collection of matchmaking rules, formatted as a JSON string. (Note that comments14
-	// are not allowed in JSON, but most elements support a description field.)
+	// Collection of matchmaking rules, formatted as a JSON string. Comments are
+	// not allowed in JSON, but most elements support a description field.
 	//
 	// RuleSetBody is a required field
 	RuleSetBody *string `min:"1" type:"string" required:"true"`
 
 	// Unique identifier for a matchmaking rule set
-	RuleSetName *string `min:"1" type:"string"`
+	RuleSetName *string `type:"string"`
 }
 
 // String returns the string representation
@@ -1406,7 +1414,7 @@ type MatchmakingTicket struct {
 	// Name of the MatchmakingConfiguration that is used with this ticket. Matchmaking
 	// configurations determine how players are grouped into a match and how a new
 	// game session is created for the match.
-	ConfigurationName *string `min:"1" type:"string"`
+	ConfigurationName *string `type:"string"`
 
 	// Time stamp indicating when this matchmaking request stopped being processed
 	// due to success, failure, or cancellation. Format is a number expressed in
@@ -1450,10 +1458,11 @@ type MatchmakingTicket struct {
 	//    host the players. A ticket in this state contains the necessary connection
 	//    information for players.
 	//
-	//    * FAILED -- The matchmaking request was not completed. Tickets with players
-	//    who fail to accept a proposed match are placed in FAILED status.
+	//    * FAILED -- The matchmaking request was not completed.
 	//
-	//    * CANCELLED -- The matchmaking request was canceled with a call to StopMatchmaking.
+	//    * CANCELLED -- The matchmaking request was canceled. This may be the result
+	//    of a call to StopMatchmaking or a proposed match that one or more players
+	//    failed to accept.
 	//
 	//    * TIMED_OUT -- The matchmaking request was not successful within the duration
 	//    specified in the matchmaking configuration.
@@ -1472,7 +1481,7 @@ type MatchmakingTicket struct {
 	StatusReason *string `type:"string"`
 
 	// Unique identifier for a matchmaking ticket.
-	TicketId *string `min:"1" type:"string"`
+	TicketId *string `type:"string"`
 }
 
 // String returns the string representation
@@ -1752,20 +1761,17 @@ func (s ResourceCreationLimitPolicy) String() string {
 
 // Routing configuration for a fleet alias.
 //
-//    * CreateFleet
+//    * CreateAlias
 //
-//    * ListFleets
+//    * ListAliases
 //
-//    * DeleteFleet
+//    * DescribeAlias
 //
-//    * Describe fleets: DescribeFleetAttributes DescribeFleetCapacity DescribeFleetPortSettings
-//    DescribeFleetUtilization DescribeRuntimeConfiguration DescribeEC2InstanceLimits
-//    DescribeFleetEvents
+//    * UpdateAlias
 //
-//    * Update fleets: UpdateFleetAttributes UpdateFleetCapacity UpdateFleetPortSettings
-//    UpdateRuntimeConfiguration
+//    * DeleteAlias
 //
-//    * Manage fleet actions: StartFleetActions StopFleetActions
+//    * ResolveAlias
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RoutingStrategy
 type RoutingStrategy struct {
 	_ struct{} `type:"structure"`

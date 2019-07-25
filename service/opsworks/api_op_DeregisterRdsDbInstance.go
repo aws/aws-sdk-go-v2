@@ -60,7 +60,7 @@ const opDeregisterRdsDbInstance = "DeregisterRdsDbInstance"
 // Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using DeregisterRdsDbInstanceRequest.
 //    req := client.DeregisterRdsDbInstanceRequest(params)

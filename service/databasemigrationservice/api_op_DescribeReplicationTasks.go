@@ -34,9 +34,9 @@ type DescribeReplicationTasksInput struct {
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int64 `type:"integer"`
 
-	// Set this flag to avoid returning setting information. Use this to reduce
-	// overhead when settings are too large. Choose TRUE to use this flag, otherwise
-	// choose FALSE (default).
+	// An option to set to avoid returning information about settings. Use this
+	// to reduce overhead when setting information is too large. To use this option,
+	// choose true; otherwise, choose false (the default).
 	WithoutSettings *bool `type:"boolean"`
 }
 

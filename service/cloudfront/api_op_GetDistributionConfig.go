@@ -11,11 +11,12 @@ import (
 )
 
 // The request to get a distribution configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetDistributionConfigRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetDistributionConfigRequest
 type GetDistributionConfigInput struct {
 	_ struct{} `type:"structure"`
 
-	// The distribution's ID.
+	// The distribution's ID. If the ID is empty, an empty distribution configuration
+	// is returned.
 	//
 	// Id is a required field
 	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
@@ -53,7 +54,7 @@ func (s GetDistributionConfigInput) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetDistributionConfigResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetDistributionConfigResult
 type GetDistributionConfigOutput struct {
 	_ struct{} `type:"structure" payload:"DistributionConfig"`
 
@@ -86,7 +87,7 @@ func (s GetDistributionConfigOutput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-const opGetDistributionConfig = "GetDistributionConfig2018_11_05"
+const opGetDistributionConfig = "GetDistributionConfig2019_03_26"
 
 // GetDistributionConfigRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -100,12 +101,12 @@ const opGetDistributionConfig = "GetDistributionConfig2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetDistributionConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetDistributionConfig
 func (c *Client) GetDistributionConfigRequest(input *GetDistributionConfigInput) GetDistributionConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetDistributionConfig,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2018-11-05/distribution/{Id}/config",
+		HTTPPath:   "/2019-03-26/distribution/{Id}/config",
 	}
 
 	if input == nil {

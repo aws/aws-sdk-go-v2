@@ -11,7 +11,7 @@ import (
 
 // Represents a request to delete a receipt rule set and all of the receipt
 // rules it contains. You use receipt rule sets to receive email with Amazon
-// SES. For more information, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
+// SES. For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptRuleSetRequest
 type DeleteReceiptRuleSetInput struct {
 	_ struct{} `type:"structure"`
@@ -62,7 +62,7 @@ const opDeleteReceiptRuleSet = "DeleteReceiptRuleSet"
 // The currently active rule set cannot be deleted.
 //
 // For information about managing receipt rule sets, see the Amazon SES Developer
-// Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html).
+// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html).
 //
 // You can execute this operation no more than once per second.
 //

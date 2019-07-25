@@ -14,7 +14,8 @@ import (
 type CreateAppInput struct {
 	_ struct{} `type:"structure" payload:"CreateApplicationRequest"`
 
-	// Application Request.
+	// Specifies the display name of an application and the tags to associate with
+	// the application.
 	//
 	// CreateApplicationRequest is a required field
 	CreateApplicationRequest *CreateApplicationRequest `type:"structure" required:"true"`
@@ -31,6 +32,11 @@ func (s *CreateAppInput) Validate() error {
 
 	if s.CreateApplicationRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CreateApplicationRequest"))
+	}
+	if s.CreateApplicationRequest != nil {
+		if err := s.CreateApplicationRequest.Validate(); err != nil {
+			invalidParams.AddNested("CreateApplicationRequest", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -56,7 +62,7 @@ func (s CreateAppInput) MarshalFields(e protocol.FieldEncoder) error {
 type CreateAppOutput struct {
 	_ struct{} `type:"structure" payload:"ApplicationResponse"`
 
-	// Application Response.
+	// Provides information about an application.
 	//
 	// ApplicationResponse is a required field
 	ApplicationResponse *ApplicationResponse `type:"structure" required:"true"`
@@ -83,7 +89,7 @@ const opCreateApp = "CreateApp"
 // CreateAppRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Creates or updates an app.
+// Creates an application.
 //
 //    // Example sending a request using CreateAppRequest.
 //    req := client.CreateAppRequest(params)

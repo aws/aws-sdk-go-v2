@@ -357,6 +357,23 @@ func (s DashEncryption) MarshalFields(e protocol.FieldEncoder) error {
 type DashPackage struct {
 	_ struct{} `type:"structure"`
 
+	// A list of SCTE-35 message types that are treated as ad markers in the output.
+	// If empty, noad markers are output. Specify multiple items to create ad markers
+	// for all of the includedmessage types.
+	AdTriggers []__AdTriggersElement `locationName:"adTriggers" type:"list"`
+
+	// This setting allows the delivery restriction flags on SCTE-35 segmentation
+	// descriptors todetermine whether a message signals an ad. Choosing "NONE"
+	// means no SCTE-35 messages becomeads. Choosing "RESTRICTED" means SCTE-35
+	// messages of the types specified in AdTriggers thatcontain delivery restrictions
+	// will be treated as ads. Choosing "UNRESTRICTED" means SCTE-35messages of
+	// the types specified in AdTriggers that do not contain delivery restrictions
+	// willbe treated as ads. Choosing "BOTH" means all SCTE-35 messages of the
+	// types specified inAdTriggers will be treated as ads. Note that Splice Insert
+	// messages do not have these flagsand are always treated as ads if specified
+	// in AdTriggers.
+	AdsOnDeliveryRestrictions AdsOnDeliveryRestrictions `locationName:"adsOnDeliveryRestrictions" type:"string" enum:"true"`
+
 	// A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
 	Encryption *DashEncryption `locationName:"encryption" type:"structure"`
 
@@ -429,6 +446,24 @@ func (s *DashPackage) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DashPackage) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AdTriggers != nil {
+		v := s.AdTriggers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "adTriggers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.AdsOnDeliveryRestrictions) > 0 {
+		v := s.AdsOnDeliveryRestrictions
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "adsOnDeliveryRestrictions", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.Encryption != nil {
 		v := s.Encryption
 
@@ -736,6 +771,23 @@ type HlsManifestCreateOrUpdateParameters struct {
 	// ad markers and blackout tags based on SCTE-35messages in the input source.
 	AdMarkers AdMarkers `locationName:"adMarkers" type:"string" enum:"true"`
 
+	// A list of SCTE-35 message types that are treated as ad markers in the output.
+	// If empty, noad markers are output. Specify multiple items to create ad markers
+	// for all of the includedmessage types.
+	AdTriggers []__AdTriggersElement `locationName:"adTriggers" type:"list"`
+
+	// This setting allows the delivery restriction flags on SCTE-35 segmentation
+	// descriptors todetermine whether a message signals an ad. Choosing "NONE"
+	// means no SCTE-35 messages becomeads. Choosing "RESTRICTED" means SCTE-35
+	// messages of the types specified in AdTriggers thatcontain delivery restrictions
+	// will be treated as ads. Choosing "UNRESTRICTED" means SCTE-35messages of
+	// the types specified in AdTriggers that do not contain delivery restrictions
+	// willbe treated as ads. Choosing "BOTH" means all SCTE-35 messages of the
+	// types specified inAdTriggers will be treated as ads. Note that Splice Insert
+	// messages do not have these flagsand are always treated as ads if specified
+	// in AdTriggers.
+	AdsOnDeliveryRestrictions AdsOnDeliveryRestrictions `locationName:"adsOnDeliveryRestrictions" type:"string" enum:"true"`
+
 	// The ID of the manifest. The ID must be unique within the OriginEndpoint and
 	// it cannot be changed after it is created.
 	//
@@ -795,6 +847,24 @@ func (s HlsManifestCreateOrUpdateParameters) MarshalFields(e protocol.FieldEncod
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "adMarkers", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.AdTriggers != nil {
+		v := s.AdTriggers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "adTriggers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.AdsOnDeliveryRestrictions) > 0 {
+		v := s.AdsOnDeliveryRestrictions
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "adsOnDeliveryRestrictions", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.Id != nil {
 		v := *s.Id
 
@@ -845,6 +915,23 @@ type HlsPackage struct {
 	// from the input HTTP Live Streaming (HLS) manifest."SCTE35_ENHANCED" generates
 	// ad markers and blackout tags based on SCTE-35messages in the input source.
 	AdMarkers AdMarkers `locationName:"adMarkers" type:"string" enum:"true"`
+
+	// A list of SCTE-35 message types that are treated as ad markers in the output.
+	// If empty, noad markers are output. Specify multiple items to create ad markers
+	// for all of the includedmessage types.
+	AdTriggers []__AdTriggersElement `locationName:"adTriggers" type:"list"`
+
+	// This setting allows the delivery restriction flags on SCTE-35 segmentation
+	// descriptors todetermine whether a message signals an ad. Choosing "NONE"
+	// means no SCTE-35 messages becomeads. Choosing "RESTRICTED" means SCTE-35
+	// messages of the types specified in AdTriggers thatcontain delivery restrictions
+	// will be treated as ads. Choosing "UNRESTRICTED" means SCTE-35messages of
+	// the types specified in AdTriggers that do not contain delivery restrictions
+	// willbe treated as ads. Choosing "BOTH" means all SCTE-35 messages of the
+	// types specified inAdTriggers will be treated as ads. Note that Splice Insert
+	// messages do not have these flagsand are always treated as ads if specified
+	// in AdTriggers.
+	AdsOnDeliveryRestrictions AdsOnDeliveryRestrictions `locationName:"adsOnDeliveryRestrictions" type:"string" enum:"true"`
 
 	// An HTTP Live Streaming (HLS) encryption configuration.
 	Encryption *HlsEncryption `locationName:"encryption" type:"structure"`
@@ -908,6 +995,24 @@ func (s HlsPackage) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "adMarkers", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.AdTriggers != nil {
+		v := s.AdTriggers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "adTriggers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.AdsOnDeliveryRestrictions) > 0 {
+		v := s.AdsOnDeliveryRestrictions
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "adsOnDeliveryRestrictions", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Encryption != nil {
 		v := s.Encryption

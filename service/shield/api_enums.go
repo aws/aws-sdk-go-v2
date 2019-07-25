@@ -23,12 +23,14 @@ type AttackPropertyIdentifier string
 
 // Enum values for AttackPropertyIdentifier
 const (
-	AttackPropertyIdentifierDestinationUrl  AttackPropertyIdentifier = "DESTINATION_URL"
-	AttackPropertyIdentifierReferrer        AttackPropertyIdentifier = "REFERRER"
-	AttackPropertyIdentifierSourceAsn       AttackPropertyIdentifier = "SOURCE_ASN"
-	AttackPropertyIdentifierSourceCountry   AttackPropertyIdentifier = "SOURCE_COUNTRY"
-	AttackPropertyIdentifierSourceIpAddress AttackPropertyIdentifier = "SOURCE_IP_ADDRESS"
-	AttackPropertyIdentifierSourceUserAgent AttackPropertyIdentifier = "SOURCE_USER_AGENT"
+	AttackPropertyIdentifierDestinationUrl             AttackPropertyIdentifier = "DESTINATION_URL"
+	AttackPropertyIdentifierReferrer                   AttackPropertyIdentifier = "REFERRER"
+	AttackPropertyIdentifierSourceAsn                  AttackPropertyIdentifier = "SOURCE_ASN"
+	AttackPropertyIdentifierSourceCountry              AttackPropertyIdentifier = "SOURCE_COUNTRY"
+	AttackPropertyIdentifierSourceIpAddress            AttackPropertyIdentifier = "SOURCE_IP_ADDRESS"
+	AttackPropertyIdentifierSourceUserAgent            AttackPropertyIdentifier = "SOURCE_USER_AGENT"
+	AttackPropertyIdentifierWordpressPingbackReflector AttackPropertyIdentifier = "WORDPRESS_PINGBACK_REFLECTOR"
+	AttackPropertyIdentifierWordpressPingbackSource    AttackPropertyIdentifier = "WORDPRESS_PINGBACK_SOURCE"
 )
 
 func (enum AttackPropertyIdentifier) MarshalValue() (string, error) {

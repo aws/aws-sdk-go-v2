@@ -12,6 +12,68 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// An object that contains details about when a principal in the reported AWS
+// Organizations entity last attempted to access an AWS service. A principal
+// can be an IAM user, an IAM role, or the AWS account root user within the
+// reported Organizations entity.
+//
+// This data type is a response element in the GetOrganizationsAccessReport
+// operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AccessDetail
+type AccessDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The path of the Organizations entity (root, organizational unit, or account)
+	// from which an authenticated principal last attempted to access the service.
+	// AWS does not report unauthenticated requests.
+	//
+	// This field is null if no principals (IAM users, IAM roles, or root users)
+	// in the reported Organizations entity attempted to access the service within
+	// the reporting period (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
+	EntityPath *string `min:"19" type:"string"`
+
+	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
+	// when an authenticated principal most recently attempted to access the service.
+	// AWS does not report unauthenticated requests.
+	//
+	// This field is null if no principals in the reported Organizations entity
+	// attempted to access the service within the reporting period (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
+	LastAuthenticatedTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// The Region where the last service access attempt occurred.
+	//
+	// This field is null if no principals in the reported Organizations entity
+	// attempted to access the service within the reporting period (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
+	Region *string `type:"string"`
+
+	// The name of the service in which access was attempted.
+	//
+	// ServiceName is a required field
+	ServiceName *string `type:"string" required:"true"`
+
+	// The namespace of the service in which access was attempted.
+	//
+	// To learn the service namespace of a service, go to Actions, Resources, and
+	// Condition Keys for AWS Services (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html)
+	// in the IAM User Guide. Choose the name of the service to view details for
+	// that service. In the first paragraph, find the service prefix. For example,
+	// (service prefix: a4b). For more information about service namespaces, see
+	// AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
+	// in the AWS General Reference.
+	//
+	// ServiceNamespace is a required field
+	ServiceNamespace *string `min:"1" type:"string" required:"true"`
+
+	// The number of accounts with authenticated principals (root users, IAM users,
+	// and IAM roles) that attempted to access the service in the reporting period.
+	TotalAuthenticatedEntities *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s AccessDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Contains information about an AWS access key.
 //
 // This data type is used as a response element in the CreateAccessKey and ListAccessKeys
@@ -73,12 +135,12 @@ type AccessKeyLastUsed struct {
 	//    * An access key exists but has not been used since IAM began tracking
 	//    this information.
 	//
-	//    * There is no sign-in data associated with the user
+	//    * There is no sign-in data associated with the user.
 	//
 	// LastUsedDate is a required field
 	LastUsedDate *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
 
-	// The AWS region where this access key was most recently used. The value for
+	// The AWS Region where this access key was most recently used. The value for
 	// this field is "N/A" in the following situations:
 	//
 	//    * The user does not have an access key.
@@ -86,9 +148,9 @@ type AccessKeyLastUsed struct {
 	//    * An access key exists but has not been used since IAM began tracking
 	//    this information.
 	//
-	//    * There is no sign-in data associated with the user
+	//    * There is no sign-in data associated with the user.
 	//
-	// For more information about AWS regions, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html)
+	// For more information about AWS Regions, see Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html)
 	// in the Amazon Web Services General Reference.
 	//
 	// Region is a required field
@@ -102,7 +164,7 @@ type AccessKeyLastUsed struct {
 	//    * An access key exists but has not been used since IAM started tracking
 	//    this information.
 	//
-	//    * There is no sign-in data associated with the user
+	//    * There is no sign-in data associated with the user.
 	//
 	// ServiceName is a required field
 	ServiceName *string `type:"string" required:"true"`
@@ -255,7 +317,7 @@ type DeletionTaskFailureReasonType struct {
 	// role has active sessions or if any resources that were used by the role have
 	// not been deleted from the linked service, the role can't be deleted. This
 	// parameter includes a list of the resources that are associated with the role
-	// and the region in which the resources are being used.
+	// and the Region in which the resources are being used.
 	RoleUsageList []RoleUsageType `type:"list"`
 }
 
@@ -336,8 +398,9 @@ func (s EntityInfo) String() string {
 
 // Contains information about the reason that the operation failed.
 //
-// This data type is used as a response element in the GetServiceLastAccessedDetails
-// operation and the GetServiceLastAccessedDetailsWithEntities operation.
+// This data type is used as a response element in the GetOrganizationsAccessReport,
+// GetServiceLastAccessedDetails, and GetServiceLastAccessedDetailsWithEntities
+// operations.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ErrorDetails
 type ErrorDetails struct {
 	_ struct{} `type:"structure"`
@@ -390,7 +453,7 @@ type EvaluationResult struct {
 	// A list of the statements in the input policies that determine the result
 	// for this scenario. Remember that even if multiple statements allow the operation
 	// on the resource, if only one statement denies that operation, then the explicit
-	// deny overrides any allow. Inaddition, the deny statement is the only entry
+	// deny overrides any allow. In addition, the deny statement is the only entry
 	// included in the result.
 	MatchedStatements []Statement `type:"list"`
 
@@ -403,7 +466,7 @@ type EvaluationResult struct {
 	// call GetContextKeysForCustomPolicy or GetContextKeysForPrincipalPolicy.
 	MissingContextValues []string `type:"list"`
 
-	// A structure that details how AWS Organizations and its service control policies
+	// A structure that details how Organizations and its service control policies
 	// affect the results of the simulation. Only applies if the simulated user's
 	// account is part of an organization.
 	OrganizationsDecisionDetail *OrganizationsDecisionDetail `type:"structure"`
@@ -705,7 +768,7 @@ type ManagedPolicyDetail struct {
 	//
 	// For more information about paths, see IAM Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
 	// in the Using IAM guide.
-	Path *string `type:"string"`
+	Path *string `min:"1" type:"string"`
 
 	// The number of entities (users and roles) for which the policy is used as
 	// the permissions boundary.
@@ -760,12 +823,13 @@ func (s OpenIDConnectProviderListEntry) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Contains information about AWS Organizations's effect on a policy simulation.
+// Contains information about the effect that Organizations has on a policy
+// simulation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/OrganizationsDecisionDetail
 type OrganizationsDecisionDetail struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies whether the simulated operation is allowed by the AWS Organizations
+	// Specifies whether the simulated operation is allowed by the Organizations
 	// service control policies that impact the simulated user's account.
 	AllowedByOrganizations *bool `type:"boolean"`
 }
@@ -866,7 +930,7 @@ type Policy struct {
 	//
 	// For more information about paths, see IAM Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
 	// in the Using IAM guide.
-	Path *string `type:"string"`
+	Path *string `min:"1" type:"string"`
 
 	// The number of entities (users and roles) for which the policy is used to
 	// set the permissions boundary.
@@ -1302,7 +1366,7 @@ func (s RoleDetail) String() string {
 type RoleUsageType struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the region where the service-linked role is being used.
+	// The name of the Region where the service-linked role is being used.
 	Region *string `min:"1" type:"string"`
 
 	// The name of the resource that is using the service-linked role.
@@ -1532,10 +1596,10 @@ type ServiceLastAccessed struct {
 	// ServiceNamespace is a required field
 	ServiceNamespace *string `min:"1" type:"string" required:"true"`
 
-	// The total number of authenticated entities that have attempted to access
-	// the service.
+	// The total number of authenticated principals (root user, IAM users, or IAM
+	// roles) that have attempted to access the service.
 	//
-	// This field is null if no IAM entities attempted to access the service within
+	// This field is null if no principals attempted to access the service within
 	// the reporting period (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	TotalAuthenticatedEntities *int64 `type:"integer"`
 }
@@ -1798,7 +1862,7 @@ type User struct {
 	//    * A password exists but has not been used since IAM started tracking this
 	//    information on October 20, 2014.
 	//
-	// A null valuedoes not mean that the user never had a password. Also, if the
+	// A null value does not mean that the user never had a password. Also, if the
 	// user does not currently have a password, but had one in the past, then this
 	// field contains the date and time the most recent password was used.
 	//

@@ -11,11 +11,12 @@ import (
 )
 
 // The request to get a distribution's information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetDistributionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetDistributionRequest
 type GetDistributionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The distribution's ID.
+	// The distribution's ID. If the ID is empty, an empty distribution configuration
+	// is returned.
 	//
 	// Id is a required field
 	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
@@ -53,7 +54,7 @@ func (s GetDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetDistributionResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetDistributionResult
 type GetDistributionOutput struct {
 	_ struct{} `type:"structure" payload:"Distribution"`
 
@@ -86,7 +87,7 @@ func (s GetDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opGetDistribution = "GetDistribution2018_11_05"
+const opGetDistribution = "GetDistribution2019_03_26"
 
 // GetDistributionRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -100,12 +101,12 @@ const opGetDistribution = "GetDistribution2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetDistribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetDistribution
 func (c *Client) GetDistributionRequest(input *GetDistributionInput) GetDistributionRequest {
 	op := &aws.Operation{
 		Name:       opGetDistribution,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2018-11-05/distribution/{Id}",
+		HTTPPath:   "/2019-03-26/distribution/{Id}",
 	}
 
 	if input == nil {

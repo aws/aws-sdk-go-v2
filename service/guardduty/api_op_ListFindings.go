@@ -10,13 +10,15 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// List Findings Request
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFindingsRequest
 type ListFindingsInput struct {
 	_ struct{} `type:"structure"`
 
+	// The ID of the detector that specifies the GuardDuty service whose findings
+	// you want to list.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
 	// Represents the criteria used for querying findings.
 	FindingCriteria *FindingCriteria `locationName:"findingCriteria" type:"structure"`
@@ -26,9 +28,9 @@ type ListFindingsInput struct {
 	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
 
 	// You can use this parameter when paginating results. Set the value of this
-	// parameter to null on your first call to the ListFindings action. For subsequent
-	// calls to the action fill nextToken in the request with the value of nextToken
-	// from the previous response to continue listing data.
+	// parameter to null on your first call to the list action. For subsequent calls
+	// to the action fill nextToken in the request with the value of NextToken from
+	// the previous response to continue listing data.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// Represents the criteria used for sorting findings.
@@ -46,6 +48,9 @@ func (s *ListFindingsInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
@@ -94,18 +99,17 @@ func (s ListFindingsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// ListFindings response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFindingsResponse
 type ListFindingsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The list of the Findings.
-	FindingIds []string `locationName:"findingIds" type:"list"`
+	// The IDs of the findings you are listing.
+	//
+	// FindingIds is a required field
+	FindingIds []string `locationName:"findingIds" type:"list" required:"true"`
 
-	// You can use this parameter when paginating results. Set the value of this
-	// parameter to null on your first call to the list action. For subsequent calls
-	// to the action fill nextToken in the request with the value of NextToken from
-	// the previous response to continue listing data.
+	// Pagination parameter to be used on the next list operation to retrieve more
+	// items.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 

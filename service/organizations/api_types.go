@@ -122,6 +122,8 @@ type CreateAccountStatus struct {
 	//    failure. Try again later. If the problem persists, contact Customer Support.
 	FailureReason CreateAccountFailureReason `type:"string" enum:"true"`
 
+	// If the account was created successfully, the unique identifier (ID) of the
+	// new account in the AWS GovCloud (US) Region.
 	GovCloudAccountId *string `type:"string"`
 
 	// The unique identifier (ID) that references this request. You get this value
@@ -657,4 +659,49 @@ type Root struct {
 // String returns the string representation
 func (s Root) String() string {
 	return awsutil.Prettify(s)
+}
+
+// A custom key-value pair associated with a resource such as an account within
+// your organization.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Tag
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// The key identifier, or name, of the tag.
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
+
+	// The string value that's associated with the key of the tag. You can set the
+	// value of a tag to an empty string, but you can't set the value of a tag to
+	// null.
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }

@@ -11,7 +11,7 @@ import (
 )
 
 // The request to create an invalidation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CreateInvalidationRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateInvalidationRequest
 type CreateInvalidationInput struct {
 	_ struct{} `type:"structure" payload:"InvalidationBatch"`
 
@@ -23,7 +23,7 @@ type CreateInvalidationInput struct {
 	// The batch information for the invalidation.
 	//
 	// InvalidationBatch is a required field
-	InvalidationBatch *InvalidationBatch `locationName:"InvalidationBatch" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2018-11-05/"`
+	InvalidationBatch *InvalidationBatch `locationName:"InvalidationBatch" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
 }
 
 // String returns the string representation
@@ -66,14 +66,14 @@ func (s CreateInvalidationInput) MarshalFields(e protocol.FieldEncoder) error {
 	if s.InvalidationBatch != nil {
 		v := s.InvalidationBatch
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2018-11-05/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
 		e.SetFields(protocol.PayloadTarget, "InvalidationBatch", v, metadata)
 	}
 	return nil
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CreateInvalidationResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateInvalidationResult
 type CreateInvalidationOutput struct {
 	_ struct{} `type:"structure" payload:"Invalidation"`
 
@@ -107,7 +107,7 @@ func (s CreateInvalidationOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opCreateInvalidation = "CreateInvalidation2018_11_05"
+const opCreateInvalidation = "CreateInvalidation2019_03_26"
 
 // CreateInvalidationRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -121,12 +121,12 @@ const opCreateInvalidation = "CreateInvalidation2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CreateInvalidation
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateInvalidation
 func (c *Client) CreateInvalidationRequest(input *CreateInvalidationInput) CreateInvalidationRequest {
 	op := &aws.Operation{
 		Name:       opCreateInvalidation,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2018-11-05/distribution/{DistributionId}/invalidation",
+		HTTPPath:   "/2019-03-26/distribution/{DistributionId}/invalidation",
 	}
 
 	if input == nil {

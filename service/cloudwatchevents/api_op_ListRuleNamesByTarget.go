@@ -13,6 +13,10 @@ import (
 type ListRuleNamesByTargetInput struct {
 	_ struct{} `type:"structure"`
 
+	// Limits the results to show only the rules associated with the specified event
+	// bus.
+	EventBusName *string `min:"1" type:"string"`
+
 	// The maximum number of results to return.
 	Limit *int64 `min:"1" type:"integer"`
 
@@ -33,6 +37,9 @@ func (s ListRuleNamesByTargetInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListRuleNamesByTargetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListRuleNamesByTargetInput"}
+	if s.EventBusName != nil && len(*s.EventBusName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EventBusName", 1))
+	}
 	if s.Limit != nil && *s.Limit < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
@@ -75,8 +82,8 @@ const opListRuleNamesByTarget = "ListRuleNamesByTarget"
 // ListRuleNamesByTargetRequest returns a request value for making API operation for
 // Amazon CloudWatch Events.
 //
-// Lists the rules for the specified target. You can see which of the rules
-// in Amazon CloudWatch Events can invoke a specific target in your account.
+// Lists the rules for the specified target. You can see which rules can invoke
+// a specific target in your account.
 //
 //    // Example sending a request using ListRuleNamesByTargetRequest.
 //    req := client.ListRuleNamesByTargetRequest(params)

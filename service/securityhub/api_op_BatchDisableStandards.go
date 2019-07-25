@@ -14,7 +14,7 @@ import (
 type BatchDisableStandardsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARNS of the standards subscriptions that you want to disable.
+	// The ARNs of the standards subscriptions to disable.
 	//
 	// StandardsSubscriptionArns is a required field
 	StandardsSubscriptionArns []string `min:"1" type:"list" required:"true"`
@@ -96,10 +96,8 @@ const opBatchDisableStandards = "BatchDisableStandards"
 // BatchDisableStandardsRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Disables the standards specified by the standards subscription ARNs. In the
-// context of Security Hub, supported standards (for example, CIS AWS Foundations)
-// are automated and continuous checks that help determine your compliance status
-// against security industry (including AWS) best practices.
+// Disables the standards specified by the provided StandardsSubscriptionArns.
+// For more information, see Standards Supported in AWS Security Hub (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html).
 //
 //    // Example sending a request using BatchDisableStandardsRequest.
 //    req := client.BatchDisableStandardsRequest(params)

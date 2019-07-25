@@ -64,10 +64,16 @@ func (s GetBucketNotificationConfigurationInput) MarshalFields(e protocol.FieldE
 type GetBucketNotificationConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
+	// Describes the AWS Lambda functions to invoke and the events for which to
+	// invoke them.
 	LambdaFunctionConfigurations []LambdaFunctionConfiguration `locationName:"CloudFunctionConfiguration" type:"list" flattened:"true"`
 
+	// The Amazon Simple Queue Service queues to publish messages to and the events
+	// for which to publish messages.
 	QueueConfigurations []QueueConfiguration `locationName:"QueueConfiguration" type:"list" flattened:"true"`
 
+	// The topic to which notifications are sent and the events for which notifications
+	// are generated.
 	TopicConfigurations []TopicConfiguration `locationName:"TopicConfiguration" type:"list" flattened:"true"`
 }
 

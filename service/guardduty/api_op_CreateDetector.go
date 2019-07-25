@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Create Detector Request
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateDetectorRequest
 type CreateDetectorInput struct {
 	_ struct{} `type:"structure"`
@@ -25,6 +24,9 @@ type CreateDetectorInput struct {
 
 	// A enum value that specifies how frequently customer got Finding updates published.
 	FindingPublishingFrequency FindingPublishingFrequency `locationName:"findingPublishingFrequency" type:"string" enum:"true"`
+
+	// The tags to be added to a new detector resource.
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -38,6 +40,9 @@ func (s *CreateDetectorInput) Validate() error {
 
 	if s.Enable == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Enable"))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -74,16 +79,27 @@ func (s CreateDetectorInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "findingPublishingFrequency", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	return nil
 }
 
-// CreateDetector response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateDetectorResponse
 type CreateDetectorOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The unique ID of the created detector.
-	DetectorId *string `locationName:"detectorId" type:"string"`
+	DetectorId *string `locationName:"detectorId" min:"1" type:"string"`
 }
 
 // String returns the string representation

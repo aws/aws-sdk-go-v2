@@ -24,10 +24,10 @@ type CopySnapshotInput struct {
 	//
 	// When using this parameter to export a snapshot, be sure Amazon ElastiCache
 	// has the needed permissions to this S3 bucket. For more information, see Step
-	// 2: Grant ElastiCache Access to Your Amazon S3 Bucket (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html#Snapshots.Exporting.GrantAccess)
+	// 2: Grant ElastiCache Access to Your Amazon S3 Bucket (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access)
 	// in the Amazon ElastiCache User Guide.
 	//
-	// For more information, see Exporting a Snapshot (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html)
+	// For more information, see Exporting a Snapshot (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html)
 	// in the Amazon ElastiCache User Guide.
 	TargetBucket *string `type:"string"`
 
@@ -89,8 +89,8 @@ const opCopySnapshot = "CopySnapshot"
 // create their own Amazon S3 buckets and copy snapshots to it. To control access
 // to your snapshots, use an IAM policy to control who has the ability to use
 // the CopySnapshot operation. For more information about using IAM to control
-// the use of ElastiCache operations, see Exporting Snapshots (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html)
-// and Authentication & Access Control (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.html).
+// the use of ElastiCache operations, see Exporting Snapshots (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html)
+// and Authentication & Access Control (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.html).
 //
 // You could receive the following error messages.
 //
@@ -98,17 +98,17 @@ const opCopySnapshot = "CopySnapshot"
 //
 //    * Error Message: The S3 bucket %s is outside of the region. Solution:
 //    Create an Amazon S3 bucket in the same region as your snapshot. For more
-//    information, see Step 1: Create an Amazon S3 Bucket (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html#Snapshots.Exporting.CreateBucket)
+//    information, see Step 1: Create an Amazon S3 Bucket (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-create-s3-bucket)
 //    in the ElastiCache User Guide.
 //
 //    * Error Message: The S3 bucket %s does not exist. Solution: Create an
 //    Amazon S3 bucket in the same region as your snapshot. For more information,
-//    see Step 1: Create an Amazon S3 Bucket (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html#Snapshots.Exporting.CreateBucket)
+//    see Step 1: Create an Amazon S3 Bucket (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-create-s3-bucket)
 //    in the ElastiCache User Guide.
 //
 //    * Error Message: The S3 bucket %s is not owned by the authenticated user.
 //    Solution: Create an Amazon S3 bucket in the same region as your snapshot.
-//    For more information, see Step 1: Create an Amazon S3 Bucket (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html#Snapshots.Exporting.CreateBucket)
+//    For more information, see Step 1: Create an Amazon S3 Bucket (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-create-s3-bucket)
 //    in the ElastiCache User Guide.
 //
 //    * Error Message: The authenticated user does not have sufficient permissions
@@ -123,19 +123,19 @@ const opCopySnapshot = "CopySnapshot"
 //    * Error Message: ElastiCache has not been granted READ permissions %s
 //    on the S3 Bucket. Solution: Add List and Read permissions on the bucket.
 //    For more information, see Step 2: Grant ElastiCache Access to Your Amazon
-//    S3 Bucket (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html#Snapshots.Exporting.GrantAccess)
+//    S3 Bucket (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access)
 //    in the ElastiCache User Guide.
 //
 //    * Error Message: ElastiCache has not been granted WRITE permissions %s
 //    on the S3 Bucket. Solution: Add Upload/Delete permissions on the bucket.
 //    For more information, see Step 2: Grant ElastiCache Access to Your Amazon
-//    S3 Bucket (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html#Snapshots.Exporting.GrantAccess)
+//    S3 Bucket (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access)
 //    in the ElastiCache User Guide.
 //
 //    * Error Message: ElastiCache has not been granted READ_ACP permissions
 //    %s on the S3 Bucket. Solution: Add View Permissions on the bucket. For
 //    more information, see Step 2: Grant ElastiCache Access to Your Amazon
-//    S3 Bucket (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html#Snapshots.Exporting.GrantAccess)
+//    S3 Bucket (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access)
 //    in the ElastiCache User Guide.
 //
 //    // Example sending a request using CopySnapshotRequest.

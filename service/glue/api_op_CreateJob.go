@@ -16,7 +16,7 @@ type CreateJobInput struct {
 	// This parameter is deprecated. Use MaxCapacity instead.
 	//
 	// The number of AWS Glue data processing units (DPUs) to allocate to this Job.
-	// From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative
+	// You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative
 	// measure of processing power that consists of 4 vCPUs of compute capacity
 	// and 16 GB of memory. For more information, see the AWS Glue pricing page
 	// (https://aws.amazon.com/glue/pricing/).
@@ -36,11 +36,11 @@ type CreateJobInput struct {
 	// as well as arguments that AWS Glue itself consumes.
 	//
 	// For information about how to specify and consume your own Job arguments,
-	// see the Calling AWS Glue APIs in Python (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
+	// see the Calling AWS Glue APIs in Python (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
 	// topic in the developer guide.
 	//
 	// For information about the key-value pairs that AWS Glue consumes to set up
-	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
+	// your job, see the Special Parameters Used by AWS Glue (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
 	// topic in the developer guide.
 	DefaultArguments map[string]string `type:"map"`
 
@@ -50,6 +50,17 @@ type CreateJobInput struct {
 	// An ExecutionProperty specifying the maximum number of concurrent runs allowed
 	// for this job.
 	ExecutionProperty *ExecutionProperty `type:"structure"`
+
+	// Glue version determines the versions of Apache Spark and Python that AWS
+	// Glue supports. The Python version indicates the version supported for jobs
+	// of type Spark.
+	//
+	// For more information about the available AWS Glue versions and corresponding
+	// Spark and Python versions, see Glue version (https://docs.aws.amazon.com/glue/latest/dg/add-job.html)
+	// in the developer guide.
+	//
+	// Jobs that are created without specifying a Glue version default to Glue 0.9.
+	GlueVersion *string `min:"1" type:"string"`
 
 	// This field is reserved for future use.
 	LogUri *string `type:"string"`
@@ -62,9 +73,9 @@ type CreateJobInput struct {
 	// Do not set Max Capacity if using WorkerType and NumberOfWorkers.
 	//
 	// The value that can be allocated for MaxCapacity depends on whether you are
-	// running a python shell job, or an Apache Spark ETL job:
+	// running a Python shell job or an Apache Spark ETL job:
 	//
-	//    * When you specify a python shell job (JobCommand.Name="pythonshell"),
+	//    * When you specify a Python shell job (JobCommand.Name="pythonshell"),
 	//    you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.
 	//
 	//    * When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"),
@@ -90,7 +101,8 @@ type CreateJobInput struct {
 	// G.2X.
 	NumberOfWorkers *int64 `type:"integer"`
 
-	// The name or ARN of the IAM role associated with this job.
+	// The name or Amazon Resource Name (ARN) of the IAM role associated with this
+	// job.
 	//
 	// Role is a required field
 	Role *string `type:"string" required:"true"`
@@ -99,7 +111,7 @@ type CreateJobInput struct {
 	SecurityConfiguration *string `min:"1" type:"string"`
 
 	// The tags to use with this job. You may use tags to limit access to the job.
-	// For more information about tags in AWS Glue, see AWS Tags in AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html)
+	// For more information about tags in AWS Glue, see AWS Tags in AWS Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html)
 	// in the developer guide.
 	Tags map[string]string `type:"map"`
 
@@ -114,11 +126,13 @@ type CreateJobInput struct {
 	//    * For the Standard worker type, each worker provides 4 vCPU, 16 GB of
 	//    memory and a 50GB disk, and 2 executors per worker.
 	//
-	//    * For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory
-	//    and a 64GB disk, and 1 executor per worker.
+	//    * For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of
+	//    memory, 64 GB disk), and provides 1 executor per worker. We recommend
+	//    this worker type for memory-intensive jobs.
 	//
-	//    * For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory
-	//    and a 128GB disk, and 1 executor per worker.
+	//    * For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of
+	//    memory, 128 GB disk), and provides 1 executor per worker. We recommend
+	//    this worker type for memory-intensive jobs.
 	WorkerType WorkerType `type:"string" enum:"true"`
 }
 
@@ -133,6 +147,9 @@ func (s *CreateJobInput) Validate() error {
 
 	if s.Command == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Command"))
+	}
+	if s.GlueVersion != nil && len(*s.GlueVersion) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("GlueVersion", 1))
 	}
 
 	if s.Name == nil {

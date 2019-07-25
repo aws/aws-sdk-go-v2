@@ -19,6 +19,9 @@ type ModifySpotFleetRequestInput struct {
 	// the Spot Fleet.
 	ExcessCapacityTerminationPolicy ExcessCapacityTerminationPolicy `locationName:"excessCapacityTerminationPolicy" type:"string" enum:"true"`
 
+	// The number of On-Demand Instances in the fleet.
+	OnDemandTargetCapacity *int64 `type:"integer"`
+
 	// The ID of the Spot Fleet request.
 	//
 	// SpotFleetRequestId is a required field

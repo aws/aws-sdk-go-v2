@@ -14,7 +14,8 @@ import (
 type UpdateApnsVoipSandboxChannelInput struct {
 	_ struct{} `type:"structure" payload:"APNSVoipSandboxChannelRequest"`
 
-	// Apple VoIP Developer Push Notification Service channel definition.
+	// Specifies the status and settings of the APNs (Apple Push Notification service)
+	// VoIP sandbox channel for an application.
 	//
 	// APNSVoipSandboxChannelRequest is a required field
 	APNSVoipSandboxChannelRequest *APNSVoipSandboxChannelRequest `type:"structure" required:"true"`
@@ -69,7 +70,8 @@ func (s UpdateApnsVoipSandboxChannelInput) MarshalFields(e protocol.FieldEncoder
 type UpdateApnsVoipSandboxChannelOutput struct {
 	_ struct{} `type:"structure" payload:"APNSVoipSandboxChannelResponse"`
 
-	// Apple VoIP Developer Push Notification Service channel definition.
+	// Provides information about the status and settings of the APNs (Apple Push
+	// Notification service) VoIP sandbox channel for an application.
 	//
 	// APNSVoipSandboxChannelResponse is a required field
 	APNSVoipSandboxChannelResponse *APNSVoipSandboxChannelResponse `type:"structure" required:"true"`
@@ -96,7 +98,7 @@ const opUpdateApnsVoipSandboxChannel = "UpdateApnsVoipSandboxChannel"
 // UpdateApnsVoipSandboxChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Update an APNS VoIP sandbox channel
+// Updates the settings for the APNs VoIP sandbox channel for an application.
 //
 //    // Example sending a request using UpdateApnsVoipSandboxChannelRequest.
 //    req := client.UpdateApnsVoipSandboxChannelRequest(params)

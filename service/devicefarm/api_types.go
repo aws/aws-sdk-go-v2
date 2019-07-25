@@ -21,7 +21,7 @@ type AccountSettings struct {
 	AwsAccountNumber *string `locationName:"awsAccountNumber" min:"2" type:"string"`
 
 	// The default number of minutes (at the account level) a test run will execute
-	// before it times out. Default value is 60 minutes.
+	// before it times out. The default value is 150 minutes.
 	DefaultJobTimeoutMinutes *int64 `locationName:"defaultJobTimeoutMinutes" type:"integer"`
 
 	// The maximum number of minutes a test run will execute before it times out.
@@ -122,7 +122,7 @@ type Artifact struct {
 	//
 	//    * APPLICATION_CRASH_REPORT: The application crash report output type.
 	//
-	//    * XCTEST_LOG: The XCode test output type.
+	//    * XCTEST_LOG: The Xcode test output type.
 	//
 	//    * VIDEO: The Video output type.
 	//
@@ -884,9 +884,9 @@ type Job struct {
 	//
 	//    * UIAUTOMATOR: The uiautomator type.
 	//
-	//    * XCTEST: The XCode test type.
+	//    * XCTEST: The Xcode test type.
 	//
-	//    * XCTEST_UI: The XCode UI test type.
+	//    * XCTEST_UI: The Xcode UI test type.
 	Type TestType `locationName:"type" type:"string" enum:"true"`
 
 	// This value is set to true if video capture is enabled; otherwise, it is set
@@ -1182,7 +1182,7 @@ type Project struct {
 	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"unix"`
 
 	// The default number of minutes (at the project level) a test run will execute
-	// before it times out. Default value is 60 minutes.
+	// before it times out. The default value is 150 minutes.
 	DefaultJobTimeoutMinutes *int64 `locationName:"defaultJobTimeoutMinutes" type:"integer"`
 
 	// The project's name.
@@ -1258,7 +1258,7 @@ type RemoteAccessSession struct {
 	// The device (phone or tablet) used in the remote access session.
 	Device *Device `locationName:"device" type:"structure"`
 
-	// The number of minutes a device is used in a remote access sesssion (including
+	// The number of minutes a device is used in a remote access session (including
 	// setup and teardown minutes).
 	DeviceMinutes *DeviceMinutes `locationName:"deviceMinutes" type:"structure"`
 
@@ -1676,9 +1676,9 @@ type Run struct {
 	//
 	//    * UIAUTOMATOR: The uiautomator type.
 	//
-	//    * XCTEST: The XCode test type.
+	//    * XCTEST: The Xcode test type.
 	//
-	//    * XCTEST_UI: The XCode UI test type.
+	//    * XCTEST_UI: The Xcode UI test type.
 	Type TestType `locationName:"type" type:"string" enum:"true"`
 
 	// The Device Farm console URL for the recording of the run.
@@ -1932,9 +1932,9 @@ type ScheduleRunTest struct {
 	//
 	//    * UIAUTOMATOR: The uiautomator type.
 	//
-	//    * XCTEST: The XCode test type.
+	//    * XCTEST: The Xcode test type.
 	//
-	//    * XCTEST_UI: The XCode UI test type.
+	//    * XCTEST_UI: The Xcode UI test type.
 	//
 	// Type is a required field
 	Type TestType `locationName:"type" type:"string" required:"true" enum:"true"`
@@ -2073,9 +2073,9 @@ type Suite struct {
 	//
 	//    * UIAUTOMATOR: The uiautomator type.
 	//
-	//    * XCTEST: The XCode test type.
+	//    * XCTEST: The Xcode test type.
 	//
-	//    * XCTEST_UI: The XCode UI test type.
+	//    * XCTEST_UI: The Xcode UI test type.
 	Type TestType `locationName:"type" type:"string" enum:"true"`
 }
 
@@ -2240,9 +2240,9 @@ type Test struct {
 	//
 	//    * UIAUTOMATOR: The uiautomator type.
 	//
-	//    * XCTEST: The XCode test type.
+	//    * XCTEST: The Xcode test type.
 	//
-	//    * XCTEST_UI: The XCode UI test type.
+	//    * XCTEST_UI: The Xcode UI test type.
 	Type TestType `locationName:"type" type:"string" enum:"true"`
 }
 
@@ -2338,7 +2338,7 @@ type Upload struct {
 	//
 	//    * IOS_APP: An iOS upload.
 	//
-	//    * WEB_APP: A web appliction upload.
+	//    * WEB_APP: A web application upload.
 	//
 	//    * EXTERNAL_DATA: An external data upload.
 	//
@@ -2376,9 +2376,9 @@ type Upload struct {
 	//
 	//    * UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload.
 	//
-	//    * XCTEST_TEST_PACKAGE: An XCode test package upload.
+	//    * XCTEST_TEST_PACKAGE: An Xcode test package upload.
 	//
-	//    * XCTEST_UI_TEST_PACKAGE: An XCode UI test package upload.
+	//    * XCTEST_UI_TEST_PACKAGE: An Xcode UI test package upload.
 	//
 	//    * APPIUM_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload.
 	//
@@ -2407,7 +2407,7 @@ type Upload struct {
 	//
 	//    * INSTRUMENTATION_TEST_SPEC: An instrumentation test spec upload.
 	//
-	//    * XCTEST_UI_TEST_SPEC: An XCode UI test spec upload.
+	//    * XCTEST_UI_TEST_SPEC: An Xcode UI test spec upload.
 	Type UploadType `locationName:"type" type:"string" enum:"true"`
 
 	// The pre-signed Amazon S3 URL that was used to store a file through a corresponding

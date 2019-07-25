@@ -11,7 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Add tags for a resource
+// Tag a resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/TagResourceRequest
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
@@ -19,7 +19,7 @@ type TagResourceInput struct {
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resourceArn" type:"string" required:"true"`
 
-	// The Key value pairs indicating resource tags.
+	// The key-value pair for the resource tag.
 	//
 	// Tags is a required field
 	Tags map[string]string `locationName:"tags" type:"map" required:"true"`
@@ -93,7 +93,7 @@ const opTagResource = "TagResource"
 // TagResourceRequest returns a request value for making API operation for
 // Managed Streaming for Kafka.
 //
-// Add tags to a resource
+// Adds tags to the specified MSK resource.
 //
 //    // Example sending a request using TagResourceRequest.
 //    req := client.TagResourceRequest(params)

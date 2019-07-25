@@ -40,6 +40,11 @@ func (s *CreateTransitVirtualInterfaceInput) Validate() error {
 	if s.NewTransitVirtualInterface == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NewTransitVirtualInterface"))
 	}
+	if s.NewTransitVirtualInterface != nil {
+		if err := s.NewTransitVirtualInterface.Validate(); err != nil {
+			invalidParams.AddNested("NewTransitVirtualInterface", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -65,10 +70,16 @@ const opCreateTransitVirtualInterface = "CreateTransitVirtualInterface"
 // CreateTransitVirtualInterfaceRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Creates a transit virtual interface. A transit virtual interface is a VLAN
-// that transports traffic from a Direct Connect gateway to one or more transit
+// Creates a transit virtual interface. A transit virtual interface should be
+// used to access one or more transit gateways associated with Direct Connect
 // gateways. A transit virtual interface enables the connection of multiple
 // VPCs attached to a transit gateway to a Direct Connect gateway.
+//
+// If you associate your transit gateway with one or more Direct Connect gateways,
+// the Autonomous System Number (ASN) used by the transit gateway and the Direct
+// Connect gateway must be different. For example, if you use the default ASN
+// 64512 for both your the transit gateway and Direct Connect gateway, the association
+// request fails.
 //
 //    // Example sending a request using CreateTransitVirtualInterfaceRequest.
 //    req := client.CreateTransitVirtualInterfaceRequest(params)

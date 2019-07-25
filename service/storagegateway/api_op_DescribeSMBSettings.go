@@ -56,6 +56,18 @@ type DescribeSMBSettingsOutput struct {
 	// This value is true if a password for the guest user “smbguest” is set,
 	// and otherwise false.
 	SMBGuestPasswordSet *bool `type:"boolean"`
+
+	// The type of security strategy that was specified for file gateway.
+	//
+	// ClientSpecified: SMBv1 is enabled, SMB signing is offered but not required,
+	// SMB encryption is offered but not required.
+	//
+	// MandatorySigning: SMBv1 is disabled, SMB signing is required, SMB encryption
+	// is offered but not required.
+	//
+	// MandatoryEncryption: SMBv1 is disabled, SMB signing is offered but not required,
+	// SMB encryption is required.
+	SMBSecurityStrategy SMBSecurityStrategy `type:"string" enum:"true"`
 }
 
 // String returns the string representation

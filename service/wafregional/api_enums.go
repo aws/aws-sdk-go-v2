@@ -397,6 +397,8 @@ const (
 	ParameterExceptionFieldRuleType                         ParameterExceptionField = "RULE_TYPE"
 	ParameterExceptionFieldNextMarker                       ParameterExceptionField = "NEXT_MARKER"
 	ParameterExceptionFieldResourceArn                      ParameterExceptionField = "RESOURCE_ARN"
+	ParameterExceptionFieldTags                             ParameterExceptionField = "TAGS"
+	ParameterExceptionFieldTagKeys                          ParameterExceptionField = "TAG_KEYS"
 )
 
 func (enum ParameterExceptionField) MarshalValue() (string, error) {
@@ -415,6 +417,7 @@ const (
 	ParameterExceptionReasonInvalidOption      ParameterExceptionReason = "INVALID_OPTION"
 	ParameterExceptionReasonIllegalCombination ParameterExceptionReason = "ILLEGAL_COMBINATION"
 	ParameterExceptionReasonIllegalArgument    ParameterExceptionReason = "ILLEGAL_ARGUMENT"
+	ParameterExceptionReasonInvalidTagKey      ParameterExceptionReason = "INVALID_TAG_KEY"
 )
 
 func (enum ParameterExceptionReason) MarshalValue() (string, error) {

@@ -13,9 +13,8 @@ import (
 type GetTriggersInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the job for which to retrieve triggers. The trigger that can
-	// start this job will be returned, and if there is no such trigger, all triggers
-	// will be returned.
+	// The name of the job to retrieve triggers for. The trigger that can start
+	// this job is returned, and if there is no such trigger, all triggers are returned.
 	DependentJobName *string `min:"1" type:"string"`
 
 	// The maximum size of the response.

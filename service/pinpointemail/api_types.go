@@ -523,6 +523,12 @@ type DeliveryOptions struct {
 	// The name of the dedicated IP pool that you want to associate with the configuration
 	// set.
 	SendingPoolName *string `type:"string"`
+
+	// Specifies whether Amazon Pinpoint should require that incoming email is delivered
+	// over a connection that’s encrypted by using Transport Layer Security (TLS).
+	// If this value is set to Require, Amazon Pinpoint will bounce email messages
+	// that cannot be delivered over TLS. The default value is Optional.
+	TlsPolicy TlsPolicy `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -537,6 +543,12 @@ func (s DeliveryOptions) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SendingPoolName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.TlsPolicy) > 0 {
+		v := s.TlsPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TlsPolicy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }

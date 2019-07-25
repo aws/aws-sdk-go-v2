@@ -24,7 +24,7 @@ type SendMessageInput struct {
 	DelaySeconds *int64 `type:"integer"`
 
 	// Each message attribute consists of a Name, Type, and Value. For more information,
-	// see Amazon SQS Message Attributes (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html)
+	// see Amazon SQS Message Attributes (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html)
 	// in the Amazon Simple Queue Service Developer Guide.
 	MessageAttributes map[string]MessageAttributeValue `locationName:"MessageAttribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
 
@@ -47,7 +47,7 @@ type SendMessageInput struct {
 	// MessageDeduplicationId is sent successfully, any messages sent with the same
 	// MessageDeduplicationId are accepted successfully but aren't delivered during
 	// the 5-minute deduplication interval. For more information, see Exactly-Once
-	// Processing (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing)
+	// Processing (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing)
 	// in the Amazon Simple Queue Service Developer Guide.
 	//
 	//    * Every message must have a unique MessageDeduplicationId, You may provide
@@ -82,7 +82,7 @@ type SendMessageInput struct {
 	// can contain alphanumeric characters (a-z, A-Z, 0-9) and punctuation (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~).
 	//
 	// For best practices of using MessageDeduplicationId, see Using the MessageDeduplicationId
-	// Property (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
+	// Property (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
 	// in the Amazon Simple Queue Service Developer Guide.
 	MessageDeduplicationId *string `type:"string"`
 
@@ -107,7 +107,7 @@ type SendMessageInput struct {
 	// characters and punctuation (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~).
 	//
 	// For best practices of using MessageGroupId, see Using the MessageGroupId
-	// Property (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html)
+	// Property (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html)
 	// in the Amazon Simple Queue Service Developer Guide.
 	//
 	// MessageGroupId is required for FIFO queues. You can't use it for Standard
@@ -170,7 +170,7 @@ type SendMessageOutput struct {
 	MD5OfMessageBody *string `type:"string"`
 
 	// An attribute containing the MessageId of the message sent to the queue. For
-	// more information, see Queue and Message Identifiers (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-message-identifiers.html)
+	// more information, see Queue and Message Identifiers (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-message-identifiers.html)
 	// in the Amazon Simple Queue Service Developer Guide.
 	MessageId *string `type:"string"`
 

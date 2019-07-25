@@ -20,7 +20,7 @@ type AddTagsToResourceInput struct {
 	// resources are cluster and snapshot.
 	//
 	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// ResourceName is a required field
 	ResourceName *string `type:"string" required:"true"`
@@ -84,7 +84,7 @@ const opAddTagsToResource = "AddTagsToResource"
 // by your tags. You can apply tags that represent business categories (such
 // as cost centers, application names, or owners) to organize your costs across
 // multiple services. For more information, see Using Cost Allocation Tags in
-// Amazon ElastiCache (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html)
+// Amazon ElastiCache (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html)
 // in the ElastiCache User Guide.
 //
 //    // Example sending a request using AddTagsToResourceRequest.

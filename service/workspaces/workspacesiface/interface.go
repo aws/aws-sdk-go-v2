@@ -65,6 +65,8 @@ type ClientAPI interface {
 
 	AuthorizeIpRulesRequest(*workspaces.AuthorizeIpRulesInput) workspaces.AuthorizeIpRulesRequest
 
+	CopyWorkspaceImageRequest(*workspaces.CopyWorkspaceImageInput) workspaces.CopyWorkspaceImageRequest
+
 	CreateIpGroupRequest(*workspaces.CreateIpGroupInput) workspaces.CreateIpGroupRequest
 
 	CreateTagsRequest(*workspaces.CreateTagsInput) workspaces.CreateTagsRequest

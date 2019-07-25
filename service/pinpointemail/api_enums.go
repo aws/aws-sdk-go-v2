@@ -212,6 +212,28 @@ func (enum MailFromDomainStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Specifies whether Amazon Pinpoint should require that incoming email is delivered
+// over a connection encrypted with Transport Layer Security (TLS). If this
+// parameter is set to Require, Amazon Pinpoint rejects emails that weren't
+// received over TLS. If the parameter is set to Optional, then Amazon Pinpoint
+// accepts emails that weren't received over TLS. The default value is Optional.
+type TlsPolicy string
+
+// Enum values for TlsPolicy
+const (
+	TlsPolicyRequire  TlsPolicy = "REQUIRE"
+	TlsPolicyOptional TlsPolicy = "OPTIONAL"
+)
+
+func (enum TlsPolicy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TlsPolicy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The warmup status of a dedicated IP.
 type WarmupStatus string
 

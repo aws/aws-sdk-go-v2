@@ -19,7 +19,7 @@ type ListGlobalTablesInput struct {
 	// The maximum number of table names to return.
 	Limit *int64 `min:"1" type:"integer"`
 
-	// Lists the global tables in a specific region.
+	// Lists the global tables in a specific Region.
 	RegionName *string `type:"string"`
 }
 
@@ -65,7 +65,7 @@ const opListGlobalTables = "ListGlobalTables"
 // ListGlobalTablesRequest returns a request value for making API operation for
 // Amazon DynamoDB.
 //
-// Lists all global tables that have a replica in the specified region.
+// Lists all global tables that have a replica in the specified Region.
 //
 //    // Example sending a request using ListGlobalTablesRequest.
 //    req := client.ListGlobalTablesRequest(params)

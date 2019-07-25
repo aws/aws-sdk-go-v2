@@ -12,7 +12,7 @@ import (
 // Represents a request to return the requested sending authorization policies
 // for an identity. Sending authorization is an Amazon SES feature that enables
 // you to authorize other senders to use your identities. For information, see
-// the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+// the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityPoliciesRequest
 type GetIdentityPoliciesInput struct {
 	_ struct{} `type:"structure"`
@@ -88,7 +88,7 @@ const opGetIdentityPolicies = "GetIdentityPolicies"
 //
 // Sending authorization is a feature that enables an identity owner to authorize
 // other senders to use its identities. For information about using sending
-// authorization, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+// authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 //
 // You can execute this operation no more than once per second.
 //

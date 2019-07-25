@@ -12,7 +12,7 @@ import (
 )
 
 // The request to delete a streaming distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DeleteStreamingDistributionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteStreamingDistributionRequest
 type DeleteStreamingDistributionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -63,7 +63,7 @@ func (s DeleteStreamingDistributionInput) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DeleteStreamingDistributionOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteStreamingDistributionOutput
 type DeleteStreamingDistributionOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -78,7 +78,7 @@ func (s DeleteStreamingDistributionOutput) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-const opDeleteStreamingDistribution = "DeleteStreamingDistribution2018_11_05"
+const opDeleteStreamingDistribution = "DeleteStreamingDistribution2019_03_26"
 
 // DeleteStreamingDistributionRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -117,7 +117,7 @@ const opDeleteStreamingDistribution = "DeleteStreamingDistribution2018_11_05"
 // that the distribution was successfully deleted.
 //
 // For information about deleting a distribution using the CloudFront console,
-// see Deleting a Distribution (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html)
+// see Deleting a Distribution (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html)
 // in the Amazon CloudFront Developer Guide.
 //
 //    // Example sending a request using DeleteStreamingDistributionRequest.
@@ -127,12 +127,12 @@ const opDeleteStreamingDistribution = "DeleteStreamingDistribution2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DeleteStreamingDistribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteStreamingDistribution
 func (c *Client) DeleteStreamingDistributionRequest(input *DeleteStreamingDistributionInput) DeleteStreamingDistributionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteStreamingDistribution,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/2018-11-05/streaming-distribution/{Id}",
+		HTTPPath:   "/2019-03-26/streaming-distribution/{Id}",
 	}
 
 	if input == nil {

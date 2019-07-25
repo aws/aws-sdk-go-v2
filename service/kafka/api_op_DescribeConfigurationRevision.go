@@ -78,13 +78,9 @@ type DescribeConfigurationRevisionOutput struct {
 	// The description of the configuration.
 	Description *string `locationName:"description" type:"string"`
 
+	// The revision number.
 	Revision *int64 `locationName:"revision" type:"long"`
 
-	// Contents of the server.properties file. When using the API, you must ensure
-	// that the contents of the file are base64 encoded. When using the AWS Management
-	// Console, the SDK, or the AWS CLI, the contents of server.properties can be
-	// in plaintext.
-	//
 	// ServerProperties is automatically base64 encoded/decoded by the SDK.
 	ServerProperties []byte `locationName:"serverProperties" type:"blob"`
 }

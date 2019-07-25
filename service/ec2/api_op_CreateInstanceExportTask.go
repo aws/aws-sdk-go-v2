@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Contains the parameters for CreateInstanceExportTask.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInstanceExportTaskRequest
 type CreateInstanceExportTaskInput struct {
 	_ struct{} `type:"structure"`
@@ -49,7 +48,6 @@ func (s *CreateInstanceExportTaskInput) Validate() error {
 	return nil
 }
 
-// Contains the output for CreateInstanceExportTask.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInstanceExportTaskResult
 type CreateInstanceExportTaskOutput struct {
 	_ struct{} `type:"structure"`

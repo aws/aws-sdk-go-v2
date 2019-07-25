@@ -2343,6 +2343,47 @@ func (s SubscribedRuleGroupSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/Tag
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	Key *string `min:"1" type:"string"`
+
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/TagInfoForResource
+type TagInfoForResource struct {
+	_ struct{} `type:"structure"`
+
+	ResourceARN *string `min:"1" type:"string"`
+
+	TagList []Tag `min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s TagInfoForResource) String() string {
+	return awsutil.Prettify(s)
+}
+
 // In a GetSampledRequests request, the StartTime and EndTime objects specify
 // the time range for which you want AWS WAF to return a sample of web requests.
 //

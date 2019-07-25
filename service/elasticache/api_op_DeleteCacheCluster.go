@@ -68,11 +68,17 @@ const opDeleteCacheCluster = "DeleteCacheCluster"
 // a successful response from this operation, Amazon ElastiCache immediately
 // begins deleting the cluster; you cannot cancel or revert this operation.
 //
-// This operation cannot be used to delete a cluster that is the last read replica
-// of a replication group or node group (shard) that has Multi-AZ mode enabled
-// or a cluster from a Redis (cluster mode enabled) replication group.
+// This operation is not valid for:
 //
-// This operation is not valid for Redis (cluster mode enabled) clusters.
+//    * Redis (cluster mode enabled) clusters
+//
+//    * A cluster that is the last read replica of a replication group
+//
+//    * A node group (shard) that has Multi-AZ mode enabled
+//
+//    * A cluster from a Redis (cluster mode enabled) replication group
+//
+//    * A cluster that is not in the available state
 //
 //    // Example sending a request using DeleteCacheClusterRequest.
 //    req := client.DeleteCacheClusterRequest(params)

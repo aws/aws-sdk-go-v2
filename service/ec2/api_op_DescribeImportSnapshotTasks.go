@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Contains the parameters for DescribeImportSnapshotTasks.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportSnapshotTasksRequest
 type DescribeImportSnapshotTasksInput struct {
 	_ struct{} `type:"structure"`
@@ -39,7 +38,6 @@ func (s DescribeImportSnapshotTasksInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Contains the output for DescribeImportSnapshotTasks.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportSnapshotTasksResult
 type DescribeImportSnapshotTasksOutput struct {
 	_ struct{} `type:"structure"`

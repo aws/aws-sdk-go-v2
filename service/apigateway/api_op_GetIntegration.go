@@ -89,10 +89,14 @@ func (s GetIntegrationInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetIntegrationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the integration's cache key parameters.
+	// A list of request parameters whose values API Gateway caches. To be valid
+	// values for cacheKeyParameters, these parameters must also be specified for
+	// Method requestParameters.
 	CacheKeyParameters []string `locationName:"cacheKeyParameters" type:"list"`
 
-	// Specifies the integration's cache namespace.
+	// An API-specific tag group of related cached parameters. To be valid values
+	// for cacheKeyParameters, these parameters must also be specified for Method
+	// requestParameters.
 	CacheNamespace *string `locationName:"cacheNamespace" type:"string"`
 
 	// The (id (https://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id))
@@ -117,7 +121,7 @@ type GetIntegrationOutput struct {
 	//
 	// If this property is not defined, the request payload will be passed through
 	// from the method request to integration request without modification, provided
-	// that the passthroughBehaviors is configured to support payload pass-through.
+	// that the passthroughBehavior is configured to support payload pass-through.
 	ContentHandling ContentHandlingStrategy `locationName:"contentHandling" type:"string" enum:"true"`
 
 	// Specifies the credentials required for the integration, if any. For AWS integrations,

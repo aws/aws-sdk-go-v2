@@ -13,6 +13,89 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// Includes all client authentication information.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClientAuthentication
+type Authentication struct {
+	_ struct{} `type:"structure"`
+
+	// Details for ClientAuthentication using TLS.
+	Tls *Tls `locationName:"tls" type:"structure"`
+}
+
+// String returns the string representation
+func (s Authentication) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Authentication) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Tls != nil {
+		v := s.Tls
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "tls", v, metadata)
+	}
+	return nil
+}
+
+// Specifies the EBS volume upgrade information. The broker identifier must
+// be set to the keyword ALL. This means the changes apply to all the brokers
+// in the cluster.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/BrokerEBSVolumeInfo
+type BrokerEBSVolumeInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the broker to update.
+	//
+	// KafkaBrokerNodeId is a required field
+	KafkaBrokerNodeId *string `locationName:"kafkaBrokerNodeId" type:"string" required:"true"`
+
+	// Size of the EBS volume to update.
+	//
+	// VolumeSizeGB is a required field
+	VolumeSizeGB *int64 `locationName:"volumeSizeGB" type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s BrokerEBSVolumeInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BrokerEBSVolumeInfo) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BrokerEBSVolumeInfo"}
+
+	if s.KafkaBrokerNodeId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("KafkaBrokerNodeId"))
+	}
+
+	if s.VolumeSizeGB == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VolumeSizeGB"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BrokerEBSVolumeInfo) MarshalFields(e protocol.FieldEncoder) error {
+	if s.KafkaBrokerNodeId != nil {
+		v := *s.KafkaBrokerNodeId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "kafkaBrokerNodeId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VolumeSizeGB != nil {
+		v := *s.VolumeSizeGB
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "volumeSizeGB", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // Describes the setup to be used for Kafka broker nodes in the cluster.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/BrokerNodeGroupInfo
 type BrokerNodeGroupInfo struct {
@@ -38,7 +121,8 @@ type BrokerNodeGroupInfo struct {
 
 	// The AWS security groups to associate with the elastic network interfaces
 	// in order to specify who can connect to and communicate with the Amazon MSK
-	// cluster.
+	// cluster. If you don't specify a security group, Amazon MSK uses the default
+	// security group associated with the VPC.
 	SecurityGroups []string `locationName:"securityGroups" type:"list"`
 
 	// Contains information about storage volumes attached to MSK broker nodes.
@@ -143,6 +227,9 @@ type BrokerNodeInfo struct {
 	// Information about the version of software currently deployed on the Kafka
 	// brokers in the cluster.
 	CurrentBrokerSoftwareInfo *BrokerSoftwareInfo `locationName:"currentBrokerSoftwareInfo" type:"structure"`
+
+	// Endpoints for accessing the broker.
+	Endpoints []string `locationName:"endpoints" type:"list"`
 }
 
 // String returns the string representation
@@ -182,6 +269,18 @@ func (s BrokerNodeInfo) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "currentBrokerSoftwareInfo", v, metadata)
 	}
+	if s.Endpoints != nil {
+		v := s.Endpoints
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "endpoints", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
 	return nil
 }
 
@@ -191,9 +290,11 @@ type BrokerSoftwareInfo struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the configuration used for the cluster.
+	// This field isn't visible in this preview release.
 	ConfigurationArn *string `locationName:"configurationArn" type:"string"`
 
-	// The revision of the configuration to use.
+	// The revision of the configuration to use. This field isn't visible in this
+	// preview release.
 	ConfigurationRevision *int64 `locationName:"configurationRevision" type:"long"`
 
 	// The version of Apache Kafka.
@@ -233,8 +334,14 @@ func (s BrokerSoftwareInfo) MarshalFields(e protocol.FieldEncoder) error {
 type ClusterInfo struct {
 	_ struct{} `type:"structure"`
 
+	// Arn of active cluster operation.
+	ActiveOperationArn *string `locationName:"activeOperationArn" type:"string"`
+
 	// Information about the broker nodes.
 	BrokerNodeGroupInfo *BrokerNodeGroupInfo `locationName:"brokerNodeGroupInfo" type:"structure"`
+
+	// Includes all client authentication information.
+	ClientAuthentication *Authentication `locationName:"clientAuthentication" type:"structure"`
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
 	ClusterArn *string `locationName:"clusterArn" type:"string"`
@@ -256,14 +363,19 @@ type ClusterInfo struct {
 	EncryptionInfo *EncryptionInfo `locationName:"encryptionInfo" type:"structure"`
 
 	// Specifies which metrics are gathered for the MSK cluster. This property has
-	// three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.
+	// three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For
+	// a list of the metrics associated with each of these three levels of monitoring,
+	// see Monitoring (https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html).
 	EnhancedMonitoring EnhancedMonitoring `locationName:"enhancedMonitoring" type:"string" enum:"true"`
 
-	// The number of Kafka broker nodes in the cluster.
+	// The number of broker nodes in the cluster.
 	NumberOfBrokerNodes *int64 `locationName:"numberOfBrokerNodes" type:"integer"`
 
 	// The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.
 	State ClusterState `locationName:"state" type:"string" enum:"true"`
+
+	// Tags attached to the cluster.
+	Tags map[string]string `locationName:"tags" type:"map"`
 
 	// The connection string to use to connect to the Apache ZooKeeper cluster.
 	ZookeeperConnectString *string `locationName:"zookeeperConnectString" type:"string"`
@@ -276,11 +388,23 @@ func (s ClusterInfo) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ClusterInfo) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ActiveOperationArn != nil {
+		v := *s.ActiveOperationArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "activeOperationArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.BrokerNodeGroupInfo != nil {
 		v := s.BrokerNodeGroupInfo
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "brokerNodeGroupInfo", v, metadata)
+	}
+	if s.ClientAuthentication != nil {
+		v := s.ClientAuthentication
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "clientAuthentication", v, metadata)
 	}
 	if s.ClusterArn != nil {
 		v := *s.ClusterArn
@@ -336,11 +460,129 @@ func (s ClusterInfo) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	if s.ZookeeperConnectString != nil {
 		v := *s.ZookeeperConnectString
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "zookeeperConnectString", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Returns information about a cluster operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClusterOperationInfo
+type ClusterOperationInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the API request that triggered this operation.
+	ClientRequestId *string `locationName:"clientRequestId" type:"string"`
+
+	// ARN of the cluster.
+	ClusterArn *string `locationName:"clusterArn" type:"string"`
+
+	// The time at which operation was created.
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix"`
+
+	// The time at which the operation finished.
+	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
+
+	// Describes the error if the operation fails.
+	ErrorInfo *ErrorInfo `locationName:"errorInfo" type:"structure"`
+
+	// ARN of the cluster operation.
+	OperationArn *string `locationName:"operationArn" type:"string"`
+
+	// State of the cluster operation.
+	OperationState *string `locationName:"operationState" type:"string"`
+
+	// Type of the cluster operation.
+	OperationType *string `locationName:"operationType" type:"string"`
+
+	// Information about cluster attributes before a cluster is updated.
+	SourceClusterInfo *MutableClusterInfo `locationName:"sourceClusterInfo" type:"structure"`
+
+	// Information about cluster attributes after a cluster is updated.
+	TargetClusterInfo *MutableClusterInfo `locationName:"targetClusterInfo" type:"structure"`
+}
+
+// String returns the string representation
+func (s ClusterOperationInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ClusterOperationInfo) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ClientRequestId != nil {
+		v := *s.ClientRequestId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "clientRequestId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ClusterArn != nil {
+		v := *s.ClusterArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "clusterArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "creationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.EndTime != nil {
+		v := *s.EndTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "endTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.ErrorInfo != nil {
+		v := s.ErrorInfo
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "errorInfo", v, metadata)
+	}
+	if s.OperationArn != nil {
+		v := *s.OperationArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "operationArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.OperationState != nil {
+		v := *s.OperationState
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "operationState", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.OperationType != nil {
+		v := *s.OperationType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "operationType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SourceClusterInfo != nil {
+		v := s.SourceClusterInfo
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "sourceClusterInfo", v, metadata)
+	}
+	if s.TargetClusterInfo != nil {
+		v := s.TargetClusterInfo
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "targetClusterInfo", v, metadata)
 	}
 	return nil
 }
@@ -363,10 +605,14 @@ type Configuration struct {
 	// Description is a required field
 	Description *string `locationName:"description" type:"string" required:"true"`
 
+	// An array of the versions of Apache Kafka with which you can use this MSK
+	// configuration. You can use this configuration for an MSK cluster only if
+	// the Apache Kafka version specified for the cluster appears in this array.
+	//
 	// KafkaVersions is a required field
 	KafkaVersions []string `locationName:"kafkaVersions" type:"list" required:"true"`
 
-	// Describes a configuration revision.
+	// Latest revision of the configuration.
 	//
 	// LatestRevision is a required field
 	LatestRevision *ConfigurationRevision `locationName:"latestRevision" type:"structure" required:"true"`
@@ -429,7 +675,7 @@ func (s Configuration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies the Kafka configuration to use for the brokers.
+// Specifies the configuration to use for the brokers.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ConfigurationInfo
 type ConfigurationInfo struct {
 	_ struct{} `type:"structure"`
@@ -571,12 +817,13 @@ func (s EBSStorageInfo) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The data volume encryption details.
+// The data-volume encryption details.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/EncryptionAtRest
 type EncryptionAtRest struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS KMS key used for data encryption.
+	// The ARN of the AWS KMS key for encrypting data at rest. If you don't specify
+	// a KMS key, MSK creates one for you and uses it.
 	//
 	// DataVolumeKMSKeyId is a required field
 	DataVolumeKMSKeyId *string `locationName:"dataVolumeKMSKeyId" type:"string" required:"true"`
@@ -612,14 +859,67 @@ func (s EncryptionAtRest) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The settings for encrypting data in transit.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/EncryptionInTransit
+type EncryptionInTransit struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates the encryption setting for data in transit between clients and
+	// brokers. The following are the possible values.
+	//
+	// TLS means that client-broker communication is enabled with TLS only.
+	//
+	// TLS_PLAINTEXT means that client-broker communication is enabled for both
+	// TLS-encrypted, as well as plaintext data.
+	//
+	// PLAINTEXT means that client-broker communication is enabled in plaintext
+	// only.
+	//
+	// The default value is TLS_PLAINTEXT.
+	ClientBroker Broker `locationName:"clientBroker" type:"string" enum:"true"`
+
+	// When set to true, it indicates that data communication among the broker nodes
+	// of the cluster is encrypted. When set to false, the communication happens
+	// in plaintext.
+	//
+	// The default value is true.
+	InCluster *bool `locationName:"inCluster" type:"boolean"`
+}
+
+// String returns the string representation
+func (s EncryptionInTransit) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s EncryptionInTransit) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ClientBroker) > 0 {
+		v := s.ClientBroker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "clientBroker", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.InCluster != nil {
+		v := *s.InCluster
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "inCluster", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
 // Includes encryption-related information, such as the AWS KMS key used for
-// encrypting data at rest.
+// encrypting data at rest and whether you want MSK to encrypt your data in
+// transit.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/EncryptionInfo
 type EncryptionInfo struct {
 	_ struct{} `type:"structure"`
 
-	// The data volume encryption details.
+	// The data-volume encryption details.
 	EncryptionAtRest *EncryptionAtRest `locationName:"encryptionAtRest" type:"structure"`
+
+	// The details for encryption in transit.
+	EncryptionInTransit *EncryptionInTransit `locationName:"encryptionInTransit" type:"structure"`
 }
 
 // String returns the string representation
@@ -649,6 +949,95 @@ func (s EncryptionInfo) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "encryptionAtRest", v, metadata)
+	}
+	if s.EncryptionInTransit != nil {
+		v := s.EncryptionInTransit
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "encryptionInTransit", v, metadata)
+	}
+	return nil
+}
+
+// Returns information about an error state of the cluster.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ErrorInfo
+type ErrorInfo struct {
+	_ struct{} `type:"structure"`
+
+	// A number describing the error programmatically.
+	ErrorCode *string `locationName:"errorCode" type:"string"`
+
+	// An optional field to provide more details about the error.
+	ErrorString *string `locationName:"errorString" type:"string"`
+}
+
+// String returns the string representation
+func (s ErrorInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ErrorInfo) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ErrorCode != nil {
+		v := *s.ErrorCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "errorCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ErrorString != nil {
+		v := *s.ErrorString
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "errorString", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Information about cluster attributes that can be updated via update APIs.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/MutableClusterInfo
+type MutableClusterInfo struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the size of the EBS volume and the ID of the associated broker.
+	BrokerEBSVolumeInfo []BrokerEBSVolumeInfo `locationName:"brokerEBSVolumeInfo" type:"list"`
+
+	// Information about the changes in the configuration of the brokers.
+	ConfigurationInfo *ConfigurationInfo `locationName:"configurationInfo" type:"structure"`
+
+	// The number of broker nodes in the cluster.
+	NumberOfBrokerNodes *int64 `locationName:"numberOfBrokerNodes" type:"integer"`
+}
+
+// String returns the string representation
+func (s MutableClusterInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MutableClusterInfo) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BrokerEBSVolumeInfo != nil {
+		v := s.BrokerEBSVolumeInfo
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "brokerEBSVolumeInfo", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.ConfigurationInfo != nil {
+		v := s.ConfigurationInfo
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "configurationInfo", v, metadata)
+	}
+	if s.NumberOfBrokerNodes != nil {
+		v := *s.NumberOfBrokerNodes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "numberOfBrokerNodes", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -763,6 +1152,37 @@ func (s StorageInfo) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Details for client authentication using TLS.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Tls
+type Tls struct {
+	_ struct{} `type:"structure"`
+
+	// List of ACM Certificate Authority ARNs.
+	CertificateAuthorityArnList []string `locationName:"certificateAuthorityArnList" type:"list"`
+}
+
+// String returns the string representation
+func (s Tls) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Tls) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CertificateAuthorityArnList != nil {
+		v := s.CertificateAuthorityArnList
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "certificateAuthorityArnList", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Zookeeper node information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ZookeeperNodeInfo
 type ZookeeperNodeInfo struct {
@@ -773,6 +1193,9 @@ type ZookeeperNodeInfo struct {
 
 	// The virtual private cloud (VPC) IP address of the client.
 	ClientVpcIpAddress *string `locationName:"clientVpcIpAddress" type:"string"`
+
+	// Endpoints for accessing the ZooKeeper.
+	Endpoints []string `locationName:"endpoints" type:"list"`
 
 	// The role-specific ID for Zookeeper.
 	ZookeeperId *float64 `locationName:"zookeeperId" type:"double"`
@@ -799,6 +1222,18 @@ func (s ZookeeperNodeInfo) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "clientVpcIpAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Endpoints != nil {
+		v := s.Endpoints
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "endpoints", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	if s.ZookeeperId != nil {
 		v := *s.ZookeeperId

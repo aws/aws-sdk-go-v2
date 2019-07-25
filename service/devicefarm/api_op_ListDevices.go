@@ -21,7 +21,7 @@ type ListDevicesInput struct {
 	// operator, and one or more values.
 	//
 	//    * Attribute: The aspect of a device such as platform or model used as
-	//    the selction criteria in a device filter. Allowed values include: ARN:
+	//    the selection criteria in a device filter. Allowed values include: ARN:
 	//    The Amazon Resource Name (ARN) of the device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".
 	//    PLATFORM: The device platform. Valid values are "ANDROID" or "IOS". OS_VERSION:
 	//    The operating system version. For example, "10.3.2". MODEL: The device

@@ -12,8 +12,81 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// Describes a quota for an AWS account, for example, the number of DB instances
-// allowed.
+// Describes a quota for an AWS account.
+//
+// The following are account quotas:
+//
+//    * AllocatedStorage - The total allocated storage per account, in GiB.
+//    The used value is the total allocated storage in the account, in GiB.
+//
+//    * AuthorizationsPerDBSecurityGroup - The number of ingress rules per DB
+//    security group. The used value is the highest number of ingress rules
+//    in a DB security group in the account. Other DB security groups in the
+//    account might have a lower number of ingress rules.
+//
+//    * CustomEndpointsPerDBCluster - The number of custom endpoints per DB
+//    cluster. The used value is the highest number of custom endpoints in a
+//    DB clusters in the account. Other DB clusters in the account might have
+//    a lower number of custom endpoints.
+//
+//    * DBClusterParameterGroups - The number of DB cluster parameter groups
+//    per account, excluding default parameter groups. The used value is the
+//    count of nondefault DB cluster parameter groups in the account.
+//
+//    * DBClusterRoles - The number of associated AWS Identity and Access Management
+//    (IAM) roles per DB cluster. The used value is the highest number of associated
+//    IAM roles for a DB cluster in the account. Other DB clusters in the account
+//    might have a lower number of associated IAM roles.
+//
+//    * DBClusters - The number of DB clusters per account. The used value is
+//    the count of DB clusters in the account.
+//
+//    * DBInstanceRoles - The number of associated IAM roles per DB instance.
+//    The used value is the highest number of associated IAM roles for a DB
+//    instance in the account. Other DB instances in the account might have
+//    a lower number of associated IAM roles.
+//
+//    * DBInstances - The number of DB instances per account. The used value
+//    is the count of the DB instances in the account.
+//
+//    * DBParameterGroups - The number of DB parameter groups per account, excluding
+//    default parameter groups. The used value is the count of nondefault DB
+//    parameter groups in the account.
+//
+//    * DBSecurityGroups - The number of DB security groups (not VPC security
+//    groups) per account, excluding the default security group. The used value
+//    is the count of nondefault DB security groups in the account.
+//
+//    * DBSubnetGroups - The number of DB subnet groups per account. The used
+//    value is the count of the DB subnet groups in the account.
+//
+//    * EventSubscriptions - The number of event subscriptions per account.
+//    The used value is the count of the event subscriptions in the account.
+//
+//    * ManualSnapshots - The number of manual DB snapshots per account. The
+//    used value is the count of the manual DB snapshots in the account.
+//
+//    * OptionGroups - The number of DB option groups per account, excluding
+//    default option groups. The used value is the count of nondefault DB option
+//    groups in the account.
+//
+//    * ReadReplicasPerMaster - The number of Read Replicas per DB instance.
+//    The used value is the highest number of Read Replicas for a DB instance
+//    in the account. Other DB instances in the account might have a lower number
+//    of Read Replicas.
+//
+//    * ReservedDBInstances - The number of reserved DB instances per account.
+//    The used value is the count of the active reserved DB instances in the
+//    account.
+//
+//    * SubnetsPerDBSubnetGroup - The number of subnets per DB subnet group.
+//    The used value is highest number of subnets for a DB subnet group in the
+//    account. Other DB subnet groups in the account might have a lower number
+//    of subnets.
+//
+// For more information, see Limits (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)
+// in the Amazon RDS User Guide and Limits (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html)
+// in the Amazon Aurora User Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AccountQuota
 type AccountQuota struct {
 	_ struct{} `type:"structure"`
@@ -153,6 +226,22 @@ func (s CloudwatchLogsExportConfiguration) String() string {
 type DBCluster struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the Amazon Kinesis data stream used for the database activity
+	// stream.
+	ActivityStreamKinesisStreamName *string `type:"string"`
+
+	// The AWS KMS key identifier used for encrypting messages in the database activity
+	// stream.
+	ActivityStreamKmsKeyId *string `type:"string"`
+
+	// The mode of the database activity stream. Database events such as a change
+	// or access generate an activity stream event. The database session can handle
+	// these events either synchronously or asynchronously.
+	ActivityStreamMode ActivityStreamMode `type:"string" enum:"true"`
+
+	// The status of the database activity stream.
+	ActivityStreamStatus ActivityStreamStatus `type:"string" enum:"true"`
+
 	// For all database engines except Amazon Aurora, AllocatedStorage specifies
 	// the allocated storage size in gibibytes (GiB). For Aurora, AllocatedStorage
 	// always returns 1, because Aurora DB cluster storage size is not fixed, but
@@ -202,6 +291,10 @@ type DBCluster struct {
 	// DB cluster.
 	CopyTagsToSnapshot *bool `type:"boolean"`
 
+	// Specifies whether the DB cluster is a clone of a DB cluster owned by a different
+	// AWS account.
+	CrossAccountClone *bool `type:"boolean"`
+
 	// Identifies all custom endpoints associated with the cluster.
 	CustomEndpoints []string `type:"list"`
 
@@ -236,7 +329,7 @@ type DBCluster struct {
 	DbClusterResourceId *string `type:"string"`
 
 	// Indicates if the DB cluster has deletion protection enabled. The database
-	// can't be deleted when this value is set to true.
+	// can't be deleted when deletion protection is enabled.
 	DeletionProtection *bool `type:"boolean"`
 
 	// The earliest time to which a DB cluster can be backtracked.
@@ -270,27 +363,22 @@ type DBCluster struct {
 	// Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
 	HostedZoneId *string `type:"string"`
 
-	//
-	// HTTP endpoint functionality is in beta for Aurora Serverless and is subject
-	// to change.
-	//
-	// Value that is true if the HTTP endpoint for an Aurora Serverless DB cluster
-	// is enabled and false otherwise.
+	// A value that indicates whether the HTTP endpoint for an Aurora Serverless
+	// DB cluster is enabled.
 	//
 	// When enabled, the HTTP endpoint provides a connectionless web service API
 	// for running SQL queries on the Aurora Serverless DB cluster. You can also
 	// query your database from inside the RDS console with the query editor.
 	//
-	// For more information about Aurora Serverless, see Using Amazon Aurora Serverless
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html)
+	// For more information, see Using the Data API for Aurora Serverless (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html)
 	// in the Amazon Aurora User Guide.
 	HttpEndpointEnabled *bool `type:"boolean"`
 
-	// True if mapping of AWS Identity and Access Management (IAM) accounts to database
-	// accounts is enabled, and otherwise false.
+	// A value that indicates whether the mapping of AWS Identity and Access Management
+	// (IAM) accounts to database accounts is enabled.
 	IAMDatabaseAuthenticationEnabled *bool `type:"boolean"`
 
-	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted
+	// If StorageEncrypted is enabled, the AWS KMS key identifier for the encrypted
 	// DB cluster.
 	KmsKeyId *string `type:"string"`
 
@@ -476,8 +564,8 @@ type DBClusterMember struct {
 	// Specifies the instance identifier for this member of the DB cluster.
 	DBInstanceIdentifier *string `type:"string"`
 
-	// Value that is true if the cluster member is the primary instance for the
-	// DB cluster and false otherwise.
+	// A value that indicates whehter the cluster member is the primary instance
+	// for the DB cluster.
 	IsClusterWriter *bool `type:"boolean"`
 
 	// A value that specifies the order in which an Aurora Replica is promoted to
@@ -867,8 +955,8 @@ type DBInstance struct {
 	DbiResourceId *string `type:"string"`
 
 	// Indicates if the DB instance has deletion protection enabled. The database
-	// can't be deleted when this value is set to true. For more information, see
-	// Deleting a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
+	// can't be deleted when deletion protection is enabled. For more information,
+	// see Deleting a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
 	DeletionProtection *bool `type:"boolean"`
 
 	// The Active Directory Domain membership records associated with the DB instance.
@@ -930,6 +1018,10 @@ type DBInstance struct {
 
 	// Contains the master username for the DB instance.
 	MasterUsername *string `type:"string"`
+
+	// The upper limit to which Amazon RDS can automatically scale the storage of
+	// the DB instance.
+	MaxAllocatedStorage *int64 `type:"integer"`
 
 	// The interval, in seconds, between points when Enhanced Monitoring metrics
 	// are collected for the DB instance.
@@ -2301,6 +2393,10 @@ type OrderableDBInstanceOption struct {
 	// True if a DB instance supports Performance Insights, otherwise false.
 	SupportsPerformanceInsights *bool `type:"boolean"`
 
+	// Whether or not Amazon RDS can automatically scale storage for DB instances
+	// that use the specified instance class.
+	SupportsStorageAutoscaling *bool `type:"boolean"`
+
 	// Indicates whether a DB instance supports encrypted storage.
 	SupportsStorageEncryption *bool `type:"boolean"`
 
@@ -2722,7 +2818,7 @@ func (s RestoreWindow) String() string {
 type ScalingConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// A value that specifies whether to allow or disallow automatic pause for an
+	// A value that indicates whether to allow or disallow automatic pause for an
 	// Aurora DB cluster in serverless DB engine mode. A DB cluster can be paused
 	// only when it's idle (it has no connections).
 	//
@@ -2733,14 +2829,14 @@ type ScalingConfiguration struct {
 
 	// The maximum capacity for an Aurora DB cluster in serverless DB engine mode.
 	//
-	// Valid capacity values are 2, 4, 8, 16, 32, 64, 128, and 256.
+	// Valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.
 	//
 	// The maximum capacity must be greater than or equal to the minimum capacity.
 	MaxCapacity *int64 `type:"integer"`
 
 	// The minimum capacity for an Aurora DB cluster in serverless DB engine mode.
 	//
-	// Valid capacity values are 2, 4, 8, 16, 32, 64, 128, and 256.
+	// Valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.
 	//
 	// The minimum capacity must be less than or equal to the maximum capacity.
 	MinCapacity *int64 `type:"integer"`
@@ -2751,11 +2847,14 @@ type ScalingConfiguration struct {
 	// The action to take when the timeout is reached, either ForceApplyCapacityChange
 	// or RollbackCapacityChange.
 	//
-	// ForceApplyCapacityChange, the default, sets the capacity to the specified
-	// value as soon as possible.
+	// ForceApplyCapacityChange sets the capacity to the specified value as soon
+	// as possible.
 	//
-	// RollbackCapacityChange ignores the capacity change if a scaling point is
-	// not found in the timeout period.
+	// RollbackCapacityChange, the default, ignores the capacity change if a scaling
+	// point is not found in the timeout period.
+	//
+	// If you specify ForceApplyCapacityChange, connections that prevent Aurora
+	// Serverless from finding a scaling point might be dropped.
 	//
 	// For more information, see Autoscaling for Aurora Serverless (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling)
 	// in the Amazon Aurora User Guide.
@@ -2954,6 +3053,10 @@ type ValidStorageOptions struct {
 
 	// The valid storage types for your DB instance. For example, gp2, io1.
 	StorageType *string `type:"string"`
+
+	// Whether or not Amazon RDS can automatically scale storage for DB instances
+	// that use the new instance class.
+	SupportsStorageAutoscaling *bool `type:"boolean"`
 }
 
 // String returns the string representation

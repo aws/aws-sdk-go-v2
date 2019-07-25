@@ -267,7 +267,7 @@ func (s Encryption) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains the description of an Amazon Glacier job.
+// Contains the description of an Amazon S3 Glacier job.
 type GlacierJobDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -311,7 +311,7 @@ type GlacierJobDescription struct {
 	// The job description provided when initiating the job.
 	JobDescription *string `type:"string"`
 
-	// An opaque string that identifies an Amazon Glacier job.
+	// An opaque string that identifies an Amazon S3 Glacier job.
 	JobId *string `type:"string"`
 
 	// Contains the job output location.
@@ -676,7 +676,7 @@ type InventoryRetrievalJobDescription struct {
 	// An opaque string that represents where to continue pagination of the vault
 	// inventory retrieval results. You use the marker in a new InitiateJob request
 	// to obtain additional inventory items. If there are no more inventory items,
-	// this value is null. For more information, see Range Inventory Retrieval (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html#api-initiate-job-post-vault-inventory-list-filtering).
+	// this value is null. For more information, see Range Inventory Retrieval (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html#api-initiate-job-post-vault-inventory-list-filtering).
 	Marker *string `type:"string"`
 
 	// The start of the date range in Universal Coordinated Time (UTC) for vault
@@ -823,9 +823,10 @@ type JobParameters struct {
 	// request.
 	RetrievalByteRange *string `type:"string"`
 
-	// The Amazon SNS topic ARN to which Amazon Glacier sends a notification when
-	// the job is completed and the output is ready for you to download. The specified
-	// topic publishes the notification to its subscribers. The SNS topic must exist.
+	// The Amazon SNS topic ARN to which Amazon S3 Glacier sends a notification
+	// when the job is completed and the output is ready for you to download. The
+	// specified topic publishes the notification to its subscribers. The SNS topic
+	// must exist.
 	SNSTopic *string `type:"string"`
 
 	// Contains the parameters that define a job.
@@ -997,8 +998,8 @@ type PartListElement struct {
 	// The byte range of a part, inclusive of the upper value of the range.
 	RangeInBytes *string `type:"string"`
 
-	// The SHA256 tree hash value that Amazon Glacier calculated for the part. This
-	// field is never null.
+	// The SHA256 tree hash value that Amazon S3 Glacier calculated for the part.
+	// This field is never null.
 	SHA256TreeHash *string `type:"string"`
 }
 
@@ -1358,7 +1359,7 @@ func (s VaultLockPolicy) MarshalFields(e protocol.FieldEncoder) error {
 type VaultNotificationConfig struct {
 	_ struct{} `type:"structure"`
 
-	// A list of one or more events for which Amazon Glacier will send a notification
+	// A list of one or more events for which Amazon S3 Glacier will send a notification
 	// to the specified Amazon SNS topic.
 	Events []string `type:"list"`
 

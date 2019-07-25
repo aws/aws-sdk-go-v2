@@ -10,14 +10,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CreateFieldLevelEncryptionProfileRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateFieldLevelEncryptionProfileRequest
 type CreateFieldLevelEncryptionProfileInput struct {
 	_ struct{} `type:"structure" payload:"FieldLevelEncryptionProfileConfig"`
 
 	// The request to create a field-level encryption profile.
 	//
 	// FieldLevelEncryptionProfileConfig is a required field
-	FieldLevelEncryptionProfileConfig *FieldLevelEncryptionProfileConfig `locationName:"FieldLevelEncryptionProfileConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2018-11-05/"`
+	FieldLevelEncryptionProfileConfig *FieldLevelEncryptionProfileConfig `locationName:"FieldLevelEncryptionProfileConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
 }
 
 // String returns the string representation
@@ -50,13 +50,13 @@ func (s CreateFieldLevelEncryptionProfileInput) MarshalFields(e protocol.FieldEn
 	if s.FieldLevelEncryptionProfileConfig != nil {
 		v := s.FieldLevelEncryptionProfileConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2018-11-05/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
 		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionProfileConfig", v, metadata)
 	}
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CreateFieldLevelEncryptionProfileResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateFieldLevelEncryptionProfileResult
 type CreateFieldLevelEncryptionProfileOutput struct {
 	_ struct{} `type:"structure" payload:"FieldLevelEncryptionProfile"`
 
@@ -99,7 +99,7 @@ func (s CreateFieldLevelEncryptionProfileOutput) MarshalFields(e protocol.FieldE
 	return nil
 }
 
-const opCreateFieldLevelEncryptionProfile = "CreateFieldLevelEncryptionProfile2018_11_05"
+const opCreateFieldLevelEncryptionProfile = "CreateFieldLevelEncryptionProfile2019_03_26"
 
 // CreateFieldLevelEncryptionProfileRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -113,12 +113,12 @@ const opCreateFieldLevelEncryptionProfile = "CreateFieldLevelEncryptionProfile20
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CreateFieldLevelEncryptionProfile
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateFieldLevelEncryptionProfile
 func (c *Client) CreateFieldLevelEncryptionProfileRequest(input *CreateFieldLevelEncryptionProfileInput) CreateFieldLevelEncryptionProfileRequest {
 	op := &aws.Operation{
 		Name:       opCreateFieldLevelEncryptionProfile,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2018-11-05/field-level-encryption-profile",
+		HTTPPath:   "/2019-03-26/field-level-encryption-profile",
 	}
 
 	if input == nil {

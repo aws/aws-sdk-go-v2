@@ -13,20 +13,21 @@ import (
 type DeleteAccountSettingInput struct {
 	_ struct{} `type:"structure"`
 
-	// The resource name for which to disable the new format. If serviceLongArnFormat
+	// The resource name for which to disable the account setting. If serviceLongArnFormat
 	// is specified, the ARN for your Amazon ECS services is affected. If taskLongArnFormat
 	// is specified, the ARN and resource ID for your Amazon ECS tasks is affected.
 	// If containerInstanceLongArnFormat is specified, the ARN and resource ID for
-	// your Amazon ECS container instances is affected.
+	// your Amazon ECS container instances is affected. If awsvpcTrunking is specified,
+	// the ENI limit for your Amazon ECS container instances is affected.
 	//
 	// Name is a required field
 	Name SettingName `locationName:"name" type:"string" required:"true" enum:"true"`
 
 	// The ARN of the principal, which can be an IAM user, IAM role, or the root
-	// user. If you specify the root user, it modifies the ARN and resource ID format
-	// for all IAM users, IAM roles, and the root user of the account unless an
-	// IAM user or role explicitly overrides these settings for themselves. If this
-	// field is omitted, the setting are changed only for the authenticated user.
+	// user. If you specify the root user, it disables the account setting for all
+	// IAM users, IAM roles, and the root user of the account unless an IAM user
+	// or role explicitly overrides these settings. If this field is omitted, the
+	// setting is changed only for the authenticated user.
 	PrincipalArn *string `locationName:"principalArn" type:"string"`
 }
 
@@ -66,10 +67,8 @@ const opDeleteAccountSetting = "DeleteAccountSetting"
 // DeleteAccountSettingRequest returns a request value for making API operation for
 // Amazon EC2 Container Service.
 //
-// Modifies the ARN and resource ID format of a resource for a specified IAM
-// user, IAM role, or the root user for an account. You can specify whether
-// the new ARN and resource ID format are disabled for new resources that are
-// created.
+// Disables an account setting for a specified IAM user, IAM role, or the root
+// user for an account.
 //
 //    // Example sending a request using DeleteAccountSettingRequest.
 //    req := client.DeleteAccountSettingRequest(params)

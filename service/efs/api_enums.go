@@ -60,7 +60,10 @@ type TransitionToIARules string
 
 // Enum values for TransitionToIARules
 const (
+	TransitionToIARulesAfter14Days TransitionToIARules = "AFTER_14_DAYS"
 	TransitionToIARulesAfter30Days TransitionToIARules = "AFTER_30_DAYS"
+	TransitionToIARulesAfter60Days TransitionToIARules = "AFTER_60_DAYS"
+	TransitionToIARulesAfter90Days TransitionToIARules = "AFTER_90_DAYS"
 )
 
 func (enum TransitionToIARules) MarshalValue() (string, error) {

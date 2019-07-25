@@ -19,7 +19,7 @@ type UpdateNetworkProfileInput struct {
 	// Arn is a required field
 	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
 
-	// The descriptoin of the network profile about which you are returning information.
+	// The description of the network profile about which you are returning information.
 	Description *string `locationName:"description" type:"string"`
 
 	// The data throughput rate in bits per second, as an integer from 0 to 104857600.

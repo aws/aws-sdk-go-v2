@@ -13,6 +13,10 @@ import (
 type ListTargetsByRuleInput struct {
 	_ struct{} `type:"structure"`
 
+	// The event bus associated with the rule. If you omit this, the default event
+	// bus is used.
+	EventBusName *string `min:"1" type:"string"`
+
 	// The maximum number of results to return.
 	Limit *int64 `min:"1" type:"integer"`
 
@@ -33,6 +37,9 @@ func (s ListTargetsByRuleInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTargetsByRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTargetsByRuleInput"}
+	if s.EventBusName != nil && len(*s.EventBusName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EventBusName", 1))
+	}
 	if s.Limit != nil && *s.Limit < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}

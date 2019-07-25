@@ -91,7 +91,8 @@ type SendCommandInput struct {
 	// The required and optional parameters specified in the document being run.
 	Parameters map[string][]string `type:"map"`
 
-	// The IAM role that Systems Manager uses to send notifications.
+	// The ARN of the IAM service role to use to publish Amazon Simple Notification
+	// Service (Amazon SNS) notifications for Run Command commands.
 	ServiceRoleArn *string `type:"string"`
 
 	// (Optional) An array of search criteria that targets instances using a Key,Value

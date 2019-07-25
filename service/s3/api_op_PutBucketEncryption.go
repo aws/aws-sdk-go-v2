@@ -15,14 +15,16 @@ import (
 type PutBucketEncryptionInput struct {
 	_ struct{} `type:"structure" payload:"ServerSideEncryptionConfiguration"`
 
-	// The name of the bucket for which the server-side encryption configuration
-	// is set.
+	// Specifies default encryption for a bucket using server-side encryption with
+	// Amazon S3-managed keys (SSE-S3) or AWS KMS-managed keys (SSE-KMS). For information
+	// about the Amazon S3 default encryption feature, see Amazon S3 Default Bucket
+	// Encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html)
+	// in the Amazon Simple Storage Service Developer Guide.
 	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
-	// Container for server-side encryption configuration rules. Currently S3 supports
-	// one rule only.
+	// Specifies the default server-side-encryption configuration.
 	//
 	// ServerSideEncryptionConfiguration is a required field
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration `locationName:"ServerSideEncryptionConfiguration" type:"structure" required:"true" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`

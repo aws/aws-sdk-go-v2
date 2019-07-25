@@ -20,6 +20,35 @@ func (enum AdMarkers) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// This setting allows the delivery restriction flags on SCTE-35 segmentation
+// descriptors todetermine whether a message signals an ad. Choosing "NONE"
+// means no SCTE-35 messages becomeads. Choosing "RESTRICTED" means SCTE-35
+// messages of the types specified in AdTriggers thatcontain delivery restrictions
+// will be treated as ads. Choosing "UNRESTRICTED" means SCTE-35messages of
+// the types specified in AdTriggers that do not contain delivery restrictions
+// willbe treated as ads. Choosing "BOTH" means all SCTE-35 messages of the
+// types specified inAdTriggers will be treated as ads. Note that Splice Insert
+// messages do not have these flagsand are always treated as ads if specified
+// in AdTriggers.
+type AdsOnDeliveryRestrictions string
+
+// Enum values for AdsOnDeliveryRestrictions
+const (
+	AdsOnDeliveryRestrictionsNone         AdsOnDeliveryRestrictions = "NONE"
+	AdsOnDeliveryRestrictionsRestricted   AdsOnDeliveryRestrictions = "RESTRICTED"
+	AdsOnDeliveryRestrictionsUnrestricted AdsOnDeliveryRestrictions = "UNRESTRICTED"
+	AdsOnDeliveryRestrictionsBoth         AdsOnDeliveryRestrictions = "BOTH"
+)
+
+func (enum AdsOnDeliveryRestrictions) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AdsOnDeliveryRestrictions) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EncryptionMethod string
 
 // Enum values for EncryptionMethod
@@ -121,6 +150,29 @@ func (enum StreamOrder) MarshalValue() (string, error) {
 }
 
 func (enum StreamOrder) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type __AdTriggersElement string
+
+// Enum values for __AdTriggersElement
+const (
+	__AdTriggersElementSpliceInsert                           __AdTriggersElement = "SPLICE_INSERT"
+	__AdTriggersElementBreak                                  __AdTriggersElement = "BREAK"
+	__AdTriggersElementProviderAdvertisement                  __AdTriggersElement = "PROVIDER_ADVERTISEMENT"
+	__AdTriggersElementDistributorAdvertisement               __AdTriggersElement = "DISTRIBUTOR_ADVERTISEMENT"
+	__AdTriggersElementProviderPlacementOpportunity           __AdTriggersElement = "PROVIDER_PLACEMENT_OPPORTUNITY"
+	__AdTriggersElementDistributorPlacementOpportunity        __AdTriggersElement = "DISTRIBUTOR_PLACEMENT_OPPORTUNITY"
+	__AdTriggersElementProviderOverlayPlacementOpportunity    __AdTriggersElement = "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY"
+	__AdTriggersElementDistributorOverlayPlacementOpportunity __AdTriggersElement = "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
+)
+
+func (enum __AdTriggersElement) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum __AdTriggersElement) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

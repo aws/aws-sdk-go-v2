@@ -58,17 +58,18 @@ type Certificate struct {
 	// The date that the certificate was created.
 	CertificateCreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The customer-assigned name of the certificate. Valid characters are A-z and
-	// 0-9.
+	// A customer-assigned name for the certificate. Identifiers must begin with
+	// a letter; must contain only ASCII letters, digits, and hyphens; and must
+	// not end with a hyphen or contain two consecutive hyphens.
 	CertificateIdentifier *string `type:"string"`
 
 	// The owner of the certificate.
 	CertificateOwner *string `type:"string"`
 
-	// The contents of the .pem X.509 certificate file for the certificate.
+	// The contents of a .pem file, which contains an X.509 certificate.
 	CertificatePem *string `type:"string"`
 
-	// The location of the imported Oracle Wallet certificate for use with SSL.
+	// The location of an imported Oracle Wallet certificate for use with SSL.
 	//
 	// CertificateWallet is automatically base64 encoded/decoded by the SDK.
 	CertificateWallet []byte `type:"blob"`
@@ -172,7 +173,7 @@ func (s *DynamoDbSettings) Validate() error {
 type ElasticsearchSettings struct {
 	_ struct{} `type:"structure"`
 
-	// The endpoint for the ElasticSearch cluster.
+	// The endpoint for the Elasticsearch cluster.
 	//
 	// EndpointUri is a required field
 	EndpointUri *string `type:"string" required:"true"`
@@ -259,16 +260,16 @@ type Endpoint struct {
 	// hyphen or contain two consecutive hyphens.
 	EndpointIdentifier *string `type:"string"`
 
-	// The type of endpoint.
+	// The type of endpoint. Valid values are source and target.
 	EndpointType ReplicationEndpointTypeValue `type:"string" enum:"true"`
 
 	// The expanded name for the engine name. For example, if the EngineName parameter
 	// is "aurora," this value would be "Amazon Aurora MySQL."
 	EngineDisplayName *string `type:"string"`
 
-	// The database engine name. Valid values, depending on the EndPointType, include
+	// The database engine name. Valid values, depending on the EndpointType, include
 	// mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3,
-	// db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.
+	// db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.
 	EngineName *string `type:"string"`
 
 	// Value returned by a call to CreateEndpoint that can be used for cross-account
@@ -286,11 +287,14 @@ type Endpoint struct {
 	// see the KinesisSettings structure.
 	KinesisSettings *KinesisSettings `type:"structure"`
 
-	// The AWS KMS key identifier that is used to encrypt the content on the replication
-	// instance. If you don't specify a value for the KmsKeyId parameter, then AWS
-	// DMS uses your default encryption key. AWS KMS creates the default encryption
-	// key for your AWS account. Your AWS account has a different default encryption
-	// key for each AWS Region.
+	// An AWS KMS key identifier that is used to encrypt the connection parameters
+	// for the endpoint.
+	//
+	// If you don't specify a value for the KmsKeyId parameter, then AWS DMS uses
+	// your default encryption key.
+	//
+	// AWS KMS creates the default encryption key for your AWS account. Your AWS
+	// account has a different default encryption key for each AWS Region.
 	KmsKeyId *string `type:"string"`
 
 	// The settings for the MongoDB source endpoint. For more information, see the
@@ -300,7 +304,7 @@ type Endpoint struct {
 	// The port value used to access the endpoint.
 	Port *int64 `type:"integer"`
 
-	// Settings for the Amazon Redshift endpoint
+	// Settings for the Amazon Redshift endpoint.
 	RedshiftSettings *RedshiftSettings `type:"structure"`
 
 	// The settings for the S3 target endpoint. For more information, see the S3Settings
@@ -313,11 +317,7 @@ type Endpoint struct {
 	// The Amazon Resource Name (ARN) used by the service access IAM role.
 	ServiceAccessRoleArn *string `type:"string"`
 
-	// The SSL mode used to connect to the endpoint.
-	//
-	// SSL mode can be one of four values: none, require, verify-ca, verify-full.
-	//
-	// The default value is none.
+	// The SSL mode used to connect to the endpoint. The default value is none.
 	SslMode DmsSslModeValue `type:"string" enum:"true"`
 
 	// The status of the endpoint.
@@ -345,16 +345,12 @@ type Event struct {
 	// The event message.
 	Message *string `type:"string"`
 
-	// The identifier of the event source. An identifier must begin with a letter
-	// and must contain only ASCII letters, digits, and hyphens; it cannot end with
-	// a hyphen or contain two consecutive hyphens.
-	//
-	// Constraints:replication instance, endpoint, migration task
+	// The identifier of an event source.
 	SourceIdentifier *string `type:"string"`
 
 	// The type of AWS DMS resource that generates events.
 	//
-	// Valid values: replication-instance | endpoint | migration-task
+	// Valid values: replication-instance | endpoint | replication-task
 	SourceType SourceType `type:"string" enum:"true"`
 }
 
@@ -367,13 +363,13 @@ func (s Event) String() string {
 type EventCategoryGroup struct {
 	_ struct{} `type:"structure"`
 
-	// A list of event categories for a SourceType that you want to subscribe to.
+	// A list of event categories from a source type that you've chosen.
 	EventCategories []string `type:"list"`
 
 	// The type of AWS DMS resource that generates events.
 	//
 	// Valid values: replication-instance | replication-server | security-group
-	// | migration-task
+	// | replication-task
 	SourceType *string `type:"string"`
 }
 
@@ -407,7 +403,7 @@ type EventSubscription struct {
 	// The type of AWS DMS resource that generates events.
 	//
 	// Valid values: replication-instance | replication-server | security-group
-	// | migration-task
+	// | replication-task
 	SourceType *string `type:"string"`
 
 	// The status of the AWS DMS event notification subscription.
@@ -567,7 +563,7 @@ func (s MongoDbSettings) String() string {
 type OrderableReplicationInstance struct {
 	_ struct{} `type:"structure"`
 
-	// List of availability zones for this replication instance.
+	// List of Availability Zones for this replication instance.
 	AvailabilityZones []string `type:"list"`
 
 	// The default amount of storage (in gigabytes) that is allocated for the replication
@@ -588,6 +584,12 @@ type OrderableReplicationInstance struct {
 	// The minimum amount of storage (in gigabytes) that can be allocated for the
 	// replication instance.
 	MinAllocatedStorage *int64 `type:"integer"`
+
+	// The value returned when the specified EngineVersion of the replication instance
+	// is in Beta or test mode. This indicates some features might not work as expected.
+	//
+	// AWS DMS supports ReleaseStatus in versions 3.1.4 and later.
+	ReleaseStatus ReleaseStatusValues `type:"string" enum:"true"`
 
 	// The compute and memory capacity of the replication instance.
 	//
@@ -646,65 +648,69 @@ func (s PendingMaintenanceAction) String() string {
 type RedshiftSettings struct {
 	_ struct{} `type:"structure"`
 
-	// Allows any date format, including invalid formats such as 00/00/00 00:00:00,
-	// to be loaded without generating an error. You can choose TRUE or FALSE (default).
+	// A value that indicates to allow any date format, including invalid formats
+	// such as 00/00/00 00:00:00, to be loaded without generating an error. You
+	// can choose true or false (the default).
 	//
 	// This parameter applies only to TIMESTAMP and DATE columns. Always use ACCEPTANYDATE
-	// with the DATEFORMAT parameter. If the date format for the data does not match
+	// with the DATEFORMAT parameter. If the date format for the data doesn't match
 	// the DATEFORMAT specification, Amazon Redshift inserts a NULL value into that
 	// field.
 	AcceptAnyDate *bool `type:"boolean"`
 
-	// Code to run after connecting. This should be the code, not a filename.
+	// Code to run after connecting. This parameter should contain the code itself,
+	// not the name of a file containing the code.
 	AfterConnectScript *string `type:"string"`
 
-	// The location where the CSV files are stored before being uploaded to the
-	// S3 bucket.
+	// The location where the comma-separated value (.csv) files are stored before
+	// being uploaded to the S3 bucket.
 	BucketFolder *string `type:"string"`
 
 	// The name of the S3 bucket you want to use
 	BucketName *string `type:"string"`
 
-	// Sets the amount of time to wait (in milliseconds) before timing out, beginning
-	// from when you initially establish a connection.
+	// A value that sets the amount of time to wait (in milliseconds) before timing
+	// out, beginning from when you initially establish a connection.
 	ConnectionTimeout *int64 `type:"integer"`
 
-	// The name of the Amazon Redshift data warehouse (service) you are working
+	// The name of the Amazon Redshift data warehouse (service) that you are working
 	// with.
 	DatabaseName *string `type:"string"`
 
-	// The date format you are using. Valid values are auto (case-sensitive), your
-	// date format string enclosed in quotes, or NULL. If this is left unset (NULL),
-	// it defaults to a format of 'YYYY-MM-DD'. Using auto recognizes most strings,
-	// even some that are not supported when you use a date format string.
+	// The date format that you are using. Valid values are auto (case-sensitive),
+	// your date format string enclosed in quotes, or NULL. If this parameter is
+	// left unset (NULL), it defaults to a format of 'YYYY-MM-DD'. Using auto recognizes
+	// most strings, even some that aren't supported when you use a date format
+	// string.
 	//
 	// If your date and time values use formats different from each other, set this
 	// to auto.
 	DateFormat *string `type:"string"`
 
-	// Specifies whether AWS DMS should migrate empty CHAR and VARCHAR fields as
-	// NULL. A value of TRUE sets empty CHAR and VARCHAR fields to null. The default
-	// is FALSE.
+	// A value that specifies whether AWS DMS should migrate empty CHAR and VARCHAR
+	// fields as NULL. A value of true sets empty CHAR and VARCHAR fields to null.
+	// The default is false.
 	EmptyAsNull *bool `type:"boolean"`
 
-	// The type of server side encryption you want to use for your data. This is
-	// part of the endpoint settings or the extra connections attributes for Amazon
-	// S3. You can choose either SSE_S3 (default) or SSE_KMS. To use SSE_S3, create
-	// an IAM role with a policy that allows "arn:aws:s3:::*" to use the following
-	// actions: "s3:PutObject", "s3:ListBucket".
+	// The type of server-side encryption that you want to use for your data. This
+	// encryption type is part of the endpoint settings or the extra connections
+	// attributes for Amazon S3. You can choose either SSE_S3 (the default) or SSE_KMS.
+	// To use SSE_S3, create an AWS Identity and Access Management (IAM) role with
+	// a policy that allows "arn:aws:s3:::*" to use the following actions: "s3:PutObject",
+	// "s3:ListBucket"
 	EncryptionMode EncryptionModeValue `type:"string" enum:"true"`
 
-	// Specifies the number of threads used to upload a single file. This accepts
-	// a value between 1 and 64. It defaults to 10.
+	// The number of threads used to upload a single file. This parameter accepts
+	// a value from 1 through 64. It defaults to 10.
 	FileTransferUploadStreams *int64 `type:"integer"`
 
-	// Sets the amount of time to wait (in milliseconds) before timing out, beginning
+	// The amount of time to wait (in milliseconds) before timing out, beginning
 	// from when you begin loading.
 	LoadTimeout *int64 `type:"integer"`
 
-	// Specifies the maximum size (in KB) of any CSV file used to transfer data
-	// to Amazon Redshift. This accepts a value between 1 and 1048576. It defaults
-	// to 32768 KB (32 MB).
+	// The maximum size (in KB) of any .csv file used to transfer data to Amazon
+	// Redshift. This accepts a value from 1 through 1,048,576. It defaults to 32,768
+	// KB (32 MB).
 	MaxFileSize *int64 `type:"integer"`
 
 	// The password for the user named in the username property.
@@ -713,54 +719,56 @@ type RedshiftSettings struct {
 	// The port number for Amazon Redshift. The default value is 5439.
 	Port *int64 `type:"integer"`
 
-	// Removes surrounding quotation marks from strings in the incoming data. All
-	// characters within the quotation marks, including delimiters, are retained.
-	// Choose TRUE to remove quotation marks. The default is FALSE.
+	// A value that specifies to remove surrounding quotation marks from strings
+	// in the incoming data. All characters within the quotation marks, including
+	// delimiters, are retained. Choose true to remove quotation marks. The default
+	// is false.
 	RemoveQuotes *bool `type:"boolean"`
 
-	// Replaces invalid characters specified in ReplaceInvalidChars, substituting
-	// the specified value instead. The default is "?".
+	// A value that specifies to replaces the invalid characters specified in ReplaceInvalidChars,
+	// substituting the specified characters instead. The default is "?".
 	ReplaceChars *string `type:"string"`
 
-	// A list of chars you want to replace. Use with ReplaceChars.
+	// A list of characters that you want to replace. Use with ReplaceChars.
 	ReplaceInvalidChars *string `type:"string"`
 
 	// The name of the Amazon Redshift cluster you are using.
 	ServerName *string `type:"string"`
 
-	// If you are using SSE_KMS for the EncryptionMode, provide the KMS Key ID.
-	// The key you use needs an attached policy that enables IAM user permissions
-	// and allows use of the key.
+	// The AWS KMS key ID. If you are using SSE_KMS for the EncryptionMode, provide
+	// this key ID. The key that you use needs an attached policy that enables IAM
+	// user permissions and allows use of the key.
 	ServerSideEncryptionKmsKeyId *string `type:"string"`
 
-	// The ARN of the role that has access to the Redshift service.
+	// The Amazon Resource Name (ARN) of the IAM role that has access to the Amazon
+	// Redshift service.
 	ServiceAccessRoleArn *string `type:"string"`
 
-	// The time format you want to use. Valid values are auto (case-sensitive),
+	// The time format that you want to use. Valid values are auto (case-sensitive),
 	// 'timeformat_string', 'epochsecs', or 'epochmillisecs'. It defaults to 10.
-	// Using auto recognizes most strings, even some that are not supported when
+	// Using auto recognizes most strings, even some that aren't supported when
 	// you use a time format string.
 	//
 	// If your date and time values use formats different from each other, set this
-	// to auto.
+	// parameter to auto.
 	TimeFormat *string `type:"string"`
 
-	// Removes the trailing white space characters from a VARCHAR string. This parameter
-	// applies only to columns with a VARCHAR data type. Choose TRUE to remove unneeded
-	// white space. The default is FALSE.
+	// A value that specifies to remove the trailing white space characters from
+	// a VARCHAR string. This parameter applies only to columns with a VARCHAR data
+	// type. Choose true to remove unneeded white space. The default is false.
 	TrimBlanks *bool `type:"boolean"`
 
-	// Truncates data in columns to the appropriate number of characters, so that
-	// it fits in the column. Applies only to columns with a VARCHAR or CHAR data
-	// type, and rows with a size of 4 MB or less. Choose TRUE to truncate data.
-	// The default is FALSE.
+	// A value that specifies to truncate data in columns to the appropriate number
+	// of characters, so that the data fits in the column. This parameter applies
+	// only to columns with a VARCHAR or CHAR data type, and rows with a size of
+	// 4 MB or less. Choose true to truncate data. The default is false.
 	TruncateColumns *bool `type:"boolean"`
 
 	// An Amazon Redshift user name for a registered user.
 	Username *string `type:"string"`
 
-	// The size of the write buffer to use in rows. Valid values range from 1 to
-	// 2048. Defaults to 1024. Use this setting to tune performance.
+	// The size of the write buffer to use in rows. Valid values range from 1 through
+	// 2,048. The default is 1,024. Use this setting to tune performance.
 	WriteBufferSize *int64 `type:"integer"`
 }
 
@@ -822,15 +830,19 @@ type ReplicationInstance struct {
 	// The time the replication instance was created.
 	InstanceCreateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The AWS KMS key identifier that is used to encrypt the content on the replication
-	// instance. If you don't specify a value for the KmsKeyId parameter, then AWS
-	// DMS uses your default encryption key. AWS KMS creates the default encryption
-	// key for your AWS account. Your AWS account has a different default encryption
-	// key for each AWS Region.
+	// An AWS KMS key identifier that is used to encrypt the data on the replication
+	// instance.
+	//
+	// If you don't specify a value for the KmsKeyId parameter, then AWS DMS uses
+	// your default encryption key.
+	//
+	// AWS KMS creates the default encryption key for your AWS account. Your AWS
+	// account has a different default encryption key for each AWS Region.
 	KmsKeyId *string `type:"string"`
 
-	// Specifies if the replication instance is a Multi-AZ deployment. You cannot
-	// set the AvailabilityZone parameter if the Multi-AZ parameter is set to true.
+	// Specifies whether the replication instance is a Multi-AZ deployment. You
+	// cannot set the AvailabilityZone parameter if the Multi-AZ parameter is set
+	// to true.
 	MultiAZ *bool `type:"boolean"`
 
 	// The pending modification values.
@@ -870,13 +882,13 @@ type ReplicationInstance struct {
 	// The private IP address of the replication instance.
 	ReplicationInstancePrivateIpAddress *string `deprecated:"true" type:"string"`
 
-	// The private IP address of the replication instance.
+	// One or more private IP addresses for the replication instance.
 	ReplicationInstancePrivateIpAddresses []string `type:"list"`
 
 	// The public IP address of the replication instance.
 	ReplicationInstancePublicIpAddress *string `deprecated:"true" type:"string"`
 
-	// The public IP address of the replication instance.
+	// One or more public IP addresses for the replication instance.
 	ReplicationInstancePublicIpAddresses []string `type:"list"`
 
 	// The status of the replication instance.
@@ -928,8 +940,9 @@ type ReplicationPendingModifiedValues struct {
 	// The engine version number of the replication instance.
 	EngineVersion *string `type:"string"`
 
-	// Specifies if the replication instance is a Multi-AZ deployment. You cannot
-	// set the AvailabilityZone parameter if the Multi-AZ parameter is set to true.
+	// Specifies whether the replication instance is a Multi-AZ deployment. You
+	// cannot set the AvailabilityZone parameter if the Multi-AZ parameter is set
+	// to true.
 	MultiAZ *bool `type:"boolean"`
 
 	// The compute and memory capacity of the replication instance.
@@ -948,7 +961,7 @@ func (s ReplicationPendingModifiedValues) String() string {
 type ReplicationSubnetGroup struct {
 	_ struct{} `type:"structure"`
 
-	// The description of the replication subnet group.
+	// A description for the replication subnet group.
 	ReplicationSubnetGroupDescription *string `type:"string"`
 
 	// The identifier of the replication instance subnet group.
@@ -974,8 +987,8 @@ type ReplicationTask struct {
 	_ struct{} `type:"structure"`
 
 	// Indicates when you want a change data capture (CDC) operation to start. Use
-	// either CdcStartPosition or CdcStartTime to specify when you want a CDC operation
-	// to start. Specifying both values results in an error.
+	// either CdcStartPosition or CdcStartTime to specify when you want the CDC
+	// operation to start. Specifying both values results in an error.
 	//
 	// The value can be in date, checkpoint, or LSN/SCN format.
 	//
@@ -1127,7 +1140,7 @@ type ResourcePendingMaintenanceActions struct {
 
 	// The Amazon Resource Name (ARN) of the DMS resource that the pending maintenance
 	// action applies to. For information about creating an ARN, see Constructing
-	// an Amazon Resource Name (ARN) (https://docs.aws.amazon.com/dms/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN)
+	// an Amazon Resource Name (ARN) for AWS DMS (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.AWS.ARN.html)
 	// in the DMS documentation.
 	ResourceIdentifier *string `type:"string"`
 }
@@ -1143,24 +1156,37 @@ type S3Settings struct {
 	_ struct{} `type:"structure"`
 
 	// An optional parameter to set a folder name in the S3 bucket. If provided,
-	// tables are created in the path <bucketFolder>/<schema_name>/<table_name>/.
-	// If this parameter is not specified, then the path used is <schema_name>/<table_name>/.
+	// tables are created in the path bucketFolder/schema_name/table_name/. If this
+	// parameter is not specified, then the path used is schema_name/table_name/.
 	BucketFolder *string `type:"string"`
 
 	// The name of the S3 bucket.
 	BucketName *string `type:"string"`
 
-	// Option to write only INSERT operations to the comma-separated value (CSV)
-	// output files. By default, the first field in a CSV record contains the letter
-	// I (insert), U (update) or D (delete) to indicate whether the row was inserted,
-	// updated, or deleted at the source database. If cdcInsertsOnly is set to true,
-	// then only INSERTs are recorded in the CSV file, without the I annotation
-	// on each line. Valid values are TRUE and FALSE.
+	// A value that enables a change data capture (CDC) load to write only INSERT
+	// operations to .csv or columnar storage (.parquet) output files. By default
+	// (the false setting), the first field in a .csv or .parquet record contains
+	// the letter I (INSERT), U (UPDATE), or D (DELETE). These values indicate whether
+	// the row was inserted, updated, or deleted at the source database for a CDC
+	// load to the target.
+	//
+	// If cdcInsertsOnly is set to true or y, only INSERTs from the source database
+	// are migrated to the .csv or .parquet file. For .csv format only, how these
+	// INSERTs are recorded depends on the value of IncludeOpForFullLoad. If IncludeOpForFullLoad
+	// is set to true, the first field of every CDC record is set to I to indicate
+	// the INSERT operation at the source. If IncludeOpForFullLoad is set to false,
+	// every CDC record is written without a first field to indicate the INSERT
+	// operation at the source. For more information about how these settings work
+	// together, see Indicating Source DB Operations in Migrated S3 Data (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps)
+	// in the AWS Database Migration Service User Guide..
+	//
+	// AWS DMS supports this interaction between CdcInsertsOnly and IncludeOpForFullLoad
+	// in versions 3.1.4 and later.
 	CdcInsertsOnly *bool `type:"boolean"`
 
 	// An optional parameter to use GZIP to compress the target files. Set to GZIP
 	// to compress the target files. Set to NONE (the default) or do not use to
-	// leave the files uncompressed. Applies to both CSV and PARQUET data formats.
+	// leave the files uncompressed. Applies to both .csv and .parquet file formats.
 	CompressionType CompressionTypeValue `type:"string" enum:"true"`
 
 	// The delimiter used to separate columns in the source files. The default is
@@ -1171,47 +1197,49 @@ type S3Settings struct {
 	// carriage return (\n).
 	CsvRowDelimiter *string `type:"string"`
 
-	// The format of the data which you want to use for output. You can choose one
+	// The format of the data that you want to use for output. You can choose one
 	// of the following:
 	//
-	//    * CSV : This is a row-based format with comma-separated values.
+	//    * csv : This is a row-based file format with comma-separated values (.csv).
 	//
-	//    * PARQUET : Apache Parquet is a columnar storage format that features
-	//    efficient compression and provides faster query response.
+	//    * parquet : Apache Parquet (.parquet) is a columnar storage file format
+	//    that features efficient compression and provides faster query response.
 	DataFormat DataFormatValue `type:"string" enum:"true"`
 
-	// The size of one data page in bytes. Defaults to 1024 * 1024 bytes (1MiB).
-	// For PARQUET format only.
+	// The size of one data page in bytes. This parameter defaults to 1024 * 1024
+	// bytes (1 MiB). This number is used for .parquet file format only.
 	DataPageSize *int64 `type:"integer"`
 
 	// The maximum size of an encoded dictionary page of a column. If the dictionary
 	// page exceeds this, this column is stored using an encoding type of PLAIN.
-	// Defaults to 1024 * 1024 bytes (1MiB), the maximum size of a dictionary page
-	// before it reverts to PLAIN encoding. For PARQUET format only.
+	// This parameter defaults to 1024 * 1024 bytes (1 MiB), the maximum size of
+	// a dictionary page before it reverts to PLAIN encoding. This size is used
+	// for .parquet file format only.
 	DictPageSizeLimit *int64 `type:"integer"`
 
-	// Enables statistics for Parquet pages and rowGroups. Choose TRUE to enable
-	// statistics, choose FALSE to disable. Statistics include NULL, DISTINCT, MAX,
-	// and MIN values. Defaults to TRUE. For PARQUET format only.
+	// A value that enables statistics for Parquet pages and row groups. Choose
+	// true to enable statistics, false to disable. Statistics include NULL, DISTINCT,
+	// MAX, and MIN values. This parameter defaults to true. This value is used
+	// for .parquet file format only.
 	EnableStatistics *bool `type:"boolean"`
 
-	// The type of encoding you are using: RLE_DICTIONARY (default), PLAIN, or PLAIN_DICTIONARY.
+	// The type of encoding you are using:
 	//
 	//    * RLE_DICTIONARY uses a combination of bit-packing and run-length encoding
-	//    to store repeated values more efficiently.
+	//    to store repeated values more efficiently. This is the default.
 	//
-	//    * PLAIN does not use encoding at all. Values are stored as they are.
+	//    * PLAIN doesn't use encoding at all. Values are stored as they are.
 	//
 	//    * PLAIN_DICTIONARY builds a dictionary of the values encountered in a
 	//    given column. The dictionary is stored in a dictionary page for each column
 	//    chunk.
 	EncodingType EncodingTypeValue `type:"string" enum:"true"`
 
-	// The type of server side encryption you want to use for your data. This is
-	// part of the endpoint settings or the extra connections attributes for Amazon
-	// S3. You can choose either SSE_S3 (default) or SSE_KMS. To use SSE_S3, you
-	// need an IAM role with permission to allow "arn:aws:s3:::dms-*" to use the
-	// following actions:
+	// The type of server-side encryption that you want to use for your data. This
+	// encryption type is part of the endpoint settings or the extra connections
+	// attributes for Amazon S3. You can choose either SSE_S3 (the default) or SSE_KMS.
+	// To use SSE_S3, you need an AWS Identity and Access Management (IAM) role
+	// with permission to allow "arn:aws:s3:::dms-*" to use the following actions:
 	//
 	//    * s3:CreateBucket
 	//
@@ -1239,28 +1267,64 @@ type S3Settings struct {
 	// The external table definition.
 	ExternalTableDefinition *string `type:"string"`
 
-	// The version of Apache Parquet format you want to use: PARQUET_1_0 (default)
-	// or PARQUET_2_0.
+	// A value that enables a full load to write INSERT operations to the comma-separated
+	// value (.csv) output files only to indicate how the rows were added to the
+	// source database.
+	//
+	// AWS DMS supports IncludeOpForFullLoad in versions 3.1.4 and later.
+	//
+	// For full load, records can only be inserted. By default (the false setting),
+	// no information is recorded in these output files for a full load to indicate
+	// that the rows were inserted at the source database. If IncludeOpForFullLoad
+	// is set to true or y, the INSERT is recorded as an I annotation in the first
+	// field of the .csv file. This allows the format of your target records from
+	// a full load to be consistent with the target records from a CDC load.
+	//
+	// This setting works together with CdcInsertsOnly for output to .csv files
+	// only. For more information about how these settings work together, see Indicating
+	// Source DB Operations in Migrated S3 Data (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps)
+	// in the AWS Database Migration Service User Guide..
+	IncludeOpForFullLoad *bool `type:"boolean"`
+
+	// The version of the Apache Parquet format that you want to use: parquet_1_0
+	// (the default) or parquet_2_0.
 	ParquetVersion ParquetVersionValue `type:"string" enum:"true"`
 
 	// The number of rows in a row group. A smaller row group size provides faster
-	// reads. But as the number of row groups grows, the slower writes become. Defaults
-	// to 10,000 (ten thousand) rows. For PARQUET format only.
+	// reads. But as the number of row groups grows, the slower writes become. This
+	// parameter defaults to 10,000 rows. This number is used for .parquet file
+	// format only.
 	//
 	// If you choose a value larger than the maximum, RowGroupLength is set to the
 	// max row group length in bytes (64 * 1024 * 1024).
 	RowGroupLength *int64 `type:"integer"`
 
-	// If you are using SSE_KMS for the EncryptionMode, provide the KMS Key ID.
-	// The key you use needs an attached policy that enables IAM user permissions
-	// and allows use of the key.
+	// If you are using SSE_KMS for the EncryptionMode, provide the AWS KMS key
+	// ID. The key that you use needs an attached policy that enables AWS Identity
+	// and Access Management (IAM) user permissions and allows use of the key.
 	//
-	// Here is a CLI example: aws dms create-endpoint --endpoint-identifier <value>
-	// --endpoint-type target --engine-name s3 --s3-settings ServiceAccessRoleArn=<value>,BucketFolder=<value>,BucketName=<value>,EncryptionMode=SSE_KMS,ServerSideEncryptionKmsKeyId=<value>
+	// Here is a CLI example: aws dms create-endpoint --endpoint-identifier value
+	// --endpoint-type target --engine-name s3 --s3-settings ServiceAccessRoleArn=value,BucketFolder=value,BucketName=value,EncryptionMode=SSE_KMS,ServerSideEncryptionKmsKeyId=value
 	ServerSideEncryptionKmsKeyId *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) used by the service access IAM role.
 	ServiceAccessRoleArn *string `type:"string"`
+
+	// A value that includes a timestamp column in the Amazon S3 target endpoint
+	// data. AWS DMS includes an additional column in the migrated data when you
+	// set timestampColumnName to a non-blank value.
+	//
+	// AWS DMS supports TimestampColumnName in versions 3.1.4 and later.
+	//
+	// For a full load, each row of the timestamp column contains a timestamp for
+	// when the data was transferred from the source to the target by DMS. For a
+	// CDC load, each row of the timestamp column contains the timestamp for the
+	// commit of that row in the source database. The format for the timestamp column
+	// value is yyyy-MM-dd HH:mm:ss.SSSSSS. For CDC, the microsecond precision depends
+	// on the commit timestamp supported by DMS for the source database. When the
+	// AddColumnName setting is set to true, DMS also includes the name for the
+	// timestamp column that you set as the nonblank value of timestampColumnName.
+	TimestampColumnName *string `type:"string"`
 }
 
 // String returns the string representation
@@ -1291,16 +1355,16 @@ func (s Subnet) String() string {
 type SupportedEndpointType struct {
 	_ struct{} `type:"structure"`
 
-	// The type of endpoint.
+	// The type of endpoint. Valid values are source and target.
 	EndpointType ReplicationEndpointTypeValue `type:"string" enum:"true"`
 
 	// The expanded name for the engine name. For example, if the EngineName parameter
 	// is "aurora," this value would be "Amazon Aurora MySQL."
 	EngineDisplayName *string `type:"string"`
 
-	// The database engine name. Valid values, depending on the EndPointType, include
+	// The database engine name. Valid values, depending on the EndpointType, include
 	// mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3,
-	// db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.
+	// db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.
 	EngineName *string `type:"string"`
 
 	// Indicates if Change Data Capture (CDC) is supported.

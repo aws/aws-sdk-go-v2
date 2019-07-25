@@ -100,15 +100,13 @@ type CreateTrainingJobInput struct {
 	// RoleArn is a required field
 	RoleArn *string `min:"20" type:"string" required:"true"`
 
-	// Sets a duration for training. Use this parameter to cap model training costs.
-	// To stop a job, Amazon SageMaker sends the algorithm the SIGTERM signal, which
-	// delays job termination for 120 seconds. Algorithms might use this 120-second
-	// window to save the model artifacts.
+	// Specifies a limit to how long a model training job can run. When the job
+	// reaches the time limit, Amazon SageMaker ends the training job. Use this
+	// API to cap model training costs.
 	//
-	// When Amazon SageMaker terminates a job because the stopping condition has
-	// been met, training algorithms provided by Amazon SageMaker save the intermediate
-	// results of the job. This intermediate data is a valid model artifact. You
-	// can use it to create a model using the CreateModel API.
+	// To stop a job, Amazon SageMaker sends the algorithm the SIGTERM signal, which
+	// delays job termination for 120 seconds. Algorithms can use this 120-second
+	// window to save the model artifacts, so the results of training are not lost.
 	//
 	// StoppingCondition is a required field
 	StoppingCondition *StoppingCondition `type:"structure" required:"true"`
@@ -250,9 +248,11 @@ const opCreateTrainingJob = "CreateTrainingJob"
 //
 //    * AlgorithmSpecification - Identifies the training algorithm to use.
 //
-//    * HyperParameters - Specify these algorithm-specific parameters to influence
-//    the quality of the final model. For a list of hyperparameters for each
-//    training algorithm provided by Amazon SageMaker, see Algorithms (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html).
+//    * HyperParameters - Specify these algorithm-specific parameters to enable
+//    the estimation of model parameters during training. Hyperparameters can
+//    be tuned to optimize this learning process. For a list of hyperparameters
+//    for each training algorithm provided by Amazon SageMaker, see Algorithms
+//    (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html).
 //
 //    * InputDataConfig - Describes the training dataset and the Amazon S3 location
 //    where it is stored.
@@ -269,7 +269,7 @@ const opCreateTrainingJob = "CreateTrainingJob"
 //    this role the necessary permissions so that Amazon SageMaker can successfully
 //    complete model training.
 //
-//    * StoppingCondition - Sets a duration for training. Use this parameter
+//    * StoppingCondition - Sets a time limit for training. Use this parameter
 //    to cap model training costs.
 //
 // For more information about Amazon SageMaker, see How It Works (https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html).

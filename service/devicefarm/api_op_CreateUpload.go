@@ -76,9 +76,9 @@ type CreateUploadInput struct {
 	//
 	//    * UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload.
 	//
-	//    * XCTEST_TEST_PACKAGE: An XCode test package upload.
+	//    * XCTEST_TEST_PACKAGE: An Xcode test package upload.
 	//
-	//    * XCTEST_UI_TEST_PACKAGE: An XCode UI test package upload.
+	//    * XCTEST_UI_TEST_PACKAGE: An Xcode UI test package upload.
 	//
 	//    * APPIUM_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload.
 	//
@@ -107,7 +107,7 @@ type CreateUploadInput struct {
 	//
 	//    * INSTRUMENTATION_TEST_SPEC: An instrumentation test spec upload.
 	//
-	//    * XCTEST_UI_TEST_SPEC: An XCode UI test spec upload.
+	//    * XCTEST_UI_TEST_SPEC: An Xcode UI test spec upload.
 	//
 	// Note If you call CreateUpload with WEB_APP specified, AWS Device Farm throws
 	// an ArgumentException error.

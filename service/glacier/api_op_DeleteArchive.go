@@ -11,13 +11,13 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Provides options for deleting an archive from an Amazon Glacier vault.
+// Provides options for deleting an archive from an Amazon S3 Glacier vault.
 type DeleteArchiveInput struct {
 	_ struct{} `type:"structure"`
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon Glacier uses the AWS account ID associated with the
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -110,11 +110,11 @@ const opDeleteArchive = "DeleteArchive"
 // for this archive ID may or may not succeed according to the following scenarios:
 //
 //    * If the archive retrieval job is actively preparing the data for download
-//    when Amazon Glacier receives the delete archive request, the archival
+//    when Amazon S3 Glacier receives the delete archive request, the archival
 //    retrieval operation might fail.
 //
 //    * If the archive retrieval job has successfully prepared the archive for
-//    download when Amazon Glacier receives the delete archive request, you
+//    download when Amazon S3 Glacier receives the delete archive request, you
 //    will be able to download the output.
 //
 // This operation is idempotent. Attempting to delete an already-deleted archive
@@ -124,11 +124,11 @@ const opDeleteArchive = "DeleteArchive"
 // AWS Identity and Access Management (IAM) users don't have any permissions
 // by default. You must grant them explicit permission to perform specific actions.
 // For more information, see Access Control Using AWS Identity and Access Management
-// (IAM) (http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
+// (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
 //
 // For conceptual information and underlying REST API, see Deleting an Archive
-// in Amazon Glacier (http://docs.aws.amazon.com/amazonglacier/latest/dev/deleting-an-archive.html)
-// and Delete Archive (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-delete.html)
+// in Amazon Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/deleting-an-archive.html)
+// and Delete Archive (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-delete.html)
 // in the Amazon Glacier Developer Guide.
 //
 //    // Example sending a request using DeleteArchiveRequest.

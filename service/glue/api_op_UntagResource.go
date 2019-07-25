@@ -13,7 +13,7 @@ import (
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the resource from which to remove the tags.
+	// The Amazon Resource Name (ARN) of the resource from which to remove the tags.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `min:"1" type:"string" required:"true"`

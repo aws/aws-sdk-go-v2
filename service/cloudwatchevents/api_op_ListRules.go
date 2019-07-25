@@ -13,6 +13,10 @@ import (
 type ListRulesInput struct {
 	_ struct{} `type:"structure"`
 
+	// Limits the results to show only the rules associated with the specified event
+	// bus.
+	EventBusName *string `min:"1" type:"string"`
+
 	// The maximum number of results to return.
 	Limit *int64 `min:"1" type:"integer"`
 
@@ -31,6 +35,9 @@ func (s ListRulesInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListRulesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListRulesInput"}
+	if s.EventBusName != nil && len(*s.EventBusName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EventBusName", 1))
+	}
 	if s.Limit != nil && *s.Limit < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
@@ -69,10 +76,10 @@ const opListRules = "ListRules"
 // ListRulesRequest returns a request value for making API operation for
 // Amazon CloudWatch Events.
 //
-// Lists your Amazon CloudWatch Events rules. You can either list all the rules
-// or you can provide a prefix to match to the rule names.
+// Lists your EventBridge rules. You can either list all the rules or provide
+// a prefix to match to the rule names.
 //
-// ListRules does not list the targets of a rule. To see the targets associated
+// ListRules doesn't list the targets of a rule. To see the targets associated
 // with a rule, use ListTargetsByRule.
 //
 //    // Example sending a request using ListRulesRequest.

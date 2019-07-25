@@ -36,7 +36,7 @@ type DescribeClientVpnTargetNetworksInput struct {
 	MaxResults *int64 `min:"5" type:"integer"`
 
 	// The token to retrieve the next page of results.
-	NextToken *string `min:"1" type:"string"`
+	NextToken *string `type:"string"`
 }
 
 // String returns the string representation
@@ -54,9 +54,6 @@ func (s *DescribeClientVpnTargetNetworksInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 5 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
 	}
-	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
-	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -73,7 +70,7 @@ type DescribeClientVpnTargetNetworksOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null
 	// when there are no more results to return.
-	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
+	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
 // String returns the string representation

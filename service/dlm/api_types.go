@@ -19,7 +19,8 @@ var _ = awsutil.Prettify
 type CreateRule struct {
 	_ struct{} `type:"structure"`
 
-	// The interval. The supported values are 12 and 24.
+	// The interval between snapshots. The supported values are 2, 3, 4, 6, 8, 12,
+	// and 24.
 	//
 	// Interval is a required field
 	Interval *int64 `min:"1" type:"integer" required:"true"`
@@ -29,7 +30,7 @@ type CreateRule struct {
 	// IntervalUnit is a required field
 	IntervalUnit IntervalUnitValues `type:"string" required:"true" enum:"true"`
 
-	// The time, in UTC, to start the operation.
+	// The time, in UTC, to start the operation. The supported format is hh:mm.
 	//
 	// The operation occurs within a one-hour window following the specified time.
 	Times []string `type:"list"`
@@ -212,10 +213,45 @@ func (s LifecyclePolicySummary) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Optional parameters that can be added to the policy. The set of valid parameters
+// depends on the combination of policyType and resourceType values.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/Parameters
+type Parameters struct {
+	_ struct{} `type:"structure"`
+
+	// When executing an EBS Snapshot Management – Instance policy, execute all
+	// CreateSnapshots calls with the excludeBootVolume set to the supplied field.
+	// Defaults to false. Only valid for EBS Snapshot Management – Instance policies.
+	ExcludeBootVolume *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s Parameters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Parameters) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ExcludeBootVolume != nil {
+		v := *s.ExcludeBootVolume
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ExcludeBootVolume", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
 // Specifies the configuration of a lifecycle policy.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/PolicyDetails
 type PolicyDetails struct {
 	_ struct{} `type:"structure"`
+
+	// A set of optional parameters that can be provided by the policy.
+	Parameters *Parameters `type:"structure"`
+
+	// This field determines the valid target resource types and actions a policy
+	// can manage. This field defaults to EBS_SNAPSHOT_MANAGEMENT if not present.
+	PolicyType PolicyTypeValues `type:"string" enum:"true"`
 
 	// The resource type.
 	ResourceTypes []ResourceTypeValues `min:"1" type:"list"`
@@ -267,6 +303,18 @@ func (s *PolicyDetails) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PolicyDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Parameters != nil {
+		v := s.Parameters
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Parameters", v, metadata)
+	}
+	if len(s.PolicyType) > 0 {
+		v := s.PolicyType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PolicyType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.ResourceTypes != nil {
 		v := s.ResourceTypes
 
@@ -355,6 +403,8 @@ func (s RetainRule) MarshalFields(e protocol.FieldEncoder) error {
 type Schedule struct {
 	_ struct{} `type:"structure"`
 
+	// Copy all user-defined tags on a source volume to snapshots of the volume
+	// created by this policy.
 	CopyTags *bool `type:"boolean"`
 
 	// The create rule.
@@ -369,6 +419,12 @@ type Schedule struct {
 	// The tags to apply to policy-created resources. These user-defined tags are
 	// in addition to the AWS-added lifecycle tags.
 	TagsToAdd []Tag `type:"list"`
+
+	// A collection of key/value pairs with values determined dynamically when the
+	// policy is executed. Keys may be any valid Amazon EC2 tag key. Values must
+	// be in one of the two following formats: $(instance-id) or $(timestamp). Variable
+	// tags are only valid for EBS Snapshot Management – Instance policies.
+	VariableTags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -393,6 +449,13 @@ func (s *Schedule) Validate() error {
 		for i, v := range s.TagsToAdd {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagsToAdd", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.VariableTags != nil {
+		for i, v := range s.VariableTags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "VariableTags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -434,6 +497,18 @@ func (s Schedule) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		ls0 := e.List(protocol.BodyTarget, "TagsToAdd", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.VariableTags != nil {
+		v := s.VariableTags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "VariableTags", metadata)
 		ls0.Start()
 		for _, v1 := range v {
 			ls0.ListAddFields(v1)

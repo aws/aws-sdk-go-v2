@@ -14,8 +14,10 @@ import (
 type GetMasterAccountInput struct {
 	_ struct{} `type:"structure"`
 
+	// The unique ID of the detector of the GuardDuty member account.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -29,6 +31,9 @@ func (s *GetMasterAccountInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -50,13 +55,14 @@ func (s GetMasterAccountInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// GetMasterAccount response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccountResponse
 type GetMasterAccountOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Contains details about the master account.
-	Master *Master `locationName:"master" type:"structure"`
+	// Master account details.
+	//
+	// Master is a required field
+	Master *Master `locationName:"master" type:"structure" required:"true"`
 }
 
 // String returns the string representation

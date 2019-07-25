@@ -36,7 +36,7 @@ type CreatePolicyInput struct {
 	// can contain any ASCII character from the ! (\u0021) through the DEL character
 	// (\u007F), including most punctuation characters, digits, and upper and lowercased
 	// letters.
-	Path *string `type:"string"`
+	Path *string `min:"1" type:"string"`
 
 	// The JSON policy document that you want to use as the content for the new
 	// policy.
@@ -79,6 +79,9 @@ func (s CreatePolicyInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreatePolicyInput"}
+	if s.Path != nil && len(*s.Path) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Path", 1))
+	}
 
 	if s.PolicyDocument == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyDocument"))

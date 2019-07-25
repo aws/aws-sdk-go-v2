@@ -41,6 +41,12 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// Example: mySubnetgroup
 	DBSubnetGroupName *string `type:"string"`
 
+	// Specifies whether this cluster can be deleted. If DeletionProtection is enabled,
+	// the cluster cannot be deleted unless it is modified and DeletionProtection
+	// is disabled. DeletionProtection protects clusters from being accidentally
+	// deleted.
+	DeletionProtection *bool `type:"boolean"`
+
 	// A list of log types that must be enabled for exporting to Amazon CloudWatch
 	// Logs.
 	EnableCloudwatchLogsExports []string `type:"list"`

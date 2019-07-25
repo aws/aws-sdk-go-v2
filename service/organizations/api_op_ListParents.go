@@ -14,7 +14,7 @@ type ListParentsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The unique identifier (ID) of the OU or account whose parent containers you
-	// want to list. Do not specify a root.
+	// want to list. Don't specify a root.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) for a child ID string
 	// requires one of the following:

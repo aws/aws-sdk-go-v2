@@ -185,7 +185,7 @@ type Cluster struct {
 	// The Amazon Resource Name (ARN) that identifies the cluster. The ARN contains
 	// the arn:aws:ecs namespace, followed by the Region of the cluster, the AWS
 	// account ID of the cluster owner, the cluster namespace, and then the cluster
-	// name. For example, arn:aws:ecs:region:012345678910:cluster/test ..
+	// name. For example, arn:aws:ecs:region:012345678910:cluster/test.
 	ClusterArn *string `locationName:"clusterArn" type:"string"`
 
 	// A user-generated string that you use to identify your cluster.
@@ -200,6 +200,10 @@ type Cluster struct {
 
 	// The number of tasks in the cluster that are in the RUNNING state.
 	RunningTasksCount *int64 `locationName:"runningTasksCount" type:"integer"`
+
+	// The settings for the cluster. This parameter indicates whether CloudWatch
+	// Container Insights is enabled or disabled for a cluster.
+	Settings []ClusterSetting `locationName:"settings" type:"list"`
 
 	// Additional information about your clusters that are separated by launch type,
 	// including:
@@ -235,6 +239,28 @@ type Cluster struct {
 
 // String returns the string representation
 func (s Cluster) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The settings to use when creating a cluster. This parameter is used to enable
+// CloudWatch Container Insights for a cluster.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ClusterSetting
+type ClusterSetting struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the cluster setting. The only supported value is containerInsights.
+	Name ClusterSettingName `locationName:"name" type:"string" enum:"true"`
+
+	// The value to set for the cluster setting. The supported values are enabled
+	// and disabled. If enabled is specified, CloudWatch Container Insights will
+	// be enabled for the cluster, otherwise it will be disabled unless the containerInsights
+	// account setting is enabled. If a cluster value is specified, it will override
+	// the containerInsights value set with PutAccountSetting or PutAccountSettingDefault.
+	Value *string `locationName:"value" type:"string"`
+}
+
+// String returns the string representation
+func (s ClusterSetting) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -372,13 +398,13 @@ type ContainerDefinition struct {
 	// version 1.26.0 of the container agent to enable container dependencies. However,
 	// we recommend using the latest container agent version. For information about
 	// checking your agent version and updating to the latest version, see Updating
-	// the Amazon ECS Container Agent (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
+	// the Amazon ECS Container Agent (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
 	// in the Amazon Elastic Container Service Developer Guide. If you are using
 	// an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1
 	// of the ecs-init package. If your container instances are launched from version
 	// 20190301 or later, then they contain the required versions of the container
 	// agent and ecs-init. For more information, see Amazon ECS-optimized Linux
-	// AMI (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
+	// AMI (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	//
 	// This parameter is available for tasks using the Fargate launch type in the
@@ -535,16 +561,16 @@ type ContainerDefinition struct {
 	// and the --interactive option to docker run (https://docs.docker.com/engine/reference/run/).
 	Interactive *bool `locationName:"interactive" type:"boolean"`
 
-	// The link parameter allows containers to communicate with each other without
-	// the need for port mappings. Only supported if the network mode of a task
-	// definition is set to bridge. The name:internalName construct is analogous
+	// The links parameter allows containers to communicate with each other without
+	// the need for port mappings. This parameter is only supported if the network
+	// mode of a task definition is bridge. The name:internalName construct is analogous
 	// to name:alias in Docker links. Up to 255 letters (uppercase and lowercase),
-	// numbers, hyphens, and underscores are allowed. For more information about
-	// linking Docker containers, go to https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/
-	// (https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/).
-	// This parameter maps to Links in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// numbers, and hyphens are allowed. For more information about linking Docker
+	// containers, go to Legacy container links (https://docs.docker.com/network/links/)
+	// in the Docker documentation. This parameter maps to Links in the Create a
+	// container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
 	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
-	// and the --link option to docker run (https://docs.docker.com/engine/reference/commandline/run/).
+	// and the --link option to docker run (https://docs.docker.com/engine/reference/run/).
 	//
 	// This parameter is not supported for Windows containers.
 	//
@@ -555,7 +581,7 @@ type ContainerDefinition struct {
 	Links []string `locationName:"links" type:"list"`
 
 	// Linux-specific modifications that are applied to the container, such as Linux
-	// KernelCapabilities.
+	// kernel capabilities. For more information see KernelCapabilities.
 	//
 	// This parameter is not supported for Windows containers.
 	LinuxParameters *LinuxParameters `locationName:"linuxParameters" type:"structure"`
@@ -597,15 +623,16 @@ type ContainerDefinition struct {
 	// in the Amazon Elastic Container Service Developer Guide.
 	LogConfiguration *LogConfiguration `locationName:"logConfiguration" type:"structure"`
 
-	// The hard limit (in MiB) of memory to present to the container. If your container
-	// attempts to exceed the memory specified here, the container is killed. This
-	// parameter maps to Memory in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// The amount (in MiB) of memory to present to the container. If your container
+	// attempts to exceed the memory specified here, the container is killed. The
+	// total amount of memory reserved for all containers within a task must be
+	// lower than the task memory value, if one is specified. This parameter maps
+	// to Memory in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
 	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
 	// and the --memory option to docker run (https://docs.docker.com/engine/reference/run/).
 	//
 	// If your containers are part of a task using the Fargate launch type, this
-	// field is optional and the only requirement is that the total amount of memory
-	// reserved for all containers within a task be lower than the task memory value.
+	// field is optional.
 	//
 	// For containers that are part of a task using the EC2 launch type, you must
 	// specify a non-zero integer for one or both of memory or memoryReservation
@@ -659,8 +686,8 @@ type ContainerDefinition struct {
 	// The name of a container. If you are linking multiple containers together
 	// in a task definition, the name of one container can be entered in the links
 	// of another container to connect the containers. Up to 255 letters (uppercase
-	// and lowercase), numbers, hyphens, and underscores are allowed. This parameter
-	// maps to name in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// and lowercase), numbers, and hyphens are allowed. This parameter maps to
+	// name in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
 	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
 	// and the --name option to docker run (https://docs.docker.com/engine/reference/run/).
 	Name *string `locationName:"name" type:"string"`
@@ -723,7 +750,7 @@ type ContainerDefinition struct {
 	ResourceRequirements []ResourceRequirement `locationName:"resourceRequirements" type:"list"`
 
 	// The secrets to pass to the container. For more information, see Specifying
-	// Sensitive Data (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
+	// Sensitive Data (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Secrets []Secret `locationName:"secrets" type:"list"`
 
@@ -738,13 +765,13 @@ type ContainerDefinition struct {
 	// version 1.26.0 of the container agent to enable a container start timeout
 	// value. However, we recommend using the latest container agent version. For
 	// information about checking your agent version and updating to the latest
-	// version, see Updating the Amazon ECS Container Agent (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
+	// version, see Updating the Amazon ECS Container Agent (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
 	// in the Amazon Elastic Container Service Developer Guide. If you are using
 	// an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1
 	// of the ecs-init package. If your container instances are launched from version
 	// 20190301 or later, then they contain the required versions of the container
 	// agent and ecs-init. For more information, see Amazon ECS-optimized Linux
-	// AMI (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
+	// AMI (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	//
 	// This parameter is available for tasks using the Fargate launch type in the
@@ -764,13 +791,13 @@ type ContainerDefinition struct {
 	// the container agent to enable a container stop timeout value. However, we
 	// recommend using the latest container agent version. For information about
 	// checking your agent version and updating to the latest version, see Updating
-	// the Amazon ECS Container Agent (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
+	// the Amazon ECS Container Agent (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
 	// in the Amazon Elastic Container Service Developer Guide. If you are using
 	// an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1
 	// of the ecs-init package. If your container instances are launched from version
 	// 20190301 or later, then they contain the required versions of the container
 	// agent and ecs-init. For more information, see Amazon ECS-optimized Linux
-	// AMI (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
+	// AMI (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	StopTimeout *int64 `locationName:"stopTimeout" type:"integer"`
 
@@ -914,13 +941,13 @@ func (s *ContainerDefinition) Validate() error {
 // container agent to enable container dependencies. However, we recommend using
 // the latest container agent version. For information about checking your agent
 // version and updating to the latest version, see Updating the Amazon ECS Container
-// Agent (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
+// Agent (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
 // in the Amazon Elastic Container Service Developer Guide. If you are using
 // an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1
 // of the ecs-init package. If your container instances are launched from version
 // 20190301 or later, then they contain the required versions of the container
 // agent and ecs-init. For more information, see Amazon ECS-optimized Linux
-// AMI (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
+// AMI (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
 // in the Amazon Elastic Container Service Developer Guide.
 //
 // If you are using tasks that use the Fargate launch type, container dependency
@@ -994,7 +1021,7 @@ type ContainerInstance struct {
 	// this value is NULL.
 	AgentUpdateStatus AgentUpdateStatus `locationName:"agentUpdateStatus" type:"string" enum:"true"`
 
-	// The elastic network interfaces associated with the container instance.
+	// The resources attached to a container instance, such as elastic network interfaces.
 	Attachments []Attachment `locationName:"attachments" type:"list"`
 
 	// The attributes set for the container instance, either by the Amazon ECS container
@@ -1004,7 +1031,7 @@ type ContainerInstance struct {
 	// The Amazon Resource Name (ARN) of the container instance. The ARN contains
 	// the arn:aws:ecs namespace, followed by the Region of the container instance,
 	// the AWS account ID of the container instance owner, the container-instance
-	// namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID .
+	// namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID.
 	ContainerInstanceArn *string `locationName:"containerInstanceArn" type:"string"`
 
 	// The EC2 instance ID of the container instance.
@@ -1037,13 +1064,28 @@ type ContainerInstance struct {
 	// The number of tasks on the container instance that are in the RUNNING status.
 	RunningTasksCount *int64 `locationName:"runningTasksCount" type:"integer"`
 
-	// The status of the container instance. The valid values are ACTIVE, INACTIVE,
-	// or DRAINING. ACTIVE indicates that the container instance can accept tasks.
-	// DRAINING indicates that new tasks are not placed on the container instance
+	// The status of the container instance. The valid values are REGISTERING, REGISTRATION_FAILED,
+	// ACTIVE, INACTIVE, DEREGISTERING, or DRAINING.
+	//
+	// If your account has opted in to the awsvpcTrunking account setting, then
+	// any newly registered container instance will transition to a REGISTERING
+	// status while the trunk elastic network interface is provisioned for the instance.
+	// If the registration fails, the instance will transition to a REGISTRATION_FAILED
+	// status. You can describe the container instance and see the reason for failure
+	// in the statusReason parameter. Once the container instance is terminated,
+	// the instance transitions to a DEREGISTERING status while the trunk elastic
+	// network interface is deprovisioned. The instance then transitions to an INACTIVE
+	// status.
+	//
+	// The ACTIVE status indicates that the container instance can accept tasks.
+	// The DRAINING indicates that new tasks are not placed on the container instance
 	// and any service tasks running on the container instance are removed if possible.
 	// For more information, see Container Instance Draining (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-draining.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Status *string `locationName:"status" type:"string"`
+
+	// The reason that the container instance reached its current status.
+	StatusReason *string `locationName:"statusReason" type:"string"`
 
 	// The metadata that you apply to the container instance to help you categorize
 	// and organize them. Each tag consists of a key and an optional value, both
@@ -1070,7 +1112,10 @@ func (s ContainerInstance) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The overrides that should be sent to a container.
+// The overrides that should be sent to a container. An empty container override
+// can be passed in. An example of an empty container override would be {"containerOverrides":
+// [ ] }. If a non-empty container override is specified, the name parameter
+// must be included.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerOverride
 type ContainerOverride struct {
 	_ struct{} `type:"structure"`
@@ -1285,7 +1330,7 @@ func (s DeploymentConfiguration) String() string {
 }
 
 // The deployment controller to use for the service. For more information, see
-// Amazon ECS Deployment Types (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
+// Amazon ECS Deployment Types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
 // in the Amazon Elastic Container Service Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentController
 type DeploymentController struct {
@@ -1727,7 +1772,7 @@ func (s *LinuxParameters) Validate() error {
 	return nil
 }
 
-// Details on a load balancer that is used with a service.
+// Details on a load balancer to be used with a service or task set.
 //
 // If the service is using the ECS deployment controller, you are limited to
 // one load balancer or target group.
@@ -1761,14 +1806,24 @@ type LoadBalancer struct {
 	// mapping.
 	ContainerPort *int64 `locationName:"containerPort" type:"integer"`
 
-	// The name of a load balancer.
+	// The name of the load balancer to associate with the Amazon ECS service or
+	// task set.
+	//
+	// A load balancer name is only specified when using a classic load balancer.
+	// If you are using an application load balancer or a network load balancer
+	// this should be omitted.
 	LoadBalancerName *string `locationName:"loadBalancerName" type:"string"`
 
 	// The full Amazon Resource Name (ARN) of the Elastic Load Balancing target
-	// group or groups associated with a service. For services using the ECS deployment
-	// controller, you are limited to one target group. For services using the CODE_DEPLOY
-	// deployment controller, you are required to define two target groups for the
-	// load balancer.
+	// group or groups associated with a service or task set.
+	//
+	// A target group ARN is only specified when using an application load balancer
+	// or a network load balancer. If you are using a classic load balancer this
+	// should be omitted.
+	//
+	// For services using the ECS deployment controller, you are limited to one
+	// target group. For services using the CODE_DEPLOY deployment controller, you
+	// are required to define two target groups for the load balancer.
 	//
 	// If your service's task definition uses the awsvpc network mode (which is
 	// required for the Fargate launch type), you must choose ip as the target type,
@@ -2076,6 +2131,9 @@ type PortMapping struct {
 	// receives a host port in the ephemeral port range. For more information, see
 	// hostPort. Port mappings that are automatically assigned in this way do not
 	// count toward the 100 reserved ports limit of a container instance.
+	//
+	// You cannot expose the same container port for multiple protocols. An error
+	// will be returned if this is attempted.
 	ContainerPort *int64 `locationName:"containerPort" type:"integer"`
 
 	// The port number on the container instance to reserve for your container.
@@ -2126,12 +2184,11 @@ func (s PortMapping) String() string {
 // ecs-init package to enable a proxy configuration. If your container instances
 // are launched from the Amazon ECS-optimized AMI version 20190301 or later,
 // then they contain the required versions of the container agent and ecs-init.
-// For more information, see Amazon ECS-optimized Linux AMI (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
+// For more information, see Amazon ECS-optimized Linux AMI (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
 // in the Amazon Elastic Container Service Developer Guide.
 //
-// This parameter is available for tasks using the Fargate launch type in the
-// Ohio (us-east-2) region only and the task or service requires platform version
-// 1.3.0 or later.
+// For tasks using the Fargate launch type, the task or service requires platform
+// version 1.3.0 or later.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ProxyConfiguration
 type ProxyConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -2151,7 +2208,7 @@ type ProxyConfiguration struct {
 	//
 	//    * IgnoredGID - (Required) The group ID (GID) of the proxy container as
 	//    defined by the user parameter in a container definition. This is used
-	//    to ensure the proxy ignores its own traffic. If IgnoredGID is specified,
+	//    to ensure the proxy ignores its own traffic. If IgnoredUID is specified,
 	//    this field can be empty.
 	//
 	//    * AppPorts - (Required) The list of ports that the application uses. Network
@@ -2266,7 +2323,7 @@ func (s Resource) String() string {
 
 // The type and amount of a resource to assign to a container. The only supported
 // resource is a GPU. For more information, see Working with GPUs on Amazon
-// ECS (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html)
+// ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html)
 // in the Amazon Elastic Container Service Developer Guide
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ResourceRequirement
 type ResourceRequirement struct {
@@ -2337,7 +2394,7 @@ func (s Scale) String() string {
 //    * To reference sensitive information in the log configuration of a container,
 //    use the secretOptions container definition parameter.
 //
-// For more information, see Specifying Sensitive Data (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
+// For more information, see Specifying Sensitive Data (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
 // in the Amazon Elastic Container Service Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Secret
 type Secret struct {
@@ -2414,7 +2471,7 @@ type Service struct {
 	DesiredCount *int64 `locationName:"desiredCount" type:"integer"`
 
 	// Specifies whether to enable Amazon ECS managed tags for the tasks in the
-	// service. For more information, see Tagging Your Amazon ECS Resources (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
+	// service. For more information, see Tagging Your Amazon ECS Resources (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags *bool `locationName:"enableECSManagedTags" type:"boolean"`
 
@@ -2427,8 +2484,9 @@ type Service struct {
 	// started.
 	HealthCheckGracePeriodSeconds *int64 `locationName:"healthCheckGracePeriodSeconds" type:"integer"`
 
-	// The launch type on which your service is running. For more information, see
-	// Amazon ECS Launch Types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
+	// The launch type on which your service is running. If no value is specified,
+	// it will default to EC2. Valid values include EC2 and FARGATE. For more information,
+	// see Amazon ECS Launch Types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	LaunchType LaunchType `locationName:"launchType" type:"string" enum:"true"`
 
@@ -2457,10 +2515,10 @@ type Service struct {
 	// The placement strategy that determines how tasks for the service are placed.
 	PlacementStrategy []PlacementStrategy `locationName:"placementStrategy" type:"list"`
 
-	// The platform version on which your tasks in the service are running. A platform
-	// version is only specified for tasks using the Fargate launch type. If one
-	// is not specified, the LATEST platform version is used by default. For more
-	// information, see AWS Fargate Platform Versions (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
+	// The platform version on which to run your service. A platform version is
+	// only specified for tasks using the Fargate launch type. If one is not specified,
+	// the LATEST platform version is used by default. For more information, see
+	// AWS Fargate Platform Versions (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string `locationName:"platformVersion" type:"string"`
 
@@ -2477,7 +2535,7 @@ type Service struct {
 	RunningCount *int64 `locationName:"runningCount" type:"integer"`
 
 	// The scheduling strategy to use for the service. For more information, see
-	// Services (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).
+	// Services (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).
 	//
 	// There are two service scheduler strategies available:
 	//
@@ -2494,17 +2552,17 @@ type Service struct {
 
 	// The ARN that identifies the service. The ARN contains the arn:aws:ecs namespace,
 	// followed by the Region of the service, the AWS account ID of the service
-	// owner, the service namespace, and then the service name. For example, arn:aws:ecs:region:012345678910:service/my-service .
+	// owner, the service namespace, and then the service name. For example, arn:aws:ecs:region:012345678910:service/my-service.
 	ServiceArn *string `locationName:"serviceArn" type:"string"`
 
 	// The name of your service. Up to 255 letters (uppercase and lowercase), numbers,
-	// hyphens, and underscores are allowed. Service names must be unique within
-	// a cluster, but you can have similarly named services in multiple clusters
-	// within a Region or across multiple Regions.
+	// and hyphens are allowed. Service names must be unique within a cluster, but
+	// you can have similarly named services in multiple clusters within a Region
+	// or across multiple Regions.
 	ServiceName *string `locationName:"serviceName" type:"string"`
 
 	// The details of the service discovery registries to assign to this service.
-	// For more information, see Service Discovery (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
+	// For more information, see Service Discovery (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
 	ServiceRegistries []ServiceRegistry `locationName:"serviceRegistries" type:"list"`
 
 	// The status of the service. The valid values are ACTIVE, DRAINING, or INACTIVE.
@@ -2597,17 +2655,14 @@ func (s ServiceRegistry) String() string {
 type Setting struct {
 	_ struct{} `type:"structure"`
 
-	// The account resource name.
+	// The Amazon ECS resource name.
 	Name SettingName `locationName:"name" type:"string" enum:"true"`
 
 	// The ARN of the principal, which can be an IAM user, IAM role, or the root
 	// user. If this field is omitted, the authenticated user is assumed.
 	PrincipalArn *string `locationName:"principalArn" type:"string"`
 
-	// The current account setting for the resource name. If enabled, the resource
-	// receives the new Amazon Resource Name (ARN) and resource identifier (ID)
-	// format. If disabled, the resource receives the old Amazon Resource Name (ARN)
-	// and resource identifier (ID) format.
+	// Whether the account setting is enabled or disabled for the specified resource.
 	Value *string `locationName:"value" type:"string"`
 }
 
@@ -2742,7 +2797,7 @@ type Task struct {
 	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
 
 	// The desired status of the task. For more information, see Task Lifecycle
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_life_cycle.html).
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html).
 	DesiredStatus *string `locationName:"desiredStatus" type:"string"`
 
 	// The Unix timestamp for when the task execution stopped.
@@ -2765,7 +2820,7 @@ type Task struct {
 	HealthStatus HealthStatus `locationName:"healthStatus" type:"string" enum:"true"`
 
 	// The last known status of the task. For more information, see Task Lifecycle
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_life_cycle.html).
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html).
 	LastStatus *string `locationName:"lastStatus" type:"string"`
 
 	// The launch type on which your task is running. For more information, see
@@ -2867,7 +2922,11 @@ func (s Task) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Details of a task definition.
+// The details of a task definition which describes the container and volume
+// definitions of an Amazon Elastic Container Service task. You can specify
+// which Docker images to use, the required resources, and other configurations
+// related to launching the task definition through an Amazon ECS service or
+// task.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskDefinition
 type TaskDefinition struct {
 	_ struct{} `type:"structure"`
@@ -2905,11 +2964,15 @@ type TaskDefinition struct {
 	//    (30 GB) in increments of 1024 (1 GB)
 	Cpu *string `locationName:"cpu" type:"string"`
 
-	// The Amazon Resource Name (ARN) of the task execution role that the Amazon
-	// ECS container agent and the Docker daemon can assume.
+	// The Amazon Resource Name (ARN) of the task execution role that containers
+	// in this task can assume. All containers in this task are granted the permissions
+	// that are specified in this role.
 	ExecutionRoleArn *string `locationName:"executionRoleArn" type:"string"`
 
-	// The family of your task definition, used as the definition name.
+	// The name of a family that this task definition is registered to. A family
+	// groups multiple versions of a task definition. Amazon ECS gives the first
+	// task definition that you registered to a family a revision number of 1. Amazon
+	// ECS gives sequential revision numbers to each task definition that you add.
 	Family *string `locationName:"family" type:"string"`
 
 	// The IPC resource namespace to use for the containers in the task. The valid
@@ -2930,7 +2993,7 @@ type TaskDefinition struct {
 	//
 	// If you are setting namespaced kernel parameters using systemControls for
 	// the containers in the task, the following will apply to your IPC resource
-	// namespace. For more information, see System Controls (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html)
+	// namespace. For more information, see System Controls (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	//
 	//    * For tasks that use the host IPC mode, IPC namespace related systemControls
@@ -2982,7 +3045,7 @@ type TaskDefinition struct {
 	// If the network mode is awsvpc, the task is allocated an elastic network interface,
 	// and you must specify a NetworkConfiguration value when you create a service
 	// or run a task with the task definition. For more information, see Task Networking
-	// (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	//
 	// Currently, only Amazon ECS-optimized AMIs, other Amazon Linux variants with
@@ -3029,7 +3092,7 @@ type TaskDefinition struct {
 	// enable a proxy configuration. If your container instances are launched from
 	// the Amazon ECS-optimized AMI version 20190301 or later, then they contain
 	// the required versions of the container agent and ecs-init. For more information,
-	// see Amazon ECS-optimized Linux AMI (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
+	// see Amazon ECS-optimized Linux AMI (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	ProxyConfiguration *ProxyConfiguration `locationName:"proxyConfiguration" type:"structure"`
 
@@ -3037,7 +3100,8 @@ type TaskDefinition struct {
 	// valid if you are using the Fargate launch type for your task.
 	RequiresAttributes []Attribute `locationName:"requiresAttributes" type:"list"`
 
-	// The launch type that the task is using.
+	// The launch type the task requires. If no value is specified, it will default
+	// to EC2. Valid values include EC2 and FARGATE.
 	RequiresCompatibilities []Compatibility `locationName:"requiresCompatibilities" type:"list"`
 
 	// The revision of the task in a particular family. The revision is a version
@@ -3054,8 +3118,10 @@ type TaskDefinition struct {
 	// The full Amazon Resource Name (ARN) of the task definition.
 	TaskDefinitionArn *string `locationName:"taskDefinitionArn" type:"string"`
 
-	// The ARN of the IAM role that containers in this task can assume. All containers
-	// in this task are granted the permissions that are specified in this role.
+	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
+	// role that grants containers in the task permission to call AWS APIs on your
+	// behalf. For more information, see Amazon ECS Task Role (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_IAM_role.html)
+	// in the Amazon Elastic Container Service Developer Guide.
 	//
 	// IAM roles for tasks on Windows require that the -EnableTaskIAMRole option
 	// is set when you launch the Amazon ECS-optimized Windows AMI. Your containers
@@ -3064,10 +3130,10 @@ type TaskDefinition struct {
 	// in the Amazon Elastic Container Service Developer Guide.
 	TaskRoleArn *string `locationName:"taskRoleArn" type:"string"`
 
-	// The list of volumes in a task.
+	// The list of volume definitions for the task.
 	//
-	// If you are using the Fargate launch type, the host and sourcePath parameters
-	// are not supported.
+	// If your tasks are using the Fargate launch type, the host and sourcePath
+	// parameters are not supported.
 	//
 	// For more information about volume definition parameters and defaults, see
 	// Amazon ECS Task Definitions (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html)
@@ -3217,7 +3283,7 @@ type TaskSet struct {
 	ServiceArn *string `locationName:"serviceArn" type:"string"`
 
 	// The details of the service discovery registries to assign to this task set.
-	// For more information, see Service Discovery (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
+	// For more information, see Service Discovery (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
 	ServiceRegistries []ServiceRegistry `locationName:"serviceRegistries" type:"list"`
 
 	// The stability status, which indicates whether the task set has reached a
@@ -3231,7 +3297,10 @@ type TaskSet struct {
 	//    * There are no tasks running on container instances in the DRAINING status.
 	//
 	//    * All tasks are reporting a healthy status from the load balancers, service
-	//    discovery, and container health checks.
+	//    discovery, and container health checks. If a healthCheckGracePeriodSeconds
+	//    value was set when the service was created, you may see a STEADY_STATE
+	//    reached since unhealthy Elastic Load Balancing target health checks will
+	//    be ignored until it expires.
 	//
 	// If any of those conditions are not met, the stability status returns STABILIZING.
 	StabilityStatus StabilityStatus `locationName:"stabilityStatus" type:"string" enum:"true"`
@@ -3397,7 +3466,7 @@ func (s VersionInfo) String() string {
 // A data volume used in a task definition. For tasks that use a Docker volume,
 // specify a DockerVolumeConfiguration. For tasks that use a bind mount host
 // volume, specify a host and optional sourcePath. For more information, see
-// Using Data Volumes in Tasks (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html).
+// Using Data Volumes in Tasks (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Volume
 type Volume struct {
 	_ struct{} `type:"structure"`
@@ -3423,8 +3492,8 @@ type Volume struct {
 	Host *HostVolumeProperties `locationName:"host" type:"structure"`
 
 	// The name of the volume. Up to 255 letters (uppercase and lowercase), numbers,
-	// hyphens, and underscores are allowed. This name is referenced in the sourceVolume
-	// parameter of container definition mountPoints.
+	// and hyphens are allowed. This name is referenced in the sourceVolume parameter
+	// of container definition mountPoints.
 	Name *string `locationName:"name" type:"string"`
 }
 

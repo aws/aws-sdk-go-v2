@@ -19,7 +19,7 @@ type TagResourceInput struct {
 	// ResourceArn is a required field
 	ResourceArn *string `locationName:"resourceArn" type:"string" required:"true"`
 
-	// The tags to add.
+	// The tags to assign.
 	//
 	// Tags is a required field
 	Tags []Tag `locationName:"tags" min:"1" type:"list" required:"true"`

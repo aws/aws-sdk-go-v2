@@ -84,8 +84,7 @@ const opPutDashboard = "PutDashboard"
 // dashboard. If you update a dashboard, the entire contents are replaced with
 // what you specify here.
 //
-// There is no limit to the number of dashboards in your account. All dashboards
-// in your account are global, not region-specific.
+// All dashboards in your account are global, not region-specific.
 //
 // A simple way to create a dashboard using PutDashboard is to copy an existing
 // dashboard. To copy an existing dashboard using the console, you can load

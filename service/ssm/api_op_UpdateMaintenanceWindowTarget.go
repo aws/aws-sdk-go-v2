@@ -21,7 +21,7 @@ type UpdateMaintenanceWindowTargetInput struct {
 	Name *string `min:"3" type:"string"`
 
 	// User-provided value that will be included in any CloudWatch events raised
-	// while running tasks for these targets in this Maintenance Window.
+	// while running tasks for these targets in this maintenance window.
 	OwnerInformation *string `min:"1" type:"string"`
 
 	// If True, then all fields that are required by the RegisterTargetWithMaintenanceWindow
@@ -32,7 +32,7 @@ type UpdateMaintenanceWindowTargetInput struct {
 	// The targets to add or replace.
 	Targets []Target `type:"list"`
 
-	// The Maintenance Window ID with which to modify the target.
+	// The maintenance window ID with which to modify the target.
 	//
 	// WindowId is a required field
 	WindowId *string `min:"20" type:"string" required:"true"`
@@ -104,7 +104,7 @@ type UpdateMaintenanceWindowTargetOutput struct {
 	// The updated targets.
 	Targets []Target `type:"list"`
 
-	// The Maintenance Window ID specified in the update request.
+	// The maintenance window ID specified in the update request.
 	WindowId *string `min:"20" type:"string"`
 
 	// The target ID specified in the update request.
@@ -121,21 +121,22 @@ const opUpdateMaintenanceWindowTarget = "UpdateMaintenanceWindowTarget"
 // UpdateMaintenanceWindowTargetRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Modifies the target of an existing Maintenance Window. You can't change the
-// target type, but you can change the following:
+// Modifies the target of an existing maintenance window. You can change the
+// following:
 //
-// The target from being an ID target to a Tag target, or a Tag target to an
-// ID target.
+//    * Name
 //
-// IDs for an ID target.
+//    * Description
 //
-// Tags for a Tag target.
+//    * Owner
 //
-// Owner.
+//    * IDs for an ID target
 //
-// Name.
+//    * Tags for a Tag target
 //
-// Description.
+//    * From any supported tag type to another. The three supported tag types
+//    are ID target, Tag target, and resource group. For more information, see
+//    Target.
 //
 // If a parameter is null, then the corresponding field is not modified.
 //

@@ -17,7 +17,7 @@ type UpdateVoiceChannelInput struct {
 	// ApplicationId is a required field
 	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
 
-	// Voice Channel Request
+	// Specifies the status and settings of the voice channel for an application.
 	//
 	// VoiceChannelRequest is a required field
 	VoiceChannelRequest *VoiceChannelRequest `type:"structure" required:"true"`
@@ -69,7 +69,8 @@ func (s UpdateVoiceChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateVoiceChannelOutput struct {
 	_ struct{} `type:"structure" payload:"VoiceChannelResponse"`
 
-	// Voice Channel Response.
+	// Provides information about the status and settings of the voice channel for
+	// an application.
 	//
 	// VoiceChannelResponse is a required field
 	VoiceChannelResponse *VoiceChannelResponse `type:"structure" required:"true"`
@@ -96,7 +97,7 @@ const opUpdateVoiceChannel = "UpdateVoiceChannel"
 // UpdateVoiceChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Update an Voice channel
+// Updates the status and settings of the voice channel for an application.
 //
 //    // Example sending a request using UpdateVoiceChannelRequest.
 //    req := client.UpdateVoiceChannelRequest(params)

@@ -54,6 +54,12 @@ type CreateDBClusterInput struct {
 	// Example: mySubnetgroup
 	DBSubnetGroupName *string `type:"string"`
 
+	// Specifies whether this cluster can be deleted. If DeletionProtection is enabled,
+	// the cluster cannot be deleted unless it is modified and DeletionProtection
+	// is disabled. DeletionProtection protects clusters from being accidentally
+	// deleted.
+	DeletionProtection *bool `type:"boolean"`
+
 	// A list of log types that need to be enabled for exporting to Amazon CloudWatch
 	// Logs.
 	EnableCloudwatchLogsExports []string `type:"list"`
@@ -94,10 +100,13 @@ type CreateDBClusterInput struct {
 	KmsKeyId *string `type:"string"`
 
 	// The password for the master database user. This password can contain any
-	// printable ASCII character except "/", """, or "@".
+	// printable ASCII character except forward slash (/), double quote ("), or
+	// the "at" symbol (@).
 	//
 	// Constraints: Must contain from 8 to 41 characters.
-	MasterUserPassword *string `type:"string"`
+	//
+	// MasterUserPassword is a required field
+	MasterUserPassword *string `type:"string" required:"true"`
 
 	// The name of the master user for the DB cluster.
 	//
@@ -108,7 +117,9 @@ type CreateDBClusterInput struct {
 	//    * The first character must be a letter.
 	//
 	//    * Cannot be a reserved word for the chosen database engine.
-	MasterUsername *string `type:"string"`
+	//
+	// MasterUsername is a required field
+	MasterUsername *string `type:"string" required:"true"`
 
 	// The port number on which the instances in the DB cluster accept connections.
 	Port *int64 `type:"integer"`
@@ -168,6 +179,14 @@ func (s *CreateDBClusterInput) Validate() error {
 
 	if s.Engine == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Engine"))
+	}
+
+	if s.MasterUserPassword == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MasterUserPassword"))
+	}
+
+	if s.MasterUsername == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MasterUsername"))
 	}
 
 	if invalidParams.Len() > 0 {

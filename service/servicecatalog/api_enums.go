@@ -318,6 +318,23 @@ func (enum ProvisionedProductViewFilterBy) MarshalValueBuf(b []byte) ([]byte, er
 	return append(b, enum...), nil
 }
 
+type ProvisioningArtifactGuidance string
+
+// Enum values for ProvisioningArtifactGuidance
+const (
+	ProvisioningArtifactGuidanceDefault    ProvisioningArtifactGuidance = "DEFAULT"
+	ProvisioningArtifactGuidanceDeprecated ProvisioningArtifactGuidance = "DEPRECATED"
+)
+
+func (enum ProvisioningArtifactGuidance) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProvisioningArtifactGuidance) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ProvisioningArtifactPropertyName string
 
 // Enum values for ProvisioningArtifactPropertyName
@@ -517,6 +534,24 @@ func (enum SortOrder) MarshalValue() (string, error) {
 }
 
 func (enum SortOrder) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type StackInstanceStatus string
+
+// Enum values for StackInstanceStatus
+const (
+	StackInstanceStatusCurrent    StackInstanceStatus = "CURRENT"
+	StackInstanceStatusOutdated   StackInstanceStatus = "OUTDATED"
+	StackInstanceStatusInoperable StackInstanceStatus = "INOPERABLE"
+)
+
+func (enum StackInstanceStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackInstanceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

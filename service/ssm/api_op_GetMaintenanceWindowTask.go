@@ -13,12 +13,12 @@ import (
 type GetMaintenanceWindowTaskInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Maintenance Window ID that includes the task to retrieve.
+	// The maintenance window ID that includes the task to retrieve.
 	//
 	// WindowId is a required field
 	WindowId *string `min:"20" type:"string" required:"true"`
 
-	// The Maintenance Window task ID to retrieve.
+	// The maintenance window task ID to retrieve.
 	//
 	// WindowTaskId is a required field
 	WindowTaskId *string `min:"36" type:"string" required:"true"`
@@ -65,7 +65,7 @@ type GetMaintenanceWindowTaskOutput struct {
 	// LoggingInfo has been deprecated. To specify an S3 bucket to contain logs,
 	// instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options
-	// for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.
+	// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 	LoggingInfo *LoggingInfo `type:"structure"`
 
 	// The maximum number of targets allowed to run this task in parallel.
@@ -81,7 +81,8 @@ type GetMaintenanceWindowTaskOutput struct {
 	// priority. Tasks that have the same priority are scheduled in parallel.
 	Priority *int64 `type:"integer"`
 
-	// The IAM service role to assume during task execution.
+	// The ARN of the IAM service role to use to publish Amazon Simple Notification
+	// Service (Amazon SNS) notifications for maintenance window Run Command tasks.
 	ServiceRoleArn *string `type:"string"`
 
 	// The targets where the task should run.
@@ -89,8 +90,8 @@ type GetMaintenanceWindowTaskOutput struct {
 
 	// The resource that the task used during execution. For RUN_COMMAND and AUTOMATION
 	// task types, the TaskArn is the Systems Manager Document name/ARN. For LAMBDA
-	// tasks, the value is the function name/ARN. For STEP_FUNCTION tasks, the value
-	// is the state machine ARN.
+	// tasks, the value is the function name/ARN. For STEP_FUNCTIONS tasks, the
+	// value is the state machine ARN.
 	TaskArn *string `min:"1" type:"string"`
 
 	// The parameters to pass to the task when it runs.
@@ -101,16 +102,16 @@ type GetMaintenanceWindowTaskOutput struct {
 	// TaskParameters has been deprecated. To specify parameters to pass to a task
 	// when it runs, instead use the Parameters option in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options
-	// for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.
+	// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map"`
 
 	// The type of task to run.
 	TaskType MaintenanceWindowTaskType `type:"string" enum:"true"`
 
-	// The retrieved Maintenance Window ID.
+	// The retrieved maintenance window ID.
 	WindowId *string `min:"20" type:"string"`
 
-	// The retrieved Maintenance Window task ID.
+	// The retrieved maintenance window task ID.
 	WindowTaskId *string `min:"36" type:"string"`
 }
 
@@ -124,7 +125,7 @@ const opGetMaintenanceWindowTask = "GetMaintenanceWindowTask"
 // GetMaintenanceWindowTaskRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Lists the tasks in a Maintenance Window.
+// Lists the tasks in a maintenance window.
 //
 //    // Example sending a request using GetMaintenanceWindowTaskRequest.
 //    req := client.GetMaintenanceWindowTaskRequest(params)

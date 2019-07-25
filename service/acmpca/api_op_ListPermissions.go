@@ -14,10 +14,10 @@ type ListPermissionsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Number (ARN) of the private CA to inspect. You can find
-	// the ARN by calling the ListCertificateAuthorities operation. This must be
-	// of the form: arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	// the ARN by calling the ListCertificateAuthorities action. This must be of
+	// the form: arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	// You can get a private CA's ARN by running the ListCertificateAuthorities
-	// operation.
+	// action.
 	//
 	// CertificateAuthorityArn is a required field
 	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
@@ -86,8 +86,8 @@ const opListPermissions = "ListPermissions"
 // AWS Certificate Manager Private Certificate Authority.
 //
 // Lists all the permissions, if any, that have been assigned by a private CA.
-// Permissions can be granted with the CreatePermission operation and revoked
-// with the DeletePermission operation.
+// Permissions can be granted with the CreatePermission action and revoked with
+// the DeletePermission action.
 //
 //    // Example sending a request using ListPermissionsRequest.
 //    req := client.ListPermissionsRequest(params)

@@ -46,8 +46,8 @@ type DescribeAccountLimitsOutput struct {
 	// Information about the limits.
 	Limits []Limit `type:"list"`
 
-	// The marker to use when requesting the next set of results. If there are no
-	// additional results, the string is empty.
+	// If there are additional results, this is the marker for the next set of results.
+	// Otherwise, this is null.
 	NextMarker *string `type:"string"`
 }
 

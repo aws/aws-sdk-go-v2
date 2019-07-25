@@ -13,8 +13,8 @@ import (
 type ReceiveMessageInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of s that need to be returned along with each message. These attributes
-	// include:
+	// A list of attributes that need to be returned along with each message. These
+	// attributes include:
 	//
 	//    * All - Returns all values.
 	//
@@ -99,7 +99,7 @@ type ReceiveMessageInput struct {
 	//    * During a visibility timeout, subsequent calls with the same ReceiveRequestAttemptId
 	//    return the same messages and receipt handles. If a retry occurs within
 	//    the deduplication interval, it resets the visibility timeout. For more
-	//    information, see Visibility Timeout (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)
+	//    information, see Visibility Timeout (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)
 	//    in the Amazon Simple Queue Service Developer Guide. If a caller of the
 	//    ReceiveMessage action still processes messages when the visibility timeout
 	//    expires and messages become visible, another worker consuming from the
@@ -123,7 +123,7 @@ type ReceiveMessageInput struct {
 	// can contain alphanumeric characters (a-z, A-Z, 0-9) and punctuation (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~).
 	//
 	// For best practices of using ReceiveRequestAttemptId, see Using the ReceiveRequestAttemptId
-	// Request Parameter (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-receiverequestattemptid-request-parameter.html)
+	// Request Parameter (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-receiverequestattemptid-request-parameter.html)
 	// in the Amazon Simple Queue Service Developer Guide.
 	ReceiveRequestAttemptId *string `type:"string"`
 
@@ -178,7 +178,7 @@ const opReceiveMessage = "ReceiveMessage"
 //
 // Retrieves one or more messages (up to 10), from the specified queue. Using
 // the WaitTimeSeconds parameter enables long-poll support. For more information,
-// see Amazon SQS Long Polling (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-long-polling.html)
+// see Amazon SQS Long Polling (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-long-polling.html)
 // in the Amazon Simple Queue Service Developer Guide.
 //
 // Short poll is the default behavior where a weighted random set of machines
@@ -205,14 +205,14 @@ const opReceiveMessage = "ReceiveMessage"
 //    * An MD5 digest of the message attributes.
 //
 // The receipt handle is the identifier you must provide when deleting the message.
-// For more information, see Queue and Message Identifiers (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-message-identifiers.html)
+// For more information, see Queue and Message Identifiers (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-message-identifiers.html)
 // in the Amazon Simple Queue Service Developer Guide.
 //
 // You can provide the VisibilityTimeout parameter in your request. The parameter
 // is applied to the messages that Amazon SQS returns in the response. If you
 // don't include the parameter, the overall visibility timeout for the queue
 // is used for the returned messages. For more information, see Visibility Timeout
-// (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)
+// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)
 // in the Amazon Simple Queue Service Developer Guide.
 //
 // A message that isn't deleted or a message whose visibility isn't extended

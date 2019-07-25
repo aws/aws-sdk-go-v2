@@ -61,7 +61,9 @@ const opDescribeCacheSubnetGroups = "DescribeCacheSubnetGroups"
 // Amazon ElastiCache.
 //
 // Returns a list of cache subnet group descriptions. If a subnet group name
-// is specified, the list contains only the description of that group.
+// is specified, the list contains only the description of that group. This
+// is applicable only when you have ElastiCache in VPC setup. All ElastiCache
+// clusters now launch in VPC by default.
 //
 //    // Example sending a request using DescribeCacheSubnetGroupsRequest.
 //    req := client.DescribeCacheSubnetGroupsRequest(params)

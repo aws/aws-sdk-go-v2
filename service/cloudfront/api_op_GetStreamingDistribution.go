@@ -11,7 +11,7 @@ import (
 )
 
 // The request to get a streaming distribution's information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetStreamingDistributionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetStreamingDistributionRequest
 type GetStreamingDistributionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +53,7 @@ func (s GetStreamingDistributionInput) MarshalFields(e protocol.FieldEncoder) er
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetStreamingDistributionResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetStreamingDistributionResult
 type GetStreamingDistributionOutput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistribution"`
 
@@ -87,7 +87,7 @@ func (s GetStreamingDistributionOutput) MarshalFields(e protocol.FieldEncoder) e
 	return nil
 }
 
-const opGetStreamingDistribution = "GetStreamingDistribution2018_11_05"
+const opGetStreamingDistribution = "GetStreamingDistribution2019_03_26"
 
 // GetStreamingDistributionRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -102,12 +102,12 @@ const opGetStreamingDistribution = "GetStreamingDistribution2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetStreamingDistribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetStreamingDistribution
 func (c *Client) GetStreamingDistributionRequest(input *GetStreamingDistributionInput) GetStreamingDistributionRequest {
 	op := &aws.Operation{
 		Name:       opGetStreamingDistribution,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2018-11-05/streaming-distribution/{Id}",
+		HTTPPath:   "/2019-03-26/streaming-distribution/{Id}",
 	}
 
 	if input == nil {

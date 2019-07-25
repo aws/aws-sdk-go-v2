@@ -22,7 +22,7 @@ type UpdateMaintenanceWindowTaskInput struct {
 	// LoggingInfo has been deprecated. To specify an S3 bucket to contain logs,
 	// instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options
-	// for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.
+	// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 	LoggingInfo *LoggingInfo `type:"structure"`
 
 	// The new MaxConcurrency value you want to specify. MaxConcurrency is the number
@@ -45,20 +45,18 @@ type UpdateMaintenanceWindowTaskInput struct {
 	// specified are set to null.
 	Replace *bool `type:"boolean"`
 
-	// The IAM service role ARN to modify. The system assumes this role during task
-	// execution.
+	// The ARN of the IAM service role for Systems Manager to assume when running
+	// a maintenance window task. If you do not specify a service role ARN, Systems
+	// Manager uses your account's service-linked role. If no service-linked role
+	// for Systems Manager exists in your account, it is created when you run RegisterTaskWithMaintenanceWindow.
 	//
-	// If you do not specify a service role ARN, Systems Manager will use your account's
-	// service-linked role for Systems Manager by default. If no service-linked
-	// role for Systems Manager exists in your account, it will be created when
-	// you run RegisterTaskWithMaintenanceWindow without specifying a service role
-	// ARN.
+	// For more information, see the following topics in the in the AWS Systems
+	// Manager User Guide:
 	//
-	// For more information, see Service-Linked Role Permissions for Systems Manager
-	// (http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions)
-	// and Should I Use a Service-Linked Role or a Custom Service Role to Run Maintenance
-	// Window Tasks? (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role)
-	// in the AWS Systems Manager User Guide.
+	//    * Service-Linked Role Permissions for Systems Manager (http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions)
+	//
+	//    * Should I Use a Service-Linked Role or a Custom Service Role to Run Maintenance
+	//    Window Tasks? (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role)
 	ServiceRoleArn *string `type:"string"`
 
 	// The targets (either instances or tags) to modify. Instances are specified
@@ -78,7 +76,7 @@ type UpdateMaintenanceWindowTaskInput struct {
 	// TaskParameters has been deprecated. To specify parameters to pass to a task
 	// when it runs, instead use the Parameters option in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options
-	// for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.
+	// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 	//
 	// The map has the following format:
 	//
@@ -87,7 +85,7 @@ type UpdateMaintenanceWindowTaskInput struct {
 	// Value: an array of strings, each string is between 1 and 255 characters
 	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map"`
 
-	// The Maintenance Window ID that contains the task to modify.
+	// The maintenance window ID that contains the task to modify.
 	//
 	// WindowId is a required field
 	WindowId *string `min:"20" type:"string" required:"true"`
@@ -171,7 +169,7 @@ type UpdateMaintenanceWindowTaskOutput struct {
 	// LoggingInfo has been deprecated. To specify an S3 bucket to contain logs,
 	// instead use the OutputS3BucketName and OutputS3KeyPrefix options in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options
-	// for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.
+	// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 	LoggingInfo *LoggingInfo `type:"structure"`
 
 	// The updated MaxConcurrency value.
@@ -186,7 +184,8 @@ type UpdateMaintenanceWindowTaskOutput struct {
 	// The updated priority value.
 	Priority *int64 `type:"integer"`
 
-	// The updated service role ARN value.
+	// The ARN of the IAM service role to use to publish Amazon Simple Notification
+	// Service (Amazon SNS) notifications for maintenance window Run Command tasks.
 	ServiceRoleArn *string `type:"string"`
 
 	// The updated target values.
@@ -203,13 +202,13 @@ type UpdateMaintenanceWindowTaskOutput struct {
 	// TaskParameters has been deprecated. To specify parameters to pass to a task
 	// when it runs, instead use the Parameters option in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options
-	// for the supported Maintenance Window task types, see MaintenanceWindowTaskInvocationParameters.
+	// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
 	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map"`
 
-	// The ID of the Maintenance Window that was updated.
+	// The ID of the maintenance window that was updated.
 	WindowId *string `min:"20" type:"string"`
 
-	// The task ID of the Maintenance Window that was updated.
+	// The task ID of the maintenance window that was updated.
 	WindowTaskId *string `min:"36" type:"string"`
 }
 
@@ -223,7 +222,7 @@ const opUpdateMaintenanceWindowTask = "UpdateMaintenanceWindowTask"
 // UpdateMaintenanceWindowTaskRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Modifies a task assigned to a Maintenance Window. You can't change the task
+// Modifies a task assigned to a maintenance window. You can't change the task
 // type, but you can change the following values:
 //
 //    * TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript

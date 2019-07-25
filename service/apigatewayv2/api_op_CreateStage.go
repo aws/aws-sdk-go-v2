@@ -43,6 +43,10 @@ type CreateStageInput struct {
 
 	// The stage variable map.
 	StageVariables map[string]string `locationName:"stageVariables" type:"map"`
+
+	// A key value pair of string with key length between[1-128] and value length
+	// between[1-256]
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -132,6 +136,18 @@ func (s CreateStageInput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	if s.ApiId != nil {
 		v := *s.ApiId
 
@@ -172,6 +188,10 @@ type CreateStageOutput struct {
 
 	// The stage variable map.
 	StageVariables map[string]string `locationName:"stageVariables" type:"map"`
+
+	// A key value pair of string with key length between[1-128] and value length
+	// between[1-256]
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -246,6 +266,18 @@ func (s CreateStageOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		ms0 := e.Map(protocol.BodyTarget, "stageVariables", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
 			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})

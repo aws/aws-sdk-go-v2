@@ -34,6 +34,9 @@ type CreateBranchInput struct {
 	// Description for the branch.
 	Description *string `locationName:"description" type:"string"`
 
+	// Display name for a branch, will use as the default domain prefix.
+	DisplayName *string `locationName:"displayName" type:"string"`
+
 	// Enables auto building for the branch.
 	EnableAutoBuild *bool `locationName:"enableAutoBuild" type:"boolean"`
 
@@ -53,7 +56,7 @@ type CreateBranchInput struct {
 	Stage Stage `locationName:"stage" type:"string" enum:"true"`
 
 	// Tag for the branch.
-	Tags map[string]string `locationName:"tags" type:"map"`
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 
 	// The content TTL for the website in seconds.
 	Ttl *string `locationName:"ttl" type:"string"`
@@ -83,6 +86,9 @@ func (s *CreateBranchInput) Validate() error {
 	}
 	if s.BuildSpec != nil && len(*s.BuildSpec) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("BuildSpec", 1))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -118,6 +124,12 @@ func (s CreateBranchInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DisplayName != nil {
+		v := *s.DisplayName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "displayName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.EnableAutoBuild != nil {
 		v := *s.EnableAutoBuild

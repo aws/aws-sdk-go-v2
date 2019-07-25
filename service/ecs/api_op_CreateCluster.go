@@ -16,8 +16,14 @@ type CreateClusterInput struct {
 
 	// The name of your cluster. If you do not specify a name for your cluster,
 	// you create a cluster named default. Up to 255 letters (uppercase and lowercase),
-	// numbers, hyphens, and underscores are allowed.
+	// numbers, and hyphens are allowed.
 	ClusterName *string `locationName:"clusterName" type:"string"`
+
+	// The setting to use when creating a cluster. This parameter is used to enable
+	// CloudWatch Container Insights for a cluster. If this value is specified,
+	// it will override the containerInsights value set with PutAccountSetting or
+	// PutAccountSettingDefault.
+	Settings []ClusterSetting `locationName:"settings" type:"list"`
 
 	// The metadata that you apply to the cluster to help you categorize and organize
 	// them. Each tag consists of a key and an optional value, both of which you
@@ -75,7 +81,7 @@ const opCreateCluster = "CreateCluster"
 // AWS services can be managed on your behalf. However, if the IAM user that
 // makes the call does not have permissions to create the service-linked role,
 // it is not created. For more information, see Using Service-Linked Roles for
-// Amazon ECS (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html)
+// Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html)
 // in the Amazon Elastic Container Service Developer Guide.
 //
 //    // Example sending a request using CreateClusterRequest.

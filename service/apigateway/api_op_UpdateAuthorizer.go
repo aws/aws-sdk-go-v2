@@ -85,7 +85,8 @@ func (s UpdateAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error {
 // Represents an authorization layer for methods. If enabled on a method, API
 // Gateway will activate the authorizer when a client calls the method.
 //
-// Enable custom authorization (https://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html)
+// Use Lambda Function as Authorizer (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html)
+// Use Cognito User Pool as Authorizer (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html)
 type UpdateAuthorizerOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -140,11 +141,12 @@ type UpdateAuthorizerOutput struct {
 	IdentitySource *string `locationName:"identitySource" type:"string"`
 
 	// A validation expression for the incoming identity token. For TOKEN authorizers,
-	// this value is a regular expression. API Gateway will match the aud field
-	// of the incoming token from the client against the specified regular expression.
-	// It will invoke the authorizer's Lambda function when there is a match. Otherwise,
-	// it will return a 401 Unauthorized response without calling the Lambda function.
-	// The validation expression does not apply to the REQUEST authorizer.
+	// this value is a regular expression. For COGNITO_USER_POOLS authorizers, API
+	// Gateway will match the aud field of the incoming token from the client against
+	// the specified regular expression. It will invoke the authorizer's Lambda
+	// function when there is a match. Otherwise, it will return a 401 Unauthorized
+	// response without calling the Lambda function. The validation expression does
+	// not apply to the REQUEST authorizer.
 	IdentityValidationExpression *string `locationName:"identityValidationExpression" type:"string"`
 
 	// [Required] The name of the authorizer.

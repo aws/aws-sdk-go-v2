@@ -14,8 +14,7 @@ import (
 type EnableImportFindingsForProductInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the product that generates findings that you want to import into
-	// Security Hub.
+	// The ARN of the product to enable the integration for.
 	//
 	// ProductArn is a required field
 	ProductArn *string `type:"string" required:"true"`
@@ -57,8 +56,7 @@ func (s EnableImportFindingsForProductInput) MarshalFields(e protocol.FieldEncod
 type EnableImportFindingsForProductOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of a resource that represents your subscription to the product that
-	// generates the findings that you want to import into Security Hub.
+	// The ARN of your subscription to the product to enable integrations for.
 	ProductSubscriptionArn *string `type:"string"`
 }
 
@@ -83,8 +81,10 @@ const opEnableImportFindingsForProduct = "EnableImportFindingsForProduct"
 // EnableImportFindingsForProductRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Sets up the subscription that enables a findings-generating solution (product)
-// to import its findings into Security Hub.
+// Enables the integration of a partner product with Security Hub. Integrated
+// products send findings to Security Hub. When you enable a product integration,
+// a permission policy that grants permission for the product to send findings
+// to Security Hub is applied.
 //
 //    // Example sending a request using EnableImportFindingsForProductRequest.
 //    req := client.EnableImportFindingsForProductRequest(params)

@@ -17,7 +17,7 @@ type ModifyTargetGroupInput struct {
 	HealthCheckEnabled *bool `type:"boolean"`
 
 	// The approximate amount of time, in seconds, between health checks of an individual
-	// target. For Application Load Balancers, the range is 5–300 seconds. For
+	// target. For Application Load Balancers, the range is 5 to 300 seconds. For
 	// Network Load Balancers, the supported values are 10 or 30 seconds.
 	//
 	// If the protocol of the target group is TCP, you can't modify this setting.
@@ -32,8 +32,8 @@ type ModifyTargetGroupInput struct {
 
 	// The protocol the load balancer uses when performing health checks on targets.
 	// The TCP protocol is supported for health checks only if the protocol of the
-	// target group is TCP or TLS. The TLS protocol is not supported for health
-	// checks.
+	// target group is TCP, TLS, UDP, or TCP_UDP. The TLS, UDP, and TCP_UDP protocols
+	// are not supported for health checks.
 	//
 	// If the protocol of the target group is TCP, you can't modify this setting.
 	HealthCheckProtocol ProtocolEnum `type:"string" enum:"true"`

@@ -2,6 +2,25 @@
 
 package kafka
 
+// Client-broker encryption in transit setting.
+type Broker string
+
+// Enum values for Broker
+const (
+	BrokerTls          Broker = "TLS"
+	BrokerTlsPlaintext Broker = "TLS_PLAINTEXT"
+	BrokerPlaintext    Broker = "PLAINTEXT"
+)
+
+func (enum Broker) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Broker) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The distribution of broker nodes across Availability Zones. By default, broker
 // nodes are distributed among three Availability Zones. Currently, the only
 // supported value is DEFAULT. You can either specify this value explicitly
@@ -29,6 +48,7 @@ type ClusterState string
 const (
 	ClusterStateActive   ClusterState = "ACTIVE"
 	ClusterStateCreating ClusterState = "CREATING"
+	ClusterStateUpdating ClusterState = "UPDATING"
 	ClusterStateDeleting ClusterState = "DELETING"
 	ClusterStateFailed   ClusterState = "FAILED"
 )
@@ -43,7 +63,9 @@ func (enum ClusterState) MarshalValueBuf(b []byte) ([]byte, error) {
 }
 
 // Specifies which metrics are gathered for the MSK cluster. This property has
-// three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.
+// three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For
+// a list of the metrics associated with each of these three levels of monitoring,
+// see Monitoring (https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html).
 type EnhancedMonitoring string
 
 // Enum values for EnhancedMonitoring

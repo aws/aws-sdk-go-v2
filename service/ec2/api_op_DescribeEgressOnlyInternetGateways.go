@@ -24,7 +24,7 @@ type DescribeEgressOnlyInternetGatewaysInput struct {
 
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int64 `type:"integer"`
+	MaxResults *int64 `min:"5" type:"integer"`
 
 	// The token for the next page of results.
 	NextToken *string `type:"string"`
@@ -33,6 +33,19 @@ type DescribeEgressOnlyInternetGatewaysInput struct {
 // String returns the string representation
 func (s DescribeEgressOnlyInternetGatewaysInput) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeEgressOnlyInternetGatewaysInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEgressOnlyInternetGatewaysInput"}
+	if s.MaxResults != nil && *s.MaxResults < 5 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeEgressOnlyInternetGatewaysResult

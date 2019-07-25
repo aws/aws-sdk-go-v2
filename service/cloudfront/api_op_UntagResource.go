@@ -12,7 +12,7 @@ import (
 )
 
 // The request to remove tags from a CloudFront resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/UntagResourceRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UntagResourceRequest
 type UntagResourceInput struct {
 	_ struct{} `type:"structure" payload:"TagKeys"`
 
@@ -24,7 +24,7 @@ type UntagResourceInput struct {
 	// A complex type that contains zero or more Tag key elements.
 	//
 	// TagKeys is a required field
-	TagKeys *TagKeys `locationName:"TagKeys" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2018-11-05/"`
+	TagKeys *TagKeys `locationName:"TagKeys" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
 }
 
 // String returns the string representation
@@ -56,7 +56,7 @@ func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	if s.TagKeys != nil {
 		v := s.TagKeys
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2018-11-05/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
 		e.SetFields(protocol.PayloadTarget, "TagKeys", v, metadata)
 	}
 	if s.Resource != nil {
@@ -68,7 +68,7 @@ func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/UntagResourceOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UntagResourceOutput
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -83,7 +83,7 @@ func (s UntagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opUntagResource = "UntagResource2018_11_05"
+const opUntagResource = "UntagResource2019_03_26"
 
 // UntagResourceRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -97,12 +97,12 @@ const opUntagResource = "UntagResource2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/UntagResource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UntagResource
 func (c *Client) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
 	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2018-11-05/tagging?Operation=Untag",
+		HTTPPath:   "/2019-03-26/tagging?Operation=Untag",
 	}
 
 	if input == nil {

@@ -15,7 +15,8 @@ import (
 type CreateFileSystemFromBackupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the backup.
+	// The ID of the backup. Specifies the backup to use if you're creating a file
+	// system from an existing backup.
 	//
 	// BackupId is a required field
 	BackupId *string `min:"12" type:"string" required:"true"`
@@ -112,11 +113,11 @@ const opCreateFileSystemFromBackup = "CreateFileSystemFromBackup"
 // File Server backup.
 //
 // If a file system with the specified client request token exists and the parameters
-// match, this call returns the description of the existing file system. If
-// a client request token specified by the file system exists and the parameters
-// don't match, this call returns IncompatibleParameterError. If a file system
-// with the specified client request token doesn't exist, this operation does
-// the following:
+// match, this operation returns the description of the file system. If a client
+// request token specified by the file system exists and the parameters don't
+// match, this call returns IncompatibleParameterError. If a file system with
+// the specified client request token doesn't exist, this operation does the
+// following:
 //
 //    * Creates a new Amazon FSx file system from backup with an assigned ID,
 //    and an initial lifecycle state of CREATING.

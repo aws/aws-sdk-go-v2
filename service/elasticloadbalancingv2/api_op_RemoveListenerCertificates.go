@@ -63,7 +63,8 @@ const opRemoveListenerCertificates = "RemoveListenerCertificates"
 // RemoveListenerCertificatesRequest returns a request value for making API operation for
 // Elastic Load Balancing.
 //
-// Removes the specified certificate from the specified HTTPS listener.
+// Removes the specified certificate from the certificate list for the specified
+// HTTPS listener.
 //
 // You can't remove the default certificate for a listener. To replace the default
 // certificate, call ModifyListener.

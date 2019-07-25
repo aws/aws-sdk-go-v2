@@ -4,6 +4,7 @@ package directconnect
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -12,6 +13,13 @@ import (
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateLagRequest
 type CreateLagInput struct {
 	_ struct{} `type:"structure"`
+
+	// The tags to assign to the child connections of the LAG. Only newly created
+	// child connections as the result of creating a LAG connection are assigned
+	// the provided tags. The tags are not assigned to an existing connection that
+	// is provided via the “connectionId” parameter that will be migrated to
+	// the LAG.
+	ChildConnectionTags []Tag `locationName:"childConnectionTags" min:"1" type:"list"`
 
 	// The ID of an existing connection to migrate to the LAG.
 	ConnectionId *string `locationName:"connectionId" type:"string"`
@@ -38,6 +46,9 @@ type CreateLagInput struct {
 	//
 	// NumberOfConnections is a required field
 	NumberOfConnections *int64 `locationName:"numberOfConnections" type:"integer" required:"true"`
+
+	// The tags to assign to the link aggregation group (LAG).
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -48,6 +59,9 @@ func (s CreateLagInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLagInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateLagInput"}
+	if s.ChildConnectionTags != nil && len(s.ChildConnectionTags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ChildConnectionTags", 1))
+	}
 
 	if s.ConnectionsBandwidth == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectionsBandwidth"))
@@ -63,6 +77,23 @@ func (s *CreateLagInput) Validate() error {
 
 	if s.NumberOfConnections == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NumberOfConnections"))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
+	if s.ChildConnectionTags != nil {
+		for i, v := range s.ChildConnectionTags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ChildConnectionTags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -140,6 +171,9 @@ type CreateLagOutput struct {
 
 	// The AWS Region where the connection is located.
 	Region *string `locationName:"region" type:"string"`
+
+	// Any tags assigned to link aggregation group (LAG).
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 }
 
 // String returns the string representation

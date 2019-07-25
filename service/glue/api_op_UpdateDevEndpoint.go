@@ -38,7 +38,7 @@ type UpdateDevEndpointInput struct {
 	PublicKey *string `type:"string"`
 
 	// True if the list of custom libraries to be loaded in the development endpoint
-	// needs to be updated, or False otherwise.
+	// needs to be updated, or False if otherwise.
 	UpdateEtlLibraries *bool `type:"boolean"`
 }
 
@@ -76,7 +76,7 @@ const opUpdateDevEndpoint = "UpdateDevEndpoint"
 // UpdateDevEndpointRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Updates a specified DevEndpoint.
+// Updates a specified development endpoint.
 //
 //    // Example sending a request using UpdateDevEndpointRequest.
 //    req := client.UpdateDevEndpointRequest(params)

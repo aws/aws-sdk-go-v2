@@ -4,6 +4,7 @@ package cloudwatchevents
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -36,6 +37,13 @@ func (s *PutEventsInput) Validate() error {
 	if s.Entries != nil && len(s.Entries) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Entries", 1))
 	}
+	if s.Entries != nil {
+		for i, v := range s.Entries {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Entries", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -66,8 +74,8 @@ const opPutEvents = "PutEvents"
 // PutEventsRequest returns a request value for making API operation for
 // Amazon CloudWatch Events.
 //
-// Sends custom events to Amazon CloudWatch Events so that they can be matched
-// to rules.
+// Sends custom events to EventBridge so that they can be matched to rules.
+// These events can be from your custom applications and services.
 //
 //    // Example sending a request using PutEventsRequest.
 //    req := client.PutEventsRequest(params)

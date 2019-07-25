@@ -15,7 +15,7 @@ import (
 type PutPermissionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The action that you are enabling the other account to perform. Currently,
+	// The action that you're enabling the other account to perform. Currently,
 	// this must be events:PutEvents.
 	//
 	// Action is a required field
@@ -23,31 +23,35 @@ type PutPermissionInput struct {
 
 	// This parameter enables you to limit the permission to accounts that fulfill
 	// a certain condition, such as being a member of a certain AWS organization.
-	// For more information about AWS Organizations, see What Is AWS Organizations
+	// For more information about AWS Organizations, see What Is AWS Organizations?
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html)
 	// in the AWS Organizations User Guide.
 	//
-	// If you specify Condition with an AWS organization ID, and specify "*" as
-	// the value for Principal, you grant permission to all the accounts in the
-	// named organization.
+	// If you specify Condition with an AWS organization ID and specify "*" as the
+	// value for Principal, you grant permission to all the accounts in the named
+	// organization.
 	//
-	// The Condition is a JSON string which must contain Type, Key, and Value fields.
+	// The Condition is a JSON string that must contain Type, Key, and Value fields.
 	Condition *Condition `type:"structure"`
+
+	// The event bus associated with the rule. If you omit this, the default event
+	// bus is used.
+	EventBusName *string `min:"1" type:"string"`
 
 	// The 12-digit AWS account ID that you are permitting to put events to your
 	// default event bus. Specify "*" to permit any account to put events to your
 	// default event bus.
 	//
 	// If you specify "*" without specifying Condition, avoid creating rules that
-	// may match undesirable events. To create more secure rules, make sure that
+	// might match undesirable events. To create more secure rules, make sure that
 	// the event pattern for each rule contains an account field with a specific
-	// account ID from which to receive events. Rules with an account field do not
-	// match any events sent from other accounts.
+	// account ID to receive events from. Rules with an account field don't match
+	// any events sent from other accounts.
 	//
 	// Principal is a required field
 	Principal *string `min:"1" type:"string" required:"true"`
 
-	// An identifier string for the external account that you are granting permissions
+	// An identifier string for the external account that you're granting permissions
 	// to. If you later want to revoke the permission for this external account,
 	// specify this StatementId when you run RemovePermission.
 	//
@@ -69,6 +73,9 @@ func (s *PutPermissionInput) Validate() error {
 	}
 	if s.Action != nil && len(*s.Action) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Action", 1))
+	}
+	if s.EventBusName != nil && len(*s.EventBusName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EventBusName", 1))
 	}
 
 	if s.Principal == nil {
@@ -112,27 +119,25 @@ const opPutPermission = "PutPermission"
 // Amazon CloudWatch Events.
 //
 // Running PutPermission permits the specified AWS account or AWS organization
-// to put events to your account's default event bus. CloudWatch Events rules
-// in your account are triggered by these events arriving to your default event
-// bus.
+// to put events to the specified event bus. Rules in your account are triggered
+// by these events arriving to an event bus in your account.
 //
 // For another account to send events to your account, that external account
-// must have a CloudWatch Events rule with your account's default event bus
-// as a target.
+// must have a rule with your account's event bus as a target.
 //
-// To enable multiple AWS accounts to put events to your default event bus,
-// run PutPermission once for each of these accounts. Or, if all the accounts
-// are members of the same AWS organization, you can run PutPermission once
-// specifying Principal as "*" and specifying the AWS organization ID in Condition,
-// to grant permissions to all accounts in that organization.
+// To enable multiple AWS accounts to put events to an event bus, run PutPermission
+// once for each of these accounts. Or, if all the accounts are members of the
+// same AWS organization, you can run PutPermission once specifying Principal
+// as "*" and specifying the AWS organization ID in Condition, to grant permissions
+// to all accounts in that organization.
 //
 // If you grant permissions using an organization, then accounts in that organization
 // must specify a RoleArn with proper permissions when they use PutTarget to
 // add your account's event bus as a target. For more information, see Sending
-// and Receiving Events Between AWS Accounts (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEvents-CrossAccountEventDelivery.html)
-// in the Amazon CloudWatch Events User Guide.
+// and Receiving Events Between AWS Accounts (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html)
+// in the Amazon EventBridge User Guide.
 //
-// The permission policy on the default event bus cannot exceed 10 KB in size.
+// The permission policy on an event bus can't exceed 10 KB in size.
 //
 //    // Example sending a request using PutPermissionRequest.
 //    req := client.PutPermissionRequest(params)

@@ -11,7 +11,7 @@ import (
 )
 
 // Represents a request to send a single formatted email using Amazon SES. For
-// more information, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-formatted.html).
+// more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-formatted.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendEmailRequest
 type SendEmailInput struct {
 	_ struct{} `type:"structure"`
@@ -52,18 +52,18 @@ type SendEmailInput struct {
 	// and the ReturnPath to be feedback@example.com.
 	//
 	// For more information about sending authorization, see the Amazon SES Developer
-	// Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+	// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	ReturnPathArn *string `type:"string"`
 
 	// The email address that is sending the email. This email address must be either
 	// individually verified with Amazon SES, or from a domain that has been verified
 	// with Amazon SES. For information about verifying identities, see the Amazon
-	// SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html).
+	// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html).
 	//
 	// If you are sending on behalf of another user and have been permitted to do
 	// so by a sending authorization policy, then you must also specify the SourceArn
 	// parameter. For more information about sending authorization, see the Amazon
-	// SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+	// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	//
 	// Amazon SES does not support the SMTPUTF8 extension, as described in RFC6531
 	// (https://tools.ietf.org/html/rfc6531). For this reason, the local part of
@@ -89,7 +89,7 @@ type SendEmailInput struct {
 	// and the Source to be user@example.com.
 	//
 	// For more information about sending authorization, see the Amazon SES Developer
-	// Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+	// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	SourceArn *string `type:"string"`
 
 	// A list of tags, in the form of name/value pairs, to apply to an email that
@@ -169,7 +169,7 @@ const opSendEmail = "SendEmail"
 //    * If your account is still in the Amazon SES sandbox, you may only send
 //    to verified addresses or domains, or to email addresses associated with
 //    the Amazon SES Mailbox Simulator. For more information, see Verifying
-//    Email Addresses and Domains (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html)
+//    Email Addresses and Domains (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html)
 //    in the Amazon SES Developer Guide.
 //
 //    * The maximum message size is 10 MB.
@@ -190,7 +190,7 @@ const opSendEmail = "SendEmail"
 // each recipient in the To:, CC: and BCC: fields) is counted against the maximum
 // number of emails you can send in a 24-hour period (your sending quota). For
 // more information about sending quotas in Amazon SES, see Managing Your Amazon
-// SES Sending Limits (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html)
+// SES Sending Limits (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html)
 // in the Amazon SES Developer Guide.
 //
 //    // Example sending a request using SendEmailRequest.

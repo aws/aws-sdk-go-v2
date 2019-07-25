@@ -81,7 +81,7 @@ const opTagResource = "TagResource"
 // AWS OpsWorks.
 //
 // Apply cost-allocation tags to a specified stack or layer in AWS OpsWorks
-// Stacks. For more information about how tagging works, see Tags (http://docs.aws.amazon.com/opsworks/latest/userguide/tagging.html)
+// Stacks. For more information about how tagging works, see Tags (https://docs.aws.amazon.com/opsworks/latest/userguide/tagging.html)
 // in the AWS OpsWorks User Guide.
 //
 //    // Example sending a request using TagResourceRequest.

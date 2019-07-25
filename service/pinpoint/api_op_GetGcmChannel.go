@@ -54,7 +54,10 @@ func (s GetGcmChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetGcmChannelOutput struct {
 	_ struct{} `type:"structure" payload:"GCMChannelResponse"`
 
-	// Google Cloud Messaging channel definition
+	// Provides information about the status and settings of the GCM channel for
+	// an application. The GCM channel enables Amazon Pinpoint to send push notifications
+	// through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging
+	// (GCM), service.
 	//
 	// GCMChannelResponse is a required field
 	GCMChannelResponse *GCMChannelResponse `type:"structure" required:"true"`
@@ -81,7 +84,8 @@ const opGetGcmChannel = "GetGcmChannel"
 // GetGcmChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Returns information about the GCM channel for an app.
+// Retrieves information about the status and settings of the GCM channel for
+// an application.
 //
 //    // Example sending a request using GetGcmChannelRequest.
 //    req := client.GetGcmChannelRequest(params)

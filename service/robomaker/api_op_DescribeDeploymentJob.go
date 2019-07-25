@@ -184,8 +184,7 @@ const opDescribeDeploymentJob = "DescribeDeploymentJob"
 // DescribeDeploymentJobRequest returns a request value for making API operation for
 // AWS RoboMaker.
 //
-// Describes a deployment job. [Does it work regardless of deployment status,
-// e.g. Failed?]
+// Describes a deployment job.
 //
 //    // Example sending a request using DescribeDeploymentJobRequest.
 //    req := client.DescribeDeploymentJobRequest(params)

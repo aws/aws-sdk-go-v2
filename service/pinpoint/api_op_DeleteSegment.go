@@ -67,7 +67,8 @@ func (s DeleteSegmentInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteSegmentOutput struct {
 	_ struct{} `type:"structure" payload:"SegmentResponse"`
 
-	// Segment definition.
+	// Provides information about the configuration, dimension, and other settings
+	// for a segment.
 	//
 	// SegmentResponse is a required field
 	SegmentResponse *SegmentResponse `type:"structure" required:"true"`
@@ -94,7 +95,7 @@ const opDeleteSegment = "DeleteSegment"
 // DeleteSegmentRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Deletes a segment.
+// Deletes a segment from an application.
 //
 //    // Example sending a request using DeleteSegmentRequest.
 //    req := client.DeleteSegmentRequest(params)

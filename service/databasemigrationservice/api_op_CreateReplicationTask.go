@@ -43,17 +43,17 @@ type CreateReplicationTaskInput struct {
 	// “
 	CdcStopPosition *string `type:"string"`
 
-	// The migration type.
+	// The migration type. Valid values: full-load | cdc | full-load-and-cdc
 	//
 	// MigrationType is a required field
 	MigrationType MigrationTypeValue `type:"string" required:"true" enum:"true"`
 
-	// The Amazon Resource Name (ARN) of the replication instance.
+	// The Amazon Resource Name (ARN) of a replication instance.
 	//
 	// ReplicationInstanceArn is a required field
 	ReplicationInstanceArn *string `type:"string" required:"true"`
 
-	// The replication task identifier.
+	// An identifier for the replication task.
 	//
 	// Constraints:
 	//
@@ -66,30 +66,27 @@ type CreateReplicationTaskInput struct {
 	// ReplicationTaskIdentifier is a required field
 	ReplicationTaskIdentifier *string `type:"string" required:"true"`
 
-	// Settings for the task, such as target metadata settings. For a complete list
-	// of task settings, see Task Settings for AWS Database Migration Service Tasks
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html)
+	// Overall settings for the task, in JSON format. For more information, see
+	// Task Settings (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html)
 	// in the AWS Database Migration User Guide.
 	ReplicationTaskSettings *string `type:"string"`
 
-	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+	// An Amazon Resource Name (ARN) that uniquely identifies the source endpoint.
 	//
 	// SourceEndpointArn is a required field
 	SourceEndpointArn *string `type:"string" required:"true"`
 
-	// When using the AWS CLI or boto3, provide the path of the JSON file that contains
-	// the table mappings. Precede the path with "file://". When working with the
-	// DMS API, provide the JSON as the parameter value.
-	//
-	// For example, --table-mappings file://mappingfile.json
+	// The table mappings for the task, in JSON format. For more information, see
+	// Table Mapping (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html)
+	// in the AWS Database Migration User Guide.
 	//
 	// TableMappings is a required field
 	TableMappings *string `type:"string" required:"true"`
 
-	// Tags to be added to the replication instance.
+	// One or more tags to be assigned to the replication task.
 	Tags []Tag `type:"list"`
 
-	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+	// An Amazon Resource Name (ARN) that uniquely identifies the target endpoint.
 	//
 	// TargetEndpointArn is a required field
 	TargetEndpointArn *string `type:"string" required:"true"`

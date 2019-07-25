@@ -81,6 +81,8 @@ type ClientAPI interface {
 
 	ListContainersRequest(*mediastore.ListContainersInput) mediastore.ListContainersRequest
 
+	ListTagsForResourceRequest(*mediastore.ListTagsForResourceInput) mediastore.ListTagsForResourceRequest
+
 	PutContainerPolicyRequest(*mediastore.PutContainerPolicyInput) mediastore.PutContainerPolicyRequest
 
 	PutCorsPolicyRequest(*mediastore.PutCorsPolicyInput) mediastore.PutCorsPolicyRequest
@@ -90,6 +92,10 @@ type ClientAPI interface {
 	StartAccessLoggingRequest(*mediastore.StartAccessLoggingInput) mediastore.StartAccessLoggingRequest
 
 	StopAccessLoggingRequest(*mediastore.StopAccessLoggingInput) mediastore.StopAccessLoggingRequest
+
+	TagResourceRequest(*mediastore.TagResourceInput) mediastore.TagResourceRequest
+
+	UntagResourceRequest(*mediastore.UntagResourceInput) mediastore.UntagResourceRequest
 }
 
 var _ ClientAPI = (*mediastore.Client)(nil)

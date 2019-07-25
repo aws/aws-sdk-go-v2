@@ -17,10 +17,10 @@ type CreateRoleInput struct {
 	// The trust relationship policy document that grants an entity permission to
 	// assume the role.
 	//
-	// You must provide policies in JSON format in IAM. However, for AWS CloudFormation
-	// templates formatted in YAML, you can provide the policy in JSON or YAML format.
-	// AWS CloudFormation always converts a YAML policy to JSON format before submitting
-	// it to IAM.
+	// In IAM, you must provide a JSON policy that has been converted to a string.
+	// However, for AWS CloudFormation templates formatted in YAML, you can provide
+	// the policy in JSON or YAML format. AWS CloudFormation always converts a YAML
+	// policy to JSON format before submitting it to IAM.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
 	// parameter is a string of characters consisting of the following:
@@ -33,6 +33,9 @@ type CreateRoleInput struct {
 	//
 	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
 	//    return (\u000D)
+	//
+	// Upon success, the response includes the same trust policy as a URL-encoded
+	// JSON string.
 	//
 	// AssumeRolePolicyDocument is a required field
 	AssumeRolePolicyDocument *string `min:"1" type:"string" required:"true"`

@@ -69,6 +69,8 @@ type ClientAPI interface {
 
 	DecodeAuthorizationMessageRequest(*sts.DecodeAuthorizationMessageInput) sts.DecodeAuthorizationMessageRequest
 
+	GetAccessKeyInfoRequest(*sts.GetAccessKeyInfoInput) sts.GetAccessKeyInfoRequest
+
 	GetCallerIdentityRequest(*sts.GetCallerIdentityInput) sts.GetCallerIdentityRequest
 
 	GetFederationTokenRequest(*sts.GetFederationTokenInput) sts.GetFederationTokenRequest

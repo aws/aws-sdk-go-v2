@@ -90,7 +90,12 @@ type UpdateNotebookInstanceInput struct {
 	RootAccess RootAccess `type:"string" enum:"true"`
 
 	// The size, in GB, of the ML storage volume to attach to the notebook instance.
-	// The default value is 5 GB.
+	// The default value is 5 GB. ML storage volumes are encrypted, so Amazon SageMaker
+	// can't determine the amount of available free space on the volume. Because
+	// of this, you can increase the volume size when you update a notebook instance,
+	// but you can't decrease the volume size. If you want to decrease the size
+	// of the ML storage volume in use, create a new notebook instance with the
+	// desired size.
 	VolumeSizeInGB *int64 `min:"5" type:"integer"`
 }
 

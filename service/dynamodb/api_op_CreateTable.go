@@ -44,7 +44,7 @@ type CreateTableInput struct {
 	//    specification is composed of: ProjectionType - One of the following: KEYS_ONLY
 	//    - Only the index and primary keys are projected into the index. INCLUDE
 	//    - Only the specified table attributes are projected into the index. The
-	//    list of projected attributes are in NonKeyAttributes. ALL - All of the
+	//    list of projected attributes is in NonKeyAttributes. ALL - All of the
 	//    table attributes are projected into the index. NonKeyAttributes - A list
 	//    of one or more non-key attribute names that are projected into the secondary
 	//    index. The total count of attributes provided in NonKeyAttributes, summed
@@ -69,7 +69,7 @@ type CreateTableInput struct {
 	//    key RANGE - sort key
 	//
 	// The partition key of an item is also known as its hash attribute. The term
-	// "hash attribute" derives from DynamoDB' usage of an internal hash function
+	// "hash attribute" derives from the DynamoDB usage of an internal hash function
 	// to evenly distribute data items across partitions, based on their partition
 	// key values.
 	//
@@ -84,7 +84,7 @@ type CreateTableInput struct {
 	// exactly two elements, in this order: The first element must have a KeyType
 	// of HASH, and the second element must have a KeyType of RANGE.
 	//
-	// For more information, see Specifying the Primary Key (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#WorkingWithTables.primary.key)
+	// For more information, see Working with Tables (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#WorkingWithTables.primary.key)
 	// in the Amazon DynamoDB Developer Guide.
 	//
 	// KeySchema is a required field
@@ -109,7 +109,7 @@ type CreateTableInput struct {
 	//    specification is composed of: ProjectionType - One of the following: KEYS_ONLY
 	//    - Only the index and primary keys are projected into the index. INCLUDE
 	//    - Only the specified table attributes are projected into the index. The
-	//    list of projected attributes are in NonKeyAttributes. ALL - All of the
+	//    list of projected attributes is in NonKeyAttributes. ALL - All of the
 	//    table attributes are projected into the index. NonKeyAttributes - A list
 	//    of one or more non-key attribute names that are projected into the secondary
 	//    index. The total count of attributes provided in NonKeyAttributes, summed
@@ -134,8 +134,8 @@ type CreateTableInput struct {
 
 	// The settings for DynamoDB Streams on the table. These settings consist of:
 	//
-	//    * StreamEnabled - Indicates whether Streams is to be enabled (true) or
-	//    disabled (false).
+	//    * StreamEnabled - Indicates whether DynamoDB Streams is to be enabled
+	//    (true) or disabled (false).
 	//
 	//    * StreamViewType - When an item in the table is modified, StreamViewType
 	//    determines what information is written to the table's stream. Valid values
@@ -250,8 +250,8 @@ const opCreateTable = "CreateTable"
 // Amazon DynamoDB.
 //
 // The CreateTable operation adds a new table to your account. In an AWS account,
-// table names must be unique within each region. That is, you can have two
-// tables with same name if you create the tables in different regions.
+// table names must be unique within each Region. That is, you can have two
+// tables with same name if you create the tables in different Regions.
 //
 // CreateTable is an asynchronous operation. Upon receiving a CreateTable request,
 // DynamoDB immediately returns a response with a TableStatus of CREATING. After

@@ -93,6 +93,8 @@ type SecretListEntry struct {
 	// in the folder prod.
 	Name *string `min:"1" type:"string"`
 
+	OwningService *string `min:"1" type:"string"`
+
 	// Indicated whether automatic, scheduled rotation is enabled for this secret.
 	RotationEnabled *bool `type:"boolean"`
 

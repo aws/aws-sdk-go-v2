@@ -21,6 +21,12 @@ type UpdateAppInput struct {
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
+	// Automated branch creation config for the Amplify App.
+	AutoBranchCreationConfig *AutoBranchCreationConfig `locationName:"autoBranchCreationConfig" type:"structure"`
+
+	// Automated branch creation glob patterns for the Amplify App.
+	AutoBranchCreationPatterns []string `locationName:"autoBranchCreationPatterns" type:"list"`
+
 	// Basic Authorization credentials for an Amplify App.
 	BasicAuthCredentials *string `locationName:"basicAuthCredentials" type:"string"`
 
@@ -32,6 +38,9 @@ type UpdateAppInput struct {
 
 	// Description for an Amplify App.
 	Description *string `locationName:"description" type:"string"`
+
+	// Enables automated branch creation for the Amplify App.
+	EnableAutoBranchCreation *bool `locationName:"enableAutoBranchCreation" type:"boolean"`
 
 	// Enables Basic Authorization for an Amplify App.
 	EnableBasicAuth *bool `locationName:"enableBasicAuth" type:"boolean"`
@@ -76,6 +85,11 @@ func (s *UpdateAppInput) Validate() error {
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+	if s.AutoBranchCreationConfig != nil {
+		if err := s.AutoBranchCreationConfig.Validate(); err != nil {
+			invalidParams.AddNested("AutoBranchCreationConfig", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.CustomRules != nil {
 		for i, v := range s.CustomRules {
 			if err := v.Validate(); err != nil {
@@ -94,6 +108,24 @@ func (s *UpdateAppInput) Validate() error {
 func (s UpdateAppInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
+	if s.AutoBranchCreationConfig != nil {
+		v := s.AutoBranchCreationConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "autoBranchCreationConfig", v, metadata)
+	}
+	if s.AutoBranchCreationPatterns != nil {
+		v := s.AutoBranchCreationPatterns
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "autoBranchCreationPatterns", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
 	if s.BasicAuthCredentials != nil {
 		v := *s.BasicAuthCredentials
 
@@ -123,6 +155,12 @@ func (s UpdateAppInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EnableAutoBranchCreation != nil {
+		v := *s.EnableAutoBranchCreation
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enableAutoBranchCreation", protocol.BoolValue(v), metadata)
 	}
 	if s.EnableBasicAuth != nil {
 		v := *s.EnableBasicAuth

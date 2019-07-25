@@ -48,7 +48,56 @@ func (s AccountDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The details of an AWS EC2 instance.
+// An ActionTarget object.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ActionTarget
+type ActionTarget struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN for the target action.
+	//
+	// ActionTargetArn is a required field
+	ActionTargetArn *string `type:"string" required:"true"`
+
+	// The description of the target action.
+	//
+	// Description is a required field
+	Description *string `type:"string" required:"true"`
+
+	// The name of the action target.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ActionTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ActionTarget) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ActionTargetArn != nil {
+		v := *s.ActionTargetArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ActionTargetArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The details of an Amazon EC2 instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2InstanceDetails
 type AwsEc2InstanceDetails struct {
 	_ struct{} `type:"structure"`
@@ -71,13 +120,13 @@ type AwsEc2InstanceDetails struct {
 	// The date/time the instance was launched.
 	LaunchedAt *string `type:"string"`
 
-	// The identifier of the subnet in which the instance was launched.
+	// The identifier of the subnet that the instance was launched in.
 	SubnetId *string `type:"string"`
 
 	// The instance type of the instance.
 	Type *string `type:"string"`
 
-	// The identifier of the VPC in which the instance was launched.
+	// The identifier of the VPC that the instance was launched in.
 	VpcId *string `type:"string"`
 }
 
@@ -157,7 +206,7 @@ func (s AwsEc2InstanceDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// AWS IAM access key details related to a finding.
+// IAM access key details related to a finding.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamAccessKeyDetails
 type AwsIamAccessKeyDetails struct {
 	_ struct{} `type:"structure"`
@@ -200,7 +249,7 @@ func (s AwsIamAccessKeyDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The details of an AWS S3 Bucket.
+// The details of an Amazon S3 bucket.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketDetails
 type AwsS3BucketDetails struct {
 	_ struct{} `type:"structure"`
@@ -239,52 +288,53 @@ func (s AwsS3BucketDetails) MarshalFields(e protocol.FieldEncoder) error {
 // AWS security services and third-party solutions, and compliance checks.
 //
 // A finding is a potential security issue generated either by AWS services
-// (GuardDuty, Inspector, Macie) or by the integrated third-party solutions
-// and compliance checks.
+// (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by the integrated
+// third-party solutions and compliance checks.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFinding
 type AwsSecurityFinding struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS account ID in which a finding is generated.
+	// The AWS account ID that a finding is generated in.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `type:"string" required:"true"`
 
 	// This data type is exclusive to findings that are generated as the result
 	// of a check run against a specific rule in a supported standard (for example,
-	// AWS CIS Foundations). Contains compliance-related finding details.
+	// CIS AWS Foundations). Contains compliance-related finding details.
 	Compliance *Compliance `type:"structure"`
 
 	// A finding's confidence. Confidence is defined as the likelihood that a finding
 	// accurately identifies the behavior or issue that it was intended to identify.
-	// Confidence is scored on a 0-100 basis using a ratio scale. 0 equates zero
-	// percent confidence and 100 equates to 100 percent confidence.
+	// Confidence is scored on a 0-100 basis using a ratio scale, where 0 means
+	// zero percent confidence and 100 means 100 percent confidence.
 	Confidence *int64 `type:"integer"`
 
-	// An ISO8601-formatted timestamp that indicates when the potential security
-	// issue captured by a finding was created by the security findings provider.
+	// An ISO8601-formatted timestamp that indicates when the security-findings
+	// provider created the potential security issue that a finding captured.
 	//
 	// CreatedAt is a required field
 	CreatedAt *string `type:"string" required:"true"`
 
 	// The level of importance assigned to the resources associated with the finding.
-	// A score of 0 means the underlying resources have no criticality, and a score
-	// of 100 is reserved for the most critical resources.
+	// A score of 0 means that the underlying resources have no criticality, and
+	// a score of 100 is reserved for the most critical resources.
 	Criticality *int64 `type:"integer"`
 
 	// A finding's description.
 	//
 	// In this release, Description is a required property.
-	Description *string `type:"string"`
+	//
+	// Description is a required field
+	Description *string `type:"string" required:"true"`
 
-	// An ISO8601-formatted timestamp that indicates when the potential security
-	// issue captured by a finding was first observed by the security findings provider.
+	// An ISO8601-formatted timestamp that indicates when the security-findings
+	// provider first observed the potential security issue that a finding captured.
 	FirstObservedAt *string `type:"string"`
 
-	// This is the identifier for the solution-specific component (a discrete unit
-	// of logic) that generated a finding. In various security findings provider's
-	// solutions, this generator can be called a rule, a check, a detector, a plug-in,
-	// etc.
+	// The identifier for the solution-specific component (a discrete unit of logic)
+	// that generated a finding. In various security-findings providers' solutions,
+	// this generator can be called a rule, a check, a detector, a plug-in, etc.
 	//
 	// GeneratorId is a required field
 	GeneratorId *string `type:"string" required:"true"`
@@ -294,9 +344,9 @@ type AwsSecurityFinding struct {
 	// Id is a required field
 	Id *string `type:"string" required:"true"`
 
-	// An ISO8601-formatted timestamp that indicates when the potential security
-	// issue captured by a finding was most recently observed by the security findings
-	// provider.
+	// An ISO8601-formatted timestamp that indicates when the security-findings
+	// provider most recently observed the potential security issue that a finding
+	// captured.
 	LastObservedAt *string `type:"string"`
 
 	// A list of malware related to a finding.
@@ -312,14 +362,14 @@ type AwsSecurityFinding struct {
 	Process *ProcessDetails `type:"structure"`
 
 	// The ARN generated by Security Hub that uniquely identifies a third-party
-	// company (security findings provider) once this provider's product (solution
+	// company (security-findings provider) after this provider's product (solution
 	// that generates findings) is registered with Security Hub.
 	//
 	// ProductArn is a required field
 	ProductArn *string `type:"string" required:"true"`
 
-	// A data type where security findings providers can include additional solution-specific
-	// details that are not part of the defined AwsSecurityFinding format.
+	// A data type where security-findings providers can include additional solution-specific
+	// details that aren't part of the defined AwsSecurityFinding format.
 	ProductFields map[string]string `type:"map"`
 
 	// The record state of a finding.
@@ -328,16 +378,16 @@ type AwsSecurityFinding struct {
 	// A list of related findings.
 	RelatedFindings []RelatedFinding `type:"list"`
 
-	// An data type that describes the remediation options for a finding.
+	// A data type that describes the remediation options for a finding.
 	Remediation *Remediation `type:"structure"`
 
-	// A set of resource data types that describe the resources to which the finding
-	// refers.
+	// A set of resource data types that describe the resources that the finding
+	// refers to.
 	//
 	// Resources is a required field
 	Resources []Resource `type:"list" required:"true"`
 
-	// The schema version for which a finding is formatted.
+	// The schema version that a finding is formatted for.
 	//
 	// SchemaVersion is a required field
 	SchemaVersion *string `type:"string" required:"true"`
@@ -347,7 +397,7 @@ type AwsSecurityFinding struct {
 	// Severity is a required field
 	Severity *Severity `type:"structure" required:"true"`
 
-	// A URL that links to a page about the current finding in the security findings
+	// A URL that links to a page about the current finding in the security-findings
 	// provider's solution.
 	SourceUrl *string `type:"string"`
 
@@ -357,9 +407,11 @@ type AwsSecurityFinding struct {
 	// A finding's title.
 	//
 	// In this release, Title is a required property.
-	Title *string `type:"string"`
+	//
+	// Title is a required field
+	Title *string `type:"string" required:"true"`
 
-	// One or more finding types in the format of 'namespace/category/classifier'
+	// One or more finding types in the format of namespace/category/classifier
 	// that classify a finding.
 	//
 	// Valid namespace values are: Software and Configuration Checks | TTPs | Effects
@@ -368,8 +420,8 @@ type AwsSecurityFinding struct {
 	// Types is a required field
 	Types []string `type:"list" required:"true"`
 
-	// An ISO8601-formatted timestamp that indicates when the finding record was
-	// last updated by the security findings provider.
+	// An ISO8601-formatted timestamp that indicates when the security-findings
+	// provider last updated the finding record.
 	//
 	// UpdatedAt is a required field
 	UpdatedAt *string `type:"string" required:"true"`
@@ -402,6 +454,10 @@ func (s *AwsSecurityFinding) Validate() error {
 		invalidParams.Add(aws.NewErrParamRequired("CreatedAt"))
 	}
 
+	if s.Description == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Description"))
+	}
+
 	if s.GeneratorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GeneratorId"))
 	}
@@ -424,6 +480,10 @@ func (s *AwsSecurityFinding) Validate() error {
 
 	if s.Severity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Severity"))
+	}
+
+	if s.Title == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Title"))
 	}
 
 	if s.Types == nil {
@@ -705,7 +765,7 @@ func (s AwsSecurityFinding) MarshalFields(e protocol.FieldEncoder) error {
 type AwsSecurityFindingFilters struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS account ID in which a finding is generated.
+	// The AWS account ID that a finding is generated in.
 	AwsAccountId []StringFilter `type:"list"`
 
 	// The name of the findings provider (company) that owns the solution (product)
@@ -713,36 +773,35 @@ type AwsSecurityFindingFilters struct {
 	CompanyName []StringFilter `type:"list"`
 
 	// Exclusive to findings that are generated as the result of a check run against
-	// a specific rule in a supported standard (for example, AWS CIS Foundations).
+	// a specific rule in a supported standard (for example, CIS AWS Foundations).
 	// Contains compliance-related finding details.
 	ComplianceStatus []StringFilter `type:"list"`
 
 	// A finding's confidence. Confidence is defined as the likelihood that a finding
 	// accurately identifies the behavior or issue that it was intended to identify.
-	// Confidence is scored on a 0-100 basis using a ratio scale. 0 equates zero
-	// percent confidence and 100 equates to 100 percent confidence.
+	// Confidence is scored on a 0-100 basis using a ratio scale, where 0 means
+	// zero percent confidence and 100 means 100 percent confidence.
 	Confidence []NumberFilter `type:"list"`
 
-	// An ISO8601-formatted timestamp that indicates when the potential security
-	// issue captured by a finding was created by the security findings provider.
+	// An ISO8601-formatted timestamp that indicates when the security-findings
+	// provider captured the potential security issue that a finding captured.
 	CreatedAt []DateFilter `type:"list"`
 
 	// The level of importance assigned to the resources associated with the finding.
-	// A score of 0 means the underlying resources have no criticality, and a score
-	// of 100 is reserved for the most critical resources.
+	// A score of 0 means that the underlying resources have no criticality, and
+	// a score of 100 is reserved for the most critical resources.
 	Criticality []NumberFilter `type:"list"`
 
 	// A finding's description.
 	Description []StringFilter `type:"list"`
 
-	// An ISO8601-formatted timestamp that indicates when the potential security
-	// issue captured by a finding was first observed by the security findings provider.
+	// An ISO8601-formatted timestamp that indicates when the security-findings
+	// provider first observed the potential security issue that a finding captured.
 	FirstObservedAt []DateFilter `type:"list"`
 
-	// This is the identifier for the solution-specific component (a discrete unit
-	// of logic) that generated a finding. In various security findings provider's
-	// solutions, this generator can be called a rule, a check, a detector, a plug-in,
-	// etc.
+	// The identifier for the solution-specific component (a discrete unit of logic)
+	// that generated a finding. In various security-findings providers' solutions,
+	// this generator can be called a rule, a check, a detector, a plug-in, etc.
 	GeneratorId []StringFilter `type:"list"`
 
 	// The security findings provider-specific identifier for a finding.
@@ -751,9 +810,9 @@ type AwsSecurityFindingFilters struct {
 	// A keyword for a finding.
 	Keyword []KeywordFilter `type:"list"`
 
-	// An ISO8601-formatted timestamp that indicates when the potential security
-	// issue captured by a finding was most recently observed by the security findings
-	// provider.
+	// An ISO8601-formatted timestamp that indicates when the security-findings
+	// provider most recently observed the potential security issue that a finding
+	// captured.
 	LastObservedAt []DateFilter `type:"list"`
 
 	// The name of the malware that was observed.
@@ -830,12 +889,12 @@ type AwsSecurityFindingFilters struct {
 	ProcessTerminatedAt []DateFilter `type:"list"`
 
 	// The ARN generated by Security Hub that uniquely identifies a third-party
-	// company (security findings provider) once this provider's product (solution
+	// company (security findings provider) after this provider's product (solution
 	// that generates findings) is registered with Security Hub.
 	ProductArn []StringFilter `type:"list"`
 
-	// A data type where security findings providers can include additional solution-specific
-	// details that are not part of the defined AwsSecurityFinding format.
+	// A data type where security-findings providers can include additional solution-specific
+	// details that aren't part of the defined AwsSecurityFinding format.
 	ProductFields []MapFilter `type:"list"`
 
 	// The name of the solution (product) that generates findings.
@@ -871,13 +930,13 @@ type AwsSecurityFindingFilters struct {
 	// The date/time the instance was launched.
 	ResourceAwsEc2InstanceLaunchedAt []DateFilter `type:"list"`
 
-	// The identifier of the subnet in which the instance was launched.
+	// The identifier of the subnet that the instance was launched in.
 	ResourceAwsEc2InstanceSubnetId []StringFilter `type:"list"`
 
 	// The instance type of the instance.
 	ResourceAwsEc2InstanceType []StringFilter `type:"list"`
 
-	// The identifier of the VPC in which the instance was launched.
+	// The identifier of the VPC that the instance was launched in.
 	ResourceAwsEc2InstanceVpcId []StringFilter `type:"list"`
 
 	// The creation date/time of the IAM access key related to a finding.
@@ -907,24 +966,24 @@ type AwsSecurityFindingFilters struct {
 	// The name of the container related to a finding.
 	ResourceContainerName []StringFilter `type:"list"`
 
-	// The details of a resource that does not have a specific sub-field for the
-	// resource type defined.
+	// The details of a resource that doesn't have a specific subfield for the resource
+	// type defined.
 	ResourceDetailsOther []MapFilter `type:"list"`
 
 	// The canonical identifier for the given resource type.
 	ResourceId []StringFilter `type:"list"`
 
-	// The canonical AWS partition name to which the region is assigned.
+	// The canonical AWS partition name that the Region is assigned to.
 	ResourcePartition []StringFilter `type:"list"`
 
-	// The canonical AWS external region name where this resource is located.
+	// The canonical AWS external Region name where this resource is located.
 	ResourceRegion []StringFilter `type:"list"`
 
 	// A list of AWS tags associated with a resource at the time the finding was
 	// processed.
 	ResourceTags []MapFilter `type:"list"`
 
-	// Specifies the type of the resource for which details are provided.
+	// Specifies the type of the resource that details are provided for.
 	ResourceType []StringFilter `type:"list"`
 
 	// The label of a finding's severity.
@@ -933,11 +992,11 @@ type AwsSecurityFindingFilters struct {
 	// The normalized severity of a finding.
 	SeverityNormalized []NumberFilter `type:"list"`
 
-	// The native severity as defined by the security findings provider's solution
+	// The native severity as defined by the security-findings provider's solution
 	// that generated the finding.
 	SeverityProduct []NumberFilter `type:"list"`
 
-	// A URL that links to a page about the current finding in the security findings
+	// A URL that links to a page about the current finding in the security-findings
 	// provider's solution.
 	SourceUrl []StringFilter `type:"list"`
 
@@ -962,19 +1021,19 @@ type AwsSecurityFindingFilters struct {
 	// A finding's title.
 	Title []StringFilter `type:"list"`
 
-	// A finding type in the format of 'namespace/category/classifier' that classifies
+	// A finding type in the format of namespace/category/classifier that classifies
 	// a finding.
 	Type []StringFilter `type:"list"`
 
-	// An ISO8601-formatted timestamp that indicates when the finding record was
-	// last updated by the security findings provider.
+	// An ISO8601-formatted timestamp that indicates when the security-findings
+	// provider last updated the finding record.
 	UpdatedAt []DateFilter `type:"list"`
 
 	// A list of name/value string pairs associated with the finding. These are
 	// custom, user-defined fields added to a finding.
 	UserDefinedFields []MapFilter `type:"list"`
 
-	// Indicates the veracity of a finding.
+	// The veracity of a finding.
 	VerificationState []StringFilter `type:"list"`
 
 	// The workflow state of a finding.
@@ -1988,13 +2047,13 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // Exclusive to findings that are generated as the result of a check run against
-// a specific rule in a supported standard (for example, AWS CIS Foundations).
+// a specific rule in a supported standard (for example, CIS AWS Foundations).
 // Contains compliance-related finding details.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Compliance
 type Compliance struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates the result of a compliance check.
+	// The result of a compliance check.
 	Status ComplianceStatus `type:"string" enum:"true"`
 }
 
@@ -2025,7 +2084,7 @@ type ContainerDetails struct {
 	// The name of the image related to a finding.
 	ImageName *string `type:"string"`
 
-	// The date/time that the container was started.
+	// The date and time when the container started.
 	LaunchedAt *string `type:"string"`
 
 	// The name of the container related to a finding.
@@ -2143,7 +2202,7 @@ func (s DateRange) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Includes details of the list of the findings that cannot be imported.
+// Includes details of the list of the findings that can't be imported.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ImportFindingsError
 type ImportFindingsError struct {
 	_ struct{} `type:"structure"`
@@ -2158,7 +2217,7 @@ type ImportFindingsError struct {
 	// ErrorMessage is a required field
 	ErrorMessage *string `type:"string" required:"true"`
 
-	// The id of the error made during the BatchImportFindings operation.
+	// The ID of the error made during the BatchImportFindings operation.
 	//
 	// Id is a required field
 	Id *string `type:"string" required:"true"`
@@ -2197,14 +2256,14 @@ func (s ImportFindingsError) MarshalFields(e protocol.FieldEncoder) error {
 type Insight struct {
 	_ struct{} `type:"structure"`
 
-	// A collection of attributes that are applied to all active Security Hub-aggregated
-	// findings and that result in a subset of findings that are included in this
-	// insight.
+	// One or more attributes used to filter the findings included in the insight.
+	// Only findings that match the criteria defined in the filters are included
+	// in the insight.
 	//
 	// Filters is a required field
 	Filters *AwsSecurityFindingFilters `type:"structure" required:"true"`
 
-	// The attribute by which the insight's findings are grouped. This attribute
+	// The attribute that the insight's findings are grouped by. This attribute
 	// is used as a findings aggregator for the purposes of viewing and managing
 	// multiple related findings under a single operand.
 	//
@@ -2266,7 +2325,7 @@ type InsightResultValue struct {
 	// Count is a required field
 	Count *int64 `type:"integer" required:"true"`
 
-	// The value of the attribute by which the findings are grouped for the insight's
+	// The value of the attribute that the findings are grouped by for the insight
 	// whose results are returned by the GetInsightResults operation.
 	//
 	// GroupByAttributeValue is a required field
@@ -2300,7 +2359,7 @@ func (s InsightResultValue) MarshalFields(e protocol.FieldEncoder) error {
 type InsightResults struct {
 	_ struct{} `type:"structure"`
 
-	// The attribute by which the findings are grouped for the insight's whose results
+	// The attribute that the findings are grouped by for the insight whose results
 	// are returned by the GetInsightResults operation.
 	//
 	// GroupByAttribute is a required field
@@ -2352,22 +2411,22 @@ func (s InsightResults) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The details of an invitation sent to an AWS account by the Security Hub master
-// account.
+// Details about an invitation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Invitation
 type Invitation struct {
 	_ struct{} `type:"structure"`
 
-	// The account ID of the master Security Hub account who sent the invitation.
+	// The account ID of the Security Hub master account that the invitation was
+	// sent from.
 	AccountId *string `type:"string"`
 
-	// The ID of the invitation sent by the master Security Hub account.
+	// The ID of the invitation sent to the member account.
 	InvitationId *string `type:"string"`
 
 	// The timestamp of when the invitation was sent.
 	InvitedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The current relationship status between the inviter and invitee accounts.
+	// The current status of the association between member and master accounts.
 	MemberStatus *string `type:"string"`
 }
 
@@ -2405,12 +2464,12 @@ func (s Invitation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The IP filter for querying findings.>
+// The IP filter for querying findings.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/IpFilter
 type IpFilter struct {
 	_ struct{} `type:"structure"`
 
-	// Finding's CIDR value.
+	// A finding's CIDR value.
 	Cidr *string `type:"string"`
 }
 
@@ -2465,7 +2524,7 @@ type Malware struct {
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
 
-	// The filesystem path of the malware that was observed.
+	// The file system path of the malware that was observed.
 	Path *string `type:"string"`
 
 	// The state of the malware that was observed.
@@ -2528,8 +2587,8 @@ func (s Malware) MarshalFields(e protocol.FieldEncoder) error {
 type MapFilter struct {
 	_ struct{} `type:"structure"`
 
-	// Represents the condition to be applied to a key value when querying for findings
-	// with a map filter.
+	// The condition to apply to a key value when querying for findings with a map
+	// filter.
 	Comparison MapFilterComparison `type:"string" enum:"true"`
 
 	// The key of the map filter.
@@ -2567,28 +2626,30 @@ func (s MapFilter) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The details for a Security Hub member account.
+// The details about a member account.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Member
 type Member struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS account ID of a Security Hub member account.
+	// The AWS account ID of the member account.
 	AccountId *string `type:"string"`
 
-	// The email of a Security Hub member account.
+	// The email address of the member account.
 	Email *string `type:"string"`
 
-	// Time stamp at which the member account was invited to Security Hub.
+	// A timestamp for the date and time when the invitation was sent to the member
+	// account.
 	InvitedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The AWS account ID of the master Security Hub account to this member account.
+	// The AWS account ID of the Security Hub master account associated with this
+	// member account.
 	MasterId *string `type:"string"`
 
 	// The status of the relationship between the member account and its master
 	// account.
 	MemberStatus *string `type:"string"`
 
-	// Time stamp at which this member account was updated.
+	// The timestamp for the date and time when the member account was updated.
 	UpdatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
 }
 
@@ -2655,7 +2716,7 @@ type Network struct {
 	// The destination port of network-related information about a finding.
 	DestinationPort *int64 `type:"integer"`
 
-	// Indicates the direction of network traffic associated with a finding.
+	// The direction of network traffic associated with a finding.
 	Direction NetworkDirection `type:"string" enum:"true"`
 
 	// The protocol of network-related information about a finding.
@@ -2886,16 +2947,16 @@ func (s NoteUpdate) MarshalFields(e protocol.FieldEncoder) error {
 type NumberFilter struct {
 	_ struct{} `type:"structure"`
 
-	// Represents the "equal to" condition to be applied to a single field when
-	// querying for findings.
+	// The equal-to condition to be applied to a single field when querying for
+	// findings.
 	Eq *float64 `type:"double"`
 
-	// Represents the "greater than equal" condition to be applied to a single field
-	// when querying for findings.
+	// The greater-than-equal condition to be applied to a single field when querying
+	// for findings.
 	Gte *float64 `type:"double"`
 
-	// Represents the "less than equal" condition to be applied to a single field
-	// when querying for findings.
+	// The less-than-equal condition to be applied to a single field when querying
+	// for findings.
 	Lte *float64 `type:"double"`
 }
 
@@ -2947,7 +3008,7 @@ type ProcessDetails struct {
 	// The process ID.
 	Pid *int64 `type:"integer"`
 
-	// The date/time that the process was terminated.
+	// The date and time when the process was terminated.
 	TerminatedAt *string `type:"string"`
 }
 
@@ -2997,16 +3058,112 @@ func (s ProcessDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Provides a recommendation on how to remediate the issue identified within
-// a finding.
+// Contains details about a product.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Product
+type Product struct {
+	_ struct{} `type:"structure"`
+
+	// The URL used to activate the product.
+	ActivationUrl *string `type:"string"`
+
+	// The categories assigned to the product.
+	Categories []string `type:"list"`
+
+	// The name of the company that provides the product.
+	CompanyName *string `type:"string"`
+
+	// A description of the product.
+	Description *string `type:"string"`
+
+	// The URL for the page that contains more information about the product.
+	MarketplaceUrl *string `type:"string"`
+
+	// The ARN assigned to the product.
+	//
+	// ProductArn is a required field
+	ProductArn *string `type:"string" required:"true"`
+
+	// The name of the product.
+	ProductName *string `type:"string"`
+
+	// The resource policy associated with the product.
+	ProductSubscriptionResourcePolicy *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Product) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Product) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ActivationUrl != nil {
+		v := *s.ActivationUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ActivationUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Categories != nil {
+		v := s.Categories
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Categories", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.CompanyName != nil {
+		v := *s.CompanyName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CompanyName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MarketplaceUrl != nil {
+		v := *s.MarketplaceUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MarketplaceUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ProductArn != nil {
+		v := *s.ProductArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProductArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ProductName != nil {
+		v := *s.ProductName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProductName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ProductSubscriptionResourcePolicy != nil {
+		v := *s.ProductSubscriptionResourcePolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProductSubscriptionResourcePolicy", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A recommendation on how to remediate the issue identified in a finding.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Recommendation
 type Recommendation struct {
 	_ struct{} `type:"structure"`
 
-	// The recommendation of what to do about the issue described in a finding.
+	// Describes the recommended steps to take to remediate an issue identified
+	// in a finding.
 	Text *string `type:"string"`
 
-	// A URL to link to general remediation information for the finding type of
+	// A URL to a page or site that contains information about how to remediate
 	// a finding.
 	Url *string `type:"string"`
 }
@@ -3033,17 +3190,17 @@ func (s Recommendation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Related finding's details.
+// Details about a related finding.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RelatedFinding
 type RelatedFinding struct {
 	_ struct{} `type:"structure"`
 
-	// The solution-generated identifier for a related finding.
+	// The product-generated identifier for a related finding.
 	//
 	// Id is a required field
 	Id *string `type:"string" required:"true"`
 
-	// The ARN of the solution that generated a related finding.
+	// The ARN of the product that generated a related finding.
 	//
 	// ProductArn is a required field
 	ProductArn *string `type:"string" required:"true"`
@@ -3089,12 +3246,12 @@ func (s RelatedFinding) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The remediation options for a finding.
+// Details about the remediation steps for a finding.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Remediation
 type Remediation struct {
 	_ struct{} `type:"structure"`
 
-	// Provides a recommendation on how to remediate the issue identified within
+	// A recommendation on the steps to take to remediate the issue identified by
 	// a finding.
 	Recommendation *Recommendation `type:"structure"`
 }
@@ -3115,12 +3272,12 @@ func (s Remediation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A resource data type that describes a resource to which the finding refers.
+// A resource related to a finding.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Resource
 type Resource struct {
 	_ struct{} `type:"structure"`
 
-	// Provides additional details about the resource.
+	// Additional details about the resource related to a finding.
 	Details *ResourceDetails `type:"structure"`
 
 	// The canonical identifier for the given resource type.
@@ -3128,17 +3285,17 @@ type Resource struct {
 	// Id is a required field
 	Id *string `type:"string" required:"true"`
 
-	// The canonical AWS partition name to which the region is assigned.
+	// The canonical AWS partition name that the Region is assigned to.
 	Partition Partition `type:"string" enum:"true"`
 
-	// The canonical AWS external region name where this resource is located.
+	// The canonical AWS external Region name where this resource is located.
 	Region *string `type:"string"`
 
 	// A list of AWS tags associated with a resource at the time the finding was
 	// processed.
 	Tags map[string]string `type:"map"`
 
-	// Specifies the type of the resource for which details are provided.
+	// The type of the resource that details are provided for.
 	//
 	// Type is a required field
 	Type *string `type:"string" required:"true"`
@@ -3214,25 +3371,24 @@ func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Provides additional details about the resource.
+// Additional details about a resource related to a finding.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails
 type ResourceDetails struct {
 	_ struct{} `type:"structure"`
 
-	// The details of an AWS EC2 instance.
+	// Details about an Amazon EC2 instance related to a finding.
 	AwsEc2Instance *AwsEc2InstanceDetails `type:"structure"`
 
-	// AWS IAM access key details related to a finding.
+	// Details about an IAM access key related to a finding.
 	AwsIamAccessKey *AwsIamAccessKeyDetails `type:"structure"`
 
-	// The details of an AWS S3 Bucket.
+	// Details about an Amazon S3 Bucket related to a finding.
 	AwsS3Bucket *AwsS3BucketDetails `type:"structure"`
 
-	// Container details related to a finding.
+	// Details about a container resource related to a finding.
 	Container *ContainerDetails `type:"structure"`
 
-	// The details of a resource that does not have a specific sub-field for the
-	// resource type defined.
+	// Details about a resource that doesn't have a specific type defined.
 	Other map[string]string `type:"map"`
 }
 
@@ -3282,15 +3438,15 @@ func (s ResourceDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The account details that could not be processed.
+// Details about the account that wasn't processed.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Result
 type Result struct {
 	_ struct{} `type:"structure"`
 
-	// An ID of the AWS account that could not be processed.
+	// An AWS account ID of the account that wasn't be processed.
 	AccountId *string `type:"string"`
 
-	// The reason for why an account could not be processed.
+	// The reason that the account wasn't be processed.
 	ProcessingResult *string `type:"string"`
 }
 
@@ -3316,7 +3472,7 @@ func (s Result) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A finding's severity.
+// The severity of the finding.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Severity
 type Severity struct {
 	_ struct{} `type:"structure"`
@@ -3326,7 +3482,7 @@ type Severity struct {
 	// Normalized is a required field
 	Normalized *int64 `type:"integer" required:"true"`
 
-	// The native severity as defined by the security findings provider's solution
+	// The native severity as defined by the AWS service or integrated partner product
 	// that generated the finding.
 	Product *float64 `type:"double"`
 }
@@ -3367,15 +3523,15 @@ func (s Severity) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A collection of attributes used for sorting findings.
+// A collection of finding attributes used to sort findings.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SortCriterion
 type SortCriterion struct {
 	_ struct{} `type:"structure"`
 
-	// The finding attribute used for sorting findings.
+	// The finding attribute used to sort findings.
 	Field *string `type:"string"`
 
-	// The order used for sorting findings.
+	// The order used to sort findings.
 	SortOrder SortOrder `type:"string" enum:"true"`
 }
 
@@ -3408,17 +3564,18 @@ type StandardsSubscription struct {
 
 	// The ARN of a standard.
 	//
-	// In this release, Security Hub only supports the CIS AWS Foundations standard.
-	//
-	// Its ARN is arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0.
+	// In this release, Security Hub supports only the CIS AWS Foundations standard,
+	// which uses the following ARN: arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0.
 	//
 	// StandardsArn is a required field
 	StandardsArn *string `type:"string" required:"true"`
 
+	// A key-value pair of input for the standard.
+	//
 	// StandardsInput is a required field
 	StandardsInput map[string]string `type:"map" required:"true"`
 
-	// The standard's status.
+	// The status of the standards subscription.
 	//
 	// StandardsStatus is a required field
 	StandardsStatus StandardsStatus `type:"string" required:"true" enum:"true"`
@@ -3483,6 +3640,7 @@ type StandardsSubscriptionRequest struct {
 	// StandardsArn is a required field
 	StandardsArn *string `type:"string" required:"true"`
 
+	// A key-value pair of input for the standard.
 	StandardsInput map[string]string `type:"map"`
 }
 
@@ -3533,8 +3691,7 @@ func (s StandardsSubscriptionRequest) MarshalFields(e protocol.FieldEncoder) err
 type StringFilter struct {
 	_ struct{} `type:"structure"`
 
-	// Represents the condition to be applied to a string value when querying for
-	// findings.
+	// The condition to be applied to a string value when querying for findings.
 	Comparison StringFilterComparison `type:"string" enum:"true"`
 
 	// The string filter value.
@@ -3563,7 +3720,7 @@ func (s StringFilter) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Threat intel details related to a finding.
+// Details about the threat intel related to a finding.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ThreatIntelIndicator
 type ThreatIntelIndicator struct {
 	_ struct{} `type:"structure"`
@@ -3571,13 +3728,15 @@ type ThreatIntelIndicator struct {
 	// The category of a threat intel indicator.
 	Category ThreatIntelIndicatorCategory `type:"string" enum:"true"`
 
-	// The date/time of the last observation of a threat intel indicator.
+	// The date and time when the most recent instance of a threat intel indicator
+	// was observed.
 	LastObservedAt *string `type:"string"`
 
-	// The source of the threat intel.
+	// The source of the threat intel indicator.
 	Source *string `type:"string"`
 
-	// The URL for more details from the source of the threat intel.
+	// The URL to the page or site where you can get more information about the
+	// threat intel indicator.
 	SourceUrl *string `type:"string"`
 
 	// The type of a threat intel indicator.

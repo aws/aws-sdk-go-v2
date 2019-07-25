@@ -67,7 +67,10 @@ func (s GetImportJobInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetImportJobOutput struct {
 	_ struct{} `type:"structure" payload:"ImportJobResponse"`
 
-	// Import job response.
+	// Provides information about the status and settings of a job that imports
+	// endpoint definitions from one or more files. The files can be stored in an
+	// Amazon Simple Storage Service (Amazon S3) bucket or uploaded directly from
+	// a computer by using the Amazon Pinpoint console.
 	//
 	// ImportJobResponse is a required field
 	ImportJobResponse *ImportJobResponse `type:"structure" required:"true"`
@@ -94,7 +97,8 @@ const opGetImportJob = "GetImportJob"
 // GetImportJobRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Returns information about an import job.
+// Retrieves information about the status and settings of a specific import
+// job for an application.
 //
 //    // Example sending a request using GetImportJobRequest.
 //    req := client.GetImportJobRequest(params)

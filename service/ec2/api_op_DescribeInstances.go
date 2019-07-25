@@ -24,7 +24,7 @@ type DescribeInstancesInput struct {
 	//    * affinity - The affinity setting for an instance running on a Dedicated
 	//    Host (default | host).
 	//
-	//    * architecture - The instance architecture (i386 | x86_64).
+	//    * architecture - The instance architecture (i386 | x86_64 | arm64).
 	//
 	//    * availability-zone - The Availability Zone of the instance.
 	//
@@ -300,7 +300,7 @@ const opDescribeInstances = "DescribeInstances"
 // DescribeInstancesRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Describes the specified instances or all of your instances.
+// Describes the specified instances or all of AWS account's instances.
 //
 // If you specify one or more instance IDs, Amazon EC2 returns information for
 // those instances. If you do not specify instance IDs, Amazon EC2 returns information

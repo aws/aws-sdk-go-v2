@@ -154,9 +154,29 @@ type Encryption struct {
 	// Algorithm is a required field
 	Algorithm Algorithm `locationName:"algorithm" type:"string" required:"true" enum:"true"`
 
+	// A 128-bit, 16-byte hex value represented by a 32-character string, to be
+	// used with the key for encrypting content. This parameter is not valid for
+	// static key encryption.
+	ConstantInitializationVector *string `locationName:"constantInitializationVector" type:"string"`
+
+	// The value of one of the devices that you configured with your digital rights
+	// management (DRM) platform key provider. This parameter is required for SPEKE
+	// encryption and is not valid for static key encryption.
+	DeviceId *string `locationName:"deviceId" type:"string"`
+
 	// The type of key that is used for the encryption. If no keyType is provided,
 	// the service will use the default setting (static-key).
 	KeyType KeyType `locationName:"keyType" type:"string" enum:"true"`
+
+	// The AWS Region that the API Gateway proxy endpoint was created in. This parameter
+	// is required for SPEKE encryption and is not valid for static key encryption.
+	Region *string `locationName:"region" type:"string"`
+
+	// An identifier for the content. The service sends this value to the key server
+	// to identify the current endpoint. The resource ID is also known as the content
+	// ID. This parameter is required for SPEKE encryption and is not valid for
+	// static key encryption.
+	ResourceId *string `locationName:"resourceId" type:"string"`
 
 	// The ARN of the role that you created during setup (when you set up AWS Elemental
 	// MediaConnect as a trusted entity).
@@ -164,11 +184,15 @@ type Encryption struct {
 	// RoleArn is a required field
 	RoleArn *string `locationName:"roleArn" type:"string" required:"true"`
 
-	// The ARN that was assigned to the secret that you created in AWS Secrets Manager
-	// to store the encryption key.
-	//
-	// SecretArn is a required field
-	SecretArn *string `locationName:"secretArn" type:"string" required:"true"`
+	// The ARN of the secret that you created in AWS Secrets Manager to store the
+	// encryption key. This parameter is required for static key encryption and
+	// is not valid for SPEKE encryption.
+	SecretArn *string `locationName:"secretArn" type:"string"`
+
+	// The URL from the API Gateway proxy that you set up to talk to your key server.
+	// This parameter is required for SPEKE encryption and is not valid for static
+	// key encryption.
+	Url *string `locationName:"url" type:"string"`
 }
 
 // String returns the string representation
@@ -187,10 +211,6 @@ func (s *Encryption) Validate() error {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 
-	if s.SecretArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecretArn"))
-	}
-
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	}
@@ -205,11 +225,35 @@ func (s Encryption) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "algorithm", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.ConstantInitializationVector != nil {
+		v := *s.ConstantInitializationVector
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "constantInitializationVector", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DeviceId != nil {
+		v := *s.DeviceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "deviceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if len(s.KeyType) > 0 {
 		v := s.KeyType
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "keyType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Region != nil {
+		v := *s.Region
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "region", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceId != nil {
+		v := *s.ResourceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.RoleArn != nil {
 		v := *s.RoleArn
@@ -222,6 +266,12 @@ func (s Encryption) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "secretArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Url != nil {
+		v := *s.Url
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1080,17 +1130,43 @@ type UpdateEncryption struct {
 	// or aes256).
 	Algorithm Algorithm `locationName:"algorithm" type:"string" enum:"true"`
 
+	// A 128-bit, 16-byte hex value represented by a 32-character string, to be
+	// used with the key for encrypting content. This parameter is not valid for
+	// static key encryption.
+	ConstantInitializationVector *string `locationName:"constantInitializationVector" type:"string"`
+
+	// The value of one of the devices that you configured with your digital rights
+	// management (DRM) platform key provider. This parameter is required for SPEKE
+	// encryption and is not valid for static key encryption.
+	DeviceId *string `locationName:"deviceId" type:"string"`
+
 	// The type of key that is used for the encryption. If no keyType is provided,
 	// the service will use the default setting (static-key).
 	KeyType KeyType `locationName:"keyType" type:"string" enum:"true"`
+
+	// The AWS Region that the API Gateway proxy endpoint was created in. This parameter
+	// is required for SPEKE encryption and is not valid for static key encryption.
+	Region *string `locationName:"region" type:"string"`
+
+	// An identifier for the content. The service sends this value to the key server
+	// to identify the current endpoint. The resource ID is also known as the content
+	// ID. This parameter is required for SPEKE encryption and is not valid for
+	// static key encryption.
+	ResourceId *string `locationName:"resourceId" type:"string"`
 
 	// The ARN of the role that you created during setup (when you set up AWS Elemental
 	// MediaConnect as a trusted entity).
 	RoleArn *string `locationName:"roleArn" type:"string"`
 
-	// The ARN that was assigned to the secret that you created in AWS Secrets Manager
-	// to store the encryption key.
+	// The ARN of the secret that you created in AWS Secrets Manager to store the
+	// encryption key. This parameter is required for static key encryption and
+	// is not valid for SPEKE encryption.
 	SecretArn *string `locationName:"secretArn" type:"string"`
+
+	// The URL from the API Gateway proxy that you set up to talk to your key server.
+	// This parameter is required for SPEKE encryption and is not valid for static
+	// key encryption.
+	Url *string `locationName:"url" type:"string"`
 }
 
 // String returns the string representation
@@ -1106,11 +1182,35 @@ func (s UpdateEncryption) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "algorithm", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.ConstantInitializationVector != nil {
+		v := *s.ConstantInitializationVector
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "constantInitializationVector", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DeviceId != nil {
+		v := *s.DeviceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "deviceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if len(s.KeyType) > 0 {
 		v := s.KeyType
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "keyType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Region != nil {
+		v := *s.Region
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "region", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceId != nil {
+		v := *s.ResourceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.RoleArn != nil {
 		v := *s.RoleArn
@@ -1123,6 +1223,12 @@ func (s UpdateEncryption) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "secretArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Url != nil {
+		v := *s.Url
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

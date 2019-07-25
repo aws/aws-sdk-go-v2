@@ -260,7 +260,8 @@ const opTestInvokeAuthorizer = "TestInvokeAuthorizer"
 // Simulate the execution of an Authorizer in your RestApi with headers, parameters,
 // and an incoming request body.
 //
-// Enable custom authorizers (https://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html)
+// Use Lambda Function as Authorizer (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html)
+// Use Cognito User Pool as Authorizer (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html)
 //
 //    // Example sending a request using TestInvokeAuthorizerRequest.
 //    req := client.TestInvokeAuthorizerRequest(params)

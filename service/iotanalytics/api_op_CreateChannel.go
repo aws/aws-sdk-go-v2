@@ -20,6 +20,9 @@ type CreateChannelInput struct {
 	// ChannelName is a required field
 	ChannelName *string `locationName:"channelName" min:"1" type:"string" required:"true"`
 
+	// Where channel data is stored.
+	ChannelStorage *ChannelStorage `locationName:"channelStorage" type:"structure"`
+
 	// How long, in days, message data is kept for the channel.
 	RetentionPeriod *RetentionPeriod `locationName:"retentionPeriod" type:"structure"`
 
@@ -44,6 +47,11 @@ func (s *CreateChannelInput) Validate() error {
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
+	if s.ChannelStorage != nil {
+		if err := s.ChannelStorage.Validate(); err != nil {
+			invalidParams.AddNested("ChannelStorage", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.RetentionPeriod != nil {
 		if err := s.RetentionPeriod.Validate(); err != nil {
@@ -72,6 +80,12 @@ func (s CreateChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "channelName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ChannelStorage != nil {
+		v := s.ChannelStorage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "channelStorage", v, metadata)
 	}
 	if s.RetentionPeriod != nil {
 		v := s.RetentionPeriod

@@ -26,14 +26,15 @@ type CreateDeploymentInput struct {
 	// A user-defined comment.
 	Comment *string `type:"string"`
 
-	// A string that contains user-defined, custom JSON. It is used to override
-	// the corresponding default stack configuration JSON values. The string should
-	// be in the following format:
+	// A string that contains user-defined, custom JSON. You can use this parameter
+	// to override some corresponding default stack configuration JSON values. The
+	// string should be in the following format:
 	//
 	// "{\"key1\": \"value1\", \"key2\": \"value2\",...}"
 	//
 	// For more information about custom JSON, see Use Custom JSON to Modify the
-	// Stack Configuration Attributes (http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html).
+	// Stack Configuration Attributes (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html)
+	// and Overriding Attributes With Custom JSON (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html).
 	CustomJson *string `type:"string"`
 
 	// The instance IDs for the deployment targets.
@@ -97,13 +98,13 @@ const opCreateDeployment = "CreateDeployment"
 // AWS OpsWorks.
 //
 // Runs deployment or stack commands. For more information, see Deploying Apps
-// (http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-deploying.html)
-// and Run Stack Commands (http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-commands.html).
+// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-deploying.html)
+// and Run Stack Commands (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-commands.html).
 //
 // Required Permissions: To use this action, an IAM user must have a Deploy
 // or Manage permissions level for the stack, or an attached policy that explicitly
 // grants permissions. For more information on user permissions, see Managing
-// User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using CreateDeploymentRequest.
 //    req := client.CreateDeploymentRequest(params)

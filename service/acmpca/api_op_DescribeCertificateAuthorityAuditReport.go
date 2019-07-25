@@ -15,7 +15,7 @@ type DescribeCertificateAuthorityAuditReportInput struct {
 	_ struct{} `type:"structure"`
 
 	// The report ID returned by calling the CreateCertificateAuthorityAuditReport
-	// operation.
+	// action.
 	//
 	// AuditReportId is a required field
 	AuditReportId *string `min:"36" type:"string" required:"true"`
@@ -85,9 +85,9 @@ const opDescribeCertificateAuthorityAuditReport = "DescribeCertificateAuthorityA
 // AWS Certificate Manager Private Certificate Authority.
 //
 // Lists information about a specific audit report created by calling the CreateCertificateAuthorityAuditReport
-// operation. Audit information is created every time the certificate authority
+// action. Audit information is created every time the certificate authority
 // (CA) private key is used. The private key is used when you call the IssueCertificate
-// operation or the RevokeCertificate operation.
+// action or the RevokeCertificate action.
 //
 //    // Example sending a request using DescribeCertificateAuthorityAuditReportRequest.
 //    req := client.DescribeCertificateAuthorityAuditReportRequest(params)

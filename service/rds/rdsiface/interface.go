@@ -274,9 +274,13 @@ type ClientAPI interface {
 
 	RevokeDBSecurityGroupIngressRequest(*rds.RevokeDBSecurityGroupIngressInput) rds.RevokeDBSecurityGroupIngressRequest
 
+	StartActivityStreamRequest(*rds.StartActivityStreamInput) rds.StartActivityStreamRequest
+
 	StartDBClusterRequest(*rds.StartDBClusterInput) rds.StartDBClusterRequest
 
 	StartDBInstanceRequest(*rds.StartDBInstanceInput) rds.StartDBInstanceRequest
+
+	StopActivityStreamRequest(*rds.StopActivityStreamInput) rds.StopActivityStreamRequest
 
 	StopDBClusterRequest(*rds.StopDBClusterInput) rds.StopDBClusterRequest
 

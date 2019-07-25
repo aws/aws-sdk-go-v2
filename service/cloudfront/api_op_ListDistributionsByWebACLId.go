@@ -12,7 +12,7 @@ import (
 
 // The request to list distributions that are associated with a specified AWS
 // WAF web ACL.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListDistributionsByWebACLIdRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListDistributionsByWebACLIdRequest
 type ListDistributionsByWebACLIdInput struct {
 	_ struct{} `type:"structure"`
 
@@ -80,7 +80,7 @@ func (s ListDistributionsByWebACLIdInput) MarshalFields(e protocol.FieldEncoder)
 
 // The response to a request to list the distributions that are associated with
 // a specified AWS WAF web ACL.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListDistributionsByWebACLIdResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListDistributionsByWebACLIdResult
 type ListDistributionsByWebACLIdOutput struct {
 	_ struct{} `type:"structure" payload:"DistributionList"`
 
@@ -104,7 +104,7 @@ func (s ListDistributionsByWebACLIdOutput) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-const opListDistributionsByWebACLId = "ListDistributionsByWebACLId2018_11_05"
+const opListDistributionsByWebACLId = "ListDistributionsByWebACLId2019_03_26"
 
 // ListDistributionsByWebACLIdRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -118,12 +118,12 @@ const opListDistributionsByWebACLId = "ListDistributionsByWebACLId2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListDistributionsByWebACLId
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListDistributionsByWebACLId
 func (c *Client) ListDistributionsByWebACLIdRequest(input *ListDistributionsByWebACLIdInput) ListDistributionsByWebACLIdRequest {
 	op := &aws.Operation{
 		Name:       opListDistributionsByWebACLId,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2018-11-05/distributionsByWebACLId/{WebACLId}",
+		HTTPPath:   "/2019-03-26/distributionsByWebACLId/{WebACLId}",
 	}
 
 	if input == nil {

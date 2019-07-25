@@ -14,7 +14,8 @@ import (
 type UpdateAdmChannelInput struct {
 	_ struct{} `type:"structure" payload:"ADMChannelRequest"`
 
-	// Amazon Device Messaging channel definition.
+	// Specifies the status and settings of the ADM (Amazon Device Messaging) channel
+	// for an application.
 	//
 	// ADMChannelRequest is a required field
 	ADMChannelRequest *ADMChannelRequest `type:"structure" required:"true"`
@@ -38,6 +39,11 @@ func (s *UpdateAdmChannelInput) Validate() error {
 
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
+	}
+	if s.ADMChannelRequest != nil {
+		if err := s.ADMChannelRequest.Validate(); err != nil {
+			invalidParams.AddNested("ADMChannelRequest", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -69,7 +75,8 @@ func (s UpdateAdmChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateAdmChannelOutput struct {
 	_ struct{} `type:"structure" payload:"ADMChannelResponse"`
 
-	// Amazon Device Messaging channel definition.
+	// Provides information about the status and settings of the ADM (Amazon Device
+	// Messaging) channel for an application.
 	//
 	// ADMChannelResponse is a required field
 	ADMChannelResponse *ADMChannelResponse `type:"structure" required:"true"`
@@ -96,7 +103,7 @@ const opUpdateAdmChannel = "UpdateAdmChannel"
 // UpdateAdmChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Update an ADM channel.
+// Updates the ADM channel settings for an application.
 //
 //    // Example sending a request using UpdateAdmChannelRequest.
 //    req := client.UpdateAdmChannelRequest(params)

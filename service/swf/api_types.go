@@ -181,7 +181,7 @@ type ActivityTaskScheduledEventAttributes struct {
 	// to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string `locationName:"taskPriority" type:"string"`
 }
@@ -327,7 +327,7 @@ type ActivityTypeConfiguration struct {
 	// to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	DefaultTaskPriority *string `locationName:"defaultTaskPriority" type:"string"`
 
@@ -411,7 +411,7 @@ func (s ActivityTypeInfo) String() string {
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type CancelTimerDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -453,7 +453,7 @@ type CancelTimerFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -496,7 +496,7 @@ func (s CancelTimerFailedEventAttributes) String() string {
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type CancelWorkflowExecutionDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -519,7 +519,7 @@ type CancelWorkflowExecutionFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -808,7 +808,7 @@ func (s *CloseStatusFilter) Validate() error {
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type CompleteWorkflowExecutionDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -832,7 +832,7 @@ type CompleteWorkflowExecutionFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -873,7 +873,7 @@ func (s CompleteWorkflowExecutionFailedEventAttributes) String() string {
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type ContinueAsNewWorkflowExecutionDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -935,7 +935,7 @@ type ContinueAsNewWorkflowExecutionDecisionAttributes struct {
 	// Higher numbers indicate higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string `locationName:"taskPriority" type:"string"`
 
@@ -991,7 +991,7 @@ type ContinueAsNewWorkflowExecutionFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -1068,7 +1068,7 @@ func (s ContinueAsNewWorkflowExecutionFailedEventAttributes) String() string {
 // this action as if they were members of the API. Treating decisions as a pseudo
 // API maintains a uniform conceptual model and helps keep policies readable.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 // Decision Failure
@@ -1087,7 +1087,7 @@ func (s ContinueAsNewWorkflowExecutionFailedEventAttributes) String() string {
 // error. The event attribute's cause parameter indicates the cause. If cause
 // is set to OPERATION_NOT_PERMITTED, the decision failed because it lacked
 // sufficient permissions. For details and example IAM policies, see Using IAM
-// to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 //    * ScheduleActivityTaskFailed – A ScheduleActivityTask decision failed.
@@ -1355,7 +1355,7 @@ type DecisionTaskScheduledEventAttributes struct {
 	// to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string `locationName:"taskPriority" type:"string"`
 }
@@ -1433,6 +1433,9 @@ func (s DomainConfiguration) String() string {
 // Contains general information about a domain.
 type DomainInfo struct {
 	_ struct{} `type:"structure"`
+
+	// The ARN of the domain.
+	Arn *string `locationName:"arn" min:"1" type:"string"`
 
 	// The description of the domain provided through RegisterDomain.
 	Description *string `locationName:"description" type:"string"`
@@ -1560,7 +1563,7 @@ func (s ExternalWorkflowExecutionSignaledEventAttributes) String() string {
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type FailWorkflowExecutionDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -1586,7 +1589,7 @@ type FailWorkflowExecutionFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -2211,7 +2214,7 @@ func (s MarkerRecordedEventAttributes) String() string {
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type RecordMarkerDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -2256,7 +2259,7 @@ type RecordMarkerFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -2299,7 +2302,7 @@ func (s RecordMarkerFailedEventAttributes) String() string {
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type RequestCancelActivityTaskDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -2346,7 +2349,7 @@ type RequestCancelActivityTaskFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -2384,7 +2387,7 @@ func (s RequestCancelActivityTaskFailedEventAttributes) String() string {
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type RequestCancelExternalWorkflowExecutionDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -2434,7 +2437,7 @@ type RequestCancelExternalWorkflowExecutionFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -2506,6 +2509,45 @@ func (s RequestCancelExternalWorkflowExecutionInitiatedEventAttributes) String()
 	return awsutil.Prettify(s)
 }
 
+// Tags are key-value pairs that can be associated with Amazon SWF state machines
+// and activities.
+//
+// Tags may only contain unicode letters, digits, whitespace, or these symbols:
+// _ . : / = + - @.
+type ResourceTag struct {
+	_ struct{} `type:"structure"`
+
+	// The key of a tag.
+	//
+	// Key is a required field
+	Key *string `locationName:"key" min:"1" type:"string" required:"true"`
+
+	// The value of a tag.
+	Value *string `locationName:"value" type:"string"`
+}
+
+// String returns the string representation
+func (s ResourceTag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResourceTag) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceTag"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Provides the details of the ScheduleActivityTask decision.
 //
 // Access Control
@@ -2528,7 +2570,7 @@ func (s RequestCancelExternalWorkflowExecutionInitiatedEventAttributes) String()
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type ScheduleActivityTaskDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -2623,7 +2665,7 @@ type ScheduleActivityTaskDecisionAttributes struct {
 	// Higher numbers indicate higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string `locationName:"taskPriority" type:"string"`
 }
@@ -2683,7 +2725,7 @@ type ScheduleActivityTaskFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -2770,7 +2812,7 @@ type ScheduleLambdaFunctionFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -2817,7 +2859,7 @@ func (s ScheduleLambdaFunctionFailedEventAttributes) String() string {
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type SignalExternalWorkflowExecutionDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -2883,7 +2925,7 @@ type SignalExternalWorkflowExecutionFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -2986,7 +3028,7 @@ func (s SignalExternalWorkflowExecutionInitiatedEventAttributes) String() string
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type StartChildWorkflowExecutionDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -3061,7 +3103,7 @@ type StartChildWorkflowExecutionDecisionAttributes struct {
 	// Higher numbers indicate higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string `locationName:"taskPriority" type:"string"`
 
@@ -3141,7 +3183,7 @@ type StartChildWorkflowExecutionFailedEventAttributes struct {
 	//
 	// When cause is set to OPERATION_NOT_PERMITTED, the decision fails because
 	// it lacks sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -3249,7 +3291,7 @@ type StartChildWorkflowExecutionInitiatedEventAttributes struct {
 	// to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string `locationName:"taskPriority" type:"string"`
 
@@ -3285,7 +3327,7 @@ type StartLambdaFunctionFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because the
 	// IAM role attached to the execution lacked sufficient permissions. For details
-	// and example IAM policies, see Lambda Tasks (http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
+	// and example IAM policies, see Lambda Tasks (https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
 	// in the Amazon SWF Developer Guide.
 	Cause StartLambdaFunctionFailedCause `locationName:"cause" type:"string" enum:"true"`
 
@@ -3321,7 +3363,7 @@ func (s StartLambdaFunctionFailedEventAttributes) String() string {
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type StartTimerDecisionAttributes struct {
 	_ struct{} `type:"structure"`
@@ -3386,7 +3428,7 @@ type StartTimerFailedEventAttributes struct {
 	//
 	// If cause is set to OPERATION_NOT_PERMITTED, the decision failed because it
 	// lacked sufficient permissions. For details and example IAM policies, see
-	// Using IAM to Manage Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// Using IAM to Manage Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 	// in the Amazon SWF Developer Guide.
 	//
 	// Cause is a required field
@@ -3417,6 +3459,9 @@ type TagFilter struct {
 
 	// Specifies the tag that must be associated with the execution for it to meet
 	// the filter criteria.
+	//
+	// Tags may only contain unicode letters, digits, whitespace, or these symbols:
+	// _ . : / = + - @.
 	//
 	// Tag is a required field
 	Tag *string `locationName:"tag" type:"string" required:"true"`
@@ -3717,7 +3762,7 @@ type WorkflowExecutionConfiguration struct {
 	// to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string `locationName:"taskPriority" type:"string"`
 
@@ -4234,8 +4279,8 @@ type WorkflowTypeConfiguration struct {
 	//
 	// Executions of this workflow type need IAM roles to invoke Lambda functions.
 	// If you don't specify an IAM role when starting this workflow type, the default
-	// Lambda role is attached to the execution. For more information, see http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
+	// Lambda role is attached to the execution. For more information, see https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
 	// in the Amazon SWF Developer Guide.
 	DefaultLambdaRole *string `locationName:"defaultLambdaRole" min:"1" type:"string"`
 
@@ -4254,7 +4299,7 @@ type WorkflowTypeConfiguration struct {
 	// to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	DefaultTaskPriority *string `locationName:"defaultTaskPriority" type:"string"`
 

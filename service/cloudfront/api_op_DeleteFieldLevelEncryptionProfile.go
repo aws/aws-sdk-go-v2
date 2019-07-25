@@ -11,7 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DeleteFieldLevelEncryptionProfileRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteFieldLevelEncryptionProfileRequest
 type DeleteFieldLevelEncryptionProfileInput struct {
 	_ struct{} `type:"structure"`
 
@@ -62,7 +62,7 @@ func (s DeleteFieldLevelEncryptionProfileInput) MarshalFields(e protocol.FieldEn
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DeleteFieldLevelEncryptionProfileOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteFieldLevelEncryptionProfileOutput
 type DeleteFieldLevelEncryptionProfileOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -77,7 +77,7 @@ func (s DeleteFieldLevelEncryptionProfileOutput) MarshalFields(e protocol.FieldE
 	return nil
 }
 
-const opDeleteFieldLevelEncryptionProfile = "DeleteFieldLevelEncryptionProfile2018_11_05"
+const opDeleteFieldLevelEncryptionProfile = "DeleteFieldLevelEncryptionProfile2019_03_26"
 
 // DeleteFieldLevelEncryptionProfileRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -91,12 +91,12 @@ const opDeleteFieldLevelEncryptionProfile = "DeleteFieldLevelEncryptionProfile20
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DeleteFieldLevelEncryptionProfile
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteFieldLevelEncryptionProfile
 func (c *Client) DeleteFieldLevelEncryptionProfileRequest(input *DeleteFieldLevelEncryptionProfileInput) DeleteFieldLevelEncryptionProfileRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFieldLevelEncryptionProfile,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/2018-11-05/field-level-encryption-profile/{Id}",
+		HTTPPath:   "/2019-03-26/field-level-encryption-profile/{Id}",
 	}
 
 	if input == nil {

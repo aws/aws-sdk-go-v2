@@ -31,7 +31,7 @@ type ListCreateAccountStatusInput struct {
 	NextToken *string `type:"string"`
 
 	// A list of one or more states that you want included in the response. If this
-	// parameter is not present, then all requests are included in the response.
+	// parameter isn't present, all requests are included in the response.
 	States []CreateAccountState `type:"list"`
 }
 

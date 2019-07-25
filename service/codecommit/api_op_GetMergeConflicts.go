@@ -13,17 +13,36 @@ import (
 type GetMergeConflictsInput struct {
 	_ struct{} `type:"structure"`
 
+	// The level of conflict detail to use. If unspecified, the default FILE_LEVEL
+	// is used, which will return a not mergeable result if the same file has differences
+	// in both branches. If LINE_LEVEL is specified, a conflict will be considered
+	// not mergeable if the same file in both branches has differences on the same
+	// line.
+	ConflictDetailLevel ConflictDetailLevelTypeEnum `locationName:"conflictDetailLevel" type:"string" enum:"true"`
+
+	// Specifies which branch to use when resolving conflicts, or whether to attempt
+	// automatically merging two versions of a file. The default is NONE, which
+	// requires any conflicts to be resolved manually before the merge operation
+	// will be successful.
+	ConflictResolutionStrategy ConflictResolutionStrategyTypeEnum `locationName:"conflictResolutionStrategy" type:"string" enum:"true"`
+
 	// The branch, tag, HEAD, or other fully qualified reference used to identify
 	// a commit. For example, a branch name or a full commit ID.
 	//
 	// DestinationCommitSpecifier is a required field
 	DestinationCommitSpecifier *string `locationName:"destinationCommitSpecifier" type:"string" required:"true"`
 
-	// The merge option or strategy you want to use to merge the code. The only
-	// valid value is FAST_FORWARD_MERGE.
+	// The maximum number of files to include in the output.
+	MaxConflictFiles *int64 `locationName:"maxConflictFiles" type:"integer"`
+
+	// The merge option or strategy you want to use to merge the code.
 	//
 	// MergeOption is a required field
 	MergeOption MergeOptionTypeEnum `locationName:"mergeOption" type:"string" required:"true" enum:"true"`
+
+	// An enumeration token that when provided in a request, returns the next batch
+	// of the results.
+	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The name of the repository where the pull request was created.
 	//
@@ -74,17 +93,30 @@ func (s *GetMergeConflictsInput) Validate() error {
 type GetMergeConflictsOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The commit ID of the merge base.
+	BaseCommitId *string `locationName:"baseCommitId" type:"string"`
+
+	// A list of metadata for any conflicting files. If the specified merge strategy
+	// is FAST_FORWARD_MERGE, this list will always be empty.
+	//
+	// ConflictMetadataList is a required field
+	ConflictMetadataList []ConflictMetadata `locationName:"conflictMetadataList" type:"list" required:"true"`
+
 	// The commit ID of the destination commit specifier that was used in the merge
 	// evaluation.
 	//
 	// DestinationCommitId is a required field
 	DestinationCommitId *string `locationName:"destinationCommitId" type:"string" required:"true"`
 
-	// A Boolean value that indicates whether the code is mergable by the specified
+	// A Boolean value that indicates whether the code is mergeable by the specified
 	// merge option.
 	//
 	// Mergeable is a required field
 	Mergeable *bool `locationName:"mergeable" type:"boolean" required:"true"`
+
+	// An enumeration token that can be used in a request to return the next batch
+	// of the results.
+	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The commit ID of the source commit specifier that was used in the merge evaluation.
 	//
@@ -118,6 +150,12 @@ func (c *Client) GetMergeConflictsRequest(input *GetMergeConflictsInput) GetMerg
 		Name:       opGetMergeConflicts,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxConflictFiles",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -150,6 +188,53 @@ func (r GetMergeConflictsRequest) Send(ctx context.Context) (*GetMergeConflictsR
 	}
 
 	return resp, nil
+}
+
+// NewGetMergeConflictsRequestPaginator returns a paginator for GetMergeConflicts.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.GetMergeConflictsRequest(input)
+//   p := codecommit.NewGetMergeConflictsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewGetMergeConflictsPaginator(req GetMergeConflictsRequest) GetMergeConflictsPaginator {
+	return GetMergeConflictsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *GetMergeConflictsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// GetMergeConflictsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetMergeConflictsPaginator struct {
+	aws.Pager
+}
+
+func (p *GetMergeConflictsPaginator) CurrentPage() *GetMergeConflictsOutput {
+	return p.Pager.CurrentPage().(*GetMergeConflictsOutput)
 }
 
 // GetMergeConflictsResponse is the response type for the

@@ -93,6 +93,8 @@ type ClientAPI interface {
 
 	ListOpenWorkflowExecutionsRequest(*swf.ListOpenWorkflowExecutionsInput) swf.ListOpenWorkflowExecutionsRequest
 
+	ListTagsForResourceRequest(*swf.ListTagsForResourceInput) swf.ListTagsForResourceRequest
+
 	ListWorkflowTypesRequest(*swf.ListWorkflowTypesInput) swf.ListWorkflowTypesRequest
 
 	PollForActivityTaskRequest(*swf.PollForActivityTaskInput) swf.PollForActivityTaskRequest
@@ -121,7 +123,17 @@ type ClientAPI interface {
 
 	StartWorkflowExecutionRequest(*swf.StartWorkflowExecutionInput) swf.StartWorkflowExecutionRequest
 
+	TagResourceRequest(*swf.TagResourceInput) swf.TagResourceRequest
+
 	TerminateWorkflowExecutionRequest(*swf.TerminateWorkflowExecutionInput) swf.TerminateWorkflowExecutionRequest
+
+	UndeprecateActivityTypeRequest(*swf.UndeprecateActivityTypeInput) swf.UndeprecateActivityTypeRequest
+
+	UndeprecateDomainRequest(*swf.UndeprecateDomainInput) swf.UndeprecateDomainRequest
+
+	UndeprecateWorkflowTypeRequest(*swf.UndeprecateWorkflowTypeInput) swf.UndeprecateWorkflowTypeRequest
+
+	UntagResourceRequest(*swf.UntagResourceInput) swf.UntagResourceRequest
 }
 
 var _ ClientAPI = (*swf.Client)(nil)

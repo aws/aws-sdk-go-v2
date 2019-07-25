@@ -59,6 +59,10 @@ type CreateDomainNameInput struct {
 	// for this domain name.
 	RegionalCertificateName *string `locationName:"regionalCertificateName" type:"string"`
 
+	// The Transport Layer Security (TLS) version + cipher suite for this DomainName.
+	// The valid values are TLS_1_0 and TLS_1_2.
+	SecurityPolicy SecurityPolicy `locationName:"securityPolicy" type:"string" enum:"true"`
+
 	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/].
 	// The tag key can be up to 128 characters and must not start with aws:. The
 	// tag value can be up to 256 characters.
@@ -141,6 +145,12 @@ func (s CreateDomainNameInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "regionalCertificateName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if len(s.SecurityPolicy) > 0 {
+		v := s.SecurityPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "securityPolicy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.Tags != nil {
 		v := s.Tags
 
@@ -200,6 +210,16 @@ type CreateDomainNameOutput struct {
 	// The custom domain name as an API host name, for example, my-api.example.com.
 	DomainName *string `locationName:"domainName" type:"string"`
 
+	// The status of the DomainName migration. The valid values are AVAILABLE and
+	// UPDATING. If the status is UPDATING, the domain cannot be modified further
+	// until the existing operation is complete. If it is AVAILABLE, the domain
+	// can be updated.
+	DomainNameStatus DomainNameStatus `locationName:"domainNameStatus" type:"string" enum:"true"`
+
+	// An optional text message containing detailed information about status of
+	// the DomainName migration.
+	DomainNameStatusMessage *string `locationName:"domainNameStatusMessage" type:"string"`
+
 	// The endpoint configuration of this DomainName showing the endpoint types
 	// of the domain name.
 	EndpointConfiguration *EndpointConfiguration `locationName:"endpointConfiguration" type:"structure"`
@@ -222,6 +242,10 @@ type CreateDomainNameOutput struct {
 	// For more information, see Set up a Regional Custom Domain Name (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html)
 	// and AWS Regions and Endpoints for API Gateway (https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region).
 	RegionalHostedZoneId *string `locationName:"regionalHostedZoneId" type:"string"`
+
+	// The Transport Layer Security (TLS) version + cipher suite for this DomainName.
+	// The valid values are TLS_1_0 and TLS_1_2.
+	SecurityPolicy SecurityPolicy `locationName:"securityPolicy" type:"string" enum:"true"`
 
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]string `locationName:"tags" type:"map"`
@@ -270,6 +294,18 @@ func (s CreateDomainNameOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "domainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if len(s.DomainNameStatus) > 0 {
+		v := s.DomainNameStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "domainNameStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.DomainNameStatusMessage != nil {
+		v := *s.DomainNameStatusMessage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "domainNameStatusMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.EndpointConfiguration != nil {
 		v := s.EndpointConfiguration
 
@@ -299,6 +335,12 @@ func (s CreateDomainNameOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "regionalHostedZoneId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.SecurityPolicy) > 0 {
+		v := s.SecurityPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "securityPolicy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Tags != nil {
 		v := s.Tags

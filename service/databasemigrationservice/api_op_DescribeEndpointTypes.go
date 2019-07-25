@@ -65,7 +65,7 @@ type DescribeEndpointTypesOutput struct {
 	// the value specified by MaxRecords.
 	Marker *string `type:"string"`
 
-	// The type of endpoints that are supported.
+	// The types of endpoints that are supported.
 	SupportedEndpointTypes []SupportedEndpointType `type:"list"`
 }
 

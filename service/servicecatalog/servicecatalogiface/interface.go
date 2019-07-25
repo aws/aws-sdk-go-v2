@@ -137,6 +137,8 @@ type ClientAPI interface {
 
 	DescribeServiceActionRequest(*servicecatalog.DescribeServiceActionInput) servicecatalog.DescribeServiceActionRequest
 
+	DescribeServiceActionExecutionParametersRequest(*servicecatalog.DescribeServiceActionExecutionParametersInput) servicecatalog.DescribeServiceActionExecutionParametersRequest
+
 	DescribeTagOptionRequest(*servicecatalog.DescribeTagOptionInput) servicecatalog.DescribeTagOptionRequest
 
 	DisableAWSOrganizationsAccessRequest(*servicecatalog.DisableAWSOrganizationsAccessInput) servicecatalog.DisableAWSOrganizationsAccessRequest
@@ -190,6 +192,8 @@ type ClientAPI interface {
 	ListServiceActionsRequest(*servicecatalog.ListServiceActionsInput) servicecatalog.ListServiceActionsRequest
 
 	ListServiceActionsForProvisioningArtifactRequest(*servicecatalog.ListServiceActionsForProvisioningArtifactInput) servicecatalog.ListServiceActionsForProvisioningArtifactRequest
+
+	ListStackInstancesForProvisionedProductRequest(*servicecatalog.ListStackInstancesForProvisionedProductInput) servicecatalog.ListStackInstancesForProvisionedProductRequest
 
 	ListTagOptionsRequest(*servicecatalog.ListTagOptionsInput) servicecatalog.ListTagOptionsRequest
 

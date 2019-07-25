@@ -14,8 +14,8 @@ import (
 type IncreaseReplicaCountInput struct {
 	_ struct{} `type:"structure"`
 
-	// If True, the number of replica nodes is increased immediately. If False,
-	// the number of replica nodes is increased during the next maintenance window.
+	// If True, the number of replica nodes is increased immediately. ApplyImmediately=False
+	// is not currently supported.
 	//
 	// ApplyImmediately is a required field
 	ApplyImmediately *bool `type:"boolean" required:"true"`

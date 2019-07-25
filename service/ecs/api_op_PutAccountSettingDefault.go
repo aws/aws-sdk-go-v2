@@ -13,11 +13,14 @@ import (
 type PutAccountSettingDefaultInput struct {
 	_ struct{} `type:"structure"`
 
-	// The resource type to enable the new format for. If serviceLongArnFormat is
-	// specified, the ARN for your Amazon ECS services is affected. If taskLongArnFormat
-	// is specified, the ARN and resource ID for your Amazon ECS tasks are affected.
+	// The resource name for which to modify the account setting. If serviceLongArnFormat
+	// is specified, the ARN for your Amazon ECS services is affected. If taskLongArnFormat
+	// is specified, the ARN and resource ID for your Amazon ECS tasks is affected.
 	// If containerInstanceLongArnFormat is specified, the ARN and resource ID for
-	// your Amazon ECS container instances are affected.
+	// your Amazon ECS container instances is affected. If awsvpcTrunking is specified,
+	// the ENI limit for your Amazon ECS container instances is affected. If containerInsights
+	// is specified, the default setting for CloudWatch Container Insights for your
+	// clusters is affected.
 	//
 	// Name is a required field
 	Name SettingName `locationName:"name" type:"string" required:"true" enum:"true"`
@@ -69,10 +72,8 @@ const opPutAccountSettingDefault = "PutAccountSettingDefault"
 // PutAccountSettingDefaultRequest returns a request value for making API operation for
 // Amazon EC2 Container Service.
 //
-// Modifies the ARN and resource ID format of a resource type for all IAM users
-// on an account for which no individual account setting has been set. Enabling
-// this setting is required to use new Amazon ECS features such as resource
-// tagging.
+// Modifies an account setting for all IAM users on an account for whom no individual
+// account setting has been specified.
 //
 //    // Example sending a request using PutAccountSettingDefaultRequest.
 //    req := client.PutAccountSettingDefaultRequest(params)

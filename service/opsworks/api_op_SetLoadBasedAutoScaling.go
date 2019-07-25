@@ -80,7 +80,7 @@ const opSetLoadBasedAutoScaling = "SetLoadBasedAutoScaling"
 //
 // Specify the load-based auto scaling configuration for a specified layer.
 // For more information, see Managing Load with Time-based and Load-based Instances
-// (http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html).
+// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html).
 //
 // To use load-based auto scaling, you must create a set of load-based auto
 // scaling instances. Load-based auto scaling operates only on the instances
@@ -90,7 +90,7 @@ const opSetLoadBasedAutoScaling = "SetLoadBasedAutoScaling"
 // Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
+// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using SetLoadBasedAutoScalingRequest.
 //    req := client.SetLoadBasedAutoScalingRequest(params)

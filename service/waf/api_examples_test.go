@@ -103,6 +103,12 @@ func ExampleClient_CreateRuleRequest_shared00() {
 				fmt.Println(waf.ErrCodeWAFInvalidParameterException, aerr.Error())
 			case waf.ErrCodeWAFLimitsExceededException:
 				fmt.Println(waf.ErrCodeWAFLimitsExceededException, aerr.Error())
+			case waf.ErrCodeWAFTagOperationException:
+				fmt.Println(waf.ErrCodeWAFTagOperationException, aerr.Error())
+			case waf.ErrCodeWAFTagOperationInternalErrorException:
+				fmt.Println(waf.ErrCodeWAFTagOperationInternalErrorException, aerr.Error())
+			case waf.ErrCodeWAFBadRequestException:
+				fmt.Println(waf.ErrCodeWAFBadRequestException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -245,6 +251,12 @@ func ExampleClient_CreateWebACLRequest_shared00() {
 				fmt.Println(waf.ErrCodeWAFInvalidParameterException, aerr.Error())
 			case waf.ErrCodeWAFLimitsExceededException:
 				fmt.Println(waf.ErrCodeWAFLimitsExceededException, aerr.Error())
+			case waf.ErrCodeWAFTagOperationException:
+				fmt.Println(waf.ErrCodeWAFTagOperationException, aerr.Error())
+			case waf.ErrCodeWAFTagOperationInternalErrorException:
+				fmt.Println(waf.ErrCodeWAFTagOperationInternalErrorException, aerr.Error())
+			case waf.ErrCodeWAFBadRequestException:
+				fmt.Println(waf.ErrCodeWAFBadRequestException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -429,6 +441,10 @@ func ExampleClient_DeleteRuleRequest_shared00() {
 				fmt.Println(waf.ErrCodeWAFReferencedItemException, aerr.Error())
 			case waf.ErrCodeWAFNonEmptyEntityException:
 				fmt.Println(waf.ErrCodeWAFNonEmptyEntityException, aerr.Error())
+			case waf.ErrCodeWAFTagOperationException:
+				fmt.Println(waf.ErrCodeWAFTagOperationException, aerr.Error())
+			case waf.ErrCodeWAFTagOperationInternalErrorException:
+				fmt.Println(waf.ErrCodeWAFTagOperationInternalErrorException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -567,6 +583,10 @@ func ExampleClient_DeleteWebACLRequest_shared00() {
 				fmt.Println(waf.ErrCodeWAFReferencedItemException, aerr.Error())
 			case waf.ErrCodeWAFNonEmptyEntityException:
 				fmt.Println(waf.ErrCodeWAFNonEmptyEntityException, aerr.Error())
+			case waf.ErrCodeWAFTagOperationException:
+				fmt.Println(waf.ErrCodeWAFTagOperationException, aerr.Error())
+			case waf.ErrCodeWAFTagOperationInternalErrorException:
+				fmt.Println(waf.ErrCodeWAFTagOperationInternalErrorException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

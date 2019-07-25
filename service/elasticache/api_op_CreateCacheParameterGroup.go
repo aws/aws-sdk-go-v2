@@ -17,7 +17,8 @@ type CreateCacheParameterGroupInput struct {
 	// The name of the cache parameter group family that the cache parameter group
 	// can be used with.
 	//
-	// Valid values are: memcached1.4 | redis2.6 | redis2.8 | redis3.2 | redis4.0
+	// Valid values are: memcached1.4 | memcached1.5 | redis2.6 | redis2.8 | redis3.2
+	// | redis4.0 | redis5.0 |
 	//
 	// CacheParameterGroupFamily is a required field
 	CacheParameterGroupFamily *string `type:"string" required:"true"`
@@ -87,10 +88,10 @@ const opCreateCacheParameterGroup = "CreateCacheParameterGroup"
 // created CacheParameterGroup you can change the values of specific parameters.
 // For more information, see:
 //
-//    * ModifyCacheParameterGroup (http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyCacheParameterGroup.html)
+//    * ModifyCacheParameterGroup (https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyCacheParameterGroup.html)
 //    in the ElastiCache API Reference.
 //
-//    * Parameters and Parameter Groups (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.html)
+//    * Parameters and Parameter Groups (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.html)
 //    in the ElastiCache User Guide.
 //
 //    // Example sending a request using CreateCacheParameterGroupRequest.

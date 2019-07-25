@@ -58,13 +58,20 @@ type ModifyDBClusterInput struct {
 	// The name of the DB cluster parameter group to use for the DB cluster.
 	DBClusterParameterGroupName *string `type:"string"`
 
+	// Specifies whether this cluster can be deleted. If DeletionProtection is enabled,
+	// the cluster cannot be deleted unless it is modified and DeletionProtection
+	// is disabled. DeletionProtection protects clusters from being accidentally
+	// deleted.
+	DeletionProtection *bool `type:"boolean"`
+
 	// The version number of the database engine to which you want to upgrade. Changing
 	// this parameter results in an outage. The change is applied during the next
 	// maintenance window unless the ApplyImmediately parameter is set to true.
 	EngineVersion *string `type:"string"`
 
-	// The new password for the master database user. This password can contain
-	// any printable ASCII character except "/", """, or "@".
+	// The password for the master database user. This password can contain any
+	// printable ASCII character except forward slash (/), double quote ("), or
+	// the "at" symbol (@).
 	//
 	// Constraints: Must contain from 8 to 41 characters.
 	MasterUserPassword *string `type:"string"`

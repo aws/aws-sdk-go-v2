@@ -594,7 +594,8 @@ func ExampleClient_CreateOpenIDConnectProviderRequest_shared00() {
 // To create an IAM role
 //
 // The following command creates a role named Test-Role and attaches a trust policy
-// to it that is provided as a URL-encoded JSON string.
+// that you must convert from JSON to a string. Upon success, the response includes
+// the same policy as a URL-encoded JSON string.
 func ExampleClient_CreateRoleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
@@ -603,7 +604,7 @@ func ExampleClient_CreateRoleRequest_shared00() {
 
 	svc := iam.New(cfg)
 	input := &iam.CreateRoleInput{
-		AssumeRolePolicyDocument: aws.String("<URL-encoded-JSON>"),
+		AssumeRolePolicyDocument: aws.String("<Stringified-JSON>"),
 		Path:                     aws.String("/"),
 		RoleName:                 aws.String("Test-Role"),
 	}
@@ -1179,6 +1180,41 @@ func ExampleClient_DeleteVirtualMFADeviceRequest_shared00() {
 	fmt.Println(result)
 }
 
+// To generate a service last accessed data report for an organizational unit
+//
+// The following operation generates a report for the organizational unit ou-rge0-awexample
+func ExampleClient_GenerateOrganizationsAccessReportRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := iam.New(cfg)
+	input := &iam.GenerateOrganizationsAccessReportInput{
+		EntityPath: aws.String("o-a1b2c3d4e5/r-f6g7h8i9j0example/ou-1a2b3c-k9l8m7n6o5example"),
+	}
+
+	req := svc.GenerateOrganizationsAccessReportRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case iam.ErrCodeReportGenerationLimitExceededException:
+				fmt.Println(iam.ErrCodeReportGenerationLimitExceededException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // To generate a service last accessed data report for a policy
 //
 // The following operation generates a report for the policy: ExamplePolicy1
@@ -1347,6 +1383,41 @@ func ExampleClient_GetLoginProfileRequest_shared00() {
 				fmt.Println(iam.ErrCodeNoSuchEntityException, aerr.Error())
 			case iam.ErrCodeServiceFailureException:
 				fmt.Println(iam.ErrCodeServiceFailureException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To get details from a previously generated organizational unit report
+//
+// The following operation gets details about the report with the job ID: examplea-1234-b567-cde8-90fg123abcd4
+func ExampleClient_GetOrganizationsAccessReportRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := iam.New(cfg)
+	input := &iam.GetOrganizationsAccessReportInput{
+		JobId: aws.String("examplea-1234-b567-cde8-90fg123abcd4"),
+	}
+
+	req := svc.GetOrganizationsAccessReportRequest(input)
+	result, err := req.Send(context.Background())
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case iam.ErrCodeNoSuchEntityException:
+				fmt.Println(iam.ErrCodeNoSuchEntityException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

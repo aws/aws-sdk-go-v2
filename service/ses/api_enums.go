@@ -75,6 +75,7 @@ type ConfigurationSetAttribute string
 const (
 	ConfigurationSetAttributeEventDestinations ConfigurationSetAttribute = "eventDestinations"
 	ConfigurationSetAttributeTrackingOptions   ConfigurationSetAttribute = "trackingOptions"
+	ConfigurationSetAttributeDeliveryOptions   ConfigurationSetAttribute = "deliveryOptions"
 	ConfigurationSetAttributeReputationOptions ConfigurationSetAttribute = "reputationOptions"
 )
 

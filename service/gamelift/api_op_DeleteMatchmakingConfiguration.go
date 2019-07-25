@@ -17,7 +17,7 @@ type DeleteMatchmakingConfigurationInput struct {
 	// Unique identifier for a matchmaking configuration
 	//
 	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
+	Name *string `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -31,9 +31,6 @@ func (s *DeleteMatchmakingConfigurationInput) Validate() error {
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -60,6 +57,8 @@ const opDeleteMatchmakingConfiguration = "DeleteMatchmakingConfiguration"
 // Permanently removes a FlexMatch matchmaking configuration. To delete, specify
 // the configuration name. A matchmaking configuration cannot be deleted if
 // it is being used in any active matchmaking tickets.
+//
+// Related operations
 //
 //    * CreateMatchmakingConfiguration
 //

@@ -18,7 +18,7 @@ type CreateGlobalTableInput struct {
 	// GlobalTableName is a required field
 	GlobalTableName *string `min:"3" type:"string" required:"true"`
 
-	// The regions where the global table needs to be created.
+	// The Regions where the global table needs to be created.
 	//
 	// ReplicationGroup is a required field
 	ReplicationGroup []Replica `type:"list" required:"true"`
@@ -70,7 +70,7 @@ const opCreateGlobalTable = "CreateGlobalTable"
 //
 // Creates a global table from an existing table. A global table creates a replication
 // relationship between two or more DynamoDB tables with the same table name
-// in the provided regions.
+// in the provided Regions.
 //
 // If you want to add a new replica table to a global table, each of the following
 // conditions must be true:

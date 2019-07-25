@@ -11,7 +11,7 @@ import (
 
 // Represents a request to create a new IP address filter. You use IP address
 // filters when you receive email with Amazon SES. For more information, see
-// the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
+// the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptFilterRequest
 type CreateReceiptFilterInput struct {
 	_ struct{} `type:"structure"`
@@ -66,7 +66,7 @@ const opCreateReceiptFilter = "CreateReceiptFilter"
 // Creates a new IP address filter.
 //
 // For information about setting up IP address filters, see the Amazon SES Developer
-// Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html).
+// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html).
 //
 // You can execute this operation no more than once per second.
 //

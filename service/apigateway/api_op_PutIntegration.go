@@ -14,10 +14,10 @@ import (
 type PutIntegrationInput struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies a put integration input's cache key parameters.
+	// An API-specific tag group of related cached parameters.
 	CacheKeyParameters []string `locationName:"cacheKeyParameters" type:"list"`
 
-	// Specifies a put integration input's cache namespace.
+	// A list of request parameters whose values are to be cached.
 	CacheNamespace *string `locationName:"cacheNamespace" type:"string"`
 
 	// The (id (https://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id))
@@ -42,7 +42,7 @@ type PutIntegrationInput struct {
 	//
 	// If this property is not defined, the request payload will be passed through
 	// from the method request to integration request without modification, provided
-	// that the passthroughBehaviors is configured to support payload pass-through.
+	// that the passthroughBehavior is configured to support payload pass-through.
 	ContentHandling ContentHandlingStrategy `locationName:"contentHandling" type:"string" enum:"true"`
 
 	// Specifies whether credentials are required for a put integration.
@@ -289,10 +289,14 @@ func (s PutIntegrationInput) MarshalFields(e protocol.FieldEncoder) error {
 type PutIntegrationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the integration's cache key parameters.
+	// A list of request parameters whose values API Gateway caches. To be valid
+	// values for cacheKeyParameters, these parameters must also be specified for
+	// Method requestParameters.
 	CacheKeyParameters []string `locationName:"cacheKeyParameters" type:"list"`
 
-	// Specifies the integration's cache namespace.
+	// An API-specific tag group of related cached parameters. To be valid values
+	// for cacheKeyParameters, these parameters must also be specified for Method
+	// requestParameters.
 	CacheNamespace *string `locationName:"cacheNamespace" type:"string"`
 
 	// The (id (https://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id))
@@ -317,7 +321,7 @@ type PutIntegrationOutput struct {
 	//
 	// If this property is not defined, the request payload will be passed through
 	// from the method request to integration request without modification, provided
-	// that the passthroughBehaviors is configured to support payload pass-through.
+	// that the passthroughBehavior is configured to support payload pass-through.
 	ContentHandling ContentHandlingStrategy `locationName:"contentHandling" type:"string" enum:"true"`
 
 	// Specifies the credentials required for the integration, if any. For AWS integrations,

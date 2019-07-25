@@ -20,6 +20,9 @@ type UpdateDatastoreInput struct {
 	// DatastoreName is a required field
 	DatastoreName *string `location:"uri" locationName:"datastoreName" min:"1" type:"string" required:"true"`
 
+	// Where data store data is stored.
+	DatastoreStorage *DatastoreStorage `locationName:"datastoreStorage" type:"structure"`
+
 	// How long, in days, message data is kept for the data store.
 	RetentionPeriod *RetentionPeriod `locationName:"retentionPeriod" type:"structure"`
 }
@@ -39,6 +42,11 @@ func (s *UpdateDatastoreInput) Validate() error {
 	if s.DatastoreName != nil && len(*s.DatastoreName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatastoreName", 1))
 	}
+	if s.DatastoreStorage != nil {
+		if err := s.DatastoreStorage.Validate(); err != nil {
+			invalidParams.AddNested("DatastoreStorage", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.RetentionPeriod != nil {
 		if err := s.RetentionPeriod.Validate(); err != nil {
 			invalidParams.AddNested("RetentionPeriod", err.(aws.ErrInvalidParams))
@@ -54,6 +62,12 @@ func (s *UpdateDatastoreInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateDatastoreInput) MarshalFields(e protocol.FieldEncoder) error {
 
+	if s.DatastoreStorage != nil {
+		v := s.DatastoreStorage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "datastoreStorage", v, metadata)
+	}
 	if s.RetentionPeriod != nil {
 		v := s.RetentionPeriod
 

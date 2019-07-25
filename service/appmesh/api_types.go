@@ -54,6 +54,159 @@ func (s AccessLog) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object representing the AWS Cloud Map attribute information for your virtual
+// node.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/AwsCloudMapInstanceAttribute
+type AwsCloudMapInstanceAttribute struct {
+	_ struct{} `type:"structure"`
+
+	// The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud
+	// Map service instance that contains the specified key and value is returned.
+	//
+	// Key is a required field
+	Key *string `locationName:"key" min:"1" type:"string" required:"true"`
+
+	// The value of an AWS Cloud Map service instance attribute key. Any AWS Cloud
+	// Map service instance that contains the specified key and value is returned.
+	//
+	// Value is a required field
+	Value *string `locationName:"value" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AwsCloudMapInstanceAttribute) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AwsCloudMapInstanceAttribute) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AwsCloudMapInstanceAttribute"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+	if s.Value != nil && len(*s.Value) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsCloudMapInstanceAttribute) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Key != nil {
+		v := *s.Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "key", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object representing the AWS Cloud Map service discovery information for
+// your virtual node.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/AwsCloudMapServiceDiscovery
+type AwsCloudMapServiceDiscovery struct {
+	_ struct{} `type:"structure"`
+
+	// A string map that contains attributes with values that you can use to filter
+	// instances by any custom attribute that you specified when you registered
+	// the instance. Only instances that match all of the specified key/value pairs
+	// will be returned.
+	Attributes []AwsCloudMapInstanceAttribute `locationName:"attributes" type:"list"`
+
+	// The name of the AWS Cloud Map namespace to use.
+	//
+	// NamespaceName is a required field
+	NamespaceName *string `locationName:"namespaceName" min:"1" type:"string" required:"true"`
+
+	// The name of the AWS Cloud Map service to use.
+	//
+	// ServiceName is a required field
+	ServiceName *string `locationName:"serviceName" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AwsCloudMapServiceDiscovery) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AwsCloudMapServiceDiscovery) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AwsCloudMapServiceDiscovery"}
+
+	if s.NamespaceName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NamespaceName"))
+	}
+	if s.NamespaceName != nil && len(*s.NamespaceName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NamespaceName", 1))
+	}
+
+	if s.ServiceName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ServiceName"))
+	}
+	if s.ServiceName != nil && len(*s.ServiceName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ServiceName", 1))
+	}
+	if s.Attributes != nil {
+		for i, v := range s.Attributes {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsCloudMapServiceDiscovery) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Attributes != nil {
+		v := s.Attributes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "attributes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NamespaceName != nil {
+		v := *s.NamespaceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "namespaceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ServiceName != nil {
+		v := *s.ServiceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "serviceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // An object representing the backends that a virtual node is expected to send
 // outbound traffic to.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/Backend
@@ -1164,6 +1317,9 @@ func (s RouteStatus) MarshalFields(e protocol.FieldEncoder) error {
 type ServiceDiscovery struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies any AWS Cloud Map information for the virtual node.
+	AwsCloudMap *AwsCloudMapServiceDiscovery `locationName:"awsCloudMap" type:"structure"`
+
 	// Specifies the DNS information for the virtual node.
 	Dns *DnsServiceDiscovery `locationName:"dns" type:"structure"`
 }
@@ -1176,6 +1332,11 @@ func (s ServiceDiscovery) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ServiceDiscovery) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ServiceDiscovery"}
+	if s.AwsCloudMap != nil {
+		if err := s.AwsCloudMap.Validate(); err != nil {
+			invalidParams.AddNested("AwsCloudMap", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.Dns != nil {
 		if err := s.Dns.Validate(); err != nil {
 			invalidParams.AddNested("Dns", err.(aws.ErrInvalidParams))
@@ -1190,6 +1351,12 @@ func (s *ServiceDiscovery) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ServiceDiscovery) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AwsCloudMap != nil {
+		v := s.AwsCloudMap
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "awsCloudMap", v, metadata)
+	}
 	if s.Dns != nil {
 		v := s.Dns
 
@@ -1871,9 +2038,7 @@ type VirtualRouterSpec struct {
 
 	// The listeners that the virtual router is expected to receive inbound traffic
 	// from. Currently only one listener is supported per virtual router.
-	//
-	// Listeners is a required field
-	Listeners []VirtualRouterListener `locationName:"listeners" min:"1" type:"list" required:"true"`
+	Listeners []VirtualRouterListener `locationName:"listeners" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -1884,10 +2049,6 @@ func (s VirtualRouterSpec) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VirtualRouterSpec) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "VirtualRouterSpec"}
-
-	if s.Listeners == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Listeners"))
-	}
 	if s.Listeners != nil && len(s.Listeners) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Listeners", 1))
 	}

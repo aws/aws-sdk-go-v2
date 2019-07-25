@@ -25,13 +25,16 @@ type Action struct {
 	// as well as arguments that AWS Glue itself consumes.
 	//
 	// For information about how to specify and consume your own Job arguments,
-	// see the Calling AWS Glue APIs in Python (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
+	// see the Calling AWS Glue APIs in Python (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
 	// topic in the developer guide.
 	//
 	// For information about the key-value pairs that AWS Glue consumes to set up
-	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
+	// your job, see the Special Parameters Used by AWS Glue (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
 	// topic in the developer guide.
 	Arguments map[string]string `type:"map"`
+
+	// The name of the crawler to be used with this action.
+	CrawlerName *string `min:"1" type:"string"`
 
 	// The name of a job to be executed.
 	JobName *string `min:"1" type:"string"`
@@ -57,6 +60,9 @@ func (s Action) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Action) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Action"}
+	if s.CrawlerName != nil && len(*s.CrawlerName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CrawlerName", 1))
+	}
 	if s.JobName != nil && len(*s.JobName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
 	}
@@ -86,7 +92,7 @@ type BatchStopJobRunError struct {
 	// Specifies details about the error that was encountered.
 	ErrorDetail *ErrorDetail `type:"structure"`
 
-	// The name of the job definition used in the job run in question.
+	// The name of the job definition that is used in the job run in question.
 	JobName *string `min:"1" type:"string"`
 
 	// The JobRunId of the job run in question.
@@ -256,7 +262,7 @@ func (s Classifier) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Specifies how CloudWatch data should be encrypted.
+// Specifies how Amazon CloudWatch data should be encrypted.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CloudWatchEncryption
 type CloudWatchEncryption struct {
 	_ struct{} `type:"structure"`
@@ -264,7 +270,7 @@ type CloudWatchEncryption struct {
 	// The encryption mode to use for CloudWatch data.
 	CloudWatchEncryptionMode CloudWatchEncryptionMode `type:"string" enum:"true"`
 
-	// The AWS ARN of the KMS key to be used to encrypt the data.
+	// The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
 	KmsKeyArn *string `type:"string"`
 }
 
@@ -468,7 +474,13 @@ func (s *Column) Validate() error {
 type Condition struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the Job to whose JobRuns this condition applies and on which
+	// The state of the crawler to which this condition applies.
+	CrawlState CrawlState `type:"string" enum:"true"`
+
+	// The name of the crawler to which this condition applies.
+	CrawlerName *string `min:"1" type:"string"`
+
+	// The name of the job whose JobRuns this condition applies to, and on which
 	// this trigger waits.
 	JobName *string `min:"1" type:"string"`
 
@@ -476,7 +488,7 @@ type Condition struct {
 	LogicalOperator LogicalOperator `type:"string" enum:"true"`
 
 	// The condition state. Currently, the values supported are SUCCEEDED, STOPPED,
-	// TIMEOUT and FAILED.
+	// TIMEOUT, and FAILED.
 	State JobRunState `type:"string" enum:"true"`
 }
 
@@ -488,6 +500,9 @@ func (s Condition) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Condition) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Condition"}
+	if s.CrawlerName != nil && len(*s.CrawlerName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CrawlerName", 1))
+	}
 	if s.JobName != nil && len(*s.JobName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
 	}
@@ -709,6 +724,35 @@ func (s ConnectionsList) String() string {
 	return awsutil.Prettify(s)
 }
 
+// The details of a crawl in the workflow.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Crawl
+type Crawl struct {
+	_ struct{} `type:"structure"`
+
+	// The date and time on which the crawl completed.
+	CompletedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The error message associated with the crawl.
+	ErrorMessage *string `type:"string"`
+
+	// The log group associated with the crawl.
+	LogGroup *string `min:"1" type:"string"`
+
+	// The log stream associated with the crawl.
+	LogStream *string `min:"1" type:"string"`
+
+	// The date and time on which the crawl started.
+	StartedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The state of the crawler.
+	State CrawlState `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s Crawl) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Specifies a crawler program that examines a data source and uses classifiers
 // to try to determine its schema. If successful, the crawler records metadata
 // concerning the data source in the AWS Glue Data Catalog.
@@ -812,6 +856,20 @@ type CrawlerMetrics struct {
 
 // String returns the string representation
 func (s CrawlerMetrics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The details of a Crawler node present in the workflow.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CrawlerNodeDetails
+type CrawlerNodeDetails struct {
+	_ struct{} `type:"structure"`
+
+	// A list of crawls represented by the crawl node.
+	Crawls []Crawl `type:"list"`
+}
+
+// String returns the string representation
+func (s CrawlerNodeDetails) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -1226,18 +1284,18 @@ func (s *DatabaseInput) Validate() error {
 	return nil
 }
 
-// A development endpoint where a developer can remotely debug ETL scripts.
+// A development endpoint where a developer can remotely debug extract, transform,
+// and load (ETL) scripts.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DevEndpoint
 type DevEndpoint struct {
 	_ struct{} `type:"structure"`
 
 	// A map of arguments used to configure the DevEndpoint.
 	//
-	// Note that currently, we only support "--enable-glue-datacatalog": "" as a
-	// valid argument.
+	// Currently, only "--enable-glue-datacatalog": "" is supported as a valid argument.
 	Arguments map[string]string `type:"map"`
 
-	// The AWS availability zone where this DevEndpoint is located.
+	// The AWS Availability Zone where this DevEndpoint is located.
 	AvailabilityZone *string `type:"string"`
 
 	// The point in time at which this DevEndpoint was created.
@@ -1246,20 +1304,19 @@ type DevEndpoint struct {
 	// The name of the DevEndpoint.
 	EndpointName *string `type:"string"`
 
-	// Path to one or more Java Jars in an S3 bucket that should be loaded in your
-	// DevEndpoint.
+	// The path to one or more Java .jar files in an S3 bucket that should be loaded
+	// in your DevEndpoint.
 	//
-	// Please note that only pure Java/Scala libraries can currently be used on
-	// a DevEndpoint.
+	// You can only use pure Java/Scala libraries with a DevEndpoint.
 	ExtraJarsS3Path *string `type:"string"`
 
-	// Path(s) to one or more Python libraries in an S3 bucket that should be loaded
-	// in your DevEndpoint. Multiple values must be complete paths separated by
-	// a comma.
+	// The paths to one or more Python libraries in an Amazon S3 bucket that should
+	// be loaded in your DevEndpoint. Multiple values must be complete paths separated
+	// by a comma.
 	//
-	// Please note that only pure Python libraries can currently be used on a DevEndpoint.
-	// Libraries that rely on C extensions, such as the pandas (http://pandas.pydata.org/)
-	// Python data analysis library, are not yet supported.
+	// You can only use pure Python libraries with a DevEndpoint. Libraries that
+	// rely on C extensions, such as the pandas (http://pandas.pydata.org/) Python
+	// data analysis library, are not currently supported.
 	ExtraPythonLibsS3Path *string `type:"string"`
 
 	// The reason for a current failure in this DevEndpoint.
@@ -1274,31 +1331,38 @@ type DevEndpoint struct {
 	// The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
 	NumberOfNodes *int64 `type:"integer"`
 
-	// A private IP address to access the DevEndpoint within a VPC, if the DevEndpoint
+	// The number of workers of a defined workerType that are allocated to the development
+	// endpoint.
+	//
+	// The maximum number of workers you can define are 299 for G.1X, and 149 for
+	// G.2X.
+	NumberOfWorkers *int64 `type:"integer"`
+
+	// A private IP address to access the DevEndpoint within a VPC if the DevEndpoint
 	// is created within one. The PrivateAddress field is present only when you
-	// create the DevEndpoint within your virtual private cloud (VPC).
+	// create the DevEndpoint within your VPC.
 	PrivateAddress *string `type:"string"`
 
 	// The public IP address used by this DevEndpoint. The PublicAddress field is
-	// present only when you create a non-VPC (virtual private cloud) DevEndpoint.
+	// present only when you create a non-virtual private cloud (VPC) DevEndpoint.
 	PublicAddress *string `type:"string"`
 
 	// The public key to be used by this DevEndpoint for authentication. This attribute
-	// is provided for backward compatibility, as the recommended attribute to use
-	// is public keys.
+	// is provided for backward compatibility because the recommended attribute
+	// to use is public keys.
 	PublicKey *string `type:"string"`
 
 	// A list of public keys to be used by the DevEndpoints for authentication.
-	// The use of this attribute is preferred over a single public key because the
-	// public keys allow you to have a different private key per client.
+	// Using this attribute is preferred over a single public key because the public
+	// keys allow you to have a different private key per client.
 	//
 	// If you previously created an endpoint with a public key, you must remove
-	// that key to be able to set a list of public keys: call the UpdateDevEndpoint
-	// API with the public key content in the deletePublicKeys attribute, and the
-	// list of new keys in the addPublicKeys attribute.
+	// that key to be able to set a list of public keys. Call the UpdateDevEndpoint
+	// API operation with the public key content in the deletePublicKeys attribute,
+	// and the list of new keys in the addPublicKeys attribute.
 	PublicKeys []string `type:"list"`
 
-	// The AWS ARN of the IAM role used in this DevEndpoint.
+	// The Amazon Resource Name (ARN) of the IAM role used in this DevEndpoint.
 	RoleArn *string `type:"string"`
 
 	// The name of the SecurityConfiguration structure to be used with this DevEndpoint.
@@ -1316,6 +1380,21 @@ type DevEndpoint struct {
 	// The ID of the virtual private cloud (VPC) used by this DevEndpoint.
 	VpcId *string `type:"string"`
 
+	// The type of predefined worker that is allocated to the development endpoint.
+	// Accepts a value of Standard, G.1X, or G.2X.
+	//
+	//    * For the Standard worker type, each worker provides 4 vCPU, 16 GB of
+	//    memory and a 50GB disk, and 2 executors per worker.
+	//
+	//    * For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of
+	//    memory, 64 GB disk), and provides 1 executor per worker. We recommend
+	//    this worker type for memory-intensive jobs.
+	//
+	//    * For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of
+	//    memory, 128 GB disk), and provides 1 executor per worker. We recommend
+	//    this worker type for memory-intensive jobs.
+	WorkerType WorkerType `type:"string" enum:"true"`
+
 	// The YARN endpoint address used by this DevEndpoint.
 	YarnEndpointAddress *string `type:"string"`
 
@@ -1328,25 +1407,24 @@ func (s DevEndpoint) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Custom libraries to be loaded into a DevEndpoint.
+// Custom libraries to be loaded into a development endpoint.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DevEndpointCustomLibraries
 type DevEndpointCustomLibraries struct {
 	_ struct{} `type:"structure"`
 
-	// Path to one or more Java Jars in an S3 bucket that should be loaded in your
-	// DevEndpoint.
+	// The path to one or more Java .jar files in an S3 bucket that should be loaded
+	// in your DevEndpoint.
 	//
-	// Please note that only pure Java/Scala libraries can currently be used on
-	// a DevEndpoint.
+	// You can only use pure Java/Scala libraries with a DevEndpoint.
 	ExtraJarsS3Path *string `type:"string"`
 
-	// Path(s) to one or more Python libraries in an S3 bucket that should be loaded
-	// in your DevEndpoint. Multiple values must be complete paths separated by
-	// a comma.
+	// The paths to one or more Python libraries in an Amazon Simple Storage Service
+	// (Amazon S3) bucket that should be loaded in your DevEndpoint. Multiple values
+	// must be complete paths separated by a comma.
 	//
-	// Please note that only pure Python libraries can currently be used on a DevEndpoint.
-	// Libraries that rely on C extensions, such as the pandas (http://pandas.pydata.org/)
-	// Python data analysis library, are not yet supported.
+	// You can only use pure Python libraries with a DevEndpoint. Libraries that
+	// rely on C extensions, such as the pandas (http://pandas.pydata.org/) Python
+	// data analysis library, are not currently supported.
 	ExtraPythonLibsS3Path *string `type:"string"`
 }
 
@@ -1366,6 +1444,24 @@ type DynamoDBTarget struct {
 
 // String returns the string representation
 func (s DynamoDBTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// An edge represents a directed connection between two AWS Glue components
+// which are part of the workflow the edge belongs to.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Edge
+type Edge struct {
+	_ struct{} `type:"structure"`
+
+	// The unique of the node within the workflow where the edge ends.
+	DestinationId *string `min:"1" type:"string"`
+
+	// The unique of the node within the workflow where the edge starts.
+	SourceId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s Edge) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -1409,13 +1505,14 @@ func (s *EncryptionAtRest) Validate() error {
 type EncryptionConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// The encryption configuration for CloudWatch.
+	// The encryption configuration for Amazon CloudWatch.
 	CloudWatchEncryption *CloudWatchEncryption `type:"structure"`
 
-	// The encryption configuration for Job Bookmarks.
+	// The encryption configuration for job bookmarks.
 	JobBookmarksEncryption *JobBookmarksEncryption `type:"structure"`
 
-	// The encryption configuration for S3 data.
+	// The encryption configuration for Amazon Simple Storage Service (Amazon S3)
+	// data.
 	S3Encryption []S3Encryption `type:"list"`
 }
 
@@ -1544,10 +1641,10 @@ func (s JdbcTarget) String() string {
 type Job struct {
 	_ struct{} `type:"structure"`
 
-	// This field is deprecated, use MaxCapacity instead.
+	// This field is deprecated. Use MaxCapacity instead.
 	//
 	// The number of AWS Glue data processing units (DPUs) allocated to runs of
-	// this job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is
+	// this job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is
 	// a relative measure of processing power that consists of 4 vCPUs of compute
 	// capacity and 16 GB of memory. For more information, see the AWS Glue pricing
 	// page (https://aws.amazon.com/glue/pricing/).
@@ -1568,20 +1665,31 @@ type Job struct {
 	// as well as arguments that AWS Glue itself consumes.
 	//
 	// For information about how to specify and consume your own Job arguments,
-	// see the Calling AWS Glue APIs in Python (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
+	// see the Calling AWS Glue APIs in Python (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
 	// topic in the developer guide.
 	//
 	// For information about the key-value pairs that AWS Glue consumes to set up
-	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
+	// your job, see the Special Parameters Used by AWS Glue (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
 	// topic in the developer guide.
 	DefaultArguments map[string]string `type:"map"`
 
-	// Description of the job being defined.
+	// A description of the job.
 	Description *string `type:"string"`
 
 	// An ExecutionProperty specifying the maximum number of concurrent runs allowed
 	// for this job.
 	ExecutionProperty *ExecutionProperty `type:"structure"`
+
+	// Glue version determines the versions of Apache Spark and Python that AWS
+	// Glue supports. The Python version indicates the version supported for jobs
+	// of type Spark.
+	//
+	// For more information about the available AWS Glue versions and corresponding
+	// Spark and Python versions, see Glue version (https://docs.aws.amazon.com/glue/latest/dg/add-job.html)
+	// in the developer guide.
+	//
+	// Jobs that are created without specifying a Glue version default to Glue 0.9.
+	GlueVersion *string `min:"1" type:"string"`
 
 	// The last point in time when this job definition was modified.
 	LastModifiedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -1597,9 +1705,9 @@ type Job struct {
 	// Do not set Max Capacity if using WorkerType and NumberOfWorkers.
 	//
 	// The value that can be allocated for MaxCapacity depends on whether you are
-	// running a python shell job, or an Apache Spark ETL job:
+	// running a Python shell job or an Apache Spark ETL job:
 	//
-	//    * When you specify a python shell job (JobCommand.Name="pythonshell"),
+	//    * When you specify a Python shell job (JobCommand.Name="pythonshell"),
 	//    you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.
 	//
 	//    * When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"),
@@ -1623,7 +1731,8 @@ type Job struct {
 	// G.2X.
 	NumberOfWorkers *int64 `type:"integer"`
 
-	// The name or ARN of the IAM role associated with this job.
+	// The name or Amazon Resource Name (ARN) of the IAM role associated with this
+	// job.
 	Role *string `type:"string"`
 
 	// The name of the SecurityConfiguration structure to be used with this job.
@@ -1640,11 +1749,13 @@ type Job struct {
 	//    * For the Standard worker type, each worker provides 4 vCPU, 16 GB of
 	//    memory and a 50GB disk, and 2 executors per worker.
 	//
-	//    * For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory
-	//    and a 64GB disk, and 1 executor per worker.
+	//    * For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of
+	//    memory, 64 GB disk), and provides 1 executor per worker. We recommend
+	//    this worker type for memory-intensive jobs.
 	//
-	//    * For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory
-	//    and a 128GB disk, and 1 executor per worker.
+	//    * For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of
+	//    memory, 128 GB disk), and provides 1 executor per worker. We recommend
+	//    this worker type for memory-intensive jobs.
 	WorkerType WorkerType `type:"string" enum:"true"`
 }
 
@@ -1653,7 +1764,7 @@ func (s Job) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Defines a point which a job can resume processing.
+// Defines a point that a job can resume processing.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobBookmarkEntry
 type JobBookmarkEntry struct {
 	_ struct{} `type:"structure"`
@@ -1664,13 +1775,13 @@ type JobBookmarkEntry struct {
 	// The bookmark itself.
 	JobBookmark *string `type:"string"`
 
-	// Name of the job in question.
+	// The name of the job in question.
 	JobName *string `type:"string"`
 
 	// The run ID number.
 	Run *int64 `type:"integer"`
 
-	// Version of the job.
+	// The version of the job.
 	Version *int64 `type:"integer"`
 }
 
@@ -1679,15 +1790,15 @@ func (s JobBookmarkEntry) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Specifies how Job bookmark data should be encrypted.
+// Specifies how job bookmark data should be encrypted.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobBookmarksEncryption
 type JobBookmarksEncryption struct {
 	_ struct{} `type:"structure"`
 
-	// The encryption mode to use for Job bookmarks data.
+	// The encryption mode to use for job bookmarks data.
 	JobBookmarksEncryptionMode JobBookmarksEncryptionMode `type:"string" enum:"true"`
 
-	// The AWS ARN of the KMS key to be used to encrypt the data.
+	// The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
 	KmsKeyArn *string `type:"string"`
 }
 
@@ -1701,11 +1812,16 @@ func (s JobBookmarksEncryption) String() string {
 type JobCommand struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the job command: this must be glueetl, for an Apache Spark ETL
-	// job, or pythonshell, for a Python shell job.
+	// The name of the job command. For an Apache Spark ETL job, this must be glueetl.
+	// For a Python shell job, it must be pythonshell.
 	Name *string `type:"string"`
 
-	// Specifies the S3 path to a script that executes a job (required).
+	// The Python version being used to execute a Python shell job. Allowed values
+	// are 2 or 3.
+	PythonVersion *string `type:"string"`
+
+	// Specifies the Amazon Simple Storage Service (Amazon S3) path to a script
+	// that executes a job.
 	ScriptLocation *string `type:"string"`
 }
 
@@ -1714,12 +1830,26 @@ func (s JobCommand) String() string {
 	return awsutil.Prettify(s)
 }
 
+// The details of a Job node present in the workflow.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobNodeDetails
+type JobNodeDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The information for the job runs represented by the job node.
+	JobRuns []JobRun `type:"list"`
+}
+
+// String returns the string representation
+func (s JobNodeDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Contains information about a job run.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobRun
 type JobRun struct {
 	_ struct{} `type:"structure"`
 
-	// This field is deprecated, use MaxCapacity instead.
+	// This field is deprecated. Use MaxCapacity instead.
 	//
 	// The number of AWS Glue data processing units (DPUs) allocated to this JobRun.
 	// From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative
@@ -1735,18 +1865,18 @@ type JobRun struct {
 	// as well as arguments that AWS Glue itself consumes.
 	//
 	// For information about how to specify and consume your own job arguments,
-	// see the Calling AWS Glue APIs in Python (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
+	// see the Calling AWS Glue APIs in Python (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
 	// topic in the developer guide.
 	//
 	// For information about the key-value pairs that AWS Glue consumes to set up
-	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
+	// your job, see the Special Parameters Used by AWS Glue (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
 	// topic in the developer guide.
 	Arguments map[string]string `type:"map"`
 
 	// The number of the attempt to run this job.
 	Attempt *int64 `type:"integer"`
 
-	// The date and time this job run completed.
+	// The date and time that this job run completed.
 	CompletedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// An error message associated with this job run.
@@ -1754,6 +1884,17 @@ type JobRun struct {
 
 	// The amount of time (in seconds) that the job run consumed resources.
 	ExecutionTime *int64 `type:"integer"`
+
+	// Glue version determines the versions of Apache Spark and Python that AWS
+	// Glue supports. The Python version indicates the version supported for jobs
+	// of type Spark.
+	//
+	// For more information about the available AWS Glue versions and corresponding
+	// Spark and Python versions, see Glue version (https://docs.aws.amazon.com/glue/latest/dg/add-job.html)
+	// in the developer guide.
+	//
+	// Jobs that are created without specifying a Glue version default to Glue 0.9.
+	GlueVersion *string `min:"1" type:"string"`
 
 	// The ID of this job run.
 	Id *string `min:"1" type:"string"`
@@ -1764,27 +1905,27 @@ type JobRun struct {
 	// The current state of the job run.
 	JobRunState JobRunState `type:"string" enum:"true"`
 
-	// The last time this job run was modified.
+	// The last time that this job run was modified.
 	LastModifiedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The name of the log group for secure logging, that can be server-side encrypted
-	// in CloudWatch using KMS. This name can be /aws-glue/jobs/, in which case
-	// the default encryption is NONE. If you add a role name and SecurityConfiguration
+	// The name of the log group for secure logging that can be server-side encrypted
+	// in Amazon CloudWatch using AWS KMS. This name can be /aws-glue/jobs/, in
+	// which case the default encryption is NONE. If you add a role name and SecurityConfiguration
 	// name (in other words, /aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/),
-	// then that security configuration will be used to encrypt the log group.
+	// then that security configuration is used to encrypt the log group.
 	LogGroupName *string `type:"string"`
 
 	// The number of AWS Glue data processing units (DPUs) that can be allocated
 	// when this job runs. A DPU is a relative measure of processing power that
 	// consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information,
-	// see the AWS Glue pricing page (https://aws.amazon.com/glue/pricing/).
+	// see the AWS Glue pricing page (https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/).
 	//
 	// Do not set Max Capacity if using WorkerType and NumberOfWorkers.
 	//
 	// The value that can be allocated for MaxCapacity depends on whether you are
-	// running a python shell job, or an Apache Spark ETL job:
+	// running a Python shell job or an Apache Spark ETL job:
 	//
-	//    * When you specify a python shell job (JobCommand.Name="pythonshell"),
+	//    * When you specify a Python shell job (JobCommand.Name="pythonshell"),
 	//    you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.
 	//
 	//    * When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"),
@@ -1844,16 +1985,16 @@ func (s JobRun) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Specifies information used to update an existing job definition. Note that
-// the previous job definition will be completely overwritten by this information.
+// Specifies information used to update an existing job definition. The previous
+// job definition is completely overwritten by this information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobUpdate
 type JobUpdate struct {
 	_ struct{} `type:"structure"`
 
 	// This field is deprecated. Use MaxCapacity instead.
 	//
-	// The number of AWS Glue data processing units (DPUs) to allocate to this Job.
-	// From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative
+	// The number of AWS Glue data processing units (DPUs) to allocate to this job.
+	// You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative
 	// measure of processing power that consists of 4 vCPUs of compute capacity
 	// and 16 GB of memory. For more information, see the AWS Glue pricing page
 	// (https://aws.amazon.com/glue/pricing/).
@@ -1871,11 +2012,11 @@ type JobUpdate struct {
 	// as well as arguments that AWS Glue itself consumes.
 	//
 	// For information about how to specify and consume your own Job arguments,
-	// see the Calling AWS Glue APIs in Python (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
+	// see the Calling AWS Glue APIs in Python (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
 	// topic in the developer guide.
 	//
 	// For information about the key-value pairs that AWS Glue consumes to set up
-	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
+	// your job, see the Special Parameters Used by AWS Glue (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
 	// topic in the developer guide.
 	DefaultArguments map[string]string `type:"map"`
 
@@ -1885,6 +2026,15 @@ type JobUpdate struct {
 	// An ExecutionProperty specifying the maximum number of concurrent runs allowed
 	// for this job.
 	ExecutionProperty *ExecutionProperty `type:"structure"`
+
+	// Glue version determines the versions of Apache Spark and Python that AWS
+	// Glue supports. The Python version indicates the version supported for jobs
+	// of type Spark.
+	//
+	// For more information about the available AWS Glue versions and corresponding
+	// Spark and Python versions, see Glue version (https://docs.aws.amazon.com/glue/latest/dg/add-job.html)
+	// in the developer guide.
+	GlueVersion *string `min:"1" type:"string"`
 
 	// This field is reserved for future use.
 	LogUri *string `type:"string"`
@@ -1897,9 +2047,9 @@ type JobUpdate struct {
 	// Do not set Max Capacity if using WorkerType and NumberOfWorkers.
 	//
 	// The value that can be allocated for MaxCapacity depends on whether you are
-	// running a python shell job, or an Apache Spark ETL job:
+	// running a Python shell job or an Apache Spark ETL job:
 	//
-	//    * When you specify a python shell job (JobCommand.Name="pythonshell"),
+	//    * When you specify a Python shell job (JobCommand.Name="pythonshell"),
 	//    you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.
 	//
 	//    * When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"),
@@ -1910,7 +2060,7 @@ type JobUpdate struct {
 	// The maximum number of times to retry this job if it fails.
 	MaxRetries *int64 `type:"integer"`
 
-	// Specifies configuration properties of a job notification.
+	// Specifies the configuration properties of a job notification.
 	NotificationProperty *NotificationProperty `type:"structure"`
 
 	// The number of workers of a defined workerType that are allocated when a job
@@ -1920,7 +2070,8 @@ type JobUpdate struct {
 	// G.2X.
 	NumberOfWorkers *int64 `type:"integer"`
 
-	// The name or ARN of the IAM role associated with this job (required).
+	// The name or Amazon Resource Name (ARN) of the IAM role associated with this
+	// job (required).
 	Role *string `type:"string"`
 
 	// The name of the SecurityConfiguration structure to be used with this job.
@@ -1937,11 +2088,13 @@ type JobUpdate struct {
 	//    * For the Standard worker type, each worker provides 4 vCPU, 16 GB of
 	//    memory and a 50GB disk, and 2 executors per worker.
 	//
-	//    * For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory
-	//    and a 64GB disk, and 1 executor per worker.
+	//    * For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of
+	//    memory, 64 GB disk), and provides 1 executor per worker. We recommend
+	//    this worker type for memory-intensive jobs.
 	//
-	//    * For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory
-	//    and a 128GB disk, and 1 executor per worker.
+	//    * For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of
+	//    memory, 128 GB disk), and provides 1 executor per worker. We recommend
+	//    this worker type for memory-intensive jobs.
 	WorkerType WorkerType `type:"string" enum:"true"`
 }
 
@@ -1953,6 +2106,9 @@ func (s JobUpdate) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *JobUpdate) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "JobUpdate"}
+	if s.GlueVersion != nil && len(*s.GlueVersion) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("GlueVersion", 1))
+	}
 	if s.SecurityConfiguration != nil && len(*s.SecurityConfiguration) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SecurityConfiguration", 1))
 	}
@@ -2109,6 +2265,36 @@ type MappingEntry struct {
 
 // String returns the string representation
 func (s MappingEntry) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A node represents an AWS Glue component like Trigger, Job etc. which is part
+// of a workflow.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Node
+type Node struct {
+	_ struct{} `type:"structure"`
+
+	// Details of the crawler when the node represents a crawler.
+	CrawlerDetails *CrawlerNodeDetails `type:"structure"`
+
+	// Details of the Job when the node represents a Job.
+	JobDetails *JobNodeDetails `type:"structure"`
+
+	// The name of the AWS Glue component represented by the node.
+	Name *string `min:"1" type:"string"`
+
+	// Details of the Trigger when the node represents a Trigger.
+	TriggerDetails *TriggerNodeDetails `type:"structure"`
+
+	// The type of AWS Glue component represented by the node.
+	Type NodeType `type:"string" enum:"true"`
+
+	// The unique Id assigned to the node within the workflow.
+	UniqueId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s Node) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -2371,8 +2557,8 @@ type Predicate struct {
 	// A list of the conditions that determine when the trigger will fire.
 	Conditions []Condition `type:"list"`
 
-	// Optional field if only one condition is listed. If multiple conditions are
-	// listed, then this field is required.
+	// An optional field if only one condition is listed. If multiple conditions
+	// are listed, then this field is required.
 	Logical Logical `type:"string" enum:"true"`
 }
 
@@ -2428,15 +2614,15 @@ func (s *ResourceUri) Validate() error {
 	return nil
 }
 
-// Specifies how S3 data should be encrypted.
+// Specifies how Amazon Simple Storage Service (Amazon S3) data should be encrypted.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3Encryption
 type S3Encryption struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS ARN of the KMS key to be used to encrypt the data.
+	// The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
 	KmsKeyArn *string `type:"string"`
 
-	// The encryption mode to use for S3 data.
+	// The encryption mode to use for Amazon S3 data.
 	S3EncryptionMode S3EncryptionMode `type:"string" enum:"true"`
 }
 
@@ -2934,14 +3120,14 @@ type Trigger struct {
 	// Reserved for future use.
 	Id *string `min:"1" type:"string"`
 
-	// Name of the trigger.
+	// The name of the trigger.
 	Name *string `min:"1" type:"string"`
 
 	// The predicate of this trigger, which defines when it will fire.
 	Predicate *Predicate `type:"structure"`
 
 	// A cron expression used to specify the schedule (see Time-Based Schedules
-	// for Jobs and Crawlers (http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
+	// for Jobs and Crawlers (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
 	// For example, to run something every day at 12:15 UTC, you would specify:
 	// cron(15 12 * * ? *).
 	Schedule *string `type:"string"`
@@ -2951,6 +3137,9 @@ type Trigger struct {
 
 	// The type of trigger that this is.
 	Type TriggerType `type:"string" enum:"true"`
+
+	// The name of the workflow associated with the trigger.
+	WorkflowName *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -2958,8 +3147,22 @@ func (s Trigger) String() string {
 	return awsutil.Prettify(s)
 }
 
+// The details of a Trigger node present in the workflow.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TriggerNodeDetails
+type TriggerNodeDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The information of the trigger represented by the trigger node.
+	Trigger *Trigger `type:"structure"`
+}
+
+// String returns the string representation
+func (s TriggerNodeDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
 // A structure used to provide information used to update a trigger. This object
-// will update the the previous trigger definition by overwriting it completely.
+// updates the previous trigger definition by overwriting it completely.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TriggerUpdate
 type TriggerUpdate struct {
 	_ struct{} `type:"structure"`
@@ -2977,7 +3180,7 @@ type TriggerUpdate struct {
 	Predicate *Predicate `type:"structure"`
 
 	// A cron expression used to specify the schedule (see Time-Based Schedules
-	// for Jobs and Crawlers (http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
+	// for Jobs and Crawlers (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
 	// For example, to run something every day at 12:15 UTC, you would specify:
 	// cron(15 12 * * ? *).
 	Schedule *string `type:"string"`
@@ -3278,6 +3481,126 @@ func (s *UserDefinedFunctionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// A workflow represents a flow in which AWS Glue components should be executed
+// to complete a logical task.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Workflow
+type Workflow struct {
+	_ struct{} `type:"structure"`
+
+	// The date and time when the workflow was created.
+	CreatedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A collection of properties to be used as part of each execution of the workflow.
+	DefaultRunProperties map[string]string `type:"map"`
+
+	// A description of the workflow.
+	Description *string `type:"string"`
+
+	// The graph representing all the AWS Glue components that belong to the workflow
+	// as nodes and directed connections between them as edges.
+	Graph *WorkflowGraph `type:"structure"`
+
+	// The date and time when the workflow was last modified.
+	LastModifiedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The information about the last execution of the workflow.
+	LastRun *WorkflowRun `type:"structure"`
+
+	// The name of the workflow representing the flow.
+	Name *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s Workflow) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A workflow graph represents the complete workflow containing all the AWS
+// Glue components present in the workflow and all the directed connections
+// between them.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/WorkflowGraph
+type WorkflowGraph struct {
+	_ struct{} `type:"structure"`
+
+	// A list of all the directed connections between the nodes belonging to the
+	// workflow.
+	Edges []Edge `type:"list"`
+
+	// A list of the the AWS Glue components belong to the workflow represented
+	// as nodes.
+	Nodes []Node `type:"list"`
+}
+
+// String returns the string representation
+func (s WorkflowGraph) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A workflow run is an execution of a workflow providing all the runtime information.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/WorkflowRun
+type WorkflowRun struct {
+	_ struct{} `type:"structure"`
+
+	// The date and time when the workflow run completed.
+	CompletedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The graph representing all the AWS Glue components that belong to the workflow
+	// as nodes and directed connections between them as edges.
+	Graph *WorkflowGraph `type:"structure"`
+
+	// Name of the workflow which was executed.
+	Name *string `min:"1" type:"string"`
+
+	// The date and time when the workflow run was started.
+	StartedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The statistics of the run.
+	Statistics *WorkflowRunStatistics `type:"structure"`
+
+	// The status of the workflow run.
+	Status WorkflowRunStatus `type:"string" enum:"true"`
+
+	// The ID of this workflow run.
+	WorkflowRunId *string `min:"1" type:"string"`
+
+	// The workflow run properties which were set during the run.
+	WorkflowRunProperties map[string]string `type:"map"`
+}
+
+// String returns the string representation
+func (s WorkflowRun) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Workflow run statistics provides statistics about the workflow run.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/WorkflowRunStatistics
+type WorkflowRunStatistics struct {
+	_ struct{} `type:"structure"`
+
+	// Total number of Actions which have failed.
+	FailedActions *int64 `type:"integer"`
+
+	// Total number Actions in running state.
+	RunningActions *int64 `type:"integer"`
+
+	// Total number of Actions which have stopped.
+	StoppedActions *int64 `type:"integer"`
+
+	// Total number of Actions which have succeeded.
+	SucceededActions *int64 `type:"integer"`
+
+	// Total number of Actions which timed out.
+	TimeoutActions *int64 `type:"integer"`
+
+	// Total number of Actions in the workflow run.
+	TotalActions *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s WorkflowRunStatistics) String() string {
+	return awsutil.Prettify(s)
 }
 
 // A classifier for XML content.

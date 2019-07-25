@@ -30,7 +30,7 @@ type DescribePendingMaintenanceActionsInput struct {
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int64 `type:"integer"`
 
-	// The ARN of the replication instance.
+	// The Amazon Resource Name (ARN) of the replication instance.
 	ReplicationInstanceArn *string `type:"string"`
 }
 

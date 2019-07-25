@@ -13,8 +13,8 @@ import (
 type BatchGetDevEndpointsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The list of DevEndpoint names, which may be the names returned from the ListDevEndpoint
-	// operation.
+	// The list of DevEndpoint names, which might be the names returned from the
+	// ListDevEndpoint operation.
 	//
 	// DevEndpointNames is a required field
 	DevEndpointNames []string `min:"1" type:"list" required:"true"`
@@ -63,8 +63,8 @@ const opBatchGetDevEndpoints = "BatchGetDevEndpoints"
 // BatchGetDevEndpointsRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Returns a list of resource metadata for a given list of DevEndpoint names.
-// After calling the ListDevEndpoints operation, you can call this operation
+// Returns a list of resource metadata for a given list of development endpoint
+// names. After calling the ListDevEndpoints operation, you can call this operation
 // to access the data to which you have been granted permissions. This operation
 // supports all IAM permissions, including permission conditions that uses tags.
 //

@@ -1307,6 +1307,31 @@ func (s GroupedResourceCount) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/MemberAccountStatus
+type MemberAccountStatus struct {
+	_ struct{} `type:"structure"`
+
+	// AccountId is a required field
+	AccountId *string `type:"string" required:"true"`
+
+	// ConfigRuleName is a required field
+	ConfigRuleName *string `min:"1" type:"string" required:"true"`
+
+	ErrorCode *string `type:"string"`
+
+	ErrorMessage *string `type:"string"`
+
+	LastUpdateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// MemberAccountRuleStatus is a required field
+	MemberAccountRuleStatus MemberAccountRuleStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s MemberAccountStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
 // This object contains regions to set up the aggregator and an IAM role to
 // retrieve organization details.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationAggregationSource
@@ -1340,6 +1365,171 @@ func (s *OrganizationAggregationSource) Validate() error {
 
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationConfigRule
+type OrganizationConfigRule struct {
+	_ struct{} `type:"structure"`
+
+	ExcludedAccounts []string `type:"list"`
+
+	LastUpdateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// OrganizationConfigRuleArn is a required field
+	OrganizationConfigRuleArn *string `min:"1" type:"string" required:"true"`
+
+	// OrganizationConfigRuleName is a required field
+	OrganizationConfigRuleName *string `min:"1" type:"string" required:"true"`
+
+	OrganizationCustomRuleMetadata *OrganizationCustomRuleMetadata `type:"structure"`
+
+	OrganizationManagedRuleMetadata *OrganizationManagedRuleMetadata `type:"structure"`
+}
+
+// String returns the string representation
+func (s OrganizationConfigRule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationConfigRuleStatus
+type OrganizationConfigRuleStatus struct {
+	_ struct{} `type:"structure"`
+
+	ErrorCode *string `type:"string"`
+
+	ErrorMessage *string `type:"string"`
+
+	LastUpdateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// OrganizationConfigRuleName is a required field
+	OrganizationConfigRuleName *string `min:"1" type:"string" required:"true"`
+
+	// OrganizationRuleStatus is a required field
+	OrganizationRuleStatus OrganizationRuleStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s OrganizationConfigRuleStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationCustomRuleMetadata
+type OrganizationCustomRuleMetadata struct {
+	_ struct{} `type:"structure"`
+
+	Description *string `type:"string"`
+
+	InputParameters *string `min:"1" type:"string"`
+
+	// LambdaFunctionArn is a required field
+	LambdaFunctionArn *string `min:"1" type:"string" required:"true"`
+
+	MaximumExecutionFrequency MaximumExecutionFrequency `type:"string" enum:"true"`
+
+	// OrganizationConfigRuleTriggerTypes is a required field
+	OrganizationConfigRuleTriggerTypes []OrganizationConfigRuleTriggerType `type:"list" required:"true"`
+
+	ResourceIdScope *string `min:"1" type:"string"`
+
+	ResourceTypesScope []string `type:"list"`
+
+	TagKeyScope *string `min:"1" type:"string"`
+
+	TagValueScope *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s OrganizationCustomRuleMetadata) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OrganizationCustomRuleMetadata) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "OrganizationCustomRuleMetadata"}
+	if s.InputParameters != nil && len(*s.InputParameters) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InputParameters", 1))
+	}
+
+	if s.LambdaFunctionArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LambdaFunctionArn"))
+	}
+	if s.LambdaFunctionArn != nil && len(*s.LambdaFunctionArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("LambdaFunctionArn", 1))
+	}
+
+	if s.OrganizationConfigRuleTriggerTypes == nil {
+		invalidParams.Add(aws.NewErrParamRequired("OrganizationConfigRuleTriggerTypes"))
+	}
+	if s.ResourceIdScope != nil && len(*s.ResourceIdScope) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceIdScope", 1))
+	}
+	if s.TagKeyScope != nil && len(*s.TagKeyScope) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TagKeyScope", 1))
+	}
+	if s.TagValueScope != nil && len(*s.TagValueScope) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TagValueScope", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationManagedRuleMetadata
+type OrganizationManagedRuleMetadata struct {
+	_ struct{} `type:"structure"`
+
+	Description *string `type:"string"`
+
+	InputParameters *string `min:"1" type:"string"`
+
+	MaximumExecutionFrequency MaximumExecutionFrequency `type:"string" enum:"true"`
+
+	ResourceIdScope *string `min:"1" type:"string"`
+
+	ResourceTypesScope []string `type:"list"`
+
+	// RuleIdentifier is a required field
+	RuleIdentifier *string `min:"1" type:"string" required:"true"`
+
+	TagKeyScope *string `min:"1" type:"string"`
+
+	TagValueScope *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s OrganizationManagedRuleMetadata) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OrganizationManagedRuleMetadata) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "OrganizationManagedRuleMetadata"}
+	if s.InputParameters != nil && len(*s.InputParameters) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InputParameters", 1))
+	}
+	if s.ResourceIdScope != nil && len(*s.ResourceIdScope) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceIdScope", 1))
+	}
+
+	if s.RuleIdentifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RuleIdentifier"))
+	}
+	if s.RuleIdentifier != nil && len(*s.RuleIdentifier) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RuleIdentifier", 1))
+	}
+	if s.TagKeyScope != nil && len(*s.TagKeyScope) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TagKeyScope", 1))
+	}
+	if s.TagValueScope != nil && len(*s.TagValueScope) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TagValueScope", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1983,6 +2173,20 @@ type StaticValue struct {
 
 // String returns the string representation
 func (s StaticValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StatusDetailFilters
+type StatusDetailFilters struct {
+	_ struct{} `type:"structure"`
+
+	AccountId *string `type:"string"`
+
+	MemberAccountRuleStatus MemberAccountRuleStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s StatusDetailFilters) String() string {
 	return awsutil.Prettify(s)
 }
 

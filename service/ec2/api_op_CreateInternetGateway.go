@@ -47,7 +47,7 @@ const opCreateInternetGateway = "CreateInternetGateway"
 // gateway, you attach it to a VPC using AttachInternetGateway.
 //
 // For more information about your VPC and internet gateway, see the Amazon
-// Virtual Private Cloud User Guide (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/).
+// Virtual Private Cloud User Guide (https://docs.aws.amazon.com/vpc/latest/userguide/).
 //
 //    // Example sending a request using CreateInternetGatewayRequest.
 //    req := client.CreateInternetGatewayRequest(params)

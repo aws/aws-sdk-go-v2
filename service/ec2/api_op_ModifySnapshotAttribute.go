@@ -80,9 +80,8 @@ const opModifySnapshotAttribute = "ModifySnapshotAttribute"
 //
 // Adds or removes permission settings for the specified snapshot. You may add
 // or remove specified AWS account IDs from a snapshot's list of create volume
-// permissions, but you cannot do both in a single API call. If you need to
-// both add and remove account IDs for a snapshot, you must use multiple API
-// calls.
+// permissions, but you cannot do both in a single operation. If you need to
+// both add and remove account IDs for a snapshot, you must use multiple operations.
 //
 // Encrypted snapshots and snapshots with AWS Marketplace product codes cannot
 // be made public. Snapshots encrypted with your default CMK cannot be shared

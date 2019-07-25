@@ -14,7 +14,7 @@ import (
 type DisableImportFindingsForProductInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of a resource that represents your subscription to a supported product.
+	// The ARN of the integrated product to disable the integration for.
 	//
 	// ProductSubscriptionArn is a required field
 	ProductSubscriptionArn *string `location:"uri" locationName:"ProductSubscriptionArn" type:"string" required:"true"`
@@ -72,8 +72,9 @@ const opDisableImportFindingsForProduct = "DisableImportFindingsForProduct"
 // DisableImportFindingsForProductRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Cancels the subscription that allows a findings-generating solution (product)
-// to import its findings into Security Hub.
+// Disables the integration of the specified product with Security Hub. Findings
+// from that product are no longer sent to Security Hub after the integration
+// is disabled.
 //
 //    // Example sending a request using DisableImportFindingsForProductRequest.
 //    req := client.DisableImportFindingsForProductRequest(params)

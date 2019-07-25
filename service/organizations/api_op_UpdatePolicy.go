@@ -82,9 +82,9 @@ const opUpdatePolicy = "UpdatePolicy"
 // UpdatePolicyRequest returns a request value for making API operation for
 // AWS Organizations.
 //
-// Updates an existing policy with a new name, description, or content. If any
-// parameter is not supplied, that value remains unchanged. Note that you cannot
-// change a policy's type.
+// Updates an existing policy with a new name, description, or content. If you
+// don't supply any parameter, that value remains unchanged. You can't change
+// a policy's type.
 //
 // This operation can be called only from the organization's master account.
 //

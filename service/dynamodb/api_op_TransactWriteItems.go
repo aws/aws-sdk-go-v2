@@ -20,19 +20,20 @@ type TransactWriteItemsInput struct {
 	//
 	// Although multiple identical calls using the same client request token produce
 	// the same result on the server (no side effects), the responses to the calls
-	// may not be the same. If the ReturnConsumedCapacity> parameter is set, then
+	// might not be the same. If the ReturnConsumedCapacity> parameter is set, then
 	// the initial TransactWriteItems call returns the amount of write capacity
-	// units consumed in making the changes, and subsequent TransactWriteItems calls
-	// with the same client token return the amount of read capacity units consumed
+	// units consumed in making the changes. Subsequent TransactWriteItems calls
+	// with the same client token return the number of read capacity units consumed
 	// in reading the item.
 	//
 	// A client request token is valid for 10 minutes after the first request that
-	// uses it completes. After 10 minutes, any request with the same client token
-	// is treated as a new request. Do not resubmit the same request with the same
-	// client token for more than 10 minutes or the result may not be idempotent.
+	// uses it is completed. After 10 minutes, any request with the same client
+	// token is treated as a new request. Do not resubmit the same request with
+	// the same client token for more than 10 minutes, or the result might not be
+	// idempotent.
 	//
 	// If you submit a request with the same client token but a change in other
-	// parameters within the 10 minute idempotency window, DynamoDB returns an IdempotentParameterMismatch
+	// parameters within the 10-minute idempotency window, DynamoDB returns an IdempotentParameterMismatch
 	// exception.
 	ClientRequestToken *string `min:"1" type:"string" idempotencyToken:"true"`
 
@@ -57,10 +58,10 @@ type TransactWriteItemsInput struct {
 	// NONE (the default), no statistics are returned.
 	ReturnItemCollectionMetrics ReturnItemCollectionMetrics `type:"string" enum:"true"`
 
-	// An ordered array of up to 10 TransactWriteItem objects, each of which contains
+	// An ordered array of up to 25 TransactWriteItem objects, each of which contains
 	// a ConditionCheck, Put, Update, or Delete object. These can operate on items
 	// in different tables, but the tables must reside in the same AWS account and
-	// region, and no two of them can operate on the same item.
+	// Region, and no two of them can operate on the same item.
 	//
 	// TransactItems is a required field
 	TransactItems []TransactWriteItem `min:"1" type:"list" required:"true"`
@@ -109,7 +110,7 @@ type TransactWriteItemsOutput struct {
 
 	// A list of tables that were processed by TransactWriteItems and, for each
 	// table, information about any item collections that were affected by individual
-	// UpdateItem, PutItem or DeleteItem operations.
+	// UpdateItem, PutItem, or DeleteItem operations.
 	ItemCollectionMetrics map[string][]ItemCollectionMetrics `type:"map"`
 }
 
@@ -123,11 +124,22 @@ const opTransactWriteItems = "TransactWriteItems"
 // TransactWriteItemsRequest returns a request value for making API operation for
 // Amazon DynamoDB.
 //
-// TransactWriteItems is a synchronous write operation that groups up to 10
+// TransactWriteItems is a synchronous write operation that groups up to 25
 // action requests. These actions can target items in different tables, but
-// not in different AWS accounts or regions, and no two actions can target the
+// not in different AWS accounts or Regions, and no two actions can target the
 // same item. For example, you cannot both ConditionCheck and Update the same
-// item.
+// item. The aggregate size of the items in the transaction cannot exceed 4
+// MB.
+//
+// All AWS Regions and AWS GovCloud (US) support up to 25 items per transaction
+// with up to 4 MB of data, except the following AWS Regions:
+//
+//    * China (Beijing)
+//
+//    * China (Ningxia)
+//
+// The China (Beijing) and China (Ningxia) Regions support up to 10 items per
+// transaction with up to 4 MB of data.
 //
 // The actions are completed atomically so that either all of them succeed,
 // or all of them fail. They are defined by the following objects:
@@ -136,43 +148,44 @@ const opTransactWriteItems = "TransactWriteItems"
 //    specifies the primary key of the item to be written, the name of the table
 //    to write it in, an optional condition expression that must be satisfied
 //    for the write to succeed, a list of the item's attributes, and a field
-//    indicating whether or not to retrieve the item's attributes if the condition
+//    indicating whether to retrieve the item's attributes if the condition
 //    is not met.
 //
 //    * Update — Initiates an UpdateItem operation to update an existing item.
 //    This structure specifies the primary key of the item to be updated, the
 //    name of the table where it resides, an optional condition expression that
 //    must be satisfied for the update to succeed, an expression that defines
-//    one or more attributes to be updated, and a field indicating whether or
-//    not to retrieve the item's attributes if the condition is not met.
+//    one or more attributes to be updated, and a field indicating whether to
+//    retrieve the item's attributes if the condition is not met.
 //
 //    * Delete — Initiates a DeleteItem operation to delete an existing item.
 //    This structure specifies the primary key of the item to be deleted, the
 //    name of the table where it resides, an optional condition expression that
 //    must be satisfied for the deletion to succeed, and a field indicating
-//    whether or not to retrieve the item's attributes if the condition is not
-//    met.
+//    whether to retrieve the item's attributes if the condition is not met.
 //
 //    * ConditionCheck — Applies a condition to an item that is not being
 //    modified by the transaction. This structure specifies the primary key
 //    of the item to be checked, the name of the table where it resides, a condition
 //    expression that must be satisfied for the transaction to succeed, and
-//    a field indicating whether or not to retrieve the item's attributes if
-//    the condition is not met.
+//    a field indicating whether to retrieve the item's attributes if the condition
+//    is not met.
 //
 // DynamoDB rejects the entire TransactWriteItems request if any of the following
 // is true:
 //
 //    * A condition in one of the condition expressions is not met.
 //
-//    * A conflicting operation is in the process of updating the same item.
+//    * An ongoing operation is in the process of updating the same item.
 //
 //    * There is insufficient provisioned capacity for the transaction to be
 //    completed.
 //
-//    * An item size becomes too large (bigger than 400 KB), a Local Secondary
-//    Index (LSI) becomes too large, or a similar validation error occurs because
+//    * An item size becomes too large (bigger than 400 KB), a local secondary
+//    index (LSI) becomes too large, or a similar validation error occurs because
 //    of changes made by the transaction.
+//
+//    * The aggregate size of the items in the transaction exceeds 4 MB.
 //
 //    * There is a user error, such as an invalid data format.
 //

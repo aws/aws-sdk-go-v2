@@ -47,7 +47,7 @@ func (s *ValidateMatchmakingRuleSetInput) Validate() error {
 type ValidateMatchmakingRuleSetOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Response indicating whether or not the rule set is valid.
+	// Response indicating whether the rule set is valid.
 	Valid *bool `type:"boolean"`
 }
 

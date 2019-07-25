@@ -20,6 +20,9 @@ type CreateDatastoreInput struct {
 	// DatastoreName is a required field
 	DatastoreName *string `locationName:"datastoreName" min:"1" type:"string" required:"true"`
 
+	// Where data store data is stored.
+	DatastoreStorage *DatastoreStorage `locationName:"datastoreStorage" type:"structure"`
+
 	// How long, in days, message data is kept for the data store.
 	RetentionPeriod *RetentionPeriod `locationName:"retentionPeriod" type:"structure"`
 
@@ -44,6 +47,11 @@ func (s *CreateDatastoreInput) Validate() error {
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
+	if s.DatastoreStorage != nil {
+		if err := s.DatastoreStorage.Validate(); err != nil {
+			invalidParams.AddNested("DatastoreStorage", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.RetentionPeriod != nil {
 		if err := s.RetentionPeriod.Validate(); err != nil {
@@ -72,6 +80,12 @@ func (s CreateDatastoreInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "datastoreName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DatastoreStorage != nil {
+		v := s.DatastoreStorage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "datastoreStorage", v, metadata)
 	}
 	if s.RetentionPeriod != nil {
 		v := s.RetentionPeriod

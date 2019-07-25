@@ -4,6 +4,7 @@ package directconnect
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -31,6 +32,9 @@ type CreateInterconnectInput struct {
 	//
 	// Location is a required field
 	Location *string `locationName:"location" type:"string" required:"true"`
+
+	// The tags to assign to the interconnect,
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -52,6 +56,16 @@ func (s *CreateInterconnectInput) Validate() error {
 
 	if s.Location == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Location"))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -118,6 +132,9 @@ type CreateInterconnectOutput struct {
 
 	// The AWS Region where the connection is located.
 	Region *string `locationName:"region" type:"string"`
+
+	// Any tags assigned to the interconnect.
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 }
 
 // String returns the string representation

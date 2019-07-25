@@ -11,13 +11,13 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Provides options for deleting a vault from Amazon Glacier.
+// Provides options for deleting a vault from Amazon S3 Glacier.
 type DeleteVaultInput struct {
 	_ struct{} `type:"structure"`
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon Glacier uses the AWS account ID associated with the
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -90,16 +90,16 @@ const opDeleteVault = "DeleteVault"
 // DeleteVaultRequest returns a request value for making API operation for
 // Amazon Glacier.
 //
-// This operation deletes a vault. Amazon Glacier will delete a vault only if
-// there are no archives in the vault as of the last inventory and there have
-// been no writes to the vault since the last inventory. If either of these
+// This operation deletes a vault. Amazon S3 Glacier will delete a vault only
+// if there are no archives in the vault as of the last inventory and there
+// have been no writes to the vault since the last inventory. If either of these
 // conditions is not satisfied, the vault deletion fails (that is, the vault
-// is not removed) and Amazon Glacier returns an error. You can use DescribeVault
+// is not removed) and Amazon S3 Glacier returns an error. You can use DescribeVault
 // to return the number of archives in a vault, and you can use Initiate a Job
-// (POST jobs) (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html)
+// (POST jobs) (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html)
 // to initiate a new inventory retrieval for a vault. The inventory contains
 // the archive IDs you use to delete archives using Delete Archive (DELETE archive)
-// (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-delete.html).
+// (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-delete.html).
 //
 // This operation is idempotent.
 //
@@ -107,12 +107,12 @@ const opDeleteVault = "DeleteVault"
 // AWS Identity and Access Management (IAM) users don't have any permissions
 // by default. You must grant them explicit permission to perform specific actions.
 // For more information, see Access Control Using AWS Identity and Access Management
-// (IAM) (http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
+// (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
 //
 // For conceptual information and underlying REST API, see Deleting a Vault
-// in Amazon Glacier (http://docs.aws.amazon.com/amazonglacier/latest/dev/deleting-vaults.html)
-// and Delete Vault (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-delete.html)
-// in the Amazon Glacier Developer Guide.
+// in Amazon Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/deleting-vaults.html)
+// and Delete Vault (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-delete.html)
+// in the Amazon S3 Glacier Developer Guide.
 //
 //    // Example sending a request using DeleteVaultRequest.
 //    req := client.DeleteVaultRequest(params)

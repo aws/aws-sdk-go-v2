@@ -37,7 +37,7 @@ type CreateCommitInput struct {
 
 	// If the commit contains deletions, whether to keep a folder or folder structure
 	// if the changes leave the folders empty. If this is specified as true, a .gitkeep
-	// file will be created for empty folders.
+	// file will be created for empty folders. The default is false.
 	KeepEmptyFolders *bool `locationName:"keepEmptyFolders" type:"boolean"`
 
 	// The ID of the commit that is the parent of the commit you will create. If

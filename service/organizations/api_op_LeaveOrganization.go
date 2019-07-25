@@ -53,11 +53,11 @@ const opLeaveOrganization = "LeaveOrganization"
 //    account. When you create an account in an organization using the AWS Organizations
 //    console, API, or CLI commands, the information required of standalone
 //    accounts is not automatically collected. For each account that you want
-//    to make standalone, you must accept the End User License Agreement (EULA),
+//    to make standalone, you must accept the end user license agreement (EULA),
 //    choose a support plan, provide and verify the required contact information,
 //    and provide a current payment method. AWS uses the payment method to charge
 //    for any billable (not free tier) AWS activity that occurs while the account
-//    is not attached to an organization. Follow the steps at To leave an organization
+//    isn't attached to an organization. Follow the steps at To leave an organization
 //    when all required account information has not yet been provided (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
 //    in the AWS Organizations User Guide.
 //

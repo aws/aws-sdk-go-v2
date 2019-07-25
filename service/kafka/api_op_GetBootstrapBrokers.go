@@ -57,6 +57,9 @@ type GetBootstrapBrokersOutput struct {
 
 	// A string containing one or more hostname:port pairs.
 	BootstrapBrokerString *string `locationName:"bootstrapBrokerString" type:"string"`
+
+	// A string containing one or more DNS names (or IP) and TLS port pairs.
+	BootstrapBrokerStringTls *string `locationName:"bootstrapBrokerStringTls" type:"string"`
 }
 
 // String returns the string representation
@@ -71,6 +74,12 @@ func (s GetBootstrapBrokersOutput) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "bootstrapBrokerString", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.BootstrapBrokerStringTls != nil {
+		v := *s.BootstrapBrokerStringTls
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "bootstrapBrokerStringTls", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

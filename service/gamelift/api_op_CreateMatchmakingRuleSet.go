@@ -19,10 +19,10 @@ type CreateMatchmakingRuleSetInput struct {
 	// is different from the optional "name" field in the rule set body.)
 	//
 	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
+	Name *string `type:"string" required:"true"`
 
-	// Collection of matchmaking rules, formatted as a JSON string. Note that comments
-	// are not allowed in JSON, but most elements support a description field.
+	// Collection of matchmaking rules, formatted as a JSON string. Comments are
+	// not allowed in JSON, but most elements support a description field.
 	//
 	// RuleSetBody is a required field
 	RuleSetBody *string `min:"1" type:"string" required:"true"`
@@ -39,9 +39,6 @@ func (s *CreateMatchmakingRuleSetInput) Validate() error {
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
-	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if s.RuleSetBody == nil {
@@ -85,7 +82,7 @@ const opCreateMatchmakingRuleSet = "CreateMatchmakingRuleSet"
 //
 // To create a matchmaking rule set, provide unique rule set name and the rule
 // set body in JSON format. Rule sets must be defined in the same region as
-// the matchmaking configuration they will be used with.
+// the matchmaking configuration they are used with.
 //
 // Since matchmaking rule sets cannot be edited, it is a good idea to check
 // the rule set syntax using ValidateMatchmakingRuleSet before creating a new

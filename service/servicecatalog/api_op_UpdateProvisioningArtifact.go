@@ -28,6 +28,17 @@ type UpdateProvisioningArtifactInput struct {
 	// The updated description of the provisioning artifact.
 	Description *string `type:"string"`
 
+	// Information set by the administrator to provide guidance to end users about
+	// which provisioning artifacts to use.
+	//
+	// The DEFAULT value indicates that the product version is active.
+	//
+	// The administrator can set the guidance to DEPRECATED to inform users that
+	// the product version is deprecated. Users are able to make updates to a provisioned
+	// product of a deprecated version but cannot launch new provisioned products
+	// using a deprecated version.
+	Guidance ProvisioningArtifactGuidance `type:"string" enum:"true"`
+
 	// The updated name of the provisioning artifact.
 	Name *string `type:"string"`
 

@@ -11,7 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DeleteFieldLevelEncryptionConfigRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteFieldLevelEncryptionConfigRequest
 type DeleteFieldLevelEncryptionConfigInput struct {
 	_ struct{} `type:"structure"`
 
@@ -62,7 +62,7 @@ func (s DeleteFieldLevelEncryptionConfigInput) MarshalFields(e protocol.FieldEnc
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DeleteFieldLevelEncryptionConfigOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteFieldLevelEncryptionConfigOutput
 type DeleteFieldLevelEncryptionConfigOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -77,7 +77,7 @@ func (s DeleteFieldLevelEncryptionConfigOutput) MarshalFields(e protocol.FieldEn
 	return nil
 }
 
-const opDeleteFieldLevelEncryptionConfig = "DeleteFieldLevelEncryptionConfig2018_11_05"
+const opDeleteFieldLevelEncryptionConfig = "DeleteFieldLevelEncryptionConfig2019_03_26"
 
 // DeleteFieldLevelEncryptionConfigRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -91,12 +91,12 @@ const opDeleteFieldLevelEncryptionConfig = "DeleteFieldLevelEncryptionConfig2018
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DeleteFieldLevelEncryptionConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteFieldLevelEncryptionConfig
 func (c *Client) DeleteFieldLevelEncryptionConfigRequest(input *DeleteFieldLevelEncryptionConfigInput) DeleteFieldLevelEncryptionConfigRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFieldLevelEncryptionConfig,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/2018-11-05/field-level-encryption/{Id}",
+		HTTPPath:   "/2019-03-26/field-level-encryption/{Id}",
 	}
 
 	if input == nil {

@@ -20,7 +20,9 @@ type UpdateSegmentInput struct {
 	// SegmentId is a required field
 	SegmentId *string `location:"uri" locationName:"segment-id" type:"string" required:"true"`
 
-	// Segment definition.
+	// Specifies the configuration, dimension, and other settings for a segment.
+	// A WriteSegmentRequest object can include a Dimensions object or a SegmentGroups
+	// object, but not both.
 	//
 	// WriteSegmentRequest is a required field
 	WriteSegmentRequest *WriteSegmentRequest `type:"structure" required:"true"`
@@ -45,6 +47,11 @@ func (s *UpdateSegmentInput) Validate() error {
 
 	if s.WriteSegmentRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WriteSegmentRequest"))
+	}
+	if s.WriteSegmentRequest != nil {
+		if err := s.WriteSegmentRequest.Validate(); err != nil {
+			invalidParams.AddNested("WriteSegmentRequest", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -82,7 +89,8 @@ func (s UpdateSegmentInput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateSegmentOutput struct {
 	_ struct{} `type:"structure" payload:"SegmentResponse"`
 
-	// Segment definition.
+	// Provides information about the configuration, dimension, and other settings
+	// for a segment.
 	//
 	// SegmentResponse is a required field
 	SegmentResponse *SegmentResponse `type:"structure" required:"true"`
@@ -109,7 +117,8 @@ const opUpdateSegment = "UpdateSegment"
 // UpdateSegmentRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Used to update a segment.
+// Creates a new segment for an application or updates the configuration, dimension,
+// and other settings for an existing segment that's associated with an application.
 //
 //    // Example sending a request using UpdateSegmentRequest.
 //    req := client.UpdateSegmentRequest(params)

@@ -13,8 +13,9 @@ import (
 type DetectSyntaxInput struct {
 	_ struct{} `type:"structure"`
 
-	// The language code of the input documents. You can specify English ("en")
-	// or Spanish ("es").
+	// The language code of the input documents. You can specify any of the primary
+	// languages supported by Amazon Comprehend: German ("de"), English ("en"),
+	// Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt").
 	//
 	// LanguageCode is a required field
 	LanguageCode SyntaxLanguageCode `type:"string" required:"true" enum:"true"`

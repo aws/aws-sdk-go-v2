@@ -3,6 +3,7 @@
 package directconnect
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -50,7 +51,8 @@ type BGPPeer struct {
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
 	Asn *int64 `locationName:"asn" type:"integer"`
 
-	// The authentication key for BGP configuration.
+	// The authentication key for BGP configuration. This string has a minimum length
+	// of 6 characters and and a maximun lenth of 80 characters.
 	AuthKey *string `locationName:"authKey" type:"string"`
 
 	// The Direct Connect endpoint on which the BGP peer terminates.
@@ -165,6 +167,9 @@ type Connection struct {
 
 	// The AWS Region where the connection is located.
 	Region *string `locationName:"region" type:"string"`
+
+	// Any tags assigned to the connection.
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
 	// The ID of the VLAN.
 	Vlan *int64 `locationName:"vlan" type:"integer"`
@@ -329,7 +334,7 @@ type DirectConnectGatewayAttachment struct {
 	//    is stopped.
 	AttachmentState DirectConnectGatewayAttachmentState `locationName:"attachmentState" type:"string" enum:"true"`
 
-	// The type of attachment.
+	// The interface type.
 	AttachmentType DirectConnectGatewayAttachmentType `locationName:"attachmentType" type:"string" enum:"true"`
 
 	// The ID of the Direct Connect gateway.
@@ -411,6 +416,9 @@ type Interconnect struct {
 
 	// The AWS Region where the connection is located.
 	Region *string `locationName:"region" type:"string"`
+
+	// Any tags assigned to the interconnect.
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -487,6 +495,9 @@ type Lag struct {
 
 	// The AWS Region where the connection is located.
 	Region *string `locationName:"region" type:"string"`
+
+	// Any tags assigned to link aggregation group (LAG).
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -553,7 +564,8 @@ type NewBGPPeer struct {
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
 	Asn *int64 `locationName:"asn" type:"integer"`
 
-	// The authentication key for BGP configuration.
+	// The authentication key for BGP configuration. This string has a minimum length
+	// of 6 characters and and a maximun lenth of 80 characters.
 	AuthKey *string `locationName:"authKey" type:"string"`
 
 	// The IP address assigned to the customer interface.
@@ -581,7 +593,8 @@ type NewPrivateVirtualInterface struct {
 	// Asn is a required field
 	Asn *int64 `locationName:"asn" type:"integer" required:"true"`
 
-	// The authentication key for BGP configuration.
+	// The authentication key for BGP configuration. This string has a minimum length
+	// of 6 characters and and a maximun lenth of 80 characters.
 	AuthKey *string `locationName:"authKey" type:"string"`
 
 	// The IP address assigned to the customer interface.
@@ -593,6 +606,9 @@ type NewPrivateVirtualInterface struct {
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
 	// and 9001. The default value is 1500.
 	Mtu *int64 `locationName:"mtu" type:"integer"`
+
+	// Any tags assigned to the private virtual interface.
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
 	// The ID of the virtual private gateway.
 	VirtualGatewayId *string `locationName:"virtualGatewayId" deprecated:"true" type:"string"`
@@ -620,6 +636,9 @@ func (s *NewPrivateVirtualInterface) Validate() error {
 	if s.Asn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Asn"))
 	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
 
 	if s.VirtualInterfaceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceName"))
@@ -627,6 +646,13 @@ func (s *NewPrivateVirtualInterface) Validate() error {
 
 	if s.Vlan == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Vlan"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -651,7 +677,8 @@ type NewPrivateVirtualInterfaceAllocation struct {
 	// Asn is a required field
 	Asn *int64 `locationName:"asn" type:"integer" required:"true"`
 
-	// The authentication key for BGP configuration.
+	// The authentication key for BGP configuration. This string has a minimum length
+	// of 6 characters and and a maximun lenth of 80 characters.
 	AuthKey *string `locationName:"authKey" type:"string"`
 
 	// The IP address assigned to the customer interface.
@@ -660,6 +687,10 @@ type NewPrivateVirtualInterfaceAllocation struct {
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
 	// and 9001. The default value is 1500.
 	Mtu *int64 `locationName:"mtu" type:"integer"`
+
+	// Any tags assigned to the private virtual interface to be provisioned on a
+	// connection.
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
 	// The name of the virtual interface assigned by the customer network.
 	//
@@ -684,6 +715,9 @@ func (s *NewPrivateVirtualInterfaceAllocation) Validate() error {
 	if s.Asn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Asn"))
 	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
 
 	if s.VirtualInterfaceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceName"))
@@ -691,6 +725,13 @@ func (s *NewPrivateVirtualInterfaceAllocation) Validate() error {
 
 	if s.Vlan == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Vlan"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -715,7 +756,8 @@ type NewPublicVirtualInterface struct {
 	// Asn is a required field
 	Asn *int64 `locationName:"asn" type:"integer" required:"true"`
 
-	// The authentication key for BGP configuration.
+	// The authentication key for BGP configuration. This string has a minimum length
+	// of 6 characters and and a maximun lenth of 80 characters.
 	AuthKey *string `locationName:"authKey" type:"string"`
 
 	// The IP address assigned to the customer interface.
@@ -724,6 +766,9 @@ type NewPublicVirtualInterface struct {
 	// The routes to be advertised to the AWS network in this Region. Applies to
 	// public virtual interfaces.
 	RouteFilterPrefixes []RouteFilterPrefix `locationName:"routeFilterPrefixes" type:"list"`
+
+	// Any tags assigned to the public virtual interface.
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
 	// The name of the virtual interface assigned by the customer network.
 	//
@@ -748,6 +793,9 @@ func (s *NewPublicVirtualInterface) Validate() error {
 	if s.Asn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Asn"))
 	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
 
 	if s.VirtualInterfaceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceName"))
@@ -755,6 +803,13 @@ func (s *NewPublicVirtualInterface) Validate() error {
 
 	if s.Vlan == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Vlan"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -779,7 +834,8 @@ type NewPublicVirtualInterfaceAllocation struct {
 	// Asn is a required field
 	Asn *int64 `locationName:"asn" type:"integer" required:"true"`
 
-	// The authentication key for BGP configuration.
+	// The authentication key for BGP configuration. This string has a minimum length
+	// of 6 characters and and a maximun lenth of 80 characters.
 	AuthKey *string `locationName:"authKey" type:"string"`
 
 	// The IP address assigned to the customer interface.
@@ -788,6 +844,10 @@ type NewPublicVirtualInterfaceAllocation struct {
 	// The routes to be advertised to the AWS network in this Region. Applies to
 	// public virtual interfaces.
 	RouteFilterPrefixes []RouteFilterPrefix `locationName:"routeFilterPrefixes" type:"list"`
+
+	// Any tags assigned to the public virtual interface to be provisioned on a
+	// connection.
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
 	// The name of the virtual interface assigned by the customer network.
 	//
@@ -812,6 +872,9 @@ func (s *NewPublicVirtualInterfaceAllocation) Validate() error {
 	if s.Asn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Asn"))
 	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
 
 	if s.VirtualInterfaceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceName"))
@@ -820,6 +883,13 @@ func (s *NewPublicVirtualInterfaceAllocation) Validate() error {
 	if s.Vlan == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Vlan"))
 	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -827,7 +897,7 @@ func (s *NewPublicVirtualInterfaceAllocation) Validate() error {
 	return nil
 }
 
-// Information about a transit virtual interface.
+// Information about the transit virtual interface.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewTransitVirtualInterface
 type NewTransitVirtualInterface struct {
 	_ struct{} `type:"structure"`
@@ -851,8 +921,11 @@ type NewTransitVirtualInterface struct {
 	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string"`
 
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
-	// and 9001. The default value is 1500.
+	// and 8500. The default value is 1500.
 	Mtu *int64 `locationName:"mtu" type:"integer"`
+
+	// Any tags assigned to the transit virtual interface.
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
 	// The name of the virtual interface assigned by the customer network.
 	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string"`
@@ -866,7 +939,27 @@ func (s NewTransitVirtualInterface) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Information about a transit virtual interface to be provisioned on a connection.
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *NewTransitVirtualInterface) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "NewTransitVirtualInterface"}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Information about a transit virtual interface.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewTransitVirtualInterfaceAllocation
 type NewTransitVirtualInterfaceAllocation struct {
 	_ struct{} `type:"structure"`
@@ -887,8 +980,11 @@ type NewTransitVirtualInterfaceAllocation struct {
 	CustomerAddress *string `locationName:"customerAddress" type:"string"`
 
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
-	// and 9001. The default value is 1500.
+	// and 8500. The default value is 1500.
 	Mtu *int64 `locationName:"mtu" type:"integer"`
+
+	// Any tags assigned to the transit virtual interface.
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
 	// The name of the virtual interface assigned by the customer network.
 	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string"`
@@ -900,6 +996,26 @@ type NewTransitVirtualInterfaceAllocation struct {
 // String returns the string representation
 func (s NewTransitVirtualInterfaceAllocation) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *NewTransitVirtualInterfaceAllocation) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "NewTransitVirtualInterfaceAllocation"}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Information about a tag associated with an AWS Direct Connect resource.
@@ -1015,7 +1131,8 @@ type VirtualInterface struct {
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
 	Asn *int64 `locationName:"asn" type:"integer"`
 
-	// The authentication key for BGP configuration.
+	// The authentication key for BGP configuration. This string has a minimum length
+	// of 6 characters and and a maximun lenth of 80 characters.
 	AuthKey *string `locationName:"authKey" type:"string"`
 
 	// The Direct Connect endpoint on which the virtual interface terminates.
@@ -1055,6 +1172,9 @@ type VirtualInterface struct {
 	// The routes to be advertised to the AWS network in this Region. Applies to
 	// public virtual interfaces.
 	RouteFilterPrefixes []RouteFilterPrefix `locationName:"routeFilterPrefixes" type:"list"`
+
+	// Any tags assigned to the virtual interface.
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
 	// The ID of the virtual private gateway. Applies only to private virtual interfaces.
 	VirtualGatewayId *string `locationName:"virtualGatewayId" deprecated:"true" type:"string"`

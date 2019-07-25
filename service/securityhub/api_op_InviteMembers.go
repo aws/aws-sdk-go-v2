@@ -47,8 +47,8 @@ func (s InviteMembersInput) MarshalFields(e protocol.FieldEncoder) error {
 type InviteMembersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of account ID and email address pairs of the AWS accounts that could
-	// not be processed.
+	// A list of account ID and email address pairs of the AWS accounts that couldn't
+	// be processed.
 	UnprocessedAccounts []Result `type:"list"`
 }
 
@@ -79,10 +79,12 @@ const opInviteMembers = "InviteMembers"
 // InviteMembersRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Invites other AWS accounts to enable Security Hub and become Security Hub
-// member accounts. When an account accepts the invitation and becomes a member
-// account, the master account can view Security Hub findings of the member
-// account.
+// Invites other AWS accounts to become member accounts for the Security Hub
+// master account that the invitation is sent from. Before you can use this
+// action to invite a member, you must first create the member account in Security
+// Hub by using the CreateMembers action. When the account owner accepts the
+// invitation to become a member account and enables Security Hub, the master
+// account can view the findings generated from member account.
 //
 //    // Example sending a request using InviteMembersRequest.
 //    req := client.InviteMembersRequest(params)

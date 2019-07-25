@@ -10,7 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/UpdatePublicKeyRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdatePublicKeyRequest
 type UpdatePublicKeyInput struct {
 	_ struct{} `type:"structure" payload:"PublicKeyConfig"`
 
@@ -26,7 +26,7 @@ type UpdatePublicKeyInput struct {
 	// Request to update public key information.
 	//
 	// PublicKeyConfig is a required field
-	PublicKeyConfig *PublicKeyConfig `locationName:"PublicKeyConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2018-11-05/"`
+	PublicKeyConfig *PublicKeyConfig `locationName:"PublicKeyConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
 }
 
 // String returns the string representation
@@ -75,13 +75,13 @@ func (s UpdatePublicKeyInput) MarshalFields(e protocol.FieldEncoder) error {
 	if s.PublicKeyConfig != nil {
 		v := s.PublicKeyConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2018-11-05/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
 		e.SetFields(protocol.PayloadTarget, "PublicKeyConfig", v, metadata)
 	}
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/UpdatePublicKeyResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdatePublicKeyResult
 type UpdatePublicKeyOutput struct {
 	_ struct{} `type:"structure" payload:"PublicKey"`
 
@@ -114,7 +114,7 @@ func (s UpdatePublicKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opUpdatePublicKey = "UpdatePublicKey2018_11_05"
+const opUpdatePublicKey = "UpdatePublicKey2019_03_26"
 
 // UpdatePublicKeyRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -129,12 +129,12 @@ const opUpdatePublicKey = "UpdatePublicKey2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/UpdatePublicKey
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdatePublicKey
 func (c *Client) UpdatePublicKeyRequest(input *UpdatePublicKeyInput) UpdatePublicKeyRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePublicKey,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/2018-11-05/public-key/{Id}/config",
+		HTTPPath:   "/2019-03-26/public-key/{Id}/config",
 	}
 
 	if input == nil {

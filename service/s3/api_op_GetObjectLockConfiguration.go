@@ -14,7 +14,7 @@ import (
 type GetObjectLockConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
-	// The bucket whose Object Lock configuration you want to retrieve.
+	// The bucket whose object lock configuration you want to retrieve.
 	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
@@ -62,7 +62,7 @@ func (s GetObjectLockConfigurationInput) MarshalFields(e protocol.FieldEncoder) 
 type GetObjectLockConfigurationOutput struct {
 	_ struct{} `type:"structure" payload:"ObjectLockConfiguration"`
 
-	// The specified bucket's Object Lock configuration.
+	// The specified bucket's object lock configuration.
 	ObjectLockConfiguration *ObjectLockConfiguration `type:"structure"`
 }
 
@@ -87,8 +87,8 @@ const opGetObjectLockConfiguration = "GetObjectLockConfiguration"
 // GetObjectLockConfigurationRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Gets the Object Lock configuration for a bucket. The rule specified in the
-// Object Lock configuration will be applied by default to every new object
+// Gets the object lock configuration for a bucket. The rule specified in the
+// object lock configuration will be applied by default to every new object
 // placed in the specified bucket.
 //
 //    // Example sending a request using GetObjectLockConfigurationRequest.

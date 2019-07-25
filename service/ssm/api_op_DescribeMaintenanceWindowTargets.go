@@ -27,7 +27,7 @@ type DescribeMaintenanceWindowTargetsInput struct {
 	// a previous call.)
 	NextToken *string `type:"string"`
 
-	// The ID of the Maintenance Window whose targets should be retrieved.
+	// The ID of the maintenance window whose targets should be retrieved.
 	//
 	// WindowId is a required field
 	WindowId *string `min:"20" type:"string" required:"true"`
@@ -73,7 +73,7 @@ type DescribeMaintenanceWindowTargetsOutput struct {
 	// items to return, the string is empty.
 	NextToken *string `type:"string"`
 
-	// Information about the targets in the Maintenance Window.
+	// Information about the targets in the maintenance window.
 	Targets []MaintenanceWindowTarget `type:"list"`
 }
 
@@ -87,7 +87,7 @@ const opDescribeMaintenanceWindowTargets = "DescribeMaintenanceWindowTargets"
 // DescribeMaintenanceWindowTargetsRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Lists the targets registered with the Maintenance Window.
+// Lists the targets registered with the maintenance window.
 //
 //    // Example sending a request using DescribeMaintenanceWindowTargetsRequest.
 //    req := client.DescribeMaintenanceWindowTargetsRequest(params)

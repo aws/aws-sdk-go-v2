@@ -47,8 +47,8 @@ type RegisterWorkflowTypeInput struct {
 	//
 	// Executions of this workflow type need IAM roles to invoke Lambda functions.
 	// If you don't specify an IAM role when you start this workflow type, the default
-	// Lambda role is attached to the execution. For more information, see http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
+	// Lambda role is attached to the execution. For more information, see https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
 	// in the Amazon SWF Developer Guide.
 	DefaultLambdaRole *string `locationName:"defaultLambdaRole" min:"1" type:"string"`
 
@@ -64,7 +64,7 @@ type RegisterWorkflowTypeInput struct {
 	// higher priority.
 	//
 	// For more information about setting task priority, see Setting Task Priority
-	// (http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	DefaultTaskPriority *string `locationName:"defaultTaskPriority" type:"string"`
 
@@ -89,7 +89,7 @@ type RegisterWorkflowTypeInput struct {
 	//
 	// The specified string must not start or end with whitespace. It must not contain
 	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not contain the literal string arn.
+	// | \u007f-\u009f). Also, it must not be the literal string arn.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
@@ -102,7 +102,7 @@ type RegisterWorkflowTypeInput struct {
 	//
 	// The specified string must not start or end with whitespace. It must not contain
 	// a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f
-	// | \u007f-\u009f). Also, it must not contain the literal string arn.
+	// | \u007f-\u009f). Also, it must not be the literal string arn.
 	//
 	// Version is a required field
 	Version *string `locationName:"version" min:"1" type:"string" required:"true"`
@@ -195,7 +195,7 @@ const opRegisterWorkflowType = "RegisterWorkflowType"
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 //    // Example sending a request using RegisterWorkflowTypeRequest.

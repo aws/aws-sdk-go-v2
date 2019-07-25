@@ -81,6 +81,8 @@ type ClientAPI interface {
 
 	BatchGetTriggersRequest(*glue.BatchGetTriggersInput) glue.BatchGetTriggersRequest
 
+	BatchGetWorkflowsRequest(*glue.BatchGetWorkflowsInput) glue.BatchGetWorkflowsRequest
+
 	BatchStopJobRunRequest(*glue.BatchStopJobRunInput) glue.BatchStopJobRunRequest
 
 	CreateClassifierRequest(*glue.CreateClassifierInput) glue.CreateClassifierRequest
@@ -107,6 +109,8 @@ type ClientAPI interface {
 
 	CreateUserDefinedFunctionRequest(*glue.CreateUserDefinedFunctionInput) glue.CreateUserDefinedFunctionRequest
 
+	CreateWorkflowRequest(*glue.CreateWorkflowInput) glue.CreateWorkflowRequest
+
 	DeleteClassifierRequest(*glue.DeleteClassifierInput) glue.DeleteClassifierRequest
 
 	DeleteConnectionRequest(*glue.DeleteConnectionInput) glue.DeleteConnectionRequest
@@ -132,6 +136,8 @@ type ClientAPI interface {
 	DeleteTriggerRequest(*glue.DeleteTriggerInput) glue.DeleteTriggerRequest
 
 	DeleteUserDefinedFunctionRequest(*glue.DeleteUserDefinedFunctionInput) glue.DeleteUserDefinedFunctionRequest
+
+	DeleteWorkflowRequest(*glue.DeleteWorkflowInput) glue.DeleteWorkflowRequest
 
 	GetCatalogImportStatusRequest(*glue.GetCatalogImportStatusInput) glue.GetCatalogImportStatusRequest
 
@@ -201,6 +207,14 @@ type ClientAPI interface {
 
 	GetUserDefinedFunctionsRequest(*glue.GetUserDefinedFunctionsInput) glue.GetUserDefinedFunctionsRequest
 
+	GetWorkflowRequest(*glue.GetWorkflowInput) glue.GetWorkflowRequest
+
+	GetWorkflowRunRequest(*glue.GetWorkflowRunInput) glue.GetWorkflowRunRequest
+
+	GetWorkflowRunPropertiesRequest(*glue.GetWorkflowRunPropertiesInput) glue.GetWorkflowRunPropertiesRequest
+
+	GetWorkflowRunsRequest(*glue.GetWorkflowRunsInput) glue.GetWorkflowRunsRequest
+
 	ImportCatalogToGlueRequest(*glue.ImportCatalogToGlueInput) glue.ImportCatalogToGlueRequest
 
 	ListCrawlersRequest(*glue.ListCrawlersInput) glue.ListCrawlersRequest
@@ -211,9 +225,13 @@ type ClientAPI interface {
 
 	ListTriggersRequest(*glue.ListTriggersInput) glue.ListTriggersRequest
 
+	ListWorkflowsRequest(*glue.ListWorkflowsInput) glue.ListWorkflowsRequest
+
 	PutDataCatalogEncryptionSettingsRequest(*glue.PutDataCatalogEncryptionSettingsInput) glue.PutDataCatalogEncryptionSettingsRequest
 
 	PutResourcePolicyRequest(*glue.PutResourcePolicyInput) glue.PutResourcePolicyRequest
+
+	PutWorkflowRunPropertiesRequest(*glue.PutWorkflowRunPropertiesInput) glue.PutWorkflowRunPropertiesRequest
 
 	ResetJobBookmarkRequest(*glue.ResetJobBookmarkInput) glue.ResetJobBookmarkRequest
 
@@ -224,6 +242,8 @@ type ClientAPI interface {
 	StartJobRunRequest(*glue.StartJobRunInput) glue.StartJobRunRequest
 
 	StartTriggerRequest(*glue.StartTriggerInput) glue.StartTriggerRequest
+
+	StartWorkflowRunRequest(*glue.StartWorkflowRunInput) glue.StartWorkflowRunRequest
 
 	StopCrawlerRequest(*glue.StopCrawlerInput) glue.StopCrawlerRequest
 
@@ -256,6 +276,8 @@ type ClientAPI interface {
 	UpdateTriggerRequest(*glue.UpdateTriggerInput) glue.UpdateTriggerRequest
 
 	UpdateUserDefinedFunctionRequest(*glue.UpdateUserDefinedFunctionInput) glue.UpdateUserDefinedFunctionRequest
+
+	UpdateWorkflowRequest(*glue.UpdateWorkflowInput) glue.UpdateWorkflowRequest
 }
 
 var _ ClientAPI = (*glue.Client)(nil)

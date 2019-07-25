@@ -80,7 +80,8 @@ func (s GetCampaignVersionInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetCampaignVersionOutput struct {
 	_ struct{} `type:"structure" payload:"CampaignResponse"`
 
-	// Campaign definition
+	// Provides information about the status, configuration, and other settings
+	// for a campaign.
 	//
 	// CampaignResponse is a required field
 	CampaignResponse *CampaignResponse `type:"structure" required:"true"`
@@ -107,7 +108,8 @@ const opGetCampaignVersion = "GetCampaignVersion"
 // GetCampaignVersionRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Returns information about a specific version of a campaign.
+// Retrieves information about the status, configuration, and other settings
+// for a specific version of a campaign.
 //
 //    // Example sending a request using GetCampaignVersionRequest.
 //    req := client.GetCampaignVersionRequest(params)

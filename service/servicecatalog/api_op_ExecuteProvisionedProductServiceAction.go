@@ -27,6 +27,8 @@ type ExecuteProvisionedProductServiceActionInput struct {
 	// ExecuteToken is a required field
 	ExecuteToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
 
+	Parameters map[string][]string `min:"1" type:"map"`
+
 	// The identifier of the provisioned product.
 	//
 	// ProvisionedProductId is a required field
@@ -52,6 +54,9 @@ func (s *ExecuteProvisionedProductServiceActionInput) Validate() error {
 	}
 	if s.ExecuteToken != nil && len(*s.ExecuteToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ExecuteToken", 1))
+	}
+	if s.Parameters != nil && len(s.Parameters) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Parameters", 1))
 	}
 
 	if s.ProvisionedProductId == nil {

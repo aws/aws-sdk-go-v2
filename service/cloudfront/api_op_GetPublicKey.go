@@ -10,7 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetPublicKeyRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetPublicKeyRequest
 type GetPublicKeyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +51,7 @@ func (s GetPublicKeyInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetPublicKeyResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetPublicKeyResult
 type GetPublicKeyOutput struct {
 	_ struct{} `type:"structure" payload:"PublicKey"`
 
@@ -84,7 +84,7 @@ func (s GetPublicKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opGetPublicKey = "GetPublicKey2018_11_05"
+const opGetPublicKey = "GetPublicKey2019_03_26"
 
 // GetPublicKeyRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -98,12 +98,12 @@ const opGetPublicKey = "GetPublicKey2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetPublicKey
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetPublicKey
 func (c *Client) GetPublicKeyRequest(input *GetPublicKeyInput) GetPublicKeyRequest {
 	op := &aws.Operation{
 		Name:       opGetPublicKey,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2018-11-05/public-key/{Id}",
+		HTTPPath:   "/2019-03-26/public-key/{Id}",
 	}
 
 	if input == nil {

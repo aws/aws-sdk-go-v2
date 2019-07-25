@@ -10,7 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// The request object for the CreateFileSystem operation.
+// The request object used to create a new Amazon FSx file system.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemRequest
 type CreateFileSystemInput struct {
 	_ struct{} `type:"structure"`
@@ -20,7 +20,7 @@ type CreateFileSystemInput struct {
 	// when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
 	ClientRequestToken *string `min:"1" type:"string" idempotencyToken:"true"`
 
-	// The type of file system.
+	// The type of Amazon FSx file system to create.
 	//
 	// FileSystemType is a required field
 	FileSystemType FileSystemType `type:"string" required:"true" enum:"true"`
@@ -31,16 +31,16 @@ type CreateFileSystemInput struct {
 	// in the AWS Key Management Service API Reference.
 	KmsKeyId *string `min:"1" type:"string"`
 
-	// The configuration object for Lustre file systems used in the CreateFileSystem
-	// operation.
+	// The Lustre configuration for the file system being created. This value is
+	// required if FileSystemType is set to LUSTRE.
 	LustreConfiguration *CreateFileSystemLustreConfiguration `type:"structure"`
 
-	// A list of IDs for the security groups that apply to the specified network
-	// interfaces created for file system access. These security groups will apply
-	// to all network interfaces. This list isn't returned in later describe requests.
+	// A list of IDs specifying the security groups to apply to all network interfaces
+	// created for file system access. This list isn't returned in later requests
+	// to describe the file system.
 	SecurityGroupIds []string `type:"list"`
 
-	// The storage capacity of the file system.
+	// The storage capacity of the file system being created.
 	//
 	// For Windows file systems, the storage capacity has a minimum of 300 GiB,
 	// and a maximum of 65,536 GiB.
@@ -51,18 +51,19 @@ type CreateFileSystemInput struct {
 	// StorageCapacity is a required field
 	StorageCapacity *int64 `min:"1" type:"integer" required:"true"`
 
-	// A list of IDs for the subnets that the file system will be accessible from.
-	// File systems support only one subnet. The file server is also launched in
-	// that subnet's Availability Zone.
+	// The IDs of the subnets that the file system will be accessible from. File
+	// systems support only one subnet. The file server is also launched in that
+	// subnet's Availability Zone.
 	//
 	// SubnetIds is a required field
 	SubnetIds []string `type:"list" required:"true"`
 
-	// The tags to be applied to the file system at file system creation. The key
-	// value of the Name tag appears in the console as the file system name.
+	// The tags to apply to the file system being created. The key value of the
+	// Name tag appears in the console as the file system name.
 	Tags []Tag `min:"1" type:"list"`
 
-	// The configuration for this Microsoft Windows file system.
+	// The Microsoft Windows configuration for the file system being created. This
+	// value is required if FileSystemType is set to WINDOWS.
 	WindowsConfiguration *CreateFileSystemWindowsConfiguration `type:"structure"`
 }
 
@@ -121,12 +122,12 @@ func (s *CreateFileSystemInput) Validate() error {
 	return nil
 }
 
-// The response object for the CreateFileSystem operation.
+// The response object returned after the file system is created.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemResponse
 type CreateFileSystemOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A description of the file system.
+	// The configuration of the file system that was created.
 	FileSystem *FileSystem `type:"structure"`
 }
 

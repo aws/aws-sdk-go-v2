@@ -34,6 +34,9 @@ type UpdateBranchInput struct {
 	// Description for the branch.
 	Description *string `locationName:"description" type:"string"`
 
+	// Display name for a branch, will use as the default domain prefix.
+	DisplayName *string `locationName:"displayName" type:"string"`
+
 	// Enables auto building for the branch.
 	EnableAutoBuild *bool `locationName:"enableAutoBuild" type:"boolean"`
 
@@ -109,6 +112,12 @@ func (s UpdateBranchInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DisplayName != nil {
+		v := *s.DisplayName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "displayName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.EnableAutoBuild != nil {
 		v := *s.EnableAutoBuild

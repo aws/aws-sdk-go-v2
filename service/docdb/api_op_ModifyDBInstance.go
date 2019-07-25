@@ -33,7 +33,7 @@ type ModifyDBInstanceInput struct {
 	// and Amazon DocumentDB has enabled automatic patching for that engine version.
 	AutoMinorVersionUpgrade *bool `type:"boolean"`
 
-	// The new compute and memory capacity of the DB instance; for example, db.m4.large.
+	// The new compute and memory capacity of the DB instance; for example, db.r5.large.
 	// Not all DB instance classes are available in all AWS Regions.
 	//
 	// If you modify the DB instance class, an outage occurs during the change.

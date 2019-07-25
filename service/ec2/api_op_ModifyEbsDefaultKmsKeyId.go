@@ -19,25 +19,24 @@ type ModifyEbsDefaultKmsKeyIdInput struct {
 	// it is UnauthorizedOperation.
 	DryRun *bool `type:"boolean"`
 
-	// An identifier for the AWS Key Management Service (AWS KMS) customer master
-	// key (CMK) to use to encrypt the volume. This parameter is only required if
-	// you want to use a non-default CMK; if this parameter is not specified, the
-	// default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag
-	// must also be set.
+	// The identifier of the AWS Key Management Service (AWS KMS) customer master
+	// key (CMK) to use for Amazon EBS encryption. If this parameter is not specified,
+	// your AWS managed CMK for EBS is used. If KmsKeyId is specified, the encrypted
+	// state must be true.
 	//
-	// The CMK identifier may be provided in any of the following formats:
+	// You can specify the CMK using any of the following:
 	//
-	//    * Key ID
+	//    * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
 	//
-	//    * Key alias
+	//    * Key alias. For example, alias/ExampleAlias.
 	//
-	//    * ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed
-	//    by the Region of the CMK, the AWS account ID of the CMK owner, the key
-	//    namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.
+	//    * Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.
 	//
-	//    * ARN using key alias. The alias ARN contains the arn:aws:kms namespace,
-	//    followed by the Region of the CMK, the AWS account ID of the CMK owner,
-	//    the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
+	//    * Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
+	//
+	// AWS authenticates the CMK asynchronously. Therefore, if you specify an ID,
+	// alias, or ARN that is not valid, the action can appear to complete, but eventually
+	// fails.
 	//
 	// KmsKeyId is a required field
 	KmsKeyId *string `type:"string" required:"true"`
@@ -66,8 +65,7 @@ func (s *ModifyEbsDefaultKmsKeyIdInput) Validate() error {
 type ModifyEbsDefaultKmsKeyIdOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The full ARN of the default CMK that your account uses to encrypt an EBS
-	// volume when no CMK is specified in the API call that creates the volume.
+	// The Amazon Resource Name (ARN) of the default CMK for encryption by default.
 	KmsKeyId *string `locationName:"kmsKeyId" type:"string"`
 }
 
@@ -81,16 +79,19 @@ const opModifyEbsDefaultKmsKeyId = "ModifyEbsDefaultKmsKeyId"
 // ModifyEbsDefaultKmsKeyIdRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Changes the default customer master key (CMK) that your account uses to encrypt
-// EBS volumes if you don’t specify a CMK in the API call.
+// Changes the default customer master key (CMK) for EBS encryption by default
+// for your account in this Region.
 //
-// Your account has an AWS-managed default CMK that is used for encrypting an
-// EBS volume when no CMK is specified in the API call that creates the volume.
-// By calling this API, you can specify a customer-managed CMK to use in place
-// of the AWS-managed default CMK.
+// AWS creates a unique AWS managed CMK in each Region for use with encryption
+// by default. If you change the default CMK to a customer managed CMK, it is
+// used instead of the AWS managed CMK. To reset the default CMK to the AWS
+// managed CMK for EBS, use ResetEbsDefaultKmsKeyId.
 //
-// Note: Deleting or disabling the custom CMK that you have specified to act
-// as your default CMK will result in instance-launch failures.
+// If you delete or disable the customer managed CMK that you specified for
+// use with encryption by default, your instances will fail to launch.
+//
+// For more information, see Amazon EBS Encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)
+// in the Amazon Elastic Compute Cloud User Guide.
 //
 //    // Example sending a request using ModifyEbsDefaultKmsKeyIdRequest.
 //    req := client.ModifyEbsDefaultKmsKeyIdRequest(params)

@@ -44,7 +44,10 @@ type RegisterImageInput struct {
 	// PV AMI can make instances launched from the AMI unreachable.
 	EnaSupport *bool `locationName:"enaSupport" type:"boolean"`
 
-	// The full path to your AMI manifest in Amazon S3 storage.
+	// The full path to your AMI manifest in Amazon S3 storage. The specified bucket
+	// must have the aws-exec-read canned access control list (ACL) to ensure that
+	// it can be accessed by Amazon EC2. For more information, see Canned ACLs (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl)
+	// in the Amazon S3 Service Developer Guide.
 	ImageLocation *string `type:"string"`
 
 	// The ID of the kernel.

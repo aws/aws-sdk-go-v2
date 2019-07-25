@@ -54,7 +54,8 @@ func (s GetEventStreamInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetEventStreamOutput struct {
 	_ struct{} `type:"structure" payload:"EventStream"`
 
-	// Model for an event publishing subscription export.
+	// Specifies settings for publishing event data to an Amazon Kinesis data stream
+	// or an Amazon Kinesis Data Firehose delivery stream.
 	//
 	// EventStream is a required field
 	EventStream *EventStream `type:"structure" required:"true"`
@@ -81,7 +82,7 @@ const opGetEventStream = "GetEventStream"
 // GetEventStreamRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Returns the event stream for an app.
+// Retrieves information about the event stream settings for an application.
 //
 //    // Example sending a request using GetEventStreamRequest.
 //    req := client.GetEventStreamRequest(params)

@@ -14,7 +14,7 @@ import (
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the CloudWatch Events rule that you're adding tags to.
+	// The ARN of the rule that you're adding tags to.
 	//
 	// ResourceARN is a required field
 	ResourceARN *string `min:"1" type:"string" required:"true"`
@@ -73,11 +73,11 @@ const opTagResource = "TagResource"
 // TagResourceRequest returns a request value for making API operation for
 // Amazon CloudWatch Events.
 //
-// Assigns one or more tags (key-value pairs) to the specified CloudWatch Events
-// resource. Tags can help you organize and categorize your resources. You can
-// also use them to scope user permissions by granting a user permission to
-// access or change only resources with certain tag values. In CloudWatch Events,
-// rules can be tagged.
+// Assigns one or more tags (key-value pairs) to the specified EventBridge resource.
+// Tags can help you organize and categorize your resources. You can also use
+// them to scope user permissions by granting a user permission to access or
+// change only resources with certain tag values. In EventBridge, rules can
+// be tagged.
 //
 // Tags don't have any semantic meaning to AWS and are interpreted strictly
 // as strings of characters.

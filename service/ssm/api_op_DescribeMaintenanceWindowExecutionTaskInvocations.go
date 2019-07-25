@@ -28,13 +28,13 @@ type DescribeMaintenanceWindowExecutionTaskInvocationsInput struct {
 	// a previous call.)
 	NextToken *string `type:"string"`
 
-	// The ID of the specific task in the Maintenance Window task that should be
+	// The ID of the specific task in the maintenance window task that should be
 	// retrieved.
 	//
 	// TaskId is a required field
 	TaskId *string `min:"36" type:"string" required:"true"`
 
-	// The ID of the Maintenance Window execution the task is part of.
+	// The ID of the maintenance window execution the task is part of.
 	//
 	// WindowExecutionId is a required field
 	WindowExecutionId *string `min:"36" type:"string" required:"true"`
@@ -102,7 +102,7 @@ const opDescribeMaintenanceWindowExecutionTaskInvocations = "DescribeMaintenance
 // Amazon Simple Systems Manager (SSM).
 //
 // Retrieves the individual task executions (one per target) for a particular
-// task run as part of a Maintenance Window execution.
+// task run as part of a maintenance window execution.
 //
 //    // Example sending a request using DescribeMaintenanceWindowExecutionTaskInvocationsRequest.
 //    req := client.DescribeMaintenanceWindowExecutionTaskInvocationsRequest(params)

@@ -24,6 +24,10 @@ type PutConfigurationSetDeliveryOptionsInput struct {
 	// The name of the dedicated IP pool that you want to associate with the configuration
 	// set.
 	SendingPoolName *string `type:"string"`
+
+	// Whether Amazon Pinpoint should require that incoming email is delivered over
+	// a connection encrypted with Transport Layer Security (TLS).
+	TlsPolicy TlsPolicy `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -54,6 +58,12 @@ func (s PutConfigurationSetDeliveryOptionsInput) MarshalFields(e protocol.FieldE
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SendingPoolName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.TlsPolicy) > 0 {
+		v := s.TlsPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TlsPolicy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.ConfigurationSetName != nil {
 		v := *s.ConfigurationSetName

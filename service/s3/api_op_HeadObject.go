@@ -254,10 +254,10 @@ type HeadObjectOutput struct {
 	// The Legal Hold status for the specified object.
 	ObjectLockLegalHoldStatus ObjectLockLegalHoldStatus `location:"header" locationName:"x-amz-object-lock-legal-hold" type:"string" enum:"true"`
 
-	// The Object Lock mode currently in place for this object.
+	// The object lock mode currently in place for this object.
 	ObjectLockMode ObjectLockMode `location:"header" locationName:"x-amz-object-lock-mode" type:"string" enum:"true"`
 
-	// The date and time when this object's Object Lock will expire.
+	// The date and time when this object's object lock expires.
 	ObjectLockRetainUntilDate *time.Time `location:"header" locationName:"x-amz-object-lock-retain-until-date" type:"timestamp" timestampFormat:"rfc822"`
 
 	// The count of parts this object has.

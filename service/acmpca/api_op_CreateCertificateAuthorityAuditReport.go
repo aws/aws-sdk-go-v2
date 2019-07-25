@@ -83,8 +83,7 @@ const opCreateCertificateAuthorityAuditReport = "CreateCertificateAuthorityAudit
 //
 // Creates an audit report that lists every time that your CA private key is
 // used. The report is saved in the Amazon S3 bucket that you specify on input.
-// The IssueCertificate and RevokeCertificate operations use the private key.
-// You can generate a new report every 30 minutes.
+// The IssueCertificate and RevokeCertificate actions use the private key.
 //
 //    // Example sending a request using CreateCertificateAuthorityAuditReportRequest.
 //    req := client.CreateCertificateAuthorityAuditReportRequest(params)

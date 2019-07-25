@@ -19,7 +19,7 @@ type ApplyPendingMaintenanceActionInput struct {
 	ApplyAction *string `type:"string" required:"true"`
 
 	// A value that specifies the type of opt-in request, or undoes an opt-in request.
-	// An opt-in request of type immediate cannot be undone.
+	// You can't undo an opt-in request of type immediate.
 	//
 	// Valid values:
 	//

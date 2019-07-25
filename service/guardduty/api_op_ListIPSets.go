@@ -14,13 +14,19 @@ import (
 type ListIPSetsInput struct {
 	_ struct{} `type:"structure"`
 
+	// The unique ID of the detector the ipSet is associated with.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// You can use this parameter to indicate the maximum number of items that you
-	// want in the response.
+	// You can use this parameter to indicate the maximum number of items you want
+	// in the response. The default value is 50. The maximum value is 50.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
+	// You can use this parameter when paginating results. Set the value of this
+	// parameter to null on your first call to the list action. For subsequent calls
+	// to the action fill nextToken in the request with the value of NextToken from
+	// the previous response to continue listing data.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
@@ -35,6 +41,9 @@ func (s *ListIPSetsInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
@@ -71,18 +80,17 @@ func (s ListIPSetsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// ListIPSets response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListIPSetsResponse
 type ListIPSetsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of the IP set IDs
-	IpSetIds []string `locationName:"ipSetIds" type:"list"`
+	// The IDs of the IPSet resources.
+	//
+	// IpSetIds is a required field
+	IpSetIds []string `locationName:"ipSetIds" type:"list" required:"true"`
 
-	// You can use this parameter when paginating results. Set the value of this
-	// parameter to null on your first call to the list action. For subsequent calls
-	// to the action fill nextToken in the request with the value of NextToken from
-	// the previous response to continue listing data.
+	// Pagination parameter to be used on the next list operation to retrieve more
+	// items.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 

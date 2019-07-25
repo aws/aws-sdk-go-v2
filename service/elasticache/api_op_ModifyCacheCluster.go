@@ -28,7 +28,7 @@ type ModifyCacheClusterInput struct {
 	// Only newly created nodes are located in different Availability Zones. For
 	// instructions on how to move existing Memcached nodes to different Availability
 	// Zones, see the Availability Zone Considerations section of Cache Node Considerations
-	// for Memcached (http://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNode.Memcached.html).
+	// for Memcached (https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html).
 	AZMode AZMode `type:"string" enum:"true"`
 
 	// If true, this parameter causes the modifications in this request and any
@@ -87,7 +87,7 @@ type ModifyCacheClusterInput struct {
 	// The upgraded version of the cache engine to be run on the cache nodes.
 	//
 	// Important: You can upgrade to a newer engine version (see Selecting a Cache
-	// Engine and Version (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement)),
+	// Engine and Version (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement)),
 	// but you cannot downgrade to an earlier engine version. If you want to use
 	// an earlier engine version, you must delete the existing cluster and create
 	// it anew with the earlier engine version.
@@ -124,7 +124,7 @@ type ModifyCacheClusterInput struct {
 	// Availability Zone. Only newly created nodes can be located in different Availability
 	// Zones. For guidance on how to move existing Memcached nodes to different
 	// Availability Zones, see the Availability Zone Considerations section of Cache
-	// Node Considerations for Memcached (http://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNode.Memcached.html).
+	// Node Considerations for Memcached (https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html).
 	//
 	// Impact of new add/remove requests upon pending requests
 	//

@@ -80,7 +80,7 @@ func (s InitiateVaultLockInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains the Amazon Glacier response to your request.
+// Contains the Amazon S3 Glacier response to your request.
 type InitiateVaultLockOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -119,7 +119,7 @@ const opInitiateVaultLock = "InitiateVaultLock"
 //
 // You can set one vault lock policy for each vault and this policy can be up
 // to 20 KB in size. For more information about vault lock policies, see Amazon
-// Glacier Access Control with Vault Lock Policies (http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html).
+// Glacier Access Control with Vault Lock Policies (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html).
 //
 // You must complete the vault locking process within 24 hours after the vault
 // lock enters the InProgress state. After the 24 hour window ends, the lock
@@ -132,7 +132,7 @@ const opInitiateVaultLock = "InitiateVaultLock"
 //
 // You can abort the vault locking process by calling AbortVaultLock. You can
 // get the state of the vault lock by calling GetVaultLock. For more information
-// about the vault locking process, Amazon Glacier Vault Lock (http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html).
+// about the vault locking process, Amazon Glacier Vault Lock (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html).
 //
 // If this operation is called when the vault lock is in the InProgress state,
 // the operation returns an AccessDeniedException error. When the vault lock

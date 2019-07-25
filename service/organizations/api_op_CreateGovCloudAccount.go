@@ -116,7 +116,7 @@ const opCreateGovCloudAccount = "CreateGovCloudAccount"
 //
 // This action is available if all of the following are true:
 //
-//    * You are authorized to create accounts in the AWS GovCloud (US) Region.
+//    * You're authorized to create accounts in the AWS GovCloud (US) Region.
 //    For more information on the AWS GovCloud (US) Region, see the AWS GovCloud
 //    User Guide. (http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/welcome.html)
 //

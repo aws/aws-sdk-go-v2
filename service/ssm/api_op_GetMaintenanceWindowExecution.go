@@ -14,7 +14,7 @@ import (
 type GetMaintenanceWindowExecutionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the Maintenance Window execution that includes the task.
+	// The ID of the maintenance window execution that includes the task.
 	//
 	// WindowExecutionId is a required field
 	WindowExecutionId *string `min:"36" type:"string" required:"true"`
@@ -46,22 +46,22 @@ func (s *GetMaintenanceWindowExecutionInput) Validate() error {
 type GetMaintenanceWindowExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The time the Maintenance Window finished running.
+	// The time the maintenance window finished running.
 	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The time the Maintenance Window started running.
+	// The time the maintenance window started running.
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The status of the Maintenance Window execution.
+	// The status of the maintenance window execution.
 	Status MaintenanceWindowExecutionStatus `type:"string" enum:"true"`
 
 	// The details explaining the Status. Only available for certain status values.
 	StatusDetails *string `type:"string"`
 
-	// The ID of the task executions from the Maintenance Window execution.
+	// The ID of the task executions from the maintenance window execution.
 	TaskIds []string `type:"list"`
 
-	// The ID of the Maintenance Window execution.
+	// The ID of the maintenance window execution.
 	WindowExecutionId *string `min:"36" type:"string"`
 }
 
@@ -75,8 +75,7 @@ const opGetMaintenanceWindowExecution = "GetMaintenanceWindowExecution"
 // GetMaintenanceWindowExecutionRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Retrieves details about a specific task run as part of a Maintenance Window
-// execution.
+// Retrieves details about a specific a maintenance window execution.
 //
 //    // Example sending a request using GetMaintenanceWindowExecutionRequest.
 //    req := client.GetMaintenanceWindowExecutionRequest(params)

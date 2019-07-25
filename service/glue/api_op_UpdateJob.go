@@ -13,7 +13,7 @@ import (
 type UpdateJobInput struct {
 	_ struct{} `type:"structure"`
 
-	// Name of the job definition to update.
+	// The name of the job definition to update.
 	//
 	// JobName is a required field
 	JobName *string `min:"1" type:"string" required:"true"`

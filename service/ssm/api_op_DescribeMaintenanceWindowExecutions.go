@@ -33,7 +33,7 @@ type DescribeMaintenanceWindowExecutionsInput struct {
 	// a previous call.)
 	NextToken *string `type:"string"`
 
-	// The ID of the Maintenance Window whose executions should be retrieved.
+	// The ID of the maintenance window whose executions should be retrieved.
 	//
 	// WindowId is a required field
 	WindowId *string `min:"20" type:"string" required:"true"`
@@ -79,7 +79,7 @@ type DescribeMaintenanceWindowExecutionsOutput struct {
 	// items to return, the string is empty.
 	NextToken *string `type:"string"`
 
-	// Information about the Maintenance Windows execution.
+	// Information about the maintenance window executions.
 	WindowExecutions []MaintenanceWindowExecution `type:"list"`
 }
 
@@ -93,9 +93,9 @@ const opDescribeMaintenanceWindowExecutions = "DescribeMaintenanceWindowExecutio
 // DescribeMaintenanceWindowExecutionsRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Lists the executions of a Maintenance Window. This includes information about
-// when the Maintenance Window was scheduled to be active, and information about
-// tasks registered and run with the Maintenance Window.
+// Lists the executions of a maintenance window. This includes information about
+// when the maintenance window was scheduled to be active, and information about
+// tasks registered and run with the maintenance window.
 //
 //    // Example sending a request using DescribeMaintenanceWindowExecutionsRequest.
 //    req := client.DescribeMaintenanceWindowExecutionsRequest(params)

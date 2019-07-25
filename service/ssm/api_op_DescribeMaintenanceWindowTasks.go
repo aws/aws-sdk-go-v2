@@ -27,7 +27,7 @@ type DescribeMaintenanceWindowTasksInput struct {
 	// a previous call.)
 	NextToken *string `type:"string"`
 
-	// The ID of the Maintenance Window whose tasks should be retrieved.
+	// The ID of the maintenance window whose tasks should be retrieved.
 	//
 	// WindowId is a required field
 	WindowId *string `min:"20" type:"string" required:"true"`
@@ -73,7 +73,7 @@ type DescribeMaintenanceWindowTasksOutput struct {
 	// items to return, the string is empty.
 	NextToken *string `type:"string"`
 
-	// Information about the tasks in the Maintenance Window.
+	// Information about the tasks in the maintenance window.
 	Tasks []MaintenanceWindowTask `type:"list"`
 }
 
@@ -87,7 +87,7 @@ const opDescribeMaintenanceWindowTasks = "DescribeMaintenanceWindowTasks"
 // DescribeMaintenanceWindowTasksRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Lists the tasks in a Maintenance Window.
+// Lists the tasks in a maintenance window.
 //
 //    // Example sending a request using DescribeMaintenanceWindowTasksRequest.
 //    req := client.DescribeMaintenanceWindowTasksRequest(params)

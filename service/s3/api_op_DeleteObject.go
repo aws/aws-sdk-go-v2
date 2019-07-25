@@ -17,7 +17,7 @@ type DeleteObjectInput struct {
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
-	// Indicates whether S3 Object Lock should bypass Governance-mode restrictions
+	// Indicates whether Amazon S3 object lock should bypass governance-mode restrictions
 	// to process this operation.
 	BypassGovernanceRetention *bool `location:"header" locationName:"x-amz-bypass-governance-retention" type:"boolean"`
 

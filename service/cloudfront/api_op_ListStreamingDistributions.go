@@ -11,7 +11,7 @@ import (
 )
 
 // The request to list your streaming distributions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListStreamingDistributionsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListStreamingDistributionsRequest
 type ListStreamingDistributionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +46,7 @@ func (s ListStreamingDistributionsInput) MarshalFields(e protocol.FieldEncoder) 
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListStreamingDistributionsResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListStreamingDistributionsResult
 type ListStreamingDistributionsOutput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistributionList"`
 
@@ -70,7 +70,7 @@ func (s ListStreamingDistributionsOutput) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
-const opListStreamingDistributions = "ListStreamingDistributions2018_11_05"
+const opListStreamingDistributions = "ListStreamingDistributions2019_03_26"
 
 // ListStreamingDistributionsRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -84,12 +84,12 @@ const opListStreamingDistributions = "ListStreamingDistributions2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/ListStreamingDistributions
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListStreamingDistributions
 func (c *Client) ListStreamingDistributionsRequest(input *ListStreamingDistributionsInput) ListStreamingDistributionsRequest {
 	op := &aws.Operation{
 		Name:       opListStreamingDistributions,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2018-11-05/streaming-distribution",
+		HTTPPath:   "/2019-03-26/streaming-distribution",
 		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"StreamingDistributionList.NextMarker"},

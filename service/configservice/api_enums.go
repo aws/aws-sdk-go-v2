@@ -183,6 +183,30 @@ func (enum MaximumExecutionFrequency) MarshalValueBuf(b []byte) ([]byte, error) 
 	return append(b, enum...), nil
 }
 
+type MemberAccountRuleStatus string
+
+// Enum values for MemberAccountRuleStatus
+const (
+	MemberAccountRuleStatusCreateSuccessful MemberAccountRuleStatus = "CREATE_SUCCESSFUL"
+	MemberAccountRuleStatusCreateInProgress MemberAccountRuleStatus = "CREATE_IN_PROGRESS"
+	MemberAccountRuleStatusCreateFailed     MemberAccountRuleStatus = "CREATE_FAILED"
+	MemberAccountRuleStatusUpdateSuccessful MemberAccountRuleStatus = "UPDATE_SUCCESSFUL"
+	MemberAccountRuleStatusUpdateFailed     MemberAccountRuleStatus = "UPDATE_FAILED"
+	MemberAccountRuleStatusUpdateInProgress MemberAccountRuleStatus = "UPDATE_IN_PROGRESS"
+	MemberAccountRuleStatusDeleteSuccessful MemberAccountRuleStatus = "DELETE_SUCCESSFUL"
+	MemberAccountRuleStatusDeleteFailed     MemberAccountRuleStatus = "DELETE_FAILED"
+	MemberAccountRuleStatusDeleteInProgress MemberAccountRuleStatus = "DELETE_IN_PROGRESS"
+)
+
+func (enum MemberAccountRuleStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MemberAccountRuleStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MessageType string
 
 // Enum values for MessageType
@@ -198,6 +222,48 @@ func (enum MessageType) MarshalValue() (string, error) {
 }
 
 func (enum MessageType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type OrganizationConfigRuleTriggerType string
+
+// Enum values for OrganizationConfigRuleTriggerType
+const (
+	OrganizationConfigRuleTriggerTypeConfigurationItemChangeNotification          OrganizationConfigRuleTriggerType = "ConfigurationItemChangeNotification"
+	OrganizationConfigRuleTriggerTypeOversizedConfigurationItemChangeNotification OrganizationConfigRuleTriggerType = "OversizedConfigurationItemChangeNotification"
+	OrganizationConfigRuleTriggerTypeScheduledNotification                        OrganizationConfigRuleTriggerType = "ScheduledNotification"
+)
+
+func (enum OrganizationConfigRuleTriggerType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OrganizationConfigRuleTriggerType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type OrganizationRuleStatus string
+
+// Enum values for OrganizationRuleStatus
+const (
+	OrganizationRuleStatusCreateSuccessful OrganizationRuleStatus = "CREATE_SUCCESSFUL"
+	OrganizationRuleStatusCreateInProgress OrganizationRuleStatus = "CREATE_IN_PROGRESS"
+	OrganizationRuleStatusCreateFailed     OrganizationRuleStatus = "CREATE_FAILED"
+	OrganizationRuleStatusUpdateSuccessful OrganizationRuleStatus = "UPDATE_SUCCESSFUL"
+	OrganizationRuleStatusUpdateFailed     OrganizationRuleStatus = "UPDATE_FAILED"
+	OrganizationRuleStatusUpdateInProgress OrganizationRuleStatus = "UPDATE_IN_PROGRESS"
+	OrganizationRuleStatusDeleteSuccessful OrganizationRuleStatus = "DELETE_SUCCESSFUL"
+	OrganizationRuleStatusDeleteFailed     OrganizationRuleStatus = "DELETE_FAILED"
+	OrganizationRuleStatusDeleteInProgress OrganizationRuleStatus = "DELETE_IN_PROGRESS"
+)
+
+func (enum OrganizationRuleStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OrganizationRuleStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

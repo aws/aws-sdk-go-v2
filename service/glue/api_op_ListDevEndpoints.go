@@ -45,8 +45,8 @@ func (s *ListDevEndpointsInput) Validate() error {
 type ListDevEndpointsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The names of all DevEndpoints in the account, or the DevEndpoints with the
-	// specified tags.
+	// The names of all the DevEndpoints in the account, or the DevEndpoints with
+	// the specified tags.
 	DevEndpointNames []string `type:"list"`
 
 	// A continuation token, if the returned list does not contain the last metric
@@ -68,9 +68,9 @@ const opListDevEndpoints = "ListDevEndpoints"
 // the resources with the specified tag. This operation allows you to see which
 // resources are available in your account, and their names.
 //
-// This operation takes the optional Tags field which you can use as a filter
+// This operation takes the optional Tags field, which you can use as a filter
 // on the response so that tagged resources can be retrieved as a group. If
-// you choose to use tags filtering, only resources with the tag will be retrieved.
+// you choose to use tags filtering, only resources with the tag are retrieved.
 //
 //    // Example sending a request using ListDevEndpointsRequest.
 //    req := client.ListDevEndpointsRequest(params)

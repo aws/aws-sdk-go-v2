@@ -76,6 +76,9 @@ type DescribeBrokerOutput struct {
 	// The deployment mode of the broker.
 	DeploymentMode DeploymentMode `locationName:"deploymentMode" type:"string" enum:"true"`
 
+	// Encryption options for the broker.
+	EncryptionOptions *EncryptionOptions `locationName:"encryptionOptions" type:"structure"`
+
 	// The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.
 	EngineType EngineType `locationName:"engineType" type:"string" enum:"true"`
 
@@ -170,6 +173,12 @@ func (s DescribeBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "deploymentMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.EncryptionOptions != nil {
+		v := s.EncryptionOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "encryptionOptions", v, metadata)
 	}
 	if len(s.EngineType) > 0 {
 		v := s.EngineType

@@ -121,8 +121,8 @@ const opPutLogEvents = "PutLogEvents"
 //    * None of the log events in the batch can be more than 2 hours in the
 //    future.
 //
-//    * None of the log events in the batch can be older than 14 days or the
-//    retention period of the log group.
+//    * None of the log events in the batch can be older than 14 days or older
+//    than the retention period of the log group.
 //
 //    * The log events in the batch must be in chronological ordered by their
 //    timestamp. The timestamp is the time the event occurred, expressed as

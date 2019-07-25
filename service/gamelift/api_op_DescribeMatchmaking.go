@@ -71,6 +71,14 @@ const opDescribeMatchmaking = "DescribeMatchmaking"
 // the request is successful, a ticket object is returned for each requested
 // ID that currently exists.
 //
+// Learn more
+//
+//  Add FlexMatch to a Game Client (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html)
+//
+//  Set Up FlexMatch Event Notification (https://docs.aws.amazon.com/gamelift/latest/developerguidematch-notification.html)
+//
+// Related operations
+//
 //    * StartMatchmaking
 //
 //    * DescribeMatchmaking

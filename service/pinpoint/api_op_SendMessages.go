@@ -17,7 +17,8 @@ type SendMessagesInput struct {
 	// ApplicationId is a required field
 	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
 
-	// Send message request.
+	// Specifies the objects that define configuration and other settings for a
+	// message.
 	//
 	// MessageRequest is a required field
 	MessageRequest *MessageRequest `type:"structure" required:"true"`
@@ -38,6 +39,11 @@ func (s *SendMessagesInput) Validate() error {
 
 	if s.MessageRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MessageRequest"))
+	}
+	if s.MessageRequest != nil {
+		if err := s.MessageRequest.Validate(); err != nil {
+			invalidParams.AddNested("MessageRequest", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -69,7 +75,8 @@ func (s SendMessagesInput) MarshalFields(e protocol.FieldEncoder) error {
 type SendMessagesOutput struct {
 	_ struct{} `type:"structure" payload:"MessageResponse"`
 
-	// Send message response.
+	// Provides information about the results of a request to send a message to
+	// an endpoint address.
 	//
 	// MessageResponse is a required field
 	MessageResponse *MessageResponse `type:"structure" required:"true"`
@@ -96,7 +103,7 @@ const opSendMessages = "SendMessages"
 // SendMessagesRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Used to send a direct message.
+// Creates and sends a direct message.
 //
 //    // Example sending a request using SendMessagesRequest.
 //    req := client.SendMessagesRequest(params)

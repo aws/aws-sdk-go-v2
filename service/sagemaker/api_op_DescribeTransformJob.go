@@ -59,6 +59,12 @@ type DescribeTransformJobOutput struct {
 	// CreationTime is a required field
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
 
+	// The data structure used to combine the input data and transformed data from
+	// the batch transform output into a joined dataset and to store it in an output
+	// file. It also contains information on how to filter the input data and the
+	// joined dataset. For more information, see Batch Transform I/O Join (http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html).
+	DataProcessing *DataProcessing `type:"structure"`
+
 	// The environment variables to set in the Docker container. We support up to
 	// 16 key and values entries in the map.
 	Environment map[string]string `type:"map"`

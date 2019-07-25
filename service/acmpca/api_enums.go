@@ -81,6 +81,7 @@ type CertificateAuthorityType string
 
 // Enum values for CertificateAuthorityType
 const (
+	CertificateAuthorityTypeRoot        CertificateAuthorityType = "ROOT"
 	CertificateAuthorityTypeSubordinate CertificateAuthorityType = "SUBORDINATE"
 )
 

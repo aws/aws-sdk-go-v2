@@ -46,7 +46,8 @@ type PutObjectInput struct {
 	ContentLength *int64 `location:"header" locationName:"Content-Length" type:"long"`
 
 	// The base64-encoded 128-bit MD5 digest of the part data. This parameter is
-	// auto-populated when using the command from the CLI
+	// auto-populated when using the command from the CLI. This parameted is required
+	// if object lock parameters are specified.
 	ContentMD5 *string `location:"header" locationName:"Content-MD5" type:"string"`
 
 	// A standard MIME type describing the format of the object data.
@@ -78,10 +79,10 @@ type PutObjectInput struct {
 	// The Legal Hold status that you want to apply to the specified object.
 	ObjectLockLegalHoldStatus ObjectLockLegalHoldStatus `location:"header" locationName:"x-amz-object-lock-legal-hold" type:"string" enum:"true"`
 
-	// The Object Lock mode that you want to apply to this object.
+	// The object lock mode that you want to apply to this object.
 	ObjectLockMode ObjectLockMode `location:"header" locationName:"x-amz-object-lock-mode" type:"string" enum:"true"`
 
-	// The date and time when you want this object's Object Lock to expire.
+	// The date and time when you want this object's object lock to expire.
 	ObjectLockRetainUntilDate *time.Time `location:"header" locationName:"x-amz-object-lock-retain-until-date" type:"timestamp" timestampFormat:"rfc822"`
 
 	// Confirms that the requester knows that she or he will be charged for the
@@ -104,6 +105,11 @@ type PutObjectInput struct {
 	// Amazon S3 uses this header for a message integrity check to ensure the encryption
 	// key was transmitted without error.
 	SSECustomerKeyMD5 *string `location:"header" locationName:"x-amz-server-side-encryption-customer-key-MD5" type:"string"`
+
+	// Specifies the AWS KMS Encryption Context to use for object encryption. The
+	// value of this header is a base64-encoded UTF-8 string holding JSON with the
+	// encryption context key-value pairs.
+	SSEKMSEncryptionContext *string `location:"header" locationName:"x-amz-server-side-encryption-context" type:"string"`
 
 	// Specifies the AWS KMS key ID to use for object encryption. All GET and PUT
 	// requests for an object protected by AWS KMS will fail if not made via SSL
@@ -291,6 +297,12 @@ func (s PutObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "x-amz-server-side-encryption-customer-key-MD5", protocol.StringValue(v), metadata)
 	}
+	if s.SSEKMSEncryptionContext != nil {
+		v := *s.SSEKMSEncryptionContext
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-server-side-encryption-context", protocol.StringValue(v), metadata)
+	}
 	if s.SSEKMSKeyId != nil {
 		v := *s.SSEKMSKeyId
 
@@ -379,6 +391,11 @@ type PutObjectOutput struct {
 	// verification of the customer-provided encryption key.
 	SSECustomerKeyMD5 *string `location:"header" locationName:"x-amz-server-side-encryption-customer-key-MD5" type:"string"`
 
+	// If present, specifies the AWS KMS Encryption Context to use for object encryption.
+	// The value of this header is a base64-encoded UTF-8 string holding JSON with
+	// the encryption context key-value pairs.
+	SSEKMSEncryptionContext *string `location:"header" locationName:"x-amz-server-side-encryption-context" type:"string"`
+
 	// If present, specifies the ID of the AWS Key Management Service (KMS) master
 	// encryption key that was used for the object.
 	SSEKMSKeyId *string `location:"header" locationName:"x-amz-server-side-encryption-aws-kms-key-id" type:"string"`
@@ -427,6 +444,12 @@ func (s PutObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "x-amz-server-side-encryption-customer-key-MD5", protocol.StringValue(v), metadata)
+	}
+	if s.SSEKMSEncryptionContext != nil {
+		v := *s.SSEKMSEncryptionContext
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-server-side-encryption-context", protocol.StringValue(v), metadata)
 	}
 	if s.SSEKMSKeyId != nil {
 		v := *s.SSEKMSKeyId

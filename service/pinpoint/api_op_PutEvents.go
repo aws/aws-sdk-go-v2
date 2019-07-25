@@ -17,7 +17,7 @@ type PutEventsInput struct {
 	// ApplicationId is a required field
 	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
 
-	// A set of events to process.
+	// Specifies a batch of events to process.
 	//
 	// EventsRequest is a required field
 	EventsRequest *EventsRequest `type:"structure" required:"true"`
@@ -38,6 +38,11 @@ func (s *PutEventsInput) Validate() error {
 
 	if s.EventsRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EventsRequest"))
+	}
+	if s.EventsRequest != nil {
+		if err := s.EventsRequest.Validate(); err != nil {
+			invalidParams.AddNested("EventsRequest", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -69,7 +74,8 @@ func (s PutEventsInput) MarshalFields(e protocol.FieldEncoder) error {
 type PutEventsOutput struct {
 	_ struct{} `type:"structure" payload:"EventsResponse"`
 
-	// Custom messages associated with events.
+	// Provides information about endpoints and the events that they're associated
+	// with.
 	//
 	// EventsResponse is a required field
 	EventsResponse *EventsResponse `type:"structure" required:"true"`
@@ -96,8 +102,8 @@ const opPutEvents = "PutEvents"
 // PutEventsRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Use to record events for endpoints. This method creates events and creates
-// or updates the endpoints that those events are associated with.
+// Creates a new event to record for endpoints, or creates or updates endpoint
+// data that existing events are associated with.
 //
 //    // Example sending a request using PutEventsRequest.
 //    req := client.PutEventsRequest(params)

@@ -91,7 +91,7 @@ const opRespondDecisionTaskCompleted = "RespondDecisionTaskCompleted"
 // call. To allow for policies to be as readable as possible, you can express
 // permissions on decisions as if they were actual API calls, including applying
 // conditions to some parameters. For more information, see Using IAM to Manage
-// Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// Access to Amazon SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 //    // Example sending a request using RespondDecisionTaskCompletedRequest.

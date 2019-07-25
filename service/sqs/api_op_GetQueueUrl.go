@@ -44,7 +44,7 @@ func (s *GetQueueUrlInput) Validate() error {
 	return nil
 }
 
-// For more information, see Interpreting Responses (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-api-responses.html)
+// For more information, see Interpreting Responses (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-api-responses.html)
 // in the Amazon Simple Queue Service Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueUrlResult
 type GetQueueUrlOutput struct {
@@ -70,7 +70,7 @@ const opGetQueueUrl = "GetQueueUrl"
 // parameter to specify the account ID of the queue's owner. The queue's owner
 // must grant you permission to access the queue. For more information about
 // shared queue access, see AddPermission or see Allow Developers to Write Messages
-// to a Shared Queue (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-writing-an-sqs-policy.html#write-messages-to-shared-queue)
+// to a Shared Queue (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-writing-an-sqs-policy.html#write-messages-to-shared-queue)
 // in the Amazon Simple Queue Service Developer Guide.
 //
 //    // Example sending a request using GetQueueUrlRequest.

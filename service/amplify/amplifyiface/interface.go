@@ -65,7 +65,11 @@ type ClientAPI interface {
 
 	CreateBranchRequest(*amplify.CreateBranchInput) amplify.CreateBranchRequest
 
+	CreateDeploymentRequest(*amplify.CreateDeploymentInput) amplify.CreateDeploymentRequest
+
 	CreateDomainAssociationRequest(*amplify.CreateDomainAssociationInput) amplify.CreateDomainAssociationRequest
+
+	CreateWebhookRequest(*amplify.CreateWebhookInput) amplify.CreateWebhookRequest
 
 	DeleteAppRequest(*amplify.DeleteAppInput) amplify.DeleteAppRequest
 
@@ -75,6 +79,8 @@ type ClientAPI interface {
 
 	DeleteJobRequest(*amplify.DeleteJobInput) amplify.DeleteJobRequest
 
+	DeleteWebhookRequest(*amplify.DeleteWebhookInput) amplify.DeleteWebhookRequest
+
 	GetAppRequest(*amplify.GetAppInput) amplify.GetAppRequest
 
 	GetBranchRequest(*amplify.GetBranchInput) amplify.GetBranchRequest
@@ -82,6 +88,8 @@ type ClientAPI interface {
 	GetDomainAssociationRequest(*amplify.GetDomainAssociationInput) amplify.GetDomainAssociationRequest
 
 	GetJobRequest(*amplify.GetJobInput) amplify.GetJobRequest
+
+	GetWebhookRequest(*amplify.GetWebhookInput) amplify.GetWebhookRequest
 
 	ListAppsRequest(*amplify.ListAppsInput) amplify.ListAppsRequest
 
@@ -91,15 +99,27 @@ type ClientAPI interface {
 
 	ListJobsRequest(*amplify.ListJobsInput) amplify.ListJobsRequest
 
+	ListTagsForResourceRequest(*amplify.ListTagsForResourceInput) amplify.ListTagsForResourceRequest
+
+	ListWebhooksRequest(*amplify.ListWebhooksInput) amplify.ListWebhooksRequest
+
+	StartDeploymentRequest(*amplify.StartDeploymentInput) amplify.StartDeploymentRequest
+
 	StartJobRequest(*amplify.StartJobInput) amplify.StartJobRequest
 
 	StopJobRequest(*amplify.StopJobInput) amplify.StopJobRequest
+
+	TagResourceRequest(*amplify.TagResourceInput) amplify.TagResourceRequest
+
+	UntagResourceRequest(*amplify.UntagResourceInput) amplify.UntagResourceRequest
 
 	UpdateAppRequest(*amplify.UpdateAppInput) amplify.UpdateAppRequest
 
 	UpdateBranchRequest(*amplify.UpdateBranchInput) amplify.UpdateBranchRequest
 
 	UpdateDomainAssociationRequest(*amplify.UpdateDomainAssociationInput) amplify.UpdateDomainAssociationRequest
+
+	UpdateWebhookRequest(*amplify.UpdateWebhookInput) amplify.UpdateWebhookRequest
 }
 
 var _ ClientAPI = (*amplify.Client)(nil)

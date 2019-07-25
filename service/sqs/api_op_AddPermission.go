@@ -15,10 +15,10 @@ import (
 type AddPermissionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS account number of the principal (http://docs.aws.amazon.com/general/latest/gr/glos-chap.html#P)
+	// The AWS account number of the principal (https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#P)
 	// who is given permission. The principal must have an AWS account, but does
 	// not need to be signed up for Amazon SQS. For information about locating the
-	// AWS account identification, see Your AWS Identifiers (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-making-api-requests.html#sqs-api-request-authentication)
+	// AWS account identification, see Your AWS Identifiers (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-making-api-requests.html#sqs-api-request-authentication)
 	// in the Amazon Simple Queue Service Developer Guide.
 	//
 	// AWSAccountIds is a required field
@@ -28,7 +28,7 @@ type AddPermissionInput struct {
 	// the name of any action or *.
 	//
 	// For more information about these actions, see Overview of Managing Access
-	// Permissions to Your Amazon Simple Queue Service Resource (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html)
+	// Permissions to Your Amazon Simple Queue Service Resource (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html)
 	// in the Amazon Simple Queue Service Developer Guide.
 	//
 	// Specifying SendMessage, DeleteMessage, or ChangeMessageVisibility for ActionName.n
@@ -99,22 +99,25 @@ const opAddPermission = "AddPermission"
 // AddPermissionRequest returns a request value for making API operation for
 // Amazon Simple Queue Service.
 //
-// Adds a permission to a queue for a specific principal (http://docs.aws.amazon.com/general/latest/gr/glos-chap.html#P).
+// Adds a permission to a queue for a specific principal (https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#P).
 // This allows sharing access to the queue.
 //
 // When you create a queue, you have full control access rights for the queue.
 // Only you, the owner of the queue, can grant or deny permissions to the queue.
 // For more information about these permissions, see Allow Developers to Write
-// Messages to a Shared Queue (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-writing-an-sqs-policy.html#write-messages-to-shared-queue)
+// Messages to a Shared Queue (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-writing-an-sqs-policy.html#write-messages-to-shared-queue)
 // in the Amazon Simple Queue Service Developer Guide.
 //
-// AddPermission writes an Amazon-SQS-generated policy. If you want to write
-// your own policy, use SetQueueAttributes to upload your policy. For more information
-// about writing your own policy, see Using Custom Policies with the Amazon
-// SQS Access Policy Language (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-creating-custom-policies.html)
-// in the Amazon Simple Queue Service Developer Guide.
+//    * AddPermission generates a policy for you. You can use SetQueueAttributes
+//    to upload your policy. For more information, see Using Custom Policies
+//    with the Amazon SQS Access Policy Language (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-creating-custom-policies.html)
+//    in the Amazon Simple Queue Service Developer Guide.
 //
-// An Amazon SQS policy can have a maximum of 7 actions.
+//    * An Amazon SQS policy can have a maximum of 7 actions.
+//
+//    * To remove the ability to change queue permissions, you must deny permission
+//    to the AddPermission, RemovePermission, and SetQueueAttributes actions
+//    in your IAM policy.
 //
 // Some actions take lists of parameters. These lists are specified using the
 // param.n notation. Values of n are integers starting from 1. For example,
@@ -125,7 +128,7 @@ const opAddPermission = "AddPermission"
 // &Attribute.2=second
 //
 // Cross-account permissions don't apply to this action. For more information,
-// see see Grant Cross-Account Permissions to a Role and a User Name (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
+// see Grant Cross-Account Permissions to a Role and a User Name (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
 // in the Amazon Simple Queue Service Developer Guide.
 //
 //    // Example sending a request using AddPermissionRequest.

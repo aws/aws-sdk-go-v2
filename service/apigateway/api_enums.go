@@ -163,6 +163,24 @@ func (enum DocumentationPartType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type DomainNameStatus string
+
+// Enum values for DomainNameStatus
+const (
+	DomainNameStatusAvailable DomainNameStatus = "AVAILABLE"
+	DomainNameStatusUpdating  DomainNameStatus = "UPDATING"
+	DomainNameStatusPending   DomainNameStatus = "PENDING"
+)
+
+func (enum DomainNameStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DomainNameStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The endpoint type. The valid values are EDGE for edge-optimized API setup,
 // most suitable for mobile applications; REGIONAL for regional API endpoint
 // setup, most suitable for calling from AWS Region; and PRIVATE for private
@@ -313,6 +331,23 @@ func (enum QuotaPeriodType) MarshalValue() (string, error) {
 }
 
 func (enum QuotaPeriodType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SecurityPolicy string
+
+// Enum values for SecurityPolicy
+const (
+	SecurityPolicyTls10 SecurityPolicy = "TLS_1_0"
+	SecurityPolicyTls12 SecurityPolicy = "TLS_1_2"
+)
+
+func (enum SecurityPolicy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SecurityPolicy) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

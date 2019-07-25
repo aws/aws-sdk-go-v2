@@ -70,7 +70,8 @@ func (s GetCampaignsInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetCampaignsOutput struct {
 	_ struct{} `type:"structure" payload:"CampaignsResponse"`
 
-	// List of available campaigns.
+	// Provides information about the configuration and other settings for all the
+	// campaigns that are associated with an application.
 	//
 	// CampaignsResponse is a required field
 	CampaignsResponse *CampaignsResponse `type:"structure" required:"true"`
@@ -97,7 +98,8 @@ const opGetCampaigns = "GetCampaigns"
 // GetCampaignsRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Returns information about your campaigns.
+// Retrieves information about the status, configuration, and other settings
+// for all the campaigns that are associated with an application.
 //
 //    // Example sending a request using GetCampaignsRequest.
 //    req := client.GetCampaignsRequest(params)

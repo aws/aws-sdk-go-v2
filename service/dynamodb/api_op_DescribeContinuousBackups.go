@@ -66,8 +66,8 @@ const opDescribeContinuousBackups = "DescribeContinuousBackups"
 // If point in time recovery is enabled, PointInTimeRecoveryStatus will be set
 // to ENABLED.
 //
-// Once continuous backups and point in time recovery are enabled, you can restore
-// to any point in time within EarliestRestorableDateTime and LatestRestorableDateTime.
+// After continuous backups and point in time recovery are enabled, you can
+// restore to any point in time within EarliestRestorableDateTime and LatestRestorableDateTime.
 //
 // LatestRestorableDateTime is typically 5 minutes before the current time.
 // You can restore your table to any point in time during the last 35 days.

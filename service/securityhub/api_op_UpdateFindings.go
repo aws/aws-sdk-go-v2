@@ -14,7 +14,7 @@ import (
 type UpdateFindingsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A collection of attributes that specify what findings you want to update.
+	// A collection of attributes that specify which findings you want to update.
 	//
 	// Filters is a required field
 	Filters *AwsSecurityFindingFilters `type:"structure" required:"true"`
@@ -95,8 +95,9 @@ const opUpdateFindings = "UpdateFindings"
 // UpdateFindingsRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Updates the AWS Security Hub-aggregated findings specified by the filter
-// attributes.
+// Updates the Note and RecordState of the Security Hub-aggregated findings
+// that the filter attributes specify. Any member account that can view the
+// finding also sees the update to the finding.
 //
 //    // Example sending a request using UpdateFindingsRequest.
 //    req := client.UpdateFindingsRequest(params)

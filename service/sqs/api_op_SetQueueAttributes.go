@@ -33,7 +33,7 @@ type SetQueueAttributesInput struct {
 	//    from 60 (1 minute) to 1,209,600 (14 days). Default: 345,600 (4 days).
 	//
 	//    * Policy - The queue's policy. A valid AWS policy. For more information
-	//    about policy structure, see Overview of AWS IAM Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html)
+	//    about policy structure, see Overview of AWS IAM Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html)
 	//    in the Amazon IAM User Guide.
 	//
 	//    * ReceiveMessageWaitTimeSeconds - The length of time, in seconds, for
@@ -43,7 +43,7 @@ type SetQueueAttributesInput struct {
 	//    * RedrivePolicy - The string that includes the parameters for the dead-letter
 	//    queue functionality of the source queue. For more information about the
 	//    redrive policy and dead-letter queues, see Using Amazon SQS Dead-Letter
-	//    Queues (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)
+	//    Queues (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)
 	//    in the Amazon Simple Queue Service Developer Guide. deadLetterTargetArn
 	//    - The Amazon Resource Name (ARN) of the dead-letter queue to which Amazon
 	//    SQS moves messages after the value of maxReceiveCount is exceeded. maxReceiveCount
@@ -57,32 +57,32 @@ type SetQueueAttributesInput struct {
 	//    * VisibilityTimeout - The visibility timeout for the queue, in seconds.
 	//    Valid values: an integer from 0 to 43,200 (12 hours). Default: 30. For
 	//    more information about the visibility timeout, see Visibility Timeout
-	//    (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)
+	//    (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)
 	//    in the Amazon Simple Queue Service Developer Guide.
 	//
-	// The following attributes apply only to server-side-encryption (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html):
+	// The following attributes apply only to server-side-encryption (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html):
 	//
 	//    * KmsMasterKeyId - The ID of an AWS-managed customer master key (CMK)
-	//    for Amazon SQS or a custom CMK. For more information, see Key Terms (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms).
+	//    for Amazon SQS or a custom CMK. For more information, see Key Terms (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms).
 	//    While the alias of the AWS-managed CMK for Amazon SQS is always alias/aws/sqs,
 	//    the alias of a custom CMK can, for example, be alias/MyAlias . For more
-	//    examples, see KeyId (http://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters)
+	//    examples, see KeyId (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters)
 	//    in the AWS Key Management Service API Reference.
 	//
 	//    * KmsDataKeyReusePeriodSeconds - The length of time, in seconds, for which
-	//    Amazon SQS can reuse a data key (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-keys)
+	//    Amazon SQS can reuse a data key (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-keys)
 	//    to encrypt or decrypt messages before calling AWS KMS again. An integer
 	//    representing seconds, between 60 seconds (1 minute) and 86,400 seconds
 	//    (24 hours). Default: 300 (5 minutes). A shorter time period provides better
 	//    security but results in more calls to KMS which might incur charges after
 	//    Free Tier. For more information, see How Does the Data Key Reuse Period
-	//    Work? (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work).
+	//    Work? (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work).
 	//
 	// The following attribute applies only to FIFO (first-in-first-out) queues
-	// (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html):
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html):
 	//
 	//    * ContentBasedDeduplication - Enables content-based deduplication. For
-	//    more information, see Exactly-Once Processing (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing)
+	//    more information, see Exactly-Once Processing (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing)
 	//    in the Amazon Simple Queue Service Developer Guide. Every message must
 	//    have a unique MessageDeduplicationId, You may provide a MessageDeduplicationId
 	//    explicitly. If you aren't able to provide a MessageDeduplicationId and
@@ -153,13 +153,17 @@ const opSetQueueAttributes = "SetQueueAttributes"
 // to propagate throughout the Amazon SQS system. Changes made to the MessageRetentionPeriod
 // attribute can take up to 15 minutes.
 //
-// In the future, new attributes might be added. If you write code that calls
-// this action, we recommend that you structure your code so that it can handle
-// new attributes gracefully.
+//    * In the future, new attributes might be added. If you write code that
+//    calls this action, we recommend that you structure your code so that it
+//    can handle new attributes gracefully.
 //
-// Cross-account permissions don't apply to this action. For more information,
-// see see Grant Cross-Account Permissions to a Role and a User Name (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
-// in the Amazon Simple Queue Service Developer Guide.
+//    * Cross-account permissions don't apply to this action. For more information,
+//    see Grant Cross-Account Permissions to a Role and a User Name (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
+//    in the Amazon Simple Queue Service Developer Guide.
+//
+//    * To remove the ability to change queue permissions, you must deny permission
+//    to the AddPermission, RemovePermission, and SetQueueAttributes actions
+//    in your IAM policy.
 //
 //    // Example sending a request using SetQueueAttributesRequest.
 //    req := client.SetQueueAttributesRequest(params)

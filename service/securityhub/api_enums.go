@@ -106,7 +106,7 @@ type MapFilterComparison string
 
 // Enum values for MapFilterComparison
 const (
-	MapFilterComparisonContains MapFilterComparison = "CONTAINS"
+	MapFilterComparisonEquals MapFilterComparison = "EQUALS"
 )
 
 func (enum MapFilterComparison) MarshalValue() (string, error) {
@@ -191,10 +191,11 @@ type StandardsStatus string
 
 // Enum values for StandardsStatus
 const (
-	StandardsStatusPending  StandardsStatus = "PENDING"
-	StandardsStatusReady    StandardsStatus = "READY"
-	StandardsStatusFailed   StandardsStatus = "FAILED"
-	StandardsStatusDeleting StandardsStatus = "DELETING"
+	StandardsStatusPending    StandardsStatus = "PENDING"
+	StandardsStatusReady      StandardsStatus = "READY"
+	StandardsStatusFailed     StandardsStatus = "FAILED"
+	StandardsStatusDeleting   StandardsStatus = "DELETING"
+	StandardsStatusIncomplete StandardsStatus = "INCOMPLETE"
 )
 
 func (enum StandardsStatus) MarshalValue() (string, error) {
@@ -210,9 +211,8 @@ type StringFilterComparison string
 
 // Enum values for StringFilterComparison
 const (
-	StringFilterComparisonEquals   StringFilterComparison = "EQUALS"
-	StringFilterComparisonContains StringFilterComparison = "CONTAINS"
-	StringFilterComparisonPrefix   StringFilterComparison = "PREFIX"
+	StringFilterComparisonEquals StringFilterComparison = "EQUALS"
+	StringFilterComparisonPrefix StringFilterComparison = "PREFIX"
 )
 
 func (enum StringFilterComparison) MarshalValue() (string, error) {

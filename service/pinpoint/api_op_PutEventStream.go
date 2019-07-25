@@ -17,7 +17,9 @@ type PutEventStreamInput struct {
 	// ApplicationId is a required field
 	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
 
-	// Request to save an EventStream.
+	// Specifies the Amazon Resource Name (ARN) of an event stream to publish events
+	// to and the AWS Identity and Access Management (IAM) role to use when publishing
+	// those events.
 	//
 	// WriteEventStream is a required field
 	WriteEventStream *WriteEventStream `type:"structure" required:"true"`
@@ -38,6 +40,11 @@ func (s *PutEventStreamInput) Validate() error {
 
 	if s.WriteEventStream == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WriteEventStream"))
+	}
+	if s.WriteEventStream != nil {
+		if err := s.WriteEventStream.Validate(); err != nil {
+			invalidParams.AddNested("WriteEventStream", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -69,7 +76,8 @@ func (s PutEventStreamInput) MarshalFields(e protocol.FieldEncoder) error {
 type PutEventStreamOutput struct {
 	_ struct{} `type:"structure" payload:"EventStream"`
 
-	// Model for an event publishing subscription export.
+	// Specifies settings for publishing event data to an Amazon Kinesis data stream
+	// or an Amazon Kinesis Data Firehose delivery stream.
 	//
 	// EventStream is a required field
 	EventStream *EventStream `type:"structure" required:"true"`
@@ -96,7 +104,8 @@ const opPutEventStream = "PutEventStream"
 // PutEventStreamRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Use to create or update the event stream for an app.
+// Creates a new event stream for an application or updates the settings of
+// an existing event stream for an application.
 //
 //    // Example sending a request using PutEventStreamRequest.
 //    req := client.PutEventStreamRequest(params)

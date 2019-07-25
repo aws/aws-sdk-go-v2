@@ -11,59 +11,51 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// Column Metadata
+// Contains the metadata for a column.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ColumnMetadata
 type ColumnMetadata struct {
 	_ struct{} `type:"structure"`
 
-	// Homogenous array base SQL type from java.sql.Types.
+	// The type of the column.
 	ArrayBaseColumnType *int64 `locationName:"arrayBaseColumnType" type:"integer"`
 
-	// Whether the designated column is automatically numbered
+	// A value that indicates whether the column increments automatically.
 	IsAutoIncrement *bool `locationName:"isAutoIncrement" type:"boolean"`
 
-	// Whether values in the designated column's case matters
+	// A value that indicates whether the column is case-sensitive.
 	IsCaseSensitive *bool `locationName:"isCaseSensitive" type:"boolean"`
 
-	// Whether values in the designated column is a cash value
+	// A value that indicates whether the column contains currency values.
 	IsCurrency *bool `locationName:"isCurrency" type:"boolean"`
 
-	// Whether values in the designated column are signed numbers
+	// A value that indicates whether an integer column is signed.
 	IsSigned *bool `locationName:"isSigned" type:"boolean"`
 
-	// Usually specified by the SQL AS. If not specified, return column name.
+	// The label for the column.
 	Label *string `locationName:"label" type:"string"`
 
-	// Name of the column.
+	// The name of the column.
 	Name *string `locationName:"name" type:"string"`
 
-	// Indicates the nullability of values in the designated column. One of columnNoNulls
-	// (0), columnNullable (1), columnNullableUnknown (2)
+	// A value that indicates whether the column is nullable.
 	Nullable *int64 `locationName:"nullable" type:"integer"`
 
-	// Get the designated column's specified column size.For numeric data, this
-	// is the maximum precision. For character data, this is the length in characters.
-	// For datetime datatypes, this is the length in characters of the String representation
-	// (assuming the maximum allowed precision of the fractional seconds component).
-	// For binary data, this is the length in bytes. For the ROWID datatype, this
-	// is the length in bytes. 0 is returned for data types where the column size
-	// is not applicable.
+	// The precision value of a decimal number column.
 	Precision *int64 `locationName:"precision" type:"integer"`
 
-	// Designated column's number of digits to right of the decimal point. 0 is
-	// returned for data types where the scale is not applicable.
+	// The scale value of a decimal number column.
 	Scale *int64 `locationName:"scale" type:"integer"`
 
-	// Designated column's table's schema
+	// The name of the schema that owns the table that includes the column.
 	SchemaName *string `locationName:"schemaName" type:"string"`
 
-	// Designated column's table name
+	// The name of the table that includes the column.
 	TableName *string `locationName:"tableName" type:"string"`
 
-	// SQL type from java.sql.Types.
+	// The type of the column.
 	Type *int64 `locationName:"type" type:"integer"`
 
-	// Database-specific type name.
+	// The database-specific data type of the column.
 	TypeName *string `locationName:"typeName" type:"string"`
 }
 
@@ -161,12 +153,84 @@ func (s ColumnMetadata) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Row or Record
+// Contains a value.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/Field
+type Field struct {
+	_ struct{} `type:"structure"`
+
+	// A value of BLOB data type.
+	//
+	// BlobValue is automatically base64 encoded/decoded by the SDK.
+	BlobValue []byte `locationName:"blobValue" type:"blob"`
+
+	// A value of Boolean data type.
+	BooleanValue *bool `locationName:"booleanValue" type:"boolean"`
+
+	// A value of double data type.
+	DoubleValue *float64 `locationName:"doubleValue" type:"double"`
+
+	// A NULL value.
+	IsNull *bool `locationName:"isNull" type:"boolean"`
+
+	// A value of long data type.
+	LongValue *int64 `locationName:"longValue" type:"long"`
+
+	// A value of string data type.
+	StringValue *string `locationName:"stringValue" type:"string"`
+}
+
+// String returns the string representation
+func (s Field) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Field) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BlobValue != nil {
+		v := s.BlobValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "blobValue", protocol.QuotedValue{ValueMarshaler: protocol.BytesValue(v)}, metadata)
+	}
+	if s.BooleanValue != nil {
+		v := *s.BooleanValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "booleanValue", protocol.BoolValue(v), metadata)
+	}
+	if s.DoubleValue != nil {
+		v := *s.DoubleValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "doubleValue", protocol.Float64Value(v), metadata)
+	}
+	if s.IsNull != nil {
+		v := *s.IsNull
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "isNull", protocol.BoolValue(v), metadata)
+	}
+	if s.LongValue != nil {
+		v := *s.LongValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "longValue", protocol.Int64Value(v), metadata)
+	}
+	if s.StringValue != nil {
+		v := *s.StringValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "stringValue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A record returned by a call.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/Record
 type Record struct {
 	_ struct{} `type:"structure"`
 
-	// Record
+	// The values returned in the record.
 	Values []Value `locationName:"values" type:"list"`
 }
 
@@ -192,15 +256,15 @@ func (s Record) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Result Frame
+// The result set returned by a SQL statement.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ResultFrame
 type ResultFrame struct {
 	_ struct{} `type:"structure"`
 
-	// ResultSet Metadata.
+	// The records in the result set.
 	Records []Record `locationName:"records" type:"list"`
 
-	// ResultSet Metadata.
+	// The result-set metadata in the result set.
 	ResultSetMetadata *ResultSetMetadata `locationName:"resultSetMetadata" type:"structure"`
 }
 
@@ -232,15 +296,15 @@ func (s ResultFrame) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// List of columns and their types.
+// The metadata of the result set returned by a SQL statement.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ResultSetMetadata
 type ResultSetMetadata struct {
 	_ struct{} `type:"structure"`
 
-	// Number of columns
+	// The number of columns in the result set.
 	ColumnCount *int64 `locationName:"columnCount" type:"long"`
 
-	// List of columns and their types
+	// The metadata of the columns in the result set.
 	ColumnMetadata []ColumnMetadata `locationName:"columnMetadata" type:"list"`
 }
 
@@ -272,15 +336,49 @@ func (s ResultSetMetadata) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// SQL statement execution result
+// A parameter used in a SQL statement.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/SqlParameter
+type SqlParameter struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the parameter.
+	Name *string `locationName:"name" type:"string"`
+
+	// The value of the parameter.
+	Value *Field `locationName:"value" type:"structure"`
+}
+
+// String returns the string representation
+func (s SqlParameter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SqlParameter) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Value != nil {
+		v := s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "value", v, metadata)
+	}
+	return nil
+}
+
+// The result of a SQL statement.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/SqlStatementResult
 type SqlStatementResult struct {
 	_ struct{} `type:"structure"`
 
-	// Number of rows updated.
+	// The number of records updated by a SQL statement.
 	NumberOfRecordsUpdated *int64 `locationName:"numberOfRecordsUpdated" type:"long"`
 
-	// ResultFrame returned by executing the sql statement
+	// The result set of the SQL statement.
 	ResultFrame *ResultFrame `locationName:"resultFrame" type:"structure"`
 }
 
@@ -306,12 +404,12 @@ func (s SqlStatementResult) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// User Defined Type
+// A structure value returned by a call.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/StructValue
 type StructValue struct {
 	_ struct{} `type:"structure"`
 
-	// Struct or UDT
+	// The attributes returned in the record.
 	Attributes []Value `locationName:"attributes" type:"list"`
 }
 
@@ -337,41 +435,72 @@ func (s StructValue) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Column value
+// The response elements represent the results of an update.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/UpdateResult
+type UpdateResult struct {
+	_ struct{} `type:"structure"`
+
+	// Values for fields generated during the request.
+	GeneratedFields []Field `locationName:"generatedFields" type:"list"`
+}
+
+// String returns the string representation
+func (s UpdateResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateResult) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GeneratedFields != nil {
+		v := s.GeneratedFields
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "generatedFields", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Contains the value of a column.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/Value
 type Value struct {
 	_ struct{} `type:"structure"`
 
-	// Arbitrarily nested arrays
+	// An array of column values.
 	ArrayValues []Value `locationName:"arrayValues" type:"list"`
 
-	// Long value
+	// A value for a column of big integer data type.
 	BigIntValue *int64 `locationName:"bigIntValue" type:"long"`
 
-	// Bit value
+	// A value for a column of BIT data type.
 	BitValue *bool `locationName:"bitValue" type:"boolean"`
 
-	// Blob value
+	// A value for a column of BLOB data type.
 	//
 	// BlobValue is automatically base64 encoded/decoded by the SDK.
 	BlobValue []byte `locationName:"blobValue" type:"blob"`
 
-	// Double value
+	// A value for a column of double data type.
 	DoubleValue *float64 `locationName:"doubleValue" type:"double"`
 
-	// Integer value
+	// A value for a column of integer data type.
 	IntValue *int64 `locationName:"intValue" type:"integer"`
 
-	// Is column null
+	// A NULL value.
 	IsNull *bool `locationName:"isNull" type:"boolean"`
 
-	// Float value
+	// A value for a column of real data type.
 	RealValue *float64 `locationName:"realValue" type:"float"`
 
-	// String value
+	// A value for a column of string data type.
 	StringValue *string `locationName:"stringValue" type:"string"`
 
-	// Struct or UDT
+	// A value for a column of STRUCT data type.
 	StructValue *StructValue `locationName:"structValue" type:"structure"`
 }
 

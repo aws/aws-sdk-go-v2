@@ -61,6 +61,7 @@ const (
 	EventTypeCategoryIssue               EventTypeCategory = "issue"
 	EventTypeCategoryAccountNotification EventTypeCategory = "accountNotification"
 	EventTypeCategoryScheduledChange     EventTypeCategory = "scheduledChange"
+	EventTypeCategoryInvestigation       EventTypeCategory = "investigation"
 )
 
 func (enum EventTypeCategory) MarshalValue() (string, error) {

@@ -37,8 +37,8 @@ type ImportRestApiInput struct {
 	// endpointConfigurationTypes=REGIONAL, or endpointConfigurationTypes=PRIVATE.
 	// The default endpoint type is EDGE.
 	//
-	// To handle imported basePath, set parameters as basePath=ignore, basePath=prepend
-	// or basePath=split.
+	// To handle imported basepath, set parameters as basepath=ignore, basepath=prepend
+	// or basepath=split.
 	//
 	// For example, the AWS CLI command to exclude documentation from the imported
 	// API is:

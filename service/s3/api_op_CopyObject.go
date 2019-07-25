@@ -98,10 +98,10 @@ type CopyObjectInput struct {
 	// Specifies whether you want to apply a Legal Hold to the copied object.
 	ObjectLockLegalHoldStatus ObjectLockLegalHoldStatus `location:"header" locationName:"x-amz-object-lock-legal-hold" type:"string" enum:"true"`
 
-	// The Object Lock mode that you want to apply to the copied object.
+	// The object lock mode that you want to apply to the copied object.
 	ObjectLockMode ObjectLockMode `location:"header" locationName:"x-amz-object-lock-mode" type:"string" enum:"true"`
 
-	// The date and time when you want the copied object's Object Lock to expire.
+	// The date and time when you want the copied object's object lock to expire.
 	ObjectLockRetainUntilDate *time.Time `location:"header" locationName:"x-amz-object-lock-retain-until-date" type:"timestamp" timestampFormat:"rfc822"`
 
 	// Confirms that the requester knows that she or he will be charged for the
@@ -124,6 +124,11 @@ type CopyObjectInput struct {
 	// Amazon S3 uses this header for a message integrity check to ensure the encryption
 	// key was transmitted without error.
 	SSECustomerKeyMD5 *string `location:"header" locationName:"x-amz-server-side-encryption-customer-key-MD5" type:"string"`
+
+	// Specifies the AWS KMS Encryption Context to use for object encryption. The
+	// value of this header is a base64-encoded UTF-8 string holding JSON with the
+	// encryption context key-value pairs.
+	SSEKMSEncryptionContext *string `location:"header" locationName:"x-amz-server-side-encryption-context" type:"string"`
 
 	// Specifies the AWS KMS key ID to use for object encryption. All GET and PUT
 	// requests for an object protected by AWS KMS will fail if not made via SSL
@@ -369,6 +374,12 @@ func (s CopyObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "x-amz-server-side-encryption-customer-key-MD5", protocol.StringValue(v), metadata)
 	}
+	if s.SSEKMSEncryptionContext != nil {
+		v := *s.SSEKMSEncryptionContext
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-server-side-encryption-context", protocol.StringValue(v), metadata)
+	}
 	if s.SSEKMSKeyId != nil {
 		v := *s.SSEKMSKeyId
 
@@ -457,6 +468,11 @@ type CopyObjectOutput struct {
 	// verification of the customer-provided encryption key.
 	SSECustomerKeyMD5 *string `location:"header" locationName:"x-amz-server-side-encryption-customer-key-MD5" type:"string"`
 
+	// If present, specifies the AWS KMS Encryption Context to use for object encryption.
+	// The value of this header is a base64-encoded UTF-8 string holding JSON with
+	// the encryption context key-value pairs.
+	SSEKMSEncryptionContext *string `location:"header" locationName:"x-amz-server-side-encryption-context" type:"string"`
+
 	// If present, specifies the ID of the AWS Key Management Service (KMS) master
 	// encryption key that was used for the object.
 	SSEKMSKeyId *string `location:"header" locationName:"x-amz-server-side-encryption-aws-kms-key-id" type:"string"`
@@ -505,6 +521,12 @@ func (s CopyObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "x-amz-server-side-encryption-customer-key-MD5", protocol.StringValue(v), metadata)
+	}
+	if s.SSEKMSEncryptionContext != nil {
+		v := *s.SSEKMSEncryptionContext
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-server-side-encryption-context", protocol.StringValue(v), metadata)
 	}
 	if s.SSEKMSKeyId != nil {
 		v := *s.SSEKMSKeyId

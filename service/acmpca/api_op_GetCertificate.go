@@ -82,11 +82,11 @@ const opGetCertificate = "GetCertificate"
 // AWS Certificate Manager Private Certificate Authority.
 //
 // Retrieves a certificate from your private CA. The ARN of the certificate
-// is returned when you call the IssueCertificate operation. You must specify
-// both the ARN of your private CA and the ARN of the issued certificate when
-// calling the GetCertificate operation. You can retrieve the certificate if
-// it is in the ISSUED state. You can call the CreateCertificateAuthorityAuditReport
-// operation to create a report that contains information about all of the certificates
+// is returned when you call the IssueCertificate action. You must specify both
+// the ARN of your private CA and the ARN of the issued certificate when calling
+// the GetCertificate action. You can retrieve the certificate if it is in the
+// ISSUED state. You can call the CreateCertificateAuthorityAuditReport action
+// to create a report that contains information about all of the certificates
 // issued and revoked by your private CA.
 //
 //    // Example sending a request using GetCertificateRequest.

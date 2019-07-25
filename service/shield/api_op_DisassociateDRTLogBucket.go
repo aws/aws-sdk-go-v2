@@ -13,7 +13,7 @@ import (
 type DisassociateDRTLogBucketInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon S3 bucket that contains your flow logs.
+	// The Amazon S3 bucket that contains your AWS WAF logs.
 	//
 	// LogBucket is a required field
 	LogBucket *string `min:"3" type:"string" required:"true"`
@@ -57,7 +57,7 @@ const opDisassociateDRTLogBucket = "DisassociateDRTLogBucket"
 // AWS Shield.
 //
 // Removes the DDoS Response team's (DRT) access to the specified Amazon S3
-// bucket containing your flow logs.
+// bucket containing your AWS WAF logs.
 //
 // To make a DisassociateDRTLogBucket request, you must be subscribed to the
 // Business Support plan (https://aws.amazon.com/premiumsupport/business-support/)

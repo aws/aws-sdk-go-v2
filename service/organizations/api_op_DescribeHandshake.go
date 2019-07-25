@@ -66,7 +66,7 @@ const opDescribeHandshake = "DescribeHandshake"
 // that generated the handshake.
 //
 // You can access handshakes that are ACCEPTED, DECLINED, or CANCELED for only
-// 30 days after they change to that state. They are then deleted and no longer
+// 30 days after they change to that state. They're then deleted and no longer
 // accessible.
 //
 // This operation can be called from any account in the organization.

@@ -175,6 +175,8 @@ type ClientAPI interface {
 
 	ListSubscribedRuleGroupsRequest(*waf.ListSubscribedRuleGroupsInput) waf.ListSubscribedRuleGroupsRequest
 
+	ListTagsForResourceRequest(*waf.ListTagsForResourceInput) waf.ListTagsForResourceRequest
+
 	ListWebACLsRequest(*waf.ListWebACLsInput) waf.ListWebACLsRequest
 
 	ListXssMatchSetsRequest(*waf.ListXssMatchSetsInput) waf.ListXssMatchSetsRequest
@@ -182,6 +184,10 @@ type ClientAPI interface {
 	PutLoggingConfigurationRequest(*waf.PutLoggingConfigurationInput) waf.PutLoggingConfigurationRequest
 
 	PutPermissionPolicyRequest(*waf.PutPermissionPolicyInput) waf.PutPermissionPolicyRequest
+
+	TagResourceRequest(*waf.TagResourceInput) waf.TagResourceRequest
+
+	UntagResourceRequest(*waf.UntagResourceInput) waf.UntagResourceRequest
 
 	UpdateByteMatchSetRequest(*waf.UpdateByteMatchSetInput) waf.UpdateByteMatchSetRequest
 

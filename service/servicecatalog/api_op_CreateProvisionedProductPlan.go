@@ -70,6 +70,10 @@ type CreateProvisionedProductPlanInput struct {
 	ProvisioningParameters []UpdateProvisioningParameter `type:"list"`
 
 	// One or more tags.
+	//
+	// If the plan is for an existing provisioned product, the product must have
+	// a RESOURCE_UPDATE constraint with TagUpdatesOnProvisionedProduct set to ALLOWED
+	// to allow tag updates.
 	Tags []Tag `type:"list"`
 }
 

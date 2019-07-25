@@ -15,7 +15,7 @@ import (
 type UpdateMatchmakingConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
-	// Flag that determines whether or not a match that was created with this configuration
+	// Flag that determines whether a match that was created with this configuration
 	// must be accepted by the matched players. To require acceptance, set to TRUE.
 	AcceptanceRequired *bool `type:"boolean"`
 
@@ -30,7 +30,15 @@ type UpdateMatchmakingConfigurationInput struct {
 	// for the match.
 	AdditionalPlayerCount *int64 `type:"integer"`
 
-	// Information to attached to all events related to the matchmaking configuration.
+	// Method used to backfill game sessions created with this matchmaking configuration.
+	// Specify MANUAL when your game manages backfill requests manually or does
+	// not use the match backfill feature. Specify AUTOMATIC to have GameLift create
+	// a StartMatchBackfill request whenever a game session has one or more open
+	// slots. Learn more about manual and automatic backfill in Backfill Existing
+	// Games with FlexMatch (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html).
+	BackfillMode BackfillMode `type:"string" enum:"true"`
+
+	// Information to add to all events related to the matchmaking configuration.
 	CustomEventData *string `type:"string"`
 
 	// Descriptive label that is associated with matchmaking configuration.
@@ -52,7 +60,7 @@ type UpdateMatchmakingConfigurationInput struct {
 
 	// Amazon Resource Name (ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
 	// that is assigned to a game session queue and uniquely identifies it. Format
-	// is arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912.
+	// is arn:aws:gamelift:<region>:<aws account>:gamesessionqueue/<queue name>.
 	// These queues are used when placing game sessions for matches that are created
 	// with this matchmaking configuration. Queues can be located in any region.
 	GameSessionQueueArns []string `type:"list"`
@@ -60,7 +68,7 @@ type UpdateMatchmakingConfigurationInput struct {
 	// Unique identifier for a matchmaking configuration to update.
 	//
 	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
+	Name *string `type:"string" required:"true"`
 
 	// SNS topic ARN that is set up to receive matchmaking notifications. See Setting
 	// up Notifications for Matchmaking (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html)
@@ -68,13 +76,14 @@ type UpdateMatchmakingConfigurationInput struct {
 	NotificationTarget *string `type:"string"`
 
 	// Maximum duration, in seconds, that a matchmaking ticket can remain in process
-	// before timing out. Requests that time out can be resubmitted as needed.
+	// before timing out. Requests that fail due to timing out can be resubmitted
+	// as needed.
 	RequestTimeoutSeconds *int64 `min:"1" type:"integer"`
 
 	// Unique identifier for a matchmaking rule set to use with this configuration.
 	// A matchmaking configuration can only use rule sets that are defined in the
 	// same region.
-	RuleSetName *string `min:"1" type:"string"`
+	RuleSetName *string `type:"string"`
 }
 
 // String returns the string representation
@@ -98,14 +107,8 @@ func (s *UpdateMatchmakingConfigurationInput) Validate() error {
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
 	if s.RequestTimeoutSeconds != nil && *s.RequestTimeoutSeconds < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("RequestTimeoutSeconds", 1))
-	}
-	if s.RuleSetName != nil && len(*s.RuleSetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RuleSetName", 1))
 	}
 	if s.GameProperties != nil {
 		for i, v := range s.GameProperties {
@@ -140,8 +143,16 @@ const opUpdateMatchmakingConfiguration = "UpdateMatchmakingConfiguration"
 // UpdateMatchmakingConfigurationRequest returns a request value for making API operation for
 // Amazon GameLift.
 //
-// Updates settings for a FlexMatch matchmaking configuration. To update settings,
-// specify the configuration name to be updated and provide the new settings.
+// Updates settings for a FlexMatch matchmaking configuration. These changes
+// affect all matches and game sessions that are created after the update. To
+// update settings, specify the configuration name to be updated and provide
+// the new settings.
+//
+// Learn more
+//
+//  Design a FlexMatch Matchmaker (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-configuration.html)
+//
+// Related operations
 //
 //    * CreateMatchmakingConfiguration
 //

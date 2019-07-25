@@ -54,7 +54,8 @@ func (s DeleteEventStreamInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteEventStreamOutput struct {
 	_ struct{} `type:"structure" payload:"EventStream"`
 
-	// Model for an event publishing subscription export.
+	// Specifies settings for publishing event data to an Amazon Kinesis data stream
+	// or an Amazon Kinesis Data Firehose delivery stream.
 	//
 	// EventStream is a required field
 	EventStream *EventStream `type:"structure" required:"true"`
@@ -81,7 +82,7 @@ const opDeleteEventStream = "DeleteEventStream"
 // DeleteEventStreamRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Deletes the event stream for an app.
+// Deletes the event stream for an application.
 //
 //    // Example sending a request using DeleteEventStreamRequest.
 //    req := client.DeleteEventStreamRequest(params)

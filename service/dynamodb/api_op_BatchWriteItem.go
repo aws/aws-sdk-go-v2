@@ -32,10 +32,10 @@ type BatchWriteItemInput struct {
 	//    and their values. Each entry in this map consists of an attribute name
 	//    and an attribute value. Attribute values must not be null; string and
 	//    binary type attributes must have lengths greater than zero; and set type
-	//    attributes must not be empty. Requests that contain empty values will
-	//    be rejected with a ValidationException exception. If you specify any attributes
-	//    that are part of an index key, then the data types for those attributes
-	//    must match those of the schema in the table's attribute definition.
+	//    attributes must not be empty. Requests that contain empty values are rejected
+	//    with a ValidationException exception. If you specify any attributes that
+	//    are part of an index key, then the data types for those attributes must
+	//    match those of the schema in the table's attribute definition.
 	//
 	// RequestItems is a required field
 	RequestItems map[string][]WriteRequest `min:"1" type:"map" required:"true"`
@@ -171,9 +171,8 @@ const opBatchWriteItem = "BatchWriteItem"
 // check for unprocessed items and submit a new BatchWriteItem request with
 // those unprocessed items until all items have been processed.
 //
-// Note that if none of the items can be processed due to insufficient provisioned
-// throughput on all of the tables in the request, then BatchWriteItem will
-// return a ProvisionedThroughputExceededException.
+// If none of the items can be processed due to insufficient provisioned throughput
+// on all of the tables in the request, then BatchWriteItem returns a ProvisionedThroughputExceededException.
 //
 // If DynamoDB returns any unprocessed items, you should retry the batch operation
 // on those items. However, we strongly recommend that you use an exponential
@@ -182,16 +181,15 @@ const opBatchWriteItem = "BatchWriteItem"
 // tables. If you delay the batch operation using exponential backoff, the individual
 // requests in the batch are much more likely to succeed.
 //
-// For more information, see Batch Operations and Error Handling (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#BatchOperations)
+// For more information, see Batch Operations and Error Handling (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#Programming.Errors.BatchOperations)
 // in the Amazon DynamoDB Developer Guide.
 //
 // With BatchWriteItem, you can efficiently write or delete large amounts of
-// data, such as from Amazon Elastic MapReduce (EMR), or copy data from another
-// database into DynamoDB. In order to improve performance with these large-scale
-// operations, BatchWriteItem does not behave in the same way as individual
-// PutItem and DeleteItem calls would. For example, you cannot specify conditions
-// on individual put and delete requests, and BatchWriteItem does not return
-// deleted items in the response.
+// data, such as from Amazon EMR, or copy data from another database into DynamoDB.
+// In order to improve performance with these large-scale operations, BatchWriteItem
+// does not behave in the same way as individual PutItem and DeleteItem calls
+// would. For example, you cannot specify conditions on individual put and delete
+// requests, and BatchWriteItem does not return deleted items in the response.
 //
 // If you use a programming language that supports concurrency, you can use
 // threads to write items in parallel. Your application must include the necessary

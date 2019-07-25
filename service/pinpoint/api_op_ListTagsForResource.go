@@ -54,6 +54,8 @@ func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure" payload:"TagsModel"`
 
+	// Specifies the tags (keys and values) for an application, campaign, or segment.
+	//
 	// TagsModel is a required field
 	TagsModel *TagsModel `type:"structure" required:"true"`
 }
@@ -79,7 +81,8 @@ const opListTagsForResource = "ListTagsForResource"
 // ListTagsForResourceRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Get list of all tags for a given resource arn
+// Retrieves all the tags (keys and values) that are associated with an application,
+// campaign, or segment.
 //
 //    // Example sending a request using ListTagsForResourceRequest.
 //    req := client.ListTagsForResourceRequest(params)

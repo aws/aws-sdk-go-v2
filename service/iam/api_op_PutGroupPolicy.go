@@ -17,7 +17,9 @@ type PutGroupPolicyInput struct {
 
 	// The name of the group to associate the policy with.
 	//
-	// ®ex-name;.
+	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex))
+	// a string of characters consisting of upper and lowercase alphanumeric characters
+	// with no spaces. You can also include any of the following characters: _+=,.@-.
 	//
 	// GroupName is a required field
 	GroupName *string `min:"1" type:"string" required:"true"`

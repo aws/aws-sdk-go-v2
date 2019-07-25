@@ -14,11 +14,11 @@ import (
 type ListInvitationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates the maximum number of items that you want in the response.
+	// The maximum number of items that you want in the response.
 	MaxResults *int64 `location:"querystring" locationName:"MaxResults" min:"1" type:"integer"`
 
-	// Paginates results. Set the value of this parameter to NULL on your first
-	// call to the ListInvitations operation. For subsequent calls to the operation,
+	// Paginates results. On your first call to the ListInvitations operation, set
+	// the value of this parameter to NULL. For subsequent calls to the operation,
 	// fill nextToken in the request with the value of NextToken from the previous
 	// response to continue listing data.
 	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`

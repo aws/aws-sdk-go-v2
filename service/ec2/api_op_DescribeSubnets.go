@@ -122,7 +122,7 @@ const opDescribeSubnets = "DescribeSubnets"
 //
 // Describes one or more of your subnets.
 //
-// For more information, see Your VPC and Subnets (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html)
+// For more information, see Your VPC and Subnets (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)
 // in the Amazon Virtual Private Cloud User Guide.
 //
 //    // Example sending a request using DescribeSubnetsRequest.

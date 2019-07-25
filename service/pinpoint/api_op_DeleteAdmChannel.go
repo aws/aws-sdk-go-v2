@@ -54,7 +54,8 @@ func (s DeleteAdmChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteAdmChannelOutput struct {
 	_ struct{} `type:"structure" payload:"ADMChannelResponse"`
 
-	// Amazon Device Messaging channel definition.
+	// Provides information about the status and settings of the ADM (Amazon Device
+	// Messaging) channel for an application.
 	//
 	// ADMChannelResponse is a required field
 	ADMChannelResponse *ADMChannelResponse `type:"structure" required:"true"`
@@ -81,7 +82,8 @@ const opDeleteAdmChannel = "DeleteAdmChannel"
 // DeleteAdmChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Delete an ADM channel.
+// Disables the ADM channel for an application and deletes any existing settings
+// for the channel.
 //
 //    // Example sending a request using DeleteAdmChannelRequest.
 //    req := client.DeleteAdmChannelRequest(params)

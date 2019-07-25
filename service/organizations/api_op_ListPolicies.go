@@ -69,7 +69,7 @@ type ListPoliciesOutput struct {
 	NextToken *string `type:"string"`
 
 	// A list of policies that match the filter criteria in the request. The output
-	// list does not include the policy contents. To see the content for a policy,
+	// list doesn't include the policy contents. To see the content for a policy,
 	// see DescribePolicy.
 	Policies []PolicySummary `type:"list"`
 }

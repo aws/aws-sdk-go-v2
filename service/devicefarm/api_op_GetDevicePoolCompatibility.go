@@ -66,9 +66,9 @@ type GetDevicePoolCompatibilityInput struct {
 	//
 	//    * UIAUTOMATOR: The uiautomator type.
 	//
-	//    * XCTEST: The XCode test type.
+	//    * XCTEST: The Xcode test type.
 	//
-	//    * XCTEST_UI: The XCode UI test type.
+	//    * XCTEST_UI: The Xcode UI test type.
 	TestType TestType `locationName:"testType" type:"string" enum:"true"`
 }
 

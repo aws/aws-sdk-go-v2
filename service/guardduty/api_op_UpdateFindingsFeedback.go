@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Update findings feedback body
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedbackRequest
 type UpdateFindingsFeedbackInput struct {
 	_ struct{} `type:"structure"`
@@ -18,8 +17,11 @@ type UpdateFindingsFeedbackInput struct {
 	// Additional feedback about the GuardDuty findings.
 	Comments *string `locationName:"comments" type:"string"`
 
+	// The ID of the detector that specifies the GuardDuty service whose findings
+	// you want to mark as useful or not useful.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
 	// Valid values: USEFUL | NOT_USEFUL
 	//
@@ -43,6 +45,9 @@ func (s *UpdateFindingsFeedbackInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
 	}
 	if len(s.Feedback) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Feedback"))

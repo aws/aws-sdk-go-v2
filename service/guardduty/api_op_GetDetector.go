@@ -14,8 +14,10 @@ import (
 type GetDetectorInput struct {
 	_ struct{} `type:"structure"`
 
+	// The unique ID of the detector that you want to get.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -29,6 +31,9 @@ func (s *GetDetectorInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -50,24 +55,30 @@ func (s GetDetectorInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// GetDetector response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetectorResponse
 type GetDetectorOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The first time a resource was created. The format will be ISO-8601.
+	// Detector creation timestamp.
 	CreatedAt *string `locationName:"createdAt" type:"string"`
 
-	// A enum value that specifies how frequently customer got Finding updates published.
+	// Finding publishing frequency.
 	FindingPublishingFrequency FindingPublishingFrequency `locationName:"findingPublishingFrequency" type:"string" enum:"true"`
 
-	// Customer serviceRole name or ARN for accessing customer resources
-	ServiceRole *string `locationName:"serviceRole" type:"string"`
+	// The GuardDuty service role.
+	//
+	// ServiceRole is a required field
+	ServiceRole *string `locationName:"serviceRole" type:"string" required:"true"`
 
-	// The status of detector.
-	Status DetectorStatus `locationName:"status" type:"string" enum:"true"`
+	// The detector status.
+	//
+	// Status is a required field
+	Status DetectorStatus `locationName:"status" min:"1" type:"string" required:"true" enum:"true"`
 
-	// The first time a resource was created. The format will be ISO-8601.
+	// The tags of the detector resource.
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
+
+	// Detector last update timestamp.
 	UpdatedAt *string `locationName:"updatedAt" type:"string"`
 }
 
@@ -101,6 +112,18 @@ func (s GetDetectorOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	if s.UpdatedAt != nil {
 		v := *s.UpdatedAt

@@ -13,7 +13,7 @@ import (
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the CloudWatch Events rule from which you are removing tags.
+	// The ARN of the rule that you're removing tags from.
 	//
 	// ResourceARN is a required field
 	ResourceARN *string `min:"1" type:"string" required:"true"`
@@ -65,8 +65,8 @@ const opUntagResource = "UntagResource"
 // UntagResourceRequest returns a request value for making API operation for
 // Amazon CloudWatch Events.
 //
-// Removes one or more tags from the specified CloudWatch Events resource. In
-// CloudWatch Events, rules can be tagged.
+// Removes one or more tags from the specified EventBridge resource. In EventBridge,
+// rules can be tagged.
 //
 //    // Example sending a request using UntagResourceRequest.
 //    req := client.UntagResourceRequest(params)

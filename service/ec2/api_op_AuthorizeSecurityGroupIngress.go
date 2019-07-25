@@ -108,9 +108,9 @@ const opAuthorizeSecurityGroupIngress = "AuthorizeSecurityGroupIngress"
 //
 // Adds the specified ingress rules to a security group.
 //
-// An inbound rule permits instances to receive traffic from the specified destination
-// IPv4 or IPv6 CIDR address ranges, or from the specified destination security
-// groups.
+// An inbound rule permits instances to receive traffic from the specified IPv4
+// or IPv6 CIDR address ranges, or from the instances associated with the specified
+// destination security groups.
 //
 // You specify a protocol for each rule (for example, TCP). For TCP and UDP,
 // you must also specify the destination port or port range. For ICMP/ICMPv6,

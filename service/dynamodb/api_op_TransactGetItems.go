@@ -19,7 +19,7 @@ type TransactGetItemsInput struct {
 	// is valid.
 	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string" enum:"true"`
 
-	// An ordered array of up to 10 TransactGetItem objects, each of which contains
+	// An ordered array of up to 25 TransactGetItem objects, each of which contains
 	// a Get structure.
 	//
 	// TransactItems is a required field
@@ -65,7 +65,7 @@ type TransactGetItemsOutput struct {
 	// consumed by the TransactGetItems call in that table.
 	ConsumedCapacity []ConsumedCapacity `type:"list"`
 
-	// An ordered array of up to 10 ItemResponse objects, each of which corresponds
+	// An ordered array of up to 25 ItemResponse objects, each of which corresponds
 	// to the TransactGetItem object in the same position in the TransactItems array.
 	// Each ItemResponse object contains a Map of the name-value pairs that are
 	// the projected attributes of the requested item.
@@ -88,10 +88,21 @@ const opTransactGetItems = "TransactGetItems"
 //
 // TransactGetItems is a synchronous operation that atomically retrieves multiple
 // items from one or more tables (but not from indexes) in a single account
-// and region. A TransactGetItems call can contain up to 10 TransactGetItem
+// and Region. A TransactGetItems call can contain up to 25 TransactGetItem
 // objects, each of which contains a Get structure that specifies an item to
-// retrieve from a table in the account and region. A call to TransactGetItems
-// cannot retrieve items from tables in more than one AWS account or region.
+// retrieve from a table in the account and Region. A call to TransactGetItems
+// cannot retrieve items from tables in more than one AWS account or Region.
+// The aggregate size of the items in the transaction cannot exceed 4 MB.
+//
+// All AWS Regions and AWS GovCloud (US) support up to 25 items per transaction
+// with up to 4 MB of data, except the following AWS Regions:
+//
+//    * China (Beijing)
+//
+//    * China (Ningxia)
+//
+// The China (Beijing) and China (Ningxia) Regions support up to 10 items per
+// transaction with up to 4 MB of data.
 //
 // DynamoDB rejects the entire TransactGetItems request if any of the following
 // is true:
@@ -103,6 +114,8 @@ const opTransactGetItems = "TransactGetItems"
 //    completed.
 //
 //    * There is a user error, such as an invalid data format.
+//
+//    * The aggregate size of the items in the transaction cannot exceed 4 MB.
 //
 //    // Example sending a request using TransactGetItemsRequest.
 //    req := client.TransactGetItemsRequest(params)

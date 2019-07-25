@@ -31,7 +31,7 @@ type DescribeMovingAddressesInput struct {
 	// 1000; if MaxResults is given a value outside of this range, an error is returned.
 	//
 	// Default: If no value is provided, the default is 1000.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
+	MaxResults *int64 `locationName:"maxResults" min:"5" type:"integer"`
 
 	// The token for the next page of results.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -43,6 +43,19 @@ type DescribeMovingAddressesInput struct {
 // String returns the string representation
 func (s DescribeMovingAddressesInput) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeMovingAddressesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeMovingAddressesInput"}
+	if s.MaxResults != nil && *s.MaxResults < 5 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeMovingAddressesResult

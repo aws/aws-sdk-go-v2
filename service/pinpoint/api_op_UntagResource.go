@@ -90,7 +90,8 @@ const opUntagResource = "UntagResource"
 // UntagResourceRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Remove tags from a resource.
+// Removes one or more tags (keys and values) from an application, campaign,
+// or segment.
 //
 //    // Example sending a request using UntagResourceRequest.
 //    req := client.UntagResourceRequest(params)

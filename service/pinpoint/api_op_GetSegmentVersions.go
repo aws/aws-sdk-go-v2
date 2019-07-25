@@ -83,7 +83,7 @@ func (s GetSegmentVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetSegmentVersionsOutput struct {
 	_ struct{} `type:"structure" payload:"SegmentsResponse"`
 
-	// Segments in your account.
+	// Provides information about all the segments that are associated with an application.
 	//
 	// SegmentsResponse is a required field
 	SegmentsResponse *SegmentsResponse `type:"structure" required:"true"`
@@ -110,7 +110,8 @@ const opGetSegmentVersions = "GetSegmentVersions"
 // GetSegmentVersionsRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Returns information about your segment versions.
+// Retrieves information about the configuration, dimension, and other settings
+// for all versions of a specific segment that's associated with an application.
 //
 //    // Example sending a request using GetSegmentVersionsRequest.
 //    req := client.GetSegmentVersionsRequest(params)

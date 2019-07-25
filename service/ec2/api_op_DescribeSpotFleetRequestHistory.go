@@ -27,7 +27,7 @@ type DescribeSpotFleetRequestHistoryInput struct {
 	// The maximum number of results to return in a single call. Specify a value
 	// between 1 and 1000. The default value is 1000. To retrieve the remaining
 	// results, make another call with the returned NextToken value.
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
+	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
 
 	// The token for the next set of results.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -51,6 +51,9 @@ func (s DescribeSpotFleetRequestHistoryInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeSpotFleetRequestHistoryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeSpotFleetRequestHistoryInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
 
 	if s.SpotFleetRequestId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SpotFleetRequestId"))

@@ -13,10 +13,18 @@ import (
 type DeleteDocumentInput struct {
 	_ struct{} `type:"structure"`
 
+	// The version of the document that you want to delete. If not provided, all
+	// versions of the document are deleted.
+	DocumentVersion *string `type:"string"`
+
 	// The name of the document.
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
+
+	// The version name of the document that you want to delete. If not provided,
+	// all versions of the document are deleted.
+	VersionName *string `type:"string"`
 }
 
 // String returns the string representation

@@ -13,7 +13,7 @@ import (
 type AssociateDRTLogBucketInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon S3 bucket that contains your flow logs.
+	// The Amazon S3 bucket that contains your AWS WAF logs.
 	//
 	// LogBucket is a required field
 	LogBucket *string `min:"3" type:"string" required:"true"`
@@ -57,8 +57,8 @@ const opAssociateDRTLogBucket = "AssociateDRTLogBucket"
 // AWS Shield.
 //
 // Authorizes the DDoS Response team (DRT) to access the specified Amazon S3
-// bucket containing your flow logs. You can associate up to 10 Amazon S3 buckets
-// with your subscription.
+// bucket containing your AWS WAF logs. You can associate up to 10 Amazon S3
+// buckets with your subscription.
 //
 // To use the services of the DRT and make an AssociateDRTLogBucket request,
 // you must be subscribed to the Business Support plan (https://aws.amazon.com/premiumsupport/business-support/)

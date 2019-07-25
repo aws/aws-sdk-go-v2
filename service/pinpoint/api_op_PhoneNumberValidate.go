@@ -14,7 +14,7 @@ import (
 type PhoneNumberValidateInput struct {
 	_ struct{} `type:"structure" payload:"NumberValidateRequest"`
 
-	// Phone Number Validate request.
+	// Specifies a phone number to validate and retrieve information about.
 	//
 	// NumberValidateRequest is a required field
 	NumberValidateRequest *NumberValidateRequest `type:"structure" required:"true"`
@@ -56,7 +56,7 @@ func (s PhoneNumberValidateInput) MarshalFields(e protocol.FieldEncoder) error {
 type PhoneNumberValidateOutput struct {
 	_ struct{} `type:"structure" payload:"NumberValidateResponse"`
 
-	// Phone Number Validate response.
+	// Provides information about a phone number.
 	//
 	// NumberValidateResponse is a required field
 	NumberValidateResponse *NumberValidateResponse `type:"structure" required:"true"`
@@ -83,7 +83,7 @@ const opPhoneNumberValidate = "PhoneNumberValidate"
 // PhoneNumberValidateRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Returns information about the specified phone number.
+// Retrieves information about a phone number.
 //
 //    // Example sending a request using PhoneNumberValidateRequest.
 //    req := client.PhoneNumberValidateRequest(params)

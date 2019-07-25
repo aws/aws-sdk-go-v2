@@ -12,7 +12,7 @@ import (
 // Represents a request to specify the Amazon SNS topic to which Amazon SES
 // will publish bounce, complaint, or delivery notifications for emails sent
 // with that identity as the Source. For information about Amazon SES notifications,
-// see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html).
+// see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityNotificationTopicRequest
 type SetIdentityNotificationTopicInput struct {
 	_ struct{} `type:"structure"`
@@ -89,7 +89,7 @@ const opSetIdentityNotificationTopic = "SetIdentityNotificationTopic"
 // You can execute this operation no more than once per second.
 //
 // For more information about feedback notification, see the Amazon SES Developer
-// Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html).
+// Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html).
 //
 //    // Example sending a request using SetIdentityNotificationTopicRequest.
 //    req := client.SetIdentityNotificationTopicRequest(params)

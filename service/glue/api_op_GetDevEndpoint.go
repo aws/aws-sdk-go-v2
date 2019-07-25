@@ -13,7 +13,7 @@ import (
 type GetDevEndpointInput struct {
 	_ struct{} `type:"structure"`
 
-	// Name of the DevEndpoint for which to retrieve information.
+	// Name of the DevEndpoint to retrieve information for.
 	//
 	// EndpointName is a required field
 	EndpointName *string `type:"string" required:"true"`
@@ -56,7 +56,7 @@ const opGetDevEndpoint = "GetDevEndpoint"
 // GetDevEndpointRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Retrieves information about a specified DevEndpoint.
+// Retrieves information about a specified development endpoint.
 //
 // When you create a development endpoint in a virtual private cloud (VPC),
 // AWS Glue returns only a private IP address, and the public IP address field

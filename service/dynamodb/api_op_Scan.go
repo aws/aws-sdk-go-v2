@@ -29,7 +29,7 @@ type ScanInput struct {
 	//
 	//    * If ConsistentRead is false, then the data returned from Scan might not
 	//    contain the results from other recently completed write operations (PutItem,
-	//    UpdateItem or DeleteItem).
+	//    UpdateItem, or DeleteItem).
 	//
 	//    * If ConsistentRead is true, then all of the write operations that completed
 	//    before the Scan began are guaranteed to be contained in the Scan response.
@@ -84,7 +84,7 @@ type ScanInput struct {
 	// Tokens that begin with the : character are expression attribute values, which
 	// are placeholders for the actual value at runtime.
 	//
-	// For more information on expression attribute names, see Accessing Item Attributes
+	// For more information on expression attribute names, see Specifying Item Attributes
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeNames map[string]string `type:"map"`
@@ -106,7 +106,7 @@ type ScanInput struct {
 	//
 	// ProductStatus IN (:avail, :back, :disc)
 	//
-	// For more information on expression attribute values, see Specifying Conditions
+	// For more information on expression attribute values, see Condition Expressions
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeValues map[string]AttributeValue `type:"map"`
@@ -131,11 +131,11 @@ type ScanInput struct {
 	// items). If DynamoDB processes the number of items up to the limit while processing
 	// the results, it stops the operation and returns the matching values up to
 	// that point, and a key in LastEvaluatedKey to apply in a subsequent operation,
-	// so that you can pick up where you left off. Also, if the processed data set
+	// so that you can pick up where you left off. Also, if the processed dataset
 	// size exceeds 1 MB before DynamoDB reaches this limit, it stops the operation
 	// and returns the matching values up to the limit, and a key in LastEvaluatedKey
 	// to apply in a subsequent operation to continue the operation. For more information,
-	// see Query and Scan (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html)
+	// see Working with Queries (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html)
 	// in the Amazon DynamoDB Developer Guide.
 	Limit *int64 `min:"1" type:"integer"`
 
@@ -147,7 +147,7 @@ type ScanInput struct {
 	// If any of the requested attributes are not found, they will not appear in
 	// the result.
 	//
-	// For more information, see Accessing Item Attributes (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
+	// For more information, see Specifying Item Attributes (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ProjectionExpression *string `type:"string"`
 
@@ -195,10 +195,10 @@ type ScanInput struct {
 	//
 	//    * ALL_ATTRIBUTES - Returns all of the item attributes from the specified
 	//    table or index. If you query a local secondary index, then for each matching
-	//    item in the index DynamoDB will fetch the entire item from the parent
-	//    table. If the index is configured to project all item attributes, then
-	//    all of the data can be obtained from the local secondary index, and no
-	//    fetching is required.
+	//    item in the index, DynamoDB fetches the entire item from the parent table.
+	//    If the index is configured to project all item attributes, then all of
+	//    the data can be obtained from the local secondary index, and no fetching
+	//    is required.
 	//
 	//    * ALL_PROJECTED_ATTRIBUTES - Allowed only when querying an index. Retrieves
 	//    all attributes that have been projected into the index. If the index is
@@ -212,13 +212,13 @@ type ScanInput struct {
 	//    This return value is equivalent to specifying AttributesToGet without
 	//    specifying any value for Select. If you query or scan a local secondary
 	//    index and request only attributes that are projected into that index,
-	//    the operation will read only the index and not the table. If any of the
-	//    requested attributes are not projected into the local secondary index,
-	//    DynamoDB will fetch each of these attributes from the parent table. This
-	//    extra fetching incurs additional throughput cost and latency. If you query
-	//    or scan a global secondary index, you can only request attributes that
-	//    are projected into the index. Global secondary index queries cannot fetch
-	//    attributes from the parent table.
+	//    the operation reads only the index and not the table. If any of the requested
+	//    attributes are not projected into the local secondary index, DynamoDB
+	//    fetches each of these attributes from the parent table. This extra fetching
+	//    incurs additional throughput cost and latency. If you query or scan a
+	//    global secondary index, you can only request attributes that are projected
+	//    into the index. Global secondary index queries cannot fetch attributes
+	//    from the parent table.
 	//
 	// If neither Select nor AttributesToGet are specified, DynamoDB defaults to
 	// ALL_ATTRIBUTES when accessing a table, and ALL_PROJECTED_ATTRIBUTES when
@@ -355,16 +355,16 @@ const opScan = "Scan"
 // every item in a table or a secondary index. To have DynamoDB return fewer
 // items, you can provide a FilterExpression operation.
 //
-// If the total number of scanned items exceeds the maximum data set size limit
+// If the total number of scanned items exceeds the maximum dataset size limit
 // of 1 MB, the scan stops and results are returned to the user as a LastEvaluatedKey
 // value to continue the scan in a subsequent operation. The results also include
 // the number of items exceeding the limit. A scan can result in no table data
 // meeting the filter criteria.
 //
-// A single Scan operation will read up to the maximum number of items set (if
-// using the Limit parameter) or a maximum of 1 MB of data and then apply any
-// filtering to the results using FilterExpression. If LastEvaluatedKey is present
-// in the response, you will need to paginate the result set. For more information,
+// A single Scan operation reads up to the maximum number of items set (if using
+// the Limit parameter) or a maximum of 1 MB of data and then apply any filtering
+// to the results using FilterExpression. If LastEvaluatedKey is present in
+// the response, you need to paginate the result set. For more information,
 // see Paginating the Results (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.Pagination)
 // in the Amazon DynamoDB Developer Guide.
 //

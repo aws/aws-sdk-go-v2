@@ -27,7 +27,7 @@ type AddTagsToResourceInput struct {
 	// For the Document and Parameter values, use the name of the resource.
 	//
 	// The ManagedInstance type for this API action is only for on-premises managed
-	// instances. You must specify the the name of the managed instance in the following
+	// instances. You must specify the name of the managed instance in the following
 	// format: mi-ID_number. For example, mi-1a2b3c4d5e6f.
 	//
 	// ResourceId is a required field
@@ -36,7 +36,7 @@ type AddTagsToResourceInput struct {
 	// Specifies the type of resource you are tagging.
 	//
 	// The ManagedInstance type for this API action is for on-premises managed instances.
-	// You must specify the the name of the managed instance in the following format:
+	// You must specify the name of the managed instance in the following format:
 	// mi-ID_number. For example, mi-1a2b3c4d5e6f.
 	//
 	// ResourceType is a required field
@@ -101,8 +101,8 @@ const opAddTagsToResource = "AddTagsToResource"
 // Amazon Simple Systems Manager (SSM).
 //
 // Adds or overwrites one or more tags for the specified resource. Tags are
-// metadata that you can assign to your documents, managed instances, Maintenance
-// Windows, Parameter Store parameters, and patch baselines. Tags enable you
+// metadata that you can assign to your documents, managed instances, maintenance
+// windows, Parameter Store parameters, and patch baselines. Tags enable you
 // to categorize your resources in different ways, for example, by purpose,
 // owner, or environment. Each tag consists of a key and an optional value,
 // both of which you define. For example, you could define a set of tags for

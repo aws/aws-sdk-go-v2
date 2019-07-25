@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // CodeCommit.
 //    func myFunc(svc codecommitiface.ClientAPI) bool {
-//        // Make svc.BatchGetRepositories request
+//        // Make svc.BatchDescribeMergeConflicts request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        codecommitiface.ClientPI
 //    }
-//    func (m *mockClientClient) BatchGetRepositories(input *codecommit.BatchGetRepositoriesInput) (*codecommit.BatchGetRepositoriesOutput, error) {
+//    func (m *mockClientClient) BatchDescribeMergeConflicts(input *codecommit.BatchDescribeMergeConflictsInput) (*codecommit.BatchDescribeMergeConflictsOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,6 +61,8 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	BatchDescribeMergeConflictsRequest(*codecommit.BatchDescribeMergeConflictsInput) codecommit.BatchDescribeMergeConflictsRequest
+
 	BatchGetRepositoriesRequest(*codecommit.BatchGetRepositoriesInput) codecommit.BatchGetRepositoriesRequest
 
 	CreateBranchRequest(*codecommit.CreateBranchInput) codecommit.CreateBranchRequest
@@ -71,6 +73,8 @@ type ClientAPI interface {
 
 	CreateRepositoryRequest(*codecommit.CreateRepositoryInput) codecommit.CreateRepositoryRequest
 
+	CreateUnreferencedMergeCommitRequest(*codecommit.CreateUnreferencedMergeCommitInput) codecommit.CreateUnreferencedMergeCommitRequest
+
 	DeleteBranchRequest(*codecommit.DeleteBranchInput) codecommit.DeleteBranchRequest
 
 	DeleteCommentContentRequest(*codecommit.DeleteCommentContentInput) codecommit.DeleteCommentContentRequest
@@ -78,6 +82,8 @@ type ClientAPI interface {
 	DeleteFileRequest(*codecommit.DeleteFileInput) codecommit.DeleteFileRequest
 
 	DeleteRepositoryRequest(*codecommit.DeleteRepositoryInput) codecommit.DeleteRepositoryRequest
+
+	DescribeMergeConflictsRequest(*codecommit.DescribeMergeConflictsInput) codecommit.DescribeMergeConflictsRequest
 
 	DescribePullRequestEventsRequest(*codecommit.DescribePullRequestEventsInput) codecommit.DescribePullRequestEventsRequest
 
@@ -99,7 +105,11 @@ type ClientAPI interface {
 
 	GetFolderRequest(*codecommit.GetFolderInput) codecommit.GetFolderRequest
 
+	GetMergeCommitRequest(*codecommit.GetMergeCommitInput) codecommit.GetMergeCommitRequest
+
 	GetMergeConflictsRequest(*codecommit.GetMergeConflictsInput) codecommit.GetMergeConflictsRequest
+
+	GetMergeOptionsRequest(*codecommit.GetMergeOptionsInput) codecommit.GetMergeOptionsRequest
 
 	GetPullRequestRequest(*codecommit.GetPullRequestInput) codecommit.GetPullRequestRequest
 
@@ -113,7 +123,19 @@ type ClientAPI interface {
 
 	ListRepositoriesRequest(*codecommit.ListRepositoriesInput) codecommit.ListRepositoriesRequest
 
+	ListTagsForResourceRequest(*codecommit.ListTagsForResourceInput) codecommit.ListTagsForResourceRequest
+
+	MergeBranchesByFastForwardRequest(*codecommit.MergeBranchesByFastForwardInput) codecommit.MergeBranchesByFastForwardRequest
+
+	MergeBranchesBySquashRequest(*codecommit.MergeBranchesBySquashInput) codecommit.MergeBranchesBySquashRequest
+
+	MergeBranchesByThreeWayRequest(*codecommit.MergeBranchesByThreeWayInput) codecommit.MergeBranchesByThreeWayRequest
+
 	MergePullRequestByFastForwardRequest(*codecommit.MergePullRequestByFastForwardInput) codecommit.MergePullRequestByFastForwardRequest
+
+	MergePullRequestBySquashRequest(*codecommit.MergePullRequestBySquashInput) codecommit.MergePullRequestBySquashRequest
+
+	MergePullRequestByThreeWayRequest(*codecommit.MergePullRequestByThreeWayInput) codecommit.MergePullRequestByThreeWayRequest
 
 	PostCommentForComparedCommitRequest(*codecommit.PostCommentForComparedCommitInput) codecommit.PostCommentForComparedCommitRequest
 
@@ -125,7 +147,11 @@ type ClientAPI interface {
 
 	PutRepositoryTriggersRequest(*codecommit.PutRepositoryTriggersInput) codecommit.PutRepositoryTriggersRequest
 
+	TagResourceRequest(*codecommit.TagResourceInput) codecommit.TagResourceRequest
+
 	TestRepositoryTriggersRequest(*codecommit.TestRepositoryTriggersInput) codecommit.TestRepositoryTriggersRequest
+
+	UntagResourceRequest(*codecommit.UntagResourceInput) codecommit.UntagResourceRequest
 
 	UpdateCommentRequest(*codecommit.UpdateCommentInput) codecommit.UpdateCommentRequest
 

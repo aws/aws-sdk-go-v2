@@ -21,9 +21,8 @@ type GetResourcesInput struct {
 
 	// The constraints on the resources that you want returned. The format of each
 	// resource type is service[:resourceType]. For example, specifying a resource
-	// type of ec2 returns all tagged Amazon EC2 resources (which includes tagged
-	// EC2 instances). Specifying a resource type of ec2:instance returns only EC2
-	// instances.
+	// type of ec2 returns all Amazon EC2 resources (which includes EC2 instances).
+	// Specifying a resource type of ec2:instance returns only EC2 instances.
 	//
 	// The string for each service name and resource type is the same as that embedded
 	// in a resource's Amazon Resource Name (ARN). Consult the AWS General Reference
@@ -35,23 +34,47 @@ type GetResourcesInput struct {
 	//
 	//    * For more information about ARNs, see Amazon Resource Names (ARNs) and
 	//    AWS Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	//
+	// You can specify multiple resource types by using an array. The array can
+	// include up to 100 items. Note that the length constraint requirement applies
+	// to each resource type filter.
 	ResourceTypeFilters []string `type:"list"`
 
 	// A limit that restricts the number of resources returned by GetResources in
 	// paginated output. You can set ResourcesPerPage to a minimum of 1 item and
-	// the maximum of 50 items.
+	// the maximum of 100 items.
 	ResourcesPerPage *int64 `type:"integer"`
 
-	// A list of tags (keys and values). A request can include up to 50 keys, and
-	// each key can include up to 20 values.
+	// A list of TagFilters (keys and values). Each TagFilter specified must contain
+	// a key with values as optional. A request can include up to 50 keys, and each
+	// key can include up to 20 values.
 	//
-	// If you specify multiple filters connected by an AND operator in a single
-	// request, the response returns only those resources that are associated with
-	// every specified filter.
+	// Note the following when deciding how to use TagFilters:
 	//
-	// If you specify multiple filters connected by an OR operator in a single request,
-	// the response returns all resources that are associated with at least one
-	// or possibly more of the specified filters.
+	//    * If you do specify a TagFilter, the response returns only those resources
+	//    that are currently associated with the specified tag.
+	//
+	//    * If you don't specify a TagFilter, the response includes all resources
+	//    that were ever associated with tags. Resources that currently don't have
+	//    associated tags are shown with an empty tag set, like this: "Tags": [].
+	//
+	//    * If you specify more than one filter in a single request, the response
+	//    returns only those resources that satisfy all specified filters.
+	//
+	//    * If you specify a filter that contains more than one value for a key,
+	//    the response returns resources that match any of the specified values
+	//    for that key.
+	//
+	//    * If you don't specify any values for a key, the response returns resources
+	//    that are tagged with that key irrespective of the value. For example,
+	//    for filters: filter1 = {key1, {value1}}, filter2 = {key2, {value2,value3,value4}}
+	//    , filter3 = {key3}: GetResources( {filter1} ) returns resources tagged
+	//    with key1=value1 GetResources( {filter2} ) returns resources tagged with
+	//    key2=value2 or key2=value3 or key2=value4 GetResources( {filter3} ) returns
+	//    resources tagged with any tag containing key3 as its tag key, irrespective
+	//    of its value GetResources( {filter1,filter2,filter3} ) returns resources
+	//    tagged with ( key1=value1) and ( key2=value2 or key2=value3 or key2=value4)
+	//    and (key3, irrespective of the value)
 	TagFilters []TagFilter `type:"list"`
 
 	// A limit that restricts the number of tags (key and value pairs) returned
@@ -119,12 +142,16 @@ const opGetResources = "GetResources"
 // GetResourcesRequest returns a request value for making API operation for
 // AWS Resource Groups Tagging API.
 //
-// Returns all the tagged resources that are associated with the specified tags
-// (keys and values) located in the specified region for the AWS account. The
-// tags and the resource types that you specify in the request are known as
-// filters. The response includes all tags that are associated with the requested
-// resources. If no filter is provided, this action returns a paginated resource
-// list with the associated tags.
+// Returns all the tagged or previously tagged resources that are located in
+// the specified region for the AWS account. You can optionally specify filters
+// (tags and resource types) in your request, depending on what information
+// you want returned. The response includes all tags that are associated with
+// the requested resources.
+//
+// You can check the PaginationToken response parameter to determine if a query
+// completed. Queries can occasionally return fewer results on a page than allowed.
+// The PaginationToken response parameter value is null only when there are
+// no more results to display.
 //
 //    // Example sending a request using GetResourcesRequest.
 //    req := client.GetResourcesRequest(params)

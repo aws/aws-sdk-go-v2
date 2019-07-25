@@ -72,7 +72,7 @@ const opAttachInternetGateway = "AttachInternetGateway"
 //
 // Attaches an internet gateway to a VPC, enabling connectivity between the
 // internet and the VPC. For more information about your VPC and internet gateway,
-// see the Amazon Virtual Private Cloud User Guide (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/).
+// see the Amazon Virtual Private Cloud User Guide (https://docs.aws.amazon.com/vpc/latest/userguide/).
 //
 //    // Example sending a request using AttachInternetGatewayRequest.
 //    req := client.AttachInternetGatewayRequest(params)

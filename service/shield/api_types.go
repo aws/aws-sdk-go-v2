@@ -55,11 +55,14 @@ func (s AttackDetail) String() string {
 type AttackProperty struct {
 	_ struct{} `type:"structure"`
 
-	// The type of DDoS event that was observed. NETWORK indicates layer 3 and layer
-	// 4 events and APPLICATION indicates layer 7 events.
+	// The type of distributed denial of service (DDoS) event that was observed.
+	// NETWORK indicates layer 3 and layer 4 events and APPLICATION indicates layer
+	// 7 events.
 	AttackLayer AttackLayer `type:"string" enum:"true"`
 
-	// Defines the DDoS attack property information that is provided.
+	// Defines the DDoS attack property information that is provided. The WORDPRESS_PINGBACK_REFLECTOR
+	// and WORDPRESS_PINGBACK_SOURCE values are valid only for WordPress reflective
+	// pingback DDoS attacks.
 	AttackPropertyIdentifier AttackPropertyIdentifier `type:"string" enum:"true"`
 
 	// The array of Contributor objects that includes the top five contributors
@@ -143,6 +146,12 @@ type AttackVectorDescription struct {
 	//    * ACK_FLOOD
 	//
 	//    * REQUEST_FLOOD
+	//
+	//    * HTTP_REFLECTION
+	//
+	//    * UDS_REFLECTION
+	//
+	//    * MEMCACHED_REFLECTION
 	//
 	// VectorType is a required field
 	VectorType *string `type:"string" required:"true"`

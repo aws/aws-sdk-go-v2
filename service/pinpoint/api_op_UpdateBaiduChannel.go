@@ -17,7 +17,8 @@ type UpdateBaiduChannelInput struct {
 	// ApplicationId is a required field
 	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
 
-	// Baidu Cloud Push credentials
+	// Specifies the status and settings of the Baidu (Baidu Cloud Push) channel
+	// for an application.
 	//
 	// BaiduChannelRequest is a required field
 	BaiduChannelRequest *BaiduChannelRequest `type:"structure" required:"true"`
@@ -38,6 +39,11 @@ func (s *UpdateBaiduChannelInput) Validate() error {
 
 	if s.BaiduChannelRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BaiduChannelRequest"))
+	}
+	if s.BaiduChannelRequest != nil {
+		if err := s.BaiduChannelRequest.Validate(); err != nil {
+			invalidParams.AddNested("BaiduChannelRequest", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -69,7 +75,8 @@ func (s UpdateBaiduChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateBaiduChannelOutput struct {
 	_ struct{} `type:"structure" payload:"BaiduChannelResponse"`
 
-	// Baidu Cloud Messaging channel definition
+	// Provides information about the status and settings of the Baidu (Baidu Cloud
+	// Push) channel for an application.
 	//
 	// BaiduChannelResponse is a required field
 	BaiduChannelResponse *BaiduChannelResponse `type:"structure" required:"true"`
@@ -96,7 +103,7 @@ const opUpdateBaiduChannel = "UpdateBaiduChannel"
 // UpdateBaiduChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Update a BAIDU GCM channel
+// Updates the settings of the Baidu channel for an application.
 //
 //    // Example sending a request using UpdateBaiduChannelRequest.
 //    req := client.UpdateBaiduChannelRequest(params)

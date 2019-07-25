@@ -15,6 +15,10 @@ import (
 type RemovePermissionInput struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the event bus to revoke permissions for. If you omit this, the
+	// default event bus is used.
+	EventBusName *string `min:"1" type:"string"`
+
 	// The statement ID corresponding to the account that is no longer allowed to
 	// put events to the default event bus.
 	//
@@ -30,6 +34,9 @@ func (s RemovePermissionInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemovePermissionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemovePermissionInput"}
+	if s.EventBusName != nil && len(*s.EventBusName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EventBusName", 1))
+	}
 
 	if s.StatementId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StatementId"))
@@ -60,7 +67,7 @@ const opRemovePermission = "RemovePermission"
 // Amazon CloudWatch Events.
 //
 // Revokes the permission of another AWS account to be able to put events to
-// your default event bus. Specify the account to revoke by the StatementId
+// the specified event bus. Specify the account to revoke by the StatementId
 // value that you associated with the account when you granted it permission
 // with PutPermission. You can find the StatementId by using DescribeEventBus.
 //

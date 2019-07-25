@@ -74,7 +74,7 @@ const opRespondActivityTaskFailed = "RespondActivityTaskFailed"
 // closed. Therefore a task is reported as open while a worker is processing
 // it. A task is closed after it has been specified in a call to RespondActivityTaskCompleted,
 // RespondActivityTaskCanceled, RespondActivityTaskFailed, or the task has timed
-// out (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types).
+// out (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types).
 //
 // Access Control
 //
@@ -92,7 +92,7 @@ const opRespondActivityTaskFailed = "RespondActivityTaskFailed"
 // the parameter values fall outside the specified constraints, the action fails.
 // The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED.
 // For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
 //    // Example sending a request using RespondActivityTaskFailedRequest.

@@ -54,7 +54,8 @@ func (s DeleteSmsChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteSmsChannelOutput struct {
 	_ struct{} `type:"structure" payload:"SMSChannelResponse"`
 
-	// SMS Channel Response.
+	// Provides information about the status and settings of the SMS channel for
+	// an application.
 	//
 	// SMSChannelResponse is a required field
 	SMSChannelResponse *SMSChannelResponse `type:"structure" required:"true"`
@@ -81,7 +82,8 @@ const opDeleteSmsChannel = "DeleteSmsChannel"
 // DeleteSmsChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Delete an SMS channel.
+// Disables the SMS channel for an application and deletes any existing settings
+// for the channel.
 //
 //    // Example sending a request using DeleteSmsChannelRequest.
 //    req := client.DeleteSmsChannelRequest(params)

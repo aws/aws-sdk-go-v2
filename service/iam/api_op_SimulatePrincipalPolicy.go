@@ -42,7 +42,7 @@ type SimulatePrincipalPolicyInput struct {
 	CallerArn *string `min:"1" type:"string"`
 
 	// A list of context keys and corresponding values for the simulation to use.
-	// Whenever a context key is evaluated in one of the simulated IAM permission
+	// Whenever a context key is evaluated in one of the simulated IAM permissions
 	// policies, the corresponding value is supplied.
 	ContextEntries []ContextEntry `type:"list"`
 

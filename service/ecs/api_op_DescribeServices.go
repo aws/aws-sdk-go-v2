@@ -15,7 +15,8 @@ type DescribeServicesInput struct {
 
 	// The short name or full Amazon Resource Name (ARN)the cluster that hosts the
 	// service to describe. If you do not specify a cluster, the default cluster
-	// is assumed.
+	// is assumed. This parameter is required if the service or services you are
+	// describing were launched in any cluster other than the default cluster.
 	Cluster *string `locationName:"cluster" type:"string"`
 
 	// Specifies whether you want to see the resource tags for the service. If TAGS

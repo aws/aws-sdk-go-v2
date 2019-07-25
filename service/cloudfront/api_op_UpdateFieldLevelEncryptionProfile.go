@@ -10,14 +10,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/UpdateFieldLevelEncryptionProfileRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateFieldLevelEncryptionProfileRequest
 type UpdateFieldLevelEncryptionProfileInput struct {
 	_ struct{} `type:"structure" payload:"FieldLevelEncryptionProfileConfig"`
 
 	// Request to update a field-level encryption profile.
 	//
 	// FieldLevelEncryptionProfileConfig is a required field
-	FieldLevelEncryptionProfileConfig *FieldLevelEncryptionProfileConfig `locationName:"FieldLevelEncryptionProfileConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2018-11-05/"`
+	FieldLevelEncryptionProfileConfig *FieldLevelEncryptionProfileConfig `locationName:"FieldLevelEncryptionProfileConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
 
 	// The ID of the field-level encryption profile request.
 	//
@@ -75,13 +75,13 @@ func (s UpdateFieldLevelEncryptionProfileInput) MarshalFields(e protocol.FieldEn
 	if s.FieldLevelEncryptionProfileConfig != nil {
 		v := s.FieldLevelEncryptionProfileConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2018-11-05/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
 		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionProfileConfig", v, metadata)
 	}
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/UpdateFieldLevelEncryptionProfileResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateFieldLevelEncryptionProfileResult
 type UpdateFieldLevelEncryptionProfileOutput struct {
 	_ struct{} `type:"structure" payload:"FieldLevelEncryptionProfile"`
 
@@ -114,7 +114,7 @@ func (s UpdateFieldLevelEncryptionProfileOutput) MarshalFields(e protocol.FieldE
 	return nil
 }
 
-const opUpdateFieldLevelEncryptionProfile = "UpdateFieldLevelEncryptionProfile2018_11_05"
+const opUpdateFieldLevelEncryptionProfile = "UpdateFieldLevelEncryptionProfile2019_03_26"
 
 // UpdateFieldLevelEncryptionProfileRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -128,12 +128,12 @@ const opUpdateFieldLevelEncryptionProfile = "UpdateFieldLevelEncryptionProfile20
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/UpdateFieldLevelEncryptionProfile
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateFieldLevelEncryptionProfile
 func (c *Client) UpdateFieldLevelEncryptionProfileRequest(input *UpdateFieldLevelEncryptionProfileInput) UpdateFieldLevelEncryptionProfileRequest {
 	op := &aws.Operation{
 		Name:       opUpdateFieldLevelEncryptionProfile,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/2018-11-05/field-level-encryption-profile/{Id}/config",
+		HTTPPath:   "/2019-03-26/field-level-encryption-profile/{Id}/config",
 	}
 
 	if input == nil {

@@ -36,7 +36,7 @@ type CreateCustomVerificationEmailTemplateInput struct {
 	// The content of the custom verification email. The total size of the email
 	// must be less than 10 MB. The message body may contain HTML, with some limitations.
 	// For more information, see Custom Verification Email Frequently Asked Questions
-	// (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html#custom-verification-emails-faq)
+	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html#custom-verification-emails-faq)
 	// in the Amazon SES Developer Guide.
 	//
 	// TemplateContent is a required field
@@ -110,7 +110,7 @@ const opCreateCustomVerificationEmailTemplate = "CreateCustomVerificationEmailTe
 // Creates a new custom verification email template.
 //
 // For more information about custom verification email templates, see Using
-// Custom Verification Email Templates (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
+// Custom Verification Email Templates (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
 // in the Amazon SES Developer Guide.
 //
 // You can execute this operation no more than once per second.

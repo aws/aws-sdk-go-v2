@@ -25,7 +25,7 @@ type SendBounceInput struct {
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
 	// you to use the address in the "From" header of the bounce. For more information
-	// about sending authorization, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+	// about sending authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	BounceSenderArn *string `type:"string"`
 
 	// A list of recipients of the bounced message, including the information required
@@ -116,7 +116,7 @@ const opSendBounce = "SendBounce"
 // by Amazon SES.
 //
 // For information about receiving email through Amazon SES, see the Amazon
-// SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html).
+// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html).
 //
 // You can execute this operation no more than once per second.
 //

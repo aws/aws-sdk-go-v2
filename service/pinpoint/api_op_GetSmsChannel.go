@@ -54,7 +54,8 @@ func (s GetSmsChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetSmsChannelOutput struct {
 	_ struct{} `type:"structure" payload:"SMSChannelResponse"`
 
-	// SMS Channel Response.
+	// Provides information about the status and settings of the SMS channel for
+	// an application.
 	//
 	// SMSChannelResponse is a required field
 	SMSChannelResponse *SMSChannelResponse `type:"structure" required:"true"`
@@ -81,7 +82,8 @@ const opGetSmsChannel = "GetSmsChannel"
 // GetSmsChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Get an SMS channel.
+// Retrieves information about the status and settings of the SMS channel for
+// an application.
 //
 //    // Example sending a request using GetSmsChannelRequest.
 //    req := client.GetSmsChannelRequest(params)

@@ -17,7 +17,7 @@ type CreateVaultInput struct {
 	// The AccountId value is the AWS account ID. This value must match the AWS
 	// account ID associated with the credentials used to sign the request. You
 	// can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon Glacier uses the AWS account ID associated with the
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you specify your account ID, do
 	// not include any hyphens ('-') in the ID.
 	//
@@ -71,7 +71,7 @@ func (s CreateVaultInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains the Amazon Glacier response to your request.
+// Contains the Amazon S3 Glacier response to your request.
 type CreateVaultOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -103,7 +103,7 @@ const opCreateVault = "CreateVault"
 // This operation creates a new vault with the specified name. The name of the
 // vault must be unique within a region for an AWS account. You can create up
 // to 1,000 vaults per account. If you need to create more vaults, contact Amazon
-// Glacier.
+// S3 Glacier.
 //
 // You must use the following guidelines when naming a vault.
 //
@@ -118,11 +118,11 @@ const opCreateVault = "CreateVault"
 // AWS Identity and Access Management (IAM) users don't have any permissions
 // by default. You must grant them explicit permission to perform specific actions.
 // For more information, see Access Control Using AWS Identity and Access Management
-// (IAM) (http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
+// (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
 //
 // For conceptual information and underlying REST API, see Creating a Vault
-// in Amazon Glacier (http://docs.aws.amazon.com/amazonglacier/latest/dev/creating-vaults.html)
-// and Create Vault (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-put.html)
+// in Amazon Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/creating-vaults.html)
+// and Create Vault (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-put.html)
 // in the Amazon Glacier Developer Guide.
 //
 //    // Example sending a request using CreateVaultRequest.

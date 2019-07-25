@@ -54,10 +54,10 @@ func (s *GetJobRunsInput) Validate() error {
 type GetJobRunsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of job-run metatdata objects.
+	// A list of job-run metadata objects.
 	JobRuns []JobRun `type:"list"`
 
-	// A continuation token, if not all reequested job runs have been returned.
+	// A continuation token, if not all requested job runs have been returned.
 	NextToken *string `type:"string"`
 }
 

@@ -15,7 +15,7 @@ type SetIpAddressTypeInput struct {
 
 	// The IP address type. The possible values are ipv4 (for IPv4 addresses) and
 	// dualstack (for IPv4 and IPv6 addresses). Internal load balancers must use
-	// ipv4.
+	// ipv4. Network Load Balancers must use ipv4.
 	//
 	// IpAddressType is a required field
 	IpAddressType IpAddressType `type:"string" required:"true" enum:"true"`
@@ -68,8 +68,6 @@ const opSetIpAddressType = "SetIpAddressType"
 //
 // Sets the type of IP addresses used by the subnets of the specified Application
 // Load Balancer or Network Load Balancer.
-//
-// Network Load Balancers must use ipv4.
 //
 //    // Example sending a request using SetIpAddressTypeRequest.
 //    req := client.SetIpAddressTypeRequest(params)

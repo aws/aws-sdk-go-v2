@@ -14,8 +14,7 @@ import (
 type DeleteInvitationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of account IDs specifying accounts whose invitations to Security Hub
-	// you want to delete.
+	// A list of the account IDs that sent the invitations to delete.
 	AccountIds []string `type:"list"`
 }
 
@@ -47,8 +46,8 @@ func (s DeleteInvitationsInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteInvitationsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of account ID and email address pairs of the AWS accounts that could
-	// not be processed.
+	// A list of account ID and email address pairs of the AWS accounts that invitations
+	// weren't deleted for.
 	UnprocessedAccounts []Result `type:"list"`
 }
 
@@ -79,8 +78,7 @@ const opDeleteInvitations = "DeleteInvitations"
 // DeleteInvitationsRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Deletes invitations that are sent to this AWS account (invitee) by the AWS
-// accounts (inviters) that are specified by their account IDs.
+// Deletes invitations received by the AWS account to become a member account.
 //
 //    // Example sending a request using DeleteInvitationsRequest.
 //    req := client.DeleteInvitationsRequest(params)

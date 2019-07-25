@@ -13,7 +13,7 @@ import (
 type GetTagsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon ARN of the resource for which to retrieve tags.
+	// The Amazon Resource Name (ARN) of the resource for which to retrieve tags.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `min:"1" type:"string" required:"true"`

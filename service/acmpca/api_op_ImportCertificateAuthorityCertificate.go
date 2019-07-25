@@ -15,8 +15,8 @@ import (
 type ImportCertificateAuthorityCertificateInput struct {
 	_ struct{} `type:"structure"`
 
-	// The PEM-encoded certificate for your private CA. This must be signed by using
-	// your on-premises CA.
+	// The PEM-encoded certificate for a private CA. This may be a self-signed certificate
+	// in the case of a root CA, or it may be signed by another CA that you control.
 	//
 	// Certificate is automatically base64 encoded/decoded by the SDK.
 	//
@@ -32,14 +32,15 @@ type ImportCertificateAuthorityCertificateInput struct {
 	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
 
 	// A PEM-encoded file that contains all of your certificates, other than the
-	// certificate you're importing, chaining up to your root CA. Your on-premises
-	// root certificate is the last in the chain, and each certificate in the chain
-	// signs the one preceding.
+	// certificate you're importing, chaining up to your root CA. Your ACM Private
+	// CA-hosted or on-premises root certificate is the last in the chain, and each
+	// certificate in the chain signs the one preceding.
+	//
+	// This parameter must be supplied when you import a subordinate CA. When you
+	// import a root CA, there is no chain.
 	//
 	// CertificateChain is automatically base64 encoded/decoded by the SDK.
-	//
-	// CertificateChain is a required field
-	CertificateChain []byte `type:"blob" required:"true"`
+	CertificateChain []byte `type:"blob"`
 }
 
 // String returns the string representation
@@ -65,10 +66,6 @@ func (s *ImportCertificateAuthorityCertificateInput) Validate() error {
 		invalidParams.Add(aws.NewErrParamMinLen("CertificateAuthorityArn", 5))
 	}
 
-	if s.CertificateChain == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CertificateChain"))
-	}
-
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	}
@@ -90,23 +87,40 @@ const opImportCertificateAuthorityCertificate = "ImportCertificateAuthorityCerti
 // ImportCertificateAuthorityCertificateRequest returns a request value for making API operation for
 // AWS Certificate Manager Private Certificate Authority.
 //
-// Imports your signed private CA certificate into ACM PCA. Before you can call
-// this operation, you must create the private certificate authority by calling
-// the CreateCertificateAuthority operation. You must then generate a certificate
-// signing request (CSR) by calling the GetCertificateAuthorityCsr operation.
-// Take the CSR to your on-premises CA and use the root certificate or a subordinate
-// certificate to sign it. Create a certificate chain and copy the signed certificate
-// and the certificate chain to your working directory.
+// Imports a signed private CA certificate into ACM Private CA. This action
+// is used when you are using a chain of trust whose root is located outside
+// ACM Private CA. Before you can call this action, the following preparations
+// must in place:
 //
-// Your certificate chain must not include the private CA certificate that you
-// are importing.
+// In ACM Private CA, call the CreateCertificateAuthority action to create the
+// private CA that that you plan to back with the imported certificate.
 //
-// Your on-premises CA certificate must be the last certificate in your chain.
-// The subordinate certificate, if any, that your root CA signed must be next
-// to last. The subordinate certificate signed by the preceding subordinate
-// CA must come next, and so on until your chain is built.
+// Call the GetCertificateAuthorityCsr action to generate a certificate signing
+// request (CSR).
 //
-// The chain must be PEM-encoded.
+// Sign the CSR using a root or intermediate CA hosted either by an on-premises
+// PKI hierarchy or a commercial CA..
+//
+// Create a certificate chain and copy the signed certificate and the certificate
+// chain to your working directory.
+//
+// The following requirements apply when you import a CA certificate.
+//
+//    * You cannot import a non-self-signed certificate for use as a root CA.
+//
+//    * You cannot import a self-signed certificate for use as a subordinate
+//    CA.
+//
+//    * Your certificate chain must not include the private CA certificate that
+//    you are importing.
+//
+//    * Your ACM Private CA-hosted or on-premises CA certificate must be the
+//    last certificate in your chain. The subordinate certificate, if any, that
+//    your root CA signed must be next to last. The subordinate certificate
+//    signed by the preceding subordinate CA must come next, and so on until
+//    your chain is built.
+//
+//    * The chain must be PEM-encoded.
 //
 //    // Example sending a request using ImportCertificateAuthorityCertificateRequest.
 //    req := client.ImportCertificateAuthorityCertificateRequest(params)

@@ -16,6 +16,8 @@ type UpdateBasePathMappingInput struct {
 
 	// [Required] The base path of the BasePathMapping resource to change.
 	//
+	// To specify an empty base path, set this parameter to '(none)'.
+	//
 	// BasePath is a required field
 	BasePath *string `location:"uri" locationName:"base_path" type:"string" required:"true"`
 

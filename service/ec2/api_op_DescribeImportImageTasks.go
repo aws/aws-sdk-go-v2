@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Contains the parameters for DescribeImportImageTasks.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportImageTasksRequest
 type DescribeImportImageTasksInput struct {
 	_ struct{} `type:"structure"`
@@ -40,7 +39,6 @@ func (s DescribeImportImageTasksInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Contains the output for DescribeImportImageTasks.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportImageTasksResult
 type DescribeImportImageTasksOutput struct {
 	_ struct{} `type:"structure"`

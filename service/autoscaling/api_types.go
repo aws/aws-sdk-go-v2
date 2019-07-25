@@ -399,37 +399,56 @@ func (s *CustomizedMetricSpecification) Validate() error {
 type Ebs struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates whether the volume is deleted on instance termination. The default
-	// value is true.
+	// Indicates whether the volume is deleted on instance termination. For Amazon
+	// EC2 Auto Scaling, the default value is true.
 	DeleteOnTermination *bool `type:"boolean"`
 
-	// Specifies whether the volume should be encrypted. Encrypted EBS volumes must
-	// be attached to instances that support Amazon EBS encryption. Volumes that
-	// are created from encrypted snapshots are automatically encrypted. There is
-	// no way to create an encrypted volume from an unencrypted snapshot or an unencrypted
-	// volume from an encrypted snapshot. If your AMI uses encrypted volumes, you
-	// can only launch it on supported instance types. For more information, see
-	// Amazon EBS Encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)
-	// in the Amazon EC2 User Guide for Linux Instances.
+	// Specifies whether the volume should be encrypted. Encrypted EBS volumes can
+	// only be attached to instances that support Amazon EBS encryption. For more
+	// information, see Supported Instance Types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances).
+	// If your AMI uses encrypted volumes, you can also only launch it on supported
+	// instance types.
+	//
+	// If you are creating a volume from a snapshot, you cannot specify an encryption
+	// value. Volumes that are created from encrypted snapshots are automatically
+	// encrypted, and volumes that are created from unencrypted snapshots are automatically
+	// unencrypted. By default, encrypted snapshots use the AWS managed CMK that
+	// is used for EBS encryption, but you can specify a custom CMK when you create
+	// the snapshot. The ability to encrypt a snapshot during copying also allows
+	// you to apply a new CMK to an already-encrypted snapshot. Volumes restored
+	// from the resulting copy are only accessible using the new CMK.
+	//
+	// Enabling encryption by default (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default)
+	// results in all EBS volumes being encrypted with the AWS managed CMK or a
+	// customer managed CMK, whether or not the snapshot was encrypted.
+	//
+	// For more information, see Using Encryption with EBS-Backed AMIs (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html)
+	// in the Amazon EC2 User Guide for Linux Instances and Required CMK Key Policy
+	// for Use with Encrypted Volumes (https://docs.aws.amazon.com/autoscaling/ec2/userguide/key-policy-requirements-EBS-encryption.html)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	Encrypted *bool `type:"boolean"`
 
 	// The number of I/O operations per second (IOPS) to provision for the volume.
-	// For more information, see Amazon EBS Volume Types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)
+	// The maximum ratio of IOPS to volume size (in GiB) is 50:1. For more information,
+	// see Amazon EBS Volume Types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)
 	// in the Amazon EC2 User Guide for Linux Instances.
 	//
 	// Conditional: This parameter is required when the volume type is io1. (Not
 	// used with standard, gp2, st1, or sc1 volumes.)
 	Iops *int64 `min:"100" type:"integer"`
 
-	// The ID of the snapshot. This parameter is optional if you specify a volume
-	// size.
+	// The snapshot ID of the volume to use.
+	//
+	// Conditional: This parameter is optional if you specify a volume size. If
+	// you specify both SnapshotId and VolumeSize, VolumeSize must be equal or greater
+	// than the size of the snapshot.
 	SnapshotId *string `min:"1" type:"string"`
 
-	// The volume size, in GiB.
+	// The volume size, in Gibibytes (GiB).
 	//
-	// Constraints: 1-1,024 for standard, 4-16,384 for io1, 1-16,384 for gp2, and
-	// 500-16,384 for st1 and sc1. If you specify a snapshot, the volume size must
-	// be equal to or larger than the snapshot size.
+	// This can be a number from 1-1,024 for standard, 4-16,384 for io1, 1-16,384
+	// for gp2, and 500-16,384 for st1 and sc1. If you specify a snapshot, the volume
+	// size must be equal to or larger than the snapshot size.
 	//
 	// Default: If you create a volume from a snapshot and you don't specify a volume
 	// size, the default is the snapshot size.
@@ -611,7 +630,8 @@ func (s InstanceMonitoring) String() string {
 //
 // The instances distribution specifies the distribution of On-Demand Instances
 // and Spot Instances, the maximum price to pay for Spot Instances, and how
-// the Auto Scaling group allocates instance types.
+// the Auto Scaling group allocates instance types to fulfill On-Demand and
+// Spot capacity.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstancesDistribution
 type InstancesDistribution struct {
 	_ struct{} `type:"structure"`
@@ -637,11 +657,10 @@ type InstancesDistribution struct {
 	OnDemandBaseCapacity *int64 `type:"integer"`
 
 	// Controls the percentages of On-Demand Instances and Spot Instances for your
-	// additional capacity beyond OnDemandBaseCapacity.
+	// additional capacity beyond OnDemandBaseCapacity. The range is 0–100.
 	//
-	// The range is 0–100. The default value is 100. If you leave this parameter
-	// set to 100, the percentages are 100% for On-Demand Instances and 0% for Spot
-	// Instances.
+	// The default value is 100. If you leave this parameter set to 100, the percentages
+	// are 100% for On-Demand Instances and 0% for Spot Instances.
 	OnDemandPercentageAboveBaseCapacity *int64 `type:"integer"`
 
 	// Indicates how to allocate Spot capacity across Spot pools.
@@ -653,9 +672,9 @@ type InstancesDistribution struct {
 
 	// The number of Spot pools to use to allocate your Spot capacity. The Spot
 	// pools are determined from the different instance types in the Overrides array
-	// of LaunchTemplate.
+	// of LaunchTemplate. The range is 1–20.
 	//
-	// The range is 1–20 and the default is 2.
+	// The default value is 2.
 	SpotInstancePools *int64 `type:"integer"`
 
 	// The maximum price per unit hour that you are willing to pay for a Spot Instance.
@@ -778,9 +797,8 @@ type LaunchTemplate struct {
 	LaunchTemplateSpecification *LaunchTemplateSpecification `type:"structure"`
 
 	// Any parameters that you specify override the same parameters in the launch
-	// template. Currently, the only supported override is instance type.
-	//
-	// You must specify between 2 and 20 overrides.
+	// template. Currently, the only supported override is instance type. You must
+	// specify between 2 and 20 overrides.
 	Overrides []LaunchTemplateOverrides `type:"list"`
 }
 
@@ -1226,28 +1244,28 @@ func (s MetricGranularityType) String() string {
 
 // Describes a mixed instances policy for an Auto Scaling group. With mixed
 // instances, your Auto Scaling group can provision a combination of On-Demand
-// Instances and Spot Instances across multiple instance types. Used in combination
-// with CreateAutoScalingGroup. For more information, see Auto Scaling Groups
-// with Multiple Instance Types and Purchase Options (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
+// Instances and Spot Instances across multiple instance types. For more information,
+// see Auto Scaling Groups with Multiple Instance Types and Purchase Options
+// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 //
-// When you create your Auto Scaling group, you can specify a launch configuration
-// or template as a parameter for the top-level object, or you can specify a
-// mixed instances policy, but not both at the same time.
+// You can create a mixed instances policy for a new Auto Scaling group (CreateAutoScalingGroup),
+// or you can create it for an existing group by updating the group (UpdateAutoScalingGroup)
+// to specify MixedInstancesPolicy as the top-level parameter instead of a launch
+// configuration or template.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/MixedInstancesPolicy
 type MixedInstancesPolicy struct {
 	_ struct{} `type:"structure"`
 
 	// The instances distribution to use.
 	//
-	// If you leave this parameter unspecified when creating the group, the default
-	// values are used.
+	// If you leave this parameter unspecified when creating a mixed instances policy,
+	// the default values are used.
 	InstancesDistribution *InstancesDistribution `type:"structure"`
 
-	// The launch template and overrides.
+	// The launch template and instance types (overrides).
 	//
-	// This parameter is required when creating an Auto Scaling group with a mixed
-	// instances policy, but is not required when updating the group.
+	// This parameter must be specified when creating a mixed instances policy.
 	LaunchTemplate *LaunchTemplate `type:"structure"`
 }
 
@@ -1326,7 +1344,7 @@ type PredefinedMetricSpecification struct {
 	//    interfaces by the Auto Scaling group.
 	//
 	//    * ALBRequestCountPerTarget - Number of requests completed per target in
-	//    an Application Load Balancer or a Network Load Balancer target group.
+	//    an Application Load Balancer target group.
 	//
 	// For predefined metric types ASGAverageCPUUtilization, ASGAverageNetworkIn,
 	// and ASGAverageNetworkOut, the parameter must not be specified as the resource
@@ -1438,7 +1456,7 @@ type ScalingPolicy struct {
 	// The name of the scaling policy.
 	PolicyName *string `min:"1" type:"string"`
 
-	// The policy type. The valid values are SimpleScaling and StepScaling.
+	// The policy type. The valid values are SimpleScaling, StepScaling, and TargetTrackingScaling.
 	PolicyType *string `min:"1" type:"string"`
 
 	// The amount by which to scale, based on the specified adjustment type. A positive
@@ -1470,16 +1488,20 @@ type ScheduledUpdateGroupAction struct {
 	// The number of instances you prefer to maintain in the group.
 	DesiredCapacity *int64 `type:"integer"`
 
-	// The date and time that the action is scheduled to end.
+	// The date and time in UTC for the recurring schedule to end. For example,
+	// "2019-06-01T00:00:00Z".
 	EndTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
-	// The maximum size of the group.
+	// The maximum number of instances in the Auto Scaling group.
 	MaxSize *int64 `type:"integer"`
 
-	// The minimum size of the group.
+	// The minimum number of instances in the Auto Scaling group.
 	MinSize *int64 `type:"integer"`
 
-	// The recurring schedule for the action.
+	// The recurring schedule for the action, in Unix cron syntax format.
+	//
+	// When StartTime and EndTime are specified with Recurrence, they form the boundaries
+	// of when the recurring action starts and stops.
 	Recurrence *string `min:"1" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the scheduled action.
@@ -1488,10 +1510,7 @@ type ScheduledUpdateGroupAction struct {
 	// The name of the scheduled action.
 	ScheduledActionName *string `min:"1" type:"string"`
 
-	// The date and time that the action is scheduled to begin.
-	//
-	// When StartTime and EndTime are specified with Recurrence, they form the boundaries
-	// of when the recurring action starts and stops.
+	// The date and time in UTC for this action to start. For example, "2019-06-01T00:00:00Z".
 	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// This parameter is deprecated.
@@ -1515,20 +1534,23 @@ type ScheduledUpdateGroupActionRequest struct {
 	// The number of EC2 instances that should be running in the group.
 	DesiredCapacity *int64 `type:"integer"`
 
-	// The time for the recurring schedule to end. Amazon EC2 Auto Scaling does
-	// not perform the action after this time.
+	// The date and time for the recurring schedule to end. Amazon EC2 Auto Scaling
+	// does not perform the action after this time.
 	EndTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
-	// The maximum size of the group.
+	// The maximum number of instances in the Auto Scaling group.
 	MaxSize *int64 `type:"integer"`
 
-	// The minimum size of the group.
+	// The minimum number of instances in the Auto Scaling group.
 	MinSize *int64 `type:"integer"`
 
 	// The recurring schedule for the action, in Unix cron syntax format. This format
 	// consists of five fields separated by white spaces: [Minute] [Hour] [Day_of_Month]
 	// [Month_of_Year] [Day_of_Week]. The value must be in quotes (for example,
 	// "30 0 1 1,6,12 *"). For more information about this format, see Crontab (http://crontab.org).
+	//
+	// When StartTime and EndTime are specified with Recurrence, they form the boundaries
+	// of when the recurring action starts and stops.
 	Recurrence *string `min:"1" type:"string"`
 
 	// The name of the scaling action.
@@ -1536,8 +1558,8 @@ type ScheduledUpdateGroupActionRequest struct {
 	// ScheduledActionName is a required field
 	ScheduledActionName *string `min:"1" type:"string" required:"true"`
 
-	// The time for the action to start, in YYYY-MM-DDThh:mm:ssZ format in UTC/GMT
-	// only and in quotes (for example, "2019-06-01T00:00:00Z").
+	// The date and time for the action to start, in YYYY-MM-DDThh:mm:ssZ format
+	// in UTC/GMT only and in quotes (for example, "2019-06-01T00:00:00Z").
 	//
 	// If you specify Recurrence and StartTime, Amazon EC2 Auto Scaling performs
 	// the action at this time, and then performs the action based on the specified
@@ -1746,17 +1768,17 @@ func (s TagDescription) String() string {
 type TargetTrackingConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// A customized metric. You can specify either a predefined metric or a customized
+	// A customized metric. You must specify either a predefined metric or a customized
 	// metric.
 	CustomizedMetricSpecification *CustomizedMetricSpecification `type:"structure"`
 
 	// Indicates whether scaling in by the target tracking scaling policy is disabled.
 	// If scaling in is disabled, the target tracking scaling policy doesn't remove
 	// instances from the Auto Scaling group. Otherwise, the target tracking scaling
-	// policy can remove instances from the Auto Scaling group. The default is disabled.
+	// policy can remove instances from the Auto Scaling group. The default is false.
 	DisableScaleIn *bool `type:"boolean"`
 
-	// A predefined metric. You can specify either a predefined metric or a customized
+	// A predefined metric. You must specify either a predefined metric or a customized
 	// metric.
 	PredefinedMetricSpecification *PredefinedMetricSpecification `type:"structure"`
 

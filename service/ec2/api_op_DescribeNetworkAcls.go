@@ -124,7 +124,7 @@ const opDescribeNetworkAcls = "DescribeNetworkAcls"
 //
 // Describes one or more of your network ACLs.
 //
-// For more information, see Network ACLs (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html)
+// For more information, see Network ACLs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html)
 // in the Amazon Virtual Private Cloud User Guide.
 //
 //    // Example sending a request using DescribeNetworkAclsRequest.

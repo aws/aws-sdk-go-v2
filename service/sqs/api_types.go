@@ -211,7 +211,7 @@ type Message struct {
 	MD5OfMessageAttributes *string `type:"string"`
 
 	// Each message attribute consists of a Name, Type, and Value. For more information,
-	// see Amazon SQS Message Attributes (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html)
+	// see Amazon SQS Message Attributes (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html)
 	// in the Amazon Simple Queue Service Developer Guide.
 	MessageAttributes map[string]MessageAttributeValue `locationName:"MessageAttribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
 
@@ -254,7 +254,7 @@ type MessageAttributeValue struct {
 	// Binary. For the Number data type, you must use StringValue.
 	//
 	// You can also append custom labels. For more information, see Amazon SQS Message
-	// Attributes (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html)
+	// Attributes (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html)
 	// in the Amazon Simple Queue Service Developer Guide.
 	//
 	// DataType is a required field
@@ -312,7 +312,7 @@ type SendMessageBatchRequestEntry struct {
 	Id *string `type:"string" required:"true"`
 
 	// Each message attribute consists of a Name, Type, and Value. For more information,
-	// see Amazon SQS Message Attributes (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html)
+	// see Amazon SQS Message Attributes (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html)
 	// in the Amazon Simple Queue Service Developer Guide.
 	MessageAttributes map[string]MessageAttributeValue `locationName:"MessageAttribute" locationNameKey:"Name" locationNameValue:"Value" type:"map" flattened:"true"`
 
@@ -326,7 +326,7 @@ type SendMessageBatchRequestEntry struct {
 	// The token used for deduplication of messages within a 5-minute minimum deduplication
 	// interval. If a message with a particular MessageDeduplicationId is sent successfully,
 	// subsequent messages with the same MessageDeduplicationId are accepted successfully
-	// but aren't delivered. For more information, see Exactly-Once Processing (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing)
+	// but aren't delivered. For more information, see Exactly-Once Processing (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing)
 	// in the Amazon Simple Queue Service Developer Guide.
 	//
 	//    * Every message must have a unique MessageDeduplicationId, You may provide
@@ -361,7 +361,7 @@ type SendMessageBatchRequestEntry struct {
 	// can contain alphanumeric characters (a-z, A-Z, 0-9) and punctuation (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~).
 	//
 	// For best practices of using MessageDeduplicationId, see Using the MessageDeduplicationId
-	// Property (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
+	// Property (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
 	// in the Amazon Simple Queue Service Developer Guide.
 	MessageDeduplicationId *string `type:"string"`
 
@@ -386,7 +386,7 @@ type SendMessageBatchRequestEntry struct {
 	// characters and punctuation (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~).
 	//
 	// For best practices of using MessageGroupId, see Using the MessageGroupId
-	// Property (http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html)
+	// Property (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html)
 	// in the Amazon Simple Queue Service Developer Guide.
 	//
 	// MessageGroupId is required for FIFO queues. You can't use it for Standard

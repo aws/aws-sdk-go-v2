@@ -29,6 +29,10 @@ type FilterLogEventsInput struct {
 	// in a single response. If the value is false, all the matched log events in
 	// the first log stream are searched first, then those in the next log stream,
 	// and so on. The default is false.
+	//
+	// IMPORTANT: Starting on June 17, 2019, this parameter will be ignored and
+	// the value will be assumed to be true. The response from this operation will
+	// always interleave events from multiple log streams within a log group.
 	Interleaved *bool `locationName:"interleaved" type:"boolean"`
 
 	// The maximum number of events to return. The default is 10,000 events.

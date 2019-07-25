@@ -14,16 +14,16 @@ import (
 type GetEnabledStandardsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates the maximum number of items that you want in the response.
+	// The maximum number of results to return in the response.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// Paginates results. Set the value of this parameter to NULL on your first
-	// call to the GetEnabledStandards operation. For subsequent calls to the operation,
+	// Paginates results. On your first call to the GetEnabledStandards operation,
+	// set the value of this parameter to NULL. For subsequent calls to the operation,
 	// fill nextToken in the request with the value of nextToken from the previous
 	// response to continue listing data.
 	NextToken *string `type:"string"`
 
-	// The list of standards subscription ARNS that you want to list and describe.
+	// A list of the standards subscription ARNs for the standards to retrieve.
 	StandardsSubscriptionArns []string `min:"1" type:"list"`
 }
 
@@ -86,7 +86,8 @@ type GetEnabledStandardsOutput struct {
 	// The token that is required for pagination.
 	NextToken *string `type:"string"`
 
-	// The standards subscription details returned by the operation.
+	// A list of StandardsSubscriptions objects that include information about the
+	// enabled standards.
 	StandardsSubscriptions []StandardsSubscription `type:"list"`
 }
 
@@ -123,7 +124,7 @@ const opGetEnabledStandards = "GetEnabledStandards"
 // GetEnabledStandardsRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Lists and describes enabled standards.
+// Returns a list of the standards that are currently enabled.
 //
 //    // Example sending a request using GetEnabledStandardsRequest.
 //    req := client.GetEnabledStandardsRequest(params)

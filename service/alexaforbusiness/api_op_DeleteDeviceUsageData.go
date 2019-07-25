@@ -62,6 +62,11 @@ const opDeleteDeviceUsageData = "DeleteDeviceUsageData"
 // Alexa For Business.
 //
 // When this action is called for a specified shared device, it allows authorized
+// users to delete the device's entire previous history of voice input data
+// and associated response data. This action can be called once every 24 hours
+// for a specific shared device.
+//
+// When this action is called for a specified shared device, it allows authorized
 // users to delete the device's entire previous history of voice input data.
 // This action can be called once every 24 hours for a specific shared device.
 //

@@ -20,6 +20,42 @@ func (enum ChangeTypeEnum) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ConflictDetailLevelTypeEnum string
+
+// Enum values for ConflictDetailLevelTypeEnum
+const (
+	ConflictDetailLevelTypeEnumFileLevel ConflictDetailLevelTypeEnum = "FILE_LEVEL"
+	ConflictDetailLevelTypeEnumLineLevel ConflictDetailLevelTypeEnum = "LINE_LEVEL"
+)
+
+func (enum ConflictDetailLevelTypeEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConflictDetailLevelTypeEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ConflictResolutionStrategyTypeEnum string
+
+// Enum values for ConflictResolutionStrategyTypeEnum
+const (
+	ConflictResolutionStrategyTypeEnumNone              ConflictResolutionStrategyTypeEnum = "NONE"
+	ConflictResolutionStrategyTypeEnumAcceptSource      ConflictResolutionStrategyTypeEnum = "ACCEPT_SOURCE"
+	ConflictResolutionStrategyTypeEnumAcceptDestination ConflictResolutionStrategyTypeEnum = "ACCEPT_DESTINATION"
+	ConflictResolutionStrategyTypeEnumAutomerge         ConflictResolutionStrategyTypeEnum = "AUTOMERGE"
+)
+
+func (enum ConflictResolutionStrategyTypeEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConflictResolutionStrategyTypeEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FileModeTypeEnum string
 
 // Enum values for FileModeTypeEnum
@@ -43,6 +79,8 @@ type MergeOptionTypeEnum string
 // Enum values for MergeOptionTypeEnum
 const (
 	MergeOptionTypeEnumFastForwardMerge MergeOptionTypeEnum = "FAST_FORWARD_MERGE"
+	MergeOptionTypeEnumSquashMerge      MergeOptionTypeEnum = "SQUASH_MERGE"
+	MergeOptionTypeEnumThreeWayMerge    MergeOptionTypeEnum = "THREE_WAY_MERGE"
 )
 
 func (enum MergeOptionTypeEnum) MarshalValue() (string, error) {
@@ -50,6 +88,25 @@ func (enum MergeOptionTypeEnum) MarshalValue() (string, error) {
 }
 
 func (enum MergeOptionTypeEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ObjectTypeEnum string
+
+// Enum values for ObjectTypeEnum
+const (
+	ObjectTypeEnumFile         ObjectTypeEnum = "FILE"
+	ObjectTypeEnumDirectory    ObjectTypeEnum = "DIRECTORY"
+	ObjectTypeEnumGitLink      ObjectTypeEnum = "GIT_LINK"
+	ObjectTypeEnumSymbolicLink ObjectTypeEnum = "SYMBOLIC_LINK"
+)
+
+func (enum ObjectTypeEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ObjectTypeEnum) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -120,6 +177,25 @@ func (enum RelativeFileVersionEnum) MarshalValue() (string, error) {
 }
 
 func (enum RelativeFileVersionEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ReplacementTypeEnum string
+
+// Enum values for ReplacementTypeEnum
+const (
+	ReplacementTypeEnumKeepBase        ReplacementTypeEnum = "KEEP_BASE"
+	ReplacementTypeEnumKeepSource      ReplacementTypeEnum = "KEEP_SOURCE"
+	ReplacementTypeEnumKeepDestination ReplacementTypeEnum = "KEEP_DESTINATION"
+	ReplacementTypeEnumUseNewContent   ReplacementTypeEnum = "USE_NEW_CONTENT"
+)
+
+func (enum ReplacementTypeEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReplacementTypeEnum) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

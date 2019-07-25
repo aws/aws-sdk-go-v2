@@ -67,7 +67,8 @@ func (s GetUserEndpointsInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetUserEndpointsOutput struct {
 	_ struct{} `type:"structure" payload:"EndpointsResponse"`
 
-	// List of endpoints
+	// Provides information about all the endpoints that are associated with a user
+	// ID.
 	//
 	// EndpointsResponse is a required field
 	EndpointsResponse *EndpointsResponse `type:"structure" required:"true"`
@@ -94,7 +95,8 @@ const opGetUserEndpoints = "GetUserEndpoints"
 // GetUserEndpointsRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Returns information about the endpoints that are associated with a User ID.
+// Retrieves information about all the endpoints that are associated with a
+// specific user ID.
 //
 //    // Example sending a request using GetUserEndpointsRequest.
 //    req := client.GetUserEndpointsRequest(params)

@@ -70,10 +70,12 @@ type FileSystemLifecycle string
 
 // Enum values for FileSystemLifecycle
 const (
-	FileSystemLifecycleAvailable FileSystemLifecycle = "AVAILABLE"
-	FileSystemLifecycleCreating  FileSystemLifecycle = "CREATING"
-	FileSystemLifecycleFailed    FileSystemLifecycle = "FAILED"
-	FileSystemLifecycleDeleting  FileSystemLifecycle = "DELETING"
+	FileSystemLifecycleAvailable     FileSystemLifecycle = "AVAILABLE"
+	FileSystemLifecycleCreating      FileSystemLifecycle = "CREATING"
+	FileSystemLifecycleFailed        FileSystemLifecycle = "FAILED"
+	FileSystemLifecycleDeleting      FileSystemLifecycle = "DELETING"
+	FileSystemLifecycleMisconfigured FileSystemLifecycle = "MISCONFIGURED"
+	FileSystemLifecycleUpdating      FileSystemLifecycle = "UPDATING"
 )
 
 func (enum FileSystemLifecycle) MarshalValue() (string, error) {

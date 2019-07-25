@@ -28,6 +28,7 @@ const (
 	DeploymentJobErrorCodeEnvironmentSetupError               DeploymentJobErrorCode = "EnvironmentSetupError"
 	DeploymentJobErrorCodeEtagMismatch                        DeploymentJobErrorCode = "EtagMismatch"
 	DeploymentJobErrorCodeFailureThresholdBreached            DeploymentJobErrorCode = "FailureThresholdBreached"
+	DeploymentJobErrorCodeRobotDeploymentAborted              DeploymentJobErrorCode = "RobotDeploymentAborted"
 	DeploymentJobErrorCodeRobotDeploymentNoResponse           DeploymentJobErrorCode = "RobotDeploymentNoResponse"
 	DeploymentJobErrorCodeRobotAgentConnectionTimeout         DeploymentJobErrorCode = "RobotAgentConnectionTimeout"
 	DeploymentJobErrorCodeGreengrassDeploymentFailed          DeploymentJobErrorCode = "GreengrassDeploymentFailed"
@@ -147,6 +148,7 @@ type RobotSoftwareSuiteVersionType string
 // Enum values for RobotSoftwareSuiteVersionType
 const (
 	RobotSoftwareSuiteVersionTypeKinetic RobotSoftwareSuiteVersionType = "Kinetic"
+	RobotSoftwareSuiteVersionTypeMelodic RobotSoftwareSuiteVersionType = "Melodic"
 )
 
 func (enum RobotSoftwareSuiteVersionType) MarshalValue() (string, error) {

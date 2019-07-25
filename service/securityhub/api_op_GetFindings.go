@@ -14,19 +14,20 @@ import (
 type GetFindingsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A collection of attributes that is use for querying findings.
+	// The findings attributes used to define a condition to filter the findings
+	// returned.
 	Filters *AwsSecurityFindingFilters `type:"structure"`
 
-	// Indicates the maximum number of items that you want in the response.
+	// The maximum number of findings to return.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// Paginates results. Set the value of this parameter to NULL on your first
-	// call to the GetFindings operation. For subsequent calls to the operation,
-	// fill nextToken in the request with the value of nextToken from the previous
-	// response to continue listing data.
+	// Paginates results. On your first call to the GetFindings operation, set the
+	// value of this parameter to NULL. For subsequent calls to the operation, fill
+	// nextToken in the request with the value of nextToken from the previous response
+	// to continue listing data.
 	NextToken *string `type:"string"`
 
-	// A collection of attributes used for sorting findings.
+	// Findings attributes used to sort the list of findings returned.
 	SortCriteria []SortCriterion `type:"list"`
 }
 
@@ -89,7 +90,7 @@ func (s GetFindingsInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetFindingsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Findings details returned by the operation.
+	// The findings that matched the filters specified in the request.
 	//
 	// Findings is a required field
 	Findings []AwsSecurityFinding `type:"list" required:"true"`
@@ -131,8 +132,7 @@ const opGetFindings = "GetFindings"
 // GetFindingsRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Lists and describes Security Hub-aggregated findings that are specified by
-// filter attributes.
+// Returns a list of findings that match the specified criteria.
 //
 //    // Example sending a request using GetFindingsRequest.
 //    req := client.GetFindingsRequest(params)

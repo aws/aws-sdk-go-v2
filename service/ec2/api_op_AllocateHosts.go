@@ -28,9 +28,16 @@ type AllocateHostsInput struct {
 	AvailabilityZone *string `locationName:"availabilityZone" type:"string" required:"true"`
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string `locationName:"clientToken" type:"string"`
+
+	// Indicates whether to enable or disable host recovery for the Dedicated Host.
+	// Host recovery is disabled by default. For more information, see Host Recovery
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-recovery.html)
+	// in the Amazon Elastic Compute Cloud User Guide.
+	//
+	// Default: off
+	HostRecovery HostRecovery `type:"string" enum:"true"`
 
 	// Specifies the instance type for which to configure your Dedicated Hosts.
 	// When you specify the instance type, that is the only instance type that you

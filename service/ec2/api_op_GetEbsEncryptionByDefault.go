@@ -29,7 +29,7 @@ func (s GetEbsEncryptionByDefaultInput) String() string {
 type GetEbsEncryptionByDefaultOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates whether default encryption for EBS volumes is enabled or disabled.
+	// Indicates whether encryption by default is enabled.
 	EbsEncryptionByDefault *bool `locationName:"ebsEncryptionByDefault" type:"boolean"`
 }
 
@@ -43,8 +43,11 @@ const opGetEbsEncryptionByDefault = "GetEbsEncryptionByDefault"
 // GetEbsEncryptionByDefaultRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Describes whether default EBS encryption is enabled for your account in the
-// current region.
+// Describes whether EBS encryption by default is enabled for your account in
+// the current Region.
+//
+// For more information, see Amazon EBS Encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)
+// in the Amazon Elastic Compute Cloud User Guide.
 //
 //    // Example sending a request using GetEbsEncryptionByDefaultRequest.
 //    req := client.GetEbsEncryptionByDefaultRequest(params)

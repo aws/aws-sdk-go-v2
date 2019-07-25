@@ -127,13 +127,19 @@ type ClientAPI interface {
 
 	ListMembersRequest(*guardduty.ListMembersInput) guardduty.ListMembersRequest
 
+	ListTagsForResourceRequest(*guardduty.ListTagsForResourceInput) guardduty.ListTagsForResourceRequest
+
 	ListThreatIntelSetsRequest(*guardduty.ListThreatIntelSetsInput) guardduty.ListThreatIntelSetsRequest
 
 	StartMonitoringMembersRequest(*guardduty.StartMonitoringMembersInput) guardduty.StartMonitoringMembersRequest
 
 	StopMonitoringMembersRequest(*guardduty.StopMonitoringMembersInput) guardduty.StopMonitoringMembersRequest
 
+	TagResourceRequest(*guardduty.TagResourceInput) guardduty.TagResourceRequest
+
 	UnarchiveFindingsRequest(*guardduty.UnarchiveFindingsInput) guardduty.UnarchiveFindingsRequest
+
+	UntagResourceRequest(*guardduty.UntagResourceInput) guardduty.UntagResourceRequest
 
 	UpdateDetectorRequest(*guardduty.UpdateDetectorInput) guardduty.UpdateDetectorRequest
 

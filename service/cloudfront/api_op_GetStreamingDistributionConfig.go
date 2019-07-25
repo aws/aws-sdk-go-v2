@@ -11,7 +11,7 @@ import (
 )
 
 // To request to get a streaming distribution configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetStreamingDistributionConfigRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetStreamingDistributionConfigRequest
 type GetStreamingDistributionConfigInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +53,7 @@ func (s GetStreamingDistributionConfigInput) MarshalFields(e protocol.FieldEncod
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetStreamingDistributionConfigResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetStreamingDistributionConfigResult
 type GetStreamingDistributionConfigOutput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistributionConfig"`
 
@@ -86,7 +86,7 @@ func (s GetStreamingDistributionConfigOutput) MarshalFields(e protocol.FieldEnco
 	return nil
 }
 
-const opGetStreamingDistributionConfig = "GetStreamingDistributionConfig2018_11_05"
+const opGetStreamingDistributionConfig = "GetStreamingDistributionConfig2019_03_26"
 
 // GetStreamingDistributionConfigRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -100,12 +100,12 @@ const opGetStreamingDistributionConfig = "GetStreamingDistributionConfig2018_11_
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetStreamingDistributionConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetStreamingDistributionConfig
 func (c *Client) GetStreamingDistributionConfigRequest(input *GetStreamingDistributionConfigInput) GetStreamingDistributionConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetStreamingDistributionConfig,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2018-11-05/streaming-distribution/{Id}/config",
+		HTTPPath:   "/2019-03-26/streaming-distribution/{Id}/config",
 	}
 
 	if input == nil {

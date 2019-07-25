@@ -132,3 +132,42 @@ func (s *CorsRule) Validate() error {
 	}
 	return nil
 }
+
+// A collection of tags associated with a container. Each tag consists of a
+// key:value pair, which can be anything you define. Typically, the tag key
+// represents a category (such as "environment") and the tag value represents
+// a specific value within that category (such as "test," "development," or
+// "production"). You can add up to 50 tags to each container. For more information
+// about tagging, including naming and usage conventions, see Tagging Resources
+// in MediaStore (https://aws.amazon.com/documentation/mediastore/tagging).
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/Tag
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// Part of the key:value pair that defines a tag. You can use a tag key to describe
+	// a category of information, such as "customer." Tag keys are case-sensitive.
+	Key *string `min:"1" type:"string"`
+
+	// Part of the key:value pair that defines a tag. You can use a tag value to
+	// describe a specific value within a category, such as "companyA" or "companyB."
+	// Tag values are case-sensitive.
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}

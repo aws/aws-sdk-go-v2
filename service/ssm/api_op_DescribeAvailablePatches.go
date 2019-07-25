@@ -72,7 +72,7 @@ const opDescribeAvailablePatches = "DescribeAvailablePatches"
 // DescribeAvailablePatchesRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Lists all patches that could possibly be included in a patch baseline.
+// Lists all patches eligible to be included in a patch baseline.
 //
 //    // Example sending a request using DescribeAvailablePatchesRequest.
 //    req := client.DescribeAvailablePatchesRequest(params)

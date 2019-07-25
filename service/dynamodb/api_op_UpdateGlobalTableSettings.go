@@ -27,7 +27,7 @@ type UpdateGlobalTableSettingsInput struct {
 	// GlobalTableName is a required field
 	GlobalTableName *string `min:"3" type:"string" required:"true"`
 
-	// AutoScaling settings for managing provisioned write capacity for the global
+	// Auto scaling settings for managing provisioned write capacity for the global
 	// table.
 	GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate *AutoScalingSettingsUpdate `type:"structure"`
 
@@ -35,7 +35,7 @@ type UpdateGlobalTableSettingsInput struct {
 	// a ThrottlingException.
 	GlobalTableProvisionedWriteCapacityUnits *int64 `min:"1" type:"long"`
 
-	// Represents the settings for a global table in a region that will be modified.
+	// Represents the settings for a global table in a Region that will be modified.
 	ReplicaSettingsUpdate []ReplicaSettingsUpdate `min:"1" type:"list"`
 }
 
@@ -96,7 +96,7 @@ type UpdateGlobalTableSettingsOutput struct {
 	// The name of the global table.
 	GlobalTableName *string `min:"3" type:"string"`
 
-	// The region specific settings for the global table.
+	// The Region-specific settings for the global table.
 	ReplicaSettings []ReplicaSettingsDescription `type:"list"`
 }
 

@@ -38,7 +38,7 @@ const opSendInvitation = "SendInvitation"
 // Alexa For Business.
 //
 // Sends an enrollment invitation email with a URL to a user. The URL is valid
-// for 72 hours or until you call this operation again, whichever comes first.
+// for 30 days or until you call this operation again, whichever comes first.
 //
 //    // Example sending a request using SendInvitationRequest.
 //    req := client.SendInvitationRequest(params)

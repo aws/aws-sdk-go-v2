@@ -13,6 +13,9 @@ import (
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHubRequest
 type EnableSecurityHubInput struct {
 	_ struct{} `type:"structure"`
+
+	// The tags to add to the Hub resource when you enable Security Hub.
+	Tags map[string]string `min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -20,10 +23,35 @@ func (s EnableSecurityHubInput) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *EnableSecurityHubInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "EnableSecurityHubInput"}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s EnableSecurityHubInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	return nil
 }
 
@@ -47,7 +75,11 @@ const opEnableSecurityHub = "EnableSecurityHub"
 // EnableSecurityHubRequest returns a request value for making API operation for
 // AWS SecurityHub.
 //
-// Enables the AWS Security Hub service.
+// Enables Security Hub for your account in the current Region or the Region
+// you specify in the request. When you enable Security Hub, you grant to Security
+// Hub the permissions necessary to gather findings from AWS Config, Amazon
+// GuardDuty, Amazon Inspector, and Amazon Macie. To learn more, see Setting
+// Up AWS Security Hub (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html).
 //
 //    // Example sending a request using EnableSecurityHubRequest.
 //    req := client.EnableSecurityHubRequest(params)

@@ -107,6 +107,9 @@ type DeleteLagOutput struct {
 
 	// The AWS Region where the connection is located.
 	Region *string `locationName:"region" type:"string"`
+
+	// Any tags assigned to link aggregation group (LAG).
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 }
 
 // String returns the string representation

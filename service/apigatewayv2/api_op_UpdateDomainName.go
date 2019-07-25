@@ -79,6 +79,10 @@ type UpdateDomainNameOutput struct {
 
 	// The domain name configurations.
 	DomainNameConfigurations []DomainNameConfiguration `locationName:"domainNameConfigurations" type:"list"`
+
+	// A key value pair of string with key length between[1-128] and value length
+	// between[1-256]
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -110,6 +114,18 @@ func (s UpdateDomainNameOutput) MarshalFields(e protocol.FieldEncoder) error {
 			ls0.ListAddFields(v1)
 		}
 		ls0.End()
+
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
 
 	}
 	return nil

@@ -15,7 +15,7 @@ import (
 type CreateMatchmakingConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
-	// Flag that determines whether or not a match that was created with this configuration
+	// Flag that determines whether a match that was created with this configuration
 	// must be accepted by the matched players. To require acceptance, set to TRUE.
 	//
 	// AcceptanceRequired is a required field
@@ -32,7 +32,15 @@ type CreateMatchmakingConfigurationInput struct {
 	// for the match.
 	AdditionalPlayerCount *int64 `type:"integer"`
 
-	// Information to attached to all events related to the matchmaking configuration.
+	// Method used to backfill game sessions created with this matchmaking configuration.
+	// Specify MANUAL when your game manages backfill requests manually or does
+	// not use the match backfill feature. Specify AUTOMATIC to have GameLift create
+	// a StartMatchBackfill request whenever a game session has one or more open
+	// slots. Learn more about manual and automatic backfill in Backfill Existing
+	// Games with FlexMatch (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html).
+	BackfillMode BackfillMode `type:"string" enum:"true"`
+
+	// Information to be added to all events related to this matchmaking configuration.
 	CustomEventData *string `type:"string"`
 
 	// Meaningful description of the matchmaking configuration.
@@ -54,7 +62,7 @@ type CreateMatchmakingConfigurationInput struct {
 
 	// Amazon Resource Name (ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
 	// that is assigned to a game session queue and uniquely identifies it. Format
-	// is arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912.
+	// is arn:aws:gamelift:<region>:<aws account>:gamesessionqueue/<queue name>.
 	// These queues are used when placing game sessions for matches that are created
 	// with this matchmaking configuration. Queues can be located in any region.
 	//
@@ -65,13 +73,14 @@ type CreateMatchmakingConfigurationInput struct {
 	// the configuration associated with a matchmaking request or ticket.
 	//
 	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
+	Name *string `type:"string" required:"true"`
 
 	// SNS topic ARN that is set up to receive matchmaking notifications.
 	NotificationTarget *string `type:"string"`
 
 	// Maximum duration, in seconds, that a matchmaking ticket can remain in process
-	// before timing out. Requests that time out can be resubmitted as needed.
+	// before timing out. Requests that fail due to timing out can be resubmitted
+	// as needed.
 	//
 	// RequestTimeoutSeconds is a required field
 	RequestTimeoutSeconds *int64 `min:"1" type:"integer" required:"true"`
@@ -81,7 +90,7 @@ type CreateMatchmakingConfigurationInput struct {
 	// same region.
 	//
 	// RuleSetName is a required field
-	RuleSetName *string `min:"1" type:"string" required:"true"`
+	RuleSetName *string `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -113,9 +122,6 @@ func (s *CreateMatchmakingConfigurationInput) Validate() error {
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
 
 	if s.RequestTimeoutSeconds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RequestTimeoutSeconds"))
@@ -126,9 +132,6 @@ func (s *CreateMatchmakingConfigurationInput) Validate() error {
 
 	if s.RuleSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
-	}
-	if s.RuleSetName != nil && len(*s.RuleSetName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RuleSetName", 1))
 	}
 	if s.GameProperties != nil {
 		for i, v := range s.GameProperties {
@@ -176,21 +179,21 @@ const opCreateMatchmakingConfiguration = "CreateMatchmakingConfiguration"
 // game session for the match; and the maximum time allowed for a matchmaking
 // attempt.
 //
-// Player acceptance -- In each configuration, you have the option to require
-// that all players accept participation in a proposed match. To enable this
-// feature, set AcceptanceRequired to true and specify a time limit for player
-// acceptance. Players have the option to accept or reject a proposed match,
-// and a match does not move ahead to game session placement unless all matched
-// players accept.
+// There are two ways to track the progress of matchmaking tickets: (1) polling
+// ticket status with DescribeMatchmaking; or (2) receiving notifications with
+// Amazon Simple Notification Service (SNS). To use notifications, you first
+// need to set up an SNS topic to receive the notifications, and provide the
+// topic ARN in the matchmaking configuration. Since notifications promise only
+// "best effort" delivery, we recommend calling DescribeMatchmaking if no notifications
+// are received within 30 seconds.
 //
-// Matchmaking status notification -- There are two ways to track the progress
-// of matchmaking tickets: (1) polling ticket status with DescribeMatchmaking;
-// or (2) receiving notifications with Amazon Simple Notification Service (SNS).
-// To use notifications, you first need to set up an SNS topic to receive the
-// notifications, and provide the topic ARN in the matchmaking configuration
-// (see Setting up Notifications for Matchmaking (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html)).
-// Since notifications promise only "best effort" delivery, we recommend calling
-// DescribeMatchmaking if no notifications are received within 30 seconds.
+// Learn more
+//
+//  Design a FlexMatch Matchmaker (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-configuration.html)
+//
+//  Setting up Notifications for Matchmaking (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html)
+//
+// Related operations
 //
 //    * CreateMatchmakingConfiguration
 //

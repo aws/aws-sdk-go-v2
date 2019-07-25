@@ -40,7 +40,7 @@ type ModifyReplicationGroupInput struct {
 	//
 	//    * Redis versions earlier than 2.8.6.
 	//
-	//    * Redis (cluster mode disabled): T1 and T2 cache node types.
+	//    * Redis (cluster mode disabled): T1 node types.
 	//
 	//    * Redis (cluster mode enabled): T1 node types.
 	AutomaticFailoverEnabled *bool `type:"boolean"`
@@ -68,7 +68,7 @@ type ModifyReplicationGroupInput struct {
 	// replication group.
 	//
 	// Important: You can upgrade to a newer engine version (see Selecting a Cache
-	// Engine and Version (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement)),
+	// Engine and Version (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement)),
 	// but you cannot downgrade to an earlier engine version. If you want to use
 	// an earlier engine version, you must delete the existing replication group
 	// and create it anew with the earlier engine version.
@@ -200,11 +200,10 @@ const opModifyReplicationGroup = "ModifyReplicationGroup"
 // to change a cluster's node type or engine version. For more information,
 // see:
 //
-//    * Scaling for Amazon ElastiCache for Redis—Redis (cluster mode enabled)
-//    (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html)
+//    * Scaling for Amazon ElastiCache for Redis (cluster mode enabled) (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html)
 //    in the ElastiCache User Guide
 //
-//    * ModifyReplicationGroupShardConfiguration (http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html)
+//    * ModifyReplicationGroupShardConfiguration (https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html)
 //    in the ElastiCache API Reference
 //
 // This operation is valid for Redis only.

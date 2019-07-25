@@ -54,7 +54,8 @@ func (s DeleteBaiduChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteBaiduChannelOutput struct {
 	_ struct{} `type:"structure" payload:"BaiduChannelResponse"`
 
-	// Baidu Cloud Messaging channel definition
+	// Provides information about the status and settings of the Baidu (Baidu Cloud
+	// Push) channel for an application.
 	//
 	// BaiduChannelResponse is a required field
 	BaiduChannelResponse *BaiduChannelResponse `type:"structure" required:"true"`
@@ -81,7 +82,8 @@ const opDeleteBaiduChannel = "DeleteBaiduChannel"
 // DeleteBaiduChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Delete a BAIDU GCM channel
+// Disables the Baidu channel for an application and deletes any existing settings
+// for the channel.
 //
 //    // Example sending a request using DeleteBaiduChannelRequest.
 //    req := client.DeleteBaiduChannelRequest(params)

@@ -28,7 +28,7 @@ type ModifyEventSubscriptionInput struct {
 	// The type of AWS DMS resource that generates the events you want to subscribe
 	// to.
 	//
-	// Valid values: replication-instance | migration-task
+	// Valid values: replication-instance | replication-task
 	SourceType *string `type:"string"`
 
 	// The name of the AWS DMS event notification subscription to be modified.

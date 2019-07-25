@@ -2,7 +2,6 @@
 
 package guardduty
 
-// The status of detector.
 type DetectorStatus string
 
 // Enum values for DetectorStatus
@@ -20,7 +19,6 @@ func (enum DetectorStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Finding Feedback Value
 type Feedback string
 
 // Enum values for Feedback
@@ -38,7 +36,6 @@ func (enum Feedback) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The action associated with a filter.
 type FilterAction string
 
 // Enum values for FilterAction
@@ -56,7 +53,6 @@ func (enum FilterAction) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// A enum value that specifies how frequently customer got Finding updates published.
 type FindingPublishingFrequency string
 
 // Enum values for FindingPublishingFrequency
@@ -75,7 +71,6 @@ func (enum FindingPublishingFrequency) MarshalValueBuf(b []byte) ([]byte, error)
 	return append(b, enum...), nil
 }
 
-// The types of finding statistics.
 type FindingStatisticType string
 
 // Enum values for FindingStatisticType
@@ -92,7 +87,6 @@ func (enum FindingStatisticType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The format of the ipSet.
 type IpSetFormat string
 
 // Enum values for IpSetFormat
@@ -114,7 +108,6 @@ func (enum IpSetFormat) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The status of ipSet file uploaded.
 type IpSetStatus string
 
 // Enum values for IpSetStatus
@@ -154,7 +147,6 @@ func (enum OrderBy) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The format of the threatIntelSet.
 type ThreatIntelSetFormat string
 
 // Enum values for ThreatIntelSetFormat
@@ -176,7 +168,6 @@ func (enum ThreatIntelSetFormat) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The status of threatIntelSet file uploaded.
 type ThreatIntelSetStatus string
 
 // Enum values for ThreatIntelSetStatus

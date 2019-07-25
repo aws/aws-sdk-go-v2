@@ -18,7 +18,7 @@ type SetVaultNotificationsInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen),
-	// in which case Amazon Glacier uses the AWS account ID associated with the
+	// in which case Amazon S3 Glacier uses the AWS account ID associated with the
 	// credentials used to sign the request. If you use an account ID, do not include
 	// any hyphens ('-') in the ID.
 	//
@@ -106,7 +106,7 @@ const opSetVaultNotifications = "SetVaultNotifications"
 // To configure vault notifications, send a PUT request to the notification-configuration
 // subresource of the vault. The request should include a JSON document that
 // provides an Amazon SNS topic and specific events for which you want Amazon
-// Glacier to send notifications to the topic.
+// S3 Glacier to send notifications to the topic.
 //
 // Amazon SNS topics must grant permission to the vault to be allowed to publish
 // notifications to the topic. You can configure a vault to publish a notification
@@ -126,11 +126,11 @@ const opSetVaultNotifications = "SetVaultNotifications"
 // AWS Identity and Access Management (IAM) users don't have any permissions
 // by default. You must grant them explicit permission to perform specific actions.
 // For more information, see Access Control Using AWS Identity and Access Management
-// (IAM) (http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
+// (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html).
 //
 // For conceptual information and underlying REST API, see Configuring Vault
-// Notifications in Amazon Glacier (http://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html)
-// and Set Vault Notification Configuration (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-put.html)
+// Notifications in Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html)
+// and Set Vault Notification Configuration (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-put.html)
 // in the Amazon Glacier Developer Guide.
 //
 //    // Example sending a request using SetVaultNotificationsRequest.

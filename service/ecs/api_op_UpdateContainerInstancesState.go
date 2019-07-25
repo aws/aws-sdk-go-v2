@@ -24,6 +24,11 @@ type UpdateContainerInstancesStateInput struct {
 	ContainerInstances []string `locationName:"containerInstances" type:"list" required:"true"`
 
 	// The container instance state with which to update the container instance.
+	// The only valid values for this action are ACTIVE and DRAINING. A container
+	// instance can only be updated to DRAINING status once it has reached an ACTIVE
+	// state. If a container instance is in REGISTERING, DEREGISTERING, or REGISTRATION_FAILED
+	// state you can describe the container instance but will be unable to update
+	// the container instance state.
 	//
 	// Status is a required field
 	Status ContainerInstanceStatus `locationName:"status" type:"string" required:"true" enum:"true"`
@@ -74,9 +79,13 @@ const opUpdateContainerInstancesState = "UpdateContainerInstancesState"
 //
 // Modifies the status of an Amazon ECS container instance.
 //
-// You can change the status of a container instance to DRAINING to manually
-// remove an instance from a cluster, for example to perform system updates,
-// update the Docker daemon, or scale down the cluster size.
+// Once a container instance has reached an ACTIVE state, you can change the
+// status of a container instance to DRAINING to manually remove an instance
+// from a cluster, for example to perform system updates, update the Docker
+// daemon, or scale down the cluster size.
+//
+// A container instance cannot be changed to DRAINING until it has reached an
+// ACTIVE status. If the instance is in any other status, an error will be received.
 //
 // When you set a container instance to DRAINING, Amazon ECS prevents new tasks
 // from being scheduled for placement on the container instance and replacement
@@ -114,8 +123,9 @@ const opUpdateContainerInstancesState = "UpdateContainerInstancesState"
 // A container instance has completed draining when it has no more RUNNING tasks.
 // You can verify this using ListTasks.
 //
-// When you set a container instance to ACTIVE, the Amazon ECS scheduler can
-// begin scheduling tasks on the instance again.
+// When a container instance has been drained, you can set a container instance
+// to ACTIVE status and once it has reached that status the Amazon ECS scheduler
+// can begin scheduling tasks on the instance again.
 //
 //    // Example sending a request using UpdateContainerInstancesStateRequest.
 //    req := client.UpdateContainerInstancesStateRequest(params)

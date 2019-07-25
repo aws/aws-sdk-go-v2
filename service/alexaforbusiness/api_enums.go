@@ -361,6 +361,24 @@ func (enum NetworkSecurityType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type PhoneNumberType string
+
+// Enum values for PhoneNumberType
+const (
+	PhoneNumberTypeMobile PhoneNumberType = "MOBILE"
+	PhoneNumberTypeWork   PhoneNumberType = "WORK"
+	PhoneNumberTypeHome   PhoneNumberType = "HOME"
+)
+
+func (enum PhoneNumberType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PhoneNumberType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RequirePin string
 
 // Enum values for RequirePin
@@ -375,6 +393,22 @@ func (enum RequirePin) MarshalValue() (string, error) {
 }
 
 func (enum RequirePin) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SipType string
+
+// Enum values for SipType
+const (
+	SipTypeWork SipType = "WORK"
+)
+
+func (enum SipType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SipType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

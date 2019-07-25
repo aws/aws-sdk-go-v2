@@ -19,7 +19,7 @@ type ListTagsForResourceInput struct {
 	// or arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot.
 	//
 	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// ResourceName is a required field
 	ResourceName *string `type:"string" required:"true"`
@@ -73,7 +73,7 @@ const opListTagsForResource = "ListTagsForResource"
 // an error.
 //
 // You can have a maximum of 50 cost allocation tags on an ElastiCache resource.
-// For more information, see Monitoring Costs with Tags (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html).
+// For more information, see Monitoring Costs with Tags (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html).
 //
 //    // Example sending a request using ListTagsForResourceRequest.
 //    req := client.ListTagsForResourceRequest(params)

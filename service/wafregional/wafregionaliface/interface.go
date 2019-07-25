@@ -183,6 +183,8 @@ type ClientAPI interface {
 
 	ListSubscribedRuleGroupsRequest(*wafregional.ListSubscribedRuleGroupsInput) wafregional.ListSubscribedRuleGroupsRequest
 
+	ListTagsForResourceRequest(*wafregional.ListTagsForResourceInput) wafregional.ListTagsForResourceRequest
+
 	ListWebACLsRequest(*wafregional.ListWebACLsInput) wafregional.ListWebACLsRequest
 
 	ListXssMatchSetsRequest(*wafregional.ListXssMatchSetsInput) wafregional.ListXssMatchSetsRequest
@@ -190,6 +192,10 @@ type ClientAPI interface {
 	PutLoggingConfigurationRequest(*wafregional.PutLoggingConfigurationInput) wafregional.PutLoggingConfigurationRequest
 
 	PutPermissionPolicyRequest(*wafregional.PutPermissionPolicyInput) wafregional.PutPermissionPolicyRequest
+
+	TagResourceRequest(*wafregional.TagResourceInput) wafregional.TagResourceRequest
+
+	UntagResourceRequest(*wafregional.UntagResourceInput) wafregional.UntagResourceRequest
 
 	UpdateByteMatchSetRequest(*wafregional.UpdateByteMatchSetInput) wafregional.UpdateByteMatchSetRequest
 

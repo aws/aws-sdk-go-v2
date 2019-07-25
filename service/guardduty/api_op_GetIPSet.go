@@ -14,9 +14,13 @@ import (
 type GetIPSetInput struct {
 	_ struct{} `type:"structure"`
 
+	// The unique ID of the detector the ipSet is associated with.
+	//
 	// DetectorId is a required field
-	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
+	// The unique ID of the ipSet you want to get.
+	//
 	// IpSetId is a required field
 	IpSetId *string `location:"uri" locationName:"ipSetId" type:"string" required:"true"`
 }
@@ -32,6 +36,9 @@ func (s *GetIPSetInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
 	}
 
 	if s.IpSetId == nil {
@@ -63,24 +70,34 @@ func (s GetIPSetInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// GetIPSet response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSetResponse
 type GetIPSetOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The format of the file that contains the IPSet.
-	Format IpSetFormat `locationName:"format" type:"string" enum:"true"`
+	//
+	// Format is a required field
+	Format IpSetFormat `locationName:"format" min:"1" type:"string" required:"true" enum:"true"`
 
 	// The URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
-	Location *string `locationName:"location" type:"string"`
+	//
+	// Location is a required field
+	Location *string `locationName:"location" min:"1" type:"string" required:"true"`
 
 	// The user friendly name to identify the IPSet. This name is displayed in all
 	// findings that are triggered by activity that involves IP addresses included
 	// in this IPSet.
-	Name *string `locationName:"name" type:"string"`
+	//
+	// Name is a required field
+	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
 	// The status of ipSet file uploaded.
-	Status IpSetStatus `locationName:"status" type:"string" enum:"true"`
+	//
+	// Status is a required field
+	Status IpSetStatus `locationName:"status" min:"1" type:"string" required:"true" enum:"true"`
+
+	// The tags of the IP set resource.
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -113,6 +130,18 @@ func (s GetIPSetOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }

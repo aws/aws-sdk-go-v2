@@ -63,8 +63,7 @@ func (s GetBucketEncryptionInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetBucketEncryptionOutput struct {
 	_ struct{} `type:"structure" payload:"ServerSideEncryptionConfiguration"`
 
-	// Container for server-side encryption configuration rules. Currently S3 supports
-	// one rule only.
+	// Specifies the default server-side-encryption configuration.
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration `type:"structure"`
 }
 

@@ -82,7 +82,8 @@ const opDescribeScheduledActions = "DescribeScheduledActions"
 // Auto Scaling.
 //
 // Describes the actions scheduled for your Auto Scaling group that haven't
-// run. To describe the actions that have already run, use DescribeScalingActivities.
+// run or that have not reached their end time. To describe the actions that
+// have already run, use DescribeScalingActivities.
 //
 //    // Example sending a request using DescribeScheduledActionsRequest.
 //    req := client.DescribeScheduledActionsRequest(params)

@@ -17,17 +17,16 @@ type CreateReplicationInstanceInput struct {
 	// instance.
 	AllocatedStorage *int64 `type:"integer"`
 
-	// Indicates that minor engine upgrades will be applied automatically to the
-	// replication instance during the maintenance window.
+	// Indicates whether minor engine upgrades will be applied automatically to
+	// the replication instance during the maintenance window. This parameter defaults
+	// to true.
 	//
 	// Default: true
 	AutoMinorVersionUpgrade *bool `type:"boolean"`
 
-	// The EC2 Availability Zone that the replication instance will be created in.
-	//
-	// Default: A random, system-chosen Availability Zone in the endpoint's region.
-	//
-	// Example: us-east-1d
+	// The AWS Availability Zone where the replication instance will be created.
+	// The default value is a random, system-chosen Availability Zone in the endpoint's
+	// AWS Region, for example: us-east-1d
 	AvailabilityZone *string `type:"string"`
 
 	// A list of DNS name servers supported for the replication instance.
@@ -36,15 +35,19 @@ type CreateReplicationInstanceInput struct {
 	// The engine version number of the replication instance.
 	EngineVersion *string `type:"string"`
 
-	// The AWS KMS key identifier that is used to encrypt the content on the replication
-	// instance. If you don't specify a value for the KmsKeyId parameter, then AWS
-	// DMS uses your default encryption key. AWS KMS creates the default encryption
-	// key for your AWS account. Your AWS account has a different default encryption
-	// key for each AWS Region.
+	// An AWS KMS key identifier that is used to encrypt the data on the replication
+	// instance.
+	//
+	// If you don't specify a value for the KmsKeyId parameter, then AWS DMS uses
+	// your default encryption key.
+	//
+	// AWS KMS creates the default encryption key for your AWS account. Your AWS
+	// account has a different default encryption key for each AWS Region.
 	KmsKeyId *string `type:"string"`
 
-	// Specifies if the replication instance is a Multi-AZ deployment. You cannot
-	// set the AvailabilityZone parameter if the Multi-AZ parameter is set to true.
+	// Specifies whether the replication instance is a Multi-AZ deployment. You
+	// cannot set the AvailabilityZone parameter if the Multi-AZ parameter is set
+	// to true.
 	MultiAZ *bool `type:"boolean"`
 
 	// The weekly time range during which system maintenance can occur, in Universal
@@ -53,7 +56,7 @@ type CreateReplicationInstanceInput struct {
 	// Format: ddd:hh24:mi-ddd:hh24:mi
 	//
 	// Default: A 30-minute window selected at random from an 8-hour block of time
-	// per region, occurring on a random day of the week.
+	// per AWS Region, occurring on a random day of the week.
 	//
 	// Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
 	//
@@ -93,7 +96,7 @@ type CreateReplicationInstanceInput struct {
 	// A subnet group to associate with the replication instance.
 	ReplicationSubnetGroupIdentifier *string `type:"string"`
 
-	// Tags to be associated with the replication instance.
+	// One or more tags to be assigned to the replication instance.
 	Tags []Tag `type:"list"`
 
 	// Specifies the VPC security group to be used with the replication instance.

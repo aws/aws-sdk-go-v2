@@ -54,7 +54,8 @@ func (s GetAdmChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetAdmChannelOutput struct {
 	_ struct{} `type:"structure" payload:"ADMChannelResponse"`
 
-	// Amazon Device Messaging channel definition.
+	// Provides information about the status and settings of the ADM (Amazon Device
+	// Messaging) channel for an application.
 	//
 	// ADMChannelResponse is a required field
 	ADMChannelResponse *ADMChannelResponse `type:"structure" required:"true"`
@@ -81,7 +82,8 @@ const opGetAdmChannel = "GetAdmChannel"
 // GetAdmChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Get an ADM channel.
+// Retrieves information about the status and settings of the ADM channel for
+// an application.
 //
 //    // Example sending a request using GetAdmChannelRequest.
 //    req := client.GetAdmChannelRequest(params)

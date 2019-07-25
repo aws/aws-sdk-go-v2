@@ -28,8 +28,9 @@ type UpdateFileSystemInput struct {
 	// UpdateFileSystem operation.
 	LustreConfiguration *UpdateFileSystemLustreConfiguration `type:"structure"`
 
-	// The configuration for this Microsoft Windows file system. The only supported
-	// options are for backup and maintenance.
+	// The configuration update for this Microsoft Windows file system. The only
+	// supported options are for backup and maintenance and for self-managed Active
+	// Directory configuration.
 	WindowsConfiguration *UpdateFileSystemWindowsConfiguration `type:"structure"`
 }
 
@@ -73,7 +74,7 @@ func (s *UpdateFileSystemInput) Validate() error {
 type UpdateFileSystemOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A description of the file system.
+	// A description of the file system that was updated.
 	FileSystem *FileSystem `type:"structure"`
 }
 

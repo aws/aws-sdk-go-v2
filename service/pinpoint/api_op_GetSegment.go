@@ -67,7 +67,8 @@ func (s GetSegmentInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetSegmentOutput struct {
 	_ struct{} `type:"structure" payload:"SegmentResponse"`
 
-	// Segment definition.
+	// Provides information about the configuration, dimension, and other settings
+	// for a segment.
 	//
 	// SegmentResponse is a required field
 	SegmentResponse *SegmentResponse `type:"structure" required:"true"`
@@ -94,7 +95,8 @@ const opGetSegment = "GetSegment"
 // GetSegmentRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Returns information about a segment.
+// Retrieves information about the configuration, dimension, and other settings
+// for a specific segment that's associated with an application.
 //
 //    // Example sending a request using GetSegmentRequest.
 //    req := client.GetSegmentRequest(params)

@@ -43,9 +43,7 @@ type ModifyReplicationTaskInput struct {
 	// “
 	CdcStopPosition *string `type:"string"`
 
-	// The migration type.
-	//
-	// Valid values: full-load | cdc | full-load-and-cdc
+	// The migration type. Valid values: full-load | cdc | full-load-and-cdc
 	MigrationType MigrationTypeValue `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the replication task.
@@ -68,10 +66,9 @@ type ModifyReplicationTaskInput struct {
 	ReplicationTaskSettings *string `type:"string"`
 
 	// When using the AWS CLI or boto3, provide the path of the JSON file that contains
-	// the table mappings. Precede the path with "file://". When working with the
-	// DMS API, provide the JSON as the parameter value.
-	//
-	// For example, --table-mappings file://mappingfile.json
+	// the table mappings. Precede the path with file://. When working with the
+	// DMS API, provide the JSON as the parameter value, for example: --table-mappings
+	// file://mappingfile.json
 	TableMappings *string `type:"string"`
 }
 

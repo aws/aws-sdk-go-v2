@@ -10,14 +10,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CreatePublicKeyRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreatePublicKeyRequest
 type CreatePublicKeyInput struct {
 	_ struct{} `type:"structure" payload:"PublicKeyConfig"`
 
 	// The request to add a public key to CloudFront.
 	//
 	// PublicKeyConfig is a required field
-	PublicKeyConfig *PublicKeyConfig `locationName:"PublicKeyConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2018-11-05/"`
+	PublicKeyConfig *PublicKeyConfig `locationName:"PublicKeyConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
 }
 
 // String returns the string representation
@@ -50,13 +50,13 @@ func (s CreatePublicKeyInput) MarshalFields(e protocol.FieldEncoder) error {
 	if s.PublicKeyConfig != nil {
 		v := s.PublicKeyConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2018-11-05/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
 		e.SetFields(protocol.PayloadTarget, "PublicKeyConfig", v, metadata)
 	}
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CreatePublicKeyResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreatePublicKeyResult
 type CreatePublicKeyOutput struct {
 	_ struct{} `type:"structure" payload:"PublicKey"`
 
@@ -99,7 +99,7 @@ func (s CreatePublicKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opCreatePublicKey = "CreatePublicKey2018_11_05"
+const opCreatePublicKey = "CreatePublicKey2019_03_26"
 
 // CreatePublicKeyRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -114,12 +114,12 @@ const opCreatePublicKey = "CreatePublicKey2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/CreatePublicKey
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreatePublicKey
 func (c *Client) CreatePublicKeyRequest(input *CreatePublicKeyInput) CreatePublicKeyRequest {
 	op := &aws.Operation{
 		Name:       opCreatePublicKey,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2018-11-05/public-key",
+		HTTPPath:   "/2019-03-26/public-key",
 	}
 
 	if input == nil {

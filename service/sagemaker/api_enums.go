@@ -476,6 +476,23 @@ func (enum InstanceType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type JoinSource string
+
+// Enum values for JoinSource
+const (
+	JoinSourceInput JoinSource = "Input"
+	JoinSourceNone  JoinSource = "None"
+)
+
+func (enum JoinSource) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum JoinSource) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LabelingJobStatus string
 
 // Enum values for LabelingJobStatus
@@ -1053,6 +1070,7 @@ const (
 	TargetDeviceDeeplens   TargetDevice = "deeplens"
 	TargetDeviceRk3399     TargetDevice = "rk3399"
 	TargetDeviceRk3288     TargetDevice = "rk3288"
+	TargetDeviceSbeC       TargetDevice = "sbe_c"
 )
 
 func (enum TargetDevice) MarshalValue() (string, error) {

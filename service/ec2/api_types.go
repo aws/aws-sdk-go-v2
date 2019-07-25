@@ -129,6 +129,20 @@ func (s AllowedPrincipal) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Describes the private IP addresses assigned to a network interface.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignedPrivateIpAddress
+type AssignedPrivateIpAddress struct {
+	_ struct{} `type:"structure"`
+
+	// The private IP address assigned to the network interface.
+	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
+}
+
+// String returns the string representation
+func (s AssignedPrivateIpAddress) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Describes a target network that is associated with a Client VPN endpoint.
 // A target network is a subnet in a VPC.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociatedTargetNetwork
@@ -1630,14 +1644,10 @@ type EbsBlockDevice struct {
 	DeleteOnTermination *bool `locationName:"deleteOnTermination" type:"boolean"`
 
 	// Indicates whether the encryption state of an EBS volume is changed while
-	// being restored from a backing snapshot. The default effect of setting the
-	// Encrypted parameter to true through the console, API, or CLI depends on the
-	// volume's origin (new or from a snapshot), starting encryption state, ownership,
-	// and whether account-level encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/account-level-encryption.html)
-	// is enabled. Each default case can be overridden by specifying a customer
-	// master key (CMK) with the KmsKeyId parameter in addition to setting Encrypted
-	// to true. For a complete list of possible encryption cases, see Amazon EBS
-	// Encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-parameters)
+	// being restored from a backing snapshot. The effect of setting the encryption
+	// state to true depends on the volume origin (new or from a snapshot), starting
+	// encryption state, ownership, and whether encryption by default is enabled.
+	// For more information, see Amazon EBS Encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-parameters)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	//
 	// In no case can you remove encryption from an encrypted volume.
@@ -1664,8 +1674,8 @@ type EbsBlockDevice struct {
 	// it is not used in requests to create gp2, st1, sc1, or standard volumes.
 	Iops *int64 `locationName:"iops" type:"integer"`
 
-	// Identifier (key ID, key alias, ID ARN, or alias ARN) for a user-managed CMK
-	// under which the EBS volume is encrypted.
+	// Identifier (key ID, key alias, ID ARN, or alias ARN) for a customer managed
+	// CMK under which the EBS volume is encrypted.
 	//
 	// This parameter is only supported on BlockDeviceMapping objects called by
 	// RunInstances (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html),
@@ -2398,7 +2408,8 @@ type FleetLaunchTemplateSpecificationRequest struct {
 	// The name of the launch template.
 	LaunchTemplateName *string `min:"3" type:"string"`
 
-	// The version number of the launch template.
+	// The version number of the launch template. Note: This is a required parameter
+	// and will be updated soon.
 	Version *string `type:"string"`
 }
 
@@ -2705,9 +2716,8 @@ type Host struct {
 	// The number of new instances that can be launched onto the Dedicated Host.
 	AvailableCapacity *AvailableCapacity `locationName:"availableCapacity" type:"structure"`
 
-	// Unique, case-sensitive identifier that you provide to ensure idempotency
-	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string `locationName:"clientToken" type:"string"`
 
 	// The ID of the Dedicated Host.
@@ -2715,6 +2725,10 @@ type Host struct {
 
 	// The hardware specifications of the Dedicated Host.
 	HostProperties *HostProperties `locationName:"hostProperties" type:"structure"`
+
+	// Indicates whether host recovery is enabled or disabled for the Dedicated
+	// Host.
+	HostRecovery HostRecovery `locationName:"hostRecovery" type:"string" enum:"true"`
 
 	// The reservation ID of the Dedicated Host. This returns a null response if
 	// the Dedicated Host doesn't have an associated reservation.
@@ -3013,7 +3027,7 @@ type Image struct {
 	// The AWS account ID of the image owner.
 	OwnerId *string `locationName:"imageOwnerId" type:"string"`
 
-	// The value is Windows for Windows AMIs; otherwise blank.
+	// This value is set to windows for Windows AMIs; otherwise, it is blank.
 	Platform PlatformValues `locationName:"platform" type:"string" enum:"true"`
 
 	// Any product codes associated with the AMI.
@@ -3097,7 +3111,7 @@ type ImportImageTask struct {
 
 	// The architecture of the virtual machine.
 	//
-	// Valid values: i386 | x86_64
+	// Valid values: i386 | x86_64 | arm64
 	Architecture *string `locationName:"architecture" type:"string"`
 
 	// A description of the import task.
@@ -3801,7 +3815,7 @@ type InstanceNetworkInterfaceSpecification struct {
 	//
 	// If you are not creating an EFA, specify interface or omit this parameter.
 	//
-	// Valide values: interface | efa
+	// Valid values: interface | efa
 	InterfaceType *string `type:"string"`
 
 	// A number of IPv6 addresses to assign to the network interface. Amazon EC2
@@ -3871,6 +3885,23 @@ type InstancePrivateIpAddress struct {
 
 // String returns the string representation
 func (s InstancePrivateIpAddress) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The instance details to specify which volumes should be snapshotted.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceSpecification
+type InstanceSpecification struct {
+	_ struct{} `type:"structure"`
+
+	// Excludes the root volume from being snapshotted.
+	ExcludeBootVolume *bool `type:"boolean"`
+
+	// The instance to specify which volumes should be snapshotted.
+	InstanceId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s InstanceSpecification) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -4828,7 +4859,13 @@ type LaunchTemplateInstanceNetworkInterfaceSpecificationRequest struct {
 	// The IDs of one or more security groups.
 	Groups []string `locationName:"SecurityGroupId" locationNameList:"SecurityGroupId" type:"list"`
 
-	// The type of networking interface.
+	// The type of network interface. To create an Elastic Fabric Adapter (EFA),
+	// specify efa. For more information, see Elastic Fabric Adapter (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html)
+	// in the Amazon Elastic Compute Cloud User Guide.
+	//
+	// If you are not creating an EFA, specify interface or omit this parameter.
+	//
+	// Valid values: interface | efa
 	InterfaceType *string `type:"string"`
 
 	// The number of IPv6 addresses to assign to a network interface. Amazon EC2
@@ -5383,7 +5420,7 @@ type NatGateway struct {
 	NatGatewayId *string `locationName:"natGatewayId" type:"string"`
 
 	// Reserved. If you need to sustain traffic greater than the documented limits
-	// (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html),
+	// (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html),
 	// contact us through the Support Center (https://console.aws.amazon.com/support/home?).
 	ProvisionedBandwidth *ProvisionedBandwidth `locationName:"provisionedBandwidth" type:"structure"`
 
@@ -5781,7 +5818,7 @@ func (s NewDhcpConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The allocation strategy of On-Demand Instances in an EC2 Fleet.
+// Describes the configuration of On-Demand Instances in an EC2 Fleet.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/OnDemandOptions
 type OnDemandOptions struct {
 	_ struct{} `type:"structure"`
@@ -5793,6 +5830,10 @@ type OnDemandOptions struct {
 	// launching the highest priority first. If you do not specify a value, EC2
 	// Fleet defaults to lowest-price.
 	AllocationStrategy FleetOnDemandAllocationStrategy `locationName:"allocationStrategy" type:"string" enum:"true"`
+
+	// The maximum amount per hour for On-Demand Instances that you're willing to
+	// pay.
+	MaxTotalPrice *string `locationName:"maxTotalPrice" type:"string"`
 
 	// The minimum target capacity for On-Demand Instances in the fleet. If the
 	// minimum target capacity is not reached, the fleet launches no instances.
@@ -5812,7 +5853,7 @@ func (s OnDemandOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The allocation strategy of On-Demand Instances in an EC2 Fleet.
+// Describes the configuration of On-Demand Instances in an EC2 Fleet.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/OnDemandOptionsRequest
 type OnDemandOptionsRequest struct {
 	_ struct{} `type:"structure"`
@@ -5824,6 +5865,10 @@ type OnDemandOptionsRequest struct {
 	// launching the highest priority first. If you do not specify a value, EC2
 	// Fleet defaults to lowest-price.
 	AllocationStrategy FleetOnDemandAllocationStrategy `type:"string" enum:"true"`
+
+	// The maximum amount per hour for On-Demand Instances that you're willing to
+	// pay.
+	MaxTotalPrice *string `type:"string"`
 
 	// The minimum target capacity for On-Demand Instances in the fleet. If the
 	// minimum target capacity is not reached, the fleet launches no instances.
@@ -6188,34 +6233,34 @@ func (s PropagatingVgw) String() string {
 }
 
 // Reserved. If you need to sustain traffic greater than the documented limits
-// (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html),
+// (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html),
 // contact us through the Support Center (https://console.aws.amazon.com/support/home?).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionedBandwidth
 type ProvisionedBandwidth struct {
 	_ struct{} `type:"structure"`
 
 	// Reserved. If you need to sustain traffic greater than the documented limits
-	// (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html),
+	// (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html),
 	// contact us through the Support Center (https://console.aws.amazon.com/support/home?).
 	ProvisionTime *time.Time `locationName:"provisionTime" type:"timestamp" timestampFormat:"iso8601"`
 
 	// Reserved. If you need to sustain traffic greater than the documented limits
-	// (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html),
+	// (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html),
 	// contact us through the Support Center (https://console.aws.amazon.com/support/home?).
 	Provisioned *string `locationName:"provisioned" type:"string"`
 
 	// Reserved. If you need to sustain traffic greater than the documented limits
-	// (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html),
+	// (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html),
 	// contact us through the Support Center (https://console.aws.amazon.com/support/home?).
 	RequestTime *time.Time `locationName:"requestTime" type:"timestamp" timestampFormat:"iso8601"`
 
 	// Reserved. If you need to sustain traffic greater than the documented limits
-	// (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html),
+	// (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html),
 	// contact us through the Support Center (https://console.aws.amazon.com/support/home?).
 	Requested *string `locationName:"requested" type:"string"`
 
 	// Reserved. If you need to sustain traffic greater than the documented limits
-	// (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html),
+	// (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html),
 	// contact us through the Support Center (https://console.aws.amazon.com/support/home?).
 	Status *string `locationName:"status" type:"string"`
 }
@@ -6375,6 +6420,10 @@ type Region struct {
 	// The Region service endpoint.
 	Endpoint *string `locationName:"regionEndpoint" type:"string"`
 
+	// The Region opt-in status. The possible values are opt-in-not-required, opted-in,
+	// and not-opted-in.
+	OptInStatus *string `locationName:"optInStatus" type:"string"`
+
 	// The name of the Region.
 	RegionName *string `locationName:"regionName" type:"string"`
 }
@@ -6480,7 +6529,7 @@ type RequestLaunchTemplateData struct {
 	Monitoring *LaunchTemplatesMonitoringRequest `type:"structure"`
 
 	// One or more network interfaces. If you specify a network interface, you must
-	// specify any security groups as part of the network interface.
+	// specify any security groups and subnets as part of the network interface.
 	NetworkInterfaces []LaunchTemplateInstanceNetworkInterfaceSpecificationRequest `locationName:"NetworkInterface" locationNameList:"InstanceNetworkInterfaceSpecification" type:"list"`
 
 	// The placement for the instance.
@@ -7999,7 +8048,7 @@ type Snapshot struct {
 	// the original volume or snapshot copy. Because data encryption keys are inherited
 	// by volumes created from snapshots, and vice versa, if snapshots share the
 	// same data encryption key identifier, then they belong to the same volume/snapshot
-	// lineage. This parameter is only returned by the DescribeSnapshots API operation.
+	// lineage. This parameter is only returned by DescribeSnapshots.
 	DataEncryptionKeyId *string `locationName:"dataEncryptionKeyId" type:"string"`
 
 	// The description for the snapshot.
@@ -8008,9 +8057,9 @@ type Snapshot struct {
 	// Indicates whether the snapshot is encrypted.
 	Encrypted *bool `locationName:"encrypted" type:"boolean"`
 
-	// The full ARN of the AWS Key Management Service (AWS KMS) customer master
-	// key (CMK) that was used to protect the volume encryption key for the parent
-	// volume.
+	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
+	// customer master key (CMK) that was used to protect the volume encryption
+	// key for the parent volume.
 	KmsKeyId *string `locationName:"kmsKeyId" type:"string"`
 
 	// Value from an Amazon-maintained list (amazon | self | all | aws-marketplace
@@ -8038,7 +8087,7 @@ type Snapshot struct {
 	// operation fails (for example, if the proper AWS Key Management Service (AWS
 	// KMS) permissions are not obtained) this field displays error state details
 	// to help you diagnose why the error occurred. This parameter is only returned
-	// by the DescribeSnapshots API operation.
+	// by DescribeSnapshots.
 	StateMessage *string `locationName:"statusMessage" type:"string"`
 
 	// Any tags assigned to the snapshot.
@@ -8122,6 +8171,49 @@ type SnapshotDiskContainer struct {
 
 // String returns the string representation
 func (s SnapshotDiskContainer) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about a snapshot.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotInfo
+type SnapshotInfo struct {
+	_ struct{} `type:"structure"`
+
+	// Description specified by the CreateSnapshotRequest that has been applied
+	// to all snapshots.
+	Description *string `locationName:"description" type:"string"`
+
+	// Indicates whether the snapshot is encrypted.
+	Encrypted *bool `locationName:"encrypted" type:"boolean"`
+
+	// Account id used when creating this snapshot.
+	OwnerId *string `locationName:"ownerId" type:"string"`
+
+	// Progress this snapshot has made towards completing.
+	Progress *string `locationName:"progress" type:"string"`
+
+	// Snapshot id that can be used to describe this snapshot.
+	SnapshotId *string `locationName:"snapshotId" type:"string"`
+
+	// Time this snapshot was started. This is the same for all snapshots initiated
+	// by the same request.
+	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"iso8601"`
+
+	// Current state of the snapshot.
+	State SnapshotState `locationName:"state" type:"string" enum:"true"`
+
+	// Tags associated with this snapshot.
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+
+	// Source volume from which this snapshot was created.
+	VolumeId *string `locationName:"volumeId" type:"string"`
+
+	// Size of the volume from which this snapshot was created.
+	VolumeSize *int64 `locationName:"volumeSize" type:"integer"`
+}
+
+// String returns the string representation
+func (s SnapshotInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -8410,6 +8502,16 @@ type SpotFleetRequestConfigData struct {
 	// target On-Demand capacity.
 	OnDemandFulfilledCapacity *float64 `locationName:"onDemandFulfilledCapacity" type:"double"`
 
+	// The maximum amount per hour for On-Demand Instances that you're willing to
+	// pay. You can use the onDemandMaxTotalPrice parameter, the spotMaxTotalPrice
+	// parameter, or both parameters to ensure that your fleet cost does not exceed
+	// your budget. If you set a maximum price per hour for the On-Demand Instances
+	// and Spot Instances in your request, Spot Fleet will launch instances until
+	// it reaches the maximum amount you're willing to pay. When the maximum amount
+	// you're willing to pay is reached, the fleet stops launching instances even
+	// if it hasn’t met the target capacity.
+	OnDemandMaxTotalPrice *string `locationName:"onDemandMaxTotalPrice" type:"string"`
+
 	// The number of On-Demand units to request. You can choose to set the target
 	// capacity in terms of instances or a performance characteristic that is important
 	// to your application workload, such as vCPUs, memory, or I/O. If the request
@@ -8419,6 +8521,16 @@ type SpotFleetRequestConfigData struct {
 
 	// Indicates whether Spot Fleet should replace unhealthy instances.
 	ReplaceUnhealthyInstances *bool `locationName:"replaceUnhealthyInstances" type:"boolean"`
+
+	// The maximum amount per hour for Spot Instances that you're willing to pay.
+	// You can use the spotdMaxTotalPrice parameter, the onDemandMaxTotalPrice parameter,
+	// or both parameters to ensure that your fleet cost does not exceed your budget.
+	// If you set a maximum price per hour for the On-Demand Instances and Spot
+	// Instances in your request, Spot Fleet will launch instances until it reaches
+	// the maximum amount you're willing to pay. When the maximum amount you're
+	// willing to pay is reached, the fleet stops launching instances even if it
+	// hasn’t met the target capacity.
+	SpotMaxTotalPrice *string `locationName:"spotMaxTotalPrice" type:"string"`
 
 	// The maximum price per unit hour that you are willing to pay for a Spot Instance.
 	// The default is the On-Demand price.
@@ -8684,6 +8796,9 @@ type SpotOptions struct {
 	// the number of Spot pools that you specify.
 	InstancePoolsToUseCount *int64 `locationName:"instancePoolsToUseCount" type:"integer"`
 
+	// The maximum amount per hour for Spot Instances that you're willing to pay.
+	MaxTotalPrice *string `locationName:"maxTotalPrice" type:"string"`
+
 	// The minimum target capacity for Spot Instances in the fleet. If the minimum
 	// target capacity is not reached, the fleet launches no instances.
 	MinTargetCapacity *int64 `locationName:"minTargetCapacity" type:"integer"`
@@ -8719,6 +8834,9 @@ type SpotOptionsRequest struct {
 	// selects the cheapest Spot pools and evenly allocates your target Spot capacity
 	// across the number of Spot pools that you specify.
 	InstancePoolsToUseCount *int64 `type:"integer"`
+
+	// The maximum amount per hour for Spot Instances that you're willing to pay.
+	MaxTotalPrice *string `type:"string"`
 
 	// The minimum target capacity for Spot Instances in the fleet. If the minimum
 	// target capacity is not reached, the fleet launches no instances.
@@ -9099,8 +9217,11 @@ type TagSpecification struct {
 	_ struct{} `type:"structure"`
 
 	// The type of resource to tag. Currently, the resource types that support tagging
-	// on creation are fleet, dedicated-host, instance, snapshot, and volume. To
-	// tag a resource after it has been created, see CreateTags.
+	// on creation are: capacity-reservation | client-vpn-endpoint | dedicated-host
+	// | fleet | instance | launch-template | snapshot | transit-gateway | transit-gateway-attachment
+	// | transit-gateway-route-table | volume.
+	//
+	// To tag a resource after it has been created, see CreateTags.
 	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 
 	// The tags to apply to the resource.
@@ -9117,6 +9238,15 @@ func (s TagSpecification) String() string {
 // your application workload, such as vCPUs, memory, or I/O. If the request
 // type is maintain, you can specify a target capacity of 0 and add capacity
 // later.
+//
+// You can use the On-Demand Instance MaxTotalPrice parameter, the Spot Instance
+// MaxTotalPrice, or both to ensure your fleet cost does not exceed your budget.
+// If you set a maximum price per hour for the On-Demand Instances and Spot
+// Instances in your request, EC2 Fleet will launch instances until it reaches
+// the maximum amount you're willing to pay. When the maximum amount you're
+// willing to pay is reached, the fleet stops launching instances even if it
+// hasn’t met the target capacity. The MaxTotalPrice parameters are located
+// in and
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetCapacitySpecification
 type TargetCapacitySpecification struct {
 	_ struct{} `type:"structure"`
@@ -9124,10 +9254,12 @@ type TargetCapacitySpecification struct {
 	// The default TotalTargetCapacity, which is either Spot or On-Demand.
 	DefaultTargetCapacityType DefaultTargetCapacityType `locationName:"defaultTargetCapacityType" type:"string" enum:"true"`
 
-	// The number of On-Demand units to request.
+	// The number of On-Demand units to request. If you specify a target capacity
+	// for Spot units, you cannot specify a target capacity for On-Demand units.
 	OnDemandTargetCapacity *int64 `locationName:"onDemandTargetCapacity" type:"integer"`
 
-	// The maximum number of Spot units to launch.
+	// The maximum number of Spot units to launch. If you specify a target capacity
+	// for On-Demand units, you cannot specify a target capacity for Spot units.
 	SpotTargetCapacity *int64 `locationName:"spotTargetCapacity" type:"integer"`
 
 	// The number of units to request, filled using DefaultTargetCapacityType.
@@ -9140,10 +9272,19 @@ func (s TargetCapacitySpecification) String() string {
 }
 
 // The number of units to request. You can choose to set the target capacity
-// in terms of instances or a performance characteristic that is important to
-// your application workload, such as vCPUs, memory, or I/O. If the request
-// type is maintain, you can specify a target capacity of 0 and add capacity
-// later.
+// as the number of instances. Or you can set the target capacity to a performance
+// characteristic that is important to your application workload, such as vCPUs,
+// memory, or I/O. If the request type is maintain, you can specify a target
+// capacity of 0 and add capacity later.
+//
+// You can use the On-Demand Instance MaxTotalPrice parameter, the Spot Instance
+// MaxTotalPrice parameter, or both parameters to ensure that your fleet cost
+// does not exceed your budget. If you set a maximum price per hour for the
+// On-Demand Instances and Spot Instances in your request, EC2 Fleet will launch
+// instances until it reaches the maximum amount you're willing to pay. When
+// the maximum amount you're willing to pay is reached, the fleet stops launching
+// instances even if it hasn’t met the target capacity. The MaxTotalPrice
+// parameters are located in and .
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetCapacitySpecificationRequest
 type TargetCapacitySpecificationRequest struct {
 	_ struct{} `type:"structure"`
@@ -9342,6 +9483,200 @@ type TerminateConnectionStatus struct {
 
 // String returns the string representation
 func (s TerminateConnectionStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes the Traffic Mirror filter.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorFilter
+type TrafficMirrorFilter struct {
+	_ struct{} `type:"structure"`
+
+	// The description of the Traffic Mirror filter.
+	Description *string `locationName:"description" type:"string"`
+
+	// Information about the egress rules that are associated with the Traffic Mirror
+	// filter.
+	EgressFilterRules []TrafficMirrorFilterRule `locationName:"egressFilterRuleSet" locationNameList:"item" type:"list"`
+
+	// Information about the ingress rules that are associated with the Traffic
+	// Mirror filter.
+	IngressFilterRules []TrafficMirrorFilterRule `locationName:"ingressFilterRuleSet" locationNameList:"item" type:"list"`
+
+	// The network service traffic that is associated with the Traffic Mirror filter.
+	NetworkServices []TrafficMirrorNetworkService `locationName:"networkServiceSet" locationNameList:"item" type:"list"`
+
+	// The tags assigned to the Traffic Mirror filter.
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+
+	// The ID of the Traffic Mirror filter.
+	TrafficMirrorFilterId *string `locationName:"trafficMirrorFilterId" type:"string"`
+}
+
+// String returns the string representation
+func (s TrafficMirrorFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes the Traffic Mirror rule.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorFilterRule
+type TrafficMirrorFilterRule struct {
+	_ struct{} `type:"structure"`
+
+	// The description of the Traffic Mirror rule.
+	Description *string `locationName:"description" type:"string"`
+
+	// The destination CIDR block assigned to the Traffic Mirror rule.
+	DestinationCidrBlock *string `locationName:"destinationCidrBlock" type:"string"`
+
+	// The destination port range assigned to the Traffic Mirror rule.
+	DestinationPortRange *TrafficMirrorPortRange `locationName:"destinationPortRange" type:"structure"`
+
+	// The protocol assigned to the Traffic Mirror rule.
+	Protocol *int64 `locationName:"protocol" type:"integer"`
+
+	// The action assigned to the Traffic Mirror rule.
+	RuleAction TrafficMirrorRuleAction `locationName:"ruleAction" type:"string" enum:"true"`
+
+	// The rule number of the Traffic Mirror rule.
+	RuleNumber *int64 `locationName:"ruleNumber" type:"integer"`
+
+	// The source CIDR block assigned to the Traffic Mirror rule.
+	SourceCidrBlock *string `locationName:"sourceCidrBlock" type:"string"`
+
+	// The source port range assigned to the Traffic Mirror rule.
+	SourcePortRange *TrafficMirrorPortRange `locationName:"sourcePortRange" type:"structure"`
+
+	// The traffic direction assigned to the Traffic Mirror rule.
+	TrafficDirection TrafficDirection `locationName:"trafficDirection" type:"string" enum:"true"`
+
+	// The ID of the Traffic Mirror filter that the rule is associated with.
+	TrafficMirrorFilterId *string `locationName:"trafficMirrorFilterId" type:"string"`
+
+	// The ID of the Traffic Mirror rule.
+	TrafficMirrorFilterRuleId *string `locationName:"trafficMirrorFilterRuleId" type:"string"`
+}
+
+// String returns the string representation
+func (s TrafficMirrorFilterRule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes the Traffic Mirror port range.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorPortRange
+type TrafficMirrorPortRange struct {
+	_ struct{} `type:"structure"`
+
+	// The start of the Traffic Mirror port range. This applies to the TCP and UDP
+	// protocols.
+	FromPort *int64 `locationName:"fromPort" type:"integer"`
+
+	// The end of the Traffic Mirror port range. This applies to the TCP and UDP
+	// protocols.
+	ToPort *int64 `locationName:"toPort" type:"integer"`
+}
+
+// String returns the string representation
+func (s TrafficMirrorPortRange) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about the Traffic Mirror filter rule port range.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorPortRangeRequest
+type TrafficMirrorPortRangeRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The first port in the Traffic Mirror port range. This applies to the TCP
+	// and UDP protocols.
+	FromPort *int64 `type:"integer"`
+
+	// The last port in the Traffic Mirror port range. This applies to the TCP and
+	// UDP protocols.
+	ToPort *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s TrafficMirrorPortRangeRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes a Traffic Mirror session.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorSession
+type TrafficMirrorSession struct {
+	_ struct{} `type:"structure"`
+
+	// The description of the Traffic Mirror session.
+	Description *string `locationName:"description" type:"string"`
+
+	// The ID of the Traffic Mirror session's network interface.
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
+
+	// The ID of the account that owns the Traffic Mirror session.
+	OwnerId *string `locationName:"ownerId" type:"string"`
+
+	// The number of bytes in each packet to mirror. These are the bytes after the
+	// VXLAN header. To mirror a subset, set this to the length (in bytes) to mirror.
+	// For example, if you set this value to 100, then the first 100 bytes that
+	// meet the filter criteria are copied to the target. Do not specify this parameter
+	// when you want to mirror the entire packet
+	PacketLength *int64 `locationName:"packetLength" type:"integer"`
+
+	// The session number determines the order in which sessions are evaluated when
+	// an interface is used by multiple sessions. The first session with a matching
+	// filter is the one that mirrors the packets.
+	//
+	// Valid values are 1-32766.
+	SessionNumber *int64 `locationName:"sessionNumber" type:"integer"`
+
+	// The tags assigned to the Traffic Mirror session.
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+
+	// The ID of the Traffic Mirror filter.
+	TrafficMirrorFilterId *string `locationName:"trafficMirrorFilterId" type:"string"`
+
+	// The ID for the Traffic Mirror session.
+	TrafficMirrorSessionId *string `locationName:"trafficMirrorSessionId" type:"string"`
+
+	// The ID of the Traffic Mirror target.
+	TrafficMirrorTargetId *string `locationName:"trafficMirrorTargetId" type:"string"`
+
+	// The virtual network ID associated with the Traffic Mirror session.
+	VirtualNetworkId *int64 `locationName:"virtualNetworkId" type:"integer"`
+}
+
+// String returns the string representation
+func (s TrafficMirrorSession) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes a Traffic Mirror target.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorTarget
+type TrafficMirrorTarget struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the Traffic Mirror target.
+	Description *string `locationName:"description" type:"string"`
+
+	// The network interface ID that is attached to the target.
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
+
+	// The Amazon Resource Name (ARN) of the Network Load Balancer.
+	NetworkLoadBalancerArn *string `locationName:"networkLoadBalancerArn" type:"string"`
+
+	// The ID of the account that owns the Traffic Mirror target.
+	OwnerId *string `locationName:"ownerId" type:"string"`
+
+	// The tags assigned to the Traffic Mirror target.
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+
+	// The ID of the Traffic Mirror target.
+	TrafficMirrorTargetId *string `locationName:"trafficMirrorTargetId" type:"string"`
+
+	// The type of Traffic Mirror target.
+	Type TrafficMirrorTargetType `locationName:"type" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s TrafficMirrorTarget) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -9970,7 +10305,7 @@ type Volume struct {
 	// The time stamp when volume creation was initiated.
 	CreateTime *time.Time `locationName:"createTime" type:"timestamp" timestampFormat:"iso8601"`
 
-	// Indicates whether the volume will be encrypted.
+	// Indicates whether the volume is encrypted.
 	Encrypted *bool `locationName:"encrypted" type:"boolean"`
 
 	// The number of I/O operations per second (IOPS) that the volume supports.
@@ -9990,8 +10325,9 @@ type Volume struct {
 	// it is not used in requests to create gp2, st1, sc1, or standard volumes.
 	Iops *int64 `locationName:"iops" type:"integer"`
 
-	// The full ARN of the AWS Key Management Service (AWS KMS) customer master
-	// key (CMK) that was used to protect the volume encryption key for the volume.
+	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
+	// customer master key (CMK) that was used to protect the volume encryption
+	// key for the volume.
 	KmsKeyId *string `locationName:"kmsKeyId" type:"string"`
 
 	// The size of the volume, in GiBs.
@@ -10372,6 +10708,9 @@ type VpcEndpoint struct {
 	// (Interface endpoint) One or more network interfaces for the endpoint.
 	NetworkInterfaceIds []string `locationName:"networkInterfaceIdSet" locationNameList:"item" type:"list"`
 
+	// The ID of the AWS account that owns the VPC endpoint.
+	OwnerId *string `locationName:"ownerId" type:"string"`
+
 	// The policy document associated with the endpoint, if applicable.
 	PolicyDocument *string `locationName:"policyDocument" type:"string"`
 
@@ -10419,6 +10758,12 @@ type VpcEndpointConnection struct {
 
 	// The date and time the VPC endpoint was created.
 	CreationTimestamp *time.Time `locationName:"creationTimestamp" type:"timestamp" timestampFormat:"iso8601"`
+
+	// The DNS entries for the VPC endpoint.
+	DnsEntries []DnsEntry `locationName:"dnsEntrySet" locationNameList:"item" type:"list"`
+
+	// The Amazon Resource Names (ARNs) of the network load balancers for the service.
+	NetworkLoadBalancerArns []string `locationName:"networkLoadBalancerArnSet" locationNameList:"item" type:"list"`
 
 	// The ID of the service to which the endpoint is connected.
 	ServiceId *string `locationName:"serviceId" type:"string"`
@@ -10775,7 +11120,12 @@ type VpnEndpoint struct {
 	// The ARN of the server certificate.
 	ServerCertificateArn *string `locationName:"serverCertificateArn" type:"string"`
 
-	// Indicates whether VPN split tunneling is supported.
+	// Indicates whether split-tunnel is enabled in the AWS Client VPN endpoint
+	// endpoint.
+	//
+	// For information about split-tunnel VPN endpoints, see Split-Tunnel AWS Client
+	// VPN Endpoint (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html)
+	// in the AWS Client VPN Administrator Guide.
 	SplitTunnel *bool `locationName:"splitTunnel" type:"boolean"`
 
 	// The current state of the Client VPN endpoint.

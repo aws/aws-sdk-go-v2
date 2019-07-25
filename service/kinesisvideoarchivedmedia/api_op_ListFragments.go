@@ -155,6 +155,25 @@ const opListFragments = "ListFragments"
 // the ListFragments requests to this endpoint using the --endpoint-url parameter
 // (https://docs.aws.amazon.com/cli/latest/reference/).
 //
+// If an error is thrown after invoking a Kinesis Video Streams archived media
+// API, in addition to the HTTP status code and the response body, it includes
+// the following pieces of information:
+//
+//    * x-amz-ErrorType HTTP header – contains a more specific error type
+//    in addition to what the HTTP status code provides.
+//
+//    * x-amz-RequestId HTTP header – if you want to report an issue to AWS,
+//    the support team can better diagnose the problem if given the Request
+//    Id.
+//
+// Both the HTTP status code and the ErrorType header can be utilized to make
+// programmatic decisions about whether errors are retry-able and under what
+// conditions, as well as provide information on what actions the client programmer
+// might need to take in order to successfully try again.
+//
+// For more information, see the Errors section at the bottom of this topic,
+// as well as Common Errors (https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html).
+//
 //    // Example sending a request using ListFragmentsRequest.
 //    req := client.ListFragmentsRequest(params)
 //    resp, err := req.Send(context.TODO())
@@ -168,6 +187,12 @@ func (c *Client) ListFragmentsRequest(input *ListFragmentsInput) ListFragmentsRe
 		Name:       opListFragments,
 		HTTPMethod: "POST",
 		HTTPPath:   "/listFragments",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -200,6 +225,53 @@ func (r ListFragmentsRequest) Send(ctx context.Context) (*ListFragmentsResponse,
 	}
 
 	return resp, nil
+}
+
+// NewListFragmentsRequestPaginator returns a paginator for ListFragments.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListFragmentsRequest(input)
+//   p := kinesisvideoarchivedmedia.NewListFragmentsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListFragmentsPaginator(req ListFragmentsRequest) ListFragmentsPaginator {
+	return ListFragmentsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListFragmentsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListFragmentsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListFragmentsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListFragmentsPaginator) CurrentPage() *ListFragmentsOutput {
+	return p.Pager.CurrentPage().(*ListFragmentsOutput)
 }
 
 // ListFragmentsResponse is the response type for the

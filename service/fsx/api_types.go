@@ -13,6 +13,25 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// The Microsoft AD attributes of the Amazon FSx for Windows File Server file
+// system.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ActiveDirectoryBackupAttributes
+type ActiveDirectoryBackupAttributes struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the AWS Managed Microsoft Active Directory instance to which the
+	// file system is joined.
+	ActiveDirectoryId *string `min:"12" type:"string"`
+
+	// The fully qualified domain name of the self-managed AD directory.
+	DomainName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ActiveDirectoryBackupAttributes) String() string {
+	return awsutil.Prettify(s)
+}
+
 // A backup of an Amazon FSx for Windows File Server file system. You can create
 // a new file system from a backup to protect against data loss.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/Backup
@@ -28,6 +47,10 @@ type Backup struct {
 	//
 	// CreationTime is a required field
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// The configuration of the self-managed Microsoft Active Directory (AD) to
+	// which the Windows File Server instance is joined.
+	DirectoryInformation *ActiveDirectoryBackupAttributes `type:"structure"`
 
 	// Details explaining any failures that occur when creating a backup.
 	FailureDetails *BackupFailureDetails `type:"structure"`
@@ -81,8 +104,8 @@ func (s BackupFailureDetails) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The configuration object for Lustre file systems used in the CreateFileSystem
-// operation.
+// The Lustre configuration for the file system being created. This value is
+// required if FileSystemType is set to LUSTRE.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemLustreConfiguration
 type CreateFileSystemLustreConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -158,8 +181,8 @@ func (s *CreateFileSystemLustreConfiguration) Validate() error {
 type CreateFileSystemWindowsConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// The ID for an existing Microsoft Active Directory instance that the file
-	// system should join when it's created.
+	// The ID for an existing AWS Managed Microsoft Active Directory (AD) instance
+	// that the file system should join when it's created.
 	ActiveDirectoryId *string `min:"12" type:"string"`
 
 	// The number of days to retain automatic backups. The default is to retain
@@ -167,22 +190,30 @@ type CreateFileSystemWindowsConfiguration struct {
 	// backups. The maximum retention period for backups is 35 days.
 	AutomaticBackupRetentionDays *int64 `type:"integer"`
 
-	// A boolean flag indicating whether tags on the file system should be copied
-	// to backups. This value defaults to false. If it's set to true, all tags on
-	// the file system are copied to all automatic backups and any user-initiated
-	// backups where the user doesn't specify any tags. If this value is true, and
-	// you specify one or more tags, only the specified tags are copied to backups.
+	// A boolean flag indicating whether tags for the file system should be copied
+	// to backups. This value defaults to false. If it's set to true, all tags for
+	// the file system are copied to all automatic and user-initiated backups where
+	// the user doesn't specify tags. If this value is true, and you specify one
+	// or more tags, only the specified tags are copied to backups.
 	CopyTagsToBackups *bool `type:"boolean"`
 
-	// The preferred time to take daily automatic backups, in the UTC time zone.
+	// The preferred time to take daily automatic backups, formatted HH:MM in the
+	// UTC time zone.
 	DailyAutomaticBackupStartTime *string `min:"5" type:"string"`
 
-	// The throughput of an Amazon FSx file system, measured in megabytes per second.
+	// The configuration that Amazon FSx uses to join the Windows File Server instance
+	// to your self-managed (including on-premises) Microsoft Active Directory (AD)
+	// directory.
+	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryConfiguration `type:"structure"`
+
+	// The throughput of an Amazon FSx file system, measured in megabytes per second,
+	// in 2 to the nth increments, between 2^3 (8) and 2^11 (2048).
 	//
 	// ThroughputCapacity is a required field
 	ThroughputCapacity *int64 `min:"8" type:"integer" required:"true"`
 
-	// The preferred start time to perform weekly maintenance, in the UTC time zone.
+	// The preferred start time to perform weekly maintenance, formatted d:HH:MM
+	// in the UTC time zone.
 	WeeklyMaintenanceStartTime *string `min:"7" type:"string"`
 }
 
@@ -209,6 +240,11 @@ func (s *CreateFileSystemWindowsConfiguration) Validate() error {
 	}
 	if s.WeeklyMaintenanceStartTime != nil && len(*s.WeeklyMaintenanceStartTime) < 7 {
 		invalidParams.Add(aws.NewErrParamMinLen("WeeklyMaintenanceStartTime", 7))
+	}
+	if s.SelfManagedActiveDirectoryConfiguration != nil {
+		if err := s.SelfManagedActiveDirectoryConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("SelfManagedActiveDirectoryConfiguration", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -320,22 +356,38 @@ type FileSystem struct {
 	// The DNS name for the file system.
 	DNSName *string `min:"16" type:"string"`
 
-	// Structure providing details of any failures that occur when creating the
+	// A structure providing details of any failures that occur when creating the
 	// file system has failed.
 	FailureDetails *FileSystemFailureDetails `type:"structure"`
 
-	// The eight-digit ID of the file system that was automatically assigned by
-	// Amazon FSx.
+	// The system-generated, unique 17-digit ID of the file system.
 	FileSystemId *string `min:"11" type:"string"`
 
-	// Type of file system. Currently the only supported type is WINDOWS.
+	// The type of Amazon FSx file system, either LUSTRE or WINDOWS.
 	FileSystemType FileSystemType `type:"string" enum:"true"`
 
 	// The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the
 	// file system's data for an Amazon FSx for Windows File Server file system.
 	KmsKeyId *string `min:"1" type:"string"`
 
-	// The lifecycle status of the file system.
+	// The lifecycle status of the file system:
+	//
+	//    * AVAILABLE indicates that the file system is reachable and available
+	//    for use.
+	//
+	//    * CREATING indicates that Amazon FSx is in the process of creating the
+	//    new file system.
+	//
+	//    * DELETING indicates that Amazon FSx is in the process of deleting the
+	//    file system.
+	//
+	//    * FAILED indicates that Amazon FSx was not able to create the file system.
+	//
+	//    * MISCONFIGURED indicates that the file system is in a failed but recoverable
+	//    state.
+	//
+	//    * UPDATING indicates that the file system is undergoing a customer initiated
+	//    update.
 	Lifecycle FileSystemLifecycle `type:"string" enum:"true"`
 
 	// The configuration for the Amazon FSx for Lustre file system.
@@ -348,21 +400,22 @@ type FileSystem struct {
 	// in the Amazon EC2 User Guide.
 	//
 	// For an Amazon FSx for Windows File Server file system, you can have one network
-	// interface Id. For an Amazon FSx for Lustre file system, you can have more
+	// interface ID. For an Amazon FSx for Lustre file system, you can have more
 	// than one.
 	NetworkInterfaceIds []string `type:"list"`
 
 	// The AWS account that created the file system. If the file system was created
-	// by an IAM user, the AWS account to which the IAM user belongs is the owner.
+	// by an AWS Identity and Access Management (IAM) user, the AWS account to which
+	// the IAM user belongs is the owner.
 	OwnerId *string `min:"12" type:"string"`
 
-	// The resource ARN of the file system.
+	// The Amazon Resource Name (ARN) for the file system resource.
 	ResourceARN *string `min:"8" type:"string"`
 
-	// The storage capacity of the file system in gigabytes.
+	// The storage capacity of the file system in gigabytes (GB).
 	StorageCapacity *int64 `min:"1" type:"integer"`
 
-	// The IDs of the subnets to contain the endpoint for the file system. One and
+	// The ID of the subnet to contain the endpoint for the file system. One and
 	// only one is supported. The file system is launched in the Availability Zone
 	// associated with this subnet.
 	SubnetIds []string `type:"list"`
@@ -384,13 +437,13 @@ func (s FileSystem) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Structure providing details of any failures that occur when creating the
+// A structure providing details of any failures that occur when creating the
 // file system has failed.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileSystemFailureDetails
 type FileSystemFailureDetails struct {
 	_ struct{} `type:"structure"`
 
-	// Message describing the failures that occurred during file system creation.
+	// A message describing any failures that occurred during file system creation.
 	Message *string `min:"1" type:"string"`
 }
 
@@ -434,6 +487,192 @@ type LustreFileSystemConfiguration struct {
 // String returns the string representation
 func (s LustreFileSystemConfiguration) String() string {
 	return awsutil.Prettify(s)
+}
+
+// The configuration of the self-managed Microsoft Active Directory (AD) directory
+// to which the Windows File Server instance is joined.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryAttributes
+type SelfManagedActiveDirectoryAttributes struct {
+	_ struct{} `type:"structure"`
+
+	// A list of up to two IP addresses of DNS servers or domain controllers in
+	// the self-managed AD directory.
+	DnsIps []string `min:"1" type:"list"`
+
+	// The fully qualified domain name of the self-managed AD directory.
+	DomainName *string `type:"string"`
+
+	// The name of the domain group whose members have administrative privileges
+	// for the FSx file system.
+	FileSystemAdministratorsGroup *string `min:"1" type:"string"`
+
+	// The fully qualified distinguished name of the organizational unit within
+	// the self-managed AD directory to which the Windows File Server instance is
+	// joined.
+	OrganizationalUnitDistinguishedName *string `min:"1" type:"string"`
+
+	// The user name for the service account on your self-managed AD domain that
+	// FSx uses to join to your AD domain.
+	UserName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s SelfManagedActiveDirectoryAttributes) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The configuration that Amazon FSx uses to join the Windows File Server instance
+// to your self-managed (including on-premises) Microsoft Active Directory (AD)
+// directory.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryConfiguration
+type SelfManagedActiveDirectoryConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// A list of up to two IP addresses of DNS servers or domain controllers in
+	// the self-managed AD directory. The IP addresses need to be either in the
+	// same VPC CIDR range as the one in which your Amazon FSx file system is being
+	// created, or in the private IP version 4 (Iv4) address ranges, as specified
+	// in RFC 1918 (http://www.faqs.org/rfcs/rfc1918.html):
+	//
+	//    * 10.0.0.0 - 10.255.255.255 (10/8 prefix)
+	//
+	//    * 172.16.0.0 - 172.31.255.255 (172.16/12 prefix)
+	//
+	//    * 192.168.0.0 - 192.168.255.255 (192.168/16 prefix)
+	//
+	// DnsIps is a required field
+	DnsIps []string `min:"1" type:"list" required:"true"`
+
+	// The fully qualified domain name of the self-managed AD directory, such as
+	// corp.example.com.
+	//
+	// DomainName is a required field
+	DomainName *string `type:"string" required:"true"`
+
+	// (Optional) The name of the domain group whose members are granted administrative
+	// privileges for the file system. Administrative privileges include taking
+	// ownership of files and folders, and setting audit controls (audit ACLs) on
+	// files and folders. The group that you specify must already exist in your
+	// domain. If you don't provide one, your AD domain's Domain Admins group is
+	// used.
+	FileSystemAdministratorsGroup *string `min:"1" type:"string"`
+
+	// (Optional) The fully qualified distinguished name of the organizational unit
+	// within your self-managed AD directory that the Windows File Server instance
+	// will join. Amazon FSx only accepts OU as the direct parent of the file system.
+	// An example is OU=FSx,DC=yourdomain,DC=corp,DC=com. To learn more, see RFC
+	// 2253 (https://tools.ietf.org/html/rfc2253). If none is provided, the FSx
+	// file system is created in the default location of your self-managed AD directory.
+	//
+	// Only Organizational Unit (OU) objects can be the direct parent of the file
+	// system that you're creating.
+	OrganizationalUnitDistinguishedName *string `min:"1" type:"string"`
+
+	// The password for the service account on your self-managed AD domain that
+	// Amazon FSx will use to join to your AD domain.
+	//
+	// Password is a required field
+	Password *string `min:"1" type:"string" required:"true"`
+
+	// The user name for the service account on your self-managed AD domain that
+	// Amazon FSx will use to join to your AD domain. This account must have the
+	// permission to join computers to the domain in the organizational unit provided
+	// in OrganizationalUnitDistinguishedName, or in the default location of your
+	// AD domain.
+	//
+	// UserName is a required field
+	UserName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s SelfManagedActiveDirectoryConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SelfManagedActiveDirectoryConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SelfManagedActiveDirectoryConfiguration"}
+
+	if s.DnsIps == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DnsIps"))
+	}
+	if s.DnsIps != nil && len(s.DnsIps) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DnsIps", 1))
+	}
+
+	if s.DomainName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
+	}
+	if s.FileSystemAdministratorsGroup != nil && len(*s.FileSystemAdministratorsGroup) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("FileSystemAdministratorsGroup", 1))
+	}
+	if s.OrganizationalUnitDistinguishedName != nil && len(*s.OrganizationalUnitDistinguishedName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("OrganizationalUnitDistinguishedName", 1))
+	}
+
+	if s.Password == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Password"))
+	}
+	if s.Password != nil && len(*s.Password) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Password", 1))
+	}
+
+	if s.UserName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserName"))
+	}
+	if s.UserName != nil && len(*s.UserName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The configuration that Amazon FSx uses to join the Windows File Server instance
+// to the self-managed Microsoft Active Directory (AD) directory.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryConfigurationUpdates
+type SelfManagedActiveDirectoryConfigurationUpdates struct {
+	_ struct{} `type:"structure"`
+
+	// A list of up to two IP addresses of DNS servers or domain controllers in
+	// the self-managed AD directory.
+	DnsIps []string `min:"1" type:"list"`
+
+	// The password for the service account on your self-managed AD domain that
+	// Amazon FSx will use to join to your AD domain.
+	Password *string `min:"1" type:"string"`
+
+	// The user name for the service account on your self-managed AD domain that
+	// Amazon FSx will use to join to your AD domain. This account must have the
+	// permission to join computers to the domain in the organizational unit provided
+	// in OrganizationalUnitDistinguishedName.
+	UserName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s SelfManagedActiveDirectoryConfigurationUpdates) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SelfManagedActiveDirectoryConfigurationUpdates) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SelfManagedActiveDirectoryConfigurationUpdates"}
+	if s.DnsIps != nil && len(s.DnsIps) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DnsIps", 1))
+	}
+	if s.Password != nil && len(*s.Password) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Password", 1))
+	}
+	if s.UserName != nil && len(*s.UserName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Specifies a key-value pair for a resource tag.
@@ -498,8 +737,10 @@ func (s *UpdateFileSystemLustreConfiguration) Validate() error {
 	return nil
 }
 
-// The configuration object for the Microsoft Windows file system used in the
-// UpdateFileSystem operation.
+// Updates the Microsoft Windows configuration for an existing Amazon FSx for
+// Windows File Server file system. Amazon FSx overwrites existing properties
+// with non-null values provided in the request. If you don't specify a non-null
+// value for a property, that property is not updated.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemWindowsConfiguration
 type UpdateFileSystemWindowsConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -510,6 +751,10 @@ type UpdateFileSystemWindowsConfiguration struct {
 
 	// The preferred time to take daily automatic backups, in the UTC time zone.
 	DailyAutomaticBackupStartTime *string `min:"5" type:"string"`
+
+	// The configuration Amazon FSx uses to join the Windows File Server instance
+	// to the self-managed Microsoft AD directory.
+	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryConfigurationUpdates `type:"structure"`
 
 	// The preferred time to perform weekly maintenance, in the UTC time zone.
 	WeeklyMaintenanceStartTime *string `min:"7" type:"string"`
@@ -528,6 +773,11 @@ func (s *UpdateFileSystemWindowsConfiguration) Validate() error {
 	}
 	if s.WeeklyMaintenanceStartTime != nil && len(*s.WeeklyMaintenanceStartTime) < 7 {
 		invalidParams.Add(aws.NewErrParamMinLen("WeeklyMaintenanceStartTime", 7))
+	}
+	if s.SelfManagedActiveDirectoryConfiguration != nil {
+		if err := s.SelfManagedActiveDirectoryConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("SelfManagedActiveDirectoryConfiguration", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -561,6 +811,10 @@ type WindowsFileSystemConfiguration struct {
 
 	// The list of maintenance operations in progress for this file system.
 	MaintenanceOperationsInProgress []FileSystemMaintenanceOperation `type:"list"`
+
+	// The configuration of the self-managed Microsoft Active Directory (AD) directory
+	// to which the Windows File Server instance is joined.
+	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryAttributes `type:"structure"`
 
 	// The throughput of an Amazon FSx file system, measured in megabytes per second.
 	ThroughputCapacity *int64 `min:"8" type:"integer"`

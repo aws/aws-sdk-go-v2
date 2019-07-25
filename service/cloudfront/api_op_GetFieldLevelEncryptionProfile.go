@@ -10,7 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetFieldLevelEncryptionProfileRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionProfileRequest
 type GetFieldLevelEncryptionProfileInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +51,7 @@ func (s GetFieldLevelEncryptionProfileInput) MarshalFields(e protocol.FieldEncod
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetFieldLevelEncryptionProfileResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionProfileResult
 type GetFieldLevelEncryptionProfileOutput struct {
 	_ struct{} `type:"structure" payload:"FieldLevelEncryptionProfile"`
 
@@ -84,7 +84,7 @@ func (s GetFieldLevelEncryptionProfileOutput) MarshalFields(e protocol.FieldEnco
 	return nil
 }
 
-const opGetFieldLevelEncryptionProfile = "GetFieldLevelEncryptionProfile2018_11_05"
+const opGetFieldLevelEncryptionProfile = "GetFieldLevelEncryptionProfile2019_03_26"
 
 // GetFieldLevelEncryptionProfileRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -98,12 +98,12 @@ const opGetFieldLevelEncryptionProfile = "GetFieldLevelEncryptionProfile2018_11_
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/GetFieldLevelEncryptionProfile
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionProfile
 func (c *Client) GetFieldLevelEncryptionProfileRequest(input *GetFieldLevelEncryptionProfileInput) GetFieldLevelEncryptionProfileRequest {
 	op := &aws.Operation{
 		Name:       opGetFieldLevelEncryptionProfile,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2018-11-05/field-level-encryption-profile/{Id}",
+		HTTPPath:   "/2019-03-26/field-level-encryption-profile/{Id}",
 	}
 
 	if input == nil {

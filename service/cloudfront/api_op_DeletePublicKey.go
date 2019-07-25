@@ -11,7 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DeletePublicKeyRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeletePublicKeyRequest
 type DeletePublicKeyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -62,7 +62,7 @@ func (s DeletePublicKeyInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DeletePublicKeyOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeletePublicKeyOutput
 type DeletePublicKeyOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -77,7 +77,7 @@ func (s DeletePublicKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opDeletePublicKey = "DeletePublicKey2018_11_05"
+const opDeletePublicKey = "DeletePublicKey2019_03_26"
 
 // DeletePublicKeyRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -91,12 +91,12 @@ const opDeletePublicKey = "DeletePublicKey2018_11_05"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2018-11-05/DeletePublicKey
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeletePublicKey
 func (c *Client) DeletePublicKeyRequest(input *DeletePublicKeyInput) DeletePublicKeyRequest {
 	op := &aws.Operation{
 		Name:       opDeletePublicKey,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/2018-11-05/public-key/{Id}",
+		HTTPPath:   "/2019-03-26/public-key/{Id}",
 	}
 
 	if input == nil {

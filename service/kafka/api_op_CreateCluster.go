@@ -20,12 +20,16 @@ type CreateClusterInput struct {
 	// BrokerNodeGroupInfo is a required field
 	BrokerNodeGroupInfo *BrokerNodeGroupInfo `locationName:"brokerNodeGroupInfo" type:"structure" required:"true"`
 
+	// Includes all client authentication related information.
+	ClientAuthentication *Authentication `locationName:"clientAuthentication" type:"structure"`
+
 	// The name of the cluster.
 	//
 	// ClusterName is a required field
 	ClusterName *string `locationName:"clusterName" min:"1" type:"string" required:"true"`
 
-	// Comprises of the Configuration to be used on Kafka brokers in a cluster.
+	// Represents the configuration that you want MSK to use for the brokers in
+	// a cluster.
 	ConfigurationInfo *ConfigurationInfo `locationName:"configurationInfo" type:"structure"`
 
 	// Includes all encryption-related information.
@@ -40,10 +44,13 @@ type CreateClusterInput struct {
 	// KafkaVersion is a required field
 	KafkaVersion *string `locationName:"kafkaVersion" min:"1" type:"string" required:"true"`
 
-	// The number of Kafka broker nodes in the Amazon MSK cluster.
+	// The number of broker nodes in the cluster.
 	//
 	// NumberOfBrokerNodes is a required field
 	NumberOfBrokerNodes *int64 `locationName:"numberOfBrokerNodes" min:"1" type:"integer" required:"true"`
+
+	// Create tags when creating the cluster.
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -111,6 +118,12 @@ func (s CreateClusterInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "brokerNodeGroupInfo", v, metadata)
 	}
+	if s.ClientAuthentication != nil {
+		v := s.ClientAuthentication
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "clientAuthentication", v, metadata)
+	}
 	if s.ClusterName != nil {
 		v := *s.ClusterName
 
@@ -146,6 +159,18 @@ func (s CreateClusterInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "numberOfBrokerNodes", protocol.Int64Value(v), metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }
