@@ -286,6 +286,20 @@ func renameCollidingField(name string, v *Shape, field *ShapeRef) {
 	v.MemberRefs[newName] = field
 }
 
+func (a *API) setJsonTag() {
+	for _, v := range a.Shapes {
+		var parent string
+		if len(v.MemberRefs) > 0 {
+			parent = v.ShapeName
+		}
+		for k, field := range v.MemberRefs {
+			if field.ShapeName != "_" {
+				field.JsonTag = ShapeTag{"json", a.NiceName()+":"+parent+":"+k}
+			}
+		}
+	}
+}
+
 func (a *API) renameAPIPayloadShapes() {
 	for _, op := range a.Operations {
 		op.InputRef.Payload = a.ExportableName(op.InputRef.Payload)

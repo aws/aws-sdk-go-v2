@@ -22,7 +22,7 @@ type DescribeCertificateInput struct {
 	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// CertificateArn is a required field
-	CertificateArn *string `min:"20" type:"string" required:"true"`
+	CertificateArn *string `json:"ACM:DescribeCertificateInput:CertificateArn" min:"20" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -52,7 +52,7 @@ type DescribeCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Metadata about an ACM certificate.
-	Certificate *CertificateDetail `type:"structure"`
+	Certificate *CertificateDetail `json:"ACM:DescribeCertificateOutput:Certificate" type:"structure"`
 }
 
 // String returns the string representation

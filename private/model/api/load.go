@@ -190,6 +190,7 @@ func (a *API) Setup() {
 	if !a.NoValidataShapeMethods {
 		a.addShapeValidations()
 	}
-
+	
+	a.setJsonTag()
 	a.initialized = true
 }

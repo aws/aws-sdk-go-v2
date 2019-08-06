@@ -36,6 +36,7 @@ type ShapeRef struct {
 	OrigShapeName string `json:"-"`
 
 	GenerateGetter bool
+	JsonTag        ShapeTag
 }
 
 // CanBeEmpty returns if the shape value can sent request as an empty value.
@@ -398,7 +399,11 @@ func (s ShapeTags) String() string {
 // GoTags returns the rendered tags string for the ShapeRef
 func (ref *ShapeRef) GoTags(toplevel bool, isRequired bool) string {
 	tags := ShapeTags{}
-
+	
+	if ref.JsonTag.Key != "" {
+		tags = append(tags, ref.JsonTag)
+	}
+	
 	if ref.Location != "" {
 		tags = append(tags, ShapeTag{"location", ref.Location})
 	} else if ref.Shape.Location != "" {

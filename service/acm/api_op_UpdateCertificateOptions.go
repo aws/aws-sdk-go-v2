@@ -20,7 +20,7 @@ type UpdateCertificateOptionsInput struct {
 	// arn:aws:acm:us-east-1:account:certificate/12345678-1234-1234-1234-123456789012
 	//
 	// CertificateArn is a required field
-	CertificateArn *string `min:"20" type:"string" required:"true"`
+	CertificateArn *string `json:"ACM:UpdateCertificateOptionsInput:CertificateArn" min:"20" type:"string" required:"true"`
 
 	// Use to update the options for your certificate. Currently, you can specify
 	// whether to add your certificate to a transparency log. Certificate transparency
@@ -29,7 +29,7 @@ type UpdateCertificateOptionsInput struct {
 	// an error message in a browser.
 	//
 	// Options is a required field
-	Options *CertificateOptions `type:"structure" required:"true"`
+	Options *CertificateOptions `json:"ACM:UpdateCertificateOptionsInput:Options" type:"structure" required:"true"`
 }
 
 // String returns the string representation

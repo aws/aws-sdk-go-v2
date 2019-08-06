@@ -24,13 +24,13 @@ type ResendValidationEmailInput struct {
 	// arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012
 	//
 	// CertificateArn is a required field
-	CertificateArn *string `min:"20" type:"string" required:"true"`
+	CertificateArn *string `json:"ACM:ResendValidationEmailInput:CertificateArn" min:"20" type:"string" required:"true"`
 
 	// The fully qualified domain name (FQDN) of the certificate that needs to be
 	// validated.
 	//
 	// Domain is a required field
-	Domain *string `min:"1" type:"string" required:"true"`
+	Domain *string `json:"ACM:ResendValidationEmailInput:Domain" min:"1" type:"string" required:"true"`
 
 	// The base validation domain that will act as the suffix of the email addresses
 	// that are used to send the emails. This must be the same as the Domain value
@@ -50,7 +50,7 @@ type ResendValidationEmailInput struct {
 	//    * webmaster@subdomain.example.com
 	//
 	// ValidationDomain is a required field
-	ValidationDomain *string `min:"1" type:"string" required:"true"`
+	ValidationDomain *string `json:"ACM:ResendValidationEmailInput:ValidationDomain" min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation

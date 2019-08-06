@@ -18,24 +18,24 @@ type ImportCertificateInput struct {
 	// Certificate is automatically base64 encoded/decoded by the SDK.
 	//
 	// Certificate is a required field
-	Certificate []byte `min:"1" type:"blob" required:"true"`
+	Certificate []byte `json:"ACM:ImportCertificateInput:Certificate" min:"1" type:"blob" required:"true"`
 
 	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of an imported certificate to replace. To import a new certificate, omit
 	// this field.
-	CertificateArn *string `min:"20" type:"string"`
+	CertificateArn *string `json:"ACM:ImportCertificateInput:CertificateArn" min:"20" type:"string"`
 
 	// The PEM encoded certificate chain.
 	//
 	// CertificateChain is automatically base64 encoded/decoded by the SDK.
-	CertificateChain []byte `min:"1" type:"blob"`
+	CertificateChain []byte `json:"ACM:ImportCertificateInput:CertificateChain" min:"1" type:"blob"`
 
 	// The private key that matches the public key in the certificate.
 	//
 	// PrivateKey is automatically base64 encoded/decoded by the SDK.
 	//
 	// PrivateKey is a required field
-	PrivateKey []byte `min:"1" type:"blob" required:"true"`
+	PrivateKey []byte `json:"ACM:ImportCertificateInput:PrivateKey" min:"1" type:"blob" required:"true"`
 }
 
 // String returns the string representation
@@ -79,7 +79,7 @@ type ImportCertificateOutput struct {
 
 	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of the imported certificate.
-	CertificateArn *string `min:"20" type:"string"`
+	CertificateArn *string `json:"ACM:ImportCertificateOutput:CertificateArn" min:"20" type:"string"`
 }
 
 // String returns the string representation

@@ -21,7 +21,7 @@ type GetCertificateInput struct {
 	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// CertificateArn is a required field
-	CertificateArn *string `min:"20" type:"string" required:"true"`
+	CertificateArn *string `json:"ACM:GetCertificateInput:CertificateArn" min:"20" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -52,11 +52,11 @@ type GetCertificateOutput struct {
 
 	// String that contains the ACM certificate represented by the ARN specified
 	// at input.
-	Certificate *string `min:"1" type:"string"`
+	Certificate *string `json:"ACM:GetCertificateOutput:Certificate" min:"1" type:"string"`
 
 	// The certificate chain that contains the root certificate issued by the certificate
 	// authority (CA).
-	CertificateChain *string `min:"1" type:"string"`
+	CertificateChain *string `json:"ACM:GetCertificateOutput:CertificateChain" min:"1" type:"string"`
 }
 
 // String returns the string representation

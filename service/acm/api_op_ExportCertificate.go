@@ -19,7 +19,7 @@ type ExportCertificateInput struct {
 	// arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012
 	//
 	// CertificateArn is a required field
-	CertificateArn *string `min:"20" type:"string" required:"true"`
+	CertificateArn *string `json:"ACM:ExportCertificateInput:CertificateArn" min:"20" type:"string" required:"true"`
 
 	// Passphrase to associate with the encrypted exported private key. If you want
 	// to later decrypt the private key, you must have the passphrase. You can use
@@ -30,7 +30,7 @@ type ExportCertificateInput struct {
 	// Passphrase is automatically base64 encoded/decoded by the SDK.
 	//
 	// Passphrase is a required field
-	Passphrase []byte `min:"4" type:"blob" required:"true"`
+	Passphrase []byte `json:"ACM:ExportCertificateInput:Passphrase" min:"4" type:"blob" required:"true"`
 }
 
 // String returns the string representation
@@ -67,15 +67,15 @@ type ExportCertificateOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The base64 PEM-encoded certificate.
-	Certificate *string `min:"1" type:"string"`
+	Certificate *string `json:"ACM:ExportCertificateOutput:Certificate" min:"1" type:"string"`
 
 	// The base64 PEM-encoded certificate chain. This does not include the certificate
 	// that you are exporting.
-	CertificateChain *string `min:"1" type:"string"`
+	CertificateChain *string `json:"ACM:ExportCertificateOutput:CertificateChain" min:"1" type:"string"`
 
 	// The encrypted private key associated with the public key in the certificate.
 	// The key is output in PKCS #8 format and is base64 PEM-encoded.
-	PrivateKey *string `min:"1" type:"string"`
+	PrivateKey *string `json:"ACM:ExportCertificateOutput:PrivateKey" min:"1" type:"string"`
 }
 
 // String returns the string representation

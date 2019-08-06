@@ -22,7 +22,7 @@ type RequestCertificateInput struct {
 	// user guide. The ARN must have the following form:
 	//
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
-	CertificateAuthorityArn *string `min:"20" type:"string"`
+	CertificateAuthorityArn *string `json:"ACM:RequestCertificateInput:CertificateAuthorityArn" min:"20" type:"string"`
 
 	// Fully qualified domain name (FQDN), such as www.example.com, that you want
 	// to secure with an ACM certificate. Use an asterisk (*) to create a wildcard
@@ -34,11 +34,11 @@ type RequestCertificateInput struct {
 	// octets in length.
 	//
 	// DomainName is a required field
-	DomainName *string `min:"1" type:"string" required:"true"`
+	DomainName *string `json:"ACM:RequestCertificateInput:DomainName" min:"1" type:"string" required:"true"`
 
 	// The domain name that you want ACM to use to send you emails so that you can
 	// validate domain ownership.
-	DomainValidationOptions []DomainValidationOption `min:"1" type:"list"`
+	DomainValidationOptions []DomainValidationOption `json:"ACM:RequestCertificateInput:DomainValidationOptions" min:"1" type:"list"`
 
 	// Customer chosen string that can be used to distinguish between calls to RequestCertificate.
 	// Idempotency tokens time out after one hour. Therefore, if you call RequestCertificate
@@ -46,7 +46,7 @@ type RequestCertificateInput struct {
 	// that you are requesting only one certificate and will issue only one. If
 	// you change the idempotency token for each call, ACM recognizes that you are
 	// requesting multiple certificates.
-	IdempotencyToken *string `min:"1" type:"string"`
+	IdempotencyToken *string `json:"ACM:RequestCertificateInput:IdempotencyToken" min:"1" type:"string"`
 
 	// Currently, you can use this parameter to specify whether to add the certificate
 	// to a certificate transparency log. Certificate transparency makes it possible
@@ -54,7 +54,7 @@ type RequestCertificateInput struct {
 	// Certificates that have not been logged typically produce an error message
 	// in a browser. For more information, see Opting Out of Certificate Transparency
 	// Logging (https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency).
-	Options *CertificateOptions `type:"structure"`
+	Options *CertificateOptions `json:"ACM:RequestCertificateInput:Options" type:"structure"`
 
 	// Additional FQDNs to be included in the Subject Alternative Name extension
 	// of the ACM certificate. For example, add the name www.example.net to a certificate
@@ -78,13 +78,13 @@ type RequestCertificateInput struct {
 	//
 	//    * (63 octets).(63 octets).(63 octets).(62 octets) is not legal because
 	//    the total length of the DNS name (63+1+63+1+63+1+62) exceeds 253 octets.
-	SubjectAlternativeNames []string `min:"1" type:"list"`
+	SubjectAlternativeNames []string `json:"ACM:RequestCertificateInput:SubjectAlternativeNames" min:"1" type:"list"`
 
 	// The method you want to use if you are requesting a public certificate to
 	// validate that you own or control domain. You can validate with DNS (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html)
 	// or validate with email (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html).
 	// We recommend that you use DNS validation.
-	ValidationMethod ValidationMethod `type:"string" enum:"true"`
+	ValidationMethod ValidationMethod `json:"ACM:RequestCertificateInput:ValidationMethod" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -136,7 +136,7 @@ type RequestCertificateOutput struct {
 	// form:
 	//
 	// arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012
-	CertificateArn *string `min:"20" type:"string"`
+	CertificateArn *string `json:"ACM:RequestCertificateOutput:CertificateArn" min:"20" type:"string"`
 }
 
 // String returns the string representation
