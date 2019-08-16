@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
-	"path"
 	"strings"
 	"testing"
 
@@ -68,7 +67,7 @@ func TestEndpoint(t *testing.T) {
 	op := &aws.Operation{
 		Name:       "GetMetadata",
 		HTTPMethod: "GET",
-		HTTPPath:   path.Join("/", "meta-data", "testpath"),
+		HTTPPath:   "/meta-data/testpath",
 	}
 
 	req := c.NewRequest(op, nil, nil)
@@ -93,9 +92,29 @@ func TestGetMetadata(t *testing.T) {
 	c := ec2metadata.New(cfg)
 
 	resp, err := c.GetMetadata("some/path")
-
 	if err != nil {
-		t.Errorf("expect no error, got %v", err)
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if e, a := "success", resp; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+}
+
+func TestGetMetadata_TrailingSlash(t *testing.T) {
+	server := initTestServer(
+		"/latest/meta-data/some/path/",
+		"success", // real response includes suffix
+	)
+	defer server.Close()
+
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL + "/latest")
+
+	c := ec2metadata.New(cfg)
+
+	resp, err := c.GetMetadata("some/path/")
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
 	}
 	if e, a := "success", resp; e != a {
 		t.Errorf("expect %v, got %v", e, a)
@@ -115,9 +134,8 @@ func TestGetUserData(t *testing.T) {
 	c := ec2metadata.New(cfg)
 
 	resp, err := c.GetUserData()
-
 	if err != nil {
-		t.Errorf("expect no error, got %v", err)
+		t.Fatalf("expect no error, got %v", err)
 	}
 	if e, a := "success", resp; e != a {
 		t.Errorf("expect %v, got %v", e, a)
@@ -152,7 +170,7 @@ func TestGetUserData_Error(t *testing.T) {
 
 	resp, err := c.GetUserData()
 	if err == nil {
-		t.Errorf("expect error")
+		t.Fatalf("expect error")
 	}
 	if len(resp) != 0 {
 		t.Errorf("expect empty, got %v", resp)
@@ -177,9 +195,8 @@ func TestGetRegion(t *testing.T) {
 	c := ec2metadata.New(cfg)
 
 	region, err := c.Region()
-
 	if err != nil {
-		t.Errorf("expect no error, got %v", err)
+		t.Fatalf("expect no error, got %v", err)
 	}
 	if e, a := "us-west-2", region; e != a {
 		t.Errorf("expect %v, got %v", e, a)
@@ -217,7 +234,7 @@ func TestMetadataIAMInfo_success(t *testing.T) {
 
 	iamInfo, err := c.IAMInfo()
 	if err != nil {
-		t.Errorf("expect no error, got %v", err)
+		t.Fatalf("expect no error, got %v", err)
 	}
 	if e, a := "Success", iamInfo.Code; e != a {
 		t.Errorf("expect %v, got %v", e, a)
@@ -244,7 +261,7 @@ func TestMetadataIAMInfo_failure(t *testing.T) {
 
 	iamInfo, err := c.IAMInfo()
 	if err == nil {
-		t.Errorf("expect error")
+		t.Fatalf("expect error")
 	}
 	if e, a := "", iamInfo.Code; e != a {
 		t.Errorf("expect %v, got %v", e, a)
@@ -310,7 +327,7 @@ func TestEC2RoleProviderInstanceIdentity(t *testing.T) {
 
 	doc, err := c.GetInstanceIdentityDocument()
 	if err != nil {
-		t.Errorf("expect no error, got %v", err)
+		t.Fatalf("expect no error, got %v", err)
 	}
 	if e, a := doc.AccountID, "123456789012"; e != a {
 		t.Errorf("expect %v, got %v", e, a)
