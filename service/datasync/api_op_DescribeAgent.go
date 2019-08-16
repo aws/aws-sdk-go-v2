@@ -51,7 +51,9 @@ type DescribeAgentOutput struct {
 	// The time that the agent was activated (that is, created in your account).
 	CreationTime *time.Time `type:"timestamp"`
 
-	EndpointOptions *EndpointOptions `type:"structure"`
+	// The type of endpoint that your agent is connected to. If the endpoint is
+	// a VPC endpoint, the agent is not accessible over the public Internet.
+	EndpointType EndpointType `type:"string" enum:"true"`
 
 	// The time that the agent last connected to DataSyc.
 	LastConnectionTime *time.Time `type:"timestamp"`
@@ -59,6 +61,7 @@ type DescribeAgentOutput struct {
 	// The name of the agent.
 	Name *string `min:"1" type:"string"`
 
+	// The subnet and the security group that DataSync used to access a VPC endpoint.
 	PrivateLinkConfig *PrivateLinkConfig `type:"structure"`
 
 	// The status of the agent. If the status is ONLINE, then the agent is configured

@@ -12,9 +12,10 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// Describe the properties of the server that was specified. Information returned
-// includes: the server Amazon Resource Name (ARN), the authentication configuration
-// and type, the logging role, server Id and state, and assigned tags or metadata.
+// Describes the properties of the server that was specified. Information returned
+// includes the following: the server Amazon Resource Name (ARN), the authentication
+// configuration and type, the logging role, the server ID and state, and assigned
+// tags or metadata.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedServer
 type DescribedServer struct {
 	_ struct{} `type:"structure"`
@@ -33,9 +34,9 @@ type DescribedServer struct {
 	// the public internet.
 	EndpointType EndpointType `type:"string" enum:"true"`
 
-	// This value contains the Message-Digest Algorithm (MD5) hash of the server's
-	// host key. This value is equivalent to the output of ssh-keygen -l -E md5
-	// -f my-new-server-key command.
+	// This value contains the message-digest algorithm (MD5) hash of the server's
+	// host key. This value is equivalent to the output of the ssh-keygen -l -E
+	// md5 -f my-new-server-key command.
 	HostKeyFingerprint *string `type:"string"`
 
 	// Specifies information to call a customer-supplied authentication API. This
@@ -43,7 +44,7 @@ type DescribedServer struct {
 	IdentityProviderDetails *IdentityProviderDetails `type:"structure"`
 
 	// This property defines the mode of authentication method enabled for this
-	// service. A value of SERVICE_MANAGED, means that you are using this Server
+	// service. A value of SERVICE_MANAGED means that you are using this server
 	// to store and access SFTP user credentials within the service. A value of
 	// API_GATEWAY indicates that you have integrated an API Gateway endpoint that
 	// will be invoked for authenticating your user into the service.
@@ -51,10 +52,10 @@ type DescribedServer struct {
 
 	// This property is an AWS Identity and Access Management (IAM) entity that
 	// allows the server to turn on Amazon CloudWatch logging for Amazon S3 events.
-	// When set, user activity can be view in your CloudWatch logs.
+	// When set, user activity can be viewed in your CloudWatch logs.
 	LoggingRole *string `type:"string"`
 
-	// This property is a unique system assigned identifier for the SFTP server
+	// This property is a unique system-assigned identifier for the SFTP server
 	// that you instantiate.
 	ServerId *string `type:"string"`
 
@@ -63,7 +64,7 @@ type DescribedServer struct {
 	// State value of OFFLINE means that the server cannot perform file transfer
 	// operations.
 	//
-	// The states of STARTING and STOPPING indicated that the server is in an intermediate
+	// The states of STARTING and STOPPING indicate that the server is in an intermediate
 	// state, either not fully able to respond, or not fully offline. The values
 	// of START_FAILED or STOP_FAILED can indicate an error condition.
 	State State `type:"string" enum:"true"`
@@ -82,7 +83,7 @@ func (s DescribedServer) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Returns properties of the user that you wish to describe.
+// Returns properties of the user that you want to describe.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedUser
 type DescribedUser struct {
 	_ struct{} `type:"structure"`
@@ -93,9 +94,9 @@ type DescribedUser struct {
 	// Arn is a required field
 	Arn *string `min:"20" type:"string" required:"true"`
 
-	// This property specifies the landing directory (or folder) which is the location
+	// This property specifies the landing directory (or folder), which is the location
 	// that files are written to or read from in an Amazon S3 bucket for the described
-	// user. An example would be: /bucket_name/home/username .
+	// user. An example is /bucket_name/home/username .
 	HomeDirectory *string `type:"string"`
 
 	// Specifies the name of the policy in use for the described user.
@@ -144,17 +145,17 @@ func (s EndpointDetails) String() string {
 }
 
 // Returns information related to the type of user authentication that is in
-// use for a server's users. A server can only have one method of authentication.
+// use for a server's users. A server can have only one method of authentication.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/IdentityProviderDetails
 type IdentityProviderDetails struct {
 	_ struct{} `type:"structure"`
 
-	// The Role parameter provides the type of InvocationRole used to authenticate
-	// the user account.
+	// The InvocationRole parameter provides the type of InvocationRole used to
+	// authenticate the user account.
 	InvocationRole *string `type:"string"`
 
-	// The IdentityProviderDetail parameter contains the location of the service
-	// endpoint used to authenticate users.
+	// The Url parameter provides contains the location of the service endpoint
+	// used to authenticate users.
 	Url *string `type:"string"`
 }
 
@@ -179,9 +180,9 @@ type ListedServer struct {
 	EndpointType EndpointType `type:"string" enum:"true"`
 
 	// The authentication method used to validate a user for the server that was
-	// specified. listed. This can include Secure Shell (SSH), user name and password
-	// combinations, or your own custom authentication method. Valid values include
-	// SERVICE_MANAGED or API_GATEWAY.
+	// specified. This can include Secure Shell (SSH), user name and password combinations,
+	// or your own custom authentication method. Valid values include SERVICE_MANAGED
+	// or API_GATEWAY.
 	IdentityProviderType IdentityProviderType `type:"string" enum:"true"`
 
 	// The AWS Identity and Access Management entity that allows the server to turn
@@ -197,7 +198,7 @@ type ListedServer struct {
 	// and transfer files. A State value of OFFLINE means that the server cannot
 	// perform file transfer operations.
 	//
-	// The states of STARTING and STOPPING indicated that the server is in an intermediate
+	// The states of STARTING and STOPPING indicate that the server is in an intermediate
 	// state, either not fully able to respond, or not fully offline. The values
 	// of START_FAILED or STOP_FAILED can indicate an error condition.
 	State State `type:"string" enum:"true"`
@@ -218,7 +219,7 @@ type ListedUser struct {
 	_ struct{} `type:"structure"`
 
 	// This property is the unique Amazon Resource Name (ARN) for the user that
-	// you wish to learn about.
+	// you want to learn about.
 	//
 	// Arn is a required field
 	Arn *string `min:"20" type:"string" required:"true"`
@@ -228,7 +229,7 @@ type ListedUser struct {
 	HomeDirectory *string `type:"string"`
 
 	// The role in use by this user. A role is an AWS Identity and Access Management
-	// (IAM) entity that in this case allows the SFTP server to act on a user's
+	// (IAM) entity that, in this case, allows the SFTP server to act on a user's
 	// behalf. It allows the server to inherit the trust relationship that enables
 	// that user to perform file operations to their Amazon S3 bucket.
 	Role *string `type:"string"`

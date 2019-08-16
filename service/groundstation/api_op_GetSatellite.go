@@ -15,8 +15,6 @@ import (
 type GetSatelliteInput struct {
 	_ struct{} `type:"structure"`
 
-	// UUID of a satellite.
-	//
 	// SatelliteId is a required field
 	SatelliteId *string `location:"uri" locationName:"satelliteId" type:"string" required:"true"`
 }
@@ -57,22 +55,16 @@ func (s GetSatelliteInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetSatelliteOutput struct {
 	_ struct{} `type:"structure"`
 
-	// When a satellite was created.
 	DateCreated *time.Time `locationName:"dateCreated" type:"timestamp"`
 
-	// When a satellite was last updated.
 	LastUpdated *time.Time `locationName:"lastUpdated" type:"timestamp"`
 
-	// NORAD satellite ID number.
 	NoradSatelliteID *int64 `locationName:"noradSatelliteID" min:"1" type:"integer"`
 
-	// ARN of a satellite.
 	SatelliteArn *string `locationName:"satelliteArn" type:"string"`
 
-	// UUID of a satellite.
 	SatelliteId *string `locationName:"satelliteId" min:"1" type:"string"`
 
-	// Tags assigned to a satellite.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 

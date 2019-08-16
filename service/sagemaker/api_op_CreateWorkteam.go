@@ -21,7 +21,7 @@ type CreateWorkteamInput struct {
 
 	// A list of MemberDefinition objects that contains objects that identify the
 	// Amazon Cognito user pool that makes up the work team. For more information,
-	// see Amazon Cognito User Pools (http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html).
+	// see Amazon Cognito User Pools (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html).
 	//
 	// All of the CognitoMemberDefinition objects that make up the member definition
 	// must have the same ClientId and UserPool values.
@@ -32,6 +32,11 @@ type CreateWorkteamInput struct {
 	// Configures notification of workers regarding available or expiring work items.
 	NotificationConfiguration *NotificationConfiguration `type:"structure"`
 
+	// An array of key-value pairs.
+	//
+	// For more information, see Resource Tag (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html)
+	// and Using Cost Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
+	// in the AWS Billing and Cost Management User Guide.
 	Tags []Tag `type:"list"`
 
 	// The name of the work team. Use this name to identify the work team.

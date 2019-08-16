@@ -148,8 +148,9 @@ func (enum AacVbrQuality) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Specifies the "Bitstream Mode" (bsmod) for the emitted AC-3 stream. See ATSC
-// A/52-2012 for background on these values.
+// Specify the bitstream mode for the AC-3 stream that the encoder emits. For
+// more information about the AC3 bitstream mode, see ATSC A/52-2012 (Annex
+// E).
 type Ac3BitstreamMode string
 
 // Enum values for Ac3BitstreamMode
@@ -294,9 +295,9 @@ func (enum AfdSignaling) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The service automatically applies the anti-alias filter to all outputs. The
-// service no longer accepts the value DISABLED for AntiAlias. If you specify
-// that in your job, the service will ignore the setting.
+// The anti-alias filter is automatically applied to all outputs. The service
+// no longer accepts the value DISABLED for AntiAlias. If you specify that in
+// your job, the service will ignore the setting.
 type AntiAlias string
 
 // Enum values for AntiAlias
@@ -325,6 +326,7 @@ const (
 	AudioCodecAiff        AudioCodec = "AIFF"
 	AudioCodecAc3         AudioCodec = "AC3"
 	AudioCodecEac3        AudioCodec = "EAC3"
+	AudioCodecEac3Atmos   AudioCodec = "EAC3_ATMOS"
 	AudioCodecPassthrough AudioCodec = "PASSTHROUGH"
 )
 
@@ -378,14 +380,24 @@ func (enum AudioLanguageCodeControl) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Audio normalization algorithm to use. 1770-1 conforms to the CALM Act specification,
-// 1770-2 conforms to the EBU R-128 specification.
+// Choose one of the following audio normalization algorithms: ITU-R BS.1770-1:
+// Ungated loudness. A measurement of ungated average loudness for an entire
+// piece of content, suitable for measurement of short-form content under ATSC
+// recommendation A/85. Supports up to 5.1 audio channels. ITU-R BS.1770-2:
+// Gated loudness. A measurement of gated average loudness compliant with the
+// requirements of EBU-R128. Supports up to 5.1 audio channels. ITU-R BS.1770-3:
+// Modified peak. The same loudness measurement algorithm as 1770-2, with an
+// updated true peak measurement. ITU-R BS.1770-4: Higher channel count. Allows
+// for more audio channels than the other algorithms, including configurations
+// such as 7.1.
 type AudioNormalizationAlgorithm string
 
 // Enum values for AudioNormalizationAlgorithm
 const (
 	AudioNormalizationAlgorithmItuBs17701 AudioNormalizationAlgorithm = "ITU_BS_1770_1"
 	AudioNormalizationAlgorithmItuBs17702 AudioNormalizationAlgorithm = "ITU_BS_1770_2"
+	AudioNormalizationAlgorithmItuBs17703 AudioNormalizationAlgorithm = "ITU_BS_1770_3"
+	AudioNormalizationAlgorithmItuBs17704 AudioNormalizationAlgorithm = "ITU_BS_1770_4"
 )
 
 func (enum AudioNormalizationAlgorithm) MarshalValue() (string, error) {
@@ -753,8 +765,7 @@ func (enum CmafCodecSpecification) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Encrypts the segments with the given encryption scheme. Leave blank to disable.
-// Selecting 'Disabled' in the web interface also disables encryption.
+// For DRM with CMAF, the encryption type is always sample AES.
 type CmafEncryptionType string
 
 // Enum values for CmafEncryptionType
@@ -771,9 +782,8 @@ func (enum CmafEncryptionType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The Initialization Vector is a 128-bit number used in conjunction with the
-// key for encrypting blocks. If set to INCLUDE, Initialization Vector is listed
-// in the manifest. Otherwise Initialization Vector is not in the manifest.
+// When you use DRM with CMAF outputs, choose whether the service writes the
+// 128-bit encryption initialization vector in the HLS and DASH manifests.
 type CmafInitializationVectorInManifest string
 
 // Enum values for CmafInitializationVectorInManifest
@@ -791,11 +801,13 @@ func (enum CmafInitializationVectorInManifest) MarshalValueBuf(b []byte) ([]byte
 	return append(b, enum...), nil
 }
 
-// Indicates which type of key provider is used for encryption.
+// Specify whether your DRM encryption key is static or from a key provider
+// that follows the SPEKE standard. For more information about SPEKE, see https://docs.aws.amazon.com/speke/latest/documentation/what-is-speke.html.
 type CmafKeyProviderType string
 
 // Enum values for CmafKeyProviderType
 const (
+	CmafKeyProviderTypeSpeke     CmafKeyProviderType = "SPEKE"
 	CmafKeyProviderTypeStaticKey CmafKeyProviderType = "STATIC_KEY"
 )
 
@@ -920,8 +932,9 @@ func (enum CmafWriteHLSManifest) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Enable Insert color metadata (ColorMetadata) to include color metadata in
-// this output. This setting is enabled by default.
+// Choose Insert (INSERT) for this setting to include color metadata in this
+// output. Choose Ignore (IGNORE) to exclude color metadata from this output.
+// If you don't specify a value, the service sets this to Insert by default.
 type ColorMetadata string
 
 // Enum values for ColorMetadata
@@ -940,13 +953,14 @@ func (enum ColorMetadata) MarshalValueBuf(b []byte) ([]byte, error) {
 }
 
 // If your input video has accurate color space metadata, or if you don't know
-// about color space, leave this set to the default value FOLLOW. The service
-// will automatically detect your input color space. If your input video has
-// metadata indicating the wrong color space, or if your input video is missing
-// color space metadata that should be there, specify the accurate color space
-// here. If you choose HDR10, you can also correct inaccurate color space coefficients,
-// using the HDR master display information controls. You must also set Color
-// space usage (ColorSpaceUsage) to FORCE for the service to use these values.
+// about color space, leave this set to the default value Follow (FOLLOW). The
+// service will automatically detect your input color space. If your input video
+// has metadata indicating the wrong color space, specify the accurate color
+// space here. If your input video is HDR 10 and the SMPTE ST 2086 Mastering
+// Display Color Volume static metadata isn't present in your video stream,
+// or if that metadata is present but not accurate, choose Force HDR 10 (FORCE_HDR10)
+// here and specify correct values in the input HDR 10 metadata (Hdr10Metadata)
+// settings. For more information about MediaConvert HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr.
 type ColorSpace string
 
 // Enum values for ColorSpace
@@ -967,11 +981,11 @@ func (enum ColorSpace) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Determines if colorspace conversion will be performed. If set to _None_,
-// no conversion will be performed. If _Force 601_ or _Force 709_ are selected,
-// conversion will be performed for inputs with differing colorspaces. An input's
-// colorspace can be specified explicitly in the "Video Selector":#inputs-video_selector
-// if necessary.
+// Specify the color space you want for this output. The service supports conversion
+// between HDR formats, between SDR formats, and from SDR to HDR. The service
+// doesn't support conversion from HDR to SDR. SDR to HDR conversion doesn't
+// upgrade the dynamic range. The converted video has an HDR format, but visually
+// appears the same as an unconverted output.
 type ColorSpaceConversion string
 
 // Enum values for ColorSpaceConversion
@@ -992,13 +1006,14 @@ func (enum ColorSpaceConversion) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// There are two sources for color metadata, the input file and the job configuration
-// (in the Color space and HDR master display informaiton settings). The Color
-// space usage setting controls which takes precedence. FORCE: The system will
-// use color metadata supplied by user, if any. If the user does not supply
-// color metadata, the system will use data from the source. FALLBACK: The system
-// will use color metadata from the source. If source has no color metadata,
-// the system will use user-supplied color metadata values if available.
+// There are two sources for color metadata, the input file and the job input
+// settings Color space (ColorSpace) and HDR master display information settings(Hdr10Metadata).
+// The Color space usage setting determines which takes precedence. Choose Force
+// (FORCE) to use color metadata from the input job settings. If you don't specify
+// values for those settings, the service defaults to using metadata from your
+// input. FALLBACK - Choose Fallback (FALLBACK) to use color metadata from the
+// source when it is present. If there's no color metadata in your input file,
+// the service defaults to using values you specify in the input settings.
 type ColorSpaceUsage string
 
 // Enum values for ColorSpaceUsage
@@ -1413,6 +1428,166 @@ func (enum DvbSubtitleTeletextSpacing) MarshalValueBuf(b []byte) ([]byte, error)
 	return append(b, enum...), nil
 }
 
+// Specify the bitstream mode for the E-AC-3 stream that the encoder emits.
+// For more information about the EAC3 bitstream mode, see ATSC A/52-2012 (Annex
+// E).
+type Eac3AtmosBitstreamMode string
+
+// Enum values for Eac3AtmosBitstreamMode
+const (
+	Eac3AtmosBitstreamModeCompleteMain Eac3AtmosBitstreamMode = "COMPLETE_MAIN"
+)
+
+func (enum Eac3AtmosBitstreamMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Eac3AtmosBitstreamMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// The coding mode for Dolby Digital Plus JOC (Atmos) is always 9.1.6 (CODING_MODE_9_1_6).
+type Eac3AtmosCodingMode string
+
+// Enum values for Eac3AtmosCodingMode
+const (
+	Eac3AtmosCodingModeCodingMode916 Eac3AtmosCodingMode = "CODING_MODE_9_1_6"
+)
+
+func (enum Eac3AtmosCodingMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Eac3AtmosCodingMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Enable Dolby Dialogue Intelligence to adjust loudness based on dialogue analysis.
+type Eac3AtmosDialogueIntelligence string
+
+// Enum values for Eac3AtmosDialogueIntelligence
+const (
+	Eac3AtmosDialogueIntelligenceEnabled  Eac3AtmosDialogueIntelligence = "ENABLED"
+	Eac3AtmosDialogueIntelligenceDisabled Eac3AtmosDialogueIntelligence = "DISABLED"
+)
+
+func (enum Eac3AtmosDialogueIntelligence) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Eac3AtmosDialogueIntelligence) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Specify the absolute peak level for a signal with dynamic range compression.
+type Eac3AtmosDynamicRangeCompressionLine string
+
+// Enum values for Eac3AtmosDynamicRangeCompressionLine
+const (
+	Eac3AtmosDynamicRangeCompressionLineNone          Eac3AtmosDynamicRangeCompressionLine = "NONE"
+	Eac3AtmosDynamicRangeCompressionLineFilmStandard  Eac3AtmosDynamicRangeCompressionLine = "FILM_STANDARD"
+	Eac3AtmosDynamicRangeCompressionLineFilmLight     Eac3AtmosDynamicRangeCompressionLine = "FILM_LIGHT"
+	Eac3AtmosDynamicRangeCompressionLineMusicStandard Eac3AtmosDynamicRangeCompressionLine = "MUSIC_STANDARD"
+	Eac3AtmosDynamicRangeCompressionLineMusicLight    Eac3AtmosDynamicRangeCompressionLine = "MUSIC_LIGHT"
+	Eac3AtmosDynamicRangeCompressionLineSpeech        Eac3AtmosDynamicRangeCompressionLine = "SPEECH"
+)
+
+func (enum Eac3AtmosDynamicRangeCompressionLine) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Eac3AtmosDynamicRangeCompressionLine) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Specify how the service limits the audio dynamic range when compressing the
+// audio.
+type Eac3AtmosDynamicRangeCompressionRf string
+
+// Enum values for Eac3AtmosDynamicRangeCompressionRf
+const (
+	Eac3AtmosDynamicRangeCompressionRfNone          Eac3AtmosDynamicRangeCompressionRf = "NONE"
+	Eac3AtmosDynamicRangeCompressionRfFilmStandard  Eac3AtmosDynamicRangeCompressionRf = "FILM_STANDARD"
+	Eac3AtmosDynamicRangeCompressionRfFilmLight     Eac3AtmosDynamicRangeCompressionRf = "FILM_LIGHT"
+	Eac3AtmosDynamicRangeCompressionRfMusicStandard Eac3AtmosDynamicRangeCompressionRf = "MUSIC_STANDARD"
+	Eac3AtmosDynamicRangeCompressionRfMusicLight    Eac3AtmosDynamicRangeCompressionRf = "MUSIC_LIGHT"
+	Eac3AtmosDynamicRangeCompressionRfSpeech        Eac3AtmosDynamicRangeCompressionRf = "SPEECH"
+)
+
+func (enum Eac3AtmosDynamicRangeCompressionRf) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Eac3AtmosDynamicRangeCompressionRf) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Choose how the service meters the loudness of your audio.
+type Eac3AtmosMeteringMode string
+
+// Enum values for Eac3AtmosMeteringMode
+const (
+	Eac3AtmosMeteringModeLeqA       Eac3AtmosMeteringMode = "LEQ_A"
+	Eac3AtmosMeteringModeItuBs17701 Eac3AtmosMeteringMode = "ITU_BS_1770_1"
+	Eac3AtmosMeteringModeItuBs17702 Eac3AtmosMeteringMode = "ITU_BS_1770_2"
+	Eac3AtmosMeteringModeItuBs17703 Eac3AtmosMeteringMode = "ITU_BS_1770_3"
+	Eac3AtmosMeteringModeItuBs17704 Eac3AtmosMeteringMode = "ITU_BS_1770_4"
+)
+
+func (enum Eac3AtmosMeteringMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Eac3AtmosMeteringMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Choose how the service does stereo downmixing.
+type Eac3AtmosStereoDownmix string
+
+// Enum values for Eac3AtmosStereoDownmix
+const (
+	Eac3AtmosStereoDownmixNotIndicated Eac3AtmosStereoDownmix = "NOT_INDICATED"
+	Eac3AtmosStereoDownmixStereo       Eac3AtmosStereoDownmix = "STEREO"
+	Eac3AtmosStereoDownmixSurround     Eac3AtmosStereoDownmix = "SURROUND"
+	Eac3AtmosStereoDownmixDpl2         Eac3AtmosStereoDownmix = "DPL2"
+)
+
+func (enum Eac3AtmosStereoDownmix) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Eac3AtmosStereoDownmix) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Specify whether your input audio has an additional center rear surround channel
+// matrix encoded into your left and right surround channels.
+type Eac3AtmosSurroundExMode string
+
+// Enum values for Eac3AtmosSurroundExMode
+const (
+	Eac3AtmosSurroundExModeNotIndicated Eac3AtmosSurroundExMode = "NOT_INDICATED"
+	Eac3AtmosSurroundExModeEnabled      Eac3AtmosSurroundExMode = "ENABLED"
+	Eac3AtmosSurroundExModeDisabled     Eac3AtmosSurroundExMode = "DISABLED"
+)
+
+func (enum Eac3AtmosSurroundExMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Eac3AtmosSurroundExMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // If set to ATTENUATE_3_DB, applies a 3 dB attenuation to the surround channels.
 // Only used for 3/2 coding mode.
 type Eac3AttenuationControl string
@@ -1432,8 +1607,9 @@ func (enum Eac3AttenuationControl) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Specifies the "Bitstream Mode" (bsmod) for the emitted E-AC-3 stream. See
-// ATSC A/52-2012 (Annex E) for background on these values.
+// Specify the bitstream mode for the E-AC-3 stream that the encoder emits.
+// For more information about the EAC3 bitstream mode, see ATSC A/52-2012 (Annex
+// E).
 type Eac3BitstreamMode string
 
 // Enum values for Eac3BitstreamMode
@@ -1491,8 +1667,7 @@ func (enum Eac3DcFilter) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Enables Dynamic Range Compression that restricts the absolute peak level
-// for a signal.
+// Specify the absolute peak level for a signal with dynamic range compression.
 type Eac3DynamicRangeCompressionLine string
 
 // Enum values for Eac3DynamicRangeCompressionLine
@@ -1514,8 +1689,8 @@ func (enum Eac3DynamicRangeCompressionLine) MarshalValueBuf(b []byte) ([]byte, e
 	return append(b, enum...), nil
 }
 
-// Enables Heavy Dynamic Range Compression, ensures that the instantaneous signal
-// peaks do not exceed specified levels.
+// Specify how the service limits the audio dynamic range when compressing the
+// audio.
 type Eac3DynamicRangeCompressionRf string
 
 // Enum values for Eac3DynamicRangeCompressionRf
@@ -1634,7 +1809,10 @@ func (enum Eac3PhaseControl) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Stereo downmix preference. Only used for 3/2 coding mode.
+// Choose how the service does stereo downmixing. This setting only applies
+// if you keep the default value of 3/2 - L, R, C, Ls, Rs (CODING_MODE_3_2)
+// for the setting Coding mode (Eac3CodingMode). If you choose a different value
+// for Coding mode, the service ignores Stereo downmix (Eac3StereoDownmix).
 type Eac3StereoDownmix string
 
 // Enum values for Eac3StereoDownmix
@@ -2125,13 +2303,18 @@ func (enum H264RepeatPps) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Scene change detection (inserts I-frames on scene changes).
+// Enable this setting to insert I-frames at scene changes that the service
+// automatically detects. This improves video quality and is enabled by default.
+// If this output uses QVBR, choose Transition detection (TRANSITION_DETECTION)
+// for further video quality improvement. For more information about QVBR, see
+// https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.
 type H264SceneChangeDetect string
 
 // Enum values for H264SceneChangeDetect
 const (
-	H264SceneChangeDetectDisabled H264SceneChangeDetect = "DISABLED"
-	H264SceneChangeDetectEnabled  H264SceneChangeDetect = "ENABLED"
+	H264SceneChangeDetectDisabled            H264SceneChangeDetect = "DISABLED"
+	H264SceneChangeDetectEnabled             H264SceneChangeDetect = "ENABLED"
+	H264SceneChangeDetectTransitionDetection H264SceneChangeDetect = "TRANSITION_DETECTION"
 )
 
 func (enum H264SceneChangeDetect) MarshalValue() (string, error) {
@@ -2483,17 +2666,18 @@ func (enum H265GopSizeUnits) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Use Interlace mode (InterlaceMode) to choose the scan line type for the output.
-// * Top Field First (TOP_FIELD) and Bottom Field First (BOTTOM_FIELD) produce
-// interlaced output with the entire output having the same field polarity (top
-// or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow, Default
-// Bottom (FOLLOW_BOTTOM_FIELD) use the same field polarity as the source. Therefore,
-// behavior depends on the input scan type. - If the source is interlaced, the
-// output will be interlaced with the same polarity as the source (it will follow
-// the source). The output could therefore be a mix of "top field first" and
-// "bottom field first". - If the source is progressive, the output will be
-// interlaced with "top field first" or "bottom field first" polarity, depending
-// on which of the Follow options you chose.
+// Choose the scan line type for the output. Choose Progressive (PROGRESSIVE)
+// to create a progressive output, regardless of the scan type of your input.
+// Choose Top Field First (TOP_FIELD) or Bottom Field First (BOTTOM_FIELD) to
+// create an output that's interlaced with the same field polarity throughout.
+// Choose Follow, Default Top (FOLLOW_TOP_FIELD) or Follow, Default Bottom (FOLLOW_BOTTOM_FIELD)
+// to create an interlaced output with the same field polarity as the source.
+// If the source is interlaced, the output will be interlaced with the same
+// polarity as the source (it will follow the source). The output could therefore
+// be a mix of "top field first" and "bottom field first". If the source is
+// progressive, your output will be interlaced with "top field first" or "bottom
+// field first" polarity, depending on which of the Follow options you chose.
+// If you don't choose a value, the service will default to Progressive (PROGRESSIVE).
 type H265InterlaceMode string
 
 // Enum values for H265InterlaceMode
@@ -2595,13 +2779,18 @@ func (enum H265SampleAdaptiveOffsetFilterMode) MarshalValueBuf(b []byte) ([]byte
 	return append(b, enum...), nil
 }
 
-// Scene change detection (inserts I-frames on scene changes).
+// Enable this setting to insert I-frames at scene changes that the service
+// automatically detects. This improves video quality and is enabled by default.
+// If this output uses QVBR, choose Transition detection (TRANSITION_DETECTION)
+// for further video quality improvement. For more information about QVBR, see
+// https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.
 type H265SceneChangeDetect string
 
 // Enum values for H265SceneChangeDetect
 const (
-	H265SceneChangeDetectDisabled H265SceneChangeDetect = "DISABLED"
-	H265SceneChangeDetectEnabled  H265SceneChangeDetect = "ENABLED"
+	H265SceneChangeDetectDisabled            H265SceneChangeDetect = "DISABLED"
+	H265SceneChangeDetectEnabled             H265SceneChangeDetect = "ENABLED"
+	H265SceneChangeDetectTransitionDetection H265SceneChangeDetect = "TRANSITION_DETECTION"
 )
 
 func (enum H265SceneChangeDetect) MarshalValue() (string, error) {
@@ -2802,6 +2991,28 @@ func (enum HlsAdMarkers) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Use this setting only in audio-only outputs. Choose MPEG-2 Transport Stream
+// (M2TS) to create a file in an MPEG2-TS container. Keep the default value
+// Automatic (AUTOMATIC) to create a raw audio-only file with no container.
+// Regardless of the value that you specify here, if this output has video,
+// the service will place outputs into an MPEG2-TS container.
+type HlsAudioOnlyContainer string
+
+// Enum values for HlsAudioOnlyContainer
+const (
+	HlsAudioOnlyContainerAutomatic HlsAudioOnlyContainer = "AUTOMATIC"
+	HlsAudioOnlyContainerM2ts      HlsAudioOnlyContainer = "M2TS"
+)
+
+func (enum HlsAudioOnlyContainer) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HlsAudioOnlyContainer) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Four types of audio-only tracks are supported: Audio-Only Variant Stream
 // The client can play back this audio-only stream instead of video in low-bandwidth
 // scenarios. Represented as an EXT-X-STREAM-INF in the HLS manifest. Alternate
@@ -2973,7 +3184,8 @@ func (enum HlsInitializationVectorInManifest) MarshalValueBuf(b []byte) ([]byte,
 	return append(b, enum...), nil
 }
 
-// Indicates which type of key provider is used for encryption.
+// Specify whether your DRM encryption key is static or from a key provider
+// that follows the SPEKE standard. For more information about SPEKE, see https://docs.aws.amazon.com/speke/latest/documentation/what-is-speke.html.
 type HlsKeyProviderType string
 
 // Enum values for HlsKeyProviderType
@@ -3731,8 +3943,12 @@ func (enum M2tsRateMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Enables SCTE-35 passthrough (scte35Source) to pass any SCTE-35 signals from
-// input to output.
+// For SCTE-35 markers from your input-- Choose Passthrough (PASSTHROUGH) if
+// you want SCTE-35 markers that appear in your input to also appear in this
+// output. Choose None (NONE) if you don't want SCTE-35 markers in this output.
+// For SCTE-35 markers from an ESAM XML document-- Choose None (NONE). Also
+// provide the ESAM XML as a string in the setting Signal processing notification
+// XML (sccXml). Also enable ESAM SCTE-35 (include the property scte35Esam).
 type M2tsScte35Source string
 
 // Enum values for M2tsScte35Source
@@ -3845,8 +4061,14 @@ func (enum M3u8PcrControl) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Enables SCTE-35 passthrough (scte35Source) to pass any SCTE-35 signals from
-// input to output.
+// For SCTE-35 markers from your input-- Choose Passthrough (PASSTHROUGH) if
+// you want SCTE-35 markers that appear in your input to also appear in this
+// output. Choose None (NONE) if you don't want SCTE-35 markers in this output.
+// For SCTE-35 markers from an ESAM XML document-- Choose None (NONE) if you
+// don't want manifest conditioning. Choose Passthrough (PASSTHROUGH) and choose
+// Ad markers (adMarkers) if you do want manifest conditioning. In both cases,
+// also provide the ESAM XML as a string in the setting Signal processing notification
+// XML (sccXml).
 type M3u8Scte35Source string
 
 // Enum values for M3u8Scte35Source
@@ -4317,7 +4539,8 @@ func (enum Mpeg2RateControlMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Scene change detection (inserts I-frames on scene changes).
+// Enable this setting to insert I-frames at scene changes that the service
+// automatically detects. This improves video quality and is enabled by default.
 type Mpeg2SceneChangeDetect string
 
 // Enum values for Mpeg2SceneChangeDetect
@@ -4472,10 +4695,11 @@ func (enum MsSmoothManifestEncoding) MarshalValueBuf(b []byte) ([]byte, error) {
 
 // Use Noise reducer filter (NoiseReducerFilter) to select one of the following
 // spatial image filtering functions. To use this setting, you must also enable
-// Noise reducer (NoiseReducer). * Bilateral is an edge preserving noise reduction
-// filter. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) are convolution
-// filters. * Conserve is a min/max noise reduction filter. * Spatial is a frequency-domain
-// filter based on JND principles.
+// Noise reducer (NoiseReducer). * Bilateral preserves edges while reducing
+// noise. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) do convolution
+// filtering. * Conserve does min/max noise reduction. * Spatial does frequency-domain
+// filtering based on JND principles. * Temporal optimizes video quality for
+// complex motion.
 type NoiseReducerFilter string
 
 // Enum values for NoiseReducerFilter
@@ -4487,6 +4711,7 @@ const (
 	NoiseReducerFilterSharpen   NoiseReducerFilter = "SHARPEN"
 	NoiseReducerFilterConserve  NoiseReducerFilter = "CONSERVE"
 	NoiseReducerFilterSpatial   NoiseReducerFilter = "SPATIAL"
+	NoiseReducerFilterTemporal  NoiseReducerFilter = "TEMPORAL"
 )
 
 func (enum NoiseReducerFilter) MarshalValue() (string, error) {
@@ -4898,11 +5123,12 @@ func (enum S3ServerSideEncryptionType) MarshalValueBuf(b []byte) ([]byte, error)
 	return append(b, enum...), nil
 }
 
-// Applies only if your input aspect ratio is different from your output aspect
-// ratio. Choose "Stretch to output" to have the service stretch your video
-// image to fit. Keep the setting "Default" to allow the service to letterbox
-// your video instead. This setting overrides any positioning value you specify
-// elsewhere in the job.
+// Specify how the service handles outputs that have a different aspect ratio
+// from the input aspect ratio. Choose Stretch to output (STRETCH_TO_OUTPUT)
+// to have the service stretch your video image to fit. Keep the setting Default
+// (DEFAULT) to have the service letterbox your video instead. This setting
+// overrides any value that you specify for the setting Selection placement
+// (position) in this output.
 type ScalingBehavior string
 
 // Enum values for ScalingBehavior
@@ -4975,6 +5201,27 @@ func (enum StatusUpdateInterval) MarshalValue() (string, error) {
 }
 
 func (enum StatusUpdateInterval) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// A page type as defined in the standard ETSI EN 300 468, Table 94
+type TeletextPageType string
+
+// Enum values for TeletextPageType
+const (
+	TeletextPageTypePageTypeInitial                 TeletextPageType = "PAGE_TYPE_INITIAL"
+	TeletextPageTypePageTypeSubtitle                TeletextPageType = "PAGE_TYPE_SUBTITLE"
+	TeletextPageTypePageTypeAddlInfo                TeletextPageType = "PAGE_TYPE_ADDL_INFO"
+	TeletextPageTypePageTypeProgramSchedule         TeletextPageType = "PAGE_TYPE_PROGRAM_SCHEDULE"
+	TeletextPageTypePageTypeHearingImpairedSubtitle TeletextPageType = "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
+)
+
+func (enum TeletextPageType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TeletextPageType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

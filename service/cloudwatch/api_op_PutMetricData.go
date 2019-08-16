@@ -24,8 +24,8 @@ type PutMetricDataInput struct {
 
 	// The namespace for the metric data.
 	//
-	// You cannot specify a namespace that begins with "AWS/". Namespaces that begin
-	// with "AWS/" are reserved for use by Amazon Web Services products.
+	// To avoid conflicts with AWS service namespaces, you should not specify a
+	// namespace that begins with AWS/
 	//
 	// Namespace is a required field
 	Namespace *string `min:"1" type:"string" required:"true"`

@@ -43,7 +43,7 @@ type SearchTransitGatewayRoutesInput struct {
 	//
 	//    * state - The state of the route (active | blackhole).
 	//
-	//    * type - The type of roue (propagated | static).
+	//    * type - The type of route (propagated | static).
 	//
 	// Filters is a required field
 	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list" required:"true"`

@@ -14,8 +14,8 @@ import (
 type BatchCreatePartitionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the catalog in which the partion is to be created. Currently, this
-	// should be the AWS account ID.
+	// The ID of the catalog in which the partition is to be created. Currently,
+	// this should be the AWS account ID.
 	CatalogId *string `min:"1" type:"string"`
 
 	// The name of the metadata database in which the partition is to be created.
@@ -81,7 +81,7 @@ func (s *BatchCreatePartitionInput) Validate() error {
 type BatchCreatePartitionOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Errors encountered when trying to create the requested partitions.
+	// The errors encountered when trying to create the requested partitions.
 	Errors []PartitionError `type:"list"`
 }
 

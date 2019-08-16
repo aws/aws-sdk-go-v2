@@ -13,6 +13,9 @@ import (
 type ModifyVpnConnectionInput struct {
 	_ struct{} `type:"structure"`
 
+	// The ID of the customer gateway at your end of the VPN connection.
+	CustomerGatewayId *string `type:"string"`
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
 	// the required permissions, the error response is DryRunOperation. Otherwise,

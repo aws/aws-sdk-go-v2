@@ -4,6 +4,7 @@ package greengrass
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -33,6 +34,13 @@ func (s *CreateConnectorDefinitionVersionInput) Validate() error {
 
 	if s.ConnectorDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectorDefinitionId"))
+	}
+	if s.Connectors != nil {
+		for i, v := range s.Connectors {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Connectors", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

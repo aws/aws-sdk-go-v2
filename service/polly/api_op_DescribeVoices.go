@@ -14,6 +14,10 @@ import (
 type DescribeVoicesInput struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies the engine (standard or neural) used by Amazon Polly when processing
+	// input text for speech synthesis.
+	Engine Engine `location:"querystring" locationName:"Engine" type:"string" enum:"true"`
+
 	// Boolean value indicating whether to return any bilingual voices that use
 	// the specified language as an additional language. For instance, if you request
 	// all languages that use US English (es-US), and there is an Italian voice
@@ -40,6 +44,12 @@ func (s DescribeVoicesInput) String() string {
 func (s DescribeVoicesInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	if len(s.Engine) > 0 {
+		v := s.Engine
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Engine", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.IncludeAdditionalLanguageCodes != nil {
 		v := *s.IncludeAdditionalLanguageCodes
 

@@ -16,14 +16,17 @@ var _ = awsutil.Prettify
 type AddOutputRequest struct {
 	_ struct{} `type:"structure"`
 
+	// The range of IP addresses that should be allowed to initiate output requests
+	// to this flow. These IP addresses should be in the form of a Classless Inter-Domain
+	// Routing (CIDR) block; for example, 10.0.0.0/16.
+	CidrAllowList []string `locationName:"cidrAllowList" type:"list"`
+
 	// A description of the output. This description appears only on the AWS Elemental
 	// MediaConnect console and will not be seen by the end user.
 	Description *string `locationName:"description" type:"string"`
 
 	// The IP address from which video will be sent to output destinations.
-	//
-	// Destination is a required field
-	Destination *string `locationName:"destination" type:"string" required:"true"`
+	Destination *string `locationName:"destination" type:"string"`
 
 	// The type of key used for the encryption. If no keyType is provided, the service
 	// will use the default setting (static-key).
@@ -36,14 +39,15 @@ type AddOutputRequest struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// The port to use when content is distributed to this output.
-	//
-	// Port is a required field
-	Port *int64 `locationName:"port" type:"integer" required:"true"`
+	Port *int64 `locationName:"port" type:"integer"`
 
 	// The protocol to use for the output.
 	//
 	// Protocol is a required field
 	Protocol Protocol `locationName:"protocol" type:"string" required:"true" enum:"true"`
+
+	// The remote ID for the Zixi-pull output stream.
+	RemoteId *string `locationName:"remoteId" type:"string"`
 
 	// The smoothing latency in milliseconds for RTP and RTP-FEC streams.
 	SmoothingLatency *int64 `locationName:"smoothingLatency" type:"integer"`
@@ -61,14 +65,6 @@ func (s AddOutputRequest) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddOutputRequest) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddOutputRequest"}
-
-	if s.Destination == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Destination"))
-	}
-
-	if s.Port == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Port"))
-	}
 	if len(s.Protocol) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
 	}
@@ -86,6 +82,18 @@ func (s *AddOutputRequest) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s AddOutputRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CidrAllowList != nil {
+		v := s.CidrAllowList
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "cidrAllowList", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
 	if s.Description != nil {
 		v := *s.Description
 
@@ -127,6 +135,12 @@ func (s AddOutputRequest) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "protocol", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.RemoteId != nil {
+		v := *s.RemoteId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "remoteId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SmoothingLatency != nil {
 		v := *s.SmoothingLatency
@@ -861,7 +875,7 @@ type SetSourceRequest struct {
 	StreamId *string `locationName:"streamId" type:"string"`
 
 	// The range of IP addresses that should be allowed to contribute content to
-	// your source. These IP addresses should in the form of a Classless Inter-Domain
+	// your source. These IP addresses should be in the form of a Classless Inter-Domain
 	// Routing (CIDR) block; for example, 10.0.0.0/16.
 	WhitelistCidr *string `locationName:"whitelistCidr" type:"string"`
 }
@@ -988,7 +1002,7 @@ type Source struct {
 	Transport *Transport `locationName:"transport" type:"structure"`
 
 	// The range of IP addresses that should be allowed to contribute content to
-	// your source. These IP addresses should in the form of a Classless Inter-Domain
+	// your source. These IP addresses should be in the form of a Classless Inter-Domain
 	// Routing (CIDR) block; for example, 10.0.0.0/16.
 	WhitelistCidr *string `locationName:"whitelistCidr" type:"string"`
 }
@@ -1062,6 +1076,11 @@ func (s Source) MarshalFields(e protocol.FieldEncoder) error {
 type Transport struct {
 	_ struct{} `type:"structure"`
 
+	// The range of IP addresses that should be allowed to initiate output requests
+	// to this flow. These IP addresses should be in the form of a Classless Inter-Domain
+	// Routing (CIDR) block; for example, 10.0.0.0/16.
+	CidrAllowList []string `locationName:"cidrAllowList" type:"list"`
+
 	// The smoothing max bitrate for RTP and RTP-FEC streams.
 	MaxBitrate *int64 `locationName:"maxBitrate" type:"integer"`
 
@@ -1072,6 +1091,9 @@ type Transport struct {
 	//
 	// Protocol is a required field
 	Protocol Protocol `locationName:"protocol" type:"string" required:"true" enum:"true"`
+
+	// The remote ID for the Zixi-pull stream.
+	RemoteId *string `locationName:"remoteId" type:"string"`
 
 	// The smoothing latency in milliseconds for RTP and RTP-FEC streams.
 	SmoothingLatency *int64 `locationName:"smoothingLatency" type:"integer"`
@@ -1088,6 +1110,18 @@ func (s Transport) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Transport) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CidrAllowList != nil {
+		v := s.CidrAllowList
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "cidrAllowList", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
 	if s.MaxBitrate != nil {
 		v := *s.MaxBitrate
 
@@ -1105,6 +1139,12 @@ func (s Transport) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "protocol", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.RemoteId != nil {
+		v := *s.RemoteId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "remoteId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SmoothingLatency != nil {
 		v := *s.SmoothingLatency

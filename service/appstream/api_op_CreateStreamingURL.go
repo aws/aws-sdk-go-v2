@@ -24,7 +24,7 @@ type CreateStreamingURLInput struct {
 	FleetName *string `min:"1" type:"string" required:"true"`
 
 	// The session context. For more information, see Session Context (https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters)
-	// in the Amazon AppStream 2.0 Developer Guide.
+	// in the Amazon AppStream 2.0 Administration Guide.
 	SessionContext *string `min:"1" type:"string"`
 
 	// The name of the stack.

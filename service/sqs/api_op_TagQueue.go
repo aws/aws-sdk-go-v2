@@ -80,9 +80,6 @@ const opTagQueue = "TagQueue"
 //    * A new tag with a key identical to that of an existing tag overwrites
 //    the existing tag.
 //
-//    * Tagging actions are limited to 5 TPS per AWS account. If your application
-//    requires a higher throughput, file a technical support request (https://console.aws.amazon.com/support/home#/case/create?issueType=technical).
-//
 // For a full list of tag restrictions, see Limits Related to Queues (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-limits.html#limits-queues)
 // in the Amazon Simple Queue Service Developer Guide.
 //

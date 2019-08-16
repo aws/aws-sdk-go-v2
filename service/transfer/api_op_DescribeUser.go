@@ -20,8 +20,8 @@ type DescribeUserInput struct {
 	ServerId *string `type:"string" required:"true"`
 
 	// The name of the user assigned to one or more servers. User names are part
-	// of the sign-in credentials to use the AWS Transfer service and perform file
-	// transfer tasks.
+	// of the sign-in credentials to use the AWS Transfer for SFTP service and perform
+	// file transfer tasks.
 	//
 	// UserName is a required field
 	UserName *string `type:"string" required:"true"`

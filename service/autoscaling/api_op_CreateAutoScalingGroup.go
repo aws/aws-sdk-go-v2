@@ -48,7 +48,7 @@ type CreateAutoScalingGroupInput struct {
 	// During this time, any health check failures for the instance are ignored.
 	// The default value is 0.
 	//
-	// For more information, see Health Checks for Auto Scaling Instances (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html)
+	// For more information, see Health Check Grace Period (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	//
 	// Conditional: This parameter is required if you are adding an ELB health check.
@@ -80,19 +80,14 @@ type CreateAutoScalingGroupInput struct {
 
 	// The name of the launch configuration.
 	//
-	// For more information, see Creating an Auto Scaling Group Using a Launch Configuration
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg.html) in
-	// the Amazon EC2 Auto Scaling User Guide.
-	//
 	// If you do not specify LaunchConfigurationName, you must specify one of the
 	// following parameters: InstanceId, LaunchTemplate, or MixedInstancesPolicy.
 	LaunchConfigurationName *string `min:"1" type:"string"`
 
 	// The launch template to use to launch instances.
 	//
-	// For more information, see Creating an Auto Scaling Group Using a Launch Template
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-launch-template.html)
-	// in the Amazon EC2 Auto Scaling User Guide.
+	// For more information, see LaunchTemplateSpecification (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_LaunchTemplateSpecification.html)
+	// in the Amazon EC2 Auto Scaling API Reference.
 	//
 	// If you do not specify LaunchTemplate, you must specify one of the following
 	// parameters: InstanceId, LaunchConfigurationName, or MixedInstancesPolicy.
@@ -125,13 +120,14 @@ type CreateAutoScalingGroupInput struct {
 	// default values are used.
 	//
 	// The policy includes parameters that not only define the distribution of On-Demand
-	// Instances and Spot Instances, the maximum price to pay for Spot instances,
+	// Instances and Spot Instances, the maximum price to pay for Spot Instances,
 	// and how the Auto Scaling group allocates instance types to fulfill On-Demand
 	// and Spot capacity, but also the parameters that specify the instance configuration
 	// information—the launch template and instance types.
 	//
-	// For more information, see Auto Scaling Groups with Multiple Instance Types
-	// and Purchase Options (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
+	// For more information, see MixedInstancesPolicy (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html)
+	// in the Amazon EC2 Auto Scaling API Reference and Auto Scaling Groups with
+	// Multiple Instance Types and Purchase Options (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	//
 	// You must specify one of the following parameters in your request: LaunchConfigurationName,

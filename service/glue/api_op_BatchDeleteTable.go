@@ -13,12 +13,12 @@ import (
 type BatchDeleteTableInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the Data Catalog where the table resides. If none is supplied,
+	// The ID of the Data Catalog where the table resides. If none is provided,
 	// the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 
-	// The name of the catalog database where the tables to delete reside. For Hive
-	// compatibility, this name is entirely lowercase.
+	// The name of the catalog database in which the tables to delete reside. For
+	// Hive compatibility, this name is entirely lowercase.
 	//
 	// DatabaseName is a required field
 	DatabaseName *string `min:"1" type:"string" required:"true"`
@@ -78,14 +78,14 @@ const opBatchDeleteTable = "BatchDeleteTable"
 //
 // Deletes multiple tables at once.
 //
-// After completing this operation, you will no longer have access to the table
-// versions and partitions that belong to the deleted table. AWS Glue deletes
-// these "orphaned" resources asynchronously in a timely manner, at the discretion
-// of the service.
+// After completing this operation, you no longer have access to the table versions
+// and partitions that belong to the deleted table. AWS Glue deletes these "orphaned"
+// resources asynchronously in a timely manner, at the discretion of the service.
 //
-// To ensure immediate deletion of all related resources, before calling BatchDeleteTable,
-// use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or
-// BatchDeletePartition, to delete any resources that belong to the table.
+// To ensure the immediate deletion of all related resources, before calling
+// BatchDeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and
+// DeletePartition or BatchDeletePartition, to delete any resources that belong
+// to the table.
 //
 //    // Example sending a request using BatchDeleteTableRequest.
 //    req := client.BatchDeleteTableRequest(params)

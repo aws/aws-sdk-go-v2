@@ -54,7 +54,7 @@ func (s DeleteServerOutput) String() string {
 const opDeleteServer = "DeleteServer"
 
 // DeleteServerRequest returns a request value for making API operation for
-// AWS OpsWorks for Chef Automate.
+// AWS OpsWorks CM.
 //
 // Deletes the server and the underlying AWS CloudFormation stacks (including
 // the server's EC2 instance). When you run this command, the server state is

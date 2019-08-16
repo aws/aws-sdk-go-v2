@@ -71,6 +71,7 @@ const (
 	CloudWatchRegionEuWest2      CloudWatchRegion = "eu-west-2"
 	CloudWatchRegionEuWest3      CloudWatchRegion = "eu-west-3"
 	CloudWatchRegionApEast1      CloudWatchRegion = "ap-east-1"
+	CloudWatchRegionMeSouth1     CloudWatchRegion = "me-south-1"
 	CloudWatchRegionApSouth1     CloudWatchRegion = "ap-south-1"
 	CloudWatchRegionApSoutheast1 CloudWatchRegion = "ap-southeast-1"
 	CloudWatchRegionApSoutheast2 CloudWatchRegion = "ap-southeast-2"
@@ -277,6 +278,7 @@ const (
 	ResourceRecordSetRegionCnNorth1     ResourceRecordSetRegion = "cn-north-1"
 	ResourceRecordSetRegionCnNorthwest1 ResourceRecordSetRegion = "cn-northwest-1"
 	ResourceRecordSetRegionApEast1      ResourceRecordSetRegion = "ap-east-1"
+	ResourceRecordSetRegionMeSouth1     ResourceRecordSetRegion = "me-south-1"
 	ResourceRecordSetRegionApSouth1     ResourceRecordSetRegion = "ap-south-1"
 )
 
@@ -355,6 +357,7 @@ const (
 	VPCRegionEuWest3      VPCRegion = "eu-west-3"
 	VPCRegionEuCentral1   VPCRegion = "eu-central-1"
 	VPCRegionApEast1      VPCRegion = "ap-east-1"
+	VPCRegionMeSouth1     VPCRegion = "me-south-1"
 	VPCRegionApSoutheast1 VPCRegion = "ap-southeast-1"
 	VPCRegionApSoutheast2 VPCRegion = "ap-southeast-2"
 	VPCRegionApSouth1     VPCRegion = "ap-south-1"

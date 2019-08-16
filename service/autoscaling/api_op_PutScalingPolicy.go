@@ -14,12 +14,12 @@ import (
 type PutScalingPolicyInput struct {
 	_ struct{} `type:"structure"`
 
-	// The adjustment type. The valid values are ChangeInCapacity, ExactCapacity,
-	// and PercentChangeInCapacity.
+	// Specifies whether the ScalingAdjustment parameter is an absolute number or
+	// a percentage of the current capacity. The valid values are ChangeInCapacity,
+	// ExactCapacity, and PercentChangeInCapacity.
 	//
-	// This parameter is supported if the policy type is SimpleScaling or StepScaling.
-	//
-	// For more information, see Dynamic Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html)
+	// Valid only if the policy type is StepScaling or SimpleScaling. For more information,
+	// see Scaling Adjustment Types (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html#as-scaling-adjustment)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	AdjustmentType *string `min:"1" type:"string"`
 
@@ -28,13 +28,12 @@ type PutScalingPolicyInput struct {
 	// AutoScalingGroupName is a required field
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
-	// The amount of time, in seconds, after a scaling activity completes and before
-	// the next scaling activity can start. If this parameter is not specified,
-	// the default cooldown period for the group applies.
+	// The amount of time, in seconds, after a scaling activity completes before
+	// any further dynamic scaling activities can start. If this parameter is not
+	// specified, the default cooldown period for the group applies.
 	//
-	// This parameter is supported if the policy type is SimpleScaling.
-	//
-	// For more information, see Scaling Cooldowns (https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html)
+	// Valid only if the policy type is SimpleScaling. For more information, see
+	// Scaling Cooldowns (https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	Cooldown *int64 `type:"integer"`
 
@@ -42,14 +41,14 @@ type PutScalingPolicyInput struct {
 	// to the CloudWatch metrics. The default is to use the value specified for
 	// the default cooldown period for the group.
 	//
-	// This parameter is supported if the policy type is StepScaling or TargetTrackingScaling.
+	// Valid only if the policy type is StepScaling or TargetTrackingScaling.
 	EstimatedInstanceWarmup *int64 `type:"integer"`
 
 	// The aggregation type for the CloudWatch metrics. The valid values are Minimum,
 	// Maximum, and Average. If the aggregation type is null, the value is treated
 	// as Average.
 	//
-	// This parameter is supported if the policy type is StepScaling.
+	// Valid only if the policy type is StepScaling.
 	MetricAggregationType *string `min:"1" type:"string"`
 
 	// The minimum number of instances to scale. If the value of AdjustmentType
@@ -57,7 +56,14 @@ type PutScalingPolicyInput struct {
 	// of the Auto Scaling group by at least this many instances. Otherwise, the
 	// error is ValidationError.
 	//
-	// This parameter is supported if the policy type is SimpleScaling or StepScaling.
+	// This property replaces the MinAdjustmentStep property. For example, suppose
+	// that you create a step scaling policy to scale out an Auto Scaling group
+	// by 25 percent and you specify a MinAdjustmentMagnitude of 2. If the group
+	// has 4 instances and the scaling policy is performed, 25 percent of 4 is 1.
+	// However, because you specified a MinAdjustmentMagnitude of 2, Amazon EC2
+	// Auto Scaling scales out the group by 2 instances.
+	//
+	// Valid only if the policy type is SimpleScaling or StepScaling.
 	MinAdjustmentMagnitude *int64 `type:"integer"`
 
 	// Available for backward compatibility. Use MinAdjustmentMagnitude instead.
@@ -72,26 +78,32 @@ type PutScalingPolicyInput struct {
 	// If the policy type is null, the value is treated as SimpleScaling.
 	PolicyType *string `min:"1" type:"string"`
 
-	// The amount by which to scale, based on the specified adjustment type. A positive
-	// value adds to the current capacity while a negative number removes from the
-	// current capacity.
+	// The amount by which a simple scaling policy scales the Auto Scaling group
+	// in response to an alarm breach. The adjustment is based on the value that
+	// you specified in the AdjustmentType parameter (either an absolute number
+	// or a percentage). A positive value adds to the current capacity and a negative
+	// value subtracts from the current capacity. For exact capacity, you must specify
+	// a positive value.
 	//
-	// Conditional: This parameter is required if the policy type is SimpleScaling
-	// and not supported otherwise.
+	// Conditional: If you specify SimpleScaling for the policy type, you must specify
+	// this parameter. (Not used with any other policy type.)
 	ScalingAdjustment *int64 `type:"integer"`
 
 	// A set of adjustments that enable you to scale based on the size of the alarm
 	// breach.
 	//
-	// Conditional: This parameter is required if the policy type is StepScaling
-	// and not supported otherwise.
+	// Conditional: If you specify StepScaling for the policy type, you must specify
+	// this parameter. (Not used with any other policy type.)
 	StepAdjustments []StepAdjustment `type:"list"`
 
 	// A target tracking scaling policy. Includes support for predefined or customized
 	// metrics.
 	//
-	// Conditional: This parameter is required if the policy type is TargetTrackingScaling
-	// and not supported otherwise.
+	// For more information, see TargetTrackingConfiguration (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_TargetTrackingConfiguration.html)
+	// in the Amazon EC2 Auto Scaling API Reference.
+	//
+	// Conditional: If you specify TargetTrackingScaling for the policy type, you
+	// must specify this parameter. (Not used with any other policy type.)
 	TargetTrackingConfiguration *TargetTrackingConfiguration `type:"structure"`
 }
 
@@ -167,10 +179,14 @@ const opPutScalingPolicy = "PutScalingPolicy"
 // PutScalingPolicyRequest returns a request value for making API operation for
 // Auto Scaling.
 //
-// Creates or updates a policy for an Auto Scaling group. To update an existing
-// policy, use the existing policy name and set the parameters to change. Any
-// existing parameter not changed in an update to an existing policy is not
-// changed in this update request.
+// Creates or updates a scaling policy for an Auto Scaling group. To update
+// an existing scaling policy, use the existing policy name and set the parameters
+// to change. Any existing parameter not changed in an update to an existing
+// policy is not changed in this update request.
+//
+// For more information about using scaling policies to scale your Auto Scaling
+// group automatically, see Dynamic Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html)
+// in the Amazon EC2 Auto Scaling User Guide.
 //
 //    // Example sending a request using PutScalingPolicyRequest.
 //    req := client.PutScalingPolicyRequest(params)

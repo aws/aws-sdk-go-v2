@@ -33,7 +33,7 @@ type UpdateCACertificateInput struct {
 	// Information about the registration configuration.
 	RegistrationConfig *RegistrationConfig `locationName:"registrationConfig" type:"structure"`
 
-	// If true, remove auto registration.
+	// If true, removes auto registration.
 	RemoveAutoRegistration *bool `locationName:"removeAutoRegistration" type:"boolean"`
 }
 

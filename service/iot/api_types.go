@@ -486,6 +486,68 @@ func (s ActiveViolation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Parameters used when defining a mitigation action that move a set of things
+// to a thing group.
+type AddThingsToThingGroupParams struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies if this mitigation action can move the things that triggered the
+	// mitigation action even if they are part of one or more dynamic things groups.
+	OverrideDynamicGroups *bool `locationName:"overrideDynamicGroups" type:"boolean"`
+
+	// The list of groups to which you want to add the things that triggered the
+	// mitigation action. You can add a thing to a maximum of 10 groups, but you
+	// cannot add a thing to more than one group in the same hierarchy.
+	//
+	// ThingGroupNames is a required field
+	ThingGroupNames []string `locationName:"thingGroupNames" min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s AddThingsToThingGroupParams) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AddThingsToThingGroupParams) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AddThingsToThingGroupParams"}
+
+	if s.ThingGroupNames == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ThingGroupNames"))
+	}
+	if s.ThingGroupNames != nil && len(s.ThingGroupNames) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ThingGroupNames", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AddThingsToThingGroupParams) MarshalFields(e protocol.FieldEncoder) error {
+	if s.OverrideDynamicGroups != nil {
+		v := *s.OverrideDynamicGroups
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "overrideDynamicGroups", protocol.BoolValue(v), metadata)
+	}
+	if s.ThingGroupNames != nil {
+		v := s.ThingGroupNames
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "thingGroupNames", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // A structure containing the alert target ARN and the role ARN.
 type AlertTarget struct {
 	_ struct{} `type:"structure"`
@@ -590,7 +652,7 @@ type AttributePayload struct {
 	//
 	// To remove an attribute, call UpdateThing with an empty attribute value.
 	//
-	// The merge attribute is only valid when calling UpdateThing.
+	// The merge attribute is only valid when calling UpdateThing or UpdateThingGroup.
 	Merge *bool `locationName:"merge" type:"boolean"`
 }
 
@@ -650,22 +712,22 @@ func (s AuditCheckConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 type AuditCheckDetails struct {
 	_ struct{} `type:"structure"`
 
-	// True if the check completed and found all resources compliant.
+	// True if the check is complete and found all resources compliant.
 	CheckCompliant *bool `locationName:"checkCompliant" type:"boolean"`
 
-	// The completion status of this check, one of "IN_PROGRESS", "WAITING_FOR_DATA_COLLECTION",
+	// The completion status of this check. One of "IN_PROGRESS", "WAITING_FOR_DATA_COLLECTION",
 	// "CANCELED", "COMPLETED_COMPLIANT", "COMPLETED_NON_COMPLIANT", or "FAILED".
 	CheckRunStatus AuditCheckRunStatus `locationName:"checkRunStatus" type:"string" enum:"true"`
 
-	// The code of any error encountered when performing this check during this
-	// audit. One of "INSUFFICIENT_PERMISSIONS", or "AUDIT_CHECK_DISABLED".
+	// The code of any error encountered when this check is performed during this
+	// audit. One of "INSUFFICIENT_PERMISSIONS" or "AUDIT_CHECK_DISABLED".
 	ErrorCode *string `locationName:"errorCode" type:"string"`
 
-	// The message associated with any error encountered when performing this check
+	// The message associated with any error encountered when this check is performed
 	// during this audit.
 	Message *string `locationName:"message" type:"string"`
 
-	// The number of resources that the check found non-compliant.
+	// The number of resources that were found noncompliant during the check.
 	NonCompliantResourcesCount *int64 `locationName:"nonCompliantResourcesCount" type:"long"`
 
 	// The number of resources on which the check was performed.
@@ -725,16 +787,20 @@ type AuditFinding struct {
 	// The audit check that generated this result.
 	CheckName *string `locationName:"checkName" type:"string"`
 
+	// A unique identifier for this set of audit findings. This identifier is used
+	// to apply mitigation tasks to one or more sets of findings.
+	FindingId *string `locationName:"findingId" min:"1" type:"string"`
+
 	// The time the result (finding) was discovered.
 	FindingTime *time.Time `locationName:"findingTime" type:"timestamp"`
 
-	// The resource that was found to be non-compliant with the audit check.
+	// The resource that was found to be noncompliant with the audit check.
 	NonCompliantResource *NonCompliantResource `locationName:"nonCompliantResource" type:"structure"`
 
-	// The reason the resource was non-compliant.
+	// The reason the resource was noncompliant.
 	ReasonForNonCompliance *string `locationName:"reasonForNonCompliance" type:"string"`
 
-	// A code which indicates the reason that the resource was non-compliant.
+	// A code that indicates the reason that the resource was noncompliant.
 	ReasonForNonComplianceCode *string `locationName:"reasonForNonComplianceCode" type:"string"`
 
 	// The list of related resources.
@@ -743,7 +809,7 @@ type AuditFinding struct {
 	// The severity of the result (finding).
 	Severity AuditFindingSeverity `locationName:"severity" type:"string" enum:"true"`
 
-	// The ID of the audit that generated this result (finding)
+	// The ID of the audit that generated this result (finding).
 	TaskId *string `locationName:"taskId" min:"1" type:"string"`
 
 	// The time the audit started.
@@ -762,6 +828,12 @@ func (s AuditFinding) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "checkName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FindingId != nil {
+		v := *s.FindingId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "findingId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.FindingTime != nil {
 		v := *s.FindingTime
@@ -818,6 +890,230 @@ func (s AuditFinding) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "taskStartTime",
 			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	return nil
+}
+
+// Returned by ListAuditMitigationActionsTask, this object contains information
+// that describes a mitigation action that has been started.
+type AuditMitigationActionExecutionMetadata struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier for the mitigation action being applied by the task.
+	ActionId *string `locationName:"actionId" type:"string"`
+
+	// The friendly name of the mitigation action being applied by the task.
+	ActionName *string `locationName:"actionName" type:"string"`
+
+	// The date and time when the task was completed or canceled. Blank if the task
+	// is still running.
+	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
+
+	// If an error occurred, the code that indicates which type of error occurred.
+	ErrorCode *string `locationName:"errorCode" type:"string"`
+
+	// The unique identifier for the findings to which the task and associated mitigation
+	// action are applied.
+	FindingId *string `locationName:"findingId" min:"1" type:"string"`
+
+	// If an error occurred, a message that describes the error.
+	Message *string `locationName:"message" type:"string"`
+
+	// The date and time when the task was started.
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
+
+	// The current status of the task being executed.
+	Status AuditMitigationActionsExecutionStatus `locationName:"status" type:"string" enum:"true"`
+
+	// The unique identifier for the task that applies the mitigation action.
+	TaskId *string `locationName:"taskId" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s AuditMitigationActionExecutionMetadata) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AuditMitigationActionExecutionMetadata) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ActionId != nil {
+		v := *s.ActionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "actionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ActionName != nil {
+		v := *s.ActionName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "actionName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EndTime != nil {
+		v := *s.EndTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "endTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.ErrorCode != nil {
+		v := *s.ErrorCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "errorCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FindingId != nil {
+		v := *s.FindingId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "findingId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "startTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.TaskId != nil {
+		v := *s.TaskId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "taskId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Information about an audit mitigation actions task that is returned by ListAuditMitigationActionsTasks.
+type AuditMitigationActionsTaskMetadata struct {
+	_ struct{} `type:"structure"`
+
+	// The time at which the audit mitigation actions task was started.
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
+
+	// The unique identifier for the task.
+	TaskId *string `locationName:"taskId" min:"1" type:"string"`
+
+	// The current state of the audit mitigation actions task.
+	TaskStatus AuditMitigationActionsTaskStatus `locationName:"taskStatus" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s AuditMitigationActionsTaskMetadata) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AuditMitigationActionsTaskMetadata) MarshalFields(e protocol.FieldEncoder) error {
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "startTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.TaskId != nil {
+		v := *s.TaskId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "taskId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.TaskStatus) > 0 {
+		v := s.TaskStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "taskStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Used in MitigationActionParams, this information identifies the target findings
+// to which the mitigation actions are applied. Only one entry appears.
+type AuditMitigationActionsTaskTarget struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies a filter in the form of an audit check and set of reason codes
+	// that identify the findings from the audit to which the audit mitigation actions
+	// task apply.
+	AuditCheckToReasonCodeFilter map[string][]string `locationName:"auditCheckToReasonCodeFilter" type:"map"`
+
+	// If the task will apply a mitigation action to findings from a specific audit,
+	// this value uniquely identifies the audit.
+	AuditTaskId *string `locationName:"auditTaskId" min:"1" type:"string"`
+
+	// If the task will apply a mitigation action to one or more listed findings,
+	// this value uniquely identifies those findings.
+	FindingIds []string `locationName:"findingIds" min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s AuditMitigationActionsTaskTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AuditMitigationActionsTaskTarget) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AuditMitigationActionsTaskTarget"}
+	if s.AuditTaskId != nil && len(*s.AuditTaskId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AuditTaskId", 1))
+	}
+	if s.FindingIds != nil && len(s.FindingIds) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("FindingIds", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AuditMitigationActionsTaskTarget) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AuditCheckToReasonCodeFilter != nil {
+		v := s.AuditCheckToReasonCodeFilter
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "auditCheckToReasonCodeFilter", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ls1 := ms0.List(k1)
+			ls1.Start()
+			for _, v2 := range v1 {
+				ls1.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v2)})
+			}
+			ls1.End()
+		}
+		ms0.End()
+
+	}
+	if s.AuditTaskId != nil {
+		v := *s.AuditTaskId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "auditTaskId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FindingIds != nil {
+		v := s.FindingIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "findingIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -884,11 +1180,11 @@ type AuditTaskMetadata struct {
 	// The ID of this audit.
 	TaskId *string `locationName:"taskId" min:"1" type:"string"`
 
-	// The status of this audit: one of "IN_PROGRESS", "COMPLETED", "FAILED" or
+	// The status of this audit. One of "IN_PROGRESS", "COMPLETED", "FAILED", or
 	// "CANCELED".
 	TaskStatus AuditTaskStatus `locationName:"taskStatus" type:"string" enum:"true"`
 
-	// The type of this audit: one of "ON_DEMAND_AUDIT_TASK" or "SCHEDULED_AUDIT_TASK".
+	// The type of this audit. One of "ON_DEMAND_AUDIT_TASK" or "SCHEDULED_AUDIT_TASK".
 	TaskType AuditTaskType `locationName:"taskType" type:"string" enum:"true"`
 }
 
@@ -2629,6 +2925,63 @@ func (s ElasticsearchAction) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Parameters used when defining a mitigation action that enable AWS IoT logging.
+type EnableIoTLoggingParams struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the types of information to be logged.
+	//
+	// LogLevel is a required field
+	LogLevel LogLevel `locationName:"logLevel" type:"string" required:"true" enum:"true"`
+
+	// The ARN of the IAM role used for logging.
+	//
+	// RoleArnForLogging is a required field
+	RoleArnForLogging *string `locationName:"roleArnForLogging" min:"20" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s EnableIoTLoggingParams) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *EnableIoTLoggingParams) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "EnableIoTLoggingParams"}
+	if len(s.LogLevel) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("LogLevel"))
+	}
+
+	if s.RoleArnForLogging == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleArnForLogging"))
+	}
+	if s.RoleArnForLogging != nil && len(*s.RoleArnForLogging) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArnForLogging", 20))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s EnableIoTLoggingParams) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.LogLevel) > 0 {
+		v := s.LogLevel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "logLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.RoleArnForLogging != nil {
+		v := *s.RoleArnForLogging
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "roleArnForLogging", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Error information.
 type ErrorInfo struct {
 	_ struct{} `type:"structure"`
@@ -2962,7 +3315,7 @@ func (s ImplicitDeny) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Sends messge data to an AWS IoT Analytics channel.
+// Sends message data to an AWS IoT Analytics channel.
 type IotAnalyticsAction struct {
 	_ struct{} `type:"structure"`
 
@@ -4128,17 +4481,231 @@ func (s MetricValue) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information about the resource that was non-compliant with the audit check.
+// Describes which changes should be applied as part of a mitigation action.
+type MitigationAction struct {
+	_ struct{} `type:"structure"`
+
+	// The set of parameters for this mitigation action. The parameters vary, depending
+	// on the kind of action you apply.
+	ActionParams *MitigationActionParams `locationName:"actionParams" type:"structure"`
+
+	// A unique identifier for the mitigation action.
+	Id *string `locationName:"id" type:"string"`
+
+	// A user-friendly name for the mitigation action.
+	Name *string `locationName:"name" type:"string"`
+
+	// The IAM role ARN used to apply this mitigation action.
+	RoleArn *string `locationName:"roleArn" min:"20" type:"string"`
+}
+
+// String returns the string representation
+func (s MitigationAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MitigationAction) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ActionParams != nil {
+		v := s.ActionParams
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "actionParams", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Information that identifies a mitigation action. This information is returned
+// by ListMitigationActions.
+type MitigationActionIdentifier struct {
+	_ struct{} `type:"structure"`
+
+	// The IAM role ARN used to apply this mitigation action.
+	ActionArn *string `locationName:"actionArn" type:"string"`
+
+	// The friendly name of the mitigation action.
+	ActionName *string `locationName:"actionName" type:"string"`
+
+	// The date when this mitigation action was created.
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
+}
+
+// String returns the string representation
+func (s MitigationActionIdentifier) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MitigationActionIdentifier) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ActionArn != nil {
+		v := *s.ActionArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "actionArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ActionName != nil {
+		v := *s.ActionName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "actionName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationDate != nil {
+		v := *s.CreationDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "creationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	return nil
+}
+
+// The set of parameters for this mitigation action. You can specify only one
+// type of parameter (in other words, you can apply only one action for each
+// defined mitigation action).
+type MitigationActionParams struct {
+	_ struct{} `type:"structure"`
+
+	// Parameters to define a mitigation action that moves devices associated with
+	// a certificate to one or more specified thing groups, typically for quarantine.
+	AddThingsToThingGroupParams *AddThingsToThingGroupParams `locationName:"addThingsToThingGroupParams" type:"structure"`
+
+	// Parameters to define a mitigation action that enables AWS IoT logging at
+	// a specified level of detail.
+	EnableIoTLoggingParams *EnableIoTLoggingParams `locationName:"enableIoTLoggingParams" type:"structure"`
+
+	// Parameters to define a mitigation action that publishes findings to Amazon
+	// SNS. You can implement your own custom actions in response to the Amazon
+	// SNS messages.
+	PublishFindingToSnsParams *PublishFindingToSnsParams `locationName:"publishFindingToSnsParams" type:"structure"`
+
+	// Parameters to define a mitigation action that adds a blank policy to restrict
+	// permissions.
+	ReplaceDefaultPolicyVersionParams *ReplaceDefaultPolicyVersionParams `locationName:"replaceDefaultPolicyVersionParams" type:"structure"`
+
+	// Parameters to define a mitigation action that changes the state of the CA
+	// certificate to inactive.
+	UpdateCACertificateParams *UpdateCACertificateParams `locationName:"updateCACertificateParams" type:"structure"`
+
+	// Parameters to define a mitigation action that changes the state of the device
+	// certificate to inactive.
+	UpdateDeviceCertificateParams *UpdateDeviceCertificateParams `locationName:"updateDeviceCertificateParams" type:"structure"`
+}
+
+// String returns the string representation
+func (s MitigationActionParams) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MitigationActionParams) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MitigationActionParams"}
+	if s.AddThingsToThingGroupParams != nil {
+		if err := s.AddThingsToThingGroupParams.Validate(); err != nil {
+			invalidParams.AddNested("AddThingsToThingGroupParams", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.EnableIoTLoggingParams != nil {
+		if err := s.EnableIoTLoggingParams.Validate(); err != nil {
+			invalidParams.AddNested("EnableIoTLoggingParams", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.PublishFindingToSnsParams != nil {
+		if err := s.PublishFindingToSnsParams.Validate(); err != nil {
+			invalidParams.AddNested("PublishFindingToSnsParams", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.ReplaceDefaultPolicyVersionParams != nil {
+		if err := s.ReplaceDefaultPolicyVersionParams.Validate(); err != nil {
+			invalidParams.AddNested("ReplaceDefaultPolicyVersionParams", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.UpdateCACertificateParams != nil {
+		if err := s.UpdateCACertificateParams.Validate(); err != nil {
+			invalidParams.AddNested("UpdateCACertificateParams", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.UpdateDeviceCertificateParams != nil {
+		if err := s.UpdateDeviceCertificateParams.Validate(); err != nil {
+			invalidParams.AddNested("UpdateDeviceCertificateParams", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MitigationActionParams) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AddThingsToThingGroupParams != nil {
+		v := s.AddThingsToThingGroupParams
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "addThingsToThingGroupParams", v, metadata)
+	}
+	if s.EnableIoTLoggingParams != nil {
+		v := s.EnableIoTLoggingParams
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "enableIoTLoggingParams", v, metadata)
+	}
+	if s.PublishFindingToSnsParams != nil {
+		v := s.PublishFindingToSnsParams
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "publishFindingToSnsParams", v, metadata)
+	}
+	if s.ReplaceDefaultPolicyVersionParams != nil {
+		v := s.ReplaceDefaultPolicyVersionParams
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "replaceDefaultPolicyVersionParams", v, metadata)
+	}
+	if s.UpdateCACertificateParams != nil {
+		v := s.UpdateCACertificateParams
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "updateCACertificateParams", v, metadata)
+	}
+	if s.UpdateDeviceCertificateParams != nil {
+		v := s.UpdateDeviceCertificateParams
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "updateDeviceCertificateParams", v, metadata)
+	}
+	return nil
+}
+
+// Information about the resource that was noncompliant with the audit check.
 type NonCompliantResource struct {
 	_ struct{} `type:"structure"`
 
-	// Additional information about the non-compliant resource.
+	// Other information about the noncompliant resource.
 	AdditionalInfo map[string]string `locationName:"additionalInfo" type:"map"`
 
-	// Information identifying the non-compliant resource.
+	// Information that identifies the noncompliant resource.
 	ResourceIdentifier *ResourceIdentifier `locationName:"resourceIdentifier" type:"structure"`
 
-	// The type of the non-compliant resource.
+	// The type of the noncompliant resource.
 	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 }
 
@@ -4717,12 +5284,54 @@ func (s PresignedUrlConfig) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Parameters to define a mitigation action that publishes findings to Amazon
+// SNS. You can implement your own custom actions in response to the Amazon
+// SNS messages.
+type PublishFindingToSnsParams struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the topic to which you want to publish the findings.
+	//
+	// TopicArn is a required field
+	TopicArn *string `locationName:"topicArn" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s PublishFindingToSnsParams) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PublishFindingToSnsParams) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PublishFindingToSnsParams"}
+
+	if s.TopicArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PublishFindingToSnsParams) MarshalFields(e protocol.FieldEncoder) error {
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "topicArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The input for the DynamoActionVS action that specifies the DynamoDB table
 // to which the message data will be written.
 type PutItemInput struct {
 	_ struct{} `type:"structure"`
 
-	// The table where the message data will be written
+	// The table where the message data will be written.
 	//
 	// TableName is a required field
 	TableName *string `locationName:"tableName" type:"string" required:"true"`
@@ -4860,10 +5469,10 @@ func (s RegistrationConfig) MarshalFields(e protocol.FieldEncoder) error {
 type RelatedResource struct {
 	_ struct{} `type:"structure"`
 
-	// Additional information about the resource.
+	// Other information about the resource.
 	AdditionalInfo map[string]string `locationName:"additionalInfo" type:"map"`
 
-	// Information identifying the resource.
+	// Information that identifies the resource.
 	ResourceIdentifier *ResourceIdentifier `locationName:"resourceIdentifier" type:"structure"`
 
 	// The type of resource.
@@ -4904,9 +5513,52 @@ func (s RelatedResource) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Parameters to define a mitigation action that adds a blank policy to restrict
+// permissions.
+type ReplaceDefaultPolicyVersionParams struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the template to be applied. The only supported value is BLANK_POLICY.
+	//
+	// TemplateName is a required field
+	TemplateName PolicyTemplateName `locationName:"templateName" type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s ReplaceDefaultPolicyVersionParams) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ReplaceDefaultPolicyVersionParams) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ReplaceDefaultPolicyVersionParams"}
+	if len(s.TemplateName) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReplaceDefaultPolicyVersionParams) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.TemplateName) > 0 {
+		v := s.TemplateName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "templateName", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Describes an action to republish to another topic.
 type RepublishAction struct {
 	_ struct{} `type:"structure"`
+
+	// The Quality of Service (QoS) level to use when republishing messages.
+	Qos *int64 `locationName:"qos" type:"integer"`
 
 	// The ARN of the IAM role that grants access.
 	//
@@ -4944,6 +5596,12 @@ func (s *RepublishAction) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s RepublishAction) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Qos != nil {
+		v := *s.Qos
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "qos", protocol.Int64Value(v), metadata)
+	}
 	if s.RoleArn != nil {
 		v := *s.RoleArn
 
@@ -4959,7 +5617,7 @@ func (s RepublishAction) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information identifying the non-compliant resource.
+// Information that identifies the noncompliant resource.
 type ResourceIdentifier struct {
 	_ struct{} `type:"structure"`
 
@@ -4972,7 +5630,7 @@ type ResourceIdentifier struct {
 	// The client ID.
 	ClientId *string `locationName:"clientId" type:"string"`
 
-	// The ID of the Cognito Identity Pool.
+	// The ID of the Amazon Cognito identity pool.
 	CognitoIdentityPoolId *string `locationName:"cognitoIdentityPoolId" type:"string"`
 
 	// The ID of the certificate attached to the resource.
@@ -5390,7 +6048,7 @@ type ScheduledAuditMetadata struct {
 	// is "WEEKLY" or "BIWEEKLY").
 	DayOfWeek DayOfWeek `locationName:"dayOfWeek" type:"string" enum:"true"`
 
-	// How often the scheduled audit takes place.
+	// How often the scheduled audit occurs.
 	Frequency AuditFrequency `locationName:"frequency" type:"string" enum:"true"`
 
 	// The ARN of the scheduled audit.
@@ -6175,13 +6833,13 @@ type TaskStatistics struct {
 	// The number of checks that found compliant resources.
 	CompliantChecks *int64 `locationName:"compliantChecks" type:"integer"`
 
-	// The number of checks
+	// The number of checks.
 	FailedChecks *int64 `locationName:"failedChecks" type:"integer"`
 
 	// The number of checks in progress.
 	InProgressChecks *int64 `locationName:"inProgressChecks" type:"integer"`
 
-	// The number of checks that found non-compliant resources.
+	// The number of checks that found noncompliant resources.
 	NonCompliantChecks *int64 `locationName:"nonCompliantChecks" type:"integer"`
 
 	// The number of checks in this audit.
@@ -6239,6 +6897,70 @@ func (s TaskStatistics) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "waitingForDataCollectionChecks", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Provides summary counts of how many tasks for findings are in a particular
+// state. This information is included in the response from DescribeAuditMitigationActionsTask.
+type TaskStatisticsForAuditCheck struct {
+	_ struct{} `type:"structure"`
+
+	// The number of findings to which the mitigation action task was canceled when
+	// applied.
+	CanceledFindingsCount *int64 `locationName:"canceledFindingsCount" type:"long"`
+
+	// The number of findings for which at least one of the actions failed when
+	// applied.
+	FailedFindingsCount *int64 `locationName:"failedFindingsCount" type:"long"`
+
+	// The number of findings skipped because of filter conditions provided in the
+	// parameters to the command.
+	SkippedFindingsCount *int64 `locationName:"skippedFindingsCount" type:"long"`
+
+	// The number of findings for which all mitigation actions succeeded when applied.
+	SucceededFindingsCount *int64 `locationName:"succeededFindingsCount" type:"long"`
+
+	// The total number of findings to which a task is being applied.
+	TotalFindingsCount *int64 `locationName:"totalFindingsCount" type:"long"`
+}
+
+// String returns the string representation
+func (s TaskStatisticsForAuditCheck) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TaskStatisticsForAuditCheck) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CanceledFindingsCount != nil {
+		v := *s.CanceledFindingsCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "canceledFindingsCount", protocol.Int64Value(v), metadata)
+	}
+	if s.FailedFindingsCount != nil {
+		v := *s.FailedFindingsCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "failedFindingsCount", protocol.Int64Value(v), metadata)
+	}
+	if s.SkippedFindingsCount != nil {
+		v := *s.SkippedFindingsCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "skippedFindingsCount", protocol.Int64Value(v), metadata)
+	}
+	if s.SucceededFindingsCount != nil {
+		v := *s.SucceededFindingsCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "succeededFindingsCount", protocol.Int64Value(v), metadata)
+	}
+	if s.TotalFindingsCount != nil {
+		v := *s.TotalFindingsCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "totalFindingsCount", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -7188,6 +7910,88 @@ func (s TransferData) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "transferMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Parameters to define a mitigation action that changes the state of the CA
+// certificate to inactive.
+type UpdateCACertificateParams struct {
+	_ struct{} `type:"structure"`
+
+	// The action that you want to apply to the CA cerrtificate. The only supported
+	// value is DEACTIVATE.
+	//
+	// Action is a required field
+	Action CACertificateUpdateAction `locationName:"action" type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s UpdateCACertificateParams) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateCACertificateParams) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateCACertificateParams"}
+	if len(s.Action) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateCACertificateParams) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Action) > 0 {
+		v := s.Action
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "action", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Parameters to define a mitigation action that changes the state of the device
+// certificate to inactive.
+type UpdateDeviceCertificateParams struct {
+	_ struct{} `type:"structure"`
+
+	// The action that you want to apply to the device cerrtificate. The only supported
+	// value is DEACTIVATE.
+	//
+	// Action is a required field
+	Action DeviceCertificateUpdateAction `locationName:"action" type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s UpdateDeviceCertificateParams) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateDeviceCertificateParams) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDeviceCertificateParams"}
+	if len(s.Action) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateDeviceCertificateParams) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Action) > 0 {
+		v := s.Action
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "action", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }

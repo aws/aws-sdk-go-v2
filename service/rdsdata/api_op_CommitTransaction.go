@@ -15,18 +15,12 @@ import (
 type CommitTransactionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-	//
 	// ResourceArn is a required field
 	ResourceArn *string `locationName:"resourceArn" type:"string" required:"true"`
 
-	// The name or ARN of the secret that enables access to the DB cluster.
-	//
 	// SecretArn is a required field
 	SecretArn *string `locationName:"secretArn" type:"string" required:"true"`
 
-	// The identifier of the transaction to end and commit.
-	//
 	// TransactionId is a required field
 	TransactionId *string `locationName:"transactionId" type:"string" required:"true"`
 }
@@ -88,7 +82,6 @@ func (s CommitTransactionInput) MarshalFields(e protocol.FieldEncoder) error {
 type CommitTransactionOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The status of the commit operation.
 	TransactionStatus *string `locationName:"transactionStatus" type:"string"`
 }
 

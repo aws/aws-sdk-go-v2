@@ -45,8 +45,16 @@ type ApplicationInfo struct {
 	// The lifecycle of the application.
 	LifeCycle *string `type:"string"`
 
-	// The issues on the user side that are blocking Application Insights from fully
-	// monitoring the application.
+	// Indicates whether Application Insights will create opsItems for any problem
+	// detected by Application Insights for an application.
+	OpsCenterEnabled *bool `type:"boolean"`
+
+	// The SNS topic provided to Application Insights that is associated to the
+	// created opsItems to receive SNS notifications for opsItem updates.
+	OpsItemSNSTopicArn *string `type:"string"`
+
+	// The issues on the user side that block Application Insights from successfully
+	// monitoring an application.
 	Remarks *string `type:"string"`
 
 	// The name of the resource group used for the application.

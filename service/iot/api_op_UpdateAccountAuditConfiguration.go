@@ -15,18 +15,18 @@ type UpdateAccountAuditConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies which audit checks are enabled and disabled for this account. Use
-	// DescribeAccountAuditConfiguration to see the list of all checks including
+	// DescribeAccountAuditConfiguration to see the list of all checks, including
 	// those that are currently enabled.
 	//
-	// Note that some data collection may begin immediately when certain checks
-	// are enabled. When a check is disabled, any data collected so far in relation
-	// to the check is deleted.
+	// Some data collection might start immediately when certain checks are enabled.
+	// When a check is disabled, any data collected so far in relation to the check
+	// is deleted.
 	//
 	// You cannot disable a check if it is used by any scheduled audit. You must
 	// first delete the check from the scheduled audit or delete the scheduled audit
 	// itself.
 	//
-	// On the first call to UpdateAccountAuditConfiguration this parameter is required
+	// On the first call to UpdateAccountAuditConfiguration, this parameter is required
 	// and must specify at least one enabled check.
 	AuditCheckConfigurations map[string]AuditCheckConfiguration `locationName:"auditCheckConfigurations" type:"map"`
 
@@ -34,7 +34,7 @@ type UpdateAccountAuditConfigurationInput struct {
 	AuditNotificationTargetConfigurations map[string]AuditNotificationTarget `locationName:"auditNotificationTargetConfigurations" type:"map"`
 
 	// The ARN of the role that grants permission to AWS IoT to access information
-	// about your devices, policies, certificates and other items as necessary when
+	// about your devices, policies, certificates and other items as required when
 	// performing an audit.
 	RoleArn *string `locationName:"roleArn" min:"20" type:"string"`
 }

@@ -52,8 +52,7 @@ type CreateClientVpnEndpointInput struct {
 
 	// Information about the DNS servers to be used for DNS resolution. A Client
 	// VPN endpoint can have up to two DNS servers. If no DNS server is specified,
-	// the DNS address of the VPC that is to be associated with Client VPN endpoint
-	// is used as the DNS server.
+	// the DNS address configured on the device is used for the DNS server.
 	DnsServers []string `locationNameList:"item" type:"list"`
 
 	// Checks whether you have the required permissions for the action, without
@@ -68,8 +67,7 @@ type CreateClientVpnEndpointInput struct {
 	// ServerCertificateArn is a required field
 	ServerCertificateArn *string `type:"string" required:"true"`
 
-	// Indicates whether split-tunnel is enabled on the AWS Client VPN endpoint
-	// endpoint.
+	// Indicates whether split-tunnel is enabled on the AWS Client VPN endpoint.
 	//
 	// By default, split-tunnel on a VPN endpoint is disabled.
 	//

@@ -84,7 +84,7 @@ type BatchGetPartitionOutput struct {
 	// A list of the requested partitions.
 	Partitions []Partition `type:"list"`
 
-	// A list of the partition values in the request for which partions were not
+	// A list of the partition values in the request for which partitions were not
 	// returned.
 	UnprocessedKeys []PartitionValueList `type:"list"`
 }

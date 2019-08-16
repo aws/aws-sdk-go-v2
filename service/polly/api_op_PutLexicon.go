@@ -94,7 +94,7 @@ const opPutLexicon = "PutLexicon"
 // Lexicon operations have eventual consistency, therefore, it might take some
 // time before the lexicon is available to the SynthesizeSpeech operation.
 //
-// For more information, see Managing Lexicons (http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
+// For more information, see Managing Lexicons (https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
 //
 //    // Example sending a request using PutLexiconRequest.
 //    req := client.PutLexiconRequest(params)

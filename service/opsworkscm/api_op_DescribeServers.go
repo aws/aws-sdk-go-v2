@@ -68,7 +68,7 @@ func (s DescribeServersOutput) String() string {
 const opDescribeServers = "DescribeServers"
 
 // DescribeServersRequest returns a request value for making API operation for
-// AWS OpsWorks for Chef Automate.
+// AWS OpsWorks CM.
 //
 // Lists all configuration management servers that are identified with your
 // account. Only the stored results from Amazon DynamoDB are returned. AWS OpsWorks

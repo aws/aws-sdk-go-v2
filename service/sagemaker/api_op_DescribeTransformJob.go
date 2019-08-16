@@ -59,10 +59,13 @@ type DescribeTransformJobOutput struct {
 	// CreationTime is a required field
 	CreationTime *time.Time `type:"timestamp" required:"true"`
 
-	// The data structure used to combine the input data and transformed data from
-	// the batch transform output into a joined dataset and to store it in an output
-	// file. It also contains information on how to filter the input data and the
-	// joined dataset. For more information, see Batch Transform I/O Join (http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html).
+	// The data structure used to specify the data to be used for inference in a
+	// batch transform job and to associate the data that is relevant to the prediction
+	// results in the output. The input filter provided allows you to exclude input
+	// data that is not needed for inference in a batch transform job. The output
+	// filter provided allows you to include input data relevant to interpreting
+	// the predictions in the output from the job. For more information, see Associate
+	// Prediction Results with their Corresponding Input Records (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html).
 	DataProcessing *DataProcessing `type:"structure"`
 
 	// The environment variables to set in the Docker container. We support up to
@@ -72,7 +75,7 @@ type DescribeTransformJobOutput struct {
 	// If the transform job failed, FailureReason describes why it failed. A transform
 	// job creates a log file, which includes error messages, and stores it as an
 	// Amazon S3 object. For more information, see Log Amazon SageMaker Events with
-	// Amazon CloudWatch (http://docs.aws.amazon.com/sagemaker/latest/dg/logging-cloudwatch.html).
+	// Amazon CloudWatch (https://docs.aws.amazon.com/sagemaker/latest/dg/logging-cloudwatch.html).
 	FailureReason *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the Amazon SageMaker Ground Truth labeling

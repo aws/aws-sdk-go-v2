@@ -435,7 +435,7 @@ func (s *CodeGenNodeArg) Validate() error {
 type Column struct {
 	_ struct{} `type:"structure"`
 
-	// Free-form text comment.
+	// A free-form text comment.
 	Comment *string `type:"string"`
 
 	// The name of the Column.
@@ -443,7 +443,10 @@ type Column struct {
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// The datatype of data in the Column.
+	// These key-value pairs define properties associated with the column.
+	Parameters map[string]string `type:"map"`
+
+	// The data type of the Column.
 	Type *string `type:"string"`
 }
 
@@ -513,6 +516,37 @@ func (s *Condition) Validate() error {
 	return nil
 }
 
+// The confusion matrix shows you what your transform is predicting accurately
+// and what types of errors it is making.
+//
+// For more information, see Confusion matrix (https://en.wikipedia.org/wiki/Confusion_matrix)
+// in Wikipedia.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConfusionMatrix
+type ConfusionMatrix struct {
+	_ struct{} `type:"structure"`
+
+	// The number of matches in the data that the transform didn't find, in the
+	// confusion matrix for your transform.
+	NumFalseNegatives *int64 `type:"long"`
+
+	// The number of nonmatches in the data that the transform incorrectly classified
+	// as a match, in the confusion matrix for your transform.
+	NumFalsePositives *int64 `type:"long"`
+
+	// The number of nonmatches in the data that the transform correctly rejected,
+	// in the confusion matrix for your transform.
+	NumTrueNegatives *int64 `type:"long"`
+
+	// The number of matches in the data that the transform correctly found, in
+	// the confusion matrix for your transform.
+	NumTruePositives *int64 `type:"long"`
+}
+
+// String returns the string representation
+func (s ConfusionMatrix) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Defines a connection to a data source.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Connection
 type Connection struct {
@@ -535,8 +569,8 @@ type Connection struct {
 	//    by setting ConnectionPasswordEncryption in the Data Catalog encryption
 	//    settings, this field stores the encrypted password.
 	//
-	//    * JDBC_DRIVER_JAR_URI - The Amazon S3 path of the JAR file that contains
-	//    the JDBC driver to use.
+	//    * JDBC_DRIVER_JAR_URI - The Amazon Simple Storage Service (Amazon S3)
+	//    path of the JAR file that contains the JDBC driver to use.
 	//
 	//    * JDBC_DRIVER_CLASS_NAME - The class name of the JDBC driver to use.
 	//
@@ -544,15 +578,15 @@ type Connection struct {
 	//
 	//    * JDBC_ENGINE_VERSION - The version of the JDBC engine to use.
 	//
-	//    * CONFIG_FILES - (Reserved for future use).
+	//    * CONFIG_FILES - (Reserved for future use.)
 	//
 	//    * INSTANCE_ID - The instance ID to use.
 	//
 	//    * JDBC_CONNECTION_URL - The URL for the JDBC connection.
 	//
 	//    * JDBC_ENFORCE_SSL - A Boolean string (true, false) specifying whether
-	//    Secure Sockets Layer (SSL) with hostname matching will be enforced for
-	//    the JDBC connection on the client. The default is false.
+	//    Secure Sockets Layer (SSL) with hostname matching is enforced for the
+	//    JDBC connection on the client. The default is false.
 	ConnectionProperties map[string]string `type:"map"`
 
 	// The type of the connection. Currently, only JDBC is supported; SFTP is not
@@ -664,8 +698,8 @@ func (s *ConnectionInput) Validate() error {
 //
 // This encryption requires that you set AWS KMS key permissions to enable or
 // restrict access on the password key according to your security requirements.
-// For example, you might want only admin users to have decrypt permission on
-// the password key.
+// For example, you might want only administrators to have decrypt permission
+// on the password key.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectionPasswordEncryption
 type ConnectionPasswordEncryption struct {
 	_ struct{} `type:"structure"`
@@ -1208,22 +1242,52 @@ func (s *DataCatalogEncryptionSettings) Validate() error {
 	return nil
 }
 
-// The Database object represents a logical grouping of tables that may reside
+// The AWS Lake Formation principal.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataLakePrincipal
+type DataLakePrincipal struct {
+	_ struct{} `type:"structure"`
+
+	// An identifier for the AWS Lake Formation principal.
+	DataLakePrincipalIdentifier *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DataLakePrincipal) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DataLakePrincipal) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DataLakePrincipal"}
+	if s.DataLakePrincipalIdentifier != nil && len(*s.DataLakePrincipalIdentifier) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DataLakePrincipalIdentifier", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The Database object represents a logical grouping of tables that might reside
 // in a Hive metastore or an RDBMS.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Database
 type Database struct {
 	_ struct{} `type:"structure"`
 
+	// Creates a set of default permissions on the table for principals.
+	CreateTableDefaultPermissions []PrincipalPermissions `type:"list"`
+
 	// The time at which the metadata database was created in the catalog.
 	CreateTime *time.Time `type:"timestamp"`
 
-	// Description of the database.
+	// A description of the database.
 	Description *string `type:"string"`
 
 	// The location of the database (for example, an HDFS path).
 	LocationUri *string `min:"1" type:"string"`
 
-	// Name of the database. For Hive compatibility, this is folded to lowercase
+	// The name of the database. For Hive compatibility, this is folded to lowercase
 	// when it is stored.
 	//
 	// Name is a required field
@@ -1243,19 +1307,24 @@ func (s Database) String() string {
 type DatabaseInput struct {
 	_ struct{} `type:"structure"`
 
-	// Description of the database
+	// Creates a set of default permissions on the table for principals.
+	CreateTableDefaultPermissions []PrincipalPermissions `type:"list"`
+
+	// A description of the database.
 	Description *string `type:"string"`
 
 	// The location of the database (for example, an HDFS path).
 	LocationUri *string `min:"1" type:"string"`
 
-	// Name of the database. For Hive compatibility, this is folded to lowercase
+	// The name of the database. For Hive compatibility, this is folded to lowercase
 	// when it is stored.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// Thes key-value pairs define parameters and properties of the database.
+	// These key-value pairs define parameters and properties of the database.
+	//
+	// These key-value pairs define parameters and properties of the database.
 	Parameters map[string]string `type:"map"`
 }
 
@@ -1276,6 +1345,13 @@ func (s *DatabaseInput) Validate() error {
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+	if s.CreateTableDefaultPermissions != nil {
+		for i, v := range s.CreateTableDefaultPermissions {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CreateTableDefaultPermissions", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1393,6 +1469,10 @@ type DevEndpoint struct {
 	//    * For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of
 	//    memory, 128 GB disk), and provides 1 executor per worker. We recommend
 	//    this worker type for memory-intensive jobs.
+	//
+	// Known issue: when a development endpoint is created with the G.2X WorkerType
+	// configuration, the Spark drivers for the development endpoint will run on
+	// 4 vCPU, 16 GB of memory, and a 64 GB disk.
 	WorkerType WorkerType `type:"string" enum:"true"`
 
 	// The YARN endpoint address used by this DevEndpoint.
@@ -1538,6 +1618,26 @@ func (s ErrorDetail) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Evaluation metrics provide an estimate of the quality of your machine learning
+// transform.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/EvaluationMetrics
+type EvaluationMetrics struct {
+	_ struct{} `type:"structure"`
+
+	// The evaluation metrics for the find matches algorithm.
+	FindMatchesMetrics *FindMatchesMetrics `type:"structure"`
+
+	// The type of machine learning transform.
+	//
+	// TransformType is a required field
+	TransformType TransformType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s EvaluationMetrics) String() string {
+	return awsutil.Prettify(s)
+}
+
 // An execution property of a job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ExecutionProperty
 type ExecutionProperty struct {
@@ -1551,6 +1651,161 @@ type ExecutionProperty struct {
 
 // String returns the string representation
 func (s ExecutionProperty) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Specifies configuration properties for an exporting labels task run.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ExportLabelsTaskRunProperties
+type ExportLabelsTaskRunProperties struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Simple Storage Service (Amazon S3) path where you will export
+	// the labels.
+	OutputS3Path *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ExportLabelsTaskRunProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The evaluation metrics for the find matches algorithm. The quality of your
+// machine learning transform is measured by getting your transform to predict
+// some matches and comparing the results to known matches from the same dataset.
+// The quality metrics are based on a subset of your data, so they are not precise.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FindMatchesMetrics
+type FindMatchesMetrics struct {
+	_ struct{} `type:"structure"`
+
+	// The area under the precision/recall curve (AUPRC) is a single number measuring
+	// the overall quality of the transform, that is independent of the choice made
+	// for precision vs. recall. Higher values indicate that you have a more attractive
+	// precision vs. recall tradeoff.
+	//
+	// For more information, see Precision and recall (https://en.wikipedia.org/wiki/Precision_and_recall)
+	// in Wikipedia.
+	AreaUnderPRCurve *float64 `type:"double"`
+
+	// The confusion matrix shows you what your transform is predicting accurately
+	// and what types of errors it is making.
+	//
+	// For more information, see Confusion matrix (https://en.wikipedia.org/wiki/Confusion_matrix)
+	// in Wikipedia.
+	ConfusionMatrix *ConfusionMatrix `type:"structure"`
+
+	// The maximum F1 metric indicates the transform's accuracy between 0 and 1,
+	// where 1 is the best accuracy.
+	//
+	// For more information, see F1 score (https://en.wikipedia.org/wiki/F1_score)
+	// in Wikipedia.
+	F1 *float64 `type:"double"`
+
+	// The precision metric indicates when often your transform is correct when
+	// it predicts a match. Specifically, it measures how well the transform finds
+	// true positives from the total true positives possible.
+	//
+	// For more information, see Precision and recall (https://en.wikipedia.org/wiki/Precision_and_recall)
+	// in Wikipedia.
+	Precision *float64 `type:"double"`
+
+	// The recall metric indicates that for an actual match, how often your transform
+	// predicts the match. Specifically, it measures how well the transform finds
+	// true positives from the total records in the source data.
+	//
+	// For more information, see Precision and recall (https://en.wikipedia.org/wiki/Precision_and_recall)
+	// in Wikipedia.
+	Recall *float64 `type:"double"`
+}
+
+// String returns the string representation
+func (s FindMatchesMetrics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The parameters to configure the find matches transform.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FindMatchesParameters
+type FindMatchesParameters struct {
+	_ struct{} `type:"structure"`
+
+	// The value that is selected when tuning your transform for a balance between
+	// accuracy and cost. A value of 0.5 means that the system balances accuracy
+	// and cost concerns. A value of 1.0 means a bias purely for accuracy, which
+	// typically results in a higher cost, sometimes substantially higher. A value
+	// of 0.0 means a bias purely for cost, which results in a less accurate FindMatches
+	// transform, sometimes with unacceptable accuracy.
+	//
+	// Accuracy measures how well the transform finds true positives and true negatives.
+	// Increasing accuracy requires more machine resources and cost. But it also
+	// results in increased recall.
+	//
+	// Cost measures how many compute resources, and thus money, are consumed to
+	// run the transform.
+	AccuracyCostTradeoff *float64 `type:"double"`
+
+	// The value to switch on or off to force the output to match the provided labels
+	// from users. If the value is True, the find matches transform forces the output
+	// to match the provided labels. The results override the normal conflation
+	// results. If the value is False, the find matches transform does not ensure
+	// all the labels provided are respected, and the results rely on the trained
+	// model.
+	//
+	// Note that setting this value to true may increase the conflation execution
+	// time.
+	EnforceProvidedLabels *bool `type:"boolean"`
+
+	// The value selected when tuning your transform for a balance between precision
+	// and recall. A value of 0.5 means no preference; a value of 1.0 means a bias
+	// purely for precision, and a value of 0.0 means a bias for recall. Because
+	// this is a tradeoff, choosing values close to 1.0 means very low recall, and
+	// choosing values close to 0.0 results in very low precision.
+	//
+	// The precision metric indicates how often your model is correct when it predicts
+	// a match.
+	//
+	// The recall metric indicates that for an actual match, how often your model
+	// predicts the match.
+	PrecisionRecallTradeoff *float64 `type:"double"`
+
+	// The name of a column that uniquely identifies rows in the source table. Used
+	// to help identify matching records.
+	PrimaryKeyColumnName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s FindMatchesParameters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *FindMatchesParameters) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "FindMatchesParameters"}
+	if s.PrimaryKeyColumnName != nil && len(*s.PrimaryKeyColumnName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("PrimaryKeyColumnName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Specifies configuration properties for a Find Matches task run.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FindMatchesTaskRunProperties
+type FindMatchesTaskRunProperties struct {
+	_ struct{} `type:"structure"`
+
+	// The job ID for the Find Matches task run.
+	JobId *string `min:"1" type:"string"`
+
+	// The name assigned to the job for the Find Matches task run.
+	JobName *string `min:"1" type:"string"`
+
+	// The job run ID for the Find Matches task run.
+	JobRunId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s FindMatchesTaskRunProperties) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -1572,6 +1827,64 @@ type GetConnectionsFilter struct {
 // String returns the string representation
 func (s GetConnectionsFilter) String() string {
 	return awsutil.Prettify(s)
+}
+
+// The database and table in the AWS Glue Data Catalog that is used for input
+// or output data.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GlueTable
+type GlueTable struct {
+	_ struct{} `type:"structure"`
+
+	// A unique identifier for the AWS Glue Data Catalog.
+	CatalogId *string `min:"1" type:"string"`
+
+	// The name of the connection to the AWS Glue Data Catalog.
+	ConnectionName *string `min:"1" type:"string"`
+
+	// A database name in the AWS Glue Data Catalog.
+	//
+	// DatabaseName is a required field
+	DatabaseName *string `min:"1" type:"string" required:"true"`
+
+	// A table name in the AWS Glue Data Catalog.
+	//
+	// TableName is a required field
+	TableName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GlueTable) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GlueTable) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GlueTable"}
+	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
+	}
+	if s.ConnectionName != nil && len(*s.ConnectionName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ConnectionName", 1))
+	}
+
+	if s.DatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
+	}
+	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
+	}
+
+	if s.TableName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
+	}
+	if s.TableName != nil && len(*s.TableName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // A classifier that uses grok patterns.
@@ -1612,6 +1925,24 @@ type GrokClassifier struct {
 
 // String returns the string representation
 func (s GrokClassifier) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Specifies configuration properties for an importing labels task run.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ImportLabelsTaskRunProperties
+type ImportLabelsTaskRunProperties struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Simple Storage Service (Amazon S3) path from where you will import
+	// the labels.
+	InputS3Path *string `type:"string"`
+
+	// Indicates whether to overwrite your existing labels.
+	Replace *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s ImportLabelsTaskRunProperties) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -1778,8 +2109,14 @@ type JobBookmarkEntry struct {
 	// The name of the job in question.
 	JobName *string `type:"string"`
 
+	// The unique run identifier associated with the previous job run.
+	PreviousRunId *string `type:"string"`
+
 	// The run ID number.
 	Run *int64 `type:"integer"`
+
+	// The run ID number.
+	RunId *string `type:"string"`
 
 	// The version of the job.
 	Version *int64 `type:"integer"`
@@ -2159,6 +2496,21 @@ func (s JsonClassifier) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Specifies configuration properties for a labeling set generation task run.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/LabelingSetGenerationTaskRunProperties
+type LabelingSetGenerationTaskRunProperties struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Simple Storage Service (Amazon S3) path where you will generate
+	// the labeling set.
+	OutputS3Path *string `type:"string"`
+}
+
+// String returns the string representation
+func (s LabelingSetGenerationTaskRunProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Status and error information about the most recent crawl.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/LastCrawlInfo
 type LastCrawlInfo struct {
@@ -2237,6 +2589,101 @@ func (s *Location) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// A structure for a machine learning transform.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MLTransform
+type MLTransform struct {
+	_ struct{} `type:"structure"`
+
+	// A timestamp. The time and date that this machine learning transform was created.
+	CreatedOn *time.Time `type:"timestamp"`
+
+	// A user-defined, long-form description text for the machine learning transform.
+	// Descriptions are not guaranteed to be unique and can be changed at any time.
+	Description *string `type:"string"`
+
+	// An EvaluationMetrics object. Evaluation metrics provide an estimate of the
+	// quality of your machine learning transform.
+	EvaluationMetrics *EvaluationMetrics `type:"structure"`
+
+	// A list of AWS Glue table definitions used by the transform.
+	InputRecordTables []GlueTable `type:"list"`
+
+	// A count identifier for the labeling files generated by AWS Glue for this
+	// transform. As you create a better transform, you can iteratively download,
+	// label, and upload the labeling file.
+	LabelCount *int64 `type:"integer"`
+
+	// A timestamp. The last point in time when this machine learning transform
+	// was modified.
+	LastModifiedOn *time.Time `type:"timestamp"`
+
+	// The number of AWS Glue data processing units (DPUs) that are allocated to
+	// task runs for this transform. You can allocate from 2 to 100 DPUs; the default
+	// is 10. A DPU is a relative measure of processing power that consists of 4
+	// vCPUs of compute capacity and 16 GB of memory. For more information, see
+	// the AWS Glue pricing page (https://aws.amazon.com/glue/pricing/).
+	//
+	// When the WorkerType field is set to a value other than Standard, the MaxCapacity
+	// field is set automatically and becomes read-only.
+	MaxCapacity *float64 `type:"double"`
+
+	// The maximum number of times to retry after an MLTaskRun of the machine learning
+	// transform fails.
+	MaxRetries *int64 `type:"integer"`
+
+	// A user-defined name for the machine learning transform. Names are not guaranteed
+	// unique and can be changed at any time.
+	Name *string `min:"1" type:"string"`
+
+	// The number of workers of a defined workerType that are allocated when a task
+	// of the transform runs.
+	NumberOfWorkers *int64 `type:"integer"`
+
+	// A TransformParameters object. You can use parameters to tune (customize)
+	// the behavior of the machine learning transform by specifying what data it
+	// learns from and your preference on various tradeoffs (such as precious vs.
+	// recall, or accuracy vs. cost).
+	Parameters *TransformParameters `type:"structure"`
+
+	// The name or Amazon Resource Name (ARN) of the IAM role with the required
+	// permissions. This role needs permission to your Amazon Simple Storage Service
+	// (Amazon S3) sources, targets, temporary directory, scripts, and any libraries
+	// used by the task run for this transform.
+	Role *string `type:"string"`
+
+	// A map of key-value pairs representing the columns and data types that this
+	// transform can run against. Has an upper bound of 100 columns.
+	Schema []SchemaColumn `type:"list"`
+
+	// The current status of the machine learning transform.
+	Status TransformStatusType `type:"string" enum:"true"`
+
+	// The timeout in minutes of the machine learning transform.
+	Timeout *int64 `min:"1" type:"integer"`
+
+	// The unique transform ID that is generated for the machine learning transform.
+	// The ID is guaranteed to be unique and does not change.
+	TransformId *string `min:"1" type:"string"`
+
+	// The type of predefined worker that is allocated when a task of this transform
+	// runs. Accepts a value of Standard, G.1X, or G.2X.
+	//
+	//    * For the Standard worker type, each worker provides 4 vCPU, 16 GB of
+	//    memory and a 50GB disk, and 2 executors per worker.
+	//
+	//    * For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory
+	//    and a 64GB disk, and 1 executor per worker.
+	//
+	//    * For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory
+	//    and a 128GB disk, and 1 executor per worker.
+	WorkerType WorkerType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s MLTransform) String() string {
+	return awsutil.Prettify(s)
 }
 
 // Defines a mapping.
@@ -2377,7 +2824,7 @@ type Partition struct {
 	// The time at which the partition was created.
 	CreationTime *time.Time `type:"timestamp"`
 
-	// The name of the catalog database where the table in question is located.
+	// The name of the catalog database in which to create the partition.
 	DatabaseName *string `min:"1" type:"string"`
 
 	// The last time at which the partition was accessed.
@@ -2392,7 +2839,7 @@ type Partition struct {
 	// Provides information about the physical location where the partition is stored.
 	StorageDescriptor *StorageDescriptor `type:"structure"`
 
-	// The name of the table in question.
+	// The name of the database table in which to create the partition.
 	TableName *string `min:"1" type:"string"`
 
 	// The values of the partition.
@@ -2409,7 +2856,7 @@ func (s Partition) String() string {
 type PartitionError struct {
 	_ struct{} `type:"structure"`
 
-	// Details about the partition error.
+	// The details about the partition error.
 	ErrorDetail *ErrorDetail `type:"structure"`
 
 	// The values that define the partition.
@@ -2421,7 +2868,7 @@ func (s PartitionError) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The structure used to create and update a partion.
+// The structure used to create and update a partition.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PartitionInput
 type PartitionInput struct {
 	_ struct{} `type:"structure"`
@@ -2584,7 +3031,59 @@ func (s *Predicate) Validate() error {
 	return nil
 }
 
-// URIs for function resources.
+// Permissions granted to a principal.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PrincipalPermissions
+type PrincipalPermissions struct {
+	_ struct{} `type:"structure"`
+
+	// The permissions that are granted to the principal.
+	Permissions []Permission `type:"list"`
+
+	// The principal who is granted permissions.
+	Principal *DataLakePrincipal `type:"structure"`
+}
+
+// String returns the string representation
+func (s PrincipalPermissions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PrincipalPermissions) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PrincipalPermissions"}
+	if s.Principal != nil {
+		if err := s.Principal.Validate(); err != nil {
+			invalidParams.AddNested("Principal", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Defines a property predicate.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PropertyPredicate
+type PropertyPredicate struct {
+	_ struct{} `type:"structure"`
+
+	// The comparator used to compare this property to others.
+	Comparator Comparator `type:"string" enum:"true"`
+
+	// The key of the property.
+	Key *string `type:"string"`
+
+	// The value of the property.
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s PropertyPredicate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The URIs for function resources.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResourceUri
 type ResourceUri struct {
 	_ struct{} `type:"structure"`
@@ -2686,6 +3185,38 @@ func (s SchemaChangePolicy) String() string {
 	return awsutil.Prettify(s)
 }
 
+// A key-value pair representing a column and data type that this transform
+// can run against. The Schema parameter of the MLTransform may contain up to
+// 100 of these structures.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SchemaColumn
+type SchemaColumn struct {
+	_ struct{} `type:"structure"`
+
+	// The type of data in the column.
+	DataType *string `type:"string"`
+
+	// The name of the column.
+	Name *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s SchemaColumn) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SchemaColumn) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SchemaColumn"}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Specifies a security configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SecurityConfiguration
 type SecurityConfiguration struct {
@@ -2712,14 +3243,13 @@ func (s SecurityConfiguration) String() string {
 type Segment struct {
 	_ struct{} `type:"structure"`
 
-	// The zero-based index number of the this segment. For example, if the total
-	// number of segments is 4, SegmentNumber values will range from zero through
-	// three.
+	// The zero-based index number of the segment. For example, if the total number
+	// of segments is 4, SegmentNumber values range from 0 through 3.
 	//
 	// SegmentNumber is a required field
 	SegmentNumber *int64 `type:"integer" required:"true"`
 
-	// The total numer of segments.
+	// The total number of segments.
 	//
 	// TotalSegments is a required field
 	TotalSegments *int64 `min:"1" type:"integer" required:"true"`
@@ -2751,7 +3281,7 @@ func (s *Segment) Validate() error {
 	return nil
 }
 
-// Information about a serialization/deserialization program (SerDe) which serves
+// Information about a serialization/deserialization program (SerDe) that serves
 // as an extractor and loader.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SerDeInfo
 type SerDeInfo struct {
@@ -2763,7 +3293,7 @@ type SerDeInfo struct {
 	// These key-value pairs define initialization parameters for the SerDe.
 	Parameters map[string]string `type:"map"`
 
-	// Usually the class that implements the SerDe. An example is: org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe.
+	// Usually the class that implements the SerDe. An example is org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe.
 	SerializationLibrary *string `min:"1" type:"string"`
 }
 
@@ -2788,8 +3318,8 @@ func (s *SerDeInfo) Validate() error {
 	return nil
 }
 
-// Specifies skewed values in a table. Skewed are ones that occur with very
-// high frequency.
+// Specifies skewed values in a table. Skewed values are those that occur with
+// very high frequency.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SkewedInfo
 type SkewedInfo struct {
 	_ struct{} `type:"structure"`
@@ -2806,6 +3336,20 @@ type SkewedInfo struct {
 
 // String returns the string representation
 func (s SkewedInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SortCriterion
+type SortCriterion struct {
+	_ struct{} `type:"structure"`
+
+	FieldName *string `type:"string"`
+
+	Sort Sort `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s SortCriterion) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -2828,7 +3372,7 @@ type StorageDescriptor struct {
 	// a custom format.
 	InputFormat *string `type:"string"`
 
-	// The physical location of the table. By default this takes the form of the
+	// The physical location of the table. By default, this takes the form of the
 	// warehouse location, followed by the database location in the warehouse, followed
 	// by the table name.
 	Location *string `type:"string"`
@@ -2840,14 +3384,13 @@ type StorageDescriptor struct {
 	// or a custom format.
 	OutputFormat *string `type:"string"`
 
-	// User-supplied properties in key-value form.
+	// The user-supplied properties in key-value form.
 	Parameters map[string]string `type:"map"`
 
-	// Serialization/deserialization (SerDe) information.
+	// The serialization/deserialization (SerDe) information.
 	SerdeInfo *SerDeInfo `type:"structure"`
 
-	// Information about values that appear very frequently in a column (skewed
-	// values).
+	// The information about values that appear frequently in a column (skewed values).
 	SkewedInfo *SkewedInfo `type:"structure"`
 
 	// A list specifying the sort order of each bucket in the table.
@@ -2896,32 +3439,35 @@ func (s *StorageDescriptor) Validate() error {
 type Table struct {
 	_ struct{} `type:"structure"`
 
-	// Time when the table definition was created in the Data Catalog.
+	// The time when the table definition was created in the Data Catalog.
 	CreateTime *time.Time `type:"timestamp"`
 
-	// Person or entity who created the table.
+	// The person or entity who created the table.
 	CreatedBy *string `min:"1" type:"string"`
 
-	// Name of the metadata database where the table metadata resides. For Hive
-	// compatibility, this must be all lowercase.
+	// The name of the database where the table metadata resides. For Hive compatibility,
+	// this must be all lowercase.
 	DatabaseName *string `min:"1" type:"string"`
 
-	// Description of the table.
+	// A description of the table.
 	Description *string `type:"string"`
 
-	// Last time the table was accessed. This is usually taken from HDFS, and may
-	// not be reliable.
+	// Indicates whether the table has been registered with AWS Lake Formation.
+	IsRegisteredWithLakeFormation *bool `type:"boolean"`
+
+	// The last time that the table was accessed. This is usually taken from HDFS,
+	// and might not be reliable.
 	LastAccessTime *time.Time `type:"timestamp"`
 
-	// Last time column statistics were computed for this table.
+	// The last time that column statistics were computed for this table.
 	LastAnalyzedTime *time.Time `type:"timestamp"`
 
-	// Name of the table. For Hive compatibility, this must be entirely lowercase.
+	// The table name. For Hive compatibility, this must be entirely lowercase.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// Owner of the table.
+	// The owner of the table.
 	Owner *string `min:"1" type:"string"`
 
 	// These key-value pairs define properties associated with the table.
@@ -2930,13 +3476,14 @@ type Table struct {
 	// A list of columns by which the table is partitioned. Only primitive types
 	// are supported as partition keys.
 	//
-	// When creating a table used by Athena, and you do not specify any partitionKeys,
-	// you must at least set the value of partitionKeys to an empty list. For example:
+	// When you create a table used by Amazon Athena, and you do not specify any
+	// partitionKeys, you must at least set the value of partitionKeys to an empty
+	// list. For example:
 	//
 	// "PartitionKeys": []
 	PartitionKeys []Column `type:"list"`
 
-	// Retention time for this table.
+	// The retention time for this table.
 	Retention *int64 `type:"integer"`
 
 	// A storage descriptor containing information about the physical storage of
@@ -2946,7 +3493,7 @@ type Table struct {
 	// The type of this table (EXTERNAL_TABLE, VIRTUAL_VIEW, etc.).
 	TableType *string `type:"string"`
 
-	// Last time the table was updated.
+	// The last time that the table was updated.
 	UpdateTime *time.Time `type:"timestamp"`
 
 	// If the table is a view, the expanded text of the view; otherwise null.
@@ -2966,10 +3513,10 @@ func (s Table) String() string {
 type TableError struct {
 	_ struct{} `type:"structure"`
 
-	// Detail about the error.
+	// The details about the error.
 	ErrorDetail *ErrorDetail `type:"structure"`
 
-	// Name of the table. For Hive compatibility, this must be entirely lowercase.
+	// The name of the table. For Hive compatibility, this must be entirely lowercase.
 	TableName *string `min:"1" type:"string"`
 }
 
@@ -2978,27 +3525,27 @@ func (s TableError) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Structure used to create or update the table.
+// A structure used to define a table.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableInput
 type TableInput struct {
 	_ struct{} `type:"structure"`
 
-	// Description of the table.
+	// A description of the table.
 	Description *string `type:"string"`
 
-	// Last time the table was accessed.
+	// The last time that the table was accessed.
 	LastAccessTime *time.Time `type:"timestamp"`
 
-	// Last time column statistics were computed for this table.
+	// The last time that column statistics were computed for this table.
 	LastAnalyzedTime *time.Time `type:"timestamp"`
 
-	// Name of the table. For Hive compatibility, this is folded to lowercase when
+	// The table name. For Hive compatibility, this is folded to lowercase when
 	// it is stored.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// Owner of the table.
+	// The table owner.
 	Owner *string `min:"1" type:"string"`
 
 	// These key-value pairs define properties associated with the table.
@@ -3007,13 +3554,14 @@ type TableInput struct {
 	// A list of columns by which the table is partitioned. Only primitive types
 	// are supported as partition keys.
 	//
-	// When creating a table used by Athena, and you do not specify any partitionKeys,
-	// you must at least set the value of partitionKeys to an empty list. For example:
+	// When you create a table used by Amazon Athena, and you do not specify any
+	// partitionKeys, you must at least set the value of partitionKeys to an empty
+	// list. For example:
 	//
 	// "PartitionKeys": []
 	PartitionKeys []Column `type:"list"`
 
-	// Retention time for this table.
+	// The retention time for this table.
 	Retention *int64 `type:"integer"`
 
 	// A storage descriptor containing information about the physical storage of
@@ -3072,7 +3620,7 @@ func (s *TableInput) Validate() error {
 type TableVersion struct {
 	_ struct{} `type:"structure"`
 
-	// The table in question
+	// The table in question.
 	Table *Table `type:"structure"`
 
 	// The ID value that identifies this table version. A VersionId is a string
@@ -3090,7 +3638,7 @@ func (s TableVersion) String() string {
 type TableVersionError struct {
 	_ struct{} `type:"structure"`
 
-	// Detail about the error.
+	// The details about the error.
 	ErrorDetail *ErrorDetail `type:"structure"`
 
 	// The name of the table in question.
@@ -3104,6 +3652,279 @@ type TableVersionError struct {
 // String returns the string representation
 func (s TableVersionError) String() string {
 	return awsutil.Prettify(s)
+}
+
+// The sampling parameters that are associated with the machine learning transform.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TaskRun
+type TaskRun struct {
+	_ struct{} `type:"structure"`
+
+	// The last point in time that the requested task run was completed.
+	CompletedOn *time.Time `type:"timestamp"`
+
+	// The list of error strings associated with this task run.
+	ErrorString *string `type:"string"`
+
+	// The amount of time (in seconds) that the task run consumed resources.
+	ExecutionTime *int64 `type:"integer"`
+
+	// The last point in time that the requested task run was updated.
+	LastModifiedOn *time.Time `type:"timestamp"`
+
+	// The names of the log group for secure logging, associated with this task
+	// run.
+	LogGroupName *string `type:"string"`
+
+	// Specifies configuration properties associated with this task run.
+	Properties *TaskRunProperties `type:"structure"`
+
+	// The date and time that this task run started.
+	StartedOn *time.Time `type:"timestamp"`
+
+	// The current status of the requested task run.
+	Status TaskStatusType `type:"string" enum:"true"`
+
+	// The unique identifier for this task run.
+	TaskRunId *string `min:"1" type:"string"`
+
+	// The unique identifier for the transform.
+	TransformId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s TaskRun) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The criteria that are used to filter the task runs for the machine learning
+// transform.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TaskRunFilterCriteria
+type TaskRunFilterCriteria struct {
+	_ struct{} `type:"structure"`
+
+	// Filter on task runs started after this date.
+	StartedAfter *time.Time `type:"timestamp"`
+
+	// Filter on task runs started before this date.
+	StartedBefore *time.Time `type:"timestamp"`
+
+	// The current status of the task run.
+	Status TaskStatusType `type:"string" enum:"true"`
+
+	// The type of task run.
+	TaskRunType TaskType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s TaskRunFilterCriteria) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The configuration properties for the task run.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TaskRunProperties
+type TaskRunProperties struct {
+	_ struct{} `type:"structure"`
+
+	// The configuration properties for an exporting labels task run.
+	ExportLabelsTaskRunProperties *ExportLabelsTaskRunProperties `type:"structure"`
+
+	// The configuration properties for a find matches task run.
+	FindMatchesTaskRunProperties *FindMatchesTaskRunProperties `type:"structure"`
+
+	// The configuration properties for an importing labels task run.
+	ImportLabelsTaskRunProperties *ImportLabelsTaskRunProperties `type:"structure"`
+
+	// The configuration properties for a labeling set generation task run.
+	LabelingSetGenerationTaskRunProperties *LabelingSetGenerationTaskRunProperties `type:"structure"`
+
+	// The type of task run.
+	TaskType TaskType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s TaskRunProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The sorting criteria that are used to sort the list of task runs for the
+// machine learning transform.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TaskRunSortCriteria
+type TaskRunSortCriteria struct {
+	_ struct{} `type:"structure"`
+
+	// The column to be used to sort the list of task runs for the machine learning
+	// transform.
+	//
+	// Column is a required field
+	Column TaskRunSortColumnType `type:"string" required:"true" enum:"true"`
+
+	// The sort direction to be used to sort the list of task runs for the machine
+	// learning transform.
+	//
+	// SortDirection is a required field
+	SortDirection SortDirectionType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s TaskRunSortCriteria) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TaskRunSortCriteria) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TaskRunSortCriteria"}
+	if len(s.Column) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Column"))
+	}
+	if len(s.SortDirection) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("SortDirection"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The criteria used to filter the machine learning transforms.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TransformFilterCriteria
+type TransformFilterCriteria struct {
+	_ struct{} `type:"structure"`
+
+	// The time and date after which the transforms were created.
+	CreatedAfter *time.Time `type:"timestamp"`
+
+	// The time and date before which the transforms were created.
+	CreatedBefore *time.Time `type:"timestamp"`
+
+	// Filter on transforms last modified after this date.
+	LastModifiedAfter *time.Time `type:"timestamp"`
+
+	// Filter on transforms last modified before this date.
+	LastModifiedBefore *time.Time `type:"timestamp"`
+
+	// A unique transform name that is used to filter the machine learning transforms.
+	Name *string `min:"1" type:"string"`
+
+	// Filters on datasets with a specific schema. The Map<Column, Type> object
+	// is an array of key-value pairs representing the schema this transform accepts,
+	// where Column is the name of a column, and Type is the type of the data such
+	// as an integer or string. Has an upper bound of 100 columns.
+	Schema []SchemaColumn `type:"list"`
+
+	// Filters the list of machine learning transforms by the last known status
+	// of the transforms (to indicate whether a transform can be used or not). One
+	// of "NOT_READY", "READY", or "DELETING".
+	Status TransformStatusType `type:"string" enum:"true"`
+
+	// The type of machine learning transform that is used to filter the machine
+	// learning transforms.
+	TransformType TransformType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s TransformFilterCriteria) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TransformFilterCriteria) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TransformFilterCriteria"}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+	if s.Schema != nil {
+		for i, v := range s.Schema {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Schema", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The algorithm-specific parameters that are associated with the machine learning
+// transform.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TransformParameters
+type TransformParameters struct {
+	_ struct{} `type:"structure"`
+
+	// The parameters for the find matches algorithm.
+	FindMatchesParameters *FindMatchesParameters `type:"structure"`
+
+	// The type of machine learning transform.
+	//
+	// For information about the types of machine learning transforms, see Creating
+	// Machine Learning Transforms (http://docs.aws.amazon.com/glue/latest/dg/add-job-machine-learning-transform.html).
+	//
+	// TransformType is a required field
+	TransformType TransformType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s TransformParameters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TransformParameters) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TransformParameters"}
+	if len(s.TransformType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("TransformType"))
+	}
+	if s.FindMatchesParameters != nil {
+		if err := s.FindMatchesParameters.Validate(); err != nil {
+			invalidParams.AddNested("FindMatchesParameters", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The sorting criteria that are associated with the machine learning transform.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TransformSortCriteria
+type TransformSortCriteria struct {
+	_ struct{} `type:"structure"`
+
+	// The column to be used in the sorting criteria that are associated with the
+	// machine learning transform.
+	//
+	// Column is a required field
+	Column TransformSortColumnType `type:"string" required:"true" enum:"true"`
+
+	// The sort direction to be used in the sorting criteria that are associated
+	// with the machine learning transform.
+	//
+	// SortDirection is a required field
+	SortDirection SortDirectionType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s TransformSortCriteria) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TransformSortCriteria) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TransformSortCriteria"}
+	if len(s.Column) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Column"))
+	}
+	if len(s.SortDirection) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("SortDirection"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Information about a specific trigger.
@@ -3431,7 +4252,7 @@ func (s UserDefinedFunction) String() string {
 	return awsutil.Prettify(s)
 }
 
-// A structure used to create or updata a user-defined function.
+// A structure used to create or update a user-defined function.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UserDefinedFunctionInput
 type UserDefinedFunctionInput struct {
 	_ struct{} `type:"structure"`

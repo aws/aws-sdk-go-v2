@@ -14,13 +14,9 @@ import (
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the resource to delete tags from.
-	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"querystring" locationName:"resourceArn" type:"string" required:"true"`
 
-	// The keys of the tags to be removed.
-	//
 	// TagKeys is a required field
 	TagKeys []string `locationName:"tagKeys" type:"list" required:"true"`
 }

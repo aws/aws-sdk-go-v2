@@ -14,13 +14,9 @@ import (
 type DescribeVirtualNodeInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh that the virtual node resides in.
-	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The name of the virtual node to describe.
-	//
 	// VirtualNodeName is a required field
 	VirtualNodeName *string `location:"uri" locationName:"virtualNodeName" min:"1" type:"string" required:"true"`
 }
@@ -77,7 +73,7 @@ func (s DescribeVirtualNodeInput) MarshalFields(e protocol.FieldEncoder) error {
 type DescribeVirtualNodeOutput struct {
 	_ struct{} `type:"structure" payload:"VirtualNode"`
 
-	// The full description of your virtual node.
+	// An object representing a virtual node returned by a describe operation.
 	//
 	// VirtualNode is a required field
 	VirtualNode *VirtualNodeData `locationName:"virtualNode" type:"structure" required:"true"`

@@ -21,6 +21,9 @@ type CreateCustomerGatewayInput struct {
 	// BgpAsn is a required field
 	BgpAsn *int64 `type:"integer" required:"true"`
 
+	// The Amazon Resource Name (ARN) for the customer gateway certificate.
+	CertificateArn *string `type:"string"`
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
 	// the required permissions, the error response is DryRunOperation. Otherwise,
@@ -29,9 +32,7 @@ type CreateCustomerGatewayInput struct {
 
 	// The Internet-routable IP address for the customer gateway's outside interface.
 	// The address must be static.
-	//
-	// PublicIp is a required field
-	PublicIp *string `locationName:"IpAddress" type:"string" required:"true"`
+	PublicIp *string `locationName:"IpAddress" type:"string"`
 
 	// The type of VPN connection that this customer gateway supports (ipsec.1).
 	//
@@ -50,10 +51,6 @@ func (s *CreateCustomerGatewayInput) Validate() error {
 
 	if s.BgpAsn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BgpAsn"))
-	}
-
-	if s.PublicIp == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PublicIp"))
 	}
 	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))

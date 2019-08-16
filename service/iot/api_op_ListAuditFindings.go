@@ -27,7 +27,7 @@ type ListAuditFindingsInput struct {
 	// The token for the next set of results.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
-	// Information identifying the non-compliant resource.
+	// Information identifying the noncompliant resource.
 	ResourceIdentifier *ResourceIdentifier `locationName:"resourceIdentifier" type:"structure"`
 
 	// A filter to limit results to those found after the specified time. You must

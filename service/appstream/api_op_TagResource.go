@@ -83,7 +83,7 @@ const opTagResource = "TagResource"
 // disassociate tags from your resources, use UntagResource.
 //
 // For more information about tags, see Tagging Your Resources (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
-// in the Amazon AppStream 2.0 Developer Guide.
+// in the Amazon AppStream 2.0 Administration Guide.
 //
 //    // Example sending a request using TagResourceRequest.
 //    req := client.TagResourceRequest(params)

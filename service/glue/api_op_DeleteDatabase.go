@@ -13,11 +13,11 @@ import (
 type DeleteDatabaseInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the Data Catalog in which the database resides. If none is supplied,
+	// The ID of the Data Catalog in which the database resides. If none is provided,
 	// the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 
-	// The name of the Database to delete. For Hive compatibility, this must be
+	// The name of the database to delete. For Hive compatibility, this must be
 	// all lowercase.
 	//
 	// Name is a required field
@@ -64,18 +64,18 @@ const opDeleteDatabase = "DeleteDatabase"
 // DeleteDatabaseRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Removes a specified Database from a Data Catalog.
+// Removes a specified database from a Data Catalog.
 //
-// After completing this operation, you will no longer have access to the tables
+// After completing this operation, you no longer have access to the tables
 // (and all table versions and partitions that might belong to the tables) and
 // the user-defined functions in the deleted database. AWS Glue deletes these
 // "orphaned" resources asynchronously in a timely manner, at the discretion
 // of the service.
 //
-// To ensure immediate deletion of all related resources, before calling DeleteDatabase,
-// use DeleteTableVersion or BatchDeleteTableVersion, DeletePartition or BatchDeletePartition,
-// DeleteUserDefinedFunction, and DeleteTable or BatchDeleteTable, to delete
-// any resources that belong to the database.
+// To ensure the immediate deletion of all related resources, before calling
+// DeleteDatabase, use DeleteTableVersion or BatchDeleteTableVersion, DeletePartition
+// or BatchDeletePartition, DeleteUserDefinedFunction, and DeleteTable or BatchDeleteTable,
+// to delete any resources that belong to the database.
 //
 //    // Example sending a request using DeleteDatabaseRequest.
 //    req := client.DeleteDatabaseRequest(params)

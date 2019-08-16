@@ -13,7 +13,7 @@ import (
 type DeleteTableInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the Data Catalog where the table resides. If none is supplied,
+	// The ID of the Data Catalog where the table resides. If none is provided,
 	// the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 
@@ -79,14 +79,13 @@ const opDeleteTable = "DeleteTable"
 //
 // Removes a table definition from the Data Catalog.
 //
-// After completing this operation, you will no longer have access to the table
-// versions and partitions that belong to the deleted table. AWS Glue deletes
-// these "orphaned" resources asynchronously in a timely manner, at the discretion
-// of the service.
+// After completing this operation, you no longer have access to the table versions
+// and partitions that belong to the deleted table. AWS Glue deletes these "orphaned"
+// resources asynchronously in a timely manner, at the discretion of the service.
 //
-// To ensure immediate deletion of all related resources, before calling DeleteTable,
-// use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or
-// BatchDeletePartition, to delete any resources that belong to the table.
+// To ensure the immediate deletion of all related resources, before calling
+// DeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition
+// or BatchDeletePartition, to delete any resources that belong to the table.
 //
 //    // Example sending a request using DeleteTableRequest.
 //    req := client.DeleteTableRequest(params)

@@ -40,7 +40,9 @@ type CreateLaunchTemplateVersionInput struct {
 
 	// The version number of the launch template version on which to base the new
 	// version. The new version inherits the same launch parameters as the source
-	// version, except for parameters that you specify in LaunchTemplateData.
+	// version, except for parameters that you specify in LaunchTemplateData. Snapshots
+	// applied to the block device mapping are ignored when creating a new version
+	// unless they are explicitly included.
 	SourceVersion *string `type:"string"`
 
 	// A description for the version of the launch template.

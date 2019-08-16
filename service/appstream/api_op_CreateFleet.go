@@ -156,7 +156,7 @@ type CreateFleetInput struct {
 	// _ . : / = + \ - @
 	//
 	// For more information, see Tagging Your Resources (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
-	// in the Amazon AppStream 2.0 Developer Guide.
+	// in the Amazon AppStream 2.0 Administration Guide.
 	Tags map[string]string `min:"1" type:"map"`
 
 	// The VPC configuration for the fleet.

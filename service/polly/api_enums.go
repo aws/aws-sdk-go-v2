@@ -2,6 +2,23 @@
 
 package polly
 
+type Engine string
+
+// Enum values for Engine
+const (
+	EngineStandard Engine = "standard"
+	EngineNeural   Engine = "neural"
+)
+
+func (enum Engine) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Engine) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Gender string
 
 // Enum values for Gender

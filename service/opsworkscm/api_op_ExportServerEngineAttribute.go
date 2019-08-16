@@ -92,7 +92,7 @@ func (s ExportServerEngineAttributeOutput) String() string {
 const opExportServerEngineAttribute = "ExportServerEngineAttribute"
 
 // ExportServerEngineAttributeRequest returns a request value for making API operation for
-// AWS OpsWorks for Chef Automate.
+// AWS OpsWorks CM.
 //
 // Exports a specified server engine attribute as a base64-encoded string. For
 // example, you can export user data that you can use in EC2 to associate nodes

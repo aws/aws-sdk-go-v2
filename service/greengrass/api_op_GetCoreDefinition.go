@@ -68,6 +68,7 @@ type GetCoreDefinitionOutput struct {
 
 	Name *string `type:"string"`
 
+	// The key-value pair for the resource tag.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 

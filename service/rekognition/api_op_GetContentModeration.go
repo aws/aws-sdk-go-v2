@@ -12,8 +12,8 @@ import (
 type GetContentModerationInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier for the content moderation job. Use JobId to identify the
-	// job in a subsequent call to GetContentModeration.
+	// The identifier for the unsafe content job. Use JobId to identify the job
+	// in a subsequent call to GetContentModeration.
 	//
 	// JobId is a required field
 	JobId *string `min:"1" type:"string" required:"true"`
@@ -25,7 +25,7 @@ type GetContentModerationInput struct {
 
 	// If the previous response was incomplete (because there is more data to retrieve),
 	// Amazon Rekognition returns a pagination token in the response. You can use
-	// this pagination token to retrieve the next set of content moderation labels.
+	// this pagination token to retrieve the next set of unsafe content labels.
 	NextToken *string `type:"string"`
 
 	// Sort to use for elements in the ModerationLabelDetections array. Use TIMESTAMP
@@ -63,10 +63,10 @@ func (s *GetContentModerationInput) Validate() error {
 type GetContentModerationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The current status of the content moderation job.
+	// The current status of the unsafe content analysis job.
 	JobStatus VideoJobStatus `type:"string" enum:"true"`
 
-	// The detected moderation labels and the time(s) they were detected.
+	// The detected unsafe content labels and the time(s) they were detected.
 	ModerationLabels []ContentModerationDetection `type:"list"`
 
 	// Version number of the moderation detection model that was used to detect
@@ -74,8 +74,8 @@ type GetContentModerationOutput struct {
 	ModerationModelVersion *string `type:"string"`
 
 	// If the response is truncated, Amazon Rekognition Video returns this token
-	// that you can use in the subsequent request to retrieve the next set of moderation
-	// labels.
+	// that you can use in the subsequent request to retrieve the next set of unsafe
+	// content labels.
 	NextToken *string `type:"string"`
 
 	// If the job fails, StatusMessage provides a descriptive error message.
@@ -96,23 +96,23 @@ const opGetContentModeration = "GetContentModeration"
 // GetContentModerationRequest returns a request value for making API operation for
 // Amazon Rekognition.
 //
-// Gets the content moderation analysis results for a Amazon Rekognition Video
-// analysis started by StartContentModeration.
+// Gets the unsafe content analysis results for a Amazon Rekognition Video analysis
+// started by StartContentModeration.
 //
-// Content moderation analysis of a video is an asynchronous operation. You
-// start analysis by calling StartContentModeration which returns a job identifier
+// Unsafe content analysis of a video is an asynchronous operation. You start
+// analysis by calling StartContentModeration which returns a job identifier
 // (JobId). When analysis finishes, Amazon Rekognition Video publishes a completion
 // status to the Amazon Simple Notification Service topic registered in the
-// initial call to StartContentModeration. To get the results of the content
-// moderation analysis, first check that the status value published to the Amazon
+// initial call to StartContentModeration. To get the results of the unsafe
+// content analysis, first check that the status value published to the Amazon
 // SNS topic is SUCCEEDED. If so, call GetContentModeration and pass the job
 // identifier (JobId) from the initial call to StartContentModeration.
 //
 // For more information, see Working with Stored Videos in the Amazon Rekognition
 // Devlopers Guide.
 //
-// GetContentModeration returns detected content moderation labels, and the
-// time they are detected, in an array, ModerationLabels, of ContentModerationDetection
+// GetContentModeration returns detected unsafe content labels, and the time
+// they are detected, in an array, ModerationLabels, of ContentModerationDetection
 // objects.
 //
 // By default, the moderated labels are returned sorted by time, in milliseconds

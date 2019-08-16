@@ -65,6 +65,12 @@ type DescribeInputOutput struct {
 	// A standard input has two sources and a single pipeline input only has one.
 	InputClass InputClass `locationName:"inputClass" type:"string" enum:"true"`
 
+	// There are two types of input sources, static and dynamic. If an input source
+	// is dynamic you canchange the source url of the input dynamically using an
+	// input switch action. However, the only input typeto support a dynamic url
+	// at this time is MP4_FILE. By default all input sources are static.
+	InputSourceType InputSourceType `locationName:"inputSourceType" type:"string" enum:"true"`
+
 	MediaConnectFlows []MediaConnectFlow `locationName:"mediaConnectFlows" type:"list"`
 
 	Name *string `locationName:"name" type:"string"`
@@ -130,6 +136,12 @@ func (s DescribeInputOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "inputClass", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.InputSourceType) > 0 {
+		v := s.InputSourceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "inputSourceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.MediaConnectFlows != nil {
 		v := s.MediaConnectFlows

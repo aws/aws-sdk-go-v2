@@ -93,7 +93,7 @@ const opGetLexicon = "GetLexicon"
 // Amazon Polly.
 //
 // Returns the content of the specified pronunciation lexicon stored in an AWS
-// Region. For more information, see Managing Lexicons (http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
+// Region. For more information, see Managing Lexicons (https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
 //
 //    // Example sending a request using GetLexiconRequest.
 //    req := client.GetLexiconRequest(params)

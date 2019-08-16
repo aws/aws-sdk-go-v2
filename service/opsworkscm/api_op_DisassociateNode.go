@@ -76,7 +76,7 @@ func (s DisassociateNodeOutput) String() string {
 const opDisassociateNode = "DisassociateNode"
 
 // DisassociateNodeRequest returns a request value for making API operation for
-// AWS OpsWorks for Chef Automate.
+// AWS OpsWorks CM.
 //
 // Disassociates a node from an AWS OpsWorks CM server, and removes the node
 // from the server's managed nodes. After a node is disassociated, the node

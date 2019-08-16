@@ -14,11 +14,8 @@ import (
 type ListMissionProfilesInput struct {
 	_ struct{} `type:"structure"`
 
-	// Maximum number of mission profiles returned.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
 
-	// Next token returned in the request of a previous ListMissionProfiles call.
-	// Used to get the next page of results.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
@@ -50,11 +47,8 @@ func (s ListMissionProfilesInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListMissionProfilesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// List of mission profiles
 	MissionProfileList []MissionProfileListItem `locationName:"missionProfileList" type:"list"`
 
-	// Next token returned in the response of a previous ListMissionProfiles call.
-	// Used to get the next page of results.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 

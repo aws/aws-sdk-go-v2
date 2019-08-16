@@ -76,7 +76,7 @@ func (s UpdateServerOutput) String() string {
 const opUpdateServer = "UpdateServer"
 
 // UpdateServerRequest returns a request value for making API operation for
-// AWS OpsWorks for Chef Automate.
+// AWS OpsWorks CM.
 //
 // Updates settings for a server.
 //

@@ -21,7 +21,8 @@ type DeleteCertificateInput struct {
 	// CertificateId is a required field
 	CertificateId *string `location:"uri" locationName:"certificateId" min:"64" type:"string" required:"true"`
 
-	// Forces a certificate request to be deleted.
+	// Forces the deletion of a certificate if it is inactive and is not attached
+	// to an IoT thing.
 	ForceDelete *bool `location:"querystring" locationName:"forceDelete" type:"boolean"`
 }
 
@@ -87,10 +88,10 @@ const opDeleteCertificate = "DeleteCertificate"
 //
 // Deletes the specified certificate.
 //
-// A certificate cannot be deleted if it has a policy attached to it or if its
-// status is set to ACTIVE. To delete a certificate, first use the DetachPrincipalPolicy
-// API to detach all policies. Next, use the UpdateCertificate API to set the
-// certificate to the INACTIVE status.
+// A certificate cannot be deleted if it has a policy or IoT thing attached
+// to it or if its status is set to ACTIVE. To delete a certificate, first use
+// the DetachPrincipalPolicy API to detach all policies. Next, use the UpdateCertificate
+// API to set the certificate to the INACTIVE status.
 //
 //    // Example sending a request using DeleteCertificateRequest.
 //    req := client.DeleteCertificateRequest(params)

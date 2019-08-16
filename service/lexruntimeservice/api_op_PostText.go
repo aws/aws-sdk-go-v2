@@ -34,12 +34,12 @@ type PostTextInput struct {
 	// The namespace x-amz-lex: is reserved for special attributes. Don't create
 	// any request attributes with the prefix x-amz-lex:.
 	//
-	// For more information, see Setting Request Attributes (http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs).
+	// For more information, see Setting Request Attributes (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs).
 	RequestAttributes map[string]string `locationName:"requestAttributes" type:"map"`
 
 	// Application-specific information passed between Amazon Lex and a client application.
 	//
-	// For more information, see Setting Session Attributes (http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs).
+	// For more information, see Setting Session Attributes (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs).
 	SessionAttributes map[string]string `locationName:"sessionAttributes" type:"map"`
 
 	// The ID of the client application user. Amazon Lex uses this to identify a
@@ -339,8 +339,8 @@ const opPostText = "PostText"
 // PostTextRequest returns a request value for making API operation for
 // Amazon Lex Runtime Service.
 //
-// Sends user input (text-only) to Amazon Lex. Client applications can use this
-// API to send requests to Amazon Lex at runtime. Amazon Lex then interprets
+// Sends user input (text or SSML) to Amazon Lex. Client applications can use
+// this API to send requests to Amazon Lex at runtime. Amazon Lex then interprets
 // the user input using the machine learning model it built for the bot.
 //
 // In response, Amazon Lex returns the next message to convey to the user an
@@ -380,7 +380,7 @@ const opPostText = "PostText"
 //    set to ElicitIntent and slotToElicit is set to null.
 //
 // In addition, Amazon Lex also returns your application-specific sessionAttributes.
-// For more information, see Managing Conversation Context (http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html).
+// For more information, see Managing Conversation Context (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html).
 //
 //    // Example sending a request using PostTextRequest.
 //    req := client.PostTextRequest(params)

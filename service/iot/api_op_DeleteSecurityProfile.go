@@ -15,7 +15,7 @@ type DeleteSecurityProfileInput struct {
 
 	// The expected version of the security profile. A new version is generated
 	// whenever the security profile is updated. If you specify a value that is
-	// different than the actual version, a VersionConflictException is thrown.
+	// different from the actual version, a VersionConflictException is thrown.
 	ExpectedVersion *int64 `location:"querystring" locationName:"expectedVersion" type:"long"`
 
 	// The name of the security profile to be deleted.

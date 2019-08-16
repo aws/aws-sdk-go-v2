@@ -62,6 +62,7 @@ const (
 	DimensionInstanceTypeFamily Dimension = "INSTANCE_TYPE_FAMILY"
 	DimensionBillingEntity      Dimension = "BILLING_ENTITY"
 	DimensionReservationId      Dimension = "RESERVATION_ID"
+	DimensionRightsizingType    Dimension = "RIGHTSIZING_TYPE"
 )
 
 func (enum Dimension) MarshalValue() (string, error) {
@@ -182,6 +183,23 @@ func (enum PaymentOption) MarshalValue() (string, error) {
 }
 
 func (enum PaymentOption) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RightsizingType string
+
+// Enum values for RightsizingType
+const (
+	RightsizingTypeTerminate RightsizingType = "TERMINATE"
+	RightsizingTypeModify    RightsizingType = "MODIFY"
+)
+
+func (enum RightsizingType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RightsizingType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

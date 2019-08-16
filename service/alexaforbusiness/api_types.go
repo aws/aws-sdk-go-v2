@@ -1001,6 +1001,9 @@ type Profile struct {
 	// Retrieves if the profile is default or not.
 	IsDefault *bool `type:"boolean"`
 
+	// The locale of a room profile.
+	Locale *string `min:"1" type:"string"`
+
 	// The max volume limit of a room profile.
 	MaxVolumeLimit *int64 `type:"integer"`
 
@@ -1044,6 +1047,9 @@ type ProfileData struct {
 
 	// Retrieves if the profile data is default or not.
 	IsDefault *bool `type:"boolean"`
+
+	// The locale of a room profile.
+	Locale *string `min:"1" type:"string"`
 
 	// The ARN of a room profile.
 	ProfileArn *string `type:"string"`

@@ -87,14 +87,14 @@ const opPutDestination = "PutDestination"
 // Creates or updates a destination. A destination encapsulates a physical resource
 // (such as an Amazon Kinesis stream) and enables you to subscribe to a real-time
 // stream of log events for a different account, ingested using PutLogEvents.
-// Currently, the only supported physical resource is a Kinesis stream belonging
-// to the same account as the destination.
+// A destination can be an Amazon Kinesis stream, Amazon Kinesis Data Firehose
+// strea, or an AWS Lambda function.
 //
-// Through an access policy, a destination controls what is written to its Kinesis
-// stream. By default, PutDestination does not set any access policy with the
-// destination, which means a cross-account user cannot call PutSubscriptionFilter
-// against this destination. To enable this, the destination owner must call
-// PutDestinationPolicy after PutDestination.
+// Through an access policy, a destination controls what is written to it. By
+// default, PutDestination does not set any access policy with the destination,
+// which means a cross-account user cannot call PutSubscriptionFilter against
+// this destination. To enable this, the destination owner must call PutDestinationPolicy
+// after PutDestination.
 //
 //    // Example sending a request using PutDestinationRequest.
 //    req := client.PutDestinationRequest(params)

@@ -73,7 +73,7 @@ func (s RestoreServerOutput) String() string {
 const opRestoreServer = "RestoreServer"
 
 // RestoreServerRequest returns a request value for making API operation for
-// AWS OpsWorks for Chef Automate.
+// AWS OpsWorks CM.
 //
 // Restores a backup to a server that is in a CONNECTION_LOST, HEALTHY, RUNNING,
 // UNHEALTHY, or TERMINATED state. When you run RestoreServer, the server's

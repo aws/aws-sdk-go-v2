@@ -36,6 +36,26 @@ func (enum CloudWatchEncryptionMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type Comparator string
+
+// Enum values for Comparator
+const (
+	ComparatorEquals            Comparator = "EQUALS"
+	ComparatorGreaterThan       Comparator = "GREATER_THAN"
+	ComparatorLessThan          Comparator = "LESS_THAN"
+	ComparatorGreaterThanEquals Comparator = "GREATER_THAN_EQUALS"
+	ComparatorLessThanEquals    Comparator = "LESS_THAN_EQUALS"
+)
+
+func (enum Comparator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Comparator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ConnectionPropertyKey string
 
 // Enum values for ConnectionPropertyKey
@@ -297,6 +317,30 @@ func (enum NodeType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type Permission string
+
+// Enum values for Permission
+const (
+	PermissionAll                Permission = "ALL"
+	PermissionSelect             Permission = "SELECT"
+	PermissionAlter              Permission = "ALTER"
+	PermissionDrop               Permission = "DROP"
+	PermissionDelete             Permission = "DELETE"
+	PermissionInsert             Permission = "INSERT"
+	PermissionCreateDatabase     Permission = "CREATE_DATABASE"
+	PermissionCreateTable        Permission = "CREATE_TABLE"
+	PermissionDataLocationAccess Permission = "DATA_LOCATION_ACCESS"
+)
+
+func (enum Permission) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Permission) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PrincipalType string
 
 // Enum values for PrincipalType
@@ -365,6 +409,154 @@ func (enum ScheduleState) MarshalValue() (string, error) {
 }
 
 func (enum ScheduleState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type Sort string
+
+// Enum values for Sort
+const (
+	SortAsc  Sort = "ASC"
+	SortDesc Sort = "DESC"
+)
+
+func (enum Sort) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Sort) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SortDirectionType string
+
+// Enum values for SortDirectionType
+const (
+	SortDirectionTypeDescending SortDirectionType = "DESCENDING"
+	SortDirectionTypeAscending  SortDirectionType = "ASCENDING"
+)
+
+func (enum SortDirectionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SortDirectionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TaskRunSortColumnType string
+
+// Enum values for TaskRunSortColumnType
+const (
+	TaskRunSortColumnTypeTaskRunType TaskRunSortColumnType = "TASK_RUN_TYPE"
+	TaskRunSortColumnTypeStatus      TaskRunSortColumnType = "STATUS"
+	TaskRunSortColumnTypeStarted     TaskRunSortColumnType = "STARTED"
+)
+
+func (enum TaskRunSortColumnType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TaskRunSortColumnType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TaskStatusType string
+
+// Enum values for TaskStatusType
+const (
+	TaskStatusTypeStarting  TaskStatusType = "STARTING"
+	TaskStatusTypeRunning   TaskStatusType = "RUNNING"
+	TaskStatusTypeStopping  TaskStatusType = "STOPPING"
+	TaskStatusTypeStopped   TaskStatusType = "STOPPED"
+	TaskStatusTypeSucceeded TaskStatusType = "SUCCEEDED"
+	TaskStatusTypeFailed    TaskStatusType = "FAILED"
+	TaskStatusTypeTimeout   TaskStatusType = "TIMEOUT"
+)
+
+func (enum TaskStatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TaskStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TaskType string
+
+// Enum values for TaskType
+const (
+	TaskTypeEvaluation            TaskType = "EVALUATION"
+	TaskTypeLabelingSetGeneration TaskType = "LABELING_SET_GENERATION"
+	TaskTypeImportLabels          TaskType = "IMPORT_LABELS"
+	TaskTypeExportLabels          TaskType = "EXPORT_LABELS"
+	TaskTypeFindMatches           TaskType = "FIND_MATCHES"
+)
+
+func (enum TaskType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TaskType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TransformSortColumnType string
+
+// Enum values for TransformSortColumnType
+const (
+	TransformSortColumnTypeName          TransformSortColumnType = "NAME"
+	TransformSortColumnTypeTransformType TransformSortColumnType = "TRANSFORM_TYPE"
+	TransformSortColumnTypeStatus        TransformSortColumnType = "STATUS"
+	TransformSortColumnTypeCreated       TransformSortColumnType = "CREATED"
+	TransformSortColumnTypeLastModified  TransformSortColumnType = "LAST_MODIFIED"
+)
+
+func (enum TransformSortColumnType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TransformSortColumnType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TransformStatusType string
+
+// Enum values for TransformStatusType
+const (
+	TransformStatusTypeNotReady TransformStatusType = "NOT_READY"
+	TransformStatusTypeReady    TransformStatusType = "READY"
+	TransformStatusTypeDeleting TransformStatusType = "DELETING"
+)
+
+func (enum TransformStatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TransformStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TransformType string
+
+// Enum values for TransformType
+const (
+	TransformTypeFindMatches TransformType = "FIND_MATCHES"
+)
+
+func (enum TransformType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TransformType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

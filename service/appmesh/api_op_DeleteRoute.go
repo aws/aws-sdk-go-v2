@@ -14,18 +14,12 @@ import (
 type DeleteRouteInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh to delete the route in.
-	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The name of the route to delete.
-	//
 	// RouteName is a required field
 	RouteName *string `location:"uri" locationName:"routeName" min:"1" type:"string" required:"true"`
 
-	// The name of the virtual router to delete the route in.
-	//
 	// VirtualRouterName is a required field
 	VirtualRouterName *string `location:"uri" locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
 }
@@ -95,7 +89,7 @@ func (s DeleteRouteInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteRouteOutput struct {
 	_ struct{} `type:"structure" payload:"Route"`
 
-	// The route that was deleted.
+	// An object representing a route returned by a describe operation.
 	//
 	// Route is a required field
 	Route *RouteData `locationName:"route" type:"structure" required:"true"`

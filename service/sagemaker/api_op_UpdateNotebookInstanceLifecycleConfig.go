@@ -19,11 +19,13 @@ type UpdateNotebookInstanceLifecycleConfigInput struct {
 	// NotebookInstanceLifecycleConfigName is a required field
 	NotebookInstanceLifecycleConfigName *string `type:"string" required:"true"`
 
-	// The shell script that runs only once, when you create a notebook instance
+	// The shell script that runs only once, when you create a notebook instance.
+	// The shell script must be a base64-encoded string.
 	OnCreate []NotebookInstanceLifecycleHook `type:"list"`
 
 	// The shell script that runs every time you start a notebook instance, including
-	// when you create the notebook instance.
+	// when you create the notebook instance. The shell script must be a base64-encoded
+	// string.
 	OnStart []NotebookInstanceLifecycleHook `type:"list"`
 }
 

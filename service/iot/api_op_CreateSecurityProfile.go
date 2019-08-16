@@ -15,7 +15,7 @@ type CreateSecurityProfileInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of metrics whose data is retained (stored). By default, data is retained
-	// for any metric used in the profile's behaviors but it is also retained for
+	// for any metric used in the profile's behaviors, but it is also retained for
 	// any metric specified here.
 	AdditionalMetricsToRetain []string `locationName:"additionalMetricsToRetain" type:"list"`
 
@@ -35,7 +35,7 @@ type CreateSecurityProfileInput struct {
 	// SecurityProfileName is a required field
 	SecurityProfileName *string `location:"uri" locationName:"securityProfileName" min:"1" type:"string" required:"true"`
 
-	// Metadata which can be used to manage the security profile.
+	// Metadata that can be used to manage the security profile.
 	Tags []Tag `locationName:"tags" type:"list"`
 }
 

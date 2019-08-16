@@ -123,7 +123,7 @@ type ListViolationEventsOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The security profile violation alerts issued for this account during the
-	// given time frame, potentially filtered by security profile, behavior violated,
+	// given time period, potentially filtered by security profile, behavior violated,
 	// or thing (device) violating.
 	ViolationEvents []ViolationEvent `locationName:"violationEvents" type:"list"`
 }
@@ -163,7 +163,7 @@ const opListViolationEvents = "ListViolationEvents"
 //
 // Lists the Device Defender security profile violations discovered during the
 // given time period. You can use filters to limit the results to those alerts
-// issued for a particular security profile, behavior or thing (device).
+// issued for a particular security profile, behavior, or thing (device).
 //
 //    // Example sending a request using ListViolationEventsRequest.
 //    req := client.ListViolationEventsRequest(params)

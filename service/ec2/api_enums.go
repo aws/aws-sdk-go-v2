@@ -80,8 +80,9 @@ type AllocationStrategy string
 
 // Enum values for AllocationStrategy
 const (
-	AllocationStrategyLowestPrice AllocationStrategy = "lowestPrice"
-	AllocationStrategyDiversified AllocationStrategy = "diversified"
+	AllocationStrategyLowestPrice       AllocationStrategy = "lowestPrice"
+	AllocationStrategyDiversified       AllocationStrategy = "diversified"
+	AllocationStrategyCapacityOptimized AllocationStrategy = "capacityOptimized"
 )
 
 func (enum AllocationStrategy) MarshalValue() (string, error) {
@@ -1386,6 +1387,7 @@ const (
 	InstanceTypeI3en6xlarge  InstanceType = "i3en.6xlarge"
 	InstanceTypeI3en12xlarge InstanceType = "i3en.12xlarge"
 	InstanceTypeI3en24xlarge InstanceType = "i3en.24xlarge"
+	InstanceTypeI3enMetal    InstanceType = "i3en.metal"
 	InstanceTypeHi14xlarge   InstanceType = "hi1.4xlarge"
 	InstanceTypeHs18xlarge   InstanceType = "hs1.8xlarge"
 	InstanceTypeC1Medium     InstanceType = "c1.medium"
@@ -2317,8 +2319,9 @@ type SpotAllocationStrategy string
 
 // Enum values for SpotAllocationStrategy
 const (
-	SpotAllocationStrategyLowestPrice SpotAllocationStrategy = "lowest-price"
-	SpotAllocationStrategyDiversified SpotAllocationStrategy = "diversified"
+	SpotAllocationStrategyLowestPrice       SpotAllocationStrategy = "lowest-price"
+	SpotAllocationStrategyDiversified       SpotAllocationStrategy = "diversified"
+	SpotAllocationStrategyCapacityOptimized SpotAllocationStrategy = "capacity-optimized"
 )
 
 func (enum SpotAllocationStrategy) MarshalValue() (string, error) {

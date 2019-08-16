@@ -14,8 +14,6 @@ import (
 type CancelContactInput struct {
 	_ struct{} `type:"structure"`
 
-	// UUID of a contact.
-	//
 	// ContactId is a required field
 	ContactId *string `location:"uri" locationName:"contactId" type:"string" required:"true"`
 }
@@ -56,7 +54,6 @@ func (s CancelContactInput) MarshalFields(e protocol.FieldEncoder) error {
 type CancelContactOutput struct {
 	_ struct{} `type:"structure"`
 
-	// UUID of a contact.
 	ContactId *string `locationName:"contactId" type:"string"`
 }
 

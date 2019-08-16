@@ -86,8 +86,8 @@ const opGetMasterAccount = "GetMasterAccount"
 // GetMasterAccountRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Provides the details for the GuardDuty master account to the current GuardDuty
-// member account.
+// Provides the details for the GuardDuty master account associated with the
+// current GuardDuty member account.
 //
 //    // Example sending a request using GetMasterAccountRequest.
 //    req := client.GetMasterAccountRequest(params)

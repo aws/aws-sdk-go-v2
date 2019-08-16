@@ -25,15 +25,15 @@ type ListAuditTasksInput struct {
 	// The token for the next set of results.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 
-	// The beginning of the time period. Note that audit information is retained
-	// for a limited time (180 days). Requesting a start time prior to what is retained
-	// results in an "InvalidRequestException".
+	// The beginning of the time period. Audit information is retained for a limited
+	// time (180 days). Requesting a start time prior to what is retained results
+	// in an "InvalidRequestException".
 	//
 	// StartTime is a required field
 	StartTime *time.Time `location:"querystring" locationName:"startTime" type:"timestamp" required:"true"`
 
 	// A filter to limit the output to audits with the specified completion status:
-	// can be one of "IN_PROGRESS", "COMPLETED", "FAILED" or "CANCELED".
+	// can be one of "IN_PROGRESS", "COMPLETED", "FAILED", or "CANCELED".
 	TaskStatus AuditTaskStatus `location:"querystring" locationName:"taskStatus" type:"string" enum:"true"`
 
 	// A filter to limit the output to the specified type of audit: can be one of

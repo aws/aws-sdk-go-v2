@@ -91,6 +91,10 @@
       "base": "<p>The request syntax was malformed. Check your request syntax and try again.</p>",
       "refs": { }
     },
+    "Boolean": {
+      "base": null,
+      "refs": { }
+    },
     "ConflictException": {
       "base": "<p>The request contains a client token that was used for a previous update resource call\n         with different specifications. Try the request again with a new client token.</p>",
       "refs": { }
@@ -335,6 +339,24 @@
       "base": "<p>You don't have permissions to perform this action.</p>",
       "refs": { }
     },
+    "HeaderMatch": {
+      "base": null,
+      "refs": { }
+    },
+    "HeaderMatchMethod": {
+      "base": "<p>An object representing the method and value to match the header value sent with a request. Specify one match method.</p>",
+      "refs": {
+        "HeaderMatchMethod$exact": "<p>The header value sent by the client must match the specified value exactly.</p>",
+        "HeaderMatchMethod$prefix": "<p>The header value sent by the client must begin with the specified characters.</p>",
+        "HeaderMatchMethod$range": "<p>The object that specifies the range of numbers that the header value sent by the client must be included in.</p>",
+        "HeaderMatchMethod$regex": "<p>The header value sent by the client must include the specified characters.</p>",
+        "HeaderMatchMethod$suffix": "<p>The header value sent by the client must end with the specified characters.</p>"
+      }
+    },
+    "HeaderName": {
+      "base": null,
+      "refs": { }
+    },
     "HealthCheckIntervalMillis": {
       "base": null,
       "refs": { }
@@ -363,6 +385,10 @@
       "base": null,
       "refs": { }
     },
+    "HttpMethod": {
+      "base": null,
+      "refs": { }
+    },
     "HttpRoute": {
       "base": "<p>An object representing the HTTP routing specification for a route.</p>",
       "refs": {
@@ -376,11 +402,32 @@
         "HttpRouteAction$weightedTargets": "<p>The targets that traffic is routed to when a request matches the route. You can specify\n         one or more targets and their relative weights to distribute traffic with.</p>"
       }
     },
+    "HttpRouteHeader": {
+      "base": "<p>An object representing the HTTP header in the request.</p>",
+      "refs": {
+        "HttpRouteHeader$invert": "<p>Specify <code>True</code> to match the opposite of the <code>HeaderMatchMethod</code> method and value. The default value is <code>False</code>.</p>",
+        "HttpRouteHeader$match": "<p>The <code>HeaderMatchMethod</code> object.</p>",
+        "HttpRouteHeader$name": "<p>A name for the HTTP header in the client request that will be matched on.</p>"
+      }
+    },
+    "HttpRouteHeaders": {
+      "base": null,
+      "refs": {
+        "HttpRouteHeaders$member": null
+      }
+    },
     "HttpRouteMatch": {
       "base": "<p>An object representing the requirements for a route to match HTTP requests for a virtual\n         router.</p>",
       "refs": {
-        "HttpRouteMatch$prefix": "<p>Specifies the path to match requests with. This parameter must always start with\n            <code>/</code>, which by itself matches all requests to the virtual service name. You\n         can also match for path-based routing of requests. For example, if your virtual service\n         name is <code>my-service.local</code> and you want the route to match requests to\n            <code>my-service.local/metrics</code>, your prefix should be\n         <code>/metrics</code>.</p>"
+        "HttpRouteMatch$headers": "<p>The client request headers to match on.</p>",
+        "HttpRouteMatch$method": "<p>The client request header method to match on.</p>",
+        "HttpRouteMatch$prefix": "<p>Specifies the path to match requests with. This parameter must always start with\n            <code>/</code>, which by itself matches all requests to the virtual service name. You\n         can also match for path-based routing of requests. For example, if your virtual service\n         name is <code>my-service.local</code> and you want the route to match requests to\n            <code>my-service.local/metrics</code>, your prefix should be\n         <code>/metrics</code>.</p>",
+        "HttpRouteMatch$scheme": "<p>The client request header scheme to match on.</p>"
       }
+    },
+    "HttpScheme": {
+      "base": null,
+      "refs": { }
     },
     "InternalServerErrorException": {
       "base": "<p>The request processing has failed because of an unknown error, exception, or\n         failure.</p>",
@@ -523,6 +570,13 @@
       "base": null,
       "refs": { }
     },
+    "MatchRange": {
+      "base": "<p>The range of values to match on. The first character of the range is included in the range, though the last character is not. For example, if the range specified were 1-100, only values 1-99 would be matched.</p>",
+      "refs": {
+        "MatchRange$end": "<p>The end of the range.</p>",
+        "MatchRange$start": "<p>The start of the range.</p>"
+      }
+    },
     "MeshData": {
       "base": "<p>An object representing a service mesh returned by a describe operation.</p>",
       "refs": {
@@ -619,6 +673,10 @@
         "RouteList$member": null
       }
     },
+    "RoutePriority": {
+      "base": null,
+      "refs": { }
+    },
     "RouteRef": {
       "base": "<p>An object representing a route returned by a list operation.</p>",
       "refs": {
@@ -632,6 +690,7 @@
       "base": "<p>An object representing the specification of a route.</p>",
       "refs": {
         "RouteSpec$httpRoute": "<p>The HTTP routing information for the route.</p>",
+        "RouteSpec$priority": "<p>The priority for the route. Routes are matched based on the specified value, where 0 is the highest priority.</p>",
         "RouteSpec$tcpRoute": "<p>The TCP routing information for the route.</p>"
       }
     },

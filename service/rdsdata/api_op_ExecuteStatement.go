@@ -16,47 +16,25 @@ import (
 type ExecuteStatementInput struct {
 	_ struct{} `type:"structure"`
 
-	// A value that indicates whether to continue running the statement after the
-	// call times out. By default, the statement stops running when the call times
-	// out.
-	//
-	// For DDL statements, we recommend continuing to run the statement after the
-	// call times out. When a DDL statement terminates before it is finished running,
-	// it can result in errors and possibly corrupted data structures.
 	ContinueAfterTimeout *bool `locationName:"continueAfterTimeout" type:"boolean"`
 
-	// The name of the database.
 	Database *string `locationName:"database" type:"string"`
 
-	// A value that indicates whether to include metadata in the results.
 	IncludeResultMetadata *bool `locationName:"includeResultMetadata" type:"boolean"`
 
-	// The parameters for the SQL statement.
 	Parameters []SqlParameter `locationName:"parameters" type:"list"`
 
-	// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-	//
 	// ResourceArn is a required field
 	ResourceArn *string `locationName:"resourceArn" type:"string" required:"true"`
 
-	// The name of the database schema.
 	Schema *string `locationName:"schema" type:"string"`
 
-	// The name or ARN of the secret that enables access to the DB cluster.
-	//
 	// SecretArn is a required field
 	SecretArn *string `locationName:"secretArn" type:"string" required:"true"`
 
-	// The SQL statement to run.
-	//
 	// Sql is a required field
 	Sql *string `locationName:"sql" type:"string" required:"true"`
 
-	// The identifier of a transaction that was started by using the BeginTransaction
-	// operation. Specify the transaction ID of the transaction that you want to
-	// include the SQL statement in.
-	//
-	// If the SQL statement is not part of a transaction, don't set this parameter.
 	TransactionId *string `locationName:"transactionId" type:"string"`
 }
 
@@ -160,16 +138,12 @@ func (s ExecuteStatementInput) MarshalFields(e protocol.FieldEncoder) error {
 type ExecuteStatementOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Metadata for the columns included in the results.
 	ColumnMetadata []ColumnMetadata `locationName:"columnMetadata" type:"list"`
 
-	// Values for fields generated during the request.
 	GeneratedFields []Field `locationName:"generatedFields" type:"list"`
 
-	// The number of records updated by the request.
 	NumberOfRecordsUpdated *int64 `locationName:"numberOfRecordsUpdated" type:"long"`
 
-	// The records returned by the SQL statement.
 	Records [][]Field `locationName:"records" type:"list"`
 }
 

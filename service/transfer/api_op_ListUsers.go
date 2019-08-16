@@ -18,11 +18,11 @@ type ListUsersInput struct {
 
 	// When you can get additional results from the ListUsers call, a NextToken
 	// parameter is returned in the output. You can then pass in a subsequent command
-	// the NextToken parameter to continue listing additional users.
+	// to the NextToken parameter to continue listing additional users.
 	NextToken *string `min:"1" type:"string"`
 
 	// A system-assigned unique identifier for a Secure File Transfer Protocol (SFTP)
-	// server that has users are assigned to it.
+	// server that has users assigned to it.
 	//
 	// ServerId is a required field
 	ServerId *string `type:"string" required:"true"`
@@ -59,7 +59,7 @@ type ListUsersOutput struct {
 
 	// When you can get additional results from the ListUsers call, a NextToken
 	// parameter is returned in the output. You can then pass in a subsequent command
-	// the NextToken parameter to continue listing additional users.
+	// to the NextToken parameter to continue listing additional users.
 	NextToken *string `min:"1" type:"string"`
 
 	// A system-assigned unique identifier for an SFTP server that the users are

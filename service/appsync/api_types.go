@@ -869,6 +869,10 @@ type LogConfig struct {
 	// CloudWatchLogsRoleArn is a required field
 	CloudWatchLogsRoleArn *string `locationName:"cloudWatchLogsRoleArn" type:"string" required:"true"`
 
+	// Set to TRUE to exclude sections that contain information such as headers,
+	// context, and evaluated mapping templates, regardless of logging level.
+	ExcludeVerboseContent *bool `locationName:"excludeVerboseContent" type:"boolean"`
+
 	// The field logging level. Values can be NONE, ERROR, or ALL.
 	//
 	//    * NONE: No field-level logs are captured.
@@ -914,6 +918,12 @@ func (s LogConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "cloudWatchLogsRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ExcludeVerboseContent != nil {
+		v := *s.ExcludeVerboseContent
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "excludeVerboseContent", protocol.BoolValue(v), metadata)
 	}
 	if len(s.FieldLogLevel) > 0 {
 		v := s.FieldLogLevel

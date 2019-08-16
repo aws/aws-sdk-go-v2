@@ -100,7 +100,7 @@ type CreateLabelingJobInput struct {
 	StoppingConditions *LabelingJobStoppingConditions `type:"structure"`
 
 	// An array of key/value pairs. For more information, see Using Cost Allocation
-	// Tags (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
+	// Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 	// in the AWS Billing and Cost Management User Guide.
 	Tags []Tag `type:"list"`
 }
@@ -226,11 +226,11 @@ const opCreateLabelingJob = "CreateLabelingJob"
 // that need to be labeled by a human. Automated data labeling uses active learning
 // to determine if a data object can be labeled by machine or if it needs to
 // be sent to a human worker. For more information, see Using Automated Data
-// Labeling (http://docs.aws.amazon.com/sagemaker/latest/dg/sms-automated-labeling.html).
+// Labeling (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-automated-labeling.html).
 //
 // The data objects to be labeled are contained in an Amazon S3 bucket. You
 // create a manifest file that describes the location of each object. For more
-// information, see Using Input and Output Data (http://docs.aws.amazon.com/sagemaker/latest/dg/sms-data.html).
+// information, see Using Input and Output Data (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-data.html).
 //
 // The output can be used as the manifest file for another labeling job or as
 // training data for your machine learning models.

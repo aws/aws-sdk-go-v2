@@ -87,7 +87,7 @@ func (s DescribeEventsOutput) String() string {
 const opDescribeEvents = "DescribeEvents"
 
 // DescribeEventsRequest returns a request value for making API operation for
-// AWS OpsWorks for Chef Automate.
+// AWS OpsWorks CM.
 //
 // Describes events for a specified server. Results are ordered by time, with
 // newest events first.

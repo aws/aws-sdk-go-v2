@@ -14,24 +14,10 @@ import (
 type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of tag results returned by ListTagsForResource in paginated
-	// output. When this parameter is used, ListTagsForResource returns only limit
-	// results in a single page along with a nextToken response element. You can
-	// see the remaining results of the initial request by sending another ListTagsForResource
-	// request with the returned nextToken value. This value can be between 1 and
-	// 100. If you don't use this parameter, ListTagsForResource returns up to 100
-	// results and a nextToken value if applicable.
 	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
 
-	// The nextToken value returned from a previous paginated ListTagsForResource
-	// request where limit was used and the results exceeded the value of that parameter.
-	// Pagination continues from the end of the previous results that returned the
-	// nextToken value.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 
-	// The Amazon Resource Name (ARN) that identifies the resource to list the tags
-	// for.
-	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"querystring" locationName:"resourceArn" type:"string" required:"true"`
 }
@@ -87,14 +73,8 @@ func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The nextToken value to include in a future ListTagsForResource request. When
-	// the results of a ListTagsForResource request exceed limit, you can use this
-	// value to retrieve the next page of results. This value is null when there
-	// are no more results to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
-	// The tags for the resource.
-	//
 	// Tags is a required field
 	Tags []TagRef `locationName:"tags" type:"list" required:"true"`
 }

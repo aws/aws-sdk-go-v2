@@ -16,7 +16,7 @@ type UpdateSecurityProfileInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of metrics whose data is retained (stored). By default, data is retained
-	// for any metric used in the profile's behaviors but it is also retained for
+	// for any metric used in the profile's behaviors, but it is also retained for
 	// any metric specified here.
 	AdditionalMetricsToRetain []string `locationName:"additionalMetricsToRetain" type:"list"`
 
@@ -28,21 +28,21 @@ type UpdateSecurityProfileInput struct {
 	Behaviors []Behavior `locationName:"behaviors" type:"list"`
 
 	// If true, delete all additionalMetricsToRetain defined for this security profile.
-	// If any additionalMetricsToRetain are defined in the current invocation an
+	// If any additionalMetricsToRetain are defined in the current invocation, an
 	// exception occurs.
 	DeleteAdditionalMetricsToRetain *bool `locationName:"deleteAdditionalMetricsToRetain" type:"boolean"`
 
 	// If true, delete all alertTargets defined for this security profile. If any
-	// alertTargets are defined in the current invocation an exception occurs.
+	// alertTargets are defined in the current invocation, an exception occurs.
 	DeleteAlertTargets *bool `locationName:"deleteAlertTargets" type:"boolean"`
 
 	// If true, delete all behaviors defined for this security profile. If any behaviors
-	// are defined in the current invocation an exception occurs.
+	// are defined in the current invocation, an exception occurs.
 	DeleteBehaviors *bool `locationName:"deleteBehaviors" type:"boolean"`
 
 	// The expected version of the security profile. A new version is generated
 	// whenever the security profile is updated. If you specify a value that is
-	// different than the actual version, a VersionConflictException is thrown.
+	// different from the actual version, a VersionConflictException is thrown.
 	ExpectedVersion *int64 `location:"querystring" locationName:"expectedVersion" type:"long"`
 
 	// A description of the security profile.
@@ -173,7 +173,7 @@ type UpdateSecurityProfileOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of metrics whose data is retained (stored). By default, data is retained
-	// for any metric used in the security profile's behaviors but it is also retained
+	// for any metric used in the security profile's behaviors, but it is also retained
 	// for any metric specified here.
 	AdditionalMetricsToRetain []string `locationName:"additionalMetricsToRetain" type:"list"`
 

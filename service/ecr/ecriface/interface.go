@@ -99,6 +99,8 @@ type ClientAPI interface {
 
 	PutImageRequest(*ecr.PutImageInput) ecr.PutImageRequest
 
+	PutImageTagMutabilityRequest(*ecr.PutImageTagMutabilityInput) ecr.PutImageTagMutabilityRequest
+
 	PutLifecyclePolicyRequest(*ecr.PutLifecyclePolicyInput) ecr.PutLifecyclePolicyRequest
 
 	SetRepositoryPolicyRequest(*ecr.SetRepositoryPolicyInput) ecr.SetRepositoryPolicyRequest

@@ -14,8 +14,6 @@ import (
 type DeleteMissionProfileInput struct {
 	_ struct{} `type:"structure"`
 
-	// UUID of a mission profile.
-	//
 	// MissionProfileId is a required field
 	MissionProfileId *string `location:"uri" locationName:"missionProfileId" type:"string" required:"true"`
 }
@@ -56,7 +54,6 @@ func (s DeleteMissionProfileInput) MarshalFields(e protocol.FieldEncoder) error 
 type DeleteMissionProfileOutput struct {
 	_ struct{} `type:"structure"`
 
-	// ID of a mission profile.
 	MissionProfileId *string `locationName:"missionProfileId" type:"string"`
 }
 

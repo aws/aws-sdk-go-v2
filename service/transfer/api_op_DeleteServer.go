@@ -56,10 +56,8 @@ const opDeleteServer = "DeleteServer"
 // AWS Transfer for SFTP.
 //
 // Deletes the Secure File Transfer Protocol (SFTP) server that you specify.
-// If you used SERVICE_MANAGED as your IdentityProviderType, you need to delete
-// all users associated with this server before deleting the server itself
 //
-// No response returns from this call.
+// No response returns from this operation.
 //
 //    // Example sending a request using DeleteServerRequest.
 //    req := client.DeleteServerRequest(params)

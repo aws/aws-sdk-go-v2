@@ -12,6 +12,46 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// Describes a virtual private cloud (VPC) interface endpoint that lets you
+// create a private connection between the VPC that you specify and AppStream
+// 2.0. When you specify a VPC interface endpoint for a stack, users of the
+// stack can connect to AppStream 2.0 only through that endpoint. When you specify
+// a VPC interface endpoint for an image builder, administrators can connect
+// to the image builder only through that endpoint.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AccessEndpoint
+type AccessEndpoint struct {
+	_ struct{} `type:"structure"`
+
+	// The type of VPC interface endpoint.
+	//
+	// EndpointType is a required field
+	EndpointType AccessEndpointType `type:"string" required:"true" enum:"true"`
+
+	// The identifier (ID) of the VPC in which the endpoint is used.
+	VpceId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s AccessEndpoint) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AccessEndpoint) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AccessEndpoint"}
+	if len(s.EndpointType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("EndpointType"))
+	}
+	if s.VpceId != nil && len(*s.VpceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("VpceId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Describes an application in the application catalog.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Application
 type Application struct {
@@ -414,6 +454,10 @@ func (s Image) String() string {
 type ImageBuilder struct {
 	_ struct{} `type:"structure"`
 
+	// The list of virtual private cloud (VPC) interface endpoint objects. Administrators
+	// can connect to the image builder only through the specified endpoints.
+	AccessEndpoints []AccessEndpoint `min:"1" type:"list"`
+
 	// The version of the AppStream 2.0 agent that is currently being used by the
 	// image builder.
 	AppstreamAgentVersion *string `min:"1" type:"string"`
@@ -714,6 +758,10 @@ func (s SharedImagePermissions) String() string {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack
 type Stack struct {
 	_ struct{} `type:"structure"`
+
+	// The list of virtual private cloud (VPC) interface endpoint objects. Users
+	// of the stack can connect to AppStream 2.0 only through the specified endpoints.
+	AccessEndpoints []AccessEndpoint `min:"1" type:"list"`
 
 	// The persistent application settings for users of the stack.
 	ApplicationSettings *ApplicationSettingsResponse `type:"structure"`

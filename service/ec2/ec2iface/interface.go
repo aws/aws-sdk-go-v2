@@ -576,6 +576,8 @@ type ClientAPI interface {
 
 	ExportTransitGatewayRoutesRequest(*ec2.ExportTransitGatewayRoutesInput) ec2.ExportTransitGatewayRoutesRequest
 
+	GetCapacityReservationUsageRequest(*ec2.GetCapacityReservationUsageInput) ec2.GetCapacityReservationUsageRequest
+
 	GetConsoleOutputRequest(*ec2.GetConsoleOutputInput) ec2.GetConsoleOutputRequest
 
 	GetConsoleScreenshotRequest(*ec2.GetConsoleScreenshotInput) ec2.GetConsoleScreenshotRequest
@@ -678,6 +680,8 @@ type ClientAPI interface {
 
 	ModifyVpnConnectionRequest(*ec2.ModifyVpnConnectionInput) ec2.ModifyVpnConnectionRequest
 
+	ModifyVpnTunnelCertificateRequest(*ec2.ModifyVpnTunnelCertificateInput) ec2.ModifyVpnTunnelCertificateRequest
+
 	MonitorInstancesRequest(*ec2.MonitorInstancesInput) ec2.MonitorInstancesRequest
 
 	MoveAddressToVpcRequest(*ec2.MoveAddressToVpcInput) ec2.MoveAddressToVpcRequest
@@ -747,6 +751,8 @@ type ClientAPI interface {
 	RunScheduledInstancesRequest(*ec2.RunScheduledInstancesInput) ec2.RunScheduledInstancesRequest
 
 	SearchTransitGatewayRoutesRequest(*ec2.SearchTransitGatewayRoutesInput) ec2.SearchTransitGatewayRoutesRequest
+
+	SendDiagnosticInterruptRequest(*ec2.SendDiagnosticInterruptInput) ec2.SendDiagnosticInterruptRequest
 
 	StartInstancesRequest(*ec2.StartInstancesInput) ec2.StartInstancesRequest
 

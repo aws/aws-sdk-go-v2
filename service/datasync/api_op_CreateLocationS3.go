@@ -23,8 +23,8 @@ type CreateLocationS3Input struct {
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management
 	// (IAM) role that is used to access an Amazon S3 bucket.
 	//
-	// For detailed information about using such a role, see "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location"
-	// (Creating a Location for Amazon S3) in the AWS DataSync User Guide.
+	// For detailed information about using such a role, see Creating a Location
+	// for Amazon S3 in the AWS DataSync User Guide.
 	//
 	// S3Config is a required field
 	S3Config *S3Config `type:"structure" required:"true"`
@@ -101,8 +101,8 @@ const opCreateLocationS3 = "CreateLocationS3"
 // required permissions and attaching the policy to the role. An example of
 // such a policy is shown in the examples section.
 //
-// For more information, see "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location"
-// (Configuring Amazon S3 Location Settings) in the AWS DataSync User Guide.
+// For more information, see Configuring Amazon S3 Location Settings in the
+// AWS DataSync User Guide.
 //
 //    // Example sending a request using CreateLocationS3Request.
 //    req := client.CreateLocationS3Request(params)

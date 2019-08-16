@@ -72,7 +72,7 @@ func (s UpdateServerEngineAttributesOutput) String() string {
 const opUpdateServerEngineAttributes = "UpdateServerEngineAttributes"
 
 // UpdateServerEngineAttributesRequest returns a request value for making API operation for
-// AWS OpsWorks for Chef Automate.
+// AWS OpsWorks CM.
 //
 // Updates engine-specific attributes on a specified server. The server enters
 // the MODIFYING state when this operation is in progress. Only one update can

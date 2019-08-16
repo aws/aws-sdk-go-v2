@@ -14,7 +14,7 @@ type GetQueryResultsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The maximum number of results (rows) to return in this request.
-	MaxResults *int64 `type:"integer"`
+	MaxResults *int64 `min:"1" type:"integer"`
 
 	// The token that specifies where to start pagination if a previous request
 	// was truncated.
@@ -34,6 +34,9 @@ func (s GetQueryResultsInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetQueryResultsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetQueryResultsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}

@@ -14,8 +14,6 @@ import (
 type DescribeMeshInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh to describe.
-	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
 }
@@ -59,7 +57,7 @@ func (s DescribeMeshInput) MarshalFields(e protocol.FieldEncoder) error {
 type DescribeMeshOutput struct {
 	_ struct{} `type:"structure" payload:"Mesh"`
 
-	// The full description of your service mesh.
+	// An object representing a service mesh returned by a describe operation.
 	//
 	// Mesh is a required field
 	Mesh *MeshData `locationName:"mesh" type:"structure" required:"true"`

@@ -14,13 +14,9 @@ import (
 type DescribeVirtualServiceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh that the virtual service resides in.
-	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The name of the virtual service to describe.
-	//
 	// VirtualServiceName is a required field
 	VirtualServiceName *string `location:"uri" locationName:"virtualServiceName" type:"string" required:"true"`
 }
@@ -74,7 +70,7 @@ func (s DescribeVirtualServiceInput) MarshalFields(e protocol.FieldEncoder) erro
 type DescribeVirtualServiceOutput struct {
 	_ struct{} `type:"structure" payload:"VirtualService"`
 
-	// The full description of your virtual service.
+	// An object representing a virtual service returned by a describe operation.
 	//
 	// VirtualService is a required field
 	VirtualService *VirtualServiceData `locationName:"virtualService" type:"structure" required:"true"`

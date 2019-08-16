@@ -17,8 +17,11 @@ type AssociateRoleToGroupInput struct {
 	// GroupId is a required field
 	GroupId *string `location:"uri" locationName:"GroupId" type:"string" required:"true"`
 
-	// The ARN of the role you wish to associate with this group.
-	RoleArn *string `type:"string"`
+	// The ARN of the role you wish to associate with this group. The existence
+	// of the role is not validated.
+	//
+	// RoleArn is a required field
+	RoleArn *string `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -32,6 +35,10 @@ func (s *AssociateRoleToGroupInput) Validate() error {
 
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
+	}
+
+	if s.RoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 
 	if invalidParams.Len() > 0 {

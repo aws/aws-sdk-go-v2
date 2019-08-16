@@ -13,7 +13,7 @@ import (
 type GetDatabasesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the Data Catalog from which to retrieve Databases. If none is supplied,
+	// The ID of the Data Catalog from which to retrieve Databases. If none is provided,
 	// the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 
@@ -69,7 +69,7 @@ const opGetDatabases = "GetDatabases"
 // GetDatabasesRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Retrieves all Databases defined in a given Data Catalog.
+// Retrieves all databases defined in a given Data Catalog.
 //
 //    // Example sending a request using GetDatabasesRequest.
 //    req := client.GetDatabasesRequest(params)

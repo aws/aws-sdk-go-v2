@@ -25,6 +25,11 @@ type ImportSourceCredentialsInput struct {
 	// ServerType is a required field
 	ServerType ServerType `locationName:"serverType" type:"string" required:"true" enum:"true"`
 
+	// Set to false to prevent overwriting the repository source credentials. Set
+	// to true to overwrite the repository source credentials. The default value
+	// is true.
+	ShouldOverwrite *bool `locationName:"shouldOverwrite" type:"boolean"`
+
 	// For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket,
 	// this is the app password.
 	//

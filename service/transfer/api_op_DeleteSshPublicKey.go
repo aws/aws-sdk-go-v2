@@ -76,7 +76,7 @@ const opDeleteSshPublicKey = "DeleteSshPublicKey"
 //
 // Deletes a user's Secure Shell (SSH) public key.
 //
-// No response is returned from this call.
+// No response is returned from this operation.
 //
 //    // Example sending a request using DeleteSshPublicKeyRequest.
 //    req := client.DeleteSshPublicKeyRequest(params)

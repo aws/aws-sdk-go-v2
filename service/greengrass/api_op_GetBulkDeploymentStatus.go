@@ -70,6 +70,7 @@ type GetBulkDeploymentStatusOutput struct {
 	// Error message
 	ErrorMessage *string `type:"string"`
 
+	// The key-value pair for the resource tag.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 

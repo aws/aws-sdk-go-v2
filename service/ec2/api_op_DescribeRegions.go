@@ -27,6 +27,9 @@ type DescribeRegionsInput struct {
 	//
 	//    * endpoint - The endpoint of the Region (for example, ec2.us-east-1.amazonaws.com).
 	//
+	//    * opt-in-status - The opt-in status of the Region (opt-in-not-required
+	//    | opted-in | not-opted-in).
+	//
 	//    * region-name - The name of the Region (for example, us-east-1).
 	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 

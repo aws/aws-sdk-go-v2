@@ -13,16 +13,25 @@ import (
 type UpdateUserInput struct {
 	_ struct{} `type:"structure"`
 
-	// The HomeDirectory parameter specifies the landing directory (folder) for
-	// a user when they log in to the server using their client. An example would
-	// be: /home/username .
+	// A parameter that specifies the landing directory (folder) for a user when
+	// they log in to the server using their client. An example is /home/username .
 	HomeDirectory *string `type:"string"`
 
 	// Allows you to supply a scope-down policy for your user so you can use the
 	// same AWS Identity and Access Management (IAM) role across multiple users.
-	// The policy scopes down users access to portions of your Amazon S3 bucket.
+	// The policy scopes down user access to portions of your Amazon S3 bucket.
 	// Variables you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory},
 	// and ${Transfer:HomeBucket}.
+	//
+	// For scope-down policies, AWS Transfer for SFTP stores the policy as a JSON
+	// blob, instead of the Amazon Resource Name (ARN) of the policy. You save the
+	// policy as a JSON blob and pass it in the Policy argument.
+	//
+	// For an example of a scope-down policy, see "https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down">Creating
+	// a Scope-Down Policy.
+	//
+	// For more information, see "https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html"
+	// in the AWS Security Token Service API Reference.
 	Policy *string `type:"string"`
 
 	// The IAM role that controls your user's access to your Amazon S3 bucket. The

@@ -14,16 +14,12 @@ import (
 type UpdateMeshInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of therequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
-	// The name of the service mesh to update.
-	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The service mesh specification to apply.
+	// An object representing the specification of a service mesh.
 	Spec *MeshSpec `locationName:"spec" type:"structure"`
 }
 

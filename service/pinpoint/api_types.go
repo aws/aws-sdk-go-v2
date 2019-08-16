@@ -1853,9 +1853,6 @@ type ApplicationDateRangeKpiResponse struct {
 	// ApplicationId is a required field
 	ApplicationId *string `type:"string" required:"true"`
 
-	// The last date or date and time of the date range that was used to filter
-	// the query results, in ISO 8601 format. The date range is inclusive.
-	//
 	// EndTime is a required field
 	EndTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
 
@@ -1879,9 +1876,6 @@ type ApplicationDateRangeKpiResponse struct {
 	// The App Metrics resource returns all results in a single page.
 	NextToken *string `type:"string"`
 
-	// The first date or date and time of the date range that was used to filter
-	// the query results, in ISO 8601 format. The date range is inclusive.
-	//
 	// StartTime is a required field
 	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
 }
@@ -2679,9 +2673,6 @@ type CampaignDateRangeKpiResponse struct {
 	// CampaignId is a required field
 	CampaignId *string `type:"string" required:"true"`
 
-	// The last date or date and time of the date range that was used to filter
-	// the query results, in ISO 8601 format. The date range is inclusive.
-	//
 	// EndTime is a required field
 	EndTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
 
@@ -2705,9 +2696,6 @@ type CampaignDateRangeKpiResponse struct {
 	// The Campaign Metrics resource returns all results in a single page.
 	NextToken *string `type:"string"`
 
-	// The first date or date and time of the date range that was used to filter
-	// the query results, in ISO 8601 format. The date range is inclusive.
-	//
 	// StartTime is a required field
 	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
 }
@@ -8123,9 +8111,6 @@ func (s QuietTime) MarshalFields(e protocol.FieldEncoder) error {
 type RawEmail struct {
 	_ struct{} `type:"structure"`
 
-	// The email message, represented as a raw MIME message. The entire message
-	// must be base64 encoded.
-	//
 	// Data is automatically base64 encoded/decoded by the SDK.
 	Data []byte `type:"blob"`
 }

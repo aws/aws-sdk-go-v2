@@ -15,6 +15,11 @@ import (
 type SynthesizeSpeechInput struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies the engine (standard or neural) for Amazon Polly to use when processing
+	// input text for speech synthesis. Using a voice that is not supported for
+	// the engine selected will result in an error.
+	Engine Engine `type:"string" enum:"true"`
+
 	// Optional language code for the Synthesize Speech request. This is only necessary
 	// if using a bilingual voice, such as Aditi, which can be used for either Indian
 	// English (en-IN) or Hindi (hi-IN).
@@ -29,7 +34,7 @@ type SynthesizeSpeechInput struct {
 	// List of one or more pronunciation lexicon names you want the service to apply
 	// during synthesis. Lexicons are applied only if the language of the lexicon
 	// is the same as the language of the voice. For information about storing lexicons,
-	// see PutLexicon (http://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html).
+	// see PutLexicon (https://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html).
 	LexiconNames []string `type:"list"`
 
 	// The format in which the returned output will be encoded. For audio stream,
@@ -43,8 +48,9 @@ type SynthesizeSpeechInput struct {
 
 	// The audio frequency specified in Hz.
 	//
-	// The valid values for mp3 and ogg_vorbis are "8000", "16000", and "22050".
-	// The default value is "22050".
+	// The valid values for mp3 and ogg_vorbis are "8000", "16000", "22050", and
+	// "24000". The default value for standard voices is "22050". The default value
+	// for neural voices is "24000".
 	//
 	// Valid values for pcm are "8000" and "16000" The default value is "16000".
 	SampleRate *string `type:"string"`
@@ -59,11 +65,11 @@ type SynthesizeSpeechInput struct {
 	Text *string `type:"string" required:"true"`
 
 	// Specifies whether the input text is plain text or SSML. The default value
-	// is plain text. For more information, see Using SSML (http://docs.aws.amazon.com/polly/latest/dg/ssml.html).
+	// is plain text. For more information, see Using SSML (https://docs.aws.amazon.com/polly/latest/dg/ssml.html).
 	TextType TextType `type:"string" enum:"true"`
 
 	// Voice ID to use for the synthesis. You can get a list of available voice
-	// IDs by calling the DescribeVoices (http://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html)
+	// IDs by calling the DescribeVoices (https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html)
 	// operation.
 	//
 	// VoiceId is a required field
@@ -99,6 +105,12 @@ func (s *SynthesizeSpeechInput) Validate() error {
 func (s SynthesizeSpeechInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	if len(s.Engine) > 0 {
+		v := s.Engine
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if len(s.LanguageCode) > 0 {
 		v := s.LanguageCode
 
@@ -221,7 +233,7 @@ const opSynthesizeSpeech = "SynthesizeSpeech"
 // must be valid, well-formed SSML. Some alphabets might not be available with
 // all the voices (for example, Cyrillic might not be read at all by English
 // voices) unless phoneme mapping is used. For more information, see How it
-// Works (http://docs.aws.amazon.com/polly/latest/dg/how-text-to-speech-works.html).
+// Works (https://docs.aws.amazon.com/polly/latest/dg/how-text-to-speech-works.html).
 //
 //    // Example sending a request using SynthesizeSpeechRequest.
 //    req := client.SynthesizeSpeechRequest(params)

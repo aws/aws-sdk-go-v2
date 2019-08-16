@@ -73,6 +73,8 @@ type ClientAPI interface {
 
 	GetReservationUtilizationRequest(*costexplorer.GetReservationUtilizationInput) costexplorer.GetReservationUtilizationRequest
 
+	GetRightsizingRecommendationRequest(*costexplorer.GetRightsizingRecommendationInput) costexplorer.GetRightsizingRecommendationRequest
+
 	GetTagsRequest(*costexplorer.GetTagsInput) costexplorer.GetTagsRequest
 
 	GetUsageForecastRequest(*costexplorer.GetUsageForecastInput) costexplorer.GetUsageForecastRequest

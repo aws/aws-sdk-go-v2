@@ -4,6 +4,7 @@ package appstream
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -12,6 +13,10 @@ import (
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderRequest
 type CreateImageBuilderInput struct {
 	_ struct{} `type:"structure"`
+
+	// The list of virtual private cloud (VPC) interface endpoint objects. Administrators
+	// can connect to the image builder only through the specified endpoints.
+	AccessEndpoints []AccessEndpoint `min:"1" type:"list"`
 
 	// The version of the AppStream 2.0 agent to use for this image builder. To
 	// use the latest version of the AppStream 2.0 agent, specify [LATEST].
@@ -58,7 +63,7 @@ type CreateImageBuilderInput struct {
 	// If you do not specify a value, the value is set to an empty string.
 	//
 	// For more information about tags, see Tagging Your Resources (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
-	// in the Amazon AppStream 2.0 Developer Guide.
+	// in the Amazon AppStream 2.0 Administration Guide.
 	Tags map[string]string `min:"1" type:"map"`
 
 	// The VPC configuration for the image builder. You can specify only one subnet.
@@ -73,6 +78,9 @@ func (s CreateImageBuilderInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateImageBuilderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateImageBuilderInput"}
+	if s.AccessEndpoints != nil && len(s.AccessEndpoints) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AccessEndpoints", 1))
+	}
 	if s.AppstreamAgentVersion != nil && len(*s.AppstreamAgentVersion) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AppstreamAgentVersion", 1))
 	}
@@ -92,6 +100,13 @@ func (s *CreateImageBuilderInput) Validate() error {
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
+	if s.AccessEndpoints != nil {
+		for i, v := range s.AccessEndpoints {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AccessEndpoints", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

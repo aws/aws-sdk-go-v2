@@ -14,13 +14,9 @@ import (
 type DeleteVirtualNodeInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh to delete the virtual node in.
-	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The name of the virtual node to delete.
-	//
 	// VirtualNodeName is a required field
 	VirtualNodeName *string `location:"uri" locationName:"virtualNodeName" min:"1" type:"string" required:"true"`
 }
@@ -77,7 +73,7 @@ func (s DeleteVirtualNodeInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteVirtualNodeOutput struct {
 	_ struct{} `type:"structure" payload:"VirtualNode"`
 
-	// The virtual node that was deleted.
+	// An object representing a virtual node returned by a describe operation.
 	//
 	// VirtualNode is a required field
 	VirtualNode *VirtualNodeData `locationName:"virtualNode" type:"structure" required:"true"`

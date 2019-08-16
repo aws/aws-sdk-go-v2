@@ -17,6 +17,9 @@ type ResetJobBookmarkInput struct {
 	//
 	// JobName is a required field
 	JobName *string `type:"string" required:"true"`
+
+	// The unique run identifier associated with this job run.
+	RunId *string `type:"string"`
 }
 
 // String returns the string representation

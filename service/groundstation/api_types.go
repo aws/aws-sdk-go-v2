@@ -76,7 +76,7 @@ type AntennaDownlinkDemodDecodeConfig struct {
 	// DemodulationConfig is a required field
 	DemodulationConfig *DemodulationConfig `locationName:"demodulationConfig" type:"structure" required:"true"`
 
-	// Information about the spectral Config.
+	// Object that describes a spectral Config.
 	//
 	// SpectrumConfig is a required field
 	SpectrumConfig *SpectrumConfig `locationName:"spectrumConfig" type:"structure" required:"true"`
@@ -157,7 +157,7 @@ type AntennaUplinkConfig struct {
 	// SpectrumConfig is a required field
 	SpectrumConfig *UplinkSpectrumConfig `locationName:"spectrumConfig" type:"structure" required:"true"`
 
-	// EIRP of the target.
+	// Object that represents EIRP.
 	//
 	// TargetEirp is a required field
 	TargetEirp *Eirp `locationName:"targetEirp" type:"structure" required:"true"`
@@ -218,16 +218,12 @@ func (s AntennaUplinkConfig) MarshalFields(e protocol.FieldEncoder) error {
 type ConfigListItem struct {
 	_ struct{} `type:"structure"`
 
-	// ARN of a Config.
 	ConfigArn *string `locationName:"configArn" type:"string"`
 
-	// UUID of a Config.
 	ConfigId *string `locationName:"configId" type:"string"`
 
-	// Type of a Config.
 	ConfigType ConfigCapabilityType `locationName:"configType" type:"string" enum:"true"`
 
-	// Name of a Config.
 	Name *string `locationName:"name" type:"string"`
 }
 
@@ -280,8 +276,7 @@ type ConfigTypeData struct {
 	// downlink demod decode during a contact.
 	AntennaDownlinkDemodDecodeConfig *AntennaDownlinkDemodDecodeConfig `locationName:"antennaDownlinkDemodDecodeConfig" type:"structure"`
 
-	// Information about how AWS Ground Station should conﬁgure an antenna for
-	// uplink during a contact.
+	// Information about the uplink Config of an antenna.
 	AntennaUplinkConfig *AntennaUplinkConfig `locationName:"antennaUplinkConfig" type:"structure"`
 
 	// Information about the dataflow endpoint Config.
@@ -389,42 +384,29 @@ func (s ConfigTypeData) MarshalFields(e protocol.FieldEncoder) error {
 type ContactData struct {
 	_ struct{} `type:"structure"`
 
-	// UUID of a contact.
 	ContactId *string `locationName:"contactId" type:"string"`
 
-	// Status of a contact.
 	ContactStatus ContactStatus `locationName:"contactStatus" type:"string" enum:"true"`
 
-	// End time of a contact.
 	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
 
-	// Error message of a contact.
 	ErrorMessage *string `locationName:"errorMessage" type:"string"`
 
-	// Name of a ground station.
 	GroundStation *string `locationName:"groundStation" type:"string"`
 
-	// Maximum elevation angle of a contact.
+	// Elevation angle of the satellite in the sky during a contact.
 	MaximumElevation *Elevation `locationName:"maximumElevation" type:"structure"`
 
-	// ARN of a mission profile.
 	MissionProfileArn *string `locationName:"missionProfileArn" type:"string"`
 
-	// Amount of time after a contact ends that you’d like to receive a CloudWatch
-	// event indicating the pass has finished.
 	PostPassEndTime *time.Time `locationName:"postPassEndTime" type:"timestamp"`
 
-	// Amount of time prior to contact start you’d like to receive a CloudWatch
-	// event indicating an upcoming pass.
 	PrePassStartTime *time.Time `locationName:"prePassStartTime" type:"timestamp"`
 
-	// ARN of a satellite.
 	SatelliteArn *string `locationName:"satelliteArn" type:"string"`
 
-	// Start time of a contact.
 	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
 
-	// Tags assigned to a contact.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
@@ -525,13 +507,11 @@ func (s ContactData) MarshalFields(e protocol.FieldEncoder) error {
 type DataflowEndpoint struct {
 	_ struct{} `type:"structure"`
 
-	// Socket address of a dataflow endpoint.
+	// Information about the socket address.
 	Address *SocketAddress `locationName:"address" type:"structure"`
 
-	// Name of a dataflow endpoint.
 	Name *string `locationName:"name" min:"1" type:"string"`
 
-	// Status of a dataflow endpoint.
 	Status EndpointStatus `locationName:"status" type:"string" enum:"true"`
 }
 
@@ -586,8 +566,6 @@ func (s DataflowEndpoint) MarshalFields(e protocol.FieldEncoder) error {
 type DataflowEndpointConfig struct {
 	_ struct{} `type:"structure"`
 
-	// Name of a dataflow endpoint.
-	//
 	// DataflowEndpointName is a required field
 	DataflowEndpointName *string `locationName:"dataflowEndpointName" type:"string" required:"true"`
 }
@@ -627,10 +605,8 @@ func (s DataflowEndpointConfig) MarshalFields(e protocol.FieldEncoder) error {
 type DataflowEndpointListItem struct {
 	_ struct{} `type:"structure"`
 
-	// ARN of a dataflow endpoint group.
 	DataflowEndpointGroupArn *string `locationName:"dataflowEndpointGroupArn" type:"string"`
 
-	// UUID of a dataflow endpoint group.
 	DataflowEndpointGroupId *string `locationName:"dataflowEndpointGroupId" type:"string"`
 }
 
@@ -661,8 +637,6 @@ func (s DataflowEndpointListItem) MarshalFields(e protocol.FieldEncoder) error {
 type DecodeConfig struct {
 	_ struct{} `type:"structure"`
 
-	// Unvalidated JSON of a decode Config.
-	//
 	// UnvalidatedJSON is a required field
 	UnvalidatedJSON *string `locationName:"unvalidatedJSON" min:"2" type:"string" required:"true"`
 }
@@ -705,8 +679,6 @@ func (s DecodeConfig) MarshalFields(e protocol.FieldEncoder) error {
 type DemodulationConfig struct {
 	_ struct{} `type:"structure"`
 
-	// Unvalidated JSON of a demodulation Config.
-	//
 	// UnvalidatedJSON is a required field
 	UnvalidatedJSON *string `locationName:"unvalidatedJSON" min:"2" type:"string" required:"true"`
 }
@@ -749,13 +721,9 @@ func (s DemodulationConfig) MarshalFields(e protocol.FieldEncoder) error {
 type Eirp struct {
 	_ struct{} `type:"structure"`
 
-	// Units of an EIRP.
-	//
 	// Units is a required field
 	Units EirpUnits `locationName:"units" type:"string" required:"true" enum:"true"`
 
-	// Value of an EIRP.
-	//
 	// Value is a required field
 	Value *float64 `locationName:"value" type:"double" required:"true"`
 }
@@ -804,13 +772,9 @@ func (s Eirp) MarshalFields(e protocol.FieldEncoder) error {
 type Elevation struct {
 	_ struct{} `type:"structure"`
 
-	// Elevation angle units.
-	//
 	// Unit is a required field
 	Unit AngleUnits `locationName:"unit" type:"string" required:"true" enum:"true"`
 
-	// Elevation angle value.
-	//
 	// Value is a required field
 	Value *float64 `locationName:"value" type:"double" required:"true"`
 }
@@ -842,10 +806,10 @@ func (s Elevation) MarshalFields(e protocol.FieldEncoder) error {
 type EndpointDetails struct {
 	_ struct{} `type:"structure"`
 
-	// A dataflow endpoint.
+	// Information about a dataflow endpoint.
 	Endpoint *DataflowEndpoint `locationName:"endpoint" type:"structure"`
 
-	// Endpoint security details.
+	// Information about endpoints.
 	SecurityDetails *SecurityDetails `locationName:"securityDetails" type:"structure"`
 }
 
@@ -896,13 +860,9 @@ func (s EndpointDetails) MarshalFields(e protocol.FieldEncoder) error {
 type Frequency struct {
 	_ struct{} `type:"structure"`
 
-	// Frequency units.
-	//
 	// Units is a required field
 	Units FrequencyUnits `locationName:"units" type:"string" required:"true" enum:"true"`
 
-	// Frequency value.
-	//
 	// Value is a required field
 	Value *float64 `locationName:"value" type:"double" required:"true"`
 }
@@ -951,13 +911,9 @@ func (s Frequency) MarshalFields(e protocol.FieldEncoder) error {
 type FrequencyBandwidth struct {
 	_ struct{} `type:"structure"`
 
-	// Frequency bandwidth units.
-	//
 	// Units is a required field
 	Units BandwidthUnits `locationName:"units" type:"string" required:"true" enum:"true"`
 
-	// Frequency bandwidth value.
-	//
 	// Value is a required field
 	Value *float64 `locationName:"value" type:"double" required:"true"`
 }
@@ -1006,13 +962,10 @@ func (s FrequencyBandwidth) MarshalFields(e protocol.FieldEncoder) error {
 type GroundStationData struct {
 	_ struct{} `type:"structure"`
 
-	// ID of a ground station.
 	GroundStationId *string `locationName:"groundStationId" type:"string"`
 
-	// Name of a ground station.
 	GroundStationName *string `locationName:"groundStationName" type:"string"`
 
-	// Ground station Region.
 	Region *string `locationName:"region" type:"string"`
 }
 
@@ -1049,16 +1002,12 @@ func (s GroundStationData) MarshalFields(e protocol.FieldEncoder) error {
 type MissionProfileListItem struct {
 	_ struct{} `type:"structure"`
 
-	// ARN of a mission profile.
 	MissionProfileArn *string `locationName:"missionProfileArn" type:"string"`
 
-	// ID of a mission profile.
 	MissionProfileId *string `locationName:"missionProfileId" type:"string"`
 
-	// Name of a mission profile.
 	Name *string `locationName:"name" type:"string"`
 
-	// Region of a mission profile.
 	Region *string `locationName:"region" type:"string"`
 }
 
@@ -1101,13 +1050,10 @@ func (s MissionProfileListItem) MarshalFields(e protocol.FieldEncoder) error {
 type SatelliteListItem struct {
 	_ struct{} `type:"structure"`
 
-	// NORAD satellite ID number.
 	NoradSatelliteID *int64 `locationName:"noradSatelliteID" min:"1" type:"integer"`
 
-	// ARN of a satellite.
 	SatelliteArn *string `locationName:"satelliteArn" type:"string"`
 
-	// ID of a satellite.
 	SatelliteId *string `locationName:"satelliteId" min:"1" type:"string"`
 }
 
@@ -1144,19 +1090,12 @@ func (s SatelliteListItem) MarshalFields(e protocol.FieldEncoder) error {
 type SecurityDetails struct {
 	_ struct{} `type:"structure"`
 
-	// ARN to a role needed for connecting streams to your instances.
-	//
 	// RoleArn is a required field
 	RoleArn *string `locationName:"roleArn" type:"string" required:"true"`
 
-	// The security groups to attach to the elastic network interfaces.
-	//
 	// SecurityGroupIds is a required field
 	SecurityGroupIds []string `locationName:"securityGroupIds" type:"list" required:"true"`
 
-	// A list of subnets where AWS Ground Station places elastic network interfaces
-	// to send streams to your instances.
-	//
 	// SubnetIds is a required field
 	SubnetIds []string `locationName:"subnetIds" type:"list" required:"true"`
 }
@@ -1228,13 +1167,9 @@ func (s SecurityDetails) MarshalFields(e protocol.FieldEncoder) error {
 type SocketAddress struct {
 	_ struct{} `type:"structure"`
 
-	// Name of a socket address.
-	//
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
 
-	// Port of a socket address.
-	//
 	// Port is a required field
 	Port *int64 `locationName:"port" type:"integer" required:"true"`
 }
@@ -1284,17 +1219,16 @@ func (s SocketAddress) MarshalFields(e protocol.FieldEncoder) error {
 type SpectrumConfig struct {
 	_ struct{} `type:"structure"`
 
-	// Bandwidth of a spectral Config.
+	// Object that describes the frequency bandwidth.
 	//
 	// Bandwidth is a required field
 	Bandwidth *FrequencyBandwidth `locationName:"bandwidth" type:"structure" required:"true"`
 
-	// Center frequency of a spectral Config.
+	// Object that describes the frequency.
 	//
 	// CenterFrequency is a required field
 	CenterFrequency *Frequency `locationName:"centerFrequency" type:"structure" required:"true"`
 
-	// Polarization of a spectral Config.
 	Polarization Polarization `locationName:"polarization" type:"string" enum:"true"`
 }
 
@@ -1360,8 +1294,6 @@ func (s SpectrumConfig) MarshalFields(e protocol.FieldEncoder) error {
 type TrackingConfig struct {
 	_ struct{} `type:"structure"`
 
-	// Current setting for autotrack.
-	//
 	// Autotrack is a required field
 	Autotrack Criticality `locationName:"autotrack" type:"string" required:"true" enum:"true"`
 }
@@ -1403,13 +1335,9 @@ func (s TrackingConfig) MarshalFields(e protocol.FieldEncoder) error {
 type UplinkEchoConfig struct {
 	_ struct{} `type:"structure"`
 
-	// ARN of an uplink Config.
-	//
 	// AntennaUplinkConfigArn is a required field
 	AntennaUplinkConfigArn *string `locationName:"antennaUplinkConfigArn" type:"string" required:"true"`
 
-	// Whether or not an uplink Config is enabled.
-	//
 	// Enabled is a required field
 	Enabled *bool `locationName:"enabled" type:"boolean" required:"true"`
 }
@@ -1459,12 +1387,11 @@ func (s UplinkEchoConfig) MarshalFields(e protocol.FieldEncoder) error {
 type UplinkSpectrumConfig struct {
 	_ struct{} `type:"structure"`
 
-	// Center frequency of an uplink spectral Config.
+	// Object that describes the frequency.
 	//
 	// CenterFrequency is a required field
 	CenterFrequency *Frequency `locationName:"centerFrequency" type:"structure" required:"true"`
 
-	// Polarization of an uplink spectral Config.
 	Polarization Polarization `locationName:"polarization" type:"string" enum:"true"`
 }
 

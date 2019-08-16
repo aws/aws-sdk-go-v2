@@ -75,7 +75,7 @@ func (s *ModifyCapacityReservationInput) Validate() error {
 type ModifyCapacityReservationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Information about the Capacity Reservation.
+	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool `locationName:"return" type:"boolean"`
 }
 

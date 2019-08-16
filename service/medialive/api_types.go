@@ -2209,6 +2209,9 @@ type Channel struct {
 	// The name of the channel. (user-mutable)
 	Name *string `locationName:"name" type:"string"`
 
+	// Runtime details for the pipelines of a running channel.
+	PipelineDetails []PipelineDetail `locationName:"pipelineDetails" type:"list"`
+
 	// The number of currently healthy pipelines.
 	PipelinesRunningCount *int64 `locationName:"pipelinesRunningCount" type:"integer"`
 
@@ -2305,6 +2308,18 @@ func (s Channel) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PipelineDetails != nil {
+		v := s.PipelineDetails
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "pipelineDetails", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.PipelinesRunningCount != nil {
 		v := *s.PipelinesRunningCount
@@ -5356,6 +5371,23 @@ func (s HlsWebdavSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Settings to configure an action so that it occurs immediately. This is only
+// supported for input switch actions currently.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ImmediateModeScheduleActionStartSettings
+type ImmediateModeScheduleActionStartSettings struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s ImmediateModeScheduleActionStartSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ImmediateModeScheduleActionStartSettings) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Input
 type Input struct {
 	_ struct{} `type:"structure"`
@@ -5381,6 +5413,11 @@ type Input struct {
 	// SINGLE_PIPELINE, this value is valid. If the ChannelClass is STANDARD, this
 	// value is not valid because the channel requires two sources in the input.
 	InputClass InputClass `locationName:"inputClass" type:"string" enum:"true"`
+
+	// Certain pull input sources can be dynamic, meaning that they can have their
+	// URL's dynamically changesduring input switch actions. Presently, this functionality
+	// only works with MP4_FILE inputs.
+	InputSourceType InputSourceType `locationName:"inputSourceType" type:"string" enum:"true"`
 
 	// A list of MediaConnect Flows for this input.
 	MediaConnectFlows []MediaConnectFlow `locationName:"mediaConnectFlows" type:"list"`
@@ -5454,6 +5491,12 @@ func (s Input) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "inputClass", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.InputSourceType) > 0 {
+		v := s.InputSourceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "inputSourceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.MediaConnectFlows != nil {
 		v := s.MediaConnectFlows
@@ -5644,6 +5687,65 @@ func (s InputChannelLevel) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "inputChannel", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Settings to let you create a clip of the file input, in order to set up the
+// input to ingest only a portion of the file.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputClippingSettings
+type InputClippingSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The source of the timecodes in the source being clipped.
+	//
+	// InputTimecodeSource is a required field
+	InputTimecodeSource InputTimecodeSource `locationName:"inputTimecodeSource" type:"string" required:"true" enum:"true"`
+
+	// Settings to identify the start of the clip.
+	StartTimecode *StartTimecode `locationName:"startTimecode" type:"structure"`
+
+	// Settings to identify the end of the clip.
+	StopTimecode *StopTimecode `locationName:"stopTimecode" type:"structure"`
+}
+
+// String returns the string representation
+func (s InputClippingSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *InputClippingSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "InputClippingSettings"}
+	if len(s.InputTimecodeSource) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("InputTimecodeSource"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputClippingSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.InputTimecodeSource) > 0 {
+		v := s.InputTimecodeSource
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "inputTimecodeSource", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.StartTimecode != nil {
+		v := s.StartTimecode
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "startTimecode", v, metadata)
+	}
+	if s.StopTimecode != nil {
+		v := s.StopTimecode
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "stopTimecode", v, metadata)
 	}
 	return nil
 }
@@ -6268,15 +6370,27 @@ func (s InputSpecification) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Settings for the action to switch an input.
+// Settings for the "switch input" action: to switch from ingesting one input
+// to ingesting another input.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputSwitchScheduleActionSettings
 type InputSwitchScheduleActionSettings struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the input attachment that should be switched to by this action.
+	// The name of the input attachment (not the name of the input!) to switch to.
+	// The name is specified in the channel configuration.
 	//
 	// InputAttachmentNameReference is a required field
 	InputAttachmentNameReference *string `locationName:"inputAttachmentNameReference" type:"string" required:"true"`
+
+	// Settings to let you create a clip of the file input, in order to set up the
+	// input to ingest only a portion of the file.
+	InputClippingSettings *InputClippingSettings `locationName:"inputClippingSettings" type:"structure"`
+
+	// The value for the variable portion of the URL for the dynamic input, for
+	// this instance of the input. Each time you use the same dynamic input in an
+	// input switch action, you can provide a different value, in order to connect
+	// the input to a different content source.
+	UrlPath []string `locationName:"urlPath" type:"list"`
 }
 
 // String returns the string representation
@@ -6290,6 +6404,11 @@ func (s *InputSwitchScheduleActionSettings) Validate() error {
 
 	if s.InputAttachmentNameReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InputAttachmentNameReference"))
+	}
+	if s.InputClippingSettings != nil {
+		if err := s.InputClippingSettings.Validate(); err != nil {
+			invalidParams.AddNested("InputClippingSettings", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6305,6 +6424,24 @@ func (s InputSwitchScheduleActionSettings) MarshalFields(e protocol.FieldEncoder
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "inputAttachmentNameReference", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.InputClippingSettings != nil {
+		v := s.InputClippingSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "inputClippingSettings", v, metadata)
+	}
+	if s.UrlPath != nil {
+		v := s.UrlPath
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "urlPath", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -7271,7 +7408,7 @@ func (s MediaPackageGroupSettings) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Media Package Output Destination Settings
+// MediaPackage Output Destination Settings
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageOutputDestinationSettings
 type MediaPackageOutputDestinationSettings struct {
 	_ struct{} `type:"structure"`
@@ -8402,6 +8539,52 @@ func (s PauseStateScheduleActionSettings) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
+// Runtime details of a pipeline when a channel is running.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PipelineDetail
+type PipelineDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the active input attachment currently being ingested by this
+	// pipeline.
+	ActiveInputAttachmentName *string `locationName:"activeInputAttachmentName" type:"string"`
+
+	// The name of the input switch schedule action that occurred most recently
+	// and that resulted in the switch to the current input attachment for this
+	// pipeline.
+	ActiveInputSwitchActionName *string `locationName:"activeInputSwitchActionName" type:"string"`
+
+	// Pipeline ID
+	PipelineId *string `locationName:"pipelineId" type:"string"`
+}
+
+// String returns the string representation
+func (s PipelineDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PipelineDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ActiveInputAttachmentName != nil {
+		v := *s.ActiveInputAttachmentName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "activeInputAttachmentName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ActiveInputSwitchActionName != nil {
+		v := *s.ActiveInputSwitchActionName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "activeInputSwitchActionName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PipelineId != nil {
+		v := *s.PipelineId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "pipelineId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Settings for pausing a pipeline.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PipelinePauseStateSettings
 type PipelinePauseStateSettings struct {
@@ -9199,16 +9382,20 @@ func (s ScheduleActionSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Settings to specify the start time for an action.
+// Settings to specify when an action should occur. Only one of the options
+// must be selected.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleActionStartSettings
 type ScheduleActionStartSettings struct {
 	_ struct{} `type:"structure"`
 
-	// Holds the start time for the action.
+	// Option for specifying the start time for an action.
 	FixedModeScheduleActionStartSettings *FixedModeScheduleActionStartSettings `locationName:"fixedModeScheduleActionStartSettings" type:"structure"`
 
-	// Specifies an action to follow for scheduling this action.
+	// Option for specifying an action as relative to another action.
 	FollowModeScheduleActionStartSettings *FollowModeScheduleActionStartSettings `locationName:"followModeScheduleActionStartSettings" type:"structure"`
+
+	// Option for specifying an action that should be applied immediately.
+	ImmediateModeScheduleActionStartSettings *ImmediateModeScheduleActionStartSettings `locationName:"immediateModeScheduleActionStartSettings" type:"structure"`
 }
 
 // String returns the string representation
@@ -9249,6 +9436,12 @@ func (s ScheduleActionStartSettings) MarshalFields(e protocol.FieldEncoder) erro
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "followModeScheduleActionStartSettings", v, metadata)
+	}
+	if s.ImmediateModeScheduleActionStartSettings != nil {
+		v := s.ImmediateModeScheduleActionStartSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "immediateModeScheduleActionStartSettings", v, metadata)
 	}
 	return nil
 }
@@ -10052,6 +10245,33 @@ func (s StandardHlsSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Settings to identify the start of the clip.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartTimecode
+type StartTimecode struct {
+	_ struct{} `type:"structure"`
+
+	// The timecode for the frame where you want to start the clip. Optional; if
+	// not specified, the clip starts at first frame in the file. Enter the timecode
+	// as HH:MM:SS:FF or HH:MM:SS;FF.
+	Timecode *string `locationName:"timecode" type:"string"`
+}
+
+// String returns the string representation
+func (s StartTimecode) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StartTimecode) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Timecode != nil {
+		v := *s.Timecode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timecode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Settings for the action to activate a static image.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StaticImageActivateScheduleActionSettings
 type StaticImageActivateScheduleActionSettings struct {
@@ -10294,6 +10514,44 @@ func (s StaticKeySettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "staticKeyValue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Settings to identify the end of the clip.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopTimecode
+type StopTimecode struct {
+	_ struct{} `type:"structure"`
+
+	// If you specify a StopTimecode in an input (in order to clip the file), you
+	// can specify if you want the clip to exclude (the default) or include the
+	// frame specified by the timecode.
+	LastFrameClippingBehavior LastFrameClippingBehavior `locationName:"lastFrameClippingBehavior" type:"string" enum:"true"`
+
+	// The timecode for the frame where you want to stop the clip. Optional; if
+	// not specified, the clip continues to the end of the file. Enter the timecode
+	// as HH:MM:SS:FF or HH:MM:SS;FF.
+	Timecode *string `locationName:"timecode" type:"string"`
+}
+
+// String returns the string representation
+func (s StopTimecode) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StopTimecode) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.LastFrameClippingBehavior) > 0 {
+		v := s.LastFrameClippingBehavior
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastFrameClippingBehavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Timecode != nil {
+		v := *s.Timecode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timecode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

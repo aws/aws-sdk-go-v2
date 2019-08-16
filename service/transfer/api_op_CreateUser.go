@@ -20,8 +20,18 @@ type CreateUserInput struct {
 
 	// A scope-down policy for your user so you can use the same IAM role across
 	// multiple users. This policy scopes down user access to portions of their
-	// Amazon S3 bucket. Variables you can use inside this policy include ${Transfer:UserName},
+	// Amazon S3 bucket. Variables that you can use inside this policy include ${Transfer:UserName},
 	// ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.
+	//
+	// For scope-down policies, AWS Transfer for SFTP stores the policy as a JSON
+	// blob, instead of the Amazon Resource Name (ARN) of the policy. You save the
+	// policy as a JSON blob and pass it in the Policy argument.
+	//
+	// For an example of a scope-down policy, see "https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down">Creating
+	// a Scope-Down Policy.
+	//
+	// For more information, see "https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html"
+	// in the AWS Security Token Service API Reference.
 	Policy *string `type:"string"`
 
 	// The IAM role that controls your user's access to your Amazon S3 bucket. The
@@ -40,7 +50,7 @@ type CreateUserInput struct {
 	// ServerId is a required field
 	ServerId *string `type:"string" required:"true"`
 
-	// The public portion of the Secure Shall (SSH) key used to authenticate the
+	// The public portion of the Secure Shell (SSH) key used to authenticate the
 	// user to the SFTP server.
 	SshPublicKeyBody *string `type:"string"`
 
@@ -119,15 +129,13 @@ const opCreateUser = "CreateUser"
 // CreateUserRequest returns a request value for making API operation for
 // AWS Transfer for SFTP.
 //
-// Adds a user and associate them with an existing Secure File Transfer Protocol
-// (SFTP) server. Using parameters for CreateUser, you can specify the user
-// name, set the home directory, store the user's public key, and assign the
-// user's AWS Identity and Access Management (IAM) role. You can also optionally
-// add a scope-down policy, and assign metadata with tags that can be used to
-// group and search for users.
-//
-// The response returns the UserName and ServerId values of the new user for
-// that server.
+// Creates a user and associates them with an existing Secure File Transfer
+// Protocol (SFTP) server. You can only create and associate users with SFTP
+// servers that have the IdentityProviderType set to SERVICE_MANAGED. Using
+// parameters for CreateUser, you can specify the user name, set the home directory,
+// store the user's public key, and assign the user's AWS Identity and Access
+// Management (IAM) role. You can also optionally add a scope-down policy, and
+// assign metadata with tags that can be used to group and search for users.
 //
 //    // Example sending a request using CreateUserRequest.
 //    req := client.CreateUserRequest(params)

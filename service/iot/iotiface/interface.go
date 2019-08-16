@@ -77,6 +77,8 @@ type ClientAPI interface {
 
 	AttachThingPrincipalRequest(*iot.AttachThingPrincipalInput) iot.AttachThingPrincipalRequest
 
+	CancelAuditMitigationActionsTaskRequest(*iot.CancelAuditMitigationActionsTaskInput) iot.CancelAuditMitigationActionsTaskRequest
+
 	CancelAuditTaskRequest(*iot.CancelAuditTaskInput) iot.CancelAuditTaskRequest
 
 	CancelCertificateTransferRequest(*iot.CancelCertificateTransferInput) iot.CancelCertificateTransferRequest
@@ -98,6 +100,8 @@ type ClientAPI interface {
 	CreateJobRequest(*iot.CreateJobInput) iot.CreateJobRequest
 
 	CreateKeysAndCertificateRequest(*iot.CreateKeysAndCertificateInput) iot.CreateKeysAndCertificateRequest
+
+	CreateMitigationActionRequest(*iot.CreateMitigationActionInput) iot.CreateMitigationActionRequest
 
 	CreateOTAUpdateRequest(*iot.CreateOTAUpdateInput) iot.CreateOTAUpdateRequest
 
@@ -137,6 +141,8 @@ type ClientAPI interface {
 
 	DeleteJobExecutionRequest(*iot.DeleteJobExecutionInput) iot.DeleteJobExecutionRequest
 
+	DeleteMitigationActionRequest(*iot.DeleteMitigationActionInput) iot.DeleteMitigationActionRequest
+
 	DeleteOTAUpdateRequest(*iot.DeleteOTAUpdateInput) iot.DeleteOTAUpdateRequest
 
 	DeletePolicyRequest(*iot.DeletePolicyInput) iot.DeletePolicyRequest
@@ -167,6 +173,10 @@ type ClientAPI interface {
 
 	DescribeAccountAuditConfigurationRequest(*iot.DescribeAccountAuditConfigurationInput) iot.DescribeAccountAuditConfigurationRequest
 
+	DescribeAuditFindingRequest(*iot.DescribeAuditFindingInput) iot.DescribeAuditFindingRequest
+
+	DescribeAuditMitigationActionsTaskRequest(*iot.DescribeAuditMitigationActionsTaskInput) iot.DescribeAuditMitigationActionsTaskRequest
+
 	DescribeAuditTaskRequest(*iot.DescribeAuditTaskInput) iot.DescribeAuditTaskRequest
 
 	DescribeAuthorizerRequest(*iot.DescribeAuthorizerInput) iot.DescribeAuthorizerRequest
@@ -188,6 +198,8 @@ type ClientAPI interface {
 	DescribeJobRequest(*iot.DescribeJobInput) iot.DescribeJobRequest
 
 	DescribeJobExecutionRequest(*iot.DescribeJobExecutionInput) iot.DescribeJobExecutionRequest
+
+	DescribeMitigationActionRequest(*iot.DescribeMitigationActionInput) iot.DescribeMitigationActionRequest
 
 	DescribeRoleAliasRequest(*iot.DescribeRoleAliasInput) iot.DescribeRoleAliasRequest
 
@@ -245,6 +257,10 @@ type ClientAPI interface {
 
 	ListAuditFindingsRequest(*iot.ListAuditFindingsInput) iot.ListAuditFindingsRequest
 
+	ListAuditMitigationActionsExecutionsRequest(*iot.ListAuditMitigationActionsExecutionsInput) iot.ListAuditMitigationActionsExecutionsRequest
+
+	ListAuditMitigationActionsTasksRequest(*iot.ListAuditMitigationActionsTasksInput) iot.ListAuditMitigationActionsTasksRequest
+
 	ListAuditTasksRequest(*iot.ListAuditTasksInput) iot.ListAuditTasksRequest
 
 	ListAuthorizersRequest(*iot.ListAuthorizersInput) iot.ListAuthorizersRequest
@@ -264,6 +280,8 @@ type ClientAPI interface {
 	ListJobExecutionsForThingRequest(*iot.ListJobExecutionsForThingInput) iot.ListJobExecutionsForThingRequest
 
 	ListJobsRequest(*iot.ListJobsInput) iot.ListJobsRequest
+
+	ListMitigationActionsRequest(*iot.ListMitigationActionsInput) iot.ListMitigationActionsRequest
 
 	ListOTAUpdatesRequest(*iot.ListOTAUpdatesInput) iot.ListOTAUpdatesRequest
 
@@ -345,6 +363,8 @@ type ClientAPI interface {
 
 	SetV2LoggingOptionsRequest(*iot.SetV2LoggingOptionsInput) iot.SetV2LoggingOptionsRequest
 
+	StartAuditMitigationActionsTaskRequest(*iot.StartAuditMitigationActionsTaskInput) iot.StartAuditMitigationActionsTaskRequest
+
 	StartOnDemandAuditTaskRequest(*iot.StartOnDemandAuditTaskInput) iot.StartOnDemandAuditTaskRequest
 
 	StartThingRegistrationTaskRequest(*iot.StartThingRegistrationTaskInput) iot.StartThingRegistrationTaskRequest
@@ -378,6 +398,8 @@ type ClientAPI interface {
 	UpdateIndexingConfigurationRequest(*iot.UpdateIndexingConfigurationInput) iot.UpdateIndexingConfigurationRequest
 
 	UpdateJobRequest(*iot.UpdateJobInput) iot.UpdateJobRequest
+
+	UpdateMitigationActionRequest(*iot.UpdateMitigationActionInput) iot.UpdateMitigationActionRequest
 
 	UpdateRoleAliasRequest(*iot.UpdateRoleAliasInput) iot.UpdateRoleAliasRequest
 

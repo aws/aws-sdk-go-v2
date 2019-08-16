@@ -22,9 +22,7 @@ type CreateSimulationApplicationInput struct {
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
 	// The rendering engine for the simulation application.
-	//
-	// RenderingEngine is a required field
-	RenderingEngine *RenderingEngine `locationName:"renderingEngine" type:"structure" required:"true"`
+	RenderingEngine *RenderingEngine `locationName:"renderingEngine" type:"structure"`
 
 	// The robot software suite of the simulation application.
 	//
@@ -60,10 +58,6 @@ func (s *CreateSimulationApplicationInput) Validate() error {
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.RenderingEngine == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RenderingEngine"))
 	}
 
 	if s.RobotSoftwareSuite == nil {

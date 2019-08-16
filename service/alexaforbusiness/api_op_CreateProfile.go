@@ -26,6 +26,9 @@ type CreateProfileInput struct {
 	// DistanceUnit is a required field
 	DistanceUnit DistanceUnit `type:"string" required:"true" enum:"true"`
 
+	// The locale of the room profile.
+	Locale *string `min:"1" type:"string"`
+
 	// The maximum volume limit for a room profile.
 	MaxVolumeLimit *int64 `type:"integer"`
 
@@ -76,6 +79,9 @@ func (s *CreateProfileInput) Validate() error {
 	}
 	if len(s.DistanceUnit) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("DistanceUnit"))
+	}
+	if s.Locale != nil && len(*s.Locale) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Locale", 1))
 	}
 
 	if s.ProfileName == nil {

@@ -97,7 +97,10 @@ const opArchiveFindings = "ArchiveFindings"
 // ArchiveFindingsRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Archives Amazon GuardDuty findings specified by the list of finding IDs.
+// Archives GuardDuty findings specified by the list of finding IDs.
+//
+// Only the master account can archive findings. Member accounts do not have
+// permission to archive findings from their accounts.
 //
 //    // Example sending a request using ArchiveFindingsRequest.
 //    req := client.ArchiveFindingsRequest(params)

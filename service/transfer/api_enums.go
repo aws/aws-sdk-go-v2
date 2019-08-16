@@ -23,7 +23,7 @@ func (enum EndpointType) MarshalValueBuf(b []byte) ([]byte, error) {
 // use for a server's users. For SERVICE_MANAGED authentication, the Secure
 // Shell (SSH) public keys are stored with a user on an SFTP server instance.
 // For API_GATEWAY authentication, your custom authentication method is implemented
-// by using an API call. A server can only have one method of authentication.
+// by using an API call. A server can have only one method of authentication.
 type IdentityProviderType string
 
 // Enum values for IdentityProviderType

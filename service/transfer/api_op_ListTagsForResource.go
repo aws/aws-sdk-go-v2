@@ -24,9 +24,9 @@ type ListTagsForResourceInput struct {
 	// request.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// When you request additional results from the ListTagsForResource call, a
-	// NextToken parameter is returned in the input. You can then pass in a subsequent
-	// command the NextToken parameter to continue listing additional tags.
+	// When you request additional results from the ListTagsForResource operation,
+	// a NextToken parameter is returned in the input. You can then pass in a subsequent
+	// command to the NextToken parameter to continue listing additional tags.
 	NextToken *string `min:"1" type:"string"`
 }
 
@@ -67,12 +67,11 @@ type ListTagsForResourceOutput struct {
 
 	// When you can get additional results from the ListTagsForResource call, a
 	// NextToken parameter is returned in the output. You can then pass in a subsequent
-	// command the NextToken parameter to continue listing additional tags.
+	// command to the NextToken parameter to continue listing additional tags.
 	NextToken *string `min:"1" type:"string"`
 
 	// Key-value pairs that are assigned to a resource, usually for the purpose
-	// of grouping and searching for items. Tags are metadata that you define that
-	// you can use for any purpose.
+	// of grouping and searching for items. Tags are metadata that you define.
 	Tags []Tag `min:"1" type:"list"`
 }
 

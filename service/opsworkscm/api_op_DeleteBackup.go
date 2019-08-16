@@ -52,7 +52,7 @@ func (s DeleteBackupOutput) String() string {
 const opDeleteBackup = "DeleteBackup"
 
 // DeleteBackupRequest returns a request value for making API operation for
-// AWS OpsWorks for Chef Automate.
+// AWS OpsWorks CM.
 //
 // Deletes a backup. You can delete both manual and automated backups. This
 // operation is asynchronous.

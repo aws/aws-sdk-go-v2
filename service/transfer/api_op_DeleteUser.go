@@ -67,7 +67,7 @@ const opDeleteUser = "DeleteUser"
 //
 // Deletes the user belonging to the server you specify.
 //
-// No response returns from this call.
+// No response returns from this operation.
 //
 // When you delete a user from a server, the user's information is lost.
 //

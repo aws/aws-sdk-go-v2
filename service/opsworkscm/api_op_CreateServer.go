@@ -212,7 +212,7 @@ func (s CreateServerOutput) String() string {
 const opCreateServer = "CreateServer"
 
 // CreateServerRequest returns a request value for making API operation for
-// AWS OpsWorks for Chef Automate.
+// AWS OpsWorks CM.
 //
 // Creates and immedately starts a new server. The server is ready to use when
 // it is in the HEALTHY state. By default, you can create a maximum of 10 servers.

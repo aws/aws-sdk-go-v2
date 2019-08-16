@@ -16,29 +16,16 @@ import (
 type ExecuteSqlInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the secret that enables access to the DB
-	// cluster.
-	//
 	// AwsSecretStoreArn is a required field
 	AwsSecretStoreArn *string `locationName:"awsSecretStoreArn" type:"string" required:"true"`
 
-	// The name of the database.
 	Database *string `locationName:"database" type:"string"`
 
-	// The ARN of the Aurora Serverless DB cluster.
-	//
 	// DbClusterOrInstanceArn is a required field
 	DbClusterOrInstanceArn *string `locationName:"dbClusterOrInstanceArn" type:"string" required:"true"`
 
-	// The name of the database schema.
 	Schema *string `locationName:"schema" type:"string"`
 
-	// One or more SQL statements to run on the DB cluster.
-	//
-	// You can separate SQL statements from each other with a semicolon (;). Any
-	// valid SQL statement is permitted, including data definition, data manipulation,
-	// and commit statements.
-	//
 	// SqlStatements is a required field
 	SqlStatements *string `locationName:"sqlStatements" type:"string" required:"true"`
 }
@@ -113,7 +100,6 @@ func (s ExecuteSqlInput) MarshalFields(e protocol.FieldEncoder) error {
 type ExecuteSqlOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The results of the SQL statement or statements.
 	SqlStatementResults []SqlStatementResult `locationName:"sqlStatementResults" type:"list"`
 }
 

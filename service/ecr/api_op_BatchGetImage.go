@@ -4,6 +4,7 @@ package ecr
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -59,6 +60,13 @@ func (s *BatchGetImageInput) Validate() error {
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
+	}
+	if s.ImageIds != nil {
+		for i, v := range s.ImageIds {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ImageIds", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

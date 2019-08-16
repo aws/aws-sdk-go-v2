@@ -13,8 +13,7 @@ import (
 type CreatePartitionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the catalog in which the partion is to be created. Currently, this
-	// should be the AWS account ID.
+	// The AWS account ID of the catalog in which the partition is to be created.
 	CatalogId *string `min:"1" type:"string"`
 
 	// The name of the metadata database in which the partition is to be created.

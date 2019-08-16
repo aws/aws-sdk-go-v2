@@ -14,13 +14,9 @@ import (
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// ARN of a resource.
-	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resourceArn" type:"string" required:"true"`
 
-	// Keys of a resource tag.
-	//
 	// TagKeys is a required field
 	TagKeys []string `location:"querystring" locationName:"tagKeys" type:"list" required:"true"`
 }

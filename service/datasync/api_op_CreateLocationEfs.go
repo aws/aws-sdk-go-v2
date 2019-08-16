@@ -32,9 +32,8 @@ type CreateLocationEfsInput struct {
 	//    rule that enables outbound connections to the NFS port on one of the file
 	//    system’s mount targets. You can enable outbound connections either by
 	//    IP address (CIDR range) or security group. For information about security
-	//    groups and mount targets, see "https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access"
-	//    (Security Groups for Amazon EC2 Instances and Mount Targets) in the Amazon
-	//    EFS User Guide.
+	//    groups and mount targets, see Security Groups for Amazon EC2 Instances
+	//    and Mount Targets in the Amazon EFS User Guide.
 	//
 	// Ec2Config is a required field
 	Ec2Config *Ec2Config `type:"structure" required:"true"`

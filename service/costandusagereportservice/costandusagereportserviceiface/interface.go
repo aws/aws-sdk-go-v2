@@ -65,6 +65,8 @@ type ClientAPI interface {
 
 	DescribeReportDefinitionsRequest(*costandusagereportservice.DescribeReportDefinitionsInput) costandusagereportservice.DescribeReportDefinitionsRequest
 
+	ModifyReportDefinitionRequest(*costandusagereportservice.ModifyReportDefinitionInput) costandusagereportservice.ModifyReportDefinitionRequest
+
 	PutReportDefinitionRequest(*costandusagereportservice.PutReportDefinitionInput) costandusagereportservice.PutReportDefinitionRequest
 }
 

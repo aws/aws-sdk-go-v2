@@ -78,32 +78,18 @@ func (s *Ec2Config) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/EndpointOptions
-type EndpointOptions struct {
-	_ struct{} `type:"structure"`
-
-	Fips *bool `type:"boolean"`
-
-	PrivateLink *bool `type:"boolean"`
-}
-
-// String returns the string representation
-func (s EndpointOptions) String() string {
-	return awsutil.Prettify(s)
-}
-
-// A pattern that determines which files to include in the transfer or which
-// files to exclude.
+// Specifies which files, folders and objects to include or exclude when transferring
+// files from source to destination.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/FilterRule
 type FilterRule struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the type of filter rule pattern to apply. DataSync only supports
-	// the SIMPLE_PATTERN rule type.
+	// The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN
+	// rule type.
 	FilterType FilterType `type:"string" enum:"true"`
 
-	// A pattern that defines the filter. The filter might include or exclude files
-	// is a transfer.
+	// A single filter string that consists of the patterns to include or exclude.
+	// The patterns are delimited by "|" (that is, a pipe), for example: /folder1|/folder2
 	Value *string `type:"string"`
 }
 
@@ -333,15 +319,31 @@ func (s *Options) Validate() error {
 	return nil
 }
 
+// The VPC endpoint, subnet and security group that an agent uses to access
+// IP addresses in a VPC (Virtual Private Cloud).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/PrivateLinkConfig
 type PrivateLinkConfig struct {
 	_ struct{} `type:"structure"`
 
-	PrivateLinkEndpoint *string `type:"string"`
+	// The private endpoint that is configured for an agent that has access to IP
+	// addresses in a PrivateLink (https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html).
+	// An agent that is configured with this endpoint will not be accessible over
+	// the public Internet.
+	PrivateLinkEndpoint *string `min:"7" type:"string"`
 
+	// The Amazon Resource Names (ARNs) of the security groups that are configured
+	// for the EC2 resource that hosts an agent activated in a VPC or an agent that
+	// has access to a VPC endpoint.
 	SecurityGroupArns []string `min:"1" type:"list"`
 
+	// The Amazon Resource Names (ARNs) of the subnets that are configured for an
+	// agent activated in a VPC or an agent that has access to a VPC endpoint.
 	SubnetArns []string `min:"1" type:"list"`
+
+	// The ID of the VPC endpoint that is configured for an agent. An agent that
+	// is configured with a VPC endpoint will not be accessible over the public
+	// Internet.
+	VpcEndpointId *string `type:"string"`
 }
 
 // String returns the string representation
@@ -352,8 +354,8 @@ func (s PrivateLinkConfig) String() string {
 // The Amazon Resource Name (ARN) of the AWS Identity and Access Management
 // (IAM) role that is used to access an Amazon S3 bucket.
 //
-// For detailed information about using such a role, see "https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location"
-// (Creating a Location for Amazon S3) in the AWS DataSync User Guide.
+// For detailed information about using such a role, see Creating a Location
+// for Amazon S3 in the AWS DataSync User Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/S3Config
 type S3Config struct {
 	_ struct{} `type:"structure"`

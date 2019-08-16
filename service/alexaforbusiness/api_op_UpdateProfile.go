@@ -23,6 +23,9 @@ type UpdateProfileInput struct {
 	// done to the default status.
 	IsDefault *bool `type:"boolean"`
 
+	// The updated locale for the room profile.
+	Locale *string `min:"1" type:"string"`
+
 	// The updated maximum volume limit for the room profile.
 	MaxVolumeLimit *int64 `type:"integer"`
 
@@ -58,6 +61,9 @@ func (s *UpdateProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateProfileInput"}
 	if s.Address != nil && len(*s.Address) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Address", 1))
+	}
+	if s.Locale != nil && len(*s.Locale) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Locale", 1))
 	}
 	if s.ProfileName != nil && len(*s.ProfileName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProfileName", 1))

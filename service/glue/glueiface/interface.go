@@ -85,6 +85,8 @@ type ClientAPI interface {
 
 	BatchStopJobRunRequest(*glue.BatchStopJobRunInput) glue.BatchStopJobRunRequest
 
+	CancelMLTaskRunRequest(*glue.CancelMLTaskRunInput) glue.CancelMLTaskRunRequest
+
 	CreateClassifierRequest(*glue.CreateClassifierInput) glue.CreateClassifierRequest
 
 	CreateConnectionRequest(*glue.CreateConnectionInput) glue.CreateConnectionRequest
@@ -96,6 +98,8 @@ type ClientAPI interface {
 	CreateDevEndpointRequest(*glue.CreateDevEndpointInput) glue.CreateDevEndpointRequest
 
 	CreateJobRequest(*glue.CreateJobInput) glue.CreateJobRequest
+
+	CreateMLTransformRequest(*glue.CreateMLTransformInput) glue.CreateMLTransformRequest
 
 	CreatePartitionRequest(*glue.CreatePartitionInput) glue.CreatePartitionRequest
 
@@ -122,6 +126,8 @@ type ClientAPI interface {
 	DeleteDevEndpointRequest(*glue.DeleteDevEndpointInput) glue.DeleteDevEndpointRequest
 
 	DeleteJobRequest(*glue.DeleteJobInput) glue.DeleteJobRequest
+
+	DeleteMLTransformRequest(*glue.DeleteMLTransformInput) glue.DeleteMLTransformRequest
 
 	DeletePartitionRequest(*glue.DeletePartitionInput) glue.DeletePartitionRequest
 
@@ -169,11 +175,21 @@ type ClientAPI interface {
 
 	GetJobRequest(*glue.GetJobInput) glue.GetJobRequest
 
+	GetJobBookmarkRequest(*glue.GetJobBookmarkInput) glue.GetJobBookmarkRequest
+
 	GetJobRunRequest(*glue.GetJobRunInput) glue.GetJobRunRequest
 
 	GetJobRunsRequest(*glue.GetJobRunsInput) glue.GetJobRunsRequest
 
 	GetJobsRequest(*glue.GetJobsInput) glue.GetJobsRequest
+
+	GetMLTaskRunRequest(*glue.GetMLTaskRunInput) glue.GetMLTaskRunRequest
+
+	GetMLTaskRunsRequest(*glue.GetMLTaskRunsInput) glue.GetMLTaskRunsRequest
+
+	GetMLTransformRequest(*glue.GetMLTransformInput) glue.GetMLTransformRequest
+
+	GetMLTransformsRequest(*glue.GetMLTransformsInput) glue.GetMLTransformsRequest
 
 	GetMappingRequest(*glue.GetMappingInput) glue.GetMappingRequest
 
@@ -235,11 +251,21 @@ type ClientAPI interface {
 
 	ResetJobBookmarkRequest(*glue.ResetJobBookmarkInput) glue.ResetJobBookmarkRequest
 
+	SearchTablesRequest(*glue.SearchTablesInput) glue.SearchTablesRequest
+
 	StartCrawlerRequest(*glue.StartCrawlerInput) glue.StartCrawlerRequest
 
 	StartCrawlerScheduleRequest(*glue.StartCrawlerScheduleInput) glue.StartCrawlerScheduleRequest
 
+	StartExportLabelsTaskRunRequest(*glue.StartExportLabelsTaskRunInput) glue.StartExportLabelsTaskRunRequest
+
+	StartImportLabelsTaskRunRequest(*glue.StartImportLabelsTaskRunInput) glue.StartImportLabelsTaskRunRequest
+
 	StartJobRunRequest(*glue.StartJobRunInput) glue.StartJobRunRequest
+
+	StartMLEvaluationTaskRunRequest(*glue.StartMLEvaluationTaskRunInput) glue.StartMLEvaluationTaskRunRequest
+
+	StartMLLabelingSetGenerationTaskRunRequest(*glue.StartMLLabelingSetGenerationTaskRunInput) glue.StartMLLabelingSetGenerationTaskRunRequest
 
 	StartTriggerRequest(*glue.StartTriggerInput) glue.StartTriggerRequest
 
@@ -268,6 +294,8 @@ type ClientAPI interface {
 	UpdateDevEndpointRequest(*glue.UpdateDevEndpointInput) glue.UpdateDevEndpointRequest
 
 	UpdateJobRequest(*glue.UpdateJobInput) glue.UpdateJobRequest
+
+	UpdateMLTransformRequest(*glue.UpdateMLTransformInput) glue.UpdateMLTransformRequest
 
 	UpdatePartitionRequest(*glue.UpdatePartitionInput) glue.UpdatePartitionRequest
 

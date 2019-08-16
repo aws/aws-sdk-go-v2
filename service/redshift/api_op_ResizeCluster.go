@@ -26,7 +26,8 @@ type ResizeClusterInput struct {
 	// The new cluster type for the specified cluster.
 	ClusterType *string `type:"string"`
 
-	// The new node type for the nodes you are adding.
+	// The new node type for the nodes you are adding. If not specified, the cluster's
+	// current node type is used.
 	NodeType *string `type:"string"`
 
 	// The new number of nodes for the cluster.

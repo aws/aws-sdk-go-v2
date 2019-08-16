@@ -15,12 +15,9 @@ import (
 type CreateDataflowEndpointGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// Endpoint details of each endpoint in the dataflow endpoint group.
-	//
 	// EndpointDetails is a required field
 	EndpointDetails []EndpointDetails `locationName:"endpointDetails" type:"list" required:"true"`
 
-	// Tags of a dataflow endpoint group.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
@@ -85,7 +82,6 @@ func (s CreateDataflowEndpointGroupInput) MarshalFields(e protocol.FieldEncoder)
 type CreateDataflowEndpointGroupOutput struct {
 	_ struct{} `type:"structure"`
 
-	// ID of a dataflow endpoint group.
 	DataflowEndpointGroupId *string `locationName:"dataflowEndpointGroupId" type:"string"`
 }
 

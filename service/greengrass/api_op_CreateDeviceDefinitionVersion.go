@@ -4,6 +4,7 @@ package greengrass
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -33,6 +34,13 @@ func (s *CreateDeviceDefinitionVersionInput) Validate() error {
 
 	if s.DeviceDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceDefinitionId"))
+	}
+	if s.Devices != nil {
+		for i, v := range s.Devices {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Devices", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

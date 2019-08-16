@@ -59,7 +59,7 @@ type DescribeComponentConfigurationOutput struct {
 	Monitor *bool `type:"boolean"`
 
 	// The tier of the application component. Supported tiers include DOT_NET_WORKER,
-	// DOT_NET_WEB_TIER, SQL_SERVER, and DEFAULT
+	// DOT_NET_WEB, SQL_SERVER, and DEFAULT
 	Tier *string `type:"string"`
 }
 

@@ -13,13 +13,13 @@ import (
 type TestIdentityProviderInput struct {
 	_ struct{} `type:"structure"`
 
-	// A system assigned identifier for a specific server. That server's user authentication
+	// A system-assigned identifier for a specific server. That server's user authentication
 	// method is tested with a user name and password.
 	//
 	// ServerId is a required field
 	ServerId *string `type:"string" required:"true"`
 
-	// This request parameter is name of the user account to be tested.
+	// This request parameter is the name of the user account to be tested.
 	//
 	// UserName is a required field
 	UserName *string `type:"string" required:"true"`
@@ -55,8 +55,11 @@ func (s *TestIdentityProviderInput) Validate() error {
 type TestIdentityProviderOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The result of the authorization test as a message.
+	// A message that indicates whether the test was successful or not.
 	Message *string `type:"string"`
+
+	// The response that is returned from your API Gateway.
+	Response *string `type:"string"`
 
 	// The HTTP status code that is the response from your API Gateway.
 	//
@@ -81,7 +84,7 @@ const opTestIdentityProvider = "TestIdentityProvider"
 //
 // If the IdentityProviderType of the server is API_Gateway, tests whether your
 // API Gateway is set up successfully. We highly recommend that you call this
-// method to test your authentication method as soon as you create your server.
+// operation to test your authentication method as soon as you create your server.
 // By doing so, you can troubleshoot issues with the API Gateway integration
 // to ensure that your users can successfully use the service.
 //

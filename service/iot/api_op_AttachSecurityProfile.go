@@ -88,8 +88,8 @@ const opAttachSecurityProfile = "AttachSecurityProfile"
 // AttachSecurityProfileRequest returns a request value for making API operation for
 // AWS IoT.
 //
-// Associates a Device Defender security profile with a thing group or with
-// this account. Each thing group or account can have up to five security profiles
+// Associates a Device Defender security profile with a thing group or this
+// account. Each thing group or account can have up to five security profiles
 // associated with it.
 //
 //    // Example sending a request using AttachSecurityProfileRequest.

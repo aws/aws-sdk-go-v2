@@ -39,6 +39,10 @@ type CreateQueueInput struct {
 	// queues and not applicable to on-demand queues.
 	ReservationPlanSettings *ReservationPlanSettings `locationName:"reservationPlanSettings" type:"structure"`
 
+	// Initial state of the queue. If you create a paused queue, then jobs in that
+	// queue won't begin.
+	Status QueueStatus `locationName:"status" type:"string" enum:"true"`
+
 	// The tags that you want to add to the resource. You can tag resources with
 	// a key-value pair or with only a key.
 	Tags map[string]string `locationName:"tags" type:"map"`
@@ -95,6 +99,12 @@ func (s CreateQueueInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "reservationPlanSettings", v, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Tags != nil {
 		v := s.Tags

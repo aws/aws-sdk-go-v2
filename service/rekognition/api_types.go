@@ -231,14 +231,14 @@ func (s ComparedSourceImageFace) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Information about a moderation label detection in a stored video.
+// Information about an unsafe content label detection in a stored video.
 type ContentModerationDetection struct {
 	_ struct{} `type:"structure"`
 
-	// The moderation label detected by in the stored video.
+	// The unsafe content label detected by in the stored video.
 	ModerationLabel *ModerationLabel `type:"structure"`
 
-	// Time, in milliseconds from the beginning of the video, that the moderation
+	// Time, in milliseconds from the beginning of the video, that the unsafe content
 	// label was detected.
 	Timestamp *int64 `type:"long"`
 }
@@ -248,8 +248,11 @@ func (s ContentModerationDetection) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The emotions detected on the face, and the confidence level in the determination.
-// For example, HAPPY, SAD, and ANGRY.
+// The emotions that appear to be expressed on the face, and the confidence
+// level in the determination. The API is only making a determination of the
+// physical appearance of a person's face. It is not a determination of the
+// person’s internal emotional state and should not be used in such a way.
+// For example, a person pretending to have a sad face might not be sad emotionally.
 type Emotion struct {
 	_ struct{} `type:"structure"`
 
@@ -367,8 +370,11 @@ type FaceDetail struct {
 	// object such as a tree). Default attribute.
 	Confidence *float64 `type:"float"`
 
-	// The emotions detected on the face, and the confidence level in the determination.
-	// For example, HAPPY, SAD, and ANGRY.
+	// The emotions that appear to be expressed on the face, and the confidence
+	// level in the determination. The API is only making a determination of the
+	// physical appearance of a person's face. It is not a determination of the
+	// person’s internal emotional state and should not be used in such a way.
+	// For example, a person pretending to have a sad face might not be sad emotionally.
 	Emotions []Emotion `type:"list"`
 
 	// Indicates whether or not the face is wearing eye glasses, and the confidence
@@ -725,8 +731,8 @@ func (s Landmark) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Provides information about a single type of moderated content found in an
-// image or video. Each type of moderated content has a label within a hierarchical
+// Provides information about a single type of unsafe content found in an image
+// or video. Each type of moderated content has a label within a hierarchical
 // taxonomy. For more information, see Detecting Unsafe Content in the Amazon
 // Rekognition Developer Guide.
 type ModerationLabel struct {
@@ -740,7 +746,7 @@ type ModerationLabel struct {
 	// to 50 percent.
 	Confidence *float64 `type:"float"`
 
-	// The label name for the type of content detected in the image.
+	// The label name for the type of unsafe content detected in the image.
 	Name *string `type:"string"`
 
 	// The name for the parent label. Labels at the top level of the hierarchy have

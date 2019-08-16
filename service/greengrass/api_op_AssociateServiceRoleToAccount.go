@@ -15,12 +15,28 @@ type AssociateServiceRoleToAccountInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ARN of the service role you wish to associate with your account.
-	RoleArn *string `type:"string"`
+	//
+	// RoleArn is a required field
+	RoleArn *string `type:"string" required:"true"`
 }
 
 // String returns the string representation
 func (s AssociateServiceRoleToAccountInput) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AssociateServiceRoleToAccountInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateServiceRoleToAccountInput"}
+
+	if s.RoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.

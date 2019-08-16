@@ -13,8 +13,8 @@ import (
 type GetDataCatalogEncryptionSettingsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the Data Catalog for which to retrieve the security configuration.
-	// If none is provided, the AWS account ID is used by default.
+	// The ID of the Data Catalog to retrieve the security configuration for. If
+	// none is provided, the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 }
 
