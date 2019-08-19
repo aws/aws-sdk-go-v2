@@ -58,7 +58,7 @@ func (s *SyncDeploymentJobInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SyncDeploymentJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	var ClientRequestToken string
 	if s.ClientRequestToken != nil {
@@ -89,7 +89,7 @@ type SyncDeploymentJobOutput struct {
 	Arn *string `locationName:"arn" min:"1" type:"string"`
 
 	// The time, in milliseconds since the epoch, when the fleet was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// Information about the deployment application configurations.
 	DeploymentApplicationConfigs []DeploymentApplicationConfig `locationName:"deploymentApplicationConfigs" min:"1" type:"list"`
@@ -185,7 +185,8 @@ func (s SyncDeploymentJobOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DeploymentApplicationConfigs != nil {
 		v := s.DeploymentApplicationConfigs

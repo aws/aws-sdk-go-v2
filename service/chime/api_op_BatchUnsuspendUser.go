@@ -50,6 +50,7 @@ func (s *BatchUnsuspendUserInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchUnsuspendUserInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.UserIdList != nil {
 		v := s.UserIdList

@@ -49,7 +49,7 @@ type GetPipelineStateOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time the pipeline was created, in timestamp format.
-	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"unix"`
+	Created *time.Time `locationName:"created" type:"timestamp"`
 
 	// The name of the pipeline for which you want to get the state.
 	PipelineName *string `locationName:"pipelineName" min:"1" type:"string"`
@@ -64,7 +64,7 @@ type GetPipelineStateOutput struct {
 	StageStates []StageState `locationName:"stageStates" type:"list"`
 
 	// The date and time the pipeline was last updated, in timestamp format.
-	Updated *time.Time `locationName:"updated" type:"timestamp" timestampFormat:"unix"`
+	Updated *time.Time `locationName:"updated" type:"timestamp"`
 }
 
 // String returns the string representation

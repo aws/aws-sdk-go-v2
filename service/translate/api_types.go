@@ -166,7 +166,7 @@ type TerminologyProperties struct {
 	Arn *string `type:"string"`
 
 	// The time at which the custom terminology was created, based on the timestamp.
-	CreatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `type:"timestamp"`
 
 	// The description of the custom terminology properties.
 	Description *string `type:"string"`
@@ -175,7 +175,7 @@ type TerminologyProperties struct {
 	EncryptionKey *EncryptionKey `type:"structure"`
 
 	// The time at which the custom terminology was last update, based on the timestamp.
-	LastUpdatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `type:"timestamp"`
 
 	// The name of the custom terminology.
 	Name *string `min:"1" type:"string"`

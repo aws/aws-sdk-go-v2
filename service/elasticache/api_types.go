@@ -52,7 +52,7 @@ type CacheCluster struct {
 	AutoMinorVersionUpgrade *bool `type:"boolean"`
 
 	// The date and time when the cluster was created.
-	CacheClusterCreateTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	CacheClusterCreateTime *time.Time `type:"timestamp"`
 
 	// The user-supplied identifier of the cluster. This identifier is a unique
 	// key that identifies a cluster.
@@ -283,7 +283,7 @@ type CacheNode struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time when the cache node was created.
-	CacheNodeCreateTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	CacheNodeCreateTime *time.Time `type:"timestamp"`
 
 	// The cache node identifier. A node ID is a numeric identifier (0001, 0002,
 	// etc.). The combination of cluster ID and node ID uniquely identifies every
@@ -634,7 +634,7 @@ type Event struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time when the event occurred.
-	Date *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	Date *time.Time `type:"timestamp"`
 
 	// The text of the event.
 	Message *string `type:"string"`
@@ -779,26 +779,26 @@ type NodeGroupMemberUpdateStatus struct {
 	CacheNodeId *string `type:"string"`
 
 	// The deletion date of the node
-	NodeDeletionDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	NodeDeletionDate *time.Time `type:"timestamp"`
 
 	// The end date of the update for a node
-	NodeUpdateEndDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	NodeUpdateEndDate *time.Time `type:"timestamp"`
 
 	// Reflects whether the update was initiated by the customer or automatically
 	// applied
 	NodeUpdateInitiatedBy NodeUpdateInitiatedBy `type:"string" enum:"true"`
 
 	// The date when the update is triggered
-	NodeUpdateInitiatedDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	NodeUpdateInitiatedDate *time.Time `type:"timestamp"`
 
 	// The start date of the update for a node
-	NodeUpdateStartDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	NodeUpdateStartDate *time.Time `type:"timestamp"`
 
 	// The update status of the node
 	NodeUpdateStatus NodeUpdateStatus `type:"string" enum:"true"`
 
 	// The date when the NodeUpdateStatus was last modified
-	NodeUpdateStatusModifiedDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	NodeUpdateStatusModifiedDate *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -832,7 +832,7 @@ type NodeSnapshot struct {
 	CacheClusterId *string `type:"string"`
 
 	// The date and time when the cache node was created in the source cluster.
-	CacheNodeCreateTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	CacheNodeCreateTime *time.Time `type:"timestamp"`
 
 	// The cache node identifier for the node in the source cluster.
 	CacheNodeId *string `type:"string"`
@@ -848,7 +848,7 @@ type NodeSnapshot struct {
 
 	// The date and time when the source node's metadata and cache data set was
 	// obtained for the snapshot.
-	SnapshotCreateTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	SnapshotCreateTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -1221,7 +1221,7 @@ type ReservedCacheNode struct {
 	ReservedCacheNodesOfferingId *string `type:"string"`
 
 	// The time the reservation started.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	StartTime *time.Time `type:"timestamp"`
 
 	// The state of the reserved cache node.
 	State *string `type:"string"`
@@ -1392,7 +1392,7 @@ type ServiceUpdate struct {
 	ServiceUpdateDescription *string `type:"string"`
 
 	// The date after which the service update is no longer available
-	ServiceUpdateEndDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	ServiceUpdateEndDate *time.Time `type:"timestamp"`
 
 	// The unique ID of the service update
 	ServiceUpdateName *string `type:"string"`
@@ -1400,10 +1400,10 @@ type ServiceUpdate struct {
 	// The recommendend date to apply the service update in order to ensure compliance.
 	// For information on compliance, see Self-Service Security Updates for Compliance
 	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/elasticache-compliance.html#elasticache-compliance-self-service).
-	ServiceUpdateRecommendedApplyByDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	ServiceUpdateRecommendedApplyByDate *time.Time `type:"timestamp"`
 
 	// The date when the service update is initially available
-	ServiceUpdateReleaseDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	ServiceUpdateReleaseDate *time.Time `type:"timestamp"`
 
 	// The severity of the service update
 	ServiceUpdateSeverity ServiceUpdateSeverity `type:"string" enum:"true"`
@@ -1457,7 +1457,7 @@ type Snapshot struct {
 	AutomaticFailover AutomaticFailoverStatus `type:"string" enum:"true"`
 
 	// The date and time when the source cluster was created.
-	CacheClusterCreateTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	CacheClusterCreateTime *time.Time `type:"timestamp"`
 
 	// The user-supplied identifier of the source cluster.
 	CacheClusterId *string `type:"string"`
@@ -1648,10 +1648,10 @@ type TimeRangeFilter struct {
 	_ struct{} `type:"structure"`
 
 	// The end time of the time range filter
-	EndTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// The start time of the time range filter
-	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	StartTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -1706,10 +1706,10 @@ type UpdateAction struct {
 	// The recommended date to apply the service update to ensure compliance. For
 	// information on compliance, see Self-Service Security Updates for Compliance
 	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/elasticache-compliance.html#elasticache-compliance-self-service).
-	ServiceUpdateRecommendedApplyByDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	ServiceUpdateRecommendedApplyByDate *time.Time `type:"timestamp"`
 
 	// The date the update is first available
-	ServiceUpdateReleaseDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	ServiceUpdateReleaseDate *time.Time `type:"timestamp"`
 
 	// The severity of the service update
 	ServiceUpdateSeverity ServiceUpdateSeverity `type:"string" enum:"true"`
@@ -1727,13 +1727,13 @@ type UpdateAction struct {
 	SlaMet SlaMet `type:"string" enum:"true"`
 
 	// The date that the service update is available to a replication group
-	UpdateActionAvailableDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	UpdateActionAvailableDate *time.Time `type:"timestamp"`
 
 	// The status of the update action
 	UpdateActionStatus UpdateActionStatus `type:"string" enum:"true"`
 
 	// The date when the UpdateActionStatus was last modified
-	UpdateActionStatusModifiedDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	UpdateActionStatusModifiedDate *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

@@ -53,7 +53,7 @@ type GetEvaluationOutput struct {
 
 	// The time that the Evaluation was created. The time is expressed in epoch
 	// time.
-	CreatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `type:"timestamp"`
 
 	// The AWS user account that invoked the evaluation. The account type can be
 	// either an AWS root account or an AWS Identity and Access Management (IAM)
@@ -69,7 +69,7 @@ type GetEvaluationOutput struct {
 	// The epoch time when Amazon Machine Learning marked the Evaluation as COMPLETED
 	// or FAILED. FinishedAt is only available when the Evaluation is in the COMPLETED
 	// or FAILED state.
-	FinishedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	FinishedAt *time.Time `type:"timestamp"`
 
 	// The location of the data file or directory in Amazon Simple Storage Service
 	// (Amazon S3).
@@ -77,7 +77,7 @@ type GetEvaluationOutput struct {
 
 	// The time of the most recent edit to the Evaluation. The time is expressed
 	// in epoch time.
-	LastUpdatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `type:"timestamp"`
 
 	// A link to the file that contains logs of the CreateEvaluation operation.
 	LogUri *string `type:"string"`
@@ -111,7 +111,7 @@ type GetEvaluationOutput struct {
 
 	// The epoch time when Amazon Machine Learning marked the Evaluation as INPROGRESS.
 	// StartedAt isn't available if the Evaluation is in the PENDING state.
-	StartedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartedAt *time.Time `type:"timestamp"`
 
 	// The status of the evaluation. This element can have one of the following
 	// values:

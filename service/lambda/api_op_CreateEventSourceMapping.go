@@ -62,7 +62,7 @@ type CreateEventSourceMappingInput struct {
 	StartingPosition EventSourcePosition `type:"string" enum:"true"`
 
 	// With StartingPosition set to AT_TIMESTAMP, the time from which to start reading.
-	StartingPositionTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartingPositionTimestamp *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -96,6 +96,7 @@ func (s *CreateEventSourceMappingInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateEventSourceMappingInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.BatchSize != nil {
 		v := *s.BatchSize
@@ -131,7 +132,8 @@ func (s CreateEventSourceMappingInput) MarshalFields(e protocol.FieldEncoder) er
 		v := *s.StartingPositionTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartingPositionTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "StartingPositionTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -152,7 +154,7 @@ type CreateEventSourceMappingOutput struct {
 	FunctionArn *string `type:"string"`
 
 	// The date that the event source mapping was last updated.
-	LastModified *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModified *time.Time `type:"timestamp"`
 
 	// The result of the last AWS Lambda invocation of your Lambda function.
 	LastProcessingResult *string `type:"string"`
@@ -197,7 +199,8 @@ func (s CreateEventSourceMappingOutput) MarshalFields(e protocol.FieldEncoder) e
 		v := *s.LastModified
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastModified", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastModified",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.LastProcessingResult != nil {
 		v := *s.LastProcessingResult

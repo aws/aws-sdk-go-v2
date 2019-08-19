@@ -85,7 +85,7 @@ type CreateVocabularyOutput struct {
 	LanguageCode LanguageCode `type:"string" enum:"true"`
 
 	// The date and time that the vocabulary was created.
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTime *time.Time `type:"timestamp"`
 
 	// The name of the vocabulary.
 	VocabularyName *string `min:"1" type:"string"`

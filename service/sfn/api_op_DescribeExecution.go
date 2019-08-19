@@ -80,7 +80,7 @@ type DescribeExecutionOutput struct {
 	// The date the execution is started.
 	//
 	// StartDate is a required field
-	StartDate *time.Time `locationName:"startDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartDate *time.Time `locationName:"startDate" type:"timestamp" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the executed stated machine.
 	//
@@ -93,7 +93,7 @@ type DescribeExecutionOutput struct {
 	Status ExecutionStatus `locationName:"status" type:"string" required:"true" enum:"true"`
 
 	// If the execution has already ended, the date the execution stopped.
-	StopDate *time.Time `locationName:"stopDate" type:"timestamp" timestampFormat:"unix"`
+	StopDate *time.Time `locationName:"stopDate" type:"timestamp"`
 }
 
 // String returns the string representation

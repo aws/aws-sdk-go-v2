@@ -64,7 +64,7 @@ type LexiconAttributes struct {
 	LanguageCode LanguageCode `type:"string" enum:"true"`
 
 	// Date lexicon was last modified (a timestamp value).
-	LastModified *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModified *time.Time `type:"timestamp"`
 
 	// Number of lexemes in the lexicon.
 	LexemesCount *int64 `type:"integer"`
@@ -99,7 +99,8 @@ func (s LexiconAttributes) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastModified
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastModified", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastModified",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.LexemesCount != nil {
 		v := *s.LexemesCount
@@ -162,7 +163,7 @@ type SynthesisTask struct {
 	_ struct{} `type:"structure"`
 
 	// Timestamp for the time the synthesis task was started.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// Optional language code for a synthesis task. This is only necessary if using
 	// a bilingual voice, such as Aditi, which can be used for either Indian English
@@ -234,7 +235,8 @@ func (s SynthesisTask) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if len(s.LanguageCode) > 0 {
 		v := s.LanguageCode

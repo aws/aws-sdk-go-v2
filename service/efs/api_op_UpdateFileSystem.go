@@ -58,6 +58,7 @@ func (s *UpdateFileSystemInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateFileSystemInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.ProvisionedThroughputInMibps != nil {
 		v := *s.ProvisionedThroughputInMibps
@@ -88,7 +89,7 @@ type UpdateFileSystemOutput struct {
 	// The time that the file system was created, in seconds (since 1970-01-01T00:00:00Z).
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// The opaque string specified in the request.
 	//
@@ -180,7 +181,8 @@ func (s UpdateFileSystemOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CreationToken != nil {
 		v := *s.CreationToken

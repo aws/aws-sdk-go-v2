@@ -15,10 +15,10 @@ type ListAlgorithmsInput struct {
 	_ struct{} `type:"structure"`
 
 	// A filter that returns only algorithms created after the specified time (timestamp).
-	CreationTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTimeAfter *time.Time `type:"timestamp"`
 
 	// A filter that returns only algorithms created before the specified time (timestamp).
-	CreationTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTimeBefore *time.Time `type:"timestamp"`
 
 	// The maximum number of algorithms to return in the response.
 	MaxResults *int64 `min:"1" type:"integer"`

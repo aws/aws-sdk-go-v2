@@ -50,6 +50,7 @@ func (s *PutSchemaFromJsonInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PutSchemaFromJsonInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.Document != nil {
 		v := *s.Document

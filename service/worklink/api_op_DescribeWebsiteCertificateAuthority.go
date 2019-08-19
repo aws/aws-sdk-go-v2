@@ -57,7 +57,7 @@ func (s *DescribeWebsiteCertificateAuthorityInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeWebsiteCertificateAuthorityInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.FleetArn != nil {
 		v := *s.FleetArn
@@ -82,7 +82,7 @@ type DescribeWebsiteCertificateAuthorityOutput struct {
 	Certificate *string `min:"1" type:"string"`
 
 	// The time that the certificate authority was added.
-	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTime *time.Time `type:"timestamp"`
 
 	// The certificate name to display.
 	DisplayName *string `type:"string"`
@@ -105,7 +105,8 @@ func (s DescribeWebsiteCertificateAuthorityOutput) MarshalFields(e protocol.Fiel
 		v := *s.CreatedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DisplayName != nil {
 		v := *s.DisplayName

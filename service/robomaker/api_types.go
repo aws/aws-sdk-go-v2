@@ -154,7 +154,7 @@ type DeploymentJob struct {
 	Arn *string `locationName:"arn" min:"1" type:"string"`
 
 	// The time, in milliseconds since the epoch, when the deployment job was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The deployment application configuration.
 	DeploymentApplicationConfigs []DeploymentApplicationConfig `locationName:"deploymentApplicationConfigs" min:"1" type:"list"`
@@ -192,7 +192,8 @@ func (s DeploymentJob) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DeploymentApplicationConfigs != nil {
 		v := s.DeploymentApplicationConfigs
@@ -408,7 +409,7 @@ type Fleet struct {
 	Arn *string `locationName:"arn" min:"1" type:"string"`
 
 	// The time, in milliseconds since the epoch, when the fleet was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the last deployment job.
 	LastDeploymentJob *string `locationName:"lastDeploymentJob" min:"1" type:"string"`
@@ -417,7 +418,7 @@ type Fleet struct {
 	LastDeploymentStatus DeploymentStatus `locationName:"lastDeploymentStatus" type:"string" enum:"true"`
 
 	// The time of the last deployment.
-	LastDeploymentTime *time.Time `locationName:"lastDeploymentTime" type:"timestamp" timestampFormat:"unix"`
+	LastDeploymentTime *time.Time `locationName:"lastDeploymentTime" type:"timestamp"`
 
 	// The name of the fleet.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -440,7 +441,8 @@ func (s Fleet) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.LastDeploymentJob != nil {
 		v := *s.LastDeploymentJob
@@ -458,7 +460,8 @@ func (s Fleet) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastDeploymentTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastDeploymentTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastDeploymentTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -721,7 +724,7 @@ type Robot struct {
 	Arn *string `locationName:"arn" min:"1" type:"string"`
 
 	// The time, in milliseconds since the epoch, when the robot was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the fleet.
 	FleetArn *string `locationName:"fleetArn" min:"1" type:"string"`
@@ -733,7 +736,7 @@ type Robot struct {
 	LastDeploymentJob *string `locationName:"lastDeploymentJob" min:"1" type:"string"`
 
 	// The time of the last deployment.
-	LastDeploymentTime *time.Time `locationName:"lastDeploymentTime" type:"timestamp" timestampFormat:"unix"`
+	LastDeploymentTime *time.Time `locationName:"lastDeploymentTime" type:"timestamp"`
 
 	// The name of the robot.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -765,7 +768,8 @@ func (s Robot) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.FleetArn != nil {
 		v := *s.FleetArn
@@ -789,7 +793,8 @@ func (s Robot) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastDeploymentTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastDeploymentTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastDeploymentTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -892,7 +897,7 @@ type RobotApplicationSummary struct {
 
 	// The time, in milliseconds since the epoch, when the robot application was
 	// last updated.
-	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
 
 	// The name of the robot application.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -921,7 +926,8 @@ func (s RobotApplicationSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastUpdatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -953,10 +959,10 @@ type RobotDeployment struct {
 	Arn *string `locationName:"arn" min:"1" type:"string"`
 
 	// The time, in milliseconds since the epoch, when the deployment finished.
-	DeploymentFinishTime *time.Time `locationName:"deploymentFinishTime" type:"timestamp" timestampFormat:"unix"`
+	DeploymentFinishTime *time.Time `locationName:"deploymentFinishTime" type:"timestamp"`
 
 	// The time, in milliseconds since the epoch, when the deployment was started.
-	DeploymentStartTime *time.Time `locationName:"deploymentStartTime" type:"timestamp" timestampFormat:"unix"`
+	DeploymentStartTime *time.Time `locationName:"deploymentStartTime" type:"timestamp"`
 
 	// The robot deployment failure code.
 	FailureCode DeploymentJobErrorCode `locationName:"failureCode" type:"string" enum:"true"`
@@ -988,13 +994,15 @@ func (s RobotDeployment) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DeploymentFinishTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "deploymentFinishTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "deploymentFinishTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DeploymentStartTime != nil {
 		v := *s.DeploymentStartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "deploymentStartTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "deploymentStartTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if len(s.FailureCode) > 0 {
 		v := s.FailureCode
@@ -1143,7 +1151,7 @@ type SimulationApplicationSummary struct {
 
 	// The time, in milliseconds since the epoch, when the simulation application
 	// was last updated.
-	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
 
 	// The name of the simulation application.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -1175,7 +1183,8 @@ func (s SimulationApplicationSummary) MarshalFields(e protocol.FieldEncoder) err
 		v := *s.LastUpdatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -1239,11 +1248,11 @@ type SimulationJob struct {
 
 	// The time, in milliseconds since the epoch, when the simulation job was last
 	// started.
-	LastStartedAt *time.Time `locationName:"lastStartedAt" type:"timestamp" timestampFormat:"unix"`
+	LastStartedAt *time.Time `locationName:"lastStartedAt" type:"timestamp"`
 
 	// The time, in milliseconds since the epoch, when the simulation job was last
 	// updated.
-	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
 
 	// The maximum simulation job duration in seconds. The value must be 8 days
 	// (691,200 seconds) or less.
@@ -1322,13 +1331,15 @@ func (s SimulationJob) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastStartedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastStartedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastStartedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.LastUpdatedAt != nil {
 		v := *s.LastUpdatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.MaxJobDurationInSeconds != nil {
 		v := *s.MaxJobDurationInSeconds
@@ -1415,7 +1426,7 @@ type SimulationJobSummary struct {
 
 	// The time, in milliseconds since the epoch, when the simulation job was last
 	// updated.
-	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
 
 	// The name of the simulation job.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -1447,7 +1458,8 @@ func (s SimulationJobSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastUpdatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name

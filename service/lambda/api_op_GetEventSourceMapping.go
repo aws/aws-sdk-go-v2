@@ -42,6 +42,7 @@ func (s *GetEventSourceMappingInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetEventSourceMappingInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.UUID != nil {
 		v := *s.UUID
@@ -68,7 +69,7 @@ type GetEventSourceMappingOutput struct {
 	FunctionArn *string `type:"string"`
 
 	// The date that the event source mapping was last updated.
-	LastModified *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModified *time.Time `type:"timestamp"`
 
 	// The result of the last AWS Lambda invocation of your Lambda function.
 	LastProcessingResult *string `type:"string"`
@@ -113,7 +114,8 @@ func (s GetEventSourceMappingOutput) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.LastModified
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastModified", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastModified",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.LastProcessingResult != nil {
 		v := *s.LastProcessingResult

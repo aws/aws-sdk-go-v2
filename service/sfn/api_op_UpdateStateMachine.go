@@ -62,7 +62,7 @@ type UpdateStateMachineOutput struct {
 	// The date and time the state machine was updated.
 	//
 	// UpdateDate is a required field
-	UpdateDate *time.Time `locationName:"updateDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	UpdateDate *time.Time `locationName:"updateDate" type:"timestamp" required:"true"`
 }
 
 // String returns the string representation

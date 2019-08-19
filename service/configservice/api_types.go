@@ -125,13 +125,13 @@ type AggregateEvaluationResult struct {
 	ComplianceType ComplianceType `type:"string" enum:"true"`
 
 	// The time when the AWS Config rule evaluated the AWS resource.
-	ConfigRuleInvokedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ConfigRuleInvokedTime *time.Time `type:"timestamp"`
 
 	// Uniquely identifies the evaluation result.
 	EvaluationResultIdentifier *EvaluationResultIdentifier `type:"structure"`
 
 	// The time when AWS Config recorded the aggregate evaluation result.
-	ResultRecordedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ResultRecordedTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -232,7 +232,7 @@ type AggregatedSourceStatus struct {
 	LastUpdateStatus AggregatedSourceStatusType `type:"string" enum:"true"`
 
 	// The time of the last update.
-	LastUpdateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdateTime *time.Time `type:"timestamp"`
 
 	// The source account ID or an organization.
 	SourceId *string `type:"string"`
@@ -262,7 +262,7 @@ type AggregationAuthorization struct {
 	AuthorizedAwsRegion *string `min:"1" type:"string"`
 
 	// The time stamp when the aggregation authorization was created.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -291,7 +291,7 @@ type BaseConfigurationItem struct {
 	Configuration *string `locationName:"configuration" type:"string"`
 
 	// The time when the configuration recording was initiated.
-	ConfigurationItemCaptureTime *time.Time `locationName:"configurationItemCaptureTime" type:"timestamp" timestampFormat:"unix"`
+	ConfigurationItemCaptureTime *time.Time `locationName:"configurationItemCaptureTime" type:"timestamp"`
 
 	// The configuration item status.
 	ConfigurationItemStatus ConfigurationItemStatus `locationName:"configurationItemStatus" type:"string" enum:"true"`
@@ -301,7 +301,7 @@ type BaseConfigurationItem struct {
 	ConfigurationStateId *string `locationName:"configurationStateId" type:"string"`
 
 	// The time stamp when the resource was created.
-	ResourceCreationTime *time.Time `locationName:"resourceCreationTime" type:"timestamp" timestampFormat:"unix"`
+	ResourceCreationTime *time.Time `locationName:"resourceCreationTime" type:"timestamp"`
 
 	// The ID of the resource (for example., sg-xxxxxx).
 	ResourceId *string `locationName:"resourceId" min:"1" type:"string"`
@@ -426,7 +426,7 @@ type ComplianceSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The time that AWS Config created the compliance summary.
-	ComplianceSummaryTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ComplianceSummaryTimestamp *time.Time `type:"timestamp"`
 
 	// The number of AWS Config rules or AWS resources that are compliant, up to
 	// a maximum of 25 for rules and 100 for resources.
@@ -469,7 +469,7 @@ type ConfigExportDeliveryInfo struct {
 	_ struct{} `type:"structure"`
 
 	// The time of the last attempted delivery.
-	LastAttemptTime *time.Time `locationName:"lastAttemptTime" type:"timestamp" timestampFormat:"unix"`
+	LastAttemptTime *time.Time `locationName:"lastAttemptTime" type:"timestamp"`
 
 	// The error code from the last attempted delivery.
 	LastErrorCode *string `locationName:"lastErrorCode" type:"string"`
@@ -481,10 +481,10 @@ type ConfigExportDeliveryInfo struct {
 	LastStatus DeliveryStatus `locationName:"lastStatus" type:"string" enum:"true"`
 
 	// The time of the last successful delivery.
-	LastSuccessfulTime *time.Time `locationName:"lastSuccessfulTime" type:"timestamp" timestampFormat:"unix"`
+	LastSuccessfulTime *time.Time `locationName:"lastSuccessfulTime" type:"timestamp"`
 
 	// The time that the next delivery occurs.
-	NextDeliveryTime *time.Time `locationName:"nextDeliveryTime" type:"timestamp" timestampFormat:"unix"`
+	NextDeliveryTime *time.Time `locationName:"nextDeliveryTime" type:"timestamp"`
 }
 
 // String returns the string representation
@@ -709,7 +709,7 @@ type ConfigRuleEvaluationStatus struct {
 	ConfigRuleName *string `min:"1" type:"string"`
 
 	// The time that you first activated the AWS Config rule.
-	FirstActivatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	FirstActivatedTime *time.Time `type:"timestamp"`
 
 	// Indicates whether AWS Config has evaluated your resources against the rule
 	// at least once.
@@ -729,19 +729,19 @@ type ConfigRuleEvaluationStatus struct {
 
 	// The time that AWS Config last failed to evaluate your AWS resources against
 	// the rule.
-	LastFailedEvaluationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastFailedEvaluationTime *time.Time `type:"timestamp"`
 
 	// The time that AWS Config last failed to invoke the AWS Config rule to evaluate
 	// your AWS resources.
-	LastFailedInvocationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastFailedInvocationTime *time.Time `type:"timestamp"`
 
 	// The time that AWS Config last successfully evaluated your AWS resources against
 	// the rule.
-	LastSuccessfulEvaluationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastSuccessfulEvaluationTime *time.Time `type:"timestamp"`
 
 	// The time that AWS Config last successfully invoked the AWS Config rule to
 	// evaluate your AWS resources.
-	LastSuccessfulInvocationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastSuccessfulInvocationTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -818,7 +818,7 @@ type ConfigStreamDeliveryInfo struct {
 	LastStatus DeliveryStatus `locationName:"lastStatus" type:"string" enum:"true"`
 
 	// The time from the last status change.
-	LastStatusChangeTime *time.Time `locationName:"lastStatusChangeTime" type:"timestamp" timestampFormat:"unix"`
+	LastStatusChangeTime *time.Time `locationName:"lastStatusChangeTime" type:"timestamp"`
 }
 
 // String returns the string representation
@@ -842,10 +842,10 @@ type ConfigurationAggregator struct {
 	ConfigurationAggregatorName *string `min:"1" type:"string"`
 
 	// The time stamp when the configuration aggregator was created.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The time of the last update.
-	LastUpdatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedTime *time.Time `type:"timestamp"`
 
 	// Provides an organization and list of regions to be aggregated.
 	OrganizationAggregationSource *OrganizationAggregationSource `type:"structure"`
@@ -877,7 +877,7 @@ type ConfigurationItem struct {
 	Configuration *string `locationName:"configuration" type:"string"`
 
 	// The time when the configuration recording was initiated.
-	ConfigurationItemCaptureTime *time.Time `locationName:"configurationItemCaptureTime" type:"timestamp" timestampFormat:"unix"`
+	ConfigurationItemCaptureTime *time.Time `locationName:"configurationItemCaptureTime" type:"timestamp"`
 
 	// Unique MD5 hash that represents the configuration item's state.
 	//
@@ -906,7 +906,7 @@ type ConfigurationItem struct {
 	Relationships []Relationship `locationName:"relationships" type:"list"`
 
 	// The time stamp when the resource was created.
-	ResourceCreationTime *time.Time `locationName:"resourceCreationTime" type:"timestamp" timestampFormat:"unix"`
+	ResourceCreationTime *time.Time `locationName:"resourceCreationTime" type:"timestamp"`
 
 	// The ID of the resource (for example, sg-xxxxxx).
 	ResourceId *string `locationName:"resourceId" min:"1" type:"string"`
@@ -983,16 +983,16 @@ type ConfigurationRecorderStatus struct {
 	LastErrorMessage *string `locationName:"lastErrorMessage" type:"string"`
 
 	// The time the recorder was last started.
-	LastStartTime *time.Time `locationName:"lastStartTime" type:"timestamp" timestampFormat:"unix"`
+	LastStartTime *time.Time `locationName:"lastStartTime" type:"timestamp"`
 
 	// The last (previous) status of the recorder.
 	LastStatus RecorderStatus `locationName:"lastStatus" type:"string" enum:"true"`
 
 	// The time when the status was last changed.
-	LastStatusChangeTime *time.Time `locationName:"lastStatusChangeTime" type:"timestamp" timestampFormat:"unix"`
+	LastStatusChangeTime *time.Time `locationName:"lastStatusChangeTime" type:"timestamp"`
 
 	// The time the recorder was last stopped.
-	LastStopTime *time.Time `locationName:"lastStopTime" type:"timestamp" timestampFormat:"unix"`
+	LastStopTime *time.Time `locationName:"lastStopTime" type:"timestamp"`
 
 	// The name of the configuration recorder.
 	Name *string `locationName:"name" type:"string"`
@@ -1132,7 +1132,7 @@ type Evaluation struct {
 	// (for example, every 24 hours).
 	//
 	// OrderingTimestamp is a required field
-	OrderingTimestamp *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	OrderingTimestamp *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -1193,13 +1193,13 @@ type EvaluationResult struct {
 	ComplianceType ComplianceType `type:"string" enum:"true"`
 
 	// The time when the AWS Config rule evaluated the AWS resource.
-	ConfigRuleInvokedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ConfigRuleInvokedTime *time.Time `type:"timestamp"`
 
 	// Uniquely identifies the evaluation result.
 	EvaluationResultIdentifier *EvaluationResultIdentifier `type:"structure"`
 
 	// The time when AWS Config recorded the evaluation result.
-	ResultRecordedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ResultRecordedTime *time.Time `type:"timestamp"`
 
 	// An encrypted token that associates an evaluation with an AWS Config rule.
 	// The token identifies the rule, the AWS resource being evaluated, and the
@@ -1225,7 +1225,7 @@ type EvaluationResultIdentifier struct {
 	// The time can indicate when AWS Config delivered a configuration item change
 	// notification, or it can indicate when AWS Config delivered the configuration
 	// snapshot, depending on which event triggered the evaluation.
-	OrderingTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	OrderingTimestamp *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -1321,7 +1321,7 @@ type MemberAccountStatus struct {
 
 	ErrorMessage *string `type:"string"`
 
-	LastUpdateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdateTime *time.Time `type:"timestamp"`
 
 	// MemberAccountRuleStatus is a required field
 	MemberAccountRuleStatus MemberAccountRuleStatus `type:"string" required:"true" enum:"true"`
@@ -1379,7 +1379,7 @@ type OrganizationConfigRule struct {
 
 	ExcludedAccounts []string `type:"list"`
 
-	LastUpdateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdateTime *time.Time `type:"timestamp"`
 
 	// OrganizationConfigRuleArn is a required field
 	OrganizationConfigRuleArn *string `min:"1" type:"string" required:"true"`
@@ -1405,7 +1405,7 @@ type OrganizationConfigRuleStatus struct {
 
 	ErrorMessage *string `type:"string"`
 
-	LastUpdateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdateTime *time.Time `type:"timestamp"`
 
 	// OrganizationConfigRuleName is a required field
 	OrganizationConfigRuleName *string `min:"1" type:"string" required:"true"`
@@ -1742,10 +1742,10 @@ type RemediationExecutionStatus struct {
 	_ struct{} `type:"structure"`
 
 	// Start time when the remediation was executed.
-	InvocationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	InvocationTime *time.Time `type:"timestamp"`
 
 	// The time when the remediation execution was last updated.
-	LastUpdatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedTime *time.Time `type:"timestamp"`
 
 	// The details that identify a resource within AWS Config, including the resource
 	// type and resource ID.
@@ -1775,13 +1775,13 @@ type RemediationExecutionStep struct {
 	Name *string `type:"string"`
 
 	// The time when the step started.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `type:"timestamp"`
 
 	// The valid status of the step.
 	State RemediationExecutionStepState `type:"string" enum:"true"`
 
 	// The time when the step stopped.
-	StopTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StopTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -1904,7 +1904,7 @@ type ResourceIdentifier struct {
 	_ struct{} `type:"structure"`
 
 	// The time that the resource was deleted.
-	ResourceDeletionTime *time.Time `locationName:"resourceDeletionTime" type:"timestamp" timestampFormat:"unix"`
+	ResourceDeletionTime *time.Time `locationName:"resourceDeletionTime" type:"timestamp"`
 
 	// The ID of the resource (for example, sg-xxxxxx).
 	ResourceId *string `locationName:"resourceId" min:"1" type:"string"`

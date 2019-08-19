@@ -25,7 +25,7 @@ type GetResourcePolicyOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time at which the policy was created.
-	CreateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreateTime *time.Time `type:"timestamp"`
 
 	// Contains the hash value associated with this policy.
 	PolicyHash *string `min:"1" type:"string"`
@@ -34,7 +34,7 @@ type GetResourcePolicyOutput struct {
 	PolicyInJson *string `min:"2" type:"string"`
 
 	// The date and time at which the policy was last updated.
-	UpdateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	UpdateTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

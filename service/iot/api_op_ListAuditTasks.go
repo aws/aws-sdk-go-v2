@@ -17,7 +17,7 @@ type ListAuditTasksInput struct {
 	// The end of the time period.
 	//
 	// EndTime is a required field
-	EndTime *time.Time `location:"querystring" locationName:"endTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	EndTime *time.Time `location:"querystring" locationName:"endTime" type:"timestamp" required:"true"`
 
 	// The maximum number of results to return at one time. The default is 25.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
@@ -30,7 +30,7 @@ type ListAuditTasksInput struct {
 	// results in an "InvalidRequestException".
 	//
 	// StartTime is a required field
-	StartTime *time.Time `location:"querystring" locationName:"startTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartTime *time.Time `location:"querystring" locationName:"startTime" type:"timestamp" required:"true"`
 
 	// A filter to limit the output to audits with the specified completion status:
 	// can be one of "IN_PROGRESS", "COMPLETED", "FAILED" or "CANCELED".
@@ -69,12 +69,14 @@ func (s *ListAuditTasksInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListAuditTasksInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.EndTime != nil {
 		v := *s.EndTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "endTime", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.QueryTarget, "endTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
@@ -92,7 +94,8 @@ func (s ListAuditTasksInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "startTime", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.QueryTarget, "startTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if len(s.TaskStatus) > 0 {
 		v := s.TaskStatus

@@ -72,12 +72,17 @@ func isStreaming(s *Shape) bool {
 	return false
 }
 
-func jsonVersion(s *Shape) string {
+func getContentType(s *Shape) string {
 	if isStreaming(s) {
 		return ""
 	}
-
-	return s.API.Metadata.JSONVersion
+	if s.API.Metadata.JSONVersion != "" && s.API.Metadata.Protocol == "json" {
+		return fmt.Sprintf("application/x-amz-json-%s", s.API.Metadata.JSONVersion)
+	}
+	if  s.API.Metadata.Protocol == "json" || s.API.Metadata.Protocol == "rest-json" {
+		return "application/json"
+	}
+	return ""
 }
 
 var marshalShapeTmpl = template.Must(template.New("marshalShapeTmpl").Funcs(
@@ -85,7 +90,8 @@ var marshalShapeTmpl = template.Must(template.New("marshalShapeTmpl").Funcs(
 		"MarshalShapeRefGoCode": MarshalShapeRefGoCode,
 		"nestedRefsByLocation":  nestedRefsByLocation,
 		"isShapeFieldsNested":   isShapeFieldsNested,
-		"jsonVersion":           jsonVersion,
+		"getContentType": getContentType,
+
 	},
 ).Parse(`
 {{ define "encode shape" -}}
@@ -94,10 +100,11 @@ var marshalShapeTmpl = template.Must(template.New("marshalShapeTmpl").Funcs(
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s {{ $shapeName }}) MarshalFields(e protocol.FieldEncoder) error {
 	{{- if $.UsedAsInput -}}
-	{{- $version := (jsonVersion $) -}}
-	{{ if (ne  $version "") -}}
-		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-{{ $version }}"), protocol.Metadata{})
-	{{- end }}
+
+		{{- $contentType := (getContentType $)}}
+		{{ if $contentType -}}
+			e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("{{ $contentType }}"), protocol.Metadata{})
+		{{- end }}
 	{{ end }}
 	{{ $refMap := nestedRefsByLocation $ -}}
 	{{ range $loc, $refs := $refMap -}}
@@ -200,8 +207,16 @@ func isShapeFieldsNested(loc string, s *Shape) bool {
 	return loc == "Body" && len(s.LocationName) != 0 && s.API.Metadata.Protocol == "rest-xml"
 }
 
+func QuotedFormatTime(s marshalShapeRef) string  {
+	if  s.Ref.API.Metadata.Protocol == "json" || s.Ref.API.Metadata.Protocol == "rest-json" && s.Location() == "Body" {
+		return "true"
+	}
+	return "false"
+}
+
 var marshalShapeRefTmpl = template.Must(template.New("marshalShapeRefTmpl").Funcs(template.FuncMap{
 	"Collection": Collection,
+	"quotedFormatTime": QuotedFormatTime,
 }).Parse(`
 {{ define "encode field" -}}
 	{{ if $.IsIdempotencyToken -}}
@@ -236,7 +251,8 @@ var marshalShapeRefTmpl = template.Must(template.New("marshalShapeRefTmpl").Func
 	{{- else if $.IsShapeType "structure" -}}
 		v
 	{{- else if $.IsShapeType "timestamp" -}}
-		protocol.TimeValue{V: v, Format: {{ $.TimeFormat }} }
+		{{- $quotes := (quotedFormatTime $)}}
+		protocol.TimeValue{V: v, Format: {{ $.TimeFormat }}, QuotedFormatTime: {{ $quotes }},}
 	{{- else if $.IsShapeType "jsonvalue" -}}
 		{{ if eq $.Location "Header" -}}
 		protocol.JSONValue{V: v , EscapeMode: protocol.Base64Escape}
@@ -706,17 +722,29 @@ func (r marshalShapeRef) IsIdempotencyToken() bool {
 	return r.Ref.IdempotencyToken || r.Ref.Shape.IdempotencyToken
 }
 func (r marshalShapeRef) TimeFormat() string {
+
+	if r.Ref.TimestampFormat!="" {
+		return fmt.Sprintf("%q",r.Ref.TimestampFormat)
+	}
+	if r.Ref.Shape.TimestampFormat!= "" {
+		return fmt.Sprintf("%q",r.Ref.Shape.TimestampFormat)
+	}
+
 	switch r.Location() {
 	case "Header", "Headers":
-		return "protocol.RFC822TimeFromat"
+		return "protocol.RFC822TimeFormatName"
 	case "Query":
-		return "protocol.RFC822TimeFromat"
+		switch r.Context.API.Metadata.Protocol {
+		case "rest-json", "rest-xml":
+			return "protocol.ISO8601TimeFormatName"
+		}
+		return "protocol.RFC822TimeFormatName"
 	default:
 		switch r.Context.API.Metadata.Protocol {
 		case "json", "rest-json":
-			return "protocol.UnixTimeFormat"
+			return "protocol.UnixTimeFormatName"
 		case "rest-xml", "ec2", "query":
-			return "protocol.ISO8601TimeFormat"
+			return "protocol.ISO8601TimeFormatName"
 		default:
 			panic(fmt.Sprintf("unable to determine time format for %s ref", r.Name))
 		}

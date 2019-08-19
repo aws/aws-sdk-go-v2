@@ -23,7 +23,7 @@ type GetRelationalDatabaseLogEventsInput struct {
 	//    * Specified in the Unix time format. For example, if you wish to use an
 	//    end time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as
 	//    the end time.
-	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
 
 	// The name of the log stream.
 	//
@@ -58,7 +58,7 @@ type GetRelationalDatabaseLogEventsInput struct {
 	//    * Specified in the Unix time format. For example, if you wish to use a
 	//    start time of October 1, 2018, at 8 PM UTC, then you input 1538424000
 	//    as the start time.
-	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
 }
 
 // String returns the string representation

@@ -55,7 +55,7 @@ type CreateReplicationJobInput struct {
 	// The seed replication time.
 	//
 	// SeedReplicationTime is a required field
-	SeedReplicationTime *time.Time `locationName:"seedReplicationTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	SeedReplicationTime *time.Time `locationName:"seedReplicationTime" type:"timestamp" required:"true"`
 
 	// The identifier of the server.
 	//

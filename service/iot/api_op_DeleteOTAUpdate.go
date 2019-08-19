@@ -51,6 +51,7 @@ func (s *DeleteOTAUpdateInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DeleteOTAUpdateInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.OtaUpdateId != nil {
 		v := *s.OtaUpdateId

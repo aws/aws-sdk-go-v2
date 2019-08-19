@@ -19,7 +19,7 @@ type BillingRecord struct {
 	_ struct{} `type:"structure"`
 
 	// The date that the operation was billed, in Unix format.
-	BillDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	BillDate *time.Time `type:"timestamp"`
 
 	// The name of the domain that the billing record applies to. If the domain
 	// name contains characters other than a-z, 0-9, and - (hyphen), such as an
@@ -201,7 +201,7 @@ type DomainSummary struct {
 	DomainName *string `type:"string" required:"true"`
 
 	// Expiration date of the domain in Coordinated Universal Time (UTC).
-	Expiry *time.Time `type:"timestamp" timestampFormat:"unix"`
+	Expiry *time.Time `type:"timestamp"`
 
 	// Indicates whether a domain is locked from unauthorized transfer to another
 	// party.
@@ -367,7 +367,7 @@ type OperationSummary struct {
 	// The date when the request was submitted.
 	//
 	// SubmittedDate is a required field
-	SubmittedDate *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	SubmittedDate *time.Time `type:"timestamp" required:"true"`
 
 	// Type of the action requested.
 	//

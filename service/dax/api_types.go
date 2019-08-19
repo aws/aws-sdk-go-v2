@@ -113,7 +113,7 @@ type Event struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time when the event occurred.
-	Date *time.Time `type:"timestamp" timestampFormat:"unix"`
+	Date *time.Time `type:"timestamp"`
 
 	// A user-defined message associated with the event.
 	Message *string `type:"string"`
@@ -147,7 +147,7 @@ type Node struct {
 	Endpoint *Endpoint `type:"structure"`
 
 	// The date and time (in UNIX epoch format) when the node was launched.
-	NodeCreateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	NodeCreateTime *time.Time `type:"timestamp"`
 
 	// A system-generated identifier for the node.
 	NodeId *string `type:"string"`

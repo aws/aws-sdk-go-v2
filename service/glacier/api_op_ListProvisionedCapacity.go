@@ -44,6 +44,7 @@ func (s *ListProvisionedCapacityInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListProvisionedCapacityInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.AccountId != nil {
 		v := *s.AccountId

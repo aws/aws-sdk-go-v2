@@ -419,7 +419,7 @@ type SigningJob struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time that the signing job was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The ID of the signing job.
 	JobId *string `locationName:"jobId" type:"string"`
@@ -450,7 +450,8 @@ func (s SigningJob) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.JobId != nil {
 		v := *s.JobId

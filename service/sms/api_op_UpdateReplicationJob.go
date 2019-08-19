@@ -44,7 +44,7 @@ type UpdateReplicationJobInput struct {
 	LicenseType LicenseType `locationName:"licenseType" type:"string" enum:"true"`
 
 	// The start time of the next replication run.
-	NextReplicationRunStartTime *time.Time `locationName:"nextReplicationRunStartTime" type:"timestamp" timestampFormat:"unix"`
+	NextReplicationRunStartTime *time.Time `locationName:"nextReplicationRunStartTime" type:"timestamp"`
 
 	// The maximum number of SMS-created AMIs to retain. The oldest will be deleted
 	// once the maximum number is reached and a new AMI is created.

@@ -90,6 +90,7 @@ func (s *CreateDomainNameInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateDomainNameInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.CertificateArn != nil {
 		v := *s.CertificateArn
@@ -192,7 +193,7 @@ type CreateDomainNameOutput struct {
 
 	// The timestamp when the certificate that was used by edge-optimized endpoint
 	// for this domain name was uploaded.
-	CertificateUploadDate *time.Time `locationName:"certificateUploadDate" type:"timestamp" timestampFormat:"unix"`
+	CertificateUploadDate *time.Time `locationName:"certificateUploadDate" type:"timestamp"`
 
 	// The domain name of the Amazon CloudFront distribution associated with this
 	// custom domain name for an edge-optimized endpoint. You set up this association
@@ -274,7 +275,8 @@ func (s CreateDomainNameOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CertificateUploadDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "certificateUploadDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "certificateUploadDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DistributionDomainName != nil {
 		v := *s.DistributionDomainName

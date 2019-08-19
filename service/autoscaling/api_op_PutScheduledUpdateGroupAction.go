@@ -26,7 +26,7 @@ type PutScheduledUpdateGroupActionInput struct {
 
 	// The date and time for the recurring schedule to end. Amazon EC2 Auto Scaling
 	// does not perform the action after this time.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// The maximum number of instances in the Auto Scaling group.
 	MaxSize *int64 `type:"integer"`
@@ -58,10 +58,10 @@ type PutScheduledUpdateGroupActionInput struct {
 	//
 	// If you try to schedule your action in the past, Amazon EC2 Auto Scaling returns
 	// an error message.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	StartTime *time.Time `type:"timestamp"`
 
 	// This parameter is deprecated.
-	Time *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	Time *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

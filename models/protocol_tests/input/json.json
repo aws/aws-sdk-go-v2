@@ -57,8 +57,19 @@
         "members": {
           "TimeArg": {
             "shape": "TimestampType"
+          },
+          "TimeCustom": {
+            "timestampFormat": "rfc822",
+            "shape": "TimestampType"
+          },
+          "TimeFormat": {
+            "shape": "TimestampFormatType"
           }
         }
+      },
+      "TimestampFormatType": {
+        "timestampFormat": "rfc822",
+        "type": "timestamp"
       },
       "TimestampType": {
         "type": "timestamp"
@@ -73,10 +84,12 @@
           "name": "OperationName"
         },
         "params": {
-          "TimeArg": 1422172800
+          "TimeArg": 1422172800,
+          "TimeCustom": 1422172800,
+          "TimeFormat": 1422172800
         },
         "serialized": {
-          "body": "{\"TimeArg\": 1422172800}",
+          "body": "{\"TimeArg\": 1422172800, \"TimeCustom\": \"Sun, 25 Jan 2015 08:00:00 GMT\", \"TimeFormat\": \"Sun, 25 Jan 2015 08:00:00 GMT\"}",
           "headers": {
             "X-Amz-Target": "com.amazonaws.foo.OperationName",
             "Content-Type": "application/x-amz-json-1.1"

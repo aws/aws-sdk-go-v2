@@ -56,7 +56,7 @@ type Cluster struct {
 	ClientRequestToken *string `locationName:"clientRequestToken" type:"string"`
 
 	// The Unix epoch timestamp in seconds for when the cluster was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The endpoint for your Kubernetes API server.
 	Endpoint *string `locationName:"endpoint" type:"string"`
@@ -120,7 +120,8 @@ func (s Cluster) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Endpoint != nil {
 		v := *s.Endpoint
@@ -322,7 +323,7 @@ type Update struct {
 	_ struct{} `type:"structure"`
 
 	// The Unix epoch timestamp in seconds for when the update was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// Any errors associated with a Failed update.
 	Errors []ErrorDetail `locationName:"errors" type:"list"`
@@ -351,7 +352,8 @@ func (s Update) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Errors != nil {
 		v := s.Errors

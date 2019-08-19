@@ -40,7 +40,7 @@ func (s *DescribeBrokerInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.BrokerId != nil {
 		v := *s.BrokerId
@@ -71,7 +71,7 @@ type DescribeBrokerOutput struct {
 	// Broker configuration information
 	Configurations *Configurations `locationName:"configurations" type:"structure"`
 
-	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"unix"`
+	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The deployment mode of the broker.
 	DeploymentMode DeploymentMode `locationName:"deploymentMode" type:"string" enum:"true"`
@@ -166,7 +166,8 @@ func (s DescribeBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Created
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "created", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "created",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if len(s.DeploymentMode) > 0 {
 		v := s.DeploymentMode

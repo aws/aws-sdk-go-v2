@@ -34,7 +34,7 @@ type Container struct {
 	AccessLoggingEnabled *bool `type:"boolean"`
 
 	// Unix timestamp.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The DNS endpoint of the container. Use the endpoint to identify the specific
 	// container when sending requests to the data plane. The service assigns this

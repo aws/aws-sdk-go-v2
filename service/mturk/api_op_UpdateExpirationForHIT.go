@@ -17,7 +17,7 @@ type UpdateExpirationForHITInput struct {
 	// The date and time at which you want the HIT to expire
 	//
 	// ExpireAt is a required field
-	ExpireAt *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	ExpireAt *time.Time `type:"timestamp" required:"true"`
 
 	// The HIT to update.
 	//

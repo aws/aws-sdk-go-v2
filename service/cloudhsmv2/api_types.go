@@ -28,13 +28,13 @@ type Backup struct {
 	// The identifier (ID) of the cluster that was backed up.
 	ClusterId *string `type:"string"`
 
-	CopyTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CopyTimestamp *time.Time `type:"timestamp"`
 
 	// The date and time when the backup was created.
-	CreateTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreateTimestamp *time.Time `type:"timestamp"`
 
 	// The date and time when the backup will be permanently deleted.
-	DeleteTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DeleteTimestamp *time.Time `type:"timestamp"`
 
 	SourceBackup *string `type:"string"`
 
@@ -91,7 +91,7 @@ type Cluster struct {
 	ClusterId *string `type:"string"`
 
 	// The date and time when the cluster was created.
-	CreateTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreateTimestamp *time.Time `type:"timestamp"`
 
 	// The type of HSM that the cluster contains.
 	HsmType *string `type:"string"`
@@ -132,7 +132,7 @@ func (s Cluster) String() string {
 type DestinationBackup struct {
 	_ struct{} `type:"structure"`
 
-	CreateTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreateTimestamp *time.Time `type:"timestamp"`
 
 	SourceBackup *string `type:"string"`
 

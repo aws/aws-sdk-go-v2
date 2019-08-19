@@ -15,7 +15,7 @@ type SearchFlowExecutionsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time of the latest flow execution to return.
-	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
 
 	// The ID of a flow execution.
 	FlowExecutionId *string `locationName:"flowExecutionId" type:"string"`
@@ -28,7 +28,7 @@ type SearchFlowExecutionsInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The date and time of the earliest flow execution to return.
-	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
 
 	// The ID of the system instance that contains the flow.
 	//

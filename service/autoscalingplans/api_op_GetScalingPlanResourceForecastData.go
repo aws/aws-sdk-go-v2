@@ -22,7 +22,7 @@ type GetScalingPlanResourceForecastDataInput struct {
 	// Scaling only issues forecasts for periods of two days in advance.
 	//
 	// EndTime is a required field
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	EndTime *time.Time `type:"timestamp" required:"true"`
 
 	// The type of forecast data to get.
 	//
@@ -89,7 +89,7 @@ type GetScalingPlanResourceForecastDataInput struct {
 	// The date and time can be at most 56 days before the current date and time.
 	//
 	// StartTime is a required field
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartTime *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation

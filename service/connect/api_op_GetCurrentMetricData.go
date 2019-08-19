@@ -151,7 +151,7 @@ func (s *GetCurrentMetricDataInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetCurrentMetricDataInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.CurrentMetrics != nil {
 		v := s.CurrentMetrics
@@ -209,7 +209,7 @@ type GetCurrentMetricDataOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The time at which CurrentMetricData was retrieved and cached for pagination.
-	DataSnapshotTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DataSnapshotTime *time.Time `type:"timestamp"`
 
 	// A list of CurrentMetricResult objects organized by Dimensions combining with
 	// CurrentMetricDataCollections.
@@ -244,7 +244,8 @@ func (s GetCurrentMetricDataOutput) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.DataSnapshotTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DataSnapshotTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "DataSnapshotTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.MetricResults != nil {
 		v := s.MetricResults

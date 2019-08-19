@@ -58,14 +58,14 @@ type DescribeResourceOutput struct {
 
 	// The date and time when a resource was disabled from WorkMail, in UNIX epoch
 	// time format.
-	DisabledDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DisabledDate *time.Time `type:"timestamp"`
 
 	// The email of the described resource.
 	Email *string `min:"1" type:"string"`
 
 	// The date and time when a resource was enabled for WorkMail, in UNIX epoch
 	// time format.
-	EnabledDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EnabledDate *time.Time `type:"timestamp"`
 
 	// The name of the described resource.
 	Name *string `min:"1" type:"string"`

@@ -46,7 +46,7 @@ type DescribeLocationS3Output struct {
 	_ struct{} `type:"structure"`
 
 	// The time that the Amazon S3 bucket location was created.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the Amazon S3 bucket location.
 	LocationArn *string `type:"string"`

@@ -50,6 +50,7 @@ func (s *GetDocumentationPartInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetDocumentationPartInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.DocumentationPartId != nil {
 		v := *s.DocumentationPartId

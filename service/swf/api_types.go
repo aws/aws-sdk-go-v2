@@ -374,10 +374,10 @@ type ActivityTypeInfo struct {
 	// The date and time this activity type was created through RegisterActivityType.
 	//
 	// CreationDate is a required field
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" required:"true"`
 
 	// If DEPRECATED, the date and time DeprecateActivityType was called.
-	DeprecationDate *time.Time `locationName:"deprecationDate" type:"timestamp" timestampFormat:"unix"`
+	DeprecationDate *time.Time `locationName:"deprecationDate" type:"timestamp"`
 
 	// The description of the activity type provided in RegisterActivityType.
 	Description *string `locationName:"description" type:"string"`
@@ -1472,12 +1472,12 @@ type ExecutionTimeFilter struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the latest start or close date and time to return.
-	LatestDate *time.Time `locationName:"latestDate" type:"timestamp" timestampFormat:"unix"`
+	LatestDate *time.Time `locationName:"latestDate" type:"timestamp"`
 
 	// Specifies the oldest start or close date and time to return.
 	//
 	// OldestDate is a required field
-	OldestDate *time.Time `locationName:"oldestDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	OldestDate *time.Time `locationName:"oldestDate" type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -1862,7 +1862,7 @@ type HistoryEvent struct {
 	// The date and time when the event occurred.
 	//
 	// EventTimestamp is a required field
-	EventTimestamp *time.Time `locationName:"eventTimestamp" type:"timestamp" timestampFormat:"unix" required:"true"`
+	EventTimestamp *time.Time `locationName:"eventTimestamp" type:"timestamp" required:"true"`
 
 	// The type of the history event.
 	//
@@ -3941,7 +3941,7 @@ type WorkflowExecutionInfo struct {
 
 	// The time when the workflow execution was closed. Set only if the execution
 	// status is CLOSED.
-	CloseTimestamp *time.Time `locationName:"closeTimestamp" type:"timestamp" timestampFormat:"unix"`
+	CloseTimestamp *time.Time `locationName:"closeTimestamp" type:"timestamp"`
 
 	// The workflow execution this information is about.
 	//
@@ -3960,7 +3960,7 @@ type WorkflowExecutionInfo struct {
 	// The time when the execution was started.
 	//
 	// StartTimestamp is a required field
-	StartTimestamp *time.Time `locationName:"startTimestamp" type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartTimestamp *time.Time `locationName:"startTimestamp" type:"timestamp" required:"true"`
 
 	// The list of tags associated with the workflow execution. Tags can be used
 	// to identify and list workflow executions of interest through the visibility
@@ -4364,11 +4364,11 @@ type WorkflowTypeInfo struct {
 	// The date when this type was registered.
 	//
 	// CreationDate is a required field
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" required:"true"`
 
 	// If the type is in deprecated state, then it is set to the date when the type
 	// was deprecated.
-	DeprecationDate *time.Time `locationName:"deprecationDate" type:"timestamp" timestampFormat:"unix"`
+	DeprecationDate *time.Time `locationName:"deprecationDate" type:"timestamp"`
 
 	// The description of the type registered through RegisterWorkflowType.
 	Description *string `locationName:"description" type:"string"`

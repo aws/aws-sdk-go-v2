@@ -79,6 +79,7 @@ func (s *UpdateDataRetentionInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateDataRetentionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.CurrentVersion != nil {
 		v := *s.CurrentVersion

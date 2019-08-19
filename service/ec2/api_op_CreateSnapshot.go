@@ -92,7 +92,7 @@ type CreateSnapshotOutput struct {
 	SnapshotId *string `locationName:"snapshotId" type:"string"`
 
 	// The time stamp when the snapshot was initiated.
-	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"iso8601"`
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
 
 	// The snapshot state.
 	State SnapshotState `locationName:"status" type:"string" enum:"true"`

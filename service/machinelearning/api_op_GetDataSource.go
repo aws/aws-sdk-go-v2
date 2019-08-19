@@ -64,7 +64,7 @@ type GetDataSourceOutput struct {
 
 	// The time that the DataSource was created. The time is expressed in epoch
 	// time.
-	CreatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `type:"timestamp"`
 
 	// The AWS user account from which the DataSource was created. The account type
 	// can be either an AWS root account or an AWS Identity and Access Management
@@ -94,11 +94,11 @@ type GetDataSourceOutput struct {
 	// The epoch time when Amazon Machine Learning marked the DataSource as COMPLETED
 	// or FAILED. FinishedAt is only available when the DataSource is in the COMPLETED
 	// or FAILED state.
-	FinishedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	FinishedAt *time.Time `type:"timestamp"`
 
 	// The time of the most recent edit to the DataSource. The time is expressed
 	// in epoch time.
-	LastUpdatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `type:"timestamp"`
 
 	// A link to the file containing logs of CreateDataSourceFrom* operations.
 	LogUri *string `type:"string"`
@@ -125,7 +125,7 @@ type GetDataSourceOutput struct {
 
 	// The epoch time when Amazon Machine Learning marked the DataSource as INPROGRESS.
 	// StartedAt isn't available if the DataSource is in the PENDING state.
-	StartedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartedAt *time.Time `type:"timestamp"`
 
 	// The current status of the DataSource. This element can have one of the following
 	// values:

@@ -203,7 +203,7 @@ type Edge struct {
 	Aliases []Alias `type:"list"`
 
 	// The end time of the last segment on the edge.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// Identifier of the edge. Unique within a service map.
 	ReferenceId *int64 `type:"integer"`
@@ -212,7 +212,7 @@ type Edge struct {
 	ResponseTimeHistogram []HistogramEntry `type:"list"`
 
 	// The start time of the first segment on the edge.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `type:"timestamp"`
 
 	// Response statistics for segments on the edge.
 	SummaryStatistics *EdgeStatistics `type:"structure"`
@@ -241,7 +241,8 @@ func (s Edge) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.EndTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EndTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "EndTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ReferenceId != nil {
 		v := *s.ReferenceId
@@ -265,7 +266,8 @@ func (s Edge) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "StartTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.SummaryStatistics != nil {
 		v := s.SummaryStatistics
@@ -1444,10 +1446,10 @@ type SamplingRuleRecord struct {
 	_ struct{} `type:"structure"`
 
 	// When the rule was created.
-	CreatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `type:"timestamp"`
 
 	// When the rule was last modified.
-	ModifiedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ModifiedAt *time.Time `type:"timestamp"`
 
 	// The sampling rule.
 	SamplingRule *SamplingRule `type:"structure"`
@@ -1464,13 +1466,15 @@ func (s SamplingRuleRecord) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ModifiedAt != nil {
 		v := *s.ModifiedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ModifiedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "ModifiedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.SamplingRule != nil {
 		v := s.SamplingRule
@@ -1648,7 +1652,7 @@ type SamplingStatisticSummary struct {
 	SampledCount *int64 `type:"integer"`
 
 	// The start time of the reporting window.
-	Timestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	Timestamp *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -1686,7 +1690,8 @@ func (s SamplingStatisticSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Timestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "Timestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -1724,7 +1729,7 @@ type SamplingStatisticsDocument struct {
 	// The current time.
 	//
 	// Timestamp is a required field
-	Timestamp *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	Timestamp *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -1804,7 +1809,8 @@ func (s SamplingStatisticsDocument) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.Timestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "Timestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -1862,7 +1868,7 @@ type SamplingTargetDocument struct {
 	ReservoirQuota *int64 `type:"integer"`
 
 	// When the reservoir quota expires.
-	ReservoirQuotaTTL *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ReservoirQuotaTTL *time.Time `type:"timestamp"`
 
 	// The name of the sampling rule.
 	RuleName *string `type:"string"`
@@ -1897,7 +1903,8 @@ func (s SamplingTargetDocument) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ReservoirQuotaTTL
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ReservoirQuotaTTL", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "ReservoirQuotaTTL",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.RuleName != nil {
 		v := *s.RuleName
@@ -1965,7 +1972,7 @@ type Service struct {
 	Edges []Edge `type:"list"`
 
 	// The end time of the last segment that the service generated.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// The canonical name of the service.
 	Name *string `type:"string"`
@@ -1983,7 +1990,7 @@ type Service struct {
 	Root *bool `type:"boolean"`
 
 	// The start time of the first segment that the service generated.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `type:"timestamp"`
 
 	// The service's state.
 	State *string `type:"string"`
@@ -2048,7 +2055,8 @@ func (s Service) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.EndTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EndTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "EndTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -2096,7 +2104,8 @@ func (s Service) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "StartTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.State != nil {
 		v := *s.State
@@ -2248,7 +2257,7 @@ type TelemetryRecord struct {
 	SegmentsSpilloverCount *int64 `type:"integer"`
 
 	// Timestamp is a required field
-	Timestamp *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	Timestamp *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -2306,7 +2315,8 @@ func (s TelemetryRecord) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Timestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "Timestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -2326,7 +2336,7 @@ type TimeSeriesServiceStatistics struct {
 	ServiceSummaryStatistics *ServiceStatistics `type:"structure"`
 
 	// Timestamp of the window for which statistics are aggregated.
-	Timestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	Timestamp *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -2364,7 +2374,8 @@ func (s TimeSeriesServiceStatistics) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.Timestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "Timestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -2468,7 +2479,7 @@ type TraceSummary struct {
 	IsPartial *bool `type:"boolean"`
 
 	// The matched time stamp of a defined event.
-	MatchedEventTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	MatchedEventTime *time.Time `type:"timestamp"`
 
 	// A list of resource ARNs for any resource corresponding to the trace segments.
 	ResourceARNs []ResourceARNDetail `type:"list"`
@@ -2617,7 +2628,8 @@ func (s TraceSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.MatchedEventTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MatchedEventTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "MatchedEventTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ResourceARNs != nil {
 		v := s.ResourceARNs

@@ -15,7 +15,7 @@ type RestoreTableToPointInTimeInput struct {
 	_ struct{} `type:"structure"`
 
 	// Time in the past to restore the table to.
-	RestoreDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	RestoreDateTime *time.Time `type:"timestamp"`
 
 	// Name of the source table that is being restored.
 	//

@@ -75,7 +75,7 @@ type DescribeAlgorithmOutput struct {
 	// A timestamp specifying when the algorithm was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// Details about inference jobs that the algorithm runs.
 	InferenceSpecification *InferenceSpecification `type:"structure"`

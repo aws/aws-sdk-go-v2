@@ -51,6 +51,7 @@ func (s *DeleteDeploymentInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DeleteDeploymentInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.DeploymentId != nil {
 		v := *s.DeploymentId

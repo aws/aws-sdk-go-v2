@@ -77,7 +77,7 @@ type EntityDescription struct {
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The time at which the entity was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The definition document of the entity.
 	Definition *DefinitionDocument `locationName:"definition" type:"structure"`
@@ -132,7 +132,7 @@ type FlowExecutionMessage struct {
 	Payload *string `locationName:"payload" type:"string"`
 
 	// The date and time when the message was last updated.
-	Timestamp *time.Time `locationName:"timestamp" type:"timestamp" timestampFormat:"unix"`
+	Timestamp *time.Time `locationName:"timestamp" type:"timestamp"`
 }
 
 // String returns the string representation
@@ -146,7 +146,7 @@ type FlowExecutionSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time when the flow execution summary was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The ID of the flow execution.
 	FlowExecutionId *string `locationName:"flowExecutionId" type:"string"`
@@ -161,7 +161,7 @@ type FlowExecutionSummary struct {
 	SystemInstanceId *string `locationName:"systemInstanceId" type:"string"`
 
 	// The date and time when the flow execution summary was last updated.
-	UpdatedAt *time.Time `locationName:"updatedAt" type:"timestamp" timestampFormat:"unix"`
+	UpdatedAt *time.Time `locationName:"updatedAt" type:"timestamp"`
 }
 
 // String returns the string representation
@@ -238,7 +238,7 @@ type FlowTemplateSummary struct {
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The date when the workflow was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The ID of the workflow.
 	Id *string `locationName:"id" type:"string"`
@@ -352,7 +352,7 @@ type SystemInstanceSummary struct {
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The date when the system instance was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The ID of the Greengrass group where the system instance is deployed.
 	GreengrassGroupId *string `locationName:"greengrassGroupId" type:"string"`
@@ -373,7 +373,7 @@ type SystemInstanceSummary struct {
 	Target DeploymentTarget `locationName:"target" type:"string" enum:"true"`
 
 	// The date and time when the system instance was last updated.
-	UpdatedAt *time.Time `locationName:"updatedAt" type:"timestamp" timestampFormat:"unix"`
+	UpdatedAt *time.Time `locationName:"updatedAt" type:"timestamp"`
 }
 
 // String returns the string representation
@@ -450,7 +450,7 @@ type SystemTemplateSummary struct {
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The date when the system was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The ID of the system.
 	Id *string `locationName:"id" type:"string"`

@@ -163,6 +163,7 @@ func (s *PutIntegrationInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PutIntegrationInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.CacheKeyParameters != nil {
 		v := s.CacheKeyParameters

@@ -59,7 +59,7 @@ type GetMLModelOutput struct {
 	ComputeTime *int64 `type:"long"`
 
 	// The time that the MLModel was created. The time is expressed in epoch time.
-	CreatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `type:"timestamp"`
 
 	// The AWS user account from which the MLModel was created. The account type
 	// can be either an AWS root account or an AWS Identity and Access Management
@@ -72,7 +72,7 @@ type GetMLModelOutput struct {
 	// The epoch time when Amazon Machine Learning marked the MLModel as COMPLETED
 	// or FAILED. FinishedAt is only available when the MLModel is in the COMPLETED
 	// or FAILED state.
-	FinishedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	FinishedAt *time.Time `type:"timestamp"`
 
 	// The location of the data file or directory in Amazon Simple Storage Service
 	// (Amazon S3).
@@ -80,7 +80,7 @@ type GetMLModelOutput struct {
 
 	// The time of the most recent edit to the MLModel. The time is expressed in
 	// epoch time.
-	LastUpdatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `type:"timestamp"`
 
 	// A link to the file that contains logs of the CreateMLModel operation.
 	LogUri *string `type:"string"`
@@ -128,14 +128,14 @@ type GetMLModelOutput struct {
 
 	// The time of the most recent edit to the ScoreThreshold. The time is expressed
 	// in epoch time.
-	ScoreThresholdLastUpdatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ScoreThresholdLastUpdatedAt *time.Time `type:"timestamp"`
 
 	// Long integer type that is a 64-bit signed number.
 	SizeInBytes *int64 `type:"long"`
 
 	// The epoch time when Amazon Machine Learning marked the MLModel as INPROGRESS.
 	// StartedAt isn't available if the MLModel is in the PENDING state.
-	StartedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartedAt *time.Time `type:"timestamp"`
 
 	// The current status of the MLModel. This element can have one of the following
 	// values:

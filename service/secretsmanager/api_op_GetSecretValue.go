@@ -89,7 +89,7 @@ type GetSecretValueOutput struct {
 	ARN *string `min:"20" type:"string"`
 
 	// The date and time that this version of the secret was created.
-	CreatedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedDate *time.Time `type:"timestamp"`
 
 	// The friendly name of the secret.
 	Name *string `min:"1" type:"string"`

@@ -67,7 +67,7 @@ type PlacementDescription struct {
 	// The date when the placement was initially created, in UNIX epoch time format.
 	//
 	// CreatedDate is a required field
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" required:"true"`
 
 	// The name of the placement.
 	//
@@ -84,7 +84,7 @@ type PlacementDescription struct {
 	// same.
 	//
 	// UpdatedDate is a required field
-	UpdatedDate *time.Time `locationName:"updatedDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	UpdatedDate *time.Time `locationName:"updatedDate" type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -110,7 +110,8 @@ func (s PlacementDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.PlacementName != nil {
 		v := *s.PlacementName
@@ -128,7 +129,8 @@ func (s PlacementDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.UpdatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "updatedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "updatedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -141,7 +143,7 @@ type PlacementSummary struct {
 	// The date when the placement was originally created, in UNIX epoch time format.
 	//
 	// CreatedDate is a required field
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" required:"true"`
 
 	// The name of the placement being summarized.
 	//
@@ -158,7 +160,7 @@ type PlacementSummary struct {
 	// same.
 	//
 	// UpdatedDate is a required field
-	UpdatedDate *time.Time `locationName:"updatedDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	UpdatedDate *time.Time `locationName:"updatedDate" type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -172,7 +174,8 @@ func (s PlacementSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.PlacementName != nil {
 		v := *s.PlacementName
@@ -190,7 +193,8 @@ func (s PlacementSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.UpdatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "updatedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "updatedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -255,7 +259,7 @@ type ProjectDescription struct {
 	// The date when the project was originally created, in UNIX epoch time format.
 	//
 	// CreatedDate is a required field
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" required:"true"`
 
 	// The description of the project.
 	Description *string `locationName:"description" type:"string"`
@@ -275,7 +279,7 @@ type ProjectDescription struct {
 	// the project was not updated, then createdDate and updatedDate are the same.
 	//
 	// UpdatedDate is a required field
-	UpdatedDate *time.Time `locationName:"updatedDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	UpdatedDate *time.Time `locationName:"updatedDate" type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -295,7 +299,8 @@ func (s ProjectDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -331,7 +336,8 @@ func (s ProjectDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.UpdatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "updatedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "updatedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -348,7 +354,7 @@ type ProjectSummary struct {
 	// The date when the project was originally created, in UNIX epoch time format.
 	//
 	// CreatedDate is a required field
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" required:"true"`
 
 	// The name of the project being summarized.
 	//
@@ -362,7 +368,7 @@ type ProjectSummary struct {
 	// the project was not updated, then createdDate and updatedDate are the same.
 	//
 	// UpdatedDate is a required field
-	UpdatedDate *time.Time `locationName:"updatedDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	UpdatedDate *time.Time `locationName:"updatedDate" type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -382,7 +388,8 @@ func (s ProjectSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ProjectName != nil {
 		v := *s.ProjectName
@@ -406,7 +413,8 @@ func (s ProjectSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.UpdatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "updatedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "updatedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }

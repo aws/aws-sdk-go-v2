@@ -212,7 +212,7 @@ type BrokerSummary struct {
 	BrokerState BrokerState `locationName:"brokerState" type:"string" enum:"true"`
 
 	// The time when the broker was created.
-	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"unix"`
+	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"iso8601"`
 
 	// Required. The deployment mode of the broker.
 	DeploymentMode DeploymentMode `locationName:"deploymentMode" type:"string" enum:"true"`
@@ -256,7 +256,8 @@ func (s BrokerSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Created
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "created", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "created",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if len(s.DeploymentMode) > 0 {
 		v := s.DeploymentMode
@@ -282,7 +283,7 @@ type Configuration struct {
 	Arn *string `locationName:"arn" type:"string"`
 
 	// Required. The date and time of the configuration revision.
-	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"unix"`
+	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"iso8601"`
 
 	// Required. The description of the configuration.
 	Description *string `locationName:"description" type:"string"`
@@ -327,7 +328,8 @@ func (s Configuration) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Created
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "created", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "created",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -420,7 +422,7 @@ type ConfigurationRevision struct {
 	_ struct{} `type:"structure"`
 
 	// Required. The date and time of the configuration revision.
-	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"unix"`
+	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The description of the configuration revision.
 	Description *string `locationName:"description" type:"string"`
@@ -440,7 +442,8 @@ func (s ConfigurationRevision) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Created
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "created", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "created",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description

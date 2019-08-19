@@ -70,7 +70,7 @@ type DescribeSecretOutput struct {
 	// If a secret is scheduled for deletion, then its details, including the encrypted
 	// secret information, is not accessible. To cancel a scheduled deletion and
 	// restore access, use RestoreSecret.
-	DeletedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DeletedDate *time.Time `type:"timestamp"`
 
 	// The user-provided description of the secret.
 	Description *string `type:"string"`
@@ -84,14 +84,14 @@ type DescribeSecretOutput struct {
 
 	// The last date that this secret was accessed. This value is truncated to midnight
 	// of the date and therefore shows only the date, not the time.
-	LastAccessedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastAccessedDate *time.Time `type:"timestamp"`
 
 	// The last date and time that this secret was modified in any way.
-	LastChangedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastChangedDate *time.Time `type:"timestamp"`
 
 	// The most recent date and time that the Secrets Manager rotation process was
 	// successfully completed. This value is null if the secret has never rotated.
-	LastRotatedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastRotatedDate *time.Time `type:"timestamp"`
 
 	// The user-provided friendly name of the secret.
 	Name *string `min:"1" type:"string"`

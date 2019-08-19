@@ -389,7 +389,7 @@ type EventSourceMappingConfiguration struct {
 	FunctionArn *string `type:"string"`
 
 	// The date that the event source mapping was last updated.
-	LastModified *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModified *time.Time `type:"timestamp"`
 
 	// The result of the last AWS Lambda invocation of your Lambda function.
 	LastProcessingResult *string `type:"string"`
@@ -434,7 +434,8 @@ func (s EventSourceMappingConfiguration) MarshalFields(e protocol.FieldEncoder) 
 		v := *s.LastModified
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastModified", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastModified",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.LastProcessingResult != nil {
 		v := *s.LastProcessingResult

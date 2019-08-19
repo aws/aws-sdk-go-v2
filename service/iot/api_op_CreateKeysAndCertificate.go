@@ -25,6 +25,7 @@ func (s CreateKeysAndCertificateInput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateKeysAndCertificateInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.SetAsActive != nil {
 		v := *s.SetAsActive

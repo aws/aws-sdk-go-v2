@@ -83,7 +83,7 @@ type StartExecutionOutput struct {
 	// The date the execution is started.
 	//
 	// StartDate is a required field
-	StartDate *time.Time `locationName:"startDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartDate *time.Time `locationName:"startDate" type:"timestamp" required:"true"`
 }
 
 // String returns the string representation

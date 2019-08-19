@@ -381,7 +381,7 @@ type DetectorModelConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// The time the detector model was created.
-	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp"`
 
 	// The ARN of the detector model.
 	DetectorModelArn *string `locationName:"detectorModelArn" type:"string"`
@@ -403,7 +403,7 @@ type DetectorModelConfiguration struct {
 	Key *string `locationName:"key" min:"1" type:"string"`
 
 	// The time the detector model was last updated.
-	LastUpdateTime *time.Time `locationName:"lastUpdateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdateTime *time.Time `locationName:"lastUpdateTime" type:"timestamp"`
 
 	// The ARN of the role that grants permission to AWS IoT Events to perform its
 	// operations.
@@ -424,7 +424,8 @@ func (s DetectorModelConfiguration) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.CreationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DetectorModelArn != nil {
 		v := *s.DetectorModelArn
@@ -460,7 +461,8 @@ func (s DetectorModelConfiguration) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.LastUpdateTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdateTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdateTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.RoleArn != nil {
 		v := *s.RoleArn
@@ -558,7 +560,7 @@ type DetectorModelSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The time the detector model was created.
-	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp"`
 
 	// A brief description of the detector model.
 	DetectorModelDescription *string `locationName:"detectorModelDescription" type:"string"`
@@ -578,7 +580,8 @@ func (s DetectorModelSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DetectorModelDescription != nil {
 		v := *s.DetectorModelDescription
@@ -601,7 +604,7 @@ type DetectorModelVersionSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The time the detector model version was created.
-	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp"`
 
 	// The ARN of the detector model version.
 	DetectorModelArn *string `locationName:"detectorModelArn" type:"string"`
@@ -613,7 +616,7 @@ type DetectorModelVersionSummary struct {
 	DetectorModelVersion *string `locationName:"detectorModelVersion" min:"1" type:"string"`
 
 	// The last time the detector model version was updated.
-	LastUpdateTime *time.Time `locationName:"lastUpdateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdateTime *time.Time `locationName:"lastUpdateTime" type:"timestamp"`
 
 	// The ARN of the role that grants the detector model permission to perform
 	// its tasks.
@@ -634,7 +637,8 @@ func (s DetectorModelVersionSummary) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.CreationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DetectorModelArn != nil {
 		v := *s.DetectorModelArn
@@ -658,7 +662,8 @@ func (s DetectorModelVersionSummary) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.LastUpdateTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdateTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdateTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.RoleArn != nil {
 		v := *s.RoleArn
@@ -845,7 +850,7 @@ type InputConfiguration struct {
 	// The time the input was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" required:"true"`
 
 	// The ARN of the input.
 	//
@@ -863,7 +868,7 @@ type InputConfiguration struct {
 	// The last time the input was updated.
 	//
 	// LastUpdateTime is a required field
-	LastUpdateTime *time.Time `locationName:"lastUpdateTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	LastUpdateTime *time.Time `locationName:"lastUpdateTime" type:"timestamp" required:"true"`
 
 	// The status of the input.
 	//
@@ -882,7 +887,8 @@ func (s InputConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.InputArn != nil {
 		v := *s.InputArn
@@ -906,7 +912,8 @@ func (s InputConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastUpdateTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdateTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdateTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status
@@ -984,7 +991,7 @@ type InputSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The time the input was created.
-	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp"`
 
 	// The ARN of the input.
 	InputArn *string `locationName:"inputArn" type:"string"`
@@ -996,7 +1003,7 @@ type InputSummary struct {
 	InputName *string `locationName:"inputName" min:"1" type:"string"`
 
 	// The last time the input was updated.
-	LastUpdateTime *time.Time `locationName:"lastUpdateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdateTime *time.Time `locationName:"lastUpdateTime" type:"timestamp"`
 
 	// The status of the input.
 	Status InputStatus `locationName:"status" type:"string" enum:"true"`
@@ -1013,7 +1020,8 @@ func (s InputSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.InputArn != nil {
 		v := *s.InputArn
@@ -1037,7 +1045,8 @@ func (s InputSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastUpdateTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdateTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdateTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status

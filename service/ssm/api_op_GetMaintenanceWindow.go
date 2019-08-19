@@ -51,7 +51,7 @@ type GetMaintenanceWindowOutput struct {
 	AllowUnassociatedTargets *bool `type:"boolean"`
 
 	// The date the maintenance window was created.
-	CreatedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedDate *time.Time `type:"timestamp"`
 
 	// The number of hours before the end of the maintenance window that Systems
 	// Manager stops scheduling new tasks for execution.
@@ -72,7 +72,7 @@ type GetMaintenanceWindowOutput struct {
 	EndDate *string `type:"string"`
 
 	// The date the maintenance window was last modified.
-	ModifiedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ModifiedDate *time.Time `type:"timestamp"`
 
 	// The name of the maintenance window.
 	Name *string `min:"3" type:"string"`

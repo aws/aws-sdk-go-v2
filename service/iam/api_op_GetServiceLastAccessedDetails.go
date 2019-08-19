@@ -88,13 +88,13 @@ type GetServiceLastAccessedDetailsOutput struct {
 	// status value of IN_PROGRESS.
 	//
 	// JobCompletionDate is a required field
-	JobCompletionDate *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	JobCompletionDate *time.Time `type:"timestamp" required:"true"`
 
 	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
 	// when the report job was created.
 	//
 	// JobCreationDate is a required field
-	JobCreationDate *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	JobCreationDate *time.Time `type:"timestamp" required:"true"`
 
 	// The status of the job.
 	//

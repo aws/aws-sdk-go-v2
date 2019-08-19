@@ -103,7 +103,7 @@ type ApplicationInfo struct {
 	ComputePlatform ComputePlatform `locationName:"computePlatform" type:"string" enum:"true"`
 
 	// The time at which the application was created.
-	CreateTime *time.Time `locationName:"createTime" type:"timestamp" timestampFormat:"unix"`
+	CreateTime *time.Time `locationName:"createTime" type:"timestamp"`
 
 	// The name for a connection to a GitHub account.
 	GitHubAccountName *string `locationName:"gitHubAccountName" type:"string"`
@@ -218,7 +218,7 @@ type DeploymentConfigInfo struct {
 	ComputePlatform ComputePlatform `locationName:"computePlatform" type:"string" enum:"true"`
 
 	// The time at which the deployment configuration was created.
-	CreateTime *time.Time `locationName:"createTime" type:"timestamp" timestampFormat:"unix"`
+	CreateTime *time.Time `locationName:"createTime" type:"timestamp"`
 
 	// The deployment configuration ID.
 	DeploymentConfigId *string `locationName:"deploymentConfigId" type:"string"`
@@ -350,13 +350,13 @@ type DeploymentInfo struct {
 	BlueGreenDeploymentConfiguration *BlueGreenDeploymentConfiguration `locationName:"blueGreenDeploymentConfiguration" type:"structure"`
 
 	// A timestamp that indicates when the deployment was complete.
-	CompleteTime *time.Time `locationName:"completeTime" type:"timestamp" timestampFormat:"unix"`
+	CompleteTime *time.Time `locationName:"completeTime" type:"timestamp"`
 
 	// The destination platform type for the deployment (Lambda, Server, or ECS).
 	ComputePlatform ComputePlatform `locationName:"computePlatform" type:"string" enum:"true"`
 
 	// A timestamp that indicates when the deployment was created.
-	CreateTime *time.Time `locationName:"createTime" type:"timestamp" timestampFormat:"unix"`
+	CreateTime *time.Time `locationName:"createTime" type:"timestamp"`
 
 	// The means by which the deployment was created:
 	//
@@ -457,7 +457,7 @@ type DeploymentInfo struct {
 	// In some cases, the reported value of the start time might be later than the
 	// complete time. This is due to differences in the clock settings of backend
 	// servers that participate in the deployment process.
-	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
 
 	// The current state of the deployment as a whole.
 	Status DeploymentStatus `locationName:"status" type:"string" enum:"true"`
@@ -691,7 +691,7 @@ type ECSTarget struct {
 
 	// The date and time when the target Amazon ECS application was updated by a
 	// deployment.
-	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
 
 	// The lifecycle events of the deployment to this target Amazon ECS application.
 	LifecycleEvents []LifecycleEvent `locationName:"lifecycleEvents" type:"list"`
@@ -858,13 +858,13 @@ type GenericRevisionInfo struct {
 	Description *string `locationName:"description" type:"string"`
 
 	// When the revision was first used by AWS CodeDeploy.
-	FirstUsedTime *time.Time `locationName:"firstUsedTime" type:"timestamp" timestampFormat:"unix"`
+	FirstUsedTime *time.Time `locationName:"firstUsedTime" type:"timestamp"`
 
 	// When the revision was last used by AWS CodeDeploy.
-	LastUsedTime *time.Time `locationName:"lastUsedTime" type:"timestamp" timestampFormat:"unix"`
+	LastUsedTime *time.Time `locationName:"lastUsedTime" type:"timestamp"`
 
 	// When the revision was registered with AWS CodeDeploy.
-	RegisterTime *time.Time `locationName:"registerTime" type:"timestamp" timestampFormat:"unix"`
+	RegisterTime *time.Time `locationName:"registerTime" type:"timestamp"`
 }
 
 // String returns the string representation
@@ -921,7 +921,7 @@ type InstanceInfo struct {
 
 	// If the on-premises instance was deregistered, the time at which the on-premises
 	// instance was deregistered.
-	DeregisterTime *time.Time `locationName:"deregisterTime" type:"timestamp" timestampFormat:"unix"`
+	DeregisterTime *time.Time `locationName:"deregisterTime" type:"timestamp"`
 
 	// The ARN of the IAM session associated with the on-premises instance.
 	IamSessionArn *string `locationName:"iamSessionArn" type:"string"`
@@ -936,7 +936,7 @@ type InstanceInfo struct {
 	InstanceName *string `locationName:"instanceName" type:"string"`
 
 	// The time at which the on-premises instance was registered.
-	RegisterTime *time.Time `locationName:"registerTime" type:"timestamp" timestampFormat:"unix"`
+	RegisterTime *time.Time `locationName:"registerTime" type:"timestamp"`
 
 	// The tags currently associated with the on-premises instance.
 	Tags []Tag `locationName:"tags" type:"list"`
@@ -967,7 +967,7 @@ type InstanceSummary struct {
 	InstanceType InstanceType `locationName:"instanceType" type:"string" enum:"true"`
 
 	// A timestamp that indicaties when the instance information was last updated.
-	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
 
 	// A list of lifecycle events for this instance.
 	LifecycleEvents []LifecycleEvent `locationName:"lifecycleEvents" type:"list"`
@@ -1007,7 +1007,7 @@ type InstanceTarget struct {
 	InstanceLabel TargetLabel `locationName:"instanceLabel" type:"string" enum:"true"`
 
 	// The date and time when the target instance was updated by a deployment.
-	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
 
 	// The lifecycle events of the deployment to this target instance.
 	LifecycleEvents []LifecycleEvent `locationName:"lifecycleEvents" type:"list"`
@@ -1068,7 +1068,7 @@ type LambdaTarget struct {
 	LambdaFunctionInfo *LambdaFunctionInfo `locationName:"lambdaFunctionInfo" type:"structure"`
 
 	// The date and time when the target Lambda function was updated by a deployment.
-	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
 
 	// The lifecycle events of the deployment to this target Lambda function.
 	LifecycleEvents []LifecycleEvent `locationName:"lifecycleEvents" type:"list"`
@@ -1096,14 +1096,14 @@ type LastDeploymentInfo struct {
 
 	// A timestamp that indicates when the most recent deployment to the deployment
 	// group started.
-	CreateTime *time.Time `locationName:"createTime" type:"timestamp" timestampFormat:"unix"`
+	CreateTime *time.Time `locationName:"createTime" type:"timestamp"`
 
 	// The unique ID of a deployment.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
 
 	// A timestamp that indicates when the most recent deployment to the deployment
 	// group was complete.
-	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
 
 	// The status of the most recent deployment.
 	Status DeploymentStatus `locationName:"status" type:"string" enum:"true"`
@@ -1123,14 +1123,14 @@ type LifecycleEvent struct {
 	Diagnostics *Diagnostics `locationName:"diagnostics" type:"structure"`
 
 	// A timestamp that indicates when the deployment lifecycle event ended.
-	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
 
 	// The deployment lifecycle event name, such as ApplicationStop, BeforeInstall,
 	// AfterInstall, ApplicationStart, or ValidateService.
 	LifecycleEventName *string `locationName:"lifecycleEventName" type:"string"`
 
 	// A timestamp that indicates when the deployment lifecycle event started.
-	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
 
 	// The deployment lifecycle event status:
 	//
@@ -1547,12 +1547,12 @@ type TimeRange struct {
 	// The end time of the time range.
 	//
 	// Specify null to leave the end time open-ended.
-	End *time.Time `locationName:"end" type:"timestamp" timestampFormat:"unix"`
+	End *time.Time `locationName:"end" type:"timestamp"`
 
 	// The start time of the time range.
 	//
 	// Specify null to leave the start time open-ended.
-	Start *time.Time `locationName:"start" type:"timestamp" timestampFormat:"unix"`
+	Start *time.Time `locationName:"start" type:"timestamp"`
 }
 
 // String returns the string representation

@@ -59,7 +59,7 @@ type GetShardIteratorInput struct {
 	// iterator returned is for the next (later) record. If the time stamp is older
 	// than the current trim horizon, the iterator returned is for the oldest untrimmed
 	// data record (TRIM_HORIZON).
-	Timestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	Timestamp *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

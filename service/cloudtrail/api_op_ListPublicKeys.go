@@ -17,7 +17,7 @@ type ListPublicKeysInput struct {
 
 	// Optionally specifies, in UTC, the end of the time range to look up public
 	// keys for CloudTrail digest files. If not specified, the current time is used.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// Reserved for future use.
 	NextToken *string `type:"string"`
@@ -25,7 +25,7 @@ type ListPublicKeysInput struct {
 	// Optionally specifies, in UTC, the start of the time range to look up public
 	// keys for CloudTrail digest files. If not specified, the current time is used,
 	// and the current public key is returned.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

@@ -244,7 +244,7 @@ type QueryExecutionStatus struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time that the query completed.
-	CompletionDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CompletionDateTime *time.Time `type:"timestamp"`
 
 	// The state of query execution. QUEUED state is listed but is not used by Athena
 	// and is reserved for future use. RUNNING indicates that the query has been
@@ -258,7 +258,7 @@ type QueryExecutionStatus struct {
 	StateChangeReason *string `type:"string"`
 
 	// The date and time that the query was submitted.
-	SubmissionDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmissionDateTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -529,7 +529,7 @@ type WorkGroup struct {
 	Configuration *WorkGroupConfiguration `type:"structure"`
 
 	// The date and time the workgroup was created.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The workgroup description.
 	Description *string `type:"string"`
@@ -661,7 +661,7 @@ type WorkGroupSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The workgroup creation date and time.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The workgroup description.
 	Description *string `type:"string"`

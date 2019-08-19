@@ -24,6 +24,7 @@ func (s UpdateEventConfigurationsInput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateEventConfigurationsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.EventConfigurations != nil {
 		v := s.EventConfigurations

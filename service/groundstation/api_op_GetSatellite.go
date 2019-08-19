@@ -42,7 +42,7 @@ func (s *GetSatelliteInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetSatelliteInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.SatelliteId != nil {
 		v := *s.SatelliteId
@@ -58,10 +58,10 @@ type GetSatelliteOutput struct {
 	_ struct{} `type:"structure"`
 
 	// When a satellite was created.
-	DateCreated *time.Time `locationName:"dateCreated" type:"timestamp" timestampFormat:"unix"`
+	DateCreated *time.Time `locationName:"dateCreated" type:"timestamp"`
 
 	// When a satellite was last updated.
-	LastUpdated *time.Time `locationName:"lastUpdated" type:"timestamp" timestampFormat:"unix"`
+	LastUpdated *time.Time `locationName:"lastUpdated" type:"timestamp"`
 
 	// NORAD satellite ID number.
 	NoradSatelliteID *int64 `locationName:"noradSatelliteID" min:"1" type:"integer"`
@@ -87,13 +87,15 @@ func (s GetSatelliteOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DateCreated
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "dateCreated", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "dateCreated",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.LastUpdated != nil {
 		v := *s.LastUpdated
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdated", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdated",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.NoradSatelliteID != nil {
 		v := *s.NoradSatelliteID

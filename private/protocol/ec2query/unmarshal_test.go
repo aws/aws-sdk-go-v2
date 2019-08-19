@@ -1216,9 +1216,13 @@ type OutputService10TestShapeOutputService10TestCaseOperation1Input struct {
 type OutputService10TestShapeOutputService10TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	FooEnum OutputService10TestShapeEC2EnumType `type:"string" enum:"true"`
+	StructMember *OutputService10TestShapeTimeContainer `type:"structure"`
 
-	ListEnums []OutputService10TestShapeEC2EnumType `type:"list"`
+	TimeArg *time.Time `type:"timestamp"`
+
+	TimeCustom *time.Time `type:"timestamp" timestampFormat:"rfc822"`
+
+	TimeFormat *time.Time `type:"timestamp" timestampFormat:"unixTimestamp"`
 }
 
 const opOutputService10TestCaseOperation1 = "OperationName"
@@ -1285,19 +1289,151 @@ func (r *OutputService10TestCaseOperation1Response) SDKResponseMetdata() *aws.Re
 	return r.response
 }
 
-type OutputService10TestShapeEC2EnumType string
+type OutputService10TestShapeTimeContainer struct {
+	_ struct{} `type:"structure"`
 
-// Enum values for OutputService10TestShapeEC2EnumType
+	Bar *time.Time `locationName:"bar" type:"timestamp" timestampFormat:"unixTimestamp"`
+
+	Foo *time.Time `locationName:"foo" type:"timestamp"`
+}
+
+// OutputService11ProtocolTest provides the API operation methods for making requests to
+// OutputService11ProtocolTest. See this package's package overview docs
+// for details on the service.
+//
+// The client's methods are safe to use concurrently. It is not safe to
+// modify mutate any of the struct's properties though.
+type OutputService11ProtocolTest struct {
+	*aws.Client
+}
+
+// New creates a new instance of the client from the provided Config.
+//
+// Example:
+//     // Create a client from just a config.
+//     svc := outputservice11protocoltest.New(myConfig)
+func NewOutputService11ProtocolTest(config aws.Config) *OutputService11ProtocolTest {
+	svc := &OutputService11ProtocolTest{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
+				ServiceName:   "OutputService11ProtocolTest",
+				ServiceID:     "OutputService11ProtocolTest",
+				EndpointsID:   "outputservice11protocoltest",
+				SigningName:   "outputservice11protocoltest",
+				SigningRegion: config.Region,
+				APIVersion:    "",
+			},
+		),
+	}
+
+	// Handlers
+	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
+	svc.Handlers.Build.PushBackNamed(ec2query.BuildHandler)
+	svc.Handlers.Unmarshal.PushBackNamed(ec2query.UnmarshalHandler)
+	svc.Handlers.UnmarshalMeta.PushBackNamed(ec2query.UnmarshalMetaHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(ec2query.UnmarshalErrorHandler)
+
+	return svc
+}
+
+// newRequest creates a new request for a client operation and runs any
+// custom request initialization.
+func (c *OutputService11ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
+	req := c.NewRequest(op, params, data)
+
+	return req
+}
+
+type OutputService11TestShapeOutputService11TestCaseOperation1Input struct {
+	_ struct{} `type:"structure"`
+}
+
+type OutputService11TestShapeOutputService11TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+
+	FooEnum OutputService11TestShapeEC2EnumType `type:"string" enum:"true"`
+
+	ListEnums []OutputService11TestShapeEC2EnumType `type:"list"`
+}
+
+const opOutputService11TestCaseOperation1 = "OperationName"
+
+// OutputService11TestCaseOperation1Request returns a request value for making API operation for
+// .
+//
+//    // Example sending a request using OutputService11TestCaseOperation1Request.
+//    req := client.OutputService11TestCaseOperation1Request(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *OutputService11ProtocolTest) OutputService11TestCaseOperation1Request(input *OutputService11TestShapeOutputService11TestCaseOperation1Input) OutputService11TestCaseOperation1Request {
+	op := &aws.Operation{
+		Name: opOutputService11TestCaseOperation1,
+
+		HTTPPath: "/",
+	}
+
+	if input == nil {
+		input = &OutputService11TestShapeOutputService11TestCaseOperation1Input{}
+	}
+
+	req := c.newRequest(op, input, &OutputService11TestShapeOutputService11TestCaseOperation1Output{})
+	return OutputService11TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService11TestCaseOperation1Request}
+}
+
+// OutputService11TestCaseOperation1Request is the request type for the
+// OutputService11TestCaseOperation1 API operation.
+type OutputService11TestCaseOperation1Request struct {
+	*aws.Request
+	Input *OutputService11TestShapeOutputService11TestCaseOperation1Input
+	Copy  func(*OutputService11TestShapeOutputService11TestCaseOperation1Input) OutputService11TestCaseOperation1Request
+}
+
+// Send marshals and sends the OutputService11TestCaseOperation1 API request.
+func (r OutputService11TestCaseOperation1Request) Send(ctx context.Context) (*OutputService11TestCaseOperation1Response, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	resp := &OutputService11TestCaseOperation1Response{
+		OutputService11TestShapeOutputService11TestCaseOperation1Output: r.Request.Data.(*OutputService11TestShapeOutputService11TestCaseOperation1Output),
+		response: &aws.Response{Request: r.Request},
+	}
+
+	return resp, nil
+}
+
+// OutputService11TestCaseOperation1Response is the response type for the
+// OutputService11TestCaseOperation1 API operation.
+type OutputService11TestCaseOperation1Response struct {
+	*OutputService11TestShapeOutputService11TestCaseOperation1Output
+
+	response *aws.Response
+}
+
+// SDKResponseMetdata returns the response metadata for the
+// OutputService11TestCaseOperation1 request.
+func (r *OutputService11TestCaseOperation1Response) SDKResponseMetdata() *aws.Response {
+	return r.response
+}
+
+type OutputService11TestShapeEC2EnumType string
+
+// Enum values for OutputService11TestShapeEC2EnumType
 const (
-	EC2EnumTypeFoo OutputService10TestShapeEC2EnumType = "foo"
-	EC2EnumTypeBar OutputService10TestShapeEC2EnumType = "bar"
+	EC2EnumTypeFoo OutputService11TestShapeEC2EnumType = "foo"
+	EC2EnumTypeBar OutputService11TestShapeEC2EnumType = "bar"
 )
 
-func (enum OutputService10TestShapeEC2EnumType) MarshalValue() (string, error) {
+func (enum OutputService11TestShapeEC2EnumType) MarshalValue() (string, error) {
 	return string(enum), nil
 }
 
-func (enum OutputService10TestShapeEC2EnumType) MarshalValueBuf(b []byte) ([]byte, error) {
+func (enum OutputService11TestShapeEC2EnumType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -1615,13 +1751,13 @@ func TestOutputService9ProtocolTestEmptyStringCase1(t *testing.T) {
 
 }
 
-func TestOutputService10ProtocolTestEnumOutputCase1(t *testing.T) {
+func TestOutputService10ProtocolTestTimestampMembersCase1(t *testing.T) {
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
 
 	svc := NewOutputService10ProtocolTest(cfg)
 
-	buf := bytes.NewReader([]byte("<OperationNameResponse><FooEnum>foo</FooEnum><ListEnums><member>foo</member><member>bar</member></ListEnums></OperationNameResponse>"))
+	buf := bytes.NewReader([]byte("<OperationNameResponse><StructMember><foo>2014-04-29T18:30:38Z</foo><bar>1398796238</bar></StructMember><TimeArg>2014-04-29T18:30:38Z</TimeArg><TimeCustom>Tue, 29 Apr 2014 18:30:38 GMT</TimeCustom><TimeFormat>1398796238</TimeFormat><RequestId>requestid</RequestId></OperationNameResponse>"))
 	req := svc.OutputService10TestCaseOperation1Request(nil)
 	req.HTTPResponse = &http.Response{StatusCode: 200, Body: ioutil.NopCloser(buf), Header: http.Header{}}
 
@@ -1639,13 +1775,55 @@ func TestOutputService10ProtocolTestEnumOutputCase1(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := OutputService10TestShapeEC2EnumType("foo"), out.FooEnum; e != a {
+	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.StructMember.Bar.String(); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := OutputService10TestShapeEC2EnumType("foo"), out.ListEnums[0]; e != a {
+	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.StructMember.Foo.String(); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := OutputService10TestShapeEC2EnumType("bar"), out.ListEnums[1]; e != a {
+	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.TimeArg.String(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.TimeCustom.String(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.TimeFormat.String(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+
+}
+
+func TestOutputService11ProtocolTestEnumOutputCase1(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService11ProtocolTest(cfg)
+
+	buf := bytes.NewReader([]byte("<OperationNameResponse><FooEnum>foo</FooEnum><ListEnums><member>foo</member><member>bar</member></ListEnums></OperationNameResponse>"))
+	req := svc.OutputService11TestCaseOperation1Request(nil)
+	req.HTTPResponse = &http.Response{StatusCode: 200, Body: ioutil.NopCloser(buf), Header: http.Header{}}
+
+	// set headers
+
+	// unmarshal response
+	ec2query.UnmarshalMeta(req.Request)
+	ec2query.Unmarshal(req.Request)
+	if req.Error != nil {
+		t.Errorf("expect not error, got %v", req.Error)
+	}
+
+	out := req.Data.(*OutputService11TestShapeOutputService11TestCaseOperation1Output)
+	// assert response
+	if out == nil {
+		t.Errorf("expect not to be nil")
+	}
+	if e, a := OutputService11TestShapeEC2EnumType("foo"), out.FooEnum; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := OutputService11TestShapeEC2EnumType("foo"), out.ListEnums[0]; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := OutputService11TestShapeEC2EnumType("bar"), out.ListEnums[1]; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 

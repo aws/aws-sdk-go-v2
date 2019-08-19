@@ -96,6 +96,7 @@ type OutputService1TestShapeOutputService1TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService1TestShapeOutputService1TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	return nil
 }
@@ -310,6 +311,7 @@ type OutputService2TestShapeOutputService2TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService2TestShapeOutputService2TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	return nil
 }
@@ -476,6 +478,7 @@ type OutputService3TestShapeOutputService3TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService3TestShapeOutputService3TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	return nil
 }
@@ -485,7 +488,17 @@ type OutputService3TestShapeOutputService3TestCaseOperation1Output struct {
 
 	StructMember *OutputService3TestShapeTimeContainer `type:"structure"`
 
-	TimeMember *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TimeArg *time.Time `type:"timestamp"`
+
+	TimeArgInHeader *time.Time `location:"header" locationName:"x-amz-timearg" type:"timestamp"`
+
+	TimeCustom *time.Time `type:"timestamp" timestampFormat:"rfc822"`
+
+	TimeCustomInHeader *time.Time `location:"header" locationName:"x-amz-timecustom" type:"timestamp" timestampFormat:"unixTimestamp"`
+
+	TimeFormat *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	TimeFormatInHeader *time.Time `location:"header" locationName:"x-amz-timeformat" type:"timestamp" timestampFormat:"iso8601"`
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -496,11 +509,47 @@ func (s OutputService3TestShapeOutputService3TestCaseOperation1Output) MarshalFi
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "StructMember", v, metadata)
 	}
-	if s.TimeMember != nil {
-		v := *s.TimeMember
+	if s.TimeArg != nil {
+		v := *s.TimeArg
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "TimeMember", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "TimeArg",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.TimeCustom != nil {
+		v := *s.TimeCustom
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TimeCustom",
+			protocol.TimeValue{V: v, Format: "rfc822", QuotedFormatTime: true}, metadata)
+	}
+	if s.TimeFormat != nil {
+		v := *s.TimeFormat
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TimeFormat",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
+	}
+	if s.TimeArgInHeader != nil {
+		v := *s.TimeArgInHeader
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-timearg",
+			protocol.TimeValue{V: v, Format: protocol.RFC822TimeFormatName, QuotedFormatTime: false}, metadata)
+	}
+	if s.TimeCustomInHeader != nil {
+		v := *s.TimeCustomInHeader
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-timecustom",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: false}, metadata)
+	}
+	if s.TimeFormatInHeader != nil {
+		v := *s.TimeFormatInHeader
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-timeformat",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: false}, metadata)
 	}
 	return nil
 }
@@ -572,16 +621,26 @@ func (r *OutputService3TestCaseOperation1Response) SDKResponseMetdata() *aws.Res
 type OutputService3TestShapeTimeContainer struct {
 	_ struct{} `type:"structure"`
 
-	Foo *time.Time `locationName:"foo" type:"timestamp" timestampFormat:"unix"`
+	Bar *time.Time `locationName:"bar" type:"timestamp" timestampFormat:"iso8601"`
+
+	Foo *time.Time `locationName:"foo" type:"timestamp"`
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService3TestShapeTimeContainer) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Bar != nil {
+		v := *s.Bar
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "bar",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
+	}
 	if s.Foo != nil {
 		v := *s.Foo
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "foo", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "foo",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -640,6 +699,7 @@ type OutputService4TestShapeOutputService4TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService4TestShapeOutputService4TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	return nil
 }
@@ -785,6 +845,7 @@ type OutputService5TestShapeOutputService5TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService5TestShapeOutputService5TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	return nil
 }
@@ -947,6 +1008,7 @@ type OutputService6TestShapeOutputService6TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService6TestShapeOutputService6TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	return nil
 }
@@ -1097,6 +1159,7 @@ type OutputService7TestShapeOutputService7TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService7TestShapeOutputService7TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	return nil
 }
@@ -1242,6 +1305,7 @@ type OutputService8TestShapeOutputService8TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService8TestShapeOutputService8TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	return nil
 }
@@ -1381,6 +1445,7 @@ type OutputService9TestShapeOutputService9TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService9TestShapeOutputService9TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	return nil
 }
@@ -1540,6 +1605,7 @@ type OutputService10TestShapeOutputService10TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService10TestShapeOutputService10TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	return nil
 }
@@ -1704,6 +1770,7 @@ type OutputService11TestShapeOutputService11TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService11TestShapeOutputService11TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	return nil
 }
@@ -1843,6 +1910,7 @@ type OutputService12TestShapeOutputService12TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService12TestShapeOutputService12TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	return nil
 }
@@ -1956,6 +2024,7 @@ type OutputService12TestShapeOutputService12TestCaseOperation2Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService12TestShapeOutputService12TestCaseOperation2Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	return nil
 }
@@ -2063,119 +2132,6 @@ func (r *OutputService12TestCaseOperation2Response) SDKResponseMetdata() *aws.Re
 	return r.response
 }
 
-type OutputService12TestShapeOutputService12TestCaseOperation3Input struct {
-	_ struct{} `type:"structure"`
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s OutputService12TestShapeOutputService12TestCaseOperation3Input) MarshalFields(e protocol.FieldEncoder) error {
-
-	return nil
-}
-
-type OutputService12TestShapeOutputService12TestCaseOperation3Output struct {
-	_ struct{} `type:"structure"`
-
-	BodyField aws.JSONValue `type:"jsonvalue"`
-
-	BodyListField []aws.JSONValue `type:"list"`
-
-	HeaderField aws.JSONValue `location:"header" locationName:"X-Amz-Foo" type:"jsonvalue"`
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s OutputService12TestShapeOutputService12TestCaseOperation3Output) MarshalFields(e protocol.FieldEncoder) error {
-	if s.BodyField != nil {
-		v := s.BodyField
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "BodyField", protocol.JSONValue{V: v, EscapeMode: protocol.QuotedEscape}, metadata)
-	}
-	if s.BodyListField != nil {
-		v := s.BodyListField
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "BodyListField", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.JSONValue{V: v1, EscapeMode: protocol.QuotedEscape})
-		}
-		ls0.End()
-
-	}
-	if s.HeaderField != nil {
-		v := s.HeaderField
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "X-Amz-Foo", protocol.JSONValue{V: v, EscapeMode: protocol.Base64Escape}, metadata)
-	}
-	return nil
-}
-
-const opOutputService12TestCaseOperation3 = "OperationName"
-
-// OutputService12TestCaseOperation3Request returns a request value for making API operation for
-// .
-//
-//    // Example sending a request using OutputService12TestCaseOperation3Request.
-//    req := client.OutputService12TestCaseOperation3Request(params)
-//    resp, err := req.Send(context.TODO())
-//    if err == nil {
-//        fmt.Println(resp)
-//    }
-func (c *OutputService12ProtocolTest) OutputService12TestCaseOperation3Request(input *OutputService12TestShapeOutputService12TestCaseOperation3Input) OutputService12TestCaseOperation3Request {
-	op := &aws.Operation{
-		Name: opOutputService12TestCaseOperation3,
-
-		HTTPPath: "/",
-	}
-
-	if input == nil {
-		input = &OutputService12TestShapeOutputService12TestCaseOperation3Input{}
-	}
-
-	req := c.newRequest(op, input, &OutputService12TestShapeOutputService12TestCaseOperation3Output{})
-	return OutputService12TestCaseOperation3Request{Request: req, Input: input, Copy: c.OutputService12TestCaseOperation3Request}
-}
-
-// OutputService12TestCaseOperation3Request is the request type for the
-// OutputService12TestCaseOperation3 API operation.
-type OutputService12TestCaseOperation3Request struct {
-	*aws.Request
-	Input *OutputService12TestShapeOutputService12TestCaseOperation3Input
-	Copy  func(*OutputService12TestShapeOutputService12TestCaseOperation3Input) OutputService12TestCaseOperation3Request
-}
-
-// Send marshals and sends the OutputService12TestCaseOperation3 API request.
-func (r OutputService12TestCaseOperation3Request) Send(ctx context.Context) (*OutputService12TestCaseOperation3Response, error) {
-	r.Request.SetContext(ctx)
-	err := r.Request.Send()
-	if err != nil {
-		return nil, err
-	}
-
-	resp := &OutputService12TestCaseOperation3Response{
-		OutputService12TestShapeOutputService12TestCaseOperation3Output: r.Request.Data.(*OutputService12TestShapeOutputService12TestCaseOperation3Output),
-		response: &aws.Response{Request: r.Request},
-	}
-
-	return resp, nil
-}
-
-// OutputService12TestCaseOperation3Response is the response type for the
-// OutputService12TestCaseOperation3 API operation.
-type OutputService12TestCaseOperation3Response struct {
-	*OutputService12TestShapeOutputService12TestCaseOperation3Output
-
-	response *aws.Response
-}
-
-// SDKResponseMetdata returns the response metadata for the
-// OutputService12TestCaseOperation3 request.
-func (r *OutputService12TestCaseOperation3Response) SDKResponseMetdata() *aws.Response {
-	return r.response
-}
-
 // OutputService13ProtocolTest provides the API operation methods for making requests to
 // OutputService13ProtocolTest. See this package's package overview docs
 // for details on the service.
@@ -2230,6 +2186,7 @@ type OutputService13TestShapeOutputService13TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService13TestShapeOutputService13TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	return nil
 }
@@ -2349,6 +2306,7 @@ type OutputService13TestShapeOutputService13TestCaseOperation2Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService13TestShapeOutputService13TestCaseOperation2Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if len(s.FooEnum) > 0 {
 		v := s.FooEnum
@@ -2576,11 +2534,14 @@ func TestOutputService3ProtocolTestTimestampMembersCase1(t *testing.T) {
 
 	svc := NewOutputService3ProtocolTest(cfg)
 
-	buf := bytes.NewReader([]byte("{\"TimeMember\": 1398796238, \"StructMember\": {\"foo\": 1398796238}}"))
+	buf := bytes.NewReader([]byte("{\"TimeArg\": 1398796238, \"TimeCustom\": \"Tue, 29 Apr 2014 18:30:38 GMT\", \"TimeFormat\": \"2014-04-29T18:30:38Z\", \"StructMember\": {\"foo\": 1398796238, \"bar\": \"2014-04-29T18:30:38Z\"}}"))
 	req := svc.OutputService3TestCaseOperation1Request(nil)
 	req.HTTPResponse = &http.Response{StatusCode: 200, Body: ioutil.NopCloser(buf), Header: http.Header{}}
 
 	// set headers
+	req.HTTPResponse.Header.Set("x-amz-timearg", "Tue, 29 Apr 2014 18:30:38 GMT")
+	req.HTTPResponse.Header.Set("x-amz-timecustom", "1398796238")
+	req.HTTPResponse.Header.Set("x-amz-timeformat", "2014-04-29T18:30:38Z")
 
 	// unmarshal response
 	restjson.UnmarshalMeta(req.Request)
@@ -2594,10 +2555,28 @@ func TestOutputService3ProtocolTestTimestampMembersCase1(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
+	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.StructMember.Bar.String(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
 	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.StructMember.Foo.String(); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.TimeMember.String(); e != a {
+	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.TimeArg.String(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.TimeArgInHeader.String(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.TimeCustom.String(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.TimeCustomInHeader.String(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.TimeFormat.String(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.TimeFormatInHeader.String(); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
@@ -2932,33 +2911,6 @@ func TestOutputService12ProtocolTestJSONValueTraitCase2(t *testing.T) {
 		t.Errorf("expect not to be nil")
 	}
 	reflect.DeepEqual(out.BodyListField[0], map[string]interface{}{"Foo": "Bar"})
-
-}
-
-func TestOutputService12ProtocolTestJSONValueTraitCase3(t *testing.T) {
-	cfg := unit.Config()
-	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
-
-	svc := NewOutputService12ProtocolTest(cfg)
-
-	buf := bytes.NewReader([]byte(""))
-	req := svc.OutputService12TestCaseOperation3Request(nil)
-	req.HTTPResponse = &http.Response{StatusCode: 200, Body: ioutil.NopCloser(buf), Header: http.Header{}}
-
-	// set headers
-
-	// unmarshal response
-	restjson.UnmarshalMeta(req.Request)
-	restjson.Unmarshal(req.Request)
-	if req.Error != nil {
-		t.Errorf("expect not error, got %v", req.Error)
-	}
-
-	out := req.Data.(*OutputService12TestShapeOutputService12TestCaseOperation3Output)
-	// assert response
-	if out == nil {
-		t.Errorf("expect not to be nil")
-	}
 
 }
 

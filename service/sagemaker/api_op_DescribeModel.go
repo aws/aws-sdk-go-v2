@@ -49,7 +49,7 @@ type DescribeModelOutput struct {
 	// A timestamp that shows when the model was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// If True, no inbound or outbound network calls can be made to or from the
 	// model container.

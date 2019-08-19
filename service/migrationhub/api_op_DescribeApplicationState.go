@@ -50,7 +50,7 @@ type DescribeApplicationStateOutput struct {
 	ApplicationStatus ApplicationStatus `type:"string" enum:"true"`
 
 	// The timestamp when the application status was last updated.
-	LastUpdatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

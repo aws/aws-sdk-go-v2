@@ -17,7 +17,7 @@ type ViewBillingInput struct {
 
 	// The end date and time for the time period for which you want a list of billing
 	// records. Specify the date and time in Coordinated Universal time (UTC).
-	End *time.Time `type:"timestamp" timestampFormat:"unix"`
+	End *time.Time `type:"timestamp"`
 
 	// For an initial request for a list of billing records, omit this element.
 	// If the number of billing records that are associated with the current AWS
@@ -38,7 +38,7 @@ type ViewBillingInput struct {
 	// The beginning date and time for the time period for which you want a list
 	// of billing records. Specify the date and time in Coordinated Universal time
 	// (UTC).
-	Start *time.Time `type:"timestamp" timestampFormat:"unix"`
+	Start *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

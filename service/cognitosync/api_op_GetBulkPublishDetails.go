@@ -47,7 +47,7 @@ func (s *GetBulkPublishDetailsInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetBulkPublishDetailsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.IdentityPoolId != nil {
 		v := *s.IdentityPoolId
@@ -65,10 +65,10 @@ type GetBulkPublishDetailsOutput struct {
 
 	// If BulkPublishStatus is SUCCEEDED, the time the last bulk publish operation
 	// completed.
-	BulkPublishCompleteTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	BulkPublishCompleteTime *time.Time `type:"timestamp"`
 
 	// The date/time at which the last bulk publish was initiated.
-	BulkPublishStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	BulkPublishStartTime *time.Time `type:"timestamp"`
 
 	// Status of the last bulk publish operation, valid values are:
 	// NOT_STARTED - No bulk publish has been requested for this identity pool
@@ -102,13 +102,15 @@ func (s GetBulkPublishDetailsOutput) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.BulkPublishCompleteTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "BulkPublishCompleteTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "BulkPublishCompleteTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.BulkPublishStartTime != nil {
 		v := *s.BulkPublishStartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "BulkPublishStartTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "BulkPublishStartTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if len(s.BulkPublishStatus) > 0 {
 		v := s.BulkPublishStatus

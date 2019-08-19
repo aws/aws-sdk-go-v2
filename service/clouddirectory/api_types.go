@@ -4008,7 +4008,7 @@ type Directory struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time when the directory was created.
-	CreationDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) that is associated with the directory. For
 	// more information, see arns.
@@ -4032,7 +4032,8 @@ func (s Directory) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDateTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDateTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDateTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DirectoryArn != nil {
 		v := *s.DirectoryArn
@@ -4982,7 +4983,7 @@ type TypedAttributeValue struct {
 	BooleanValue *bool `type:"boolean"`
 
 	// A date and time value.
-	DatetimeValue *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DatetimeValue *time.Time `type:"timestamp"`
 
 	// A number data value.
 	NumberValue *string `type:"string"`
@@ -5014,7 +5015,8 @@ func (s TypedAttributeValue) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DatetimeValue
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DatetimeValue", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "DatetimeValue",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.NumberValue != nil {
 		v := *s.NumberValue

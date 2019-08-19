@@ -54,6 +54,7 @@ func (s *GetPolicyVersionInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetPolicyVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.PolicyName != nil {
 		v := *s.PolicyName
@@ -75,7 +76,7 @@ type GetPolicyVersionOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The date the policy version was created.
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
 
 	// The generation ID of the policy version.
 	GenerationId *string `locationName:"generationId" type:"string"`
@@ -84,7 +85,7 @@ type GetPolicyVersionOutput struct {
 	IsDefaultVersion *bool `locationName:"isDefaultVersion" type:"boolean"`
 
 	// The date the policy version was last modified.
-	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp" timestampFormat:"unix"`
+	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp"`
 
 	// The policy ARN.
 	PolicyArn *string `locationName:"policyArn" type:"string"`
@@ -110,7 +111,8 @@ func (s GetPolicyVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.GenerationId != nil {
 		v := *s.GenerationId
@@ -128,7 +130,8 @@ func (s GetPolicyVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastModifiedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastModifiedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastModifiedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.PolicyArn != nil {
 		v := *s.PolicyArn

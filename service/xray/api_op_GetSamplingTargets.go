@@ -50,6 +50,7 @@ func (s *GetSamplingTargetsInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetSamplingTargetsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.SamplingStatisticsDocuments != nil {
 		v := s.SamplingStatisticsDocuments
@@ -73,7 +74,7 @@ type GetSamplingTargetsOutput struct {
 	// The last time a user changed the sampling rule configuration. If the sampling
 	// rule configuration changed since the service last retrieved it, the service
 	// should call GetSamplingRules to get the latest version.
-	LastRuleModification *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastRuleModification *time.Time `type:"timestamp"`
 
 	// Updated rules that the service should use to sample requests.
 	SamplingTargetDocuments []SamplingTargetDocument `type:"list"`
@@ -93,7 +94,8 @@ func (s GetSamplingTargetsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastRuleModification
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastRuleModification", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastRuleModification",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.SamplingTargetDocuments != nil {
 		v := s.SamplingTargetDocuments

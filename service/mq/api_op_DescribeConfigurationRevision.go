@@ -47,7 +47,7 @@ func (s *DescribeConfigurationRevisionInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeConfigurationRevisionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.ConfigurationId != nil {
 		v := *s.ConfigurationId
@@ -70,7 +70,7 @@ type DescribeConfigurationRevisionOutput struct {
 
 	ConfigurationId *string `locationName:"configurationId" type:"string"`
 
-	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"unix"`
+	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"iso8601"`
 
 	Data *string `locationName:"data" type:"string"`
 
@@ -94,7 +94,8 @@ func (s DescribeConfigurationRevisionOutput) MarshalFields(e protocol.FieldEncod
 		v := *s.Created
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "created", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "created",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.Data != nil {
 		v := *s.Data

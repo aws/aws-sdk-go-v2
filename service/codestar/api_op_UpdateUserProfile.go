@@ -66,7 +66,7 @@ type UpdateUserProfileOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The date the user profile was created, in timestamp format.
-	CreatedTimestamp *time.Time `locationName:"createdTimestamp" type:"timestamp" timestampFormat:"unix"`
+	CreatedTimestamp *time.Time `locationName:"createdTimestamp" type:"timestamp"`
 
 	// The name that is displayed as the friendly name for the user in AWS CodeStar.
 	DisplayName *string `locationName:"displayName" min:"1" type:"string"`
@@ -76,7 +76,7 @@ type UpdateUserProfileOutput struct {
 	EmailAddress *string `locationName:"emailAddress" min:"3" type:"string"`
 
 	// The date the user profile was last modified, in timestamp format.
-	LastModifiedTimestamp *time.Time `locationName:"lastModifiedTimestamp" type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTimestamp *time.Time `locationName:"lastModifiedTimestamp" type:"timestamp"`
 
 	// The SSH public key associated with the user in AWS CodeStar. This is the
 	// public portion of the public/private keypair the user can use to access project

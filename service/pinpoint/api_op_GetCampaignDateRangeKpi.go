@@ -21,7 +21,7 @@ type GetCampaignDateRangeKpiInput struct {
 	// CampaignId is a required field
 	CampaignId *string `location:"uri" locationName:"campaign-id" type:"string" required:"true"`
 
-	EndTime *time.Time `location:"querystring" locationName:"end-time" type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `location:"querystring" locationName:"end-time" type:"timestamp" timestampFormat:"iso8601"`
 
 	// KpiName is a required field
 	KpiName *string `location:"uri" locationName:"kpi-name" type:"string" required:"true"`
@@ -30,7 +30,7 @@ type GetCampaignDateRangeKpiInput struct {
 
 	PageSize *string `location:"querystring" locationName:"page-size" type:"string"`
 
-	StartTime *time.Time `location:"querystring" locationName:"start-time" type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `location:"querystring" locationName:"start-time" type:"timestamp" timestampFormat:"iso8601"`
 }
 
 // String returns the string representation
@@ -62,7 +62,7 @@ func (s *GetCampaignDateRangeKpiInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetCampaignDateRangeKpiInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.ApplicationId != nil {
 		v := *s.ApplicationId
@@ -86,7 +86,8 @@ func (s GetCampaignDateRangeKpiInput) MarshalFields(e protocol.FieldEncoder) err
 		v := *s.EndTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "end-time", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.QueryTarget, "end-time",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: false}, metadata)
 	}
 	if s.NextToken != nil {
 		v := *s.NextToken
@@ -104,7 +105,8 @@ func (s GetCampaignDateRangeKpiInput) MarshalFields(e protocol.FieldEncoder) err
 		v := *s.StartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "start-time", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.QueryTarget, "start-time",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: false}, metadata)
 	}
 	return nil
 }

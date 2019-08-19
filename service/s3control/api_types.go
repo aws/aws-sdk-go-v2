@@ -26,7 +26,7 @@ type JobDescriptor struct {
 	ConfirmationRequired *bool `type:"boolean"`
 
 	// A timestamp indicating when this job was created.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The description for this job, if one was provided in this job's Create Job
 	// request.
@@ -76,11 +76,11 @@ type JobDescriptor struct {
 	SuspendedCause *string `min:"1" type:"string"`
 
 	// The timestamp when this job was suspended, if it has been suspended.
-	SuspendedDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	SuspendedDate *time.Time `type:"timestamp"`
 
 	// A timestamp indicating when this job terminated. A job's termination date
 	// is the date and time when it succeeded, failed, or was canceled.
-	TerminationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	TerminationDate *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -100,7 +100,8 @@ func (s JobDescriptor) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -190,13 +191,15 @@ func (s JobDescriptor) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.SuspendedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SuspendedDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "SuspendedDate",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.TerminationDate != nil {
 		v := *s.TerminationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "TerminationDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "TerminationDate",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	return nil
 }
@@ -242,7 +245,7 @@ type JobListDescriptor struct {
 	_ struct{} `type:"structure"`
 
 	// A timestamp indicating when the specified job was created.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The user-specified description that was included in the specified job's Create
 	// Job request.
@@ -267,7 +270,7 @@ type JobListDescriptor struct {
 
 	// A timestamp indicating when the specified job terminated. A job's termination
 	// date is the date and time when it succeeded, failed, or was canceled.
-	TerminationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	TerminationDate *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -281,7 +284,8 @@ func (s JobListDescriptor) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -323,7 +327,8 @@ func (s JobListDescriptor) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.TerminationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "TerminationDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "TerminationDate",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	return nil
 }
@@ -962,7 +967,7 @@ type S3CopyObjectOperation struct {
 
 	MetadataDirective S3MetadataDirective `type:"string" enum:"true"`
 
-	ModifiedSinceConstraint *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	ModifiedSinceConstraint *time.Time `type:"timestamp"`
 
 	NewObjectMetadata *S3ObjectMetadata `type:"structure"`
 
@@ -972,7 +977,7 @@ type S3CopyObjectOperation struct {
 
 	ObjectLockMode S3ObjectLockMode `type:"string" enum:"true"`
 
-	ObjectLockRetainUntilDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	ObjectLockRetainUntilDate *time.Time `type:"timestamp"`
 
 	RedirectLocation *string `min:"1" type:"string"`
 
@@ -986,7 +991,7 @@ type S3CopyObjectOperation struct {
 
 	TargetResource *string `min:"1" type:"string"`
 
-	UnModifiedSinceConstraint *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	UnModifiedSinceConstraint *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -1065,7 +1070,8 @@ func (s S3CopyObjectOperation) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ModifiedSinceConstraint
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ModifiedSinceConstraint", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "ModifiedSinceConstraint",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.NewObjectMetadata != nil {
 		v := s.NewObjectMetadata
@@ -1101,7 +1107,8 @@ func (s S3CopyObjectOperation) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ObjectLockRetainUntilDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ObjectLockRetainUntilDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "ObjectLockRetainUntilDate",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.RedirectLocation != nil {
 		v := *s.RedirectLocation
@@ -1143,7 +1150,8 @@ func (s S3CopyObjectOperation) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.UnModifiedSinceConstraint
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "UnModifiedSinceConstraint", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "UnModifiedSinceConstraint",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	return nil
 }
@@ -1302,7 +1310,7 @@ type S3ObjectMetadata struct {
 
 	ContentType *string `min:"1" type:"string"`
 
-	HttpExpiresDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	HttpExpiresDate *time.Time `type:"timestamp"`
 
 	RequesterCharged *bool `type:"boolean"`
 
@@ -1392,7 +1400,8 @@ func (s S3ObjectMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.HttpExpiresDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "HttpExpiresDate", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "HttpExpiresDate",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.RequesterCharged != nil {
 		v := *s.RequesterCharged

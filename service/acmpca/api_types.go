@@ -104,24 +104,24 @@ type CertificateAuthority struct {
 	CertificateAuthorityConfiguration *CertificateAuthorityConfiguration `type:"structure"`
 
 	// Date and time at which your private CA was created.
-	CreatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `type:"timestamp"`
 
 	// Reason the request to create your private CA failed.
 	FailureReason FailureReason `type:"string" enum:"true"`
 
 	// Date and time at which your private CA was last updated.
-	LastStateChangeAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastStateChangeAt *time.Time `type:"timestamp"`
 
 	// Date and time after which your private CA certificate is not valid.
-	NotAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	NotAfter *time.Time `type:"timestamp"`
 
 	// Date and time before which your private CA certificate is not valid.
-	NotBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	NotBefore *time.Time `type:"timestamp"`
 
 	// The period during which a deleted CA can be restored. For more information,
 	// see the PermanentDeletionTimeInDays parameter of the DeleteCertificateAuthorityRequest
 	// action.
-	RestorableUntil *time.Time `type:"timestamp" timestampFormat:"unix"`
+	RestorableUntil *time.Time `type:"timestamp"`
 
 	// Information about the certificate revocation list (CRL) created and maintained
 	// by your private CA.
@@ -318,7 +318,7 @@ type Permission struct {
 	CertificateAuthorityArn *string `min:"5" type:"string"`
 
 	// The time at which the permission was created.
-	CreatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `type:"timestamp"`
 
 	// The name of the policy that is associated with the permission.
 	Policy *string `type:"string"`

@@ -103,8 +103,6 @@ func (s OutputService1TestShapeOutputService1TestCaseOperation1Input) MarshalFie
 type OutputService1TestShapeOutputService1TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	Blobs [][]byte `type:"list"`
-
 	Char *string `type:"character"`
 
 	Double *float64 `type:"double"`
@@ -125,27 +123,13 @@ type OutputService1TestShapeOutputService1TestCaseOperation1Output struct {
 
 	Str *string `type:"string"`
 
-	Timestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
-
-	Timestamps []time.Time `type:"list"`
+	Timestamp *time.Time `type:"timestamp"`
 
 	TrueBool *bool `type:"boolean"`
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService1TestShapeOutputService1TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Blobs != nil {
-		v := s.Blobs
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Blobs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.BytesValue(v1))
-		}
-		ls0.End()
-
-	}
 	if s.Char != nil {
 		v := *s.Char
 
@@ -204,19 +188,8 @@ func (s OutputService1TestShapeOutputService1TestCaseOperation1Output) MarshalFi
 		v := *s.Timestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
-	}
-	if s.Timestamps != nil {
-		v := s.Timestamps
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Timestamps", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.TimeValue{V: v1})
-		}
-		ls0.End()
-
+		e.SetValue(protocol.BodyTarget, "Timestamp",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.TrueBool != nil {
 		v := *s.TrueBool
@@ -316,8 +289,6 @@ func (s OutputService1TestShapeOutputService1TestCaseOperation2Input) MarshalFie
 type OutputService1TestShapeOutputService1TestCaseOperation2Output struct {
 	_ struct{} `type:"structure"`
 
-	Blobs [][]byte `type:"list"`
-
 	Char *string `type:"character"`
 
 	Double *float64 `type:"double"`
@@ -338,27 +309,13 @@ type OutputService1TestShapeOutputService1TestCaseOperation2Output struct {
 
 	Str *string `type:"string"`
 
-	Timestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
-
-	Timestamps []time.Time `type:"list"`
+	Timestamp *time.Time `type:"timestamp"`
 
 	TrueBool *bool `type:"boolean"`
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService1TestShapeOutputService1TestCaseOperation2Output) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Blobs != nil {
-		v := s.Blobs
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Blobs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.BytesValue(v1))
-		}
-		ls0.End()
-
-	}
 	if s.Char != nil {
 		v := *s.Char
 
@@ -417,19 +374,8 @@ func (s OutputService1TestShapeOutputService1TestCaseOperation2Output) MarshalFi
 		v := *s.Timestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
-	}
-	if s.Timestamps != nil {
-		v := s.Timestamps
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Timestamps", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.TimeValue{V: v1})
-		}
-		ls0.End()
-
+		e.SetValue(protocol.BodyTarget, "Timestamp",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.TrueBool != nil {
 		v := *s.TrueBool
@@ -513,219 +459,6 @@ type OutputService1TestCaseOperation2Response struct {
 // SDKResponseMetdata returns the response metadata for the
 // OutputService1TestCaseOperation2 request.
 func (r *OutputService1TestCaseOperation2Response) SDKResponseMetdata() *aws.Response {
-	return r.response
-}
-
-type OutputService1TestShapeOutputService1TestCaseOperation3Input struct {
-	_ struct{} `type:"structure"`
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s OutputService1TestShapeOutputService1TestCaseOperation3Input) MarshalFields(e protocol.FieldEncoder) error {
-
-	return nil
-}
-
-type OutputService1TestShapeOutputService1TestCaseOperation3Output struct {
-	_ struct{} `type:"structure"`
-
-	Blobs [][]byte `type:"list"`
-
-	Char *string `type:"character"`
-
-	Double *float64 `type:"double"`
-
-	FalseBool *bool `type:"boolean"`
-
-	Float *float64 `type:"float"`
-
-	Float64s []float64 `type:"list"`
-
-	ImaHeader *string `location:"header" type:"string"`
-
-	ImaHeaderLocation *string `location:"header" locationName:"X-Foo" type:"string"`
-
-	Long *int64 `type:"long"`
-
-	Num *int64 `locationName:"FooNum" type:"integer"`
-
-	Str *string `type:"string"`
-
-	Timestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
-
-	Timestamps []time.Time `type:"list"`
-
-	TrueBool *bool `type:"boolean"`
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s OutputService1TestShapeOutputService1TestCaseOperation3Output) MarshalFields(e protocol.FieldEncoder) error {
-	if s.Blobs != nil {
-		v := s.Blobs
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Blobs", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.BytesValue(v1))
-		}
-		ls0.End()
-
-	}
-	if s.Char != nil {
-		v := *s.Char
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Char", protocol.StringValue(v), metadata)
-	}
-	if s.Double != nil {
-		v := *s.Double
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Double", protocol.Float64Value(v), metadata)
-	}
-	if s.FalseBool != nil {
-		v := *s.FalseBool
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FalseBool", protocol.BoolValue(v), metadata)
-	}
-	if s.Float != nil {
-		v := *s.Float
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Float", protocol.Float64Value(v), metadata)
-	}
-	if s.Float64s != nil {
-		v := s.Float64s
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Float64s", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.Float64Value(v1))
-		}
-		ls0.End()
-
-	}
-	if s.Long != nil {
-		v := *s.Long
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Long", protocol.Int64Value(v), metadata)
-	}
-	if s.Num != nil {
-		v := *s.Num
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FooNum", protocol.Int64Value(v), metadata)
-	}
-	if s.Str != nil {
-		v := *s.Str
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Str", protocol.StringValue(v), metadata)
-	}
-	if s.Timestamp != nil {
-		v := *s.Timestamp
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
-	}
-	if s.Timestamps != nil {
-		v := s.Timestamps
-
-		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "Timestamps", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.TimeValue{V: v1})
-		}
-		ls0.End()
-
-	}
-	if s.TrueBool != nil {
-		v := *s.TrueBool
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "TrueBool", protocol.BoolValue(v), metadata)
-	}
-	if s.ImaHeader != nil {
-		v := *s.ImaHeader
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "ImaHeader", protocol.StringValue(v), metadata)
-	}
-	if s.ImaHeaderLocation != nil {
-		v := *s.ImaHeaderLocation
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "X-Foo", protocol.StringValue(v), metadata)
-	}
-	return nil
-}
-
-const opOutputService1TestCaseOperation3 = "OperationName"
-
-// OutputService1TestCaseOperation3Request returns a request value for making API operation for
-// .
-//
-//    // Example sending a request using OutputService1TestCaseOperation3Request.
-//    req := client.OutputService1TestCaseOperation3Request(params)
-//    resp, err := req.Send(context.TODO())
-//    if err == nil {
-//        fmt.Println(resp)
-//    }
-func (c *OutputService1ProtocolTest) OutputService1TestCaseOperation3Request(input *OutputService1TestShapeOutputService1TestCaseOperation3Input) OutputService1TestCaseOperation3Request {
-	op := &aws.Operation{
-		Name: opOutputService1TestCaseOperation3,
-
-		HTTPPath: "/",
-	}
-
-	if input == nil {
-		input = &OutputService1TestShapeOutputService1TestCaseOperation3Input{}
-	}
-
-	req := c.newRequest(op, input, &OutputService1TestShapeOutputService1TestCaseOperation3Output{})
-	return OutputService1TestCaseOperation3Request{Request: req, Input: input, Copy: c.OutputService1TestCaseOperation3Request}
-}
-
-// OutputService1TestCaseOperation3Request is the request type for the
-// OutputService1TestCaseOperation3 API operation.
-type OutputService1TestCaseOperation3Request struct {
-	*aws.Request
-	Input *OutputService1TestShapeOutputService1TestCaseOperation3Input
-	Copy  func(*OutputService1TestShapeOutputService1TestCaseOperation3Input) OutputService1TestCaseOperation3Request
-}
-
-// Send marshals and sends the OutputService1TestCaseOperation3 API request.
-func (r OutputService1TestCaseOperation3Request) Send(ctx context.Context) (*OutputService1TestCaseOperation3Response, error) {
-	r.Request.SetContext(ctx)
-	err := r.Request.Send()
-	if err != nil {
-		return nil, err
-	}
-
-	resp := &OutputService1TestCaseOperation3Response{
-		OutputService1TestShapeOutputService1TestCaseOperation3Output: r.Request.Data.(*OutputService1TestShapeOutputService1TestCaseOperation3Output),
-		response: &aws.Response{Request: r.Request},
-	}
-
-	return resp, nil
-}
-
-// OutputService1TestCaseOperation3Response is the response type for the
-// OutputService1TestCaseOperation3 API operation.
-type OutputService1TestCaseOperation3Response struct {
-	*OutputService1TestShapeOutputService1TestCaseOperation3Output
-
-	response *aws.Response
-}
-
-// SDKResponseMetdata returns the response metadata for the
-// OutputService1TestCaseOperation3 request.
-func (r *OutputService1TestCaseOperation3Response) SDKResponseMetdata() *aws.Response {
 	return r.response
 }
 
@@ -2134,7 +1867,7 @@ type OutputService11TestShapeOutputService11TestCaseOperation1Output struct {
 
 	Str *string `location:"header" locationName:"x-str" type:"string"`
 
-	Timestamp *time.Time `location:"header" locationName:"x-timestamp" type:"timestamp" timestampFormat:"iso8601"`
+	Timestamp *time.Time `location:"header" locationName:"x-timestamp" type:"timestamp"`
 
 	TrueBool *bool `location:"header" locationName:"x-true-bool" type:"boolean"`
 }
@@ -2187,7 +1920,8 @@ func (s OutputService11TestShapeOutputService11TestCaseOperation1Output) Marshal
 		v := *s.Timestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-timestamp", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-timestamp",
+			protocol.TimeValue{V: v, Format: protocol.RFC822TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.TrueBool != nil {
 		v := *s.TrueBool
@@ -2462,38 +2196,70 @@ func (s OutputService13TestShapeOutputService13TestCaseOperation1Input) MarshalF
 type OutputService13TestShapeOutputService13TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	FooEnum OutputService13TestShapeRESTJSONEnumType `type:"string" enum:"true"`
+	StructMember *OutputService13TestShapeTimeContainer `type:"structure"`
 
-	HeaderEnum OutputService13TestShapeRESTJSONEnumType `location:"header" locationName:"x-amz-enum" type:"string" enum:"true"`
+	TimeArg *time.Time `type:"timestamp"`
 
-	ListEnums []OutputService13TestShapeRESTJSONEnumType `type:"list"`
+	TimeArgInHeader *time.Time `location:"header" locationName:"x-amz-timearg" type:"timestamp"`
+
+	TimeCustom *time.Time `type:"timestamp" timestampFormat:"rfc822"`
+
+	TimeCustomInHeader *time.Time `location:"header" locationName:"x-amz-timecustom" type:"timestamp" timestampFormat:"unixTimestamp"`
+
+	TimeFormat *time.Time `type:"timestamp" timestampFormat:"unixTimestamp"`
+
+	TimeFormatInHeader *time.Time `location:"header" locationName:"x-amz-timeformat" type:"timestamp" timestampFormat:"unixTimestamp"`
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService13TestShapeOutputService13TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
-	if len(s.FooEnum) > 0 {
-		v := s.FooEnum
+	if s.StructMember != nil {
+		v := s.StructMember
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FooEnum", v, metadata)
+		e.SetFields(protocol.BodyTarget, "StructMember", v, metadata)
 	}
-	if s.ListEnums != nil {
-		v := s.ListEnums
+	if s.TimeArg != nil {
+		v := *s.TimeArg
 
 		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ListEnums", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.StringValue(v1))
-		}
-		ls0.End()
-
+		e.SetValue(protocol.BodyTarget, "TimeArg",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
-	if len(s.HeaderEnum) > 0 {
-		v := s.HeaderEnum
+	if s.TimeCustom != nil {
+		v := *s.TimeCustom
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-enum", v, metadata)
+		e.SetValue(protocol.BodyTarget, "TimeCustom",
+			protocol.TimeValue{V: v, Format: "rfc822", QuotedFormatTime: false}, metadata)
+	}
+	if s.TimeFormat != nil {
+		v := *s.TimeFormat
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TimeFormat",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: false}, metadata)
+	}
+	if s.TimeArgInHeader != nil {
+		v := *s.TimeArgInHeader
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-timearg",
+			protocol.TimeValue{V: v, Format: protocol.RFC822TimeFormatName, QuotedFormatTime: false}, metadata)
+	}
+	if s.TimeCustomInHeader != nil {
+		v := *s.TimeCustomInHeader
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-timecustom",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: false}, metadata)
+	}
+	if s.TimeFormatInHeader != nil {
+		v := *s.TimeFormatInHeader
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-timeformat",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: false}, metadata)
 	}
 	return nil
 }
@@ -2511,9 +2277,9 @@ const opOutputService13TestCaseOperation1 = "OperationName"
 //    }
 func (c *OutputService13ProtocolTest) OutputService13TestCaseOperation1Request(input *OutputService13TestShapeOutputService13TestCaseOperation1Input) OutputService13TestCaseOperation1Request {
 	op := &aws.Operation{
-		Name:       opOutputService13TestCaseOperation1,
-		HTTPMethod: "POST",
-		HTTPPath:   "/path",
+		Name: opOutputService13TestCaseOperation1,
+
+		HTTPPath: "/",
 	}
 
 	if input == nil {
@@ -2562,138 +2328,31 @@ func (r *OutputService13TestCaseOperation1Response) SDKResponseMetdata() *aws.Re
 	return r.response
 }
 
-type OutputService13TestShapeOutputService13TestCaseOperation2Input struct {
+type OutputService13TestShapeTimeContainer struct {
 	_ struct{} `type:"structure"`
 
-	FooEnum OutputService13TestShapeRESTJSONEnumType `type:"string" enum:"true"`
+	Bar *time.Time `locationName:"bar" type:"timestamp" timestampFormat:"unixTimestamp"`
 
-	HeaderEnum OutputService13TestShapeRESTJSONEnumType `location:"header" locationName:"x-amz-enum" type:"string" enum:"true"`
-
-	ListEnums []OutputService13TestShapeRESTJSONEnumType `type:"list"`
+	Foo *time.Time `locationName:"foo" type:"timestamp"`
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s OutputService13TestShapeOutputService13TestCaseOperation2Input) MarshalFields(e protocol.FieldEncoder) error {
-
-	if len(s.FooEnum) > 0 {
-		v := s.FooEnum
+func (s OutputService13TestShapeTimeContainer) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Bar != nil {
+		v := *s.Bar
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FooEnum", v, metadata)
+		e.SetValue(protocol.BodyTarget, "bar",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: false}, metadata)
 	}
-	if s.ListEnums != nil {
-		v := s.ListEnums
+	if s.Foo != nil {
+		v := *s.Foo
 
 		metadata := protocol.Metadata{}
-		ls0 := e.List(protocol.BodyTarget, "ListEnums", metadata)
-		ls0.Start()
-		for _, v1 := range v {
-			ls0.ListAddValue(protocol.StringValue(v1))
-		}
-		ls0.End()
-
-	}
-	if len(s.HeaderEnum) > 0 {
-		v := s.HeaderEnum
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-enum", v, metadata)
+		e.SetValue(protocol.BodyTarget, "foo",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	return nil
-}
-
-type OutputService13TestShapeOutputService13TestCaseOperation2Output struct {
-	_ struct{} `type:"structure"`
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s OutputService13TestShapeOutputService13TestCaseOperation2Output) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
-
-const opOutputService13TestCaseOperation2 = "OperationName"
-
-// OutputService13TestCaseOperation2Request returns a request value for making API operation for
-// .
-//
-//    // Example sending a request using OutputService13TestCaseOperation2Request.
-//    req := client.OutputService13TestCaseOperation2Request(params)
-//    resp, err := req.Send(context.TODO())
-//    if err == nil {
-//        fmt.Println(resp)
-//    }
-func (c *OutputService13ProtocolTest) OutputService13TestCaseOperation2Request(input *OutputService13TestShapeOutputService13TestCaseOperation2Input) OutputService13TestCaseOperation2Request {
-	op := &aws.Operation{
-		Name:       opOutputService13TestCaseOperation2,
-		HTTPMethod: "POST",
-		HTTPPath:   "/path",
-	}
-
-	if input == nil {
-		input = &OutputService13TestShapeOutputService13TestCaseOperation2Input{}
-	}
-
-	req := c.newRequest(op, input, &OutputService13TestShapeOutputService13TestCaseOperation2Output{})
-	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return OutputService13TestCaseOperation2Request{Request: req, Input: input, Copy: c.OutputService13TestCaseOperation2Request}
-}
-
-// OutputService13TestCaseOperation2Request is the request type for the
-// OutputService13TestCaseOperation2 API operation.
-type OutputService13TestCaseOperation2Request struct {
-	*aws.Request
-	Input *OutputService13TestShapeOutputService13TestCaseOperation2Input
-	Copy  func(*OutputService13TestShapeOutputService13TestCaseOperation2Input) OutputService13TestCaseOperation2Request
-}
-
-// Send marshals and sends the OutputService13TestCaseOperation2 API request.
-func (r OutputService13TestCaseOperation2Request) Send(ctx context.Context) (*OutputService13TestCaseOperation2Response, error) {
-	r.Request.SetContext(ctx)
-	err := r.Request.Send()
-	if err != nil {
-		return nil, err
-	}
-
-	resp := &OutputService13TestCaseOperation2Response{
-		OutputService13TestShapeOutputService13TestCaseOperation2Output: r.Request.Data.(*OutputService13TestShapeOutputService13TestCaseOperation2Output),
-		response: &aws.Response{Request: r.Request},
-	}
-
-	return resp, nil
-}
-
-// OutputService13TestCaseOperation2Response is the response type for the
-// OutputService13TestCaseOperation2 API operation.
-type OutputService13TestCaseOperation2Response struct {
-	*OutputService13TestShapeOutputService13TestCaseOperation2Output
-
-	response *aws.Response
-}
-
-// SDKResponseMetdata returns the response metadata for the
-// OutputService13TestCaseOperation2 request.
-func (r *OutputService13TestCaseOperation2Response) SDKResponseMetdata() *aws.Response {
-	return r.response
-}
-
-type OutputService13TestShapeRESTJSONEnumType string
-
-// Enum values for OutputService13TestShapeRESTJSONEnumType
-const (
-	RESTJSONEnumTypeFoo OutputService13TestShapeRESTJSONEnumType = "foo"
-	RESTJSONEnumTypeBar OutputService13TestShapeRESTJSONEnumType = "bar"
-	RESTJSONEnumType0   OutputService13TestShapeRESTJSONEnumType = "0"
-	RESTJSONEnumType1   OutputService13TestShapeRESTJSONEnumType = "1"
-)
-
-func (enum OutputService13TestShapeRESTJSONEnumType) MarshalValue() (string, error) {
-	return string(enum), nil
-}
-
-func (enum OutputService13TestShapeRESTJSONEnumType) MarshalValueBuf(b []byte) ([]byte, error) {
-	b = b[0:0]
-	return append(b, enum...), nil
 }
 
 // OutputService14ProtocolTest provides the API operation methods for making requests to
@@ -2757,22 +2416,38 @@ func (s OutputService14TestShapeOutputService14TestCaseOperation1Input) MarshalF
 type OutputService14TestShapeOutputService14TestCaseOperation1Output struct {
 	_ struct{} `type:"structure"`
 
-	ListItems []OutputService14TestShapeItemShape `locationName:"ItemsList" locationNameList:"Item" type:"list"`
+	FooEnum OutputService14TestShapeRESTJSONEnumType `type:"string" enum:"true"`
+
+	HeaderEnum OutputService14TestShapeRESTJSONEnumType `location:"header" locationName:"x-amz-enum" type:"string" enum:"true"`
+
+	ListEnums []OutputService14TestShapeRESTJSONEnumType `type:"list"`
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s OutputService14TestShapeOutputService14TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
-	if s.ListItems != nil {
-		v := s.ListItems
+	if len(s.FooEnum) > 0 {
+		v := s.FooEnum
 
-		metadata := protocol.Metadata{ListLocationName: "Item"}
-		ls0 := e.List(protocol.BodyTarget, "ItemsList", metadata)
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FooEnum", v, metadata)
+	}
+	if s.ListEnums != nil {
+		v := s.ListEnums
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ListEnums", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddFields(v1)
+			ls0.ListAddValue(protocol.StringValue(v1))
 		}
 		ls0.End()
 
+	}
+	if len(s.HeaderEnum) > 0 {
+		v := s.HeaderEnum
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-enum", v, metadata)
 	}
 	return nil
 }
@@ -2791,7 +2466,7 @@ const opOutputService14TestCaseOperation1 = "OperationName"
 func (c *OutputService14ProtocolTest) OutputService14TestCaseOperation1Request(input *OutputService14TestShapeOutputService14TestCaseOperation1Input) OutputService14TestCaseOperation1Request {
 	op := &aws.Operation{
 		Name:       opOutputService14TestCaseOperation1,
-		HTTPMethod: "GET",
+		HTTPMethod: "POST",
 		HTTPPath:   "/path",
 	}
 
@@ -2841,17 +2516,296 @@ func (r *OutputService14TestCaseOperation1Response) SDKResponseMetdata() *aws.Re
 	return r.response
 }
 
-type OutputService14TestShapeItemDetailShape struct {
+type OutputService14TestShapeOutputService14TestCaseOperation2Input struct {
+	_ struct{} `type:"structure"`
+
+	FooEnum OutputService14TestShapeRESTJSONEnumType `type:"string" enum:"true"`
+
+	HeaderEnum OutputService14TestShapeRESTJSONEnumType `location:"header" locationName:"x-amz-enum" type:"string" enum:"true"`
+
+	ListEnums []OutputService14TestShapeRESTJSONEnumType `type:"list"`
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OutputService14TestShapeOutputService14TestCaseOperation2Input) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.FooEnum) > 0 {
+		v := s.FooEnum
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FooEnum", v, metadata)
+	}
+	if s.ListEnums != nil {
+		v := s.ListEnums
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ListEnums", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.StringValue(v1))
+		}
+		ls0.End()
+
+	}
+	if len(s.HeaderEnum) > 0 {
+		v := s.HeaderEnum
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-enum", v, metadata)
+	}
+	return nil
+}
+
+type OutputService14TestShapeOutputService14TestCaseOperation2Output struct {
+	_ struct{} `type:"structure"`
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OutputService14TestShapeOutputService14TestCaseOperation2Output) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+const opOutputService14TestCaseOperation2 = "OperationName"
+
+// OutputService14TestCaseOperation2Request returns a request value for making API operation for
+// .
+//
+//    // Example sending a request using OutputService14TestCaseOperation2Request.
+//    req := client.OutputService14TestCaseOperation2Request(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *OutputService14ProtocolTest) OutputService14TestCaseOperation2Request(input *OutputService14TestShapeOutputService14TestCaseOperation2Input) OutputService14TestCaseOperation2Request {
+	op := &aws.Operation{
+		Name:       opOutputService14TestCaseOperation2,
+		HTTPMethod: "POST",
+		HTTPPath:   "/path",
+	}
+
+	if input == nil {
+		input = &OutputService14TestShapeOutputService14TestCaseOperation2Input{}
+	}
+
+	req := c.newRequest(op, input, &OutputService14TestShapeOutputService14TestCaseOperation2Output{})
+	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return OutputService14TestCaseOperation2Request{Request: req, Input: input, Copy: c.OutputService14TestCaseOperation2Request}
+}
+
+// OutputService14TestCaseOperation2Request is the request type for the
+// OutputService14TestCaseOperation2 API operation.
+type OutputService14TestCaseOperation2Request struct {
+	*aws.Request
+	Input *OutputService14TestShapeOutputService14TestCaseOperation2Input
+	Copy  func(*OutputService14TestShapeOutputService14TestCaseOperation2Input) OutputService14TestCaseOperation2Request
+}
+
+// Send marshals and sends the OutputService14TestCaseOperation2 API request.
+func (r OutputService14TestCaseOperation2Request) Send(ctx context.Context) (*OutputService14TestCaseOperation2Response, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	resp := &OutputService14TestCaseOperation2Response{
+		OutputService14TestShapeOutputService14TestCaseOperation2Output: r.Request.Data.(*OutputService14TestShapeOutputService14TestCaseOperation2Output),
+		response: &aws.Response{Request: r.Request},
+	}
+
+	return resp, nil
+}
+
+// OutputService14TestCaseOperation2Response is the response type for the
+// OutputService14TestCaseOperation2 API operation.
+type OutputService14TestCaseOperation2Response struct {
+	*OutputService14TestShapeOutputService14TestCaseOperation2Output
+
+	response *aws.Response
+}
+
+// SDKResponseMetdata returns the response metadata for the
+// OutputService14TestCaseOperation2 request.
+func (r *OutputService14TestCaseOperation2Response) SDKResponseMetdata() *aws.Response {
+	return r.response
+}
+
+type OutputService14TestShapeRESTJSONEnumType string
+
+// Enum values for OutputService14TestShapeRESTJSONEnumType
+const (
+	RESTJSONEnumTypeFoo OutputService14TestShapeRESTJSONEnumType = "foo"
+	RESTJSONEnumTypeBar OutputService14TestShapeRESTJSONEnumType = "bar"
+	RESTJSONEnumType0   OutputService14TestShapeRESTJSONEnumType = "0"
+	RESTJSONEnumType1   OutputService14TestShapeRESTJSONEnumType = "1"
+)
+
+func (enum OutputService14TestShapeRESTJSONEnumType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OutputService14TestShapeRESTJSONEnumType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// OutputService15ProtocolTest provides the API operation methods for making requests to
+// OutputService15ProtocolTest. See this package's package overview docs
+// for details on the service.
+//
+// The client's methods are safe to use concurrently. It is not safe to
+// modify mutate any of the struct's properties though.
+type OutputService15ProtocolTest struct {
+	*aws.Client
+}
+
+// New creates a new instance of the client from the provided Config.
+//
+// Example:
+//     // Create a client from just a config.
+//     svc := outputservice15protocoltest.New(myConfig)
+func NewOutputService15ProtocolTest(config aws.Config) *OutputService15ProtocolTest {
+	svc := &OutputService15ProtocolTest{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
+				ServiceName:   "OutputService15ProtocolTest",
+				ServiceID:     "OutputService15ProtocolTest",
+				EndpointsID:   "outputservice15protocoltest",
+				SigningName:   "outputservice15protocoltest",
+				SigningRegion: config.Region,
+				APIVersion:    "",
+			},
+		),
+	}
+
+	// Handlers
+	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
+	svc.Handlers.Build.PushBackNamed(restxml.BuildHandler)
+	svc.Handlers.Unmarshal.PushBackNamed(restxml.UnmarshalHandler)
+	svc.Handlers.UnmarshalMeta.PushBackNamed(restxml.UnmarshalMetaHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(restxml.UnmarshalErrorHandler)
+
+	return svc
+}
+
+// newRequest creates a new request for a client operation and runs any
+// custom request initialization.
+func (c *OutputService15ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
+	req := c.NewRequest(op, params, data)
+
+	return req
+}
+
+type OutputService15TestShapeOutputService15TestCaseOperation1Input struct {
+	_ struct{} `type:"structure"`
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OutputService15TestShapeOutputService15TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
+}
+
+type OutputService15TestShapeOutputService15TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+
+	ListItems []OutputService15TestShapeItemShape `locationName:"ItemsList" locationNameList:"Item" type:"list"`
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OutputService15TestShapeOutputService15TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ListItems != nil {
+		v := s.ListItems
+
+		metadata := protocol.Metadata{ListLocationName: "Item"}
+		ls0 := e.List(protocol.BodyTarget, "ItemsList", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+const opOutputService15TestCaseOperation1 = "OperationName"
+
+// OutputService15TestCaseOperation1Request returns a request value for making API operation for
+// .
+//
+//    // Example sending a request using OutputService15TestCaseOperation1Request.
+//    req := client.OutputService15TestCaseOperation1Request(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *OutputService15ProtocolTest) OutputService15TestCaseOperation1Request(input *OutputService15TestShapeOutputService15TestCaseOperation1Input) OutputService15TestCaseOperation1Request {
+	op := &aws.Operation{
+		Name:       opOutputService15TestCaseOperation1,
+		HTTPMethod: "GET",
+		HTTPPath:   "/path",
+	}
+
+	if input == nil {
+		input = &OutputService15TestShapeOutputService15TestCaseOperation1Input{}
+	}
+
+	req := c.newRequest(op, input, &OutputService15TestShapeOutputService15TestCaseOperation1Output{})
+	return OutputService15TestCaseOperation1Request{Request: req, Input: input, Copy: c.OutputService15TestCaseOperation1Request}
+}
+
+// OutputService15TestCaseOperation1Request is the request type for the
+// OutputService15TestCaseOperation1 API operation.
+type OutputService15TestCaseOperation1Request struct {
+	*aws.Request
+	Input *OutputService15TestShapeOutputService15TestCaseOperation1Input
+	Copy  func(*OutputService15TestShapeOutputService15TestCaseOperation1Input) OutputService15TestCaseOperation1Request
+}
+
+// Send marshals and sends the OutputService15TestCaseOperation1 API request.
+func (r OutputService15TestCaseOperation1Request) Send(ctx context.Context) (*OutputService15TestCaseOperation1Response, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	resp := &OutputService15TestCaseOperation1Response{
+		OutputService15TestShapeOutputService15TestCaseOperation1Output: r.Request.Data.(*OutputService15TestShapeOutputService15TestCaseOperation1Output),
+		response: &aws.Response{Request: r.Request},
+	}
+
+	return resp, nil
+}
+
+// OutputService15TestCaseOperation1Response is the response type for the
+// OutputService15TestCaseOperation1 API operation.
+type OutputService15TestCaseOperation1Response struct {
+	*OutputService15TestShapeOutputService15TestCaseOperation1Output
+
+	response *aws.Response
+}
+
+// SDKResponseMetdata returns the response metadata for the
+// OutputService15TestCaseOperation1 request.
+func (r *OutputService15TestCaseOperation1Response) SDKResponseMetdata() *aws.Response {
+	return r.response
+}
+
+type OutputService15TestShapeItemDetailShape struct {
 	_ struct{} `type:"structure" xmlPrefix:"xsi" xmlURI:"http://www.w3.org/2001/XMLSchema-instance"`
 
 	ID *string `type:"string"`
 
 	// Type is a required field
-	Type OutputService14TestShapeItemType `locationName:"xsi:type" type:"string" xmlAttribute:"true" required:"true" enum:"true"`
+	Type OutputService15TestShapeItemType `locationName:"xsi:type" type:"string" xmlAttribute:"true" required:"true" enum:"true"`
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s OutputService14TestShapeItemDetailShape) MarshalFields(e protocol.FieldEncoder) error {
+func (s OutputService15TestShapeItemDetailShape) MarshalFields(e protocol.FieldEncoder) error {
 	if s.ID != nil {
 		v := *s.ID
 
@@ -2862,14 +2816,14 @@ func (s OutputService14TestShapeItemDetailShape) MarshalFields(e protocol.FieldE
 	return nil
 }
 
-type OutputService14TestShapeItemShape struct {
+type OutputService15TestShapeItemShape struct {
 	_ struct{} `type:"structure"`
 
-	ItemDetail *OutputService14TestShapeItemDetailShape `type:"structure" xmlPrefix:"xsi" xmlURI:"http://www.w3.org/2001/XMLSchema-instance"`
+	ItemDetail *OutputService15TestShapeItemDetailShape `type:"structure" xmlPrefix:"xsi" xmlURI:"http://www.w3.org/2001/XMLSchema-instance"`
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s OutputService14TestShapeItemShape) MarshalFields(e protocol.FieldEncoder) error {
+func (s OutputService15TestShapeItemShape) MarshalFields(e protocol.FieldEncoder) error {
 	if s.ItemDetail != nil {
 		v := s.ItemDetail
 		attrs := make([]protocol.Attribute, 0, 1)
@@ -2885,20 +2839,20 @@ func (s OutputService14TestShapeItemShape) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-type OutputService14TestShapeItemType string
+type OutputService15TestShapeItemType string
 
-// Enum values for OutputService14TestShapeItemType
+// Enum values for OutputService15TestShapeItemType
 const (
-	ItemTypeType1 OutputService14TestShapeItemType = "Type1"
-	ItemTypeType2 OutputService14TestShapeItemType = "Type2"
-	ItemTypeType3 OutputService14TestShapeItemType = "Type3"
+	ItemTypeType1 OutputService15TestShapeItemType = "Type1"
+	ItemTypeType2 OutputService15TestShapeItemType = "Type2"
+	ItemTypeType3 OutputService15TestShapeItemType = "Type3"
 )
 
-func (enum OutputService14TestShapeItemType) MarshalValue() (string, error) {
+func (enum OutputService15TestShapeItemType) MarshalValue() (string, error) {
 	return string(enum), nil
 }
 
-func (enum OutputService14TestShapeItemType) MarshalValueBuf(b []byte) ([]byte, error) {
+func (enum OutputService15TestShapeItemType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -3026,45 +2980,6 @@ func TestOutputService1ProtocolTestScalarMembersCase2(t *testing.T) {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := true, *out.TrueBool; e != a {
-		t.Errorf("expect %v, got %v", e, a)
-	}
-
-}
-
-func TestOutputService1ProtocolTestScalarMembersCase3(t *testing.T) {
-	cfg := unit.Config()
-	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
-
-	svc := NewOutputService1ProtocolTest(cfg)
-
-	buf := bytes.NewReader([]byte("<OperationNameResponse><Float64s><member>0.1</member><member>0.2</member></Float64s><Blobs><member>dmFsdWU=</member><member>dmFsdWUy</member></Blobs><Timestamps><member>2015-01-25T08:00:00Z</member><member>2015-01-25T08:00:01Z</member></Timestamps></OperationNameResponse>"))
-	req := svc.OutputService1TestCaseOperation3Request(nil)
-	req.HTTPResponse = &http.Response{StatusCode: 200, Body: ioutil.NopCloser(buf), Header: http.Header{}}
-
-	// set headers
-
-	// unmarshal response
-	restxml.UnmarshalMeta(req.Request)
-	restxml.Unmarshal(req.Request)
-	if req.Error != nil {
-		t.Errorf("expect not error, got %v", req.Error)
-	}
-
-	out := req.Data.(*OutputService1TestShapeOutputService1TestCaseOperation3Output)
-	// assert response
-	if out == nil {
-		t.Errorf("expect not to be nil")
-	}
-	if e, a := "value", string(out.Blobs[0]); e != a {
-		t.Errorf("expect %v, got %v", e, a)
-	}
-	if e, a := "value2", string(out.Blobs[1]); e != a {
-		t.Errorf("expect %v, got %v", e, a)
-	}
-	if e, a := time.Unix(1.4221728e+09, 0).UTC().String(), out.Timestamps[0].String(); e != a {
-		t.Errorf("expect %v, got %v", e, a)
-	}
-	if e, a := time.Unix(1.422172801e+09, 0).UTC().String(), out.Timestamps[1].String(); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
@@ -3455,18 +3370,20 @@ func TestOutputService12ProtocolTestEmptyStringCase1(t *testing.T) {
 
 }
 
-func TestOutputService13ProtocolTestEnumCase1(t *testing.T) {
+func TestOutputService13ProtocolTestTimestampMembersCase1(t *testing.T) {
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
 
 	svc := NewOutputService13ProtocolTest(cfg)
 
-	buf := bytes.NewReader([]byte("<OperationNameResponse><FooEnum>foo</FooEnum><ListEnums><member>0</member><member>1</member></ListEnums></OperationNameResponse>"))
+	buf := bytes.NewReader([]byte("<OperationNameResponse><StructMember><foo>2014-04-29T18:30:38Z</foo><bar>1398796238</bar></StructMember><TimeArg>2014-04-29T18:30:38Z</TimeArg><TimeCustom>Tue, 29 Apr 2014 18:30:38 GMT</TimeCustom><TimeFormat>1398796238</TimeFormat><RequestId>requestid</RequestId></OperationNameResponse>"))
 	req := svc.OutputService13TestCaseOperation1Request(nil)
 	req.HTTPResponse = &http.Response{StatusCode: 200, Body: ioutil.NopCloser(buf), Header: http.Header{}}
 
 	// set headers
-	req.HTTPResponse.Header.Set("x-amz-enum", "baz")
+	req.HTTPResponse.Header.Set("x-amz-timearg", "Tue, 29 Apr 2014 18:30:38 GMT")
+	req.HTTPResponse.Header.Set("x-amz-timecustom", "1398796238")
+	req.HTTPResponse.Header.Set("x-amz-timeformat", "1398796238")
 
 	// unmarshal response
 	restxml.UnmarshalMeta(req.Request)
@@ -3480,59 +3397,45 @@ func TestOutputService13ProtocolTestEnumCase1(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
-	if e, a := OutputService13TestShapeRESTJSONEnumType("foo"), out.FooEnum; e != a {
+	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.StructMember.Bar.String(); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := OutputService13TestShapeRESTJSONEnumType("baz"), out.HeaderEnum; e != a {
+	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.StructMember.Foo.String(); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := OutputService13TestShapeRESTJSONEnumType("0"), out.ListEnums[0]; e != a {
+	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.TimeArg.String(); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := OutputService13TestShapeRESTJSONEnumType("1"), out.ListEnums[1]; e != a {
+	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.TimeArgInHeader.String(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.TimeCustom.String(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.TimeCustomInHeader.String(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.TimeFormat.String(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := time.Unix(1.398796238e+09, 0).UTC().String(), out.TimeFormatInHeader.String(); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
 
-func TestOutputService13ProtocolTestEnumCase2(t *testing.T) {
-	cfg := unit.Config()
-	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
-
-	svc := NewOutputService13ProtocolTest(cfg)
-
-	buf := bytes.NewReader([]byte(""))
-	req := svc.OutputService13TestCaseOperation2Request(nil)
-	req.HTTPResponse = &http.Response{StatusCode: 200, Body: ioutil.NopCloser(buf), Header: http.Header{}}
-
-	// set headers
-
-	// unmarshal response
-	restxml.UnmarshalMeta(req.Request)
-	restxml.Unmarshal(req.Request)
-	if req.Error != nil {
-		t.Errorf("expect not error, got %v", req.Error)
-	}
-
-	out := req.Data.(*OutputService13TestShapeOutputService13TestCaseOperation2Output)
-	// assert response
-	if out == nil {
-		t.Errorf("expect not to be nil")
-	}
-
-}
-
-func TestOutputService14ProtocolTestXMLAttributesCase1(t *testing.T) {
+func TestOutputService14ProtocolTestEnumCase1(t *testing.T) {
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
 
 	svc := NewOutputService14ProtocolTest(cfg)
 
-	buf := bytes.NewReader([]byte("<SomeOutputDoc xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\"><ItemsList><Item><ItemDetail xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Type1\"><ID>id1</ID></ItemDetail></Item><Item><ItemDetail xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Type2\"><ID>id2</ID></ItemDetail></Item><Item><ItemDetail xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Type3\"><ID>id3</ID></ItemDetail></Item></ItemsList></SomeOutputDoc>"))
+	buf := bytes.NewReader([]byte("<OperationNameResponse><FooEnum>foo</FooEnum><ListEnums><member>0</member><member>1</member></ListEnums></OperationNameResponse>"))
 	req := svc.OutputService14TestCaseOperation1Request(nil)
 	req.HTTPResponse = &http.Response{StatusCode: 200, Body: ioutil.NopCloser(buf), Header: http.Header{}}
 
 	// set headers
+	req.HTTPResponse.Header.Set("x-amz-enum", "baz")
 
 	// unmarshal response
 	restxml.UnmarshalMeta(req.Request)
@@ -3546,22 +3449,88 @@ func TestOutputService14ProtocolTestXMLAttributesCase1(t *testing.T) {
 	if out == nil {
 		t.Errorf("expect not to be nil")
 	}
+	if e, a := OutputService14TestShapeRESTJSONEnumType("foo"), out.FooEnum; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := OutputService14TestShapeRESTJSONEnumType("baz"), out.HeaderEnum; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := OutputService14TestShapeRESTJSONEnumType("0"), out.ListEnums[0]; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := OutputService14TestShapeRESTJSONEnumType("1"), out.ListEnums[1]; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+
+}
+
+func TestOutputService14ProtocolTestEnumCase2(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService14ProtocolTest(cfg)
+
+	buf := bytes.NewReader([]byte(""))
+	req := svc.OutputService14TestCaseOperation2Request(nil)
+	req.HTTPResponse = &http.Response{StatusCode: 200, Body: ioutil.NopCloser(buf), Header: http.Header{}}
+
+	// set headers
+
+	// unmarshal response
+	restxml.UnmarshalMeta(req.Request)
+	restxml.Unmarshal(req.Request)
+	if req.Error != nil {
+		t.Errorf("expect not error, got %v", req.Error)
+	}
+
+	out := req.Data.(*OutputService14TestShapeOutputService14TestCaseOperation2Output)
+	// assert response
+	if out == nil {
+		t.Errorf("expect not to be nil")
+	}
+
+}
+
+func TestOutputService15ProtocolTestXMLAttributesCase1(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService15ProtocolTest(cfg)
+
+	buf := bytes.NewReader([]byte("<SomeOutputDoc xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\"><ItemsList><Item><ItemDetail xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Type1\"><ID>id1</ID></ItemDetail></Item><Item><ItemDetail xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Type2\"><ID>id2</ID></ItemDetail></Item><Item><ItemDetail xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"Type3\"><ID>id3</ID></ItemDetail></Item></ItemsList></SomeOutputDoc>"))
+	req := svc.OutputService15TestCaseOperation1Request(nil)
+	req.HTTPResponse = &http.Response{StatusCode: 200, Body: ioutil.NopCloser(buf), Header: http.Header{}}
+
+	// set headers
+
+	// unmarshal response
+	restxml.UnmarshalMeta(req.Request)
+	restxml.Unmarshal(req.Request)
+	if req.Error != nil {
+		t.Errorf("expect not error, got %v", req.Error)
+	}
+
+	out := req.Data.(*OutputService15TestShapeOutputService15TestCaseOperation1Output)
+	// assert response
+	if out == nil {
+		t.Errorf("expect not to be nil")
+	}
 	if e, a := string("id1"), *out.ListItems[0].ItemDetail.ID; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := OutputService14TestShapeItemType("Type1"), out.ListItems[0].ItemDetail.Type; e != a {
+	if e, a := OutputService15TestShapeItemType("Type1"), out.ListItems[0].ItemDetail.Type; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := string("id2"), *out.ListItems[1].ItemDetail.ID; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := OutputService14TestShapeItemType("Type2"), out.ListItems[1].ItemDetail.Type; e != a {
+	if e, a := OutputService15TestShapeItemType("Type2"), out.ListItems[1].ItemDetail.Type; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := string("id3"), *out.ListItems[2].ItemDetail.ID; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
-	if e, a := OutputService14TestShapeItemType("Type3"), out.ListItems[2].ItemDetail.Type; e != a {
+	if e, a := OutputService15TestShapeItemType("Type3"), out.ListItems[2].ItemDetail.Type; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 

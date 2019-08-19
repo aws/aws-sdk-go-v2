@@ -96,6 +96,7 @@ type InputService1TestShapeInputService1TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService1TestShapeInputService1TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	return nil
 }
@@ -231,6 +232,7 @@ type InputService2TestShapeInputService2TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService2TestShapeInputService2TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.PipelineId != nil {
 		v := *s.PipelineId
@@ -372,6 +374,7 @@ type InputService3TestShapeInputService3TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService3TestShapeInputService3TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.Foo != nil {
 		v := *s.Foo
@@ -513,6 +516,7 @@ type InputService4TestShapeInputService4TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService4TestShapeInputService4TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.Items != nil {
 		v := s.Items
@@ -662,6 +666,7 @@ type InputService5TestShapeInputService5TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService5TestShapeInputService5TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.PipelineId != nil {
 		v := *s.PipelineId
@@ -817,6 +822,7 @@ type InputService6TestShapeInputService6TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService6TestShapeInputService6TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.PipelineId != nil {
 		v := *s.PipelineId
@@ -975,6 +981,7 @@ type InputService7TestShapeInputService7TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService7TestShapeInputService7TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.BoolQuery != nil {
 		v := *s.BoolQuery
@@ -1068,6 +1075,7 @@ type InputService7TestShapeInputService7TestCaseOperation2Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService7TestShapeInputService7TestCaseOperation2Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.BoolQuery != nil {
 		v := *s.BoolQuery
@@ -1213,6 +1221,7 @@ type InputService8TestShapeInputService8TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService8TestShapeInputService8TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.PipelineId != nil {
 		v := *s.PipelineId
@@ -1372,6 +1381,7 @@ type InputService9TestShapeInputService9TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService9TestShapeInputService9TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.Config != nil {
 		v := s.Config
@@ -1564,6 +1574,7 @@ type InputService10TestShapeInputService10TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService10TestShapeInputService10TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.Config != nil {
 		v := s.Config
@@ -1944,6 +1955,7 @@ func (s *InputService12TestShapeInputService12TestCaseOperation1Input) Validate(
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService12TestShapeInputService12TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.Bar != nil {
 		v := s.Bar
@@ -2325,6 +2337,7 @@ type InputService14TestShapeInputService14TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService14TestShapeInputService14TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.Foo != nil {
 		v := s.Foo
@@ -2418,6 +2431,7 @@ type InputService14TestShapeInputService14TestCaseOperation2Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService14TestShapeInputService14TestCaseOperation2Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.Foo != nil {
 		v := s.Foo
@@ -2576,6 +2590,7 @@ type InputService15TestShapeInputService15TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService15TestShapeInputService15TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.Foo != nil {
 		v := *s.Foo
@@ -2669,6 +2684,7 @@ type InputService15TestShapeInputService15TestCaseOperation2Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService15TestShapeInputService15TestCaseOperation2Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.Foo != nil {
 		v := *s.Foo
@@ -2810,6 +2826,7 @@ type InputService16TestShapeInputService16TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService16TestShapeInputService16TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.RecursiveStruct != nil {
 		v := s.RecursiveStruct
@@ -2903,6 +2920,7 @@ type InputService16TestShapeInputService16TestCaseOperation2Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService16TestShapeInputService16TestCaseOperation2Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.RecursiveStruct != nil {
 		v := s.RecursiveStruct
@@ -2996,6 +3014,7 @@ type InputService16TestShapeInputService16TestCaseOperation3Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService16TestShapeInputService16TestCaseOperation3Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.RecursiveStruct != nil {
 		v := s.RecursiveStruct
@@ -3089,6 +3108,7 @@ type InputService16TestShapeInputService16TestCaseOperation4Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService16TestShapeInputService16TestCaseOperation4Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.RecursiveStruct != nil {
 		v := s.RecursiveStruct
@@ -3182,6 +3202,7 @@ type InputService16TestShapeInputService16TestCaseOperation5Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService16TestShapeInputService16TestCaseOperation5Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.RecursiveStruct != nil {
 		v := s.RecursiveStruct
@@ -3275,6 +3296,7 @@ type InputService16TestShapeInputService16TestCaseOperation6Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService16TestShapeInputService16TestCaseOperation6Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.RecursiveStruct != nil {
 		v := s.RecursiveStruct
@@ -3464,25 +3486,91 @@ func (c *InputService17ProtocolTest) newRequest(op *aws.Operation, params, data 
 type InputService17TestShapeInputService17TestCaseOperation1Input struct {
 	_ struct{} `type:"structure"`
 
-	TimeArg *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TimeArg *time.Time `type:"timestamp"`
 
-	TimeArgInHeader *time.Time `location:"header" locationName:"x-amz-timearg" type:"timestamp" timestampFormat:"rfc822"`
+	TimeArgInHeader *time.Time `location:"header" locationName:"x-amz-timearg" type:"timestamp"`
+
+	TimeArgInQuery *time.Time `location:"querystring" locationName:"TimeQuery" type:"timestamp"`
+
+	TimeCustom *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	TimeCustomInHeader *time.Time `location:"header" locationName:"x-amz-timecustom-header" type:"timestamp" timestampFormat:"unixTimestamp"`
+
+	TimeCustomInQuery *time.Time `location:"querystring" locationName:"TimeCustomQuery" type:"timestamp" timestampFormat:"unixTimestamp"`
+
+	TimeFormat *time.Time `type:"timestamp" timestampFormat:"rfc822"`
+
+	TimeFormatInHeader *time.Time `location:"header" locationName:"x-amz-timeformat-header" type:"timestamp" timestampFormat:"unixTimestamp"`
+
+	TimeFormatInQuery *time.Time `location:"querystring" locationName:"TimeFormatQuery" type:"timestamp" timestampFormat:"unixTimestamp"`
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService17TestShapeInputService17TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.TimeArg != nil {
 		v := *s.TimeArg
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "TimeArg", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "TimeArg",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.TimeCustom != nil {
+		v := *s.TimeCustom
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TimeCustom",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
+	}
+	if s.TimeFormat != nil {
+		v := *s.TimeFormat
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TimeFormat",
+			protocol.TimeValue{V: v, Format: "rfc822", QuotedFormatTime: true}, metadata)
 	}
 	if s.TimeArgInHeader != nil {
 		v := *s.TimeArgInHeader
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-timearg", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-timearg",
+			protocol.TimeValue{V: v, Format: protocol.RFC822TimeFormatName, QuotedFormatTime: false}, metadata)
+	}
+	if s.TimeCustomInHeader != nil {
+		v := *s.TimeCustomInHeader
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-timecustom-header",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: false}, metadata)
+	}
+	if s.TimeFormatInHeader != nil {
+		v := *s.TimeFormatInHeader
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-timeformat-header",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: false}, metadata)
+	}
+	if s.TimeArgInQuery != nil {
+		v := *s.TimeArgInQuery
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "TimeQuery",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
+	}
+	if s.TimeCustomInQuery != nil {
+		v := *s.TimeCustomInQuery
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "TimeCustomQuery",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: false}, metadata)
+	}
+	if s.TimeFormatInQuery != nil {
+		v := *s.TimeFormatInQuery
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "TimeFormatQuery",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: false}, metadata)
 	}
 	return nil
 }
@@ -3562,107 +3650,6 @@ func (r *InputService17TestCaseOperation1Response) SDKResponseMetdata() *aws.Res
 	return r.response
 }
 
-type InputService17TestShapeInputService17TestCaseOperation2Input struct {
-	_ struct{} `type:"structure"`
-
-	TimeArg *time.Time `type:"timestamp" timestampFormat:"unix"`
-
-	TimeArgInHeader *time.Time `location:"header" locationName:"x-amz-timearg" type:"timestamp" timestampFormat:"rfc822"`
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s InputService17TestShapeInputService17TestCaseOperation2Input) MarshalFields(e protocol.FieldEncoder) error {
-
-	if s.TimeArg != nil {
-		v := *s.TimeArg
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "TimeArg", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
-	}
-	if s.TimeArgInHeader != nil {
-		v := *s.TimeArgInHeader
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-timearg", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
-	}
-	return nil
-}
-
-type InputService17TestShapeInputService17TestCaseOperation2Output struct {
-	_ struct{} `type:"structure"`
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s InputService17TestShapeInputService17TestCaseOperation2Output) MarshalFields(e protocol.FieldEncoder) error {
-	return nil
-}
-
-const opInputService17TestCaseOperation2 = "OperationName"
-
-// InputService17TestCaseOperation2Request returns a request value for making API operation for
-// .
-//
-//    // Example sending a request using InputService17TestCaseOperation2Request.
-//    req := client.InputService17TestCaseOperation2Request(params)
-//    resp, err := req.Send(context.TODO())
-//    if err == nil {
-//        fmt.Println(resp)
-//    }
-func (c *InputService17ProtocolTest) InputService17TestCaseOperation2Request(input *InputService17TestShapeInputService17TestCaseOperation2Input) InputService17TestCaseOperation2Request {
-	op := &aws.Operation{
-		Name:       opInputService17TestCaseOperation2,
-		HTTPMethod: "POST",
-		HTTPPath:   "/path",
-	}
-
-	if input == nil {
-		input = &InputService17TestShapeInputService17TestCaseOperation2Input{}
-	}
-
-	req := c.newRequest(op, input, &InputService17TestShapeInputService17TestCaseOperation2Output{})
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return InputService17TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService17TestCaseOperation2Request}
-}
-
-// InputService17TestCaseOperation2Request is the request type for the
-// InputService17TestCaseOperation2 API operation.
-type InputService17TestCaseOperation2Request struct {
-	*aws.Request
-	Input *InputService17TestShapeInputService17TestCaseOperation2Input
-	Copy  func(*InputService17TestShapeInputService17TestCaseOperation2Input) InputService17TestCaseOperation2Request
-}
-
-// Send marshals and sends the InputService17TestCaseOperation2 API request.
-func (r InputService17TestCaseOperation2Request) Send(ctx context.Context) (*InputService17TestCaseOperation2Response, error) {
-	r.Request.SetContext(ctx)
-	err := r.Request.Send()
-	if err != nil {
-		return nil, err
-	}
-
-	resp := &InputService17TestCaseOperation2Response{
-		InputService17TestShapeInputService17TestCaseOperation2Output: r.Request.Data.(*InputService17TestShapeInputService17TestCaseOperation2Output),
-		response: &aws.Response{Request: r.Request},
-	}
-
-	return resp, nil
-}
-
-// InputService17TestCaseOperation2Response is the response type for the
-// InputService17TestCaseOperation2 API operation.
-type InputService17TestCaseOperation2Response struct {
-	*InputService17TestShapeInputService17TestCaseOperation2Output
-
-	response *aws.Response
-}
-
-// SDKResponseMetdata returns the response metadata for the
-// InputService17TestCaseOperation2 request.
-func (r *InputService17TestCaseOperation2Response) SDKResponseMetdata() *aws.Response {
-	return r.response
-}
-
 // InputService18ProtocolTest provides the API operation methods for making requests to
 // InputService18ProtocolTest. See this package's package overview docs
 // for details on the service.
@@ -3714,17 +3701,19 @@ func (c *InputService18ProtocolTest) newRequest(op *aws.Operation, params, data 
 type InputService18TestShapeInputService18TestCaseOperation1Input struct {
 	_ struct{} `type:"structure"`
 
-	TimeArg *time.Time `locationName:"timestamp_location" type:"timestamp" timestampFormat:"unix"`
+	TimeArg *time.Time `locationName:"timestamp_location" type:"timestamp"`
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService18TestShapeInputService18TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.TimeArg != nil {
 		v := *s.TimeArg
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "timestamp_location", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "timestamp_location",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -3860,6 +3849,7 @@ type InputService19TestShapeInputService19TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService19TestShapeInputService19TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.Foo != nil {
 		v := *s.Foo
@@ -4001,6 +3991,7 @@ type InputService20TestShapeInputService20TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService20TestShapeInputService20TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	var Token string
 	if s.Token != nil {
@@ -4100,6 +4091,7 @@ type InputService20TestShapeInputService20TestCaseOperation2Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService20TestShapeInputService20TestCaseOperation2Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	var Token string
 	if s.Token != nil {
@@ -4251,6 +4243,7 @@ type InputService21TestShapeInputService21TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService21TestShapeInputService21TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.HeaderField != nil {
 		v := s.HeaderField
@@ -4360,6 +4353,7 @@ type InputService21TestShapeInputService21TestCaseOperation2Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService21TestShapeInputService21TestCaseOperation2Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.HeaderField != nil {
 		v := s.HeaderField
@@ -4469,6 +4463,7 @@ type InputService21TestShapeInputService21TestCaseOperation3Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService21TestShapeInputService21TestCaseOperation3Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.HeaderField != nil {
 		v := s.HeaderField
@@ -4661,6 +4656,7 @@ type InputService22TestShapeInputService22TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService22TestShapeInputService22TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if len(s.FooEnum) > 0 {
 		v := s.FooEnum
@@ -4798,6 +4794,7 @@ type InputService22TestShapeInputService22TestCaseOperation2Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService22TestShapeInputService22TestCaseOperation2Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if len(s.FooEnum) > 0 {
 		v := s.FooEnum
@@ -4994,6 +4991,7 @@ type InputService23TestShapeInputService23TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService23TestShapeInputService23TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.Name != nil {
 		v := *s.Name
@@ -5107,6 +5105,7 @@ func (s *InputService23TestShapeInputService23TestCaseOperation2Input) Validate(
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService23TestShapeInputService23TestCaseOperation2Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.Name != nil {
 		v := *s.Name
@@ -5258,6 +5257,7 @@ type InputService24TestShapeInputService24TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService24TestShapeInputService24TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.Header1 != nil {
 		v := *s.Header1
@@ -5415,6 +5415,7 @@ type InputService25TestShapeInputService25TestCaseOperation1Input struct {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s InputService25TestShapeInputService25TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.MapDefaults != nil {
 		v := s.MapDefaults
@@ -5804,7 +5805,7 @@ func TestInputService9ProtocolTestURIParameterQuerystringParamsAndJSONBodyCase1(
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertJSON(t, `{"Config":{"A":"one","B":"two"}}`, util.Trim(string(body)))
+	awstesting.AssertJSON(t, `{"Config": {"A": "one", "B": "two"}}`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://test/2014-01-01/jobsByPipeline/foo?Ascending=true&PageToken=bar", r.URL.String())
@@ -5843,7 +5844,7 @@ func TestInputService10ProtocolTestURIParameterQuerystringParamsHeadersAndJSONBo
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertJSON(t, `{"Config":{"A":"one","B":"two"}}`, util.Trim(string(body)))
+	awstesting.AssertJSON(t, `{"Config": {"A": "one", "B": "two"}}`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://test/2014-01-01/jobsByPipeline/foo?Ascending=true&PageToken=bar", r.URL.String())
@@ -5918,7 +5919,7 @@ func TestInputService12ProtocolTestSerializeBlobsInBodyCase1(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertJSON(t, `{"Bar":"QmxvYiBwYXJhbQ=="}`, util.Trim(string(body)))
+	awstesting.AssertJSON(t, `{"Bar": "QmxvYiBwYXJhbQ=="}`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://test/2014-01-01/foo_name", r.URL.String())
@@ -6009,7 +6010,7 @@ func TestInputService14ProtocolTestStructurePayloadCase1(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertJSON(t, `{"baz":"bar"}`, util.Trim(string(body)))
+	awstesting.AssertJSON(t, `{"baz": "bar"}`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://test/", r.URL.String())
@@ -6114,7 +6115,7 @@ func TestInputService16ProtocolTestRecursiveShapesCase1(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertJSON(t, `{"RecursiveStruct":{"NoRecurse":"foo"}}`, util.Trim(string(body)))
+	awstesting.AssertJSON(t, `{"RecursiveStruct": {"NoRecurse": "foo"}}`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://test/path", r.URL.String())
@@ -6150,7 +6151,7 @@ func TestInputService16ProtocolTestRecursiveShapesCase2(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertJSON(t, `{"RecursiveStruct":{"RecursiveStruct":{"NoRecurse":"foo"}}}`, util.Trim(string(body)))
+	awstesting.AssertJSON(t, `{"RecursiveStruct": {"RecursiveStruct": {"NoRecurse": "foo"}}}`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://test/path", r.URL.String())
@@ -6190,7 +6191,7 @@ func TestInputService16ProtocolTestRecursiveShapesCase3(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertJSON(t, `{"RecursiveStruct":{"RecursiveStruct":{"RecursiveStruct":{"RecursiveStruct":{"NoRecurse":"foo"}}}}}`, util.Trim(string(body)))
+	awstesting.AssertJSON(t, `{"RecursiveStruct": {"RecursiveStruct": {"RecursiveStruct": {"RecursiveStruct": {"NoRecurse": "foo"}}}}}`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://test/path", r.URL.String())
@@ -6231,7 +6232,7 @@ func TestInputService16ProtocolTestRecursiveShapesCase4(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertJSON(t, `{"RecursiveStruct":{"RecursiveList":[{"NoRecurse":"foo"},{"NoRecurse":"bar"}]}}`, util.Trim(string(body)))
+	awstesting.AssertJSON(t, `{"RecursiveStruct": {"RecursiveList": [{"NoRecurse": "foo"}, {"NoRecurse": "bar"}]}}`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://test/path", r.URL.String())
@@ -6274,7 +6275,7 @@ func TestInputService16ProtocolTestRecursiveShapesCase5(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertJSON(t, `{"RecursiveStruct":{"RecursiveList":[{"NoRecurse":"foo"},{"RecursiveStruct":{"NoRecurse":"bar"}}]}}`, util.Trim(string(body)))
+	awstesting.AssertJSON(t, `{"RecursiveStruct": {"RecursiveList": [{"NoRecurse": "foo"}, {"RecursiveStruct": {"NoRecurse": "bar"}}]}}`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://test/path", r.URL.String())
@@ -6315,7 +6316,7 @@ func TestInputService16ProtocolTestRecursiveShapesCase6(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertJSON(t, `{"RecursiveStruct":{"RecursiveMap":{"foo":{"NoRecurse":"foo"},"bar":{"NoRecurse":"bar"}}}}`, util.Trim(string(body)))
+	awstesting.AssertJSON(t, `{"RecursiveStruct": {"RecursiveMap": {"foo": {"NoRecurse": "foo"}, "bar": {"NoRecurse": "bar"}}}}`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://test/path", r.URL.String())
@@ -6330,7 +6331,15 @@ func TestInputService17ProtocolTestTimestampValuesCase1(t *testing.T) {
 
 	svc := NewInputService17ProtocolTest(cfg)
 	input := &InputService17TestShapeInputService17TestCaseOperation1Input{
-		TimeArg: aws.Time(time.Unix(1422172800, 0)),
+		TimeArg:            aws.Time(time.Unix(1422172800, 0)),
+		TimeArgInHeader:    aws.Time(time.Unix(1422172800, 0)),
+		TimeArgInQuery:     aws.Time(time.Unix(1422172800, 0)),
+		TimeCustom:         aws.Time(time.Unix(1422172800, 0)),
+		TimeCustomInHeader: aws.Time(time.Unix(1422172800, 0)),
+		TimeCustomInQuery:  aws.Time(time.Unix(1422172800, 0)),
+		TimeFormat:         aws.Time(time.Unix(1422172800, 0)),
+		TimeFormatInHeader: aws.Time(time.Unix(1422172800, 0)),
+		TimeFormatInQuery:  aws.Time(time.Unix(1422172800, 0)),
 	}
 
 	req := svc.InputService17TestCaseOperation1Request(input)
@@ -6347,38 +6356,22 @@ func TestInputService17ProtocolTestTimestampValuesCase1(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertJSON(t, `{"TimeArg":1422172800}`, util.Trim(string(body)))
+	awstesting.AssertJSON(t, `{"TimeArg": 1422172800, "TimeCustom": "2015-01-25T08:00:00Z", "TimeFormat": "Sun, 25 Jan 2015 08:00:00 GMT"}`, util.Trim(string(body)))
 
 	// assert URL
-	awstesting.AssertURL(t, "https://test/path", r.URL.String())
+	awstesting.AssertURL(t, "https://test/path?TimeQuery=2015-01-25T08%3A00%3A00Z&TimeCustomQuery=1422172800&TimeFormatQuery=1422172800", r.URL.String())
 
 	// assert headers
-
-}
-
-func TestInputService17ProtocolTestTimestampValuesCase2(t *testing.T) {
-	cfg := unit.Config()
-	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
-
-	svc := NewInputService17ProtocolTest(cfg)
-	input := &InputService17TestShapeInputService17TestCaseOperation2Input{
-		TimeArgInHeader: aws.Time(time.Unix(1422172800, 0)),
+	if e, a := "application/json", r.Header.Get("Content-Type"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
 	}
-
-	req := svc.InputService17TestCaseOperation2Request(input)
-	r := req.HTTPRequest
-
-	// build request
-	req.Build()
-	if req.Error != nil {
-		t.Errorf("expect no error, got %v", req.Error)
-	}
-
-	// assert URL
-	awstesting.AssertURL(t, "https://test/path", r.URL.String())
-
-	// assert headers
 	if e, a := "Sun, 25 Jan 2015 08:00:00 GMT", r.Header.Get("x-amz-timearg"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "1422172800", r.Header.Get("x-amz-timecustom-header"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "1422172800", r.Header.Get("x-amz-timeformat-header"); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
@@ -6407,7 +6400,7 @@ func TestInputService18ProtocolTestNamedLocationsInJSONBodyCase1(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertJSON(t, `{"timestamp_location":1422172800}`, util.Trim(string(body)))
+	awstesting.AssertJSON(t, `{"timestamp_location": 1422172800}`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://test/path", r.URL.String())
@@ -6473,7 +6466,7 @@ func TestInputService20ProtocolTestIdempotencyTokenAutoFillCase1(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertJSON(t, `{"Token":"abc123"}`, util.Trim(string(body)))
+	awstesting.AssertJSON(t, `{"Token": "abc123"}`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://test/path", r.URL.String())
@@ -6503,7 +6496,7 @@ func TestInputService20ProtocolTestIdempotencyTokenAutoFillCase2(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertJSON(t, `{"Token":"00000000-0000-4000-8000-000000000000"}`, util.Trim(string(body)))
+	awstesting.AssertJSON(t, `{"Token": "00000000-0000-4000-8000-000000000000"}`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://test/path", r.URL.String())
@@ -6657,7 +6650,7 @@ func TestInputService22ProtocolTestEnumCase1(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertJSON(t, `{"FooEnum":"foo","ListEnums":["foo","","bar"]}`, util.Trim(string(body)))
+	awstesting.AssertJSON(t, `{"FooEnum": "foo", "ListEnums": ["foo", "", "bar"]}`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://test/path?Enum=bar&List=0&List=1&List=", r.URL.String())
@@ -6715,7 +6708,7 @@ func TestInputService23ProtocolTestEndpointHostTraitCase1(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertJSON(t, `{"Name":"myname"}`, util.Trim(string(body)))
+	awstesting.AssertJSON(t, `{"Name": "myname"}`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://data-service.region.amazonaws.com/path", r.URL.String())
@@ -6747,7 +6740,7 @@ func TestInputService23ProtocolTestEndpointHostTraitCase2(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertJSON(t, `{"Name":"myname"}`, util.Trim(string(body)))
+	awstesting.AssertJSON(t, `{"Name": "myname"}`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://foo-myname.service.region.amazonaws.com/path", r.URL.String())
@@ -6834,7 +6827,7 @@ func TestInputService25ProtocolTestEmptyOrUnsetMapsInPayloadCase1(t *testing.T) 
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertJSON(t, `{"MapDefaults":{"test_key_1":"test_value_1","test_key_2":"test_value_2","test_key_3":"test_value_3"},"MapEmpty":{}}`, util.Trim(string(body)))
+	awstesting.AssertJSON(t, `{"MapDefaults": {"test_key_1":"test_value_1", "test_key_2":"test_value_2", "test_key_3":"test_value_3"}, "MapEmpty":{}}`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://test/", r.URL.String())

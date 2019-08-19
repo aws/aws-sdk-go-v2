@@ -258,7 +258,7 @@ type SshPublicKey struct {
 	// The date that the public key was added to the user account.
 	//
 	// DateImported is a required field
-	DateImported *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	DateImported *time.Time `type:"timestamp" required:"true"`
 
 	// The content of the SSH public key as specified by the PublicKeyId.
 	//

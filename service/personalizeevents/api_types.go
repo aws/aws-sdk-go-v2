@@ -55,7 +55,7 @@ type Event struct {
 	// The timestamp on the client side when the event occurred.
 	//
 	// SentAt is a required field
-	SentAt *time.Time `locationName:"sentAt" type:"timestamp" timestampFormat:"unix" required:"true"`
+	SentAt *time.Time `locationName:"sentAt" type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -115,7 +115,8 @@ func (s Event) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.SentAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sentAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "sentAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }

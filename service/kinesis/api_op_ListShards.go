@@ -60,7 +60,7 @@ type ListShardsInput struct {
 	// for.
 	//
 	// You cannot specify this parameter if you specify the NextToken parameter.
-	StreamCreationTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StreamCreationTimestamp *time.Time `type:"timestamp"`
 
 	// The name of the data stream whose shards you want to list.
 	//

@@ -50,7 +50,7 @@ type CreateCapacityReservationInput struct {
 	// an hour from the specified time. For example, if you specify 5/31/2019, 13:30:55,
 	// the Capacity Reservation is guaranteed to end between 13:30:55 and 14:30:55
 	// on 5/31/2019.
-	EndDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	EndDate *time.Time `type:"timestamp"`
 
 	// Indicates the way in which the Capacity Reservation ends. A Capacity Reservation
 	// can have one of the following end types:

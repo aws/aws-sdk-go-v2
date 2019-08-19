@@ -53,11 +53,11 @@ type DescribeEventSourceOutput struct {
 	CreatedBy *string `type:"string"`
 
 	// The date and time that the event source was created.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The date and time that the event source will expire if you don't create a
 	// matching event bus.
-	ExpirationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ExpirationTime *time.Time `type:"timestamp"`
 
 	// The name of the partner event source.
 	Name *string `type:"string"`

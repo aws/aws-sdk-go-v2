@@ -168,7 +168,7 @@ type DirectoryConfig struct {
 	_ struct{} `type:"structure"`
 
 	// The time the directory configuration was created.
-	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTime *time.Time `type:"timestamp"`
 
 	// The fully qualified name of the directory (for example, corp.example.com).
 	//
@@ -222,7 +222,7 @@ type Fleet struct {
 	ComputeCapacityStatus *ComputeCapacityStatus `type:"structure" required:"true"`
 
 	// The time the fleet was created.
-	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTime *time.Time `type:"timestamp"`
 
 	// The description to display.
 	Description *string `min:"1" type:"string"`
@@ -362,7 +362,7 @@ type Image struct {
 	BaseImageArn *string `type:"string"`
 
 	// The time the image was created.
-	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTime *time.Time `type:"timestamp"`
 
 	// The description to display.
 	Description *string `min:"1" type:"string"`
@@ -391,7 +391,7 @@ type Image struct {
 
 	// The release date of the public base image. For private images, this date
 	// is the release date of the base image from which the image was created.
-	PublicBaseImageReleasedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	PublicBaseImageReleasedDate *time.Time `type:"timestamp"`
 
 	// The image starts in the PENDING state. If image creation succeeds, the state
 	// is AVAILABLE. If image creation fails, the state is FAILED.
@@ -422,7 +422,7 @@ type ImageBuilder struct {
 	Arn *string `type:"string"`
 
 	// The time stamp when the image builder was created.
-	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTime *time.Time `type:"timestamp"`
 
 	// The description to display.
 	Description *string `min:"1" type:"string"`
@@ -574,7 +574,7 @@ type ResourceError struct {
 	ErrorMessage *string `min:"1" type:"string"`
 
 	// The time the error occurred.
-	ErrorTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ErrorTimestamp *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -659,7 +659,7 @@ type Session struct {
 	// elapses or the user chooses to end his or her session. If the DisconnectTimeOutInSeconds
 	// elapses, or the user chooses to end his or her session, the streaming instance
 	// is terminated and the streaming session ends.
-	MaxExpirationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	MaxExpirationTime *time.Time `type:"timestamp"`
 
 	// The network details for the streaming session.
 	NetworkAccessConfiguration *NetworkAccessConfiguration `type:"structure"`
@@ -670,7 +670,7 @@ type Session struct {
 	StackName *string `min:"1" type:"string" required:"true"`
 
 	// The time when a streaming instance is dedicated for the user.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `type:"timestamp"`
 
 	// The current state of the streaming session.
 	//
@@ -722,7 +722,7 @@ type Stack struct {
 	Arn *string `type:"string"`
 
 	// The time the stack was created.
-	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTime *time.Time `type:"timestamp"`
 
 	// The description to display.
 	Description *string `min:"1" type:"string"`
@@ -819,7 +819,7 @@ type UsageReportSubscription struct {
 	_ struct{} `type:"structure"`
 
 	// The time when the last usage report was generated.
-	LastGeneratedReportDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastGeneratedReportDate *time.Time `type:"timestamp"`
 
 	// The Amazon S3 bucket where generated reports are stored.
 	//
@@ -857,7 +857,7 @@ type User struct {
 	AuthenticationType AuthenticationType `type:"string" required:"true" enum:"true"`
 
 	// The date and time the user was created in the user pool.
-	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTime *time.Time `type:"timestamp"`
 
 	// Specifies whether the user in the user pool is enabled.
 	Enabled *bool `type:"boolean"`

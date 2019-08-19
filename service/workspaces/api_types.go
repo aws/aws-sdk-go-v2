@@ -37,7 +37,7 @@ type AccountModification struct {
 	ModificationState DedicatedTenancyModificationStateEnum `type:"string" enum:"true"`
 
 	// The timestamp when the modification of the BYOL configuration was started.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -493,10 +493,10 @@ type WorkspaceConnectionStatus struct {
 	ConnectionState ConnectionState `type:"string" enum:"true"`
 
 	// The timestamp of the connection status check.
-	ConnectionStateCheckTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ConnectionStateCheckTimestamp *time.Time `type:"timestamp"`
 
 	// The timestamp of the last known user connection.
-	LastKnownUserConnectionTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastKnownUserConnectionTimestamp *time.Time `type:"timestamp"`
 
 	// The identifier of the WorkSpace.
 	WorkspaceId *string `type:"string"`

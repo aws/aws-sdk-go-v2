@@ -47,7 +47,7 @@ type Activity struct {
 	ResourceMetadata *ResourceMetadata `type:"structure"`
 
 	// The timestamp when the action was performed.
-	TimeStamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TimeStamp *time.Time `type:"timestamp"`
 
 	// The activity type.
 	Type ActivityType `type:"string" enum:"true"`
@@ -106,7 +106,8 @@ func (s Activity) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.TimeStamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "TimeStamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "TimeStamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if len(s.Type) > 0 {
 		v := s.Type
@@ -131,7 +132,7 @@ type Comment struct {
 	Contributor *User `type:"structure"`
 
 	// The time that the comment was created.
-	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTimestamp *time.Time `type:"timestamp"`
 
 	// The ID of the parent comment.
 	ParentId *string `min:"1" type:"string"`
@@ -178,7 +179,8 @@ func (s Comment) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ParentId != nil {
 		v := *s.ParentId
@@ -234,7 +236,7 @@ type CommentMetadata struct {
 	Contributor *User `type:"structure"`
 
 	// The timestamp that the comment was created.
-	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTimestamp *time.Time `type:"timestamp"`
 
 	// The ID of the user being replied to.
 	RecipientId *string `min:"1" type:"string"`
@@ -269,7 +271,8 @@ func (s CommentMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.RecipientId != nil {
 		v := *s.RecipientId
@@ -286,7 +289,7 @@ type DocumentMetadata struct {
 	_ struct{} `type:"structure"`
 
 	// The time when the document was created.
-	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTimestamp *time.Time `type:"timestamp"`
 
 	// The ID of the creator.
 	CreatorId *string `min:"1" type:"string"`
@@ -301,7 +304,7 @@ type DocumentMetadata struct {
 	LatestVersionMetadata *DocumentVersionMetadata `type:"structure"`
 
 	// The time when the document was updated.
-	ModifiedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ModifiedTimestamp *time.Time `type:"timestamp"`
 
 	// The ID of the parent folder.
 	ParentFolderId *string `min:"1" type:"string"`
@@ -321,7 +324,8 @@ func (s DocumentMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CreatorId != nil {
 		v := *s.CreatorId
@@ -357,7 +361,8 @@ func (s DocumentMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ModifiedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ModifiedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "ModifiedTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ParentFolderId != nil {
 		v := *s.ParentFolderId
@@ -380,16 +385,16 @@ type DocumentVersionMetadata struct {
 	_ struct{} `type:"structure"`
 
 	// The timestamp when the content of the document was originally created.
-	ContentCreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ContentCreatedTimestamp *time.Time `type:"timestamp"`
 
 	// The timestamp when the content of the document was modified.
-	ContentModifiedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ContentModifiedTimestamp *time.Time `type:"timestamp"`
 
 	// The content type of the document.
 	ContentType *string `min:"1" type:"string"`
 
 	// The timestamp when the document was first uploaded.
-	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTimestamp *time.Time `type:"timestamp"`
 
 	// The ID of the creator.
 	CreatorId *string `min:"1" type:"string"`
@@ -398,7 +403,7 @@ type DocumentVersionMetadata struct {
 	Id *string `min:"1" type:"string"`
 
 	// The timestamp when the document was last uploaded.
-	ModifiedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ModifiedTimestamp *time.Time `type:"timestamp"`
 
 	// The name of the version.
 	Name *string `min:"1" type:"string"`
@@ -430,13 +435,15 @@ func (s DocumentVersionMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ContentCreatedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ContentCreatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "ContentCreatedTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ContentModifiedTimestamp != nil {
 		v := *s.ContentModifiedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ContentModifiedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "ContentModifiedTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ContentType != nil {
 		v := *s.ContentType
@@ -448,7 +455,8 @@ func (s DocumentVersionMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CreatorId != nil {
 		v := *s.CreatorId
@@ -466,7 +474,8 @@ func (s DocumentVersionMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ModifiedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ModifiedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "ModifiedTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -525,7 +534,7 @@ type FolderMetadata struct {
 	_ struct{} `type:"structure"`
 
 	// The time when the folder was created.
-	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTimestamp *time.Time `type:"timestamp"`
 
 	// The ID of the creator.
 	CreatorId *string `min:"1" type:"string"`
@@ -540,7 +549,7 @@ type FolderMetadata struct {
 	LatestVersionSize *int64 `type:"long"`
 
 	// The time when the folder was updated.
-	ModifiedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ModifiedTimestamp *time.Time `type:"timestamp"`
 
 	// The name of the folder.
 	Name *string `min:"1" type:"string"`
@@ -569,7 +578,8 @@ func (s FolderMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CreatorId != nil {
 		v := *s.CreatorId
@@ -605,7 +615,8 @@ func (s FolderMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ModifiedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ModifiedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "ModifiedTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -1247,7 +1258,7 @@ type User struct {
 	_ struct{} `type:"structure"`
 
 	// The time when the user was created.
-	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTimestamp *time.Time `type:"timestamp"`
 
 	// The email address of the user.
 	EmailAddress *string `min:"1" type:"string"`
@@ -1262,7 +1273,7 @@ type User struct {
 	Locale LocaleType `type:"string" enum:"true"`
 
 	// The time when the user was modified.
-	ModifiedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ModifiedTimestamp *time.Time `type:"timestamp"`
 
 	// The ID of the organization.
 	OrganizationId *string `min:"1" type:"string"`
@@ -1303,7 +1314,8 @@ func (s User) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.EmailAddress != nil {
 		v := *s.EmailAddress
@@ -1333,7 +1345,8 @@ func (s User) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ModifiedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ModifiedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "ModifiedTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.OrganizationId != nil {
 		v := *s.OrganizationId

@@ -188,7 +188,7 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	//    * Can't be specified if the UseLatestRestorableTime parameter is enabled
 	//
 	// Example: 2009-09-07T23:45:00Z
-	RestoreTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	RestoreTime *time.Time `type:"timestamp"`
 
 	// The identifier of the source DB instance from which to restore.
 	//

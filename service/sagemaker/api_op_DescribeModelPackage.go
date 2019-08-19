@@ -52,7 +52,7 @@ type DescribeModelPackageOutput struct {
 	// A timestamp specifying when the model package was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// Details about inference jobs that can be run with models based on this model
 	// package.

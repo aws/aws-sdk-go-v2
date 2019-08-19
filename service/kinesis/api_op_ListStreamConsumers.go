@@ -55,7 +55,7 @@ type ListStreamConsumersInput struct {
 	// for.
 	//
 	// You can't specify this parameter if you specify the NextToken parameter.
-	StreamCreationTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StreamCreationTimestamp *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

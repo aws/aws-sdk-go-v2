@@ -162,7 +162,7 @@ type AlgorithmSummary struct {
 	// A timestamp that shows when the algorithm was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -614,7 +614,7 @@ type CodeRepositorySummary struct {
 	// The date and time that the Git repository was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// Configuration details for the Git repository, including the URL where it
 	// is located and the ARN of the AWS Secrets Manager secret that contains the
@@ -624,7 +624,7 @@ type CodeRepositorySummary struct {
 	// The date and time that the Git repository was last modified.
 	//
 	// LastModifiedTime is a required field
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	LastModifiedTime *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -698,7 +698,7 @@ type CompilationJobSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The time when the model compilation job completed.
-	CompilationEndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CompilationEndTime *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the model compilation job.
 	//
@@ -716,7 +716,7 @@ type CompilationJobSummary struct {
 	CompilationJobStatus CompilationJobStatus `type:"string" required:"true" enum:"true"`
 
 	// The time when the model compilation job started.
-	CompilationStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CompilationStartTime *time.Time `type:"timestamp"`
 
 	// The type of device that the model will run on after compilation has completed.
 	//
@@ -726,10 +726,10 @@ type CompilationJobSummary struct {
 	// The time when the model compilation job was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// The time when the model compilation job was last modified.
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -1024,7 +1024,7 @@ type DeployedImage struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time when the image path for the model resolved to the ResolvedImage
-	ResolutionTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ResolutionTime *time.Time `type:"timestamp"`
 
 	// The specific digest path of the image hosted in this ProductionVariant.
 	ResolvedImage *string `type:"string"`
@@ -1085,7 +1085,7 @@ type EndpointConfigSummary struct {
 	// A timestamp that shows when the endpoint configuration was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the endpoint configuration.
 	//
@@ -1111,7 +1111,7 @@ type EndpointSummary struct {
 	// A timestamp that shows when the endpoint was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the endpoint.
 	//
@@ -1161,7 +1161,7 @@ type EndpointSummary struct {
 	// A timestamp that shows when the endpoint was last modified.
 	//
 	// LastModifiedTime is a required field
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	LastModifiedTime *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -1896,7 +1896,7 @@ type HyperParameterTrainingJobSummary struct {
 	// The date and time that the training job was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// The reason that the training job failed.
 	FailureReason *string `type:"string"`
@@ -1925,7 +1925,7 @@ type HyperParameterTrainingJobSummary struct {
 	// this time. For successful jobs and stopped jobs, this is the time after model
 	// artifacts are uploaded. For failed jobs, this is the time when Amazon SageMaker
 	// detects a job failure.
-	TrainingEndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TrainingEndTime *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the training job.
 	//
@@ -1943,7 +1943,7 @@ type HyperParameterTrainingJobSummary struct {
 	TrainingJobStatus TrainingJobStatus `type:"string" required:"true" enum:"true"`
 
 	// The date and time that the training job started.
-	TrainingStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TrainingStartTime *time.Time `type:"timestamp"`
 
 	// A list of the hyperparameters for which you specified ranges to search.
 	//
@@ -2093,10 +2093,10 @@ type HyperParameterTuningJobSummary struct {
 	// The date and time that the tuning job was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// The date and time that the tuning job ended.
-	HyperParameterTuningEndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	HyperParameterTuningEndTime *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the tuning job.
 	//
@@ -2114,7 +2114,7 @@ type HyperParameterTuningJobSummary struct {
 	HyperParameterTuningJobStatus HyperParameterTuningJobStatus `type:"string" required:"true" enum:"true"`
 
 	// The date and time that the tuning job was modified.
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTime *time.Time `type:"timestamp"`
 
 	// The ObjectiveStatusCounters object that specifies the numbers of training
 	// jobs, categorized by objective metric status, that this tuning job launched.
@@ -2670,7 +2670,7 @@ type LabelingJobForWorkteamSummary struct {
 	// The date and time that the labeling job was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// A unique identifier for a labeling job. You can use this to refer to a specific
 	// labeling job.
@@ -2897,7 +2897,7 @@ type LabelingJobSummary struct {
 	// The date and time that the job was created (timestamp).
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// If the LabelingJobStatus field is Failed, this field contains a description
 	// of the error.
@@ -2932,7 +2932,7 @@ type LabelingJobSummary struct {
 	// The date and time that the job was last modified (timestamp).
 	//
 	// LastModifiedTime is a required field
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	LastModifiedTime *time.Time `type:"timestamp" required:"true"`
 
 	// The Amazon Resource Name (ARN) of a Lambda function. The function is run
 	// before each data object is sent to a worker.
@@ -2990,7 +2990,7 @@ type MetricData struct {
 	MetricName *string `min:"1" type:"string"`
 
 	// The date and time that the algorithm emitted the metric.
-	Timestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	Timestamp *time.Time `type:"timestamp"`
 
 	// The value of the metric.
 	Value *float64 `type:"float"`
@@ -3172,7 +3172,7 @@ type ModelPackageSummary struct {
 	// A timestamp that shows when the model package was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the model package.
 	//
@@ -3312,7 +3312,7 @@ type ModelSummary struct {
 	// A timestamp that indicates when the model was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the model.
 	//
@@ -3406,10 +3406,10 @@ type NotebookInstanceLifecycleConfigSummary struct {
 	_ struct{} `type:"structure"`
 
 	// A timestamp that tells when the lifecycle configuration was created.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// A timestamp that tells when the lifecycle configuration was last modified.
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTime *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the lifecycle configuration.
 	//
@@ -3485,7 +3485,7 @@ type NotebookInstanceSummary struct {
 	AdditionalCodeRepositories []string `type:"list"`
 
 	// A timestamp that shows when the notebook instance was created.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The Git repository associated with the notebook instance as its default code
 	// repository. This can be either the name of a Git repository stored as a resource
@@ -3499,7 +3499,7 @@ type NotebookInstanceSummary struct {
 	InstanceType InstanceType `type:"string" enum:"true"`
 
 	// A timestamp that shows when the notebook instance was last modified.
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTime *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the notebook instance.
 	//
@@ -4443,13 +4443,13 @@ type SecondaryStatusTransition struct {
 	// A timestamp that shows when the training job transitioned out of this secondary
 	// status state into another secondary status state or when the training job
 	// has ended.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// A timestamp that shows when the training job transitioned to the current
 	// secondary status state.
 	//
 	// StartTime is a required field
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartTime *time.Time `type:"timestamp" required:"true"`
 
 	// Contains a secondary status information from a training job.
 	//
@@ -4823,7 +4823,7 @@ type TrainingJob struct {
 	AlgorithmSpecification *AlgorithmSpecification `type:"structure"`
 
 	// A timestamp that indicates when the training job was created.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// To encrypt all communications between ML compute instances in distributed
 	// training, choose True. Encryption provides greater security for distributed
@@ -4854,7 +4854,7 @@ type TrainingJob struct {
 	LabelingJobArn *string `type:"string"`
 
 	// A timestamp that indicates when the status of the training job was last modified.
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTime *time.Time `type:"timestamp"`
 
 	// Information about the Amazon S3 location that is configured for storing model
 	// artifacts.
@@ -4946,7 +4946,7 @@ type TrainingJob struct {
 	// this time. For successful jobs and stopped jobs, this is the time after model
 	// artifacts are uploaded. For failed jobs, this is the time when Amazon SageMaker
 	// detects a job failure.
-	TrainingEndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TrainingEndTime *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the training job.
 	TrainingJobArn *string `type:"string"`
@@ -4978,7 +4978,7 @@ type TrainingJob struct {
 	// The start time in CloudWatch Logs might be later than this time. The difference
 	// is due to the time it takes to download the training data and to the size
 	// of the training container.
-	TrainingStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TrainingStartTime *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the associated hyperparameter tuning job
 	// if the training job was launched by a hyperparameter tuning job.
@@ -5143,15 +5143,15 @@ type TrainingJobSummary struct {
 	// A timestamp that shows when the training job was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// Timestamp when the training job was last modified.
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTime *time.Time `type:"timestamp"`
 
 	// A timestamp that shows when the training job ended. This field is set only
 	// if the training job has one of the terminal statuses (Completed, Failed,
 	// or Stopped).
-	TrainingEndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TrainingEndTime *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the training job.
 	//
@@ -5478,19 +5478,19 @@ type TransformJobSummary struct {
 	// A timestamp that shows when the transform Job was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// If the transform job failed, the reason it failed.
 	FailureReason *string `type:"string"`
 
 	// Indicates when the transform job was last modified.
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTime *time.Time `type:"timestamp"`
 
 	// Indicates when the transform job ends on compute instances. For successful
 	// jobs and stopped jobs, this is the exact time recorded after the results
 	// are uploaded. For failed jobs, this is when Amazon SageMaker detected that
 	// the job failed.
-	TransformEndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TransformEndTime *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the transform job.
 	//
@@ -5851,7 +5851,7 @@ type Workteam struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time that the work team was created (timestamp).
-	CreateDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreateDate *time.Time `type:"timestamp"`
 
 	// A description of the work team.
 	//
@@ -5859,7 +5859,7 @@ type Workteam struct {
 	Description *string `min:"1" type:"string" required:"true"`
 
 	// The date and time that the work team was last updated (timestamp).
-	LastUpdatedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDate *time.Time `type:"timestamp"`
 
 	// The Amazon Cognito user groups that make up the work team.
 	//

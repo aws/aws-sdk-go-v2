@@ -44,6 +44,7 @@ func (s *DescribeAuditTaskInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeAuditTaskInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.TaskId != nil {
 		v := *s.TaskId
@@ -64,7 +65,7 @@ type DescribeAuditTaskOutput struct {
 	ScheduledAuditName *string `locationName:"scheduledAuditName" min:"1" type:"string"`
 
 	// The time the audit started.
-	TaskStartTime *time.Time `locationName:"taskStartTime" type:"timestamp" timestampFormat:"unix"`
+	TaskStartTime *time.Time `locationName:"taskStartTime" type:"timestamp"`
 
 	// Statistical information about the audit.
 	TaskStatistics *TaskStatistics `locationName:"taskStatistics" type:"structure"`
@@ -106,7 +107,8 @@ func (s DescribeAuditTaskOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.TaskStartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "taskStartTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "taskStartTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.TaskStatistics != nil {
 		v := s.TaskStatistics

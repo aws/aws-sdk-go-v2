@@ -72,7 +72,7 @@ type GetMaintenanceWindowExecutionTaskInvocationOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The time that the task finished running on the target.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// The execution ID.
 	ExecutionId *string `type:"string"`
@@ -88,7 +88,7 @@ type GetMaintenanceWindowExecutionTaskInvocationOutput struct {
 	Parameters *string `type:"string"`
 
 	// The time that the task started running on the target.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `type:"timestamp"`
 
 	// The task status for an invocation.
 	Status MaintenanceWindowExecutionStatus `type:"string" enum:"true"`

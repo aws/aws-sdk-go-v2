@@ -21,16 +21,16 @@ type AppSummary struct {
 	AppId *string `locationName:"appId" type:"string"`
 
 	// Time of creation of this application.
-	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp"`
 
 	// Description of the application.
 	Description *string `locationName:"description" type:"string"`
 
 	// Timestamp of the application's creation.
-	LastModified *time.Time `locationName:"lastModified" type:"timestamp" timestampFormat:"unix"`
+	LastModified *time.Time `locationName:"lastModified" type:"timestamp"`
 
 	// Timestamp of the application's most recent successful replication.
-	LatestReplicationTime *time.Time `locationName:"latestReplicationTime" type:"timestamp" timestampFormat:"unix"`
+	LatestReplicationTime *time.Time `locationName:"latestReplicationTime" type:"timestamp"`
 
 	// Details about the latest launch of the application.
 	LaunchDetails *LaunchDetails `locationName:"launchDetails" type:"structure"`
@@ -77,7 +77,7 @@ type Connector struct {
 	_ struct{} `type:"structure"`
 
 	// The time the connector was associated.
-	AssociatedOn *time.Time `locationName:"associatedOn" type:"timestamp" timestampFormat:"unix"`
+	AssociatedOn *time.Time `locationName:"associatedOn" type:"timestamp"`
 
 	// The capabilities of the connector.
 	CapabilityList []ConnectorCapability `locationName:"capabilityList" type:"list"`
@@ -118,7 +118,7 @@ type LaunchDetails struct {
 	_ struct{} `type:"structure"`
 
 	// Latest time this application was launched successfully.
-	LatestLaunchTime *time.Time `locationName:"latestLaunchTime" type:"timestamp" timestampFormat:"unix"`
+	LatestLaunchTime *time.Time `locationName:"latestLaunchTime" type:"timestamp"`
 
 	// Identifier of the latest stack launched for this application.
 	StackId *string `locationName:"stackId" type:"string"`
@@ -170,7 +170,7 @@ type ReplicationJob struct {
 	LicenseType LicenseType `locationName:"licenseType" type:"string" enum:"true"`
 
 	// The start time of the next replication run.
-	NextReplicationRunStartTime *time.Time `locationName:"nextReplicationRunStartTime" type:"timestamp" timestampFormat:"unix"`
+	NextReplicationRunStartTime *time.Time `locationName:"nextReplicationRunStartTime" type:"timestamp"`
 
 	// Number of recent AMIs to keep in the customer's account for a replication
 	// job. By default the value is set to zero, meaning that all AMIs are kept.
@@ -188,7 +188,7 @@ type ReplicationJob struct {
 	RunOnce *bool `locationName:"runOnce" type:"boolean"`
 
 	// The seed replication time.
-	SeedReplicationTime *time.Time `locationName:"seedReplicationTime" type:"timestamp" timestampFormat:"unix"`
+	SeedReplicationTime *time.Time `locationName:"seedReplicationTime" type:"timestamp"`
 
 	// The identifier of the server.
 	ServerId *string `locationName:"serverId" type:"string"`
@@ -220,7 +220,7 @@ type ReplicationRun struct {
 	AmiId *string `locationName:"amiId" type:"string"`
 
 	// The completion time of the last replication run.
-	CompletedTime *time.Time `locationName:"completedTime" type:"timestamp" timestampFormat:"unix"`
+	CompletedTime *time.Time `locationName:"completedTime" type:"timestamp"`
 
 	// The description of the replication run.
 	Description *string `locationName:"description" type:"string"`
@@ -248,7 +248,7 @@ type ReplicationRun struct {
 	ReplicationRunId *string `locationName:"replicationRunId" type:"string"`
 
 	// The start time of the next replication run.
-	ScheduledStartTime *time.Time `locationName:"scheduledStartTime" type:"timestamp" timestampFormat:"unix"`
+	ScheduledStartTime *time.Time `locationName:"scheduledStartTime" type:"timestamp"`
 
 	// Details of the current stage of the replication run.
 	StageDetails *ReplicationRunStageDetails `locationName:"stageDetails" type:"structure"`
@@ -477,7 +477,7 @@ type ServerReplicationParameters struct {
 	RunOnce *bool `locationName:"runOnce" type:"boolean"`
 
 	// Seed time for creating a replication job for the server.
-	SeedTime *time.Time `locationName:"seedTime" type:"timestamp" timestampFormat:"unix"`
+	SeedTime *time.Time `locationName:"seedTime" type:"timestamp"`
 }
 
 // String returns the string representation

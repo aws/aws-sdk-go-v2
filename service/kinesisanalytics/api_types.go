@@ -58,14 +58,14 @@ type ApplicationDetail struct {
 	CloudWatchLoggingOptionDescriptions []CloudWatchLoggingOptionDescription `type:"list"`
 
 	// Time stamp when the application version was created.
-	CreateTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreateTimestamp *time.Time `type:"timestamp"`
 
 	// Describes the application input configuration. For more information, see
 	// Configuring Application Input (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
 	InputDescriptions []InputDescription `type:"list"`
 
 	// Time stamp when the application was last updated.
-	LastUpdateTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdateTimestamp *time.Time `type:"timestamp"`
 
 	// Describes the application output configuration. For more information, see
 	// Configuring Application Output (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).

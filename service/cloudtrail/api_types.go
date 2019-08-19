@@ -128,7 +128,7 @@ type Event struct {
 	EventSource *string `type:"string"`
 
 	// The date and time of the event returned.
-	EventTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EventTime *time.Time `type:"timestamp"`
 
 	// Information about whether the event is a write event or a read event.
 	ReadOnly *string `type:"string"`
@@ -239,10 +239,10 @@ type PublicKey struct {
 	Fingerprint *string `type:"string"`
 
 	// The ending time of validity of the public key.
-	ValidityEndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ValidityEndTime *time.Time `type:"timestamp"`
 
 	// The starting time of validity of the public key.
-	ValidityStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ValidityStartTime *time.Time `type:"timestamp"`
 
 	// The DER encoded public key value in PKCS#1 format.
 	//

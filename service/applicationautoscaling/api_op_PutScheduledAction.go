@@ -15,7 +15,7 @@ type PutScheduledActionInput struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time for the scheduled action to end.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// The identifier of the resource associated with the scheduled action. This
 	// string consists of the resource type and unique identifier.
@@ -129,7 +129,7 @@ type PutScheduledActionInput struct {
 	ServiceNamespace ServiceNamespace `type:"string" required:"true" enum:"true"`
 
 	// The date and time for the scheduled action to start.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

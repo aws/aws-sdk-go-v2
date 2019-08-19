@@ -59,7 +59,7 @@ type GetTrailStatusOutput struct {
 
 	// Displays the most recent date and time when CloudTrail delivered logs to
 	// CloudWatch Logs.
-	LatestCloudWatchLogsDeliveryTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LatestCloudWatchLogsDeliveryTime *time.Time `type:"timestamp"`
 
 	// This field is deprecated.
 	LatestDeliveryAttemptSucceeded *string `type:"string"`
@@ -80,7 +80,7 @@ type GetTrailStatusOutput struct {
 
 	// Specifies the date and time that CloudTrail last delivered log files to an
 	// account's Amazon S3 bucket.
-	LatestDeliveryTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LatestDeliveryTime *time.Time `type:"timestamp"`
 
 	// Displays any Amazon S3 error that CloudTrail encountered when attempting
 	// to deliver a digest file to the designated bucket. For more information see
@@ -95,7 +95,7 @@ type GetTrailStatusOutput struct {
 
 	// Specifies the date and time that CloudTrail last delivered a digest file
 	// to an account's Amazon S3 bucket.
-	LatestDigestDeliveryTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LatestDigestDeliveryTime *time.Time `type:"timestamp"`
 
 	// This field is deprecated.
 	LatestNotificationAttemptSucceeded *string `type:"string"`
@@ -110,15 +110,15 @@ type GetTrailStatusOutput struct {
 
 	// Specifies the date and time of the most recent Amazon SNS notification that
 	// CloudTrail has written a new log file to an account's Amazon S3 bucket.
-	LatestNotificationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LatestNotificationTime *time.Time `type:"timestamp"`
 
 	// Specifies the most recent date and time when CloudTrail started recording
 	// API calls for an AWS account.
-	StartLoggingTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartLoggingTime *time.Time `type:"timestamp"`
 
 	// Specifies the most recent date and time when CloudTrail stopped recording
 	// API calls for an AWS account.
-	StopLoggingTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StopLoggingTime *time.Time `type:"timestamp"`
 
 	// This field is deprecated.
 	TimeLoggingStarted *string `type:"string"`

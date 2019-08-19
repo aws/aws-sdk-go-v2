@@ -18,7 +18,7 @@ type GetTraceSummariesInput struct {
 	// The end of the time frame for which to retrieve traces.
 	//
 	// EndTime is a required field
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	EndTime *time.Time `type:"timestamp" required:"true"`
 
 	// Specify a filter expression to retrieve trace summaries for services or requests
 	// that meet certain requirements.
@@ -38,7 +38,7 @@ type GetTraceSummariesInput struct {
 	// The start of the time frame for which to retrieve traces.
 	//
 	// StartTime is a required field
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartTime *time.Time `type:"timestamp" required:"true"`
 
 	// A parameter to indicate whether to query trace summaries by TraceId or Event
 	// time.
@@ -70,12 +70,14 @@ func (s *GetTraceSummariesInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetTraceSummariesInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.EndTime != nil {
 		v := *s.EndTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EndTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "EndTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.FilterExpression != nil {
 		v := *s.FilterExpression
@@ -105,7 +107,8 @@ func (s GetTraceSummariesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "StartTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if len(s.TimeRangeType) > 0 {
 		v := s.TimeRangeType
@@ -121,7 +124,7 @@ type GetTraceSummariesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The start time of this page of results.
-	ApproximateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ApproximateTime *time.Time `type:"timestamp"`
 
 	// If the requested time frame contained more than one page of results, you
 	// can use this token to retrieve the next page. The first page contains the
@@ -147,7 +150,8 @@ func (s GetTraceSummariesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ApproximateTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ApproximateTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "ApproximateTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.NextToken != nil {
 		v := *s.NextToken

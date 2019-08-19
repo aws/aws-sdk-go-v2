@@ -16,11 +16,11 @@ type ListLabelingJobsForWorkteamInput struct {
 
 	// A filter that returns only labeling jobs created after the specified time
 	// (timestamp).
-	CreationTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTimeAfter *time.Time `type:"timestamp"`
 
 	// A filter that returns only labeling jobs created before the specified time
 	// (timestamp).
-	CreationTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTimeBefore *time.Time `type:"timestamp"`
 
 	// A filter the limits jobs to only the ones whose job reference code contains
 	// the specified string.

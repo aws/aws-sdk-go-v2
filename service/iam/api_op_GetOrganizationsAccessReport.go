@@ -99,13 +99,13 @@ type GetOrganizationsAccessReportOutput struct {
 	//
 	// This field is null if the job is still in progress, as indicated by a job
 	// status value of IN_PROGRESS.
-	JobCompletionDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	JobCompletionDate *time.Time `type:"timestamp"`
 
 	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
 	// when the report job was created.
 	//
 	// JobCreationDate is a required field
-	JobCreationDate *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	JobCreationDate *time.Time `type:"timestamp" required:"true"`
 
 	// The status of the job.
 	//

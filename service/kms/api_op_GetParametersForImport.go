@@ -89,7 +89,7 @@ type GetParametersForImportOutput struct {
 	// The time at which the import token and public key are no longer valid. After
 	// this time, you cannot use them to make an ImportKeyMaterial request and you
 	// must send another GetParametersForImport request to get new ones.
-	ParametersValidTo *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ParametersValidTo *time.Time `type:"timestamp"`
 
 	// The public key to use to encrypt the key material before importing it with
 	// ImportKeyMaterial.

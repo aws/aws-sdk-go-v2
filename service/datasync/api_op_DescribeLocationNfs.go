@@ -46,7 +46,7 @@ type DescribeLocationNfsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The time that the NFS location was created.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The Amazon resource Name (ARN) of the NFS location that was described.
 	LocationArn *string `type:"string"`

@@ -50,7 +50,7 @@ type DescribeCollectionOutput struct {
 	// The number of milliseconds since the Unix epoch time until the creation of
 	// the collection. The Unix epoch time is 00:00:00 Coordinated Universal Time
 	// (UTC), Thursday, 1 January 1970.
-	CreationTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTimestamp *time.Time `type:"timestamp"`
 
 	// The number of faces that are indexed into the collection. To index faces
 	// into a collection, use IndexFaces.

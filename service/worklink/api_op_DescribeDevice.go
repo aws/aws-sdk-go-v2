@@ -57,7 +57,7 @@ func (s *DescribeDeviceInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeDeviceInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.DeviceId != nil {
 		v := *s.DeviceId
@@ -79,10 +79,10 @@ type DescribeDeviceOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The date that the device first signed in to Amazon WorkLink.
-	FirstAccessedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	FirstAccessedTime *time.Time `type:"timestamp"`
 
 	// The date that the device last accessed Amazon WorkLink.
-	LastAccessedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastAccessedTime *time.Time `type:"timestamp"`
 
 	// The manufacturer of the device.
 	Manufacturer *string `min:"1" type:"string"`
@@ -117,13 +117,15 @@ func (s DescribeDeviceOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.FirstAccessedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FirstAccessedTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "FirstAccessedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.LastAccessedTime != nil {
 		v := *s.LastAccessedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastAccessedTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastAccessedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Manufacturer != nil {
 		v := *s.Manufacturer

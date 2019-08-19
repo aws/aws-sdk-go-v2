@@ -38,11 +38,11 @@ type ListBackupsInput struct {
 	TableName *string `min:"3" type:"string"`
 
 	// Only backups created after this time are listed. TimeRangeLowerBound is inclusive.
-	TimeRangeLowerBound *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TimeRangeLowerBound *time.Time `type:"timestamp"`
 
 	// Only backups created before this time are listed. TimeRangeUpperBound is
 	// exclusive.
-	TimeRangeUpperBound *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TimeRangeUpperBound *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

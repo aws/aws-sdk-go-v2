@@ -43,7 +43,7 @@ func (s *DescribeProtectedResourceInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeProtectedResourceInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.ResourceArn != nil {
 		v := *s.ResourceArn
@@ -62,7 +62,7 @@ type DescribeProtectedResourceOutput struct {
 	// Coordinated Universal Time (UTC). The value of LastBackupTime is accurate
 	// to milliseconds. For example, the value 1516925490.087 represents Friday,
 	// January 26, 2018 12:11:30.087 AM.
-	LastBackupTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastBackupTime *time.Time `type:"timestamp"`
 
 	// An ARN that uniquely identifies a resource. The format of the ARN depends
 	// on the resource type.
@@ -84,7 +84,8 @@ func (s DescribeProtectedResourceOutput) MarshalFields(e protocol.FieldEncoder) 
 		v := *s.LastBackupTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastBackupTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastBackupTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ResourceArn != nil {
 		v := *s.ResourceArn

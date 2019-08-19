@@ -65,7 +65,7 @@ type DescribeCertificateAuthorityAuditReportOutput struct {
 	AuditReportStatus AuditReportStatus `type:"string" enum:"true"`
 
 	// The date and time at which the report was created.
-	CreatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `type:"timestamp"`
 
 	// Name of the S3 bucket that contains the report.
 	S3BucketName *string `type:"string"`

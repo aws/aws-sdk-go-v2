@@ -22,11 +22,11 @@ type GetResourceConfigHistoryInput struct {
 	// The time stamp that indicates an earlier time. If not specified, the action
 	// returns paginated results that contain configuration items that start when
 	// the first configuration item was recorded.
-	EarlierTime *time.Time `locationName:"earlierTime" type:"timestamp" timestampFormat:"unix"`
+	EarlierTime *time.Time `locationName:"earlierTime" type:"timestamp"`
 
 	// The time stamp that indicates a later time. If not specified, current time
 	// is taken.
-	LaterTime *time.Time `locationName:"laterTime" type:"timestamp" timestampFormat:"unix"`
+	LaterTime *time.Time `locationName:"laterTime" type:"timestamp"`
 
 	// The maximum number of configuration items returned on each page. The default
 	// is 10. You cannot specify a number greater than 100. If you specify 0, AWS

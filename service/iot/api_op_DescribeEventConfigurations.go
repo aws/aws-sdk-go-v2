@@ -22,6 +22,7 @@ func (s DescribeEventConfigurationsInput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeEventConfigurationsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	return nil
 }
@@ -30,13 +31,13 @@ type DescribeEventConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The creation date of the event configuration.
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
 
 	// The event configurations.
 	EventConfigurations map[string]Configuration `locationName:"eventConfigurations" type:"map"`
 
 	// The date the event configurations were last modified.
-	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp" timestampFormat:"unix"`
+	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp"`
 }
 
 // String returns the string representation
@@ -50,7 +51,8 @@ func (s DescribeEventConfigurationsOutput) MarshalFields(e protocol.FieldEncoder
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.EventConfigurations != nil {
 		v := s.EventConfigurations
@@ -68,7 +70,8 @@ func (s DescribeEventConfigurationsOutput) MarshalFields(e protocol.FieldEncoder
 		v := *s.LastModifiedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastModifiedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastModifiedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }

@@ -57,7 +57,7 @@ func (s *DescribeDomainInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeDomainInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.DomainName != nil {
 		v := *s.DomainName
@@ -82,7 +82,7 @@ type DescribeDomainOutput struct {
 	AcmCertificateArn *string `type:"string"`
 
 	// The time that the domain was added.
-	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTime *time.Time `type:"timestamp"`
 
 	// The name to display.
 	DisplayName *string `type:"string"`
@@ -111,7 +111,8 @@ func (s DescribeDomainOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DisplayName != nil {
 		v := *s.DisplayName

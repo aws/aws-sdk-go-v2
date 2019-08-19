@@ -106,6 +106,7 @@ func (s *StartSpeechSynthesisTaskInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s StartSpeechSynthesisTaskInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if len(s.LanguageCode) > 0 {
 		v := s.LanguageCode

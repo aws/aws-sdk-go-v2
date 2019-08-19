@@ -532,13 +532,13 @@ type ClusterTimeline struct {
 	_ struct{} `type:"structure"`
 
 	// The creation date and time of the cluster.
-	CreationDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `type:"timestamp"`
 
 	// The date and time when the cluster was terminated.
-	EndDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndDateTime *time.Time `type:"timestamp"`
 
 	// The date and time when the cluster was ready to execute steps.
-	ReadyDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ReadyDateTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -1254,13 +1254,13 @@ type InstanceFleetTimeline struct {
 	_ struct{} `type:"structure"`
 
 	// The time and date the instance fleet was created.
-	CreationDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `type:"timestamp"`
 
 	// The time and date the instance fleet terminated.
-	EndDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndDateTime *time.Time `type:"timestamp"`
 
 	// The time and date the instance fleet was ready to run jobs.
-	ReadyDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ReadyDateTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -1457,10 +1457,10 @@ type InstanceGroupDetail struct {
 	// The date/time the instance group was created.
 	//
 	// CreationDateTime is a required field
-	CreationDateTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationDateTime *time.Time `type:"timestamp" required:"true"`
 
 	// The date/time the instance group was terminated.
-	EndDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndDateTime *time.Time `type:"timestamp"`
 
 	// Unique identifier for the instance group.
 	InstanceGroupId *string `type:"string"`
@@ -1497,10 +1497,10 @@ type InstanceGroupDetail struct {
 	Name *string `type:"string"`
 
 	// The date/time the instance group was available to the cluster.
-	ReadyDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ReadyDateTime *time.Time `type:"timestamp"`
 
 	// The date/time the instance group was started.
-	StartDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartDateTime *time.Time `type:"timestamp"`
 
 	// State of instance group. The following values are deprecated: STARTING, TERMINATED,
 	// and FAILED.
@@ -1600,13 +1600,13 @@ type InstanceGroupTimeline struct {
 	_ struct{} `type:"structure"`
 
 	// The creation date and time of the instance group.
-	CreationDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `type:"timestamp"`
 
 	// The date and time when the instance group terminated.
-	EndDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndDateTime *time.Time `type:"timestamp"`
 
 	// The date and time when the instance group became ready to perform tasks.
-	ReadyDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ReadyDateTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -1679,13 +1679,13 @@ type InstanceTimeline struct {
 	_ struct{} `type:"structure"`
 
 	// The creation date and time of the instance.
-	CreationDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `type:"timestamp"`
 
 	// The date and time when the instance was terminated.
-	EndDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndDateTime *time.Time `type:"timestamp"`
 
 	// The date and time when the instance was ready to perform tasks.
-	ReadyDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ReadyDateTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -1900,20 +1900,20 @@ type JobFlowExecutionStatusDetail struct {
 	// The creation date and time of the job flow.
 	//
 	// CreationDateTime is a required field
-	CreationDateTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationDateTime *time.Time `type:"timestamp" required:"true"`
 
 	// The completion date and time of the job flow.
-	EndDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndDateTime *time.Time `type:"timestamp"`
 
 	// Description of the job flow last changed state.
 	LastStateChangeReason *string `type:"string"`
 
 	// The date and time when the job flow was ready to start running bootstrap
 	// actions.
-	ReadyDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ReadyDateTime *time.Time `type:"timestamp"`
 
 	// The start date and time of the job flow.
-	StartDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartDateTime *time.Time `type:"timestamp"`
 
 	// The state of the job flow.
 	//
@@ -2472,7 +2472,7 @@ type SecurityConfigurationSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time the security configuration was created.
-	CreationDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `type:"timestamp"`
 
 	// The name of the security configuration.
 	Name *string `type:"string"`
@@ -2725,16 +2725,16 @@ type StepExecutionStatusDetail struct {
 	// The creation date and time of the step.
 	//
 	// CreationDateTime is a required field
-	CreationDateTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationDateTime *time.Time `type:"timestamp" required:"true"`
 
 	// The completion date and time of the step.
-	EndDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndDateTime *time.Time `type:"timestamp"`
 
 	// A description of the step's current state.
 	LastStateChangeReason *string `type:"string"`
 
 	// The start date and time of the step.
-	StartDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartDateTime *time.Time `type:"timestamp"`
 
 	// The state of the step.
 	//
@@ -2823,13 +2823,13 @@ type StepTimeline struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time when the cluster step was created.
-	CreationDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `type:"timestamp"`
 
 	// The date and time when the cluster step execution completed or failed.
-	EndDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndDateTime *time.Time `type:"timestamp"`
 
 	// The date and time when the cluster step execution started.
-	StartDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartDateTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

@@ -62,13 +62,13 @@ type Group struct {
 	_ struct{} `type:"structure"`
 
 	// The date indicating when the group was disabled from Amazon WorkMail use.
-	DisabledDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DisabledDate *time.Time `type:"timestamp"`
 
 	// The email of the group.
 	Email *string `min:"1" type:"string"`
 
 	// The date indicating when the group was enabled for Amazon WorkMail use.
-	EnabledDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EnabledDate *time.Time `type:"timestamp"`
 
 	// The identifier of the group.
 	Id *string `min:"12" type:"string"`
@@ -91,10 +91,10 @@ type Member struct {
 	_ struct{} `type:"structure"`
 
 	// The date indicating when the member was disabled from Amazon WorkMail use.
-	DisabledDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DisabledDate *time.Time `type:"timestamp"`
 
 	// The date indicating when the member was enabled for Amazon WorkMail use.
-	EnabledDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EnabledDate *time.Time `type:"timestamp"`
 
 	// The identifier of the member.
 	Id *string `type:"string"`
@@ -178,13 +178,13 @@ type Resource struct {
 	_ struct{} `type:"structure"`
 
 	// The date indicating when the resource was disabled from Amazon WorkMail use.
-	DisabledDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DisabledDate *time.Time `type:"timestamp"`
 
 	// The email of the resource.
 	Email *string `min:"1" type:"string"`
 
 	// The date indicating when the resource was enabled for Amazon WorkMail use.
-	EnabledDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EnabledDate *time.Time `type:"timestamp"`
 
 	// The identifier of the resource.
 	Id *string `min:"12" type:"string"`
@@ -210,7 +210,7 @@ type User struct {
 	_ struct{} `type:"structure"`
 
 	// The date indicating when the user was disabled from Amazon WorkMail use.
-	DisabledDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DisabledDate *time.Time `type:"timestamp"`
 
 	// The display name of the user.
 	DisplayName *string `type:"string"`
@@ -219,7 +219,7 @@ type User struct {
 	Email *string `min:"1" type:"string"`
 
 	// The date indicating when the user was enabled for Amazon WorkMail use.
-	EnabledDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EnabledDate *time.Time `type:"timestamp"`
 
 	// The identifier of the user.
 	Id *string `min:"12" type:"string"`

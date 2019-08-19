@@ -51,7 +51,7 @@ type CreateImageBuilderStreamingURLOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The elapsed time, in seconds after the Unix epoch, when this URL expires.
-	Expires *time.Time `type:"timestamp" timestampFormat:"unix"`
+	Expires *time.Time `type:"timestamp"`
 
 	// The URL to start the AppStream 2.0 streaming session.
 	StreamingURL *string `min:"1" type:"string"`

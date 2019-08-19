@@ -6437,7 +6437,7 @@ type Job struct {
 	BillingTagsSource BillingTagsSource `locationName:"billingTagsSource" type:"string" enum:"true"`
 
 	// The time, in Unix epoch format in seconds, when the job got created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unixTimestamp"`
 
 	// A job's phase can be PROBING, TRANSCODING OR UPLOADING
 	CurrentPhase JobPhase `locationName:"currentPhase" type:"string" enum:"true"`
@@ -6537,7 +6537,8 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: true}, metadata)
 	}
 	if len(s.CurrentPhase) > 0 {
 		v := s.CurrentPhase
@@ -6823,13 +6824,13 @@ type JobTemplate struct {
 	Category *string `locationName:"category" type:"string"`
 
 	// The timestamp in epoch seconds for Job template creation.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unixTimestamp"`
 
 	// An optional description you create for each job template.
 	Description *string `locationName:"description" type:"string"`
 
 	// The timestamp in epoch seconds when the Job template was last updated.
-	LastUpdated *time.Time `locationName:"lastUpdated" type:"timestamp" timestampFormat:"unix"`
+	LastUpdated *time.Time `locationName:"lastUpdated" type:"timestamp" timestampFormat:"unixTimestamp"`
 
 	// A name you create for each job template. Each name must be unique within
 	// your account.
@@ -6887,7 +6888,8 @@ func (s JobTemplate) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -6899,7 +6901,8 @@ func (s JobTemplate) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastUpdated
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdated", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdated",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: true}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -9391,13 +9394,13 @@ type Preset struct {
 	Category *string `locationName:"category" type:"string"`
 
 	// The timestamp in epoch seconds for preset creation.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unixTimestamp"`
 
 	// An optional description you create for each preset.
 	Description *string `locationName:"description" type:"string"`
 
 	// The timestamp in epoch seconds when the preset was last updated.
-	LastUpdated *time.Time `locationName:"lastUpdated" type:"timestamp" timestampFormat:"unix"`
+	LastUpdated *time.Time `locationName:"lastUpdated" type:"timestamp" timestampFormat:"unixTimestamp"`
 
 	// A name you create for each preset. Each name must be unique within your account.
 	//
@@ -9437,7 +9440,8 @@ func (s Preset) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -9449,7 +9453,8 @@ func (s Preset) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastUpdated
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdated", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdated",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: true}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -9757,13 +9762,13 @@ type Queue struct {
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The timestamp in epoch seconds for when you created the queue.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unixTimestamp"`
 
 	// An optional description that you create for each queue.
 	Description *string `locationName:"description" type:"string"`
 
 	// The timestamp in epoch seconds for when you most recently updated the queue.
-	LastUpdated *time.Time `locationName:"lastUpdated" type:"timestamp" timestampFormat:"unix"`
+	LastUpdated *time.Time `locationName:"lastUpdated" type:"timestamp" timestampFormat:"unixTimestamp"`
 
 	// A name that you create for each queue. Each name must be unique within your
 	// account.
@@ -9816,7 +9821,8 @@ func (s Queue) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -9828,7 +9834,8 @@ func (s Queue) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastUpdated
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdated", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdated",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: true}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -10023,11 +10030,11 @@ type ReservationPlan struct {
 
 	// The timestamp in epoch seconds for when the current pricing plan term for
 	// this reserved queue expires.
-	ExpiresAt *time.Time `locationName:"expiresAt" type:"timestamp" timestampFormat:"unix"`
+	ExpiresAt *time.Time `locationName:"expiresAt" type:"timestamp" timestampFormat:"unixTimestamp"`
 
 	// The timestamp in epoch seconds for when you set up the current pricing plan
 	// for this reserved queue.
-	PurchasedAt *time.Time `locationName:"purchasedAt" type:"timestamp" timestampFormat:"unix"`
+	PurchasedAt *time.Time `locationName:"purchasedAt" type:"timestamp" timestampFormat:"unixTimestamp"`
 
 	// Specifies whether the term of your reserved queue pricing plan is automatically
 	// extended (AUTO_RENEW) or expires (EXPIRE) at the end of the term.
@@ -10062,13 +10069,15 @@ func (s ReservationPlan) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ExpiresAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "expiresAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "expiresAt",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: true}, metadata)
 	}
 	if s.PurchasedAt != nil {
 		v := *s.PurchasedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "purchasedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "purchasedAt",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: true}, metadata)
 	}
 	if len(s.RenewalType) > 0 {
 		v := s.RenewalType
@@ -10703,13 +10712,13 @@ type Timing struct {
 	_ struct{} `type:"structure"`
 
 	// The time, in Unix epoch format, that the transcoding job finished
-	FinishTime *time.Time `locationName:"finishTime" type:"timestamp" timestampFormat:"unix"`
+	FinishTime *time.Time `locationName:"finishTime" type:"timestamp" timestampFormat:"unixTimestamp"`
 
 	// The time, in Unix epoch format, that transcoding for the job began.
-	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unixTimestamp"`
 
 	// The time, in Unix epoch format, that you submitted the job.
-	SubmitTime *time.Time `locationName:"submitTime" type:"timestamp" timestampFormat:"unix"`
+	SubmitTime *time.Time `locationName:"submitTime" type:"timestamp" timestampFormat:"unixTimestamp"`
 }
 
 // String returns the string representation
@@ -10723,19 +10732,22 @@ func (s Timing) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.FinishTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "finishTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "finishTime",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: true}, metadata)
 	}
 	if s.StartTime != nil {
 		v := *s.StartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "startTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "startTime",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: true}, metadata)
 	}
 	if s.SubmitTime != nil {
 		v := *s.SubmitTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "submitTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "submitTime",
+			protocol.TimeValue{V: v, Format: "unixTimestamp", QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }

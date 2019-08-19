@@ -47,6 +47,7 @@ func (s *CreateCertificateFromCsrInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateCertificateFromCsrInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.CertificateSigningRequest != nil {
 		v := *s.CertificateSigningRequest

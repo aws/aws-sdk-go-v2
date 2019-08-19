@@ -20,10 +20,10 @@ type ListClustersInput struct {
 	ClusterStates []ClusterState `type:"list"`
 
 	// The creation date and time beginning value filter for listing clusters.
-	CreatedAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedAfter *time.Time `type:"timestamp"`
 
 	// The creation date and time end value filter for listing clusters.
-	CreatedBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedBefore *time.Time `type:"timestamp"`
 
 	// The pagination token that indicates the next set of results to retrieve.
 	Marker *string `type:"string"`

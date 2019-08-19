@@ -152,7 +152,7 @@ type LicenseConfigurationAssociation struct {
 	_ struct{} `type:"structure"`
 
 	// Time when the license configuration was associated with the resource.
-	AssociationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	AssociationTime *time.Time `type:"timestamp"`
 
 	// ARN of the resource associated with the license configuration.
 	ResourceArn *string `type:"string"`
@@ -175,7 +175,7 @@ type LicenseConfigurationUsage struct {
 	_ struct{} `type:"structure"`
 
 	// Time when the license configuration was initially associated with a resource.
-	AssociationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	AssociationTime *time.Time `type:"timestamp"`
 
 	// Number of licenses consumed out of the total provisioned in the license configuration.
 	ConsumedLicenses *int64 `type:"long"`

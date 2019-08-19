@@ -16,7 +16,7 @@ type ListProblemsInput struct {
 
 	// The time when the problem ended, in epoch seconds. If not specified, problems
 	// within the past seven days are returned.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value.
@@ -30,7 +30,7 @@ type ListProblemsInput struct {
 
 	// The time when the problem was detected, in epoch seconds. If you don't specify
 	// a time frame for the request, problems within the past seven days are returned.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

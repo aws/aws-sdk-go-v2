@@ -68,7 +68,7 @@ type Budget struct {
 	CostTypes *CostTypes `type:"structure"`
 
 	// The last time that you updated this budget.
-	LastUpdatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedTime *time.Time `type:"timestamp"`
 
 	// A map containing multiple BudgetLimit, including current or future limits.
 	//
@@ -583,7 +583,7 @@ type TimePeriod struct {
 	//
 	// After the end date, AWS deletes the budget and all associated notifications
 	// and subscribers. You can change your end date with the UpdateBudget operation.
-	End *time.Time `type:"timestamp" timestampFormat:"unix"`
+	End *time.Time `type:"timestamp"`
 
 	// The start date for a budget. If you created your budget and didn't specify
 	// a start date, AWS defaults to the start of your chosen time period (DAILY,
@@ -594,7 +594,7 @@ type TimePeriod struct {
 	// and Cost Management console and the API.
 	//
 	// You can change your start date with the UpdateBudget operation.
-	Start *time.Time `type:"timestamp" timestampFormat:"unix"`
+	Start *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

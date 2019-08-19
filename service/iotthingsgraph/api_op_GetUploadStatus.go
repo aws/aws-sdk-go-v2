@@ -50,7 +50,7 @@ type GetUploadStatusOutput struct {
 	// The date at which the upload was created.
 	//
 	// CreatedDate is a required field
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" required:"true"`
 
 	// The reason for an upload failure.
 	FailureReason []string `locationName:"failureReason" type:"list"`

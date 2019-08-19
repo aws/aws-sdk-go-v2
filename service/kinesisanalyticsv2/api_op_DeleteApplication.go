@@ -22,7 +22,7 @@ type DeleteApplicationInput struct {
 	// Use the DescribeApplication operation to get this value.
 	//
 	// CreateTimestamp is a required field
-	CreateTimestamp *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreateTimestamp *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation

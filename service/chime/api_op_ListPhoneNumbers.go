@@ -53,6 +53,7 @@ func (s *ListPhoneNumbersInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListPhoneNumbersInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if len(s.FilterName) > 0 {
 		v := s.FilterName

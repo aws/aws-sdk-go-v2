@@ -45,7 +45,7 @@ func (s *DescribeFleetInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeFleetInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.Fleet != nil {
 		v := *s.Fleet
@@ -64,7 +64,7 @@ type DescribeFleetOutput struct {
 	Arn *string `locationName:"arn" min:"1" type:"string"`
 
 	// The time, in milliseconds since the epoch, when the fleet was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the last deployment job.
 	LastDeploymentJob *string `locationName:"lastDeploymentJob" min:"1" type:"string"`
@@ -73,7 +73,7 @@ type DescribeFleetOutput struct {
 	LastDeploymentStatus DeploymentStatus `locationName:"lastDeploymentStatus" type:"string" enum:"true"`
 
 	// The time of the last deployment.
-	LastDeploymentTime *time.Time `locationName:"lastDeploymentTime" type:"timestamp" timestampFormat:"unix"`
+	LastDeploymentTime *time.Time `locationName:"lastDeploymentTime" type:"timestamp"`
 
 	// The name of the fleet.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -102,7 +102,8 @@ func (s DescribeFleetOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.LastDeploymentJob != nil {
 		v := *s.LastDeploymentJob
@@ -120,7 +121,8 @@ func (s DescribeFleetOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastDeploymentTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastDeploymentTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastDeploymentTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name

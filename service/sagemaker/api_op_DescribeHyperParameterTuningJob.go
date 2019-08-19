@@ -53,13 +53,13 @@ type DescribeHyperParameterTuningJobOutput struct {
 	// The date and time that the tuning job started.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// If the tuning job failed, the reason it failed.
 	FailureReason *string `type:"string"`
 
 	// The date and time that the tuning job ended.
-	HyperParameterTuningEndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	HyperParameterTuningEndTime *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the tuning job.
 	//
@@ -84,7 +84,7 @@ type DescribeHyperParameterTuningJobOutput struct {
 	HyperParameterTuningJobStatus HyperParameterTuningJobStatus `type:"string" required:"true" enum:"true"`
 
 	// The date and time that the status of the tuning job was modified.
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTime *time.Time `type:"timestamp"`
 
 	// The ObjectiveStatusCounters object that specifies the number of training
 	// jobs, categorized by the status of their final objective metric, that this

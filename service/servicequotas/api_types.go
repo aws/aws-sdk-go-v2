@@ -101,7 +101,7 @@ type RequestedServiceQuotaChange struct {
 
 	// The date and time when the service quota increase request was received and
 	// the case Id was created.
-	Created *time.Time `type:"timestamp" timestampFormat:"unix"`
+	Created *time.Time `type:"timestamp"`
 
 	// New increased value for the service quota.
 	DesiredValue *float64 `type:"double"`
@@ -114,7 +114,7 @@ type RequestedServiceQuotaChange struct {
 
 	// The date and time of the most recent change in the service quota increase
 	// request.
-	LastUpdated *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdated *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the service quota.
 	QuotaArn *string `type:"string"`
