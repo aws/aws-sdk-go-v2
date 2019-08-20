@@ -285,7 +285,7 @@ func (b *xmlBuilder) buildScalar(value reflect.Value, current *XMLNode, tag refl
 		}
 		str, err = protocol.FormatTime(format, converted)
 		if err != nil {
-			return fmt.Errorf("%v",err)
+			return err
 		}
 	default:
 		if value.Kind() != reflect.String {

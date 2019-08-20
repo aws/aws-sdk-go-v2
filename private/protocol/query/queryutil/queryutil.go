@@ -259,9 +259,9 @@ func (q *queryParser) parseScalar(v url.Values, r reflect.Value, name string, ta
 
 		t, err := protocol.FormatTime(format, value)
 		if err != nil {
-			return fmt.Errorf("%v",err)
+			return err
 		}
-		v.Set(name,t)
+		v.Set(name, t)
 	default:
 		return fmt.Errorf("unsupported value for param %s: %v (%s)", name, r.Interface(), r.Type().Name())
 	}
