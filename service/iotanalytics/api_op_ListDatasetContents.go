@@ -29,12 +29,12 @@ type ListDatasetContentsInput struct {
 	// A filter to limit results to those data set contents whose creation is scheduled
 	// before the given time. See the field triggers.schedule in the CreateDataset
 	// request. (timestamp)
-	ScheduledBefore *time.Time `location:"querystring" locationName:"scheduledBefore" type:"timestamp" timestampFormat:"unix"`
+	ScheduledBefore *time.Time `location:"querystring" locationName:"scheduledBefore" type:"timestamp"`
 
 	// A filter to limit results to those data set contents whose creation is scheduled
 	// on or after the given time. See the field triggers.schedule in the CreateDataset
 	// request. (timestamp)
-	ScheduledOnOrAfter *time.Time `location:"querystring" locationName:"scheduledOnOrAfter" type:"timestamp" timestampFormat:"unix"`
+	ScheduledOnOrAfter *time.Time `location:"querystring" locationName:"scheduledOnOrAfter" type:"timestamp"`
 }
 
 // String returns the string representation
@@ -64,6 +64,7 @@ func (s *ListDatasetContentsInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListDatasetContentsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.DatasetName != nil {
 		v := *s.DatasetName
@@ -87,13 +88,15 @@ func (s ListDatasetContentsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ScheduledBefore
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "scheduledBefore", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.QueryTarget, "scheduledBefore",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.ScheduledOnOrAfter != nil {
 		v := *s.ScheduledOnOrAfter
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "scheduledOnOrAfter", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.QueryTarget, "scheduledOnOrAfter",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	return nil
 }

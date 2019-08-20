@@ -53,7 +53,7 @@ func (s *CreateIntentVersionInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateIntentVersionInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.Checksum != nil {
 		v := *s.Checksum
@@ -86,7 +86,7 @@ type CreateIntentVersionOutput struct {
 	ConfirmationPrompt *Prompt `locationName:"confirmationPrompt" type:"structure"`
 
 	// The date that the intent was created.
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix"`
+	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp"`
 
 	// A description of the intent.
 	Description *string `locationName:"description" type:"string"`
@@ -102,7 +102,7 @@ type CreateIntentVersionOutput struct {
 	FulfillmentActivity *FulfillmentActivity `locationName:"fulfillmentActivity" type:"structure"`
 
 	// The date that the intent was updated.
-	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp"`
 
 	// The name of the intent.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -154,7 +154,8 @@ func (s CreateIntentVersionOutput) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.CreatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -184,7 +185,8 @@ func (s CreateIntentVersionOutput) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.LastUpdatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdatedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name

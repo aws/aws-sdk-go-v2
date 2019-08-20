@@ -37,7 +37,7 @@ type DescribeEnvironmentsInput struct {
 
 	// If specified when IncludeDeleted is set to true, then environments deleted
 	// after this date are displayed.
-	IncludedDeletedBackTo *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	IncludedDeletedBackTo *time.Time `type:"timestamp"`
 
 	// For a paginated request. Specify a maximum number of environments to include
 	// in each response.

@@ -53,6 +53,7 @@ func (s *GetLayerVersionInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetLayerVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.LayerName != nil {
 		v := *s.LayerName

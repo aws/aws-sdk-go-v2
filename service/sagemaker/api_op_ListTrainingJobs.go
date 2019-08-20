@@ -16,19 +16,19 @@ type ListTrainingJobsInput struct {
 
 	// A filter that returns only training jobs created after the specified time
 	// (timestamp).
-	CreationTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTimeAfter *time.Time `type:"timestamp"`
 
 	// A filter that returns only training jobs created before the specified time
 	// (timestamp).
-	CreationTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTimeBefore *time.Time `type:"timestamp"`
 
 	// A filter that returns only training jobs modified after the specified time
 	// (timestamp).
-	LastModifiedTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTimeAfter *time.Time `type:"timestamp"`
 
 	// A filter that returns only training jobs modified before the specified time
 	// (timestamp).
-	LastModifiedTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTimeBefore *time.Time `type:"timestamp"`
 
 	// The maximum number of training jobs to return in the response.
 	MaxResults *int64 `min:"1" type:"integer"`

@@ -42,7 +42,7 @@ func (s *DescribeSigningJobInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeSigningJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.JobId != nil {
 		v := *s.JobId
@@ -58,10 +58,10 @@ type DescribeSigningJobOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Date and time that the signing job was completed.
-	CompletedAt *time.Time `locationName:"completedAt" type:"timestamp" timestampFormat:"unix"`
+	CompletedAt *time.Time `locationName:"completedAt" type:"timestamp"`
 
 	// Date and time that the signing job was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The ID of the signing job on output.
 	JobId *string `locationName:"jobId" type:"string"`
@@ -109,13 +109,15 @@ func (s DescribeSigningJobOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CompletedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "completedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "completedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CreatedAt != nil {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.JobId != nil {
 		v := *s.JobId

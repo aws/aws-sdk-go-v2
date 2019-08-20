@@ -45,10 +45,10 @@ type StopContinuousExportOutput struct {
 
 	// Timestamp that represents when this continuous export started collecting
 	// data.
-	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
 
 	// Timestamp that represents when this continuous export was stopped.
-	StopTime *time.Time `locationName:"stopTime" type:"timestamp" timestampFormat:"unix"`
+	StopTime *time.Time `locationName:"stopTime" type:"timestamp"`
 }
 
 // String returns the string representation

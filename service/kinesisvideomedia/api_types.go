@@ -64,7 +64,7 @@ type StartSelector struct {
 	// A timestamp value. This value is required if you choose the PRODUCER_TIMESTAMP
 	// or the SERVER_TIMESTAMP as the startSelectorType. The GetMedia API then starts
 	// with the chunk containing the fragment that has the specified timestamp.
-	StartTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTimestamp *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -115,7 +115,8 @@ func (s StartSelector) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StartTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "StartTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }

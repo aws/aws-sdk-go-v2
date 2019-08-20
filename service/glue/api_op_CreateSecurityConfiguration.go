@@ -56,7 +56,7 @@ type CreateSecurityConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The time at which the new security configuration was created.
-	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTimestamp *time.Time `type:"timestamp"`
 
 	// The name assigned to the new security configuration.
 	Name *string `min:"1" type:"string"`

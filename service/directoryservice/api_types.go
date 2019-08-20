@@ -228,7 +228,7 @@ type DirectoryDescription struct {
 	Edition DirectoryEdition `type:"string" enum:"true"`
 
 	// Specifies when the directory was created.
-	LaunchTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LaunchTime *time.Time `type:"timestamp"`
 
 	// The fully qualified name of the directory.
 	Name *string `type:"string"`
@@ -270,7 +270,7 @@ type DirectoryDescription struct {
 	Stage DirectoryStage `type:"string" enum:"true"`
 
 	// The date and time that the stage was last updated.
-	StageLastUpdatedDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StageLastUpdatedDateTime *time.Time `type:"timestamp"`
 
 	// Additional information about the directory stage.
 	StageReason *string `type:"string"`
@@ -410,13 +410,13 @@ type DomainController struct {
 	DomainControllerId *string `type:"string"`
 
 	// Specifies when the domain controller was created.
-	LaunchTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LaunchTime *time.Time `type:"timestamp"`
 
 	// The status of the domain controller.
 	Status DomainControllerStatus `type:"string" enum:"true"`
 
 	// The date and time that the status was last updated.
-	StatusLastUpdatedDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StatusLastUpdatedDateTime *time.Time `type:"timestamp"`
 
 	// A description of the domain controller state.
 	StatusReason *string `type:"string"`
@@ -439,7 +439,7 @@ type EventTopic struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time of when you associated your directory with the SNS topic.
-	CreatedDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedDateTime *time.Time `type:"timestamp"`
 
 	// The Directory ID of an AWS Directory Service directory that will publish
 	// status messages to an SNS topic.
@@ -486,7 +486,7 @@ type IpRouteInfo struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time the address block was added to the directory.
-	AddedDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	AddedDateTime *time.Time `type:"timestamp"`
 
 	// IP address block in the IpRoute.
 	CidrIp *string `type:"string"`
@@ -523,7 +523,7 @@ type LogSubscription struct {
 	LogGroupName *string `min:"1" type:"string"`
 
 	// The date and time that the log subscription was created.
-	SubscriptionCreatedDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubscriptionCreatedDateTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -636,7 +636,7 @@ type SchemaExtensionInfo struct {
 	DirectoryId *string `type:"string"`
 
 	// The date and time that the schema extension was completed.
-	EndDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndDateTime *time.Time `type:"timestamp"`
 
 	// The identifier of the schema extension.
 	SchemaExtensionId *string `type:"string"`
@@ -649,7 +649,7 @@ type SchemaExtensionInfo struct {
 
 	// The date and time that the schema extension started being applied to the
 	// directory.
-	StartDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartDateTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -705,10 +705,10 @@ type SharedDirectory struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time that the shared directory was created.
-	CreatedDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedDateTime *time.Time `type:"timestamp"`
 
 	// The date and time that the shared directory was last updated.
-	LastUpdatedDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `type:"timestamp"`
 
 	// Identifier of the directory owner account, which contains the directory that
 	// has been shared to the consumer account.
@@ -759,7 +759,7 @@ type Snapshot struct {
 	SnapshotId *string `type:"string"`
 
 	// The date and time that the snapshot was taken.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `type:"timestamp"`
 
 	// The snapshot status.
 	Status SnapshotStatus `type:"string" enum:"true"`
@@ -846,13 +846,13 @@ type Trust struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time that the trust relationship was created.
-	CreatedDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedDateTime *time.Time `type:"timestamp"`
 
 	// The Directory ID of the AWS directory involved in the trust relationship.
 	DirectoryId *string `type:"string"`
 
 	// The date and time that the trust relationship was last updated.
-	LastUpdatedDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `type:"timestamp"`
 
 	// The Fully Qualified Domain Name (FQDN) of the external domain involved in
 	// the trust relationship.
@@ -862,7 +862,7 @@ type Trust struct {
 	SelectiveAuth SelectiveAuth `type:"string" enum:"true"`
 
 	// The date and time that the TrustState was last updated.
-	StateLastUpdatedDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StateLastUpdatedDateTime *time.Time `type:"timestamp"`
 
 	// The trust relationship direction.
 	TrustDirection TrustDirection `type:"string" enum:"true"`

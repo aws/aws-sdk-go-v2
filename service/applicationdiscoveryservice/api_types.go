@@ -137,7 +137,7 @@ type ConfigurationTag struct {
 
 	// The time the configuration tag was created in Coordinated Universal Time
 	// (UTC).
-	TimeOfCreation *time.Time `locationName:"timeOfCreation" type:"timestamp" timestampFormat:"unix"`
+	TimeOfCreation *time.Time `locationName:"timeOfCreation" type:"timestamp"`
 
 	// A value on which to filter. For example key = serverType and value = web
 	// server.
@@ -170,7 +170,7 @@ type ContinuousExportDescription struct {
 	SchemaStorageConfig map[string]string `locationName:"schemaStorageConfig" type:"map"`
 
 	// The timestamp representing when the continuous export was started.
-	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
 
 	// Describes the status of the export. Can be one of the following values:
 	//
@@ -234,7 +234,7 @@ type ContinuousExportDescription struct {
 	StatusDetail *string `locationName:"statusDetail" min:"1" type:"string"`
 
 	// The timestamp that represents when this continuous export was stopped.
-	StopTime *time.Time `locationName:"stopTime" type:"timestamp" timestampFormat:"unix"`
+	StopTime *time.Time `locationName:"stopTime" type:"timestamp"`
 }
 
 // String returns the string representation
@@ -404,7 +404,7 @@ type ExportInfo struct {
 	// The time that the data export was initiated.
 	//
 	// ExportRequestTime is a required field
-	ExportRequestTime *time.Time `locationName:"exportRequestTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	ExportRequestTime *time.Time `locationName:"exportRequestTime" type:"timestamp" required:"true"`
 
 	// The status of the data export job.
 	//
@@ -419,11 +419,11 @@ type ExportInfo struct {
 
 	// The endTime used in the StartExportTask request. If no endTime was requested,
 	// this result does not appear in ExportInfo.
-	RequestedEndTime *time.Time `locationName:"requestedEndTime" type:"timestamp" timestampFormat:"unix"`
+	RequestedEndTime *time.Time `locationName:"requestedEndTime" type:"timestamp"`
 
 	// The value of startTime parameter in the StartExportTask request. If no startTime
 	// was requested, this result does not appear in ExportInfo.
-	RequestedStartTime *time.Time `locationName:"requestedStartTime" type:"timestamp" timestampFormat:"unix"`
+	RequestedStartTime *time.Time `locationName:"requestedStartTime" type:"timestamp"`
 
 	// A status message provided for API callers.
 	//
@@ -530,15 +530,15 @@ type ImportTask struct {
 
 	// The time that the import task request finished, presented in the Unix time
 	// stamp format.
-	ImportCompletionTime *time.Time `locationName:"importCompletionTime" type:"timestamp" timestampFormat:"unix"`
+	ImportCompletionTime *time.Time `locationName:"importCompletionTime" type:"timestamp"`
 
 	// The time that the import task request was deleted, presented in the Unix
 	// time stamp format.
-	ImportDeletedTime *time.Time `locationName:"importDeletedTime" type:"timestamp" timestampFormat:"unix"`
+	ImportDeletedTime *time.Time `locationName:"importDeletedTime" type:"timestamp"`
 
 	// The time that the import task request was made, presented in the Unix time
 	// stamp format.
-	ImportRequestTime *time.Time `locationName:"importRequestTime" type:"timestamp" timestampFormat:"unix"`
+	ImportRequestTime *time.Time `locationName:"importRequestTime" type:"timestamp"`
 
 	// The unique ID for a specific import task. These IDs aren't globally unique,
 	// but they are unique within an AWS account.

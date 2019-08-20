@@ -50,7 +50,7 @@ type DescribeUserProfileOutput struct {
 	// format.
 	//
 	// CreatedTimestamp is a required field
-	CreatedTimestamp *time.Time `locationName:"createdTimestamp" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreatedTimestamp *time.Time `locationName:"createdTimestamp" type:"timestamp" required:"true"`
 
 	// The display name shown for the user in AWS CodeStar projects. For example,
 	// this could be set to both first and last name ("Mary Major") or a single
@@ -69,7 +69,7 @@ type DescribeUserProfileOutput struct {
 	// The date and time when the user profile was last modified, in timestamp format.
 	//
 	// LastModifiedTimestamp is a required field
-	LastModifiedTimestamp *time.Time `locationName:"lastModifiedTimestamp" type:"timestamp" timestampFormat:"unix" required:"true"`
+	LastModifiedTimestamp *time.Time `locationName:"lastModifiedTimestamp" type:"timestamp" required:"true"`
 
 	// The SSH public key associated with the user. This SSH public key is associated
 	// with the user profile, and can be used in conjunction with the associated

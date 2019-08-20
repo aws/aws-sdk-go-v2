@@ -70,7 +70,7 @@ type GetDomainDetailOutput struct {
 
 	// The date when the domain was created as found in the response to a WHOIS
 	// query. The date and time is in Coordinated Universal time (UTC).
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp"`
 
 	// Reserved for future use.
 	DnsSec *string `type:"string"`
@@ -82,7 +82,7 @@ type GetDomainDetailOutput struct {
 
 	// The date when the registration for the domain is set to expire. The date
 	// and time is in Coordinated Universal time (UTC).
-	ExpirationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ExpirationDate *time.Time `type:"timestamp"`
 
 	// The name of the domain.
 	//
@@ -148,7 +148,7 @@ type GetDomainDetailOutput struct {
 
 	// The last updated date of the domain as found in the response to a WHOIS query.
 	// The date and time is in Coordinated Universal time (UTC).
-	UpdatedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	UpdatedDate *time.Time `type:"timestamp"`
 
 	// The fully qualified name of the WHOIS server that can answer the WHOIS query
 	// for the domain.

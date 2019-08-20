@@ -98,10 +98,10 @@ type ProjectDetails struct {
 	ConsoleUrl *string `locationName:"consoleUrl" type:"string"`
 
 	// Date the project was created.
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix"`
+	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp"`
 
 	// Date of the last modification of the project.
-	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp"`
 
 	// Name of the project.
 	Name *string `locationName:"name" type:"string"`
@@ -136,13 +136,15 @@ func (s ProjectDetails) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.LastUpdatedDate != nil {
 		v := *s.LastUpdatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdatedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name

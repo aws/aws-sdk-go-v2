@@ -17,7 +17,7 @@ type ListViolationEventsInput struct {
 	// The end time for the alerts to be listed.
 	//
 	// EndTime is a required field
-	EndTime *time.Time `location:"querystring" locationName:"endTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	EndTime *time.Time `location:"querystring" locationName:"endTime" type:"timestamp" required:"true"`
 
 	// The maximum number of results to return at one time.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
@@ -32,7 +32,7 @@ type ListViolationEventsInput struct {
 	// The start time for the alerts to be listed.
 	//
 	// StartTime is a required field
-	StartTime *time.Time `location:"querystring" locationName:"startTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartTime *time.Time `location:"querystring" locationName:"startTime" type:"timestamp" required:"true"`
 
 	// A filter to limit results to those alerts caused by the specified thing.
 	ThingName *string `location:"querystring" locationName:"thingName" min:"1" type:"string"`
@@ -72,12 +72,14 @@ func (s *ListViolationEventsInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListViolationEventsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.EndTime != nil {
 		v := *s.EndTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "endTime", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.QueryTarget, "endTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
@@ -101,7 +103,8 @@ func (s ListViolationEventsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "startTime", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.QueryTarget, "startTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.ThingName != nil {
 		v := *s.ThingName

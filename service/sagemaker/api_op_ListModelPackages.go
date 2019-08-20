@@ -16,11 +16,11 @@ type ListModelPackagesInput struct {
 
 	// A filter that returns only model packages created after the specified time
 	// (timestamp).
-	CreationTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTimeAfter *time.Time `type:"timestamp"`
 
 	// A filter that returns only model packages created before the specified time
 	// (timestamp).
-	CreationTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTimeBefore *time.Time `type:"timestamp"`
 
 	// The maximum number of model packages to return in the response.
 	MaxResults *int64 `min:"1" type:"integer"`

@@ -33,7 +33,7 @@ type StartJobInput struct {
 	CommitMessage *string `locationName:"commitMessage" type:"string"`
 
 	// Commit date / time for the Job.
-	CommitTime *time.Time `locationName:"commitTime" type:"timestamp" timestampFormat:"unix"`
+	CommitTime *time.Time `locationName:"commitTime" type:"timestamp"`
 
 	// Unique Id for an existing job. Required for "RETRY" JobType.
 	JobId *string `locationName:"jobId" type:"string"`
@@ -84,7 +84,7 @@ func (s *StartJobInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s StartJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.CommitId != nil {
 		v := *s.CommitId
@@ -102,7 +102,8 @@ func (s StartJobInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CommitTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "commitTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "commitTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.JobId != nil {
 		v := *s.JobId

@@ -60,7 +60,7 @@ type DescribeNotebookInstanceOutput struct {
 
 	// A timestamp. Use this parameter to return the time when the notebook instance
 	// was created
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The Git repository associated with the notebook instance as its default code
 	// repository. This can be either the name of a Git repository stored as a resource
@@ -91,7 +91,7 @@ type DescribeNotebookInstanceOutput struct {
 
 	// A timestamp. Use this parameter to retrieve the time when the notebook instance
 	// was last modified.
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTime *time.Time `type:"timestamp"`
 
 	// The network interface IDs that Amazon SageMaker created at the time of creating
 	// the instance.

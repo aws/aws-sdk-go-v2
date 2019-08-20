@@ -31,7 +31,7 @@ type MeterUsageInput struct {
 	// is not before the start of the software usage.
 	//
 	// Timestamp is a required field
-	Timestamp *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	Timestamp *time.Time `type:"timestamp" required:"true"`
 
 	// It will be one of the fcp dimension name provided during the publishing of
 	// the product.

@@ -109,7 +109,7 @@ type Cluster struct {
 	ClusterAvailabilityStatus *string `type:"string"`
 
 	// The date and time that the cluster was created.
-	ClusterCreateTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	ClusterCreateTime *time.Time `type:"timestamp"`
 
 	// The unique identifier of the cluster.
 	ClusterIdentifier *string `type:"string"`
@@ -339,7 +339,7 @@ type ClusterDbRevision struct {
 	CurrentDatabaseRevision *string `type:"string"`
 
 	// The date on which the database revision was released.
-	DatabaseRevisionReleaseDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	DatabaseRevisionReleaseDate *time.Time `type:"timestamp"`
 
 	// A list of RevisionTarget objects, where each object describes the database
 	// revision that a cluster can be updated to.
@@ -678,13 +678,13 @@ type DeferredMaintenanceWindow struct {
 	_ struct{} `type:"structure"`
 
 	// A timestamp for the end of the time period when we defer maintenance.
-	DeferMaintenanceEndTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	DeferMaintenanceEndTime *time.Time `type:"timestamp"`
 
 	// A unique identifier for the maintenance window.
 	DeferMaintenanceIdentifier *string `type:"string"`
 
 	// A timestamp for the beginning of the time period when we defer maintenance.
-	DeferMaintenanceStartTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	DeferMaintenanceStartTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -795,7 +795,7 @@ type Event struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time of the event.
-	Date *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	Date *time.Time `type:"timestamp"`
 
 	// A list of the event categories.
 	//
@@ -920,7 +920,7 @@ type EventSubscription struct {
 
 	// The date and time the Amazon Redshift event notification subscription was
 	// created.
-	SubscriptionCreationTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	SubscriptionCreationTime *time.Time `type:"timestamp"`
 
 	// The list of tags for the event subscription.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
@@ -1231,7 +1231,7 @@ type ReservedNode struct {
 
 	// The time the reservation started. You purchase a reserved node offering for
 	// a duration. This is the start time of that duration.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	StartTime *time.Time `type:"timestamp"`
 
 	// The state of the reserved compute node.
 	//
@@ -1363,7 +1363,7 @@ type RevisionTarget struct {
 	DatabaseRevision *string `type:"string"`
 
 	// The date on which the database revision was released.
-	DatabaseRevisionReleaseDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	DatabaseRevisionReleaseDate *time.Time `type:"timestamp"`
 
 	// A string that describes the changes and features that will be applied to
 	// the cluster when it is updated to the corresponding ClusterDbRevision.
@@ -1394,7 +1394,7 @@ type Snapshot struct {
 	BackupProgressInMegaBytes *float64 `type:"double"`
 
 	// The time (UTC) when the cluster was originally created.
-	ClusterCreateTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	ClusterCreateTime *time.Time `type:"timestamp"`
 
 	// The identifier of the cluster for which the snapshot was taken.
 	ClusterIdentifier *string `type:"string"`
@@ -1474,13 +1474,13 @@ type Snapshot struct {
 
 	// The time (in UTC format) when Amazon Redshift began the snapshot. A snapshot
 	// contains a copy of the cluster data as of this exact time.
-	SnapshotCreateTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	SnapshotCreateTime *time.Time `type:"timestamp"`
 
 	// The snapshot identifier that is provided in the request.
 	SnapshotIdentifier *string `type:"string"`
 
 	// A timestamp representing the start of the retention period for the snapshot.
-	SnapshotRetentionStartTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	SnapshotRetentionStartTime *time.Time `type:"timestamp"`
 
 	// The snapshot type. Snapshots created using CreateClusterSnapshot and CopyClusterSnapshot
 	// are of type "manual".
@@ -1700,7 +1700,7 @@ type TableRestoreStatus struct {
 
 	// The time that the table restore request was made, in Universal Coordinated
 	// Time (UTC).
-	RequestTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	RequestTime *time.Time `type:"timestamp"`
 
 	// The identifier of the snapshot that the table is being restored from.
 	SnapshotIdentifier *string `type:"string"`

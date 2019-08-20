@@ -19,7 +19,7 @@ type ListAuditFindingsInput struct {
 
 	// A filter to limit results to those found before the specified time. You must
 	// specify either the startTime and endTime or the taskId, but not both.
-	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
 
 	// The maximum number of results to return at one time. The default is 25.
 	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
@@ -32,7 +32,7 @@ type ListAuditFindingsInput struct {
 
 	// A filter to limit results to those found after the specified time. You must
 	// specify either the startTime and endTime or the taskId, but not both.
-	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
 
 	// A filter to limit results to the audit with the specified ID. You must specify
 	// either the taskId or the startTime and endTime, but not both.
@@ -67,6 +67,7 @@ func (s *ListAuditFindingsInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListAuditFindingsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.CheckName != nil {
 		v := *s.CheckName
@@ -78,7 +79,8 @@ func (s ListAuditFindingsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.EndTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "endTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "endTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
@@ -102,7 +104,8 @@ func (s ListAuditFindingsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "startTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "startTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.TaskId != nil {
 		v := *s.TaskId

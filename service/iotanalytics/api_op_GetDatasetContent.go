@@ -54,6 +54,7 @@ func (s *GetDatasetContentInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetDatasetContentInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.DatasetName != nil {
 		v := *s.DatasetName
@@ -81,7 +82,7 @@ type GetDatasetContentOutput struct {
 	Status *DatasetContentStatus `locationName:"status" type:"structure"`
 
 	// The time when the request was made.
-	Timestamp *time.Time `locationName:"timestamp" type:"timestamp" timestampFormat:"unix"`
+	Timestamp *time.Time `locationName:"timestamp" type:"timestamp"`
 }
 
 // String returns the string representation
@@ -113,7 +114,8 @@ func (s GetDatasetContentOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Timestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "timestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "timestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }

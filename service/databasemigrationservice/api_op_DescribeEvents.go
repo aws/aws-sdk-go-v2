@@ -19,7 +19,7 @@ type DescribeEventsInput struct {
 	Duration *int64 `type:"integer"`
 
 	// The end time for the events to be listed.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// A list of event categories for the source type that you've chosen.
 	EventCategories []string `type:"list"`
@@ -50,7 +50,7 @@ type DescribeEventsInput struct {
 	SourceType SourceType `type:"string" enum:"true"`
 
 	// The start time for the events to be listed.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

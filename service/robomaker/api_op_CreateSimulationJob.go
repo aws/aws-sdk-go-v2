@@ -126,7 +126,7 @@ func (s *CreateSimulationJobInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateSimulationJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	var ClientRequestToken string
 	if s.ClientRequestToken != nil {
@@ -290,11 +290,11 @@ type CreateSimulationJobOutput struct {
 
 	// The time, in milliseconds since the epoch, when the simulation job was last
 	// started.
-	LastStartedAt *time.Time `locationName:"lastStartedAt" type:"timestamp" timestampFormat:"unix"`
+	LastStartedAt *time.Time `locationName:"lastStartedAt" type:"timestamp"`
 
 	// The time, in milliseconds since the epoch, when the simulation job was last
 	// updated.
-	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
 
 	// The maximum simulation job duration in seconds.
 	MaxJobDurationInSeconds *int64 `locationName:"maxJobDurationInSeconds" type:"long"`
@@ -362,13 +362,15 @@ func (s CreateSimulationJobOutput) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.LastStartedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastStartedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastStartedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.LastUpdatedAt != nil {
 		v := *s.LastUpdatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.MaxJobDurationInSeconds != nil {
 		v := *s.MaxJobDurationInSeconds

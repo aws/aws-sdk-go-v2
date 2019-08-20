@@ -16,10 +16,10 @@ type DescribeJobFlowsInput struct {
 	_ struct{} `type:"structure"`
 
 	// Return only job flows created after this date and time.
-	CreatedAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedAfter *time.Time `type:"timestamp"`
 
 	// Return only job flows created before this date and time.
-	CreatedBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedBefore *time.Time `type:"timestamp"`
 
 	// Return only job flows whose job flow ID is contained in this list.
 	JobFlowIds []string `type:"list"`

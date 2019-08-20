@@ -54,7 +54,7 @@ type DescribeProjectOutput struct {
 	ClientRequestToken *string `locationName:"clientRequestToken" min:"1" type:"string"`
 
 	// The date and time the project was created, in timestamp format.
-	CreatedTimeStamp *time.Time `locationName:"createdTimeStamp" type:"timestamp" timestampFormat:"unix"`
+	CreatedTimeStamp *time.Time `locationName:"createdTimeStamp" type:"timestamp"`
 
 	// The description of the project, if any.
 	Description *string `locationName:"description" type:"string"`

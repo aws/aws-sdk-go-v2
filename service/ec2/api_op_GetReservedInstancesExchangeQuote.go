@@ -70,7 +70,7 @@ type GetReservedInstancesExchangeQuoteOutput struct {
 	IsValidExchange *bool `locationName:"isValidExchange" type:"boolean"`
 
 	// The new end date of the reservation term.
-	OutputReservedInstancesWillExpireAt *time.Time `locationName:"outputReservedInstancesWillExpireAt" type:"timestamp" timestampFormat:"iso8601"`
+	OutputReservedInstancesWillExpireAt *time.Time `locationName:"outputReservedInstancesWillExpireAt" type:"timestamp"`
 
 	// The total true upfront charge for the exchange.
 	PaymentDue *string `locationName:"paymentDue" type:"string"`

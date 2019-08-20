@@ -99,7 +99,7 @@ type PutApprovalResultOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The timestamp showing when the approval or rejection was submitted.
-	ApprovedAt *time.Time `locationName:"approvedAt" type:"timestamp" timestampFormat:"unix"`
+	ApprovedAt *time.Time `locationName:"approvedAt" type:"timestamp"`
 }
 
 // String returns the string representation

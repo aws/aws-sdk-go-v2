@@ -19,7 +19,7 @@ type CachediSCSIVolume struct {
 
 	// The date the volume was created. Volumes created prior to March 28, 2017
 	// don’t have this time stamp.
-	CreatedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedDate *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
 	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
@@ -544,7 +544,7 @@ type StorediSCSIVolume struct {
 
 	// The date the volume was created. Volumes created prior to March 28, 2017
 	// don’t have this time stamp.
-	CreatedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedDate *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
 	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
@@ -694,7 +694,7 @@ type Tape struct {
 	TapeBarcode *string `min:"7" type:"string"`
 
 	// The date the virtual tape was created.
-	TapeCreatedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TapeCreatedDate *time.Time `type:"timestamp"`
 
 	// The size, in bytes, of the virtual tape capacity.
 	TapeSizeInBytes *int64 `type:"long"`
@@ -726,7 +726,7 @@ type TapeArchive struct {
 	//
 	// The default time stamp format is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z'
 	// format.
-	CompletionTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CompletionTime *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
 	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
@@ -751,7 +751,7 @@ type TapeArchive struct {
 	TapeBarcode *string `min:"7" type:"string"`
 
 	// The date the virtual tape was created.
-	TapeCreatedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TapeCreatedDate *time.Time `type:"timestamp"`
 
 	// The size, in bytes, of the archived virtual tape.
 	TapeSizeInBytes *int64 `type:"long"`
@@ -819,7 +819,7 @@ type TapeRecoveryPointInfo struct {
 	//
 	// The default time stamp format of the tape recovery point time is in the ISO8601
 	// extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
-	TapeRecoveryPointTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TapeRecoveryPointTime *time.Time `type:"timestamp"`
 
 	// The size, in bytes, of the virtual tapes to recover.
 	TapeSizeInBytes *int64 `type:"long"`

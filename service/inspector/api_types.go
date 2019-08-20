@@ -139,12 +139,12 @@ type AssessmentRun struct {
 
 	// The assessment run completion time that corresponds to the rules packages
 	// evaluation completion time or failure.
-	CompletedAt *time.Time `locationName:"completedAt" type:"timestamp" timestampFormat:"unix"`
+	CompletedAt *time.Time `locationName:"completedAt" type:"timestamp"`
 
 	// The time when StartAssessmentRun was called.
 	//
 	// CreatedAt is a required field
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" required:"true"`
 
 	// A Boolean value (true or false) that specifies whether the process of collecting
 	// data from the agents is completed.
@@ -179,7 +179,7 @@ type AssessmentRun struct {
 	RulesPackageArns []string `locationName:"rulesPackageArns" min:"1" type:"list" required:"true"`
 
 	// The time when StartAssessmentRun was called.
-	StartedAt *time.Time `locationName:"startedAt" type:"timestamp" timestampFormat:"unix"`
+	StartedAt *time.Time `locationName:"startedAt" type:"timestamp"`
 
 	// The state of the assessment run.
 	//
@@ -189,7 +189,7 @@ type AssessmentRun struct {
 	// The last time when the assessment run's state changed.
 	//
 	// StateChangedAt is a required field
-	StateChangedAt *time.Time `locationName:"stateChangedAt" type:"timestamp" timestampFormat:"unix" required:"true"`
+	StateChangedAt *time.Time `locationName:"stateChangedAt" type:"timestamp" required:"true"`
 
 	// A list of the assessment run state changes.
 	//
@@ -325,7 +325,7 @@ type AssessmentRunNotification struct {
 	// The date of the notification.
 	//
 	// Date is a required field
-	Date *time.Time `locationName:"date" type:"timestamp" timestampFormat:"unix" required:"true"`
+	Date *time.Time `locationName:"date" type:"timestamp" required:"true"`
 
 	// The Boolean value that specifies whether the notification represents an error.
 	//
@@ -365,7 +365,7 @@ type AssessmentRunStateChange struct {
 	// The last time the assessment run state changed.
 	//
 	// StateChangedAt is a required field
-	StateChangedAt *time.Time `locationName:"stateChangedAt" type:"timestamp" timestampFormat:"unix" required:"true"`
+	StateChangedAt *time.Time `locationName:"stateChangedAt" type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -387,7 +387,7 @@ type AssessmentTarget struct {
 	// The time at which the assessment target is created.
 	//
 	// CreatedAt is a required field
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" required:"true"`
 
 	// The name of the Amazon Inspector assessment target.
 	//
@@ -401,7 +401,7 @@ type AssessmentTarget struct {
 	// The time at which UpdateAssessmentTarget is called.
 	//
 	// UpdatedAt is a required field
-	UpdatedAt *time.Time `locationName:"updatedAt" type:"timestamp" timestampFormat:"unix" required:"true"`
+	UpdatedAt *time.Time `locationName:"updatedAt" type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -464,7 +464,7 @@ type AssessmentTemplate struct {
 	// The time at which the assessment template is created.
 	//
 	// CreatedAt is a required field
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" required:"true"`
 
 	// The duration in seconds specified for this assessment template. The default
 	// value is 3600 seconds (one hour). The maximum value is 86400 seconds (one
@@ -672,7 +672,7 @@ type EventSubscription struct {
 	// The time at which SubscribeToEvent is called.
 	//
 	// SubscribedAt is a required field
-	SubscribedAt *time.Time `locationName:"subscribedAt" type:"timestamp" timestampFormat:"unix" required:"true"`
+	SubscribedAt *time.Time `locationName:"subscribedAt" type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -804,7 +804,7 @@ type Finding struct {
 	// The time when the finding was generated.
 	//
 	// CreatedAt is a required field
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" required:"true"`
 
 	// The description of the finding.
 	Description *string `locationName:"description" type:"string"`
@@ -839,7 +839,7 @@ type Finding struct {
 	// The time when AddAttributesToFindings is called.
 	//
 	// UpdatedAt is a required field
-	UpdatedAt *time.Time `locationName:"updatedAt" type:"timestamp" timestampFormat:"unix" required:"true"`
+	UpdatedAt *time.Time `locationName:"updatedAt" type:"timestamp" required:"true"`
 
 	// The user-defined attributes that are assigned to the finding.
 	//
@@ -1027,7 +1027,7 @@ type ResourceGroup struct {
 	// The time at which resource group is created.
 	//
 	// CreatedAt is a required field
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" required:"true"`
 
 	// The tags (key and value pairs) of the resource group. This data type property
 	// is used in the CreateResourceGroup action.
@@ -1253,10 +1253,10 @@ type TimestampRange struct {
 	_ struct{} `type:"structure"`
 
 	// The minimum value of the timestamp range.
-	BeginDate *time.Time `locationName:"beginDate" type:"timestamp" timestampFormat:"unix"`
+	BeginDate *time.Time `locationName:"beginDate" type:"timestamp"`
 
 	// The maximum value of the timestamp range.
-	EndDate *time.Time `locationName:"endDate" type:"timestamp" timestampFormat:"unix"`
+	EndDate *time.Time `locationName:"endDate" type:"timestamp"`
 }
 
 // String returns the string representation

@@ -57,7 +57,7 @@ type CreateSecurityConfigurationOutput struct {
 	// The date and time the security configuration was created.
 	//
 	// CreationDateTime is a required field
-	CreationDateTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationDateTime *time.Time `type:"timestamp" required:"true"`
 
 	// The name of the security configuration.
 	//

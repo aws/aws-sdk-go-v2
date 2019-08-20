@@ -1030,12 +1030,12 @@ type ResourceMetadata struct {
 	// The Unix epoch timestamp in seconds for when the resource was created.
 	//
 	// CreatedAt is a required field
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" required:"true"`
 
 	// The Unix epoch timestamp in seconds for when the resource was last updated.
 	//
 	// LastUpdatedAt is a required field
-	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix" required:"true"`
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" required:"true"`
 
 	// The unique identifier for the resource.
 	//
@@ -1066,13 +1066,15 @@ func (s ResourceMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.LastUpdatedAt != nil {
 		v := *s.LastUpdatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Uid != nil {
 		v := *s.Uid

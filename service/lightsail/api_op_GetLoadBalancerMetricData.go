@@ -17,7 +17,7 @@ type GetLoadBalancerMetricDataInput struct {
 	// The end time of the period.
 	//
 	// EndTime is a required field
-	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	EndTime *time.Time `locationName:"endTime" type:"timestamp" required:"true"`
 
 	// The name of the load balancer.
 	//
@@ -97,7 +97,7 @@ type GetLoadBalancerMetricDataInput struct {
 	// The start time of the period.
 	//
 	// StartTime is a required field
-	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartTime *time.Time `locationName:"startTime" type:"timestamp" required:"true"`
 
 	// An array of statistics that you want to request metrics for. Valid values
 	// are listed below.

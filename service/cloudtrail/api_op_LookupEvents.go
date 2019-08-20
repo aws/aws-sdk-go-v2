@@ -19,7 +19,7 @@ type LookupEventsInput struct {
 	// Specifies that only events that occur before or at the specified time are
 	// returned. If the specified end time is before the specified start time, an
 	// error is returned.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// Contains a list of lookup attributes. Currently the list can contain only
 	// one item.
@@ -39,7 +39,7 @@ type LookupEventsInput struct {
 	// Specifies that only events that occur after or at the specified time are
 	// returned. If the specified start time is after the specified end time, an
 	// error is returned.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

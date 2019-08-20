@@ -53,7 +53,7 @@ type StartSupportDataExportInput struct {
 	// only affects the customer_support_contacts_data data set type.
 	//
 	// FromDate is a required field
-	FromDate *time.Time `locationName:"fromDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	FromDate *time.Time `locationName:"fromDate" type:"timestamp" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the Role with an attached permissions policy
 	// to interact with the provided AWS services.

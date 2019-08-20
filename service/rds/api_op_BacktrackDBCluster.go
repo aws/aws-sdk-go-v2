@@ -30,7 +30,7 @@ type BacktrackDBClusterInput struct {
 	// Example: 2017-07-08T18:00Z
 	//
 	// BacktrackTo is a required field
-	BacktrackTo *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	BacktrackTo *time.Time `type:"timestamp" required:"true"`
 
 	// The DB cluster identifier of the DB cluster to be backtracked. This parameter
 	// is stored as a lowercase string.
@@ -94,13 +94,13 @@ type BacktrackDBClusterOutput struct {
 	BacktrackIdentifier *string `type:"string"`
 
 	// The timestamp of the time at which the backtrack was requested.
-	BacktrackRequestCreationTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	BacktrackRequestCreationTime *time.Time `type:"timestamp"`
 
 	// The timestamp of the time to which the DB cluster was backtracked.
-	BacktrackTo *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	BacktrackTo *time.Time `type:"timestamp"`
 
 	// The timestamp of the time from which the DB cluster was backtracked.
-	BacktrackedFrom *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	BacktrackedFrom *time.Time `type:"timestamp"`
 
 	// Contains a user-supplied DB cluster identifier. This identifier is the unique
 	// key that identifies a DB cluster.

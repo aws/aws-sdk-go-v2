@@ -22,7 +22,7 @@ type GetResourceMetricsInput struct {
 	// The value for EndTime must be later than the value for StartTime.
 	//
 	// EndTime is a required field
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	EndTime *time.Time `type:"timestamp" required:"true"`
 
 	// An immutable, AWS Region-unique identifier for a data source. Performance
 	// Insights gathers metrics from this data source.
@@ -81,7 +81,7 @@ type GetResourceMetricsInput struct {
 	// The value for StartTime must be earlier than the value for EndTime.
 	//
 	// StartTime is a required field
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartTime *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -135,12 +135,12 @@ type GetResourceMetricsOutput struct {
 	// The end time for the returned metrics, after alignment to a granular boundary
 	// (as specified by PeriodInSeconds). AlignedEndTime will be greater than or
 	// equal to the value of the user-specified Endtime.
-	AlignedEndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	AlignedEndTime *time.Time `type:"timestamp"`
 
 	// The start time for the returned metrics, after alignment to a granular boundary
 	// (as specified by PeriodInSeconds). AlignedStartTime will be less than or
 	// equal to the value of the user-specified StartTime.
-	AlignedStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	AlignedStartTime *time.Time `type:"timestamp"`
 
 	// An immutable, AWS Region-unique identifier for a data source. Performance
 	// Insights gathers metrics from this data source.

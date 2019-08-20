@@ -150,7 +150,7 @@ type CloudFormationStackRecord struct {
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The date when the CloudFormation stack record was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// A list of objects describing the destination service, which is AWS CloudFormation,
 	// and the Amazon Resource Name (ARN) of the AWS CloudFormation stack.
@@ -236,7 +236,7 @@ type Disk struct {
 	AttachmentState *string `locationName:"attachmentState" deprecated:"true" type:"string"`
 
 	// The date when the disk was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// (Deprecated) The number of GB in use by the disk.
 	//
@@ -337,7 +337,7 @@ type DiskSnapshot struct {
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The date when the disk snapshot was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the source disk from which the disk snapshot
 	// was created.
@@ -410,7 +410,7 @@ type Domain struct {
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The date when the domain recordset was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// An array of key-value pairs containing information about the domain entries.
 	DomainEntries []DomainEntry `locationName:"domainEntries" type:"list"`
@@ -505,7 +505,7 @@ type ExportSnapshotRecord struct {
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The date when the export snapshot record was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// A list of objects describing the destination of the export snapshot record.
 	DestinationInfo *DestinationInfo `locationName:"destinationInfo" type:"structure"`
@@ -541,7 +541,7 @@ type ExportSnapshotRecordSourceInfo struct {
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The date when the source instance or disk snapshot was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// A list of objects describing a disk snapshot.
 	DiskSnapshotInfo *DiskSnapshotInfo `locationName:"diskSnapshotInfo" type:"structure"`
@@ -595,18 +595,18 @@ type HostKeyAttributes struct {
 	// The returned RDP certificate is not valid after this point in time.
 	//
 	// This value is listed only for RDP certificates.
-	NotValidAfter *time.Time `locationName:"notValidAfter" type:"timestamp" timestampFormat:"unix"`
+	NotValidAfter *time.Time `locationName:"notValidAfter" type:"timestamp"`
 
 	// The returned RDP certificate is valid after this point in time.
 	//
 	// This value is listed only for RDP certificates.
-	NotValidBefore *time.Time `locationName:"notValidBefore" type:"timestamp" timestampFormat:"unix"`
+	NotValidBefore *time.Time `locationName:"notValidBefore" type:"timestamp"`
 
 	// The public SSH host key or the RDP certificate.
 	PublicKey *string `locationName:"publicKey" type:"string"`
 
 	// The time that the SSH host key or RDP certificate was recorded by Lightsail.
-	WitnessedAt *time.Time `locationName:"witnessedAt" type:"timestamp" timestampFormat:"unix"`
+	WitnessedAt *time.Time `locationName:"witnessedAt" type:"timestamp"`
 }
 
 // String returns the string representation
@@ -632,7 +632,7 @@ type Instance struct {
 	BundleId *string `locationName:"bundleId" type:"string"`
 
 	// The timestamp when the instance was created (e.g., 1479734909.17).
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The size of the vCPU and the amount of RAM for the instance.
 	Hardware *InstanceHardware `locationName:"hardware" type:"structure"`
@@ -698,7 +698,7 @@ type InstanceAccessDetails struct {
 	CertKey *string `locationName:"certKey" type:"string"`
 
 	// For SSH access, the date on which the temporary keys expire.
-	ExpiresAt *time.Time `locationName:"expiresAt" type:"timestamp" timestampFormat:"unix"`
+	ExpiresAt *time.Time `locationName:"expiresAt" type:"timestamp"`
 
 	// Describes the public SSH host keys or the RDP certificate.
 	HostKeys []HostKeyAttributes `locationName:"hostKeys" type:"list"`
@@ -1027,7 +1027,7 @@ type InstanceSnapshot struct {
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The timestamp when the snapshot was created (e.g., 1479907467.024).
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// An array of disk objects containing information about all block storage disks.
 	FromAttachedDisks []Disk `locationName:"fromAttachedDisks" type:"list"`
@@ -1126,7 +1126,7 @@ type KeyPair struct {
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The timestamp when the key pair was created (e.g., 1479816991.349).
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The RSA fingerprint of the key pair.
 	Fingerprint *string `locationName:"fingerprint" type:"string"`
@@ -1168,7 +1168,7 @@ type LoadBalancer struct {
 	ConfigurationOptions map[string]string `locationName:"configurationOptions" type:"map"`
 
 	// The date when your load balancer was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The DNS name of your Lightsail load balancer.
 	DnsName *string `locationName:"dnsName" type:"string"`
@@ -1238,7 +1238,7 @@ type LoadBalancerTlsCertificate struct {
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The time when you created your SSL/TLS certificate.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The domain name for your SSL/TLS certificate.
 	DomainName *string `locationName:"domainName" type:"string"`
@@ -1254,7 +1254,7 @@ type LoadBalancerTlsCertificate struct {
 	IsAttached *bool `locationName:"isAttached" type:"boolean"`
 
 	// The time when the SSL/TLS certificate was issued.
-	IssuedAt *time.Time `locationName:"issuedAt" type:"timestamp" timestampFormat:"unix"`
+	IssuedAt *time.Time `locationName:"issuedAt" type:"timestamp"`
 
 	// The issuer of the certificate.
 	Issuer *string `locationName:"issuer" type:"string"`
@@ -1273,10 +1273,10 @@ type LoadBalancerTlsCertificate struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// The timestamp when the SSL/TLS certificate expires.
-	NotAfter *time.Time `locationName:"notAfter" type:"timestamp" timestampFormat:"unix"`
+	NotAfter *time.Time `locationName:"notAfter" type:"timestamp"`
 
 	// The timestamp when the SSL/TLS certificate is first valid.
-	NotBefore *time.Time `locationName:"notBefore" type:"timestamp" timestampFormat:"unix"`
+	NotBefore *time.Time `locationName:"notBefore" type:"timestamp"`
 
 	// An object containing information about the status of Lightsail's managed
 	// renewal for the certificate.
@@ -1310,7 +1310,7 @@ type LoadBalancerTlsCertificate struct {
 	RevocationReason LoadBalancerTlsCertificateRevocationReason `locationName:"revocationReason" type:"string" enum:"true"`
 
 	// The timestamp when the SSL/TLS certificate was revoked.
-	RevokedAt *time.Time `locationName:"revokedAt" type:"timestamp" timestampFormat:"unix"`
+	RevokedAt *time.Time `locationName:"revokedAt" type:"timestamp"`
 
 	// The serial number of the certificate.
 	Serial *string `locationName:"serial" type:"string"`
@@ -1436,7 +1436,7 @@ type LogEvent struct {
 	_ struct{} `type:"structure"`
 
 	// The timestamp when the database log event was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The message of the database log event.
 	Message *string `locationName:"message" type:"string"`
@@ -1468,7 +1468,7 @@ type MetricDatapoint struct {
 	Sum *float64 `locationName:"sum" type:"double"`
 
 	// The timestamp (e.g., 1479816991.349).
-	Timestamp *time.Time `locationName:"timestamp" type:"timestamp" timestampFormat:"unix"`
+	Timestamp *time.Time `locationName:"timestamp" type:"timestamp"`
 
 	// The unit.
 	Unit MetricUnit `locationName:"unit" type:"string" enum:"true"`
@@ -1500,7 +1500,7 @@ type Operation struct {
 	_ struct{} `type:"structure"`
 
 	// The timestamp when the operation was initialized (e.g., 1479816991.349).
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The error code.
 	ErrorCode *string `locationName:"errorCode" type:"string"`
@@ -1533,7 +1533,7 @@ type Operation struct {
 	Status OperationStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The timestamp when the status was changed (e.g., 1479816991.349).
-	StatusChangedAt *time.Time `locationName:"statusChangedAt" type:"timestamp" timestampFormat:"unix"`
+	StatusChangedAt *time.Time `locationName:"statusChangedAt" type:"timestamp"`
 }
 
 // String returns the string representation
@@ -1586,7 +1586,7 @@ type PendingMaintenanceAction struct {
 	Action *string `locationName:"action" type:"string"`
 
 	// The effective date of the pending database maintenance action.
-	CurrentApplyDate *time.Time `locationName:"currentApplyDate" type:"timestamp" timestampFormat:"unix"`
+	CurrentApplyDate *time.Time `locationName:"currentApplyDate" type:"timestamp"`
 
 	// Additional detail about the pending database maintenance action.
 	Description *string `locationName:"description" type:"string"`
@@ -1681,7 +1681,7 @@ type RelationalDatabase struct {
 	BackupRetentionEnabled *bool `locationName:"backupRetentionEnabled" type:"boolean"`
 
 	// The timestamp when the database was created. Formatted in Unix time.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The database software (for example, MySQL).
 	Engine *string `locationName:"engine" type:"string"`
@@ -1694,7 +1694,7 @@ type RelationalDatabase struct {
 
 	// The latest point in time to which the database can be restored. Formatted
 	// in Unix time.
-	LatestRestorableTime *time.Time `locationName:"latestRestorableTime" type:"timestamp" timestampFormat:"unix"`
+	LatestRestorableTime *time.Time `locationName:"latestRestorableTime" type:"timestamp"`
 
 	// The Region name and Availability Zone where the database is located.
 	Location *ResourceLocation `locationName:"location" type:"structure"`
@@ -1861,7 +1861,7 @@ type RelationalDatabaseEvent struct {
 	_ struct{} `type:"structure"`
 
 	// The timestamp when the database event was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The category that the database event belongs to.
 	EventCategories []string `locationName:"eventCategories" type:"list"`
@@ -1944,7 +1944,7 @@ type RelationalDatabaseSnapshot struct {
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The timestamp when the database snapshot was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The software of the database snapshot (for example, MySQL)
 	Engine *string `locationName:"engine" type:"string"`
@@ -2026,7 +2026,7 @@ type StaticIp struct {
 	AttachedTo *string `locationName:"attachedTo" type:"string"`
 
 	// The timestamp when the static IP was created (e.g., 1479735304.222).
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The static IP address.
 	IpAddress *string `locationName:"ipAddress" type:"string"`

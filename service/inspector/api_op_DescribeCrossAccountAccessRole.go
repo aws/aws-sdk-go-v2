@@ -27,7 +27,7 @@ type DescribeCrossAccountAccessRoleOutput struct {
 	// The date when the cross-account access role was registered.
 	//
 	// RegisteredAt is a required field
-	RegisteredAt *time.Time `locationName:"registeredAt" type:"timestamp" timestampFormat:"unix" required:"true"`
+	RegisteredAt *time.Time `locationName:"registeredAt" type:"timestamp" required:"true"`
 
 	// The ARN that specifies the IAM role that Amazon Inspector uses to access
 	// your AWS account.

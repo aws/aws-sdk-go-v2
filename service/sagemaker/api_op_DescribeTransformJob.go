@@ -57,7 +57,7 @@ type DescribeTransformJobOutput struct {
 	// A timestamp that shows when the transform Job was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// The data structure used to combine the input data and transformed data from
 	// the batch transform output into a joined dataset and to store it in an output
@@ -93,7 +93,7 @@ type DescribeTransformJobOutput struct {
 
 	// Indicates when the transform job has been completed, or has stopped or failed.
 	// You are billed for the time interval between this time and the value of TransformStartTime.
-	TransformEndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TransformEndTime *time.Time `type:"timestamp"`
 
 	// Describes the dataset to be transformed and the Amazon S3 location where
 	// it is stored.
@@ -129,7 +129,7 @@ type DescribeTransformJobOutput struct {
 
 	// Indicates when the transform job starts on ML instances. You are billed for
 	// the time interval between this time and the value of TransformEndTime.
-	TransformStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TransformStartTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

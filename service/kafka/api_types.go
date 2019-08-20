@@ -350,7 +350,7 @@ type ClusterInfo struct {
 	ClusterName *string `locationName:"clusterName" type:"string"`
 
 	// The time when the cluster was created.
-	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"iso8601"`
 
 	// Information about the version of software currently deployed on the Kafka
 	// brokers in the cluster.
@@ -422,7 +422,8 @@ func (s ClusterInfo) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationTime",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.CurrentBrokerSoftwareInfo != nil {
 		v := s.CurrentBrokerSoftwareInfo
@@ -493,10 +494,10 @@ type ClusterOperationInfo struct {
 	ClusterArn *string `locationName:"clusterArn" type:"string"`
 
 	// The time at which operation was created.
-	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The time at which the operation finished.
-	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"iso8601"`
 
 	// Describes the error if the operation fails.
 	ErrorInfo *ErrorInfo `locationName:"errorInfo" type:"structure"`
@@ -540,13 +541,15 @@ func (s ClusterOperationInfo) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationTime",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.EndTime != nil {
 		v := *s.EndTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "endTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "endTime",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.ErrorInfo != nil {
 		v := s.ErrorInfo
@@ -598,7 +601,7 @@ type Configuration struct {
 	Arn *string `locationName:"arn" type:"string" required:"true"`
 
 	// CreationTime is a required field
-	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"iso8601" required:"true"`
 
 	// The description of the configuration.
 	//
@@ -640,7 +643,8 @@ func (s Configuration) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationTime",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -739,7 +743,7 @@ type ConfigurationRevision struct {
 	// The time when the configuration revision was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"iso8601" required:"true"`
 
 	// The description of the configuration revision.
 	Description *string `locationName:"description" type:"string"`
@@ -761,7 +765,8 @@ func (s ConfigurationRevision) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationTime",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description

@@ -44,7 +44,7 @@ type UsageRecord struct {
 	// the timestamp value is not before the start of the software usage.
 	//
 	// Timestamp is a required field
-	Timestamp *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	Timestamp *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation

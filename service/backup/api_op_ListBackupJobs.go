@@ -22,10 +22,10 @@ type ListBackupJobsInput struct {
 	ByBackupVaultName *string `location:"querystring" locationName:"backupVaultName" type:"string"`
 
 	// Returns only backup jobs that were created after the specified date.
-	ByCreatedAfter *time.Time `location:"querystring" locationName:"createdAfter" type:"timestamp" timestampFormat:"unix"`
+	ByCreatedAfter *time.Time `location:"querystring" locationName:"createdAfter" type:"timestamp"`
 
 	// Returns only backup jobs that were created before the specified date.
-	ByCreatedBefore *time.Time `location:"querystring" locationName:"createdBefore" type:"timestamp" timestampFormat:"unix"`
+	ByCreatedBefore *time.Time `location:"querystring" locationName:"createdBefore" type:"timestamp"`
 
 	// Returns only backup jobs that match the specified resource Amazon Resource
 	// Name (ARN).
@@ -77,7 +77,7 @@ func (s *ListBackupJobsInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListBackupJobsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.ByBackupVaultName != nil {
 		v := *s.ByBackupVaultName
@@ -89,13 +89,15 @@ func (s ListBackupJobsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ByCreatedAfter
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "createdAfter", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.QueryTarget, "createdAfter",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.ByCreatedBefore != nil {
 		v := *s.ByCreatedBefore
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "createdBefore", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.QueryTarget, "createdBefore",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.ByResourceArn != nil {
 		v := *s.ByResourceArn

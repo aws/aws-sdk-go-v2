@@ -51,6 +51,7 @@ func (s *GetStageInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetStageInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.RestApiId != nil {
 		v := *s.RestApiId
@@ -93,7 +94,7 @@ type GetStageOutput struct {
 	ClientCertificateId *string `locationName:"clientCertificateId" type:"string"`
 
 	// The timestamp when the stage was created.
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix"`
+	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp"`
 
 	// The identifier of the Deployment that the stage points to.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
@@ -105,7 +106,7 @@ type GetStageOutput struct {
 	DocumentationVersion *string `locationName:"documentationVersion" type:"string"`
 
 	// The timestamp when the stage last updated.
-	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp"`
 
 	// A map that defines the method settings for a Stage resource. Keys (designated
 	// as /{method_setting_key below) are method paths defined as {resource_path}/{http_method}
@@ -180,7 +181,8 @@ func (s GetStageOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DeploymentId != nil {
 		v := *s.DeploymentId
@@ -204,7 +206,8 @@ func (s GetStageOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastUpdatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdatedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.MethodSettings != nil {
 		v := s.MethodSettings

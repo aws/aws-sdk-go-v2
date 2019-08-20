@@ -99,7 +99,7 @@ type DescribeTaskExecutionOutput struct {
 	Result *TaskExecutionResultDetail `type:"structure"`
 
 	// The time that the task execution was started.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `type:"timestamp"`
 
 	// The status of the task execution.
 	//

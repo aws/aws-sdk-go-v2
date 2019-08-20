@@ -89,7 +89,7 @@ type Dataset struct {
 	_ struct{} `type:"structure"`
 
 	// Date on which the dataset was created.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp"`
 
 	// Total size in bytes of the records in this dataset.
 	DataStorage *int64 `type:"long"`
@@ -106,7 +106,7 @@ type Dataset struct {
 	LastModifiedBy *string `type:"string"`
 
 	// Date when the dataset was last modified.
-	LastModifiedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedDate *time.Time `type:"timestamp"`
 
 	// Number of records in this dataset.
 	NumRecords *int64 `type:"long"`
@@ -123,7 +123,8 @@ func (s Dataset) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DataStorage != nil {
 		v := *s.DataStorage
@@ -153,7 +154,8 @@ func (s Dataset) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastModifiedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastModifiedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastModifiedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.NumRecords != nil {
 		v := *s.NumRecords
@@ -177,7 +179,7 @@ type IdentityPoolUsage struct {
 	IdentityPoolId *string `min:"1" type:"string"`
 
 	// Date on which the identity pool was last modified.
-	LastModifiedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedDate *time.Time `type:"timestamp"`
 
 	// Number of sync sessions for the identity pool.
 	SyncSessionsCount *int64 `type:"long"`
@@ -206,7 +208,8 @@ func (s IdentityPoolUsage) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastModifiedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastModifiedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastModifiedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.SyncSessionsCount != nil {
 		v := *s.SyncSessionsCount
@@ -237,7 +240,7 @@ type IdentityUsage struct {
 	IdentityPoolId *string `min:"1" type:"string"`
 
 	// Date on which the identity was last modified.
-	LastModifiedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedDate *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -275,7 +278,8 @@ func (s IdentityUsage) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastModifiedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastModifiedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastModifiedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -339,7 +343,7 @@ type Record struct {
 	_ struct{} `type:"structure"`
 
 	// The last modified date of the client device.
-	DeviceLastModifiedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DeviceLastModifiedDate *time.Time `type:"timestamp"`
 
 	// The key for the record.
 	Key *string `min:"1" type:"string"`
@@ -348,7 +352,7 @@ type Record struct {
 	LastModifiedBy *string `type:"string"`
 
 	// The date on which the record was last modified.
-	LastModifiedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedDate *time.Time `type:"timestamp"`
 
 	// The server sync count for this record.
 	SyncCount *int64 `type:"long"`
@@ -368,7 +372,8 @@ func (s Record) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DeviceLastModifiedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DeviceLastModifiedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "DeviceLastModifiedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Key != nil {
 		v := *s.Key
@@ -386,7 +391,8 @@ func (s Record) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastModifiedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastModifiedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastModifiedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.SyncCount != nil {
 		v := *s.SyncCount
@@ -409,7 +415,7 @@ type RecordPatch struct {
 	_ struct{} `type:"structure"`
 
 	// The last modified date of the client device.
-	DeviceLastModifiedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DeviceLastModifiedDate *time.Time `type:"timestamp"`
 
 	// The key associated with the record patch.
 	//
@@ -465,7 +471,8 @@ func (s RecordPatch) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DeviceLastModifiedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DeviceLastModifiedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "DeviceLastModifiedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Key != nil {
 		v := *s.Key

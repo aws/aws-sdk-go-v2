@@ -16,19 +16,19 @@ type ListCompilationJobsInput struct {
 
 	// A filter that returns the model compilation jobs that were created after
 	// a specified time.
-	CreationTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTimeAfter *time.Time `type:"timestamp"`
 
 	// A filter that returns the model compilation jobs that were created before
 	// a specified time.
-	CreationTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTimeBefore *time.Time `type:"timestamp"`
 
 	// A filter that returns the model compilation jobs that were modified after
 	// a specified time.
-	LastModifiedTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTimeAfter *time.Time `type:"timestamp"`
 
 	// A filter that returns the model compilation jobs that were modified before
 	// a specified time.
-	LastModifiedTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTimeBefore *time.Time `type:"timestamp"`
 
 	// The maximum number of model compilation jobs to return in the response.
 	MaxResults *int64 `min:"1" type:"integer"`

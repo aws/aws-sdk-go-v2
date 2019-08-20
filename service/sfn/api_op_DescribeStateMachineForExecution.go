@@ -73,7 +73,7 @@ type DescribeStateMachineForExecutionOutput struct {
 	// For a newly created state machine, this is the creation date.
 	//
 	// UpdateDate is a required field
-	UpdateDate *time.Time `locationName:"updateDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	UpdateDate *time.Time `locationName:"updateDate" type:"timestamp" required:"true"`
 }
 
 // String returns the string representation

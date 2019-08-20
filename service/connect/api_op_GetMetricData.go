@@ -23,7 +23,7 @@ type GetMetricDataInput struct {
 	// The time range between StartTime and EndTime must be less than 24 hours.
 	//
 	// EndTime is a required field
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	EndTime *time.Time `type:"timestamp" required:"true"`
 
 	// A Filters object that contains a list of queue IDs or queue ARNs, up to 100,
 	// or a list of Channels to use to filter the metrics returned in the response.
@@ -250,7 +250,7 @@ type GetMetricDataInput struct {
 	// Historical metrics are available in Amazon Connect only for 24 hours.
 	//
 	// StartTime is a required field
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartTime *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -301,13 +301,14 @@ func (s *GetMetricDataInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetMetricDataInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.EndTime != nil {
 		v := *s.EndTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EndTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "EndTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Filters != nil {
 		v := s.Filters
@@ -355,7 +356,8 @@ func (s GetMetricDataInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "StartTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.InstanceId != nil {
 		v := *s.InstanceId

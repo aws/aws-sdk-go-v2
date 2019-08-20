@@ -23,13 +23,13 @@ type Credentials struct {
 
 	// A token generated with an expiration time for the session a user is logged
 	// in to Amazon Connect
-	AccessTokenExpiration *time.Time `type:"timestamp" timestampFormat:"unix"`
+	AccessTokenExpiration *time.Time `type:"timestamp"`
 
 	// Renews a token generated for a user to access the Amazon Connect instance.
 	RefreshToken *string `type:"string"`
 
 	// Renews the expiration timer for a generated token.
-	RefreshTokenExpiration *time.Time `type:"timestamp" timestampFormat:"unix"`
+	RefreshTokenExpiration *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -49,7 +49,8 @@ func (s Credentials) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.AccessTokenExpiration
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AccessTokenExpiration", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "AccessTokenExpiration",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.RefreshToken != nil {
 		v := *s.RefreshToken
@@ -61,7 +62,8 @@ func (s Credentials) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.RefreshTokenExpiration
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "RefreshTokenExpiration", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "RefreshTokenExpiration",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }

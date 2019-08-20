@@ -75,10 +75,10 @@ type AdminGetUserOutput struct {
 	UserAttributes []AttributeType `type:"list"`
 
 	// The date the user was created.
-	UserCreateDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	UserCreateDate *time.Time `type:"timestamp"`
 
 	// The date the user was last modified.
-	UserLastModifiedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	UserLastModifiedDate *time.Time `type:"timestamp"`
 
 	// The list of the user's MFA settings.
 	UserMFASettingList []string `type:"list"`

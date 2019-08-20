@@ -65,7 +65,7 @@ type RegisterUsageOutput struct {
 	_ struct{} `type:"structure"`
 
 	// (Optional) Only included when public key version has expired
-	PublicKeyRotationTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	PublicKeyRotationTimestamp *time.Time `type:"timestamp"`
 
 	// JWT Token
 	Signature *string `type:"string"`

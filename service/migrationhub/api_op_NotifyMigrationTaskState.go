@@ -43,7 +43,7 @@ type NotifyMigrationTaskStateInput struct {
 	// The timestamp when the task was gathered.
 	//
 	// UpdateDateTime is a required field
-	UpdateDateTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	UpdateDateTime *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation

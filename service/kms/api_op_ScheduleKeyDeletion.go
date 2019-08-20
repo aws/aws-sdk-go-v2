@@ -67,7 +67,7 @@ type ScheduleKeyDeletionOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time after which AWS KMS deletes the customer master key (CMK).
-	DeletionDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DeletionDate *time.Time `type:"timestamp"`
 
 	// The unique identifier of the customer master key (CMK) for which deletion
 	// is scheduled.

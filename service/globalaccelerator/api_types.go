@@ -23,7 +23,7 @@ type Accelerator struct {
 	AcceleratorArn *string `type:"string"`
 
 	// The date and time that the accelerator was created.
-	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTime *time.Time `type:"timestamp"`
 
 	// Indicates whether theaccelerator is enabled. The value is true or false.
 	// The default value is true.
@@ -39,7 +39,7 @@ type Accelerator struct {
 	IpSets []IpSet `type:"list"`
 
 	// The date and time that the accelerator was last modified.
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTime *time.Time `type:"timestamp"`
 
 	// The name of the accelerator. The name can have a maximum of 32 characters,
 	// must contain only alphanumeric characters or hyphens (-), and must not begin

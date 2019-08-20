@@ -48,7 +48,7 @@ type DescribeOrganizationOutput struct {
 
 	// The date at which the organization became usable in the WorkMail context,
 	// in UNIX epoch time format.
-	CompletedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CompletedDate *time.Time `type:"timestamp"`
 
 	// The default mail domain associated with the organization.
 	DefaultMailDomain *string `type:"string"`

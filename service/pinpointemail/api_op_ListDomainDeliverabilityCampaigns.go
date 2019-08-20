@@ -24,7 +24,7 @@ type ListDomainDeliverabilityCampaignsInput struct {
 	// of the StartDate parameter.
 	//
 	// EndDate is a required field
-	EndDate *time.Time `location:"querystring" locationName:"EndDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	EndDate *time.Time `location:"querystring" locationName:"EndDate" type:"timestamp" required:"true"`
 
 	// A token that’s returned from a previous call to the ListDomainDeliverabilityCampaigns
 	// operation. This token indicates the position of a campaign in the list of
@@ -41,7 +41,7 @@ type ListDomainDeliverabilityCampaignsInput struct {
 	// data for.
 	//
 	// StartDate is a required field
-	StartDate *time.Time `location:"querystring" locationName:"StartDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartDate *time.Time `location:"querystring" locationName:"StartDate" type:"timestamp" required:"true"`
 
 	// The domain to obtain deliverability data for.
 	//
@@ -78,7 +78,7 @@ func (s *ListDomainDeliverabilityCampaignsInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListDomainDeliverabilityCampaignsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.SubscribedDomain != nil {
 		v := *s.SubscribedDomain
@@ -90,7 +90,8 @@ func (s ListDomainDeliverabilityCampaignsInput) MarshalFields(e protocol.FieldEn
 		v := *s.EndDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "EndDate", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.QueryTarget, "EndDate",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.NextToken != nil {
 		v := *s.NextToken
@@ -108,7 +109,8 @@ func (s ListDomainDeliverabilityCampaignsInput) MarshalFields(e protocol.FieldEn
 		v := *s.StartDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "StartDate", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.QueryTarget, "StartDate",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	return nil
 }

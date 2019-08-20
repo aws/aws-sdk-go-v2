@@ -72,7 +72,7 @@ func (s *CreateApiInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateApiInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.ApiKeySelectionExpression != nil {
 		v := *s.ApiKeySelectionExpression
@@ -133,7 +133,7 @@ type CreateApiOutput struct {
 	// for more information.
 	ApiKeySelectionExpression *string `locationName:"apiKeySelectionExpression" type:"string"`
 
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix"`
+	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"iso8601"`
 
 	// A string with a length between [0-1024].
 	Description *string `locationName:"description" type:"string"`
@@ -185,7 +185,8 @@ func (s CreateApiOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdDate",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description

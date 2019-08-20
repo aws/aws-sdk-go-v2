@@ -75,6 +75,7 @@ func (s *GetObjectInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetObjectInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.Range != nil {
 		v := *s.Range
@@ -118,7 +119,7 @@ type GetObjectOutput struct {
 	ETag *string `location:"header" locationName:"ETag" min:"1" type:"string"`
 
 	// The date and time that the object was last modified.
-	LastModified *time.Time `location:"header" locationName:"Last-Modified" type:"timestamp" timestampFormat:"rfc822"`
+	LastModified *time.Time `location:"header" locationName:"Last-Modified" type:"timestamp"`
 
 	// The HTML status code of the request. Status codes ranging from 200 to 299
 	// indicate success. All other status codes indicate the type of error that
@@ -169,7 +170,8 @@ func (s GetObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastModified
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Last-Modified", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.HeaderTarget, "Last-Modified",
+			protocol.TimeValue{V: v, Format: protocol.RFC822TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	// Skipping Body Output type's body not valid.
 	// ignoring invalid encode state, StatusCode. StatusCode

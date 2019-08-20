@@ -25,7 +25,7 @@ type GetRelationalDatabaseMetricDataInput struct {
 	//    the end time.
 	//
 	// EndTime is a required field
-	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	EndTime *time.Time `locationName:"endTime" type:"timestamp" required:"true"`
 
 	// The name of the metric data to return.
 	//
@@ -53,7 +53,7 @@ type GetRelationalDatabaseMetricDataInput struct {
 	//    as the start time.
 	//
 	// StartTime is a required field
-	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartTime *time.Time `locationName:"startTime" type:"timestamp" required:"true"`
 
 	// The array of statistics for your metric data request.
 	//

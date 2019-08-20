@@ -41,7 +41,7 @@ type DescribeClusterSnapshotsInput struct {
 	// about ISO 8601, go to the ISO8601 Wikipedia page. (http://en.wikipedia.org/wiki/ISO_8601)
 	//
 	// Example: 2012-07-16T18:00:00Z
-	EndTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeClusterSnapshots request
@@ -83,7 +83,7 @@ type DescribeClusterSnapshotsInput struct {
 	// ISO 8601, go to the ISO8601 Wikipedia page. (http://en.wikipedia.org/wiki/ISO_8601)
 	//
 	// Example: 2012-07-16T18:00:00Z
-	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	StartTime *time.Time `type:"timestamp"`
 
 	// A tag key or keys for which you want to return all matching cluster snapshots
 	// that are associated with the specified key or keys. For example, suppose

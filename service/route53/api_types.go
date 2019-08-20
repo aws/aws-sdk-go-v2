@@ -654,7 +654,7 @@ type ChangeInfo struct {
 	// at 17:48:16.751 UTC.
 	//
 	// SubmittedAt is a required field
-	SubmittedAt *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	SubmittedAt *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -686,7 +686,8 @@ func (s ChangeInfo) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.SubmittedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SubmittedAt", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "SubmittedAt",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	return nil
 }
@@ -2613,7 +2614,7 @@ type StatusReport struct {
 	// 8601 format (https://en.wikipedia.org/wiki/ISO_8601) and Coordinated Universal
 	// Time (UTC). For example, the value 2017-03-27T17:48:16.751Z represents March
 	// 27, 2017 at 17:48:16.751 UTC.
-	CheckedTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	CheckedTime *time.Time `type:"timestamp"`
 
 	// A description of the status of the health check endpoint as reported by one
 	// of the Amazon Route 53 health checkers.
@@ -2631,7 +2632,8 @@ func (s StatusReport) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CheckedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CheckedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CheckedTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.Status != nil {
 		v := *s.Status

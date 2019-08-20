@@ -215,7 +215,7 @@ type Datapoint struct {
 	_ struct{} `type:"structure"`
 
 	// The time stamp for the data point in UTC format.
-	Timestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	Timestamp *time.Time `type:"timestamp"`
 
 	// The value of the data point.
 	Value *float64 `type:"double"`
@@ -627,7 +627,7 @@ type ScalingPlan struct {
 	ApplicationSource *ApplicationSource `type:"structure" required:"true"`
 
 	// The Unix time stamp when the scaling plan was created.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The scaling instructions.
 	//
@@ -670,7 +670,7 @@ type ScalingPlan struct {
 	StatusMessage *string `type:"string"`
 
 	// The Unix time stamp when the scaling plan entered the current status.
-	StatusStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StatusStartTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

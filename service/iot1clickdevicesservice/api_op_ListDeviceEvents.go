@@ -19,14 +19,14 @@ type ListDeviceEventsInput struct {
 	DeviceId *string `location:"uri" locationName:"deviceId" type:"string" required:"true"`
 
 	// FromTimeStamp is a required field
-	FromTimeStamp *time.Time `location:"querystring" locationName:"fromTimeStamp" type:"timestamp" timestampFormat:"unix" required:"true"`
+	FromTimeStamp *time.Time `location:"querystring" locationName:"fromTimeStamp" type:"timestamp" timestampFormat:"iso8601" required:"true"`
 
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 
 	// ToTimeStamp is a required field
-	ToTimeStamp *time.Time `location:"querystring" locationName:"toTimeStamp" type:"timestamp" timestampFormat:"unix" required:"true"`
+	ToTimeStamp *time.Time `location:"querystring" locationName:"toTimeStamp" type:"timestamp" timestampFormat:"iso8601" required:"true"`
 }
 
 // String returns the string representation
@@ -61,7 +61,7 @@ func (s *ListDeviceEventsInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListDeviceEventsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.DeviceId != nil {
 		v := *s.DeviceId
@@ -73,7 +73,8 @@ func (s ListDeviceEventsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.FromTimeStamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "fromTimeStamp", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.QueryTarget, "fromTimeStamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: false}, metadata)
 	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
@@ -91,7 +92,8 @@ func (s ListDeviceEventsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ToTimeStamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "toTimeStamp", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.QueryTarget, "toTimeStamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: false}, metadata)
 	}
 	return nil
 }

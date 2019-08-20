@@ -29,13 +29,13 @@ type ModifyClusterMaintenanceInput struct {
 
 	// A timestamp indicating end time for the deferred maintenance window. If you
 	// specify an end time, you can't specify a duration.
-	DeferMaintenanceEndTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	DeferMaintenanceEndTime *time.Time `type:"timestamp"`
 
 	// A unique identifier for the deferred maintenance window.
 	DeferMaintenanceIdentifier *string `type:"string"`
 
 	// A timestamp indicating the start time for the deferred maintenance window.
-	DeferMaintenanceStartTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	DeferMaintenanceStartTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

@@ -19,7 +19,7 @@ type Principal struct {
 	_ struct{} `type:"structure"`
 
 	// The time when the principal was associated with the resource share.
-	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp"`
 
 	// Indicates whether the principal belongs to the same organization as the AWS
 	// account that owns the resource share.
@@ -29,7 +29,7 @@ type Principal struct {
 	Id *string `locationName:"id" type:"string"`
 
 	// The time when the association was last updated.
-	LastUpdatedTime *time.Time `locationName:"lastUpdatedTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedTime *time.Time `locationName:"lastUpdatedTime" type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the resource share.
 	ResourceShareArn *string `locationName:"resourceShareArn" type:"string"`
@@ -46,7 +46,8 @@ func (s Principal) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.External != nil {
 		v := *s.External
@@ -64,7 +65,8 @@ func (s Principal) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastUpdatedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ResourceShareArn != nil {
 		v := *s.ResourceShareArn
@@ -84,10 +86,10 @@ type Resource struct {
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The time when the resource was associated with the resource share.
-	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp"`
 
 	// The time when the association was last updated.
-	LastUpdatedTime *time.Time `locationName:"lastUpdatedTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedTime *time.Time `locationName:"lastUpdatedTime" type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the resource share.
 	ResourceShareArn *string `locationName:"resourceShareArn" type:"string"`
@@ -119,13 +121,15 @@ func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.LastUpdatedTime != nil {
 		v := *s.LastUpdatedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ResourceShareArn != nil {
 		v := *s.ResourceShareArn
@@ -164,10 +168,10 @@ type ResourceShare struct {
 	AllowExternalPrincipals *bool `locationName:"allowExternalPrincipals" type:"boolean"`
 
 	// The time when the resource share was created.
-	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp"`
 
 	// The time when the resource share was last updated.
-	LastUpdatedTime *time.Time `locationName:"lastUpdatedTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedTime *time.Time `locationName:"lastUpdatedTime" type:"timestamp"`
 
 	// The name of the resource share.
 	Name *string `locationName:"name" type:"string"`
@@ -205,13 +209,15 @@ func (s ResourceShare) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.LastUpdatedTime != nil {
 		v := *s.LastUpdatedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -272,14 +278,14 @@ type ResourceShareAssociation struct {
 	AssociationType ResourceShareAssociationType `locationName:"associationType" type:"string" enum:"true"`
 
 	// The time when the association was created.
-	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp"`
 
 	// Indicates whether the principal belongs to the same organization as the AWS
 	// account that owns the resource share.
 	External *bool `locationName:"external" type:"boolean"`
 
 	// The time when the association was last updated.
-	LastUpdatedTime *time.Time `locationName:"lastUpdatedTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedTime *time.Time `locationName:"lastUpdatedTime" type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the resource share.
 	ResourceShareArn *string `locationName:"resourceShareArn" type:"string"`
@@ -314,7 +320,8 @@ func (s ResourceShareAssociation) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.External != nil {
 		v := *s.External
@@ -326,7 +333,8 @@ func (s ResourceShareAssociation) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastUpdatedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ResourceShareArn != nil {
 		v := *s.ResourceShareArn
@@ -355,7 +363,7 @@ type ResourceShareInvitation struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time when the invitation was sent.
-	InvitationTimestamp *time.Time `locationName:"invitationTimestamp" type:"timestamp" timestampFormat:"unix"`
+	InvitationTimestamp *time.Time `locationName:"invitationTimestamp" type:"timestamp"`
 
 	// The ID of the AWS account that received the invitation.
 	ReceiverAccountId *string `locationName:"receiverAccountId" type:"string"`
@@ -390,7 +398,8 @@ func (s ResourceShareInvitation) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.InvitationTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "invitationTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "invitationTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ReceiverAccountId != nil {
 		v := *s.ReceiverAccountId

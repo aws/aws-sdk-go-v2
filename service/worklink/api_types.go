@@ -55,7 +55,7 @@ type DomainSummary struct {
 	// The time that the domain was created.
 	//
 	// CreatedTime is a required field
-	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreatedTime *time.Time `type:"timestamp" required:"true"`
 
 	// The name to display.
 	DisplayName *string `type:"string"`
@@ -82,7 +82,8 @@ func (s DomainSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DisplayName != nil {
 		v := *s.DisplayName
@@ -114,7 +115,7 @@ type FleetSummary struct {
 	CompanyCode *string `min:"1" type:"string"`
 
 	// The time when the fleet was created.
-	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTime *time.Time `type:"timestamp"`
 
 	// The name to display.
 	DisplayName *string `type:"string"`
@@ -129,7 +130,7 @@ type FleetSummary struct {
 	FleetStatus FleetStatus `type:"string" enum:"true"`
 
 	// The time when the fleet was last updated.
-	LastUpdatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -149,7 +150,8 @@ func (s FleetSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DisplayName != nil {
 		v := *s.DisplayName
@@ -179,7 +181,8 @@ func (s FleetSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastUpdatedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastUpdatedTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -198,7 +201,7 @@ type WebsiteAuthorizationProviderSummary struct {
 	AuthorizationProviderType AuthorizationProviderType `type:"string" required:"true" enum:"true"`
 
 	// The time of creation.
-	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTime *time.Time `type:"timestamp"`
 
 	// The domain name of the authorization provider. This applies only to SAML-based
 	// authorization providers.
@@ -228,7 +231,8 @@ func (s WebsiteAuthorizationProviderSummary) MarshalFields(e protocol.FieldEncod
 		v := *s.CreatedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DomainName != nil {
 		v := *s.DomainName
@@ -245,7 +249,7 @@ type WebsiteCaSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The time when the CA was added.
-	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTime *time.Time `type:"timestamp"`
 
 	// The name to display.
 	DisplayName *string `type:"string"`
@@ -265,7 +269,8 @@ func (s WebsiteCaSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DisplayName != nil {
 		v := *s.DisplayName

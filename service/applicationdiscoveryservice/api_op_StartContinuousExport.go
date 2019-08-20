@@ -40,7 +40,7 @@ type StartContinuousExportOutput struct {
 	SchemaStorageConfig map[string]string `locationName:"schemaStorageConfig" type:"map"`
 
 	// The timestamp representing when the continuous export was started.
-	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
 }
 
 // String returns the string representation

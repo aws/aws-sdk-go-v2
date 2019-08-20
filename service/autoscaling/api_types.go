@@ -42,7 +42,7 @@ type Activity struct {
 	Details *string `type:"string"`
 
 	// The end time of the activity.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// A value between 0 and 100 that indicates the progress of the activity.
 	Progress *int64 `type:"integer"`
@@ -50,7 +50,7 @@ type Activity struct {
 	// The start time of the activity.
 	//
 	// StartTime is a required field
-	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	StartTime *time.Time `type:"timestamp" required:"true"`
 
 	// The current status of the activity.
 	//
@@ -119,7 +119,7 @@ type AutoScalingGroup struct {
 	// The date and time the group was created.
 	//
 	// CreatedTime is a required field
-	CreatedTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	CreatedTime *time.Time `type:"timestamp" required:"true"`
 
 	// The amount of time, in seconds, after a scaling activity completes before
 	// another scaling activity can start.
@@ -723,7 +723,7 @@ type LaunchConfiguration struct {
 	// The creation date and time for the launch configuration.
 	//
 	// CreatedTime is a required field
-	CreatedTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	CreatedTime *time.Time `type:"timestamp" required:"true"`
 
 	// Controls whether the instance is optimized for EBS I/O (true) or not (false).
 	EbsOptimized *bool `type:"boolean"`
@@ -1490,7 +1490,7 @@ type ScheduledUpdateGroupAction struct {
 
 	// The date and time in UTC for the recurring schedule to end. For example,
 	// "2019-06-01T00:00:00Z".
-	EndTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// The maximum number of instances in the Auto Scaling group.
 	MaxSize *int64 `type:"integer"`
@@ -1511,10 +1511,10 @@ type ScheduledUpdateGroupAction struct {
 	ScheduledActionName *string `min:"1" type:"string"`
 
 	// The date and time in UTC for this action to start. For example, "2019-06-01T00:00:00Z".
-	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	StartTime *time.Time `type:"timestamp"`
 
 	// This parameter is deprecated.
-	Time *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	Time *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -1536,7 +1536,7 @@ type ScheduledUpdateGroupActionRequest struct {
 
 	// The date and time for the recurring schedule to end. Amazon EC2 Auto Scaling
 	// does not perform the action after this time.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// The maximum number of instances in the Auto Scaling group.
 	MaxSize *int64 `type:"integer"`
@@ -1567,7 +1567,7 @@ type ScheduledUpdateGroupActionRequest struct {
 	//
 	// If you try to schedule the action in the past, Amazon EC2 Auto Scaling returns
 	// an error message.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	StartTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

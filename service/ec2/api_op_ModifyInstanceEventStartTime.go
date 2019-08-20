@@ -33,7 +33,7 @@ type ModifyInstanceEventStartTimeInput struct {
 	// The new date and time when the event will take place.
 	//
 	// NotBefore is a required field
-	NotBefore *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	NotBefore *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation

@@ -414,7 +414,7 @@ type ActiveViolation struct {
 	Behavior *Behavior `locationName:"behavior" type:"structure"`
 
 	// The time the most recent violation occurred.
-	LastViolationTime *time.Time `locationName:"lastViolationTime" type:"timestamp" timestampFormat:"unix"`
+	LastViolationTime *time.Time `locationName:"lastViolationTime" type:"timestamp"`
 
 	// The value of the metric (the measurement) which caused the most recent violation.
 	LastViolationValue *MetricValue `locationName:"lastViolationValue" type:"structure"`
@@ -429,7 +429,7 @@ type ActiveViolation struct {
 	ViolationId *string `locationName:"violationId" min:"1" type:"string"`
 
 	// The time the violation started.
-	ViolationStartTime *time.Time `locationName:"violationStartTime" type:"timestamp" timestampFormat:"unix"`
+	ViolationStartTime *time.Time `locationName:"violationStartTime" type:"timestamp"`
 }
 
 // String returns the string representation
@@ -449,7 +449,8 @@ func (s ActiveViolation) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastViolationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastViolationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastViolationTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.LastViolationValue != nil {
 		v := s.LastViolationValue
@@ -479,7 +480,8 @@ func (s ActiveViolation) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ViolationStartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "violationStartTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "violationStartTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -724,7 +726,7 @@ type AuditFinding struct {
 	CheckName *string `locationName:"checkName" type:"string"`
 
 	// The time the result (finding) was discovered.
-	FindingTime *time.Time `locationName:"findingTime" type:"timestamp" timestampFormat:"unix"`
+	FindingTime *time.Time `locationName:"findingTime" type:"timestamp"`
 
 	// The resource that was found to be non-compliant with the audit check.
 	NonCompliantResource *NonCompliantResource `locationName:"nonCompliantResource" type:"structure"`
@@ -745,7 +747,7 @@ type AuditFinding struct {
 	TaskId *string `locationName:"taskId" min:"1" type:"string"`
 
 	// The time the audit started.
-	TaskStartTime *time.Time `locationName:"taskStartTime" type:"timestamp" timestampFormat:"unix"`
+	TaskStartTime *time.Time `locationName:"taskStartTime" type:"timestamp"`
 }
 
 // String returns the string representation
@@ -765,7 +767,8 @@ func (s AuditFinding) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.FindingTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "findingTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "findingTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.NonCompliantResource != nil {
 		v := s.NonCompliantResource
@@ -813,7 +816,8 @@ func (s AuditFinding) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.TaskStartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "taskStartTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "taskStartTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -1038,10 +1042,10 @@ type AuthorizerDescription struct {
 	AuthorizerName *string `locationName:"authorizerName" min:"1" type:"string"`
 
 	// The UNIX timestamp of when the authorizer was created.
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
 
 	// The UNIX timestamp of when the authorizer was last updated.
-	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp" timestampFormat:"unix"`
+	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp"`
 
 	// The status of the authorizer.
 	Status AuthorizerStatus `locationName:"status" type:"string" enum:"true"`
@@ -1083,13 +1087,15 @@ func (s AuthorizerDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.LastModifiedDate != nil {
 		v := *s.LastModifiedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastModifiedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastModifiedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status
@@ -1355,7 +1361,7 @@ type BillingGroupMetadata struct {
 	_ struct{} `type:"structure"`
 
 	// The date the billing group was created.
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
 }
 
 // String returns the string representation
@@ -1369,7 +1375,8 @@ func (s BillingGroupMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -1409,7 +1416,7 @@ type CACertificate struct {
 	CertificateId *string `locationName:"certificateId" min:"64" type:"string"`
 
 	// The date the CA certificate was created.
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
 
 	// The status of the CA certificate.
 	//
@@ -1440,7 +1447,8 @@ func (s CACertificate) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status
@@ -1469,7 +1477,7 @@ type CACertificateDescription struct {
 	CertificatePem *string `locationName:"certificatePem" min:"1" type:"string"`
 
 	// The date the CA certificate was created.
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
 
 	// The customer version of the CA certificate.
 	CustomerVersion *int64 `locationName:"customerVersion" min:"1" type:"integer"`
@@ -1478,7 +1486,7 @@ type CACertificateDescription struct {
 	GenerationId *string `locationName:"generationId" type:"string"`
 
 	// The date the CA certificate was last modified.
-	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp" timestampFormat:"unix"`
+	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp"`
 
 	// The owner of the CA certificate.
 	OwnedBy *string `locationName:"ownedBy" min:"12" type:"string"`
@@ -1525,7 +1533,8 @@ func (s CACertificateDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CustomerVersion != nil {
 		v := *s.CustomerVersion
@@ -1543,7 +1552,8 @@ func (s CACertificateDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastModifiedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastModifiedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastModifiedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.OwnedBy != nil {
 		v := *s.OwnedBy
@@ -1578,7 +1588,7 @@ type Certificate struct {
 	CertificateId *string `locationName:"certificateId" min:"64" type:"string"`
 
 	// The date and time the certificate was created.
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
 
 	// The status of the certificate.
 	//
@@ -1609,7 +1619,8 @@ func (s Certificate) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status
@@ -1637,7 +1648,7 @@ type CertificateDescription struct {
 	CertificatePem *string `locationName:"certificatePem" min:"1" type:"string"`
 
 	// The date and time the certificate was created.
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
 
 	// The customer version of the certificate.
 	CustomerVersion *int64 `locationName:"customerVersion" min:"1" type:"integer"`
@@ -1646,7 +1657,7 @@ type CertificateDescription struct {
 	GenerationId *string `locationName:"generationId" type:"string"`
 
 	// The date and time the certificate was last modified.
-	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp" timestampFormat:"unix"`
+	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp"`
 
 	// The ID of the AWS account that owns the certificate.
 	OwnedBy *string `locationName:"ownedBy" min:"12" type:"string"`
@@ -1699,7 +1710,8 @@ func (s CertificateDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CustomerVersion != nil {
 		v := *s.CustomerVersion
@@ -1717,7 +1729,8 @@ func (s CertificateDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastModifiedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastModifiedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastModifiedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.OwnedBy != nil {
 		v := *s.OwnedBy
@@ -1757,10 +1770,10 @@ type CertificateValidity struct {
 	_ struct{} `type:"structure"`
 
 	// The certificate is not valid after this date.
-	NotAfter *time.Time `locationName:"notAfter" type:"timestamp" timestampFormat:"unix"`
+	NotAfter *time.Time `locationName:"notAfter" type:"timestamp"`
 
 	// The certificate is not valid before this date.
-	NotBefore *time.Time `locationName:"notBefore" type:"timestamp" timestampFormat:"unix"`
+	NotBefore *time.Time `locationName:"notBefore" type:"timestamp"`
 }
 
 // String returns the string representation
@@ -1774,13 +1787,15 @@ func (s CertificateValidity) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NotAfter
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "notAfter", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "notAfter",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.NotBefore != nil {
 		v := *s.NotBefore
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "notBefore", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "notBefore",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -3071,10 +3086,10 @@ type Job struct {
 	Comment *string `locationName:"comment" type:"string"`
 
 	// The time, in seconds since the epoch, when the job was completed.
-	CompletedAt *time.Time `locationName:"completedAt" type:"timestamp" timestampFormat:"unix"`
+	CompletedAt *time.Time `locationName:"completedAt" type:"timestamp"`
 
 	// The time, in seconds since the epoch, when the job was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// A short text description of the job.
 	Description *string `locationName:"description" type:"string"`
@@ -3096,7 +3111,7 @@ type Job struct {
 	JobProcessDetails *JobProcessDetails `locationName:"jobProcessDetails" type:"structure"`
 
 	// The time, in seconds since the epoch, when the job was last updated.
-	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
 
 	// Configuration for pre-signed S3 URLs.
 	PresignedUrlConfig *PresignedUrlConfig `locationName:"presignedUrlConfig" type:"structure"`
@@ -3149,13 +3164,15 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CompletedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "completedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "completedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CreatedAt != nil {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -3197,7 +3214,8 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastUpdatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.PresignedUrlConfig != nil {
 		v := s.PresignedUrlConfig
@@ -3269,13 +3287,13 @@ type JobExecution struct {
 	JobId *string `locationName:"jobId" min:"1" type:"string"`
 
 	// The time, in seconds since the epoch, when the job execution was last updated.
-	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
 
 	// The time, in seconds since the epoch, when the job execution was queued.
-	QueuedAt *time.Time `locationName:"queuedAt" type:"timestamp" timestampFormat:"unix"`
+	QueuedAt *time.Time `locationName:"queuedAt" type:"timestamp"`
 
 	// The time, in seconds since the epoch, when the job execution started.
-	StartedAt *time.Time `locationName:"startedAt" type:"timestamp" timestampFormat:"unix"`
+	StartedAt *time.Time `locationName:"startedAt" type:"timestamp"`
 
 	// The status of the job execution (IN_PROGRESS, QUEUED, FAILED, SUCCEEDED,
 	// TIMED_OUT, CANCELED, or REJECTED).
@@ -3327,19 +3345,22 @@ func (s JobExecution) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastUpdatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.QueuedAt != nil {
 		v := *s.QueuedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "queuedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "queuedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.StartedAt != nil {
 		v := *s.StartedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "startedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "startedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status
@@ -3408,13 +3429,13 @@ type JobExecutionSummary struct {
 	ExecutionNumber *int64 `locationName:"executionNumber" type:"long"`
 
 	// The time, in seconds since the epoch, when the job execution was last updated.
-	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
 
 	// The time, in seconds since the epoch, when the job execution was queued.
-	QueuedAt *time.Time `locationName:"queuedAt" type:"timestamp" timestampFormat:"unix"`
+	QueuedAt *time.Time `locationName:"queuedAt" type:"timestamp"`
 
 	// The time, in seconds since the epoch, when the job execution started.
-	StartedAt *time.Time `locationName:"startedAt" type:"timestamp" timestampFormat:"unix"`
+	StartedAt *time.Time `locationName:"startedAt" type:"timestamp"`
 
 	// The status of the job execution.
 	Status JobExecutionStatus `locationName:"status" type:"string" enum:"true"`
@@ -3437,19 +3458,22 @@ func (s JobExecutionSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastUpdatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.QueuedAt != nil {
 		v := *s.QueuedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "queuedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "queuedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.StartedAt != nil {
 		v := *s.StartedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "startedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "startedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status
@@ -3690,10 +3714,10 @@ type JobSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The time, in seconds since the epoch, when the job completed.
-	CompletedAt *time.Time `locationName:"completedAt" type:"timestamp" timestampFormat:"unix"`
+	CompletedAt *time.Time `locationName:"completedAt" type:"timestamp"`
 
 	// The time, in seconds since the epoch, when the job was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The job ARN.
 	JobArn *string `locationName:"jobArn" type:"string"`
@@ -3702,7 +3726,7 @@ type JobSummary struct {
 	JobId *string `locationName:"jobId" min:"1" type:"string"`
 
 	// The time, in seconds since the epoch, when the job was last updated.
-	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
 
 	// The job summary status.
 	Status JobStatus `locationName:"status" type:"string" enum:"true"`
@@ -3730,13 +3754,15 @@ func (s JobSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CompletedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "completedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "completedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CreatedAt != nil {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.JobArn != nil {
 		v := *s.JobArn
@@ -3754,7 +3780,8 @@ func (s JobSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastUpdatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status
@@ -4252,7 +4279,7 @@ type OTAUpdateInfo struct {
 	AwsJobExecutionsRolloutConfig *AwsJobExecutionsRolloutConfig `locationName:"awsJobExecutionsRolloutConfig" type:"structure"`
 
 	// The date when the OTA update was created.
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
 
 	// A description of the OTA update.
 	Description *string `locationName:"description" type:"string"`
@@ -4261,7 +4288,7 @@ type OTAUpdateInfo struct {
 	ErrorInfo *ErrorInfo `locationName:"errorInfo" type:"structure"`
 
 	// The date when the OTA update was last updated.
-	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp" timestampFormat:"unix"`
+	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp"`
 
 	// The OTA update ARN.
 	OtaUpdateArn *string `locationName:"otaUpdateArn" type:"string"`
@@ -4328,7 +4355,8 @@ func (s OTAUpdateInfo) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -4346,7 +4374,8 @@ func (s OTAUpdateInfo) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastModifiedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastModifiedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastModifiedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.OtaUpdateArn != nil {
 		v := *s.OtaUpdateArn
@@ -4404,7 +4433,7 @@ type OTAUpdateSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The date when the OTA update was created.
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
 
 	// The OTA update ARN.
 	OtaUpdateArn *string `locationName:"otaUpdateArn" type:"string"`
@@ -4424,7 +4453,8 @@ func (s OTAUpdateSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.OtaUpdateArn != nil {
 		v := *s.OtaUpdateArn
@@ -4452,10 +4482,10 @@ type OutgoingCertificate struct {
 	CertificateId *string `locationName:"certificateId" min:"64" type:"string"`
 
 	// The certificate creation date.
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
 
 	// The date the transfer was initiated.
-	TransferDate *time.Time `locationName:"transferDate" type:"timestamp" timestampFormat:"unix"`
+	TransferDate *time.Time `locationName:"transferDate" type:"timestamp"`
 
 	// The transfer message.
 	TransferMessage *string `locationName:"transferMessage" type:"string"`
@@ -4487,13 +4517,15 @@ func (s OutgoingCertificate) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.TransferDate != nil {
 		v := *s.TransferDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "transferDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "transferDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.TransferMessage != nil {
 		v := *s.TransferMessage
@@ -4548,7 +4580,7 @@ type PolicyVersion struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time the policy was created.
-	CreateDate *time.Time `locationName:"createDate" type:"timestamp" timestampFormat:"unix"`
+	CreateDate *time.Time `locationName:"createDate" type:"timestamp"`
 
 	// Specifies whether the policy version is the default.
 	IsDefaultVersion *bool `locationName:"isDefaultVersion" type:"boolean"`
@@ -4568,7 +4600,8 @@ func (s PolicyVersion) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreateDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.IsDefaultVersion != nil {
 		v := *s.IsDefaultVersion
@@ -5024,13 +5057,13 @@ type RoleAliasDescription struct {
 	_ struct{} `type:"structure"`
 
 	// The UNIX timestamp of when the role alias was created.
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
 
 	// The number of seconds for which the credential is valid.
 	CredentialDurationSeconds *int64 `locationName:"credentialDurationSeconds" min:"900" type:"integer"`
 
 	// The UNIX timestamp of when the role alias was last modified.
-	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp" timestampFormat:"unix"`
+	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp"`
 
 	// The role alias owner.
 	Owner *string `locationName:"owner" min:"12" type:"string"`
@@ -5056,7 +5089,8 @@ func (s RoleAliasDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CredentialDurationSeconds != nil {
 		v := *s.CredentialDurationSeconds
@@ -5068,7 +5102,8 @@ func (s RoleAliasDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastModifiedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastModifiedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastModifiedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Owner != nil {
 		v := *s.Owner
@@ -5956,7 +5991,7 @@ type StreamInfo struct {
 	_ struct{} `type:"structure"`
 
 	// The date when the stream was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The description of the stream.
 	Description *string `locationName:"description" type:"string"`
@@ -5965,7 +6000,7 @@ type StreamInfo struct {
 	Files []StreamFile `locationName:"files" min:"1" type:"list"`
 
 	// The date when the stream was last updated.
-	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
 
 	// An IAM role AWS IoT assumes to access your S3 files.
 	RoleArn *string `locationName:"roleArn" min:"20" type:"string"`
@@ -5991,7 +6026,8 @@ func (s StreamInfo) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -6015,7 +6051,8 @@ func (s StreamInfo) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastUpdatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.RoleArn != nil {
 		v := *s.RoleArn
@@ -6515,7 +6552,7 @@ type ThingGroupMetadata struct {
 	_ struct{} `type:"structure"`
 
 	// The UNIX timestamp of when the thing group was created.
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
 
 	// The parent thing group name.
 	ParentGroupName *string `locationName:"parentGroupName" min:"1" type:"string"`
@@ -6535,7 +6572,8 @@ func (s ThingGroupMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ParentGroupName != nil {
 		v := *s.ParentGroupName
@@ -6712,14 +6750,14 @@ type ThingTypeMetadata struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time when the thing type was created.
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
 
 	// Whether the thing type is deprecated. If true, no new things could be associated
 	// with this type.
 	Deprecated *bool `locationName:"deprecated" type:"boolean"`
 
 	// The date and time when the thing type was deprecated.
-	DeprecationDate *time.Time `locationName:"deprecationDate" type:"timestamp" timestampFormat:"unix"`
+	DeprecationDate *time.Time `locationName:"deprecationDate" type:"timestamp"`
 }
 
 // String returns the string representation
@@ -6733,7 +6771,8 @@ func (s ThingTypeMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Deprecated != nil {
 		v := *s.Deprecated
@@ -6745,7 +6784,8 @@ func (s ThingTypeMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DeprecationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "deprecationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "deprecationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -6833,7 +6873,7 @@ type TopicRule struct {
 	AwsIotSqlVersion *string `locationName:"awsIotSqlVersion" type:"string"`
 
 	// The date and time the rule was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The description of the rule.
 	Description *string `locationName:"description" type:"string"`
@@ -6881,7 +6921,8 @@ func (s TopicRule) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -6921,7 +6962,7 @@ type TopicRuleListItem struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time the rule was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The rule ARN.
 	RuleArn *string `locationName:"ruleArn" type:"string"`
@@ -6947,7 +6988,8 @@ func (s TopicRuleListItem) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.RuleArn != nil {
 		v := *s.RuleArn
@@ -7092,16 +7134,16 @@ type TransferData struct {
 	_ struct{} `type:"structure"`
 
 	// The date the transfer was accepted.
-	AcceptDate *time.Time `locationName:"acceptDate" type:"timestamp" timestampFormat:"unix"`
+	AcceptDate *time.Time `locationName:"acceptDate" type:"timestamp"`
 
 	// The date the transfer was rejected.
-	RejectDate *time.Time `locationName:"rejectDate" type:"timestamp" timestampFormat:"unix"`
+	RejectDate *time.Time `locationName:"rejectDate" type:"timestamp"`
 
 	// The reason why the transfer was rejected.
 	RejectReason *string `locationName:"rejectReason" type:"string"`
 
 	// The date the transfer took place.
-	TransferDate *time.Time `locationName:"transferDate" type:"timestamp" timestampFormat:"unix"`
+	TransferDate *time.Time `locationName:"transferDate" type:"timestamp"`
 
 	// The transfer message.
 	TransferMessage *string `locationName:"transferMessage" type:"string"`
@@ -7118,13 +7160,15 @@ func (s TransferData) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.AcceptDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "acceptDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "acceptDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.RejectDate != nil {
 		v := *s.RejectDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "rejectDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "rejectDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.RejectReason != nil {
 		v := *s.RejectReason
@@ -7136,7 +7180,8 @@ func (s TransferData) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.TransferDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "transferDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "transferDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.TransferMessage != nil {
 		v := *s.TransferMessage
@@ -7188,7 +7233,7 @@ type ViolationEvent struct {
 	ThingName *string `locationName:"thingName" min:"1" type:"string"`
 
 	// The time the violation event occurred.
-	ViolationEventTime *time.Time `locationName:"violationEventTime" type:"timestamp" timestampFormat:"unix"`
+	ViolationEventTime *time.Time `locationName:"violationEventTime" type:"timestamp"`
 
 	// The type of violation event.
 	ViolationEventType ViolationEventType `locationName:"violationEventType" type:"string" enum:"true"`
@@ -7232,7 +7277,8 @@ func (s ViolationEvent) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ViolationEventTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "violationEventTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "violationEventTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if len(s.ViolationEventType) > 0 {
 		v := s.ViolationEventType

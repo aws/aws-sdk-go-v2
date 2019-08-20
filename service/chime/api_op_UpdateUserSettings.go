@@ -65,6 +65,7 @@ func (s *UpdateUserSettingsInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateUserSettingsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.UserSettings != nil {
 		v := s.UserSettings

@@ -59,7 +59,7 @@ type ApiKey struct {
 	_ struct{} `type:"structure"`
 
 	// The timestamp when the API Key was created.
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix"`
+	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp"`
 
 	// An AWS Marketplace customer identifier , when integrating with the AWS SaaS
 	// Marketplace.
@@ -75,7 +75,7 @@ type ApiKey struct {
 	Id *string `locationName:"id" type:"string"`
 
 	// The timestamp when the API Key was last updated.
-	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp"`
 
 	// The name of the API Key.
 	Name *string `locationName:"name" type:"string"`
@@ -101,7 +101,8 @@ func (s ApiKey) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CustomerId != nil {
 		v := *s.CustomerId
@@ -131,7 +132,8 @@ func (s ApiKey) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastUpdatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdatedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -503,13 +505,13 @@ type Certificate struct {
 	ClientCertificateId *string `locationName:"clientCertificateId" type:"string"`
 
 	// The timestamp when the client certificate was created.
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix"`
+	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp"`
 
 	// The description of the client certificate.
 	Description *string `locationName:"description" type:"string"`
 
 	// The timestamp when the client certificate will expire.
-	ExpirationDate *time.Time `locationName:"expirationDate" type:"timestamp" timestampFormat:"unix"`
+	ExpirationDate *time.Time `locationName:"expirationDate" type:"timestamp"`
 
 	// The PEM-encoded public key of the client certificate, which can be used to
 	// configure certificate authentication in the integration endpoint .
@@ -536,7 +538,8 @@ func (s Certificate) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -548,7 +551,8 @@ func (s Certificate) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ExpirationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "expirationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "expirationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.PemEncodedCertificate != nil {
 		v := *s.PemEncodedCertificate
@@ -589,7 +593,7 @@ type Deployment struct {
 	ApiSummary map[string]map[string]MethodSnapshot `locationName:"apiSummary" type:"map"`
 
 	// The date and time that the deployment resource was created.
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix"`
+	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp"`
 
 	// The description for the deployment resource.
 	Description *string `locationName:"description" type:"string"`
@@ -626,7 +630,8 @@ func (s Deployment) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -873,7 +878,7 @@ type DocumentationVersion struct {
 	_ struct{} `type:"structure"`
 
 	// The date when the API documentation snapshot is created.
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix"`
+	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp"`
 
 	// The description of the API documentation snapshot.
 	Description *string `locationName:"description" type:"string"`
@@ -893,7 +898,8 @@ func (s DocumentationVersion) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -936,7 +942,7 @@ type DomainName struct {
 
 	// The timestamp when the certificate that was used by edge-optimized endpoint
 	// for this domain name was uploaded.
-	CertificateUploadDate *time.Time `locationName:"certificateUploadDate" type:"timestamp" timestampFormat:"unix"`
+	CertificateUploadDate *time.Time `locationName:"certificateUploadDate" type:"timestamp"`
 
 	// The domain name of the Amazon CloudFront distribution associated with this
 	// custom domain name for an edge-optimized endpoint. You set up this association
@@ -1018,7 +1024,8 @@ func (s DomainName) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CertificateUploadDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "certificateUploadDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "certificateUploadDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DistributionDomainName != nil {
 		v := *s.DistributionDomainName
@@ -2627,7 +2634,7 @@ type RestApi struct {
 	BinaryMediaTypes []string `locationName:"binaryMediaTypes" type:"list"`
 
 	// The timestamp when the API was created.
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix"`
+	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp"`
 
 	// The API's description.
 	Description *string `locationName:"description" type:"string"`
@@ -2694,7 +2701,8 @@ func (s RestApi) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -2909,7 +2917,7 @@ type Stage struct {
 	ClientCertificateId *string `locationName:"clientCertificateId" type:"string"`
 
 	// The timestamp when the stage was created.
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix"`
+	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp"`
 
 	// The identifier of the Deployment that the stage points to.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
@@ -2921,7 +2929,7 @@ type Stage struct {
 	DocumentationVersion *string `locationName:"documentationVersion" type:"string"`
 
 	// The timestamp when the stage last updated.
-	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp"`
 
 	// A map that defines the method settings for a Stage resource. Keys (designated
 	// as /{method_setting_key below) are method paths defined as {resource_path}/{http_method}
@@ -2996,7 +3004,8 @@ func (s Stage) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DeploymentId != nil {
 		v := *s.DeploymentId
@@ -3020,7 +3029,8 @@ func (s Stage) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastUpdatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdatedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdatedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.MethodSettings != nil {
 		v := s.MethodSettings

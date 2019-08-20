@@ -34,7 +34,7 @@ type AffectedEntity struct {
 	EventArn *string `locationName:"eventArn" type:"string"`
 
 	// The most recent time that the entity was updated.
-	LastUpdatedTime *time.Time `locationName:"lastUpdatedTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedTime *time.Time `locationName:"lastUpdatedTime" type:"timestamp"`
 
 	// The most recent status of the entity affected by the event. The possible
 	// values are IMPAIRED, UNIMPAIRED, and UNKNOWN.
@@ -60,10 +60,10 @@ type DateTimeRange struct {
 	_ struct{} `type:"structure"`
 
 	// The starting date and time of a time range.
-	From *time.Time `locationName:"from" type:"timestamp" timestampFormat:"unix"`
+	From *time.Time `locationName:"from" type:"timestamp"`
 
 	// The ending date and time of a time range.
-	To *time.Time `locationName:"to" type:"timestamp" timestampFormat:"unix"`
+	To *time.Time `locationName:"to" type:"timestamp"`
 }
 
 // String returns the string representation
@@ -166,7 +166,7 @@ type Event struct {
 	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
 
 	// The date and time that the event ended.
-	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
 
 	// The category of the event. Possible values are issue, scheduledChange, and
 	// accountNotification.
@@ -177,7 +177,7 @@ type Event struct {
 	EventTypeCode *string `locationName:"eventTypeCode" min:"3" type:"string"`
 
 	// The most recent date and time that the event was updated.
-	LastUpdatedTime *time.Time `locationName:"lastUpdatedTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedTime *time.Time `locationName:"lastUpdatedTime" type:"timestamp"`
 
 	// The AWS region name of the event.
 	Region *string `locationName:"region" type:"string"`
@@ -186,7 +186,7 @@ type Event struct {
 	Service *string `locationName:"service" min:"2" type:"string"`
 
 	// The date and time that the event began.
-	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
 
 	// The most recent status of the event. Possible values are open, closed, and
 	// upcoming.

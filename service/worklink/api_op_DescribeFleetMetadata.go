@@ -45,7 +45,7 @@ func (s *DescribeFleetMetadataInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeFleetMetadataInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.FleetArn != nil {
 		v := *s.FleetArn
@@ -64,7 +64,7 @@ type DescribeFleetMetadataOutput struct {
 	CompanyCode *string `min:"1" type:"string"`
 
 	// The time that the fleet was created.
-	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTime *time.Time `type:"timestamp"`
 
 	// The name to display.
 	DisplayName *string `type:"string"`
@@ -76,7 +76,7 @@ type DescribeFleetMetadataOutput struct {
 	FleetStatus FleetStatus `type:"string" enum:"true"`
 
 	// The time that the fleet was last updated.
-	LastUpdatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedTime *time.Time `type:"timestamp"`
 
 	// The option to optimize for better performance by routing traffic through
 	// the closest AWS Region to users, which may be outside of your home Region.
@@ -100,7 +100,8 @@ func (s DescribeFleetMetadataOutput) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.CreatedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DisplayName != nil {
 		v := *s.DisplayName
@@ -124,7 +125,8 @@ func (s DescribeFleetMetadataOutput) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.LastUpdatedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastUpdatedTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.OptimizeForEndUserLocation != nil {
 		v := *s.OptimizeForEndUserLocation

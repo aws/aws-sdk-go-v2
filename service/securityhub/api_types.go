@@ -2424,7 +2424,7 @@ type Invitation struct {
 	InvitationId *string `type:"string"`
 
 	// The timestamp of when the invitation was sent.
-	InvitedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	InvitedAt *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The current status of the association between member and master accounts.
 	MemberStatus *string `type:"string"`
@@ -2453,7 +2453,8 @@ func (s Invitation) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.InvitedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "InvitedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "InvitedAt",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.MemberStatus != nil {
 		v := *s.MemberStatus
@@ -2639,7 +2640,7 @@ type Member struct {
 
 	// A timestamp for the date and time when the invitation was sent to the member
 	// account.
-	InvitedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	InvitedAt *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The AWS account ID of the Security Hub master account associated with this
 	// member account.
@@ -2650,7 +2651,7 @@ type Member struct {
 	MemberStatus *string `type:"string"`
 
 	// The timestamp for the date and time when the member account was updated.
-	UpdatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	UpdatedAt *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 }
 
 // String returns the string representation
@@ -2676,7 +2677,8 @@ func (s Member) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.InvitedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "InvitedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "InvitedAt",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.MasterId != nil {
 		v := *s.MasterId
@@ -2694,7 +2696,8 @@ func (s Member) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.UpdatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "UpdatedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "UpdatedAt",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }

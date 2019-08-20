@@ -75,7 +75,7 @@ type DescribeEnvironmentHealthOutput struct {
 	InstancesHealth *InstanceHealthSummary `type:"structure"`
 
 	// The date and time that the health information was retrieved.
-	RefreshedAt *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	RefreshedAt *time.Time `type:"timestamp"`
 
 	// The environment's operational status. Ready, Launching, Updating, Terminating,
 	// or Terminated.

@@ -109,7 +109,7 @@ type DescribeStackDriftDetectionStatusOutput struct {
 	// Time at which the stack drift detection operation was initiated.
 	//
 	// Timestamp is a required field
-	Timestamp *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	Timestamp *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation

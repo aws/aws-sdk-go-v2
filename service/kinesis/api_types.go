@@ -29,7 +29,7 @@ type Consumer struct {
 	ConsumerARN *string `min:"1" type:"string" required:"true"`
 
 	// ConsumerCreationTimestamp is a required field
-	ConsumerCreationTimestamp *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	ConsumerCreationTimestamp *time.Time `type:"timestamp" required:"true"`
 
 	// The name of the consumer is something you choose when you register the consumer.
 	//
@@ -64,7 +64,7 @@ type ConsumerDescription struct {
 	ConsumerARN *string `min:"1" type:"string" required:"true"`
 
 	// ConsumerCreationTimestamp is a required field
-	ConsumerCreationTimestamp *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	ConsumerCreationTimestamp *time.Time `type:"timestamp" required:"true"`
 
 	// The name of the consumer is something you choose when you register the consumer.
 	//
@@ -241,7 +241,7 @@ type Record struct {
 	_ struct{} `type:"structure"`
 
 	// The approximate time that the record was inserted into the stream.
-	ApproximateArrivalTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ApproximateArrivalTimestamp *time.Time `type:"timestamp"`
 
 	// The data blob. The data in the blob is both opaque and immutable to Kinesis
 	// Data Streams, which does not inspect, interpret, or change the data in the
@@ -390,7 +390,7 @@ type StreamDescription struct {
 	// The approximate time that the stream was created.
 	//
 	// StreamCreationTimestamp is a required field
-	StreamCreationTimestamp *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	StreamCreationTimestamp *time.Time `type:"timestamp" required:"true"`
 
 	// The name of the stream being described.
 	//
@@ -477,7 +477,7 @@ type StreamDescriptionSummary struct {
 	// The approximate time that the stream was created.
 	//
 	// StreamCreationTimestamp is a required field
-	StreamCreationTimestamp *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	StreamCreationTimestamp *time.Time `type:"timestamp" required:"true"`
 
 	// The name of the stream being described.
 	//

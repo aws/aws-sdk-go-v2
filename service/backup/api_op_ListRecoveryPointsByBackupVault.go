@@ -27,10 +27,10 @@ type ListRecoveryPointsByBackupVaultInput struct {
 	ByBackupPlanId *string `location:"querystring" locationName:"backupPlanId" type:"string"`
 
 	// Returns only recovery points that were created after the specified timestamp.
-	ByCreatedAfter *time.Time `location:"querystring" locationName:"createdAfter" type:"timestamp" timestampFormat:"unix"`
+	ByCreatedAfter *time.Time `location:"querystring" locationName:"createdAfter" type:"timestamp"`
 
 	// Returns only recovery points that were created before the specified timestamp.
-	ByCreatedBefore *time.Time `location:"querystring" locationName:"createdBefore" type:"timestamp" timestampFormat:"unix"`
+	ByCreatedBefore *time.Time `location:"querystring" locationName:"createdBefore" type:"timestamp"`
 
 	// Returns only recovery points that match the specified resource Amazon Resource
 	// Name (ARN).
@@ -73,7 +73,7 @@ func (s *ListRecoveryPointsByBackupVaultInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListRecoveryPointsByBackupVaultInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.BackupVaultName != nil {
 		v := *s.BackupVaultName
@@ -91,13 +91,15 @@ func (s ListRecoveryPointsByBackupVaultInput) MarshalFields(e protocol.FieldEnco
 		v := *s.ByCreatedAfter
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "createdAfter", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.QueryTarget, "createdAfter",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.ByCreatedBefore != nil {
 		v := *s.ByCreatedBefore
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "createdBefore", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.QueryTarget, "createdBefore",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.ByResourceArn != nil {
 		v := *s.ByResourceArn

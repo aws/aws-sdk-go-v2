@@ -54,7 +54,7 @@ type DescribeTrainingJobOutput struct {
 	// A timestamp that indicates when the training job was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// To encrypt all communications between ML compute instances in distributed
 	// training, choose True. Encryption provides greater security for distributed
@@ -91,7 +91,7 @@ type DescribeTrainingJobOutput struct {
 	LabelingJobArn *string `type:"string"`
 
 	// A timestamp that indicates when the status of the training job was last modified.
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTime *time.Time `type:"timestamp"`
 
 	// Information about the Amazon S3 location that is configured for storing model
 	// artifacts.
@@ -186,7 +186,7 @@ type DescribeTrainingJobOutput struct {
 	// this time. For successful jobs and stopped jobs, this is the time after model
 	// artifacts are uploaded. For failed jobs, this is the time when Amazon SageMaker
 	// detects a job failure.
-	TrainingEndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TrainingEndTime *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the training job.
 	//
@@ -224,7 +224,7 @@ type DescribeTrainingJobOutput struct {
 	// The start time in CloudWatch Logs might be later than this time. The difference
 	// is due to the time it takes to download the training data and to the size
 	// of the training container.
-	TrainingStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TrainingStartTime *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the associated hyperparameter tuning job
 	// if the training job was launched by a hyperparameter tuning job.

@@ -25,7 +25,7 @@ type DescribeActivitiesInput struct {
 
 	// The timestamp that determines the end time of the activities. The response
 	// includes the activities performed before the specified timestamp.
-	EndTime *time.Time `location:"querystring" locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `location:"querystring" locationName:"endTime" type:"timestamp"`
 
 	// Includes indirect activities. An indirect activity results from a direct
 	// activity performed on a parent resource. For example, sharing a parent folder
@@ -48,7 +48,7 @@ type DescribeActivitiesInput struct {
 
 	// The timestamp that determines the starting time of the activities. The response
 	// includes the activities performed after the specified timestamp.
-	StartTime *time.Time `location:"querystring" locationName:"startTime" type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `location:"querystring" locationName:"startTime" type:"timestamp"`
 
 	// The ID of the user who performed the action. The response includes activities
 	// pertaining to this user. This is an optional parameter and is only applicable
@@ -94,7 +94,7 @@ func (s *DescribeActivitiesInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeActivitiesInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.AuthenticationToken != nil {
 		v := *s.AuthenticationToken
@@ -112,7 +112,8 @@ func (s DescribeActivitiesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.EndTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "endTime", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.QueryTarget, "endTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.IncludeIndirectActivities != nil {
 		v := *s.IncludeIndirectActivities
@@ -148,7 +149,8 @@ func (s DescribeActivitiesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "startTime", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.QueryTarget, "startTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.UserId != nil {
 		v := *s.UserId

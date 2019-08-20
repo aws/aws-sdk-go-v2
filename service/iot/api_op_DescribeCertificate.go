@@ -45,6 +45,7 @@ func (s *DescribeCertificateInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeCertificateInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.CertificateId != nil {
 		v := *s.CertificateId

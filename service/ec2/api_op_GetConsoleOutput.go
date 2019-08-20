@@ -62,7 +62,7 @@ type GetConsoleOutputOutput struct {
 	Output *string `locationName:"output" type:"string"`
 
 	// The time at which the output was last updated.
-	Timestamp *time.Time `locationName:"timestamp" type:"timestamp" timestampFormat:"iso8601"`
+	Timestamp *time.Time `locationName:"timestamp" type:"timestamp"`
 }
 
 // String returns the string representation

@@ -1296,7 +1296,7 @@ type OptionStatus struct {
 	// Timestamp which tells the creation date for the entity.
 	//
 	// CreationDate is a required field
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationDate *time.Time `type:"timestamp" required:"true"`
 
 	// Indicates whether the Elasticsearch domain is being deleted.
 	PendingDeletion *bool `type:"boolean"`
@@ -1309,7 +1309,7 @@ type OptionStatus struct {
 	// Timestamp which tells the last updated time for the entity.
 	//
 	// UpdateDate is a required field
-	UpdateDate *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	UpdateDate *time.Time `type:"timestamp" required:"true"`
 
 	// Specifies the latest version for the entity.
 	UpdateVersion *int64 `type:"integer"`
@@ -1326,7 +1326,8 @@ func (s OptionStatus) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.PendingDeletion != nil {
 		v := *s.PendingDeletion
@@ -1344,7 +1345,8 @@ func (s OptionStatus) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.UpdateDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "UpdateDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "UpdateDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.UpdateVersion != nil {
 		v := *s.UpdateVersion
@@ -1426,7 +1428,7 @@ type ReservedElasticsearchInstance struct {
 	ReservedElasticsearchInstanceOfferingId *string `type:"string"`
 
 	// The time the reservation started.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `type:"timestamp"`
 
 	// The state of the reserved Elasticsearch instance.
 	State *string `type:"string"`
@@ -1513,7 +1515,8 @@ func (s ReservedElasticsearchInstance) MarshalFields(e protocol.FieldEncoder) er
 		v := *s.StartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "StartTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.State != nil {
 		v := *s.State
@@ -1633,7 +1636,7 @@ type ServiceSoftwareOptions struct {
 
 	// Timestamp, in Epoch time, until which you can manually request a service
 	// software update. After this date, we automatically update your service software.
-	AutomatedUpdateDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	AutomatedUpdateDate *time.Time `type:"timestamp"`
 
 	// True if you are able to cancel your service software version update. False
 	// if you are not able to cancel your service software version.
@@ -1668,7 +1671,8 @@ func (s ServiceSoftwareOptions) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.AutomatedUpdateDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AutomatedUpdateDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "AutomatedUpdateDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Cancellable != nil {
 		v := *s.Cancellable
@@ -1941,7 +1945,7 @@ type UpgradeHistory struct {
 
 	// UTC Timestamp at which the Upgrade API call was made in "yyyy-MM-ddTHH:mm:ssZ"
 	// format.
-	StartTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTimestamp *time.Time `type:"timestamp"`
 
 	// A list of UpgradeStepItem s representing information about each step performed
 	// as pard of a specific Upgrade or Upgrade Eligibility Check.
@@ -1973,7 +1977,8 @@ func (s UpgradeHistory) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StartTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "StartTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.StepsList != nil {
 		v := s.StepsList

@@ -88,7 +88,7 @@ type DeleteSecretOutput struct {
 	// The date and time after which this secret can be deleted by Secrets Manager
 	// and can no longer be restored. This value is the date and time of the delete
 	// request plus the number of days specified in RecoveryWindowInDays.
-	DeletionDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DeletionDate *time.Time `type:"timestamp"`
 
 	// The friendly name of the secret that is now scheduled for deletion.
 	Name *string `min:"1" type:"string"`

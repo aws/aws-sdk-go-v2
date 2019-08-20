@@ -25,7 +25,7 @@ type Algorithm struct {
 	AlgorithmImage *AlgorithmImage `locationName:"algorithmImage" type:"structure"`
 
 	// The date and time (in Unix time) that the algorithm was created.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// Specifies the default hyperparameters, their ranges, and whether they are
 	// tunable. A tunable hyperparameter can have its value determined during hyperparameter
@@ -40,7 +40,7 @@ type Algorithm struct {
 	DefaultResourceConfig map[string]string `locationName:"defaultResourceConfig" type:"map"`
 
 	// The date and time (in Unix time) that the algorithm was last updated.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// The name of the algorithm.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -120,13 +120,13 @@ type Campaign struct {
 	CampaignArn *string `locationName:"campaignArn" type:"string"`
 
 	// The date and time (in Unix format) that the campaign was created.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// If a campaign fails, the reason behind the failure.
 	FailureReason *string `locationName:"failureReason" type:"string"`
 
 	// The date and time (in Unix format) that the campaign was last updated.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// Provides a summary of the properties of a campaign update. For a complete
 	// listing, call the DescribeCampaign API.
@@ -167,13 +167,13 @@ type CampaignSummary struct {
 	CampaignArn *string `locationName:"campaignArn" type:"string"`
 
 	// The date and time (in Unix time) that the campaign was created.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// If a campaign fails, the reason behind the failure.
 	FailureReason *string `locationName:"failureReason" type:"string"`
 
 	// The date and time (in Unix time) that the campaign was last updated.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// The name of the campaign.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -200,13 +200,13 @@ type CampaignUpdateSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time (in Unix time) that the campaign update was created.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// If a campaign update fails, the reason behind the failure.
 	FailureReason *string `locationName:"failureReason" type:"string"`
 
 	// The date and time (in Unix time) that the campaign update was last updated.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// Specifies the requested minimum provisioned transactions (recommendations)
 	// per second that Amazon Personalize will support.
@@ -306,7 +306,7 @@ type Dataset struct {
 	_ struct{} `type:"structure"`
 
 	// The creation date and time (in Unix time) of the dataset.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the dataset that you want metadata for.
 	DatasetArn *string `locationName:"datasetArn" type:"string"`
@@ -324,7 +324,7 @@ type Dataset struct {
 	DatasetType *string `locationName:"datasetType" type:"string"`
 
 	// A time stamp that shows when the dataset was updated.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// The name of the dataset.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -360,7 +360,7 @@ type DatasetGroup struct {
 	_ struct{} `type:"structure"`
 
 	// The creation date and time (in Unix time) of the dataset group.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the dataset group.
 	DatasetGroupArn *string `locationName:"datasetGroupArn" type:"string"`
@@ -372,7 +372,7 @@ type DatasetGroup struct {
 	KmsKeyArn *string `locationName:"kmsKeyArn" type:"string"`
 
 	// The last update date and time (in Unix time) of the dataset group.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// The name of the dataset group.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -402,7 +402,7 @@ type DatasetGroupSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time (in Unix time) that the dataset group was created.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the dataset group.
 	DatasetGroupArn *string `locationName:"datasetGroupArn" type:"string"`
@@ -411,7 +411,7 @@ type DatasetGroupSummary struct {
 	FailureReason *string `locationName:"failureReason" type:"string"`
 
 	// The date and time (in Unix time) that the dataset group was last updated.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// The name of the dataset group.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -442,7 +442,7 @@ type DatasetImportJob struct {
 	_ struct{} `type:"structure"`
 
 	// The creation date and time (in Unix time) of the dataset import job.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// The Amazon S3 bucket that contains the training data to import.
 	DataSource *DataSource `locationName:"dataSource" type:"structure"`
@@ -461,7 +461,7 @@ type DatasetImportJob struct {
 	JobName *string `locationName:"jobName" min:"1" type:"string"`
 
 	// The date and time (in Unix time) the dataset was last updated.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// The ARN of the AWS Identity and Access Management (IAM) role that has permissions
 	// to read from the Amazon S3 data source.
@@ -487,7 +487,7 @@ type DatasetImportJobSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time (in Unix time) that the dataset import job was created.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the dataset import job.
 	DatasetImportJobArn *string `locationName:"datasetImportJobArn" type:"string"`
@@ -499,7 +499,7 @@ type DatasetImportJobSummary struct {
 	JobName *string `locationName:"jobName" min:"1" type:"string"`
 
 	// The date and time (in Unix time) that the dataset was last updated.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// The status of the dataset import job.
 	//
@@ -521,10 +521,10 @@ type DatasetSchema struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time (in Unix time) that the schema was created.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// The date and time (in Unix time) that the schema was last updated.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// The name of the schema.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -548,10 +548,10 @@ type DatasetSchemaSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time (in Unix time) that the schema was created.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// The date and time (in Unix time) that the schema was last updated.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// The name of the schema.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -572,7 +572,7 @@ type DatasetSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time (in Unix time) that the dataset was created.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the dataset.
 	DatasetArn *string `locationName:"datasetArn" type:"string"`
@@ -589,7 +589,7 @@ type DatasetSummary struct {
 	DatasetType *string `locationName:"datasetType" type:"string"`
 
 	// The date and time (in Unix time) that the dataset was last updated.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// The name of the dataset.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -711,7 +711,7 @@ type EventTracker struct {
 	AccountId *string `locationName:"accountId" type:"string"`
 
 	// The date and time (in Unix format) that the event tracker was created.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the dataset group that receives the event
 	// data.
@@ -721,7 +721,7 @@ type EventTracker struct {
 	EventTrackerArn *string `locationName:"eventTrackerArn" type:"string"`
 
 	// The date and time (in Unix time) that the event tracker was last updated.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// The name of the event tracker.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -753,13 +753,13 @@ type EventTrackerSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time (in Unix time) that the event tracker was created.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the event tracker.
 	EventTrackerArn *string `locationName:"eventTrackerArn" type:"string"`
 
 	// The date and time (in Unix time) that the event tracker was last updated.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// The name of the event tracker.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -786,7 +786,7 @@ type FeatureTransformation struct {
 	_ struct{} `type:"structure"`
 
 	// The creation date and time (in Unix time) of the feature transformation.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// Provides the default parameters for feature transformation.
 	DefaultParameters map[string]string `locationName:"defaultParameters" type:"map"`
@@ -795,7 +795,7 @@ type FeatureTransformation struct {
 	FeatureTransformationArn *string `locationName:"featureTransformationArn" type:"string"`
 
 	// The last update date and time (in Unix time) of the feature transformation.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// The name of the feature transformation.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -977,7 +977,7 @@ type Recipe struct {
 	AlgorithmArn *string `locationName:"algorithmArn" type:"string"`
 
 	// The date and time (in Unix format) that the recipe was created.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// The description of the recipe.
 	Description *string `locationName:"description" type:"string"`
@@ -986,7 +986,7 @@ type Recipe struct {
 	FeatureTransformationArn *string `locationName:"featureTransformationArn" type:"string"`
 
 	// The date and time (in Unix format) that the recipe was last updated.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// The name of the recipe.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -1019,10 +1019,10 @@ type RecipeSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time (in Unix time) that the recipe was created.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// The date and time (in Unix time) that the recipe was last updated.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// The name of the recipe.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -1049,7 +1049,7 @@ type Solution struct {
 	AutoMLResult *AutoMLResult `locationName:"autoMLResult" type:"structure"`
 
 	// The creation date and time (in Unix time) of the solution.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the dataset group that provides the training
 	// data.
@@ -1060,7 +1060,7 @@ type Solution struct {
 	EventType *string `locationName:"eventType" type:"string"`
 
 	// The date and time (in Unix time) that the solution was last updated.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// Describes the latest version of the solution, including the status and the
 	// ARN.
@@ -1155,10 +1155,10 @@ type SolutionSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time (in Unix time) that the solution was created.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// The date and time (in Unix time) that the solution was last updated.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// The name of the solution.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -1187,7 +1187,7 @@ type SolutionVersion struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time (in Unix time) that this version of the solution was created.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the dataset group providing the training
 	// data.
@@ -1201,7 +1201,7 @@ type SolutionVersion struct {
 	FailureReason *string `locationName:"failureReason" type:"string"`
 
 	// The date and time (in Unix time) that the solution was last updated.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// When true, Amazon Personalize performs a search for the most optimal recipe
 	// according to the solution configuration. When false (the default), Amazon
@@ -1244,13 +1244,13 @@ type SolutionVersionSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time (in Unix time) that this version of a solution was created.
-	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp" timestampFormat:"unix"`
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
 
 	// If a solution version fails, the reason behind the failure.
 	FailureReason *string `locationName:"failureReason" type:"string"`
 
 	// The date and time (in Unix time) that the solution version was last updated.
-	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the solution version.
 	SolutionVersionArn *string `locationName:"solutionVersionArn" type:"string"`

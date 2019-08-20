@@ -54,7 +54,7 @@ type PutObjectInput struct {
 	ContentType *string `location:"header" locationName:"Content-Type" type:"string"`
 
 	// The date and time at which the object is no longer cacheable.
-	Expires *time.Time `location:"header" locationName:"Expires" type:"timestamp" timestampFormat:"rfc822"`
+	Expires *time.Time `location:"header" locationName:"Expires" type:"timestamp"`
 
 	// Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object.
 	GrantFullControl *string `location:"header" locationName:"x-amz-grant-full-control" type:"string"`
@@ -83,7 +83,7 @@ type PutObjectInput struct {
 	ObjectLockMode ObjectLockMode `location:"header" locationName:"x-amz-object-lock-mode" type:"string" enum:"true"`
 
 	// The date and time when you want this object's object lock to expire.
-	ObjectLockRetainUntilDate *time.Time `location:"header" locationName:"x-amz-object-lock-retain-until-date" type:"timestamp" timestampFormat:"rfc822"`
+	ObjectLockRetainUntilDate *time.Time `location:"header" locationName:"x-amz-object-lock-retain-until-date" type:"timestamp" timestampFormat:"iso8601"`
 
 	// Confirms that the requester knows that she or he will be charged for the
 	// request. Bucket owners need not specify this parameter in their requests.
@@ -229,7 +229,8 @@ func (s PutObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Expires
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Expires", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.HeaderTarget, "Expires",
+			protocol.TimeValue{V: v, Format: protocol.RFC822TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.GrantFullControl != nil {
 		v := *s.GrantFullControl
@@ -271,7 +272,8 @@ func (s PutObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ObjectLockRetainUntilDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-object-lock-retain-until-date", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-object-lock-retain-until-date",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: false}, metadata)
 	}
 	if len(s.RequestPayer) > 0 {
 		v := s.RequestPayer

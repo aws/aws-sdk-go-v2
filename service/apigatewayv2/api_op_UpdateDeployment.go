@@ -50,7 +50,7 @@ func (s *UpdateDeploymentInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateDeploymentInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.Description != nil {
 		v := *s.Description
@@ -77,7 +77,7 @@ func (s UpdateDeploymentInput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateDeploymentOutput struct {
 	_ struct{} `type:"structure"`
 
-	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix"`
+	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The identifier.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
@@ -102,7 +102,8 @@ func (s UpdateDeploymentOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdDate",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.DeploymentId != nil {
 		v := *s.DeploymentId

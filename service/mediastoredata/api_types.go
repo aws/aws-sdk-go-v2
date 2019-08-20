@@ -28,7 +28,7 @@ type Item struct {
 	ETag *string `min:"1" type:"string"`
 
 	// The date and time that the item was last modified.
-	LastModified *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModified *time.Time `type:"timestamp"`
 
 	// The name of the item.
 	Name *string `type:"string"`
@@ -66,7 +66,8 @@ func (s Item) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastModified
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastModified", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastModified",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name

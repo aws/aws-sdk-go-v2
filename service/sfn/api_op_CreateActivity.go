@@ -80,7 +80,7 @@ type CreateActivityOutput struct {
 	// The date the activity is created.
 	//
 	// CreationDate is a required field
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" required:"true"`
 }
 
 // String returns the string representation

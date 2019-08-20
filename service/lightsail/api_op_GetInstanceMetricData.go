@@ -17,7 +17,7 @@ type GetInstanceMetricDataInput struct {
 	// The end time of the time period.
 	//
 	// EndTime is a required field
-	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	EndTime *time.Time `locationName:"endTime" type:"timestamp" required:"true"`
 
 	// The name of the instance for which you want to get metrics data.
 	//
@@ -37,7 +37,7 @@ type GetInstanceMetricDataInput struct {
 	// The start time of the time period.
 	//
 	// StartTime is a required field
-	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartTime *time.Time `locationName:"startTime" type:"timestamp" required:"true"`
 
 	// The instance statistics.
 	//

@@ -25,7 +25,7 @@ type BlacklistEntry struct {
 	Description *string `type:"string"`
 
 	// The time when the blacklisting event occurred, shown in Unix time format.
-	ListingTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ListingTime *time.Time `type:"timestamp"`
 
 	// The name of the blacklist that the IP address appears on.
 	RblName *string `type:"string"`
@@ -48,7 +48,8 @@ func (s BlacklistEntry) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ListingTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ListingTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "ListingTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.RblName != nil {
 		v := *s.RblName
@@ -328,7 +329,7 @@ type DailyVolume struct {
 	DomainIspPlacements []DomainIspPlacement `type:"list"`
 
 	// The date that the DailyVolume metrics apply to, in Unix time.
-	StartDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartDate *time.Time `type:"timestamp"`
 
 	// An object that contains inbox placement metrics for a specific day in the
 	// analysis period.
@@ -358,7 +359,8 @@ func (s DailyVolume) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StartDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "StartDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.VolumeStatistics != nil {
 		v := s.VolumeStatistics
@@ -445,7 +447,7 @@ type DeliverabilityTestReport struct {
 
 	// The date and time when the predictive inbox placement test was created, in
 	// Unix time format.
-	CreateDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreateDate *time.Time `type:"timestamp"`
 
 	// The status of the predictive inbox placement test. If the status is IN_PROGRESS,
 	// then the predictive inbox placement test is currently running. Predictive
@@ -480,7 +482,8 @@ func (s DeliverabilityTestReport) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreateDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreateDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreateDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if len(s.DeliverabilityTestStatus) > 0 {
 		v := s.DeliverabilityTestStatus
@@ -718,7 +721,7 @@ type DomainDeliverabilityCampaign struct {
 	// The first time, in Unix time format, when the email message was delivered
 	// to any recipient's inbox. This value can help you determine how long it took
 	// for a campaign to deliver an email message.
-	FirstSeenDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	FirstSeenDateTime *time.Time `type:"timestamp"`
 
 	// The verified email address that the email message was sent from.
 	FromAddress *string `type:"string"`
@@ -733,7 +736,7 @@ type DomainDeliverabilityCampaign struct {
 	// The last time, in Unix time format, when the email message was delivered
 	// to any recipient's inbox. This value can help you determine how long it took
 	// for a campaign to deliver an email message.
-	LastSeenDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastSeenDateTime *time.Time `type:"timestamp"`
 
 	// The projected number of recipients that the email message was sent to.
 	ProjectedVolume *int64 `type:"long"`
@@ -794,7 +797,8 @@ func (s DomainDeliverabilityCampaign) MarshalFields(e protocol.FieldEncoder) err
 		v := *s.FirstSeenDateTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FirstSeenDateTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "FirstSeenDateTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.FromAddress != nil {
 		v := *s.FromAddress
@@ -818,7 +822,8 @@ func (s DomainDeliverabilityCampaign) MarshalFields(e protocol.FieldEncoder) err
 		v := *s.LastSeenDateTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastSeenDateTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastSeenDateTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ProjectedVolume != nil {
 		v := *s.ProjectedVolume
@@ -884,7 +889,7 @@ type DomainDeliverabilityTrackingOption struct {
 
 	// The date, in Unix time format, when you enabled the Deliverability dashboard
 	// for the domain.
-	SubscriptionStartDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubscriptionStartDate *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -910,7 +915,8 @@ func (s DomainDeliverabilityTrackingOption) MarshalFields(e protocol.FieldEncode
 		v := *s.SubscriptionStartDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SubscriptionStartDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "SubscriptionStartDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -1897,7 +1903,7 @@ type ReputationOptions struct {
 	// The date and time (in Unix time) when the reputation metrics were last given
 	// a fresh start. When your account is given a fresh start, your reputation
 	// metrics are calculated starting from the date of the fresh start.
-	LastFreshStart *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastFreshStart *time.Time `type:"timestamp"`
 
 	// If true, tracking of reputation metrics is enabled for the configuration
 	// set. If false, tracking of reputation metrics is disabled for the configuration
@@ -1916,7 +1922,8 @@ func (s ReputationOptions) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastFreshStart
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastFreshStart", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastFreshStart",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ReputationMetricsEnabled != nil {
 		v := *s.ReputationMetricsEnabled

@@ -57,7 +57,7 @@ type DescribeUserOutput struct {
 
 	// The date and time at which the user was disabled for Amazon WorkMail usage,
 	// in UNIX epoch time format.
-	DisabledDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DisabledDate *time.Time `type:"timestamp"`
 
 	// The display name of the user.
 	DisplayName *string `type:"string"`
@@ -67,7 +67,7 @@ type DescribeUserOutput struct {
 
 	// The date and time at which the user was enabled for Amazon WorkMail usage,
 	// in UNIX epoch time format.
-	EnabledDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EnabledDate *time.Time `type:"timestamp"`
 
 	// The name for the user.
 	Name *string `min:"1" type:"string"`

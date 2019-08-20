@@ -46,7 +46,7 @@ type DescribeEndpointOutput struct {
 	// A timestamp that shows when the endpoint was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the endpoint.
 	//
@@ -101,7 +101,7 @@ type DescribeEndpointOutput struct {
 	// A timestamp that shows when the endpoint was last modified.
 	//
 	// LastModifiedTime is a required field
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	LastModifiedTime *time.Time `type:"timestamp" required:"true"`
 
 	// An array of ProductionVariantSummary objects, one for each model hosted behind
 	// this endpoint.

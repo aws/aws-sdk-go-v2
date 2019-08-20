@@ -36,7 +36,7 @@ type ModifyCapacityReservationInput struct {
 	//
 	// You must provide an EndDate value if EndDateType is limited. Omit EndDate
 	// if EndDateType is unlimited.
-	EndDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	EndDate *time.Time `type:"timestamp"`
 
 	// Indicates the way in which the Capacity Reservation ends. A Capacity Reservation
 	// can have one of the following end types:

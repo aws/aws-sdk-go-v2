@@ -68,7 +68,7 @@ func (s *CreateRobotInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateRobotInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if len(s.Architecture) > 0 {
 		v := s.Architecture
@@ -114,7 +114,7 @@ type CreateRobotOutput struct {
 	Arn *string `locationName:"arn" min:"1" type:"string"`
 
 	// The time, in milliseconds since the epoch, when the robot was created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the Greengrass group associated with the
 	// robot.
@@ -150,7 +150,8 @@ func (s CreateRobotOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.GreengrassGroupId != nil {
 		v := *s.GreengrassGroupId

@@ -65,7 +65,7 @@ type CreateRelationalDatabaseFromSnapshotInput struct {
 	//    * Specified in the Unix time format. For example, if you wish to use a
 	//    restore time of October 1, 2018, at 8 PM UTC, then you input 1538424000
 	//    as the restore time.
-	RestoreTime *time.Time `locationName:"restoreTime" type:"timestamp" timestampFormat:"unix"`
+	RestoreTime *time.Time `locationName:"restoreTime" type:"timestamp"`
 
 	// The name of the source database.
 	SourceRelationalDatabaseName *string `locationName:"sourceRelationalDatabaseName" type:"string"`

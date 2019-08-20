@@ -19,7 +19,7 @@ type DescribeEventsInput struct {
 
 	// The end of the time interval for which to retrieve events, specified in ISO
 	// 8601 format.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// The maximum number of results to include in the response. If more results
 	// exist than the specified MaxResults value, a token is included in the response
@@ -43,7 +43,7 @@ type DescribeEventsInput struct {
 
 	// The beginning of the time interval to retrieve events for, specified in ISO
 	// 8601 format.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

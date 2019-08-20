@@ -46,7 +46,7 @@ type Backup struct {
 	// The time when a particular backup was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// The configuration of the self-managed Microsoft Active Directory (AD) to
 	// which the Windows File Server instance is joined.
@@ -351,7 +351,7 @@ type FileSystem struct {
 
 	// The time that the file system was created, in seconds (since 1970-01-01T00:00:00Z),
 	// also known as Unix time.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The DNS name for the file system.
 	DNSName *string `min:"16" type:"string"`

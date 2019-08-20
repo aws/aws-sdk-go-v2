@@ -64,14 +64,14 @@ type Observation struct {
 	_ struct{} `type:"structure"`
 
 	// The time when the observation ended, in epoch seconds.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// The ID of the observation type.
 	Id *string `type:"string"`
 
 	// The timestamp in the CloudWatch Logs that specifies when the matched line
 	// occurred.
-	LineTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LineTime *time.Time `type:"timestamp"`
 
 	// The log filter of the observation.
 	LogFilter LogFilter `type:"string" enum:"true"`
@@ -95,7 +95,7 @@ type Observation struct {
 	SourceType *string `type:"string"`
 
 	// The time when the observation was first detected, in epoch seconds.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `type:"timestamp"`
 
 	// The unit of the source observation metric.
 	Unit *string `type:"string"`
@@ -118,7 +118,7 @@ type Problem struct {
 	AffectedResource *string `type:"string"`
 
 	// The time when the problem ended, in epoch seconds.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// Feedback provided by the user about the problem.
 	Feedback map[string]FeedbackValue `type:"map"`
@@ -136,7 +136,7 @@ type Problem struct {
 	SeverityLevel SeverityLevel `type:"string" enum:"true"`
 
 	// The time when the problem started, in epoch seconds.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `type:"timestamp"`
 
 	// The status of the problem.
 	Status Status `type:"string" enum:"true"`

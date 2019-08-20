@@ -175,7 +175,7 @@ type CatalogImportStatus struct {
 	ImportCompleted *bool `type:"boolean"`
 
 	// The time that the migration was started.
-	ImportTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ImportTime *time.Time `type:"timestamp"`
 
 	// The name of the person who initiated the migration.
 	ImportedBy *string `min:"1" type:"string"`
@@ -560,7 +560,7 @@ type Connection struct {
 	ConnectionType ConnectionType `type:"string" enum:"true"`
 
 	// The time that this connection definition was created.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The description of the connection.
 	Description *string `type:"string"`
@@ -569,7 +569,7 @@ type Connection struct {
 	LastUpdatedBy *string `min:"1" type:"string"`
 
 	// The last time that this connection definition was updated.
-	LastUpdatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedTime *time.Time `type:"timestamp"`
 
 	// A list of criteria that can be used in selecting this connection.
 	MatchCriteria []string `type:"list"`
@@ -730,7 +730,7 @@ type Crawl struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time on which the crawl completed.
-	CompletedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CompletedOn *time.Time `type:"timestamp"`
 
 	// The error message associated with the crawl.
 	ErrorMessage *string `type:"string"`
@@ -742,7 +742,7 @@ type Crawl struct {
 	LogStream *string `min:"1" type:"string"`
 
 	// The date and time on which the crawl started.
-	StartedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartedOn *time.Time `type:"timestamp"`
 
 	// The state of the crawler.
 	State CrawlState `type:"string" enum:"true"`
@@ -777,7 +777,7 @@ type Crawler struct {
 	CrawlerSecurityConfiguration *string `type:"string"`
 
 	// The time that the crawler was created.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The name of the database in which the crawler's output is stored.
 	DatabaseName *string `type:"string"`
@@ -790,7 +790,7 @@ type Crawler struct {
 	LastCrawl *LastCrawlInfo `type:"structure"`
 
 	// The time that the crawler was last updated.
-	LastUpdated *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdated *time.Time `type:"timestamp"`
 
 	// The name of the crawler.
 	Name *string `min:"1" type:"string"`
@@ -1135,7 +1135,7 @@ type CsvClassifier struct {
 	ContainsHeader CsvHeaderOption `type:"string" enum:"true"`
 
 	// The time that this classifier was registered.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// A custom symbol to denote what separates each column entry in the row.
 	Delimiter *string `min:"1" type:"string"`
@@ -1148,7 +1148,7 @@ type CsvClassifier struct {
 	Header []string `type:"list"`
 
 	// The time that this classifier was last updated.
-	LastUpdated *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdated *time.Time `type:"timestamp"`
 
 	// The name of the classifier.
 	//
@@ -1215,7 +1215,7 @@ type Database struct {
 	_ struct{} `type:"structure"`
 
 	// The time at which the metadata database was created in the catalog.
-	CreateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreateTime *time.Time `type:"timestamp"`
 
 	// Description of the database.
 	Description *string `type:"string"`
@@ -1299,7 +1299,7 @@ type DevEndpoint struct {
 	AvailabilityZone *string `type:"string"`
 
 	// The point in time at which this DevEndpoint was created.
-	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTimestamp *time.Time `type:"timestamp"`
 
 	// The name of the DevEndpoint.
 	EndpointName *string `type:"string"`
@@ -1323,7 +1323,7 @@ type DevEndpoint struct {
 	FailureReason *string `type:"string"`
 
 	// The point in time at which this DevEndpoint was last modified.
-	LastModifiedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTimestamp *time.Time `type:"timestamp"`
 
 	// The status of the last update.
 	LastUpdateStatus *string `type:"string"`
@@ -1586,7 +1586,7 @@ type GrokClassifier struct {
 	Classification *string `type:"string" required:"true"`
 
 	// The time that this classifier was registered.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// Optional custom grok patterns defined by this classifier. For more information,
 	// see custom patterns in Writing Custom Classifiers (http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html).
@@ -1599,7 +1599,7 @@ type GrokClassifier struct {
 	GrokPattern *string `min:"1" type:"string" required:"true"`
 
 	// The time that this classifier was last updated.
-	LastUpdated *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdated *time.Time `type:"timestamp"`
 
 	// The name of the classifier.
 	//
@@ -1657,7 +1657,7 @@ type Job struct {
 	Connections *ConnectionsList `type:"structure"`
 
 	// The time and date that this job definition was created.
-	CreatedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedOn *time.Time `type:"timestamp"`
 
 	// The default arguments for this job, specified as name-value pairs.
 	//
@@ -1692,7 +1692,7 @@ type Job struct {
 	GlueVersion *string `min:"1" type:"string"`
 
 	// The last point in time when this job definition was modified.
-	LastModifiedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedOn *time.Time `type:"timestamp"`
 
 	// This field is reserved for future use.
 	LogUri *string `type:"string"`
@@ -1877,7 +1877,7 @@ type JobRun struct {
 	Attempt *int64 `type:"integer"`
 
 	// The date and time that this job run completed.
-	CompletedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CompletedOn *time.Time `type:"timestamp"`
 
 	// An error message associated with this job run.
 	ErrorMessage *string `type:"string"`
@@ -1906,7 +1906,7 @@ type JobRun struct {
 	JobRunState JobRunState `type:"string" enum:"true"`
 
 	// The last time that this job run was modified.
-	LastModifiedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedOn *time.Time `type:"timestamp"`
 
 	// The name of the log group for secure logging that can be server-side encrypted
 	// in Amazon CloudWatch using AWS KMS. This name can be /aws-glue/jobs/, in
@@ -1955,7 +1955,7 @@ type JobRun struct {
 	SecurityConfiguration *string `min:"1" type:"string"`
 
 	// The date and time at which this job run was started.
-	StartedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartedOn *time.Time `type:"timestamp"`
 
 	// The JobRun timeout in minutes. This is the maximum time that a job run can
 	// consume resources before it is terminated and enters TIMEOUT status. The
@@ -2133,7 +2133,7 @@ type JsonClassifier struct {
 	_ struct{} `type:"structure"`
 
 	// The time that this classifier was registered.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// A JsonPath string defining the JSON data for the classifier to classify.
 	// AWS Glue supports a subset of JsonPath, as described in Writing JsonPath
@@ -2143,7 +2143,7 @@ type JsonClassifier struct {
 	JsonPath *string `type:"string" required:"true"`
 
 	// The time that this classifier was last updated.
-	LastUpdated *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdated *time.Time `type:"timestamp"`
 
 	// The name of the classifier.
 	//
@@ -2177,7 +2177,7 @@ type LastCrawlInfo struct {
 	MessagePrefix *string `min:"1" type:"string"`
 
 	// The time at which the crawl started.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `type:"timestamp"`
 
 	// Status of the last crawl.
 	Status LastCrawlStatus `type:"string" enum:"true"`
@@ -2375,16 +2375,16 @@ type Partition struct {
 	_ struct{} `type:"structure"`
 
 	// The time at which the partition was created.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The name of the catalog database where the table in question is located.
 	DatabaseName *string `min:"1" type:"string"`
 
 	// The last time at which the partition was accessed.
-	LastAccessTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastAccessTime *time.Time `type:"timestamp"`
 
 	// The last time at which column statistics were computed for this partition.
-	LastAnalyzedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastAnalyzedTime *time.Time `type:"timestamp"`
 
 	// These key-value pairs define partition parameters.
 	Parameters map[string]string `type:"map"`
@@ -2427,10 +2427,10 @@ type PartitionInput struct {
 	_ struct{} `type:"structure"`
 
 	// The last time at which the partition was accessed.
-	LastAccessTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastAccessTime *time.Time `type:"timestamp"`
 
 	// The last time at which column statistics were computed for this partition.
-	LastAnalyzedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastAnalyzedTime *time.Time `type:"timestamp"`
 
 	// These key-value pairs define partition parameters.
 	Parameters map[string]string `type:"map"`
@@ -2692,7 +2692,7 @@ type SecurityConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// The time at which this security configuration was created.
-	CreatedTimeStamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTimeStamp *time.Time `type:"timestamp"`
 
 	// The encryption configuration associated with this security configuration.
 	EncryptionConfiguration *EncryptionConfiguration `type:"structure"`
@@ -2897,7 +2897,7 @@ type Table struct {
 	_ struct{} `type:"structure"`
 
 	// Time when the table definition was created in the Data Catalog.
-	CreateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreateTime *time.Time `type:"timestamp"`
 
 	// Person or entity who created the table.
 	CreatedBy *string `min:"1" type:"string"`
@@ -2911,10 +2911,10 @@ type Table struct {
 
 	// Last time the table was accessed. This is usually taken from HDFS, and may
 	// not be reliable.
-	LastAccessTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastAccessTime *time.Time `type:"timestamp"`
 
 	// Last time column statistics were computed for this table.
-	LastAnalyzedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastAnalyzedTime *time.Time `type:"timestamp"`
 
 	// Name of the table. For Hive compatibility, this must be entirely lowercase.
 	//
@@ -2947,7 +2947,7 @@ type Table struct {
 	TableType *string `type:"string"`
 
 	// Last time the table was updated.
-	UpdateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	UpdateTime *time.Time `type:"timestamp"`
 
 	// If the table is a view, the expanded text of the view; otherwise null.
 	ViewExpandedText *string `type:"string"`
@@ -2987,10 +2987,10 @@ type TableInput struct {
 	Description *string `type:"string"`
 
 	// Last time the table was accessed.
-	LastAccessTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastAccessTime *time.Time `type:"timestamp"`
 
 	// Last time column statistics were computed for this table.
-	LastAnalyzedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastAnalyzedTime *time.Time `type:"timestamp"`
 
 	// Name of the table. For Hive compatibility, this is folded to lowercase when
 	// it is stored.
@@ -3411,7 +3411,7 @@ type UserDefinedFunction struct {
 	ClassName *string `min:"1" type:"string"`
 
 	// The time at which the function was created.
-	CreateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreateTime *time.Time `type:"timestamp"`
 
 	// The name of the function.
 	FunctionName *string `min:"1" type:"string"`
@@ -3490,7 +3490,7 @@ type Workflow struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time when the workflow was created.
-	CreatedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedOn *time.Time `type:"timestamp"`
 
 	// A collection of properties to be used as part of each execution of the workflow.
 	DefaultRunProperties map[string]string `type:"map"`
@@ -3503,7 +3503,7 @@ type Workflow struct {
 	Graph *WorkflowGraph `type:"structure"`
 
 	// The date and time when the workflow was last modified.
-	LastModifiedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedOn *time.Time `type:"timestamp"`
 
 	// The information about the last execution of the workflow.
 	LastRun *WorkflowRun `type:"structure"`
@@ -3544,7 +3544,7 @@ type WorkflowRun struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time when the workflow run completed.
-	CompletedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CompletedOn *time.Time `type:"timestamp"`
 
 	// The graph representing all the AWS Glue components that belong to the workflow
 	// as nodes and directed connections between them as edges.
@@ -3554,7 +3554,7 @@ type WorkflowRun struct {
 	Name *string `min:"1" type:"string"`
 
 	// The date and time when the workflow run was started.
-	StartedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartedOn *time.Time `type:"timestamp"`
 
 	// The statistics of the run.
 	Statistics *WorkflowRunStatistics `type:"structure"`
@@ -3614,10 +3614,10 @@ type XMLClassifier struct {
 	Classification *string `type:"string" required:"true"`
 
 	// The time that this classifier was registered.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The time that this classifier was last updated.
-	LastUpdated *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdated *time.Time `type:"timestamp"`
 
 	// The name of the classifier.
 	//

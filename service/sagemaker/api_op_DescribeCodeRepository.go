@@ -59,7 +59,7 @@ type DescribeCodeRepositoryOutput struct {
 	// The date and time that the repository was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// Configuration details about the repository, including the URL where the repository
 	// is located, the default branch, and the Amazon Resource Name (ARN) of the
@@ -70,7 +70,7 @@ type DescribeCodeRepositoryOutput struct {
 	// The date and time that the repository was last changed.
 	//
 	// LastModifiedTime is a required field
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	LastModifiedTime *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation

@@ -100,7 +100,7 @@ type DASHTimestampRange struct {
 	// This value is inclusive. The EndTimestamp is compared to the (starting) timestamp
 	// of the fragment. Fragments that start before the EndTimestamp value and continue
 	// past it are included in the session.
-	EndTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTimestamp *time.Time `type:"timestamp"`
 
 	// The start of the timestamp range for the requested media.
 	//
@@ -110,7 +110,7 @@ type DASHTimestampRange struct {
 	// This value is inclusive. Fragments that start before the StartTimestamp and
 	// continue past it are included in the session. If FragmentSelectorType is
 	// SERVER_TIMESTAMP, the StartTimestamp must be later than the stream head.
-	StartTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTimestamp *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -124,13 +124,15 @@ func (s DASHTimestampRange) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.EndTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EndTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "EndTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.StartTimestamp != nil {
 		v := *s.StartTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "StartTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -152,10 +154,10 @@ type Fragment struct {
 	FragmentSizeInBytes *int64 `type:"long"`
 
 	// The timestamp from the producer corresponding to the fragment.
-	ProducerTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ProducerTimestamp *time.Time `type:"timestamp"`
 
 	// The timestamp from the AWS server corresponding to the fragment.
-	ServerTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ServerTimestamp *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -187,13 +189,15 @@ func (s Fragment) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ProducerTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ProducerTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "ProducerTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ServerTimestamp != nil {
 		v := *s.ServerTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ServerTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "ServerTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -360,7 +364,7 @@ type HLSTimestampRange struct {
 	// This value is inclusive. The EndTimestamp is compared to the (starting) timestamp
 	// of the fragment. Fragments that start before the EndTimestamp value and continue
 	// past it are included in the session.
-	EndTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTimestamp *time.Time `type:"timestamp"`
 
 	// The start of the timestamp range for the requested media.
 	//
@@ -370,7 +374,7 @@ type HLSTimestampRange struct {
 	// This value is inclusive. Fragments that start before the StartTimestamp and
 	// continue past it are included in the session. If FragmentSelectorType is
 	// SERVER_TIMESTAMP, the StartTimestamp must be later than the stream head.
-	StartTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTimestamp *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -384,13 +388,15 @@ func (s HLSTimestampRange) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.EndTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EndTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "EndTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.StartTimestamp != nil {
 		v := *s.StartTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "StartTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -403,12 +409,12 @@ type TimestampRange struct {
 	// The ending timestamp in the range of timestamps for which to return fragments.
 	//
 	// EndTimestamp is a required field
-	EndTimestamp *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	EndTimestamp *time.Time `type:"timestamp" required:"true"`
 
 	// The starting timestamp in the range of timestamps for which to return fragments.
 	//
 	// StartTimestamp is a required field
-	StartTimestamp *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartTimestamp *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -440,13 +446,15 @@ func (s TimestampRange) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.EndTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EndTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "EndTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.StartTimestamp != nil {
 		v := *s.StartTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "StartTimestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }

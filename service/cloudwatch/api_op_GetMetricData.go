@@ -24,7 +24,7 @@ type GetMetricDataInput struct {
 	// setting 12:07 or 12:29 as the EndTime.
 	//
 	// EndTime is a required field
-	EndTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	EndTime *time.Time `type:"timestamp" required:"true"`
 
 	// The maximum number of data points the request should return before paginating.
 	// If you omit this, the default of 100,800 is used.
@@ -57,7 +57,7 @@ type GetMetricDataInput struct {
 	// setting 12:07 or 12:29 as the StartTime.
 	//
 	// StartTime is a required field
-	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	StartTime *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation

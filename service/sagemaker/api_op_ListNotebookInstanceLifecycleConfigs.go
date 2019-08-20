@@ -16,19 +16,19 @@ type ListNotebookInstanceLifecycleConfigsInput struct {
 
 	// A filter that returns only lifecycle configurations that were created after
 	// the specified time (timestamp).
-	CreationTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTimeAfter *time.Time `type:"timestamp"`
 
 	// A filter that returns only lifecycle configurations that were created before
 	// the specified time (timestamp).
-	CreationTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTimeBefore *time.Time `type:"timestamp"`
 
 	// A filter that returns only lifecycle configurations that were modified after
 	// the specified time (timestamp).
-	LastModifiedTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTimeAfter *time.Time `type:"timestamp"`
 
 	// A filter that returns only lifecycle configurations that were modified before
 	// the specified time (timestamp).
-	LastModifiedTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTimeBefore *time.Time `type:"timestamp"`
 
 	// The maximum number of lifecycle configurations to return in the response.
 	MaxResults *int64 `min:"1" type:"integer"`

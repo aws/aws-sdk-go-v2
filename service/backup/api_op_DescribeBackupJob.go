@@ -42,7 +42,7 @@ func (s *DescribeBackupJobInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeBackupJobInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.BackupJobId != nil {
 		v := *s.BackupJobId
@@ -81,7 +81,7 @@ type DescribeBackupJobOutput struct {
 	// format and Coordinated Universal Time (UTC). The value of CreationDate is
 	// accurate to milliseconds. For example, the value 1516925490.087 represents
 	// Friday, January 26, 2018 12:11:30.087 AM.
-	CompletionDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CompletionDate *time.Time `type:"timestamp"`
 
 	// Contains identifying information about the creation of a backup job, including
 	// the BackupPlanArn, BackupPlanId, BackupPlanVersion, and BackupRuleId of the
@@ -92,13 +92,13 @@ type DescribeBackupJobOutput struct {
 	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
 	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp"`
 
 	// The date and time that a job to back up resources is expected to be completed,
 	// in Unix format and Coordinated Universal Time (UTC). The value of ExpectedCompletionDate
 	// is accurate to milliseconds. For example, the value 1516925490.087 represents
 	// Friday, January 26, 2018 12:11:30.087 AM.
-	ExpectedCompletionDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ExpectedCompletionDate *time.Time `type:"timestamp"`
 
 	// Specifies the IAM role ARN used to create the target recovery point; for
 	// example, arn:aws:iam::123456789012:role/S3Access.
@@ -127,7 +127,7 @@ type DescribeBackupJobOutput struct {
 	// PM on the date specified. The value of StartBy is accurate to milliseconds.
 	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
-	StartBy *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartBy *time.Time `type:"timestamp"`
 
 	// The current state of a resource recovery point.
 	State BackupJobState `type:"string" enum:"true"`
@@ -177,7 +177,8 @@ func (s DescribeBackupJobOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CompletionDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CompletionDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CompletionDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CreatedBy != nil {
 		v := s.CreatedBy
@@ -189,13 +190,15 @@ func (s DescribeBackupJobOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ExpectedCompletionDate != nil {
 		v := *s.ExpectedCompletionDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ExpectedCompletionDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "ExpectedCompletionDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.IamRoleArn != nil {
 		v := *s.IamRoleArn
@@ -231,7 +234,8 @@ func (s DescribeBackupJobOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StartBy
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartBy", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "StartBy",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if len(s.State) > 0 {
 		v := s.State

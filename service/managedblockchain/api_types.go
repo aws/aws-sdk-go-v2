@@ -88,13 +88,13 @@ type Invitation struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time that the invitation was created.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The date and time that the invitation expires. This is the CreationDate plus
 	// the ProposalDurationInHours that is specified in the ProposalThresholdPolicy.
 	// After this date and time, the invitee can no longer create a member and join
 	// the network using this InvitationId.
-	ExpirationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ExpirationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The unique identifier for the invitation.
 	InvitationId *string `min:"1" type:"string"`
@@ -131,13 +131,15 @@ func (s Invitation) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.ExpirationDate != nil {
 		v := *s.ExpirationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ExpirationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "ExpirationDate",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.InvitationId != nil {
 		v := *s.InvitationId
@@ -208,7 +210,7 @@ type Member struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time that the member was created.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// An optional description for the member.
 	Description *string `type:"string"`
@@ -258,7 +260,8 @@ func (s Member) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -549,7 +552,7 @@ type MemberSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time that the member was created.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// An optional description of the member.
 	Description *string `type:"string"`
@@ -596,7 +599,8 @@ func (s MemberSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -637,7 +641,7 @@ type Network struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time that the network was created.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// Attributes of the blockchain framework for the network.
 	Description *string `type:"string"`
@@ -680,7 +684,8 @@ func (s Network) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -890,7 +895,7 @@ type NetworkSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time that the network was created.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// An optional description of the network.
 	Description *string `type:"string"`
@@ -922,7 +927,8 @@ func (s NetworkSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -972,7 +978,7 @@ type Node struct {
 	AvailabilityZone *string `type:"string"`
 
 	// The date and time that the node was created.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// Attributes of the blockchain framework being used.
 	FrameworkAttributes *NodeFrameworkAttributes `type:"structure"`
@@ -1010,7 +1016,8 @@ func (s Node) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.FrameworkAttributes != nil {
 		v := s.FrameworkAttributes
@@ -1179,7 +1186,7 @@ type NodeSummary struct {
 	AvailabilityZone *string `type:"string"`
 
 	// The date and time that the node was created.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The unique identifier of the node.
 	Id *string `min:"1" type:"string"`
@@ -1208,7 +1215,8 @@ func (s NodeSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.Id != nil {
 		v := *s.Id
@@ -1240,7 +1248,7 @@ type Proposal struct {
 	Actions *ProposalActions `type:"structure"`
 
 	// The date and time that the proposal was created.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The description of the proposal.
 	Description *string `type:"string"`
@@ -1250,7 +1258,7 @@ type Proposal struct {
 	// After this date and time, if members have not cast enough votes to determine
 	// the outcome according to the voting policy, the proposal is EXPIRED and Actions
 	// are not carried out.
-	ExpirationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ExpirationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The unique identifier of the network for which the proposal is made.
 	NetworkId *string `min:"1" type:"string"`
@@ -1312,7 +1320,8 @@ func (s Proposal) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -1324,7 +1333,8 @@ func (s Proposal) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ExpirationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ExpirationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "ExpirationDate",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.NetworkId != nil {
 		v := *s.NetworkId
@@ -1456,7 +1466,7 @@ type ProposalSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time that the proposal was created.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The description of the proposal.
 	Description *string `type:"string"`
@@ -1466,7 +1476,7 @@ type ProposalSummary struct {
 	// After this date and time, if members have not cast enough votes to determine
 	// the outcome according to the voting policy, the proposal is EXPIRED and Actions
 	// are not carried out.
-	ExpirationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ExpirationDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The unique identifier of the proposal.
 	ProposalId *string `min:"1" type:"string"`
@@ -1509,7 +1519,8 @@ func (s ProposalSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -1521,7 +1532,8 @@ func (s ProposalSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ExpirationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ExpirationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "ExpirationDate",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.ProposalId != nil {
 		v := *s.ProposalId

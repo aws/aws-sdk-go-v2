@@ -31,7 +31,7 @@ type AlarmHistoryItem struct {
 	HistorySummary *string `min:"1" type:"string"`
 
 	// The time stamp for the alarm history item.
-	Timestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	Timestamp *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -127,7 +127,7 @@ type DashboardEntry struct {
 	// The time stamp of when the dashboard was last modified, either by an API
 	// call or through the console. This number is expressed as the number of milliseconds
 	// since Jan 1, 1970 00:00:00 UTC.
-	LastModified *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	LastModified *time.Time `type:"timestamp"`
 
 	// The size of the dashboard, in bytes.
 	Size *int64 `type:"long"`
@@ -180,7 +180,7 @@ type Datapoint struct {
 	Sum *float64 `type:"double"`
 
 	// The time stamp used for the data point.
-	Timestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	Timestamp *time.Time `type:"timestamp"`
 
 	// The standard unit for the data point.
 	Unit StandardUnit `type:"string" enum:"true"`
@@ -352,7 +352,7 @@ type MetricAlarm struct {
 	AlarmArn *string `min:"1" type:"string"`
 
 	// The time stamp of the last update to the alarm configuration.
-	AlarmConfigurationUpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	AlarmConfigurationUpdatedTimestamp *time.Time `type:"timestamp"`
 
 	// The description of the alarm.
 	AlarmDescription *string `type:"string"`
@@ -416,7 +416,7 @@ type MetricAlarm struct {
 	StateReasonData *string `type:"string"`
 
 	// The time stamp of the last update to the alarm state.
-	StateUpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	StateUpdatedTimestamp *time.Time `type:"timestamp"`
 
 	// The state value for the alarm.
 	StateValue StateValue `type:"string" enum:"true"`
@@ -629,7 +629,7 @@ type MetricDatum struct {
 
 	// The time the metric data was received, expressed as the number of milliseconds
 	// since Jan 1, 1970 00:00:00 UTC.
-	Timestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	Timestamp *time.Time `type:"timestamp"`
 
 	// When you are using a Put operation, this defines what unit you want to use
 	// when storing the metric. In a Get operation, this displays the unit that
@@ -769,13 +769,13 @@ type Range struct {
 	// For example, 2019-07-01T23:59:59.
 	//
 	// EndTime is a required field
-	EndTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	EndTime *time.Time `type:"timestamp" required:"true"`
 
 	// The start time of the range to exclude. The format is yyyy-MM-dd'T'HH:mm:ss.
 	// For example, 2019-07-01T23:59:59.
 	//
 	// StartTime is a required field
-	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	StartTime *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation

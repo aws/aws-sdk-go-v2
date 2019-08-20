@@ -53,7 +53,7 @@ type DescribeTaskOutput struct {
 	CloudWatchLogGroupArn *string `type:"string"`
 
 	// The time that the task was created.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the task execution that is syncing files.
 	CurrentTaskExecutionArn *string `type:"string"`

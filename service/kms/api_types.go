@@ -90,7 +90,7 @@ type CustomKeyStoresListEntry struct {
 	ConnectionState ConnectionStateType `type:"string" enum:"true"`
 
 	// The date and time when the custom key store was created.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp"`
 
 	// A unique identifier for the custom key store.
 	CustomKeyStoreId *string `min:"1" type:"string"`
@@ -173,7 +173,7 @@ type GrantListEntry struct {
 	Constraints *GrantConstraints `type:"structure"`
 
 	// The date and time when the grant was created.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp"`
 
 	// The unique identifier for the grant.
 	GrantId *string `min:"1" type:"string"`
@@ -245,7 +245,7 @@ type KeyMetadata struct {
 	CloudHsmClusterId *string `min:"19" type:"string"`
 
 	// The date and time when the CMK was created.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp"`
 
 	// A unique identifier for the custom key store (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 	// that contains the CMK. This value is present only when the CMK is created
@@ -254,7 +254,7 @@ type KeyMetadata struct {
 
 	// The date and time after which AWS KMS deletes the CMK. This value is present
 	// only when KeyState is PendingDeletion.
-	DeletionDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DeletionDate *time.Time `type:"timestamp"`
 
 	// The description of the CMK.
 	Description *string `type:"string"`
@@ -301,7 +301,7 @@ type KeyMetadata struct {
 	// expires, AWS KMS deletes the key material and the CMK becomes unusable. This
 	// value is present only for CMKs whose Origin is EXTERNAL and whose ExpirationModel
 	// is KEY_MATERIAL_EXPIRES, otherwise this value is omitted.
-	ValidTo *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ValidTo *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

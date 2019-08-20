@@ -306,10 +306,10 @@ type ApplicationDetail struct {
 	CloudWatchLoggingOptionDescriptions []CloudWatchLoggingOptionDescription `type:"list"`
 
 	// The current timestamp when the application was created.
-	CreateTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreateTimestamp *time.Time `type:"timestamp"`
 
 	// The current timestamp when the application was last updated.
-	LastUpdateTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdateTimestamp *time.Time `type:"timestamp"`
 
 	// The runtime environment for the application (SQL-1.0 or FLINK-1_6).
 	//
@@ -3260,7 +3260,7 @@ type SnapshotDetails struct {
 	ApplicationVersionId *int64 `min:"1" type:"long" required:"true"`
 
 	// The timestamp of the application snapshot.
-	SnapshotCreationTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SnapshotCreationTimestamp *time.Time `type:"timestamp"`
 
 	// The identifier for the application snapshot.
 	//

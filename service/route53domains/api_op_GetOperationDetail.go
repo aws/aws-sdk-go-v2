@@ -59,7 +59,7 @@ type GetOperationDetailOutput struct {
 	Status OperationStatus `type:"string" enum:"true"`
 
 	// The date when the request was submitted.
-	SubmittedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmittedDate *time.Time `type:"timestamp"`
 
 	// The type of operation that was requested.
 	Type OperationType `type:"string" enum:"true"`

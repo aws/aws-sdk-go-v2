@@ -200,7 +200,7 @@ type PolicyComplianceDetail struct {
 
 	// A time stamp that indicates when the returned information should be considered
 	// out-of-date.
-	ExpiredAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ExpiredAt *time.Time `type:"timestamp"`
 
 	// Details about problems with dependent services, such as AWS WAF or AWS Config,
 	// that are causing a resource to be non-compliant. The details include the
@@ -243,7 +243,7 @@ type PolicyComplianceStatus struct {
 	IssueInfoMap map[string]string `type:"map"`
 
 	// Time stamp of the last update to the EvaluationResult objects.
-	LastUpdated *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdated *time.Time `type:"timestamp"`
 
 	// The member account ID.
 	MemberAccount *string `min:"1" type:"string"`

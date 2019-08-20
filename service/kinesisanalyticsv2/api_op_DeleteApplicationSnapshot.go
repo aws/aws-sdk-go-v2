@@ -23,7 +23,7 @@ type DeleteApplicationSnapshotInput struct {
 	// this value using or .
 	//
 	// SnapshotCreationTimestamp is a required field
-	SnapshotCreationTimestamp *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	SnapshotCreationTimestamp *time.Time `type:"timestamp" required:"true"`
 
 	// The identifier for the snapshot delete.
 	//

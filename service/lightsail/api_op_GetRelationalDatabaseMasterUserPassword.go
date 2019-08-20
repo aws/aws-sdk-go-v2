@@ -55,7 +55,7 @@ type GetRelationalDatabaseMasterUserPasswordOutput struct {
 
 	// The timestamp when the specified version of the master user password was
 	// created.
-	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The master user password for the password version specified.
 	MasterUserPassword *string `locationName:"masterUserPassword" type:"string"`

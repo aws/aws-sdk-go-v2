@@ -312,11 +312,11 @@ type EventSource struct {
 	CreatedBy *string `type:"string"`
 
 	// The date and time when the event source was created.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The date and time when the event source will expire if the AWS account doesn't
 	// create a matching event bus for it.
-	ExpirationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ExpirationTime *time.Time `type:"timestamp"`
 
 	// The name of the event source.
 	Name *string `type:"string"`
@@ -508,11 +508,11 @@ type PartnerEventSourceAccount struct {
 	Account *string `min:"12" type:"string"`
 
 	// The date and time when the event source was created.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The date and time when the event source will expire if the AWS account doesn't
 	// create a matching event bus for it.
-	ExpirationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ExpirationTime *time.Time `type:"timestamp"`
 
 	// The state of the event source. If it's ACTIVE, you have already created a
 	// matching event bus for this event source, and that event bus is active. If
@@ -552,7 +552,7 @@ type PutEventsRequestEntry struct {
 
 	// The timestamp of the event, per RFC3339 (https://www.rfc-editor.org/rfc/rfc3339.txt).
 	// If no timestamp is provided, the timestamp of the PutEvents call is used.
-	Time *time.Time `type:"timestamp" timestampFormat:"unix"`
+	Time *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -613,7 +613,7 @@ type PutPartnerEventsRequestEntry struct {
 	Source *string `type:"string"`
 
 	// The date and time of the event.
-	Time *time.Time `type:"timestamp" timestampFormat:"unix"`
+	Time *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

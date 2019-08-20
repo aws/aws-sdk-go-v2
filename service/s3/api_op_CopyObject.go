@@ -48,14 +48,14 @@ type CopyObjectInput struct {
 	CopySourceIfMatch *string `location:"header" locationName:"x-amz-copy-source-if-match" type:"string"`
 
 	// Copies the object if it has been modified since the specified time.
-	CopySourceIfModifiedSince *time.Time `location:"header" locationName:"x-amz-copy-source-if-modified-since" type:"timestamp" timestampFormat:"rfc822"`
+	CopySourceIfModifiedSince *time.Time `location:"header" locationName:"x-amz-copy-source-if-modified-since" type:"timestamp"`
 
 	// Copies the object if its entity tag (ETag) is different than the specified
 	// ETag.
 	CopySourceIfNoneMatch *string `location:"header" locationName:"x-amz-copy-source-if-none-match" type:"string"`
 
 	// Copies the object if it hasn't been modified since the specified time.
-	CopySourceIfUnmodifiedSince *time.Time `location:"header" locationName:"x-amz-copy-source-if-unmodified-since" type:"timestamp" timestampFormat:"rfc822"`
+	CopySourceIfUnmodifiedSince *time.Time `location:"header" locationName:"x-amz-copy-source-if-unmodified-since" type:"timestamp"`
 
 	// Specifies the algorithm to use when decrypting the source object (e.g., AES256).
 	CopySourceSSECustomerAlgorithm *string `location:"header" locationName:"x-amz-copy-source-server-side-encryption-customer-algorithm" type:"string"`
@@ -71,7 +71,7 @@ type CopyObjectInput struct {
 	CopySourceSSECustomerKeyMD5 *string `location:"header" locationName:"x-amz-copy-source-server-side-encryption-customer-key-MD5" type:"string"`
 
 	// The date and time at which the object is no longer cacheable.
-	Expires *time.Time `location:"header" locationName:"Expires" type:"timestamp" timestampFormat:"rfc822"`
+	Expires *time.Time `location:"header" locationName:"Expires" type:"timestamp"`
 
 	// Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object.
 	GrantFullControl *string `location:"header" locationName:"x-amz-grant-full-control" type:"string"`
@@ -102,7 +102,7 @@ type CopyObjectInput struct {
 	ObjectLockMode ObjectLockMode `location:"header" locationName:"x-amz-object-lock-mode" type:"string" enum:"true"`
 
 	// The date and time when you want the copied object's object lock to expire.
-	ObjectLockRetainUntilDate *time.Time `location:"header" locationName:"x-amz-object-lock-retain-until-date" type:"timestamp" timestampFormat:"rfc822"`
+	ObjectLockRetainUntilDate *time.Time `location:"header" locationName:"x-amz-object-lock-retain-until-date" type:"timestamp" timestampFormat:"iso8601"`
 
 	// Confirms that the requester knows that she or he will be charged for the
 	// request. Bucket owners need not specify this parameter in their requests.
@@ -264,7 +264,8 @@ func (s CopyObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CopySourceIfModifiedSince
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-copy-source-if-modified-since", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-copy-source-if-modified-since",
+			protocol.TimeValue{V: v, Format: protocol.RFC822TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.CopySourceIfNoneMatch != nil {
 		v := *s.CopySourceIfNoneMatch
@@ -276,7 +277,8 @@ func (s CopyObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CopySourceIfUnmodifiedSince
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-copy-source-if-unmodified-since", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-copy-source-if-unmodified-since",
+			protocol.TimeValue{V: v, Format: protocol.RFC822TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.CopySourceSSECustomerAlgorithm != nil {
 		v := *s.CopySourceSSECustomerAlgorithm
@@ -300,7 +302,8 @@ func (s CopyObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Expires
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Expires", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.HeaderTarget, "Expires",
+			protocol.TimeValue{V: v, Format: protocol.RFC822TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.GrantFullControl != nil {
 		v := *s.GrantFullControl
@@ -348,7 +351,8 @@ func (s CopyObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ObjectLockRetainUntilDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-object-lock-retain-until-date", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-object-lock-retain-until-date",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: false}, metadata)
 	}
 	if len(s.RequestPayer) > 0 {
 		v := s.RequestPayer

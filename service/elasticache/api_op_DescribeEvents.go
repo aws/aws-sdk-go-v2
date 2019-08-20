@@ -22,7 +22,7 @@ type DescribeEventsInput struct {
 	// 8601 format.
 	//
 	// Example: 2017-03-30T07:03:49.555Z
-	EndTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// An optional marker returned from a prior request. Use this marker for pagination
 	// of results from this operation. If this parameter is specified, the response
@@ -50,7 +50,7 @@ type DescribeEventsInput struct {
 	// 8601 format.
 	//
 	// Example: 2017-03-30T07:03:49.555Z
-	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	StartTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

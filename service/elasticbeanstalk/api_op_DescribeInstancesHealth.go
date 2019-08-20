@@ -67,7 +67,7 @@ type DescribeInstancesHealthOutput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// The date and time that the health information was retrieved.
-	RefreshedAt *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	RefreshedAt *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

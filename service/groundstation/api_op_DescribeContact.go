@@ -42,7 +42,7 @@ func (s *DescribeContactInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeContactInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.ContactId != nil {
 		v := *s.ContactId
@@ -64,7 +64,7 @@ type DescribeContactOutput struct {
 	ContactStatus ContactStatus `locationName:"contactStatus" type:"string" enum:"true"`
 
 	// End time of a contact.
-	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
 
 	// Error message for a contact.
 	ErrorMessage *string `locationName:"errorMessage" type:"string"`
@@ -80,17 +80,17 @@ type DescribeContactOutput struct {
 
 	// Amount of time after a contact ends that you’d like to receive a CloudWatch
 	// event indicating the pass has finished.
-	PostPassEndTime *time.Time `locationName:"postPassEndTime" type:"timestamp" timestampFormat:"unix"`
+	PostPassEndTime *time.Time `locationName:"postPassEndTime" type:"timestamp"`
 
 	// Amount of time prior to contact start you’d like to receive a CloudWatch
 	// event indicating an upcoming pass.
-	PrePassStartTime *time.Time `locationName:"prePassStartTime" type:"timestamp" timestampFormat:"unix"`
+	PrePassStartTime *time.Time `locationName:"prePassStartTime" type:"timestamp"`
 
 	// ARN of a satellite.
 	SatelliteArn *string `locationName:"satelliteArn" type:"string"`
 
 	// Start time of a contact.
-	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
 
 	// Tags assigned to a contact.
 	Tags map[string]string `locationName:"tags" type:"map"`
@@ -119,7 +119,8 @@ func (s DescribeContactOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.EndTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "endTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "endTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ErrorMessage != nil {
 		v := *s.ErrorMessage
@@ -149,13 +150,15 @@ func (s DescribeContactOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.PostPassEndTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "postPassEndTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "postPassEndTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.PrePassStartTime != nil {
 		v := *s.PrePassStartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "prePassStartTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "prePassStartTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.SatelliteArn != nil {
 		v := *s.SatelliteArn
@@ -167,7 +170,8 @@ func (s DescribeContactOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "startTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "startTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Tags != nil {
 		v := s.Tags

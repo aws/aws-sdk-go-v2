@@ -36,7 +36,7 @@ type GetServersOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The time when the server was last modified.
-	LastModifiedOn *time.Time `locationName:"lastModifiedOn" type:"timestamp" timestampFormat:"unix"`
+	LastModifiedOn *time.Time `locationName:"lastModifiedOn" type:"timestamp"`
 
 	// The token required to retrieve the next set of results. This value is null
 	// when there are no more results to return.

@@ -108,7 +108,7 @@ type Detector struct {
 	_ struct{} `type:"structure"`
 
 	// The time the detector (instance) was created.
-	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp"`
 
 	// The name of the detector model that created this detector (instance).
 	DetectorModelName *string `locationName:"detectorModelName" min:"1" type:"string"`
@@ -121,7 +121,7 @@ type Detector struct {
 	KeyValue *string `locationName:"keyValue" min:"1" type:"string"`
 
 	// The time the detector (instance) was last updated.
-	LastUpdateTime *time.Time `locationName:"lastUpdateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdateTime *time.Time `locationName:"lastUpdateTime" type:"timestamp"`
 
 	// The current state of the detector (instance).
 	State *DetectorState `locationName:"state" type:"structure"`
@@ -138,7 +138,8 @@ func (s Detector) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DetectorModelName != nil {
 		v := *s.DetectorModelName
@@ -162,7 +163,8 @@ func (s Detector) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastUpdateTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdateTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdateTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.State != nil {
 		v := s.State
@@ -367,7 +369,7 @@ type DetectorSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The time the detector (instance) was created.
-	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp"`
 
 	// The name of the detector model that created this detector (instance).
 	DetectorModelName *string `locationName:"detectorModelName" min:"1" type:"string"`
@@ -380,7 +382,7 @@ type DetectorSummary struct {
 	KeyValue *string `locationName:"keyValue" min:"1" type:"string"`
 
 	// The time the detector (instance) was last updated.
-	LastUpdateTime *time.Time `locationName:"lastUpdateTime" type:"timestamp" timestampFormat:"unix"`
+	LastUpdateTime *time.Time `locationName:"lastUpdateTime" type:"timestamp"`
 
 	// The current state of the detector (instance).
 	State *DetectorStateSummary `locationName:"state" type:"structure"`
@@ -397,7 +399,8 @@ func (s DetectorSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.DetectorModelName != nil {
 		v := *s.DetectorModelName
@@ -421,7 +424,8 @@ func (s DetectorSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastUpdateTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastUpdateTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastUpdateTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.State != nil {
 		v := s.State
@@ -526,7 +530,7 @@ type Timer struct {
 	// The number of seconds which have elapsed on the timer.
 	//
 	// Timestamp is a required field
-	Timestamp *time.Time `locationName:"timestamp" type:"timestamp" timestampFormat:"unix" required:"true"`
+	Timestamp *time.Time `locationName:"timestamp" type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -546,7 +550,8 @@ func (s Timer) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Timestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "timestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "timestamp",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }

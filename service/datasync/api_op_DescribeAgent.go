@@ -49,12 +49,12 @@ type DescribeAgentOutput struct {
 	AgentArn *string `type:"string"`
 
 	// The time that the agent was activated (that is, created in your account).
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	EndpointOptions *EndpointOptions `type:"structure"`
 
 	// The time that the agent last connected to DataSyc.
-	LastConnectionTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastConnectionTime *time.Time `type:"timestamp"`
 
 	// The name of the agent.
 	Name *string `min:"1" type:"string"`

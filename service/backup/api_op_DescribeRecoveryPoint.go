@@ -55,7 +55,7 @@ func (s *DescribeRecoveryPointInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeRecoveryPointInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.BackupVaultName != nil {
 		v := *s.BackupVaultName
@@ -96,7 +96,7 @@ type DescribeRecoveryPointOutput struct {
 	// Unix format and Coordinated Universal Time (UTC). The value of CompletionDate
 	// is accurate to milliseconds. For example, the value 1516925490.087 represents
 	// Friday, January 26, 2018 12:11:30.087 AM.
-	CompletionDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CompletionDate *time.Time `type:"timestamp"`
 
 	// Contains identifying information about the creation of a recovery point,
 	// including the BackupPlanArn, BackupPlanId, BackupPlanVersion, and BackupRuleId
@@ -107,7 +107,7 @@ type DescribeRecoveryPointOutput struct {
 	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
 	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp"`
 
 	// The server-side encryption key used to protect your backups; for example,
 	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.
@@ -125,7 +125,7 @@ type DescribeRecoveryPointOutput struct {
 	// and Coordinated Universal Time (UTC). The value of LastRestoreTime is accurate
 	// to milliseconds. For example, the value 1516925490.087 represents Friday,
 	// January 26, 2018 12:11:30.087 AM.
-	LastRestoreTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastRestoreTime *time.Time `type:"timestamp"`
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage
 	// and when it expires. AWS Backup transitions and expires backups automatically
@@ -196,7 +196,8 @@ func (s DescribeRecoveryPointOutput) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.CompletionDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CompletionDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CompletionDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CreatedBy != nil {
 		v := s.CreatedBy
@@ -208,7 +209,8 @@ func (s DescribeRecoveryPointOutput) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.EncryptionKeyArn != nil {
 		v := *s.EncryptionKeyArn
@@ -232,7 +234,8 @@ func (s DescribeRecoveryPointOutput) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.LastRestoreTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastRestoreTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastRestoreTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Lifecycle != nil {
 		v := s.Lifecycle

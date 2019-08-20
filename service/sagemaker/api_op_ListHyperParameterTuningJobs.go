@@ -16,19 +16,19 @@ type ListHyperParameterTuningJobsInput struct {
 
 	// A filter that returns only tuning jobs that were created after the specified
 	// time.
-	CreationTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTimeAfter *time.Time `type:"timestamp"`
 
 	// A filter that returns only tuning jobs that were created before the specified
 	// time.
-	CreationTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTimeBefore *time.Time `type:"timestamp"`
 
 	// A filter that returns only tuning jobs that were modified after the specified
 	// time.
-	LastModifiedTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTimeAfter *time.Time `type:"timestamp"`
 
 	// A filter that returns only tuning jobs that were modified before the specified
 	// time.
-	LastModifiedTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTimeBefore *time.Time `type:"timestamp"`
 
 	// The maximum number of tuning jobs to return. The default value is 10.
 	MaxResults *int64 `min:"1" type:"integer"`

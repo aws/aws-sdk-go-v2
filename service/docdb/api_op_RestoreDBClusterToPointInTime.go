@@ -94,7 +94,7 @@ type RestoreDBClusterToPointInTimeInput struct {
 	//    * Cannot be specified if the RestoreType parameter is copy-on-write.
 	//
 	// Example: 2015-03-07T23:45:00Z
-	RestoreToTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	RestoreToTime *time.Time `type:"timestamp"`
 
 	// The identifier of the source DB cluster from which to restore.
 	//

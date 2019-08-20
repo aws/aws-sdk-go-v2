@@ -21,7 +21,7 @@ type DataPoint struct {
 	// The time, in epoch format, associated with a particular Value.
 	//
 	// Timestamp is a required field
-	Timestamp *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	Timestamp *time.Time `type:"timestamp" required:"true"`
 
 	// The actual value associated with a particular Timestamp.
 	//

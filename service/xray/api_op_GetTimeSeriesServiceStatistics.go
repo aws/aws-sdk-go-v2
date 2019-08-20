@@ -18,7 +18,7 @@ type GetTimeSeriesServiceStatisticsInput struct {
 	// The end of the time frame for which to aggregate statistics.
 	//
 	// EndTime is a required field
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	EndTime *time.Time `type:"timestamp" required:"true"`
 
 	// A filter expression defining entities that will be aggregated for statistics.
 	// Supports ID, service, and edge functions. If no selector expression is specified,
@@ -40,7 +40,7 @@ type GetTimeSeriesServiceStatisticsInput struct {
 	// The start of the time frame for which to aggregate statistics.
 	//
 	// StartTime is a required field
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartTime *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -77,12 +77,14 @@ func (s *GetTimeSeriesServiceStatisticsInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetTimeSeriesServiceStatisticsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.EndTime != nil {
 		v := *s.EndTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EndTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "EndTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.EntitySelectorExpression != nil {
 		v := *s.EntitySelectorExpression
@@ -118,7 +120,8 @@ func (s GetTimeSeriesServiceStatisticsInput) MarshalFields(e protocol.FieldEncod
 		v := *s.StartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "StartTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }

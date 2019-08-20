@@ -2065,7 +2065,7 @@ type Distribution struct {
 	// The date and time the distribution was last modified.
 	//
 	// LastModifiedTime is a required field
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	LastModifiedTime *time.Time `type:"timestamp" required:"true"`
 
 	// This response element indicates the current status of the distribution. When
 	// the status is Deployed, the distribution's information is fully propagated
@@ -2134,7 +2134,8 @@ func (s Distribution) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastModifiedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastModifiedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastModifiedTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.Status != nil {
 		v := *s.Status
@@ -2752,7 +2753,7 @@ type DistributionSummary struct {
 	// The date and time the distribution was last modified.
 	//
 	// LastModifiedTime is a required field
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	LastModifiedTime *time.Time `type:"timestamp" required:"true"`
 
 	// A complex type that contains information about origin groups for this distribution.
 	OriginGroups *OriginGroups `type:"structure"`
@@ -2883,7 +2884,8 @@ func (s DistributionSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastModifiedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastModifiedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastModifiedTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.OriginGroups != nil {
 		v := s.OriginGroups
@@ -3102,7 +3104,7 @@ type FieldLevelEncryption struct {
 	// The last time the field-level encryption configuration was changed.
 	//
 	// LastModifiedTime is a required field
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	LastModifiedTime *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -3128,7 +3130,8 @@ func (s FieldLevelEncryption) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastModifiedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastModifiedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastModifiedTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	return nil
 }
@@ -3300,7 +3303,7 @@ type FieldLevelEncryptionProfile struct {
 	// The last time the field-level encryption profile was updated.
 	//
 	// LastModifiedTime is a required field
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	LastModifiedTime *time.Time `type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -3326,7 +3329,8 @@ func (s FieldLevelEncryptionProfile) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.LastModifiedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastModifiedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastModifiedTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	return nil
 }
@@ -3506,7 +3510,7 @@ type FieldLevelEncryptionProfileSummary struct {
 	// The time when the the field-level encryption profile summary was last updated.
 	//
 	// LastModifiedTime is a required field
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	LastModifiedTime *time.Time `type:"timestamp" required:"true"`
 
 	// Name for the field-level encryption profile summary.
 	//
@@ -3543,7 +3547,8 @@ func (s FieldLevelEncryptionProfileSummary) MarshalFields(e protocol.FieldEncode
 		v := *s.LastModifiedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastModifiedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastModifiedTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -3573,7 +3578,7 @@ type FieldLevelEncryptionSummary struct {
 	// The last time that the summary of field-level encryption items was modified.
 	//
 	// LastModifiedTime is a required field
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	LastModifiedTime *time.Time `type:"timestamp" required:"true"`
 
 	// A summary of a query argument-profile mapping.
 	QueryArgProfileConfig *QueryArgProfileConfig `type:"structure"`
@@ -3608,7 +3613,8 @@ func (s FieldLevelEncryptionSummary) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.LastModifiedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastModifiedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastModifiedTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.QueryArgProfileConfig != nil {
 		v := s.QueryArgProfileConfig
@@ -3993,7 +3999,7 @@ type Invalidation struct {
 	// The date and time the invalidation request was first made.
 	//
 	// CreateTime is a required field
-	CreateTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	CreateTime *time.Time `type:"timestamp" required:"true"`
 
 	// The identifier for the invalidation request. For example: IDFDVBD632BHDS5.
 	//
@@ -4023,7 +4029,8 @@ func (s Invalidation) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreateTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreateTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreateTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.Id != nil {
 		v := *s.Id
@@ -4225,7 +4232,7 @@ type InvalidationSummary struct {
 	// The time that an invalidation request was created.
 	//
 	// CreateTime is a required field
-	CreateTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	CreateTime *time.Time `type:"timestamp" required:"true"`
 
 	// The unique ID for an invalidation request.
 	//
@@ -4249,7 +4256,8 @@ func (s InvalidationSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreateTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreateTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreateTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.Id != nil {
 		v := *s.Id
@@ -5326,7 +5334,7 @@ type PublicKey struct {
 	// A time you added a public key to CloudFront.
 	//
 	// CreatedTime is a required field
-	CreatedTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	CreatedTime *time.Time `type:"timestamp" required:"true"`
 
 	// A unique ID assigned to a public key you've added to CloudFront.
 	//
@@ -5351,7 +5359,8 @@ func (s PublicKey) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.Id != nil {
 		v := *s.Id
@@ -5529,7 +5538,7 @@ type PublicKeySummary struct {
 	// Creation time for public key information summary.
 	//
 	// CreatedTime is a required field
-	CreatedTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	CreatedTime *time.Time `type:"timestamp" required:"true"`
 
 	// Encoded key for public key information summary.
 	//
@@ -5564,7 +5573,8 @@ func (s PublicKeySummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.EncodedKey != nil {
 		v := *s.EncodedKey
@@ -6155,7 +6165,7 @@ type StreamingDistribution struct {
 	Id *string `type:"string" required:"true"`
 
 	// The date and time that the distribution was last modified.
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	LastModifiedTime *time.Time `type:"timestamp"`
 
 	// The current status of the RTMP distribution. When the status is Deployed,
 	// the distribution's information is propagated to all CloudFront edge locations.
@@ -6204,7 +6214,8 @@ func (s StreamingDistribution) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastModifiedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastModifiedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastModifiedTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if s.Status != nil {
 		v := *s.Status
@@ -6586,7 +6597,7 @@ type StreamingDistributionSummary struct {
 	// The date and time the distribution was last modified.
 	//
 	// LastModifiedTime is a required field
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+	LastModifiedTime *time.Time `type:"timestamp" required:"true"`
 
 	// A complex type that contains information about price class for this streaming
 	// distribution.
@@ -6672,7 +6683,8 @@ func (s StreamingDistributionSummary) MarshalFields(e protocol.FieldEncoder) err
 		v := *s.LastModifiedTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastModifiedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastModifiedTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	if len(s.PriceClass) > 0 {
 		v := s.PriceClass

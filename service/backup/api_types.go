@@ -43,7 +43,7 @@ type BackupJob struct {
 	// and Coordinated Universal Time (UTC). The value of CompletionDate is accurate
 	// to milliseconds. For example, the value 1516925490.087 represents Friday,
 	// January 26, 2018 12:11:30.087 AM.
-	CompletionDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CompletionDate *time.Time `type:"timestamp"`
 
 	// Contains identifying information about the creation of a backup job, including
 	// the BackupPlanArn, BackupPlanId, BackupPlanVersion, and BackupRuleId of the
@@ -54,13 +54,13 @@ type BackupJob struct {
 	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
 	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp"`
 
 	// The date and time a job to back up resources is expected to be completed,
 	// in Unix format and Coordinated Universal Time (UTC). The value of ExpectedCompletionDate
 	// is accurate to milliseconds. For example, the value 1516925490.087 represents
 	// Friday, January 26, 2018 12:11:30.087 AM.
-	ExpectedCompletionDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ExpectedCompletionDate *time.Time `type:"timestamp"`
 
 	// Specifies the IAM role ARN used to create the target recovery point; for
 	// example, arn:aws:iam::123456789012:role/S3Access.
@@ -89,7 +89,7 @@ type BackupJob struct {
 	// PM on the date specified. The value of StartBy is accurate to milliseconds.
 	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
-	StartBy *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartBy *time.Time `type:"timestamp"`
 
 	// The current state of a resource recovery point.
 	State BackupJobState `type:"string" enum:"true"`
@@ -139,7 +139,8 @@ func (s BackupJob) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CompletionDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CompletionDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CompletionDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CreatedBy != nil {
 		v := s.CreatedBy
@@ -151,13 +152,15 @@ func (s BackupJob) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ExpectedCompletionDate != nil {
 		v := *s.ExpectedCompletionDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ExpectedCompletionDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "ExpectedCompletionDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.IamRoleArn != nil {
 		v := *s.IamRoleArn
@@ -193,7 +196,8 @@ func (s BackupJob) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StartBy
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartBy", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "StartBy",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if len(s.State) > 0 {
 		v := s.State
@@ -384,7 +388,7 @@ type BackupPlansListMember struct {
 	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
 	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp"`
 
 	// A unique string that identifies the request and allows failed requests to
 	// be retried without the risk of executing the operation twice.
@@ -394,13 +398,13 @@ type BackupPlansListMember struct {
 	// Universal Time (UTC). The value of DeletionDate is accurate to milliseconds.
 	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
-	DeletionDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DeletionDate *time.Time `type:"timestamp"`
 
 	// The last time a job to back up resources was executed with this rule. A date
 	// and time, in Unix format and Coordinated Universal Time (UTC). The value
 	// of LastExecutionDate is accurate to milliseconds. For example, the value
 	// 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
-	LastExecutionDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastExecutionDate *time.Time `type:"timestamp"`
 
 	// Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most
 	// 1,024 bytes long. Version IDs cannot be edited.
@@ -436,7 +440,8 @@ func (s BackupPlansListMember) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CreatorRequestId != nil {
 		v := *s.CreatorRequestId
@@ -448,13 +453,15 @@ func (s BackupPlansListMember) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DeletionDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DeletionDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "DeletionDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.LastExecutionDate != nil {
 		v := *s.LastExecutionDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastExecutionDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastExecutionDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.VersionId != nil {
 		v := *s.VersionId
@@ -808,7 +815,7 @@ type BackupSelectionsListMember struct {
 	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
 	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp"`
 
 	// A unique string that identifies the request and allows failed requests to
 	// be retried without the risk of executing the operation twice.
@@ -842,7 +849,8 @@ func (s BackupSelectionsListMember) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CreatorRequestId != nil {
 		v := *s.CreatorRequestId
@@ -890,7 +898,7 @@ type BackupVaultListMember struct {
 	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
 	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp"`
 
 	// A unique string that identifies the request and allows failed requests to
 	// be retried without the risk of executing the operation twice.
@@ -927,7 +935,8 @@ func (s BackupVaultListMember) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CreatorRequestId != nil {
 		v := *s.CreatorRequestId
@@ -967,10 +976,10 @@ type CalculatedLifecycle struct {
 	_ struct{} `type:"structure"`
 
 	// A timestamp that specifies when to delete a recovery point.
-	DeleteAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DeleteAt *time.Time `type:"timestamp"`
 
 	// A timestamp that specifies when to transition a recovery point to cold storage.
-	MoveToColdStorageAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	MoveToColdStorageAt *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -984,13 +993,15 @@ func (s CalculatedLifecycle) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DeleteAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DeleteAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "DeleteAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.MoveToColdStorageAt != nil {
 		v := *s.MoveToColdStorageAt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MoveToColdStorageAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "MoveToColdStorageAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -1116,7 +1127,7 @@ type ProtectedResource struct {
 	// Universal Time (UTC). The value of LastBackupTime is accurate to milliseconds.
 	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
-	LastBackupTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastBackupTime *time.Time `type:"timestamp"`
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format
 	// of the ARN depends on the resource type.
@@ -1138,7 +1149,8 @@ func (s ProtectedResource) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastBackupTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastBackupTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastBackupTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ResourceArn != nil {
 		v := *s.ResourceArn
@@ -1181,7 +1193,7 @@ type RecoveryPointByBackupVault struct {
 	// format and Coordinated Universal Time (UTC). The value of CompletionDate
 	// is accurate to milliseconds. For example, the value 1516925490.087 represents
 	// Friday, January 26, 2018 12:11:30.087 AM.
-	CompletionDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CompletionDate *time.Time `type:"timestamp"`
 
 	// Contains identifying information about the creation of a recovery point,
 	// including the BackupPlanArn, BackupPlanId, BackupPlanVersion, and BackupRuleId
@@ -1192,7 +1204,7 @@ type RecoveryPointByBackupVault struct {
 	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
 	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp"`
 
 	// The server-side encryption key that is used to protect your backups; for
 	// example, arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.
@@ -1210,7 +1222,7 @@ type RecoveryPointByBackupVault struct {
 	// Coordinated Universal Time (UTC). The value of LastRestoreTime is accurate
 	// to milliseconds. For example, the value 1516925490.087 represents Friday,
 	// January 26, 2018 12:11:30.087 AM.
-	LastRestoreTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastRestoreTime *time.Time `type:"timestamp"`
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage
 	// and when it expires. AWS Backup transitions and expires backups automatically
@@ -1275,7 +1287,8 @@ func (s RecoveryPointByBackupVault) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.CompletionDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CompletionDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CompletionDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CreatedBy != nil {
 		v := s.CreatedBy
@@ -1287,7 +1300,8 @@ func (s RecoveryPointByBackupVault) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.EncryptionKeyArn != nil {
 		v := *s.EncryptionKeyArn
@@ -1311,7 +1325,8 @@ func (s RecoveryPointByBackupVault) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.LastRestoreTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastRestoreTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastRestoreTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Lifecycle != nil {
 		v := s.Lifecycle
@@ -1364,7 +1379,7 @@ type RecoveryPointByResource struct {
 	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
 	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp"`
 
 	// The server-side encryption key that is used to protect your backups; for
 	// example, arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.
@@ -1401,7 +1416,8 @@ func (s RecoveryPointByResource) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.EncryptionKeyArn != nil {
 		v := *s.EncryptionKeyArn
@@ -1492,7 +1508,7 @@ type RestoreJobsListMember struct {
 	// format and Coordinated Universal Time (UTC). The value of CompletionDate
 	// is accurate to milliseconds. For example, the value 1516925490.087 represents
 	// Friday, January 26, 2018 12:11:30.087 AM.
-	CompletionDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CompletionDate *time.Time `type:"timestamp"`
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format
 	// of the ARN depends on the resource type.
@@ -1502,7 +1518,7 @@ type RestoreJobsListMember struct {
 	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
 	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp"`
 
 	// The amount of time in minutes that a job restoring a recovery point is expected
 	// to take.
@@ -1548,7 +1564,8 @@ func (s RestoreJobsListMember) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CompletionDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CompletionDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CompletionDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CreatedResourceArn != nil {
 		v := *s.CreatedResourceArn
@@ -1560,7 +1577,8 @@ func (s RestoreJobsListMember) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.ExpectedCompletionTimeMinutes != nil {
 		v := *s.ExpectedCompletionTimeMinutes

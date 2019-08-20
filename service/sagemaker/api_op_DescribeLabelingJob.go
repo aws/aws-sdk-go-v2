@@ -49,7 +49,7 @@ type DescribeLabelingJobOutput struct {
 	// The date and time that the labeling job was created.
 	//
 	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreationTime *time.Time `type:"timestamp" required:"true"`
 
 	// If the job failed, the reason that it failed.
 	FailureReason *string `type:"string"`
@@ -142,7 +142,7 @@ type DescribeLabelingJobOutput struct {
 	// The date and time that the labeling job was last updated.
 	//
 	// LastModifiedTime is a required field
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	LastModifiedTime *time.Time `type:"timestamp" required:"true"`
 
 	// The location of the job's output data and the AWS Key Management Service
 	// key ID for the key used to encrypt the output data, if any.

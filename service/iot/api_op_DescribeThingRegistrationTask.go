@@ -41,6 +41,7 @@ func (s *DescribeThingRegistrationTaskInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeThingRegistrationTaskInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.TaskId != nil {
 		v := *s.TaskId
@@ -55,7 +56,7 @@ type DescribeThingRegistrationTaskOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The task creation date.
-	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp"`
 
 	// The number of things that failed to be provisioned.
 	FailureCount *int64 `locationName:"failureCount" type:"integer"`
@@ -67,7 +68,7 @@ type DescribeThingRegistrationTaskOutput struct {
 	InputFileKey *string `locationName:"inputFileKey" min:"1" type:"string"`
 
 	// The date when the task was last modified.
-	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp" timestampFormat:"unix"`
+	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp"`
 
 	// The message.
 	Message *string `locationName:"message" type:"string"`
@@ -102,7 +103,8 @@ func (s DescribeThingRegistrationTaskOutput) MarshalFields(e protocol.FieldEncod
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "creationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.FailureCount != nil {
 		v := *s.FailureCount
@@ -126,7 +128,8 @@ func (s DescribeThingRegistrationTaskOutput) MarshalFields(e protocol.FieldEncod
 		v := *s.LastModifiedDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastModifiedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastModifiedDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Message != nil {
 		v := *s.Message

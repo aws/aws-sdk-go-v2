@@ -1857,7 +1857,7 @@ type ApplicationDateRangeKpiResponse struct {
 	// the query results, in ISO 8601 format. The date range is inclusive.
 	//
 	// EndTime is a required field
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	EndTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
 
 	// The name of the metric, also referred to as a key performance indicator (KPI),
 	// that the data was retrieved for. This value describes the associated metric
@@ -1883,7 +1883,7 @@ type ApplicationDateRangeKpiResponse struct {
 	// the query results, in ISO 8601 format. The date range is inclusive.
 	//
 	// StartTime is a required field
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
 }
 
 // String returns the string representation
@@ -1903,7 +1903,8 @@ func (s ApplicationDateRangeKpiResponse) MarshalFields(e protocol.FieldEncoder) 
 		v := *s.EndTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EndTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "EndTime",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.KpiName != nil {
 		v := *s.KpiName
@@ -1927,7 +1928,8 @@ func (s ApplicationDateRangeKpiResponse) MarshalFields(e protocol.FieldEncoder) 
 		v := *s.StartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "StartTime",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -2681,7 +2683,7 @@ type CampaignDateRangeKpiResponse struct {
 	// the query results, in ISO 8601 format. The date range is inclusive.
 	//
 	// EndTime is a required field
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	EndTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
 
 	// The name of the metric, also referred to as a key performance indicator (KPI),
 	// that the data was retrieved for. This value describes the associated metric
@@ -2707,7 +2709,7 @@ type CampaignDateRangeKpiResponse struct {
 	// the query results, in ISO 8601 format. The date range is inclusive.
 	//
 	// StartTime is a required field
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
 }
 
 // String returns the string representation
@@ -2733,7 +2735,8 @@ func (s CampaignDateRangeKpiResponse) MarshalFields(e protocol.FieldEncoder) err
 		v := *s.EndTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EndTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "EndTime",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.KpiName != nil {
 		v := *s.KpiName
@@ -2757,7 +2760,8 @@ func (s CampaignDateRangeKpiResponse) MarshalFields(e protocol.FieldEncoder) err
 		v := *s.StartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "StartTime",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }

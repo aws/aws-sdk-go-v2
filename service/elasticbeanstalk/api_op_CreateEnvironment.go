@@ -170,10 +170,10 @@ type CreateEnvironmentOutput struct {
 	CNAME *string `min:"1" type:"string"`
 
 	// The creation date for this environment.
-	DateCreated *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	DateCreated *time.Time `type:"timestamp"`
 
 	// The last modified date for this environment.
-	DateUpdated *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	DateUpdated *time.Time `type:"timestamp"`
 
 	// Describes this environment.
 	Description *string `type:"string"`

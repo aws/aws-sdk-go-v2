@@ -65,7 +65,7 @@ type SecretListEntry struct {
 	// secrets. The secret can be recovered until the number of days in the recovery
 	// window has passed, as specified in the RecoveryWindowInDays parameter of
 	// the DeleteSecret operation.
-	DeletedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DeletedDate *time.Time `type:"timestamp"`
 
 	// The user-provided description of the secret.
 	Description *string `type:"string"`
@@ -79,13 +79,13 @@ type SecretListEntry struct {
 
 	// The last date that this secret was accessed. This value is truncated to midnight
 	// of the date and therefore shows only the date, not the time.
-	LastAccessedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastAccessedDate *time.Time `type:"timestamp"`
 
 	// The last date and time that this secret was modified in any way.
-	LastChangedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastChangedDate *time.Time `type:"timestamp"`
 
 	// The last date and time that the rotation process for this secret was invoked.
-	LastRotatedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastRotatedDate *time.Time `type:"timestamp"`
 
 	// The friendly name of the secret. You can use forward slashes in the name
 	// to represent a path hierarchy. For example, /prod/databases/dbserver1 could
@@ -130,11 +130,11 @@ type SecretVersionsListEntry struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time this version of the secret was created.
-	CreatedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedDate *time.Time `type:"timestamp"`
 
 	// The date that this version of the secret was last accessed. Note that the
 	// resolution of this field is at the date level and does not include the time.
-	LastAccessedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastAccessedDate *time.Time `type:"timestamp"`
 
 	// The unique version identifier of this version of the secret.
 	VersionId *string `min:"32" type:"string"`

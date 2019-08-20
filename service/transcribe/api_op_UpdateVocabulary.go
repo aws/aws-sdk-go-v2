@@ -80,7 +80,7 @@ type UpdateVocabularyOutput struct {
 	LanguageCode LanguageCode `type:"string" enum:"true"`
 
 	// The date and time that the vocabulary was updated.
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastModifiedTime *time.Time `type:"timestamp"`
 
 	// The name of the vocabulary that was updated.
 	VocabularyName *string `min:"1" type:"string"`

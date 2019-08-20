@@ -44,6 +44,7 @@ func (s *BatchDeletePhoneNumberInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchDeletePhoneNumberInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.PhoneNumberIds != nil {
 		v := s.PhoneNumberIds

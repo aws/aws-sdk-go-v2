@@ -56,7 +56,7 @@ type Certificate struct {
 	CertificateArn *string `type:"string"`
 
 	// The date that the certificate was created.
-	CertificateCreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CertificateCreationDate *time.Time `type:"timestamp"`
 
 	// A customer-assigned name for the certificate. Identifiers must begin with
 	// a letter; must contain only ASCII letters, digits, and hyphens; and must
@@ -81,10 +81,10 @@ type Certificate struct {
 	SigningAlgorithm *string `type:"string"`
 
 	// The beginning date that the certificate is valid.
-	ValidFromDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ValidFromDate *time.Time `type:"timestamp"`
 
 	// The final date that the certificate is valid.
-	ValidToDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ValidToDate *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -337,7 +337,7 @@ type Event struct {
 	_ struct{} `type:"structure"`
 
 	// The date of the event.
-	Date *time.Time `type:"timestamp" timestampFormat:"unix"`
+	Date *time.Time `type:"timestamp"`
 
 	// The event categories available for the specified source type.
 	EventCategories []string `type:"list"`
@@ -617,14 +617,14 @@ type PendingMaintenanceAction struct {
 	// action will be applied to the resource during its first maintenance window
 	// after this date. If this date is specified, any next-maintenance opt-in requests
 	// are ignored.
-	AutoAppliedAfterDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	AutoAppliedAfterDate *time.Time `type:"timestamp"`
 
 	// The effective date when the pending maintenance action will be applied to
 	// the resource. This date takes into account opt-in requests received from
 	// the ApplyPendingMaintenanceAction API, the AutoAppliedAfterDate, and the
 	// ForcedApplyDate. This value is blank if an opt-in request has not been received
 	// and nothing has been specified as AutoAppliedAfterDate or ForcedApplyDate.
-	CurrentApplyDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CurrentApplyDate *time.Time `type:"timestamp"`
 
 	// A description providing more detail about the maintenance action.
 	Description *string `type:"string"`
@@ -633,7 +633,7 @@ type PendingMaintenanceAction struct {
 	// action will be applied to the resource on this date regardless of the maintenance
 	// window for the resource. If this date is specified, any immediate opt-in
 	// requests are ignored.
-	ForcedApplyDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ForcedApplyDate *time.Time `type:"timestamp"`
 
 	// Indicates the type of opt-in request that has been received for the resource.
 	OptInStatus *string `type:"string"`
@@ -788,7 +788,7 @@ type RefreshSchemasStatus struct {
 	LastFailureMessage *string `type:"string"`
 
 	// The date the schema was last refreshed.
-	LastRefreshDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastRefreshDate *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) of the replication instance.
 	ReplicationInstanceArn *string `type:"string"`
@@ -825,10 +825,10 @@ type ReplicationInstance struct {
 
 	// The expiration date of the free replication instance that is part of the
 	// Free DMS program.
-	FreeUntil *time.Time `type:"timestamp" timestampFormat:"unix"`
+	FreeUntil *time.Time `type:"timestamp"`
 
 	// The time the replication instance was created.
-	InstanceCreateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	InstanceCreateTime *time.Time `type:"timestamp"`
 
 	// An AWS KMS key identifier that is used to encrypt the data on the replication
 	// instance.
@@ -1026,7 +1026,7 @@ type ReplicationTask struct {
 	ReplicationTaskArn *string `type:"string"`
 
 	// The date the replication task was created.
-	ReplicationTaskCreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ReplicationTaskCreationDate *time.Time `type:"timestamp"`
 
 	// The user-assigned replication task identifier or name.
 	//
@@ -1043,7 +1043,7 @@ type ReplicationTask struct {
 	ReplicationTaskSettings *string `type:"string"`
 
 	// The date the replication task is scheduled to start.
-	ReplicationTaskStartDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ReplicationTaskStartDate *time.Time `type:"timestamp"`
 
 	// The statistics for the task, including elapsed time, tables loaded, and table
 	// errors.
@@ -1092,7 +1092,7 @@ type ReplicationTaskAssessmentResult struct {
 	ReplicationTaskIdentifier *string `type:"string"`
 
 	// The date the task assessment was completed.
-	ReplicationTaskLastAssessmentDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ReplicationTaskLastAssessmentDate *time.Time `type:"timestamp"`
 
 	// The URL of the S3 object containing the task assessment results.
 	S3ObjectUrl *string `type:"string"`
@@ -1402,7 +1402,7 @@ type TableStatistics struct {
 	Inserts *int64 `type:"long"`
 
 	// The last time the table was updated.
-	LastUpdateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdateTime *time.Time `type:"timestamp"`
 
 	// The schema name.
 	SchemaName *string `type:"string"`

@@ -205,12 +205,12 @@ type DocumentClassificationJobFilter struct {
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in descending order, newest to oldest.
-	SubmitTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTimeAfter *time.Time `type:"timestamp"`
 
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted after the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
-	SubmitTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTimeBefore *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -244,7 +244,7 @@ type DocumentClassificationJobProperties struct {
 	DocumentClassifierArn *string `type:"string"`
 
 	// The time that the document classification job completed.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// The input data configuration that you supplied when you created the document
 	// classification job.
@@ -268,7 +268,7 @@ type DocumentClassificationJobProperties struct {
 	OutputDataConfig *OutputDataConfig `type:"structure"`
 
 	// The time that the document classification job was submitted for processing.
-	SubmitTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTime *time.Time `type:"timestamp"`
 
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses
 	// to encrypt data on the storage volume attached to the ML compute instance(s)
@@ -304,12 +304,12 @@ type DocumentClassifierFilter struct {
 	// Filters the list of classifiers based on the time that the classifier was
 	// submitted for processing. Returns only classifiers submitted after the specified
 	// time. Classifiers are returned in descending order, newest to oldest.
-	SubmitTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTimeAfter *time.Time `type:"timestamp"`
 
 	// Filters the list of classifiers based on the time that the classifier was
 	// submitted for processing. Returns only classifiers submitted before the specified
 	// time. Classifiers are returned in ascending order, oldest to newest.
-	SubmitTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTimeBefore *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -409,7 +409,7 @@ type DocumentClassifierProperties struct {
 	DocumentClassifierArn *string `type:"string"`
 
 	// The time that training the document classifier completed.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// The input data configuration that you supplied when you created the document
 	// classifier for training.
@@ -431,16 +431,16 @@ type DocumentClassifierProperties struct {
 	Status ModelStatus `type:"string" enum:"true"`
 
 	// The time that the document classifier was submitted for training.
-	SubmitTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTime *time.Time `type:"timestamp"`
 
 	// The time that training of the document classifier was completed. Indicates
 	// the time when the training completes on documentation classifiers. You are
 	// billed for the time interval between this time and the value of TrainingStartTime.
-	TrainingEndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TrainingEndTime *time.Time `type:"timestamp"`
 
 	// Indicates the time when the training starts on documentation classifiers.
 	// You are billed for the time interval between this time and the value of TrainingEndTime.
-	TrainingStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TrainingStartTime *time.Time `type:"timestamp"`
 
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses
 	// to encrypt data on the storage volume attached to the ML compute instance(s)
@@ -500,12 +500,12 @@ type DominantLanguageDetectionJobFilter struct {
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted after the specified time. Jobs are
 	// returned in descending order, newest to oldest.
-	SubmitTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTimeAfter *time.Time `type:"timestamp"`
 
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
-	SubmitTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTimeBefore *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -536,7 +536,7 @@ type DominantLanguageDetectionJobProperties struct {
 	DataAccessRoleArn *string `min:"20" type:"string"`
 
 	// The time that the dominant language detection job completed.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// The input data configuration that you supplied when you created the dominant
 	// language detection job.
@@ -560,7 +560,7 @@ type DominantLanguageDetectionJobProperties struct {
 	OutputDataConfig *OutputDataConfig `type:"structure"`
 
 	// The time that the dominant language detection job was submitted for processing.
-	SubmitTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTime *time.Time `type:"timestamp"`
 
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses
 	// to encrypt data on the storage volume attached to the ML compute instance(s)
@@ -599,12 +599,12 @@ type EntitiesDetectionJobFilter struct {
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted after the specified time. Jobs are
 	// returned in descending order, newest to oldest.
-	SubmitTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTimeAfter *time.Time `type:"timestamp"`
 
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
-	SubmitTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTimeBefore *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -635,7 +635,7 @@ type EntitiesDetectionJobProperties struct {
 	DataAccessRoleArn *string `min:"20" type:"string"`
 
 	// The time that the entities detection job completed
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) that identifies the entity recognizer.
 	EntityRecognizerArn *string `type:"string"`
@@ -665,7 +665,7 @@ type EntitiesDetectionJobProperties struct {
 	OutputDataConfig *OutputDataConfig `type:"structure"`
 
 	// The time that the entities detection job was submitted for processing.
-	SubmitTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTime *time.Time `type:"timestamp"`
 
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses
 	// to encrypt data on the storage volume attached to the ML compute instance(s)
@@ -856,12 +856,12 @@ type EntityRecognizerFilter struct {
 	// Filters the list of entities based on the time that the list was submitted
 	// for processing. Returns only jobs submitted after the specified time. Jobs
 	// are returned in ascending order, oldest to newest.
-	SubmitTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTimeAfter *time.Time `type:"timestamp"`
 
 	// Filters the list of entities based on the time that the list was submitted
 	// for processing. Returns only jobs submitted before the specified time. Jobs
 	// are returned in descending order, newest to oldest.
-	SubmitTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTimeBefore *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -996,7 +996,7 @@ type EntityRecognizerProperties struct {
 	DataAccessRoleArn *string `min:"20" type:"string"`
 
 	// The time that the recognizer creation completed.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// The Amazon Resource Name (ARN) that identifies the entity recognizer.
 	EntityRecognizerArn *string `type:"string"`
@@ -1018,13 +1018,13 @@ type EntityRecognizerProperties struct {
 	Status ModelStatus `type:"string" enum:"true"`
 
 	// The time that the recognizer was submitted for processing.
-	SubmitTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTime *time.Time `type:"timestamp"`
 
 	// The time that training of the entity recognizer was completed.
-	TrainingEndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TrainingEndTime *time.Time `type:"timestamp"`
 
 	// The time that training of the entity recognizer started.
-	TrainingStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	TrainingStartTime *time.Time `type:"timestamp"`
 
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses
 	// to encrypt data on the storage volume attached to the ML compute instance(s)
@@ -1199,12 +1199,12 @@ type KeyPhrasesDetectionJobFilter struct {
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted after the specified time. Jobs are
 	// returned in descending order, newest to oldest.
-	SubmitTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTimeAfter *time.Time `type:"timestamp"`
 
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
-	SubmitTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTimeBefore *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -1235,7 +1235,7 @@ type KeyPhrasesDetectionJobProperties struct {
 	DataAccessRoleArn *string `min:"20" type:"string"`
 
 	// The time that the key phrases detection job completed.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// The input data configuration that you supplied when you created the key phrases
 	// detection job.
@@ -1262,7 +1262,7 @@ type KeyPhrasesDetectionJobProperties struct {
 	OutputDataConfig *OutputDataConfig `type:"structure"`
 
 	// The time that the key phrases detection job was submitted for processing.
-	SubmitTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTime *time.Time `type:"timestamp"`
 
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses
 	// to encrypt data on the storage volume attached to the ML compute instance(s)
@@ -1374,12 +1374,12 @@ type SentimentDetectionJobFilter struct {
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted after the specified time. Jobs are
 	// returned in descending order, newest to oldest.
-	SubmitTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTimeAfter *time.Time `type:"timestamp"`
 
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
-	SubmitTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTimeBefore *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -1410,7 +1410,7 @@ type SentimentDetectionJobProperties struct {
 	DataAccessRoleArn *string `min:"20" type:"string"`
 
 	// The time that the sentiment detection job ended.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// The input data configuration that you supplied when you created the sentiment
 	// detection job.
@@ -1437,7 +1437,7 @@ type SentimentDetectionJobProperties struct {
 	OutputDataConfig *OutputDataConfig `type:"structure"`
 
 	// The time that the sentiment detection job was submitted for processing.
-	SubmitTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTime *time.Time `type:"timestamp"`
 
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses
 	// to encrypt data on the storage volume attached to the ML compute instance(s)
@@ -1578,12 +1578,12 @@ type TopicsDetectionJobFilter struct {
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Only returns jobs submitted after the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
-	SubmitTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTimeAfter *time.Time `type:"timestamp"`
 
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing. Only returns jobs submitted before the specified time. Jobs are
 	// returned in descending order, newest to oldest.
-	SubmitTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTimeBefore *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -1614,7 +1614,7 @@ type TopicsDetectionJobProperties struct {
 	DataAccessRoleArn *string `min:"20" type:"string"`
 
 	// The time that the topic detection job was completed.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// The input data configuration supplied when you created the topic detection
 	// job.
@@ -1642,7 +1642,7 @@ type TopicsDetectionJobProperties struct {
 	OutputDataConfig *OutputDataConfig `type:"structure"`
 
 	// The time that the topic detection job was submitted for processing.
-	SubmitTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubmitTime *time.Time `type:"timestamp"`
 
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses
 	// to encrypt data on the storage volume attached to the ML compute instance(s)

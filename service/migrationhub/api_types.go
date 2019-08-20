@@ -104,7 +104,7 @@ type MigrationTask struct {
 	Task *Task `type:"structure"`
 
 	// The timestamp when the task was gathered.
-	UpdateDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	UpdateDateTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -134,7 +134,7 @@ type MigrationTaskSummary struct {
 	StatusDetail *string `type:"string"`
 
 	// The timestamp when the task was gathered.
-	UpdateDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	UpdateDateTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

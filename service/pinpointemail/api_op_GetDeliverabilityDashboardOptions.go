@@ -33,7 +33,7 @@ func (s GetDeliverabilityDashboardOptionsInput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetDeliverabilityDashboardOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	return nil
 }
@@ -69,7 +69,7 @@ type GetDeliverabilityDashboardOptionsOutput struct {
 	// dashboard is scheduled to expire, if your subscription is scheduled to expire
 	// at the end of the current calendar month. This value is null if you have
 	// an active subscription that isn’t due to expire at the end of the month.
-	SubscriptionExpiryDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	SubscriptionExpiryDate *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation
@@ -119,7 +119,8 @@ func (s GetDeliverabilityDashboardOptionsOutput) MarshalFields(e protocol.FieldE
 		v := *s.SubscriptionExpiryDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SubscriptionExpiryDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "SubscriptionExpiryDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }

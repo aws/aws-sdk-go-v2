@@ -73,7 +73,7 @@ type DescribeWorkflowExecutionOutput struct {
 	// The time when the last activity task was scheduled for this workflow execution.
 	// You can use this information to determine if the workflow has not made progress
 	// for an unusually long period of time and might require a corrective action.
-	LatestActivityTaskTimestamp *time.Time `locationName:"latestActivityTaskTimestamp" type:"timestamp" timestampFormat:"unix"`
+	LatestActivityTaskTimestamp *time.Time `locationName:"latestActivityTaskTimestamp" type:"timestamp"`
 
 	// The latest executionContext provided by the decider for this workflow execution.
 	// A decider can provide an executionContext (a free-form string) when closing

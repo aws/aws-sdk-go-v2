@@ -53,10 +53,10 @@ type DescribeLoggingStatusOutput struct {
 	LastFailureMessage *string `type:"string"`
 
 	// The last time when logs failed to be delivered.
-	LastFailureTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	LastFailureTime *time.Time `type:"timestamp"`
 
 	// The last time that logs were delivered.
-	LastSuccessfulDeliveryTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	LastSuccessfulDeliveryTime *time.Time `type:"timestamp"`
 
 	// true if logging is on, false if logging is off.
 	LoggingEnabled *bool `type:"boolean"`

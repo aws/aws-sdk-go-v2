@@ -46,7 +46,7 @@ type DescribeLocationEfsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The time that the EFS location was created.
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationTime *time.Time `type:"timestamp"`
 
 	// The subnet and the security group that DataSync uses to access target EFS
 	// file system. The subnet must have at least one mount target for that file

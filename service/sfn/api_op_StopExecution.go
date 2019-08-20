@@ -55,7 +55,7 @@ type StopExecutionOutput struct {
 	// The date the execution is stopped.
 	//
 	// StopDate is a required field
-	StopDate *time.Time `locationName:"stopDate" type:"timestamp" timestampFormat:"unix" required:"true"`
+	StopDate *time.Time `locationName:"stopDate" type:"timestamp" required:"true"`
 }
 
 // String returns the string representation

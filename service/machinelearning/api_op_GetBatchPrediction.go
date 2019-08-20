@@ -60,7 +60,7 @@ type GetBatchPredictionOutput struct {
 
 	// The time when the BatchPrediction was created. The time is expressed in epoch
 	// time.
-	CreatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `type:"timestamp"`
 
 	// The AWS user account that invoked the BatchPrediction. The account type can
 	// be either an AWS root account or an AWS Identity and Access Management (IAM)
@@ -70,7 +70,7 @@ type GetBatchPredictionOutput struct {
 	// The epoch time when Amazon Machine Learning marked the BatchPrediction as
 	// COMPLETED or FAILED. FinishedAt is only available when the BatchPrediction
 	// is in the COMPLETED or FAILED state.
-	FinishedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	FinishedAt *time.Time `type:"timestamp"`
 
 	// The location of the data file or directory in Amazon Simple Storage Service
 	// (Amazon S3).
@@ -82,7 +82,7 @@ type GetBatchPredictionOutput struct {
 
 	// The time of the most recent edit to BatchPrediction. The time is expressed
 	// in epoch time.
-	LastUpdatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `type:"timestamp"`
 
 	// A link to the file that contains logs of the CreateBatchPrediction operation.
 	LogUri *string `type:"string"`
@@ -105,7 +105,7 @@ type GetBatchPredictionOutput struct {
 	// The epoch time when Amazon Machine Learning marked the BatchPrediction as
 	// INPROGRESS. StartedAt isn't available if the BatchPrediction is in the PENDING
 	// state.
-	StartedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartedAt *time.Time `type:"timestamp"`
 
 	// The status of the BatchPrediction, which can be one of the following values:
 	//

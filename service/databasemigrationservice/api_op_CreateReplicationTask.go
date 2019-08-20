@@ -32,7 +32,7 @@ type CreateReplicationTaskInput struct {
 	// to start. Specifying both values results in an error.
 	//
 	// Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”
-	CdcStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CdcStartTime *time.Time `type:"timestamp"`
 
 	// Indicates when you want a change data capture (CDC) operation to stop. The
 	// value can be either server time or commit time.

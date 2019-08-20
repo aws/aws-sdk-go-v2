@@ -31,7 +31,7 @@ type BatchPrediction struct {
 
 	// The time that the BatchPrediction was created. The time is expressed in epoch
 	// time.
-	CreatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `type:"timestamp"`
 
 	// The AWS user account that invoked the BatchPrediction. The account type can
 	// be either an AWS root account or an AWS Identity and Access Management (IAM)
@@ -39,7 +39,7 @@ type BatchPrediction struct {
 	CreatedByIamUser *string `type:"string"`
 
 	// A timestamp represented in epoch time.
-	FinishedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	FinishedAt *time.Time `type:"timestamp"`
 
 	// The location of the data file or directory in Amazon Simple Storage Service
 	// (Amazon S3).
@@ -50,7 +50,7 @@ type BatchPrediction struct {
 
 	// The time of the most recent edit to the BatchPrediction. The time is expressed
 	// in epoch time.
-	LastUpdatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `type:"timestamp"`
 
 	// The ID of the MLModel that generated predictions for the BatchPrediction
 	// request.
@@ -69,7 +69,7 @@ type BatchPrediction struct {
 	OutputUri *string `type:"string"`
 
 	// A timestamp represented in epoch time.
-	StartedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartedAt *time.Time `type:"timestamp"`
 
 	// The status of the BatchPrediction. This element can have one of the following
 	// values:
@@ -112,7 +112,7 @@ type DataSource struct {
 
 	// The time that the DataSource was created. The time is expressed in epoch
 	// time.
-	CreatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `type:"timestamp"`
 
 	// The AWS user account from which the DataSource was created. The account type
 	// can be either an AWS root account or an AWS Identity and Access Management
@@ -135,11 +135,11 @@ type DataSource struct {
 	DataSourceId *string `min:"1" type:"string"`
 
 	// A timestamp represented in epoch time.
-	FinishedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	FinishedAt *time.Time `type:"timestamp"`
 
 	// The time of the most recent edit to the BatchPrediction. The time is expressed
 	// in epoch time.
-	LastUpdatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `type:"timestamp"`
 
 	// A description of the most recent details about creating the DataSource.
 	Message *string `type:"string"`
@@ -161,7 +161,7 @@ type DataSource struct {
 	RoleARN *string `min:"1" type:"string"`
 
 	// A timestamp represented in epoch time.
-	StartedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartedAt *time.Time `type:"timestamp"`
 
 	// The current status of the DataSource. This element can have one of the following
 	// values:
@@ -197,7 +197,7 @@ type Evaluation struct {
 
 	// The time that the Evaluation was created. The time is expressed in epoch
 	// time.
-	CreatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `type:"timestamp"`
 
 	// The AWS user account that invoked the evaluation. The account type can be
 	// either an AWS root account or an AWS Identity and Access Management (IAM)
@@ -211,7 +211,7 @@ type Evaluation struct {
 	EvaluationId *string `min:"1" type:"string"`
 
 	// A timestamp represented in epoch time.
-	FinishedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	FinishedAt *time.Time `type:"timestamp"`
 
 	// The location and name of the data in Amazon Simple Storage Server (Amazon
 	// S3) that is used in the evaluation.
@@ -219,7 +219,7 @@ type Evaluation struct {
 
 	// The time of the most recent edit to the Evaluation. The time is expressed
 	// in epoch time.
-	LastUpdatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `type:"timestamp"`
 
 	// The ID of the MLModel that is the focus of the evaluation.
 	MLModelId *string `min:"1" type:"string"`
@@ -249,7 +249,7 @@ type Evaluation struct {
 	PerformanceMetrics *PerformanceMetrics `type:"structure"`
 
 	// A timestamp represented in epoch time.
-	StartedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartedAt *time.Time `type:"timestamp"`
 
 	// The status of the evaluation. This element can have one of the following
 	// values:
@@ -290,7 +290,7 @@ type MLModel struct {
 	ComputeTime *int64 `type:"long"`
 
 	// The time that the MLModel was created. The time is expressed in epoch time.
-	CreatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `type:"timestamp"`
 
 	// The AWS user account from which the MLModel was created. The account type
 	// can be either an AWS root account or an AWS Identity and Access Management
@@ -301,7 +301,7 @@ type MLModel struct {
 	EndpointInfo *RealtimeEndpointInfo `type:"structure"`
 
 	// A timestamp represented in epoch time.
-	FinishedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	FinishedAt *time.Time `type:"timestamp"`
 
 	// The location of the data file or directory in Amazon Simple Storage Service
 	// (Amazon S3).
@@ -309,7 +309,7 @@ type MLModel struct {
 
 	// The time of the most recent edit to the MLModel. The time is expressed in
 	// epoch time.
-	LastUpdatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastUpdatedAt *time.Time `type:"timestamp"`
 
 	// The ID assigned to the MLModel at creation.
 	MLModelId *string `min:"1" type:"string"`
@@ -336,13 +336,13 @@ type MLModel struct {
 
 	// The time of the most recent edit to the ScoreThreshold. The time is expressed
 	// in epoch time.
-	ScoreThresholdLastUpdatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ScoreThresholdLastUpdatedAt *time.Time `type:"timestamp"`
 
 	// Long integer type that is a 64-bit signed number.
 	SizeInBytes *int64 `type:"long"`
 
 	// A timestamp represented in epoch time.
-	StartedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartedAt *time.Time `type:"timestamp"`
 
 	// The current status of an MLModel. This element can have one of the following
 	// values:
@@ -826,7 +826,7 @@ type RealtimeEndpointInfo struct {
 
 	// The time that the request to create the real-time endpoint for the MLModel
 	// was received. The time is expressed in epoch time.
-	CreatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedAt *time.Time `type:"timestamp"`
 
 	// The current status of the real-time endpoint for the MLModel. This element
 	// can have one of the following values:

@@ -57,7 +57,7 @@ type ImportKeyMaterialInput struct {
 	// expires, AWS KMS deletes the key material and the CMK becomes unusable. You
 	// must omit this parameter when the ExpirationModel parameter is set to KEY_MATERIAL_DOES_NOT_EXPIRE.
 	// Otherwise it is required.
-	ValidTo *time.Time `type:"timestamp" timestampFormat:"unix"`
+	ValidTo *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

@@ -144,7 +144,7 @@ type GetClusterCredentialsOutput struct {
 	DbUser *string `type:"string"`
 
 	// The date and time the password in DbPassword expires.
-	Expiration *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+	Expiration *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

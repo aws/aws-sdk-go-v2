@@ -44,7 +44,7 @@ type App struct {
 	// Create date / time for the Amplify App.
 	//
 	// CreateTime is a required field
-	CreateTime *time.Time `locationName:"createTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreateTime *time.Time `locationName:"createTime" type:"timestamp" required:"true"`
 
 	// Custom redirect / rewrite rules for the Amplify App.
 	CustomRules []CustomRule `locationName:"customRules" type:"list"`
@@ -104,7 +104,7 @@ type App struct {
 	// Update date / time for the Amplify App.
 	//
 	// UpdateTime is a required field
-	UpdateTime *time.Time `locationName:"updateTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	UpdateTime *time.Time `locationName:"updateTime" type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -160,7 +160,8 @@ func (s App) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreateTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CustomRules != nil {
 		v := s.CustomRules
@@ -262,7 +263,8 @@ func (s App) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.UpdateTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "updateTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "updateTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -397,7 +399,7 @@ type Branch struct {
 	// Creation date and time for a branch, part of an Amplify App.
 	//
 	// CreateTime is a required field
-	CreateTime *time.Time `locationName:"createTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreateTime *time.Time `locationName:"createTime" type:"timestamp" required:"true"`
 
 	// Custom domains for a branch, part of an Amplify App.
 	//
@@ -463,7 +465,7 @@ type Branch struct {
 	// Last updated date and time for a branch, part of an Amplify App.
 	//
 	// UpdateTime is a required field
-	UpdateTime *time.Time `locationName:"updateTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	UpdateTime *time.Time `locationName:"updateTime" type:"timestamp" required:"true"`
 }
 
 // String returns the string representation
@@ -519,7 +521,8 @@ func (s Branch) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreateTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CustomDomains != nil {
 		v := s.CustomDomains
@@ -621,7 +624,8 @@ func (s Branch) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.UpdateTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "updateTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "updateTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -872,10 +876,10 @@ type JobSummary struct {
 	// Commit date / time for the Job.
 	//
 	// CommitTime is a required field
-	CommitTime *time.Time `locationName:"commitTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CommitTime *time.Time `locationName:"commitTime" type:"timestamp" required:"true"`
 
 	// End date / time for the Job.
-	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
 
 	// Arn for the Job.
 	//
@@ -897,7 +901,7 @@ type JobSummary struct {
 	// Start date / time for the Job.
 	//
 	// StartTime is a required field
-	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartTime *time.Time `locationName:"startTime" type:"timestamp" required:"true"`
 
 	// Status for the Job.
 	//
@@ -928,13 +932,15 @@ func (s JobSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CommitTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "commitTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "commitTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.EndTime != nil {
 		v := *s.EndTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "endTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "endTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.JobArn != nil {
 		v := *s.JobArn
@@ -958,7 +964,8 @@ func (s JobSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "startTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "startTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status
@@ -978,7 +985,7 @@ type ProductionBranch struct {
 	BranchName *string `locationName:"branchName" min:"1" type:"string"`
 
 	// Last Deploy Time of Production Branch.
-	LastDeployTime *time.Time `locationName:"lastDeployTime" type:"timestamp" timestampFormat:"unix"`
+	LastDeployTime *time.Time `locationName:"lastDeployTime" type:"timestamp"`
 
 	// Status of Production Branch.
 	Status *string `locationName:"status" min:"3" type:"string"`
@@ -1004,7 +1011,8 @@ func (s ProductionBranch) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastDeployTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lastDeployTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "lastDeployTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Status != nil {
 		v := *s.Status
@@ -1035,7 +1043,7 @@ type Step struct {
 	// End date/ time of the execution step.
 	//
 	// EndTime is a required field
-	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	EndTime *time.Time `locationName:"endTime" type:"timestamp" required:"true"`
 
 	// URL to the logs for the execution step.
 	LogUrl *string `locationName:"logUrl" type:"string"`
@@ -1046,7 +1054,7 @@ type Step struct {
 	// Start date/ time of the execution step.
 	//
 	// StartTime is a required field
-	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	StartTime *time.Time `locationName:"startTime" type:"timestamp" required:"true"`
 
 	// Status of the execution step.
 	//
@@ -1085,7 +1093,8 @@ func (s Step) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.EndTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "endTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "endTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.LogUrl != nil {
 		v := *s.LogUrl
@@ -1109,7 +1118,8 @@ func (s Step) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "startTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "startTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status
@@ -1253,7 +1263,7 @@ type Webhook struct {
 	// Create date / time for a webhook.
 	//
 	// CreateTime is a required field
-	CreateTime *time.Time `locationName:"createTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	CreateTime *time.Time `locationName:"createTime" type:"timestamp" required:"true"`
 
 	// Description for a webhook.
 	//
@@ -1263,7 +1273,7 @@ type Webhook struct {
 	// Update date / time for a webhook.
 	//
 	// UpdateTime is a required field
-	UpdateTime *time.Time `locationName:"updateTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+	UpdateTime *time.Time `locationName:"updateTime" type:"timestamp" required:"true"`
 
 	// ARN for the webhook.
 	//
@@ -1298,7 +1308,8 @@ func (s Webhook) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreateTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "createTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "createTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -1310,7 +1321,8 @@ func (s Webhook) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.UpdateTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "updateTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "updateTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.WebhookArn != nil {
 		v := *s.WebhookArn

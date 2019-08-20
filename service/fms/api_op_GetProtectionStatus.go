@@ -18,7 +18,7 @@ type GetProtectionStatusInput struct {
 	// type. The sample request above indicates a number type because the default
 	// used by AWS Firewall Manager is Unix time in seconds. However, any valid
 	// timestamp format is allowed.
-	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	EndTime *time.Time `type:"timestamp"`
 
 	// Specifies the number of objects that you want AWS Firewall Manager to return
 	// for this request. If you have more objects than the number that you specify
@@ -47,7 +47,7 @@ type GetProtectionStatusInput struct {
 	// type. The sample request above indicates a number type because the default
 	// used by AWS Firewall Manager is Unix time in seconds. However, any valid
 	// timestamp format is allowed.
-	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	StartTime *time.Time `type:"timestamp"`
 }
 
 // String returns the string representation

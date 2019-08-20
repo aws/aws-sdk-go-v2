@@ -46,6 +46,7 @@ func (s *DescribeObjectInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeObjectInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.Path != nil {
 		v := *s.Path
@@ -77,7 +78,7 @@ type DescribeObjectOutput struct {
 	ETag *string `location:"header" locationName:"ETag" min:"1" type:"string"`
 
 	// The date and time that the object was last modified.
-	LastModified *time.Time `location:"header" locationName:"Last-Modified" type:"timestamp" timestampFormat:"rfc822"`
+	LastModified *time.Time `location:"header" locationName:"Last-Modified" type:"timestamp"`
 }
 
 // String returns the string representation
@@ -115,7 +116,8 @@ func (s DescribeObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LastModified
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Last-Modified", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+		e.SetValue(protocol.HeaderTarget, "Last-Modified",
+			protocol.TimeValue{V: v, Format: protocol.RFC822TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	return nil
 }

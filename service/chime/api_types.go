@@ -36,7 +36,7 @@ type Account struct {
 	AwsAccountId *string `type:"string" required:"true"`
 
 	// The Amazon Chime account creation timestamp, in ISO 8601 format.
-	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The default license for the Amazon Chime account.
 	DefaultLicense License `type:"string" enum:"true"`
@@ -79,7 +79,8 @@ func (s Account) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedTimestamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if len(s.DefaultLicense) > 0 {
 		v := s.DefaultLicense
@@ -164,7 +165,7 @@ type Bot struct {
 	BotType BotType `type:"string" enum:"true"`
 
 	// The bot creation timestamp, in ISO 8601 format.
-	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// When true, the bot is stopped from running in your account.
 	Disabled *bool `type:"boolean"`
@@ -177,7 +178,7 @@ type Bot struct {
 	SecurityToken *string `type:"string"`
 
 	// The updated bot timestamp, in ISO 8601 format.
-	UpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	UpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The unique ID for the bot user.
 	UserId *string `type:"string"`
@@ -212,7 +213,8 @@ func (s Bot) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedTimestamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.Disabled != nil {
 		v := *s.Disabled
@@ -236,7 +238,8 @@ func (s Bot) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.UpdatedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "UpdatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "UpdatedTimestamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.UserId != nil {
 		v := *s.UserId
@@ -596,10 +599,10 @@ type PhoneNumber struct {
 	Capabilities *PhoneNumberCapabilities `type:"structure"`
 
 	// The phone number creation timestamp, in ISO 8601 format.
-	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The deleted phone number timestamp, in ISO 8601 format.
-	DeletionTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DeletionTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The phone number, in E.164 format.
 	E164PhoneNumber *string `type:"string"`
@@ -617,7 +620,7 @@ type PhoneNumber struct {
 	Type PhoneNumberType `type:"string" enum:"true"`
 
 	// The updated phone number timestamp, in ISO 8601 format.
-	UpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	UpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 }
 
 // String returns the string representation
@@ -649,13 +652,15 @@ func (s PhoneNumber) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedTimestamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.DeletionTimestamp != nil {
 		v := *s.DeletionTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DeletionTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "DeletionTimestamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.E164PhoneNumber != nil {
 		v := *s.E164PhoneNumber
@@ -691,7 +696,8 @@ func (s PhoneNumber) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.UpdatedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "UpdatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "UpdatedTimestamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -703,7 +709,7 @@ type PhoneNumberAssociation struct {
 	_ struct{} `type:"structure"`
 
 	// The timestamp of the phone number association, in ISO 8601 format.
-	AssociatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	AssociatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// Defines the association with an Amazon Chime account ID, user ID, or Amazon
 	// Chime Voice Connector ID.
@@ -724,7 +730,8 @@ func (s PhoneNumberAssociation) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.AssociatedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AssociatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "AssociatedTimestamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if len(s.Name) > 0 {
 		v := s.Name
@@ -863,7 +870,7 @@ type PhoneNumberOrder struct {
 	_ struct{} `type:"structure"`
 
 	// The phone number order creation timestamp, in ISO 8601 format.
-	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The ordered phone number details, such as the phone number in E.164 format
 	// and the phone number status.
@@ -879,7 +886,7 @@ type PhoneNumberOrder struct {
 	Status PhoneNumberOrderStatus `type:"string" enum:"true"`
 
 	// The updated phone number order timestamp, in ISO 8601 format.
-	UpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	UpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 }
 
 // String returns the string representation
@@ -893,7 +900,8 @@ func (s PhoneNumberOrder) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedTimestamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.OrderedPhoneNumbers != nil {
 		v := s.OrderedPhoneNumbers
@@ -929,7 +937,8 @@ func (s PhoneNumberOrder) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.UpdatedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "UpdatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "UpdatedTimestamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -1104,7 +1113,7 @@ type TerminationHealth struct {
 	Source *string `type:"string"`
 
 	// The timestamp, in ISO 8601 format.
-	Timestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	Timestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 }
 
 // String returns the string representation
@@ -1124,7 +1133,8 @@ func (s TerminationHealth) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Timestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "Timestamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	return nil
 }
@@ -1243,7 +1253,7 @@ type User struct {
 
 	// Date and time when the user is invited to the Amazon Chime account, in ISO
 	// 8601 format.
-	InvitedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
+	InvitedOn *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The license type for the user.
 	LicenseType License `type:"string" enum:"true"`
@@ -1258,7 +1268,7 @@ type User struct {
 	PrimaryProvisionedNumber *string `type:"string"`
 
 	// Date and time when the user is registered, in ISO 8601 format.
-	RegisteredOn *time.Time `type:"timestamp" timestampFormat:"unix"`
+	RegisteredOn *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The user ID.
 	//
@@ -1295,7 +1305,8 @@ func (s User) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.InvitedOn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "InvitedOn", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "InvitedOn",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if len(s.LicenseType) > 0 {
 		v := s.LicenseType
@@ -1325,7 +1336,8 @@ func (s User) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.RegisteredOn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "RegisteredOn", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "RegisteredOn",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.UserId != nil {
 		v := *s.UserId
@@ -1447,7 +1459,7 @@ type VoiceConnector struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Chime Voice Connector creation timestamp, in ISO 8601 format.
-	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The name of the Amazon Chime Voice Connector.
 	Name *string `min:"1" type:"string"`
@@ -1459,7 +1471,7 @@ type VoiceConnector struct {
 	RequireEncryption *bool `type:"boolean"`
 
 	// The updated Amazon Chime Voice Connector timestamp, in ISO 8601 format.
-	UpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	UpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The Amazon Chime Voice Connector ID.
 	VoiceConnectorId *string `type:"string"`
@@ -1476,7 +1488,8 @@ func (s VoiceConnector) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreatedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreatedTimestamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -1500,7 +1513,8 @@ func (s VoiceConnector) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.UpdatedTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "UpdatedTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "UpdatedTimestamp",
+			protocol.TimeValue{V: v, Format: "iso8601", QuotedFormatTime: true}, metadata)
 	}
 	if s.VoiceConnectorId != nil {
 		v := *s.VoiceConnectorId

@@ -26,7 +26,7 @@ type ReportInstanceStatusInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The time at which the reported instance health state ended.
-	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"iso8601"`
+	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
 
 	// The instances.
 	//
@@ -60,7 +60,7 @@ type ReportInstanceStatusInput struct {
 	ReasonCodes []ReportInstanceReasonCodes `locationName:"reasonCode" locationNameList:"item" type:"list" required:"true"`
 
 	// The time at which the reported instance health state began.
-	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"iso8601"`
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
 
 	// The status of all instances listed.
 	//

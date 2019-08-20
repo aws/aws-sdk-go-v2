@@ -108,7 +108,7 @@ type BusinessReport struct {
 	_ struct{} `type:"structure"`
 
 	// The time of report delivery.
-	DeliveryTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DeliveryTime *time.Time `type:"timestamp"`
 
 	// The download link where a user can download the report.
 	DownloadUrl *string `type:"string"`
@@ -513,7 +513,7 @@ type DeviceEvent struct {
 	_ struct{} `type:"structure"`
 
 	// The time (in epoch) when the event occurred.
-	Timestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+	Timestamp *time.Time `type:"timestamp"`
 
 	// The type of device event.
 	Type DeviceEventType `type:"string" enum:"true"`
@@ -536,7 +536,7 @@ type DeviceNetworkProfileInfo struct {
 	CertificateArn *string `type:"string"`
 
 	// The time (in epoch) when the certificate expires.
-	CertificateExpirationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CertificateExpirationTime *time.Time `type:"timestamp"`
 
 	// The ARN of the network profile associated with a device.
 	NetworkProfileArn *string `type:"string"`

@@ -46,7 +46,7 @@ func (s *GetBackupPlanInput) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetBackupPlanInput) MarshalFields(e protocol.FieldEncoder) error {
-	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
 	if s.BackupPlanId != nil {
 		v := *s.BackupPlanId
@@ -82,7 +82,7 @@ type GetBackupPlanOutput struct {
 	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
 	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
-	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	CreationDate *time.Time `type:"timestamp"`
 
 	// A unique string that identifies the request and allows failed requests to
 	// be retried without the risk of executing the operation twice.
@@ -92,13 +92,13 @@ type GetBackupPlanOutput struct {
 	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds.
 	// For example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
-	DeletionDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	DeletionDate *time.Time `type:"timestamp"`
 
 	// The last time a job to back up resources was executed with this backup plan.
 	// A date and time, in Unix format and Coordinated Universal Time (UTC). The
 	// value of LastExecutionDate is accurate to milliseconds. For example, the
 	// value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
-	LastExecutionDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+	LastExecutionDate *time.Time `type:"timestamp"`
 
 	// Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most
 	// 1,024 bytes long. Version IDs cannot be edited.
@@ -134,7 +134,8 @@ func (s GetBackupPlanOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CreationDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "CreationDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.CreatorRequestId != nil {
 		v := *s.CreatorRequestId
@@ -146,13 +147,15 @@ func (s GetBackupPlanOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DeletionDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DeletionDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "DeletionDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.LastExecutionDate != nil {
 		v := *s.LastExecutionDate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LastExecutionDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "LastExecutionDate",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
 	}
 	if s.VersionId != nil {
 		v := *s.VersionId
