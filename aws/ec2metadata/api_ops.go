@@ -19,7 +19,7 @@ func (c *Client) GetMetadata(p string) (string, error) {
 	op := &aws.Operation{
 		Name:       "GetMetadata",
 		HTTPMethod: "GET",
-		HTTPPath:   path.Join("/", "meta-data", p),
+		HTTPPath:   suffixPath("/meta-data", p),
 	}
 
 	output := &metadataOutput{}
@@ -35,7 +35,7 @@ func (c *Client) GetUserData() (string, error) {
 	op := &aws.Operation{
 		Name:       "GetUserData",
 		HTTPMethod: "GET",
-		HTTPPath:   path.Join("/", "user-data"),
+		HTTPPath:   "/user-data",
 	}
 
 	output := &metadataOutput{}
@@ -56,7 +56,7 @@ func (c *Client) GetDynamicData(p string) (string, error) {
 	op := &aws.Operation{
 		Name:       "GetDynamicData",
 		HTTPMethod: "GET",
-		HTTPPath:   path.Join("/", "dynamic", p),
+		HTTPPath:   suffixPath("/dynamic", p),
 	}
 
 	output := &metadataOutput{}
@@ -159,4 +159,12 @@ type EC2InstanceIdentityDocument struct {
 	KernelID           string    `json:"kernelId"`
 	RamdiskID          string    `json:"ramdiskId"`
 	Architecture       string    `json:"architecture"`
+}
+
+func suffixPath(base, add string) string {
+	reqPath := path.Join(base, add)
+	if len(add) != 0 && add[len(add)-1] == '/' {
+		reqPath += "/"
+	}
+	return reqPath
 }

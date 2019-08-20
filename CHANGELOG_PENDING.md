@@ -3,6 +3,6 @@
 ### SDK Enhancements
 
 ### SDK Bugs
-* `private/model`: Handles empty map vs unset map behavior in send request ([#337](https://github.com/aws/aws-sdk-go-v2/pull/337))
-  * Updates shape marshal model to handle the empty map vs nil map behavior. Also adds a test case to assert behavior when a user sends an empty map vs unset map.
-  * Fixes [#332](https://github.com/aws/aws-sdk-go-v2/issues/332)
+* `aws/ec2rolecreds`: Fix security creds path to include trailing slash ([#356](https://github.com/aws/aws-sdk-go-v2/pull/356))
+  * Fixes the iamSecurityCredsPath var to include a trailing slash preventing redirects when making requests to the EC2 Instance Metadata service.
+  * Fixes [#351](https://github.com/aws/aws-sdk-go-v2/issues/351)

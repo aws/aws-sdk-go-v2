@@ -20,6 +20,7 @@ func TestClientDisableIMDS(t *testing.T) {
 
 	cfg := unit.Config()
 	cfg.LogLevel = aws.LogDebugWithHTTPBody
+	cfg.Logger = t
 
 	svc := ec2metadata.New(cfg)
 	resp, err := svc.Region()
