@@ -238,6 +238,9 @@ func unmarshalHeader(v reflect.Value, header string, tag reflect.StructTag) erro
 		format := tag.Get("timestampFormat")
 		if len(format) == 0 {
 			format = protocol.RFC822TimeFormatName
+			if tag.Get("location") == "querystring" {
+				format = protocol.ISO8601TimeFormatName
+			}
 		}
 		t, err := protocol.ParseTime(format, header)
 		if err != nil {

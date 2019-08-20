@@ -208,7 +208,7 @@ func isShapeFieldsNested(loc string, s *Shape) bool {
 }
 
 func QuotedFormatTime(s marshalShapeRef) string  {
-	if  s.Ref.API.Metadata.Protocol == "json" || s.Ref.API.Metadata.Protocol == "rest-json" && s.Location() == "Body" {
+	if  (s.Ref.API.Metadata.Protocol == "json" || s.Ref.API.Metadata.Protocol == "rest-json") && s.Location() == "Body" {
 		return "true"
 	}
 	return "false"

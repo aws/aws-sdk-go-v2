@@ -228,7 +228,10 @@ func buildScalar(v reflect.Value, buf *bytes.Buffer, tag reflect.StructTag, pare
 				format = protocol.UnixTimeFormatName
 			}
 
-			ts, _ := protocol.FormatTime(format, converted)
+			ts, err := protocol.FormatTime(format, converted)
+			if err != nil {
+				return fmt.Errorf("%v",err)
+			}
 			if format != protocol.UnixTimeFormatName {
 				ts = `"` + ts + `"`
 			}

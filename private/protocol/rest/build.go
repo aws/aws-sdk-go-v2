@@ -329,7 +329,10 @@ func convertType(v reflect.Value, tag reflect.StructTag) (str string, err error)
 				format = protocol.ISO8601TimeFormatName
 			}
 		}
-		str,_ = protocol.FormatTime(format, value)
+		str,err = protocol.FormatTime(format, value)
+		if err != nil {
+			return "",fmt.Errorf("%v",err)
+		}
 	case aws.JSONValue:
 		if len(value) == 0 {
 			return "", &protocol.ErrValueNotSet{}
