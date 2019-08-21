@@ -9,6 +9,10 @@ import (
 	"text/template"
 )
 
+// UnmarshalShapeGoCode renders the shape's Unmarshal method to decode each
+// field within the shape. A string is returned of the rendered Go code.
+//
+// Will panic if error.
 func UnmarshalShapeGoCode(s *Shape) string {
 	w := &bytes.Buffer{}
 	if s.API.Metadata.Protocol == "rest-xml" {
@@ -30,11 +34,11 @@ func UnmarshalShapeGoCode(s *Shape) string {
 
 var unmarshalShapeXMLTmpl = template.Must(template.New("unmarshalShapeXMLTmpl").Funcs(
 	template.FuncMap{
-		"setImports": setImports,
-		"setSDKImports": setSDKImports,
+		"setImports":                 setImports,
+		"setSDKImports":              setSDKImports,
 		"getStructFieldOuterTagName": getStructFieldOuterTagName,
-		"findLocationNameLocal": findLocationNameLocal,
-		"templateMap": templateMap,
+		"findLocationNameLocal":      findLocationNameLocal,
+		"templateMap":                templateMap,
 	},
 ).Parse(`
 {{ define "main body" -}}
@@ -655,8 +659,8 @@ func unmarshalAWSXMLFlattenedMap{{ $shapeName }}(s *{{ $.GoTypeElem }}, d *xml.D
 
 var unmarshalShapeRESTTmpl = template.Must(template.New("unmarshalShapeRESTTmpl").Funcs(
 	template.FuncMap{
-		"setImports": setImports,
-		"setSDKImports": setSDKImports,
+		"setImports":       setImports,
+		"setSDKImports":    setSDKImports,
 		"getHeaderKeyName": getHeaderKeyName,
 	},
 ).Parse(`
@@ -773,7 +777,7 @@ func (s *{{ $.GoTypeElem }}) UnmarshalAWSREST(r *http.Response) (err error) {
 
 var unmarshalShapePayloadTmpl = template.Must(template.New("unmarshalShapePayloadTmpl").Funcs(
 	template.FuncMap{
-		"setImports": setImports,
+		"setImports":    setImports,
 		"setSDKImports": setSDKImports,
 	},
 ).Parse(`
@@ -1072,11 +1076,11 @@ func getStructFieldOuterTagName(ref *ShapeRef, fieldName string) string {
 
 func findLocationNameLocal(locationName string) string {
 	i := strings.Index(locationName, ":")
-	return locationName[i + 1:]
+	return locationName[i+1:]
 }
 
 func templateMap(args ...interface{}) map[string]interface{} {
-	if len(args) % 2 != 0 {
+	if len(args)%2 != 0 {
 		panic(fmt.Sprintf("invalid map call, non-even args %v", args))
 	}
 	m := map[string]interface{}{}
@@ -1085,7 +1089,7 @@ func templateMap(args ...interface{}) map[string]interface{} {
 		if !ok {
 			panic(fmt.Sprintf("invalid map call, arg is not string, %T, %v", args[i], args[i]))
 		}
-		m[k] = args[i + 1]
+		m[k] = args[i+1]
 	}
 	return m
 }

@@ -286,7 +286,7 @@ func writeAPIFile(g *generateInfo) error {
 		codeLayout,
 		"",
 		g.API.PackageName(),
-		g.API.APIParamShapesGoCode(),
+		g.API.APIShapesGoCode(),
 	); err != nil {
 		return err
 	}
