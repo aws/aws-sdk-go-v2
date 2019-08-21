@@ -19,7 +19,7 @@ var _ = awsutil.Prettify
 type AccessLog struct {
 	_ struct{} `type:"structure"`
 
-	// The file object to send virtual node access logs to.
+	// An object representing an access log file.
 	File *FileAccessLog `locationName:"file" type:"structure"`
 }
 
@@ -60,15 +60,9 @@ func (s AccessLog) MarshalFields(e protocol.FieldEncoder) error {
 type AwsCloudMapInstanceAttribute struct {
 	_ struct{} `type:"structure"`
 
-	// The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud
-	// Map service instance that contains the specified key and value is returned.
-	//
 	// Key is a required field
 	Key *string `locationName:"key" min:"1" type:"string" required:"true"`
 
-	// The value of an AWS Cloud Map service instance attribute key. Any AWS Cloud
-	// Map service instance that contains the specified key and value is returned.
-	//
 	// Value is a required field
 	Value *string `locationName:"value" min:"1" type:"string" required:"true"`
 }
@@ -125,19 +119,11 @@ func (s AwsCloudMapInstanceAttribute) MarshalFields(e protocol.FieldEncoder) err
 type AwsCloudMapServiceDiscovery struct {
 	_ struct{} `type:"structure"`
 
-	// A string map that contains attributes with values that you can use to filter
-	// instances by any custom attribute that you specified when you registered
-	// the instance. Only instances that match all of the specified key/value pairs
-	// will be returned.
 	Attributes []AwsCloudMapInstanceAttribute `locationName:"attributes" type:"list"`
 
-	// The name of the AWS Cloud Map namespace to use.
-	//
 	// NamespaceName is a required field
 	NamespaceName *string `locationName:"namespaceName" min:"1" type:"string" required:"true"`
 
-	// The name of the AWS Cloud Map service to use.
-	//
 	// ServiceName is a required field
 	ServiceName *string `locationName:"serviceName" min:"1" type:"string" required:"true"`
 }
@@ -213,7 +199,7 @@ func (s AwsCloudMapServiceDiscovery) MarshalFields(e protocol.FieldEncoder) erro
 type Backend struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies a virtual service to use as a backend for a virtual node.
+	// An object representing a virtual service backend for a virtual node.
 	VirtualService *VirtualServiceBackend `locationName:"virtualService" type:"structure"`
 }
 
@@ -254,8 +240,6 @@ func (s Backend) MarshalFields(e protocol.FieldEncoder) error {
 type DnsServiceDiscovery struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the DNS service discovery hostname for the virtual node.
-	//
 	// Hostname is a required field
 	Hostname *string `locationName:"hostname" type:"string" required:"true"`
 }
@@ -295,12 +279,6 @@ func (s DnsServiceDiscovery) MarshalFields(e protocol.FieldEncoder) error {
 type EgressFilter struct {
 	_ struct{} `type:"structure"`
 
-	// The egress filter type. By default, the type is DROP_ALL, which allows egress
-	// only from virtual nodes to other defined resources in the service mesh (and
-	// any traffic to *.amazonaws.com for AWS API calls). You can set the egress
-	// filter type to ALLOW_ALL to allow egress to any endpoint inside or outside
-	// of the service mesh.
-	//
 	// Type is a required field
 	Type EgressFilterType `locationName:"type" type:"string" required:"true" enum:"true"`
 }
@@ -339,15 +317,6 @@ func (s EgressFilter) MarshalFields(e protocol.FieldEncoder) error {
 type FileAccessLog struct {
 	_ struct{} `type:"structure"`
 
-	// The file path to write access logs to. You can use /dev/stdout to send access
-	// logs to standard out and configure your Envoy container to use a log driver,
-	// such as awslogs, to export the access logs to a log storage service such
-	// as Amazon CloudWatch Logs. You can also specify a path in the Envoy container's
-	// file system to write the files to disk.
-	//
-	// The Envoy process must have write permissions to the path that you specify
-	// here. Otherwise, Envoy fails to bootstrap properly.
-	//
 	// Path is a required field
 	Path *string `locationName:"path" min:"1" type:"string" required:"true"`
 }
@@ -385,45 +354,114 @@ func (s FileAccessLog) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object representing the method and value to match the header value sent
+// with a request. Specify one match method.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HeaderMatchMethod
+type HeaderMatchMethod struct {
+	_ struct{} `type:"structure"`
+
+	Exact *string `locationName:"exact" min:"1" type:"string"`
+
+	Prefix *string `locationName:"prefix" min:"1" type:"string"`
+
+	// The range of values to match on. The first character of the range is included
+	// in the range, though the last character is not. For example, if the range
+	// specified were 1-100, only values 1-99 would be matched.
+	Range *MatchRange `locationName:"range" type:"structure"`
+
+	Regex *string `locationName:"regex" min:"1" type:"string"`
+
+	Suffix *string `locationName:"suffix" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s HeaderMatchMethod) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HeaderMatchMethod) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HeaderMatchMethod"}
+	if s.Exact != nil && len(*s.Exact) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Exact", 1))
+	}
+	if s.Prefix != nil && len(*s.Prefix) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Prefix", 1))
+	}
+	if s.Regex != nil && len(*s.Regex) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Regex", 1))
+	}
+	if s.Suffix != nil && len(*s.Suffix) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Suffix", 1))
+	}
+	if s.Range != nil {
+		if err := s.Range.Validate(); err != nil {
+			invalidParams.AddNested("Range", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HeaderMatchMethod) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Exact != nil {
+		v := *s.Exact
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "exact", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Prefix != nil {
+		v := *s.Prefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "prefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Range != nil {
+		v := s.Range
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "range", v, metadata)
+	}
+	if s.Regex != nil {
+		v := *s.Regex
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "regex", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Suffix != nil {
+		v := *s.Suffix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "suffix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // An object representing the health check policy for a virtual node's listener.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HealthCheckPolicy
 type HealthCheckPolicy struct {
 	_ struct{} `type:"structure"`
 
-	// The number of consecutive successful health checks that must occur before
-	// declaring listener healthy.
-	//
 	// HealthyThreshold is a required field
 	HealthyThreshold *int64 `locationName:"healthyThreshold" min:"2" type:"integer" required:"true"`
 
-	// The time period in milliseconds between each health check execution.
-	//
 	// IntervalMillis is a required field
 	IntervalMillis *int64 `locationName:"intervalMillis" min:"5000" type:"long" required:"true"`
 
-	// The destination path for the health check request. This is required only
-	// if the specified protocol is HTTP. If the protocol is TCP, this parameter
-	// is ignored.
 	Path *string `locationName:"path" type:"string"`
 
-	// The destination port for the health check request. This port must match the
-	// port defined in the PortMapping for the listener.
 	Port *int64 `locationName:"port" min:"1" type:"integer"`
 
-	// The protocol for the health check request.
-	//
 	// Protocol is a required field
 	Protocol PortProtocol `locationName:"protocol" type:"string" required:"true" enum:"true"`
 
-	// The amount of time to wait when receiving a response from the health check,
-	// in milliseconds.
-	//
 	// TimeoutMillis is a required field
 	TimeoutMillis *int64 `locationName:"timeoutMillis" min:"2000" type:"long" required:"true"`
 
-	// The number of consecutive failed health checks that must occur before declaring
-	// a virtual node unhealthy.
-	//
 	// UnhealthyThreshold is a required field
 	UnhealthyThreshold *int64 `locationName:"unhealthyThreshold" min:"2" type:"integer" required:"true"`
 }
@@ -529,12 +567,14 @@ func (s HealthCheckPolicy) MarshalFields(e protocol.FieldEncoder) error {
 type HttpRoute struct {
 	_ struct{} `type:"structure"`
 
-	// The action to take if a match is determined.
+	// An object representing the traffic distribution requirements for matched
+	// HTTP requests.
 	//
 	// Action is a required field
 	Action *HttpRouteAction `locationName:"action" type:"structure" required:"true"`
 
-	// The criteria for determining an HTTP request match.
+	// An object representing the requirements for a route to match HTTP requests
+	// for a virtual router.
 	//
 	// Match is a required field
 	Match *HttpRouteMatch `locationName:"match" type:"structure" required:"true"`
@@ -596,10 +636,6 @@ func (s HttpRoute) MarshalFields(e protocol.FieldEncoder) error {
 type HttpRouteAction struct {
 	_ struct{} `type:"structure"`
 
-	// The targets that traffic is routed to when a request matches the route. You
-	// can specify one or more targets and their relative weights to distribute
-	// traffic with.
-	//
 	// WeightedTargets is a required field
 	WeightedTargets []WeightedTarget `locationName:"weightedTargets" min:"1" type:"list" required:"true"`
 }
@@ -650,20 +686,85 @@ func (s HttpRouteAction) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object representing the HTTP header in the request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRouteHeader
+type HttpRouteHeader struct {
+	_ struct{} `type:"structure"`
+
+	Invert *bool `locationName:"invert" type:"boolean"`
+
+	// An object representing the method and value to match the header value sent
+	// with a request. Specify one match method.
+	Match *HeaderMatchMethod `locationName:"match" type:"structure"`
+
+	// Name is a required field
+	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s HttpRouteHeader) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HttpRouteHeader) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HttpRouteHeader"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+	if s.Match != nil {
+		if err := s.Match.Validate(); err != nil {
+			invalidParams.AddNested("Match", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HttpRouteHeader) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Invert != nil {
+		v := *s.Invert
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "invert", protocol.BoolValue(v), metadata)
+	}
+	if s.Match != nil {
+		v := s.Match
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "match", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // An object representing the requirements for a route to match HTTP requests
 // for a virtual router.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/HttpRouteMatch
 type HttpRouteMatch struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the path to match requests with. This parameter must always start
-	// with /, which by itself matches all requests to the virtual service name.
-	// You can also match for path-based routing of requests. For example, if your
-	// virtual service name is my-service.local and you want the route to match
-	// requests to my-service.local/metrics, your prefix should be /metrics.
-	//
+	Headers []HttpRouteHeader `locationName:"headers" min:"1" type:"list"`
+
+	Method HttpMethod `locationName:"method" type:"string" enum:"true"`
+
 	// Prefix is a required field
 	Prefix *string `locationName:"prefix" type:"string" required:"true"`
+
+	Scheme HttpScheme `locationName:"scheme" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -674,9 +775,19 @@ func (s HttpRouteMatch) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HttpRouteMatch) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "HttpRouteMatch"}
+	if s.Headers != nil && len(s.Headers) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Headers", 1))
+	}
 
 	if s.Prefix == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Prefix"))
+	}
+	if s.Headers != nil {
+		for i, v := range s.Headers {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Headers", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -687,11 +798,35 @@ func (s *HttpRouteMatch) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s HttpRouteMatch) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Headers != nil {
+		v := s.Headers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "headers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.Method) > 0 {
+		v := s.Method
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "method", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.Prefix != nil {
 		v := *s.Prefix
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "prefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Scheme) > 0 {
+		v := s.Scheme
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "scheme", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -701,10 +836,10 @@ func (s HttpRouteMatch) MarshalFields(e protocol.FieldEncoder) error {
 type Listener struct {
 	_ struct{} `type:"structure"`
 
-	// The health check information for the listener.
+	// An object representing the health check policy for a virtual node's listener.
 	HealthCheck *HealthCheckPolicy `locationName:"healthCheck" type:"structure"`
 
-	// The port mapping information for the listener.
+	// An object representing a virtual node or virtual router listener port mapping.
 	//
 	// PortMapping is a required field
 	PortMapping *PortMapping `locationName:"portMapping" type:"structure" required:"true"`
@@ -761,7 +896,7 @@ func (s Listener) MarshalFields(e protocol.FieldEncoder) error {
 type Logging struct {
 	_ struct{} `type:"structure"`
 
-	// The access log configuration for a virtual node.
+	// An object representing the access logging information for a virtual node.
 	AccessLog *AccessLog `locationName:"accessLog" type:"structure"`
 }
 
@@ -796,27 +931,79 @@ func (s Logging) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The range of values to match on. The first character of the range is included
+// in the range, though the last character is not. For example, if the range
+// specified were 1-100, only values 1-99 would be matched.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MatchRange
+type MatchRange struct {
+	_ struct{} `type:"structure"`
+
+	// End is a required field
+	End *int64 `locationName:"end" type:"long" required:"true"`
+
+	// Start is a required field
+	Start *int64 `locationName:"start" type:"long" required:"true"`
+}
+
+// String returns the string representation
+func (s MatchRange) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MatchRange) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MatchRange"}
+
+	if s.End == nil {
+		invalidParams.Add(aws.NewErrParamRequired("End"))
+	}
+
+	if s.Start == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Start"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MatchRange) MarshalFields(e protocol.FieldEncoder) error {
+	if s.End != nil {
+		v := *s.End
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "end", protocol.Int64Value(v), metadata)
+	}
+	if s.Start != nil {
+		v := *s.Start
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "start", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // An object representing a service mesh returned by a describe operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MeshData
 type MeshData struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh.
-	//
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The associated metadata for the service mesh.
+	// An object representing metadata for a resource.
 	//
 	// Metadata is a required field
 	Metadata *ResourceMetadata `locationName:"metadata" type:"structure" required:"true"`
 
-	// The associated specification for the service mesh.
+	// An object representing the specification of a service mesh.
 	//
 	// Spec is a required field
 	Spec *MeshSpec `locationName:"spec" type:"structure" required:"true"`
 
-	// The status of the service mesh.
+	// An object representing the status of a service mesh.
 	//
 	// Status is a required field
 	Status *MeshStatus `locationName:"status" type:"structure" required:"true"`
@@ -861,13 +1048,9 @@ func (s MeshData) MarshalFields(e protocol.FieldEncoder) error {
 type MeshRef struct {
 	_ struct{} `type:"structure"`
 
-	// The full Amazon Resource Name (ARN) of the service mesh.
-	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" type:"string" required:"true"`
 
-	// The name of the service mesh.
-	//
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 }
@@ -899,7 +1082,7 @@ func (s MeshRef) MarshalFields(e protocol.FieldEncoder) error {
 type MeshSpec struct {
 	_ struct{} `type:"structure"`
 
-	// The egress filter rules for the service mesh.
+	// An object representing the egress filter rules for a service mesh.
 	EgressFilter *EgressFilter `locationName:"egressFilter" type:"structure"`
 }
 
@@ -939,7 +1122,6 @@ func (s MeshSpec) MarshalFields(e protocol.FieldEncoder) error {
 type MeshStatus struct {
 	_ struct{} `type:"structure"`
 
-	// The current mesh status.
 	Status MeshStatusCode `locationName:"status" type:"string" enum:"true"`
 }
 
@@ -964,13 +1146,9 @@ func (s MeshStatus) MarshalFields(e protocol.FieldEncoder) error {
 type PortMapping struct {
 	_ struct{} `type:"structure"`
 
-	// The port used for the port mapping.
-	//
 	// Port is a required field
 	Port *int64 `locationName:"port" min:"1" type:"integer" required:"true"`
 
-	// The protocol used for the port mapping.
-	//
 	// Protocol is a required field
 	Protocol PortProtocol `locationName:"protocol" type:"string" required:"true" enum:"true"`
 }
@@ -1022,29 +1200,18 @@ func (s PortMapping) MarshalFields(e protocol.FieldEncoder) error {
 type ResourceMetadata struct {
 	_ struct{} `type:"structure"`
 
-	// The full Amazon Resource Name (ARN) for the resource.
-	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" type:"string" required:"true"`
 
-	// The Unix epoch timestamp in seconds for when the resource was created.
-	//
 	// CreatedAt is a required field
 	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" required:"true"`
 
-	// The Unix epoch timestamp in seconds for when the resource was last updated.
-	//
 	// LastUpdatedAt is a required field
 	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" required:"true"`
 
-	// The unique identifier for the resource.
-	//
 	// Uid is a required field
 	Uid *string `locationName:"uid" type:"string" required:"true"`
 
-	// The version of the resource. Resources are created at version 1, and this
-	// version is incremented each time that they're updated.
-	//
 	// Version is a required field
 	Version *int64 `locationName:"version" type:"long" required:"true"`
 }
@@ -1096,33 +1263,27 @@ func (s ResourceMetadata) MarshalFields(e protocol.FieldEncoder) error {
 type RouteData struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh that the route resides in.
-	//
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The associated metadata for the route.
+	// An object representing metadata for a resource.
 	//
 	// Metadata is a required field
 	Metadata *ResourceMetadata `locationName:"metadata" type:"structure" required:"true"`
 
-	// The name of the route.
-	//
 	// RouteName is a required field
 	RouteName *string `locationName:"routeName" min:"1" type:"string" required:"true"`
 
-	// The specifications of the route.
+	// An object representing the specification of a route.
 	//
 	// Spec is a required field
 	Spec *RouteSpec `locationName:"spec" type:"structure" required:"true"`
 
-	// The status of the route.
+	// An object representing the current status of a route.
 	//
 	// Status is a required field
 	Status *RouteStatus `locationName:"status" type:"structure" required:"true"`
 
-	// The virtual router that the route is associated with.
-	//
 	// VirtualRouterName is a required field
 	VirtualRouterName *string `locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
 }
@@ -1178,23 +1339,15 @@ func (s RouteData) MarshalFields(e protocol.FieldEncoder) error {
 type RouteRef struct {
 	_ struct{} `type:"structure"`
 
-	// The full Amazon Resource Name (ARN) for the route.
-	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" type:"string" required:"true"`
 
-	// The name of the service mesh that the route resides in.
-	//
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The name of the route.
-	//
 	// RouteName is a required field
 	RouteName *string `locationName:"routeName" min:"1" type:"string" required:"true"`
 
-	// The virtual router that the route is associated with.
-	//
 	// VirtualRouterName is a required field
 	VirtualRouterName *string `locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
 }
@@ -1238,10 +1391,12 @@ func (s RouteRef) MarshalFields(e protocol.FieldEncoder) error {
 type RouteSpec struct {
 	_ struct{} `type:"structure"`
 
-	// The HTTP routing information for the route.
+	// An object representing the HTTP routing specification for a route.
 	HttpRoute *HttpRoute `locationName:"httpRoute" type:"structure"`
 
-	// The TCP routing information for the route.
+	Priority *int64 `locationName:"priority" type:"integer"`
+
+	// An object representing the TCP routing specification for a route.
 	TcpRoute *TcpRoute `locationName:"tcpRoute" type:"structure"`
 }
 
@@ -1278,6 +1433,12 @@ func (s RouteSpec) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "httpRoute", v, metadata)
 	}
+	if s.Priority != nil {
+		v := *s.Priority
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "priority", protocol.Int64Value(v), metadata)
+	}
 	if s.TcpRoute != nil {
 		v := s.TcpRoute
 
@@ -1292,8 +1453,6 @@ func (s RouteSpec) MarshalFields(e protocol.FieldEncoder) error {
 type RouteStatus struct {
 	_ struct{} `type:"structure"`
 
-	// The current status for the route.
-	//
 	// Status is a required field
 	Status RouteStatusCode `locationName:"status" type:"string" required:"true" enum:"true"`
 }
@@ -1319,10 +1478,12 @@ func (s RouteStatus) MarshalFields(e protocol.FieldEncoder) error {
 type ServiceDiscovery struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies any AWS Cloud Map information for the virtual node.
+	// An object representing the AWS Cloud Map service discovery information for
+	// your virtual node.
 	AwsCloudMap *AwsCloudMapServiceDiscovery `locationName:"awsCloudMap" type:"structure"`
 
-	// Specifies the DNS information for the virtual node.
+	// An object representing the DNS service discovery information for your virtual
+	// node.
 	Dns *DnsServiceDiscovery `locationName:"dns" type:"structure"`
 }
 
@@ -1376,14 +1537,9 @@ func (s ServiceDiscovery) MarshalFields(e protocol.FieldEncoder) error {
 type TagRef struct {
 	_ struct{} `type:"structure"`
 
-	// One part of a key-value pair that make up a tag. A key is a general label
-	// that acts like a category for more specific tag values.
-	//
 	// Key is a required field
 	Key *string `locationName:"key" min:"1" type:"string" required:"true"`
 
-	// The optional part of a key-value pair that make up a tag. A value acts as
-	// a descriptor within a tag category (key).
 	Value *string `locationName:"value" type:"string"`
 }
 
@@ -1431,7 +1587,8 @@ func (s TagRef) MarshalFields(e protocol.FieldEncoder) error {
 type TcpRoute struct {
 	_ struct{} `type:"structure"`
 
-	// The action to take if a match is determined.
+	// An object representing the traffic distribution requirements for matched
+	// TCP requests.
 	//
 	// Action is a required field
 	Action *TcpRouteAction `locationName:"action" type:"structure" required:"true"`
@@ -1478,10 +1635,6 @@ func (s TcpRoute) MarshalFields(e protocol.FieldEncoder) error {
 type TcpRouteAction struct {
 	_ struct{} `type:"structure"`
 
-	// The targets that traffic is routed to when a request matches the route. You
-	// can specify one or more targets and their relative weights to distribute
-	// traffic with.
-	//
 	// WeightedTargets is a required field
 	WeightedTargets []WeightedTarget `locationName:"weightedTargets" min:"1" type:"list" required:"true"`
 }
@@ -1537,28 +1690,24 @@ func (s TcpRouteAction) MarshalFields(e protocol.FieldEncoder) error {
 type VirtualNodeData struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh that the virtual node resides in.
-	//
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The associated metadata for the virtual node.
+	// An object representing metadata for a resource.
 	//
 	// Metadata is a required field
 	Metadata *ResourceMetadata `locationName:"metadata" type:"structure" required:"true"`
 
-	// The specifications of the virtual node.
+	// An object representing the specification of a virtual node.
 	//
 	// Spec is a required field
 	Spec *VirtualNodeSpec `locationName:"spec" type:"structure" required:"true"`
 
-	// The current status for the virtual node.
+	// An object representing the current status of the virtual node.
 	//
 	// Status is a required field
 	Status *VirtualNodeStatus `locationName:"status" type:"structure" required:"true"`
 
-	// The name of the virtual node.
-	//
 	// VirtualNodeName is a required field
 	VirtualNodeName *string `locationName:"virtualNodeName" min:"1" type:"string" required:"true"`
 }
@@ -1608,18 +1757,12 @@ func (s VirtualNodeData) MarshalFields(e protocol.FieldEncoder) error {
 type VirtualNodeRef struct {
 	_ struct{} `type:"structure"`
 
-	// The full Amazon Resource Name (ARN) for the virtual node.
-	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" type:"string" required:"true"`
 
-	// The name of the service mesh that the virtual node resides in.
-	//
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The name of the virtual node.
-	//
 	// VirtualNodeName is a required field
 	VirtualNodeName *string `locationName:"virtualNodeName" min:"1" type:"string" required:"true"`
 }
@@ -1657,8 +1800,6 @@ func (s VirtualNodeRef) MarshalFields(e protocol.FieldEncoder) error {
 type VirtualNodeServiceProvider struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the virtual node that is acting as a service provider.
-	//
 	// VirtualNodeName is a required field
 	VirtualNodeName *string `locationName:"virtualNodeName" min:"1" type:"string" required:"true"`
 }
@@ -1701,18 +1842,14 @@ func (s VirtualNodeServiceProvider) MarshalFields(e protocol.FieldEncoder) error
 type VirtualNodeSpec struct {
 	_ struct{} `type:"structure"`
 
-	// The backends that the virtual node is expected to send outbound traffic to.
 	Backends []Backend `locationName:"backends" type:"list"`
 
-	// The listeners that the virtual node is expected to receive inbound traffic
-	// from. Currently only one listener is supported per virtual node.
 	Listeners []Listener `locationName:"listeners" type:"list"`
 
-	// The inbound and outbound access logging information for the virtual node.
+	// An object representing the logging information for a virtual node.
 	Logging *Logging `locationName:"logging" type:"structure"`
 
-	// The service discovery information for the virtual node. If your virtual node
-	// does not expect ingress traffic, you can omit this parameter.
+	// An object representing the service discovery information for a virtual node.
 	ServiceDiscovery *ServiceDiscovery `locationName:"serviceDiscovery" type:"structure"`
 }
 
@@ -1801,8 +1938,6 @@ func (s VirtualNodeSpec) MarshalFields(e protocol.FieldEncoder) error {
 type VirtualNodeStatus struct {
 	_ struct{} `type:"structure"`
 
-	// The current status of the virtual node.
-	//
 	// Status is a required field
 	Status VirtualNodeStatusCode `locationName:"status" type:"string" required:"true" enum:"true"`
 }
@@ -1828,28 +1963,24 @@ func (s VirtualNodeStatus) MarshalFields(e protocol.FieldEncoder) error {
 type VirtualRouterData struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh that the virtual router resides in.
-	//
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The associated metadata for the virtual router.
+	// An object representing metadata for a resource.
 	//
 	// Metadata is a required field
 	Metadata *ResourceMetadata `locationName:"metadata" type:"structure" required:"true"`
 
-	// The specifications of the virtual router.
+	// An object representing the specification of a virtual router.
 	//
 	// Spec is a required field
 	Spec *VirtualRouterSpec `locationName:"spec" type:"structure" required:"true"`
 
-	// The current status of the virtual router.
+	// An object representing the status of a virtual router.
 	//
 	// Status is a required field
 	Status *VirtualRouterStatus `locationName:"status" type:"structure" required:"true"`
 
-	// The name of the virtual router.
-	//
 	// VirtualRouterName is a required field
 	VirtualRouterName *string `locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
 }
@@ -1945,18 +2076,12 @@ func (s VirtualRouterListener) MarshalFields(e protocol.FieldEncoder) error {
 type VirtualRouterRef struct {
 	_ struct{} `type:"structure"`
 
-	// The full Amazon Resource Name (ARN) for the virtual router.
-	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" type:"string" required:"true"`
 
-	// The name of the service mesh that the virtual router resides in.
-	//
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The name of the virtual router.
-	//
 	// VirtualRouterName is a required field
 	VirtualRouterName *string `locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
 }
@@ -1994,8 +2119,6 @@ func (s VirtualRouterRef) MarshalFields(e protocol.FieldEncoder) error {
 type VirtualRouterServiceProvider struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the virtual router that is acting as a service provider.
-	//
 	// VirtualRouterName is a required field
 	VirtualRouterName *string `locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
 }
@@ -2038,8 +2161,6 @@ func (s VirtualRouterServiceProvider) MarshalFields(e protocol.FieldEncoder) err
 type VirtualRouterSpec struct {
 	_ struct{} `type:"structure"`
 
-	// The listeners that the virtual router is expected to receive inbound traffic
-	// from. Currently only one listener is supported per virtual router.
 	Listeners []VirtualRouterListener `locationName:"listeners" min:"1" type:"list"`
 }
 
@@ -2090,8 +2211,6 @@ func (s VirtualRouterSpec) MarshalFields(e protocol.FieldEncoder) error {
 type VirtualRouterStatus struct {
 	_ struct{} `type:"structure"`
 
-	// The current status of the virtual router.
-	//
 	// Status is a required field
 	Status VirtualRouterStatusCode `locationName:"status" type:"string" required:"true" enum:"true"`
 }
@@ -2117,8 +2236,6 @@ func (s VirtualRouterStatus) MarshalFields(e protocol.FieldEncoder) error {
 type VirtualServiceBackend struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the virtual service that is acting as a virtual node backend.
-	//
 	// VirtualServiceName is a required field
 	VirtualServiceName *string `locationName:"virtualServiceName" type:"string" required:"true"`
 }
@@ -2158,8 +2275,6 @@ func (s VirtualServiceBackend) MarshalFields(e protocol.FieldEncoder) error {
 type VirtualServiceData struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh that the virtual service resides in.
-	//
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
@@ -2168,18 +2283,16 @@ type VirtualServiceData struct {
 	// Metadata is a required field
 	Metadata *ResourceMetadata `locationName:"metadata" type:"structure" required:"true"`
 
-	// The specifications of the virtual service.
+	// An object representing the specification of a virtual service.
 	//
 	// Spec is a required field
 	Spec *VirtualServiceSpec `locationName:"spec" type:"structure" required:"true"`
 
-	// The current status of the virtual service.
+	// An object representing the status of a virtual service.
 	//
 	// Status is a required field
 	Status *VirtualServiceStatus `locationName:"status" type:"structure" required:"true"`
 
-	// The name of the virtual service.
-	//
 	// VirtualServiceName is a required field
 	VirtualServiceName *string `locationName:"virtualServiceName" type:"string" required:"true"`
 }
@@ -2229,10 +2342,10 @@ func (s VirtualServiceData) MarshalFields(e protocol.FieldEncoder) error {
 type VirtualServiceProvider struct {
 	_ struct{} `type:"structure"`
 
-	// The virtual node associated with a virtual service.
+	// An object representing a virtual node service provider.
 	VirtualNode *VirtualNodeServiceProvider `locationName:"virtualNode" type:"structure"`
 
-	// The virtual router associated with a virtual service.
+	// An object representing a virtual node service provider.
 	VirtualRouter *VirtualRouterServiceProvider `locationName:"virtualRouter" type:"structure"`
 }
 
@@ -2283,18 +2396,12 @@ func (s VirtualServiceProvider) MarshalFields(e protocol.FieldEncoder) error {
 type VirtualServiceRef struct {
 	_ struct{} `type:"structure"`
 
-	// The full Amazon Resource Name (ARN) for the virtual service.
-	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" type:"string" required:"true"`
 
-	// The name of the service mesh that the virtual service resides in.
-	//
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The name of the virtual service.
-	//
 	// VirtualServiceName is a required field
 	VirtualServiceName *string `locationName:"virtualServiceName" type:"string" required:"true"`
 }
@@ -2332,8 +2439,7 @@ func (s VirtualServiceRef) MarshalFields(e protocol.FieldEncoder) error {
 type VirtualServiceSpec struct {
 	_ struct{} `type:"structure"`
 
-	// The App Mesh object that is acting as the provider for a virtual service.
-	// You can specify a single virtual node or virtual router.
+	// An object representing the provider for a virtual service.
 	Provider *VirtualServiceProvider `locationName:"provider" type:"structure"`
 }
 
@@ -2373,8 +2479,6 @@ func (s VirtualServiceSpec) MarshalFields(e protocol.FieldEncoder) error {
 type VirtualServiceStatus struct {
 	_ struct{} `type:"structure"`
 
-	// The current status of the virtual service.
-	//
 	// Status is a required field
 	Status VirtualServiceStatusCode `locationName:"status" type:"string" required:"true" enum:"true"`
 }
@@ -2403,13 +2507,9 @@ func (s VirtualServiceStatus) MarshalFields(e protocol.FieldEncoder) error {
 type WeightedTarget struct {
 	_ struct{} `type:"structure"`
 
-	// The virtual node to associate with the weighted target.
-	//
 	// VirtualNode is a required field
 	VirtualNode *string `locationName:"virtualNode" min:"1" type:"string" required:"true"`
 
-	// The relative weight of the weighted target.
-	//
 	// Weight is a required field
 	Weight *int64 `locationName:"weight" type:"integer" required:"true"`
 }

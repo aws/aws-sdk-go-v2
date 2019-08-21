@@ -51,6 +51,18 @@ type DescribeTrainingJobOutput struct {
 	// AlgorithmSpecification is a required field
 	AlgorithmSpecification *AlgorithmSpecification `type:"structure" required:"true"`
 
+	// The billable time in seconds.
+	//
+	// You can calculate the savings from using managed spot training using the
+	// formula (1 - BillableTimeInSeconds / TrainingTimeInSeconds) * 100. For example,
+	// if BillableTimeInSeconds is 100 and TrainingTimeInSeconds is 500, the savings
+	// is 80%.
+	BillableTimeInSeconds *int64 `min:"1" type:"integer"`
+
+	// Contains information about the output location for managed spot training
+	// checkpoint data.
+	CheckpointConfig *CheckpointConfig `type:"structure"`
+
 	// A timestamp that indicates when the training job was created.
 	//
 	// CreationTime is a required field
@@ -62,6 +74,10 @@ type DescribeTrainingJobOutput struct {
 	// amount of communication between compute instances, especially if you use
 	// a deep learning algorithms in distributed training.
 	EnableInterContainerTrafficEncryption *bool `type:"boolean"`
+
+	// A Boolean indicating whether managed spot training is enabled (True) or not
+	// (False).
+	EnableManagedSpotTraining *bool `type:"boolean"`
 
 	// If you want to allow inbound or outbound network calls, except for calls
 	// between peers within a training cluster for distributed training, choose
@@ -147,6 +163,12 @@ type DescribeTrainingJobOutput struct {
 	//    * MaxRuntimeExceeded - The job stopped because it exceeded the maximum
 	//    allowed runtime.
 	//
+	//    * MaxWaitTmeExceeded - The job stopped because it exceeded the maximum
+	//    allowed wait time.
+	//
+	//    * Interrupted - The job stopped because the managed spot training instances
+	//    were interrupted.
+	//
 	//    * Stopped - The training job has stopped.
 	//
 	// Stopping
@@ -170,9 +192,10 @@ type DescribeTrainingJobOutput struct {
 	// through.
 	SecondaryStatusTransitions []SecondaryStatusTransition `type:"list"`
 
-	// Specifies a limit to how long a model training job can run. When the job
-	// reaches the time limit, Amazon SageMaker ends the training job. Use this
-	// API to cap model training costs.
+	// Specifies a limit to how long a model training job can run. It also specifies
+	// the maximum time to wait for a spot instance. When the job reaches the time
+	// limit, Amazon SageMaker ends the training job. Use this API to cap model
+	// training costs.
 	//
 	// To stop a job, Amazon SageMaker sends the algorithm the SIGTERM signal, which
 	// delays job termination for 120 seconds. Algorithms can use this 120-second
@@ -225,6 +248,9 @@ type DescribeTrainingJobOutput struct {
 	// is due to the time it takes to download the training data and to the size
 	// of the training container.
 	TrainingStartTime *time.Time `type:"timestamp"`
+
+	// The training time in seconds.
+	TrainingTimeInSeconds *int64 `min:"1" type:"integer"`
 
 	// The Amazon Resource Name (ARN) of the associated hyperparameter tuning job
 	// if the training job was launched by a hyperparameter tuning job.

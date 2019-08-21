@@ -59,7 +59,7 @@ func (s *DetectModerationLabelsInput) Validate() error {
 type DetectModerationLabelsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Array of detected Moderation labels and the time, in millseconds from the
+	// Array of detected Moderation labels and the time, in milliseconds from the
 	// start of the video, they were detected.
 	ModerationLabels []ModerationLabel `type:"list"`
 
@@ -78,10 +78,10 @@ const opDetectModerationLabels = "DetectModerationLabels"
 // DetectModerationLabelsRequest returns a request value for making API operation for
 // Amazon Rekognition.
 //
-// Detects explicit or suggestive adult content in a specified JPEG or PNG format
-// image. Use DetectModerationLabels to moderate images depending on your requirements.
-// For example, you might want to filter images that contain nudity, but not
-// images containing suggestive content.
+// Detects unsafe content in a specified JPEG or PNG format image. Use DetectModerationLabels
+// to moderate images depending on your requirements. For example, you might
+// want to filter images that contain nudity, but not images containing suggestive
+// content.
 //
 // To filter images, use the labels returned by DetectModerationLabels to determine
 // which types of content are appropriate.

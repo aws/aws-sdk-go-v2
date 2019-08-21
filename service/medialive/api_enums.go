@@ -2221,6 +2221,27 @@ func (enum InputSourceEndBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// There are two types of input sources, static and dynamic. If an input source
+// is dynamic you canchange the source url of the input dynamically using an
+// input switch action. However, the only input typeto support a dynamic url
+// at this time is MP4_FILE. By default all input sources are static.
+type InputSourceType string
+
+// Enum values for InputSourceType
+const (
+	InputSourceTypeStatic  InputSourceType = "STATIC"
+	InputSourceTypeDynamic InputSourceType = "DYNAMIC"
+)
+
+func (enum InputSourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InputSourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InputState string
 
 // Enum values for InputState
@@ -2237,6 +2258,30 @@ func (enum InputState) MarshalValue() (string, error) {
 }
 
 func (enum InputState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// To clip the file, you must specify the timecode for the start and end of
+// the clip. Specify EMBEDDED to use the timecode embedded in the source content.
+// The embedded timecode must exist in the source content, otherwise MediaLive
+// will output black frames until it reaches the end of the source. Specify
+// ZEROBASED to use a timecode that assumes that the first frame in the file
+// has the timestamp 00:00:00.00. There is no default for this field, you must
+// specify a value.
+type InputTimecodeSource string
+
+// Enum values for InputTimecodeSource
+const (
+	InputTimecodeSourceZerobased InputTimecodeSource = "ZEROBASED"
+	InputTimecodeSourceEmbedded  InputTimecodeSource = "EMBEDDED"
+)
+
+func (enum InputTimecodeSource) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InputTimecodeSource) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -2259,6 +2304,26 @@ func (enum InputType) MarshalValue() (string, error) {
 }
 
 func (enum InputType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// If you specify a StopTimecode in an input (in order to clip the file), you
+// can specify if you want the clip to exclude (the default) or include the
+// frame specified by the timecode.
+type LastFrameClippingBehavior string
+
+// Enum values for LastFrameClippingBehavior
+const (
+	LastFrameClippingBehaviorExcludeLastFrame LastFrameClippingBehavior = "EXCLUDE_LAST_FRAME"
+	LastFrameClippingBehaviorIncludeLastFrame LastFrameClippingBehavior = "INCLUDE_LAST_FRAME"
+)
+
+func (enum LastFrameClippingBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LastFrameClippingBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

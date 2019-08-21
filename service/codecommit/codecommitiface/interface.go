@@ -63,6 +63,8 @@ import (
 type ClientAPI interface {
 	BatchDescribeMergeConflictsRequest(*codecommit.BatchDescribeMergeConflictsInput) codecommit.BatchDescribeMergeConflictsRequest
 
+	BatchGetCommitsRequest(*codecommit.BatchGetCommitsInput) codecommit.BatchGetCommitsRequest
+
 	BatchGetRepositoriesRequest(*codecommit.BatchGetRepositoriesInput) codecommit.BatchGetRepositoriesRequest
 
 	CreateBranchRequest(*codecommit.CreateBranchInput) codecommit.CreateBranchRequest

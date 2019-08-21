@@ -14,6 +14,11 @@ import (
 type StartSpeechSynthesisTaskInput struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies the engine (standard or neural) for Amazon Polly to use when processing
+	// input text for speech synthesis. Using a voice that is not supported for
+	// the engine selected will result in an error.
+	Engine Engine `type:"string" enum:"true"`
+
 	// Optional language code for the Speech Synthesis request. This is only necessary
 	// if using a bilingual voice, such as Aditi, which can be used for either Indian
 	// English (en-IN) or Hindi (hi-IN).
@@ -46,8 +51,9 @@ type StartSpeechSynthesisTaskInput struct {
 
 	// The audio frequency specified in Hz.
 	//
-	// The valid values for mp3 and ogg_vorbis are "8000", "16000", and "22050".
-	// The default value is "22050".
+	// The valid values for mp3 and ogg_vorbis are "8000", "16000", "22050", and
+	// "24000". The default value for standard voices is "22050". The default value
+	// for neural voices is "24000".
 	//
 	// Valid values for pcm are "8000" and "16000" The default value is "16000".
 	SampleRate *string `type:"string"`
@@ -108,6 +114,12 @@ func (s *StartSpeechSynthesisTaskInput) Validate() error {
 func (s StartSpeechSynthesisTaskInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	if len(s.Engine) > 0 {
+		v := s.Engine
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if len(s.LanguageCode) > 0 {
 		v := s.LanguageCode
 

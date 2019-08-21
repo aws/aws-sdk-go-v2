@@ -20,7 +20,7 @@ type PutImageInput struct {
 
 	// The tag to associate with the image. This parameter is required for images
 	// that use the Docker Image Manifest V2 Schema 2 or OCI formats.
-	ImageTag *string `locationName:"imageTag" type:"string"`
+	ImageTag *string `locationName:"imageTag" min:"1" type:"string"`
 
 	// The AWS account ID associated with the registry that contains the repository
 	// in which to put the image. If you do not specify a registry, the default
@@ -44,6 +44,9 @@ func (s *PutImageInput) Validate() error {
 
 	if s.ImageManifest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ImageManifest"))
+	}
+	if s.ImageTag != nil && len(*s.ImageTag) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ImageTag", 1))
 	}
 
 	if s.RepositoryName == nil {

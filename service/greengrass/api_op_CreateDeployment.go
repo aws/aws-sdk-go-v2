@@ -22,7 +22,9 @@ type CreateDeploymentInput struct {
 
 	// The type of deployment. When used for ''CreateDeployment'', only ''NewDeployment''
 	// and ''Redeployment'' are valid.
-	DeploymentType DeploymentType `type:"string" enum:"true"`
+	//
+	// DeploymentType is a required field
+	DeploymentType DeploymentType `type:"string" required:"true" enum:"true"`
 
 	// GroupId is a required field
 	GroupId *string `location:"uri" locationName:"GroupId" type:"string" required:"true"`
@@ -39,6 +41,9 @@ func (s CreateDeploymentInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDeploymentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDeploymentInput"}
+	if len(s.DeploymentType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("DeploymentType"))
+	}
 
 	if s.GroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupId"))

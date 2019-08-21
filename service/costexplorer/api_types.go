@@ -123,6 +123,45 @@ func (s CoverageNormalizedUnits) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Context about the current instance.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CurrentInstance
+type CurrentInstance struct {
+	_ struct{} `type:"structure"`
+
+	// The currency code that Amazon Web Services used to calculate the costs for
+	// this instance.
+	CurrencyCode *string `type:"string"`
+
+	// Current On Demand cost of operating this instance on a monthly basis.
+	MonthlyCost *string `type:"string"`
+
+	// Number of hours during the lookback period billed at On Demand rates.
+	OnDemandHoursInLookbackPeriod *string `type:"string"`
+
+	// Number of hours during the lookback period covered by reservations.
+	ReservationCoveredHoursInLookbackPeriod *string `type:"string"`
+
+	// Details about the resource and utilization.
+	ResourceDetails *ResourceDetails `type:"structure"`
+
+	// Resource ID of the current instance.
+	ResourceId *string `type:"string"`
+
+	// Utilization information of the current instance during the lookback period.
+	ResourceUtilization *ResourceUtilization `type:"structure"`
+
+	// Cost allocation resource tags applied to the instance.
+	Tags []TagValues `type:"list"`
+
+	// The total number of hours the instance ran during the lookback period.
+	TotalRunningHoursInLookbackPeriod *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CurrentInstance) String() string {
+	return awsutil.Prettify(s)
+}
+
 // The time period that you want the usage and costs for.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DateInterval
 type DateInterval struct {
@@ -244,6 +283,66 @@ func (s EC2InstanceDetails) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Details on the Amazon EC2 Resource.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/EC2ResourceDetails
+type EC2ResourceDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Hourly public On Demand rate for the instance type.
+	HourlyOnDemandRate *string `type:"string"`
+
+	// The type of Amazon Web Services instance.
+	InstanceType *string `type:"string"`
+
+	// Memory capacity of Amazon Web Services instance.
+	Memory *string `type:"string"`
+
+	// Network performance capacity of the Amazon Web Services instance.
+	NetworkPerformance *string `type:"string"`
+
+	// The platform of the Amazon Web Services instance. The platform is the specific
+	// combination of operating system, license model, and software on an instance.
+	Platform *string `type:"string"`
+
+	// The Amazon Web Services Region of the instance.
+	Region *string `type:"string"`
+
+	// The SKU of the product.
+	Sku *string `type:"string"`
+
+	// The disk storage of the Amazon Web Services instance (Not EBS storage).
+	Storage *string `type:"string"`
+
+	// Number of VCPU cores in the Amazon Web Services instance type.
+	Vcpu *string `type:"string"`
+}
+
+// String returns the string representation
+func (s EC2ResourceDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Utilization metrics of the instance.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/EC2ResourceUtilization
+type EC2ResourceUtilization struct {
+	_ struct{} `type:"structure"`
+
+	// Maximum observed or expected CPU utilization of the instance.
+	MaxCpuUtilizationPercentage *string `type:"string"`
+
+	// Maximum observed or expected memory utilization of the instance.
+	MaxMemoryUtilizationPercentage *string `type:"string"`
+
+	// Maximum observed or expected storage utilization of the instance (does not
+	// measure EBS storage).
+	MaxStorageUtilizationPercentage *string `type:"string"`
+}
+
+// String returns the string representation
+func (s EC2ResourceUtilization) String() string {
+	return awsutil.Prettify(s)
+}
+
 // The Amazon EC2 hardware specifications that you want AWS to provide recommendations
 // for.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/EC2Specification
@@ -319,26 +418,30 @@ func (s ElastiCacheInstanceDetails) String() string {
 //
 //    * Simple dimension values - You can set the dimension name and values
 //    for the filters that you plan to use. For example, you can filter for
-//    INSTANCE_TYPE==m4.xlarge OR INSTANCE_TYPE==c4.large. The Expression for
-//    that looks like this: { "Dimensions": { "Key": "INSTANCE_TYPE", "Values":
-//    [ "m4.xlarge", “c4.large” ] } } The list of dimension values are OR'd
-//    together to retrieve cost or usage data. You can create Expression and
-//    DimensionValues objects using either with* methods or set* methods in
-//    multiple lines.
+//    REGION==us-east-1 OR REGION==us-west-1. The Expression for that looks
+//    like this: { "Dimensions": { "Key": "REGION", "Values": [ "us-east-1",
+//    “us-west-1” ] } } The list of dimension values are OR'd together to
+//    retrieve cost or usage data. You can create Expression and DimensionValues
+//    objects using either with* methods or set* methods in multiple lines.
 //
 //    * Compound dimension values with logical operations - You can use multiple
 //    Expression types and the logical operators AND/OR/NOT to create a list
 //    of one or more Expression objects. This allows you to filter on more advanced
-//    options. For example, you can filter on ((INSTANCE_TYPE == m4.large OR
-//    INSTANCE_TYPE == m3.large) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
-//    DataTransfer). The Expression for that looks like this: { "And": [ {"Or":
-//    [ {"Dimensions": { "Key": "INSTANCE_TYPE", "Values": [ "m4.x.large", "c4.large"
-//    ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not":
-//    {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ]
-//    } Because each Expression can have only one operator, the service returns
-//    an error if more than one is specified. The following example shows an
-//    Expression object that creates an error. { "And": [ ... ], "DimensionValues":
-//    { "Dimension": "USAGE_TYPE", "Values": [ "DataTransfer" ] } }
+//    options. For example, you can filter on ((REGION == us-east-1 OR REGION
+//    == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer).
+//    The Expression for that looks like this: { "And": [ {"Or": [ {"Dimensions":
+//    { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] }}, {"Tags":
+//    { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not": {"Dimensions":
+//    { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } Because each
+//    Expression can have only one operator, the service returns an error if
+//    more than one is specified. The following example shows an Expression
+//    object that creates an error. { "And": [ ... ], "DimensionValues": { "Dimension":
+//    "USAGE_TYPE", "Values": [ "DataTransfer" ] } }
+//
+// For GetRightsizingRecommendation action, a combination of OR and NOT is not
+// supported. OR is not supported between different dimensions, or dimensions
+// and tags. NOT operators aren't supported. Dimentions are also limited to
+// LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/Expression
 type Expression struct {
 	_ struct{} `type:"structure"`
@@ -462,6 +565,21 @@ type MetricValue struct {
 
 // String returns the string representation
 func (s MetricValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Details on the modification recommendation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ModifyRecommendationDetail
+type ModifyRecommendationDetail struct {
+	_ struct{} `type:"structure"`
+
+	// Identifies whether this instance type is the Amazon Web Services default
+	// recommendation.
+	TargetInstances []TargetInstance `type:"list"`
+}
+
+// String returns the string representation
+func (s ModifyRecommendationDetail) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -791,6 +909,34 @@ func (s ReservationUtilizationGroup) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Details on the resource.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ResourceDetails
+type ResourceDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Details on the Amazon EC2 resource.
+	EC2ResourceDetails *EC2ResourceDetails `type:"structure"`
+}
+
+// String returns the string representation
+func (s ResourceDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Resource utilization of current resource.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ResourceUtilization
+type ResourceUtilization struct {
+	_ struct{} `type:"structure"`
+
+	// Utilization of current Amazon EC2 Instance
+	EC2ResourceUtilization *EC2ResourceUtilization `type:"structure"`
+}
+
+// String returns the string representation
+func (s ResourceUtilization) String() string {
+	return awsutil.Prettify(s)
+}
+
 // The result that is associated with a time period.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ResultByTime
 type ResultByTime struct {
@@ -811,6 +957,77 @@ type ResultByTime struct {
 
 // String returns the string representation
 func (s ResultByTime) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Recommendations to rightsize resources.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RightsizingRecommendation
+type RightsizingRecommendation struct {
+	_ struct{} `type:"structure"`
+
+	// The account that this recommendation is for.
+	AccountId *string `type:"string"`
+
+	// Context regarding the current instance.
+	CurrentInstance *CurrentInstance `type:"structure"`
+
+	// Details for modification recommendations.
+	ModifyRecommendationDetail *ModifyRecommendationDetail `type:"structure"`
+
+	// Recommendation to either terminate or modify the resource.
+	RightsizingType RightsizingType `type:"string" enum:"true"`
+
+	// Details for termination recommendations.
+	TerminateRecommendationDetail *TerminateRecommendationDetail `type:"structure"`
+}
+
+// String returns the string representation
+func (s RightsizingRecommendation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Metadata for this recommendation set.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RightsizingRecommendationMetadata
+type RightsizingRecommendationMetadata struct {
+	_ struct{} `type:"structure"`
+
+	// The time stamp for when Amazon Web Services made this recommendation.
+	GenerationTimestamp *string `type:"string"`
+
+	// How many days of previous usage that Amazon Web Services considers when making
+	// this recommendation.
+	LookbackPeriodInDays LookbackPeriodInDays `type:"string" enum:"true"`
+
+	// The ID for this specific recommendation.
+	RecommendationId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s RightsizingRecommendationMetadata) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Summary of rightsizing recommendations
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RightsizingRecommendationSummary
+type RightsizingRecommendationSummary struct {
+	_ struct{} `type:"structure"`
+
+	// Estimated total savings resulting from modifications, on a monthly basis.
+	EstimatedTotalMonthlySavingsAmount *string `type:"string"`
+
+	// The currency code that Amazon Web Services used to calculate the savings.
+	SavingsCurrencyCode *string `type:"string"`
+
+	// Savings percentage based on the recommended modifications, relative to the
+	// total On Demand costs associated with these instances.
+	SavingsPercentage *string `type:"string"`
+
+	// Total number of instance recommendations.
+	TotalRecommendationCount *string `type:"string"`
+}
+
+// String returns the string representation
+func (s RightsizingRecommendationSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -843,6 +1060,55 @@ type TagValues struct {
 
 // String returns the string representation
 func (s TagValues) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Details on recommended instance.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/TargetInstance
+type TargetInstance struct {
+	_ struct{} `type:"structure"`
+
+	// The currency code that Amazon Web Services used to calculate the costs for
+	// this instance.
+	CurrencyCode *string `type:"string"`
+
+	// Indicates whether or not this recommendation is the defaulted Amazon Web
+	// Services recommendation.
+	DefaultTargetInstance *bool `type:"boolean"`
+
+	// Expected cost to operate this instance type on a monthly basis.
+	EstimatedMonthlyCost *string `type:"string"`
+
+	// Estimated savings resulting from modification, on a monthly basis.
+	EstimatedMonthlySavings *string `type:"string"`
+
+	// Expected utilization metrics for target instance type.
+	ExpectedResourceUtilization *ResourceUtilization `type:"structure"`
+
+	// Details on the target instance type.
+	ResourceDetails *ResourceDetails `type:"structure"`
+}
+
+// String returns the string representation
+func (s TargetInstance) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Details on termination recommendation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/TerminateRecommendationDetail
+type TerminateRecommendationDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The currency code that Amazon Web Services used to calculate the costs for
+	// this instance.
+	CurrencyCode *string `type:"string"`
+
+	// Estimated savings resulting from modification, on a monthly basis.
+	EstimatedMonthlySavings *string `type:"string"`
+}
+
+// String returns the string representation
+func (s TerminateRecommendationDetail) String() string {
 	return awsutil.Prettify(s)
 }
 

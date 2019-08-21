@@ -18,8 +18,10 @@ type StartContentModerationInput struct {
 	// more than once.
 	ClientRequestToken *string `min:"1" type:"string"`
 
-	// Unique identifier you specify to identify the job in the completion status
-	// published to the Amazon Simple Notification Service topic.
+	// An identifier you specify that's returned in the completion notification
+	// that's published to your Amazon Simple Notification Service topic. For example,
+	// you can use JobTag to group related jobs and identify them in the completion
+	// notification.
 	JobTag *string `min:"1" type:"string"`
 
 	// Specifies the minimum confidence that Amazon Rekognition must have in order
@@ -32,10 +34,10 @@ type StartContentModerationInput struct {
 	MinConfidence *float64 `type:"float"`
 
 	// The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish
-	// the completion status of the content moderation analysis to.
+	// the completion status of the unsafe content analysis to.
 	NotificationChannel *NotificationChannel `type:"structure"`
 
-	// The video in which you want to moderate content. The video must be stored
+	// The video in which you want to detect unsafe content. The video must be stored
 	// in an Amazon S3 bucket.
 	//
 	// Video is a required field
@@ -80,7 +82,7 @@ func (s *StartContentModerationInput) Validate() error {
 type StartContentModerationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier for the content moderation analysis job. Use JobId to identify
+	// The identifier for the unsafe content analysis job. Use JobId to identify
 	// the job in a subsequent call to GetContentModeration.
 	JobId *string `min:"1" type:"string"`
 }
@@ -95,20 +97,18 @@ const opStartContentModeration = "StartContentModeration"
 // StartContentModerationRequest returns a request value for making API operation for
 // Amazon Rekognition.
 //
-// Starts asynchronous detection of explicit or suggestive adult content in
-// a stored video.
+// Starts asynchronous detection of unsafe content in a stored video.
 //
 // Amazon Rekognition Video can moderate content in a video stored in an Amazon
 // S3 bucket. Use Video to specify the bucket name and the filename of the video.
 // StartContentModeration returns a job identifier (JobId) which you use to
-// get the results of the analysis. When content moderation analysis is finished,
+// get the results of the analysis. When unsafe content analysis is finished,
 // Amazon Rekognition Video publishes a completion status to the Amazon Simple
 // Notification Service topic that you specify in NotificationChannel.
 //
-// To get the results of the content moderation analysis, first check that the
-// status value published to the Amazon SNS topic is SUCCEEDED. If so, call
-// GetContentModeration and pass the job identifier (JobId) from the initial
-// call to StartContentModeration.
+// To get the results of the unsafe content analysis, first check that the status
+// value published to the Amazon SNS topic is SUCCEEDED. If so, call GetContentModeration
+// and pass the job identifier (JobId) from the initial call to StartContentModeration.
 //
 // For more information, see Detecting Unsafe Content in the Amazon Rekognition
 // Developer Guide.

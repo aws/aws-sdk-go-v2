@@ -18,8 +18,8 @@ type TagResourceInput struct {
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resource-arn" type:"string" required:"true"`
 
-	// Tags is a required field
-	Tags map[string]string `locationName:"tags" type:"map" required:"true"`
+	// The key-value pair for the resource tag.
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -33,10 +33,6 @@ func (s *TagResourceInput) Validate() error {
 
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
-	}
-
-	if s.Tags == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 
 	if invalidParams.Len() > 0 {

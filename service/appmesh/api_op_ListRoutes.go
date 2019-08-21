@@ -14,28 +14,13 @@ import (
 type ListRoutesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of results returned by ListRoutes in paginated output.
-	// When you use this parameter, ListRoutes returns only limit results in a single
-	// page along with a nextToken response element. You can see the remaining results
-	// of the initial request by sending another ListRoutes request with the returned
-	// nextToken value. This value can be between 1 and 100. If you don't use this
-	// parameter, ListRoutes returns up to 100 results and a nextToken value if
-	// applicable.
 	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
 
-	// The name of the service mesh to list routes in.
-	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The nextToken value returned from a previous paginated ListRoutes request
-	// where limit was used and the results exceeded the value of that parameter.
-	// Pagination continues from the end of the previous results that returned the
-	// nextToken value.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 
-	// The name of the virtual router to list routes in.
-	//
 	// VirtualRouterName is a required field
 	VirtualRouterName *string `location:"uri" locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
 }
@@ -107,14 +92,8 @@ func (s ListRoutesInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListRoutesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The nextToken value to include in a future ListRoutes request. When the results
-	// of a ListRoutes request exceed limit, you can use this value to retrieve
-	// the next page of results. This value is null when there are no more results
-	// to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
-	// The list of existing routes for the specified service mesh and virtual router.
-	//
 	// Routes is a required field
 	Routes []RouteRef `locationName:"routes" type:"list" required:"true"`
 }

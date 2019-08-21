@@ -42,7 +42,7 @@ type UpdateAutoScalingGroupInput struct {
 	// checking the health status of an EC2 instance that has come into service.
 	// The default value is 0.
 	//
-	// For more information, see Health Checks for Auto Scaling Instances (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html)
+	// For more information, see Health Check Grace Period (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	//
 	// Conditional: This parameter is required if you are adding an ELB health check.
@@ -66,6 +66,9 @@ type UpdateAutoScalingGroupInput struct {
 	// The launch template and version to use to specify the updates. If you specify
 	// LaunchTemplate in your update request, you can't specify LaunchConfigurationName
 	// or MixedInstancesPolicy.
+	//
+	// For more information, see LaunchTemplateSpecification (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_LaunchTemplateSpecification.html)
+	// in the Amazon EC2 Auto Scaling API Reference.
 	LaunchTemplate *LaunchTemplateSpecification `type:"structure"`
 
 	// The maximum size of the Auto Scaling group.
@@ -79,8 +82,9 @@ type UpdateAutoScalingGroupInput struct {
 	// In your call to UpdateAutoScalingGroup, you can make changes to the policy
 	// that is specified. All optional parameters are left unchanged if not specified.
 	//
-	// For more information, see Auto Scaling Groups with Multiple Instance Types
-	// and Purchase Options (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
+	// For more information, see MixedInstancesPolicy (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html)
+	// in the Amazon EC2 Auto Scaling API Reference and Auto Scaling Groups with
+	// Multiple Instance Types and Purchase Options (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	MixedInstancesPolicy *MixedInstancesPolicy `type:"structure"`
 
@@ -195,12 +199,12 @@ const opUpdateAutoScalingGroup = "UpdateAutoScalingGroup"
 // aren't affected.
 //
 // If you associate a new launch configuration or template with an Auto Scaling
-// group, all new instances will get the updated configuration, but existing
-// instances continue to run with the configuration that they were originally
-// launched with. When you update a group to specify a mixed instances policy
-// instead of a launch configuration or template, existing instances may be
-// replaced to match the new purchasing options that you specified in the policy.
-// For example, if the group currently has 100% On-Demand capacity and the policy
+// group, all new instances will get the updated configuration. Existing instances
+// continue to run with the configuration that they were originally launched
+// with. When you update a group to specify a mixed instances policy instead
+// of a launch configuration or template, existing instances may be replaced
+// to match the new purchasing options that you specified in the policy. For
+// example, if the group currently has 100% On-Demand capacity and the policy
 // specifies 50% Spot capacity, this means that half of your instances will
 // be gradually terminated and relaunched as Spot Instances. When replacing
 // instances, Amazon EC2 Auto Scaling launches new instances before terminating

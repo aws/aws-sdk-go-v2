@@ -30,10 +30,10 @@ type ListResourceRecordSetsInput struct {
 	// of maxitems resource record sets.
 	MaxItems *string `location:"querystring" locationName:"maxitems" type:"string"`
 
-	// Weighted resource record sets only: If results were truncated for a given
-	// DNS name and type, specify the value of NextRecordIdentifier from the previous
-	// response to get the next resource record set that has the current DNS name
-	// and type.
+	// Resource record sets that have a routing policy other than simple: If results
+	// were truncated for a given DNS name and type, specify the value of NextRecordIdentifier
+	// from the previous response to get the next resource record set that has the
+	// current DNS name and type.
 	StartRecordIdentifier *string `location:"querystring" locationName:"identifier" min:"1" type:"string"`
 
 	// The first name in the lexicographic ordering of resource record sets that

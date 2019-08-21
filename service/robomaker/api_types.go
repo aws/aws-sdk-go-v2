@@ -13,6 +13,141 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// Information about a data source.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DataSource
+type DataSource struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the data source.
+	Name *string `locationName:"name" min:"1" type:"string"`
+
+	// The S3 bucket where the data files are located.
+	S3Bucket *string `locationName:"s3Bucket" min:"3" type:"string"`
+
+	// The list of S3 keys identifying the data source files.
+	S3Keys []S3KeyOutput `locationName:"s3Keys" type:"list"`
+}
+
+// String returns the string representation
+func (s DataSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DataSource) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.S3Bucket != nil {
+		v := *s.S3Bucket
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "s3Bucket", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.S3Keys != nil {
+		v := s.S3Keys
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "s3Keys", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Information about a data source.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DataSourceConfig
+type DataSourceConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the data source.
+	//
+	// Name is a required field
+	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
+
+	// The S3 bucket where the data files are located.
+	//
+	// S3Bucket is a required field
+	S3Bucket *string `locationName:"s3Bucket" min:"3" type:"string" required:"true"`
+
+	// The list of S3 keys identifying the data source files.
+	//
+	// S3Keys is a required field
+	S3Keys []string `locationName:"s3Keys" min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s DataSourceConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DataSourceConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DataSourceConfig"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if s.S3Bucket == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3Bucket"))
+	}
+	if s.S3Bucket != nil && len(*s.S3Bucket) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("S3Bucket", 3))
+	}
+
+	if s.S3Keys == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3Keys"))
+	}
+	if s.S3Keys != nil && len(s.S3Keys) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("S3Keys", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DataSourceConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.S3Bucket != nil {
+		v := *s.S3Bucket
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "s3Bucket", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.S3Keys != nil {
+		v := s.S3Keys
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "s3Keys", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Information about a deployment application configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeploymentApplicationConfig
 type DeploymentApplicationConfig struct {
@@ -105,6 +240,11 @@ type DeploymentConfig struct {
 
 	// The percentage of deployments that need to fail before stopping deployment.
 	FailureThresholdPercentage *int64 `locationName:"failureThresholdPercentage" min:"1" type:"integer"`
+
+	// The amount of time, in seconds, to wait for deployment to a single robot
+	// to complete. Choose a time between 1 minute and 7 days. The default is 5
+	// hours.
+	RobotDeploymentTimeoutInSeconds *int64 `locationName:"robotDeploymentTimeoutInSeconds" type:"long"`
 }
 
 // String returns the string representation
@@ -141,6 +281,12 @@ func (s DeploymentConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "failureThresholdPercentage", protocol.Int64Value(v), metadata)
+	}
+	if s.RobotDeploymentTimeoutInSeconds != nil {
+		v := *s.RobotDeploymentTimeoutInSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "robotDeploymentTimeoutInSeconds", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -545,6 +691,47 @@ func (s LaunchConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "packageName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The logging configuration.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/LoggingConfig
+type LoggingConfig struct {
+	_ struct{} `type:"structure"`
+
+	// A boolean indicating whether to record all ROS topics.
+	//
+	// RecordAllRosTopics is a required field
+	RecordAllRosTopics *bool `locationName:"recordAllRosTopics" type:"boolean" required:"true"`
+}
+
+// String returns the string representation
+func (s LoggingConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LoggingConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LoggingConfig"}
+
+	if s.RecordAllRosTopics == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RecordAllRosTopics"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LoggingConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.RecordAllRosTopics != nil {
+		v := *s.RecordAllRosTopics
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "recordAllRosTopics", protocol.BoolValue(v), metadata)
 	}
 	return nil
 }
@@ -1065,6 +1252,40 @@ func (s RobotSoftwareSuite) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Information about S3 keys.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/S3KeyOutput
+type S3KeyOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The etag for the object.
+	Etag *string `locationName:"etag" type:"string"`
+
+	// The S3 key.
+	S3Key *string `locationName:"s3Key" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s S3KeyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s S3KeyOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Etag != nil {
+		v := *s.Etag
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "etag", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.S3Key != nil {
+		v := *s.S3Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "s3Key", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Information about a simulation application configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationApplicationConfig
 type SimulationApplicationConfig struct {
@@ -1224,6 +1445,9 @@ type SimulationJob struct {
 	// A unique identifier for this SimulationJob request.
 	ClientRequestToken *string `locationName:"clientRequestToken" min:"1" type:"string"`
 
+	// The data sources for the simulation job.
+	DataSources []DataSource `locationName:"dataSources" type:"list"`
+
 	// The failure behavior the simulation job.
 	//
 	// Continue
@@ -1253,6 +1477,9 @@ type SimulationJob struct {
 	// The time, in milliseconds since the epoch, when the simulation job was last
 	// updated.
 	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
+
+	// The logging configuration.
+	LoggingConfig *LoggingConfig `locationName:"loggingConfig" type:"structure"`
 
 	// The maximum simulation job duration in seconds. The value must be 8 days
 	// (691,200 seconds) or less.
@@ -1303,6 +1530,18 @@ func (s SimulationJob) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "clientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.DataSources != nil {
+		v := s.DataSources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "dataSources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if len(s.FailureBehavior) > 0 {
 		v := s.FailureBehavior
 
@@ -1340,6 +1579,12 @@ func (s SimulationJob) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
 			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.LoggingConfig != nil {
+		v := s.LoggingConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "loggingConfig", v, metadata)
 	}
 	if s.MaxJobDurationInSeconds != nil {
 		v := *s.MaxJobDurationInSeconds
@@ -1424,6 +1669,9 @@ type SimulationJobSummary struct {
 	// The Amazon Resource Name (ARN) of the simulation job.
 	Arn *string `locationName:"arn" min:"1" type:"string"`
 
+	// The names of the data sources.
+	DataSourceNames []string `locationName:"dataSourceNames" type:"list"`
+
 	// The time, in milliseconds since the epoch, when the simulation job was last
 	// updated.
 	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
@@ -1432,10 +1680,10 @@ type SimulationJobSummary struct {
 	Name *string `locationName:"name" min:"1" type:"string"`
 
 	// A list of simulation job robot application names.
-	RobotApplicationNames []string `locationName:"robotApplicationNames" min:"1" type:"list"`
+	RobotApplicationNames []string `locationName:"robotApplicationNames" type:"list"`
 
 	// A list of simulation job simulation application names.
-	SimulationApplicationNames []string `locationName:"simulationApplicationNames" min:"1" type:"list"`
+	SimulationApplicationNames []string `locationName:"simulationApplicationNames" type:"list"`
 
 	// The status of the simulation job.
 	Status SimulationJobStatus `locationName:"status" type:"string" enum:"true"`
@@ -1453,6 +1701,18 @@ func (s SimulationJobSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DataSourceNames != nil {
+		v := s.DataSourceNames
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "dataSourceNames", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	if s.LastUpdatedAt != nil {
 		v := *s.LastUpdatedAt

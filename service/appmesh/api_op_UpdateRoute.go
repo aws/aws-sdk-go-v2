@@ -14,27 +14,19 @@ import (
 type UpdateRouteInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of therequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
-	// The name of the service mesh that the route resides in.
-	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The name of the route to update.
-	//
 	// RouteName is a required field
 	RouteName *string `location:"uri" locationName:"routeName" min:"1" type:"string" required:"true"`
 
-	// The new route specification to apply. This overwrites the existing data.
+	// An object representing the specification of a route.
 	//
 	// Spec is a required field
 	Spec *RouteSpec `locationName:"spec" type:"structure" required:"true"`
 
-	// The name of the virtual router that the route is associated with.
-	//
 	// VirtualRouterName is a required field
 	VirtualRouterName *string `location:"uri" locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
 }
@@ -131,7 +123,7 @@ func (s UpdateRouteInput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateRouteOutput struct {
 	_ struct{} `type:"structure" payload:"Route"`
 
-	// A full description of the route that was updated.
+	// An object representing a route returned by a describe operation.
 	//
 	// Route is a required field
 	Route *RouteData `locationName:"route" type:"structure" required:"true"`

@@ -15,8 +15,6 @@ import (
 type DescribeContactInput struct {
 	_ struct{} `type:"structure"`
 
-	// UUID of a contact.
-	//
 	// ContactId is a required field
 	ContactId *string `location:"uri" locationName:"contactId" type:"string" required:"true"`
 }
@@ -57,42 +55,29 @@ func (s DescribeContactInput) MarshalFields(e protocol.FieldEncoder) error {
 type DescribeContactOutput struct {
 	_ struct{} `type:"structure"`
 
-	// UUID of a contact.
 	ContactId *string `locationName:"contactId" type:"string"`
 
-	// Status of a contact.
 	ContactStatus ContactStatus `locationName:"contactStatus" type:"string" enum:"true"`
 
-	// End time of a contact.
 	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
 
-	// Error message for a contact.
 	ErrorMessage *string `locationName:"errorMessage" type:"string"`
 
-	// Ground station for a contact.
 	GroundStation *string `locationName:"groundStation" type:"string"`
 
-	// Maximum elevation angle of a contact.
+	// Elevation angle of the satellite in the sky during a contact.
 	MaximumElevation *Elevation `locationName:"maximumElevation" type:"structure"`
 
-	// ARN of a mission profile.
 	MissionProfileArn *string `locationName:"missionProfileArn" type:"string"`
 
-	// Amount of time after a contact ends that you’d like to receive a CloudWatch
-	// event indicating the pass has finished.
 	PostPassEndTime *time.Time `locationName:"postPassEndTime" type:"timestamp"`
 
-	// Amount of time prior to contact start you’d like to receive a CloudWatch
-	// event indicating an upcoming pass.
 	PrePassStartTime *time.Time `locationName:"prePassStartTime" type:"timestamp"`
 
-	// ARN of a satellite.
 	SatelliteArn *string `locationName:"satelliteArn" type:"string"`
 
-	// Start time of a contact.
 	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
 
-	// Tags assigned to a contact.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 

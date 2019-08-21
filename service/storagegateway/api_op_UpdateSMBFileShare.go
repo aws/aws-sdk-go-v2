@@ -14,9 +14,9 @@ import (
 type UpdateSMBFileShareInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of users or groups in the Active Directory that have administrator
-	// rights to the file share. A group must be prefixed with the @ character.
-	// For example @group1. Can only be set if Authentication is set to ActiveDirectory.
+	// A list of users in the Active Directory that have administrator rights to
+	// the file share. A group must be prefixed with the @ character. For example
+	// @group1. Can only be set if Authentication is set to ActiveDirectory.
 	AdminUserList []string `type:"list"`
 
 	// The default storage class for objects put into an Amazon S3 bucket by the

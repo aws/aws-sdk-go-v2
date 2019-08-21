@@ -84,8 +84,7 @@ func (s DeleteMembersInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteMembersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of objects containing the unprocessed account and a result string
-	// explaining why it was unprocessed.
+	// The accounts that could not be processed.
 	//
 	// UnprocessedAccounts is a required field
 	UnprocessedAccounts []UnprocessedAccount `locationName:"unprocessedAccounts" type:"list" required:"true"`

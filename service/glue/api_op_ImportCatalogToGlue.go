@@ -51,7 +51,7 @@ const opImportCatalogToGlue = "ImportCatalogToGlue"
 // ImportCatalogToGlueRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Imports an existing Athena Data Catalog to AWS Glue
+// Imports an existing Amazon Athena Data Catalog to AWS Glue
 //
 //    // Example sending a request using ImportCatalogToGlueRequest.
 //    req := client.ImportCatalogToGlueRequest(params)

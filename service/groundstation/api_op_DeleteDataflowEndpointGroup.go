@@ -14,8 +14,6 @@ import (
 type DeleteDataflowEndpointGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// ID of a dataflow endpoint group.
-	//
 	// DataflowEndpointGroupId is a required field
 	DataflowEndpointGroupId *string `location:"uri" locationName:"dataflowEndpointGroupId" type:"string" required:"true"`
 }
@@ -56,7 +54,6 @@ func (s DeleteDataflowEndpointGroupInput) MarshalFields(e protocol.FieldEncoder)
 type DeleteDataflowEndpointGroupOutput struct {
 	_ struct{} `type:"structure"`
 
-	// ID of a dataflow endpoint group.
 	DataflowEndpointGroupId *string `locationName:"dataflowEndpointGroupId" type:"string"`
 }
 

@@ -74,14 +74,17 @@ const opGetQueryResults = "GetQueryResults"
 // GetQueryResultsRequest returns a request value for making API operation for
 // Amazon CloudWatch Logs.
 //
-// Returns the results from the specified query. If the query is in progress,
-// partial results of that current execution are returned.
+// Returns the results from the specified query.
 //
 // Only the fields requested in the query are returned, along with a @ptr field
 // which is the identifier for the log record. You can use the value of @ptr
 // in a operation to get the full log record.
 //
 // GetQueryResults does not start a query execution. To run a query, use .
+//
+// If the value of the Status field in the output is Running, this operation
+// returns only partial results. If you see a value of Scheduled or Running
+// for the status, you can retry the operation later to see the final results.
 //
 //    // Example sending a request using GetQueryResultsRequest.
 //    req := client.GetQueryResultsRequest(params)

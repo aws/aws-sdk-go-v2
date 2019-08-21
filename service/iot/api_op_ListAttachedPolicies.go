@@ -22,7 +22,7 @@ type ListAttachedPoliciesInput struct {
 	// When true, recursively list attached policies.
 	Recursive *bool `location:"querystring" locationName:"recursive" type:"boolean"`
 
-	// The group for which the policies will be listed.
+	// The group or principal for which the policies will be listed.
 	//
 	// Target is a required field
 	Target *string `location:"uri" locationName:"target" type:"string" required:"true"`

@@ -23,6 +23,10 @@ type CreateTrainingJobInput struct {
 	// AlgorithmSpecification is a required field
 	AlgorithmSpecification *AlgorithmSpecification `type:"structure" required:"true"`
 
+	// Contains information about the output location for managed spot training
+	// checkpoint data.
+	CheckpointConfig *CheckpointConfig `type:"structure"`
+
 	// To encrypt all communications between ML compute instances in distributed
 	// training, choose True. Encryption provides greater security for distributed
 	// training, but training might take longer. How long it takes depends on the
@@ -31,6 +35,18 @@ type CreateTrainingJobInput struct {
 	// see Protect Communications Between ML Compute Instances in a Distributed
 	// Training Job (https://docs.aws.amazon.com/sagemaker/latest/dg/train-encrypt.html).
 	EnableInterContainerTrafficEncryption *bool `type:"boolean"`
+
+	// To train models using managed spot training, choose True. Managed spot training
+	// provides a fully managed and scalable infrastructure for training machine
+	// learning models. this option is useful when training jobs can be interrupted
+	// and when there is flexibility when the training job is run.
+	//
+	// The complete and intermediate results of jobs are stored in an Amazon S3
+	// bucket, and can be used as a starting point to train models incrementally.
+	// Amazon SageMaker provides metrics and logs in CloudWatch. They can be used
+	// to see when managed spot training jobs are running, interrupted, resumed,
+	// or completed.
+	EnableManagedSpotTraining *bool `type:"boolean"`
 
 	// Isolates the training container. No inbound or outbound network calls can
 	// be made, except for calls between peers within a training cluster for distributed
@@ -57,16 +73,19 @@ type CreateTrainingJobInput struct {
 	//
 	// Algorithms can accept input data from one or more channels. For example,
 	// an algorithm might have two channels of input data, training_data and validation_data.
-	// The configuration for each channel provides the S3 location where the input
-	// data is stored. It also provides information about the stored data: the MIME
-	// type, compression method, and whether the data is wrapped in RecordIO format.
+	// The configuration for each channel provides the S3, EFS, or FSx location
+	// where the input data is stored. It also provides information about the stored
+	// data: the MIME type, compression method, and whether the data is wrapped
+	// in RecordIO format.
 	//
 	// Depending on the input mode that the algorithm supports, Amazon SageMaker
 	// either copies input data files from an S3 bucket to a local directory in
-	// the Docker container, or makes it available as input streams.
+	// the Docker container, or makes it available as input streams. For example,
+	// if you specify an EFS location, input data files will be made available as
+	// input streams. They do not need to be downloaded.
 	InputDataConfig []Channel `min:"1" type:"list"`
 
-	// Specifies the path to the S3 bucket where you want to store model artifacts.
+	// Specifies the path to the S3 location where you want to store model artifacts.
 	// Amazon SageMaker creates subfolders for the artifacts.
 	//
 	// OutputDataConfig is a required field
@@ -175,6 +194,11 @@ func (s *CreateTrainingJobInput) Validate() error {
 			invalidParams.AddNested("AlgorithmSpecification", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.CheckpointConfig != nil {
+		if err := s.CheckpointConfig.Validate(); err != nil {
+			invalidParams.AddNested("CheckpointConfig", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.InputDataConfig != nil {
 		for i, v := range s.InputDataConfig {
 			if err := v.Validate(); err != nil {
@@ -254,23 +278,29 @@ const opCreateTrainingJob = "CreateTrainingJob"
 //    for each training algorithm provided by Amazon SageMaker, see Algorithms
 //    (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html).
 //
-//    * InputDataConfig - Describes the training dataset and the Amazon S3 location
-//    where it is stored.
+//    * InputDataConfig - Describes the training dataset and the Amazon S3,
+//    EFS, or FSx location where it is stored.
 //
-//    * OutputDataConfig - Identifies the Amazon S3 location where you want
-//    Amazon SageMaker to save the results of model training.
+//    * OutputDataConfig - Identifies the Amazon S3 bucket where you want Amazon
+//    SageMaker to save the results of model training.
 //
 //    * ResourceConfig - Identifies the resources, ML compute instances, and
 //    ML storage volumes to deploy for model training. In distributed training,
 //    you specify more than one instance.
+//
+//    * EnableManagedSpotTraining - Optimize the cost of training machine learning
+//    models by up to 80% by using Amazon EC2 Spot instances. For more information,
+//    see Managed Spot Training (https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html).
 //
 //    * RoleARN - The Amazon Resource Number (ARN) that Amazon SageMaker assumes
 //    to perform tasks on your behalf during model training. You must grant
 //    this role the necessary permissions so that Amazon SageMaker can successfully
 //    complete model training.
 //
-//    * StoppingCondition - Sets a time limit for training. Use this parameter
-//    to cap model training costs.
+//    * StoppingCondition - To help cap training costs, use MaxRuntimeInSeconds
+//    to set a time limit for training. Use MaxWaitTimeInSeconds to specify
+//    how long you are willing to to wait for a managed spot training job to
+//    complete.
 //
 // For more information about Amazon SageMaker, see How It Works (https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html).
 //

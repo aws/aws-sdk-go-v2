@@ -14,7 +14,7 @@ type UpdateDatabaseInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the Data Catalog in which the metadata database resides. If none
-	// is supplied, the AWS account ID is used by default.
+	// is provided, the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 
 	// A DatabaseInput object specifying the new definition of the metadata database

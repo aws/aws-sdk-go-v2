@@ -3,6 +3,8 @@
 package greengrass
 
 import (
+	"fmt"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -260,12 +262,16 @@ type Connector struct {
 	_ struct{} `type:"structure"`
 
 	// The ARN of the connector.
-	ConnectorArn *string `type:"string"`
+	//
+	// ConnectorArn is a required field
+	ConnectorArn *string `type:"string" required:"true"`
 
 	// A descriptive or arbitrary ID for the connector. This value must be unique
 	// within the connector definition version. Max length is 128 characters with
 	// pattern [a-zA-Z0-9:_-]+.
-	Id *string `type:"string"`
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
 
 	// The parameters or configuration that the connector uses.
 	Parameters map[string]string `type:"map"`
@@ -274,6 +280,24 @@ type Connector struct {
 // String returns the string representation
 func (s Connector) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Connector) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Connector"}
+
+	if s.ConnectorArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ConnectorArn"))
+	}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -321,6 +345,23 @@ func (s ConnectorDefinitionVersion) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ConnectorDefinitionVersion) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ConnectorDefinitionVersion"}
+	if s.Connectors != nil {
+		for i, v := range s.Connectors {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Connectors", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ConnectorDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error {
 	if s.Connectors != nil {
@@ -344,22 +385,50 @@ type Core struct {
 	_ struct{} `type:"structure"`
 
 	// The ARN of the certificate associated with the core.
-	CertificateArn *string `type:"string"`
+	//
+	// CertificateArn is a required field
+	CertificateArn *string `type:"string" required:"true"`
 
 	// A descriptive or arbitrary ID for the core. This value must be unique within
 	// the core definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
-	Id *string `type:"string"`
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
 
 	// If true, the core's local shadow is automatically synced with the cloud.
 	SyncShadow *bool `type:"boolean"`
 
 	// The ARN of the thing which is the core.
-	ThingArn *string `type:"string"`
+	//
+	// ThingArn is a required field
+	ThingArn *string `type:"string" required:"true"`
 }
 
 // String returns the string representation
 func (s Core) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Core) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Core"}
+
+	if s.CertificateArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
+	}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+
+	if s.ThingArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ThingArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -405,6 +474,23 @@ func (s CoreDefinitionVersion) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CoreDefinitionVersion) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CoreDefinitionVersion"}
+	if s.Cores != nil {
+		for i, v := range s.Cores {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Cores", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CoreDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error {
 	if s.Cores != nil {
@@ -439,15 +525,16 @@ type DefinitionInformation struct {
 	// The time, in milliseconds since the epoch, when the definition was last updated.
 	LastUpdatedTimestamp *string `type:"string"`
 
-	// The latest version of the definition.
+	// The ID of the latest version associated with the definition.
 	LatestVersion *string `type:"string"`
 
-	// The ARN of the latest version of the definition.
+	// The ARN of the latest version associated with the definition.
 	LatestVersionArn *string `type:"string"`
 
 	// The name of the definition.
 	Name *string `type:"string"`
 
+	// Tag(s) attached to the resource arn.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
@@ -582,24 +669,52 @@ type Device struct {
 	_ struct{} `type:"structure"`
 
 	// The ARN of the certificate associated with the device.
-	CertificateArn *string `type:"string"`
+	//
+	// CertificateArn is a required field
+	CertificateArn *string `type:"string" required:"true"`
 
 	// A descriptive or arbitrary ID for the device. This value must be unique within
 	// the device definition version. Max length is 128 characters with pattern
 	// ''[a-zA-Z0-9:_-]+''.
-	Id *string `type:"string"`
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
 
 	// If true, the device's local shadow will be automatically synced with the
 	// cloud.
 	SyncShadow *bool `type:"boolean"`
 
 	// The thing ARN of the device.
-	ThingArn *string `type:"string"`
+	//
+	// ThingArn is a required field
+	ThingArn *string `type:"string" required:"true"`
 }
 
 // String returns the string representation
 func (s Device) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Device) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Device"}
+
+	if s.CertificateArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
+	}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+
+	if s.ThingArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ThingArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -643,6 +758,23 @@ type DeviceDefinitionVersion struct {
 // String returns the string representation
 func (s DeviceDefinitionVersion) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeviceDefinitionVersion) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeviceDefinitionVersion"}
+	if s.Devices != nil {
+		for i, v := range s.Devices {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Devices", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -710,12 +842,33 @@ type Function struct {
 	// A descriptive or arbitrary ID for the function. This value must be unique
 	// within the function definition version. Max length is 128 characters with
 	// pattern ''[a-zA-Z0-9:_-]+''.
-	Id *string `type:"string"`
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
 }
 
 // String returns the string representation
 func (s Function) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Function) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Function"}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+	if s.FunctionConfiguration != nil {
+		if err := s.FunctionConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("FunctionConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -777,6 +930,21 @@ type FunctionConfiguration struct {
 // String returns the string representation
 func (s FunctionConfiguration) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *FunctionConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "FunctionConfiguration"}
+	if s.Environment != nil {
+		if err := s.Environment.Validate(); err != nil {
+			invalidParams.AddNested("Environment", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -853,6 +1021,23 @@ type FunctionConfigurationEnvironment struct {
 // String returns the string representation
 func (s FunctionConfigurationEnvironment) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *FunctionConfigurationEnvironment) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "FunctionConfigurationEnvironment"}
+	if s.ResourceAccessPolicies != nil {
+		for i, v := range s.ResourceAccessPolicies {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResourceAccessPolicies", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -981,6 +1166,23 @@ type FunctionDefinitionVersion struct {
 // String returns the string representation
 func (s FunctionDefinitionVersion) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *FunctionDefinitionVersion) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "FunctionDefinitionVersion"}
+	if s.Functions != nil {
+		for i, v := range s.Functions {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Functions", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -1139,10 +1341,10 @@ type GroupInformation struct {
 	// The time, in milliseconds since the epoch, when the group was last updated.
 	LastUpdatedTimestamp *string `type:"string"`
 
-	// The latest version of the group.
+	// The ID of the latest version associated with the group.
 	LatestVersion *string `type:"string"`
 
-	// The ARN of the latest version of the group.
+	// The ARN of the latest version associated with the group.
 	LatestVersionArn *string `type:"string"`
 
 	// The name of the group.
@@ -1403,27 +1605,58 @@ type Logger struct {
 	_ struct{} `type:"structure"`
 
 	// The component that will be subject to logging.
-	Component LoggerComponent `type:"string" enum:"true"`
+	//
+	// Component is a required field
+	Component LoggerComponent `type:"string" required:"true" enum:"true"`
 
 	// A descriptive or arbitrary ID for the logger. This value must be unique within
 	// the logger definition version. Max length is 128 characters with pattern
 	// ''[a-zA-Z0-9:_-]+''.
-	Id *string `type:"string"`
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
 
 	// The level of the logs.
-	Level LoggerLevel `type:"string" enum:"true"`
+	//
+	// Level is a required field
+	Level LoggerLevel `type:"string" required:"true" enum:"true"`
 
 	// The amount of file space, in KB, to use if the local file system is used
 	// for logging purposes.
 	Space *int64 `type:"integer"`
 
 	// The type of log output which will be used.
-	Type LoggerType `type:"string" enum:"true"`
+	//
+	// Type is a required field
+	Type LoggerType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
 func (s Logger) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Logger) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Logger"}
+	if len(s.Component) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Component"))
+	}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+	if len(s.Level) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Level"))
+	}
+	if len(s.Type) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -1475,6 +1708,23 @@ func (s LoggerDefinitionVersion) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LoggerDefinitionVersion) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LoggerDefinitionVersion"}
+	if s.Loggers != nil {
+		for i, v := range s.Loggers {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Loggers", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s LoggerDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error {
 	if s.Loggers != nil {
@@ -1500,20 +1750,48 @@ type Resource struct {
 	// The resource ID, used to refer to a resource in the Lambda function configuration.
 	// Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''. This must
 	// be unique within a Greengrass group.
-	Id *string `type:"string"`
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
 
 	// The descriptive resource name, which is displayed on the AWS IoT Greengrass
 	// console. Max length 128 characters with pattern ''[a-zA-Z0-9:_-]+''. This
 	// must be unique within a Greengrass group.
-	Name *string `type:"string"`
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
 
 	// A container of data for all resource types.
-	ResourceDataContainer *ResourceDataContainer `type:"structure"`
+	//
+	// ResourceDataContainer is a required field
+	ResourceDataContainer *ResourceDataContainer `type:"structure" required:"true"`
 }
 
 // String returns the string representation
 func (s Resource) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Resource) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Resource"}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if s.ResourceDataContainer == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceDataContainer"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -1550,12 +1828,28 @@ type ResourceAccessPolicy struct {
 
 	// The ID of the resource. (This ID is assigned to the resource when you create
 	// the resource definiton.)
-	ResourceId *string `type:"string"`
+	//
+	// ResourceId is a required field
+	ResourceId *string `type:"string" required:"true"`
 }
 
 // String returns the string representation
 func (s ResourceAccessPolicy) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResourceAccessPolicy) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceAccessPolicy"}
+
+	if s.ResourceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -1652,6 +1946,23 @@ type ResourceDefinitionVersion struct {
 // String returns the string representation
 func (s ResourceDefinitionVersion) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResourceDefinitionVersion) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceDefinitionVersion"}
+	if s.Resources != nil {
+		for i, v := range s.Resources {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Resources", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -1794,23 +2105,57 @@ type Subscription struct {
 	// A descriptive or arbitrary ID for the subscription. This value must be unique
 	// within the subscription definition version. Max length is 128 characters
 	// with pattern ''[a-zA-Z0-9:_-]+''.
-	Id *string `type:"string"`
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
 
 	// The source of the subscription. Can be a thing ARN, a Lambda function ARN,
 	// a connector ARN, 'cloud' (which represents the AWS IoT cloud), or 'GGShadowService'.
-	Source *string `type:"string"`
+	//
+	// Source is a required field
+	Source *string `type:"string" required:"true"`
 
 	// The MQTT topic used to route the message.
-	Subject *string `type:"string"`
+	//
+	// Subject is a required field
+	Subject *string `type:"string" required:"true"`
 
 	// Where the message is sent to. Can be a thing ARN, a Lambda function ARN,
 	// a connector ARN, 'cloud' (which represents the AWS IoT cloud), or 'GGShadowService'.
-	Target *string `type:"string"`
+	//
+	// Target is a required field
+	Target *string `type:"string" required:"true"`
 }
 
 // String returns the string representation
 func (s Subscription) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Subscription) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Subscription"}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+
+	if s.Source == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Source"))
+	}
+
+	if s.Subject == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Subject"))
+	}
+
+	if s.Target == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Target"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -1854,6 +2199,23 @@ type SubscriptionDefinitionVersion struct {
 // String returns the string representation
 func (s SubscriptionDefinitionVersion) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SubscriptionDefinitionVersion) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SubscriptionDefinitionVersion"}
+	if s.Subscriptions != nil {
+		for i, v := range s.Subscriptions {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Subscriptions", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.

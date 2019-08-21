@@ -519,7 +519,9 @@ type ComputeResource struct {
 	// in the AWS Batch User Guide.
 	SpotIamFleetRole *string `locationName:"spotIamFleetRole" type:"string"`
 
-	// The VPC subnets into which the compute resources are launched.
+	// The VPC subnets into which the compute resources are launched. For more information,
+	// see VPCs and Subnets (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)
+	// in the Amazon VPC User Guide.
 	//
 	// Subnets is a required field
 	Subnets []string `locationName:"subnets" type:"list" required:"true"`
@@ -768,6 +770,10 @@ type ContainerDetail struct {
 	// The Amazon Resource Name (ARN) associated with the job upon execution.
 	JobRoleArn *string `locationName:"jobRoleArn" type:"string"`
 
+	// Linux-specific modifications that are applied to the container, such as details
+	// for device mappings.
+	LinuxParameters *LinuxParameters `locationName:"linuxParameters" type:"structure"`
+
 	// The name of the CloudWatch Logs log stream associated with the container.
 	// The log group for AWS Batch jobs is /aws/batch/job. Each container attempt
 	// receives a log stream name when they reach the RUNNING status.
@@ -876,6 +882,12 @@ func (s ContainerDetail) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "jobRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LinuxParameters != nil {
+		v := s.LinuxParameters
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "linuxParameters", v, metadata)
 	}
 	if s.LogStreamName != nil {
 		v := *s.LogStreamName
@@ -1161,6 +1173,10 @@ type ContainerProperties struct {
 	// for AWS permissions.
 	JobRoleArn *string `locationName:"jobRoleArn" type:"string"`
 
+	// Linux-specific modifications that are applied to the container, such as details
+	// for device mappings.
+	LinuxParameters *LinuxParameters `locationName:"linuxParameters" type:"structure"`
+
 	// The hard limit (in MiB) of memory to present to the container. If your container
 	// attempts to exceed the memory specified here, the container is killed. This
 	// parameter maps to Memory in the Create a container (https://docs.docker.com/engine/api/v1.23/#create-a-container)
@@ -1230,6 +1246,11 @@ func (s ContainerProperties) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ContainerProperties) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ContainerProperties"}
+	if s.LinuxParameters != nil {
+		if err := s.LinuxParameters.Validate(); err != nil {
+			invalidParams.AddNested("LinuxParameters", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.ResourceRequirements != nil {
 		for i, v := range s.ResourceRequirements {
 			if err := v.Validate(); err != nil {
@@ -1294,6 +1315,12 @@ func (s ContainerProperties) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "jobRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LinuxParameters != nil {
+		v := s.LinuxParameters
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "linuxParameters", v, metadata)
 	}
 	if s.Memory != nil {
 		v := *s.Memory
@@ -1407,6 +1434,73 @@ func (s ContainerSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "reason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object representing a container instance host device.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/Device
+type Device struct {
+	_ struct{} `type:"structure"`
+
+	// The path inside the container at which to expose the host device. By default
+	// the hostPath value is used.
+	ContainerPath *string `locationName:"containerPath" type:"string"`
+
+	// The path for the device on the host container instance.
+	//
+	// HostPath is a required field
+	HostPath *string `locationName:"hostPath" type:"string" required:"true"`
+
+	// The explicit permissions to provide to the container for the device. By default,
+	// the container has permissions for read, write, and mknod for the device.
+	Permissions []DeviceCgroupPermission `locationName:"permissions" type:"list"`
+}
+
+// String returns the string representation
+func (s Device) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Device) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Device"}
+
+	if s.HostPath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HostPath"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Device) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ContainerPath != nil {
+		v := *s.ContainerPath
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "containerPath", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.HostPath != nil {
+		v := *s.HostPath
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "hostPath", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Permissions != nil {
+		v := s.Permissions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "permissions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -2151,6 +2245,58 @@ func (s LaunchTemplateSpecification) MarshalFields(e protocol.FieldEncoder) erro
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Linux-specific modifications that are applied to the container, such as details
+// for device mappings.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/LinuxParameters
+type LinuxParameters struct {
+	_ struct{} `type:"structure"`
+
+	// Any host devices to expose to the container. This parameter maps to Devices
+	// in the Create a container (https://docs.docker.com/engine/api/v1.23/#create-a-container)
+	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.23/)
+	// and the --device option to docker run (https://docs.docker.com/engine/reference/run/).
+	Devices []Device `locationName:"devices" type:"list"`
+}
+
+// String returns the string representation
+func (s LinuxParameters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LinuxParameters) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LinuxParameters"}
+	if s.Devices != nil {
+		for i, v := range s.Devices {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Devices", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LinuxParameters) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Devices != nil {
+		v := s.Devices
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "devices", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	return nil
 }

@@ -76,15 +76,15 @@ const opGetAccessKeyInfo = "GetAccessKeyInfo"
 // key IDs beginning with ASIA are temporary credentials that are created using
 // STS operations. If the account in the response belongs to you, you can sign
 // in as the root user and review your root user access keys. Then, you can
-// pull a credentials report (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report)
+// pull a credentials report (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html)
 // to learn which IAM user owns the keys. To learn who requested the temporary
 // credentials for an ASIA access key, view the STS events in your CloudTrail
-// logs (https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration).
+// logs (https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html).
 //
 // This operation does not indicate the state of the access key. The key might
 // be active, inactive, or deleted. Active keys might not have permissions to
-// perform an operation. Providing a deleted keys might return an error that
-// the key doesn't exist.
+// perform an operation. Providing a deleted access key might return an error
+// that the key doesn't exist.
 //
 //    // Example sending a request using GetAccessKeyInfoRequest.
 //    req := client.GetAccessKeyInfoRequest(params)

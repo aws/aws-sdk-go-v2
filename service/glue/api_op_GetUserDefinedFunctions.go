@@ -14,7 +14,7 @@ type GetUserDefinedFunctionsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the Data Catalog where the functions to be retrieved are located.
-	// If none is supplied, the AWS account ID is used by default.
+	// If none is provided, the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 
 	// The name of the catalog database where the functions are located.
@@ -92,7 +92,7 @@ const opGetUserDefinedFunctions = "GetUserDefinedFunctions"
 // GetUserDefinedFunctionsRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Retrieves a multiple function definitions from the Data Catalog.
+// Retrieves multiple function definitions from the Data Catalog.
 //
 //    // Example sending a request using GetUserDefinedFunctionsRequest.
 //    req := client.GetUserDefinedFunctionsRequest(params)

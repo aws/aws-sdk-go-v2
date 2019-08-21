@@ -67,6 +67,9 @@ type DescribeSimulationJobOutput struct {
 	// of the request.
 	ClientRequestToken *string `locationName:"clientRequestToken" min:"1" type:"string"`
 
+	// The data sources for the simulation job.
+	DataSources []DataSource `locationName:"dataSources" type:"list"`
+
 	// The failure behavior for the simulation job.
 	FailureBehavior FailureBehavior `locationName:"failureBehavior" type:"string" enum:"true"`
 
@@ -147,6 +150,9 @@ type DescribeSimulationJobOutput struct {
 	// updated.
 	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
 
+	// The logging configuration.
+	LoggingConfig *LoggingConfig `locationName:"loggingConfig" type:"structure"`
+
 	// The maximum job duration in seconds. The value must be 8 days (691,200 seconds)
 	// or less.
 	MaxJobDurationInSeconds *int64 `locationName:"maxJobDurationInSeconds" type:"long"`
@@ -195,6 +201,18 @@ func (s DescribeSimulationJobOutput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "clientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.DataSources != nil {
+		v := s.DataSources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "dataSources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if len(s.FailureBehavior) > 0 {
 		v := s.FailureBehavior
 
@@ -232,6 +250,12 @@ func (s DescribeSimulationJobOutput) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
 			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.LoggingConfig != nil {
+		v := s.LoggingConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "loggingConfig", v, metadata)
 	}
 	if s.MaxJobDurationInSeconds != nil {
 		v := *s.MaxJobDurationInSeconds

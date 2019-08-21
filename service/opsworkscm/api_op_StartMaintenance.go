@@ -61,7 +61,7 @@ func (s StartMaintenanceOutput) String() string {
 const opStartMaintenance = "StartMaintenance"
 
 // StartMaintenanceRequest returns a request value for making API operation for
-// AWS OpsWorks for Chef Automate.
+// AWS OpsWorks CM.
 //
 // Manually starts server maintenance. This command can be useful if an earlier
 // maintenance attempt failed, and the underlying cause of maintenance failure

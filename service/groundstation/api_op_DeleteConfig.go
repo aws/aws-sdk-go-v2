@@ -14,13 +14,9 @@ import (
 type DeleteConfigInput struct {
 	_ struct{} `type:"structure"`
 
-	// UUID of a Config.
-	//
 	// ConfigId is a required field
 	ConfigId *string `location:"uri" locationName:"configId" type:"string" required:"true"`
 
-	// Type of a Config.
-	//
 	// ConfigType is a required field
 	ConfigType ConfigCapabilityType `location:"uri" locationName:"configType" type:"string" required:"true" enum:"true"`
 }
@@ -70,13 +66,10 @@ func (s DeleteConfigInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteConfigOutput struct {
 	_ struct{} `type:"structure"`
 
-	// ARN of a Config.
 	ConfigArn *string `locationName:"configArn" type:"string"`
 
-	// UUID of a Config.
 	ConfigId *string `locationName:"configId" type:"string"`
 
-	// Type of a Config.
 	ConfigType ConfigCapabilityType `locationName:"configType" type:"string" enum:"true"`
 }
 

@@ -56,6 +56,7 @@ func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The tags associated with the resource.
 	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 }
 

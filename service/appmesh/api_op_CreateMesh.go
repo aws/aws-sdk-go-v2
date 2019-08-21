@@ -15,22 +15,14 @@ import (
 type CreateMeshInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of therequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
-	// The name to use for the service mesh.
-	//
 	// MeshName is a required field
 	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The service mesh specification to apply.
+	// An object representing the specification of a service mesh.
 	Spec *MeshSpec `locationName:"spec" type:"structure"`
 
-	// Optional metadata that you can apply to the service mesh to assist with categorization
-	// and organization. Each tag consists of a key and an optional value, both
-	// of which you define. Tag keys can have a maximum character length of 128
-	// characters, and tag values can have a maximum length of 256 characters.
 	Tags []TagRef `locationName:"tags" type:"list"`
 }
 
@@ -115,7 +107,7 @@ func (s CreateMeshInput) MarshalFields(e protocol.FieldEncoder) error {
 type CreateMeshOutput struct {
 	_ struct{} `type:"structure" payload:"Mesh"`
 
-	// The full description of your service mesh following the create call.
+	// An object representing a service mesh returned by a describe operation.
 	//
 	// Mesh is a required field
 	Mesh *MeshData `locationName:"mesh" type:"structure" required:"true"`

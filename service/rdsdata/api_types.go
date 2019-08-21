@@ -16,46 +16,32 @@ var _ = awsutil.Prettify
 type ColumnMetadata struct {
 	_ struct{} `type:"structure"`
 
-	// The type of the column.
 	ArrayBaseColumnType *int64 `locationName:"arrayBaseColumnType" type:"integer"`
 
-	// A value that indicates whether the column increments automatically.
 	IsAutoIncrement *bool `locationName:"isAutoIncrement" type:"boolean"`
 
-	// A value that indicates whether the column is case-sensitive.
 	IsCaseSensitive *bool `locationName:"isCaseSensitive" type:"boolean"`
 
-	// A value that indicates whether the column contains currency values.
 	IsCurrency *bool `locationName:"isCurrency" type:"boolean"`
 
-	// A value that indicates whether an integer column is signed.
 	IsSigned *bool `locationName:"isSigned" type:"boolean"`
 
-	// The label for the column.
 	Label *string `locationName:"label" type:"string"`
 
-	// The name of the column.
 	Name *string `locationName:"name" type:"string"`
 
-	// A value that indicates whether the column is nullable.
 	Nullable *int64 `locationName:"nullable" type:"integer"`
 
-	// The precision value of a decimal number column.
 	Precision *int64 `locationName:"precision" type:"integer"`
 
-	// The scale value of a decimal number column.
 	Scale *int64 `locationName:"scale" type:"integer"`
 
-	// The name of the schema that owns the table that includes the column.
 	SchemaName *string `locationName:"schemaName" type:"string"`
 
-	// The name of the table that includes the column.
 	TableName *string `locationName:"tableName" type:"string"`
 
-	// The type of the column.
 	Type *int64 `locationName:"type" type:"integer"`
 
-	// The database-specific data type of the column.
 	TypeName *string `locationName:"typeName" type:"string"`
 }
 
@@ -158,24 +144,17 @@ func (s ColumnMetadata) MarshalFields(e protocol.FieldEncoder) error {
 type Field struct {
 	_ struct{} `type:"structure"`
 
-	// A value of BLOB data type.
-	//
 	// BlobValue is automatically base64 encoded/decoded by the SDK.
 	BlobValue []byte `locationName:"blobValue" type:"blob"`
 
-	// A value of Boolean data type.
 	BooleanValue *bool `locationName:"booleanValue" type:"boolean"`
 
-	// A value of double data type.
 	DoubleValue *float64 `locationName:"doubleValue" type:"double"`
 
-	// A NULL value.
 	IsNull *bool `locationName:"isNull" type:"boolean"`
 
-	// A value of long data type.
 	LongValue *int64 `locationName:"longValue" type:"long"`
 
-	// A value of string data type.
 	StringValue *string `locationName:"stringValue" type:"string"`
 }
 
@@ -230,7 +209,6 @@ func (s Field) MarshalFields(e protocol.FieldEncoder) error {
 type Record struct {
 	_ struct{} `type:"structure"`
 
-	// The values returned in the record.
 	Values []Value `locationName:"values" type:"list"`
 }
 
@@ -261,10 +239,9 @@ func (s Record) MarshalFields(e protocol.FieldEncoder) error {
 type ResultFrame struct {
 	_ struct{} `type:"structure"`
 
-	// The records in the result set.
 	Records []Record `locationName:"records" type:"list"`
 
-	// The result-set metadata in the result set.
+	// The metadata of the result set returned by a SQL statement.
 	ResultSetMetadata *ResultSetMetadata `locationName:"resultSetMetadata" type:"structure"`
 }
 
@@ -301,10 +278,8 @@ func (s ResultFrame) MarshalFields(e protocol.FieldEncoder) error {
 type ResultSetMetadata struct {
 	_ struct{} `type:"structure"`
 
-	// The number of columns in the result set.
 	ColumnCount *int64 `locationName:"columnCount" type:"long"`
 
-	// The metadata of the columns in the result set.
 	ColumnMetadata []ColumnMetadata `locationName:"columnMetadata" type:"list"`
 }
 
@@ -341,10 +316,9 @@ func (s ResultSetMetadata) MarshalFields(e protocol.FieldEncoder) error {
 type SqlParameter struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the parameter.
 	Name *string `locationName:"name" type:"string"`
 
-	// The value of the parameter.
+	// Contains a value.
 	Value *Field `locationName:"value" type:"structure"`
 }
 
@@ -375,10 +349,9 @@ func (s SqlParameter) MarshalFields(e protocol.FieldEncoder) error {
 type SqlStatementResult struct {
 	_ struct{} `type:"structure"`
 
-	// The number of records updated by a SQL statement.
 	NumberOfRecordsUpdated *int64 `locationName:"numberOfRecordsUpdated" type:"long"`
 
-	// The result set of the SQL statement.
+	// The result set returned by a SQL statement.
 	ResultFrame *ResultFrame `locationName:"resultFrame" type:"structure"`
 }
 
@@ -409,7 +382,6 @@ func (s SqlStatementResult) MarshalFields(e protocol.FieldEncoder) error {
 type StructValue struct {
 	_ struct{} `type:"structure"`
 
-	// The attributes returned in the record.
 	Attributes []Value `locationName:"attributes" type:"list"`
 }
 
@@ -440,7 +412,6 @@ func (s StructValue) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateResult struct {
 	_ struct{} `type:"structure"`
 
-	// Values for fields generated during the request.
 	GeneratedFields []Field `locationName:"generatedFields" type:"list"`
 }
 
@@ -471,36 +442,26 @@ func (s UpdateResult) MarshalFields(e protocol.FieldEncoder) error {
 type Value struct {
 	_ struct{} `type:"structure"`
 
-	// An array of column values.
 	ArrayValues []Value `locationName:"arrayValues" type:"list"`
 
-	// A value for a column of big integer data type.
 	BigIntValue *int64 `locationName:"bigIntValue" type:"long"`
 
-	// A value for a column of BIT data type.
 	BitValue *bool `locationName:"bitValue" type:"boolean"`
 
-	// A value for a column of BLOB data type.
-	//
 	// BlobValue is automatically base64 encoded/decoded by the SDK.
 	BlobValue []byte `locationName:"blobValue" type:"blob"`
 
-	// A value for a column of double data type.
 	DoubleValue *float64 `locationName:"doubleValue" type:"double"`
 
-	// A value for a column of integer data type.
 	IntValue *int64 `locationName:"intValue" type:"integer"`
 
-	// A NULL value.
 	IsNull *bool `locationName:"isNull" type:"boolean"`
 
-	// A value for a column of real data type.
 	RealValue *float64 `locationName:"realValue" type:"float"`
 
-	// A value for a column of string data type.
 	StringValue *string `locationName:"stringValue" type:"string"`
 
-	// A value for a column of STRUCT data type.
+	// A structure value returned by a call.
 	StructValue *StructValue `locationName:"structValue" type:"structure"`
 }
 

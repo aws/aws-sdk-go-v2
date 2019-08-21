@@ -17,6 +17,7 @@ const (
 	AWSRegionApNortheast1 AWSRegion = "ap-northeast-1"
 	AWSRegionEuNorth1     AWSRegion = "eu-north-1"
 	AWSRegionApNortheast3 AWSRegion = "ap-northeast-3"
+	AWSRegionApEast1      AWSRegion = "ap-east-1"
 )
 
 func (enum AWSRegion) MarshalValue() (string, error) {

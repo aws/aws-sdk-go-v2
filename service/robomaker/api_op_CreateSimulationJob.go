@@ -20,6 +20,12 @@ type CreateSimulationJobInput struct {
 	// of the request.
 	ClientRequestToken *string `locationName:"clientRequestToken" min:"1" type:"string" idempotencyToken:"true"`
 
+	// The data sources for the simulation job.
+	//
+	// There is a limit of 100 files and a combined size of 25GB for all DataSourceConfig
+	// objects.
+	DataSources []DataSourceConfig `locationName:"dataSources" min:"1" type:"list"`
+
 	// The failure behavior the simulation job.
 	//
 	// Continue
@@ -37,6 +43,9 @@ type CreateSimulationJobInput struct {
 	//
 	// IamRole is a required field
 	IamRole *string `locationName:"iamRole" min:"1" type:"string" required:"true"`
+
+	// The logging configuration.
+	LoggingConfig *LoggingConfig `locationName:"loggingConfig" type:"structure"`
 
 	// The maximum simulation job duration in seconds (up to 14 days or 1,209,600
 	// seconds. When maxJobDurationInSeconds is reached, the simulation job will
@@ -76,6 +85,9 @@ func (s *CreateSimulationJobInput) Validate() error {
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
 	}
+	if s.DataSources != nil && len(s.DataSources) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DataSources", 1))
+	}
 
 	if s.IamRole == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IamRole"))
@@ -92,6 +104,18 @@ func (s *CreateSimulationJobInput) Validate() error {
 	}
 	if s.SimulationApplications != nil && len(s.SimulationApplications) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SimulationApplications", 1))
+	}
+	if s.DataSources != nil {
+		for i, v := range s.DataSources {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DataSources", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.LoggingConfig != nil {
+		if err := s.LoggingConfig.Validate(); err != nil {
+			invalidParams.AddNested("LoggingConfig", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.OutputLocation != nil {
 		if err := s.OutputLocation.Validate(); err != nil {
@@ -140,6 +164,18 @@ func (s CreateSimulationJobInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "clientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.DataSources != nil {
+		v := s.DataSources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "dataSources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if len(s.FailureBehavior) > 0 {
 		v := s.FailureBehavior
 
@@ -151,6 +187,12 @@ func (s CreateSimulationJobInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "iamRole", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LoggingConfig != nil {
+		v := s.LoggingConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "loggingConfig", v, metadata)
 	}
 	if s.MaxJobDurationInSeconds != nil {
 		v := *s.MaxJobDurationInSeconds
@@ -220,6 +262,9 @@ type CreateSimulationJobOutput struct {
 	// of the request.
 	ClientRequestToken *string `locationName:"clientRequestToken" min:"1" type:"string"`
 
+	// The data sources for the simulation job.
+	DataSources []DataSource `locationName:"dataSources" type:"list"`
+
 	// the failure behavior for the simulation job.
 	FailureBehavior FailureBehavior `locationName:"failureBehavior" type:"string" enum:"true"`
 
@@ -282,6 +327,18 @@ type CreateSimulationJobOutput struct {
 	// SimulationApplicationVersionMismatchedEtag
 	//
 	// Etag for SimulationApplication does not match value during version creation.
+	//
+	// WrongRegionS3Output
+	//
+	// S3 output bucket is in a different region than AWS RoboMaker.
+	//
+	// WrongRegionRobotApplication
+	//
+	// RobotApplication bucket is in a different region than AWS RoboMaker.
+	//
+	// WrongRegionSimulationApplication
+	//
+	// SimulationApplication bucket is in a different region than AWS RoboMaker.
 	FailureCode SimulationJobErrorCode `locationName:"failureCode" type:"string" enum:"true"`
 
 	// The IAM role that allows the simulation job to call the AWS APIs that are
@@ -295,6 +352,9 @@ type CreateSimulationJobOutput struct {
 	// The time, in milliseconds since the epoch, when the simulation job was last
 	// updated.
 	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp"`
+
+	// The logging configuration.
+	LoggingConfig *LoggingConfig `locationName:"loggingConfig" type:"structure"`
 
 	// The maximum simulation job duration in seconds.
 	MaxJobDurationInSeconds *int64 `locationName:"maxJobDurationInSeconds" type:"long"`
@@ -340,6 +400,18 @@ func (s CreateSimulationJobOutput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "clientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.DataSources != nil {
+		v := s.DataSources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "dataSources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if len(s.FailureBehavior) > 0 {
 		v := s.FailureBehavior
 
@@ -371,6 +443,12 @@ func (s CreateSimulationJobOutput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
 			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.LoggingConfig != nil {
+		v := s.LoggingConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "loggingConfig", v, metadata)
 	}
 	if s.MaxJobDurationInSeconds != nil {
 		v := *s.MaxJobDurationInSeconds

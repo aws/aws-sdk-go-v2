@@ -15,34 +15,22 @@ import (
 type ListContactsInput struct {
 	_ struct{} `type:"structure"`
 
-	// End time of a contact.
-	//
 	// EndTime is a required field
 	EndTime *time.Time `locationName:"endTime" type:"timestamp" required:"true"`
 
-	// Name of a ground station.
 	GroundStation *string `locationName:"groundStation" type:"string"`
 
-	// Maximum number of contacts returned.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
-	// ARN of a mission profile.
 	MissionProfileArn *string `locationName:"missionProfileArn" type:"string"`
 
-	// Next token returned in the request of a previous ListContacts call. Used
-	// to get the next page of results.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
-	// ARN of a satellite.
 	SatelliteArn *string `locationName:"satelliteArn" type:"string"`
 
-	// Start time of a contact.
-	//
 	// StartTime is a required field
 	StartTime *time.Time `locationName:"startTime" type:"timestamp" required:"true"`
 
-	// Status of a contact reservation.
-	//
 	// StatusList is a required field
 	StatusList []ContactStatus `locationName:"statusList" type:"list" required:"true"`
 }
@@ -141,11 +129,8 @@ func (s ListContactsInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListContactsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// List of contacts.
 	ContactList []ContactData `locationName:"contactList" type:"list"`
 
-	// Next token returned in the response of a previous ListContacts call. Used
-	// to get the next page of results.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 

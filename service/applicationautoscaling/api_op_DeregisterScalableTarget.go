@@ -19,8 +19,8 @@ type DeregisterScalableTargetInput struct {
 	//    * ECS service - The resource type is service and the unique identifier
 	//    is the cluster name and service name. Example: service/default/sample-webapp.
 	//
-	//    * Spot fleet request - The resource type is spot-fleet-request and the
-	//    unique identifier is the Spot fleet request ID. Example: spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE.
+	//    * Spot Fleet request - The resource type is spot-fleet-request and the
+	//    unique identifier is the Spot Fleet request ID. Example: spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE.
 	//
 	//    * EMR cluster - The resource type is instancegroup and the unique identifier
 	//    is the cluster ID and instance group ID. Example: instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0.
@@ -54,7 +54,7 @@ type DeregisterScalableTargetInput struct {
 	//    * ecs:service:DesiredCount - The desired task count of an ECS service.
 	//
 	//    * ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot
-	//    fleet request.
+	//    Fleet request.
 	//
 	//    * elasticmapreduce:instancegroup:InstanceCount - The instance count of
 	//    an EMR Instance Group.
@@ -89,7 +89,7 @@ type DeregisterScalableTargetInput struct {
 
 	// The namespace of the AWS service that provides the resource or custom-resource
 	// for a resource provided by your own application or service. For more information,
-	// see AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
+	// see AWS Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
 	// in the Amazon Web Services General Reference.
 	//
 	// ServiceNamespace is a required field
@@ -139,7 +139,7 @@ const opDeregisterScalableTarget = "DeregisterScalableTarget"
 // DeregisterScalableTargetRequest returns a request value for making API operation for
 // Application Auto Scaling.
 //
-// Deregisters a scalable target.
+// Deregisters an Application Auto Scaling scalable target.
 //
 // Deregistering a scalable target deletes the scaling policies that are associated
 // with it.

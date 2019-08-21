@@ -13,11 +13,11 @@ import (
 type CreateDatabaseInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the Data Catalog in which to create the database. If none is supplied,
+	// The ID of the Data Catalog in which to create the database. If none is provided,
 	// the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 
-	// A DatabaseInput object defining the metadata database to create in the catalog.
+	// The metadata for the database.
 	//
 	// DatabaseInput is a required field
 	DatabaseInput *DatabaseInput `type:"structure" required:"true"`

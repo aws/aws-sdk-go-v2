@@ -60,7 +60,7 @@ type PutScheduledUpdateGroupActionInput struct {
 	// an error message.
 	StartTime *time.Time `type:"timestamp"`
 
-	// This parameter is deprecated.
+	// This parameter is no longer used.
 	Time *time.Time `type:"timestamp"`
 }
 

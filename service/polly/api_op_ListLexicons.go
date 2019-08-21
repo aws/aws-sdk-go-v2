@@ -83,7 +83,7 @@ const opListLexicons = "ListLexicons"
 // Amazon Polly.
 //
 // Returns a list of pronunciation lexicons stored in an AWS Region. For more
-// information, see Managing Lexicons (http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
+// information, see Managing Lexicons (https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
 //
 //    // Example sending a request using ListLexiconsRequest.
 //    req := client.ListLexiconsRequest(params)

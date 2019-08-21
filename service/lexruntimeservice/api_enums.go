@@ -2,6 +2,24 @@
 
 package lexruntimeservice
 
+type ConfirmationStatus string
+
+// Enum values for ConfirmationStatus
+const (
+	ConfirmationStatusNone      ConfirmationStatus = "None"
+	ConfirmationStatusConfirmed ConfirmationStatus = "Confirmed"
+	ConfirmationStatusDenied    ConfirmationStatus = "Denied"
+)
+
+func (enum ConfirmationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConfirmationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ContentType string
 
 // Enum values for ContentType
@@ -14,6 +32,26 @@ func (enum ContentType) MarshalValue() (string, error) {
 }
 
 func (enum ContentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DialogActionType string
+
+// Enum values for DialogActionType
+const (
+	DialogActionTypeElicitIntent  DialogActionType = "ElicitIntent"
+	DialogActionTypeConfirmIntent DialogActionType = "ConfirmIntent"
+	DialogActionTypeElicitSlot    DialogActionType = "ElicitSlot"
+	DialogActionTypeClose         DialogActionType = "Close"
+	DialogActionTypeDelegate      DialogActionType = "Delegate"
+)
+
+func (enum DialogActionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DialogActionType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -35,6 +73,24 @@ func (enum DialogState) MarshalValue() (string, error) {
 }
 
 func (enum DialogState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type FulfillmentState string
+
+// Enum values for FulfillmentState
+const (
+	FulfillmentStateFulfilled           FulfillmentState = "Fulfilled"
+	FulfillmentStateFailed              FulfillmentState = "Failed"
+	FulfillmentStateReadyForFulfillment FulfillmentState = "ReadyForFulfillment"
+)
+
+func (enum FulfillmentState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FulfillmentState) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

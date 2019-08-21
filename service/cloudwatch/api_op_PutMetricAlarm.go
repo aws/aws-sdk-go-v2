@@ -99,7 +99,8 @@ type PutMetricAlarmInput struct {
 	// | arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0
 	InsufficientDataActions []string `type:"list"`
 
-	// The name for the metric associated with the alarm.
+	// The name for the metric associated with the alarm. For each PutMetricAlarm
+	// operation, you must specify either MetricName or a Metrics array.
 	//
 	// If you are creating an alarm based on a math expression, you cannot specify
 	// this parameter, or any of the Dimensions, Period, Namespace, Statistic, or
@@ -108,8 +109,11 @@ type PutMetricAlarmInput struct {
 	MetricName *string `min:"1" type:"string"`
 
 	// An array of MetricDataQuery structures that enable you to create an alarm
-	// based on the result of a metric math expression. Each item in the Metrics
-	// array either retrieves a metric or performs a math expression.
+	// based on the result of a metric math expression. For each PutMetricAlarm
+	// operation, you must specify either MetricName or a Metrics array.
+	//
+	// Each item in the Metrics array either retrieves a metric or performs a math
+	// expression.
 	//
 	// One item in the Metrics array is the expression that the alarm watches. You
 	// designate this expression by setting ReturnValue to true for this object
@@ -138,6 +142,10 @@ type PutMetricAlarmInput struct {
 
 	// The length, in seconds, used each time the metric specified in MetricName
 	// is evaluated. Valid values are 10, 30, and any multiple of 60.
+	//
+	// Period is required for alarms based on static thresholds. If you are creating
+	// an alarm based on a metric math expression, you specify the period for each
+	// metric within the objects in the Metrics array.
 	//
 	// Be sure to specify 10 or 30 only for metrics that are stored by a PutMetricData
 	// call with a StorageResolution of 1. If you specify a period of 10 or 30 for
@@ -168,6 +176,9 @@ type PutMetricAlarmInput struct {
 	Tags []Tag `type:"list"`
 
 	// The value against which the specified statistic is compared.
+	//
+	// This parameter is required for alarms based on static thresholds, but should
+	// not be used for alarms based on anomaly detection models.
 	Threshold *float64 `type:"double"`
 
 	// If this is an alarm based on an anomaly detection model, make this value
@@ -193,8 +204,17 @@ type PutMetricAlarmInput struct {
 	// to your data. Metric data points that specify a unit of measure, such as
 	// Percent, are aggregated separately.
 	//
-	// If you specify a unit, you must use a unit that is appropriate for the metric.
-	// Otherwise, the CloudWatch alarm can get stuck in the INSUFFICIENT DATA state.
+	// If you don't specify Unit, CloudWatch retrieves all unit types that have
+	// been published for the metric and attempts to evaluate the alarm. Usually
+	// metrics are published with only one unit, so the alarm will work as intended.
+	//
+	// However, if the metric is published with multiple types of units and you
+	// don't specify a unit, the alarm's behavior is not defined and will behave
+	// un-predictably.
+	//
+	// We recommend omitting Unit so that you don't inadvertently specify an incorrect
+	// unit that is not published for this metric. Doing so causes the alarm to
+	// be stuck in the INSUFFICIENT DATA state.
 	Unit StandardUnit `type:"string" enum:"true"`
 }
 

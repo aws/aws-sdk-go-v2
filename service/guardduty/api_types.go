@@ -11,6 +11,7 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// Contains information about the access keys.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccessKeyDetails
 type AccessKeyDetails struct {
 	_ struct{} `type:"structure"`
@@ -62,6 +63,7 @@ func (s AccessKeyDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the account.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccountDetail
 type AccountDetail struct {
 	_ struct{} `type:"structure"`
@@ -123,6 +125,7 @@ func (s AccountDetail) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Action
 type Action struct {
 	_ struct{} `type:"structure"`
@@ -183,6 +186,7 @@ func (s Action) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the API operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AwsApiCallAction
 type AwsApiCallAction struct {
 	_ struct{} `type:"structure"`
@@ -243,6 +247,7 @@ func (s AwsApiCallAction) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the city associated with the IP address.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/City
 type City struct {
 	_ struct{} `type:"structure"`
@@ -267,14 +272,17 @@ func (s City) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the condition.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Condition
 type Condition struct {
 	_ struct{} `type:"structure"`
 
-	// Represents the equal condition to be applied to a single field when querying
-	// for findings.
+	// Deprecated. Represents the equal condition to be applied to a single field
+	// when querying for findings.
 	Eq []string `locationName:"eq" deprecated:"true" type:"list"`
 
+	// Represents an equal condition to be applied to a single field when querying
+	// for findings.
 	Equals []string `locationName:"equals" type:"list"`
 
 	// Represents a greater than condition to be applied to a single field when
@@ -285,12 +293,12 @@ type Condition struct {
 	// when querying for findings.
 	GreaterThanOrEqual *int64 `locationName:"greaterThanOrEqual" type:"long"`
 
-	// Represents a greater than condition to be applied to a single field when
-	// querying for findings.
+	// Deprecated. Represents a greater than condition to be applied to a single
+	// field when querying for findings.
 	Gt *int64 `locationName:"gt" deprecated:"true" type:"integer"`
 
-	// Represents a greater than equal condition to be applied to a single field
-	// when querying for findings.
+	// Deprecated. Represents a greater than equal condition to be applied to a
+	// single field when querying for findings.
 	Gte *int64 `locationName:"gte" deprecated:"true" type:"integer"`
 
 	// Represents a less than condition to be applied to a single field when querying
@@ -301,18 +309,20 @@ type Condition struct {
 	// querying for findings.
 	LessThanOrEqual *int64 `locationName:"lessThanOrEqual" type:"long"`
 
-	// Represents a less than condition to be applied to a single field when querying
-	// for findings.
+	// Deprecated. Represents a less than condition to be applied to a single field
+	// when querying for findings.
 	Lt *int64 `locationName:"lt" deprecated:"true" type:"integer"`
 
-	// Represents a less than equal condition to be applied to a single field when
-	// querying for findings.
+	// Deprecated. Represents a less than equal condition to be applied to a single
+	// field when querying for findings.
 	Lte *int64 `locationName:"lte" deprecated:"true" type:"integer"`
 
-	// Represents the not equal condition to be applied to a single field when querying
-	// for findings.
+	// Deprecated. Represents the not equal condition to be applied to a single
+	// field when querying for findings.
 	Neq []string `locationName:"neq" deprecated:"true" type:"list"`
 
+	// Represents an not equal condition to be applied to a single field when querying
+	// for findings.
 	NotEquals []string `locationName:"notEquals" type:"list"`
 }
 
@@ -422,6 +432,7 @@ func (s Condition) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the country.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Country
 type Country struct {
 	_ struct{} `type:"structure"`
@@ -455,6 +466,7 @@ func (s Country) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the DNS request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DnsRequestAction
 type DnsRequestAction struct {
 	_ struct{} `type:"structure"`
@@ -479,6 +491,7 @@ func (s DnsRequestAction) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the domain.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DomainDetails
 type DomainDetails struct {
 	_ struct{} `type:"structure"`
@@ -503,74 +516,103 @@ func (s DomainDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the reason that the finding was generated.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Evidence
+type Evidence struct {
+	_ struct{} `type:"structure"`
+
+	// A list of threat intelligence details related to the evidence.
+	ThreatIntelligenceDetails []ThreatIntelligenceDetail `locationName:"threatIntelligenceDetails" type:"list"`
+}
+
+// String returns the string representation
+func (s Evidence) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Evidence) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ThreatIntelligenceDetails != nil {
+		v := s.ThreatIntelligenceDetails
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "threatIntelligenceDetails", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Contains information about the finding.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Finding
 type Finding struct {
 	_ struct{} `type:"structure"`
 
-	// AWS account ID where the activity occurred that prompted GuardDuty to generate
-	// a finding.
+	// The ID of the account in which the finding was generated.
 	//
 	// AccountId is a required field
 	AccountId *string `locationName:"accountId" type:"string" required:"true"`
 
-	// The ARN of a finding described by the action.
+	// The ARN for the finding.
 	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" type:"string" required:"true"`
 
-	// The confidence level of a finding.
+	// The confidence score for the finding.
 	Confidence *float64 `locationName:"confidence" type:"double"`
 
-	// The time stamp at which a finding was generated.
+	// The time and date at which the finding was created.
 	//
 	// CreatedAt is a required field
 	CreatedAt *string `locationName:"createdAt" type:"string" required:"true"`
 
-	// The description of a finding.
+	// The description of the finding.
 	Description *string `locationName:"description" type:"string"`
 
-	// The identifier that corresponds to a finding described by the action.
+	// The ID of the finding.
 	//
 	// Id is a required field
 	Id *string `locationName:"id" type:"string" required:"true"`
 
-	// The AWS resource partition.
+	// The partition associated with the finding.
 	Partition *string `locationName:"partition" type:"string"`
 
-	// The AWS region where the activity occurred that prompted GuardDuty to generate
-	// a finding.
+	// The Region in which the finding was generated.
 	//
 	// Region is a required field
 	Region *string `locationName:"region" type:"string" required:"true"`
 
-	// The AWS resource associated with the activity that prompted GuardDuty to
-	// generate a finding.
+	// Contains information about the resource.
 	//
 	// Resource is a required field
 	Resource *Resource `locationName:"resource" type:"structure" required:"true"`
 
-	// Findings' schema version.
+	// The version of the schema used for the finding.
 	//
 	// SchemaVersion is a required field
 	SchemaVersion *string `locationName:"schemaVersion" type:"string" required:"true"`
 
-	// Additional information assigned to the generated finding by GuardDuty.
+	// Contains information about the service.
 	Service *Service `locationName:"service" type:"structure"`
 
-	// The severity of a finding.
+	// The severity of the finding.
 	//
 	// Severity is a required field
 	Severity *float64 `locationName:"severity" type:"double" required:"true"`
 
-	// The title of a finding.
+	// The title for the finding.
 	Title *string `locationName:"title" type:"string"`
 
-	// The type of a finding described by the action.
+	// The type of the finding.
 	//
 	// Type is a required field
 	Type *string `locationName:"type" min:"1" type:"string" required:"true"`
 
-	// The time stamp at which a finding was last updated.
+	// The time and date at which the finding was laste updated.
 	//
 	// UpdatedAt is a required field
 	UpdatedAt *string `locationName:"updatedAt" type:"string" required:"true"`
@@ -676,6 +718,7 @@ func (s Finding) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains finding criteria information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FindingCriteria
 type FindingCriteria struct {
 	_ struct{} `type:"structure"`
@@ -707,6 +750,7 @@ func (s FindingCriteria) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about finding statistics.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FindingStatistics
 type FindingStatistics struct {
 	_ struct{} `type:"structure"`
@@ -737,6 +781,7 @@ func (s FindingStatistics) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GeoLocation
 type GeoLocation struct {
 	_ struct{} `type:"structure"`
@@ -770,6 +815,7 @@ func (s GeoLocation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the instance profile.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/IamInstanceProfile
 type IamInstanceProfile struct {
 	_ struct{} `type:"structure"`
@@ -803,6 +849,7 @@ func (s IamInstanceProfile) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the details of an instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InstanceDetails
 type InstanceDetails struct {
 	_ struct{} `type:"structure"`
@@ -944,6 +991,7 @@ func (s InstanceDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the invitation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Invitation
 type Invitation struct {
 	_ struct{} `type:"structure"`
@@ -995,6 +1043,7 @@ func (s Invitation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the port for the local connection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/LocalPortDetails
 type LocalPortDetails struct {
 	_ struct{} `type:"structure"`
@@ -1028,17 +1077,18 @@ func (s LocalPortDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the Master account and invitation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Master
 type Master struct {
 	_ struct{} `type:"structure"`
 
-	// Master account ID
+	// The ID of the account used as the Master account.
 	AccountId *string `locationName:"accountId" min:"12" type:"string"`
 
 	// This value is used to validate the master account to the member account.
 	InvitationId *string `locationName:"invitationId" type:"string"`
 
-	// Timestamp at which the invitation was sent
+	// Timestamp at which the invitation was sent.
 	InvitedAt *string `locationName:"invitedAt" type:"string"`
 
 	// The status of the relationship between the master and member accounts.
@@ -1079,6 +1129,7 @@ func (s Master) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Continas information about the member account
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Member
 type Member struct {
 	_ struct{} `type:"structure"`
@@ -1167,6 +1218,7 @@ func (s Member) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the network connection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/NetworkConnectionAction
 type NetworkConnectionAction struct {
 	_ struct{} `type:"structure"`
@@ -1236,6 +1288,7 @@ func (s NetworkConnectionAction) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the network interface.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/NetworkInterface
 type NetworkInterface struct {
 	_ struct{} `type:"structure"`
@@ -1359,6 +1412,7 @@ func (s NetworkInterface) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Continas information about the organization.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Organization
 type Organization struct {
 	_ struct{} `type:"structure"`
@@ -1410,6 +1464,7 @@ func (s Organization) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the port probe.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/PortProbeAction
 type PortProbeAction struct {
 	_ struct{} `type:"structure"`
@@ -1449,6 +1504,7 @@ func (s PortProbeAction) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the port probe details.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/PortProbeDetail
 type PortProbeDetail struct {
 	_ struct{} `type:"structure"`
@@ -1482,6 +1538,7 @@ func (s PortProbeDetail) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the private IP address.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/PrivateIpAddressDetails
 type PrivateIpAddressDetails struct {
 	_ struct{} `type:"structure"`
@@ -1515,6 +1572,7 @@ func (s PrivateIpAddressDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the product code.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ProductCode
 type ProductCode struct {
 	_ struct{} `type:"structure"`
@@ -1548,6 +1606,7 @@ func (s ProductCode) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Continas information about the remote IP address.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RemoteIpDetails
 type RemoteIpDetails struct {
 	_ struct{} `type:"structure"`
@@ -1608,6 +1667,7 @@ func (s RemoteIpDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the remote port.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RemotePortDetails
 type RemotePortDetails struct {
 	_ struct{} `type:"structure"`
@@ -1641,6 +1701,7 @@ func (s RemotePortDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Resource
 type Resource struct {
 	_ struct{} `type:"structure"`
@@ -1685,6 +1746,7 @@ func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the security group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SecurityGroup
 type SecurityGroup struct {
 	_ struct{} `type:"structure"`
@@ -1718,6 +1780,7 @@ func (s SecurityGroup) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the service.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Service
 type Service struct {
 	_ struct{} `type:"structure"`
@@ -1741,6 +1804,9 @@ type Service struct {
 	// Last seen timestamp of the activity that prompted GuardDuty to generate this
 	// finding.
 	EventLastSeen *string `locationName:"eventLastSeen" type:"string"`
+
+	// An evidence object associated with the service.
+	Evidence *Evidence `locationName:"evidence" type:"structure"`
 
 	// Resource role information for this finding.
 	ResourceRole *string `locationName:"resourceRole" type:"string"`
@@ -1795,6 +1861,12 @@ func (s Service) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "eventLastSeen", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.Evidence != nil {
+		v := s.Evidence
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "evidence", v, metadata)
+	}
 	if s.ResourceRole != nil {
 		v := *s.ResourceRole
 
@@ -1816,6 +1888,7 @@ func (s Service) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the criteria for sorting.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SortCriteria
 type SortCriteria struct {
 	_ struct{} `type:"structure"`
@@ -1850,6 +1923,7 @@ func (s SortCriteria) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information about the tag associated with the resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
@@ -1883,6 +1957,49 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An instance of a threat intelligence detail that constitutes evidence for
+// the finding.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ThreatIntelligenceDetail
+type ThreatIntelligenceDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the threat intelligence list that triggered the finding.
+	ThreatListName *string `locationName:"threatListName" type:"string"`
+
+	// A list of names of the threats in the threat intelligence list that triggered
+	// the finding.
+	ThreatNames []string `locationName:"threatNames" type:"list"`
+}
+
+// String returns the string representation
+func (s ThreatIntelligenceDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ThreatIntelligenceDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ThreatListName != nil {
+		v := *s.ThreatListName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "threatListName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ThreatNames != nil {
+		v := s.ThreatNames
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "threatNames", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Contains information about the accounts that were not processed.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnprocessedAccount
 type UnprocessedAccount struct {
 	_ struct{} `type:"structure"`

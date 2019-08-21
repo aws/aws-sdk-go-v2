@@ -36,6 +36,13 @@ type CreateJobInput struct {
 	// transcoding settings individually
 	JobTemplate *string `locationName:"jobTemplate" type:"string"`
 
+	// Specify the relative priority for this job. In any given queue, the service
+	// begins processing the job with the highest value first. When more than one
+	// job has the same priority, the service begins processing the job that you
+	// submitted first. If you don't specify a priority, the service uses the default
+	// value 0.
+	Priority *int64 `locationName:"priority" type:"integer"`
+
 	// Optional. When you create a job, you can specify a queue to send it to. If
 	// you don't specify, the job will go to the default queue. For more about queues,
 	// see the User Guide topic at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html.
@@ -71,6 +78,9 @@ func (s CreateJobInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateJobInput"}
+	if s.Priority != nil && *s.Priority < -50 {
+		invalidParams.Add(aws.NewErrParamMinValue("Priority", -50))
+	}
 
 	if s.Role == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Role"))
@@ -129,6 +139,12 @@ func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "jobTemplate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Priority != nil {
+		v := *s.Priority
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "priority", protocol.Int64Value(v), metadata)
 	}
 	if s.Queue != nil {
 		v := *s.Queue

@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Lex Runtime Service.
 //    func myFunc(svc lexruntimeserviceiface.ClientAPI) bool {
-//        // Make svc.PostContent request
+//        // Make svc.DeleteSession request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        lexruntimeserviceiface.ClientPI
 //    }
-//    func (m *mockClientClient) PostContent(input *lexruntimeservice.PostContentInput) (*lexruntimeservice.PostContentOutput, error) {
+//    func (m *mockClientClient) DeleteSession(input *lexruntimeservice.DeleteSessionInput) (*lexruntimeservice.DeleteSessionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,9 +61,15 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	DeleteSessionRequest(*lexruntimeservice.DeleteSessionInput) lexruntimeservice.DeleteSessionRequest
+
+	GetSessionRequest(*lexruntimeservice.GetSessionInput) lexruntimeservice.GetSessionRequest
+
 	PostContentRequest(*lexruntimeservice.PostContentInput) lexruntimeservice.PostContentRequest
 
 	PostTextRequest(*lexruntimeservice.PostTextInput) lexruntimeservice.PostTextRequest
+
+	PutSessionRequest(*lexruntimeservice.PutSessionInput) lexruntimeservice.PutSessionRequest
 }
 
 var _ ClientAPI = (*lexruntimeservice.Client)(nil)

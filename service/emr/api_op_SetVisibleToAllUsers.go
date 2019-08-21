@@ -11,6 +11,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
+// This member will be deprecated.
+//
 // The input to the SetVisibleToAllUsers action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetVisibleToAllUsersInput
 type SetVisibleToAllUsersInput struct {
@@ -21,6 +23,8 @@ type SetVisibleToAllUsersInput struct {
 	// JobFlowIds is a required field
 	JobFlowIds []string `type:"list" required:"true"`
 
+	// This member will be deprecated.
+	//
 	// Whether the specified clusters are visible to all IAM users of the AWS account
 	// associated with the cluster. If this value is set to True, all IAM users
 	// of that AWS account can view and, if they have the proper IAM policy permissions
@@ -68,6 +72,8 @@ const opSetVisibleToAllUsers = "SetVisibleToAllUsers"
 
 // SetVisibleToAllUsersRequest returns a request value for making API operation for
 // Amazon Elastic MapReduce.
+//
+// This member will be deprecated.
 //
 // Sets whether all AWS Identity and Access Management (IAM) users under your
 // account can access the specified clusters (job flows). This action works

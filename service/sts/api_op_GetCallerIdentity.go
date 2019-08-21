@@ -49,8 +49,15 @@ const opGetCallerIdentity = "GetCallerIdentity"
 // GetCallerIdentityRequest returns a request value for making API operation for
 // AWS Security Token Service.
 //
-// Returns details about the IAM identity whose credentials are used to call
-// the API.
+// Returns details about the IAM user or role whose credentials are used to
+// call the operation.
+//
+// No permissions are required to perform this operation. If an administrator
+// adds a policy to your IAM user or role that explicitly denies access to the
+// sts:GetCallerIdentity action, you can still perform this operation. Permissions
+// are not required because the same information is returned when an IAM user
+// or role is denied access. To view an example response, see I Am Not Authorized
+// to Perform: iam:DeleteVirtualMFADevice (https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_access-denied-delete-mfa).
 //
 //    // Example sending a request using GetCallerIdentityRequest.
 //    req := client.GetCallerIdentityRequest(params)

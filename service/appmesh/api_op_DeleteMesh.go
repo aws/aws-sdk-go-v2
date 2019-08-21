@@ -14,8 +14,6 @@ import (
 type DeleteMeshInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh to delete.
-	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
 }
@@ -59,7 +57,7 @@ func (s DeleteMeshInput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteMeshOutput struct {
 	_ struct{} `type:"structure" payload:"Mesh"`
 
-	// The service mesh that was deleted.
+	// An object representing a service mesh returned by a describe operation.
 	//
 	// Mesh is a required field
 	Mesh *MeshData `locationName:"mesh" type:"structure" required:"true"`

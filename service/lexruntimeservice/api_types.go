@@ -52,6 +52,145 @@ func (s Button) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Describes the next action that the bot should take in its interaction with
+// the user and provides information about the context in which the action takes
+// place. Use the DialogAction data type to set the interaction to a specific
+// state, or to return the interaction to a previous state.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/DialogAction
+type DialogAction struct {
+	_ struct{} `type:"structure"`
+
+	// The fulfillment state of the intent. The possible values are:
+	//
+	//    * Failed - The Lambda function associated with the intent failed to fulfill
+	//    the intent.
+	//
+	//    * Fulfilled - The intent has fulfilled by the Lambda function associated
+	//    with the intent.
+	//
+	//    * ReadyForFulfillment - All of the information necessary for the intent
+	//    is present and the intent ready to be fulfilled by the client application.
+	FulfillmentState FulfillmentState `locationName:"fulfillmentState" type:"string" enum:"true"`
+
+	// The name of the intent.
+	IntentName *string `locationName:"intentName" type:"string"`
+
+	// The message that should be shown to the user. If you don't specify a message,
+	// Amazon Lex will use the message configured for the intent.
+	Message *string `locationName:"message" min:"1" type:"string"`
+
+	//    * PlainText - The message contains plain UTF-8 text.
+	//
+	//    * CustomPayload - The message is a custom format for the client.
+	//
+	//    * SSML - The message contains text formatted for voice output.
+	//
+	//    * Composite - The message contains an escaped JSON object containing one
+	//    or more messages. For more information, see Message Groups (https://docs.aws.amazon.com/lex/latest/dg/howitworks-manage-prompts.html).
+	MessageFormat MessageFormatType `locationName:"messageFormat" type:"string" enum:"true"`
+
+	// The name of the slot that should be elicited from the user.
+	SlotToElicit *string `locationName:"slotToElicit" type:"string"`
+
+	// Map of the slots that have been gathered and their values.
+	Slots map[string]string `locationName:"slots" type:"map"`
+
+	// The next action that the bot should take in its interaction with the user.
+	// The possible values are:
+	//
+	//    * ConfirmIntent - The next action is asking the user if the intent is
+	//    complete and ready to be fulfilled. This is a yes/no question such as
+	//    "Place the order?"
+	//
+	//    * Close - Indicates that the there will not be a response from the user.
+	//    For example, the statement "Your order has been placed" does not require
+	//    a response.
+	//
+	//    * Delegate - The next action is determined by Amazon Lex.
+	//
+	//    * ElicitIntent - The next action is to determine the intent that the user
+	//    wants to fulfill.
+	//
+	//    * ElicitSlot - The next action is to elicit a slot value from the user.
+	//
+	// Type is a required field
+	Type DialogActionType `locationName:"type" type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s DialogAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DialogAction) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DialogAction"}
+	if s.Message != nil && len(*s.Message) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Message", 1))
+	}
+	if len(s.Type) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DialogAction) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.FulfillmentState) > 0 {
+		v := s.FulfillmentState
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "fulfillmentState", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.IntentName != nil {
+		v := *s.IntentName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "intentName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.MessageFormat) > 0 {
+		v := s.MessageFormat
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "messageFormat", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.SlotToElicit != nil {
+		v := *s.SlotToElicit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "slotToElicit", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Slots != nil {
+		v := s.Slots
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "slots", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Represents an option rendered to the user when a prompt is shown. It could
 // be an image, a button, a link, or text.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/GenericAttachment
@@ -116,6 +255,121 @@ func (s GenericAttachment) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "title", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Provides information about the state of an intent. You can use this information
+// to get the current state of an intent so that you can process the intent,
+// or so that you can return the intent to its previous state.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/IntentSummary
+type IntentSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The status of the intent after the user responds to the confirmation prompt.
+	// If the user confirms the intent, Amazon Lex sets this field to Confirmed.
+	// If the user denies the intent, Amazon Lex sets this value to Denied. The
+	// possible values are:
+	//
+	//    * Confirmed - The user has responded "Yes" to the confirmation prompt,
+	//    confirming that the intent is complete and that it is ready to be fulfilled.
+	//
+	//    * Denied - The user has responded "No" to the confirmation prompt.
+	//
+	//    * None - The user has never been prompted for confirmation; or, the user
+	//    was prompted but did not confirm or deny the prompt.
+	ConfirmationStatus ConfirmationStatus `locationName:"confirmationStatus" type:"string" enum:"true"`
+
+	// The next action that the bot should take in its interaction with the user.
+	// The possible values are:
+	//
+	//    * ConfirmIntent - The next action is asking the user if the intent is
+	//    complete and ready to be fulfilled. This is a yes/no question such as
+	//    "Place the order?"
+	//
+	//    * Close - Indicates that the there will not be a response from the user.
+	//    For example, the statement "Your order has been placed" does not require
+	//    a response.
+	//
+	//    * ElicitIntent - The next action is to determine the intent that the user
+	//    wants to fulfill.
+	//
+	//    * ElicitSlot - The next action is to elicit a slot value from the user.
+	//
+	// DialogActionType is a required field
+	DialogActionType DialogActionType `locationName:"dialogActionType" type:"string" required:"true" enum:"true"`
+
+	// The fulfillment state of the intent. The possible values are:
+	//
+	//    * Failed - The Lambda function associated with the intent failed to fulfill
+	//    the intent.
+	//
+	//    * Fulfilled - The intent has fulfilled by the Lambda function associated
+	//    with the intent.
+	//
+	//    * ReadyForFulfillment - All of the information necessary for the intent
+	//    is present and the intent ready to be fulfilled by the client application.
+	FulfillmentState FulfillmentState `locationName:"fulfillmentState" type:"string" enum:"true"`
+
+	// The name of the intent.
+	IntentName *string `locationName:"intentName" type:"string"`
+
+	// The next slot to elicit from the user. If there is not slot to elicit, the
+	// field is blank.
+	SlotToElicit *string `locationName:"slotToElicit" type:"string"`
+
+	// Map of the slots that have been gathered and their values.
+	Slots map[string]string `locationName:"slots" type:"map"`
+}
+
+// String returns the string representation
+func (s IntentSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s IntentSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ConfirmationStatus) > 0 {
+		v := s.ConfirmationStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "confirmationStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.DialogActionType) > 0 {
+		v := s.DialogActionType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "dialogActionType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.FulfillmentState) > 0 {
+		v := s.FulfillmentState
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "fulfillmentState", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.IntentName != nil {
+		v := *s.IntentName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "intentName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SlotToElicit != nil {
+		v := *s.SlotToElicit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "slotToElicit", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Slots != nil {
+		v := s.Slots
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "slots", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }

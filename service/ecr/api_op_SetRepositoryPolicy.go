@@ -18,7 +18,9 @@ type SetRepositoryPolicyInput struct {
 	// operation. This is intended to prevent accidental repository lock outs.
 	Force *bool `locationName:"force" type:"boolean"`
 
-	// The JSON repository policy text to apply to the repository.
+	// The JSON repository policy text to apply to the repository. For more information,
+	// see Amazon ECR Repository Policy Examples (https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html)
+	// in the Amazon Elastic Container Registry User Guide.
 	//
 	// PolicyText is a required field
 	PolicyText *string `locationName:"policyText" type:"string" required:"true"`
@@ -84,6 +86,8 @@ const opSetRepositoryPolicy = "SetRepositoryPolicy"
 // Amazon EC2 Container Registry.
 //
 // Applies a repository policy on a specified repository to control access permissions.
+// For more information, see Amazon ECR Repository Policies (https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicies.html)
+// in the Amazon Elastic Container Registry User Guide.
 //
 //    // Example sending a request using SetRepositoryPolicyRequest.
 //    req := client.SetRepositoryPolicyRequest(params)

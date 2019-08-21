@@ -14,12 +14,9 @@ import (
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// ARN of a resource tag.
-	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resourceArn" type:"string" required:"true"`
 
-	// Tags assigned to a resource.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 

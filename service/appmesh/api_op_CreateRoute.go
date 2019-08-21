@@ -15,33 +15,21 @@ import (
 type CreateRouteInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of therequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
-	// The name of the service mesh to create the route in.
-	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The name to use for the route.
-	//
 	// RouteName is a required field
 	RouteName *string `locationName:"routeName" min:"1" type:"string" required:"true"`
 
-	// The route specification to apply.
+	// An object representing the specification of a route.
 	//
 	// Spec is a required field
 	Spec *RouteSpec `locationName:"spec" type:"structure" required:"true"`
 
-	// Optional metadata that you can apply to the route to assist with categorization
-	// and organization. Each tag consists of a key and an optional value, both
-	// of which you define. Tag keys can have a maximum character length of 128
-	// characters, and tag values can have a maximum length of 256 characters.
 	Tags []TagRef `locationName:"tags" type:"list"`
 
-	// The name of the virtual router in which to create the route.
-	//
 	// VirtualRouterName is a required field
 	VirtualRouterName *string `location:"uri" locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
 }
@@ -157,7 +145,7 @@ func (s CreateRouteInput) MarshalFields(e protocol.FieldEncoder) error {
 type CreateRouteOutput struct {
 	_ struct{} `type:"structure" payload:"Route"`
 
-	// The full description of your mesh following the create call.
+	// An object representing a route returned by a describe operation.
 	//
 	// Route is a required field
 	Route *RouteData `locationName:"route" type:"structure" required:"true"`

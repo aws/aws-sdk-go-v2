@@ -60,7 +60,7 @@ func (s CreateBackupOutput) String() string {
 const opCreateBackup = "CreateBackup"
 
 // CreateBackupRequest returns a request value for making API operation for
-// AWS OpsWorks for Chef Automate.
+// AWS OpsWorks CM.
 //
 // Creates an application-level backup of a server. While the server is in the
 // BACKING_UP state, the server cannot be changed, and no additional backup

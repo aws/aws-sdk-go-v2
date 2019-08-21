@@ -500,9 +500,15 @@ type CapacityReservation struct {
 	// The Availability Zone in which the capacity is reserved.
 	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
 
+	// The Availability Zone ID of the Capacity Reservation.
+	AvailabilityZoneId *string `locationName:"availabilityZoneId" type:"string"`
+
 	// The remaining capacity. Indicates the number of instances that can be launched
 	// in the Capacity Reservation.
 	AvailableInstanceCount *int64 `locationName:"availableInstanceCount" type:"integer"`
+
+	// The Amazon Resource Name (ARN) of the Capacity Reservation.
+	CapacityReservationArn *string `locationName:"capacityReservationArn" type:"string"`
 
 	// The ID of the Capacity Reservation.
 	CapacityReservationId *string `locationName:"capacityReservationId" type:"string"`
@@ -558,17 +564,20 @@ type CapacityReservation struct {
 	// The type of instance for which the Capacity Reservation reserves capacity.
 	InstanceType *string `locationName:"instanceType" type:"string"`
 
+	// The ID of the AWS account that owns the Capacity Reservation.
+	OwnerId *string `locationName:"ownerId" type:"string"`
+
 	// The current state of the Capacity Reservation. A Capacity Reservation can
 	// be in one of the following states:
 	//
 	//    * active - The Capacity Reservation is active and the capacity is available
 	//    for your use.
 	//
-	//    * cancelled - The Capacity Reservation expired automatically at the date
+	//    * expired - The Capacity Reservation expired automatically at the date
 	//    and time specified in your request. The reserved capacity is no longer
 	//    available for your use.
 	//
-	//    * expired - The Capacity Reservation was manually cancelled. The reserved
+	//    * cancelled - The Capacity Reservation was manually cancelled. The reserved
 	//    capacity is no longer available for your use.
 	//
 	//    * pending - The Capacity Reservation request was successful but the capacity
@@ -592,7 +601,8 @@ type CapacityReservation struct {
 	//    that is dedicated to a single AWS account.
 	Tenancy CapacityReservationTenancy `locationName:"tenancy" type:"string" enum:"true"`
 
-	// The number of instances for which the Capacity Reservation reserves capacity.
+	// The total number of instances for which the Capacity Reservation reserves
+	// capacity.
 	TotalInstanceCount *int64 `locationName:"totalInstanceCount" type:"integer"`
 }
 
@@ -1190,6 +1200,9 @@ type CustomerGateway struct {
 	// (ASN).
 	BgpAsn *string `locationName:"bgpAsn" type:"string"`
 
+	// The Amazon Resource Name (ARN) for the customer gateway certificate.
+	CertificateArn *string `locationName:"certificateArn" type:"string"`
+
 	// The ID of the customer gateway.
 	CustomerGatewayId *string `locationName:"customerGatewayId" type:"string"`
 
@@ -1698,9 +1711,10 @@ type EbsBlockDevice struct {
 	// size.
 	VolumeSize *int64 `locationName:"volumeSize" type:"integer"`
 
-	// The volume type. If you set the type to io1, you must also set the Iops property.
+	// The volume type. If you set the type to io1, you must also specify the IOPS
+	// that the volume supports.
 	//
-	// Default: standard
+	// Default: gp2
 	VolumeType VolumeType `locationName:"volumeType" type:"string" enum:"true"`
 }
 
@@ -3854,8 +3868,8 @@ type InstanceNetworkInterfaceSpecification struct {
 	// request.
 	SecondaryPrivateIpAddressCount *int64 `locationName:"secondaryPrivateIpAddressCount" type:"integer"`
 
-	// The ID of the subnet associated with the network string. Applies only if
-	// creating a network interface when launching an instance.
+	// The ID of the subnet associated with the network interface. Applies only
+	// if creating a network interface when launching an instance.
 	SubnetId *string `locationName:"subnetId" type:"string"`
 }
 
@@ -4068,6 +4082,23 @@ type InstanceStatusSummary struct {
 
 // String returns the string representation
 func (s InstanceStatusSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about the Capacity Reservation usage.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceUsage
+type InstanceUsage struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the AWS account that is making use of the Capacity Reservation.
+	AccountId *string `locationName:"accountId" type:"string"`
+
+	// The number of instances the AWS account currently has in the Capacity Reservation.
+	UsedInstanceCount *int64 `locationName:"usedInstanceCount" type:"integer"`
+}
+
+// String returns the string representation
+func (s InstanceUsage) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -6661,7 +6692,9 @@ type RequestSpotLaunchSpecification struct {
 	// you can specify the names or the IDs of the security groups.
 	SecurityGroups []string `locationName:"SecurityGroup" locationNameList:"item" type:"list"`
 
-	// The ID of the subnet in which to launch the instance.
+	// The IDs of the subnets in which to launch the instance. To specify multiple
+	// subnets, separate them using commas; for example, "subnet-1234abcdeexample1,
+	// subnet-0987cdef6example2".
 	SubnetId *string `locationName:"subnetId" type:"string"`
 
 	// The Base64-encoded user data for the instance. User data is limited to 16
@@ -7581,7 +7614,7 @@ type ScheduledInstancesEbs struct {
 	// The volume type. gp2 for General Purpose SSD, io1 for Provisioned IOPS SSD,
 	// Throughput Optimized HDD for st1, Cold HDD for sc1, or standard for Magnetic.
 	//
-	// Default: standard
+	// Default: gp2
 	VolumeType *string `type:"string"`
 }
 
@@ -8298,7 +8331,7 @@ type SpotFleetLaunchSpecification struct {
 	// Deprecated.
 	AddressingType *string `locationName:"addressingType" type:"string"`
 
-	// One or more block devices that are mapped to the Spot instances. You can't
+	// One or more block devices that are mapped to the Spot Instances. You can't
 	// specify both a snapshot ID and an encryption value. This is because only
 	// blank volumes can be encrypted on creation. If a snapshot is the basis for
 	// a volume, it is not blank and its encryption status is used for the volume
@@ -8356,8 +8389,9 @@ type SpotFleetLaunchSpecification struct {
 	// by the value of WeightedCapacity.
 	SpotPrice *string `locationName:"spotPrice" type:"string"`
 
-	// The ID of the subnet in which to launch the instances. To specify multiple
-	// subnets, separate them using commas; for example, "subnet-a61dafcf, subnet-65ea5f08".
+	// The IDs of the subnets in which to launch the instances. To specify multiple
+	// subnets, separate them using commas; for example, "subnet-1234abcdeexample1,
+	// subnet-0987cdef6example2".
 	SubnetId *string `locationName:"subnetId" type:"string"`
 
 	// The tags to apply during creation.
@@ -8432,8 +8466,19 @@ func (s SpotFleetRequestConfig) String() string {
 type SpotFleetRequestConfigData struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates how to allocate the target capacity across the Spot pools specified
-	// by the Spot Fleet request. The default is lowestPrice.
+	// Indicates how to allocate the target Spot Instance capacity across the Spot
+	// Instance pools specified by the Spot Fleet request.
+	//
+	// If the allocation strategy is lowestPrice, Spot Fleet launches instances
+	// from the Spot Instance pools with the lowest price. This is the default allocation
+	// strategy.
+	//
+	// If the allocation strategy is diversified, Spot Fleet launches instances
+	// from all the Spot Instance pools that you specify.
+	//
+	// If the allocation strategy is capacityOptimized, Spot Fleet launches instances
+	// from Spot Instance pools that are optimally chosen based on the available
+	// Spot Instance capacity.
 	AllocationStrategy AllocationStrategy `locationName:"allocationStrategy" type:"string" enum:"true"`
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
@@ -8783,8 +8828,19 @@ func (s SpotMarketOptions) String() string {
 type SpotOptions struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates how to allocate the target capacity across the Spot pools specified
-	// by the Spot Fleet request. The default is lowest-price.
+	// Indicates how to allocate the target Spot Instance capacity across the Spot
+	// Instance pools specified by the EC2 Fleet.
+	//
+	// If the allocation strategy is lowestPrice, EC2 Fleet launches instances from
+	// the Spot Instance pools with the lowest price. This is the default allocation
+	// strategy.
+	//
+	// If the allocation strategy is diversified, EC2 Fleet launches instances from
+	// all the Spot Instance pools that you specify.
+	//
+	// If the allocation strategy is capacityOptimized, EC2 Fleet launches instances
+	// from Spot Instance pools that are optimally chosen based on the available
+	// Spot Instance capacity.
 	AllocationStrategy SpotAllocationStrategy `locationName:"allocationStrategy" type:"string" enum:"true"`
 
 	// The behavior when a Spot Instance is interrupted. The default is terminate.
@@ -8822,8 +8878,19 @@ func (s SpotOptions) String() string {
 type SpotOptionsRequest struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates how to allocate the target capacity across the Spot pools specified
-	// by the Spot Fleet request. The default is lowestPrice.
+	// Indicates how to allocate the target Spot Instance capacity across the Spot
+	// Instance pools specified by the EC2 Fleet.
+	//
+	// If the allocation strategy is lowestPrice, EC2 Fleet launches instances from
+	// the Spot Instance pools with the lowest price. This is the default allocation
+	// strategy.
+	//
+	// If the allocation strategy is diversified, EC2 Fleet launches instances from
+	// all the Spot Instance pools that you specify.
+	//
+	// If the allocation strategy is capacityOptimized, EC2 Fleet launches instances
+	// from Spot Instance pools that are optimally chosen based on the available
+	// Spot Instance capacity.
 	AllocationStrategy SpotAllocationStrategy `type:"string" enum:"true"`
 
 	// The behavior when a Spot Instance is interrupted. The default is terminate.
@@ -10272,6 +10339,9 @@ type VgwTelemetry struct {
 	// The number of accepted routes.
 	AcceptedRouteCount *int64 `locationName:"acceptedRouteCount" type:"integer"`
 
+	// The Amazon Resource Name (ARN) of the VPN tunnel endpoint certificate.
+	CertificateArn *string `locationName:"certificateArn" type:"string"`
+
 	// The date and time of the last change in status.
 	LastStatusChange *time.Time `locationName:"lastStatusChange" type:"timestamp"`
 
@@ -11120,8 +11190,7 @@ type VpnEndpoint struct {
 	// The ARN of the server certificate.
 	ServerCertificateArn *string `locationName:"serverCertificateArn" type:"string"`
 
-	// Indicates whether split-tunnel is enabled in the AWS Client VPN endpoint
-	// endpoint.
+	// Indicates whether split-tunnel is enabled in the AWS Client VPN endpoint.
 	//
 	// For information about split-tunnel VPN endpoints, see Split-Tunnel AWS Client
 	// VPN Endpoint (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html)

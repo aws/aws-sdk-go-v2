@@ -147,7 +147,7 @@ const opPutLifecycleHook = "PutLifecycleHook"
 // launch or terminate.
 //
 // If you need more time, record the lifecycle action heartbeat to keep the
-// instance in a pending state using using RecordLifecycleActionHeartbeat.
+// instance in a pending state using RecordLifecycleActionHeartbeat.
 //
 // If you finish before the timeout period ends, complete the lifecycle action
 // using CompleteLifecycleAction.

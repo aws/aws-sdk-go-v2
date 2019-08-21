@@ -45,6 +45,27 @@
         {"shape":"EncryptionKeyUnavailableException"}
       ]
     },
+    "BatchGetCommits":{
+      "name":"BatchGetCommits",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchGetCommitsInput"},
+      "output":{"shape":"BatchGetCommitsOutput"},
+      "errors":[
+        {"shape":"CommitIdsListRequiredException"},
+        {"shape":"CommitIdsLimitExceededException"},
+        {"shape":"RepositoryNameRequiredException"},
+        {"shape":"InvalidRepositoryNameException"},
+        {"shape":"RepositoryDoesNotExistException"},
+        {"shape":"EncryptionIntegrityChecksFailedException"},
+        {"shape":"EncryptionKeyAccessDeniedException"},
+        {"shape":"EncryptionKeyDisabledException"},
+        {"shape":"EncryptionKeyNotFoundException"},
+        {"shape":"EncryptionKeyUnavailableException"}
+      ]
+    },
     "BatchGetRepositories":{
       "name":"BatchGetRepositories",
       "http":{
@@ -232,6 +253,7 @@
         {"shape":"FolderContentSizeLimitExceededException"},
         {"shape":"MaximumFileContentToLoadExceededException"},
         {"shape":"MaximumItemsToCompareExceededException"},
+        {"shape":"ConcurrentReferenceUpdateException"},
         {"shape":"FileModeRequiredException"},
         {"shape":"InvalidFileModeException"},
         {"shape":"NameLengthExceededException"},
@@ -836,6 +858,7 @@
         {"shape":"BranchNameIsTagNameException"},
         {"shape":"BranchDoesNotExistException"},
         {"shape":"ManualMergeRequiredException"},
+        {"shape":"ConcurrentReferenceUpdateException"},
         {"shape":"EncryptionIntegrityChecksFailedException"},
         {"shape":"EncryptionKeyAccessDeniedException"},
         {"shape":"EncryptionKeyDisabledException"},
@@ -885,6 +908,7 @@
         {"shape":"NameLengthExceededException"},
         {"shape":"InvalidEmailException"},
         {"shape":"CommitMessageLengthExceededException"},
+        {"shape":"ConcurrentReferenceUpdateException"},
         {"shape":"EncryptionIntegrityChecksFailedException"},
         {"shape":"EncryptionKeyAccessDeniedException"},
         {"shape":"EncryptionKeyDisabledException"},
@@ -914,6 +938,7 @@
         {"shape":"BranchNameIsTagNameException"},
         {"shape":"BranchDoesNotExistException"},
         {"shape":"ManualMergeRequiredException"},
+        {"shape":"ConcurrentReferenceUpdateException"},
         {"shape":"InvalidConflictDetailLevelException"},
         {"shape":"InvalidConflictResolutionStrategyException"},
         {"shape":"InvalidConflictResolutionException"},
@@ -962,6 +987,7 @@
         {"shape":"RepositoryNameRequiredException"},
         {"shape":"InvalidRepositoryNameException"},
         {"shape":"RepositoryDoesNotExistException"},
+        {"shape":"ConcurrentReferenceUpdateException"},
         {"shape":"EncryptionIntegrityChecksFailedException"},
         {"shape":"EncryptionKeyAccessDeniedException"},
         {"shape":"EncryptionKeyDisabledException"},
@@ -997,6 +1023,7 @@
         {"shape":"MultipleConflictResolutionEntriesException"},
         {"shape":"ReplacementContentRequiredException"},
         {"shape":"MaximumConflictResolutionEntriesExceededException"},
+        {"shape":"ConcurrentReferenceUpdateException"},
         {"shape":"PathRequiredException"},
         {"shape":"InvalidPathException"},
         {"shape":"InvalidFileModeException"},
@@ -1056,6 +1083,7 @@
         {"shape":"InvalidRepositoryNameException"},
         {"shape":"RepositoryDoesNotExistException"},
         {"shape":"RepositoryNotAssociatedWithPullRequestException"},
+        {"shape":"ConcurrentReferenceUpdateException"},
         {"shape":"EncryptionIntegrityChecksFailedException"},
         {"shape":"EncryptionKeyAccessDeniedException"},
         {"shape":"EncryptionKeyDisabledException"},
@@ -1499,6 +1527,36 @@
         "baseCommitId":{"shape":"ObjectId"}
       }
     },
+    "BatchGetCommitsError":{
+      "type":"structure",
+      "members":{
+        "commitId":{"shape":"ObjectId"},
+        "errorCode":{"shape":"ErrorCode"},
+        "errorMessage":{"shape":"ErrorMessage"}
+      }
+    },
+    "BatchGetCommitsErrorsList":{
+      "type":"list",
+      "member":{"shape":"BatchGetCommitsError"}
+    },
+    "BatchGetCommitsInput":{
+      "type":"structure",
+      "required":[
+        "commitIds",
+        "repositoryName"
+      ],
+      "members":{
+        "commitIds":{"shape":"CommitIdsInputList"},
+        "repositoryName":{"shape":"RepositoryName"}
+      }
+    },
+    "BatchGetCommitsOutput":{
+      "type":"structure",
+      "members":{
+        "commits":{"shape":"CommitObjectsList"},
+        "errors":{"shape":"BatchGetCommitsErrorsList"}
+      }
+    },
     "BatchGetRepositoriesInput":{
       "type":"structure",
       "required":["repositoryNames"],
@@ -1715,6 +1773,22 @@
       },
       "exception":true
     },
+    "CommitIdsInputList":{
+      "type":"list",
+      "member":{"shape":"ObjectId"}
+    },
+    "CommitIdsLimitExceededException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true
+    },
+    "CommitIdsListRequiredException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true
+    },
     "CommitMessageLengthExceededException":{
       "type":"structure",
       "members":{
@@ -1722,7 +1796,17 @@
       "exception":true
     },
     "CommitName":{"type":"string"},
+    "CommitObjectsList":{
+      "type":"list",
+      "member":{"shape":"Commit"}
+    },
     "CommitRequiredException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true
+    },
+    "ConcurrentReferenceUpdateException":{
       "type":"structure",
       "members":{
       },
@@ -2099,6 +2183,8 @@
       },
       "exception":true
     },
+    "ErrorCode":{"type":"string"},
+    "ErrorMessage":{"type":"string"},
     "EventDate":{"type":"timestamp"},
     "ExceptionName":{"type":"string"},
     "File":{

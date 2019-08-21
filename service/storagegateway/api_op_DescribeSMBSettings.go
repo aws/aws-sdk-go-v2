@@ -59,14 +59,18 @@ type DescribeSMBSettingsOutput struct {
 
 	// The type of security strategy that was specified for file gateway.
 	//
-	// ClientSpecified: SMBv1 is enabled, SMB signing is offered but not required,
-	// SMB encryption is offered but not required.
+	// ClientSpecified: if you use this option, requests are established based on
+	// what is negotiated by the client. This option is recommended when you want
+	// to maximize compatibility across different clients in your environment.
 	//
-	// MandatorySigning: SMBv1 is disabled, SMB signing is required, SMB encryption
-	// is offered but not required.
+	// MandatorySigning: if you use this option, file gateway only allows connections
+	// from SMBv2 or SMBv3 clients that have signing enabled. This option works
+	// with SMB clients on Microsoft Windows Vista, Windows Server 2008 or newer.
 	//
-	// MandatoryEncryption: SMBv1 is disabled, SMB signing is offered but not required,
-	// SMB encryption is required.
+	// MandatoryEncryption: if you use this option, file gateway only allows connections
+	// from SMBv3 clients that have encryption enabled. This option is highly recommended
+	// for environments that handle sensitive data. This option works with SMB clients
+	// on Microsoft Windows 8, Windows Server 2012 or newer.
 	SMBSecurityStrategy SMBSecurityStrategy `type:"string" enum:"true"`
 }
 

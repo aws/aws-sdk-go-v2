@@ -124,6 +124,9 @@ const opCreateExportTask = "CreateExportTask"
 // same S3 bucket. To separate out log data for each export task, you can specify
 // a prefix to be used as the Amazon S3 key prefix for all exported objects.
 //
+// Exporting to S3 buckets that are encrypted with AES-256 is supported. Exporting
+// to S3 buckets encrypted with SSE-KMS is not supported.
+//
 //    // Example sending a request using CreateExportTaskRequest.
 //    req := client.CreateExportTaskRequest(params)
 //    resp, err := req.Send(context.TODO())

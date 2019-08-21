@@ -4,6 +4,7 @@ package greengrass
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -33,6 +34,13 @@ func (s *CreateResourceDefinitionVersionInput) Validate() error {
 
 	if s.ResourceDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceDefinitionId"))
+	}
+	if s.Resources != nil {
+		for i, v := range s.Resources {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Resources", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

@@ -4,6 +4,7 @@ package greengrass
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -33,6 +34,13 @@ func (s *CreateSubscriptionDefinitionVersionInput) Validate() error {
 
 	if s.SubscriptionDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionDefinitionId"))
+	}
+	if s.Subscriptions != nil {
+		for i, v := range s.Subscriptions {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Subscriptions", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

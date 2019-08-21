@@ -155,6 +155,12 @@ func (c *Client) DescribeJobDefinitionsRequest(input *DescribeJobDefinitionsInpu
 		Name:       opDescribeJobDefinitions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/describejobdefinitions",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -187,6 +193,53 @@ func (r DescribeJobDefinitionsRequest) Send(ctx context.Context) (*DescribeJobDe
 	}
 
 	return resp, nil
+}
+
+// NewDescribeJobDefinitionsRequestPaginator returns a paginator for DescribeJobDefinitions.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.DescribeJobDefinitionsRequest(input)
+//   p := batch.NewDescribeJobDefinitionsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewDescribeJobDefinitionsPaginator(req DescribeJobDefinitionsRequest) DescribeJobDefinitionsPaginator {
+	return DescribeJobDefinitionsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *DescribeJobDefinitionsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// DescribeJobDefinitionsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeJobDefinitionsPaginator struct {
+	aws.Pager
+}
+
+func (p *DescribeJobDefinitionsPaginator) CurrentPage() *DescribeJobDefinitionsOutput {
+	return p.Pager.CurrentPage().(*DescribeJobDefinitionsOutput)
 }
 
 // DescribeJobDefinitionsResponse is the response type for the

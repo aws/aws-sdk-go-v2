@@ -13,6 +13,13 @@ import (
 type CreateApplicationInput struct {
 	_ struct{} `type:"structure"`
 
+	// When set to true, creates opsItems for any problems detected on an application.
+	OpsCenterEnabled *bool `type:"boolean"`
+
+	// The SNS topic provided to Application Insights that is associated to the
+	// created opsItem. Allows you to receive notifications for updates to the opsItem.
+	OpsItemSNSTopicArn *string `type:"string"`
+
 	// The name of the resource group.
 	//
 	// ResourceGroupName is a required field

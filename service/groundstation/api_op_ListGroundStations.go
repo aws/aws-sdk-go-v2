@@ -14,11 +14,8 @@ import (
 type ListGroundStationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Maximum number of ground stations returned.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
 
-	// Next token that can be supplied in the next call to get the next page of
-	// ground stations.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
@@ -50,11 +47,8 @@ func (s ListGroundStationsInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListGroundStationsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// List of ground stations.
 	GroundStationList []GroundStationData `locationName:"groundStationList" type:"list"`
 
-	// Next token that can be supplied in the next call to get the next page of
-	// ground stations.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 

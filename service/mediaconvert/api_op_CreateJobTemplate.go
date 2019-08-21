@@ -34,6 +34,13 @@ type CreateJobTemplateInput struct {
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
 
+	// Specify the relative priority for this job. In any given queue, the service
+	// begins processing the job with the highest value first. When more than one
+	// job has the same priority, the service begins processing the job that you
+	// submitted first. If you don't specify a priority, the service uses the default
+	// value 0.
+	Priority *int64 `locationName:"priority" type:"integer"`
+
 	// Optional. The queue that jobs created from this template are assigned to.
 	// If you don't specify this, jobs will go to the default queue.
 	Queue *string `locationName:"queue" type:"string"`
@@ -66,6 +73,9 @@ func (s *CreateJobTemplateInput) Validate() error {
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Priority != nil && *s.Priority < -50 {
+		invalidParams.Add(aws.NewErrParamMinValue("Priority", -50))
 	}
 
 	if s.Settings == nil {
@@ -115,6 +125,12 @@ func (s CreateJobTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Priority != nil {
+		v := *s.Priority
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "priority", protocol.Int64Value(v), metadata)
 	}
 	if s.Queue != nil {
 		v := *s.Queue

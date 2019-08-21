@@ -65,6 +65,7 @@ const (
 	EmotionNameSurprised EmotionName = "SURPRISED"
 	EmotionNameCalm      EmotionName = "CALM"
 	EmotionNameUnknown   EmotionName = "UNKNOWN"
+	EmotionNameFear      EmotionName = "FEAR"
 )
 
 func (enum EmotionName) MarshalValue() (string, error) {

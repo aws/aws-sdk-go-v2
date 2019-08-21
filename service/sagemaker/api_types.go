@@ -303,7 +303,10 @@ type AnnotationConsolidationConfig struct {
 	//    on the Jaccard index of the boxes. arn:aws:lambda:us-east-1:432418664414:function:ACS-BoundingBox
 	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-BoundingBox arn:aws:lambda:us-west-2:081040173940:function:ACS-BoundingBox
 	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-BoundingBox arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-BoundingBox
-	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-BoundingBox
+	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-BoundingBox arn:aws:lambda:ap-south-1:565803892007:function:ACS-BoundingBox
+	//    arn:aws:lambda:eu-central-1:203001061592:function:ACS-BoundingBox arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-BoundingBox
+	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-BoundingBox arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-BoundingBox
+	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-BoundingBox
 	//
 	//    * Image classification - Uses a variant of the Expectation Maximization
 	//    approach to estimate the true class of an image based on annotations from
@@ -311,6 +314,10 @@ type AnnotationConsolidationConfig struct {
 	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClass arn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClass
 	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClass arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClass
 	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-ImageMultiClass
+	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-ImageMultiClass arn:aws:lambda:eu-central-1:203001061592:function:ACS-ImageMultiClass
+	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-ImageMultiClass
+	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-ImageMultiClass arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-ImageMultiClass
+	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClass
 	//
 	//    * Semantic segmentation - Treats each pixel in an image as a multi-class
 	//    classification and treats pixel annotations from workers as "votes" for
@@ -320,6 +327,12 @@ type AnnotationConsolidationConfig struct {
 	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-SemanticSegmentation
 	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-SemanticSegmentation
 	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-SemanticSegmentation
+	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-SemanticSegmentation
+	//    arn:aws:lambda:eu-central-1:203001061592:function:ACS-SemanticSegmentation
+	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-SemanticSegmentation
+	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-SemanticSegmentation
+	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-SemanticSegmentation
+	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-SemanticSegmentation
 	//
 	//    * Text classification - Uses a variant of the Expectation Maximization
 	//    approach to estimate the true class of text based on annotations from
@@ -327,8 +340,34 @@ type AnnotationConsolidationConfig struct {
 	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClass arn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClass
 	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClass arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClass
 	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-TextMultiClass
+	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-TextMultiClass arn:aws:lambda:eu-central-1:203001061592:function:ACS-TextMultiClass
+	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-TextMultiClass
+	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-TextMultiClass arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-TextMultiClass
+	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClass
 	//
-	// For more information, see Annotation Consolidation (http://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html).
+	//    * Named entity eecognition - Groups similar selections and calculates
+	//    aggregate boundaries, resolving to most-assigned label. arn:aws:lambda:us-east-1:432418664414:function:ACS-NamedEntityRecognition
+	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-NamedEntityRecognition
+	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-NamedEntityRecognition
+	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-NamedEntityRecognition
+	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-NamedEntityRecognition
+	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-NamedEntityRecognition
+	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-NamedEntityRecognition
+	//    arn:aws:lambda:eu-central-1:203001061592:function:ACS-NamedEntityRecognition
+	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-NamedEntityRecognition
+	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-NamedEntityRecognition
+	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-NamedEntityRecognition
+	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-NamedEntityRecognition
+	//
+	//    * Named entity eecognition - Groups similar selections and calculates
+	//    aggregate boundaries, resolving to most-assigned label. arn:aws:lambda:us-east-1:432418664414:function:ACS-NamedEntityRecognition
+	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-NamedEntityRecognition
+	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-NamedEntityRecognition
+	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-NamedEntityRecognition
+	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-NamedEntityRecognition
+	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-NamedEntityRecognition
+	//
+	// For more information, see Annotation Consolidation (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html).
 	//
 	// AnnotationConsolidationLambdaArn is a required field
 	AnnotationConsolidationLambdaArn *string `type:"string" required:"true"`
@@ -596,6 +635,42 @@ func (s *ChannelSpecification) Validate() error {
 	return nil
 }
 
+// Contains information about the output location for managed spot training
+// checkpoint data.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CheckpointConfig
+type CheckpointConfig struct {
+	_ struct{} `type:"structure"`
+
+	// (Optional) The local directory where checkpoints are written. The default
+	// directory is /opt/ml/checkpoints/.
+	LocalPath *string `type:"string"`
+
+	// Identifies the S3 path where you want Amazon SageMaker to store checkpoints.
+	// For example, s3://bucket-name/key-name-prefix.
+	//
+	// S3Uri is a required field
+	S3Uri *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CheckpointConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CheckpointConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CheckpointConfig"}
+
+	if s.S3Uri == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3Uri"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Specifies summary information about a Git repository.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CodeRepositorySummary
 type CodeRepositorySummary struct {
@@ -747,7 +822,7 @@ type ContainerDefinition struct {
 	// When a ContainerDefinition is part of an inference pipeline, the value of
 	// ths parameter uniquely identifies the container for the purposes of logging
 	// and metrics. For information, see Use Logs and Metrics to Monitor an Inference
-	// Pipeline (http://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html).
+	// Pipeline (https://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html).
 	// If you don't specify a value for this parameter for a ContainerDefinition
 	// that is part of an inference pipeline, a unique name is automatically assigned
 	// based on the position of the ContainerDefinition in the pipeline. If you
@@ -773,14 +848,14 @@ type ContainerDefinition struct {
 	// are stored. This path must point to a single gzip compressed tar archive
 	// (.tar.gz suffix). The S3 path is required for Amazon SageMaker built-in algorithms,
 	// but not if you use your own algorithms. For more information on built-in
-	// algorithms, see Common Parameters (http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html).
+	// algorithms, see Common Parameters (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html).
 	//
 	// If you provide a value for this parameter, Amazon SageMaker uses AWS Security
 	// Token Service to download model artifacts from the S3 path you provide. AWS
 	// STS is activated in your IAM user account by default. If you previously deactivated
 	// AWS STS for a region, you need to reactivate AWS STS for that region. For
 	// more information, see Activating and Deactivating AWS STS in an AWS Region
-	// (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
 	// in the AWS Identity and Access Management User Guide.
 	//
 	// If you use a built-in algorithm to create a model, Amazon SageMaker requires
@@ -834,7 +909,7 @@ type ContinuousParameterRange struct {
 
 	// The scale that hyperparameter tuning uses to search the hyperparameter range.
 	// For information about choosing a hyperparameter scale, see Hyperparameter
-	// Scaling (http://docs.aws.amazon.com//sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
+	// Scaling (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
 	// One of the following values:
 	//
 	// Auto
@@ -930,18 +1005,22 @@ func (s *ContinuousParameterRangeSpecification) Validate() error {
 	return nil
 }
 
-// The data structure used to combine the input data and transformed data from
-// the batch transform output into a joined dataset and to store it in an output
-// file. It also contains information on how to filter the input data and the
-// joined dataset. For more information, see Batch Transform I/O Join (http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html).
+// The data structure used to specify the data to be used for inference in a
+// batch transform job and to associate the data that is relevant to the prediction
+// results in the output. The input filter provided allows you to exclude input
+// data that is not needed for inference in a batch transform job. The output
+// filter provided allows you to include input data relevant to interpreting
+// the predictions in the output from the job. For more information, see Associate
+// Prediction Results with their Corresponding Input Records (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DataProcessing
 type DataProcessing struct {
 	_ struct{} `type:"structure"`
 
-	// A JSONPath expression used to select a portion of the input data to pass
-	// to the algorithm. Use the InputFilter parameter to exclude fields, such as
-	// an ID column, from the input. If you want Amazon SageMaker to pass the entire
-	// input dataset to the algorithm, accept the default value $.
+	// A JSONPath (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators)
+	// expression used to select a portion of the input data to pass to the algorithm.
+	// Use the InputFilter parameter to exclude fields, such as an ID column, from
+	// the input. If you want Amazon SageMaker to pass the entire input dataset
+	// to the algorithm, accept the default value $.
 	//
 	// Examples: "$", "$[1:]", "$.features"
 	InputFilter *string `type:"string"`
@@ -950,8 +1029,7 @@ type DataProcessing struct {
 	// values are None and Input The default value is None which specifies not to
 	// join the input with the transformed data. If you want the batch transform
 	// job to join the original input data with the transformed data, set JoinSource
-	// to Input. To join input and output, the batch transform job must satisfy
-	// the Requirements for Using Batch Transform I/O Join (http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html#batch-transform-io-join-requirements).
+	// to Input.
 	//
 	// For JSON or JSONLines objects, such as a JSON array, Amazon SageMaker adds
 	// the transformed data to the input JSON object in an attribute called SageMakerOutput.
@@ -966,13 +1044,14 @@ type DataProcessing struct {
 	// is a CSV file.
 	JoinSource JoinSource `type:"string" enum:"true"`
 
-	// A JSONPath expression used to select a portion of the joined dataset to save
-	// in the output file for a batch transform job. If you want Amazon SageMaker
-	// to store the entire input dataset in the output file, leave the default value,
-	// $. If you specify indexes that aren't within the dimension size of the joined
+	// A JSONPath (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators)
+	// expression used to select a portion of the joined dataset to save in the
+	// output file for a batch transform job. If you want Amazon SageMaker to store
+	// the entire input dataset in the output file, leave the default value, $.
+	// If you specify indexes that aren't within the dimension size of the joined
 	// dataset, you get an error.
 	//
-	// Examples: "$", "$[0,5:]", "$.['id','SageMakerOutput']"
+	// Examples: "$", "$[0,5:]", "$['id','SageMakerOutput']"
 	OutputFilter *string `type:"string"`
 }
 
@@ -986,6 +1065,9 @@ func (s DataProcessing) String() string {
 type DataSource struct {
 	_ struct{} `type:"structure"`
 
+	// The file system that is associated with a channel.
+	FileSystemDataSource *FileSystemDataSource `type:"structure"`
+
 	// The S3 location of the data source that is associated with a channel.
 	S3DataSource *S3DataSource `type:"structure"`
 }
@@ -998,6 +1080,11 @@ func (s DataSource) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DataSource) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DataSource"}
+	if s.FileSystemDataSource != nil {
+		if err := s.FileSystemDataSource.Validate(); err != nil {
+			invalidParams.AddNested("FileSystemDataSource", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.S3DataSource != nil {
 		if err := s.S3DataSource.Validate(); err != nil {
 			invalidParams.AddNested("S3DataSource", err.(aws.ErrInvalidParams))
@@ -1017,7 +1104,7 @@ func (s *DataSource) Validate() error {
 // of the primary container when you created the model hosted in this ProductionVariant,
 // the path resolves to a path of the form registry/repository[@digest]. A digest
 // is a hash value that identifies a specific version of an image. For information
-// about Amazon ECR paths, see Pulling an Image (http://docs.aws.amazon.com//AmazonECR/latest/userguide/docker-pull-ecr-image.html)
+// about Amazon ECR paths, see Pulling an Image (https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-pull-ecr-image.html)
 // in the Amazon ECR User Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeployedImage
 type DeployedImage struct {
@@ -1167,6 +1254,65 @@ type EndpointSummary struct {
 // String returns the string representation
 func (s EndpointSummary) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Specifies a file system data source for a channel.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/FileSystemDataSource
+type FileSystemDataSource struct {
+	_ struct{} `type:"structure"`
+
+	// The full path to the directory to associate with the channel.
+	//
+	// DirectoryPath is a required field
+	DirectoryPath *string `type:"string" required:"true"`
+
+	// The access mode of the mount of the directory associated with the channel.
+	// A directory can be mounted either in ro (read-only) or rw (read-write).
+	//
+	// FileSystemAccessMode is a required field
+	FileSystemAccessMode FileSystemAccessMode `type:"string" required:"true" enum:"true"`
+
+	// The file system id.
+	//
+	// FileSystemId is a required field
+	FileSystemId *string `min:"11" type:"string" required:"true"`
+
+	// The file system type.
+	//
+	// FileSystemType is a required field
+	FileSystemType FileSystemType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s FileSystemDataSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *FileSystemDataSource) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "FileSystemDataSource"}
+
+	if s.DirectoryPath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryPath"))
+	}
+	if len(s.FileSystemAccessMode) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("FileSystemAccessMode"))
+	}
+
+	if s.FileSystemId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
+	}
+	if s.FileSystemId != nil && len(*s.FileSystemId) < 11 {
+		invalidParams.Add(aws.NewErrParamMinLen("FileSystemId", 11))
+	}
+	if len(s.FileSystemType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("FileSystemType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // A conditional statement for a search expression that includes a Boolean operator,
@@ -1444,6 +1590,8 @@ type HumanTaskConfig struct {
 	//
 	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClass
 	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-NamedEntityRecognition
+	//
 	// US East (Ohio) (us-east-2):
 	//
 	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-BoundingBox
@@ -1453,6 +1601,8 @@ type HumanTaskConfig struct {
 	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-SemanticSegmentation
 	//
 	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClass
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-NamedEntityRecognition
 	//
 	// US West (Oregon) (us-west-2):
 	//
@@ -1464,6 +1614,20 @@ type HumanTaskConfig struct {
 	//
 	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClass
 	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-NamedEntityRecognition
+	//
+	// Canada (Central) (ca-central-1):
+	//
+	//    * arn:awslambda:ca-central-1:918755190332:function:PRE-BoundingBox
+	//
+	//    * arn:awslambda:ca-central-1:918755190332:function:PRE-ImageMultiClass
+	//
+	//    * arn:awslambda:ca-central-1:918755190332:function:PRE-SemanticSegmentation
+	//
+	//    * arn:awslambda:ca-central-1:918755190332:function:PRE-TextMultiClass
+	//
+	//    * arn:awslambda:ca-central-1:918755190332:function:PRE-NamedEntityRecognition
+	//
 	// EU (Ireland) (eu-west-1):
 	//
 	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-BoundingBox
@@ -1473,6 +1637,32 @@ type HumanTaskConfig struct {
 	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-SemanticSegmentation
 	//
 	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClass
+	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-NamedEntityRecognition
+	//
+	// EU (London) (eu-west-2):
+	//
+	//    * arn:awslambda:eu-west-2:487402164563:function:PRE-BoundingBox
+	//
+	//    * arn:awslambda:eu-west-2:487402164563:function:PRE-ImageMultiClass
+	//
+	//    * arn:awslambda:eu-west-2:487402164563:function:PRE-SemanticSegmentation
+	//
+	//    * arn:awslambda:eu-west-2:487402164563:function:PRE-TextMultiClass
+	//
+	//    * arn:awslambda:eu-west-2:487402164563:function:PRE-NamedEntityRecognition
+	//
+	// EU Frankfurt (eu-central-1):
+	//
+	//    * arn:awslambda:eu-central-1:203001061592:function:PRE-BoundingBox
+	//
+	//    * arn:awslambda:eu-central-1:203001061592:function:PRE-ImageMultiClass
+	//
+	//    * arn:awslambda:eu-central-1:203001061592:function:PRE-SemanticSegmentation
+	//
+	//    * arn:awslambda:eu-central-1:203001061592:function:PRE-TextMultiClass
+	//
+	//    * arn:awslambda:eu-central-1:203001061592:function:PRE-NamedEntityRecognition
 	//
 	// Asia Pacific (Tokyo) (ap-northeast-1):
 	//
@@ -1484,7 +1674,45 @@ type HumanTaskConfig struct {
 	//
 	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClass
 	//
-	// Asia Pacific (Sydney) (ap-southeast-1):
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-NamedEntityRecognition
+	//
+	// Asia Pacific (Seoul) (ap-northeast-2):
+	//
+	//    * arn:awslambda:ap-northeast-2:845288260483:function:PRE-BoundingBox
+	//
+	//    * arn:awslambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClass
+	//
+	//    * arn:awslambda:ap-northeast-2:845288260483:function:PRE-SemanticSegmentation
+	//
+	//    * arn:awslambda:ap-northeast-2:845288260483:function:PRE-TextMultiClass
+	//
+	//    * arn:awslambda:ap-northeast-2:845288260483:function:PRE-NamedEntityRecognition
+	//
+	// Asia Pacific (Mumbai) (ap-south-1):
+	//
+	//    * arn:awslambda:ap-south-1:565803892007:function:PRE-BoundingBox
+	//
+	//    * arn:awslambda:ap-south-1:565803892007:function:PRE-ImageMultiClass
+	//
+	//    * arn:awslambda:ap-south-1:565803892007:function:PRE-SemanticSegmentation
+	//
+	//    * arn:awslambda:ap-south-1:565803892007:function:PRE-TextMultiClass
+	//
+	//    * arn:awslambda:ap-south-1:565803892007:function:PRE-NamedEntityRecognition
+	//
+	// Asia Pacific (Singapore) (ap-southeast-1):
+	//
+	//    * arn:awslambda:ap-southeast-1:377565633583:function:PRE-BoundingBox
+	//
+	//    * arn:awslambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClass
+	//
+	//    * arn:awslambda:ap-southeast-1:377565633583:function:PRE-SemanticSegmentation
+	//
+	//    * arn:awslambda:ap-southeast-1:377565633583:function:PRE-TextMultiClass
+	//
+	//    * arn:awslambda:ap-southeast-1:377565633583:function:PRE-NamedEntityRecognition
+	//
+	// Asia Pacific (Sydney) (ap-southeast-2):
 	//
 	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-BoundingBox
 	//
@@ -1494,13 +1722,18 @@ type HumanTaskConfig struct {
 	//
 	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-TextMultiClass
 	//
+	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-NamedEntityRecognition
+	//
 	// PreHumanTaskLambdaArn is a required field
 	PreHumanTaskLambdaArn *string `type:"string" required:"true"`
 
-	// The price that you pay for each task performed by a public worker.
+	// The price that you pay for each task performed by an Amazon Mechanical Turk
+	// worker.
 	PublicWorkforceTaskPrice *PublicWorkforceTaskPrice `type:"structure"`
 
-	// The length of time that a task remains available for labelling by human workers.
+	// The length of time that a task remains available for labeling by human workers.
+	// If you choose the Amazon Mechanical Turk workforce, the maximum is 12 hours
+	// (43200). For private and vendor workforces, the maximum is as listed.
 	TaskAvailabilityLifetimeInSeconds *int64 `min:"1" type:"integer"`
 
 	// A description of the task for your human workers.
@@ -1515,7 +1748,7 @@ type HumanTaskConfig struct {
 	// The amount of time that a worker has to complete a task.
 	//
 	// TaskTimeLimitInSeconds is a required field
-	TaskTimeLimitInSeconds *int64 `min:"1" type:"integer" required:"true"`
+	TaskTimeLimitInSeconds *int64 `min:"30" type:"integer" required:"true"`
 
 	// A title for the task for your human workers.
 	//
@@ -1578,8 +1811,8 @@ func (s *HumanTaskConfig) Validate() error {
 	if s.TaskTimeLimitInSeconds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskTimeLimitInSeconds"))
 	}
-	if s.TaskTimeLimitInSeconds != nil && *s.TaskTimeLimitInSeconds < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("TaskTimeLimitInSeconds", 1))
+	if s.TaskTimeLimitInSeconds != nil && *s.TaskTimeLimitInSeconds < 30 {
+		invalidParams.Add(aws.NewErrParamMinValue("TaskTimeLimitInSeconds", 30))
 	}
 
 	if s.TaskTitle == nil {
@@ -1752,12 +1985,20 @@ type HyperParameterTrainingJobDefinition struct {
 	// AlgorithmSpecification is a required field
 	AlgorithmSpecification *HyperParameterAlgorithmSpecification `type:"structure" required:"true"`
 
+	// Contains information about the output location for managed spot training
+	// checkpoint data.
+	CheckpointConfig *CheckpointConfig `type:"structure"`
+
 	// To encrypt all communications between ML compute instances in distributed
 	// training, choose True. Encryption provides greater security for distributed
 	// training, but training might take longer. How long it takes depends on the
 	// amount of communication between compute instances, especially if you use
 	// a deep learning algorithm in distributed training.
 	EnableInterContainerTrafficEncryption *bool `type:"boolean"`
+
+	// A Boolean indicating whether managed spot training is enabled (True) or not
+	// (False).
+	EnableManagedSpotTraining *bool `type:"boolean"`
 
 	// Isolates the training container. No inbound or outbound network calls can
 	// be made, except for calls between peers within a training cluster for distributed
@@ -1802,8 +2043,9 @@ type HyperParameterTrainingJobDefinition struct {
 	StaticHyperParameters map[string]string `type:"map"`
 
 	// Specifies a limit to how long a model hyperparameter training job can run.
-	// When the job reaches the time limit, Amazon SageMaker ends the training job.
-	// Use this API to cap model training costs.
+	// It also specifies how long you are willing to wait for a managed spot training
+	// job to complete. When the job reaches the a limit, Amazon SageMaker ends
+	// the training job. Use this API to cap model training costs.
 	//
 	// StoppingCondition is a required field
 	StoppingCondition *StoppingCondition `type:"structure" required:"true"`
@@ -1852,6 +2094,11 @@ func (s *HyperParameterTrainingJobDefinition) Validate() error {
 	if s.AlgorithmSpecification != nil {
 		if err := s.AlgorithmSpecification.Validate(); err != nil {
 			invalidParams.AddNested("AlgorithmSpecification", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.CheckpointConfig != nil {
+		if err := s.CheckpointConfig.Validate(); err != nil {
+			invalidParams.AddNested("CheckpointConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.InputDataConfig != nil {
@@ -1982,7 +2229,7 @@ type HyperParameterTuningJobConfig struct {
 	// values to use for the training job it launches. To use the Bayesian search
 	// stategy, set this to Bayesian. To randomly search, set it to Random. For
 	// information about search strategies, see How Hyperparameter Tuning Works
-	// (http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html).
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html).
 	//
 	// Strategy is a required field
 	Strategy HyperParameterTuningJobStrategyType `type:"string" required:"true" enum:"true"`
@@ -2000,7 +2247,7 @@ type HyperParameterTuningJobConfig struct {
 	//
 	// Amazon SageMaker stops training jobs launched by the hyperparameter tuning
 	// job when they are unlikely to perform better than previously completed training
-	// jobs. For more information, see Stop Training Jobs Early (http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html).
+	// jobs. For more information, see Stop Training Jobs Early (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html).
 	TrainingJobEarlyStoppingType TrainingJobEarlyStoppingType `type:"string" enum:"true"`
 }
 
@@ -2166,7 +2413,7 @@ type HyperParameterTuningJobWarmStartConfig struct {
 	// An array of hyperparameter tuning jobs that are used as the starting point
 	// for the new hyperparameter tuning job. For more information about warm starting
 	// a hyperparameter tuning job, see Using a Previous Hyperparameter Tuning Job
-	// as a Starting Point (http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-warm-start.html).
+	// as a Starting Point (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-warm-start.html).
 	//
 	// Hyperparameter tuning jobs created before October 1, 2018 cannot be used
 	// as parent jobs for warm start tuning jobs.
@@ -2426,7 +2673,7 @@ type IntegerParameterRange struct {
 
 	// The scale that hyperparameter tuning uses to search the hyperparameter range.
 	// For information about choosing a hyperparameter scale, see Hyperparameter
-	// Scaling (http://docs.aws.amazon.com//sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
+	// Scaling (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
 	// One of the following values:
 	//
 	// Auto
@@ -2580,6 +2827,8 @@ type LabelingJobAlgorithmsConfig struct {
 	//    * Text classification arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/text-classification
 	//
 	//    * Object detection arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/object-detection
+	//
+	//    * Semantic Segmentation arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/semantic-segmentation
 	//
 	// LabelingJobAlgorithmSpecificationArn is a required field
 	LabelingJobAlgorithmSpecificationArn *string `type:"string" required:"true"`
@@ -2808,8 +3057,14 @@ func (s *LabelingJobOutputConfig) Validate() error {
 type LabelingJobResourceConfig struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS Key Management Service key ID for the key used to encrypt the output
-	// data, if any.
+	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
+	// encrypt data on the storage volume attached to the ML compute instance(s)
+	// that run the training job. The VolumeKmsKeyId can be any of the following
+	// formats:
+	//
+	//    * // KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	//    * // Amazon Resource Name (ARN) of a KMS Key "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string `type:"string"`
 }
 
@@ -2891,7 +3146,7 @@ type LabelingJobSummary struct {
 
 	// The Amazon Resource Name (ARN) of the Lambda function used to consolidate
 	// the annotations from individual workers into a label for a data object. For
-	// more information, see Annotation Consolidation (http://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html).
+	// more information, see Annotation Consolidation (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html).
 	AnnotationConsolidationLambdaArn *string `type:"string"`
 
 	// The date and time that the job was created (timestamp).
@@ -3001,10 +3256,10 @@ func (s MetricData) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Specifies a metric that the training algorithm writes to stderr or stdout.
-// Amazon SageMakerhyperparameter tuning captures all defined metrics. You specify
-// one metric that a hyperparameter tuning job uses as its objective metric
-// to choose the best training job.
+// Specifies a metric that the training algorithm writes to stderr or stdout
+// . Amazon SageMakerhyperparameter tuning captures all defined metrics. You
+// specify one metric that a hyperparameter tuning job uses as its objective
+// metric to choose the best training job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricDefinition
 type MetricDefinition struct {
 	_ struct{} `type:"structure"`
@@ -3358,7 +3613,7 @@ type NestedFilters struct {
 	Filters []Filter `min:"1" type:"list" required:"true"`
 
 	// The name of the property to use in the nested filters. The value must match
-	// a listed property name, such as InputDataConfig.
+	// a listed property name, such as InputDataConfig .
 	//
 	// NestedPropertyName is a required field
 	NestedPropertyName *string `min:"1" type:"string" required:"true"`
@@ -3477,11 +3732,11 @@ type NotebookInstanceSummary struct {
 
 	// An array of up to three Git repositories associated with the notebook instance.
 	// These can be either the names of Git repositories stored as resources in
-	// your account, or the URL of Git repositories in AWS CodeCommit (http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+	// your account, or the URL of Git repositories in AWS CodeCommit (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
 	// or in any other Git repository. These repositories are cloned at the same
 	// level as the default repository of your notebook instance. For more information,
 	// see Associating Git Repositories with Amazon SageMaker Notebook Instances
-	// (http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
 	AdditionalCodeRepositories []string `type:"list"`
 
 	// A timestamp that shows when the notebook instance was created.
@@ -3489,10 +3744,10 @@ type NotebookInstanceSummary struct {
 
 	// The Git repository associated with the notebook instance as its default code
 	// repository. This can be either the name of a Git repository stored as a resource
-	// in your account, or the URL of a Git repository in AWS CodeCommit (http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+	// in your account, or the URL of a Git repository in AWS CodeCommit (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
 	// or in any other Git repository. When you open a notebook instance, it opens
 	// in the directory that contains this repository. For more information, see
-	// Associating Git Repositories with Amazon SageMaker Notebook Instances (http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
+	// Associating Git Repositories with Amazon SageMaker Notebook Instances (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
 	DefaultCodeRepository *string `min:"1" type:"string"`
 
 	// The type of ML compute instance that the notebook instance is running on.
@@ -3644,7 +3899,7 @@ type OutputDataConfig struct {
 	//
 	// The KMS key policy must grant permission to the IAM role that you specify
 	// in your CreateTrainingJob, CreateTransformJob, or CreateHyperParameterTuningJob
-	// requests. For more information, see Using Key Policies in AWS KMS (http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
+	// requests. For more information, see Using Key Policies in AWS KMS (https://docs.aws.amazon.com/http:/docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
 	// in the AWS Key Management Service Developer Guide.
 	KmsKeyId *string `type:"string"`
 
@@ -3824,8 +4079,7 @@ type ProductionVariant struct {
 
 	// The size of the Elastic Inference (EI) instance to use for the production
 	// variant. EI instances provide on-demand GPU computing for inference. For
-	// more information, see Using Elastic Inference in Amazon SageMaker (http://docs.aws.amazon.com/sagemaker/latest/dg/ei.html).
-	// For more information, see Using Elastic Inference in Amazon SageMaker (http://docs.aws.amazon.com/sagemaker/latest/dg/ei.html).
+	// more information, see Using Elastic Inference in Amazon SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html).
 	AcceleratorType ProductionVariantAcceleratorType `type:"string" enum:"true"`
 
 	// Number of instances to launch initially.
@@ -3978,7 +4232,8 @@ func (s PropertyNameSuggestion) String() string {
 // each task performed.
 //
 // Use one of the following prices for bounding box tasks. Prices are in US
-// dollars.
+// dollars and should be based on the complexity of the task; the longer it
+// takes in your initial testing, the more you should offer.
 //
 //    * 0.036
 //
@@ -4057,7 +4312,8 @@ func (s PropertyNameSuggestion) String() string {
 type PublicWorkforceTaskPrice struct {
 	_ struct{} `type:"structure"`
 
-	// Defines the amount of money paid to a worker in United States dollars.
+	// Defines the amount of money paid to an Amazon Mechanical Turk worker in United
+	// States dollars.
 	AmountInUsd *USD `type:"structure"`
 }
 
@@ -4669,8 +4925,9 @@ func (s *SourceAlgorithmSpecification) Validate() error {
 }
 
 // Specifies a limit to how long a model training or compilation job can run.
-// When the job reaches the time limit, Amazon SageMaker ends the training or
-// compilation job. Use this API to cap model training costs.
+// It also specifies how long you are willing to wait for a managed spot training
+// job to complete. When the job reaches the time limit, Amazon SageMaker ends
+// the training or compilation job. Use this API to cap model training costs.
 //
 // To stop a job, Amazon SageMaker sends the algorithm the SIGTERM signal, which
 // delays job termination for 120 seconds. Algorithms can use this 120-second
@@ -4695,6 +4952,12 @@ type StoppingCondition struct {
 	// ends the job. If value is not specified, default value is 1 day. The maximum
 	// value is 28 days.
 	MaxRuntimeInSeconds *int64 `min:"1" type:"integer"`
+
+	// The maximum length of time, in seconds, how long you are willing to wait
+	// for a managed spot training job to complete. It is the amount of time spent
+	// waiting for Spot capacity plus the amount of time the training job runs.
+	// It must be equal to or greater than MaxRuntimeInSeconds.
+	MaxWaitTimeInSeconds *int64 `min:"1" type:"integer"`
 }
 
 // String returns the string representation
@@ -4707,6 +4970,9 @@ func (s *StoppingCondition) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StoppingCondition"}
 	if s.MaxRuntimeInSeconds != nil && *s.MaxRuntimeInSeconds < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxRuntimeInSeconds", 1))
+	}
+	if s.MaxWaitTimeInSeconds != nil && *s.MaxWaitTimeInSeconds < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxWaitTimeInSeconds", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5603,7 +5869,7 @@ type TransformResources struct {
 
 	// The ML compute instance type for the transform job. If you are using built-in
 	// algorithms to transform moderately sized datasets, we recommend using ml.m4.xlarge
-	// or ml.m5.largeinstance types.
+	// or ml.m5.large instance types.
 	//
 	// InstanceType is a required field
 	InstanceType TransformInstanceType `type:"string" required:"true" enum:"true"`
@@ -5731,7 +5997,7 @@ type UiConfig struct {
 
 	// The Amazon S3 bucket location of the UI template. For more information about
 	// the contents of a UI template, see Creating Your Custom Labeling Task Template
-	// (http://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step2.html).
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step2.html).
 	//
 	// UiTemplateS3Uri is a required field
 	UiTemplateS3Uri *string `type:"string" required:"true"`

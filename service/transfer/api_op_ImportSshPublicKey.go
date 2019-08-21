@@ -56,9 +56,9 @@ func (s *ImportSshPublicKeyInput) Validate() error {
 	return nil
 }
 
-// This response identifies the user, server they belong to, and the identifier
+// This response identifies the user, the server they belong to, and the identifier
 // of the SSH public key associated with that user. A user can have more than
-// one key on each server that they are associate with.
+// one key on each server that they are associated with.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ImportSshPublicKeyResponse
 type ImportSshPublicKeyOutput struct {
 	_ struct{} `type:"structure"`

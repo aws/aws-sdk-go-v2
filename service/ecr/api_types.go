@@ -139,12 +139,25 @@ type ImageIdentifier struct {
 	ImageDigest *string `locationName:"imageDigest" type:"string"`
 
 	// The tag used for the image.
-	ImageTag *string `locationName:"imageTag" type:"string"`
+	ImageTag *string `locationName:"imageTag" min:"1" type:"string"`
 }
 
 // String returns the string representation
 func (s ImageIdentifier) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ImageIdentifier) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ImageIdentifier"}
+	if s.ImageTag != nil && len(*s.ImageTag) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ImageTag", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // An object representing an Amazon ECR image layer.
@@ -282,6 +295,9 @@ type Repository struct {
 
 	// The date and time, in JavaScript date format, when the repository was created.
 	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
+
+	// The tag mutability setting for the repository.
+	ImageTagMutability ImageTagMutability `locationName:"imageTagMutability" type:"string" enum:"true"`
 
 	// The AWS account ID associated with the registry that contains the repository.
 	RegistryId *string `locationName:"registryId" type:"string"`

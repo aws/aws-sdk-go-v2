@@ -279,7 +279,7 @@ type LogStream struct {
 	// IMPORTANT: Starting on June 17, 2019, this parameter will be deprecated for
 	// log streams, and will be reported as zero. This change applies only to log
 	// streams. The storedBytes parameter for log groups is not affected.
-	StoredBytes *int64 `locationName:"storedBytes" type:"long"`
+	StoredBytes *int64 `locationName:"storedBytes" deprecated:"true" type:"long"`
 
 	// The sequence token.
 	UploadSequenceToken *string `locationName:"uploadSequenceToken" min:"1" type:"string"`

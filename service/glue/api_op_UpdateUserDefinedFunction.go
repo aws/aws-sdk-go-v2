@@ -14,7 +14,7 @@ type UpdateUserDefinedFunctionInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the Data Catalog where the function to be updated is located. If
-	// none is supplied, the AWS account ID is used by default.
+	// none is provided, the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 
 	// The name of the catalog database where the function to be updated is located.
@@ -22,7 +22,7 @@ type UpdateUserDefinedFunctionInput struct {
 	// DatabaseName is a required field
 	DatabaseName *string `min:"1" type:"string" required:"true"`
 
-	// A FunctionInput object that re-defines the function in the Data Catalog.
+	// A FunctionInput object that redefines the function in the Data Catalog.
 	//
 	// FunctionInput is a required field
 	FunctionInput *UserDefinedFunctionInput `type:"structure" required:"true"`

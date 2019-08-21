@@ -15,9 +15,10 @@ type CreateCapacityReservationInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Availability Zone in which to create the Capacity Reservation.
-	//
-	// AvailabilityZone is a required field
-	AvailabilityZone *string `type:"string" required:"true"`
+	AvailabilityZone *string `type:"string"`
+
+	// The ID of the Availability Zone in which to create the Capacity Reservation.
+	AvailabilityZoneId *string `type:"string"`
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. For more information, see How to Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
@@ -122,10 +123,6 @@ func (s CreateCapacityReservationInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCapacityReservationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateCapacityReservationInput"}
-
-	if s.AvailabilityZone == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZone"))
-	}
 
 	if s.InstanceCount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceCount"))

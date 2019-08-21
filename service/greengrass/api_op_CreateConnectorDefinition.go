@@ -22,12 +22,28 @@ type CreateConnectorDefinitionInput struct {
 
 	Name *string `type:"string"`
 
+	// The key-value pair for the resource tag.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
 func (s CreateConnectorDefinitionInput) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateConnectorDefinitionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateConnectorDefinitionInput"}
+	if s.InitialVersion != nil {
+		if err := s.InitialVersion.Validate(); err != nil {
+			invalidParams.AddNested("InitialVersion", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.

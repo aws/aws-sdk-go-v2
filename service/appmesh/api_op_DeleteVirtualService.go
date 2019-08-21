@@ -14,13 +14,9 @@ import (
 type DeleteVirtualServiceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh to delete the virtual service in.
-	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The name of the virtual service to delete.
-	//
 	// VirtualServiceName is a required field
 	VirtualServiceName *string `location:"uri" locationName:"virtualServiceName" type:"string" required:"true"`
 }
@@ -74,7 +70,7 @@ func (s DeleteVirtualServiceInput) MarshalFields(e protocol.FieldEncoder) error 
 type DeleteVirtualServiceOutput struct {
 	_ struct{} `type:"structure" payload:"VirtualService"`
 
-	// The virtual service that was deleted.
+	// An object representing a virtual service returned by a describe operation.
 	//
 	// VirtualService is a required field
 	VirtualService *VirtualServiceData `locationName:"virtualService" type:"structure" required:"true"`

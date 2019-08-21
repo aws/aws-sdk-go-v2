@@ -71,7 +71,7 @@ const opUntagResource = "UntagResource"
 // To list the current tags for your resources, use ListTagsForResource.
 //
 // For more information about tags, see Tagging Your Resources (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
-// in the Amazon AppStream 2.0 Developer Guide.
+// in the Amazon AppStream 2.0 Administration Guide.
 //
 //    // Example sending a request using UntagResourceRequest.
 //    req := client.UntagResourceRequest(params)

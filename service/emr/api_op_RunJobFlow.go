@@ -115,11 +115,11 @@ type RunJobFlowInput struct {
 
 	// The Amazon EMR release label, which determines the version of open-source
 	// application packages installed on the cluster. Release labels are in the
-	// form emr-x.x.x, where x.x.x is an Amazon EMR release version, for example,
-	// emr-5.14.0. For more information about Amazon EMR release versions and included
-	// application versions and features, see https://docs.aws.amazon.com/emr/latest/ReleaseGuide/
+	// form emr-x.x.x, where x.x.x is an Amazon EMR release version such as emr-5.14.0.
+	// For more information about Amazon EMR release versions and included application
+	// versions and features, see https://docs.aws.amazon.com/emr/latest/ReleaseGuide/
 	// (https://docs.aws.amazon.com/emr/latest/ReleaseGuide/). The release label
-	// applies only to Amazon EMR releases versions 4.x and later. Earlier versions
+	// applies only to Amazon EMR releases version 4.0 and later. Earlier versions
 	// use AmiVersion.
 	ReleaseLabel *string `type:"string"`
 
@@ -170,6 +170,8 @@ type RunJobFlowInput struct {
 	// A list of tags to associate with a cluster and propagate to Amazon EC2 instances.
 	Tags []Tag `type:"list"`
 
+	// This member will be deprecated.
+	//
 	// Whether the cluster is visible to all IAM users of the AWS account associated
 	// with the cluster. If this value is set to true, all IAM users of that AWS
 	// account can view and (if they have the proper policy permissions set) manage

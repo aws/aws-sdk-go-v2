@@ -60,7 +60,7 @@ const opListTagsForResource = "ListTagsForResource"
 // can tag AppStream 2.0 image builders, images, fleets, and stacks.
 //
 // For more information about tags, see Tagging Your Resources (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
-// in the Amazon AppStream 2.0 Developer Guide.
+// in the Amazon AppStream 2.0 Administration Guide.
 //
 //    // Example sending a request using ListTagsForResourceRequest.
 //    req := client.ListTagsForResourceRequest(params)

@@ -14,23 +14,16 @@ import (
 type UpdateVirtualServiceInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of therequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
-	// The name of the service mesh that the virtual service resides in.
-	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The new virtual service specification to apply. This overwrites the existing
-	// data.
+	// An object representing the specification of a virtual service.
 	//
 	// Spec is a required field
 	Spec *VirtualServiceSpec `locationName:"spec" type:"structure" required:"true"`
 
-	// The name of the virtual service to update.
-	//
 	// VirtualServiceName is a required field
 	VirtualServiceName *string `location:"uri" locationName:"virtualServiceName" type:"string" required:"true"`
 }
@@ -111,7 +104,7 @@ func (s UpdateVirtualServiceInput) MarshalFields(e protocol.FieldEncoder) error 
 type UpdateVirtualServiceOutput struct {
 	_ struct{} `type:"structure" payload:"VirtualService"`
 
-	// A full description of the virtual service that was updated.
+	// An object representing a virtual service returned by a describe operation.
 	//
 	// VirtualService is a required field
 	VirtualService *VirtualServiceData `locationName:"virtualService" type:"structure" required:"true"`

@@ -55,7 +55,8 @@ const opDeleteAlarms = "DeleteAlarms"
 // DeleteAlarmsRequest returns a request value for making API operation for
 // Amazon CloudWatch.
 //
-// Deletes the specified alarms. In the event of an error, no alarms are deleted.
+// Deletes the specified alarms. You can delete up to 50 alarms in one operation.
+// In the event of an error, no alarms are deleted.
 //
 //    // Example sending a request using DeleteAlarmsRequest.
 //    req := client.DeleteAlarmsRequest(params)

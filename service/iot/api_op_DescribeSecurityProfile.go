@@ -59,7 +59,7 @@ type DescribeSecurityProfileOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of metrics whose data is retained (stored). By default, data is retained
-	// for any metric used in the profile's behaviors but it is also retained for
+	// for any metric used in the profile's behaviors, but it is also retained for
 	// any metric specified here.
 	AdditionalMetricsToRetain []string `locationName:"additionalMetricsToRetain" type:"list"`
 

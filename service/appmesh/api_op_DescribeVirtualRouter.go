@@ -14,13 +14,9 @@ import (
 type DescribeVirtualRouterInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the service mesh that the virtual router resides in.
-	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The name of the virtual router to describe.
-	//
 	// VirtualRouterName is a required field
 	VirtualRouterName *string `location:"uri" locationName:"virtualRouterName" min:"1" type:"string" required:"true"`
 }
@@ -77,7 +73,7 @@ func (s DescribeVirtualRouterInput) MarshalFields(e protocol.FieldEncoder) error
 type DescribeVirtualRouterOutput struct {
 	_ struct{} `type:"structure" payload:"VirtualRouter"`
 
-	// The full description of your virtual router.
+	// An object representing a virtual router returned by a describe operation.
 	//
 	// VirtualRouter is a required field
 	VirtualRouter *VirtualRouterData `locationName:"virtualRouter" type:"structure" required:"true"`

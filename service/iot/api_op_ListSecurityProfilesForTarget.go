@@ -19,7 +19,7 @@ type ListSecurityProfilesForTargetInput struct {
 	// The token for the next set of results.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 
-	// If true, return child groups as well.
+	// If true, return child groups too.
 	Recursive *bool `location:"querystring" locationName:"recursive" type:"boolean"`
 
 	// The ARN of the target (thing group) whose attached security profiles you

@@ -77,6 +77,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge"
 	"github.com/aws/aws-sdk-go-v2/service/firehose"
 	"github.com/aws/aws-sdk-go-v2/service/fms"
+	"github.com/aws/aws-sdk-go-v2/service/forecast"
+	"github.com/aws/aws-sdk-go-v2/service/forecastquery"
 	"github.com/aws/aws-sdk-go-v2/service/fsx"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift"
 	"github.com/aws/aws-sdk-go-v2/service/glacier"
@@ -105,6 +107,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideomedia"
 	"github.com/aws/aws-sdk-go-v2/service/kms"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation"
 	"github.com/aws/aws-sdk-go-v2/service/lambda"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice"
@@ -276,6 +279,8 @@ func createServices(cfg aws.Config) []service {
 		{name: "eventbridge", value: reflect.ValueOf(eventbridge.New(cfg))},
 		{name: "firehose", value: reflect.ValueOf(firehose.New(cfg))},
 		{name: "fms", value: reflect.ValueOf(fms.New(cfg))},
+		{name: "forecast", value: reflect.ValueOf(forecast.New(cfg))},
+		{name: "forecastquery", value: reflect.ValueOf(forecastquery.New(cfg))},
 		{name: "fsx", value: reflect.ValueOf(fsx.New(cfg))},
 		{name: "gamelift", value: reflect.ValueOf(gamelift.New(cfg))},
 		{name: "glacier", value: reflect.ValueOf(glacier.New(cfg))},
@@ -304,6 +309,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "kinesisvideoarchivedmedia", value: reflect.ValueOf(kinesisvideoarchivedmedia.New(cfg))},
 		{name: "kinesisvideomedia", value: reflect.ValueOf(kinesisvideomedia.New(cfg))},
 		{name: "kms", value: reflect.ValueOf(kms.New(cfg))},
+		{name: "lakeformation", value: reflect.ValueOf(lakeformation.New(cfg))},
 		{name: "lambda", value: reflect.ValueOf(lambda.New(cfg))},
 		{name: "lexmodelbuildingservice", value: reflect.ValueOf(lexmodelbuildingservice.New(cfg))},
 		{name: "lexruntimeservice", value: reflect.ValueOf(lexruntimeservice.New(cfg))},

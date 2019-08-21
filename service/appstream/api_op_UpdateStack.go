@@ -14,6 +14,10 @@ import (
 type UpdateStackInput struct {
 	_ struct{} `type:"structure"`
 
+	// The list of virtual private cloud (VPC) interface endpoint objects. Users
+	// of the stack can connect to AppStream 2.0 only through the specified endpoints.
+	AccessEndpoints []AccessEndpoint `min:"1" type:"list"`
+
 	// The persistent application settings for users of a stack. When these settings
 	// are enabled, changes that users make to applications and Windows settings
 	// are automatically saved after each session and applied to the next session.
@@ -59,6 +63,9 @@ func (s UpdateStackInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateStackInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateStackInput"}
+	if s.AccessEndpoints != nil && len(s.AccessEndpoints) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AccessEndpoints", 1))
+	}
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
@@ -68,6 +75,13 @@ func (s *UpdateStackInput) Validate() error {
 	}
 	if s.UserSettings != nil && len(s.UserSettings) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserSettings", 1))
+	}
+	if s.AccessEndpoints != nil {
+		for i, v := range s.AccessEndpoints {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AccessEndpoints", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 	if s.ApplicationSettings != nil {
 		if err := s.ApplicationSettings.Validate(); err != nil {

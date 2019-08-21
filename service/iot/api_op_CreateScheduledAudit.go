@@ -20,13 +20,13 @@ type CreateScheduledAuditInput struct {
 	DayOfMonth *string `locationName:"dayOfMonth" type:"string"`
 
 	// The day of the week on which the scheduled audit takes place. Can be one
-	// of "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT". This field is required
+	// of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT". This field is required
 	// if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".
 	DayOfWeek DayOfWeek `locationName:"dayOfWeek" type:"string" enum:"true"`
 
 	// How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY",
-	// "BIWEEKLY" or "MONTHLY". The actual start time of each audit is determined
-	// by the system.
+	// "BIWEEKLY" or "MONTHLY". The start time of each audit is determined by the
+	// system.
 	//
 	// Frequency is a required field
 	Frequency AuditFrequency `locationName:"frequency" type:"string" required:"true" enum:"true"`
@@ -36,12 +36,12 @@ type CreateScheduledAuditInput struct {
 	// ScheduledAuditName is a required field
 	ScheduledAuditName *string `location:"uri" locationName:"scheduledAuditName" min:"1" type:"string" required:"true"`
 
-	// Metadata which can be used to manage the scheduled audit.
+	// Metadata that can be used to manage the scheduled audit.
 	Tags []Tag `locationName:"tags" type:"list"`
 
 	// Which checks are performed during the scheduled audit. Checks must be enabled
 	// for your account. (Use DescribeAccountAuditConfiguration to see the list
-	// of all checks including those that are enabled or UpdateAccountAuditConfiguration
+	// of all checks, including those that are enabled or use UpdateAccountAuditConfiguration
 	// to select which checks are enabled.)
 	//
 	// TargetCheckNames is a required field

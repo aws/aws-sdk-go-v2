@@ -89,6 +89,8 @@ type ClientAPI interface {
 
 	ListProblemsRequest(*applicationinsights.ListProblemsInput) applicationinsights.ListProblemsRequest
 
+	UpdateApplicationRequest(*applicationinsights.UpdateApplicationInput) applicationinsights.UpdateApplicationRequest
+
 	UpdateComponentRequest(*applicationinsights.UpdateComponentInput) applicationinsights.UpdateComponentRequest
 
 	UpdateComponentConfigurationRequest(*applicationinsights.UpdateComponentConfigurationInput) applicationinsights.UpdateComponentConfigurationRequest

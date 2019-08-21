@@ -35,7 +35,7 @@ func (s DescribeAccountAttributesOutput) String() string {
 const opDescribeAccountAttributes = "DescribeAccountAttributes"
 
 // DescribeAccountAttributesRequest returns a request value for making API operation for
-// AWS OpsWorks for Chef Automate.
+// AWS OpsWorks CM.
 //
 // Describes your OpsWorks-CM account attributes.
 //

@@ -78,6 +78,8 @@ type DeleteChannelOutput struct {
 
 	Name *string `locationName:"name" type:"string"`
 
+	PipelineDetails []PipelineDetail `locationName:"pipelineDetails" type:"list"`
+
 	PipelinesRunningCount *int64 `locationName:"pipelinesRunningCount" type:"integer"`
 
 	RoleArn *string `locationName:"roleArn" type:"string"`
@@ -171,6 +173,18 @@ func (s DeleteChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PipelineDetails != nil {
+		v := s.PipelineDetails
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "pipelineDetails", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.PipelinesRunningCount != nil {
 		v := *s.PipelinesRunningCount

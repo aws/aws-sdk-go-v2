@@ -36,6 +36,23 @@ func (enum Atime) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type EndpointType string
+
+// Enum values for EndpointType
+const (
+	EndpointTypePublic      EndpointType = "PUBLIC"
+	EndpointTypePrivateLink EndpointType = "PRIVATE_LINK"
+)
+
+func (enum EndpointType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EndpointType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FilterType string
 
 // Enum values for FilterType

@@ -50,7 +50,7 @@ type UpdateFlowSourceInput struct {
 	StreamId *string `locationName:"streamId" type:"string"`
 
 	// The range of IP addresses that should be allowed to contribute content to
-	// your source. These IP addresses should in the form of a Classless Inter-Domain
+	// your source. These IP addresses should be in the form of a Classless Inter-Domain
 	// Routing (CIDR) block; for example, 10.0.0.0/16.
 	WhitelistCidr *string `locationName:"whitelistCidr" type:"string"`
 }

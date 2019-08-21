@@ -2,6 +2,22 @@
 
 package appstream
 
+type AccessEndpointType string
+
+// Enum values for AccessEndpointType
+const (
+	AccessEndpointTypeStreaming AccessEndpointType = "STREAMING"
+)
+
+func (enum AccessEndpointType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AccessEndpointType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Action string
 
 // Enum values for Action
@@ -69,6 +85,7 @@ const (
 	FleetErrorCodeNetworkInterfaceLimitExceeded                     FleetErrorCode = "NETWORK_INTERFACE_LIMIT_EXCEEDED"
 	FleetErrorCodeInternalServiceError                              FleetErrorCode = "INTERNAL_SERVICE_ERROR"
 	FleetErrorCodeIamServiceRoleIsMissing                           FleetErrorCode = "IAM_SERVICE_ROLE_IS_MISSING"
+	FleetErrorCodeStsDisabledInRegion                               FleetErrorCode = "STS_DISABLED_IN_REGION"
 	FleetErrorCodeSubnetHasInsufficientIpAddresses                  FleetErrorCode = "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES"
 	FleetErrorCodeIamServiceRoleMissingDescribeSubnetAction         FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION"
 	FleetErrorCodeSubnetNotFound                                    FleetErrorCode = "SUBNET_NOT_FOUND"
@@ -315,6 +332,7 @@ const (
 	StackAttributeFeedbackUrl                 StackAttribute = "FEEDBACK_URL"
 	StackAttributeThemeName                   StackAttribute = "THEME_NAME"
 	StackAttributeUserSettings                StackAttribute = "USER_SETTINGS"
+	StackAttributeAccessEndpoints             StackAttribute = "ACCESS_ENDPOINTS"
 )
 
 func (enum StackAttribute) MarshalValue() (string, error) {

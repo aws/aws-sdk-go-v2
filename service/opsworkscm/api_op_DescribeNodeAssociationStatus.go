@@ -78,7 +78,7 @@ func (s DescribeNodeAssociationStatusOutput) String() string {
 const opDescribeNodeAssociationStatus = "DescribeNodeAssociationStatus"
 
 // DescribeNodeAssociationStatusRequest returns a request value for making API operation for
-// AWS OpsWorks for Chef Automate.
+// AWS OpsWorks CM.
 //
 // Returns the current status of an existing association or disassociation request.
 //

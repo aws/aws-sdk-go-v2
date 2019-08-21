@@ -112,7 +112,7 @@ const opCreateEndpoint = "CreateEndpoint"
 // model artifacts from the S3 path you provided. AWS STS is activated in your
 // IAM user account by default. If you previously deactivated AWS STS for a
 // region, you need to reactivate AWS STS for that region. For more information,
-// see Activating and Deactivating AWS STS i an AWS Region (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
+// see Activating and Deactivating AWS STS i an AWS Region (IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
 // in the AWS Identity and Access Management User Guide.
 //
 //    // Example sending a request using CreateEndpointRequest.

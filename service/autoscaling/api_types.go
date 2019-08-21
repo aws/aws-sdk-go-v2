@@ -663,18 +663,26 @@ type InstancesDistribution struct {
 	// are 100% for On-Demand Instances and 0% for Spot Instances.
 	OnDemandPercentageAboveBaseCapacity *int64 `type:"integer"`
 
-	// Indicates how to allocate Spot capacity across Spot pools.
+	// Indicates how to allocate instances across Spot Instance pools.
 	//
-	// The only valid value is lowest-price, which is also the default value. The
-	// Auto Scaling group selects the cheapest Spot pools and evenly allocates your
-	// Spot capacity across the number of Spot pools that you specify.
+	// If the allocation strategy is lowest-price, the Auto Scaling group launches
+	// instances using the Spot pools with the lowest price, and evenly allocates
+	// your instances across the number of Spot pools that you specify. If the allocation
+	// strategy is capacity-optimized, the Auto Scaling group launches instances
+	// using Spot pools that are optimally chosen based on the available Spot capacity.
+	//
+	// The default Spot allocation strategy for calls that you make through the
+	// API, the AWS CLI, or the AWS SDKs is lowest-price. The default Spot allocation
+	// strategy for the AWS Management Console is capacity-optimized.
+	//
+	// Valid values: lowest-price | capacity-optimized
 	SpotAllocationStrategy *string `type:"string"`
 
-	// The number of Spot pools to use to allocate your Spot capacity. The Spot
-	// pools are determined from the different instance types in the Overrides array
-	// of LaunchTemplate. The range is 1–20.
+	// The number of Spot Instance pools across which to allocate your Spot Instances.
+	// The Spot pools are determined from the different instance types in the Overrides
+	// array of LaunchTemplate. The range is 1–20. The default value is 2.
 	//
-	// The default value is 2.
+	// Valid only when the Spot allocation strategy is lowest-price.
 	SpotInstancePools *int64 `type:"integer"`
 
 	// The maximum price per unit hour that you are willing to pay for a Spot Instance.
@@ -696,14 +704,21 @@ func (s InstancesDistribution) String() string {
 type LaunchConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// [EC2-VPC] Indicates whether to assign a public IP address to each instance.
+	// For Auto Scaling groups that are running in a VPC, specifies whether to assign
+	// a public IP address to the group's instances.
+	//
+	// For more information, see Launching Auto Scaling Instances in a VPC (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	AssociatePublicIpAddress *bool `type:"boolean"`
 
 	// A block device mapping, which specifies the block devices for the instance.
+	//
+	// For more information, see Block Device Mapping (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html)
+	// in the Amazon EC2 User Guide for Linux Instances.
 	BlockDeviceMappings []BlockDeviceMapping `type:"list"`
 
 	// The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to.
-	// This parameter can only be used if you are launching EC2-Classic instances.
+	//
 	// For more information, see ClassicLink (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html)
 	// in the Amazon EC2 User Guide for Linux Instances and Linking EC2-Classic
 	// Instances to a VPC (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink)
@@ -711,13 +726,11 @@ type LaunchConfiguration struct {
 	ClassicLinkVPCId *string `min:"1" type:"string"`
 
 	// The IDs of one or more security groups for the VPC specified in ClassicLinkVPCId.
+	//
 	// For more information, see ClassicLink (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html)
 	// in the Amazon EC2 User Guide for Linux Instances and Linking EC2-Classic
 	// Instances to a VPC (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink)
 	// in the Amazon EC2 Auto Scaling User Guide.
-	//
-	// Conditional: This parameter is required if you specify a ClassicLink-enabled
-	// VPC, and cannot be used otherwise.
 	ClassicLinkVPCSecurityGroups []string `type:"list"`
 
 	// The creation date and time for the launch configuration.
@@ -725,23 +738,43 @@ type LaunchConfiguration struct {
 	// CreatedTime is a required field
 	CreatedTime *time.Time `type:"timestamp" required:"true"`
 
-	// Controls whether the instance is optimized for EBS I/O (true) or not (false).
+	// Specifies whether the launch configuration is optimized for EBS I/O (true)
+	// or not (false).
+	//
+	// For more information, see Amazon EBS-Optimized Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html)
+	// in the Amazon EC2 User Guide for Linux Instances.
 	EbsOptimized *bool `type:"boolean"`
 
-	// The name or Amazon Resource Name (ARN) of the instance profile associated
-	// with the IAM role for the instance.
+	// The name or the Amazon Resource Name (ARN) of the instance profile associated
+	// with the IAM role for the instance. The instance profile contains the IAM
+	// role.
+	//
+	// For more information, see IAM Role for Applications That Run on Amazon EC2
+	// Instances (https://docs.aws.amazon.com/autoscaling/ec2/userguide/us-iam-role.html)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	IamInstanceProfile *string `min:"1" type:"string"`
 
-	// The ID of the Amazon Machine Image (AMI).
+	// The ID of the Amazon Machine Image (AMI) to use to launch your EC2 instances.
+	//
+	// For more information, see Finding an AMI (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html)
+	// in the Amazon EC2 User Guide for Linux Instances.
 	//
 	// ImageId is a required field
 	ImageId *string `min:"1" type:"string" required:"true"`
 
 	// Controls whether instances in this group are launched with detailed (true)
 	// or basic (false) monitoring.
+	//
+	// For more information, see Configure Monitoring for Auto Scaling Instances
+	// (https://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html#enable-as-instance-metrics)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	InstanceMonitoring *InstanceMonitoring `type:"structure"`
 
 	// The instance type for the instances.
+	//
+	// For information about available instance types, see Available Instance Types
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes)
+	// in the Amazon EC2 User Guide for Linux Instances.
 	//
 	// InstanceType is a required field
 	InstanceType *string `min:"1" type:"string" required:"true"`
@@ -750,6 +783,9 @@ type LaunchConfiguration struct {
 	KernelId *string `min:"1" type:"string"`
 
 	// The name of the key pair.
+	//
+	// For more information, see Amazon EC2 Key Pairs (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
+	// in the Amazon EC2 User Guide for Linux Instances.
 	KeyName *string `min:"1" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the launch configuration.
@@ -761,20 +797,36 @@ type LaunchConfiguration struct {
 	LaunchConfigurationName *string `min:"1" type:"string" required:"true"`
 
 	// The tenancy of the instance, either default or dedicated. An instance with
-	// dedicated tenancy runs in an isolated, single-tenant hardware and can only
-	// be launched into a VPC.
+	// dedicated tenancy runs on isolated, single-tenant hardware and can only be
+	// launched into a VPC.
+	//
+	// For more information, see Instance Placement Tenancy (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-vpc-tenancy)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	PlacementTenancy *string `min:"1" type:"string"`
 
 	// The ID of the RAM disk associated with the AMI.
 	RamdiskId *string `min:"1" type:"string"`
 
-	// The security groups to associate with the instances.
+	// A list that contains the security groups to assign to the instances in the
+	// Auto Scaling group.
+	//
+	// For more information, see Security Groups for Your VPC (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html)
+	// in the Amazon Virtual Private Cloud User Guide.
 	SecurityGroups []string `type:"list"`
 
-	// The price to bid when launching Spot Instances.
+	// The maximum hourly price to be paid for any Spot Instance launched to fulfill
+	// the request. Spot Instances are launched when the price you specify exceeds
+	// the current Spot market price.
+	//
+	// For more information, see Launching Spot Instances in Your Auto Scaling Group
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-spot-instances.html)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	SpotPrice *string `min:"1" type:"string"`
 
-	// The user data available to the instances.
+	// The Base64-encoded user data to make available to the launched EC2 instances.
+	//
+	// For more information, see Instance Metadata and User Data (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
+	// in the Amazon EC2 User Guide for Linux Instances.
 	UserData *string `type:"string"`
 }
 
@@ -911,8 +963,8 @@ func (s *LaunchTemplateSpecification) Validate() error {
 }
 
 // Describes a lifecycle hook, which tells Amazon EC2 Auto Scaling that you
-// want to perform an action whenever it launches instances or whenever it terminates
-// instances. Used in response to DescribeLifecycleHooks.
+// want to perform an action whenever it launches instances or terminates instances.
+// Used in response to DescribeLifecycleHooks.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LifecycleHook
 type LifecycleHook struct {
 	_ struct{} `type:"structure"`
@@ -986,7 +1038,7 @@ func (s LifecycleHook) String() string {
 // launch or terminate.
 //
 // If you need more time, record the lifecycle action heartbeat to keep the
-// instance in a pending state using using RecordLifecycleActionHeartbeat.
+// instance in a pending state using RecordLifecycleActionHeartbeat.
 //
 // If you finish before the timeout period ends, complete the lifecycle action
 // using CompleteLifecycleAction.
@@ -1249,10 +1301,10 @@ func (s MetricGranularityType) String() string {
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 //
-// You can create a mixed instances policy for a new Auto Scaling group (CreateAutoScalingGroup),
-// or you can create it for an existing group by updating the group (UpdateAutoScalingGroup)
-// to specify MixedInstancesPolicy as the top-level parameter instead of a launch
-// configuration or template.
+// You can create a mixed instances policy for a new Auto Scaling group, or
+// you can create it for an existing group by updating the group to specify
+// MixedInstancesPolicy as the top-level parameter instead of a launch configuration
+// or template. For more information, see CreateAutoScalingGroup and UpdateAutoScalingGroup.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/MixedInstancesPolicy
 type MixedInstancesPolicy struct {
 	_ struct{} `type:"structure"`
@@ -1513,7 +1565,7 @@ type ScheduledUpdateGroupAction struct {
 	// The date and time in UTC for this action to start. For example, "2019-06-01T00:00:00Z".
 	StartTime *time.Time `type:"timestamp"`
 
-	// This parameter is deprecated.
+	// This parameter is no longer used.
 	Time *time.Time `type:"timestamp"`
 }
 

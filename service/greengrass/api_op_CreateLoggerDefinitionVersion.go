@@ -4,6 +4,7 @@ package greengrass
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -33,6 +34,13 @@ func (s *CreateLoggerDefinitionVersionInput) Validate() error {
 
 	if s.LoggerDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoggerDefinitionId"))
+	}
+	if s.Loggers != nil {
+		for i, v := range s.Loggers {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Loggers", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

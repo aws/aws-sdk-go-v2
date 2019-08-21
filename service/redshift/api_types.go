@@ -225,6 +225,18 @@ type Cluster struct {
 	// Default: false
 	EnhancedVpcRouting *bool `type:"boolean"`
 
+	// The date and time when the next snapshot is expected to be taken for clusters
+	// with a valid snapshot schedule and backups enabled.
+	ExpectedNextSnapshotScheduleTime *time.Time `type:"timestamp"`
+
+	// The status of next expected snapshot for clusters having a valid snapshot
+	// schedule and backups enabled. Possible values are the following:
+	//
+	//    * OnTrack - The next snapshot is expected to be taken on time.
+	//
+	//    * Pending - The next snapshot is pending to be taken.
+	ExpectedNextSnapshotScheduleTimeStatus *string `type:"string"`
+
 	// A value that reports whether the Amazon Redshift cluster has finished applying
 	// any hardware security module (HSM) settings changes specified in a modify
 	// cluster command.

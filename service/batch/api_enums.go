@@ -91,6 +91,24 @@ func (enum CRType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type DeviceCgroupPermission string
+
+// Enum values for DeviceCgroupPermission
+const (
+	DeviceCgroupPermissionRead  DeviceCgroupPermission = "READ"
+	DeviceCgroupPermissionWrite DeviceCgroupPermission = "WRITE"
+	DeviceCgroupPermissionMknod DeviceCgroupPermission = "MKNOD"
+)
+
+func (enum DeviceCgroupPermission) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeviceCgroupPermission) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type JQState string
 
 // Enum values for JQState

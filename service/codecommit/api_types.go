@@ -39,6 +39,27 @@ func (s BatchDescribeMergeConflictsError) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Returns information about errors in a BatchGetCommits operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetCommitsError
+type BatchGetCommitsError struct {
+	_ struct{} `type:"structure"`
+
+	// A commit ID that either could not be found or was not in a valid format.
+	CommitId *string `locationName:"commitId" type:"string"`
+
+	// An error code that specifies whether the commit ID was not valid or not found.
+	ErrorCode *string `locationName:"errorCode" type:"string"`
+
+	// An error message that provides detail about why the commit ID either was
+	// not found or was not valid.
+	ErrorMessage *string `locationName:"errorMessage" type:"string"`
+}
+
+// String returns the string representation
+func (s BatchGetCommitsError) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Returns information about a specific Git blob object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BlobMetadata
 type BlobMetadata struct {
@@ -1051,7 +1072,8 @@ type RepositoryTrigger struct {
 	// The branches that will be included in the trigger configuration. If you specify
 	// an empty array, the trigger will apply to all branches.
 	//
-	// While no content is required in the array, you must include the array itself.
+	// Although no content is required in the array, you must include the array
+	// itself.
 	Branches []string `locationName:"branches" type:"list"`
 
 	// Any custom data associated with the trigger that will be included in the
@@ -1059,14 +1081,13 @@ type RepositoryTrigger struct {
 	CustomData *string `locationName:"customData" type:"string"`
 
 	// The ARN of the resource that is the target for a trigger. For example, the
-	// ARN of a topic in Amazon Simple Notification Service (SNS).
+	// ARN of a topic in Amazon SNS.
 	//
 	// DestinationArn is a required field
 	DestinationArn *string `locationName:"destinationArn" type:"string" required:"true"`
 
 	// The repository events that will cause the trigger to run actions in another
-	// service, such as sending a notification through Amazon Simple Notification
-	// Service (SNS).
+	// service, such as sending a notification through Amazon SNS.
 	//
 	// The valid value "all" cannot be used with any other values.
 	//

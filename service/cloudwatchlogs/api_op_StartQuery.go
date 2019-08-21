@@ -26,8 +26,15 @@ type StartQueryInput struct {
 
 	// The log group on which to perform the query.
 	//
-	// LogGroupName is a required field
-	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
+	// A StartQuery operation must include a logGroupNames or a logGroupName parameter,
+	// but not both.
+	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string"`
+
+	// The list of log groups to be queried. You can include up to 20 log groups.
+	//
+	// A StartQuery operation must include a logGroupNames or a logGroupName parameter,
+	// but not both.
+	LogGroupNames []string `locationName:"logGroupNames" type:"list"`
 
 	// The query string to use. For more information, see CloudWatch Logs Insights
 	// Query Syntax (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html).
@@ -57,10 +64,6 @@ func (s *StartQueryInput) Validate() error {
 	}
 	if s.Limit != nil && *s.Limit < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
-	}
-
-	if s.LogGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))

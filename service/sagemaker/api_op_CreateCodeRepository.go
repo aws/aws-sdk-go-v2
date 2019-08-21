@@ -84,7 +84,7 @@ const opCreateCodeRepository = "CreateCodeRepository"
 // more than one notebook instance, and it persists independently from the lifecycle
 // of any notebook instances it is associated with.
 //
-// The repository can be hosted either in AWS CodeCommit (http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+// The repository can be hosted either in AWS CodeCommit (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
 // or in any other Git repository.
 //
 //    // Example sending a request using CreateCodeRepositoryRequest.

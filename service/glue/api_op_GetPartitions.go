@@ -14,7 +14,7 @@ type GetPartitionsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the Data Catalog where the partitions in question reside. If none
-	// is supplied, the AWS account ID is used by default.
+	// is provided, the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 
 	// The name of the catalog database where the partitions reside.
@@ -22,7 +22,7 @@ type GetPartitionsInput struct {
 	// DatabaseName is a required field
 	DatabaseName *string `min:"1" type:"string" required:"true"`
 
-	// An expression filtering the partitions to be returned.
+	// An expression that filters the partitions to be returned.
 	//
 	// The expression uses SQL syntax similar to the SQL WHERE filter clause. The
 	// SQL statement parser JSQLParser (http://jsqlparser.sourceforge.net/home.php)
@@ -33,7 +33,7 @@ type GetPartitionsInput struct {
 	//
 	// =
 	//
-	// Checks if the values of the two operands are equal or not; if yes, then the
+	// Checks whether the values of the two operands are equal; if yes, then the
 	// condition becomes true.
 	//
 	// Example: Assume 'variable a' holds 10 and 'variable b' holds 20.
@@ -42,36 +42,36 @@ type GetPartitionsInput struct {
 	//
 	// < >
 	//
-	// Checks if the values of two operands are equal or not; if the values are
-	// not equal, then the condition becomes true.
+	// Checks whether the values of two operands are equal; if the values are not
+	// equal, then the condition becomes true.
 	//
 	// Example: (a < > b) is true.
 	//
 	// >
 	//
-	// Checks if the value of the left operand is greater than the value of the
-	// right operand; if yes, then the condition becomes true.
+	// Checks whether the value of the left operand is greater than the value of
+	// the right operand; if yes, then the condition becomes true.
 	//
 	// Example: (a > b) is not true.
 	//
 	// <
 	//
-	// Checks if the value of the left operand is less than the value of the right
-	// operand; if yes, then the condition becomes true.
+	// Checks whether the value of the left operand is less than the value of the
+	// right operand; if yes, then the condition becomes true.
 	//
 	// Example: (a < b) is true.
 	//
 	// >=
 	//
-	// Checks if the value of the left operand is greater than or equal to the value
-	// of the right operand; if yes, then the condition becomes true.
+	// Checks whether the value of the left operand is greater than or equal to
+	// the value of the right operand; if yes, then the condition becomes true.
 	//
 	// Example: (a >= b) is not true.
 	//
 	// <=
 	//
-	// Checks if the value of the left operand is less than or equal to the value
-	// of the right operand; if yes, then the condition becomes true.
+	// Checks whether the value of the left operand is less than or equal to the
+	// value of the right operand; if yes, then the condition becomes true.
 	//
 	// Example: (a <= b) is true.
 	//
@@ -79,7 +79,7 @@ type GetPartitionsInput struct {
 	//
 	// Logical operators.
 	//
-	// Supported Partition Key Types: The following are the the supported partition
+	// Supported Partition Key Types: The following are the supported partition
 	// keys.
 	//
 	//    * string
@@ -168,8 +168,8 @@ func (s *GetPartitionsInput) Validate() error {
 type GetPartitionsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A continuation token, if the returned list of partitions does not does not
-	// include the last one.
+	// A continuation token, if the returned list of partitions does not include
+	// the last one.
 	NextToken *string `type:"string"`
 
 	// A list of requested partitions.

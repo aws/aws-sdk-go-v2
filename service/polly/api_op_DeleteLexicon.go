@@ -76,7 +76,7 @@ const opDeleteLexicon = "DeleteLexicon"
 // which has been deleted is not available for speech synthesis, nor is it possible
 // to retrieve it using either the GetLexicon or ListLexicon APIs.
 //
-// For more information, see Managing Lexicons (http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
+// For more information, see Managing Lexicons (https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
 //
 //    // Example sending a request using DeleteLexiconRequest.
 //    req := client.DeleteLexiconRequest(params)

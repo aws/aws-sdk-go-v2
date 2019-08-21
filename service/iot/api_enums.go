@@ -113,6 +113,46 @@ func (enum AuditFrequency) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type AuditMitigationActionsExecutionStatus string
+
+// Enum values for AuditMitigationActionsExecutionStatus
+const (
+	AuditMitigationActionsExecutionStatusInProgress AuditMitigationActionsExecutionStatus = "IN_PROGRESS"
+	AuditMitigationActionsExecutionStatusCompleted  AuditMitigationActionsExecutionStatus = "COMPLETED"
+	AuditMitigationActionsExecutionStatusFailed     AuditMitigationActionsExecutionStatus = "FAILED"
+	AuditMitigationActionsExecutionStatusCanceled   AuditMitigationActionsExecutionStatus = "CANCELED"
+	AuditMitigationActionsExecutionStatusSkipped    AuditMitigationActionsExecutionStatus = "SKIPPED"
+	AuditMitigationActionsExecutionStatusPending    AuditMitigationActionsExecutionStatus = "PENDING"
+)
+
+func (enum AuditMitigationActionsExecutionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AuditMitigationActionsExecutionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AuditMitigationActionsTaskStatus string
+
+// Enum values for AuditMitigationActionsTaskStatus
+const (
+	AuditMitigationActionsTaskStatusInProgress AuditMitigationActionsTaskStatus = "IN_PROGRESS"
+	AuditMitigationActionsTaskStatusCompleted  AuditMitigationActionsTaskStatus = "COMPLETED"
+	AuditMitigationActionsTaskStatusFailed     AuditMitigationActionsTaskStatus = "FAILED"
+	AuditMitigationActionsTaskStatusCanceled   AuditMitigationActionsTaskStatus = "CANCELED"
+)
+
+func (enum AuditMitigationActionsTaskStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AuditMitigationActionsTaskStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AuditNotificationType string
 
 // Enum values for AuditNotificationType
@@ -234,6 +274,22 @@ func (enum CACertificateStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type CACertificateUpdateAction string
+
+// Enum values for CACertificateUpdateAction
+const (
+	CACertificateUpdateActionDeactivate CACertificateUpdateAction = "DEACTIVATE"
+)
+
+func (enum CACertificateUpdateAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CACertificateUpdateAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CannedAccessControlList string
 
 // Enum values for CannedAccessControlList
@@ -319,6 +375,22 @@ func (enum DayOfWeek) MarshalValue() (string, error) {
 }
 
 func (enum DayOfWeek) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DeviceCertificateUpdateAction string
+
+// Enum values for DeviceCertificateUpdateAction
+const (
+	DeviceCertificateUpdateActionDeactivate DeviceCertificateUpdateAction = "DEACTIVATE"
+)
+
+func (enum DeviceCertificateUpdateAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeviceCertificateUpdateAction) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -517,6 +589,27 @@ func (enum MessageFormat) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type MitigationActionType string
+
+// Enum values for MitigationActionType
+const (
+	MitigationActionTypeUpdateDeviceCertificate     MitigationActionType = "UPDATE_DEVICE_CERTIFICATE"
+	MitigationActionTypeUpdateCaCertificate         MitigationActionType = "UPDATE_CA_CERTIFICATE"
+	MitigationActionTypeAddThingsToThingGroup       MitigationActionType = "ADD_THINGS_TO_THING_GROUP"
+	MitigationActionTypeReplaceDefaultPolicyVersion MitigationActionType = "REPLACE_DEFAULT_POLICY_VERSION"
+	MitigationActionTypeEnableIotLogging            MitigationActionType = "ENABLE_IOT_LOGGING"
+	MitigationActionTypePublishFindingToSns         MitigationActionType = "PUBLISH_FINDING_TO_SNS"
+)
+
+func (enum MitigationActionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MitigationActionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OTAUpdateStatus string
 
 // Enum values for OTAUpdateStatus
@@ -532,6 +625,22 @@ func (enum OTAUpdateStatus) MarshalValue() (string, error) {
 }
 
 func (enum OTAUpdateStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type PolicyTemplateName string
+
+// Enum values for PolicyTemplateName
+const (
+	PolicyTemplateNameBlankPolicy PolicyTemplateName = "BLANK_POLICY"
+)
+
+func (enum PolicyTemplateName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PolicyTemplateName) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

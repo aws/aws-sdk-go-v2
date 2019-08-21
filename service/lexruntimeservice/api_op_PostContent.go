@@ -27,9 +27,13 @@ type PostContentInput struct {
 	//    * If the value begins with audio/, Amazon Lex returns speech in the response.
 	//    Amazon Lex uses Amazon Polly to generate the speech (using the configuration
 	//    you specified in the Accept header). For example, if you specify audio/mpeg
-	//    as the value, Amazon Lex returns speech in the MPEG format. The following
-	//    are the accepted values: audio/mpeg audio/ogg audio/pcm text/plain; charset=utf-8
-	//    audio/* (defaults to mpeg)
+	//    as the value, Amazon Lex returns speech in the MPEG format.
+	//
+	//    * If the value is audio/pcm, the speech returned is audio/pcm in 16-bit,
+	//    little endian format.
+	//
+	//    * The following are the accepted values: audio/mpeg audio/ogg audio/pcm
+	//    text/plain; charset=utf-8 audio/* (defaults to mpeg)
 	Accept *string `location:"header" locationName:"Accept" type:"string"`
 
 	// Alias of the Amazon Lex bot.
@@ -79,7 +83,7 @@ type PostContentInput struct {
 	// The namespace x-amz-lex: is reserved for special attributes. Don't create
 	// any request attributes with the prefix x-amz-lex:.
 	//
-	// For more information, see Setting Request Attributes (http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs).
+	// For more information, see Setting Request Attributes (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs).
 	RequestAttributes aws.JSONValue `location:"header" locationName:"x-amz-lex-request-attributes" type:"jsonvalue"`
 
 	// You pass this value as the x-amz-lex-session-attributes HTTP header.
@@ -89,7 +93,7 @@ type PostContentInput struct {
 	// and values. The total size of the sessionAttributes and requestAttributes
 	// headers is limited to 12 KB.
 	//
-	// For more information, see Setting Session Attributes (http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs).
+	// For more information, see Setting Session Attributes (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs).
 	SessionAttributes aws.JSONValue `location:"header" locationName:"x-amz-lex-session-attributes" type:"jsonvalue"`
 
 	// The ID of the client application user. Amazon Lex uses this to identify a
@@ -279,7 +283,7 @@ type PostContentOutput struct {
 	// or from a Lambda function.
 	//
 	// If the intent is not configured with a Lambda function, or if the Lambda
-	// function returned Delegate as the dialogAction.type its response, Amazon
+	// function returned Delegate as the dialogAction.type in its response, Amazon
 	// Lex decides on the next course of action and selects an appropriate message
 	// from the bot's configuration based on the current interaction context. For
 	// example, if Amazon Lex isn't able to understand user input, it uses a clarification
@@ -316,7 +320,7 @@ type PostContentOutput struct {
 	SlotToElicit *string `location:"header" locationName:"x-amz-lex-slot-to-elicit" type:"string"`
 
 	// Map of zero or more intent slots (name/value pairs) Amazon Lex detected from
-	// the user input during the conversation.
+	// the user input during the conversation. The field is base-64 encoded.
 	//
 	// Amazon Lex creates a resolution list containing likely values for a slot.
 	// The value that it returns is determined by the valueSelectionStrategy selected
@@ -445,7 +449,7 @@ const opPostContent = "PostContent"
 //    header is set to ElicitIntent and the x-amz-slot-to-elicit header is omitted.
 //
 // In addition, Amazon Lex also returns your application-specific sessionAttributes.
-// For more information, see Managing Conversation Context (http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html).
+// For more information, see Managing Conversation Context (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html).
 //
 //    // Example sending a request using PostContentRequest.
 //    req := client.PostContentRequest(params)

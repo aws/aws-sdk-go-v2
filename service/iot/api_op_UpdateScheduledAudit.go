@@ -20,13 +20,13 @@ type UpdateScheduledAuditInput struct {
 	DayOfMonth *string `locationName:"dayOfMonth" type:"string"`
 
 	// The day of the week on which the scheduled audit takes place. Can be one
-	// of "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT". This field is required
+	// of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT". This field is required
 	// if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".
 	DayOfWeek DayOfWeek `locationName:"dayOfWeek" type:"string" enum:"true"`
 
 	// How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY",
-	// "BIWEEKLY" or "MONTHLY". The actual start time of each audit is determined
-	// by the system.
+	// "BIWEEKLY", or "MONTHLY". The start time of each audit is determined by the
+	// system.
 	Frequency AuditFrequency `locationName:"frequency" type:"string" enum:"true"`
 
 	// The name of the scheduled audit. (Max. 128 chars)
@@ -36,7 +36,7 @@ type UpdateScheduledAuditInput struct {
 
 	// Which checks are performed during the scheduled audit. Checks must be enabled
 	// for your account. (Use DescribeAccountAuditConfiguration to see the list
-	// of all checks including those that are enabled or UpdateAccountAuditConfiguration
+	// of all checks, including those that are enabled or use UpdateAccountAuditConfiguration
 	// to select which checks are enabled.)
 	TargetCheckNames []string `locationName:"targetCheckNames" type:"list"`
 }
@@ -134,7 +134,7 @@ const opUpdateScheduledAudit = "UpdateScheduledAudit"
 // UpdateScheduledAuditRequest returns a request value for making API operation for
 // AWS IoT.
 //
-// Updates a scheduled audit, including what checks are performed and how often
+// Updates a scheduled audit, including which checks are performed and how often
 // the audit takes place.
 //
 //    // Example sending a request using UpdateScheduledAuditRequest.

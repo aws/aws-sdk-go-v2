@@ -293,6 +293,40 @@ func (enum EndpointStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type FileSystemAccessMode string
+
+// Enum values for FileSystemAccessMode
+const (
+	FileSystemAccessModeRw FileSystemAccessMode = "rw"
+	FileSystemAccessModeRo FileSystemAccessMode = "ro"
+)
+
+func (enum FileSystemAccessMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FileSystemAccessMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type FileSystemType string
+
+// Enum values for FileSystemType
+const (
+	FileSystemTypeEfs       FileSystemType = "EFS"
+	FileSystemTypeFsxLustre FileSystemType = "FSxLustre"
+)
+
+func (enum FileSystemType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FileSystemType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Framework string
 
 // Enum values for Framework
@@ -987,6 +1021,8 @@ const (
 	SecondaryStatusMaxRuntimeExceeded       SecondaryStatus = "MaxRuntimeExceeded"
 	SecondaryStatusCompleted                SecondaryStatus = "Completed"
 	SecondaryStatusFailed                   SecondaryStatus = "Failed"
+	SecondaryStatusInterrupted              SecondaryStatus = "Interrupted"
+	SecondaryStatusMaxWaitTimeExceeded      SecondaryStatus = "MaxWaitTimeExceeded"
 )
 
 func (enum SecondaryStatus) MarshalValue() (string, error) {
@@ -1070,7 +1106,10 @@ const (
 	TargetDeviceDeeplens   TargetDevice = "deeplens"
 	TargetDeviceRk3399     TargetDevice = "rk3399"
 	TargetDeviceRk3288     TargetDevice = "rk3288"
+	TargetDeviceAisage     TargetDevice = "aisage"
 	TargetDeviceSbeC       TargetDevice = "sbe_c"
+	TargetDeviceQcs605     TargetDevice = "qcs605"
+	TargetDeviceQcs603     TargetDevice = "qcs603"
 )
 
 func (enum TargetDevice) MarshalValue() (string, error) {
@@ -1103,32 +1142,33 @@ type TrainingInstanceType string
 
 // Enum values for TrainingInstanceType
 const (
-	TrainingInstanceTypeMlM4Xlarge   TrainingInstanceType = "ml.m4.xlarge"
-	TrainingInstanceTypeMlM42xlarge  TrainingInstanceType = "ml.m4.2xlarge"
-	TrainingInstanceTypeMlM44xlarge  TrainingInstanceType = "ml.m4.4xlarge"
-	TrainingInstanceTypeMlM410xlarge TrainingInstanceType = "ml.m4.10xlarge"
-	TrainingInstanceTypeMlM416xlarge TrainingInstanceType = "ml.m4.16xlarge"
-	TrainingInstanceTypeMlM5Large    TrainingInstanceType = "ml.m5.large"
-	TrainingInstanceTypeMlM5Xlarge   TrainingInstanceType = "ml.m5.xlarge"
-	TrainingInstanceTypeMlM52xlarge  TrainingInstanceType = "ml.m5.2xlarge"
-	TrainingInstanceTypeMlM54xlarge  TrainingInstanceType = "ml.m5.4xlarge"
-	TrainingInstanceTypeMlM512xlarge TrainingInstanceType = "ml.m5.12xlarge"
-	TrainingInstanceTypeMlM524xlarge TrainingInstanceType = "ml.m5.24xlarge"
-	TrainingInstanceTypeMlC4Xlarge   TrainingInstanceType = "ml.c4.xlarge"
-	TrainingInstanceTypeMlC42xlarge  TrainingInstanceType = "ml.c4.2xlarge"
-	TrainingInstanceTypeMlC44xlarge  TrainingInstanceType = "ml.c4.4xlarge"
-	TrainingInstanceTypeMlC48xlarge  TrainingInstanceType = "ml.c4.8xlarge"
-	TrainingInstanceTypeMlP2Xlarge   TrainingInstanceType = "ml.p2.xlarge"
-	TrainingInstanceTypeMlP28xlarge  TrainingInstanceType = "ml.p2.8xlarge"
-	TrainingInstanceTypeMlP216xlarge TrainingInstanceType = "ml.p2.16xlarge"
-	TrainingInstanceTypeMlP32xlarge  TrainingInstanceType = "ml.p3.2xlarge"
-	TrainingInstanceTypeMlP38xlarge  TrainingInstanceType = "ml.p3.8xlarge"
-	TrainingInstanceTypeMlP316xlarge TrainingInstanceType = "ml.p3.16xlarge"
-	TrainingInstanceTypeMlC5Xlarge   TrainingInstanceType = "ml.c5.xlarge"
-	TrainingInstanceTypeMlC52xlarge  TrainingInstanceType = "ml.c5.2xlarge"
-	TrainingInstanceTypeMlC54xlarge  TrainingInstanceType = "ml.c5.4xlarge"
-	TrainingInstanceTypeMlC59xlarge  TrainingInstanceType = "ml.c5.9xlarge"
-	TrainingInstanceTypeMlC518xlarge TrainingInstanceType = "ml.c5.18xlarge"
+	TrainingInstanceTypeMlM4Xlarge     TrainingInstanceType = "ml.m4.xlarge"
+	TrainingInstanceTypeMlM42xlarge    TrainingInstanceType = "ml.m4.2xlarge"
+	TrainingInstanceTypeMlM44xlarge    TrainingInstanceType = "ml.m4.4xlarge"
+	TrainingInstanceTypeMlM410xlarge   TrainingInstanceType = "ml.m4.10xlarge"
+	TrainingInstanceTypeMlM416xlarge   TrainingInstanceType = "ml.m4.16xlarge"
+	TrainingInstanceTypeMlM5Large      TrainingInstanceType = "ml.m5.large"
+	TrainingInstanceTypeMlM5Xlarge     TrainingInstanceType = "ml.m5.xlarge"
+	TrainingInstanceTypeMlM52xlarge    TrainingInstanceType = "ml.m5.2xlarge"
+	TrainingInstanceTypeMlM54xlarge    TrainingInstanceType = "ml.m5.4xlarge"
+	TrainingInstanceTypeMlM512xlarge   TrainingInstanceType = "ml.m5.12xlarge"
+	TrainingInstanceTypeMlM524xlarge   TrainingInstanceType = "ml.m5.24xlarge"
+	TrainingInstanceTypeMlC4Xlarge     TrainingInstanceType = "ml.c4.xlarge"
+	TrainingInstanceTypeMlC42xlarge    TrainingInstanceType = "ml.c4.2xlarge"
+	TrainingInstanceTypeMlC44xlarge    TrainingInstanceType = "ml.c4.4xlarge"
+	TrainingInstanceTypeMlC48xlarge    TrainingInstanceType = "ml.c4.8xlarge"
+	TrainingInstanceTypeMlP2Xlarge     TrainingInstanceType = "ml.p2.xlarge"
+	TrainingInstanceTypeMlP28xlarge    TrainingInstanceType = "ml.p2.8xlarge"
+	TrainingInstanceTypeMlP216xlarge   TrainingInstanceType = "ml.p2.16xlarge"
+	TrainingInstanceTypeMlP32xlarge    TrainingInstanceType = "ml.p3.2xlarge"
+	TrainingInstanceTypeMlP38xlarge    TrainingInstanceType = "ml.p3.8xlarge"
+	TrainingInstanceTypeMlP316xlarge   TrainingInstanceType = "ml.p3.16xlarge"
+	TrainingInstanceTypeMlC5Xlarge     TrainingInstanceType = "ml.c5.xlarge"
+	TrainingInstanceTypeMlC52xlarge    TrainingInstanceType = "ml.c5.2xlarge"
+	TrainingInstanceTypeMlC54xlarge    TrainingInstanceType = "ml.c5.4xlarge"
+	TrainingInstanceTypeMlC59xlarge    TrainingInstanceType = "ml.c5.9xlarge"
+	TrainingInstanceTypeMlC518xlarge   TrainingInstanceType = "ml.c5.18xlarge"
+	TrainingInstanceTypeMlP3dn24xlarge TrainingInstanceType = "ml.p3dn.24xlarge"
 )
 
 func (enum TrainingInstanceType) MarshalValue() (string, error) {

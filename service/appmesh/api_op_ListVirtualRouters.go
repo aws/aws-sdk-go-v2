@@ -14,24 +14,11 @@ import (
 type ListVirtualRoutersInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of results returned by ListVirtualRouters in paginated
-	// output. When you use this parameter, ListVirtualRouters returns only limit
-	// results in a single page along with a nextToken response element. You can
-	// see the remaining results of the initial request by sending another ListVirtualRouters
-	// request with the returned nextToken value. This value can be between 1 and
-	// 100. If you don't use this parameter, ListVirtualRouters returns up to 100
-	// results and a nextToken value if applicable.
 	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
 
-	// The name of the service mesh to list virtual routers in.
-	//
 	// MeshName is a required field
 	MeshName *string `location:"uri" locationName:"meshName" min:"1" type:"string" required:"true"`
 
-	// The nextToken value returned from a previous paginated ListVirtualRouters
-	// request where limit was used and the results exceeded the value of that parameter.
-	// Pagination continues from the end of the previous results that returned the
-	// nextToken value.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
@@ -89,14 +76,8 @@ func (s ListVirtualRoutersInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListVirtualRoutersOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The nextToken value to include in a future ListVirtualRouters request. When
-	// the results of a ListVirtualRouters request exceed limit, you can use this
-	// value to retrieve the next page of results. This value is null when there
-	// are no more results to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
-	// The list of existing virtual routers for the specified service mesh.
-	//
 	// VirtualRouters is a required field
 	VirtualRouters []VirtualRouterRef `locationName:"virtualRouters" type:"list" required:"true"`
 }

@@ -75,12 +75,12 @@ const opDeleteService = "DeleteService"
 // When you delete a service, if there are still running tasks that require
 // cleanup, the service status moves from ACTIVE to DRAINING, and the service
 // is no longer visible in the console or in the ListServices API operation.
-// After the tasks have stopped, then the service status moves from DRAINING
-// to INACTIVE. Services in the DRAINING or INACTIVE status can still be viewed
-// with the DescribeServices API operation. However, in the future, INACTIVE
-// services may be cleaned up and purged from Amazon ECS record keeping, and
-// DescribeServices calls on those services return a ServiceNotFoundException
-// error.
+// After all tasks have transitioned to either STOPPING or STOPPED status, the
+// service status moves from DRAINING to INACTIVE. Services in the DRAINING
+// or INACTIVE status can still be viewed with the DescribeServices API operation.
+// However, in the future, INACTIVE services may be cleaned up and purged from
+// Amazon ECS record keeping, and DescribeServices calls on those services return
+// a ServiceNotFoundException error.
 //
 // If you attempt to create a new service with the same name as an existing
 // service in either ACTIVE or DRAINING status, you receive an error.

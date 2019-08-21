@@ -66,10 +66,6 @@ const opDeleteDeviceUsageData = "DeleteDeviceUsageData"
 // and associated response data. This action can be called once every 24 hours
 // for a specific shared device.
 //
-// When this action is called for a specified shared device, it allows authorized
-// users to delete the device's entire previous history of voice input data.
-// This action can be called once every 24 hours for a specific shared device.
-//
 //    // Example sending a request using DeleteDeviceUsageDataRequest.
 //    req := client.DeleteDeviceUsageDataRequest(params)
 //    resp, err := req.Send(context.TODO())

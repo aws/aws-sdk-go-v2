@@ -25,9 +25,7 @@ type UpdateSimulationApplicationInput struct {
 	CurrentRevisionId *string `locationName:"currentRevisionId" min:"1" type:"string"`
 
 	// The rendering engine for the simulation application.
-	//
-	// RenderingEngine is a required field
-	RenderingEngine *RenderingEngine `locationName:"renderingEngine" type:"structure" required:"true"`
+	RenderingEngine *RenderingEngine `locationName:"renderingEngine" type:"structure"`
 
 	// Information about the robot software suite.
 	//
@@ -62,10 +60,6 @@ func (s *UpdateSimulationApplicationInput) Validate() error {
 	}
 	if s.CurrentRevisionId != nil && len(*s.CurrentRevisionId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CurrentRevisionId", 1))
-	}
-
-	if s.RenderingEngine == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RenderingEngine"))
 	}
 
 	if s.RobotSoftwareSuite == nil {

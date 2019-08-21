@@ -13,22 +13,22 @@ import (
 type RegisterScalableTargetInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum value to scale to in response to a scale-out event. This parameter
+	// The maximum value to scale to in response to a scale-out event. MaxCapacity
 	// is required to register a scalable target.
 	MaxCapacity *int64 `type:"integer"`
 
-	// The minimum value to scale to in response to a scale-in event. This parameter
+	// The minimum value to scale to in response to a scale-in event. MinCapacity
 	// is required to register a scalable target.
 	MinCapacity *int64 `type:"integer"`
 
-	// The identifier of the resource associated with the scalable target. This
-	// string consists of the resource type and unique identifier.
+	// The identifier of the resource that is associated with the scalable target.
+	// This string consists of the resource type and unique identifier.
 	//
 	//    * ECS service - The resource type is service and the unique identifier
 	//    is the cluster name and service name. Example: service/default/sample-webapp.
 	//
-	//    * Spot fleet request - The resource type is spot-fleet-request and the
-	//    unique identifier is the Spot fleet request ID. Example: spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE.
+	//    * Spot Fleet request - The resource type is spot-fleet-request and the
+	//    unique identifier is the Spot Fleet request ID. Example: spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE.
 	//
 	//    * EMR cluster - The resource type is instancegroup and the unique identifier
 	//    is the cluster ID and instance group ID. Example: instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0.
@@ -61,7 +61,7 @@ type RegisterScalableTargetInput struct {
 	// Roles for Application Auto Scaling (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-service-linked-roles.html).
 	//
 	// For resources that are not supported using a service-linked role, this parameter
-	// is required and must specify the ARN of an IAM role that allows Application
+	// is required, and it must specify the ARN of an IAM role that allows Application
 	// Auto Scaling to modify the scalable target on your behalf.
 	RoleARN *string `min:"1" type:"string"`
 
@@ -71,7 +71,7 @@ type RegisterScalableTargetInput struct {
 	//    * ecs:service:DesiredCount - The desired task count of an ECS service.
 	//
 	//    * ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot
-	//    fleet request.
+	//    Fleet request.
 	//
 	//    * elasticmapreduce:instancegroup:InstanceCount - The instance count of
 	//    an EMR Instance Group.
@@ -106,7 +106,7 @@ type RegisterScalableTargetInput struct {
 
 	// The namespace of the AWS service that provides the resource or custom-resource
 	// for a resource provided by your own application or service. For more information,
-	// see AWS Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
+	// see AWS Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
 	// in the Amazon Web Services General Reference.
 	//
 	// ServiceNamespace is a required field
@@ -160,16 +160,25 @@ const opRegisterScalableTarget = "RegisterScalableTarget"
 // Application Auto Scaling.
 //
 // Registers or updates a scalable target. A scalable target is a resource that
-// Application Auto Scaling can scale out and scale in. Each scalable target
-// has a resource ID, scalable dimension, and namespace, as well as values for
-// minimum and maximum capacity.
+// Application Auto Scaling can scale out and scale in. Scalable targets are
+// uniquely identified by the combination of resource ID, scalable dimension,
+// and namespace.
+//
+// When you register a new scalable target, you must specify values for minimum
+// and maximum capacity. Application Auto Scaling will not scale capacity to
+// values that are outside of this range.
+//
+// To update a scalable target, specify the parameter that you want to change
+// as well as the following parameters that identify the scalable target: resource
+// ID, scalable dimension, and namespace. Any parameters that you don't specify
+// are not changed by this update request.
 //
 // After you register a scalable target, you do not need to register it again
 // to use other Application Auto Scaling operations. To see which resources
 // have been registered, use DescribeScalableTargets. You can also view the
-// scaling policies for a service namespace using DescribeScalableTargets.
+// scaling policies for a service namespace by using DescribeScalableTargets.
 //
-// If you no longer need a scalable target, you can deregister it using DeregisterScalableTarget.
+// If you no longer need a scalable target, you can deregister it by using DeregisterScalableTarget.
 //
 //    // Example sending a request using RegisterScalableTargetRequest.
 //    req := client.RegisterScalableTargetRequest(params)

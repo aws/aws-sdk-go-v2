@@ -63,11 +63,11 @@ type DescribeScheduledAuditOutput struct {
 	DayOfMonth *string `locationName:"dayOfMonth" type:"string"`
 
 	// The day of the week on which the scheduled audit takes place. One of "SUN",
-	// "MON", "TUE", "WED", "THU", "FRI" or "SAT".
+	// "MON", "TUE", "WED", "THU", "FRI", or "SAT".
 	DayOfWeek DayOfWeek `locationName:"dayOfWeek" type:"string" enum:"true"`
 
-	// How often the scheduled audit takes place. One of "DAILY", "WEEKLY", "BIWEEKLY"
-	// or "MONTHLY". The actual start time of each audit is determined by the system.
+	// How often the scheduled audit takes place. One of "DAILY", "WEEKLY", "BIWEEKLY",
+	// or "MONTHLY". The start time of each audit is determined by the system.
 	Frequency AuditFrequency `locationName:"frequency" type:"string" enum:"true"`
 
 	// The ARN of the scheduled audit.
@@ -76,9 +76,9 @@ type DescribeScheduledAuditOutput struct {
 	// The name of the scheduled audit.
 	ScheduledAuditName *string `locationName:"scheduledAuditName" min:"1" type:"string"`
 
-	// Which checks are performed during the scheduled audit. (Note that checks
-	// must be enabled for your account. (Use DescribeAccountAuditConfiguration
-	// to see the list of all checks including those that are enabled or UpdateAccountAuditConfiguration
+	// Which checks are performed during the scheduled audit. Checks must be enabled
+	// for your account. (Use DescribeAccountAuditConfiguration to see the list
+	// of all checks, including those that are enabled or use UpdateAccountAuditConfiguration
 	// to select which checks are enabled.)
 	TargetCheckNames []string `locationName:"targetCheckNames" type:"list"`
 }

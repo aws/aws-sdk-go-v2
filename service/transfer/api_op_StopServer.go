@@ -61,7 +61,7 @@ const opStopServer = "StopServer"
 // Stopping a server will not reduce or impact your Secure File Transfer Protocol
 // (SFTP) endpoint billing.
 //
-// The states of STOPPING indicates that the server is in an intermediate state,
+// The state of STOPPING indicates that the server is in an intermediate state,
 // either not fully able to respond, or not fully offline. The values of STOP_FAILED
 // can indicate an error condition.
 //

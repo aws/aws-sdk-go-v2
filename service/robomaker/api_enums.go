@@ -191,6 +191,7 @@ const (
 	SimulationJobErrorCodeSimulationApplicationCrash                 SimulationJobErrorCode = "SimulationApplicationCrash"
 	SimulationJobErrorCodeBadPermissionsRobotApplication             SimulationJobErrorCode = "BadPermissionsRobotApplication"
 	SimulationJobErrorCodeBadPermissionsSimulationApplication        SimulationJobErrorCode = "BadPermissionsSimulationApplication"
+	SimulationJobErrorCodeBadPermissionsS3object                     SimulationJobErrorCode = "BadPermissionsS3Object"
 	SimulationJobErrorCodeBadPermissionsS3output                     SimulationJobErrorCode = "BadPermissionsS3Output"
 	SimulationJobErrorCodeBadPermissionsCloudwatchLogs               SimulationJobErrorCode = "BadPermissionsCloudwatchLogs"
 	SimulationJobErrorCodeSubnetIpLimitExceeded                      SimulationJobErrorCode = "SubnetIpLimitExceeded"
@@ -198,8 +199,13 @@ const (
 	SimulationJobErrorCodeBadPermissionsUserCredentials              SimulationJobErrorCode = "BadPermissionsUserCredentials"
 	SimulationJobErrorCodeInvalidBundleRobotApplication              SimulationJobErrorCode = "InvalidBundleRobotApplication"
 	SimulationJobErrorCodeInvalidBundleSimulationApplication         SimulationJobErrorCode = "InvalidBundleSimulationApplication"
+	SimulationJobErrorCodeInvalidS3resource                          SimulationJobErrorCode = "InvalidS3Resource"
+	SimulationJobErrorCodeMismatchedEtag                             SimulationJobErrorCode = "MismatchedEtag"
 	SimulationJobErrorCodeRobotApplicationVersionMismatchedEtag      SimulationJobErrorCode = "RobotApplicationVersionMismatchedEtag"
 	SimulationJobErrorCodeSimulationApplicationVersionMismatchedEtag SimulationJobErrorCode = "SimulationApplicationVersionMismatchedEtag"
+	SimulationJobErrorCodeResourceNotFound                           SimulationJobErrorCode = "ResourceNotFound"
+	SimulationJobErrorCodeInvalidInput                               SimulationJobErrorCode = "InvalidInput"
+	SimulationJobErrorCodeWrongRegionS3bucket                        SimulationJobErrorCode = "WrongRegionS3Bucket"
 	SimulationJobErrorCodeWrongRegionS3output                        SimulationJobErrorCode = "WrongRegionS3Output"
 	SimulationJobErrorCodeWrongRegionRobotApplication                SimulationJobErrorCode = "WrongRegionRobotApplication"
 	SimulationJobErrorCodeWrongRegionSimulationApplication           SimulationJobErrorCode = "WrongRegionSimulationApplication"
@@ -243,7 +249,8 @@ type SimulationSoftwareSuiteType string
 
 // Enum values for SimulationSoftwareSuiteType
 const (
-	SimulationSoftwareSuiteTypeGazebo SimulationSoftwareSuiteType = "Gazebo"
+	SimulationSoftwareSuiteTypeGazebo     SimulationSoftwareSuiteType = "Gazebo"
+	SimulationSoftwareSuiteTypeRosbagPlay SimulationSoftwareSuiteType = "RosbagPlay"
 )
 
 func (enum SimulationSoftwareSuiteType) MarshalValue() (string, error) {

@@ -4,6 +4,7 @@ package greengrass
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -37,6 +38,13 @@ func (s *CreateFunctionDefinitionVersionInput) Validate() error {
 
 	if s.FunctionDefinitionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionDefinitionId"))
+	}
+	if s.Functions != nil {
+		for i, v := range s.Functions {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Functions", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

@@ -165,6 +165,83 @@ func (s AutoScalingPolicyStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
+// A configuration for Amazon EMR block public access. When BlockPublicSecurityGroupRules
+// is set to true, Amazon EMR prevents cluster creation if one of the cluster's
+// security groups has a rule that allows inbound traffic from 0.0.0.0/0 or
+// ::/0 on a port, unless the port is specified as an exception using PermittedPublicSecurityGroupRuleRanges.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/BlockPublicAccessConfiguration
+type BlockPublicAccessConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates whether EMR block public access is enabled (true) or disabled (false).
+	// By default, the value is false for accounts that have created EMR clusters
+	// before July 2019. For accounts created after this, the default is true.
+	//
+	// BlockPublicSecurityGroupRules is a required field
+	BlockPublicSecurityGroupRules *bool `type:"boolean" required:"true"`
+
+	// Specifies ports and port ranges that are permitted to have security group
+	// rules that allow inbound traffic from all public sources. For example, if
+	// Port 23 (Telnet) is specified for PermittedPublicSecurityGroupRuleRanges,
+	// Amazon EMR allows cluster creation if a security group associated with the
+	// cluster has a rule that allows inbound traffic on Port 23 from IPv4 0.0.0.0/0
+	// or IPv6 port ::/0 as the source.
+	//
+	// By default, Port 22, which is used for SSH access to the cluster EC2 instances,
+	// is in the list of PermittedPublicSecurityGroupRuleRanges.
+	PermittedPublicSecurityGroupRuleRanges []PortRange `type:"list"`
+}
+
+// String returns the string representation
+func (s BlockPublicAccessConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BlockPublicAccessConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BlockPublicAccessConfiguration"}
+
+	if s.BlockPublicSecurityGroupRules == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BlockPublicSecurityGroupRules"))
+	}
+	if s.PermittedPublicSecurityGroupRuleRanges != nil {
+		for i, v := range s.PermittedPublicSecurityGroupRuleRanges {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PermittedPublicSecurityGroupRuleRanges", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Properties that describe the AWS principal that created the BlockPublicAccessConfiguration
+// using the PutBlockPublicAccessConfiguration action as well as the date and
+// time that the configuration was created. Each time a configuration for block
+// public access is updated, Amazon EMR updates this metadata.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/BlockPublicAccessConfigurationMetadata
+type BlockPublicAccessConfigurationMetadata struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name that created or last modified the configuration.
+	//
+	// CreatedByArn is a required field
+	CreatedByArn *string `min:"20" type:"string" required:"true"`
+
+	// The date and time that the configuration was created.
+	//
+	// CreationDateTime is a required field
+	CreationDateTime *time.Time `type:"timestamp" required:"true"`
+}
+
+// String returns the string representation
+func (s BlockPublicAccessConfigurationMetadata) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Configuration of a bootstrap action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/BootstrapActionConfig
 type BootstrapActionConfig struct {
@@ -395,11 +472,11 @@ type Cluster struct {
 
 	// The Amazon EMR release label, which determines the version of open-source
 	// application packages installed on the cluster. Release labels are in the
-	// form emr-x.x.x, where x.x.x is an Amazon EMR release version, for example,
-	// emr-5.14.0. For more information about Amazon EMR release versions and included
-	// application versions and features, see https://docs.aws.amazon.com/emr/latest/ReleaseGuide/
+	// form emr-x.x.x, where x.x.x is an Amazon EMR release version such as emr-5.14.0.
+	// For more information about Amazon EMR release versions and included application
+	// versions and features, see https://docs.aws.amazon.com/emr/latest/ReleaseGuide/
 	// (https://docs.aws.amazon.com/emr/latest/ReleaseGuide/). The release label
-	// applies only to Amazon EMR releases versions 4.x and later. Earlier versions
+	// applies only to Amazon EMR releases version 4.0 and later. Earlier versions
 	// use AmiVersion.
 	ReleaseLabel *string `type:"string"`
 
@@ -446,6 +523,8 @@ type Cluster struct {
 	// of a cluster error.
 	TerminationProtected *bool `type:"boolean"`
 
+	// This member will be deprecated.
+	//
 	// Indicates whether the cluster is visible to all IAM users of the AWS account
 	// associated with the cluster. If this value is set to true, all IAM users
 	// of that AWS account can view and manage the cluster if they have the proper
@@ -725,14 +804,9 @@ type Ec2InstanceAttributes struct {
 	// the master node as a user named "hadoop".
 	Ec2KeyName *string `type:"string"`
 
-	// To launch the cluster in Amazon VPC, set this parameter to the identifier
-	// of the Amazon VPC subnet where you want the cluster to launch. If you do
-	// not specify this value, the cluster is launched in the normal AWS cloud,
-	// outside of a VPC.
-	//
-	// Amazon VPC currently does not support cluster compute quadruple extra large
-	// (cc1.4xlarge) instances. Thus, you cannot specify the cc1.4xlarge instance
-	// type for nodes of a cluster launched in a VPC.
+	// Set this parameter to the identifier of the Amazon VPC subnet where you want
+	// the cluster to launch. If you do not specify this value, and your account
+	// supports EC2-Classic, the cluster launches in EC2-Classic.
 	Ec2SubnetId *string `type:"string"`
 
 	// The identifier of the Amazon EC2 security group for the master node.
@@ -760,7 +834,7 @@ type Ec2InstanceAttributes struct {
 	// EC2 cluster instances. Subnets must exist within the same VPC. Amazon EMR
 	// chooses the EC2 subnet with the best fit from among the list of RequestedEc2SubnetIds,
 	// and then launches all cluster instances within that Subnet. If this value
-	// is not specified, and the account and region support EC2-Classic networks,
+	// is not specified, and the account and Region support EC2-Classic networks,
 	// the cluster launches instances in the EC2-Classic network and uses RequestedEc2AvailabilityZones
 	// instead of this setting. If EC2-Classic is not supported, and no Subnet is
 	// specified, Amazon EMR chooses the subnet for you. RequestedEc2SubnetIDs and
@@ -1878,6 +1952,8 @@ type JobFlowDetail struct {
 	// is empty.
 	SupportedProducts []string `type:"list"`
 
+	// This member will be deprecated.
+	//
 	// Specifies whether the cluster is visible to all IAM users of the AWS account
 	// associated with the cluster. If this value is set to true, all IAM users
 	// of that AWS account can view and (if they have the proper policy permissions
@@ -1949,14 +2025,8 @@ type JobFlowInstancesConfig struct {
 	// Applies to clusters that use the uniform instance group configuration. To
 	// launch the cluster in Amazon Virtual Private Cloud (Amazon VPC), set this
 	// parameter to the identifier of the Amazon VPC subnet where you want the cluster
-	// to launch. If you do not specify this value, the cluster launches in the
-	// normal Amazon Web Services cloud, outside of an Amazon VPC, if the account
-	// launching the cluster supports EC2 Classic networks in the region where the
-	// cluster launches.
-	//
-	// Amazon VPC currently does not support cluster compute quadruple extra large
-	// (cc1.4xlarge) instances. Thus you cannot specify the cc1.4xlarge instance
-	// type for clusters launched in an Amazon VPC.
+	// to launch. If you do not specify this value and your account supports EC2-Classic,
+	// the cluster launches in EC2-Classic.
 	Ec2SubnetId *string `type:"string"`
 
 	// Applies to clusters that use the instance fleet configuration. When multiple
@@ -2242,6 +2312,41 @@ type PlacementType struct {
 // String returns the string representation
 func (s PlacementType) String() string {
 	return awsutil.Prettify(s)
+}
+
+// A list of port ranges that are permitted to allow inbound traffic from all
+// public IP addresses. To specify a single port, use the same value for MinRange
+// and MaxRange.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PortRange
+type PortRange struct {
+	_ struct{} `type:"structure"`
+
+	// The smallest port number in a specified range of port numbers.
+	MaxRange *int64 `type:"integer"`
+
+	// The smallest port number in a specified range of port numbers.
+	//
+	// MinRange is a required field
+	MinRange *int64 `type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s PortRange) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PortRange) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PortRange"}
+
+	if s.MinRange == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MinRange"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // The type of adjustment the automatic scaling activity makes when triggered,

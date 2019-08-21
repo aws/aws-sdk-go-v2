@@ -89,7 +89,7 @@ func (s AssociateNodeOutput) String() string {
 const opAssociateNode = "AssociateNode"
 
 // AssociateNodeRequest returns a request value for making API operation for
-// AWS OpsWorks for Chef Automate.
+// AWS OpsWorks CM.
 //
 // Associates a new node with the server. For more information about how to
 // disassociate a node, see DisassociateNode.

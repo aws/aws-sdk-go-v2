@@ -123,9 +123,10 @@ const opCreateDetector = "CreateDetector"
 // CreateDetectorRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Creates a single Amazon GuardDuty detector. A detector is an object that
-// represents the GuardDuty service. A detector must be created in order for
-// GuardDuty to become operational.
+// Creates a single Amazon GuardDuty detector. A detector is a resource that
+// represents the GuardDuty service. To start using GuardDuty, you must create
+// a detector in each region that you enable the service. You can have only
+// one detector per account per region.
 //
 //    // Example sending a request using CreateDetectorRequest.
 //    req := client.CreateDetectorRequest(params)

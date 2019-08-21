@@ -15,19 +15,13 @@ import (
 type BeginTransactionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the database.
 	Database *string `locationName:"database" type:"string"`
 
-	// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-	//
 	// ResourceArn is a required field
 	ResourceArn *string `locationName:"resourceArn" type:"string" required:"true"`
 
-	// The name of the database schema.
 	Schema *string `locationName:"schema" type:"string"`
 
-	// The name or ARN of the secret that enables access to the DB cluster.
-	//
 	// SecretArn is a required field
 	SecretArn *string `locationName:"secretArn" type:"string" required:"true"`
 }
@@ -91,7 +85,6 @@ func (s BeginTransactionInput) MarshalFields(e protocol.FieldEncoder) error {
 type BeginTransactionOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The transaction ID of the transaction started by the call.
 	TransactionId *string `locationName:"transactionId" type:"string"`
 }
 

@@ -17,24 +17,24 @@ type CreateNotebookInstanceInput struct {
 	// A list of Elastic Inference (EI) instance types to associate with this notebook
 	// instance. Currently, only one instance type can be associated with a notebook
 	// instance. For more information, see Using Elastic Inference in Amazon SageMaker
-	// (http://docs.aws.amazon.com/sagemaker/latest/dg/ei.html).
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html).
 	AcceleratorTypes []NotebookInstanceAcceleratorType `type:"list"`
 
 	// An array of up to three Git repositories to associate with the notebook instance.
 	// These can be either the names of Git repositories stored as resources in
-	// your account, or the URL of Git repositories in AWS CodeCommit (http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+	// your account, or the URL of Git repositories in AWS CodeCommit (codecommit/latest/userguide/welcome.html)
 	// or in any other Git repository. These repositories are cloned at the same
 	// level as the default repository of your notebook instance. For more information,
 	// see Associating Git Repositories with Amazon SageMaker Notebook Instances
-	// (http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
 	AdditionalCodeRepositories []string `type:"list"`
 
 	// A Git repository to associate with the notebook instance as its default code
 	// repository. This can be either the name of a Git repository stored as a resource
-	// in your account, or the URL of a Git repository in AWS CodeCommit (http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+	// in your account, or the URL of a Git repository in AWS CodeCommit (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
 	// or in any other Git repository. When you open a notebook instance, it opens
 	// in the directory that contains this repository. For more information, see
-	// Associating Git Repositories with Amazon SageMaker Notebook Instances (http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
+	// Associating Git Repositories with Amazon SageMaker Notebook Instances (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
 	DefaultCodeRepository *string `min:"1" type:"string"`
 
 	// Sets whether Amazon SageMaker provides internet access to the notebook instance.
@@ -57,7 +57,7 @@ type CreateNotebookInstanceInput struct {
 	// The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon
 	// SageMaker uses to encrypt data on the storage volume attached to your notebook
 	// instance. The KMS key you provide must be enabled. For information, see Enabling
-	// and Disabling Keys (http://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html)
+	// and Disabling Keys (https://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html)
 	// in the AWS Key Management Service Developer Guide.
 	KmsKeyId *string `type:"string"`
 
@@ -75,7 +75,7 @@ type CreateNotebookInstanceInput struct {
 	// SageMaker assumes this role to perform tasks on your behalf. You must grant
 	// this role necessary permissions so Amazon SageMaker can perform these tasks.
 	// The policy must allow the Amazon SageMaker service principal (sagemaker.amazonaws.com)
-	// permissions to assume this role. For more information, see Amazon SageMaker
+	// permissionsto to assume this role. For more information, see Amazon SageMaker
 	// Roles (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html).
 	//
 	// To be able to pass this role to Amazon SageMaker, the caller of this API
@@ -199,7 +199,8 @@ const opCreateNotebookInstance = "CreateNotebookInstance"
 // groups allow it.
 //
 // After creating the notebook instance, Amazon SageMaker returns its Amazon
-// Resource Name (ARN).
+// Resource Name (ARN). You can't change the name of a notebook instance after
+// you create it.
 //
 // After Amazon SageMaker creates the notebook instance, you can connect to
 // the Jupyter server and work in Jupyter notebooks. For example, you can write

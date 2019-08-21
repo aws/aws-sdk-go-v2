@@ -28,7 +28,9 @@ type UpdateServerInput struct {
 	//
 	// If you aren't planning to migrate existing users from an existing SFTP server
 	// to a new AWS SFTP server, don't update the host key. Accidentally changing
-	// a server's host key can be disruptive. For more information, see change-host-key
+	// a server's host key can be disruptive.
+	//
+	// For more information, see "https://docs.aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key"
 	// in the AWS SFTP User Guide.
 	HostKey *string `type:"string"`
 

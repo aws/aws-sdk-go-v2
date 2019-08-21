@@ -14,7 +14,7 @@ type UpdatePartitionInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the Data Catalog where the partition to be updated resides. If
-	// none is supplied, the AWS account ID is used by default.
+	// none is provided, the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 
 	// The name of the catalog database in which the table in question resides.
@@ -22,7 +22,7 @@ type UpdatePartitionInput struct {
 	// DatabaseName is a required field
 	DatabaseName *string `min:"1" type:"string" required:"true"`
 
-	// The new partition object to which to update the partition.
+	// The new partition object to update the partition to.
 	//
 	// PartitionInput is a required field
 	PartitionInput *PartitionInput `type:"structure" required:"true"`
@@ -32,7 +32,7 @@ type UpdatePartitionInput struct {
 	// PartitionValueList is a required field
 	PartitionValueList []string `type:"list" required:"true"`
 
-	// The name of the table where the partition to be updated is located.
+	// The name of the table in which the partition to be updated is located.
 	//
 	// TableName is a required field
 	TableName *string `min:"1" type:"string" required:"true"`

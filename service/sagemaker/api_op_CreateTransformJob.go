@@ -28,8 +28,13 @@ type CreateTransformJobInput struct {
 	// limit, set BatchStrategy to MultiRecord and SplitType to Line.
 	BatchStrategy BatchStrategy `type:"string" enum:"true"`
 
-	// The data structure used for combining the input data and inference in the
-	// output file. For more information, see Batch Transform I/O Join (http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html).
+	// The data structure used to specify the data to be used for inference in a
+	// batch transform job and to associate the data that is relevant to the prediction
+	// results in the output. The input filter provided allows you to exclude input
+	// data that is not needed for inference in a batch transform job. The output
+	// filter provided allows you to include input data relevant to interpreting
+	// the predictions in the output from the job. For more information, see Associate
+	// Prediction Results with their Corresponding Input Records (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html).
 	DataProcessing *DataProcessing `type:"structure"`
 
 	// The environment variables to set in the Docker container. We support up to
@@ -41,7 +46,7 @@ type CreateTransformJobInput struct {
 	// Amazon SageMaker checks the optional execution-parameters to determine the
 	// optimal settings for your chosen algorithm. If the execution-parameters endpoint
 	// is not enabled, the default value is 1. For more information on execution-parameters,
-	// see How Containers Serve Requests (http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-batch-code.html#your-algorithms-batch-code-how-containe-serves-requests).
+	// see How Containers Serve Requests (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-batch-code.html#your-algorithms-batch-code-how-containe-serves-requests).
 	// For built-in algorithms, you don't need to set a value for MaxConcurrentTransforms.
 	MaxConcurrentTransforms *int64 `type:"integer"`
 

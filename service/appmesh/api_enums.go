@@ -19,6 +19,47 @@ func (enum EgressFilterType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type HttpMethod string
+
+// Enum values for HttpMethod
+const (
+	HttpMethodConnect HttpMethod = "CONNECT"
+	HttpMethodDelete  HttpMethod = "DELETE"
+	HttpMethodGet     HttpMethod = "GET"
+	HttpMethodHead    HttpMethod = "HEAD"
+	HttpMethodOptions HttpMethod = "OPTIONS"
+	HttpMethodPatch   HttpMethod = "PATCH"
+	HttpMethodPost    HttpMethod = "POST"
+	HttpMethodPut     HttpMethod = "PUT"
+	HttpMethodTrace   HttpMethod = "TRACE"
+)
+
+func (enum HttpMethod) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HttpMethod) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type HttpScheme string
+
+// Enum values for HttpScheme
+const (
+	HttpSchemeHttp  HttpScheme = "http"
+	HttpSchemeHttps HttpScheme = "https"
+)
+
+func (enum HttpScheme) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HttpScheme) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MeshStatusCode string
 
 // Enum values for MeshStatusCode

@@ -14,8 +14,6 @@ import (
 type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// ARN of a resource.
-	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resourceArn" type:"string" required:"true"`
 }
@@ -56,7 +54,6 @@ func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Tags assigned to a resource.
 	Tags map[string]string `locationName:"tags" type:"map"`
 }
 

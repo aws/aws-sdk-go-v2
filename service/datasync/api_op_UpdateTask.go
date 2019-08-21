@@ -17,9 +17,10 @@ type UpdateTaskInput struct {
 	// The Amazon Resource Name (ARN) of the resource name of the CloudWatch LogGroup.
 	CloudWatchLogGroupArn *string `type:"string"`
 
-	// A filter that determines which files to exclude from a task based on the
-	// specified pattern in the filter. Transfers all files in the task’s subdirectory,
-	// except files that match the filter that is set.
+	// A list of filter rules that determines which files to exclude from a task.
+	// The list should contain a single filter string that consists of the patterns
+	// to exclude. The patterns are delimited by "|" (that is, a pipe), for example:
+	// "/folder1|/folder2"
 	Excludes []FilterRule `type:"list"`
 
 	// The name of the task to update.

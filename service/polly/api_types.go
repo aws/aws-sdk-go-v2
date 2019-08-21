@@ -50,7 +50,7 @@ func (s Lexicon) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains metadata describing the lexicon such as the number of lexemes, language
-// code, and so on. For more information, see Managing Lexicons (http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
+// code, and so on. For more information, see Managing Lexicons (https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/LexiconAttributes
 type LexiconAttributes struct {
 	_ struct{} `type:"structure"`
@@ -165,6 +165,11 @@ type SynthesisTask struct {
 	// Timestamp for the time the synthesis task was started.
 	CreationTime *time.Time `type:"timestamp"`
 
+	// Specifies the engine (standard or neural) for Amazon Polly to use when processing
+	// input text for speech synthesis. Using a voice that is not supported for
+	// the engine selected will result in an error.
+	Engine Engine `type:"string" enum:"true"`
+
 	// Optional language code for a synthesis task. This is only necessary if using
 	// a bilingual voice, such as Aditi, which can be used for either Indian English
 	// (en-IN) or Hindi (hi-IN).
@@ -193,8 +198,9 @@ type SynthesisTask struct {
 
 	// The audio frequency specified in Hz.
 	//
-	// The valid values for mp3 and ogg_vorbis are "8000", "16000", and "22050".
-	// The default value is "22050".
+	// The valid values for mp3 and ogg_vorbis are "8000", "16000", "22050", and
+	// "24000". The default value for standard voices is "22050". The default value
+	// for neural voices is "24000".
 	//
 	// Valid values for pcm are "8000" and "16000" The default value is "16000".
 	SampleRate *string `type:"string"`
@@ -237,6 +243,12 @@ func (s SynthesisTask) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "CreationTime",
 			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if len(s.Engine) > 0 {
+		v := s.Engine
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Engine", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.LanguageCode) > 0 {
 		v := s.LanguageCode
@@ -360,6 +372,10 @@ type Voice struct {
 	// Name of the voice (for example, Salli, Kendra, etc.). This provides a human
 	// readable voice name that you might display in your application.
 	Name *string `type:"string"`
+
+	// Specifies which engines (standard or neural) that are supported by a given
+	// voice.
+	SupportedEngines []Engine `type:"list"`
 }
 
 // String returns the string representation
@@ -410,6 +426,18 @@ func (s Voice) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SupportedEngines != nil {
+		v := s.SupportedEngines
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SupportedEngines", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	return nil
 }

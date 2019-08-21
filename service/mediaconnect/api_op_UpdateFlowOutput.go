@@ -15,6 +15,11 @@ import (
 type UpdateFlowOutputInput struct {
 	_ struct{} `type:"structure"`
 
+	// The range of IP addresses that should be allowed to initiate output requests
+	// to this flow. These IP addresses should be in the form of a Classless Inter-Domain
+	// Routing (CIDR) block; for example, 10.0.0.0/16.
+	CidrAllowList []string `locationName:"cidrAllowList" type:"list"`
+
 	// A description of the output. This description appears only on the AWS Elemental
 	// MediaConnect console and will not be seen by the end user.
 	Description *string `locationName:"description" type:"string"`
@@ -40,6 +45,9 @@ type UpdateFlowOutputInput struct {
 
 	// The protocol to use for the output.
 	Protocol Protocol `locationName:"protocol" type:"string" enum:"true"`
+
+	// The remote ID for the Zixi-pull stream.
+	RemoteId *string `locationName:"remoteId" type:"string"`
 
 	// The smoothing latency in milliseconds for RTP and RTP-FEC streams.
 	SmoothingLatency *int64 `locationName:"smoothingLatency" type:"integer"`
@@ -76,6 +84,18 @@ func (s *UpdateFlowOutputInput) Validate() error {
 func (s UpdateFlowOutputInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	if s.CidrAllowList != nil {
+		v := s.CidrAllowList
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "cidrAllowList", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
 	if s.Description != nil {
 		v := *s.Description
 
@@ -111,6 +131,12 @@ func (s UpdateFlowOutputInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "protocol", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.RemoteId != nil {
+		v := *s.RemoteId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "remoteId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SmoothingLatency != nil {
 		v := *s.SmoothingLatency

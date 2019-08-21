@@ -66,7 +66,7 @@ func (s DescribeBackupsOutput) String() string {
 const opDescribeBackups = "DescribeBackups"
 
 // DescribeBackupsRequest returns a request value for making API operation for
-// AWS OpsWorks for Chef Automate.
+// AWS OpsWorks CM.
 //
 // Describes backups. The results are ordered by time, with newest backups first.
 // If you do not specify a BackupId or ServerName, the command returns all backups.

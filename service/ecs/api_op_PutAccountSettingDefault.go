@@ -73,7 +73,8 @@ const opPutAccountSettingDefault = "PutAccountSettingDefault"
 // Amazon EC2 Container Service.
 //
 // Modifies an account setting for all IAM users on an account for whom no individual
-// account setting has been specified.
+// account setting has been specified. Account settings are set on a per-Region
+// basis.
 //
 //    // Example sending a request using PutAccountSettingDefaultRequest.
 //    req := client.PutAccountSettingDefaultRequest(params)
