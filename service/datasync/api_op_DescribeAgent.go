@@ -61,7 +61,8 @@ type DescribeAgentOutput struct {
 	// The name of the agent.
 	Name *string `min:"1" type:"string"`
 
-	// The subnet and the security group that DataSync used to access a VPC endpoint.
+	// The VPC endpoint, subnet and security group that an agent uses to access
+	// IP addresses in a VPC (Virtual Private Cloud).
 	PrivateLinkConfig *PrivateLinkConfig `type:"structure"`
 
 	// The status of the agent. If the status is ONLINE, then the agent is configured

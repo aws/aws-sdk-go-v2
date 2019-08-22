@@ -71,6 +71,8 @@ type ClientAPI interface {
 
 	CreateLocationS3Request(*datasync.CreateLocationS3Input) datasync.CreateLocationS3Request
 
+	CreateLocationSmbRequest(*datasync.CreateLocationSmbInput) datasync.CreateLocationSmbRequest
+
 	CreateTaskRequest(*datasync.CreateTaskInput) datasync.CreateTaskRequest
 
 	DeleteAgentRequest(*datasync.DeleteAgentInput) datasync.DeleteAgentRequest
@@ -86,6 +88,8 @@ type ClientAPI interface {
 	DescribeLocationNfsRequest(*datasync.DescribeLocationNfsInput) datasync.DescribeLocationNfsRequest
 
 	DescribeLocationS3Request(*datasync.DescribeLocationS3Input) datasync.DescribeLocationS3Request
+
+	DescribeLocationSmbRequest(*datasync.DescribeLocationSmbInput) datasync.DescribeLocationSmbRequest
 
 	DescribeTaskRequest(*datasync.DescribeTaskInput) datasync.DescribeTaskRequest
 

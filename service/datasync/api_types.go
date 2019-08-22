@@ -386,6 +386,24 @@ func (s *S3Config) Validate() error {
 	return nil
 }
 
+// Represents the mount options that are available for DataSync to access an
+// SMB location.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/SmbMountOptions
+type SmbMountOptions struct {
+	_ struct{} `type:"structure"`
+
+	// The specific SMB version that you want DataSync to use to mount your SMB
+	// share. If you don't specify a version, DataSync defaults to AUTOMATIC. That
+	// is, DataSync automatically selects a version based on negotiation with the
+	// SMB Server server.
+	Version SmbVersion `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s SmbMountOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Represents a single entry in a list of AWS resource tags. TagListEntry returns
 // an array that contains a list of tasks when the ListTagsForResource operation
 // is called.
