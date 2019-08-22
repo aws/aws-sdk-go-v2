@@ -2148,6 +2148,7 @@ var awsPartition = partition{
 				"ap-southeast-1": endpoint{},
 				"ap-southeast-2": endpoint{},
 				"eu-central-1":   endpoint{},
+				"eu-north-1":     endpoint{},
 				"eu-west-1":      endpoint{},
 				"eu-west-2":      endpoint{},
 				"eu-west-3":      endpoint{},
@@ -4664,6 +4665,12 @@ var awsusgovPartition = partition{
 		"neptune": service{
 
 			Endpoints: endpoints{
+				"us-gov-east-1": endpoint{
+					Hostname: "rds.us-gov-east-1.amazonaws.com",
+					CredentialScope: credentialScope{
+						Region: "us-gov-east-1",
+					},
+				},
 				"us-gov-west-1": endpoint{
 					Hostname: "rds.us-gov-west-1.amazonaws.com",
 					CredentialScope: credentialScope{

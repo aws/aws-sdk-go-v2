@@ -194,6 +194,24 @@ func (enum PreserveDevices) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type SmbVersion string
+
+// Enum values for SmbVersion
+const (
+	SmbVersionAutomatic SmbVersion = "AUTOMATIC"
+	SmbVersionSmb2      SmbVersion = "SMB2"
+	SmbVersionSmb3      SmbVersion = "SMB3"
+)
+
+func (enum SmbVersion) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SmbVersion) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TaskExecutionStatus string
 
 // Enum values for TaskExecutionStatus
