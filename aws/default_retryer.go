@@ -40,7 +40,7 @@ func (d DefaultRetryer) RetryRules(r *Request) time.Duration {
 	throttle := d.shouldThrottle(r)
 	if throttle {
 		if delay, ok := getRetryAfterDelay(r); ok {
-			return delay
+			initialDelay = delay
 		}
 
 		minTime = 500
