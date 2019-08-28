@@ -7,9 +7,12 @@
 * `private/protocol`: Add support for parsing fractional timestamp ([#367](https://github.com/aws/aws-sdk-go-v2/pull/367))
   * Fixes the SDK's ability to parse fractional unix timestamp values and adds tests.
   * Fixes [#365](https://github.com/aws/aws-sdk-go-v2/issues/365)
+* `aws/ec2metadata`: Add marketplaceProductCodes to EC2 Instance Identity Document
+  * Adds `MarketplaceProductCodes` to the EC2 Instance Metadata's Identity Document. The ec2metadata client will now retrieve these values if they are available.
+  * Related to: [aws/aws-sdk-go#2781](https://github.com/aws/aws-sdk-go/issues/2781)
 
 ### SDK Bugs
 * `aws`: Fixes bug in calculating throttled retry delay ([#373](https://github.com/aws/aws-sdk-go/pull/373))
   * The `Retry-After` duration specified in the request is now added to the Retry delay for throttled exception. Adds test for retry delays for throttled exceptions. Fixes bug where the throttled retry's math was off.
   * Fixes [#45](https://github.com/aws/aws-sdk-go/issues/45)
-  
+
