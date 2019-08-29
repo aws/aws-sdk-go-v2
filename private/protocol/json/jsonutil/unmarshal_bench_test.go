@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	simpleJSON = []byte(`{"FooEnum": "foo", "ListEnums": ["0", "1"]}`)
+	simpleJSON  = []byte(`{"FooEnum": "foo", "ListEnums": ["0", "1"]}`)
 	complexJSON = []byte(`{"Table":{"AttributeDefinitions":[{"AttributeName":"1","AttributeType":"N"}],"CreationDateTime":1.562054355238E9,"ItemCount":0,"KeySchema":[{"AttributeName":"1","KeyType":"HASH"}],"ProvisionedThroughput":{"NumberOfDecreasesToday":0,"ReadCapacityUnits":5,"WriteCapacityUnits":5},"TableArn":"arn:aws:dynamodb:us-west-2:183557167593:table/TestTable","TableId":"575d0be6-34e3-4843-838c-8e8e8d4ea2f7","TableName":"TestTable","TableSizeBytes":0,"TableStatus":"ACTIVE"}}`)
 )
 

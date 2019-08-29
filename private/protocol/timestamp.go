@@ -38,7 +38,7 @@ func IsKnownTimestampFormat(name string) bool {
 }
 
 // FormatTime returns a string value of the time.
-func FormatTime(name string, t time.Time) (string,error) {
+func FormatTime(name string, t time.Time) (string, error) {
 	t = t.UTC()
 
 	switch name {
@@ -49,7 +49,7 @@ func FormatTime(name string, t time.Time) (string,error) {
 	case UnixTimeFormatName:
 		return strconv.FormatInt(t.Unix(), 10), nil
 	default:
-		return "",fmt.Errorf("unknown timestamp format name, " + name)
+		return "", fmt.Errorf("unknown timestamp format name, " + name)
 	}
 }
 
@@ -67,7 +67,7 @@ func ParseTime(formatName, value string) (time.Time, error) {
 			return time.Time{}, err
 		}
 		t := time.Unix(int64(v), 0)
-		return t.UTC(),nil
+		return t.UTC(), nil
 
 	default:
 		panic("unknown timestamp format name, " + formatName)

@@ -135,8 +135,8 @@ func (v JSONValue) MarshalValueBuf(b []byte) ([]byte, error) {
 
 // TimeValue provies encoding of time.Time for AWS protocols.
 type TimeValue struct {
-	V      time.Time
-	Format string
+	V                time.Time
+	Format           string
 	QuotedFormatTime bool
 }
 
@@ -148,8 +148,8 @@ func (v TimeValue) MarshalValue() (string, error) {
 	}
 
 	if v.QuotedFormatTime {
-		format, err :=  FormatTime(v.Format, v.V)
-		return fmt.Sprintf("%q",format),err
+		format, err := FormatTime(v.Format, v.V)
+		return fmt.Sprintf("%q", format), err
 	}
 
 	return FormatTime(v.Format, v.V)
