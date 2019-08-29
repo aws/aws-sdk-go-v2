@@ -21,6 +21,7 @@ import (
 //    func (d retryer) MaxRetries() int { return 100 }
 type DefaultRetryer struct {
 	NumMaxRetries int
+	MinTime       int64
 }
 
 // MaxRetries returns the number of maximum returns the service will use to make
@@ -34,9 +35,14 @@ var seededRand = rand.New(&lockedSource{src: rand.NewSource(time.Now().UnixNano(
 // RetryRules returns the delay duration before retrying this request again
 func (d DefaultRetryer) RetryRules(r *Request) time.Duration {
 	// Set the upper limit of delay in retrying at ~five minutes
-	var minTime int64 = 30
-	var initialDelay time.Duration
+	var minTime int64
+	if d.MinTime != 0 {
+		minTime = d.MinTime
+	} else {
+		minTime = 30
+	}
 
+	var initialDelay time.Duration
 	throttle := d.shouldThrottle(r)
 	if throttle {
 		if delay, ok := getRetryAfterDelay(r); ok {
@@ -51,6 +57,13 @@ func (d DefaultRetryer) RetryRules(r *Request) time.Duration {
 		retryCount = 8
 	} else if retryCount > 12 {
 		retryCount = 12
+	}
+
+	maxRetriesAllowed := d.MaxRetries()
+	if maxRetriesAllowed != 0 {
+		if retryCount > maxRetriesAllowed-1 {
+			retryCount = maxRetriesAllowed - 1
+		}
 	}
 
 	delay := (1 << uint(retryCount)) * (seededRand.Int63n(minTime) + minTime)
@@ -73,16 +86,18 @@ func (d DefaultRetryer) ShouldRetry(r *Request) bool {
 
 // ShouldThrottle returns true if the request should be throttled.
 func (d DefaultRetryer) shouldThrottle(r *Request) bool {
-	switch r.HTTPResponse.StatusCode {
-	case 429:
-	case 502:
-	case 503:
-	case 504:
-	default:
-		return r.IsErrorThrottle()
+	if r.HTTPResponse != nil {
+		switch r.HTTPResponse.StatusCode {
+		case 429:
+		case 502:
+		case 503:
+		case 504:
+		default:
+			return r.IsErrorThrottle()
+		}
+		return true
 	}
-
-	return true
+	return r.IsErrorThrottle()
 }
 
 // This will look in the Retry-After header, RFC 7231, for how long

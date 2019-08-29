@@ -1,5 +1,10 @@
 package aws
 
+// UseServiceDefaultRetries instructs the config to use the service's own
+// default number of retries. This will be the default action if
+// Config.MaxRetries is nil also.
+const UseServiceDefaultRetries = -1
+
 // A Config provides service configuration for service clients.
 type Config struct {
 	// The region to send requests to. This parameter is required and must

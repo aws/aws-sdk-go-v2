@@ -8,7 +8,43 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
+type retryer struct {
+	aws.DefaultRetryer
+}
+
+func (d retryer) RetryRules(r *request.Request) time.Duration {
+	switch r.Operation.Name {
+	case opModifyNetworkInterfaceAttribute:
+		fallthrough
+	case opAssignPrivateIpAddresses:
+		return d.customRetryRule(r)
+	default:
+		return d.DefaultRetryer.RetryRules(r)
+	}
+}
+
+func (d retryer) customRetryRule(r *request.Request) time.Duration {
+	d.MinTime = 1000
+	return d.DefaultRetryer.RetryRules(r)
+}
+
+func setCustomRetryer(c *Client) {
+	maxRetries := 3
+	c.Retryer = retryer{
+		DefaultRetryer: request.DefaultRetryer{
+			NumMaxRetries: maxRetries,
+		},
+	}
+}
+
 func init() {
+	initClient = func(c *Client) {
+		if c.Config.Retryer == nil {
+			// Only override the retryer with a custom one if the config
+			// does not already contain a retryer
+			setCustomRetryer(c)
+		}
+	}
 	initRequest = func(c *Client, r *request.Request) {
 		if r.Operation.Name == opCopySnapshot { // fill the PresignedURL parameter
 			r.Handlers.Build.PushFront(fillPresignedURL)
