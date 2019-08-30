@@ -152,7 +152,7 @@ func TestGetRetryDelay(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		a, ok := getRetryDelay(&c.r)
+		a, ok := getRetryAfterDelay(&c.r)
 		if c.ok != ok {
 			t.Errorf("%d: expected %v, but received %v", i, c.ok, ok)
 		}
@@ -160,5 +160,37 @@ func TestGetRetryDelay(t *testing.T) {
 		if (c.e != a) == c.equal {
 			t.Errorf("%d: expected %v, but received %v", i, c.e, a)
 		}
+	}
+}
+
+func TestRetryDelay(t *testing.T) {
+	d := DefaultRetryer{100}
+	r := Request{}
+	for i := 0; i < 100; i++ {
+		rTemp := r
+		rTemp.HTTPResponse = &http.Response{StatusCode: 500, Header: http.Header{"Retry-After": []string{"299"}}}
+		rTemp.RetryCount = i
+		a := d.RetryRules(&rTemp)
+		if a > 5*time.Minute {
+			t.Errorf("retry delay should never be greater than five minutes, received %s for retrycount %d", a, i)
+		}
+	}
+
+	for i := 0; i < 100; i++ {
+		rTemp := r
+		rTemp.RetryCount = i
+		rTemp.HTTPResponse = &http.Response{StatusCode: 503, Header: http.Header{"Retry-After": []string{""}}}
+		a := d.RetryRules(&rTemp)
+		if a > 5*time.Minute {
+			t.Errorf("retry delay should not be greater than five minutes, received %s for retrycount %d", a, i)
+		}
+	}
+
+	rTemp := r
+	rTemp.RetryCount = 1
+	rTemp.HTTPResponse = &http.Response{StatusCode: 503, Header: http.Header{"Retry-After": []string{"300"}}}
+	a := d.RetryRules(&rTemp)
+	if a < 5*time.Minute{
+		t.Errorf("retry delay should not be less than retry-after duration, received %s for retrycount %d", a, 1)
 	}
 }
