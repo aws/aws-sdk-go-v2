@@ -251,6 +251,17 @@ func (r *Request) SetStringBody(s string) {
 // SetReaderBody will set the request's body reader.
 func (r *Request) SetReaderBody(reader io.ReadSeeker) {
 	r.Body = reader
+	if IsReaderSeekable(reader) {
+		var err error
+		// Get the Bodies current offset so retries will start from the same
+		// initial position.
+		r.BodyStart, err = reader.Seek(0, 1)
+		if err != nil {
+			r.Error = awserr.New(ErrCodeSerialization,
+				"failed to determine start of request body", err)
+			return
+		}
+	}
 	r.ResetBody()
 }
 
@@ -350,12 +361,16 @@ func (r *Request) Sign() error {
 	return r.Error
 }
 
-func (r *Request) getNextRequestBody() (io.ReadCloser, error) {
+func (r *Request) getNextRequestBody() (body io.ReadCloser, err error) {
 	if r.safeBody != nil {
 		r.safeBody.Close()
 	}
 
-	r.safeBody = newOffsetReader(r.Body, r.BodyStart)
+	r.safeBody, err = newOffsetReader(r.Body, r.BodyStart)
+	if err != nil {
+		return nil, awserr.New(ErrCodeSerialization,
+			"failed to get request body error", err)
+	}
 
 	// Go 1.8 tightened and clarified the rules code needs to use when building
 	// requests with the http package. Go 1.8 removed the automatic detection
@@ -372,10 +387,10 @@ func (r *Request) getNextRequestBody() (io.ReadCloser, error) {
 	// Related golang/go#18257
 	l, err := computeBodyLength(r.Body)
 	if err != nil {
-		return nil, awserr.New(ErrCodeSerialization, "failed to compute request body size", err)
+		return nil, awserr.New(ErrCodeSerialization,
+			"failed to compute request body size", err)
 	}
 
-	var body io.ReadCloser
 	if l == 0 {
 		body = NoBody
 	} else if l > 0 {
