@@ -60,7 +60,7 @@ type AuthType string
 // Enumeration values for AuthType trait
 const (
 	NoneAuthType           AuthType = "none"
-	V4UnsignedBodyAuthType AuthType = "v2-unsigned-body"
+	V4UnsignedBodyAuthType AuthType = "v4-unsigned-body"
 )
 
 // GetSigner returns the signer to use for a request.
@@ -68,10 +68,11 @@ func (o *Operation) GetSigner() string {
 	buf := bytes.NewBuffer(nil)
 
 	switch o.AuthType {
-	case "NoneAuthType":
-		o.API.AddSDKImport("aws/credentials")
+	case NoneAuthType:
+		o.API.AddSDKImport("aws")
+
 		buf.WriteString("req.Config.Credentials = aws.AnonymousCredentials")
-	case "v4UnsignedBodyAuthType":
+	case V4UnsignedBodyAuthType:
 		o.API.AddSDKImport("aws/signer/v4")
 
 		buf.WriteString("req.Handlers.Sign.Remove(v4.SignRequestHandler)\n")
