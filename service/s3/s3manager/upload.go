@@ -440,6 +440,12 @@ func (u *uploader) nextReader() (io.ReadSeeker, int, error) {
 	default:
 		part := make([]byte, u.cfg.PartSize)
 		n, err := readFillBuf(r, part)
+		if n < 0 {
+			if err == nil {
+				err = io.ErrUnexpectedEOF
+			}
+			return nil, -1, err
+		}
 		u.readerPos += int64(n)
 
 		return bytes.NewReader(part[0:n]), n, err
