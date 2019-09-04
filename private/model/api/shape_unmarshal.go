@@ -648,7 +648,8 @@ func unmarshalAWSXMLFlattenedMap{{ $shapeName }}(s *{{ $.GoTypeElem }}, d *xml.D
 		value, _ := base64.StdEncoding.DecodeString(string(v))
 	{{ else if eq $ref.Shape.Type "timestamp" -}}
 		{{ setImports $ref.Shape "time" -}}
-		value, _ := time.Parse({{ $ref.CheckTimeFormatShapeRef }}, string(v))
+		{{ setSDKImports $ref.Shape "private/protocol" -}}
+		value, _ := protocol.ParseTime({{ $ref.CheckTimeFormatShapeRef }}, string(v))
 	{{ else if $ref.Shape.IsEnum -}}
 		value := {{ $ref.Shape.GoTypeElem }}(v)
 	{{ else if or (eq $ref.Shape.Type "string") (eq $ref.Shape.Type "character") -}}
@@ -724,7 +725,8 @@ func (s *{{ $.GoTypeElem }}) UnmarshalAWSREST(r *http.Response) (err error) {
 					{{ else if eq $ref.Shape.Type "timestamp" -}}
 						{{ setImports $ "time" -}}
 						{{ setImports $ "fmt" -}}
-						value, err := time.Parse({{ $ref.CheckTimeFormatShapeRef }}, v[0])
+						{{ setSDKImports $ "private/protocol" -}}
+						value, err := protocol.ParseTime({{ $ref.CheckTimeFormatShapeRef }}, v[0])
 						if err != nil {
 							return fmt.Errorf("fail to UnmarshalAWSREST {{ $.GoTypeElem }}.{{ $name }}, %s", err)
 						}
@@ -983,18 +985,29 @@ func (ref *ShapeRef) GetLocationName() string {
 	return locationName
 }
 
-func (ref ShapeRef) CheckTimeFormatShapeRef() string {
+func (ref *ShapeRef) CheckTimeFormatShapeRef() string {
+	if ref.TimestampFormat != "" {
+		return fmt.Sprintf("%q", ref.TimestampFormat)
+	}
+	if ref.Shape.TimestampFormat != "" {
+		return fmt.Sprintf("%q", ref.Shape.TimestampFormat)
+	}
+
 	switch ref.GetLocation() {
 	case "header", "headers":
-		return "protocol.RFC822TimeFromat"
-	case "query":
-		return "protocol.RFC822TimeFromat"
+		return "protocol.RFC822TimeFormatName"
+	case "Query":
+		switch ref.API.Metadata.Protocol {
+		case "rest-json", "rest-xml":
+			return "protocol.ISO8601TimeFormatName"
+		}
+		return "protocol.RFC822TimeFormatName"
 	default:
 		switch ref.API.Metadata.Protocol {
 		case "json", "rest-json":
-			return "protocol.UnixTimeFormat"
+			return "protocol.UnixTimeFormatName"
 		case "rest-xml", "ec2", "query":
-			return "protocol.ISO8601TimeFormat"
+			return "protocol.ISO8601TimeFormatName"
 		default:
 			panic(fmt.Sprintf("unable to determine time format for %s ref", ref.ShapeName))
 		}
