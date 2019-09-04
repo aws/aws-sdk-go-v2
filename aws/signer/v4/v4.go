@@ -329,8 +329,11 @@ func (v4 Signer) signWithBody(r *http.Request, body io.ReadSeeker, service, regi
 		return http.Header{}, err
 	}
 
+	ctx.sanitizeHostForHeader()
 	ctx.assignAmzQueryValues()
-	ctx.build(v4.DisableHeaderHoisting)
+	if err := ctx.build(v4.DisableHeaderHoisting); err != nil {
+		return nil, err
+	}
 
 	// If the request is not presigned the body should be attached to it. This
 	// prevents the confusion of wanting to send a signed request without
@@ -483,11 +486,13 @@ func (v4 *Signer) logSigningInfo(ctx *signingCtx) {
 	v4.Logger.Log(msg)
 }
 
-func (ctx *signingCtx) build(disableHeaderHoisting bool) {
+func (ctx *signingCtx) build(disableHeaderHoisting bool) error {
 	ctx.buildTime()             // no depends
 	ctx.buildCredentialString() // no depends
 
-	ctx.buildBodyDigest()
+	if err := ctx.buildBodyDigest(); err != nil {
+		return err
+	}
 
 	unsignedHeaders := ctx.Request.Header
 	if ctx.isPresign {
@@ -515,6 +520,7 @@ func (ctx *signingCtx) build(disableHeaderHoisting bool) {
 		}
 		ctx.Request.Header.Set("Authorization", strings.Join(parts, ", "))
 	}
+	return nil
 }
 
 func (ctx *signingCtx) buildTime() {
@@ -685,6 +691,10 @@ func (ctx *signingCtx) isRequestSigned() bool {
 	}
 
 	return false
+}
+
+func (ctx *signingCtx) sanitizeHostForHeader() {
+	aws.SanitizeHostForHeader(ctx.Request)
 }
 
 // unsign removes signing flags for both signed and presigned requests.

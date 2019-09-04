@@ -940,3 +940,61 @@ func TestRequest_TemporaryRetry(t *testing.T) {
 		t.Errorf("expect temporary error, was not")
 	}
 }
+
+func TestSanitizeHostForHeader(t *testing.T) {
+	cases := []struct {
+		url                 string
+		expectedRequestHost string
+	}{
+		{"https://estest.us-east-1.es.amazonaws.com:443", "estest.us-east-1.es.amazonaws.com"},
+		{"https://estest.us-east-1.es.amazonaws.com", "estest.us-east-1.es.amazonaws.com"},
+		{"https://localhost:9200", "localhost:9200"},
+		{"http://localhost:80", "localhost"},
+		{"http://localhost:8080", "localhost:8080"},
+	}
+
+	for _, c := range cases {
+		r, _ := http.NewRequest("GET", c.url, nil)
+		aws.SanitizeHostForHeader(r)
+
+		if h := r.Host; h != c.expectedRequestHost {
+			t.Errorf("expect %v host, got %q", c.expectedRequestHost, h)
+		}
+	}
+}
+
+func TestRequestBodySeekFails(t *testing.T) {
+	s := awstesting.NewClient(unit.Config())
+	s.Handlers.Validate.Clear()
+	s.Handlers.Build.Clear()
+
+	out := &testData{}
+	r := s.NewRequest(&aws.Operation{Name: "Operation"}, nil, out)
+	r.SetReaderBody(&stubSeekFail{
+		Err: fmt.Errorf("failed to seek reader"),
+	})
+	err := r.Send()
+	if err == nil {
+		t.Fatal("expect error, but got none")
+	}
+
+	aerr := err.(awserr.Error)
+	if e, a := aws.ErrCodeSerialization, aerr.Code(); e != a {
+		t.Errorf("expect %v error code, got %v", e, a)
+	}
+
+}
+
+type stubSeekFail struct {
+	Err error
+}
+
+func (f *stubSeekFail) Read(b []byte) (int, error) {
+	return len(b), nil
+}
+func (f *stubSeekFail) ReadAt(b []byte, offset int64) (int, error) {
+	return len(b), nil
+}
+func (f *stubSeekFail) Seek(offset int64, mode int) (int64, error) {
+	return 0, f.Err
+}

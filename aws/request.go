@@ -100,6 +100,7 @@ func New(cfg Config, metadata Metadata, handlers Handlers,
 
 	// TODO need better way of handling this error... NewRequest should return error.
 	endpoint, err := cfg.EndpointResolver.ResolveEndpoint(metadata.EndpointsID, cfg.Region)
+
 	if err == nil {
 		// TODO so ugly
 		metadata.Endpoint = endpoint.URL
@@ -227,6 +228,9 @@ func (r *Request) SetContext(ctx context.Context) {
 
 // WillRetry returns if the request's can be retried.
 func (r *Request) WillRetry() bool {
+	if !IsReaderSeekable(r.Body) && r.HTTPRequest.Body != NoBody {
+		return false
+	}
 	return r.Error != nil && BoolValue(r.Retryable) && r.RetryCount < r.MaxRetries()
 }
 
@@ -385,7 +389,7 @@ func (r *Request) getNextRequestBody() (body io.ReadCloser, err error) {
 	// of the SDK if they used that field.
 	//
 	// Related golang/go#18257
-	l, err := computeBodyLength(r.Body)
+	l, err := SeekerLen(r.Body)
 	if err != nil {
 		return nil, awserr.New(ErrCodeSerialization,
 			"failed to compute request body size", err)
@@ -403,7 +407,8 @@ func (r *Request) getNextRequestBody() (body io.ReadCloser, err error) {
 		// Transfer-Encoding: chunked bodies for these methods.
 		//
 		// This would only happen if a ReaderSeekerCloser was used with
-		// a io.Reader that was not also an io.Seeker.
+		// a io.Reader that was not also an io.Seeker, or did not
+		// implement Len() method.
 		switch r.Operation.HTTPMethod {
 		case "GET", "HEAD", "DELETE":
 			body = NoBody
@@ -413,42 +418,6 @@ func (r *Request) getNextRequestBody() (body io.ReadCloser, err error) {
 	}
 
 	return body, nil
-}
-
-// Attempts to compute the length of the body of the reader using the
-// io.Seeker interface. If the value is not seekable because of being
-// a ReaderSeekerCloser without an unerlying Seeker -1 will be returned.
-// If no error occurs the length of the body will be returned.
-func computeBodyLength(r io.ReadSeeker) (int64, error) {
-	seekable := true
-	// Determine if the seeker is actually seekable. ReaderSeekerCloser
-	// hides the fact that a io.Readers might not actually be seekable.
-	switch v := r.(type) {
-	case ReaderSeekerCloser:
-		seekable = v.IsSeeker()
-	case *ReaderSeekerCloser:
-		seekable = v.IsSeeker()
-	}
-	if !seekable {
-		return -1, nil
-	}
-
-	curOffset, err := r.Seek(0, 1)
-	if err != nil {
-		return 0, err
-	}
-
-	endOffset, err := r.Seek(0, 2)
-	if err != nil {
-		return 0, err
-	}
-
-	_, err = r.Seek(curOffset, 0)
-	if err != nil {
-		return 0, err
-	}
-
-	return endOffset - curOffset, nil
 }
 
 // GetBody will return an io.ReadSeeker of the Request's underlying
@@ -599,4 +568,73 @@ func shouldRetryCancel(r *Request) bool {
 		(errStr != "net/http: request canceled" &&
 			errStr != "net/http: request canceled while waiting for connection")
 
+}
+
+// SanitizeHostForHeader removes default port from host and updates request.Host
+func SanitizeHostForHeader(r *http.Request) {
+	host := getHost(r)
+	port := portOnly(host)
+	if port != "" && isDefaultPort(r.URL.Scheme, port) {
+		r.Host = stripPort(host)
+	}
+}
+
+// Returns host from request
+func getHost(r *http.Request) string {
+	if r.Host != "" {
+		return r.Host
+	}
+
+	return r.URL.Host
+}
+
+// Hostname returns u.Host, without any port number.
+//
+// If Host is an IPv6 literal with a port number, Hostname returns the
+// IPv6 literal without the square brackets. IPv6 literals may include
+// a zone identifier.
+//
+// Copied from the Go 1.8 standard library (net/url)
+func stripPort(hostport string) string {
+	colon := strings.IndexByte(hostport, ':')
+	if colon == -1 {
+		return hostport
+	}
+	if i := strings.IndexByte(hostport, ']'); i != -1 {
+		return strings.TrimPrefix(hostport[:i], "[")
+	}
+	return hostport[:colon]
+}
+
+// Port returns the port part of u.Host, without the leading colon.
+// If u.Host doesn't contain a port, Port returns an empty string.
+//
+// Copied from the Go 1.8 standard library (net/url)
+func portOnly(hostport string) string {
+	colon := strings.IndexByte(hostport, ':')
+	if colon == -1 {
+		return ""
+	}
+	if i := strings.Index(hostport, "]:"); i != -1 {
+		return hostport[i+len("]:"):]
+	}
+	if strings.Contains(hostport, "]") {
+		return ""
+	}
+	return hostport[colon+len(":"):]
+}
+
+// Returns true if the specified URI is using the standard port
+// (i.e. port 80 for HTTP URIs or 443 for HTTPS URIs)
+func isDefaultPort(scheme, port string) bool {
+	if port == "" {
+		return true
+	}
+
+	lowerCaseScheme := strings.ToLower(scheme)
+	if (lowerCaseScheme == "http" && port == "80") || (lowerCaseScheme == "https" && port == "443") {
+		return true
+	}
+
+	return false
 }
