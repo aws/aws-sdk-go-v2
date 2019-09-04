@@ -41,15 +41,15 @@ var BuildContentLengthHandler = aws.NamedHandler{Name: "core.BuildContentLengthH
 			length = int64(body.Len())
 		case io.Seeker:
 			var err error
-			r.BodyStart, err = body.Seek(0, 1)
+			r.BodyStart, err = body.Seek(0, io.SeekCurrent)
 			if err != nil {
 				r.Error = awserr.New(aws.ErrCodeSerialization, "failed to determine start of the request body", err)
 			}
-			end, err := body.Seek(0, 2)
+			end, err := body.Seek(0, io.SeekEnd)
 			if err != nil {
 				r.Error = awserr.New(aws.ErrCodeSerialization, "failed to determine end of the request body", err)
 			}
-			_, err = body.Seek(r.BodyStart, 0) // make sure to seek back to original location
+			_, err = body.Seek(r.BodyStart, io.SeekStart) // make sure to seek back to original location
 			if err != nil {
 				r.Error = awserr.New(aws.ErrCodeSerialization, "failed to seek back to the original location", err)
 			}

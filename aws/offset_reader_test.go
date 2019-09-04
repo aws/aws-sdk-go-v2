@@ -35,7 +35,7 @@ func TestOffsetReaderSeek(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	orig, err := reader.Seek(0, 1)
+	orig, err := reader.Seek(0, io.SeekCurrent)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -43,7 +43,7 @@ func TestOffsetReaderSeek(t *testing.T) {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
-	n, err := reader.Seek(0, 2)
+	n, err := reader.Seek(0, io.SeekEnd)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -51,7 +51,7 @@ func TestOffsetReaderSeek(t *testing.T) {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
-	n, err = reader.Seek(orig, 0)
+	n, err = reader.Seek(orig, io.SeekStart)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}

@@ -259,7 +259,7 @@ func (r *Request) SetReaderBody(reader io.ReadSeeker) {
 		var err error
 		// Get the Bodies current offset so retries will start from the same
 		// initial position.
-		r.BodyStart, err = reader.Seek(0, 1)
+		r.BodyStart, err = reader.Seek(0, io.SeekCurrent)
 		if err != nil {
 			r.Error = awserr.New(ErrCodeSerialization,
 				"failed to determine start of request body", err)

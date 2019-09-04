@@ -722,13 +722,13 @@ func makeSha256(data []byte) []byte {
 
 func makeSha256Reader(reader io.ReadSeeker) (hashBytes []byte, err error) {
 	hash := sha256.New()
-	start, err := reader.Seek(0, 1)
+	start, err := reader.Seek(0, io.SeekCurrent)
 	if err != nil {
 		return nil, err
 	}
 	defer func() {
 		// ensure error is return if unable to seek back to start if payload
-		_, err = reader.Seek(start, 0)
+		_, err = reader.Seek(start, io.SeekStart)
 	}()
 
 	io.Copy(hash, reader)

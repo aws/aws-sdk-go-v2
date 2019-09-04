@@ -2,6 +2,7 @@ package s3
 
 import (
 	"bytes"
+	"io"
 	"io/ioutil"
 	"net/http"
 
@@ -17,7 +18,7 @@ func copyMultipartStatusOKUnmarhsalError(r *request.Request) {
 	}
 	body := bytes.NewReader(b)
 	r.HTTPResponse.Body = ioutil.NopCloser(body)
-	defer body.Seek(0, 0)
+	defer body.Seek(0, io.SeekStart)
 
 	if body.Len() == 0 {
 		// If there is no body don't attempt to parse the body.

@@ -115,7 +115,7 @@ func (c *EncryptionClient) PutObjectRequest(input *s3.PutObjectInput) s3.PutObje
 		shaHex := hex.EncodeToString(sha.GetValue())
 		req.HTTPRequest.Header.Set("X-Amz-Content-Sha256", shaHex)
 
-		dst.Seek(0, 0)
+		dst.Seek(0, io.SeekStart)
 		input.Body = dst
 
 		err = c.SaveStrategy.Save(env, r)

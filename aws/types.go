@@ -76,17 +76,17 @@ func (r ReaderSeekerCloser) GetLen() (int64, error) {
 }
 
 func seekerLen(s io.Seeker) (int64, error) {
-	curOffset, err := s.Seek(0, 1)
+	curOffset, err := s.Seek(0, io.SeekCurrent)
 	if err != nil {
 		return 0, err
 	}
 
-	endOffset, err := s.Seek(0, 2)
+	endOffset, err := s.Seek(0, io.SeekEnd)
 	if err != nil {
 		return 0, err
 	}
 
-	_, err = s.Seek(curOffset, 0)
+	_, err = s.Seek(curOffset, io.SeekStart)
 	if err != nil {
 		return 0, err
 	}
