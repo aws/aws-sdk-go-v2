@@ -89,6 +89,9 @@ var _ = io.EOF
 var _ = aws.String
 var _ = fmt.Println
 var _ = reflect.Value{}
+var _ = strings.Reader{}
+var _ = strconv.Atoi
+var _ = base64.Encoding{}
 
 func init() {
 	protocol.RandReader = &awstesting.ZeroReader{}
@@ -116,6 +119,9 @@ var extraImports = []string{
 	"time",
 	"reflect",
 	"net/url",
+	"strings",
+	"strconv",
+	"encoding/base64",
 	"",
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting",
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit",

@@ -4,6 +4,10 @@ package route53
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
+	"strconv"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -179,6 +183,121 @@ func (s ListHostedZonesByNameOutput) MarshalFields(e protocol.FieldEncoder) erro
 		e.SetValue(protocol.BodyTarget, "NextHostedZoneId", protocol.StringValue(v), metadata)
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *ListHostedZonesByNameOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = ListHostedZonesByNameOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML ListHostedZonesByNameOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML ListHostedZonesByNameOutput, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *ListHostedZonesByNameOutput) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = ListHostedZonesByNameOutput{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "DNSName":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListHostedZonesByNameOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.DNSName = &value
+			case "HostedZoneId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListHostedZonesByNameOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.HostedZoneId = &value
+			case "HostedZones":
+				if s.HostedZones == nil {
+					s.HostedZones = make([]HostedZone, 0)
+				}
+				err := unmarshalAWSXMLListHostedZones(&s.HostedZones, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListHostedZonesByNameOutput.%s, %s", name, err)
+				}
+			case "IsTruncated":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListHostedZonesByNameOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.IsTruncated = &value
+			case "MaxItems":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListHostedZonesByNameOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.MaxItems = &value
+			case "NextDNSName":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListHostedZonesByNameOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.NextDNSName = &value
+			case "NextHostedZoneId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListHostedZonesByNameOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.NextHostedZoneId = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListHostedZonesByNameOutput.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 const opListHostedZonesByName = "ListHostedZonesByName"

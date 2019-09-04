@@ -4,6 +4,11 @@ package s3
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
+	"net/http"
+	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -460,6 +465,194 @@ func (s CreateMultipartUploadOutput) MarshalFields(e protocol.FieldEncoder) erro
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "x-amz-server-side-encryption", v, metadata)
+	}
+	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *CreateMultipartUploadOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CreateMultipartUploadOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML CreateMultipartUploadOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML CreateMultipartUploadOutput, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *CreateMultipartUploadOutput) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CreateMultipartUploadOutput{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "x-amz-abort-date":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CreateMultipartUploadOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := protocol.ParseTime(protocol.RFC822TimeFormatName, string(v))
+				s.AbortDate = &value
+			case "x-amz-abort-rule-id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CreateMultipartUploadOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.AbortRuleId = &value
+			case "Bucket":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CreateMultipartUploadOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Bucket = &value
+			case "Key":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CreateMultipartUploadOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Key = &value
+			case "x-amz-request-charged":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CreateMultipartUploadOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := RequestCharged(v)
+				s.RequestCharged = value
+			case "x-amz-server-side-encryption-customer-algorithm":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CreateMultipartUploadOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.SSECustomerAlgorithm = &value
+			case "x-amz-server-side-encryption-customer-key-MD5":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CreateMultipartUploadOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.SSECustomerKeyMD5 = &value
+			case "x-amz-server-side-encryption-context":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CreateMultipartUploadOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.SSEKMSEncryptionContext = &value
+			case "x-amz-server-side-encryption-aws-kms-key-id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CreateMultipartUploadOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.SSEKMSKeyId = &value
+			case "x-amz-server-side-encryption":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CreateMultipartUploadOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := ServerSideEncryption(v)
+				s.ServerSideEncryption = value
+			case "UploadId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CreateMultipartUploadOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.UploadId = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CreateMultipartUploadOutput.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+// UnmarshalAWSREST decodes the AWS API shape using the passed in *http.Response.
+func (s *CreateMultipartUploadOutput) UnmarshalAWSREST(r *http.Response) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CreateMultipartUploadOutput{}
+		}
+	}()
+	for k, v := range r.Header {
+		switch {
+		case strings.EqualFold(k, "x-amz-abort-date"):
+			value, err := protocol.ParseTime(protocol.RFC822TimeFormatName, v[0])
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST CreateMultipartUploadOutput.AbortDate, %s", err)
+			}
+			s.AbortDate = &value
+		case strings.EqualFold(k, "x-amz-abort-rule-id"):
+			value := v[0]
+			s.AbortRuleId = &value
+		case strings.EqualFold(k, "x-amz-request-charged"):
+			value := RequestCharged(v[0])
+			s.RequestCharged = value
+		case strings.EqualFold(k, "x-amz-server-side-encryption-customer-algorithm"):
+			value := v[0]
+			s.SSECustomerAlgorithm = &value
+		case strings.EqualFold(k, "x-amz-server-side-encryption-customer-key-MD5"):
+			value := v[0]
+			s.SSECustomerKeyMD5 = &value
+		case strings.EqualFold(k, "x-amz-server-side-encryption-context"):
+			value := v[0]
+			s.SSEKMSEncryptionContext = &value
+		case strings.EqualFold(k, "x-amz-server-side-encryption-aws-kms-key-id"):
+			value := v[0]
+			s.SSEKMSKeyId = &value
+		case strings.EqualFold(k, "x-amz-server-side-encryption"):
+			value := ServerSideEncryption(v[0])
+			s.ServerSideEncryption = value
+		}
 	}
 	return nil
 }

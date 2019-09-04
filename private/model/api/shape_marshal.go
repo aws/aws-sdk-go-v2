@@ -79,7 +79,7 @@ func getContentType(s *Shape) string {
 	if s.API.Metadata.JSONVersion != "" && s.API.Metadata.Protocol == "json" {
 		return fmt.Sprintf("application/x-amz-json-%s", s.API.Metadata.JSONVersion)
 	}
-	if  s.API.Metadata.Protocol == "json" || s.API.Metadata.Protocol == "rest-json" {
+	if s.API.Metadata.Protocol == "json" || s.API.Metadata.Protocol == "rest-json" {
 		return "application/json"
 	}
 	return ""
@@ -90,8 +90,7 @@ var marshalShapeTmpl = template.Must(template.New("marshalShapeTmpl").Funcs(
 		"MarshalShapeRefGoCode": MarshalShapeRefGoCode,
 		"nestedRefsByLocation":  nestedRefsByLocation,
 		"isShapeFieldsNested":   isShapeFieldsNested,
-		"getContentType": getContentType,
-
+		"getContentType":        getContentType,
 	},
 ).Parse(`
 {{ define "encode shape" -}}
@@ -207,15 +206,15 @@ func isShapeFieldsNested(loc string, s *Shape) bool {
 	return loc == "Body" && len(s.LocationName) != 0 && s.API.Metadata.Protocol == "rest-xml"
 }
 
-func QuotedFormatTime(s marshalShapeRef) string  {
-	if  (s.Ref.API.Metadata.Protocol == "json" || s.Ref.API.Metadata.Protocol == "rest-json") && s.Location() == "Body" {
+func QuotedFormatTime(s marshalShapeRef) string {
+	if (s.Ref.API.Metadata.Protocol == "json" || s.Ref.API.Metadata.Protocol == "rest-json") && s.Location() == "Body" {
 		return "true"
 	}
 	return "false"
 }
 
 var marshalShapeRefTmpl = template.Must(template.New("marshalShapeRefTmpl").Funcs(template.FuncMap{
-	"Collection": Collection,
+	"Collection":       Collection,
 	"quotedFormatTime": QuotedFormatTime,
 }).Parse(`
 {{ define "encode field" -}}
@@ -723,11 +722,11 @@ func (r marshalShapeRef) IsIdempotencyToken() bool {
 }
 func (r marshalShapeRef) TimeFormat() string {
 
-	if r.Ref.TimestampFormat!="" {
-		return fmt.Sprintf("%q",r.Ref.TimestampFormat)
+	if r.Ref.TimestampFormat != "" {
+		return fmt.Sprintf("%q", r.Ref.TimestampFormat)
 	}
-	if r.Ref.Shape.TimestampFormat!= "" {
-		return fmt.Sprintf("%q",r.Ref.Shape.TimestampFormat)
+	if r.Ref.Shape.TimestampFormat != "" {
+		return fmt.Sprintf("%q", r.Ref.Shape.TimestampFormat)
 	}
 
 	switch r.Location() {
@@ -750,91 +749,6 @@ func (r marshalShapeRef) TimeFormat() string {
 		}
 	}
 }
-
-// UnmarshalShapeGoCode renders the shape's UnmarshalAWS method with unmarshalers
-// for each field within the shape. A string is returned of the rendered Go code.
-//
-// Will panic if error.
-func UnmarshalShapeGoCode(s *Shape) string {
-	w := &bytes.Buffer{}
-	if err := unmarshalShapeTmpl.Execute(w, s); err != nil {
-		panic(fmt.Sprintf("failed to render shape's fields unmarshaler, %v", err))
-	}
-
-	return w.String()
-}
-
-var unmarshalShapeTmpl = template.Must(template.New("unmarshalShapeTmpl").Funcs(
-	template.FuncMap{
-		"UnmarshalShapeRefGoCode": UnmarshalShapeRefGoCode,
-	},
-).Parse(`
-{{ $shapeName := $.ShapeName -}}
-
-// UnmarshalAWS decodes the AWS API shape using the passed in protocol decoder.
-func (s *{{ $shapeName }}) UnmarshalAWS(d protocol.FieldDecoder) {
-	{{ range $name, $ref := $.MemberRefs -}}
-		{{ UnmarshalShapeRefGoCode $name $ref $ }}
-	{{ end }}
-}
-
-{{ if $.UsedInList -}}
-func decode{{ $shapeName }}List(vsp *[]*{{ $shapeName }}) func(int, protocol.ListDecoder) {
-	return func(n int, ld protocol.ListDecoder) {
-		vs := make([]{{ $shapeName }}, n)
-		*vsp = make([]*{{ $shapeName }}, n)
-		for i := 0; i < n; i++ {
-			ld.ListGetUnmarshaler(&vs[i])
-			(*vsp)[i] = &vs[i]
-		}
-	}
-}
-{{- end }}
-
-{{ if $.UsedInMap -}}
-func decode{{ $shapeName }}Map(vsp *map[string]*{{ $shapeName }}) func([]string, protocol.MapDecoder) {
-	return func(ks []string, md protocol.MapDecoder) {
-		vs := make(map[string]*{{ $shapeName }}, n)
-		for _, k range ks {
-			v := &{{ $shapeName }}{}
-			md.MapGetUnmarshaler(k, v)
-			vs[k] = v
-		}
-	}
-}
-{{- end }}
-`))
-
-// UnmarshalShapeRefGoCode generates the Go code to unmarshal an API shape.
-func UnmarshalShapeRefGoCode(refName string, ref *ShapeRef, context *Shape) string {
-	if ref.XMLAttribute {
-		return "// Skipping " + refName + " XML Attribute."
-	}
-
-	mRef := marshalShapeRef{
-		Name:    refName,
-		Ref:     ref,
-		Context: context,
-	}
-
-	switch mRef.Location() {
-	case "Path":
-		return "// ignoring invalid decode state, Path. " + refName
-	case "Query":
-		return "// ignoring invalid decode state, Query. " + refName
-	}
-
-	w := &bytes.Buffer{}
-	if err := unmarshalShapeRefTmpl.ExecuteTemplate(w, "decode", mRef); err != nil {
-		panic(fmt.Sprintf("failed to decode shape ref, %s, %v", ref.Shape.Type, err))
-	}
-
-	return w.String()
-}
-
-var unmarshalShapeRefTmpl = template.Must(template.New("unmarshalShapeRefTmpl").Parse(`
-//  Decode {{ $.Name }} {{ $.GoType }} {{ $.MarshalerType }} to {{ $.Location }} at {{ $.LocationName }}
-`))
 
 func CanGenerateProtocolShapes(s *Shape) bool {
 	if s.Type == "list" {

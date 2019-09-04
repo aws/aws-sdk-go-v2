@@ -4,6 +4,9 @@ package route53
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -116,6 +119,80 @@ func (s CreateVPCAssociationAuthorizationOutput) MarshalFields(e protocol.FieldE
 		e.SetFields(protocol.BodyTarget, "VPC", v, metadata)
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *CreateVPCAssociationAuthorizationOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CreateVPCAssociationAuthorizationOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML CreateVPCAssociationAuthorizationOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML CreateVPCAssociationAuthorizationOutput, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *CreateVPCAssociationAuthorizationOutput) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CreateVPCAssociationAuthorizationOutput{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "HostedZoneId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CreateVPCAssociationAuthorizationOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.HostedZoneId = &value
+			case "VPC":
+				value := VPC{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CreateVPCAssociationAuthorizationOutput.%s, %s", name, err)
+				}
+				s.VPC = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CreateVPCAssociationAuthorizationOutput.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 const opCreateVPCAssociationAuthorization = "CreateVPCAssociationAuthorization"

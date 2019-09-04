@@ -4,6 +4,10 @@ package route53
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
+	"strconv"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -236,6 +240,113 @@ func (s ListTrafficPolicyInstancesByPolicyOutput) MarshalFields(e protocol.Field
 
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *ListTrafficPolicyInstancesByPolicyOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = ListTrafficPolicyInstancesByPolicyOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML ListTrafficPolicyInstancesByPolicyOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML ListTrafficPolicyInstancesByPolicyOutput, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *ListTrafficPolicyInstancesByPolicyOutput) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = ListTrafficPolicyInstancesByPolicyOutput{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "HostedZoneIdMarker":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListTrafficPolicyInstancesByPolicyOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.HostedZoneIdMarker = &value
+			case "IsTruncated":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListTrafficPolicyInstancesByPolicyOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.IsTruncated = &value
+			case "MaxItems":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListTrafficPolicyInstancesByPolicyOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.MaxItems = &value
+			case "TrafficPolicyInstanceNameMarker":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListTrafficPolicyInstancesByPolicyOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.TrafficPolicyInstanceNameMarker = &value
+			case "TrafficPolicyInstanceTypeMarker":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListTrafficPolicyInstancesByPolicyOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := RRType(v)
+				s.TrafficPolicyInstanceTypeMarker = value
+			case "TrafficPolicyInstances":
+				if s.TrafficPolicyInstances == nil {
+					s.TrafficPolicyInstances = make([]TrafficPolicyInstance, 0)
+				}
+				err := unmarshalAWSXMLListTrafficPolicyInstances(&s.TrafficPolicyInstances, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListTrafficPolicyInstancesByPolicyOutput.%s, %s", name, err)
+				}
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListTrafficPolicyInstancesByPolicyOutput.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 const opListTrafficPolicyInstancesByPolicy = "ListTrafficPolicyInstancesByPolicy"

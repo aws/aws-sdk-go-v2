@@ -4,6 +4,9 @@ package cloudfront
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -77,6 +80,36 @@ func (s ListTagsForResourceOutput) MarshalFields(e protocol.FieldEncoder) error 
 		e.SetFields(protocol.PayloadTarget, "Tags", v, metadata)
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *ListTagsForResourceOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = ListTagsForResourceOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML ListTagsForResourceOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		if s.Tags == nil {
+			s.Tags = &Tags{}
+		}
+		err = s.Tags.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML ListTagsForResourceOutput, %s", err)
+		}
+		return nil
+	}
 }
 
 const opListTagsForResource = "ListTagsForResource2019_03_26"

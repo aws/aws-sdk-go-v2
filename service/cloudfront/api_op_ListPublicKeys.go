@@ -4,6 +4,9 @@ package cloudfront
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -71,6 +74,36 @@ func (s ListPublicKeysOutput) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetFields(protocol.PayloadTarget, "PublicKeyList", v, metadata)
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *ListPublicKeysOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = ListPublicKeysOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML ListPublicKeysOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		if s.PublicKeyList == nil {
+			s.PublicKeyList = &PublicKeyList{}
+		}
+		err = s.PublicKeyList.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML ListPublicKeysOutput, %s", err)
+		}
+		return nil
+	}
 }
 
 const opListPublicKeys = "ListPublicKeys2019_03_26"

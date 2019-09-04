@@ -4,6 +4,9 @@ package cloudfront
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -81,6 +84,37 @@ func (s UntagResourceOutput) String() string {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UntagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
+}
+func (s *UntagResourceOutput) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = UntagResourceOutput{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML UntagResourceOutput.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 const opUntagResource = "UntagResource2019_03_26"

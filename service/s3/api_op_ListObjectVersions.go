@@ -4,6 +4,10 @@ package s3
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
+	"strconv"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -260,6 +264,169 @@ func (s ListObjectVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *ListObjectVersionsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = ListObjectVersionsOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML ListObjectVersionsOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML ListObjectVersionsOutput, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *ListObjectVersionsOutput) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = ListObjectVersionsOutput{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "CommonPrefixes":
+				if s.CommonPrefixes == nil {
+					s.CommonPrefixes = make([]CommonPrefix, 0)
+				}
+				err := unmarshalAWSXMLFlattenedListCommonPrefixList(&s.CommonPrefixes, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectVersionsOutput.%s, %s", name, err)
+				}
+			case "DeleteMarker":
+				if s.DeleteMarkers == nil {
+					s.DeleteMarkers = make([]DeleteMarkerEntry, 0)
+				}
+				err := unmarshalAWSXMLFlattenedListDeleteMarkers(&s.DeleteMarkers, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectVersionsOutput.%s, %s", name, err)
+				}
+			case "Delimiter":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectVersionsOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Delimiter = &value
+			case "EncodingType":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectVersionsOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := EncodingType(v)
+				s.EncodingType = value
+			case "IsTruncated":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectVersionsOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.IsTruncated = &value
+			case "KeyMarker":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectVersionsOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.KeyMarker = &value
+			case "MaxKeys":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectVersionsOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.MaxKeys = &value
+			case "Name":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectVersionsOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Name = &value
+			case "NextKeyMarker":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectVersionsOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.NextKeyMarker = &value
+			case "NextVersionIdMarker":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectVersionsOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.NextVersionIdMarker = &value
+			case "Prefix":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectVersionsOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Prefix = &value
+			case "VersionIdMarker":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectVersionsOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.VersionIdMarker = &value
+			case "Version":
+				if s.Versions == nil {
+					s.Versions = make([]ObjectVersion, 0)
+				}
+				err := unmarshalAWSXMLFlattenedListObjectVersionList(&s.Versions, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectVersionsOutput.%s, %s", name, err)
+				}
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ListObjectVersionsOutput.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 const opListObjectVersions = "ListObjectVersions"

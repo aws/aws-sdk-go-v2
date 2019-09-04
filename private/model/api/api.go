@@ -17,7 +17,8 @@ import (
 // SDKImportRoot is the root import path of the SDK.
 const SDKImportRoot = "github.com/aws/aws-sdk-go-v2"
 
-// An API defines a service API's definition. and logic to serialize the definition.
+// An API defines a service API's definition, and logic to serialize the
+// definition.
 type API struct {
 	Metadata      Metadata
 	Operations    map[string]*Operation
@@ -255,25 +256,6 @@ func (a *API) importsGoCode() string {
 	return code
 }
 
-// A tplAPI is the top level template for the API
-var tplAPI = template.Must(template.New("api").Parse(`
-{{ range $_, $o := .OperationList }}
-{{ $o.GoCode }}
-
-{{ end }}
-
-{{ range $_, $s := .ShapeList }}
-	{{- if and (and (not $s.UsedAsOutput) (not $s.UsedAsInput)) (eq $s.Type "structure") }}
-		{{ $s.GoCode }}
-	{{- end }}
-{{ end }}
-
-{{ range $_, $s := .ShapeList }}
-{{ if $s.IsEnum }}{{ $s.GoCode }}{{ end }}
-
-{{ end }}
-`))
-
 // AddImport adds the import path to the generated file's import.
 func (a *API) AddImport(v string) error {
 	a.imports[v] = true
@@ -290,7 +272,37 @@ func (a *API) AddSDKImport(v ...string) error {
 	return nil
 }
 
-// APIGoCode renders the API in Go code. Returning it as a string
+var tplAPI = func() *template.Template {
+	const tplAPIDef = `
+{{ range $_, $o := .OperationList }}
+	{{ $o.GoCode }}
+{{ end }}
+
+{{ template "tplAPIShapes" $ -}}
+
+{{ range $_, $s := .ShapeList }}
+	{{ if $s.IsEnum }}{{ $s.GoCode }}{{ end }}
+{{ end }}
+`
+
+	apiTmpl := template.Must(
+		template.New("api").
+			Funcs(template.FuncMap{
+				"UnmarshalShapeGoCode": UnmarshalShapeGoCode,
+			}).Parse(tplAPIDef),
+	)
+
+	template.Must(
+		apiTmpl.AddParseTree(
+			"tplAPIShapes",
+			tplAPIShapes.Tree),
+	)
+
+	return apiTmpl
+}()
+
+// APIGoCode renders the API's operations, and shapes as Go code. Returning all
+// as a single string.
 func (a *API) APIGoCode() string {
 	a.resetImports()
 	a.AddSDKImport("aws")
@@ -353,17 +365,25 @@ func (a *API) APIEnumsGoCode() string {
 }
 
 // A tplAPIShapes is the top level template for the API Shapes.
-var tplAPIShapes = template.Must(template.New("api").Parse(`
+var tplAPIShapes = template.Must(template.New("api").Funcs(
+	template.FuncMap{
+		"UnmarshalShapeGoCode": UnmarshalShapeGoCode,
+	},
+).Parse(` 
 {{ range $_, $s := .ShapeList }}
 	{{ if and (and (not $s.UsedAsInput) (not $s.UsedAsOutput)) (eq $s.Type "structure") -}}
 		{{ $s.GoCode }}
-	{{- end }}
+	{{ else if or (eq $s.Type "list") (eq $s.Type "map") -}}
+		{{ if not $s.API.NoGenUnmarshalers -}}
+			{{ UnmarshalShapeGoCode $s }}
+		{{ end -}}
+	{{ end -}}
 {{ end }}
 `))
 
-// APIParamShapesGoCode renders the API's shape types in Go code. Returning
-// them as a string.
-func (a *API) APIParamShapesGoCode() string {
+// APIShapesGoCode renders the non-input/output API's shape types in Go
+// code. Returning them as a string.
+func (a *API) APIShapesGoCode() string {
 	a.resetImports()
 	a.AddSDKImport("aws")
 	a.AddSDKImport("internal/awsutil")

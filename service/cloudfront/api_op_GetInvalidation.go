@@ -4,6 +4,9 @@ package cloudfront
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -91,6 +94,36 @@ func (s GetInvalidationOutput) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetFields(protocol.PayloadTarget, "Invalidation", v, metadata)
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *GetInvalidationOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = GetInvalidationOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML GetInvalidationOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		if s.Invalidation == nil {
+			s.Invalidation = &Invalidation{}
+		}
+		err = s.Invalidation.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML GetInvalidationOutput, %s", err)
+		}
+		return nil
+	}
 }
 
 const opGetInvalidation = "GetInvalidation2019_03_26"

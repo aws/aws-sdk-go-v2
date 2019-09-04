@@ -36,7 +36,10 @@ func (a *API) EnableSelectGeneratedMarshalers() {
 
 	// Enable generated marshalers
 	switch a.Metadata.Protocol {
-	case "rest-xml", "rest-json":
+	case "rest-xml":
+		a.NoGenMarshalers = false
+		a.NoGenUnmarshalers = false
+	case "rest-json":
 		a.NoGenMarshalers = false
 	}
 }

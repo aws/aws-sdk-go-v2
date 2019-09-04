@@ -4,6 +4,9 @@ package s3
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -80,6 +83,36 @@ func (s GetBucketPolicyStatusOutput) MarshalFields(e protocol.FieldEncoder) erro
 		e.SetFields(protocol.PayloadTarget, "PolicyStatus", v, metadata)
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *GetBucketPolicyStatusOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = GetBucketPolicyStatusOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML GetBucketPolicyStatusOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		if s.PolicyStatus == nil {
+			s.PolicyStatus = &PolicyStatus{}
+		}
+		err = s.PolicyStatus.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML GetBucketPolicyStatusOutput, %s", err)
+		}
+		return nil
+	}
 }
 
 const opGetBucketPolicyStatus = "GetBucketPolicyStatus"

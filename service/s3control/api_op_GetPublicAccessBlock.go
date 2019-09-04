@@ -4,6 +4,9 @@ package s3control
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -70,6 +73,36 @@ func (s GetPublicAccessBlockOutput) MarshalFields(e protocol.FieldEncoder) error
 		e.SetFields(protocol.PayloadTarget, "PublicAccessBlockConfiguration", v, metadata)
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *GetPublicAccessBlockOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = GetPublicAccessBlockOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML GetPublicAccessBlockOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		if s.PublicAccessBlockConfiguration == nil {
+			s.PublicAccessBlockConfiguration = &PublicAccessBlockConfiguration{}
+		}
+		err = s.PublicAccessBlockConfiguration.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML GetPublicAccessBlockOutput, %s", err)
+		}
+		return nil
+	}
 }
 
 const opGetPublicAccessBlock = "GetPublicAccessBlock"

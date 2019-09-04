@@ -4,6 +4,9 @@ package s3
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -80,6 +83,36 @@ func (s GetObjectLockConfigurationOutput) MarshalFields(e protocol.FieldEncoder)
 		e.SetFields(protocol.PayloadTarget, "ObjectLockConfiguration", v, metadata)
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *GetObjectLockConfigurationOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = GetObjectLockConfigurationOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML GetObjectLockConfigurationOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		if s.ObjectLockConfiguration == nil {
+			s.ObjectLockConfiguration = &ObjectLockConfiguration{}
+		}
+		err = s.ObjectLockConfiguration.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML GetObjectLockConfigurationOutput, %s", err)
+		}
+		return nil
+	}
 }
 
 const opGetObjectLockConfiguration = "GetObjectLockConfiguration"

@@ -4,6 +4,9 @@ package cloudfront
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -72,6 +75,36 @@ func (s ListFieldLevelEncryptionProfilesOutput) MarshalFields(e protocol.FieldEn
 		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionProfileList", v, metadata)
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *ListFieldLevelEncryptionProfilesOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = ListFieldLevelEncryptionProfilesOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML ListFieldLevelEncryptionProfilesOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		if s.FieldLevelEncryptionProfileList == nil {
+			s.FieldLevelEncryptionProfileList = &FieldLevelEncryptionProfileList{}
+		}
+		err = s.FieldLevelEncryptionProfileList.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML ListFieldLevelEncryptionProfilesOutput, %s", err)
+		}
+		return nil
+	}
 }
 
 const opListFieldLevelEncryptionProfiles = "ListFieldLevelEncryptionProfiles2019_03_26"

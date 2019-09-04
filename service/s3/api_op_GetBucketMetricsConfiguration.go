@@ -4,6 +4,9 @@ package s3
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -95,6 +98,36 @@ func (s GetBucketMetricsConfigurationOutput) MarshalFields(e protocol.FieldEncod
 		e.SetFields(protocol.PayloadTarget, "MetricsConfiguration", v, metadata)
 	}
 	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *GetBucketMetricsConfigurationOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = GetBucketMetricsConfigurationOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML GetBucketMetricsConfigurationOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		if s.MetricsConfiguration == nil {
+			s.MetricsConfiguration = &MetricsConfiguration{}
+		}
+		err = s.MetricsConfiguration.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML GetBucketMetricsConfigurationOutput, %s", err)
+		}
+		return nil
+	}
 }
 
 const opGetBucketMetricsConfiguration = "GetBucketMetricsConfiguration"

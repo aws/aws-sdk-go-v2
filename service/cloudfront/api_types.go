@@ -3,7 +3,9 @@
 package cloudfront
 
 import (
+	"encoding/xml"
 	"fmt"
+	"strconv"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -80,6 +82,59 @@ func (s ActiveTrustedSigners) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *ActiveTrustedSigners) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = ActiveTrustedSigners{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML ActiveTrustedSigners.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Enabled":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ActiveTrustedSigners.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.Enabled = &value
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]Signer, 0)
+				}
+				err := unmarshalAWSXMLListSignerList(&s.Items, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ActiveTrustedSigners.%s, %s", name, err)
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ActiveTrustedSigners.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ActiveTrustedSigners.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // AWS services in China customers must file for an Internet Content Provider
 // (ICP) recordal if they want to serve content publicly on an alternate domain
@@ -136,6 +191,152 @@ func (s AliasICPRecordal) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ICPRecordalStatus", v, metadata)
 	}
+	return nil
+}
+func (s *AliasICPRecordal) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = AliasICPRecordal{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML AliasICPRecordal.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "CNAME":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML AliasICPRecordal.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.CNAME = &value
+			case "ICPRecordalStatus":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML AliasICPRecordal.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := ICPRecordalStatus(v)
+				s.ICPRecordalStatus = value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML AliasICPRecordal.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListAliasICPRecordals(s *[]AliasICPRecordal, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]AliasICPRecordal, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "AliasICPRecordal":
+				value := AliasICPRecordal{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []AliasICPRecordal.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []AliasICPRecordal.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListAliasICPRecordals(s *[]AliasICPRecordal, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]AliasICPRecordal, 0)
+		}
+	}()
+	value := AliasICPRecordal{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
+	return nil
+}
+
+func unmarshalAWSXMLListAliasList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "CNAME":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListAliasList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
 	return nil
 }
 
@@ -196,6 +397,76 @@ func (s Aliases) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
 	}
 	return nil
+}
+func (s *Aliases) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = Aliases{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML Aliases.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]string, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML Aliases.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "Items" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "CNAME":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML Aliases.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value := string(v)
+							s.Items = append(s.Items, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Aliases.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Aliases.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A complex type that controls which HTTP methods CloudFront processes and
@@ -297,6 +568,131 @@ func (s AllowedMethods) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
 	}
+	return nil
+}
+func (s *AllowedMethods) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = AllowedMethods{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML AllowedMethods.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "CachedMethods":
+				value := CachedMethods{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML AllowedMethods.%s, %s", name, err)
+				}
+				s.CachedMethods = &value
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]Method, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML AllowedMethods.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "Items" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "Method":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML AllowedMethods.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value := Method(v)
+							s.Items = append(s.Items, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML AllowedMethods.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML AllowedMethods.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListAwsAccountNumberList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "AwsAccountNumber":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListAwsAccountNumberList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
 	return nil
 }
 
@@ -621,6 +1017,188 @@ func (s CacheBehavior) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *CacheBehavior) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CacheBehavior{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML CacheBehavior.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "AllowedMethods":
+				value := AllowedMethods{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CacheBehavior.%s, %s", name, err)
+				}
+				s.AllowedMethods = &value
+			case "Compress":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CacheBehavior.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.Compress = &value
+			case "DefaultTTL":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CacheBehavior.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.DefaultTTL = &value
+			case "FieldLevelEncryptionId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CacheBehavior.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.FieldLevelEncryptionId = &value
+			case "ForwardedValues":
+				value := ForwardedValues{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CacheBehavior.%s, %s", name, err)
+				}
+				s.ForwardedValues = &value
+			case "LambdaFunctionAssociations":
+				value := LambdaFunctionAssociations{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CacheBehavior.%s, %s", name, err)
+				}
+				s.LambdaFunctionAssociations = &value
+			case "MaxTTL":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CacheBehavior.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.MaxTTL = &value
+			case "MinTTL":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CacheBehavior.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.MinTTL = &value
+			case "PathPattern":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CacheBehavior.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.PathPattern = &value
+			case "SmoothStreaming":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CacheBehavior.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.SmoothStreaming = &value
+			case "TargetOriginId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CacheBehavior.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.TargetOriginId = &value
+			case "TrustedSigners":
+				value := TrustedSigners{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CacheBehavior.%s, %s", name, err)
+				}
+				s.TrustedSigners = &value
+			case "ViewerProtocolPolicy":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CacheBehavior.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := ViewerProtocolPolicy(v)
+				s.ViewerProtocolPolicy = value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CacheBehavior.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListCacheBehaviorList(s *[]CacheBehavior, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]CacheBehavior, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "CacheBehavior":
+				value := CacheBehavior{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []CacheBehavior.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []CacheBehavior.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListCacheBehaviorList(s *[]CacheBehavior, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]CacheBehavior, 0)
+		}
+	}()
+	value := CacheBehavior{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
+	return nil
+}
 
 // A complex type that contains zero or more CacheBehavior elements.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CacheBehaviors
@@ -684,6 +1262,51 @@ func (s CacheBehaviors) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
 	}
 	return nil
+}
+func (s *CacheBehaviors) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CacheBehaviors{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML CacheBehaviors.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]CacheBehavior, 0)
+				}
+				err := unmarshalAWSXMLListCacheBehaviorList(&s.Items, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CacheBehaviors.%s, %s", name, err)
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CacheBehaviors.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CacheBehaviors.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A complex type that controls whether CloudFront caches the response to requests
@@ -759,6 +1382,76 @@ func (s CachedMethods) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *CachedMethods) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CachedMethods{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML CachedMethods.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]Method, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML CachedMethods.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "Items" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "Method":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML CachedMethods.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value := Method(v)
+							s.Items = append(s.Items, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CachedMethods.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CachedMethods.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // CloudFront origin access identity.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CloudFrontOriginAccessIdentity
@@ -807,6 +1500,58 @@ func (s CloudFrontOriginAccessIdentity) MarshalFields(e protocol.FieldEncoder) e
 		e.SetValue(protocol.BodyTarget, "S3CanonicalUserId", protocol.StringValue(v), metadata)
 	}
 	return nil
+}
+func (s *CloudFrontOriginAccessIdentity) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CloudFrontOriginAccessIdentity{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentity.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "CloudFrontOriginAccessIdentityConfig":
+				value := CloudFrontOriginAccessIdentityConfig{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentity.%s, %s", name, err)
+				}
+				s.CloudFrontOriginAccessIdentityConfig = &value
+			case "Id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentity.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Id = &value
+			case "S3CanonicalUserId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentity.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.S3CanonicalUserId = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentity.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // Origin access identity configuration. Send a GET request to the /CloudFront
@@ -879,6 +1624,51 @@ func (s CloudFrontOriginAccessIdentityConfig) MarshalFields(e protocol.FieldEnco
 		e.SetValue(protocol.BodyTarget, "Comment", protocol.StringValue(v), metadata)
 	}
 	return nil
+}
+func (s *CloudFrontOriginAccessIdentityConfig) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CloudFrontOriginAccessIdentityConfig{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentityConfig.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "CallerReference":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentityConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.CallerReference = &value
+			case "Comment":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentityConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Comment = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentityConfig.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // Lists the origin access identities for CloudFront.Send a GET request to the
@@ -980,6 +1770,83 @@ func (s CloudFrontOriginAccessIdentityList) MarshalFields(e protocol.FieldEncode
 	}
 	return nil
 }
+func (s *CloudFrontOriginAccessIdentityList) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CloudFrontOriginAccessIdentityList{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentityList.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "IsTruncated":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentityList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.IsTruncated = &value
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]CloudFrontOriginAccessIdentitySummary, 0)
+				}
+				err := unmarshalAWSXMLListCloudFrontOriginAccessIdentitySummaryList(&s.Items, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentityList.%s, %s", name, err)
+				}
+			case "Marker":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentityList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Marker = &value
+			case "MaxItems":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentityList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.MaxItems = &value
+			case "NextMarker":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentityList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.NextMarker = &value
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentityList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentityList.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // Summary of the information about a CloudFront origin access identity.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CloudFrontOriginAccessIdentitySummary
@@ -1030,6 +1897,112 @@ func (s CloudFrontOriginAccessIdentitySummary) MarshalFields(e protocol.FieldEnc
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "S3CanonicalUserId", protocol.StringValue(v), metadata)
 	}
+	return nil
+}
+func (s *CloudFrontOriginAccessIdentitySummary) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CloudFrontOriginAccessIdentitySummary{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentitySummary.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Comment":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentitySummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Comment = &value
+			case "Id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentitySummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Id = &value
+			case "S3CanonicalUserId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentitySummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.S3CanonicalUserId = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CloudFrontOriginAccessIdentitySummary.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListCloudFrontOriginAccessIdentitySummaryList(s *[]CloudFrontOriginAccessIdentitySummary, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]CloudFrontOriginAccessIdentitySummary, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "CloudFrontOriginAccessIdentitySummary":
+				value := CloudFrontOriginAccessIdentitySummary{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []CloudFrontOriginAccessIdentitySummary.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []CloudFrontOriginAccessIdentitySummary.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListCloudFrontOriginAccessIdentitySummaryList(s *[]CloudFrontOriginAccessIdentitySummary, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]CloudFrontOriginAccessIdentitySummary, 0)
+		}
+	}()
+	value := CloudFrontOriginAccessIdentitySummary{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
 	return nil
 }
 
@@ -1096,6 +2069,59 @@ func (s ContentTypeProfile) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *ContentTypeProfile) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = ContentTypeProfile{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML ContentTypeProfile.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "ContentType":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ContentTypeProfile.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ContentType = &value
+			case "Format":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ContentTypeProfile.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := Format(v)
+				s.Format = value
+			case "ProfileId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ContentTypeProfile.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ProfileId = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ContentTypeProfile.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // The configuration for a field-level encryption content type-profile mapping.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ContentTypeProfileConfig
@@ -1153,6 +2179,103 @@ func (s ContentTypeProfileConfig) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ForwardWhenContentTypeIsUnknown", protocol.BoolValue(v), metadata)
 	}
+	return nil
+}
+func (s *ContentTypeProfileConfig) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = ContentTypeProfileConfig{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML ContentTypeProfileConfig.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "ContentTypeProfiles":
+				value := ContentTypeProfiles{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ContentTypeProfileConfig.%s, %s", name, err)
+				}
+				s.ContentTypeProfiles = &value
+			case "ForwardWhenContentTypeIsUnknown":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ContentTypeProfileConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.ForwardWhenContentTypeIsUnknown = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ContentTypeProfileConfig.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListContentTypeProfileList(s *[]ContentTypeProfile, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]ContentTypeProfile, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "ContentTypeProfile":
+				value := ContentTypeProfile{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []ContentTypeProfile.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []ContentTypeProfile.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListContentTypeProfileList(s *[]ContentTypeProfile, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]ContentTypeProfile, 0)
+		}
+	}()
+	value := ContentTypeProfile{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
 	return nil
 }
 
@@ -1218,6 +2341,99 @@ func (s ContentTypeProfiles) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *ContentTypeProfiles) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = ContentTypeProfiles{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML ContentTypeProfiles.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]ContentTypeProfile, 0)
+				}
+				err := unmarshalAWSXMLListContentTypeProfileList(&s.Items, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ContentTypeProfiles.%s, %s", name, err)
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ContentTypeProfiles.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ContentTypeProfiles.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListCookieNameList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Name":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListCookieNameList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	return nil
+}
 
 // A complex type that specifies whether you want CloudFront to forward cookies
 // to the origin and, if so, which ones. For more information about forwarding
@@ -1278,6 +2494,76 @@ func (s CookieNames) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
 	}
 	return nil
+}
+func (s *CookieNames) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CookieNames{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML CookieNames.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]string, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML CookieNames.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "Items" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "Name":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML CookieNames.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value := string(v)
+							s.Items = append(s.Items, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CookieNames.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CookieNames.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A complex type that specifies whether you want CloudFront to forward cookies
@@ -1352,6 +2638,50 @@ func (s CookiePreference) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetFields(protocol.BodyTarget, "WhitelistedNames", v, metadata)
 	}
 	return nil
+}
+func (s *CookiePreference) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CookiePreference{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML CookiePreference.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Forward":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CookiePreference.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := ItemSelection(v)
+				s.Forward = value
+			case "WhitelistedNames":
+				value := CookieNames{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CookiePreference.%s, %s", name, err)
+				}
+				s.WhitelistedNames = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CookiePreference.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A complex type that controls:
@@ -1481,6 +2811,120 @@ func (s CustomErrorResponse) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *CustomErrorResponse) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CustomErrorResponse{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML CustomErrorResponse.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "ErrorCachingMinTTL":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CustomErrorResponse.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.ErrorCachingMinTTL = &value
+			case "ErrorCode":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CustomErrorResponse.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.ErrorCode = &value
+			case "ResponseCode":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CustomErrorResponse.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ResponseCode = &value
+			case "ResponsePagePath":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CustomErrorResponse.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ResponsePagePath = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CustomErrorResponse.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListCustomErrorResponseList(s *[]CustomErrorResponse, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]CustomErrorResponse, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "CustomErrorResponse":
+				value := CustomErrorResponse{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []CustomErrorResponse.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []CustomErrorResponse.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListCustomErrorResponseList(s *[]CustomErrorResponse, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]CustomErrorResponse, 0)
+		}
+	}()
+	value := CustomErrorResponse{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
+	return nil
+}
 
 // A complex type that controls:
 //
@@ -1556,6 +3000,51 @@ func (s CustomErrorResponses) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *CustomErrorResponses) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CustomErrorResponses{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML CustomErrorResponses.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]CustomErrorResponse, 0)
+				}
+				err := unmarshalAWSXMLListCustomErrorResponseList(&s.Items, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CustomErrorResponses.%s, %s", name, err)
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CustomErrorResponses.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CustomErrorResponses.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // A complex type that contains the list of Custom Headers for each origin.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CustomHeaders
@@ -1620,6 +3109,51 @@ func (s CustomHeaders) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
 	}
 	return nil
+}
+func (s *CustomHeaders) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CustomHeaders{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML CustomHeaders.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]OriginCustomHeader, 0)
+				}
+				err := unmarshalAWSXMLListOriginCustomHeadersList(&s.Items, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CustomHeaders.%s, %s", name, err)
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CustomHeaders.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CustomHeaders.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A custom origin or an Amazon S3 bucket configured as a website endpoint.
@@ -1735,6 +3269,82 @@ func (s CustomOriginConfig) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetFields(protocol.BodyTarget, "OriginSslProtocols", v, metadata)
 	}
 	return nil
+}
+func (s *CustomOriginConfig) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = CustomOriginConfig{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML CustomOriginConfig.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "HTTPPort":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CustomOriginConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.HTTPPort = &value
+			case "HTTPSPort":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CustomOriginConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.HTTPSPort = &value
+			case "OriginKeepaliveTimeout":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CustomOriginConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.OriginKeepaliveTimeout = &value
+			case "OriginProtocolPolicy":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CustomOriginConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := OriginProtocolPolicy(v)
+				s.OriginProtocolPolicy = value
+			case "OriginReadTimeout":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CustomOriginConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.OriginReadTimeout = &value
+			case "OriginSslProtocols":
+				value := OriginSslProtocols{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CustomOriginConfig.%s, %s", name, err)
+				}
+				s.OriginSslProtocols = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML CustomOriginConfig.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A complex type that describes the default cache behavior if you don't specify
@@ -2006,6 +3616,127 @@ func (s DefaultCacheBehavior) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *DefaultCacheBehavior) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = DefaultCacheBehavior{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML DefaultCacheBehavior.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "AllowedMethods":
+				value := AllowedMethods{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DefaultCacheBehavior.%s, %s", name, err)
+				}
+				s.AllowedMethods = &value
+			case "Compress":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DefaultCacheBehavior.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.Compress = &value
+			case "DefaultTTL":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DefaultCacheBehavior.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.DefaultTTL = &value
+			case "FieldLevelEncryptionId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DefaultCacheBehavior.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.FieldLevelEncryptionId = &value
+			case "ForwardedValues":
+				value := ForwardedValues{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DefaultCacheBehavior.%s, %s", name, err)
+				}
+				s.ForwardedValues = &value
+			case "LambdaFunctionAssociations":
+				value := LambdaFunctionAssociations{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DefaultCacheBehavior.%s, %s", name, err)
+				}
+				s.LambdaFunctionAssociations = &value
+			case "MaxTTL":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DefaultCacheBehavior.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.MaxTTL = &value
+			case "MinTTL":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DefaultCacheBehavior.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.MinTTL = &value
+			case "SmoothStreaming":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DefaultCacheBehavior.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.SmoothStreaming = &value
+			case "TargetOriginId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DefaultCacheBehavior.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.TargetOriginId = &value
+			case "TrustedSigners":
+				value := TrustedSigners{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DefaultCacheBehavior.%s, %s", name, err)
+				}
+				s.TrustedSigners = &value
+			case "ViewerProtocolPolicy":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DefaultCacheBehavior.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := ViewerProtocolPolicy(v)
+				s.ViewerProtocolPolicy = value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DefaultCacheBehavior.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // A distribution tells CloudFront where you want content to be delivered from,
 // and the details about how to track and manage content delivery.
@@ -2144,6 +3875,105 @@ func (s Distribution) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), metadata)
 	}
 	return nil
+}
+func (s *Distribution) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = Distribution{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML Distribution.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "ARN":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Distribution.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ARN = &value
+			case "ActiveTrustedSigners":
+				value := ActiveTrustedSigners{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Distribution.%s, %s", name, err)
+				}
+				s.ActiveTrustedSigners = &value
+			case "AliasICPRecordals":
+				if s.AliasICPRecordals == nil {
+					s.AliasICPRecordals = make([]AliasICPRecordal, 0)
+				}
+				err := unmarshalAWSXMLListAliasICPRecordals(&s.AliasICPRecordals, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Distribution.%s, %s", name, err)
+				}
+			case "DistributionConfig":
+				value := DistributionConfig{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Distribution.%s, %s", name, err)
+				}
+				s.DistributionConfig = &value
+			case "DomainName":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Distribution.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.DomainName = &value
+			case "Id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Distribution.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Id = &value
+			case "InProgressInvalidationBatches":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Distribution.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.InProgressInvalidationBatches = &value
+			case "LastModifiedTime":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Distribution.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
+				s.LastModifiedTime = &value
+			case "Status":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Distribution.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Status = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Distribution.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A distribution configuration.
@@ -2515,6 +4345,162 @@ func (s DistributionConfig) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *DistributionConfig) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = DistributionConfig{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfig.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Aliases":
+				value := Aliases{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfig.%s, %s", name, err)
+				}
+				s.Aliases = &value
+			case "CacheBehaviors":
+				value := CacheBehaviors{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfig.%s, %s", name, err)
+				}
+				s.CacheBehaviors = &value
+			case "CallerReference":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.CallerReference = &value
+			case "Comment":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Comment = &value
+			case "CustomErrorResponses":
+				value := CustomErrorResponses{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfig.%s, %s", name, err)
+				}
+				s.CustomErrorResponses = &value
+			case "DefaultCacheBehavior":
+				value := DefaultCacheBehavior{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfig.%s, %s", name, err)
+				}
+				s.DefaultCacheBehavior = &value
+			case "DefaultRootObject":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.DefaultRootObject = &value
+			case "Enabled":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.Enabled = &value
+			case "HttpVersion":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := HttpVersion(v)
+				s.HttpVersion = value
+			case "IsIPV6Enabled":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.IsIPV6Enabled = &value
+			case "Logging":
+				value := LoggingConfig{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfig.%s, %s", name, err)
+				}
+				s.Logging = &value
+			case "OriginGroups":
+				value := OriginGroups{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfig.%s, %s", name, err)
+				}
+				s.OriginGroups = &value
+			case "Origins":
+				value := Origins{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfig.%s, %s", name, err)
+				}
+				s.Origins = &value
+			case "PriceClass":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := PriceClass(v)
+				s.PriceClass = value
+			case "Restrictions":
+				value := Restrictions{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfig.%s, %s", name, err)
+				}
+				s.Restrictions = &value
+			case "ViewerCertificate":
+				value := ViewerCertificate{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfig.%s, %s", name, err)
+				}
+				s.ViewerCertificate = &value
+			case "WebACLId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.WebACLId = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfig.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // A distribution Configuration and a list of tags to be associated with the
 // distribution.
@@ -2581,6 +4567,49 @@ func (s DistributionConfigWithTags) MarshalFields(e protocol.FieldEncoder) error
 		e.SetFields(protocol.BodyTarget, "Tags", v, metadata)
 	}
 	return nil
+}
+func (s *DistributionConfigWithTags) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = DistributionConfigWithTags{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfigWithTags.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "DistributionConfig":
+				value := DistributionConfig{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfigWithTags.%s, %s", name, err)
+				}
+				s.DistributionConfig = &value
+			case "Tags":
+				value := Tags{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfigWithTags.%s, %s", name, err)
+				}
+				s.Tags = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionConfigWithTags.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A distribution list.
@@ -2671,6 +4700,83 @@ func (s DistributionList) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
 	}
 	return nil
+}
+func (s *DistributionList) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = DistributionList{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML DistributionList.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "IsTruncated":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.IsTruncated = &value
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]DistributionSummary, 0)
+				}
+				err := unmarshalAWSXMLListDistributionSummaryList(&s.Items, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionList.%s, %s", name, err)
+				}
+			case "Marker":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Marker = &value
+			case "MaxItems":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.MaxItems = &value
+			case "NextMarker":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.NextMarker = &value
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionList.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A summary of the information about a CloudFront distribution.
@@ -2931,6 +5037,240 @@ func (s DistributionSummary) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *DistributionSummary) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = DistributionSummary{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "ARN":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ARN = &value
+			case "AliasICPRecordals":
+				if s.AliasICPRecordals == nil {
+					s.AliasICPRecordals = make([]AliasICPRecordal, 0)
+				}
+				err := unmarshalAWSXMLListAliasICPRecordals(&s.AliasICPRecordals, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+			case "Aliases":
+				value := Aliases{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+				s.Aliases = &value
+			case "CacheBehaviors":
+				value := CacheBehaviors{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+				s.CacheBehaviors = &value
+			case "Comment":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Comment = &value
+			case "CustomErrorResponses":
+				value := CustomErrorResponses{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+				s.CustomErrorResponses = &value
+			case "DefaultCacheBehavior":
+				value := DefaultCacheBehavior{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+				s.DefaultCacheBehavior = &value
+			case "DomainName":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.DomainName = &value
+			case "Enabled":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.Enabled = &value
+			case "HttpVersion":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := HttpVersion(v)
+				s.HttpVersion = value
+			case "Id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Id = &value
+			case "IsIPV6Enabled":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.IsIPV6Enabled = &value
+			case "LastModifiedTime":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
+				s.LastModifiedTime = &value
+			case "OriginGroups":
+				value := OriginGroups{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+				s.OriginGroups = &value
+			case "Origins":
+				value := Origins{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+				s.Origins = &value
+			case "PriceClass":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := PriceClass(v)
+				s.PriceClass = value
+			case "Restrictions":
+				value := Restrictions{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+				s.Restrictions = &value
+			case "Status":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Status = &value
+			case "ViewerCertificate":
+				value := ViewerCertificate{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+				s.ViewerCertificate = &value
+			case "WebACLId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.WebACLId = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListDistributionSummaryList(s *[]DistributionSummary, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]DistributionSummary, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "DistributionSummary":
+				value := DistributionSummary{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []DistributionSummary.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []DistributionSummary.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListDistributionSummaryList(s *[]DistributionSummary, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]DistributionSummary, 0)
+		}
+	}()
+	value := DistributionSummary{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
+	return nil
+}
 
 // Complex data type for field-level encryption profiles that includes all of
 // the encryption entities.
@@ -2996,6 +5336,51 @@ func (s EncryptionEntities) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
 	}
 	return nil
+}
+func (s *EncryptionEntities) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = EncryptionEntities{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML EncryptionEntities.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]EncryptionEntity, 0)
+				}
+				err := unmarshalAWSXMLListEncryptionEntityList(&s.Items, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML EncryptionEntities.%s, %s", name, err)
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML EncryptionEntities.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML EncryptionEntities.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // Complex data type for field-level encryption profiles that includes the encryption
@@ -3081,6 +5466,111 @@ func (s EncryptionEntity) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *EncryptionEntity) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = EncryptionEntity{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML EncryptionEntity.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "FieldPatterns":
+				value := FieldPatterns{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML EncryptionEntity.%s, %s", name, err)
+				}
+				s.FieldPatterns = &value
+			case "ProviderId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML EncryptionEntity.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ProviderId = &value
+			case "PublicKeyId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML EncryptionEntity.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.PublicKeyId = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML EncryptionEntity.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListEncryptionEntityList(s *[]EncryptionEntity, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]EncryptionEntity, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "EncryptionEntity":
+				value := EncryptionEntity{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []EncryptionEntity.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []EncryptionEntity.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListEncryptionEntityList(s *[]EncryptionEntity, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]EncryptionEntity, 0)
+		}
+	}()
+	value := EncryptionEntity{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
+	return nil
+}
 
 // A complex data type that includes the profile configurations and other options
 // specified for field-level encryption.
@@ -3134,6 +5624,58 @@ func (s FieldLevelEncryption) MarshalFields(e protocol.FieldEncoder) error {
 			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	return nil
+}
+func (s *FieldLevelEncryption) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = FieldLevelEncryption{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryption.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "FieldLevelEncryptionConfig":
+				value := FieldLevelEncryptionConfig{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryption.%s, %s", name, err)
+				}
+				s.FieldLevelEncryptionConfig = &value
+			case "Id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryption.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Id = &value
+			case "LastModifiedTime":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryption.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
+				s.LastModifiedTime = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryption.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A complex data type that includes the profile configurations specified for
@@ -3217,6 +5759,65 @@ func (s FieldLevelEncryptionConfig) MarshalFields(e protocol.FieldEncoder) error
 	}
 	return nil
 }
+func (s *FieldLevelEncryptionConfig) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = FieldLevelEncryptionConfig{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionConfig.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "CallerReference":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.CallerReference = &value
+			case "Comment":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Comment = &value
+			case "ContentTypeProfileConfig":
+				value := ContentTypeProfileConfig{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionConfig.%s, %s", name, err)
+				}
+				s.ContentTypeProfileConfig = &value
+			case "QueryArgProfileConfig":
+				value := QueryArgProfileConfig{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionConfig.%s, %s", name, err)
+				}
+				s.QueryArgProfileConfig = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionConfig.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // List of field-level encrpytion configurations.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionList
@@ -3281,6 +5882,67 @@ func (s FieldLevelEncryptionList) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *FieldLevelEncryptionList) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = FieldLevelEncryptionList{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionList.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]FieldLevelEncryptionSummary, 0)
+				}
+				err := unmarshalAWSXMLListFieldLevelEncryptionSummaryList(&s.Items, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionList.%s, %s", name, err)
+				}
+			case "MaxItems":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.MaxItems = &value
+			case "NextMarker":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.NextMarker = &value
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionList.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // A complex data type for field-level encryption profiles.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionProfile
@@ -3333,6 +5995,58 @@ func (s FieldLevelEncryptionProfile) MarshalFields(e protocol.FieldEncoder) erro
 			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
 	}
 	return nil
+}
+func (s *FieldLevelEncryptionProfile) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = FieldLevelEncryptionProfile{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfile.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "FieldLevelEncryptionProfileConfig":
+				value := FieldLevelEncryptionProfileConfig{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfile.%s, %s", name, err)
+				}
+				s.FieldLevelEncryptionProfileConfig = &value
+			case "Id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfile.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Id = &value
+			case "LastModifiedTime":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfile.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
+				s.LastModifiedTime = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfile.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A complex data type of profiles for the field-level encryption.
@@ -3421,6 +6135,66 @@ func (s FieldLevelEncryptionProfileConfig) MarshalFields(e protocol.FieldEncoder
 	}
 	return nil
 }
+func (s *FieldLevelEncryptionProfileConfig) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = FieldLevelEncryptionProfileConfig{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfileConfig.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "CallerReference":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfileConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.CallerReference = &value
+			case "Comment":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfileConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Comment = &value
+			case "EncryptionEntities":
+				value := EncryptionEntities{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfileConfig.%s, %s", name, err)
+				}
+				s.EncryptionEntities = &value
+			case "Name":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfileConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Name = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfileConfig.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // List of field-level encryption profiles.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionProfileList
@@ -3485,6 +6259,67 @@ func (s FieldLevelEncryptionProfileList) MarshalFields(e protocol.FieldEncoder) 
 		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
 	}
 	return nil
+}
+func (s *FieldLevelEncryptionProfileList) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = FieldLevelEncryptionProfileList{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfileList.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]FieldLevelEncryptionProfileSummary, 0)
+				}
+				err := unmarshalAWSXMLListFieldLevelEncryptionProfileSummaryList(&s.Items, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfileList.%s, %s", name, err)
+				}
+			case "MaxItems":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfileList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.MaxItems = &value
+			case "NextMarker":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfileList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.NextMarker = &value
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfileList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfileList.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // The field-level encryption profile summary.
@@ -3558,6 +6393,127 @@ func (s FieldLevelEncryptionProfileSummary) MarshalFields(e protocol.FieldEncode
 	}
 	return nil
 }
+func (s *FieldLevelEncryptionProfileSummary) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = FieldLevelEncryptionProfileSummary{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfileSummary.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Comment":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfileSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Comment = &value
+			case "EncryptionEntities":
+				value := EncryptionEntities{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfileSummary.%s, %s", name, err)
+				}
+				s.EncryptionEntities = &value
+			case "Id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfileSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Id = &value
+			case "LastModifiedTime":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfileSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
+				s.LastModifiedTime = &value
+			case "Name":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfileSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Name = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfileSummary.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListFieldLevelEncryptionProfileSummaryList(s *[]FieldLevelEncryptionProfileSummary, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]FieldLevelEncryptionProfileSummary, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "FieldLevelEncryptionProfileSummary":
+				value := FieldLevelEncryptionProfileSummary{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []FieldLevelEncryptionProfileSummary.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []FieldLevelEncryptionProfileSummary.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListFieldLevelEncryptionProfileSummaryList(s *[]FieldLevelEncryptionProfileSummary, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]FieldLevelEncryptionProfileSummary, 0)
+		}
+	}()
+	value := FieldLevelEncryptionProfileSummary{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
+	return nil
+}
 
 // A summary of a field-level encryption item.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/FieldLevelEncryptionSummary
@@ -3624,6 +6580,174 @@ func (s FieldLevelEncryptionSummary) MarshalFields(e protocol.FieldEncoder) erro
 	}
 	return nil
 }
+func (s *FieldLevelEncryptionSummary) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = FieldLevelEncryptionSummary{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionSummary.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Comment":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Comment = &value
+			case "ContentTypeProfileConfig":
+				value := ContentTypeProfileConfig{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionSummary.%s, %s", name, err)
+				}
+				s.ContentTypeProfileConfig = &value
+			case "Id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Id = &value
+			case "LastModifiedTime":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
+				s.LastModifiedTime = &value
+			case "QueryArgProfileConfig":
+				value := QueryArgProfileConfig{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionSummary.%s, %s", name, err)
+				}
+				s.QueryArgProfileConfig = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionSummary.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListFieldLevelEncryptionSummaryList(s *[]FieldLevelEncryptionSummary, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]FieldLevelEncryptionSummary, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "FieldLevelEncryptionSummary":
+				value := FieldLevelEncryptionSummary{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []FieldLevelEncryptionSummary.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []FieldLevelEncryptionSummary.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListFieldLevelEncryptionSummaryList(s *[]FieldLevelEncryptionSummary, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]FieldLevelEncryptionSummary, 0)
+		}
+	}()
+	value := FieldLevelEncryptionSummary{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
+	return nil
+}
+
+func unmarshalAWSXMLListFieldPatternList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "FieldPattern":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListFieldPatternList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	return nil
+}
 
 // A complex data type that includes the field patterns to match for field-level
 // encryption.
@@ -3680,6 +6804,76 @@ func (s FieldPatterns) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
 	}
 	return nil
+}
+func (s *FieldPatterns) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = FieldPatterns{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML FieldPatterns.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]string, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML FieldPatterns.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "Items" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "FieldPattern":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML FieldPatterns.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value := string(v)
+							s.Items = append(s.Items, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldPatterns.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML FieldPatterns.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A complex type that specifies how CloudFront handles query strings and cookies.
@@ -3803,6 +6997,64 @@ func (s ForwardedValues) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *ForwardedValues) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = ForwardedValues{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML ForwardedValues.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Cookies":
+				value := CookiePreference{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ForwardedValues.%s, %s", name, err)
+				}
+				s.Cookies = &value
+			case "Headers":
+				value := Headers{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ForwardedValues.%s, %s", name, err)
+				}
+				s.Headers = &value
+			case "QueryString":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ForwardedValues.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.QueryString = &value
+			case "QueryStringCacheKeys":
+				value := QueryStringCacheKeys{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ForwardedValues.%s, %s", name, err)
+				}
+				s.QueryStringCacheKeys = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ForwardedValues.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // A complex type that controls the countries in which your content is distributed.
 // CloudFront determines the location of your users using MaxMind GeoIP databases.
@@ -3898,6 +7150,132 @@ func (s GeoRestriction) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *GeoRestriction) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = GeoRestriction{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML GeoRestriction.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]string, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML GeoRestriction.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "Items" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "Location":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML GeoRestriction.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value := string(v)
+							s.Items = append(s.Items, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML GeoRestriction.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			case "RestrictionType":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML GeoRestriction.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := GeoRestrictionType(v)
+				s.RestrictionType = value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML GeoRestriction.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListHeaderList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Name":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListHeaderList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	return nil
+}
 
 // A complex type that specifies the request headers, if any, that you want
 // CloudFront to base caching on for this cache behavior.
@@ -3990,6 +7368,76 @@ func (s Headers) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *Headers) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = Headers{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML Headers.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]string, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML Headers.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "Items" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "Name":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML Headers.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value := string(v)
+							s.Items = append(s.Items, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Headers.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Headers.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // An invalidation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Invalidation
@@ -4051,6 +7499,66 @@ func (s Invalidation) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), metadata)
 	}
 	return nil
+}
+func (s *Invalidation) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = Invalidation{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML Invalidation.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "CreateTime":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Invalidation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
+				s.CreateTime = &value
+			case "Id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Invalidation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Id = &value
+			case "InvalidationBatch":
+				value := InvalidationBatch{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Invalidation.%s, %s", name, err)
+				}
+				s.InvalidationBatch = &value
+			case "Status":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Invalidation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Status = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Invalidation.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // An invalidation batch.
@@ -4129,6 +7637,50 @@ func (s InvalidationBatch) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetFields(protocol.BodyTarget, "Paths", v, metadata)
 	}
 	return nil
+}
+func (s *InvalidationBatch) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = InvalidationBatch{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML InvalidationBatch.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "CallerReference":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML InvalidationBatch.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.CallerReference = &value
+			case "Paths":
+				value := Paths{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML InvalidationBatch.%s, %s", name, err)
+				}
+				s.Paths = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML InvalidationBatch.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // The InvalidationList complex type describes the list of invalidation objects.
@@ -4223,6 +7775,83 @@ func (s InvalidationList) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *InvalidationList) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = InvalidationList{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML InvalidationList.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "IsTruncated":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML InvalidationList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.IsTruncated = &value
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]InvalidationSummary, 0)
+				}
+				err := unmarshalAWSXMLListInvalidationSummaryList(&s.Items, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML InvalidationList.%s, %s", name, err)
+				}
+			case "Marker":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML InvalidationList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Marker = &value
+			case "MaxItems":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML InvalidationList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.MaxItems = &value
+			case "NextMarker":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML InvalidationList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.NextMarker = &value
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML InvalidationList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML InvalidationList.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // A summary of an invalidation request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/InvalidationSummary
@@ -4271,6 +7900,160 @@ func (s InvalidationSummary) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), metadata)
 	}
+	return nil
+}
+func (s *InvalidationSummary) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = InvalidationSummary{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML InvalidationSummary.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "CreateTime":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML InvalidationSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
+				s.CreateTime = &value
+			case "Id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML InvalidationSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Id = &value
+			case "Status":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML InvalidationSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Status = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML InvalidationSummary.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListInvalidationSummaryList(s *[]InvalidationSummary, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]InvalidationSummary, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "InvalidationSummary":
+				value := InvalidationSummary{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []InvalidationSummary.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []InvalidationSummary.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListInvalidationSummaryList(s *[]InvalidationSummary, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]InvalidationSummary, 0)
+		}
+	}()
+	value := InvalidationSummary{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
+	return nil
+}
+
+func unmarshalAWSXMLListKeyPairIdList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "KeyPairId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListKeyPairIdList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
 	return nil
 }
 
@@ -4322,6 +8105,76 @@ func (s KeyPairIds) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
 	}
 	return nil
+}
+func (s *KeyPairIds) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = KeyPairIds{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML KeyPairIds.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]string, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML KeyPairIds.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "Items" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "KeyPairId":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML KeyPairIds.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value := string(v)
+							s.Items = append(s.Items, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML KeyPairIds.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML KeyPairIds.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A complex type that contains a Lambda function association.
@@ -4409,6 +8262,112 @@ func (s LambdaFunctionAssociation) MarshalFields(e protocol.FieldEncoder) error 
 	}
 	return nil
 }
+func (s *LambdaFunctionAssociation) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = LambdaFunctionAssociation{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML LambdaFunctionAssociation.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "EventType":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML LambdaFunctionAssociation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := EventType(v)
+				s.EventType = value
+			case "IncludeBody":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML LambdaFunctionAssociation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.IncludeBody = &value
+			case "LambdaFunctionARN":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML LambdaFunctionAssociation.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.LambdaFunctionARN = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML LambdaFunctionAssociation.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListLambdaFunctionAssociationList(s *[]LambdaFunctionAssociation, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]LambdaFunctionAssociation, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "LambdaFunctionAssociation":
+				value := LambdaFunctionAssociation{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []LambdaFunctionAssociation.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []LambdaFunctionAssociation.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListLambdaFunctionAssociationList(s *[]LambdaFunctionAssociation, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]LambdaFunctionAssociation, 0)
+		}
+	}()
+	value := LambdaFunctionAssociation{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
+	return nil
+}
 
 // A complex type that specifies a list of Lambda functions associations for
 // a cache behavior.
@@ -4481,6 +8440,99 @@ func (s LambdaFunctionAssociations) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
 	}
+	return nil
+}
+func (s *LambdaFunctionAssociations) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = LambdaFunctionAssociations{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML LambdaFunctionAssociations.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]LambdaFunctionAssociation, 0)
+				}
+				err := unmarshalAWSXMLListLambdaFunctionAssociationList(&s.Items, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML LambdaFunctionAssociations.%s, %s", name, err)
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML LambdaFunctionAssociations.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML LambdaFunctionAssociations.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListLocationList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Location":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListLocationList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
 	return nil
 }
 
@@ -4580,6 +8632,115 @@ func (s LoggingConfig) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Prefix", protocol.StringValue(v), metadata)
 	}
+	return nil
+}
+func (s *LoggingConfig) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = LoggingConfig{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML LoggingConfig.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Bucket":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML LoggingConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Bucket = &value
+			case "Enabled":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML LoggingConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.Enabled = &value
+			case "IncludeCookies":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML LoggingConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.IncludeCookies = &value
+			case "Prefix":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML LoggingConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Prefix = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML LoggingConfig.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListMethodsList(s *[]Method, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]Method, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Method":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []Method.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := Method(v)
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []Method.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListMethodsList(s *[]Method, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]Method, 0)
+		}
+	}()
 	return nil
 }
 
@@ -4755,6 +8916,80 @@ func (s Origin) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *Origin) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = Origin{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML Origin.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "CustomHeaders":
+				value := CustomHeaders{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Origin.%s, %s", name, err)
+				}
+				s.CustomHeaders = &value
+			case "CustomOriginConfig":
+				value := CustomOriginConfig{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Origin.%s, %s", name, err)
+				}
+				s.CustomOriginConfig = &value
+			case "DomainName":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Origin.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.DomainName = &value
+			case "Id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Origin.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Id = &value
+			case "OriginPath":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Origin.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.OriginPath = &value
+			case "S3OriginConfig":
+				value := S3OriginConfig{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Origin.%s, %s", name, err)
+				}
+				s.S3OriginConfig = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Origin.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // A complex type that contains HeaderName and HeaderValue elements, if any,
 // for this distribution.
@@ -4813,6 +9048,104 @@ func (s OriginCustomHeader) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "HeaderValue", protocol.StringValue(v), metadata)
 	}
+	return nil
+}
+func (s *OriginCustomHeader) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OriginCustomHeader{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OriginCustomHeader.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "HeaderName":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OriginCustomHeader.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.HeaderName = &value
+			case "HeaderValue":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OriginCustomHeader.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.HeaderValue = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OriginCustomHeader.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListOriginCustomHeadersList(s *[]OriginCustomHeader, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]OriginCustomHeader, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "OriginCustomHeader":
+				value := OriginCustomHeader{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []OriginCustomHeader.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []OriginCustomHeader.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListOriginCustomHeadersList(s *[]OriginCustomHeader, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]OriginCustomHeader, 0)
+		}
+	}()
+	value := OriginCustomHeader{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
 	return nil
 }
 
@@ -4902,6 +9235,57 @@ func (s OriginGroup) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *OriginGroup) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OriginGroup{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OriginGroup.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "FailoverCriteria":
+				value := OriginGroupFailoverCriteria{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OriginGroup.%s, %s", name, err)
+				}
+				s.FailoverCriteria = &value
+			case "Id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OriginGroup.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Id = &value
+			case "Members":
+				value := OriginGroupMembers{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OriginGroup.%s, %s", name, err)
+				}
+				s.Members = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OriginGroup.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // A complex data type that includes information about the failover criteria
 // for an origin group, including the status codes for which CloudFront will
@@ -4951,6 +9335,95 @@ func (s OriginGroupFailoverCriteria) MarshalFields(e protocol.FieldEncoder) erro
 	}
 	return nil
 }
+func (s *OriginGroupFailoverCriteria) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OriginGroupFailoverCriteria{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OriginGroupFailoverCriteria.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "StatusCodes":
+				value := StatusCodes{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OriginGroupFailoverCriteria.%s, %s", name, err)
+				}
+				s.StatusCodes = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OriginGroupFailoverCriteria.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListOriginGroupList(s *[]OriginGroup, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]OriginGroup, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "OriginGroup":
+				value := OriginGroup{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []OriginGroup.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []OriginGroup.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListOriginGroupList(s *[]OriginGroup, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]OriginGroup, 0)
+		}
+	}()
+	value := OriginGroup{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
+	return nil
+}
 
 // An origin in an origin group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginGroupMember
@@ -4990,6 +9463,96 @@ func (s OriginGroupMember) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "OriginId", protocol.StringValue(v), metadata)
 	}
+	return nil
+}
+func (s *OriginGroupMember) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OriginGroupMember{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OriginGroupMember.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "OriginId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OriginGroupMember.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.OriginId = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OriginGroupMember.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListOriginGroupMemberList(s *[]OriginGroupMember, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]OriginGroupMember, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "OriginGroupMember":
+				value := OriginGroupMember{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []OriginGroupMember.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []OriginGroupMember.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListOriginGroupMemberList(s *[]OriginGroupMember, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]OriginGroupMember, 0)
+		}
+	}()
+	value := OriginGroupMember{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
 	return nil
 }
 
@@ -5064,6 +9627,51 @@ func (s OriginGroupMembers) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *OriginGroupMembers) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OriginGroupMembers{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OriginGroupMembers.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]OriginGroupMember, 0)
+				}
+				err := unmarshalAWSXMLListOriginGroupMemberList(&s.Items, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OriginGroupMembers.%s, %s", name, err)
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OriginGroupMembers.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OriginGroupMembers.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // A complex data type for the origin groups specified for a distribution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/OriginGroups
@@ -5125,6 +9733,104 @@ func (s OriginGroups) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
 	}
+	return nil
+}
+func (s *OriginGroups) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OriginGroups{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OriginGroups.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]OriginGroup, 0)
+				}
+				err := unmarshalAWSXMLListOriginGroupList(&s.Items, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OriginGroups.%s, %s", name, err)
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OriginGroups.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OriginGroups.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListOriginList(s *[]Origin, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]Origin, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Origin":
+				value := Origin{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []Origin.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []Origin.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListOriginList(s *[]Origin, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]Origin, 0)
+		}
+	}()
+	value := Origin{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
 	return nil
 }
 
@@ -5190,6 +9896,76 @@ func (s OriginSslProtocols) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
 	}
 	return nil
+}
+func (s *OriginSslProtocols) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = OriginSslProtocols{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML OriginSslProtocols.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]SslProtocol, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML OriginSslProtocols.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "Items" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "SslProtocol":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML OriginSslProtocols.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value := SslProtocol(v)
+							s.Items = append(s.Items, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OriginSslProtocols.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML OriginSslProtocols.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A complex type that contains information about origins and origin groups
@@ -5264,6 +10040,99 @@ func (s Origins) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *Origins) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = Origins{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML Origins.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]Origin, 0)
+				}
+				err := unmarshalAWSXMLListOriginList(&s.Items, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Origins.%s, %s", name, err)
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Origins.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Origins.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListPathList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Path":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListPathList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	return nil
+}
 
 // A complex type that contains information about the objects that you want
 // to invalidate. For more information, see Specifying the Objects to Invalidate
@@ -5324,6 +10193,76 @@ func (s Paths) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *Paths) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = Paths{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML Paths.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]string, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML Paths.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "Items" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "Path":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML Paths.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value := string(v)
+							s.Items = append(s.Items, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Paths.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Paths.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // A complex data type of public keys you add to CloudFront to use with features
 // like field-level encryption.
@@ -5375,6 +10314,58 @@ func (s PublicKey) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetFields(protocol.BodyTarget, "PublicKeyConfig", v, metadata)
 	}
 	return nil
+}
+func (s *PublicKey) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = PublicKey{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML PublicKey.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "CreatedTime":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicKey.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
+				s.CreatedTime = &value
+			case "Id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicKey.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Id = &value
+			case "PublicKeyConfig":
+				value := PublicKeyConfig{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicKey.%s, %s", name, err)
+				}
+				s.PublicKeyConfig = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicKey.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // Information about a public key you add to CloudFront to use with features
@@ -5459,6 +10450,67 @@ func (s PublicKeyConfig) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *PublicKeyConfig) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = PublicKeyConfig{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML PublicKeyConfig.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "CallerReference":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicKeyConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.CallerReference = &value
+			case "Comment":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicKeyConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Comment = &value
+			case "EncodedKey":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicKeyConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.EncodedKey = &value
+			case "Name":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicKeyConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Name = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicKeyConfig.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // A list of public keys you've added to CloudFront to use with features like
 // field-level encryption.
@@ -5525,6 +10577,67 @@ func (s PublicKeyList) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
 	}
 	return nil
+}
+func (s *PublicKeyList) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = PublicKeyList{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML PublicKeyList.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]PublicKeySummary, 0)
+				}
+				err := unmarshalAWSXMLListPublicKeySummaryList(&s.Items, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicKeyList.%s, %s", name, err)
+				}
+			case "MaxItems":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicKeyList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.MaxItems = &value
+			case "NextMarker":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicKeyList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.NextMarker = &value
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicKeyList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicKeyList.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A complex data type for public key information.
@@ -5596,6 +10709,128 @@ func (s PublicKeySummary) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *PublicKeySummary) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = PublicKeySummary{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML PublicKeySummary.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Comment":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicKeySummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Comment = &value
+			case "CreatedTime":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicKeySummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
+				s.CreatedTime = &value
+			case "EncodedKey":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicKeySummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.EncodedKey = &value
+			case "Id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicKeySummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Id = &value
+			case "Name":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicKeySummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Name = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML PublicKeySummary.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListPublicKeySummaryList(s *[]PublicKeySummary, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]PublicKeySummary, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "PublicKeySummary":
+				value := PublicKeySummary{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []PublicKeySummary.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []PublicKeySummary.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListPublicKeySummaryList(s *[]PublicKeySummary, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]PublicKeySummary, 0)
+		}
+	}()
+	value := PublicKeySummary{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
+	return nil
+}
 
 // Query argument-profile mapping for field-level encryption.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/QueryArgProfile
@@ -5652,6 +10887,51 @@ func (s QueryArgProfile) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *QueryArgProfile) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = QueryArgProfile{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML QueryArgProfile.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "ProfileId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML QueryArgProfile.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ProfileId = &value
+			case "QueryArg":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML QueryArgProfile.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.QueryArg = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML QueryArgProfile.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // Configuration for query argument-profile mapping for field-level encryption.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/QueryArgProfileConfig
@@ -5707,6 +10987,103 @@ func (s QueryArgProfileConfig) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "QueryArgProfiles", v, metadata)
 	}
+	return nil
+}
+func (s *QueryArgProfileConfig) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = QueryArgProfileConfig{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML QueryArgProfileConfig.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "ForwardWhenQueryArgProfileIsUnknown":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML QueryArgProfileConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.ForwardWhenQueryArgProfileIsUnknown = &value
+			case "QueryArgProfiles":
+				value := QueryArgProfiles{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML QueryArgProfileConfig.%s, %s", name, err)
+				}
+				s.QueryArgProfiles = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML QueryArgProfileConfig.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListQueryArgProfileList(s *[]QueryArgProfile, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]QueryArgProfile, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "QueryArgProfile":
+				value := QueryArgProfile{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []QueryArgProfile.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []QueryArgProfile.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListQueryArgProfileList(s *[]QueryArgProfile, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]QueryArgProfile, 0)
+		}
+	}()
+	value := QueryArgProfile{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
 	return nil
 }
 
@@ -5772,6 +11149,51 @@ func (s QueryArgProfiles) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *QueryArgProfiles) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = QueryArgProfiles{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML QueryArgProfiles.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]QueryArgProfile, 0)
+				}
+				err := unmarshalAWSXMLListQueryArgProfileList(&s.Items, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML QueryArgProfiles.%s, %s", name, err)
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML QueryArgProfiles.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML QueryArgProfiles.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // A complex type that contains information about the query string parameters
 // that you want CloudFront to use for caching for a cache behavior.
@@ -5831,6 +11253,124 @@ func (s QueryStringCacheKeys) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *QueryStringCacheKeys) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = QueryStringCacheKeys{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML QueryStringCacheKeys.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]string, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML QueryStringCacheKeys.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "Items" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "Name":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML QueryStringCacheKeys.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value := string(v)
+							s.Items = append(s.Items, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML QueryStringCacheKeys.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML QueryStringCacheKeys.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListQueryStringCacheKeysList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Name":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListQueryStringCacheKeysList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	return nil
+}
 
 // A complex type that identifies ways in which you want to restrict distribution
 // of your content.
@@ -5878,6 +11418,42 @@ func (s Restrictions) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetFields(protocol.BodyTarget, "GeoRestriction", v, metadata)
 	}
 	return nil
+}
+func (s *Restrictions) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = Restrictions{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML Restrictions.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "GeoRestriction":
+				value := GeoRestriction{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Restrictions.%s, %s", name, err)
+				}
+				s.GeoRestriction = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Restrictions.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A complex type that contains information about the Amazon S3 bucket from
@@ -5952,6 +11528,51 @@ func (s S3Origin) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *S3Origin) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = S3Origin{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML S3Origin.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "DomainName":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3Origin.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.DomainName = &value
+			case "OriginAccessIdentity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3Origin.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.OriginAccessIdentity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3Origin.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // A complex type that contains information about the Amazon S3 origin. If the
 // origin is a custom origin, use the CustomOriginConfig element instead.
@@ -6016,6 +11637,43 @@ func (s S3OriginConfig) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *S3OriginConfig) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = S3OriginConfig{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML S3OriginConfig.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "OriginAccessIdentity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3OriginConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.OriginAccessIdentity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML S3OriginConfig.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // A complex type that lists the AWS accounts that were included in the TrustedSigners
 // complex type, as well as their active CloudFront key pair IDs, if any.
@@ -6055,6 +11713,199 @@ func (s Signer) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "KeyPairIds", v, metadata)
 	}
+	return nil
+}
+func (s *Signer) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = Signer{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML Signer.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "AwsAccountNumber":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Signer.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.AwsAccountNumber = &value
+			case "KeyPairIds":
+				value := KeyPairIds{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Signer.%s, %s", name, err)
+				}
+				s.KeyPairIds = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Signer.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListSignerList(s *[]Signer, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]Signer, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Signer":
+				value := Signer{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []Signer.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []Signer.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListSignerList(s *[]Signer, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]Signer, 0)
+		}
+	}()
+	value := Signer{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
+	return nil
+}
+
+func unmarshalAWSXMLListSslProtocolsList(s *[]SslProtocol, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]SslProtocol, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "SslProtocol":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []SslProtocol.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := SslProtocol(v)
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []SslProtocol.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListSslProtocolsList(s *[]SslProtocol, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]SslProtocol, 0)
+		}
+	}()
+	return nil
+}
+
+func unmarshalAWSXMLListStatusCodeList(s *[]int64, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]int64, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "StatusCode":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []int64.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []int64.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListStatusCodeList(s *[]int64, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]int64, 0)
+		}
+	}()
 	return nil
 }
 
@@ -6122,6 +11973,76 @@ func (s StatusCodes) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
 	}
 	return nil
+}
+func (s *StatusCodes) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = StatusCodes{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML StatusCodes.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]int64, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML StatusCodes.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "Items" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "StatusCode":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML StatusCodes.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value, _ := strconv.ParseInt(string(v), 10, 64)
+							s.Items = append(s.Items, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StatusCodes.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StatusCodes.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A streaming distribution tells CloudFront where you want RTMP content to
@@ -6230,6 +12151,89 @@ func (s StreamingDistribution) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetFields(protocol.BodyTarget, "StreamingDistributionConfig", v, metadata)
 	}
 	return nil
+}
+func (s *StreamingDistribution) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = StreamingDistribution{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistribution.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "ARN":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistribution.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ARN = &value
+			case "ActiveTrustedSigners":
+				value := ActiveTrustedSigners{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistribution.%s, %s", name, err)
+				}
+				s.ActiveTrustedSigners = &value
+			case "DomainName":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistribution.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.DomainName = &value
+			case "Id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistribution.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Id = &value
+			case "LastModifiedTime":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistribution.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
+				s.LastModifiedTime = &value
+			case "Status":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistribution.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Status = &value
+			case "StreamingDistributionConfig":
+				value := StreamingDistributionConfig{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistribution.%s, %s", name, err)
+				}
+				s.StreamingDistributionConfig = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistribution.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // The RTMP distribution's configuration information.
@@ -6397,6 +12401,95 @@ func (s StreamingDistributionConfig) MarshalFields(e protocol.FieldEncoder) erro
 	}
 	return nil
 }
+func (s *StreamingDistributionConfig) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = StreamingDistributionConfig{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionConfig.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Aliases":
+				value := Aliases{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionConfig.%s, %s", name, err)
+				}
+				s.Aliases = &value
+			case "CallerReference":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.CallerReference = &value
+			case "Comment":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Comment = &value
+			case "Enabled":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.Enabled = &value
+			case "Logging":
+				value := StreamingLoggingConfig{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionConfig.%s, %s", name, err)
+				}
+				s.Logging = &value
+			case "PriceClass":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := PriceClass(v)
+				s.PriceClass = value
+			case "S3Origin":
+				value := S3Origin{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionConfig.%s, %s", name, err)
+				}
+				s.S3Origin = &value
+			case "TrustedSigners":
+				value := TrustedSigners{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionConfig.%s, %s", name, err)
+				}
+				s.TrustedSigners = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionConfig.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // A streaming distribution Configuration and a list of tags to be associated
 // with the streaming distribution.
@@ -6463,6 +12556,49 @@ func (s StreamingDistributionConfigWithTags) MarshalFields(e protocol.FieldEncod
 		e.SetFields(protocol.BodyTarget, "Tags", v, metadata)
 	}
 	return nil
+}
+func (s *StreamingDistributionConfigWithTags) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = StreamingDistributionConfigWithTags{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionConfigWithTags.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "StreamingDistributionConfig":
+				value := StreamingDistributionConfig{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionConfigWithTags.%s, %s", name, err)
+				}
+				s.StreamingDistributionConfig = &value
+			case "Tags":
+				value := Tags{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionConfigWithTags.%s, %s", name, err)
+				}
+				s.Tags = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionConfigWithTags.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A streaming distribution list.
@@ -6554,6 +12690,83 @@ func (s StreamingDistributionList) MarshalFields(e protocol.FieldEncoder) error 
 		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
 	}
 	return nil
+}
+func (s *StreamingDistributionList) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = StreamingDistributionList{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionList.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "IsTruncated":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.IsTruncated = &value
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]StreamingDistributionSummary, 0)
+				}
+				err := unmarshalAWSXMLListStreamingDistributionSummaryList(&s.Items, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionList.%s, %s", name, err)
+				}
+			case "Marker":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Marker = &value
+			case "MaxItems":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.MaxItems = &value
+			case "NextMarker":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.NextMarker = &value
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionList.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionList.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A summary of the information for a CloudFront streaming distribution.
@@ -6712,6 +12925,173 @@ func (s StreamingDistributionSummary) MarshalFields(e protocol.FieldEncoder) err
 	}
 	return nil
 }
+func (s *StreamingDistributionSummary) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = StreamingDistributionSummary{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionSummary.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "ARN":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ARN = &value
+			case "Aliases":
+				value := Aliases{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionSummary.%s, %s", name, err)
+				}
+				s.Aliases = &value
+			case "Comment":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Comment = &value
+			case "DomainName":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.DomainName = &value
+			case "Enabled":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.Enabled = &value
+			case "Id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Id = &value
+			case "LastModifiedTime":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
+				s.LastModifiedTime = &value
+			case "PriceClass":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := PriceClass(v)
+				s.PriceClass = value
+			case "S3Origin":
+				value := S3Origin{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionSummary.%s, %s", name, err)
+				}
+				s.S3Origin = &value
+			case "Status":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionSummary.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Status = &value
+			case "TrustedSigners":
+				value := TrustedSigners{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionSummary.%s, %s", name, err)
+				}
+				s.TrustedSigners = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionSummary.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListStreamingDistributionSummaryList(s *[]StreamingDistributionSummary, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]StreamingDistributionSummary, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "StreamingDistributionSummary":
+				value := StreamingDistributionSummary{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []StreamingDistributionSummary.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []StreamingDistributionSummary.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListStreamingDistributionSummaryList(s *[]StreamingDistributionSummary, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]StreamingDistributionSummary, 0)
+		}
+	}()
+	value := StreamingDistributionSummary{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
+	return nil
+}
 
 // A complex type that controls whether access logs are written for this streaming
 // distribution.
@@ -6792,6 +13172,59 @@ func (s StreamingLoggingConfig) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *StreamingLoggingConfig) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = StreamingLoggingConfig{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML StreamingLoggingConfig.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Bucket":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingLoggingConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Bucket = &value
+			case "Enabled":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingLoggingConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.Enabled = &value
+			case "Prefix":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingLoggingConfig.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Prefix = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML StreamingLoggingConfig.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
 
 // A complex type that contains Tag key and Tag value.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Tag
@@ -6851,6 +13284,99 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+func (s *Tag) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = Tag{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML Tag.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Key":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Tag.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Key = &value
+			case "Value":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Tag.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Value = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Tag.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListTagKeyList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Key":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []string.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListTagKeyList(s *[]string, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]string, 0)
+		}
+	}()
+	return nil
+}
 
 // A complex type that contains zero or more Tag elements.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TagKeys
@@ -6880,6 +13406,121 @@ func (s TagKeys) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
+	return nil
+}
+func (s *TagKeys) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = TagKeys{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML TagKeys.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]string, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML TagKeys.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "Items" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "Key":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML TagKeys.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value := string(v)
+							s.Items = append(s.Items, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML TagKeys.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+func unmarshalAWSXMLListTagList(s *[]Tag, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]Tag, 0)
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return err
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				break
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Tag":
+				value := Tag{}
+				err := value.unmarshalAWSXML(d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []Tag.%s, %s", name, err)
+				}
+				*s = append(*s, value)
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML []Tag.%s, %s", name, err)
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func unmarshalAWSXMLFlattenedListTagList(s *[]Tag, d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = make([]Tag, 0)
+		}
+	}()
+	value := Tag{}
+	err = value.unmarshalAWSXML(d, head)
+	if err != nil {
+		return err
+	}
+	*s = append(*s, value)
 	return nil
 }
 
@@ -6929,6 +13570,43 @@ func (s Tags) MarshalFields(e protocol.FieldEncoder) error {
 
 	}
 	return nil
+}
+func (s *Tags) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = Tags{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML Tags.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]Tag, 0)
+				}
+				err := unmarshalAWSXMLListTagList(&s.Items, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Tags.%s, %s", name, err)
+				}
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML Tags.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A complex type that specifies the AWS accounts, if any, that you want to
@@ -7020,6 +13698,84 @@ func (s TrustedSigners) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
 	}
 	return nil
+}
+func (s *TrustedSigners) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = TrustedSigners{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML TrustedSigners.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Enabled":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML TrustedSigners.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.Enabled = &value
+			case "Items":
+				if s.Items == nil {
+					s.Items = make([]string, 0)
+				}
+				for {
+					tok, err = d.Token()
+					if tok == nil || err != nil {
+						return fmt.Errorf("fail to UnmarshalAWSXML TrustedSigners.%s, %s", name, err)
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "Items" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "AwsAccountNumber":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return fmt.Errorf("fail to UnmarshalAWSXML TrustedSigners.%s, %s", name, err)
+							}
+							v, _ := tok.(xml.CharData)
+							value := string(v)
+							s.Items = append(s.Items, value)
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			case "Quantity":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML TrustedSigners.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.Quantity = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML TrustedSigners.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }
 
 // A complex type that specifies the following:
@@ -7207,4 +13963,73 @@ func (s ViewerCertificate) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "SSLSupportMethod", v, metadata)
 	}
 	return nil
+}
+func (s *ViewerCertificate) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = ViewerCertificate{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML ViewerCertificate.%s, %s", name, err)
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "ACMCertificateArn":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ViewerCertificate.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ACMCertificateArn = &value
+			case "CloudFrontDefaultCertificate":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ViewerCertificate.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.CloudFrontDefaultCertificate = &value
+			case "IAMCertificateId":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ViewerCertificate.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.IAMCertificateId = &value
+			case "MinimumProtocolVersion":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ViewerCertificate.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := MinimumProtocolVersion(v)
+				s.MinimumProtocolVersion = value
+			case "SSLSupportMethod":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ViewerCertificate.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := SSLSupportMethod(v)
+				s.SSLSupportMethod = value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML ViewerCertificate.%s, %s", name, err)
+				}
+			}
+		}
+	}
 }

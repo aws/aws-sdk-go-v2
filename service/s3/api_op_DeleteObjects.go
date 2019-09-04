@@ -4,6 +4,11 @@ package s3
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
+	"net/http"
+	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -156,6 +161,106 @@ func (s DeleteObjectsOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "x-amz-request-charged", v, metadata)
+	}
+	return nil
+}
+
+// UnmarshalAWSXML decodes the AWS API shape using the passed in *xml.Decoder.
+func (s *DeleteObjectsOutput) UnmarshalAWSXML(d *xml.Decoder) (err error) {
+	defer func() {
+		if err != nil {
+			*s = DeleteObjectsOutput{}
+		}
+	}()
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			return fmt.Errorf("fail to UnmarshalAWSXML DeleteObjectsOutput, %s", err)
+		}
+		start, ok := tok.(xml.StartElement)
+		if !ok {
+			continue
+		}
+		err = s.unmarshalAWSXML(d, start)
+		if err != nil {
+			return fmt.Errorf("fail to UnmarshalAWSXML DeleteObjectsOutput, %s", err)
+		}
+		return nil
+	}
+}
+
+func (s *DeleteObjectsOutput) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = DeleteObjectsOutput{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "Deleted":
+				if s.Deleted == nil {
+					s.Deleted = make([]DeletedObject, 0)
+				}
+				err := unmarshalAWSXMLFlattenedListDeletedObjects(&s.Deleted, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DeleteObjectsOutput.%s, %s", name, err)
+				}
+			case "Error":
+				if s.Errors == nil {
+					s.Errors = make([]Error, 0)
+				}
+				err := unmarshalAWSXMLFlattenedListErrors(&s.Errors, d, start)
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DeleteObjectsOutput.%s, %s", name, err)
+				}
+			case "x-amz-request-charged":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DeleteObjectsOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := RequestCharged(v)
+				s.RequestCharged = value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML DeleteObjectsOutput.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+// UnmarshalAWSREST decodes the AWS API shape using the passed in *http.Response.
+func (s *DeleteObjectsOutput) UnmarshalAWSREST(r *http.Response) (err error) {
+	defer func() {
+		if err != nil {
+			*s = DeleteObjectsOutput{}
+		}
+	}()
+	for k, v := range r.Header {
+		switch {
+		case strings.EqualFold(k, "x-amz-request-charged"):
+			value := RequestCharged(v[0])
+			s.RequestCharged = value
+		}
 	}
 	return nil
 }

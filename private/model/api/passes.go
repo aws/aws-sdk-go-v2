@@ -293,20 +293,20 @@ func (a *API) renameAPIPayloadShapes() {
 	}
 }
 
-// createInputOutputShapes creates toplevel input/output shapes if they
-// have not been defined in the API. This normalizes all APIs to always
-// have an input and output structure in the signature.
+// createInputOutputShapes creates top level input/output shapes if they have
+// not been defined in the API. This normalizes all APIs to always have an
+// input and output structure in the signature.
 func (a *API) createInputOutputShapes() {
 	for _, op := range a.Operations {
-		createAPIParamShape(a, op.Name, &op.InputRef, op.ExportedName+"Input")
+		createAPIShape(a, op.Name, &op.InputRef, op.ExportedName+"Input")
 		op.InputRef.Shape.UsedAsInput = true
 
-		createAPIParamShape(a, op.Name, &op.OutputRef, op.ExportedName+"Output")
+		createAPIShape(a, op.Name, &op.OutputRef, op.ExportedName+"Output")
 		op.OutputRef.Shape.UsedAsOutput = true
 	}
 }
 
-func createAPIParamShape(a *API, opName string, ref *ShapeRef, shapeName string) {
+func createAPIShape(a *API, opName string, ref *ShapeRef, shapeName string) {
 	if len(ref.ShapeName) == 0 {
 		setAsPlacholderShape(ref, shapeName, a)
 		return

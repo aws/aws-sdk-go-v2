@@ -4,6 +4,12 @@ package s3
 
 import (
 	"context"
+	"encoding/xml"
+	"fmt"
+	"io"
+	"net/http"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -486,6 +492,414 @@ func (s HeadObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ms0.End()
 
+	}
+	return nil
+}
+func (s *HeadObjectOutput) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error) {
+	defer func() {
+		if err != nil {
+			*s = HeadObjectOutput{}
+		}
+	}()
+	name := ""
+	for {
+		tok, err := d.Token()
+		if tok == nil || err != nil {
+			if err == io.EOF {
+				return nil
+			}
+		}
+		if end, ok := tok.(xml.EndElement); ok {
+			name = end.Name.Local
+			if name == head.Name.Local {
+				return nil
+			}
+		}
+		if start, ok := tok.(xml.StartElement); ok {
+			switch name = start.Name.Local; name {
+			case "accept-ranges":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.AcceptRanges = &value
+			case "Cache-Control":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.CacheControl = &value
+			case "Content-Disposition":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ContentDisposition = &value
+			case "Content-Encoding":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ContentEncoding = &value
+			case "Content-Language":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ContentLanguage = &value
+			case "Content-Length":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.ContentLength = &value
+			case "Content-Type":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ContentType = &value
+			case "x-amz-delete-marker":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseBool(string(v))
+				s.DeleteMarker = &value
+			case "ETag":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.ETag = &value
+			case "x-amz-expiration":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Expiration = &value
+			case "Expires":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Expires = &value
+			case "Last-Modified":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := protocol.ParseTime(protocol.RFC822TimeFormatName, string(v))
+				s.LastModified = &value
+			case "x-amz-meta-":
+				if s.Metadata == nil {
+					s.Metadata = make(map[string]string)
+				}
+				curKey := ""
+				for {
+					tok, err := d.Token()
+					if tok == nil || err != nil {
+						return err
+					}
+					if end, ok := tok.(xml.EndElement); ok {
+						name := end.Name.Local
+						if name == "x-amz-meta-" {
+							break
+						}
+					}
+					if start, ok := tok.(xml.StartElement); ok {
+						switch name = start.Name.Local; name {
+						case "key":
+							tok, err := d.Token()
+							if tok == nil || err != nil {
+								return err
+							}
+							v, _ := tok.(xml.CharData)
+							curKey = string(v)
+						case "value":
+							tok, err = d.Token()
+							if tok == nil || err != nil {
+								return err
+							}
+							v, _ := tok.(xml.CharData)
+							value := string(v)
+							s.Metadata[curKey] = value
+						case "entry":
+							continue
+						default:
+							err := d.Skip()
+							if err != nil {
+								return err
+							}
+						}
+					}
+				}
+			case "x-amz-missing-meta":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.MissingMeta = &value
+			case "x-amz-object-lock-legal-hold":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := ObjectLockLegalHoldStatus(v)
+				s.ObjectLockLegalHoldStatus = value
+			case "x-amz-object-lock-mode":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := ObjectLockMode(v)
+				s.ObjectLockMode = value
+			case "x-amz-object-lock-retain-until-date":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := protocol.ParseTime("iso8601", string(v))
+				s.ObjectLockRetainUntilDate = &value
+			case "x-amz-mp-parts-count":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value, _ := strconv.ParseInt(string(v), 10, 64)
+				s.PartsCount = &value
+			case "x-amz-replication-status":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := ReplicationStatus(v)
+				s.ReplicationStatus = value
+			case "x-amz-request-charged":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := RequestCharged(v)
+				s.RequestCharged = value
+			case "x-amz-restore":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.Restore = &value
+			case "x-amz-server-side-encryption-customer-algorithm":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.SSECustomerAlgorithm = &value
+			case "x-amz-server-side-encryption-customer-key-MD5":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.SSECustomerKeyMD5 = &value
+			case "x-amz-server-side-encryption-aws-kms-key-id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.SSEKMSKeyId = &value
+			case "x-amz-server-side-encryption":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := ServerSideEncryption(v)
+				s.ServerSideEncryption = value
+			case "x-amz-storage-class":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := StorageClass(v)
+				s.StorageClass = value
+			case "x-amz-version-id":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.VersionId = &value
+			case "x-amz-website-redirect-location":
+				tok, err = d.Token()
+				if tok == nil || err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+				v, _ := tok.(xml.CharData)
+				value := string(v)
+				s.WebsiteRedirectLocation = &value
+			default:
+				err := d.Skip()
+				if err != nil {
+					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
+				}
+			}
+		}
+	}
+}
+
+// UnmarshalAWSREST decodes the AWS API shape using the passed in *http.Response.
+func (s *HeadObjectOutput) UnmarshalAWSREST(r *http.Response) (err error) {
+	defer func() {
+		if err != nil {
+			*s = HeadObjectOutput{}
+		}
+	}()
+	for k, v := range r.Header {
+		switch {
+		case strings.EqualFold(k, "accept-ranges"):
+			value := v[0]
+			s.AcceptRanges = &value
+		case strings.EqualFold(k, "Cache-Control"):
+			value := v[0]
+			s.CacheControl = &value
+		case strings.EqualFold(k, "Content-Disposition"):
+			value := v[0]
+			s.ContentDisposition = &value
+		case strings.EqualFold(k, "Content-Encoding"):
+			value := v[0]
+			s.ContentEncoding = &value
+		case strings.EqualFold(k, "Content-Language"):
+			value := v[0]
+			s.ContentLanguage = &value
+		case strings.EqualFold(k, "Content-Length"):
+			value, err := strconv.ParseInt(v[0], 10, 64)
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST HeadObjectOutput.ContentLength, %s", err)
+			}
+			s.ContentLength = &value
+		case strings.EqualFold(k, "Content-Type"):
+			value := v[0]
+			s.ContentType = &value
+		case strings.EqualFold(k, "x-amz-delete-marker"):
+			value, err := strconv.ParseBool(v[0])
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST HeadObjectOutput.DeleteMarker, %s", err)
+			}
+			s.DeleteMarker = &value
+		case strings.EqualFold(k, "ETag"):
+			value := v[0]
+			s.ETag = &value
+		case strings.EqualFold(k, "x-amz-expiration"):
+			value := v[0]
+			s.Expiration = &value
+		case strings.EqualFold(k, "Expires"):
+			value := v[0]
+			s.Expires = &value
+		case strings.EqualFold(k, "Last-Modified"):
+			value, err := protocol.ParseTime(protocol.RFC822TimeFormatName, v[0])
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST HeadObjectOutput.LastModified, %s", err)
+			}
+			s.LastModified = &value
+		case strings.HasPrefix(strings.ToLower(k), "x-amz-meta-"):
+			if s.Metadata == nil {
+				s.Metadata = map[string]string{}
+			}
+			s.Metadata[k[len("x-amz-meta-"):]] = v[0]
+		case strings.EqualFold(k, "x-amz-missing-meta"):
+			value, err := strconv.ParseInt(v[0], 10, 64)
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST HeadObjectOutput.MissingMeta, %s", err)
+			}
+			s.MissingMeta = &value
+		case strings.EqualFold(k, "x-amz-object-lock-legal-hold"):
+			value := ObjectLockLegalHoldStatus(v[0])
+			s.ObjectLockLegalHoldStatus = value
+		case strings.EqualFold(k, "x-amz-object-lock-mode"):
+			value := ObjectLockMode(v[0])
+			s.ObjectLockMode = value
+		case strings.EqualFold(k, "x-amz-object-lock-retain-until-date"):
+			value, err := protocol.ParseTime("iso8601", v[0])
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST HeadObjectOutput.ObjectLockRetainUntilDate, %s", err)
+			}
+			s.ObjectLockRetainUntilDate = &value
+		case strings.EqualFold(k, "x-amz-mp-parts-count"):
+			value, err := strconv.ParseInt(v[0], 10, 64)
+			if err != nil {
+				return fmt.Errorf("fail to UnmarshalAWSREST HeadObjectOutput.PartsCount, %s", err)
+			}
+			s.PartsCount = &value
+		case strings.EqualFold(k, "x-amz-replication-status"):
+			value := ReplicationStatus(v[0])
+			s.ReplicationStatus = value
+		case strings.EqualFold(k, "x-amz-request-charged"):
+			value := RequestCharged(v[0])
+			s.RequestCharged = value
+		case strings.EqualFold(k, "x-amz-restore"):
+			value := v[0]
+			s.Restore = &value
+		case strings.EqualFold(k, "x-amz-server-side-encryption-customer-algorithm"):
+			value := v[0]
+			s.SSECustomerAlgorithm = &value
+		case strings.EqualFold(k, "x-amz-server-side-encryption-customer-key-MD5"):
+			value := v[0]
+			s.SSECustomerKeyMD5 = &value
+		case strings.EqualFold(k, "x-amz-server-side-encryption-aws-kms-key-id"):
+			value := v[0]
+			s.SSEKMSKeyId = &value
+		case strings.EqualFold(k, "x-amz-server-side-encryption"):
+			value := ServerSideEncryption(v[0])
+			s.ServerSideEncryption = value
+		case strings.EqualFold(k, "x-amz-storage-class"):
+			value := StorageClass(v[0])
+			s.StorageClass = value
+		case strings.EqualFold(k, "x-amz-version-id"):
+			value := v[0]
+			s.VersionId = &value
+		case strings.EqualFold(k, "x-amz-website-redirect-location"):
+			value := v[0]
+			s.WebsiteRedirectLocation = &value
+		}
 	}
 	return nil
 }

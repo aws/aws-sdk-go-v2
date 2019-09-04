@@ -30,11 +30,11 @@ type ShapeRef struct {
 	Ignore           bool
 	XMLNamespace     XMLInfo
 	Payload          string
-	IdempotencyToken bool `json:"idempotencyToken"`
+	IdempotencyToken bool   `json:"idempotencyToken"`
 	TimestampFormat  string `json:"timestampFormat"`
-	JSONValue        bool `json:"jsonvalue"`
-	Deprecated       bool `json:"deprecated"`
-	HostLabel        bool `json:"hostLabel"`
+	JSONValue        bool   `json:"jsonvalue"`
+	Deprecated       bool   `json:"deprecated"`
+	HostLabel        bool   `json:"hostLabel"`
 
 	OrigShapeName string `json:"-"`
 
@@ -84,7 +84,7 @@ type Shape struct {
 	Streaming        bool
 	Location         string
 	LocationName     string
-	IdempotencyToken bool `json:"idempotencyToken"`
+	IdempotencyToken bool   `json:"idempotencyToken"`
 	TimestampFormat  string `json:"timestampFormat"`
 	XMLNamespace     XMLInfo
 	Min              float64 // optional Minimum length (string, list) or value (number)
