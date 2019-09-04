@@ -239,7 +239,7 @@ func (s *JobDescriptor) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (
 					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.CreationTime = &value
 			case "Description":
 				tok, err = d.Token()
@@ -347,7 +347,7 @@ func (s *JobDescriptor) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (
 					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.SuspendedDate = &value
 			case "TerminationDate":
 				tok, err = d.Token()
@@ -355,7 +355,7 @@ func (s *JobDescriptor) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (
 					return fmt.Errorf("fail to UnmarshalAWSXML JobDescriptor.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.TerminationDate = &value
 			default:
 				err := d.Skip()
@@ -619,7 +619,7 @@ func (s *JobListDescriptor) unmarshalAWSXML(d *xml.Decoder, head xml.StartElemen
 					return fmt.Errorf("fail to UnmarshalAWSXML JobListDescriptor.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.CreationTime = &value
 			case "Description":
 				tok, err = d.Token()
@@ -674,7 +674,7 @@ func (s *JobListDescriptor) unmarshalAWSXML(d *xml.Decoder, head xml.StartElemen
 					return fmt.Errorf("fail to UnmarshalAWSXML JobListDescriptor.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.TerminationDate = &value
 			default:
 				err := d.Skip()
@@ -2245,7 +2245,7 @@ func (s *S3CopyObjectOperation) unmarshalAWSXML(d *xml.Decoder, head xml.StartEl
 					return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.ModifiedSinceConstraint = &value
 			case "NewObjectMetadata":
 				value := S3ObjectMetadata{}
@@ -2284,7 +2284,7 @@ func (s *S3CopyObjectOperation) unmarshalAWSXML(d *xml.Decoder, head xml.StartEl
 					return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.ObjectLockRetainUntilDate = &value
 			case "RedirectLocation":
 				tok, err = d.Token()
@@ -2340,7 +2340,7 @@ func (s *S3CopyObjectOperation) unmarshalAWSXML(d *xml.Decoder, head xml.StartEl
 					return fmt.Errorf("fail to UnmarshalAWSXML S3CopyObjectOperation.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.UnModifiedSinceConstraint = &value
 			default:
 				err := d.Skip()
@@ -2902,7 +2902,7 @@ func (s *S3ObjectMetadata) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement
 					return fmt.Errorf("fail to UnmarshalAWSXML S3ObjectMetadata.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.HttpExpiresDate = &value
 			case "RequesterCharged":
 				tok, err = d.Token()

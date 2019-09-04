@@ -337,7 +337,7 @@ func (s *ListPartsOutput) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement)
 					return fmt.Errorf("fail to UnmarshalAWSXML ListPartsOutput.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.RFC822TimeFromat, string(v))
+				value, _ := protocol.ParseTime(protocol.RFC822TimeFormatName, string(v))
 				s.AbortDate = &value
 			case "x-amz-abort-rule-id":
 				tok, err = d.Token()
@@ -461,7 +461,7 @@ func (s *ListPartsOutput) UnmarshalAWSREST(r *http.Response) (err error) {
 	for k, v := range r.Header {
 		switch {
 		case strings.EqualFold(k, "x-amz-abort-date"):
-			value, err := time.Parse(protocol.RFC822TimeFromat, v[0])
+			value, err := protocol.ParseTime(protocol.RFC822TimeFormatName, v[0])
 			if err != nil {
 				return fmt.Errorf("fail to UnmarshalAWSREST ListPartsOutput.AbortDate, %s", err)
 			}

@@ -975,7 +975,7 @@ func (s *ChangeInfo) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err
 					return fmt.Errorf("fail to UnmarshalAWSXML ChangeInfo.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.SubmittedAt = &value
 			default:
 				err := d.Skip()
@@ -5098,7 +5098,7 @@ func (s *StatusReport) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (e
 					return fmt.Errorf("fail to UnmarshalAWSXML StatusReport.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.CheckedTime = &value
 			case "Status":
 				tok, err = d.Token()

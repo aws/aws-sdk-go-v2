@@ -524,7 +524,7 @@ func (s *CreateMultipartUploadOutput) unmarshalAWSXML(d *xml.Decoder, head xml.S
 					return fmt.Errorf("fail to UnmarshalAWSXML CreateMultipartUploadOutput.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.RFC822TimeFromat, string(v))
+				value, _ := protocol.ParseTime(protocol.RFC822TimeFormatName, string(v))
 				s.AbortDate = &value
 			case "x-amz-abort-rule-id":
 				tok, err = d.Token()
@@ -626,7 +626,7 @@ func (s *CreateMultipartUploadOutput) UnmarshalAWSREST(r *http.Response) (err er
 	for k, v := range r.Header {
 		switch {
 		case strings.EqualFold(k, "x-amz-abort-date"):
-			value, err := time.Parse(protocol.RFC822TimeFromat, v[0])
+			value, err := protocol.ParseTime(protocol.RFC822TimeFormatName, v[0])
 			if err != nil {
 				return fmt.Errorf("fail to UnmarshalAWSREST CreateMultipartUploadOutput.AbortDate, %s", err)
 			}

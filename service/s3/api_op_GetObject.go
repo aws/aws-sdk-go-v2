@@ -624,7 +624,7 @@ func (s *GetObjectOutput) UnmarshalAWSREST(r *http.Response) (err error) {
 			value := v[0]
 			s.Expires = &value
 		case strings.EqualFold(k, "Last-Modified"):
-			value, err := time.Parse(protocol.RFC822TimeFromat, v[0])
+			value, err := protocol.ParseTime(protocol.RFC822TimeFormatName, v[0])
 			if err != nil {
 				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput.LastModified, %s", err)
 			}
@@ -647,7 +647,7 @@ func (s *GetObjectOutput) UnmarshalAWSREST(r *http.Response) (err error) {
 			value := ObjectLockMode(v[0])
 			s.ObjectLockMode = value
 		case strings.EqualFold(k, "x-amz-object-lock-retain-until-date"):
-			value, err := time.Parse(protocol.RFC822TimeFromat, v[0])
+			value, err := protocol.ParseTime("iso8601", v[0])
 			if err != nil {
 				return fmt.Errorf("fail to UnmarshalAWSREST GetObjectOutput.ObjectLockRetainUntilDate, %s", err)
 			}

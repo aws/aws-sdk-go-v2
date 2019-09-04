@@ -378,7 +378,7 @@ func (s *OutputService1TestShapeOutputService1TestCaseOperation1Output) unmarsha
 					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation1Output.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.Timestamp = &value
 			case "TrueBool":
 				tok, err = d.Token()
@@ -764,7 +764,7 @@ func (s *OutputService1TestShapeOutputService1TestCaseOperation2Output) unmarsha
 					return fmt.Errorf("fail to UnmarshalAWSXML OutputService1TestShapeOutputService1TestCaseOperation2Output.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.Timestamp = &value
 			case "TrueBool":
 				tok, err = d.Token()
@@ -3627,7 +3627,7 @@ func (s *OutputService11TestShapeOutputService11TestCaseOperation1Output) unmars
 					return fmt.Errorf("fail to UnmarshalAWSXML OutputService11TestShapeOutputService11TestCaseOperation1Output.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.RFC822TimeFromat, string(v))
+				value, _ := protocol.ParseTime(protocol.RFC822TimeFormatName, string(v))
 				s.Timestamp = &value
 			case "x-true-bool":
 				tok, err = d.Token()
@@ -3693,7 +3693,7 @@ func (s *OutputService11TestShapeOutputService11TestCaseOperation1Output) Unmars
 			value := v[0]
 			s.Str = &value
 		case strings.EqualFold(k, "x-timestamp"):
-			value, err := time.Parse(protocol.RFC822TimeFromat, v[0])
+			value, err := protocol.ParseTime(protocol.RFC822TimeFormatName, v[0])
 			if err != nil {
 				return fmt.Errorf("fail to UnmarshalAWSREST OutputService11TestShapeOutputService11TestCaseOperation1Output.Timestamp, %s", err)
 			}
@@ -4170,7 +4170,7 @@ func (s *OutputService13TestShapeOutputService13TestCaseOperation1Output) unmars
 					return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeOutputService13TestCaseOperation1Output.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.TimeArg = &value
 			case "x-amz-timearg":
 				tok, err = d.Token()
@@ -4178,7 +4178,7 @@ func (s *OutputService13TestShapeOutputService13TestCaseOperation1Output) unmars
 					return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeOutputService13TestCaseOperation1Output.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.RFC822TimeFromat, string(v))
+				value, _ := protocol.ParseTime(protocol.RFC822TimeFormatName, string(v))
 				s.TimeArgInHeader = &value
 			case "TimeCustom":
 				tok, err = d.Token()
@@ -4186,7 +4186,7 @@ func (s *OutputService13TestShapeOutputService13TestCaseOperation1Output) unmars
 					return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeOutputService13TestCaseOperation1Output.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime("rfc822", string(v))
 				s.TimeCustom = &value
 			case "x-amz-timecustom":
 				tok, err = d.Token()
@@ -4194,7 +4194,7 @@ func (s *OutputService13TestShapeOutputService13TestCaseOperation1Output) unmars
 					return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeOutputService13TestCaseOperation1Output.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.RFC822TimeFromat, string(v))
+				value, _ := protocol.ParseTime("unixTimestamp", string(v))
 				s.TimeCustomInHeader = &value
 			case "TimeFormat":
 				tok, err = d.Token()
@@ -4202,7 +4202,7 @@ func (s *OutputService13TestShapeOutputService13TestCaseOperation1Output) unmars
 					return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeOutputService13TestCaseOperation1Output.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime("unixTimestamp", string(v))
 				s.TimeFormat = &value
 			case "x-amz-timeformat":
 				tok, err = d.Token()
@@ -4210,7 +4210,7 @@ func (s *OutputService13TestShapeOutputService13TestCaseOperation1Output) unmars
 					return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeOutputService13TestCaseOperation1Output.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.RFC822TimeFromat, string(v))
+				value, _ := protocol.ParseTime("unixTimestamp", string(v))
 				s.TimeFormatInHeader = &value
 			default:
 				err := d.Skip()
@@ -4232,19 +4232,19 @@ func (s *OutputService13TestShapeOutputService13TestCaseOperation1Output) Unmars
 	for k, v := range r.Header {
 		switch {
 		case strings.EqualFold(k, "x-amz-timearg"):
-			value, err := time.Parse(protocol.RFC822TimeFromat, v[0])
+			value, err := protocol.ParseTime(protocol.RFC822TimeFormatName, v[0])
 			if err != nil {
 				return fmt.Errorf("fail to UnmarshalAWSREST OutputService13TestShapeOutputService13TestCaseOperation1Output.TimeArgInHeader, %s", err)
 			}
 			s.TimeArgInHeader = &value
 		case strings.EqualFold(k, "x-amz-timecustom"):
-			value, err := time.Parse(protocol.RFC822TimeFromat, v[0])
+			value, err := protocol.ParseTime("unixTimestamp", v[0])
 			if err != nil {
 				return fmt.Errorf("fail to UnmarshalAWSREST OutputService13TestShapeOutputService13TestCaseOperation1Output.TimeCustomInHeader, %s", err)
 			}
 			s.TimeCustomInHeader = &value
 		case strings.EqualFold(k, "x-amz-timeformat"):
-			value, err := time.Parse(protocol.RFC822TimeFromat, v[0])
+			value, err := protocol.ParseTime("unixTimestamp", v[0])
 			if err != nil {
 				return fmt.Errorf("fail to UnmarshalAWSREST OutputService13TestShapeOutputService13TestCaseOperation1Output.TimeFormatInHeader, %s", err)
 			}
@@ -4370,7 +4370,7 @@ func (s *OutputService13TestShapeTimeContainer) unmarshalAWSXML(d *xml.Decoder, 
 					return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeTimeContainer.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime("unixTimestamp", string(v))
 				s.Bar = &value
 			case "foo":
 				tok, err = d.Token()
@@ -4378,7 +4378,7 @@ func (s *OutputService13TestShapeTimeContainer) unmarshalAWSXML(d *xml.Decoder, 
 					return fmt.Errorf("fail to UnmarshalAWSXML OutputService13TestShapeTimeContainer.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.Foo = &value
 			default:
 				err := d.Skip()

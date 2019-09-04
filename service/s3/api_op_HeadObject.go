@@ -611,7 +611,7 @@ func (s *HeadObjectOutput) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement
 					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.RFC822TimeFromat, string(v))
+				value, _ := protocol.ParseTime(protocol.RFC822TimeFormatName, string(v))
 				s.LastModified = &value
 			case "x-amz-meta-":
 				if s.Metadata == nil {
@@ -686,7 +686,7 @@ func (s *HeadObjectOutput) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement
 					return fmt.Errorf("fail to UnmarshalAWSXML HeadObjectOutput.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.RFC822TimeFromat, string(v))
+				value, _ := protocol.ParseTime("iso8601", string(v))
 				s.ObjectLockRetainUntilDate = &value
 			case "x-amz-mp-parts-count":
 				tok, err = d.Token()
@@ -835,7 +835,7 @@ func (s *HeadObjectOutput) UnmarshalAWSREST(r *http.Response) (err error) {
 			value := v[0]
 			s.Expires = &value
 		case strings.EqualFold(k, "Last-Modified"):
-			value, err := time.Parse(protocol.RFC822TimeFromat, v[0])
+			value, err := protocol.ParseTime(protocol.RFC822TimeFormatName, v[0])
 			if err != nil {
 				return fmt.Errorf("fail to UnmarshalAWSREST HeadObjectOutput.LastModified, %s", err)
 			}
@@ -858,7 +858,7 @@ func (s *HeadObjectOutput) UnmarshalAWSREST(r *http.Response) (err error) {
 			value := ObjectLockMode(v[0])
 			s.ObjectLockMode = value
 		case strings.EqualFold(k, "x-amz-object-lock-retain-until-date"):
-			value, err := time.Parse(protocol.RFC822TimeFromat, v[0])
+			value, err := protocol.ParseTime("iso8601", v[0])
 			if err != nil {
 				return fmt.Errorf("fail to UnmarshalAWSREST HeadObjectOutput.ObjectLockRetainUntilDate, %s", err)
 			}

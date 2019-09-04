@@ -1158,7 +1158,7 @@ func (s *Bucket) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err err
 					return fmt.Errorf("fail to UnmarshalAWSXML Bucket.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.CreationDate = &value
 			case "Name":
 				tok, err = d.Token()
@@ -2636,7 +2636,7 @@ func (s *CopyObjectResult) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement
 					return fmt.Errorf("fail to UnmarshalAWSXML CopyObjectResult.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.LastModified = &value
 			default:
 				err := d.Skip()
@@ -2715,7 +2715,7 @@ func (s *CopyPartResult) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) 
 					return fmt.Errorf("fail to UnmarshalAWSXML CopyPartResult.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.LastModified = &value
 			default:
 				err := d.Skip()
@@ -3095,7 +3095,7 @@ func (s *DeleteMarkerEntry) unmarshalAWSXML(d *xml.Decoder, head xml.StartElemen
 					return fmt.Errorf("fail to UnmarshalAWSXML DeleteMarkerEntry.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.LastModified = &value
 			case "Owner":
 				value := Owner{}
@@ -6197,7 +6197,7 @@ func (s *LifecycleExpiration) unmarshalAWSXML(d *xml.Decoder, head xml.StartElem
 					return fmt.Errorf("fail to UnmarshalAWSXML LifecycleExpiration.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime("iso8601", string(v))
 				s.Date = &value
 			case "Days":
 				tok, err = d.Token()
@@ -7507,7 +7507,7 @@ func (s *MultipartUpload) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement)
 					return fmt.Errorf("fail to UnmarshalAWSXML MultipartUpload.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.Initiated = &value
 			case "Initiator":
 				value := Initiator{}
@@ -8229,7 +8229,7 @@ func (s *Object) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err err
 					return fmt.Errorf("fail to UnmarshalAWSXML Object.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.LastModified = &value
 			case "Owner":
 				value := Owner{}
@@ -8675,7 +8675,7 @@ func (s *ObjectLockRetention) unmarshalAWSXML(d *xml.Decoder, head xml.StartElem
 					return fmt.Errorf("fail to UnmarshalAWSXML ObjectLockRetention.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime("iso8601", string(v))
 				s.RetainUntilDate = &value
 			default:
 				err := d.Skip()
@@ -8885,7 +8885,7 @@ func (s *ObjectVersion) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (
 					return fmt.Errorf("fail to UnmarshalAWSXML ObjectVersion.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.LastModified = &value
 			case "Owner":
 				value := Owner{}
@@ -9340,7 +9340,7 @@ func (s *Part) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err error
 					return fmt.Errorf("fail to UnmarshalAWSXML Part.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.LastModified = &value
 			case "PartNumber":
 				tok, err = d.Token()
@@ -13492,7 +13492,7 @@ func (s *Transition) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err
 					return fmt.Errorf("fail to UnmarshalAWSXML Transition.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime("iso8601", string(v))
 				s.Date = &value
 			case "Days":
 				tok, err = d.Token()

@@ -3956,7 +3956,7 @@ func (s *Distribution) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (e
 					return fmt.Errorf("fail to UnmarshalAWSXML Distribution.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.LastModifiedTime = &value
 			case "Status":
 				tok, err = d.Token()
@@ -5155,7 +5155,7 @@ func (s *DistributionSummary) unmarshalAWSXML(d *xml.Decoder, head xml.StartElem
 					return fmt.Errorf("fail to UnmarshalAWSXML DistributionSummary.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.LastModifiedTime = &value
 			case "OriginGroups":
 				value := OriginGroups{}
@@ -5666,7 +5666,7 @@ func (s *FieldLevelEncryption) unmarshalAWSXML(d *xml.Decoder, head xml.StartEle
 					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryption.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.LastModifiedTime = &value
 			default:
 				err := d.Skip()
@@ -6037,7 +6037,7 @@ func (s *FieldLevelEncryptionProfile) unmarshalAWSXML(d *xml.Decoder, head xml.S
 					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfile.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.LastModifiedTime = &value
 			default:
 				err := d.Skip()
@@ -6442,7 +6442,7 @@ func (s *FieldLevelEncryptionProfileSummary) unmarshalAWSXML(d *xml.Decoder, hea
 					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionProfileSummary.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.LastModifiedTime = &value
 			case "Name":
 				tok, err = d.Token()
@@ -6629,7 +6629,7 @@ func (s *FieldLevelEncryptionSummary) unmarshalAWSXML(d *xml.Decoder, head xml.S
 					return fmt.Errorf("fail to UnmarshalAWSXML FieldLevelEncryptionSummary.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.LastModifiedTime = &value
 			case "QueryArgProfileConfig":
 				value := QueryArgProfileConfig{}
@@ -7526,7 +7526,7 @@ func (s *Invalidation) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (e
 					return fmt.Errorf("fail to UnmarshalAWSXML Invalidation.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.CreateTime = &value
 			case "Id":
 				tok, err = d.Token()
@@ -7928,7 +7928,7 @@ func (s *InvalidationSummary) unmarshalAWSXML(d *xml.Decoder, head xml.StartElem
 					return fmt.Errorf("fail to UnmarshalAWSXML InvalidationSummary.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.CreateTime = &value
 			case "Id":
 				tok, err = d.Token()
@@ -10341,7 +10341,7 @@ func (s *PublicKey) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement) (err 
 					return fmt.Errorf("fail to UnmarshalAWSXML PublicKey.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.CreatedTime = &value
 			case "Id":
 				tok, err = d.Token()
@@ -10743,7 +10743,7 @@ func (s *PublicKeySummary) unmarshalAWSXML(d *xml.Decoder, head xml.StartElement
 					return fmt.Errorf("fail to UnmarshalAWSXML PublicKeySummary.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.CreatedTime = &value
 			case "EncodedKey":
 				tok, err = d.Token()
@@ -12209,7 +12209,7 @@ func (s *StreamingDistribution) unmarshalAWSXML(d *xml.Decoder, head xml.StartEl
 					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistribution.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.LastModifiedTime = &value
 			case "Status":
 				tok, err = d.Token()
@@ -12998,7 +12998,7 @@ func (s *StreamingDistributionSummary) unmarshalAWSXML(d *xml.Decoder, head xml.
 					return fmt.Errorf("fail to UnmarshalAWSXML StreamingDistributionSummary.%s, %s", name, err)
 				}
 				v, _ := tok.(xml.CharData)
-				value, _ := time.Parse(protocol.ISO8601TimeFormat, string(v))
+				value, _ := protocol.ParseTime(protocol.ISO8601TimeFormatName, string(v))
 				s.LastModifiedTime = &value
 			case "PriceClass":
 				tok, err = d.Token()
