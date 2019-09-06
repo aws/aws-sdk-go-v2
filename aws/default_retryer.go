@@ -29,19 +29,19 @@ type DefaultRetryer struct {
 }
 
 const (
-	// Default max number of retries
+	// DefaultRetryerMaxNumRetries sets max number of retries
 	DefaultRetryerMaxNumRetries = 3
 
-	// Default min retry delay
+	// DefaultRetryerMinRetryDelay sets min retry delay
 	DefaultRetryerMinRetryDelay = 30 * time.Millisecond
 
-	// Default minimum delay when throttled
+	// DefaultRetryerMinThrottleDelay sets minimum delay when throttled
 	DefaultRetryerMinThrottleDelay = 500 * time.Millisecond
 
-	// Default max retry delay
+	// DefaultRetryerMaxRetryDelay sets max retry delay
 	DefaultRetryerMaxRetryDelay = 300 * time.Second
 
-	// Default maximum delay when throttled
+	// DefaultRetryerMaxThrottleDelay sets maximum delay when throttled
 	DefaultRetryerMaxThrottleDelay = 300 * time.Second
 )
 
@@ -53,6 +53,7 @@ func (d DefaultRetryer) MaxRetries() int {
 
 var seededRand = rand.New(&lockedSource{src: rand.NewSource(time.Now().UnixNano())})
 
+// setDefaults sets default values for the default Retryer
 func (d *DefaultRetryer) setDefaults() {
 	if d.NumMaxRetries == 0 {
 		d.NumMaxRetries = DefaultRetryerMaxNumRetries

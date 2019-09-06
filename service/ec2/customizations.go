@@ -8,16 +8,17 @@ import (
 )
 
 const (
-	// custom max number of retries
+	// customRetryerMaxNumRetries sets max number of retries
 	customRetryerMaxNumRetries = 3
 
-	// custom min retry delay
+	// customRetryerMinRetryDelay sets min retry delay
 	customRetryerMinRetryDelay = 1 * time.Second
 
-	// custom max retry delay
+	// customRetryerMaxRetryDelay sets max retry delay
 	customRetryerMaxRetryDelay = 8 * time.Second
 )
 
+// setCustomRetryer func returns aws.Retryer
 func setCustomRetryer(c *Client) aws.Retryer {
 	return aws.DefaultRetryer{
 		NumMaxRetries:    customRetryerMaxNumRetries,
