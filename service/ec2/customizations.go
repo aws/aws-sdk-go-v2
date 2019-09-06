@@ -8,8 +8,13 @@ import (
 )
 
 const (
+	// custom max number of retries
 	customRetryerMaxNumRetries = 3
+
+	// custom min retry delay
 	customRetryerMinRetryDelay = 1 * time.Second
+
+	// custom max retry delay
 	customRetryerMaxRetryDelay = 8 * time.Second
 )
 

@@ -21,7 +21,6 @@ import (
 //    // This implementation always has 100 max retries
 //    func (d retryer) MaxRetries() int { return 100 }
 type DefaultRetryer struct {
-	// num of max retries allowed
 	NumMaxRetries    int
 	MinRetryDelay    time.Duration
 	MinThrottleDelay time.Duration
@@ -30,10 +29,19 @@ type DefaultRetryer struct {
 }
 
 const (
-	DefaultRetryerMaxNumRetries    = 3
-	DefaultRetryerMinRetryDelay    = 30 * time.Millisecond
+	// Default max number of retries
+	DefaultRetryerMaxNumRetries = 3
+
+	// Default min retry delay
+	DefaultRetryerMinRetryDelay = 30 * time.Millisecond
+
+	// Default minimum delay when throttled
 	DefaultRetryerMinThrottleDelay = 500 * time.Millisecond
-	DefaultRetryerMaxRetryDelay    = 300 * time.Second
+
+	// Default max retry delay
+	DefaultRetryerMaxRetryDelay = 300 * time.Second
+
+	// Default maximum delay when throttled
 	DefaultRetryerMaxThrottleDelay = 300 * time.Second
 )
 
