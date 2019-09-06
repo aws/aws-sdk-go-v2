@@ -4,55 +4,37 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-type retryer struct {
-	aws.DefaultRetryer
-}
+const (
+	customRetryerMaxNumRetries = 3
+	customRetryerMinRetryDelay = 1 * time.Second
+	customRetryerMaxRetryDelay = 8 * time.Second
+)
 
-func (d retryer) RetryRules(r *request.Request) time.Duration {
-	switch r.Operation.Name {
-	case opModifyNetworkInterfaceAttribute:
-		fallthrough
-	case opAssignPrivateIpAddresses:
-		return d.customRetryRule(r)
-	default:
-		return d.DefaultRetryer.RetryRules(r)
-	}
-}
-
-func (d retryer) customRetryRule(r *request.Request) time.Duration {
-	d.MinTime = 1000
-	return d.DefaultRetryer.RetryRules(r)
-}
-
-func setCustomRetryer(c *Client) {
-	maxRetries := 3
-	c.Retryer = retryer{
-		DefaultRetryer: request.DefaultRetryer{
-			NumMaxRetries: maxRetries,
-		},
+func setCustomRetryer(c *Client) aws.Retryer {
+	return aws.DefaultRetryer{
+		NumMaxRetries:    customRetryerMaxNumRetries,
+		MinRetryDelay:    customRetryerMinRetryDelay,
+		MinThrottleDelay: customRetryerMinRetryDelay,
+		MaxRetryDelay:    customRetryerMaxRetryDelay,
+		MaxThrottleDelay: customRetryerMaxRetryDelay,
 	}
 }
 
 func init() {
-	initClient = func(c *Client) {
-		if c.Config.Retryer == nil {
-			// Only override the retryer with a custom one if the config
-			// does not already contain a retryer
-			setCustomRetryer(c)
-		}
-	}
-	initRequest = func(c *Client, r *request.Request) {
+	initRequest = func(c *Client, r *aws.Request) {
 		if r.Operation.Name == opCopySnapshot { // fill the PresignedURL parameter
 			r.Handlers.Build.PushFront(fillPresignedURL)
+		}
+		if c.Config.Retryer == nil && (r.Operation.Name == opModifyNetworkInterfaceAttribute || r.Operation.Name == opAssignPrivateIpAddresses) {
+			r.Retryer = setCustomRetryer(c)
 		}
 	}
 }
 
-func fillPresignedURL(r *request.Request) {
+func fillPresignedURL(r *aws.Request) {
 	if !r.ParamsFilled() {
 		return
 	}
@@ -85,7 +67,7 @@ func fillPresignedURL(r *request.Request) {
 	metadata.SigningRegion = resolved.SigningRegion
 
 	// Presign a CopySnapshot request with modified params
-	req := request.New(cfgCp, metadata, r.Handlers, r.Retryer, r.Operation, newParams, r.Data)
+	req := aws.New(cfgCp, metadata, r.Handlers, r.Retryer, r.Operation, newParams, r.Data)
 	url, err := req.Presign(5 * time.Minute) // 5 minutes should be enough.
 	if err != nil {                          // bubble error back up to original request
 		r.Error = err

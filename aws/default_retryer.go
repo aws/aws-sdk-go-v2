@@ -1,6 +1,7 @@
 package aws
 
 import (
+	"math"
 	"math/rand"
 	"strconv"
 	"sync"
@@ -20,9 +21,21 @@ import (
 //    // This implementation always has 100 max retries
 //    func (d retryer) MaxRetries() int { return 100 }
 type DefaultRetryer struct {
-	NumMaxRetries int
-	MinTime       int64
+	// num of max retries allowed
+	NumMaxRetries    int
+	MinRetryDelay    time.Duration
+	MinThrottleDelay time.Duration
+	MaxRetryDelay    time.Duration
+	MaxThrottleDelay time.Duration
 }
+
+const (
+	DefaultRetryerMaxNumRetries    = 3
+	DefaultRetryerMinRetryDelay    = 30 * time.Millisecond
+	DefaultRetryerMinThrottleDelay = 500 * time.Millisecond
+	DefaultRetryerMaxRetryDelay    = 300 * time.Second
+	DefaultRetryerMaxThrottleDelay = 300 * time.Second
+)
 
 // MaxRetries returns the number of maximum returns the service will use to make
 // an individual API
@@ -32,42 +45,67 @@ func (d DefaultRetryer) MaxRetries() int {
 
 var seededRand = rand.New(&lockedSource{src: rand.NewSource(time.Now().UnixNano())})
 
-// RetryRules returns the delay duration before retrying this request again
-func (d DefaultRetryer) RetryRules(r *Request) time.Duration {
-	// Set the upper limit of delay in retrying at ~five minutes
-	var minTime int64
-	if d.MinTime != 0 {
-		minTime = d.MinTime
-	} else {
-		minTime = 30
+func (d *DefaultRetryer) setDefaults() {
+	if d.NumMaxRetries == 0 {
+		d.NumMaxRetries = DefaultRetryerMaxNumRetries
+	}
+	if d.MinRetryDelay == 0 {
+		d.MinRetryDelay = DefaultRetryerMinRetryDelay
+	}
+	if d.MinThrottleDelay == 0 {
+		d.MinThrottleDelay = DefaultRetryerMinThrottleDelay
+	}
+	if d.MaxRetryDelay == 0 {
+		d.MaxRetryDelay = DefaultRetryerMaxRetryDelay
+	}
+	if d.MaxThrottleDelay == 0 {
+		d.MaxThrottleDelay = DefaultRetryerMaxThrottleDelay
 	}
 
+}
+
+// RetryRules returns the delay duration before retrying this request again
+// Note: RetryRules method must be a value receiver so that the
+// defaultRetryer is safe.
+func (d DefaultRetryer) RetryRules(r *Request) time.Duration {
+
+	// set default values for the retryer if not set.
+	d.setDefaults()
+
+	// Set the upper limit of delay in retrying at ~five minutes
+	minDelay := d.MinRetryDelay
 	var initialDelay time.Duration
 	throttle := d.shouldThrottle(r)
 	if throttle {
 		if delay, ok := getRetryAfterDelay(r); ok {
 			initialDelay = delay
 		}
-
-		minTime = 500
+		minDelay = d.MinThrottleDelay
 	}
 
 	retryCount := r.RetryCount
-	if throttle && retryCount > 8 {
-		retryCount = 8
-	} else if retryCount > 12 {
-		retryCount = 12
+	maxDelay := d.MaxRetryDelay
+	if throttle {
+		maxDelay = d.MaxThrottleDelay
 	}
 
-	maxRetriesAllowed := d.MaxRetries()
-	if maxRetriesAllowed != 0 {
-		if retryCount > maxRetriesAllowed-1 {
-			retryCount = maxRetriesAllowed - 1
+	var delay time.Duration
+
+	// Logic to cap the retry count based on the minDelay provided
+	actualRetryCount := int(math.Log2(float64(minDelay))) + 1
+	if actualRetryCount < 63-retryCount {
+		delay = time.Duration(1<<uint64(retryCount)) * getDelaySeed(minDelay)
+		if delay > maxDelay {
+			delay = getDelaySeed(maxDelay / 2)
 		}
+	} else {
+		delay = getDelaySeed(maxDelay / 2)
 	}
+	return delay + initialDelay
+}
 
-	delay := (1 << uint(retryCount)) * (seededRand.Int63n(minTime) + minTime)
-	return (time.Duration(delay) * time.Millisecond) + initialDelay
+func getDelaySeed(duration time.Duration) time.Duration {
+	return time.Duration(seededRand.Int63n(int64(duration)) + int64(duration))
 }
 
 // ShouldRetry returns true if the request should be retried.

@@ -64,19 +64,16 @@ func NewClient(cfg Config, metadata Metadata) *Client {
 	retryer := cfg.Retryer
 	if retryer == nil {
 		// TODO need better way of specifing default num retries
-		retryer = DefaultRetryer{3, 0}
+		retryer = DefaultRetryer{NumMaxRetries: 3}
 	}
 	svc.Retryer = retryer
-
 	svc.AddDebugHandlers()
-
 	return svc
 }
 
 // NewRequest returns a new Request pointer for the service API
 // operation and parameters.
 func (c *Client) NewRequest(operation *Operation, params interface{}, data interface{}) *Request {
-
 	return New(c.Config, c.Metadata, c.Handlers, c.Retryer, operation, params, data)
 }
 
