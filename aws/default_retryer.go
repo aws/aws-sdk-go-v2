@@ -48,7 +48,6 @@ const (
 // MaxRetries returns the number of maximum returns the service will use to make
 // an individual API
 func (d DefaultRetryer) MaxRetries() int {
-	d.setDefaults()
 	return d.NumMaxRetries
 }
 
