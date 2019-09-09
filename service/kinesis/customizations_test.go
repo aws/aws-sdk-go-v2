@@ -33,7 +33,9 @@ func TestKinesisGetRecordsCustomization(t *testing.T) {
 	retryCount := 0
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 4}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 4
+	})
 
 	svc := New(cfg)
 	req := svc.GetRecordsRequest(&GetRecordsInput{

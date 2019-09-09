@@ -161,7 +161,9 @@ func dlLoggingSvcWithErrReader(cases []testErrReader) (*s3.Client, *[]string) {
 	var index int
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: len(cases) - 1}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = len(cases) - 1
+	})
 	svc := s3.New(cfg)
 
 	svc.Handlers.Send.Clear()

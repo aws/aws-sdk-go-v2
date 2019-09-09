@@ -56,7 +56,9 @@ func TestRetryThrottleStatusCodes(t *testing.T) {
 		},
 	}
 
-	d := DefaultRetryer{NumMaxRetries: 10}
+	d := NewDefaultRetryer(func(d *DefaultRetryer) {
+		d.NumMaxRetries = 100
+	})
 	for i, c := range cases {
 		throttle := d.shouldThrottle(&c.r)
 		retry := d.ShouldRetry(&c.r)
@@ -164,7 +166,11 @@ func TestGetRetryDelay(t *testing.T) {
 }
 
 func TestRetryDelay(t *testing.T) {
-	d := DefaultRetryer{NumMaxRetries: 100}
+
+	d := NewDefaultRetryer(func(d *DefaultRetryer) {
+		d.NumMaxRetries = 100
+	})
+
 	r := Request{}
 	for i := 0; i < 100; i++ {
 		rTemp := r

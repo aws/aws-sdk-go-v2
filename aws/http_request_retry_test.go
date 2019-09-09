@@ -25,7 +25,9 @@ func TestRequestCancelRetry(t *testing.T) {
 	reqNum := 0
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("http://endpoint")
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 10}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 10
+	})
 
 	s := mock.NewMockClient(cfg)
 

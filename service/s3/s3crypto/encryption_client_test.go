@@ -21,7 +21,9 @@ import (
 
 func TestDefaultConfigValues(t *testing.T) {
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 0
+	})
 	cfg.Region = "us-west-2"
 
 	svc := kms.New(cfg)
@@ -49,7 +51,9 @@ func TestPutObject(t *testing.T) {
 	cb := mockCipherBuilder{generator}
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 0
+	})
 	cfg.Region = "us-west-2"
 
 	c := s3crypto.NewEncryptionClient(cfg, cb)

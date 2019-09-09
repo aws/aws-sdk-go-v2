@@ -19,7 +19,9 @@ var db *dynamodb.Client
 
 func TestMain(m *testing.M) {
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 2}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 2
+	})
 
 	db = dynamodb.New(cfg)
 	db.Handlers.Send.Clear() // mock sending
@@ -57,7 +59,9 @@ func TestDefaultRetryRules(t *testing.T) {
 
 func TestCustomRetryRules(t *testing.T) {
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 2}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 2
+	})
 
 	svc := dynamodb.New(cfg)
 	if e, a := 2, svc.Retryer.MaxRetries(); e != a {
@@ -138,7 +142,9 @@ func TestValidateCRC32DoesNotMatch(t *testing.T) {
 
 func TestValidateCRC32DoesNotMatchNoComputeChecksum(t *testing.T) {
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 2}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 2
+	})
 
 	svc := dynamodb.New(cfg)
 	svc.DisableComputeChecksums = true

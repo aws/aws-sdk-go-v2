@@ -18,15 +18,13 @@ const (
 	customRetryerMaxRetryDelay = 8 * time.Second
 )
 
-// setCustomRetryer func returns aws.Retryer
-func setCustomRetryer(c *Client) aws.Retryer {
-	return aws.DefaultRetryer{
-		NumMaxRetries:    customRetryerMaxNumRetries,
-		MinRetryDelay:    customRetryerMinRetryDelay,
-		MinThrottleDelay: customRetryerMinRetryDelay,
-		MaxRetryDelay:    customRetryerMaxRetryDelay,
-		MaxThrottleDelay: customRetryerMaxRetryDelay,
-	}
+// setCustomRetryer overides the default Retryer values
+func setCustomRetryer(d *aws.DefaultRetryer) {
+	d.NumMaxRetries = customRetryerMaxNumRetries
+	d.MinRetryDelay = customRetryerMinRetryDelay
+	d.MinThrottleDelay = customRetryerMinRetryDelay
+	d.MaxRetryDelay = customRetryerMaxRetryDelay
+	d.MaxThrottleDelay = customRetryerMaxRetryDelay
 }
 
 func init() {
@@ -35,7 +33,7 @@ func init() {
 			r.Handlers.Build.PushFront(fillPresignedURL)
 		}
 		if c.Config.Retryer == nil && (r.Operation.Name == opModifyNetworkInterfaceAttribute || r.Operation.Name == opAssignPrivateIpAddresses) {
-			r.Retryer = setCustomRetryer(c)
+			r.Retryer = aws.Retryer(aws.NewDefaultRetryer(setCustomRetryer))
 		}
 	}
 }

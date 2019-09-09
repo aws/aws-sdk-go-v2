@@ -10,7 +10,12 @@ import (
 
 func TestCustomRetryRules(t *testing.T) {
 
-	svc := New(unit.Config())
+	cfg := unit.Config()
+	// set retryer to nil as unit.config sets default retryer
+	// retryer is set to nil as we want to use the custom retryer
+	cfg.Retryer = nil
+	svc := New(cfg)
+
 	req := svc.ModifyNetworkInterfaceAttributeRequest(&ModifyNetworkInterfaceAttributeInput{
 		NetworkInterfaceId: aws.String("foo"),
 	})
@@ -32,13 +37,13 @@ func TestCustomRetryRules(t *testing.T) {
 func TestCustomRetryer_WhenRetrierSpecified(t *testing.T) {
 	svc := New(aws.Config{
 		Region: "us-west-2",
-		Retryer: aws.DefaultRetryer{
-			NumMaxRetries:    4,
-			MinThrottleDelay: 50 * time.Millisecond,
-			MinRetryDelay:    10 * time.Millisecond,
-			MaxThrottleDelay: 200 * time.Millisecond,
-			MaxRetryDelay:    300 * time.Millisecond,
-		},
+		Retryer: aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+			d.NumMaxRetries = 4
+			d.MinThrottleDelay = 50 * time.Millisecond
+			d.MinRetryDelay = 10 * time.Millisecond
+			d.MaxThrottleDelay = 200 * time.Millisecond
+			d.MaxRetryDelay = 300 * time.Millisecond
+		}),
 		EndpointResolver: unit.Config().EndpointResolver,
 	})
 
@@ -74,7 +79,12 @@ func TestCustomRetryer_WhenRetrierSpecified(t *testing.T) {
 }
 
 func TestCustomRetryer(t *testing.T) {
-	svc := New(unit.Config())
+
+	cfg := unit.Config()
+	// set retryer to nil as unit.config sets default retryer
+	// retryer is set to nil as we want to use the custom retryer
+	cfg.Retryer = nil
+	svc := New(cfg)
 
 	req := svc.AssignPrivateIpAddressesRequest(&AssignPrivateIpAddressesInput{
 		NetworkInterfaceId: aws.String("foo"),

@@ -87,7 +87,7 @@ func NewDownloader(cfg aws.Config, options ...func(*Downloader)) *Downloader {
 		Retryer:     cfg.Retryer,
 	}
 	if d.Retryer == nil {
-		d.Retryer = aws.DefaultRetryer{NumMaxRetries: 3}
+		d.Retryer = aws.NewDefaultRetryer()
 	}
 
 	for _, option := range options {
@@ -122,7 +122,7 @@ func NewDownloaderWithClient(svc s3iface.ClientAPI, options ...func(*Downloader)
 	if s3Svc, ok := svc.(*s3.Client); ok {
 		retryer = s3Svc.Retryer
 	} else {
-		retryer = aws.DefaultRetryer{NumMaxRetries: 3}
+		retryer = aws.NewDefaultRetryer()
 	}
 
 	d := &Downloader{

@@ -87,7 +87,9 @@ func TestRequestRecoverRetry5xx(t *testing.T) {
 	}
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 10}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 10
+	})
 
 	s := awstesting.NewClient(cfg)
 	s.Handlers.Validate.Clear()
@@ -126,7 +128,9 @@ func TestRequestRecoverRetry4xxRetryable(t *testing.T) {
 	}
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 10}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 10
+	})
 
 	s := awstesting.NewClient(cfg)
 	s.Handlers.Validate.Clear()
@@ -154,7 +158,9 @@ func TestRequestRecoverRetry4xxRetryable(t *testing.T) {
 // test that retries don't occur for 4xx status codes with a response type that can't be retried
 func TestRequest4xxUnretryable(t *testing.T) {
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 10}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 10
+	})
 
 	s := awstesting.NewClient(cfg)
 
@@ -207,7 +213,9 @@ func TestRequestExhaustRetries(t *testing.T) {
 		{StatusCode: 500, Body: body(`{"__type":"UnknownError","message":"An error occurred."}`)},
 	}
 
-	s := awstesting.NewClient(unit.Config())
+	cfg := unit.Config()
+	cfg.Retryer = aws.NewDefaultRetryer()
+	s := awstesting.NewClient(cfg)
 
 	s.Handlers.Validate.Clear()
 	s.Handlers.Unmarshal.PushBack(unmarshal)
@@ -266,7 +274,9 @@ func TestRequest_RecoverExpiredCreds(t *testing.T) {
 	}
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 10}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 10
+	})
 
 	credsInvalidated := false
 	credsProvider := func() aws.CredentialsProvider {
@@ -394,7 +404,7 @@ func TestRequestThrottleRetries(t *testing.T) {
 	orig := sdk.SleepWithContext
 	defer func() { sdk.SleepWithContext = orig }()
 
-	delays := []time.Duration{}
+	var delays []time.Duration
 	sdk.SleepWithContext = func(ctx context.Context, dur time.Duration) error {
 		delays = append(delays, dur)
 		return nil
@@ -408,7 +418,9 @@ func TestRequestThrottleRetries(t *testing.T) {
 		{StatusCode: 500, Body: body(`{"__type":"Throttling","message":"An error occurred."}`)},
 	}
 
-	s := awstesting.NewClient(unit.Config())
+	cfg := unit.Config()
+	cfg.Retryer = aws.NewDefaultRetryer()
+	s := awstesting.NewClient(cfg)
 
 	s.Handlers.Validate.Clear()
 	s.Handlers.Unmarshal.PushBack(unmarshal)
@@ -460,7 +472,9 @@ func TestRequestRecoverTimeoutWithNilBody(t *testing.T) {
 	}
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 10}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 10
+	})
 
 	s := awstesting.NewClient(cfg)
 
@@ -507,7 +521,9 @@ func TestRequestRecoverTimeoutWithNilResponse(t *testing.T) {
 	}
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 10}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 10
+	})
 
 	s := awstesting.NewClient(cfg)
 
@@ -572,7 +588,9 @@ func TestRequest_NoBody(t *testing.T) {
 
 			cfg := unit.Config()
 			cfg.Region = "mock-region"
-			cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 0}
+			cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+				d.NumMaxRetries = 0
+			})
 			cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 
 			s := awstesting.NewClient(cfg)
@@ -744,13 +762,17 @@ func TestSerializationErrConnectionReset(t *testing.T) {
 		TargetPrefix:  "Foo",
 	}
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 5}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 5
+	})
 
 	req := aws.New(
 		cfg,
 		meta,
 		handlers,
-		aws.DefaultRetryer{NumMaxRetries: 5},
+		aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+			d.NumMaxRetries = 5
+		}),
 		op,
 		&struct{}{},
 		&struct{}{},
@@ -895,7 +917,9 @@ func TestRequest_TemporaryRetry(t *testing.T) {
 	defer server.Close()
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 1}
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 1
+	})
 	cfg.HTTPClient = &http.Client{
 		Timeout: 100 * time.Millisecond,
 	}
