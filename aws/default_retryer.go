@@ -53,6 +53,17 @@ func (d DefaultRetryer) MaxRetries() int {
 
 var seededRand = rand.New(&lockedSource{src: rand.NewSource(time.Now().UnixNano())})
 
+// NewDefaultRetryer returns Default Retryer initialized with default values and optionally takes function
+// to override values for default retryer.
+func NewDefaultRetryer(opts ...func(d *DefaultRetryer)) DefaultRetryer {
+	d := DefaultRetryer{}
+	d.setDefaults()
+	for _, opt := range opts {
+		opt(&d)
+	}
+	return d
+}
+
 // setDefaults sets default values for the default Retryer
 func (d *DefaultRetryer) setDefaults() {
 	if d.NumMaxRetries == 0 {
@@ -77,10 +88,6 @@ func (d *DefaultRetryer) setDefaults() {
 // Note: RetryRules method must be a value receiver so that the
 // defaultRetryer is safe.
 func (d DefaultRetryer) RetryRules(r *Request) time.Duration {
-
-	// set default values for the retryer if not set.
-	d.setDefaults()
-
 	// Set the upper limit of delay in retrying at ~five minutes
 	minDelay := d.MinRetryDelay
 	var initialDelay time.Duration
