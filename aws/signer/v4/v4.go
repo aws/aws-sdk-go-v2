@@ -329,7 +329,7 @@ func (v4 Signer) signWithBody(r *http.Request, body io.ReadSeeker, service, regi
 		return http.Header{}, err
 	}
 
-	ctx.sanitizeHostForHeader()
+	aws.SanitizeHostForHeader(ctx.Request)
 	ctx.assignAmzQueryValues()
 	if err := ctx.build(v4.DisableHeaderHoisting); err != nil {
 		return nil, err
@@ -691,10 +691,6 @@ func (ctx *signingCtx) isRequestSigned() bool {
 	}
 
 	return false
-}
-
-func (ctx *signingCtx) sanitizeHostForHeader() {
-	aws.SanitizeHostForHeader(ctx.Request)
 }
 
 // unsign removes signing flags for both signed and presigned requests.
