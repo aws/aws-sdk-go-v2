@@ -16,7 +16,6 @@ func init() {
 			Source: "unit test credentials",
 		},
 	}
-	config.Retryer = aws.NewDefaultRetryer()
 }
 
 var config aws.Config

@@ -6,8 +6,5 @@ import (
 
 // NewClient creates and initializes a generic service client for testing.
 func NewClient(cfg aws.Config) *aws.Client {
-	if cfg.Retryer == nil {
-		cfg.Retryer = aws.NewDefaultRetryer()
-	}
 	return aws.NewClient(cfg, aws.Metadata{ServiceName: "mockService"})
 }
