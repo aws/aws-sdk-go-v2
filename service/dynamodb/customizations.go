@@ -5,22 +5,12 @@ import (
 	"hash/crc32"
 	"io"
 	"io/ioutil"
-	"math"
 	"strconv"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 )
-
-type retryer struct {
-	aws.DefaultRetryer
-}
-
-func (d retryer) RetryRules(r *aws.Request) time.Duration {
-	delay := time.Duration(math.Pow(2, float64(r.RetryCount))) * 50
-	return delay * time.Millisecond
-}
 
 func init() {
 	initClient = func(c *Client) {
@@ -43,11 +33,10 @@ func init() {
 }
 
 func setCustomRetryer(c *Client) {
-	c.Retryer = retryer{
-		DefaultRetryer: aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-			d.NumMaxRetries = 10
-		}),
-	}
+	c.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 10
+		d.MinRetryDelay = 50 * time.Millisecond
+	})
 }
 
 func drainBody(b io.ReadCloser, length int64) (out *bytes.Buffer, err error) {

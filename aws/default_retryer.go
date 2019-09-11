@@ -9,15 +9,8 @@ import (
 )
 
 // DefaultRetryer implements basic retry logic using exponential backoff for
-// most services. If you want to implement custom retry logic, implement the
-// Retryer interface or create a structure type that composes this
-// struct and override the specific methods. For example, to override only
-// the MaxRetries method:
-//
-//		type retryer struct {
-//      client.DefaultRetryer
-//    }
-//
+// most services. You can implement your own custom retryer by implementing
+// retryer interface.
 type DefaultRetryer struct {
 	NumMaxRetries    int
 	MinRetryDelay    time.Duration
