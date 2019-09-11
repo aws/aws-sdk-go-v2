@@ -21,7 +21,7 @@ func TestOffsetReaderRead(t *testing.T) {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if err != nil {
-		t.Errorf("expect no error, got %v", err)
+		t.Fatalf("expect no error, got %v", err)
 	}
 	if e, a := buf, tempBuf; !bytes.Equal(e, a) {
 		t.Errorf("expect %v, got %v", e, a)
@@ -30,27 +30,30 @@ func TestOffsetReaderRead(t *testing.T) {
 
 func TestOffsetReaderSeek(t *testing.T) {
 	buf := []byte("testData")
-	reader := newOffsetReader(bytes.NewReader(buf), 0)
-
-	orig, err := reader.Seek(0, 1)
+	reader, err := newOffsetReader(bytes.NewReader(buf), 0)
 	if err != nil {
-		t.Errorf("expect no error, got %v", err)
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	orig, err := reader.Seek(0, io.SeekCurrent)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
 	}
 	if e, a := int64(0), orig; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
-	n, err := reader.Seek(0, 2)
+	n, err := reader.Seek(0, io.SeekEnd)
 	if err != nil {
-		t.Errorf("expect no error, got %v", err)
+		t.Fatalf("expect no error, got %v", err)
 	}
 	if e, a := int64(len(buf)), n; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
-	n, err = reader.Seek(orig, 0)
+	n, err = reader.Seek(orig, io.SeekStart)
 	if err != nil {
-		t.Errorf("expect no error, got %v", err)
+		t.Fatalf("expect no error, got %v", err)
 	}
 	if e, a := int64(0), n; e != a {
 		t.Errorf("expect %v, got %v", e, a)
@@ -81,8 +84,10 @@ func TestOffsetReaderCloseAndCopy(t *testing.T) {
 	tempBuf := make([]byte, len(buf))
 	reader := &offsetReader{buf: bytes.NewReader(buf)}
 
-	newReader := reader.CloseAndCopy(0)
-
+	newReader, err := reader.CloseAndCopy(0)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
 	n, err := reader.Read(tempBuf)
 	if e, a := 0, n; e != a {
 		t.Errorf("expect %v, got %v", e, a)
@@ -96,7 +101,7 @@ func TestOffsetReaderCloseAndCopy(t *testing.T) {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if err != nil {
-		t.Errorf("expect no error, got %v", err)
+		t.Fatalf("expect no error, got %v", err)
 	}
 	if e, a := buf, tempBuf; !bytes.Equal(e, a) {
 		t.Errorf("expect %v, got %v", e, a)
@@ -108,13 +113,16 @@ func TestOffsetReaderCloseAndCopyOffset(t *testing.T) {
 	tempBuf := make([]byte, len(buf))
 	reader := &offsetReader{buf: bytes.NewReader(buf)}
 
-	newReader := reader.CloseAndCopy(4)
+	newReader, err := reader.CloseAndCopy(4)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
 	n, err := newReader.Read(tempBuf)
 	if e, a := n, len(buf)-4; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if err != nil {
-		t.Errorf("expect no error, got %v", err)
+		t.Fatalf("expect no error, got %v", err)
 	}
 
 	expected := []byte{'D', 'a', 't', 'a', 0, 0, 0, 0}
