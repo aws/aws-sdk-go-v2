@@ -30,18 +30,16 @@ func TestGetObjectGCM(t *testing.T) {
 	defer ts.Close()
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 0
-	})
+	cfg.Retryer = aws.NoOpRetryer{}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
 	cfg.Region = "us-west-2"
 
 	c := s3crypto.NewDecryptionClient(cfg)
-	c.S3Client.(*s3.Client).ForcePathStyle = true
-
 	if c == nil {
-		t.Error("expected non-nil value")
+		t.Fatalf("failed to create a new S3 crypto decryption client")
 	}
+
+	c.S3Client.(*s3.Client).ForcePathStyle = true
 	input := &s3.GetObjectInput{
 		Key:    aws.String("test"),
 		Bucket: aws.String("test"),
@@ -103,18 +101,16 @@ func TestGetObjectCBC(t *testing.T) {
 	defer ts.Close()
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 0
-	})
+	cfg.Retryer = aws.NoOpRetryer{}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
 	cfg.Region = "us-west-2"
 
 	c := s3crypto.NewDecryptionClient(cfg)
-	c.S3Client.(*s3.Client).ForcePathStyle = true
-
 	if c == nil {
-		t.Error("expected non-nil value")
+		t.Fatalf("failed to create a new S3 crypto decryption client")
 	}
+
+	c.S3Client.(*s3.Client).ForcePathStyle = true
 	input := &s3.GetObjectInput{
 		Key:    aws.String("test"),
 		Bucket: aws.String("test"),
@@ -174,18 +170,16 @@ func TestGetObjectCBC2(t *testing.T) {
 	defer ts.Close()
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 0
-	})
+	cfg.Retryer = aws.NoOpRetryer{}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
 	cfg.Region = "us-west-2"
 
 	c := s3crypto.NewDecryptionClient(cfg)
-	c.S3Client.(*s3.Client).ForcePathStyle = true
-
 	if c == nil {
-		t.Error("expected non-nil value")
+		t.Fatalf("failed to create a new S3 crypto decryption client")
 	}
+
+	c.S3Client.(*s3.Client).ForcePathStyle = true
 	input := &s3.GetObjectInput{
 		Key:    aws.String("test"),
 		Bucket: aws.String("test"),

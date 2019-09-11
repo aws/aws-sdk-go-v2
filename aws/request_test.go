@@ -213,9 +213,7 @@ func TestRequestExhaustRetries(t *testing.T) {
 		{StatusCode: 500, Body: body(`{"__type":"UnknownError","message":"An error occurred."}`)},
 	}
 
-	cfg := unit.Config()
-	cfg.Retryer = aws.NewDefaultRetryer()
-	s := awstesting.NewClient(cfg)
+	s := awstesting.NewClient(unit.Config())
 
 	s.Handlers.Validate.Clear()
 	s.Handlers.Unmarshal.PushBack(unmarshal)
@@ -418,9 +416,7 @@ func TestRequestThrottleRetries(t *testing.T) {
 		{StatusCode: 500, Body: body(`{"__type":"Throttling","message":"An error occurred."}`)},
 	}
 
-	cfg := unit.Config()
-	cfg.Retryer = aws.NewDefaultRetryer()
-	s := awstesting.NewClient(cfg)
+	s := awstesting.NewClient(unit.Config())
 
 	s.Handlers.Validate.Clear()
 	s.Handlers.Unmarshal.PushBack(unmarshal)
@@ -588,9 +584,7 @@ func TestRequest_NoBody(t *testing.T) {
 
 			cfg := unit.Config()
 			cfg.Region = "mock-region"
-			cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-				d.NumMaxRetries = 0
-			})
+			cfg.Retryer = aws.NoOpRetryer{}
 			cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 
 			s := awstesting.NewClient(cfg)

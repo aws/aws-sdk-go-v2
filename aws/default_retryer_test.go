@@ -73,7 +73,7 @@ func TestRetryThrottleStatusCodes(t *testing.T) {
 	}
 }
 
-func TestCanUseRetryAfter(t *testing.T) {
+func TestGetRetryAfterDelay(t *testing.T) {
 	cases := []struct {
 		r Request
 		e bool

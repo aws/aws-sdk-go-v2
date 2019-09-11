@@ -21,9 +21,7 @@ import (
 
 func TestDefaultConfigValues(t *testing.T) {
 	cfg := unit.Config()
-	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 0
-	})
+	cfg.Retryer = aws.NoOpRetryer{}
 	cfg.Region = "us-west-2"
 
 	svc := kms.New(cfg)
@@ -51,17 +49,15 @@ func TestPutObject(t *testing.T) {
 	cb := mockCipherBuilder{generator}
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 0
-	})
+	cfg.Retryer = aws.NoOpRetryer{}
 	cfg.Region = "us-west-2"
 
 	c := s3crypto.NewEncryptionClient(cfg, cb)
-	c.S3Client.(*s3.Client).ForcePathStyle = true
-
 	if c == nil {
-		t.Error("expected non-vil client value")
+		t.Fatalf("failed to create a new S3 crypto encryption client")
 	}
+
+	c.S3Client.(*s3.Client).ForcePathStyle = true
 	input := &s3.PutObjectInput{
 		Key:    aws.String("test"),
 		Bucket: aws.String("test"),

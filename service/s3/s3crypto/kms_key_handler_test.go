@@ -49,9 +49,7 @@ func TestKMSGenerateCipherData(t *testing.T) {
 	}))
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 0
-	})
+	cfg.Retryer = aws.NoOpRetryer{}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
 	cfg.Region = "us-west-2"
 
@@ -81,9 +79,7 @@ func TestKMSDecrypt(t *testing.T) {
 	}))
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 0
-	})
+	cfg.Retryer = aws.NoOpRetryer{}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
 	cfg.Region = "us-west-2"
 
@@ -110,9 +106,7 @@ func TestKMSDecryptBadJSON(t *testing.T) {
 	}))
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 0
-	})
+	cfg.Retryer = aws.NoOpRetryer{}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
 	cfg.Region = "us-west-2"
 

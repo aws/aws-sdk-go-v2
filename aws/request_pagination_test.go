@@ -358,7 +358,7 @@ func TestPaginationWithContextCancel(t *testing.T) {
 
 	for _, c := range cases {
 		input := c.input
-		inValues := []string{}
+		var inValues []string
 		p := aws.Pager{
 			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				h := defaults.Handlers()
@@ -388,7 +388,7 @@ func TestPaginationWithContextCancel(t *testing.T) {
 		ctx, cancelFn := context.WithCancel(context.Background())
 		cancelFn()
 
-		results := []*string{}
+		var results []*string
 		for p.Next(ctx) {
 			page := p.CurrentPage()
 			output := page.(*mockOutput)

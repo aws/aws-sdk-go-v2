@@ -11,9 +11,6 @@ import (
 func TestCustomRetryRules(t *testing.T) {
 
 	cfg := unit.Config()
-	// set retryer to nil as unit.config sets default retryer
-	// retryer is set to nil as we want to use the custom retryer
-	cfg.Retryer = nil
 	svc := New(cfg)
 
 	req := svc.ModifyNetworkInterfaceAttributeRequest(&ModifyNetworkInterfaceAttributeInput{
@@ -81,9 +78,6 @@ func TestCustomRetryer_WhenRetrierSpecified(t *testing.T) {
 func TestCustomRetryer(t *testing.T) {
 
 	cfg := unit.Config()
-	// set retryer to nil as unit.config sets default retryer
-	// retryer is set to nil as we want to use the custom retryer
-	cfg.Retryer = nil
 	svc := New(cfg)
 
 	req := svc.AssignPrivateIpAddressesRequest(&AssignPrivateIpAddressesInput{

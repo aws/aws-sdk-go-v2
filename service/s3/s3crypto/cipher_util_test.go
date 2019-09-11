@@ -100,9 +100,7 @@ func TestCEKFactory(t *testing.T) {
 	defer ts.Close()
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 0
-	})
+	cfg.Retryer = aws.NoOpRetryer{}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
 	cfg.Region = "us-west-2"
 
@@ -158,9 +156,7 @@ func TestCEKFactoryNoCEK(t *testing.T) {
 	defer ts.Close()
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 0
-	})
+	cfg.Retryer = aws.NoOpRetryer{}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
 	cfg.Region = "us-west-2"
 
@@ -216,9 +212,7 @@ func TestCEKFactoryCustomEntry(t *testing.T) {
 	defer ts.Close()
 
 	cfg := unit.Config()
-	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 0
-	})
+	cfg.Retryer = aws.NoOpRetryer{}
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(ts.URL)
 	cfg.Region = "us-west-2"
 

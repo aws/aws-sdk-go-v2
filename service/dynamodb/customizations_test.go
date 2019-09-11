@@ -8,8 +8,6 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	client "github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
@@ -29,13 +27,13 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 
-func mockCRCResponse(svc *dynamodb.Client, status int, body, crc string) (req *request.Request) {
+func mockCRCResponse(svc *dynamodb.Client, status int, body, crc string) (req *aws.Request) {
 	header := http.Header{}
 	header.Set("x-amz-crc32", crc)
 
 	listReq := svc.ListTablesRequest(nil)
 	req = listReq.Request
-	req.Handlers.Send.PushBack(func(*request.Request) {
+	req.Handlers.Send.PushBack(func(*aws.Request) {
 		req.HTTPResponse = &http.Response{
 			ContentLength: int64(len(body)),
 			StatusCode:    status,
@@ -70,12 +68,14 @@ func TestCustomRetryRules(t *testing.T) {
 }
 
 type testCustomRetryer struct {
-	client.DefaultRetryer
+	aws.DefaultRetryer
 }
 
 func TestCustomRetry_FromConfig(t *testing.T) {
 	cfg := unit.Config()
-	cfg.Retryer = testCustomRetryer{client.DefaultRetryer{NumMaxRetries: 9}}
+	cfg.Retryer = testCustomRetryer{aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 9.
+	})}
 
 	svc := dynamodb.New(cfg)
 

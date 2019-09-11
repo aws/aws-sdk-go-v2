@@ -18,8 +18,6 @@ import (
 //      client.DefaultRetryer
 //    }
 //
-//    // This implementation always has 100 max retries
-//    func (d retryer) MaxRetries() int { return 100 }
 type DefaultRetryer struct {
 	NumMaxRetries    int
 	MinRetryDelay    time.Duration
@@ -29,16 +27,16 @@ type DefaultRetryer struct {
 }
 
 const (
-	// DefaultRetryerMaxNumRetries sets max number of retries
+	// DefaultRetryerMaxNumRetries sets maximum number of retries
 	DefaultRetryerMaxNumRetries = 3
 
-	// DefaultRetryerMinRetryDelay sets min retry delay
+	// DefaultRetryerMinRetryDelay sets minimum retry delay
 	DefaultRetryerMinRetryDelay = 30 * time.Millisecond
 
 	// DefaultRetryerMinThrottleDelay sets minimum delay when throttled
 	DefaultRetryerMinThrottleDelay = 500 * time.Millisecond
 
-	// DefaultRetryerMaxRetryDelay sets max retry delay
+	// DefaultRetryerMaxRetryDelay sets maximum retry delay
 	DefaultRetryerMaxRetryDelay = 300 * time.Second
 
 	// DefaultRetryerMaxThrottleDelay sets maximum delay when throttled
@@ -53,38 +51,25 @@ func (d DefaultRetryer) MaxRetries() int {
 
 var seededRand = rand.New(&lockedSource{src: rand.NewSource(time.Now().UnixNano())})
 
-// NewDefaultRetryer returns Default Retryer initialized with default values and optionally takes function
+// NewDefaultRetryer returns a retryer initialized with default values and optionally takes function
 // to override values for default retryer.
 func NewDefaultRetryer(opts ...func(d *DefaultRetryer)) DefaultRetryer {
-	d := DefaultRetryer{}
-	d.setDefaults()
+	d := DefaultRetryer{
+		NumMaxRetries:    DefaultRetryerMaxNumRetries,
+		MinRetryDelay:    DefaultRetryerMinRetryDelay,
+		MinThrottleDelay: DefaultRetryerMinThrottleDelay,
+		MaxRetryDelay:    DefaultRetryerMaxRetryDelay,
+		MaxThrottleDelay: DefaultRetryerMaxThrottleDelay,
+	}
+
 	for _, opt := range opts {
 		opt(&d)
 	}
 	return d
 }
 
-// setDefaults sets default values for the default Retryer
-func (d *DefaultRetryer) setDefaults() {
-	if d.NumMaxRetries == 0 {
-		d.NumMaxRetries = DefaultRetryerMaxNumRetries
-	}
-	if d.MinRetryDelay == 0 {
-		d.MinRetryDelay = DefaultRetryerMinRetryDelay
-	}
-	if d.MinThrottleDelay == 0 {
-		d.MinThrottleDelay = DefaultRetryerMinThrottleDelay
-	}
-	if d.MaxRetryDelay == 0 {
-		d.MaxRetryDelay = DefaultRetryerMaxRetryDelay
-	}
-	if d.MaxThrottleDelay == 0 {
-		d.MaxThrottleDelay = DefaultRetryerMaxThrottleDelay
-	}
-
-}
-
 // RetryRules returns the delay duration before retrying this request again
+
 // Note: RetryRules method must be a value receiver so that the
 // defaultRetryer is safe.
 func (d DefaultRetryer) RetryRules(r *Request) time.Duration {
@@ -110,17 +95,18 @@ func (d DefaultRetryer) RetryRules(r *Request) time.Duration {
 	// Logic to cap the retry count based on the minDelay provided
 	actualRetryCount := int(math.Log2(float64(minDelay))) + 1
 	if actualRetryCount < 63-retryCount {
-		delay = time.Duration(1<<uint64(retryCount)) * getDelaySeed(minDelay)
+		delay = time.Duration(1<<uint64(retryCount)) * getJitterDelay(minDelay)
 		if delay > maxDelay {
-			delay = getDelaySeed(maxDelay / 2)
+			delay = getJitterDelay(maxDelay / 2)
 		}
 	} else {
-		delay = getDelaySeed(maxDelay / 2)
+		delay = getJitterDelay(maxDelay / 2)
 	}
 	return delay + initialDelay
 }
 
-func getDelaySeed(duration time.Duration) time.Duration {
+// getJitterDelay returns a jittered delay for retry
+func getJitterDelay(duration time.Duration) time.Duration {
 	return time.Duration(seededRand.Int63n(int64(duration)) + int64(duration))
 }
 
