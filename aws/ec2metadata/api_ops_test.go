@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"reflect"
 	"strings"
 	"testing"
 
@@ -19,6 +20,7 @@ import (
 
 const instanceIdentityDocument = `{
   "devpayProductCodes" : null,
+  "marketplaceProductCodes" : [ "1abc2defghijklm3nopqrs4tu" ], 
   "availabilityZone" : "us-east-1d",
   "privateIp" : "10.158.112.84",
   "version" : "2010-08-31",
@@ -337,5 +339,9 @@ func TestEC2RoleProviderInstanceIdentity(t *testing.T) {
 	}
 	if e, a := doc.Region, "us-east-1"; e != a {
 		t.Errorf("expect %v, got %v", e, a)
+	}
+	expectProductCodes := []string{"1abc2defghijklm3nopqrs4tu"}
+	if e, a := expectProductCodes, doc.MarketplaceProductCodes; !reflect.DeepEqual(e, a) {
+		t.Errorf("Expect %v product codes, got %v", e, a)
 	}
 }
