@@ -69,7 +69,7 @@ func NewDefaultRetryer(opts ...func(d *DefaultRetryer)) DefaultRetryer {
 }
 
 // RetryRules returns the delay duration before retrying this request again
-
+//
 // Note: RetryRules method must be a value receiver so that the
 // defaultRetryer is safe.
 func (d DefaultRetryer) RetryRules(r *Request) time.Duration {

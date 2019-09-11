@@ -12,7 +12,7 @@ func (d NoOpRetryer) MaxRetries() int {
 	return 0
 }
 
-// NoOpRetryer should never retry; so ShouldRetry will always return false.
+// ShouldRetry will always return false for NoOpRetryer, as it should never retry.
 func (d NoOpRetryer) ShouldRetry(_ *Request) bool {
 	return false
 }
