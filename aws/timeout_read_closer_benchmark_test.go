@@ -56,7 +56,9 @@ func BenchmarkTimeoutReadCloser(b *testing.B) {
 		cfg,
 		meta,
 		handlers,
-		aws.DefaultRetryer{NumMaxRetries: 5},
+		aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+			d.NumMaxRetries = 5
+		}),
 		op,
 		&struct {
 			Foo *string

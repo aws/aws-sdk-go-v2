@@ -63,13 +63,10 @@ func NewClient(cfg Config, metadata Metadata) *Client {
 
 	retryer := cfg.Retryer
 	if retryer == nil {
-		// TODO need better way of specifing default num retries
-		retryer = DefaultRetryer{NumMaxRetries: 3}
+		retryer = NewDefaultRetryer()
 	}
 	svc.Retryer = retryer
-
 	svc.AddDebugHandlers()
-
 	return svc
 }
 
