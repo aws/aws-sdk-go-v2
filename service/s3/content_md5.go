@@ -22,7 +22,7 @@ func contentMD5(r *request.Request) {
 		r.Error = awserr.New("ContentMD5", "failed to read body", err)
 		return
 	}
-	_, err = r.Body.Seek(0, 0)
+	_, err = r.Body.Seek(0, io.SeekStart)
 	if err != nil {
 		r.Error = awserr.New("ContentMD5", "failed to seek body", err)
 		return

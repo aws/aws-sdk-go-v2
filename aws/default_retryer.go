@@ -66,7 +66,6 @@ func NewDefaultRetryer(opts ...func(d *DefaultRetryer)) DefaultRetryer {
 // Note: RetryRules method must be a value receiver so that the
 // defaultRetryer is safe.
 func (d DefaultRetryer) RetryRules(r *Request) time.Duration {
-	// Set the upper limit of delay in retrying at ~five minutes
 	minDelay := d.MinRetryDelay
 	var initialDelay time.Duration
 	throttle := d.shouldThrottle(r)
@@ -78,6 +77,7 @@ func (d DefaultRetryer) RetryRules(r *Request) time.Duration {
 	}
 
 	retryCount := r.RetryCount
+
 	maxDelay := d.MaxRetryDelay
 	if throttle {
 		maxDelay = d.MaxThrottleDelay
