@@ -1,13 +1,13 @@
 ### SDK Features
 
 ### SDK Enhancements
-* `aws/endpoints`: Expose DNSSuffix for partitions ([#368](https://github.com/aws/aws-sdk-go/pull/368))
+* `aws/endpoints`: Expose DNSSuffix for partitions ([#369](https://github.com/aws/aws-sdk-go-v2/pull/369))
   * Exposes the underlying partition metadata's DNSSuffix value via the `DNSSuffix` method on the endpoint's `Partition` type. This allows access to the partition's DNS suffix, e.g. "amazon.com".
-  * Fixes [#347](https://github.com/aws/aws-sdk-go/issues/347)
+  * Fixes [#347](https://github.com/aws/aws-sdk-go-v2/issues/347)
 * `private/protocol`: Add support for parsing fractional timestamp ([#367](https://github.com/aws/aws-sdk-go-v2/pull/367))
   * Fixes the SDK's ability to parse fractional unix timestamp values and adds tests.
   * Fixes [#365](https://github.com/aws/aws-sdk-go-v2/issues/365)
-* `aws/ec2metadata`: Add marketplaceProductCodes to EC2 Instance Identity Document
+* `aws/ec2metadata`: Add marketplaceProductCodes to EC2 Instance Identity Document ([#374](https://github.com/aws/aws-sdk-go-v2/pull/374))
   * Adds `MarketplaceProductCodes` to the EC2 Instance Metadata's Identity Document. The ec2metadata client will now retrieve these values if they are available.
   * Related to: [aws/aws-sdk-go#2781](https://github.com/aws/aws-sdk-go/issues/2781)
 
