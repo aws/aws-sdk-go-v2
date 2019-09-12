@@ -175,6 +175,21 @@ func (l *HandlerList) SwapNamed(n NamedHandler) (swapped bool) {
 	return swapped
 }
 
+// Swap will swap out all handlers matching the name passed in. The matched
+// handlers will be swapped in. True is returned if the handlers were swapped.
+func (l *HandlerList) Swap(name string, replace NamedHandler) bool {
+	var swapped bool
+
+	for i := 0; i < len(l.list); i++ {
+		if l.list[i].Name == name {
+			l.list[i] = replace
+			swapped = true
+		}
+	}
+
+	return swapped
+}
+
 // SetBackNamed will replace the named handler if it exists in the handler list.
 // If the handler does not exist the handler will be added to the end of the list.
 func (l *HandlerList) SetBackNamed(n NamedHandler) {

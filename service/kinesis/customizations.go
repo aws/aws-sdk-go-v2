@@ -9,14 +9,12 @@ import (
 var readDuration = 5 * time.Second
 
 func init() {
-	ops := []string{
-		opGetRecords,
-	}
 	initRequest = func(c *Client, r *request.Request) {
-		for _, operation := range ops {
-			if r.Operation.Name == operation {
-				r.ApplyOptions(request.WithResponseReadTimeout(readDuration))
-			}
+		if r.Operation.Name == opGetRecords {
+			r.ApplyOptions(request.WithResponseReadTimeout(readDuration))
 		}
+
+		// Service specific error codes.
+		r.RetryErrorCodes = append(r.RetryErrorCodes, ErrCodeLimitExceededException)
 	}
 }
