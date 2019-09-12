@@ -14,6 +14,10 @@
   * Provides more customization options for retryer by adding a constructor for default Retryer which accepts functional options. Adds NoOpRetryer to support no retry behavior. Exposes members of default retryer.
   * Updates the underlying logic used by the default retryer to calculate jittered delay for retry. Handles int overflow for retry delay. 
   * Fixes [#370](https://github.com/aws/aws-sdk-go-v2/issues/370)
+* `aws` : Refactors request retry behavior path logic ([#384](https://github.com/aws/aws-sdk-go-v2/pull/384))
+  * Retry utilities now follow a consistent code path. aws.IsErrorRetryable is the primary entry point to determine if a request is retryable. 
+  * Corrects sdk's behavior by not retrying errors with status code 501. Adds support for retrying the Kinesis API error, LimitExceededException.
+  * Fixes [#372](https://github.com/aws/aws-sdk-go-v2/issues/372), [#145](https://github.com/aws/aws-sdk-go-v2/issues/145)
   
 ### SDK Bugs
 * `aws`: Fixes bug in calculating throttled retry delay ([#373](https://github.com/aws/aws-sdk-go-v2/pull/373))
