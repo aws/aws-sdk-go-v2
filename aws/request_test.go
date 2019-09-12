@@ -159,7 +159,7 @@ func TestRequestRecoverRetry4xxRetryable(t *testing.T) {
 func TestRequest4xxUnretryable(t *testing.T) {
 	cfg := unit.Config()
 	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
-		d.NumMaxRetries = 10
+		d.NumMaxRetries = 1
 	})
 
 	s := awstesting.NewClient(cfg)
@@ -169,7 +169,10 @@ func TestRequest4xxUnretryable(t *testing.T) {
 	s.Handlers.UnmarshalError.PushBack(unmarshalError)
 	s.Handlers.Send.Clear() // mock sending
 	s.Handlers.Send.PushBack(func(r *aws.Request) {
-		r.HTTPResponse = &http.Response{StatusCode: 401, Body: body(`{"__type":"SignatureDoesNotMatch","message":"Signature does not match."}`)}
+		r.HTTPResponse = &http.Response{
+			StatusCode: 401,
+			Body:       body(`{"__type":"SignatureDoesNotMatch","message":"Signature does not match."}`),
+		}
 	})
 	out := &testData{}
 	r := s.NewRequest(&aws.Operation{Name: "Operation"}, nil, out)
@@ -644,7 +647,7 @@ func TestIsSerializationErrorRetryable(t *testing.T) {
 			Error: c.err,
 		}
 		if r.IsErrorRetryable() != c.expected {
-			t.Errorf("Case %d: expected %v, but received %v", i+1, c.expected, !c.expected)
+			t.Errorf("Case %d: expected %v, but received %v", i, c.expected, !c.expected)
 		}
 	}
 }

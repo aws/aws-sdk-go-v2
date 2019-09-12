@@ -158,9 +158,10 @@ func handleSendError(r *aws.Request, err error) {
 			Body:       ioutil.NopCloser(bytes.NewReader([]byte{})),
 		}
 	}
-	// Catch all other request errors.
+
+	// Catch all request errors, and let the default retrier determine
+	// if the error is retryable.
 	r.Error = awserr.New("RequestError", "send request failed", err)
-	r.Retryable = aws.Bool(true) // network errors are retryable
 
 	// Override the error with a context canceled error, if that was canceled.
 	ctx := r.Context()
@@ -183,34 +184,36 @@ var ValidateResponseHandler = aws.NamedHandler{Name: "core.ValidateResponseHandl
 
 // AfterRetryHandler performs final checks to determine if the request should
 // be retried and how long to delay.
-var AfterRetryHandler = aws.NamedHandler{Name: "core.AfterRetryHandler", Fn: func(r *aws.Request) {
-	// If one of the other handlers already set the retry state
-	// we don't want to override it based on the service's state
-	if r.Retryable == nil || r.Config.EnforceShouldRetryCheck {
-		r.Retryable = aws.Bool(r.ShouldRetry(r))
-	}
-
-	if r.WillRetry() {
-		r.RetryDelay = r.RetryRules(r)
-
-		if err := sdk.SleepWithContext(r.Context(), r.RetryDelay); err != nil {
-			r.Error = awserr.New(aws.ErrCodeRequestCanceled,
-				"request context canceled", err)
-			r.Retryable = aws.Bool(false)
-			return
+var AfterRetryHandler = aws.NamedHandler{
+	Name: "core.AfterRetryHandler",
+	Fn: func(r *aws.Request) {
+		// If one of the other handlers already set the retry state
+		// we don't want to override it based on the service's state
+		if r.Retryable == nil || r.Config.EnforceShouldRetryCheck {
+			r.Retryable = aws.Bool(r.ShouldRetry(r))
 		}
 
-		// when the expired token exception occurs the credentials
-		// need to be expired locally so that the next request to
-		// get credentials will trigger a credentials refresh.
-		if p, ok := r.Config.Credentials.(sdk.Invalidator); ok && r.IsErrorExpired() {
-			p.Invalidate()
-		}
+		if r.WillRetry() {
+			r.RetryDelay = r.RetryRules(r)
 
-		r.RetryCount++
-		r.Error = nil
-	}
-}}
+			if err := sdk.SleepWithContext(r.Context(), r.RetryDelay); err != nil {
+				r.Error = awserr.New(aws.ErrCodeRequestCanceled,
+					"request context canceled", err)
+				r.Retryable = aws.Bool(false)
+				return
+			}
+
+			// when the expired token exception occurs the credentials
+			// need to be expired locally so that the next request to
+			// get credentials will trigger a credentials refresh.
+			if p, ok := r.Config.Credentials.(sdk.Invalidator); ok && r.IsErrorExpired() {
+				p.Invalidate()
+			}
+
+			r.RetryCount++
+			r.Error = nil
+		}
+	}}
 
 // ValidateEndpointHandler is a request handler to validate a request had the
 // appropriate Region and Endpoint set. Will set r.Error if the endpoint or

@@ -68,8 +68,8 @@ func NewDefaultRetryer(opts ...func(d *DefaultRetryer)) DefaultRetryer {
 func (d DefaultRetryer) RetryRules(r *Request) time.Duration {
 	minDelay := d.MinRetryDelay
 	var initialDelay time.Duration
-	throttle := d.shouldThrottle(r)
-	if throttle {
+	isThrottle := r.IsErrorThrottle()
+	if isThrottle {
 		if delay, ok := getRetryAfterDelay(r); ok {
 			initialDelay = delay
 		}
@@ -79,7 +79,7 @@ func (d DefaultRetryer) RetryRules(r *Request) time.Duration {
 	retryCount := r.RetryCount
 
 	maxDelay := d.MaxRetryDelay
-	if throttle {
+	if isThrottle {
 		maxDelay = d.MaxThrottleDelay
 	}
 
@@ -114,23 +114,7 @@ func (d DefaultRetryer) ShouldRetry(r *Request) bool {
 	if r.HTTPResponse.StatusCode >= 500 {
 		return true
 	}
-	return r.IsErrorRetryable() || d.shouldThrottle(r)
-}
-
-// ShouldThrottle returns true if the request should be throttled.
-func (d DefaultRetryer) shouldThrottle(r *Request) bool {
-	if r.HTTPResponse != nil {
-		switch r.HTTPResponse.StatusCode {
-		case 429:
-		case 502:
-		case 503:
-		case 504:
-		default:
-			return r.IsErrorThrottle()
-		}
-		return true
-	}
-	return r.IsErrorThrottle()
+	return r.IsErrorRetryable() || r.IsErrorThrottle()
 }
 
 // This will look in the Retry-After header, RFC 7231, for how long
