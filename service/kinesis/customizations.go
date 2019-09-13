@@ -3,15 +3,15 @@ package kinesis
 import (
 	"time"
 
-	request "github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
 var readDuration = 5 * time.Second
 
 func init() {
-	initRequest = func(c *Client, r *request.Request) {
+	initRequest = func(c *Client, r *aws.Request) {
 		if r.Operation.Name == opGetRecords {
-			r.ApplyOptions(request.WithResponseReadTimeout(readDuration))
+			r.ApplyOptions(aws.WithResponseReadTimeout(readDuration))
 		}
 
 		// Service specific error codes.

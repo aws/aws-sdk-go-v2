@@ -1,6 +1,12 @@
 package sts_test
 
 import (
+	"bytes"
+	"context"
+	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
+	"io/ioutil"
+	"net/http"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -47,5 +53,49 @@ func TestUnsignedRequest_AssumeRoleWithWebIdentity(t *testing.T) {
 	}
 	if e, a := "", req.HTTPRequest.Header.Get("Authorization"); e != a {
 		t.Errorf("expect %v, got %v", e, a)
+	}
+}
+
+func TestSTSCustomRetryErrorCodes(t *testing.T) {
+	cfg := unit.Config()
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 1
+	})
+
+	svc := sts.New(cfg)
+	svc.Handlers.Validate.Clear()
+
+	const xmlErr = `<ErrorResponse><Error><Code>%s</Code><Message>some error message</Message></Error></ErrorResponse>`
+	var reqCount int
+	resps := []*http.Response{
+		{
+			StatusCode: 400,
+			Header:     http.Header{},
+			Body: ioutil.NopCloser(bytes.NewReader(
+				[]byte(fmt.Sprintf(xmlErr, sts.ErrCodeIDPCommunicationErrorException)),
+			)),
+		},
+		{
+			StatusCode: 200,
+			Header:     http.Header{},
+			Body:       ioutil.NopCloser(bytes.NewReader([]byte{})),
+		},
+	}
+
+	req := svc.AssumeRoleWithWebIdentityRequest(&sts.AssumeRoleWithWebIdentityInput{})
+	req.Handlers.Send.Swap(defaults.SendHandler.Name, aws.NamedHandler{
+		Name: "custom send handler",
+		Fn: func(r *aws.Request) {
+			r.HTTPResponse = resps[reqCount]
+			reqCount++
+		},
+	})
+
+	if _, err := req.Send(context.Background()); err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if e, a := 2, reqCount; e != a {
+		t.Errorf("expect %v requests, got %v", e, a)
 	}
 }
