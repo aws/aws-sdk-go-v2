@@ -66,7 +66,10 @@ func NewDefaultRetryer(opts ...func(d *DefaultRetryer)) DefaultRetryer {
 // Note: RetryRules method must be a value receiver so that the
 // defaultRetryer is safe.
 func (d DefaultRetryer) RetryRules(r *Request) time.Duration {
+
 	minDelay := d.MinRetryDelay
+	maxDelay := d.MaxRetryDelay
+
 	var initialDelay time.Duration
 	isThrottle := r.IsErrorThrottle()
 	if isThrottle {
@@ -74,15 +77,10 @@ func (d DefaultRetryer) RetryRules(r *Request) time.Duration {
 			initialDelay = delay
 		}
 		minDelay = d.MinThrottleDelay
-	}
-
-	retryCount := r.RetryCount
-
-	maxDelay := d.MaxRetryDelay
-	if isThrottle {
 		maxDelay = d.MaxThrottleDelay
 	}
 
+	retryCount := r.RetryCount
 	var delay time.Duration
 
 	// Logic to cap the retry count based on the minDelay provided

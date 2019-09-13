@@ -1,3 +1,5 @@
+// +build go1.7
+
 package aws
 
 import (
@@ -181,22 +183,24 @@ func TestRequest_retryCustomCodes(t *testing.T) {
 	}
 
 	for name, c := range cases {
-		req := Request{
-			HTTPRequest:        &http.Request{},
-			HTTPResponse:       &http.Response{},
-			Error:              awserr.New(c.Code, "some error", nil),
-			RetryErrorCodes:    c.RetryErrorCodes,
-			ThrottleErrorCodes: c.ThrottleErrorCodes,
-		}
+		t.Run(name, func(t *testing.T) {
+			req := Request{
+				HTTPRequest:        &http.Request{},
+				HTTPResponse:       &http.Response{},
+				Error:              awserr.New(c.Code, "some error", nil),
+				RetryErrorCodes:    c.RetryErrorCodes,
+				ThrottleErrorCodes: c.ThrottleErrorCodes,
+			}
 
-		retryable := req.IsErrorRetryable()
-		if e, a := c.Retryable, retryable; e != a {
-			t.Errorf("%s, expect %v retryable, got %v", name, e, a)
-		}
+			retryable := req.IsErrorRetryable()
+			if e, a := c.Retryable, retryable; e != a {
+				t.Errorf("%s, expect %v retryable, got %v", name, e, a)
+			}
 
-		throttle := req.IsErrorThrottle()
-		if e, a := c.Throttle, throttle; e != a {
-			t.Errorf("%s, expect %v throttle, got %v", name, e, a)
-		}
+			throttle := req.IsErrorThrottle()
+			if e, a := c.Throttle, throttle; e != a {
+				t.Errorf("%s, expect %v throttle, got %v", name, e, a)
+			}
+		})
 	}
 }

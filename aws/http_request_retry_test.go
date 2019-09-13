@@ -16,8 +16,6 @@ func TestRequestCancelRetry(t *testing.T) {
 	restoreSleep := mockSleep()
 	defer restoreSleep()
 
-	c := make(chan struct{})
-
 	reqNum := 0
 	cfg := unit.Config()
 	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
@@ -34,9 +32,10 @@ func TestRequestCancelRetry(t *testing.T) {
 		reqNum++
 	})
 	out := &testData{}
+	ctx, cancelFn := context.WithCancel(context.Background())
 	r := s.NewRequest(&aws.Operation{Name: "Operation"}, nil, out)
-	r.HTTPRequest.Cancel = c
-	close(c)
+	r.SetContext(ctx)
+	cancelFn() // cancelling the context associated with the request
 
 	err := r.Send()
 	if e, a := "canceled", err.Error(); !strings.Contains(a, e) {
