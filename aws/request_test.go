@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -1042,6 +1043,33 @@ func Test501NotRetrying(t *testing.T) {
 		t.Errorf("expect %d retry count, got %d", e, a)
 	}
 }
+
+func TestRequestInvalidEndpoint(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("http://localhost:90 ")
+
+	r := aws.New(
+		cfg,
+		aws.Metadata{},
+		cfg.Handlers,
+		aws.NewDefaultRetryer(),
+		&aws.Operation{},
+		nil,
+		nil,
+	)
+
+	if r.Error == nil {
+		t.Errorf("expect error, got none")
+	}
+}
+
+type timeoutErr struct {
+	error
+}
+
+var errTimeout = awserr.New("foo", "bar", &timeoutErr{
+	errors.New("net/http: request canceled"),
+})
 
 type stubSeekFail struct {
 	Err error
