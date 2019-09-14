@@ -98,7 +98,7 @@ func TestResetBody_ExcludeEmptyUnseekableBodyByMethod(t *testing.T) {
 
 		r.SetReaderBody(c.Body)
 
-		if a, e := r.HTTPRequest.Body == NoBody, c.IsNoBody; a != e {
+		if a, e := r.HTTPRequest.Body == http.NoBody, c.IsNoBody; a != e {
 			t.Errorf("%d, expect body to be set to noBody(%t), but was %t", i, e, a)
 		}
 	}

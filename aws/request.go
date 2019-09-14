@@ -32,10 +32,6 @@ const (
 	ErrCodeRequestCanceled = "RequestCanceled"
 )
 
-// NoBody is a http.NoBody reader instructing Go HTTP client to not include
-// and body in the HTTP request.
-var NoBody = http.NoBody
-
 // A Request is the service request to be made.
 type Request struct {
 	Config   Config
@@ -241,7 +237,7 @@ func (r *Request) SetContext(ctx context.Context) {
 
 // WillRetry returns if the request's can be retried.
 func (r *Request) WillRetry() bool {
-	if !IsReaderSeekable(r.Body) && r.HTTPRequest.Body != NoBody {
+	if !IsReaderSeekable(r.Body) && r.HTTPRequest.Body != http.NoBody {
 		return false
 	}
 	return r.Error != nil && BoolValue(r.Retryable) && r.RetryCount < r.MaxRetries()
@@ -413,7 +409,7 @@ func (r *Request) getNextRequestBody() (body io.ReadCloser, err error) {
 	}
 
 	if l == 0 {
-		body = NoBody
+		body = http.NoBody
 	} else if l > 0 {
 		body = r.safeBody
 	} else {
@@ -428,7 +424,7 @@ func (r *Request) getNextRequestBody() (body io.ReadCloser, err error) {
 		// implement Len() method.
 		switch r.Operation.HTTPMethod {
 		case "GET", "HEAD", "DELETE":
-			body = NoBody
+			body = http.NoBody
 		default:
 			body = r.safeBody
 		}

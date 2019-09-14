@@ -104,7 +104,7 @@ var SendHandler = aws.NamedHandler{
 
 		// TODO remove this complexity the SDK's built http.Request should
 		// set Request.Body to nil, if there is no body to send. #318
-		if aws.NoBody == r.HTTPRequest.Body {
+		if http.NoBody == r.HTTPRequest.Body {
 			// Strip off the request body if the NoBody reader was used as a
 			// place holder for a request body. This prevents the SDK from
 			// making requests with a request body when it would be invalid
@@ -159,7 +159,7 @@ func handleSendError(r *aws.Request, err error) {
 		}
 	}
 
-	// Catch all request errors, and let the default retrier determine
+	// Catch all request errors, and let the retryer determine
 	// if the error is retryable.
 	r.Error = awserr.New("RequestError", "send request failed", err)
 
