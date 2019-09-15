@@ -441,10 +441,7 @@ func (u *uploader) nextReader() (io.ReadSeeker, int, error) {
 		part := make([]byte, u.cfg.PartSize)
 		n, err := readFillBuf(r, part)
 		if n < 0 {
-			if err == nil {
-				err = io.ErrUnexpectedEOF
-			}
-			return nil, -1, err
+			return nil, n, err
 		}
 		u.readerPos += int64(n)
 
@@ -453,7 +450,7 @@ func (u *uploader) nextReader() (io.ReadSeeker, int, error) {
 }
 
 func readFillBuf(r io.Reader, b []byte) (offset int, err error) {
-	for offset < len(b) && err == nil {
+	for offset >= 0 && offset < len(b) && err == nil {
 		var n int
 		n, err = r.Read(b[offset:])
 		offset += n
