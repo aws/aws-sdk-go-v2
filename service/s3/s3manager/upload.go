@@ -144,8 +144,13 @@ type Uploader struct {
 	// MaxUploadParts is the max number of parts which will be uploaded to S3.
 	// Will be used to calculate the partsize of the object to be uploaded.
 	// E.g: 5GB file, with MaxUploadParts set to 100, will upload the file
-	// as 100, 50MB parts.
-	// With a limited of s3.MaxUploadParts (10,000 parts).
+	// as 100, 50MB parts. With a limited of s3.MaxUploadParts (10,000 parts).
+	//
+	// MaxUploadParts must not be used to limit the total number of bytes uploaded.
+	// Use a type like to io.LimitReader (https://golang.org/pkg/io/#LimitedReader)
+	// instead. An io.LimitReader is helpful when uploading an unbounded reader
+	// to S3, and you know its maximum size. Otherwise the reader's io.EOF returned
+	// error must be used to signal end of stream.
 	MaxUploadParts int
 
 	// The client to use when uploading to S3.
@@ -532,21 +537,6 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker) (*UploadOutput, error) {
 
 	// Read and queue the rest of the parts
 	for u.geterr() == nil && err == nil {
-		num++
-		// This upload exceeded maximum number of supported parts, error now.
-		if num > int64(u.cfg.MaxUploadParts) || num > int64(MaxUploadParts) {
-			var msg string
-			if num > int64(u.cfg.MaxUploadParts) {
-				msg = fmt.Sprintf("exceeded total allowed configured MaxUploadParts (%d). Adjust PartSize to fit in this limit",
-					u.cfg.MaxUploadParts)
-			} else {
-				msg = fmt.Sprintf("exceeded total allowed S3 limit MaxUploadParts (%d). Adjust PartSize to fit in this limit",
-					MaxUploadParts)
-			}
-			u.seterr(awserr.New("TotalPartsExceeded", msg, nil))
-			break
-		}
-
 		var reader io.ReadSeeker
 		var nextChunkLen int
 		reader, nextChunkLen, err = u.nextReader()
@@ -563,6 +553,21 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker) (*UploadOutput, error) {
 			// No need to upload empty part, if file was empty to start
 			// with empty single part would of been created and never
 			// started multipart upload.
+			break
+		}
+
+		num++
+		// This upload exceeded maximum number of supported parts, error now.
+		if num > int64(u.cfg.MaxUploadParts) || num > int64(MaxUploadParts) {
+			var msg string
+			if num > int64(u.cfg.MaxUploadParts) {
+				msg = fmt.Sprintf("exceeded total allowed configured MaxUploadParts (%d). Adjust PartSize to fit in this limit",
+					u.cfg.MaxUploadParts)
+			} else {
+				msg = fmt.Sprintf("exceeded total allowed S3 limit MaxUploadParts (%d). Adjust PartSize to fit in this limit",
+					MaxUploadParts)
+			}
+			u.seterr(awserr.New("TotalPartsExceeded", msg, nil))
 			break
 		}
 

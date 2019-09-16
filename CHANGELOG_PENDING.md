@@ -22,4 +22,8 @@
 * `aws` : Adds missing sdk error checking when seeking readers ([#379](https://github.com/aws/aws-sdk-go-v2/pull/379))
   * Adds support for nonseekable io.Reader. Adds support for streamed payloads for unsigned body request. 
   * Fixes [#371](https://github.com/aws/aws-sdk-go-v2/issues/371)
+* `service/s3` : Fixes unexpected EOF error by s3manager ([#386](https://github.com/aws/aws-sdk-go-v2/pull/386))
+  * Fixes bug which threw unexpected EOF error when s3 upload is performed for a file of maximum allowed size
+  * Fixes [#316](https://github.com/aws/aws-sdk-go-v2/issues/316)
+
   
