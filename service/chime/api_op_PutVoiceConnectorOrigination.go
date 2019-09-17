@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorOriginationRequest
 type PutVoiceConnectorOriginationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -72,7 +71,6 @@ func (s PutVoiceConnectorOriginationInput) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorOriginationResponse
 type PutVoiceConnectorOriginationOutput struct {
 	_ struct{} `type:"structure"`
 

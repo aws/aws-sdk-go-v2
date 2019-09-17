@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of an AddTagsToResource operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AddTagsToResourceMessage
 type AddTagsToResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +56,6 @@ func (s *AddTagsToResourceInput) Validate() error {
 
 // Represents the output from the AddTagsToResource, ListTagsForResource, and
 // RemoveTagsFromResource operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TagListMessage
 type AddTagsToResourceOutput struct {
 	_ struct{} `type:"structure"`
 

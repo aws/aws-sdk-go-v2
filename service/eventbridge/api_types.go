@@ -16,7 +16,6 @@ var _ = awsutil.Prettify
 // This structure specifies the VPC subnets and security groups for the task
 // and whether a public IP address is to be used. This structure is relevant
 // only for ECS tasks that use the awsvpc network mode.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/AwsVpcConfiguration
 type AwsVpcConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s *AwsVpcConfiguration) Validate() error {
 // The array size can be between 2 and 10,000. If you specify array properties
 // for a job, it becomes an array job. This parameter is used only if the target
 // is an AWS Batch job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/BatchArrayProperties
 type BatchArrayProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -76,7 +74,6 @@ func (s BatchArrayProperties) String() string {
 }
 
 // The custom parameters to be used when the target is an AWS Batch job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/BatchParameters
 type BatchParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -131,7 +128,6 @@ func (s *BatchParameters) Validate() error {
 // The retry strategy to use for failed jobs if the target is an AWS Batch job.
 // If you specify a retry strategy here, it overrides the retry strategy defined
 // in the job definition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/BatchRetryStrategy
 type BatchRetryStrategy struct {
 	_ struct{} `type:"structure"`
 
@@ -152,7 +148,6 @@ func (s BatchRetryStrategy) String() string {
 // of the AWS organization. The following is an example value for Condition:
 //
 // '{"Type" : "StringEquals", "Key": "aws:PrincipalOrgID", "Value": "o-1234567890"}'
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Condition
 type Condition struct {
 	_ struct{} `type:"structure"`
 
@@ -200,7 +195,6 @@ func (s *Condition) Validate() error {
 }
 
 // The custom parameters to be used when the target is an Amazon ECS task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/EcsParameters
 type EcsParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -278,7 +272,6 @@ func (s *EcsParameters) Validate() error {
 // as your custom applications and services. A partner event bus receives events
 // from an event source created by an SaaS partner. These events come from the
 // partners services or applications.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/EventBus
 type EventBus struct {
 	_ struct{} `type:"structure"`
 
@@ -301,7 +294,6 @@ func (s EventBus) String() string {
 // A partner event source is created by an SaaS partner. If a customer creates
 // a partner event bus that matches this event source, that AWS account can
 // receive events from the partner's applications or services.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/EventSource
 type EventSource struct {
 	_ struct{} `type:"structure"`
 
@@ -336,7 +328,6 @@ func (s EventSource) String() string {
 
 // Contains the parameters needed for you to provide custom input to a target
 // based on one or more pieces of data extracted from the event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/InputTransformer
 type InputTransformer struct {
 	_ struct{} `type:"structure"`
 
@@ -418,7 +409,6 @@ func (s *InputTransformer) Validate() error {
 // and use as the partition key for the Amazon Kinesis data stream so that you
 // can control the shard that the event goes to. If you don't include this parameter,
 // the default is to use the eventId as the partition key.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/KinesisParameters
 type KinesisParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -450,7 +440,6 @@ func (s *KinesisParameters) Validate() error {
 }
 
 // This structure specifies the network configuration for an ECS task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/NetworkConfiguration
 type NetworkConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -483,7 +472,6 @@ func (s *NetworkConfiguration) Validate() error {
 // A partner event source is created by an SaaS partner. If a customer creates
 // a partner event bus that matches this event source, that AWS account can
 // receive events from the partner's applications or services.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PartnerEventSource
 type PartnerEventSource struct {
 	_ struct{} `type:"structure"`
 
@@ -500,7 +488,6 @@ func (s PartnerEventSource) String() string {
 }
 
 // The AWS account that a partner event source has been offered to.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PartnerEventSourceAccount
 type PartnerEventSourceAccount struct {
 	_ struct{} `type:"structure"`
 
@@ -528,7 +515,6 @@ func (s PartnerEventSourceAccount) String() string {
 }
 
 // Represents an event to be submitted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutEventsRequestEntry
 type PutEventsRequestEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -574,7 +560,6 @@ func (s *PutEventsRequestEntry) Validate() error {
 }
 
 // Represents an event that failed to be submitted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutEventsResultEntry
 type PutEventsResultEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -594,7 +579,6 @@ func (s PutEventsResultEntry) String() string {
 }
 
 // The details about an event generated by an SaaS partner.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutPartnerEventsRequestEntry
 type PutPartnerEventsRequestEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -622,7 +606,6 @@ func (s PutPartnerEventsRequestEntry) String() string {
 }
 
 // Represents an event that a partner tried to generate but failed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutPartnerEventsResultEntry
 type PutPartnerEventsResultEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -642,7 +625,6 @@ func (s PutPartnerEventsResultEntry) String() string {
 }
 
 // Represents a target that failed to be added to a rule.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutTargetsResultEntry
 type PutTargetsResultEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -664,7 +646,6 @@ func (s PutTargetsResultEntry) String() string {
 }
 
 // Represents a target that failed to be removed from a rule.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/RemoveTargetsResultEntry
 type RemoveTargetsResultEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -686,7 +667,6 @@ func (s RemoveTargetsResultEntry) String() string {
 }
 
 // Contains information about a rule in Amazon EventBridge.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Rule
 type Rule struct {
 	_ struct{} `type:"structure"`
 
@@ -727,7 +707,6 @@ func (s Rule) String() string {
 
 // This parameter contains the criteria (either InstanceIds or a tag) used to
 // specify which EC2 instances are to be sent the command.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/RunCommandParameters
 type RunCommandParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -770,7 +749,6 @@ func (s *RunCommandParameters) Validate() error {
 // Information about the EC2 instances that are to be sent the command, specified
 // as key-value pairs. Each RunCommandTarget block can include only one key,
 // but this key can specify multiple values.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/RunCommandTarget
 type RunCommandTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -817,7 +795,6 @@ func (s *RunCommandTarget) Validate() error {
 
 // This structure includes the custom parameter to be used when the target is
 // an SQS FIFO queue.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/SqsParameters
 type SqsParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -832,7 +809,6 @@ func (s SqsParameters) String() string {
 
 // A key-value pair associated with an AWS resource. In EventBridge, rules support
 // tagging.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -883,7 +859,6 @@ func (s *Tag) Validate() error {
 // in the Target structure. For more information, see Sending and Receiving
 // Events Between AWS Accounts (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html)
 // in the Amazon EventBridge User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Target
 type Target struct {
 	_ struct{} `type:"structure"`
 

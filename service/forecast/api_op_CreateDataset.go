@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateDatasetRequest
 type CreateDatasetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -96,7 +95,6 @@ func (s *CreateDatasetInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateDatasetResponse
 type CreateDatasetOutput struct {
 	_ struct{} `type:"structure"`
 

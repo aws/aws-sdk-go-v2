@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the inputs for the DescribeSnapshots operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSnapshotsRequest
 type DescribeSnapshotsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -36,7 +35,6 @@ func (s DescribeSnapshotsInput) String() string {
 }
 
 // Contains the results of the DescribeSnapshots operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSnapshotsResult
 type DescribeSnapshotsOutput struct {
 	_ struct{} `type:"structure"`
 

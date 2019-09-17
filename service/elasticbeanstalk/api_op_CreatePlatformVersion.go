@@ -11,7 +11,6 @@ import (
 )
 
 // Request to create a new platform version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreatePlatformVersionRequest
 type CreatePlatformVersionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -87,7 +86,6 @@ func (s *CreatePlatformVersionInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreatePlatformVersionResult
 type CreatePlatformVersionOutput struct {
 	_ struct{} `type:"structure"`
 

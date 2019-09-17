@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // A list of failures when performing a batch grant or batch revoke operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/BatchPermissionsFailureEntry
 type BatchPermissionsFailureEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -31,7 +30,6 @@ func (s BatchPermissionsFailureEntry) String() string {
 }
 
 // A permission to a resource granted by batch operation to the principal.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/BatchPermissionsRequestEntry
 type BatchPermissionsRequestEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -86,7 +84,6 @@ func (s *BatchPermissionsRequestEntry) Validate() error {
 }
 
 // A structure for the catalog object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CatalogResource
 type CatalogResource struct {
 	_ struct{} `type:"structure"`
 }
@@ -98,7 +95,6 @@ func (s CatalogResource) String() string {
 
 // A wildcard object, consisting of an optional list of excluded column names
 // or indexes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ColumnWildcard
 type ColumnWildcard struct {
 	_ struct{} `type:"structure"`
 
@@ -112,7 +108,6 @@ func (s ColumnWildcard) String() string {
 }
 
 // The AWS Lake Formation principal.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DataLakePrincipal
 type DataLakePrincipal struct {
 	_ struct{} `type:"structure"`
 
@@ -139,7 +134,6 @@ func (s *DataLakePrincipal) Validate() error {
 }
 
 // The AWS Lake Formation principal.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DataLakeSettings
 type DataLakeSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -192,7 +186,6 @@ func (s *DataLakeSettings) Validate() error {
 }
 
 // A structure for a data location object where permissions are granted or revoked.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DataLocationResource
 type DataLocationResource struct {
 	_ struct{} `type:"structure"`
 
@@ -223,7 +216,6 @@ func (s *DataLocationResource) Validate() error {
 }
 
 // A structure for the database object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DatabaseResource
 type DatabaseResource struct {
 	_ struct{} `type:"structure"`
 
@@ -256,7 +248,6 @@ func (s *DatabaseResource) Validate() error {
 }
 
 // Contains details about an error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ErrorDetail
 type ErrorDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -274,7 +265,6 @@ func (s ErrorDetail) String() string {
 
 // This structure describes the filtering of columns in a table based on a filter
 // condition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/FilterCondition
 type FilterCondition struct {
 	_ struct{} `type:"structure"`
 
@@ -294,7 +284,6 @@ func (s FilterCondition) String() string {
 }
 
 // Permissions granted to a principal.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/PrincipalPermissions
 type PrincipalPermissions struct {
 	_ struct{} `type:"structure"`
 
@@ -326,7 +315,6 @@ func (s *PrincipalPermissions) Validate() error {
 }
 
 // The permissions granted or revoked on a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/PrincipalResourcePermissions
 type PrincipalResourcePermissions struct {
 	_ struct{} `type:"structure"`
 
@@ -350,7 +338,6 @@ func (s PrincipalResourcePermissions) String() string {
 }
 
 // A structure for the resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/Resource
 type Resource struct {
 	_ struct{} `type:"structure"`
 
@@ -414,7 +401,6 @@ func (s *Resource) Validate() error {
 }
 
 // A structure containing information about an AWS Lake Formation resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ResourceInfo
 type ResourceInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -435,7 +421,6 @@ func (s ResourceInfo) String() string {
 
 // A structure for the table object. A table is a metadata definition that represents
 // your data. You can Grant and Revoke table privileges to a principal.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/TableResource
 type TableResource struct {
 	_ struct{} `type:"structure"`
 
@@ -486,7 +471,6 @@ func (s *TableResource) Validate() error {
 //
 // This object must take a value for at least one of ColumnsNames, ColumnsIndexes,
 // or ColumnsWildcard.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/TableWithColumnsResource
 type TableWithColumnsResource struct {
 	_ struct{} `type:"structure"`
 

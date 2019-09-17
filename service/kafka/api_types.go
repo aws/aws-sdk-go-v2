@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Includes all client authentication information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClientAuthentication
 type Authentication struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s Authentication) MarshalFields(e protocol.FieldEncoder) error {
 // Specifies the EBS volume upgrade information. The broker identifier must
 // be set to the keyword ALL. This means the changes apply to all the brokers
 // in the cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/BrokerEBSVolumeInfo
 type BrokerEBSVolumeInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -97,7 +95,6 @@ func (s BrokerEBSVolumeInfo) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes the setup to be used for Kafka broker nodes in the cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/BrokerNodeGroupInfo
 type BrokerNodeGroupInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -208,7 +205,6 @@ func (s BrokerNodeGroupInfo) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // BrokerNodeInfo
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/BrokerNodeInfo
 type BrokerNodeInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -285,7 +281,6 @@ func (s BrokerNodeInfo) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the current software installed on the cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/BrokerSoftwareInfo
 type BrokerSoftwareInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -330,7 +325,6 @@ func (s BrokerSoftwareInfo) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Returns information about a cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClusterInfo
 type ClusterInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -483,7 +477,6 @@ func (s ClusterInfo) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Returns information about a cluster operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClusterOperationInfo
 type ClusterOperationInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -591,7 +584,6 @@ func (s ClusterOperationInfo) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents an MSK Configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Configuration
 type Configuration struct {
 	_ struct{} `type:"structure"`
 
@@ -680,7 +672,6 @@ func (s Configuration) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the configuration to use for the brokers.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ConfigurationInfo
 type ConfigurationInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -736,7 +727,6 @@ func (s ConfigurationInfo) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes a configuration revision.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ConfigurationRevision
 type ConfigurationRevision struct {
 	_ struct{} `type:"structure"`
 
@@ -785,7 +775,6 @@ func (s ConfigurationRevision) MarshalFields(e protocol.FieldEncoder) error {
 
 // Contains information about the EBS storage volumes attached to Kafka broker
 // nodes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/EBSStorageInfo
 type EBSStorageInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -823,7 +812,6 @@ func (s EBSStorageInfo) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The data-volume encryption details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/EncryptionAtRest
 type EncryptionAtRest struct {
 	_ struct{} `type:"structure"`
 
@@ -865,7 +853,6 @@ func (s EncryptionAtRest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The settings for encrypting data in transit.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/EncryptionInTransit
 type EncryptionInTransit struct {
 	_ struct{} `type:"structure"`
 
@@ -916,7 +903,6 @@ func (s EncryptionInTransit) MarshalFields(e protocol.FieldEncoder) error {
 // Includes encryption-related information, such as the AWS KMS key used for
 // encrypting data at rest and whether you want MSK to encrypt your data in
 // transit.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/EncryptionInfo
 type EncryptionInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -965,7 +951,6 @@ func (s EncryptionInfo) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Returns information about an error state of the cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ErrorInfo
 type ErrorInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -999,7 +984,6 @@ func (s ErrorInfo) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about cluster attributes that can be updated via update APIs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/MutableClusterInfo
 type MutableClusterInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1048,7 +1032,6 @@ func (s MutableClusterInfo) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The node information object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/NodeInfo
 type NodeInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1118,7 +1101,6 @@ func (s NodeInfo) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains information about storage volumes attached to MSK broker nodes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/StorageInfo
 type StorageInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1158,7 +1140,6 @@ func (s StorageInfo) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Details for client authentication using TLS.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Tls
 type Tls struct {
 	_ struct{} `type:"structure"`
 
@@ -1189,7 +1170,6 @@ func (s Tls) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Zookeeper node information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ZookeeperNodeInfo
 type ZookeeperNodeInfo struct {
 	_ struct{} `type:"structure"`
 

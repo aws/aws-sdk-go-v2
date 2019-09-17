@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the input to DescribeDBInstances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBInstancesMessage
 type DescribeDBInstancesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -76,7 +75,6 @@ func (s *DescribeDBInstancesInput) Validate() error {
 }
 
 // Represents the output of DescribeDBInstances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBInstanceMessage
 type DescribeDBInstancesOutput struct {
 	_ struct{} `type:"structure"`
 

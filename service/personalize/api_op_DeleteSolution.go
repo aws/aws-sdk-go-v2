@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DeleteSolutionRequest
 type DeleteSolutionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *DeleteSolutionInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DeleteSolutionOutput
 type DeleteSolutionOutput struct {
 	_ struct{} `type:"structure"`
 }

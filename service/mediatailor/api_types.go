@@ -13,7 +13,6 @@ var _ = awsutil.Prettify
 
 // The configuration for using a content delivery network (CDN), like Amazon
 // CloudFront, for content and ad segment management.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CdnConfiguration
 type CdnConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s CdnConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The configuration for DASH content.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DashConfiguration
 type DashConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -111,7 +109,6 @@ func (s DashConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The configuration for DASH PUT operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DashConfigurationForPut
 type DashConfigurationForPut struct {
 	_ struct{} `type:"structure"`
 
@@ -156,7 +153,6 @@ func (s DashConfigurationForPut) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The configuration for HLS content.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/HlsConfiguration
 type HlsConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -181,7 +177,6 @@ func (s HlsConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PlaybackConfiguration
 type PlaybackConfiguration struct {
 	_ struct{} `type:"structure"`
 

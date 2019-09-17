@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemoveLayerVersionPermissionRequest
 type RemoveLayerVersionPermissionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -99,7 +98,6 @@ func (s RemoveLayerVersionPermissionInput) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemoveLayerVersionPermissionOutput
 type RemoveLayerVersionPermissionOutput struct {
 	_ struct{} `type:"structure"`
 }

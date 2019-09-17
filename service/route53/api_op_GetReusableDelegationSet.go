@@ -11,7 +11,6 @@ import (
 )
 
 // A request to get information about a specified reusable delegation set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetReusableDelegationSetRequest
 type GetReusableDelegationSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s GetReusableDelegationSetInput) MarshalFields(e protocol.FieldEncoder) er
 
 // A complex type that contains the response to the GetReusableDelegationSet
 // request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetReusableDelegationSetResponse
 type GetReusableDelegationSetOutput struct {
 	_ struct{} `type:"structure"`
 

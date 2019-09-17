@@ -15,7 +15,6 @@ var _ = awsutil.Prettify
 
 // Describes a modification to the configuration of bring your own license (BYOL)
 // for the specified account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AccountModification
 type AccountModification struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +45,6 @@ func (s AccountModification) String() string {
 }
 
 // Describes the compute type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ComputeType
 type ComputeType struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +58,6 @@ func (s ComputeType) String() string {
 }
 
 // Describes the default values used to create a WorkSpace.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DefaultWorkspaceCreationProperties
 type DefaultWorkspaceCreationProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -87,7 +84,6 @@ func (s DefaultWorkspaceCreationProperties) String() string {
 }
 
 // Describes a WorkSpace that cannot be created.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/FailedCreateWorkspaceRequest
 type FailedCreateWorkspaceRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -110,7 +106,6 @@ func (s FailedCreateWorkspaceRequest) String() string {
 // Describes a WorkSpace that could not be rebooted. (RebootWorkspaces), rebuilt
 // (RebuildWorkspaces), terminated (TerminateWorkspaces), started (StartWorkspaces),
 // or stopped (StopWorkspaces).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/FailedWorkspaceChangeRequest
 type FailedWorkspaceChangeRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -131,7 +126,6 @@ func (s FailedWorkspaceChangeRequest) String() string {
 }
 
 // Describes a rule for an IP access control group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/IpRuleItem
 type IpRuleItem struct {
 	_ struct{} `type:"structure"`
 
@@ -148,7 +142,6 @@ func (s IpRuleItem) String() string {
 }
 
 // Describes a WorkSpace modification.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModificationState
 type ModificationState struct {
 	_ struct{} `type:"structure"`
 
@@ -165,7 +158,6 @@ func (s ModificationState) String() string {
 }
 
 // The operating system that the image is running.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/OperatingSystem
 type OperatingSystem struct {
 	_ struct{} `type:"structure"`
 
@@ -179,7 +171,6 @@ func (s OperatingSystem) String() string {
 }
 
 // Describes an Amazon WorkSpaces client.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ClientProperties
 type Properties struct {
 	_ struct{} `type:"structure"`
 
@@ -195,7 +186,6 @@ func (s Properties) String() string {
 }
 
 // Information about the Amazon WorkSpaces client.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ClientPropertiesResult
 type PropertiesResult struct {
 	_ struct{} `type:"structure"`
 
@@ -212,7 +202,6 @@ func (s PropertiesResult) String() string {
 }
 
 // Describes the information used to reboot a WorkSpace.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebootRequest
 type RebootRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -242,7 +231,6 @@ func (s *RebootRequest) Validate() error {
 }
 
 // Describes the information used to rebuild a WorkSpace.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildRequest
 type RebuildRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -272,7 +260,6 @@ func (s *RebuildRequest) Validate() error {
 }
 
 // Describes the root volume for a WorkSpace bundle.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RootStorage
 type RootStorage struct {
 	_ struct{} `type:"structure"`
 
@@ -286,7 +273,6 @@ func (s RootStorage) String() string {
 }
 
 // Information used to start a WorkSpace.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StartRequest
 type StartRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -300,7 +286,6 @@ func (s StartRequest) String() string {
 }
 
 // Describes the information used to stop a WorkSpace.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StopRequest
 type StopRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -314,7 +299,6 @@ func (s StopRequest) String() string {
 }
 
 // Describes a tag.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -350,7 +334,6 @@ func (s *Tag) Validate() error {
 }
 
 // Describes the information used to terminate a WorkSpace.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateRequest
 type TerminateRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -380,7 +363,6 @@ func (s *TerminateRequest) Validate() error {
 }
 
 // Describes the user storage for a WorkSpace bundle.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UserStorage
 type UserStorage struct {
 	_ struct{} `type:"structure"`
 
@@ -394,7 +376,6 @@ func (s UserStorage) String() string {
 }
 
 // Describes a WorkSpace.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/Workspace
 type Workspace struct {
 	_ struct{} `type:"structure"`
 
@@ -451,7 +432,6 @@ func (s Workspace) String() string {
 }
 
 // Describes a WorkSpace bundle.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceBundle
 type WorkspaceBundle struct {
 	_ struct{} `type:"structure"`
 
@@ -484,7 +464,6 @@ func (s WorkspaceBundle) String() string {
 }
 
 // Describes the connection status of a WorkSpace.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceConnectionStatus
 type WorkspaceConnectionStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -508,7 +487,6 @@ func (s WorkspaceConnectionStatus) String() string {
 }
 
 // Describes an AWS Directory Service directory that is used with Amazon WorkSpaces.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceDirectory
 type WorkspaceDirectory struct {
 	_ struct{} `type:"structure"`
 
@@ -560,7 +538,6 @@ func (s WorkspaceDirectory) String() string {
 }
 
 // Describes a WorkSpace image.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceImage
 type WorkspaceImage struct {
 	_ struct{} `type:"structure"`
 
@@ -596,7 +573,6 @@ func (s WorkspaceImage) String() string {
 }
 
 // Describes a WorkSpace.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceProperties
 type WorkspaceProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -624,7 +600,6 @@ func (s WorkspaceProperties) String() string {
 }
 
 // Describes the information used to create a WorkSpace.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceRequest
 type WorkspaceRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -700,7 +675,6 @@ func (s *WorkspaceRequest) Validate() error {
 }
 
 // Describes an IP access control group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspacesIpGroup
 type WorkspacesIpGroup struct {
 	_ struct{} `type:"structure"`
 

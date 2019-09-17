@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/GetResourceMetricsRequest
 type GetResourceMetricsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -128,7 +127,6 @@ func (s *GetResourceMetricsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/GetResourceMetricsResponse
 type GetResourceMetricsOutput struct {
 	_ struct{} `type:"structure"`
 

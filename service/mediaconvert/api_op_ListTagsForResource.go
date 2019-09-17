@@ -13,7 +13,6 @@ import (
 // List the tags for your AWS Elemental MediaConvert resource by sending a request
 // with the Amazon Resource Name (ARN) of the resource. To get the ARN, send
 // a GET request with the resource name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListTagsForResourceRequest
 type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // A successful request to list the tags for a resource returns a JSON map of
 // tags.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListTagsForResourceResponse
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 

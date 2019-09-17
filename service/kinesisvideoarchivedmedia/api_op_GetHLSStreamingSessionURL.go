@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/GetHLSStreamingSessionURLInput
 type GetHLSStreamingSessionURLInput struct {
 	_ struct{} `type:"structure"`
 
@@ -243,7 +242,6 @@ func (s GetHLSStreamingSessionURLInput) MarshalFields(e protocol.FieldEncoder) e
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/GetHLSStreamingSessionURLOutput
 type GetHLSStreamingSessionURLOutput struct {
 	_ struct{} `type:"structure"`
 

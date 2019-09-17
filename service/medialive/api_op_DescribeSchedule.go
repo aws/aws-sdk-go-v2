@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeScheduleRequest
 type DescribeScheduleInput struct {
 	_ struct{} `type:"structure"`
 
@@ -69,7 +68,6 @@ func (s DescribeScheduleInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeScheduleResponse
 type DescribeScheduleOutput struct {
 	_ struct{} `type:"structure"`
 

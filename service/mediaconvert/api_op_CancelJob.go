@@ -11,7 +11,6 @@ import (
 )
 
 // Cancel a job by sending a request with the job ID
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CancelJobRequest
 type CancelJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s CancelJobInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A cancel job request will receive a response with an empty body.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CancelJobResponse
 type CancelJobOutput struct {
 	_ struct{} `type:"structure"`
 }

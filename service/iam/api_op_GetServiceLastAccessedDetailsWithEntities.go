@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServiceLastAccessedDetailsWithEntitiesRequest
 type GetServiceLastAccessedDetailsWithEntitiesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -87,7 +86,6 @@ func (s *GetServiceLastAccessedDetailsWithEntitiesInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServiceLastAccessedDetailsWithEntitiesResponse
 type GetServiceLastAccessedDetailsWithEntitiesOutput struct {
 	_ struct{} `type:"structure"`
 

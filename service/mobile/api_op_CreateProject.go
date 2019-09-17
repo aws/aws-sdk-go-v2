@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure used to request a project be created.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/CreateProjectRequest
 type CreateProjectInput struct {
 	_ struct{} `type:"structure" payload:"Contents"`
 
@@ -67,7 +66,6 @@ func (s CreateProjectInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure used in response to a request to create a project.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/CreateProjectResult
 type CreateProjectOutput struct {
 	_ struct{} `type:"structure"`
 

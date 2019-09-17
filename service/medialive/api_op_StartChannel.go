@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannelRequest
 type StartChannelInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s StartChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartChannelResponse
 type StartChannelOutput struct {
 	_ struct{} `type:"structure"`
 

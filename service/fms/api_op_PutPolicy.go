@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PutPolicyRequest
 type PutPolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *PutPolicyInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PutPolicyResponse
 type PutPolicyOutput struct {
 	_ struct{} `type:"structure"`
 

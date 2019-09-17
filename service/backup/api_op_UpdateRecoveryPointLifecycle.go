@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateRecoveryPointLifecycleInput
 type UpdateRecoveryPointLifecycleInput struct {
 	_ struct{} `type:"structure"`
 
@@ -88,7 +87,6 @@ func (s UpdateRecoveryPointLifecycleInput) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateRecoveryPointLifecycleOutput
 type UpdateRecoveryPointLifecycleOutput struct {
 	_ struct{} `type:"structure"`
 

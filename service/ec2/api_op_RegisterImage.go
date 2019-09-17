@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for RegisterImage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisterImageRequest
 type RegisterImageInput struct {
 	_ struct{} `type:"structure"`
 
@@ -104,7 +103,6 @@ func (s *RegisterImageInput) Validate() error {
 }
 
 // Contains the output of RegisterImage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisterImageResult
 type RegisterImageOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // UpdateNFSFileShareInput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShareInput
 type UpdateNFSFileShareInput struct {
 	_ struct{} `type:"structure"`
 
@@ -112,7 +111,6 @@ func (s *UpdateNFSFileShareInput) Validate() error {
 }
 
 // UpdateNFSFileShareOutput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShareOutput
 type UpdateNFSFileShareOutput struct {
 	_ struct{} `type:"structure"`
 

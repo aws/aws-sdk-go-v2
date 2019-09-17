@@ -11,7 +11,6 @@ import (
 )
 
 // Contains the parameters for DescribeSpotPriceHistory.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotPriceHistoryRequest
 type DescribeSpotPriceHistoryInput struct {
 	_ struct{} `type:"structure"`
 
@@ -72,7 +71,6 @@ func (s DescribeSpotPriceHistoryInput) String() string {
 }
 
 // Contains the output of DescribeSpotPriceHistory.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotPriceHistoryResult
 type DescribeSpotPriceHistoryOutput struct {
 	_ struct{} `type:"structure"`
 

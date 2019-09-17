@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactAttributesRequest
 type UpdateContactAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -105,7 +104,6 @@ func (s UpdateContactAttributesInput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactAttributesResponse
 type UpdateContactAttributesOutput struct {
 	_ struct{} `type:"structure"`
 }

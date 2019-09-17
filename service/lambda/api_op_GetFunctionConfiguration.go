@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfigurationRequest
 type GetFunctionConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -81,7 +80,6 @@ func (s GetFunctionConfigurationInput) MarshalFields(e protocol.FieldEncoder) er
 }
 
 // Details about a function's configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration
 type GetFunctionConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 

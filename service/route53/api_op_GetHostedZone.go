@@ -11,7 +11,6 @@ import (
 )
 
 // A request to get information about a specified hosted zone.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneRequest
 type GetHostedZoneInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s GetHostedZoneInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contain the response to a GetHostedZone request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneResponse
 type GetHostedZoneOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the inputs for the CreateHapgRequest action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHapgRequest
 type CreateHapgInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *CreateHapgInput) Validate() error {
 }
 
 // Contains the output of the CreateHAPartitionGroup action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHapgResponse
 type CreateHapgOutput struct {
 	_ struct{} `type:"structure"`
 

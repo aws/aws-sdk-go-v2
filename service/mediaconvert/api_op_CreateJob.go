@@ -12,7 +12,6 @@ import (
 
 // Send your create job request with your job settings and IAM role. Optionally,
 // include user metadata and the ARN for the queue.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateJobRequest
 type CreateJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -186,7 +185,6 @@ func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Successful create job requests will return the job JSON.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateJobResponse
 type CreateJobOutput struct {
 	_ struct{} `type:"structure"`
 

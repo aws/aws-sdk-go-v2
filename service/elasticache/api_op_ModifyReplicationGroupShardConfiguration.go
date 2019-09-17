@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the input for a ModifyReplicationGroupShardConfiguration operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupShardConfigurationMessage
 type ModifyReplicationGroupShardConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -96,7 +95,6 @@ func (s *ModifyReplicationGroupShardConfigurationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupShardConfigurationResult
 type ModifyReplicationGroupShardConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Name of the availability zone.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/AvailabilityZone
 type AvailabilityZone struct {
 	_ struct{} `type:"structure"`
 
@@ -39,7 +38,6 @@ func (s AvailabilityZone) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Types of broker engines.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerEngineType
 type BrokerEngineType struct {
 	_ struct{} `type:"structure"`
 
@@ -79,7 +77,6 @@ func (s BrokerEngineType) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Returns information about all brokers.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerInstance
 type BrokerInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -128,7 +125,6 @@ func (s BrokerInstance) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Option for host instance type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerInstanceOption
 type BrokerInstanceOption struct {
 	_ struct{} `type:"structure"`
 
@@ -192,7 +188,6 @@ func (s BrokerInstanceOption) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The Amazon Resource Name (ARN) of the broker.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerSummary
 type BrokerSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -275,7 +270,6 @@ func (s BrokerSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Returns information about all configurations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/Configuration
 type Configuration struct {
 	_ struct{} `type:"structure"`
 
@@ -383,7 +377,6 @@ func (s Configuration) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A list of information about the configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ConfigurationId
 type ConfigurationId struct {
 	_ struct{} `type:"structure"`
 
@@ -417,7 +410,6 @@ func (s ConfigurationId) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Returns information about the specified configuration revision.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ConfigurationRevision
 type ConfigurationRevision struct {
 	_ struct{} `type:"structure"`
 
@@ -461,7 +453,6 @@ func (s ConfigurationRevision) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Broker configuration information
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/Configurations
 type Configurations struct {
 	_ struct{} `type:"structure"`
 
@@ -510,7 +501,6 @@ func (s Configurations) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Encryption options for the broker.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/EncryptionOptions
 type EncryptionOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -562,7 +552,6 @@ func (s EncryptionOptions) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Id of the engine version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/EngineVersion
 type EngineVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -587,7 +576,6 @@ func (s EngineVersion) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The list of information about logs to be enabled for the specified broker.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/Logs
 type Logs struct {
 	_ struct{} `type:"structure"`
 
@@ -623,7 +611,6 @@ func (s Logs) MarshalFields(e protocol.FieldEncoder) error {
 
 // The list of information about logs currently enabled and pending to be deployed
 // for the specified broker.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/LogsSummary
 type LogsSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -686,7 +673,6 @@ func (s LogsSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The list of information about logs to be enabled for the specified broker.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/PendingLogs
 type PendingLogs struct {
 	_ struct{} `type:"structure"`
 
@@ -722,7 +708,6 @@ func (s PendingLogs) MarshalFields(e protocol.FieldEncoder) error {
 
 // Returns information about the XML element or attribute that was sanitized
 // in the configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/SanitizationWarning
 type SanitizationWarning struct {
 	_ struct{} `type:"structure"`
 
@@ -765,7 +750,6 @@ func (s SanitizationWarning) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An ActiveMQ user associated with the broker.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/User
 type User struct {
 	_ struct{} `type:"structure"`
 
@@ -830,7 +814,6 @@ func (s User) MarshalFields(e protocol.FieldEncoder) error {
 
 // Returns information about the status of the changes pending for the ActiveMQ
 // user.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UserPendingChanges
 type UserPendingChanges struct {
 	_ struct{} `type:"structure"`
 
@@ -881,7 +864,6 @@ func (s UserPendingChanges) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Returns a list of all ActiveMQ users.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UserSummary
 type UserSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -918,7 +900,6 @@ func (s UserSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 // The scheduled time period relative to UTC during which Amazon MQ begins to
 // apply pending updates or patches to the broker.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/WeeklyStartTime
 type WeeklyStartTime struct {
 	_ struct{} `type:"structure"`
 

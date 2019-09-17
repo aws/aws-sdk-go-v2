@@ -11,7 +11,6 @@ import (
 )
 
 // Creates a cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateClusterRequest
 type CreateClusterInput struct {
 	_ struct{} `type:"structure"`
 
@@ -176,7 +175,6 @@ func (s CreateClusterInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Returns information about the created cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateClusterResponse
 type CreateClusterOutput struct {
 	_ struct{} `type:"structure"`
 

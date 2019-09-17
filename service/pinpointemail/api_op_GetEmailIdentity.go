@@ -11,7 +11,6 @@ import (
 )
 
 // A request to return details about an email identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetEmailIdentityRequest
 type GetEmailIdentityInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s GetEmailIdentityInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Details about an email identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetEmailIdentityResponse
 type GetEmailIdentityOutput struct {
 	_ struct{} `type:"structure"`
 

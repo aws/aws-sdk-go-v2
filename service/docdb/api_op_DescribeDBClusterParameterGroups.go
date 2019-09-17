@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the input to DescribeDBClusterParameterGroups.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBClusterParameterGroupsMessage
 type DescribeDBClusterParameterGroupsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -63,7 +62,6 @@ func (s *DescribeDBClusterParameterGroupsInput) Validate() error {
 }
 
 // Represents the output of DBClusterParameterGroups.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterParameterGroupsMessage
 type DescribeDBClusterParameterGroupsOutput struct {
 	_ struct{} `type:"structure"`
 

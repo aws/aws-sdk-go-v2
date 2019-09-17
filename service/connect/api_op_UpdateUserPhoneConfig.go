@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserPhoneConfigRequest
 type UpdateUserPhoneConfigInput struct {
 	_ struct{} `type:"structure"`
 
@@ -96,7 +95,6 @@ func (s UpdateUserPhoneConfigInput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserPhoneConfigOutput
 type UpdateUserPhoneConfigOutput struct {
 	_ struct{} `type:"structure"`
 }

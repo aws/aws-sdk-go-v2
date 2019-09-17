@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachObjectRequest
 type DetachObjectInput struct {
 	_ struct{} `type:"structure"`
 
@@ -87,7 +86,6 @@ func (s DetachObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachObjectResponse
 type DetachObjectOutput struct {
 	_ struct{} `type:"structure"`
 

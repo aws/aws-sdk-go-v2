@@ -10,7 +10,6 @@ import (
 )
 
 // This input determines which steps to list.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListStepsInput
 type ListStepsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s *ListStepsInput) Validate() error {
 
 // This output contains the list of steps returned in reverse order. This means
 // that the last step is the first element in the list.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListStepsOutput
 type ListStepsOutput struct {
 	_ struct{} `type:"structure"`
 

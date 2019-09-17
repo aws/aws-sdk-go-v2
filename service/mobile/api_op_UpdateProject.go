@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure used for requests to update project configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/UpdateProjectRequest
 type UpdateProjectInput struct {
 	_ struct{} `type:"structure" payload:"Contents"`
 
@@ -64,7 +63,6 @@ func (s UpdateProjectInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure used for requests to updated project configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/UpdateProjectResult
 type UpdateProjectOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyAccountRequest
 type ModifyAccountInput struct {
 	_ struct{} `type:"structure"`
 
@@ -30,7 +29,6 @@ func (s ModifyAccountInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyAccountResult
 type ModifyAccountOutput struct {
 	_ struct{} `type:"structure"`
 }

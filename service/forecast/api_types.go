@@ -15,7 +15,6 @@ var _ = awsutil.Prettify
 
 // Specifies a categorical hyperparameter and it's range of tunable values.
 // This object is part of the ParameterRanges object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CategoricalParameterRange
 type CategoricalParameterRange struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s *CategoricalParameterRange) Validate() error {
 
 // Specifies a continuous hyperparameter and it's range of tunable values. This
 // object is part of the ParameterRanges object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ContinuousParameterRange
 type ContinuousParameterRange struct {
 	_ struct{} `type:"structure"`
 
@@ -144,7 +142,6 @@ func (s *ContinuousParameterRange) Validate() error {
 
 // The destination of an exported forecast and credentials to access the location.
 // This object is submitted in the CreateForecastExportJob request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DataDestination
 type DataDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -181,7 +178,6 @@ func (s *DataDestination) Validate() error {
 
 // The source of your training data and credentials to access the data. This
 // object is submitted in the CreateDatasetImportJob request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DataSource
 type DataSource struct {
 	_ struct{} `type:"structure"`
 
@@ -219,7 +215,6 @@ func (s *DataSource) Validate() error {
 // Provides a summary of the dataset group properties used in the ListDatasetGroups
 // operation. To get the complete set of properties, call the DescribeDatasetGroup
 // operation, and provide the listed DatasetGroupArn.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DatasetGroupSummary
 type DatasetGroupSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -246,7 +241,6 @@ func (s DatasetGroupSummary) String() string {
 // Provides a summary of the dataset import job properties used in the ListDatasetImportJobs
 // operation. To get the complete set of properties, call the DescribeDatasetImportJob
 // operation, and provide the listed DatasetImportJobArn.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DatasetImportJobSummary
 type DatasetImportJobSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -294,7 +288,6 @@ func (s DatasetImportJobSummary) String() string {
 // Provides a summary of the dataset properties used in the ListDatasets operation.
 // To get the complete set of properties, call the DescribeDataset operation,
 // and provide the listed DatasetArn.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DatasetSummary
 type DatasetSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -328,7 +321,6 @@ func (s DatasetSummary) String() string {
 // An AWS Key Management Service (KMS) key and an AWS Identity and Access Management
 // (IAM) role that Amazon Forecast can assume to access the key. This object
 // is optionally submitted in the CreateDataset and CreatePredictor requests.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/EncryptionConfig
 type EncryptionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -383,7 +375,6 @@ func (s *EncryptionConfig) Validate() error {
 // 20 data points for evaluation. The second time, the algorithm trains the
 // model using the first 160 data points and uses the last 40 data points for
 // evaluation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/EvaluationParameters
 type EvaluationParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -404,7 +395,6 @@ func (s EvaluationParameters) String() string {
 
 // The results of evaluating an algorithm. Returned as part of the GetAccuracyMetrics
 // response.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/EvaluationResult
 type EvaluationResult struct {
 	_ struct{} `type:"structure"`
 
@@ -440,7 +430,6 @@ func (s EvaluationResult) String() string {
 // } ]
 //
 // }
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/Featurization
 type Featurization struct {
 	_ struct{} `type:"structure"`
 
@@ -503,7 +492,6 @@ func (s *Featurization) Validate() error {
 // You can create multiple featurization configurations. For example, you might
 // call the CreatePredictor operation twice by specifying different featurization
 // configurations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/FeaturizationConfig
 type FeaturizationConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -577,7 +565,6 @@ func (s *FeaturizationConfig) Validate() error {
 // "FeaturizationMethodParameters": {"aggregation": "avg", "backfill": "nan"}
 //
 // }
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/FeaturizationMethod
 type FeaturizationMethod struct {
 	_ struct{} `type:"structure"`
 
@@ -626,7 +613,6 @@ func (s *FeaturizationMethod) Validate() error {
 // of a condition and a match statement. The condition is either IS or IS_NOT,
 // which specifies whether to include or exclude, respectively, the objects
 // that match the statement. The match statement consists of a key and a value.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/Filter
 type Filter struct {
 	_ struct{} `type:"structure"`
 
@@ -675,7 +661,6 @@ func (s *Filter) Validate() error {
 // Provides a summary of the forecast export job properties used in the ListForecastExportJobs
 // operation. To get the complete set of properties, call the DescribeForecastExportJob
 // operation, and provide the listed ForecastExportJobArn.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ForecastExportJobSummary
 type ForecastExportJobSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -718,7 +703,6 @@ func (s ForecastExportJobSummary) String() string {
 // Provides a summary of the forecast properties used in the ListForecasts operation.
 // To get the complete set of properties, call the DescribeForecast operation,
 // and provide the listed ForecastArn.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ForecastSummary
 type ForecastSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -778,7 +762,6 @@ func (s ForecastSummary) String() string {
 // by running many training jobs over a range of hyperparameter values. The
 // optimum set of values is dependent on the algorithm, the training data, and
 // the given metric objective.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/HyperParameterTuningJobConfig
 type HyperParameterTuningJobConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -809,7 +792,6 @@ func (s *HyperParameterTuningJobConfig) Validate() error {
 // The data used to train a predictor. The data includes a dataset group and
 // any supplementary features. This object is specified in the CreatePredictor
 // request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/InputDataConfig
 type InputDataConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -854,7 +836,6 @@ func (s *InputDataConfig) Validate() error {
 
 // Specifies an integer hyperparameter and it's range of tunable values. This
 // object is part of the ParameterRanges object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/IntegerParameterRange
 type IntegerParameterRange struct {
 	_ struct{} `type:"structure"`
 
@@ -936,7 +917,6 @@ func (s *IntegerParameterRange) Validate() error {
 
 // Provides metrics used to evaluate the performance of a predictor. This object
 // is part of the WindowSummary object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/Metrics
 type Metrics struct {
 	_ struct{} `type:"structure"`
 
@@ -958,7 +938,6 @@ func (s Metrics) String() string {
 // ranges of tunable values. The range of tunable values determines which values
 // that a hyperparameter tuning job can choose for the specified hyperparameter.
 // This object is part of the HyperParameterTuningJobConfig object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ParameterRanges
 type ParameterRanges struct {
 	_ struct{} `type:"structure"`
 
@@ -1020,7 +999,6 @@ func (s *ParameterRanges) Validate() error {
 // Provides a summary of the predictor properties used in the ListPredictors
 // operation. To get the complete set of properties, call the DescribePredictor
 // operation, and provide the listed PredictorArn.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/PredictorSummary
 type PredictorSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1070,7 +1048,6 @@ func (s PredictorSummary) String() string {
 // can assume to access the file(s). Optionally, includes an AWS Key Management
 // Service (KMS) key. This object is submitted in the CreateDatasetImportJob
 // and CreateForecastExportJob requests.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/S3Config
 type S3Config struct {
 	_ struct{} `type:"structure"`
 
@@ -1118,7 +1095,6 @@ func (s *S3Config) Validate() error {
 
 // Defines the fields of a dataset. This object is specified in the CreateDataset
 // request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/Schema
 type Schema struct {
 	_ struct{} `type:"structure"`
 
@@ -1151,7 +1127,6 @@ func (s *Schema) Validate() error {
 // An attribute of a schema, which defines a field of a dataset. A schema attribute
 // is required for every field in a dataset. The Schema object contains an array
 // of SchemaAttribute objects.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/SchemaAttribute
 type SchemaAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -1182,7 +1157,6 @@ func (s *SchemaAttribute) Validate() error {
 
 // Provides statistics for each data field imported to an Amazon Forecast dataset
 // with the CreateDatasetImportJob operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/Statistics
 type Statistics struct {
 	_ struct{} `type:"structure"`
 
@@ -1222,7 +1196,6 @@ func (s Statistics) String() string {
 // For this release, the only supported feature is a holiday calendar. If the
 // calendar is used, all data should belong to the same country as the calendar.
 // For the calendar data, see http://jollyday.sourceforge.net/data.html (http://jollyday.sourceforge.net/data.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/SupplementaryFeature
 type SupplementaryFeature struct {
 	_ struct{} `type:"structure"`
 
@@ -1275,7 +1248,6 @@ func (s *SupplementaryFeature) Validate() error {
 
 // The weighted loss value for a quantile. This object is part of the Metrics
 // object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/WeightedQuantileLoss
 type WeightedQuantileLoss struct {
 	_ struct{} `type:"structure"`
 
@@ -1299,7 +1271,6 @@ func (s WeightedQuantileLoss) String() string {
 //
 // The TestWindowStart and TestWindowEnd parameters are determined by the BackTestWindowOffset
 // parameter of the EvaluationParameters object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/WindowSummary
 type WindowSummary struct {
 	_ struct{} `type:"structure"`
 

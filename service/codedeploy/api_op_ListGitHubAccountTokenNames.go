@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a ListGitHubAccountTokenNames operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListGitHubAccountTokenNamesInput
 type ListGitHubAccountTokenNamesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -25,7 +24,6 @@ func (s ListGitHubAccountTokenNamesInput) String() string {
 }
 
 // Represents the output of a ListGitHubAccountTokenNames operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListGitHubAccountTokenNamesOutput
 type ListGitHubAccountTokenNamesOutput struct {
 	_ struct{} `type:"structure"`
 

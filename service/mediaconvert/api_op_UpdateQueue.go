@@ -12,7 +12,6 @@ import (
 
 // Modify a queue by sending a request with the queue name and any changes to
 // the queue.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdateQueueRequest
 type UpdateQueueInput struct {
 	_ struct{} `type:"structure"`
 
@@ -95,7 +94,6 @@ func (s UpdateQueueInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // Successful update queue requests return the new queue information in JSON
 // format.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdateQueueResponse
 type UpdateQueueOutput struct {
 	_ struct{} `type:"structure"`
 

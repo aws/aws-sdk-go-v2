@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/waf"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetLoggingConfigurationRequest
 type GetLoggingConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *GetLoggingConfigurationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetLoggingConfigurationResponse
 type GetLoggingConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 

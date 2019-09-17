@@ -10,7 +10,6 @@ import (
 )
 
 // The request object for DeleteBackup operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteBackupRequest
 type DeleteBackupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s *DeleteBackupInput) Validate() error {
 }
 
 // The response object for DeleteBackup operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteBackupResponse
 type DeleteBackupOutput struct {
 	_ struct{} `type:"structure"`
 

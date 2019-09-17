@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricDataInput
 type GetMetricDataInput struct {
 	_ struct{} `type:"structure"`
 
@@ -119,7 +118,6 @@ func (s *GetMetricDataInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricDataOutput
 type GetMetricDataOutput struct {
 	_ struct{} `type:"structure"`
 

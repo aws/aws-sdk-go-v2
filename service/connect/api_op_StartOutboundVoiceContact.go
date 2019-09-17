@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartOutboundVoiceContactRequest
 type StartOutboundVoiceContactInput struct {
 	_ struct{} `type:"structure"`
 
@@ -161,7 +160,6 @@ func (s StartOutboundVoiceContactInput) MarshalFields(e protocol.FieldEncoder) e
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartOutboundVoiceContactResponse
 type StartOutboundVoiceContactOutput struct {
 	_ struct{} `type:"structure"`
 

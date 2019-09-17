@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the request to confirm registration of a user.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmSignUpRequest
 type ConfirmSignUpInput struct {
 	_ struct{} `type:"structure"`
 
@@ -91,7 +90,6 @@ func (s *ConfirmSignUpInput) Validate() error {
 }
 
 // Represents the response from the server for the registration confirmation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmSignUpResponse
 type ConfirmSignUpOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -12,7 +12,6 @@ import (
 )
 
 // Request to create a configuration template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateConfigurationTemplateMessage
 type CreateConfigurationTemplateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -129,7 +128,6 @@ func (s *CreateConfigurationTemplateInput) Validate() error {
 }
 
 // Describes the settings for a configuration set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ConfigurationSettingsDescription
 type CreateConfigurationTemplateOutput struct {
 	_ struct{} `type:"structure"`
 

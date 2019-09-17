@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteBackupSelectionInput
 type DeleteBackupSelectionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -69,7 +68,6 @@ func (s DeleteBackupSelectionInput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteBackupSelectionOutput
 type DeleteBackupSelectionOutput struct {
 	_ struct{} `type:"structure"`
 }

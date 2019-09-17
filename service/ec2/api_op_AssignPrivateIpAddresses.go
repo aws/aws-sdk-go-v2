@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for AssignPrivateIpAddresses.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignPrivateIpAddressesRequest
 type AssignPrivateIpAddressesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s *AssignPrivateIpAddressesInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignPrivateIpAddressesResult
 type AssignPrivateIpAddressesOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Information about a data source.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DataSource
 type DataSource struct {
 	_ struct{} `type:"structure"`
 
@@ -63,7 +62,6 @@ func (s DataSource) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a data source.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DataSourceConfig
 type DataSourceConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -149,7 +147,6 @@ func (s DataSourceConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a deployment application configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeploymentApplicationConfig
 type DeploymentApplicationConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -231,7 +228,6 @@ func (s DeploymentApplicationConfig) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // Information about a deployment configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeploymentConfig
 type DeploymentConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -292,7 +288,6 @@ func (s DeploymentConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a deployment job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeploymentJob
 type DeploymentJob struct {
 	_ struct{} `type:"structure"`
 
@@ -387,7 +382,6 @@ func (s DeploymentJob) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Configuration information for a deployment launch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeploymentLaunchConfig
 type DeploymentLaunchConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -491,7 +485,6 @@ func (s DeploymentLaunchConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a filter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/Filter
 type Filter struct {
 	_ struct{} `type:"structure"`
 
@@ -547,7 +540,6 @@ func (s Filter) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a fleet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/Fleet
 type Fleet struct {
 	_ struct{} `type:"structure"`
 
@@ -619,7 +611,6 @@ func (s Fleet) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a launch configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/LaunchConfig
 type LaunchConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -696,7 +687,6 @@ func (s LaunchConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The logging configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/LoggingConfig
 type LoggingConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -737,7 +727,6 @@ func (s LoggingConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The output location.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/OutputLocation
 type OutputLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -787,7 +776,6 @@ func (s OutputLocation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the progress of a deployment job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ProgressDetail
 type ProgressDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -866,7 +854,6 @@ func (s ProgressDetail) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a rendering engine.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RenderingEngine
 type RenderingEngine struct {
 	_ struct{} `type:"structure"`
 
@@ -900,7 +887,6 @@ func (s RenderingEngine) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a robot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/Robot
 type Robot struct {
 	_ struct{} `type:"structure"`
 
@@ -999,7 +985,6 @@ func (s Robot) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Application configuration information for a robot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RobotApplicationConfig
 type RobotApplicationConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1075,7 +1060,6 @@ func (s RobotApplicationConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Summary information for a robot application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RobotApplicationSummary
 type RobotApplicationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1138,7 +1122,6 @@ func (s RobotApplicationSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a robot deployment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RobotDeployment
 type RobotDeployment struct {
 	_ struct{} `type:"structure"`
 
@@ -1219,7 +1202,6 @@ func (s RobotDeployment) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a robot software suite.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RobotSoftwareSuite
 type RobotSoftwareSuite struct {
 	_ struct{} `type:"structure"`
 
@@ -1253,7 +1235,6 @@ func (s RobotSoftwareSuite) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about S3 keys.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/S3KeyOutput
 type S3KeyOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -1287,7 +1268,6 @@ func (s S3KeyOutput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a simulation application configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationApplicationConfig
 type SimulationApplicationConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1363,7 +1343,6 @@ func (s SimulationApplicationConfig) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // Summary information for a simulation application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationApplicationSummary
 type SimulationApplicationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1435,7 +1414,6 @@ func (s SimulationApplicationSummary) MarshalFields(e protocol.FieldEncoder) err
 }
 
 // Information about a simulation job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationJob
 type SimulationJob struct {
 	_ struct{} `type:"structure"`
 
@@ -1662,7 +1640,6 @@ func (s SimulationJob) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Summary information for a simulation job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationJobSummary
 type SimulationJobSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1761,7 +1738,6 @@ func (s SimulationJobSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a simulation software suite.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationSoftwareSuite
 type SimulationSoftwareSuite struct {
 	_ struct{} `type:"structure"`
 
@@ -1795,7 +1771,6 @@ func (s SimulationSoftwareSuite) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a source.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/Source
 type Source struct {
 	_ struct{} `type:"structure"`
 
@@ -1847,7 +1822,6 @@ func (s Source) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a source configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SourceConfig
 type SourceConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1909,7 +1883,6 @@ func (s SourceConfig) MarshalFields(e protocol.FieldEncoder) error {
 // identifying the list of security group IDs and subnet IDs. These must belong
 // to the same VPC. You must provide at least one security group and two subnet
 // IDs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/VPCConfig
 type VPCConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1986,7 +1959,6 @@ func (s VPCConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // VPC configuration associated with your simulation job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/VPCConfigResponse
 type VPCConfigResponse struct {
 	_ struct{} `type:"structure"`
 

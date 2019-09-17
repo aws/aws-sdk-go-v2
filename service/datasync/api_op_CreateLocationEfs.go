@@ -11,7 +11,6 @@ import (
 )
 
 // CreateLocationEfsRequest
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationEfsRequest
 type CreateLocationEfsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -91,7 +90,6 @@ func (s *CreateLocationEfsInput) Validate() error {
 }
 
 // CreateLocationEfs
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationEfsResponse
 type CreateLocationEfsOutput struct {
 	_ struct{} `type:"structure"`
 

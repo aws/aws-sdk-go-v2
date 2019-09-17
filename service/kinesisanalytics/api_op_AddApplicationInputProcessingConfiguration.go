@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInputProcessingConfigurationRequest
 type AddApplicationInputProcessingConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -86,7 +85,6 @@ func (s *AddApplicationInputProcessingConfigurationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInputProcessingConfigurationResponse
 type AddApplicationInputProcessingConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 }

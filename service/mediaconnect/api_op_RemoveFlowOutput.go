@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveFlowOutputRequest
 type RemoveFlowOutputInput struct {
 	_ struct{} `type:"structure"`
 
@@ -65,7 +64,6 @@ func (s RemoveFlowOutputInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // The result of a successful RemoveFlowOutput request including the flow ARN
 // and the output ARN that was removed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveFlowOutputResponse
 type RemoveFlowOutputOutput struct {
 	_ struct{} `type:"structure"`
 

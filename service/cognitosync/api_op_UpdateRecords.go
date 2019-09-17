@@ -13,7 +13,6 @@ import (
 
 // A request to post updates to records or add and delete records for a dataset
 // and user.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UpdateRecordsRequest
 type UpdateRecordsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -158,7 +157,6 @@ func (s UpdateRecordsInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Returned for a successful UpdateRecordsRequest.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UpdateRecordsResponse
 type UpdateRecordsOutput struct {
 	_ struct{} `type:"structure"`
 

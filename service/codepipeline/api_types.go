@@ -17,7 +17,6 @@ var _ = awsutil.Prettify
 // credentials that are issued by AWS Secure Token Service (STS). They can be
 // used to access input and output artifacts in the Amazon S3 bucket used to
 // store artifact for the pipeline in AWS CodePipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/AWSSessionCredentials
 type AWSSessionCredentials struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s AWSSessionCredentials) String() string {
 }
 
 // Represents information about an action configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionConfiguration
 type ActionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +55,6 @@ func (s ActionConfiguration) String() string {
 }
 
 // Represents information about an action configuration property.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionConfigurationProperty
 type ActionConfigurationProperty struct {
 	_ struct{} `type:"structure"`
 
@@ -144,7 +141,6 @@ func (s *ActionConfigurationProperty) Validate() error {
 
 // Represents the context of an action within the stage of a pipeline to a job
 // worker.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionContext
 type ActionContext struct {
 	_ struct{} `type:"structure"`
 
@@ -161,7 +157,6 @@ func (s ActionContext) String() string {
 }
 
 // Represents information about an action declaration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionDeclaration
 type ActionDeclaration struct {
 	_ struct{} `type:"structure"`
 
@@ -249,7 +244,6 @@ func (s *ActionDeclaration) Validate() error {
 }
 
 // Represents information about the run of an action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecution
 type ActionExecution struct {
 	_ struct{} `type:"structure"`
 
@@ -293,7 +287,6 @@ func (s ActionExecution) String() string {
 
 // Returns information about an execution of an action, including the action
 // execution ID, and the name, version, and timing of the action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionDetail
 type ActionExecutionDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -336,7 +329,6 @@ func (s ActionExecutionDetail) String() string {
 }
 
 // Filter values for the action execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionFilter
 type ActionExecutionFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -350,7 +342,6 @@ func (s ActionExecutionFilter) String() string {
 }
 
 // Input information used for an action execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionInput
 type ActionExecutionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -378,7 +369,6 @@ func (s ActionExecutionInput) String() string {
 
 // Output details listed for an action execution, such as the action execution
 // result.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionOutput
 type ActionExecutionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -395,7 +385,6 @@ func (s ActionExecutionOutput) String() string {
 }
 
 // Execution result information, such as the external execution ID.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecutionResult
 type ActionExecutionResult struct {
 	_ struct{} `type:"structure"`
 
@@ -416,7 +405,6 @@ func (s ActionExecutionResult) String() string {
 }
 
 // Represents information about the version (or revision) of an action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionRevision
 type ActionRevision struct {
 	_ struct{} `type:"structure"`
 
@@ -473,7 +461,6 @@ func (s *ActionRevision) Validate() error {
 }
 
 // Represents information about the state of an action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionState
 type ActionState struct {
 	_ struct{} `type:"structure"`
 
@@ -501,7 +488,6 @@ func (s ActionState) String() string {
 }
 
 // Returns information about the details of an action type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionType
 type ActionType struct {
 	_ struct{} `type:"structure"`
 
@@ -533,7 +519,6 @@ func (s ActionType) String() string {
 }
 
 // Represents information about an action type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionTypeId
 type ActionTypeId struct {
 	_ struct{} `type:"structure"`
 
@@ -600,7 +585,6 @@ func (s *ActionTypeId) Validate() error {
 }
 
 // Returns information about the settings for an action type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionTypeSettings
 type ActionTypeSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -655,7 +639,6 @@ func (s *ActionTypeSettings) Validate() error {
 }
 
 // Represents information about the result of an approval request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ApprovalResult
 type ApprovalResult struct {
 	_ struct{} `type:"structure"`
 
@@ -694,7 +677,6 @@ func (s *ApprovalResult) Validate() error {
 
 // Represents information about an artifact that will be worked upon by actions
 // in the pipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/Artifact
 type Artifact struct {
 	_ struct{} `type:"structure"`
 
@@ -715,7 +697,6 @@ func (s Artifact) String() string {
 }
 
 // Artifact details for the action execution, such as the artifact location.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ArtifactDetail
 type ArtifactDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -732,7 +713,6 @@ func (s ArtifactDetail) String() string {
 }
 
 // Returns information about the details of an artifact.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ArtifactDetails
 type ArtifactDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -771,7 +751,6 @@ func (s *ArtifactDetails) Validate() error {
 }
 
 // Represents information about the location of an artifact.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ArtifactLocation
 type ArtifactLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -788,7 +767,6 @@ func (s ArtifactLocation) String() string {
 }
 
 // Represents revision details of an artifact.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ArtifactRevision
 type ArtifactRevision struct {
 	_ struct{} `type:"structure"`
 
@@ -825,7 +803,6 @@ func (s ArtifactRevision) String() string {
 }
 
 // The Amazon S3 bucket where artifacts are stored for the pipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ArtifactStore
 type ArtifactStore struct {
 	_ struct{} `type:"structure"`
 
@@ -880,7 +857,6 @@ func (s *ArtifactStore) Validate() error {
 }
 
 // Reserved for future use.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/BlockerDeclaration
 type BlockerDeclaration struct {
 	_ struct{} `type:"structure"`
 
@@ -921,7 +897,6 @@ func (s *BlockerDeclaration) Validate() error {
 }
 
 // Represents information about a current revision.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CurrentRevision
 type CurrentRevision struct {
 	_ struct{} `type:"structure"`
 
@@ -977,7 +952,6 @@ func (s *CurrentRevision) Validate() error {
 
 // Represents information about the key used to encrypt data in the artifact
 // store, such as an AWS Key Management Service (AWS KMS) key.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/EncryptionKey
 type EncryptionKey struct {
 	_ struct{} `type:"structure"`
 
@@ -1020,7 +994,6 @@ func (s *EncryptionKey) Validate() error {
 }
 
 // Represents information about an error in AWS CodePipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ErrorDetails
 type ErrorDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -1038,7 +1011,6 @@ func (s ErrorDetails) String() string {
 
 // The details of the actions taken and results produced on an artifact as it
 // passes through stages in the pipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ExecutionDetails
 type ExecutionDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -1076,7 +1048,6 @@ func (s *ExecutionDetails) Validate() error {
 }
 
 // Represents information about failure details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/FailureDetails
 type FailureDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -1124,7 +1095,6 @@ func (s *FailureDetails) Validate() error {
 
 // Represents information about an artifact to be worked on, such as a test
 // or build artifact.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InputArtifact
 type InputArtifact struct {
 	_ struct{} `type:"structure"`
 
@@ -1163,7 +1133,6 @@ func (s *InputArtifact) Validate() error {
 }
 
 // Represents information about a job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/Job
 type Job struct {
 	_ struct{} `type:"structure"`
 
@@ -1189,7 +1158,6 @@ func (s Job) String() string {
 
 // Represents additional information about a job required for a job worker to
 // complete the job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/JobData
 type JobData struct {
 	_ struct{} `type:"structure"`
 
@@ -1231,7 +1199,6 @@ func (s JobData) String() string {
 }
 
 // Represents information about the details of a job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/JobDetails
 type JobDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -1253,7 +1220,6 @@ func (s JobDetails) String() string {
 
 // The detail returned for each webhook after listing webhooks, such as the
 // webhook URL, the webhook name, and the webhook ARN.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListWebhookItem
 type ListWebhookItem struct {
 	_ struct{} `type:"structure"`
 
@@ -1294,7 +1260,6 @@ func (s ListWebhookItem) String() string {
 }
 
 // Represents information about the output of an action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/OutputArtifact
 type OutputArtifact struct {
 	_ struct{} `type:"structure"`
 
@@ -1339,7 +1304,6 @@ func (s *OutputArtifact) Validate() error {
 // PipelineContext contains pipelineArn and pipelineExecutionId for custom action
 // jobs. The pipelineArn and pipelineExecutionId fields are not populated for
 // ThirdParty action jobs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineContext
 type PipelineContext struct {
 	_ struct{} `type:"structure"`
 
@@ -1366,7 +1330,6 @@ func (s PipelineContext) String() string {
 }
 
 // Represents the structure of actions and stages to be performed in the pipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineDeclaration
 type PipelineDeclaration struct {
 	_ struct{} `type:"structure"`
 
@@ -1457,7 +1420,6 @@ func (s *PipelineDeclaration) Validate() error {
 }
 
 // Represents information about an execution of a pipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineExecution
 type PipelineExecution struct {
 	_ struct{} `type:"structure"`
 
@@ -1493,7 +1455,6 @@ func (s PipelineExecution) String() string {
 }
 
 // Summary information about a pipeline execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineExecutionSummary
 type PipelineExecutionSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1530,7 +1491,6 @@ func (s PipelineExecutionSummary) String() string {
 }
 
 // Information about a pipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineMetadata
 type PipelineMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -1550,7 +1510,6 @@ func (s PipelineMetadata) String() string {
 }
 
 // Returns a summary of a pipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineSummary
 type PipelineSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1573,7 +1532,6 @@ func (s PipelineSummary) String() string {
 }
 
 // The location of the Amazon S3 bucket that contains a revision.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/S3ArtifactLocation
 type S3ArtifactLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -1595,7 +1553,6 @@ func (s S3ArtifactLocation) String() string {
 }
 
 // The Amazon S3 artifact location for an action's artifacts.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/S3Location
 type S3Location struct {
 	_ struct{} `type:"structure"`
 
@@ -1613,7 +1570,6 @@ func (s S3Location) String() string {
 
 // Information about the version (or revision) of a source artifact that initiated
 // a pipeline execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/SourceRevision
 type SourceRevision struct {
 	_ struct{} `type:"structure"`
 
@@ -1644,7 +1600,6 @@ func (s SourceRevision) String() string {
 }
 
 // Represents information about a stage to a job worker.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StageContext
 type StageContext struct {
 	_ struct{} `type:"structure"`
 
@@ -1658,7 +1613,6 @@ func (s StageContext) String() string {
 }
 
 // Represents information about a stage and its definition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StageDeclaration
 type StageDeclaration struct {
 	_ struct{} `type:"structure"`
 
@@ -1717,7 +1671,6 @@ func (s *StageDeclaration) Validate() error {
 }
 
 // Represents information about the run of a stage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StageExecution
 type StageExecution struct {
 	_ struct{} `type:"structure"`
 
@@ -1739,7 +1692,6 @@ func (s StageExecution) String() string {
 }
 
 // Represents information about the state of the stage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StageState
 type StageState struct {
 	_ struct{} `type:"structure"`
 
@@ -1763,7 +1715,6 @@ func (s StageState) String() string {
 }
 
 // A tag is a key/value pair that is used to manage the resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -1806,7 +1757,6 @@ func (s *Tag) Validate() error {
 
 // A response to a PollForThirdPartyJobs request returned by AWS CodePipeline
 // when there is a job to be worked upon by a partner action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ThirdPartyJob
 type ThirdPartyJob struct {
 	_ struct{} `type:"structure"`
 
@@ -1824,7 +1774,6 @@ func (s ThirdPartyJob) String() string {
 }
 
 // Represents information about the job data for a partner action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ThirdPartyJobData
 type ThirdPartyJobData struct {
 	_ struct{} `type:"structure"`
 
@@ -1873,7 +1822,6 @@ func (s ThirdPartyJobData) String() string {
 }
 
 // The details of a job sent in response to a GetThirdPartyJobDetails request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ThirdPartyJobDetails
 type ThirdPartyJobDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -1896,7 +1844,6 @@ func (s ThirdPartyJobDetails) String() string {
 
 // Represents information about the state of transitions between one stage and
 // another stage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/TransitionState
 type TransitionState struct {
 	_ struct{} `type:"structure"`
 
@@ -1920,7 +1867,6 @@ func (s TransitionState) String() string {
 }
 
 // The authentication applied to incoming webhook trigger requests.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/WebhookAuthConfiguration
 type WebhookAuthConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1956,7 +1902,6 @@ func (s *WebhookAuthConfiguration) Validate() error {
 }
 
 // Represents information about a webhook and its definition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/WebhookDefinition
 type WebhookDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -2069,7 +2014,6 @@ func (s *WebhookDefinition) Validate() error {
 
 // The event criteria that specify when a webhook notification is sent to your
 // URL.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/WebhookFilterRule
 type WebhookFilterRule struct {
 	_ struct{} `type:"structure"`
 

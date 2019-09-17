@@ -15,7 +15,6 @@ var _ = awsutil.Prettify
 // An entitlement represents capacity in a product owned by the customer. For
 // example, a customer might own some number of users or seats in an SaaS application
 // or some amount of data capacity in a multi-tenant database.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/entitlement.marketplace-2017-01-11/Entitlement
 type Entitlement struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s Entitlement) String() string {
 
 // The EntitlementValue represents the amount of capacity that the customer
 // is entitled to for the product.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/entitlement.marketplace-2017-01-11/EntitlementValue
 type EntitlementValue struct {
 	_ struct{} `type:"structure"`
 

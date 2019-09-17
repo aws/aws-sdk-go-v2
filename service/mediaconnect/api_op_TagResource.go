@@ -13,7 +13,6 @@ import (
 
 // The tags to add to the resource. Tag keys can have a maximum character length
 // of 128 characters, and tag values can have a maximum length of 256 characters.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/TagResourceRequest
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -75,7 +74,6 @@ func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/TagResourceOutput
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }

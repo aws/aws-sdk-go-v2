@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure used to untag resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UntagResourceRequest
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -78,7 +77,6 @@ func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Response for untag resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UntagResourceResponse
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }

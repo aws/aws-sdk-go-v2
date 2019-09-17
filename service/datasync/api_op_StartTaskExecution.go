@@ -10,7 +10,6 @@ import (
 )
 
 // StartTaskExecutionRequest
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/StartTaskExecutionRequest
 type StartTaskExecutionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -62,7 +61,6 @@ func (s *StartTaskExecutionInput) Validate() error {
 }
 
 // StartTaskExecutionResponse
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/StartTaskExecutionResponse
 type StartTaskExecutionOutput struct {
 	_ struct{} `type:"structure"`
 

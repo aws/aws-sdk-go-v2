@@ -12,7 +12,6 @@ import (
 
 // Removes an association between the Amazon Resource Name (ARN) of an AWS Certificate
 // Manager (ACM) certificate and an AWS Elemental MediaConvert resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DisassociateCertificateRequest
 type DisassociateCertificateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +56,6 @@ func (s DisassociateCertificateInput) MarshalFields(e protocol.FieldEncoder) err
 
 // Successful disassociation of Certificate Manager Amazon Resource Name (ARN)
 // with Mediaconvert returns an OK message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DisassociateCertificateResponse
 type DisassociateCertificateOutput struct {
 	_ struct{} `type:"structure"`
 }

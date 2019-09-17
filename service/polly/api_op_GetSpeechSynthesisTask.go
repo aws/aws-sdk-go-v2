@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetSpeechSynthesisTaskInput
 type GetSpeechSynthesisTaskInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s GetSpeechSynthesisTaskInput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetSpeechSynthesisTaskOutput
 type GetSpeechSynthesisTaskOutput struct {
 	_ struct{} `type:"structure"`
 

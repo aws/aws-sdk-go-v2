@@ -11,7 +11,6 @@ import (
 )
 
 // Contains the inputs for the ConnectDirectory operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ConnectDirectoryRequest
 type ConnectDirectoryInput struct {
 	_ struct{} `type:"structure"`
 
@@ -92,7 +91,6 @@ func (s *ConnectDirectoryInput) Validate() error {
 }
 
 // Contains the results of the ConnectDirectory operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ConnectDirectoryResult
 type ConnectDirectoryOutput struct {
 	_ struct{} `type:"structure"`
 

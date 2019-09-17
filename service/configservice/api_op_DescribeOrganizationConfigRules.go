@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConfigRulesRequest
 type DescribeOrganizationConfigRulesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -25,7 +24,6 @@ func (s DescribeOrganizationConfigRulesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeOrganizationConfigRulesResponse
 type DescribeOrganizationConfigRulesOutput struct {
 	_ struct{} `type:"structure"`
 

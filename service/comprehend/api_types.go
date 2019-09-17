@@ -15,7 +15,6 @@ var _ = awsutil.Prettify
 
 // The result of calling the operation. The operation returns one object for
 // each document that is successfully processed by the operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectDominantLanguageItemResult
 type BatchDetectDominantLanguageItemResult struct {
 	_ struct{} `type:"structure"`
 
@@ -34,7 +33,6 @@ func (s BatchDetectDominantLanguageItemResult) String() string {
 
 // The result of calling the operation. The operation returns one object for
 // each document that is successfully processed by the operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectEntitiesItemResult
 type BatchDetectEntitiesItemResult struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +50,6 @@ func (s BatchDetectEntitiesItemResult) String() string {
 
 // The result of calling the operation. The operation returns one object for
 // each document that is successfully processed by the operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectKeyPhrasesItemResult
 type BatchDetectKeyPhrasesItemResult struct {
 	_ struct{} `type:"structure"`
 
@@ -70,7 +67,6 @@ func (s BatchDetectKeyPhrasesItemResult) String() string {
 
 // The result of calling the operation. The operation returns one object for
 // each document that is successfully processed by the operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectSentimentItemResult
 type BatchDetectSentimentItemResult struct {
 	_ struct{} `type:"structure"`
 
@@ -92,7 +88,6 @@ func (s BatchDetectSentimentItemResult) String() string {
 
 // The result of calling the operation. The operation returns one object that
 // is successfully processed by the operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectSyntaxItemResult
 type BatchDetectSyntaxItemResult struct {
 	_ struct{} `type:"structure"`
 
@@ -111,7 +106,6 @@ func (s BatchDetectSyntaxItemResult) String() string {
 // Describes an error that occurred while processing a document in a batch.
 // The operation returns on BatchItemError object for each document that contained
 // an error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchItemError
 type BatchItemError struct {
 	_ struct{} `type:"structure"`
 
@@ -132,7 +126,6 @@ func (s BatchItemError) String() string {
 
 // Describes the result metrics for the test data associated with an documentation
 // classifier.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ClassifierEvaluationMetrics
 type ClassifierEvaluationMetrics struct {
 	_ struct{} `type:"structure"`
 
@@ -163,7 +156,6 @@ func (s ClassifierEvaluationMetrics) String() string {
 }
 
 // Provides information about a document classifier.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ClassifierMetadata
 type ClassifierMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -191,7 +183,6 @@ func (s ClassifierMetadata) String() string {
 // Provides information for filtering a list of document classification jobs.
 // For more information, see the operation. You can provide only one filter
 // parameter in each request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassificationJobFilter
 type DocumentClassificationJobFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -232,7 +223,6 @@ func (s *DocumentClassificationJobFilter) Validate() error {
 }
 
 // Provides information about a document classification job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassificationJobProperties
 type DocumentClassificationJobProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -294,7 +284,6 @@ func (s DocumentClassificationJobProperties) String() string {
 // Provides information for filtering a list of document classifiers. You can
 // only specify one filtering parameter in a request. For more information,
 // see the operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierFilter
 type DocumentClassifierFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -320,7 +309,6 @@ func (s DocumentClassifierFilter) String() string {
 // The input properties for training a document classifier.
 //
 // For more information on how the input file is formatted, see how-document-classification-training-data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierInputDataConfig
 type DocumentClassifierInputDataConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -356,7 +344,6 @@ func (s *DocumentClassifierInputDataConfig) Validate() error {
 }
 
 // Provides output results configuration parameters for custom classifier jobs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierOutputDataConfig
 type DocumentClassifierOutputDataConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -392,7 +379,6 @@ func (s DocumentClassifierOutputDataConfig) String() string {
 }
 
 // Provides information about a document classifier.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierProperties
 type DocumentClassifierProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -465,7 +451,6 @@ func (s DocumentClassifierProperties) String() string {
 
 // Returns the code for the dominant language in the input text and the level
 // of confidence that Amazon Comprehend has in the accuracy of the detection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DominantLanguage
 type DominantLanguage struct {
 	_ struct{} `type:"structure"`
 
@@ -486,7 +471,6 @@ func (s DominantLanguage) String() string {
 
 // Provides information for filtering a list of dominant language detection
 // jobs. For more information, see the operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DominantLanguageDetectionJobFilter
 type DominantLanguageDetectionJobFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -527,7 +511,6 @@ func (s *DominantLanguageDetectionJobFilter) Validate() error {
 }
 
 // Provides information about a dominant language detection job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DominantLanguageDetectionJobProperties
 type DominantLanguageDetectionJobProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -585,7 +568,6 @@ func (s DominantLanguageDetectionJobProperties) String() string {
 
 // Provides information for filtering a list of dominant language detection
 // jobs. For more information, see the operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntitiesDetectionJobFilter
 type EntitiesDetectionJobFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -626,7 +608,6 @@ func (s *EntitiesDetectionJobFilter) Validate() error {
 }
 
 // Provides information about an entities detection job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntitiesDetectionJobProperties
 type EntitiesDetectionJobProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -689,7 +670,6 @@ func (s EntitiesDetectionJobProperties) String() string {
 }
 
 // Provides information about an entity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/Entity
 type Entity struct {
 	_ struct{} `type:"structure"`
 
@@ -723,7 +703,6 @@ func (s Entity) String() string {
 }
 
 // Describes the annotations associated with a entity recognizer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerAnnotations
 type EntityRecognizerAnnotations struct {
 	_ struct{} `type:"structure"`
 
@@ -755,7 +734,6 @@ func (s *EntityRecognizerAnnotations) Validate() error {
 }
 
 // Describes the training documents submitted with an entity recognizer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerDocuments
 type EntityRecognizerDocuments struct {
 	_ struct{} `type:"structure"`
 
@@ -787,7 +765,6 @@ func (s *EntityRecognizerDocuments) Validate() error {
 }
 
 // Describes the entity recognizer submitted with an entity recognizer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerEntityList
 type EntityRecognizerEntityList struct {
 	_ struct{} `type:"structure"`
 
@@ -818,7 +795,6 @@ func (s *EntityRecognizerEntityList) Validate() error {
 }
 
 // Detailed information about the accuracy of an entity recognizer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerEvaluationMetrics
 type EntityRecognizerEvaluationMetrics struct {
 	_ struct{} `type:"structure"`
 
@@ -846,7 +822,6 @@ func (s EntityRecognizerEvaluationMetrics) String() string {
 // Provides information for filtering a list of entity recognizers. You can
 // only specify one filtering parameter in a request. For more information,
 // see the operation./>
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerFilter
 type EntityRecognizerFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -870,7 +845,6 @@ func (s EntityRecognizerFilter) String() string {
 }
 
 // Specifies the format and location of the input data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerInputDataConfig
 type EntityRecognizerInputDataConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -938,7 +912,6 @@ func (s *EntityRecognizerInputDataConfig) Validate() error {
 }
 
 // Detailed information about an entity recognizer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerMetadata
 type EntityRecognizerMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -964,7 +937,6 @@ func (s EntityRecognizerMetadata) String() string {
 
 // Individual item from the list of entity types in the metadata of an entity
 // recognizer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerMetadataEntityTypesListItem
 type EntityRecognizerMetadataEntityTypesListItem struct {
 	_ struct{} `type:"structure"`
 
@@ -987,7 +959,6 @@ func (s EntityRecognizerMetadataEntityTypesListItem) String() string {
 }
 
 // Describes information about an entity recognizer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerProperties
 type EntityRecognizerProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -1049,7 +1020,6 @@ func (s EntityRecognizerProperties) String() string {
 
 // Detailed information about the accuracy of an entity recognizer for a specific
 // entity type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityTypesEvaluationMetrics
 type EntityTypesEvaluationMetrics struct {
 	_ struct{} `type:"structure"`
 
@@ -1076,7 +1046,6 @@ func (s EntityTypesEvaluationMetrics) String() string {
 }
 
 // Information about an individual item on a list of entity types.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityTypesListItem
 type EntityTypesListItem struct {
 	_ struct{} `type:"structure"`
 
@@ -1106,7 +1075,6 @@ func (s *EntityTypesListItem) Validate() error {
 }
 
 // The input properties for a topic detection job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/InputDataConfig
 type InputDataConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1153,7 +1121,6 @@ func (s *InputDataConfig) Validate() error {
 }
 
 // Describes a key noun phrase.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/KeyPhrase
 type KeyPhrase struct {
 	_ struct{} `type:"structure"`
 
@@ -1185,7 +1152,6 @@ func (s KeyPhrase) String() string {
 
 // Provides information for filtering a list of dominant language detection
 // jobs. For more information, see the operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/KeyPhrasesDetectionJobFilter
 type KeyPhrasesDetectionJobFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -1226,7 +1192,6 @@ func (s *KeyPhrasesDetectionJobFilter) Validate() error {
 }
 
 // Provides information about a key phrases detection job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/KeyPhrasesDetectionJobProperties
 type KeyPhrasesDetectionJobProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -1286,7 +1251,6 @@ func (s KeyPhrasesDetectionJobProperties) String() string {
 }
 
 // Provides configuration parameters for the output of topic detection jobs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/OutputDataConfig
 type OutputDataConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1341,7 +1305,6 @@ func (s *OutputDataConfig) Validate() error {
 // that Amazon Comprehend has that the part of speech was correctly identified.
 // For more information about the parts of speech that Amazon Comprehend can
 // identify, see how-syntax.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/PartOfSpeechTag
 type PartOfSpeechTag struct {
 	_ struct{} `type:"structure"`
 
@@ -1360,7 +1323,6 @@ func (s PartOfSpeechTag) String() string {
 
 // Provides information for filtering a list of dominant language detection
 // jobs. For more information, see the operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/SentimentDetectionJobFilter
 type SentimentDetectionJobFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -1401,7 +1363,6 @@ func (s *SentimentDetectionJobFilter) Validate() error {
 }
 
 // Provides information about a sentiment detection job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/SentimentDetectionJobProperties
 type SentimentDetectionJobProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -1462,7 +1423,6 @@ func (s SentimentDetectionJobProperties) String() string {
 
 // Describes the level of confidence that Amazon Comprehend has in the accuracy
 // of its detection of sentiments.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/SentimentScore
 type SentimentScore struct {
 	_ struct{} `type:"structure"`
 
@@ -1490,7 +1450,6 @@ func (s SentimentScore) String() string {
 
 // Represents a work in the input text that was recognized and assigned a part
 // of speech. There is one syntax token record for each word in the source text.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/SyntaxToken
 type SyntaxToken struct {
 	_ struct{} `type:"structure"`
 
@@ -1522,7 +1481,6 @@ func (s SyntaxToken) String() string {
 // A key-value pair that adds as a metadata to a resource used by Amazon Comprehend.
 // For example, a tag with the key-value pair ‘Department’:’Sales’ might
 // be added to a resource to indicate its use by a particular department.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -1565,7 +1523,6 @@ func (s *Tag) Validate() error {
 
 // Provides information for filtering topic detection jobs. For more information,
 // see .
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TopicsDetectionJobFilter
 type TopicsDetectionJobFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -1605,7 +1562,6 @@ func (s *TopicsDetectionJobFilter) Validate() error {
 }
 
 // Provides information about a topic detection job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TopicsDetectionJobProperties
 type TopicsDetectionJobProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -1668,7 +1624,6 @@ func (s TopicsDetectionJobProperties) String() string {
 // Configuration parameters for an optional private Virtual Private Cloud (VPC)
 // containing the resources you are using for the job. For For more information,
 // see Amazon VPC (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/VpcConfig
 type VpcConfig struct {
 	_ struct{} `type:"structure"`
 

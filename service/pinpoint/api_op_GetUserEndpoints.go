@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetUserEndpointsRequest
 type GetUserEndpointsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -63,7 +62,6 @@ func (s GetUserEndpointsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetUserEndpointsResponse
 type GetUserEndpointsOutput struct {
 	_ struct{} `type:"structure" payload:"EndpointsResponse"`
 

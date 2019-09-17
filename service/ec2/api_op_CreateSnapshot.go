@@ -11,7 +11,6 @@ import (
 )
 
 // Contains the parameters for CreateSnapshot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSnapshotRequest
 type CreateSnapshotInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s *CreateSnapshotInput) Validate() error {
 }
 
 // Describes a snapshot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Snapshot
 type CreateSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 

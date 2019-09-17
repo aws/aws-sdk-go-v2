@@ -12,7 +12,6 @@ import (
 
 // A request to list all of the predictive inbox placement tests that you've
 // performed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListDeliverabilityTestReportsRequest
 type ListDeliverabilityTestReportsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s ListDeliverabilityTestReportsInput) MarshalFields(e protocol.FieldEncode
 
 // A list of the predictive inbox placement test reports that are available
 // for your account, regardless of whether or not those tests are complete.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListDeliverabilityTestReportsResponse
 type ListDeliverabilityTestReportsOutput struct {
 	_ struct{} `type:"structure"`
 

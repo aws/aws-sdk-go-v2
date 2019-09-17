@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StopContactRequest
 type StopContactInput struct {
 	_ struct{} `type:"structure"`
 
@@ -77,7 +76,6 @@ func (s StopContactInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StopContactResponse
 type StopContactOutput struct {
 	_ struct{} `type:"structure"`
 }

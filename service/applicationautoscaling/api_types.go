@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Represents a CloudWatch alarm associated with a scaling policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/Alarm
 type Alarm struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s Alarm) String() string {
 //    when capacity increases.
 //
 // For more information about CloudWatch, see Amazon CloudWatch Concepts (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/CustomizedMetricSpecification
 type CustomizedMetricSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -114,7 +112,6 @@ func (s *CustomizedMetricSpecification) Validate() error {
 }
 
 // Describes the dimension names and values associated with a metric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/MetricDimension
 type MetricDimension struct {
 	_ struct{} `type:"structure"`
 
@@ -154,7 +151,6 @@ func (s *MetricDimension) Validate() error {
 
 // Represents a predefined metric for a target tracking scaling policy to use
 // with Application Auto Scaling.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/PredefinedMetricSpecification
 type PredefinedMetricSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -201,7 +197,6 @@ func (s *PredefinedMetricSpecification) Validate() error {
 }
 
 // Represents a scalable target.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/ScalableTarget
 type ScalableTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -315,7 +310,6 @@ func (s ScalableTarget) String() string {
 }
 
 // Represents the minimum and maximum capacity for a scheduled action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/ScalableTargetAction
 type ScalableTargetAction struct {
 	_ struct{} `type:"structure"`
 
@@ -332,7 +326,6 @@ func (s ScalableTargetAction) String() string {
 }
 
 // Represents a scaling activity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/ScalingActivity
 type ScalingActivity struct {
 	_ struct{} `type:"structure"`
 
@@ -459,7 +452,6 @@ func (s ScalingActivity) String() string {
 }
 
 // Represents a scaling policy to use with Application Auto Scaling.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/ScalingPolicy
 type ScalingPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -581,7 +573,6 @@ func (s ScalingPolicy) String() string {
 }
 
 // Represents a scheduled action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/ScheduledAction
 type ScheduledAction struct {
 	_ struct{} `type:"structure"`
 
@@ -746,7 +737,6 @@ func (s ScheduledAction) String() string {
 //    with a null upper bound.
 //
 //    * The upper and lower bound can't be null in the same step adjustment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/StepAdjustment
 type StepAdjustment struct {
 	_ struct{} `type:"structure"`
 
@@ -796,7 +786,6 @@ func (s *StepAdjustment) Validate() error {
 
 // Represents a step scaling policy configuration to use with Application Auto
 // Scaling.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/StepScalingPolicyConfiguration
 type StepScalingPolicyConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -872,7 +861,6 @@ func (s *StepScalingPolicyConfiguration) Validate() error {
 
 // Represents a target tracking scaling policy configuration to use with Application
 // Auto Scaling.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/TargetTrackingScalingPolicyConfiguration
 type TargetTrackingScalingPolicyConfiguration struct {
 	_ struct{} `type:"structure"`
 

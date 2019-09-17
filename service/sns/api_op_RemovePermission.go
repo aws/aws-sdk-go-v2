@@ -12,7 +12,6 @@ import (
 )
 
 // Input for RemovePermission action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/RemovePermissionInput
 type RemovePermissionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s *RemovePermissionInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/RemovePermissionOutput
 type RemovePermissionOutput struct {
 	_ struct{} `type:"structure"`
 }

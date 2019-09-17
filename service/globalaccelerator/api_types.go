@@ -15,7 +15,6 @@ var _ = awsutil.Prettify
 // An accelerator is a complex type that includes one or more listeners that
 // process inbound connections and then direct traffic to one or more endpoint
 // groups, each of which includes endpoints, such as load balancers.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/Accelerator
 type Accelerator struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s Accelerator) String() string {
 }
 
 // Attributes of an accelerator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AcceleratorAttributes
 type AcceleratorAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -84,7 +82,6 @@ func (s AcceleratorAttributes) String() string {
 }
 
 // A complex type for endpoints.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointConfiguration
 type EndpointConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -112,7 +109,6 @@ func (s EndpointConfiguration) String() string {
 
 // A complex type for an endpoint. Each endpoint group can include one or more
 // endpoints, such as load balancers.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointDescription
 type EndpointDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -165,7 +161,6 @@ func (s EndpointDescription) String() string {
 
 // A complex type for the endpoint group. An AWS Region can have only one endpoint
 // group for a specific listener.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointGroup
 type EndpointGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -221,7 +216,6 @@ func (s EndpointGroup) String() string {
 }
 
 // A complex type for the set of IP addresses for an accelerator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/IpSet
 type IpSet struct {
 	_ struct{} `type:"structure"`
 
@@ -239,7 +233,6 @@ func (s IpSet) String() string {
 }
 
 // A complex type for a listener.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/Listener
 type Listener struct {
 	_ struct{} `type:"structure"`
 
@@ -281,7 +274,6 @@ func (s Listener) String() string {
 }
 
 // A complex type for a range of ports for a listener.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/PortRange
 type PortRange struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RestorePhoneNumberRequest
 type RestorePhoneNumberInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s RestorePhoneNumberInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RestorePhoneNumberResponse
 type RestorePhoneNumberOutput struct {
 	_ struct{} `type:"structure"`
 

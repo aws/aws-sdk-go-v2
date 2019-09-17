@@ -10,7 +10,6 @@ import (
 )
 
 // SetSMBGuestPasswordInput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetSMBGuestPasswordInput
 type SetSMBGuestPasswordInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s *SetSMBGuestPasswordInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetSMBGuestPasswordOutput
 type SetSMBGuestPasswordOutput struct {
 	_ struct{} `type:"structure"`
 

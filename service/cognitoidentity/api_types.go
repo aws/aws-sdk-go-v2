@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // A provider representing an Amazon Cognito user pool and its client ID.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/CognitoIdentityProvider
 type CognitoIdentityProvider struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s *CognitoIdentityProvider) Validate() error {
 }
 
 // Credentials for the provided identity ID.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/Credentials
 type Credentials struct {
 	_ struct{} `type:"structure"`
 
@@ -82,7 +80,6 @@ func (s Credentials) String() string {
 }
 
 // A description of the identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/IdentityDescription
 type IdentityDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -105,7 +102,6 @@ func (s IdentityDescription) String() string {
 }
 
 // A description of the identity pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/IdentityPoolShortDescription
 type IdentityPoolShortDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -123,7 +119,6 @@ func (s IdentityPoolShortDescription) String() string {
 
 // A rule that maps a claim name, a claim value, and a match type to a role
 // ARN.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/MappingRule
 type MappingRule struct {
 	_ struct{} `type:"structure"`
 
@@ -190,7 +185,6 @@ func (s *MappingRule) Validate() error {
 }
 
 // A role mapping.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/RoleMapping
 type RoleMapping struct {
 	_ struct{} `type:"structure"`
 
@@ -238,7 +232,6 @@ func (s *RoleMapping) Validate() error {
 }
 
 // A container for rules.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/RulesConfigurationType
 type RulesConfigurationType struct {
 	_ struct{} `type:"structure"`
 
@@ -281,7 +274,6 @@ func (s *RulesConfigurationType) Validate() error {
 
 // An array of UnprocessedIdentityId objects, each of which contains an ErrorCode
 // and IdentityId.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UnprocessedIdentityId
 type UnprocessedIdentityId struct {
 	_ struct{} `type:"structure"`
 

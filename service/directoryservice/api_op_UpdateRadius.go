@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the inputs for the UpdateRadius operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateRadiusRequest
 type UpdateRadiusInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s *UpdateRadiusInput) Validate() error {
 }
 
 // Contains the results of the UpdateRadius operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateRadiusResult
 type UpdateRadiusOutput struct {
 	_ struct{} `type:"structure"`
 }

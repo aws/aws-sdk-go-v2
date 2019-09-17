@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartContinuousExportRequest
 type StartContinuousExportInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -20,7 +19,6 @@ func (s StartContinuousExportInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartContinuousExportResponse
 type StartContinuousExportOutput struct {
 	_ struct{} `type:"structure"`
 

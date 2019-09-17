@@ -12,7 +12,6 @@ import (
 
 // A complex type that contains information about the traffic policy that you
 // want to update the comment for.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateTrafficPolicyCommentRequest
 type UpdateTrafficPolicyCommentInput struct {
 	_ struct{} `locationName:"UpdateTrafficPolicyCommentRequest" type:"structure" xmlURI:"https://route53.amazonaws.com/doc/2013-04-01/"`
 
@@ -95,7 +94,6 @@ func (s UpdateTrafficPolicyCommentInput) MarshalFields(e protocol.FieldEncoder) 
 }
 
 // A complex type that contains the response information for the traffic policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateTrafficPolicyCommentResponse
 type UpdateTrafficPolicyCommentOutput struct {
 	_ struct{} `type:"structure"`
 

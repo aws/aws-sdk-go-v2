@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListBulkDeploymentsRequest
 type ListBulkDeploymentsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s ListBulkDeploymentsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListBulkDeploymentsResponse
 type ListBulkDeploymentsOutput struct {
 	_ struct{} `type:"structure"`
 

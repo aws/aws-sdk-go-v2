@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/ListFragmentsInput
 type ListFragmentsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -97,7 +96,6 @@ func (s ListFragmentsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/ListFragmentsOutput
 type ListFragmentsOutput struct {
 	_ struct{} `type:"structure"`
 

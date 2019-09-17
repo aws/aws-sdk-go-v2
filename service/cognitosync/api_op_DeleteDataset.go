@@ -11,7 +11,6 @@ import (
 )
 
 // A request to delete the specific dataset.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DeleteDatasetRequest
 type DeleteDatasetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -96,7 +95,6 @@ func (s DeleteDatasetInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Response to a successful DeleteDataset request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DeleteDatasetResponse
 type DeleteDatasetOutput struct {
 	_ struct{} `type:"structure"`
 

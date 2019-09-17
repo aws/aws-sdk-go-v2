@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for CopySnapshot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopySnapshotRequest
 type CopySnapshotInput struct {
 	_ struct{} `type:"structure"`
 
@@ -111,7 +110,6 @@ func (s *CopySnapshotInput) Validate() error {
 }
 
 // Contains the output of CopySnapshot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopySnapshotResult
 type CopySnapshotOutput struct {
 	_ struct{} `type:"structure"`
 

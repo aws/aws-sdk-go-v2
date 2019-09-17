@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input for ListStreams.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreamsInput
 type ListStreamsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *ListStreamsInput) Validate() error {
 }
 
 // Represents the output for ListStreams.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreamsOutput
 type ListStreamsOutput struct {
 	_ struct{} `type:"structure"`
 

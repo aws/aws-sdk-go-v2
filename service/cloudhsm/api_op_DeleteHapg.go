@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the inputs for the DeleteHapg action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHapgRequest
 type DeleteHapgInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *DeleteHapgInput) Validate() error {
 }
 
 // Contains the output of the DeleteHapg action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHapgResponse
 type DeleteHapgOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for DescribeScheduledInstanceAvailability.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeScheduledInstanceAvailabilityRequest
 type DescribeScheduledInstanceAvailabilityInput struct {
 	_ struct{} `type:"structure"`
 
@@ -92,7 +91,6 @@ func (s *DescribeScheduledInstanceAvailabilityInput) Validate() error {
 }
 
 // Contains the output of DescribeScheduledInstanceAvailability.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeScheduledInstanceAvailabilityResult
 type DescribeScheduledInstanceAvailabilityOutput struct {
 	_ struct{} `type:"structure"`
 

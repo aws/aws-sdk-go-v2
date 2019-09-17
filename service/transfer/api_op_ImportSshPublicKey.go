@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ImportSshPublicKeyRequest
 type ImportSshPublicKeyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s *ImportSshPublicKeyInput) Validate() error {
 // This response identifies the user, the server they belong to, and the identifier
 // of the SSH public key associated with that user. A user can have more than
 // one key on each server that they are associated with.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ImportSshPublicKeyResponse
 type ImportSshPublicKeyOutput struct {
 	_ struct{} `type:"structure"`
 

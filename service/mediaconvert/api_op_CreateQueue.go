@@ -16,7 +16,6 @@ import (
 // under reservationPlanSettings. When you create a reserved queue, you enter
 // into a 12-month commitment to purchase the RTS that you specify. You can't
 // cancel this commitment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateQueueRequest
 type CreateQueueInput struct {
 	_ struct{} `type:"structure"`
 
@@ -123,7 +122,6 @@ func (s CreateQueueInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // Successful create queue requests return the name of the queue that you just
 // created and information about it.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateQueueResponse
 type CreateQueueOutput struct {
 	_ struct{} `type:"structure"`
 

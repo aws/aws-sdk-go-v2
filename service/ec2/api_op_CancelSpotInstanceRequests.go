@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for CancelSpotInstanceRequests.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotInstanceRequestsRequest
 type CancelSpotInstanceRequestsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +45,6 @@ func (s *CancelSpotInstanceRequestsInput) Validate() error {
 }
 
 // Contains the output of CancelSpotInstanceRequests.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotInstanceRequestsResult
 type CancelSpotInstanceRequestsOutput struct {
 	_ struct{} `type:"structure"`
 

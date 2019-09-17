@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/UpdateS3ResourcesRequest
 type UpdateS3ResourcesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s *UpdateS3ResourcesInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/UpdateS3ResourcesResult
 type UpdateS3ResourcesOutput struct {
 	_ struct{} `type:"structure"`
 

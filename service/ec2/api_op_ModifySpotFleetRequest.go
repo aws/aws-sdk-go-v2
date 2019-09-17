@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for ModifySpotFleetRequest.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySpotFleetRequestRequest
 type ModifySpotFleetRequestInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s *ModifySpotFleetRequestInput) Validate() error {
 }
 
 // Contains the output of ModifySpotFleetRequest.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySpotFleetRequestResponse
 type ModifySpotFleetRequestOutput struct {
 	_ struct{} `type:"structure"`
 

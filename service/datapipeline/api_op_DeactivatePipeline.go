@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for DeactivatePipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DeactivatePipelineInput
 type DeactivatePipelineInput struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +47,6 @@ func (s *DeactivatePipelineInput) Validate() error {
 }
 
 // Contains the output of DeactivatePipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DeactivatePipelineOutput
 type DeactivatePipelineOutput struct {
 	_ struct{} `type:"structure"`
 }

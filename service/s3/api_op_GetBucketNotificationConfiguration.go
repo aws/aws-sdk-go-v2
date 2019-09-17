@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketNotificationConfigurationRequest
 type GetBucketNotificationConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +59,6 @@ func (s GetBucketNotificationConfigurationInput) MarshalFields(e protocol.FieldE
 
 // A container for specifying the notification configuration of the bucket.
 // If this element is empty, notifications are turned off for the bucket.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfiguration
 type GetBucketNotificationConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 

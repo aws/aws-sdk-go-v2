@@ -11,7 +11,6 @@ import (
 )
 
 // Contains the parameters for DetachVolume.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachVolumeRequest
 type DetachVolumeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -62,7 +61,6 @@ func (s *DetachVolumeInput) Validate() error {
 }
 
 // Describes volume attachment details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeAttachment
 type DetachVolumeOutput struct {
 	_ struct{} `type:"structure"`
 

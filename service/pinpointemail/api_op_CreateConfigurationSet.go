@@ -12,7 +12,6 @@ import (
 )
 
 // A request to create a configuration set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateConfigurationSetRequest
 type CreateConfigurationSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -124,7 +123,6 @@ func (s CreateConfigurationSetInput) MarshalFields(e protocol.FieldEncoder) erro
 
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateConfigurationSetResponse
 type CreateConfigurationSetOutput struct {
 	_ struct{} `type:"structure"`
 }

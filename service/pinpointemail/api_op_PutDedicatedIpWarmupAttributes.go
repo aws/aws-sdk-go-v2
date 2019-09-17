@@ -13,7 +13,6 @@ import (
 // A request to change the warm-up attributes for a dedicated IP address. This
 // operation is useful when you want to resume the warm-up process for an existing
 // IP address.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutDedicatedIpWarmupAttributesRequest
 type PutDedicatedIpWarmupAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -72,7 +71,6 @@ func (s PutDedicatedIpWarmupAttributesInput) MarshalFields(e protocol.FieldEncod
 
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutDedicatedIpWarmupAttributesResponse
 type PutDedicatedIpWarmupAttributesOutput struct {
 	_ struct{} `type:"structure"`
 }

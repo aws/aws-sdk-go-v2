@@ -10,7 +10,6 @@ import (
 )
 
 // UpdateTaskResponse
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateTaskRequest
 type UpdateTaskInput struct {
 	_ struct{} `type:"structure"`
 
@@ -70,7 +69,6 @@ func (s *UpdateTaskInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateTaskResponse
 type UpdateTaskOutput struct {
 	_ struct{} `type:"structure"`
 }

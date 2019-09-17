@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Contains information about an alias.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/AliasListEntry
 type AliasListEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -34,7 +33,6 @@ func (s AliasListEntry) String() string {
 
 // Contains information about each custom key store in the custom key store
 // list.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CustomKeyStoresListEntry
 type CustomKeyStoresListEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -140,7 +138,6 @@ func (s CustomKeyStoresListEntry) String() string {
 // kms:EncryptionContext: and kms:EncryptionContextKeys conditions in an IAM
 // or key policy. For details, see kms:EncryptionContext: (https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-context)
 // in the AWS Key Management Service Developer Guide .
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GrantConstraints
 type GrantConstraints struct {
 	_ struct{} `type:"structure"`
 
@@ -164,7 +161,6 @@ func (s GrantConstraints) String() string {
 }
 
 // Contains information about an entry in a list of grants.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GrantListEntry
 type GrantListEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -205,7 +201,6 @@ func (s GrantListEntry) String() string {
 }
 
 // Contains information about each entry in the key list.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/KeyListEntry
 type KeyListEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -225,7 +220,6 @@ func (s KeyListEntry) String() string {
 //
 // This data type is used as a response element for the CreateKey and DescribeKey
 // operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/KeyMetadata
 type KeyMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -315,7 +309,6 @@ func (s KeyMetadata) String() string {
 // For information about the rules that apply to tag keys and tag values, see
 // User-Defined Tag Restrictions (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)
 // in the AWS Billing and Cost Management User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 

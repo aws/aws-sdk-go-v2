@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the inputs for the GetSnapshotLimits operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetSnapshotLimitsRequest
 type GetSnapshotLimitsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *GetSnapshotLimitsInput) Validate() error {
 }
 
 // Contains the results of the GetSnapshotLimits operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetSnapshotLimitsResult
 type GetSnapshotLimitsOutput struct {
 	_ struct{} `type:"structure"`
 

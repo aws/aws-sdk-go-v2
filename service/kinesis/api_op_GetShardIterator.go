@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the input for GetShardIterator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetShardIteratorInput
 type GetShardIteratorInput struct {
 	_ struct{} `type:"structure"`
 
@@ -95,7 +94,6 @@ func (s *GetShardIteratorInput) Validate() error {
 }
 
 // Represents the output for GetShardIterator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetShardIteratorOutput
 type GetShardIteratorOutput struct {
 	_ struct{} `type:"structure"`
 

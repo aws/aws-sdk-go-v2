@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure for the list webhooks request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListWebhooksRequest
 type ListWebhooksInput struct {
 	_ struct{} `type:"structure"`
 
@@ -80,7 +79,6 @@ func (s ListWebhooksInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure for the list webhooks request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListWebhooksResult
 type ListWebhooksOutput struct {
 	_ struct{} `type:"structure"`
 

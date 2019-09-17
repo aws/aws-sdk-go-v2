@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/AssociateMemberAccountRequest
 type AssociateMemberAccountInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *AssociateMemberAccountInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/AssociateMemberAccountOutput
 type AssociateMemberAccountOutput struct {
 	_ struct{} `type:"structure"`
 }

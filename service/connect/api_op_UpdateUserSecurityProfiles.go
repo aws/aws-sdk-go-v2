@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserSecurityProfilesRequest
 type UpdateUserSecurityProfilesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -99,7 +98,6 @@ func (s UpdateUserSecurityProfilesInput) MarshalFields(e protocol.FieldEncoder) 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserSecurityProfilesOutput
 type UpdateUserSecurityProfilesOutput struct {
 	_ struct{} `type:"structure"`
 }

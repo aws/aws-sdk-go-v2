@@ -21,7 +21,6 @@ var _ = awsutil.Prettify
 // control the audio quality with the setting VBR quality (vbrQuality). In CBR
 // mode, you use the setting Bitrate (bitrate). Defaults and valid values depend
 // on the rate control mode.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AacSettings
 type AacSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -156,7 +155,6 @@ func (s AacSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to
 // the value AC3.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Ac3Settings
 type Ac3Settings struct {
 	_ struct{} `type:"structure"`
 
@@ -274,7 +272,6 @@ func (s Ac3Settings) MarshalFields(e protocol.FieldEncoder) error {
 // complex content. Outputs that use this feature incur pro-tier pricing. For
 // information about feature limitations, see the AWS Elemental MediaConvert
 // User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AccelerationSettings
 type AccelerationSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -315,7 +312,6 @@ func (s AccelerationSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to
 // the value AIFF.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AiffSettings
 type AiffSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -380,7 +376,6 @@ func (s AiffSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for ancillary captions source.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AncillarySourceSettings
 type AncillarySourceSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -425,7 +420,6 @@ func (s AncillarySourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 // following lists the codec enum, settings object pairs. * AAC, AacSettings
 // * MP2, Mp2Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings
 // * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AudioCodecSettings
 type AudioCodecSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -570,7 +564,6 @@ func (s AudioCodecSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Description of audio output
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AudioDescription
 type AudioDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -741,7 +734,6 @@ func (s AudioDescription) MarshalFields(e protocol.FieldEncoder) error {
 
 // Advanced audio normalization settings. Ignore these settings unless you need
 // to comply with a loudness standard.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AudioNormalizationSettings
 type AudioNormalizationSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -841,7 +833,6 @@ func (s AudioNormalizationSettings) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // Selector for Audio
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AudioSelector
 type AudioSelector struct {
 	_ struct{} `type:"structure"`
 
@@ -1000,7 +991,6 @@ func (s AudioSelector) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Group of Audio Selectors
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AudioSelectorGroup
 type AudioSelectorGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -1034,7 +1024,6 @@ func (s AudioSelectorGroup) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for Avail Blanking
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AvailBlanking
 type AvailBlanking struct {
 	_ struct{} `type:"structure"`
 
@@ -1073,7 +1062,6 @@ func (s AvailBlanking) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Burn-In Destination Settings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/BurninDestinationSettings
 type BurninDestinationSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -1310,7 +1298,6 @@ func (s BurninDestinationSettings) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // Description of Caption output
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CaptionDescription
 type CaptionDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1409,7 +1396,6 @@ func (s CaptionDescription) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Caption Description for preset
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CaptionDescriptionPreset
 type CaptionDescriptionPreset struct {
 	_ struct{} `type:"structure"`
 
@@ -1494,7 +1480,6 @@ func (s CaptionDescriptionPreset) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specific settings required by destination type. Note that burnin_destination_settings
 // are not available if the source of the caption data is Embedded or Teletext.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CaptionDestinationSettings
 type CaptionDestinationSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -1610,7 +1595,6 @@ func (s CaptionDestinationSettings) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // Set up captions in your outputs by first selecting them from your input here.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CaptionSelector
 type CaptionSelector struct {
 	_ struct{} `type:"structure"`
 
@@ -1684,7 +1668,6 @@ func (s CaptionSelector) MarshalFields(e protocol.FieldEncoder) error {
 
 // Source settings (SourceSettings) contains the group of settings for captions
 // in the input.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CaptionSourceSettings
 type CaptionSourceSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -1808,7 +1791,6 @@ func (s CaptionSourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 // remixing value for each channel. Units are in dB. Acceptable values are within
 // the range from -60 (mute) through 6. A setting of 0 passes the input channel
 // unchanged to the output channel (no attenuation or amplification).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ChannelMapping
 type ChannelMapping struct {
 	_ struct{} `type:"structure"`
 
@@ -1839,7 +1821,6 @@ func (s ChannelMapping) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for CMAF encryption
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CmafEncryptionSettings
 type CmafEncryptionSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -1930,7 +1911,6 @@ func (s CmafEncryptionSettings) MarshalFields(e protocol.FieldEncoder) error {
 // Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
 // CMAF_GROUP_SETTINGS. Each output in a CMAF Output Group may only contain
 // a single video, audio, or caption output.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CmafGroupSettings
 type CmafGroupSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -2147,7 +2127,6 @@ func (s CmafGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for color correction.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ColorCorrector
 type ColorCorrector struct {
 	_ struct{} `type:"structure"`
 
@@ -2254,7 +2233,6 @@ func (s ColorCorrector) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Container specific settings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ContainerSettings
 type ContainerSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -2355,7 +2333,6 @@ func (s ContainerSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies DRM settings for DASH outputs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DashIsoEncryptionSettings
 type DashIsoEncryptionSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -2397,7 +2374,6 @@ func (s DashIsoEncryptionSettings) MarshalFields(e protocol.FieldEncoder) error 
 
 // Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
 // DASH_ISO_GROUP_SETTINGS.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DashIsoGroupSettings
 type DashIsoGroupSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -2543,7 +2519,6 @@ func (s DashIsoGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for deinterlacer
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Deinterlacer
 type Deinterlacer struct {
 	_ struct{} `type:"structure"`
 
@@ -2601,7 +2576,6 @@ func (s Deinterlacer) MarshalFields(e protocol.FieldEncoder) error {
 
 // Settings associated with the destination. Will vary based on the type of
 // destination
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DestinationSettings
 type DestinationSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -2627,7 +2601,6 @@ func (s DestinationSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Inserts DVB Network Information Table (NIT) at the specified table repetition
 // interval.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DvbNitSettings
 type DvbNitSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -2689,7 +2662,6 @@ func (s DvbNitSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Inserts DVB Service Description Table (NIT) at the specified table repetition
 // interval.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DvbSdtSettings
 type DvbSdtSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -2768,7 +2740,6 @@ func (s DvbSdtSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // DVB-Sub Destination Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DvbSubDestinationSettings
 type DvbSubDestinationSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -3005,7 +2976,6 @@ func (s DvbSubDestinationSettings) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // DVB Sub Source Settings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DvbSubSourceSettings
 type DvbSubSourceSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -3045,7 +3015,6 @@ func (s DvbSubSourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Inserts DVB Time and Date Table (TDT) at the specified table repetition interval.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DvbTdtSettings
 type DvbTdtSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -3085,7 +3054,6 @@ func (s DvbTdtSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to
 // the value EAC3_ATMOS.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Eac3AtmosSettings
 type Eac3AtmosSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -3277,7 +3245,6 @@ func (s Eac3AtmosSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to
 // the value EAC3.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Eac3Settings
 type Eac3Settings struct {
 	_ struct{} `type:"structure"`
 
@@ -3548,7 +3515,6 @@ func (s Eac3Settings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Settings specific to embedded/ancillary caption outputs, including 608/708
 // Channel destination number.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/EmbeddedDestinationSettings
 type EmbeddedDestinationSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -3609,7 +3575,6 @@ func (s EmbeddedDestinationSettings) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // Settings for embedded captions Source
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/EmbeddedSourceSettings
 type EmbeddedSourceSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -3672,7 +3637,6 @@ func (s EmbeddedSourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes an account-specific API endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Endpoint
 type Endpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -3697,7 +3661,6 @@ func (s Endpoint) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // ESAM ManifestConfirmConditionNotification defined by OC-SP-ESAM-API-I03-131025.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/EsamManifestConfirmConditionNotification
 type EsamManifestConfirmConditionNotification struct {
 	_ struct{} `type:"structure"`
 
@@ -3726,7 +3689,6 @@ func (s EsamManifestConfirmConditionNotification) MarshalFields(e protocol.Field
 
 // Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion,
 // you can ignore these settings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/EsamSettings
 type EsamSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -3777,7 +3739,6 @@ func (s EsamSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // ESAM SignalProcessingNotification data defined by OC-SP-ESAM-API-I03-131025.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/EsamSignalProcessingNotification
 type EsamSignalProcessingNotification struct {
 	_ struct{} `type:"structure"`
 
@@ -3810,7 +3771,6 @@ func (s EsamSignalProcessingNotification) MarshalFields(e protocol.FieldEncoder)
 }
 
 // Settings for F4v container
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/F4vSettings
 type F4vSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -3838,7 +3798,6 @@ func (s F4vSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
 // FILE_GROUP_SETTINGS.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/FileGroupSettings
 type FileGroupSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -3877,7 +3836,6 @@ func (s FileGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for File-based Captions in Source
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/FileSourceSettings
 type FileSourceSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -3941,7 +3899,6 @@ func (s FileSourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Required when you set (Codec) under (VideoDescription)>(CodecSettings) to
 // the value FRAME_CAPTURE.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/FrameCaptureSettings
 type FrameCaptureSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -4028,7 +3985,6 @@ func (s FrameCaptureSettings) MarshalFields(e protocol.FieldEncoder) error {
 // Required when you set Rate control mode to QVBR. Not valid when you set Rate
 // control mode to a value other than QVBR, or when you don't define Rate control
 // mode.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/H264QvbrSettings
 type H264QvbrSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -4088,7 +4044,6 @@ func (s H264QvbrSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Required when you set (Codec) under (VideoDescription)>(CodecSettings) to
 // the value H_264.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/H264Settings
 type H264Settings struct {
 	_ struct{} `type:"structure"`
 
@@ -4570,7 +4525,6 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 // Required when you set Rate control mode to QVBR. Not valid when you set Rate
 // control mode to a value other than QVBR, or when you don't define Rate control
 // mode.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/H265QvbrSettings
 type H265QvbrSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -4629,7 +4583,6 @@ func (s H265QvbrSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for H265 codec
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/H265Settings
 type H265Settings struct {
 	_ struct{} `type:"structure"`
 
@@ -5127,7 +5080,6 @@ func (s H265Settings) MarshalFields(e protocol.FieldEncoder) error {
 // in the video stream. They are intended to help the downstream video player
 // display content in a way that reflects the intentions of the the content
 // creator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Hdr10Metadata
 type Hdr10Metadata struct {
 	_ struct{} `type:"structure"`
 
@@ -5273,7 +5225,6 @@ func (s Hdr10Metadata) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Caption Language Mapping
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/HlsCaptionLanguageMapping
 type HlsCaptionLanguageMapping struct {
 	_ struct{} `type:"structure"`
 
@@ -5342,7 +5293,6 @@ func (s HlsCaptionLanguageMapping) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // Settings for HLS encryption
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/HlsEncryptionSettings
 type HlsEncryptionSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -5444,7 +5394,6 @@ func (s HlsEncryptionSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
 // HLS_GROUP_SETTINGS.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/HlsGroupSettings
 type HlsGroupSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -5763,7 +5712,6 @@ func (s HlsGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for HLS output groups
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/HlsSettings
 type HlsSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -5852,7 +5800,6 @@ func (s HlsSettings) MarshalFields(e protocol.FieldEncoder) error {
 // to specify the base 64 encoded string and use Timecode (TimeCode) to specify
 // the time when the tag should be inserted. To insert multiple ID3 tags in
 // your output, create multiple instances of ID3 insertion (Id3Insertion).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Id3Insertion
 type Id3Insertion struct {
 	_ struct{} `type:"structure"`
 
@@ -5888,7 +5835,6 @@ func (s Id3Insertion) MarshalFields(e protocol.FieldEncoder) error {
 // Enable the image inserter feature to include a graphic overlay on your video.
 // Enable or disable this feature for each input or output individually. This
 // setting is disabled by default.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ImageInserter
 type ImageInserter struct {
 	_ struct{} `type:"structure"`
 
@@ -5937,7 +5883,6 @@ func (s ImageInserter) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies media input
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Input
 type Input struct {
 	_ struct{} `type:"structure"`
 
@@ -6261,7 +6206,6 @@ func (s Input) MarshalFields(e protocol.FieldEncoder) error {
 // To transcode only portions of your input (clips), include one Input clipping
 // (one instance of InputClipping in the JSON job file) for each input clip.
 // All input clips you specify will be included in every output of the job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InputClipping
 type InputClipping struct {
 	_ struct{} `type:"structure"`
 
@@ -6313,7 +6257,6 @@ func (s InputClipping) MarshalFields(e protocol.FieldEncoder) error {
 // them to Amazon S3. MediaConvert can decrypt files only when you use AWS Key
 // Management Service (KMS) to encrypt the data key that you use to encrypt
 // your content.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InputDecryptionSettings
 type InputDecryptionSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -6394,7 +6337,6 @@ func (s InputDecryptionSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specified video input in a template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InputTemplate
 type InputTemplate struct {
 	_ struct{} `type:"structure"`
 
@@ -6664,7 +6606,6 @@ func (s InputTemplate) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings that specify how your still graphic overlay appears.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InsertableImage
 type InsertableImage struct {
 	_ struct{} `type:"structure"`
 
@@ -6815,7 +6756,6 @@ func (s InsertableImage) MarshalFields(e protocol.FieldEncoder) error {
 
 // Each job converts an input file into an output file or files. For more information,
 // see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Job
 type Job struct {
 	_ struct{} `type:"structure"`
 
@@ -7051,7 +6991,6 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // JobSettings contains all the transcode settings for a job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/JobSettings
 type JobSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -7220,7 +7159,6 @@ func (s JobSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // A job template is a pre-made set of encoding instructions that you can use
 // to quickly create a job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/JobTemplate
 type JobTemplate struct {
 	_ struct{} `type:"structure"`
 
@@ -7359,7 +7297,6 @@ func (s JobTemplate) MarshalFields(e protocol.FieldEncoder) error {
 
 // JobTemplateSettings contains all the transcode settings saved in the template
 // that will be applied to jobs created from it.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/JobTemplateSettings
 type JobTemplateSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -7530,7 +7467,6 @@ func (s JobTemplateSettings) MarshalFields(e protocol.FieldEncoder) error {
 // to put SCTE-35 markers in your HLS and transport stream outputs at the insertion
 // points that you specify in an ESAM XML document. Provide the document in
 // the setting SCC XML (sccXml).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/M2tsScte35Esam
 type M2tsScte35Esam struct {
 	_ struct{} `type:"structure"`
 
@@ -7578,7 +7514,6 @@ func (s M2tsScte35Esam) MarshalFields(e protocol.FieldEncoder) error {
 // systems and players use the program map table to look up the PID for each
 // type of data it accesses and then uses the PIDs to locate specific data within
 // the asset.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/M2tsSettings
 type M2tsSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -8052,7 +7987,6 @@ func (s M2tsSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for TS segments in HLS
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/M3u8Settings
 type M3u8Settings struct {
 	_ struct{} `type:"structure"`
 
@@ -8264,7 +8198,6 @@ func (s M3u8Settings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Overlay motion graphics on top of your video at the time that you specify.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MotionImageInserter
 type MotionImageInserter struct {
 	_ struct{} `type:"structure"`
 
@@ -8387,7 +8320,6 @@ func (s MotionImageInserter) MarshalFields(e protocol.FieldEncoder) error {
 // rate of the overlay in frames per second, as a fraction. For example, specify
 // 24 fps as 24/1. The overlay frame rate doesn't need to match the frame rate
 // of the underlying video.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MotionImageInsertionFramerate
 type MotionImageInsertionFramerate struct {
 	_ struct{} `type:"structure"`
 
@@ -8440,7 +8372,6 @@ func (s MotionImageInsertionFramerate) MarshalFields(e protocol.FieldEncoder) er
 
 // Specify the offset between the upper-left corner of the video frame and the
 // top left corner of the overlay.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MotionImageInsertionOffset
 type MotionImageInsertionOffset struct {
 	_ struct{} `type:"structure"`
 
@@ -8476,7 +8407,6 @@ func (s MotionImageInsertionOffset) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // Settings for MOV Container.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MovSettings
 type MovSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -8544,7 +8474,6 @@ func (s MovSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to
 // the value MP2.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Mp2Settings
 type Mp2Settings struct {
 	_ struct{} `type:"structure"`
 
@@ -8609,7 +8538,6 @@ func (s Mp2Settings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Settings for MP4 container. You can create audio-only AAC outputs with this
 // container.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Mp4Settings
 type Mp4Settings struct {
 	_ struct{} `type:"structure"`
 
@@ -8668,7 +8596,6 @@ func (s Mp4Settings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Required when you set (Codec) under (VideoDescription)>(CodecSettings) to
 // the value MPEG2.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Mpeg2Settings
 type Mpeg2Settings struct {
 	_ struct{} `type:"structure"`
 
@@ -9047,7 +8974,6 @@ func (s Mpeg2Settings) MarshalFields(e protocol.FieldEncoder) error {
 
 // If you are using DRM, set DRM System (MsSmoothEncryptionSettings) to specify
 // the value SpekeKeyProvider.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MsSmoothEncryptionSettings
 type MsSmoothEncryptionSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -9075,7 +9001,6 @@ func (s MsSmoothEncryptionSettings) MarshalFields(e protocol.FieldEncoder) error
 
 // Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
 // MS_SMOOTH_GROUP_SETTINGS.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MsSmoothGroupSettings
 type MsSmoothGroupSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -9173,7 +9098,6 @@ func (s MsSmoothGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 // instance of nielsenConfiguration in your JSON job specification. Even if
 // you don't include any children of nielsenConfiguration, you still enable
 // the setting.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/NielsenConfiguration
 type NielsenConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -9213,7 +9137,6 @@ func (s NielsenConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 // individually. This setting is disabled by default. When you enable Noise
 // reducer (NoiseReducer), you must also select a value for Noise reducer filter
 // (NoiseReducerFilter).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/NoiseReducer
 type NoiseReducer struct {
 	_ struct{} `type:"structure"`
 
@@ -9291,7 +9214,6 @@ func (s NoiseReducer) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for a noise reducer filter
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/NoiseReducerFilterSettings
 type NoiseReducerFilterSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -9317,7 +9239,6 @@ func (s NoiseReducerFilterSettings) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // Noise reducer filter settings for spatial filter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/NoiseReducerSpatialFilterSettings
 type NoiseReducerSpatialFilterSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -9376,7 +9297,6 @@ func (s NoiseReducerSpatialFilterSettings) MarshalFields(e protocol.FieldEncoder
 }
 
 // Noise reducer filter settings for temporal filter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/NoiseReducerTemporalFilterSettings
 type NoiseReducerTemporalFilterSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -9440,7 +9360,6 @@ func (s NoiseReducerTemporalFilterSettings) MarshalFields(e protocol.FieldEncode
 
 // An output object describes the settings for a single output file or stream
 // in an output group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Output
 type Output struct {
 	_ struct{} `type:"structure"`
 
@@ -9596,7 +9515,6 @@ func (s Output) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // OutputChannel mapping settings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/OutputChannelMapping
 type OutputChannelMapping struct {
 	_ struct{} `type:"structure"`
 
@@ -9627,7 +9545,6 @@ func (s OutputChannelMapping) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Details regarding output
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/OutputDetail
 type OutputDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -9661,7 +9578,6 @@ func (s OutputDetail) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Group of outputs
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/OutputGroup
 type OutputGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -9745,7 +9661,6 @@ func (s OutputGroup) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains details about the output groups specified in the job settings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/OutputGroupDetail
 type OutputGroupDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -9776,7 +9691,6 @@ func (s OutputGroupDetail) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Output Group settings, including type
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/OutputGroupSettings
 type OutputGroupSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -9883,7 +9797,6 @@ func (s OutputGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specific settings for this type of output.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/OutputSettings
 type OutputSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -9909,7 +9822,6 @@ func (s OutputSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // A preset is a collection of preconfigured media conversion settings that
 // you want MediaConvert to apply to the output during the conversion process.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Preset
 type Preset struct {
 	_ struct{} `type:"structure"`
 
@@ -10004,7 +9916,6 @@ func (s Preset) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for preset
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/PresetSettings
 type PresetSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -10109,7 +10020,6 @@ func (s PresetSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Required when you set (Codec) under (VideoDescription)>(CodecSettings) to
 // the value PRORES.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ProresSettings
 type ProresSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -10281,7 +10191,6 @@ func (s ProresSettings) MarshalFields(e protocol.FieldEncoder) error {
 // account for running multiple transcoding jobs at the same time. If you don't
 // specify a queue, the service sends all jobs through the default queue. For
 // more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Queue
 type Queue struct {
 	_ struct{} `type:"structure"`
 
@@ -10410,7 +10319,6 @@ func (s Queue) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Use Rectangle to identify a specific area of the video frame.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Rectangle
 type Rectangle struct {
 	_ struct{} `type:"structure"`
 
@@ -10482,7 +10390,6 @@ func (s Rectangle) MarshalFields(e protocol.FieldEncoder) error {
 // Use Manual audio remixing (RemixSettings) to adjust audio levels for each
 // audio channel in each output of your job. With audio remixing, you can output
 // more or fewer audio channels than your input audio source provides.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/RemixSettings
 type RemixSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -10548,7 +10455,6 @@ func (s RemixSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Details about the pricing plan for your reserved queue. Required for reserved
 // queues and not applicable to on-demand queues.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ReservationPlan
 type ReservationPlan struct {
 	_ struct{} `type:"structure"`
 
@@ -10629,7 +10535,6 @@ func (s ReservationPlan) MarshalFields(e protocol.FieldEncoder) error {
 
 // Details about the pricing plan for your reserved queue. Required for reserved
 // queues and not applicable to on-demand queues.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ReservationPlanSettings
 type ReservationPlanSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -10709,7 +10614,6 @@ func (s ReservationPlanSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // The Amazon Resource Name (ARN) and tags for an AWS Elemental MediaConvert
 // resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ResourceTags
 type ResourceTags struct {
 	_ struct{} `type:"structure"`
 
@@ -10749,7 +10653,6 @@ func (s ResourceTags) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings associated with S3 destination
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/S3DestinationSettings
 type S3DestinationSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -10776,7 +10679,6 @@ func (s S3DestinationSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Settings for how your job outputs are encrypted as they are uploaded to Amazon
 // S3.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/S3EncryptionSettings
 type S3EncryptionSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -10825,7 +10727,6 @@ func (s S3EncryptionSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for SCC caption output.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/SccDestinationSettings
 type SccDestinationSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -10857,7 +10758,6 @@ func (s SccDestinationSettings) MarshalFields(e protocol.FieldEncoder) error {
 // Use these settings when doing DRM encryption with a SPEKE-compliant key provider,
 // if your output group type is HLS, MS Smooth, or DASH. If your output group
 // type is CMAF, use the SpekeKeyProviderCmaf settings instead.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/SpekeKeyProvider
 type SpekeKeyProvider struct {
 	_ struct{} `type:"structure"`
 
@@ -10923,7 +10823,6 @@ func (s SpekeKeyProvider) MarshalFields(e protocol.FieldEncoder) error {
 // Use these settings when doing DRM encryption with a SPEKE-compliant key provider,
 // if your output group type is CMAF. If your output group type is HLS, MS Smooth,
 // or DASH, use the SpekeKeyProvider settings instead.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/SpekeKeyProviderCmaf
 type SpekeKeyProviderCmaf struct {
 	_ struct{} `type:"structure"`
 
@@ -11004,7 +10903,6 @@ func (s SpekeKeyProviderCmaf) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Use these settings to set up encryption with a static key provider.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/StaticKeyProvider
 type StaticKeyProvider struct {
 	_ struct{} `type:"structure"`
 
@@ -11061,7 +10959,6 @@ func (s StaticKeyProvider) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for Teletext caption output
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TeletextDestinationSettings
 type TeletextDestinationSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -11121,7 +11018,6 @@ func (s TeletextDestinationSettings) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // Settings specific to Teletext caption sources, including Page number.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TeletextSourceSettings
 type TeletextSourceSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -11162,7 +11058,6 @@ func (s TeletextSourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Timecode burn-in (TimecodeBurnIn)--Burns the output timecode and specified
 // prefix into the output.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TimecodeBurnin
 type TimecodeBurnin struct {
 	_ struct{} `type:"structure"`
 
@@ -11225,7 +11120,6 @@ func (s TimecodeBurnin) MarshalFields(e protocol.FieldEncoder) error {
 
 // These settings control how the service handles timecodes throughout the job.
 // These settings don't affect input clipping.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TimecodeConfig
 type TimecodeConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -11308,7 +11202,6 @@ func (s TimecodeConfig) MarshalFields(e protocol.FieldEncoder) error {
 // in your job. To include timed metadata, you must enable it here, enable it
 // in each output container, and specify tags and timecodes in ID3 insertion
 // (Id3Insertion) objects.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TimedMetadataInsertion
 type TimedMetadataInsertion struct {
 	_ struct{} `type:"structure"`
 
@@ -11340,7 +11233,6 @@ func (s TimedMetadataInsertion) MarshalFields(e protocol.FieldEncoder) error {
 
 // Information about when jobs are submitted, started, and finished is specified
 // in Unix epoch format in seconds.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Timing
 type Timing struct {
 	_ struct{} `type:"structure"`
 
@@ -11387,7 +11279,6 @@ func (s Timing) MarshalFields(e protocol.FieldEncoder) error {
 
 // Settings specific to caption sources that are specfied by track number. Sources
 // include IMSC in IMF.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TrackSourceSettings
 type TrackSourceSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -11431,7 +11322,6 @@ func (s TrackSourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Settings specific to TTML caption outputs, including Pass style information
 // (TtmlStylePassthrough).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TtmlDestinationSettings
 type TtmlDestinationSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -11463,7 +11353,6 @@ func (s TtmlDestinationSettings) MarshalFields(e protocol.FieldEncoder) error {
 // The following lists the codec enum, settings object pairs. * H_264, H264Settings
 // * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE,
 // FrameCaptureSettings
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoCodecSettings
 type VideoCodecSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -11573,7 +11462,6 @@ func (s VideoCodecSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Settings for video outputs
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoDescription
 type VideoDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -11815,7 +11703,6 @@ func (s VideoDescription) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains details about the output's video stream
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoDetail
 type VideoDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -11851,7 +11738,6 @@ func (s VideoDetail) MarshalFields(e protocol.FieldEncoder) error {
 // Find additional transcoding features under Preprocessors (VideoPreprocessors).
 // Enable the features at each output individually. These features are disabled
 // by default.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoPreprocessor
 type VideoPreprocessor struct {
 	_ struct{} `type:"structure"`
 
@@ -11950,7 +11836,6 @@ func (s VideoPreprocessor) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Selector for video.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoSelector
 type VideoSelector struct {
 	_ struct{} `type:"structure"`
 
@@ -12075,7 +11960,6 @@ func (s VideoSelector) MarshalFields(e protocol.FieldEncoder) error {
 
 // Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to
 // the value WAV.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/WavSettings
 type WavSettings struct {
 	_ struct{} `type:"structure"`
 

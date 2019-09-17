@@ -11,7 +11,6 @@ import (
 )
 
 // Contains the parameters for CreateVolume.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolumeRequest
 type CreateVolumeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -115,7 +114,6 @@ func (s *CreateVolumeInput) Validate() error {
 }
 
 // Describes a volume.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Volume
 type CreateVolumeOutput struct {
 	_ struct{} `type:"structure"`
 

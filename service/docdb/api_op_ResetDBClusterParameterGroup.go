@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input to ResetDBClusterParameterGroup.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ResetDBClusterParameterGroupMessage
 type ResetDBClusterParameterGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s *ResetDBClusterParameterGroupInput) Validate() error {
 }
 
 // Contains the name of a DB cluster parameter group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterParameterGroupNameMessage
 type ResetDBClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplicationDependenciesRequest
 type ListApplicationDependenciesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -77,7 +76,6 @@ func (s ListApplicationDependenciesInput) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplicationDependenciesResponse
 type ListApplicationDependenciesOutput struct {
 	_ struct{} `type:"structure"`
 

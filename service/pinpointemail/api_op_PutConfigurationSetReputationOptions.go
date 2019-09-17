@@ -12,7 +12,6 @@ import (
 
 // A request to enable or disable tracking of reputation metrics for a configuration
 // set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutConfigurationSetReputationOptionsRequest
 type PutConfigurationSetReputationOptionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -68,7 +67,6 @@ func (s PutConfigurationSetReputationOptionsInput) MarshalFields(e protocol.Fiel
 
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutConfigurationSetReputationOptionsResponse
 type PutConfigurationSetReputationOptionsOutput struct {
 	_ struct{} `type:"structure"`
 }

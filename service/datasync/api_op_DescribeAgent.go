@@ -11,7 +11,6 @@ import (
 )
 
 // DescribeAgent
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeAgentRequest
 type DescribeAgentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *DescribeAgentInput) Validate() error {
 }
 
 // DescribeAgentResponse
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeAgentResponse
 type DescribeAgentOutput struct {
 	_ struct{} `type:"structure"`
 

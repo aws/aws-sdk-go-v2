@@ -12,7 +12,6 @@ import (
 )
 
 // Request to update an environment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateEnvironmentMessage
 type UpdateEnvironmentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -126,7 +125,6 @@ func (s *UpdateEnvironmentInput) Validate() error {
 }
 
 // Describes the properties of an environment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentDescription
 type UpdateEnvironmentOutput struct {
 	_ struct{} `type:"structure"`
 

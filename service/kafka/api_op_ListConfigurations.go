@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListConfigurationsRequest
 type ListConfigurationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s ListConfigurationsInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // The response contains an array of Configuration and a next token if the response
 // is truncated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListConfigurationsResponse
 type ListConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 

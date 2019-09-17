@@ -15,7 +15,6 @@ var _ = awsutil.Prettify
 
 // Provides lexicon name and lexicon content in string format. For more information,
 // see Pronunciation Lexicon Specification (PLS) Version 1.0 (https://www.w3.org/TR/pronunciation-lexicon/).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/Lexicon
 type Lexicon struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s Lexicon) MarshalFields(e protocol.FieldEncoder) error {
 
 // Contains metadata describing the lexicon such as the number of lexemes, language
 // code, and so on. For more information, see Managing Lexicons (https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/LexiconAttributes
 type LexiconAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -124,7 +122,6 @@ func (s LexiconAttributes) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes the content of the lexicon.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/LexiconDescription
 type LexiconDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -158,7 +155,6 @@ func (s LexiconDescription) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // SynthesisTask object that provides information about a speech synthesis task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/SynthesisTask
 type SynthesisTask struct {
 	_ struct{} `type:"structure"`
 
@@ -344,7 +340,6 @@ func (s SynthesisTask) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Description of the voice.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/Voice
 type Voice struct {
 	_ struct{} `type:"structure"`
 

@@ -12,7 +12,6 @@ import (
 
 // A request to obtain a list of configuration sets for your Amazon Pinpoint
 // account in the current AWS Region.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListConfigurationSetsRequest
 type ListConfigurationSetsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s ListConfigurationSetsInput) MarshalFields(e protocol.FieldEncoder) error
 
 // A list of configuration sets in your Amazon Pinpoint account in the current
 // AWS Region.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListConfigurationSetsResponse
 type ListConfigurationSetsOutput struct {
 	_ struct{} `type:"structure"`
 

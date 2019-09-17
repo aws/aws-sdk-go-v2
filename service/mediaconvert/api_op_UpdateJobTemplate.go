@@ -13,7 +13,6 @@ import (
 // Modify a job template by sending a request with the job template name and
 // any of the following that you wish to change: description, category, and
 // queue.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdateJobTemplateRequest
 type UpdateJobTemplateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -144,7 +143,6 @@ func (s UpdateJobTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // Successful update job template requests will return the new job template
 // JSON.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdateJobTemplateResponse
 type UpdateJobTemplateOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -12,7 +12,6 @@ import (
 )
 
 // Request structure for update App request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateAppRequest
 type UpdateAppInput struct {
 	_ struct{} `type:"structure"`
 
@@ -214,7 +213,6 @@ func (s UpdateAppInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure for an Amplify App update request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateAppResult
 type UpdateAppOutput struct {
 	_ struct{} `type:"structure"`
 

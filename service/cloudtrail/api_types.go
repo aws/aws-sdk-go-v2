@@ -56,7 +56,6 @@ var _ = awsutil.Prettify
 // the CloudTrail user did not specify logging data events for all Lambda functions,
 // the Invoke operation for MyOtherLambdaFunction does not match the function
 // specified for the trail. The trail doesn’t log the event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DataResource
 type DataResource struct {
 	_ struct{} `type:"structure"`
 
@@ -106,7 +105,6 @@ func (s DataResource) String() string {
 
 // Contains information about an event that was returned by a lookup request.
 // The result includes a representation of a CloudTrail event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/Event
 type Event struct {
 	_ struct{} `type:"structure"`
 
@@ -155,7 +153,6 @@ func (s Event) String() string {
 // selector, the trail doesn't log the event.
 //
 // You can configure up to five event selectors for a trail.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventSelector
 type EventSelector struct {
 	_ struct{} `type:"structure"`
 
@@ -193,7 +190,6 @@ func (s EventSelector) String() string {
 }
 
 // Specifies an attribute and value that filter the events returned.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/LookupAttribute
 type LookupAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -231,7 +227,6 @@ func (s *LookupAttribute) Validate() error {
 }
 
 // Contains information about a returned public key.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PublicKey
 type PublicKey struct {
 	_ struct{} `type:"structure"`
 
@@ -256,7 +251,6 @@ func (s PublicKey) String() string {
 }
 
 // Specifies the type and name of a resource referenced by an event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/Resource
 type Resource struct {
 	_ struct{} `type:"structure"`
 
@@ -280,7 +274,6 @@ func (s Resource) String() string {
 }
 
 // A resource tag.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ResourceTag
 type ResourceTag struct {
 	_ struct{} `type:"structure"`
 
@@ -297,7 +290,6 @@ func (s ResourceTag) String() string {
 }
 
 // A custom key-value pair associated with a resource such as a CloudTrail trail.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -332,7 +324,6 @@ func (s *Tag) Validate() error {
 }
 
 // The settings for a trail.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/Trail
 type Trail struct {
 	_ struct{} `type:"structure"`
 

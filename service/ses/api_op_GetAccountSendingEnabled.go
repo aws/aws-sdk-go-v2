@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetAccountSendingEnabledInput
 type GetAccountSendingEnabledInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -21,7 +20,6 @@ func (s GetAccountSendingEnabledInput) String() string {
 
 // Represents a request to return the email sending status for your Amazon SES
 // account in the current AWS Region.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetAccountSendingEnabledResponse
 type GetAccountSendingEnabledOutput struct {
 	_ struct{} `type:"structure"`
 

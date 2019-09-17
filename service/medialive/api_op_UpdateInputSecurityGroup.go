@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputSecurityGroupRequest
 type UpdateInputSecurityGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -78,7 +77,6 @@ func (s UpdateInputSecurityGroupInput) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputSecurityGroupResponse
 type UpdateInputSecurityGroupOutput struct {
 	_ struct{} `type:"structure"`
 

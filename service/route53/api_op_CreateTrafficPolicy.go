@@ -12,7 +12,6 @@ import (
 
 // A complex type that contains information about the traffic policy that you
 // want to create.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyRequest
 type CreateTrafficPolicyInput struct {
 	_ struct{} `locationName:"CreateTrafficPolicyRequest" type:"structure" xmlURI:"https://route53.amazonaws.com/doc/2013-04-01/"`
 
@@ -83,7 +82,6 @@ func (s CreateTrafficPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains the response information for the CreateTrafficPolicy
 // request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyResponse
 type CreateTrafficPolicyOutput struct {
 	_ struct{} `type:"structure"`
 

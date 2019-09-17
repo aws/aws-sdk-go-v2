@@ -14,7 +14,6 @@ import (
 // you lose the ability to use Amazon Pinpoint to send email from that identity.
 // You can restore your ability to send email by completing the verification
 // process for the identity again.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DeleteEmailIdentityRequest
 type DeleteEmailIdentityInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s DeleteEmailIdentityInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DeleteEmailIdentityResponse
 type DeleteEmailIdentityOutput struct {
 	_ struct{} `type:"structure"`
 }

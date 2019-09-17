@@ -10,7 +10,6 @@ import (
 )
 
 // The request representing the confirmation for a password reset.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmForgotPasswordRequest
 type ConfirmForgotPasswordInput struct {
 	_ struct{} `type:"structure"`
 
@@ -98,7 +97,6 @@ func (s *ConfirmForgotPasswordInput) Validate() error {
 
 // The response from the server that results from a user's request to retrieve
 // a forgotten password.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmForgotPasswordResponse
 type ConfirmForgotPasswordOutput struct {
 	_ struct{} `type:"structure"`
 }

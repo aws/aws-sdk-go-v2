@@ -11,7 +11,6 @@ import (
 )
 
 // A request to create a new configuration set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/CreateConfigurationSetRequest
 type CreateConfigurationSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -39,7 +38,6 @@ func (s CreateConfigurationSetInput) MarshalFields(e protocol.FieldEncoder) erro
 
 // An empty object that indicates that the configuration set was successfully
 // created.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/CreateConfigurationSetResponse
 type CreateConfigurationSetOutput struct {
 	_ struct{} `type:"structure"`
 }

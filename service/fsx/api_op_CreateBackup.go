@@ -11,7 +11,6 @@ import (
 )
 
 // The request object for the CreateBackup operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateBackupRequest
 type CreateBackupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -66,7 +65,6 @@ func (s *CreateBackupInput) Validate() error {
 }
 
 // The response object for the CreateBackup operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateBackupResponse
 type CreateBackupOutput struct {
 	_ struct{} `type:"structure"`
 

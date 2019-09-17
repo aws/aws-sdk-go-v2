@@ -15,7 +15,6 @@ import (
 // For more information about custom verification email templates, see Using
 // Custom Verification Email Templates (ses/latest/DeveloperGuide/custom-verification-emails.html)
 // in the Amazon SES Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListCustomVerificationEmailTemplatesRequest
 type ListCustomVerificationEmailTemplatesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s *ListCustomVerificationEmailTemplatesInput) Validate() error {
 }
 
 // A paginated list of custom verification email templates.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListCustomVerificationEmailTemplatesResponse
 type ListCustomVerificationEmailTemplatesOutput struct {
 	_ struct{} `type:"structure"`
 

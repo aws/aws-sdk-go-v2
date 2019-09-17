@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeConfigurationRevisionRequest
 type DescribeConfigurationRevisionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -65,7 +64,6 @@ func (s DescribeConfigurationRevisionInput) MarshalFields(e protocol.FieldEncode
 }
 
 // Response body for DescribeConfigurationRevision.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeConfigurationRevisionResponse
 type DescribeConfigurationRevisionOutput struct {
 	_ struct{} `type:"structure"`
 

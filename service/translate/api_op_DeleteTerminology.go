@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/DeleteTerminologyRequest
 type DeleteTerminologyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *DeleteTerminologyInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/DeleteTerminologyOutput
 type DeleteTerminologyOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Stores account attributes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/AccountAttribute
 type AccountAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s AccountAttribute) String() string {
 }
 
 // Describes a single backup.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/Backup
 type Backup struct {
 	_ struct{} `type:"structure"`
 
@@ -133,7 +131,6 @@ func (s Backup) String() string {
 }
 
 // A name and value pair that is specific to the engine of the server.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/EngineAttribute
 type EngineAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -150,7 +147,6 @@ func (s EngineAttribute) String() string {
 }
 
 // Describes a configuration management server.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/Server
 type Server struct {
 	_ struct{} `type:"structure"`
 
@@ -266,7 +262,6 @@ func (s Server) String() string {
 
 // An event that is related to the server, such as the start of maintenance
 // or backup.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ServerEvent
 type ServerEvent struct {
 	_ struct{} `type:"structure"`
 

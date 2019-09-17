@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for DescribeReservedInstancesModifications.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesModificationsRequest
 type DescribeReservedInstancesModificationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -63,7 +62,6 @@ func (s DescribeReservedInstancesModificationsInput) String() string {
 }
 
 // Contains the output of DescribeReservedInstancesModifications.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesModificationsResult
 type DescribeReservedInstancesModificationsOutput struct {
 	_ struct{} `type:"structure"`
 

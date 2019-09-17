@@ -12,7 +12,6 @@ import (
 
 // A request to retrieve a list of the blacklists that your dedicated IP addresses
 // appear on.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetBlacklistReportsRequest
 type GetBlacklistReportsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -63,7 +62,6 @@ func (s GetBlacklistReportsInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object that contains information about blacklist events.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetBlacklistReportsResponse
 type GetBlacklistReportsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -13,7 +13,6 @@ import (
 
 // Creates a new flow. The request must include one source. The request optionally
 // can include outputs (up to 20) and one entitlement.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateFlowRequest
 type CreateFlowInput struct {
 	_ struct{} `type:"structure"`
 
@@ -130,7 +129,6 @@ func (s CreateFlowInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The result of a successful CreateFlow request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateFlowResponse
 type CreateFlowOutput struct {
 	_ struct{} `type:"structure"`
 

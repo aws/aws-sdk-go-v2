@@ -13,7 +13,6 @@ import (
 
 // Represents a request to enable or disable the email sending capabilities
 // for your entire Amazon SES account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateAccountSendingEnabledRequest
 type UpdateAccountSendingEnabledInput struct {
 	_ struct{} `type:"structure"`
 
@@ -27,7 +26,6 @@ func (s UpdateAccountSendingEnabledInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateAccountSendingEnabledOutput
 type UpdateAccountSendingEnabledOutput struct {
 	_ struct{} `type:"structure"`
 }

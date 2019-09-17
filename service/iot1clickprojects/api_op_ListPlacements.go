@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iot1click-projects-2018-05-14/ListPlacementsRequest
 type ListPlacementsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -80,7 +79,6 @@ func (s ListPlacementsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iot1click-projects-2018-05-14/ListPlacementsResponse
 type ListPlacementsOutput struct {
 	_ struct{} `type:"structure"`
 

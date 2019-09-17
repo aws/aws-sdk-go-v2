@@ -12,7 +12,6 @@ import (
 
 // A request to get a list of geographic locations that Amazon Route 53 supports
 // for geolocation resource record sets.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListGeoLocationsRequest
 type ListGeoLocationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -108,7 +107,6 @@ func (s ListGeoLocationsInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type containing the response information for the request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListGeoLocationsResponse
 type ListGeoLocationsOutput struct {
 	_ struct{} `type:"structure"`
 

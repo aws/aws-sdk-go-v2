@@ -14,7 +14,6 @@ var _ = awsutil.Prettify
 
 // Gives a detailed description of the result of an action on each entry in
 // the request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/BatchResultErrorEntry
 type BatchResultErrorEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s BatchResultErrorEntry) String() string {
 // &ChangeMessageVisibilityBatchRequestEntry.1.ReceiptHandle=your_receipt_handle
 //
 // &ChangeMessageVisibilityBatchRequestEntry.1.VisibilityTimeout=45
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityBatchRequestEntry
 type ChangeMessageVisibilityBatchRequestEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -98,7 +96,6 @@ func (s *ChangeMessageVisibilityBatchRequestEntry) Validate() error {
 }
 
 // Encloses the Id of an entry in ChangeMessageVisibilityBatch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityBatchResultEntry
 type ChangeMessageVisibilityBatchResultEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -114,7 +111,6 @@ func (s ChangeMessageVisibilityBatchResultEntry) String() string {
 }
 
 // Encloses a receipt handle and an identifier for it.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageBatchRequestEntry
 type DeleteMessageBatchRequestEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -156,7 +152,6 @@ func (s *DeleteMessageBatchRequestEntry) Validate() error {
 }
 
 // Encloses the Id of an entry in DeleteMessageBatch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageBatchResultEntry
 type DeleteMessageBatchResultEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -172,7 +167,6 @@ func (s DeleteMessageBatchResultEntry) String() string {
 }
 
 // An Amazon SQS message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/Message
 type Message struct {
 	_ struct{} `type:"structure"`
 
@@ -237,7 +231,6 @@ func (s Message) String() string {
 // Name, type, value and the message body must not be empty or null. All parts
 // of the message attribute, including Name, Type, and Value, are part of the
 // message size restriction (256 KB or 262,144 bytes).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/MessageAttributeValue
 type MessageAttributeValue struct {
 	_ struct{} `type:"structure"`
 
@@ -288,7 +281,6 @@ func (s *MessageAttributeValue) Validate() error {
 }
 
 // Contains the details of a single Amazon SQS message along with an Id.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageBatchRequestEntry
 type SendMessageBatchRequestEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -425,7 +417,6 @@ func (s *SendMessageBatchRequestEntry) Validate() error {
 }
 
 // Encloses a MessageId for a successfully-enqueued message in a SendMessageBatch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageBatchResultEntry
 type SendMessageBatchResultEntry struct {
 	_ struct{} `type:"structure"`
 

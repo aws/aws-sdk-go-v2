@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/BatchAssociateServiceActionWithProvisioningArtifactInput
 type BatchAssociateServiceActionWithProvisioningArtifactInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s *BatchAssociateServiceActionWithProvisioningArtifactInput) Validate() er
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/BatchAssociateServiceActionWithProvisioningArtifactOutput
 type BatchAssociateServiceActionWithProvisioningArtifactOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -12,7 +12,6 @@ import (
 )
 
 // Contains the parameters for SetStatus.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/SetStatusInput
 type SetStatusInput struct {
 	_ struct{} `type:"structure"`
 
@@ -64,7 +63,6 @@ func (s *SetStatusInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/SetStatusOutput
 type SetStatusOutput struct {
 	_ struct{} `type:"structure"`
 }

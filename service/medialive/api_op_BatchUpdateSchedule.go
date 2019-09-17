@@ -12,7 +12,6 @@ import (
 
 // A request to create actions (add actions to the schedule), delete actions
 // (remove actions from the schedule), or both create and delete actions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchUpdateScheduleRequest
 type BatchUpdateScheduleInput struct {
 	_ struct{} `type:"structure"`
 
@@ -80,7 +79,6 @@ func (s BatchUpdateScheduleInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BatchUpdateScheduleResponse
 type BatchUpdateScheduleOutput struct {
 	_ struct{} `type:"structure"`
 

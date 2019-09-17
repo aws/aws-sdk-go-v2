@@ -15,7 +15,6 @@ var _ = awsutil.Prettify
 
 // Points to an S3Destination object that contains information about your S3
 // bucket.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/Destination
 type Destination struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s Destination) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The encryption algorithm options that are available to an AWS Signer job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/EncryptionAlgorithmOptions
 type EncryptionAlgorithmOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -85,7 +83,6 @@ func (s EncryptionAlgorithmOptions) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // The hash algorithms that are available to an AWS Signer job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/HashAlgorithmOptions
 type HashAlgorithmOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -129,7 +126,6 @@ func (s HashAlgorithmOptions) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The name and prefix of the S3 bucket where AWS Signer saves your signed objects.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/S3Destination
 type S3Destination struct {
 	_ struct{} `type:"structure"`
 
@@ -164,7 +160,6 @@ func (s S3Destination) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The S3 bucket name and key where AWS Signer saved your signed code image.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/S3SignedObject
 type S3SignedObject struct {
 	_ struct{} `type:"structure"`
 
@@ -198,7 +193,6 @@ func (s S3SignedObject) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the S3 bucket where you saved your unsigned code.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/S3Source
 type S3Source struct {
 	_ struct{} `type:"structure"`
 
@@ -270,7 +264,6 @@ func (s S3Source) MarshalFields(e protocol.FieldEncoder) error {
 
 // Points to an S3SignedObject object that contains information about your signed
 // code image.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SignedObject
 type SignedObject struct {
 	_ struct{} `type:"structure"`
 
@@ -295,7 +288,6 @@ func (s SignedObject) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The configuration of an AWS Signer operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SigningConfiguration
 type SigningConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -334,7 +326,6 @@ func (s SigningConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 
 // A signing configuration that overrides the default encryption or hash algorithm
 // of a signing job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SigningConfigurationOverrides
 type SigningConfigurationOverrides struct {
 	_ struct{} `type:"structure"`
 
@@ -370,7 +361,6 @@ func (s SigningConfigurationOverrides) MarshalFields(e protocol.FieldEncoder) er
 }
 
 // The image format of an AWS Signer platform or profile.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SigningImageFormat
 type SigningImageFormat struct {
 	_ struct{} `type:"structure"`
 
@@ -414,7 +404,6 @@ func (s SigningImageFormat) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains information about a signing job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SigningJob
 type SigningJob struct {
 	_ struct{} `type:"structure"`
 
@@ -487,7 +476,6 @@ func (s SigningJob) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The ACM certificate that is used to sign your code.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SigningMaterial
 type SigningMaterial struct {
 	_ struct{} `type:"structure"`
 
@@ -530,7 +518,6 @@ func (s SigningMaterial) MarshalFields(e protocol.FieldEncoder) error {
 
 // Contains information about the signing configurations and parameters that
 // is used to perform an AWS Signer job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SigningPlatform
 type SigningPlatform struct {
 	_ struct{} `type:"structure"`
 
@@ -620,7 +607,6 @@ func (s SigningPlatform) MarshalFields(e protocol.FieldEncoder) error {
 
 // Any overrides that are applied to the signing configuration of an AWS Signer
 // platform.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SigningPlatformOverrides
 type SigningPlatformOverrides struct {
 	_ struct{} `type:"structure"`
 
@@ -647,7 +633,6 @@ func (s SigningPlatformOverrides) MarshalFields(e protocol.FieldEncoder) error {
 
 // Contains information about the ACM certificates and AWS Signer configuration
 // parameters that can be used by a given AWS Signer user.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SigningProfile
 type SigningProfile struct {
 	_ struct{} `type:"structure"`
 
@@ -715,7 +700,6 @@ func (s SigningProfile) MarshalFields(e protocol.FieldEncoder) error {
 
 // An S3Source object that contains information about the S3 bucket where you
 // saved your unsigned code.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/Source
 type Source struct {
 	_ struct{} `type:"structure"`
 

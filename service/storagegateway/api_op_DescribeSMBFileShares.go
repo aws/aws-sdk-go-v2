@@ -10,7 +10,6 @@ import (
 )
 
 // DescribeSMBFileSharesInput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBFileSharesInput
 type DescribeSMBFileSharesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -44,7 +43,6 @@ func (s *DescribeSMBFileSharesInput) Validate() error {
 }
 
 // DescribeSMBFileSharesOutput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBFileSharesOutput
 type DescribeSMBFileSharesOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -12,7 +12,6 @@ import (
 
 // A request for the resource record sets that are associated with a specified
 // hosted zone.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListResourceRecordSetsRequest
 type ListResourceRecordSetsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -129,7 +128,6 @@ func (s ListResourceRecordSetsInput) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // A complex type that contains list information for the resource record set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListResourceRecordSetsResponse
 type ListResourceRecordSetsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // The input for the DescribeConfigurationRecorderStatus action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecorderStatusRequest
 type DescribeConfigurationRecorderStatusInput struct {
 	_ struct{} `type:"structure"`
 
@@ -26,7 +25,6 @@ func (s DescribeConfigurationRecorderStatusInput) String() string {
 }
 
 // The output for the DescribeConfigurationRecorderStatus action, in JSON format.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecorderStatusResponse
 type DescribeConfigurationRecorderStatusOutput struct {
 	_ struct{} `type:"structure"`
 

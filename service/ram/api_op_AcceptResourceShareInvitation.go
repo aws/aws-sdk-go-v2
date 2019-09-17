@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AcceptResourceShareInvitationRequest
 type AcceptResourceShareInvitationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -62,7 +61,6 @@ func (s AcceptResourceShareInvitationInput) MarshalFields(e protocol.FieldEncode
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AcceptResourceShareInvitationResponse
 type AcceptResourceShareInvitationOutput struct {
 	_ struct{} `type:"structure"`
 

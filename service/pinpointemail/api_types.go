@@ -16,7 +16,6 @@ var _ = awsutil.Prettify
 
 // An object that contains information about a blacklisting event that impacts
 // one of the dedicated IP addresses that is associated with your account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/BlacklistEntry
 type BlacklistEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s BlacklistEntry) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the body of the email message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/Body
 type Body struct {
 	_ struct{} `type:"structure"`
 
@@ -121,7 +119,6 @@ func (s Body) MarshalFields(e protocol.FieldEncoder) error {
 // An object that defines an Amazon CloudWatch destination for email events.
 // You can use Amazon CloudWatch to monitor and gain insights on your email
 // sending metrics.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CloudWatchDestination
 type CloudWatchDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -177,7 +174,6 @@ func (s CloudWatchDestination) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object that defines the dimension configuration to use when you send Amazon
 // Pinpoint email events to Amazon CloudWatch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CloudWatchDimensionConfiguration
 type CloudWatchDimensionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -266,7 +262,6 @@ func (s CloudWatchDimensionConfiguration) MarshalFields(e protocol.FieldEncoder)
 
 // An object that represents the content of the email, and optionally a character
 // set specification.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/Content
 type Content struct {
 	_ struct{} `type:"structure"`
 
@@ -320,7 +315,6 @@ func (s Content) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object that contains information about the volume of email sent on each
 // day of the analysis period.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DailyVolume
 type DailyVolume struct {
 	_ struct{} `type:"structure"`
 
@@ -373,7 +367,6 @@ func (s DailyVolume) MarshalFields(e protocol.FieldEncoder) error {
 
 // Contains information about a dedicated IP address that is associated with
 // your Amazon Pinpoint account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DedicatedIp
 type DedicatedIp struct {
 	_ struct{} `type:"structure"`
 
@@ -441,7 +434,6 @@ func (s DedicatedIp) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object that contains metadata related to a predictive inbox placement
 // test.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DeliverabilityTestReport
 type DeliverabilityTestReport struct {
 	_ struct{} `type:"structure"`
 
@@ -519,7 +511,6 @@ func (s DeliverabilityTestReport) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Used to associate a configuration set with a dedicated IP pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DeliveryOptions
 type DeliveryOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -557,7 +548,6 @@ func (s DeliveryOptions) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object that describes the recipients for an email.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/Destination
 type Destination struct {
 	_ struct{} `type:"structure"`
 
@@ -622,7 +612,6 @@ func (s Destination) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object that contains information about the DKIM configuration for an email
 // identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DkimAttributes
 type DkimAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -698,7 +687,6 @@ func (s DkimAttributes) MarshalFields(e protocol.FieldEncoder) error {
 // This data is available for a campaign only if the campaign sent email by
 // using a domain that the Deliverability dashboard is enabled for (PutDeliverabilityDashboardOption
 // operation).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DomainDeliverabilityCampaign
 type DomainDeliverabilityCampaign struct {
 	_ struct{} `type:"structure"`
 
@@ -875,7 +863,6 @@ func (s DomainDeliverabilityCampaign) MarshalFields(e protocol.FieldEncoder) err
 // Deliverability dashboard subscription. If a Deliverability dashboard subscription
 // is active for a domain, you gain access to reputation, inbox placement, and
 // other metrics for the domain.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DomainDeliverabilityTrackingOption
 type DomainDeliverabilityTrackingOption struct {
 	_ struct{} `type:"structure"`
 
@@ -923,7 +910,6 @@ func (s DomainDeliverabilityTrackingOption) MarshalFields(e protocol.FieldEncode
 
 // An object that contains inbox placement data for email sent from one of your
 // email domains to a specific email provider.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DomainIspPlacement
 type DomainIspPlacement struct {
 	_ struct{} `type:"structure"`
 
@@ -992,7 +978,6 @@ func (s DomainIspPlacement) MarshalFields(e protocol.FieldEncoder) error {
 // you specify the subject and the text and HTML versions of the message body.
 // You can also create raw messages, in which you specify a complete MIME-formatted
 // message. Raw messages can include attachments and custom headers.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/EmailContent
 type EmailContent struct {
 	_ struct{} `type:"structure"`
 
@@ -1071,7 +1056,6 @@ func (s EmailContent) MarshalFields(e protocol.FieldEncoder) error {
 // Amazon SNS to receive notifications when you receive bounces or complaints,
 // or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for
 // long-term storage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/EventDestination
 type EventDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -1174,7 +1158,6 @@ func (s EventDestination) MarshalFields(e protocol.FieldEncoder) error {
 // services receive events from emails sent using the configuration set that
 // the event destination is associated with. Also defines the types of events
 // that are sent to the event destination.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/EventDestinationDefinition
 type EventDestinationDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -1287,7 +1270,6 @@ func (s EventDestinationDefinition) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // Information about an email identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/IdentityInfo
 type IdentityInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1344,7 +1326,6 @@ func (s IdentityInfo) MarshalFields(e protocol.FieldEncoder) error {
 // for a verified domain that’s associated with your AWS account. This data
 // is available only if you enabled the Deliverability dashboard for the domain
 // (PutDeliverabilityDashboardOption operation).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/InboxPlacementTrackingOption
 type InboxPlacementTrackingOption struct {
 	_ struct{} `type:"structure"`
 
@@ -1386,7 +1367,6 @@ func (s InboxPlacementTrackingOption) MarshalFields(e protocol.FieldEncoder) err
 
 // An object that describes how email sent during the predictive inbox placement
 // test was handled by a certain email provider.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/IspPlacement
 type IspPlacement struct {
 	_ struct{} `type:"structure"`
 
@@ -1422,7 +1402,6 @@ func (s IspPlacement) MarshalFields(e protocol.FieldEncoder) error {
 // An object that defines an Amazon Kinesis Data Firehose destination for email
 // events. You can use Amazon Kinesis Data Firehose to stream data to other
 // services, such as Amazon S3 and Amazon Redshift.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/KinesisFirehoseDestination
 type KinesisFirehoseDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -1480,7 +1459,6 @@ func (s KinesisFirehoseDestination) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // A list of attributes that are associated with a MAIL FROM domain.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/MailFromAttributes
 type MailFromAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -1549,7 +1527,6 @@ func (s MailFromAttributes) MarshalFields(e protocol.FieldEncoder) error {
 
 // Represents the email message that you're sending. The Message object consists
 // of a subject line and a message body.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/Message
 type Message struct {
 	_ struct{} `type:"structure"`
 
@@ -1619,7 +1596,6 @@ func (s Message) MarshalFields(e protocol.FieldEncoder) error {
 
 // Contains the name and value of a tag that you apply to an email. You can
 // use message tags when you publish email sending events.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/MessageTag
 type MessageTag struct {
 	_ struct{} `type:"structure"`
 
@@ -1688,7 +1664,6 @@ func (s MessageTag) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object that contains information about email that was sent from the selected
 // domain.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/OverallVolume
 type OverallVolume struct {
 	_ struct{} `type:"structure"`
 
@@ -1742,7 +1717,6 @@ func (s OverallVolume) MarshalFields(e protocol.FieldEncoder) error {
 // An object that defines a Amazon Pinpoint destination for email events. You
 // can use Amazon Pinpoint events to create attributes in Amazon Pinpoint projects.
 // You can use these attributes to create segments for your campaigns.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PinpointDestination
 type PinpointDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -1768,7 +1742,6 @@ func (s PinpointDestination) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object that contains inbox placement data for an email provider.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PlacementStatistics
 type PlacementStatistics struct {
 	_ struct{} `type:"structure"`
 
@@ -1834,7 +1807,6 @@ func (s PlacementStatistics) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The raw email message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/RawMessage
 type RawMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -1896,7 +1868,6 @@ func (s RawMessage) MarshalFields(e protocol.FieldEncoder) error {
 
 // Enable or disable collection of reputation metrics for emails that you send
 // using this configuration set in the current AWS Region.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ReputationOptions
 type ReputationOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -1936,7 +1907,6 @@ func (s ReputationOptions) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object that contains information about the per-day and per-second sending
 // limits for your Amazon Pinpoint account in the current AWS Region.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/SendQuota
 type SendQuota struct {
 	_ struct{} `type:"structure"`
 
@@ -1984,7 +1954,6 @@ func (s SendQuota) MarshalFields(e protocol.FieldEncoder) error {
 
 // Used to enable or disable email sending for messages that use this configuration
 // set in the current AWS Region.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/SendingOptions
 type SendingOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -2011,7 +1980,6 @@ func (s SendingOptions) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object that defines an Amazon SNS destination for email events. You can
 // use Amazon SNS to send notification when certain email events occur.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/SnsDestination
 type SnsDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -2081,7 +2049,6 @@ func (s SnsDestination) MarshalFields(e protocol.FieldEncoder) error {
 //    are available only for your AWS account, not any other accounts that share
 //    the resource. In addition, the tags are available only for resources that
 //    are located in the specified AWS Region for your AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -2150,7 +2117,6 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 // These images and links include references to a domain operated by AWS. You
 // can optionally configure Amazon Pinpoint to use a domain that you operate
 // for these images and links.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/TrackingOptions
 type TrackingOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -2192,7 +2158,6 @@ func (s TrackingOptions) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object that contains information about the amount of email that was delivered
 // to recipients.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/VolumeStatistics
 type VolumeStatistics struct {
 	_ struct{} `type:"structure"`
 

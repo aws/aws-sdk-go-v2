@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Describes a principal for use with AWS Resource Access Manager.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/Principal
 type Principal struct {
 	_ struct{} `type:"structure"`
 
@@ -78,7 +77,6 @@ func (s Principal) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes a resource associated with a resource share.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/Resource
 type Resource struct {
 	_ struct{} `type:"structure"`
 
@@ -159,7 +157,6 @@ func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes a resource share.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceShare
 type ResourceShare struct {
 	_ struct{} `type:"structure"`
 
@@ -265,7 +262,6 @@ func (s ResourceShare) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes an association with a resource share.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceShareAssociation
 type ResourceShareAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -358,7 +354,6 @@ func (s ResourceShareAssociation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes an invitation to join a resource share.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceShareInvitation
 type ResourceShareInvitation struct {
 	_ struct{} `type:"structure"`
 
@@ -453,7 +448,6 @@ func (s ResourceShareInvitation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a tag.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -487,7 +481,6 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Used to filter information based on tags.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/TagFilter
 type TagFilter struct {
 	_ struct{} `type:"structure"`
 

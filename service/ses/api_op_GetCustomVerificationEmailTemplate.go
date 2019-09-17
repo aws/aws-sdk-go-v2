@@ -10,7 +10,6 @@ import (
 )
 
 // Represents a request to retrieve an existing custom verification email template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetCustomVerificationEmailTemplateRequest
 type GetCustomVerificationEmailTemplateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *GetCustomVerificationEmailTemplateInput) Validate() error {
 }
 
 // The content of the custom verification email template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetCustomVerificationEmailTemplateResponse
 type GetCustomVerificationEmailTemplateOutput struct {
 	_ struct{} `type:"structure"`
 

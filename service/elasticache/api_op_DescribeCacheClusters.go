@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a DescribeCacheClusters operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheClustersMessage
 type DescribeCacheClustersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s DescribeCacheClustersInput) String() string {
 }
 
 // Represents the output of a DescribeCacheClusters operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheClusterMessage
 type DescribeCacheClustersOutput struct {
 	_ struct{} `type:"structure"`
 

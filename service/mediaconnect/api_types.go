@@ -12,7 +12,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // The output that you want to add to this flow.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddOutputRequest
 type AddOutputRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -158,7 +157,6 @@ func (s AddOutputRequest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the encryption of the flow.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Encryption
 type Encryption struct {
 	_ struct{} `type:"structure"`
 
@@ -291,7 +289,6 @@ func (s Encryption) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The settings for a flow entitlement.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Entitlement
 type Entitlement struct {
 	_ struct{} `type:"structure"`
 
@@ -367,7 +364,6 @@ func (s Entitlement) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The settings for a flow, including its source, outputs, and entitlements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Flow
 type Flow struct {
 	_ struct{} `type:"structure"`
 
@@ -493,7 +489,6 @@ func (s Flow) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The entitlements that you want to grant on a flow.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GrantEntitlementRequest
 type GrantEntitlementRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -578,7 +573,6 @@ func (s GrantEntitlementRequest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An entitlement that has been granted to you from other AWS accounts.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListedEntitlement
 type ListedEntitlement struct {
 	_ struct{} `type:"structure"`
 
@@ -617,7 +611,6 @@ func (s ListedEntitlement) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides a summary of a flow, including its ARN, Availability Zone, and source
 // type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListedFlow
 type ListedFlow struct {
 	_ struct{} `type:"structure"`
 
@@ -702,7 +695,6 @@ func (s ListedFlow) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Messages that provide the state of the flow.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Messages
 type Messages struct {
 	_ struct{} `type:"structure"`
 
@@ -735,7 +727,6 @@ func (s Messages) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The settings for an output.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Output
 type Output struct {
 	_ struct{} `type:"structure"`
 
@@ -839,7 +830,6 @@ func (s Output) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The settings for the source of the flow.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/SetSourceRequest
 type SetSourceRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -966,7 +956,6 @@ func (s SetSourceRequest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The settings for the source of the flow.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Source
 type Source struct {
 	_ struct{} `type:"structure"`
 
@@ -1072,7 +1061,6 @@ func (s Source) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Attributes related to the transport stream that are used in a source or output.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Transport
 type Transport struct {
 	_ struct{} `type:"structure"`
 
@@ -1162,7 +1150,6 @@ func (s Transport) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the encryption of the flow.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateEncryption
 type UpdateEncryption struct {
 	_ struct{} `type:"structure"`
 

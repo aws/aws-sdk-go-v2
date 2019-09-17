@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure used in requests to export project configuration details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ExportProjectRequest
 type ExportProjectInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s ExportProjectInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure used for requests to export project configuration details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ExportProjectResult
 type ExportProjectOutput struct {
 	_ struct{} `type:"structure"`
 

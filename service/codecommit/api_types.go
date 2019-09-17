@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Information about errors in a BatchDescribeMergeConflicts operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchDescribeMergeConflictsError
 type BatchDescribeMergeConflictsError struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s BatchDescribeMergeConflictsError) String() string {
 }
 
 // Returns information about errors in a BatchGetCommits operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetCommitsError
 type BatchGetCommitsError struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +59,6 @@ func (s BatchGetCommitsError) String() string {
 }
 
 // Returns information about a specific Git blob object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BlobMetadata
 type BlobMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -89,7 +86,6 @@ func (s BlobMetadata) String() string {
 }
 
 // Returns information about a branch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BranchInfo
 type BranchInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -106,7 +102,6 @@ func (s BranchInfo) String() string {
 }
 
 // Returns information about a specific comment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Comment
 type Comment struct {
 	_ struct{} `type:"structure"`
 
@@ -144,7 +139,6 @@ func (s Comment) String() string {
 }
 
 // Returns information about comments on the comparison between two commits.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CommentsForComparedCommit
 type CommentsForComparedCommit struct {
 	_ struct{} `type:"structure"`
 
@@ -179,7 +173,6 @@ func (s CommentsForComparedCommit) String() string {
 }
 
 // Returns information about comments on a pull request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CommentsForPullRequest
 type CommentsForPullRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -222,7 +215,6 @@ func (s CommentsForPullRequest) String() string {
 }
 
 // Returns information about a specific commit.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Commit
 type Commit struct {
 	_ struct{} `type:"structure"`
 
@@ -264,7 +256,6 @@ func (s Commit) String() string {
 }
 
 // Information about conflicts in a merge operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Conflict
 type Conflict struct {
 	_ struct{} `type:"structure"`
 
@@ -282,7 +273,6 @@ func (s Conflict) String() string {
 }
 
 // Information about the metadata for a conflict in a merge operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ConflictMetadata
 type ConflictMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -329,7 +319,6 @@ func (s ConflictMetadata) String() string {
 
 // A list of inputs to use when resolving conflicts during a merge if AUTOMERGE
 // is chosen as the conflict resolution strategy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ConflictResolution
 type ConflictResolution struct {
 	_ struct{} `type:"structure"`
 
@@ -380,7 +369,6 @@ func (s *ConflictResolution) Validate() error {
 }
 
 // A file that will be deleted as part of a commit.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteFileEntry
 type DeleteFileEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -411,7 +399,6 @@ func (s *DeleteFileEntry) Validate() error {
 }
 
 // Returns information about a set of differences for a commit specifier.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Difference
 type Difference struct {
 	_ struct{} `type:"structure"`
 
@@ -434,7 +421,6 @@ func (s Difference) String() string {
 }
 
 // Returns information about a file in a repository.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/File
 type File struct {
 	_ struct{} `type:"structure"`
 
@@ -458,7 +444,6 @@ func (s File) String() string {
 }
 
 // A file that will be added, updated, or deleted as part of a commit.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FileMetadata
 type FileMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -480,7 +465,6 @@ func (s FileMetadata) String() string {
 }
 
 // Information about file modes in a merge or pull request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FileModes
 type FileModes struct {
 	_ struct{} `type:"structure"`
 
@@ -500,7 +484,6 @@ func (s FileModes) String() string {
 }
 
 // Information about the size of files in a merge or pull request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FileSizes
 type FileSizes struct {
 	_ struct{} `type:"structure"`
 
@@ -520,7 +503,6 @@ func (s FileSizes) String() string {
 }
 
 // Returns information about a folder in a repository.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Folder
 type Folder struct {
 	_ struct{} `type:"structure"`
 
@@ -543,7 +525,6 @@ func (s Folder) String() string {
 
 // Information about whether a file is binary or textual in a merge or pull
 // request operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/IsBinaryFile
 type IsBinaryFile struct {
 	_ struct{} `type:"structure"`
 
@@ -567,7 +548,6 @@ func (s IsBinaryFile) String() string {
 
 // Returns information about the location of a change or comment in the comparison
 // between two commits or a pull request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Location
 type Location struct {
 	_ struct{} `type:"structure"`
 
@@ -589,7 +569,6 @@ func (s Location) String() string {
 }
 
 // Information about merge hunks in a merge or pull request operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeHunk
 type MergeHunk struct {
 	_ struct{} `type:"structure"`
 
@@ -618,7 +597,6 @@ func (s MergeHunk) String() string {
 
 // Information about the details of a merge hunk that contains a conflict in
 // a merge or pull request operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeHunkDetail
 type MergeHunkDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -640,7 +618,6 @@ func (s MergeHunkDetail) String() string {
 
 // Returns information about a merge or potential merge between a source reference
 // and a destination reference in a pull request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeMetadata
 type MergeMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -663,7 +640,6 @@ func (s MergeMetadata) String() string {
 }
 
 // Information about the file operation conflicts in a merge operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeOperations
 type MergeOperations struct {
 	_ struct{} `type:"structure"`
 
@@ -681,7 +657,6 @@ func (s MergeOperations) String() string {
 }
 
 // Information about the type of an object in a merge operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ObjectTypes
 type ObjectTypes struct {
 	_ struct{} `type:"structure"`
 
@@ -701,7 +676,6 @@ func (s ObjectTypes) String() string {
 }
 
 // Returns information about a pull request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequest
 type PullRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -748,7 +722,6 @@ func (s PullRequest) String() string {
 
 // Metadata about the pull request that is used when comparing the pull request
 // source with its destination.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestCreatedEventMetadata
 type PullRequestCreatedEventMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -773,7 +746,6 @@ func (s PullRequestCreatedEventMetadata) String() string {
 }
 
 // Returns information about a pull request event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestEvent
 type PullRequestEvent struct {
 	_ struct{} `type:"structure"`
 
@@ -812,7 +784,6 @@ func (s PullRequestEvent) String() string {
 
 // Returns information about the change in the merge state for a pull request
 // event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestMergedStateChangedEventMetadata
 type PullRequestMergedStateChangedEventMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -832,7 +803,6 @@ func (s PullRequestMergedStateChangedEventMetadata) String() string {
 }
 
 // Information about an update to the source branch of a pull request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestSourceReferenceUpdatedEventMetadata
 type PullRequestSourceReferenceUpdatedEventMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -858,7 +828,6 @@ func (s PullRequestSourceReferenceUpdatedEventMetadata) String() string {
 }
 
 // Information about a change to the status of a pull request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestStatusChangedEventMetadata
 type PullRequestStatusChangedEventMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -872,7 +841,6 @@ func (s PullRequestStatusChangedEventMetadata) String() string {
 }
 
 // Returns information about a pull request target.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestTarget
 type PullRequestTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -912,7 +880,6 @@ func (s PullRequestTarget) String() string {
 }
 
 // Information about a file that will be added or updated as part of a commit.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutFileEntry
 type PutFileEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -961,7 +928,6 @@ func (s *PutFileEntry) Validate() error {
 
 // Information about a replacement content entry in the conflict of a merge
 // or pull request operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ReplaceContentEntry
 type ReplaceContentEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -1007,7 +973,6 @@ func (s *ReplaceContentEntry) Validate() error {
 }
 
 // Information about a repository.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryMetadata
 type RepositoryMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -1048,7 +1013,6 @@ func (s RepositoryMetadata) String() string {
 }
 
 // Information about a repository name and ID.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryNameIdPair
 type RepositoryNameIdPair struct {
 	_ struct{} `type:"structure"`
 
@@ -1065,7 +1029,6 @@ func (s RepositoryNameIdPair) String() string {
 }
 
 // Information about a trigger for a repository.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryTrigger
 type RepositoryTrigger struct {
 	_ struct{} `type:"structure"`
 
@@ -1128,7 +1091,6 @@ func (s *RepositoryTrigger) Validate() error {
 }
 
 // A trigger failed to run.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryTriggerExecutionFailure
 type RepositoryTriggerExecutionFailure struct {
 	_ struct{} `type:"structure"`
 
@@ -1145,7 +1107,6 @@ func (s RepositoryTriggerExecutionFailure) String() string {
 }
 
 // Information about the file mode changes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/SetFileModeEntry
 type SetFileModeEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -1183,7 +1144,6 @@ func (s *SetFileModeEntry) Validate() error {
 }
 
 // Information about a source file that is part of changes made in a commit.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/SourceFileSpecifier
 type SourceFileSpecifier struct {
 	_ struct{} `type:"structure"`
 
@@ -1216,7 +1176,6 @@ func (s *SourceFileSpecifier) Validate() error {
 }
 
 // Returns information about a submodule reference in a repository folder.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/SubModule
 type SubModule struct {
 	_ struct{} `type:"structure"`
 
@@ -1237,7 +1196,6 @@ func (s SubModule) String() string {
 }
 
 // Returns information about a symbolic link in a repository folder.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/SymbolicLink
 type SymbolicLink struct {
 	_ struct{} `type:"structure"`
 
@@ -1261,7 +1219,6 @@ func (s SymbolicLink) String() string {
 }
 
 // Returns information about a target for a pull request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Target
 type Target struct {
 	_ struct{} `type:"structure"`
 
@@ -1308,7 +1265,6 @@ func (s *Target) Validate() error {
 }
 
 // Information about the user who made a specified commit.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UserInfo
 type UserInfo struct {
 	_ struct{} `type:"structure"`
 

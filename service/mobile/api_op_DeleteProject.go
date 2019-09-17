@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure used to request a project be deleted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DeleteProjectRequest
 type DeleteProjectInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s DeleteProjectInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure used in response to request to delete a project.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DeleteProjectResult
 type DeleteProjectOutput struct {
 	_ struct{} `type:"structure"`
 

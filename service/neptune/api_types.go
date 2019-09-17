@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Specifies an Availability Zone.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/AvailabilityZone
 type AvailabilityZone struct {
 	_ struct{} `type:"structure"`
 
@@ -27,7 +26,6 @@ func (s AvailabilityZone) String() string {
 }
 
 // Specifies a character set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CharacterSet
 type CharacterSet struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +46,6 @@ func (s CharacterSet) String() string {
 //
 // The EnableLogTypes and DisableLogTypes arrays determine which logs will be
 // exported (or not exported) to CloudWatch Logs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CloudwatchLogsExportConfiguration
 type CloudwatchLogsExportConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -67,7 +64,6 @@ func (s CloudwatchLogsExportConfiguration) String() string {
 // Contains the details of an Amazon Neptune DB cluster.
 //
 // This data type is used as a response element in the DescribeDBClusters action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBCluster
 type DBCluster struct {
 	_ struct{} `type:"structure"`
 
@@ -217,7 +213,6 @@ func (s DBCluster) String() string {
 }
 
 // Contains information about an instance that is part of a DB cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterMember
 type DBClusterMember struct {
 	_ struct{} `type:"structure"`
 
@@ -243,7 +238,6 @@ func (s DBClusterMember) String() string {
 }
 
 // Contains status information for a DB cluster option group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterOptionGroupStatus
 type DBClusterOptionGroupStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -263,7 +257,6 @@ func (s DBClusterOptionGroupStatus) String() string {
 //
 // This data type is used as a response element in the DescribeDBClusterParameterGroups
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterParameterGroup
 type DBClusterParameterGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -289,7 +282,6 @@ func (s DBClusterParameterGroup) String() string {
 
 // Describes an AWS Identity and Access Management (IAM) role that is associated
 // with a DB cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterRole
 type DBClusterRole struct {
 	_ struct{} `type:"structure"`
 
@@ -320,7 +312,6 @@ func (s DBClusterRole) String() string {
 //
 // This data type is used as a response element in the DescribeDBClusterSnapshots
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterSnapshot
 type DBClusterSnapshot struct {
 	_ struct{} `type:"structure"`
 
@@ -404,7 +395,6 @@ func (s DBClusterSnapshot) String() string {
 // Manual DB cluster snapshot attributes are used to authorize other AWS accounts
 // to restore a manual DB cluster snapshot. For more information, see the ModifyDBClusterSnapshotAttribute
 // API action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterSnapshotAttribute
 type DBClusterSnapshotAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -436,7 +426,6 @@ func (s DBClusterSnapshotAttribute) String() string {
 // Manual DB cluster snapshot attributes are used to authorize other AWS accounts
 // to copy or restore a manual DB cluster snapshot. For more information, see
 // the ModifyDBClusterSnapshotAttribute API action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterSnapshotAttributesResult
 type DBClusterSnapshotAttributesResult struct {
 	_ struct{} `type:"structure"`
 
@@ -454,7 +443,6 @@ func (s DBClusterSnapshotAttributesResult) String() string {
 }
 
 // This data type is used as a response element in the action DescribeDBEngineVersions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBEngineVersion
 type DBEngineVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -509,7 +497,6 @@ func (s DBEngineVersion) String() string {
 // Contains the details of an Amazon Neptune DB instance.
 //
 // This data type is used as a response element in the DescribeDBInstances action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBInstance
 type DBInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -705,7 +692,6 @@ func (s DBInstance) String() string {
 }
 
 // Provides a list of status information for a DB instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBInstanceStatusInfo
 type DBInstanceStatusInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -734,7 +720,6 @@ func (s DBInstanceStatusInfo) String() string {
 //
 // This data type is used as a response element in the DescribeDBParameterGroups
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBParameterGroup
 type DBParameterGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -768,7 +753,6 @@ func (s DBParameterGroup) String() string {
 //    * ModifyDBInstance
 //
 //    * RebootDBInstance
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBParameterGroupStatus
 type DBParameterGroupStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -785,7 +769,6 @@ func (s DBParameterGroupStatus) String() string {
 }
 
 // Specifies membership in a designated DB security group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBSecurityGroupMembership
 type DBSecurityGroupMembership struct {
 	_ struct{} `type:"structure"`
 
@@ -805,7 +788,6 @@ func (s DBSecurityGroupMembership) String() string {
 //
 // This data type is used as a response element in the DescribeDBSubnetGroups
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBSubnetGroup
 type DBSubnetGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -834,7 +816,6 @@ func (s DBSubnetGroup) String() string {
 }
 
 // An Active Directory Domain membership record associated with a DB instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DomainMembership
 type DomainMembership struct {
 	_ struct{} `type:"structure"`
 
@@ -859,7 +840,6 @@ func (s DomainMembership) String() string {
 }
 
 // A range of double values.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DoubleRange
 type DoubleRange struct {
 	_ struct{} `type:"structure"`
 
@@ -876,7 +856,6 @@ func (s DoubleRange) String() string {
 }
 
 // Specifies a connection endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/Endpoint
 type Endpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -897,7 +876,6 @@ func (s Endpoint) String() string {
 
 // Contains the result of a successful invocation of the DescribeEngineDefaultParameters
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/EngineDefaults
 type EngineDefaults struct {
 	_ struct{} `type:"structure"`
 
@@ -920,7 +898,6 @@ func (s EngineDefaults) String() string {
 }
 
 // This data type is used as a response element in the DescribeEvents action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/Event
 type Event struct {
 	_ struct{} `type:"structure"`
 
@@ -950,7 +927,6 @@ func (s Event) String() string {
 
 // Contains the results of a successful invocation of the DescribeEventCategories
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/EventCategoriesMap
 type EventCategoriesMap struct {
 	_ struct{} `type:"structure"`
 
@@ -968,7 +944,6 @@ func (s EventCategoriesMap) String() string {
 
 // Contains the results of a successful invocation of the DescribeEventSubscriptions
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/EventSubscription
 type EventSubscription struct {
 	_ struct{} `type:"structure"`
 
@@ -1019,7 +994,6 @@ func (s EventSubscription) String() string {
 }
 
 // This type is not currently supported.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/Filter
 type Filter struct {
 	_ struct{} `type:"structure"`
 
@@ -1058,7 +1032,6 @@ func (s *Filter) Validate() error {
 }
 
 // Provides information on the option groups the DB instance is a member of.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/OptionGroupMembership
 type OptionGroupMembership struct {
 	_ struct{} `type:"structure"`
 
@@ -1080,7 +1053,6 @@ func (s OptionGroupMembership) String() string {
 //
 // This data type is used as a response element in the DescribeOrderableDBInstanceOptions
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/OrderableDBInstanceOption
 type OrderableDBInstanceOption struct {
 	_ struct{} `type:"structure"`
 
@@ -1152,7 +1124,6 @@ func (s OrderableDBInstanceOption) String() string {
 }
 
 // Specifies a parameter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/Parameter
 type Parameter struct {
 	_ struct{} `type:"structure"`
 
@@ -1196,7 +1167,6 @@ func (s Parameter) String() string {
 
 // A list of the log types whose configuration is still pending. In other words,
 // these log types are in the process of being activated or deactivated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/PendingCloudwatchLogsExports
 type PendingCloudwatchLogsExports struct {
 	_ struct{} `type:"structure"`
 
@@ -1215,7 +1185,6 @@ func (s PendingCloudwatchLogsExports) String() string {
 }
 
 // Provides information about a pending maintenance action for a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/PendingMaintenanceAction
 type PendingMaintenanceAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1254,7 +1223,6 @@ func (s PendingMaintenanceAction) String() string {
 }
 
 // This data type is used as a response element in the ModifyDBInstance action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/PendingModifiedValues
 type PendingModifiedValues struct {
 	_ struct{} `type:"structure"`
 
@@ -1314,7 +1282,6 @@ func (s PendingModifiedValues) String() string {
 }
 
 // A range of integer values.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/Range
 type Range struct {
 	_ struct{} `type:"structure"`
 
@@ -1337,7 +1304,6 @@ func (s Range) String() string {
 }
 
 // Describes the pending maintenance actions for a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ResourcePendingMaintenanceActions
 type ResourcePendingMaintenanceActions struct {
 	_ struct{} `type:"structure"`
 
@@ -1358,7 +1324,6 @@ func (s ResourcePendingMaintenanceActions) String() string {
 //
 // This data type is used as a response element in the DescribeDBSubnetGroups
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/Subnet
 type Subnet struct {
 	_ struct{} `type:"structure"`
 
@@ -1379,7 +1344,6 @@ func (s Subnet) String() string {
 
 // Metadata assigned to an Amazon Neptune resource consisting of a key-value
 // pair.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -1402,7 +1366,6 @@ func (s Tag) String() string {
 }
 
 // A time zone associated with a DBInstance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/Timezone
 type Timezone struct {
 	_ struct{} `type:"structure"`
 
@@ -1416,7 +1379,6 @@ func (s Timezone) String() string {
 }
 
 // The version of the database engine that a DB instance can be upgraded to.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/UpgradeTarget
 type UpgradeTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -1445,7 +1407,6 @@ func (s UpgradeTarget) String() string {
 // Information about valid modifications that you can make to your DB instance.
 // Contains the result of a successful call to the DescribeValidDBInstanceModifications
 // action. You can use this information when you call ModifyDBInstance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ValidDBInstanceModificationsMessage
 type ValidDBInstanceModificationsMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -1462,7 +1423,6 @@ func (s ValidDBInstanceModificationsMessage) String() string {
 //
 // Contains the result of a successful call to the DescribeValidDBInstanceModifications
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ValidStorageOptions
 type ValidStorageOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -1488,7 +1448,6 @@ func (s ValidStorageOptions) String() string {
 
 // This data type is used as a response element for queries on VPC security
 // group membership.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/VpcSecurityGroupMembership
 type VpcSecurityGroupMembership struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure for list branches request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListBranchesRequest
 type ListBranchesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -80,7 +79,6 @@ func (s ListBranchesInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure for list branches request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListBranchesResult
 type ListBranchesOutput struct {
 	_ struct{} `type:"structure"`
 

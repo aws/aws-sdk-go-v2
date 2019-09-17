@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input to ModifyDBClusterParameterGroup.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBClusterParameterGroupMessage
 type ModifyDBClusterParameterGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s *ModifyDBClusterParameterGroupInput) Validate() error {
 }
 
 // Contains the name of a DB cluster parameter group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterParameterGroupNameMessage
 type ModifyDBClusterParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
 

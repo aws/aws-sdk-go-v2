@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateResolverRuleRequest
 type CreateResolverRuleInput struct {
 	_ struct{} `type:"structure"`
 
@@ -95,7 +94,6 @@ func (s *CreateResolverRuleInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateResolverRuleResponse
 type CreateResolverRuleOutput struct {
 	_ struct{} `type:"structure"`
 

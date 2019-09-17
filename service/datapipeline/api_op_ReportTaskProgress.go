@@ -11,7 +11,6 @@ import (
 )
 
 // Contains the parameters for ReportTaskProgress.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ReportTaskProgressInput
 type ReportTaskProgressInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s *ReportTaskProgressInput) Validate() error {
 }
 
 // Contains the output of ReportTaskProgress.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ReportTaskProgressOutput
 type ReportTaskProgressOutput struct {
 	_ struct{} `type:"structure"`
 

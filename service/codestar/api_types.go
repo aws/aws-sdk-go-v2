@@ -13,7 +13,6 @@ var _ = awsutil.Prettify
 // Location and destination information about the source code files provided
 // with the project request. The source code is uploaded to the new project
 // source repository after project creation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/Code
 type Code struct {
 	_ struct{} `type:"structure"`
 
@@ -67,7 +66,6 @@ func (s *Code) Validate() error {
 // Information about the AWS CodeCommit repository to be created in AWS CodeStar.
 // This is where the source code files provided with the project request will
 // be uploaded after project creation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CodeCommitCodeDestination
 type CodeCommitCodeDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -102,7 +100,6 @@ func (s *CodeCommitCodeDestination) Validate() error {
 // The repository to be created in AWS CodeStar. Valid values are AWS CodeCommit
 // or GitHub. After AWS CodeStar provisions the new repository, the source code
 // files provided with the project request are placed in the repository.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CodeDestination
 type CodeDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -144,7 +141,6 @@ func (s *CodeDestination) Validate() error {
 
 // The location where the source code files provided with the project request
 // are stored. AWS CodeStar retrieves the files during project creation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CodeSource
 type CodeSource struct {
 	_ struct{} `type:"structure"`
 
@@ -182,7 +178,6 @@ func (s *CodeSource) Validate() error {
 // Information about the GitHub repository to be created in AWS CodeStar. This
 // is where the source code files provided with the project request will be
 // uploaded after project creation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/GitHubCodeDestination
 type GitHubCodeDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -276,7 +271,6 @@ func (s *GitHubCodeDestination) Validate() error {
 }
 
 // An indication of whether a project creation or deletion is failed or successful.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ProjectStatus
 type ProjectStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -295,7 +289,6 @@ func (s ProjectStatus) String() string {
 }
 
 // Information about the metadata for a project.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ProjectSummary
 type ProjectSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -312,7 +305,6 @@ func (s ProjectSummary) String() string {
 }
 
 // Information about a resource for a project.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/Resource
 type Resource struct {
 	_ struct{} `type:"structure"`
 
@@ -329,7 +321,6 @@ func (s Resource) String() string {
 
 // The Amazon S3 location where the source code files provided with the project
 // request are stored.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/S3Location
 type S3Location struct {
 	_ struct{} `type:"structure"`
 
@@ -361,7 +352,6 @@ func (s *S3Location) Validate() error {
 }
 
 // Information about a team member in a project.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/TeamMember
 type TeamMember struct {
 	_ struct{} `type:"structure"`
 
@@ -389,7 +379,6 @@ func (s TeamMember) String() string {
 
 // The toolchain template file provided with the project request. AWS CodeStar
 // uses the template to provision the toolchain stack in AWS CloudFormation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/Toolchain
 type Toolchain struct {
 	_ struct{} `type:"structure"`
 
@@ -439,7 +428,6 @@ func (s *Toolchain) Validate() error {
 // The Amazon S3 location where the toolchain template file provided with the
 // project request is stored. AWS CodeStar retrieves the file during project
 // creation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ToolchainSource
 type ToolchainSource struct {
 	_ struct{} `type:"structure"`
 
@@ -475,7 +463,6 @@ func (s *ToolchainSource) Validate() error {
 }
 
 // Information about a user's profile in AWS CodeStar.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UserProfileSummary
 type UserProfileSummary struct {
 	_ struct{} `type:"structure"`
 

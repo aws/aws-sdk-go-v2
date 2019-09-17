@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // A collection of accounts and regions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/AccountAggregationSource
 type AccountAggregationSource struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s *AccountAggregationSource) Validate() error {
 //
 // A rule is compliant if all of the resources that the rule evaluated comply
 // with it. It is noncompliant if any of these resources do not comply.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/AggregateComplianceByConfigRule
 type AggregateComplianceByConfigRule struct {
 	_ struct{} `type:"structure"`
 
@@ -84,7 +82,6 @@ func (s AggregateComplianceByConfigRule) String() string {
 
 // Returns the number of compliant and noncompliant rules for one or more accounts
 // and regions in an aggregator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/AggregateComplianceCount
 type AggregateComplianceCount struct {
 	_ struct{} `type:"structure"`
 
@@ -103,7 +100,6 @@ func (s AggregateComplianceCount) String() string {
 // The details of an AWS Config evaluation for an account ID and region in an
 // aggregator. Provides the AWS resource that was evaluated, the compliance
 // of the resource, related time stamps, and supplementary information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/AggregateEvaluationResult
 type AggregateEvaluationResult struct {
 	_ struct{} `type:"structure"`
 
@@ -142,7 +138,6 @@ func (s AggregateEvaluationResult) String() string {
 // The details that identify a resource that is collected by AWS Config aggregator,
 // including the resource type, ID, (if available) the custom resource name,
 // the source account, and source region.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/AggregateResourceIdentifier
 type AggregateResourceIdentifier struct {
 	_ struct{} `type:"structure"`
 
@@ -207,7 +202,6 @@ func (s *AggregateResourceIdentifier) Validate() error {
 }
 
 // The current sync status between the source and the aggregator account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/AggregatedSourceStatus
 type AggregatedSourceStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -248,7 +242,6 @@ func (s AggregatedSourceStatus) String() string {
 
 // An object that represents the authorizations granted to aggregator accounts
 // and regions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/AggregationAuthorization
 type AggregationAuthorization struct {
 	_ struct{} `type:"structure"`
 
@@ -271,7 +264,6 @@ func (s AggregationAuthorization) String() string {
 }
 
 // The detailed configuration of a specified resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/BaseConfigurationItem
 type BaseConfigurationItem struct {
 	_ struct{} `type:"structure"`
 
@@ -327,7 +319,6 @@ func (s BaseConfigurationItem) String() string {
 
 // Indicates whether an AWS resource or AWS Config rule is compliant and provides
 // the number of contributors that affect the compliance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/Compliance
 type Compliance struct {
 	_ struct{} `type:"structure"`
 
@@ -361,7 +352,6 @@ func (s Compliance) String() string {
 // Indicates whether an AWS Config rule is compliant. A rule is compliant if
 // all of the resources that the rule evaluated comply with it. A rule is noncompliant
 // if any of these resources do not comply.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ComplianceByConfigRule
 type ComplianceByConfigRule struct {
 	_ struct{} `type:"structure"`
 
@@ -381,7 +371,6 @@ func (s ComplianceByConfigRule) String() string {
 // AWS Config rules is compliant. A resource is compliant if it complies with
 // all of the rules that evaluate it. A resource is noncompliant if it does
 // not comply with one or more of these rules.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ComplianceByResource
 type ComplianceByResource struct {
 	_ struct{} `type:"structure"`
 
@@ -403,7 +392,6 @@ func (s ComplianceByResource) String() string {
 
 // The number of AWS resources or AWS Config rules responsible for the current
 // compliance of the item, up to a maximum number.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ComplianceContributorCount
 type ComplianceContributorCount struct {
 	_ struct{} `type:"structure"`
 
@@ -421,7 +409,6 @@ func (s ComplianceContributorCount) String() string {
 }
 
 // The number of AWS Config rules or AWS resources that are compliant and noncompliant.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ComplianceSummary
 type ComplianceSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -444,7 +431,6 @@ func (s ComplianceSummary) String() string {
 
 // The number of AWS resources of a specific type that are compliant or noncompliant,
 // up to a maximum of 100 for each.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ComplianceSummaryByResourceType
 type ComplianceSummaryByResourceType struct {
 	_ struct{} `type:"structure"`
 
@@ -464,7 +450,6 @@ func (s ComplianceSummaryByResourceType) String() string {
 // Provides status of the delivery of the snapshot or the configuration history
 // to the specified Amazon S3 bucket. Also provides the status of notifications
 // about the Amazon S3 delivery to the specified Amazon SNS topic.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigExportDeliveryInfo
 type ConfigExportDeliveryInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -506,7 +491,6 @@ func (s ConfigExportDeliveryInfo) String() string {
 // For more information about developing and using AWS Config rules, see Evaluating
 // AWS Resource Configurations with AWS Config (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html)
 // in the AWS Config Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigRule
 type ConfigRule struct {
 	_ struct{} `type:"structure"`
 
@@ -618,7 +602,6 @@ func (s *ConfigRule) Validate() error {
 
 // Filters the compliance results based on account ID, region, compliance type,
 // and rule name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigRuleComplianceFilters
 type ConfigRuleComplianceFilters struct {
 	_ struct{} `type:"structure"`
 
@@ -661,7 +644,6 @@ func (s *ConfigRuleComplianceFilters) Validate() error {
 }
 
 // Filters the results based on the account IDs and regions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigRuleComplianceSummaryFilters
 type ConfigRuleComplianceSummaryFilters struct {
 	_ struct{} `type:"structure"`
 
@@ -695,7 +677,6 @@ func (s *ConfigRuleComplianceSummaryFilters) Validate() error {
 // and the related error for the last failure.
 //
 // This action does not return status information about custom AWS Config rules.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigRuleEvaluationStatus
 type ConfigRuleEvaluationStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -785,7 +766,6 @@ func (s ConfigRuleEvaluationStatus) String() string {
 //
 // To update the deliveryFrequency with which AWS Config delivers your configuration
 // snapshots, use the PutDeliveryChannel action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigSnapshotDeliveryProperties
 type ConfigSnapshotDeliveryProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -800,7 +780,6 @@ func (s ConfigSnapshotDeliveryProperties) String() string {
 
 // A list that contains the status of the delivery of the configuration stream
 // notification to the Amazon SNS topic.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigStreamDeliveryInfo
 type ConfigStreamDeliveryInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -828,7 +807,6 @@ func (s ConfigStreamDeliveryInfo) String() string {
 
 // The details about the configuration aggregator, including information about
 // source accounts, regions, and metadata of the aggregator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigurationAggregator
 type ConfigurationAggregator struct {
 	_ struct{} `type:"structure"`
 
@@ -857,7 +835,6 @@ func (s ConfigurationAggregator) String() string {
 }
 
 // A list that contains detailed configurations of a specified resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigurationItem
 type ConfigurationItem struct {
 	_ struct{} `type:"structure"`
 
@@ -935,7 +912,6 @@ func (s ConfigurationItem) String() string {
 
 // An object that represents the recording of configuration changes of an AWS
 // resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigurationRecorder
 type ConfigurationRecorder struct {
 	_ struct{} `type:"structure"`
 
@@ -972,7 +948,6 @@ func (s *ConfigurationRecorder) Validate() error {
 }
 
 // The current status of the configuration recorder.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigurationRecorderStatus
 type ConfigurationRecorderStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -1008,7 +983,6 @@ func (s ConfigurationRecorderStatus) String() string {
 
 // The channel through which AWS Config delivers notifications and updated configuration
 // states.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeliveryChannel
 type DeliveryChannel struct {
 	_ struct{} `type:"structure"`
 
@@ -1066,7 +1040,6 @@ func (s *DeliveryChannel) Validate() error {
 // The status of a specified delivery channel.
 //
 // Valid values: Success | Failure
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeliveryChannelStatus
 type DeliveryChannelStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -1093,7 +1066,6 @@ func (s DeliveryChannelStatus) String() string {
 
 // Identifies an AWS resource and indicates whether it complies with the AWS
 // Config rule that it was evaluated against.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/Evaluation
 type Evaluation struct {
 	_ struct{} `type:"structure"`
 
@@ -1177,7 +1149,6 @@ func (s *Evaluation) Validate() error {
 // The details of an AWS Config evaluation. Provides the AWS resource that was
 // evaluated, the compliance of the resource, related time stamps, and supplementary
 // information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/EvaluationResult
 type EvaluationResult struct {
 	_ struct{} `type:"structure"`
 
@@ -1213,7 +1184,6 @@ func (s EvaluationResult) String() string {
 }
 
 // Uniquely identifies an evaluation result.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/EvaluationResultIdentifier
 type EvaluationResultIdentifier struct {
 	_ struct{} `type:"structure"`
 
@@ -1235,7 +1205,6 @@ func (s EvaluationResultIdentifier) String() string {
 
 // Identifies an AWS Config rule that evaluated an AWS resource, and provides
 // the type and ID of the resource that the rule evaluated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/EvaluationResultQualifier
 type EvaluationResultQualifier struct {
 	_ struct{} `type:"structure"`
 
@@ -1255,7 +1224,6 @@ func (s EvaluationResultQualifier) String() string {
 }
 
 // List of each of the failed remediations with specific reasons.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/FailedRemediationBatch
 type FailedRemediationBatch struct {
 	_ struct{} `type:"structure"`
 
@@ -1272,7 +1240,6 @@ func (s FailedRemediationBatch) String() string {
 }
 
 // Details about the fields such as name of the field.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/FieldInfo
 type FieldInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1286,7 +1253,6 @@ func (s FieldInfo) String() string {
 }
 
 // The count of resources that are grouped by the group name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GroupedResourceCount
 type GroupedResourceCount struct {
 	_ struct{} `type:"structure"`
 
@@ -1307,7 +1273,6 @@ func (s GroupedResourceCount) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/MemberAccountStatus
 type MemberAccountStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -1334,7 +1299,6 @@ func (s MemberAccountStatus) String() string {
 
 // This object contains regions to set up the aggregator and an IAM role to
 // retrieve organization details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationAggregationSource
 type OrganizationAggregationSource struct {
 	_ struct{} `type:"structure"`
 
@@ -1373,7 +1337,6 @@ func (s *OrganizationAggregationSource) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationConfigRule
 type OrganizationConfigRule struct {
 	_ struct{} `type:"structure"`
 
@@ -1397,7 +1360,6 @@ func (s OrganizationConfigRule) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationConfigRuleStatus
 type OrganizationConfigRuleStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -1419,7 +1381,6 @@ func (s OrganizationConfigRuleStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationCustomRuleMetadata
 type OrganizationCustomRuleMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -1482,7 +1443,6 @@ func (s *OrganizationCustomRuleMetadata) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationManagedRuleMetadata
 type OrganizationManagedRuleMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -1540,7 +1500,6 @@ func (s *OrganizationManagedRuleMetadata) Validate() error {
 
 // An object that represents the account ID and region of an aggregator account
 // that is requesting authorization but is not yet authorized.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PendingAggregationRequest
 type PendingAggregationRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -1557,7 +1516,6 @@ func (s PendingAggregationRequest) String() string {
 }
 
 // Details about the query.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/QueryInfo
 type QueryInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1600,7 +1558,6 @@ func (s QueryInfo) String() string {
 // For a list of supported resource types, see Supported Resource Types (https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources).
 //
 // For more information, see Selecting Which Resources AWS Config Records (https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RecordingGroup
 type RecordingGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -1649,7 +1606,6 @@ func (s RecordingGroup) String() string {
 }
 
 // The relationship of the related resource to the main resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/Relationship
 type Relationship struct {
 	_ struct{} `type:"structure"`
 
@@ -1674,7 +1630,6 @@ func (s Relationship) String() string {
 // An object that represents the details about the remediation configuration
 // that includes the remediation action, parameters, and data to execute the
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RemediationConfiguration
 type RemediationConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1737,7 +1692,6 @@ func (s *RemediationConfiguration) Validate() error {
 
 // Provides details of the current status of the invoked remediation action
 // for that resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RemediationExecutionStatus
 type RemediationExecutionStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -1764,7 +1718,6 @@ func (s RemediationExecutionStatus) String() string {
 }
 
 // Name of the step from the SSM document.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RemediationExecutionStep
 type RemediationExecutionStep struct {
 	_ struct{} `type:"structure"`
 
@@ -1791,7 +1744,6 @@ func (s RemediationExecutionStep) String() string {
 
 // The value is either a dynamic (resource) value or a static value. You must
 // select either a dynamic value or a static value.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RemediationParameterValue
 type RemediationParameterValue struct {
 	_ struct{} `type:"structure"`
 
@@ -1808,7 +1760,6 @@ func (s RemediationParameterValue) String() string {
 }
 
 // An object that contains the resource type and the number of resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceCount
 type ResourceCount struct {
 	_ struct{} `type:"structure"`
 
@@ -1825,7 +1776,6 @@ func (s ResourceCount) String() string {
 }
 
 // Filters the resource count based on account ID, region, and resource type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceCountFilters
 type ResourceCountFilters struct {
 	_ struct{} `type:"structure"`
 
@@ -1859,7 +1809,6 @@ func (s *ResourceCountFilters) Validate() error {
 
 // Filters the results by resource account ID, region, resource ID, and resource
 // name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceFilters
 type ResourceFilters struct {
 	_ struct{} `type:"structure"`
 
@@ -1899,7 +1848,6 @@ func (s *ResourceFilters) Validate() error {
 
 // The details that identify a resource that is discovered by AWS Config, including
 // the resource type, ID, and (if available) the custom resource name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceIdentifier
 type ResourceIdentifier struct {
 	_ struct{} `type:"structure"`
 
@@ -1923,7 +1871,6 @@ func (s ResourceIdentifier) String() string {
 
 // The details that identify a resource within AWS Config, including the resource
 // type and resource ID.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceKey
 type ResourceKey struct {
 	_ struct{} `type:"structure"`
 
@@ -1964,7 +1911,6 @@ func (s *ResourceKey) Validate() error {
 }
 
 // The dynamic value of the resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceValue
 type ResourceValue struct {
 	_ struct{} `type:"structure"`
 
@@ -1980,7 +1926,6 @@ func (s ResourceValue) String() string {
 // An object with the name of the retention configuration and the retention
 // period in days. The object stores the configuration for data retention in
 // AWS Config.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RetentionConfiguration
 type RetentionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -2008,7 +1953,6 @@ func (s RetentionConfiguration) String() string {
 // a scope to constrain which resources trigger an evaluation for a rule. Otherwise,
 // evaluations for the rule are triggered when any resource in your recording
 // group changes in configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/Scope
 type Scope struct {
 	_ struct{} `type:"structure"`
 
@@ -2058,7 +2002,6 @@ func (s *Scope) Validate() error {
 
 // Provides the AWS Config rule owner (AWS or customer), the rule identifier,
 // and the events that trigger the evaluation of your AWS resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/Source
 type Source struct {
 	_ struct{} `type:"structure"`
 
@@ -2112,7 +2055,6 @@ func (s *Source) Validate() error {
 // you want AWS Config to run evaluations for the rule if the trigger type is
 // periodic. You can specify the parameter values for SourceDetail only for
 // custom rules.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/SourceDetail
 type SourceDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -2163,7 +2105,6 @@ func (s SourceDetail) String() string {
 }
 
 // The static value of the resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StaticValue
 type StaticValue struct {
 	_ struct{} `type:"structure"`
 
@@ -2176,7 +2117,6 @@ func (s StaticValue) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StatusDetailFilters
 type StatusDetailFilters struct {
 	_ struct{} `type:"structure"`
 
@@ -2194,7 +2134,6 @@ func (s StatusDetailFilters) String() string {
 // you categorize and organize them. Each tag consists of a key and an optional
 // value, both of which you define. Tag keys can have a maximum character length
 // of 128 characters, and tag values can have a maximum length of 256 characters.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 

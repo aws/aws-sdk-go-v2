@@ -11,7 +11,6 @@ import (
 )
 
 // A PutRecords request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecordsInput
 type PutRecordsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -63,7 +62,6 @@ func (s *PutRecordsInput) Validate() error {
 }
 
 // PutRecords results.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecordsOutput
 type PutRecordsOutput struct {
 	_ struct{} `type:"structure"`
 

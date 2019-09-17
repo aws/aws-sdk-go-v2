@@ -11,7 +11,6 @@ import (
 )
 
 // DescribeLocationNfsRequest
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationNfsRequest
 type DescribeLocationNfsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *DescribeLocationNfsInput) Validate() error {
 }
 
 // DescribeLocationNfsResponse
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationNfsResponse
 type DescribeLocationNfsOutput struct {
 	_ struct{} `type:"structure"`
 

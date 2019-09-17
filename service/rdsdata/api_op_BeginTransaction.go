@@ -11,7 +11,6 @@ import (
 )
 
 // The request parameters represent the input of a request to start a SQL transaction.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/BeginTransactionRequest
 type BeginTransactionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -81,7 +80,6 @@ func (s BeginTransactionInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The response elements represent the output of a request to start a SQL transaction.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/BeginTransactionResponse
 type BeginTransactionOutput struct {
 	_ struct{} `type:"structure"`
 

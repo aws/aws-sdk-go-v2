@@ -11,7 +11,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Endpoint for mobile app and device.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Endpoint
 type Endpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -36,7 +35,6 @@ func (s Endpoint) String() string {
 // name, type, and value, are included in the message size restriction, which
 // is currently 256 KB (262,144 bytes). For more information, see Using Amazon
 // SNS Message Attributes (https://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/MessageAttributeValue
 type MessageAttributeValue struct {
 	_ struct{} `type:"structure"`
 
@@ -78,7 +76,6 @@ func (s *MessageAttributeValue) Validate() error {
 }
 
 // Platform application object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PlatformApplication
 type PlatformApplication struct {
 	_ struct{} `type:"structure"`
 
@@ -95,7 +92,6 @@ func (s PlatformApplication) String() string {
 }
 
 // A wrapper type for the attributes of an Amazon SNS subscription.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Subscription
 type Subscription struct {
 	_ struct{} `type:"structure"`
 
@@ -121,7 +117,6 @@ func (s Subscription) String() string {
 }
 
 // The list of tags to be added to the specified topic.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -164,7 +159,6 @@ func (s *Tag) Validate() error {
 
 // A wrapper type for the topic's Amazon Resource Name (ARN). To retrieve a
 // topic's attributes, use GetTopicAttributes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Topic
 type Topic struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // The CheckDomainTransferability request contains the following elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CheckDomainTransferabilityRequest
 type CheckDomainTransferabilityInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s *CheckDomainTransferabilityInput) Validate() error {
 }
 
 // The CheckDomainTransferability response includes the following elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CheckDomainTransferabilityResponse
 type CheckDomainTransferabilityOutput struct {
 	_ struct{} `type:"structure"`
 

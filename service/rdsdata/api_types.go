@@ -12,7 +12,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Contains the metadata for a column.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ColumnMetadata
 type ColumnMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -140,7 +139,6 @@ func (s ColumnMetadata) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains a value.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/Field
 type Field struct {
 	_ struct{} `type:"structure"`
 
@@ -205,7 +203,6 @@ func (s Field) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A record returned by a call.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/Record
 type Record struct {
 	_ struct{} `type:"structure"`
 
@@ -235,7 +232,6 @@ func (s Record) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The result set returned by a SQL statement.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ResultFrame
 type ResultFrame struct {
 	_ struct{} `type:"structure"`
 
@@ -274,7 +270,6 @@ func (s ResultFrame) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The metadata of the result set returned by a SQL statement.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ResultSetMetadata
 type ResultSetMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -312,7 +307,6 @@ func (s ResultSetMetadata) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A parameter used in a SQL statement.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/SqlParameter
 type SqlParameter struct {
 	_ struct{} `type:"structure"`
 
@@ -345,7 +339,6 @@ func (s SqlParameter) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The result of a SQL statement.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/SqlStatementResult
 type SqlStatementResult struct {
 	_ struct{} `type:"structure"`
 
@@ -378,7 +371,6 @@ func (s SqlStatementResult) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A structure value returned by a call.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/StructValue
 type StructValue struct {
 	_ struct{} `type:"structure"`
 
@@ -408,7 +400,6 @@ func (s StructValue) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The response elements represent the results of an update.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/UpdateResult
 type UpdateResult struct {
 	_ struct{} `type:"structure"`
 
@@ -438,7 +429,6 @@ func (s UpdateResult) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains the value of a column.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/Value
 type Value struct {
 	_ struct{} `type:"structure"`
 

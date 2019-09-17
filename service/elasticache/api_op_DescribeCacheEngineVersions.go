@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a DescribeCacheEngineVersions operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheEngineVersionsMessage
 type DescribeCacheEngineVersionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s DescribeCacheEngineVersionsInput) String() string {
 }
 
 // Represents the output of a DescribeCacheEngineVersions operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheEngineVersionMessage
 type DescribeCacheEngineVersionsOutput struct {
 	_ struct{} `type:"structure"`
 

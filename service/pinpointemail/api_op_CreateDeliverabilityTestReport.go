@@ -19,7 +19,6 @@ import (
 // to special email addresses spread across several major email providers. After
 // about 24 hours, the test is complete, and you can use the GetDeliverabilityTestReport
 // operation to view the results of the test.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateDeliverabilityTestReportRequest
 type CreateDeliverabilityTestReportInput struct {
 	_ struct{} `type:"structure"`
 
@@ -117,7 +116,6 @@ func (s CreateDeliverabilityTestReportInput) MarshalFields(e protocol.FieldEncod
 }
 
 // Information about the predictive inbox placement test that you created.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateDeliverabilityTestReportResponse
 type CreateDeliverabilityTestReportOutput struct {
 	_ struct{} `type:"structure"`
 

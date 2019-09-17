@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the inputs for the CreateLunaClient action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateLunaClientRequest
 type CreateLunaClientInput struct {
 	_ struct{} `type:"structure"`
 
@@ -47,7 +46,6 @@ func (s *CreateLunaClientInput) Validate() error {
 }
 
 // Contains the output of the CreateLunaClient action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateLunaClientResponse
 type CreateLunaClientOutput struct {
 	_ struct{} `type:"structure"`
 

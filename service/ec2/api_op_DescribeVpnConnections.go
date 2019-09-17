@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for DescribeVpnConnections.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpnConnectionsRequest
 type DescribeVpnConnectionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -72,7 +71,6 @@ func (s DescribeVpnConnectionsInput) String() string {
 }
 
 // Contains the output of DescribeVpnConnections.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpnConnectionsResult
 type DescribeVpnConnectionsOutput struct {
 	_ struct{} `type:"structure"`
 

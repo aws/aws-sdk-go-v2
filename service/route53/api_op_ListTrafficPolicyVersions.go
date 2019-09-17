@@ -12,7 +12,6 @@ import (
 
 // A complex type that contains the information about the request to list your
 // traffic policies.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyVersionsRequest
 type ListTrafficPolicyVersionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -87,7 +86,6 @@ func (s ListTrafficPolicyVersionsInput) MarshalFields(e protocol.FieldEncoder) e
 }
 
 // A complex type that contains the response information for the request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyVersionsResponse
 type ListTrafficPolicyVersionsOutput struct {
 	_ struct{} `type:"structure"`
 

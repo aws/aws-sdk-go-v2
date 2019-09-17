@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for AttachLoaBalancerToSubnets.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AttachLoadBalancerToSubnetsInput
 type AttachLoadBalancerToSubnetsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s *AttachLoadBalancerToSubnetsInput) Validate() error {
 }
 
 // Contains the output of AttachLoadBalancerToSubnets.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AttachLoadBalancerToSubnetsOutput
 type AttachLoadBalancerToSubnetsOutput struct {
 	_ struct{} `type:"structure"`
 

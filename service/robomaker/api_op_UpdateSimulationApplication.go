@@ -12,7 +12,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/UpdateSimulationApplicationRequest
 type UpdateSimulationApplicationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -136,7 +135,6 @@ func (s UpdateSimulationApplicationInput) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/UpdateSimulationApplicationResponse
 type UpdateSimulationApplicationOutput struct {
 	_ struct{} `type:"structure"`
 

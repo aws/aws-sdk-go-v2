@@ -19,7 +19,6 @@ var _ = awsutil.Prettify
 // For more information, see Aborting Incomplete Multipart Uploads Using a Bucket
 // Lifecycle Policy (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)
 // in the Amazon Simple Storage Service Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbortIncompleteMultipartUpload
 type AbortIncompleteMultipartUpload struct {
 	_ struct{} `type:"structure"`
 
@@ -47,7 +46,6 @@ func (s AbortIncompleteMultipartUpload) MarshalFields(e protocol.FieldEncoder) e
 // Configures the transfer acceleration state for an Amazon S3 bucket. For more
 // information, see Amazon S3 Transfer Acceleration (https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html)
 // in the Amazon Simple Storage Service Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AccelerateConfiguration
 type AccelerateConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -72,7 +70,6 @@ func (s AccelerateConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains the elements that set the ACL permissions for an object per grantee.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AccessControlPolicy
 type AccessControlPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -129,7 +126,6 @@ func (s AccessControlPolicy) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A container for information about access control for replicas.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AccessControlTranslation
 type AccessControlTranslation struct {
 	_ struct{} `type:"structure"`
 
@@ -173,7 +169,6 @@ func (s AccessControlTranslation) MarshalFields(e protocol.FieldEncoder) error {
 // A conjunction (logical AND) of predicates, which is used in evaluating a
 // metrics filter. The operator must have at least two predicates in any combination,
 // and an object must match all of the predicates for the filter to apply.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsAndOperator
 type AnalyticsAndOperator struct {
 	_ struct{} `type:"structure"`
 
@@ -235,7 +230,6 @@ func (s AnalyticsAndOperator) MarshalFields(e protocol.FieldEncoder) error {
 //
 // For more information, see GET Bucket analytics (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETAnalyticsConfig.html)
 // in the Amazon Simple Storage Service API Reference.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsConfiguration
 type AnalyticsConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -313,7 +307,6 @@ func (s AnalyticsConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Where to publish the analytics results.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsExportDestination
 type AnalyticsExportDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -358,7 +351,6 @@ func (s AnalyticsExportDestination) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsFilter
 type AnalyticsFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -421,7 +413,6 @@ func (s AnalyticsFilter) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsS3BucketDestination
 type AnalyticsS3BucketDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -501,7 +492,6 @@ func (s AnalyticsS3BucketDestination) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Bucket
 type Bucket struct {
 	_ struct{} `type:"structure"`
 
@@ -538,7 +528,6 @@ func (s Bucket) MarshalFields(e protocol.FieldEncoder) error {
 // Specifies the lifecycle configuration for objects in an Amazon S3 bucket.
 // For more information, see Object Lifecycle Management (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html)
 // in the Amazon Simple Storage Service Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/BucketLifecycleConfiguration
 type BucketLifecycleConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -591,7 +580,6 @@ func (s BucketLifecycleConfiguration) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/BucketLoggingStatus
 type BucketLoggingStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -637,7 +625,6 @@ func (s BucketLoggingStatus) MarshalFields(e protocol.FieldEncoder) error {
 // S3 bucket. For more information, see Enabling Cross-Origin Resource Sharing
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the Amazon
 // Simple Storage Service Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CORSConfiguration
 type CORSConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -691,7 +678,6 @@ func (s CORSConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies a cross-origin access rule for an Amazon S3 bucket.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CORSRule
 type CORSRule struct {
 	_ struct{} `type:"structure"`
 
@@ -805,7 +791,6 @@ func (s CORSRule) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes how a CSV-formatted input object is formatted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CSVInput
 type CSVInput struct {
 	_ struct{} `type:"structure"`
 
@@ -888,7 +873,6 @@ func (s CSVInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes how CSV-formatted results are formatted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CSVOutput
 type CSVOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -949,7 +933,6 @@ func (s CSVOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CloudFunctionConfiguration
 type CloudFunctionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1013,7 +996,6 @@ func (s CloudFunctionConfiguration) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CommonPrefix
 type CommonPrefix struct {
 	_ struct{} `type:"structure"`
 
@@ -1036,7 +1018,6 @@ func (s CommonPrefix) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompletedMultipartUpload
 type CompletedMultipartUpload struct {
 	_ struct{} `type:"structure"`
 
@@ -1065,7 +1046,6 @@ func (s CompletedMultipartUpload) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompletedPart
 type CompletedPart struct {
 	_ struct{} `type:"structure"`
 
@@ -1100,7 +1080,6 @@ func (s CompletedPart) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies a condition that must be met for a redirect to apply.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Condition
 type Condition struct {
 	_ struct{} `type:"structure"`
 
@@ -1143,7 +1122,6 @@ func (s Condition) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyObjectResult
 type CopyObjectResult struct {
 	_ struct{} `type:"structure"`
 
@@ -1175,7 +1153,6 @@ func (s CopyObjectResult) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyPartResult
 type CopyPartResult struct {
 	_ struct{} `type:"structure"`
 
@@ -1209,7 +1186,6 @@ func (s CopyPartResult) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucketConfiguration
 type CreateBucketConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1236,7 +1212,6 @@ func (s CreateBucketConfiguration) MarshalFields(e protocol.FieldEncoder) error 
 
 // The container element for specifying the default object lock retention settings
 // for new objects placed in the specified bucket.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DefaultRetention
 type DefaultRetention struct {
 	_ struct{} `type:"structure"`
 
@@ -1279,7 +1254,6 @@ func (s DefaultRetention) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Delete
 type Delete struct {
 	_ struct{} `type:"structure"`
 
@@ -1340,7 +1314,6 @@ func (s Delete) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteMarkerEntry
 type DeleteMarkerEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -1402,7 +1375,6 @@ func (s DeleteMarkerEntry) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies whether Amazon S3 should replicate delete makers.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteMarkerReplication
 type DeleteMarkerReplication struct {
 	_ struct{} `type:"structure"`
 
@@ -1429,7 +1401,6 @@ func (s DeleteMarkerReplication) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeletedObject
 type DeletedObject struct {
 	_ struct{} `type:"structure"`
 
@@ -1478,7 +1449,6 @@ func (s DeletedObject) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies information about where to publish analysis or configuration results
 // for an Amazon S3 bucket.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Destination
 type Destination struct {
 	_ struct{} `type:"structure"`
 
@@ -1590,7 +1560,6 @@ func (s Destination) MarshalFields(e protocol.FieldEncoder) error {
 
 // Describes the server-side encryption that will be applied to the restore
 // results.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Encryption
 type Encryption struct {
 	_ struct{} `type:"structure"`
 
@@ -1652,7 +1621,6 @@ func (s Encryption) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies encryption-related information for an Amazon S3 bucket that is
 // a destination for replicated objects.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/EncryptionConfiguration
 type EncryptionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1677,7 +1645,6 @@ func (s EncryptionConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Error
 type Error struct {
 	_ struct{} `type:"structure"`
 
@@ -1724,7 +1691,6 @@ func (s Error) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ErrorDocument
 type ErrorDocument struct {
 	_ struct{} `type:"structure"`
 
@@ -1769,7 +1735,6 @@ func (s ErrorDocument) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the Amazon S3 object key name to filter on and whether to filter
 // on the suffix or prefix of the key name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/FilterRule
 type FilterRule struct {
 	_ struct{} `type:"structure"`
 
@@ -1806,7 +1771,6 @@ func (s FilterRule) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GlacierJobParameters
 type GlacierJobParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -1845,7 +1809,6 @@ func (s GlacierJobParameters) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Grant
 type Grant struct {
 	_ struct{} `type:"structure"`
 
@@ -1898,7 +1861,6 @@ func (s Grant) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Grantee
 type Grantee struct {
 	_ struct{} `type:"structure" xmlPrefix:"xsi" xmlURI:"http://www.w3.org/2001/XMLSchema-instance"`
 
@@ -1968,7 +1930,6 @@ func (s Grantee) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/IndexDocument
 type IndexDocument struct {
 	_ struct{} `type:"structure"`
 
@@ -2011,7 +1972,6 @@ func (s IndexDocument) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Initiator
 type Initiator struct {
 	_ struct{} `type:"structure"`
 
@@ -2046,7 +2006,6 @@ func (s Initiator) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes the serialization format of the object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InputSerialization
 type InputSerialization struct {
 	_ struct{} `type:"structure"`
 
@@ -2101,7 +2060,6 @@ func (s InputSerialization) MarshalFields(e protocol.FieldEncoder) error {
 // Specifies the inventory configuration for an Amazon S3 bucket. For more information,
 // see GET Bucket inventory (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html)
 // in the Amazon Simple Storage Service API Reference.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryConfiguration
 type InventoryConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -2244,7 +2202,6 @@ func (s InventoryConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryDestination
 type InventoryDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -2292,7 +2249,6 @@ func (s InventoryDestination) MarshalFields(e protocol.FieldEncoder) error {
 
 // Contains the type of server-side encryption used to encrypt the inventory
 // results.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryEncryption
 type InventoryEncryption struct {
 	_ struct{} `type:"structure"`
 
@@ -2340,7 +2296,6 @@ func (s InventoryEncryption) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryFilter
 type InventoryFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -2380,7 +2335,6 @@ func (s InventoryFilter) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryS3BucketDestination
 type InventoryS3BucketDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -2475,7 +2429,6 @@ func (s InventoryS3BucketDestination) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventorySchedule
 type InventorySchedule struct {
 	_ struct{} `type:"structure"`
 
@@ -2514,7 +2467,6 @@ func (s InventorySchedule) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/JSONInput
 type JSONInput struct {
 	_ struct{} `type:"structure"`
 
@@ -2538,7 +2490,6 @@ func (s JSONInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/JSONOutput
 type JSONOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -2563,7 +2514,6 @@ func (s JSONOutput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A container for specifying the configuration for AWS Lambda notifications.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LambdaFunctionConfiguration
 type LambdaFunctionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -2648,7 +2598,6 @@ func (s LambdaFunctionConfiguration) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LifecycleConfiguration
 type LifecycleConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -2699,7 +2648,6 @@ func (s LifecycleConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LifecycleExpiration
 type LifecycleExpiration struct {
 	_ struct{} `type:"structure"`
 
@@ -2747,7 +2695,6 @@ func (s LifecycleExpiration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LifecycleRule
 type LifecycleRule struct {
 	_ struct{} `type:"structure"`
 
@@ -2886,7 +2833,6 @@ func (s LifecycleRule) MarshalFields(e protocol.FieldEncoder) error {
 // This is used in a Lifecycle Rule Filter to apply a logical AND to two or
 // more predicates. The Lifecycle Rule will apply to any object matching all
 // of the predicates configured inside the And operator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LifecycleRuleAndOperator
 type LifecycleRuleAndOperator struct {
 	_ struct{} `type:"structure"`
 
@@ -2944,7 +2890,6 @@ func (s LifecycleRuleAndOperator) MarshalFields(e protocol.FieldEncoder) error {
 
 // The Filter is used to identify objects that a Lifecycle Rule applies to.
 // A Filter must have exactly one of Prefix, Tag, or And specified.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LifecycleRuleFilter
 type LifecycleRuleFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -3012,7 +2957,6 @@ func (s LifecycleRuleFilter) MarshalFields(e protocol.FieldEncoder) error {
 // all log object keys for a bucket. For more information, see PUT Bucket logging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html)
 // in the Amazon Simple Storage Service API Reference.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LoggingEnabled
 type LoggingEnabled struct {
 	_ struct{} `type:"structure"`
 
@@ -3096,7 +3040,6 @@ func (s LoggingEnabled) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A metadata key-value pair to store with an object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetadataEntry
 type MetadataEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -3127,7 +3070,6 @@ func (s MetadataEntry) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetricsAndOperator
 type MetricsAndOperator struct {
 	_ struct{} `type:"structure"`
 
@@ -3190,7 +3132,6 @@ func (s MetricsAndOperator) MarshalFields(e protocol.FieldEncoder) error {
 // want to keep, they are erased. For more information, see PUT Bucket metrics
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTMetricConfiguration.html)
 // in the Amazon Simple Storage Service API Reference.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetricsConfiguration
 type MetricsConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -3246,7 +3187,6 @@ func (s MetricsConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetricsFilter
 type MetricsFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -3310,7 +3250,6 @@ func (s MetricsFilter) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MultipartUpload
 type MultipartUpload struct {
 	_ struct{} `type:"structure"`
 
@@ -3384,7 +3323,6 @@ func (s MultipartUpload) MarshalFields(e protocol.FieldEncoder) error {
 // configuration action on a bucket that has versioning enabled (or suspended)
 // to request that Amazon S3 delete noncurrent object versions at a specific
 // period in the object's lifetime.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NoncurrentVersionExpiration
 type NoncurrentVersionExpiration struct {
 	_ struct{} `type:"structure"`
 
@@ -3419,7 +3357,6 @@ func (s NoncurrentVersionExpiration) MarshalFields(e protocol.FieldEncoder) erro
 // noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING,
 // GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's
 // lifetime.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NoncurrentVersionTransition
 type NoncurrentVersionTransition struct {
 	_ struct{} `type:"structure"`
 
@@ -3458,7 +3395,6 @@ func (s NoncurrentVersionTransition) MarshalFields(e protocol.FieldEncoder) erro
 
 // A container for specifying the notification configuration of the bucket.
 // If this element is empty, notifications are turned off for the bucket.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfiguration
 type NotificationConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -3552,7 +3488,6 @@ func (s NotificationConfiguration) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfigurationDeprecated
 type NotificationConfigurationDeprecated struct {
 	_ struct{} `type:"structure"`
 
@@ -3594,7 +3529,6 @@ func (s NotificationConfigurationDeprecated) MarshalFields(e protocol.FieldEncod
 // Specifies object key name filtering rules. For information about key name
 // filtering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
 // in the Amazon Simple Storage Service Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfigurationFilter
 type NotificationConfigurationFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -3618,7 +3552,6 @@ func (s NotificationConfigurationFilter) MarshalFields(e protocol.FieldEncoder) 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Object
 type Object struct {
 	_ struct{} `type:"structure"`
 
@@ -3683,7 +3616,6 @@ func (s Object) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectIdentifier
 type ObjectIdentifier struct {
 	_ struct{} `type:"structure"`
 
@@ -3736,7 +3668,6 @@ func (s ObjectIdentifier) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The container element for object lock configuration parameters.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectLockConfiguration
 type ObjectLockConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -3770,7 +3701,6 @@ func (s ObjectLockConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A Legal Hold configuration for an object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectLockLegalHold
 type ObjectLockLegalHold struct {
 	_ struct{} `type:"structure"`
 
@@ -3795,7 +3725,6 @@ func (s ObjectLockLegalHold) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A Retention configuration for an object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectLockRetention
 type ObjectLockRetention struct {
 	_ struct{} `type:"structure"`
 
@@ -3830,7 +3759,6 @@ func (s ObjectLockRetention) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The container element for an object lock rule.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectLockRule
 type ObjectLockRule struct {
 	_ struct{} `type:"structure"`
 
@@ -3855,7 +3783,6 @@ func (s ObjectLockRule) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectVersion
 type ObjectVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -3943,7 +3870,6 @@ func (s ObjectVersion) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes the location where the restore job's output is stored.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/OutputLocation
 type OutputLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -3983,7 +3909,6 @@ func (s OutputLocation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes how results of the Select job are serialized.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/OutputSerialization
 type OutputSerialization struct {
 	_ struct{} `type:"structure"`
 
@@ -4016,7 +3941,6 @@ func (s OutputSerialization) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Owner
 type Owner struct {
 	_ struct{} `type:"structure"`
 
@@ -4047,7 +3971,6 @@ func (s Owner) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ParquetInput
 type ParquetInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -4062,7 +3985,6 @@ func (s ParquetInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Part
 type Part struct {
 	_ struct{} `type:"structure"`
 
@@ -4116,7 +4038,6 @@ func (s Part) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The container element for a bucket's policy status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PolicyStatus
 type PolicyStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -4142,7 +4063,6 @@ func (s PolicyStatus) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the Block Public Access configuration for an Amazon S3 bucket.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PublicAccessBlockConfiguration
 type PublicAccessBlockConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -4220,7 +4140,6 @@ func (s PublicAccessBlockConfiguration) MarshalFields(e protocol.FieldEncoder) e
 
 // Specifies the configuration for publishing messages to an Amazon Simple Queue
 // Service (Amazon SQS) queue when Amazon S3 detects specified events.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/QueueConfiguration
 type QueueConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -4301,7 +4220,6 @@ func (s QueueConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/QueueConfigurationDeprecated
 type QueueConfigurationDeprecated struct {
 	_ struct{} `type:"structure"`
 
@@ -4359,7 +4277,6 @@ func (s QueueConfigurationDeprecated) MarshalFields(e protocol.FieldEncoder) err
 
 // Specifies how requests are redirected. In the event of an error, you can
 // specify a different error code to return.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Redirect
 type Redirect struct {
 	_ struct{} `type:"structure"`
 
@@ -4430,7 +4347,6 @@ func (s Redirect) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the redirect behavior of all requests to a website endpoint of
 // an Amazon S3 bucket.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RedirectAllRequestsTo
 type RedirectAllRequestsTo struct {
 	_ struct{} `type:"structure"`
 
@@ -4482,7 +4398,6 @@ func (s RedirectAllRequestsTo) MarshalFields(e protocol.FieldEncoder) error {
 
 // A container for replication rules. You can add up to 1,000 rules. The maximum
 // size of a replication configuration is 2 MB.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationConfiguration
 type ReplicationConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -4555,7 +4470,6 @@ func (s ReplicationConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies which Amazon S3 objects to replicate and where to store the replicas.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRule
 type ReplicationRule struct {
 	_ struct{} `type:"structure"`
 
@@ -4697,7 +4611,6 @@ func (s ReplicationRule) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRuleAndOperator
 type ReplicationRuleAndOperator struct {
 	_ struct{} `type:"structure"`
 
@@ -4753,7 +4666,6 @@ func (s ReplicationRuleAndOperator) MarshalFields(e protocol.FieldEncoder) error
 
 // A filter that identifies the subset of objects to which the replication rule
 // applies. A Filter must specify exactly one Prefix, Tag, or an And child element.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRuleFilter
 type ReplicationRuleFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -4826,7 +4738,6 @@ func (s ReplicationRuleFilter) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RequestPaymentConfiguration
 type RequestPaymentConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -4866,7 +4777,6 @@ func (s RequestPaymentConfiguration) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // Container for restore job parameters.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RestoreRequest
 type RestoreRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -4972,7 +4882,6 @@ func (s RestoreRequest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the redirect behavior and when a redirect is applied.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RoutingRule
 type RoutingRule struct {
 	_ struct{} `type:"structure"`
 
@@ -5029,7 +4938,6 @@ func (s RoutingRule) MarshalFields(e protocol.FieldEncoder) error {
 // Specifies lifecycle rules for an Amazon S3 bucket. For more information,
 // see PUT Bucket lifecycle (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html)
 // in the Amazon Simple Storage Service API Reference.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Rule
 type Rule struct {
 	_ struct{} `type:"structure"`
 
@@ -5153,7 +5061,6 @@ func (s Rule) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A container for object key name prefix and suffix filtering rules.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/S3KeyFilter
 type S3KeyFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -5185,7 +5092,6 @@ func (s S3KeyFilter) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes an S3 location that will receive the results of the restore request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/S3Location
 type S3Location struct {
 	_ struct{} `type:"structure"`
 
@@ -5325,7 +5231,6 @@ func (s S3Location) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the use of SSE-KMS to encrypt delivered Inventory reports.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SSEKMS
 type SSEKMS struct {
 	_ struct{} `locationName:"SSE-KMS" type:"structure"`
 
@@ -5370,7 +5275,6 @@ func (s SSEKMS) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the use of SSE-S3 to encrypt delivered Inventory reports.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SSES3
 type SSES3 struct {
 	_ struct{} `locationName:"SSE-S3" type:"structure"`
 }
@@ -5386,7 +5290,6 @@ func (s SSES3) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes the parameters for Select job types.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SelectParameters
 type SelectParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -5475,7 +5378,6 @@ func (s SelectParameters) MarshalFields(e protocol.FieldEncoder) error {
 // this default encryption will be applied. For more information, see PUT Bucket
 // encryption (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTencryption.html)
 // in the Amazon Simple Storage Service API Reference.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ServerSideEncryptionByDefault
 type ServerSideEncryptionByDefault struct {
 	_ struct{} `type:"structure"`
 
@@ -5525,7 +5427,6 @@ func (s ServerSideEncryptionByDefault) MarshalFields(e protocol.FieldEncoder) er
 }
 
 // Specifies the default server-side-encryption configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ServerSideEncryptionConfiguration
 type ServerSideEncryptionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -5580,7 +5481,6 @@ func (s ServerSideEncryptionConfiguration) MarshalFields(e protocol.FieldEncoder
 }
 
 // Specifies the default server-side encryption configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ServerSideEncryptionRule
 type ServerSideEncryptionRule struct {
 	_ struct{} `type:"structure"`
 
@@ -5626,7 +5526,6 @@ func (s ServerSideEncryptionRule) MarshalFields(e protocol.FieldEncoder) error {
 // replication of these objects. Currently, Amazon S3 supports only the filter
 // that you can specify for objects created with server-side encryption using
 // an AWS KMS-Managed Key (SSE-KMS).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SourceSelectionCriteria
 type SourceSelectionCriteria struct {
 	_ struct{} `type:"structure"`
 
@@ -5669,7 +5568,6 @@ func (s SourceSelectionCriteria) MarshalFields(e protocol.FieldEncoder) error {
 
 // A container for filter information for the selection of S3 objects encrypted
 // with AWS KMS.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SseKmsEncryptedObjects
 type SseKmsEncryptedObjects struct {
 	_ struct{} `type:"structure"`
 
@@ -5712,7 +5610,6 @@ func (s SseKmsEncryptedObjects) MarshalFields(e protocol.FieldEncoder) error {
 // Specifies data related to access patterns to be collected and made available
 // to analyze the tradeoffs between different storage classes for an Amazon
 // S3 bucket.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/StorageClassAnalysis
 type StorageClassAnalysis struct {
 	_ struct{} `type:"structure"`
 
@@ -5752,7 +5649,6 @@ func (s StorageClassAnalysis) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/StorageClassAnalysisDataExport
 type StorageClassAnalysisDataExport struct {
 	_ struct{} `type:"structure"`
 
@@ -5811,7 +5707,6 @@ func (s StorageClassAnalysisDataExport) MarshalFields(e protocol.FieldEncoder) e
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -5869,7 +5764,6 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Tagging
 type Tagging struct {
 	_ struct{} `type:"structure"`
 
@@ -5920,7 +5814,6 @@ func (s Tagging) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/TargetGrant
 type TargetGrant struct {
 	_ struct{} `type:"structure"`
 
@@ -5976,7 +5869,6 @@ func (s TargetGrant) MarshalFields(e protocol.FieldEncoder) error {
 // A container for specifying the configuration for publication of messages
 // to an Amazon Simple Notification Service (Amazon SNS) topic when Amazon S3
 // detects specified events.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/TopicConfiguration
 type TopicConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -6061,7 +5953,6 @@ func (s TopicConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/TopicConfigurationDeprecated
 type TopicConfigurationDeprecated struct {
 	_ struct{} `type:"structure"`
 
@@ -6120,7 +6011,6 @@ func (s TopicConfigurationDeprecated) MarshalFields(e protocol.FieldEncoder) err
 }
 
 // Specifies when an object transitions to a specified storage class.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Transition
 type Transition struct {
 	_ struct{} `type:"structure"`
 
@@ -6168,7 +6058,6 @@ func (s Transition) MarshalFields(e protocol.FieldEncoder) error {
 // Describes the versioning state of an Amazon S3 bucket. For more information,
 // see PUT Bucket versioning (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html)
 // in the Amazon Simple Storage Service API Reference.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/VersioningConfiguration
 type VersioningConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -6204,7 +6093,6 @@ func (s VersioningConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies website configuration parameters for an Amazon S3 bucket.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/WebsiteConfiguration
 type WebsiteConfiguration struct {
 	_ struct{} `type:"structure"`
 

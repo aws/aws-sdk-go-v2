@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartEntitiesDetectionJobRequest
 type StartEntitiesDetectionJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -122,7 +121,6 @@ func (s *StartEntitiesDetectionJobInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartEntitiesDetectionJobResponse
 type StartEntitiesDetectionJobOutput struct {
 	_ struct{} `type:"structure"`
 

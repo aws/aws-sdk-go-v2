@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/InitiateDeviceClaimRequest
 type InitiateDeviceClaimInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s InitiateDeviceClaimInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/InitiateDeviceClaimResponse
 type InitiateDeviceClaimOutput struct {
 	_ struct{} `type:"structure"`
 

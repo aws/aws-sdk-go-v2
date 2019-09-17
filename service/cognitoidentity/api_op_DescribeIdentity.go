@@ -11,7 +11,6 @@ import (
 )
 
 // Input to the DescribeIdentity action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/DescribeIdentityInput
 type DescribeIdentityInput struct {
 	_ struct{} `type:"structure"`
 
@@ -44,7 +43,6 @@ func (s *DescribeIdentityInput) Validate() error {
 }
 
 // A description of the identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/IdentityDescription
 type DescribeIdentityOutput struct {
 	_ struct{} `type:"structure"`
 

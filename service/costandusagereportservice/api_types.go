@@ -13,7 +13,6 @@ var _ = awsutil.Prettify
 // The definition of AWS Cost and Usage Report. You can specify the report name,
 // time unit, report format, compression format, S3 bucket, additional artifacts,
 // and schema elements in the definition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ReportDefinition
 type ReportDefinition struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 )
 
 // CreateNFSFileShareInput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShareInput
 type CreateNFSFileShareInput struct {
 	_ struct{} `type:"structure"`
 
@@ -168,7 +167,6 @@ func (s *CreateNFSFileShareInput) Validate() error {
 }
 
 // CreateNFSFileShareOutput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShareOutput
 type CreateNFSFileShareOutput struct {
 	_ struct{} `type:"structure"`
 

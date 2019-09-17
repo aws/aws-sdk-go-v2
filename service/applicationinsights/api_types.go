@@ -14,7 +14,6 @@ var _ = awsutil.Prettify
 
 // Describes a standalone resource or similarly grouped resources that the application
 // is made up of.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ApplicationComponent
 type ApplicationComponent struct {
 	_ struct{} `type:"structure"`
 
@@ -38,7 +37,6 @@ func (s ApplicationComponent) String() string {
 }
 
 // Describes the status of the application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ApplicationInfo
 type ApplicationInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -67,7 +65,6 @@ func (s ApplicationInfo) String() string {
 }
 
 // Describes an anomaly or error with the application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/Observation
 type Observation struct {
 	_ struct{} `type:"structure"`
 
@@ -118,7 +115,6 @@ func (s Observation) String() string {
 }
 
 // Describes a problem that is detected by correlating observations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/Problem
 type Problem struct {
 	_ struct{} `type:"structure"`
 
@@ -159,7 +155,6 @@ func (s Problem) String() string {
 }
 
 // Describes observations related to the problem.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/RelatedObservations
 type RelatedObservations struct {
 	_ struct{} `type:"structure"`
 

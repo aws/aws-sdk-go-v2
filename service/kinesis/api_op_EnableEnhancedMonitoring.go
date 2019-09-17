@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input for EnableEnhancedMonitoring.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/EnableEnhancedMonitoringInput
 type EnableEnhancedMonitoringInput struct {
 	_ struct{} `type:"structure"`
 
@@ -78,7 +77,6 @@ func (s *EnableEnhancedMonitoringInput) Validate() error {
 }
 
 // Represents the output for EnableEnhancedMonitoring and DisableEnhancedMonitoring.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/EnhancedMonitoringOutput
 type EnableEnhancedMonitoringOutput struct {
 	_ struct{} `type:"structure"`
 

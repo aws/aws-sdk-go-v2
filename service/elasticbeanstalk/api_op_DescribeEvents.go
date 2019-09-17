@@ -11,7 +11,6 @@ import (
 )
 
 // Request to retrieve a list of events for an environment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEventsMessage
 type DescribeEventsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -93,7 +92,6 @@ func (s *DescribeEventsInput) Validate() error {
 }
 
 // Result message wrapping a list of event descriptions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EventDescriptionsMessage
 type DescribeEventsOutput struct {
 	_ struct{} `type:"structure"`
 

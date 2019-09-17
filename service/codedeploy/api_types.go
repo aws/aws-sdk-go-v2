@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Information about an alarm.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/Alarm
 type Alarm struct {
 	_ struct{} `type:"structure"`
 
@@ -28,7 +27,6 @@ func (s Alarm) String() string {
 }
 
 // Information about alarms associated with the deployment group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AlarmConfiguration
 type AlarmConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +58,6 @@ func (s AlarmConfiguration) String() string {
 // or JSON-formatted string. For AWS Lambda and Amazon ECS deployments, the
 // revision is the same as the AppSpec file. This method replaces the deprecated
 // RawString data type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AppSpecContent
 type AppSpecContent struct {
 	_ struct{} `type:"structure"`
 
@@ -88,7 +85,6 @@ func (s AppSpecContent) String() string {
 }
 
 // Information about an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ApplicationInfo
 type ApplicationInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -120,7 +116,6 @@ func (s ApplicationInfo) String() string {
 
 // Information about a configuration for automatically rolling back to a previous
 // version of an application revision when a deployment is not completed successfully.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AutoRollbackConfiguration
 type AutoRollbackConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -138,7 +133,6 @@ func (s AutoRollbackConfiguration) String() string {
 }
 
 // Information about an Auto Scaling group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AutoScalingGroup
 type AutoScalingGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -155,7 +149,6 @@ func (s AutoScalingGroup) String() string {
 }
 
 // Information about blue/green deployment options for a deployment group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BlueGreenDeploymentConfiguration
 type BlueGreenDeploymentConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -180,7 +173,6 @@ func (s BlueGreenDeploymentConfiguration) String() string {
 // Information about whether instances in the original environment are terminated
 // when a blue/green deployment is successful. BlueInstanceTerminationOption
 // does not apply to Lambda deployments.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BlueInstanceTerminationOption
 type BlueInstanceTerminationOption struct {
 	_ struct{} `type:"structure"`
 
@@ -210,7 +202,6 @@ func (s BlueInstanceTerminationOption) String() string {
 }
 
 // Information about a deployment configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentConfigInfo
 type DeploymentConfigInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -240,7 +231,6 @@ func (s DeploymentConfigInfo) String() string {
 }
 
 // Information about a deployment group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentGroupInfo
 type DeploymentGroupInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -331,7 +321,6 @@ func (s DeploymentGroupInfo) String() string {
 }
 
 // Information about a deployment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentInfo
 type DeploymentInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -477,7 +466,6 @@ func (s DeploymentInfo) String() string {
 }
 
 // Information about the deployment status of the instances in the deployment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentOverview
 type DeploymentOverview struct {
 	_ struct{} `type:"structure"`
 
@@ -509,7 +497,6 @@ func (s DeploymentOverview) String() string {
 
 // Information about how traffic is rerouted to instances in a replacement environment
 // in a blue/green deployment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentReadyOption
 type DeploymentReadyOption struct {
 	_ struct{} `type:"structure"`
 
@@ -539,7 +526,6 @@ func (s DeploymentReadyOption) String() string {
 
 // Information about the type of deployment, either in-place or blue/green,
 // you want to run and whether to route deployment traffic behind a load balancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentStyle
 type DeploymentStyle struct {
 	_ struct{} `type:"structure"`
 
@@ -556,7 +542,6 @@ func (s DeploymentStyle) String() string {
 }
 
 // Information about the deployment target.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentTarget
 type DeploymentTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -582,7 +567,6 @@ func (s DeploymentTarget) String() string {
 }
 
 // Diagnostic information about executable scripts that are part of a deployment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/Diagnostics
 type Diagnostics struct {
 	_ struct{} `type:"structure"`
 
@@ -622,7 +606,6 @@ func (s Diagnostics) String() string {
 }
 
 // Information about an EC2 tag filter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/EC2TagFilter
 type EC2TagFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -648,7 +631,6 @@ func (s EC2TagFilter) String() string {
 }
 
 // Information about groups of EC2 instance tags.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/EC2TagSet
 type EC2TagSet struct {
 	_ struct{} `type:"structure"`
 
@@ -665,7 +647,6 @@ func (s EC2TagSet) String() string {
 
 // Contains the service and cluster names used to identify an Amazon ECS deployment's
 // target.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ECSService
 type ECSService struct {
 	_ struct{} `type:"structure"`
 
@@ -682,7 +663,6 @@ func (s ECSService) String() string {
 }
 
 // Information about the target of an Amazon ECS deployment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ECSTarget
 type ECSTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -719,7 +699,6 @@ func (s ECSTarget) String() string {
 // how many tasks are running, and whether the task set serves production traffic.
 // An AWS CodeDeploy application that uses the Amazon ECS compute platform deploys
 // a containerized application in an Amazon ECS service as a task set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ECSTaskSet
 type ECSTaskSet struct {
 	_ struct{} `type:"structure"`
 
@@ -773,7 +752,6 @@ func (s ECSTaskSet) String() string {
 // Information about a load balancer in Elastic Load Balancing to use in a deployment.
 // Instances are registered directly with a load balancer, and traffic is routed
 // to the load balancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ELBInfo
 type ELBInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -791,7 +769,6 @@ func (s ELBInfo) String() string {
 }
 
 // Information about a deployment error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ErrorInformation
 type ErrorInformation struct {
 	_ struct{} `type:"structure"`
 
@@ -847,7 +824,6 @@ func (s ErrorInformation) String() string {
 }
 
 // Information about an application revision.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GenericRevisionInfo
 type GenericRevisionInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -873,7 +849,6 @@ func (s GenericRevisionInfo) String() string {
 }
 
 // Information about the location of application artifacts stored in GitHub.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GitHubLocation
 type GitHubLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -895,7 +870,6 @@ func (s GitHubLocation) String() string {
 
 // Information about the instances that belong to the replacement environment
 // in a blue/green deployment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GreenFleetProvisioningOption
 type GreenFleetProvisioningOption struct {
 	_ struct{} `type:"structure"`
 
@@ -915,7 +889,6 @@ func (s GreenFleetProvisioningOption) String() string {
 }
 
 // Information about an on-premises instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InstanceInfo
 type InstanceInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -948,7 +921,6 @@ func (s InstanceInfo) String() string {
 }
 
 // Information about an instance in a deployment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InstanceSummary
 type InstanceSummary struct {
 	_ struct{} `deprecated:"true" type:"structure"`
 
@@ -995,7 +967,6 @@ func (s InstanceSummary) String() string {
 
 // A target Amazon EC2 or on-premises instance during a deployment that uses
 // the EC2/On-premises compute platform.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InstanceTarget
 type InstanceTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -1028,7 +999,6 @@ func (s InstanceTarget) String() string {
 }
 
 // Information about a Lambda function specified in a deployment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LambdaFunctionInfo
 type LambdaFunctionInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1057,7 +1027,6 @@ func (s LambdaFunctionInfo) String() string {
 }
 
 // Information about the target AWS Lambda function during an AWS Lambda deployment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LambdaTarget
 type LambdaTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -1090,7 +1059,6 @@ func (s LambdaTarget) String() string {
 
 // Information about the most recent attempted or successful deployment to a
 // deployment group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LastDeploymentInfo
 type LastDeploymentInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1115,7 +1083,6 @@ func (s LastDeploymentInfo) String() string {
 }
 
 // Information about a deployment lifecycle event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LifecycleEvent
 type LifecycleEvent struct {
 	_ struct{} `type:"structure"`
 
@@ -1155,7 +1122,6 @@ func (s LifecycleEvent) String() string {
 
 // Information about the Elastic Load Balancing load balancer or target group
 // used in a deployment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LoadBalancerInfo
 type LoadBalancerInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1184,7 +1150,6 @@ func (s LoadBalancerInfo) String() string {
 }
 
 // Information about minimum healthy instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/MinimumHealthyHosts
 type MinimumHealthyHosts struct {
 	_ struct{} `type:"structure"`
 
@@ -1226,7 +1191,6 @@ func (s MinimumHealthyHosts) String() string {
 }
 
 // Information about groups of on-premises instance tags.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/OnPremisesTagSet
 type OnPremisesTagSet struct {
 	_ struct{} `type:"structure"`
 
@@ -1244,7 +1208,6 @@ func (s OnPremisesTagSet) String() string {
 // A revision for an AWS Lambda deployment that is a YAML-formatted or JSON-formatted
 // string. For AWS Lambda deployments, the revision is the same as the AppSpec
 // file.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RawString
 type RawString struct {
 	_ struct{} `deprecated:"true" type:"structure"`
 
@@ -1263,7 +1226,6 @@ func (s RawString) String() string {
 }
 
 // Information about an application revision.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RevisionInfo
 type RevisionInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1281,7 +1243,6 @@ func (s RevisionInfo) String() string {
 }
 
 // Information about the location of an application revision.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RevisionLocation
 type RevisionLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -1317,7 +1278,6 @@ func (s RevisionLocation) String() string {
 }
 
 // Information about a deployment rollback.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RollbackInfo
 type RollbackInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1340,7 +1300,6 @@ func (s RollbackInfo) String() string {
 
 // Information about the location of application artifacts stored in Amazon
 // S3.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/S3Location
 type S3Location struct {
 	_ struct{} `type:"structure"`
 
@@ -1381,7 +1340,6 @@ func (s S3Location) String() string {
 }
 
 // Information about a tag.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -1398,7 +1356,6 @@ func (s Tag) String() string {
 }
 
 // Information about an on-premises instance tag filter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TagFilter
 type TagFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -1426,7 +1383,6 @@ func (s TagFilter) String() string {
 // Information about a target group in Elastic Load Balancing to use in a deployment.
 // Instances are registered as targets in a target group, and traffic is routed
 // to the target group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TargetGroupInfo
 type TargetGroupInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1446,7 +1402,6 @@ func (s TargetGroupInfo) String() string {
 
 // Information about two target groups and how traffic is routed during an Amazon
 // ECS deployment. An optional test traffic route can be specified.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TargetGroupPairInfo
 type TargetGroupPairInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1472,7 +1427,6 @@ func (s TargetGroupPairInfo) String() string {
 
 // Information about the instances to be used in the replacement environment
 // in a blue/green deployment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TargetInstances
 type TargetInstances struct {
 	_ struct{} `type:"structure"`
 
@@ -1499,7 +1453,6 @@ func (s TargetInstances) String() string {
 // A configuration that shifts traffic from one version of a Lambda function
 // to another in two increments. The original and target Lambda function versions
 // are specified in the deployment's AppSpec file.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TimeBasedCanary
 type TimeBasedCanary struct {
 	_ struct{} `type:"structure"`
 
@@ -1521,7 +1474,6 @@ func (s TimeBasedCanary) String() string {
 // to another in equal increments, with an equal number of minutes between each
 // increment. The original and target Lambda function versions are specified
 // in the deployment's AppSpec file.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TimeBasedLinear
 type TimeBasedLinear struct {
 	_ struct{} `type:"structure"`
 
@@ -1540,7 +1492,6 @@ func (s TimeBasedLinear) String() string {
 }
 
 // Information about a time range.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TimeRange
 type TimeRange struct {
 	_ struct{} `type:"structure"`
 
@@ -1562,7 +1513,6 @@ func (s TimeRange) String() string {
 
 // Information about a listener. The listener contains the path used to route
 // traffic that is received from the load balancer to a target group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TrafficRoute
 type TrafficRoute struct {
 	_ struct{} `type:"structure"`
 
@@ -1579,7 +1529,6 @@ func (s TrafficRoute) String() string {
 
 // The configuration that specifies how traffic is shifted from one version
 // of a Lambda function to another version during an AWS Lambda deployment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TrafficRoutingConfig
 type TrafficRoutingConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1605,7 +1554,6 @@ func (s TrafficRoutingConfig) String() string {
 }
 
 // Information about notification triggers for the deployment group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TriggerConfig
 type TriggerConfig struct {
 	_ struct{} `type:"structure"`
 

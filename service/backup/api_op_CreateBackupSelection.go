@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupSelectionInput
 type CreateBackupSelectionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -89,7 +88,6 @@ func (s CreateBackupSelectionInput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupSelectionOutput
 type CreateBackupSelectionOutput struct {
 	_ struct{} `type:"structure"`
 

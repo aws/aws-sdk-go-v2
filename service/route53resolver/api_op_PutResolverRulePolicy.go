@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/PutResolverRulePolicyRequest
 type PutResolverRulePolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s *PutResolverRulePolicyInput) Validate() error {
 }
 
 // The response to a PutResolverRulePolicy request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/PutResolverRulePolicyResponse
 type PutResolverRulePolicyOutput struct {
 	_ struct{} `type:"structure"`
 

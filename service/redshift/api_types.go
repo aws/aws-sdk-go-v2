@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // A name value pair that describes an aspect of an account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AccountAttribute
 type AccountAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -30,7 +29,6 @@ func (s AccountAttribute) String() string {
 }
 
 // Describes an AWS customer account authorized to restore a snapshot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AccountWithRestoreAccess
 type AccountWithRestoreAccess struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +46,6 @@ func (s AccountWithRestoreAccess) String() string {
 }
 
 // Describes an attribute value.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AttributeValueTarget
 type AttributeValueTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -62,7 +59,6 @@ func (s AttributeValueTarget) String() string {
 }
 
 // Describes an availability zone.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AvailabilityZone
 type AvailabilityZone struct {
 	_ struct{} `type:"structure"`
 
@@ -78,7 +74,6 @@ func (s AvailabilityZone) String() string {
 }
 
 // Describes a cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster
 type Cluster struct {
 	_ struct{} `type:"structure"`
 
@@ -325,7 +320,6 @@ func (s Cluster) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterAssociatedToSchedule
 type ClusterAssociatedToSchedule struct {
 	_ struct{} `type:"structure"`
 
@@ -340,7 +334,6 @@ func (s ClusterAssociatedToSchedule) String() string {
 }
 
 // Describes a ClusterDbRevision.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterDbRevision
 type ClusterDbRevision struct {
 	_ struct{} `type:"structure"`
 
@@ -365,7 +358,6 @@ func (s ClusterDbRevision) String() string {
 
 // An AWS Identity and Access Management (IAM) role that can be used by the
 // associated Amazon Redshift cluster to access other AWS services.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterIamRole
 type ClusterIamRole struct {
 	_ struct{} `type:"structure"`
 
@@ -392,7 +384,6 @@ func (s ClusterIamRole) String() string {
 }
 
 // The identifier of a node in a cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterNode
 type ClusterNode struct {
 	_ struct{} `type:"structure"`
 
@@ -412,7 +403,6 @@ func (s ClusterNode) String() string {
 }
 
 // Describes a parameter group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterParameterGroup
 type ClusterParameterGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -436,7 +426,6 @@ func (s ClusterParameterGroup) String() string {
 }
 
 // Describes the status of a parameter group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterParameterGroupStatus
 type ClusterParameterGroupStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -460,7 +449,6 @@ func (s ClusterParameterGroupStatus) String() string {
 }
 
 // Describes the status of a parameter group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterParameterStatus
 type ClusterParameterStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -503,7 +491,6 @@ func (s ClusterParameterStatus) String() string {
 }
 
 // Describes a security group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSecurityGroup
 type ClusterSecurityGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -531,7 +518,6 @@ func (s ClusterSecurityGroup) String() string {
 }
 
 // Describes a cluster security group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSecurityGroupMembership
 type ClusterSecurityGroupMembership struct {
 	_ struct{} `type:"structure"`
 
@@ -549,7 +535,6 @@ func (s ClusterSecurityGroupMembership) String() string {
 
 // Returns the destination region and retention period that are configured for
 // cross-region snapshot copy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSnapshotCopyStatus
 type ClusterSnapshotCopyStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -578,7 +563,6 @@ func (s ClusterSnapshotCopyStatus) String() string {
 }
 
 // Describes a subnet group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSubnetGroup
 type ClusterSubnetGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -609,7 +593,6 @@ func (s ClusterSubnetGroup) String() string {
 
 // Describes a cluster version, including the parameter group family and description
 // of the version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterVersion
 type ClusterVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -630,7 +613,6 @@ func (s ClusterVersion) String() string {
 
 // Describes the status of a cluster while it is in the process of resizing
 // with an incremental resize.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DataTransferProgress
 type DataTransferProgress struct {
 	_ struct{} `type:"structure"`
 
@@ -660,7 +642,6 @@ func (s DataTransferProgress) String() string {
 }
 
 // Describes the default cluster parameters for a parameter group family.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DefaultClusterParameters
 type DefaultClusterParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -685,7 +666,6 @@ func (s DefaultClusterParameters) String() string {
 }
 
 // Describes a deferred maintenance window
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeferredMaintenanceWindow
 type DeferredMaintenanceWindow struct {
 	_ struct{} `type:"structure"`
 
@@ -704,7 +684,6 @@ func (s DeferredMaintenanceWindow) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSnapshotMessage
 type DeleteClusterSnapshotMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -744,7 +723,6 @@ func (s *DeleteClusterSnapshotMessage) Validate() error {
 }
 
 // Describes an Amazon EC2 security group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EC2SecurityGroup
 type EC2SecurityGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -768,7 +746,6 @@ func (s EC2SecurityGroup) String() string {
 }
 
 // Describes the status of the elastic IP (EIP) address.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ElasticIpStatus
 type ElasticIpStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -785,7 +762,6 @@ func (s ElasticIpStatus) String() string {
 }
 
 // Describes a connection endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Endpoint
 type Endpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -802,7 +778,6 @@ func (s Endpoint) String() string {
 }
 
 // Describes an event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Event
 type Event struct {
 	_ struct{} `type:"structure"`
 
@@ -838,7 +813,6 @@ func (s Event) String() string {
 }
 
 // Describes event categories.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EventCategoriesMap
 type EventCategoriesMap struct {
 	_ struct{} `type:"structure"`
 
@@ -856,7 +830,6 @@ func (s EventCategoriesMap) String() string {
 }
 
 // Describes event information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EventInfoMap
 type EventInfoMap struct {
 	_ struct{} `type:"structure"`
 
@@ -881,7 +854,6 @@ func (s EventInfoMap) String() string {
 }
 
 // Describes event subscriptions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EventSubscription
 type EventSubscription struct {
 	_ struct{} `type:"structure"`
 
@@ -946,7 +918,6 @@ func (s EventSubscription) String() string {
 // Returns information about an HSM client certificate. The certificate is stored
 // in a secure Hardware Storage Module (HSM), and used by the Amazon Redshift
 // cluster to encrypt data files.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/HsmClientCertificate
 type HsmClientCertificate struct {
 	_ struct{} `type:"structure"`
 
@@ -969,7 +940,6 @@ func (s HsmClientCertificate) String() string {
 // Returns information about an HSM configuration, which is an object that describes
 // to Amazon Redshift clusters the information they require to connect to an
 // HSM where they can store database encryption keys.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/HsmConfiguration
 type HsmConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -996,7 +966,6 @@ func (s HsmConfiguration) String() string {
 }
 
 // Describes the status of changes to HSM settings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/HsmStatus
 type HsmStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -1021,7 +990,6 @@ func (s HsmStatus) String() string {
 }
 
 // Describes an IP range used in a security group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/IPRange
 type IPRange struct {
 	_ struct{} `type:"structure"`
 
@@ -1045,7 +1013,6 @@ func (s IPRange) String() string {
 // current, the cluster is updated to the most recently certified maintenance
 // release. If the value is trailing, the cluster is updated to the previously
 // certified maintenance release.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/MaintenanceTrack
 type MaintenanceTrack struct {
 	_ struct{} `type:"structure"`
 
@@ -1065,7 +1032,6 @@ func (s MaintenanceTrack) String() string {
 }
 
 // Describes an orderable cluster option.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/OrderableClusterOption
 type OrderableClusterOption struct {
 	_ struct{} `type:"structure"`
 
@@ -1088,7 +1054,6 @@ func (s OrderableClusterOption) String() string {
 }
 
 // Describes a parameter in a cluster parameter group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Parameter
 type Parameter struct {
 	_ struct{} `type:"structure"`
 
@@ -1133,7 +1098,6 @@ func (s Parameter) String() string {
 
 // Describes cluster attributes that are in a pending state. A change to one
 // or more the attributes was requested and is in progress or will be applied.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PendingModifiedValues
 type PendingModifiedValues struct {
 	_ struct{} `type:"structure"`
 
@@ -1188,7 +1152,6 @@ func (s PendingModifiedValues) String() string {
 }
 
 // Describes a recurring charge.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RecurringCharge
 type RecurringCharge struct {
 	_ struct{} `type:"structure"`
 
@@ -1207,7 +1170,6 @@ func (s RecurringCharge) String() string {
 
 // Describes a reserved node. You can call the DescribeReservedNodeOfferings
 // API to obtain the available reserved node offerings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReservedNode
 type ReservedNode struct {
 	_ struct{} `type:"structure"`
 
@@ -1273,7 +1235,6 @@ func (s ReservedNode) String() string {
 }
 
 // Describes a reserved node offering.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReservedNodeOffering
 type ReservedNodeOffering struct {
 	_ struct{} `type:"structure"`
 
@@ -1315,7 +1276,6 @@ func (s ReservedNodeOffering) String() string {
 }
 
 // Describes a resize operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeInfo
 type ResizeInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1333,7 +1293,6 @@ func (s ResizeInfo) String() string {
 
 // Describes the status of a cluster restore action. Returns null if the cluster
 // was not created by restoring a snapshot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreStatus
 type RestoreStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -1366,7 +1325,6 @@ func (s RestoreStatus) String() string {
 }
 
 // Describes a RevisionTarget.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevisionTarget
 type RevisionTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -1388,7 +1346,6 @@ func (s RevisionTarget) String() string {
 }
 
 // Describes a snapshot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Snapshot
 type Snapshot struct {
 	_ struct{} `type:"structure"`
 
@@ -1536,7 +1493,6 @@ func (s Snapshot) String() string {
 // For more information about managing snapshot copy grants, go to Amazon Redshift
 // Database Encryption (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
 // in the Amazon Redshift Cluster Management Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotCopyGrant
 type SnapshotCopyGrant struct {
 	_ struct{} `type:"structure"`
 
@@ -1557,7 +1513,6 @@ func (s SnapshotCopyGrant) String() string {
 }
 
 // Describes the errors returned by a snapshot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotErrorMessage
 type SnapshotErrorMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -1581,7 +1536,6 @@ func (s SnapshotErrorMessage) String() string {
 
 // Describes a snapshot schedule. You can set a regular interval for creating
 // snapshots of a cluster. You can also schedule snapshots for specific dates.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotSchedule
 type SnapshotSchedule struct {
 	_ struct{} `type:"structure"`
 
@@ -1613,7 +1567,6 @@ func (s SnapshotSchedule) String() string {
 }
 
 // Describes a sorting entity
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotSortingEntity
 type SnapshotSortingEntity struct {
 	_ struct{} `type:"structure"`
 
@@ -1645,7 +1598,6 @@ func (s *SnapshotSortingEntity) Validate() error {
 }
 
 // Describes a subnet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Subnet
 type Subnet struct {
 	_ struct{} `type:"structure"`
 
@@ -1665,7 +1617,6 @@ func (s Subnet) String() string {
 }
 
 // Describes the operations that are allowed on a maintenance track.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SupportedOperation
 type SupportedOperation struct {
 	_ struct{} `type:"structure"`
 
@@ -1679,7 +1630,6 @@ func (s SupportedOperation) String() string {
 }
 
 // A list of supported platforms for orderable clusters.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SupportedPlatform
 type SupportedPlatform struct {
 	_ struct{} `type:"structure"`
 
@@ -1692,7 +1642,6 @@ func (s SupportedPlatform) String() string {
 }
 
 // Describes the status of a RestoreTableFromClusterSnapshot operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/TableRestoreStatus
 type TableRestoreStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -1750,7 +1699,6 @@ func (s TableRestoreStatus) String() string {
 }
 
 // A tag consisting of a name/value pair for a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -1767,7 +1715,6 @@ func (s Tag) String() string {
 }
 
 // A tag and its associated resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/TaggedResource
 type TaggedResource struct {
 	_ struct{} `type:"structure"`
 
@@ -1811,7 +1758,6 @@ func (s TaggedResource) String() string {
 }
 
 // A maintenance track that you can switch the current track to.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UpdateTarget
 type UpdateTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -1831,7 +1777,6 @@ func (s UpdateTarget) String() string {
 }
 
 // Describes the members of a VPC security group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/VpcSecurityGroupMembership
 type VpcSecurityGroupMembership struct {
 	_ struct{} `type:"structure"`
 

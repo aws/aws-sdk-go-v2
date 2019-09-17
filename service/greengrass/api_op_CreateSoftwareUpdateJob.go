@@ -11,7 +11,6 @@ import (
 )
 
 // Request for the CreateSoftwareUpdateJob API.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSoftwareUpdateJobRequest
 type CreateSoftwareUpdateJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -136,7 +135,6 @@ func (s CreateSoftwareUpdateJobInput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSoftwareUpdateJobResponse
 type CreateSoftwareUpdateJobOutput struct {
 	_ struct{} `type:"structure"`
 

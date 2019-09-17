@@ -11,7 +11,6 @@ import (
 )
 
 // A request to UnsubscribeFromDataset.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UnsubscribeFromDatasetRequest
 type UnsubscribeFromDatasetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -112,7 +111,6 @@ func (s UnsubscribeFromDatasetInput) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // Response to an UnsubscribeFromDataset request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UnsubscribeFromDatasetResponse
 type UnsubscribeFromDatasetOutput struct {
 	_ struct{} `type:"structure"`
 }

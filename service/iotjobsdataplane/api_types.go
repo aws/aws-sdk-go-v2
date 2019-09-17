@@ -12,7 +12,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Contains data about a job execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/JobExecution
 type JobExecution struct {
 	_ struct{} `type:"structure"`
 
@@ -138,7 +137,6 @@ func (s JobExecution) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains data about the state of a job execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/JobExecutionState
 type JobExecutionState struct {
 	_ struct{} `type:"structure"`
 
@@ -189,7 +187,6 @@ func (s JobExecutionState) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains a subset of information about a job execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/JobExecutionSummary
 type JobExecutionSummary struct {
 	_ struct{} `type:"structure"`
 

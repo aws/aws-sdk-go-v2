@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListEnabledProductsForImportRequest
 type ListEnabledProductsForImportInput struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s ListEnabledProductsForImportInput) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListEnabledProductsForImportResponse
 type ListEnabledProductsForImportOutput struct {
 	_ struct{} `type:"structure"`
 

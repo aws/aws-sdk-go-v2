@@ -12,7 +12,6 @@ import (
 
 // The request parameters represent the input of a request to run a SQL statement
 // against a database.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ExecuteStatementRequest
 type ExecuteStatementInput struct {
 	_ struct{} `type:"structure"`
 
@@ -134,7 +133,6 @@ func (s ExecuteStatementInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // The response elements represent the output of a request to run a SQL statement
 // against a database.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ExecuteStatementResponse
 type ExecuteStatementOutput struct {
 	_ struct{} `type:"structure"`
 

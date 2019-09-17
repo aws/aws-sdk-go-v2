@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJobRequest
 type CreateTrainingJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -240,7 +239,6 @@ func (s *CreateTrainingJobInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateTrainingJobResponse
 type CreateTrainingJobOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateUserSettingsRequest
 type UpdateUserSettingsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -88,7 +87,6 @@ func (s UpdateUserSettingsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateUserSettingsOutput
 type UpdateUserSettingsOutput struct {
 	_ struct{} `type:"structure"`
 }

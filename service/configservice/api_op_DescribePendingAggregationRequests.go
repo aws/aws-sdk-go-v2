@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribePendingAggregationRequestsRequest
 type DescribePendingAggregationRequestsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -27,7 +26,6 @@ func (s DescribePendingAggregationRequestsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribePendingAggregationRequestsResponse
 type DescribePendingAggregationRequestsOutput struct {
 	_ struct{} `type:"structure"`
 

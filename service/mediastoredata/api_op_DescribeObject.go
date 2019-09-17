@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/DescribeObjectRequest
 type DescribeObjectInput struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +56,6 @@ func (s DescribeObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/DescribeObjectResponse
 type DescribeObjectOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure for delete job request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteJobRequest
 type DeleteJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -90,7 +89,6 @@ func (s DeleteJobInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure for the delete job request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteJobResult
 type DeleteJobOutput struct {
 	_ struct{} `type:"structure"`
 

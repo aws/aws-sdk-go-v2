@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorTerminationCredentialsRequest
 type DeleteVoiceConnectorTerminationCredentialsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -69,7 +68,6 @@ func (s DeleteVoiceConnectorTerminationCredentialsInput) MarshalFields(e protoco
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorTerminationCredentialsOutput
 type DeleteVoiceConnectorTerminationCredentialsOutput struct {
 	_ struct{} `type:"structure"`
 }

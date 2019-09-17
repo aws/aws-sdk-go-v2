@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Details about license consumption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ConsumedLicenseSummary
 type ConsumedLicenseSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -34,7 +33,6 @@ func (s ConsumedLicenseSummary) String() string {
 // of resources by specific criteria, such as tags, attributes, or IDs. The
 // filters supported by a Describe operation are documented with the Describe
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/Filter
 type Filter struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +49,6 @@ func (s Filter) String() string {
 }
 
 // An inventory filter object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/InventoryFilter
 type InventoryFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -97,7 +94,6 @@ func (s *InventoryFilter) Validate() error {
 // or VCPU), tenancy (shared tenancy, Amazon EC2 Dedicated Instance, Amazon
 // EC2 Dedicated Host, or any of these), host affinity (how long a VM must be
 // associated with a host), the number of licenses purchased and used.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/LicenseConfiguration
 type LicenseConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -147,7 +143,6 @@ func (s LicenseConfiguration) String() string {
 }
 
 // Describes a server resource that is associated with a license configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/LicenseConfigurationAssociation
 type LicenseConfigurationAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -170,7 +165,6 @@ func (s LicenseConfigurationAssociation) String() string {
 }
 
 // Contains details of the usage of each resource from the license pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/LicenseConfigurationUsage
 type LicenseConfigurationUsage struct {
 	_ struct{} `type:"structure"`
 
@@ -200,7 +194,6 @@ func (s LicenseConfigurationUsage) String() string {
 }
 
 // Object used for associating a license configuration with a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/LicenseSpecification
 type LicenseSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -230,7 +223,6 @@ func (s *LicenseSpecification) Validate() error {
 }
 
 // Summary for a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ManagedResourceSummary
 type ManagedResourceSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -247,7 +239,6 @@ func (s ManagedResourceSummary) String() string {
 }
 
 // Object containing configuration information for AWS Organizations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/OrganizationConfiguration
 type OrganizationConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -277,7 +268,6 @@ func (s *OrganizationConfiguration) Validate() error {
 }
 
 // A set of attributes that describe a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ResourceInventory
 type ResourceInventory struct {
 	_ struct{} `type:"structure"`
 
@@ -306,7 +296,6 @@ func (s ResourceInventory) String() string {
 }
 
 // Tag for a resource in a key-value format.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTimeSeriesServiceStatisticsRequest
 type GetTimeSeriesServiceStatisticsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -126,7 +125,6 @@ func (s GetTimeSeriesServiceStatisticsInput) MarshalFields(e protocol.FieldEncod
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTimeSeriesServiceStatisticsResult
 type GetTimeSeriesServiceStatisticsOutput struct {
 	_ struct{} `type:"structure"`
 

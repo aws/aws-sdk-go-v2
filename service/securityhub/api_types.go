@@ -15,7 +15,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // The details of an AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AccountDetails
 type AccountDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s AccountDetails) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An ActionTarget object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ActionTarget
 type ActionTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -98,7 +96,6 @@ func (s ActionTarget) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The details of an Amazon EC2 instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2InstanceDetails
 type AwsEc2InstanceDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -207,7 +204,6 @@ func (s AwsEc2InstanceDetails) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // IAM access key details related to a finding.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamAccessKeyDetails
 type AwsIamAccessKeyDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -250,7 +246,6 @@ func (s AwsIamAccessKeyDetails) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The details of an Amazon S3 bucket.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketDetails
 type AwsS3BucketDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -290,7 +285,6 @@ func (s AwsS3BucketDetails) MarshalFields(e protocol.FieldEncoder) error {
 // A finding is a potential security issue generated either by AWS services
 // (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by the integrated
 // third-party solutions and compliance checks.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFinding
 type AwsSecurityFinding struct {
 	_ struct{} `type:"structure"`
 
@@ -761,7 +755,6 @@ func (s AwsSecurityFinding) MarshalFields(e protocol.FieldEncoder) error {
 // A collection of attributes that are applied to all active Security Hub-aggregated
 // findings and that result in a subset of findings that are included in this
 // insight.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFindingFilters
 type AwsSecurityFindingFilters struct {
 	_ struct{} `type:"structure"`
 
@@ -2049,7 +2042,6 @@ func (s AwsSecurityFindingFilters) MarshalFields(e protocol.FieldEncoder) error 
 // Exclusive to findings that are generated as the result of a check run against
 // a specific rule in a supported standard (for example, CIS AWS Foundations).
 // Contains compliance-related finding details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Compliance
 type Compliance struct {
 	_ struct{} `type:"structure"`
 
@@ -2074,7 +2066,6 @@ func (s Compliance) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Container details related to a finding.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ContainerDetails
 type ContainerDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -2126,7 +2117,6 @@ func (s ContainerDetails) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A date filter for querying findings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DateFilter
 type DateFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -2169,7 +2159,6 @@ func (s DateFilter) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A date range for the date filter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DateRange
 type DateRange struct {
 	_ struct{} `type:"structure"`
 
@@ -2203,7 +2192,6 @@ func (s DateRange) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Includes details of the list of the findings that can't be imported.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ImportFindingsError
 type ImportFindingsError struct {
 	_ struct{} `type:"structure"`
 
@@ -2252,7 +2240,6 @@ func (s ImportFindingsError) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains information about a Security Hub insight.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Insight
 type Insight struct {
 	_ struct{} `type:"structure"`
 
@@ -2316,7 +2303,6 @@ func (s Insight) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The insight result values returned by the GetInsightResults operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/InsightResultValue
 type InsightResultValue struct {
 	_ struct{} `type:"structure"`
 
@@ -2355,7 +2341,6 @@ func (s InsightResultValue) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The insight results returned by the GetInsightResults operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/InsightResults
 type InsightResults struct {
 	_ struct{} `type:"structure"`
 
@@ -2412,7 +2397,6 @@ func (s InsightResults) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Details about an invitation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Invitation
 type Invitation struct {
 	_ struct{} `type:"structure"`
 
@@ -2466,7 +2450,6 @@ func (s Invitation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The IP filter for querying findings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/IpFilter
 type IpFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -2491,7 +2474,6 @@ func (s IpFilter) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A keyword filter for querying findings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/KeywordFilter
 type KeywordFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -2516,7 +2498,6 @@ func (s KeywordFilter) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A list of malware related to a finding.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Malware
 type Malware struct {
 	_ struct{} `type:"structure"`
 
@@ -2584,7 +2565,6 @@ func (s Malware) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The map filter for querying findings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/MapFilter
 type MapFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -2628,7 +2608,6 @@ func (s MapFilter) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The details about a member account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Member
 type Member struct {
 	_ struct{} `type:"structure"`
 
@@ -2703,7 +2682,6 @@ func (s Member) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The details of network-related information about a finding.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Network
 type Network struct {
 	_ struct{} `type:"structure"`
 
@@ -2819,7 +2797,6 @@ func (s Network) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A user-defined note added to a finding.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Note
 type Note struct {
 	_ struct{} `type:"structure"`
 
@@ -2890,7 +2867,6 @@ func (s Note) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The updated note.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/NoteUpdate
 type NoteUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -2946,7 +2922,6 @@ func (s NoteUpdate) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A number filter for querying findings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/NumberFilter
 type NumberFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -2992,7 +2967,6 @@ func (s NumberFilter) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The details of process-related information about a finding.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProcessDetails
 type ProcessDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -3062,7 +3036,6 @@ func (s ProcessDetails) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains details about a product.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Product
 type Product struct {
 	_ struct{} `type:"structure"`
 
@@ -3158,7 +3131,6 @@ func (s Product) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A recommendation on how to remediate the issue identified in a finding.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Recommendation
 type Recommendation struct {
 	_ struct{} `type:"structure"`
 
@@ -3194,7 +3166,6 @@ func (s Recommendation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Details about a related finding.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RelatedFinding
 type RelatedFinding struct {
 	_ struct{} `type:"structure"`
 
@@ -3250,7 +3221,6 @@ func (s RelatedFinding) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Details about the remediation steps for a finding.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Remediation
 type Remediation struct {
 	_ struct{} `type:"structure"`
 
@@ -3276,7 +3246,6 @@ func (s Remediation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A resource related to a finding.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Resource
 type Resource struct {
 	_ struct{} `type:"structure"`
 
@@ -3375,7 +3344,6 @@ func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Additional details about a resource related to a finding.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails
 type ResourceDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -3442,7 +3410,6 @@ func (s ResourceDetails) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Details about the account that wasn't processed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Result
 type Result struct {
 	_ struct{} `type:"structure"`
 
@@ -3476,7 +3443,6 @@ func (s Result) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The severity of the finding.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Severity
 type Severity struct {
 	_ struct{} `type:"structure"`
 
@@ -3527,7 +3493,6 @@ func (s Severity) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A collection of finding attributes used to sort findings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SortCriterion
 type SortCriterion struct {
 	_ struct{} `type:"structure"`
 
@@ -3561,7 +3526,6 @@ func (s SortCriterion) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A resource that represents your subscription to a supported standard.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StandardsSubscription
 type StandardsSubscription struct {
 	_ struct{} `type:"structure"`
 
@@ -3630,7 +3594,6 @@ func (s StandardsSubscription) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The standard that you want to enable.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StandardsSubscriptionRequest
 type StandardsSubscriptionRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -3690,7 +3653,6 @@ func (s StandardsSubscriptionRequest) MarshalFields(e protocol.FieldEncoder) err
 }
 
 // A string filter for querying findings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StringFilter
 type StringFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -3724,7 +3686,6 @@ func (s StringFilter) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Details about the threat intel related to a finding.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ThreatIntelIndicator
 type ThreatIntelIndicator struct {
 	_ struct{} `type:"structure"`
 

@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Describes an account attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AccountAttribute
 type AccountAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -31,7 +30,6 @@ func (s AccountAttribute) String() string {
 }
 
 // Describes a value of an account attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AccountAttributeValue
 type AccountAttributeValue struct {
 	_ struct{} `type:"structure"`
 
@@ -45,7 +43,6 @@ func (s AccountAttributeValue) String() string {
 }
 
 // Describes a running instance in a Spot Fleet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ActiveInstance
 type ActiveInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -70,7 +67,6 @@ func (s ActiveInstance) String() string {
 }
 
 // Describes an Elastic IP address.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Address
 type Address struct {
 	_ struct{} `type:"structure"`
 
@@ -113,7 +109,6 @@ func (s Address) String() string {
 }
 
 // Describes a principal.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllowedPrincipal
 type AllowedPrincipal struct {
 	_ struct{} `type:"structure"`
 
@@ -130,7 +125,6 @@ func (s AllowedPrincipal) String() string {
 }
 
 // Describes the private IP addresses assigned to a network interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignedPrivateIpAddress
 type AssignedPrivateIpAddress struct {
 	_ struct{} `type:"structure"`
 
@@ -145,7 +139,6 @@ func (s AssignedPrivateIpAddress) String() string {
 
 // Describes a target network that is associated with a Client VPN endpoint.
 // A target network is a subnet in a VPC.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociatedTargetNetwork
 type AssociatedTargetNetwork struct {
 	_ struct{} `type:"structure"`
 
@@ -162,7 +155,6 @@ func (s AssociatedTargetNetwork) String() string {
 }
 
 // Describes the state of a target network association.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociationStatus
 type AssociationStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -179,7 +171,6 @@ func (s AssociationStatus) String() string {
 }
 
 // Describes a value for a resource attribute that is a Boolean value.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttributeBooleanValue
 type AttributeBooleanValue struct {
 	_ struct{} `type:"structure"`
 
@@ -193,7 +184,6 @@ func (s AttributeBooleanValue) String() string {
 }
 
 // Describes a value for a resource attribute that is a String.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttributeValue
 type AttributeValue struct {
 	_ struct{} `type:"structure"`
 
@@ -207,7 +197,6 @@ func (s AttributeValue) String() string {
 }
 
 // Information about an authorization rule.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizationRule
 type AuthorizationRule struct {
 	_ struct{} `type:"structure"`
 
@@ -238,7 +227,6 @@ func (s AuthorizationRule) String() string {
 }
 
 // Describes an Availability Zone.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AvailabilityZone
 type AvailabilityZone struct {
 	_ struct{} `type:"structure"`
 
@@ -264,7 +252,6 @@ func (s AvailabilityZone) String() string {
 }
 
 // Describes a message about an Availability Zone.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AvailabilityZoneMessage
 type AvailabilityZoneMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -278,7 +265,6 @@ func (s AvailabilityZoneMessage) String() string {
 }
 
 // The capacity information for instances launched onto the Dedicated Host.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AvailableCapacity
 type AvailableCapacity struct {
 	_ struct{} `type:"structure"`
 
@@ -294,7 +280,6 @@ func (s AvailableCapacity) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BlobAttributeValue
 type BlobAttributeValue struct {
 	_ struct{} `type:"structure"`
 
@@ -308,7 +293,6 @@ func (s BlobAttributeValue) String() string {
 }
 
 // Describes a block device mapping.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BlockDeviceMapping
 type BlockDeviceMapping struct {
 	_ struct{} `type:"structure"`
 
@@ -345,7 +329,6 @@ func (s BlockDeviceMapping) String() string {
 }
 
 // Describes a bundle task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BundleTask
 type BundleTask struct {
 	_ struct{} `type:"structure"`
 
@@ -380,7 +363,6 @@ func (s BundleTask) String() string {
 }
 
 // Describes an error for BundleInstance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BundleTaskError
 type BundleTaskError struct {
 	_ struct{} `type:"structure"`
 
@@ -398,7 +380,6 @@ func (s BundleTaskError) String() string {
 
 // Information about an address range that is provisioned for use with your
 // AWS resources through bring your own IP addresses (BYOIP).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ByoipCidr
 type ByoipCidr struct {
 	_ struct{} `type:"structure"`
 
@@ -422,7 +403,6 @@ func (s ByoipCidr) String() string {
 }
 
 // Describes a Spot Fleet error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotFleetRequestsError
 type CancelSpotFleetRequestsError struct {
 	_ struct{} `type:"structure"`
 
@@ -439,7 +419,6 @@ func (s CancelSpotFleetRequestsError) String() string {
 }
 
 // Describes a Spot Fleet request that was not successfully canceled.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotFleetRequestsErrorItem
 type CancelSpotFleetRequestsErrorItem struct {
 	_ struct{} `type:"structure"`
 
@@ -456,7 +435,6 @@ func (s CancelSpotFleetRequestsErrorItem) String() string {
 }
 
 // Describes a Spot Fleet request that was successfully canceled.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotFleetRequestsSuccessItem
 type CancelSpotFleetRequestsSuccessItem struct {
 	_ struct{} `type:"structure"`
 
@@ -476,7 +454,6 @@ func (s CancelSpotFleetRequestsSuccessItem) String() string {
 }
 
 // Describes a request to cancel a Spot Instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelledSpotInstanceRequest
 type CancelledSpotInstanceRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -493,7 +470,6 @@ func (s CancelledSpotInstanceRequest) String() string {
 }
 
 // Describes a Capacity Reservation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservation
 type CapacityReservation struct {
 	_ struct{} `type:"structure"`
 
@@ -620,7 +596,6 @@ func (s CapacityReservation) String() string {
 // that has matching attributes (instance type, platform, Availability Zone).
 // Use the CapacityReservationTarget parameter to explicitly target a specific
 // Capacity Reservation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationSpecification
 type CapacityReservationSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -649,7 +624,6 @@ func (s CapacityReservationSpecification) String() string {
 // in run in any open Capacity Reservation that has matching attributes (instance
 // type, platform, Availability Zone). The action returns the capacityReservationTarget
 // response element if the instance explicily targets a specific Capacity Reservation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationSpecificationResponse
 type CapacityReservationSpecificationResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -673,7 +647,6 @@ func (s CapacityReservationSpecificationResponse) String() string {
 }
 
 // Describes a target Capacity Reservation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationTarget
 type CapacityReservationTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -687,7 +660,6 @@ func (s CapacityReservationTarget) String() string {
 }
 
 // Describes a target Capacity Reservation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationTargetResponse
 type CapacityReservationTargetResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -701,7 +673,6 @@ func (s CapacityReservationTargetResponse) String() string {
 }
 
 // Information about the client certificate used for authentication.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CertificateAuthentication
 type CertificateAuthentication struct {
 	_ struct{} `type:"structure"`
 
@@ -715,7 +686,6 @@ func (s CertificateAuthentication) String() string {
 }
 
 // Information about the client certificate to be used for authentication.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CertificateAuthenticationRequest
 type CertificateAuthenticationRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -730,7 +700,6 @@ func (s CertificateAuthenticationRequest) String() string {
 }
 
 // Describes the state of a client certificate revocation list.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientCertificateRevocationListStatus
 type CertificateRevocationListStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -752,7 +721,6 @@ func (s CertificateRevocationListStatus) String() string {
 // information, see Prepare to Bring Your Address Range to Your AWS Account
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#prepare-for-byoip)
 // in the Amazon Elastic Compute Cloud User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CidrAuthorizationContext
 type CidrAuthorizationContext struct {
 	_ struct{} `type:"structure"`
 
@@ -791,7 +759,6 @@ func (s *CidrAuthorizationContext) Validate() error {
 }
 
 // Describes an IPv4 CIDR block.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CidrBlock
 type CidrBlock struct {
 	_ struct{} `type:"structure"`
 
@@ -805,7 +772,6 @@ func (s CidrBlock) String() string {
 }
 
 // Describes the ClassicLink DNS support status of a VPC.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClassicLinkDnsSupport
 type ClassicLinkDnsSupport struct {
 	_ struct{} `type:"structure"`
 
@@ -822,7 +788,6 @@ func (s ClassicLinkDnsSupport) String() string {
 }
 
 // Describes a linked EC2-Classic instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClassicLinkInstance
 type ClassicLinkInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -845,7 +810,6 @@ func (s ClassicLinkInstance) String() string {
 }
 
 // Describes a Classic Load Balancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClassicLoadBalancer
 type ClassicLoadBalancer struct {
 	_ struct{} `type:"structure"`
 
@@ -860,7 +824,6 @@ func (s ClassicLoadBalancer) String() string {
 
 // Describes the Classic Load Balancers to attach to a Spot Fleet. Spot Fleet
 // registers the running Spot Instances with these Classic Load Balancers.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClassicLoadBalancersConfig
 type ClassicLoadBalancersConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -887,7 +850,6 @@ func (s *ClassicLoadBalancersConfig) Validate() error {
 }
 
 // Describes the client connection logging options for the Client VPN endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConnectionLogOptions
 type ConnectionLogOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -909,7 +871,6 @@ func (s ConnectionLogOptions) String() string {
 
 // Information about the client connection logging options for a Client VPN
 // endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConnectionLogResponseOptions
 type ConnectionLogResponseOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -932,7 +893,6 @@ func (s ConnectionLogResponseOptions) String() string {
 }
 
 // Describes a connection notification for a VPC endpoint or VPC endpoint service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConnectionNotification
 type ConnectionNotification struct {
 	_ struct{} `type:"structure"`
 
@@ -965,7 +925,6 @@ func (s ConnectionNotification) String() string {
 }
 
 // Describes a conversion task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConversionTask
 type ConversionTask struct {
 	_ struct{} `type:"structure"`
 
@@ -1000,7 +959,6 @@ func (s ConversionTask) String() string {
 }
 
 // The CPU options for the instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CpuOptions
 type CpuOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -1018,7 +976,6 @@ func (s CpuOptions) String() string {
 
 // The CPU options for the instance. Both the core count and threads per core
 // must be specified in the request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CpuOptionsRequest
 type CpuOptionsRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -1037,7 +994,6 @@ func (s CpuOptionsRequest) String() string {
 }
 
 // Describes the instances that could not be launched by the fleet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFleetError
 type CreateFleetError struct {
 	_ struct{} `type:"structure"`
 
@@ -1065,7 +1021,6 @@ func (s CreateFleetError) String() string {
 }
 
 // Describes the instances that were launched by the fleet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFleetInstance
 type CreateFleetInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -1094,7 +1049,6 @@ func (s CreateFleetInstance) String() string {
 }
 
 // Describes the options for a VPC attachment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTransitGatewayVpcAttachmentRequestOptions
 type CreateTransitGatewayVpcAttachmentRequestOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -1112,7 +1066,6 @@ func (s CreateTransitGatewayVpcAttachmentRequestOptions) String() string {
 
 // Describes the user or group to be added or removed from the list of create
 // volume permissions for a volume.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolumePermission
 type CreateVolumePermission struct {
 	_ struct{} `type:"structure"`
 
@@ -1129,7 +1082,6 @@ func (s CreateVolumePermission) String() string {
 }
 
 // Describes modifications to the list of create volume permissions for a volume.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolumePermissionModifications
 type CreateVolumePermissionModifications struct {
 	_ struct{} `type:"structure"`
 
@@ -1146,7 +1098,6 @@ func (s CreateVolumePermissionModifications) String() string {
 }
 
 // Describes the credit option for CPU usage of a T2 or T3 instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreditSpecification
 type CreditSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -1161,7 +1112,6 @@ func (s CreditSpecification) String() string {
 }
 
 // The credit option for CPU usage of a T2 or T3 instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreditSpecificationRequest
 type CreditSpecificationRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -1192,7 +1142,6 @@ func (s *CreditSpecificationRequest) Validate() error {
 }
 
 // Describes a customer gateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CustomerGateway
 type CustomerGateway struct {
 	_ struct{} `type:"structure"`
 
@@ -1226,7 +1175,6 @@ func (s CustomerGateway) String() string {
 }
 
 // Describes the client-specific data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientData
 type Data struct {
 	_ struct{} `type:"structure"`
 
@@ -1249,7 +1197,6 @@ func (s Data) String() string {
 }
 
 // Describes an EC2 Fleet error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleetError
 type DeleteFleetError struct {
 	_ struct{} `type:"structure"`
 
@@ -1266,7 +1213,6 @@ func (s DeleteFleetError) String() string {
 }
 
 // Describes an EC2 Fleet that was not successfully deleted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleetErrorItem
 type DeleteFleetErrorItem struct {
 	_ struct{} `type:"structure"`
 
@@ -1283,7 +1229,6 @@ func (s DeleteFleetErrorItem) String() string {
 }
 
 // Describes an EC2 Fleet that was successfully deleted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleetSuccessItem
 type DeleteFleetSuccessItem struct {
 	_ struct{} `type:"structure"`
 
@@ -1303,7 +1248,6 @@ func (s DeleteFleetSuccessItem) String() string {
 }
 
 // Describes a launch template version that could not be deleted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLaunchTemplateVersionsResponseErrorItem
 type DeleteLaunchTemplateVersionsResponseErrorItem struct {
 	_ struct{} `type:"structure"`
 
@@ -1326,7 +1270,6 @@ func (s DeleteLaunchTemplateVersionsResponseErrorItem) String() string {
 }
 
 // Describes a launch template version that was successfully deleted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLaunchTemplateVersionsResponseSuccessItem
 type DeleteLaunchTemplateVersionsResponseSuccessItem struct {
 	_ struct{} `type:"structure"`
 
@@ -1346,7 +1289,6 @@ func (s DeleteLaunchTemplateVersionsResponseSuccessItem) String() string {
 }
 
 // Describes the instances that could not be launched by the fleet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetError
 type DescribeFleetError struct {
 	_ struct{} `type:"structure"`
 
@@ -1374,7 +1316,6 @@ func (s DescribeFleetError) String() string {
 }
 
 // Describes the instances that were launched by the fleet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetsInstances
 type DescribeFleetsInstances struct {
 	_ struct{} `type:"structure"`
 
@@ -1403,7 +1344,6 @@ func (s DescribeFleetsInstances) String() string {
 }
 
 // Describes a DHCP configuration option.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DhcpConfiguration
 type DhcpConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1420,7 +1360,6 @@ func (s DhcpConfiguration) String() string {
 }
 
 // Describes a set of DHCP options.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DhcpOptions
 type DhcpOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -1443,7 +1382,6 @@ func (s DhcpOptions) String() string {
 }
 
 // Describes an Active Directory.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DirectoryServiceAuthentication
 type DirectoryServiceAuthentication struct {
 	_ struct{} `type:"structure"`
 
@@ -1457,7 +1395,6 @@ func (s DirectoryServiceAuthentication) String() string {
 }
 
 // Describes the Active Directory to be used for client authentication.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DirectoryServiceAuthenticationRequest
 type DirectoryServiceAuthenticationRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -1471,7 +1408,6 @@ func (s DirectoryServiceAuthenticationRequest) String() string {
 }
 
 // Describes a disk image.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DiskImage
 type DiskImage struct {
 	_ struct{} `type:"structure"`
 
@@ -1511,7 +1447,6 @@ func (s *DiskImage) Validate() error {
 }
 
 // Describes a disk image.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DiskImageDescription
 type DiskImageDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1541,7 +1476,6 @@ func (s DiskImageDescription) String() string {
 }
 
 // Describes a disk image.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DiskImageDetail
 type DiskImageDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -1595,7 +1529,6 @@ func (s *DiskImageDetail) Validate() error {
 }
 
 // Describes a disk image volume.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DiskImageVolumeDescription
 type DiskImageVolumeDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1612,7 +1545,6 @@ func (s DiskImageVolumeDescription) String() string {
 }
 
 // Describes a DNS entry.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DnsEntry
 type DnsEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -1629,7 +1561,6 @@ func (s DnsEntry) String() string {
 }
 
 // Information about the DNS server to be used.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DnsServersOptionsModifyStructure
 type DnsServersOptionsModifyStructure struct {
 	_ struct{} `type:"structure"`
 
@@ -1649,7 +1580,6 @@ func (s DnsServersOptionsModifyStructure) String() string {
 }
 
 // Describes a block device for an EBS volume.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsBlockDevice
 type EbsBlockDevice struct {
 	_ struct{} `type:"structure"`
 
@@ -1724,7 +1654,6 @@ func (s EbsBlockDevice) String() string {
 }
 
 // Describes a parameter used to set up an EBS volume in a block device mapping.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsInstanceBlockDevice
 type EbsInstanceBlockDevice struct {
 	_ struct{} `type:"structure"`
 
@@ -1748,7 +1677,6 @@ func (s EbsInstanceBlockDevice) String() string {
 
 // Describes information used to set up an EBS volume specified in a block device
 // mapping.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsInstanceBlockDeviceSpecification
 type EbsInstanceBlockDeviceSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -1765,7 +1693,6 @@ func (s EbsInstanceBlockDeviceSpecification) String() string {
 }
 
 // Describes an egress-only internet gateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EgressOnlyInternetGateway
 type EgressOnlyInternetGateway struct {
 	_ struct{} `type:"structure"`
 
@@ -1782,7 +1709,6 @@ func (s EgressOnlyInternetGateway) String() string {
 }
 
 // Describes the association between an instance and an Elastic Graphics accelerator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpuAssociation
 type ElasticGpuAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -1806,7 +1732,6 @@ func (s ElasticGpuAssociation) String() string {
 }
 
 // Describes the status of an Elastic Graphics accelerator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpuHealth
 type ElasticGpuHealth struct {
 	_ struct{} `type:"structure"`
 
@@ -1820,7 +1745,6 @@ func (s ElasticGpuHealth) String() string {
 }
 
 // A specification for an Elastic Graphics accelerator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpuSpecification
 type ElasticGpuSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -1850,7 +1774,6 @@ func (s *ElasticGpuSpecification) Validate() error {
 }
 
 // Describes an elastic GPU.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpuSpecificationResponse
 type ElasticGpuSpecificationResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -1864,7 +1787,6 @@ func (s ElasticGpuSpecificationResponse) String() string {
 }
 
 // Describes an Elastic Graphics accelerator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpus
 type ElasticGpus struct {
 	_ struct{} `type:"structure"`
 
@@ -1893,7 +1815,6 @@ func (s ElasticGpus) String() string {
 }
 
 // Describes an elastic inference accelerator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticInferenceAccelerator
 type ElasticInferenceAccelerator struct {
 	_ struct{} `type:"structure"`
 
@@ -1924,7 +1845,6 @@ func (s *ElasticInferenceAccelerator) Validate() error {
 }
 
 // Describes the association between an instance and an elastic inference accelerator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticInferenceAcceleratorAssociation
 type ElasticInferenceAcceleratorAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -1948,7 +1868,6 @@ func (s ElasticInferenceAcceleratorAssociation) String() string {
 }
 
 // Describes an EC2 Fleet or Spot Fleet event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EventInformation
 type EventInformation struct {
 	_ struct{} `type:"structure"`
 
@@ -2031,7 +1950,6 @@ func (s EventInformation) String() string {
 }
 
 // Describes an instance export task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportTask
 type ExportTask struct {
 	_ struct{} `type:"structure"`
 
@@ -2060,7 +1978,6 @@ func (s ExportTask) String() string {
 }
 
 // Describes the format and location for an instance export task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportToS3Task
 type ExportToS3Task struct {
 	_ struct{} `type:"structure"`
 
@@ -2085,7 +2002,6 @@ func (s ExportToS3Task) String() string {
 }
 
 // Describes an instance export task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportToS3TaskSpecification
 type ExportToS3TaskSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -2135,7 +2051,6 @@ func (s ExportToS3TaskSpecification) String() string {
 //    * DescribeVolumes
 //
 //    * DescribeVpcs
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Filter
 type Filter struct {
 	_ struct{} `type:"structure"`
 
@@ -2152,7 +2067,6 @@ func (s Filter) String() string {
 }
 
 // Describes an EC2 Fleet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetData
 type FleetData struct {
 	_ struct{} `type:"structure"`
 
@@ -2250,7 +2164,6 @@ func (s FleetData) String() string {
 }
 
 // Describes a launch template and overrides.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateConfig
 type FleetLaunchTemplateConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -2268,7 +2181,6 @@ func (s FleetLaunchTemplateConfig) String() string {
 }
 
 // Describes a launch template and overrides.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateConfigRequest
 type FleetLaunchTemplateConfigRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -2302,7 +2214,6 @@ func (s *FleetLaunchTemplateConfigRequest) Validate() error {
 }
 
 // Describes overrides for a launch template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateOverrides
 type FleetLaunchTemplateOverrides struct {
 	_ struct{} `type:"structure"`
 
@@ -2339,7 +2250,6 @@ func (s FleetLaunchTemplateOverrides) String() string {
 }
 
 // Describes overrides for a launch template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateOverridesRequest
 type FleetLaunchTemplateOverridesRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -2376,7 +2286,6 @@ func (s FleetLaunchTemplateOverridesRequest) String() string {
 }
 
 // Describes a launch template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateSpecification
 type FleetLaunchTemplateSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -2412,7 +2321,6 @@ func (s *FleetLaunchTemplateSpecification) Validate() error {
 
 // The launch template to use. You must specify either the launch template ID
 // or launch template name in the request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateSpecificationRequest
 type FleetLaunchTemplateSpecificationRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -2446,7 +2354,6 @@ func (s *FleetLaunchTemplateSpecificationRequest) Validate() error {
 }
 
 // Describes a flow log.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FlowLog
 type FlowLog struct {
 	_ struct{} `type:"structure"`
 
@@ -2501,7 +2408,6 @@ func (s FlowLog) String() string {
 }
 
 // Describes an Amazon FPGA image (AFI).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FpgaImage
 type FpgaImage struct {
 	_ struct{} `type:"structure"`
 
@@ -2557,7 +2463,6 @@ func (s FpgaImage) String() string {
 }
 
 // Describes an Amazon FPGA image (AFI) attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FpgaImageAttribute
 type FpgaImageAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -2584,7 +2489,6 @@ func (s FpgaImageAttribute) String() string {
 
 // Describes the state of the bitstream generation process for an Amazon FPGA
 // image (AFI).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FpgaImageState
 type FpgaImageState struct {
 	_ struct{} `type:"structure"`
 
@@ -2609,7 +2513,6 @@ func (s FpgaImageState) String() string {
 }
 
 // Describes a security group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GroupIdentifier
 type GroupIdentifier struct {
 	_ struct{} `type:"structure"`
 
@@ -2630,7 +2533,6 @@ func (s GroupIdentifier) String() string {
 // Hibernation is currently supported only for Amazon Linux. For more information,
 // see Hibernate Your Instance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html)
 // in the Amazon Elastic Compute Cloud User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HibernationOptions
 type HibernationOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -2649,7 +2551,6 @@ func (s HibernationOptions) String() string {
 // Hibernation is currently supported only for Amazon Linux. For more information,
 // see Hibernate Your Instance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html)
 // in the Amazon Elastic Compute Cloud User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HibernationOptionsRequest
 type HibernationOptionsRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -2665,7 +2566,6 @@ func (s HibernationOptionsRequest) String() string {
 }
 
 // Describes an event in the history of the Spot Fleet request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HistoryRecord
 type HistoryRecord struct {
 	_ struct{} `type:"structure"`
 
@@ -2694,7 +2594,6 @@ func (s HistoryRecord) String() string {
 }
 
 // Describes an event in the history of an EC2 Fleet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HistoryRecordEntry
 type HistoryRecordEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -2714,7 +2613,6 @@ func (s HistoryRecordEntry) String() string {
 }
 
 // Describes the properties of the Dedicated Host.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Host
 type Host struct {
 	_ struct{} `type:"structure"`
 
@@ -2767,7 +2665,6 @@ func (s Host) String() string {
 }
 
 // Describes an instance running on a Dedicated Host.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HostInstance
 type HostInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -2784,7 +2681,6 @@ func (s HostInstance) String() string {
 }
 
 // Details about the Dedicated Host Reservation offering.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HostOffering
 type HostOffering struct {
 	_ struct{} `type:"structure"`
 
@@ -2816,7 +2712,6 @@ func (s HostOffering) String() string {
 }
 
 // Describes properties of a Dedicated Host.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HostProperties
 type HostProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -2839,7 +2734,6 @@ func (s HostProperties) String() string {
 }
 
 // Details about the Dedicated Host Reservation and associated Dedicated Hosts.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HostReservation
 type HostReservation struct {
 	_ struct{} `type:"structure"`
 
@@ -2897,7 +2791,6 @@ func (s HostReservation) String() string {
 }
 
 // Describes an IAM instance profile.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IamInstanceProfile
 type IamInstanceProfile struct {
 	_ struct{} `type:"structure"`
 
@@ -2914,7 +2807,6 @@ func (s IamInstanceProfile) String() string {
 }
 
 // Describes an association between an IAM instance profile and an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IamInstanceProfileAssociation
 type IamInstanceProfileAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -2940,7 +2832,6 @@ func (s IamInstanceProfileAssociation) String() string {
 }
 
 // Describes an IAM instance profile.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IamInstanceProfileSpecification
 type IamInstanceProfileSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -2957,7 +2848,6 @@ func (s IamInstanceProfileSpecification) String() string {
 }
 
 // Describes the ICMP type and code.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IcmpTypeCode
 type IcmpTypeCode struct {
 	_ struct{} `type:"structure"`
 
@@ -2974,7 +2864,6 @@ func (s IcmpTypeCode) String() string {
 }
 
 // Describes the ID format for a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IdFormat
 type IdFormat struct {
 	_ struct{} `type:"structure"`
 
@@ -2996,7 +2885,6 @@ func (s IdFormat) String() string {
 }
 
 // Describes an image.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Image
 type Image struct {
 	_ struct{} `type:"structure"`
 
@@ -3087,7 +2975,6 @@ func (s Image) String() string {
 }
 
 // Describes the disk container object for an import image task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageDiskContainer
 type ImageDiskContainer struct {
 	_ struct{} `type:"structure"`
 
@@ -3119,7 +3006,6 @@ func (s ImageDiskContainer) String() string {
 }
 
 // Describes an import image task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageTask
 type ImportImageTask struct {
 	_ struct{} `type:"structure"`
 
@@ -3174,7 +3060,6 @@ func (s ImportImageTask) String() string {
 }
 
 // Describes the launch specification for VM import.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportInstanceLaunchSpecification
 type ImportInstanceLaunchSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -3221,7 +3106,6 @@ func (s ImportInstanceLaunchSpecification) String() string {
 }
 
 // Describes an import instance task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportInstanceTaskDetails
 type ImportInstanceTaskDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -3244,7 +3128,6 @@ func (s ImportInstanceTaskDetails) String() string {
 }
 
 // Describes an import volume task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportInstanceVolumeDetailItem
 type ImportInstanceVolumeDetailItem struct {
 	_ struct{} `type:"structure"`
 
@@ -3276,7 +3159,6 @@ func (s ImportInstanceVolumeDetailItem) String() string {
 }
 
 // Describes an import snapshot task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportSnapshotTask
 type ImportSnapshotTask struct {
 	_ struct{} `type:"structure"`
 
@@ -3296,7 +3178,6 @@ func (s ImportSnapshotTask) String() string {
 }
 
 // Describes an import volume task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportVolumeTaskDetails
 type ImportVolumeTaskDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -3322,7 +3203,6 @@ func (s ImportVolumeTaskDetails) String() string {
 }
 
 // Describes an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Instance
 type Instance struct {
 	_ struct{} `type:"structure"`
 
@@ -3490,7 +3370,6 @@ func (s Instance) String() string {
 }
 
 // Describes a block device mapping.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceBlockDeviceMapping
 type InstanceBlockDeviceMapping struct {
 	_ struct{} `type:"structure"`
 
@@ -3508,7 +3387,6 @@ func (s InstanceBlockDeviceMapping) String() string {
 }
 
 // Describes a block device mapping entry.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceBlockDeviceMappingSpecification
 type InstanceBlockDeviceMappingSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -3532,7 +3410,6 @@ func (s InstanceBlockDeviceMappingSpecification) String() string {
 }
 
 // Information about the instance type that the Dedicated Host supports.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceCapacity
 type InstanceCapacity struct {
 	_ struct{} `type:"structure"`
 
@@ -3552,7 +3429,6 @@ func (s InstanceCapacity) String() string {
 }
 
 // Describes a Reserved Instance listing state.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceCount
 type InstanceCount struct {
 	_ struct{} `type:"structure"`
 
@@ -3569,7 +3445,6 @@ func (s InstanceCount) String() string {
 }
 
 // Describes the credit option for CPU usage of a T2 or T3 instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceCreditSpecification
 type InstanceCreditSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -3587,7 +3462,6 @@ func (s InstanceCreditSpecification) String() string {
 }
 
 // Describes the credit option for CPU usage of a T2 or T3 instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceCreditSpecificationRequest
 type InstanceCreditSpecificationRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -3605,7 +3479,6 @@ func (s InstanceCreditSpecificationRequest) String() string {
 }
 
 // Describes an instance to export.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceExportDetails
 type InstanceExportDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -3622,7 +3495,6 @@ func (s InstanceExportDetails) String() string {
 }
 
 // Describes an IPv6 address.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceIpv6Address
 type InstanceIpv6Address struct {
 	_ struct{} `type:"structure"`
 
@@ -3636,7 +3508,6 @@ func (s InstanceIpv6Address) String() string {
 }
 
 // Describes an IPv6 address.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceIpv6AddressRequest
 type InstanceIpv6AddressRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -3650,7 +3521,6 @@ func (s InstanceIpv6AddressRequest) String() string {
 }
 
 // Describes the market (purchasing) option for the instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceMarketOptionsRequest
 type InstanceMarketOptionsRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -3667,7 +3537,6 @@ func (s InstanceMarketOptionsRequest) String() string {
 }
 
 // Describes the monitoring of an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceMonitoring
 type InstanceMonitoring struct {
 	_ struct{} `type:"structure"`
 
@@ -3684,7 +3553,6 @@ func (s InstanceMonitoring) String() string {
 }
 
 // Describes a network interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterface
 type InstanceNetworkInterface struct {
 	_ struct{} `type:"structure"`
 
@@ -3746,7 +3614,6 @@ func (s InstanceNetworkInterface) String() string {
 }
 
 // Describes association information for an Elastic IP address (IPv4).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceAssociation
 type InstanceNetworkInterfaceAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -3766,7 +3633,6 @@ func (s InstanceNetworkInterfaceAssociation) String() string {
 }
 
 // Describes a network interface attachment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceAttachment
 type InstanceNetworkInterfaceAttachment struct {
 	_ struct{} `type:"structure"`
 
@@ -3792,7 +3658,6 @@ func (s InstanceNetworkInterfaceAttachment) String() string {
 }
 
 // Describes a network interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceSpecification
 type InstanceNetworkInterfaceSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -3879,7 +3744,6 @@ func (s InstanceNetworkInterfaceSpecification) String() string {
 }
 
 // Describes a private IPv4 address.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstancePrivateIpAddress
 type InstancePrivateIpAddress struct {
 	_ struct{} `type:"structure"`
 
@@ -3903,7 +3767,6 @@ func (s InstancePrivateIpAddress) String() string {
 }
 
 // The instance details to specify which volumes should be snapshotted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceSpecification
 type InstanceSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -3920,7 +3783,6 @@ func (s InstanceSpecification) String() string {
 }
 
 // Describes the current state of an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceState
 type InstanceState struct {
 	_ struct{} `type:"structure"`
 
@@ -3962,7 +3824,6 @@ func (s InstanceState) String() string {
 }
 
 // Describes an instance state change.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStateChange
 type InstanceStateChange struct {
 	_ struct{} `type:"structure"`
 
@@ -3982,7 +3843,6 @@ func (s InstanceStateChange) String() string {
 }
 
 // Describes the status of an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStatus
 type InstanceStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -4015,7 +3875,6 @@ func (s InstanceStatus) String() string {
 }
 
 // Describes the instance status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStatusDetails
 type InstanceStatusDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -4036,7 +3895,6 @@ func (s InstanceStatusDetails) String() string {
 }
 
 // Describes a scheduled event for an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStatusEvent
 type InstanceStatusEvent struct {
 	_ struct{} `type:"structure"`
 
@@ -4069,7 +3927,6 @@ func (s InstanceStatusEvent) String() string {
 }
 
 // Describes the status of an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStatusSummary
 type InstanceStatusSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -4086,7 +3943,6 @@ func (s InstanceStatusSummary) String() string {
 }
 
 // Information about the Capacity Reservation usage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceUsage
 type InstanceUsage struct {
 	_ struct{} `type:"structure"`
 
@@ -4103,7 +3959,6 @@ func (s InstanceUsage) String() string {
 }
 
 // Describes an internet gateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InternetGateway
 type InternetGateway struct {
 	_ struct{} `type:"structure"`
 
@@ -4127,7 +3982,6 @@ func (s InternetGateway) String() string {
 
 // Describes the attachment of a VPC to an internet gateway or an egress-only
 // internet gateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InternetGatewayAttachment
 type InternetGatewayAttachment struct {
 	_ struct{} `type:"structure"`
 
@@ -4145,7 +3999,6 @@ func (s InternetGatewayAttachment) String() string {
 }
 
 // Describes a set of permissions for a security group rule.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpPermission
 type IpPermission struct {
 	_ struct{} `type:"structure"`
 
@@ -4191,7 +4044,6 @@ func (s IpPermission) String() string {
 }
 
 // Describes an IPv4 range.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpRange
 type IpRange struct {
 	_ struct{} `type:"structure"`
 
@@ -4213,7 +4065,6 @@ func (s IpRange) String() string {
 }
 
 // Describes an IPv6 CIDR block.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ipv6CidrBlock
 type Ipv6CidrBlock struct {
 	_ struct{} `type:"structure"`
 
@@ -4227,7 +4078,6 @@ func (s Ipv6CidrBlock) String() string {
 }
 
 // [EC2-VPC only] Describes an IPv6 range.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ipv6Range
 type Ipv6Range struct {
 	_ struct{} `type:"structure"`
 
@@ -4249,7 +4099,6 @@ func (s Ipv6Range) String() string {
 }
 
 // Describes a key pair.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/KeyPairInfo
 type KeyPairInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -4269,7 +4118,6 @@ func (s KeyPairInfo) String() string {
 }
 
 // Describes a launch permission.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchPermission
 type LaunchPermission struct {
 	_ struct{} `type:"structure"`
 
@@ -4286,7 +4134,6 @@ func (s LaunchPermission) String() string {
 }
 
 // Describes a launch permission modification.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchPermissionModifications
 type LaunchPermissionModifications struct {
 	_ struct{} `type:"structure"`
 
@@ -4304,7 +4151,6 @@ func (s LaunchPermissionModifications) String() string {
 }
 
 // Describes the launch specification for an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchSpecification
 type LaunchSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -4369,7 +4215,6 @@ func (s LaunchSpecification) String() string {
 }
 
 // Describes a launch template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplate
 type LaunchTemplate struct {
 	_ struct{} `type:"structure"`
 
@@ -4401,7 +4246,6 @@ func (s LaunchTemplate) String() string {
 }
 
 // Describes a launch template and overrides.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateAndOverridesResponse
 type LaunchTemplateAndOverridesResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -4419,7 +4263,6 @@ func (s LaunchTemplateAndOverridesResponse) String() string {
 }
 
 // Describes a block device mapping.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateBlockDeviceMapping
 type LaunchTemplateBlockDeviceMapping struct {
 	_ struct{} `type:"structure"`
 
@@ -4443,7 +4286,6 @@ func (s LaunchTemplateBlockDeviceMapping) String() string {
 }
 
 // Describes a block device mapping.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateBlockDeviceMappingRequest
 type LaunchTemplateBlockDeviceMappingRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -4477,7 +4319,6 @@ func (s LaunchTemplateBlockDeviceMappingRequest) String() string {
 // Capacity Reservation that has matching attributes (instance type, platform,
 // Availability Zone). Use the CapacityReservationTarget parameter to explicitly
 // target a specific Capacity Reservation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateCapacityReservationSpecificationRequest
 type LaunchTemplateCapacityReservationSpecificationRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -4501,7 +4342,6 @@ func (s LaunchTemplateCapacityReservationSpecificationRequest) String() string {
 }
 
 // Information about the Capacity Reservation targeting option.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateCapacityReservationSpecificationResponse
 type LaunchTemplateCapacityReservationSpecificationResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -4525,7 +4365,6 @@ func (s LaunchTemplateCapacityReservationSpecificationResponse) String() string 
 }
 
 // Describes a launch template and overrides.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateConfig
 type LaunchTemplateConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -4558,7 +4397,6 @@ func (s *LaunchTemplateConfig) Validate() error {
 }
 
 // The CPU options for the instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateCpuOptions
 type LaunchTemplateCpuOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -4576,7 +4414,6 @@ func (s LaunchTemplateCpuOptions) String() string {
 
 // The CPU options for the instance. Both the core count and threads per core
 // must be specified in the request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateCpuOptionsRequest
 type LaunchTemplateCpuOptionsRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -4595,7 +4432,6 @@ func (s LaunchTemplateCpuOptionsRequest) String() string {
 }
 
 // Describes a block device for an EBS volume.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateEbsBlockDevice
 type LaunchTemplateEbsBlockDevice struct {
 	_ struct{} `type:"structure"`
 
@@ -4627,7 +4463,6 @@ func (s LaunchTemplateEbsBlockDevice) String() string {
 }
 
 // The parameters for a block device for an EBS volume.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateEbsBlockDeviceRequest
 type LaunchTemplateEbsBlockDeviceRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -4673,7 +4508,6 @@ func (s LaunchTemplateEbsBlockDeviceRequest) String() string {
 }
 
 // Describes an elastic inference accelerator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateElasticInferenceAccelerator
 type LaunchTemplateElasticInferenceAccelerator struct {
 	_ struct{} `type:"structure"`
 
@@ -4704,7 +4538,6 @@ func (s *LaunchTemplateElasticInferenceAccelerator) Validate() error {
 }
 
 // Describes an elastic inference accelerator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateElasticInferenceAcceleratorResponse
 type LaunchTemplateElasticInferenceAcceleratorResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -4719,7 +4552,6 @@ func (s LaunchTemplateElasticInferenceAcceleratorResponse) String() string {
 }
 
 // Indicates whether an instance is configured for hibernation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateHibernationOptions
 type LaunchTemplateHibernationOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -4736,7 +4568,6 @@ func (s LaunchTemplateHibernationOptions) String() string {
 // Indicates whether the instance is configured for hibernation. This parameter
 // is valid only if the instance meets the hibernation prerequisites (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites).
 // Hibernation is currently supported only for Amazon Linux.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateHibernationOptionsRequest
 type LaunchTemplateHibernationOptionsRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -4752,7 +4583,6 @@ func (s LaunchTemplateHibernationOptionsRequest) String() string {
 }
 
 // Describes an IAM instance profile.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateIamInstanceProfileSpecification
 type LaunchTemplateIamInstanceProfileSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -4769,7 +4599,6 @@ func (s LaunchTemplateIamInstanceProfileSpecification) String() string {
 }
 
 // An IAM instance profile.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateIamInstanceProfileSpecificationRequest
 type LaunchTemplateIamInstanceProfileSpecificationRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -4786,7 +4615,6 @@ func (s LaunchTemplateIamInstanceProfileSpecificationRequest) String() string {
 }
 
 // The market (purchasing) option for the instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceMarketOptions
 type LaunchTemplateInstanceMarketOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -4803,7 +4631,6 @@ func (s LaunchTemplateInstanceMarketOptions) String() string {
 }
 
 // The market (purchasing) option for the instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceMarketOptionsRequest
 type LaunchTemplateInstanceMarketOptionsRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -4820,7 +4647,6 @@ func (s LaunchTemplateInstanceMarketOptionsRequest) String() string {
 }
 
 // Describes a network interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceNetworkInterfaceSpecification
 type LaunchTemplateInstanceNetworkInterfaceSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -4871,7 +4697,6 @@ func (s LaunchTemplateInstanceNetworkInterfaceSpecification) String() string {
 }
 
 // The parameters for a network interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceNetworkInterfaceSpecificationRequest
 type LaunchTemplateInstanceNetworkInterfaceSpecificationRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -4930,7 +4755,6 @@ func (s LaunchTemplateInstanceNetworkInterfaceSpecificationRequest) String() str
 }
 
 // Describes a license configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateLicenseConfiguration
 type LaunchTemplateLicenseConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -4944,7 +4768,6 @@ func (s LaunchTemplateLicenseConfiguration) String() string {
 }
 
 // Describes a license configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateLicenseConfigurationRequest
 type LaunchTemplateLicenseConfigurationRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -4958,7 +4781,6 @@ func (s LaunchTemplateLicenseConfigurationRequest) String() string {
 }
 
 // Describes overrides for a launch template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateOverrides
 type LaunchTemplateOverrides struct {
 	_ struct{} `type:"structure"`
 
@@ -4992,7 +4814,6 @@ func (s LaunchTemplateOverrides) String() string {
 }
 
 // Describes the placement of an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatePlacement
 type LaunchTemplatePlacement struct {
 	_ struct{} `type:"structure"`
 
@@ -5022,7 +4843,6 @@ func (s LaunchTemplatePlacement) String() string {
 }
 
 // Describes the placement of an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatePlacementRequest
 type LaunchTemplatePlacementRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -5053,7 +4873,6 @@ func (s LaunchTemplatePlacementRequest) String() string {
 
 // The launch template to use. You must specify either the launch template ID
 // or launch template name in the request, but not both.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateSpecification
 type LaunchTemplateSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -5075,7 +4894,6 @@ func (s LaunchTemplateSpecification) String() string {
 }
 
 // The options for Spot Instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateSpotMarketOptions
 type LaunchTemplateSpotMarketOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -5106,7 +4924,6 @@ func (s LaunchTemplateSpotMarketOptions) String() string {
 }
 
 // The options for Spot Instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateSpotMarketOptionsRequest
 type LaunchTemplateSpotMarketOptionsRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -5138,7 +4955,6 @@ func (s LaunchTemplateSpotMarketOptionsRequest) String() string {
 }
 
 // The tag specification for the launch template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateTagSpecification
 type LaunchTemplateTagSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -5155,7 +4971,6 @@ func (s LaunchTemplateTagSpecification) String() string {
 }
 
 // The tags specification for the launch template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateTagSpecificationRequest
 type LaunchTemplateTagSpecificationRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -5174,7 +4989,6 @@ func (s LaunchTemplateTagSpecificationRequest) String() string {
 }
 
 // Describes a launch template version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateVersion
 type LaunchTemplateVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -5209,7 +5023,6 @@ func (s LaunchTemplateVersion) String() string {
 }
 
 // Describes the monitoring for the instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatesMonitoring
 type LaunchTemplatesMonitoring struct {
 	_ struct{} `type:"structure"`
 
@@ -5224,7 +5037,6 @@ func (s LaunchTemplatesMonitoring) String() string {
 }
 
 // Describes the monitoring for the instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatesMonitoringRequest
 type LaunchTemplatesMonitoringRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -5239,7 +5051,6 @@ func (s LaunchTemplatesMonitoringRequest) String() string {
 }
 
 // Describes a license configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LicenseConfiguration
 type LicenseConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -5253,7 +5064,6 @@ func (s LicenseConfiguration) String() string {
 }
 
 // Describes a license configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LicenseConfigurationRequest
 type LicenseConfigurationRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -5268,7 +5078,6 @@ func (s LicenseConfigurationRequest) String() string {
 
 // Describes the Classic Load Balancers and target groups to attach to a Spot
 // Fleet request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LoadBalancersConfig
 type LoadBalancersConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -5305,7 +5114,6 @@ func (s *LoadBalancersConfig) Validate() error {
 }
 
 // Describes a load permission.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LoadPermission
 type LoadPermission struct {
 	_ struct{} `type:"structure"`
 
@@ -5322,7 +5130,6 @@ func (s LoadPermission) String() string {
 }
 
 // Describes modifications to the load permissions of an Amazon FPGA image (AFI).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LoadPermissionModifications
 type LoadPermissionModifications struct {
 	_ struct{} `type:"structure"`
 
@@ -5339,7 +5146,6 @@ func (s LoadPermissionModifications) String() string {
 }
 
 // Describes a load permission.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LoadPermissionRequest
 type LoadPermissionRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -5356,7 +5162,6 @@ func (s LoadPermissionRequest) String() string {
 }
 
 // Describes the options for a VPC attachment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayVpcAttachmentRequestOptions
 type ModifyTransitGatewayVpcAttachmentRequestOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -5373,7 +5178,6 @@ func (s ModifyTransitGatewayVpcAttachmentRequestOptions) String() string {
 }
 
 // Describes the monitoring of an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Monitoring
 type Monitoring struct {
 	_ struct{} `type:"structure"`
 
@@ -5388,7 +5192,6 @@ func (s Monitoring) String() string {
 }
 
 // Describes the status of a moving Elastic IP address.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MovingAddressStatus
 type MovingAddressStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -5406,7 +5209,6 @@ func (s MovingAddressStatus) String() string {
 }
 
 // Describes a NAT gateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NatGateway
 type NatGateway struct {
 	_ struct{} `type:"structure"`
 
@@ -5490,7 +5292,6 @@ func (s NatGateway) String() string {
 }
 
 // Describes the IP addresses and network interface associated with a NAT gateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NatGatewayAddress
 type NatGatewayAddress struct {
 	_ struct{} `type:"structure"`
 
@@ -5514,7 +5315,6 @@ func (s NatGatewayAddress) String() string {
 }
 
 // Describes a network ACL.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkAcl
 type NetworkAcl struct {
 	_ struct{} `type:"structure"`
 
@@ -5546,7 +5346,6 @@ func (s NetworkAcl) String() string {
 }
 
 // Describes an association between a network ACL and a subnet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkAclAssociation
 type NetworkAclAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -5566,7 +5365,6 @@ func (s NetworkAclAssociation) String() string {
 }
 
 // Describes an entry in a network ACL.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkAclEntry
 type NetworkAclEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -5603,7 +5401,6 @@ func (s NetworkAclEntry) String() string {
 }
 
 // Describes a network interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterface
 type NetworkInterface struct {
 	_ struct{} `type:"structure"`
 
@@ -5676,7 +5473,6 @@ func (s NetworkInterface) String() string {
 }
 
 // Describes association information for an Elastic IP address (IPv4 only).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfaceAssociation
 type NetworkInterfaceAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -5702,7 +5498,6 @@ func (s NetworkInterfaceAssociation) String() string {
 }
 
 // Describes a network interface attachment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfaceAttachment
 type NetworkInterfaceAttachment struct {
 	_ struct{} `type:"structure"`
 
@@ -5734,7 +5529,6 @@ func (s NetworkInterfaceAttachment) String() string {
 }
 
 // Describes an attachment change.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfaceAttachmentChanges
 type NetworkInterfaceAttachmentChanges struct {
 	_ struct{} `type:"structure"`
 
@@ -5751,7 +5545,6 @@ func (s NetworkInterfaceAttachmentChanges) String() string {
 }
 
 // Describes an IPv6 address associated with a network interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfaceIpv6Address
 type NetworkInterfaceIpv6Address struct {
 	_ struct{} `type:"structure"`
 
@@ -5765,7 +5558,6 @@ func (s NetworkInterfaceIpv6Address) String() string {
 }
 
 // Describes a permission for a network interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfacePermission
 type NetworkInterfacePermission struct {
 	_ struct{} `type:"structure"`
 
@@ -5794,7 +5586,6 @@ func (s NetworkInterfacePermission) String() string {
 }
 
 // Describes the state of a network interface permission.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfacePermissionState
 type NetworkInterfacePermissionState struct {
 	_ struct{} `type:"structure"`
 
@@ -5811,7 +5602,6 @@ func (s NetworkInterfacePermissionState) String() string {
 }
 
 // Describes the private IPv4 address of a network interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfacePrivateIpAddress
 type NetworkInterfacePrivateIpAddress struct {
 	_ struct{} `type:"structure"`
 
@@ -5835,7 +5625,6 @@ func (s NetworkInterfacePrivateIpAddress) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NewDhcpConfiguration
 type NewDhcpConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -5850,7 +5639,6 @@ func (s NewDhcpConfiguration) String() string {
 }
 
 // Describes the configuration of On-Demand Instances in an EC2 Fleet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/OnDemandOptions
 type OnDemandOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -5885,7 +5673,6 @@ func (s OnDemandOptions) String() string {
 }
 
 // Describes the configuration of On-Demand Instances in an EC2 Fleet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/OnDemandOptionsRequest
 type OnDemandOptionsRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -5921,7 +5708,6 @@ func (s OnDemandOptionsRequest) String() string {
 
 // Describes the data that identifies an Amazon FPGA image (AFI) on the PCI
 // bus.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PciId
 type PciId struct {
 	_ struct{} `type:"structure"`
 
@@ -5944,7 +5730,6 @@ func (s PciId) String() string {
 }
 
 // Describes the VPC peering connection options.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PeeringConnectionOptions
 type PeeringConnectionOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -5967,7 +5752,6 @@ func (s PeeringConnectionOptions) String() string {
 }
 
 // The VPC peering connection options.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PeeringConnectionOptionsRequest
 type PeeringConnectionOptionsRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -5990,7 +5774,6 @@ func (s PeeringConnectionOptionsRequest) String() string {
 }
 
 // Describes the placement of an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Placement
 type Placement struct {
 	_ struct{} `type:"structure"`
 
@@ -6030,7 +5813,6 @@ func (s Placement) String() string {
 }
 
 // Describes a placement group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PlacementGroup
 type PlacementGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -6053,7 +5835,6 @@ func (s PlacementGroup) String() string {
 }
 
 // Describes the placement of an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PlacementResponse
 type PlacementResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -6067,7 +5848,6 @@ func (s PlacementResponse) String() string {
 }
 
 // Describes a range of ports.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PortRange
 type PortRange struct {
 	_ struct{} `type:"structure"`
 
@@ -6084,7 +5864,6 @@ func (s PortRange) String() string {
 }
 
 // Describes prefixes for AWS services.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PrefixList
 type PrefixList struct {
 	_ struct{} `type:"structure"`
 
@@ -6104,7 +5883,6 @@ func (s PrefixList) String() string {
 }
 
 // Describes a prefix list ID.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PrefixListId
 type PrefixListId struct {
 	_ struct{} `type:"structure"`
 
@@ -6125,7 +5903,6 @@ func (s PrefixListId) String() string {
 }
 
 // Describes the price for a Reserved Instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PriceSchedule
 type PriceSchedule struct {
 	_ struct{} `type:"structure"`
 
@@ -6159,7 +5936,6 @@ func (s PriceSchedule) String() string {
 }
 
 // Describes the price for a Reserved Instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PriceScheduleSpecification
 type PriceScheduleSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -6181,7 +5957,6 @@ func (s PriceScheduleSpecification) String() string {
 }
 
 // Describes a Reserved Instance offering.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PricingDetail
 type PricingDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -6198,7 +5973,6 @@ func (s PricingDetail) String() string {
 }
 
 // PrincipalIdFormat description
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PrincipalIdFormat
 type PrincipalIdFormat struct {
 	_ struct{} `type:"structure"`
 
@@ -6215,7 +5989,6 @@ func (s PrincipalIdFormat) String() string {
 }
 
 // Describes a secondary private IPv4 address for a network interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PrivateIpAddressSpecification
 type PrivateIpAddressSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -6233,7 +6006,6 @@ func (s PrivateIpAddressSpecification) String() string {
 }
 
 // Describes a product code.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProductCode
 type ProductCode struct {
 	_ struct{} `type:"structure"`
 
@@ -6250,7 +6022,6 @@ func (s ProductCode) String() string {
 }
 
 // Describes a virtual private gateway propagating route.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PropagatingVgw
 type PropagatingVgw struct {
 	_ struct{} `type:"structure"`
 
@@ -6266,7 +6037,6 @@ func (s PropagatingVgw) String() string {
 // Reserved. If you need to sustain traffic greater than the documented limits
 // (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html),
 // contact us through the Support Center (https://console.aws.amazon.com/support/home?).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionedBandwidth
 type ProvisionedBandwidth struct {
 	_ struct{} `type:"structure"`
 
@@ -6302,7 +6072,6 @@ func (s ProvisionedBandwidth) String() string {
 }
 
 // Describes an address pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PublicIpv4Pool
 type PublicIpv4Pool struct {
 	_ struct{} `type:"structure"`
 
@@ -6328,7 +6097,6 @@ func (s PublicIpv4Pool) String() string {
 }
 
 // Describes an address range of an IPv4 address pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PublicIpv4PoolRange
 type PublicIpv4PoolRange struct {
 	_ struct{} `type:"structure"`
 
@@ -6351,7 +6119,6 @@ func (s PublicIpv4PoolRange) String() string {
 }
 
 // Describes the result of the purchase.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Purchase
 type Purchase struct {
 	_ struct{} `type:"structure"`
 
@@ -6388,7 +6155,6 @@ func (s Purchase) String() string {
 }
 
 // Describes a request to purchase Scheduled Instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseRequest
 type PurchaseRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -6427,7 +6193,6 @@ func (s *PurchaseRequest) Validate() error {
 }
 
 // Describes a recurring charge.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RecurringCharge
 type RecurringCharge struct {
 	_ struct{} `type:"structure"`
 
@@ -6444,7 +6209,6 @@ func (s RecurringCharge) String() string {
 }
 
 // Describes a Region.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Region
 type Region struct {
 	_ struct{} `type:"structure"`
 
@@ -6465,7 +6229,6 @@ func (s Region) String() string {
 }
 
 // The information to include in the launch template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestLaunchTemplateData
 type RequestLaunchTemplateData struct {
 	_ struct{} `type:"structure"`
 
@@ -6632,7 +6395,6 @@ func (s *RequestLaunchTemplateData) Validate() error {
 }
 
 // Describes the launch specification for an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotLaunchSpecification
 type RequestSpotLaunchSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -6723,7 +6485,6 @@ func (s *RequestSpotLaunchSpecification) Validate() error {
 }
 
 // Describes a reservation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Reservation
 type Reservation struct {
 	_ struct{} `type:"structure"`
 
@@ -6750,7 +6511,6 @@ func (s Reservation) String() string {
 }
 
 // The cost associated with the Reserved Instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservationValue
 type ReservationValue struct {
 	_ struct{} `type:"structure"`
 
@@ -6771,7 +6531,6 @@ func (s ReservationValue) String() string {
 }
 
 // Describes the limit price of a Reserved Instance offering.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstanceLimitPrice
 type ReservedInstanceLimitPrice struct {
 	_ struct{} `type:"structure"`
 
@@ -6790,7 +6549,6 @@ func (s ReservedInstanceLimitPrice) String() string {
 }
 
 // The total value of the Convertible Reserved Instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstanceReservationValue
 type ReservedInstanceReservationValue struct {
 	_ struct{} `type:"structure"`
 
@@ -6807,7 +6565,6 @@ func (s ReservedInstanceReservationValue) String() string {
 }
 
 // Describes a Reserved Instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstances
 type ReservedInstances struct {
 	_ struct{} `type:"structure"`
 
@@ -6873,7 +6630,6 @@ func (s ReservedInstances) String() string {
 }
 
 // Describes the configuration settings for the modified Reserved Instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstancesConfiguration
 type ReservedInstancesConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -6903,7 +6659,6 @@ func (s ReservedInstancesConfiguration) String() string {
 }
 
 // Describes the ID of a Reserved Instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstancesId
 type ReservedInstancesId struct {
 	_ struct{} `type:"structure"`
 
@@ -6917,7 +6672,6 @@ func (s ReservedInstancesId) String() string {
 }
 
 // Describes a Reserved Instance listing.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstancesListing
 type ReservedInstancesListing struct {
 	_ struct{} `type:"structure"`
 
@@ -6960,7 +6714,6 @@ func (s ReservedInstancesListing) String() string {
 }
 
 // Describes a Reserved Instance modification.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstancesModification
 type ReservedInstancesModification struct {
 	_ struct{} `type:"structure"`
 
@@ -7000,7 +6753,6 @@ func (s ReservedInstancesModification) String() string {
 }
 
 // Describes the modification request/s.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstancesModificationResult
 type ReservedInstancesModificationResult struct {
 	_ struct{} `type:"structure"`
 
@@ -7019,7 +6771,6 @@ func (s ReservedInstancesModificationResult) String() string {
 }
 
 // Describes a Reserved Instance offering.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstancesOffering
 type ReservedInstancesOffering struct {
 	_ struct{} `type:"structure"`
 
@@ -7084,7 +6835,6 @@ func (s ReservedInstancesOffering) String() string {
 
 // Describes the error that's returned when you cannot delete a launch template
 // version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResponseError
 type ResponseError struct {
 	_ struct{} `type:"structure"`
 
@@ -7101,7 +6851,6 @@ func (s ResponseError) String() string {
 }
 
 // The information for a launch template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResponseLaunchTemplateData
 type ResponseLaunchTemplateData struct {
 	_ struct{} `type:"structure"`
 
@@ -7193,7 +6942,6 @@ func (s ResponseLaunchTemplateData) String() string {
 }
 
 // Describes a route in a route table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Route
 type Route struct {
 	_ struct{} `type:"structure"`
 
@@ -7252,7 +7000,6 @@ func (s Route) String() string {
 }
 
 // Describes a route table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RouteTable
 type RouteTable struct {
 	_ struct{} `type:"structure"`
 
@@ -7284,7 +7031,6 @@ func (s RouteTable) String() string {
 }
 
 // Describes an association between a route table and a subnet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RouteTableAssociation
 type RouteTableAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -7307,7 +7053,6 @@ func (s RouteTableAssociation) String() string {
 }
 
 // Describes the monitoring of an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstancesMonitoringEnabled
 type RunInstancesMonitoringEnabled struct {
 	_ struct{} `type:"structure"`
 
@@ -7339,7 +7084,6 @@ func (s *RunInstancesMonitoringEnabled) Validate() error {
 
 // Describes the storage parameters for S3 and S3 buckets for an instance store-backed
 // AMI.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/S3Storage
 type S3Storage struct {
 	_ struct{} `type:"structure"`
 
@@ -7372,7 +7116,6 @@ func (s S3Storage) String() string {
 }
 
 // Describes a Scheduled Instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstance
 type ScheduledInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -7428,7 +7171,6 @@ func (s ScheduledInstance) String() string {
 }
 
 // Describes a schedule that is available for your Scheduled Instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstanceAvailability
 type ScheduledInstanceAvailability struct {
 	_ struct{} `type:"structure"`
 
@@ -7479,7 +7221,6 @@ func (s ScheduledInstanceAvailability) String() string {
 }
 
 // Describes the recurring schedule for a Scheduled Instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstanceRecurrence
 type ScheduledInstanceRecurrence struct {
 	_ struct{} `type:"structure"`
 
@@ -7509,7 +7250,6 @@ func (s ScheduledInstanceRecurrence) String() string {
 }
 
 // Describes the recurring schedule for a Scheduled Instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstanceRecurrenceRequest
 type ScheduledInstanceRecurrenceRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -7542,7 +7282,6 @@ func (s ScheduledInstanceRecurrenceRequest) String() string {
 }
 
 // Describes a block device mapping for a Scheduled Instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesBlockDeviceMapping
 type ScheduledInstancesBlockDeviceMapping struct {
 	_ struct{} `type:"structure"`
 
@@ -7576,7 +7315,6 @@ func (s ScheduledInstancesBlockDeviceMapping) String() string {
 }
 
 // Describes an EBS volume for a Scheduled Instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesEbs
 type ScheduledInstancesEbs struct {
 	_ struct{} `type:"structure"`
 
@@ -7624,7 +7362,6 @@ func (s ScheduledInstancesEbs) String() string {
 }
 
 // Describes an IAM instance profile for a Scheduled Instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesIamInstanceProfile
 type ScheduledInstancesIamInstanceProfile struct {
 	_ struct{} `type:"structure"`
 
@@ -7641,7 +7378,6 @@ func (s ScheduledInstancesIamInstanceProfile) String() string {
 }
 
 // Describes an IPv6 address.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesIpv6Address
 type ScheduledInstancesIpv6Address struct {
 	_ struct{} `type:"structure"`
 
@@ -7659,7 +7395,6 @@ func (s ScheduledInstancesIpv6Address) String() string {
 // If you are launching the Scheduled Instance in EC2-VPC, you must specify
 // the ID of the subnet. You can specify the subnet using either SubnetId or
 // NetworkInterface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesLaunchSpecification
 type ScheduledInstancesLaunchSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -7734,7 +7469,6 @@ func (s *ScheduledInstancesLaunchSpecification) Validate() error {
 }
 
 // Describes whether monitoring is enabled for a Scheduled Instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesMonitoring
 type ScheduledInstancesMonitoring struct {
 	_ struct{} `type:"structure"`
 
@@ -7748,7 +7482,6 @@ func (s ScheduledInstancesMonitoring) String() string {
 }
 
 // Describes a network interface for a Scheduled Instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesNetworkInterface
 type ScheduledInstancesNetworkInterface struct {
 	_ struct{} `type:"structure"`
 
@@ -7800,7 +7533,6 @@ func (s ScheduledInstancesNetworkInterface) String() string {
 }
 
 // Describes the placement for a Scheduled Instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesPlacement
 type ScheduledInstancesPlacement struct {
 	_ struct{} `type:"structure"`
 
@@ -7817,7 +7549,6 @@ func (s ScheduledInstancesPlacement) String() string {
 }
 
 // Describes a private IPv4 address for a Scheduled Instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesPrivateIpAddressConfig
 type ScheduledInstancesPrivateIpAddressConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -7835,7 +7566,6 @@ func (s ScheduledInstancesPrivateIpAddressConfig) String() string {
 }
 
 // Describes a security group
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroup
 type SecurityGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -7870,7 +7600,6 @@ func (s SecurityGroup) String() string {
 }
 
 // Describes a security group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroupIdentifier
 type SecurityGroupIdentifier struct {
 	_ struct{} `type:"structure"`
 
@@ -7887,7 +7616,6 @@ func (s SecurityGroupIdentifier) String() string {
 }
 
 // Describes a VPC with a security group that references your security group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroupReference
 type SecurityGroupReference struct {
 	_ struct{} `type:"structure"`
 
@@ -7907,7 +7635,6 @@ func (s SecurityGroupReference) String() string {
 }
 
 // Describes a service configuration for a VPC endpoint service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ServiceConfiguration
 type ServiceConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -7953,7 +7680,6 @@ func (s ServiceConfiguration) String() string {
 }
 
 // Describes a VPC endpoint service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ServiceDetail
 type ServiceDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -7999,7 +7725,6 @@ func (s ServiceDetail) String() string {
 }
 
 // Describes the type of service for a VPC endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ServiceTypeDetail
 type ServiceTypeDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -8014,7 +7739,6 @@ func (s ServiceTypeDetail) String() string {
 
 // Describes the time period for a Scheduled Instance to start its first schedule.
 // The time period must span less than one day.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SlotDateTimeRangeRequest
 type SlotDateTimeRangeRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -8055,7 +7779,6 @@ func (s *SlotDateTimeRangeRequest) Validate() error {
 }
 
 // Describes the time period for a Scheduled Instance to start its first schedule.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SlotStartTimeRangeRequest
 type SlotStartTimeRangeRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -8072,7 +7795,6 @@ func (s SlotStartTimeRangeRequest) String() string {
 }
 
 // Describes a snapshot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Snapshot
 type Snapshot struct {
 	_ struct{} `type:"structure"`
 
@@ -8141,7 +7863,6 @@ func (s Snapshot) String() string {
 }
 
 // Describes the snapshot created from the imported disk.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotDetail
 type SnapshotDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -8182,7 +7903,6 @@ func (s SnapshotDetail) String() string {
 }
 
 // The disk container object for the import snapshot request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotDiskContainer
 type SnapshotDiskContainer struct {
 	_ struct{} `type:"structure"`
 
@@ -8208,7 +7928,6 @@ func (s SnapshotDiskContainer) String() string {
 }
 
 // Information about a snapshot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotInfo
 type SnapshotInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -8251,7 +7970,6 @@ func (s SnapshotInfo) String() string {
 }
 
 // Details about the import snapshot task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotTaskDetail
 type SnapshotTaskDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -8296,7 +8014,6 @@ func (s SnapshotTaskDetail) String() string {
 }
 
 // Describes the data feed for a Spot Instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotDatafeedSubscription
 type SpotDatafeedSubscription struct {
 	_ struct{} `type:"structure"`
 
@@ -8324,7 +8041,6 @@ func (s SpotDatafeedSubscription) String() string {
 // Describes the launch specification for one or more Spot Instances. If you
 // include On-Demand capacity in your fleet request, you can't use SpotFleetLaunchSpecification;
 // you must use LaunchTemplateConfig (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_LaunchTemplateConfig.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetLaunchSpecification
 type SpotFleetLaunchSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -8416,7 +8132,6 @@ func (s SpotFleetLaunchSpecification) String() string {
 }
 
 // Describes whether monitoring is enabled.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetMonitoring
 type SpotFleetMonitoring struct {
 	_ struct{} `type:"structure"`
 
@@ -8432,7 +8147,6 @@ func (s SpotFleetMonitoring) String() string {
 }
 
 // Describes a Spot Fleet request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetRequestConfig
 type SpotFleetRequestConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -8462,7 +8176,6 @@ func (s SpotFleetRequestConfig) String() string {
 }
 
 // Describes the configuration of a Spot Fleet request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetRequestConfigData
 type SpotFleetRequestConfigData struct {
 	_ struct{} `type:"structure"`
 
@@ -8651,7 +8364,6 @@ func (s *SpotFleetRequestConfigData) Validate() error {
 }
 
 // The tags for a Spot Fleet resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetTagSpecification
 type SpotFleetTagSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -8669,7 +8381,6 @@ func (s SpotFleetTagSpecification) String() string {
 }
 
 // Describes a Spot Instance request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotInstanceRequest
 type SpotInstanceRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -8750,7 +8461,6 @@ func (s SpotInstanceRequest) String() string {
 }
 
 // Describes a Spot Instance state change.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotInstanceStateFault
 type SpotInstanceStateFault struct {
 	_ struct{} `type:"structure"`
 
@@ -8767,7 +8477,6 @@ func (s SpotInstanceStateFault) String() string {
 }
 
 // Describes the status of a Spot Instance request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotInstanceStatus
 type SpotInstanceStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -8789,7 +8498,6 @@ func (s SpotInstanceStatus) String() string {
 }
 
 // The options for Spot Instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotMarketOptions
 type SpotMarketOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -8824,7 +8532,6 @@ func (s SpotMarketOptions) String() string {
 }
 
 // Describes the configuration of Spot Instances in an EC2 Fleet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotOptions
 type SpotOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -8874,7 +8581,6 @@ func (s SpotOptions) String() string {
 }
 
 // Describes the configuration of Spot Instances in an EC2 Fleet request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotOptionsRequest
 type SpotOptionsRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -8924,7 +8630,6 @@ func (s SpotOptionsRequest) String() string {
 }
 
 // Describes Spot Instance placement.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotPlacement
 type SpotPlacement struct {
 	_ struct{} `type:"structure"`
 
@@ -8950,7 +8655,6 @@ func (s SpotPlacement) String() string {
 
 // Describes the maximum price per hour that you are willing to pay for a Spot
 // Instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotPrice
 type SpotPrice struct {
 	_ struct{} `type:"structure"`
 
@@ -8976,7 +8680,6 @@ func (s SpotPrice) String() string {
 }
 
 // Describes a stale rule in a security group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StaleIpPermission
 type StaleIpPermission struct {
 	_ struct{} `type:"structure"`
 
@@ -9010,7 +8713,6 @@ func (s StaleIpPermission) String() string {
 }
 
 // Describes a stale security group (a security group that contains stale rules).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StaleSecurityGroup
 type StaleSecurityGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -9039,7 +8741,6 @@ func (s StaleSecurityGroup) String() string {
 }
 
 // Describes a state change.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StateReason
 type StateReason struct {
 	_ struct{} `type:"structure"`
 
@@ -9094,7 +8795,6 @@ func (s StateReason) String() string {
 }
 
 // Describes the storage location for an instance store-backed AMI.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Storage
 type Storage struct {
 	_ struct{} `type:"structure"`
 
@@ -9108,7 +8808,6 @@ func (s Storage) String() string {
 }
 
 // Describes a storage location in Amazon S3.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StorageLocation
 type StorageLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -9125,7 +8824,6 @@ func (s StorageLocation) String() string {
 }
 
 // Describes a subnet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Subnet
 type Subnet struct {
 	_ struct{} `type:"structure"`
 
@@ -9181,7 +8879,6 @@ func (s Subnet) String() string {
 }
 
 // Describes the state of a CIDR block.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SubnetCidrBlockState
 type SubnetCidrBlockState struct {
 	_ struct{} `type:"structure"`
 
@@ -9198,7 +8895,6 @@ func (s SubnetCidrBlockState) String() string {
 }
 
 // Describes an IPv6 CIDR block associated with a subnet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SubnetIpv6CidrBlockAssociation
 type SubnetIpv6CidrBlockAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -9219,7 +8915,6 @@ func (s SubnetIpv6CidrBlockAssociation) String() string {
 
 // Describes the T2 or T3 instance whose credit option for CPU usage was successfully
 // modified.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SuccessfulInstanceCreditSpecificationItem
 type SuccessfulInstanceCreditSpecificationItem struct {
 	_ struct{} `type:"structure"`
 
@@ -9233,7 +8928,6 @@ func (s SuccessfulInstanceCreditSpecificationItem) String() string {
 }
 
 // Describes a tag.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -9256,7 +8950,6 @@ func (s Tag) String() string {
 }
 
 // Describes a tag.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TagDescription
 type TagDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -9279,7 +8972,6 @@ func (s TagDescription) String() string {
 }
 
 // The tags to apply to a resource when the resource is being created.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TagSpecification
 type TagSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -9314,7 +9006,6 @@ func (s TagSpecification) String() string {
 // willing to pay is reached, the fleet stops launching instances even if it
 // hasn’t met the target capacity. The MaxTotalPrice parameters are located
 // in and
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetCapacitySpecification
 type TargetCapacitySpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -9352,7 +9043,6 @@ func (s TargetCapacitySpecification) String() string {
 // the maximum amount you're willing to pay is reached, the fleet stops launching
 // instances even if it hasn’t met the target capacity. The MaxTotalPrice
 // parameters are located in and .
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetCapacitySpecificationRequest
 type TargetCapacitySpecificationRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -9391,7 +9081,6 @@ func (s *TargetCapacitySpecificationRequest) Validate() error {
 }
 
 // Information about the Convertible Reserved Instance offering.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetConfiguration
 type TargetConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -9409,7 +9098,6 @@ func (s TargetConfiguration) String() string {
 }
 
 // Details about the target configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetConfigurationRequest
 type TargetConfigurationRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -9443,7 +9131,6 @@ func (s *TargetConfigurationRequest) Validate() error {
 }
 
 // Describes a load balancer target group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetGroup
 type TargetGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -9458,7 +9145,6 @@ func (s TargetGroup) String() string {
 
 // Describes the target groups to attach to a Spot Fleet. Spot Fleet registers
 // the running Spot Instances with these target groups.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetGroupsConfig
 type TargetGroupsConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -9485,7 +9171,6 @@ func (s *TargetGroupsConfig) Validate() error {
 }
 
 // Describes a target network associated with a Client VPN endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetNetwork
 type TargetNetwork struct {
 	_ struct{} `type:"structure"`
 
@@ -9514,7 +9199,6 @@ func (s TargetNetwork) String() string {
 }
 
 // The total value of the new Convertible Reserved Instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetReservationValue
 type TargetReservationValue struct {
 	_ struct{} `type:"structure"`
 
@@ -9534,7 +9218,6 @@ func (s TargetReservationValue) String() string {
 }
 
 // Information about a terminated Client VPN endpoint client connection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TerminateConnectionStatus
 type TerminateConnectionStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -9554,7 +9237,6 @@ func (s TerminateConnectionStatus) String() string {
 }
 
 // Describes the Traffic Mirror filter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorFilter
 type TrafficMirrorFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -9585,7 +9267,6 @@ func (s TrafficMirrorFilter) String() string {
 }
 
 // Describes the Traffic Mirror rule.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorFilterRule
 type TrafficMirrorFilterRule struct {
 	_ struct{} `type:"structure"`
 
@@ -9629,7 +9310,6 @@ func (s TrafficMirrorFilterRule) String() string {
 }
 
 // Describes the Traffic Mirror port range.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorPortRange
 type TrafficMirrorPortRange struct {
 	_ struct{} `type:"structure"`
 
@@ -9648,7 +9328,6 @@ func (s TrafficMirrorPortRange) String() string {
 }
 
 // Information about the Traffic Mirror filter rule port range.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorPortRangeRequest
 type TrafficMirrorPortRangeRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -9667,7 +9346,6 @@ func (s TrafficMirrorPortRangeRequest) String() string {
 }
 
 // Describes a Traffic Mirror session.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorSession
 type TrafficMirrorSession struct {
 	_ struct{} `type:"structure"`
 
@@ -9716,7 +9394,6 @@ func (s TrafficMirrorSession) String() string {
 }
 
 // Describes a Traffic Mirror target.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorTarget
 type TrafficMirrorTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -9748,7 +9425,6 @@ func (s TrafficMirrorTarget) String() string {
 }
 
 // Describes a transit gateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGateway
 type TransitGateway struct {
 	_ struct{} `type:"structure"`
 
@@ -9784,7 +9460,6 @@ func (s TransitGateway) String() string {
 
 // Describes an association between a resource attachment and a transit gateway
 // route table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayAssociation
 type TransitGatewayAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -9810,7 +9485,6 @@ func (s TransitGatewayAssociation) String() string {
 }
 
 // Describes an attachment between a resource and a transit gateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayAttachment
 type TransitGatewayAttachment struct {
 	_ struct{} `type:"structure"`
 
@@ -9851,7 +9525,6 @@ func (s TransitGatewayAttachment) String() string {
 }
 
 // Describes an association.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayAttachmentAssociation
 type TransitGatewayAttachmentAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -9868,7 +9541,6 @@ func (s TransitGatewayAttachmentAssociation) String() string {
 }
 
 // Describes a propagation route table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayAttachmentPropagation
 type TransitGatewayAttachmentPropagation struct {
 	_ struct{} `type:"structure"`
 
@@ -9885,7 +9557,6 @@ func (s TransitGatewayAttachmentPropagation) String() string {
 }
 
 // Describes the options for a transit gateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayOptions
 type TransitGatewayOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -9924,7 +9595,6 @@ func (s TransitGatewayOptions) String() string {
 }
 
 // Describes route propagation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayPropagation
 type TransitGatewayPropagation struct {
 	_ struct{} `type:"structure"`
 
@@ -9950,7 +9620,6 @@ func (s TransitGatewayPropagation) String() string {
 }
 
 // Describes the options for a transit gateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayRequestOptions
 type TransitGatewayRequestOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -9984,7 +9653,6 @@ func (s TransitGatewayRequestOptions) String() string {
 }
 
 // Describes a route for a transit gateway route table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayRoute
 type TransitGatewayRoute struct {
 	_ struct{} `type:"structure"`
 
@@ -10007,7 +9675,6 @@ func (s TransitGatewayRoute) String() string {
 }
 
 // Describes a route attachment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayRouteAttachment
 type TransitGatewayRouteAttachment struct {
 	_ struct{} `type:"structure"`
 
@@ -10027,7 +9694,6 @@ func (s TransitGatewayRouteAttachment) String() string {
 }
 
 // Describes a transit gateway route table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayRouteTable
 type TransitGatewayRouteTable struct {
 	_ struct{} `type:"structure"`
 
@@ -10061,7 +9727,6 @@ func (s TransitGatewayRouteTable) String() string {
 }
 
 // Describes an association between a route table and a resource attachment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayRouteTableAssociation
 type TransitGatewayRouteTableAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -10084,7 +9749,6 @@ func (s TransitGatewayRouteTableAssociation) String() string {
 }
 
 // Describes a route table propagation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayRouteTablePropagation
 type TransitGatewayRouteTablePropagation struct {
 	_ struct{} `type:"structure"`
 
@@ -10107,7 +9771,6 @@ func (s TransitGatewayRouteTablePropagation) String() string {
 }
 
 // Describes a VPC attachment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayVpcAttachment
 type TransitGatewayVpcAttachment struct {
 	_ struct{} `type:"structure"`
 
@@ -10145,7 +9808,6 @@ func (s TransitGatewayVpcAttachment) String() string {
 }
 
 // Describes the VPC attachment options.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayVpcAttachmentOptions
 type TransitGatewayVpcAttachmentOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -10163,7 +9825,6 @@ func (s TransitGatewayVpcAttachmentOptions) String() string {
 
 // Describes the T2 or T3 instance whose credit option for CPU usage was not
 // modified.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnsuccessfulInstanceCreditSpecificationItem
 type UnsuccessfulInstanceCreditSpecificationItem struct {
 	_ struct{} `type:"structure"`
 
@@ -10182,7 +9843,6 @@ func (s UnsuccessfulInstanceCreditSpecificationItem) String() string {
 
 // Information about the error for the T2 or T3 instance whose credit option
 // for CPU usage was not modified.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnsuccessfulInstanceCreditSpecificationItemError
 type UnsuccessfulInstanceCreditSpecificationItemError struct {
 	_ struct{} `type:"structure"`
 
@@ -10199,7 +9859,6 @@ func (s UnsuccessfulInstanceCreditSpecificationItemError) String() string {
 }
 
 // Information about items that were not successfully processed in a batch call.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnsuccessfulItem
 type UnsuccessfulItem struct {
 	_ struct{} `type:"structure"`
 
@@ -10217,7 +9876,6 @@ func (s UnsuccessfulItem) String() string {
 
 // Information about the error that occurred. For more information about errors,
 // see Error Codes (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnsuccessfulItemError
 type UnsuccessfulItemError struct {
 	_ struct{} `type:"structure"`
 
@@ -10234,7 +9892,6 @@ func (s UnsuccessfulItemError) String() string {
 }
 
 // Describes the S3 bucket for the disk image.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UserBucket
 type UserBucket struct {
 	_ struct{} `type:"structure"`
 
@@ -10251,7 +9908,6 @@ func (s UserBucket) String() string {
 }
 
 // Describes the S3 bucket for the disk image.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UserBucketDetails
 type UserBucketDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -10268,7 +9924,6 @@ func (s UserBucketDetails) String() string {
 }
 
 // Describes the user data for an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UserData
 type UserData struct {
 	_ struct{} `type:"structure"`
 
@@ -10284,7 +9939,6 @@ func (s UserData) String() string {
 }
 
 // Describes a security group and AWS account ID pair.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UserIdGroupPair
 type UserIdGroupPair struct {
 	_ struct{} `type:"structure"`
 
@@ -10332,7 +9986,6 @@ func (s UserIdGroupPair) String() string {
 }
 
 // Describes telemetry for a VPN tunnel.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VgwTelemetry
 type VgwTelemetry struct {
 	_ struct{} `type:"structure"`
 
@@ -10362,7 +10015,6 @@ func (s VgwTelemetry) String() string {
 }
 
 // Describes a volume.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Volume
 type Volume struct {
 	_ struct{} `type:"structure"`
 
@@ -10427,7 +10079,6 @@ func (s Volume) String() string {
 }
 
 // Describes volume attachment details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeAttachment
 type VolumeAttachment struct {
 	_ struct{} `type:"structure"`
 
@@ -10456,7 +10107,6 @@ func (s VolumeAttachment) String() string {
 }
 
 // Describes an EBS volume.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeDetail
 type VolumeDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -10488,7 +10138,6 @@ func (s *VolumeDetail) Validate() error {
 // Describes the modification status of an EBS volume.
 //
 // If the volume has never been modified, some element values will be null.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeModification
 type VolumeModification struct {
 	_ struct{} `type:"structure"`
 
@@ -10536,7 +10185,6 @@ func (s VolumeModification) String() string {
 }
 
 // Describes a volume status operation code.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeStatusAction
 type VolumeStatusAction struct {
 	_ struct{} `type:"structure"`
 
@@ -10559,7 +10207,6 @@ func (s VolumeStatusAction) String() string {
 }
 
 // Describes a volume status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeStatusDetails
 type VolumeStatusDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -10576,7 +10223,6 @@ func (s VolumeStatusDetails) String() string {
 }
 
 // Describes a volume status event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeStatusEvent
 type VolumeStatusEvent struct {
 	_ struct{} `type:"structure"`
 
@@ -10602,7 +10248,6 @@ func (s VolumeStatusEvent) String() string {
 }
 
 // Describes the status of a volume.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeStatusInfo
 type VolumeStatusInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -10619,7 +10264,6 @@ func (s VolumeStatusInfo) String() string {
 }
 
 // Describes the volume status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeStatusItem
 type VolumeStatusItem struct {
 	_ struct{} `type:"structure"`
 
@@ -10645,7 +10289,6 @@ func (s VolumeStatusItem) String() string {
 }
 
 // Describes a VPC.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Vpc
 type Vpc struct {
 	_ struct{} `type:"structure"`
 
@@ -10687,7 +10330,6 @@ func (s Vpc) String() string {
 }
 
 // Describes an attachment between a virtual private gateway and a VPC.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcAttachment
 type VpcAttachment struct {
 	_ struct{} `type:"structure"`
 
@@ -10704,7 +10346,6 @@ func (s VpcAttachment) String() string {
 }
 
 // Describes an IPv4 CIDR block associated with a VPC.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcCidrBlockAssociation
 type VpcCidrBlockAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -10724,7 +10365,6 @@ func (s VpcCidrBlockAssociation) String() string {
 }
 
 // Describes the state of a CIDR block.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcCidrBlockState
 type VpcCidrBlockState struct {
 	_ struct{} `type:"structure"`
 
@@ -10741,7 +10381,6 @@ func (s VpcCidrBlockState) String() string {
 }
 
 // Describes whether a VPC is enabled for ClassicLink.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcClassicLink
 type VpcClassicLink struct {
 	_ struct{} `type:"structure"`
 
@@ -10761,7 +10400,6 @@ func (s VpcClassicLink) String() string {
 }
 
 // Describes a VPC endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEndpoint
 type VpcEndpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -10822,7 +10460,6 @@ func (s VpcEndpoint) String() string {
 }
 
 // Describes a VPC endpoint connection to a service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEndpointConnection
 type VpcEndpointConnection struct {
 	_ struct{} `type:"structure"`
 
@@ -10854,7 +10491,6 @@ func (s VpcEndpointConnection) String() string {
 }
 
 // Describes an IPv6 CIDR block associated with a VPC.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcIpv6CidrBlockAssociation
 type VpcIpv6CidrBlockAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -10874,7 +10510,6 @@ func (s VpcIpv6CidrBlockAssociation) String() string {
 }
 
 // Describes a VPC peering connection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcPeeringConnection
 type VpcPeeringConnection struct {
 	_ struct{} `type:"structure"`
 
@@ -10905,7 +10540,6 @@ func (s VpcPeeringConnection) String() string {
 }
 
 // Describes the VPC peering connection options.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcPeeringConnectionOptionsDescription
 type VpcPeeringConnectionOptionsDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -10928,7 +10562,6 @@ func (s VpcPeeringConnectionOptionsDescription) String() string {
 }
 
 // Describes the status of a VPC peering connection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcPeeringConnectionStateReason
 type VpcPeeringConnectionStateReason struct {
 	_ struct{} `type:"structure"`
 
@@ -10945,7 +10578,6 @@ func (s VpcPeeringConnectionStateReason) String() string {
 }
 
 // Describes a VPC in a VPC peering connection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcPeeringConnectionVpcInfo
 type VpcPeeringConnectionVpcInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -10981,7 +10613,6 @@ func (s VpcPeeringConnectionVpcInfo) String() string {
 // VPN supports Active Directory and mutual authentication. For more information,
 // see Authentication (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication)
 // in the AWS Client VPN Administrator Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnAuthentication
 type VpnAuthentication struct {
 	_ struct{} `type:"structure"`
 
@@ -11004,7 +10635,6 @@ func (s VpnAuthentication) String() string {
 // Client VPN supports Active Directory and mutual authentication. For more
 // information, see Authentication (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication)
 // in the AWS Client VPN Administrator Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnAuthenticationRequest
 type VpnAuthenticationRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -11028,7 +10658,6 @@ func (s VpnAuthenticationRequest) String() string {
 }
 
 // Describes the state of an authorization rule.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnAuthorizationRuleStatus
 type VpnAuthorizationRuleStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -11045,7 +10674,6 @@ func (s VpnAuthorizationRuleStatus) String() string {
 }
 
 // Describes a client connection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnConnection
 type VpnConnection struct {
 	_ struct{} `type:"structure"`
 
@@ -11097,7 +10725,6 @@ func (s VpnConnection) String() string {
 }
 
 // Describes VPN connection options.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnConnectionOptions
 type VpnConnectionOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -11112,7 +10739,6 @@ func (s VpnConnectionOptions) String() string {
 }
 
 // Describes VPN connection options.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnConnectionOptionsSpecification
 type VpnConnectionOptionsSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -11133,7 +10759,6 @@ func (s VpnConnectionOptionsSpecification) String() string {
 }
 
 // Describes the status of a client connection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnConnectionStatus
 type VpnConnectionStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -11150,7 +10775,6 @@ func (s VpnConnectionStatus) String() string {
 }
 
 // Describes a Client VPN endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnEndpoint
 type VpnEndpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -11216,7 +10840,6 @@ func (s VpnEndpoint) String() string {
 }
 
 // Describes the state of a Client VPN endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnEndpointStatus
 type VpnEndpointStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -11246,7 +10869,6 @@ func (s VpnEndpointStatus) String() string {
 }
 
 // Describes a virtual private gateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnGateway
 type VpnGateway struct {
 	_ struct{} `type:"structure"`
 
@@ -11279,7 +10901,6 @@ func (s VpnGateway) String() string {
 }
 
 // Information about a Client VPN endpoint route.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnRoute
 type VpnRoute struct {
 	_ struct{} `type:"structure"`
 
@@ -11314,7 +10935,6 @@ func (s VpnRoute) String() string {
 }
 
 // Describes the state of a Client VPN endpoint route.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnRouteStatus
 type VpnRouteStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -11331,7 +10951,6 @@ func (s VpnRouteStatus) String() string {
 }
 
 // Describes a static route for a VPN connection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnStaticRoute
 type VpnStaticRoute struct {
 	_ struct{} `type:"structure"`
 
@@ -11351,7 +10970,6 @@ func (s VpnStaticRoute) String() string {
 }
 
 // The tunnel options for a VPN connection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnTunnelOptionsSpecification
 type VpnTunnelOptionsSpecification struct {
 	_ struct{} `type:"structure"`
 

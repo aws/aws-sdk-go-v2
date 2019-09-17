@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for SetTaskStatus.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/SetTaskStatusInput
 type SetTaskStatusInput struct {
 	_ struct{} `type:"structure"`
 
@@ -71,7 +70,6 @@ func (s *SetTaskStatusInput) Validate() error {
 }
 
 // Contains the output of SetTaskStatus.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/SetTaskStatusOutput
 type SetTaskStatusOutput struct {
 	_ struct{} `type:"structure"`
 }

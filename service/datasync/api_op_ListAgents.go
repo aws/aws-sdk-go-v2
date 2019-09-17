@@ -10,7 +10,6 @@ import (
 )
 
 // ListAgentsRequest
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListAgentsRequest
 type ListAgentsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -28,7 +27,6 @@ func (s ListAgentsInput) String() string {
 }
 
 // ListAgentsResponse
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListAgentsResponse
 type ListAgentsOutput struct {
 	_ struct{} `type:"structure"`
 

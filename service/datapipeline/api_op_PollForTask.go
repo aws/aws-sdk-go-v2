@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for PollForTask.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PollForTaskInput
 type PollForTaskInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s *PollForTaskInput) Validate() error {
 }
 
 // Contains the output of PollForTask.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PollForTaskOutput
 type PollForTaskOutput struct {
 	_ struct{} `type:"structure"`
 

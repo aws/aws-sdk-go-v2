@@ -11,7 +11,6 @@ import (
 
 // You can use the following request parameters to query for how much of your
 // instance usage a reservation covered.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetReservationCoverageRequest
 type GetReservationCoverageInput struct {
 	_ struct{} `type:"structure"`
 
@@ -126,7 +125,6 @@ func (s *GetReservationCoverageInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetReservationCoverageResponse
 type GetReservationCoverageOutput struct {
 	_ struct{} `type:"structure"`
 

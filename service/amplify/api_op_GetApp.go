@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure for get App request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetAppRequest
 type GetAppInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s GetAppInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetAppResult
 type GetAppOutput struct {
 	_ struct{} `type:"structure"`
 

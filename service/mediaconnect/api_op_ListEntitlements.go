@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListEntitlementsRequest
 type ListEntitlementsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s ListEntitlementsInput) MarshalFields(e protocol.FieldEncoder) error {
 // The result of a successful ListEntitlements request. The response includes
 // the ARN of each entitlement, the name of the associated flow, and the NextToken
 // to use in a subsequent ListEntitlements request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListEntitlementsResponse
 type ListEntitlementsOutput struct {
 	_ struct{} `type:"structure"`
 

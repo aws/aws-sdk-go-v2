@@ -11,7 +11,6 @@ import (
 )
 
 // Input to the CreateIdentityPool action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/CreateIdentityPoolInput
 type CreateIdentityPoolInput struct {
 	_ struct{} `type:"structure"`
 
@@ -90,7 +89,6 @@ func (s *CreateIdentityPoolInput) Validate() error {
 }
 
 // An object representing an Amazon Cognito identity pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/IdentityPool
 type CreateIdentityPoolOutput struct {
 	_ struct{} `type:"structure"`
 

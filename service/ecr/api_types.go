@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // An object representing authorization data for an Amazon ECR registry.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/AuthorizationData
 type AuthorizationData struct {
 	_ struct{} `type:"structure"`
 
@@ -38,7 +37,6 @@ func (s AuthorizationData) String() string {
 }
 
 // An object representing a filter on a DescribeImages operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImagesFilter
 type DescribeImagesFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +51,6 @@ func (s DescribeImagesFilter) String() string {
 }
 
 // An object representing an Amazon ECR image.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Image
 type Image struct {
 	_ struct{} `type:"structure"`
 
@@ -76,7 +73,6 @@ func (s Image) String() string {
 }
 
 // An object that describes an image returned by a DescribeImages operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageDetail
 type ImageDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -111,7 +107,6 @@ func (s ImageDetail) String() string {
 }
 
 // An object representing an Amazon ECR image failure.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageFailure
 type ImageFailure struct {
 	_ struct{} `type:"structure"`
 
@@ -131,7 +126,6 @@ func (s ImageFailure) String() string {
 }
 
 // An object with identifying information for an Amazon ECR image.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageIdentifier
 type ImageIdentifier struct {
 	_ struct{} `type:"structure"`
 
@@ -161,7 +155,6 @@ func (s *ImageIdentifier) Validate() error {
 }
 
 // An object representing an Amazon ECR image layer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Layer
 type Layer struct {
 	_ struct{} `type:"structure"`
 
@@ -185,7 +178,6 @@ func (s Layer) String() string {
 }
 
 // An object representing an Amazon ECR image layer failure.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LayerFailure
 type LayerFailure struct {
 	_ struct{} `type:"structure"`
 
@@ -205,7 +197,6 @@ func (s LayerFailure) String() string {
 }
 
 // The filter for the lifecycle policy preview.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LifecyclePolicyPreviewFilter
 type LifecyclePolicyPreviewFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -219,7 +210,6 @@ func (s LifecyclePolicyPreviewFilter) String() string {
 }
 
 // The result of the lifecycle policy preview.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LifecyclePolicyPreviewResult
 type LifecyclePolicyPreviewResult struct {
 	_ struct{} `type:"structure"`
 
@@ -246,7 +236,6 @@ func (s LifecyclePolicyPreviewResult) String() string {
 }
 
 // The summary of the lifecycle policy preview request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LifecyclePolicyPreviewSummary
 type LifecyclePolicyPreviewSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -260,7 +249,6 @@ func (s LifecyclePolicyPreviewSummary) String() string {
 }
 
 // The type of action to be taken.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LifecyclePolicyRuleAction
 type LifecyclePolicyRuleAction struct {
 	_ struct{} `type:"structure"`
 
@@ -274,7 +262,6 @@ func (s LifecyclePolicyRuleAction) String() string {
 }
 
 // An object representing a filter on a ListImages operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListImagesFilter
 type ListImagesFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -289,7 +276,6 @@ func (s ListImagesFilter) String() string {
 }
 
 // An object representing a repository.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Repository
 type Repository struct {
 	_ struct{} `type:"structure"`
 
@@ -325,7 +311,6 @@ func (s Repository) String() string {
 // them. Each tag consists of a key and an optional value, both of which you
 // define. Tag keys can have a maximum character length of 128 characters, and
 // tag values can have a maximum length of 256 characters.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 

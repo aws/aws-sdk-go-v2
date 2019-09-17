@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Describes the activity information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/Activity
 type Activity struct {
 	_ struct{} `type:"structure"`
 
@@ -119,7 +118,6 @@ func (s Activity) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes a comment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/Comment
 type Comment struct {
 	_ struct{} `type:"structure"`
 
@@ -222,7 +220,6 @@ func (s Comment) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes the metadata of a comment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CommentMetadata
 type CommentMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -284,7 +281,6 @@ func (s CommentMetadata) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes the document.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DocumentMetadata
 type DocumentMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -380,7 +376,6 @@ func (s DocumentMetadata) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes a version of a document.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DocumentVersionMetadata
 type DocumentVersionMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -529,7 +524,6 @@ func (s DocumentVersionMetadata) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes a folder.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/FolderMetadata
 type FolderMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -652,7 +646,6 @@ func (s FolderMetadata) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes the metadata of a user group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GroupMetadata
 type GroupMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -686,7 +679,6 @@ func (s GroupMetadata) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Set of options which defines notification preferences of given action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/NotificationOptions
 type NotificationOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -720,7 +712,6 @@ func (s NotificationOptions) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes the users or user groups.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/Participants
 type Participants struct {
 	_ struct{} `type:"structure"`
 
@@ -766,7 +757,6 @@ func (s Participants) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes the permissions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/PermissionInfo
 type PermissionInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -800,7 +790,6 @@ func (s PermissionInfo) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/Principal
 type Principal struct {
 	_ struct{} `type:"structure"`
 
@@ -849,7 +838,6 @@ func (s Principal) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes the metadata of a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ResourceMetadata
 type ResourceMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -929,7 +917,6 @@ func (s ResourceMetadata) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes the path information of a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ResourcePath
 type ResourcePath struct {
 	_ struct{} `type:"structure"`
 
@@ -960,7 +947,6 @@ func (s ResourcePath) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes the resource path.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ResourcePathComponent
 type ResourcePathComponent struct {
 	_ struct{} `type:"structure"`
 
@@ -994,7 +980,6 @@ func (s ResourcePathComponent) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes the recipient type and ID, if available.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/SharePrincipal
 type SharePrincipal struct {
 	_ struct{} `type:"structure"`
 
@@ -1066,7 +1051,6 @@ func (s SharePrincipal) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes the share results of a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ShareResult
 type ShareResult struct {
 	_ struct{} `type:"structure"`
 
@@ -1136,7 +1120,6 @@ func (s ShareResult) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes the storage for a user.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/StorageRuleType
 type StorageRuleType struct {
 	_ struct{} `type:"structure"`
 
@@ -1170,7 +1153,6 @@ func (s StorageRuleType) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes a subscription.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/Subscription
 type Subscription struct {
 	_ struct{} `type:"structure"`
 
@@ -1213,7 +1195,6 @@ func (s Subscription) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes the upload.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UploadMetadata
 type UploadMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -1253,7 +1234,6 @@ func (s UploadMetadata) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes a user.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/User
 type User struct {
 	_ struct{} `type:"structure"`
 
@@ -1406,7 +1386,6 @@ func (s User) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes the metadata of the user.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UserMetadata
 type UserMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -1467,7 +1446,6 @@ func (s UserMetadata) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Describes the storage for a user.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UserStorageMetadata
 type UserStorageMetadata struct {
 	_ struct{} `type:"structure"`
 

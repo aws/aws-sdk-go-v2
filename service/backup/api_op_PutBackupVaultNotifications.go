@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/PutBackupVaultNotificationsInput
 type PutBackupVaultNotificationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -94,7 +93,6 @@ func (s PutBackupVaultNotificationsInput) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/PutBackupVaultNotificationsOutput
 type PutBackupVaultNotificationsOutput struct {
 	_ struct{} `type:"structure"`
 }

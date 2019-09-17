@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListMembersRequest
 type ListMembersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -74,7 +73,6 @@ func (s ListMembersInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListMembersResponse
 type ListMembersOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedbackRequest
 type UpdateFindingsFeedbackInput struct {
 	_ struct{} `type:"structure"`
 
@@ -100,7 +99,6 @@ func (s UpdateFindingsFeedbackInput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedbackResponse
 type UpdateFindingsFeedbackOutput struct {
 	_ struct{} `type:"structure"`
 }

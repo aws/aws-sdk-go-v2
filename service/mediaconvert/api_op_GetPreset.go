@@ -11,7 +11,6 @@ import (
 )
 
 // Query a preset by sending a request with the preset name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetPresetRequest
 type GetPresetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s GetPresetInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Successful get preset requests will return an OK message and the preset JSON.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetPresetResponse
 type GetPresetOutput struct {
 	_ struct{} `type:"structure"`
 

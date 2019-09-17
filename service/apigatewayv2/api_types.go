@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Settings for logging access in a stage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/AccessLogSettings
 type AccessLogSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s AccessLogSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents an API.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/Api
 type Api struct {
 	_ struct{} `type:"structure"`
 
@@ -195,7 +193,6 @@ func (s Api) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents an API mapping.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/ApiMapping
 type ApiMapping struct {
 	_ struct{} `type:"structure"`
 
@@ -251,7 +248,6 @@ func (s ApiMapping) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents an authorizer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/Authorizer
 type Authorizer struct {
 	_ struct{} `type:"structure"`
 
@@ -390,7 +386,6 @@ func (s Authorizer) MarshalFields(e protocol.FieldEncoder) error {
 
 // An immutable representation of an API that can be called by users. A Deployment
 // must be associated with a Stage for it to be callable over the internet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/Deployment
 type Deployment struct {
 	_ struct{} `type:"structure"`
 
@@ -452,7 +447,6 @@ func (s Deployment) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents a domain name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/DomainName
 type DomainName struct {
 	_ struct{} `type:"structure"`
 
@@ -518,7 +512,6 @@ func (s DomainName) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The domain name configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/DomainNameConfiguration
 type DomainNameConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -618,7 +611,6 @@ func (s DomainNameConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents an integration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/Integration
 type Integration struct {
 	_ struct{} `type:"structure"`
 
@@ -843,7 +835,6 @@ func (s Integration) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents an integration response.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/IntegrationResponse
 type IntegrationResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -950,7 +941,6 @@ func (s IntegrationResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Represents a data model for an API. See Create Models and Mapping Templates
 // for Request and Response Mappings (https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/Model
 type Model struct {
 	_ struct{} `type:"structure"`
 
@@ -1015,7 +1005,6 @@ func (s Model) MarshalFields(e protocol.FieldEncoder) error {
 
 // Validation constraints imposed on parameters of a request (path, query string,
 // headers).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/ParameterConstraints
 type ParameterConstraints struct {
 	_ struct{} `type:"structure"`
 
@@ -1040,7 +1029,6 @@ func (s ParameterConstraints) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents a route.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/Route
 type Route struct {
 	_ struct{} `type:"structure"`
 
@@ -1194,7 +1182,6 @@ func (s Route) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents a route response.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/RouteResponse
 type RouteResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -1269,7 +1256,6 @@ func (s RouteResponse) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents a collection of route settings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/RouteSettings
 type RouteSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -1333,7 +1319,6 @@ func (s RouteSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents an API stage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/Stage
 type Stage struct {
 	_ struct{} `type:"structure"`
 

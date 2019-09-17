@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListUsersRequest
 type ListUsersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -92,7 +91,6 @@ func (s ListUsersInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListUsersResponse
 type ListUsersOutput struct {
 	_ struct{} `type:"structure"`
 

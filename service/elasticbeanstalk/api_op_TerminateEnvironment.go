@@ -11,7 +11,6 @@ import (
 )
 
 // Request to terminate an environment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/TerminateEnvironmentMessage
 type TerminateEnvironmentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -69,7 +68,6 @@ func (s *TerminateEnvironmentInput) Validate() error {
 }
 
 // Describes the properties of an environment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentDescription
 type TerminateEnvironmentOutput struct {
 	_ struct{} `type:"structure"`
 

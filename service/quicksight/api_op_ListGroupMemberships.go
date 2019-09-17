@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListGroupMembershipsRequest
 type ListGroupMembershipsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -110,7 +109,6 @@ func (s ListGroupMembershipsInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListGroupMembershipsResponse
 type ListGroupMembershipsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DescribeDomainRequest
 type DescribeDomainInput struct {
 	_ struct{} `type:"structure"`
 
@@ -74,7 +73,6 @@ func (s DescribeDomainInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DescribeDomainResponse
 type DescribeDomainOutput struct {
 	_ struct{} `type:"structure"`
 

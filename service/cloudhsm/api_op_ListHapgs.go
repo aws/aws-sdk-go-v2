@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHapgsRequest
 type ListHapgsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -23,7 +22,6 @@ func (s ListHapgsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHapgsResponse
 type ListHapgsOutput struct {
 	_ struct{} `type:"structure"`
 

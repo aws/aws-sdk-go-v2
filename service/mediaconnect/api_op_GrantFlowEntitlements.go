@@ -12,7 +12,6 @@ import (
 )
 
 // Grants an entitlement on a flow.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GrantFlowEntitlementsRequest
 type GrantFlowEntitlementsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -81,7 +80,6 @@ func (s GrantFlowEntitlementsInput) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // The entitlements that were just granted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GrantFlowEntitlementsResponse
 type GrantFlowEntitlementsOutput struct {
 	_ struct{} `type:"structure"`
 

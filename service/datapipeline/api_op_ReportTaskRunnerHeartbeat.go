@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for ReportTaskRunnerHeartbeat.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ReportTaskRunnerHeartbeatInput
 type ReportTaskRunnerHeartbeatInput struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +59,6 @@ func (s *ReportTaskRunnerHeartbeatInput) Validate() error {
 }
 
 // Contains the output of ReportTaskRunnerHeartbeat.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ReportTaskRunnerHeartbeatOutput
 type ReportTaskRunnerHeartbeatOutput struct {
 	_ struct{} `type:"structure"`
 

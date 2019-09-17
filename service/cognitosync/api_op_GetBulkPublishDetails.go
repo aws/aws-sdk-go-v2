@@ -12,7 +12,6 @@ import (
 )
 
 // The input for the GetBulkPublishDetails operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetBulkPublishDetailsRequest
 type GetBulkPublishDetailsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s GetBulkPublishDetailsInput) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // The output for the GetBulkPublishDetails operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetBulkPublishDetailsResponse
 type GetBulkPublishDetailsOutput struct {
 	_ struct{} `type:"structure"`
 

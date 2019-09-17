@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMappingRequest
 type GetEventSourceMappingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s GetEventSourceMappingInput) MarshalFields(e protocol.FieldEncoder) error
 
 // A mapping between an AWS resource and an AWS Lambda function. See CreateEventSourceMapping
 // for details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventSourceMappingConfiguration
 type GetEventSourceMappingOutput struct {
 	_ struct{} `type:"structure"`
 

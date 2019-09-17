@@ -20,7 +20,6 @@ var _ = awsutil.Prettify
 // or multi-valued set. For example, a book item can have title and authors
 // attributes. Each book has one title but can have many authors. The multi-valued
 // attribute is a set; duplicate values are not allowed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/AttributeValue
 type AttributeValue struct {
 	_ struct{} `type:"structure"`
 
@@ -63,7 +62,6 @@ func (s AttributeValue) String() string {
 }
 
 // Contains details about the type of identity that made the request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/Identity
 type Identity struct {
 	_ struct{} `type:"structure"`
 
@@ -97,7 +95,6 @@ func (s Identity) String() string {
 // The sort key of an item is also known as its range attribute. The term "range
 // attribute" derives from the way DynamoDB stores items with the same partition
 // key physically close together, in sorted order by the sort key value.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/KeySchemaElement
 type KeySchemaElement struct {
 	_ struct{} `type:"structure"`
 
@@ -118,7 +115,6 @@ func (s KeySchemaElement) String() string {
 }
 
 // A description of a unique event within a stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/Record
 type Record struct {
 	_ struct{} `type:"structure"`
 
@@ -170,7 +166,6 @@ func (s Record) String() string {
 
 // The beginning and ending sequence numbers for the stream records contained
 // within a shard.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/SequenceNumberRange
 type SequenceNumberRange struct {
 	_ struct{} `type:"structure"`
 
@@ -187,7 +182,6 @@ func (s SequenceNumberRange) String() string {
 }
 
 // A uniquely identified group of stream records within a stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/Shard
 type Shard struct {
 	_ struct{} `type:"structure"`
 
@@ -207,7 +201,6 @@ func (s Shard) String() string {
 }
 
 // Represents all of the data describing a particular stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/Stream
 type Stream struct {
 	_ struct{} `type:"structure"`
 
@@ -238,7 +231,6 @@ func (s Stream) String() string {
 }
 
 // Represents all of the data describing a particular stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/StreamDescription
 type StreamDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -317,7 +309,6 @@ func (s StreamDescription) String() string {
 
 // A description of a single data modification that was performed on an item
 // in a DynamoDB table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/StreamRecord
 type StreamRecord struct {
 	_ struct{} `type:"structure"`
 

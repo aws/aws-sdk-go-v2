@@ -12,7 +12,6 @@ import (
 
 // Delete a queue by sending a request with the queue name. You can't delete
 // a queue with an active pricing plan or one that has unprocessed jobs in it.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DeleteQueueRequest
 type DeleteQueueInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s DeleteQueueInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // Delete queue requests return an OK message or error message with an empty
 // body.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DeleteQueueResponse
 type DeleteQueueOutput struct {
 	_ struct{} `type:"structure"`
 }

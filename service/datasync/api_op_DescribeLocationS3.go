@@ -11,7 +11,6 @@ import (
 )
 
 // DescribeLocationS3Request
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationS3Request
 type DescribeLocationS3Input struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *DescribeLocationS3Input) Validate() error {
 }
 
 // DescribeLocationS3Response
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationS3Response
 type DescribeLocationS3Output struct {
 	_ struct{} `type:"structure"`
 

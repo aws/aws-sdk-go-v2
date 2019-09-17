@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHsmsRequest
 type ListHsmsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -24,7 +23,6 @@ func (s ListHsmsInput) String() string {
 }
 
 // Contains the output of the ListHsms operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHsmsResponse
 type ListHsmsOutput struct {
 	_ struct{} `type:"structure"`
 

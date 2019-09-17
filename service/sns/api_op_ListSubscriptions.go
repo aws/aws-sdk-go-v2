@@ -10,7 +10,6 @@ import (
 )
 
 // Input for ListSubscriptions action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptionsInput
 type ListSubscriptionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -24,7 +23,6 @@ func (s ListSubscriptionsInput) String() string {
 }
 
 // Response for ListSubscriptions action
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptionsResponse
 type ListSubscriptionsOutput struct {
 	_ struct{} `type:"structure"`
 

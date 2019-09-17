@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteAppRequest
 type DeleteAppInput struct {
 	_ struct{} `type:"structure"`
 
@@ -30,7 +29,6 @@ func (s DeleteAppInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteAppResponse
 type DeleteAppOutput struct {
 	_ struct{} `type:"structure"`
 }

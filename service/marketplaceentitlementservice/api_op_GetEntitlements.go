@@ -10,7 +10,6 @@ import (
 )
 
 // The GetEntitlementsRequest contains parameters for the GetEntitlements operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/entitlement.marketplace-2017-01-11/GetEntitlementsRequest
 type GetEntitlementsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s *GetEntitlementsInput) Validate() error {
 }
 
 // The GetEntitlementsRequest contains results from the GetEntitlements operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/entitlement.marketplace-2017-01-11/GetEntitlementsResult
 type GetEntitlementsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 )
 
 // The settings for the updated source of the flow.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowSourceRequest
 type UpdateFlowSourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -153,7 +152,6 @@ func (s UpdateFlowSourceInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // The result of a successful UpdateFlowSource request. The response includes
 // the ARN of the flow that was updated and the updated source configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowSourceResponse
 type UpdateFlowSourceOutput struct {
 	_ struct{} `type:"structure"`
 

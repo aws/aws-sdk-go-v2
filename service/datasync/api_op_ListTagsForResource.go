@@ -10,7 +10,6 @@ import (
 )
 
 // ListTagsForResourceRequest
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListTagsForResourceRequest
 type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -47,7 +46,6 @@ func (s *ListTagsForResourceInput) Validate() error {
 }
 
 // ListTagsForResourceResponse
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListTagsForResourceResponse
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 

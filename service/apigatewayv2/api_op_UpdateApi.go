@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/UpdateApiRequest
 type UpdateApiInput struct {
 	_ struct{} `type:"structure"`
 
@@ -108,7 +107,6 @@ func (s UpdateApiInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/UpdateApiResponse
 type UpdateApiOutput struct {
 	_ struct{} `type:"structure"`
 

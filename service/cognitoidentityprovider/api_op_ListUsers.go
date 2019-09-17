@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the request to list users.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUsersRequest
 type ListUsersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -102,7 +101,6 @@ func (s *ListUsersInput) Validate() error {
 }
 
 // The response from the request to list users.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUsersResponse
 type ListUsersOutput struct {
 	_ struct{} `type:"structure"`
 

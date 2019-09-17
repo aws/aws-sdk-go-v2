@@ -11,7 +11,6 @@ import (
 )
 
 // A request to obtain information about a configuration set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetConfigurationSetRequest
 type GetConfigurationSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s GetConfigurationSetInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a configuration set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetConfigurationSetResponse
 type GetConfigurationSetOutput struct {
 	_ struct{} `type:"structure"`
 

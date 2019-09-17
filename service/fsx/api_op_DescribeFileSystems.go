@@ -10,7 +10,6 @@ import (
 )
 
 // The request object for DescribeFileSystems operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeFileSystemsRequest
 type DescribeFileSystemsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s *DescribeFileSystemsInput) Validate() error {
 }
 
 // The response object for DescribeFileSystems operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeFileSystemsResponse
 type DescribeFileSystemsOutput struct {
 	_ struct{} `type:"structure"`
 

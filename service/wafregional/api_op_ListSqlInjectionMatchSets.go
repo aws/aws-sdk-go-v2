@@ -12,7 +12,6 @@ import (
 
 // A request to list the SqlInjectionMatchSet objects created by the current
 // AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListSqlInjectionMatchSetsRequest
 type ListSqlInjectionMatchSetsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s *ListSqlInjectionMatchSetsInput) Validate() error {
 }
 
 // The response to a ListSqlInjectionMatchSets request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListSqlInjectionMatchSetsResponse
 type ListSqlInjectionMatchSetsOutput struct {
 	_ struct{} `type:"structure"`
 

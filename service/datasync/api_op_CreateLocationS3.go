@@ -11,7 +11,6 @@ import (
 )
 
 // CreateLocationS3Request
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationS3Request
 type CreateLocationS3Input struct {
 	_ struct{} `type:"structure"`
 
@@ -74,7 +73,6 @@ func (s *CreateLocationS3Input) Validate() error {
 }
 
 // CreateLocationS3Response
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationS3Response
 type CreateLocationS3Output struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // Contains input to the ResolveCustomer operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ResolveCustomerRequest
 type ResolveCustomerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *ResolveCustomerInput) Validate() error {
 
 // The result of the ResolveCustomer operation. Contains the CustomerIdentifier
 // and product code.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ResolveCustomerResult
 type ResolveCustomerOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClusterOperationsRequest
 type ListClusterOperationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -71,7 +70,6 @@ func (s ListClusterOperationsInput) MarshalFields(e protocol.FieldEncoder) error
 
 // The response contains an array containing cluster operation information and
 // a next token if the response is truncated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClusterOperationsResponse
 type ListClusterOperationsOutput struct {
 	_ struct{} `type:"structure"`
 

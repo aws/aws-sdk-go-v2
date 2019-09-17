@@ -10,7 +10,6 @@ import (
 )
 
 // Input for ListPlatformApplications action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPlatformApplicationsInput
 type ListPlatformApplicationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -25,7 +24,6 @@ func (s ListPlatformApplicationsInput) String() string {
 }
 
 // Response for ListPlatformApplications action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPlatformApplicationsResponse
 type ListPlatformApplicationsOutput struct {
 	_ struct{} `type:"structure"`
 

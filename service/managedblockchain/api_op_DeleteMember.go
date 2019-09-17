@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/DeleteMemberInput
 type DeleteMemberInput struct {
 	_ struct{} `type:"structure"`
 
@@ -73,7 +72,6 @@ func (s DeleteMemberInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/DeleteMemberOutput
 type DeleteMemberOutput struct {
 	_ struct{} `type:"structure"`
 }

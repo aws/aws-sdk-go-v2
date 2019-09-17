@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // The details of a DDoS attack.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AttackDetail
 type AttackDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s AttackDetail) String() string {
 }
 
 // Details of the described attack.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AttackProperty
 type AttackProperty struct {
 	_ struct{} `type:"structure"`
 
@@ -83,7 +81,6 @@ func (s AttackProperty) String() string {
 }
 
 // Summarizes all DDoS attacks for a specified time period.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AttackSummary
 type AttackSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -111,7 +108,6 @@ func (s AttackSummary) String() string {
 }
 
 // Describes the attack.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AttackVectorDescription
 type AttackVectorDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -163,7 +159,6 @@ func (s AttackVectorDescription) String() string {
 }
 
 // A contributor to the attack and their contribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Contributor
 type Contributor struct {
 	_ struct{} `type:"structure"`
 
@@ -184,7 +179,6 @@ func (s Contributor) String() string {
 
 // Contact information that the DRT can use to contact you during a suspected
 // attack.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/EmergencyContact
 type EmergencyContact struct {
 	_ struct{} `type:"structure"`
 
@@ -217,7 +211,6 @@ func (s *EmergencyContact) Validate() error {
 }
 
 // Specifies how many protections of a given type you can create.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Limit
 type Limit struct {
 	_ struct{} `type:"structure"`
 
@@ -234,7 +227,6 @@ func (s Limit) String() string {
 }
 
 // The mitigation applied to a DDoS attack.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Mitigation
 type Mitigation struct {
 	_ struct{} `type:"structure"`
 
@@ -248,7 +240,6 @@ func (s Mitigation) String() string {
 }
 
 // An object that represents a resource that is under DDoS protection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Protection
 type Protection struct {
 	_ struct{} `type:"structure"`
 
@@ -268,7 +259,6 @@ func (s Protection) String() string {
 }
 
 // The attack information for the specified SubResource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/SubResourceSummary
 type SubResourceSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -291,7 +281,6 @@ func (s SubResourceSummary) String() string {
 }
 
 // Information about the AWS Shield Advanced subscription for an account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Subscription
 type Subscription struct {
 	_ struct{} `type:"structure"`
 
@@ -324,7 +313,6 @@ func (s Subscription) String() string {
 }
 
 // A summary of information about the attack.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/SummarizedAttackVector
 type SummarizedAttackVector struct {
 	_ struct{} `type:"structure"`
 
@@ -343,7 +331,6 @@ func (s SummarizedAttackVector) String() string {
 }
 
 // The counter that describes a DDoS attack.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/SummarizedCounter
 type SummarizedCounter struct {
 	_ struct{} `type:"structure"`
 
@@ -372,7 +359,6 @@ func (s SummarizedCounter) String() string {
 }
 
 // The time range.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/TimeRange
 type TimeRange struct {
 	_ struct{} `type:"structure"`
 

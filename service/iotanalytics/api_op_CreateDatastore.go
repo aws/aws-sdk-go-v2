@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/CreateDatastoreRequest
 type CreateDatastoreInput struct {
 	_ struct{} `type:"structure"`
 
@@ -109,7 +108,6 @@ func (s CreateDatastoreInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/CreateDatastoreResponse
 type CreateDatastoreOutput struct {
 	_ struct{} `type:"structure"`
 

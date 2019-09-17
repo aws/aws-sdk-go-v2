@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateIndexRequest
 type CreateIndexInput struct {
 	_ struct{} `type:"structure"`
 
@@ -119,7 +118,6 @@ func (s CreateIndexInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateIndexResponse
 type CreateIndexOutput struct {
 	_ struct{} `type:"structure"`
 

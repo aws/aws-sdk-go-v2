@@ -12,7 +12,6 @@ import (
 )
 
 // Represents the input for SplitShard.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SplitShardInput
 type SplitShardInput struct {
 	_ struct{} `type:"structure"`
 
@@ -71,7 +70,6 @@ func (s *SplitShardInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SplitShardOutput
 type SplitShardOutput struct {
 	_ struct{} `type:"structure"`
 }

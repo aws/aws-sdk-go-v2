@@ -12,7 +12,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // A MediaPackage VOD Asset resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/AssetShallow
 type AssetShallow struct {
 	_ struct{} `type:"structure"`
 
@@ -82,7 +81,6 @@ func (s AssetShallow) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A CMAF encryption configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/CmafEncryption
 type CmafEncryption struct {
 	_ struct{} `type:"structure"`
 
@@ -129,7 +127,6 @@ func (s CmafEncryption) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A CMAF packaging configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/CmafPackage
 type CmafPackage struct {
 	_ struct{} `type:"structure"`
 
@@ -200,7 +197,6 @@ func (s CmafPackage) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DashEncryption
 type DashEncryption struct {
 	_ struct{} `type:"structure"`
 
@@ -247,7 +243,6 @@ func (s DashEncryption) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A DASH manifest configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DashManifest
 type DashManifest struct {
 	_ struct{} `type:"structure"`
 
@@ -301,7 +296,6 @@ func (s DashManifest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DashPackage
 type DashPackage struct {
 	_ struct{} `type:"structure"`
 
@@ -372,7 +366,6 @@ func (s DashPackage) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The endpoint URL used to access an Asset using one PackagingConfiguration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/EgressEndpoint
 type EgressEndpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -406,7 +399,6 @@ func (s EgressEndpoint) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An HTTP Live Streaming (HLS) encryption configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/HlsEncryption
 type HlsEncryption struct {
 	_ struct{} `type:"structure"`
 
@@ -462,7 +454,6 @@ func (s HlsEncryption) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An HTTP Live Streaming (HLS) manifest configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/HlsManifest
 type HlsManifest struct {
 	_ struct{} `type:"structure"`
 
@@ -543,7 +534,6 @@ func (s HlsManifest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An HTTP Live Streaming (HLS) packaging configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/HlsPackage
 type HlsPackage struct {
 	_ struct{} `type:"structure"`
 
@@ -623,7 +613,6 @@ func (s HlsPackage) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A Microsoft Smooth Streaming (MSS) encryption configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/MssEncryption
 type MssEncryption struct {
 	_ struct{} `type:"structure"`
 
@@ -670,7 +659,6 @@ func (s MssEncryption) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A Microsoft Smooth Streaming (MSS) manifest configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/MssManifest
 type MssManifest struct {
 	_ struct{} `type:"structure"`
 
@@ -704,7 +692,6 @@ func (s MssManifest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A Microsoft Smooth Streaming (MSS) PackagingConfiguration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/MssPackage
 type MssPackage struct {
 	_ struct{} `type:"structure"`
 
@@ -774,7 +761,6 @@ func (s MssPackage) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A MediaPackage VOD PackagingConfiguration resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/PackagingConfiguration
 type PackagingConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -853,7 +839,6 @@ func (s PackagingConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A MediaPackage VOD PackagingGroup resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/PackagingGroup
 type PackagingGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -888,7 +873,6 @@ func (s PackagingGroup) MarshalFields(e protocol.FieldEncoder) error {
 
 // A configuration for accessing an external Secure Packager and Encoder Key
 // Exchange (SPEKE) service that will provide encryption keys.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/SpekeKeyProvider
 type SpekeKeyProvider struct {
 	_ struct{} `type:"structure"`
 
@@ -966,7 +950,6 @@ func (s SpekeKeyProvider) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A StreamSelection configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/StreamSelection
 type StreamSelection struct {
 	_ struct{} `type:"structure"`
 

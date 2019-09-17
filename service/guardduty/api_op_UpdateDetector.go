@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetectorRequest
 type UpdateDetectorInput struct {
 	_ struct{} `type:"structure"`
 
@@ -74,7 +73,6 @@ func (s UpdateDetectorInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetectorResponse
 type UpdateDetectorOutput struct {
 	_ struct{} `type:"structure"`
 }

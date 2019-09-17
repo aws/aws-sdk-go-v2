@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetRecoveryPointRestoreMetadataInput
 type GetRecoveryPointRestoreMetadataInput struct {
 	_ struct{} `type:"structure"`
 
@@ -71,7 +70,6 @@ func (s GetRecoveryPointRestoreMetadataInput) MarshalFields(e protocol.FieldEnco
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetRecoveryPointRestoreMetadataOutput
 type GetRecoveryPointRestoreMetadataOutput struct {
 	_ struct{} `type:"structure"`
 

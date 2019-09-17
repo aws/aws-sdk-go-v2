@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Information about the columns in a query execution result.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ColumnInfo
 type ColumnInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +59,6 @@ func (s ColumnInfo) String() string {
 }
 
 // A piece of data (a field in the table).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/Datum
 type Datum struct {
 	_ struct{} `type:"structure"`
 
@@ -75,7 +73,6 @@ func (s Datum) String() string {
 
 // If query results are encrypted in Amazon S3, indicates the encryption option
 // used (for example, SSE-KMS or CSE-KMS) and key information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/EncryptionConfiguration
 type EncryptionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -114,7 +111,6 @@ func (s *EncryptionConfiguration) Validate() error {
 
 // A query, where QueryString is the list of SQL query statements that comprise
 // the query.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/NamedQuery
 type NamedQuery struct {
 	_ struct{} `type:"structure"`
 
@@ -149,7 +145,6 @@ func (s NamedQuery) String() string {
 }
 
 // Information about a single instance of a query execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryExecution
 type QueryExecution struct {
 	_ struct{} `type:"structure"`
 
@@ -193,7 +188,6 @@ func (s QueryExecution) String() string {
 }
 
 // The database in which the query execution occurs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryExecutionContext
 type QueryExecutionContext struct {
 	_ struct{} `type:"structure"`
 
@@ -221,7 +215,6 @@ func (s *QueryExecutionContext) Validate() error {
 
 // The amount of data scanned during the query execution and the amount of time
 // that it took to execute, and the type of statement that was run.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryExecutionStatistics
 type QueryExecutionStatistics struct {
 	_ struct{} `type:"structure"`
 
@@ -239,7 +232,6 @@ func (s QueryExecutionStatistics) String() string {
 
 // The completion date, current state, submission time, and state change reason
 // (if applicable) for the query execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryExecutionStatus
 type QueryExecutionStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -270,7 +262,6 @@ func (s QueryExecutionStatus) String() string {
 // option, if any, used for query results. These are known as "client-side settings".
 // If workgroup settings override client-side settings, then the query uses
 // the workgroup settings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ResultConfiguration
 type ResultConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -316,7 +307,6 @@ func (s *ResultConfiguration) Validate() error {
 
 // The information about the updates in the query results, such as output location
 // and encryption configuration for the query results.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ResultConfigurationUpdates
 type ResultConfigurationUpdates struct {
 	_ struct{} `type:"structure"`
 
@@ -373,7 +363,6 @@ func (s *ResultConfigurationUpdates) Validate() error {
 
 // The metadata and rows that comprise a query result set. The metadata describes
 // the column structure and data types.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ResultSet
 type ResultSet struct {
 	_ struct{} `type:"structure"`
 
@@ -392,7 +381,6 @@ func (s ResultSet) String() string {
 
 // The metadata that describes the column structure and data types of a table
 // of query results.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ResultSetMetadata
 type ResultSetMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -406,7 +394,6 @@ func (s ResultSetMetadata) String() string {
 }
 
 // The rows that comprise a query result table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/Row
 type Row struct {
 	_ struct{} `type:"structure"`
 
@@ -429,7 +416,6 @@ func (s Row) String() string {
 // letters and numbers representable in UTF-8, and the following characters:
 // + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be
 // unique per resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -464,7 +450,6 @@ func (s *Tag) Validate() error {
 }
 
 // Information about a named query ID that could not be processed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UnprocessedNamedQueryId
 type UnprocessedNamedQueryId struct {
 	_ struct{} `type:"structure"`
 
@@ -486,7 +471,6 @@ func (s UnprocessedNamedQueryId) String() string {
 }
 
 // Describes a query execution that failed to process.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UnprocessedQueryExecutionId
 type UnprocessedQueryExecutionId struct {
 	_ struct{} `type:"structure"`
 
@@ -515,7 +499,6 @@ func (s UnprocessedQueryExecutionId) String() string {
 // control limits for all queries in a workgroup. The workgroup settings override
 // is specified in EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration.
 // See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/WorkGroup
 type WorkGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -555,7 +538,6 @@ func (s WorkGroup) String() string {
 // data usage limits for the amount of data scanned per query or per workgroup.
 // The workgroup settings override is specified in EnforceWorkGroupConfiguration
 // (true/false) in the WorkGroupConfiguration. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/WorkGroupConfiguration
 type WorkGroupConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -619,7 +601,6 @@ func (s *WorkGroupConfiguration) Validate() error {
 // are enabled for the workgroup, whether the workgroup settings override the
 // client-side settings, and the data usage limit for the amount of bytes scanned
 // per query, if it is specified.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/WorkGroupConfigurationUpdates
 type WorkGroupConfigurationUpdates struct {
 	_ struct{} `type:"structure"`
 
@@ -678,7 +659,6 @@ func (s *WorkGroupConfigurationUpdates) Validate() error {
 
 // The summary information for the workgroup, which includes its name, state,
 // description, and the date and time it was created.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/WorkGroupSummary
 type WorkGroupSummary struct {
 	_ struct{} `type:"structure"`
 

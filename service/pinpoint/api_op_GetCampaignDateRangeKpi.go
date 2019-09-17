@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignDateRangeKpiRequest
 type GetCampaignDateRangeKpiInput struct {
 	_ struct{} `type:"structure"`
 
@@ -111,7 +110,6 @@ func (s GetCampaignDateRangeKpiInput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignDateRangeKpiResponse
 type GetCampaignDateRangeKpiOutput struct {
 	_ struct{} `type:"structure" payload:"CampaignDateRangeKpiResponse"`
 

@@ -12,7 +12,6 @@ import (
 )
 
 // Request structure for Start job request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/StartJobRequest
 type StartJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -139,7 +138,6 @@ func (s StartJobInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure for run job request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/StartJobResult
 type StartJobOutput struct {
 	_ struct{} `type:"structure"`
 

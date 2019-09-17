@@ -14,7 +14,6 @@ var _ = awsutil.Prettify
 
 // This section describes operations that you can perform on an AWS Elemental
 // MediaStore container.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/Container
 type Container struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s Container) String() string {
 
 // A rule for a CORS policy. You can add up to 100 rules to a CORS policy. If
 // more than one rule applies, the service uses the first applicable rule listed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/CorsRule
 type CorsRule struct {
 	_ struct{} `type:"structure"`
 
@@ -140,7 +138,6 @@ func (s *CorsRule) Validate() error {
 // "production"). You can add up to 50 tags to each container. For more information
 // about tagging, including naming and usage conventions, see Tagging Resources
 // in MediaStore (https://aws.amazon.com/documentation/mediastore/tagging).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 

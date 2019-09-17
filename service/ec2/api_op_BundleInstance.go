@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for BundleInstance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BundleInstanceRequest
 type BundleInstanceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -63,7 +62,6 @@ func (s *BundleInstanceInput) Validate() error {
 }
 
 // Contains the output of BundleInstance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BundleInstanceResult
 type BundleInstanceOutput struct {
 	_ struct{} `type:"structure"`
 

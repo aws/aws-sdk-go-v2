@@ -12,7 +12,6 @@ import (
 
 // A request for meta data about a dataset (creation date, number of records,
 // size) by owner and dataset name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeDatasetRequest
 type DescribeDatasetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -97,7 +96,6 @@ func (s DescribeDatasetInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Response to a successful DescribeDataset request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeDatasetResponse
 type DescribeDatasetOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 )
 
 // Request body for UpdateClusterConfiguration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateClusterConfigurationRequest
 type UpdateClusterConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -88,7 +87,6 @@ func (s UpdateClusterConfigurationInput) MarshalFields(e protocol.FieldEncoder) 
 }
 
 // Response body for UpdateClusterConfiguration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateClusterConfigurationResponse
 type UpdateClusterConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 

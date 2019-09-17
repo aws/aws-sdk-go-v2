@@ -11,7 +11,6 @@ import (
 )
 
 // The request object for this operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateGroupRequest
 type CreateGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -103,7 +102,6 @@ func (s CreateGroupInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The response object for this operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateGroupResponse
 type CreateGroupOutput struct {
 	_ struct{} `type:"structure"`
 

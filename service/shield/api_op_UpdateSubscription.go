@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateSubscriptionRequest
 type UpdateSubscriptionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -26,7 +25,6 @@ func (s UpdateSubscriptionInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateSubscriptionResponse
 type UpdateSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 }

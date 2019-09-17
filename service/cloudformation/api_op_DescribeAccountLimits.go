@@ -10,7 +10,6 @@ import (
 )
 
 // The input for the DescribeAccountLimits action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeAccountLimitsInput
 type DescribeAccountLimitsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -37,7 +36,6 @@ func (s *DescribeAccountLimitsInput) Validate() error {
 }
 
 // The output for the DescribeAccountLimits action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeAccountLimitsOutput
 type DescribeAccountLimitsOutput struct {
 	_ struct{} `type:"structure"`
 

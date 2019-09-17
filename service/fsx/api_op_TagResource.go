@@ -11,7 +11,6 @@ import (
 )
 
 // The request object for the TagResource operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/TagResourceRequest
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -65,7 +64,6 @@ func (s *TagResourceInput) Validate() error {
 }
 
 // The response object for the TagResource operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/TagResourceResponse
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure used to tag resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/TagResourceRequest
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -78,7 +77,6 @@ func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Response for tag resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/TagResourceResponse
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -15,7 +15,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Contains detailed information about a backup job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupJob
 type BackupJob struct {
 	_ struct{} `type:"structure"`
 
@@ -218,7 +217,6 @@ func (s BackupJob) MarshalFields(e protocol.FieldEncoder) error {
 // objects, each of which specifies a backup rule. Each rule in a backup plan
 // is a separate scheduled task and can back up a different selection of AWS
 // resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupPlan
 type BackupPlan struct {
 	_ struct{} `type:"structure"`
 
@@ -266,7 +264,6 @@ func (s BackupPlan) MarshalFields(e protocol.FieldEncoder) error {
 // objects, each of which specifies a backup rule. Each rule in a backup plan
 // is a separate scheduled task and can back up a different selection of AWS
 // resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupPlanInput
 type BackupPlanInput struct {
 	_ struct{} `type:"structure"`
 
@@ -336,7 +333,6 @@ func (s BackupPlanInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object specifying metadata associated with a backup plan template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupPlanTemplatesListMember
 type BackupPlanTemplatesListMember struct {
 	_ struct{} `type:"structure"`
 
@@ -370,7 +366,6 @@ func (s BackupPlanTemplatesListMember) MarshalFields(e protocol.FieldEncoder) er
 }
 
 // Contains metadata about a backup plan.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupPlansListMember
 type BackupPlansListMember struct {
 	_ struct{} `type:"structure"`
 
@@ -473,7 +468,6 @@ func (s BackupPlansListMember) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies a scheduled task used to back up a selection of resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupRule
 type BackupRule struct {
 	_ struct{} `type:"structure"`
 
@@ -586,7 +580,6 @@ func (s BackupRule) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies a scheduled task used to back up a selection of resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupRuleInput
 type BackupRuleInput struct {
 	_ struct{} `type:"structure"`
 
@@ -706,7 +699,6 @@ func (s BackupRuleInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Used to specify a set of resources to a backup plan.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupSelection
 type BackupSelection struct {
 	_ struct{} `type:"structure"`
 
@@ -804,7 +796,6 @@ func (s BackupSelection) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains metadata about a BackupSelection object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupSelectionsListMember
 type BackupSelectionsListMember struct {
 	_ struct{} `type:"structure"`
 
@@ -880,7 +871,6 @@ func (s BackupSelectionsListMember) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // Contains metadata about a backup vault.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupVaultListMember
 type BackupVaultListMember struct {
 	_ struct{} `type:"structure"`
 
@@ -971,7 +961,6 @@ func (s BackupVaultListMember) MarshalFields(e protocol.FieldEncoder) error {
 // 90 days greater than the “transition to cold after days” setting. The
 // “transition to cold after days” setting cannot be changed after a backup
 // has been transitioned to cold.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CalculatedLifecycle
 type CalculatedLifecycle struct {
 	_ struct{} `type:"structure"`
 
@@ -1009,7 +998,6 @@ func (s CalculatedLifecycle) MarshalFields(e protocol.FieldEncoder) error {
 // Contains an array of triplets made up of a condition type (such as StringEquals),
 // a key, and a value. Conditions are used to filter resources in a selection
 // that is assigned to a backup plan.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/Condition
 type Condition struct {
 	_ struct{} `type:"structure"`
 
@@ -1083,7 +1071,6 @@ func (s Condition) MarshalFields(e protocol.FieldEncoder) error {
 
 // Contains an array of Transition objects specifying how long in days before
 // a recovery point transitions to cold storage or is deleted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/Lifecycle
 type Lifecycle struct {
 	_ struct{} `type:"structure"`
 
@@ -1119,7 +1106,6 @@ func (s Lifecycle) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A structure that contains information about a backed-up resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ProtectedResource
 type ProtectedResource struct {
 	_ struct{} `type:"structure"`
 
@@ -1169,7 +1155,6 @@ func (s ProtectedResource) MarshalFields(e protocol.FieldEncoder) error {
 
 // Contains detailed information about the recovery points stored in a backup
 // vault.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RecoveryPointByBackupVault
 type RecoveryPointByBackupVault struct {
 	_ struct{} `type:"structure"`
 
@@ -1362,7 +1347,6 @@ func (s RecoveryPointByBackupVault) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // Contains detailed information about a saved recovery point.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RecoveryPointByResource
 type RecoveryPointByResource struct {
 	_ struct{} `type:"structure"`
 
@@ -1442,7 +1426,6 @@ func (s RecoveryPointByResource) MarshalFields(e protocol.FieldEncoder) error {
 
 // Contains information about the backup plan and rule that AWS Backup used
 // to initiate the recovery point backup.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RecoveryPointCreator
 type RecoveryPointCreator struct {
 	_ struct{} `type:"structure"`
 
@@ -1497,7 +1480,6 @@ func (s RecoveryPointCreator) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains metadata about a restore job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RestoreJobsListMember
 type RestoreJobsListMember struct {
 	_ struct{} `type:"structure"`
 

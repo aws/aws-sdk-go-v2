@@ -12,7 +12,6 @@ import (
 
 // Information about a bulk deployment. You cannot start a new bulk deployment
 // while another one is still running or in a non-terminal state.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/StartBulkDeploymentRequest
 type StartBulkDeploymentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -100,7 +99,6 @@ func (s StartBulkDeploymentInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/StartBulkDeploymentResponse
 type StartBulkDeploymentOutput struct {
 	_ struct{} `type:"structure"`
 

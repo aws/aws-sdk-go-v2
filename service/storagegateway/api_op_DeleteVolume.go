@@ -10,7 +10,6 @@ import (
 )
 
 // A JSON object containing the DeleteVolumeInput$VolumeARN to delete.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteVolumeInput
 type DeleteVolumeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -44,7 +43,6 @@ func (s *DeleteVolumeInput) Validate() error {
 }
 
 // A JSON object containing the of the storage volume that was deleted
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteVolumeOutput
 type DeleteVolumeOutput struct {
 	_ struct{} `type:"structure"`
 

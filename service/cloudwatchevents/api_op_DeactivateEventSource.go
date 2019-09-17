@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeactivateEventSourceRequest
 type DeactivateEventSourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *DeactivateEventSourceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeactivateEventSourceOutput
 type DeactivateEventSourceOutput struct {
 	_ struct{} `type:"structure"`
 }

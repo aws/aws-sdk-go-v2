@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Account takeover action type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AccountTakeoverActionType
 type AccountTakeoverActionType struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s *AccountTakeoverActionType) Validate() error {
 }
 
 // Account takeover actions type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AccountTakeoverActionsType
 type AccountTakeoverActionsType struct {
 	_ struct{} `type:"structure"`
 
@@ -107,7 +105,6 @@ func (s *AccountTakeoverActionsType) Validate() error {
 
 // Configuration for mitigation actions and notification for different levels
 // of risk detected for a potential account takeover.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AccountTakeoverRiskConfigurationType
 type AccountTakeoverRiskConfigurationType struct {
 	_ struct{} `type:"structure"`
 
@@ -150,7 +147,6 @@ func (s *AccountTakeoverRiskConfigurationType) Validate() error {
 }
 
 // The configuration for creating a new user profile.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminCreateUserConfigType
 type AdminCreateUserConfigType struct {
 	_ struct{} `type:"structure"`
 
@@ -196,7 +192,6 @@ func (s *AdminCreateUserConfigType) Validate() error {
 
 // The Amazon Pinpoint analytics configuration for collecting metrics for a
 // user pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AnalyticsConfigurationType
 type AnalyticsConfigurationType struct {
 	_ struct{} `type:"structure"`
 
@@ -255,7 +250,6 @@ func (s *AnalyticsConfigurationType) Validate() error {
 //
 // An endpoint uniquely identifies a mobile device, email address, or phone
 // number that can receive messages from Amazon Pinpoint analytics.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AnalyticsMetadataType
 type AnalyticsMetadataType struct {
 	_ struct{} `type:"structure"`
 
@@ -269,7 +263,6 @@ func (s AnalyticsMetadataType) String() string {
 }
 
 // Specifies whether the attribute is standard or custom.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AttributeType
 type AttributeType struct {
 	_ struct{} `type:"structure"`
 
@@ -305,7 +298,6 @@ func (s *AttributeType) Validate() error {
 }
 
 // The authentication event type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AuthEventType
 type AuthEventType struct {
 	_ struct{} `type:"structure"`
 
@@ -342,7 +334,6 @@ func (s AuthEventType) String() string {
 }
 
 // The authentication result.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AuthenticationResultType
 type AuthenticationResultType struct {
 	_ struct{} `type:"structure"`
 
@@ -371,7 +362,6 @@ func (s AuthenticationResultType) String() string {
 }
 
 // The challenge response type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ChallengeResponseType
 type ChallengeResponseType struct {
 	_ struct{} `type:"structure"`
 
@@ -388,7 +378,6 @@ func (s ChallengeResponseType) String() string {
 }
 
 // The code delivery details being returned from the server.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CodeDeliveryDetailsType
 type CodeDeliveryDetailsType struct {
 	_ struct{} `type:"structure"`
 
@@ -408,7 +397,6 @@ func (s CodeDeliveryDetailsType) String() string {
 }
 
 // The compromised credentials actions type
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CompromisedCredentialsActionsType
 type CompromisedCredentialsActionsType struct {
 	_ struct{} `type:"structure"`
 
@@ -437,7 +425,6 @@ func (s *CompromisedCredentialsActionsType) Validate() error {
 }
 
 // The compromised credentials risk configuration type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CompromisedCredentialsRiskConfigurationType
 type CompromisedCredentialsRiskConfigurationType struct {
 	_ struct{} `type:"structure"`
 
@@ -477,7 +464,6 @@ func (s *CompromisedCredentialsRiskConfigurationType) Validate() error {
 
 // Contextual user data type used for evaluating the risk of an unexpected event
 // by Amazon Cognito advanced security.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ContextDataType
 type ContextDataType struct {
 	_ struct{} `type:"structure"`
 
@@ -539,7 +525,6 @@ func (s *ContextDataType) Validate() error {
 
 // The configuration for a custom domain that hosts the sign-up and sign-in
 // webpages for your application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CustomDomainConfigType
 type CustomDomainConfigType struct {
 	_ struct{} `type:"structure"`
 
@@ -573,7 +558,6 @@ func (s *CustomDomainConfigType) Validate() error {
 }
 
 // The configuration for the user pool's device tracking.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeviceConfigurationType
 type DeviceConfigurationType struct {
 	_ struct{} `type:"structure"`
 
@@ -591,7 +575,6 @@ func (s DeviceConfigurationType) String() string {
 }
 
 // The device verifier against which it will be authenticated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeviceSecretVerifierConfigType
 type DeviceSecretVerifierConfigType struct {
 	_ struct{} `type:"structure"`
 
@@ -608,7 +591,6 @@ func (s DeviceSecretVerifierConfigType) String() string {
 }
 
 // The device type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeviceType
 type DeviceType struct {
 	_ struct{} `type:"structure"`
 
@@ -634,7 +616,6 @@ func (s DeviceType) String() string {
 }
 
 // A container for information about a domain.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DomainDescriptionType
 type DomainDescriptionType struct {
 	_ struct{} `type:"structure"`
 
@@ -670,7 +651,6 @@ func (s DomainDescriptionType) String() string {
 }
 
 // The email configuration type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/EmailConfigurationType
 type EmailConfigurationType struct {
 	_ struct{} `type:"structure"`
 
@@ -751,7 +731,6 @@ func (s *EmailConfigurationType) Validate() error {
 }
 
 // Specifies the user context data captured at the time of an event request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/EventContextDataType
 type EventContextDataType struct {
 	_ struct{} `type:"structure"`
 
@@ -777,7 +756,6 @@ func (s EventContextDataType) String() string {
 }
 
 // Specifies the event feedback type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/EventFeedbackType
 type EventFeedbackType struct {
 	_ struct{} `type:"structure"`
 
@@ -801,7 +779,6 @@ func (s EventFeedbackType) String() string {
 }
 
 // The event risk type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/EventRiskType
 type EventRiskType struct {
 	_ struct{} `type:"structure"`
 
@@ -818,7 +795,6 @@ func (s EventRiskType) String() string {
 }
 
 // The group type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GroupType
 type GroupType struct {
 	_ struct{} `type:"structure"`
 
@@ -863,7 +839,6 @@ func (s GroupType) String() string {
 }
 
 // The HTTP header.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/HttpHeader
 type HttpHeader struct {
 	_ struct{} `type:"structure"`
 
@@ -880,7 +855,6 @@ func (s HttpHeader) String() string {
 }
 
 // A container for information about an identity provider.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/IdentityProviderType
 type IdentityProviderType struct {
 	_ struct{} `type:"structure"`
 
@@ -916,7 +890,6 @@ func (s IdentityProviderType) String() string {
 }
 
 // Specifies the configuration for AWS Lambda triggers.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/LambdaConfigType
 type LambdaConfigType struct {
 	_ struct{} `type:"structure"`
 
@@ -997,7 +970,6 @@ func (s *LambdaConfigType) Validate() error {
 }
 
 // Specifies the different settings for multi-factor authentication (MFA).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/MFAOptionType
 type MFAOptionType struct {
 	_ struct{} `type:"structure"`
 
@@ -1027,7 +999,6 @@ func (s *MFAOptionType) Validate() error {
 }
 
 // The message template structure.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/MessageTemplateType
 type MessageTemplateType struct {
 	_ struct{} `type:"structure"`
 
@@ -1066,7 +1037,6 @@ func (s *MessageTemplateType) Validate() error {
 }
 
 // The new device metadata type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/NewDeviceMetadataType
 type NewDeviceMetadataType struct {
 	_ struct{} `type:"structure"`
 
@@ -1083,7 +1053,6 @@ func (s NewDeviceMetadataType) String() string {
 }
 
 // The notify configuration type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/NotifyConfigurationType
 type NotifyConfigurationType struct {
 	_ struct{} `type:"structure"`
 
@@ -1151,7 +1120,6 @@ func (s *NotifyConfigurationType) Validate() error {
 }
 
 // The notify email type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/NotifyEmailType
 type NotifyEmailType struct {
 	_ struct{} `type:"structure"`
 
@@ -1197,7 +1165,6 @@ func (s *NotifyEmailType) Validate() error {
 
 // The minimum and maximum value of an attribute that is of the number data
 // type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/NumberAttributeConstraintsType
 type NumberAttributeConstraintsType struct {
 	_ struct{} `type:"structure"`
 
@@ -1214,7 +1181,6 @@ func (s NumberAttributeConstraintsType) String() string {
 }
 
 // The password policy type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/PasswordPolicyType
 type PasswordPolicyType struct {
 	_ struct{} `type:"structure"`
 
@@ -1260,7 +1226,6 @@ func (s *PasswordPolicyType) Validate() error {
 }
 
 // A container for identity provider details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ProviderDescription
 type ProviderDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1283,7 +1248,6 @@ func (s ProviderDescription) String() string {
 }
 
 // A container for information about an identity provider for a user pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ProviderUserIdentifierType
 type ProviderUserIdentifierType struct {
 	_ struct{} `type:"structure"`
 
@@ -1316,7 +1280,6 @@ func (s *ProviderUserIdentifierType) Validate() error {
 }
 
 // A resource server scope.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ResourceServerScopeType
 type ResourceServerScopeType struct {
 	_ struct{} `type:"structure"`
 
@@ -1361,7 +1324,6 @@ func (s *ResourceServerScopeType) Validate() error {
 }
 
 // A container for information about a resource server for a user pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ResourceServerType
 type ResourceServerType struct {
 	_ struct{} `type:"structure"`
 
@@ -1384,7 +1346,6 @@ func (s ResourceServerType) String() string {
 }
 
 // The risk configuration type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RiskConfigurationType
 type RiskConfigurationType struct {
 	_ struct{} `type:"structure"`
 
@@ -1415,7 +1376,6 @@ func (s RiskConfigurationType) String() string {
 }
 
 // The type of the configuration to override the risk decision.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RiskExceptionConfigurationType
 type RiskExceptionConfigurationType struct {
 	_ struct{} `type:"structure"`
 
@@ -1435,7 +1395,6 @@ func (s RiskExceptionConfigurationType) String() string {
 }
 
 // The SMS multi-factor authentication (MFA) settings type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SMSMfaSettingsType
 type SMSMfaSettingsType struct {
 	_ struct{} `type:"structure"`
 
@@ -1452,7 +1411,6 @@ func (s SMSMfaSettingsType) String() string {
 }
 
 // Contains information about the schema attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SchemaAttributeType
 type SchemaAttributeType struct {
 	_ struct{} `type:"structure"`
 
@@ -1506,7 +1464,6 @@ func (s *SchemaAttributeType) Validate() error {
 }
 
 // The SMS configuration type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SmsConfigurationType
 type SmsConfigurationType struct {
 	_ struct{} `type:"structure"`
 
@@ -1543,7 +1500,6 @@ func (s *SmsConfigurationType) Validate() error {
 }
 
 // The SMS text message multi-factor authentication (MFA) configuration type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SmsMfaConfigType
 type SmsMfaConfigType struct {
 	_ struct{} `type:"structure"`
 
@@ -1578,7 +1534,6 @@ func (s *SmsMfaConfigType) Validate() error {
 }
 
 // The type used for enabling software token MFA at the user pool level.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SoftwareTokenMfaConfigType
 type SoftwareTokenMfaConfigType struct {
 	_ struct{} `type:"structure"`
 
@@ -1592,7 +1547,6 @@ func (s SoftwareTokenMfaConfigType) String() string {
 }
 
 // The type used for enabling software token MFA at the user level.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SoftwareTokenMfaSettingsType
 type SoftwareTokenMfaSettingsType struct {
 	_ struct{} `type:"structure"`
 
@@ -1609,7 +1563,6 @@ func (s SoftwareTokenMfaSettingsType) String() string {
 }
 
 // The constraints associated with a string attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StringAttributeConstraintsType
 type StringAttributeConstraintsType struct {
 	_ struct{} `type:"structure"`
 
@@ -1627,7 +1580,6 @@ func (s StringAttributeConstraintsType) String() string {
 
 // A container for the UI customization information for a user pool's built-in
 // app UI.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UICustomizationType
 type UICustomizationType struct {
 	_ struct{} `type:"structure"`
 
@@ -1661,7 +1613,6 @@ func (s UICustomizationType) String() string {
 // Contextual data such as the user's device fingerprint, IP address, or location
 // used for evaluating the risk of an unexpected event by Amazon Cognito advanced
 // security.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserContextDataType
 type UserContextDataType struct {
 	_ struct{} `type:"structure"`
 
@@ -1677,7 +1628,6 @@ func (s UserContextDataType) String() string {
 }
 
 // The user import job type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserImportJobType
 type UserImportJobType struct {
 	_ struct{} `type:"structure"`
 
@@ -1750,7 +1700,6 @@ func (s UserImportJobType) String() string {
 }
 
 // The user pool add-ons type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolAddOnsType
 type UserPoolAddOnsType struct {
 	_ struct{} `type:"structure"`
 
@@ -1779,7 +1728,6 @@ func (s *UserPoolAddOnsType) Validate() error {
 }
 
 // The description of the user pool client.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolClientDescription
 type UserPoolClientDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1800,7 +1748,6 @@ func (s UserPoolClientDescription) String() string {
 }
 
 // Contains information about a user pool client.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolClientType
 type UserPoolClientType struct {
 	_ struct{} `type:"structure"`
 
@@ -1904,7 +1851,6 @@ func (s UserPoolClientType) String() string {
 }
 
 // A user pool description.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolDescriptionType
 type UserPoolDescriptionType struct {
 	_ struct{} `type:"structure"`
 
@@ -1933,7 +1879,6 @@ func (s UserPoolDescriptionType) String() string {
 }
 
 // The policy associated with a user pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolPolicyType
 type UserPoolPolicyType struct {
 	_ struct{} `type:"structure"`
 
@@ -1962,7 +1907,6 @@ func (s *UserPoolPolicyType) Validate() error {
 }
 
 // A container for information about the user pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolType
 type UserPoolType struct {
 	_ struct{} `type:"structure"`
 
@@ -2076,7 +2020,6 @@ func (s UserPoolType) String() string {
 }
 
 // The user type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserType
 type UserType struct {
 	_ struct{} `type:"structure"`
 
@@ -2125,7 +2068,6 @@ func (s UserType) String() string {
 }
 
 // The template for verification messages.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/VerificationMessageTemplateType
 type VerificationMessageTemplateType struct {
 	_ struct{} `type:"structure"`
 

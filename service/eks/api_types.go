@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // An object representing the certificate-authority-data for your cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Certificate
 type Certificate struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s Certificate) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing an Amazon EKS cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Cluster
 type Cluster struct {
 	_ struct{} `type:"structure"`
 
@@ -175,7 +173,6 @@ func (s Cluster) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing an error when an asynchronous operation fails.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ErrorDetail
 type ErrorDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -244,7 +241,6 @@ func (s ErrorDetail) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object representing the enabled or disabled Kubernetes control plane logs
 // for your cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/LogSetup
 type LogSetup struct {
 	_ struct{} `type:"structure"`
 
@@ -287,7 +283,6 @@ func (s LogSetup) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the logging configuration for resources in your cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Logging
 type Logging struct {
 	_ struct{} `type:"structure"`
 
@@ -318,7 +313,6 @@ func (s Logging) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing an asynchronous update.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Update
 type Update struct {
 	_ struct{} `type:"structure"`
 
@@ -401,7 +395,6 @@ func (s Update) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the details of an update request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateParam
 type UpdateParam struct {
 	_ struct{} `type:"structure"`
 
@@ -435,7 +428,6 @@ func (s UpdateParam) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the VPC configuration to use for an Amazon EKS cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/VpcConfigRequest
 type VpcConfigRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -516,7 +508,6 @@ func (s VpcConfigRequest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing an Amazon EKS cluster VPC configuration response.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/VpcConfigResponse
 type VpcConfigResponse struct {
 	_ struct{} `type:"structure"`
 

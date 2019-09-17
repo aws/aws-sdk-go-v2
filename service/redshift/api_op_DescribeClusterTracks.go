@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterTracksMessage
 type DescribeClusterTracksInput struct {
 	_ struct{} `type:"structure"`
 
@@ -33,7 +32,6 @@ func (s DescribeClusterTracksInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/TrackListMessage
 type DescribeClusterTracksOutput struct {
 	_ struct{} `type:"structure"`
 
