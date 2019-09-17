@@ -1,15 +1,18 @@
 package kinesis
 
 import (
+	"bytes"
 	"context"
+	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"testing"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 )
 
@@ -42,7 +45,7 @@ func TestKinesisGetRecordsCustomization(t *testing.T) {
 		ShardIterator: aws.String("foo"),
 	})
 	req.Handlers.Send.Clear()
-	req.Handlers.Send.PushBack(func(r *request.Request) {
+	req.Handlers.Send.PushBack(func(r *aws.Request) {
 		r.HTTPResponse = &http.Response{
 			StatusCode: 200,
 			Header: http.Header{
@@ -54,13 +57,13 @@ func TestKinesisGetRecordsCustomization(t *testing.T) {
 		r.HTTPResponse.Status = http.StatusText(r.HTTPResponse.StatusCode)
 		retryCount++
 	})
-	req.ApplyOptions(request.WithResponseReadTimeout(time.Second))
+	req.ApplyOptions(aws.WithResponseReadTimeout(time.Second))
 	_, err := req.Send(context.Background())
 	if err == nil {
 		t.Errorf("Expected error, but received nil")
 	} else if v, ok := err.(awserr.Error); !ok {
 		t.Errorf("Expected awserr.Error but received %v", err)
-	} else if v.Code() != request.ErrCodeResponseTimeout {
+	} else if v.Code() != aws.ErrCodeResponseTimeout {
 		t.Errorf("Expected 'RequestTimeout' error, but received %s instead", v.Code())
 	}
 	if retryCount != 5 {
@@ -75,7 +78,7 @@ func TestKinesisGetRecordsNoTimeout(t *testing.T) {
 		ShardIterator: aws.String("foo"),
 	})
 	req.Handlers.Send.Clear()
-	req.Handlers.Send.PushBack(func(r *request.Request) {
+	req.Handlers.Send.PushBack(func(r *aws.Request) {
 		r.HTTPResponse = &http.Response{
 			StatusCode: 200,
 			Header: http.Header{
@@ -86,9 +89,55 @@ func TestKinesisGetRecordsNoTimeout(t *testing.T) {
 		}
 		r.HTTPResponse.Status = http.StatusText(r.HTTPResponse.StatusCode)
 	})
-	req.ApplyOptions(request.WithResponseReadTimeout(time.Second))
+	req.ApplyOptions(aws.WithResponseReadTimeout(time.Second))
 	_, err := req.Send(context.Background())
 	if err != nil {
 		t.Errorf("Expected no error, but received %v", err)
+	}
+}
+
+func TestKinesisCustomRetryErrorCodes(t *testing.T) {
+
+	cfg := unit.Config()
+	cfg.LogLevel = aws.LogLevel(aws.LogDebugWithHTTPBody)
+	cfg.Retryer = aws.NewDefaultRetryer(func(d *aws.DefaultRetryer) {
+		d.NumMaxRetries = 1
+	})
+
+	svc := New(cfg)
+	svc.Handlers.Validate.Clear()
+
+	const jsonErr = `{"__type":%q, "message":"some error message"}`
+	var reqCount int
+	resps := []*http.Response{
+		{
+			StatusCode: 400,
+			Header:     http.Header{},
+			Body: ioutil.NopCloser(bytes.NewReader(
+				[]byte(fmt.Sprintf(jsonErr, ErrCodeLimitExceededException)),
+			)),
+		},
+		{
+			StatusCode: 200,
+			Header:     http.Header{},
+			Body:       ioutil.NopCloser(bytes.NewReader([]byte{})),
+		},
+	}
+
+	req := svc.GetRecordsRequest(&GetRecordsInput{})
+	req.Handlers.Send.Swap(defaults.SendHandler.Name, aws.NamedHandler{
+		Name: "custom send handler",
+		Fn: func(r *aws.Request) {
+			r.HTTPResponse = resps[reqCount]
+			reqCount++
+		},
+	})
+
+	if _, err := req.Send(context.Background()); err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if e, a := 2, reqCount; e != a {
+		t.Errorf("expect %v requests, got %v", e, a)
 	}
 }

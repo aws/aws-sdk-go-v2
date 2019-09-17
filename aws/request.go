@@ -5,7 +5,6 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"net"
 	"net/http"
 	"net/url"
 	"reflect"
@@ -40,6 +39,7 @@ type Request struct {
 	Handlers Handlers
 
 	Retryer
+	AttemptTime      time.Time
 	Time             time.Time
 	ExpireTime       time.Duration
 	Operation        *Operation
@@ -61,6 +61,15 @@ type Request struct {
 	context context.Context
 
 	built bool
+
+	// Additional API error codes that should be retried. IsErrorRetryable
+	// will consider these codes in addition to its built in cases.
+	RetryErrorCodes []string
+
+	// Additional API error codes that should be retried with throttle backoff
+	// delay. IsErrorThrottle will consider these codes in addition to its
+	// built in cases.
+	ThrottleErrorCodes []string
 
 	// Need to persist an intermediate body between the input Body and HTTP
 	// request body because the HTTP Client's transport can maintain a reference
@@ -228,10 +237,15 @@ func (r *Request) SetContext(ctx context.Context) {
 
 // WillRetry returns if the request's can be retried.
 func (r *Request) WillRetry() bool {
-	if !IsReaderSeekable(r.Body) && r.HTTPRequest.Body != NoBody {
+	if !IsReaderSeekable(r.Body) && r.HTTPRequest.Body != http.NoBody {
 		return false
 	}
 	return r.Error != nil && BoolValue(r.Retryable) && r.RetryCount < r.MaxRetries()
+}
+
+// fmtAttemptCount returns a formatted string with attempt count
+func fmtAttemptCount(retryCount, maxRetries int) string {
+	return fmt.Sprintf("attempt %v/%v", retryCount, maxRetries)
 }
 
 // ParamsFilled returns if the request's parameters have been populated
@@ -308,14 +322,13 @@ func (r *Request) PresignRequest(expireTime time.Duration) (string, http.Header,
 	return r.HTTPRequest.URL.String(), r.SignedHeaderVals, nil
 }
 
-func debugLogReqError(r *Request, stage string, retrying bool, err error) {
+const (
+	notRetrying = "not retrying"
+)
+
+func debugLogReqError(r *Request, stage string, retryStr string, err error) {
 	if !r.Config.LogLevel.Matches(LogDebugWithRequestErrors) {
 		return
-	}
-
-	retryStr := "not retrying"
-	if retrying {
-		retryStr = "will retry"
 	}
 
 	r.Config.Logger.Log(fmt.Sprintf("DEBUG: %s %s/%s failed, %s, error %v",
@@ -336,12 +349,12 @@ func (r *Request) Build() error {
 	if !r.built {
 		r.Handlers.Validate.Run(r)
 		if r.Error != nil {
-			debugLogReqError(r, "Validate Request", false, r.Error)
+			debugLogReqError(r, "Validate Request", notRetrying, r.Error)
 			return r.Error
 		}
 		r.Handlers.Build.Run(r)
 		if r.Error != nil {
-			debugLogReqError(r, "Build Request", false, r.Error)
+			debugLogReqError(r, "Build Request", notRetrying, r.Error)
 			return r.Error
 		}
 		r.built = true
@@ -357,7 +370,7 @@ func (r *Request) Build() error {
 func (r *Request) Sign() error {
 	r.Build()
 	if r.Error != nil {
-		debugLogReqError(r, "Build Request", false, r.Error)
+		debugLogReqError(r, "Build Request", notRetrying, r.Error)
 		return r.Error
 	}
 
@@ -396,7 +409,7 @@ func (r *Request) getNextRequestBody() (body io.ReadCloser, err error) {
 	}
 
 	if l == 0 {
-		body = NoBody
+		body = http.NoBody
 	} else if l > 0 {
 		body = r.safeBody
 	} else {
@@ -411,7 +424,7 @@ func (r *Request) getNextRequestBody() (body io.ReadCloser, err error) {
 		// implement Len() method.
 		switch r.Operation.HTTPMethod {
 		case "GET", "HEAD", "DELETE":
-			body = NoBody
+			body = http.NoBody
 		default:
 			body = r.safeBody
 		}
@@ -446,79 +459,90 @@ func (r *Request) Send() error {
 		r.Handlers.Complete.Run(r)
 	}()
 
+	if err := r.Error; err != nil {
+		return err
+	}
+
 	for {
-		if BoolValue(r.Retryable) {
-			if r.Config.LogLevel.Matches(LogDebugWithRequestRetries) {
-				r.Config.Logger.Log(fmt.Sprintf("DEBUG: Retrying Request %s/%s, attempt %d",
-					r.Metadata.ServiceName, r.Operation.Name, r.RetryCount))
-			}
+		r.Error = nil
+		r.AttemptTime = time.Now()
 
-			// The previous http.Request will have a reference to the r.Body
-			// and the HTTP Client's Transport may still be reading from
-			// the request's body even though the Client's Do returned.
-			r.HTTPRequest = copyHTTPRequest(r.HTTPRequest, nil)
-			r.ResetBody()
-
-			// Closing response body to ensure that no response body is leaked
-			// between retry attempts.
-			if r.HTTPResponse != nil && r.HTTPResponse.Body != nil {
-				r.HTTPResponse.Body.Close()
-			}
+		if err := r.Sign(); err != nil {
+			debugLogReqError(r, "Sign Request", notRetrying, err)
+			return err
 		}
 
-		r.Sign()
-		if r.Error != nil {
+		if err := r.sendRequest(); err == nil {
+			return nil
+		}
+		r.Handlers.Retry.Run(r)
+		r.Handlers.AfterRetry.Run(r)
+
+		if r.Error != nil || !BoolValue(r.Retryable) {
 			return r.Error
 		}
 
-		r.Retryable = nil
-
-		r.Handlers.Send.Run(r)
-		if r.Error != nil {
-			if !shouldRetryCancel(r) {
-				return r.Error
-			}
-
-			err := r.Error
-			r.Handlers.Retry.Run(r)
-			r.Handlers.AfterRetry.Run(r)
-			if r.Error != nil {
-				debugLogReqError(r, "Send Request", false, err)
-				return r.Error
-			}
-			debugLogReqError(r, "Send Request", true, err)
-			continue
+		if err := r.prepareRetry(); err != nil {
+			r.Error = err
+			return err
 		}
-		r.Handlers.UnmarshalMeta.Run(r)
-		r.Handlers.ValidateResponse.Run(r)
-		if r.Error != nil {
-			r.Handlers.UnmarshalError.Run(r)
-			err := r.Error
+	}
+}
 
-			r.Handlers.Retry.Run(r)
-			r.Handlers.AfterRetry.Run(r)
-			if r.Error != nil {
-				debugLogReqError(r, "Validate Response", false, err)
-				return r.Error
-			}
-			debugLogReqError(r, "Validate Response", true, err)
-			continue
-		}
+func (r *Request) prepareRetry() error {
+	if r.Config.LogLevel.Matches(LogDebugWithRequestRetries) {
+		r.Config.Logger.Log(fmt.Sprintf("DEBUG: Retrying Request %s/%s, attempt %d",
+			r.Metadata.ServiceName, r.Operation.Name, r.RetryCount))
+	}
 
-		r.Handlers.Unmarshal.Run(r)
-		if r.Error != nil {
-			err := r.Error
-			r.Handlers.Retry.Run(r)
-			r.Handlers.AfterRetry.Run(r)
-			if r.Error != nil {
-				debugLogReqError(r, "Unmarshal Response", false, err)
-				return r.Error
-			}
-			debugLogReqError(r, "Unmarshal Response", true, err)
-			continue
-		}
+	// The previous http.Request will have a reference to the r.Body
+	// and the HTTP Client's Transport may still be reading from
+	// the request's body even though the Client's Do returned.
+	r.HTTPRequest = copyHTTPRequest(r.HTTPRequest, nil)
+	r.ResetBody()
+	if err := r.Error; err != nil {
+		return awserr.New(ErrCodeSerialization,
+			"failed to prepare body for retry", err)
 
-		break
+	}
+
+	// Closing response body to ensure that no response body is leaked
+	// between retry attempts.
+	if r.HTTPResponse != nil && r.HTTPResponse.Body != nil {
+		r.HTTPResponse.Body.Close()
+	}
+
+	return nil
+}
+
+func (r *Request) sendRequest() (sendErr error) {
+	defer r.Handlers.CompleteAttempt.Run(r)
+
+	r.Retryable = nil
+	r.Handlers.Send.Run(r)
+	if r.Error != nil {
+		debugLogReqError(r, "Send Request",
+			fmtAttemptCount(r.RetryCount, r.MaxRetries()),
+			r.Error)
+		return r.Error
+	}
+
+	r.Handlers.UnmarshalMeta.Run(r)
+	r.Handlers.ValidateResponse.Run(r)
+	if r.Error != nil {
+		r.Handlers.UnmarshalError.Run(r)
+		debugLogReqError(r, "Validate Response",
+			fmtAttemptCount(r.RetryCount, r.MaxRetries()),
+			r.Error)
+		return r.Error
+	}
+
+	r.Handlers.Unmarshal.Run(r)
+	if r.Error != nil {
+		debugLogReqError(r, "Unmarshal Response",
+			fmtAttemptCount(r.RetryCount, r.MaxRetries()),
+			r.Error)
+		return r.Error
 	}
 
 	return nil
@@ -542,32 +566,6 @@ func AddToUserAgent(r *Request, s string) {
 		s = curUA + " " + s
 	}
 	r.HTTPRequest.Header.Set("User-Agent", s)
-}
-
-func shouldRetryCancel(r *Request) bool {
-	awsErr, ok := r.Error.(awserr.Error)
-	timeoutErr := false
-	errStr := r.Error.Error()
-	if ok {
-		if awsErr.Code() == ErrCodeRequestCanceled {
-			return false
-		}
-		err := awsErr.OrigErr()
-		netErr, netOK := err.(net.Error)
-		timeoutErr = netOK && netErr.Temporary()
-		if urlErr, ok := err.(*url.Error); !timeoutErr && ok {
-			errStr = urlErr.Err.Error()
-		}
-	}
-
-	// There can be two types of canceled errors here.
-	// The first being a net.Error and the other being an error.
-	// If the request was timed out, we want to continue the retry
-	// process. Otherwise, return the canceled error.
-	return timeoutErr ||
-		(errStr != "net/http: request canceled" &&
-			errStr != "net/http: request canceled while waiting for connection")
-
 }
 
 // SanitizeHostForHeader removes default port from host and updates request.Host
@@ -637,4 +635,25 @@ func isDefaultPort(scheme, port string) bool {
 	}
 
 	return false
+}
+
+// ResetBody rewinds the request body back to its starting position, and
+// set's the HTTP Request body reference. When the body is read prior
+// to being sent in the HTTP request it will need to be rewound.
+//
+// ResetBody will automatically be called by the SDK's build handler, but if
+// the request is being used directly ResetBody must be called before the request
+// is Sent.  SetStringBody, SetBufferBody, and SetReaderBody will automatically
+// call ResetBody.
+//
+func (r *Request) ResetBody() {
+	body, err := r.getNextRequestBody()
+	if err != nil {
+		r.Error = awserr.New(ErrCodeSerialization,
+			"failed to reset request body", err)
+		return
+	}
+
+	r.HTTPRequest.Body = body
+	r.HTTPRequest.GetBody = r.getNextRequestBody
 }
