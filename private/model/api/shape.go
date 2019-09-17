@@ -622,25 +622,13 @@ var structShapeTmpl = func() *template.Template {
 
 const structShapeTmplDef = `
 {{ .Docstring }}
-{{ if ne $.OrigShapeName "" -}}
-	{{ $crosslinkURL := GetCrosslinkURL $.API.BaseCrosslinkURL $.API.Metadata.UID $.OrigShapeName -}}
-	{{ if ne $crosslinkURL "" -}}
-		// Please also see {{ $crosslinkURL }}
-	{{ end -}}
-{{ else -}}
-	{{ $crosslinkURL := GetCrosslinkURL $.API.BaseCrosslinkURL $.API.Metadata.UID $.ShapeName -}}
-	{{ if ne $crosslinkURL "" -}}
-		// Please also see {{ $crosslinkURL }}
-	{{ end -}}
-{{ end -}}
-{{ $context := . -}}
 type {{ .ShapeName }} struct {
 	_ struct{} {{ .GoTags true false }}
 
-	{{ range $_, $name := $context.MemberNames -}}
-		{{ $elem := index $context.MemberRefs $name -}}
-		{{ $isBlob := $context.WillRefBeBase64Encoded $name -}}
-		{{ $isRequired := $context.IsRequired $name -}}
+	{{ range $_, $name := $.MemberNames -}}
+		{{ $elem := index $.MemberRefs $name -}}
+		{{ $isBlob := $.WillRefBeBase64Encoded $name -}}
+		{{ $isRequired := $.IsRequired $name -}}
 		{{ $doc := $elem.Docstring -}}
 
 		{{ if $doc -}}
@@ -658,7 +646,7 @@ type {{ .ShapeName }} struct {
 			{{ end -}}
 			// {{ $name }} is a required field
 		{{ end -}}
-		{{ $name }} {{ $context.GoStructType $name $elem }} {{ $elem.GoTags false $isRequired }}
+		{{ $name }} {{ $.GoStructType $name $elem }} {{ $elem.GoTags false $isRequired }}
 
 	{{ end }}
 }
@@ -675,11 +663,11 @@ type {{ .ShapeName }} struct {
 
 {{ $builderShapeName := print .ShapeName -}}
 
-{{ range $_, $name := $context.MemberNames -}}
-	{{ $elem := index $context.MemberRefs $name -}}
+{{ range $_, $name := $.MemberNames -}}
+	{{ $elem := index $.MemberRefs $name -}}
 
 {{ if $elem.GenerateGetter -}}
-func (s *{{ $builderShapeName }}) get{{ $name }}() (v {{ $context.GoStructValueType $name $elem }}) {
+func (s *{{ $builderShapeName }}) get{{ $name }}() (v {{ $.GoStructValueType $name $elem }}) {
 	{{ if $elem.UseIndirection -}}
 		if s.{{ $name }} == nil {
 			return v
@@ -714,9 +702,8 @@ type {{ $.EnumType }} string
 
 // Enum values for {{ $.EnumType }}
 const (
-	{{ $context := . -}}
 	{{ range $index, $elem := .Enum -}}
-		{{ $name := index $context.EnumConsts $index -}}
+		{{ $name := index $.EnumConsts $index -}}
 		{{ $name }} {{ $.EnumType }} = "{{ $elem }}"
 	{{ end -}}
 )
