@@ -83,7 +83,7 @@ const opCreateVpnConnection = "CreateVpnConnection"
 // Amazon Elastic Compute Cloud.
 //
 // Creates a VPN connection between an existing virtual private gateway and
-// a VPN customer gateway. The supported connection types is ipsec.1.
+// a VPN customer gateway. The supported connection type is ipsec.1.
 //
 // The response includes information that you need to give to your network administrator
 // to configure your customer gateway.

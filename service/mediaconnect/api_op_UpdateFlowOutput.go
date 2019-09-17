@@ -48,7 +48,7 @@ type UpdateFlowOutputInput struct {
 	// The remote ID for the Zixi-pull stream.
 	RemoteId *string `locationName:"remoteId" type:"string"`
 
-	// The smoothing latency in milliseconds for RTP and RTP-FEC streams.
+	// The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
 	SmoothingLatency *int64 `locationName:"smoothingLatency" type:"integer"`
 
 	// The stream ID that you want to use for this transport. This parameter applies

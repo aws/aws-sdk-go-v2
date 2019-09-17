@@ -3,6 +3,7 @@
 package robomaker
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -626,6 +627,9 @@ type LaunchConfig struct {
 	//
 	// PackageName is a required field
 	PackageName *string `locationName:"packageName" min:"1" type:"string" required:"true"`
+
+	// The port forwarding configuration.
+	PortForwardingConfig *PortForwardingConfig `locationName:"portForwardingConfig" type:"structure"`
 }
 
 // String returns the string representation
@@ -649,6 +653,11 @@ func (s *LaunchConfig) Validate() error {
 	}
 	if s.PackageName != nil && len(*s.PackageName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PackageName", 1))
+	}
+	if s.PortForwardingConfig != nil {
+		if err := s.PortForwardingConfig.Validate(); err != nil {
+			invalidParams.AddNested("PortForwardingConfig", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -682,6 +691,12 @@ func (s LaunchConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "packageName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PortForwardingConfig != nil {
+		v := s.PortForwardingConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "portForwardingConfig", v, metadata)
 	}
 	return nil
 }
@@ -722,6 +737,48 @@ func (s LoggingConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "recordAllRosTopics", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// Describes a network interface.
+type NetworkInterface struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the network interface.
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
+
+	// The IPv4 address of the network interface within the subnet.
+	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
+
+	// The IPv4 public address of the network interface.
+	PublicIpAddress *string `locationName:"publicIpAddress" type:"string"`
+}
+
+// String returns the string representation
+func (s NetworkInterface) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NetworkInterface) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NetworkInterfaceId != nil {
+		v := *s.NetworkInterfaceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "networkInterfaceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PrivateIpAddress != nil {
+		v := *s.PrivateIpAddress
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "privateIpAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PublicIpAddress != nil {
+		v := *s.PublicIpAddress
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "publicIpAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -771,6 +828,124 @@ func (s OutputLocation) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "s3Prefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Configuration information for port forwarding.
+type PortForwardingConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The port mappings for the configuration.
+	PortMappings []PortMapping `locationName:"portMappings" type:"list"`
+}
+
+// String returns the string representation
+func (s PortForwardingConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PortForwardingConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PortForwardingConfig"}
+	if s.PortMappings != nil {
+		for i, v := range s.PortMappings {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PortMappings", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PortForwardingConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.PortMappings != nil {
+		v := s.PortMappings
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "portMappings", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// An object representing a port mapping.
+type PortMapping struct {
+	_ struct{} `type:"structure"`
+
+	// The port number on the application.
+	//
+	// ApplicationPort is a required field
+	ApplicationPort *int64 `locationName:"applicationPort" min:"1024" type:"integer" required:"true"`
+
+	// A Boolean indicating whether to enable this port mapping on public IP.
+	EnableOnPublicIp *bool `locationName:"enableOnPublicIp" type:"boolean"`
+
+	// The port number on the simulation job instance to use as a remote connection
+	// point.
+	//
+	// JobPort is a required field
+	JobPort *int64 `locationName:"jobPort" min:"1" type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s PortMapping) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PortMapping) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PortMapping"}
+
+	if s.ApplicationPort == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationPort"))
+	}
+	if s.ApplicationPort != nil && *s.ApplicationPort < 1024 {
+		invalidParams.Add(aws.NewErrParamMinValue("ApplicationPort", 1024))
+	}
+
+	if s.JobPort == nil {
+		invalidParams.Add(aws.NewErrParamRequired("JobPort"))
+	}
+	if s.JobPort != nil && *s.JobPort < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("JobPort", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PortMapping) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApplicationPort != nil {
+		v := *s.ApplicationPort
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "applicationPort", protocol.Int64Value(v), metadata)
+	}
+	if s.EnableOnPublicIp != nil {
+		v := *s.EnableOnPublicIp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enableOnPublicIp", protocol.BoolValue(v), metadata)
+	}
+	if s.JobPort != nil {
+		v := *s.JobPort
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobPort", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -1466,6 +1641,9 @@ type SimulationJob struct {
 	// The name of the simulation job.
 	Name *string `locationName:"name" min:"1" type:"string"`
 
+	// Describes a network interface.
+	NetworkInterface *NetworkInterface `locationName:"networkInterface" type:"structure"`
+
 	// Location for output files generated by the simulation job.
 	OutputLocation *OutputLocation `locationName:"outputLocation" type:"structure"`
 
@@ -1575,6 +1753,12 @@ func (s SimulationJob) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.NetworkInterface != nil {
+		v := s.NetworkInterface
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "networkInterface", v, metadata)
 	}
 	if s.OutputLocation != nil {
 		v := s.OutputLocation

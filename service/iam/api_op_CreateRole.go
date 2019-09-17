@@ -33,8 +33,7 @@ type CreateRoleInput struct {
 	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
 	//    return (\u000D)
 	//
-	// Upon success, the response includes the same trust policy as a URL-encoded
-	// JSON string.
+	// Upon success, the response includes the same trust policy in JSON format.
 	//
 	// AssumeRolePolicyDocument is a required field
 	AssumeRolePolicyDocument *string `min:"1" type:"string" required:"true"`

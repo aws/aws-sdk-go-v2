@@ -26,7 +26,7 @@ type UpdateDocumentInput struct {
 	// supports JSON and YAML documents. JSON is the default format.
 	DocumentFormat DocumentFormat `type:"string" enum:"true"`
 
-	// The version of the document that you want to update.
+	// (Required) The version of the document that you want to update.
 	DocumentVersion *string `type:"string"`
 
 	// The name of the document that you want to update.

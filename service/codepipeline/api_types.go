@@ -160,12 +160,26 @@ func (s ActionContext) String() string {
 type ActionDeclaration struct {
 	_ struct{} `type:"structure"`
 
-	// The configuration information for the action type.
+	// Specifies the action type and the provider of the action.
 	//
 	// ActionTypeId is a required field
 	ActionTypeId *ActionTypeId `locationName:"actionTypeId" type:"structure" required:"true"`
 
-	// The action declaration's configuration.
+	// The action's configuration. These are key-value pairs that specify input
+	// values for an action. For more information, see Action Structure Requirements
+	// in CodePipeline (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements).
+	// For the list of configuration properties for the AWS CloudFormation action
+	// type in CodePipeline, see Configuration Properties Reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html)
+	// in the AWS CloudFormation User Guide. For template snippets with examples,
+	// see Using Parameter Override Functions with CodePipeline Pipelines (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-parameter-override-functions.html)
+	// in the AWS CloudFormation User Guide.
+	//
+	// The values can be represented in either JSON or YAML format. For example,
+	// the JSON configuration item format is as follows:
+	//
+	// JSON:
+	//
+	// "Configuration" : { Key : Value },
 	Configuration map[string]string `locationName:"configuration" type:"map"`
 
 	// The name or ID of the artifact consumed by the action, such as a test or
@@ -803,6 +817,10 @@ func (s ArtifactRevision) String() string {
 }
 
 // The Amazon S3 bucket where artifacts are stored for the pipeline.
+//
+// You must include either artifactStore or artifactStores in your pipeline,
+// but you cannot use both. If you create a cross-region action in your pipeline,
+// you must use artifactStores.
 type ArtifactStore struct {
 	_ struct{} `type:"structure"`
 
@@ -955,8 +973,12 @@ func (s *CurrentRevision) Validate() error {
 type EncryptionKey struct {
 	_ struct{} `type:"structure"`
 
-	// The ID used to identify the key. For an AWS KMS key, this is the key ID or
-	// key ARN.
+	// The ID used to identify the key. For an AWS KMS key, you can use the key
+	// ID, the key ARN, or the alias ARN.
+	//
+	// Aliases are recognized only in the account that created the customer master
+	// key (CMK). For cross-account actions, you can only use the key ID or key
+	// ARN to identify the key.
 	//
 	// Id is a required field
 	Id *string `locationName:"id" min:"1" type:"string" required:"true"`
@@ -1045,6 +1067,25 @@ func (s *ExecutionDetails) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// The interaction or event that started a pipeline execution.
+type ExecutionTrigger struct {
+	_ struct{} `type:"structure"`
+
+	// Detail related to the event that started a pipeline execution, such as the
+	// webhook ARN of the webhook that triggered the pipeline execution or the user
+	// ARN for a user-initiated start-pipeline-execution CLI command.
+	TriggerDetail *string `locationName:"triggerDetail" type:"string"`
+
+	// The type of change-detection method, command, or user interaction that started
+	// a pipeline execution.
+	TriggerType TriggerType `locationName:"triggerType" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ExecutionTrigger) String() string {
+	return awsutil.Prettify(s)
 }
 
 // Represents information about failure details.
@@ -1335,14 +1376,19 @@ type PipelineDeclaration struct {
 
 	// Represents information about the Amazon S3 bucket where artifacts are stored
 	// for the pipeline.
+	//
+	// You must include either artifactStore or artifactStores in your pipeline,
+	// but you cannot use both. If you create a cross-region action in your pipeline,
+	// you must use artifactStores.
 	ArtifactStore *ArtifactStore `locationName:"artifactStore" type:"structure"`
 
 	// A mapping of artifactStore objects and their corresponding regions. There
 	// must be an artifact store for the pipeline region and for each cross-region
-	// action within the pipeline. You can only use either artifactStore or artifactStores,
-	// not both.
+	// action within the pipeline.
 	//
-	// If you create a cross-region action in your pipeline, you must use artifactStores.
+	// You must include either artifactStore or artifactStores in your pipeline,
+	// but you cannot use both. If you create a cross-region action in your pipeline,
+	// you must use artifactStores.
 	ArtifactStores map[string]ArtifactStore `locationName:"artifactStores" type:"map"`
 
 	// The name of the action to be performed.
@@ -1483,6 +1529,10 @@ type PipelineExecutionSummary struct {
 	//
 	//    * Failed: The pipeline execution was not completed successfully.
 	Status PipelineExecutionStatus `locationName:"status" type:"string" enum:"true"`
+
+	// The interaction or event that started a pipeline execution, such as automated
+	// change detection or a StartPipelineExecution API call.
+	Trigger *ExecutionTrigger `locationName:"trigger" type:"structure"`
 }
 
 // String returns the string representation

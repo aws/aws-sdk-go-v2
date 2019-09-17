@@ -24,7 +24,7 @@ type CreateStateMachineInput struct {
 	//
 	// A name must not contain:
 	//
-	//    * whitespace
+	//    * white space
 	//
 	//    * brackets < > { } [ ]
 	//
@@ -43,6 +43,14 @@ type CreateStateMachineInput struct {
 	RoleArn *string `locationName:"roleArn" min:"1" type:"string" required:"true"`
 
 	// Tags to be added when creating a state machine.
+	//
+	// An array of key-value pairs. For more information, see Using Cost Allocation
+	// Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+	// in the AWS Billing and Cost Management User Guide, and Controlling Access
+	// Using IAM Tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html).
+	//
+	// Tags may only contain Unicode letters, digits, white space, or these symbols:
+	// _ . : / = + - @.
 	Tags []Tag `locationName:"tags" type:"list"`
 }
 
@@ -120,6 +128,13 @@ const opCreateStateMachine = "CreateStateMachine"
 //
 // This operation is eventually consistent. The results are best effort and
 // may not reflect very recent updates and changes.
+//
+// CreateStateMachine is an idempotent API. Subsequent requests won’t create
+// a duplicate resource if it was already created. CreateStateMachine's idempotency
+// check is based on the state machine name and definition. If a following request
+// has a different roleArn or tags, Step Functions will ignore these differences
+// and treat it as an idempotent request of the previous. In this case, roleArn
+// and tags will not be updated, even if they are different.
 //
 //    // Example sending a request using CreateStateMachineRequest.
 //    req := client.CreateStateMachineRequest(params)

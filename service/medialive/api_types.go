@@ -816,13 +816,11 @@ type AudioOnlyHlsSettings struct {
 	// Specifies the group to which the audio Rendition belongs.
 	AudioGroupId *string `locationName:"audioGroupId" type:"string"`
 
-	// For use with an audio only Stream. Must be a .jpg or .png file. If given,
-	// this image will be used as the cover-art for the audio only output. Ideally,
-	// it should be formatted for an iPhone screen for two reasons. The iPhone does
-	// not resize the image, it crops a centered image on the top/bottom and left/right.
-	// Additionally, this image file gets saved bit-for-bit into every 10-second
-	// segment file, so will increase bandwidth by {image file size} * {segment
-	// count} * {user count.}.
+	// Optional. Specifies the .jpg or .png image to use as the cover art for an
+	// audio-only output. We recommend a low bit-size file because the image increases
+	// the output audio bandwidth.The image is attached to the audio as an ID3 tag,
+	// frame type APIC, picture type 0x10, as per the "ID3 tag version 2.4.0 - Native
+	// Frames" standard.
 	AudioOnlyImage *InputLocation `locationName:"audioOnlyImage" type:"structure"`
 
 	// Four types of audio-only tracks are supported:Audio-Only Variant StreamThe
@@ -2502,6 +2500,21 @@ func (s ChannelSummary) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Passthrough applies no color space conversion to the output
+type ColorSpacePassthroughSettings struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s ColorSpacePassthroughSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ColorSpacePassthroughSettings) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 // DVB Network Information Table (NIT)
 type DvbNitSettings struct {
 	_ struct{} `type:"structure"`
@@ -3865,6 +3878,48 @@ func (s GlobalConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// H264 Color Space Settings
+type H264ColorSpaceSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Passthrough applies no color space conversion to the output
+	ColorSpacePassthroughSettings *ColorSpacePassthroughSettings `locationName:"colorSpacePassthroughSettings" type:"structure"`
+
+	// Rec601 Settings
+	Rec601Settings *Rec601Settings `locationName:"rec601Settings" type:"structure"`
+
+	// Rec709 Settings
+	Rec709Settings *Rec709Settings `locationName:"rec709Settings" type:"structure"`
+}
+
+// String returns the string representation
+func (s H264ColorSpaceSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s H264ColorSpaceSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ColorSpacePassthroughSettings != nil {
+		v := s.ColorSpacePassthroughSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "colorSpacePassthroughSettings", v, metadata)
+	}
+	if s.Rec601Settings != nil {
+		v := s.Rec601Settings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "rec601Settings", v, metadata)
+	}
+	if s.Rec709Settings != nil {
+		v := s.Rec709Settings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "rec709Settings", v, metadata)
+	}
+	return nil
+}
+
 // H264 Settings
 type H264Settings struct {
 	_ struct{} `type:"structure"`
@@ -3888,11 +3943,14 @@ type H264Settings struct {
 	// Percentage of the buffer that should initially be filled (HRD buffer model).
 	BufFillPct *int64 `locationName:"bufFillPct" type:"integer"`
 
-	// Size of buffer (HRD buffer model) in bits/second.
+	// Size of buffer (HRD buffer model) in bits.
 	BufSize *int64 `locationName:"bufSize" type:"integer"`
 
 	// Includes colorspace metadata in the output.
 	ColorMetadata H264ColorMetadata `locationName:"colorMetadata" type:"string" enum:"true"`
+
+	// Color Space settings
+	ColorSpaceSettings *H264ColorSpaceSettings `locationName:"colorSpaceSettings" type:"structure"`
 
 	// Entropy encoding mode. Use cabac (must be in Main or High profile) or cavlc.
 	EntropyEncoding H264EntropyEncoding `locationName:"entropyEncoding" type:"string" enum:"true"`
@@ -3946,7 +4004,7 @@ type H264Settings struct {
 	// while high can produce better quality for certain content.
 	LookAheadRateControl H264LookAheadRateControl `locationName:"lookAheadRateControl" type:"string" enum:"true"`
 
-	// For QVBR: See the tooltip for Quality level For VBR: Set the maximum bitrate
+	// For QVBR: See the tooltip for Quality levelFor VBR: Set the maximum bitrate
 	// in order to accommodate expected spikes in the complexity of the video.
 	MaxBitrate *int64 `locationName:"maxBitrate" min:"1000" type:"integer"`
 
@@ -3987,7 +4045,7 @@ type H264Settings struct {
 	// level: 6. Max bitrate: 1M to 1.5M
 	QvbrQualityLevel *int64 `locationName:"qvbrQualityLevel" min:"1" type:"integer"`
 
-	// Rate control mode. QVBR: Quality will match the specified quality level except
+	// Rate control mode.QVBR: Quality will match the specified quality level except
 	// when it is constrained by themaximum bitrate. Recommended if you or your
 	// viewers pay for bandwidth.VBR: Quality and bitrate vary, depending on the
 	// video complexity. Recommended instead of QVBRif you want to maintain a specific
@@ -4111,6 +4169,12 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "colorMetadata", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ColorSpaceSettings != nil {
+		v := s.ColorSpaceSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "colorSpaceSettings", v, metadata)
 	}
 	if len(s.EntropyEncoding) > 0 {
 		v := s.EntropyEncoding
@@ -4297,6 +4361,447 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "timecodeInsertion", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// H265 Color Space Settings
+type H265ColorSpaceSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Passthrough applies no color space conversion to the output
+	ColorSpacePassthroughSettings *ColorSpacePassthroughSettings `locationName:"colorSpacePassthroughSettings" type:"structure"`
+
+	// Hdr10 Settings
+	Hdr10Settings *Hdr10Settings `locationName:"hdr10Settings" type:"structure"`
+
+	// Rec601 Settings
+	Rec601Settings *Rec601Settings `locationName:"rec601Settings" type:"structure"`
+
+	// Rec709 Settings
+	Rec709Settings *Rec709Settings `locationName:"rec709Settings" type:"structure"`
+}
+
+// String returns the string representation
+func (s H265ColorSpaceSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s H265ColorSpaceSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ColorSpacePassthroughSettings != nil {
+		v := s.ColorSpacePassthroughSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "colorSpacePassthroughSettings", v, metadata)
+	}
+	if s.Hdr10Settings != nil {
+		v := s.Hdr10Settings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "hdr10Settings", v, metadata)
+	}
+	if s.Rec601Settings != nil {
+		v := s.Rec601Settings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "rec601Settings", v, metadata)
+	}
+	if s.Rec709Settings != nil {
+		v := s.Rec709Settings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "rec709Settings", v, metadata)
+	}
+	return nil
+}
+
+// H265 Settings
+type H265Settings struct {
+	_ struct{} `type:"structure"`
+
+	// Adaptive quantization. Allows intra-frame quantizers to vary to improve visual
+	// quality.
+	AdaptiveQuantization H265AdaptiveQuantization `locationName:"adaptiveQuantization" type:"string" enum:"true"`
+
+	// Indicates that AFD values will be written into the output stream. If afdSignaling
+	// is "auto", the system will try to preserve the input AFD value (in cases
+	// where multiple AFD values are valid). If set to "fixed", the AFD value will
+	// be the value configured in the fixedAfd parameter.
+	AfdSignaling AfdSignaling `locationName:"afdSignaling" type:"string" enum:"true"`
+
+	// Whether or not EML should insert an Alternative Transfer Function SEI message
+	// to support backwards compatibility with non-HDR decoders and displays.
+	AlternativeTransferFunction H265AlternativeTransferFunction `locationName:"alternativeTransferFunction" type:"string" enum:"true"`
+
+	// Average bitrate in bits/second. Required when the rate control mode is VBR
+	// or CBR. Not used for QVBR. In an MS Smooth output group, each output must
+	// have a unique value when its bitrate is rounded down to the nearest multiple
+	// of 1000.
+	Bitrate *int64 `locationName:"bitrate" min:"100000" type:"integer"`
+
+	// Size of buffer (HRD buffer model) in bits.
+	BufSize *int64 `locationName:"bufSize" min:"100000" type:"integer"`
+
+	// Includes colorspace metadata in the output.
+	ColorMetadata H265ColorMetadata `locationName:"colorMetadata" type:"string" enum:"true"`
+
+	// Color Space settings
+	ColorSpaceSettings *H265ColorSpaceSettings `locationName:"colorSpaceSettings" type:"structure"`
+
+	// Four bit AFD value to write on all frames of video in the output stream.
+	// Only valid when afdSignaling is set to 'Fixed'.
+	FixedAfd FixedAfd `locationName:"fixedAfd" type:"string" enum:"true"`
+
+	// If set to enabled, adjust quantization within each frame to reduce flicker
+	// or 'pop' on I-frames.
+	FlickerAq H265FlickerAq `locationName:"flickerAq" type:"string" enum:"true"`
+
+	// Framerate denominator.
+	//
+	// FramerateDenominator is a required field
+	FramerateDenominator *int64 `locationName:"framerateDenominator" min:"1" type:"integer" required:"true"`
+
+	// Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976
+	// fps.
+	//
+	// FramerateNumerator is a required field
+	FramerateNumerator *int64 `locationName:"framerateNumerator" min:"1" type:"integer" required:"true"`
+
+	// Frequency of closed GOPs. In streaming applications, it is recommended that
+	// this be set to 1 so a decoder joining mid-stream will receive an IDR frame
+	// as quickly as possible. Setting this value to 0 will break output segmenting.
+	GopClosedCadence *int64 `locationName:"gopClosedCadence" type:"integer"`
+
+	// GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits.
+	// Must be greater than zero.
+	GopSize *float64 `locationName:"gopSize" type:"double"`
+
+	// Indicates if the gopSize is specified in frames or seconds. If seconds the
+	// system will convert the gopSize into a frame count at run time.
+	GopSizeUnits H265GopSizeUnits `locationName:"gopSizeUnits" type:"string" enum:"true"`
+
+	// H.265 Level.
+	Level H265Level `locationName:"level" type:"string" enum:"true"`
+
+	// Amount of lookahead. A value of low can decrease latency and memory usage,
+	// while high can produce better quality for certain content.
+	LookAheadRateControl H265LookAheadRateControl `locationName:"lookAheadRateControl" type:"string" enum:"true"`
+
+	// For QVBR: See the tooltip for Quality level
+	MaxBitrate *int64 `locationName:"maxBitrate" min:"100000" type:"integer"`
+
+	// Only meaningful if sceneChangeDetect is set to enabled. Enforces separation
+	// between repeated (cadence) I-frames and I-frames inserted by Scene Change
+	// Detection. If a scene change I-frame is within I-interval frames of a cadence
+	// I-frame, the GOP is shrunk and/or stretched to the scene change I-frame.
+	// GOP stretch requires enabling lookahead as well as setting I-interval. The
+	// normal cadence resumes for the next GOP. Note: Maximum GOP stretch = GOP
+	// size + Min-I-interval - 1
+	MinIInterval *int64 `locationName:"minIInterval" type:"integer"`
+
+	// Pixel Aspect Ratio denominator.
+	ParDenominator *int64 `locationName:"parDenominator" min:"1" type:"integer"`
+
+	// Pixel Aspect Ratio numerator.
+	ParNumerator *int64 `locationName:"parNumerator" min:"1" type:"integer"`
+
+	// H.265 Profile.
+	Profile H265Profile `locationName:"profile" type:"string" enum:"true"`
+
+	// Controls the target quality for the video encode. Applies only when the rate
+	// control mode is QVBR. Set values for the QVBR quality level field and Max
+	// bitrate field that suit your most important viewing devices. Recommended
+	// values are:- Primary screen: Quality level: 8 to 10. Max bitrate: 4M- PC
+	// or tablet: Quality level: 7. Max bitrate: 1.5M to 3M- Smartphone: Quality
+	// level: 6. Max bitrate: 1M to 1.5M
+	QvbrQualityLevel *int64 `locationName:"qvbrQualityLevel" min:"1" type:"integer"`
+
+	// Rate control mode.QVBR: Quality will match the specified quality level except
+	// when it is constrained by themaximum bitrate. Recommended if you or your
+	// viewers pay for bandwidth.CBR: Quality varies, depending on the video complexity.
+	// Recommended only if you distributeyour assets to devices that cannot handle
+	// variable bitrates.
+	RateControlMode H265RateControlMode `locationName:"rateControlMode" type:"string" enum:"true"`
+
+	// Sets the scan type of the output to progressive or top-field-first interlaced.
+	ScanType H265ScanType `locationName:"scanType" type:"string" enum:"true"`
+
+	// Scene change detection.
+	SceneChangeDetect H265SceneChangeDetect `locationName:"sceneChangeDetect" type:"string" enum:"true"`
+
+	// Number of slices per picture. Must be less than or equal to the number of
+	// macroblock rows for progressive pictures, and less than or equal to half
+	// the number of macroblock rows for interlaced pictures.This field is optional;
+	// when no value is specified the encoder will choose the number of slices based
+	// on encode resolution.
+	Slices *int64 `locationName:"slices" min:"1" type:"integer"`
+
+	// H.265 Tier.
+	Tier H265Tier `locationName:"tier" type:"string" enum:"true"`
+
+	// Determines how timecodes should be inserted into the video elementary stream.-
+	// 'disabled': Do not include timecodes- 'picTimingSei': Pass through picture
+	// timing SEI messages from the source specified in Timecode Config
+	TimecodeInsertion H265TimecodeInsertionBehavior `locationName:"timecodeInsertion" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s H265Settings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *H265Settings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "H265Settings"}
+	if s.Bitrate != nil && *s.Bitrate < 100000 {
+		invalidParams.Add(aws.NewErrParamMinValue("Bitrate", 100000))
+	}
+	if s.BufSize != nil && *s.BufSize < 100000 {
+		invalidParams.Add(aws.NewErrParamMinValue("BufSize", 100000))
+	}
+
+	if s.FramerateDenominator == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FramerateDenominator"))
+	}
+	if s.FramerateDenominator != nil && *s.FramerateDenominator < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("FramerateDenominator", 1))
+	}
+
+	if s.FramerateNumerator == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FramerateNumerator"))
+	}
+	if s.FramerateNumerator != nil && *s.FramerateNumerator < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("FramerateNumerator", 1))
+	}
+	if s.MaxBitrate != nil && *s.MaxBitrate < 100000 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxBitrate", 100000))
+	}
+	if s.ParDenominator != nil && *s.ParDenominator < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("ParDenominator", 1))
+	}
+	if s.ParNumerator != nil && *s.ParNumerator < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("ParNumerator", 1))
+	}
+	if s.QvbrQualityLevel != nil && *s.QvbrQualityLevel < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("QvbrQualityLevel", 1))
+	}
+	if s.Slices != nil && *s.Slices < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Slices", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s H265Settings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AdaptiveQuantization) > 0 {
+		v := s.AdaptiveQuantization
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "adaptiveQuantization", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.AfdSignaling) > 0 {
+		v := s.AfdSignaling
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "afdSignaling", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.AlternativeTransferFunction) > 0 {
+		v := s.AlternativeTransferFunction
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "alternativeTransferFunction", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Bitrate != nil {
+		v := *s.Bitrate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "bitrate", protocol.Int64Value(v), metadata)
+	}
+	if s.BufSize != nil {
+		v := *s.BufSize
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "bufSize", protocol.Int64Value(v), metadata)
+	}
+	if len(s.ColorMetadata) > 0 {
+		v := s.ColorMetadata
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "colorMetadata", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ColorSpaceSettings != nil {
+		v := s.ColorSpaceSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "colorSpaceSettings", v, metadata)
+	}
+	if len(s.FixedAfd) > 0 {
+		v := s.FixedAfd
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "fixedAfd", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.FlickerAq) > 0 {
+		v := s.FlickerAq
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "flickerAq", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.FramerateDenominator != nil {
+		v := *s.FramerateDenominator
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "framerateDenominator", protocol.Int64Value(v), metadata)
+	}
+	if s.FramerateNumerator != nil {
+		v := *s.FramerateNumerator
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "framerateNumerator", protocol.Int64Value(v), metadata)
+	}
+	if s.GopClosedCadence != nil {
+		v := *s.GopClosedCadence
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "gopClosedCadence", protocol.Int64Value(v), metadata)
+	}
+	if s.GopSize != nil {
+		v := *s.GopSize
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "gopSize", protocol.Float64Value(v), metadata)
+	}
+	if len(s.GopSizeUnits) > 0 {
+		v := s.GopSizeUnits
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "gopSizeUnits", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Level) > 0 {
+		v := s.Level
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "level", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.LookAheadRateControl) > 0 {
+		v := s.LookAheadRateControl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lookAheadRateControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.MaxBitrate != nil {
+		v := *s.MaxBitrate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxBitrate", protocol.Int64Value(v), metadata)
+	}
+	if s.MinIInterval != nil {
+		v := *s.MinIInterval
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "minIInterval", protocol.Int64Value(v), metadata)
+	}
+	if s.ParDenominator != nil {
+		v := *s.ParDenominator
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "parDenominator", protocol.Int64Value(v), metadata)
+	}
+	if s.ParNumerator != nil {
+		v := *s.ParNumerator
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "parNumerator", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Profile) > 0 {
+		v := s.Profile
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "profile", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.QvbrQualityLevel != nil {
+		v := *s.QvbrQualityLevel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "qvbrQualityLevel", protocol.Int64Value(v), metadata)
+	}
+	if len(s.RateControlMode) > 0 {
+		v := s.RateControlMode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "rateControlMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.ScanType) > 0 {
+		v := s.ScanType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "scanType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.SceneChangeDetect) > 0 {
+		v := s.SceneChangeDetect
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sceneChangeDetect", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Slices != nil {
+		v := *s.Slices
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "slices", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Tier) > 0 {
+		v := s.Tier
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "tier", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.TimecodeInsertion) > 0 {
+		v := s.TimecodeInsertion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timecodeInsertion", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Hdr10 Settings
+type Hdr10Settings struct {
+	_ struct{} `type:"structure"`
+
+	// Maximum Content Light LevelAn integer metadata value defining the maximum
+	// light level, in nits,of any single pixel within an encoded HDR video stream
+	// or file.
+	MaxCll *int64 `locationName:"maxCll" type:"integer"`
+
+	// Maximum Frame Average Light LevelAn integer metadata value defining the maximum
+	// average light level, in nits,for any single frame within an encoded HDR video
+	// stream or file.
+	MaxFall *int64 `locationName:"maxFall" type:"integer"`
+}
+
+// String returns the string representation
+func (s Hdr10Settings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Hdr10Settings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MaxCll != nil {
+		v := *s.MaxCll
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxCll", protocol.Int64Value(v), metadata)
+	}
+	if s.MaxFall != nil {
+		v := *s.MaxFall
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxFall", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -7652,6 +8157,10 @@ func (s MsSmoothGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 type MsSmoothOutputSettings struct {
 	_ struct{} `type:"structure"`
 
+	// Only applicable when this output is referencing an H.265 video description.Specifies
+	// whether MP4 segments should be packaged as HEV1 or HVC1.
+	H265PackagingType MsSmoothH265PackagingType `locationName:"h265PackagingType" type:"string" enum:"true"`
+
 	// String concatenated to the end of the destination filename. Required for
 	// multiple outputs of the same type.
 	NameModifier *string `locationName:"nameModifier" type:"string"`
@@ -7664,6 +8173,12 @@ func (s MsSmoothOutputSettings) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s MsSmoothOutputSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.H265PackagingType) > 0 {
+		v := s.H265PackagingType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "h265PackagingType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.NameModifier != nil {
 		v := *s.NameModifier
 
@@ -8518,6 +9033,36 @@ func (s PipelinePauseStateSettings) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "pipelineId", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	return nil
+}
+
+// Rec601 Settings
+type Rec601Settings struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s Rec601Settings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Rec601Settings) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Rec709 Settings
+type Rec709Settings struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s Rec709Settings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Rec709Settings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
@@ -10762,6 +11307,9 @@ type VideoCodecSettings struct {
 
 	// H264 Settings
 	H264Settings *H264Settings `locationName:"h264Settings" type:"structure"`
+
+	// H265 Settings
+	H265Settings *H265Settings `locationName:"h265Settings" type:"structure"`
 }
 
 // String returns the string representation
@@ -10780,6 +11328,11 @@ func (s *VideoCodecSettings) Validate() error {
 	if s.H264Settings != nil {
 		if err := s.H264Settings.Validate(); err != nil {
 			invalidParams.AddNested("H264Settings", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.H265Settings != nil {
+		if err := s.H265Settings.Validate(); err != nil {
+			invalidParams.AddNested("H265Settings", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10802,6 +11355,12 @@ func (s VideoCodecSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "h264Settings", v, metadata)
+	}
+	if s.H265Settings != nil {
+		v := s.H265Settings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "h265Settings", v, metadata)
 	}
 	return nil
 }
@@ -10929,8 +11488,9 @@ func (s VideoDescription) MarshalFields(e protocol.FieldEncoder) error {
 type VideoSelector struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the colorspace of an input. This setting works in tandem with colorSpaceConversion
-	// to determine if any conversion will be performed.
+	// Specifies the color space of an input. This setting works in tandem with
+	// colorSpaceUsage and a video description's colorSpaceSettingsChoice to determine
+	// if any conversion will be performed.
 	ColorSpace VideoSelectorColorSpace `locationName:"colorSpace" type:"string" enum:"true"`
 
 	// Applies only if colorSpace is a value other than follow. This field controls

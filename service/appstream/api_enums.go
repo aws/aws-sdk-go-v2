@@ -64,6 +64,7 @@ const (
 	FleetAttributeVpcConfiguration                 FleetAttribute = "VPC_CONFIGURATION"
 	FleetAttributeVpcConfigurationSecurityGroupIds FleetAttribute = "VPC_CONFIGURATION_SECURITY_GROUP_IDS"
 	FleetAttributeDomainJoinInfo                   FleetAttribute = "DOMAIN_JOIN_INFO"
+	FleetAttributeIamRoleArn                       FleetAttribute = "IAM_ROLE_ARN"
 )
 
 func (enum FleetAttribute) MarshalValue() (string, error) {
@@ -85,6 +86,7 @@ const (
 	FleetErrorCodeNetworkInterfaceLimitExceeded                     FleetErrorCode = "NETWORK_INTERFACE_LIMIT_EXCEEDED"
 	FleetErrorCodeInternalServiceError                              FleetErrorCode = "INTERNAL_SERVICE_ERROR"
 	FleetErrorCodeIamServiceRoleIsMissing                           FleetErrorCode = "IAM_SERVICE_ROLE_IS_MISSING"
+	FleetErrorCodeMachineRoleIsMissing                              FleetErrorCode = "MACHINE_ROLE_IS_MISSING"
 	FleetErrorCodeStsDisabledInRegion                               FleetErrorCode = "STS_DISABLED_IN_REGION"
 	FleetErrorCodeSubnetHasInsufficientIpAddresses                  FleetErrorCode = "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES"
 	FleetErrorCodeIamServiceRoleMissingDescribeSubnetAction         FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION"
@@ -332,6 +334,7 @@ const (
 	StackAttributeFeedbackUrl                 StackAttribute = "FEEDBACK_URL"
 	StackAttributeThemeName                   StackAttribute = "THEME_NAME"
 	StackAttributeUserSettings                StackAttribute = "USER_SETTINGS"
+	StackAttributeIamRoleArn                  StackAttribute = "IAM_ROLE_ARN"
 	StackAttributeAccessEndpoints             StackAttribute = "ACCESS_ENDPOINTS"
 )
 

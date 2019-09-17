@@ -13,6 +13,7 @@ const (
 	MessageSystemAttributeNameSequenceNumber                   MessageSystemAttributeName = "SequenceNumber"
 	MessageSystemAttributeNameMessageDeduplicationId           MessageSystemAttributeName = "MessageDeduplicationId"
 	MessageSystemAttributeNameMessageGroupId                   MessageSystemAttributeName = "MessageGroupId"
+	MessageSystemAttributeNameAwstraceHeader                   MessageSystemAttributeName = "AWSTraceHeader"
 )
 
 func (enum MessageSystemAttributeName) MarshalValue() (string, error) {
@@ -20,6 +21,22 @@ func (enum MessageSystemAttributeName) MarshalValue() (string, error) {
 }
 
 func (enum MessageSystemAttributeName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type MessageSystemAttributeNameForSends string
+
+// Enum values for MessageSystemAttributeNameForSends
+const (
+	MessageSystemAttributeNameForSendsAwstraceHeader MessageSystemAttributeNameForSends = "AWSTraceHeader"
+)
+
+func (enum MessageSystemAttributeNameForSends) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MessageSystemAttributeNameForSends) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

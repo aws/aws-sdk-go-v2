@@ -69,7 +69,7 @@ const opDescribeListenerCertificates = "DescribeListenerCertificates"
 // Elastic Load Balancing.
 //
 // Describes the default certificate and the certificate list for the specified
-// HTTPS listener.
+// HTTPS or TLS listener.
 //
 // If the default certificate is also in the certificate list, it appears twice
 // in the results (once with IsDefault set to true and once with IsDefault set

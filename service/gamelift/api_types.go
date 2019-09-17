@@ -183,6 +183,31 @@ func (s Build) String() string {
 	return awsutil.Prettify(s)
 }
 
+type CertificateConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// CertificateType is a required field
+	CertificateType CertificateType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s CertificateConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CertificateConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CertificateConfiguration"}
+	if len(s.CertificateType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("CertificateType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Player information for use when creating player sessions using a game session
 // placement request with StartGameSessionPlacement.
 type DesiredPlayerSession struct {
@@ -441,6 +466,8 @@ type FleetAttributes struct {
 
 	// Unique identifier for a build.
 	BuildId *string `type:"string"`
+
+	CertificateConfiguration *CertificateConfiguration `type:"structure"`
 
 	// Time stamp indicating when this data object was created. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
@@ -729,6 +756,8 @@ type GameSession struct {
 	// Number of players currently in the game session.
 	CurrentPlayerSessionCount *int64 `type:"integer"`
 
+	DnsName *string `type:"string"`
+
 	// Unique identifier for a fleet that the game session is running on.
 	FleetId *string `type:"string"`
 
@@ -804,6 +833,8 @@ func (s GameSession) String() string {
 type GameSessionConnectionInfo struct {
 	_ struct{} `type:"structure"`
 
+	DnsName *string `type:"string"`
+
 	// Amazon Resource Name (ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
 	// that is assigned to a game session and uniquely identifies it.
 	GameSessionArn *string `min:"1" type:"string"`
@@ -861,6 +892,8 @@ func (s GameSessionDetail) String() string {
 //    * StopGameSessionPlacement
 type GameSessionPlacement struct {
 	_ struct{} `type:"structure"`
+
+	DnsName *string `type:"string"`
 
 	// Time stamp indicating when this request was completed, canceled, or timed
 	// out.
@@ -1068,6 +1101,8 @@ type Instance struct {
 	// Time stamp indicating when this data object was created. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
 	CreationTime *time.Time `type:"timestamp"`
+
+	DnsName *string `type:"string"`
 
 	// Unique identifier for a fleet that the instance is in.
 	FleetId *string `type:"string"`
@@ -1648,6 +1683,8 @@ type PlayerSession struct {
 	// Time stamp indicating when this data object was created. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
 	CreationTime *time.Time `type:"timestamp"`
+
+	DnsName *string `type:"string"`
 
 	// Unique identifier for a fleet that the player's game session is running on.
 	FleetId *string `type:"string"`

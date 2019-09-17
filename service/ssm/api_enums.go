@@ -910,8 +910,9 @@ type ParameterTier string
 
 // Enum values for ParameterTier
 const (
-	ParameterTierStandard ParameterTier = "Standard"
-	ParameterTierAdvanced ParameterTier = "Advanced"
+	ParameterTierStandard           ParameterTier = "Standard"
+	ParameterTierAdvanced           ParameterTier = "Advanced"
+	ParameterTierIntelligentTiering ParameterTier = "Intelligent-Tiering"
 )
 
 func (enum ParameterTier) MarshalValue() (string, error) {

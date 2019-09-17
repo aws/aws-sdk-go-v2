@@ -145,6 +145,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice"
 	"github.com/aws/aws-sdk-go-v2/service/polly"
 	"github.com/aws/aws-sdk-go-v2/service/pricing"
+	"github.com/aws/aws-sdk-go-v2/service/qldb"
+	"github.com/aws/aws-sdk-go-v2/service/qldbsession"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight"
 	"github.com/aws/aws-sdk-go-v2/service/ram"
 	"github.com/aws/aws-sdk-go-v2/service/rds"
@@ -190,6 +192,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/workdocs"
 	"github.com/aws/aws-sdk-go-v2/service/worklink"
 	"github.com/aws/aws-sdk-go-v2/service/workmail"
+	"github.com/aws/aws-sdk-go-v2/service/workmailmessageflow"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces"
 	"github.com/aws/aws-sdk-go-v2/service/xray"
 )
@@ -347,6 +350,8 @@ func createServices(cfg aws.Config) []service {
 		{name: "pinpointsmsvoice", value: reflect.ValueOf(pinpointsmsvoice.New(cfg))},
 		{name: "polly", value: reflect.ValueOf(polly.New(cfg))},
 		{name: "pricing", value: reflect.ValueOf(pricing.New(cfg))},
+		{name: "qldb", value: reflect.ValueOf(qldb.New(cfg))},
+		{name: "qldbsession", value: reflect.ValueOf(qldbsession.New(cfg))},
 		{name: "quicksight", value: reflect.ValueOf(quicksight.New(cfg))},
 		{name: "ram", value: reflect.ValueOf(ram.New(cfg))},
 		{name: "rds", value: reflect.ValueOf(rds.New(cfg))},
@@ -392,6 +397,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "workdocs", value: reflect.ValueOf(workdocs.New(cfg))},
 		{name: "worklink", value: reflect.ValueOf(worklink.New(cfg))},
 		{name: "workmail", value: reflect.ValueOf(workmail.New(cfg))},
+		{name: "workmailmessageflow", value: reflect.ValueOf(workmailmessageflow.New(cfg))},
 		{name: "workspaces", value: reflect.ValueOf(workspaces.New(cfg))},
 		{name: "xray", value: reflect.ValueOf(xray.New(cfg))},
 	}

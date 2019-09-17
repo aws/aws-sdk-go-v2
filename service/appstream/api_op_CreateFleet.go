@@ -53,6 +53,12 @@ type CreateFleetInput struct {
 	// connected and a small hourly fee for instances that are not streaming apps.
 	FleetType FleetType `type:"string" enum:"true"`
 
+	// The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To
+	// assume a role, a fleet instance calls the AWS Security Token Service (STS)
+	// AssumeRole API operation and passes the ARN of the role to use. The operation
+	// creates a new session with temporary credentials.
+	IamRoleArn *string `type:"string"`
+
 	// The amount of time that users can be idle (inactive) before they are disconnected
 	// from their streaming session and the DisconnectTimeoutInSeconds time interval
 	// begins. Users are notified before they are disconnected due to inactivity.

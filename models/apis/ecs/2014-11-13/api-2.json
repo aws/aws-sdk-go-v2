@@ -609,6 +609,21 @@
         {"shape":"InvalidParameterException"}
       ]
     },
+    "UpdateClusterSettings":{
+      "name":"UpdateClusterSettings",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateClusterSettingsRequest"},
+      "output":{"shape":"UpdateClusterSettingsResponse"},
+      "errors":[
+        {"shape":"ServerException"},
+        {"shape":"ClientException"},
+        {"shape":"ClusterNotFoundException"},
+        {"shape":"InvalidParameterException"}
+      ]
+    },
     "UpdateContainerAgent":{
       "name":"UpdateContainerAgent",
       "http":{
@@ -905,6 +920,7 @@
         "containerArn":{"shape":"String"},
         "taskArn":{"shape":"String"},
         "name":{"shape":"String"},
+        "runtimeId":{"shape":"String"},
         "lastStatus":{"shape":"String"},
         "exitCode":{"shape":"BoxedInteger"},
         "reason":{"shape":"String"},
@@ -914,7 +930,8 @@
         "cpu":{"shape":"String"},
         "memory":{"shape":"String"},
         "memoryReservation":{"shape":"String"},
-        "gpuIds":{"shape":"GpuIds"}
+        "gpuIds":{"shape":"GpuIds"},
+        "firelensConfiguration":{"shape":"FirelensConfiguration"}
       }
     },
     "ContainerCondition":{
@@ -965,7 +982,8 @@
         "logConfiguration":{"shape":"LogConfiguration"},
         "healthCheck":{"shape":"HealthCheck"},
         "systemControls":{"shape":"SystemControls"},
-        "resourceRequirements":{"shape":"ResourceRequirements"}
+        "resourceRequirements":{"shape":"ResourceRequirements"},
+        "firelensConfiguration":{"shape":"FirelensConfiguration"}
       }
     },
     "ContainerDefinitions":{
@@ -1050,6 +1068,7 @@
       "type":"structure",
       "members":{
         "containerName":{"shape":"String"},
+        "runtimeId":{"shape":"String"},
         "exitCode":{"shape":"BoxedInteger"},
         "networkBindings":{"shape":"NetworkBindings"},
         "reason":{"shape":"String"},
@@ -1457,6 +1476,26 @@
       "type":"list",
       "member":{"shape":"Failure"}
     },
+    "FirelensConfiguration":{
+      "type":"structure",
+      "required":["type"],
+      "members":{
+        "type":{"shape":"FirelensConfigurationType"},
+        "options":{"shape":"FirelensConfigurationOptionsMap"}
+      }
+    },
+    "FirelensConfigurationOptionsMap":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"String"}
+    },
+    "FirelensConfigurationType":{
+      "type":"string",
+      "enum":[
+        "fluentd",
+        "fluentbit"
+      ]
+    },
     "GpuIds":{
       "type":"list",
       "member":{"shape":"String"}
@@ -1500,6 +1539,32 @@
       "members":{
         "sourcePath":{"shape":"String"}
       }
+    },
+    "InferenceAccelerator":{
+      "type":"structure",
+      "required":[
+        "deviceName",
+        "deviceType"
+      ],
+      "members":{
+        "deviceName":{"shape":"String"},
+        "deviceType":{"shape":"String"}
+      }
+    },
+    "InferenceAcceleratorOverride":{
+      "type":"structure",
+      "members":{
+        "deviceName":{"shape":"String"},
+        "deviceType":{"shape":"String"}
+      }
+    },
+    "InferenceAcceleratorOverrides":{
+      "type":"list",
+      "member":{"shape":"InferenceAcceleratorOverride"}
+    },
+    "InferenceAccelerators":{
+      "type":"list",
+      "member":{"shape":"InferenceAccelerator"}
     },
     "Integer":{"type":"integer"},
     "InvalidParameterException":{
@@ -1737,7 +1802,8 @@
         "gelf",
         "fluentd",
         "awslogs",
-        "splunk"
+        "splunk",
+        "awsfirelens"
       ]
     },
     "Long":{"type":"long"},
@@ -2005,7 +2071,8 @@
         "tags":{"shape":"Tags"},
         "pidMode":{"shape":"PidMode"},
         "ipcMode":{"shape":"IpcMode"},
-        "proxyConfiguration":{"shape":"ProxyConfiguration"}
+        "proxyConfiguration":{"shape":"ProxyConfiguration"},
+        "inferenceAccelerators":{"shape":"InferenceAccelerators"}
       }
     },
     "RegisterTaskDefinitionResponse":{
@@ -2060,7 +2127,10 @@
     },
     "ResourceType":{
       "type":"string",
-      "enum":["GPU"]
+      "enum":[
+        "GPU",
+        "InferenceAccelerator"
+      ]
     },
     "Resources":{
       "type":"list",
@@ -2334,6 +2404,7 @@
         "cluster":{"shape":"String"},
         "task":{"shape":"String"},
         "containerName":{"shape":"String"},
+        "runtimeId":{"shape":"String"},
         "status":{"shape":"String"},
         "exitCode":{"shape":"BoxedInteger"},
         "reason":{"shape":"String"},
@@ -2463,7 +2534,8 @@
         "platformVersion":{"shape":"String"},
         "attachments":{"shape":"Attachments"},
         "healthStatus":{"shape":"HealthStatus"},
-        "tags":{"shape":"Tags"}
+        "tags":{"shape":"Tags"},
+        "inferenceAccelerators":{"shape":"InferenceAccelerators"}
       }
     },
     "TaskDefinition":{
@@ -2539,6 +2611,7 @@
       "type":"structure",
       "members":{
         "containerOverrides":{"shape":"ContainerOverrides"},
+        "inferenceAcceleratorOverrides":{"shape":"InferenceAcceleratorOverrides"},
         "taskRoleArn":{"shape":"String"},
         "executionRoleArn":{"shape":"String"}
       }
@@ -2672,6 +2745,23 @@
     "UntagResourceResponse":{
       "type":"structure",
       "members":{
+      }
+    },
+    "UpdateClusterSettingsRequest":{
+      "type":"structure",
+      "required":[
+        "cluster",
+        "settings"
+      ],
+      "members":{
+        "cluster":{"shape":"String"},
+        "settings":{"shape":"ClusterSettings"}
+      }
+    },
+    "UpdateClusterSettingsResponse":{
+      "type":"structure",
+      "members":{
+        "cluster":{"shape":"Cluster"}
       }
     },
     "UpdateContainerAgentRequest":{

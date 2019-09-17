@@ -1026,6 +1026,9 @@ type ReplicationGroup struct {
 	// The user supplied description of the replication group.
 	Description *string `type:"string"`
 
+	// The ID of the KMS key used to encrypt the disk in the cluster.
+	KmsKeyId *string `type:"string"`
+
 	// The names of all the cache clusters that are part of this replication group.
 	MemberClusters []string `locationNameList:"ClusterId" type:"list"`
 
@@ -1473,6 +1476,9 @@ type Snapshot struct {
 
 	// The version of the cache engine version that is used by the source cluster.
 	EngineVersion *string `type:"string"`
+
+	// The ID of the KMS key used to encrypt the snapshot.
+	KmsKeyId *string `type:"string"`
 
 	// A list of the cache nodes in the source cluster.
 	NodeSnapshots []NodeSnapshot `locationNameList:"NodeSnapshot" type:"list"`

@@ -279,10 +279,12 @@ func (s *AuthenticateOidcActionConfig) Validate() error {
 type AvailabilityZone struct {
 	_ struct{} `type:"structure"`
 
-	// [Network Load Balancers] The static IP address.
+	// [Network Load Balancers] If you need static IP addresses for your load balancer,
+	// you can specify one Elastic IP address per Availability Zone when you create
+	// the load balancer.
 	LoadBalancerAddresses []LoadBalancerAddress `type:"list"`
 
-	// The ID of the subnet.
+	// The ID of the subnet. You can specify one subnet per Availability Zone.
 	SubnetId *string `type:"string"`
 
 	// The name of the Availability Zone.
@@ -1271,9 +1273,8 @@ type TargetHealth struct {
 	//
 	//    * Target.Timeout - The health check requests timed out.
 	//
-	//    * Target.FailedHealthChecks - The health checks failed because the connection
-	//    to the target timed out, the target response was malformed, or the target
-	//    failed the health check for an unknown reason.
+	//    * Target.FailedHealthChecks - The load balancer received an error while
+	//    establishing a connection to the target or the target response was malformed.
 	//
 	//    * Elb.InternalError - The health checks failed due to an internal error.
 	//

@@ -133,7 +133,7 @@ const opCreateAccount = "CreateAccount"
 //
 // The user who calls the API to create an account must have the organizations:CreateAccount
 // permission. If you enabled all features in the organization, AWS Organizations
-// will create the required service-linked role named AWSServiceRoleForOrganizations.
+// creates the required service-linked role named AWSServiceRoleForOrganizations.
 // For more information, see AWS Organizations and Service-Linked Roles (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs)
 // in the AWS Organizations User Guide.
 //

@@ -104,7 +104,7 @@ type CreateTargetGroupInput struct {
 	UnhealthyThresholdCount *int64 `min:"2" type:"integer"`
 
 	// The identifier of the virtual private cloud (VPC). If the target is a Lambda
-	// function, this parameter does not apply.
+	// function, this parameter does not apply. Otherwise, this parameter is required.
 	VpcId *string `type:"string"`
 }
 

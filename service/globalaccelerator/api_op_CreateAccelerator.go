@@ -82,6 +82,8 @@ const opCreateAccelerator = "CreateAccelerator"
 // each of which includes endpoints, such as Network Load Balancers. To see
 // an AWS CLI example of creating an accelerator, scroll down to Example.
 //
+// You must specify the US-West-2 (Oregon) Region to create or update accelerators.
+//
 //    // Example sending a request using CreateAcceleratorRequest.
 //    req := client.CreateAcceleratorRequest(params)
 //    resp, err := req.Send(context.TODO())

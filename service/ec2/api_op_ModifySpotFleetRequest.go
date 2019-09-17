@@ -80,7 +80,7 @@ const opModifySpotFleetRequest = "ModifySpotFleetRequest"
 // price. If the allocation strategy is diversified, the Spot Fleet distributes
 // the instances across the Spot Instance pools. If the allocation strategy
 // is capacityOptimized, Spot Fleet launches instances from Spot Instance pools
-// that are optimally chosen based on the available Spot Instance capacity.
+// with optimal capacity for the number of instances that are launching.
 //
 // To scale down your Spot Fleet, decrease its target capacity. First, the Spot
 // Fleet cancels any open requests that exceed the new target capacity. You

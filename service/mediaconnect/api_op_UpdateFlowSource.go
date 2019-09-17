@@ -32,10 +32,11 @@ type UpdateFlowSourceInput struct {
 	// The port that the flow will be listening on for incoming content.
 	IngestPort *int64 `locationName:"ingestPort" type:"integer"`
 
-	// The smoothing max bitrate for RTP and RTP-FEC streams.
+	// The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
 	MaxBitrate *int64 `locationName:"maxBitrate" type:"integer"`
 
-	// The maximum latency in milliseconds for Zixi-based streams.
+	// The maximum latency in milliseconds. This parameter applies only to RIST-based
+	// and Zixi-based streams.
 	MaxLatency *int64 `locationName:"maxLatency" type:"integer"`
 
 	// The protocol that is used by the source.

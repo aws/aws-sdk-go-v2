@@ -71,13 +71,15 @@ const opEnablePolicyType = "EnablePolicyType"
 // (OU), or account in that root. You can undo this by using the DisablePolicyType
 // operation.
 //
+// This is an asynchronous request that AWS performs in the background. AWS
+// recommends that you first use ListRoots to see the status of policy types
+// for a specified root, and then use this operation.
+//
 // This operation can be called only from the organization's master account.
 //
 // You can enable a policy type in a root only if that policy type is available
-// in the organization. Use DescribeOrganization to view the status of available
-// policy types in the organization.
-//
-// To view the status of policy type in a root, use ListRoots.
+// in the organization. To view the status of available policy types in the
+// organization, use DescribeOrganization.
 //
 //    // Example sending a request using EnablePolicyTypeRequest.
 //    req := client.EnablePolicyTypeRequest(params)

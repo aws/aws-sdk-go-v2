@@ -13,11 +13,9 @@ import (
 type DescribeInstancePatchesInput struct {
 	_ struct{} `type:"structure"`
 
-	// Each entry in the array is a structure containing:
-	//
-	// Key (string, between 1 and 128 characters)
-	//
-	// Values (array of strings, each string between 1 and 256 characters)
+	// An array of structures. Each entry in the array is a structure containing
+	// a Key, Value combination. Valid values for Key are Classification | KBId
+	// | Severity | State.
 	Filters []PatchOrchestratorFilter `type:"list"`
 
 	// The ID of the instance whose patch state information should be retrieved.

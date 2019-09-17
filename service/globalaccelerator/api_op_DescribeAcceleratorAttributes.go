@@ -13,13 +13,29 @@ type DescribeAcceleratorAttributesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the accelerator with the attributes that
-	// you want to describe. Value is required.
-	AcceleratorArn *string `type:"string"`
+	// you want to describe.
+	//
+	// AcceleratorArn is a required field
+	AcceleratorArn *string `type:"string" required:"true"`
 }
 
 // String returns the string representation
 func (s DescribeAcceleratorAttributesInput) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeAcceleratorAttributesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAcceleratorAttributesInput"}
+
+	if s.AcceleratorArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AcceleratorArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 type DescribeAcceleratorAttributesOutput struct {

@@ -40,15 +40,15 @@ type ListPoliciesForTargetInput struct {
 	// The regex pattern (http://wikipedia.org/wiki/regex) for a target ID string
 	// requires one of the following:
 	//
-	//    * Root: a string that begins with "r-" followed by from 4 to 32 lower-case
+	//    * Root - A string that begins with "r-" followed by from 4 to 32 lower-case
 	//    letters or digits.
 	//
-	//    * Account: a string that consists of exactly 12 digits.
+	//    * Account - A string that consists of exactly 12 digits.
 	//
-	//    * Organizational unit (OU): a string that begins with "ou-" followed by
-	//    from 4 to 32 lower-case letters or digits (the ID of the root that the
-	//    OU is in) followed by a second "-" dash and from 8 to 32 additional lower-case
-	//    letters or digits.
+	//    * Organizational unit (OU) - A string that begins with "ou-" followed
+	//    by from 4 to 32 lower-case letters or digits (the ID of the root that
+	//    the OU is in) followed by a second "-" dash and from 8 to 32 additional
+	//    lower-case letters or digits.
 	//
 	// TargetId is a required field
 	TargetId *string `type:"string" required:"true"`

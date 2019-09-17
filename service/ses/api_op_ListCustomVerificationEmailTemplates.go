@@ -13,7 +13,7 @@ import (
 // for your account.
 //
 // For more information about custom verification email templates, see Using
-// Custom Verification Email Templates (ses/latest/DeveloperGuide/custom-verification-emails.html)
+// Custom Verification Email Templates (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
 // in the Amazon SES Developer Guide.
 type ListCustomVerificationEmailTemplatesInput struct {
 	_ struct{} `type:"structure"`

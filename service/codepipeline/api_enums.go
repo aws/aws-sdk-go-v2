@@ -271,6 +271,27 @@ func (enum StageTransitionType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type TriggerType string
+
+// Enum values for TriggerType
+const (
+	TriggerTypeCreatePipeline         TriggerType = "CreatePipeline"
+	TriggerTypeStartPipelineExecution TriggerType = "StartPipelineExecution"
+	TriggerTypePollForSourceChanges   TriggerType = "PollForSourceChanges"
+	TriggerTypeWebhook                TriggerType = "Webhook"
+	TriggerTypeCloudWatchEvent        TriggerType = "CloudWatchEvent"
+	TriggerTypePutActionRevision      TriggerType = "PutActionRevision"
+)
+
+func (enum TriggerType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TriggerType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type WebhookAuthenticationType string
 
 // Enum values for WebhookAuthenticationType

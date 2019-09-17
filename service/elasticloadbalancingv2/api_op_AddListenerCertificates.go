@@ -65,7 +65,7 @@ const opAddListenerCertificates = "AddListenerCertificates"
 // Elastic Load Balancing.
 //
 // Adds the specified SSL server certificate to the certificate list for the
-// specified HTTPS listener.
+// specified HTTPS or TLS listener.
 //
 // If the certificate in already in the certificate list, the call is successful
 // but the certificate is not added again.

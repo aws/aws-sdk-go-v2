@@ -826,8 +826,8 @@ type FleetActivityStatus string
 // Enum values for FleetActivityStatus
 const (
 	FleetActivityStatusError              FleetActivityStatus = "error"
-	FleetActivityStatusPendingFulfillment FleetActivityStatus = "pending-fulfillment"
-	FleetActivityStatusPendingTermination FleetActivityStatus = "pending-termination"
+	FleetActivityStatusPendingFulfillment FleetActivityStatus = "pending_fulfillment"
+	FleetActivityStatusPendingTermination FleetActivityStatus = "pending_termination"
 	FleetActivityStatusFulfilled          FleetActivityStatus = "fulfilled"
 )
 
@@ -900,8 +900,8 @@ const (
 	FleetStateCodeActive             FleetStateCode = "active"
 	FleetStateCodeDeleted            FleetStateCode = "deleted"
 	FleetStateCodeFailed             FleetStateCode = "failed"
-	FleetStateCodeDeletedRunning     FleetStateCode = "deleted-running"
-	FleetStateCodeDeletedTerminating FleetStateCode = "deleted-terminating"
+	FleetStateCodeDeletedRunning     FleetStateCode = "deleted_running"
+	FleetStateCodeDeletedTerminating FleetStateCode = "deleted_terminating"
 	FleetStateCodeModifying          FleetStateCode = "modifying"
 )
 

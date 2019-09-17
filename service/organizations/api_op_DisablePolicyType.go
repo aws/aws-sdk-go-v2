@@ -72,12 +72,16 @@ const opDisablePolicyType = "DisablePolicyType"
 // of the specified type to that root or to any organizational unit (OU) or
 // account in that root. You can undo this by using the EnablePolicyType operation.
 //
+// This is an asynchronous request that AWS performs in the background. If you
+// disable a policy for a root, it still appears enabled for the organization
+// if all features (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
+// are enabled for the organization. AWS recommends that you first use ListRoots
+// to see the status of policy types for a specified root, and then use this
+// operation.
+//
 // This operation can be called only from the organization's master account.
 //
-// If you disable a policy type for a root, it still shows as enabled for the
-// organization if all features are enabled in that organization. Use ListRoots
-// to see the status of policy types for a specified root. Use DescribeOrganization
-// to see the status of policy types in the organization.
+// To view the status of available policy types in the organization, use DescribeOrganization.
 //
 //    // Example sending a request using DisablePolicyTypeRequest.
 //    req := client.DisablePolicyTypeRequest(params)

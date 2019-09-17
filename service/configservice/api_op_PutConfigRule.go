@@ -20,6 +20,7 @@ type PutConfigRuleInput struct {
 	// ConfigRule is a required field
 	ConfigRule *ConfigRule `type:"structure" required:"true"`
 
+	// An array of tag object.
 	Tags []Tag `type:"list"`
 }
 

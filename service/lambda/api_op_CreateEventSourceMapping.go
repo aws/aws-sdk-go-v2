@@ -55,6 +55,8 @@ type CreateEventSourceMappingInput struct {
 	// FunctionName is a required field
 	FunctionName *string `min:"1" type:"string" required:"true"`
 
+	MaximumBatchingWindowInSeconds *int64 `type:"integer"`
+
 	// The position in a stream from which to start reading. Required for Amazon
 	// Kinesis and Amazon DynamoDB Streams sources. AT_TIMESTAMP is only supported
 	// for Amazon Kinesis streams.
@@ -121,6 +123,12 @@ func (s CreateEventSourceMappingInput) MarshalFields(e protocol.FieldEncoder) er
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "FunctionName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.MaximumBatchingWindowInSeconds != nil {
+		v := *s.MaximumBatchingWindowInSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaximumBatchingWindowInSeconds", protocol.Int64Value(v), metadata)
+	}
 	if len(s.StartingPosition) > 0 {
 		v := s.StartingPosition
 
@@ -156,6 +164,8 @@ type CreateEventSourceMappingOutput struct {
 
 	// The result of the last AWS Lambda invocation of your Lambda function.
 	LastProcessingResult *string `type:"string"`
+
+	MaximumBatchingWindowInSeconds *int64 `type:"integer"`
 
 	// The state of the event source mapping. It can be one of the following: Creating,
 	// Enabling, Enabled, Disabling, Disabled, Updating, or Deleting.
@@ -205,6 +215,12 @@ func (s CreateEventSourceMappingOutput) MarshalFields(e protocol.FieldEncoder) e
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LastProcessingResult", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MaximumBatchingWindowInSeconds != nil {
+		v := *s.MaximumBatchingWindowInSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaximumBatchingWindowInSeconds", protocol.Int64Value(v), metadata)
 	}
 	if s.State != nil {
 		v := *s.State

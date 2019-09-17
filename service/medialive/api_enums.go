@@ -1421,9 +1421,10 @@ type H264RateControlMode string
 
 // Enum values for H264RateControlMode
 const (
-	H264RateControlModeCbr  H264RateControlMode = "CBR"
-	H264RateControlModeQvbr H264RateControlMode = "QVBR"
-	H264RateControlModeVbr  H264RateControlMode = "VBR"
+	H264RateControlModeCbr       H264RateControlMode = "CBR"
+	H264RateControlModeMultiplex H264RateControlMode = "MULTIPLEX"
+	H264RateControlModeQvbr      H264RateControlMode = "QVBR"
+	H264RateControlModeVbr       H264RateControlMode = "VBR"
 )
 
 func (enum H264RateControlMode) MarshalValue() (string, error) {
@@ -1557,6 +1558,256 @@ func (enum H264TimecodeInsertionBehavior) MarshalValue() (string, error) {
 }
 
 func (enum H264TimecodeInsertionBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// H265 Adaptive Quantization
+type H265AdaptiveQuantization string
+
+// Enum values for H265AdaptiveQuantization
+const (
+	H265AdaptiveQuantizationHigh   H265AdaptiveQuantization = "HIGH"
+	H265AdaptiveQuantizationHigher H265AdaptiveQuantization = "HIGHER"
+	H265AdaptiveQuantizationLow    H265AdaptiveQuantization = "LOW"
+	H265AdaptiveQuantizationMax    H265AdaptiveQuantization = "MAX"
+	H265AdaptiveQuantizationMedium H265AdaptiveQuantization = "MEDIUM"
+	H265AdaptiveQuantizationOff    H265AdaptiveQuantization = "OFF"
+)
+
+func (enum H265AdaptiveQuantization) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum H265AdaptiveQuantization) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// H265 Alternative Transfer Function
+type H265AlternativeTransferFunction string
+
+// Enum values for H265AlternativeTransferFunction
+const (
+	H265AlternativeTransferFunctionInsert H265AlternativeTransferFunction = "INSERT"
+	H265AlternativeTransferFunctionOmit   H265AlternativeTransferFunction = "OMIT"
+)
+
+func (enum H265AlternativeTransferFunction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum H265AlternativeTransferFunction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// H265 Color Metadata
+type H265ColorMetadata string
+
+// Enum values for H265ColorMetadata
+const (
+	H265ColorMetadataIgnore H265ColorMetadata = "IGNORE"
+	H265ColorMetadataInsert H265ColorMetadata = "INSERT"
+)
+
+func (enum H265ColorMetadata) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum H265ColorMetadata) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// H265 Flicker Aq
+type H265FlickerAq string
+
+// Enum values for H265FlickerAq
+const (
+	H265FlickerAqDisabled H265FlickerAq = "DISABLED"
+	H265FlickerAqEnabled  H265FlickerAq = "ENABLED"
+)
+
+func (enum H265FlickerAq) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum H265FlickerAq) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// H265 Gop Size Units
+type H265GopSizeUnits string
+
+// Enum values for H265GopSizeUnits
+const (
+	H265GopSizeUnitsFrames  H265GopSizeUnits = "FRAMES"
+	H265GopSizeUnitsSeconds H265GopSizeUnits = "SECONDS"
+)
+
+func (enum H265GopSizeUnits) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum H265GopSizeUnits) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// H265 Level
+type H265Level string
+
+// Enum values for H265Level
+const (
+	H265LevelH265Level1    H265Level = "H265_LEVEL_1"
+	H265LevelH265Level2    H265Level = "H265_LEVEL_2"
+	H265LevelH265Level21   H265Level = "H265_LEVEL_2_1"
+	H265LevelH265Level3    H265Level = "H265_LEVEL_3"
+	H265LevelH265Level31   H265Level = "H265_LEVEL_3_1"
+	H265LevelH265Level4    H265Level = "H265_LEVEL_4"
+	H265LevelH265Level41   H265Level = "H265_LEVEL_4_1"
+	H265LevelH265Level5    H265Level = "H265_LEVEL_5"
+	H265LevelH265Level51   H265Level = "H265_LEVEL_5_1"
+	H265LevelH265Level52   H265Level = "H265_LEVEL_5_2"
+	H265LevelH265Level6    H265Level = "H265_LEVEL_6"
+	H265LevelH265Level61   H265Level = "H265_LEVEL_6_1"
+	H265LevelH265Level62   H265Level = "H265_LEVEL_6_2"
+	H265LevelH265LevelAuto H265Level = "H265_LEVEL_AUTO"
+)
+
+func (enum H265Level) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum H265Level) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// H265 Look Ahead Rate Control
+type H265LookAheadRateControl string
+
+// Enum values for H265LookAheadRateControl
+const (
+	H265LookAheadRateControlHigh   H265LookAheadRateControl = "HIGH"
+	H265LookAheadRateControlLow    H265LookAheadRateControl = "LOW"
+	H265LookAheadRateControlMedium H265LookAheadRateControl = "MEDIUM"
+)
+
+func (enum H265LookAheadRateControl) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum H265LookAheadRateControl) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// H265 Profile
+type H265Profile string
+
+// Enum values for H265Profile
+const (
+	H265ProfileMain      H265Profile = "MAIN"
+	H265ProfileMain10bit H265Profile = "MAIN_10BIT"
+)
+
+func (enum H265Profile) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum H265Profile) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// H265 Rate Control Mode
+type H265RateControlMode string
+
+// Enum values for H265RateControlMode
+const (
+	H265RateControlModeCbr  H265RateControlMode = "CBR"
+	H265RateControlModeQvbr H265RateControlMode = "QVBR"
+)
+
+func (enum H265RateControlMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum H265RateControlMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// H265 Scan Type
+type H265ScanType string
+
+// Enum values for H265ScanType
+const (
+	H265ScanTypeProgressive H265ScanType = "PROGRESSIVE"
+)
+
+func (enum H265ScanType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum H265ScanType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// H265 Scene Change Detect
+type H265SceneChangeDetect string
+
+// Enum values for H265SceneChangeDetect
+const (
+	H265SceneChangeDetectDisabled H265SceneChangeDetect = "DISABLED"
+	H265SceneChangeDetectEnabled  H265SceneChangeDetect = "ENABLED"
+)
+
+func (enum H265SceneChangeDetect) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum H265SceneChangeDetect) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// H265 Tier
+type H265Tier string
+
+// Enum values for H265Tier
+const (
+	H265TierHigh H265Tier = "HIGH"
+	H265TierMain H265Tier = "MAIN"
+)
+
+func (enum H265Tier) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum H265Tier) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// H265 Timecode Insertion Behavior
+type H265TimecodeInsertionBehavior string
+
+// Enum values for H265TimecodeInsertionBehavior
+const (
+	H265TimecodeInsertionBehaviorDisabled     H265TimecodeInsertionBehavior = "DISABLED"
+	H265TimecodeInsertionBehaviorPicTimingSei H265TimecodeInsertionBehavior = "PIC_TIMING_SEI"
+)
+
+func (enum H265TimecodeInsertionBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum H265TimecodeInsertionBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -2745,6 +2996,24 @@ func (enum Mp2CodingMode) MarshalValue() (string, error) {
 }
 
 func (enum Mp2CodingMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Ms Smooth H265 Packaging Type
+type MsSmoothH265PackagingType string
+
+// Enum values for MsSmoothH265PackagingType
+const (
+	MsSmoothH265PackagingTypeHev1 MsSmoothH265PackagingType = "HEV1"
+	MsSmoothH265PackagingTypeHvc1 MsSmoothH265PackagingType = "HVC1"
+)
+
+func (enum MsSmoothH265PackagingType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MsSmoothH265PackagingType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

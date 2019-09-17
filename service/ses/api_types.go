@@ -572,13 +572,13 @@ func (s DeliveryOptions) String() string {
 type Destination struct {
 	_ struct{} `type:"structure"`
 
-	// The BCC: field(s) of the message.
+	// The recipients to place on the BCC: line of the message.
 	BccAddresses []string `type:"list"`
 
-	// The CC: field(s) of the message.
+	// The recipients to place on the CC: line of the message.
 	CcAddresses []string `type:"list"`
 
-	// The To: field(s) of the message.
+	// The recipients to place on the To: line of the message.
 	ToAddresses []string `type:"list"`
 }
 
@@ -1785,7 +1785,7 @@ func (s SendDataPoint) String() string {
 type StopAction struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the RuleSet that is being stopped.
+	// The scope of the StopAction. The only acceptable value is RuleSet.
 	//
 	// Scope is a required field
 	Scope StopScope `type:"string" required:"true" enum:"true"`

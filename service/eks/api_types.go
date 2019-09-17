@@ -59,6 +59,9 @@ type Cluster struct {
 	// The endpoint for your Kubernetes API server.
 	Endpoint *string `locationName:"endpoint" type:"string"`
 
+	// The identity provider information for the cluster.
+	Identity *Identity `locationName:"identity" type:"structure"`
+
 	// The logging configuration for your cluster.
 	Logging *Logging `locationName:"logging" type:"structure"`
 
@@ -84,6 +87,11 @@ type Cluster struct {
 
 	// The current status of the cluster.
 	Status ClusterStatus `locationName:"status" type:"string" enum:"true"`
+
+	// The metadata that you apply to the cluster to assist with categorization
+	// and organization. Each tag consists of a key and an optional value, both
+	// of which you define.
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 
 	// The Kubernetes server version for the cluster.
 	Version *string `locationName:"version" type:"string"`
@@ -127,6 +135,12 @@ func (s Cluster) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "endpoint", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.Identity != nil {
+		v := s.Identity
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "identity", v, metadata)
+	}
 	if s.Logging != nil {
 		v := s.Logging
 
@@ -162,6 +176,18 @@ func (s Cluster) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	if s.Version != nil {
 		v := *s.Version
@@ -239,6 +265,31 @@ func (s ErrorDetail) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object representing an identity provider for authentication credentials.
+type Identity struct {
+	_ struct{} `type:"structure"`
+
+	// The OpenID Connect (https://openid.net/connect/) identity provider information
+	// for the cluster.
+	Oidc *OIDC `locationName:"oidc" type:"structure"`
+}
+
+// String returns the string representation
+func (s Identity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Identity) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Oidc != nil {
+		v := s.Oidc
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "oidc", v, metadata)
+	}
+	return nil
+}
+
 // An object representing the enabled or disabled Kubernetes control plane logs
 // for your cluster.
 type LogSetup struct {
@@ -308,6 +359,31 @@ func (s Logging) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	return nil
+}
+
+// An object representing the OpenID Connect (https://openid.net/connect/) identity
+// provider information for the cluster.
+type OIDC struct {
+	_ struct{} `type:"structure"`
+
+	// The issuer URL for the OpenID Connect identity provider.
+	Issuer *string `locationName:"issuer" type:"string"`
+}
+
+// String returns the string representation
+func (s OIDC) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OIDC) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Issuer != nil {
+		v := *s.Issuer
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "issuer", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

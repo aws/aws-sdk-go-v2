@@ -12,10 +12,17 @@ import (
 type DescribeOrganizationConfigRulesInput struct {
 	_ struct{} `type:"structure"`
 
+	// The maximum number of organization config rules returned on each page. If
+	// you do no specify a number, AWS Config uses the default. The default is 100.
 	Limit *int64 `type:"integer"`
 
+	// The nextToken string returned on a previous page that you use to get the
+	// next page of results in a paginated response.
 	NextToken *string `type:"string"`
 
+	// The names of organization config rules for which you want details. If you
+	// do not specify any names, AWS Config returns details for all your organization
+	// config rules.
 	OrganizationConfigRuleNames []string `type:"list"`
 }
 
@@ -27,8 +34,11 @@ func (s DescribeOrganizationConfigRulesInput) String() string {
 type DescribeOrganizationConfigRulesOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The nextToken string returned on a previous page that you use to get the
+	// next page of results in a paginated response.
 	NextToken *string `type:"string"`
 
+	// Retuns a list OrganizationConfigRule objects.
 	OrganizationConfigRules []OrganizationConfigRule `type:"list"`
 }
 
@@ -41,6 +51,15 @@ const opDescribeOrganizationConfigRules = "DescribeOrganizationConfigRules"
 
 // DescribeOrganizationConfigRulesRequest returns a request value for making API operation for
 // AWS Config.
+//
+// Returns a list of organization config rules.
+//
+// When you specify the limit and the next token, you receive a paginated response.
+// Limit and next token are not applicable if you specify organization config
+// rule names. It is only applicable, when you request all the organization
+// config rules.
+//
+// Only a master account can call this API.
 //
 //    // Example sending a request using DescribeOrganizationConfigRulesRequest.
 //    req := client.DescribeOrganizationConfigRulesRequest(params)

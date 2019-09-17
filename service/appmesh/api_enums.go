@@ -2,6 +2,23 @@
 
 package appmesh
 
+type DurationUnit string
+
+// Enum values for DurationUnit
+const (
+	DurationUnitMs DurationUnit = "ms"
+	DurationUnitS  DurationUnit = "s"
+)
+
+func (enum DurationUnit) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DurationUnit) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EgressFilterType string
 
 // Enum values for EgressFilterType
@@ -109,6 +126,22 @@ func (enum RouteStatusCode) MarshalValue() (string, error) {
 }
 
 func (enum RouteStatusCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TcpRetryPolicyEvent string
+
+// Enum values for TcpRetryPolicyEvent
+const (
+	TcpRetryPolicyEventConnectionError TcpRetryPolicyEvent = "connection-error"
+)
+
+func (enum TcpRetryPolicyEvent) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TcpRetryPolicyEvent) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

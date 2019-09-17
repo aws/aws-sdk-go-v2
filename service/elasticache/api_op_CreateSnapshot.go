@@ -17,6 +17,9 @@ type CreateSnapshotInput struct {
 	// cluster.
 	CacheClusterId *string `type:"string"`
 
+	// The ID of the KMS key used to encrypt the snapshot.
+	KmsKeyId *string `type:"string"`
+
 	// The identifier of an existing replication group. The snapshot is created
 	// from this replication group.
 	ReplicationGroupId *string `type:"string"`

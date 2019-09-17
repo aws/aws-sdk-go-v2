@@ -646,7 +646,7 @@ func (s InputLambdaProcessorDescription) String() string {
 type InputLambdaProcessorUpdate struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the new AWS Lambda (https://docs.aws.amazon.com/ambda/)
+	// The Amazon Resource Name (ARN) of the new AWS Lambda (https://docs.aws.amazon.com/lambda/)
 	// function that is used to preprocess the records in the stream.
 	//
 	// To specify an earlier version of the Lambda function than the latest, include
@@ -2259,9 +2259,7 @@ func (s *SourceSchema) Validate() error {
 // AWS resources. If you specify a tag that already exists, the tag value is
 // replaced with the value that you specify in the request. Note that the maximum
 // number of application tags includes system tags. The maximum number of user-defined
-// application tags is 50. For more information, see Using Cost Allocation Tags
-// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-// in the AWS Billing and Cost Management Guide.
+// application tags is 50. For more information, see Using Tagging (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html).
 type Tag struct {
 	_ struct{} `type:"structure"`
 

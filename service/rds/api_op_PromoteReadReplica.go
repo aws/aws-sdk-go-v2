@@ -12,15 +12,17 @@ import (
 type PromoteReadReplicaInput struct {
 	_ struct{} `type:"structure"`
 
-	// The number of days to retain automated backups. Setting this parameter to
-	// a positive number enables backups. Setting this parameter to 0 disables automated
-	// backups.
+	// The number of days for which automated backups are retained. Setting this
+	// parameter to a positive number enables backups. Setting this parameter to
+	// 0 disables automated backups.
 	//
 	// Default: 1
 	//
 	// Constraints:
 	//
-	//    * Must be a value from 0 to 8
+	//    * Must be a value from 0 to 35.
+	//
+	//    * Can't be set to 0 if the DB instance is a source to Read Replicas.
 	BackupRetentionPeriod *int64 `type:"integer"`
 
 	// The DB instance identifier. This value is stored as a lowercase string.
