@@ -30,5 +30,6 @@
   * Fixes bug which threw unexpected EOF error when s3 upload is performed for a file of maximum allowed size
   * Fixes [#316](https://github.com/aws/aws-sdk-go-v2/issues/316)
 * `private/model` : Fixes generated API Reference docs links being invalid ([387](https://github.com/aws/aws-sdk-go-v2/pull/387))
-  * Fixes [#327](https://github.com/aws/aws-sdk-go-v2/issues/327)    
+  * Fixes [#327](https://github.com/aws/aws-sdk-go-v2/issues/327)
+  
   
