@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplicationVersionMessage
 type CreateApplicationVersionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -121,7 +120,6 @@ func (s *CreateApplicationVersionInput) Validate() error {
 }
 
 // Result message wrapping a single description of an application version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationVersionDescriptionMessage
 type CreateApplicationVersionOutput struct {
 	_ struct{} `type:"structure"`
 

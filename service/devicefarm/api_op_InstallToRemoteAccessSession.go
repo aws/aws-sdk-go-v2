@@ -11,7 +11,6 @@ import (
 
 // Represents the request to install an Android application (in .apk format)
 // or an iOS application (in .ipa format) as part of a remote access session.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/InstallToRemoteAccessSessionRequest
 type InstallToRemoteAccessSessionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s *InstallToRemoteAccessSessionInput) Validate() error {
 
 // Represents the response from the server after AWS Device Farm makes a request
 // to install to a remote access session.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/InstallToRemoteAccessSessionResult
 type InstallToRemoteAccessSessionOutput struct {
 	_ struct{} `type:"structure"`
 

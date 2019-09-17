@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for RegisterInstancesWithLoadBalancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RegisterEndPointsInput
 type RegisterInstancesWithLoadBalancerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s *RegisterInstancesWithLoadBalancerInput) Validate() error {
 }
 
 // Contains the output of RegisterInstancesWithLoadBalancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RegisterEndPointsOutput
 type RegisterInstancesWithLoadBalancerOutput struct {
 	_ struct{} `type:"structure"`
 

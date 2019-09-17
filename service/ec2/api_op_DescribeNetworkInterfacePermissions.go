@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for DescribeNetworkInterfacePermissions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfacePermissionsRequest
 type DescribeNetworkInterfacePermissionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s *DescribeNetworkInterfacePermissionsInput) Validate() error {
 }
 
 // Contains the output for DescribeNetworkInterfacePermissions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfacePermissionsResult
 type DescribeNetworkInterfacePermissionsOutput struct {
 	_ struct{} `type:"structure"`
 

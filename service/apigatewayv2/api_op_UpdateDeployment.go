@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/UpdateDeploymentRequest
 type UpdateDeploymentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -73,7 +72,6 @@ func (s UpdateDeploymentInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/UpdateDeploymentResponse
 type UpdateDeploymentOutput struct {
 	_ struct{} `type:"structure"`
 

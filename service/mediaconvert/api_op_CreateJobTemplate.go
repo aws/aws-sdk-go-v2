@@ -13,7 +13,6 @@ import (
 // Send your create job template request with the name of the template and the
 // JSON for the template. The template JSON should include everything in a valid
 // job, except for input location and filename, IAM role, and user metadata.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateJobTemplateRequest
 type CreateJobTemplateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -166,7 +165,6 @@ func (s CreateJobTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Successful create job template requests will return the template JSON.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateJobTemplateResponse
 type CreateJobTemplateOutput struct {
 	_ struct{} `type:"structure"`
 

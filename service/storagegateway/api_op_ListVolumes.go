@@ -14,7 +14,6 @@ import (
 //    * ListVolumesInput$Limit
 //
 //    * ListVolumesInput$Marker
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumesInput
 type ListVolumesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s *ListVolumesInput) Validate() error {
 //    * ListVolumesOutput$Marker
 //
 //    * ListVolumesOutput$VolumeInfos
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumesOutput
 type ListVolumesOutput struct {
 	_ struct{} `type:"structure"`
 

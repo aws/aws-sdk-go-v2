@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateFieldLevelEncryptionConfigRequest
 type UpdateFieldLevelEncryptionConfigInput struct {
 	_ struct{} `type:"structure" payload:"FieldLevelEncryptionConfig"`
 
@@ -81,7 +80,6 @@ func (s UpdateFieldLevelEncryptionConfigInput) MarshalFields(e protocol.FieldEnc
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateFieldLevelEncryptionConfigResult
 type UpdateFieldLevelEncryptionConfigOutput struct {
 	_ struct{} `type:"structure" payload:"FieldLevelEncryption"`
 

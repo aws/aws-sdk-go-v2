@@ -12,7 +12,6 @@ import (
 
 // A complex type that contains information about the request to create a hosted
 // zone.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetAccountLimitRequest
 type GetAccountLimitInput struct {
 	_ struct{} `type:"structure"`
 
@@ -70,7 +69,6 @@ func (s GetAccountLimitInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains the requested limit.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetAccountLimitResponse
 type GetAccountLimitOutput struct {
 	_ struct{} `type:"structure"`
 

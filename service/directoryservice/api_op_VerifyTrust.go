@@ -11,7 +11,6 @@ import (
 
 // Initiates the verification of an existing trust relationship between an AWS
 // Managed Microsoft AD directory and an external domain.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/VerifyTrustRequest
 type VerifyTrustInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *VerifyTrustInput) Validate() error {
 }
 
 // Result of a VerifyTrust request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/VerifyTrustResult
 type VerifyTrustOutput struct {
 	_ struct{} `type:"structure"`
 

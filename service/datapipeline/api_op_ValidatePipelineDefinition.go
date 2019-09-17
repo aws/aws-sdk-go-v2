@@ -11,7 +11,6 @@ import (
 )
 
 // Contains the parameters for ValidatePipelineDefinition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ValidatePipelineDefinitionInput
 type ValidatePipelineDefinitionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -80,7 +79,6 @@ func (s *ValidatePipelineDefinitionInput) Validate() error {
 }
 
 // Contains the output of ValidatePipelineDefinition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ValidatePipelineDefinitionOutput
 type ValidatePipelineDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 

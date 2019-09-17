@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the input to DescribeOrderableDBInstanceOptions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeOrderableDBInstanceOptionsMessage
 type DescribeOrderableDBInstanceOptionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -81,7 +80,6 @@ func (s *DescribeOrderableDBInstanceOptionsInput) Validate() error {
 }
 
 // Represents the output of DescribeOrderableDBInstanceOptions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/OrderableDBInstanceOptionsMessage
 type DescribeOrderableDBInstanceOptionsOutput struct {
 	_ struct{} `type:"structure"`
 

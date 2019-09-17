@@ -11,7 +11,6 @@ import (
 )
 
 // The updates that you want to make to an existing output of an existing flow.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowOutputRequest
 type UpdateFlowOutputInput struct {
 	_ struct{} `type:"structure"`
 
@@ -167,7 +166,6 @@ func (s UpdateFlowOutputInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // The result of a successful UpdateFlowOutput request including the flow ARN
 // and the updated output.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowOutputResponse
 type UpdateFlowOutputOutput struct {
 	_ struct{} `type:"structure"`
 

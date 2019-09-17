@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of CreateDBClusterSnapshot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBClusterSnapshotMessage
 type CreateDBClusterSnapshotInput struct {
 	_ struct{} `type:"structure"`
 
@@ -69,7 +68,6 @@ func (s *CreateDBClusterSnapshotInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBClusterSnapshotResult
 type CreateDBClusterSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 

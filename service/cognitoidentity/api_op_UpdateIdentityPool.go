@@ -11,7 +11,6 @@ import (
 )
 
 // An object representing an Amazon Cognito identity pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/IdentityPool
 type UpdateIdentityPoolInput struct {
 	_ struct{} `type:"structure"`
 
@@ -96,7 +95,6 @@ func (s *UpdateIdentityPoolInput) Validate() error {
 }
 
 // An object representing an Amazon Cognito identity pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/IdentityPool
 type UpdateIdentityPoolOutput struct {
 	_ struct{} `type:"structure"`
 

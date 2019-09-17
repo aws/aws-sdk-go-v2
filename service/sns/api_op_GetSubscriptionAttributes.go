@@ -10,7 +10,6 @@ import (
 )
 
 // Input for GetSubscriptionAttributes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSubscriptionAttributesInput
 type GetSubscriptionAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *GetSubscriptionAttributesInput) Validate() error {
 }
 
 // Response for GetSubscriptionAttributes action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSubscriptionAttributesResponse
 type GetSubscriptionAttributesOutput struct {
 	_ struct{} `type:"structure"`
 

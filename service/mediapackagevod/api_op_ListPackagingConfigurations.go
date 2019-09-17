@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ListPackagingConfigurationsRequest
 type ListPackagingConfigurationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -64,7 +63,6 @@ func (s ListPackagingConfigurationsInput) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ListPackagingConfigurationsResponse
 type ListPackagingConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 

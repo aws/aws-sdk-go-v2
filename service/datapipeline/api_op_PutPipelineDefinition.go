@@ -11,7 +11,6 @@ import (
 )
 
 // Contains the parameters for PutPipelineDefinition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PutPipelineDefinitionInput
 type PutPipelineDefinitionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -81,7 +80,6 @@ func (s *PutPipelineDefinitionInput) Validate() error {
 }
 
 // Contains the output of PutPipelineDefinition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PutPipelineDefinitionOutput
 type PutPipelineDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 

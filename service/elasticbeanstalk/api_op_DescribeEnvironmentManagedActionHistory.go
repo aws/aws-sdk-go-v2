@@ -10,7 +10,6 @@ import (
 )
 
 // Request to list completed and failed managed actions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActionHistoryRequest
 type DescribeEnvironmentManagedActionHistoryInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +45,6 @@ func (s *DescribeEnvironmentManagedActionHistoryInput) Validate() error {
 }
 
 // A result message containing a list of completed and failed managed actions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActionHistoryResult
 type DescribeEnvironmentManagedActionHistoryOutput struct {
 	_ struct{} `type:"structure"`
 

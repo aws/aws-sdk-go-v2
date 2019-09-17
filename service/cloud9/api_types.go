@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Information about an AWS Cloud9 development environment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/Environment
 type Environment struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s Environment) String() string {
 
 // Information about the current creation or deletion lifecycle state of an
 // AWS Cloud9 development environment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/EnvironmentLifecycle
 type EnvironmentLifecycle struct {
 	_ struct{} `type:"structure"`
 
@@ -78,7 +76,6 @@ func (s EnvironmentLifecycle) String() string {
 }
 
 // Information about an environment member for an AWS Cloud9 development environment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/EnvironmentMember
 type EnvironmentMember struct {
 	_ struct{} `type:"structure"`
 

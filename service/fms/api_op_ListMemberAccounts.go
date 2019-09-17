@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListMemberAccountsRequest
 type ListMemberAccountsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s *ListMemberAccountsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListMemberAccountsResponse
 type ListMemberAccountsOutput struct {
 	_ struct{} `type:"structure"`
 

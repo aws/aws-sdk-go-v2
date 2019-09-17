@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackInstancesInput
 type UpdateStackInstancesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -116,7 +115,6 @@ func (s *UpdateStackInstancesInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackInstancesOutput
 type UpdateStackInstancesOutput struct {
 	_ struct{} `type:"structure"`
 

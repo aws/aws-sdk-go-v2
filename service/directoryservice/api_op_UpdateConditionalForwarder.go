@@ -10,7 +10,6 @@ import (
 )
 
 // Updates a conditional forwarder.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateConditionalForwarderRequest
 type UpdateConditionalForwarderInput struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s *UpdateConditionalForwarderInput) Validate() error {
 }
 
 // The result of an UpdateConditionalForwarder request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateConditionalForwarderResult
 type UpdateConditionalForwarderOutput struct {
 	_ struct{} `type:"structure"`
 }

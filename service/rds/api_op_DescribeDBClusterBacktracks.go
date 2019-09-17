@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterBacktracksMessage
 type DescribeDBClusterBacktracksInput struct {
 	_ struct{} `type:"structure"`
 
@@ -97,7 +96,6 @@ func (s *DescribeDBClusterBacktracksInput) Validate() error {
 
 // Contains the result of a successful invocation of the DescribeDBClusterBacktracks
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterBacktrackMessage
 type DescribeDBClusterBacktracksOutput struct {
 	_ struct{} `type:"structure"`
 

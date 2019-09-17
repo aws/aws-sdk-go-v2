@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateLabelingJobRequest
 type CreateLabelingJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -185,7 +184,6 @@ func (s *CreateLabelingJobInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateLabelingJobResponse
 type CreateLabelingJobOutput struct {
 	_ struct{} `type:"structure"`
 

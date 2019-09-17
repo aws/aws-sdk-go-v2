@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListNodesRequest
 type ListNodesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -70,7 +69,6 @@ func (s ListNodesInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about nodes in the cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListNodesResponse
 type ListNodesOutput struct {
 	_ struct{} `type:"structure"`
 

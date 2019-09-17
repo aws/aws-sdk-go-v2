@@ -12,7 +12,6 @@ import (
 
 // Associates the Amazon Resource Name (ARN) of an AWS Certificate Manager (ACM)
 // certificate with an AWS Elemental MediaConvert resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AssociateCertificateRequest
 type AssociateCertificateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +56,6 @@ func (s AssociateCertificateInput) MarshalFields(e protocol.FieldEncoder) error 
 
 // Successful association of Certificate Manager Amazon Resource Name (ARN)
 // with Mediaconvert returns an OK message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AssociateCertificateResponse
 type AssociateCertificateOutput struct {
 	_ struct{} `type:"structure"`
 }

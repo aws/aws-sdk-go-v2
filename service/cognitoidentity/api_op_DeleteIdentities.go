@@ -10,7 +10,6 @@ import (
 )
 
 // Input to the DeleteIdentities action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/DeleteIdentitiesInput
 type DeleteIdentitiesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *DeleteIdentitiesInput) Validate() error {
 }
 
 // Returned in response to a successful DeleteIdentities operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/DeleteIdentitiesResponse
 type DeleteIdentitiesOutput struct {
 	_ struct{} `type:"structure"`
 

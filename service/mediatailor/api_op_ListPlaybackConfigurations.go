@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListPlaybackConfigurationsRequest
 type ListPlaybackConfigurationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s ListPlaybackConfigurationsInput) MarshalFields(e protocol.FieldEncoder) 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListPlaybackConfigurationsResponse
 type ListPlaybackConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
 

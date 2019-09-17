@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyGlobalClusterMessage
 type ModifyGlobalClusterInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +45,6 @@ func (s ModifyGlobalClusterInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyGlobalClusterResult
 type ModifyGlobalClusterOutput struct {
 	_ struct{} `type:"structure"`
 

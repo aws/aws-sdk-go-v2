@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationInputProcessingConfigurationRequest
 type DeleteApplicationInputProcessingConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -69,7 +68,6 @@ func (s *DeleteApplicationInputProcessingConfigurationInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationInputProcessingConfigurationResponse
 type DeleteApplicationInputProcessingConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketEncryptionRequest
 type DeleteBucketEncryptionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +59,6 @@ func (s DeleteBucketEncryptionInput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketEncryptionOutput
 type DeleteBucketEncryptionOutput struct {
 	_ struct{} `type:"structure"`
 }

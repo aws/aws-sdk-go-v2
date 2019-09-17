@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Describes the properties of an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationDescription
 type ApplicationDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +47,6 @@ func (s ApplicationDescription) String() string {
 }
 
 // Application request metrics for an AWS Elastic Beanstalk environment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationMetrics
 type ApplicationMetrics struct {
 	_ struct{} `type:"structure"`
 
@@ -80,7 +78,6 @@ func (s ApplicationMetrics) String() string {
 // that Elastic Beanstalk assumes in order to apply lifecycle settings. The
 // version lifecycle configuration defines lifecycle settings for application
 // versions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationResourceLifecycleConfig
 type ApplicationResourceLifecycleConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -120,7 +117,6 @@ func (s *ApplicationResourceLifecycleConfig) Validate() error {
 }
 
 // Describes the properties of an application version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationVersionDescription
 type ApplicationVersionDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -187,7 +183,6 @@ func (s ApplicationVersionDescription) String() string {
 // When Elastic Beanstalk deletes an application version from its database,
 // you can no longer deploy that version to an environment. The source bundle
 // remains in S3 unless you configure the rule to delete it.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationVersionLifecycleConfig
 type ApplicationVersionLifecycleConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -226,7 +221,6 @@ func (s *ApplicationVersionLifecycleConfig) Validate() error {
 }
 
 // Describes an Auto Scaling launch configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/AutoScalingGroup
 type AutoScalingGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -240,7 +234,6 @@ func (s AutoScalingGroup) String() string {
 }
 
 // Settings for an AWS CodeBuild build.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/BuildConfiguration
 type BuildConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -301,7 +294,6 @@ func (s *BuildConfiguration) Validate() error {
 }
 
 // The builder used to build the custom platform.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Builder
 type Builder struct {
 	_ struct{} `type:"structure"`
 
@@ -315,7 +307,6 @@ func (s Builder) String() string {
 }
 
 // CPU utilization metrics for an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CPUUtilization
 type CPUUtilization struct {
 	_ struct{} `type:"structure"`
 
@@ -370,7 +361,6 @@ func (s CPUUtilization) String() string {
 }
 
 // Describes the possible values for a configuration option.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ConfigurationOptionDescription
 type ConfigurationOptionDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -456,7 +446,6 @@ func (s ConfigurationOptionDescription) String() string {
 // its current value. For a list of possible option values, go to Option Values
 // (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html)
 // in the AWS Elastic Beanstalk Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ConfigurationOptionSetting
 type ConfigurationOptionSetting struct {
 	_ struct{} `type:"structure"`
 
@@ -492,7 +481,6 @@ func (s *ConfigurationOptionSetting) Validate() error {
 }
 
 // Describes the settings for a configuration set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ConfigurationSettingsDescription
 type ConfigurationSettingsDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -546,7 +534,6 @@ func (s ConfigurationSettingsDescription) String() string {
 }
 
 // A custom AMI available to platforms.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CustomAmi
 type CustomAmi struct {
 	_ struct{} `type:"structure"`
 
@@ -563,7 +550,6 @@ func (s CustomAmi) String() string {
 }
 
 // Information about an application version deployment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Deployment
 type Deployment struct {
 	_ struct{} `type:"structure"`
 
@@ -595,7 +581,6 @@ func (s Deployment) String() string {
 }
 
 // Describes the properties of an environment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentDescription
 type EnvironmentDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -701,7 +686,6 @@ func (s EnvironmentDescription) String() string {
 }
 
 // The information retrieved from the Amazon EC2 instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentInfoDescription
 type EnvironmentInfoDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -732,7 +716,6 @@ func (s EnvironmentInfoDescription) String() string {
 // to another environment in the same group. See Environment Manifest (env.yaml)
 // (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html)
 // for details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentLink
 type EnvironmentLink struct {
 	_ struct{} `type:"structure"`
 
@@ -749,7 +732,6 @@ func (s EnvironmentLink) String() string {
 }
 
 // Describes the AWS resources in use by this environment. This data is live.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentResourceDescription
 type EnvironmentResourceDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -785,7 +767,6 @@ func (s EnvironmentResourceDescription) String() string {
 
 // Describes the AWS resources in use by this environment. This data is not
 // live data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentResourcesDescription
 type EnvironmentResourcesDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -799,7 +780,6 @@ func (s EnvironmentResourcesDescription) String() string {
 }
 
 // Describes the properties of an environment tier
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentTier
 type EnvironmentTier struct {
 	_ struct{} `type:"structure"`
 
@@ -835,7 +815,6 @@ func (s EnvironmentTier) String() string {
 }
 
 // Describes an event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EventDescription
 type EventDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -873,7 +852,6 @@ func (s EventDescription) String() string {
 }
 
 // The description of an Amazon EC2 instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Instance
 type Instance struct {
 	_ struct{} `type:"structure"`
 
@@ -888,7 +866,6 @@ func (s Instance) String() string {
 
 // Represents summary information about the health of an instance. For more
 // information, see Health Colors and Statuses (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/InstanceHealthSummary
 type InstanceHealthSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -930,7 +907,6 @@ func (s InstanceHealthSummary) String() string {
 
 // Represents the average latency for the slowest X percent of requests over
 // the last 10 seconds.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Latency
 type Latency struct {
 	_ struct{} `type:"structure"`
 
@@ -973,7 +949,6 @@ func (s Latency) String() string {
 }
 
 // Describes an Auto Scaling launch configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/LaunchConfiguration
 type LaunchConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -987,7 +962,6 @@ func (s LaunchConfiguration) String() string {
 }
 
 // Describes an Amazon EC2 launch template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/LaunchTemplate
 type LaunchTemplate struct {
 	_ struct{} `type:"structure"`
 
@@ -1001,7 +975,6 @@ func (s LaunchTemplate) String() string {
 }
 
 // Describes the properties of a Listener for the LoadBalancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Listener
 type Listener struct {
 	_ struct{} `type:"structure"`
 
@@ -1018,7 +991,6 @@ func (s Listener) String() string {
 }
 
 // Describes a LoadBalancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/LoadBalancer
 type LoadBalancer struct {
 	_ struct{} `type:"structure"`
 
@@ -1032,7 +1004,6 @@ func (s LoadBalancer) String() string {
 }
 
 // Describes the details of a LoadBalancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/LoadBalancerDescription
 type LoadBalancerDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1052,7 +1023,6 @@ func (s LoadBalancerDescription) String() string {
 }
 
 // The record of an upcoming or in-progress managed action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ManagedAction
 type ManagedAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1080,7 +1050,6 @@ func (s ManagedAction) String() string {
 }
 
 // The record of a completed or failed managed action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ManagedActionHistoryItem
 type ManagedActionHistoryItem struct {
 	_ struct{} `type:"structure"`
 
@@ -1116,7 +1085,6 @@ func (s ManagedActionHistoryItem) String() string {
 
 // A lifecycle rule that deletes application versions after the specified number
 // of days.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/MaxAgeRule
 type MaxAgeRule struct {
 	_ struct{} `type:"structure"`
 
@@ -1154,7 +1122,6 @@ func (s *MaxAgeRule) Validate() error {
 
 // A lifecycle rule that deletes the oldest application version when the maximum
 // count is exceeded.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/MaxCountRule
 type MaxCountRule struct {
 	_ struct{} `type:"structure"`
 
@@ -1192,7 +1159,6 @@ func (s *MaxCountRule) Validate() error {
 
 // A regular expression representing a restriction on a string configuration
 // option value.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/OptionRestrictionRegex
 type OptionRestrictionRegex struct {
 	_ struct{} `type:"structure"`
 
@@ -1210,7 +1176,6 @@ func (s OptionRestrictionRegex) String() string {
 }
 
 // A specification identifying an individual configuration option.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/OptionSpecification
 type OptionSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -1243,7 +1208,6 @@ func (s *OptionSpecification) Validate() error {
 }
 
 // Detailed information about a platform.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/PlatformDescription
 type PlatformDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1312,7 +1276,6 @@ func (s PlatformDescription) String() string {
 // The filter is evaluated as the expression:
 //
 // Type Operator Values[i]
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/PlatformFilter
 type PlatformFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -1338,7 +1301,6 @@ func (s PlatformFilter) String() string {
 }
 
 // A framework supported by the custom platform.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/PlatformFramework
 type PlatformFramework struct {
 	_ struct{} `type:"structure"`
 
@@ -1355,7 +1317,6 @@ func (s PlatformFramework) String() string {
 }
 
 // A programming language supported by the platform.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/PlatformProgrammingLanguage
 type PlatformProgrammingLanguage struct {
 	_ struct{} `type:"structure"`
 
@@ -1372,7 +1333,6 @@ func (s PlatformProgrammingLanguage) String() string {
 }
 
 // Detailed information about a platform.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/PlatformSummary
 type PlatformSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1408,7 +1368,6 @@ func (s PlatformSummary) String() string {
 }
 
 // Describes a queue.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Queue
 type Queue struct {
 	_ struct{} `type:"structure"`
 
@@ -1426,7 +1385,6 @@ func (s Queue) String() string {
 
 // The AWS Elastic Beanstalk quota information for a single resource type in
 // an AWS account. It reflects the resource's limits for this account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ResourceQuota
 type ResourceQuota struct {
 	_ struct{} `type:"structure"`
 
@@ -1442,7 +1400,6 @@ func (s ResourceQuota) String() string {
 
 // A set of per-resource AWS Elastic Beanstalk quotas associated with an AWS
 // account. They reflect Elastic Beanstalk resource limits for this account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ResourceQuotas
 type ResourceQuotas struct {
 	_ struct{} `type:"structure"`
 
@@ -1468,7 +1425,6 @@ func (s ResourceQuotas) String() string {
 }
 
 // The bucket and key of an item stored in Amazon S3.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/S3Location
 type S3Location struct {
 	_ struct{} `type:"structure"`
 
@@ -1486,7 +1442,6 @@ func (s S3Location) String() string {
 
 // Detailed health information about an Amazon EC2 instance in your Elastic
 // Beanstalk environment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SingleInstanceHealth
 type SingleInstanceHealth struct {
 	_ struct{} `type:"structure"`
 
@@ -1531,7 +1486,6 @@ func (s SingleInstanceHealth) String() string {
 }
 
 // Describes the solution stack.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SolutionStackDescription
 type SolutionStackDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1548,7 +1502,6 @@ func (s SolutionStackDescription) String() string {
 }
 
 // Location of the source code for an application version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SourceBuildInformation
 type SourceBuildInformation struct {
 	_ struct{} `type:"structure"`
 
@@ -1612,7 +1565,6 @@ func (s *SourceBuildInformation) Validate() error {
 }
 
 // A specification for an environment configuration
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SourceConfiguration
 type SourceConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1647,7 +1599,6 @@ func (s *SourceConfiguration) Validate() error {
 // Represents the percentage of requests over the last 10 seconds that resulted
 // in each type of status code response. For more information, see Status Code
 // Definitions (http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/StatusCodes
 type StatusCodes struct {
 	_ struct{} `type:"structure"`
 
@@ -1674,7 +1625,6 @@ func (s StatusCodes) String() string {
 }
 
 // CPU utilization and load average metrics for an Amazon EC2 instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SystemStatus
 type SystemStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -1692,7 +1642,6 @@ func (s SystemStatus) String() string {
 }
 
 // Describes a tag applied to a resource in an environment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -1725,7 +1674,6 @@ func (s *Tag) Validate() error {
 }
 
 // Describes a trigger.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Trigger
 type Trigger struct {
 	_ struct{} `type:"structure"`
 
@@ -1739,7 +1687,6 @@ func (s Trigger) String() string {
 }
 
 // An error or warning for a desired configuration option value.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ValidationMessage
 type ValidationMessage struct {
 	_ struct{} `type:"structure"`
 

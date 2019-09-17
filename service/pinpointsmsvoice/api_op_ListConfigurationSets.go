@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/ListConfigurationSetsRequest
 type ListConfigurationSetsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -45,7 +44,6 @@ func (s ListConfigurationSetsInput) MarshalFields(e protocol.FieldEncoder) error
 
 // An object that contains information about the configuration sets for your
 // account in the current region.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/ListConfigurationSetsResponse
 type ListConfigurationSetsOutput struct {
 	_ struct{} `type:"structure"`
 

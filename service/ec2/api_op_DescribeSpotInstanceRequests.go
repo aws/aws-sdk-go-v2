@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for DescribeSpotInstanceRequests.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotInstanceRequestsRequest
 type DescribeSpotInstanceRequestsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -147,7 +146,6 @@ func (s DescribeSpotInstanceRequestsInput) String() string {
 }
 
 // Contains the output of DescribeSpotInstanceRequests.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotInstanceRequestsResult
 type DescribeSpotInstanceRequestsOutput struct {
 	_ struct{} `type:"structure"`
 

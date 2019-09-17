@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Information about an Availability Zone.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/AvailabilityZone
 type AvailabilityZone struct {
 	_ struct{} `type:"structure"`
 
@@ -32,7 +31,6 @@ func (s AvailabilityZone) String() string {
 // The EnableLogTypes and DisableLogTypes arrays determine which logs are exported
 // (or not exported) to CloudWatch Logs. The values within these arrays depend
 // on the DB engine that is being used.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CloudwatchLogsExportConfiguration
 type CloudwatchLogsExportConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +47,6 @@ func (s CloudwatchLogsExportConfiguration) String() string {
 }
 
 // Detailed information about a DB cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBCluster
 type DBCluster struct {
 	_ struct{} `type:"structure"`
 
@@ -177,7 +174,6 @@ func (s DBCluster) String() string {
 }
 
 // Contains information about an instance that is part of a DB cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterMember
 type DBClusterMember struct {
 	_ struct{} `type:"structure"`
 
@@ -204,7 +200,6 @@ func (s DBClusterMember) String() string {
 }
 
 // Detailed information about a DB cluster parameter group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterParameterGroup
 type DBClusterParameterGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -230,7 +225,6 @@ func (s DBClusterParameterGroup) String() string {
 
 // Describes an AWS Identity and Access Management (IAM) role that is associated
 // with a DB cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterRole
 type DBClusterRole struct {
 	_ struct{} `type:"structure"`
 
@@ -258,7 +252,6 @@ func (s DBClusterRole) String() string {
 }
 
 // Detailed information about a DB cluster snapshot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterSnapshot
 type DBClusterSnapshot struct {
 	_ struct{} `type:"structure"`
 
@@ -330,7 +323,6 @@ func (s DBClusterSnapshot) String() string {
 //
 // Manual DB cluster snapshot attributes are used to authorize other AWS accounts
 // to restore a manual DB cluster snapshot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterSnapshotAttribute
 type DBClusterSnapshotAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -357,7 +349,6 @@ func (s DBClusterSnapshotAttribute) String() string {
 
 // Detailed information about the attributes that are associated with a DB cluster
 // snapshot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterSnapshotAttributesResult
 type DBClusterSnapshotAttributesResult struct {
 	_ struct{} `type:"structure"`
 
@@ -374,7 +365,6 @@ func (s DBClusterSnapshotAttributesResult) String() string {
 }
 
 // Detailed information about a DB engine version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBEngineVersion
 type DBEngineVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -412,7 +402,6 @@ func (s DBEngineVersion) String() string {
 }
 
 // Detailed information about a DB instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBInstance
 type DBInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -517,7 +506,6 @@ func (s DBInstance) String() string {
 }
 
 // Provides a list of status information for a DB instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBInstanceStatusInfo
 type DBInstanceStatusInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -543,7 +531,6 @@ func (s DBInstanceStatusInfo) String() string {
 }
 
 // Detailed information about a DB subnet group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBSubnetGroup
 type DBSubnetGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -573,7 +560,6 @@ func (s DBSubnetGroup) String() string {
 
 // Network information for accessing a DB cluster or DB instance. Client programs
 // must specify a valid endpoint to access these Amazon DocumentDB resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/Endpoint
 type Endpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -594,7 +580,6 @@ func (s Endpoint) String() string {
 
 // Contains the result of a successful invocation of the DescribeEngineDefaultClusterParameters
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/EngineDefaults
 type EngineDefaults struct {
 	_ struct{} `type:"structure"`
 
@@ -617,7 +602,6 @@ func (s EngineDefaults) String() string {
 }
 
 // Detailed information about an event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/Event
 type Event struct {
 	_ struct{} `type:"structure"`
 
@@ -646,7 +630,6 @@ func (s Event) String() string {
 }
 
 // An event source type, accompanied by one or more event category names.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/EventCategoriesMap
 type EventCategoriesMap struct {
 	_ struct{} `type:"structure"`
 
@@ -667,7 +650,6 @@ func (s EventCategoriesMap) String() string {
 // as IDs.
 //
 // Wildcards are not supported in filters.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/Filter
 type Filter struct {
 	_ struct{} `type:"structure"`
 
@@ -706,7 +688,6 @@ func (s *Filter) Validate() error {
 }
 
 // The options that are available for a DB instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/OrderableDBInstanceOption
 type OrderableDBInstanceOption struct {
 	_ struct{} `type:"structure"`
 
@@ -735,7 +716,6 @@ func (s OrderableDBInstanceOption) String() string {
 }
 
 // Detailed information about an individual parameter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/Parameter
 type Parameter struct {
 	_ struct{} `type:"structure"`
 
@@ -779,7 +759,6 @@ func (s Parameter) String() string {
 
 // A list of the log types whose configuration is still pending. These log types
 // are in the process of being activated or deactivated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/PendingCloudwatchLogsExports
 type PendingCloudwatchLogsExports struct {
 	_ struct{} `type:"structure"`
 
@@ -798,7 +777,6 @@ func (s PendingCloudwatchLogsExports) String() string {
 }
 
 // Provides information about a pending maintenance action for a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/PendingMaintenanceAction
 type PendingMaintenanceAction struct {
 	_ struct{} `type:"structure"`
 
@@ -835,7 +813,6 @@ func (s PendingMaintenanceAction) String() string {
 
 // One or more modified settings for a DB instance. These modified settings
 // have been requested, but haven't been applied yet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/PendingModifiedValues
 type PendingModifiedValues struct {
 	_ struct{} `type:"structure"`
 
@@ -897,7 +874,6 @@ func (s PendingModifiedValues) String() string {
 }
 
 // Represents the output of ApplyPendingMaintenanceAction.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ResourcePendingMaintenanceActions
 type ResourcePendingMaintenanceActions struct {
 	_ struct{} `type:"structure"`
 
@@ -916,7 +892,6 @@ func (s ResourcePendingMaintenanceActions) String() string {
 }
 
 // Detailed information about a subnet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/Subnet
 type Subnet struct {
 	_ struct{} `type:"structure"`
 
@@ -937,7 +912,6 @@ func (s Subnet) String() string {
 
 // Metadata assigned to an Amazon DocumentDB resource consisting of a key-value
 // pair.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -960,7 +934,6 @@ func (s Tag) String() string {
 }
 
 // The version of the database engine that a DB instance can be upgraded to.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/UpgradeTarget
 type UpgradeTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -988,7 +961,6 @@ func (s UpgradeTarget) String() string {
 
 // Used as a response element for queries on virtual private cloud (VPC) security
 // group membership.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/VpcSecurityGroupMembership
 type VpcSecurityGroupMembership struct {
 	_ struct{} `type:"structure"`
 

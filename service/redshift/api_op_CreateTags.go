@@ -12,7 +12,6 @@ import (
 )
 
 // Contains the output from the CreateTags action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateTagsMessage
 type CreateTagsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s *CreateTagsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateTagsOutput
 type CreateTagsOutput struct {
 	_ struct{} `type:"structure"`
 }

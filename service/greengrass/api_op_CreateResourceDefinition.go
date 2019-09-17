@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinitionRequest
 type CreateResourceDefinitionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -82,7 +81,6 @@ func (s CreateResourceDefinitionInput) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinitionResponse
 type CreateResourceDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 

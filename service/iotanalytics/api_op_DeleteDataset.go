@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DeleteDatasetRequest
 type DeleteDatasetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s DeleteDatasetInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DeleteDatasetOutput
 type DeleteDatasetOutput struct {
 	_ struct{} `type:"structure"`
 }

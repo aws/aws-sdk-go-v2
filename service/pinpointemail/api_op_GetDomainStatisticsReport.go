@@ -12,7 +12,6 @@ import (
 )
 
 // A request to obtain deliverability metrics for a domain.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDomainStatisticsReportRequest
 type GetDomainStatisticsReportInput struct {
 	_ struct{} `type:"structure"`
 
@@ -91,7 +90,6 @@ func (s GetDomainStatisticsReportInput) MarshalFields(e protocol.FieldEncoder) e
 
 // An object that includes statistics that are related to the domain that you
 // specified.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDomainStatisticsReportResponse
 type GetDomainStatisticsReportOutput struct {
 	_ struct{} `type:"structure"`
 

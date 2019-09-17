@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/GetIntegrationResponsesRequest
 type GetIntegrationResponsesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -79,7 +78,6 @@ func (s GetIntegrationResponsesInput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/GetIntegrationResponsesResponse
 type GetIntegrationResponsesOutput struct {
 	_ struct{} `type:"structure"`
 

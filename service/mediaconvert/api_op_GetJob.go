@@ -11,7 +11,6 @@ import (
 )
 
 // Query a job by sending a request with the job ID.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetJobRequest
 type GetJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s GetJobInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Successful get job requests will return an OK message and the job JSON.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetJobResponse
 type GetJobOutput struct {
 	_ struct{} `type:"structure"`
 

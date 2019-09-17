@@ -11,7 +11,6 @@ import (
 
 // Represents the request to get the header information for the .csv file for
 // the user import job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetCSVHeaderRequest
 type GetCSVHeaderInput struct {
 	_ struct{} `type:"structure"`
 
@@ -45,7 +44,6 @@ func (s *GetCSVHeaderInput) Validate() error {
 
 // Represents the response from the server to the request to get the header
 // information for the .csv file for the user import job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetCSVHeaderResponse
 type GetCSVHeaderOutput struct {
 	_ struct{} `type:"structure"`
 

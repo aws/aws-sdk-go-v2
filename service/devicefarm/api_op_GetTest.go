@@ -10,7 +10,6 @@ import (
 )
 
 // Represents a request to the get test operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetTestRequest
 type GetTestInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *GetTestInput) Validate() error {
 }
 
 // Represents the result of a get test request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetTestResult
 type GetTestOutput struct {
 	_ struct{} `type:"structure"`
 

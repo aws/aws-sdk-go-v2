@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Configuration options for configure Cognito streams.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/CognitoStreams
 type CognitoStreams struct {
 	_ struct{} `type:"structure"`
 
@@ -84,7 +83,6 @@ func (s CognitoStreams) MarshalFields(e protocol.FieldEncoder) error {
 // a particular entity in an application (like a saved game). Datasets are automatically
 // created if they don't exist. Data is synced by dataset, and a dataset can
 // hold up to 1MB of key-value pairs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/Dataset
 type Dataset struct {
 	_ struct{} `type:"structure"`
 
@@ -167,7 +165,6 @@ func (s Dataset) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Usage information for the identity pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/IdentityPoolUsage
 type IdentityPoolUsage struct {
 	_ struct{} `type:"structure"`
 
@@ -221,7 +218,6 @@ func (s IdentityPoolUsage) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Usage information for the identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/IdentityUsage
 type IdentityUsage struct {
 	_ struct{} `type:"structure"`
 
@@ -285,7 +281,6 @@ func (s IdentityUsage) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Configuration options to be applied to the identity pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/PushSync
 type PushSync struct {
 	_ struct{} `type:"structure"`
 
@@ -338,7 +333,6 @@ func (s PushSync) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The basic data structure of a dataset.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/Record
 type Record struct {
 	_ struct{} `type:"structure"`
 
@@ -410,7 +404,6 @@ func (s Record) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An update operation for a record.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/RecordPatch
 type RecordPatch struct {
 	_ struct{} `type:"structure"`
 

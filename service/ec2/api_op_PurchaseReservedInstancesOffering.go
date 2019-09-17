@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for PurchaseReservedInstancesOffering.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseReservedInstancesOfferingRequest
 type PurchaseReservedInstancesOfferingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +59,6 @@ func (s *PurchaseReservedInstancesOfferingInput) Validate() error {
 }
 
 // Contains the output of PurchaseReservedInstancesOffering.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseReservedInstancesOfferingResult
 type PurchaseReservedInstancesOfferingOutput struct {
 	_ struct{} `type:"structure"`
 

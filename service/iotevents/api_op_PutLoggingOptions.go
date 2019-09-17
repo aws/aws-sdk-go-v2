@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/PutLoggingOptionsRequest
 type PutLoggingOptionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s PutLoggingOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/PutLoggingOptionsOutput
 type PutLoggingOptionsOutput struct {
 	_ struct{} `type:"structure"`
 }

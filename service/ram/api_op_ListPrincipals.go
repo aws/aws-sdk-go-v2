@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPrincipalsRequest
 type ListPrincipalsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -121,7 +120,6 @@ func (s ListPrincipalsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPrincipalsResponse
 type ListPrincipalsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Information about the AccessLog attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AccessLog
 type AccessLog struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +56,6 @@ func (s *AccessLog) Validate() error {
 }
 
 // This data type is reserved.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AdditionalAttribute
 type AdditionalAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -74,7 +72,6 @@ func (s AdditionalAttribute) String() string {
 }
 
 // Information about a policy for application-controlled session stickiness.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AppCookieStickinessPolicy
 type AppCookieStickinessPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -92,7 +89,6 @@ func (s AppCookieStickinessPolicy) String() string {
 }
 
 // Information about the configuration of an EC2 instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/BackendServerDescription
 type BackendServerDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -109,7 +105,6 @@ func (s BackendServerDescription) String() string {
 }
 
 // Information about the ConnectionDraining attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ConnectionDraining
 type ConnectionDraining struct {
 	_ struct{} `type:"structure"`
 
@@ -143,7 +138,6 @@ func (s *ConnectionDraining) Validate() error {
 }
 
 // Information about the ConnectionSettings attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ConnectionSettings
 type ConnectionSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -177,7 +171,6 @@ func (s *ConnectionSettings) Validate() error {
 }
 
 // Information about the CrossZoneLoadBalancing attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CrossZoneLoadBalancing
 type CrossZoneLoadBalancing struct {
 	_ struct{} `type:"structure"`
 
@@ -207,7 +200,6 @@ func (s *CrossZoneLoadBalancing) Validate() error {
 }
 
 // Information about a health check.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/HealthCheck
 type HealthCheck struct {
 	_ struct{} `type:"structure"`
 
@@ -308,7 +300,6 @@ func (s *HealthCheck) Validate() error {
 }
 
 // The ID of an EC2 instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/Instance
 type Instance struct {
 	_ struct{} `type:"structure"`
 
@@ -322,7 +313,6 @@ func (s Instance) String() string {
 }
 
 // Information about the state of an EC2 instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/InstanceState
 type InstanceState struct {
 	_ struct{} `type:"structure"`
 
@@ -378,7 +368,6 @@ func (s InstanceState) String() string {
 }
 
 // Information about a policy for duration-based session stickiness.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/LBCookieStickinessPolicy
 type LBCookieStickinessPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -398,7 +387,6 @@ func (s LBCookieStickinessPolicy) String() string {
 }
 
 // Information about an Elastic Load Balancing resource limit for your AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/Limit
 type Limit struct {
 	_ struct{} `type:"structure"`
 
@@ -425,7 +413,6 @@ func (s Limit) String() string {
 // For information about the protocols and the ports supported by Elastic Load
 // Balancing, see Listeners for Your Classic Load Balancer (http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html)
 // in the Classic Load Balancers Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/Listener
 type Listener struct {
 	_ struct{} `type:"structure"`
 
@@ -495,7 +482,6 @@ func (s *Listener) Validate() error {
 }
 
 // The policies enabled for a listener.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ListenerDescription
 type ListenerDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -512,7 +498,6 @@ func (s ListenerDescription) String() string {
 }
 
 // The attributes for a load balancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/LoadBalancerAttributes
 type LoadBalancerAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -586,7 +571,6 @@ func (s *LoadBalancerAttributes) Validate() error {
 }
 
 // Information about a load balancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/LoadBalancerDescription
 type LoadBalancerDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -658,7 +642,6 @@ func (s LoadBalancerDescription) String() string {
 }
 
 // The policies for a load balancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/Policies
 type Policies struct {
 	_ struct{} `type:"structure"`
 
@@ -678,7 +661,6 @@ func (s Policies) String() string {
 }
 
 // Information about a policy attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/PolicyAttribute
 type PolicyAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -695,7 +677,6 @@ func (s PolicyAttribute) String() string {
 }
 
 // Information about a policy attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/PolicyAttributeDescription
 type PolicyAttributeDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -712,7 +693,6 @@ func (s PolicyAttributeDescription) String() string {
 }
 
 // Information about a policy attribute type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/PolicyAttributeTypeDescription
 type PolicyAttributeTypeDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -748,7 +728,6 @@ func (s PolicyAttributeTypeDescription) String() string {
 }
 
 // Information about a policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/PolicyDescription
 type PolicyDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -768,7 +747,6 @@ func (s PolicyDescription) String() string {
 }
 
 // Information about a policy type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/PolicyTypeDescription
 type PolicyTypeDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -789,7 +767,6 @@ func (s PolicyTypeDescription) String() string {
 }
 
 // Information about a source security group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SourceSecurityGroup
 type SourceSecurityGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -806,7 +783,6 @@ func (s SourceSecurityGroup) String() string {
 }
 
 // Information about a tag.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -842,7 +818,6 @@ func (s *Tag) Validate() error {
 }
 
 // The tags associated with a load balancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/TagDescription
 type TagDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -859,7 +834,6 @@ func (s TagDescription) String() string {
 }
 
 // The key of a tag.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/TagKeyOnly
 type TagKeyOnly struct {
 	_ struct{} `type:"structure"`
 

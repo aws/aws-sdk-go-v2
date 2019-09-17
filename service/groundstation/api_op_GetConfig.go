@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetConfigRequest
 type GetConfigInput struct {
 	_ struct{} `type:"structure"`
 
@@ -62,7 +61,6 @@ func (s GetConfigInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetConfigResponse
 type GetConfigOutput struct {
 	_ struct{} `type:"structure"`
 

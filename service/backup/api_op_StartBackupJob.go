@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartBackupJobInput
 type StartBackupJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -154,7 +153,6 @@ func (s StartBackupJobInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartBackupJobOutput
 type StartBackupJobOutput struct {
 	_ struct{} `type:"structure"`
 

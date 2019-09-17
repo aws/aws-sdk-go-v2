@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeSnapshotSchedulesMessage
 type DescribeSnapshotSchedulesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -45,7 +44,6 @@ func (s DescribeSnapshotSchedulesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeSnapshotSchedulesOutputMessage
 type DescribeSnapshotSchedulesOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 )
 
 // Information required to update a Greengrass core's connectivity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateConnectivityInfoRequest
 type UpdateConnectivityInfoInput struct {
 	_ struct{} `type:"structure"`
 
@@ -66,7 +65,6 @@ func (s UpdateConnectivityInfoInput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateConnectivityInfoResponse
 type UpdateConnectivityInfoOutput struct {
 	_ struct{} `type:"structure"`
 

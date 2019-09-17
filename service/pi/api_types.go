@@ -14,7 +14,6 @@ var _ = awsutil.Prettify
 
 // A timestamp, and a single numerical value, which together represent a measurement
 // at a particular point in time.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/DataPoint
 type DataPoint struct {
 	_ struct{} `type:"structure"`
 
@@ -37,7 +36,6 @@ func (s DataPoint) String() string {
 // A logical grouping of Performance Insights metrics for a related subject
 // area. For example, the db.sql dimension group consists of the following dimensions:
 // db.sql.id, db.sql.db_id, db.sql.statement, and db.sql.tokenized_id.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/DimensionGroup
 type DimensionGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -124,7 +122,6 @@ func (s *DimensionGroup) Validate() error {
 
 // An array of descriptions and aggregated values for each dimension within
 // a dimension group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/DimensionKeyDescription
 type DimensionKeyDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -147,7 +144,6 @@ func (s DimensionKeyDescription) String() string {
 
 // A time-ordered series of data points, correpsonding to a dimension of a Performance
 // Insights metric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/MetricKeyDataPoints
 type MetricKeyDataPoints struct {
 	_ struct{} `type:"structure"`
 
@@ -169,7 +165,6 @@ func (s MetricKeyDataPoints) String() string {
 // data points for that metric. You can optionally request that the data points
 // be aggregated by dimension group ( GroupBy), and return only those data points
 // that match your criteria (Filter).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/MetricQuery
 type MetricQuery struct {
 	_ struct{} `type:"structure"`
 
@@ -228,7 +223,6 @@ func (s *MetricQuery) Validate() error {
 
 // If PartitionBy was specified in a DescribeDimensionKeys request, the dimensions
 // are returned in an array. Each element in the array specifies one dimension.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/ResponsePartitionKey
 type ResponsePartitionKey struct {
 	_ struct{} `type:"structure"`
 
@@ -245,7 +239,6 @@ func (s ResponsePartitionKey) String() string {
 
 // An object describing a Performance Insights metric and one or more dimensions
 // for that metric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/ResponseResourceMetricKey
 type ResponseResourceMetricKey struct {
 	_ struct{} `type:"structure"`
 

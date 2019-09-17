@@ -15,7 +15,6 @@ var _ = awsutil.Prettify
 
 // Information about a bulk deployment. You cannot start a new bulk deployment
 // while another one is still running or in a non-terminal state.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/BulkDeployment
 type BulkDeployment struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s BulkDeployment) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Relevant metrics on input records processed during bulk deployment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/BulkDeploymentMetrics
 type BulkDeploymentMetrics struct {
 	_ struct{} `type:"structure"`
 
@@ -108,7 +106,6 @@ func (s BulkDeploymentMetrics) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about an individual group deployment in a bulk deployment operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/BulkDeploymentResult
 type BulkDeploymentResult struct {
 	_ struct{} `type:"structure"`
 
@@ -203,7 +200,6 @@ func (s BulkDeploymentResult) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a Greengrass core's connectivity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ConnectivityInfo
 type ConnectivityInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -257,7 +253,6 @@ func (s ConnectivityInfo) MarshalFields(e protocol.FieldEncoder) error {
 // Information about a connector. Connectors run on the Greengrass core and
 // contain built-in integration with local infrastructure, device protocols,
 // AWS, and other cloud services.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Connector
 type Connector struct {
 	_ struct{} `type:"structure"`
 
@@ -331,7 +326,6 @@ func (s Connector) MarshalFields(e protocol.FieldEncoder) error {
 
 // Information about the connector definition version, which is a container
 // for connectors.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ConnectorDefinitionVersion
 type ConnectorDefinitionVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -380,7 +374,6 @@ func (s ConnectorDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // Information about a core.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Core
 type Core struct {
 	_ struct{} `type:"structure"`
 
@@ -461,7 +454,6 @@ func (s Core) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a core definition version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CoreDefinitionVersion
 type CoreDefinitionVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -509,7 +501,6 @@ func (s CoreDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a definition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DefinitionInformation
 type DefinitionInformation struct {
 	_ struct{} `type:"structure"`
 
@@ -603,7 +594,6 @@ func (s DefinitionInformation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a deployment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Deployment
 type Deployment struct {
 	_ struct{} `type:"structure"`
 
@@ -664,7 +654,6 @@ func (s Deployment) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a device.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Device
 type Device struct {
 	_ struct{} `type:"structure"`
 
@@ -747,7 +736,6 @@ func (s Device) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a device definition version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeviceDefinitionVersion
 type DeviceDefinitionVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -795,7 +783,6 @@ func (s DeviceDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Details about the error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ErrorDetail
 type ErrorDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -829,7 +816,6 @@ func (s ErrorDetail) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a Lambda function.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Function
 type Function struct {
 	_ struct{} `type:"structure"`
 
@@ -895,7 +881,6 @@ func (s Function) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The configuration of the Lambda function.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionConfiguration
 type FunctionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -995,7 +980,6 @@ func (s FunctionConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The environment configuration of the function.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionConfigurationEnvironment
 type FunctionConfigurationEnvironment struct {
 	_ struct{} `type:"structure"`
 
@@ -1083,7 +1067,6 @@ func (s FunctionConfigurationEnvironment) MarshalFields(e protocol.FieldEncoder)
 
 // The default configuration that applies to all Lambda functions in the group.
 // Individual Lambda functions can override these settings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionDefaultConfig
 type FunctionDefaultConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1108,7 +1091,6 @@ func (s FunctionDefaultConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Configuration information that specifies how a Lambda function runs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionDefaultExecutionConfig
 type FunctionDefaultExecutionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1151,7 +1133,6 @@ func (s FunctionDefaultExecutionConfig) MarshalFields(e protocol.FieldEncoder) e
 }
 
 // Information about a function definition version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionDefinitionVersion
 type FunctionDefinitionVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -1209,7 +1190,6 @@ func (s FunctionDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // Configuration information that specifies how a Lambda function runs.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionExecutionConfig
 type FunctionExecutionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1257,7 +1237,6 @@ func (s FunctionExecutionConfig) MarshalFields(e protocol.FieldEncoder) error {
 // to minimize the risk of unintended changes or malicious attacks. To run as
 // root, you must set ''IsolationMode'' to ''NoContainer'' and update config.json
 // in ''greengrass-root/config'' to set ''allowFunctionsToRunAsRoot'' to ''yes''.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionRunAsConfig
 type FunctionRunAsConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1291,7 +1270,6 @@ func (s FunctionRunAsConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a certificate authority for a group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GroupCertificateAuthorityProperties
 type GroupCertificateAuthorityProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -1325,7 +1303,6 @@ func (s GroupCertificateAuthorityProperties) MarshalFields(e protocol.FieldEncod
 }
 
 // Information about a group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GroupInformation
 type GroupInformation struct {
 	_ struct{} `type:"structure"`
 
@@ -1404,7 +1381,6 @@ func (s GroupInformation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Group owner related settings for local resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GroupOwnerSetting
 type GroupOwnerSetting struct {
 	_ struct{} `type:"structure"`
 
@@ -1441,7 +1417,6 @@ func (s GroupOwnerSetting) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a group version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GroupVersion
 type GroupVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -1520,7 +1495,6 @@ func (s GroupVersion) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Attributes that define a local device resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/LocalDeviceResourceData
 type LocalDeviceResourceData struct {
 	_ struct{} `type:"structure"`
 
@@ -1555,7 +1529,6 @@ func (s LocalDeviceResourceData) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Attributes that define a local volume resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/LocalVolumeResourceData
 type LocalVolumeResourceData struct {
 	_ struct{} `type:"structure"`
 
@@ -1600,7 +1573,6 @@ func (s LocalVolumeResourceData) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a logger
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Logger
 type Logger struct {
 	_ struct{} `type:"structure"`
 
@@ -1695,7 +1667,6 @@ func (s Logger) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a logger definition version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/LoggerDefinitionVersion
 type LoggerDefinitionVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -1743,7 +1714,6 @@ func (s LoggerDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Resource
 type Resource struct {
 	_ struct{} `type:"structure"`
 
@@ -1818,7 +1788,6 @@ func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A policy used by the function to access a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResourceAccessPolicy
 type ResourceAccessPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -1873,7 +1842,6 @@ func (s ResourceAccessPolicy) MarshalFields(e protocol.FieldEncoder) error {
 // supported resource data types: ''LocalDeviceResourceData'', ''LocalVolumeResourceData'',
 // ''SageMakerMachineLearningModelResourceData'', ''S3MachineLearningModelResourceData'',
 // ''SecretsManagerSecretResourceData''.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResourceDataContainer
 type ResourceDataContainer struct {
 	_ struct{} `type:"structure"`
 
@@ -1935,7 +1903,6 @@ func (s ResourceDataContainer) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a resource definition version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResourceDefinitionVersion
 type ResourceDefinitionVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -1983,7 +1950,6 @@ func (s ResourceDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // Attributes that define an Amazon S3 machine learning resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/S3MachineLearningModelResourceData
 type S3MachineLearningModelResourceData struct {
 	_ struct{} `type:"structure"`
 
@@ -2018,7 +1984,6 @@ func (s S3MachineLearningModelResourceData) MarshalFields(e protocol.FieldEncode
 }
 
 // Attributes that define an Amazon SageMaker machine learning resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/SageMakerMachineLearningModelResourceData
 type SageMakerMachineLearningModelResourceData struct {
 	_ struct{} `type:"structure"`
 
@@ -2055,7 +2020,6 @@ func (s SageMakerMachineLearningModelResourceData) MarshalFields(e protocol.Fiel
 // AWS Secrets Manager. AWS IoT Greengrass stores a local, encrypted copy of
 // the secret on the Greengrass core, where it can be securely accessed by connectors
 // and Lambda functions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/SecretsManagerSecretResourceData
 type SecretsManagerSecretResourceData struct {
 	_ struct{} `type:"structure"`
 
@@ -2098,7 +2062,6 @@ func (s SecretsManagerSecretResourceData) MarshalFields(e protocol.FieldEncoder)
 }
 
 // Information about a subscription.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Subscription
 type Subscription struct {
 	_ struct{} `type:"structure"`
 
@@ -2188,7 +2151,6 @@ func (s Subscription) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a subscription definition version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/SubscriptionDefinitionVersion
 type SubscriptionDefinitionVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -2236,7 +2198,6 @@ func (s SubscriptionDefinitionVersion) MarshalFields(e protocol.FieldEncoder) er
 }
 
 // Information about a version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/VersionInformation
 type VersionInformation struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // Request to list an environment's upcoming and in-progress managed actions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActionsRequest
 type DescribeEnvironmentManagedActionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -30,7 +29,6 @@ func (s DescribeEnvironmentManagedActionsInput) String() string {
 }
 
 // The result message containing a list of managed actions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActionsResult
 type DescribeEnvironmentManagedActionsOutput struct {
 	_ struct{} `type:"structure"`
 

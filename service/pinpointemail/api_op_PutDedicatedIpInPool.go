@@ -11,7 +11,6 @@ import (
 )
 
 // A request to move a dedicated IP address to a dedicated IP pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutDedicatedIpInPoolRequest
 type PutDedicatedIpInPoolInput struct {
 	_ struct{} `type:"structure"`
 
@@ -73,7 +72,6 @@ func (s PutDedicatedIpInPoolInput) MarshalFields(e protocol.FieldEncoder) error 
 
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutDedicatedIpInPoolResponse
 type PutDedicatedIpInPoolOutput struct {
 	_ struct{} `type:"structure"`
 }

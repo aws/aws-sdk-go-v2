@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // An object representing an AWS Batch array job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ArrayProperties
 type ArrayProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -39,7 +38,6 @@ func (s ArrayProperties) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the array properties of a job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ArrayPropertiesDetail
 type ArrayPropertiesDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -90,7 +88,6 @@ func (s ArrayPropertiesDetail) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the array properties of a job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ArrayPropertiesSummary
 type ArrayPropertiesSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -125,7 +122,6 @@ func (s ArrayPropertiesSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the details of a container that is part of a job attempt.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/AttemptContainerDetail
 type AttemptContainerDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -207,7 +203,6 @@ func (s AttemptContainerDetail) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a job attempt.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/AttemptDetail
 type AttemptDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -264,7 +259,6 @@ func (s AttemptDetail) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing an AWS Batch compute environment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeEnvironmentDetail
 type ComputeEnvironmentDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -384,7 +378,6 @@ func (s ComputeEnvironmentDetail) MarshalFields(e protocol.FieldEncoder) error {
 // a queue. Compute environments are tried in ascending order. For example,
 // if two compute environments are associated with a job queue, the compute
 // environment with a lower order integer value is tried for job placement first.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeEnvironmentOrder
 type ComputeEnvironmentOrder struct {
 	_ struct{} `type:"structure"`
 
@@ -440,7 +433,6 @@ func (s ComputeEnvironmentOrder) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing an AWS Batch compute resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeResource
 type ComputeResource struct {
 	_ struct{} `type:"structure"`
 
@@ -697,7 +689,6 @@ func (s ComputeResource) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object representing the attributes of a compute environment that can be
 // updated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeResourceUpdate
 type ComputeResourceUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -740,7 +731,6 @@ func (s ComputeResourceUpdate) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the details of a container that is part of a job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerDetail
 type ContainerDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -1001,7 +991,6 @@ func (s ContainerDetail) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The overrides that should be sent to a container.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerOverrides
 type ContainerOverrides struct {
 	_ struct{} `type:"structure"`
 
@@ -1118,7 +1107,6 @@ func (s ContainerOverrides) MarshalFields(e protocol.FieldEncoder) error {
 
 // Container properties are used in job definitions to describe the container
 // that is launched as part of a job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerProperties
 type ContainerProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -1404,7 +1392,6 @@ func (s ContainerProperties) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing summary details of a container within a job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerSummary
 type ContainerSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1439,7 +1426,6 @@ func (s ContainerSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a container instance host device.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/Device
 type Device struct {
 	_ struct{} `type:"structure"`
 
@@ -1509,7 +1495,6 @@ func (s Device) MarshalFields(e protocol.FieldEncoder) error {
 // and where it is stored. If this parameter is empty, then the Docker daemon
 // assigns a host path for your data volume, but the data is not guaranteed
 // to persist after the containers associated with it stop running.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/Host
 type Host struct {
 	_ struct{} `type:"structure"`
 
@@ -1540,7 +1525,6 @@ func (s Host) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing an AWS Batch job definition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobDefinition
 type JobDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -1668,7 +1652,6 @@ func (s JobDefinition) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing an AWS Batch job dependency.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobDependency
 type JobDependency struct {
 	_ struct{} `type:"structure"`
 
@@ -1702,7 +1685,6 @@ func (s JobDependency) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing an AWS Batch job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobDetail
 type JobDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -1926,7 +1908,6 @@ func (s JobDetail) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the details of an AWS Batch job queue.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobQueueDetail
 type JobQueueDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -2024,7 +2005,6 @@ func (s JobQueueDetail) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing summary details of a job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobSummary
 type JobSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -2141,7 +2121,6 @@ func (s JobSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing a job timeout configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobTimeout
 type JobTimeout struct {
 	_ struct{} `type:"structure"`
 
@@ -2167,7 +2146,6 @@ func (s JobTimeout) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A key-value pair object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/KeyValuePair
 type KeyValuePair struct {
 	_ struct{} `type:"structure"`
 
@@ -2205,7 +2183,6 @@ func (s KeyValuePair) MarshalFields(e protocol.FieldEncoder) error {
 // An object representing a launch template associated with a compute resource.
 // You must specify either the launch template ID or launch template name in
 // the request, but not both.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/LaunchTemplateSpecification
 type LaunchTemplateSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -2251,7 +2228,6 @@ func (s LaunchTemplateSpecification) MarshalFields(e protocol.FieldEncoder) erro
 
 // Linux-specific modifications that are applied to the container, such as details
 // for device mappings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/LinuxParameters
 type LinuxParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -2304,7 +2280,6 @@ func (s LinuxParameters) MarshalFields(e protocol.FieldEncoder) error {
 // Details on a Docker volume mount point that is used in a job's container
 // properties. This parameter maps to Volumes in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.19/#create-a-container)
 // section of the Docker Remote API and the --volume option to docker run.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/MountPoint
 type MountPoint struct {
 	_ struct{} `type:"structure"`
 
@@ -2349,7 +2324,6 @@ func (s MountPoint) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object representing the elastic network interface for a multi-node parallel
 // job node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/NetworkInterface
 type NetworkInterface struct {
 	_ struct{} `type:"structure"`
 
@@ -2392,7 +2366,6 @@ func (s NetworkInterface) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the details of a multi-node parallel job node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/NodeDetails
 type NodeDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -2430,7 +2403,6 @@ func (s NodeDetails) MarshalFields(e protocol.FieldEncoder) error {
 
 // Object representing any node overrides to a job definition that is used in
 // a SubmitJob API operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/NodeOverrides
 type NodeOverrides struct {
 	_ struct{} `type:"structure"`
 
@@ -2498,7 +2470,6 @@ func (s NodeOverrides) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object representing the node properties of a multi-node parallel job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/NodeProperties
 type NodeProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -2585,7 +2556,6 @@ func (s NodeProperties) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object representing the properties of a node that is associated with a
 // multi-node parallel job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/NodePropertiesSummary
 type NodePropertiesSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -2632,7 +2602,6 @@ func (s NodePropertiesSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 // Object representing any node overrides to a job definition that is used in
 // a SubmitJob API operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/NodePropertyOverride
 type NodePropertyOverride struct {
 	_ struct{} `type:"structure"`
 
@@ -2692,7 +2661,6 @@ func (s NodePropertyOverride) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object representing the properties of the node range for a multi-node
 // parallel job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/NodeRangeProperty
 type NodeRangeProperty struct {
 	_ struct{} `type:"structure"`
 
@@ -2754,7 +2722,6 @@ func (s NodeRangeProperty) MarshalFields(e protocol.FieldEncoder) error {
 
 // The type and amount of a resource to assign to a container. Currently, the
 // only supported resource type is GPU.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ResourceRequirement
 type ResourceRequirement struct {
 	_ struct{} `type:"structure"`
 
@@ -2812,7 +2779,6 @@ func (s ResourceRequirement) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The retry strategy associated with a job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RetryStrategy
 type RetryStrategy struct {
 	_ struct{} `type:"structure"`
 
@@ -2839,7 +2805,6 @@ func (s RetryStrategy) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The ulimit settings to pass to the container.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/Ulimit
 type Ulimit struct {
 	_ struct{} `type:"structure"`
 
@@ -2910,7 +2875,6 @@ func (s Ulimit) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A data volume used in a job's container properties.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/Volume
 type Volume struct {
 	_ struct{} `type:"structure"`
 

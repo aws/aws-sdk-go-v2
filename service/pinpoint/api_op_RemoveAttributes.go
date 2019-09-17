@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/RemoveAttributesRequest
 type RemoveAttributesInput struct {
 	_ struct{} `type:"structure" payload:"UpdateAttributesRequest"`
 
@@ -79,7 +78,6 @@ func (s RemoveAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/RemoveAttributesResponse
 type RemoveAttributesOutput struct {
 	_ struct{} `type:"structure" payload:"AttributesResource"`
 

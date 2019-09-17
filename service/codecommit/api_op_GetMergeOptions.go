@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetMergeOptionsInput
 type GetMergeOptionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -75,7 +74,6 @@ func (s *GetMergeOptionsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetMergeOptionsOutput
 type GetMergeOptionsOutput struct {
 	_ struct{} `type:"structure"`
 

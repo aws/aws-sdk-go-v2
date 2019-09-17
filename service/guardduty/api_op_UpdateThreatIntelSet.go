@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSetRequest
 type UpdateThreatIntelSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -106,7 +105,6 @@ func (s UpdateThreatIntelSetInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSetResponse
 type UpdateThreatIntelSetOutput struct {
 	_ struct{} `type:"structure"`
 }

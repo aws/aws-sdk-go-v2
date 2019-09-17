@@ -11,7 +11,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Details of the common errors that all actions return.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/FailureInfo
 type FailureInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -34,7 +33,6 @@ func (s FailureInfo) String() string {
 
 // A list of resource ARNs and the tags (keys and values) that are associated
 // with each.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/ResourceTagMapping
 type ResourceTagMapping struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +52,6 @@ func (s ResourceTagMapping) String() string {
 // them. Each tag consists of a key and an optional value, both of which you
 // define. For more information, see Tag Basics (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-basics)
 // in the Amazon EC2 User Guide for Linux Instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -78,7 +75,6 @@ func (s Tag) String() string {
 
 // A list of tags (keys and values) that are used to specify the associated
 // resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/TagFilter
 type TagFilter struct {
 	_ struct{} `type:"structure"`
 

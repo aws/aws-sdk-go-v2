@@ -10,7 +10,6 @@ import (
 )
 
 // The input for the GetSMSAttributes request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSMSAttributesInput
 type GetSMSAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -29,7 +28,6 @@ func (s GetSMSAttributesInput) String() string {
 }
 
 // The response from the GetSMSAttributes request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSMSAttributesResponse
 type GetSMSAttributesOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Returns an error that explains why the action did not succeed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ErrorReason
 type ErrorReason struct {
 	_ struct{} `type:"structure"`
 
@@ -44,7 +43,6 @@ func (s ErrorReason) String() string {
 
 // A structure that uses CloudWatch metrics to gather data about the service
 // quota.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/MetricInfo
 type MetricInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -75,7 +73,6 @@ func (s MetricInfo) String() string {
 }
 
 // A structure that contains information about the quota period.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/QuotaPeriod
 type QuotaPeriod struct {
 	_ struct{} `type:"structure"`
 
@@ -92,7 +89,6 @@ func (s QuotaPeriod) String() string {
 }
 
 // A structure that contains information about a requested change for a quota.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/RequestedServiceQuotaChange
 type RequestedServiceQuotaChange struct {
 	_ struct{} `type:"structure"`
 
@@ -149,7 +145,6 @@ func (s RequestedServiceQuotaChange) String() string {
 // A structure that contains the ServiceName and ServiceCode. It does not include
 // all details of the service quota. To get those values, use the ListServiceQuotas
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ServiceInfo
 type ServiceInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -167,7 +162,6 @@ func (s ServiceInfo) String() string {
 
 // A structure that contains the full set of details that define the service
 // quota.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ServiceQuota
 type ServiceQuota struct {
 	_ struct{} `type:"structure"`
 
@@ -214,7 +208,6 @@ func (s ServiceQuota) String() string {
 }
 
 // A structure that contains information about one service quota increase request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ServiceQuotaIncreaseRequestInTemplate
 type ServiceQuotaIncreaseRequestInTemplate struct {
 	_ struct{} `type:"structure"`
 

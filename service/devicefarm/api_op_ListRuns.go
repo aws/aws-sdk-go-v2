@@ -10,7 +10,6 @@ import (
 )
 
 // Represents a request to the list runs operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRunsRequest
 type ListRunsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s *ListRunsInput) Validate() error {
 }
 
 // Represents the result of a list runs request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRunsResult
 type ListRunsOutput struct {
 	_ struct{} `type:"structure"`
 

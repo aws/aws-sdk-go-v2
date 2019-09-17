@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure for stop job request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/StopJobRequest
 type StopJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -90,7 +89,6 @@ func (s StopJobInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure for the stop job request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/StopJobResult
 type StopJobOutput struct {
 	_ struct{} `type:"structure"`
 

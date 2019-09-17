@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the request to list all offerings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingsRequest
 type ListOfferingsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -38,7 +37,6 @@ func (s *ListOfferingsInput) Validate() error {
 }
 
 // Represents the return values of the list of offerings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingsResult
 type ListOfferingsOutput struct {
 	_ struct{} `type:"structure"`
 

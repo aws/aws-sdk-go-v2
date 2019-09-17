@@ -14,7 +14,6 @@ import (
 // filter the response by category by specifying it in your request body. You
 // can also optionally specify the maximum number, up to twenty, of queues to
 // be returned.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListPresetsRequest
 type ListPresetsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -96,7 +95,6 @@ func (s ListPresetsInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // Successful list presets requests return a JSON array of presets. If you don't
 // specify how they are ordered, you will receive them alphabetically by name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListPresetsResponse
 type ListPresetsOutput struct {
 	_ struct{} `type:"structure"`
 

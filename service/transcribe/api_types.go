@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Describes the input media file in a transcription request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Media
 type Media struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s *Media) Validate() error {
 }
 
 // Provides optional settings for the StartTranscriptionJob operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Settings
 type Settings struct {
 	_ struct{} `type:"structure"`
 
@@ -109,7 +107,6 @@ func (s *Settings) Validate() error {
 }
 
 // Identifies the location of a transcription.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Transcript
 type Transcript struct {
 	_ struct{} `type:"structure"`
 
@@ -129,7 +126,6 @@ func (s Transcript) String() string {
 
 // Describes an asynchronous transcription job that was created with the StartTranscriptionJob
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJob
 type TranscriptionJob struct {
 	_ struct{} `type:"structure"`
 
@@ -207,7 +203,6 @@ func (s TranscriptionJob) String() string {
 }
 
 // Provides a summary of information about a transcription job. .
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJobSummary
 type TranscriptionJobSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -248,7 +243,6 @@ func (s TranscriptionJobSummary) String() string {
 }
 
 // Provides information about a custom vocabulary.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/VocabularyInfo
 type VocabularyInfo struct {
 	_ struct{} `type:"structure"`
 

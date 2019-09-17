@@ -14,7 +14,6 @@ var _ = awsutil.Prettify
 
 // Contains metadata about an ACM certificate. This structure is returned in
 // the response to a DescribeCertificate request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateDetail
 type CertificateDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -150,7 +149,6 @@ func (s CertificateDetail) String() string {
 // a browser error. Transparency makes it possible for you to detect SSL/TLS
 // certificates that have been mistakenly or maliciously issued for your domain.
 // For general information, see Certificate Transparency Logging (https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateOptions
 type CertificateOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -165,7 +163,6 @@ func (s CertificateOptions) String() string {
 }
 
 // This structure is returned in the response object of ListCertificates action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateSummary
 type CertificateSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -188,7 +185,6 @@ func (s CertificateSummary) String() string {
 }
 
 // Contains information about the validation of each domain name in the certificate.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DomainValidation
 type DomainValidation struct {
 	_ struct{} `type:"structure"`
 
@@ -229,7 +225,6 @@ func (s DomainValidation) String() string {
 
 // Contains information about the domain names that you want ACM to use to send
 // you emails that enable you to validate domain ownership.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DomainValidationOption
 type DomainValidationOption struct {
 	_ struct{} `type:"structure"`
 
@@ -291,7 +286,6 @@ func (s *DomainValidationOption) Validate() error {
 // The Extended Key Usage X.509 v3 extension defines one or more purposes for
 // which the public key can be used. This is in addition to or in place of the
 // basic purposes specified by the Key Usage extension.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ExtendedKeyUsage
 type ExtendedKeyUsage struct {
 	_ struct{} `type:"structure"`
 
@@ -329,7 +323,6 @@ func (s ExtendedKeyUsage) String() string {
 
 // This structure can be used in the ListCertificates action to filter the output
 // of the certificate list.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/Filters
 type Filters struct {
 	_ struct{} `type:"structure"`
 
@@ -350,7 +343,6 @@ func (s Filters) String() string {
 
 // The Key Usage X.509 v3 extension defines the purpose of the public key contained
 // in the certificate.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/KeyUsage
 type KeyUsage struct {
 	_ struct{} `type:"structure"`
 
@@ -366,7 +358,6 @@ func (s KeyUsage) String() string {
 // Contains information about the status of ACM's managed renewal (https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
 // for the certificate. This structure exists only when the certificate type
 // is AMAZON_ISSUED.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RenewalSummary
 type RenewalSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -401,7 +392,6 @@ func (s RenewalSummary) String() string {
 
 // Contains a DNS record value that you can use to can use to validate ownership
 // or control of a domain. This is used by the DescribeCertificate action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResourceRecord
 type ResourceRecord struct {
 	_ struct{} `type:"structure"`
 
@@ -429,7 +419,6 @@ func (s ResourceRecord) String() string {
 }
 
 // A key-value pair that identifies or specifies metadata about an ACM resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 

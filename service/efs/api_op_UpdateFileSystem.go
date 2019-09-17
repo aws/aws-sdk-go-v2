@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/UpdateFileSystemRequest
 type UpdateFileSystemInput struct {
 	_ struct{} `type:"structure"`
 
@@ -82,7 +81,6 @@ func (s UpdateFileSystemInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A description of the file system.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemDescription
 type UpdateFileSystemOutput struct {
 	_ struct{} `type:"structure"`
 

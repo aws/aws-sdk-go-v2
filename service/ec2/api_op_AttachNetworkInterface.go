@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for AttachNetworkInterface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachNetworkInterfaceRequest
 type AttachNetworkInterfaceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -64,7 +63,6 @@ func (s *AttachNetworkInterfaceInput) Validate() error {
 }
 
 // Contains the output of AttachNetworkInterface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachNetworkInterfaceResult
 type AttachNetworkInterfaceOutput struct {
 	_ struct{} `type:"structure"`
 

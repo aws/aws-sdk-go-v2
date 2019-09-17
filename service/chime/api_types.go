@@ -16,7 +16,6 @@ var _ = awsutil.Prettify
 
 // The Amazon Chime account details. An AWS account can have multiple Amazon
 // Chime accounts.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Account
 type Account struct {
 	_ struct{} `type:"structure"`
 
@@ -114,7 +113,6 @@ func (s Account) MarshalFields(e protocol.FieldEncoder) error {
 // option in the Amazon Chime web application. For more information about these
 // settings, see Use the Policies Page (https://docs.aws.amazon.com/chime/latest/ag/policies.html)
 // in the Amazon Chime Administration Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AccountSettings
 type AccountSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -151,7 +149,6 @@ func (s AccountSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // A resource that allows Enterprise account administrators to configure an
 // interface to receive events from Amazon Chime.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Bot
 type Bot struct {
 	_ struct{} `type:"structure"`
 
@@ -252,7 +249,6 @@ func (s Bot) MarshalFields(e protocol.FieldEncoder) error {
 
 // The Amazon Chime Business Calling settings for the administrator's AWS account.
 // Includes any Amazon S3 buckets designated for storing call detail records.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/BusinessCallingSettings
 type BusinessCallingSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -278,7 +274,6 @@ func (s BusinessCallingSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // The SIP credentials used to authenticate requests to your Amazon Chime Voice
 // Connector.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Credential
 type Credential struct {
 	_ struct{} `type:"structure"`
 
@@ -315,7 +310,6 @@ func (s Credential) MarshalFields(e protocol.FieldEncoder) error {
 
 // The configuration that allows a bot to receive outgoing events. Can be either
 // an HTTPS endpoint or a Lambda function ARN.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/EventsConfiguration
 type EventsConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -359,7 +353,6 @@ func (s EventsConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 
 // Invitation object returned after emailing users to invite them to join the
 // Amazon Chime Team account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Invite
 type Invite struct {
 	_ struct{} `type:"structure"`
 
@@ -411,7 +404,6 @@ func (s Invite) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A phone number for which an order has been placed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/OrderedPhoneNumber
 type OrderedPhoneNumber struct {
 	_ struct{} `type:"structure"`
 
@@ -446,7 +438,6 @@ func (s OrderedPhoneNumber) MarshalFields(e protocol.FieldEncoder) error {
 
 // Origination settings enable your SIP hosts to receive inbound calls using
 // your Amazon Chime Voice Connector.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Origination
 type Origination struct {
 	_ struct{} `type:"structure"`
 
@@ -507,7 +498,6 @@ func (s Origination) MarshalFields(e protocol.FieldEncoder) error {
 // Origination routes define call distribution properties for your SIP hosts
 // to receive inbound calls using your Amazon Chime Voice Connector. Limit:
 // 10 origination routes per Amazon Chime Voice Connector.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/OriginationRoute
 type OriginationRoute struct {
 	_ struct{} `type:"structure"`
 
@@ -588,7 +578,6 @@ func (s OriginationRoute) MarshalFields(e protocol.FieldEncoder) error {
 
 // A phone number used for Amazon Chime Business Calling or an Amazon Chime
 // Voice Connector.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PhoneNumber
 type PhoneNumber struct {
 	_ struct{} `type:"structure"`
 
@@ -704,7 +693,6 @@ func (s PhoneNumber) MarshalFields(e protocol.FieldEncoder) error {
 
 // The phone number associations, such as Amazon Chime account ID, Amazon Chime
 // user ID, or Amazon Chime Voice Connector ID.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PhoneNumberAssociation
 type PhoneNumberAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -750,7 +738,6 @@ func (s PhoneNumberAssociation) MarshalFields(e protocol.FieldEncoder) error {
 
 // The phone number capabilities, such as enabled inbound and outbound calling
 // and text messaging.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PhoneNumberCapabilities
 type PhoneNumberCapabilities struct {
 	_ struct{} `type:"structure"`
 
@@ -822,7 +809,6 @@ func (s PhoneNumberCapabilities) MarshalFields(e protocol.FieldEncoder) error {
 // If the phone number action fails for one or more of the phone numbers in
 // the request, a list of the phone numbers is returned, along with error codes
 // and error messages.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PhoneNumberError
 type PhoneNumberError struct {
 	_ struct{} `type:"structure"`
 
@@ -865,7 +851,6 @@ func (s PhoneNumberError) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The details of a phone number order created for Amazon Chime.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PhoneNumberOrder
 type PhoneNumberOrder struct {
 	_ struct{} `type:"structure"`
 
@@ -945,7 +930,6 @@ func (s PhoneNumberOrder) MarshalFields(e protocol.FieldEncoder) error {
 
 // Settings that allow management of telephony permissions for an Amazon Chime
 // user, such as inbound and outbound calling and text messaging.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/TelephonySettings
 type TelephonySettings struct {
 	_ struct{} `type:"structure"`
 
@@ -1017,7 +1001,6 @@ func (s TelephonySettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // Termination settings enable your SIP hosts to make outbound calls using your
 // Amazon Chime Voice Connector.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Termination
 type Termination struct {
 	_ struct{} `type:"structure"`
 
@@ -1105,7 +1088,6 @@ func (s Termination) MarshalFields(e protocol.FieldEncoder) error {
 
 // The termination health details, including the source IP address and timestamp
 // of the last successful SIP OPTIONS message from your SIP infrastructure.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/TerminationHealth
 type TerminationHealth struct {
 	_ struct{} `type:"structure"`
 
@@ -1141,7 +1123,6 @@ func (s TerminationHealth) MarshalFields(e protocol.FieldEncoder) error {
 
 // The phone number ID and product type fields to update, used with the BatchUpdatePhoneNumber
 // and UpdatePhoneNumber actions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdatePhoneNumberRequestItem
 type UpdatePhoneNumberRequestItem struct {
 	_ struct{} `type:"structure"`
 
@@ -1191,7 +1172,6 @@ func (s UpdatePhoneNumberRequestItem) MarshalFields(e protocol.FieldEncoder) err
 }
 
 // The user ID and user fields to update, used with the BatchUpdateUser action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateUserRequestItem
 type UpdateUserRequestItem struct {
 	_ struct{} `type:"structure"`
 
@@ -1241,7 +1221,6 @@ func (s UpdateUserRequestItem) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The user on the Amazon Chime account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/User
 type User struct {
 	_ struct{} `type:"structure"`
 
@@ -1363,7 +1342,6 @@ func (s User) MarshalFields(e protocol.FieldEncoder) error {
 // The list of errors returned when errors are encountered during the BatchSuspendUser,
 // BatchUnsuspendUser, or BatchUpdateUser actions. This includes user IDs, error
 // codes, and error messages.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UserError
 type UserError struct {
 	_ struct{} `type:"structure"`
 
@@ -1407,7 +1385,6 @@ func (s UserError) MarshalFields(e protocol.FieldEncoder) error {
 
 // Settings associated with an Amazon Chime user, including inbound and outbound
 // calling and text messaging.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UserSettings
 type UserSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -1454,7 +1431,6 @@ func (s UserSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 // The Amazon Chime Voice Connector configuration, including outbound host name
 // and encryption settings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/VoiceConnector
 type VoiceConnector struct {
 	_ struct{} `type:"structure"`
 
@@ -1527,7 +1503,6 @@ func (s VoiceConnector) MarshalFields(e protocol.FieldEncoder) error {
 
 // The Amazon Chime Voice Connector settings. Includes any Amazon S3 buckets
 // designated for storing call detail records.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/VoiceConnectorSettings
 type VoiceConnectorSettings struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopLabelingJobRequest
 type StopLabelingJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *StopLabelingJobInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopLabelingJobOutput
 type StopLabelingJobOutput struct {
 	_ struct{} `type:"structure"`
 }

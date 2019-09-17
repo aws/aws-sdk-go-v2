@@ -16,7 +16,6 @@ var _ = awsutil.Prettify
 // the translated text response. This is optional in the response and will only
 // be present if you specified terminology input in the request. Currently,
 // only one terminology can be applied per TranslateText request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/AppliedTerminology
 type AppliedTerminology struct {
 	_ struct{} `type:"structure"`
 
@@ -38,7 +37,6 @@ func (s AppliedTerminology) String() string {
 
 // The encryption key used to encrypt the custom terminologies used by Amazon
 // Translate.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/EncryptionKey
 type EncryptionKey struct {
 	_ struct{} `type:"structure"`
 
@@ -80,7 +78,6 @@ func (s *EncryptionKey) Validate() error {
 }
 
 // The term being translated by the custom terminology.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/Term
 type Term struct {
 	_ struct{} `type:"structure"`
 
@@ -97,7 +94,6 @@ func (s Term) String() string {
 }
 
 // The data associated with the custom terminology.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TerminologyData
 type TerminologyData struct {
 	_ struct{} `type:"structure"`
 
@@ -137,7 +133,6 @@ func (s *TerminologyData) Validate() error {
 }
 
 // The location of the custom terminology data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TerminologyDataLocation
 type TerminologyDataLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -158,7 +153,6 @@ func (s TerminologyDataLocation) String() string {
 }
 
 // The properties of the custom terminology.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TerminologyProperties
 type TerminologyProperties struct {
 	_ struct{} `type:"structure"`
 

@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterEndpointMessage
 type CreateDBClusterEndpointInput struct {
 	_ struct{} `type:"structure"`
 
@@ -80,7 +79,6 @@ func (s *CreateDBClusterEndpointInput) Validate() error {
 //
 // For the data structure that represents Amazon RDS DB instance endpoints,
 // see Endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterEndpoint
 type CreateDBClusterEndpointOutput struct {
 	_ struct{} `type:"structure"`
 

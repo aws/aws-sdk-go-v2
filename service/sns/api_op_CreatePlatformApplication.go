@@ -10,7 +10,6 @@ import (
 )
 
 // Input for CreatePlatformApplication action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformApplicationInput
 type CreatePlatformApplicationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s *CreatePlatformApplicationInput) Validate() error {
 }
 
 // Response from CreatePlatformApplication action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformApplicationResponse
 type CreatePlatformApplicationOutput struct {
 	_ struct{} `type:"structure"`
 

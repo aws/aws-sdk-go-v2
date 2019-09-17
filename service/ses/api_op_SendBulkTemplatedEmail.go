@@ -12,7 +12,6 @@ import (
 
 // Represents a request to send a templated email to multiple destinations using
 // Amazon SES. For more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendBulkTemplatedEmailRequest
 type SendBulkTemplatedEmailInput struct {
 	_ struct{} `type:"structure"`
 
@@ -151,7 +150,6 @@ func (s *SendBulkTemplatedEmailInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendBulkTemplatedEmailResponse
 type SendBulkTemplatedEmailOutput struct {
 	_ struct{} `type:"structure"`
 

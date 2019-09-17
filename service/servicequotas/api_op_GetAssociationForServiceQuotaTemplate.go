@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetAssociationForServiceQuotaTemplateRequest
 type GetAssociationForServiceQuotaTemplateInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -19,7 +18,6 @@ func (s GetAssociationForServiceQuotaTemplateInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetAssociationForServiceQuotaTemplateResponse
 type GetAssociationForServiceQuotaTemplateOutput struct {
 	_ struct{} `type:"structure"`
 

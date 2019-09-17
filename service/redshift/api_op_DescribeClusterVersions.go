@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterVersionsMessage
 type DescribeClusterVersionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s DescribeClusterVersionsInput) String() string {
 }
 
 // Contains the output from the DescribeClusterVersions action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterVersionsMessage
 type DescribeClusterVersionsOutput struct {
 	_ struct{} `type:"structure"`
 

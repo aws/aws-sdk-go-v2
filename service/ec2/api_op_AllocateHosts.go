@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateHostsRequest
 type AllocateHostsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -83,7 +82,6 @@ func (s *AllocateHostsInput) Validate() error {
 }
 
 // Contains the output of AllocateHosts.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateHostsResult
 type AllocateHostsOutput struct {
 	_ struct{} `type:"structure"`
 

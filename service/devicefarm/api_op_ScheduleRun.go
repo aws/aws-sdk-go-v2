@@ -10,7 +10,6 @@ import (
 )
 
 // Represents a request to the schedule run operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRunRequest
 type ScheduleRunInput struct {
 	_ struct{} `type:"structure"`
 
@@ -95,7 +94,6 @@ func (s *ScheduleRunInput) Validate() error {
 }
 
 // Represents the result of a schedule run request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRunResult
 type ScheduleRunOutput struct {
 	_ struct{} `type:"structure"`
 

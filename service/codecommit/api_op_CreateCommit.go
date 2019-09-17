@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateCommitInput
 type CreateCommitInput struct {
 	_ struct{} `type:"structure"`
 
@@ -106,7 +105,6 @@ func (s *CreateCommitInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateCommitOutput
 type CreateCommitOutput struct {
 	_ struct{} `type:"structure"`
 

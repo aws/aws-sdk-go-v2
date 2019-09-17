@@ -10,7 +10,6 @@ import (
 )
 
 // Describes a conditional forwarder.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeConditionalForwardersRequest
 type DescribeConditionalForwardersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -45,7 +44,6 @@ func (s *DescribeConditionalForwardersInput) Validate() error {
 }
 
 // The result of a DescribeConditionalForwarder request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeConditionalForwardersResult
 type DescribeConditionalForwardersOutput struct {
 	_ struct{} `type:"structure"`
 

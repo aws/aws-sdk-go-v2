@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/GetRoutesRequest
 type GetRoutesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -66,7 +65,6 @@ func (s GetRoutesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/apigatewayv2-2018-11-29/GetRoutesResponse
 type GetRoutesOutput struct {
 	_ struct{} `type:"structure"`
 

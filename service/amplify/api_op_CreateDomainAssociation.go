@@ -12,7 +12,6 @@ import (
 )
 
 // Request structure for create Domain Association request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateDomainAssociationRequest
 type CreateDomainAssociationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -110,7 +109,6 @@ func (s CreateDomainAssociationInput) MarshalFields(e protocol.FieldEncoder) err
 }
 
 // Result structure for the create Domain Association request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateDomainAssociationResult
 type CreateDomainAssociationOutput struct {
 	_ struct{} `type:"structure"`
 

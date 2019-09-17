@@ -10,7 +10,6 @@ import (
 )
 
 // The input for the SetSMSAttributes action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSMSAttributesInput
 type SetSMSAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -113,7 +112,6 @@ func (s *SetSMSAttributesInput) Validate() error {
 }
 
 // The response for the SetSMSAttributes action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSMSAttributesResponse
 type SetSMSAttributesOutput struct {
 	_ struct{} `type:"structure"`
 }

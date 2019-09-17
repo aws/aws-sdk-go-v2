@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateVirtualInterfaceAttributesRequest
 type UpdateVirtualInterfaceAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *UpdateVirtualInterfaceAttributesInput) Validate() error {
 }
 
 // Information about a virtual interface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/VirtualInterface
 type UpdateVirtualInterfaceAttributesOutput struct {
 	_ struct{} `type:"structure"`
 

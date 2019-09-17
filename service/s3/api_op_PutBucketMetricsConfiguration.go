@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketMetricsConfigurationRequest
 type PutBucketMetricsConfigurationInput struct {
 	_ struct{} `type:"structure" payload:"MetricsConfiguration"`
 
@@ -94,7 +93,6 @@ func (s PutBucketMetricsConfigurationInput) MarshalFields(e protocol.FieldEncode
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketMetricsConfigurationOutput
 type PutBucketMetricsConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 }

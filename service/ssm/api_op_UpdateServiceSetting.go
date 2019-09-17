@@ -10,7 +10,6 @@ import (
 )
 
 // The request body of the UpdateServiceSetting API action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateServiceSettingRequest
 type UpdateServiceSettingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s *UpdateServiceSettingInput) Validate() error {
 }
 
 // The result body of the UpdateServiceSetting API action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateServiceSettingResult
 type UpdateServiceSettingOutput struct {
 	_ struct{} `type:"structure"`
 }

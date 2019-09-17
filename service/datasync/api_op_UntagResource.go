@@ -10,7 +10,6 @@ import (
 )
 
 // UntagResourceRequest
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UntagResourceRequest
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s *UntagResourceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UntagResourceResponse
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }

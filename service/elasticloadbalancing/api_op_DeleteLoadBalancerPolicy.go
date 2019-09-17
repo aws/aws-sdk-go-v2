@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for DeleteLoadBalancerPolicy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancerPolicyInput
 type DeleteLoadBalancerPolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s *DeleteLoadBalancerPolicyInput) Validate() error {
 }
 
 // Contains the output of DeleteLoadBalancerPolicy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancerPolicyOutput
 type DeleteLoadBalancerPolicyOutput struct {
 	_ struct{} `type:"structure"`
 }

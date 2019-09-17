@@ -15,7 +15,6 @@ var _ = awsutil.Prettify
 
 // A complex type that contains information about the Amazon Route 53 DNS records
 // that you want AWS Cloud Map to create when you register an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DnsConfig
 type DnsConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -105,7 +104,6 @@ func (s *DnsConfig) Validate() error {
 
 // A complex type that contains information about changes to the Route 53 DNS
 // records that AWS Cloud Map creates when you register an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DnsConfigChange
 type DnsConfigChange struct {
 	_ struct{} `type:"structure"`
 
@@ -144,7 +142,6 @@ func (s *DnsConfigChange) Validate() error {
 
 // A complex type that contains the ID for the Route 53 hosted zone that AWS
 // Cloud Map creates when you create a namespace.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DnsProperties
 type DnsProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -160,7 +157,6 @@ func (s DnsProperties) String() string {
 
 // A complex type that contains information about the Route 53 DNS records that
 // you want AWS Cloud Map to create when you register an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DnsRecord
 type DnsRecord struct {
 	_ struct{} `type:"structure"`
 
@@ -327,7 +323,6 @@ func (s *DnsRecord) Validate() error {
 // Health checks are basic Route 53 health checks that monitor an AWS endpoint.
 // For information about pricing for health checks, see Amazon Route 53 Pricing
 // (http://aws.amazon.com/route53/pricing/).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/HealthCheckConfig
 type HealthCheckConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -445,7 +440,6 @@ func (s *HealthCheckConfig) Validate() error {
 // traffic to the resource.
 //
 // Note the following about configuring custom health checks.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/HealthCheckCustomConfig
 type HealthCheckCustomConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -484,7 +478,6 @@ func (s *HealthCheckCustomConfig) Validate() error {
 // In a response to a DiscoverInstance request, HttpInstanceSummary contains
 // information about one instance that matches the values that you specified
 // in the request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/HttpInstanceSummary
 type HttpInstanceSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -512,7 +505,6 @@ func (s HttpInstanceSummary) String() string {
 }
 
 // A complex type that contains the name of an HTTP namespace.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/HttpProperties
 type HttpProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -527,7 +519,6 @@ func (s HttpProperties) String() string {
 
 // A complex type that contains information about an instance that AWS Cloud
 // Map creates when you submit a RegisterInstance request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/Instance
 type Instance struct {
 	_ struct{} `type:"structure"`
 
@@ -639,7 +630,6 @@ func (s Instance) String() string {
 
 // A complex type that contains information about the instances that you registered
 // by using a specified service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/InstanceSummary
 type InstanceSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -679,7 +669,6 @@ func (s InstanceSummary) String() string {
 }
 
 // A complex type that contains information about a specified namespace.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/Namespace
 type Namespace struct {
 	_ struct{} `type:"structure"`
 
@@ -724,7 +713,6 @@ func (s Namespace) String() string {
 
 // A complex type that identifies the namespaces that you want to list. You
 // can choose to list public or private namespaces.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/NamespaceFilter
 type NamespaceFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -779,7 +767,6 @@ func (s *NamespaceFilter) Validate() error {
 
 // A complex type that contains information that is specific to the namespace
 // type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/NamespaceProperties
 type NamespaceProperties struct {
 	_ struct{} `type:"structure"`
 
@@ -797,7 +784,6 @@ func (s NamespaceProperties) String() string {
 }
 
 // A complex type that contains information about a namespace.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/NamespaceSummary
 type NamespaceSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -835,7 +821,6 @@ func (s NamespaceSummary) String() string {
 }
 
 // A complex type that contains information about a specified operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/Operation
 type Operation struct {
 	_ struct{} `type:"structure"`
 
@@ -905,7 +890,6 @@ func (s Operation) String() string {
 }
 
 // A complex type that lets you select the operations that you want to list.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/OperationFilter
 type OperationFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -986,7 +970,6 @@ func (s *OperationFilter) Validate() error {
 
 // A complex type that contains information about an operation that matches
 // the criteria that you specified in a ListOperations request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/OperationSummary
 type OperationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1012,7 +995,6 @@ func (s OperationSummary) String() string {
 }
 
 // A complex type that contains information about the specified service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/Service
 type Service struct {
 	_ struct{} `type:"structure"`
 
@@ -1074,7 +1056,6 @@ func (s Service) String() string {
 }
 
 // A complex type that contains changes to an existing service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ServiceChange
 type ServiceChange struct {
 	_ struct{} `type:"structure"`
 
@@ -1179,7 +1160,6 @@ func (s *ServiceChange) Validate() error {
 
 // A complex type that lets you specify the namespaces that you want to list
 // services for.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ServiceFilter
 type ServiceFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -1230,7 +1210,6 @@ func (s *ServiceFilter) Validate() error {
 }
 
 // A complex type that contains information about a specified service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ServiceSummary
 type ServiceSummary struct {
 	_ struct{} `type:"structure"`
 

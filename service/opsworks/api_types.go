@@ -11,7 +11,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Describes an agent version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AgentVersion
 type AgentVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -28,7 +27,6 @@ func (s AgentVersion) String() string {
 }
 
 // A description of the app.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/App
 type App struct {
 	_ struct{} `type:"structure"`
 
@@ -93,7 +91,6 @@ func (s App) String() string {
 
 // Describes a load-based auto scaling upscaling or downscaling threshold configuration,
 // which specifies when AWS OpsWorks Stacks starts or stops load-based instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AutoScalingThresholds
 type AutoScalingThresholds struct {
 	_ struct{} `type:"structure"`
 
@@ -161,7 +158,6 @@ func (s *AutoScalingThresholds) Validate() error {
 // Describes a block device mapping. This data type maps directly to the Amazon
 // EC2 BlockDeviceMapping (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html)
 // data type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/BlockDeviceMapping
 type BlockDeviceMapping struct {
 	_ struct{} `type:"structure"`
 
@@ -187,7 +183,6 @@ func (s BlockDeviceMapping) String() string {
 }
 
 // Describes the Chef configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ChefConfiguration
 type ChefConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -204,7 +199,6 @@ func (s ChefConfiguration) String() string {
 }
 
 // Describes the Amazon CloudWatch logs configuration for a layer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CloudWatchLogsConfiguration
 type CloudWatchLogsConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -223,7 +217,6 @@ func (s CloudWatchLogsConfiguration) String() string {
 // Describes the Amazon CloudWatch logs configuration for a layer. For detailed
 // information about members of this data type, see the CloudWatch Logs Agent
 // Reference (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CloudWatchLogsLogStream
 type CloudWatchLogsLogStream struct {
 	_ struct{} `type:"structure"`
 
@@ -295,7 +288,6 @@ func (s CloudWatchLogsLogStream) String() string {
 }
 
 // Describes a command.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Command
 type Command struct {
 	_ struct{} `type:"structure"`
 
@@ -368,7 +360,6 @@ func (s Command) String() string {
 }
 
 // Describes an app's data source.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DataSource
 type DataSource struct {
 	_ struct{} `type:"structure"`
 
@@ -389,7 +380,6 @@ func (s DataSource) String() string {
 }
 
 // Describes a deployment of a stack or app.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Deployment
 type Deployment struct {
 	_ struct{} `type:"structure"`
 
@@ -449,7 +439,6 @@ func (s Deployment) String() string {
 }
 
 // Used to specify a stack or deployment command.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeploymentCommand
 type DeploymentCommand struct {
 	_ struct{} `type:"structure"`
 
@@ -537,7 +526,6 @@ func (s *DeploymentCommand) Validate() error {
 // Describes an Amazon EBS volume. This data type maps directly to the Amazon
 // EC2 EbsBlockDevice (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html)
 // data type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/EbsBlockDevice
 type EbsBlockDevice struct {
 	_ struct{} `type:"structure"`
 
@@ -571,7 +559,6 @@ func (s EbsBlockDevice) String() string {
 }
 
 // Describes a registered Amazon ECS cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/EcsCluster
 type EcsCluster struct {
 	_ struct{} `type:"structure"`
 
@@ -594,7 +581,6 @@ func (s EcsCluster) String() string {
 }
 
 // Describes an Elastic IP address.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ElasticIp
 type ElasticIp struct {
 	_ struct{} `type:"structure"`
 
@@ -620,7 +606,6 @@ func (s ElasticIp) String() string {
 }
 
 // Describes an Elastic Load Balancing instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ElasticLoadBalancer
 type ElasticLoadBalancer struct {
 	_ struct{} `type:"structure"`
 
@@ -659,7 +644,6 @@ func (s ElasticLoadBalancer) String() string {
 }
 
 // Represents an app's environment variable.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/EnvironmentVariable
 type EnvironmentVariable struct {
 	_ struct{} `type:"structure"`
 
@@ -709,7 +693,6 @@ func (s *EnvironmentVariable) Validate() error {
 }
 
 // Describes an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Instance
 type Instance struct {
 	_ struct{} `type:"structure"`
 
@@ -887,7 +870,6 @@ func (s Instance) String() string {
 
 // Contains a description of an Amazon EC2 instance from the Amazon EC2 metadata
 // service. For more information, see Instance Metadata and User Data (https://docs.aws.amazon.com/sdkfornet/latest/apidocs/Index.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/InstanceIdentity
 type InstanceIdentity struct {
 	_ struct{} `type:"structure"`
 
@@ -904,7 +886,6 @@ func (s InstanceIdentity) String() string {
 }
 
 // Describes how many instances a stack has for each status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/InstancesCount
 type InstancesCount struct {
 	_ struct{} `type:"structure"`
 
@@ -975,7 +956,6 @@ func (s InstancesCount) String() string {
 }
 
 // Describes a layer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Layer
 type Layer struct {
 	_ struct{} `type:"structure"`
 
@@ -1083,7 +1063,6 @@ func (s Layer) String() string {
 }
 
 // Specifies the lifecycle event configuration
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/LifecycleEventConfiguration
 type LifecycleEventConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1097,7 +1076,6 @@ func (s LifecycleEventConfiguration) String() string {
 }
 
 // Describes a layer's load-based auto scaling configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/LoadBasedAutoScalingConfiguration
 type LoadBasedAutoScalingConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1122,7 +1100,6 @@ func (s LoadBasedAutoScalingConfiguration) String() string {
 }
 
 // Describes supported operating systems in AWS OpsWorks Stacks.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/OperatingSystem
 type OperatingSystem struct {
 	_ struct{} `type:"structure"`
 
@@ -1158,7 +1135,6 @@ func (s OperatingSystem) String() string {
 // A block that contains information about the configuration manager (Chef)
 // and the versions of the configuration manager that are supported for an operating
 // system.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/OperatingSystemConfigurationManager
 type OperatingSystemConfigurationManager struct {
 	_ struct{} `type:"structure"`
 
@@ -1176,7 +1152,6 @@ func (s OperatingSystemConfigurationManager) String() string {
 }
 
 // Describes stack or user permissions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Permission
 type Permission struct {
 	_ struct{} `type:"structure"`
 
@@ -1216,7 +1191,6 @@ func (s Permission) String() string {
 }
 
 // Describes an instance's RAID array.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RaidArray
 type RaidArray struct {
 	_ struct{} `type:"structure"`
 
@@ -1267,7 +1241,6 @@ func (s RaidArray) String() string {
 }
 
 // Describes an Amazon RDS instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RdsDbInstance
 type RdsDbInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -1319,7 +1292,6 @@ func (s RdsDbInstance) String() string {
 // followed by two colons and the recipe name, which is the recipe's file name
 // without the .rb extension. For example: phpapp2::dbsetup specifies the dbsetup.rb
 // recipe in the repository's phpapp2 folder.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Recipes
 type Recipes struct {
 	_ struct{} `type:"structure"`
 
@@ -1345,7 +1317,6 @@ func (s Recipes) String() string {
 }
 
 // A registered instance's reported operating system.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ReportedOs
 type ReportedOs struct {
 	_ struct{} `type:"structure"`
 
@@ -1365,7 +1336,6 @@ func (s ReportedOs) String() string {
 }
 
 // Describes a user's SSH information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SelfUserProfile
 type SelfUserProfile struct {
 	_ struct{} `type:"structure"`
 
@@ -1388,7 +1358,6 @@ func (s SelfUserProfile) String() string {
 }
 
 // Describes an AWS OpsWorks Stacks service error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ServiceError
 type ServiceError struct {
 	_ struct{} `type:"structure"`
 
@@ -1417,7 +1386,6 @@ func (s ServiceError) String() string {
 }
 
 // The Shutdown event configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ShutdownEventConfiguration
 type ShutdownEventConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1438,7 +1406,6 @@ func (s ShutdownEventConfiguration) String() string {
 // Contains the information required to retrieve an app or cookbook from a repository.
 // For more information, see Creating Apps (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html)
 // or Custom Recipes and Cookbooks (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Source
 type Source struct {
 	_ struct{} `type:"structure"`
 
@@ -1490,7 +1457,6 @@ func (s Source) String() string {
 }
 
 // Describes an app's SSL configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SslConfiguration
 type SslConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1533,7 +1499,6 @@ func (s *SslConfiguration) Validate() error {
 }
 
 // Describes a stack.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Stack
 type Stack struct {
 	_ struct{} `type:"structure"`
 
@@ -1630,7 +1595,6 @@ func (s Stack) String() string {
 }
 
 // Describes the configuration manager.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StackConfigurationManager
 type StackConfigurationManager struct {
 	_ struct{} `type:"structure"`
 
@@ -1649,7 +1613,6 @@ func (s StackConfigurationManager) String() string {
 }
 
 // Summarizes the number of layers, instances, and apps in a stack.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StackSummary
 type StackSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1679,7 +1642,6 @@ func (s StackSummary) String() string {
 
 // Contains the data needed by RDP clients such as the Microsoft Remote Desktop
 // Connection to log in to the instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/TemporaryCredential
 type TemporaryCredential struct {
 	_ struct{} `type:"structure"`
 
@@ -1705,7 +1667,6 @@ func (s TemporaryCredential) String() string {
 }
 
 // Describes an instance's time-based auto scaling configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/TimeBasedAutoScalingConfiguration
 type TimeBasedAutoScalingConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1722,7 +1683,6 @@ func (s TimeBasedAutoScalingConfiguration) String() string {
 }
 
 // Describes a user's SSH information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UserProfile
 type UserProfile struct {
 	_ struct{} `type:"structure"`
 
@@ -1749,7 +1709,6 @@ func (s UserProfile) String() string {
 }
 
 // Describes an instance's Amazon EBS volume.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Volume
 type Volume struct {
 	_ struct{} `type:"structure"`
 
@@ -1821,7 +1780,6 @@ func (s Volume) String() string {
 }
 
 // Describes an Amazon EBS volume configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/VolumeConfiguration
 type VolumeConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1915,7 +1873,6 @@ func (s *VolumeConfiguration) Validate() error {
 // hours, from UTC 1200 - 1600. It will be off for the remainder of the day.
 //
 // { "12":"on", "13":"on", "14":"on", "15":"on" }
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/WeeklyAutoScalingSchedule
 type WeeklyAutoScalingSchedule struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/GetDASHStreamingSessionURLInput
 type GetDASHStreamingSessionURLInput struct {
 	_ struct{} `type:"structure"`
 
@@ -220,7 +219,6 @@ func (s GetDASHStreamingSessionURLInput) MarshalFields(e protocol.FieldEncoder) 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/GetDASHStreamingSessionURLOutput
 type GetDASHStreamingSessionURLOutput struct {
 	_ struct{} `type:"structure"`
 

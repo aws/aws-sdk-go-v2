@@ -10,7 +10,6 @@ import (
 )
 
 // Initiates the authorization request, as an administrator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminInitiateAuthRequest
 type AdminInitiateAuthInput struct {
 	_ struct{} `type:"structure"`
 
@@ -127,7 +126,6 @@ func (s *AdminInitiateAuthInput) Validate() error {
 }
 
 // Initiates the authentication response, as an administrator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminInitiateAuthResponse
 type AdminInitiateAuthOutput struct {
 	_ struct{} `type:"structure"`
 

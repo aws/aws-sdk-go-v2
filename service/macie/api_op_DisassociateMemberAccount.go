@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/DisassociateMemberAccountRequest
 type DisassociateMemberAccountInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *DisassociateMemberAccountInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/DisassociateMemberAccountOutput
 type DisassociateMemberAccountOutput struct {
 	_ struct{} `type:"structure"`
 }

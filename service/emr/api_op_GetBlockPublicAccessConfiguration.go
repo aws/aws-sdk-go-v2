@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetBlockPublicAccessConfigurationInput
 type GetBlockPublicAccessConfigurationInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -19,7 +18,6 @@ func (s GetBlockPublicAccessConfigurationInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetBlockPublicAccessConfigurationOutput
 type GetBlockPublicAccessConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 

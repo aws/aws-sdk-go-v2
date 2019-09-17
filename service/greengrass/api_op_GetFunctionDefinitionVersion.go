@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinitionVersionRequest
 type GetFunctionDefinitionVersionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -72,7 +71,6 @@ func (s GetFunctionDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder
 }
 
 // Information about a function definition version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinitionVersionResponse
 type GetFunctionDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
 

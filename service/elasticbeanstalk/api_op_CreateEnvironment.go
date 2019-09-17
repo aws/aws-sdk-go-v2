@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateEnvironmentMessage
 type CreateEnvironmentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -151,7 +150,6 @@ func (s *CreateEnvironmentInput) Validate() error {
 }
 
 // Describes the properties of an environment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentDescription
 type CreateEnvironmentOutput struct {
 	_ struct{} `type:"structure"`
 

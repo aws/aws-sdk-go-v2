@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListUpdatesRequest
 type ListUpdatesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -82,7 +81,6 @@ func (s ListUpdatesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListUpdatesResponse
 type ListUpdatesOutput struct {
 	_ struct{} `type:"structure"`
 

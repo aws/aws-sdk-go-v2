@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input for GetRecords.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetRecordsInput
 type GetRecordsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s *GetRecordsInput) Validate() error {
 }
 
 // Represents the output for GetRecords.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetRecordsOutput
 type GetRecordsOutput struct {
 	_ struct{} `type:"structure"`
 

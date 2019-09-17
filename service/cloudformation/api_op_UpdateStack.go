@@ -11,7 +11,6 @@ import (
 )
 
 // The input for an UpdateStack action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackInput
 type UpdateStackInput struct {
 	_ struct{} `type:"structure"`
 
@@ -249,7 +248,6 @@ func (s *UpdateStackInput) Validate() error {
 }
 
 // The output for an UpdateStack action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackOutput
 type UpdateStackOutput struct {
 	_ struct{} `type:"structure"`
 

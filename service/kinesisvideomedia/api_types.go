@@ -26,7 +26,6 @@ var _ = awsutil.Prettify
 //    tag (AWS_KINESISVIDEO_CONTINUATION_TOKEN). If your previous GetMedia request
 //    terminated, you can use this tag value in your next GetMedia request.
 //    The API then starts returning chunks starting where the last API ended.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-media-2017-09-30/StartSelector
 type StartSelector struct {
 	_ struct{} `type:"structure"`
 

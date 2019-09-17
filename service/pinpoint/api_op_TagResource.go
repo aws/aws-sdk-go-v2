@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TagResourceRequest
 type TagResourceInput struct {
 	_ struct{} `type:"structure" payload:"TagsModel"`
 
@@ -71,7 +70,6 @@ func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TagResourceOutput
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }

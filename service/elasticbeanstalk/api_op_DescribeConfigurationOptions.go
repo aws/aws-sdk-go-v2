@@ -11,7 +11,6 @@ import (
 )
 
 // Result message containing a list of application version descriptions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeConfigurationOptionsMessage
 type DescribeConfigurationOptionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -69,7 +68,6 @@ func (s *DescribeConfigurationOptionsInput) Validate() error {
 }
 
 // Describes the settings for a specified configuration set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ConfigurationOptionsDescription
 type DescribeConfigurationOptionsOutput struct {
 	_ struct{} `type:"structure"`
 

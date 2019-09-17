@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectLegalHoldRequest
 type PutObjectLegalHoldInput struct {
 	_ struct{} `type:"structure" payload:"LegalHold"`
 
@@ -107,7 +106,6 @@ func (s PutObjectLegalHoldInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectLegalHoldOutput
 type PutObjectLegalHoldOutput struct {
 	_ struct{} `type:"structure"`
 

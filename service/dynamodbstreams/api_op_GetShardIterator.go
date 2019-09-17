@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a GetShardIterator operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetShardIteratorInput
 type GetShardIteratorInput struct {
 	_ struct{} `type:"structure"`
 
@@ -85,7 +84,6 @@ func (s *GetShardIteratorInput) Validate() error {
 }
 
 // Represents the output of a GetShardIterator operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetShardIteratorOutput
 type GetShardIteratorOutput struct {
 	_ struct{} `type:"structure"`
 

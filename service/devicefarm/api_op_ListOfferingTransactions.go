@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the request to list the offering transaction history.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingTransactionsRequest
 type ListOfferingTransactionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -38,7 +37,6 @@ func (s *ListOfferingTransactionsInput) Validate() error {
 }
 
 // Returns the transaction log of the specified offerings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingTransactionsResult
 type ListOfferingTransactionsOutput struct {
 	_ struct{} `type:"structure"`
 

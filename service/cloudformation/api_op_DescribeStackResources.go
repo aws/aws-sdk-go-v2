@@ -10,7 +10,6 @@ import (
 )
 
 // The input for DescribeStackResources action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResourcesInput
 type DescribeStackResourcesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s DescribeStackResourcesInput) String() string {
 }
 
 // The output for a DescribeStackResources action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResourcesOutput
 type DescribeStackResourcesOutput struct {
 	_ struct{} `type:"structure"`
 

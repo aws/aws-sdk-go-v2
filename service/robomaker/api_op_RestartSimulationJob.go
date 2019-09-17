@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RestartSimulationJobRequest
 type RestartSimulationJobInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s RestartSimulationJobInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RestartSimulationJobResponse
 type RestartSimulationJobOutput struct {
 	_ struct{} `type:"structure"`
 }

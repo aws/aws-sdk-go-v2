@@ -11,7 +11,6 @@ import (
 )
 
 // Gets information about a specific traffic policy version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyRequest
 type GetTrafficPolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -75,7 +74,6 @@ func (s GetTrafficPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains the response information for the request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyResponse
 type GetTrafficPolicyOutput struct {
 	_ struct{} `type:"structure"`
 

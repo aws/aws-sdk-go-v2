@@ -10,7 +10,6 @@ import (
 )
 
 // Requests a list of AWS Cost and Usage reports owned by the account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DescribeReportDefinitionsRequest
 type DescribeReportDefinitionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *DescribeReportDefinitionsInput) Validate() error {
 }
 
 // If the action is successful, the service sends back an HTTP 200 response.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DescribeReportDefinitionsResponse
 type DescribeReportDefinitionsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/StartNextPendingJobExecutionRequest
 type StartNextPendingJobExecutionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -87,7 +86,6 @@ func (s StartNextPendingJobExecutionInput) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/StartNextPendingJobExecutionResponse
 type StartNextPendingJobExecutionOutput struct {
 	_ struct{} `type:"structure"`
 

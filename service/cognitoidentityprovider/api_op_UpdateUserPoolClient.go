@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the request to update the user pool client.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolClientRequest
 type UpdateUserPoolClientInput struct {
 	_ struct{} `type:"structure"`
 
@@ -144,7 +143,6 @@ func (s *UpdateUserPoolClientInput) Validate() error {
 
 // Represents the response from the server to the request to update the user
 // pool client.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolClientResponse
 type UpdateUserPoolClientOutput struct {
 	_ struct{} `type:"structure"`
 

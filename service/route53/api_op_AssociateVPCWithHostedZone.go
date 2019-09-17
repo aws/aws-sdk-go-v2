@@ -12,7 +12,6 @@ import (
 
 // A complex type that contains information about the request to associate a
 // VPC with a private hosted zone.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AssociateVPCWithHostedZoneRequest
 type AssociateVPCWithHostedZoneInput struct {
 	_ struct{} `locationName:"AssociateVPCWithHostedZoneRequest" type:"structure" xmlURI:"https://route53.amazonaws.com/doc/2013-04-01/"`
 
@@ -92,7 +91,6 @@ func (s AssociateVPCWithHostedZoneInput) MarshalFields(e protocol.FieldEncoder) 
 
 // A complex type that contains the response information for the AssociateVPCWithHostedZone
 // request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AssociateVPCWithHostedZoneResponse
 type AssociateVPCWithHostedZoneOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // An object that represents the details of the consumer you registered.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/Consumer
 type Consumer struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +47,6 @@ func (s Consumer) String() string {
 }
 
 // An object that represents the details of a registered consumer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ConsumerDescription
 type ConsumerDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -88,7 +86,6 @@ func (s ConsumerDescription) String() string {
 }
 
 // Represents enhanced metrics types.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/EnhancedMetrics
 type EnhancedMetrics struct {
 	_ struct{} `type:"structure"`
 
@@ -126,7 +123,6 @@ func (s EnhancedMetrics) String() string {
 
 // The range of possible hash key values for the shard, which is a set of ordered
 // contiguous positive integers.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/HashKeyRange
 type HashKeyRange struct {
 	_ struct{} `type:"structure"`
 
@@ -147,7 +143,6 @@ func (s HashKeyRange) String() string {
 }
 
 // Represents the output for PutRecords.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecordsRequestEntry
 type PutRecordsRequestEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -208,7 +203,6 @@ func (s *PutRecordsRequestEntry) Validate() error {
 // A record that is successfully added to a stream includes SequenceNumber and
 // ShardId in the result. A record that fails to be added to the stream includes
 // ErrorCode and ErrorMessage in the result.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecordsResultEntry
 type PutRecordsResultEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -236,7 +230,6 @@ func (s PutRecordsResultEntry) String() string {
 
 // The unit of data of the Kinesis data stream, which is composed of a sequence
 // number, a partition key, and a data blob.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/Record
 type Record struct {
 	_ struct{} `type:"structure"`
 
@@ -280,7 +273,6 @@ func (s Record) String() string {
 }
 
 // The range of possible sequence numbers for the shard.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SequenceNumberRange
 type SequenceNumberRange struct {
 	_ struct{} `type:"structure"`
 
@@ -300,7 +292,6 @@ func (s SequenceNumberRange) String() string {
 }
 
 // A uniquely identified group of data records in a Kinesis data stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/Shard
 type Shard struct {
 	_ struct{} `type:"structure"`
 
@@ -333,7 +324,6 @@ func (s Shard) String() string {
 }
 
 // Represents the output for DescribeStream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StreamDescription
 type StreamDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -424,7 +414,6 @@ func (s StreamDescription) String() string {
 }
 
 // Represents the output for DescribeStreamSummary
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StreamDescriptionSummary
 type StreamDescriptionSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -511,7 +500,6 @@ func (s StreamDescriptionSummary) String() string {
 }
 
 // Metadata assigned to the stream, consisting of a key-value pair.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 

@@ -15,7 +15,6 @@ var _ = awsutil.Prettify
 
 // Contains the range of timestamps for the requested media, and the source
 // of the timestamps.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/DASHFragmentSelector
 type DASHFragmentSelector struct {
 	_ struct{} `type:"structure"`
 
@@ -82,7 +81,6 @@ func (s DASHFragmentSelector) MarshalFields(e protocol.FieldEncoder) error {
 // The values in the DASHimestampRange are inclusive. Fragments that begin before
 // the start time but continue past it, or fragments that begin before the end
 // time but continue past it, are included in the session.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/DASHTimestampRange
 type DASHTimestampRange struct {
 	_ struct{} `type:"structure"`
 
@@ -138,7 +136,6 @@ func (s DASHTimestampRange) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents a segment of video or other time-delimited data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/Fragment
 type Fragment struct {
 	_ struct{} `type:"structure"`
 
@@ -218,7 +215,6 @@ func (s Fragment) MarshalFields(e protocol.FieldEncoder) error {
 //
 // A fragment selector range with a start time of 00:00:01 and end time of 00:00:04
 // would return the fragments with start times of 00:00:02 and 00:00:04.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/FragmentSelector
 type FragmentSelector struct {
 	_ struct{} `type:"structure"`
 
@@ -279,7 +275,6 @@ func (s FragmentSelector) MarshalFields(e protocol.FieldEncoder) error {
 
 // Contains the range of timestamps for the requested media, and the source
 // of the timestamps.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/HLSFragmentSelector
 type HLSFragmentSelector struct {
 	_ struct{} `type:"structure"`
 
@@ -346,7 +341,6 @@ func (s HLSFragmentSelector) MarshalFields(e protocol.FieldEncoder) error {
 // The values in the HLSTimestampRange are inclusive. Fragments that begin before
 // the start time but continue past it, or fragments that begin before the end
 // time but continue past it, are included in the session.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/HLSTimestampRange
 type HLSTimestampRange struct {
 	_ struct{} `type:"structure"`
 
@@ -402,7 +396,6 @@ func (s HLSTimestampRange) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The range of timestamps for which to return fragments.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/TimestampRange
 type TimestampRange struct {
 	_ struct{} `type:"structure"`
 

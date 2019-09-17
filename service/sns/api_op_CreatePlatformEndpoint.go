@@ -10,7 +10,6 @@ import (
 )
 
 // Input for CreatePlatformEndpoint action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformEndpointInput
 type CreatePlatformEndpointInput struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s *CreatePlatformEndpointInput) Validate() error {
 }
 
 // Response from CreateEndpoint action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreateEndpointResponse
 type CreatePlatformEndpointOutput struct {
 	_ struct{} `type:"structure"`
 

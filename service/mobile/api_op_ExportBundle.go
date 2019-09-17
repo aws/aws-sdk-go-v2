@@ -12,7 +12,6 @@ import (
 
 // Request structure used to request generation of custom SDK and tool packages
 // required to integrate mobile web or app clients with backed AWS resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ExportBundleRequest
 type ExportBundleInput struct {
 	_ struct{} `type:"structure"`
 
@@ -75,7 +74,6 @@ func (s ExportBundleInput) MarshalFields(e protocol.FieldEncoder) error {
 // Result structure which contains link to download custom-generated SDK and
 // tool packages used to integrate mobile web or app clients with backed AWS
 // resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ExportBundleResult
 type ExportBundleOutput struct {
 	_ struct{} `type:"structure"`
 

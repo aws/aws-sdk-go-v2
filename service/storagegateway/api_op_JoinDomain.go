@@ -10,7 +10,6 @@ import (
 )
 
 // JoinDomainInput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/JoinDomainInput
 type JoinDomainInput struct {
 	_ struct{} `type:"structure"`
 
@@ -95,7 +94,6 @@ func (s *JoinDomainInput) Validate() error {
 }
 
 // JoinDomainOutput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/JoinDomainOutput
 type JoinDomainOutput struct {
 	_ struct{} `type:"structure"`
 

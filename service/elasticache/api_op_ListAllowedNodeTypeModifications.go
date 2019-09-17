@@ -10,7 +10,6 @@ import (
 )
 
 // The input parameters for the ListAllowedNodeTypeModifications operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ListAllowedNodeTypeModificationsMessage
 type ListAllowedNodeTypeModificationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -37,7 +36,6 @@ func (s ListAllowedNodeTypeModificationsInput) String() string {
 
 // Represents the allowed node types you can use to modify your cluster or replication
 // group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AllowedNodeTypeModificationsMessage
 type ListAllowedNodeTypeModificationsOutput struct {
 	_ struct{} `type:"structure"`
 

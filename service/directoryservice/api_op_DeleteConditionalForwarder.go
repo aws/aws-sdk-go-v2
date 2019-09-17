@@ -10,7 +10,6 @@ import (
 )
 
 // Deletes a conditional forwarder.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteConditionalForwarderRequest
 type DeleteConditionalForwarderInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s *DeleteConditionalForwarderInput) Validate() error {
 }
 
 // The result of a DeleteConditionalForwarder request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteConditionalForwarderResult
 type DeleteConditionalForwarderOutput struct {
 	_ struct{} `type:"structure"`
 }

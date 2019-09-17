@@ -11,7 +11,6 @@ import (
 )
 
 // A request to create and send a new voice message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/SendVoiceMessageRequest
 type SendVoiceMessageInput struct {
 	_ struct{} `type:"structure"`
 
@@ -80,7 +79,6 @@ func (s SendVoiceMessageInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object that that contains the Message ID of a Voice message that was sent
 // successfully.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/SendVoiceMessageResponse
 type SendVoiceMessageOutput struct {
 	_ struct{} `type:"structure"`
 

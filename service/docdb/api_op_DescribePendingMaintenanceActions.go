@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the input to DescribePendingMaintenanceActions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribePendingMaintenanceActionsMessage
 type DescribePendingMaintenanceActionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -70,7 +69,6 @@ func (s *DescribePendingMaintenanceActionsInput) Validate() error {
 }
 
 // Represents the output of DescribePendingMaintenanceActions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/PendingMaintenanceActionsMessage
 type DescribePendingMaintenanceActionsOutput struct {
 	_ struct{} `type:"structure"`
 

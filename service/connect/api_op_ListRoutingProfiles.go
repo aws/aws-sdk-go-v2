@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfilesRequest
 type ListRoutingProfilesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -81,7 +80,6 @@ func (s ListRoutingProfilesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfilesResponse
 type ListRoutingProfilesOutput struct {
 	_ struct{} `type:"structure"`
 

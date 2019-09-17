@@ -11,7 +11,6 @@ import (
 )
 
 // The ViewBilling request includes the following elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ViewBillingRequest
 type ViewBillingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -47,7 +46,6 @@ func (s ViewBillingInput) String() string {
 }
 
 // The ViewBilling response includes the following elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ViewBillingResponse
 type ViewBillingOutput struct {
 	_ struct{} `type:"structure"`
 

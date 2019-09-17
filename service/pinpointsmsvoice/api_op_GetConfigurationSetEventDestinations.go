@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/GetConfigurationSetEventDestinationsRequest
 type GetConfigurationSetEventDestinationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s GetConfigurationSetEventDestinationsInput) MarshalFields(e protocol.Fiel
 }
 
 // An object that contains information about an event destination.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/GetConfigurationSetEventDestinationsResponse
 type GetConfigurationSetEventDestinationsOutput struct {
 	_ struct{} `type:"structure"`
 

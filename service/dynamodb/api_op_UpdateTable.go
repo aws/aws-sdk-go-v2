@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the input of an UpdateTable operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTableInput
 type UpdateTableInput struct {
 	_ struct{} `type:"structure"`
 
@@ -108,7 +107,6 @@ func (s *UpdateTableInput) Validate() error {
 }
 
 // Represents the output of an UpdateTable operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTableOutput
 type UpdateTableOutput struct {
 	_ struct{} `type:"structure"`
 

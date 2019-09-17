@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the input to DescribeDBEngineVersions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBEngineVersionsMessage
 type DescribeDBEngineVersionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -85,7 +84,6 @@ func (s *DescribeDBEngineVersionsInput) Validate() error {
 }
 
 // Represents the output of DescribeDBEngineVersions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBEngineVersionMessage
 type DescribeDBEngineVersionsOutput struct {
 	_ struct{} `type:"structure"`
 

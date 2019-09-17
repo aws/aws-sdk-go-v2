@@ -10,7 +10,6 @@ import (
 )
 
 // Represents a request to the get device pool compatibility operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolCompatibilityRequest
 type GetDevicePoolCompatibilityInput struct {
 	_ struct{} `type:"structure"`
 
@@ -108,7 +107,6 @@ func (s *GetDevicePoolCompatibilityInput) Validate() error {
 }
 
 // Represents the result of describe device pool compatibility request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolCompatibilityResult
 type GetDevicePoolCompatibilityOutput struct {
 	_ struct{} `type:"structure"`
 

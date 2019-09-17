@@ -12,7 +12,6 @@ import (
 
 // A request to get a list of the reusable delegation sets that are associated
 // with the current AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListReusableDelegationSetsRequest
 type ListReusableDelegationSetsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s ListReusableDelegationSetsInput) MarshalFields(e protocol.FieldEncoder) 
 
 // A complex type that contains information about the reusable delegation sets
 // that are associated with the current AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListReusableDelegationSetsResponse
 type ListReusableDelegationSetsOutput struct {
 	_ struct{} `type:"structure"`
 

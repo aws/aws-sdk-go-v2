@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure for create a new deployment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateDeploymentRequest
 type CreateDeploymentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -93,7 +92,6 @@ func (s CreateDeploymentInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure for create a new deployment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateDeploymentResult
 type CreateDeploymentOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -12,7 +12,6 @@ import (
 
 // Send your create preset request with the name of the preset and the JSON
 // for the output settings specified by the preset.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreatePresetRequest
 type CreatePresetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -109,7 +108,6 @@ func (s CreatePresetInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Successful create preset requests will return the preset JSON.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreatePresetResponse
 type CreatePresetOutput struct {
 	_ struct{} `type:"structure"`
 

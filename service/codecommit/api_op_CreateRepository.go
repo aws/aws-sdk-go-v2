@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a create repository operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateRepositoryInput
 type CreateRepositoryInput struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s *CreateRepositoryInput) Validate() error {
 }
 
 // Represents the output of a create repository operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateRepositoryOutput
 type CreateRepositoryOutput struct {
 	_ struct{} `type:"structure"`
 

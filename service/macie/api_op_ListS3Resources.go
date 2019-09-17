@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/ListS3ResourcesRequest
 type ListS3ResourcesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -33,7 +32,6 @@ func (s ListS3ResourcesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/ListS3ResourcesResult
 type ListS3ResourcesOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // Represents a request to the get suite operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetSuiteRequest
 type GetSuiteInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *GetSuiteInput) Validate() error {
 }
 
 // Represents the result of a get suite request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetSuiteResult
 type GetSuiteOutput struct {
 	_ struct{} `type:"structure"`
 

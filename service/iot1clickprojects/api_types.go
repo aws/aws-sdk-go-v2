@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // An object representing a device for a placement template (see PlacementTemplate).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iot1click-projects-2018-05-14/DeviceTemplate
 type DeviceTemplate struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s DeviceTemplate) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object describing a project's placement.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iot1click-projects-2018-05-14/PlacementDescription
 type PlacementDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -136,7 +134,6 @@ func (s PlacementDescription) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object providing summary information for a particular placement.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iot1click-projects-2018-05-14/PlacementSummary
 type PlacementSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -200,7 +197,6 @@ func (s PlacementSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An object defining the template for a placement.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iot1click-projects-2018-05-14/PlacementTemplate
 type PlacementTemplate struct {
 	_ struct{} `type:"structure"`
 
@@ -249,7 +245,6 @@ func (s PlacementTemplate) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object providing detailed information for a particular project associated
 // with an AWS account and region.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iot1click-projects-2018-05-14/ProjectDescription
 type ProjectDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -344,7 +339,6 @@ func (s ProjectDescription) MarshalFields(e protocol.FieldEncoder) error {
 
 // An object providing summary information for a particular project for an associated
 // AWS account and region.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iot1click-projects-2018-05-14/ProjectSummary
 type ProjectSummary struct {
 	_ struct{} `type:"structure"`
 

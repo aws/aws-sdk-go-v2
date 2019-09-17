@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure for update webhook request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateWebhookRequest
 type UpdateWebhookInput struct {
 	_ struct{} `type:"structure"`
 
@@ -75,7 +74,6 @@ func (s UpdateWebhookInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure for the update webhook request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateWebhookResult
 type UpdateWebhookOutput struct {
 	_ struct{} `type:"structure"`
 

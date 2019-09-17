@@ -12,7 +12,6 @@ import (
 )
 
 // Contains the parameters for DeleteCustomerGateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteCustomerGatewayRequest
 type DeleteCustomerGatewayInput struct {
 	_ struct{} `type:"structure"`
 
@@ -47,7 +46,6 @@ func (s *DeleteCustomerGatewayInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteCustomerGatewayOutput
 type DeleteCustomerGatewayOutput struct {
 	_ struct{} `type:"structure"`
 }

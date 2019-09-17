@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // A structure that defines the rotation configuration for the secret.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/RotationRulesType
 type RotationRulesType struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s *RotationRulesType) Validate() error {
 // A structure that contains the details about a secret. It does not include
 // the encrypted SecretString and SecretBinary values. To get those values,
 // use the GetSecretValue operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/SecretListEntry
 type SecretListEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -125,7 +123,6 @@ func (s SecretListEntry) String() string {
 }
 
 // A structure that contains information about one version of a secret.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/SecretVersionsListEntry
 type SecretVersionsListEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -150,7 +147,6 @@ func (s SecretVersionsListEntry) String() string {
 }
 
 // A structure that contains information about a tag.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 

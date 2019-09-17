@@ -10,7 +10,6 @@ import (
 )
 
 // Removes the specified directory as a publisher to the specified SNS topic.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeregisterEventTopicRequest
 type DeregisterEventTopicInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s *DeregisterEventTopicInput) Validate() error {
 }
 
 // The result of a DeregisterEventTopic request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeregisterEventTopicResult
 type DeregisterEventTopicOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -11,7 +11,6 @@ import (
 )
 
 // Request for a list of datasets for an identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListDatasetsRequest
 type ListDatasetsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -95,7 +94,6 @@ func (s ListDatasetsInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Returned for a successful ListDatasets request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListDatasetsResponse
 type ListDatasetsOutput struct {
 	_ struct{} `type:"structure"`
 

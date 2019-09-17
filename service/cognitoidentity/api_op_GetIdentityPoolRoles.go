@@ -10,7 +10,6 @@ import (
 )
 
 // Input to the GetIdentityPoolRoles action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetIdentityPoolRolesInput
 type GetIdentityPoolRolesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *GetIdentityPoolRolesInput) Validate() error {
 }
 
 // Returned in response to a successful GetIdentityPoolRoles operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetIdentityPoolRolesResponse
 type GetIdentityPoolRolesOutput struct {
 	_ struct{} `type:"structure"`
 

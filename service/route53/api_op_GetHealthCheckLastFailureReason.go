@@ -11,7 +11,6 @@ import (
 )
 
 // A request for the reason that a health check failed most recently.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckLastFailureReasonRequest
 type GetHealthCheckLastFailureReasonInput struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +59,6 @@ func (s GetHealthCheckLastFailureReasonInput) MarshalFields(e protocol.FieldEnco
 
 // A complex type that contains the response to a GetHealthCheckLastFailureReason
 // request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckLastFailureReasonResponse
 type GetHealthCheckLastFailureReasonOutput struct {
 	_ struct{} `type:"structure"`
 

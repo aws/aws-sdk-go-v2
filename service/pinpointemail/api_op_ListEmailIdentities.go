@@ -14,7 +14,6 @@ import (
 // Pinpoint account. This list includes identities that you've already verified,
 // identities that are unverified, and identities that were verified in the
 // past, but are no longer verified.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListEmailIdentitiesRequest
 type ListEmailIdentitiesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s ListEmailIdentitiesInput) MarshalFields(e protocol.FieldEncoder) error {
 // A list of all of the identities that you've attempted to verify for use with
 // Amazon Pinpoint, regardless of whether or not those identities were successfully
 // verified.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListEmailIdentitiesResponse
 type ListEmailIdentitiesOutput struct {
 	_ struct{} `type:"structure"`
 

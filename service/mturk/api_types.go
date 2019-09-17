@@ -16,7 +16,6 @@ var _ = awsutil.Prettify
 // The Assignment data structure represents a single assignment of a HIT to
 // a Worker. The assignment tracks the Worker's efforts to complete the HIT,
 // and contains the results for later retrieval.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/Assignment
 type Assignment struct {
 	_ struct{} `type:"structure"`
 
@@ -81,7 +80,6 @@ func (s Assignment) String() string {
 }
 
 // An object representing a Bonus payment paid to a Worker.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/BonusPayment
 type BonusPayment struct {
 	_ struct{} `type:"structure"`
 
@@ -108,7 +106,6 @@ func (s BonusPayment) String() string {
 
 // The HIT data structure represents a single HIT, including all the information
 // necessary for a Worker to accept and complete the HIT.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/HIT
 type HIT struct {
 	_ struct{} `type:"structure"`
 
@@ -202,7 +199,6 @@ func (s HIT) String() string {
 // The HITLayoutParameter data structure defines parameter values used with
 // a HITLayout. A HITLayout is a reusable Amazon Mechanical Turk project template
 // used to provide Human Intelligence Task (HIT) question data for CreateHIT.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/HITLayoutParameter
 type HITLayoutParameter struct {
 	_ struct{} `type:"structure"`
 
@@ -241,7 +237,6 @@ func (s *HITLayoutParameter) Validate() error {
 }
 
 // The Locale data structure represents a geographical region or location.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/Locale
 type Locale struct {
 	_ struct{} `type:"structure"`
 
@@ -283,7 +278,6 @@ func (s *Locale) Validate() error {
 
 // The NotificationSpecification data structure describes a HIT event notification
 // for a HIT type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/NotificationSpecification
 type NotificationSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -352,7 +346,6 @@ func (s *NotificationSpecification) Validate() error {
 
 // When MTurk encounters an issue with notifying the Workers you specified,
 // it returns back this object with failure details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/NotifyWorkersFailureStatus
 type NotifyWorkersFailureStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -373,7 +366,6 @@ func (s NotifyWorkersFailureStatus) String() string {
 
 // This data structure is the data type for the AnswerKey parameter of the ScoreMyKnownAnswers/2011-09-01
 // Review Policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ParameterMapEntry
 type ParameterMapEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -393,7 +385,6 @@ func (s ParameterMapEntry) String() string {
 }
 
 // Name of the parameter from the Review policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/PolicyParameter
 type PolicyParameter struct {
 	_ struct{} `type:"structure"`
 
@@ -414,7 +405,6 @@ func (s PolicyParameter) String() string {
 
 // The Qualification data structure represents a Qualification assigned to a
 // user, including the Qualification type and the value (score).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/Qualification
 type Qualification struct {
 	_ struct{} `type:"structure"`
 
@@ -448,7 +438,6 @@ func (s Qualification) String() string {
 
 // The QualificationRequest data structure represents a request a Worker has
 // made for a Qualification.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/QualificationRequest
 type QualificationRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -490,7 +479,6 @@ func (s QualificationRequest) String() string {
 // a Worker must have before the Worker is allowed to accept a HIT. A requirement
 // may optionally state that a Worker must have the Qualification in order to
 // preview the HIT, or see the HIT in search results.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/QualificationRequirement
 type QualificationRequirement struct {
 	_ struct{} `type:"structure"`
 
@@ -595,7 +583,6 @@ func (s *QualificationRequirement) Validate() error {
 // Worker to be able to accept the HIT. The type also describes how a Worker
 // can obtain a Qualification of that type, such as through a Qualification
 // test.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/QualificationType
 type QualificationType struct {
 	_ struct{} `type:"structure"`
 
@@ -668,7 +655,6 @@ func (s QualificationType) String() string {
 // Both the AssignmentReviewReport and the HITReviewReport elements contains
 // the ReviewActionDetail data structure. This structure is returned multiple
 // times for each action specified in the Review Policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ReviewActionDetail
 type ReviewActionDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -706,7 +692,6 @@ func (s ReviewActionDetail) String() string {
 
 // HIT Review Policy data structures represent HIT review policies, which you
 // specify when you create a HIT.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ReviewPolicy
 type ReviewPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -739,7 +724,6 @@ func (s *ReviewPolicy) Validate() error {
 }
 
 // Contains both ReviewResult and ReviewAction elements for a particular HIT.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ReviewReport
 type ReviewReport struct {
 	_ struct{} `type:"structure"`
 
@@ -757,7 +741,6 @@ func (s ReviewReport) String() string {
 
 // This data structure is returned multiple times for each result specified
 // in the Review Policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ReviewResultDetail
 type ReviewResultDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -795,7 +778,6 @@ func (s ReviewResultDetail) String() string {
 
 // The WorkerBlock data structure represents a Worker who has been blocked.
 // It has two elements: the WorkerId and the Reason for the block.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/WorkerBlock
 type WorkerBlock struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 )
 
 // A request to obtain a list of dedicated IP pools.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListDedicatedIpPoolsRequest
 type ListDedicatedIpPoolsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s ListDedicatedIpPoolsInput) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // A list of dedicated IP pools.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListDedicatedIpPoolsResponse
 type ListDedicatedIpPoolsOutput struct {
 	_ struct{} `type:"structure"`
 

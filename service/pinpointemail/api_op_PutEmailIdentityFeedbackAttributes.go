@@ -12,7 +12,6 @@ import (
 
 // A request to set the attributes that control how bounce and complaint events
 // are processed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutEmailIdentityFeedbackAttributesRequest
 type PutEmailIdentityFeedbackAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -78,7 +77,6 @@ func (s PutEmailIdentityFeedbackAttributesInput) MarshalFields(e protocol.FieldE
 
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutEmailIdentityFeedbackAttributesResponse
 type PutEmailIdentityFeedbackAttributesOutput struct {
 	_ struct{} `type:"structure"`
 }

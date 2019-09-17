@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RevokeFlowEntitlementRequest
 type RevokeFlowEntitlementInput struct {
 	_ struct{} `type:"structure"`
 
@@ -66,7 +65,6 @@ func (s RevokeFlowEntitlementInput) MarshalFields(e protocol.FieldEncoder) error
 // The result of a successful RevokeFlowEntitlement request. The response includes
 // the ARN of the flow that was updated and the ARN of the entitlement that
 // was revoked.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RevokeFlowEntitlementResponse
 type RevokeFlowEntitlementOutput struct {
 	_ struct{} `type:"structure"`
 

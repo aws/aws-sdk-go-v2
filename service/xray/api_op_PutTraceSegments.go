@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTraceSegmentsRequest
 type PutTraceSegmentsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s PutTraceSegmentsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTraceSegmentsResult
 type PutTraceSegmentsOutput struct {
 	_ struct{} `type:"structure"`
 

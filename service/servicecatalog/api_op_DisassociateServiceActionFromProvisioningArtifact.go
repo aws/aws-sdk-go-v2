@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateServiceActionFromProvisioningArtifactInput
 type DisassociateServiceActionFromProvisioningArtifactInput struct {
 	_ struct{} `type:"structure"`
 
@@ -74,7 +73,6 @@ func (s *DisassociateServiceActionFromProvisioningArtifactInput) Validate() erro
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateServiceActionFromProvisioningArtifactOutput
 type DisassociateServiceActionFromProvisioningArtifactOutput struct {
 	_ struct{} `type:"structure"`
 }

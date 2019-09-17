@@ -11,7 +11,6 @@ import (
 )
 
 // The input for the BulkPublish operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/BulkPublishRequest
 type BulkPublishInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s BulkPublishInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The output for the BulkPublish operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/BulkPublishResponse
 type BulkPublishOutput struct {
 	_ struct{} `type:"structure"`
 

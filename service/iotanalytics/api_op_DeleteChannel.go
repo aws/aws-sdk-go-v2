@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DeleteChannelRequest
 type DeleteChannelInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s DeleteChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DeleteChannelOutput
 type DeleteChannelOutput struct {
 	_ struct{} `type:"structure"`
 }

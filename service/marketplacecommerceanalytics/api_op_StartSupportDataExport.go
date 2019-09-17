@@ -11,7 +11,6 @@ import (
 )
 
 // Container for the parameters to the StartSupportDataExport operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/StartSupportDataExportRequest
 type StartSupportDataExportInput struct {
 	_ struct{} `type:"structure"`
 
@@ -115,7 +114,6 @@ func (s *StartSupportDataExportInput) Validate() error {
 }
 
 // Container for the result of the StartSupportDataExport operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/StartSupportDataExportResult
 type StartSupportDataExportOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -16,7 +16,6 @@ var _ = awsutil.Prettify
 
 // A complex type that contains the type of limit that you specified in the
 // request and the current value for that limit.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AccountLimit
 type AccountLimit struct {
 	_ struct{} `type:"structure"`
 
@@ -73,7 +72,6 @@ func (s AccountLimit) MarshalFields(e protocol.FieldEncoder) error {
 // A complex type that identifies the CloudWatch alarm that you want Amazon
 // Route 53 health checkers to use to determine whether the specified health
 // check is healthy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AlarmIdentifier
 type AlarmIdentifier struct {
 	_ struct{} `type:"structure"`
 
@@ -157,7 +155,6 @@ func (s AlarmIdentifier) MarshalFields(e protocol.FieldEncoder) error {
 //
 //    * For information about creating failover resource record sets in a private
 //    hosted zone, see Configuring Failover in a Private Hosted Zone (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AliasTarget
 type AliasTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -485,7 +482,6 @@ func (s AliasTarget) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The information for each resource record set that you want to change.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/Change
 type Change struct {
 	_ struct{} `type:"structure"`
 
@@ -559,7 +555,6 @@ func (s Change) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The information for a change request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeBatch
 type ChangeBatch struct {
 	_ struct{} `type:"structure"`
 
@@ -626,7 +621,6 @@ func (s ChangeBatch) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that describes change information about changes made to your
 // hosted zone.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeInfo
 type ChangeInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -694,7 +688,6 @@ func (s ChangeInfo) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about the CloudWatch alarm that
 // Amazon Route 53 is monitoring for this health check.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CloudWatchAlarmConfiguration
 type CloudWatchAlarmConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -813,7 +806,6 @@ func (s CloudWatchAlarmConfiguration) MarshalFields(e protocol.FieldEncoder) err
 
 // A complex type that lists the name servers in a delegation set, as well as
 // the CallerReference and the ID for the delegation set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DelegationSet
 type DelegationSet struct {
 	_ struct{} `type:"structure"`
 
@@ -867,7 +859,6 @@ func (s DelegationSet) MarshalFields(e protocol.FieldEncoder) error {
 
 // For the metric that the CloudWatch alarm is associated with, a complex type
 // that contains information about one dimension.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/Dimension
 type Dimension struct {
 	_ struct{} `type:"structure"`
 
@@ -907,7 +898,6 @@ func (s Dimension) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains information about a geographic location.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GeoLocation
 type GeoLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -976,7 +966,6 @@ func (s GeoLocation) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains the codes and full continent, country, and subdivision
 // names for the specified geolocation code.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GeoLocationDetails
 type GeoLocationDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -1049,7 +1038,6 @@ func (s GeoLocationDetails) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about one health check that is associated
 // with the current AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HealthCheck
 type HealthCheck struct {
 	_ struct{} `type:"structure"`
 
@@ -1135,7 +1123,6 @@ func (s HealthCheck) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains information about the health check.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HealthCheckConfig
 type HealthCheckConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1582,7 +1569,6 @@ func (s HealthCheckConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains the last failure reason as reported by one Amazon
 // Route 53 health checker.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HealthCheckObservation
 type HealthCheckObservation struct {
 	_ struct{} `type:"structure"`
 
@@ -1628,7 +1614,6 @@ func (s HealthCheckObservation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains general information about the hosted zone.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZone
 type HostedZone struct {
 	_ struct{} `type:"structure"`
 
@@ -1717,7 +1702,6 @@ func (s HostedZone) MarshalFields(e protocol.FieldEncoder) error {
 // A complex type that contains an optional comment about your hosted zone.
 // If you don't want to specify a comment, omit both the HostedZoneConfig and
 // Comment elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZoneConfig
 type HostedZoneConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1752,7 +1736,6 @@ func (s HostedZoneConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains the type of limit that you specified in the
 // request and the current value for that limit.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZoneLimit
 type HostedZoneLimit struct {
 	_ struct{} `type:"structure"`
 
@@ -1799,7 +1782,6 @@ func (s HostedZoneLimit) MarshalFields(e protocol.FieldEncoder) error {
 // is a complex type that describes the service that created the resource. When
 // a resource is created by another service, you can't edit or delete it using
 // Amazon Route 53.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/LinkedService
 type LinkedService struct {
 	_ struct{} `type:"structure"`
 
@@ -1839,7 +1821,6 @@ func (s LinkedService) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about a configuration for DNS query
 // logging.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/QueryLoggingConfig
 type QueryLoggingConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1891,7 +1872,6 @@ func (s QueryLoggingConfig) MarshalFields(e protocol.FieldEncoder) error {
 // Information specific to the resource record.
 //
 // If you're creating an alias resource record set, omit ResourceRecord.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ResourceRecord
 type ResourceRecord struct {
 	_ struct{} `type:"structure"`
 
@@ -1941,7 +1921,6 @@ func (s ResourceRecord) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the resource record set to create or delete.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ResourceRecordSet
 type ResourceRecordSet struct {
 	_ struct{} `type:"structure"`
 
@@ -2511,7 +2490,6 @@ func (s ResourceRecordSet) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type containing a resource and its associated tags.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ResourceTagSet
 type ResourceTagSet struct {
 	_ struct{} `type:"structure"`
 
@@ -2565,7 +2543,6 @@ func (s ResourceTagSet) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains the type of limit that you specified in the
 // request and the current value for that limit.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ReusableDelegationSetLimit
 type ReusableDelegationSetLimit struct {
 	_ struct{} `type:"structure"`
 
@@ -2606,7 +2583,6 @@ func (s ReusableDelegationSetLimit) MarshalFields(e protocol.FieldEncoder) error
 
 // A complex type that contains the status that one Amazon Route 53 health checker
 // reports and the time of the health check.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/StatusReport
 type StatusReport struct {
 	_ struct{} `type:"structure"`
 
@@ -2646,7 +2622,6 @@ func (s StatusReport) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about a tag that you want to add
 // or edit for the specified health check or hosted zone.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -2697,7 +2672,6 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains settings for a traffic policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TrafficPolicy
 type TrafficPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -2782,7 +2756,6 @@ func (s TrafficPolicy) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains settings for the new traffic policy instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TrafficPolicyInstance
 type TrafficPolicyInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -2922,7 +2895,6 @@ func (s TrafficPolicyInstance) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about the latest version of one
 // traffic policy that is associated with the current AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TrafficPolicySummary
 type TrafficPolicySummary struct {
 	_ struct{} `type:"structure"`
 
@@ -2996,7 +2968,6 @@ func (s TrafficPolicySummary) MarshalFields(e protocol.FieldEncoder) error {
 
 // (Private hosted zones only) A complex type that contains information about
 // an Amazon VPC.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/VPC
 type VPC struct {
 	_ struct{} `type:"structure"`
 

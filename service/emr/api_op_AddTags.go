@@ -10,7 +10,6 @@ import (
 )
 
 // This input identifies a cluster and a list of tags to attach.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddTagsInput
 type AddTagsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s *AddTagsInput) Validate() error {
 }
 
 // This output indicates the result of adding tags to a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddTagsOutput
 type AddTagsOutput struct {
 	_ struct{} `type:"structure"`
 }

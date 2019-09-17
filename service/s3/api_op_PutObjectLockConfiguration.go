@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectLockConfigurationRequest
 type PutObjectLockConfigurationInput struct {
 	_ struct{} `type:"structure" payload:"ObjectLockConfiguration"`
 
@@ -88,7 +87,6 @@ func (s PutObjectLockConfigurationInput) MarshalFields(e protocol.FieldEncoder) 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectLockConfigurationOutput
 type PutObjectLockConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateMountTargetRequest
 type CreateMountTargetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -93,7 +92,6 @@ func (s CreateMountTargetInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides a description of a mount target.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/MountTargetDescription
 type CreateMountTargetOutput struct {
 	_ struct{} `type:"structure"`
 

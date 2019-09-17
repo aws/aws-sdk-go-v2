@@ -12,7 +12,6 @@ import (
 )
 
 // Request body for CreateConfiguration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateConfigurationRequest
 type CreateConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -100,7 +99,6 @@ func (s CreateConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Response body for CreateConfiguration
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateConfigurationResponse
 type CreateConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 

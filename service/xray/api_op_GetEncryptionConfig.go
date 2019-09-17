@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetEncryptionConfigRequest
 type GetEncryptionConfigInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -27,7 +26,6 @@ func (s GetEncryptionConfigInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetEncryptionConfigResult
 type GetEncryptionConfigOutput struct {
 	_ struct{} `type:"structure"`
 

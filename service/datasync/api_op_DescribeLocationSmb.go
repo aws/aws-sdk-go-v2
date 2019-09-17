@@ -11,7 +11,6 @@ import (
 )
 
 // DescribeLocationSmbRequest
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationSmbRequest
 type DescribeLocationSmbInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *DescribeLocationSmbInput) Validate() error {
 }
 
 // DescribeLocationSmbResponse
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationSmbResponse
 type DescribeLocationSmbOutput struct {
 	_ struct{} `type:"structure"`
 

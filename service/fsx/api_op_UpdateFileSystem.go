@@ -10,7 +10,6 @@ import (
 )
 
 // The request object for the UpdateFileSystem operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemRequest
 type UpdateFileSystemInput struct {
 	_ struct{} `type:"structure"`
 
@@ -70,7 +69,6 @@ func (s *UpdateFileSystemInput) Validate() error {
 }
 
 // The response object for the UpdateFileSystem operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemResponse
 type UpdateFileSystemOutput struct {
 	_ struct{} `type:"structure"`
 

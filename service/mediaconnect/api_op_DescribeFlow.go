@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeFlowRequest
 type DescribeFlowInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s DescribeFlowInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The result of a successful DescribeFlow request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeFlowResponse
 type DescribeFlowOutput struct {
 	_ struct{} `type:"structure"`
 

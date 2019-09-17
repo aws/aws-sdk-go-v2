@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplicaMessage
 type CreateDBInstanceReadReplicaInput struct {
 	_ struct{} `type:"structure"`
 
@@ -309,7 +308,6 @@ func (s *CreateDBInstanceReadReplicaInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplicaResult
 type CreateDBInstanceReadReplicaOutput struct {
 	_ struct{} `type:"structure"`
 

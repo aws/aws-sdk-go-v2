@@ -11,7 +11,6 @@ import (
 )
 
 // A request for usage information on an identity pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListIdentityPoolUsageRequest
 type ListIdentityPoolUsageInput struct {
 	_ struct{} `type:"structure"`
 
@@ -47,7 +46,6 @@ func (s ListIdentityPoolUsageInput) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // Returned for a successful ListIdentityPoolUsage request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListIdentityPoolUsageResponse
 type ListIdentityPoolUsageOutput struct {
 	_ struct{} `type:"structure"`
 

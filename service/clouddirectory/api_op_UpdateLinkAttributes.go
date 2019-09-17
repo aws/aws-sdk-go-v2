@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateLinkAttributesRequest
 type UpdateLinkAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -103,7 +102,6 @@ func (s UpdateLinkAttributesInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateLinkAttributesResponse
 type UpdateLinkAttributesOutput struct {
 	_ struct{} `type:"structure"`
 }

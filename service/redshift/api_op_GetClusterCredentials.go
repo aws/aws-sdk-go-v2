@@ -11,7 +11,6 @@ import (
 )
 
 // The request parameters to get cluster credentials.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetClusterCredentialsMessage
 type GetClusterCredentialsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -127,7 +126,6 @@ func (s *GetClusterCredentialsInput) Validate() error {
 
 // Temporary credentials with authorization to log on to an Amazon Redshift
 // database.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterCredentials
 type GetClusterCredentialsOutput struct {
 	_ struct{} `type:"structure"`
 

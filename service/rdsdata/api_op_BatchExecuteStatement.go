@@ -12,7 +12,6 @@ import (
 
 // The request parameters represent the input of a SQL statement over an array
 // of data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/BatchExecuteStatementRequest
 type BatchExecuteStatementInput struct {
 	_ struct{} `type:"structure"`
 
@@ -123,7 +122,6 @@ func (s BatchExecuteStatementInput) MarshalFields(e protocol.FieldEncoder) error
 
 // The response elements represent the output of a SQL statement over an array
 // of data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/BatchExecuteStatementResponse
 type BatchExecuteStatementOutput struct {
 	_ struct{} `type:"structure"`
 

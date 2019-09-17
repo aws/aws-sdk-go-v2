@@ -13,7 +13,6 @@ import (
 
 // A request to configure Cognito Events"
 // "
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SetCognitoEventsRequest
 type SetCognitoEventsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -79,7 +78,6 @@ func (s SetCognitoEventsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SetCognitoEventsOutput
 type SetCognitoEventsOutput struct {
 	_ struct{} `type:"structure"`
 }

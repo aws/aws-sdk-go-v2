@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/AssociateS3ResourcesRequest
 type AssociateS3ResourcesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s *AssociateS3ResourcesInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/AssociateS3ResourcesResult
 type AssociateS3ResourcesOutput struct {
 	_ struct{} `type:"structure"`
 

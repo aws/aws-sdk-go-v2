@@ -16,7 +16,6 @@ var _ = awsutil.Prettify
 
 // An activity that adds other attributes based on existing attributes in the
 // message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/AddAttributesActivity
 type AddAttributesActivity struct {
 	_ struct{} `type:"structure"`
 
@@ -100,7 +99,6 @@ func (s AddAttributesActivity) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains informations about errors.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/BatchPutMessageErrorEntry
 type BatchPutMessageErrorEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -145,7 +143,6 @@ func (s BatchPutMessageErrorEntry) MarshalFields(e protocol.FieldEncoder) error 
 
 // A collection of data from an MQTT topic. Channels archive the raw, unprocessed
 // messages before publishing the data to a pipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/Channel
 type Channel struct {
 	_ struct{} `type:"structure"`
 
@@ -226,7 +223,6 @@ func (s Channel) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The activity that determines the source of the messages to be processed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ChannelActivity
 type ChannelActivity struct {
 	_ struct{} `type:"structure"`
 
@@ -300,7 +296,6 @@ func (s ChannelActivity) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Statistics information about the channel.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ChannelStatistics
 type ChannelStatistics struct {
 	_ struct{} `type:"structure"`
 
@@ -325,7 +320,6 @@ func (s ChannelStatistics) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Where channel data is stored.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ChannelStorage
 type ChannelStorage struct {
 	_ struct{} `type:"structure"`
 
@@ -375,7 +369,6 @@ func (s ChannelStorage) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Where channel data is stored.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ChannelStorageSummary
 type ChannelStorageSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -410,7 +403,6 @@ func (s ChannelStorageSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A summary of information about a channel.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ChannelSummary
 type ChannelSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -473,7 +465,6 @@ func (s ChannelSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information needed to run the "containerAction" to produce data set contents.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ContainerDatasetAction
 type ContainerDatasetAction struct {
 	_ struct{} `type:"structure"`
 
@@ -582,7 +573,6 @@ func (s ContainerDatasetAction) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Use this to store channel data in an S3 bucket that you manage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/CustomerManagedChannelS3Storage
 type CustomerManagedChannelS3Storage struct {
 	_ struct{} `type:"structure"`
 
@@ -659,7 +649,6 @@ func (s CustomerManagedChannelS3Storage) MarshalFields(e protocol.FieldEncoder) 
 }
 
 // Used to store channel data in an S3 bucket that you manage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/CustomerManagedChannelS3StorageSummary
 type CustomerManagedChannelS3StorageSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -705,7 +694,6 @@ func (s CustomerManagedChannelS3StorageSummary) MarshalFields(e protocol.FieldEn
 }
 
 // Use this to store data store data in an S3 bucket that you manage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/CustomerManagedDatastoreS3Storage
 type CustomerManagedDatastoreS3Storage struct {
 	_ struct{} `type:"structure"`
 
@@ -782,7 +770,6 @@ func (s CustomerManagedDatastoreS3Storage) MarshalFields(e protocol.FieldEncoder
 }
 
 // Used to store data store data in an S3 bucket that you manage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/CustomerManagedDatastoreS3StorageSummary
 type CustomerManagedDatastoreS3StorageSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -828,7 +815,6 @@ func (s CustomerManagedDatastoreS3StorageSummary) MarshalFields(e protocol.Field
 }
 
 // Information about a data set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/Dataset
 type Dataset struct {
 	_ struct{} `type:"structure"`
 
@@ -960,7 +946,6 @@ func (s Dataset) MarshalFields(e protocol.FieldEncoder) error {
 
 // A "DatasetAction" object that specifies how data set contents are automatically
 // created.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatasetAction
 type DatasetAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1030,7 +1015,6 @@ func (s DatasetAction) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the action which automatically creates the data set's contents.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatasetActionSummary
 type DatasetActionSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1064,7 +1048,6 @@ func (s DatasetActionSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The destination to which data set contents are delivered.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatasetContentDeliveryDestination
 type DatasetContentDeliveryDestination struct {
 	_ struct{} `type:"structure"`
 
@@ -1119,7 +1102,6 @@ func (s DatasetContentDeliveryDestination) MarshalFields(e protocol.FieldEncoder
 
 // When data set contents are created they are delivered to destination specified
 // here.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatasetContentDeliveryRule
 type DatasetContentDeliveryRule struct {
 	_ struct{} `type:"structure"`
 
@@ -1174,7 +1156,6 @@ func (s DatasetContentDeliveryRule) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // The state of the data set contents and the reason they are in this state.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatasetContentStatus
 type DatasetContentStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -1209,7 +1190,6 @@ func (s DatasetContentStatus) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Summary information about data set contents.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatasetContentSummary
 type DatasetContentSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1263,7 +1243,6 @@ func (s DatasetContentSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The data set whose latest contents are used as input to the notebook or application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatasetContentVersionValue
 type DatasetContentVersionValue struct {
 	_ struct{} `type:"structure"`
 
@@ -1308,7 +1287,6 @@ func (s DatasetContentVersionValue) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // The reference to a data set entry.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatasetEntry
 type DatasetEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -1342,7 +1320,6 @@ func (s DatasetEntry) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A summary of information about a data set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatasetSummary
 type DatasetSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1428,7 +1405,6 @@ func (s DatasetSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The "DatasetTrigger" that specifies when the data set is automatically updated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatasetTrigger
 type DatasetTrigger struct {
 	_ struct{} `type:"structure"`
 
@@ -1478,7 +1454,6 @@ func (s DatasetTrigger) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a data store.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/Datastore
 type Datastore struct {
 	_ struct{} `type:"structure"`
 
@@ -1571,7 +1546,6 @@ func (s Datastore) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The 'datastore' activity that specifies where to store the processed data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatastoreActivity
 type DatastoreActivity struct {
 	_ struct{} `type:"structure"`
 
@@ -1633,7 +1607,6 @@ func (s DatastoreActivity) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Statistical information about the data store.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatastoreStatistics
 type DatastoreStatistics struct {
 	_ struct{} `type:"structure"`
 
@@ -1658,7 +1631,6 @@ func (s DatastoreStatistics) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Where data store data is stored.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatastoreStorage
 type DatastoreStorage struct {
 	_ struct{} `type:"structure"`
 
@@ -1708,7 +1680,6 @@ func (s DatastoreStorage) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Where data store data is stored.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatastoreStorageSummary
 type DatastoreStorageSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1743,7 +1714,6 @@ func (s DatastoreStorageSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A summary of information about a data store.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatastoreSummary
 type DatastoreSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1807,7 +1777,6 @@ func (s DatastoreSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 // Used to limit data to that which has arrived since the last execution of
 // the action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DeltaTime
 type DeltaTime struct {
 	_ struct{} `type:"structure"`
 
@@ -1873,7 +1842,6 @@ func (s DeltaTime) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An activity that adds data from the AWS IoT device registry to your message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DeviceRegistryEnrichActivity
 type DeviceRegistryEnrichActivity struct {
 	_ struct{} `type:"structure"`
 
@@ -1984,7 +1952,6 @@ func (s DeviceRegistryEnrichActivity) MarshalFields(e protocol.FieldEncoder) err
 
 // An activity that adds information from the AWS IoT Device Shadows service
 // to a message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DeviceShadowEnrichActivity
 type DeviceShadowEnrichActivity struct {
 	_ struct{} `type:"structure"`
 
@@ -2094,7 +2061,6 @@ func (s DeviceShadowEnrichActivity) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // The estimated size of the resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/EstimatedResourceSize
 type EstimatedResourceSize struct {
 	_ struct{} `type:"structure"`
 
@@ -2129,7 +2095,6 @@ func (s EstimatedResourceSize) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An activity that filters a message based on its attributes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/FilterActivity
 type FilterActivity struct {
 	_ struct{} `type:"structure"`
 
@@ -2205,7 +2170,6 @@ func (s FilterActivity) MarshalFields(e protocol.FieldEncoder) error {
 
 // Configuration information for coordination with the AWS Glue ETL (extract,
 // transform and load) service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/GlueConfiguration
 type GlueConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -2270,7 +2234,6 @@ func (s GlueConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Configuration information for delivery of data set contents to AWS IoT Events.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/IotEventsDestinationConfiguration
 type IotEventsDestinationConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -2333,7 +2296,6 @@ func (s IotEventsDestinationConfiguration) MarshalFields(e protocol.FieldEncoder
 }
 
 // An activity that runs a Lambda function to modify the message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/LambdaActivity
 type LambdaActivity struct {
 	_ struct{} `type:"structure"`
 
@@ -2428,7 +2390,6 @@ func (s LambdaActivity) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about logging options.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/LoggingOptions
 type LoggingOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -2502,7 +2463,6 @@ func (s LoggingOptions) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An activity that computes an arithmetic expression using the message's attributes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/MathActivity
 type MathActivity struct {
 	_ struct{} `type:"structure"`
 
@@ -2595,7 +2555,6 @@ func (s MathActivity) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about a message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/Message
 type Message struct {
 	_ struct{} `type:"structure"`
 
@@ -2659,7 +2618,6 @@ func (s Message) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The value of the variable as a structure that specifies an output file URI.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/OutputFileUriValue
 type OutputFileUriValue struct {
 	_ struct{} `type:"structure"`
 
@@ -2701,7 +2659,6 @@ func (s OutputFileUriValue) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains information about a pipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/Pipeline
 type Pipeline struct {
 	_ struct{} `type:"structure"`
 
@@ -2785,7 +2742,6 @@ func (s Pipeline) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An activity that performs a transformation on a message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/PipelineActivity
 type PipelineActivity struct {
 	_ struct{} `type:"structure"`
 
@@ -2953,7 +2909,6 @@ func (s PipelineActivity) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A summary of information about a pipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/PipelineSummary
 type PipelineSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -3014,7 +2969,6 @@ func (s PipelineSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 // Information which is used to filter message data, to segregate it according
 // to the time frame in which it arrives.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/QueryFilter
 type QueryFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -3055,7 +3009,6 @@ func (s QueryFilter) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An activity that removes attributes from a message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/RemoveAttributesActivity
 type RemoveAttributesActivity struct {
 	_ struct{} `type:"structure"`
 
@@ -3135,7 +3088,6 @@ func (s RemoveAttributesActivity) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about pipeline reprocessing.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ReprocessingSummary
 type ReprocessingSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -3179,7 +3131,6 @@ func (s ReprocessingSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The configuration of the resource used to execute the "containerAction".
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ResourceConfiguration
 type ResourceConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -3239,7 +3190,6 @@ func (s ResourceConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // How long, in days, message data is kept.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/RetentionPeriod
 type RetentionPeriod struct {
 	_ struct{} `type:"structure"`
 
@@ -3287,7 +3237,6 @@ func (s RetentionPeriod) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Configuration information for delivery of data set contents to Amazon S3.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/S3DestinationConfiguration
 type S3DestinationConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -3385,7 +3334,6 @@ func (s S3DestinationConfiguration) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // The schedule for when to trigger an update.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/Schedule
 type Schedule struct {
 	_ struct{} `type:"structure"`
 
@@ -3413,7 +3361,6 @@ func (s Schedule) MarshalFields(e protocol.FieldEncoder) error {
 
 // Creates a new message using only the specified attributes from the original
 // message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/SelectAttributesActivity
 type SelectAttributesActivity struct {
 	_ struct{} `type:"structure"`
 
@@ -3494,7 +3441,6 @@ func (s SelectAttributesActivity) MarshalFields(e protocol.FieldEncoder) error {
 
 // Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics
 // service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ServiceManagedChannelS3Storage
 type ServiceManagedChannelS3Storage struct {
 	_ struct{} `type:"structure"`
 }
@@ -3511,7 +3457,6 @@ func (s ServiceManagedChannelS3Storage) MarshalFields(e protocol.FieldEncoder) e
 
 // Used to store channel data in an S3 bucket managed by the AWS IoT Analytics
 // service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ServiceManagedChannelS3StorageSummary
 type ServiceManagedChannelS3StorageSummary struct {
 	_ struct{} `type:"structure"`
 }
@@ -3528,7 +3473,6 @@ func (s ServiceManagedChannelS3StorageSummary) MarshalFields(e protocol.FieldEnc
 
 // Use this to store data store data in an S3 bucket managed by the AWS IoT
 // Analytics service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ServiceManagedDatastoreS3Storage
 type ServiceManagedDatastoreS3Storage struct {
 	_ struct{} `type:"structure"`
 }
@@ -3545,7 +3489,6 @@ func (s ServiceManagedDatastoreS3Storage) MarshalFields(e protocol.FieldEncoder)
 
 // Used to store data store data in an S3 bucket managed by the AWS IoT Analytics
 // service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ServiceManagedDatastoreS3StorageSummary
 type ServiceManagedDatastoreS3StorageSummary struct {
 	_ struct{} `type:"structure"`
 }
@@ -3561,7 +3504,6 @@ func (s ServiceManagedDatastoreS3StorageSummary) MarshalFields(e protocol.FieldE
 }
 
 // The SQL query to modify the message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/SqlQueryDatasetAction
 type SqlQueryDatasetAction struct {
 	_ struct{} `type:"structure"`
 
@@ -3624,7 +3566,6 @@ func (s SqlQueryDatasetAction) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A set of key/value pairs which are used to manage the resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -3687,7 +3628,6 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 
 // Information about the data set whose content generation triggers the new
 // data set content generation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/TriggeringDataset
 type TriggeringDataset struct {
 	_ struct{} `type:"structure"`
 
@@ -3734,7 +3674,6 @@ func (s TriggeringDataset) MarshalFields(e protocol.FieldEncoder) error {
 // An instance of a variable to be passed to the "containerAction" execution.
 // Each variable must have a name and a value given by one of "stringValue",
 // "datasetContentVersionValue", or "outputFileUriValue".
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/Variable
 type Variable struct {
 	_ struct{} `type:"structure"`
 
@@ -3825,7 +3764,6 @@ func (s Variable) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the versioning of data set contents.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/VersioningConfiguration
 type VersioningConfiguration struct {
 	_ struct{} `type:"structure"`
 

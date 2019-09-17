@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // The summary of devices.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DeviceSummary
 type DeviceSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +47,6 @@ func (s DeviceSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The summary of the domain.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DomainSummary
 type DomainSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -107,7 +105,6 @@ func (s DomainSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The summary of the fleet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/FleetSummary
 type FleetSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -188,7 +185,6 @@ func (s FleetSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The summary of the website authorization provider.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/WebsiteAuthorizationProviderSummary
 type WebsiteAuthorizationProviderSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -244,7 +240,6 @@ func (s WebsiteAuthorizationProviderSummary) MarshalFields(e protocol.FieldEncod
 }
 
 // The summary of the certificate authority (CA).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/WebsiteCaSummary
 type WebsiteCaSummary struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 )
 
 // The request object for the CreateFileSystemFromBackup operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemFromBackupRequest
 type CreateFileSystemFromBackupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -91,7 +90,6 @@ func (s *CreateFileSystemFromBackupInput) Validate() error {
 }
 
 // The response object for the CreateFileSystemFromBackup operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemFromBackupResponse
 type CreateFileSystemFromBackupOutput struct {
 	_ struct{} `type:"structure"`
 

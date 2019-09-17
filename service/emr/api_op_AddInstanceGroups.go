@@ -11,7 +11,6 @@ import (
 )
 
 // Input to an AddInstanceGroups call.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceGroupsInput
 type AddInstanceGroupsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -57,7 +56,6 @@ func (s *AddInstanceGroupsInput) Validate() error {
 }
 
 // Output from an AddInstanceGroups call.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceGroupsOutput
 type AddInstanceGroupsOutput struct {
 	_ struct{} `type:"structure"`
 

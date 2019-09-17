@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure for the get Domain Association request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetDomainAssociationRequest
 type GetDomainAssociationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -72,7 +71,6 @@ func (s GetDomainAssociationInput) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // Result structure for the get Domain Association request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetDomainAssociationResult
 type GetDomainAssociationOutput struct {
 	_ struct{} `type:"structure"`
 

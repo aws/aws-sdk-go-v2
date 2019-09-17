@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/GetCloudFormationTemplateRequest
 type GetCloudFormationTemplateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -63,7 +62,6 @@ func (s GetCloudFormationTemplateInput) MarshalFields(e protocol.FieldEncoder) e
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/GetCloudFormationTemplateResponse
 type GetCloudFormationTemplateOutput struct {
 	_ struct{} `type:"structure"`
 

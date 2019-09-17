@@ -15,7 +15,6 @@ import (
 // to send email during a specified time range. This data is available for a
 // domain only if you enabled the Deliverability dashboard (PutDeliverabilityDashboardOption
 // operation) for the domain.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListDomainDeliverabilityCampaignsRequest
 type ListDomainDeliverabilityCampaignsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -119,7 +118,6 @@ func (s ListDomainDeliverabilityCampaignsInput) MarshalFields(e protocol.FieldEn
 // that used a specific domain to send email during a specified time range.
 // This data is available for a domain only if you enabled the Deliverability
 // dashboard (PutDeliverabilityDashboardOption operation) for the domain.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListDomainDeliverabilityCampaignsResponse
 type ListDomainDeliverabilityCampaignsOutput struct {
 	_ struct{} `type:"structure"`
 

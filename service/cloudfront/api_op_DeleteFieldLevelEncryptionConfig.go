@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteFieldLevelEncryptionConfigRequest
 type DeleteFieldLevelEncryptionConfigInput struct {
 	_ struct{} `type:"structure"`
 
@@ -62,7 +61,6 @@ func (s DeleteFieldLevelEncryptionConfigInput) MarshalFields(e protocol.FieldEnc
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteFieldLevelEncryptionConfigOutput
 type DeleteFieldLevelEncryptionConfigOutput struct {
 	_ struct{} `type:"structure"`
 }

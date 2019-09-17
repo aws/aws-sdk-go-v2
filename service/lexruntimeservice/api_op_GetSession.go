@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/GetSessionRequest
 type GetSessionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -86,7 +85,6 @@ func (s GetSessionInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/GetSessionResponse
 type GetSessionOutput struct {
 	_ struct{} `type:"structure"`
 

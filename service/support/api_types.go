@@ -12,7 +12,6 @@ var _ = awsutil.Prettify
 
 // An attachment to a case communication. The attachment consists of the file
 // name and the content of the file.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/Attachment
 type Attachment struct {
 	_ struct{} `type:"structure"`
 
@@ -32,7 +31,6 @@ func (s Attachment) String() string {
 
 // The file name and ID of an attachment to a case communication. You can use
 // the ID to retrieve the attachment with the DescribeAttachment operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AttachmentDetails
 type AttachmentDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -84,7 +82,6 @@ func (s AttachmentDetails) String() string {
 //    * submittedBy. The email address of the account that submitted the case.
 //
 //    * timeCreated. The time the case was created, in ISO-8601 format.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CaseDetails
 type CaseDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -139,7 +136,6 @@ func (s CaseDetails) String() string {
 // A JSON-formatted name/value pair that represents the category name and category
 // code of the problem, selected from the DescribeServices response for each
 // AWS service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/Category
 type Category struct {
 	_ struct{} `type:"structure"`
 
@@ -158,7 +154,6 @@ func (s Category) String() string {
 // A communication associated with an AWS Support case. The communication consists
 // of the case ID, the message body, attachment information, the account email
 // address, and the date and time of the communication.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/Communication
 type Communication struct {
 	_ struct{} `type:"structure"`
 
@@ -185,7 +180,6 @@ func (s Communication) String() string {
 }
 
 // The five most recent communications associated with the case.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/RecentCaseCommunications
 type RecentCaseCommunications struct {
 	_ struct{} `type:"structure"`
 
@@ -202,7 +196,6 @@ func (s RecentCaseCommunications) String() string {
 }
 
 // Information about an AWS service returned by the DescribeServices operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/Service
 type Service struct {
 	_ struct{} `type:"structure"`
 
@@ -227,7 +220,6 @@ func (s Service) String() string {
 
 // A code and name pair that represent a severity level that can be applied
 // to a support case.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/SeverityLevel
 type SeverityLevel struct {
 	_ struct{} `type:"structure"`
 
@@ -246,7 +238,6 @@ func (s SeverityLevel) String() string {
 
 // The container for summary information that relates to the category of the
 // Trusted Advisor check.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/TrustedAdvisorCategorySpecificSummary
 type TrustedAdvisorCategorySpecificSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -261,7 +252,6 @@ func (s TrustedAdvisorCategorySpecificSummary) String() string {
 }
 
 // The description and metadata for a Trusted Advisor check.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/TrustedAdvisorCheckDescription
 type TrustedAdvisorCheckDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -302,7 +292,6 @@ func (s TrustedAdvisorCheckDescription) String() string {
 }
 
 // The refresh status of a Trusted Advisor check.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/TrustedAdvisorCheckRefreshStatus
 type TrustedAdvisorCheckRefreshStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -330,7 +319,6 @@ func (s TrustedAdvisorCheckRefreshStatus) String() string {
 }
 
 // The results of a Trusted Advisor check returned by DescribeTrustedAdvisorCheckResult.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/TrustedAdvisorCheckResult
 type TrustedAdvisorCheckResult struct {
 	_ struct{} `type:"structure"`
 
@@ -375,7 +363,6 @@ func (s TrustedAdvisorCheckResult) String() string {
 
 // A summary of a Trusted Advisor check result, including the alert status,
 // last refresh, and number of resources examined.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/TrustedAdvisorCheckSummary
 type TrustedAdvisorCheckSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -418,7 +405,6 @@ func (s TrustedAdvisorCheckSummary) String() string {
 
 // The estimated cost savings that might be realized if the recommended actions
 // are taken.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/TrustedAdvisorCostOptimizingSummary
 type TrustedAdvisorCostOptimizingSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -441,7 +427,6 @@ func (s TrustedAdvisorCostOptimizingSummary) String() string {
 }
 
 // Contains information about a resource identified by a Trusted Advisor check.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/TrustedAdvisorResourceDetail
 type TrustedAdvisorResourceDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -479,7 +464,6 @@ func (s TrustedAdvisorResourceDetail) String() string {
 
 // Details about AWS resources that were analyzed in a call to Trusted Advisor
 // DescribeTrustedAdvisorCheckSummaries.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/TrustedAdvisorResourcesSummary
 type TrustedAdvisorResourcesSummary struct {
 	_ struct{} `type:"structure"`
 

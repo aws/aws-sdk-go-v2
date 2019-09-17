@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a DescribeCacheSecurityGroups operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheSecurityGroupsMessage
 type DescribeCacheSecurityGroupsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -38,7 +37,6 @@ func (s DescribeCacheSecurityGroupsInput) String() string {
 }
 
 // Represents the output of a DescribeCacheSecurityGroups operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSecurityGroupMessage
 type DescribeCacheSecurityGroupsOutput struct {
 	_ struct{} `type:"structure"`
 

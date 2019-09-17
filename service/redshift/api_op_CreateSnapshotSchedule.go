@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateSnapshotScheduleMessage
 type CreateSnapshotScheduleInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s CreateSnapshotScheduleInput) String() string {
 
 // Describes a snapshot schedule. You can set a regular interval for creating
 // snapshots of a cluster. You can also schedule snapshots for specific dates.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotSchedule
 type CreateSnapshotScheduleOutput struct {
 	_ struct{} `type:"structure"`
 

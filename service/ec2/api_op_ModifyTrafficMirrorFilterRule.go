@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTrafficMirrorFilterRuleRequest
 type ModifyTrafficMirrorFilterRuleInput struct {
 	_ struct{} `type:"structure"`
 
@@ -79,7 +78,6 @@ func (s *ModifyTrafficMirrorFilterRuleInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTrafficMirrorFilterRuleResult
 type ModifyTrafficMirrorFilterRuleOutput struct {
 	_ struct{} `type:"structure"`
 

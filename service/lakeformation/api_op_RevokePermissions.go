@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RevokePermissionsRequest
 type RevokePermissionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -80,7 +79,6 @@ func (s *RevokePermissionsInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RevokePermissionsResponse
 type RevokePermissionsOutput struct {
 	_ struct{} `type:"structure"`
 }

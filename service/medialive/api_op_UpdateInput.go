@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputRequest
 type UpdateInputInput struct {
 	_ struct{} `type:"structure"`
 
@@ -122,7 +121,6 @@ func (s UpdateInputInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputResponse
 type UpdateInputOutput struct {
 	_ struct{} `type:"structure"`
 

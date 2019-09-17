@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/EnableSharingWithAwsOrganizationRequest
 type EnableSharingWithAwsOrganizationInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -27,7 +26,6 @@ func (s EnableSharingWithAwsOrganizationInput) MarshalFields(e protocol.FieldEnc
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/EnableSharingWithAwsOrganizationResponse
 type EnableSharingWithAwsOrganizationOutput struct {
 	_ struct{} `type:"structure"`
 

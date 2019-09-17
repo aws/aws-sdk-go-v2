@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure for list job request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListJobsRequest
 type ListJobsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -98,7 +97,6 @@ func (s ListJobsInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Maximum number of records to list in a single response.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListJobsResult
 type ListJobsOutput struct {
 	_ struct{} `type:"structure"`
 

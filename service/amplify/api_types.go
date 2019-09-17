@@ -15,7 +15,6 @@ var _ = awsutil.Prettify
 
 // Amplify App represents different branches of a repository for building, deploying,
 // and hosting.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/App
 type App struct {
 	_ struct{} `type:"structure"`
 
@@ -270,7 +269,6 @@ func (s App) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Structure with auto branch creation config.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/AutoBranchCreationConfig
 type AutoBranchCreationConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -368,7 +366,6 @@ func (s AutoBranchCreationConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Branch for an Amplify App, which maps to a 3rd party repository branch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Branch
 type Branch struct {
 	_ struct{} `type:"structure"`
 
@@ -631,7 +628,6 @@ func (s Branch) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Custom rewrite / redirect rule.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CustomRule
 type CustomRule struct {
 	_ struct{} `type:"structure"`
 
@@ -718,7 +714,6 @@ func (s CustomRule) MarshalFields(e protocol.FieldEncoder) error {
 
 // Structure for Domain Association, which associates a custom domain with an
 // Amplify App.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DomainAssociation
 type DomainAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -815,7 +810,6 @@ func (s DomainAssociation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Structure for an execution job for an Amplify App.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Job
 type Job struct {
 	_ struct{} `type:"structure"`
 
@@ -859,7 +853,6 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Structure for the summary of a Job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/JobSummary
 type JobSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -977,7 +970,6 @@ func (s JobSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Structure with Production Branch information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ProductionBranch
 type ProductionBranch struct {
 	_ struct{} `type:"structure"`
 
@@ -1030,7 +1022,6 @@ func (s ProductionBranch) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Structure for an execution step for an execution job, for an Amplify App.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Step
 type Step struct {
 	_ struct{} `type:"structure"`
 
@@ -1143,7 +1134,6 @@ func (s Step) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Subdomain for the Domain Association.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/SubDomain
 type SubDomain struct {
 	_ struct{} `type:"structure"`
 
@@ -1192,7 +1182,6 @@ func (s SubDomain) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Setting for the Subdomain.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/SubDomainSetting
 type SubDomainSetting struct {
 	_ struct{} `type:"structure"`
 
@@ -1251,7 +1240,6 @@ func (s SubDomainSetting) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Structure for webhook, which associates a webhook with an Amplify App.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Webhook
 type Webhook struct {
 	_ struct{} `type:"structure"`
 

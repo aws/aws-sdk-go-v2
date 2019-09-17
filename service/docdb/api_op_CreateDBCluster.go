@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input to CreateDBCluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBClusterMessage
 type CreateDBClusterInput struct {
 	_ struct{} `type:"structure"`
 
@@ -195,7 +194,6 @@ func (s *CreateDBClusterInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBClusterResult
 type CreateDBClusterOutput struct {
 	_ struct{} `type:"structure"`
 

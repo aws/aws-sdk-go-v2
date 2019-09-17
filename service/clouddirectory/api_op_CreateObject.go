@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateObjectRequest
 type CreateObjectInput struct {
 	_ struct{} `type:"structure"`
 
@@ -127,7 +126,6 @@ func (s CreateObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateObjectResponse
 type CreateObjectOutput struct {
 	_ struct{} `type:"structure"`
 

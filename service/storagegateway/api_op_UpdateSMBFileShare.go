@@ -10,7 +10,6 @@ import (
 )
 
 // UpdateSMBFileShareInput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBFileShareInput
 type UpdateSMBFileShareInput struct {
 	_ struct{} `type:"structure"`
 
@@ -108,7 +107,6 @@ func (s *UpdateSMBFileShareInput) Validate() error {
 }
 
 // UpdateSMBFileShareOutput
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBFileShareOutput
 type UpdateSMBFileShareOutput struct {
 	_ struct{} `type:"structure"`
 

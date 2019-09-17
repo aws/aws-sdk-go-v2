@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateStateMachineInput
 type CreateStateMachineInput struct {
 	_ struct{} `type:"structure"`
 
@@ -90,7 +89,6 @@ func (s *CreateStateMachineInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateStateMachineOutput
 type CreateStateMachineOutput struct {
 	_ struct{} `type:"structure"`
 

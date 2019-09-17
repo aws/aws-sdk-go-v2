@@ -10,7 +10,6 @@ import (
 )
 
 // DeleteAgentRequest
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DeleteAgentRequest
 type DeleteAgentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *DeleteAgentInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DeleteAgentResponse
 type DeleteAgentOutput struct {
 	_ struct{} `type:"structure"`
 }

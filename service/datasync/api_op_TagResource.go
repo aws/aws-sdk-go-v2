@@ -11,7 +11,6 @@ import (
 )
 
 // TagResourceRequest
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TagResourceRequest
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s *TagResourceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/TagResourceResponse
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }

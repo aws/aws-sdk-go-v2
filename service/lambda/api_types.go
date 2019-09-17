@@ -15,7 +15,6 @@ var _ = awsutil.Prettify
 
 // Limits that are related to concurrency and code storage. All file and storage
 // sizes are in bytes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AccountLimit
 type AccountLimit struct {
 	_ struct{} `type:"structure"`
 
@@ -79,7 +78,6 @@ func (s AccountLimit) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The number of functions and amount of storage in use.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AccountUsage
 type AccountUsage struct {
 	_ struct{} `type:"structure"`
 
@@ -114,7 +112,6 @@ func (s AccountUsage) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides configuration information about a Lambda function alias (https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AliasConfiguration
 type AliasConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -186,7 +183,6 @@ func (s AliasConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 
 // The traffic-shifting (https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html)
 // configuration of a Lambda function alias.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AliasRoutingConfiguration
 type AliasRoutingConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -217,7 +213,6 @@ func (s AliasRoutingConfiguration) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Concurrency
 type Concurrency struct {
 	_ struct{} `type:"structure"`
 
@@ -244,7 +239,6 @@ func (s Concurrency) MarshalFields(e protocol.FieldEncoder) error {
 
 // The dead letter queue (https://docs.aws.amazon.com/lambda/latest/dg/dlq.html)
 // for failed asynchronous invocations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeadLetterConfig
 type DeadLetterConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -269,7 +263,6 @@ func (s DeadLetterConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A function's environment variable settings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Environment
 type Environment struct {
 	_ struct{} `type:"structure"`
 
@@ -300,7 +293,6 @@ func (s Environment) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Error messages for environment variables that couldn't be applied.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EnvironmentError
 type EnvironmentError struct {
 	_ struct{} `type:"structure"`
 
@@ -334,7 +326,6 @@ func (s EnvironmentError) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The results of a configuration update that applied environment variables.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EnvironmentResponse
 type EnvironmentResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -375,7 +366,6 @@ func (s EnvironmentResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // A mapping between an AWS resource and an AWS Lambda function. See CreateEventSourceMapping
 // for details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventSourceMappingConfiguration
 type EventSourceMappingConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -466,7 +456,6 @@ func (s EventSourceMappingConfiguration) MarshalFields(e protocol.FieldEncoder) 
 
 // The code for the Lambda function. You can specify either an object in Amazon
 // S3, or upload a deployment package directly.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCode
 type FunctionCode struct {
 	_ struct{} `type:"structure"`
 
@@ -541,7 +530,6 @@ func (s FunctionCode) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Details about a function's deployment package.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCodeLocation
 type FunctionCodeLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -575,7 +563,6 @@ func (s FunctionCodeLocation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Details about a function's configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration
 type FunctionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -779,7 +766,6 @@ func (s FunctionConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An AWS Lambda layer (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Layer
 type Layer struct {
 	_ struct{} `type:"structure"`
 
@@ -814,7 +800,6 @@ func (s Layer) MarshalFields(e protocol.FieldEncoder) error {
 
 // A ZIP archive that contains the contents of an AWS Lambda layer (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
 // You can specify either an Amazon S3 location, or upload a layer archive directly.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/LayerVersionContentInput
 type LayerVersionContentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -888,7 +873,6 @@ func (s LayerVersionContentInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Details about a version of an AWS Lambda layer (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/LayerVersionContentOutput
 type LayerVersionContentOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -931,7 +915,6 @@ func (s LayerVersionContentOutput) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // Details about a version of an AWS Lambda layer (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/LayerVersionsListItem
 type LayerVersionsListItem struct {
 	_ struct{} `type:"structure"`
 
@@ -1007,7 +990,6 @@ func (s LayerVersionsListItem) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Details about an AWS Lambda layer (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/LayersListItem
 type LayersListItem struct {
 	_ struct{} `type:"structure"`
 
@@ -1050,7 +1032,6 @@ func (s LayersListItem) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The function's AWS X-Ray tracing configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TracingConfig
 type TracingConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1075,7 +1056,6 @@ func (s TracingConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The function's AWS X-Ray tracing configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TracingConfigResponse
 type TracingConfigResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -1100,7 +1080,6 @@ func (s TracingConfigResponse) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The VPC security groups and subnets that are attached to a Lambda function.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/VpcConfig
 type VpcConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -1146,7 +1125,6 @@ func (s VpcConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The VPC security groups and subnets that are attached to a Lambda function.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/VpcConfigResponse
 type VpcConfigResponse struct {
 	_ struct{} `type:"structure"`
 

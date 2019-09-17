@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListFlowsRequest
 type ListFlowsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s ListFlowsInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // The result of a successful ListFlows request. The response includes flow
 // summaries and the NextToken to use in a subsequent ListFlows request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListFlowsResponse
 type ListFlowsOutput struct {
 	_ struct{} `type:"structure"`
 

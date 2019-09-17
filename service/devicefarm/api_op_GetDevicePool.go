@@ -10,7 +10,6 @@ import (
 )
 
 // Represents a request to the get device pool operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolRequest
 type GetDevicePoolInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *GetDevicePoolInput) Validate() error {
 }
 
 // Represents the result of a get device pool request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolResult
 type GetDevicePoolOutput struct {
 	_ struct{} `type:"structure"`
 

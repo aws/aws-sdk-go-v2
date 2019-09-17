@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DisassociateDomainRequest
 type DisassociateDomainInput struct {
 	_ struct{} `type:"structure"`
 
@@ -73,7 +72,6 @@ func (s DisassociateDomainInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DisassociateDomainResponse
 type DisassociateDomainOutput struct {
 	_ struct{} `type:"structure"`
 }

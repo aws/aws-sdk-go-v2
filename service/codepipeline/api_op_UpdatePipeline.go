@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of an UpdatePipeline action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UpdatePipelineInput
 type UpdatePipelineInput struct {
 	_ struct{} `type:"structure"`
 
@@ -45,7 +44,6 @@ func (s *UpdatePipelineInput) Validate() error {
 }
 
 // Represents the output of an UpdatePipeline action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UpdatePipelineOutput
 type UpdatePipelineOutput struct {
 	_ struct{} `type:"structure"`
 

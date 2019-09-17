@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteResourcePolicyRequest
 type DeleteResourcePolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -24,7 +23,6 @@ func (s DeleteResourcePolicyInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteResourcePolicyOutput
 type DeleteResourcePolicyOutput struct {
 	_ struct{} `type:"structure"`
 }

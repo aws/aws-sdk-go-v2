@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for CreateCustomerGateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCustomerGatewayRequest
 type CreateCustomerGatewayInput struct {
 	_ struct{} `type:"structure"`
 
@@ -63,7 +62,6 @@ func (s *CreateCustomerGatewayInput) Validate() error {
 }
 
 // Contains the output of CreateCustomerGateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCustomerGatewayResult
 type CreateCustomerGatewayOutput struct {
 	_ struct{} `type:"structure"`
 

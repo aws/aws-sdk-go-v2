@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateDeviceFromRoomRequest
 type DisassociateDeviceFromRoomInput struct {
 	_ struct{} `type:"structure"`
 
@@ -22,7 +21,6 @@ func (s DisassociateDeviceFromRoomInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateDeviceFromRoomResponse
 type DisassociateDeviceFromRoomOutput struct {
 	_ struct{} `type:"structure"`
 }

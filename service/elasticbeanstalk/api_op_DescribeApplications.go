@@ -10,7 +10,6 @@ import (
 )
 
 // Request to describe one or more applications.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeApplicationsMessage
 type DescribeApplicationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -25,7 +24,6 @@ func (s DescribeApplicationsInput) String() string {
 }
 
 // Result message containing a list of application descriptions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationDescriptionsMessage
 type DescribeApplicationsOutput struct {
 	_ struct{} `type:"structure"`
 

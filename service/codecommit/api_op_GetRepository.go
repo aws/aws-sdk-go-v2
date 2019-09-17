@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a get repository operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepositoryInput
 type GetRepositoryInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *GetRepositoryInput) Validate() error {
 }
 
 // Represents the output of a get repository operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepositoryOutput
 type GetRepositoryOutput struct {
 	_ struct{} `type:"structure"`
 

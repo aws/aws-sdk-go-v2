@@ -11,7 +11,6 @@ import (
 )
 
 // Get information about a queue by sending a request with the queue name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetQueueRequest
 type GetQueueInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s GetQueueInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // Successful get queue requests return an OK message and information about
 // the queue in JSON.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetQueueResponse
 type GetQueueOutput struct {
 	_ struct{} `type:"structure"`
 

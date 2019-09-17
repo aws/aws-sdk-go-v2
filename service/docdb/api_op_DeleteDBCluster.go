@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input to DeleteDBCluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBClusterMessage
 type DeleteDBClusterInput struct {
 	_ struct{} `type:"structure"`
 
@@ -69,7 +68,6 @@ func (s *DeleteDBClusterInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBClusterResult
 type DeleteDBClusterOutput struct {
 	_ struct{} `type:"structure"`
 

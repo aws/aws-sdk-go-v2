@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/UpdateLifecyclePolicyRequest
 type UpdateLifecyclePolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -96,7 +95,6 @@ func (s UpdateLifecyclePolicyInput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/UpdateLifecyclePolicyResponse
 type UpdateLifecyclePolicyOutput struct {
 	_ struct{} `type:"structure"`
 }

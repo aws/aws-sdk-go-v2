@@ -10,7 +10,6 @@ import (
 )
 
 // Input to the ListIdentities action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ListIdentitiesInput
 type ListIdentitiesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -66,7 +65,6 @@ func (s *ListIdentitiesInput) Validate() error {
 }
 
 // The response to a ListIdentities request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ListIdentitiesResponse
 type ListIdentitiesOutput struct {
 	_ struct{} `type:"structure"`
 

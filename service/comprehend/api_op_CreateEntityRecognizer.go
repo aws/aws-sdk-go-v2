@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateEntityRecognizerRequest
 type CreateEntityRecognizerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -119,7 +118,6 @@ func (s *CreateEntityRecognizerInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateEntityRecognizerResponse
 type CreateEntityRecognizerOutput struct {
 	_ struct{} `type:"structure"`
 

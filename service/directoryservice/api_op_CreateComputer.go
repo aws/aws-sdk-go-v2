@@ -11,7 +11,6 @@ import (
 )
 
 // Contains the inputs for the CreateComputer operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateComputerRequest
 type CreateComputerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -84,7 +83,6 @@ func (s *CreateComputerInput) Validate() error {
 }
 
 // Contains the results for the CreateComputer operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateComputerResult
 type CreateComputerOutput struct {
 	_ struct{} `type:"structure"`
 

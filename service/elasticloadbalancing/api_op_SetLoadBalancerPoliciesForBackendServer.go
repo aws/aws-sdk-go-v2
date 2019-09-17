@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for SetLoadBalancerPoliciesForBackendServer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesForBackendServerInput
 type SetLoadBalancerPoliciesForBackendServerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s *SetLoadBalancerPoliciesForBackendServerInput) Validate() error {
 }
 
 // Contains the output of SetLoadBalancerPoliciesForBackendServer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesForBackendServerOutput
 type SetLoadBalancerPoliciesForBackendServerOutput struct {
 	_ struct{} `type:"structure"`
 }

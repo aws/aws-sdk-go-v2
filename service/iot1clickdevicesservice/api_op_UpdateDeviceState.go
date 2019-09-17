@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/UpdateDeviceStateRequest
 type UpdateDeviceStateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s UpdateDeviceStateInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devices-2018-05-14/UpdateDeviceStateResponse
 type UpdateDeviceStateOutput struct {
 	_ struct{} `type:"structure"`
 }

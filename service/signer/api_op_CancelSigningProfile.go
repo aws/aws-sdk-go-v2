@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/CancelSigningProfileRequest
 type CancelSigningProfileInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s CancelSigningProfileInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/CancelSigningProfileOutput
 type CancelSigningProfileOutput struct {
 	_ struct{} `type:"structure"`
 }

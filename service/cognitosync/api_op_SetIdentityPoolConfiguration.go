@@ -11,7 +11,6 @@ import (
 )
 
 // The input for the SetIdentityPoolConfiguration operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SetIdentityPoolConfigurationRequest
 type SetIdentityPoolConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -86,7 +85,6 @@ func (s SetIdentityPoolConfigurationInput) MarshalFields(e protocol.FieldEncoder
 }
 
 // The output for the SetIdentityPoolConfiguration operation
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SetIdentityPoolConfigurationResponse
 type SetIdentityPoolConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 

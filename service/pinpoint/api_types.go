@@ -16,7 +16,6 @@ var _ = awsutil.Prettify
 
 // Specifies the status and settings of the ADM (Amazon Device Messaging) channel
 // for an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ADMChannelRequest
 type ADMChannelRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -83,7 +82,6 @@ func (s ADMChannelRequest) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about the status and settings of the ADM (Amazon Device
 // Messaging) channel for an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ADMChannelResponse
 type ADMChannelResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -194,7 +192,6 @@ func (s ADMChannelResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the settings for a one-time message that's sent directly to an
 // endpoint through the ADM (Amazon Device Messaging) channel.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ADMMessage
 type ADMMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -401,7 +398,6 @@ func (s ADMMessage) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the status and settings of the APNs (Apple Push Notification service)
 // channel for an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSChannelRequest
 type APNSChannelRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -496,7 +492,6 @@ func (s APNSChannelRequest) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about the status and settings of the APNs (Apple Push
 // Notification service) channel for an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSChannelResponse
 type APNSChannelResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -628,7 +623,6 @@ func (s APNSChannelResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the settings for a one-time message that's sent directly to an
 // endpoint through the APNs (Apple Push Notification service) channel.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSMessage
 type APNSMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -870,7 +864,6 @@ func (s APNSMessage) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the status and settings of the APNs (Apple Push Notification service)
 // sandbox channel for an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSSandboxChannelRequest
 type APNSSandboxChannelRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -967,7 +960,6 @@ func (s APNSSandboxChannelRequest) MarshalFields(e protocol.FieldEncoder) error 
 
 // Provides information about the status and settings of the APNs (Apple Push
 // Notification service) sandbox channel for an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSSandboxChannelResponse
 type APNSSandboxChannelResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -1100,7 +1092,6 @@ func (s APNSSandboxChannelResponse) MarshalFields(e protocol.FieldEncoder) error
 
 // Specifies the status and settings of the APNs (Apple Push Notification service)
 // VoIP channel for an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSVoipChannelRequest
 type APNSVoipChannelRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -1195,7 +1186,6 @@ func (s APNSVoipChannelRequest) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about the status and settings of the APNs (Apple Push
 // Notification service) VoIP channel for an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSVoipChannelResponse
 type APNSVoipChannelResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -1328,7 +1318,6 @@ func (s APNSVoipChannelResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the status and settings of the APNs (Apple Push Notification service)
 // VoIP sandbox channel for an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSVoipSandboxChannelRequest
 type APNSVoipSandboxChannelRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -1426,7 +1415,6 @@ func (s APNSVoipSandboxChannelRequest) MarshalFields(e protocol.FieldEncoder) er
 
 // Provides information about the status and settings of the APNs (Apple Push
 // Notification service) VoIP sandbox channel for an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSVoipSandboxChannelResponse
 type APNSVoipSandboxChannelResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -1558,7 +1546,6 @@ func (s APNSVoipSandboxChannelResponse) MarshalFields(e protocol.FieldEncoder) e
 }
 
 // Provides information about the activities that were performed by a campaign.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ActivitiesResponse
 type ActivitiesResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -1601,7 +1588,6 @@ func (s ActivitiesResponse) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides information about an activity that was performed by a campaign.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ActivityResponse
 type ActivityResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -1748,7 +1734,6 @@ func (s ActivityResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies address-based configuration settings for a message that's sent
 // directly to an endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/AddressConfiguration
 type AddressConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1844,7 +1829,6 @@ func (s AddressConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides the results of a query that retrieved the data for a standard metric
 // that applies to an application, and provides information about that query.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ApplicationDateRangeKpiResponse
 type ApplicationDateRangeKpiResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -1929,7 +1913,6 @@ func (s ApplicationDateRangeKpiResponse) MarshalFields(e protocol.FieldEncoder) 
 }
 
 // Provides information about an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ApplicationResponse
 type ApplicationResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -1998,7 +1981,6 @@ func (s ApplicationResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about an application, including the default settings
 // for an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ApplicationSettingsResource
 type ApplicationSettingsResource struct {
 	_ struct{} `type:"structure"`
 
@@ -2080,7 +2062,6 @@ func (s ApplicationSettingsResource) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // Provides information about all of your applications.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ApplicationsResponse
 type ApplicationsResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -2122,7 +2103,6 @@ func (s ApplicationsResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies attribute-based criteria for including or excluding endpoints from
 // a segment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/AttributeDimension
 type AttributeDimension struct {
 	_ struct{} `type:"structure"`
 
@@ -2183,7 +2163,6 @@ func (s AttributeDimension) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about the type and the names of attributes that were
 // removed from all the endpoints that are associated with an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/AttributesResource
 type AttributesResource struct {
 	_ struct{} `type:"structure"`
 
@@ -2246,7 +2225,6 @@ func (s AttributesResource) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the status and settings of the Baidu (Baidu Cloud Push) channel
 // for an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/BaiduChannelRequest
 type BaiduChannelRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -2314,7 +2292,6 @@ func (s BaiduChannelRequest) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about the status and settings of the Baidu (Baidu Cloud
 // Push) channel for an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/BaiduChannelResponse
 type BaiduChannelResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -2438,7 +2415,6 @@ func (s BaiduChannelResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the settings for a one-time message that's sent directly to an
 // endpoint through the Baidu (Baidu Cloud Push) channel.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/BaiduMessage
 type BaiduMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -2624,7 +2600,6 @@ func (s BaiduMessage) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides the results of a query that retrieved the data for a standard metric
 // that applies to an application or campaign.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/BaseKpiResult
 type BaseKpiResult struct {
 	_ struct{} `type:"structure"`
 
@@ -2659,7 +2634,6 @@ func (s BaseKpiResult) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides the results of a query that retrieved the data for a standard metric
 // that applies to a campaign, and provides information about that query.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignDateRangeKpiResponse
 type CampaignDateRangeKpiResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -2756,7 +2730,6 @@ func (s CampaignDateRangeKpiResponse) MarshalFields(e protocol.FieldEncoder) err
 
 // Specifies the content and "From" address for an email message that's sent
 // to recipients of a campaign.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignEmailMessage
 type CampaignEmailMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -2827,7 +2800,6 @@ func (s CampaignEmailMessage) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the settings for events that cause a campaign to be sent.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignEventFilter
 type CampaignEventFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -2889,7 +2861,6 @@ func (s CampaignEventFilter) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the AWS Lambda function to use as a code hook for a campaign.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignHook
 type CampaignHook struct {
 	_ struct{} `type:"structure"`
 
@@ -2934,7 +2905,6 @@ func (s CampaignHook) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies limits on the messages that a campaign can send.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignLimits
 type CampaignLimits struct {
 	_ struct{} `type:"structure"`
 
@@ -2992,7 +2962,6 @@ func (s CampaignLimits) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about the status, configuration, and other settings
 // for a campaign.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignResponse
 type CampaignResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -3240,7 +3209,6 @@ func (s CampaignResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the content and settings for an SMS message that's sent to recipients
 // of a campaign.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignSmsMessage
 type CampaignSmsMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -3287,7 +3255,6 @@ func (s CampaignSmsMessage) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides information about the status of a campaign.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignState
 type CampaignState struct {
 	_ struct{} `type:"structure"`
 
@@ -3315,7 +3282,6 @@ func (s CampaignState) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about the configuration and other settings for all the
 // campaigns that are associated with an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignsResponse
 type CampaignsResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -3359,7 +3325,6 @@ func (s CampaignsResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about the general settings and status of a channel for
 // an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ChannelResponse
 type ChannelResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -3458,7 +3423,6 @@ func (s ChannelResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about the general settings and status of all channels
 // for an application, including channels that aren't enabled for the application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ChannelsResponse
 type ChannelsResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -3493,7 +3457,6 @@ func (s ChannelsResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the display name of an application and the tags to associate with
 // the application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateApplicationRequest
 type CreateApplicationRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -3552,7 +3515,6 @@ func (s CreateApplicationRequest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the default message to use for all channels.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DefaultMessage
 type DefaultMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -3600,7 +3562,6 @@ func (s DefaultMessage) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the default settings and content for a push notification that's
 // sent directly to an endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DefaultPushNotificationMessage
 type DefaultPushNotificationMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -3716,7 +3677,6 @@ func (s DefaultPushNotificationMessage) MarshalFields(e protocol.FieldEncoder) e
 
 // Specifies the settings and content for the default message and any default
 // messages that you tailored for specific channels.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DirectMessageConfiguration
 type DirectMessageConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -3823,7 +3783,6 @@ func (s DirectMessageConfiguration) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // Specifies the status and settings of the email channel for an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EmailChannelRequest
 type EmailChannelRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -3912,7 +3871,6 @@ func (s EmailChannelRequest) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about the status and settings of the email channel for
 // an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EmailChannelResponse
 type EmailChannelResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -4074,7 +4032,6 @@ func (s EmailChannelResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the default settings and content for a one-time email message that's
 // sent directly to an endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EmailMessage
 type EmailMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -4175,7 +4132,6 @@ func (s EmailMessage) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies an endpoint to create or update and the settings and attributes
 // to set or change for the endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointBatchItem
 type EndpointBatchItem struct {
 	_ struct{} `type:"structure"`
 
@@ -4337,7 +4293,6 @@ func (s EndpointBatchItem) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies a batch of endpoints to create or update and the settings and attributes
 // to set or change for each endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointBatchRequest
 type EndpointBatchRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -4387,7 +4342,6 @@ func (s EndpointBatchRequest) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies demographic information about an endpoint, such as the applicable
 // time zone and platform.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointDemographic
 type EndpointDemographic struct {
 	_ struct{} `type:"structure"`
 
@@ -4478,7 +4432,6 @@ func (s EndpointDemographic) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides the status code and message that result from processing data for
 // an endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointItemResponse
 type EndpointItemResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -4514,7 +4467,6 @@ func (s EndpointItemResponse) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies geographic information about an endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointLocation
 type EndpointLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -4589,7 +4541,6 @@ func (s EndpointLocation) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about the delivery status and results of sending a message
 // directly to an endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointMessageResult
 type EndpointMessageResult struct {
 	_ struct{} `type:"structure"`
 
@@ -4686,7 +4637,6 @@ func (s EndpointMessageResult) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the channel type and other settings for an endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointRequest
 type EndpointRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -4838,7 +4788,6 @@ func (s EndpointRequest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides information about the channel type and other settings for an endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointResponse
 type EndpointResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -5028,7 +4977,6 @@ func (s EndpointResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the content, including message variables and attributes, to use
 // in a message that's sent directly to an endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointSendConfiguration
 type EndpointSendConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -5115,7 +5063,6 @@ func (s EndpointSendConfiguration) MarshalFields(e protocol.FieldEncoder) error 
 
 // Specifies data for one or more attributes that describe the user who's associated
 // with an endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointUser
 type EndpointUser struct {
 	_ struct{} `type:"structure"`
 
@@ -5170,7 +5117,6 @@ func (s EndpointUser) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about all the endpoints that are associated with a user
 // ID.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointsResponse
 type EndpointsResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -5204,7 +5150,6 @@ func (s EndpointsResponse) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies information about an event that reports data to Amazon Pinpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/Event
 type Event struct {
 	_ struct{} `type:"structure"`
 
@@ -5350,7 +5295,6 @@ func (s Event) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the dimensions for an event filter that determines when a campaign
 // is sent.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventDimensions
 type EventDimensions struct {
 	_ struct{} `type:"structure"`
 
@@ -5438,7 +5382,6 @@ func (s EventDimensions) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides the status code and message that result from processing an event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventItemResponse
 type EventItemResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -5476,7 +5419,6 @@ func (s EventItemResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies settings for publishing event data to an Amazon Kinesis data stream
 // or an Amazon Kinesis Data Firehose delivery stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventStream
 type EventStream struct {
 	_ struct{} `type:"structure"`
 
@@ -5562,7 +5504,6 @@ func (s EventStream) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies a batch of endpoints and events to process.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventsBatch
 type EventsBatch struct {
 	_ struct{} `type:"structure"`
 
@@ -5631,7 +5572,6 @@ func (s EventsBatch) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies a batch of events to process.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventsRequest
 type EventsRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -5687,7 +5627,6 @@ func (s EventsRequest) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about endpoints and the events that they're associated
 // with.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventsResponse
 type EventsResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -5723,7 +5662,6 @@ func (s EventsResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the settings for a job that exports endpoint definitions to an
 // Amazon Simple Storage Service (Amazon S3) bucket.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ExportJobRequest
 type ExportJobRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -5807,7 +5745,6 @@ func (s ExportJobRequest) MarshalFields(e protocol.FieldEncoder) error {
 // definitions to a file. The file can be added directly to an Amazon Simple
 // Storage Service (Amazon S3) bucket by using the Amazon Pinpoint API or downloaded
 // directly to a computer by using the Amazon Pinpoint console.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ExportJobResource
 type ExportJobResource struct {
 	_ struct{} `type:"structure"`
 
@@ -5873,7 +5810,6 @@ func (s ExportJobResource) MarshalFields(e protocol.FieldEncoder) error {
 // endpoint definitions to a file. The file can be added directly to an Amazon
 // Simple Storage Service (Amazon S3) bucket by using the Amazon Pinpoint API
 // or downloaded directly to a computer by using the Amazon Pinpoint console.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ExportJobResponse
 type ExportJobResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -6036,7 +5972,6 @@ func (s ExportJobResponse) MarshalFields(e protocol.FieldEncoder) error {
 // Provides information about all the export jobs that are associated with an
 // application or segment. An export job is a job that exports endpoint definitions
 // to a file.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ExportJobsResponse
 type ExportJobsResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -6082,7 +6017,6 @@ func (s ExportJobsResponse) MarshalFields(e protocol.FieldEncoder) error {
 // Specifies the status and settings of the GCM channel for an application.
 // This channel enables Amazon Pinpoint to send push notifications through the
 // Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GCMChannelRequest
 type GCMChannelRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -6136,7 +6070,6 @@ func (s GCMChannelRequest) MarshalFields(e protocol.FieldEncoder) error {
 // an application. The GCM channel enables Amazon Pinpoint to send push notifications
 // through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging
 // (GCM), service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GCMChannelResponse
 type GCMChannelResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -6261,7 +6194,6 @@ func (s GCMChannelResponse) MarshalFields(e protocol.FieldEncoder) error {
 // endpoint through the GCM channel. The GCM channel enables Amazon Pinpoint
 // to send messages to the Firebase Cloud Messaging (FCM), formerly Google Cloud
 // Messaging (GCM), service.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GCMMessage
 type GCMMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -6495,7 +6427,6 @@ func (s GCMMessage) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the GPS coordinates of a location.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GPSCoordinates
 type GPSCoordinates struct {
 	_ struct{} `type:"structure"`
 
@@ -6552,7 +6483,6 @@ func (s GPSCoordinates) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies GPS-based criteria for including or excluding endpoints from a
 // segment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GPSPointDimension
 type GPSPointDimension struct {
 	_ struct{} `type:"structure"`
 
@@ -6608,7 +6538,6 @@ func (s GPSPointDimension) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the settings for a job that imports endpoint definitions from an
 // Amazon Simple Storage Service (Amazon S3) bucket.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ImportJobRequest
 type ImportJobRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -6748,7 +6677,6 @@ func (s ImportJobRequest) MarshalFields(e protocol.FieldEncoder) error {
 // definitions from one or more files. The files can be stored in an Amazon
 // Simple Storage Service (Amazon S3) bucket or uploaded directly from a computer
 // by using the Amazon Pinpoint console.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ImportJobResource
 type ImportJobResource struct {
 	_ struct{} `type:"structure"`
 
@@ -6869,7 +6797,6 @@ func (s ImportJobResource) MarshalFields(e protocol.FieldEncoder) error {
 // endpoint definitions from one or more files. The files can be stored in an
 // Amazon Simple Storage Service (Amazon S3) bucket or uploaded directly from
 // a computer by using the Amazon Pinpoint console.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ImportJobResponse
 type ImportJobResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -7032,7 +6959,6 @@ func (s ImportJobResponse) MarshalFields(e protocol.FieldEncoder) error {
 // Provides information about the status and settings of all the import jobs
 // that are associated with an application or segment. An import job is a job
 // that imports endpoint definitions from one or more files.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ImportJobsResponse
 type ImportJobsResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -7077,7 +7003,6 @@ func (s ImportJobsResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about the results of a request to create or update an
 // endpoint that's associated with an event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ItemResponse
 type ItemResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -7120,7 +7045,6 @@ func (s ItemResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the content and settings for a push notification that's sent to
 // recipients of a campaign.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/Message
 type Message struct {
 	_ struct{} `type:"structure"`
 
@@ -7271,7 +7195,6 @@ func (s Message) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides information about an API request or response.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageBody
 type MessageBody struct {
 	_ struct{} `type:"structure"`
 
@@ -7305,7 +7228,6 @@ func (s MessageBody) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the message configuration settings for a campaign.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageConfiguration
 type MessageConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -7407,7 +7329,6 @@ func (s MessageConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the objects that define configuration and other settings for a
 // message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageRequest
 type MessageRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -7513,7 +7434,6 @@ func (s MessageRequest) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about the results of a request to send a message to
 // an endpoint address.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageResponse
 type MessageResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -7584,7 +7504,6 @@ func (s MessageResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about the results of sending a message directly to an
 // endpoint address.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageResult
 type MessageResult struct {
 	_ struct{} `type:"structure"`
 
@@ -7676,7 +7595,6 @@ func (s MessageResult) MarshalFields(e protocol.FieldEncoder) error {
 // Specifies metric-based criteria for including or excluding endpoints from
 // a segment. These criteria derive from custom metrics that you define for
 // endpoints.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MetricDimension
 type MetricDimension struct {
 	_ struct{} `type:"structure"`
 
@@ -7733,7 +7651,6 @@ func (s MetricDimension) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies a phone number to validate and retrieve information about.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/NumberValidateRequest
 type NumberValidateRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -7770,7 +7687,6 @@ func (s NumberValidateRequest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides information about a phone number.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/NumberValidateResponse
 type NumberValidateResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -7923,7 +7839,6 @@ func (s NumberValidateResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the properties and attributes of an endpoint that's associated
 // with an event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PublicEndpoint
 type PublicEndpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -8067,7 +7982,6 @@ func (s PublicEndpoint) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the start and end times that define a time range when messages
 // aren't sent to endpoints.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/QuietTime
 type QuietTime struct {
 	_ struct{} `type:"structure"`
 
@@ -8107,7 +8021,6 @@ func (s QuietTime) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the contents of an email message, represented as a raw MIME message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/RawEmail
 type RawEmail struct {
 	_ struct{} `type:"structure"`
 
@@ -8133,7 +8046,6 @@ func (s RawEmail) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies criteria for including or excluding endpoints from a segment based
 // on how recently an endpoint was active.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/RecencyDimension
 type RecencyDimension struct {
 	_ struct{} `type:"structure"`
 
@@ -8191,7 +8103,6 @@ func (s RecencyDimension) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides the results of a query that retrieved the data for a standard metric
 // that applies to an application or campaign.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ResultRow
 type ResultRow struct {
 	_ struct{} `type:"structure"`
 
@@ -8246,7 +8157,6 @@ func (s ResultRow) MarshalFields(e protocol.FieldEncoder) error {
 // Provides a single value and metadata about that value as part of an array
 // of query results for a standard metric that applies to an application or
 // campaign.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ResultRowValue
 type ResultRowValue struct {
 	_ struct{} `type:"structure"`
 
@@ -8298,7 +8208,6 @@ func (s ResultRowValue) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the status and settings of the SMS channel for an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SMSChannelRequest
 type SMSChannelRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -8344,7 +8253,6 @@ func (s SMSChannelRequest) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about the status and settings of the SMS channel for
 // an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SMSChannelResponse
 type SMSChannelResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -8494,7 +8402,6 @@ func (s SMSChannelResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the default settings for a one-time SMS message that's sent directly
 // to an endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SMSMessage
 type SMSMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -8584,7 +8491,6 @@ func (s SMSMessage) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the schedule settings for a campaign.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/Schedule
 type Schedule struct {
 	_ struct{} `type:"structure"`
 
@@ -8707,7 +8613,6 @@ func (s Schedule) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies dimension settings for including or excluding endpoints from a
 // segment based on how recently an endpoint was active.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentBehaviors
 type SegmentBehaviors struct {
 	_ struct{} `type:"structure"`
 
@@ -8749,7 +8654,6 @@ func (s SegmentBehaviors) MarshalFields(e protocol.FieldEncoder) error {
 // Specifies demographic-based dimension settings for including or excluding
 // endpoints from a segment. These settings derive from characteristics of endpoint
 // devices, such as platform, make, and model.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentDemographics
 type SegmentDemographics struct {
 	_ struct{} `type:"structure"`
 
@@ -8859,7 +8763,6 @@ func (s SegmentDemographics) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the dimension settings for a segment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentDimensions
 type SegmentDimensions struct {
 	_ struct{} `type:"structure"`
 
@@ -8995,7 +8898,6 @@ func (s SegmentDimensions) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the base segments and dimensions for a segment, and the relationships
 // between these base segments and dimensions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentGroup
 type SegmentGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -9096,7 +8998,6 @@ func (s SegmentGroup) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the settings that define the relationships between segment groups
 // for a segment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentGroupList
 type SegmentGroupList struct {
 	_ struct{} `type:"structure"`
 
@@ -9157,7 +9058,6 @@ func (s SegmentGroupList) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about the import job that created a segment. An import
 // job is a job that creates a user segment by importing endpoint definitions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentImportResource
 type SegmentImportResource struct {
 	_ struct{} `type:"structure"`
 
@@ -9254,7 +9154,6 @@ func (s SegmentImportResource) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies geographical dimension settings for a segment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentLocation
 type SegmentLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -9308,7 +9207,6 @@ func (s SegmentLocation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the segment identifier and version of a segment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentReference
 type SegmentReference struct {
 	_ struct{} `type:"structure"`
 
@@ -9359,7 +9257,6 @@ func (s SegmentReference) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about the configuration, dimension, and other settings
 // for a segment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentResponse
 type SegmentResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -9512,7 +9409,6 @@ func (s SegmentResponse) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides information about all the segments that are associated with an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SegmentsResponse
 type SegmentsResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -9558,7 +9454,6 @@ func (s SegmentsResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the configuration and other settings for a message to send to all
 // the endpoints that are associated with a list of users.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendUsersMessageRequest
 type SendUsersMessageRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -9651,7 +9546,6 @@ func (s SendUsersMessageRequest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides information about which users and endpoints a message was sent to.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendUsersMessageResponse
 type SendUsersMessageResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -9710,7 +9604,6 @@ func (s SendUsersMessageResponse) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides information about a session.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/Session
 type Session struct {
 	_ struct{} `type:"structure"`
 
@@ -9784,7 +9677,6 @@ func (s Session) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the dimension type and values for a segment dimension.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SetDimension
 type SetDimension struct {
 	_ struct{} `type:"structure"`
 
@@ -9845,7 +9737,6 @@ func (s SetDimension) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the content of an email message, composed of a subject, a text
 // part, and an HTML part.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SimpleEmail
 type SimpleEmail struct {
 	_ struct{} `type:"structure"`
 
@@ -9893,7 +9784,6 @@ func (s SimpleEmail) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the subject or body of an email message, represented as textual
 // email data and the applicable character set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SimpleEmailPart
 type SimpleEmailPart struct {
 	_ struct{} `type:"structure"`
 
@@ -9927,7 +9817,6 @@ func (s SimpleEmailPart) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the tags (keys and values) for an application, campaign, or segment.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TagsModel
 type TagsModel struct {
 	_ struct{} `type:"structure"`
 
@@ -9981,7 +9870,6 @@ func (s TagsModel) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the settings for a campaign treatment. A treatment is a variation
 // of a campaign that's used for A/B testing of a campaign.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TreatmentResource
 type TreatmentResource struct {
 	_ struct{} `type:"structure"`
 
@@ -10067,7 +9955,6 @@ func (s TreatmentResource) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies one or more attributes to remove from all the endpoints that are
 // associated with an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateAttributesRequest
 type UpdateAttributesRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -10101,7 +9988,6 @@ func (s UpdateAttributesRequest) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the status and settings of the voice channel for an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/VoiceChannelRequest
 type VoiceChannelRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -10127,7 +10013,6 @@ func (s VoiceChannelRequest) MarshalFields(e protocol.FieldEncoder) error {
 
 // Provides information about the status and settings of the voice channel for
 // an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/VoiceChannelResponse
 type VoiceChannelResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -10247,7 +10132,6 @@ func (s VoiceChannelResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the settings for a one-time voice message that's sent directly
 // to an endpoint through the voice channel.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/VoiceMessage
 type VoiceMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -10324,7 +10208,6 @@ func (s VoiceMessage) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the default settings for an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteApplicationSettingsRequest
 type WriteApplicationSettingsRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -10400,7 +10283,6 @@ func (s WriteApplicationSettingsRequest) MarshalFields(e protocol.FieldEncoder) 
 }
 
 // Specifies the configuration and other settings for a campaign.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteCampaignRequest
 type WriteCampaignRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -10588,7 +10470,6 @@ func (s WriteCampaignRequest) MarshalFields(e protocol.FieldEncoder) error {
 // Specifies the Amazon Resource Name (ARN) of an event stream to publish events
 // to and the AWS Identity and Access Management (IAM) role to use when publishing
 // those events.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteEventStream
 type WriteEventStream struct {
 	_ struct{} `type:"structure"`
 
@@ -10653,7 +10534,6 @@ func (s WriteEventStream) MarshalFields(e protocol.FieldEncoder) error {
 // Specifies the configuration, dimension, and other settings for a segment.
 // A WriteSegmentRequest object can include a Dimensions object or a SegmentGroups
 // object, but not both.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteSegmentRequest
 type WriteSegmentRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -10736,7 +10616,6 @@ func (s WriteSegmentRequest) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the settings for a campaign treatment. A treatment is a variation
 // of a campaign that's used for A/B testing of a campaign.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteTreatmentResource
 type WriteTreatmentResource struct {
 	_ struct{} `type:"structure"`
 

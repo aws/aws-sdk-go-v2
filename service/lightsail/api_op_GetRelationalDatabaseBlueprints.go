@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseBlueprintsRequest
 type GetRelationalDatabaseBlueprintsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -23,7 +22,6 @@ func (s GetRelationalDatabaseBlueprintsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseBlueprintsResult
 type GetRelationalDatabaseBlueprintsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // ListLocationsRequest
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListLocationsRequest
 type ListLocationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -28,7 +27,6 @@ func (s ListLocationsInput) String() string {
 }
 
 // ListLocationsResponse
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListLocationsResponse
 type ListLocationsOutput struct {
 	_ struct{} `type:"structure"`
 

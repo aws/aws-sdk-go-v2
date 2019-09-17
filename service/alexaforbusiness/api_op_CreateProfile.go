@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateProfileRequest
 type CreateProfileInput struct {
 	_ struct{} `type:"structure"`
 
@@ -110,7 +109,6 @@ func (s *CreateProfileInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateProfileResponse
 type CreateProfileOutput struct {
 	_ struct{} `type:"structure"`
 

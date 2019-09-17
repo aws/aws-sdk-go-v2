@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the request to stop a specific run.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRunRequest
 type StopRunInput struct {
 	_ struct{} `type:"structure"`
 
@@ -44,7 +43,6 @@ func (s *StopRunInput) Validate() error {
 }
 
 // Represents the results of your stop run attempt.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRunResult
 type StopRunOutput struct {
 	_ struct{} `type:"structure"`
 

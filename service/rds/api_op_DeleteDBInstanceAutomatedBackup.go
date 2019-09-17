@@ -10,7 +10,6 @@ import (
 )
 
 // Parameter input for the DeleteDBInstanceAutomatedBackup operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceAutomatedBackupMessage
 type DeleteDBInstanceAutomatedBackupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *DeleteDBInstanceAutomatedBackupInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceAutomatedBackupResult
 type DeleteDBInstanceAutomatedBackupOutput struct {
 	_ struct{} `type:"structure"`
 

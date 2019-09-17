@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateBrokerRequest
 type CreateBrokerInput struct {
 	_ struct{} `type:"structure"`
 
@@ -207,7 +206,6 @@ func (s CreateBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateBrokerResponse
 type CreateBrokerOutput struct {
 	_ struct{} `type:"structure"`
 

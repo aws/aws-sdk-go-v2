@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for DescribeCustomerGateways.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCustomerGatewaysRequest
 type DescribeCustomerGatewaysInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s DescribeCustomerGatewaysInput) String() string {
 }
 
 // Contains the output of DescribeCustomerGateways.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCustomerGatewaysResult
 type DescribeCustomerGatewaysOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -11,7 +11,6 @@ import (
 )
 
 // Request to create an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplicationMessage
 type CreateApplicationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -72,7 +71,6 @@ func (s *CreateApplicationInput) Validate() error {
 }
 
 // Result message containing a single description of an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationDescriptionMessage
 type CreateApplicationOutput struct {
 	_ struct{} `type:"structure"`
 

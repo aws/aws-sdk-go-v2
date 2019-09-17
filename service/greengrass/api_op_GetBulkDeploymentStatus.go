@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetBulkDeploymentStatusRequest
 type GetBulkDeploymentStatusInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s GetBulkDeploymentStatusInput) MarshalFields(e protocol.FieldEncoder) err
 }
 
 // Information about the status of a bulk deployment at the time of the request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetBulkDeploymentStatusResponse
 type GetBulkDeploymentStatusOutput struct {
 	_ struct{} `type:"structure"`
 

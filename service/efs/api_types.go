@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // A description of the file system.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemDescription
 type FileSystemDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -211,7 +210,6 @@ func (s FileSystemDescription) MarshalFields(e protocol.FieldEncoder) error {
 // the file system is not modified for a period longer than a couple of hours.
 // Otherwise, the value is not necessarily the exact size the file system was
 // at any instant in time.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemSize
 type FileSystemSize struct {
 	_ struct{} `type:"structure"`
 
@@ -270,7 +268,6 @@ func (s FileSystemSize) MarshalFields(e protocol.FieldEncoder) error {
 
 // Describes a policy used by EFS lifecycle management to transition files to
 // the Infrequent Access (IA) storage class.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/LifecyclePolicy
 type LifecyclePolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -297,7 +294,6 @@ func (s LifecyclePolicy) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides a description of a mount target.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/MountTargetDescription
 type MountTargetDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -387,7 +383,6 @@ func (s MountTargetDescription) MarshalFields(e protocol.FieldEncoder) error {
 // A tag is a key-value pair. Allowed characters are letters, white space, and
 // numbers that can be represented in UTF-8, and the following characters:+
 // - = . _ : /
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 

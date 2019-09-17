@@ -12,7 +12,6 @@ import (
 )
 
 // Request object for UpdateBrokerStorage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateBrokerStorageRequest
 type UpdateBrokerStorageInput struct {
 	_ struct{} `type:"structure"`
 
@@ -98,7 +97,6 @@ func (s UpdateBrokerStorageInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Response body for UpdateBrokerStorage.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateBrokerStorageResponse
 type UpdateBrokerStorageOutput struct {
 	_ struct{} `type:"structure"`
 

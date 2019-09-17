@@ -11,7 +11,6 @@ import (
 )
 
 // CreateTaskRequest
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateTaskRequest
 type CreateTaskInput struct {
 	_ struct{} `type:"structure"`
 
@@ -99,7 +98,6 @@ func (s *CreateTaskInput) Validate() error {
 }
 
 // CreateTaskResponse
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateTaskResponse
 type CreateTaskOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input to ModifyDBInstance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBInstanceMessage
 type ModifyDBInstanceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -116,7 +115,6 @@ func (s *ModifyDBInstanceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBInstanceResult
 type ModifyDBInstanceOutput struct {
 	_ struct{} `type:"structure"`
 

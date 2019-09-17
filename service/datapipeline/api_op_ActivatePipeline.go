@@ -12,7 +12,6 @@ import (
 )
 
 // Contains the parameters for ActivatePipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ActivatePipelineInput
 type ActivatePipelineInput struct {
 	_ struct{} `type:"structure"`
 
@@ -59,7 +58,6 @@ func (s *ActivatePipelineInput) Validate() error {
 }
 
 // Contains the output of ActivatePipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ActivatePipelineOutput
 type ActivatePipelineOutput struct {
 	_ struct{} `type:"structure"`
 }

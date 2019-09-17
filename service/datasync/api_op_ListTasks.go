@@ -10,7 +10,6 @@ import (
 )
 
 // ListTasksRequest
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListTasksRequest
 type ListTasksInput struct {
 	_ struct{} `type:"structure"`
 
@@ -28,7 +27,6 @@ func (s ListTasksInput) String() string {
 }
 
 // ListTasksResponse
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/ListTasksResponse
 type ListTasksOutput struct {
 	_ struct{} `type:"structure"`
 

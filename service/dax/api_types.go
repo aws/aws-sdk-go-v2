@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Contains all of the attributes of a specific DAX cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/Cluster
 type Cluster struct {
 	_ struct{} `type:"structure"`
 
@@ -89,7 +88,6 @@ func (s Cluster) String() string {
 // Represents the information required for client programs to connect to the
 // configuration endpoint for a DAX cluster, or to an individual node within
 // the cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/Endpoint
 type Endpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -108,7 +106,6 @@ func (s Endpoint) String() string {
 // Represents a single occurrence of something interesting within the system.
 // Some examples of events are creating a DAX cluster, adding or removing a
 // node, or rebooting a node.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/Event
 type Event struct {
 	_ struct{} `type:"structure"`
 
@@ -133,7 +130,6 @@ func (s Event) String() string {
 }
 
 // Represents an individual node within a DAX cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/Node
 type Node struct {
 	_ struct{} `type:"structure"`
 
@@ -166,7 +162,6 @@ func (s Node) String() string {
 }
 
 // Represents a parameter value that is applicable to a particular node type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/NodeTypeSpecificValue
 type NodeTypeSpecificValue struct {
 	_ struct{} `type:"structure"`
 
@@ -185,7 +180,6 @@ func (s NodeTypeSpecificValue) String() string {
 // Describes a notification topic and its status. Notification topics are used
 // for publishing DAX events to subscribers using Amazon Simple Notification
 // Service (SNS).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/NotificationConfiguration
 type NotificationConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -202,7 +196,6 @@ func (s NotificationConfiguration) String() string {
 }
 
 // Describes an individual setting that controls some aspect of DAX behavior.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/Parameter
 type Parameter struct {
 	_ struct{} `type:"structure"`
 
@@ -247,7 +240,6 @@ func (s Parameter) String() string {
 }
 
 // A named set of parameters that are applied to all of the nodes in a DAX cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/ParameterGroup
 type ParameterGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -264,7 +256,6 @@ func (s ParameterGroup) String() string {
 }
 
 // The status of a parameter group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/ParameterGroupStatus
 type ParameterGroupStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -284,7 +275,6 @@ func (s ParameterGroupStatus) String() string {
 }
 
 // An individual DAX parameter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/ParameterNameValue
 type ParameterNameValue struct {
 	_ struct{} `type:"structure"`
 
@@ -302,7 +292,6 @@ func (s ParameterNameValue) String() string {
 
 // The description of the server-side encryption status on the specified DAX
 // cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/SSEDescription
 type SSEDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -324,7 +313,6 @@ func (s SSEDescription) String() string {
 }
 
 // Represents the settings used to enable server-side encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/SSESpecification
 type SSESpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -355,7 +343,6 @@ func (s *SSESpecification) Validate() error {
 }
 
 // An individual VPC security group and its status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/SecurityGroupMembership
 type SecurityGroupMembership struct {
 	_ struct{} `type:"structure"`
 
@@ -374,7 +361,6 @@ func (s SecurityGroupMembership) String() string {
 // Represents the subnet associated with a DAX cluster. This parameter refers
 // to subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and used
 // with DAX.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/Subnet
 type Subnet struct {
 	_ struct{} `type:"structure"`
 
@@ -395,7 +381,6 @@ func (s Subnet) String() string {
 //    * CreateSubnetGroup
 //
 //    * ModifySubnetGroup
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/SubnetGroup
 type SubnetGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -425,7 +410,6 @@ func (s SubnetGroup) String() string {
 // the tag limit of 50. User-assigned tag names have the prefix user:.
 //
 // You cannot backdate the application of a tag.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 

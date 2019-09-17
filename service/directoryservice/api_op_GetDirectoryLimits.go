@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the inputs for the GetDirectoryLimits operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetDirectoryLimitsRequest
 type GetDirectoryLimitsInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -21,7 +20,6 @@ func (s GetDirectoryLimitsInput) String() string {
 }
 
 // Contains the results of the GetDirectoryLimits operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetDirectoryLimitsResult
 type GetDirectoryLimitsOutput struct {
 	_ struct{} `type:"structure"`
 

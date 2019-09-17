@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListEventSourcesRequest
 type ListEventSourcesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s *ListEventSourcesInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListEventSourcesResponse
 type ListEventSourcesOutput struct {
 	_ struct{} `type:"structure"`
 

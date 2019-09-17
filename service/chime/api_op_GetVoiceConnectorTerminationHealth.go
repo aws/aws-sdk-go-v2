@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorTerminationHealthRequest
 type GetVoiceConnectorTerminationHealthInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s GetVoiceConnectorTerminationHealthInput) MarshalFields(e protocol.FieldE
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorTerminationHealthResponse
 type GetVoiceConnectorTerminationHealthOutput struct {
 	_ struct{} `type:"structure"`
 

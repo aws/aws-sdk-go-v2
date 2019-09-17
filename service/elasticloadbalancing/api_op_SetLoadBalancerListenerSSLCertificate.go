@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for SetLoadBalancerListenerSSLCertificate.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerListenerSSLCertificateInput
 type SetLoadBalancerListenerSSLCertificateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s *SetLoadBalancerListenerSSLCertificateInput) Validate() error {
 }
 
 // Contains the output of SetLoadBalancerListenerSSLCertificate.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerListenerSSLCertificateOutput
 type SetLoadBalancerListenerSSLCertificateOutput struct {
 	_ struct{} `type:"structure"`
 }

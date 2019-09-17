@@ -11,7 +11,6 @@ import (
 
 // Represents the request to retrieve the offering status for the specified
 // customer or account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetOfferingStatusRequest
 type GetOfferingStatusInput struct {
 	_ struct{} `type:"structure"`
 
@@ -39,7 +38,6 @@ func (s *GetOfferingStatusInput) Validate() error {
 }
 
 // Returns the status result for a device offering.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetOfferingStatusResult
 type GetOfferingStatusOutput struct {
 	_ struct{} `type:"structure"`
 

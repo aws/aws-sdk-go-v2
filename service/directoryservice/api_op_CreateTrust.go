@@ -17,7 +17,6 @@ import (
 //
 // This action initiates the creation of the AWS side of a trust relationship
 // between an AWS Managed Microsoft AD directory and an external domain.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateTrustRequest
 type CreateTrustInput struct {
 	_ struct{} `type:"structure"`
 
@@ -88,7 +87,6 @@ func (s *CreateTrustInput) Validate() error {
 }
 
 // The result of a CreateTrust request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateTrustResult
 type CreateTrustOutput struct {
 	_ struct{} `type:"structure"`
 

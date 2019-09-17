@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribePartnerEventSourceRequest
 type DescribePartnerEventSourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -41,7 +40,6 @@ func (s *DescribePartnerEventSourceInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribePartnerEventSourceResponse
 type DescribePartnerEventSourceOutput struct {
 	_ struct{} `type:"structure"`
 

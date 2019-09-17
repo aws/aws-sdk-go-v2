@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the inputs for the ListAvailableZones action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListAvailableZonesRequest
 type ListAvailableZonesInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -20,7 +19,6 @@ func (s ListAvailableZonesInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListAvailableZonesResponse
 type ListAvailableZonesOutput struct {
 	_ struct{} `type:"structure"`
 

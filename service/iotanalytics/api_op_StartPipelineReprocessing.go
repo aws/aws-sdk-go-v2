@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/StartPipelineReprocessingRequest
 type StartPipelineReprocessingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -76,7 +75,6 @@ func (s StartPipelineReprocessingInput) MarshalFields(e protocol.FieldEncoder) e
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/StartPipelineReprocessingResponse
 type StartPipelineReprocessingOutput struct {
 	_ struct{} `type:"structure"`
 

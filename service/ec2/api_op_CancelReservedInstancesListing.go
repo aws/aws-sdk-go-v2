@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for CancelReservedInstancesListing.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelReservedInstancesListingRequest
 type CancelReservedInstancesListingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *CancelReservedInstancesListingInput) Validate() error {
 }
 
 // Contains the output of CancelReservedInstancesListing.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelReservedInstancesListingResult
 type CancelReservedInstancesListingOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the request sent to retrieve the account settings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetAccountSettingsRequest
 type GetAccountSettingsInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -22,7 +21,6 @@ func (s GetAccountSettingsInput) String() string {
 
 // Represents the account settings return values from the GetAccountSettings
 // request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetAccountSettingsResult
 type GetAccountSettingsOutput struct {
 	_ struct{} `type:"structure"`
 

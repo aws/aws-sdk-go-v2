@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Message
 type RestoreDBClusterFromS3Input struct {
 	_ struct{} `type:"structure"`
 
@@ -307,7 +306,6 @@ func (s *RestoreDBClusterFromS3Input) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Result
 type RestoreDBClusterFromS3Output struct {
 	_ struct{} `type:"structure"`
 

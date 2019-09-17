@@ -10,7 +10,6 @@ import (
 )
 
 // The input for the DescribeDeliveryChannels action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeDeliveryChannelsRequest
 type DescribeDeliveryChannelsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -24,7 +23,6 @@ func (s DescribeDeliveryChannelsInput) String() string {
 }
 
 // The output for the DescribeDeliveryChannels action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeDeliveryChannelsResponse
 type DescribeDeliveryChannelsOutput struct {
 	_ struct{} `type:"structure"`
 

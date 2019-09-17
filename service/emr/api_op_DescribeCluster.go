@@ -10,7 +10,6 @@ import (
 )
 
 // This input determines which cluster to describe.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeClusterInput
 type DescribeClusterInput struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s *DescribeClusterInput) Validate() error {
 }
 
 // This output contains the description of the cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeClusterOutput
 type DescribeClusterOutput struct {
 	_ struct{} `type:"structure"`
 

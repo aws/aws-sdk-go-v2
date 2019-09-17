@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/CreateInputRequest
 type CreateInputInput struct {
 	_ struct{} `type:"structure"`
 
@@ -107,7 +106,6 @@ func (s CreateInputInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/CreateInputResponse
 type CreateInputOutput struct {
 	_ struct{} `type:"structure"`
 

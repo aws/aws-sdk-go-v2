@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a DescribeReservedCacheNodes operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReservedCacheNodesMessage
 type DescribeReservedCacheNodesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -98,7 +97,6 @@ func (s DescribeReservedCacheNodesInput) String() string {
 }
 
 // Represents the output of a DescribeReservedCacheNodes operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReservedCacheNodeMessage
 type DescribeReservedCacheNodesOutput struct {
 	_ struct{} `type:"structure"`
 

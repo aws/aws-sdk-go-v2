@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListVerifiedEmailAddressesInput
 type ListVerifiedEmailAddressesInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -21,7 +20,6 @@ func (s ListVerifiedEmailAddressesInput) String() string {
 
 // A list of email addresses that you have verified with Amazon SES under your
 // AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListVerifiedEmailAddressesResponse
 type ListVerifiedEmailAddressesOutput struct {
 	_ struct{} `type:"structure"`
 

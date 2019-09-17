@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the input to ListTagsForResource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ListTagsForResourceMessage
 type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s *ListTagsForResourceInput) Validate() error {
 }
 
 // Represents the output of ListTagsForResource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/TagListMessage
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 

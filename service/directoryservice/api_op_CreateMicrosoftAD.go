@@ -11,7 +11,6 @@ import (
 )
 
 // Creates an AWS Managed Microsoft AD directory.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateMicrosoftADRequest
 type CreateMicrosoftADInput struct {
 	_ struct{} `type:"structure"`
 
@@ -89,7 +88,6 @@ func (s *CreateMicrosoftADInput) Validate() error {
 }
 
 // Result of a CreateMicrosoftAD request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateMicrosoftADResult
 type CreateMicrosoftADOutput struct {
 	_ struct{} `type:"structure"`
 

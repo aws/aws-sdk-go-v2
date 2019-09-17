@@ -11,7 +11,6 @@ import (
 
 // Represents the request to get information about the specified remote access
 // session.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRemoteAccessSessionRequest
 type GetRemoteAccessSessionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +45,6 @@ func (s *GetRemoteAccessSessionInput) Validate() error {
 
 // Represents the response from the server that lists detailed information about
 // the remote access session.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRemoteAccessSessionResult
 type GetRemoteAccessSessionOutput struct {
 	_ struct{} `type:"structure"`
 

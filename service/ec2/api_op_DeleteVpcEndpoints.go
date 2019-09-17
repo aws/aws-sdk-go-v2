@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for DeleteVpcEndpoints.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointsRequest
 type DeleteVpcEndpointsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +45,6 @@ func (s *DeleteVpcEndpointsInput) Validate() error {
 }
 
 // Contains the output of DeleteVpcEndpoints.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointsResult
 type DeleteVpcEndpointsOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateAccountSettingsRequest
 type UpdateAccountSettingsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -67,7 +66,6 @@ func (s UpdateAccountSettingsInput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateAccountSettingsResponse
 type UpdateAccountSettingsOutput struct {
 	_ struct{} `type:"structure"`
 }

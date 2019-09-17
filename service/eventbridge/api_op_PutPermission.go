@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutPermissionRequest
 type PutPermissionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -103,7 +102,6 @@ func (s *PutPermissionInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutPermissionOutput
 type PutPermissionOutput struct {
 	_ struct{} `type:"structure"`
 }

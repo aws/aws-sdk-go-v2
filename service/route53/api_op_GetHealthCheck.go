@@ -11,7 +11,6 @@ import (
 )
 
 // A request to get information about a specified health check.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckRequest
 type GetHealthCheckInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s GetHealthCheckInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains the response to a GetHealthCheck request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckResponse
 type GetHealthCheckOutput struct {
 	_ struct{} `type:"structure"`
 

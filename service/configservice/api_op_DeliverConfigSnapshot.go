@@ -10,7 +10,6 @@ import (
 )
 
 // The input for the DeliverConfigSnapshot action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeliverConfigSnapshotRequest
 type DeliverConfigSnapshotInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *DeliverConfigSnapshotInput) Validate() error {
 }
 
 // The output for the DeliverConfigSnapshot action, in JSON format.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeliverConfigSnapshotResponse
 type DeliverConfigSnapshotOutput struct {
 	_ struct{} `type:"structure"`
 

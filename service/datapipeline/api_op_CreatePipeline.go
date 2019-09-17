@@ -11,7 +11,6 @@ import (
 )
 
 // Contains the parameters for CreatePipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/CreatePipelineInput
 type CreatePipelineInput struct {
 	_ struct{} `type:"structure"`
 
@@ -84,7 +83,6 @@ func (s *CreatePipelineInput) Validate() error {
 }
 
 // Contains the output of CreatePipeline.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/CreatePipelineOutput
 type CreatePipelineOutput struct {
 	_ struct{} `type:"structure"`
 

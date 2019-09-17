@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetWorkGroupInput
 type GetWorkGroupInput struct {
 	_ struct{} `type:"structure"`
 
@@ -38,7 +37,6 @@ func (s *GetWorkGroupInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetWorkGroupOutput
 type GetWorkGroupOutput struct {
 	_ struct{} `type:"structure"`
 

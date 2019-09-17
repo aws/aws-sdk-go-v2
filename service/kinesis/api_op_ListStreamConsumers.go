@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreamConsumersInput
 type ListStreamConsumersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -86,7 +85,6 @@ func (s *ListStreamConsumersInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreamConsumersOutput
 type ListStreamConsumersOutput struct {
 	_ struct{} `type:"structure"`
 

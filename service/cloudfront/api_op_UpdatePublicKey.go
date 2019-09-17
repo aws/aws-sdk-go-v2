@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdatePublicKeyRequest
 type UpdatePublicKeyInput struct {
 	_ struct{} `type:"structure" payload:"PublicKeyConfig"`
 
@@ -81,7 +80,6 @@ func (s UpdatePublicKeyInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdatePublicKeyResult
 type UpdatePublicKeyOutput struct {
 	_ struct{} `type:"structure" payload:"PublicKey"`
 

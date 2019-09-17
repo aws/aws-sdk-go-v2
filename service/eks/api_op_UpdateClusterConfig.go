@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterConfigRequest
 type UpdateClusterConfigInput struct {
 	_ struct{} `type:"structure"`
 
@@ -94,7 +93,6 @@ func (s UpdateClusterConfigInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterConfigResponse
 type UpdateClusterConfigOutput struct {
 	_ struct{} `type:"structure"`
 

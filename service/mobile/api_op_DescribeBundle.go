@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure to request the details of a specific bundle.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DescribeBundleRequest
 type DescribeBundleInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s DescribeBundleInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure contains the details of the bundle.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DescribeBundleResult
 type DescribeBundleOutput struct {
 	_ struct{} `type:"structure"`
 

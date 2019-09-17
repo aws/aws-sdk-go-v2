@@ -11,7 +11,6 @@ import (
 )
 
 // Delete a preset by sending a request with the preset name
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DeletePresetRequest
 type DeletePresetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s DeletePresetInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // Delete preset requests will return an OK message or error message with an
 // empty body.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DeletePresetResponse
 type DeletePresetOutput struct {
 	_ struct{} `type:"structure"`
 }

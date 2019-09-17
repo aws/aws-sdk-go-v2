@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergePullRequestBySquashInput
 type MergePullRequestBySquashInput struct {
 	_ struct{} `type:"structure"`
 
@@ -93,7 +92,6 @@ func (s *MergePullRequestBySquashInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergePullRequestBySquashOutput
 type MergePullRequestBySquashOutput struct {
 	_ struct{} `type:"structure"`
 

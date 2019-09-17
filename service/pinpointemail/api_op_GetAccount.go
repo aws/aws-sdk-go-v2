@@ -12,7 +12,6 @@ import (
 
 // A request to obtain information about the email-sending capabilities of your
 // Amazon Pinpoint account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetAccountRequest
 type GetAccountInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -31,7 +30,6 @@ func (s GetAccountInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // A list of details about the email-sending capabilities of your Amazon Pinpoint
 // account in the current AWS Region.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetAccountResponse
 type GetAccountOutput struct {
 	_ struct{} `type:"structure"`
 

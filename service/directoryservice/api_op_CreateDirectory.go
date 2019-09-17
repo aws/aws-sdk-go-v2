@@ -11,7 +11,6 @@ import (
 )
 
 // Contains the inputs for the CreateDirectory operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateDirectoryRequest
 type CreateDirectoryInput struct {
 	_ struct{} `type:"structure"`
 
@@ -85,7 +84,6 @@ func (s *CreateDirectoryInput) Validate() error {
 }
 
 // Contains the results of the CreateDirectory operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateDirectoryResult
 type CreateDirectoryOutput struct {
 	_ struct{} `type:"structure"`
 

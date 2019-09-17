@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Contains details about an activity that failed during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityFailedEventDetails
 type ActivityFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -30,7 +29,6 @@ func (s ActivityFailedEventDetails) String() string {
 }
 
 // Contains details about an activity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityListItem
 type ActivityListItem struct {
 	_ struct{} `type:"structure"`
 
@@ -69,7 +67,6 @@ func (s ActivityListItem) String() string {
 
 // Contains details about an activity schedule failure that occurred during
 // an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityScheduleFailedEventDetails
 type ActivityScheduleFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -86,7 +83,6 @@ func (s ActivityScheduleFailedEventDetails) String() string {
 }
 
 // Contains details about an activity scheduled during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityScheduledEventDetails
 type ActivityScheduledEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -111,7 +107,6 @@ func (s ActivityScheduledEventDetails) String() string {
 }
 
 // Contains details about the start of an activity during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityStartedEventDetails
 type ActivityStartedEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -127,7 +122,6 @@ func (s ActivityStartedEventDetails) String() string {
 
 // Contains details about an activity that successfully terminated during an
 // execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivitySucceededEventDetails
 type ActivitySucceededEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -141,7 +135,6 @@ func (s ActivitySucceededEventDetails) String() string {
 }
 
 // Contains details about an activity timeout that occurred during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityTimedOutEventDetails
 type ActivityTimedOutEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -158,7 +151,6 @@ func (s ActivityTimedOutEventDetails) String() string {
 }
 
 // Contains details about an abort of an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionAbortedEventDetails
 type ExecutionAbortedEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -175,7 +167,6 @@ func (s ExecutionAbortedEventDetails) String() string {
 }
 
 // Contains details about an execution failure event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionFailedEventDetails
 type ExecutionFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -192,7 +183,6 @@ func (s ExecutionFailedEventDetails) String() string {
 }
 
 // Contains details about an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionListItem
 type ExecutionListItem struct {
 	_ struct{} `type:"structure"`
 
@@ -243,7 +233,6 @@ func (s ExecutionListItem) String() string {
 }
 
 // Contains details about the start of the execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionStartedEventDetails
 type ExecutionStartedEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -261,7 +250,6 @@ func (s ExecutionStartedEventDetails) String() string {
 }
 
 // Contains details about the successful termination of the execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionSucceededEventDetails
 type ExecutionSucceededEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -275,7 +263,6 @@ func (s ExecutionSucceededEventDetails) String() string {
 }
 
 // Contains details about the execution timeout that occurred during the execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionTimedOutEventDetails
 type ExecutionTimedOutEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -292,7 +279,6 @@ func (s ExecutionTimedOutEventDetails) String() string {
 }
 
 // Contains details about the events of an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/HistoryEvent
 type HistoryEvent struct {
 	_ struct{} `type:"structure"`
 
@@ -406,7 +392,6 @@ func (s HistoryEvent) String() string {
 }
 
 // Contains details about a lambda function that failed during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionFailedEventDetails
 type LambdaFunctionFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -424,7 +409,6 @@ func (s LambdaFunctionFailedEventDetails) String() string {
 
 // Contains details about a failed lambda function schedule event that occurred
 // during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionScheduleFailedEventDetails
 type LambdaFunctionScheduleFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -441,7 +425,6 @@ func (s LambdaFunctionScheduleFailedEventDetails) String() string {
 }
 
 // Contains details about a lambda function scheduled during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionScheduledEventDetails
 type LambdaFunctionScheduledEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -463,7 +446,6 @@ func (s LambdaFunctionScheduledEventDetails) String() string {
 }
 
 // Contains details about a lambda function that failed to start during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionStartFailedEventDetails
 type LambdaFunctionStartFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -481,7 +463,6 @@ func (s LambdaFunctionStartFailedEventDetails) String() string {
 
 // Contains details about a lambda function that successfully terminated during
 // an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionSucceededEventDetails
 type LambdaFunctionSucceededEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -496,7 +477,6 @@ func (s LambdaFunctionSucceededEventDetails) String() string {
 
 // Contains details about a lambda function timeout that occurred during an
 // execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionTimedOutEventDetails
 type LambdaFunctionTimedOutEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -513,7 +493,6 @@ func (s LambdaFunctionTimedOutEventDetails) String() string {
 }
 
 // Contains details about a state entered during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateEnteredEventDetails
 type StateEnteredEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -532,7 +511,6 @@ func (s StateEnteredEventDetails) String() string {
 }
 
 // Contains details about an exit from a state during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateExitedEventDetails
 type StateExitedEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -563,7 +541,6 @@ func (s StateExitedEventDetails) String() string {
 }
 
 // Contains details about the state machine.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateMachineListItem
 type StateMachineListItem struct {
 	_ struct{} `type:"structure"`
 
@@ -602,7 +579,6 @@ func (s StateMachineListItem) String() string {
 
 // Tags are key-value pairs that can be associated with Step Functions state
 // machines and activities.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -632,7 +608,6 @@ func (s *Tag) Validate() error {
 }
 
 // Contains details about a task failure event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskFailedEventDetails
 type TaskFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -659,7 +634,6 @@ func (s TaskFailedEventDetails) String() string {
 }
 
 // Contains details about a task scheduled during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskScheduledEventDetails
 type TaskScheduledEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -693,7 +667,6 @@ func (s TaskScheduledEventDetails) String() string {
 }
 
 // Contains details about a task that failed to start during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskStartFailedEventDetails
 type TaskStartFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -720,7 +693,6 @@ func (s TaskStartFailedEventDetails) String() string {
 }
 
 // Contains details about the start of a task during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskStartedEventDetails
 type TaskStartedEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -741,7 +713,6 @@ func (s TaskStartedEventDetails) String() string {
 }
 
 // Contains details about a task that failed to submit during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskSubmitFailedEventDetails
 type TaskSubmitFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -768,7 +739,6 @@ func (s TaskSubmitFailedEventDetails) String() string {
 }
 
 // Contains details about a task submitted to a resource .
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskSubmittedEventDetails
 type TaskSubmittedEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -792,7 +762,6 @@ func (s TaskSubmittedEventDetails) String() string {
 }
 
 // Contains details about the successful completion of a task state.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskSucceededEventDetails
 type TaskSucceededEventDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -817,7 +786,6 @@ func (s TaskSucceededEventDetails) String() string {
 }
 
 // Contains details about a resource timeout that occurred during an execution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskTimedOutEventDetails
 type TaskTimedOutEventDetails struct {
 	_ struct{} `type:"structure"`
 

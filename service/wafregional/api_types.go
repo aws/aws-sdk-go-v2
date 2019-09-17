@@ -21,7 +21,6 @@ var _ = awsutil.Prettify
 //
 // To specify whether to insert or delete a Rule, use the Action parameter in
 // the WebACLUpdate data type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ActivatedRule
 type ActivatedRule struct {
 	_ struct{} `type:"structure"`
 
@@ -171,7 +170,6 @@ func (s *ActivatedRule) Validate() error {
 // want AWS WAF to search for. If a ByteMatchSet contains more than one ByteMatchTuple
 // object, a request needs to match the settings in only one ByteMatchTuple
 // to be considered a match.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ByteMatchSet
 type ByteMatchSet struct {
 	_ struct{} `type:"structure"`
 
@@ -204,7 +202,6 @@ func (s ByteMatchSet) String() string {
 
 // Returned by ListByteMatchSets. Each ByteMatchSetSummary object includes the
 // Name and ByteMatchSetId for one ByteMatchSet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ByteMatchSetSummary
 type ByteMatchSetSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -231,7 +228,6 @@ func (s ByteMatchSetSummary) String() string {
 
 // In an UpdateByteMatchSet request, ByteMatchSetUpdate specifies whether to
 // insert or delete a ByteMatchTuple and includes the settings for the ByteMatchTuple.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ByteMatchSetUpdate
 type ByteMatchSetUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -279,7 +275,6 @@ func (s *ByteMatchSetUpdate) Validate() error {
 // The bytes (typically a string that corresponds with ASCII characters) that
 // you want AWS WAF to search for in web requests, the location in requests
 // that you want AWS WAF to search, and other settings.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ByteMatchTuple
 type ByteMatchTuple struct {
 	_ struct{} `type:"structure"`
 
@@ -511,7 +506,6 @@ func (s *ByteMatchTuple) Validate() error {
 // The rule to exclude from a rule group. This is applicable only when the ActivatedRule
 // refers to a RuleGroup. The rule must belong to the RuleGroup that is specified
 // by the ActivatedRule.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ExcludedRule
 type ExcludedRule struct {
 	_ struct{} `type:"structure"`
 
@@ -544,7 +538,6 @@ func (s *ExcludedRule) Validate() error {
 }
 
 // Specifies where in a web request to look for TargetString.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/FieldToMatch
 type FieldToMatch struct {
 	_ struct{} `type:"structure"`
 
@@ -616,7 +609,6 @@ func (s *FieldToMatch) Validate() error {
 
 // The country from which web requests originate that you want AWS WAF to search
 // for.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GeoMatchConstraint
 type GeoMatchConstraint struct {
 	_ struct{} `type:"structure"`
 
@@ -654,7 +646,6 @@ func (s *GeoMatchConstraint) Validate() error {
 }
 
 // Contains one or more countries that AWS WAF will search for.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GeoMatchSet
 type GeoMatchSet struct {
 	_ struct{} `type:"structure"`
 
@@ -685,7 +676,6 @@ func (s GeoMatchSet) String() string {
 }
 
 // Contains the identifier and the name of the GeoMatchSet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GeoMatchSetSummary
 type GeoMatchSetSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -708,7 +698,6 @@ func (s GeoMatchSetSummary) String() string {
 }
 
 // Specifies the type of update to perform to an GeoMatchSet with UpdateGeoMatchSet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GeoMatchSetUpdate
 type GeoMatchSetUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -755,7 +744,6 @@ func (s *GeoMatchSetUpdate) Validate() error {
 // type that appears as Headers in the response syntax. HTTPHeader contains
 // the names and values of all of the headers that appear in one of the web
 // requests that were returned by GetSampledRequests.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/HTTPHeader
 type HTTPHeader struct {
 	_ struct{} `type:"structure"`
 
@@ -774,7 +762,6 @@ func (s HTTPHeader) String() string {
 // The response from a GetSampledRequests request includes an HTTPRequest complex
 // type that appears as Request in the response syntax. HTTPRequest contains
 // information about one of the web requests that were returned by GetSampledRequests.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/HTTPRequest
 type HTTPRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -824,7 +811,6 @@ func (s HTTPRequest) String() string {
 // you can specify /8 or any range between /16 through /32 (for IPv4) or /24,
 // /32, /48, /56, /64, or /128 (for IPv6). For more information about CIDR notation,
 // see the Wikipedia entry Classless Inter-Domain Routing (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/IPSet
 type IPSet struct {
 	_ struct{} `type:"structure"`
 
@@ -859,7 +845,6 @@ func (s IPSet) String() string {
 
 // Specifies the IP address type (IPV4 or IPV6) and the IP address range (in
 // CIDR format) that web requests originate from.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/IPSetDescriptor
 type IPSetDescriptor struct {
 	_ struct{} `type:"structure"`
 
@@ -915,7 +900,6 @@ func (s *IPSetDescriptor) Validate() error {
 }
 
 // Contains the identifier and the name of the IPSet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/IPSetSummary
 type IPSetSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -938,7 +922,6 @@ func (s IPSetSummary) String() string {
 }
 
 // Specifies the type of update to perform to an IPSet with UpdateIPSet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/IPSetUpdate
 type IPSetUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -983,7 +966,6 @@ func (s *IPSetUpdate) Validate() error {
 
 // The Amazon Kinesis Data Firehose, RedactedFields information, and the web
 // ACL Amazon Resource Name (ARN).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/LoggingConfiguration
 type LoggingConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1044,7 +1026,6 @@ func (s *LoggingConfiguration) Validate() error {
 // GeoMatchSet, and SizeConstraintSet objects that you want to add to a Rule
 // and, for each object, indicates whether you want to negate the settings,
 // for example, requests that do NOT originate from the IP address 192.0.2.44.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/Predicate
 type Predicate struct {
 	_ struct{} `type:"structure"`
 
@@ -1119,7 +1100,6 @@ func (s *Predicate) Validate() error {
 // Requests that meet both of these conditions and exceed 15,000 requests every
 // five minutes trigger the rule's action (block or count), which is defined
 // in the web ACL.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/RateBasedRule
 type RateBasedRule struct {
 	_ struct{} `type:"structure"`
 
@@ -1181,7 +1161,6 @@ func (s RateBasedRule) String() string {
 // want AWS WAF to search for. If a RegexMatchSet contains more than one RegexMatchTuple
 // object, a request needs to match the settings in only one ByteMatchTuple
 // to be considered a match.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/RegexMatchSet
 type RegexMatchSet struct {
 	_ struct{} `type:"structure"`
 
@@ -1218,7 +1197,6 @@ func (s RegexMatchSet) String() string {
 
 // Returned by ListRegexMatchSets. Each RegexMatchSetSummary object includes
 // the Name and RegexMatchSetId for one RegexMatchSet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/RegexMatchSetSummary
 type RegexMatchSetSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1245,7 +1223,6 @@ func (s RegexMatchSetSummary) String() string {
 
 // In an UpdateRegexMatchSet request, RegexMatchSetUpdate specifies whether
 // to insert or delete a RegexMatchTuple and includes the settings for the RegexMatchTuple.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/RegexMatchSetUpdate
 type RegexMatchSetUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -1303,7 +1280,6 @@ func (s *RegexMatchSetUpdate) Validate() error {
 //
 //    * Whether to perform any conversions on the request, such as converting
 //    it to lowercase, before inspecting it for the specified string.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/RegexMatchTuple
 type RegexMatchTuple struct {
 	_ struct{} `type:"structure"`
 
@@ -1437,7 +1413,6 @@ func (s *RegexMatchTuple) Validate() error {
 // The RegexPatternSet specifies the regular expression (regex) pattern that
 // you want AWS WAF to search for, such as B[a@]dB[o0]t. You can then configure
 // AWS WAF to reject those requests.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/RegexPatternSet
 type RegexPatternSet struct {
 	_ struct{} `type:"structure"`
 
@@ -1468,7 +1443,6 @@ func (s RegexPatternSet) String() string {
 
 // Returned by ListRegexPatternSets. Each RegexPatternSetSummary object includes
 // the Name and RegexPatternSetId for one RegexPatternSet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/RegexPatternSetSummary
 type RegexPatternSetSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1497,7 +1471,6 @@ func (s RegexPatternSetSummary) String() string {
 // In an UpdateRegexPatternSet request, RegexPatternSetUpdate specifies whether
 // to insert or delete a RegexPatternString and includes the settings for the
 // RegexPatternString.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/RegexPatternSetUpdate
 type RegexPatternSetUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -1550,7 +1523,6 @@ func (s *RegexPatternSetUpdate) Validate() error {
 //
 // To match the settings in this Rule, a request must originate from 192.0.2.44
 // AND include a User-Agent header for which the value is BadBot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/Rule
 type Rule struct {
 	_ struct{} `type:"structure"`
 
@@ -1597,7 +1569,6 @@ func (s Rule) String() string {
 //    * One rule group per web ACL.
 //
 //    * Ten rules per rule group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/RuleGroup
 type RuleGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -1629,7 +1600,6 @@ func (s RuleGroup) String() string {
 }
 
 // Contains the identifier and the friendly name or description of the RuleGroup.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/RuleGroupSummary
 type RuleGroupSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1657,7 +1627,6 @@ func (s RuleGroupSummary) String() string {
 
 // Specifies an ActivatedRule and indicates whether you want to add it to a
 // RuleGroup or delete it from a RuleGroup.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/RuleGroupUpdate
 type RuleGroupUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -1703,7 +1672,6 @@ func (s *RuleGroupUpdate) Validate() error {
 }
 
 // Contains the identifier and the friendly name or description of the Rule.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/RuleSummary
 type RuleSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1731,7 +1699,6 @@ func (s RuleSummary) String() string {
 
 // Specifies a Predicate (such as an IPSet) and indicates whether you want to
 // add it to a Rule or delete it from a Rule.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/RuleUpdate
 type RuleUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -1778,7 +1745,6 @@ func (s *RuleUpdate) Validate() error {
 // complex type that appears as SampledRequests in the response syntax. SampledHTTPRequests
 // contains one SampledHTTPRequest object for each web request that is returned
 // by GetSampledRequests.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SampledHTTPRequest
 type SampledHTTPRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -1818,7 +1784,6 @@ func (s SampledHTTPRequest) String() string {
 // uses the Size, ComparisonOperator, and FieldToMatch to build an expression
 // in the form of "Size ComparisonOperator size in bytes of FieldToMatch". If
 // that expression is true, the SizeConstraint is considered to match.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SizeConstraint
 type SizeConstraint struct {
 	_ struct{} `type:"structure"`
 
@@ -1981,7 +1946,6 @@ func (s *SizeConstraint) Validate() error {
 // of web requests that you want AWS WAF to inspect the size of. If a SizeConstraintSet
 // contains more than one SizeConstraint object, a request only needs to match
 // one constraint to be considered a match.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SizeConstraintSet
 type SizeConstraintSet struct {
 	_ struct{} `type:"structure"`
 
@@ -2011,7 +1975,6 @@ func (s SizeConstraintSet) String() string {
 }
 
 // The Id and Name of a SizeConstraintSet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SizeConstraintSetSummary
 type SizeConstraintSetSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -2040,7 +2003,6 @@ func (s SizeConstraintSetSummary) String() string {
 // Specifies the part of a web request that you want to inspect the size of
 // and indicates whether you want to add the specification to a SizeConstraintSet
 // or delete it from a SizeConstraintSet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SizeConstraintSetUpdate
 type SizeConstraintSetUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -2092,7 +2054,6 @@ func (s *SizeConstraintSetUpdate) Validate() error {
 // of the header. If a SqlInjectionMatchSet contains more than one SqlInjectionMatchTuple
 // object, a request needs to include snippets of SQL code in only one of the
 // specified parts of the request to be considered a match.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SqlInjectionMatchSet
 type SqlInjectionMatchSet struct {
 	_ struct{} `type:"structure"`
 
@@ -2123,7 +2084,6 @@ func (s SqlInjectionMatchSet) String() string {
 }
 
 // The Id and Name of a SqlInjectionMatchSet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SqlInjectionMatchSetSummary
 type SqlInjectionMatchSetSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -2152,7 +2112,6 @@ func (s SqlInjectionMatchSetSummary) String() string {
 // Specifies the part of a web request that you want to inspect for snippets
 // of malicious SQL code and indicates whether you want to add the specification
 // to a SqlInjectionMatchSet or delete it from a SqlInjectionMatchSet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SqlInjectionMatchSetUpdate
 type SqlInjectionMatchSetUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -2200,7 +2159,6 @@ func (s *SqlInjectionMatchSetUpdate) Validate() error {
 // Specifies the part of a web request that you want AWS WAF to inspect for
 // snippets of malicious SQL code and, if you want AWS WAF to inspect a header,
 // the name of the header.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SqlInjectionMatchTuple
 type SqlInjectionMatchTuple struct {
 	_ struct{} `type:"structure"`
 
@@ -2314,7 +2272,6 @@ func (s *SqlInjectionMatchTuple) Validate() error {
 }
 
 // A summary of the rule groups you are subscribed to.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SubscribedRuleGroupSummary
 type SubscribedRuleGroupSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -2344,7 +2301,6 @@ func (s SubscribedRuleGroupSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -2371,7 +2327,6 @@ func (s *Tag) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/TagInfoForResource
 type TagInfoForResource struct {
 	_ struct{} `type:"structure"`
 
@@ -2395,7 +2350,6 @@ func (s TagInfoForResource) String() string {
 // If your resource receives more than 5,000 requests during that period, AWS
 // WAF stops sampling after the 5,000th request. In that case, EndTime is the
 // time that AWS WAF received the 5,000th request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/TimeWindow
 type TimeWindow struct {
 	_ struct{} `type:"structure"`
 
@@ -2444,7 +2398,6 @@ func (s *TimeWindow) Validate() error {
 // the conditions in a rule. For the default action in a WebACL, specifies the
 // action that you want AWS WAF to take when a web request doesn't match all
 // of the conditions in any of the rules in a WebACL.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WafAction
 type WafAction struct {
 	_ struct{} `type:"structure"`
 
@@ -2483,7 +2436,6 @@ func (s *WafAction) Validate() error {
 }
 
 // The action to take if any rule within the RuleGroup matches a request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WafOverrideAction
 type WafOverrideAction struct {
 	_ struct{} `type:"structure"`
 
@@ -2520,7 +2472,6 @@ func (s *WafOverrideAction) Validate() error {
 // the requests that you want AWS WAF to filter. If you add more than one Rule
 // to a WebACL, a request needs to match only one of the specifications to be
 // allowed, blocked, or counted. For more information, see UpdateWebACL.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WebACL
 type WebACL struct {
 	_ struct{} `type:"structure"`
 
@@ -2566,7 +2517,6 @@ func (s WebACL) String() string {
 }
 
 // Contains the identifier and the name or description of the WebACL.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WebACLSummary
 type WebACLSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -2592,7 +2542,6 @@ func (s WebACLSummary) String() string {
 }
 
 // Specifies whether to insert a Rule into or delete a Rule from a WebACL.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WebACLUpdate
 type WebACLUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -2643,7 +2592,6 @@ func (s *WebACLUpdate) Validate() error {
 // If a XssMatchSet contains more than one XssMatchTuple object, a request needs
 // to include cross-site scripting attacks in only one of the specified parts
 // of the request to be considered a match.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/XssMatchSet
 type XssMatchSet struct {
 	_ struct{} `type:"structure"`
 
@@ -2673,7 +2621,6 @@ func (s XssMatchSet) String() string {
 }
 
 // The Id and Name of an XssMatchSet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/XssMatchSetSummary
 type XssMatchSetSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -2701,7 +2648,6 @@ func (s XssMatchSetSummary) String() string {
 // Specifies the part of a web request that you want to inspect for cross-site
 // scripting attacks and indicates whether you want to add the specification
 // to an XssMatchSet or delete it from an XssMatchSet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/XssMatchSetUpdate
 type XssMatchSetUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -2749,7 +2695,6 @@ func (s *XssMatchSetUpdate) Validate() error {
 // Specifies the part of a web request that you want AWS WAF to inspect for
 // cross-site scripting attacks and, if you want AWS WAF to inspect a header,
 // the name of the header.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/XssMatchTuple
 type XssMatchTuple struct {
 	_ struct{} `type:"structure"`
 

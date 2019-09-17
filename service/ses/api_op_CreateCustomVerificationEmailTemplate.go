@@ -12,7 +12,6 @@ import (
 )
 
 // Represents a request to create a custom verification email template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateCustomVerificationEmailTemplateRequest
 type CreateCustomVerificationEmailTemplateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -92,7 +91,6 @@ func (s *CreateCustomVerificationEmailTemplateInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateCustomVerificationEmailTemplateOutput
 type CreateCustomVerificationEmailTemplateOutput struct {
 	_ struct{} `type:"structure"`
 }

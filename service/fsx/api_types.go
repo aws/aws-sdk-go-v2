@@ -15,7 +15,6 @@ var _ = awsutil.Prettify
 
 // The Microsoft AD attributes of the Amazon FSx for Windows File Server file
 // system.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ActiveDirectoryBackupAttributes
 type ActiveDirectoryBackupAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -34,7 +33,6 @@ func (s ActiveDirectoryBackupAttributes) String() string {
 
 // A backup of an Amazon FSx for Windows File Server file system. You can create
 // a new file system from a backup to protect against data loss.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/Backup
 type Backup struct {
 	_ struct{} `type:"structure"`
 
@@ -91,7 +89,6 @@ func (s Backup) String() string {
 }
 
 // If backup creation fails, this structure contains the details of that failure.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/BackupFailureDetails
 type BackupFailureDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -106,7 +103,6 @@ func (s BackupFailureDetails) String() string {
 
 // The Lustre configuration for the file system being created. This value is
 // required if FileSystemType is set to LUSTRE.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemLustreConfiguration
 type CreateFileSystemLustreConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -177,7 +173,6 @@ func (s *CreateFileSystemLustreConfiguration) Validate() error {
 
 // The configuration object for the Microsoft Windows file system used in CreateFileSystem
 // and CreateFileSystemFromBackup operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemWindowsConfiguration
 type CreateFileSystemWindowsConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -255,7 +250,6 @@ func (s *CreateFileSystemWindowsConfiguration) Validate() error {
 
 // The data repository configuration object for Lustre file systems returned
 // in the response of the CreateFileSystem operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DataRepositoryConfiguration
 type DataRepositoryConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -287,7 +281,6 @@ func (s DataRepositoryConfiguration) String() string {
 
 // The configuration object for the Microsoft Windows file system used in the
 // DeleteFileSystem operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteFileSystemWindowsConfiguration
 type DeleteFileSystemWindowsConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -328,7 +321,6 @@ func (s *DeleteFileSystemWindowsConfiguration) Validate() error {
 
 // The response object for the Microsoft Windows file system used in the DeleteFileSystem
 // operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteFileSystemWindowsResponse
 type DeleteFileSystemWindowsResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -345,7 +337,6 @@ func (s DeleteFileSystemWindowsResponse) String() string {
 }
 
 // A description of a specific Amazon FSx file system.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileSystem
 type FileSystem struct {
 	_ struct{} `type:"structure"`
 
@@ -439,7 +430,6 @@ func (s FileSystem) String() string {
 
 // A structure providing details of any failures that occur when creating the
 // file system has failed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileSystemFailureDetails
 type FileSystemFailureDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -454,7 +444,6 @@ func (s FileSystemFailureDetails) String() string {
 
 // A filter used to restrict the results of describe calls. You can use multiple
 // filters to return results that meet all applied filter requirements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/Filter
 type Filter struct {
 	_ struct{} `type:"structure"`
 
@@ -472,7 +461,6 @@ func (s Filter) String() string {
 }
 
 // The configuration for the Amazon FSx for Lustre file system.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/LustreFileSystemConfiguration
 type LustreFileSystemConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -491,7 +479,6 @@ func (s LustreFileSystemConfiguration) String() string {
 
 // The configuration of the self-managed Microsoft Active Directory (AD) directory
 // to which the Windows File Server instance is joined.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryAttributes
 type SelfManagedActiveDirectoryAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -524,7 +511,6 @@ func (s SelfManagedActiveDirectoryAttributes) String() string {
 // The configuration that Amazon FSx uses to join the Windows File Server instance
 // to your self-managed (including on-premises) Microsoft Active Directory (AD)
 // directory.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryConfiguration
 type SelfManagedActiveDirectoryConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -632,7 +618,6 @@ func (s *SelfManagedActiveDirectoryConfiguration) Validate() error {
 
 // The configuration that Amazon FSx uses to join the Windows File Server instance
 // to the self-managed Microsoft Active Directory (AD) directory.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryConfigurationUpdates
 type SelfManagedActiveDirectoryConfigurationUpdates struct {
 	_ struct{} `type:"structure"`
 
@@ -676,7 +661,6 @@ func (s *SelfManagedActiveDirectoryConfigurationUpdates) Validate() error {
 }
 
 // Specifies a key-value pair for a resource tag.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -711,7 +695,6 @@ func (s *Tag) Validate() error {
 
 // The configuration object for Amazon FSx for Lustre file systems used in the
 // UpdateFileSystem operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemLustreConfiguration
 type UpdateFileSystemLustreConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -741,7 +724,6 @@ func (s *UpdateFileSystemLustreConfiguration) Validate() error {
 // Windows File Server file system. Amazon FSx overwrites existing properties
 // with non-null values provided in the request. If you don't specify a non-null
 // value for a property, that property is not updated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemWindowsConfiguration
 type UpdateFileSystemWindowsConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -787,7 +769,6 @@ func (s *UpdateFileSystemWindowsConfiguration) Validate() error {
 }
 
 // The configuration for this Microsoft Windows file system.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/WindowsFileSystemConfiguration
 type WindowsFileSystemConfiguration struct {
 	_ struct{} `type:"structure"`
 

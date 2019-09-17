@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/ListDetectorModelsRequest
 type ListDetectorModelsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -58,7 +57,6 @@ func (s ListDetectorModelsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/ListDetectorModelsResponse
 type ListDetectorModelsOutput struct {
 	_ struct{} `type:"structure"`
 

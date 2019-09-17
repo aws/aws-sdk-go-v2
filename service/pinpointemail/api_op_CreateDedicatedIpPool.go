@@ -12,7 +12,6 @@ import (
 )
 
 // A request to create a new dedicated IP pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateDedicatedIpPoolRequest
 type CreateDedicatedIpPoolInput struct {
 	_ struct{} `type:"structure"`
 
@@ -79,7 +78,6 @@ func (s CreateDedicatedIpPoolInput) MarshalFields(e protocol.FieldEncoder) error
 
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateDedicatedIpPoolResponse
 type CreateDedicatedIpPoolOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure for the list Domain Associations request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListDomainAssociationsRequest
 type ListDomainAssociationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -80,7 +79,6 @@ func (s ListDomainAssociationsInput) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // Result structure for the list Domain Association request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListDomainAssociationsResult
 type ListDomainAssociationsOutput struct {
 	_ struct{} `type:"structure"`
 

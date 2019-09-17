@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Represents an attribute for describing the key schema for the table and indexes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AttributeDefinition
 type AttributeDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -67,7 +66,6 @@ func (s *AttributeDefinition) Validate() error {
 //
 // For more information, see Data Types (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes)
 // in the Amazon DynamoDB Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AttributeValue
 type AttributeValue struct {
 	_ struct{} `type:"structure"`
 
@@ -147,7 +145,6 @@ func (s AttributeValue) String() string {
 // Attribute values cannot be null; string and binary type attributes must have
 // lengths greater than zero; and set type attributes must not be empty. Requests
 // with empty values will be rejected with a ValidationException exception.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AttributeValueUpdate
 type AttributeValueUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -223,7 +220,6 @@ func (s AttributeValueUpdate) String() string {
 }
 
 // Represents the properties of the scaling policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AutoScalingPolicyDescription
 type AutoScalingPolicyDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -240,7 +236,6 @@ func (s AutoScalingPolicyDescription) String() string {
 }
 
 // Represents the autoscaling policy to be modified.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AutoScalingPolicyUpdate
 type AutoScalingPolicyUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -282,7 +277,6 @@ func (s *AutoScalingPolicyUpdate) Validate() error {
 
 // Represents the autoscaling settings for a global table or global secondary
 // index.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AutoScalingSettingsDescription
 type AutoScalingSettingsDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -311,7 +305,6 @@ func (s AutoScalingSettingsDescription) String() string {
 
 // Represents the autoscaling settings to be modified for a global table or
 // global secondary index.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AutoScalingSettingsUpdate
 type AutoScalingSettingsUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -364,7 +357,6 @@ func (s *AutoScalingSettingsUpdate) Validate() error {
 }
 
 // Represents the properties of a target tracking scaling policy.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AutoScalingTargetTrackingScalingPolicyConfigurationDescription
 type AutoScalingTargetTrackingScalingPolicyConfigurationDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -404,7 +396,6 @@ func (s AutoScalingTargetTrackingScalingPolicyConfigurationDescription) String()
 
 // Represents the settings of a target tracking scaling policy that will be
 // modified.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AutoScalingTargetTrackingScalingPolicyConfigurationUpdate
 type AutoScalingTargetTrackingScalingPolicyConfigurationUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -457,7 +448,6 @@ func (s *AutoScalingTargetTrackingScalingPolicyConfigurationUpdate) Validate() e
 }
 
 // Contains the description of the backup created for the table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BackupDescription
 type BackupDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -478,7 +468,6 @@ func (s BackupDescription) String() string {
 }
 
 // Contains the details of the backup created for the table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BackupDetails
 type BackupDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -530,7 +519,6 @@ func (s BackupDetails) String() string {
 }
 
 // Contains details for the backup.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BackupSummary
 type BackupSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -581,7 +569,6 @@ func (s BackupSummary) String() string {
 }
 
 // Contains the details for the read/write capacity mode.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BillingModeSummary
 type BillingModeSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -609,7 +596,6 @@ func (s BillingModeSummary) String() string {
 // to get cancelled. The values of the list are ordered according to the ordering
 // of the TransactWriteItems request parameter. If no error occurred for the
 // associated item an error with a Null code and Null message will be present.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CancellationReason
 type CancellationReason struct {
 	_ struct{} `type:"structure"`
 
@@ -630,7 +616,6 @@ func (s CancellationReason) String() string {
 
 // Represents the amount of provisioned throughput capacity consumed on a table
 // or an index.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Capacity
 type Capacity struct {
 	_ struct{} `type:"structure"`
 
@@ -659,7 +644,6 @@ func (s Capacity) String() string {
 //
 //    * For a Scan operation, Condition is used in a ScanFilter, which evaluates
 //    the scan results and returns only the desired values.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Condition
 type Condition struct {
 	_ struct{} `type:"structure"`
 
@@ -816,7 +800,6 @@ func (s *Condition) Validate() error {
 
 // Represents a request to perform a check that an item exists or to check the
 // condition of specific attributes of the item..
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ConditionCheck
 type ConditionCheck struct {
 	_ struct{} `type:"structure"`
 
@@ -884,7 +867,6 @@ func (s *ConditionCheck) Validate() error {
 // if the request asked for it. For more information, see Provisioned Throughput
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
 // in the Amazon DynamoDB Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ConsumedCapacity
 type ConsumedCapacity struct {
 	_ struct{} `type:"structure"`
 
@@ -917,7 +899,6 @@ func (s ConsumedCapacity) String() string {
 
 // Represents the continuous backups and point in time recovery settings on
 // the table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ContinuousBackupsDescription
 type ContinuousBackupsDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -936,7 +917,6 @@ func (s ContinuousBackupsDescription) String() string {
 }
 
 // Represents a new global secondary index to be added to an existing table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateGlobalSecondaryIndexAction
 type CreateGlobalSecondaryIndexAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1017,7 +997,6 @@ func (s *CreateGlobalSecondaryIndexAction) Validate() error {
 }
 
 // Represents a replica to be added.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateReplicaAction
 type CreateReplicaAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1047,7 +1026,6 @@ func (s *CreateReplicaAction) Validate() error {
 }
 
 // Represents a request to perform a DeleteItem operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Delete
 type Delete struct {
 	_ struct{} `type:"structure"`
 
@@ -1104,7 +1082,6 @@ func (s *Delete) Validate() error {
 }
 
 // Represents a global secondary index to be deleted from an existing table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteGlobalSecondaryIndexAction
 type DeleteGlobalSecondaryIndexAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1137,7 +1114,6 @@ func (s *DeleteGlobalSecondaryIndexAction) Validate() error {
 }
 
 // Represents a replica to be removed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteReplicaAction
 type DeleteReplicaAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1167,7 +1143,6 @@ func (s *DeleteReplicaAction) Validate() error {
 }
 
 // Represents a request to perform a DeleteItem operation on an item.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteRequest
 type DeleteRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -1185,7 +1160,6 @@ func (s DeleteRequest) String() string {
 }
 
 // An endpoint information details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Endpoint
 type Endpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -1225,7 +1199,6 @@ func (s Endpoint) String() string {
 // Value and Exists are incompatible with AttributeValueList and ComparisonOperator.
 // Note that if you use both sets of parameters at once, DynamoDB will return
 // a ValidationException exception.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExpectedAttributeValue
 type ExpectedAttributeValue struct {
 	_ struct{} `type:"structure"`
 
@@ -1399,7 +1372,6 @@ func (s ExpectedAttributeValue) String() string {
 
 // Specifies an item and related attribute values to retrieve in a TransactGetItem
 // object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Get
 type Get struct {
 	_ struct{} `type:"structure"`
 
@@ -1453,7 +1425,6 @@ func (s *Get) Validate() error {
 }
 
 // Represents the properties of a global secondary index.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalSecondaryIndex
 type GlobalSecondaryIndex struct {
 	_ struct{} `type:"structure"`
 
@@ -1549,7 +1520,6 @@ func (s *GlobalSecondaryIndex) Validate() error {
 }
 
 // Represents the properties of a global secondary index.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalSecondaryIndexDescription
 type GlobalSecondaryIndexDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1628,7 +1598,6 @@ func (s GlobalSecondaryIndexDescription) String() string {
 
 // Represents the properties of a global secondary index for the table when
 // the backup was created.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalSecondaryIndexInfo
 type GlobalSecondaryIndexInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1675,7 +1644,6 @@ func (s GlobalSecondaryIndexInfo) String() string {
 //    index.
 //
 //    * An existing global secondary index to be removed from an existing table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalSecondaryIndexUpdate
 type GlobalSecondaryIndexUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -1732,7 +1700,6 @@ func (s *GlobalSecondaryIndexUpdate) Validate() error {
 }
 
 // Represents the properties of a global table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalTable
 type GlobalTable struct {
 	_ struct{} `type:"structure"`
 
@@ -1749,7 +1716,6 @@ func (s GlobalTable) String() string {
 }
 
 // Contains details about the global table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalTableDescription
 type GlobalTableDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -1784,7 +1750,6 @@ func (s GlobalTableDescription) String() string {
 
 // Represents the settings of a global secondary index for a global table that
 // will be modified.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalTableGlobalSecondaryIndexSettingsUpdate
 type GlobalTableGlobalSecondaryIndexSettingsUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -1837,7 +1802,6 @@ func (s *GlobalTableGlobalSecondaryIndexSettingsUpdate) Validate() error {
 // ItemCollectionMetrics is only returned if the request asked for it. If the
 // table does not have any local secondary indexes, this information is not
 // returned in the response.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ItemCollectionMetrics
 type ItemCollectionMetrics struct {
 	_ struct{} `type:"structure"`
 
@@ -1863,7 +1827,6 @@ func (s ItemCollectionMetrics) String() string {
 }
 
 // Details for the requested item.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ItemResponse
 type ItemResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -1887,7 +1850,6 @@ func (s ItemResponse) String() string {
 // A KeySchemaElement must be a scalar, top-level attribute (not a nested attribute).
 // The data type must be one of String, Number, or Binary. The attribute cannot
 // be nested within a List or a Map.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/KeySchemaElement
 type KeySchemaElement struct {
 	_ struct{} `type:"structure"`
 
@@ -1947,7 +1909,6 @@ func (s *KeySchemaElement) Validate() error {
 // with a simple primary key, you only need to provide the partition key. For
 // a composite primary key, you must provide both the partition key and the
 // sort key.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/KeysAndAttributes
 type KeysAndAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -2042,7 +2003,6 @@ func (s *KeysAndAttributes) Validate() error {
 }
 
 // Represents the properties of a local secondary index.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/LocalSecondaryIndex
 type LocalSecondaryIndex struct {
 	_ struct{} `type:"structure"`
 
@@ -2125,7 +2085,6 @@ func (s *LocalSecondaryIndex) Validate() error {
 }
 
 // Represents the properties of a local secondary index.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/LocalSecondaryIndexDescription
 type LocalSecondaryIndexDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -2174,7 +2133,6 @@ func (s LocalSecondaryIndexDescription) String() string {
 
 // Represents the properties of a local secondary index for the table when the
 // backup was created.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/LocalSecondaryIndexInfo
 type LocalSecondaryIndexInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -2210,7 +2168,6 @@ func (s LocalSecondaryIndexInfo) String() string {
 }
 
 // The description of the point in time settings applied to the table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PointInTimeRecoveryDescription
 type PointInTimeRecoveryDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -2237,7 +2194,6 @@ func (s PointInTimeRecoveryDescription) String() string {
 }
 
 // Represents the settings used to enable point in time recovery.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PointInTimeRecoverySpecification
 type PointInTimeRecoverySpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -2270,7 +2226,6 @@ func (s *PointInTimeRecoverySpecification) Validate() error {
 // Represents attributes that are copied (projected) from the table into an
 // index. These are in addition to the primary key attributes and index key
 // attributes, which are automatically projected.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Projection
 type Projection struct {
 	_ struct{} `type:"structure"`
 
@@ -2317,7 +2272,6 @@ func (s *Projection) Validate() error {
 // For current minimum and maximum provisioned throughput values, see Limits
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
 // in the Amazon DynamoDB Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ProvisionedThroughput
 type ProvisionedThroughput struct {
 	_ struct{} `type:"structure"`
 
@@ -2373,7 +2327,6 @@ func (s *ProvisionedThroughput) Validate() error {
 
 // Represents the provisioned throughput settings for the table, consisting
 // of read and write capacity units, along with data about increases and decreases.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ProvisionedThroughputDescription
 type ProvisionedThroughputDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -2406,7 +2359,6 @@ func (s ProvisionedThroughputDescription) String() string {
 }
 
 // Represents a request to perform a PutItem operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Put
 type Put struct {
 	_ struct{} `type:"structure"`
 
@@ -2466,7 +2418,6 @@ func (s *Put) Validate() error {
 }
 
 // Represents a request to perform a PutItem operation on an item.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PutRequest
 type PutRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -2486,7 +2437,6 @@ func (s PutRequest) String() string {
 }
 
 // Represents the properties of a replica.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Replica
 type Replica struct {
 	_ struct{} `type:"structure"`
 
@@ -2500,7 +2450,6 @@ func (s Replica) String() string {
 }
 
 // Contains the details of the replica.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaDescription
 type ReplicaDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -2514,7 +2463,6 @@ func (s ReplicaDescription) String() string {
 }
 
 // Represents the properties of a global secondary index.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaGlobalSecondaryIndexSettingsDescription
 type ReplicaGlobalSecondaryIndexSettingsDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -2559,7 +2507,6 @@ func (s ReplicaGlobalSecondaryIndexSettingsDescription) String() string {
 
 // Represents the settings of a global secondary index for a global table that
 // will be modified.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaGlobalSecondaryIndexSettingsUpdate
 type ReplicaGlobalSecondaryIndexSettingsUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -2609,7 +2556,6 @@ func (s *ReplicaGlobalSecondaryIndexSettingsUpdate) Validate() error {
 }
 
 // Represents the properties of a replica.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaSettingsDescription
 type ReplicaSettingsDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -2660,7 +2606,6 @@ func (s ReplicaSettingsDescription) String() string {
 }
 
 // Represents the settings for a global table in a region that will be modified.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaSettingsUpdate
 type ReplicaSettingsUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -2728,7 +2673,6 @@ func (s *ReplicaSettingsUpdate) Validate() error {
 //    * New parameters for an existing replica.
 //
 //    * An existing replica to be removed from an existing global table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaUpdate
 type ReplicaUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -2765,7 +2709,6 @@ func (s *ReplicaUpdate) Validate() error {
 }
 
 // Contains details for the restore.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreSummary
 type RestoreSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -2792,7 +2735,6 @@ func (s RestoreSummary) String() string {
 }
 
 // The description of the server-side encryption status on the specified table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SSEDescription
 type SSEDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -2820,7 +2762,6 @@ func (s SSEDescription) String() string {
 }
 
 // Represents the settings used to enable server-side encryption.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SSESpecification
 type SSESpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -2849,7 +2790,6 @@ func (s SSESpecification) String() string {
 }
 
 // Contains the details of the table when the backup was created.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SourceTableDetails
 type SourceTableDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -2905,7 +2845,6 @@ func (s SourceTableDetails) String() string {
 
 // Contains the details of the features enabled on the table when the backup
 // was created. For example, LSIs, GSIs, streams, TTL.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SourceTableFeatureDetails
 type SourceTableFeatureDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -2936,7 +2875,6 @@ func (s SourceTableFeatureDetails) String() string {
 }
 
 // Represents the DynamoDB Streams configuration for a table in DynamoDB.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/StreamSpecification
 type StreamSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -2968,7 +2906,6 @@ func (s StreamSpecification) String() string {
 }
 
 // Represents the properties of a table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TableDescription
 type TableDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -3169,7 +3106,6 @@ func (s TableDescription) String() string {
 //
 // For an overview on tagging DynamoDB resources, see Tagging for DynamoDB (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
 // in the Amazon DynamoDB Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -3213,7 +3149,6 @@ func (s *Tag) Validate() error {
 }
 
 // The description of the Time to Live (TTL) status on the specified table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TimeToLiveDescription
 type TimeToLiveDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -3231,7 +3166,6 @@ func (s TimeToLiveDescription) String() string {
 
 // Represents the settings used to enable or disable Time to Live (TTL) for
 // the specified table.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TimeToLiveSpecification
 type TimeToLiveSpecification struct {
 	_ struct{} `type:"structure"`
 
@@ -3275,7 +3209,6 @@ func (s *TimeToLiveSpecification) Validate() error {
 }
 
 // Specifies an item to be retrieved as part of the transaction.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TransactGetItem
 type TransactGetItem struct {
 	_ struct{} `type:"structure"`
 
@@ -3313,7 +3246,6 @@ func (s *TransactGetItem) Validate() error {
 
 // A list of requests that can perform update, put, delete, or check operations
 // on multiple items in one or more tables atomically.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TransactWriteItem
 type TransactWriteItem struct {
 	_ struct{} `type:"structure"`
 
@@ -3366,7 +3298,6 @@ func (s *TransactWriteItem) Validate() error {
 }
 
 // Represents a request to perform an UpdateItem operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Update
 type Update struct {
 	_ struct{} `type:"structure"`
 
@@ -3434,7 +3365,6 @@ func (s *Update) Validate() error {
 
 // Represents the new provisioned throughput settings to be applied to a global
 // secondary index.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalSecondaryIndexAction
 type UpdateGlobalSecondaryIndexAction struct {
 	_ struct{} `type:"structure"`
 
@@ -3489,7 +3419,6 @@ func (s *UpdateGlobalSecondaryIndexAction) Validate() error {
 // only request one of these operations, not both, in a single WriteRequest.
 // If you do need to perform both of these operations, you will need to provide
 // two separate WriteRequest objects.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/WriteRequest
 type WriteRequest struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // Request to execute a scheduled managed action immediately.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplyEnvironmentManagedActionRequest
 type ApplyEnvironmentManagedActionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +45,6 @@ func (s *ApplyEnvironmentManagedActionInput) Validate() error {
 }
 
 // The result message containing information about the managed action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplyEnvironmentManagedActionResult
 type ApplyEnvironmentManagedActionOutput struct {
 	_ struct{} `type:"structure"`
 

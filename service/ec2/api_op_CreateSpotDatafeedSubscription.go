@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for CreateSpotDatafeedSubscription.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSpotDatafeedSubscriptionRequest
 type CreateSpotDatafeedSubscriptionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -49,7 +48,6 @@ func (s *CreateSpotDatafeedSubscriptionInput) Validate() error {
 }
 
 // Contains the output of CreateSpotDatafeedSubscription.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSpotDatafeedSubscriptionResult
 type CreateSpotDatafeedSubscriptionOutput struct {
 	_ struct{} `type:"structure"`
 

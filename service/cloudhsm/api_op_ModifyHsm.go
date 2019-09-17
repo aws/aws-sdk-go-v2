@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the inputs for the ModifyHsm operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHsmRequest
 type ModifyHsmInput struct {
 	_ struct{} `locationName:"ModifyHsmRequest" type:"structure"`
 
@@ -61,7 +60,6 @@ func (s *ModifyHsmInput) Validate() error {
 }
 
 // Contains the output of the ModifyHsm operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHsmResponse
 type ModifyHsmOutput struct {
 	_ struct{} `type:"structure"`
 

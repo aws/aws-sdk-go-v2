@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a CreateDeployment operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentInput
 type CreateDeploymentInput struct {
 	_ struct{} `type:"structure"`
 
@@ -120,7 +119,6 @@ func (s *CreateDeploymentInput) Validate() error {
 }
 
 // Represents the output of a CreateDeployment operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentOutput
 type CreateDeploymentOutput struct {
 	_ struct{} `type:"structure"`
 

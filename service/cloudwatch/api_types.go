@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Represents the history of a specific alarm.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/AlarmHistoryItem
 type AlarmHistoryItem struct {
 	_ struct{} `type:"structure"`
 
@@ -42,7 +41,6 @@ func (s AlarmHistoryItem) String() string {
 // An anomaly detection model associated with a particular CloudWatch metric
 // athresnd statistic. You can use the model to display a band of expected normal
 // values when the metric is graphed.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/AnomalyDetector
 type AnomalyDetector struct {
 	_ struct{} `type:"structure"`
 
@@ -72,7 +70,6 @@ func (s AnomalyDetector) String() string {
 // The configuration specifies details about how the anomaly detection model
 // is to be trained, including time ranges to exclude from use for training
 // the model and the time zone to use for the metric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/AnomalyDetectorConfiguration
 type AnomalyDetectorConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -114,7 +111,6 @@ func (s *AnomalyDetectorConfiguration) Validate() error {
 }
 
 // Represents a specific dashboard.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DashboardEntry
 type DashboardEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -139,7 +135,6 @@ func (s DashboardEntry) String() string {
 }
 
 // An error or warning for the operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DashboardValidationMessage
 type DashboardValidationMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -156,7 +151,6 @@ func (s DashboardValidationMessage) String() string {
 }
 
 // Encapsulates the statistical data that CloudWatch computes from metric data.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/Datapoint
 type Datapoint struct {
 	_ struct{} `type:"structure"`
 
@@ -192,7 +186,6 @@ func (s Datapoint) String() string {
 }
 
 // Expands the identity of a metric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/Dimension
 type Dimension struct {
 	_ struct{} `type:"structure"`
 
@@ -237,7 +230,6 @@ func (s *Dimension) Validate() error {
 }
 
 // Represents filters for a dimension.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DimensionFilter
 type DimensionFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -276,7 +268,6 @@ func (s *DimensionFilter) Validate() error {
 }
 
 // A message returned by the GetMetricDataAPI, including a code and a description.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MessageData
 type MessageData struct {
 	_ struct{} `type:"structure"`
 
@@ -293,7 +284,6 @@ func (s MessageData) String() string {
 }
 
 // Represents a specific metric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/Metric
 type Metric struct {
 	_ struct{} `type:"structure"`
 
@@ -336,7 +326,6 @@ func (s *Metric) Validate() error {
 }
 
 // Represents an alarm.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricAlarm
 type MetricAlarm struct {
 	_ struct{} `type:"structure"`
 
@@ -470,7 +459,6 @@ func (s MetricAlarm) String() string {
 // Some of the parameters of this structure also have different uses whether
 // you are using this structure in a GetMetricData operation or a PutMetricAlarm
 // operation. These differences are explained in the following parameter list.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricDataQuery
 type MetricDataQuery struct {
 	_ struct{} `type:"structure"`
 
@@ -553,7 +541,6 @@ func (s *MetricDataQuery) Validate() error {
 // A GetMetricData call returns an array of MetricDataResult structures. Each
 // of these structures includes the data points for that metric, along with
 // the timestamps of those data points and other identifying information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricDataResult
 type MetricDataResult struct {
 	_ struct{} `type:"structure"`
 
@@ -592,7 +579,6 @@ func (s MetricDataResult) String() string {
 
 // Encapsulates the information sent to either create a metric or add new values
 // to be aggregated into an existing metric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricDatum
 type MetricDatum struct {
 	_ struct{} `type:"structure"`
 
@@ -699,7 +685,6 @@ func (s *MetricDatum) Validate() error {
 
 // This structure defines the metric to be returned, along with the statistics,
 // period, and units.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricStat
 type MetricStat struct {
 	_ struct{} `type:"structure"`
 
@@ -768,7 +753,6 @@ func (s *MetricStat) Validate() error {
 
 // Specifies one range of days or times to exclude from use for training an
 // anomaly detection model.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/Range
 type Range struct {
 	_ struct{} `type:"structure"`
 
@@ -809,7 +793,6 @@ func (s *Range) Validate() error {
 }
 
 // Represents a set of statistics that describes a specific metric.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StatisticSet
 type StatisticSet struct {
 	_ struct{} `type:"structure"`
 
@@ -866,7 +849,6 @@ func (s *StatisticSet) Validate() error {
 }
 
 // A key-value pair associated with a CloudWatch resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 

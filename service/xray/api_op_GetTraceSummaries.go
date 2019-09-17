@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceSummariesRequest
 type GetTraceSummariesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -119,7 +118,6 @@ func (s GetTraceSummariesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceSummariesResult
 type GetTraceSummariesOutput struct {
 	_ struct{} `type:"structure"`
 

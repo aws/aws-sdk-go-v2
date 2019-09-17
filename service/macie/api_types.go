@@ -11,7 +11,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // The classification type that Amazon Macie applies to the associated S3 resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/ClassificationType
 type ClassificationType struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s *ClassificationType) Validate() error {
 // The classification type that Amazon Macie applies to the associated S3 resources.
 // At least one of the classification types (oneTime or continuous) must be
 // specified.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/ClassificationTypeUpdate
 type ClassificationTypeUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -73,7 +71,6 @@ func (s ClassificationTypeUpdate) String() string {
 }
 
 // Includes details about the failed S3 resources.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/FailedS3Resource
 type FailedS3Resource struct {
 	_ struct{} `type:"structure"`
 
@@ -93,7 +90,6 @@ func (s FailedS3Resource) String() string {
 }
 
 // Contains information about the Amazon Macie member account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/MemberAccount
 type MemberAccount struct {
 	_ struct{} `type:"structure"`
 
@@ -109,7 +105,6 @@ func (s MemberAccount) String() string {
 // Contains information about the S3 resource. This data type is used as a request
 // parameter in the DisassociateS3Resources action and can be used as a response
 // parameter in the AssociateS3Resources and UpdateS3Resources actions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/S3Resource
 type S3Resource struct {
 	_ struct{} `type:"structure"`
 
@@ -145,7 +140,6 @@ func (s *S3Resource) Validate() error {
 // and data classification. This data type is used as a request parameter in
 // the AssociateS3Resources action and a response parameter in the ListS3Resources
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/S3ResourceClassification
 type S3ResourceClassification struct {
 	_ struct{} `type:"structure"`
 
@@ -194,7 +188,6 @@ func (s *S3ResourceClassification) Validate() error {
 
 // The S3 resources whose classification types you want to update. This data
 // type is used as a request parameter in the UpdateS3Resources action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/S3ResourceClassificationUpdate
 type S3ResourceClassificationUpdate struct {
 	_ struct{} `type:"structure"`
 

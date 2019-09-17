@@ -87,7 +87,6 @@ var _ = awsutil.Prettify
 // For more information, see Limits (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html)
 // in the Amazon RDS User Guide and Limits (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html)
 // in the Amazon Aurora User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AccountQuota
 type AccountQuota struct {
 	_ struct{} `type:"structure"`
 
@@ -110,7 +109,6 @@ func (s AccountQuota) String() string {
 //
 // This data type is used as an element in the OrderableDBInstanceOption data
 // type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AvailabilityZone
 type AvailabilityZone struct {
 	_ struct{} `type:"structure"`
 
@@ -129,7 +127,6 @@ func (s AvailabilityZone) String() string {
 // For more information, see Configuring the Processor of the DB Instance Class
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor)
 // in the Amazon RDS User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AvailableProcessorFeature
 type AvailableProcessorFeature struct {
 	_ struct{} `type:"structure"`
 
@@ -149,7 +146,6 @@ func (s AvailableProcessorFeature) String() string {
 }
 
 // A CA certificate for an AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Certificate
 type Certificate struct {
 	_ struct{} `type:"structure"`
 
@@ -178,7 +174,6 @@ func (s Certificate) String() string {
 }
 
 // This data type is used as a response element in the action DescribeDBEngineVersions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CharacterSet
 type CharacterSet struct {
 	_ struct{} `type:"structure"`
 
@@ -202,7 +197,6 @@ func (s CharacterSet) String() string {
 // depend on the DB engine being used. For more information, see Publishing
 // Database Logs to Amazon CloudWatch Logs (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 // in the Amazon RDS User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CloudwatchLogsExportConfiguration
 type CloudwatchLogsExportConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -222,7 +216,6 @@ func (s CloudwatchLogsExportConfiguration) String() string {
 //
 // This data type is used as a response element in the DescribeDBClusters, StopDBCluster,
 // and StartDBCluster actions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster
 type DBCluster struct {
 	_ struct{} `type:"structure"`
 
@@ -451,7 +444,6 @@ func (s DBCluster) String() string {
 
 // This data type is used as a response element in the DescribeDBClusterBacktracks
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterBacktrack
 type DBClusterBacktrack struct {
 	_ struct{} `type:"structure"`
 
@@ -506,7 +498,6 @@ func (s DBClusterBacktrack) String() string {
 //
 // For the data structure that represents Amazon RDS DB instance endpoints,
 // see Endpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterEndpoint
 type DBClusterEndpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -553,7 +544,6 @@ func (s DBClusterEndpoint) String() string {
 }
 
 // Contains information about an instance that is part of a DB cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterMember
 type DBClusterMember struct {
 	_ struct{} `type:"structure"`
 
@@ -581,7 +571,6 @@ func (s DBClusterMember) String() string {
 }
 
 // Contains status information for a DB cluster option group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterOptionGroupStatus
 type DBClusterOptionGroupStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -601,7 +590,6 @@ func (s DBClusterOptionGroupStatus) String() string {
 //
 // This data type is used as a response element in the DescribeDBClusterParameterGroups
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterParameterGroup
 type DBClusterParameterGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -627,7 +615,6 @@ func (s DBClusterParameterGroup) String() string {
 
 // Describes an AWS Identity and Access Management (IAM) role that is associated
 // with a DB cluster.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterRole
 type DBClusterRole struct {
 	_ struct{} `type:"structure"`
 
@@ -662,7 +649,6 @@ func (s DBClusterRole) String() string {
 //
 // This data type is used as a response element in the DescribeDBClusterSnapshots
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshot
 type DBClusterSnapshot struct {
 	_ struct{} `type:"structure"`
 
@@ -746,7 +732,6 @@ func (s DBClusterSnapshot) String() string {
 // Manual DB cluster snapshot attributes are used to authorize other AWS accounts
 // to restore a manual DB cluster snapshot. For more information, see the ModifyDBClusterSnapshotAttribute
 // API action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshotAttribute
 type DBClusterSnapshotAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -778,7 +763,6 @@ func (s DBClusterSnapshotAttribute) String() string {
 // Manual DB cluster snapshot attributes are used to authorize other AWS accounts
 // to copy or restore a manual DB cluster snapshot. For more information, see
 // the ModifyDBClusterSnapshotAttribute API action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshotAttributesResult
 type DBClusterSnapshotAttributesResult struct {
 	_ struct{} `type:"structure"`
 
@@ -796,7 +780,6 @@ func (s DBClusterSnapshotAttributesResult) String() string {
 }
 
 // This data type is used as a response element in the action DescribeDBEngineVersions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersion
 type DBEngineVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -863,7 +846,6 @@ func (s DBEngineVersion) String() string {
 // Contains the details of an Amazon RDS DB instance.
 //
 // This data type is used as a response element in the DescribeDBInstances action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance
 type DBInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -1131,7 +1113,6 @@ func (s DBInstance) String() string {
 // An automated backup of a DB instance. It it consists of system backups, transaction
 // logs, and the database instance properties that existed at the time you deleted
 // the source instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceAutomatedBackup
 type DBInstanceAutomatedBackup struct {
 	_ struct{} `type:"structure"`
 
@@ -1234,7 +1215,6 @@ func (s DBInstanceAutomatedBackup) String() string {
 
 // Describes an AWS Identity and Access Management (IAM) role that is associated
 // with a DB instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceRole
 type DBInstanceRole struct {
 	_ struct{} `type:"structure"`
 
@@ -1266,7 +1246,6 @@ func (s DBInstanceRole) String() string {
 }
 
 // Provides a list of status information for a DB instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceStatusInfo
 type DBInstanceStatusInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1296,7 +1275,6 @@ func (s DBInstanceStatusInfo) String() string {
 //
 // This data type is used as a response element in the DescribeDBParameterGroups
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBParameterGroup
 type DBParameterGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -1334,7 +1312,6 @@ func (s DBParameterGroup) String() string {
 //    * RebootDBInstance
 //
 //    * RestoreDBInstanceFromDBSnapshot
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBParameterGroupStatus
 type DBParameterGroupStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -1354,7 +1331,6 @@ func (s DBParameterGroupStatus) String() string {
 //
 // This data type is used as a response element in the DescribeDBSecurityGroups
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSecurityGroup
 type DBSecurityGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -1394,7 +1370,6 @@ func (s DBSecurityGroup) String() string {
 //    * RestoreDBInstanceFromDBSnapshot
 //
 //    * RestoreDBInstanceToPointInTime
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSecurityGroupMembership
 type DBSecurityGroupMembership struct {
 	_ struct{} `type:"structure"`
 
@@ -1413,7 +1388,6 @@ func (s DBSecurityGroupMembership) String() string {
 // Contains the details of an Amazon RDS DB snapshot.
 //
 // This data type is used as a response element in the DescribeDBSnapshots action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshot
 type DBSnapshot struct {
 	_ struct{} `type:"structure"`
 
@@ -1524,7 +1498,6 @@ func (s DBSnapshot) String() string {
 // Manual DB snapshot attributes are used to authorize other AWS accounts to
 // restore a manual DB snapshot. For more information, see the ModifyDBSnapshotAttribute
 // API.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshotAttribute
 type DBSnapshotAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -1555,7 +1528,6 @@ func (s DBSnapshotAttribute) String() string {
 // Manual DB snapshot attributes are used to authorize other AWS accounts to
 // copy or restore a manual DB snapshot. For more information, see the ModifyDBSnapshotAttribute
 // API action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshotAttributesResult
 type DBSnapshotAttributesResult struct {
 	_ struct{} `type:"structure"`
 
@@ -1575,7 +1547,6 @@ func (s DBSnapshotAttributesResult) String() string {
 //
 // This data type is used as a response element in the DescribeDBSubnetGroups
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSubnetGroup
 type DBSubnetGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -1604,7 +1575,6 @@ func (s DBSubnetGroup) String() string {
 }
 
 // This data type is used as a response element to DescribeDBLogFiles.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBLogFilesDetails
 type DescribeDBLogFilesDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -1624,7 +1594,6 @@ func (s DescribeDBLogFilesDetails) String() string {
 }
 
 // An Active Directory Domain membership record associated with the DB instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DomainMembership
 type DomainMembership struct {
 	_ struct{} `type:"structure"`
 
@@ -1649,7 +1618,6 @@ func (s DomainMembership) String() string {
 }
 
 // A range of double values.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DoubleRange
 type DoubleRange struct {
 	_ struct{} `type:"structure"`
 
@@ -1672,7 +1640,6 @@ func (s DoubleRange) String() string {
 //    * DescribeDBSecurityGroups
 //
 //    * RevokeDBSecurityGroupIngress
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EC2SecurityGroup
 type EC2SecurityGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -1708,7 +1675,6 @@ func (s EC2SecurityGroup) String() string {
 //
 // For the data structure that represents Amazon Aurora DB cluster endpoints,
 // see DBClusterEndpoint.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Endpoint
 type Endpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -1729,7 +1695,6 @@ func (s Endpoint) String() string {
 
 // Contains the result of a successful invocation of the DescribeEngineDefaultParameters
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EngineDefaults
 type EngineDefaults struct {
 	_ struct{} `type:"structure"`
 
@@ -1752,7 +1717,6 @@ func (s EngineDefaults) String() string {
 }
 
 // This data type is used as a response element in the DescribeEvents action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Event
 type Event struct {
 	_ struct{} `type:"structure"`
 
@@ -1782,7 +1746,6 @@ func (s Event) String() string {
 
 // Contains the results of a successful invocation of the DescribeEventCategories
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EventCategoriesMap
 type EventCategoriesMap struct {
 	_ struct{} `type:"structure"`
 
@@ -1800,7 +1763,6 @@ func (s EventCategoriesMap) String() string {
 
 // Contains the results of a successful invocation of the DescribeEventSubscriptions
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EventSubscription
 type EventSubscription struct {
 	_ struct{} `type:"structure"`
 
@@ -1868,7 +1830,6 @@ func (s EventSubscription) String() string {
 //    * DescribeDBInstances
 //
 //    * DescribePendingMaintenanceActions
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Filter
 type Filter struct {
 	_ struct{} `type:"structure"`
 
@@ -1907,7 +1868,6 @@ func (s *Filter) Validate() error {
 }
 
 // A data type representing an Aurora global database.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalCluster
 type GlobalCluster struct {
 	_ struct{} `type:"structure"`
 
@@ -1953,7 +1913,6 @@ func (s GlobalCluster) String() string {
 
 // A data structure with information about any primary and secondary clusters
 // associated with an Aurora global database.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalClusterMember
 type GlobalClusterMember struct {
 	_ struct{} `type:"structure"`
 
@@ -1976,7 +1935,6 @@ func (s GlobalClusterMember) String() string {
 
 // This data type is used as a response element in the DescribeDBSecurityGroups
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/IPRange
 type IPRange struct {
 	_ struct{} `type:"structure"`
 
@@ -1995,7 +1953,6 @@ func (s IPRange) String() string {
 
 // The minimum DB engine version required for each corresponding allowed value
 // for an option setting.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/MinimumEngineVersionPerAllowedValue
 type MinimumEngineVersionPerAllowedValue struct {
 	_ struct{} `type:"structure"`
 
@@ -2012,7 +1969,6 @@ func (s MinimumEngineVersionPerAllowedValue) String() string {
 }
 
 // Option details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Option
 type Option struct {
 	_ struct{} `type:"structure"`
 
@@ -2052,7 +2008,6 @@ func (s Option) String() string {
 }
 
 // A list of all available options
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionConfiguration
 type OptionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -2096,7 +2051,6 @@ func (s *OptionConfiguration) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroup
 type OptionGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -2137,7 +2091,6 @@ func (s OptionGroup) String() string {
 }
 
 // Provides information on the option groups the DB instance is a member of.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupMembership
 type OptionGroupMembership struct {
 	_ struct{} `type:"structure"`
 
@@ -2156,7 +2109,6 @@ func (s OptionGroupMembership) String() string {
 }
 
 // Available option.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupOption
 type OptionGroupOption struct {
 	_ struct{} `type:"structure"`
 
@@ -2226,7 +2178,6 @@ func (s OptionGroupOption) String() string {
 // Option group option settings are used to display settings available for each
 // option with their default values and other information. These values are
 // used with the DescribeOptionGroupOptions action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupOptionSetting
 type OptionGroupOptionSetting struct {
 	_ struct{} `type:"structure"`
 
@@ -2267,7 +2218,6 @@ func (s OptionGroupOptionSetting) String() string {
 // option. It is used when you modify an option group or describe option groups.
 // For example, the NATIVE_NETWORK_ENCRYPTION option has a setting called SQLNET.ENCRYPTION_SERVER
 // that can have several different values.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionSetting
 type OptionSetting struct {
 	_ struct{} `type:"structure"`
 
@@ -2307,7 +2257,6 @@ func (s OptionSetting) String() string {
 
 // The version for an option. Option group option versions are returned by the
 // DescribeOptionGroupOptions action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionVersion
 type OptionVersion struct {
 	_ struct{} `type:"structure"`
 
@@ -2327,7 +2276,6 @@ func (s OptionVersion) String() string {
 //
 // This data type is used as a response element in the DescribeOrderableDBInstanceOptions
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OrderableDBInstanceOption
 type OrderableDBInstanceOption struct {
 	_ struct{} `type:"structure"`
 
@@ -2414,7 +2362,6 @@ func (s OrderableDBInstanceOption) String() string {
 //
 // This data type is used as a response element in the DescribeEngineDefaultParameters
 // and DescribeDBParameters actions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Parameter
 type Parameter struct {
 	_ struct{} `type:"structure"`
 
@@ -2461,7 +2408,6 @@ func (s Parameter) String() string {
 
 // A list of the log types whose configuration is still pending. In other words,
 // these log types are in the process of being activated or deactivated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PendingCloudwatchLogsExports
 type PendingCloudwatchLogsExports struct {
 	_ struct{} `type:"structure"`
 
@@ -2480,7 +2426,6 @@ func (s PendingCloudwatchLogsExports) String() string {
 }
 
 // Provides information about a pending maintenance action for a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PendingMaintenanceAction
 type PendingMaintenanceAction struct {
 	_ struct{} `type:"structure"`
 
@@ -2518,7 +2463,6 @@ func (s PendingMaintenanceAction) String() string {
 }
 
 // This data type is used as a response element in the ModifyDBInstance action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PendingModifiedValues
 type PendingModifiedValues struct {
 	_ struct{} `type:"structure"`
 
@@ -2617,7 +2561,6 @@ func (s PendingModifiedValues) String() string {
 // For more information, see Configuring the Processor of the DB Instance Class
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor)
 // in the Amazon RDS User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ProcessorFeature
 type ProcessorFeature struct {
 	_ struct{} `type:"structure"`
 
@@ -2634,7 +2577,6 @@ func (s ProcessorFeature) String() string {
 }
 
 // A range of integer values.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Range
 type Range struct {
 	_ struct{} `type:"structure"`
 
@@ -2658,7 +2600,6 @@ func (s Range) String() string {
 
 // This data type is used as a response element in the DescribeReservedDBInstances
 // and DescribeReservedDBInstancesOfferings actions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RecurringCharge
 type RecurringCharge struct {
 	_ struct{} `type:"structure"`
 
@@ -2676,7 +2617,6 @@ func (s RecurringCharge) String() string {
 
 // This data type is used as a response element in the DescribeReservedDBInstances
 // and PurchaseReservedDBInstancesOffering actions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ReservedDBInstance
 type ReservedDBInstance struct {
 	_ struct{} `type:"structure"`
 
@@ -2733,7 +2673,6 @@ func (s ReservedDBInstance) String() string {
 
 // This data type is used as a response element in the DescribeReservedDBInstancesOfferings
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ReservedDBInstancesOffering
 type ReservedDBInstancesOffering struct {
 	_ struct{} `type:"structure"`
 
@@ -2774,7 +2713,6 @@ func (s ReservedDBInstancesOffering) String() string {
 }
 
 // Describes the pending maintenance actions for a resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ResourcePendingMaintenanceActions
 type ResourcePendingMaintenanceActions struct {
 	_ struct{} `type:"structure"`
 
@@ -2792,7 +2730,6 @@ func (s ResourcePendingMaintenanceActions) String() string {
 }
 
 // Earliest and latest time an instance can be restored to:
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreWindow
 type RestoreWindow struct {
 	_ struct{} `type:"structure"`
 
@@ -2812,7 +2749,6 @@ func (s RestoreWindow) String() string {
 //
 // For more information, see Using Amazon Aurora Serverless (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html)
 // in the Amazon Aurora User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ScalingConfiguration
 type ScalingConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -2869,7 +2805,6 @@ func (s ScalingConfiguration) String() string {
 //
 // For more information, see Using Amazon Aurora Serverless (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html)
 // in the Amazon Aurora User Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ScalingConfigurationInfo
 type ScalingConfigurationInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -2903,7 +2838,6 @@ func (s ScalingConfigurationInfo) String() string {
 
 // Contains an AWS Region name as the result of a successful call to the DescribeSourceRegions
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SourceRegion
 type SourceRegion struct {
 	_ struct{} `type:"structure"`
 
@@ -2924,7 +2858,6 @@ func (s SourceRegion) String() string {
 
 // This data type is used as a response element in the DescribeDBSubnetGroups
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Subnet
 type Subnet struct {
 	_ struct{} `type:"structure"`
 
@@ -2947,7 +2880,6 @@ func (s Subnet) String() string {
 }
 
 // Metadata assigned to an Amazon RDS resource consisting of a key-value pair.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -2972,7 +2904,6 @@ func (s Tag) String() string {
 // A time zone associated with a DBInstance or a DBSnapshot. This data type
 // is an element in the response to the DescribeDBInstances, the DescribeDBSnapshots,
 // and the DescribeDBEngineVersions actions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Timezone
 type Timezone struct {
 	_ struct{} `type:"structure"`
 
@@ -2986,7 +2917,6 @@ func (s Timezone) String() string {
 }
 
 // The version of the database engine that a DB instance can be upgraded to.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/UpgradeTarget
 type UpgradeTarget struct {
 	_ struct{} `type:"structure"`
 
@@ -3015,7 +2945,6 @@ func (s UpgradeTarget) String() string {
 // Information about valid modifications that you can make to your DB instance.
 // Contains the result of a successful call to the DescribeValidDBInstanceModifications
 // action. You can use this information when you call ModifyDBInstance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ValidDBInstanceModificationsMessage
 type ValidDBInstanceModificationsMessage struct {
 	_ struct{} `type:"structure"`
 
@@ -3034,7 +2963,6 @@ func (s ValidDBInstanceModificationsMessage) String() string {
 // Information about valid modifications that you can make to your DB instance.
 // Contains the result of a successful call to the DescribeValidDBInstanceModifications
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ValidStorageOptions
 type ValidStorageOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -3064,7 +2992,6 @@ func (s ValidStorageOptions) String() string {
 
 // This data type is used as a response element for queries on VPC security
 // group membership.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/VpcSecurityGroupMembership
 type VpcSecurityGroupMembership struct {
 	_ struct{} `type:"structure"`
 

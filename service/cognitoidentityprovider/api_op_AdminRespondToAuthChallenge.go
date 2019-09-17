@@ -10,7 +10,6 @@ import (
 )
 
 // The request to respond to the authentication challenge, as an administrator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRespondToAuthChallengeRequest
 type AdminRespondToAuthChallengeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -109,7 +108,6 @@ func (s *AdminRespondToAuthChallengeInput) Validate() error {
 }
 
 // Responds to the authentication challenge, as an administrator.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRespondToAuthChallengeResponse
 type AdminRespondToAuthChallengeOutput struct {
 	_ struct{} `type:"structure"`
 

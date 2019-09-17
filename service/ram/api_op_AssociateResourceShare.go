@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AssociateResourceShareRequest
 type AssociateResourceShareInput struct {
 	_ struct{} `type:"structure"`
 
@@ -92,7 +91,6 @@ func (s AssociateResourceShareInput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AssociateResourceShareResponse
 type AssociateResourceShareOutput struct {
 	_ struct{} `type:"structure"`
 

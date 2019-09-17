@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Describes an Availability Zone.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AvailabilityZone
 type AvailabilityZone struct {
 	_ struct{} `type:"structure"`
 
@@ -30,7 +29,6 @@ func (s AvailabilityZone) String() string {
 }
 
 // Describes a blueprint (a virtual private server image).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Blueprint
 type Blueprint struct {
 	_ struct{} `type:"structure"`
 
@@ -86,7 +84,6 @@ func (s Blueprint) String() string {
 
 // Describes a bundle, which is a set of specs describing your virtual private
 // server (or instance).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Bundle
 type Bundle struct {
 	_ struct{} `type:"structure"`
 
@@ -142,7 +139,6 @@ func (s Bundle) String() string {
 // A CloudFormation stack record provides information about the AWS CloudFormation
 // stack used to create a new Amazon Elastic Compute Cloud instance from an
 // exported Lightsail instance snapshot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CloudFormationStackRecord
 type CloudFormationStackRecord struct {
 	_ struct{} `type:"structure"`
 
@@ -181,7 +177,6 @@ func (s CloudFormationStackRecord) String() string {
 
 // Describes the source of a CloudFormation stack record (i.e., the export snapshot
 // record).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CloudFormationStackRecordSourceInfo
 type CloudFormationStackRecordSourceInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -201,7 +196,6 @@ func (s CloudFormationStackRecordSourceInfo) String() string {
 }
 
 // Describes the destination of a record.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DestinationInfo
 type DestinationInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -218,7 +212,6 @@ func (s DestinationInfo) String() string {
 }
 
 // Describes a system disk or an block storage disk.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Disk
 type Disk struct {
 	_ struct{} `type:"structure"`
 
@@ -288,7 +281,6 @@ func (s Disk) String() string {
 }
 
 // Describes a disk.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DiskInfo
 type DiskInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -312,7 +304,6 @@ func (s DiskInfo) String() string {
 }
 
 // Describes a block storage disk mapping.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DiskMap
 type DiskMap struct {
 	_ struct{} `type:"structure"`
 
@@ -329,7 +320,6 @@ func (s DiskMap) String() string {
 }
 
 // Describes a block storage disk snapshot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DiskSnapshot
 type DiskSnapshot struct {
 	_ struct{} `type:"structure"`
 
@@ -388,7 +378,6 @@ func (s DiskSnapshot) String() string {
 }
 
 // Describes a disk snapshot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DiskSnapshotInfo
 type DiskSnapshotInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -402,7 +391,6 @@ func (s DiskSnapshotInfo) String() string {
 }
 
 // Describes a domain where you are storing recordsets in Lightsail.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Domain
 type Domain struct {
 	_ struct{} `type:"structure"`
 
@@ -440,7 +428,6 @@ func (s Domain) String() string {
 }
 
 // Describes a domain recordset entry.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DomainEntry
 type DomainEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -497,7 +484,6 @@ func (s DomainEntry) String() string {
 }
 
 // Describes an export snapshot record.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ExportSnapshotRecord
 type ExportSnapshotRecord struct {
 	_ struct{} `type:"structure"`
 
@@ -533,7 +519,6 @@ func (s ExportSnapshotRecord) String() string {
 }
 
 // Describes the source of an export snapshot record.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ExportSnapshotRecordSourceInfo
 type ExportSnapshotRecordSourceInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -568,7 +553,6 @@ func (s ExportSnapshotRecordSourceInfo) String() string {
 }
 
 // Describes the public SSH host keys or the RDP certificate.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/HostKeyAttributes
 type HostKeyAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -615,7 +599,6 @@ func (s HostKeyAttributes) String() string {
 }
 
 // Describes an instance (a virtual private server).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Instance
 type Instance struct {
 	_ struct{} `type:"structure"`
 
@@ -689,7 +672,6 @@ func (s Instance) String() string {
 
 // The parameters for gaining temporary access to one of your Amazon Lightsail
 // instances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceAccessDetails
 type InstanceAccessDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -747,7 +729,6 @@ func (s InstanceAccessDetails) String() string {
 
 // Describes the Amazon Elastic Compute Cloud instance and related resources
 // to be created using the create cloud formation stack operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceEntry
 type InstanceEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -825,7 +806,6 @@ func (s *InstanceEntry) Validate() error {
 }
 
 // Describes the hardware for the instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceHardware
 type InstanceHardware struct {
 	_ struct{} `type:"structure"`
 
@@ -845,7 +825,6 @@ func (s InstanceHardware) String() string {
 }
 
 // Describes information about the health of the instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceHealthSummary
 type InstanceHealthSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -912,7 +891,6 @@ func (s InstanceHealthSummary) String() string {
 }
 
 // Describes monthly data transfer rates and port information for an instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceNetworking
 type InstanceNetworking struct {
 	_ struct{} `type:"structure"`
 
@@ -930,7 +908,6 @@ func (s InstanceNetworking) String() string {
 }
 
 // Describes information about the instance ports.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstancePortInfo
 type InstancePortInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -979,7 +956,6 @@ func (s InstancePortInfo) String() string {
 }
 
 // Describes the port state.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstancePortState
 type InstancePortState struct {
 	_ struct{} `type:"structure"`
 
@@ -1019,7 +995,6 @@ func (s InstancePortState) String() string {
 }
 
 // Describes the snapshot of the virtual private server, or instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceSnapshot
 type InstanceSnapshot struct {
 	_ struct{} `type:"structure"`
 
@@ -1081,7 +1056,6 @@ func (s InstanceSnapshot) String() string {
 }
 
 // Describes an instance snapshot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceSnapshotInfo
 type InstanceSnapshotInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1101,7 +1075,6 @@ func (s InstanceSnapshotInfo) String() string {
 }
 
 // Describes the virtual private server (or instance) status.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceState
 type InstanceState struct {
 	_ struct{} `type:"structure"`
 
@@ -1118,7 +1091,6 @@ func (s InstanceState) String() string {
 }
 
 // Describes the SSH key pair.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/KeyPair
 type KeyPair struct {
 	_ struct{} `type:"structure"`
 
@@ -1156,7 +1128,6 @@ func (s KeyPair) String() string {
 }
 
 // Describes the Lightsail load balancer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancer
 type LoadBalancer struct {
 	_ struct{} `type:"structure"`
 
@@ -1230,7 +1201,6 @@ func (s LoadBalancer) String() string {
 // Describes a load balancer SSL/TLS certificate.
 //
 // TLS is just an updated, more secure version of Secure Socket Layer (SSL).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancerTlsCertificate
 type LoadBalancerTlsCertificate struct {
 	_ struct{} `type:"structure"`
 
@@ -1350,7 +1320,6 @@ func (s LoadBalancerTlsCertificate) String() string {
 
 // Contains information about the domain names on an SSL/TLS certificate that
 // you will use to validate domain ownership.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancerTlsCertificateDomainValidationOption
 type LoadBalancerTlsCertificateDomainValidationOption struct {
 	_ struct{} `type:"structure"`
 
@@ -1367,7 +1336,6 @@ func (s LoadBalancerTlsCertificateDomainValidationOption) String() string {
 }
 
 // Describes the validation record of each domain name in the SSL/TLS certificate.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancerTlsCertificateDomainValidationRecord
 type LoadBalancerTlsCertificateDomainValidationRecord struct {
 	_ struct{} `type:"structure"`
 
@@ -1394,7 +1362,6 @@ func (s LoadBalancerTlsCertificateDomainValidationRecord) String() string {
 
 // Contains information about the status of Lightsail's managed renewal for
 // the certificate.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancerTlsCertificateRenewalSummary
 type LoadBalancerTlsCertificateRenewalSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1414,7 +1381,6 @@ func (s LoadBalancerTlsCertificateRenewalSummary) String() string {
 }
 
 // Provides a summary of SSL/TLS certificate metadata.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancerTlsCertificateSummary
 type LoadBalancerTlsCertificateSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1431,7 +1397,6 @@ func (s LoadBalancerTlsCertificateSummary) String() string {
 }
 
 // Describes a database log event.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LogEvent
 type LogEvent struct {
 	_ struct{} `type:"structure"`
 
@@ -1448,7 +1413,6 @@ func (s LogEvent) String() string {
 }
 
 // Describes the metric data point.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/MetricDatapoint
 type MetricDatapoint struct {
 	_ struct{} `type:"structure"`
 
@@ -1481,7 +1445,6 @@ func (s MetricDatapoint) String() string {
 
 // Describes the monthly data transfer in and out of your virtual private server
 // (or instance).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/MonthlyTransfer
 type MonthlyTransfer struct {
 	_ struct{} `type:"structure"`
 
@@ -1495,7 +1458,6 @@ func (s MonthlyTransfer) String() string {
 }
 
 // Describes the API operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Operation
 type Operation struct {
 	_ struct{} `type:"structure"`
 
@@ -1543,7 +1505,6 @@ func (s Operation) String() string {
 
 // The password data for the Windows Server-based instance, including the ciphertext
 // and the key pair name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PasswordData
 type PasswordData struct {
 	_ struct{} `type:"structure"`
 
@@ -1578,7 +1539,6 @@ func (s PasswordData) String() string {
 }
 
 // Describes a pending database maintenance action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PendingMaintenanceAction
 type PendingMaintenanceAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1598,7 +1558,6 @@ func (s PendingMaintenanceAction) String() string {
 }
 
 // Describes a pending database value modification.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PendingModifiedRelationalDatabaseValues
 type PendingModifiedRelationalDatabaseValues struct {
 	_ struct{} `type:"structure"`
 
@@ -1619,7 +1578,6 @@ func (s PendingModifiedRelationalDatabaseValues) String() string {
 
 // Describes information about the ports on your virtual private server (or
 // instance).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PortInfo
 type PortInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -1639,7 +1597,6 @@ func (s PortInfo) String() string {
 }
 
 // Describes the AWS Region.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Region
 type Region struct {
 	_ struct{} `type:"structure"`
 
@@ -1669,7 +1626,6 @@ func (s Region) String() string {
 }
 
 // Describes a database.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RelationalDatabase
 type RelationalDatabase struct {
 	_ struct{} `type:"structure"`
 
@@ -1770,7 +1726,6 @@ func (s RelationalDatabase) String() string {
 
 // Describes a database image, or blueprint. A blueprint describes the major
 // engine version of a database.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RelationalDatabaseBlueprint
 type RelationalDatabaseBlueprint struct {
 	_ struct{} `type:"structure"`
 
@@ -1801,7 +1756,6 @@ func (s RelationalDatabaseBlueprint) String() string {
 
 // Describes a database bundle. A bundle describes the performance specifications
 // of the database.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RelationalDatabaseBundle
 type RelationalDatabaseBundle struct {
 	_ struct{} `type:"structure"`
 
@@ -1839,7 +1793,6 @@ func (s RelationalDatabaseBundle) String() string {
 }
 
 // Describes an endpoint for a database.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RelationalDatabaseEndpoint
 type RelationalDatabaseEndpoint struct {
 	_ struct{} `type:"structure"`
 
@@ -1856,7 +1809,6 @@ func (s RelationalDatabaseEndpoint) String() string {
 }
 
 // Describes an event for a database.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RelationalDatabaseEvent
 type RelationalDatabaseEvent struct {
 	_ struct{} `type:"structure"`
 
@@ -1879,7 +1831,6 @@ func (s RelationalDatabaseEvent) String() string {
 }
 
 // Describes the hardware of a database.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RelationalDatabaseHardware
 type RelationalDatabaseHardware struct {
 	_ struct{} `type:"structure"`
 
@@ -1899,7 +1850,6 @@ func (s RelationalDatabaseHardware) String() string {
 }
 
 // Describes the parameters of a database.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RelationalDatabaseParameter
 type RelationalDatabaseParameter struct {
 	_ struct{} `type:"structure"`
 
@@ -1936,7 +1886,6 @@ func (s RelationalDatabaseParameter) String() string {
 }
 
 // Describes a database snapshot.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RelationalDatabaseSnapshot
 type RelationalDatabaseSnapshot struct {
 	_ struct{} `type:"structure"`
 
@@ -1998,7 +1947,6 @@ func (s RelationalDatabaseSnapshot) String() string {
 }
 
 // Describes the resource location.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ResourceLocation
 type ResourceLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -2015,7 +1963,6 @@ func (s ResourceLocation) String() string {
 }
 
 // Describes the static IP.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StaticIp
 type StaticIp struct {
 	_ struct{} `type:"structure"`
 
@@ -2058,7 +2005,6 @@ func (s StaticIp) String() string {
 //
 // For more information about tags in Lightsail, see the Lightsail Dev Guide
 // (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 

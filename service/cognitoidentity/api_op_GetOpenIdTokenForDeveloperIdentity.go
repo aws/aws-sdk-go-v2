@@ -10,7 +10,6 @@ import (
 )
 
 // Input to the GetOpenIdTokenForDeveloperIdentity action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetOpenIdTokenForDeveloperIdentityInput
 type GetOpenIdTokenForDeveloperIdentityInput struct {
 	_ struct{} `type:"structure"`
 
@@ -79,7 +78,6 @@ func (s *GetOpenIdTokenForDeveloperIdentityInput) Validate() error {
 }
 
 // Returned in response to a successful GetOpenIdTokenForDeveloperIdentity request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetOpenIdTokenForDeveloperIdentityResponse
 type GetOpenIdTokenForDeveloperIdentityOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Represents user interaction event information sent using the PutEvents API.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-events-2018-03-22/Event
 type Event struct {
 	_ struct{} `type:"structure"`
 

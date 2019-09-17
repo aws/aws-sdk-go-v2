@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the request to create a user pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolRequest
 type CreateUserPoolInput struct {
 	_ struct{} `type:"structure"`
 
@@ -172,7 +171,6 @@ func (s *CreateUserPoolInput) Validate() error {
 
 // Represents the response from the server for the request to create a user
 // pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolResponse
 type CreateUserPoolOutput struct {
 	_ struct{} `type:"structure"`
 

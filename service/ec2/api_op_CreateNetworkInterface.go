@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for CreateNetworkInterface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterfaceRequest
 type CreateNetworkInterfaceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -89,7 +88,6 @@ func (s *CreateNetworkInterfaceInput) Validate() error {
 }
 
 // Contains the output of CreateNetworkInterface.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterfaceResult
 type CreateNetworkInterfaceOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the inputs for the EnableSso operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableSsoRequest
 type EnableSsoInput struct {
 	_ struct{} `type:"structure"`
 
@@ -62,7 +61,6 @@ func (s *EnableSsoInput) Validate() error {
 }
 
 // Contains the results of the EnableSso operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableSsoResult
 type EnableSsoOutput struct {
 	_ struct{} `type:"structure"`
 }

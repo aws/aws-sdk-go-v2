@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetExclusionsPreviewRequest
 type GetExclusionsPreviewInput struct {
 	_ struct{} `type:"structure"`
 
@@ -68,7 +67,6 @@ func (s *GetExclusionsPreviewInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetExclusionsPreviewResponse
 type GetExclusionsPreviewOutput struct {
 	_ struct{} `type:"structure"`
 

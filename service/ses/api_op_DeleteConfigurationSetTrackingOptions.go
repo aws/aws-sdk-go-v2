@@ -11,7 +11,6 @@ import (
 
 // Represents a request to delete open and click tracking options in a configuration
 // set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetTrackingOptionsRequest
 type DeleteConfigurationSetTrackingOptionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -42,7 +41,6 @@ func (s *DeleteConfigurationSetTrackingOptionsInput) Validate() error {
 }
 
 // An empty element returned on a successful request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetTrackingOptionsResponse
 type DeleteConfigurationSetTrackingOptionsOutput struct {
 	_ struct{} `type:"structure"`
 }

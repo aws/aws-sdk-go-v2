@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for GetPipelineDefinition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/GetPipelineDefinitionInput
 type GetPipelineDefinitionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -48,7 +47,6 @@ func (s *GetPipelineDefinitionInput) Validate() error {
 }
 
 // Contains the output of GetPipelineDefinition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/GetPipelineDefinitionOutput
 type GetPipelineDefinitionOutput struct {
 	_ struct{} `type:"structure"`
 

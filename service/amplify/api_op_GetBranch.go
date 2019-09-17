@@ -11,7 +11,6 @@ import (
 )
 
 // Result structure for get branch request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetBranchRequest
 type GetBranchInput struct {
 	_ struct{} `type:"structure"`
 
@@ -74,7 +73,6 @@ func (s GetBranchInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetBranchResult
 type GetBranchOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -12,7 +12,6 @@ import (
 
 // A BatchMeterUsageRequest contains UsageRecords, which indicate quantities
 // of usage within your application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/BatchMeterUsageRequest
 type BatchMeterUsageInput struct {
 	_ struct{} `type:"structure"`
 
@@ -65,7 +64,6 @@ func (s *BatchMeterUsageInput) Validate() error {
 
 // Contains the UsageRecords processed by BatchMeterUsage and any records that
 // have failed due to transient error.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/BatchMeterUsageResult
 type BatchMeterUsageOutput struct {
 	_ struct{} `type:"structure"`
 

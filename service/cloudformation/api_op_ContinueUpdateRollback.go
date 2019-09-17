@@ -10,7 +10,6 @@ import (
 )
 
 // The input for the ContinueUpdateRollback action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ContinueUpdateRollbackInput
 type ContinueUpdateRollbackInput struct {
 	_ struct{} `type:"structure"`
 
@@ -109,7 +108,6 @@ func (s *ContinueUpdateRollbackInput) Validate() error {
 }
 
 // The output for a ContinueUpdateRollback action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ContinueUpdateRollbackOutput
 type ContinueUpdateRollbackOutput struct {
 	_ struct{} `type:"structure"`
 }

@@ -12,7 +12,6 @@ import (
 
 // You can send list queues requests with an empty body. You can optionally
 // specify the maximum number, up to twenty, of queues to be returned.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListQueuesRequest
 type ListQueuesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -84,7 +83,6 @@ func (s ListQueuesInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // Successful list queues requests return a JSON array of queues. If you don't
 // specify how they are ordered, you will receive them alphabetically by name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListQueuesResponse
 type ListQueuesOutput struct {
 	_ struct{} `type:"structure"`
 

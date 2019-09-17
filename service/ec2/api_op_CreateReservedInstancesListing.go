@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for CreateReservedInstancesListing.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateReservedInstancesListingRequest
 type CreateReservedInstancesListingInput struct {
 	_ struct{} `type:"structure"`
 
@@ -73,7 +72,6 @@ func (s *CreateReservedInstancesListingInput) Validate() error {
 }
 
 // Contains the output of CreateReservedInstancesListing.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateReservedInstancesListingResult
 type CreateReservedInstancesListingOutput struct {
 	_ struct{} `type:"structure"`
 

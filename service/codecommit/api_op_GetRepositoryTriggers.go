@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a get repository triggers operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepositoryTriggersInput
 type GetRepositoryTriggersInput struct {
 	_ struct{} `type:"structure"`
 
@@ -43,7 +42,6 @@ func (s *GetRepositoryTriggersInput) Validate() error {
 }
 
 // Represents the output of a get repository triggers operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepositoryTriggersOutput
 type GetRepositoryTriggersOutput struct {
 	_ struct{} `type:"structure"`
 

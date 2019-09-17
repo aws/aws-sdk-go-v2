@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerInstanceOptionsRequest
 type DescribeBrokerInstanceOptionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -72,7 +71,6 @@ func (s DescribeBrokerInstanceOptionsInput) MarshalFields(e protocol.FieldEncode
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerInstanceOptionsResponse
 type DescribeBrokerInstanceOptionsOutput struct {
 	_ struct{} `type:"structure"`
 

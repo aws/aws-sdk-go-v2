@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for RunScheduledInstances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunScheduledInstancesRequest
 type RunScheduledInstancesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -70,7 +69,6 @@ func (s *RunScheduledInstancesInput) Validate() error {
 }
 
 // Contains the output of RunScheduledInstances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunScheduledInstancesResult
 type RunScheduledInstancesOutput struct {
 	_ struct{} `type:"structure"`
 

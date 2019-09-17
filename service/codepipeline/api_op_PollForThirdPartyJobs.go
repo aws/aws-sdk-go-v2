@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a PollForThirdPartyJobs action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PollForThirdPartyJobsInput
 type PollForThirdPartyJobsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s *PollForThirdPartyJobsInput) Validate() error {
 }
 
 // Represents the output of a PollForThirdPartyJobs action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PollForThirdPartyJobsOutput
 type PollForThirdPartyJobsOutput struct {
 	_ struct{} `type:"structure"`
 

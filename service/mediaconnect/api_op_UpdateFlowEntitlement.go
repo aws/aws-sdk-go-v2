@@ -11,7 +11,6 @@ import (
 )
 
 // The updates that you want to make to a specific entitlement.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowEntitlementRequest
 type UpdateFlowEntitlementInput struct {
 	_ struct{} `type:"structure"`
 
@@ -104,7 +103,6 @@ func (s UpdateFlowEntitlementInput) MarshalFields(e protocol.FieldEncoder) error
 
 // The result of a successful UpdateFlowEntitlement request. The response includes
 // the ARN of the flow that was updated and the updated entitlement configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowEntitlementResponse
 type UpdateFlowEntitlementOutput struct {
 	_ struct{} `type:"structure"`
 

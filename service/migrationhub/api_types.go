@@ -14,7 +14,6 @@ var _ = awsutil.Prettify
 
 // An ARN of the AWS cloud resource target receiving the migration (e.g., AMI,
 // EC2 instance, RDS instance, etc.).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/CreatedArtifact
 type CreatedArtifact struct {
 	_ struct{} `type:"structure"`
 
@@ -51,7 +50,6 @@ func (s *CreatedArtifact) Validate() error {
 }
 
 // Object representing the on-premises resource being migrated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DiscoveredResource
 type DiscoveredResource struct {
 	_ struct{} `type:"structure"`
 
@@ -88,7 +86,6 @@ func (s *DiscoveredResource) Validate() error {
 }
 
 // Represents a migration task in a migration tool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/MigrationTask
 type MigrationTask struct {
 	_ struct{} `type:"structure"`
 
@@ -114,7 +111,6 @@ func (s MigrationTask) String() string {
 
 // MigrationTaskSummary includes MigrationTaskName, ProgressPercent, ProgressUpdateStream,
 // Status, and UpdateDateTime for each task.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/MigrationTaskSummary
 type MigrationTaskSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -144,7 +140,6 @@ func (s MigrationTaskSummary) String() string {
 
 // Summary of the AWS resource used for access control that is implicitly linked
 // to your AWS account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ProgressUpdateStreamSummary
 type ProgressUpdateStreamSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -180,7 +175,6 @@ func (s ProgressUpdateStreamSummary) String() string {
 // FQDN
 //
 // ^[^<>{}\\\\/?,=\\p{Cntrl}]{1,256}$
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ResourceAttribute
 type ResourceAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -221,7 +215,6 @@ func (s *ResourceAttribute) Validate() error {
 }
 
 // Task object encapsulating task information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/Task
 type Task struct {
 	_ struct{} `type:"structure"`
 

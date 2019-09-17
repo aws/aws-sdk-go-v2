@@ -11,7 +11,6 @@ import (
 )
 
 // Contains the parameters for PurchaseScheduledInstances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseScheduledInstancesRequest
 type PurchaseScheduledInstancesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -61,7 +60,6 @@ func (s *PurchaseScheduledInstancesInput) Validate() error {
 }
 
 // Contains the output of PurchaseScheduledInstances.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseScheduledInstancesResult
 type PurchaseScheduledInstancesOutput struct {
 	_ struct{} `type:"structure"`
 

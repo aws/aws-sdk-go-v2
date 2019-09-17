@@ -11,7 +11,6 @@ import (
 )
 
 // A request for a list of records.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListRecordsRequest
 type ListRecordsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -132,7 +131,6 @@ func (s ListRecordsInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Returned for a successful ListRecordsRequest.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListRecordsResponse
 type ListRecordsOutput struct {
 	_ struct{} `type:"structure"`
 

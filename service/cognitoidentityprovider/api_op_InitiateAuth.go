@@ -10,7 +10,6 @@ import (
 )
 
 // Initiates the authentication request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InitiateAuthRequest
 type InitiateAuthInput struct {
 	_ struct{} `type:"structure"`
 
@@ -105,7 +104,6 @@ func (s *InitiateAuthInput) Validate() error {
 }
 
 // Initiates the authentication response.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InitiateAuthResponse
 type InitiateAuthOutput struct {
 	_ struct{} `type:"structure"`
 

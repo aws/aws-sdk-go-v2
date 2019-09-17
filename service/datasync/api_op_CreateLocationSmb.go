@@ -11,7 +11,6 @@ import (
 )
 
 // CreateLocationSmbRequest
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationSmbRequest
 type CreateLocationSmbInput struct {
 	_ struct{} `type:"structure"`
 
@@ -118,7 +117,6 @@ func (s *CreateLocationSmbInput) Validate() error {
 }
 
 // CreateLocationSmbResponse
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationSmbResponse
 type CreateLocationSmbOutput struct {
 	_ struct{} `type:"structure"`
 

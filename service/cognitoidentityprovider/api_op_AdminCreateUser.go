@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the request to create a user in the specified user pool.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminCreateUserRequest
 type AdminCreateUserInput struct {
 	_ struct{} `type:"structure"`
 
@@ -158,7 +157,6 @@ func (s *AdminCreateUserInput) Validate() error {
 }
 
 // Represents the response from the server to the request to create the user.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminCreateUserResponse
 type AdminCreateUserOutput struct {
 	_ struct{} `type:"structure"`
 

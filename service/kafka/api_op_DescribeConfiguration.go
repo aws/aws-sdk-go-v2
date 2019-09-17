@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeConfigurationRequest
 type DescribeConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s DescribeConfigurationInput) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // Response body for DescribeConfiguration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeConfigurationResponse
 type DescribeConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 

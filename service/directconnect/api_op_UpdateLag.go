@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateLagRequest
 type UpdateLagInput struct {
 	_ struct{} `type:"structure"`
 
@@ -46,7 +45,6 @@ func (s *UpdateLagInput) Validate() error {
 }
 
 // Information about a link aggregation group (LAG).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Lag
 type UpdateLagOutput struct {
 	_ struct{} `type:"structure"`
 

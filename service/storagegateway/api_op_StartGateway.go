@@ -10,7 +10,6 @@ import (
 )
 
 // A JSON object containing the of the gateway to start.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StartGatewayInput
 type StartGatewayInput struct {
 	_ struct{} `type:"structure"`
 
@@ -44,7 +43,6 @@ func (s *StartGatewayInput) Validate() error {
 }
 
 // A JSON object containing the of the gateway that was restarted.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StartGatewayOutput
 type StartGatewayOutput struct {
 	_ struct{} `type:"structure"`
 

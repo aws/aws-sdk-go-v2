@@ -11,7 +11,6 @@ import (
 )
 
 // Empty request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetCheckerIpRangesRequest
 type GetCheckerIpRangesInput struct {
 	_ struct{} `type:"structure"`
 }
@@ -28,7 +27,6 @@ func (s GetCheckerIpRangesInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains the CheckerIpRanges element.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetCheckerIpRangesResponse
 type GetCheckerIpRangesOutput struct {
 	_ struct{} `type:"structure"`
 

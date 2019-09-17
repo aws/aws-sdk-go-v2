@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeleteSimulationApplicationRequest
 type DeleteSimulationApplicationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -67,7 +66,6 @@ func (s DeleteSimulationApplicationInput) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DeleteSimulationApplicationResponse
 type DeleteSimulationApplicationOutput struct {
 	_ struct{} `type:"structure"`
 }

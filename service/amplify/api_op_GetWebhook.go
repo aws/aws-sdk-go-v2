@@ -11,7 +11,6 @@ import (
 )
 
 // Request structure for the get webhook request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetWebhookRequest
 type GetWebhookInput struct {
 	_ struct{} `type:"structure"`
 
@@ -54,7 +53,6 @@ func (s GetWebhookInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Result structure for the get webhook request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetWebhookResult
 type GetWebhookOutput struct {
 	_ struct{} `type:"structure"`
 

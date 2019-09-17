@@ -10,7 +10,6 @@ import (
 )
 
 // Registers a new event topic.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegisterEventTopicRequest
 type RegisterEventTopicInput struct {
 	_ struct{} `type:"structure"`
 
@@ -53,7 +52,6 @@ func (s *RegisterEventTopicInput) Validate() error {
 }
 
 // The result of a RegisterEventTopic request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegisterEventTopicResult
 type RegisterEventTopicOutput struct {
 	_ struct{} `type:"structure"`
 }

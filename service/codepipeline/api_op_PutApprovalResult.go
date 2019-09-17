@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the input of a PutApprovalResult action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutApprovalResultInput
 type PutApprovalResultInput struct {
 	_ struct{} `type:"structure"`
 
@@ -94,7 +93,6 @@ func (s *PutApprovalResultInput) Validate() error {
 }
 
 // Represents the output of a PutApprovalResult action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutApprovalResultOutput
 type PutApprovalResultOutput struct {
 	_ struct{} `type:"structure"`
 

@@ -12,7 +12,6 @@ import (
 )
 
 // Contains the parameters for CreateVpnConnectionRoute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnectionRouteRequest
 type CreateVpnConnectionRouteInput struct {
 	_ struct{} `type:"structure"`
 
@@ -50,7 +49,6 @@ func (s *CreateVpnConnectionRouteInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnectionRouteOutput
 type CreateVpnConnectionRouteOutput struct {
 	_ struct{} `type:"structure"`
 }

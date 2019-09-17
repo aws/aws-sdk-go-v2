@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteBackupVaultAccessPolicyInput
 type DeleteBackupVaultAccessPolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s DeleteBackupVaultAccessPolicyInput) MarshalFields(e protocol.FieldEncode
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteBackupVaultAccessPolicyOutput
 type DeleteBackupVaultAccessPolicyOutput struct {
 	_ struct{} `type:"structure"`
 }

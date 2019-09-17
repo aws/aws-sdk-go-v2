@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a ListApplications operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationsInput
 type ListApplicationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -25,7 +24,6 @@ func (s ListApplicationsInput) String() string {
 }
 
 // Represents the output of a ListApplications operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationsOutput
 type ListApplicationsOutput struct {
 	_ struct{} `type:"structure"`
 

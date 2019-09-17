@@ -10,7 +10,6 @@ import (
 )
 
 // Input for ListEndpointsByPlatformApplication action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListEndpointsByPlatformApplicationInput
 type ListEndpointsByPlatformApplicationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -45,7 +44,6 @@ func (s *ListEndpointsByPlatformApplicationInput) Validate() error {
 }
 
 // Response for ListEndpointsByPlatformApplication action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListEndpointsByPlatformApplicationResponse
 type ListEndpointsByPlatformApplicationOutput struct {
 	_ struct{} `type:"structure"`
 

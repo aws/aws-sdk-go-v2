@@ -12,7 +12,6 @@ import (
 )
 
 // Contains the parameters for DeleteVpnConnection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnConnectionRequest
 type DeleteVpnConnectionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -47,7 +46,6 @@ func (s *DeleteVpnConnectionInput) Validate() error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnConnectionOutput
 type DeleteVpnConnectionOutput struct {
 	_ struct{} `type:"structure"`
 }

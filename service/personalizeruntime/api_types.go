@@ -14,7 +14,6 @@ var _ = awsutil.Prettify
 // An object that identifies an item.
 //
 // The and APIs return a list of PredictedItems.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/PredictedItem
 type PredictedItem struct {
 	_ struct{} `type:"structure"`
 

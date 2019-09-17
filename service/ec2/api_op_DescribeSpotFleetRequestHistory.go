@@ -11,7 +11,6 @@ import (
 )
 
 // Contains the parameters for DescribeSpotFleetRequestHistory.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequestHistoryRequest
 type DescribeSpotFleetRequestHistoryInput struct {
 	_ struct{} `type:"structure"`
 
@@ -70,7 +69,6 @@ func (s *DescribeSpotFleetRequestHistoryInput) Validate() error {
 }
 
 // Contains the output of DescribeSpotFleetRequestHistory.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequestHistoryResponse
 type DescribeSpotFleetRequestHistoryOutput struct {
 	_ struct{} `type:"structure"`
 

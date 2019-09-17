@@ -11,7 +11,6 @@ import (
 )
 
 // A list of validation messages for a specified configuration template.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ValidateConfigurationSettingsMessage
 type ValidateConfigurationSettingsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -77,7 +76,6 @@ func (s *ValidateConfigurationSettingsInput) Validate() error {
 }
 
 // Provides a list of validation messages.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ConfigurationSettingsValidationMessages
 type ValidateConfigurationSettingsOutput struct {
 	_ struct{} `type:"structure"`
 

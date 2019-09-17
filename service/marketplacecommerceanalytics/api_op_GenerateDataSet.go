@@ -11,7 +11,6 @@ import (
 )
 
 // Container for the parameters to the GenerateDataSet operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/GenerateDataSetRequest
 type GenerateDataSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -189,7 +188,6 @@ func (s *GenerateDataSetInput) Validate() error {
 }
 
 // Container for the result of the GenerateDataSet operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/GenerateDataSetResult
 type GenerateDataSetOutput struct {
 	_ struct{} `type:"structure"`
 

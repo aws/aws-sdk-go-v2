@@ -10,7 +10,6 @@ import (
 )
 
 // Contains the parameters for CreateVpnGateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnGatewayRequest
 type CreateVpnGatewayInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s *CreateVpnGatewayInput) Validate() error {
 }
 
 // Contains the output of CreateVpnGateway.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnGatewayResult
 type CreateVpnGatewayOutput struct {
 	_ struct{} `type:"structure"`
 

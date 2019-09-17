@@ -11,7 +11,6 @@ import (
 )
 
 // A request to SubscribeToDatasetRequest.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SubscribeToDatasetRequest
 type SubscribeToDatasetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -112,7 +111,6 @@ func (s SubscribeToDatasetInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Response to a SubscribeToDataset request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SubscribeToDatasetResponse
 type SubscribeToDatasetOutput struct {
 	_ struct{} `type:"structure"`
 }

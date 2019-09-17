@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/ListMemberAccountsRequest
 type ListMemberAccountsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -29,7 +28,6 @@ func (s ListMemberAccountsInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/ListMemberAccountsResult
 type ListMemberAccountsOutput struct {
 	_ struct{} `type:"structure"`
 

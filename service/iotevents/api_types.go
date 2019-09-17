@@ -15,7 +15,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // An action to be performed when the "condition" is TRUE.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/Action
 type Action struct {
 	_ struct{} `type:"structure"`
 
@@ -189,7 +188,6 @@ func (s Action) MarshalFields(e protocol.FieldEncoder) error {
 // BatchPutMessage. Each such message contains a JSON payload, and those attributes
 // (and their paired values) specified here are available for use in the condition
 // expressions used by detectors.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/Attribute
 type Attribute struct {
 	_ struct{} `type:"structure"`
 
@@ -240,7 +238,6 @@ func (s Attribute) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information needed to clear the timer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/ClearTimerAction
 type ClearTimerAction struct {
 	_ struct{} `type:"structure"`
 
@@ -285,7 +282,6 @@ func (s ClearTimerAction) MarshalFields(e protocol.FieldEncoder) error {
 
 // The detector model and the specific detectors (instances) for which the logging
 // level is given.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/DetectorDebugOption
 type DetectorDebugOption struct {
 	_ struct{} `type:"structure"`
 
@@ -342,7 +338,6 @@ func (s DetectorDebugOption) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the detector model.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/DetectorModel
 type DetectorModel struct {
 	_ struct{} `type:"structure"`
 
@@ -376,7 +371,6 @@ func (s DetectorModel) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about how the detector model is configured.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/DetectorModelConfiguration
 type DetectorModelConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -480,7 +474,6 @@ func (s DetectorModelConfiguration) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // Information that defines how a detector operates.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/DetectorModelDefinition
 type DetectorModelDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -555,7 +548,6 @@ func (s DetectorModelDefinition) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the detector model.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/DetectorModelSummary
 type DetectorModelSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -599,7 +591,6 @@ func (s DetectorModelSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the detector model version.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/DetectorModelVersionSummary
 type DetectorModelVersionSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -682,7 +673,6 @@ func (s DetectorModelVersionSummary) MarshalFields(e protocol.FieldEncoder) erro
 
 // Specifies the "actions" to be performed when the "condition" evaluates to
 // TRUE.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/Event
 type Event struct {
 	_ struct{} `type:"structure"`
 
@@ -757,7 +747,6 @@ func (s Event) MarshalFields(e protocol.FieldEncoder) error {
 
 // Sends information about the detector model instance and the event which triggered
 // the action to a Kinesis Data Firehose stream.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/FirehoseAction
 type FirehoseAction struct {
 	_ struct{} `type:"structure"`
 
@@ -809,7 +798,6 @@ func (s FirehoseAction) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the input.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/Input
 type Input struct {
 	_ struct{} `type:"structure"`
 
@@ -843,7 +831,6 @@ func (s Input) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the configuration of an input.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/InputConfiguration
 type InputConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -925,7 +912,6 @@ func (s InputConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The definition of the input.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/InputDefinition
 type InputDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -986,7 +972,6 @@ func (s InputDefinition) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the input.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/InputSummary
 type InputSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -1059,7 +1044,6 @@ func (s InputSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 // Sends an IoT Events input, passing in information about the detector model
 // instance and the event which triggered the action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/IotEventsAction
 type IotEventsAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1104,7 +1088,6 @@ func (s IotEventsAction) MarshalFields(e protocol.FieldEncoder) error {
 
 // Information required to publish the MQTT message via the AWS IoT message
 // broker.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/IotTopicPublishAction
 type IotTopicPublishAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1149,7 +1132,6 @@ func (s IotTopicPublishAction) MarshalFields(e protocol.FieldEncoder) error {
 
 // Calls a Lambda function, passing in information about the detector model
 // instance and the event which triggered the action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/LambdaAction
 type LambdaAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1193,7 +1175,6 @@ func (s LambdaAction) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The values of the AWS IoT Events logging options.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/LoggingOptions
 type LoggingOptions struct {
 	_ struct{} `type:"structure"`
 
@@ -1292,7 +1273,6 @@ func (s LoggingOptions) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // When entering this state, perform these actions if the condition is TRUE.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/OnEnterLifecycle
 type OnEnterLifecycle struct {
 	_ struct{} `type:"structure"`
 
@@ -1342,7 +1322,6 @@ func (s OnEnterLifecycle) MarshalFields(e protocol.FieldEncoder) error {
 
 // When exiting this state, perform these "actions" if the specified "condition"
 // is TRUE.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/OnExitLifecycle
 type OnExitLifecycle struct {
 	_ struct{} `type:"structure"`
 
@@ -1391,7 +1370,6 @@ func (s OnExitLifecycle) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Specifies the actions performed when the "condition" evaluates to TRUE.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/OnInputLifecycle
 type OnInputLifecycle struct {
 	_ struct{} `type:"structure"`
 
@@ -1462,7 +1440,6 @@ func (s OnInputLifecycle) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information needed to reset the timer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/ResetTimerAction
 type ResetTimerAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1506,7 +1483,6 @@ func (s ResetTimerAction) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information required to publish the Amazon SNS message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/SNSTopicPublishAction
 type SNSTopicPublishAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1550,7 +1526,6 @@ func (s SNSTopicPublishAction) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information needed to set the timer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/SetTimerAction
 type SetTimerAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1610,7 +1585,6 @@ func (s SetTimerAction) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information about the variable and its new value.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/SetVariableAction
 type SetVariableAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1673,7 +1647,6 @@ func (s SetVariableAction) MarshalFields(e protocol.FieldEncoder) error {
 
 // Sends information about the detector model instance and the event which triggered
 // the action to an AWS SQS queue.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/SqsAction
 type SqsAction struct {
 	_ struct{} `type:"structure"`
 
@@ -1724,7 +1697,6 @@ func (s SqsAction) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Information that defines a state of a detector.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/State
 type State struct {
 	_ struct{} `type:"structure"`
 
@@ -1812,7 +1784,6 @@ func (s State) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Metadata that can be used to manage the resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -1872,7 +1843,6 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 
 // Specifies the actions performed and the next state entered when a "condition"
 // evaluates to TRUE.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotevents-2018-07-27/TransitionEvent
 type TransitionEvent struct {
 	_ struct{} `type:"structure"`
 

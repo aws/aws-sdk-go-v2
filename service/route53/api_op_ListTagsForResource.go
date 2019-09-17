@@ -12,7 +12,6 @@ import (
 
 // A complex type containing information about a request for a list of the tags
 // that are associated with an individual resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTagsForResourceRequest
 type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -73,7 +72,6 @@ func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about the health checks or hosted
 // zones for which you want to list tags.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTagsForResourceResponse
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 

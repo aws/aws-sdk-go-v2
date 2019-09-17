@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceAttributeRequest
 type DescribeInstanceAttributeInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s *DescribeInstanceAttributeInput) Validate() error {
 }
 
 // Describes an instance attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceAttribute
 type DescribeInstanceAttributeOutput struct {
 	_ struct{} `type:"structure"`
 

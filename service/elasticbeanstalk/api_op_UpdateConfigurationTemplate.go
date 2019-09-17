@@ -12,7 +12,6 @@ import (
 )
 
 // The result message containing the options for the specified solution stack.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateConfigurationTemplateMessage
 type UpdateConfigurationTemplateInput struct {
 	_ struct{} `type:"structure"`
 
@@ -90,7 +89,6 @@ func (s *UpdateConfigurationTemplateInput) Validate() error {
 }
 
 // Describes the settings for a configuration set.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ConfigurationSettingsDescription
 type UpdateConfigurationTemplateOutput struct {
 	_ struct{} `type:"structure"`
 

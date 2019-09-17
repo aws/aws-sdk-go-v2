@@ -11,7 +11,6 @@ import (
 )
 
 // A request to delete a specified traffic policy instance.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteTrafficPolicyInstanceRequest
 type DeleteTrafficPolicyInstanceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -60,7 +59,6 @@ func (s DeleteTrafficPolicyInstanceInput) MarshalFields(e protocol.FieldEncoder)
 }
 
 // An empty element.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteTrafficPolicyInstanceResponse
 type DeleteTrafficPolicyInstanceOutput struct {
 	_ struct{} `type:"structure"`
 }

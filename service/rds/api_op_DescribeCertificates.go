@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeCertificatesMessage
 type DescribeCertificatesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -64,7 +63,6 @@ func (s *DescribeCertificatesInput) Validate() error {
 }
 
 // Data returned by the DescribeCertificates action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CertificateMessage
 type DescribeCertificatesOutput struct {
 	_ struct{} `type:"structure"`
 

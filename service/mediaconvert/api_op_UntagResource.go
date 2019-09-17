@@ -12,7 +12,6 @@ import (
 
 // To remove tags from a resource, send a request with the Amazon Resource Name
 // (ARN) of the resource and the keys of the tags that you want to remove.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UntagResourceRequest
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -71,7 +70,6 @@ func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A successful request to remove tags from a resource returns an OK message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UntagResourceResponse
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }

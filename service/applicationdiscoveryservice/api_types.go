@@ -15,7 +15,6 @@ var _ = awsutil.Prettify
 // Information about agents or connectors that were instructed to start collecting
 // data. Information includes the agent/connector ID, a description of the operation,
 // and whether the agent/connector configuration was updated.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/AgentConfigurationStatus
 type AgentConfigurationStatus struct {
 	_ struct{} `type:"structure"`
 
@@ -40,7 +39,6 @@ func (s AgentConfigurationStatus) String() string {
 // Information includes agent or connector IDs, IP addresses, media access control
 // (MAC) addresses, agent or connector health, hostname where the agent or connector
 // resides, and agent version for each agent.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/AgentInfo
 type AgentInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -82,7 +80,6 @@ func (s AgentInfo) String() string {
 }
 
 // Network details about the host where the agent/connector resides.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/AgentNetworkInfo
 type AgentNetworkInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -100,7 +97,6 @@ func (s AgentNetworkInfo) String() string {
 
 // Error messages returned for each import task that you deleted as a response
 // for this command.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/BatchDeleteImportDataError
 type BatchDeleteImportDataError struct {
 	_ struct{} `type:"structure"`
 
@@ -121,7 +117,6 @@ func (s BatchDeleteImportDataError) String() string {
 
 // Tags for a configuration item. Tags are metadata that help you categorize
 // IT assets.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ConfigurationTag
 type ConfigurationTag struct {
 	_ struct{} `type:"structure"`
 
@@ -150,7 +145,6 @@ func (s ConfigurationTag) String() string {
 }
 
 // A list of continuous export descriptions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ContinuousExportDescription
 type ContinuousExportDescription struct {
 	_ struct{} `type:"structure"`
 
@@ -243,7 +237,6 @@ func (s ContinuousExportDescription) String() string {
 }
 
 // Inventory data for installed discovery agents.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/CustomerAgentInfo
 type CustomerAgentInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -289,7 +282,6 @@ func (s CustomerAgentInfo) String() string {
 }
 
 // Inventory data for installed discovery connectors.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/CustomerConnectorInfo
 type CustomerConnectorInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -337,7 +329,6 @@ func (s CustomerConnectorInfo) String() string {
 // Used to select which agent's data is to be exported. A single agent ID may
 // be selected for export using the StartExportTask (http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_StartExportTask.html)
 // action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ExportFilter
 type ExportFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -388,7 +379,6 @@ func (s *ExportFilter) Validate() error {
 
 // Information regarding the export status of discovered data. The value is
 // an array of objects.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ExportInfo
 type ExportInfo struct {
 	_ struct{} `type:"structure"`
 
@@ -440,7 +430,6 @@ func (s ExportInfo) String() string {
 //
 // For more information about filters, see Querying Discovered Configuration
 // Items (http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/Filter
 type Filter struct {
 	_ struct{} `type:"structure"`
 
@@ -496,7 +485,6 @@ func (s *Filter) Validate() error {
 // An array of information related to the import task request that includes
 // status information, times, IDs, the Amazon S3 Object URL for the import file,
 // and more.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ImportTask
 type ImportTask struct {
 	_ struct{} `type:"structure"`
 
@@ -576,7 +564,6 @@ func (s ImportTask) String() string {
 // your import tasks. Currently, wildcards are not supported for filters.
 //
 // When filtering by import status, all other filter values are ignored.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ImportTaskFilter
 type ImportTaskFilter struct {
 	_ struct{} `type:"structure"`
 
@@ -607,7 +594,6 @@ func (s *ImportTaskFilter) Validate() error {
 }
 
 // Details about neighboring servers.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/NeighborConnectionDetail
 type NeighborConnectionDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -639,7 +625,6 @@ func (s NeighborConnectionDetail) String() string {
 }
 
 // A field and direction for ordered output.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/OrderByElement
 type OrderByElement struct {
 	_ struct{} `type:"structure"`
 
@@ -672,7 +657,6 @@ func (s *OrderByElement) Validate() error {
 }
 
 // Metadata that help you categorize IT assets.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -711,7 +695,6 @@ func (s *Tag) Validate() error {
 }
 
 // The tag filter. Valid names are: tagKey, tagValue, configurationId.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/TagFilter
 type TagFilter struct {
 	_ struct{} `type:"structure"`
 

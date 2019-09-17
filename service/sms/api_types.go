@@ -13,7 +13,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // Information about the application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/AppSummary
 type AppSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -72,7 +71,6 @@ func (s AppSummary) String() string {
 }
 
 // Represents a connector.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/Connector
 type Connector struct {
 	_ struct{} `type:"structure"`
 
@@ -113,7 +111,6 @@ func (s Connector) String() string {
 }
 
 // Details about the latest launch of an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/LaunchDetails
 type LaunchDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -133,7 +130,6 @@ func (s LaunchDetails) String() string {
 }
 
 // Represents a replication job.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ReplicationJob
 type ReplicationJob struct {
 	_ struct{} `type:"structure"`
 
@@ -212,7 +208,6 @@ func (s ReplicationJob) String() string {
 }
 
 // Represents a replication run.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ReplicationRun
 type ReplicationRun struct {
 	_ struct{} `type:"structure"`
 
@@ -269,7 +264,6 @@ func (s ReplicationRun) String() string {
 }
 
 // Details of the current stage of a replication run.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ReplicationRunStageDetails
 type ReplicationRunStageDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -286,7 +280,6 @@ func (s ReplicationRunStageDetails) String() string {
 }
 
 // Location of the Amazon S3 object in the customer's account.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/S3Location
 type S3Location struct {
 	_ struct{} `type:"structure"`
 
@@ -303,7 +296,6 @@ func (s S3Location) String() string {
 }
 
 // Represents a server.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/Server
 type Server struct {
 	_ struct{} `type:"structure"`
 
@@ -329,7 +321,6 @@ func (s Server) String() string {
 }
 
 // A logical grouping of servers.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ServerGroup
 type ServerGroup struct {
 	_ struct{} `type:"structure"`
 
@@ -349,7 +340,6 @@ func (s ServerGroup) String() string {
 }
 
 // Launch configuration for a server group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ServerGroupLaunchConfiguration
 type ServerGroupLaunchConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -369,7 +359,6 @@ func (s ServerGroupLaunchConfiguration) String() string {
 }
 
 // Replication configuration for a server group.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ServerGroupReplicationConfiguration
 type ServerGroupReplicationConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -387,7 +376,6 @@ func (s ServerGroupReplicationConfiguration) String() string {
 }
 
 // Launch configuration for a server.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ServerLaunchConfiguration
 type ServerLaunchConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -425,7 +413,6 @@ func (s ServerLaunchConfiguration) String() string {
 }
 
 // Replication configuration of a server.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ServerReplicationConfiguration
 type ServerReplicationConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -442,7 +429,6 @@ func (s ServerReplicationConfiguration) String() string {
 }
 
 // Replication parameters for replicating a server.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ServerReplicationParameters
 type ServerReplicationParameters struct {
 	_ struct{} `type:"structure"`
 
@@ -486,7 +472,6 @@ func (s ServerReplicationParameters) String() string {
 }
 
 // A label that can be assigned to an application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -504,7 +489,6 @@ func (s Tag) String() string {
 
 // A script that runs on first launch of an Amazon EC2 instance. Used for configuring
 // the server during launch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/UserData
 type UserData struct {
 	_ struct{} `type:"structure"`
 
@@ -518,7 +502,6 @@ func (s UserData) String() string {
 }
 
 // Represents a VM server.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/VmServer
 type VmServer struct {
 	_ struct{} `type:"structure"`
 
@@ -544,7 +527,6 @@ func (s VmServer) String() string {
 }
 
 // Represents a VM server location.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/VmServerAddress
 type VmServerAddress struct {
 	_ struct{} `type:"structure"`
 

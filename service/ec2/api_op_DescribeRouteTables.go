@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRouteTablesRequest
 type DescribeRouteTablesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -119,7 +118,6 @@ func (s *DescribeRouteTablesInput) Validate() error {
 }
 
 // Contains the output of DescribeRouteTables.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRouteTablesResult
 type DescribeRouteTablesOutput struct {
 	_ struct{} `type:"structure"`
 

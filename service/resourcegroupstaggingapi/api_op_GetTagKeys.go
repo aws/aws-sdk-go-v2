@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetTagKeysInput
 type GetTagKeysInput struct {
 	_ struct{} `type:"structure"`
 
@@ -24,7 +23,6 @@ func (s GetTagKeysInput) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetTagKeysOutput
 type GetTagKeysOutput struct {
 	_ struct{} `type:"structure"`
 

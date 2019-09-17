@@ -14,7 +14,6 @@ var _ aws.Config
 var _ = awsutil.Prettify
 
 // A nested application summary.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ApplicationDependencySummary
 type ApplicationDependencySummary struct {
 	_ struct{} `type:"structure"`
 
@@ -52,7 +51,6 @@ func (s ApplicationDependencySummary) MarshalFields(e protocol.FieldEncoder) err
 }
 
 // Policy statement applied to the application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ApplicationPolicyStatement
 type ApplicationPolicyStatement struct {
 	_ struct{} `type:"structure"`
 
@@ -130,7 +128,6 @@ func (s ApplicationPolicyStatement) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // Summary of details about the application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ApplicationSummary
 type ApplicationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -247,7 +244,6 @@ func (s ApplicationSummary) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Parameters supported by the application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ParameterDefinition
 type ParameterDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -443,7 +439,6 @@ func (s ParameterDefinition) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Parameter value of the application.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ParameterValue
 type ParameterValue struct {
 	_ struct{} `type:"structure"`
 
@@ -503,7 +498,6 @@ func (s ParameterValue) MarshalFields(e protocol.FieldEncoder) error {
 // This property corresponds to the AWS CloudFormation RollbackConfiguration
 // (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration)
 // Data Type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/RollbackConfiguration
 type RollbackConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -565,7 +559,6 @@ func (s RollbackConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 
 // This property corresponds to the AWS CloudFormation RollbackTrigger (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger)
 // Data Type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/RollbackTrigger
 type RollbackTrigger struct {
 	_ struct{} `type:"structure"`
 
@@ -626,7 +619,6 @@ func (s RollbackTrigger) MarshalFields(e protocol.FieldEncoder) error {
 
 // This property corresponds to the AWS CloudFormation Tag (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag)
 // Data Type.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -686,7 +678,6 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Application version details.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/Version
 type Version struct {
 	_ struct{} `type:"structure"`
 
@@ -848,7 +839,6 @@ func (s Version) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An application version summary.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/VersionSummary
 type VersionSummary struct {
 	_ struct{} `type:"structure"`
 

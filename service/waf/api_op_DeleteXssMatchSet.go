@@ -10,7 +10,6 @@ import (
 )
 
 // A request to delete an XssMatchSet from AWS WAF.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteXssMatchSetRequest
 type DeleteXssMatchSetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -56,7 +55,6 @@ func (s *DeleteXssMatchSetInput) Validate() error {
 }
 
 // The response to a request to delete an XssMatchSet from AWS WAF.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteXssMatchSetResponse
 type DeleteXssMatchSetOutput struct {
 	_ struct{} `type:"structure"`
 

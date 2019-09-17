@@ -11,7 +11,6 @@ import (
 )
 
 // Represents the request to register a user.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SignUpRequest
 type SignUpInput struct {
 	_ struct{} `type:"structure"`
 
@@ -107,7 +106,6 @@ func (s *SignUpInput) Validate() error {
 }
 
 // The response from the server for a registration request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SignUpResponse
 type SignUpOutput struct {
 	_ struct{} `type:"structure"`
 

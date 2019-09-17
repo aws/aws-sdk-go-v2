@@ -10,7 +10,6 @@ import (
 )
 
 // Represents the input of a RemoveTagsFromResource operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RemoveTagsFromResourceMessage
 type RemoveTagsFromResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -55,7 +54,6 @@ func (s *RemoveTagsFromResourceInput) Validate() error {
 
 // Represents the output from the AddTagsToResource, ListTagsForResource, and
 // RemoveTagsFromResource operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TagListMessage
 type RemoveTagsFromResourceOutput struct {
 	_ struct{} `type:"structure"`
 
