@@ -27,6 +27,9 @@ type SubmitContainerStateChangeInput struct {
 	// The reason for the state change request.
 	Reason *string `locationName:"reason" type:"string"`
 
+	// The ID of the Docker container.
+	RuntimeId *string `locationName:"runtimeId" type:"string"`
+
 	// The status of the state change request.
 	Status *string `locationName:"status" type:"string"`
 

@@ -13,7 +13,7 @@ type DescribeSMBSettingsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	//
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
@@ -48,7 +48,7 @@ type DescribeSMBSettingsOutput struct {
 	DomainName *string `min:"1" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 
 	// This value is true if a password for the guest user “smbguest” is set,

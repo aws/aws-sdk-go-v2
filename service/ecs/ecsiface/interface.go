@@ -142,6 +142,8 @@ type ClientAPI interface {
 
 	UntagResourceRequest(*ecs.UntagResourceInput) ecs.UntagResourceRequest
 
+	UpdateClusterSettingsRequest(*ecs.UpdateClusterSettingsInput) ecs.UpdateClusterSettingsRequest
+
 	UpdateContainerAgentRequest(*ecs.UpdateContainerAgentInput) ecs.UpdateContainerAgentRequest
 
 	UpdateContainerInstancesStateRequest(*ecs.UpdateContainerInstancesStateInput) ecs.UpdateContainerInstancesStateRequest

@@ -69,7 +69,7 @@ const opModifyVpnConnection = "ModifyVpnConnection"
 // ModifyVpnConnectionRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Modifies the target gateway of a AWS Site-to-Site VPN connection. The following
+// Modifies the target gateway of an AWS Site-to-Site VPN connection. The following
 // migration options are available:
 //
 //    * An existing virtual private gateway to a new virtual private gateway

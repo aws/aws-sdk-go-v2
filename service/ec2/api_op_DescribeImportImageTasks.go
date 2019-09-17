@@ -19,14 +19,13 @@ type DescribeImportImageTasksInput struct {
 	DryRun *bool `type:"boolean"`
 
 	// Filter tasks using the task-state filter and one of the following values:
-	// active, completed, deleting, deleted.
+	// active, completed, deleting, or deleted.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
-	// A list of import image task IDs.
+	// The IDs of the import image tasks.
 	ImportTaskIds []string `locationName:"ImportTaskId" locationNameList:"ImportTaskId" type:"list"`
 
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value.
+	// The maximum number of results to return in a single call.
 	MaxResults *int64 `type:"integer"`
 
 	// A token that indicates the next page of results.

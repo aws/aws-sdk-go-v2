@@ -364,6 +364,8 @@ type ClientAPI interface {
 
 	DescribeElasticGpusRequest(*ec2.DescribeElasticGpusInput) ec2.DescribeElasticGpusRequest
 
+	DescribeExportImageTasksRequest(*ec2.DescribeExportImageTasksInput) ec2.DescribeExportImageTasksRequest
+
 	DescribeExportTasksRequest(*ec2.DescribeExportTasksInput) ec2.DescribeExportTasksRequest
 
 	DescribeFleetHistoryRequest(*ec2.DescribeFleetHistoryInput) ec2.DescribeFleetHistoryRequest
@@ -574,6 +576,8 @@ type ClientAPI interface {
 
 	ExportClientVpnClientConfigurationRequest(*ec2.ExportClientVpnClientConfigurationInput) ec2.ExportClientVpnClientConfigurationRequest
 
+	ExportImageRequest(*ec2.ExportImageInput) ec2.ExportImageRequest
+
 	ExportTransitGatewayRoutesRequest(*ec2.ExportTransitGatewayRoutesInput) ec2.ExportTransitGatewayRoutesRequest
 
 	GetCapacityReservationUsageRequest(*ec2.GetCapacityReservationUsageInput) ec2.GetCapacityReservationUsageRequest
@@ -681,6 +685,8 @@ type ClientAPI interface {
 	ModifyVpnConnectionRequest(*ec2.ModifyVpnConnectionInput) ec2.ModifyVpnConnectionRequest
 
 	ModifyVpnTunnelCertificateRequest(*ec2.ModifyVpnTunnelCertificateInput) ec2.ModifyVpnTunnelCertificateRequest
+
+	ModifyVpnTunnelOptionsRequest(*ec2.ModifyVpnTunnelOptionsInput) ec2.ModifyVpnTunnelOptionsRequest
 
 	MonitorInstancesRequest(*ec2.MonitorInstancesInput) ec2.MonitorInstancesRequest
 

@@ -45,7 +45,7 @@ type CreateCacheClusterInput struct {
 	//
 	// Constraints:
 	//
-	//    * A name must contain from 1 to 20 alphanumeric characters or hyphens.
+	//    * A name must contain from 1 to 50 alphanumeric characters or hyphens.
 	//
 	//    * The first character must be a letter.
 	//

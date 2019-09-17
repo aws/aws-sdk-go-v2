@@ -24,7 +24,7 @@ type CreateDBClusterEndpointInput struct {
 	// DBClusterIdentifier is a required field
 	DBClusterIdentifier *string `type:"string" required:"true"`
 
-	// The type of the endpoint. One of: READER, ANY.
+	// The type of the endpoint. One of: READER, WRITER, ANY.
 	//
 	// EndpointType is a required field
 	EndpointType *string `type:"string" required:"true"`
@@ -82,7 +82,7 @@ func (s *CreateDBClusterEndpointInput) Validate() error {
 type CreateDBClusterEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The type associated with a custom endpoint. One of: READER, ANY.
+	// The type associated with a custom endpoint. One of: READER, WRITER, ANY.
 	CustomEndpointType *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) for the endpoint.

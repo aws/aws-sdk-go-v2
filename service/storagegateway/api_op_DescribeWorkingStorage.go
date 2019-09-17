@@ -14,7 +14,7 @@ type DescribeWorkingStorageInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	//
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
@@ -53,7 +53,7 @@ type DescribeWorkingStorageOutput struct {
 	DiskIds []string `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 
 	// The total working storage in bytes allocated for the gateway. If no working

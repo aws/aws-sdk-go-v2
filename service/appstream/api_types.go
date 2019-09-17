@@ -12,21 +12,21 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// Describes a virtual private cloud (VPC) interface endpoint that lets you
-// create a private connection between the VPC that you specify and AppStream
-// 2.0. When you specify a VPC interface endpoint for a stack, users of the
-// stack can connect to AppStream 2.0 only through that endpoint. When you specify
-// a VPC interface endpoint for an image builder, administrators can connect
-// to the image builder only through that endpoint.
+// Describes an interface VPC endpoint (interface endpoint) that lets you create
+// a private connection between the virtual private cloud (VPC) that you specify
+// and AppStream 2.0. When you specify an interface endpoint for a stack, users
+// of the stack can connect to AppStream 2.0 only through that endpoint. When
+// you specify an interface endpoint for an image builder, administrators can
+// connect to the image builder only through that endpoint.
 type AccessEndpoint struct {
 	_ struct{} `type:"structure"`
 
-	// The type of VPC interface endpoint.
+	// The type of interface endpoint.
 	//
 	// EndpointType is a required field
 	EndpointType AccessEndpointType `type:"string" required:"true" enum:"true"`
 
-	// The identifier (ID) of the VPC in which the endpoint is used.
+	// The identifier (ID) of the VPC in which the interface endpoint is used.
 	VpceId *string `min:"1" type:"string"`
 }
 
@@ -242,7 +242,7 @@ func (s DomainJoinInfo) String() string {
 type Fleet struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN for the fleet.
+	// The Amazon Resource Name (ARN) for the fleet.
 	//
 	// Arn is a required field
 	Arn *string `type:"string" required:"true"`
@@ -293,6 +293,12 @@ type Fleet struct {
 	// one to two minutes. You are charged for instance streaming when users are
 	// connected and a small hourly fee for instances that are not streaming apps.
 	FleetType FleetType `type:"string" enum:"true"`
+
+	// The ARN of the IAM role that is applied to the fleet. To assume a role, the
+	// fleet instance calls the AWS Security Token Service (STS) AssumeRole API
+	// operation and passes the ARN of the role to use. The operation creates a
+	// new session with temporary credentials.
+	IamRoleArn *string `type:"string"`
 
 	// The amount of time that users can be idle (inactive) before they are disconnected
 	// from their streaming session and the DisconnectTimeoutInSeconds time interval
@@ -468,6 +474,12 @@ type ImageBuilder struct {
 
 	// Enables or disables default internet access for the image builder.
 	EnableDefaultInternetAccess *bool `type:"boolean"`
+
+	// The ARN of the IAM role that is applied to the image builder. To assume a
+	// role, the image builder calls the AWS Security Token Service (STS) AssumeRole
+	// API operation and passes the ARN of the role to use. The operation creates
+	// a new session with temporary credentials.
+	IamRoleArn *string `type:"string"`
 
 	// The ARN of the image from which this builder was created.
 	ImageArn *string `type:"string"`

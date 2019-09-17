@@ -67,10 +67,10 @@ const opListAllowedNodeTypeModifications = "ListAllowedNodeTypeModifications"
 // Amazon ElastiCache.
 //
 // Lists all available node types that you can scale your Redis cluster's or
-// replication group's current node type up to.
+// replication group's current node type.
 //
 // When you use the ModifyCacheCluster or ModifyReplicationGroup operations
-// to scale up your cluster or replication group, the value of the CacheNodeType
+// to scale your cluster or replication group, the value of the CacheNodeType
 // parameter must be one of the node types returned by this operation.
 //
 //    // Example sending a request using ListAllowedNodeTypeModificationsRequest.

@@ -216,6 +216,23 @@ func (enum DeviceCgroupPermission) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type FirelensConfigurationType string
+
+// Enum values for FirelensConfigurationType
+const (
+	FirelensConfigurationTypeFluentd   FirelensConfigurationType = "fluentd"
+	FirelensConfigurationTypeFluentbit FirelensConfigurationType = "fluentbit"
+)
+
+func (enum FirelensConfigurationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FirelensConfigurationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type HealthStatus string
 
 // Enum values for HealthStatus
@@ -273,13 +290,14 @@ type LogDriver string
 
 // Enum values for LogDriver
 const (
-	LogDriverJsonFile LogDriver = "json-file"
-	LogDriverSyslog   LogDriver = "syslog"
-	LogDriverJournald LogDriver = "journald"
-	LogDriverGelf     LogDriver = "gelf"
-	LogDriverFluentd  LogDriver = "fluentd"
-	LogDriverAwslogs  LogDriver = "awslogs"
-	LogDriverSplunk   LogDriver = "splunk"
+	LogDriverJsonFile    LogDriver = "json-file"
+	LogDriverSyslog      LogDriver = "syslog"
+	LogDriverJournald    LogDriver = "journald"
+	LogDriverGelf        LogDriver = "gelf"
+	LogDriverFluentd     LogDriver = "fluentd"
+	LogDriverAwslogs     LogDriver = "awslogs"
+	LogDriverSplunk      LogDriver = "splunk"
+	LogDriverAwsfirelens LogDriver = "awsfirelens"
 )
 
 func (enum LogDriver) MarshalValue() (string, error) {
@@ -415,7 +433,8 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeGpu ResourceType = "GPU"
+	ResourceTypeGpu                  ResourceType = "GPU"
+	ResourceTypeInferenceAccelerator ResourceType = "InferenceAccelerator"
 )
 
 func (enum ResourceType) MarshalValue() (string, error) {

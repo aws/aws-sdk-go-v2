@@ -402,6 +402,10 @@ func (s EgressEndpoint) MarshalFields(e protocol.FieldEncoder) error {
 type HlsEncryption struct {
 	_ struct{} `type:"structure"`
 
+	// A constant initialization vector for encryption (optional).When not specified
+	// the initialization vector will be periodically rotated.
+	ConstantInitializationVector *string `locationName:"constantInitializationVector" type:"string"`
+
 	// The encryption method to use.
 	EncryptionMethod EncryptionMethod `locationName:"encryptionMethod" type:"string" enum:"true"`
 
@@ -438,6 +442,12 @@ func (s *HlsEncryption) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s HlsEncryption) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConstantInitializationVector != nil {
+		v := *s.ConstantInitializationVector
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "constantInitializationVector", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if len(s.EncryptionMethod) > 0 {
 		v := s.EncryptionMethod
 

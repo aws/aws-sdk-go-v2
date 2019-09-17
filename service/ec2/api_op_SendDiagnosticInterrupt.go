@@ -74,8 +74,8 @@ const opSendDiagnosticInterrupt = "SendDiagnosticInterrupt"
 //
 // For more information about configuring your operating system to generate
 // a crash dump when a kernel panic or stop error occurs, see Send a Diagnostic
-// Interrupt (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html#diagnostic-interrupt)
-// (Linux instances) or Send a Diagnostic Interrupt (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/unreachable-instance.html#diagnostic-interrupt)
+// Interrupt (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/diagnostic-interrupt.html)
+// (Linux instances) or Send a Diagnostic Interrupt (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/diagnostic-interrupt.html)
 // (Windows instances).
 //
 //    // Example sending a request using SendDiagnosticInterruptRequest.

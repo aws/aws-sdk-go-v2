@@ -77,6 +77,10 @@ const opCreatePipeline = "CreatePipeline"
 //
 // Creates a pipeline.
 //
+// In the pipeline structure, you must include either artifactStore or artifactStores
+// in your pipeline, but you cannot use both. If you create a cross-region action
+// in your pipeline, you must use artifactStores.
+//
 //    // Example sending a request using CreatePipelineRequest.
 //    req := client.CreatePipelineRequest(params)
 //    resp, err := req.Send(context.TODO())

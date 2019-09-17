@@ -13,7 +13,7 @@ import (
 type CreateImageBuilderInput struct {
 	_ struct{} `type:"structure"`
 
-	// The list of virtual private cloud (VPC) interface endpoint objects. Administrators
+	// The list of interface VPC endpoint (interface endpoint) objects. Administrators
 	// can connect to the image builder only through the specified endpoints.
 	AccessEndpoints []AccessEndpoint `min:"1" type:"list"`
 
@@ -33,6 +33,12 @@ type CreateImageBuilderInput struct {
 
 	// Enables or disables default internet access for the image builder.
 	EnableDefaultInternetAccess *bool `type:"boolean"`
+
+	// The Amazon Resource Name (ARN) of the IAM role to apply to the image builder.
+	// To assume a role, the image builder calls the AWS Security Token Service
+	// (STS) AssumeRole API operation and passes the ARN of the role to use. The
+	// operation creates a new session with temporary credentials.
+	IamRoleArn *string `type:"string"`
 
 	// The ARN of the public, private, or shared image to use.
 	ImageArn *string `type:"string"`

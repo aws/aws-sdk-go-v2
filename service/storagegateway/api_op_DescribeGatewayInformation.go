@@ -14,7 +14,7 @@ type DescribeGatewayInformationInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	//
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
@@ -46,6 +46,10 @@ func (s *DescribeGatewayInformationInput) Validate() error {
 type DescribeGatewayInformationOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was
+	// used to monitor and log events in the gateway.
+	CloudWatchLogGroupARN *string `type:"string"`
+
 	// The ID of the Amazon EC2 instance that was used to launch the gateway.
 	Ec2InstanceId *string `type:"string"`
 
@@ -53,7 +57,7 @@ type DescribeGatewayInformationOutput struct {
 	Ec2InstanceRegion *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 
 	// The unique identifier assigned to your gateway during activation. This ID

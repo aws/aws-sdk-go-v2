@@ -295,6 +295,48 @@ func (enum AfdSignaling) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Specify whether this set of input captions appears in your outputs in both
+// 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes
+// the captions data in two ways: it passes the 608 data through using the 608
+// compatibility bytes fields of the 708 wrapper, and it also translates the
+// 608 data into 708.
+type AncillaryConvert608To708 string
+
+// Enum values for AncillaryConvert608To708
+const (
+	AncillaryConvert608To708Upconvert AncillaryConvert608To708 = "UPCONVERT"
+	AncillaryConvert608To708Disabled  AncillaryConvert608To708 = "DISABLED"
+)
+
+func (enum AncillaryConvert608To708) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AncillaryConvert608To708) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// By default, the service terminates any unterminated captions at the end of
+// each input. If you want the caption to continue onto your next input, disable
+// this setting.
+type AncillaryTerminateCaptions string
+
+// Enum values for AncillaryTerminateCaptions
+const (
+	AncillaryTerminateCaptionsEndOfInput AncillaryTerminateCaptions = "END_OF_INPUT"
+	AncillaryTerminateCaptionsDisabled   AncillaryTerminateCaptions = "DISABLED"
+)
+
+func (enum AncillaryTerminateCaptions) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AncillaryTerminateCaptions) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The anti-alias filter is automatically applied to all outputs. The service
 // no longer accepts the value DISABLED for AntiAlias. If you specify that in
 // your job, the service will ignore the setting.
@@ -668,7 +710,7 @@ func (enum BurninSubtitleTeletextSpacing) MarshalValueBuf(b []byte) ([]byte, err
 
 // Specify the format for this set of captions on this output. The default format
 // is embedded without SCTE-20. Other options are embedded with SCTE-20, burn-in,
-// DVB-sub, SCC, SRT, teletext, TTML, and web-VTT. If you are using SCTE-20,
+// DVB-sub, IMSC, SCC, SRT, teletext, TTML, and web-VTT. If you are using SCTE-20,
 // choose SCTE-20 plus embedded (SCTE20_PLUS_EMBEDDED) to create an output that
 // complies with the SCTE-43 spec. To create a non-compliant output where the
 // embedded captions come first, choose Embedded plus SCTE-20 (EMBEDDED_PLUS_SCTE20).
@@ -680,6 +722,7 @@ const (
 	CaptionDestinationTypeDvbSub             CaptionDestinationType = "DVB_SUB"
 	CaptionDestinationTypeEmbedded           CaptionDestinationType = "EMBEDDED"
 	CaptionDestinationTypeEmbeddedPlusScte20 CaptionDestinationType = "EMBEDDED_PLUS_SCTE20"
+	CaptionDestinationTypeImsc               CaptionDestinationType = "IMSC"
 	CaptionDestinationTypeScte20PlusEmbedded CaptionDestinationType = "SCTE20_PLUS_EMBEDDED"
 	CaptionDestinationTypeScc                CaptionDestinationType = "SCC"
 	CaptionDestinationTypeSrt                CaptionDestinationType = "SRT"
@@ -765,12 +808,14 @@ func (enum CmafCodecSpecification) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// For DRM with CMAF, the encryption type is always sample AES.
+// Specify the encryption scheme that you want the service to use when encrypting
+// your CMAF segments. Choose AES-CBC subsample (SAMPLE-AES) or AES_CTR (AES-CTR).
 type CmafEncryptionType string
 
 // Enum values for CmafEncryptionType
 const (
 	CmafEncryptionTypeSampleAes CmafEncryptionType = "SAMPLE_AES"
+	CmafEncryptionTypeAesCtr    CmafEncryptionType = "AES_CTR"
 )
 
 func (enum CmafEncryptionType) MarshalValue() (string, error) {
@@ -1872,9 +1917,11 @@ func (enum Eac3SurroundMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// When set to UPCONVERT, 608 data is both passed through via the "608 compatibility
-// bytes" fields of the 708 wrapper as well as translated into 708. 708 data
-// present in the source content will be discarded.
+// Specify whether this set of input captions appears in your outputs in both
+// 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes
+// the captions data in two ways: it passes the 608 data through using the 608
+// compatibility bytes fields of the 708 wrapper, and it also translates the
+// 608 data into 708.
 type EmbeddedConvert608To708 string
 
 // Enum values for EmbeddedConvert608To708
@@ -1888,6 +1935,26 @@ func (enum EmbeddedConvert608To708) MarshalValue() (string, error) {
 }
 
 func (enum EmbeddedConvert608To708) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// By default, the service terminates any unterminated captions at the end of
+// each input. If you want the caption to continue onto your next input, disable
+// this setting.
+type EmbeddedTerminateCaptions string
+
+// Enum values for EmbeddedTerminateCaptions
+const (
+	EmbeddedTerminateCaptionsEndOfInput EmbeddedTerminateCaptions = "END_OF_INPUT"
+	EmbeddedTerminateCaptionsDisabled   EmbeddedTerminateCaptions = "DISABLED"
+)
+
+func (enum EmbeddedTerminateCaptions) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EmbeddedTerminateCaptions) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -1912,9 +1979,11 @@ func (enum F4vMoovPlacement) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// If set to UPCONVERT, 608 caption data is both passed through via the "608
-// compatibility bytes" fields of the 708 wrapper as well as translated into
-// 708. 708 data present in the source content will be discarded.
+// Specify whether this set of input captions appears in your outputs in both
+// 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes
+// the captions data in two ways: it passes the 608 data through using the 608
+// compatibility bytes fields of the 708 wrapper, and it also translates the
+// 608 data into 708.
 type FileSourceConvert608To708 string
 
 // Enum values for FileSourceConvert608To708
@@ -3356,6 +3425,27 @@ func (enum HlsTimedMetadataId3Frame) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Keep this setting enabled to have MediaConvert use the font style and position
+// information from the captions source in the output. This option is available
+// only when your input captions are CFF-TT, IMSC, SMPTE-TT, or TTML. Disable
+// this setting for simplified output captions.
+type ImscStylePassthrough string
+
+// Enum values for ImscStylePassthrough
+const (
+	ImscStylePassthroughEnabled  ImscStylePassthrough = "ENABLED"
+	ImscStylePassthroughDisabled ImscStylePassthrough = "DISABLED"
+)
+
+func (enum ImscStylePassthrough) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ImscStylePassthrough) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Enable Deblock (InputDeblockFilter) to produce smoother motion in the output.
 // Default is disabled. Only manaully controllable for MPEG2 and uncompressed
 // video inputs.
@@ -3471,13 +3561,16 @@ func (enum InputRotate) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Timecode source under input settings (InputTimecodeSource) only affects the
-// behavior of features that apply to a single input at a time, such as input
-// clipping and synchronizing some captions formats. Use this setting to specify
-// whether the service counts frames by timecodes embedded in the video (EMBEDDED)
-// or by starting the first frame at zero (ZEROBASED). In both cases, the timecode
-// format is HH:MM:SS:FF or HH:MM:SS;FF, where FF is the frame number. Only
-// set this to EMBEDDED if your source video has embedded timecodes.
+// Use this Timecode source setting, located under the input settings (InputTimecodeSource),
+// to specify how the service counts input video frames. This input frame count
+// affects only the behavior of features that apply to a single input at a time,
+// such as input clipping and synchronizing some captions formats. Choose Embedded
+// (EMBEDDED) to use the timecodes in your input video. Choose Start at zero
+// (ZEROBASED) to start the first frame at zero. Choose Specified start (SPECIFIEDSTART)
+// to start the first frame at the timecode that you specify in the setting
+// Start timecode (timecodeStart). If you don't specify a value for Timecode
+// source, the service will use Embedded by default. For more information about
+// timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.
 type InputTimecodeSource string
 
 // Enum values for InputTimecodeSource
@@ -5167,6 +5260,27 @@ func (enum SccDestinationFramerate) MarshalValue() (string, error) {
 }
 
 func (enum SccDestinationFramerate) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Enable this setting when you run a test job to estimate how many reserved
+// transcoding slots (RTS) you need. When this is enabled, MediaConvert runs
+// your job from an on-demand queue with similar performance to what you will
+// see with one RTS in a reserved queue. This setting is disabled by default.
+type SimulateReservedQueue string
+
+// Enum values for SimulateReservedQueue
+const (
+	SimulateReservedQueueDisabled SimulateReservedQueue = "DISABLED"
+	SimulateReservedQueueEnabled  SimulateReservedQueue = "ENABLED"
+)
+
+func (enum SimulateReservedQueue) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SimulateReservedQueue) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

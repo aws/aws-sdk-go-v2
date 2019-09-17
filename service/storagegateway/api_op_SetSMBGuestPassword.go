@@ -58,7 +58,7 @@ type SetSMBGuestPasswordOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 }
 

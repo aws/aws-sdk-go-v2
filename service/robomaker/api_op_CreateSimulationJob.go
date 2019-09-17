@@ -325,18 +325,6 @@ type CreateSimulationJobOutput struct {
 	// SimulationApplicationVersionMismatchedEtag
 	//
 	// Etag for SimulationApplication does not match value during version creation.
-	//
-	// WrongRegionS3Output
-	//
-	// S3 output bucket is in a different region than AWS RoboMaker.
-	//
-	// WrongRegionRobotApplication
-	//
-	// RobotApplication bucket is in a different region than AWS RoboMaker.
-	//
-	// WrongRegionSimulationApplication
-	//
-	// SimulationApplication bucket is in a different region than AWS RoboMaker.
 	FailureCode SimulationJobErrorCode `locationName:"failureCode" type:"string" enum:"true"`
 
 	// The IAM role that allows the simulation job to call the AWS APIs that are

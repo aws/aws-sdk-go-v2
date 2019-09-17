@@ -74,7 +74,13 @@ type ClientAPI interface {
 
 	ListClustersRequest(*eks.ListClustersInput) eks.ListClustersRequest
 
+	ListTagsForResourceRequest(*eks.ListTagsForResourceInput) eks.ListTagsForResourceRequest
+
 	ListUpdatesRequest(*eks.ListUpdatesInput) eks.ListUpdatesRequest
+
+	TagResourceRequest(*eks.TagResourceInput) eks.TagResourceRequest
+
+	UntagResourceRequest(*eks.UntagResourceInput) eks.UntagResourceRequest
 
 	UpdateClusterConfigRequest(*eks.UpdateClusterConfigInput) eks.UpdateClusterConfigRequest
 

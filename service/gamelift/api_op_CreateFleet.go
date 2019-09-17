@@ -20,6 +20,8 @@ type CreateFleetInput struct {
 	// is created.
 	BuildId *string `type:"string"`
 
+	CertificateConfiguration *CertificateConfiguration `type:"structure"`
+
 	// Human-readable description of a fleet.
 	Description *string `min:"1" type:"string"`
 
@@ -164,6 +166,11 @@ func (s *CreateFleetInput) Validate() error {
 	}
 	if s.ServerLaunchPath != nil && len(*s.ServerLaunchPath) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ServerLaunchPath", 1))
+	}
+	if s.CertificateConfiguration != nil {
+		if err := s.CertificateConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("CertificateConfiguration", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.EC2InboundPermissions != nil {
 		for i, v := range s.EC2InboundPermissions {

@@ -151,6 +151,9 @@ type CreateReplicationGroupInput struct {
 	// engine version.
 	EngineVersion *string `type:"string"`
 
+	// The ID of the KMS key used to encrypt the disk on the cluster.
+	KmsKeyId *string `type:"string"`
+
 	// A list of node group (shard) configuration options. Each node group (shard)
 	// configuration has the following members: PrimaryAvailabilityZone, ReplicaAvailabilityZones,
 	// ReplicaCount, and Slots.
@@ -258,7 +261,7 @@ type CreateReplicationGroupInput struct {
 	//
 	// Constraints:
 	//
-	//    * A name must contain from 1 to 20 alphanumeric characters or hyphens.
+	//    * A name must contain from 1 to 40 alphanumeric characters or hyphens.
 	//
 	//    * The first character must be a letter.
 	//
@@ -317,8 +320,8 @@ type CreateReplicationGroupInput struct {
 	// to true when you create a cluster.
 	//
 	// This parameter is valid only if the Engine parameter is redis, the EngineVersion
-	// parameter is 3.2.6 or 4.x, and the cluster is being created in an Amazon
-	// VPC.
+	// parameter is 3.2.6, 4.x or later, and the cluster is being created in an
+	// Amazon VPC.
 	//
 	// If you enable in-transit encryption, you must also specify a value for CacheSubnetGroup.
 	//

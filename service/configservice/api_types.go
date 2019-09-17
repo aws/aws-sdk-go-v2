@@ -3,6 +3,7 @@
 package configservice
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -1223,6 +1224,51 @@ func (s EvaluationResultQualifier) String() string {
 	return awsutil.Prettify(s)
 }
 
+// The controls that AWS Config uses for executing remediations.
+type ExecutionControls struct {
+	_ struct{} `type:"structure"`
+
+	// A SsmControls object.
+	SsmControls *SsmControls `type:"structure"`
+}
+
+// String returns the string representation
+func (s ExecutionControls) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ExecutionControls) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ExecutionControls"}
+	if s.SsmControls != nil {
+		if err := s.SsmControls.Validate(); err != nil {
+			invalidParams.AddNested("SsmControls", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// List of each of the failed delete remediation exceptions with specific reasons.
+type FailedDeleteRemediationExceptionsBatch struct {
+	_ struct{} `type:"structure"`
+
+	// Returns remediation exception resource key object of the failed items.
+	FailedItems []RemediationExceptionResourceKey `min:"1" type:"list"`
+
+	// Returns a failure message for delete remediation exception. For example,
+	// AWS Config creates an exception due to an internal error.
+	FailureMessage *string `type:"string"`
+}
+
+// String returns the string representation
+func (s FailedDeleteRemediationExceptionsBatch) String() string {
+	return awsutil.Prettify(s)
+}
+
 // List of each of the failed remediations with specific reasons.
 type FailedRemediationBatch struct {
 	_ struct{} `type:"structure"`
@@ -1236,6 +1282,22 @@ type FailedRemediationBatch struct {
 
 // String returns the string representation
 func (s FailedRemediationBatch) String() string {
+	return awsutil.Prettify(s)
+}
+
+// List of each of the failed remediation exceptions with specific reasons.
+type FailedRemediationExceptionBatch struct {
+	_ struct{} `type:"structure"`
+
+	// Returns remediation exception resource key object of the failed items.
+	FailedItems []RemediationException `type:"list"`
+
+	// Returns a failure message. For example, the auto-remediation has failed.
+	FailureMessage *string `type:"string"`
+}
+
+// String returns the string representation
+func (s FailedRemediationExceptionBatch) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -1273,21 +1335,60 @@ func (s GroupedResourceCount) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Organization config rule creation or deletion status in each member account.
+// This includes the name of the rule, the status, error code and error message
+// when the rule creation or deletion failed.
 type MemberAccountStatus struct {
 	_ struct{} `type:"structure"`
 
+	// The 12-digit account ID of a member account.
+	//
 	// AccountId is a required field
 	AccountId *string `type:"string" required:"true"`
 
+	// The name of config rule deployed in the member account.
+	//
 	// ConfigRuleName is a required field
 	ConfigRuleName *string `min:"1" type:"string" required:"true"`
 
+	// An error code that is returned when config rule creation or deletion failed
+	// in the member account.
 	ErrorCode *string `type:"string"`
 
+	// An error message indicating that config rule account creation or deletion
+	// has failed due to an error in the member account.
 	ErrorMessage *string `type:"string"`
 
+	// The timestamp of the last status update.
 	LastUpdateTime *time.Time `type:"timestamp"`
 
+	// Indicates deployment status for config rule in the member account. When master
+	// account calls PutOrganizationConfigRule action for the first time, config
+	// rule status is created in the member account. When master account calls PutOrganizationConfigRule
+	// action for the second time, config rule status is updated in the member account.
+	// Config rule status is deleted when the master account deletes OrganizationConfigRule
+	// and disables service access for config-multiaccountsetup.amazonaws.com.
+	//
+	// AWS Config sets the state of the rule to:
+	//
+	//    * CREATE_SUCCESSFUL when config rule has been created in the member account.
+	//
+	//    * CREATE_IN_PROGRESS when config rule is being created in the member account.
+	//
+	//    * CREATE_FAILED when config rule creation has failed in the member account.
+	//
+	//    * DELETE_FAILED when config rule deletion has failed in the member account.
+	//
+	//    * DELETE_IN_PROGRESS when config rule is being deleted in the member account.
+	//
+	//    * DELETE_SUCCESSFUL when config rule has been deleted in the member account.
+	//
+	//    * UPDATE_SUCCESSFUL when config rule has been updated in the member account.
+	//
+	//    * UPDATE_IN_PROGRESS when config rule is being updated in the member account.
+	//
+	//    * UPDATE_FAILED when config rule deletion has failed in the member account.
+	//
 	// MemberAccountRuleStatus is a required field
 	MemberAccountRuleStatus MemberAccountRuleStatus `type:"string" required:"true" enum:"true"`
 }
@@ -1337,21 +1438,31 @@ func (s *OrganizationAggregationSource) Validate() error {
 	return nil
 }
 
+// An organization config rule that has information about config rules that
+// AWS Config creates in member accounts.
 type OrganizationConfigRule struct {
 	_ struct{} `type:"structure"`
 
+	// A comma-separated list of accounts excluded from organization config rule.
 	ExcludedAccounts []string `type:"list"`
 
+	// The timestamp of the last update.
 	LastUpdateTime *time.Time `type:"timestamp"`
 
+	// The Amazon Resource Name (ARN) of organization config rule.
+	//
 	// OrganizationConfigRuleArn is a required field
 	OrganizationConfigRuleArn *string `min:"1" type:"string" required:"true"`
 
+	// The name that you assign to organization config rule.
+	//
 	// OrganizationConfigRuleName is a required field
 	OrganizationConfigRuleName *string `min:"1" type:"string" required:"true"`
 
+	// An OrganizationCustomRuleMetadata object.
 	OrganizationCustomRuleMetadata *OrganizationCustomRuleMetadata `type:"structure"`
 
+	// An OrganizationManagedRuleMetadata object.
 	OrganizationManagedRuleMetadata *OrganizationManagedRuleMetadata `type:"structure"`
 }
 
@@ -1360,18 +1471,61 @@ func (s OrganizationConfigRule) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Returns the status for an organization config rule in an organization.
 type OrganizationConfigRuleStatus struct {
 	_ struct{} `type:"structure"`
 
+	// An error code that is returned when organization config rule creation or
+	// deletion has failed.
 	ErrorCode *string `type:"string"`
 
+	// An error message indicating that organization config rule creation or deletion
+	// failed due to an error.
 	ErrorMessage *string `type:"string"`
 
+	// The timestamp of the last update.
 	LastUpdateTime *time.Time `type:"timestamp"`
 
+	// The name that you assign to organization config rule.
+	//
 	// OrganizationConfigRuleName is a required field
 	OrganizationConfigRuleName *string `min:"1" type:"string" required:"true"`
 
+	// Indicates deployment status of an organization config rule. When master account
+	// calls PutOrganizationConfigRule action for the first time, config rule status
+	// is created in all the member accounts. When master account calls PutOrganizationConfigRule
+	// action for the second time, config rule status is updated in all the member
+	// accounts. Additionally, config rule status is updated when one or more member
+	// accounts join or leave an organization. Config rule status is deleted when
+	// the master account deletes OrganizationConfigRule in all the member accounts
+	// and disables service access for config-multiaccountsetup.amazonaws.com.
+	//
+	// AWS Config sets the state of the rule to:
+	//
+	//    * CREATE_SUCCESSFUL when an organization config rule has been successfully
+	//    created in all the member accounts.
+	//
+	//    * CREATE_IN_PROGRESS when an organization config rule creation is in progress.
+	//
+	//    * CREATE_FAILED when an organization config rule creation failed in one
+	//    or more member accounts within that organization.
+	//
+	//    * DELETE_FAILED when an organization config rule deletion failed in one
+	//    or more member accounts within that organization.
+	//
+	//    * DELETE_IN_PROGRESS when an organization config rule deletion is in progress.
+	//
+	//    * DELETE_SUCCESSFUL when an organization config rule has been successfully
+	//    deleted from all the member accounts.
+	//
+	//    * UPDATE_SUCCESSFUL when an organization config rule has been successfully
+	//    updated in all the member accounts.
+	//
+	//    * UPDATE_IN_PROGRESS when an organization config rule update is in progress.
+	//
+	//    * UPDATE_FAILED when an organization config rule update failed in one
+	//    or more member accounts within that organization.
+	//
 	// OrganizationRuleStatus is a required field
 	OrganizationRuleStatus OrganizationRuleStatus `type:"string" required:"true" enum:"true"`
 }
@@ -1381,27 +1535,64 @@ func (s OrganizationConfigRuleStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
+// An object that specifies organization custom rule metadata such as resource
+// type, resource ID of AWS resource, Lamdba function ARN, and organization
+// trigger types that trigger AWS Config to evaluate your AWS resources against
+// a rule. It also provides the frequency with which you want AWS Config to
+// run evaluations for the rule if the trigger type is periodic.
 type OrganizationCustomRuleMetadata struct {
 	_ struct{} `type:"structure"`
 
+	// The description that you provide for organization config rule.
 	Description *string `type:"string"`
 
+	// A string, in JSON format, that is passed to organization config rule Lambda
+	// function.
 	InputParameters *string `min:"1" type:"string"`
 
+	// The lambda function ARN.
+	//
 	// LambdaFunctionArn is a required field
 	LambdaFunctionArn *string `min:"1" type:"string" required:"true"`
 
+	// The maximum frequency with which AWS Config runs evaluations for a rule.
+	// Your custom rule is triggered when AWS Config delivers the configuration
+	// snapshot. For more information, see ConfigSnapshotDeliveryProperties.
+	//
+	// By default, rules with a periodic trigger are evaluated every 24 hours. To
+	// change the frequency, specify a valid value for the MaximumExecutionFrequency
+	// parameter.
 	MaximumExecutionFrequency MaximumExecutionFrequency `type:"string" enum:"true"`
 
+	// The type of notification that triggers AWS Config to run an evaluation for
+	// a rule. You can specify the following notification types:
+	//
+	//    * ConfigurationItemChangeNotification - Triggers an evaluation when AWS
+	//    Config delivers a configuration item as a result of a resource change.
+	//
+	//    * OversizedConfigurationItemChangeNotification - Triggers an evaluation
+	//    when AWS Config delivers an oversized configuration item. AWS Config may
+	//    generate this notification type when a resource changes and the notification
+	//    exceeds the maximum size allowed by Amazon SNS.
+	//
+	//    * ScheduledNotification - Triggers a periodic evaluation at the frequency
+	//    specified for MaximumExecutionFrequency.
+	//
 	// OrganizationConfigRuleTriggerTypes is a required field
 	OrganizationConfigRuleTriggerTypes []OrganizationConfigRuleTriggerType `type:"list" required:"true"`
 
+	// The ID of the AWS resource that was evaluated.
 	ResourceIdScope *string `min:"1" type:"string"`
 
+	// The type of the AWS resource that was evaluated.
 	ResourceTypesScope []string `type:"list"`
 
+	// One part of a key-value pair that make up a tag. A key is a general label
+	// that acts like a category for more specific tag values.
 	TagKeyScope *string `min:"1" type:"string"`
 
+	// The optional part of a key-value pair that make up a tag. A value acts as
+	// a descriptor within a tag category (key).
 	TagValueScope *string `min:"1" type:"string"`
 }
 
@@ -1443,24 +1634,47 @@ func (s *OrganizationCustomRuleMetadata) Validate() error {
 	return nil
 }
 
+// An object that specifies organization managed rule metadata such as resource
+// type and ID of AWS resource along with the rule identifier. It also provides
+// the frequency with which you want AWS Config to run evaluations for the rule
+// if the trigger type is periodic.
 type OrganizationManagedRuleMetadata struct {
 	_ struct{} `type:"structure"`
 
+	// The description that you provide for organization config rule.
 	Description *string `type:"string"`
 
+	// A string, in JSON format, that is passed to organization config rule Lambda
+	// function.
 	InputParameters *string `min:"1" type:"string"`
 
+	// The maximum frequency with which AWS Config runs evaluations for a rule.
+	// You are using an AWS managed rule that is triggered at a periodic frequency.
+	//
+	// By default, rules with a periodic trigger are evaluated every 24 hours. To
+	// change the frequency, specify a valid value for the MaximumExecutionFrequency
+	// parameter.
 	MaximumExecutionFrequency MaximumExecutionFrequency `type:"string" enum:"true"`
 
+	// The ID of the AWS resource that was evaluated.
 	ResourceIdScope *string `min:"1" type:"string"`
 
+	// The type of the AWS resource that was evaluated.
 	ResourceTypesScope []string `type:"list"`
 
+	// For organization config managed rules, a predefined identifier from a list.
+	// For example, IAM_PASSWORD_POLICY is a managed rule. To reference a managed
+	// rule, see Using AWS Managed Config Rules (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html).
+	//
 	// RuleIdentifier is a required field
 	RuleIdentifier *string `min:"1" type:"string" required:"true"`
 
+	// One part of a key-value pair that make up a tag. A key is a general label
+	// that acts like a category for more specific tag values.
 	TagKeyScope *string `min:"1" type:"string"`
 
+	// The optional part of a key-value pair that make up a tag. A value acts as
+	// a descriptor within a tag category (key).
 	TagValueScope *string `min:"1" type:"string"`
 }
 
@@ -1633,16 +1847,44 @@ func (s Relationship) String() string {
 type RemediationConfiguration struct {
 	_ struct{} `type:"structure"`
 
+	// Amazon Resource Name (ARN) of remediation configuration.
+	Arn *string `min:"1" type:"string"`
+
+	// The remediation is triggered automatically.
+	Automatic *bool `type:"boolean"`
+
 	// The name of the AWS Config rule.
 	//
 	// ConfigRuleName is a required field
 	ConfigRuleName *string `min:"1" type:"string" required:"true"`
+
+	// Name of the service that owns the service linked rule, if applicable.
+	CreatedByService *string `min:"1" type:"string"`
+
+	// An ExecutionControls object.
+	ExecutionControls *ExecutionControls `type:"structure"`
+
+	// The maximum number of failed attempts for auto-remediation. If you do not
+	// select a number, the default is 5.
+	//
+	// For example, if you specify MaximumAutomaticAttempts as 5 with RetryAttemptsSeconds
+	// as 50 seconds, AWS Config throws an exception after the 5th failed attempt
+	// within 50 seconds.
+	MaximumAutomaticAttempts *int64 `min:"1" type:"integer"`
 
 	// An object of the RemediationParameterValue.
 	Parameters map[string]RemediationParameterValue `type:"map"`
 
 	// The type of a resource.
 	ResourceType *string `type:"string"`
+
+	// Maximum time in seconds that AWS Config runs auto-remediation. If you do
+	// not select a number, the default is 60 seconds.
+	//
+	// For example, if you specify RetryAttemptsSeconds as 50 seconds and MaximumAutomaticAttempts
+	// as 5, AWS Config will run auto-remediations 5 times within 50 seconds before
+	// throwing an exception.
+	RetryAttemptSeconds *int64 `min:"1" type:"long"`
 
 	// Target ID is the name of the public document.
 	//
@@ -1666,12 +1908,24 @@ func (s RemediationConfiguration) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemediationConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemediationConfiguration"}
+	if s.Arn != nil && len(*s.Arn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 1))
+	}
 
 	if s.ConfigRuleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigRuleName"))
 	}
 	if s.ConfigRuleName != nil && len(*s.ConfigRuleName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ConfigRuleName", 1))
+	}
+	if s.CreatedByService != nil && len(*s.CreatedByService) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CreatedByService", 1))
+	}
+	if s.MaximumAutomaticAttempts != nil && *s.MaximumAutomaticAttempts < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaximumAutomaticAttempts", 1))
+	}
+	if s.RetryAttemptSeconds != nil && *s.RetryAttemptSeconds < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("RetryAttemptSeconds", 1))
 	}
 
 	if s.TargetId == nil {
@@ -1682,6 +1936,84 @@ func (s *RemediationConfiguration) Validate() error {
 	}
 	if len(s.TargetType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("TargetType"))
+	}
+	if s.ExecutionControls != nil {
+		if err := s.ExecutionControls.Validate(); err != nil {
+			invalidParams.AddNested("ExecutionControls", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Parameters != nil {
+		for i, v := range s.Parameters {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Parameters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// An object that represents the details about the remediation exception. The
+// details include the rule name, an explanation of an exception, the time when
+// the exception will be deleted, the resource ID, and resource type.
+type RemediationException struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the AWS Config rule.
+	//
+	// ConfigRuleName is a required field
+	ConfigRuleName *string `min:"1" type:"string" required:"true"`
+
+	// The time when the remediation exception will be deleted.
+	ExpirationTime *time.Time `type:"timestamp"`
+
+	// An explanation of an remediation exception.
+	Message *string `min:"1" type:"string"`
+
+	// The ID of the resource (for example., sg-xxxxxx).
+	//
+	// ResourceId is a required field
+	ResourceId *string `min:"1" type:"string" required:"true"`
+
+	// The type of a resource.
+	//
+	// ResourceType is a required field
+	ResourceType *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RemediationException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The details that identify a resource within AWS Config, including the resource
+// type and resource ID.
+type RemediationExceptionResourceKey struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the resource (for example., sg-xxxxxx).
+	ResourceId *string `min:"1" type:"string"`
+
+	// The type of a resource.
+	ResourceType *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s RemediationExceptionResourceKey) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RemediationExceptionResourceKey) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RemediationExceptionResourceKey"}
+	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
+	}
+	if s.ResourceType != nil && len(*s.ResourceType) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceType", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1757,6 +2089,26 @@ type RemediationParameterValue struct {
 // String returns the string representation
 func (s RemediationParameterValue) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RemediationParameterValue) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RemediationParameterValue"}
+	if s.ResourceValue != nil {
+		if err := s.ResourceValue.Validate(); err != nil {
+			invalidParams.AddNested("ResourceValue", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.StaticValue != nil {
+		if err := s.StaticValue.Validate(); err != nil {
+			invalidParams.AddNested("StaticValue", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // An object that contains the resource type and the number of resources.
@@ -1915,12 +2267,27 @@ type ResourceValue struct {
 	_ struct{} `type:"structure"`
 
 	// The value is a resource ID.
-	Value ResourceValueType `type:"string" enum:"true"`
+	//
+	// Value is a required field
+	Value ResourceValueType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
 func (s ResourceValue) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResourceValue) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceValue"}
+	if len(s.Value) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // An object with the name of the retention configuration and the retention
@@ -2104,12 +2471,53 @@ func (s SourceDetail) String() string {
 	return awsutil.Prettify(s)
 }
 
+// AWS Systems Manager (SSM) specific remediation controls.
+type SsmControls struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum percentage of remediation actions allowed to run in parallel
+	// on the non-compliant resources for that specific rule. You can specify a
+	// percentage, such as 10%. The default value is 10.
+	ConcurrentExecutionRatePercentage *int64 `min:"1" type:"integer"`
+
+	// The percentage of errors that are allowed before SSM stops running automations
+	// on non-compliant resources for that specific rule. You can specify a percentage
+	// of errors, for example 10%. If you do not specifiy a percentage, the default
+	// is 50%. For example, if you set the ErrorPercentage to 40% for 10 non-compliant
+	// resources, then SSM stops running the automations when the fifth error is
+	// received.
+	ErrorPercentage *int64 `min:"1" type:"integer"`
+}
+
+// String returns the string representation
+func (s SsmControls) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SsmControls) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SsmControls"}
+	if s.ConcurrentExecutionRatePercentage != nil && *s.ConcurrentExecutionRatePercentage < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("ConcurrentExecutionRatePercentage", 1))
+	}
+	if s.ErrorPercentage != nil && *s.ErrorPercentage < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("ErrorPercentage", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // The static value of the resource.
 type StaticValue struct {
 	_ struct{} `type:"structure"`
 
 	// A list of values. For example, the ARN of the assumed role.
-	Values []string `type:"list"`
+	//
+	// Values is a required field
+	Values []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2117,11 +2525,54 @@ func (s StaticValue) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StaticValue) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StaticValue"}
+
+	if s.Values == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Status filter object to filter results based on specific member account ID
+// or status type for an organization config rule.
 type StatusDetailFilters struct {
 	_ struct{} `type:"structure"`
 
+	// The 12-digit account ID of the member account within an organization.
 	AccountId *string `type:"string"`
 
+	// Indicates deployment status for config rule in the member account. When master
+	// account calls PutOrganizationConfigRule action for the first time, config
+	// rule status is created in the member account. When master account calls PutOrganizationConfigRule
+	// action for the second time, config rule status is updated in the member account.
+	// Config rule status is deleted when the master account deletes OrganizationConfigRule
+	// and disables service access for config-multiaccountsetup.amazonaws.com.
+	//
+	// AWS Config sets the state of the rule to:
+	//
+	//    * CREATE_SUCCESSFUL when config rule has been created in the member account.
+	//
+	//    * CREATE_IN_PROGRESS when config rule is being created in the member account.
+	//
+	//    * CREATE_FAILED when config rule creation has failed in the member account.
+	//
+	//    * DELETE_FAILED when config rule deletion has failed in the member account.
+	//
+	//    * DELETE_IN_PROGRESS when config rule is being deleted in the member account.
+	//
+	//    * DELETE_SUCCESSFUL when config rule has been deleted in the member account.
+	//
+	//    * UPDATE_SUCCESSFUL when config rule has been updated in the member account.
+	//
+	//    * UPDATE_IN_PROGRESS when config rule is being updated in the member account.
+	//
+	//    * UPDATE_FAILED when config rule deletion has failed in the member account.
 	MemberAccountRuleStatus MemberAccountRuleStatus `type:"string" enum:"true"`
 }
 

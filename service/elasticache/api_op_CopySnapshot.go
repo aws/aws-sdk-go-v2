@@ -13,6 +13,9 @@ import (
 type CopySnapshotInput struct {
 	_ struct{} `type:"structure"`
 
+	// The ID of the KMS key used to encrypt the target snapshot.
+	KmsKeyId *string `type:"string"`
+
 	// The name of an existing snapshot from which to make a copy.
 	//
 	// SourceSnapshotName is a required field

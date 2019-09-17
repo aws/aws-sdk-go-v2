@@ -55,7 +55,7 @@ func (s *DeleteDBClusterEndpointInput) Validate() error {
 type DeleteDBClusterEndpointOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The type associated with a custom endpoint. One of: READER, ANY.
+	// The type associated with a custom endpoint. One of: READER, WRITER, ANY.
 	CustomEndpointType *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) for the endpoint.

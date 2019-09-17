@@ -14,6 +14,8 @@ import (
 type DeleteOrganizationConfigRuleInput struct {
 	_ struct{} `type:"structure"`
 
+	// The name of organization config rule that you want to delete.
+	//
 	// OrganizationConfigRuleName is a required field
 	OrganizationConfigRuleName *string `min:"1" type:"string" required:"true"`
 }
@@ -53,6 +55,13 @@ const opDeleteOrganizationConfigRule = "DeleteOrganizationConfigRule"
 
 // DeleteOrganizationConfigRuleRequest returns a request value for making API operation for
 // AWS Config.
+//
+// Deletes the specified organization config rule and all of its evaluation
+// results from all member accounts in that organization. Only a master account
+// can delete an organization config rule.
+//
+// AWS Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion
+// is complete. You cannot update a rule while it is in this state.
 //
 //    // Example sending a request using DeleteOrganizationConfigRuleRequest.
 //    req := client.DeleteOrganizationConfigRuleRequest(params)

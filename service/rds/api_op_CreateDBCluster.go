@@ -124,7 +124,7 @@ type CreateDBClusterInput struct {
 	Engine *string `type:"string" required:"true"`
 
 	// The DB engine mode of the DB cluster, either provisioned, serverless, parallelquery,
-	// or global.
+	// global, or multimaster.
 	EngineMode *string `type:"string"`
 
 	// The version number of the database engine to use.

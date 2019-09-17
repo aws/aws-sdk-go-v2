@@ -269,6 +269,37 @@ func (s DnsServiceDiscovery) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object representing the duration between retry attempts.
+type Duration struct {
+	_ struct{} `type:"structure"`
+
+	Unit DurationUnit `locationName:"unit" type:"string" enum:"true"`
+
+	Value *int64 `locationName:"value" type:"long"`
+}
+
+// String returns the string representation
+func (s Duration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Duration) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Unit) > 0 {
+		v := s.Unit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "unit", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "value", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // An object representing the egress filter rules for a service mesh.
 type EgressFilter struct {
 	_ struct{} `type:"structure"`
@@ -553,6 +584,93 @@ func (s HealthCheckPolicy) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object that represents a retry policy.
+type HttpRetryPolicy struct {
+	_ struct{} `type:"structure"`
+
+	HttpRetryEvents []string `locationName:"httpRetryEvents" min:"1" type:"list"`
+
+	// MaxRetries is a required field
+	MaxRetries *int64 `locationName:"maxRetries" type:"long" required:"true"`
+
+	// An object representing the duration between retry attempts.
+	//
+	// PerRetryTimeout is a required field
+	PerRetryTimeout *Duration `locationName:"perRetryTimeout" type:"structure" required:"true"`
+
+	TcpRetryEvents []TcpRetryPolicyEvent `locationName:"tcpRetryEvents" min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s HttpRetryPolicy) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HttpRetryPolicy) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HttpRetryPolicy"}
+	if s.HttpRetryEvents != nil && len(s.HttpRetryEvents) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("HttpRetryEvents", 1))
+	}
+
+	if s.MaxRetries == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MaxRetries"))
+	}
+
+	if s.PerRetryTimeout == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PerRetryTimeout"))
+	}
+	if s.TcpRetryEvents != nil && len(s.TcpRetryEvents) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TcpRetryEvents", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HttpRetryPolicy) MarshalFields(e protocol.FieldEncoder) error {
+	if s.HttpRetryEvents != nil {
+		v := s.HttpRetryEvents
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "httpRetryEvents", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.MaxRetries != nil {
+		v := *s.MaxRetries
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxRetries", protocol.Int64Value(v), metadata)
+	}
+	if s.PerRetryTimeout != nil {
+		v := s.PerRetryTimeout
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "perRetryTimeout", v, metadata)
+	}
+	if s.TcpRetryEvents != nil {
+		v := s.TcpRetryEvents
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tcpRetryEvents", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // An object representing the HTTP routing specification for a route.
 type HttpRoute struct {
 	_ struct{} `type:"structure"`
@@ -568,6 +686,9 @@ type HttpRoute struct {
 	//
 	// Match is a required field
 	Match *HttpRouteMatch `locationName:"match" type:"structure" required:"true"`
+
+	// An object that represents a retry policy.
+	RetryPolicy *HttpRetryPolicy `locationName:"retryPolicy" type:"structure"`
 }
 
 // String returns the string representation
@@ -596,6 +717,11 @@ func (s *HttpRoute) Validate() error {
 			invalidParams.AddNested("Match", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.RetryPolicy != nil {
+		if err := s.RetryPolicy.Validate(); err != nil {
+			invalidParams.AddNested("RetryPolicy", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -616,6 +742,12 @@ func (s HttpRoute) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "match", v, metadata)
+	}
+	if s.RetryPolicy != nil {
+		v := s.RetryPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "retryPolicy", v, metadata)
 	}
 	return nil
 }

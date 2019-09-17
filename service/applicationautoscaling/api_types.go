@@ -302,6 +302,10 @@ type ScalableTarget struct {
 	//
 	// ServiceNamespace is a required field
 	ServiceNamespace ServiceNamespace `type:"string" required:"true" enum:"true"`
+
+	// Specifies whether the scaling activities for a scalable target are in a suspended
+	// state.
+	SuspendedState *SuspendedState `type:"structure"`
 }
 
 // String returns the string representation
@@ -857,6 +861,32 @@ func (s *StepScalingPolicyConfiguration) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Specifies whether the scaling activities for a scalable target are in a suspended
+// state.
+type SuspendedState struct {
+	_ struct{} `type:"structure"`
+
+	// Whether scale in by a target tracking scaling policy or a step scaling policy
+	// is suspended. Set the value to true if you don't want Application Auto Scaling
+	// to remove capacity when a scaling policy is triggered. The default is false.
+	DynamicScalingInSuspended *bool `type:"boolean"`
+
+	// Whether scale out by a target tracking scaling policy or a step scaling policy
+	// is suspended. Set the value to true if you don't want Application Auto Scaling
+	// to add capacity when a scaling policy is triggered. The default is false.
+	DynamicScalingOutSuspended *bool `type:"boolean"`
+
+	// Whether scheduled scaling is suspended. Set the value to true if you don't
+	// want Application Auto Scaling to add or remove capacity by initiating scheduled
+	// actions. The default is false.
+	ScheduledScalingSuspended *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s SuspendedState) String() string {
+	return awsutil.Prettify(s)
 }
 
 // Represents a target tracking scaling policy configuration to use with Application

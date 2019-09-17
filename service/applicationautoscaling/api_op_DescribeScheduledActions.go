@@ -172,6 +172,12 @@ func (c *Client) DescribeScheduledActionsRequest(input *DescribeScheduledActions
 		Name:       opDescribeScheduledActions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -204,6 +210,53 @@ func (r DescribeScheduledActionsRequest) Send(ctx context.Context) (*DescribeSch
 	}
 
 	return resp, nil
+}
+
+// NewDescribeScheduledActionsRequestPaginator returns a paginator for DescribeScheduledActions.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.DescribeScheduledActionsRequest(input)
+//   p := applicationautoscaling.NewDescribeScheduledActionsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewDescribeScheduledActionsPaginator(req DescribeScheduledActionsRequest) DescribeScheduledActionsPaginator {
+	return DescribeScheduledActionsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *DescribeScheduledActionsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// DescribeScheduledActionsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeScheduledActionsPaginator struct {
+	aws.Pager
+}
+
+func (p *DescribeScheduledActionsPaginator) CurrentPage() *DescribeScheduledActionsOutput {
+	return p.Pager.CurrentPage().(*DescribeScheduledActionsOutput)
 }
 
 // DescribeScheduledActionsResponse is the response type for the

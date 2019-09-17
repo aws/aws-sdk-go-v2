@@ -15,12 +15,28 @@ type DeclineInvitationsInput struct {
 
 	// A list of account IDs that specify the accounts that invitations to Security
 	// Hub are declined from.
-	AccountIds []string `type:"list"`
+	//
+	// AccountIds is a required field
+	AccountIds []string `type:"list" required:"true"`
 }
 
 // String returns the string representation
 func (s DeclineInvitationsInput) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeclineInvitationsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeclineInvitationsInput"}
+
+	if s.AccountIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AccountIds"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.

@@ -46,7 +46,7 @@ type ActivityListItem struct {
 	//
 	// A name must not contain:
 	//
-	//    * whitespace
+	//    * white space
 	//
 	//    * brackets < > { } [ ]
 	//
@@ -195,7 +195,7 @@ type ExecutionListItem struct {
 	//
 	// A name must not contain:
 	//
-	//    * whitespace
+	//    * white space
 	//
 	//    * brackets < > { } [ ]
 	//
@@ -341,6 +341,21 @@ type HistoryEvent struct {
 	// Contains details about a lambda function timeout that occurred during an
 	// execution.
 	LambdaFunctionTimedOutEventDetails *LambdaFunctionTimedOutEventDetails `locationName:"lambdaFunctionTimedOutEventDetails" type:"structure"`
+
+	// Contains details about an iteration of a Map state that was aborted.
+	MapIterationAbortedEventDetails *MapIterationEventDetails `locationName:"mapIterationAbortedEventDetails" type:"structure"`
+
+	// Contains details about an iteration of a Map state that failed.
+	MapIterationFailedEventDetails *MapIterationEventDetails `locationName:"mapIterationFailedEventDetails" type:"structure"`
+
+	// Contains details about an iteration of a Map state that was started.
+	MapIterationStartedEventDetails *MapIterationEventDetails `locationName:"mapIterationStartedEventDetails" type:"structure"`
+
+	// Contains details about an iteration of a Map state that succeeded.
+	MapIterationSucceededEventDetails *MapIterationEventDetails `locationName:"mapIterationSucceededEventDetails" type:"structure"`
+
+	// Contains details about Map state that was started.
+	MapStateStartedEventDetails *MapStateStartedEventDetails `locationName:"mapStateStartedEventDetails" type:"structure"`
 
 	// The id of the previous event.
 	PreviousEventId *int64 `locationName:"previousEventId" type:"long"`
@@ -492,6 +507,35 @@ func (s LambdaFunctionTimedOutEventDetails) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Contains details about an iteration of a Map state.
+type MapIterationEventDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The index of the array belonging to the Map state iteration.
+	Index *int64 `locationName:"index" type:"integer"`
+
+	// The name of the iteration’s parent Map state.
+	Name *string `locationName:"name" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s MapIterationEventDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Details about a Map state that was started.
+type MapStateStartedEventDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The size of the array for Map state iterations.
+	Length *int64 `locationName:"length" type:"integer"`
+}
+
+// String returns the string representation
+func (s MapStateStartedEventDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Contains details about a state entered during an execution.
 type StateEnteredEventDetails struct {
 	_ struct{} `type:"structure"`
@@ -518,7 +562,7 @@ type StateExitedEventDetails struct {
 	//
 	// A name must not contain:
 	//
-	//    * whitespace
+	//    * white space
 	//
 	//    * brackets < > { } [ ]
 	//
@@ -553,7 +597,7 @@ type StateMachineListItem struct {
 	//
 	// A name must not contain:
 	//
-	//    * whitespace
+	//    * white space
 	//
 	//    * brackets < > { } [ ]
 	//
@@ -579,6 +623,14 @@ func (s StateMachineListItem) String() string {
 
 // Tags are key-value pairs that can be associated with Step Functions state
 // machines and activities.
+//
+// An array of key-value pairs. For more information, see Using Cost Allocation
+// Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+// in the AWS Billing and Cost Management User Guide, and Controlling Access
+// Using IAM Tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html).
+//
+// Tags may only contain Unicode letters, digits, white space, or these symbols:
+// _ . : / = + - @.
 type Tag struct {
 	_ struct{} `type:"structure"`
 

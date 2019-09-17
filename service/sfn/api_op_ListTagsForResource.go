@@ -59,6 +59,9 @@ const opListTagsForResource = "ListTagsForResource"
 //
 // List tags for a given resource.
 //
+// Tags may only contain Unicode letters, digits, white space, or these symbols:
+// _ . : / = + - @.
+//
 //    // Example sending a request using ListTagsForResourceRequest.
 //    req := client.ListTagsForResourceRequest(params)
 //    resp, err := req.Send(context.TODO())

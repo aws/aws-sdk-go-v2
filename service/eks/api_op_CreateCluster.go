@@ -52,6 +52,10 @@ type CreateClusterInput struct {
 	// RoleArn is a required field
 	RoleArn *string `locationName:"roleArn" type:"string" required:"true"`
 
+	// The metadata to apply to the cluster to assist with categorization and organization.
+	// Each tag consists of a key and an optional value, both of which you define.
+	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
+
 	// The desired Kubernetes version for your cluster. If you don't specify a value
 	// here, the latest version available in Amazon EKS is used.
 	Version *string `locationName:"version" type:"string"`
@@ -79,6 +83,9 @@ func (s *CreateClusterInput) Validate() error {
 
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -126,6 +133,18 @@ func (s CreateClusterInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	if s.Version != nil {
 		v := *s.Version

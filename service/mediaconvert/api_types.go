@@ -319,9 +319,8 @@ type AiffSettings struct {
 	// quality for this audio track.
 	BitDepth *int64 `locationName:"bitDepth" min:"16" type:"integer"`
 
-	// Set Channels to specify the number of channels in this output audio track.
-	// Choosing Mono in the console will give you 1 output channel; choosing Stereo
-	// will give you 2. In the API, valid values are 1 and 2.
+	// Specify the number of channels in this output audio track. Valid values are
+	// 1 and even numbers up to 64. For example, 1, 2, 4, 6, and so on, up to 64.
 	Channels *int64 `locationName:"channels" min:"1" type:"integer"`
 
 	// Sample rate in hz.
@@ -379,9 +378,21 @@ func (s AiffSettings) MarshalFields(e protocol.FieldEncoder) error {
 type AncillarySourceSettings struct {
 	_ struct{} `type:"structure"`
 
+	// Specify whether this set of input captions appears in your outputs in both
+	// 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes
+	// the captions data in two ways: it passes the 608 data through using the 608
+	// compatibility bytes fields of the 708 wrapper, and it also translates the
+	// 608 data into 708.
+	Convert608To708 AncillaryConvert608To708 `locationName:"convert608To708" type:"string" enum:"true"`
+
 	// Specifies the 608 channel number in the ancillary data track from which to
 	// extract captions. Unused for passthrough.
 	SourceAncillaryChannelNumber *int64 `locationName:"sourceAncillaryChannelNumber" min:"1" type:"integer"`
+
+	// By default, the service terminates any unterminated captions at the end of
+	// each input. If you want the caption to continue onto your next input, disable
+	// this setting.
+	TerminateCaptions AncillaryTerminateCaptions `locationName:"terminateCaptions" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -404,11 +415,23 @@ func (s *AncillarySourceSettings) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s AncillarySourceSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Convert608To708) > 0 {
+		v := s.Convert608To708
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "convert608To708", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.SourceAncillaryChannelNumber != nil {
 		v := *s.SourceAncillaryChannelNumber
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "sourceAncillaryChannelNumber", protocol.Int64Value(v), metadata)
+	}
+	if len(s.TerminateCaptions) > 0 {
+		v := s.TerminateCaptions
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "terminateCaptions", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -1488,7 +1511,7 @@ type CaptionDestinationSettings struct {
 
 	// Specify the format for this set of captions on this output. The default format
 	// is embedded without SCTE-20. Other options are embedded with SCTE-20, burn-in,
-	// DVB-sub, SCC, SRT, teletext, TTML, and web-VTT. If you are using SCTE-20,
+	// DVB-sub, IMSC, SCC, SRT, teletext, TTML, and web-VTT. If you are using SCTE-20,
 	// choose SCTE-20 plus embedded (SCTE20_PLUS_EMBEDDED) to create an output that
 	// complies with the SCTE-43 spec. To create a non-compliant output where the
 	// embedded captions come first, choose Embedded plus SCTE-20 (EMBEDDED_PLUS_SCTE20).
@@ -1500,6 +1523,9 @@ type CaptionDestinationSettings struct {
 	// Settings specific to embedded/ancillary caption outputs, including 608/708
 	// Channel destination number.
 	EmbeddedDestinationSettings *EmbeddedDestinationSettings `locationName:"embeddedDestinationSettings" type:"structure"`
+
+	// Settings specific to IMSC caption outputs.
+	ImscDestinationSettings *ImscDestinationSettings `locationName:"imscDestinationSettings" type:"structure"`
 
 	// Settings for SCC caption output.
 	SccDestinationSettings *SccDestinationSettings `locationName:"sccDestinationSettings" type:"structure"`
@@ -1573,6 +1599,12 @@ func (s CaptionDestinationSettings) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "embeddedDestinationSettings", v, metadata)
 	}
+	if s.ImscDestinationSettings != nil {
+		v := s.ImscDestinationSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "imscDestinationSettings", v, metadata)
+	}
 	if s.SccDestinationSettings != nil {
 		v := s.SccDestinationSettings
 
@@ -1615,8 +1647,9 @@ type CaptionSelector struct {
 	// extract a specific language with pass-through captions.
 	LanguageCode LanguageCode `locationName:"languageCode" type:"string" enum:"true"`
 
-	// Source settings (SourceSettings) contains the group of settings for captions
-	// in the input.
+	// If your input captions are SCC, TTML, STL, SMI, SRT, or IMSC in an xml file,
+	// specify the URI of the input captions source file. If your input captions
+	// are IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings.
 	SourceSettings *CaptionSourceSettings `locationName:"sourceSettings" type:"structure"`
 }
 
@@ -1666,8 +1699,9 @@ func (s CaptionSelector) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Source settings (SourceSettings) contains the group of settings for captions
-// in the input.
+// If your input captions are SCC, TTML, STL, SMI, SRT, or IMSC in an xml file,
+// specify the URI of the input captions source file. If your input captions
+// are IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings.
 type CaptionSourceSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -1680,7 +1714,9 @@ type CaptionSourceSettings struct {
 	// Settings for embedded captions Source
 	EmbeddedSourceSettings *EmbeddedSourceSettings `locationName:"embeddedSourceSettings" type:"structure"`
 
-	// Settings for File-based Captions in Source
+	// If your input captions are SCC, SMI, SRT, STL, TTML, or IMSC 1.1 in an xml
+	// file, specify the URI of the input caption source file. If your caption source
+	// is IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings.
 	FileSourceSettings *FileSourceSettings `locationName:"fileSourceSettings" type:"structure"`
 
 	// Use Source (SourceType) to identify the format of your input captions. The
@@ -1690,8 +1726,10 @@ type CaptionSourceSettings struct {
 	// Settings specific to Teletext caption sources, including Page number.
 	TeletextSourceSettings *TeletextSourceSettings `locationName:"teletextSourceSettings" type:"structure"`
 
-	// Settings specific to caption sources that are specfied by track number. Sources
-	// include IMSC in IMF.
+	// Settings specific to caption sources that are specified by track number.
+	// Currently, this is only IMSC captions in an IMF package. If your caption
+	// source is IMSC 1.1 in a separate xml file, use FileSourceSettings instead
+	// of TrackSourceSettings.
 	TrackSourceSettings *TrackSourceSettings `locationName:"trackSourceSettings" type:"structure"`
 }
 
@@ -1829,16 +1867,17 @@ type CmafEncryptionSettings struct {
 	// segment number by default.
 	ConstantInitializationVector *string `locationName:"constantInitializationVector" min:"32" type:"string"`
 
-	// For DRM with CMAF, the encryption type is always sample AES.
+	// Specify the encryption scheme that you want the service to use when encrypting
+	// your CMAF segments. Choose AES-CBC subsample (SAMPLE-AES) or AES_CTR (AES-CTR).
 	EncryptionMethod CmafEncryptionType `locationName:"encryptionMethod" type:"string" enum:"true"`
 
 	// When you use DRM with CMAF outputs, choose whether the service writes the
 	// 128-bit encryption initialization vector in the HLS and DASH manifests.
 	InitializationVectorInManifest CmafInitializationVectorInManifest `locationName:"initializationVectorInManifest" type:"string" enum:"true"`
 
-	// Use these settings when doing DRM encryption with a SPEKE-compliant key provider,
-	// if your output group type is CMAF. If your output group type is HLS, MS Smooth,
-	// or DASH, use the SpekeKeyProvider settings instead.
+	// If your output group type is CMAF, use these settings when doing DRM encryption
+	// with a SPEKE-compliant key provider. If your output group type is HLS, DASH,
+	// or Microsoft Smooth, use the SpekeKeyProvider settings instead.
 	SpekeKeyProvider *SpekeKeyProviderCmaf `locationName:"spekeKeyProvider" type:"structure"`
 
 	// Use these settings to set up encryption with a static key provider.
@@ -2344,9 +2383,9 @@ type DashIsoEncryptionSettings struct {
 	// the access unit delimiter and will leave the SEI NAL units unencrypted.
 	PlaybackDeviceCompatibility DashIsoPlaybackDeviceCompatibility `locationName:"playbackDeviceCompatibility" type:"string" enum:"true"`
 
-	// Use these settings when doing DRM encryption with a SPEKE-compliant key provider,
-	// if your output group type is HLS, MS Smooth, or DASH. If your output group
-	// type is CMAF, use the SpekeKeyProviderCmaf settings instead.
+	// If your output group type is HLS, DASH, or Microsoft Smooth, use these settings
+	// when doing DRM encryption with a SPEKE-compliant key provider. If your output
+	// group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
 	SpekeKeyProvider *SpekeKeyProvider `locationName:"spekeKeyProvider" type:"structure"`
 }
 
@@ -3520,9 +3559,9 @@ type EmbeddedDestinationSettings struct {
 
 	// Ignore this setting unless your input captions are SCC format and your output
 	// captions are embedded in the video stream. Specify a CC number for each captions
-	// channel in this output. If you have two channels, pick CC numbers that aren't
-	// in the same field. For example, choose 1 and 3. For more information, see
-	// https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.
+	// channel in this output. If you have two channels, choose CC numbers that
+	// aren't in the same field. For example, choose 1 and 3. For more information,
+	// see https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.
 	Destination608ChannelNumber *int64 `locationName:"destination608ChannelNumber" min:"1" type:"integer"`
 
 	// Ignore this setting unless your input captions are SCC format and you want
@@ -3531,7 +3570,7 @@ type EmbeddedDestinationSettings struct {
 	// number for each channel. To use this setting, also set Force 608 to 708 upconvert
 	// (Convert608To708) to Upconvert (UPCONVERT) in your input captions selector
 	// settings. If you choose to upconvert but don't specify a 708 service number,
-	// MediaConvert uses the number you specify for CC channel number (destination608ChannelNumber)
+	// MediaConvert uses the number that you specify for CC channel number (destination608ChannelNumber)
 	// for the 708 service number. For more information, see https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded.
 	Destination708ServiceNumber *int64 `locationName:"destination708ServiceNumber" min:"1" type:"integer"`
 }
@@ -3578,9 +3617,11 @@ func (s EmbeddedDestinationSettings) MarshalFields(e protocol.FieldEncoder) erro
 type EmbeddedSourceSettings struct {
 	_ struct{} `type:"structure"`
 
-	// When set to UPCONVERT, 608 data is both passed through via the "608 compatibility
-	// bytes" fields of the 708 wrapper as well as translated into 708. 708 data
-	// present in the source content will be discarded.
+	// Specify whether this set of input captions appears in your outputs in both
+	// 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes
+	// the captions data in two ways: it passes the 608 data through using the 608
+	// compatibility bytes fields of the 708 wrapper, and it also translates the
+	// 608 data into 708.
 	Convert608To708 EmbeddedConvert608To708 `locationName:"convert608To708" type:"string" enum:"true"`
 
 	// Specifies the 608/708 channel number within the video track from which to
@@ -3590,6 +3631,11 @@ type EmbeddedSourceSettings struct {
 	// Specifies the video track index used for extracting captions. The system
 	// only supports one input video track, so this should always be set to '1'.
 	Source608TrackNumber *int64 `locationName:"source608TrackNumber" min:"1" type:"integer"`
+
+	// By default, the service terminates any unterminated captions at the end of
+	// each input. If you want the caption to continue onto your next input, disable
+	// this setting.
+	TerminateCaptions EmbeddedTerminateCaptions `locationName:"terminateCaptions" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3632,6 +3678,12 @@ func (s EmbeddedSourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "source608TrackNumber", protocol.Int64Value(v), metadata)
+	}
+	if len(s.TerminateCaptions) > 0 {
+		v := s.TerminateCaptions
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "terminateCaptions", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -3835,17 +3887,21 @@ func (s FileGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Settings for File-based Captions in Source
+// If your input captions are SCC, SMI, SRT, STL, TTML, or IMSC 1.1 in an xml
+// file, specify the URI of the input caption source file. If your caption source
+// is IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings.
 type FileSourceSettings struct {
 	_ struct{} `type:"structure"`
 
-	// If set to UPCONVERT, 608 caption data is both passed through via the "608
-	// compatibility bytes" fields of the 708 wrapper as well as translated into
-	// 708. 708 data present in the source content will be discarded.
+	// Specify whether this set of input captions appears in your outputs in both
+	// 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes
+	// the captions data in two ways: it passes the 608 data through using the 608
+	// compatibility bytes fields of the 708 wrapper, and it also translates the
+	// 608 data into 708.
 	Convert608To708 FileSourceConvert608To708 `locationName:"convert608To708" type:"string" enum:"true"`
 
 	// External caption file used for loading captions. Accepted file extensions
-	// are 'scc', 'ttml', 'dfxp', 'stl', 'srt', and 'smi'.
+	// are 'scc', 'ttml', 'dfxp', 'stl', 'srt', 'xml', and 'smi'.
 	SourceFile *string `locationName:"sourceFile" min:"14" type:"string"`
 
 	// Specifies a time delta in seconds to offset the captions from the source
@@ -5314,9 +5370,9 @@ type HlsEncryptionSettings struct {
 	// playlist. This allows for offline Apple HLS FairPlay content protection.
 	OfflineEncrypted HlsOfflineEncrypted `locationName:"offlineEncrypted" type:"string" enum:"true"`
 
-	// Use these settings when doing DRM encryption with a SPEKE-compliant key provider,
-	// if your output group type is HLS, MS Smooth, or DASH. If your output group
-	// type is CMAF, use the SpekeKeyProviderCmaf settings instead.
+	// If your output group type is HLS, DASH, or Microsoft Smooth, use these settings
+	// when doing DRM encryption with a SPEKE-compliant key provider. If your output
+	// group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
 	SpekeKeyProvider *SpekeKeyProvider `locationName:"spekeKeyProvider" type:"structure"`
 
 	// Use these settings to set up encryption with a static key provider.
@@ -5882,6 +5938,33 @@ func (s ImageInserter) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Settings specific to IMSC caption outputs.
+type ImscDestinationSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Keep this setting enabled to have MediaConvert use the font style and position
+	// information from the captions source in the output. This option is available
+	// only when your input captions are CFF-TT, IMSC, SMPTE-TT, or TTML. Disable
+	// this setting for simplified output captions.
+	StylePassthrough ImscStylePassthrough `locationName:"stylePassthrough" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ImscDestinationSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ImscDestinationSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.StylePassthrough) > 0 {
+		v := s.StylePassthrough
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "stylePassthrough", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Specifies media input
 type Input struct {
 	_ struct{} `type:"structure"`
@@ -5987,14 +6070,23 @@ type Input struct {
 	// service automatically detects it.
 	SupplementalImps []string `locationName:"supplementalImps" type:"list"`
 
-	// Timecode source under input settings (InputTimecodeSource) only affects the
-	// behavior of features that apply to a single input at a time, such as input
-	// clipping and synchronizing some captions formats. Use this setting to specify
-	// whether the service counts frames by timecodes embedded in the video (EMBEDDED)
-	// or by starting the first frame at zero (ZEROBASED). In both cases, the timecode
-	// format is HH:MM:SS:FF or HH:MM:SS;FF, where FF is the frame number. Only
-	// set this to EMBEDDED if your source video has embedded timecodes.
+	// Use this Timecode source setting, located under the input settings (InputTimecodeSource),
+	// to specify how the service counts input video frames. This input frame count
+	// affects only the behavior of features that apply to a single input at a time,
+	// such as input clipping and synchronizing some captions formats. Choose Embedded
+	// (EMBEDDED) to use the timecodes in your input video. Choose Start at zero
+	// (ZEROBASED) to start the first frame at zero. Choose Specified start (SPECIFIEDSTART)
+	// to start the first frame at the timecode that you specify in the setting
+	// Start timecode (timecodeStart). If you don't specify a value for Timecode
+	// source, the service will use Embedded by default. For more information about
+	// timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.
 	TimecodeSource InputTimecodeSource `locationName:"timecodeSource" type:"string" enum:"true"`
+
+	// Specify the timecode that you want the service to use for this input's initial
+	// frame. To use this setting, you must set the Timecode source setting, located
+	// under the input settings (InputTimecodeSource), to Specified start (SPECIFIEDSTART).
+	// For more information about timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.
+	TimecodeStart *string `locationName:"timecodeStart" min:"11" type:"string"`
 
 	// Selector for video.
 	VideoSelector *VideoSelector `locationName:"videoSelector" type:"structure"`
@@ -6013,6 +6105,9 @@ func (s *Input) Validate() error {
 	}
 	if s.ProgramNumber != nil && *s.ProgramNumber < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("ProgramNumber", 1))
+	}
+	if s.TimecodeStart != nil && len(*s.TimecodeStart) < 11 {
+		invalidParams.Add(aws.NewErrParamMinLen("TimecodeStart", 11))
 	}
 	if s.AudioSelectors != nil {
 		for i, v := range s.AudioSelectors {
@@ -6193,6 +6288,12 @@ func (s Input) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "timecodeSource", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.TimecodeStart != nil {
+		v := *s.TimecodeStart
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timecodeStart", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.VideoSelector != nil {
 		v := s.VideoSelector
@@ -6418,14 +6519,23 @@ type InputTemplate struct {
 	// and video. * Use PSI - Scan only PSI data.
 	PsiControl InputPsiControl `locationName:"psiControl" type:"string" enum:"true"`
 
-	// Timecode source under input settings (InputTimecodeSource) only affects the
-	// behavior of features that apply to a single input at a time, such as input
-	// clipping and synchronizing some captions formats. Use this setting to specify
-	// whether the service counts frames by timecodes embedded in the video (EMBEDDED)
-	// or by starting the first frame at zero (ZEROBASED). In both cases, the timecode
-	// format is HH:MM:SS:FF or HH:MM:SS;FF, where FF is the frame number. Only
-	// set this to EMBEDDED if your source video has embedded timecodes.
+	// Use this Timecode source setting, located under the input settings (InputTimecodeSource),
+	// to specify how the service counts input video frames. This input frame count
+	// affects only the behavior of features that apply to a single input at a time,
+	// such as input clipping and synchronizing some captions formats. Choose Embedded
+	// (EMBEDDED) to use the timecodes in your input video. Choose Start at zero
+	// (ZEROBASED) to start the first frame at zero. Choose Specified start (SPECIFIEDSTART)
+	// to start the first frame at the timecode that you specify in the setting
+	// Start timecode (timecodeStart). If you don't specify a value for Timecode
+	// source, the service will use Embedded by default. For more information about
+	// timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.
 	TimecodeSource InputTimecodeSource `locationName:"timecodeSource" type:"string" enum:"true"`
+
+	// Specify the timecode that you want the service to use for this input's initial
+	// frame. To use this setting, you must set the Timecode source setting, located
+	// under the input settings (InputTimecodeSource), to Specified start (SPECIFIEDSTART).
+	// For more information about timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.
+	TimecodeStart *string `locationName:"timecodeStart" min:"11" type:"string"`
 
 	// Selector for video.
 	VideoSelector *VideoSelector `locationName:"videoSelector" type:"structure"`
@@ -6444,6 +6554,9 @@ func (s *InputTemplate) Validate() error {
 	}
 	if s.ProgramNumber != nil && *s.ProgramNumber < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("ProgramNumber", 1))
+	}
+	if s.TimecodeStart != nil && len(*s.TimecodeStart) < 11 {
+		invalidParams.Add(aws.NewErrParamMinLen("TimecodeStart", 11))
 	}
 	if s.AudioSelectors != nil {
 		for i, v := range s.AudioSelectors {
@@ -6595,6 +6708,12 @@ func (s InputTemplate) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "timecodeSource", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.TimecodeStart != nil {
+		v := *s.TimecodeStart
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timecodeStart", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.VideoSelector != nil {
 		v := s.VideoSelector
@@ -6829,6 +6948,12 @@ type Job struct {
 	// Settings is a required field
 	Settings *JobSettings `locationName:"settings" type:"structure" required:"true"`
 
+	// Enable this setting when you run a test job to estimate how many reserved
+	// transcoding slots (RTS) you need. When this is enabled, MediaConvert runs
+	// your job from an on-demand queue with similar performance to what you will
+	// see with one RTS in a reserved queue. This setting is disabled by default.
+	SimulateReservedQueue SimulateReservedQueue `locationName:"simulateReservedQueue" type:"string" enum:"true"`
+
 	// A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR.
 	Status JobStatus `locationName:"status" type:"string" enum:"true"`
 
@@ -6956,6 +7081,12 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "settings", v, metadata)
+	}
+	if len(s.SimulateReservedQueue) > 0 {
+		v := s.SimulateReservedQueue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "simulateReservedQueue", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status
@@ -8977,9 +9108,9 @@ func (s Mpeg2Settings) MarshalFields(e protocol.FieldEncoder) error {
 type MsSmoothEncryptionSettings struct {
 	_ struct{} `type:"structure"`
 
-	// Use these settings when doing DRM encryption with a SPEKE-compliant key provider,
-	// if your output group type is HLS, MS Smooth, or DASH. If your output group
-	// type is CMAF, use the SpekeKeyProviderCmaf settings instead.
+	// If your output group type is HLS, DASH, or Microsoft Smooth, use these settings
+	// when doing DRM encryption with a SPEKE-compliant key provider. If your output
+	// group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
 	SpekeKeyProvider *SpekeKeyProvider `locationName:"spekeKeyProvider" type:"structure"`
 }
 
@@ -9310,10 +9441,11 @@ type NoiseReducerTemporalFilterSettings struct {
 	// at the cost of bit rate.
 	Speed *int64 `locationName:"speed" type:"integer"`
 
-	// Relative strength of noise reducing filter. Higher values produce stronger
-	// filtering. Recommended Range: * [0 .. 2] for complexity reduction with minimal
-	// sharpness loss * [2 .. 8] for complexity reduction with image preservation
-	// * [8 .. 16] for noise reduction. Reduce noise combined high complexity reduction
+	// Specify the strength of the noise reducing filter on this output. Higher
+	// values produce stronger filtering. We recommend the following value ranges,
+	// depending on the result that you want: * 0-2 for complexity reduction with
+	// minimal sharpness loss * 2-8 for complexity reduction with image preservation
+	// * 8-16 for a high level of complexity reduction
 	Strength *int64 `locationName:"strength" type:"integer"`
 }
 
@@ -10405,7 +10537,7 @@ type RemixSettings struct {
 	ChannelsIn *int64 `locationName:"channelsIn" min:"1" type:"integer"`
 
 	// Specify the number of channels in this output after remixing. Valid values:
-	// 1, 2, 4, 6, 8
+	// 1, 2, 4, 6, 8... 64. (1 and even numbers to 64.)
 	ChannelsOut *int64 `locationName:"channelsOut" min:"1" type:"integer"`
 }
 
@@ -10755,9 +10887,9 @@ func (s SccDestinationSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Use these settings when doing DRM encryption with a SPEKE-compliant key provider,
-// if your output group type is HLS, MS Smooth, or DASH. If your output group
-// type is CMAF, use the SpekeKeyProviderCmaf settings instead.
+// If your output group type is HLS, DASH, or Microsoft Smooth, use these settings
+// when doing DRM encryption with a SPEKE-compliant key provider. If your output
+// group type is CMAF, use the SpekeKeyProviderCmaf settings instead.
 type SpekeKeyProvider struct {
 	_ struct{} `type:"structure"`
 
@@ -10820,9 +10952,9 @@ func (s SpekeKeyProvider) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Use these settings when doing DRM encryption with a SPEKE-compliant key provider,
-// if your output group type is CMAF. If your output group type is HLS, MS Smooth,
-// or DASH, use the SpekeKeyProvider settings instead.
+// If your output group type is CMAF, use these settings when doing DRM encryption
+// with a SPEKE-compliant key provider. If your output group type is HLS, DASH,
+// or Microsoft Smooth, use the SpekeKeyProvider settings instead.
 type SpekeKeyProviderCmaf struct {
 	_ struct{} `type:"structure"`
 
@@ -11277,8 +11409,10 @@ func (s Timing) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Settings specific to caption sources that are specfied by track number. Sources
-// include IMSC in IMF.
+// Settings specific to caption sources that are specified by track number.
+// Currently, this is only IMSC captions in an IMF package. If your caption
+// source is IMSC 1.1 in a separate xml file, use FileSourceSettings instead
+// of TrackSourceSettings.
 type TrackSourceSettings struct {
 	_ struct{} `type:"structure"`
 
@@ -11967,9 +12101,8 @@ type WavSettings struct {
 	// quality for this audio track.
 	BitDepth *int64 `locationName:"bitDepth" min:"16" type:"integer"`
 
-	// Set Channels to specify the number of channels in this output audio track.
-	// With WAV, valid values 1, 2, 4, and 8. In the console, these values are Mono,
-	// Stereo, 4-Channel, and 8-Channel, respectively.
+	// Specify the number of channels in this output audio track. Valid values are
+	// 1 and even numbers up to 64. For example, 1, 2, 4, 6, and so on, up to 64.
 	Channels *int64 `locationName:"channels" min:"1" type:"integer"`
 
 	// The service defaults to using RIFF for WAV outputs. If your output audio

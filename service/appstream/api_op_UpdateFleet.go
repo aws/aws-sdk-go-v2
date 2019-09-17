@@ -43,6 +43,12 @@ type UpdateFleetInput struct {
 	// Enables or disables default internet access for the fleet.
 	EnableDefaultInternetAccess *bool `type:"boolean"`
 
+	// The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To
+	// assume a role, a fleet instance calls the AWS Security Token Service (STS)
+	// AssumeRole API operation and passes the ARN of the role to use. The operation
+	// creates a new session with temporary credentials.
+	IamRoleArn *string `type:"string"`
+
 	// The amount of time that users can be idle (inactive) before they are disconnected
 	// from their streaming session and the DisconnectTimeoutInSeconds time interval
 	// begins. Users are notified before they are disconnected due to inactivity.
@@ -183,9 +189,9 @@ const opUpdateFleet = "UpdateFleet"
 //
 // If the fleet is in the STOPPED state, you can update any attribute except
 // the fleet name. If the fleet is in the RUNNING state, you can update the
-// DisplayName, ComputeCapacity, ImageARN, ImageName, and DisconnectTimeoutInSeconds
-// attributes. If the fleet is in the STARTING or STOPPING state, you can't
-// update it.
+// DisplayName, ComputeCapacity, ImageARN, ImageName, IdleDisconnectTimeoutInSeconds,
+// and DisconnectTimeoutInSeconds attributes. If the fleet is in the STARTING
+// or STOPPING state, you can't update it.
 //
 //    // Example sending a request using UpdateFleetRequest.
 //    req := client.UpdateFleetRequest(params)

@@ -58,7 +58,7 @@ type DescribeActivityOutput struct {
 	//
 	// A name must not contain:
 	//
-	//    * whitespace
+	//    * white space
 	//
 	//    * brackets < > { } [ ]
 	//

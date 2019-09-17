@@ -45,6 +45,7 @@ const (
 	ProtocolRtpFec   Protocol = "rtp-fec"
 	ProtocolRtp      Protocol = "rtp"
 	ProtocolZixiPull Protocol = "zixi-pull"
+	ProtocolRist     Protocol = "rist"
 )
 
 func (enum Protocol) MarshalValue() (string, error) {

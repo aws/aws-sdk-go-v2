@@ -91,8 +91,8 @@ const opModifyFleet = "ModifyFleet"
 // launches instances using the Spot Instance pool with the lowest price. If
 // the allocation strategy is diversified, the EC2 Fleet distributes the instances
 // across the Spot Instance pools. If the allocation strategy is capacityOptimized,
-// EC2 Fleet launches instances from Spot Instance pools that are optimally
-// chosen based on the available Spot Instance capacity.
+// EC2 Fleet launches instances from Spot Instance pools with optimal capacity
+// for the number of instances that are launching.
 //
 // To scale down your EC2 Fleet, decrease its target capacity. First, the EC2
 // Fleet cancels any open requests that exceed the new target capacity. You

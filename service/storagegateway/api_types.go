@@ -190,7 +190,7 @@ type FileShareInfo struct {
 	FileShareType FileShareType `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 }
 
@@ -210,7 +210,7 @@ type GatewayInfo struct {
 	Ec2InstanceRegion *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 
 	// The unique identifier assigned to your gateway during activation. This ID
@@ -309,7 +309,7 @@ type NFSFileShareInfo struct {
 	FileShareStatus *string `min:"3" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 
 	// A value that enables guessing of the MIME type for uploaded objects based
@@ -435,7 +435,7 @@ type SMBFileShareInfo struct {
 	FileShareStatus *string `min:"3" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 
 	// A value that enables guessing of the MIME type for uploaded objects based
@@ -760,7 +760,7 @@ type TapeInfo struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 
 	// The ID of the pool that you want to add your tape to for archiving. The tape
@@ -847,7 +847,7 @@ type VolumeInfo struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and region.
+	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 
 	// The unique identifier assigned to your gateway during activation. This ID

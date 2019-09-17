@@ -158,6 +158,12 @@ func (c *Client) ListAliasesRequest(input *ListAliasesInput) ListAliasesRequest 
 		Name:       opListAliases,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-03-31/functions/{FunctionName}/aliases",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"NextMarker"},
+			LimitToken:      "MaxItems",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -190,6 +196,53 @@ func (r ListAliasesRequest) Send(ctx context.Context) (*ListAliasesResponse, err
 	}
 
 	return resp, nil
+}
+
+// NewListAliasesRequestPaginator returns a paginator for ListAliases.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListAliasesRequest(input)
+//   p := lambda.NewListAliasesRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListAliasesPaginator(req ListAliasesRequest) ListAliasesPaginator {
+	return ListAliasesPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListAliasesInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListAliasesPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListAliasesPaginator struct {
+	aws.Pager
+}
+
+func (p *ListAliasesPaginator) CurrentPage() *ListAliasesOutput {
+	return p.Pager.CurrentPage().(*ListAliasesOutput)
 }
 
 // ListAliasesResponse is the response type for the

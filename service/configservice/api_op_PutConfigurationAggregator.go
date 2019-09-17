@@ -24,6 +24,7 @@ type PutConfigurationAggregatorInput struct {
 	// An OrganizationAggregationSource object.
 	OrganizationAggregationSource *OrganizationAggregationSource `type:"structure"`
 
+	// An array of tag object.
 	Tags []Tag `type:"list"`
 }
 

@@ -66,7 +66,8 @@ const opUntagResource = "UntagResource"
 // UntagResourceRequest returns a request value for making API operation for
 // Amazon Kinesis Analytics.
 //
-// Removes one or more tags from a Kinesis Analytics application.
+// Removes one or more tags from a Kinesis Analytics application. For more information,
+// see Using Tagging (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html).
 //
 //    // Example sending a request using UntagResourceRequest.
 //    req := client.UntagResourceRequest(params)

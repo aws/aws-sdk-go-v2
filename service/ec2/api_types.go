@@ -982,9 +982,8 @@ type CpuOptionsRequest struct {
 	// The number of CPU cores for the instance.
 	CoreCount *int64 `type:"integer"`
 
-	// The number of threads per CPU core. To disable Intel Hyper-Threading Technology
-	// for the instance, specify a value of 1. Otherwise, specify the default value
-	// of 2.
+	// The number of threads per CPU core. To disable multithreading for the instance,
+	// specify a value of 1. Otherwise, specify the default value of 2.
 	ThreadsPerCore *int64 `type:"integer"`
 }
 
@@ -1949,6 +1948,38 @@ func (s EventInformation) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Describes an export image task.
+type ExportImageTask struct {
+	_ struct{} `type:"structure"`
+
+	// A description of the image being exported.
+	Description *string `locationName:"description" type:"string"`
+
+	// The ID of the export image task.
+	ExportImageTaskId *string `locationName:"exportImageTaskId" type:"string"`
+
+	// The ID of the image.
+	ImageId *string `locationName:"imageId" type:"string"`
+
+	// The percent complete of the export image task.
+	Progress *string `locationName:"progress" type:"string"`
+
+	// Information about the destination S3 bucket.
+	S3ExportLocation *ExportTaskS3Location `locationName:"s3ExportLocation" type:"structure"`
+
+	// The status of the export image task. The possible values are active, completed,
+	// deleting, and deleted.
+	Status *string `locationName:"status" type:"string"`
+
+	// The status message for the export image task.
+	StatusMessage *string `locationName:"statusMessage" type:"string"`
+}
+
+// String returns the string representation
+func (s ExportImageTask) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Describes an instance export task.
 type ExportTask struct {
 	_ struct{} `type:"structure"`
@@ -1975,6 +2006,54 @@ type ExportTask struct {
 // String returns the string representation
 func (s ExportTask) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Describes the destination for an export image task.
+type ExportTaskS3Location struct {
+	_ struct{} `type:"structure"`
+
+	// The destination S3 bucket.
+	S3Bucket *string `locationName:"s3Bucket" type:"string"`
+
+	// The prefix (logical hierarchy) in the bucket.
+	S3Prefix *string `locationName:"s3Prefix" type:"string"`
+}
+
+// String returns the string representation
+func (s ExportTaskS3Location) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes the destination for an export image task.
+type ExportTaskS3LocationRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The destination S3 bucket.
+	//
+	// S3Bucket is a required field
+	S3Bucket *string `type:"string" required:"true"`
+
+	// The prefix (logical hierarchy) in the bucket.
+	S3Prefix *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ExportTaskS3LocationRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ExportTaskS3LocationRequest) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ExportTaskS3LocationRequest"}
+
+	if s.S3Bucket == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3Bucket"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Describes the format and location for an instance export task.
@@ -2392,6 +2471,9 @@ type FlowLog struct {
 	// Flow log data can be published to CloudWatch Logs or Amazon S3.
 	LogDestinationType LogDestinationType `locationName:"logDestinationType" type:"string" enum:"true"`
 
+	// The format of the flow log record.
+	LogFormat *string `locationName:"logFormat" type:"string"`
+
 	// The name of the flow log group.
 	LogGroupName *string `locationName:"logGroupName" type:"string"`
 
@@ -2787,6 +2869,32 @@ type HostReservation struct {
 
 // String returns the string representation
 func (s HostReservation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The internet key exchange (IKE) version permitted for the VPN tunnel.
+type IKEVersionsListValue struct {
+	_ struct{} `type:"structure"`
+
+	// The IKE version.
+	Value *string `locationName:"value" type:"string"`
+}
+
+// String returns the string representation
+func (s IKEVersionsListValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The IKE version that is permitted for the VPN tunnel.
+type IKEVersionsRequestListValue struct {
+	_ struct{} `type:"structure"`
+
+	// The IKE version.
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s IKEVersionsRequestListValue) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -4420,9 +4528,8 @@ type LaunchTemplateCpuOptionsRequest struct {
 	// The number of CPU cores for the instance.
 	CoreCount *int64 `type:"integer"`
 
-	// The number of threads per CPU core. To disable Intel Hyper-Threading Technology
-	// for the instance, specify a value of 1. Otherwise, specify the default value
-	// of 2.
+	// The number of threads per CPU core. To disable multithreading for the instance,
+	// specify a value of 1. Otherwise, specify the default value of 2.
 	ThreadsPerCore *int64 `type:"integer"`
 }
 
@@ -5177,6 +5284,133 @@ func (s ModifyTransitGatewayVpcAttachmentRequestOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
+// The AWS Site-to-Site VPN tunnel options to modify.
+type ModifyVpnTunnelOptionsSpecification struct {
+	_ struct{} `type:"structure"`
+
+	// The number of seconds after which a DPD timeout occurs.
+	//
+	// Constraints: A value between 0 and 30.
+	//
+	// Default: 30
+	DPDTimeoutSeconds *int64 `type:"integer"`
+
+	// The IKE versions that are permitted for the VPN tunnel.
+	//
+	// Valid values: ikev1 | ikev2
+	IKEVersions []IKEVersionsRequestListValue `locationName:"IKEVersion" locationNameList:"item" type:"list"`
+
+	// One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel
+	// for phase 1 IKE negotiations.
+	//
+	// Valid values: 2 | 14 | 15 | 16 | 17 | 18 | 22 | 23 | 24
+	Phase1DHGroupNumbers []Phase1DHGroupNumbersRequestListValue `locationName:"Phase1DHGroupNumber" locationNameList:"item" type:"list"`
+
+	// One or more encryption algorithms that are permitted for the VPN tunnel for
+	// phase 1 IKE negotiations.
+	//
+	// Valid values: AES128 | AES256
+	Phase1EncryptionAlgorithms []Phase1EncryptionAlgorithmsRequestListValue `locationName:"Phase1EncryptionAlgorithm" locationNameList:"item" type:"list"`
+
+	// One or more integrity algorithms that are permitted for the VPN tunnel for
+	// phase 1 IKE negotiations.
+	//
+	// Valid values: SHA1 | SHA2-256
+	Phase1IntegrityAlgorithms []Phase1IntegrityAlgorithmsRequestListValue `locationName:"Phase1IntegrityAlgorithm" locationNameList:"item" type:"list"`
+
+	// The lifetime for phase 1 of the IKE negotiation, in seconds.
+	//
+	// Constraints: A value between 900 and 28,800.
+	//
+	// Default: 28800
+	Phase1LifetimeSeconds *int64 `type:"integer"`
+
+	// One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel
+	// for phase 2 IKE negotiations.
+	//
+	// Valid values: 2 | 5 | 14 | 15 | 16 | 17 | 18 | 22 | 23 | 24
+	Phase2DHGroupNumbers []Phase2DHGroupNumbersRequestListValue `locationName:"Phase2DHGroupNumber" locationNameList:"item" type:"list"`
+
+	// One or more encryption algorithms that are permitted for the VPN tunnel for
+	// phase 2 IKE negotiations.
+	//
+	// Valid values: AES128 | AES256
+	Phase2EncryptionAlgorithms []Phase2EncryptionAlgorithmsRequestListValue `locationName:"Phase2EncryptionAlgorithm" locationNameList:"item" type:"list"`
+
+	// One or more integrity algorithms that are permitted for the VPN tunnel for
+	// phase 2 IKE negotiations.
+	//
+	// Valid values: SHA1 | SHA2-256
+	Phase2IntegrityAlgorithms []Phase2IntegrityAlgorithmsRequestListValue `locationName:"Phase2IntegrityAlgorithm" locationNameList:"item" type:"list"`
+
+	// The lifetime for phase 2 of the IKE negotiation, in seconds.
+	//
+	// Constraints: A value between 900 and 3,600. The value must be less than the
+	// value for Phase1LifetimeSeconds.
+	//
+	// Default: 3600
+	Phase2LifetimeSeconds *int64 `type:"integer"`
+
+	// The pre-shared key (PSK) to establish initial authentication between the
+	// virtual private gateway and the customer gateway.
+	//
+	// Constraints: Allowed characters are alphanumeric characters, periods (.),
+	// and underscores (_). Must be between 8 and 64 characters in length and cannot
+	// start with zero (0).
+	PreSharedKey *string `type:"string"`
+
+	// The percentage of the rekey window (determined by RekeyMarginTimeSeconds)
+	// during which the rekey time is randomly selected.
+	//
+	// Constraints: A value between 0 and 100.
+	//
+	// Default: 100
+	RekeyFuzzPercentage *int64 `type:"integer"`
+
+	// The margin time, in seconds, before the phase 2 lifetime expires, during
+	// which the AWS side of the VPN connection performs an IKE rekey. The exact
+	// time of the rekey is randomly selected based on the value for RekeyFuzzPercentage.
+	//
+	// Constraints: A value between 60 and half of Phase2LifetimeSeconds.
+	//
+	// Default: 540
+	RekeyMarginTimeSeconds *int64 `type:"integer"`
+
+	// The number of packets in an IKE replay window.
+	//
+	// Constraints: A value between 64 and 2048.
+	//
+	// Default: 1024
+	ReplayWindowSize *int64 `type:"integer"`
+
+	// The range of inside IP addresses for the tunnel. Any specified CIDR blocks
+	// must be unique across all VPN connections that use the same virtual private
+	// gateway.
+	//
+	// Constraints: A size /30 CIDR block from the 169.254.0.0/16 range. The following
+	// CIDR blocks are reserved and cannot be used:
+	//
+	//    * 169.254.0.0/30
+	//
+	//    * 169.254.1.0/30
+	//
+	//    * 169.254.2.0/30
+	//
+	//    * 169.254.3.0/30
+	//
+	//    * 169.254.4.0/30
+	//
+	//    * 169.254.5.0/30
+	//
+	//    * 169.254.169.252/30
+	TunnelInsideCidr *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ModifyVpnTunnelOptionsSpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Describes the monitoring of an instance.
 type Monitoring struct {
 	_ struct{} `type:"structure"`
@@ -5770,6 +6004,164 @@ type PeeringConnectionOptionsRequest struct {
 
 // String returns the string representation
 func (s PeeringConnectionOptionsRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The Diffie-Hellmann group number for phase 1 IKE negotiations.
+type Phase1DHGroupNumbersListValue struct {
+	_ struct{} `type:"structure"`
+
+	// The Diffie-Hellmann group number.
+	Value *int64 `locationName:"value" type:"integer"`
+}
+
+// String returns the string representation
+func (s Phase1DHGroupNumbersListValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Specifies a Diffie-Hellman group number for the VPN tunnel for phase 1 IKE
+// negotiations.
+type Phase1DHGroupNumbersRequestListValue struct {
+	_ struct{} `type:"structure"`
+
+	// The Diffie-Hellmann group number.
+	Value *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s Phase1DHGroupNumbersRequestListValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The encryption algorithm for phase 1 IKE negotiations.
+type Phase1EncryptionAlgorithmsListValue struct {
+	_ struct{} `type:"structure"`
+
+	// The value for the encryption algorithm.
+	Value *string `locationName:"value" type:"string"`
+}
+
+// String returns the string representation
+func (s Phase1EncryptionAlgorithmsListValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Specifies the encryption algorithm for the VPN tunnel for phase 1 IKE negotiations.
+type Phase1EncryptionAlgorithmsRequestListValue struct {
+	_ struct{} `type:"structure"`
+
+	// The value for the encryption algorithm.
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Phase1EncryptionAlgorithmsRequestListValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The integrity algorithm for phase 1 IKE negotiations.
+type Phase1IntegrityAlgorithmsListValue struct {
+	_ struct{} `type:"structure"`
+
+	// The value for the integrity algorithm.
+	Value *string `locationName:"value" type:"string"`
+}
+
+// String returns the string representation
+func (s Phase1IntegrityAlgorithmsListValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Specifies the integrity algorithm for the VPN tunnel for phase 1 IKE negotiations.
+type Phase1IntegrityAlgorithmsRequestListValue struct {
+	_ struct{} `type:"structure"`
+
+	// The value for the integrity algorithm.
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Phase1IntegrityAlgorithmsRequestListValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The Diffie-Hellmann group number for phase 2 IKE negotiations.
+type Phase2DHGroupNumbersListValue struct {
+	_ struct{} `type:"structure"`
+
+	// The Diffie-Hellmann group number.
+	Value *int64 `locationName:"value" type:"integer"`
+}
+
+// String returns the string representation
+func (s Phase2DHGroupNumbersListValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Specifies a Diffie-Hellman group number for the VPN tunnel for phase 2 IKE
+// negotiations.
+type Phase2DHGroupNumbersRequestListValue struct {
+	_ struct{} `type:"structure"`
+
+	// The Diffie-Hellmann group number.
+	Value *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s Phase2DHGroupNumbersRequestListValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The encryption algorithm for phase 2 IKE negotiations.
+type Phase2EncryptionAlgorithmsListValue struct {
+	_ struct{} `type:"structure"`
+
+	// The encryption algorithm.
+	Value *string `locationName:"value" type:"string"`
+}
+
+// String returns the string representation
+func (s Phase2EncryptionAlgorithmsListValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Specifies the encryption algorithm for the VPN tunnel for phase 2 IKE negotiations.
+type Phase2EncryptionAlgorithmsRequestListValue struct {
+	_ struct{} `type:"structure"`
+
+	// The encryption algorithm.
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Phase2EncryptionAlgorithmsRequestListValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The integrity algorithm for phase 2 IKE negotiations.
+type Phase2IntegrityAlgorithmsListValue struct {
+	_ struct{} `type:"structure"`
+
+	// The integrity algorithm.
+	Value *string `locationName:"value" type:"string"`
+}
+
+// String returns the string representation
+func (s Phase2IntegrityAlgorithmsListValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Specifies the integrity algorithm for the VPN tunnel for phase 2 IKE negotiations.
+type Phase2IntegrityAlgorithmsRequestListValue struct {
+	_ struct{} `type:"structure"`
+
+	// The integrity algorithm.
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Phase2IntegrityAlgorithmsRequestListValue) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -8190,8 +8582,8 @@ type SpotFleetRequestConfigData struct {
 	// from all the Spot Instance pools that you specify.
 	//
 	// If the allocation strategy is capacityOptimized, Spot Fleet launches instances
-	// from Spot Instance pools that are optimally chosen based on the available
-	// Spot Instance capacity.
+	// from Spot Instance pools with optimal capacity for the number of instances
+	// that are launching.
 	AllocationStrategy AllocationStrategy `locationName:"allocationStrategy" type:"string" enum:"true"`
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
@@ -8546,8 +8938,8 @@ type SpotOptions struct {
 	// all the Spot Instance pools that you specify.
 	//
 	// If the allocation strategy is capacityOptimized, EC2 Fleet launches instances
-	// from Spot Instance pools that are optimally chosen based on the available
-	// Spot Instance capacity.
+	// from Spot Instance pools with optimal capacity for the number of instances
+	// that are launching.
 	AllocationStrategy SpotAllocationStrategy `locationName:"allocationStrategy" type:"string" enum:"true"`
 
 	// The behavior when a Spot Instance is interrupted. The default is terminate.
@@ -8595,8 +8987,8 @@ type SpotOptionsRequest struct {
 	// all the Spot Instance pools that you specify.
 	//
 	// If the allocation strategy is capacityOptimized, EC2 Fleet launches instances
-	// from Spot Instance pools that are optimally chosen based on the available
-	// Spot Instance capacity.
+	// from Spot Instance pools with optimal capacity for the number of instances
+	// that are launching.
 	AllocationStrategy SpotAllocationStrategy `type:"string" enum:"true"`
 
 	// The behavior when a Spot Instance is interrupted. The default is terminate.
@@ -9823,6 +10215,69 @@ func (s TransitGatewayVpcAttachmentOptions) String() string {
 	return awsutil.Prettify(s)
 }
 
+// The VPN tunnel options.
+type TunnelOption struct {
+	_ struct{} `type:"structure"`
+
+	// The number of seconds after which a DPD timeout occurs.
+	DpdTimeoutSeconds *int64 `locationName:"dpdTimeoutSeconds" type:"integer"`
+
+	// The IKE versions that are permitted for the VPN tunnel.
+	IkeVersions []IKEVersionsListValue `locationName:"ikeVersionSet" locationNameList:"item" type:"list"`
+
+	// The external IP address of the VPN tunnel.
+	OutsideIpAddress *string `locationName:"outsideIpAddress" type:"string"`
+
+	// The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 1
+	// IKE negotiations.
+	Phase1DHGroupNumbers []Phase1DHGroupNumbersListValue `locationName:"phase1DHGroupNumberSet" locationNameList:"item" type:"list"`
+
+	// The permitted encryption algorithms for the VPN tunnel for phase 1 IKE negotiations.
+	Phase1EncryptionAlgorithms []Phase1EncryptionAlgorithmsListValue `locationName:"phase1EncryptionAlgorithmSet" locationNameList:"item" type:"list"`
+
+	// The permitted integrity algorithms for the VPN tunnel for phase 1 IKE negotiations.
+	Phase1IntegrityAlgorithms []Phase1IntegrityAlgorithmsListValue `locationName:"phase1IntegrityAlgorithmSet" locationNameList:"item" type:"list"`
+
+	// The lifetime for phase 1 of the IKE negotiation, in seconds.
+	Phase1LifetimeSeconds *int64 `locationName:"phase1LifetimeSeconds" type:"integer"`
+
+	// The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 2
+	// IKE negotiations.
+	Phase2DHGroupNumbers []Phase2DHGroupNumbersListValue `locationName:"phase2DHGroupNumberSet" locationNameList:"item" type:"list"`
+
+	// The permitted encryption algorithms for the VPN tunnel for phase 2 IKE negotiations.
+	Phase2EncryptionAlgorithms []Phase2EncryptionAlgorithmsListValue `locationName:"phase2EncryptionAlgorithmSet" locationNameList:"item" type:"list"`
+
+	// The permitted integrity algorithms for the VPN tunnel for phase 2 IKE negotiations.
+	Phase2IntegrityAlgorithms []Phase2IntegrityAlgorithmsListValue `locationName:"phase2IntegrityAlgorithmSet" locationNameList:"item" type:"list"`
+
+	// The lifetime for phase 2 of the IKE negotiation, in seconds.
+	Phase2LifetimeSeconds *int64 `locationName:"phase2LifetimeSeconds" type:"integer"`
+
+	// The pre-shared key (PSK) to establish initial authentication between the
+	// virtual private gateway and the customer gateway.
+	PreSharedKey *string `locationName:"preSharedKey" type:"string"`
+
+	// The percentage of the rekey window determined by RekeyMarginTimeSeconds during
+	// which the rekey time is randomly selected.
+	RekeyFuzzPercentage *int64 `locationName:"rekeyFuzzPercentage" type:"integer"`
+
+	// The margin time, in seconds, before the phase 2 lifetime expires, during
+	// which the AWS side of the VPN connection performs an IKE rekey.
+	RekeyMarginTimeSeconds *int64 `locationName:"rekeyMarginTimeSeconds" type:"integer"`
+
+	// The number of packets in an IKE replay window.
+	ReplayWindowSize *int64 `locationName:"replayWindowSize" type:"integer"`
+
+	// The range of inside IP addresses for the tunnel.
+	TunnelInsideCidr *string `locationName:"tunnelInsideCidr" type:"string"`
+}
+
+// String returns the string representation
+func (s TunnelOption) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Describes the T2 or T3 instance whose credit option for CPU usage was not
 // modified.
 type UnsuccessfulInstanceCreditSpecificationItem struct {
@@ -10731,6 +11186,9 @@ type VpnConnectionOptions struct {
 	// Indicates whether the VPN connection uses static routes only. Static routes
 	// must be used for devices that don't support BGP.
 	StaticRoutesOnly *bool `locationName:"staticRoutesOnly" type:"boolean"`
+
+	// Indicates the VPN tunnel options.
+	TunnelOptions []TunnelOption `locationName:"tunnelOptionSet" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -10750,7 +11208,7 @@ type VpnConnectionOptionsSpecification struct {
 	StaticRoutesOnly *bool `locationName:"staticRoutesOnly" type:"boolean"`
 
 	// The tunnel options for the VPN connection.
-	TunnelOptions []VpnTunnelOptionsSpecification `locationNameList:"item" type:"list"`
+	TunnelOptions []VpnTunnelOptionsSpecification `type:"list"`
 }
 
 // String returns the string representation
@@ -10973,12 +11431,100 @@ func (s VpnStaticRoute) String() string {
 type VpnTunnelOptionsSpecification struct {
 	_ struct{} `type:"structure"`
 
+	// The number of seconds after which a DPD timeout occurs.
+	//
+	// Constraints: A value between 0 and 30.
+	//
+	// Default: 30
+	DPDTimeoutSeconds *int64 `type:"integer"`
+
+	// The IKE versions that are permitted for the VPN tunnel.
+	//
+	// Valid values: ikev1 | ikev2
+	IKEVersions []IKEVersionsRequestListValue `locationName:"IKEVersion" locationNameList:"item" type:"list"`
+
+	// One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel
+	// for phase 1 IKE negotiations.
+	//
+	// Valid values: 2 | 14 | 15 | 16 | 17 | 18 | 22 | 23 | 24
+	Phase1DHGroupNumbers []Phase1DHGroupNumbersRequestListValue `locationName:"Phase1DHGroupNumber" locationNameList:"item" type:"list"`
+
+	// One or more encryption algorithms that are permitted for the VPN tunnel for
+	// phase 1 IKE negotiations.
+	//
+	// Valid values: AES128 | AES256
+	Phase1EncryptionAlgorithms []Phase1EncryptionAlgorithmsRequestListValue `locationName:"Phase1EncryptionAlgorithm" locationNameList:"item" type:"list"`
+
+	// One or more integrity algorithms that are permitted for the VPN tunnel for
+	// phase 1 IKE negotiations.
+	//
+	// Valid values: SHA1 | SHA2-256
+	Phase1IntegrityAlgorithms []Phase1IntegrityAlgorithmsRequestListValue `locationName:"Phase1IntegrityAlgorithm" locationNameList:"item" type:"list"`
+
+	// The lifetime for phase 1 of the IKE negotiation, in seconds.
+	//
+	// Constraints: A value between 900 and 28,800.
+	//
+	// Default: 28800
+	Phase1LifetimeSeconds *int64 `type:"integer"`
+
+	// One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel
+	// for phase 2 IKE negotiations.
+	//
+	// Valid values: 2 | 5 | 14 | 15 | 16 | 17 | 18 | 22 | 23 | 24
+	Phase2DHGroupNumbers []Phase2DHGroupNumbersRequestListValue `locationName:"Phase2DHGroupNumber" locationNameList:"item" type:"list"`
+
+	// One or more encryption algorithms that are permitted for the VPN tunnel for
+	// phase 2 IKE negotiations.
+	//
+	// Valid values: AES128 | AES256
+	Phase2EncryptionAlgorithms []Phase2EncryptionAlgorithmsRequestListValue `locationName:"Phase2EncryptionAlgorithm" locationNameList:"item" type:"list"`
+
+	// One or more integrity algorithms that are permitted for the VPN tunnel for
+	// phase 2 IKE negotiations.
+	//
+	// Valid values: SHA1 | SHA2-256
+	Phase2IntegrityAlgorithms []Phase2IntegrityAlgorithmsRequestListValue `locationName:"Phase2IntegrityAlgorithm" locationNameList:"item" type:"list"`
+
+	// The lifetime for phase 2 of the IKE negotiation, in seconds.
+	//
+	// Constraints: A value between 900 and 3,600. The value must be less than the
+	// value for Phase1LifetimeSeconds.
+	//
+	// Default: 3600
+	Phase2LifetimeSeconds *int64 `type:"integer"`
+
 	// The pre-shared key (PSK) to establish initial authentication between the
 	// virtual private gateway and customer gateway.
 	//
-	// Constraints: Allowed characters are alphanumeric characters and ._. Must
-	// be between 8 and 64 characters in length and cannot start with zero (0).
+	// Constraints: Allowed characters are alphanumeric characters, periods (.),
+	// and underscores (_). Must be between 8 and 64 characters in length and cannot
+	// start with zero (0).
 	PreSharedKey *string `type:"string"`
+
+	// The percentage of the rekey window (determined by RekeyMarginTimeSeconds)
+	// during which the rekey time is randomly selected.
+	//
+	// Constraints: A value between 0 and 100.
+	//
+	// Default: 100
+	RekeyFuzzPercentage *int64 `type:"integer"`
+
+	// The margin time, in seconds, before the phase 2 lifetime expires, during
+	// which the AWS side of the VPN connection performs an IKE rekey. The exact
+	// time of the rekey is randomly selected based on the value for RekeyFuzzPercentage.
+	//
+	// Constraints: A value between 60 and half of Phase2LifetimeSeconds.
+	//
+	// Default: 540
+	RekeyMarginTimeSeconds *int64 `type:"integer"`
+
+	// The number of packets in an IKE replay window.
+	//
+	// Constraints: A value between 64 and 2048.
+	//
+	// Default: 1024
+	ReplayWindowSize *int64 `type:"integer"`
 
 	// The range of inside IP addresses for the tunnel. Any specified CIDR blocks
 	// must be unique across all VPN connections that use the same virtual private

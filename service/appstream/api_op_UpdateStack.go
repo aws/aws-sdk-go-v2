@@ -13,8 +13,8 @@ import (
 type UpdateStackInput struct {
 	_ struct{} `type:"structure"`
 
-	// The list of virtual private cloud (VPC) interface endpoint objects. Users
-	// of the stack can connect to AppStream 2.0 only through the specified endpoints.
+	// The list of interface VPC endpoint (interface endpoint) objects. Users of
+	// the stack can connect to AppStream 2.0 only through the specified endpoints.
 	AccessEndpoints []AccessEndpoint `min:"1" type:"list"`
 
 	// The persistent application settings for users of a stack. When these settings

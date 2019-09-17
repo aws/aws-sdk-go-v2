@@ -1,6 +1,12 @@
-### SDK Features
+Services
+---
+* Synced the V2 SDK with latest AWS service API definitions.
 
-### SDK Enhancements
+SDK Features
+---
+
+SDK Enhancements
+---
 * `aws/endpoints`: Expose DNSSuffix for partitions ([#369](https://github.com/aws/aws-sdk-go-v2/pull/369))
   * Exposes the underlying partition metadata's DNSSuffix value via the `DNSSuffix` method on the endpoint's `Partition` type. This allows access to the partition's DNS suffix, e.g. "amazon.com".
   * Fixes [#347](https://github.com/aws/aws-sdk-go-v2/issues/347)
@@ -19,7 +25,8 @@
   * Corrects sdk's behavior by not retrying errors with status code 501. Adds support for retrying the Kinesis API error, LimitExceededException.
   * Fixes [#372](https://github.com/aws/aws-sdk-go-v2/issues/372), [#145](https://github.com/aws/aws-sdk-go-v2/issues/145)
   
-### SDK Bugs
+SDK Bugs
+---
 * `aws`: Fixes bug in calculating throttled retry delay ([#373](https://github.com/aws/aws-sdk-go-v2/pull/373))
   * The `Retry-After` duration specified in the request is now added to the Retry delay for throttled exception. Adds test for retry delays for throttled exceptions. Fixes bug where the throttled retry's math was off.
   * Fixes [#45](https://github.com/aws/aws-sdk-go-v2/issues/45)
@@ -31,5 +38,3 @@
   * Fixes [#316](https://github.com/aws/aws-sdk-go-v2/issues/316)
 * `private/model` : Fixes generated API Reference docs links being invalid ([387](https://github.com/aws/aws-sdk-go-v2/pull/387))
   * Fixes [#327](https://github.com/aws/aws-sdk-go-v2/issues/327)
-  
-  

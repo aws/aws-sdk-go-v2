@@ -1194,6 +1194,9 @@ type SolutionVersion struct {
 	//
 	//    * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	Status *string `locationName:"status" type:"string"`
+
+	// The time used to train the model.
+	TrainingHours *float64 `locationName:"trainingHours" type:"double"`
 }
 
 // String returns the string representation

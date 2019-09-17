@@ -346,8 +346,8 @@ type DBCluster struct {
 	// Provides the name of the database engine to be used for this DB cluster.
 	Engine *string `type:"string"`
 
-	// The DB engine mode of the DB cluster, either provisioned, serverless, or
-	// parallelquery.
+	// The DB engine mode of the DB cluster, either provisioned, serverless, parallelquery,
+	// global, or multimaster.
 	EngineMode *string `type:"string"`
 
 	// Indicates the database engine version.
@@ -501,7 +501,7 @@ func (s DBClusterBacktrack) String() string {
 type DBClusterEndpoint struct {
 	_ struct{} `type:"structure"`
 
-	// The type associated with a custom endpoint. One of: READER, ANY.
+	// The type associated with a custom endpoint. One of: READER, WRITER, ANY.
 	CustomEndpointType *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) for the endpoint.
@@ -554,8 +554,8 @@ type DBClusterMember struct {
 	// Specifies the instance identifier for this member of the DB cluster.
 	DBInstanceIdentifier *string `type:"string"`
 
-	// A value that indicates whehter the cluster member is the primary instance
-	// for the DB cluster.
+	// Value that is true if the cluster member is the primary instance for the
+	// DB cluster and false otherwise.
 	IsClusterWriter *bool `type:"boolean"`
 
 	// A value that specifies the order in which an Aurora Replica is promoted to
@@ -1315,7 +1315,7 @@ func (s DBParameterGroup) String() string {
 type DBParameterGroupStatus struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the DP parameter group.
+	// The name of the DB parameter group.
 	DBParameterGroupName *string `type:"string"`
 
 	// The status of parameter updates.

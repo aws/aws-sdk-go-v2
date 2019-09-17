@@ -23,6 +23,7 @@ type PutAggregationAuthorizationInput struct {
 	// AuthorizedAwsRegion is a required field
 	AuthorizedAwsRegion *string `min:"1" type:"string" required:"true"`
 
+	// An array of tag object.
 	Tags []Tag `type:"list"`
 }
 
