@@ -89,10 +89,6 @@ client-integ:
 	@echo "Integration Testing SDK clients"
 	AWS_REGION="" go test -count=1 -tags "integration" -v -run '^TestInteg_' ./service/...
 
-s3crypto-integ:
-	@echo "Integration Testing S3 Cyrpto utility"
-	AWS_REGION="" go test -count=1 -tags "s3crypto_integ integration" -v -run '^TestInteg_' ./service/s3/s3crypto
-
 cleanup-integ-buckets:
 	@echo "Cleaning up SDK integraiton resources"
 	go run -tags "integration" ./internal/awstesting/cmd/bucket_cleanup/main.go "aws-sdk-go-integration"
