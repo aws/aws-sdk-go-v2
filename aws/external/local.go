@@ -38,7 +38,6 @@ func validateLocalURL(v string) error {
 		return err
 	}
 
-	// Todo: remove url.go if this works for +go1.11
 	host := u.Hostname()
 	if len(host) == 0 {
 		return fmt.Errorf("unable to parse host from local HTTP cred provider URL")
