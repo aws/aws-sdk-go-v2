@@ -155,6 +155,7 @@ get-deps: get-deps-tests get-deps-x-tests get-deps-codegen get-deps-verify
 get-deps-tests:
 	@echo "go get SDK testing dependencies"
 	go get golang.org/x/net/html
+	go get github.com/google/go-cmp
 
 get-deps-x-tests:
 	@echo "go get SDK testing golang.org/x dependencies"
