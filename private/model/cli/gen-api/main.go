@@ -316,7 +316,7 @@ func writeS3ManagerUploadInputFile(g *generateInfo) error {
 func writeAPISmokeTestsFile(g *generateInfo) error {
 	return writeGoFile(filepath.Join(g.PackageDir, "api_integ_test.go"),
 		codeLayout,
-		"// +build go1.10,integration\n",
+		"// +build integration\n",
 		g.API.PackageName()+"_test",
 		g.API.APISmokeTestsGoCode(),
 	)
