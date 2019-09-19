@@ -34,11 +34,10 @@ const (
 
 // A Request is the service request to be made.
 type Request struct {
-	Config   Config
-	Metadata Metadata
-	Handlers Handlers
-
-	Retryer
+	Config           Config
+	Metadata         Metadata
+	Handlers         Handlers
+	Retryer          Retryer
 	AttemptTime      time.Time
 	Time             time.Time
 	ExpireTime       time.Duration
@@ -220,11 +219,6 @@ func (r *Request) Context() context.Context {
 // Request. It is not safe to use use a single Request value for multiple
 // requests. A new Request should be created for each API operation request.
 //
-// Go 1.6 and below:
-// The http.Request's Cancel field will be set to the Done() value of
-// the context. This will overwrite the Cancel field's value.
-//
-// Go 1.7 and above:
 // The http.Request.WithContext will be used to set the context on the underlying
 // http.Request. This will create a shallow copy of the http.Request. The SDK
 // may create sub contexts in the future for nested requests such as retries.
@@ -240,7 +234,7 @@ func (r *Request) WillRetry() bool {
 	if !IsReaderSeekable(r.Body) && r.HTTPRequest.Body != http.NoBody {
 		return false
 	}
-	return r.Error != nil && BoolValue(r.Retryable) && r.RetryCount < r.MaxRetries()
+	return r.Error != nil && BoolValue(r.Retryable) && r.RetryCount < r.Retryer.MaxRetries()
 }
 
 // fmtAttemptCount returns a formatted string with attempt count
@@ -389,19 +383,6 @@ func (r *Request) getNextRequestBody() (body io.ReadCloser, err error) {
 			"failed to get request body error", err)
 	}
 
-	// Go 1.8 tightened and clarified the rules code needs to use when building
-	// requests with the http package. Go 1.8 removed the automatic detection
-	// of if the Request.Body was empty, or actually had bytes in it. The SDK
-	// always sets the Request.Body even if it is empty and should not actually
-	// be sent. This is incorrect.
-	//
-	// Go 1.8 did add a http.NoBody value that the SDK can use to tell the http
-	// client that the request really should be sent without a body. The
-	// Request.Body cannot be set to nil, which is preferable, because the
-	// field is exported and could introduce nil pointer dereferences for users
-	// of the SDK if they used that field.
-	//
-	// Related golang/go#18257
 	l, err := SeekerLen(r.Body)
 	if err != nil {
 		return nil, awserr.New(ErrCodeSerialization,
@@ -522,7 +503,7 @@ func (r *Request) sendRequest() (sendErr error) {
 	r.Handlers.Send.Run(r)
 	if r.Error != nil {
 		debugLogReqError(r, "Send Request",
-			fmtAttemptCount(r.RetryCount, r.MaxRetries()),
+			fmtAttemptCount(r.RetryCount, r.Retryer.MaxRetries()),
 			r.Error)
 		return r.Error
 	}
@@ -532,7 +513,7 @@ func (r *Request) sendRequest() (sendErr error) {
 	if r.Error != nil {
 		r.Handlers.UnmarshalError.Run(r)
 		debugLogReqError(r, "Validate Response",
-			fmtAttemptCount(r.RetryCount, r.MaxRetries()),
+			fmtAttemptCount(r.RetryCount, r.Retryer.MaxRetries()),
 			r.Error)
 		return r.Error
 	}
@@ -540,7 +521,7 @@ func (r *Request) sendRequest() (sendErr error) {
 	r.Handlers.Unmarshal.Run(r)
 	if r.Error != nil {
 		debugLogReqError(r, "Unmarshal Response",
-			fmtAttemptCount(r.RetryCount, r.MaxRetries()),
+			fmtAttemptCount(r.RetryCount, r.Retryer.MaxRetries()),
 			r.Error)
 		return r.Error
 	}

@@ -1,5 +1,3 @@
-// +build go1.7
-
 package ini
 
 import (
@@ -13,7 +11,7 @@ import (
 
 func TestValidDataFiles(t *testing.T) {
 	const expectedFileSuffix = "_expected"
-	filepath.Walk("./testdata/valid", func(path string, info os.FileInfo, err error) error {
+	err := filepath.Walk("./testdata/valid", func(path string, info os.FileInfo, err error) error {
 		if strings.HasSuffix(path, expectedFileSuffix) {
 			return nil
 		}
@@ -93,6 +91,9 @@ func TestValidDataFiles(t *testing.T) {
 
 		return nil
 	})
+	if err != nil {
+		t.Errorf("Error while walking the file tree rooted at root, %d", err)
+	}
 }
 
 func TestInvalidDataFiles(t *testing.T) {

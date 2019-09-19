@@ -1,5 +1,3 @@
-// +build go1.10
-
 package sdkmath
 
 import "math"

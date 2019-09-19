@@ -189,12 +189,12 @@ var AfterRetryHandler = aws.NamedHandler{
 	Fn: func(r *aws.Request) {
 		// If one of the other handlers already set the retry state
 		// we don't want to override it based on the service's state
-		if r.Retryable == nil || r.Config.EnforceShouldRetryCheck {
-			r.Retryable = aws.Bool(r.ShouldRetry(r))
+		if r.Retryable == nil {
+			r.Retryable = aws.Bool(r.Retryer.ShouldRetry(r))
 		}
 
 		if r.WillRetry() {
-			r.RetryDelay = r.RetryRules(r)
+			r.RetryDelay = r.Retryer.RetryRules(r)
 
 			if err := sdk.SleepWithContext(r.Context(), r.RetryDelay); err != nil {
 				r.Error = awserr.New(aws.ErrCodeRequestCanceled,
