@@ -29,9 +29,7 @@ func TestRequest_SetContext(t *testing.T) {
 		t.Fatalf("expected error, got none")
 	}
 
-	// Only check against canceled because go 1.6 will not use the context's
-	// Err().
-	if e, a := "canceled", err.Error(); !strings.Contains(a, e) {
+	if e, a := ctx.Error.Error(), err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %q to be in %q, but was not", e, a)
 	}
 }

@@ -55,15 +55,6 @@ type Config struct {
 	// standard out.
 	Logger Logger
 
-	// EnforceShouldRetryCheck is used in the AfterRetryHandler to always call
-	// ShouldRetry regardless of whether or not if request.Retryable is set.
-	// This will utilize ShouldRetry method of custom retryers. If EnforceShouldRetryCheck
-	// is not set, then ShouldRetry will only be called if request.Retryable is nil.
-	// Proper handling of the request.Retryable field is important when setting this field.
-	//
-	// TODO this config field is depercated and needs removed.
-	EnforceShouldRetryCheck bool
-
 	// DisableRestProtocolURICleaning will not clean the URL path when making
 	// rest protocol requests.  Will default to false. This would only be used
 	// for empty directory names in s3 requests.

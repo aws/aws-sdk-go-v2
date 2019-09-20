@@ -109,7 +109,10 @@ func TestLogRequest(t *testing.T) {
 			struct{}{}, nil,
 		)
 		req.SetReaderBody(c.Body)
-		req.Build()
+		err := req.Build()
+		if err != nil {
+			t.Fatalf("failed to build request, %d", err)
+		}
 
 		logRequest(req)
 
