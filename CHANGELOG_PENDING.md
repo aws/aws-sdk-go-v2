@@ -7,6 +7,7 @@ Deprecations
   * Removing plugin credential provider from the v2 SDK developer preview. This feature may be made available as a separate module.
 * Removes support for deprecated Go versions ([#393](https://github.com/aws/aws-sdk-go-v2/pull/393))
   * Removes support for Go version specific files from the SDK. Also removes irrelevant build tags, and updates the README.md file. 
+  * Raises the minimum supported version to Go 1.11 for the SDK. Older versions may work, but are not actively supported
   
 SDK Features
 ---
