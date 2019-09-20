@@ -92,7 +92,7 @@ func TestValidDataFiles(t *testing.T) {
 		return nil
 	})
 	if err != nil {
-		t.Errorf("Error while walking the file tree rooted at root, %d", err)
+		t.Fatalf("Error while walking the file tree rooted at root, %d", err)
 	}
 }
 

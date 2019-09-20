@@ -170,8 +170,7 @@ func shouldRetryError(origErr error) bool {
 		return true
 
 	default:
-		switch err.Error() {
-		case "net/http: request canceled":
+		if strings.Contains(err.Error(), "canceled") {
 			return false
 		}
 		// here we don't know the error; so we allow a retry.
