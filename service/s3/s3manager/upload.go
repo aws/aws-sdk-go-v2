@@ -3,6 +3,7 @@ package s3manager
 import (
 	"bytes"
 	"context"
+	"crypto/md5"
 	"errors"
 	"fmt"
 	"io"
@@ -30,7 +31,7 @@ const MinUploadPartSize int64 = 1024 * 1024 * 5
 const DefaultUploadPartSize = MinUploadPartSize
 
 // DefaultUploadConcurrency is the default number of goroutines to spin up when
-// using Upload().
+// using Upload() or ResumeUpload().
 const DefaultUploadConcurrency = 5
 
 // A MultiUploadFailure wraps a failed S3 multipart upload. An error returned
@@ -62,6 +63,10 @@ type MultiUploadFailure interface {
 // So that the Error interface type can be included as an anonymous field
 // in the multiUploadError struct and not conflict with the error.Error() method.
 type awsError awserr.Error
+
+// ErrMultiUploadCanceled is returned in a MultiUploadFailure when
+// a multipart upload is canceled by the UploadPartCallback.
+var ErrMultiUploadCanceled = errors.New("upload multipart canceled")
 
 // A multiUploadError wraps the upload ID of a failed s3 multipart upload.
 // Composed of BaseError for code, message, and original error
@@ -149,6 +154,30 @@ type Uploader struct {
 	// to S3, and you know its maximum size. Otherwise the reader's io.EOF returned
 	// error must be used to signal end of stream.
 	MaxUploadParts int
+
+	// Called after each part of a multipart upload completes.
+	// Return true to continue the multipart upload, or false to cancel it.
+	//
+	// When the callback returns false, the upload will fail with a MultiUploadFailure
+	// that wraps the MultiUploadCanceledError.
+	//
+	// Example:
+	//
+	//     u := s3manager.NewUploader(opts)
+	//     output, err := u.upload(input)
+	//     if err != nil {
+	//         if multierr, ok := err.(s3manager.MultiUploadFailure); ok {
+	//             if multierr.OrigErr() == s3manager.ErrMultiUploadCanceled {
+	//                 fmt.Println("multipart upload canceled")
+	//             }
+	//         }
+	//     }
+	//
+	// Any parts that have already been uploaded will be kept or deleted based on
+	// the LeavePartsOnError option.
+	//
+	// The callback can be called from any goroutine, so must be threadsafe.
+	UploadPartCallback func(part s3.CompletedPart) bool
 
 	// The client to use when uploading to S3.
 	S3 s3iface.ClientAPI
@@ -341,6 +370,69 @@ func (u Uploader) UploadWithIterator(ctx context.Context, iter BatchUploadIterat
 	return nil
 }
 
+// ResumeUpload resumes a multipart upload by providing an existing uploadID.
+// If the data to be uploaded does not match what has been previously uploaded,
+// those parts will be uploaded again.
+//
+// Additional functional options can be provided to configure the individual
+// upload. These options are copies of the Uploader instance ResumeUpload is called from.
+// Modifying the options will not impact the original Uploader instance.
+//
+// Use the WithUploaderRequestOptions helper function to pass in request
+// options that will be applied to all API operations made with this uploader.
+//
+// It is safe to call this method concurrently across goroutines.
+func (u Uploader) ResumeUpload(uploadID string, input *UploadInput, options ...func(*Uploader)) (*UploadOutput, error) {
+	return u.ResumeUploadWithContext(context.Background(), uploadID, input, options...)
+}
+
+// ResumeUploadWithContext resumes a multipart upload by providing an existing uploadID.
+// If the data to be uploaded does not match what has been previously uploaded,
+// those parts will be uploaded again.
+//
+// ResumeUploadWithContext is the same as ResumeUpload with the additional support for
+// Context input parameters. The Context must not be nil. A nil Context will
+// cause a panic. Use the context to add deadlining, timeouts, ect. The
+// UploadWithContext may create sub-contexts for individual underlying requests.
+//
+// Additional functional options can be provided to configure the individual
+// upload. These options are copies of the Uploader instance ResumeUpload is called from.
+// Modifying the options will not impact the original Uploader instance.
+//
+// Use the WithUploaderRequestOptions helper function to pass in request
+// options that will be applied to all API operations made with this uploader.
+//
+// It is safe to call this method concurrently across goroutines.
+func (u Uploader) ResumeUploadWithContext(ctx context.Context, uploadID string, input *UploadInput, opts ...func(*Uploader)) (*UploadOutput, error) {
+	i := &uploader{in: input, cfg: u, ctx: ctx}
+	i.init()
+
+	for _, opt := range opts {
+		opt(&i.cfg)
+	}
+	i.cfg.RequestOptions = append(i.cfg.RequestOptions, request.WithAppendUserAgent("S3Manager"))
+
+	mu := multiuploader{uploader: i}
+	mu.uploadID = uploadID
+
+	// Load any existing parts
+	if err := mu.loadCompletedParts(); err != nil {
+		return nil, awserr.New("ListParts", "list upload parts failed", err)
+	}
+
+	// The part size must be the same as any existing parts
+	if len(mu.parts) > 0 {
+		mu.uploader.cfg.PartSize = mu.parts[0].size
+	}
+
+	reader, _, cleanup, err := i.nextReader()
+	if err != nil && err != io.EOF {
+		return nil, awserr.New("ReadRequestBody", "read upload data failed", err)
+	}
+
+	return mu.upload(reader, cleanup)
+}
+
 // internal structure to manage an upload to S3.
 type uploader struct {
 	ctx context.Context
@@ -356,7 +448,7 @@ type uploader struct {
 // multipart upload.
 func (u *uploader) upload() (*UploadOutput, error) {
 	if err := u.init(); err != nil {
-		return nil, awserr.New("ReadRequestBody", "unable to initillize upload", err)
+		return nil, awserr.New("ReadRequestBody", "unable to initialize upload", err)
 	}
 	defer u.cfg.partPool.Close()
 
@@ -542,16 +634,48 @@ type multiuploader struct {
 type chunk struct {
 	buf     io.ReadSeeker
 	num     int64
+	size    int64
 	cleanup func()
+}
+
+type completedPart struct {
+	etag   string
+	number int64
+	size   int64
 }
 
 // completedParts is a wrapper to make parts sortable by their part number,
 // since S3 required this list to be sent in sorted order.
-type completedParts []s3.CompletedPart
+type completedParts []completedPart
 
 func (a completedParts) Len() int           { return len(a) }
 func (a completedParts) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a completedParts) Less(i, j int) bool { return *a[i].PartNumber < *a[j].PartNumber }
+func (a completedParts) Less(i, j int) bool { return a[i].number < a[j].number }
+
+// request all the parts that are known to be completed for this upload
+func (u *multiuploader) loadCompletedParts() error {
+	var partNumberMarker *int64
+
+	req := u.cfg.S3.ListPartsRequest(&s3.ListPartsInput{
+		Bucket:           u.uploader.in.Bucket,
+		Key:              u.uploader.in.Key,
+		UploadId:         &u.uploadID,
+		PartNumberMarker: partNumberMarker,
+	})
+
+	paginator := s3.NewListPartsPaginator(req)
+
+	for paginator.Next(u.ctx) {
+		page := paginator.CurrentPage()
+
+		for _, part := range page.Parts {
+			completed := completedPart{etag: *part.ETag, number: *part.PartNumber, size: *part.Size}
+			u.parts = append(u.parts, completed)
+		}
+	}
+
+	return paginator.Err()
+}
 
 // upload will perform a multipart upload using the firstBuf buffer containing
 // the first chunk of data.
@@ -559,15 +683,17 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker, cleanup func()) (*UploadO
 	params := &s3.CreateMultipartUploadInput{}
 	awsutil.Copy(params, u.in)
 
-	// Create the multipart
-	req := u.cfg.S3.CreateMultipartUploadRequest(params)
-	req.ApplyOptions(u.cfg.RequestOptions...)
-	resp, err := req.Send(u.ctx)
-	if err != nil {
-		cleanup()
-		return nil, err
+	// Create the multipart upload unless resuming a previous upload
+	if u.uploadID == "" {
+		req := u.cfg.S3.CreateMultipartUploadRequest(params)
+		req.ApplyOptions(u.cfg.RequestOptions...)
+		resp, err := req.Send(u.ctx)
+		if err != nil {
+			cleanup()
+			return nil, err
+		}
+		u.uploadID = *resp.UploadId
 	}
-	u.uploadID = *resp.UploadId
 
 	// Create the workers
 	ch := make(chan chunk, u.cfg.Concurrency)
@@ -581,6 +707,7 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker, cleanup func()) (*UploadO
 	ch <- chunk{buf: firstBuf, num: num, cleanup: cleanup}
 
 	// Read and queue the rest of the parts
+	var err error
 	for u.geterr() == nil && err == nil {
 		var (
 			reader       io.ReadSeeker
@@ -601,7 +728,7 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker, cleanup func()) (*UploadO
 
 		num++
 
-		ch <- chunk{buf: reader, num: num, cleanup: cleanup}
+		ch <- chunk{buf: reader, num: num, size: int64(nextChunkLen), cleanup: cleanup}
 	}
 
 	// Close the channel, wait for workers, and complete upload
@@ -610,11 +737,16 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker, cleanup func()) (*UploadO
 	complete := u.complete()
 
 	if err := u.geterr(); err != nil {
+		var awsError awserr.Error
+
+		if err == ErrMultiUploadCanceled {
+			awsError = awserr.New("MultipartUpload", "upload multipart canceled", ErrMultiUploadCanceled)
+		} else {
+			awsError = awserr.New("MultipartUpload", "upload multipart failed", err)
+		}
+
 		return nil, &multiUploadError{
-			awsError: awserr.New(
-				"MultipartUpload",
-				"upload multipart failed",
-				err),
+			awsError: awsError,
 			uploadID: u.uploadID,
 		}
 	}
@@ -688,6 +820,10 @@ func (u *multiuploader) readChunk(ch chan chunk) {
 // send performs an UploadPart request and keeps track of the completed
 // part information.
 func (u *multiuploader) send(c chunk) error {
+	if u.isChunkUploaded(c) {
+		return nil
+	}
+
 	params := &s3.UploadPartInput{
 		Bucket:               u.in.Bucket,
 		Key:                  u.in.Key,
@@ -704,14 +840,61 @@ func (u *multiuploader) send(c chunk) error {
 		return err
 	}
 
-	n := c.num
-	completed := s3.CompletedPart{ETag: resp.ETag, PartNumber: &n}
+	completed := completedPart{etag: *resp.ETag, number: c.num, size: c.size}
 
 	u.m.Lock()
 	u.parts = append(u.parts, completed)
 	u.m.Unlock()
 
+	// Check if the multipart upload should be canceled after this part
+	if !u.shouldContinueUpload(completed) {
+		return ErrMultiUploadCanceled
+	}
+
 	return nil
+}
+
+// Run the UploadPartCallback to determine if the multipart upload should continue
+func (u *multiuploader) shouldContinueUpload(part completedPart) bool {
+	callback := u.uploader.cfg.UploadPartCallback
+	if callback == nil {
+		return true
+	}
+
+	return callback(s3.CompletedPart{ETag: &part.etag, PartNumber: &part.number})
+}
+
+// isChunkUploaded is called before uploading each chunk to determine
+// if this chunk can be skipped. Chunks can be skipped when resuming an upload
+// if the ETag matches for the previously uploaded chunk.
+func (u *multiuploader) isChunkUploaded(c chunk) bool {
+	var expectedETag string
+
+	u.m.Lock()
+	for _, part := range u.parts {
+		if part.number == c.num {
+			expectedETag = part.etag
+			break
+		}
+	}
+	u.m.Unlock()
+
+	if expectedETag == "" {
+		return false
+	}
+
+	// Seek the buffer back to the start so it can be read and uploaded
+	defer c.buf.Seek(0, io.SeekStart)
+
+	// Check the md5 matches
+	h := md5.New()
+	_, err := io.Copy(h, c.buf)
+	if err != nil {
+		return false
+	}
+
+	etag := fmt.Sprintf("\"%x\"", h.Sum(nil))
+	return etag == expectedETag
 }
 
 // geterr is a thread-safe getter for the error object
@@ -758,12 +941,21 @@ func (u *multiuploader) complete() *s3.CompleteMultipartUploadOutput {
 	// Parts must be sorted in PartNumber order.
 	sort.Sort(u.parts)
 
+	// Convert to []s3.CompletedPart
+	parts := make([]s3.CompletedPart, len(u.parts))
+	for i, part := range u.parts {
+		etag := part.etag
+		number := part.number
+		parts[i] = s3.CompletedPart{ETag: &etag, PartNumber: &number}
+	}
+
 	params := &s3.CompleteMultipartUploadInput{
 		Bucket:          u.in.Bucket,
 		Key:             u.in.Key,
 		UploadId:        &u.uploadID,
-		MultipartUpload: &s3.CompletedMultipartUpload{Parts: u.parts},
+		MultipartUpload: &s3.CompletedMultipartUpload{Parts: parts},
 	}
+
 	req := u.cfg.S3.CompleteMultipartUploadRequest(params)
 	req.ApplyOptions(u.cfg.RequestOptions...)
 	resp, err := req.Send(u.ctx)

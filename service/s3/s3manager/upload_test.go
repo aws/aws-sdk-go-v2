@@ -1066,39 +1066,228 @@ func TestUploadWithContextCanceled(t *testing.T) {
 	}
 }
 
-// S3 Uploader incorrectly fails an upload if the content being uploaded
-// has a size of MinPartSize * MaxUploadParts.
-func TestUploadMaxPartsEOF(t *testing.T) {
+func TestResumeUploadNotFound(t *testing.T) {
 	s, ops, _ := loggingSvc(emptyList)
-	mgr := s3manager.NewUploaderWithClient(s, func(u *s3manager.Uploader) {
-		u.Concurrency = 1
-		u.PartSize = s3manager.DefaultUploadPartSize
-		u.MaxUploadParts = 2
+	mgr := s3manager.NewUploaderWithClient(s)
+	// s.Handlers.Send.PushBack()
+	s.Handlers.Send.PushBack(func(r *aws.Request) {
+		switch r.Data.(type) {
+		case *s3.ListPartsOutput:
+			r.HTTPResponse.StatusCode = 404
+		}
 	})
-	f := bytes.NewReader(make([]byte, int(mgr.PartSize)*mgr.MaxUploadParts))
-
-	r1 := io.NewSectionReader(f, 0, s3manager.DefaultUploadPartSize)
-	r2 := io.NewSectionReader(f, s3manager.DefaultUploadPartSize, 2*s3manager.DefaultUploadPartSize)
-	body := io.MultiReader(r1, r2)
-
-	_, err := mgr.Upload(&s3manager.UploadInput{
+	_, err := mgr.ResumeUpload("UPLOAD-ID", &s3manager.UploadInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
-		Body:   body,
+		Body:   bytes.NewReader(buf12MB),
+	})
+
+	if err == nil {
+		t.Fatalf("expected error, did not get one")
+	}
+
+	aerr := err.(awserr.Error)
+	if e, a := "list upload parts failed", aerr.Message(); !strings.Contains(a, e) {
+		t.Errorf("expected error message to contain %q, but did not %q", e, a)
+	}
+
+	vals := []string{"ListParts"}
+	if !reflect.DeepEqual(vals, *ops) {
+		t.Errorf("Expected %v, but received %v", vals, *ops)
+	}
+}
+
+func TestResumeUploadNoPartsUploaded(t *testing.T) {
+	s, ops, _ := loggingSvc(emptyList)
+	mgr := s3manager.NewUploaderWithClient(s, func(u *s3manager.Uploader) {
+		u.PartSize = 1024 * 1024 * 7
+		u.Concurrency = 1
+	})
+	s.Handlers.Send.PushBack(func(r *aws.Request) {
+		switch data := r.Data.(type) {
+		case *s3.ListPartsOutput:
+			var f bool
+			data.IsTruncated = &f
+			data.Parts = []s3.Part{}
+		}
+	})
+	_, err := mgr.ResumeUpload("UPLOAD-ID", &s3manager.UploadInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   bytes.NewReader(buf12MB),
 	})
 
 	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
+		t.Errorf("Expected no error but received %v", err)
 	}
 
-	expectOps := []string{
-		"CreateMultipartUpload",
-		"UploadPart",
-		"UploadPart",
-		"CompleteMultipartUpload",
+	vals := []string{"ListParts", "UploadPart", "UploadPart", "CompleteMultipartUpload"}
+	if !reflect.DeepEqual(vals, *ops) {
+		t.Errorf("Expected %v, but received %v", vals, *ops)
 	}
-	if e, a := expectOps, *ops; !reflect.DeepEqual(e, a) {
-		t.Errorf("expect %v ops, got %v", e, a)
+}
+
+func TestResumeUploadSomePartsUploaded(t *testing.T) {
+	s, ops, _ := loggingSvc(emptyList)
+	mgr := s3manager.NewUploaderWithClient(s, func(u *s3manager.Uploader) {
+		u.Concurrency = 1
+	})
+	s.Handlers.Send.PushBack(func(r *aws.Request) {
+		switch data := r.Data.(type) {
+		case *s3.ListPartsOutput:
+			var f bool
+			data.IsTruncated = &f
+			data.Parts = []s3.Part{
+				{ETag: aws.String("\"5f363e0e58a95f06cbe9bbc662c5dfb6\""), PartNumber: aws.Int64(1), Size: aws.Int64(1024 * 1024 * 5)},
+				{ETag: aws.String("\"5f363e0e58a95f06cbe9bbc662c5dfb6\""), PartNumber: aws.Int64(2), Size: aws.Int64(1024 * 1024 * 5)},
+			}
+		}
+	})
+	_, err := mgr.ResumeUpload("UPLOAD-ID", &s3manager.UploadInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   bytes.NewReader(buf12MB),
+	})
+
+	if err != nil {
+		t.Errorf("Expected no error but received %v", err)
+	}
+
+	vals := []string{"ListParts", "UploadPart", "CompleteMultipartUpload"}
+	if !reflect.DeepEqual(vals, *ops) {
+		t.Errorf("Expected %v, but received %v", vals, *ops)
+	}
+}
+
+func TestResumeUploadAllPartsUploaded(t *testing.T) {
+	s, ops, _ := loggingSvc(emptyList)
+	mgr := s3manager.NewUploaderWithClient(s, func(u *s3manager.Uploader) {
+		u.Concurrency = 1
+	})
+	s.Handlers.Send.PushBack(func(r *aws.Request) {
+		switch data := r.Data.(type) {
+		case *s3.ListPartsOutput:
+			var f bool
+			data.IsTruncated = &f
+			data.Parts = []s3.Part{
+				{ETag: aws.String("\"5f363e0e58a95f06cbe9bbc662c5dfb6\""), PartNumber: aws.Int64(1), Size: aws.Int64(1024 * 1024 * 5)},
+				{ETag: aws.String("\"5f363e0e58a95f06cbe9bbc662c5dfb6\""), PartNumber: aws.Int64(2), Size: aws.Int64(1024 * 1024 * 5)},
+				{ETag: aws.String("\"b2d1236c286a3c0704224fe4105eca49\""), PartNumber: aws.Int64(3), Size: aws.Int64(1024 * 1024 * 2)},
+			}
+		}
+	})
+	_, err := mgr.ResumeUpload("UPLOAD-ID", &s3manager.UploadInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   bytes.NewReader(buf12MB),
+	})
+
+	if err != nil {
+		t.Errorf("Expected no error but received %v", err)
+	}
+
+	vals := []string{"ListParts", "CompleteMultipartUpload"}
+	if !reflect.DeepEqual(vals, *ops) {
+		t.Errorf("Expected %v, but received %v", vals, *ops)
+	}
+}
+
+func TestResumeUploadUsesPreviousPartSize(t *testing.T) {
+	s, ops, _ := loggingSvc(emptyList)
+	partSize := 1024 * 1024 * 5
+	mgr := s3manager.NewUploaderWithClient(s, func(u *s3manager.Uploader) {
+		u.PartSize = 1024 * 1024 * 100
+		u.Concurrency = 1
+	})
+	s.Handlers.Send.PushBack(func(r *aws.Request) {
+		switch data := r.Data.(type) {
+		case *s3.UploadPartInput:
+			d, _ := ioutil.ReadAll(data.Body)
+			if len(d) > partSize {
+				t.Errorf("expected part size %v, but received %v", partSize, len(d))
+			}
+		case *s3.ListPartsOutput:
+			data.IsTruncated = aws.Bool(false)
+			data.Parts = []s3.Part{
+				{ETag: aws.String("\"5f363e0e58a95f06cbe9bbc662c5dfb6\""), PartNumber: aws.Int64(1), Size: aws.Int64(1024 * 1024 * 5)},
+			}
+		}
+	})
+	_, err := mgr.ResumeUpload("UPLOAD-ID", &s3manager.UploadInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   bytes.NewReader(buf12MB),
+	})
+
+	if err != nil {
+		t.Errorf("Expected no error but received %v", err)
+	}
+
+	vals := []string{"ListParts", "UploadPart", "UploadPart", "CompleteMultipartUpload"}
+	if !reflect.DeepEqual(vals, *ops) {
+		t.Errorf("Expected %v, but received %v", vals, *ops)
+	}
+}
+
+func TestResumeUploadETagMismatch(t *testing.T) {
+	s, ops, _ := loggingSvc(emptyList)
+	mgr := s3manager.NewUploaderWithClient(s, func(u *s3manager.Uploader) {
+		u.PartSize = 1024 * 1024 * 5
+		u.Concurrency = 1
+	})
+	s.Handlers.Send.PushBack(func(r *aws.Request) {
+		switch data := r.Data.(type) {
+		case *s3.ListPartsOutput:
+			var f bool
+			data.IsTruncated = &f
+			data.Parts = []s3.Part{
+				{ETag: aws.String("\"5f363e0e58a95f06cbe9bbc662c5dfb6\""), PartNumber: aws.Int64(1), Size: aws.Int64(1024 * 1024 * 5)},
+				{ETag: aws.String("\"different-etag\""), PartNumber: aws.Int64(2), Size: aws.Int64(1)},
+			}
+		}
+	})
+	_, err := mgr.ResumeUpload("UPLOAD-ID", &s3manager.UploadInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   bytes.NewReader(buf12MB),
+	})
+
+	if err != nil {
+		t.Errorf("Expected no error but received %v", err)
+	}
+
+	vals := []string{"ListParts", "UploadPart", "UploadPart", "CompleteMultipartUpload"}
+	if !reflect.DeepEqual(vals, *ops) {
+		t.Errorf("Expected %v, but received %v", vals, *ops)
+	}
+}
+
+func TestUploadPartCallbackCancelsUpload(t *testing.T) {
+	s, ops, _ := loggingSvc(emptyList)
+	mgr := s3manager.NewUploaderWithClient(s, func(u *s3manager.Uploader) {
+		u.Concurrency = 1
+		u.UploadPartCallback = func(part s3.CompletedPart) bool {
+			return *part.PartNumber != 2
+		}
+	})
+	_, err := mgr.Upload(&s3manager.UploadInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   bytes.NewReader(buf12MB),
+	})
+
+	if err == nil {
+		t.Errorf("Expected error, but received nil")
+	}
+
+	aerr := err.(s3manager.MultiUploadFailure)
+	if e, a := s3manager.ErrMultiUploadCanceled, aerr.OrigErr(); e != a {
+		t.Errorf("Expected %v, but received %v", e, a)
+	}
+
+	vals := []string{"CreateMultipartUpload", "UploadPart", "UploadPart", "AbortMultipartUpload"}
+	if !reflect.DeepEqual(vals, *ops) {
+		t.Errorf("Expected %v, but received %v", vals, *ops)
 	}
 }
 
