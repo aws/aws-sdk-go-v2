@@ -19,7 +19,6 @@ SDK_EXAMPLES_PKGS=./example/...
 SDK_MODELS_PKGS=./models/...
 SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_EXAMPLES_PKGS} ${SDK_MODELS_PKGS}
 
-SDK_V1_USAGE=$(shell go list -f '''{{ if not .Standard }}{{ range $$_, $$name := .Imports }} * {{ $$.ImportPath }} -> {{ $$name }}{{ print "\n" }}{{ end }}{{ end }}''' ./... | sort -u | grep '''/aws-sdk-go/''')
 
 all: generate unit
 
@@ -158,7 +157,9 @@ vet:
 
 sdkv1check:
 	@echo "Checking for usage of AWS SDK for Go v1"
-	@if [ ! -z "${SDK_V1_USAGE}" ]; then echo "Using of V1 SDK packages"; echo "${SDK_V1_USAGE}"; exit 1; fi
+	@sdkv1usage=`go list -test -f '''{{ if not .Standard }}{{ range $$_, $$name := .Imports }} * {{ $$.ImportPath }} -> {{ $$name }}{{ print "\n" }}{{ end }}{{ range $$_, $$name := .TestImports }} *: {{ $$.ImportPath }} -> {{ $$name }}{{ print "\n" }}{{ end }}{{ end}}''' ./... | sort -u | grep '''/aws-sdk-go/'''`; \
+	echo "$$sdkv1usage"; \
+	if [ "$$sdkv1usage" != "" ]; then exit 1; fi
 
 ################
 # Dependencies #
