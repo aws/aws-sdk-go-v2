@@ -89,7 +89,7 @@ type ModifyEndpointInput struct {
 	MongoDbSettings *MongoDbSettings `type:"structure"`
 
 	// The password to be used to login to the endpoint database.
-	Password *string `type:"string"`
+	Password *string `type:"string" sensitive:"true"`
 
 	// The port used by the endpoint database.
 	Port *int64 `type:"integer"`

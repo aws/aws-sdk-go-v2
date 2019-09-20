@@ -16,7 +16,7 @@ type ListDevicesInput struct {
 	// The access tokens for the request to list devices.
 	//
 	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true"`
+	AccessToken *string `type:"string" required:"true" sensitive:"true"`
 
 	// The limit of the device request.
 	Limit *int64 `type:"integer"`

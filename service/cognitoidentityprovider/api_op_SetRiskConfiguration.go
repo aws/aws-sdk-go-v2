@@ -22,7 +22,7 @@ type SetRiskConfigurationInput struct {
 	// Otherwise, ClientId is mapped to the client. When the client ID is not null,
 	// the user pool configuration is overridden and the risk configuration for
 	// the client is used instead.
-	ClientId *string `min:"1" type:"string"`
+	ClientId *string `min:"1" type:"string" sensitive:"true"`
 
 	// The compromised credentials risk configuration.
 	CompromisedCredentialsRiskConfiguration *CompromisedCredentialsRiskConfigurationType `type:"structure"`

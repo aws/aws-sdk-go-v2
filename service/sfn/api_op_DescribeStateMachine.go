@@ -53,7 +53,7 @@ type DescribeStateMachineOutput struct {
 	// Language (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
 	//
 	// Definition is a required field
-	Definition *string `locationName:"definition" min:"1" type:"string" required:"true"`
+	Definition *string `locationName:"definition" min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The name of the state machine.
 	//

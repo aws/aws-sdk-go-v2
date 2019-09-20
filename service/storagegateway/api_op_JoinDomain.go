@@ -38,7 +38,7 @@ type JoinDomainInput struct {
 	// Active Directory domain.
 	//
 	// Password is a required field
-	Password *string `min:"1" type:"string" required:"true"`
+	Password *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// Sets the user name of user who has permission to add the gateway to the Active
 	// Directory domain.

@@ -19,13 +19,13 @@ type GetRevisionInput struct {
 	// For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14}
 	//
 	// BlockAddress is a required field
-	BlockAddress *ValueHolder `type:"structure" required:"true"`
+	BlockAddress *ValueHolder `type:"structure" required:"true" sensitive:"true"`
 
 	// The latest block location covered by the digest for which to request a proof.
 	// An address is an Amazon Ion structure that has two fields: strandId and sequenceNo.
 	//
 	// For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}
-	DigestTipAddress *ValueHolder `type:"structure"`
+	DigestTipAddress *ValueHolder `type:"structure" sensitive:"true"`
 
 	// The unique ID of the document to be verified.
 	//
@@ -119,12 +119,12 @@ type GetRevisionOutput struct {
 	// A proof contains the list of hash values that are required to recalculate
 	// the specified digest using a Merkle tree, starting with the specified document
 	// revision.
-	Proof *ValueHolder `type:"structure"`
+	Proof *ValueHolder `type:"structure" sensitive:"true"`
 
 	// The document revision data object in Amazon Ion format.
 	//
 	// Revision is a required field
-	Revision *ValueHolder `type:"structure" required:"true"`
+	Revision *ValueHolder `type:"structure" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

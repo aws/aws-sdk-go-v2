@@ -56,7 +56,7 @@ type GetMaintenanceWindowTaskOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The retrieved task description.
-	Description *string `min:"1" type:"string"`
+	Description *string `min:"1" type:"string" sensitive:"true"`
 
 	// The location in Amazon S3 where the task results are logged.
 	//
@@ -101,7 +101,7 @@ type GetMaintenanceWindowTaskOutput struct {
 	// when it runs, instead use the Parameters option in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options
 	// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
-	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map"`
+	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map" sensitive:"true"`
 
 	// The type of task to run.
 	TaskType MaintenanceWindowTaskType `type:"string" enum:"true"`

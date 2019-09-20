@@ -16,7 +16,7 @@ type InitiateDocumentVersionUploadInput struct {
 
 	// Amazon WorkDocs authentication token. Do not set this field when using administrative
 	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string"`
+	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The timestamp when the content of the document was originally created.
 	ContentCreatedTimestamp *time.Time `type:"timestamp"`

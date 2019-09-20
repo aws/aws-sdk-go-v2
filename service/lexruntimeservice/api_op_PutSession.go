@@ -48,7 +48,7 @@ type PutSessionInput struct {
 	// Map of key/value pairs representing the session-specific context information.
 	// It contains application information passed between Amazon Lex and a client
 	// application.
-	SessionAttributes map[string]string `locationName:"sessionAttributes" type:"map"`
+	SessionAttributes map[string]string `locationName:"sessionAttributes" type:"map" sensitive:"true"`
 
 	// The ID of the client application user. Amazon Lex uses this to identify a
 	// user's conversation with your bot.
@@ -173,7 +173,7 @@ type PutSessionOutput struct {
 	IntentName *string `location:"header" locationName:"x-amz-lex-intent-name" type:"string"`
 
 	// The next message that should be presented to the user.
-	Message *string `location:"header" locationName:"x-amz-lex-message" min:"1" type:"string"`
+	Message *string `location:"header" locationName:"x-amz-lex-message" min:"1" type:"string" sensitive:"true"`
 
 	// The format of the response message. One of the following values:
 	//

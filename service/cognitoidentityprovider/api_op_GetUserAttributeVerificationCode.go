@@ -17,7 +17,7 @@ type GetUserAttributeVerificationCodeInput struct {
 	// verification code.
 	//
 	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true"`
+	AccessToken *string `type:"string" required:"true" sensitive:"true"`
 
 	// The attribute name returned by the server response to get the user attribute
 	// verification code.

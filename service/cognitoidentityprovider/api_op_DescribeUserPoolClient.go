@@ -16,7 +16,7 @@ type DescribeUserPoolClientInput struct {
 	// The app client ID of the app associated with the user pool.
 	//
 	// ClientId is a required field
-	ClientId *string `min:"1" type:"string" required:"true"`
+	ClientId *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The user pool ID for the user pool you want to describe.
 	//

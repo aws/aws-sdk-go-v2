@@ -24,7 +24,7 @@ type CreateLoginProfileInput struct {
 	// because they have special meaning within that tool.
 	//
 	// Password is a required field
-	Password *string `min:"1" type:"string" required:"true"`
+	Password *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// Specifies whether the user is required to set a new password on next sign-in.
 	PasswordResetRequired *bool `type:"boolean"`

@@ -56,7 +56,7 @@ type UpdateFunctionCodeInput struct {
 	// clients handle the encoding for you.
 	//
 	// ZipFile is automatically base64 encoded/decoded by the SDK.
-	ZipFile []byte `type:"blob"`
+	ZipFile []byte `type:"blob" sensitive:"true"`
 }
 
 // String returns the string representation

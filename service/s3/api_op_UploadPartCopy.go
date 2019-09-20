@@ -49,7 +49,7 @@ type UploadPartCopyInput struct {
 	// Specifies the customer-provided encryption key for Amazon S3 to use to decrypt
 	// the source object. The encryption key provided in this header must be one
 	// that was used when the source object was created.
-	CopySourceSSECustomerKey *string `location:"header" locationName:"x-amz-copy-source-server-side-encryption-customer-key" type:"string"`
+	CopySourceSSECustomerKey *string `location:"header" locationName:"x-amz-copy-source-server-side-encryption-customer-key" type:"string" sensitive:"true"`
 
 	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.
 	// Amazon S3 uses this header for a message integrity check to ensure the encryption
@@ -80,7 +80,7 @@ type UploadPartCopyInput struct {
 	// the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm
 	// header. This must be the same encryption key specified in the initiate multipart
 	// upload request.
-	SSECustomerKey *string `location:"header" locationName:"x-amz-server-side-encryption-customer-key" type:"string"`
+	SSECustomerKey *string `location:"header" locationName:"x-amz-server-side-encryption-customer-key" type:"string" sensitive:"true"`
 
 	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.
 	// Amazon S3 uses this header for a message integrity check to ensure the encryption
@@ -287,7 +287,7 @@ type UploadPartCopyOutput struct {
 
 	// If present, specifies the ID of the AWS Key Management Service (KMS) master
 	// encryption key that was used for the object.
-	SSEKMSKeyId *string `location:"header" locationName:"x-amz-server-side-encryption-aws-kms-key-id" type:"string"`
+	SSEKMSKeyId *string `location:"header" locationName:"x-amz-server-side-encryption-aws-kms-key-id" type:"string" sensitive:"true"`
 
 	// The Server-side encryption algorithm used when storing this object in S3
 	// (e.g., AES256, aws:kms).

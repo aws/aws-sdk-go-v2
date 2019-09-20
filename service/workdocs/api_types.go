@@ -143,7 +143,7 @@ type Comment struct {
 	Status CommentStatusType `type:"string" enum:"true"`
 
 	// The text of the comment.
-	Text *string `min:"1" type:"string"`
+	Text *string `min:"1" type:"string" sensitive:"true"`
 
 	// The ID of the root comment in the thread.
 	ThreadId *string `min:"1" type:"string"`
@@ -683,7 +683,7 @@ type NotificationOptions struct {
 	_ struct{} `type:"structure"`
 
 	// Text value to be included in the email body.
-	EmailMessage *string `type:"string"`
+	EmailMessage *string `type:"string" sensitive:"true"`
 
 	// Boolean value to indicate an email notification should be sent to the receipients.
 	SendEmail *bool `type:"boolean"`
@@ -1070,7 +1070,7 @@ type ShareResult struct {
 	Status ShareStatusType `type:"string" enum:"true"`
 
 	// The status message.
-	StatusMessage *string `type:"string"`
+	StatusMessage *string `type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -1202,7 +1202,7 @@ type UploadMetadata struct {
 	SignedHeaders map[string]string `type:"map"`
 
 	// The URL of the upload.
-	UploadUrl *string `min:"1" type:"string"`
+	UploadUrl *string `min:"1" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation

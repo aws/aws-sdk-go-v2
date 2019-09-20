@@ -78,7 +78,7 @@ type CreateBuildOutput struct {
 	// location. It contains credentials to use when you are uploading a build file
 	// to an Amazon S3 bucket that is owned by Amazon GameLift. Credentials have
 	// a limited life span. To refresh these credentials, call RequestUploadCredentials.
-	UploadCredentials *AwsCredentials `type:"structure"`
+	UploadCredentials *AwsCredentials `type:"structure" sensitive:"true"`
 }
 
 // String returns the string representation

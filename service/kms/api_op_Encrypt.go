@@ -51,7 +51,7 @@ type EncryptInput struct {
 	// Plaintext is automatically base64 encoded/decoded by the SDK.
 	//
 	// Plaintext is a required field
-	Plaintext []byte `min:"1" type:"blob" required:"true"`
+	Plaintext []byte `min:"1" type:"blob" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

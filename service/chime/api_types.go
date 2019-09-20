@@ -153,7 +153,7 @@ type Bot struct {
 	_ struct{} `type:"structure"`
 
 	// The bot email address.
-	BotEmail *string `type:"string"`
+	BotEmail *string `type:"string" sensitive:"true"`
 
 	// The bot ID.
 	BotId *string `type:"string"`
@@ -168,11 +168,11 @@ type Bot struct {
 	Disabled *bool `type:"boolean"`
 
 	// The bot display name.
-	DisplayName *string `type:"string"`
+	DisplayName *string `type:"string" sensitive:"true"`
 
 	// The security token used to authenticate Amazon Chime with the outgoing event
 	// endpoint.
-	SecurityToken *string `type:"string"`
+	SecurityToken *string `type:"string" sensitive:"true"`
 
 	// The updated bot timestamp, in ISO 8601 format.
 	UpdatedTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
@@ -279,11 +279,11 @@ type Credential struct {
 
 	// The RFC2617 compliant password associated with the SIP credentials, in US-ASCII
 	// format.
-	Password *string `type:"string"`
+	Password *string `type:"string" sensitive:"true"`
 
 	// The RFC2617 compliant user name associated with the SIP credentials, in US-ASCII
 	// format.
-	Username *string `type:"string"`
+	Username *string `type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -317,10 +317,10 @@ type EventsConfiguration struct {
 	BotId *string `type:"string"`
 
 	// Lambda function ARN that allows a bot to receive outgoing events.
-	LambdaFunctionArn *string `type:"string"`
+	LambdaFunctionArn *string `type:"string" sensitive:"true"`
 
 	// HTTPS endpoint that allows a bot to receive outgoing events.
-	OutboundEventsHTTPSEndpoint *string `type:"string"`
+	OutboundEventsHTTPSEndpoint *string `type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -357,7 +357,7 @@ type Invite struct {
 	_ struct{} `type:"structure"`
 
 	// The email address to which the invite is sent.
-	EmailAddress *string `type:"string"`
+	EmailAddress *string `type:"string" sensitive:"true"`
 
 	// The status of the invite email.
 	EmailStatus EmailStatus `type:"string" enum:"true"`
@@ -408,7 +408,7 @@ type OrderedPhoneNumber struct {
 	_ struct{} `type:"structure"`
 
 	// The phone number, in E.164 format.
-	E164PhoneNumber *string `type:"string"`
+	E164PhoneNumber *string `type:"string" sensitive:"true"`
 
 	// The phone number status.
 	Status OrderedPhoneNumberStatus `type:"string" enum:"true"`
@@ -594,7 +594,7 @@ type PhoneNumber struct {
 	DeletionTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The phone number, in E.164 format.
-	E164PhoneNumber *string `type:"string"`
+	E164PhoneNumber *string `type:"string" sensitive:"true"`
 
 	// The phone number ID.
 	PhoneNumberId *string `type:"string"`
@@ -1015,7 +1015,7 @@ type Termination struct {
 	CpsLimit *int64 `min:"1" type:"integer"`
 
 	// The default caller ID phone number.
-	DefaultPhoneNumber *string `type:"string"`
+	DefaultPhoneNumber *string `type:"string" sensitive:"true"`
 
 	// When termination settings are disabled, outbound calls can not be made.
 	Disabled *bool `type:"boolean"`
@@ -1228,7 +1228,7 @@ type User struct {
 	AccountId *string `type:"string"`
 
 	// The display name of the user.
-	DisplayName *string `type:"string"`
+	DisplayName *string `type:"string" sensitive:"true"`
 
 	// Date and time when the user is invited to the Amazon Chime account, in ISO
 	// 8601 format.
@@ -1241,10 +1241,10 @@ type User struct {
 	PersonalPIN *string `type:"string"`
 
 	// The primary email address of the user.
-	PrimaryEmail *string `type:"string"`
+	PrimaryEmail *string `type:"string" sensitive:"true"`
 
 	// The primary phone number associated with the user.
-	PrimaryProvisionedNumber *string `type:"string"`
+	PrimaryProvisionedNumber *string `type:"string" sensitive:"true"`
 
 	// Date and time when the user is registered, in ISO 8601 format.
 	RegisteredOn *time.Time `type:"timestamp" timestampFormat:"iso8601"`

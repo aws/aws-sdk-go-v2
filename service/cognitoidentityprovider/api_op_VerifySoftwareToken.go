@@ -13,7 +13,7 @@ type VerifySoftwareTokenInput struct {
 	_ struct{} `type:"structure"`
 
 	// The access token.
-	AccessToken *string `type:"string"`
+	AccessToken *string `type:"string" sensitive:"true"`
 
 	// The friendly device name.
 	FriendlyDeviceName *string `type:"string"`

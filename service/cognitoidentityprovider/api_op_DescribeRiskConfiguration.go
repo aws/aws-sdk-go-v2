@@ -13,7 +13,7 @@ type DescribeRiskConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
 	// The app client ID.
-	ClientId *string `min:"1" type:"string"`
+	ClientId *string `min:"1" type:"string" sensitive:"true"`
 
 	// The user pool ID.
 	//

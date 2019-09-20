@@ -1575,7 +1575,7 @@ type Encryption struct {
 
 	// If the encryption type is aws:kms, this optional value specifies the AWS
 	// KMS key ID to use for encryption of job results.
-	KMSKeyId *string `type:"string"`
+	KMSKeyId *string `type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -5238,7 +5238,7 @@ type SSEKMS struct {
 	// key to use for encrypting Inventory reports.
 	//
 	// KeyId is a required field
-	KeyId *string `type:"string" required:"true"`
+	KeyId *string `type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -5383,7 +5383,7 @@ type ServerSideEncryptionByDefault struct {
 
 	// KMS master key ID to use for the default encryption. This parameter is allowed
 	// if and only if SSEAlgorithm is set to aws:kms.
-	KMSMasterKeyID *string `type:"string"`
+	KMSMasterKeyID *string `type:"string" sensitive:"true"`
 
 	// Server-side encryption algorithm to use for the default encryption.
 	//

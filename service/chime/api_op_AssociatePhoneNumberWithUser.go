@@ -21,7 +21,7 @@ type AssociatePhoneNumberWithUserInput struct {
 	// The phone number, in E.164 format.
 	//
 	// E164PhoneNumber is a required field
-	E164PhoneNumber *string `type:"string" required:"true"`
+	E164PhoneNumber *string `type:"string" required:"true" sensitive:"true"`
 
 	// The user ID.
 	//

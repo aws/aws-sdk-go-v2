@@ -15,7 +15,7 @@ type DescribeGroupsInput struct {
 
 	// Amazon WorkDocs authentication token. Do not set this field when using administrative
 	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string"`
+	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// The maximum number of items to return with this call.
 	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
@@ -30,7 +30,7 @@ type DescribeGroupsInput struct {
 	// A query to describe groups by group name.
 	//
 	// SearchQuery is a required field
-	SearchQuery *string `location:"querystring" locationName:"searchQuery" min:"1" type:"string" required:"true"`
+	SearchQuery *string `location:"querystring" locationName:"searchQuery" min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

@@ -18,7 +18,7 @@ var _ = awsutil.Prettify
 // used to access input and output artifacts in the Amazon S3 bucket used to
 // store artifact for the pipeline in AWS CodePipeline.
 type AWSSessionCredentials struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" sensitive:"true"`
 
 	// The access key for the session.
 	//
@@ -1212,7 +1212,7 @@ type JobData struct {
 	// credentials that are issued by AWS Secure Token Service (STS). They can be
 	// used to access input and output artifacts in the Amazon S3 bucket used to
 	// store artifacts for the pipeline in AWS CodePipeline.
-	ArtifactCredentials *AWSSessionCredentials `locationName:"artifactCredentials" type:"structure"`
+	ArtifactCredentials *AWSSessionCredentials `locationName:"artifactCredentials" type:"structure" sensitive:"true"`
 
 	// A system-generated token, such as a AWS CodeDeploy deployment ID, that a
 	// job requires in order to continue the job asynchronously.
@@ -1837,7 +1837,7 @@ type ThirdPartyJobData struct {
 	// credentials that are issued by AWS Secure Token Service (STS). They can be
 	// used to access input and output artifacts in the Amazon S3 bucket used to
 	// store artifact for the pipeline in AWS CodePipeline.
-	ArtifactCredentials *AWSSessionCredentials `locationName:"artifactCredentials" type:"structure"`
+	ArtifactCredentials *AWSSessionCredentials `locationName:"artifactCredentials" type:"structure" sensitive:"true"`
 
 	// A system-generated token, such as a AWS CodeDeploy deployment ID, that a
 	// job requires in order to continue the job asynchronously.

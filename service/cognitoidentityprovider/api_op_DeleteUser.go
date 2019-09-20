@@ -18,7 +18,7 @@ type DeleteUserInput struct {
 	// The access token from a request to delete a user.
 	//
 	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true"`
+	AccessToken *string `type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

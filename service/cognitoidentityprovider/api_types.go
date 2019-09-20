@@ -272,7 +272,7 @@ type AttributeType struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// The value of the attribute.
-	Value *string `type:"string"`
+	Value *string `type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -338,19 +338,19 @@ type AuthenticationResultType struct {
 	_ struct{} `type:"structure"`
 
 	// The access token.
-	AccessToken *string `type:"string"`
+	AccessToken *string `type:"string" sensitive:"true"`
 
 	// The expiration period of the authentication result in seconds.
 	ExpiresIn *int64 `type:"integer"`
 
 	// The ID token.
-	IdToken *string `type:"string"`
+	IdToken *string `type:"string" sensitive:"true"`
 
 	// The new device metadata from an authentication result.
 	NewDeviceMetadata *NewDeviceMetadataType `type:"structure"`
 
 	// The refresh token.
-	RefreshToken *string `type:"string"`
+	RefreshToken *string `type:"string" sensitive:"true"`
 
 	// The token type.
 	TokenType *string `type:"string"`
@@ -1354,7 +1354,7 @@ type RiskConfigurationType struct {
 	AccountTakeoverRiskConfiguration *AccountTakeoverRiskConfigurationType `type:"structure"`
 
 	// The app client ID.
-	ClientId *string `min:"1" type:"string"`
+	ClientId *string `min:"1" type:"string" sensitive:"true"`
 
 	// The compromised credentials risk configuration object including the EventFilter
 	// and the EventAction
@@ -1590,7 +1590,7 @@ type UICustomizationType struct {
 	CSSVersion *string `type:"string"`
 
 	// The client ID for the client app.
-	ClientId *string `min:"1" type:"string"`
+	ClientId *string `min:"1" type:"string" sensitive:"true"`
 
 	// The creation date for the UI customization.
 	CreationDate *time.Time `type:"timestamp"`
@@ -1732,7 +1732,7 @@ type UserPoolClientDescription struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the client associated with the user pool.
-	ClientId *string `min:"1" type:"string"`
+	ClientId *string `min:"1" type:"string" sensitive:"true"`
 
 	// The client name from the user pool client description.
 	ClientName *string `min:"1" type:"string"`
@@ -1789,13 +1789,13 @@ type UserPoolClientType struct {
 	CallbackURLs []string `type:"list"`
 
 	// The ID of the client associated with the user pool.
-	ClientId *string `min:"1" type:"string"`
+	ClientId *string `min:"1" type:"string" sensitive:"true"`
 
 	// The client name from the user pool request of the client type.
 	ClientName *string `min:"1" type:"string"`
 
 	// The client secret from the user pool request of the client type.
-	ClientSecret *string `min:"1" type:"string"`
+	ClientSecret *string `min:"1" type:"string" sensitive:"true"`
 
 	// The date the user pool client was created.
 	CreationDate *time.Time `type:"timestamp"`
@@ -2059,7 +2059,7 @@ type UserType struct {
 	UserStatus UserStatusType `type:"string" enum:"true"`
 
 	// The user name of the user you wish to describe.
-	Username *string `min:"1" type:"string"`
+	Username *string `min:"1" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation

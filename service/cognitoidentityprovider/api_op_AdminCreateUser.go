@@ -51,7 +51,7 @@ type AdminCreateUserInput struct {
 	// limit that you specified when you created the user pool. To reset the account
 	// after that time limit, you must call AdminCreateUser again, specifying "RESEND"
 	// for the MessageAction parameter.
-	TemporaryPassword *string `min:"6" type:"string"`
+	TemporaryPassword *string `min:"6" type:"string" sensitive:"true"`
 
 	// An array of name-value pairs that contain user attributes and attribute values
 	// to be set for the user to be created. You can create a user without specifying
@@ -93,7 +93,7 @@ type AdminCreateUserInput struct {
 	// username cannot be changed.
 	//
 	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
+	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The user's validation data. This is an array of name-value pairs that contain
 	// user attributes and attribute values that you can use for custom validation,

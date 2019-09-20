@@ -34,7 +34,7 @@ type CreateCustomKeyStoreInput struct {
 	// the password in the AWS CloudHSM cluster.
 	//
 	// KeyStorePassword is a required field
-	KeyStorePassword *string `min:"1" type:"string" required:"true"`
+	KeyStorePassword *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// Enter the content of the trust anchor certificate for the cluster. This is
 	// the content of the customerCA.crt file that you created when you initialized

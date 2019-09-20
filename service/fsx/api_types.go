@@ -558,7 +558,7 @@ type SelfManagedActiveDirectoryConfiguration struct {
 	// Amazon FSx will use to join to your AD domain.
 	//
 	// Password is a required field
-	Password *string `min:"1" type:"string" required:"true"`
+	Password *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The user name for the service account on your self-managed AD domain that
 	// Amazon FSx will use to join to your AD domain. This account must have the
@@ -627,7 +627,7 @@ type SelfManagedActiveDirectoryConfigurationUpdates struct {
 
 	// The password for the service account on your self-managed AD domain that
 	// Amazon FSx will use to join to your AD domain.
-	Password *string `min:"1" type:"string"`
+	Password *string `min:"1" type:"string" sensitive:"true"`
 
 	// The user name for the service account on your self-managed AD domain that
 	// Amazon FSx will use to join to your AD domain. This account must have the

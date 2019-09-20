@@ -210,7 +210,7 @@ type GitHubCodeDestination struct {
 	// The GitHub user's personal access token for the GitHub repository.
 	//
 	// Token is a required field
-	Token *string `locationName:"token" min:"1" type:"string" required:"true"`
+	Token *string `locationName:"token" min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The type of GitHub repository to be created in AWS CodeStar. Valid values
 	// are User or Organization.
@@ -475,10 +475,10 @@ type UserProfileSummary struct {
 	// two characters, so a display name with more than one space (for example "Mary
 	// Jane Major") would generate an initial icon using the first character and
 	// the first character after the space ("MJ", not "MM").
-	DisplayName *string `locationName:"displayName" min:"1" type:"string"`
+	DisplayName *string `locationName:"displayName" min:"1" type:"string" sensitive:"true"`
 
 	// The email address associated with the user.
-	EmailAddress *string `locationName:"emailAddress" min:"3" type:"string"`
+	EmailAddress *string `locationName:"emailAddress" min:"3" type:"string" sensitive:"true"`
 
 	// The SSH public key associated with the user in AWS CodeStar. If a project
 	// owner allows the user remote access to project resources, this public key

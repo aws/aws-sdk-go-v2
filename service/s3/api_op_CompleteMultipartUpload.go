@@ -126,7 +126,7 @@ type CompleteMultipartUploadOutput struct {
 
 	// If present, specifies the ID of the AWS Key Management Service (KMS) master
 	// encryption key that was used for the object.
-	SSEKMSKeyId *string `location:"header" locationName:"x-amz-server-side-encryption-aws-kms-key-id" type:"string"`
+	SSEKMSKeyId *string `location:"header" locationName:"x-amz-server-side-encryption-aws-kms-key-id" type:"string" sensitive:"true"`
 
 	// The Server-side encryption algorithm used when storing this object in S3
 	// (e.g., AES256, aws:kms).

@@ -70,7 +70,7 @@ type UpdateSecretInput struct {
 	// This parameter is not accessible using the Secrets Manager console.
 	//
 	// SecretBinary is automatically base64 encoded/decoded by the SDK.
-	SecretBinary []byte `type:"blob"`
+	SecretBinary []byte `type:"blob" sensitive:"true"`
 
 	// Specifies the secret that you want to modify or to which you want to add
 	// a new version. You can specify either the Amazon Resource Name (ARN) or the
@@ -116,7 +116,7 @@ type UpdateSecretInput struct {
 	// are escaped:
 	//
 	// "[{\"username\":\"bob\"},{\"password\":\"abc123xyz456\"}]"
-	SecretString *string `type:"string"`
+	SecretString *string `type:"string" sensitive:"true"`
 }
 
 // String returns the string representation

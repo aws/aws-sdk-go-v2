@@ -16,7 +16,7 @@ type GetLexiconInput struct {
 	// Name of the lexicon.
 	//
 	// Name is a required field
-	Name *string `location:"uri" locationName:"LexiconName" type:"string" required:"true"`
+	Name *string `location:"uri" locationName:"LexiconName" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

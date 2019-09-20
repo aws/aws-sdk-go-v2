@@ -31,7 +31,7 @@ type UpdateContactInput struct {
 	// WORK. You can either specify PhoneNumber or PhoneNumbers. We recommend that
 	// you use PhoneNumbers, which lets you specify the phone number type and multiple
 	// numbers.
-	PhoneNumber *string `type:"string"`
+	PhoneNumber *string `type:"string" sensitive:"true"`
 
 	// The list of phone numbers for the contact.
 	PhoneNumbers []PhoneNumber `type:"list"`

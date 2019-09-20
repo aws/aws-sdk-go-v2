@@ -29,7 +29,7 @@ type AdminDeleteUserAttributesInput struct {
 	// The user name of the user from which you would like to delete attributes.
 	//
 	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
+	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

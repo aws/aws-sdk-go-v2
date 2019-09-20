@@ -13,7 +13,7 @@ type UpdateProjectInput struct {
 	_ struct{} `type:"structure"`
 
 	// The description of the project, if any.
-	Description *string `locationName:"description" type:"string"`
+	Description *string `locationName:"description" type:"string" sensitive:"true"`
 
 	// The ID of the project you want to update.
 	//
@@ -21,7 +21,7 @@ type UpdateProjectInput struct {
 	Id *string `locationName:"id" min:"2" type:"string" required:"true"`
 
 	// The name of the project you want to update.
-	Name *string `locationName:"name" min:"1" type:"string"`
+	Name *string `locationName:"name" min:"1" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation

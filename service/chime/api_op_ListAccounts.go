@@ -23,7 +23,7 @@ type ListAccountsInput struct {
 	NextToken *string `location:"querystring" locationName:"next-token" type:"string"`
 
 	// User email address with which to filter results.
-	UserEmail *string `location:"querystring" locationName:"user-email" type:"string"`
+	UserEmail *string `location:"querystring" locationName:"user-email" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation

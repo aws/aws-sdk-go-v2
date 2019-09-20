@@ -24,7 +24,7 @@ type CreateBackupVaultInput struct {
 
 	// Metadata that you can assign to help organize the resources that you create.
 	// Each tag is a key-value pair.
-	BackupVaultTags map[string]string `type:"map"`
+	BackupVaultTags map[string]string `type:"map" sensitive:"true"`
 
 	// A unique string that identifies the request and allows failed requests to
 	// be retried without the risk of executing the operation twice.

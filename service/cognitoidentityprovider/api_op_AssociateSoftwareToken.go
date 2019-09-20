@@ -13,7 +13,7 @@ type AssociateSoftwareTokenInput struct {
 	_ struct{} `type:"structure"`
 
 	// The access token.
-	AccessToken *string `type:"string"`
+	AccessToken *string `type:"string" sensitive:"true"`
 
 	// The session which should be passed both ways in challenge-response calls
 	// to the service. This allows authentication of the user as part of the MFA
@@ -44,7 +44,7 @@ type AssociateSoftwareTokenOutput struct {
 
 	// A unique generated shared secret code that is used in the TOTP algorithm
 	// to generate a one time code.
-	SecretCode *string `min:"16" type:"string"`
+	SecretCode *string `min:"16" type:"string" sensitive:"true"`
 
 	// The session which should be passed both ways in challenge-response calls
 	// to the service. This allows authentication of the user as part of the MFA

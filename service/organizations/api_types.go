@@ -27,7 +27,7 @@ type Account struct {
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) for this parameter is
 	// a string of characters that represents a standard Internet email address.
-	Email *string `min:"6" type:"string"`
+	Email *string `min:"6" type:"string" sensitive:"true"`
 
 	// The unique identifier (ID) of the account.
 	//
@@ -46,7 +46,7 @@ type Account struct {
 	// The regex pattern (http://wikipedia.org/wiki/regex) that is used to validate
 	// this parameter is a string of any of the characters in the ASCII character
 	// range.
-	Name *string `min:"1" type:"string"`
+	Name *string `min:"1" type:"string" sensitive:"true"`
 
 	// The status of the account in the organization.
 	Status AccountStatus `type:"string" enum:"true"`
@@ -96,7 +96,7 @@ type CreateAccountStatus struct {
 	AccountId *string `type:"string"`
 
 	// The account name given to the account when it was created.
-	AccountName *string `min:"1" type:"string"`
+	AccountName *string `min:"1" type:"string" sensitive:"true"`
 
 	// The date and time that the account was created and the request completed.
 	CompletedTimestamp *time.Time `type:"timestamp"`
@@ -285,7 +285,7 @@ type HandshakeParty struct {
 	// requires "h-" followed by from 8 to 32 lower-case letters or digits.
 	//
 	// Id is a required field
-	Id *string `min:"1" type:"string" required:"true"`
+	Id *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The type of party.
 	//
@@ -347,7 +347,7 @@ type HandshakeResource struct {
 
 	// The information that is passed to the other party in the handshake. The format
 	// of the value string must match the requirements of the specified type.
-	Value *string `type:"string"`
+	Value *string `type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -403,7 +403,7 @@ type Organization struct {
 
 	// The email address that is associated with the AWS account that is designated
 	// as the master account for the organization.
-	MasterAccountEmail *string `min:"6" type:"string"`
+	MasterAccountEmail *string `min:"6" type:"string" sensitive:"true"`
 
 	// The unique identifier (ID) of the master account of an organization.
 	//

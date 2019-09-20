@@ -416,7 +416,7 @@ type MemberFabricConfiguration struct {
 	// backward slash(\), @, or a space.
 	//
 	// AdminPassword is a required field
-	AdminPassword *string `min:"8" type:"string" required:"true"`
+	AdminPassword *string `min:"8" type:"string" required:"true" sensitive:"true"`
 
 	// The user name for the member's initial administrative user.
 	//

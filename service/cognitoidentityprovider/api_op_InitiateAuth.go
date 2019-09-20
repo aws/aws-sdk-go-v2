@@ -65,7 +65,7 @@ type InitiateAuthInput struct {
 	// The app client ID.
 	//
 	// ClientId is a required field
-	ClientId *string `min:"1" type:"string" required:"true"`
+	ClientId *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// This is a random key-value pair map which can contain any key and will be
 	// passed to your PreAuthentication Lambda trigger as-is. It can be used to

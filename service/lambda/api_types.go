@@ -267,7 +267,7 @@ type Environment struct {
 	_ struct{} `type:"structure"`
 
 	// Environment variable key-value pairs.
-	Variables map[string]string `type:"map"`
+	Variables map[string]string `type:"map" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -300,7 +300,7 @@ type EnvironmentError struct {
 	ErrorCode *string `type:"string"`
 
 	// The error message.
-	Message *string `type:"string"`
+	Message *string `type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -333,7 +333,7 @@ type EnvironmentResponse struct {
 	Error *EnvironmentError `type:"structure"`
 
 	// Environment variable key-value pairs.
-	Variables map[string]string `type:"map"`
+	Variables map[string]string `type:"map" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -481,7 +481,7 @@ type FunctionCode struct {
 	// clients handle the encoding for you.
 	//
 	// ZipFile is automatically base64 encoded/decoded by the SDK.
-	ZipFile []byte `type:"blob"`
+	ZipFile []byte `type:"blob" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -824,7 +824,7 @@ type LayerVersionContentInput struct {
 	// handle the encoding for you.
 	//
 	// ZipFile is automatically base64 encoded/decoded by the SDK.
-	ZipFile []byte `type:"blob"`
+	ZipFile []byte `type:"blob" sensitive:"true"`
 }
 
 // String returns the string representation

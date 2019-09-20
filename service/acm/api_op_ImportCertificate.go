@@ -34,7 +34,7 @@ type ImportCertificateInput struct {
 	// PrivateKey is automatically base64 encoded/decoded by the SDK.
 	//
 	// PrivateKey is a required field
-	PrivateKey []byte `min:"1" type:"blob" required:"true"`
+	PrivateKey []byte `min:"1" type:"blob" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

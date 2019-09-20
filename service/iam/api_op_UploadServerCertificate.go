@@ -78,7 +78,7 @@ type UploadServerCertificateInput struct {
 	//    return (\u000D)
 	//
 	// PrivateKey is a required field
-	PrivateKey *string `min:"1" type:"string" required:"true"`
+	PrivateKey *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The name for the server certificate. Do not include the path in this value.
 	// The name of the certificate cannot contain any spaces.

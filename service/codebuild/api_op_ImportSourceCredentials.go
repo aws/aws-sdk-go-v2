@@ -33,7 +33,7 @@ type ImportSourceCredentialsInput struct {
 	// this is the app password.
 	//
 	// Token is a required field
-	Token *string `locationName:"token" min:"1" type:"string" required:"true"`
+	Token *string `locationName:"token" min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The Bitbucket username when the authType is BASIC_AUTH. This parameter is
 	// not valid for other types of source providers or connections.

@@ -338,10 +338,10 @@ func (s S3ExportConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 
 // A structure that can contain an Amazon Ion value in multiple encoding formats.
 type ValueHolder struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" sensitive:"true"`
 
 	// An Amazon Ion plaintext value contained in a ValueHolder structure.
-	IonText *string `min:"1" type:"string"`
+	IonText *string `min:"1" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation

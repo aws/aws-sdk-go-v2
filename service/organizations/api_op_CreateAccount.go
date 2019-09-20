@@ -15,7 +15,7 @@ type CreateAccountInput struct {
 	// The friendly name of the member account.
 	//
 	// AccountName is a required field
-	AccountName *string `min:"1" type:"string" required:"true"`
+	AccountName *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The email address of the owner to assign to the new member account. This
 	// email address must not already be associated with another AWS account. You
@@ -24,7 +24,7 @@ type CreateAccountInput struct {
 	// invalid email address.
 	//
 	// Email is a required field
-	Email *string `min:"6" type:"string" required:"true"`
+	Email *string `min:"6" type:"string" required:"true" sensitive:"true"`
 
 	// If set to ALLOW, the new account enables IAM users to access account billing
 	// information if they have the required permissions. If set to DENY, only the

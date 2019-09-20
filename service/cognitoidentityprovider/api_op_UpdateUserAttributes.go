@@ -17,7 +17,7 @@ type UpdateUserAttributesInput struct {
 	// The access token for the request to update user attributes.
 	//
 	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true"`
+	AccessToken *string `type:"string" required:"true" sensitive:"true"`
 
 	// An array of name-value pairs representing user attributes.
 	//

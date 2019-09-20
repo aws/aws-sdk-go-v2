@@ -22,7 +22,7 @@ type SetLocalConsolePasswordInput struct {
 	// The password you want to set for your VM local console.
 	//
 	// LocalConsolePassword is a required field
-	LocalConsolePassword *string `min:"6" type:"string" required:"true"`
+	LocalConsolePassword *string `min:"6" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

@@ -75,7 +75,7 @@ type DialogAction struct {
 
 	// The message that should be shown to the user. If you don't specify a message,
 	// Amazon Lex will use the message configured for the intent.
-	Message *string `locationName:"message" min:"1" type:"string"`
+	Message *string `locationName:"message" min:"1" type:"string" sensitive:"true"`
 
 	//    * PlainText - The message contains plain UTF-8 text.
 	//
@@ -91,7 +91,7 @@ type DialogAction struct {
 	SlotToElicit *string `locationName:"slotToElicit" type:"string"`
 
 	// Map of the slots that have been gathered and their values.
-	Slots map[string]string `locationName:"slots" type:"map"`
+	Slots map[string]string `locationName:"slots" type:"map" sensitive:"true"`
 
 	// The next action that the bot should take in its interaction with the user.
 	// The possible values are:
@@ -315,7 +315,7 @@ type IntentSummary struct {
 	SlotToElicit *string `locationName:"slotToElicit" type:"string"`
 
 	// Map of the slots that have been gathered and their values.
-	Slots map[string]string `locationName:"slots" type:"map"`
+	Slots map[string]string `locationName:"slots" type:"map" sensitive:"true"`
 }
 
 // String returns the string representation

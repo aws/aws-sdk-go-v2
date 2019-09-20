@@ -24,10 +24,10 @@ type PutEventsConfigurationInput struct {
 	BotId *string `location:"uri" locationName:"botId" type:"string" required:"true"`
 
 	// Lambda function ARN that allows the bot to receive outgoing events.
-	LambdaFunctionArn *string `type:"string"`
+	LambdaFunctionArn *string `type:"string" sensitive:"true"`
 
 	// HTTPS endpoint that allows the bot to receive outgoing events.
-	OutboundEventsHTTPSEndpoint *string `type:"string"`
+	OutboundEventsHTTPSEndpoint *string `type:"string" sensitive:"true"`
 }
 
 // String returns the string representation

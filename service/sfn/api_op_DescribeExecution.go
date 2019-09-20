@@ -52,7 +52,7 @@ type DescribeExecutionOutput struct {
 	// The string that contains the JSON input data of the execution.
 	//
 	// Input is a required field
-	Input *string `locationName:"input" type:"string" required:"true"`
+	Input *string `locationName:"input" type:"string" required:"true" sensitive:"true"`
 
 	// The name of the execution.
 	//
@@ -73,7 +73,7 @@ type DescribeExecutionOutput struct {
 	//
 	// This field is set only if the execution succeeds. If the execution fails,
 	// this field is null.
-	Output *string `locationName:"output" type:"string"`
+	Output *string `locationName:"output" type:"string" sensitive:"true"`
 
 	// The date the execution is started.
 	//

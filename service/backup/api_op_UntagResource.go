@@ -23,7 +23,7 @@ type UntagResourceInput struct {
 	// A list of keys to identify which key-value tags to remove from a resource.
 	//
 	// TagKeyList is a required field
-	TagKeyList []string `type:"list" required:"true"`
+	TagKeyList []string `type:"list" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

@@ -46,7 +46,7 @@ func (s BillingRecord) String() string {
 
 // ContactDetail includes the following elements.
 type ContactDetail struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" sensitive:"true"`
 
 	// First line of the contact's address.
 	AddressLine1 *string `type:"string"`

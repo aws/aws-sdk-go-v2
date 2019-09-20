@@ -31,7 +31,7 @@ type UpdateServerInput struct {
 	//
 	// For more information, see "https://docs.aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key"
 	// in the AWS SFTP User Guide.
-	HostKey *string `type:"string"`
+	HostKey *string `type:"string" sensitive:"true"`
 
 	// This response parameter is an array containing all of the information required
 	// to call a customer's authentication API method.

@@ -14,7 +14,7 @@ type GetDeviceInput struct {
 	_ struct{} `type:"structure"`
 
 	// The access token.
-	AccessToken *string `type:"string"`
+	AccessToken *string `type:"string" sensitive:"true"`
 
 	// The device key.
 	//

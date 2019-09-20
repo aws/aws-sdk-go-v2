@@ -15,7 +15,7 @@ type DeleteLabelsInput struct {
 
 	// Amazon WorkDocs authentication token. Do not set this field when using administrative
 	// API actions, as in accessing the API using AWS credentials.
-	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string"`
+	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string" sensitive:"true"`
 
 	// Flag to request removal of all labels from the specified resource.
 	DeleteAll *bool `location:"querystring" locationName:"deleteAll" type:"boolean"`

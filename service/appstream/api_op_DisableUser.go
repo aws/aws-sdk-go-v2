@@ -22,7 +22,7 @@ type DisableUserInput struct {
 	// Users' email addresses are case-sensitive.
 	//
 	// UserName is a required field
-	UserName *string `min:"1" type:"string" required:"true"`
+	UserName *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

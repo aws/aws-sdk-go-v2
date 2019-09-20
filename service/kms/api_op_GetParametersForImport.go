@@ -93,7 +93,7 @@ type GetParametersForImportOutput struct {
 	// ImportKeyMaterial.
 	//
 	// PublicKey is automatically base64 encoded/decoded by the SDK.
-	PublicKey []byte `min:"1" type:"blob"`
+	PublicKey []byte `min:"1" type:"blob" sensitive:"true"`
 }
 
 // String returns the string representation

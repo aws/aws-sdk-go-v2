@@ -80,10 +80,10 @@ type GetMaintenanceWindowExecutionTaskInvocationOutput struct {
 
 	// User-provided value to be included in any CloudWatch events raised while
 	// running tasks for these targets in this maintenance window.
-	OwnerInformation *string `min:"1" type:"string"`
+	OwnerInformation *string `min:"1" type:"string" sensitive:"true"`
 
 	// The parameters used at the time that the task ran.
-	Parameters *string `type:"string"`
+	Parameters *string `type:"string" sensitive:"true"`
 
 	// The time that the task started running on the target.
 	StartTime *time.Time `type:"timestamp"`

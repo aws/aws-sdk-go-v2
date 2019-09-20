@@ -36,7 +36,7 @@ type CreateComputerInput struct {
 	// should generate a random, strong password to use for this parameter.
 	//
 	// Password is a required field
-	Password *string `min:"8" type:"string" required:"true"`
+	Password *string `min:"8" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

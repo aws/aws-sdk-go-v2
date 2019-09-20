@@ -53,7 +53,7 @@ type PutSecretValueInput struct {
 	// console.
 	//
 	// SecretBinary is automatically base64 encoded/decoded by the SDK.
-	SecretBinary []byte `type:"blob"`
+	SecretBinary []byte `type:"blob" sensitive:"true"`
 
 	// Specifies the secret to which you want to add a new version. You can specify
 	// either the Amazon Resource Name (ARN) or the friendly name of the secret.
@@ -96,7 +96,7 @@ type PutSecretValueInput struct {
 	// If your command-line tool or SDK requires quotation marks around the parameter,
 	// you should use single quotes to avoid confusion with the double quotes required
 	// in the JSON text.
-	SecretString *string `type:"string"`
+	SecretString *string `type:"string" sensitive:"true"`
 
 	// (Optional) Specifies a list of staging labels that are attached to this version
 	// of the secret. These staging labels are used to track the versions through

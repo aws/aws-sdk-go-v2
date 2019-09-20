@@ -32,7 +32,7 @@ type CreateServerInput struct {
 	//
 	// For more information, see "https://docs.aws.amazon.com/transfer/latest/userguide/change-host-key"
 	// in the AWS SFTP User Guide.
-	HostKey *string `type:"string"`
+	HostKey *string `type:"string" sensitive:"true"`
 
 	// This parameter is required when the IdentityProviderType is set to API_GATEWAY.
 	// Accepts an array containing all of the information required to call a customer-supplied

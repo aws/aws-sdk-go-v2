@@ -19,13 +19,13 @@ type GetBlockInput struct {
 	// For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:14}
 	//
 	// BlockAddress is a required field
-	BlockAddress *ValueHolder `type:"structure" required:"true"`
+	BlockAddress *ValueHolder `type:"structure" required:"true" sensitive:"true"`
 
 	// The latest block location covered by the digest for which to request a proof.
 	// An address is an Amazon Ion structure that has two fields: strandId and sequenceNo.
 	//
 	// For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}
-	DigestTipAddress *ValueHolder `type:"structure"`
+	DigestTipAddress *ValueHolder `type:"structure" sensitive:"true"`
 
 	// The name of the ledger.
 	//
@@ -100,12 +100,12 @@ type GetBlockOutput struct {
 	// The block data object in Amazon Ion format.
 	//
 	// Block is a required field
-	Block *ValueHolder `type:"structure" required:"true"`
+	Block *ValueHolder `type:"structure" required:"true" sensitive:"true"`
 
 	// The proof object in Amazon Ion format returned by a GetBlock request. A proof
 	// contains the list of hash values required to recalculate the specified digest
 	// using a Merkle tree, starting with the specified block.
-	Proof *ValueHolder `type:"structure"`
+	Proof *ValueHolder `type:"structure" sensitive:"true"`
 }
 
 // String returns the string representation

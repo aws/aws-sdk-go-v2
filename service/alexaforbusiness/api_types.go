@@ -283,7 +283,7 @@ type Contact struct {
 	// You can either specify PhoneNumber or PhoneNumbers. We recommend that you
 	// use PhoneNumbers, which lets you specify the phone number type and multiple
 	// numbers.
-	PhoneNumber *string `type:"string"`
+	PhoneNumber *string `type:"string" sensitive:"true"`
 
 	// The list of phone numbers for the contact.
 	PhoneNumbers []PhoneNumber `type:"list"`
@@ -316,7 +316,7 @@ type ContactData struct {
 	// The phone number of the contact. The phone number type defaults to WORK.
 	// You can specify PhoneNumber or PhoneNumbers. We recommend that you use PhoneNumbers,
 	// which lets you specify the phone number type and multiple numbers.
-	PhoneNumber *string `type:"string"`
+	PhoneNumber *string `type:"string" sensitive:"true"`
 
 	// The list of phone numbers for the contact.
 	PhoneNumbers []PhoneNumber `type:"list"`
@@ -777,7 +777,7 @@ type NetworkProfile struct {
 	CertificateAuthorityArn *string `type:"string"`
 
 	// The current password of the Wi-Fi network.
-	CurrentPassword *string `min:"5" type:"string"`
+	CurrentPassword *string `min:"5" type:"string" sensitive:"true"`
 
 	// Detailed information about a device's network profile.
 	Description *string `type:"string"`
@@ -795,7 +795,7 @@ type NetworkProfile struct {
 	// The next, or subsequent, password of the Wi-Fi network. This password is
 	// asynchronously transmitted to the device and is used when the password of
 	// the network changes to NextPassword.
-	NextPassword *string `type:"string"`
+	NextPassword *string `type:"string" sensitive:"true"`
 
 	// The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK,
 	// WPA_PSK, WEP, or OPEN.
@@ -922,12 +922,12 @@ type PhoneNumber struct {
 	// The raw value of the phone number.
 	//
 	// Number is a required field
-	Number *string `type:"string" required:"true"`
+	Number *string `type:"string" required:"true" sensitive:"true"`
 
 	// The type of the phone number.
 	//
 	// Type is a required field
-	Type PhoneNumberType `type:"string" required:"true" enum:"true"`
+	Type PhoneNumberType `type:"string" required:"true" enum:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -1143,12 +1143,12 @@ type SipAddress struct {
 	// The type of the SIP address.
 	//
 	// Type is a required field
-	Type SipType `type:"string" required:"true" enum:"true"`
+	Type SipType `type:"string" required:"true" enum:"true" sensitive:"true"`
 
 	// The URI for the SIP address.
 	//
 	// Uri is a required field
-	Uri *string `min:"1" type:"string" required:"true"`
+	Uri *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

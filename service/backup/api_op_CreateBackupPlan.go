@@ -23,7 +23,7 @@ type CreateBackupPlanInput struct {
 	// To help organize your resources, you can assign your own metadata to the
 	// resources that you create. Each tag is a key-value pair. The specified tags
 	// are assigned to all backups created with this plan.
-	BackupPlanTags map[string]string `type:"map"`
+	BackupPlanTags map[string]string `type:"map" sensitive:"true"`
 
 	// Identifies the request and allows failed requests to be retried without the
 	// risk of executing the operation twice. If the request includes a CreatorRequestId

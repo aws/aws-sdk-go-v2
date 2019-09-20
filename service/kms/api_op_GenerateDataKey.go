@@ -99,7 +99,7 @@ type GenerateDataKeyOutput struct {
 	// your data outside of KMS. Then, remove it from memory as soon as possible.
 	//
 	// Plaintext is automatically base64 encoded/decoded by the SDK.
-	Plaintext []byte `min:"1" type:"blob"`
+	Plaintext []byte `min:"1" type:"blob" sensitive:"true"`
 }
 
 // String returns the string representation

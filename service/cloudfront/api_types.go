@@ -2159,7 +2159,7 @@ type DistributionConfig struct {
 	// the new comment.
 	//
 	// Comment is a required field
-	Comment *string `type:"string" required:"true"`
+	Comment *string `type:"string" required:"true" sensitive:"true"`
 
 	// A complex type that controls the following:
 	//

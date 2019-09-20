@@ -27,7 +27,7 @@ type CreateDirectoryInput struct {
 	// and this password.
 	//
 	// Password is a required field
-	Password *string `type:"string" required:"true"`
+	Password *string `type:"string" required:"true" sensitive:"true"`
 
 	// The short name of the directory, such as CORP.
 	ShortName *string `type:"string"`

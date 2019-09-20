@@ -13,7 +13,7 @@ type GetUICustomizationInput struct {
 	_ struct{} `type:"structure"`
 
 	// The client ID for the client app.
-	ClientId *string `min:"1" type:"string"`
+	ClientId *string `min:"1" type:"string" sensitive:"true"`
 
 	// The user pool ID for the user pool.
 	//

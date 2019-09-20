@@ -528,7 +528,7 @@ type MongoDbSettings struct {
 	NestingLevel NestingLevelValue `type:"string" enum:"true"`
 
 	// The password for the user account you use to access the MongoDB source endpoint.
-	Password *string `type:"string"`
+	Password *string `type:"string" sensitive:"true"`
 
 	// The port value for the MongoDB source endpoint.
 	Port *int64 `type:"integer"`
@@ -697,7 +697,7 @@ type RedshiftSettings struct {
 	MaxFileSize *int64 `type:"integer"`
 
 	// The password for the user named in the username property.
-	Password *string `type:"string"`
+	Password *string `type:"string" sensitive:"true"`
 
 	// The port number for Amazon Redshift. The default value is 5439.
 	Port *int64 `type:"integer"`

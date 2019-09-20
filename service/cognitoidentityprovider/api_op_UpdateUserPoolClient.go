@@ -51,7 +51,7 @@ type UpdateUserPoolClientInput struct {
 	// The ID of the client associated with the user pool.
 	//
 	// ClientId is a required field
-	ClientId *string `min:"1" type:"string" required:"true"`
+	ClientId *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The client name from the update user pool client request.
 	ClientName *string `min:"1" type:"string"`

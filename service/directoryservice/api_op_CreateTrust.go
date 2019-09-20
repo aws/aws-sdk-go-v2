@@ -47,7 +47,7 @@ type CreateTrustInput struct {
 	// the trust relationship on the external domain.
 	//
 	// TrustPassword is a required field
-	TrustPassword *string `min:"1" type:"string" required:"true"`
+	TrustPassword *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The trust relationship type. Forest is the default.
 	TrustType TrustType `type:"string" enum:"true"`

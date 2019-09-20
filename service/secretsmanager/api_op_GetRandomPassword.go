@@ -79,7 +79,7 @@ type GetRandomPasswordOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A string with the generated password.
-	RandomPassword *string `type:"string"`
+	RandomPassword *string `type:"string" sensitive:"true"`
 }
 
 // String returns the string representation

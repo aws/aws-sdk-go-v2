@@ -100,7 +100,7 @@ type GetSessionOutput struct {
 	// Map of key/value pairs representing the session-specific context information.
 	// It contains application information passed between Amazon Lex and a client
 	// application.
-	SessionAttributes map[string]string `locationName:"sessionAttributes" type:"map"`
+	SessionAttributes map[string]string `locationName:"sessionAttributes" type:"map" sensitive:"true"`
 
 	// A unique identifier for the session.
 	SessionId *string `locationName:"sessionId" type:"string"`

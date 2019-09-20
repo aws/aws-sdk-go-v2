@@ -81,7 +81,7 @@ type CreateMultipartUploadInput struct {
 	// does not store the encryption key. The key must be appropriate for use with
 	// the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm
 	// header.
-	SSECustomerKey *string `location:"header" locationName:"x-amz-server-side-encryption-customer-key" type:"string"`
+	SSECustomerKey *string `location:"header" locationName:"x-amz-server-side-encryption-customer-key" type:"string" sensitive:"true"`
 
 	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.
 	// Amazon S3 uses this header for a message integrity check to ensure the encryption
@@ -91,13 +91,13 @@ type CreateMultipartUploadInput struct {
 	// Specifies the AWS KMS Encryption Context to use for object encryption. The
 	// value of this header is a base64-encoded UTF-8 string holding JSON with the
 	// encryption context key-value pairs.
-	SSEKMSEncryptionContext *string `location:"header" locationName:"x-amz-server-side-encryption-context" type:"string"`
+	SSEKMSEncryptionContext *string `location:"header" locationName:"x-amz-server-side-encryption-context" type:"string" sensitive:"true"`
 
 	// Specifies the AWS KMS key ID to use for object encryption. All GET and PUT
 	// requests for an object protected by AWS KMS will fail if not made via SSL
 	// or using SigV4. Documentation on configuring any of the officially supported
 	// AWS SDKs and CLI can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
-	SSEKMSKeyId *string `location:"header" locationName:"x-amz-server-side-encryption-aws-kms-key-id" type:"string"`
+	SSEKMSKeyId *string `location:"header" locationName:"x-amz-server-side-encryption-aws-kms-key-id" type:"string" sensitive:"true"`
 
 	// The Server-side encryption algorithm used when storing this object in S3
 	// (e.g., AES256, aws:kms).
@@ -364,11 +364,11 @@ type CreateMultipartUploadOutput struct {
 	// If present, specifies the AWS KMS Encryption Context to use for object encryption.
 	// The value of this header is a base64-encoded UTF-8 string holding JSON with
 	// the encryption context key-value pairs.
-	SSEKMSEncryptionContext *string `location:"header" locationName:"x-amz-server-side-encryption-context" type:"string"`
+	SSEKMSEncryptionContext *string `location:"header" locationName:"x-amz-server-side-encryption-context" type:"string" sensitive:"true"`
 
 	// If present, specifies the ID of the AWS Key Management Service (KMS) master
 	// encryption key that was used for the object.
-	SSEKMSKeyId *string `location:"header" locationName:"x-amz-server-side-encryption-aws-kms-key-id" type:"string"`
+	SSEKMSKeyId *string `location:"header" locationName:"x-amz-server-side-encryption-aws-kms-key-id" type:"string" sensitive:"true"`
 
 	// The Server-side encryption algorithm used when storing this object in S3
 	// (e.g., AES256, aws:kms).

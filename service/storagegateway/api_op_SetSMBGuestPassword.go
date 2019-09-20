@@ -22,7 +22,7 @@ type SetSMBGuestPasswordInput struct {
 	// The password that you want to set for your SMB Server.
 	//
 	// Password is a required field
-	Password *string `min:"6" type:"string" required:"true"`
+	Password *string `min:"6" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

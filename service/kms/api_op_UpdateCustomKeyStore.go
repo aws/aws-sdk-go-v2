@@ -37,7 +37,7 @@ type UpdateCustomKeyStoreInput struct {
 	// This parameter tells AWS KMS the current password of the kmsuser crypto user
 	// (CU). It does not set or change the password of any users in the AWS CloudHSM
 	// cluster.
-	KeyStorePassword *string `min:"1" type:"string"`
+	KeyStorePassword *string `min:"1" type:"string" sensitive:"true"`
 
 	// Changes the friendly name of the custom key store to the value that you specify.
 	// The custom key store name must be unique in the AWS account.

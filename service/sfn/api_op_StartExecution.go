@@ -19,7 +19,7 @@ type StartExecutionInput struct {
 	//
 	// If you don't include any JSON input data, you still must include the two
 	// braces, for example: "input": "{}"
-	Input *string `locationName:"input" type:"string"`
+	Input *string `locationName:"input" type:"string" sensitive:"true"`
 
 	// The name of the execution. This name must be unique for your AWS account,
 	// region, and state machine for 90 days. For more information, see Limits Related
