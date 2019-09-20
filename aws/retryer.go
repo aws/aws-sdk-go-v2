@@ -152,6 +152,7 @@ func shouldRetryError(origErr error) bool {
 		}
 		// *url.Error only implements Temporary after golang 1.6 but since
 		// url.Error only wraps the error:
+		// Todo: Investigate use case for this error case for +Go1.11
 		return shouldRetryError(err.Err)
 
 	case temporary:
@@ -169,10 +170,7 @@ func shouldRetryError(origErr error) bool {
 		return true
 
 	default:
-		switch err.Error() {
-		case "net/http: request canceled",
-			"net/http: request canceled while waiting for connection":
-			// known 1.5 error case when an http request is cancelled
+		if strings.Contains(err.Error(), "canceled") {
 			return false
 		}
 		// here we don't know the error; so we allow a retry.

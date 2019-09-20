@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	request "github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
@@ -21,7 +21,7 @@ func (m *mockCloser) Close() error {
 
 func TestUnmarshalDrainBody(t *testing.T) {
 	b := &mockCloser{Reader: strings.NewReader("example body")}
-	r := &request.Request{HTTPResponse: &http.Response{
+	r := &aws.Request{HTTPResponse: &http.Response{
 		Body: b,
 	}}
 
@@ -38,7 +38,7 @@ func TestUnmarshalDrainBody(t *testing.T) {
 }
 
 func TestUnmarshalDrainBodyNoBody(t *testing.T) {
-	r := &request.Request{HTTPResponse: &http.Response{}}
+	r := &aws.Request{HTTPResponse: &http.Response{}}
 
 	protocol.UnmarshalDiscardBody(r)
 	if r.Error != nil {

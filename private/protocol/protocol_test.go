@@ -5,8 +5,7 @@ import (
 	"net/url"
 	"testing"
 
-	metadata "github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/ec2query"
@@ -37,12 +36,12 @@ func jsonData(set bool, b []byte, size, delta int) {
 	}
 }
 
-func buildNewRequest(data interface{}) *request.Request {
+func buildNewRequest(data interface{}) *aws.Request {
 	v := url.Values{}
 	v.Set("test", "TEST")
 	v.Add("test1", "TEST1")
 
-	req := &request.Request{
+	req := &aws.Request{
 		HTTPRequest: &http.Request{
 			Header: make(http.Header),
 			Body:   &awstesting.ReadCloser{Size: 2048},
@@ -55,7 +54,7 @@ func buildNewRequest(data interface{}) *request.Request {
 		}{
 			"Test",
 		},
-		Metadata: metadata.Metadata{
+		Metadata: aws.Metadata{
 			ServiceName:   "test",
 			TargetPrefix:  "test",
 			JSONVersion:   "test",
@@ -64,7 +63,7 @@ func buildNewRequest(data interface{}) *request.Request {
 			SigningName:   "test",
 			SigningRegion: "test",
 		},
-		Operation: &request.Operation{
+		Operation: &aws.Operation{
 			Name: "test",
 		},
 	}
@@ -102,7 +101,7 @@ const (
 	xmlType
 )
 
-func checkForLeak(data interface{}, build, fn func(*request.Request), t *testing.T, result expected) {
+func checkForLeak(data interface{}, build, fn func(*aws.Request), t *testing.T, result expected) {
 	req := buildNewRequest(data)
 	reader := req.HTTPResponse.Body.(*awstesting.ReadCloser)
 	switch result.dataType {

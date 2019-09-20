@@ -1,4 +1,4 @@
-// +build 1.6,codegen
+// +build codegen
 
 package api
 

@@ -47,22 +47,6 @@ type BuildableHTTPClient struct {
 	client   *http.Client
 }
 
-//type withTransportOptions interface {
-//	WithTransportOptions(...func(*http.Transport)) HTTPClient
-//}
-//
-//type getTransport interface {
-//	GetTransport() *http.Transport
-//}
-//
-//type withDialerOptions interface {
-//	WithDialerOptions(...func(*net.Dialer)) HTTPClient
-//}
-//
-//type getDialer interface {
-//	GetDialer() *net.Dialer
-//}
-
 // NewBuildableHTTPClient returns an initialized client for invoking HTTP
 // requests.
 func NewBuildableHTTPClient() *BuildableHTTPClient {

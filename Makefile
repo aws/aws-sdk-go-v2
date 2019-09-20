@@ -100,21 +100,7 @@ cleanup-integ-buckets:
 ###################
 # Sandbox Testing #
 ###################
-sandbox-tests: sandbox-test-go1.9 sandbox-test-go1.10 sandbox-test-go1.11 sandbox-test-go1.12 sandbox-test-gotip
-
-sandbox-build-go1.9:
-	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.9 -t "aws-sdk-go-1.9" .
-sandbox-go1.9: sandbox-build-go1.9
-	docker run -i -t aws-sdk-go-1.9 bash
-sandbox-test-go1.9: sandbox-build-go1.9
-	docker run -t aws-sdk-go-1.9
-
-sandbox-build-go1.10:
-	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.10 -t "aws-sdk-go-1.10" .
-sandbox-go1.10: sandbox-build-go1.10
-	docker run -i -t aws-sdk-go-1.10 bash
-sandbox-test-go1.10: sandbox-build-go1.10
-	docker run -t aws-sdk-go-1.10
+sandbox-tests: sandbox-test-go1.11 sandbox-test-go1.12 sandbox-test-gotip
 
 sandbox-build-go1.11:
 	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.11 -t "aws-sdk-go-1.11" .
@@ -169,6 +155,7 @@ get-deps: get-deps-tests get-deps-x-tests get-deps-codegen get-deps-verify
 get-deps-tests:
 	@echo "go get SDK testing dependencies"
 	go get golang.org/x/net/html
+	go get github.com/google/go-cmp
 
 get-deps-x-tests:
 	@echo "go get SDK testing golang.org/x dependencies"

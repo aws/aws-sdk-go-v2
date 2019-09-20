@@ -1,4 +1,4 @@
-// +build go1.8,codegen
+// +build codegen
 
 package api
 

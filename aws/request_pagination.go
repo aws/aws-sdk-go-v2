@@ -137,7 +137,7 @@ func (r *Request) nextPageTokens() []interface{} {
 		}
 	}
 
-	tokens := []interface{}{}
+	var tokens []interface{}
 	tokenAdded := false
 	for _, outToken := range r.Operation.OutputTokens {
 		vs, _ := awsutil.ValuesAtPath(r.Data, outToken)

@@ -1,9 +1,10 @@
-// +build 1.6,codegen
+// +build codegen
 
 package api
 
 import (
 	"encoding/json"
+	"github.com/google/go-cmp/cmp"
 	"testing"
 )
 
@@ -56,7 +57,7 @@ func buildAPI() *API {
 	}
 	outputRef := ShapeRef{
 		API:       a,
-		ShapeName: "Foooutput",
+		ShapeName: "FooOutput",
 		Shape:     output,
 	}
 
@@ -74,10 +75,14 @@ func buildAPI() *API {
 	a.Shapes = map[string]*Shape{
 		"FooInput":  input,
 		"FooOutput": output,
+		"string":    stringShape,
+		"int":       intShape,
 	}
 	a.Metadata = Metadata{
 		ServiceAbbreviation: "FooService",
 	}
+
+	a.BaseImportPath = "github.com/aws/aws-sdk-go-v2/service/"
 
 	a.Setup()
 	return a
@@ -121,16 +126,19 @@ func TestExampleGeneration(t *testing.T) {
 	expected := `
 import (
 	"fmt"
-	"bytes"
+	"context"
+	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/fooservice"
+	
 )
 
 var _ time.Duration
-var _ bytes.Buffer
+var _ strings.Reader
 var _ aws.Config
 
 func parseTime(layout, value string) *time.Time {
@@ -144,7 +152,7 @@ func parseTime(layout, value string) *time.Time {
 // I pity the foo
 //
 // Foo bar baz qux
-func ExampleFooService_Foo_shared00() {
+func ExampleClient_FooRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -155,7 +163,8 @@ func ExampleFooService_Foo_shared00() {
 		BarShape: aws.String("Hello world"),
 	}
 
-	result, err := svc.Foo(input)
+	req := svc.FooRequest(input)
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -173,10 +182,8 @@ func ExampleFooService_Foo_shared00() {
 	fmt.Println(result)
 }
 `
-	if expected != a.ExamplesGoCode() {
-		t.Log([]byte(expected))
-		t.Log([]byte(a.ExamplesGoCode()))
-		t.Errorf("Expected:\n%s\nReceived:\n%s\n", expected, a.ExamplesGoCode())
+	if v := cmp.Diff(expected, a.ExamplesGoCode()); len(v) != 0 {
+		t.Errorf(v)
 	}
 }
 

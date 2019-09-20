@@ -844,7 +844,6 @@ func TestEnforceShouldRetryCheck(t *testing.T) {
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 	cfg.Retryer = retryer
 	cfg.HTTPClient = client
-	cfg.EnforceShouldRetryCheck = true
 
 	s := awstesting.NewClient(cfg)
 

@@ -5,8 +5,6 @@ import (
 	"math"
 	"strconv"
 	"time"
-
-	"github.com/aws/aws-sdk-go-v2/internal/sdkmath"
 )
 
 // Names of time formats supported by the SDK
@@ -73,7 +71,7 @@ func ParseTime(formatName, value string) (time.Time, error) {
 	case UnixTimeFormatName:
 		v, err := strconv.ParseFloat(value, 64)
 		_, dec := math.Modf(v)
-		dec = sdkmath.Round(dec*1e3) / 1e3 //Rounds 0.1229999 to 0.123
+		dec = math.Round(dec*1e3) / 1e3 //Rounds 0.1229999 to 0.123
 		if err != nil {
 			return time.Time{}, err
 		}
