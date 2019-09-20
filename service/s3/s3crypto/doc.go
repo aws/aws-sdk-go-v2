@@ -1,4 +1,6 @@
 /*
+Package s3crypto is deprecated and may be removed from the future versions of the SDK.
+
 Package s3crypto provides encryption to S3 using KMS and AES GCM.
 
 Keyproviders are interfaces that handle masterkeys. Masterkeys are used to encrypt and decrypt the randomly
