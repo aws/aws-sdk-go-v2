@@ -17,10 +17,10 @@ type ActivityFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -71,10 +71,10 @@ type ActivityScheduleFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -90,7 +90,7 @@ type ActivityScheduledEventDetails struct {
 	HeartbeatInSeconds *int64 `locationName:"heartbeatInSeconds" type:"long"`
 
 	// The JSON data input to the activity task.
-	Input *string `locationName:"input" type:"string"`
+	Input *string `locationName:"input" type:"string" sensitive:"true"`
 
 	// The Amazon Resource Name (ARN) of the scheduled activity.
 	//
@@ -126,7 +126,7 @@ type ActivitySucceededEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// The JSON data output by the activity task.
-	Output *string `locationName:"output" type:"string"`
+	Output *string `locationName:"output" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -139,10 +139,10 @@ type ActivityTimedOutEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the timeout.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -155,10 +155,10 @@ type ExecutionAbortedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -171,10 +171,10 @@ type ExecutionFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -237,7 +237,7 @@ type ExecutionStartedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// The JSON data input to the execution.
-	Input *string `locationName:"input" type:"string"`
+	Input *string `locationName:"input" type:"string" sensitive:"true"`
 
 	// The Amazon Resource Name (ARN) of the IAM role used for executing AWS Lambda
 	// tasks.
@@ -254,7 +254,7 @@ type ExecutionSucceededEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// The JSON data output by the execution.
-	Output *string `locationName:"output" type:"string"`
+	Output *string `locationName:"output" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -267,10 +267,10 @@ type ExecutionTimedOutEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the timeout.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -411,10 +411,10 @@ type LambdaFunctionFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -428,10 +428,10 @@ type LambdaFunctionScheduleFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -444,7 +444,7 @@ type LambdaFunctionScheduledEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// The JSON data input to the lambda function.
-	Input *string `locationName:"input" type:"string"`
+	Input *string `locationName:"input" type:"string" sensitive:"true"`
 
 	// The Amazon Resource Name (ARN) of the scheduled lambda function.
 	//
@@ -465,10 +465,10 @@ type LambdaFunctionStartFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -482,7 +482,7 @@ type LambdaFunctionSucceededEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// The JSON data output by the lambda function.
-	Output *string `locationName:"output" type:"string"`
+	Output *string `locationName:"output" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -496,10 +496,10 @@ type LambdaFunctionTimedOutEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the timeout.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -541,7 +541,7 @@ type StateEnteredEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// The string that contains the JSON input data for the state.
-	Input *string `locationName:"input" type:"string"`
+	Input *string `locationName:"input" type:"string" sensitive:"true"`
 
 	// The name of the state.
 	//
@@ -576,7 +576,7 @@ type StateExitedEventDetails struct {
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
 	// The JSON output data of the state.
-	Output *string `locationName:"output" type:"string"`
+	Output *string `locationName:"output" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -664,10 +664,10 @@ type TaskFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 
 	// The service name of the resource in a task state.
 	//
@@ -692,7 +692,7 @@ type TaskScheduledEventDetails struct {
 	// The JSON data passed to the resource referenced in a task state.
 	//
 	// Parameters is a required field
-	Parameters *string `locationName:"parameters" type:"string" required:"true"`
+	Parameters *string `locationName:"parameters" type:"string" required:"true" sensitive:"true"`
 
 	// The region of the scheduled task
 	//
@@ -723,10 +723,10 @@ type TaskStartFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 
 	// The service name of the resource in a task state.
 	//
@@ -769,10 +769,10 @@ type TaskSubmitFailedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 
 	// The service name of the resource in a task state.
 	//
@@ -795,7 +795,7 @@ type TaskSubmittedEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// The response from a resource when a task has started.
-	Output *string `locationName:"output" type:"string"`
+	Output *string `locationName:"output" type:"string" sensitive:"true"`
 
 	// The service name of the resource in a task state.
 	//
@@ -819,7 +819,7 @@ type TaskSucceededEventDetails struct {
 
 	// The full JSON response from a resource when a task has succeeded. This response
 	// becomes the output of the related task.
-	Output *string `locationName:"output" type:"string"`
+	Output *string `locationName:"output" type:"string" sensitive:"true"`
 
 	// The service name of the resource in a task state.
 	//
@@ -842,10 +842,10 @@ type TaskTimedOutEventDetails struct {
 	_ struct{} `type:"structure"`
 
 	// A more detailed explanation of the cause of the failure.
-	Cause *string `locationName:"cause" type:"string"`
+	Cause *string `locationName:"cause" type:"string" sensitive:"true"`
 
 	// The error code of the failure.
-	Error *string `locationName:"error" type:"string"`
+	Error *string `locationName:"error" type:"string" sensitive:"true"`
 
 	// The service name of the resource in a task state.
 	//

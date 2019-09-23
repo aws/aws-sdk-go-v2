@@ -21,7 +21,7 @@ type AdminEnableUserInput struct {
 	// The user name of the user you wish to enable.
 	//
 	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
+	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

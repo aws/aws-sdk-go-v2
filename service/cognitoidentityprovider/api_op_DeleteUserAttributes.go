@@ -16,7 +16,7 @@ type DeleteUserAttributesInput struct {
 	// The access token used in the request to delete user attributes.
 	//
 	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true"`
+	AccessToken *string `type:"string" required:"true" sensitive:"true"`
 
 	// An array of strings representing the user attribute names you wish to delete.
 	//

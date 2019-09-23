@@ -488,7 +488,7 @@ type BackupRule struct {
 
 	// An array of key-value pair strings that are assigned to resources that are
 	// associated with this rule when restored from backup.
-	RecoveryPointTags map[string]string `type:"map"`
+	RecoveryPointTags map[string]string `type:"map" sensitive:"true"`
 
 	// Uniquely identifies a rule that is used to schedule the backup of a selection
 	// of resources.
@@ -600,7 +600,7 @@ type BackupRuleInput struct {
 
 	// To help organize your resources, you can assign your own metadata to the
 	// resources that you create. Each tag is a key-value pair.
-	RecoveryPointTags map[string]string `type:"map"`
+	RecoveryPointTags map[string]string `type:"map" sensitive:"true"`
 
 	// >An optional display name for a backup rule.
 	//

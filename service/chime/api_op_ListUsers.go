@@ -25,7 +25,7 @@ type ListUsersInput struct {
 	NextToken *string `location:"querystring" locationName:"next-token" type:"string"`
 
 	// Optional. The user email address used to filter results. Maximum 1.
-	UserEmail *string `location:"querystring" locationName:"user-email" type:"string"`
+	UserEmail *string `location:"querystring" locationName:"user-email" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation

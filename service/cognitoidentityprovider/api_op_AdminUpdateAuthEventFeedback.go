@@ -30,7 +30,7 @@ type AdminUpdateAuthEventFeedbackInput struct {
 	// The user pool username.
 	//
 	// Username is a required field
-	Username *string `min:"1" type:"string" required:"true"`
+	Username *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

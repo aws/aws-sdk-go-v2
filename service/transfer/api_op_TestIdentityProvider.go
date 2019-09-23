@@ -24,7 +24,7 @@ type TestIdentityProviderInput struct {
 	UserName *string `type:"string" required:"true"`
 
 	// The password of the user account to be tested.
-	UserPassword *string `type:"string"`
+	UserPassword *string `type:"string" sensitive:"true"`
 }
 
 // String returns the string representation

@@ -38,7 +38,7 @@ type UpdateRelationalDatabaseInput struct {
 	// any printable ASCII character except "/", """, or "@".
 	//
 	// Constraints: Must contain 8 to 41 characters.
-	MasterUserPassword *string `locationName:"masterUserPassword" type:"string"`
+	MasterUserPassword *string `locationName:"masterUserPassword" type:"string" sensitive:"true"`
 
 	// The daily time range during which automated backups are created for your
 	// database if automated backups are enabled.

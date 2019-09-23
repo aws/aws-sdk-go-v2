@@ -31,7 +31,7 @@ type UpdateLoginProfileInput struct {
 	// However, the format can be further restricted by the account administrator
 	// by setting a password policy on the AWS account. For more information, see
 	// UpdateAccountPasswordPolicy.
-	Password *string `min:"1" type:"string"`
+	Password *string `min:"1" type:"string" sensitive:"true"`
 
 	// Allows this new password to be used only once by requiring the specified
 	// IAM user to set a new password on next sign-in.

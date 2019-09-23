@@ -16,7 +16,7 @@ type CheckDomainTransferabilityInput struct {
 	// If the registrar for the top-level domain (TLD) requires an authorization
 	// code to transfer the domain, the code that you got from the current registrar
 	// for the domain.
-	AuthCode *string `type:"string"`
+	AuthCode *string `type:"string" sensitive:"true"`
 
 	// The name of the domain that you want to transfer to Amazon Route 53.
 	//

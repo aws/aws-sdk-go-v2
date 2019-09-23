@@ -24,7 +24,7 @@ type TagResourceInput struct {
 	// your own metadata to the resources you create.
 	//
 	// Tags is a required field
-	Tags map[string]string `type:"map" required:"true"`
+	Tags map[string]string `type:"map" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

@@ -101,7 +101,7 @@ type GetMaintenanceWindowExecutionTaskOutput struct {
 	// Key: string, between 1 and 255 characters
 	//
 	// Value: an array of strings, each string is between 1 and 255 characters
-	TaskParameters []map[string]MaintenanceWindowTaskParameterValueExpression `type:"list"`
+	TaskParameters []map[string]MaintenanceWindowTaskParameterValueExpression `type:"list" sensitive:"true"`
 
 	// The type of task that was run.
 	Type MaintenanceWindowTaskType `type:"string" enum:"true"`

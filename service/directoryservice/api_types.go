@@ -245,7 +245,7 @@ type DirectoryDescription struct {
 	// A directory share request that is sent by the directory owner to the directory
 	// consumer. The request includes a typed message to help the directory consumer
 	// administrator determine whether to approve or reject the share invitation.
-	ShareNotes *string `type:"string"`
+	ShareNotes *string `type:"string" sensitive:"true"`
 
 	// Current directory status of the shared AWS Managed Microsoft AD directory.
 	ShareStatus ShareStatus `type:"string" enum:"true"`
@@ -575,7 +575,7 @@ type RadiusSettings struct {
 	RadiusTimeout *int64 `min:"1" type:"integer"`
 
 	// Required for enabling RADIUS on the directory.
-	SharedSecret *string `min:"8" type:"string"`
+	SharedSecret *string `min:"8" type:"string" sensitive:"true"`
 
 	// Not currently used.
 	UseSameUsername *bool `type:"boolean"`
@@ -706,7 +706,7 @@ type SharedDirectory struct {
 	// A directory share request that is sent by the directory owner to the directory
 	// consumer. The request includes a typed message to help the directory consumer
 	// administrator determine whether to approve or reject the share invitation.
-	ShareNotes *string `type:"string"`
+	ShareNotes *string `type:"string" sensitive:"true"`
 
 	// Current directory status of the shared AWS Managed Microsoft AD directory.
 	ShareStatus ShareStatus `type:"string" enum:"true"`

@@ -17,7 +17,7 @@ type UpdateNetworkProfileInput struct {
 	CertificateAuthorityArn *string `type:"string"`
 
 	// The current password of the Wi-Fi network.
-	CurrentPassword *string `min:"5" type:"string"`
+	CurrentPassword *string `min:"5" type:"string" sensitive:"true"`
 
 	// Detailed information about a device's network profile.
 	Description *string `type:"string"`
@@ -33,7 +33,7 @@ type UpdateNetworkProfileInput struct {
 	// The next, or subsequent, password of the Wi-Fi network. This password is
 	// asynchronously transmitted to the device and is used when the password of
 	// the network changes to NextPassword.
-	NextPassword *string `type:"string"`
+	NextPassword *string `type:"string" sensitive:"true"`
 
 	// The root certificate(s) of your authentication server that will be installed
 	// on your devices and used to trust your authentication server during EAP negotiation.

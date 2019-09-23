@@ -53,7 +53,7 @@ type StartBackupJobInput struct {
 
 	// To help organize your resources, you can assign your own metadata to the
 	// resources that you create. Each tag is a key-value pair.
-	RecoveryPointTags map[string]string `type:"map"`
+	RecoveryPointTags map[string]string `type:"map" sensitive:"true"`
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format
 	// of the ARN depends on the resource type.

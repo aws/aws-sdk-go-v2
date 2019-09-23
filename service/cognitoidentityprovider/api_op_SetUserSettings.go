@@ -17,7 +17,7 @@ type SetUserSettingsInput struct {
 	// The access token for the set user settings request.
 	//
 	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true"`
+	AccessToken *string `type:"string" required:"true" sensitive:"true"`
 
 	// Specifies the options for MFA (e.g., email or phone number).
 	//

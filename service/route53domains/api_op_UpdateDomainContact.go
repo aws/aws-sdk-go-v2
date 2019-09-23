@@ -14,7 +14,7 @@ type UpdateDomainContactInput struct {
 	_ struct{} `type:"structure"`
 
 	// Provides detailed contact information.
-	AdminContact *ContactDetail `type:"structure"`
+	AdminContact *ContactDetail `type:"structure" sensitive:"true"`
 
 	// The name of the domain that you want to update contact information for.
 	//
@@ -22,10 +22,10 @@ type UpdateDomainContactInput struct {
 	DomainName *string `type:"string" required:"true"`
 
 	// Provides detailed contact information.
-	RegistrantContact *ContactDetail `type:"structure"`
+	RegistrantContact *ContactDetail `type:"structure" sensitive:"true"`
 
 	// Provides detailed contact information.
-	TechContact *ContactDetail `type:"structure"`
+	TechContact *ContactDetail `type:"structure" sensitive:"true"`
 }
 
 // String returns the string representation

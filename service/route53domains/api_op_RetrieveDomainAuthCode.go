@@ -46,7 +46,7 @@ type RetrieveDomainAuthCodeOutput struct {
 	// The authorization code for the domain.
 	//
 	// AuthCode is a required field
-	AuthCode *string `type:"string" required:"true"`
+	AuthCode *string `type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

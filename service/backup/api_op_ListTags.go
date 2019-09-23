@@ -88,7 +88,7 @@ type ListTagsOutput struct {
 
 	// To help organize your resources, you can assign your own metadata to the
 	// resources you create. Each tag is a key-value pair.
-	Tags map[string]string `type:"map"`
+	Tags map[string]string `type:"map" sensitive:"true"`
 }
 
 // String returns the string representation

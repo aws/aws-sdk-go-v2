@@ -35,7 +35,7 @@ type CreateMaintenanceWindowInput struct {
 
 	// An optional description for the maintenance window. We recommend specifying
 	// a description to help you organize your maintenance windows.
-	Description *string `min:"1" type:"string"`
+	Description *string `min:"1" type:"string" sensitive:"true"`
 
 	// The duration of the maintenance window in hours.
 	//

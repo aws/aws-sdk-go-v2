@@ -68,7 +68,7 @@ type GetDigestOutput struct {
 	// is an Amazon Ion structure that has two fields: strandId and sequenceNo.
 	//
 	// DigestTipAddress is a required field
-	DigestTipAddress *ValueHolder `type:"structure" required:"true"`
+	DigestTipAddress *ValueHolder `type:"structure" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

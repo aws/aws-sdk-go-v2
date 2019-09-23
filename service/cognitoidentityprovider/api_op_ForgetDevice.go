@@ -16,7 +16,7 @@ type ForgetDeviceInput struct {
 	_ struct{} `type:"structure"`
 
 	// The access token for the forgotten device request.
-	AccessToken *string `type:"string"`
+	AccessToken *string `type:"string" sensitive:"true"`
 
 	// The device key.
 	//

@@ -31,7 +31,7 @@ type CreateContactInput struct {
 	// to WORK. You can specify PhoneNumber or PhoneNumbers. We recommend that you
 	// use PhoneNumbers, which lets you specify the phone number type and multiple
 	// numbers.
-	PhoneNumber *string `type:"string"`
+	PhoneNumber *string `type:"string" sensitive:"true"`
 
 	// The list of phone numbers for the contact.
 	PhoneNumbers []PhoneNumber `type:"list"`

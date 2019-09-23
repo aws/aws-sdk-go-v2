@@ -27,12 +27,12 @@ type ChangePasswordInput struct {
 	// because they have special meaning within that tool.
 	//
 	// NewPassword is a required field
-	NewPassword *string `min:"1" type:"string" required:"true"`
+	NewPassword *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The IAM user's current password.
 	//
 	// OldPassword is a required field
-	OldPassword *string `min:"1" type:"string" required:"true"`
+	OldPassword *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation

@@ -20,7 +20,7 @@ type Environment struct {
 	Arn *string `locationName:"arn" type:"string"`
 
 	// The description for the environment.
-	Description *string `locationName:"description" type:"string"`
+	Description *string `locationName:"description" type:"string" sensitive:"true"`
 
 	// The ID of the environment.
 	Id *string `locationName:"id" type:"string"`

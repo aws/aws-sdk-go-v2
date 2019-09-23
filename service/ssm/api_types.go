@@ -2372,7 +2372,7 @@ type InstancePatchState struct {
 
 	// Placeholder information. This field will always be empty in the current release
 	// of the service.
-	OwnerInformation *string `min:"1" type:"string"`
+	OwnerInformation *string `min:"1" type:"string" sensitive:"true"`
 
 	// The name of the patch group the managed instance belongs to.
 	//
@@ -3032,10 +3032,10 @@ type MaintenanceWindowExecutionTaskInvocationIdentity struct {
 	// User-provided value that was specified when the target was registered with
 	// the maintenance window. This was also included in any CloudWatch events raised
 	// during the task invocation.
-	OwnerInformation *string `min:"1" type:"string"`
+	OwnerInformation *string `min:"1" type:"string" sensitive:"true"`
 
 	// The parameters that were provided for the invocation when it was run.
-	Parameters *string `type:"string"`
+	Parameters *string `type:"string" sensitive:"true"`
 
 	// The time the invocation started.
 	StartTime *time.Time `type:"timestamp"`
@@ -3104,7 +3104,7 @@ type MaintenanceWindowIdentity struct {
 	Cutoff *int64 `type:"integer"`
 
 	// A description of the maintenance window.
-	Description *string `min:"1" type:"string"`
+	Description *string `min:"1" type:"string" sensitive:"true"`
 
 	// The duration of the maintenance window in hours.
 	Duration *int64 `min:"1" type:"integer"`
@@ -3187,7 +3187,7 @@ type MaintenanceWindowLambdaParameters struct {
 	// JSON to provide to your Lambda function as input.
 	//
 	// Payload is automatically base64 encoded/decoded by the SDK.
-	Payload []byte `type:"blob"`
+	Payload []byte `type:"blob" sensitive:"true"`
 
 	// (Optional) Specify a Lambda function version or alias name. If you specify
 	// a function version, the action uses the qualified function ARN to invoke
@@ -3311,7 +3311,7 @@ type MaintenanceWindowStepFunctionsParameters struct {
 	_ struct{} `type:"structure"`
 
 	// The inputs for the STEP_FUNCTIONS task.
-	Input *string `type:"string"`
+	Input *string `type:"string" sensitive:"true"`
 
 	// The name of the STEP_FUNCTIONS task.
 	Name *string `min:"1" type:"string"`
@@ -3340,14 +3340,14 @@ type MaintenanceWindowTarget struct {
 	_ struct{} `type:"structure"`
 
 	// A description for the target.
-	Description *string `min:"1" type:"string"`
+	Description *string `min:"1" type:"string" sensitive:"true"`
 
 	// The name for the maintenance window target.
 	Name *string `min:"3" type:"string"`
 
 	// A user-provided value that will be included in any CloudWatch events that
 	// are raised while running tasks for these targets in this maintenance window.
-	OwnerInformation *string `min:"1" type:"string"`
+	OwnerInformation *string `min:"1" type:"string" sensitive:"true"`
 
 	// The type of target that is being registered with the maintenance window.
 	ResourceType MaintenanceWindowResourceType `type:"string" enum:"true"`
@@ -3380,7 +3380,7 @@ type MaintenanceWindowTask struct {
 	_ struct{} `type:"structure"`
 
 	// A description of the task.
-	Description *string `min:"1" type:"string"`
+	Description *string `min:"1" type:"string" sensitive:"true"`
 
 	// Information about an Amazon S3 bucket to write task-level logs to.
 	//
@@ -3424,7 +3424,7 @@ type MaintenanceWindowTask struct {
 	// when it runs, instead use the Parameters option in the TaskInvocationParameters
 	// structure. For information about how Systems Manager handles these options
 	// for the supported maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
-	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map"`
+	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression `type:"map" sensitive:"true"`
 
 	// The type of task. The type can be one of the following: RUN_COMMAND, AUTOMATION,
 	// LAMBDA, or STEP_FUNCTIONS.
@@ -3496,11 +3496,11 @@ func (s *MaintenanceWindowTaskInvocationParameters) Validate() error {
 
 // Defines the values for a task parameter.
 type MaintenanceWindowTaskParameterValueExpression struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" sensitive:"true"`
 
 	// This field contains an array of 0 or more strings, each 1 to 255 characters
 	// in length.
-	Values []string `type:"list"`
+	Values []string `type:"list" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -4534,7 +4534,7 @@ type PatchSource struct {
 	// debuglevel=2
 	//
 	// Configuration is a required field
-	Configuration *string `min:"1" type:"string" required:"true"`
+	Configuration *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The name specified to identify the patch source.
 	//

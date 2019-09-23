@@ -24,7 +24,7 @@ type CreateEnvironmentEC2Input struct {
 	ClientRequestToken *string `locationName:"clientRequestToken" type:"string"`
 
 	// The description of the environment to create.
-	Description *string `locationName:"description" type:"string"`
+	Description *string `locationName:"description" type:"string" sensitive:"true"`
 
 	// The type of instance to connect to the environment (for example, t2.micro).
 	//

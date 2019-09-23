@@ -54,7 +54,7 @@ type GetDomainDetailOutput struct {
 	// Provides details about the domain administrative contact.
 	//
 	// AdminContact is a required field
-	AdminContact *ContactDetail `type:"structure" required:"true"`
+	AdminContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
 
 	// Specifies whether contact information is concealed from WHOIS queries. If
 	// the value is true, WHOIS ("who is") queries return contact information either
@@ -90,7 +90,7 @@ type GetDomainDetailOutput struct {
 	// Provides details about the domain registrant.
 	//
 	// RegistrantContact is a required field
-	RegistrantContact *ContactDetail `type:"structure" required:"true"`
+	RegistrantContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
 
 	// Specifies whether contact information is concealed from WHOIS queries. If
 	// the value is true, WHOIS ("who is") queries return contact information either
@@ -135,7 +135,7 @@ type GetDomainDetailOutput struct {
 	// Provides details about the domain technical contact.
 	//
 	// TechContact is a required field
-	TechContact *ContactDetail `type:"structure" required:"true"`
+	TechContact *ContactDetail `type:"structure" required:"true" sensitive:"true"`
 
 	// Specifies whether contact information is concealed from WHOIS queries. If
 	// the value is true, WHOIS ("who is") queries return contact information either

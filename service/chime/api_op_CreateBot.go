@@ -21,7 +21,7 @@ type CreateBotInput struct {
 	// The bot display name.
 	//
 	// DisplayName is a required field
-	DisplayName *string `type:"string" required:"true"`
+	DisplayName *string `type:"string" required:"true" sensitive:"true"`
 
 	// The domain of the Amazon Chime Enterprise account.
 	Domain *string `type:"string"`

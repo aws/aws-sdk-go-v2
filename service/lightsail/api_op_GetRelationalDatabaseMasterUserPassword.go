@@ -56,7 +56,7 @@ type GetRelationalDatabaseMasterUserPasswordOutput struct {
 	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
 
 	// The master user password for the password version specified.
-	MasterUserPassword *string `locationName:"masterUserPassword" type:"string"`
+	MasterUserPassword *string `locationName:"masterUserPassword" type:"string" sensitive:"true"`
 }
 
 // String returns the string representation

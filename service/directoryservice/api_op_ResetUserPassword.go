@@ -21,7 +21,7 @@ type ResetUserPasswordInput struct {
 	// The new password that will be reset.
 	//
 	// NewPassword is a required field
-	NewPassword *string `min:"1" type:"string" required:"true"`
+	NewPassword *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The user name of the user whose password will be reset.
 	//

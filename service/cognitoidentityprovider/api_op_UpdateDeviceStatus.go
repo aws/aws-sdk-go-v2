@@ -16,7 +16,7 @@ type UpdateDeviceStatusInput struct {
 	// The access token.
 	//
 	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true"`
+	AccessToken *string `type:"string" required:"true" sensitive:"true"`
 
 	// The device key.
 	//

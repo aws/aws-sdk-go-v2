@@ -96,7 +96,7 @@ type AccessKey struct {
 	// The secret key used to sign requests.
 	//
 	// SecretAccessKey is a required field
-	SecretAccessKey *string `type:"string" required:"true"`
+	SecretAccessKey *string `type:"string" required:"true" sensitive:"true"`
 
 	// The status of the access key. Active means that the key is valid for API
 	// calls, while Inactive means it is not.
@@ -1587,7 +1587,7 @@ type ServiceSpecificCredential struct {
 	// The generated password for the service-specific credential.
 	//
 	// ServicePassword is a required field
-	ServicePassword *string `type:"string" required:"true"`
+	ServicePassword *string `type:"string" required:"true" sensitive:"true"`
 
 	// The unique identifier for the service-specific credential.
 	//
@@ -1927,7 +1927,7 @@ type VirtualMFADevice struct {
 	// The Base32StringSeed is base64-encoded.
 	//
 	// Base32StringSeed is automatically base64 encoded/decoded by the SDK.
-	Base32StringSeed []byte `type:"blob"`
+	Base32StringSeed []byte `type:"blob" sensitive:"true"`
 
 	// The date and time on which the virtual MFA device was enabled.
 	EnableDate *time.Time `type:"timestamp"`
@@ -1938,7 +1938,7 @@ type VirtualMFADevice struct {
 	// is the seed in base32 format. The Base32String value is base64-encoded.
 	//
 	// QRCodePNG is automatically base64 encoded/decoded by the SDK.
-	QRCodePNG []byte `type:"blob"`
+	QRCodePNG []byte `type:"blob" sensitive:"true"`
 
 	// The serial number associated with VirtualMFADevice.
 	//

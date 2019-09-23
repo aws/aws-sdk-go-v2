@@ -14,7 +14,7 @@ type InviteAccountToOrganizationInput struct {
 
 	// Additional information that you want to include in the generated email to
 	// the recipient account owner.
-	Notes *string `type:"string"`
+	Notes *string `type:"string" sensitive:"true"`
 
 	// The identifier (ID) of the AWS account that you want to invite to join your
 	// organization. This is a JSON object that contains the following elements:

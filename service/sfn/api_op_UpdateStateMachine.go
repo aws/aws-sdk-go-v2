@@ -15,7 +15,7 @@ type UpdateStateMachineInput struct {
 
 	// The Amazon States Language definition of the state machine. See Amazon States
 	// Language (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
-	Definition *string `locationName:"definition" min:"1" type:"string"`
+	Definition *string `locationName:"definition" min:"1" type:"string" sensitive:"true"`
 
 	// The Amazon Resource Name (ARN) of the IAM role of the state machine.
 	RoleArn *string `locationName:"roleArn" min:"1" type:"string"`

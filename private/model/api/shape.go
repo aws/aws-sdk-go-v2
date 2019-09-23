@@ -116,6 +116,9 @@ type Shape struct {
 	// Flags that the shape cannot be rename. Prevents the shape from being
 	// renamed further by the Input/Output.
 	AliasedShapeName bool
+
+	// Sensitive types should not be logged by SDK type loggers.
+	Sensitive bool `json:"sensitive"`
 }
 
 // ErrorCodeName will return the error shape's name formated for
@@ -507,6 +510,10 @@ func (ref *ShapeRef) GoTags(toplevel bool, isRequired bool) string {
 
 	if ref.IdempotencyToken || ref.Shape.IdempotencyToken {
 		tags = append(tags, ShapeTag{"idempotencyToken", "true"})
+	}
+
+	if ref.Shape.Sensitive {
+		tags = append(tags, ShapeTag{"sensitive", "true"})
 	}
 
 	if ref.Ignore {

@@ -16,7 +16,7 @@ type VerifyUserAttributeInput struct {
 	// Represents the access token of the request to verify user attributes.
 	//
 	// AccessToken is a required field
-	AccessToken *string `type:"string" required:"true"`
+	AccessToken *string `type:"string" required:"true" sensitive:"true"`
 
 	// The attribute name in the request to verify user attributes.
 	//

@@ -16,7 +16,7 @@ type SetUICustomizationInput struct {
 	CSS *string `type:"string"`
 
 	// The client ID for the client app.
-	ClientId *string `min:"1" type:"string"`
+	ClientId *string `min:"1" type:"string" sensitive:"true"`
 
 	// The uploaded logo image for the UI customization.
 	//

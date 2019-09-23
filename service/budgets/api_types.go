@@ -538,7 +538,7 @@ type Subscriber struct {
 	// AWS validates the address for a CreateSubscriber request with the .* regex.
 	//
 	// Address is a required field
-	Address *string `min:"1" type:"string" required:"true"`
+	Address *string `min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The type of notification that AWS sends to a subscriber.
 	//
