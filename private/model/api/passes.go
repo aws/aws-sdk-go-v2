@@ -280,6 +280,11 @@ func collides(name string) bool {
 }
 
 func renameCollidingField(name string, v *Shape, field *ShapeRef) {
+	// if location name is not set, we set location name to name.
+	if v.LocationName == "" {
+		v.LocationName = name
+	}
+
 	newName := name + "_"
 	debugLogger.Logf("Shape %s's field %q renamed to %q", v.ShapeName, name, newName)
 	delete(v.MemberRefs, name)
