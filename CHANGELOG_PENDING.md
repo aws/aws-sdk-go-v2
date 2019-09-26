@@ -13,6 +13,9 @@ Deprecations
   
 SDK Features
 ---
+* `service/dynamodb/dynamodbattribute`: New Encoder and Decoder Behavior for Empty Collections ([#401](https://github.com/aws/aws-sdk-go-v2/pull/401))
+  * The `Encoder` and `Decoder` types have been enhanced to support the marshaling of empty structures, maps, and slices to and from their respective DynamoDB AttributeValues.
+  * This change incorporates the behavior changes introduced via a marshal option in V1 ([#2834](https://github.com/aws/aws-sdk-go/pull/2834))
 
 SDK Enhancements
 ---

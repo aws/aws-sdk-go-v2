@@ -330,9 +330,6 @@ func (e *Encoder) encodeStruct(av *dynamodb.AttributeValue, v reflect.Value, fie
 
 		av.M[f.Name] = elem
 	}
-	if len(av.M) == 0 {
-		encodeNull(av)
-	}
 
 	return nil
 }
@@ -357,7 +354,8 @@ func (e *Encoder) encodeMap(av *dynamodb.AttributeValue, v reflect.Value, fieldT
 
 		av.M[keyName] = elem
 	}
-	if len(av.M) == 0 {
+
+	if v.IsNil() {
 		encodeNull(av)
 	}
 
@@ -365,13 +363,23 @@ func (e *Encoder) encodeMap(av *dynamodb.AttributeValue, v reflect.Value, fieldT
 }
 
 func (e *Encoder) encodeSlice(av *dynamodb.AttributeValue, v reflect.Value, fieldTag tag) error {
+	if v.Kind() == reflect.Array && v.Len() == 0 && fieldTag.OmitEmpty {
+		encodeNull(av)
+		return nil
+	}
+
 	switch v.Type().Elem().Kind() {
 	case reflect.Uint8:
-		b := v.Bytes()
-		if len(b) == 0 {
+		if v.Kind() == reflect.Slice && v.IsNil() {
 			encodeNull(av)
 			return nil
 		}
+
+		slice := reflect.MakeSlice(byteSliceType, v.Len(), v.Len())
+		reflect.Copy(slice, v)
+
+		b := slice.Bytes()
+
 		av.B = append([]byte{}, b...)
 	default:
 		var elemFn func(dynamodb.AttributeValue) error
@@ -411,9 +419,9 @@ func (e *Encoder) encodeSlice(av *dynamodb.AttributeValue, v reflect.Value, fiel
 			}
 		}
 
-		if n, err := e.encodeList(v, fieldTag, elemFn); err != nil {
+		if _, err := e.encodeList(v, fieldTag, elemFn); err != nil {
 			return err
-		} else if n == 0 {
+		} else if v.Kind() == reflect.Slice && v.IsNil() {
 			encodeNull(av)
 		}
 	}
@@ -486,8 +494,10 @@ func (e *Encoder) encodeNumber(av *dynamodb.AttributeValue, v reflect.Value) err
 		out = encodeInt(v.Int())
 	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
 		out = encodeUint(v.Uint())
-	case reflect.Float32, reflect.Float64:
-		out = encodeFloat(v.Float())
+	case reflect.Float32:
+		out = encodeFloat(v.Float(), 32)
+	case reflect.Float64:
+		out = encodeFloat(v.Float(), 64)
 	default:
 		return &unsupportedMarshalTypeError{Type: v.Type()}
 	}
@@ -523,8 +533,8 @@ func encodeInt(i int64) string {
 func encodeUint(u uint64) string {
 	return strconv.FormatUint(u, 10)
 }
-func encodeFloat(f float64) string {
-	return strconv.FormatFloat(f, 'f', -1, 64)
+func encodeFloat(f float64, bitSize int) string {
+	return strconv.FormatFloat(f, 'f', -1, bitSize)
 }
 func encodeNull(av *dynamodb.AttributeValue) {
 	t := true
@@ -544,7 +554,11 @@ func valueElem(v reflect.Value) reflect.Value {
 
 func emptyValue(v reflect.Value) bool {
 	switch v.Kind() {
-	case reflect.Array, reflect.Map, reflect.Slice, reflect.String:
+	case reflect.Array:
+		return v.Len() == 0
+	case reflect.Map, reflect.Slice:
+		return v.IsNil()
+	case reflect.String:
 		return v.Len() == 0
 	case reflect.Bool:
 		return !v.Bool()
