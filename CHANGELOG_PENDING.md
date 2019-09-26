@@ -13,6 +13,14 @@ Deprecations
 
 SDK Features
 ---
+* `service/s3/s3manager`: Add Upload Buffer Provider ([#404](https://github.com/aws/aws-sdk-go-v2/pull/404))
+  * Adds a new `BufferProvider` member for specifying how part data can be buffered in memory.
+  * Windows platforms will now default to buffering 1MB per part to reduce contention when uploading files.
+  * Non-Windows platforms will continue to employ a non-buffering behavior.
+* `service/s3/s3manager`: Add Download Buffer Provider ([#404](https://github.com/aws/aws-sdk-go-v2/pull/404))
+  * Adds a new `BufferProvider` member for specifying how part data can be buffered in memory when copying from the http response body.
+  * Windows platforms will now default to buffering 1MB per part to reduce contention when downloading files.
+  * Non-Windows platforms will continue to employ a non-buffering behavior.
 
 SDK Enhancements
 ---
