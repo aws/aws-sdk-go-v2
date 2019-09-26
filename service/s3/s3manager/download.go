@@ -433,7 +433,7 @@ func (d *downloader) downloadChunk(chunk dlchunk) error {
 		// Check if the returned error is an errReadingBody.
 		// If err is errReadingBody this indicates that an error
 		// occurred while copying the http response body.
-		// If this occurs we unwrap the error to set the underling error
+		// If this occurs we unwrap the error to set the underlying error
 		// and attempt any remaining retries.
 		if bodyErr, ok := err.(*errReadingBody); ok {
 			err = bodyErr.Unwrap()

@@ -29,6 +29,9 @@ SDK Enhancements
   * Related to [aws/aws-sdk-go#2310](https://github.com/aws/aws-sdk-go/pull/2310)
   * Fixes [#251](https://github.com/aws/aws-sdk-go-v2/issues/251)
 * `aws/request` : Retryer is now a named field on Request. ([#393](https://github.com/aws/aws-sdk-go-v2/pull/393))
-  
+* `service/s3/s3manager`: Adds `sync.Pool` to allow reuse of part buffers for streaming payloads ([#404](https://github.com/aws/aws-sdk-go-v2/pull/404))
+  * Fixes [#402](https://github.com/aws/aws-sdk-go-v2/issues/402) 
+  * Uses the new behavior introduced in V1 [#2863](https://github.com/aws/aws-sdk-go/pull/2863) which allows the reuse of the sync.Pool across multiple Upload request that match part sizes.
+   
 SDK Bugs
 ---

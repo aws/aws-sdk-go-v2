@@ -162,6 +162,9 @@ type Uploader struct {
 
 	// Defines the buffer strategy used when uploading a part
 	BufferProvider ReadSeekerWriteToProvider
+
+	// partPool allows for the re-usage of streaming payload part buffers between upload calls
+	partPool *partPool
 }
 
 // NewUploader creates a new Uploader instance to upload objects to S3. Pass In
@@ -179,8 +182,12 @@ type Uploader struct {
 //          u.PartSize = 64 * 1024 * 1024 // 64MB per part
 //     })
 func NewUploader(cfg aws.Config, options ...func(*Uploader)) *Uploader {
+	return newUploader(s3.New(cfg), options...)
+}
+
+func newUploader(client s3iface.ClientAPI, options ...func(*Uploader)) *Uploader {
 	u := &Uploader{
-		S3:                s3.New(cfg),
+		S3:                client,
 		PartSize:          DefaultUploadPartSize,
 		Concurrency:       DefaultUploadConcurrency,
 		LeavePartsOnError: false,
@@ -191,6 +198,8 @@ func NewUploader(cfg aws.Config, options ...func(*Uploader)) *Uploader {
 	for _, option := range options {
 		option(u)
 	}
+
+	u.partPool = newPartPool(u.PartSize)
 
 	return u
 }
@@ -214,20 +223,7 @@ func NewUploader(cfg aws.Config, options ...func(*Uploader)) *Uploader {
 //          u.PartSize = 64 * 1024 * 1024 // 64MB per part
 //     })
 func NewUploaderWithClient(svc s3iface.ClientAPI, options ...func(*Uploader)) *Uploader {
-	u := &Uploader{
-		S3:                svc,
-		PartSize:          DefaultUploadPartSize,
-		Concurrency:       DefaultUploadConcurrency,
-		LeavePartsOnError: false,
-		MaxUploadParts:    MaxUploadParts,
-		BufferProvider:    defaultUploadBufferProvider(),
-	}
-
-	for _, option := range options {
-		option(u)
-	}
-
-	return u
+	return newUploader(svc, options...)
 }
 
 // Upload uploads an object to S3, intelligently buffering large files into
@@ -287,6 +283,7 @@ func (u Uploader) UploadWithContext(ctx context.Context, input *UploadInput, opt
 	for _, opt := range opts {
 		opt(&i.cfg)
 	}
+
 	i.cfg.RequestOptions = append(i.cfg.RequestOptions, request.WithAppendUserAgent("S3Manager"))
 
 	return i.upload()
@@ -391,6 +388,15 @@ func (u *uploader) init() error {
 	if u.cfg.PartSize == 0 {
 		u.cfg.PartSize = DefaultUploadPartSize
 	}
+	if u.cfg.MaxUploadParts == 0 {
+		u.cfg.MaxUploadParts = MaxUploadParts
+	}
+
+	// If PartSize was changed or partPool was never setup then we need to allocated a new pool
+	// so that we return []byte slices of the correct size
+	if u.cfg.partPool == nil || u.cfg.partPool.partSize != u.cfg.PartSize {
+		u.cfg.partPool = newPartPool(u.cfg.PartSize)
+	}
 
 	// Try to get the total size for some optimizations
 	return u.initSize()
@@ -460,11 +466,13 @@ func (u *uploader) nextReader() (io.ReadSeeker, int, func(), error) {
 		return reader, int(n), cleanup, err
 
 	default:
-		part := make([]byte, u.cfg.PartSize)
+		part := u.cfg.partPool.Get().([]byte)
 		n, err := readFillBuf(r, part)
 		u.readerPos += int64(n)
 
-		cleanup := func() {}
+		cleanup := func() {
+			u.cfg.partPool.Put(part)
+		}
 
 		return bytes.NewReader(part[0:n]), n, cleanup, err
 	}
@@ -750,4 +758,19 @@ func (u *multiuploader) complete() *s3.CompleteMultipartUploadOutput {
 	}
 
 	return resp.CompleteMultipartUploadOutput
+}
+
+type partPool struct {
+	partSize int64
+	sync.Pool
+}
+
+func newPartPool(partSize int64) *partPool {
+	p := &partPool{partSize: partSize}
+
+	p.New = func() interface{} {
+		return make([]byte, p.partSize)
+	}
+
+	return p
 }
