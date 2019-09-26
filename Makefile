@@ -8,6 +8,7 @@ LINTIGNOREDEPS='vendor/.+\.go'
 LINTIGNOREPKGCOMMENT='service/[^/]+/doc_custom.go:.+package comment should be of the form'
 LINTIGNOREENDPOINTS='aws/endpoints/defaults.go:.+(method|const) .+ should be '
 UNIT_TEST_TAGS="example codegen awsinclude"
+ALL_TAGS="example codegen awsinclude integration perftest"
 
 # SDK's Core and client packages that are compatable with Go 1.9+.
 SDK_CORE_PKGS=./aws/... ./private/... ./internal/...
@@ -56,11 +57,14 @@ cleanup-models:
 ###################
 # Unit/CI Testing #
 ###################
-unit: verify
+build:
+	go build -o /dev/null -tags ${ALL_TAGS} ${SDK_ALL_PKGS}
+
+unit: verify build
 	@echo "go test SDK and vendor packages"
 	@go test -tags ${UNIT_TEST_TAGS} ${SDK_ALL_PKGS}
 
-unit-with-race-cover: verify
+unit-with-race-cover: verify build
 	@echo "go test SDK and vendor packages"
 	@go test -tags ${UNIT_TEST_TAGS} -race -cpu=1,2,4 ${SDK_ALL_PKGS}
 
