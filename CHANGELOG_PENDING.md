@@ -42,4 +42,4 @@ SDK Bugs
   * Fixes the S3 Upload Manager's handling of an unbounded streaming reader that returns negative bytes read.
 * `internal/ini`: Fix ini parser to handle empty values [#406](https://github.com/aws/aws-sdk-go-v2/pull/406)
   * Fixes incorrect modifications to the previous token value of the skipper. Adds checks for cases where a skipped statement should be marked as complete and not be ignored.
-  * Adds tests for nested and empty field value parsing, along with tests suggested in [#2801](https://github.com/aws/aws-sdk-go/pull/2801)
+  * Adds tests for nested and empty field value parsing, along with tests suggested in [aws/aws-sdk-go#2801](https://github.com/aws/aws-sdk-go/pull/2801)
