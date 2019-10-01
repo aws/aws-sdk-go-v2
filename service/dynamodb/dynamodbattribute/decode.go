@@ -171,23 +171,23 @@ func (d *Decoder) decode(av *dynamodb.AttributeValue, v reflect.Value, fieldTag 
 	}
 
 	switch {
-	case len(av.B) != 0:
+	case av.B != nil:
 		return d.decodeBinary(av.B, v)
 	case av.BOOL != nil:
 		return d.decodeBool(av.BOOL, v)
-	case len(av.BS) != 0:
+	case av.BS != nil:
 		return d.decodeBinarySet(av.BS, v)
-	case len(av.L) != 0:
+	case av.L != nil:
 		return d.decodeList(av.L, v)
-	case len(av.M) != 0:
+	case av.M != nil:
 		return d.decodeMap(av.M, v)
 	case av.N != nil:
 		return d.decodeNumber(av.N, v, fieldTag)
-	case len(av.NS) != 0:
+	case av.NS != nil:
 		return d.decodeNumberSet(av.NS, v)
-	case av.S != nil:
+	case av.S != nil: // DynamoDB does not allow for empty strings, so we do not consider the length or EnableEmptyCollections flag here
 		return d.decodeString(av.S, v, fieldTag)
-	case len(av.SS) != 0:
+	case av.SS != nil:
 		return d.decodeStringSet(av.SS, v)
 	}
 
@@ -202,7 +202,7 @@ func (d *Decoder) decodeBinary(b []byte, v reflect.Value) error {
 		return nil
 	}
 
-	if v.Kind() != reflect.Slice {
+	if v.Kind() != reflect.Slice && v.Kind() != reflect.Array {
 		return &UnmarshalTypeError{Value: "binary", Type: v.Type()}
 	}
 
@@ -220,7 +220,7 @@ func (d *Decoder) decodeBinary(b []byte, v reflect.Value) error {
 	switch v.Type().Elem().Kind() {
 	case reflect.Uint8:
 		// Fallback to reflection copy for type aliased of []byte type
-		if v.IsNil() || v.Cap() < len(b) {
+		if v.Kind() != reflect.Array && (v.IsNil() || v.Cap() < len(b)) {
 			v.Set(reflect.MakeSlice(v.Type(), len(b), len(b)))
 		} else if v.Len() != len(b) {
 			v.SetLen(len(b))

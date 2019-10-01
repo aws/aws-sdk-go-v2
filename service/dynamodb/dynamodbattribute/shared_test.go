@@ -371,21 +371,20 @@ var sharedMapTestCases = []struct {
 	},
 }
 
-func assertConvertTest(t *testing.T, i int, actual, expected interface{}, err, expectedErr error) {
-	i++
+func assertConvertTest(t *testing.T, actual, expected interface{}, err, expectedErr error) {
 	if expectedErr != nil {
 		if err != nil {
 			if e, a := expectedErr, err; !reflect.DeepEqual(e, a) {
-				t.Errorf("case %d expect %v, got %v", i, e, a)
+				t.Errorf("expect %v, got %v", e, a)
 			}
 		} else {
-			t.Fatalf("case %d, expected error, %v", i, expectedErr)
+			t.Fatalf("expected error, %v", expectedErr)
 		}
 	} else if err != nil {
-		t.Fatalf("case %d, expect no error, got %v", i, err)
+		t.Fatalf("expect no error, got %v", err)
 	} else {
 		if e, a := ptrToValue(expected), ptrToValue(actual); !reflect.DeepEqual(e, a) {
-			t.Errorf("case %d, expect %v, got %v", i, e, a)
+			t.Errorf("expect %v, got %v", e, a)
 		}
 	}
 }

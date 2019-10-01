@@ -18,22 +18,28 @@ func TestMarshalErrorTypes(t *testing.T) {
 
 func TestMarshalShared(t *testing.T) {
 	for i, c := range sharedTestCases {
-		av, err := Marshal(c.expected)
-		assertConvertTest(t, i, av, c.in, err, c.err)
+		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+			av, err := Marshal(c.expected)
+			assertConvertTest(t, av, c.in, err, c.err)
+		})
 	}
 }
 
 func TestMarshalListShared(t *testing.T) {
 	for i, c := range sharedListTestCases {
-		av, err := MarshalList(c.expected)
-		assertConvertTest(t, i, av, c.in, err, c.err)
+		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+			av, err := MarshalList(c.expected)
+			assertConvertTest(t, av, c.in, err, c.err)
+		})
 	}
 }
 
 func TestMarshalMapShared(t *testing.T) {
 	for i, c := range sharedMapTestCases {
-		av, err := MarshalMap(c.expected)
-		assertConvertTest(t, i, av, c.in, err, c.err)
+		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+			av, err := MarshalMap(c.expected)
+			assertConvertTest(t, av, c.in, err, c.err)
+		})
 	}
 }
 

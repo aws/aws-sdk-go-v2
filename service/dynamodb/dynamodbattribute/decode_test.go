@@ -19,8 +19,10 @@ func TestUnmarshalErrorTypes(t *testing.T) {
 
 func TestUnmarshalShared(t *testing.T) {
 	for i, c := range sharedTestCases {
-		err := Unmarshal(c.in, c.actual)
-		assertConvertTest(t, i, c.actual, c.expected, err, c.err)
+		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+			err := Unmarshal(c.in, c.actual)
+			assertConvertTest(t, c.actual, c.expected, err, c.err)
+		})
 	}
 }
 
@@ -173,8 +175,10 @@ func TestUnmarshal(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		err := Unmarshal(c.in, c.actual)
-		assertConvertTest(t, i, c.actual, c.expected, err, c.err)
+		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+			err := Unmarshal(c.in, c.actual)
+			assertConvertTest(t, c.actual, c.expected, err, c.err)
+		})
 	}
 }
 
@@ -184,7 +188,7 @@ func TestInterfaceInput(t *testing.T) {
 	err := Unmarshal(&dynamodb.AttributeValue{L: []dynamodb.AttributeValue{
 		{S: aws.String("abc")}, {S: aws.String("123")},
 	}}, &v)
-	assertConvertTest(t, 0, v, expected, err, nil)
+	assertConvertTest(t, v, expected, err, nil)
 }
 
 func TestUnmarshalError(t *testing.T) {
@@ -202,15 +206,19 @@ func TestUnmarshalError(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		err := Unmarshal(c.in, c.actual)
-		assertConvertTest(t, i, c.actual, c.expected, err, c.err)
+		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+			err := Unmarshal(c.in, c.actual)
+			assertConvertTest(t, c.actual, c.expected, err, c.err)
+		})
 	}
 }
 
 func TestUnmarshalListShared(t *testing.T) {
 	for i, c := range sharedListTestCases {
-		err := UnmarshalList(c.in, c.actual)
-		assertConvertTest(t, i, c.actual, c.expected, err, c.err)
+		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+			err := UnmarshalList(c.in, c.actual)
+			assertConvertTest(t, c.actual, c.expected, err, c.err)
+		})
 	}
 }
 
@@ -229,15 +237,19 @@ func TestUnmarshalListError(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		err := UnmarshalList(c.in, c.actual)
-		assertConvertTest(t, i, c.actual, c.expected, err, c.err)
+		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+			err := UnmarshalList(c.in, c.actual)
+			assertConvertTest(t, c.actual, c.expected, err, c.err)
+		})
 	}
 }
 
 func TestUnmarshalMapShared(t *testing.T) {
 	for i, c := range sharedMapTestCases {
-		err := UnmarshalMap(c.in, c.actual)
-		assertConvertTest(t, i, c.actual, c.expected, err, c.err)
+		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+			err := UnmarshalMap(c.in, c.actual)
+			assertConvertTest(t, c.actual, c.expected, err, c.err)
+		})
 	}
 }
 
@@ -264,8 +276,10 @@ func TestUnmarshalMapError(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		err := UnmarshalMap(c.in, c.actual)
-		assertConvertTest(t, i, c.actual, c.expected, err, c.err)
+		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+			err := UnmarshalMap(c.in, c.actual)
+			assertConvertTest(t, c.actual, c.expected, err, c.err)
+		})
 	}
 }
 
@@ -317,8 +331,10 @@ func TestUnmarshalListOfMaps(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		err := UnmarshalListOfMaps(c.in, c.actual)
-		assertConvertTest(t, i, c.actual, c.expected, err, c.err)
+		t.Run(fmt.Sprintf("case %d", i), func(t *testing.T) {
+			err := UnmarshalListOfMaps(c.in, c.actual)
+			assertConvertTest(t, c.actual, c.expected, err, c.err)
+		})
 	}
 }
 
