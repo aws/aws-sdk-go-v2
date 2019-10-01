@@ -10,7 +10,7 @@ Deprecations
 * Removes support for deprecated Go versions ([#393](https://github.com/aws/aws-sdk-go-v2/pull/393))
   * Removes support for Go version specific files from the SDK. Also removes irrelevant build tags, and updates the README.md file. 
   * Raises the minimum supported version to Go 1.11 for the SDK. Older versions may work, but are not actively supported
-
+  
 SDK Features
 ---
 
@@ -21,6 +21,8 @@ SDK Enhancements
   * Related to [aws/aws-sdk-go#2310](https://github.com/aws/aws-sdk-go/pull/2310)
   * Fixes [#251](https://github.com/aws/aws-sdk-go-v2/issues/251)
 * `aws/request` : Retryer is now a named field on Request. ([#393](https://github.com/aws/aws-sdk-go-v2/pull/393))
-  
+
 SDK Bugs
 ---
+* `service/s3/s3manager`: Fix index out of range when a streaming reader returns -1 ([#378](https://github.com/aws/aws-sdk-go-v2/pull/378))
+  * Fixes the S3 Upload Manager's handling of an unbounded streaming reader that returns negative bytes read.

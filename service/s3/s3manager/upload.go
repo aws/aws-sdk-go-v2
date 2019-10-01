@@ -445,6 +445,14 @@ func (u *uploader) nextReader() (io.ReadSeeker, int, error) {
 	default:
 		part := make([]byte, u.cfg.PartSize)
 		n, err := readFillBuf(r, part)
+		if n < 0 {
+			if err == nil {
+				err = fmt.Errorf(
+					"unable to read part, got negative bytes read(%d) without error, %v",
+					n, err)
+			}
+			return nil, n, err
+		}
 		u.readerPos += int64(n)
 
 		return bytes.NewReader(part[0:n]), n, err
@@ -452,7 +460,7 @@ func (u *uploader) nextReader() (io.ReadSeeker, int, error) {
 }
 
 func readFillBuf(r io.Reader, b []byte) (offset int, err error) {
-	for offset < len(b) && err == nil {
+	for offset >= 0 && offset < len(b) && err == nil {
 		var n int
 		n, err = r.Read(b[offset:])
 		offset += n
