@@ -219,21 +219,21 @@ type Endpoint struct {
 
 	// The settings in JSON format for the DMS transfer type of source endpoint.
 	//
-	// Possible attributes include the following:
+	// Possible settings include the following:
 	//
-	//    * serviceAccessRoleArn - The IAM role that has permission to access the
+	//    * ServiceAccessRoleArn - The IAM role that has permission to access the
 	//    Amazon S3 bucket.
 	//
-	//    * bucketName - The name of the S3 bucket to use.
+	//    * BucketName - The name of the S3 bucket to use.
 	//
-	//    * compressionType - An optional parameter to use GZIP to compress the
+	//    * CompressionType - An optional parameter to use GZIP to compress the
 	//    target files. To use GZIP, set this value to NONE (the default). To keep
 	//    the files uncompressed, don't use this value.
 	//
-	// Shorthand syntax for these attributes is as follows: ServiceAccessRoleArn=string,BucketName=string,CompressionType=string
+	// Shorthand syntax for these settings is as follows: ServiceAccessRoleArn=string,BucketName=string,CompressionType=string
 	//
-	// JSON syntax for these attributes is as follows: { "ServiceAccessRoleArn":
-	// "string", "BucketName": "string", "CompressionType": "none"|"gzip" }
+	// JSON syntax for these settings is as follows: { "ServiceAccessRoleArn": "string",
+	// "BucketName": "string", "CompressionType": "none"|"gzip" }
 	DmsTransferSettings *DmsTransferSettings `type:"structure"`
 
 	// The settings for the target DynamoDB database. For more information, see
@@ -481,10 +481,10 @@ type MongoDbSettings struct {
 	// Valid values: DEFAULT, MONGODB_CR, SCRAM_SHA_1
 	//
 	// DEFAULT – For MongoDB version 2.x, use MONGODB_CR. For MongoDB version
-	// 3.x, use SCRAM_SHA_1. This attribute is not used when authType=No.
+	// 3.x, use SCRAM_SHA_1. This setting is not used when authType=No.
 	AuthMechanism AuthMechanismValue `type:"string" enum:"true"`
 
-	// The MongoDB database name. This attribute is not used when authType=NO.
+	// The MongoDB database name. This setting is not used when authType=NO.
 	//
 	// The default is admin.
 	AuthSource *string `type:"string"`
@@ -501,13 +501,12 @@ type MongoDbSettings struct {
 	DatabaseName *string `type:"string"`
 
 	// Indicates the number of documents to preview to determine the document organization.
-	// Use this attribute when NestingLevel is set to ONE.
+	// Use this setting when NestingLevel is set to ONE.
 	//
 	// Must be a positive value greater than 0. Default value is 1000.
 	DocsToInvestigate *string `type:"string"`
 
-	// Specifies the document ID. Use this attribute when NestingLevel is set to
-	// NONE.
+	// Specifies the document ID. Use this setting when NestingLevel is set to NONE.
 	//
 	// Default value is false.
 	ExtractDocId *string `type:"string"`
@@ -573,7 +572,7 @@ type OrderableReplicationInstance struct {
 	// The value returned when the specified EngineVersion of the replication instance
 	// is in Beta or test mode. This indicates some features might not work as expected.
 	//
-	// AWS DMS supports ReleaseStatus in versions 3.1.4 and later.
+	// AWS DMS supports the ReleaseStatus parameter in versions 3.1.4 and later.
 	ReleaseStatus ReleaseStatusValues `type:"string" enum:"true"`
 
 	// The compute and memory capacity of the replication instance.
@@ -1143,7 +1142,7 @@ type S3Settings struct {
 	// the row was inserted, updated, or deleted at the source database for a CDC
 	// load to the target.
 	//
-	// If cdcInsertsOnly is set to true or y, only INSERTs from the source database
+	// If CdcInsertsOnly is set to true or y, only INSERTs from the source database
 	// are migrated to the .csv or .parquet file. For .csv format only, how these
 	// INSERTs are recorded depends on the value of IncludeOpForFullLoad. If IncludeOpForFullLoad
 	// is set to true, the first field of every CDC record is set to I to indicate
@@ -1153,8 +1152,8 @@ type S3Settings struct {
 	// together, see Indicating Source DB Operations in Migrated S3 Data (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps)
 	// in the AWS Database Migration Service User Guide..
 	//
-	// AWS DMS supports this interaction between CdcInsertsOnly and IncludeOpForFullLoad
-	// in versions 3.1.4 and later.
+	// AWS DMS supports this interaction between the CdcInsertsOnly and IncludeOpForFullLoad
+	// parameters in versions 3.1.4 and later.
 	CdcInsertsOnly *bool `type:"boolean"`
 
 	// An optional parameter to use GZIP to compress the target files. Set to GZIP
@@ -1244,7 +1243,8 @@ type S3Settings struct {
 	// value (.csv) output files only to indicate how the rows were added to the
 	// source database.
 	//
-	// AWS DMS supports IncludeOpForFullLoad in versions 3.1.4 and later.
+	// AWS DMS supports the IncludeOpForFullLoad parameter in versions 3.1.4 and
+	// later.
 	//
 	// For full load, records can only be inserted. By default (the false setting),
 	// no information is recorded in these output files for a full load to indicate
@@ -1253,11 +1253,34 @@ type S3Settings struct {
 	// field of the .csv file. This allows the format of your target records from
 	// a full load to be consistent with the target records from a CDC load.
 	//
-	// This setting works together with CdcInsertsOnly for output to .csv files
-	// only. For more information about how these settings work together, see Indicating
-	// Source DB Operations in Migrated S3 Data (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps)
+	// This setting works together with the CdcInsertsOnly parameter for output
+	// to .csv files only. For more information about how these settings work together,
+	// see Indicating Source DB Operations in Migrated S3 Data (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps)
 	// in the AWS Database Migration Service User Guide..
 	IncludeOpForFullLoad *bool `type:"boolean"`
+
+	// A value that specifies the precision of any TIMESTAMP column values that
+	// are written to an Amazon S3 object file in .parquet format.
+	//
+	// AWS DMS supports the ParquetTimestampInMillisecond parameter in versions
+	// 3.1.4 and later.
+	//
+	// When ParquetTimestampInMillisecond is set to true or y, AWS DMS writes all
+	// TIMESTAMP columns in a .parquet formatted file with millisecond precision.
+	// Otherwise, DMS writes them with microsecond precision.
+	//
+	// Currently, Amazon Athena and AWS Glue can handle only millisecond precision
+	// for TIMESTAMP values. Set this parameter to true for S3 endpoint object files
+	// that are .parquet formatted only if you plan to query or process the data
+	// with Athena or AWS Glue.
+	//
+	// AWS DMS writes any TIMESTAMP column values written to an S3 file in .csv
+	// format with microsecond precision.
+	//
+	// Setting ParquetTimestampInMillisecond has no effect on the string format
+	// of the timestamp column value that is inserted by setting the TimestampColumnName
+	// parameter.
+	ParquetTimestampInMillisecond *bool `type:"boolean"`
 
 	// The version of the Apache Parquet format that you want to use: parquet_1_0
 	// (the default) or parquet_2_0.
@@ -1283,20 +1306,28 @@ type S3Settings struct {
 	// The Amazon Resource Name (ARN) used by the service access IAM role.
 	ServiceAccessRoleArn *string `type:"string"`
 
-	// A value that includes a timestamp column in the Amazon S3 target endpoint
-	// data. AWS DMS includes an additional column in the migrated data when you
-	// set timestampColumnName to a non-blank value.
+	// A value that when nonblank causes AWS DMS to add a column with timestamp
+	// information to the endpoint data for an Amazon S3 target.
 	//
-	// AWS DMS supports TimestampColumnName in versions 3.1.4 and later.
+	// AWS DMS supports the TimestampColumnName parameter in versions 3.1.4 and
+	// later.
 	//
-	// For a full load, each row of the timestamp column contains a timestamp for
-	// when the data was transferred from the source to the target by DMS. For a
-	// CDC load, each row of the timestamp column contains the timestamp for the
-	// commit of that row in the source database. The format for the timestamp column
-	// value is yyyy-MM-dd HH:mm:ss.SSSSSS. For CDC, the microsecond precision depends
-	// on the commit timestamp supported by DMS for the source database. When the
-	// AddColumnName setting is set to true, DMS also includes the name for the
-	// timestamp column that you set as the nonblank value of timestampColumnName.
+	// DMS includes an additional STRING column in the .csv or .parquet object files
+	// of your migrated data when you set TimestampColumnName to a nonblank value.
+	//
+	// For a full load, each row of this timestamp column contains a timestamp for
+	// when the data was transferred from the source to the target by DMS.
+	//
+	// For a change data capture (CDC) load, each row of the timestamp column contains
+	// the timestamp for the commit of that row in the source database.
+	//
+	// The string format for this timestamp column value is yyyy-MM-dd HH:mm:ss.SSSSSS.
+	// By default, the precision of this value is in microseconds. For a CDC load,
+	// the rounding of the precision depends on the commit timestamp supported by
+	// DMS for the source database.
+	//
+	// When the AddColumnName parameter is set to true, DMS also includes a name
+	// for the timestamp column that you set with TimestampColumnName.
 	TimestampColumnName *string `type:"string"`
 }
 

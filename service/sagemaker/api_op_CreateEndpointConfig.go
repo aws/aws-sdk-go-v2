@@ -23,6 +23,18 @@ type CreateEndpointConfigInput struct {
 	// The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon
 	// SageMaker uses to encrypt data on the storage volume attached to the ML compute
 	// instance that hosts the endpoint.
+	//
+	// Nitro-based instances do not support encryption with AWS KMS. If any of the
+	// models that you specify in the ProductionVariants parameter use nitro-based
+	// instances, do not specify a value for the KmsKeyId parameter. If you specify
+	// a value for KmsKeyId when using any nitro-based instances, the call to CreateEndpointConfig
+	// fails.
+	//
+	// For a list of nitro-based instances, see Nitro-based Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances)
+	// in the Amazon Elastic Compute Cloud User Guide for Linux Instances.
+	//
+	// For more information about storage volumes on nitro-based instances, see
+	// Amazon EBS and NVMe on Linux Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nvme-ebs-volumes.html).
 	KmsKeyId *string `type:"string"`
 
 	// An list of ProductionVariant objects, one for each model that you want to

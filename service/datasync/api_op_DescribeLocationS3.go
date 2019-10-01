@@ -58,6 +58,14 @@ type DescribeLocationS3Output struct {
 	// For detailed information about using such a role, see Creating a Location
 	// for Amazon S3 in the AWS DataSync User Guide.
 	S3Config *S3Config `type:"structure"`
+
+	// The Amazon S3 storage class that you chose to store your files in when this
+	// location is used as a task destination. For more information about S3 storage
+	// classes, see Amazon S3 Storage Classes (https://aws.amazon.com/s3/storage-classes/)
+	// in the Amazon Simple Storage Service Developer Guide. Some storage classes
+	// have behaviors that can affect your S3 storage cost. For detailed information,
+	// see using-storage-classes.
+	S3StorageClass S3StorageClass `type:"string" enum:"true"`
 }
 
 // String returns the string representation

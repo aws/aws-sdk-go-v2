@@ -45,6 +45,9 @@ type UpdateBranchInput struct {
 	// Enables notifications for the branch.
 	EnableNotification *bool `locationName:"enableNotification" type:"boolean"`
 
+	// Enables Pull Request Preview for this branch.
+	EnablePullRequestPreview *bool `locationName:"enablePullRequestPreview" type:"boolean"`
+
 	// Environment Variables for the branch.
 	EnvironmentVariables map[string]string `locationName:"environmentVariables" type:"map"`
 
@@ -135,6 +138,12 @@ func (s UpdateBranchInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "enableNotification", protocol.BoolValue(v), metadata)
+	}
+	if s.EnablePullRequestPreview != nil {
+		v := *s.EnablePullRequestPreview
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enablePullRequestPreview", protocol.BoolValue(v), metadata)
 	}
 	if s.EnvironmentVariables != nil {
 		v := s.EnvironmentVariables

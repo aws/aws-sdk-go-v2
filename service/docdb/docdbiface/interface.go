@@ -92,6 +92,8 @@ type ClientAPI interface {
 
 	DeleteDBSubnetGroupRequest(*docdb.DeleteDBSubnetGroupInput) docdb.DeleteDBSubnetGroupRequest
 
+	DescribeCertificatesRequest(*docdb.DescribeCertificatesInput) docdb.DescribeCertificatesRequest
+
 	DescribeDBClusterParameterGroupsRequest(*docdb.DescribeDBClusterParameterGroupsInput) docdb.DescribeDBClusterParameterGroupsRequest
 
 	DescribeDBClusterParametersRequest(*docdb.DescribeDBClusterParametersInput) docdb.DescribeDBClusterParametersRequest

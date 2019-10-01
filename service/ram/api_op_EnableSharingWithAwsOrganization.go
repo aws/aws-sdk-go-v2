@@ -54,7 +54,9 @@ const opEnableSharingWithAwsOrganization = "EnableSharingWithAwsOrganization"
 // EnableSharingWithAwsOrganizationRequest returns a request value for making API operation for
 // AWS Resource Access Manager.
 //
-// Enables resource sharing within your organization.
+// Enables resource sharing within your AWS Organization.
+//
+// The caller must be the master account for the AWS Organization.
 //
 //    // Example sending a request using EnableSharingWithAwsOrganizationRequest.
 //    req := client.EnableSharingWithAwsOrganizationRequest(params)

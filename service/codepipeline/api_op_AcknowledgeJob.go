@@ -71,7 +71,7 @@ const opAcknowledgeJob = "AcknowledgeJob"
 // AWS CodePipeline.
 //
 // Returns information about a specified job and whether that job has been received
-// by the job worker. Only used for custom actions.
+// by the job worker. Used for custom actions only.
 //
 //    // Example sending a request using AcknowledgeJobRequest.
 //    req := client.AcknowledgeJobRequest(params)

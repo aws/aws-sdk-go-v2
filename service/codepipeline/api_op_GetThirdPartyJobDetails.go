@@ -72,13 +72,13 @@ const opGetThirdPartyJobDetails = "GetThirdPartyJobDetails"
 // GetThirdPartyJobDetailsRequest returns a request value for making API operation for
 // AWS CodePipeline.
 //
-// Requests the details of a job for a third party action. Only used for partner
-// actions.
+// Requests the details of a job for a third party action. Used for partner
+// actions only.
 //
 // When this API is called, AWS CodePipeline returns temporary credentials for
 // the Amazon S3 bucket used to store artifacts for the pipeline, if the action
-// requires access to that Amazon S3 bucket for input or output artifacts. Additionally,
-// this API returns any secret values defined for the action.
+// requires access to that Amazon S3 bucket for input or output artifacts. This
+// API also returns any secret values defined for the action.
 //
 //    // Example sending a request using GetThirdPartyJobDetailsRequest.
 //    req := client.GetThirdPartyJobDetailsRequest(params)

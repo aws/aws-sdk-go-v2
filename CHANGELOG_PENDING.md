@@ -1,5 +1,9 @@
 Services
 ---
+* Synced the V2 SDK with latest AWS service API definitions.
+
+### SDK Breaking changes
+* This update includes breaking changes to how the DynamoDB AttributeValue (un)marshier handles empty collections.
 
 Deprecations
 ---

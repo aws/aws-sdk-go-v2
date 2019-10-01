@@ -83,3 +83,41 @@ func (enum EntityType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
+
+type JobStatus string
+
+// Enum values for JobStatus
+const (
+	JobStatusSubmitted      JobStatus = "SUBMITTED"
+	JobStatusInProgress     JobStatus = "IN_PROGRESS"
+	JobStatusCompleted      JobStatus = "COMPLETED"
+	JobStatusPartialSuccess JobStatus = "PARTIAL_SUCCESS"
+	JobStatusFailed         JobStatus = "FAILED"
+	JobStatusStopRequested  JobStatus = "STOP_REQUESTED"
+	JobStatusStopped        JobStatus = "STOPPED"
+)
+
+func (enum JobStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum JobStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type LanguageCode string
+
+// Enum values for LanguageCode
+const (
+	LanguageCodeEn LanguageCode = "en"
+)
+
+func (enum LanguageCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LanguageCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

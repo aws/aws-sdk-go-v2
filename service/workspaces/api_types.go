@@ -104,8 +104,8 @@ func (s FailedCreateWorkspaceRequest) String() string {
 }
 
 // Describes a WorkSpace that could not be rebooted. (RebootWorkspaces), rebuilt
-// (RebuildWorkspaces), terminated (TerminateWorkspaces), started (StartWorkspaces),
-// or stopped (StopWorkspaces).
+// (RebuildWorkspaces), restored (RestoreWorkspace), terminated (TerminateWorkspaces),
+// started (StartWorkspaces), or stopped (StopWorkspaces).
 type FailedWorkspaceChangeRequest struct {
 	_ struct{} `type:"structure"`
 
@@ -269,6 +269,19 @@ type RootStorage struct {
 
 // String returns the string representation
 func (s RootStorage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes a snapshot.
+type Snapshot struct {
+	_ struct{} `type:"structure"`
+
+	// The time when the snapshot was created.
+	SnapshotTime *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation
+func (s Snapshot) String() string {
 	return awsutil.Prettify(s)
 }
 

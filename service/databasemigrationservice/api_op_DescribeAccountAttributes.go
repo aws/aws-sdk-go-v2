@@ -32,7 +32,8 @@ type DescribeAccountAttributesOutput struct {
 	// dms-AccountNumber-UniqueAccountIdentifier. Here is an example name for this
 	// default S3 bucket: dms-111122223333-c44445555666.
 	//
-	// AWS DMS supports UniqueAccountIdentifier in versions 3.1.4 and later.
+	// AWS DMS supports the UniqueAccountIdentifier parameter in versions 3.1.4
+	// and later.
 	UniqueAccountIdentifier *string `type:"string"`
 }
 

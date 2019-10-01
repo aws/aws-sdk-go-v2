@@ -81,6 +81,8 @@ type ClientAPI interface {
 
 	GetResourceSharesRequest(*ram.GetResourceSharesInput) ram.GetResourceSharesRequest
 
+	ListPendingInvitationResourcesRequest(*ram.ListPendingInvitationResourcesInput) ram.ListPendingInvitationResourcesRequest
+
 	ListPrincipalsRequest(*ram.ListPrincipalsInput) ram.ListPrincipalsRequest
 
 	ListResourcesRequest(*ram.ListResourcesInput) ram.ListResourcesRequest

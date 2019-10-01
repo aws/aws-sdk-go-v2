@@ -102,7 +102,7 @@ type CreateDBClusterInput struct {
 	// printable ASCII character except forward slash (/), double quote ("), or
 	// the "at" symbol (@).
 	//
-	// Constraints: Must contain from 8 to 41 characters.
+	// Constraints: Must contain from 8 to 100 characters.
 	//
 	// MasterUserPassword is a required field
 	MasterUserPassword *string `type:"string" required:"true"`
@@ -111,7 +111,7 @@ type CreateDBClusterInput struct {
 	//
 	// Constraints:
 	//
-	//    * Must be from 1 to 16 letters or numbers.
+	//    * Must be from 1 to 63 letters or numbers.
 	//
 	//    * The first character must be a letter.
 	//

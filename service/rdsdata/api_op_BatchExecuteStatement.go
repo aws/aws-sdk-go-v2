@@ -15,21 +15,35 @@ import (
 type BatchExecuteStatementInput struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the database.
 	Database *string `locationName:"database" type:"string"`
 
+	// The parameter set for the batch operation.
 	ParameterSets [][]SqlParameter `locationName:"parameterSets" type:"list"`
 
+	// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+	//
 	// ResourceArn is a required field
-	ResourceArn *string `locationName:"resourceArn" type:"string" required:"true"`
+	ResourceArn *string `locationName:"resourceArn" min:"11" type:"string" required:"true"`
 
+	// The name of the database schema.
 	Schema *string `locationName:"schema" type:"string"`
 
+	// The name or ARN of the secret that enables access to the DB cluster.
+	//
 	// SecretArn is a required field
-	SecretArn *string `locationName:"secretArn" type:"string" required:"true"`
+	SecretArn *string `locationName:"secretArn" min:"11" type:"string" required:"true"`
 
+	// The SQL statement to run.
+	//
 	// Sql is a required field
 	Sql *string `locationName:"sql" type:"string" required:"true"`
 
+	// The identifier of a transaction that was started by using the BeginTransaction
+	// operation. Specify the transaction ID of the transaction that you want to
+	// include the SQL statement in.
+	//
+	// If the SQL statement is not part of a transaction, don't set this parameter.
 	TransactionId *string `locationName:"transactionId" type:"string"`
 }
 
@@ -45,9 +59,15 @@ func (s *BatchExecuteStatementInput) Validate() error {
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 11 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 11))
+	}
 
 	if s.SecretArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SecretArn"))
+	}
+	if s.SecretArn != nil && len(*s.SecretArn) < 11 {
+		invalidParams.Add(aws.NewErrParamMinLen("SecretArn", 11))
 	}
 
 	if s.Sql == nil {
@@ -125,6 +145,7 @@ func (s BatchExecuteStatementInput) MarshalFields(e protocol.FieldEncoder) error
 type BatchExecuteStatementOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The execution results of each batch entry.
 	UpdateResults []UpdateResult `locationName:"updateResults" type:"list"`
 }
 

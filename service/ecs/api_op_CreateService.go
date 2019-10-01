@@ -64,7 +64,10 @@ type CreateServiceInput struct {
 	//
 	// If the service is using the rolling update (ECS) deployment controller and
 	// using either an Application Load Balancer or Network Load Balancer, you can
-	// specify multiple target groups to attach to the service.
+	// specify multiple target groups to attach to the service. The service-linked
+	// role is required for services that make use of multiple target groups. For
+	// more information, see Using Service-Linked Roles for Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html)
+	// in the Amazon Elastic Container Service Developer Guide.
 	//
 	// If the service is using the CODE_DEPLOY deployment controller, the service
 	// is required to use either an Application Load Balancer or Network Load Balancer.
@@ -143,8 +146,10 @@ type CreateServiceInput struct {
 	// If your account has already created the Amazon ECS service-linked role, that
 	// role is used by default for your service unless you specify a role here.
 	// The service-linked role is required if your task definition uses the awsvpc
-	// network mode, in which case you should not specify a role here. For more
-	// information, see Using Service-Linked Roles for Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html)
+	// network mode or if the service is configured to use service discovery, an
+	// external deployment controller, or multiple target groups in which case you
+	// should not specify a role here. For more information, see Using Service-Linked
+	// Roles for Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	//
 	// If your specified role has a path other than /, then you must either specify

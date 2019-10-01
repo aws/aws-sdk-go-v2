@@ -20,21 +20,21 @@ type CreateEndpointInput struct {
 
 	// The settings in JSON format for the DMS transfer type of source endpoint.
 	//
-	// Possible attributes include the following:
+	// Possible settings include the following:
 	//
-	//    * serviceAccessRoleArn - The IAM role that has permission to access the
+	//    * ServiceAccessRoleArn - The IAM role that has permission to access the
 	//    Amazon S3 bucket.
 	//
-	//    * bucketName - The name of the S3 bucket to use.
+	//    * BucketName - The name of the S3 bucket to use.
 	//
-	//    * compressionType - An optional parameter to use GZIP to compress the
+	//    * CompressionType - An optional parameter to use GZIP to compress the
 	//    target files. To use GZIP, set this value to NONE (the default). To keep
 	//    the files uncompressed, don't use this value.
 	//
-	// Shorthand syntax for these attributes is as follows: ServiceAccessRoleArn=string,BucketName=string,CompressionType=string
+	// Shorthand syntax for these settings is as follows: ServiceAccessRoleArn=string,BucketName=string,CompressionType=string
 	//
-	// JSON syntax for these attributes is as follows: { "ServiceAccessRoleArn":
-	// "string", "BucketName": "string", "CompressionType": "none"|"gzip" }
+	// JSON syntax for these settings is as follows: { "ServiceAccessRoleArn": "string",
+	// "BucketName": "string", "CompressionType": "none"|"gzip" }
 	DmsTransferSettings *DmsTransferSettings `type:"structure"`
 
 	// Settings in JSON format for the target Amazon DynamoDB endpoint. For more

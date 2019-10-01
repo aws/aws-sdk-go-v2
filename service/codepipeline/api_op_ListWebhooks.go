@@ -65,8 +65,8 @@ const opListWebhooks = "ListWebhooks"
 // ListWebhooksRequest returns a request value for making API operation for
 // AWS CodePipeline.
 //
-// Gets a listing of all the webhooks in this region for this account. The output
-// lists all webhooks and includes the webhook URL and ARN, as well the configuration
+// Gets a listing of all the webhooks in this AWS Region for this account. The
+// output lists all webhooks and includes the webhook URL and ARN and the configuration
 // for each webhook.
 //
 //    // Example sending a request using ListWebhooksRequest.

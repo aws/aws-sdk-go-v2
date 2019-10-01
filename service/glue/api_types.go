@@ -1335,7 +1335,17 @@ type DevEndpoint struct {
 
 	// A map of arguments used to configure the DevEndpoint.
 	//
-	// Currently, only "--enable-glue-datacatalog": "" is supported as a valid argument.
+	// Valid arguments are:
+	//
+	//    * "--enable-glue-datacatalog": ""
+	//
+	//    * "GLUE_PYTHON_VERSION": "3"
+	//
+	//    * "GLUE_PYTHON_VERSION": "2"
+	//
+	// You can specify a version of Python support for development endpoints by
+	// using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint
+	// APIs. If no arguments are provided, the version defaults to Python 2.
 	Arguments map[string]string `type:"map"`
 
 	// The AWS Availability Zone where this DevEndpoint is located.
@@ -1364,6 +1374,22 @@ type DevEndpoint struct {
 
 	// The reason for a current failure in this DevEndpoint.
 	FailureReason *string `type:"string"`
+
+	// Glue version determines the versions of Apache Spark and Python that AWS
+	// Glue supports. The Python version indicates the version supported for running
+	// your ETL scripts on development endpoints.
+	//
+	// For more information about the available AWS Glue versions and corresponding
+	// Spark and Python versions, see Glue version (https://docs.aws.amazon.com/glue/latest/dg/add-job.html)
+	// in the developer guide.
+	//
+	// Development endpoints that are created without specifying a Glue version
+	// default to Glue 0.9.
+	//
+	// You can specify a version of Python support for development endpoints by
+	// using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint
+	// APIs. If no arguments are provided, the version defaults to Python 2.
+	GlueVersion *string `min:"1" type:"string"`
 
 	// The point in time at which this DevEndpoint was last modified.
 	LastModifiedTimestamp *time.Time `type:"timestamp"`

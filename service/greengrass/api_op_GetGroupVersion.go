@@ -75,10 +75,10 @@ type GetGroupVersionOutput struct {
 	// Information about the group version definition.
 	Definition *GroupVersion `type:"structure"`
 
-	// The ID of the group version.
+	// The ID of the group that the version is associated with.
 	Id *string `type:"string"`
 
-	// The unique ID for the version of the group.
+	// The ID of the group version.
 	Version *string `type:"string"`
 }
 

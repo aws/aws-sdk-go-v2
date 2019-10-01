@@ -15,12 +15,16 @@ import (
 type UpdateAppInput struct {
 	_ struct{} `type:"structure"`
 
+	// Personal Access token for 3rd party source control system for an Amplify
+	// App, used to create webhook and read-only deploy key. Token is not stored.
+	AccessToken *string `locationName:"accessToken" min:"1" type:"string"`
+
 	// Unique Id for an Amplify App.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Automated branch creation config for the Amplify App.
+	// Automated branch creation branchConfig for the Amplify App.
 	AutoBranchCreationConfig *AutoBranchCreationConfig `locationName:"autoBranchCreationConfig" type:"structure"`
 
 	// Automated branch creation glob patterns for the Amplify App.
@@ -56,8 +60,15 @@ type UpdateAppInput struct {
 	// Name for an Amplify App.
 	Name *string `locationName:"name" min:"1" type:"string"`
 
+	// OAuth token for 3rd party source control system for an Amplify App, used
+	// to create webhook and read-only deploy key. OAuth token is not stored.
+	OauthToken *string `locationName:"oauthToken" type:"string"`
+
 	// Platform for an Amplify App.
 	Platform Platform `locationName:"platform" type:"string" enum:"true"`
+
+	// Repository for an Amplify App
+	Repository *string `locationName:"repository" type:"string"`
 }
 
 // String returns the string representation
@@ -68,6 +79,9 @@ func (s UpdateAppInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAppInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateAppInput"}
+	if s.AccessToken != nil && len(*s.AccessToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AccessToken", 1))
+	}
 
 	if s.AppId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AppId"))
@@ -107,6 +121,12 @@ func (s *UpdateAppInput) Validate() error {
 func (s UpdateAppInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	if s.AccessToken != nil {
+		v := *s.AccessToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "accessToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.AutoBranchCreationConfig != nil {
 		v := s.AutoBranchCreationConfig
 
@@ -197,11 +217,23 @@ func (s UpdateAppInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.OauthToken != nil {
+		v := *s.OauthToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "oauthToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if len(s.Platform) > 0 {
 		v := s.Platform
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "platform", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Repository != nil {
+		v := *s.Repository
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "repository", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.AppId != nil {
 		v := *s.AppId

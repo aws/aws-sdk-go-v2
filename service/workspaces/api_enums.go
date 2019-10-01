@@ -297,6 +297,7 @@ const (
 	WorkspaceStateRebooting        WorkspaceState = "REBOOTING"
 	WorkspaceStateStarting         WorkspaceState = "STARTING"
 	WorkspaceStateRebuilding       WorkspaceState = "REBUILDING"
+	WorkspaceStateRestoring        WorkspaceState = "RESTORING"
 	WorkspaceStateMaintenance      WorkspaceState = "MAINTENANCE"
 	WorkspaceStateAdminMaintenance WorkspaceState = "ADMIN_MAINTENANCE"
 	WorkspaceStateTerminating      WorkspaceState = "TERMINATING"

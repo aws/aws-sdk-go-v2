@@ -148,6 +148,9 @@ type RestoreFromClusterSnapshotInput struct {
 	// in the Amazon Redshift Cluster Management Guide.
 	NodeType *string `type:"string"`
 
+	// The number of nodes specified when provisioning the restored cluster.
+	NumberOfNodes *int64 `type:"integer"`
+
 	// The AWS customer account used to create or copy the snapshot. Required if
 	// you are restoring a snapshot you do not own, optional if you own the snapshot.
 	OwnerAccount *string `type:"string"`

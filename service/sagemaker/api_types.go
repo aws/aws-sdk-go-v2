@@ -352,14 +352,6 @@ type AnnotationConsolidationConfig struct {
 	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-NamedEntityRecognition
 	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-NamedEntityRecognition
 	//
-	//    * Named entity eecognition - Groups similar selections and calculates
-	//    aggregate boundaries, resolving to most-assigned label. arn:aws:lambda:us-east-1:432418664414:function:ACS-NamedEntityRecognition
-	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-NamedEntityRecognition
-	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-NamedEntityRecognition
-	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-NamedEntityRecognition
-	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-NamedEntityRecognition
-	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-NamedEntityRecognition
-	//
 	// For more information, see Annotation Consolidation (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html).
 	//
 	// AnnotationConsolidationLambdaArn is a required field
@@ -1242,7 +1234,7 @@ type FileSystemDataSource struct {
 	DirectoryPath *string `type:"string" required:"true"`
 
 	// The access mode of the mount of the directory associated with the channel.
-	// A directory can be mounted either in ro (read-only) or rw (read-write).
+	// A directory can be mounted either in ro (read-only) or rw (read-write) mode.
 	//
 	// FileSystemAccessMode is a required field
 	FileSystemAccessMode FileSystemAccessMode `type:"string" required:"true" enum:"true"`

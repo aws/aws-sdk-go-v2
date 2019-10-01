@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // ComprehendMedical.
 //    func myFunc(svc comprehendmedicaliface.ClientAPI) bool {
-//        // Make svc.DetectEntities request
+//        // Make svc.DescribeEntitiesDetectionV2Job request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        comprehendmedicaliface.ClientPI
 //    }
-//    func (m *mockClientClient) DetectEntities(input *comprehendmedical.DetectEntitiesInput) (*comprehendmedical.DetectEntitiesOutput, error) {
+//    func (m *mockClientClient) DescribeEntitiesDetectionV2Job(input *comprehendmedical.DescribeEntitiesDetectionV2JobInput) (*comprehendmedical.DescribeEntitiesDetectionV2JobOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,9 +61,27 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	DescribeEntitiesDetectionV2JobRequest(*comprehendmedical.DescribeEntitiesDetectionV2JobInput) comprehendmedical.DescribeEntitiesDetectionV2JobRequest
+
+	DescribePHIDetectionJobRequest(*comprehendmedical.DescribePHIDetectionJobInput) comprehendmedical.DescribePHIDetectionJobRequest
+
 	DetectEntitiesRequest(*comprehendmedical.DetectEntitiesInput) comprehendmedical.DetectEntitiesRequest
 
+	DetectEntitiesV2Request(*comprehendmedical.DetectEntitiesV2Input) comprehendmedical.DetectEntitiesV2Request
+
 	DetectPHIRequest(*comprehendmedical.DetectPHIInput) comprehendmedical.DetectPHIRequest
+
+	ListEntitiesDetectionV2JobsRequest(*comprehendmedical.ListEntitiesDetectionV2JobsInput) comprehendmedical.ListEntitiesDetectionV2JobsRequest
+
+	ListPHIDetectionJobsRequest(*comprehendmedical.ListPHIDetectionJobsInput) comprehendmedical.ListPHIDetectionJobsRequest
+
+	StartEntitiesDetectionV2JobRequest(*comprehendmedical.StartEntitiesDetectionV2JobInput) comprehendmedical.StartEntitiesDetectionV2JobRequest
+
+	StartPHIDetectionJobRequest(*comprehendmedical.StartPHIDetectionJobInput) comprehendmedical.StartPHIDetectionJobRequest
+
+	StopEntitiesDetectionV2JobRequest(*comprehendmedical.StopEntitiesDetectionV2JobInput) comprehendmedical.StopEntitiesDetectionV2JobRequest
+
+	StopPHIDetectionJobRequest(*comprehendmedical.StopPHIDetectionJobInput) comprehendmedical.StopPHIDetectionJobRequest
 }
 
 var _ ClientAPI = (*comprehendmedical.Client)(nil)

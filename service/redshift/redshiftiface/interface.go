@@ -156,6 +156,8 @@ type ClientAPI interface {
 
 	DescribeLoggingStatusRequest(*redshift.DescribeLoggingStatusInput) redshift.DescribeLoggingStatusRequest
 
+	DescribeNodeConfigurationOptionsRequest(*redshift.DescribeNodeConfigurationOptionsInput) redshift.DescribeNodeConfigurationOptionsRequest
+
 	DescribeOrderableClusterOptionsRequest(*redshift.DescribeOrderableClusterOptionsInput) redshift.DescribeOrderableClusterOptionsRequest
 
 	DescribeReservedNodeOfferingsRequest(*redshift.DescribeReservedNodeOfferingsInput) redshift.DescribeReservedNodeOfferingsRequest

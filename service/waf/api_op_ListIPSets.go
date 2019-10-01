@@ -18,11 +18,10 @@ type ListIPSetsInput struct {
 	// another batch of IPSet objects.
 	Limit *int64 `type:"integer"`
 
-	// If you specify a value for Limit and you have more IPSets than the value
-	// of Limit, AWS WAF returns a NextMarker value in the response that allows
-	// you to list another group of IPSets. For the second and subsequent ListIPSets
-	// requests, specify the value of NextMarker from the previous response to get
-	// information about another batch of IPSets.
+	// AWS WAF returns a NextMarker value in the response that allows you to list
+	// another group of IPSets. For the second and subsequent ListIPSets requests,
+	// specify the value of NextMarker from the previous response to get information
+	// about another batch of IPSets.
 	NextMarker *string `min:"1" type:"string"`
 }
 
@@ -50,10 +49,8 @@ type ListIPSetsOutput struct {
 	// An array of IPSetSummary objects.
 	IPSets []IPSetSummary `type:"list"`
 
-	// If you have more IPSet objects than the number that you specified for Limit
-	// in the request, the response includes a NextMarker value. To list more IPSet
-	// objects, submit another ListIPSets request, and specify the NextMarker value
-	// from the response in the NextMarker value in the next request.
+	// To list more IPSet objects, submit another ListIPSets request, and in the
+	// next request use the NextMarker response value as the NextMarker value.
 	NextMarker *string `min:"1" type:"string"`
 }
 

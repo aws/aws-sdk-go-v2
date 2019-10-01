@@ -13,7 +13,7 @@ import (
 type GetResourceShareAssociationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The status of the association.
+	// The association status.
 	AssociationStatus ResourceShareAssociationStatus `locationName:"associationStatus" type:"string" enum:"true"`
 
 	// The association type.
@@ -28,10 +28,12 @@ type GetResourceShareAssociationsInput struct {
 	// The token for the next page of results.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
-	// The principal.
+	// The principal. You cannot specify this parameter if the association type
+	// is RESOURCE.
 	Principal *string `locationName:"principal" type:"string"`
 
-	// The Amazon Resource Name (ARN) of the resource.
+	// The Amazon Resource Name (ARN) of the resource. You cannot specify this parameter
+	// if the association type is PRINCIPAL.
 	ResourceArn *string `locationName:"resourceArn" type:"string"`
 
 	// The Amazon Resource Names (ARN) of the resource shares.
@@ -121,7 +123,7 @@ type GetResourceShareAssociationsOutput struct {
 	// when there are no more results to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
-	// Information about the association.
+	// Information about the associations.
 	ResourceShareAssociations []ResourceShareAssociation `locationName:"resourceShareAssociations" type:"list"`
 }
 
@@ -158,7 +160,7 @@ const opGetResourceShareAssociations = "GetResourceShareAssociations"
 // GetResourceShareAssociationsRequest returns a request value for making API operation for
 // AWS Resource Access Manager.
 //
-// Gets the associations for the specified resource share.
+// Gets the resources or principals for the resource shares that you own.
 //
 //    // Example sending a request using GetResourceShareAssociationsRequest.
 //    req := client.GetResourceShareAssociationsRequest(params)

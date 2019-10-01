@@ -49,8 +49,8 @@ type ListActionTypesOutput struct {
 	ActionTypes []ActionType `locationName:"actionTypes" type:"list" required:"true"`
 
 	// If the amount of returned information is significantly large, an identifier
-	// is also returned which can be used in a subsequent list action types call
-	// to return the next set of action types in the list.
+	// is also returned. It can be used in a subsequent list action types call to
+	// return the next set of action types in the list.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 

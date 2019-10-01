@@ -36,7 +36,14 @@ type DescribeDBInstancesInput struct {
 	//
 	//    * dbi-resource-id - Accepts DB instance resource identifiers. The results
 	//    list will only include information about the DB instances identified by
-	//    these resource identifiers.
+	//    these DB instance resource identifiers.
+	//
+	//    * domain - Accepts Active Directory directory IDs. The results list will
+	//    only include information about the DB instances associated with these
+	//    domains.
+	//
+	//    * engine - Accepts engine names. The results list will only include information
+	//    about the DB instances for these engines.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeDBInstances request.

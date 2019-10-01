@@ -268,6 +268,43 @@ func (s App) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Structure for artifact.
+type Artifact struct {
+	_ struct{} `type:"structure"`
+
+	// File name for the artifact.
+	//
+	// ArtifactFileName is a required field
+	ArtifactFileName *string `locationName:"artifactFileName" type:"string" required:"true"`
+
+	// Unique Id for a artifact.
+	//
+	// ArtifactId is a required field
+	ArtifactId *string `locationName:"artifactId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Artifact) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Artifact) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ArtifactFileName != nil {
+		v := *s.ArtifactFileName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "artifactFileName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ArtifactId != nil {
+		v := *s.ArtifactId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "artifactId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Structure with auto branch creation config.
 type AutoBranchCreationConfig struct {
 	_ struct{} `type:"structure"`
@@ -283,6 +320,9 @@ type AutoBranchCreationConfig struct {
 
 	// Enables Basic Auth for the auto created branch.
 	EnableBasicAuth *bool `locationName:"enableBasicAuth" type:"boolean"`
+
+	// Enables Pull Request Preview for auto created branch.
+	EnablePullRequestPreview *bool `locationName:"enablePullRequestPreview" type:"boolean"`
 
 	// Environment Variables for the auto created branch.
 	EnvironmentVariables map[string]string `locationName:"environmentVariables" type:"map"`
@@ -337,6 +377,12 @@ func (s AutoBranchCreationConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "enableBasicAuth", protocol.BoolValue(v), metadata)
+	}
+	if s.EnablePullRequestPreview != nil {
+		v := *s.EnablePullRequestPreview
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enablePullRequestPreview", protocol.BoolValue(v), metadata)
 	}
 	if s.EnvironmentVariables != nil {
 		v := s.EnvironmentVariables
@@ -408,6 +454,9 @@ type Branch struct {
 	// Description is a required field
 	Description *string `locationName:"description" type:"string" required:"true"`
 
+	// The destination branch if the branch is a pull request branch.
+	DestinationBranch *string `locationName:"destinationBranch" min:"1" type:"string"`
+
 	// Display name for a branch, will use as the default domain prefix.
 	//
 	// DisplayName is a required field
@@ -428,6 +477,11 @@ type Branch struct {
 	// EnableNotification is a required field
 	EnableNotification *bool `locationName:"enableNotification" type:"boolean" required:"true"`
 
+	// Enables Pull Request Preview for this branch.
+	//
+	// EnablePullRequestPreview is a required field
+	EnablePullRequestPreview *bool `locationName:"enablePullRequestPreview" type:"boolean" required:"true"`
+
 	// Environment Variables specific to a branch, part of an Amplify App.
 	//
 	// EnvironmentVariables is a required field
@@ -437,6 +491,9 @@ type Branch struct {
 	//
 	// Framework is a required field
 	Framework *string `locationName:"framework" type:"string" required:"true"`
+
+	// The source branch if the branch is a pull request branch.
+	SourceBranch *string `locationName:"sourceBranch" min:"1" type:"string"`
 
 	// Stage for a branch, part of an Amplify App.
 	//
@@ -539,6 +596,12 @@ func (s Branch) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.DestinationBranch != nil {
+		v := *s.DestinationBranch
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "destinationBranch", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.DisplayName != nil {
 		v := *s.DisplayName
 
@@ -563,6 +626,12 @@ func (s Branch) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "enableNotification", protocol.BoolValue(v), metadata)
 	}
+	if s.EnablePullRequestPreview != nil {
+		v := *s.EnablePullRequestPreview
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enablePullRequestPreview", protocol.BoolValue(v), metadata)
+	}
 	if s.EnvironmentVariables != nil {
 		v := s.EnvironmentVariables
 
@@ -580,6 +649,12 @@ func (s Branch) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "framework", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SourceBranch != nil {
+		v := *s.SourceBranch
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sourceBranch", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Stage) > 0 {
 		v := s.Stage
@@ -1059,6 +1134,12 @@ type Step struct {
 	//
 	// StepName is a required field
 	StepName *string `locationName:"stepName" type:"string" required:"true"`
+
+	// URL to the test artifact for the execution step.
+	TestArtifactsUrl *string `locationName:"testArtifactsUrl" type:"string"`
+
+	// URL to the test config for the execution step.
+	TestConfigUrl *string `locationName:"testConfigUrl" type:"string"`
 }
 
 // String returns the string representation
@@ -1129,6 +1210,18 @@ func (s Step) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "stepName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TestArtifactsUrl != nil {
+		v := *s.TestArtifactsUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "testArtifactsUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TestConfigUrl != nil {
+		v := *s.TestConfigUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "testConfigUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

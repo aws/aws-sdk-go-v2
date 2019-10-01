@@ -14,15 +14,21 @@ import (
 type BeginTransactionInput struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the database.
 	Database *string `locationName:"database" type:"string"`
 
+	// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+	//
 	// ResourceArn is a required field
-	ResourceArn *string `locationName:"resourceArn" type:"string" required:"true"`
+	ResourceArn *string `locationName:"resourceArn" min:"11" type:"string" required:"true"`
 
+	// The name of the database schema.
 	Schema *string `locationName:"schema" type:"string"`
 
+	// The name or ARN of the secret that enables access to the DB cluster.
+	//
 	// SecretArn is a required field
-	SecretArn *string `locationName:"secretArn" type:"string" required:"true"`
+	SecretArn *string `locationName:"secretArn" min:"11" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -37,9 +43,15 @@ func (s *BeginTransactionInput) Validate() error {
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 11 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 11))
+	}
 
 	if s.SecretArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SecretArn"))
+	}
+	if s.SecretArn != nil && len(*s.SecretArn) < 11 {
+		invalidParams.Add(aws.NewErrParamMinLen("SecretArn", 11))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -83,6 +95,7 @@ func (s BeginTransactionInput) MarshalFields(e protocol.FieldEncoder) error {
 type BeginTransactionOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The transaction ID of the transaction started by the call.
 	TransactionId *string `locationName:"transactionId" type:"string"`
 }
 
@@ -109,15 +122,13 @@ const opBeginTransaction = "BeginTransaction"
 //
 // Starts a SQL transaction.
 //
-// A transaction can run for a maximum of 24 hours. A transaction is terminated
-// and rolled back automatically after 24 hours.
-//
-// A transaction times out if no calls use its transaction ID in three minutes.
-// If a transaction times out before it's committed, it's rolled back automatically.
-//
-// DDL statements inside a transaction cause an implicit commit. We recommend
-// that you run each DDL statement in a separate ExecuteStatement call with
-// continueAfterTimeout enabled.
+//    <important> <p>A transaction can run for a maximum of 24 hours. A transaction
+//    is terminated and rolled back automatically after 24 hours.</p> <p>A transaction
+//    times out if no calls use its transaction ID in three minutes. If a transaction
+//    times out before it's committed, it's rolled back automatically.</p> <p>DDL
+//    statements inside a transaction cause an implicit commit. We recommend
+//    that you run each DDL statement in a separate <code>ExecuteStatement</code>
+//    call with <code>continueAfterTimeout</code> enabled.</p> </important>
 //
 //    // Example sending a request using BeginTransactionRequest.
 //    req := client.BeginTransactionRequest(params)

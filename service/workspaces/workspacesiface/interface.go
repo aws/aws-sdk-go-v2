@@ -95,6 +95,8 @@ type ClientAPI interface {
 
 	DescribeWorkspaceImagesRequest(*workspaces.DescribeWorkspaceImagesInput) workspaces.DescribeWorkspaceImagesRequest
 
+	DescribeWorkspaceSnapshotsRequest(*workspaces.DescribeWorkspaceSnapshotsInput) workspaces.DescribeWorkspaceSnapshotsRequest
+
 	DescribeWorkspacesRequest(*workspaces.DescribeWorkspacesInput) workspaces.DescribeWorkspacesRequest
 
 	DescribeWorkspacesConnectionStatusRequest(*workspaces.DescribeWorkspacesConnectionStatusInput) workspaces.DescribeWorkspacesConnectionStatusRequest
@@ -116,6 +118,8 @@ type ClientAPI interface {
 	RebootWorkspacesRequest(*workspaces.RebootWorkspacesInput) workspaces.RebootWorkspacesRequest
 
 	RebuildWorkspacesRequest(*workspaces.RebuildWorkspacesInput) workspaces.RebuildWorkspacesRequest
+
+	RestoreWorkspaceRequest(*workspaces.RestoreWorkspaceInput) workspaces.RestoreWorkspaceRequest
 
 	RevokeIpRulesRequest(*workspaces.RevokeIpRulesInput) workspaces.RevokeIpRulesRequest
 

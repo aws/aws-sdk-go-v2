@@ -20,8 +20,8 @@ type Principal struct {
 	// The time when the principal was associated with the resource share.
 	CreationTime *time.Time `locationName:"creationTime" type:"timestamp"`
 
-	// Indicates whether the principal belongs to the same organization as the AWS
-	// account that owns the resource share.
+	// Indicates whether the principal belongs to the same AWS organization as the
+	// AWS account that owns the resource share.
 	External *bool `locationName:"external" type:"boolean"`
 
 	// The ID of the principal.
@@ -160,7 +160,7 @@ func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
 type ResourceShare struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates whether principals outside your organization can be associated
+	// Indicates whether principals outside your AWS organization can be associated
 	// with a resource share.
 	AllowExternalPrincipals *bool `locationName:"allowExternalPrincipals" type:"boolean"`
 
@@ -276,8 +276,8 @@ type ResourceShareAssociation struct {
 	// The time when the association was created.
 	CreationTime *time.Time `locationName:"creationTime" type:"timestamp"`
 
-	// Indicates whether the principal belongs to the same organization as the AWS
-	// account that owns the resource share.
+	// Indicates whether the principal belongs to the same AWS organization as the
+	// AWS account that owns the resource share.
 	External *bool `locationName:"external" type:"boolean"`
 
 	// The time when the association was last updated.
@@ -285,6 +285,9 @@ type ResourceShareAssociation struct {
 
 	// The Amazon Resource Name (ARN) of the resource share.
 	ResourceShareArn *string `locationName:"resourceShareArn" type:"string"`
+
+	// The name of the resource share.
+	ResourceShareName *string `locationName:"resourceShareName" type:"string"`
 
 	// The status of the association.
 	Status ResourceShareAssociationStatus `locationName:"status" type:"string" enum:"true"`
@@ -338,6 +341,12 @@ func (s ResourceShareAssociation) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "resourceShareArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.ResourceShareName != nil {
+		v := *s.ResourceShareName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceShareName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if len(s.Status) > 0 {
 		v := s.Status
 
@@ -366,8 +375,9 @@ type ResourceShareInvitation struct {
 	// The Amazon Resource Name (ARN) of the resource share.
 	ResourceShareArn *string `locationName:"resourceShareArn" type:"string"`
 
-	// The resources associated with the resource share.
-	ResourceShareAssociations []ResourceShareAssociation `locationName:"resourceShareAssociations" type:"list"`
+	// To view the resources associated with a pending resource share invitation,
+	// use ListPendingInvitationResources (https://docs.aws.amazon.com/ram/latest/APIReference/API_ListPendingInvitationResources.html).
+	ResourceShareAssociations []ResourceShareAssociation `locationName:"resourceShareAssociations" deprecated:"true" type:"list"`
 
 	// The Amazon Resource Name (ARN) of the invitation.
 	ResourceShareInvitationArn *string `locationName:"resourceShareInvitationArn" type:"string"`

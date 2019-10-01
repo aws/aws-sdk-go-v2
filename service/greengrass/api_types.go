@@ -2207,10 +2207,10 @@ type VersionInformation struct {
 	// The time, in milliseconds since the epoch, when the version was created.
 	CreationTimestamp *string `type:"string"`
 
-	// The ID of the version.
+	// The ID of the parent definition that the version is associated with.
 	Id *string `type:"string"`
 
-	// The unique ID of the version.
+	// The ID of the version.
 	Version *string `type:"string"`
 }
 

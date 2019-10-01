@@ -24,7 +24,7 @@ type LabelParameterVersionInput struct {
 
 	// The specific version of the parameter on which you want to attach one or
 	// more labels. If no version is specified, the system attaches the label to
-	// the latest version.)
+	// the latest version.
 	ParameterVersion *int64 `type:"long"`
 }
 
@@ -64,6 +64,9 @@ type LabelParameterVersionOutput struct {
 	// label requirements, see Labeling Parameters (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html)
 	// in the AWS Systems Manager User Guide.
 	InvalidLabels []string `min:"1" type:"list"`
+
+	// The version of the parameter that has been labeled.
+	ParameterVersion *int64 `type:"long"`
 }
 
 // String returns the string representation

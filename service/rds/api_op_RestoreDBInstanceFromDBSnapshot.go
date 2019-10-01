@@ -101,7 +101,21 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
 	DeletionProtection *bool `type:"boolean"`
 
-	// Specify the Active Directory Domain to restore the instance in.
+	// Specify the Active Directory directory ID to restore the DB instance in.
+	// The domain must be created prior to this operation. Currently, only Microsoft
+	// SQL Server and Oracle DB instances can be created in an Active Directory
+	// Domain.
+	//
+	// For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication
+	// to authenticate users that connect to the DB instance. For more information,
+	// see Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft
+	// SQL Server (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html)
+	// in the Amazon RDS User Guide.
+	//
+	// For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate
+	// users that connect to the DB instance. For more information, see Using Kerberos
+	// Authentication with Amazon RDS for Oracle (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html)
+	// in the Amazon RDS User Guide.
 	Domain *string `type:"string"`
 
 	// Specify the name of the IAM role to be used when making API calls to the

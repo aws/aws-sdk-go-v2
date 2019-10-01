@@ -24,7 +24,7 @@ type PollForJobsInput struct {
 	// A map of property names and values. For an action type with no queryable
 	// properties, this value must be null or an empty map. For an action type with
 	// a queryable property, you must supply that property as a key in the map.
-	// Only jobs whose action configuration matches the mapped value will be returned.
+	// Only jobs whose action configuration matches the mapped value are returned.
 	QueryParam map[string]string `locationName:"queryParam" type:"map"`
 }
 
@@ -73,15 +73,15 @@ const opPollForJobs = "PollForJobs"
 // PollForJobsRequest returns a request value for making API operation for
 // AWS CodePipeline.
 //
-// Returns information about any jobs for AWS CodePipeline to act upon. PollForJobs
-// is only valid for action types with "Custom" in the owner field. If the action
+// Returns information about any jobs for AWS CodePipeline to act on. PollForJobs
+// is valid only for action types with "Custom" in the owner field. If the action
 // type contains "AWS" or "ThirdParty" in the owner field, the PollForJobs action
 // returns an error.
 //
 // When this API is called, AWS CodePipeline returns temporary credentials for
 // the Amazon S3 bucket used to store artifacts for the pipeline, if the action
-// requires access to that Amazon S3 bucket for input or output artifacts. Additionally,
-// this API returns any secret values defined for the action.
+// requires access to that Amazon S3 bucket for input or output artifacts. This
+// API also returns any secret values defined for the action.
 //
 //    // Example sending a request using PollForJobsRequest.
 //    req := client.PollForJobsRequest(params)

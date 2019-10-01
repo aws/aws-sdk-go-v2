@@ -28,6 +28,14 @@ type CreateLocationS3Input struct {
 	// S3Config is a required field
 	S3Config *S3Config `type:"structure" required:"true"`
 
+	// The Amazon S3 storage class that you want to store your files in when this
+	// location is used as a task destination. For more information about S3 storage
+	// classes, see Amazon S3 Storage Classes (https://aws.amazon.com/s3/storage-classes/)
+	// in the Amazon Simple Storage Service Developer Guide. Some storage classes
+	// have behaviors that can affect your S3 storage cost. For detailed information,
+	// see using-storage-classes.
+	S3StorageClass S3StorageClass `type:"string" enum:"true"`
+
 	// A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is
 	// used to read data from the S3 source location or write data to the S3 destination.
 	Subdirectory *string `type:"string"`
@@ -99,8 +107,8 @@ const opCreateLocationS3 = "CreateLocationS3"
 // required permissions and attaching the policy to the role. An example of
 // such a policy is shown in the examples section.
 //
-// For more information, see Configuring Amazon S3 Location Settings in the
-// AWS DataSync User Guide.
+// For more information, see https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location
+// in the AWS DataSync User Guide.
 //
 //    // Example sending a request using CreateLocationS3Request.
 //    req := client.CreateLocationS3Request(params)

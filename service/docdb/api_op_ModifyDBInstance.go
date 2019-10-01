@@ -32,6 +32,9 @@ type ModifyDBInstanceInput struct {
 	// and Amazon DocumentDB has enabled automatic patching for that engine version.
 	AutoMinorVersionUpgrade *bool `type:"boolean"`
 
+	// Indicates the certificate that needs to be associated with the instance.
+	CACertificateIdentifier *string `type:"string"`
+
 	// The new compute and memory capacity of the DB instance; for example, db.r5.large.
 	// Not all DB instance classes are available in all AWS Regions.
 	//

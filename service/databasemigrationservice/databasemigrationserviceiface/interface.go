@@ -80,6 +80,8 @@ type ClientAPI interface {
 
 	DeleteCertificateRequest(*databasemigrationservice.DeleteCertificateInput) databasemigrationservice.DeleteCertificateRequest
 
+	DeleteConnectionRequest(*databasemigrationservice.DeleteConnectionInput) databasemigrationservice.DeleteConnectionRequest
+
 	DeleteEndpointRequest(*databasemigrationservice.DeleteEndpointInput) databasemigrationservice.DeleteEndpointRequest
 
 	DeleteEventSubscriptionRequest(*databasemigrationservice.DeleteEventSubscriptionInput) databasemigrationservice.DeleteEventSubscriptionRequest

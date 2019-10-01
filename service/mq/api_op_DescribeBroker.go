@@ -94,6 +94,8 @@ type DescribeBrokerOutput struct {
 
 	PendingEngineVersion *string `locationName:"pendingEngineVersion" type:"string"`
 
+	PendingHostInstanceType *string `locationName:"pendingHostInstanceType" type:"string"`
+
 	PendingSecurityGroups []string `locationName:"pendingSecurityGroups" type:"list"`
 
 	PubliclyAccessible *bool `locationName:"publiclyAccessible" type:"boolean"`
@@ -216,6 +218,12 @@ func (s DescribeBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "pendingEngineVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PendingHostInstanceType != nil {
+		v := *s.PendingHostInstanceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "pendingHostInstanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.PendingSecurityGroups != nil {
 		v := s.PendingSecurityGroups

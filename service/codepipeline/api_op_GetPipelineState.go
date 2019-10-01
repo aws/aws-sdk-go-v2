@@ -54,7 +54,7 @@ type GetPipelineStateOutput struct {
 
 	// The version number of the pipeline.
 	//
-	// A newly-created pipeline is always assigned a version number of 1.
+	// A newly created pipeline is always assigned a version number of 1.
 	PipelineVersion *int64 `locationName:"pipelineVersion" min:"1" type:"integer"`
 
 	// A list of the pipeline stage output information, including stage name, state,

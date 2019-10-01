@@ -15,12 +15,18 @@ import (
 type RollbackTransactionInput struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+	//
 	// ResourceArn is a required field
-	ResourceArn *string `locationName:"resourceArn" type:"string" required:"true"`
+	ResourceArn *string `locationName:"resourceArn" min:"11" type:"string" required:"true"`
 
+	// The name or ARN of the secret that enables access to the DB cluster.
+	//
 	// SecretArn is a required field
-	SecretArn *string `locationName:"secretArn" type:"string" required:"true"`
+	SecretArn *string `locationName:"secretArn" min:"11" type:"string" required:"true"`
 
+	// The identifier of the transaction to roll back.
+	//
 	// TransactionId is a required field
 	TransactionId *string `locationName:"transactionId" type:"string" required:"true"`
 }
@@ -37,9 +43,15 @@ func (s *RollbackTransactionInput) Validate() error {
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 11 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 11))
+	}
 
 	if s.SecretArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SecretArn"))
+	}
+	if s.SecretArn != nil && len(*s.SecretArn) < 11 {
+		invalidParams.Add(aws.NewErrParamMinLen("SecretArn", 11))
 	}
 
 	if s.TransactionId == nil {
@@ -82,6 +94,7 @@ func (s RollbackTransactionInput) MarshalFields(e protocol.FieldEncoder) error {
 type RollbackTransactionOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The status of the rollback operation.
 	TransactionStatus *string `locationName:"transactionStatus" type:"string"`
 }
 

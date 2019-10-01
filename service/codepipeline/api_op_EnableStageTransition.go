@@ -27,9 +27,9 @@ type EnableStageTransitionInput struct {
 	// StageName is a required field
 	StageName *string `locationName:"stageName" min:"1" type:"string" required:"true"`
 
-	// Specifies whether artifacts will be allowed to enter the stage and be processed
-	// by the actions in that stage (inbound) or whether already-processed artifacts
-	// will be allowed to transition to the next stage (outbound).
+	// Specifies whether artifacts are allowed to enter the stage and be processed
+	// by the actions in that stage (inbound) or whether already processed artifacts
+	// are allowed to transition to the next stage (outbound).
 	//
 	// TransitionType is a required field
 	TransitionType StageTransitionType `locationName:"transitionType" type:"string" required:"true" enum:"true"`

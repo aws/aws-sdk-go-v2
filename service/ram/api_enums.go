@@ -103,6 +103,7 @@ const (
 	ResourceStatusZonalResourceInaccessible ResourceStatus = "ZONAL_RESOURCE_INACCESSIBLE"
 	ResourceStatusLimitExceeded             ResourceStatus = "LIMIT_EXCEEDED"
 	ResourceStatusUnavailable               ResourceStatus = "UNAVAILABLE"
+	ResourceStatusPending                   ResourceStatus = "PENDING"
 )
 
 func (enum ResourceStatus) MarshalValue() (string, error) {

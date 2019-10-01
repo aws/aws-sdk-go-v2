@@ -47,14 +47,21 @@ type DetectEntitiesOutput struct {
 	// The collection of medical entities extracted from the input text and their
 	// associated information. For each entity, the response provides the entity
 	// text, the entity category, where the entity text begins and ends, and the
-	// level of confidence that Comprehend Medical has in the detection and analysis.
-	// Attributes and traits of the entity are also returned.
+	// level of confidence that Amazon Comprehend Medical has in the detection and
+	// analysis. Attributes and traits of the entity are also returned.
 	//
 	// Entities is a required field
 	Entities []Entity `type:"list" required:"true"`
 
+	// The version of the model used to analyze the documents. The version number
+	// looks like X.X.X. You can use this information to track the model used for
+	// a particular batch of documents.
+	//
+	// ModelVersion is a required field
+	ModelVersion *string `min:"1" type:"string" required:"true"`
+
 	// If the result of the previous request to DetectEntities was truncated, include
-	// the Paginationtoken to fetch the next page of entities.
+	// the PaginationToken to fetch the next page of entities.
 	PaginationToken *string `min:"1" type:"string"`
 
 	// Attributes extracted from the input text that we were unable to relate to
@@ -72,6 +79,9 @@ const opDetectEntities = "DetectEntities"
 // DetectEntitiesRequest returns a request value for making API operation for
 // AWS Comprehend Medical.
 //
+// The DetectEntities operation is deprecated. You should use the DetectEntitiesV2
+// operation instead.
+//
 // Inspects the clinical text for a variety of medical entities and returns
 // specific information about them such as entity category, location, and confidence
 // score on that information .
@@ -85,6 +95,9 @@ const opDetectEntities = "DetectEntities"
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/DetectEntities
 func (c *Client) DetectEntitiesRequest(input *DetectEntitiesInput) DetectEntitiesRequest {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, DetectEntities, has been deprecated")
+	}
 	op := &aws.Operation{
 		Name:       opDetectEntities,
 		HTTPMethod: "POST",
