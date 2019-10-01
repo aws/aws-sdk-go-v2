@@ -277,6 +277,35 @@ func TestUploadFailIfPartSizeTooSmall(t *testing.T) {
 	}
 }
 
+type negativeReader struct {
+}
+
+func (nr *negativeReader) Read(_ []byte) (int, error) {
+	return -1, io.ErrUnexpectedEOF
+}
+
+func TestUploadReaderReturnsNegative(t *testing.T) {
+	s, _, _ := loggingSvc(emptyList)
+	mgr := s3manager.NewUploaderWithClient(s, func(u *s3manager.Uploader) {
+		u.Concurrency = 1
+	})
+
+	// should not panic
+	_, err := mgr.Upload(&s3manager.UploadInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   &negativeReader{},
+	})
+	if err == nil {
+		t.Error("Expected error, but received none")
+	}
+
+	aerr := err.(awserr.Error)
+	if aerr.OrigErr() != io.ErrUnexpectedEOF {
+		t.Fatalf("expected %s. Got %s", io.ErrUnexpectedEOF, aerr.OrigErr())
+	}
+}
+
 func TestUploadOrderSingle(t *testing.T) {
 	s, ops, args := loggingSvc(emptyList)
 	mgr := s3manager.NewUploaderWithClient(s)
