@@ -13,6 +13,14 @@ Deprecations
   
 SDK Features
 ---
+* `service/s3/s3manager`: Add Upload Buffer Provider ([#404](https://github.com/aws/aws-sdk-go-v2/pull/404))
+  * Adds a new `BufferProvider` member for specifying how part data can be buffered in memory.
+  * Windows platforms will now default to buffering 1MB per part to reduce contention when uploading files.
+  * Non-Windows platforms will continue to employ a non-buffering behavior.
+* `service/s3/s3manager`: Add Download Buffer Provider ([#404](https://github.com/aws/aws-sdk-go-v2/pull/404))
+  * Adds a new `BufferProvider` member for specifying how part data can be buffered in memory when copying from the http response body.
+  * Windows platforms will now default to buffering 1MB per part to reduce contention when downloading files.
+  * Non-Windows platforms will continue to employ a non-buffering behavior.
 * `service/dynamodb/dynamodbattribute`: New Encoder and Decoder Behavior for Empty Collections ([#401](https://github.com/aws/aws-sdk-go-v2/pull/401))
   * The `Encoder` and `Decoder` types have been enhanced to support the marshaling of empty structures, maps, and slices to and from their respective DynamoDB AttributeValues.
   * This change incorporates the behavior changes introduced via a marshal option in V1 ([#2834](https://github.com/aws/aws-sdk-go/pull/2834))
@@ -24,6 +32,9 @@ SDK Enhancements
   * Related to [aws/aws-sdk-go#2310](https://github.com/aws/aws-sdk-go/pull/2310)
   * Fixes [#251](https://github.com/aws/aws-sdk-go-v2/issues/251)
 * `aws/request` : Retryer is now a named field on Request. ([#393](https://github.com/aws/aws-sdk-go-v2/pull/393))
+* `service/s3/s3manager`: Adds `sync.Pool` to allow reuse of part buffers for streaming payloads ([#404](https://github.com/aws/aws-sdk-go-v2/pull/404))
+  * Fixes [#402](https://github.com/aws/aws-sdk-go-v2/issues/402) 
+  * Uses the new behavior introduced in V1 [#2863](https://github.com/aws/aws-sdk-go/pull/2863) which allows the reuse of the sync.Pool across multiple Upload request that match part sizes.
 
 SDK Bugs
 ---
